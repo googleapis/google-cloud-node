@@ -128,7 +128,7 @@ util.inherits(LoggingWinston, winston.Transport);
  * @param {string} msg - The message to be logged.
  * @param {object=} metadata - Winston-provided metadata that should be attached
  *     to the log entry. Each property will be converted to a string using
- *     `JSON.stringify`.
+ *     `util.inspect`.
  * @param {function=} callback - A callback that is invoked when the logging
  *     agent either succeeds or gives up writing the log entry to the remote
  *     server.
@@ -148,20 +148,18 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
 
   var labels = {};
 
-  if (metadata) {
-    // Logging proto requires that the label values be strings, so we convert
-    // using util.inspect.
-    for (var key in metadata) {
-      labels[key] = JSON.stringify(metadata[key]);
-    }
+  // Logging proto requires that the label values be strings, so we convert
+  // using util.inspect.
+  for (var key in metadata) {
+    labels[key] = util.inspect(metadata[key]);
   }
 
-  metadata = {
+  var entryMetadata = {
     resource: this.resource_,
     labels: labels
   };
 
-  var entry = this.log_.entry(metadata, msg);
+  var entry = this.log_.entry(entryMetadata, msg);
   this.log_[stackdriverLevel](entry, callback);
 };
 

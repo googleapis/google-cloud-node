@@ -23,8 +23,8 @@ winston.add(stackdriverTransport, {
   }
 });
 
-logger.error('warp nacelles offline');
-logger.verbose('sheilds at 99%');
+winston.error('warp nacelles offline');
+winston.verbose('sheilds at 99%');
 ```
 
 ## Authentication
@@ -46,7 +46,7 @@ winston.add(stackdriverTransport);
 
 ### Elsewhere
 
-If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
+If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
 
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
