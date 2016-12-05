@@ -1378,13 +1378,13 @@ describe('Vision', function() {
 
         confidence: faceAnnotation.detectionConfidence * 100,
 
-        blurry: true,
-        dark: true,
-        happy: true,
-        hat: true,
-        mad: true,
-        sad: true,
-        surprised: true
+        anger: true,
+        blurred: true,
+        headwear: true,
+        joy: true,
+        sorrow: true,
+        surprise: true,
+        underExposed: true
       };
 
       var formatted = Vision.formatFaceAnnotation_(faceAnnotation);

@@ -834,13 +834,13 @@ Vision.prototype.detect = function(images, options, callback) {
  *   //       }
  *   //     },
  *   //     confidence: 56.748849,
- *   //     blurry: false,
- *   //     dark: false,
- *   //     happy: false,
- *   //     hat: false,
- *   //     mad: false,
- *   //     sad: false,
- *   //     surprised: false
+ *   //     anger: false,
+ *   //     blurred: false,
+ *   //     headwear: false,
+ *   //     joy: false,
+ *   //     sorrow: false,
+ *   //     surprise: false,
+ *   //     underExposed: false
  *   //   }
  *   // ]
  * });
@@ -1351,14 +1351,14 @@ Vision.prototype.detectText = function(images, options, callback) {
  *
  * @example
  * Vision.convertToBoolean_(Vision.likelihood.VERY_LIKELY, {
- *   blurry: 'POSSIBLE'
+ *   blurred: 'POSSIBLE'
  * });
- * // { blurry: false }
+ * // { blurred: false }
  *
  * Vision.convertToBoolean_(Vision.likelihood.UNLIKELY, {
- *   blurry: 'POSSIBLE'
+ *   blurred: 'POSSIBLE'
  * });
- * // { blurry: true }
+ * // { blurred: true }
  */
 Vision.convertToBoolean_ = function(baseLikelihood, object) {
   var convertedObject = {};
@@ -1587,13 +1587,13 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
   };
 
   extend(formattedFaceAnnotation, Vision.convertToBoolean_(LIKELY, {
-    blurry: faceAnnotation.blurredLikelihood,
-    dark: faceAnnotation.underExposedLikelihood,
-    happy: faceAnnotation.joyLikelihood,
-    hat: faceAnnotation.headwearLikelihood,
-    mad: faceAnnotation.angerLikelihood,
-    sad: faceAnnotation.sorrowLikelihood,
-    surprised: faceAnnotation.surpriseLikelihood
+    anger: faceAnnotation.angerLikelihood,
+    blurred: faceAnnotation.blurredLikelihood,
+    headwear: faceAnnotation.headwearLikelihood,
+    joy: faceAnnotation.joyLikelihood,
+    sorrow: faceAnnotation.sorrowLikelihood,
+    surprise: faceAnnotation.surpriseLikelihood,
+    underExposed: faceAnnotation.underExposedLikelihood
   }));
 
   return formattedFaceAnnotation;
