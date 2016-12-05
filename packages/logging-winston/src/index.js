@@ -150,8 +150,10 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
 
   // Logging proto requires that the label values be strings, so we convert
   // using util.inspect.
-  for (var key in metadata) {
-    labels[key] = util.inspect(metadata[key]);
+  if (is.object(metadata)) {
+    for (var key in metadata) {
+      labels[key] = util.inspect(metadata[key]);
+    }
   }
 
   var entryMetadata = {
