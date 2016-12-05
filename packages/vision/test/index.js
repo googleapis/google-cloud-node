@@ -917,24 +917,30 @@ describe('Vision', function() {
     it('should return booleans', function() {
       var baseLikelihood = Vision.likelihood.LIKELY;
 
-      var object = {
-        // f's should be false, t's should be true:
-        veryUnlikely: 'VERY_UNLIKELY',
-        unlikely: 'UNLIKELY',
-        possible: 'POSSIBLE',
-        likely: 'LIKELY',
-        veryLikely: 'VERY_LIKELY'
-      };
+      assert.strictEqual(
+        Vision.convertToBoolean_(baseLikelihood, 'VERY_UNLIKELY'),
+        false
+      );
 
-      var convertedObject = Vision.convertToBoolean_(baseLikelihood, object);
+      assert.strictEqual(
+        Vision.convertToBoolean_(baseLikelihood, 'UNLIKELY'),
+        false
+      );
 
-      assert.deepEqual(convertedObject, {
-        veryUnlikely: false,
-        unlikely: false,
-        possible: false,
-        likely: true,
-        veryLikely: true
-      });
+      assert.strictEqual(
+        Vision.convertToBoolean_(baseLikelihood, 'POSSIBLE'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.convertToBoolean_(baseLikelihood, 'LIKELY'),
+        true
+      );
+
+      assert.strictEqual(
+        Vision.convertToBoolean_(baseLikelihood, 'VERY_LIKELY'),
+        true
+      );
     });
   });
 
@@ -1289,7 +1295,9 @@ describe('Vision', function() {
         headwearLikelihood: 'LIKELY',
         angerLikelihood: 'LIKELY',
         sorrowLikelihood: 'LIKELY',
-        surpriseLikelihood: 'LIKELY'
+        surpriseLikelihood: 'LIKELY',
+
+        nonExistentLikelihood: 'LIKELY'
       };
     });
 
@@ -1384,7 +1392,10 @@ describe('Vision', function() {
         joy: true,
         sorrow: true,
         surprise: true,
-        underExposed: true
+        underExposed: true,
+
+        // Checks that *any* property that ends in `Likelihood` is shortened.
+        nonExistent: true
       };
 
       var formatted = Vision.formatFaceAnnotation_(faceAnnotation);

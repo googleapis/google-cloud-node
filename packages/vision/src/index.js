@@ -1360,17 +1360,8 @@ Vision.prototype.detectText = function(images, options, callback) {
  * });
  * // { blurred: true }
  */
-Vision.convertToBoolean_ = function(baseLikelihood, object) {
-  var convertedObject = {};
-
-  for (var prop in object) {
-    if (object.hasOwnProperty(prop)) {
-      var value = Vision.likelihood[object[prop]];
-      convertedObject[prop] = value >= baseLikelihood;
-    }
-  }
-
-  return convertedObject;
+Vision.convertToBoolean_ = function(baseLikelihood, value) {
+  return Vision.likelihood[value] >= baseLikelihood;
 };
 
 /**
@@ -1586,15 +1577,16 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
     confidence: faceAnnotation.detectionConfidence * 100
   };
 
-  extend(formattedFaceAnnotation, Vision.convertToBoolean_(LIKELY, {
-    anger: faceAnnotation.angerLikelihood,
-    blurred: faceAnnotation.blurredLikelihood,
-    headwear: faceAnnotation.headwearLikelihood,
-    joy: faceAnnotation.joyLikelihood,
-    sorrow: faceAnnotation.sorrowLikelihood,
-    surprise: faceAnnotation.surpriseLikelihood,
-    underExposed: faceAnnotation.underExposedLikelihood
-  }));
+  // Remove the `Likelihood` part from a property name.
+  // input: "joyLikelihood", output: "joy"
+  for (var prop in faceAnnotation) {
+    if (prop.indexOf('Likelihood') > -1) {
+      var shortenedProp = prop.replace('Likelihood', '');
+
+      formattedFaceAnnotation[shortenedProp] =
+        Vision.convertToBoolean_(LIKELY, faceAnnotation[prop]);
+    }
+  }
 
   return formattedFaceAnnotation;
 };
@@ -1644,7 +1636,11 @@ Vision.formatImagePropertiesAnnotation_ = function(imageAnnotation, options) {
  */
 Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
   if (!options.verbose) {
-    return Vision.convertToBoolean_(LIKELY, ssAnnotation);
+    for (var prop in ssAnnotation) {
+      var value = ssAnnotation[prop];
+      ssAnnotation[prop] = Vision.convertToBoolean_(LIKELY, value);
+    }
+    return ssAnnotation;
   }
 
   return ssAnnotation;
