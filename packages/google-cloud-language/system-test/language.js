@@ -20,7 +20,7 @@ var assert = require('assert');
 var is = require('is');
 var Storage = require('@google-cloud/storage');
 var through = require('through2');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var Language = require('../');
