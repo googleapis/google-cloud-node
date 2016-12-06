@@ -147,6 +147,17 @@ describe('BigQuery', function() {
   });
 
   describe('datetime', function() {
+    var INPUT_STRING = '2017-1-1 14:2:38.883388';
+    var INPUT_OBJ = {
+      year: 2017,
+      month: 1,
+      day: 1,
+      hours: 14,
+      minutes: 2,
+      seconds: 38,
+      fractional: 883388
+    };
+
     it('should expose static and instance constructors', function() {
       var staticDt = BigQuery.datetime();
       assert(staticDt instanceof BigQuery.datetime);
@@ -156,9 +167,37 @@ describe('BigQuery', function() {
       assert(instanceDt instanceof BigQuery.datetime);
       assert(instanceDt instanceof bq.datetime);
     });
+
+    it('should accept a string', function() {
+      var datetime = bq.datetime(INPUT_STRING);
+      assert.strictEqual(datetime.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var datetime = bq.datetime(INPUT_OBJ);
+      assert.strictEqual(datetime.value, INPUT_STRING);
+    });
+
+    it('should not include time if hours not provided', function() {
+      var datetime = bq.datetime({
+        year: 2016,
+        month: 1,
+        day: 1
+      });
+
+      assert.strictEqual(datetime.value, '2016-1-1');
+    });
   });
 
   describe('time', function() {
+    var INPUT_STRING = '14:2:38.883388';
+    var INPUT_OBJ = {
+      hours: 14,
+      minutes: 2,
+      seconds: 38,
+      fractional: 883388
+    };
+
     it('should expose static and instance constructors', function() {
       var staticT = BigQuery.time();
       assert(staticT instanceof BigQuery.time);
@@ -167,6 +206,31 @@ describe('BigQuery', function() {
       var instanceT = bq.time();
       assert(instanceT instanceof BigQuery.time);
       assert(instanceT instanceof bq.time);
+    });
+
+    it('should accept a string', function() {
+      var time = bq.time(INPUT_STRING);
+      assert.strictEqual(time.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var time = bq.time(INPUT_OBJ);
+      assert.strictEqual(time.value, INPUT_STRING);
+    });
+
+    it('should default minutes and seconds to 0', function() {
+      var time = bq.time({
+        hours: 14
+      });
+      assert.strictEqual(time.value, '14:0:0');
+    });
+
+    it('should not include fractional digits if not provided', function() {
+      var input = extend({}, INPUT_OBJ);
+      delete input.fractional;
+
+      var time = bq.time(input);
+      assert.strictEqual(time.value, '14:2:38');
     });
   });
 

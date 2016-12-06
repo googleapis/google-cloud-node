@@ -119,7 +119,7 @@ BigQuery.prototype.datetime = function(value) {
     var time;
 
     if (value.hours) {
-      time = new BigQuery.time(value);
+      time = BigQuery.time(value);
     }
 
     value = format('{y}-{m}-{d}{time}', {
