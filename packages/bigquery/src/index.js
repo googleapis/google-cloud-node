@@ -187,27 +187,38 @@ BigQuery.prototype.time = function(value) {
  */
 BigQuery.getType_ = function(value) {
   if (is.number(value)) {
-    if (value % 1 === 0) {
-      return 'INT64';
-    }
-    return 'FLOAT64';
-  } else if (is.bool(value)) {
-    return 'BOOL';
-  } else if (is.date(value)) {
-    return 'TIMESTAMP';
-  } else if (is.array(value)) {
-    return 'ARRAY';
-  } else if (value instanceof BigQuery.datetime) {
-    return 'DATETIME';
-  } else if (value instanceof BigQuery.time) {
-    return 'TIME';
-  } else if (is.object(value)) {
-    return 'STRUCT';
-  } else if (value instanceof Buffer) {
-    return 'BYTES';
-  } else {
-    return 'STRING';
+    return value % 1 === 0 ? 'INT64' : 'FLOAT64';
   }
+
+  if (is.bool(value)) {
+    return 'BOOL';
+  }
+
+  if (is.date(value)) {
+    return 'TIMESTAMP';
+  }
+
+  if (is.array(value)) {
+    return 'ARRAY';
+  }
+
+  if (value instanceof BigQuery.datetime) {
+    return 'DATETIME';
+  }
+
+  if (value instanceof BigQuery.time) {
+    return 'TIME';
+  }
+
+  if (is.object(value)) {
+    return 'STRUCT';
+  }
+
+  if (value instanceof Buffer) {
+    return 'BYTES';
+  }
+
+  return 'STRING';
 };
 
 /**
