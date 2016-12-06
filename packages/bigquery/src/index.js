@@ -185,8 +185,20 @@ BigQuery.prototype.time = function(value) {
  * @return {string} - The type detected from the value.
  */
 BigQuery.getType_ = function(value) {
-  if (is.number(value)) {
-    return value % 1 === 0 ? 'INT64' : 'FLOAT64';
+  if (value instanceof BigQuery.datetime) {
+    return 'DATETIME';
+  }
+
+  if (value instanceof BigQuery.time) {
+    return 'TIME';
+  }
+
+  if (value instanceof Buffer) {
+    return 'BYTES';
+  }
+
+  if (is.array(value)) {
+    return 'ARRAY';
   }
 
   if (is.bool(value)) {
@@ -197,24 +209,12 @@ BigQuery.getType_ = function(value) {
     return 'TIMESTAMP';
   }
 
-  if (is.array(value)) {
-    return 'ARRAY';
-  }
-
-  if (value instanceof BigQuery.datetime) {
-    return 'DATETIME';
-  }
-
-  if (value instanceof BigQuery.time) {
-    return 'TIME';
+  if (is.number(value)) {
+    return value % 1 === 0 ? 'INT64' : 'FLOAT64';
   }
 
   if (is.object(value)) {
     return 'STRUCT';
-  }
-
-  if (value instanceof Buffer) {
-    return 'BYTES';
   }
 
   return 'STRING';

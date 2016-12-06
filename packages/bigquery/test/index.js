@@ -236,15 +236,15 @@ describe('BigQuery', function() {
 
   describe('getType_', function() {
     it('should return correct types', function() {
-      assert.strictEqual(BigQuery.getType_(8), 'INT64');
-      assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
-      assert.strictEqual(BigQuery.getType_(true), 'BOOL');
-      assert.strictEqual(BigQuery.getType_(new Date()), 'TIMESTAMP');
-      assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
       assert.strictEqual(BigQuery.getType_(bq.datetime()), 'DATETIME');
       assert.strictEqual(BigQuery.getType_(bq.time()), 'TIME');
-      assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
       assert.strictEqual(BigQuery.getType_(new Buffer(2)), 'BYTES');
+      assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
+      assert.strictEqual(BigQuery.getType_(true), 'BOOL');
+      assert.strictEqual(BigQuery.getType_(new Date()), 'TIMESTAMP');
+      assert.strictEqual(BigQuery.getType_(8), 'INT64');
+      assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
+      assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
       assert.strictEqual(BigQuery.getType_('hi'), 'STRING');
     });
   });
