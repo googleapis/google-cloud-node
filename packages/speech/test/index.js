@@ -958,10 +958,41 @@ describe('Speech', function() {
         }
       };
 
+      it('should format the results', function(done) {
+        speech.api.Speech = {
+          asyncRecognize: function(reqOpts, callback) {
+            var operation = through.obj();
+            callback(null, operation, apiResponse);
+          }
+        };
+
+        var result = {
+          results: []
+        };
+
+        var formattedResults = [];
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(results, result.results);
+          assert.strictEqual(verboseMode, false);
+          return formattedResults;
+        };
+
+        speech.startRecognition(FILE, CONFIG, function(err, operation) {
+          assert.ifError(err);
+
+          operation.emit('complete', result, null, null, function(err, resp) {
+            assert.ifError(err);
+            assert.strictEqual(resp, formattedResults);
+            done();
+          });
+        });
+      });
+
       it('should format results in verbose mode', function(done) {
         speech.api.Speech = {
           asyncRecognize: function(reqOpts, callback) {
-            callback(null, through.obj(), apiResponse);
+            var operation = through.obj();
+            callback(null, operation, apiResponse);
           }
         };
 
@@ -974,9 +1005,10 @@ describe('Speech', function() {
           verbose: true
         });
 
-        speech.startRecognition(FILE, config, function(err, op) {
+        speech.startRecognition(FILE, config, function(err, operation) {
           assert.ifError(err);
-          op.emit('complete', apiResponse);
+
+          operation.emit('complete', {}, null, null, assert.ifError);
         });
       });
 

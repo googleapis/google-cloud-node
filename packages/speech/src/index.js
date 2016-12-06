@@ -806,13 +806,9 @@ Speech.prototype.startRecognition = function(file, config, callback) {
         return;
       }
 
-      // Intercept the "complete" event to decode and format the results of the
-      // operation for the user.
       eventsIntercept.patch(operation);
-      operation.intercept('complete',
-        function(result, metadata, resp, callback) {
-          callback(null,
-            Speech.formatResults_(result.results, verboseMode), metadata, resp);
+      operation.intercept('complete', function(result, meta, resp, callback) {
+        callback(null, Speech.formatResults_(result.results, verboseMode));
       });
 
       callback(null, operation, resp);
