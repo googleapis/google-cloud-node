@@ -10,45 +10,36 @@
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
 
-This client supports the following Google Cloud Platform services:
+This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Google BigQuery](#google-bigquery)
-* [Google Cloud Bigtable](#google-cloud-bigtable)
-* [Google Cloud Datastore](#google-cloud-datastore)
-* [Google Cloud DNS](#google-cloud-dns)
-* [Google Cloud Pub/Sub](#google-cloud-pubsub)
-* [Google Cloud Storage](#google-cloud-storage)
-* [Google Compute Engine](#google-compute-engine)
-* [Google Prediction API](#google-prediction-api)
-* [Google Translate API](#google-translate-api)
-* [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
-* [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
-* [Google Cloud Speech](#google-cloud-speech-beta) (Beta)
-* [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
-* [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
-* [Stackdriver Monitoring](#stackdriver-monitoring-beta) (Beta)
+* [Google BigQuery](#google-bigquery-beta) (Beta)
+* [Google Cloud Datastore](#google-cloud-datastore-beta) (Beta)
+* [Google Cloud Storage](#google-cloud-storage-beta) (Beta)
+* [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
+
+This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
+
+* [Google Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
+* [Google Cloud DNS](#google-cloud-dns-alpha) (Alpha)
+* [Google Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
+* [Google Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
+* [Google Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
+* [Google Cloud Speech](#google-cloud-speech-alpha) (Alpha)
+* [Google Cloud Vision](#google-cloud-vision-alpha) (Alpha)
+* [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
+* [Google Prediction API](#google-prediction-api-alpha) (Alpha)
+* [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
+* [Google Translate API](#google-translate-api-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
-## Where did `gcloud-node` go?
-
-`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave the same, simply change your dependency:
-
-```sh
-$ npm uninstall --save gcloud
-$ npm install --save google-cloud
-```
-
-```diff
-- var gcloud = require('gcloud');
-+ var gcloud = require('google-cloud');
-```
 
 ## Quick Start
 
 ```sh
 $ npm install --save google-cloud
 ```
+
 
 ## Example Applications
 
@@ -60,27 +51,24 @@ $ npm install --save google-cloud
 - [gstore-node][gstore-node] - Google Datastore Entities Modeling library.
 - [gstore-api][gstore-api] - REST API builder for Google Datastore Entities.
 
+
 ## Authentication
 
 With `google-cloud` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
-### On Google Compute Engine
+### On Google Cloud Platform
 
 If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-// Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
-var gcloud = require('google-cloud')({
-  projectId: projectId
-});
-
+var gcloud = require('google-cloud');
 // ...you're good to go! See the next section to get started using the APIs.
 ```
 
+
 ### Elsewhere
 
-If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
+If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
 
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
@@ -129,7 +117,7 @@ var gcloud = require('google-cloud')({
 You can also set auth on a per-API-instance basis. The examples below show you how.
 
 
-## Google BigQuery
+## Google BigQuery (Beta)
 
 - [API Documentation][gcloud-bigquery-docs]
 - [Official Documentation][cloud-bigquery-docs]
@@ -184,78 +172,7 @@ job.getQueryResults().on('data', function(row) {});
 ```
 
 
-## Google Cloud Bigtable
-
-- [API Documentation][gcloud-bigtable-docs]
-- [Official Documentation][cloud-bigtable-docs]
-
-*You may need to [create a cluster][cloud-bigtable-cluster] to use the Google Cloud Bigtable API with your project.*
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var bigtable = gcloud.bigtable;
-```
-
-#### Using the Cloud Bigtable API module
-
-```
-$ npm install --save @google-cloud/bigtable
-```
-
-```js
-var bigtable = require('@google-cloud/bigtable');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var bigtableClient = bigtable({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var instance = bigtableClient.instance('my-instance');
-var table = instance.table('prezzy');
-
-table.getRows(function(err, rows) {});
-
-// Update a row in your table.
-var row = table.row('alincoln');
-
-row.save('follows:gwashington', 1, function(err) {
-  if (err) {
-    // Error handling omitted.
-  }
-
-  row.get('follows:gwashington', function(err, data) {
-    if (err) {
-      // Error handling omitted.
-    }
-
-    // data = {
-    //   follows: {
-    //     gwashington: [
-    //       {
-    //         value: 1
-    //       }
-    //     ]
-    //   }
-    // }
-  });
-});
-```
-
-
-## Google Cloud Datastore
+## Google Cloud Datastore (Beta)
 
 - [API Documentation][gcloud-datastore-docs]
 - [Official Documentation][cloud-datastore-docs]
@@ -329,124 +246,7 @@ datastoreClient.save({
 ```
 
 
-## Google Cloud DNS
-
-- [API Documentation][gcloud-dns-docs]
-- [Official Documentation][cloud-dns-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var dns = gcloud.dns;
-```
-
-#### Using the Cloud DNS API module
-
-```
-$ npm install --save @google-cloud/dns
-```
-
-```js
-var dns = require('@google-cloud/dns');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var dnsClient = dns({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a managed zone.
-dnsClient.createZone('my-new-zone', {
-  dnsName: 'my-domain.com.'
-}, function(err, zone) {});
-
-// Reference an existing zone.
-var zone = dnsClient.zone('my-existing-zone');
-
-// Create an NS record.
-var nsRecord = zone.record('ns', {
-  ttl: 86400,
-  name: 'my-domain.com.',
-  data: 'ns-cloud1.googledomains.com.'
-});
-
-zone.addRecord(nsRecord, function(err, change) {});
-
-// Create a zonefile from the records in your zone.
-zone.export('/zonefile.zone', function(err) {});
-```
-
-
-## Google Cloud Pub/Sub
-
-- [API Documentation][gcloud-pubsub-docs]
-- [Official Documentation][cloud-pubsub-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var pubsub = gcloud.pubsub;
-```
-
-#### Using the Cloud Pub/Sub API module
-
-```
-$ npm install --save @google-cloud/pubsub
-```
-
-```js
-var pubsub = require('@google-cloud/pubsub');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authentication section above).
-
-var pubsubClient = pubsub({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Reference a topic that has been previously created.
-var topic = pubsubClient.topic('my-topic');
-
-// Publish a message to the topic.
-topic.publish('New message!', function(err) {});
-
-// Subscribe to the topic.
-topic.subscribe('subscription-name', function(err, subscription) {
-  // Register listeners to start pulling for messages.
-  function onError(err) {}
-  function onMessage(message) {}
-  subscription.on('error', onError);
-  subscription.on('message', onMessage);
-
-  // Remove listeners to stop pulling for messages.
-  subscription.removeListener('message', onMessage);
-  subscription.removeListener('error', onError);
-});
-```
-
-
-## Google Cloud Storage
+## Google Cloud Storage (Beta)
 
 - [API Documentation][gcloud-storage-docs]
 - [Official Documentation][cloud-storage-docs]
@@ -518,63 +318,10 @@ localReadStream.pipe(remoteWriteStream);
 ```
 
 
-## Google Compute Engine
+## Google Stackdriver Logging (Beta)
 
-- [API Documentation][gcloud-compute-docs]
-- [Official Documentation][cloud-compute-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var compute = gcloud.compute;
-```
-
-#### Using the Compute Engine API module
-
-```
-$ npm install --save @google-cloud/compute
-```
-
-```js
-var compute = require('@google-cloud/compute');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var gce = compute({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a new VM using the latest OS image of your choice.
-var zone = gce.zone('us-central1-a');
-var name = 'ubuntu-http';
-
-zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
-  // `operation` lets you check the status of long-running tasks.
-
-  operation
-    .on('error', function(err) {})
-    .on('running', function(metadata) {})
-    .on('complete', function(metadata) {
-      // Virtual machine created!
-    });
-});
-```
-
-## Google Prediction API
-
-- [API Documentation][gcloud-prediction-docs]
-- [Official Documentation][cloud-prediction-docs]
+- [API Documentation][gcloud-logging-docs]
+- [Official Documentation][cloud-logging-docs]
 
 #### Using the all-in-one module
 
@@ -584,66 +331,140 @@ $ npm install --save google-cloud
 
 ```js
 var gcloud = require('google-cloud');
-var prediction = gcloud.prediction;
+var logging = gcloud.logging;
 ```
 
-#### Using the Prediction API module
+#### Using the Google Stackdriver Logging API module
 
 ```
-$ npm install --save @google-cloud/prediction
+$ npm install --save @google-cloud/logging
 ```
 
 ```js
-var prediction = require('@google-cloud/prediction');
+var logging = require('@google-cloud/logging');
 ```
 
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
+// Authenticating on a global-basis. You can also authenticate on a per-API-
+// basis (see Authentication section above).
 
-var predictionClient = prediction({
+var loggingClient = logging({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Get all of the trained models in your project.
-predictionClient.getModels(function(err, models) {
+// Create a sink using a Bucket as a destination.
+var gcs = storage();
+
+loggingClient.createSink('my-new-sink', {
+  destination: gcs.bucket('my-sink')
+}, function(err, sink) {});
+
+// Write a critical entry to a log.
+var syslog = loggingClient.log('syslog');
+
+var metadata = {
+  resource: {
+    type: 'gce_instance',
+    labels: {
+      zone: 'global',
+      instance_id: '3'
+    }
+  }
+};
+
+var entry = syslog.entry(metadata, {
+  delegate: process.env.user
+});
+
+syslog.critical(entry, function(err) {});
+
+// Get all entries in your project.
+loggingClient.getEntries(function(err, entries) {
   if (!err) {
-    // `models` is an array of Model objects.
+    // `entries` contains all of the entries from the logs in your project.
   }
 });
+```
 
-// Reference an existing trained model.
-var model = predictionClient.model('my-existing-model');
 
-// Train a model.
-model.train('english', 'Hello from your friends at Google!', function(err) {});
+## Google Cloud Bigtable (Alpha)
 
-// Query a model.
-model.query('Hello', function(err, results) {
-  if (!err) {
-    // results.winner == 'english'
-    // results.scores == [
-    //   {
-    //     label: 'english',
-    //     score: 1
-    //   },
-    //   {
-    //     label: 'spanish',
-    //     score: 0
+- [API Documentation][gcloud-bigtable-docs]
+- [Official Documentation][cloud-bigtable-docs]
+
+*You may need to [create a cluster][cloud-bigtable-cluster] to use the Google Cloud Bigtable API with your project.*
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var bigtable = gcloud.bigtable;
+```
+
+#### Using the Cloud Bigtable API module
+
+```
+$ npm install --save @google-cloud/bigtable
+```
+
+```js
+var bigtable = require('@google-cloud/bigtable');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var bigtableClient = bigtable({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var instance = bigtableClient.instance('my-instance');
+var table = instance.table('prezzy');
+
+table.getRows(function(err, rows) {});
+
+// Update a row in your table.
+var row = table.row('alincoln');
+
+row.save('follows:gwashington', 1, function(err) {
+  if (err) {
+    // Error handling omitted.
+  }
+
+  row.get('follows:gwashington', function(err, data) {
+    if (err) {
+      // Error handling omitted.
+    }
+
+    // data = {
+    //   follows: {
+    //     gwashington: [
+    //       {
+    //         value: 1
+    //       }
+    //     ]
     //   }
-    // ]
-  }
+    // }
+  });
 });
 ```
 
 
-## Google Translate API
+## Google Cloud DNS (Alpha)
 
-- [API Documentation][gcloud-translate-docs]
-- [Official Documentation][cloud-translate-docs]
+- [API Documentation][gcloud-dns-docs]
+- [Official Documentation][cloud-dns-docs]
 
 #### Using the all-in-one module
 
@@ -653,20 +474,18 @@ $ npm install --save google-cloud
 
 ```js
 var gcloud = require('google-cloud');
-var translate = gcloud.translate;
+var dns = gcloud.dns;
 ```
 
-#### Using the Translate API module
+#### Using the Cloud DNS API module
 
 ```
-$ npm install --save @google-cloud/translate
+$ npm install --save @google-cloud/dns
 ```
 
 ```js
-var translate = require('@google-cloud/translate');
+var dns = require('@google-cloud/dns');
 ```
-
-**An API key is required for Translate.** See [Identifying your application to Google][api-key-howto].
 
 #### Preview
 
@@ -674,45 +493,34 @@ var translate = require('@google-cloud/translate');
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var translateClient = translate({
-  key: 'API Key'
+var dnsClient = dns({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
 });
 
-// Translate a string of text.
-translateClient.translate('Hello', 'es', function(err, translation) {
-  if (!err) {
-    // translation = 'Hola'
-  }
+// Create a managed zone.
+dnsClient.createZone('my-new-zone', {
+  dnsName: 'my-domain.com.'
+}, function(err, zone) {});
+
+// Reference an existing zone.
+var zone = dnsClient.zone('my-existing-zone');
+
+// Create an NS record.
+var nsRecord = zone.record('ns', {
+  ttl: 86400,
+  name: 'my-domain.com.',
+  data: 'ns-cloud1.googledomains.com.'
 });
 
-// Detect a language from a string of text.
-translateClient.detect('Hello', function(err, results) {
-  if (!err) {
-    // results = {
-    //   language: 'en',
-    //   confidence: 1,
-    //   input: 'Hello'
-    // }
-  }
-});
+zone.addRecord(nsRecord, function(err, change) {});
 
-// Get a list of supported languages.
-translateClient.getLanguages(function(err, languages) {
-  if (!err) {
-    // languages = [
-    //   'af',
-    //   'ar',
-    //   'az',
-    //   ...
-    // ]
-  }
-});
+// Create a zonefile from the records in your zone.
+zone.export('/zonefile.zone', function(err) {});
 ```
 
 
-## Google Cloud Natural Language (Beta)
-
-> **This is a Beta release of Google Cloud Natural Language.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+## Google Cloud Natural Language (Alpha)
 
 - [API Documentation][gcloud-language-docs]
 - [Official Documentation][cloud-language-docs]
@@ -794,9 +602,65 @@ document.annotate(function(err, annotations) {
 ```
 
 
-## Google Cloud Resource Manager (Beta)
+## Google Cloud Pub/Sub (Alpha)
 
-> **This is a Beta release of Google Cloud Resource Manager.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+- [API Documentation][gcloud-pubsub-docs]
+- [Official Documentation][cloud-pubsub-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var pubsub = gcloud.pubsub;
+```
+
+#### Using the Cloud Pub/Sub API module
+
+```
+$ npm install --save @google-cloud/pubsub
+```
+
+```js
+var pubsub = require('@google-cloud/pubsub');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you
+// auth on a global basis (see Authentication section above).
+
+var pubsubClient = pubsub({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Reference a topic that has been previously created.
+var topic = pubsubClient.topic('my-topic');
+
+// Publish a message to the topic.
+topic.publish('New message!', function(err) {});
+
+// Subscribe to the topic.
+topic.subscribe('subscription-name', function(err, subscription) {
+  // Register listeners to start pulling for messages.
+  function onError(err) {}
+  function onMessage(message) {}
+  subscription.on('error', onError);
+  subscription.on('message', onMessage);
+
+  // Remove listeners to stop pulling for messages.
+  subscription.removeListener('message', onMessage);
+  subscription.removeListener('error', onError);
+});
+```
+
+
+## Google Cloud Resource Manager (Alpha)
 
 - [API Documentation][gcloud-resource-docs]
 - [Official Documentation][cloud-resource-docs]
@@ -849,9 +713,7 @@ project.getMetadata(function(err, metadata) {
 ```
 
 
-## Google Cloud Speech (Beta)
-
-> **This is a Beta release of Google Cloud Speech.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+## Google Cloud Speech (Alpha)
 
 - [API Documentation][gcloud-speech-docs]
 - [Official Documentation][cloud-speech-docs]
@@ -934,9 +796,7 @@ fs.createReadStream('./audio.raw')
 ```
 
 
-## Google Cloud Vision (Beta)
-
-> **This is a Beta release of Google Cloud Vision.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+## Google Cloud Vision (Alpha)
 
 - [API Documentation][gcloud-vision-docs]
 - [Official Documentation][cloud-vision-docs]
@@ -1065,12 +925,10 @@ visionClient.detectFaces('./image.jpg', function(err, faces) {
 ```
 
 
-## Stackdriver Logging (Beta)
+## Google Compute Engine (Alpha)
 
-> **This is a Beta release of Stackdriver Logging.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
-
-- [API Documentation][gcloud-logging-docs]
-- [Official Documentation][cloud-logging-docs]
+- [API Documentation][gcloud-compute-docs]
+- [Official Documentation][cloud-compute-docs]
 
 #### Using the all-in-one module
 
@@ -1080,68 +938,117 @@ $ npm install --save google-cloud
 
 ```js
 var gcloud = require('google-cloud');
-var logging = gcloud.logging;
+var compute = gcloud.compute;
 ```
 
-#### Using the Stackdriver Logging API module
+#### Using the Compute Engine API module
 
 ```
-$ npm install --save @google-cloud/logging
+$ npm install --save @google-cloud/compute
 ```
 
 ```js
-var logging = require('@google-cloud/logging');
+var compute = require('@google-cloud/compute');
 ```
 
 #### Preview
 
 ```js
-// Authenticating on a global-basis. You can also authenticate on a per-API-
-// basis (see Authentication section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
-var loggingClient = logging({
+var gce = compute({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Create a sink using a Bucket as a destination.
-var gcs = storage();
+// Create a new VM using the latest OS image of your choice.
+var zone = gce.zone('us-central1-a');
+var name = 'ubuntu-http';
 
-loggingClient.createSink('my-new-sink', {
-  destination: gcs.bucket('my-sink')
-}, function(err, sink) {});
+zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
+  // `operation` lets you check the status of long-running tasks.
 
-// Write a critical entry to a log.
-var syslog = loggingClient.log('syslog');
+  operation
+    .on('error', function(err) {})
+    .on('running', function(metadata) {})
+    .on('complete', function(metadata) {
+      // Virtual machine created!
+    });
+});
+```
 
-var metadata = {
-  resource: {
-    type: 'gce_instance',
-    labels: {
-      zone: 'global',
-      instance_id: '3'
-    }
-  }
-};
 
-var entry = syslog.entry(metadata, {
-  delegate: process.env.user
+## Google Prediction API (Alpha)
+
+- [API Documentation][gcloud-prediction-docs]
+- [Official Documentation][cloud-prediction-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var prediction = gcloud.prediction;
+```
+
+#### Using the Prediction API module
+
+```
+$ npm install --save @google-cloud/prediction
+```
+
+```js
+var prediction = require('@google-cloud/prediction');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var predictionClient = prediction({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
 });
 
-syslog.critical(entry, function(err) {});
-
-// Get all entries in your project.
-loggingClient.getEntries(function(err, entries) {
+// Get all of the trained models in your project.
+predictionClient.getModels(function(err, models) {
   if (!err) {
-    // `entries` contains all of the entries from the logs in your project.
+    // `models` is an array of Model objects.
+  }
+});
+
+// Reference an existing trained model.
+var model = predictionClient.model('my-existing-model');
+
+// Train a model.
+model.train('english', 'Hello from your friends at Google!', function(err) {});
+
+// Query a model.
+model.query('Hello', function(err, results) {
+  if (!err) {
+    // results.winner == 'english'
+    // results.scores == [
+    //   {
+    //     label: 'english',
+    //     score: 1
+    //   },
+    //   {
+    //     label: 'spanish',
+    //     score: 0
+    //   }
+    // ]
   }
 });
 ```
 
 
-## Stackdriver Monitoring (Beta)
-
-> **This is a Beta release of Stackdriver Monitoring.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+## Google Stackdriver Monitoring (Alpha)
 
 ### :warning: This is an auto-generated API
 
@@ -1162,7 +1069,7 @@ var gcloud = require('google-cloud');
 var monitoring = gcloud.monitoring;
 ```
 
-#### Using the Stackdriver Monitoring API module
+#### Using the Google Stackdriver Monitoring API module
 
 ```
 $ npm install --save @google-cloud/monitoring
@@ -1182,15 +1089,98 @@ var monitoringClient = monitoring.v3({
 ```
 
 
+## Google Translate API (Alpha)
+
+- [API Documentation][gcloud-translate-docs]
+- [Official Documentation][cloud-translate-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var translate = gcloud.translate;
+```
+
+#### Using the Google Translate API module
+
+```
+$ npm install --save @google-cloud/translate
+```
+
+```js
+var translate = require('@google-cloud/translate');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var translateClient = translate({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Translate a string of text.
+translateClient.translate('Hello', 'es', function(err, translation) {
+  if (!err) {
+    // translation = 'Hola'
+  }
+});
+
+// Detect a language from a string of text.
+translateClient.detect('Hello', function(err, results) {
+  if (!err) {
+    // results = {
+    //   language: 'en',
+    //   confidence: 1,
+    //   input: 'Hello'
+    // }
+  }
+});
+
+// Get a list of supported languages.
+translateClient.getLanguages(function(err, languages) {
+  if (!err) {
+    // languages = [
+    //   'af',
+    //   'ar',
+    //   'az',
+    //   ...
+    // ]
+  }
+});
+```
+
+
+## Versioning
+
+This library follows [Semantic Versioning][semver].
+
+Please note it is currently under active development. Any release versioned 0.x.y is subject to backwards incompatible changes at any time.
+
+**Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
+
+**Alpha**: Libraries defined at an Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
+
+
+
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
 
-See [CONTRIBUTING](.github/CONTRIBUTING.md) for more information on how to get started.
+See [CONTRIBUTING][contributing] for more information on how to get started.
+
 
 ## License
 
-Apache 2.0 - See [COPYING](COPYING) for more information.
+Apache 2.0 - See [COPYING][copying] for more information.
+
 
 [gcloud-homepage]: https://googlecloudplatform.github.io/google-cloud-node/
 [gcloud-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs
@@ -1257,3 +1247,9 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-speech-docs]: https://cloud.google.com/speech/docs
 
 [cloud-vision-docs]: https://cloud.google.com/vision/docs
+
+[semver]: http://semver.org
+
+[contributing]: .github/CONTRIBUTING.md
+
+[copying]: COPYING.md

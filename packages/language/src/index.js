@@ -32,12 +32,6 @@ var v1 = require('./v1');
 var Document = require('./document.js');
 
 /**
- * <p class="notice">
- *   **This is a Beta release of Google Cloud Natural Language.** This API is
- *   not covered by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
  * The [Google Cloud Natural Language](https://cloud.google.com/natural-language/docs)
  * API provides natural language understanding technologies to developers,
  * including sentiment analysis, entity recognition, and syntax analysis. This

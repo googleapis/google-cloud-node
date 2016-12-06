@@ -1,4 +1,4 @@
-# @google-cloud/bigquery
+# @google-cloud/bigquery ([Beta][versioning])
 > Google BigQuery Client Library for Node.js
 
 *Looking for more Google APIs than just BigQuery? You might want to check out [`google-cloud`][google-cloud].*
@@ -48,18 +48,12 @@ var bigquery = require('@google-cloud/bigquery')({
 
 It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
-### On Google Compute Engine
+### On Google Cloud Platform
 
-If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-// Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
-
-var bigQuery = require('@google-cloud/bigquery')({
-  projectId: projectId
-});
-
+var bigquery = require('@google-cloud/bigquery')();
 // ...you're good to go!
 ```
 
@@ -78,7 +72,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 ``` js
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var bigquery = require('@google-cloud/bigquery')({
   projectId: projectId,
 
   // The path to your key file:
@@ -92,6 +86,7 @@ var bigQuery = require('@google-cloud/bigquery')({
 ```
 
 
+[versioning]: https://github.com/readme.md#versioning
 [google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project

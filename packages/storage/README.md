@@ -1,4 +1,4 @@
-# @google-cloud/storage
+# @google-cloud/storage ([Beta][versioning])
 > Google Cloud Storage Client Library for Node.js
 
 *Looking for more Google APIs than just Storage? You might want to check out [`google-cloud`][google-cloud].*
@@ -65,24 +65,18 @@ var gcs = require('@google-cloud/storage')({
 
 It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
-### On Google Compute Engine
+### On Google Cloud Platform
 
-If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-// Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
-
-var gcs = require('@google-cloud/storage')({
-  projectId: projectId
-});
-
+var gcs = require('@google-cloud/storage')();
 // ...you're good to go!
 ```
 
 ### Elsewhere
 
-If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
+If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
 
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
@@ -110,6 +104,7 @@ var gcs = require('@google-cloud/storage')({
 ```
 
 
+[versioning]: https://github.com/readme.md#versioning
 [google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
