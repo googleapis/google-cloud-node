@@ -143,7 +143,7 @@ describe('Speech', function() {
   });
 
   describe('startRecognition', function() {
-    it.only('recognizes speech from raw audio', function(done) {
+    it('recognizes speech from raw audio', function(done) {
       fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
         assert.ifError(err);
 
