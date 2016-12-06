@@ -79,16 +79,17 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
     'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
-  var operationsOpts = {
+  var operationsClient = new gax.lro({
+    auth: gaxGrpc.auth,
+    grpc: gaxGrpc.grpc
+  }).operationsClient({
     servicePath: servicePath,
     port: port,
     sslCreds: sslCreds,
     clientConfig: clientConfig,
     appName: appName,
-    appVersion: appVersion,
-    scopes: ALL_SCOPES
-  }
-  var operationsClient = new gax.lro(operationsOpts).operationsClient(operationsOpts);
+    appVersion: appVersion
+  });
 
   var longrunningDescriptors = {
     asyncRecognize: new gax.LongrunningDescriptor(

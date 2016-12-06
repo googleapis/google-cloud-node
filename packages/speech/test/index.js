@@ -934,15 +934,13 @@ describe('Speech', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      beforeEach(function() {
+      it('should return the error & API response', function(done) {
         speech.api.Speech = {
           asyncRecognize: function(reqOpts, callback) {
-            callback(error, apiResponse);
+            callback(error, null, apiResponse);
           }
         };
-      });
 
-      it('should return the error & API response', function(done) {
         speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
@@ -960,91 +958,13 @@ describe('Speech', function() {
         }
       };
 
-      var decodedResponse = {
-        results: []
-      };
-
-      beforeEach(function() {
-        speech.protos = {
-          Speech: {
-            AsyncRecognizeResponse: {
-              decode: function() {
-                return decodedResponse;
-              }
-            }
-          }
-        };
-
-        Speech.formatResults_ = util.noop;
-
-        speech.operation = function() {
-          return through.obj();
-        };
-
+      it('should format results in verbose mode', function(done) {
         speech.api.Speech = {
           asyncRecognize: function(reqOpts, callback) {
-            callback(null, apiResponse);
-          }
-        };
-      });
-
-      it('should return an operation & API response', function(done) {
-        var fakeOperation = through.obj();
-
-        speech.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return fakeOperation;
-        };
-
-        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
-          assert.ifError(err);
-
-          assert.strictEqual(op, fakeOperation);
-          assert.strictEqual(op.metadata, apiResponse);
-
-          assert.strictEqual(apiResponse_, apiResponse);
-
-          done();
-        });
-      });
-
-      it('should format the results', function(done) {
-        var fakeOperation = through.obj();
-        speech.operation = function() {
-          return fakeOperation;
-        };
-
-        speech.protos = {
-          Speech: {
-            AsyncRecognizeResponse: {
-              decode: function(value) {
-                assert.strictEqual(value, apiResponse.response.value);
-                return decodedResponse;
-              }
-            }
+            callback(null, through.obj(), apiResponse);
           }
         };
 
-        var formattedResults = [];
-        Speech.formatResults_ = function(results, verboseMode) {
-          assert.strictEqual(results, decodedResponse.results);
-          assert.strictEqual(verboseMode, false);
-          return formattedResults;
-        };
-
-        speech.startRecognition(FILE, CONFIG, function(err, op) {
-          assert.ifError(err);
-
-          op.on('complete', function(results) {
-            assert.strictEqual(results, formattedResults);
-            done();
-          });
-
-          op.emit('complete', apiResponse);
-        });
-      });
-
-      it('should format results in verbose mode', function(done) {
         Speech.formatResults_ = function(results, verboseMode) {
           assert.strictEqual(verboseMode, true);
           done();
