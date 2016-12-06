@@ -107,7 +107,6 @@ util.inherits(BigQuery, common.Service);
  *   minutes: 0,
  *   seconds: 0
  * });
- * // 2017-1-1 14:0:0
  */
 BigQuery.datetime =
 BigQuery.prototype.datetime = function(value) {

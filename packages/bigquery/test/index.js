@@ -241,7 +241,10 @@ describe('BigQuery', function() {
       assert.strictEqual(BigQuery.getType_(true), 'BOOL');
       assert.strictEqual(BigQuery.getType_(new Date()), 'TIMESTAMP');
       assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
+      assert.strictEqual(BigQuery.getType_(bq.datetime()), 'DATETIME');
+      assert.strictEqual(BigQuery.getType_(bq.time()), 'TIME');
       assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
+      assert.strictEqual(BigQuery.getType_(new Buffer(2)), 'BYTES');
       assert.strictEqual(BigQuery.getType_('hi'), 'STRING');
     });
   });
@@ -268,6 +271,32 @@ describe('BigQuery', function() {
 
       var queryParameter = BigQuery.valueToQueryParameter_(date);
       assert.strictEqual(queryParameter.parameterValue.value, expectedValue);
+    });
+
+    it('should locate the value on DATETIME objects', function() {
+      var datetime = {
+        value: 'value'
+      };
+
+      BigQuery.getType_ = function() {
+        return 'DATETIME';
+      };
+
+      var queryParameter = BigQuery.valueToQueryParameter_(datetime);
+      assert.strictEqual(queryParameter.parameterValue.value, datetime.value);
+    });
+
+    it('should locate the value on TIME objects', function() {
+      var time = {
+        value: 'value'
+      };
+
+      BigQuery.getType_ = function() {
+        return 'TIME';
+      };
+
+      var queryParameter = BigQuery.valueToQueryParameter_(time);
+      assert.strictEqual(queryParameter.parameterValue.value, time.value);
     });
 
     it('should format an array', function() {
