@@ -263,7 +263,7 @@ describe('BigQuery', function() {
     });
   });
 
-  describe.only('timestamp', function() {
+  describe('timestamp', function() {
     var INPUT_STRING = '2016-12-06 12:00:00.000+0';
     var INPUT_DATE = new Date(INPUT_STRING);
 
@@ -314,6 +314,17 @@ describe('BigQuery', function() {
       assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
       assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
       assert.strictEqual(BigQuery.getType_('hi'), 'STRING');
+    });
+
+    it('should throw if a type cannot be detected', function() {
+      var expectedError = new RegExp([
+        'This value could not be translated to a BigQuery data type.',
+        undefined
+      ].join('\n'));
+
+      assert.throws(function() {
+        BigQuery.getType_(undefined);
+      }, expectedError);
     });
   });
 

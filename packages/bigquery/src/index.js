@@ -116,7 +116,7 @@ BigQuery.prototype.date = function(value) {
 };
 
 /**
- * A `DATETIME` data type represents a point in time. Unlike a `TIMESTAMP`, a
+ * A `DATETIME` data type represents a point in time. Unlike a `TIMESTAMP`,
  * this does not refer to an absolute instance in time. Instead, it is the civil
  * time, or the time that a user would see on a watch or calendar.
  *
@@ -242,6 +242,8 @@ BigQuery.prototype.timestamp = function(value) {
  *
  * @private
  *
+ * @throws {error} If the type could not be detected.
+ *
  * @resource [Data Type]{@link https://cloud.google.com/bigquery/data-types}
  *
  * @param {*} value - The value.
@@ -284,7 +286,14 @@ BigQuery.getType_ = function(value) {
     return 'STRUCT';
   }
 
-  return 'STRING';
+  if (is.string(value)) {
+    return 'STRING';
+  }
+
+  throw new Error([
+    'This value could not be translated to a BigQuery data type.',
+    value
+  ].join('\n'));
 };
 
 /**
@@ -702,7 +711,9 @@ BigQuery.prototype.job = function(id) {
  * @param {object|*[]} options.params - For positional SQL parameters, provide
  *     an array of values. For named SQL parameters, provide an object which
  *     maps each named parameter to its value. The supported types are integers,
- *     floats, Date objects, Strings, Booleans, and Objects.
+ *     floats, {module:bigquery#date} objects, {module:bigquery#datetime}
+ *     objects, {module:bigquery#time} objects, {module:bigquery#timestamp}
+ *     objects, Strings, Booleans, and Objects.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
  * @param {number} options.timeoutMs - How long to wait for the query to
@@ -724,7 +735,7 @@ BigQuery.prototype.job = function(id) {
  * });
  *
  * //-
- * // Positional and named SQL parameters are supported.
+ * // Positional SQL parameters are supported.
  * //-
  * bigquery.query({
  *   query: [
@@ -738,6 +749,9 @@ BigQuery.prototype.job = function(id) {
  *   ]
  * }, callback);
  *
+ * //-
+ * // Or if you prefer to name them, that's also supported.
+ * //-
  * bigquery.query({
  *   query: [
  *     'SELECT url',
