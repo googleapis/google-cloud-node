@@ -751,6 +751,12 @@ BigQuery.prototype.job = function(id) {
  * }, callback);
  *
  * //-
+ * // If you need to use a `DATE`, `DATETIME`, `TIME`, or `TIMESTAMP` type in
+ * // your query, see {module:bigquery#date}, {module:bigquery#datetime},
+ * // {module:bigquery#time}, and {module:bigquery#timestamp}.
+ * //-
+ *
+ * //-
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
