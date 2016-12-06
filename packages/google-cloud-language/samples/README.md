@@ -14,6 +14,7 @@ Learning API.
 * [Setup](#setup)
 * [Samples](#samples)
   * [Analyze](#analyze)
+  * [Slackbot](#slackbot)
 
 ## Setup
 
@@ -61,3 +62,11 @@ For more information, see https://cloud.google.com/natural-language/docs
 
 [analyze_docs]: https://cloud.google.com/natural-language/docs
 [analyze_code]: analyze.js
+
+### Slackbot
+
+The example in the [slackbot](./slackbot) subdirectory shows a Slack bot built using the
+[Botkit](https://github.com/howdyai/botkit) library.
+It runs on a Google Container Engine (Kubernetes) cluster, and uses one of the Google Cloud Platform's ML
+APIs, the Natural Language (NL) API, to interact in a Slack channel.
+See its [README](./slackbot/README.md) for more information.
