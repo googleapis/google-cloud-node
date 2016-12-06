@@ -123,7 +123,7 @@ var translate = require('@google-cloud/translate')({
 ```
 
 
-[versioning]: https://github.com/readme.md#versioning
+[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
 [google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [api-key-howto]: https://cloud.google.com/translate/v2/using_rest#auth
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
