@@ -1252,4 +1252,4 @@ Apache 2.0 - See [COPYING][copying] for more information.
 
 [contributing]: .github/CONTRIBUTING.md
 
-[copying]: COPYING.md
+[copying]: COPYING
