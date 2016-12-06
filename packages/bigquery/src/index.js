@@ -308,7 +308,7 @@ BigQuery.getType_ = function(value) {
  */
 BigQuery.valueToQueryParameter_ = function(value) {
   if (is.date(value)) {
-    value = this.timestamp(value);
+    value = BigQuery.timestamp(value);
   }
 
   var type = BigQuery.getType_(value);

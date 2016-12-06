@@ -344,6 +344,13 @@ describe('BigQuery', function() {
       var date = new Date();
       var expectedValue = date.toJSON().replace(/(.*)T(.*)Z$/, '$1 $2');
 
+      BigQuery.timestamp = function(value) {
+        assert.strictEqual(value, date);
+        return {
+          value: expectedValue
+        }
+      };
+
       BigQuery.getType_ = function() {
         return 'TIMESTAMP';
       };
