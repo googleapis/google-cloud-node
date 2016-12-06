@@ -934,15 +934,13 @@ describe('Speech', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      beforeEach(function() {
+      it('should return the error & API response', function(done) {
         speech.api.Speech = {
           asyncRecognize: function(reqOpts, callback) {
-            callback(error, apiResponse);
+            callback(error, null, apiResponse);
           }
         };
-      });
 
-      it('should return the error & API response', function(done) {
         speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
@@ -960,91 +958,44 @@ describe('Speech', function() {
         }
       };
 
-      var decodedResponse = {
-        results: []
-      };
-
-      beforeEach(function() {
-        speech.protos = {
-          Speech: {
-            AsyncRecognizeResponse: {
-              decode: function() {
-                return decodedResponse;
-              }
-            }
-          }
-        };
-
-        Speech.formatResults_ = util.noop;
-
-        speech.operation = function() {
-          return through.obj();
-        };
-
+      it('should format the results', function(done) {
         speech.api.Speech = {
           asyncRecognize: function(reqOpts, callback) {
-            callback(null, apiResponse);
+            var operation = through.obj();
+            callback(null, operation, apiResponse);
           }
         };
-      });
 
-      it('should return an operation & API response', function(done) {
-        var fakeOperation = through.obj();
-
-        speech.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return fakeOperation;
-        };
-
-        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
-          assert.ifError(err);
-
-          assert.strictEqual(op, fakeOperation);
-          assert.strictEqual(op.metadata, apiResponse);
-
-          assert.strictEqual(apiResponse_, apiResponse);
-
-          done();
-        });
-      });
-
-      it('should format the results', function(done) {
-        var fakeOperation = through.obj();
-        speech.operation = function() {
-          return fakeOperation;
-        };
-
-        speech.protos = {
-          Speech: {
-            AsyncRecognizeResponse: {
-              decode: function(value) {
-                assert.strictEqual(value, apiResponse.response.value);
-                return decodedResponse;
-              }
-            }
-          }
+        var result = {
+          results: []
         };
 
         var formattedResults = [];
         Speech.formatResults_ = function(results, verboseMode) {
-          assert.strictEqual(results, decodedResponse.results);
+          assert.strictEqual(results, result.results);
           assert.strictEqual(verboseMode, false);
           return formattedResults;
         };
 
-        speech.startRecognition(FILE, CONFIG, function(err, op) {
+        speech.startRecognition(FILE, CONFIG, function(err, operation) {
           assert.ifError(err);
 
-          op.on('complete', function(results) {
-            assert.strictEqual(results, formattedResults);
+          operation.emit('complete', result, null, null, function(err, resp) {
+            assert.ifError(err);
+            assert.strictEqual(resp, formattedResults);
             done();
           });
-
-          op.emit('complete', apiResponse);
         });
       });
 
       it('should format results in verbose mode', function(done) {
+        speech.api.Speech = {
+          asyncRecognize: function(reqOpts, callback) {
+            var operation = through.obj();
+            callback(null, operation, apiResponse);
+          }
+        };
+
         Speech.formatResults_ = function(results, verboseMode) {
           assert.strictEqual(verboseMode, true);
           done();
@@ -1054,9 +1005,10 @@ describe('Speech', function() {
           verbose: true
         });
 
-        speech.startRecognition(FILE, config, function(err, op) {
+        speech.startRecognition(FILE, config, function(err, operation) {
           assert.ifError(err);
-          op.emit('complete', apiResponse);
+
+          operation.emit('complete', {}, null, null, assert.ifError);
         });
       });
 

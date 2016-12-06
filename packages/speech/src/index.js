@@ -800,27 +800,15 @@ Speech.prototype.startRecognition = function(file, config, callback) {
     self.api.Speech.asyncRecognize({
       config: config,
       audio: foundFile
-    }, function(err, resp) {
+    }, function(err, operation, resp) {
       if (err) {
         callback(err, null, resp);
         return;
       }
 
-      var operation = self.operation(resp.name);
-      operation.metadata = resp;
-
-      // Intercept the "complete" event to decode and format the results of the
-      // operation for the user.
       eventsIntercept.patch(operation);
-      operation.intercept('complete', function(metadata, callback) {
-        var response = metadata.response;
-
-        if (response && is.string(response.value)) {
-          var value = response.value;
-          response = self.protos.Speech.AsyncRecognizeResponse.decode(value);
-        }
-
-        callback(null, Speech.formatResults_(response.results, verboseMode));
+      operation.intercept('complete', function(result, meta, resp, callback) {
+        callback(null, Speech.formatResults_(result.results, verboseMode));
       });
 
       callback(null, operation, resp);
