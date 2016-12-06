@@ -708,6 +708,28 @@ describe('BigQuery', function() {
             });
           });
 
+          it.skip('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: []
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with TIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: []
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
           it('should work with multiple types', function(done) {
             bigquery.query({
               query: [
@@ -844,6 +866,32 @@ describe('BigQuery', function() {
               query: '??',
               params: {
                 struct: {}
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: {
+                datetime: {}
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with TIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: {
+                time: {}
               }
             }, function(err, rows) {
               assert.ifError(err);

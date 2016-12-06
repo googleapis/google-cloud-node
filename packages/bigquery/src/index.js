@@ -22,6 +22,7 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
@@ -76,6 +77,105 @@ function BigQuery(options) {
 util.inherits(BigQuery, common.Service);
 
 /**
+ * A `DATETIME` data type represents a point in time. Unlike a `TIMESTAMP`, a
+ * this does not refer to an absolute instance in time. Instead, it is the civil
+ * time, or the time that a user would see on a watch or calendar.
+ *
+ * @param {object|string} value - The time. If a string, this should be in the
+ *     format the API describes: `YYYY-[M]M-[D]D[ [H]H:[M]M:[S]S[.DDDDDD]]`.
+ *     Otherwise, provide an object.
+ * @param {string|number} value.year - Four digits.
+ * @param {string|number} value.month - One or two digits.
+ * @param {string|number} value.day - One or two digits.
+ * @param {string=|number=} value.hours - One or two digits (`00` - `23`).
+ * @param {string=|number=} value.minutes - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.seconds - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.fractional - Up to six digits for microsecond
+ *     precision.
+ *
+ * @example
+ * var datetime = bigquery.datetime('2017-01-01');
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var datetime = bigquery.datetime({
+ *   year: 2017,
+ *   month: 1,
+ *   day: 1,
+ *   hours: 14,
+ *   minutes: 0,
+ *   seconds: 0
+ * });
+ * // 2017-1-1 14:0:0
+ */
+BigQuery.datetime =
+BigQuery.prototype.datetime = function(value) {
+  if (!(this instanceof BigQuery.datetime)) {
+    return new BigQuery.datetime(value);
+  }
+
+  if (is.object(value)) {
+    var time;
+
+    if (value.hours) {
+      time = new BigQuery.time(value);
+    }
+
+    value = format('{y}-{m}-{d}{time}', {
+      y: value.year,
+      m: value.month,
+      d: value.day,
+      time: time ? ' ' + time.value : ''
+    });
+  }
+
+  this.value = value;
+};
+
+/**
+ * A `TIME` data type represents a time, independent of a specific date.
+ *
+ * @param {object|string} value - The time. If a string, this should be in the
+ *     format the API describes: `[H]H:[M]M:[S]S[.DDDDDD]`. Otherwise, provide
+ *     an object.
+ * @param {string=|number=} value.hours - One or two digits (`00` - `23`).
+ * @param {string=|number=} value.minutes - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.seconds - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.fractional - Up to six digits for microsecond
+ *     precision.
+ *
+ * @example
+ * var time = bigquery.time('14:00:00'); // 2:00 PM
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var time = bigquery.time({
+ *   hours: 14,
+ *   minutes: 0,
+ *   seconds: 0
+ * });
+ */
+BigQuery.time =
+BigQuery.prototype.time = function(value) {
+  if (!(this instanceof BigQuery.time)) {
+    return new BigQuery.time(value);
+  }
+
+  if (is.object(value)) {
+    value = format('{h}:{m}:{s}{f}', {
+      h: value.hours,
+      m: value.minutes || 0,
+      s: value.seconds || 0,
+      f: is.defined(value.fractional) ? '.' + value.fractional : ''
+    });
+  }
+
+  this.value = value;
+};
+
+/**
  * Detect a value's type.
  *
  * @private
@@ -97,8 +197,14 @@ BigQuery.getType_ = function(value) {
     return 'TIMESTAMP';
   } else if (is.array(value)) {
     return 'ARRAY';
+  } else if (value instanceof BigQuery.datetime) {
+    return 'DATETIME';
+  } else if (value instanceof BigQuery.time) {
+    return 'TIME';
   } else if (is.object(value)) {
     return 'STRUCT';
+  } else if (value instanceof Buffer) {
+    return 'BYTES';
   } else {
     return 'STRING';
   }
@@ -127,6 +233,8 @@ BigQuery.valueToQueryParameter_ = function(value) {
   if (type === 'TIMESTAMP') {
     // @TODO - Not sure why .toJSON() doesn't just work.
     value = new Date(value).toJSON().replace(/(.*)T(.*)Z$/, '$1 $2');
+  } else if (type === 'DATETIME' || type === 'TIME') {
+    value = value.value;
   }
 
   if (type === 'ARRAY') {

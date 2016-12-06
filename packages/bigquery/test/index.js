@@ -146,6 +146,30 @@ describe('BigQuery', function() {
     });
   });
 
+  describe('datetime', function() {
+    it('should expose static and instance constructors', function() {
+      var staticDt = BigQuery.datetime();
+      assert(staticDt instanceof BigQuery.datetime);
+      assert(staticDt instanceof bq.datetime);
+
+      var instanceDt = bq.datetime();
+      assert(instanceDt instanceof BigQuery.datetime);
+      assert(instanceDt instanceof bq.datetime);
+    });
+  });
+
+  describe('time', function() {
+    it('should expose static and instance constructors', function() {
+      var staticT = BigQuery.time();
+      assert(staticT instanceof BigQuery.time);
+      assert(staticT instanceof bq.time);
+
+      var instanceT = bq.time();
+      assert(instanceT instanceof BigQuery.time);
+      assert(instanceT instanceof bq.time);
+    });
+  });
+
   describe('getType_', function() {
     it('should return correct types', function() {
       assert.strictEqual(BigQuery.getType_(8), 'INT64');
