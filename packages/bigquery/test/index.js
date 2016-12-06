@@ -146,6 +146,35 @@ describe('BigQuery', function() {
     });
   });
 
+  describe('date', function() {
+    var INPUT_STRING = '2017-1-1';
+    var INPUT_OBJ = {
+      year: 2017,
+      month: 1,
+      day: 1
+    };
+
+    it('should expose static and instance constructors', function() {
+      var staticD = BigQuery.date();
+      assert(staticD instanceof BigQuery.date);
+      assert(staticD instanceof bq.date);
+
+      var instanceD = bq.date();
+      assert(instanceD instanceof BigQuery.date);
+      assert(instanceD instanceof bq.date);
+    });
+
+    it('should accept a string', function() {
+      var date = bq.date(INPUT_STRING);
+      assert.strictEqual(date.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var date = bq.date(INPUT_OBJ);
+      assert.strictEqual(date.value, INPUT_STRING);
+    });
+  });
+
   describe('datetime', function() {
     var INPUT_STRING = '2017-1-1 14:2:38.883388';
     var INPUT_OBJ = {
@@ -234,14 +263,53 @@ describe('BigQuery', function() {
     });
   });
 
+  describe.only('timestamp', function() {
+    var INPUT_STRING = '2016-12-06 12:00:00.000+0';
+    var INPUT_DATE = new Date(INPUT_STRING);
+
+    it('should expose static and instance constructors', function() {
+      var staticT = BigQuery.timestamp();
+      assert(staticT instanceof BigQuery.timestamp);
+      assert(staticT instanceof bq.timestamp);
+
+      var instanceT = bq.timestamp();
+      assert(instanceT instanceof BigQuery.timestamp);
+      assert(instanceT instanceof bq.timestamp);
+    });
+
+    it('should accept a string', function() {
+      var timestamp = bq.timestamp(INPUT_STRING);
+      assert.strictEqual(timestamp.value, INPUT_STRING);
+    });
+
+    it('should accept a Date object', function() {
+      var timestamp = bq.timestamp(INPUT_DATE);
+      assert.strictEqual(timestamp.value, INPUT_STRING.replace('+0', ''));
+    });
+
+    it('should default to now', function() {
+      var now = new Date();
+      var timestamp = new Date(bq.timestamp().value + '+0');
+
+      var expectedTimestampBoundaries = {
+        start: new Date(now.getTime() - 1000),
+        end: new Date(now.getTime() + 1000)
+      };
+
+      assert(timestamp >= expectedTimestampBoundaries.start);
+      assert(timestamp <= expectedTimestampBoundaries.end);
+    });
+  });
+
   describe('getType_', function() {
     it('should return correct types', function() {
+      assert.strictEqual(BigQuery.getType_(bq.date()), 'DATE');
       assert.strictEqual(BigQuery.getType_(bq.datetime()), 'DATETIME');
       assert.strictEqual(BigQuery.getType_(bq.time()), 'TIME');
+      assert.strictEqual(BigQuery.getType_(bq.timestamp()), 'TIMESTAMP');
       assert.strictEqual(BigQuery.getType_(new Buffer(2)), 'BYTES');
       assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
       assert.strictEqual(BigQuery.getType_(true), 'BOOL');
-      assert.strictEqual(BigQuery.getType_(new Date()), 'TIMESTAMP');
       assert.strictEqual(BigQuery.getType_(8), 'INT64');
       assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
       assert.strictEqual(BigQuery.getType_({}), 'STRUCT');

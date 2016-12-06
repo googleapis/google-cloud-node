@@ -77,6 +77,45 @@ function BigQuery(options) {
 util.inherits(BigQuery, common.Service);
 
 /**
+ * The `DATE` type represents a logical calendar date, independent of time zone.
+ * It does not represent a specific 24-hour time period. Rather, a given DATE
+ * value represents a different 24-hour period when interpreted in different
+ * time zones, and may represent a shorter or longer day during Daylight Savings
+ * Time transitions.
+ *
+ * @param {object|string} value - The date. If a string, this should be in the
+ *     format the API describes: `YYYY-[M]M-[D]D`.
+ *     Otherwise, provide an object.
+ * @param {string|number} value.year - Four digits.
+ * @param {string|number} value.month - One or two digits.
+ * @param {string|number} value.day - One or two digits.
+ *
+ * @example
+ * var date = bigquery.date('2017-01-01');
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var date = bigquery.date({
+ *   year: 2017,
+ *   month: 1,
+ *   day: 1
+ * });
+ */
+BigQuery.date =
+BigQuery.prototype.date = function(value) {
+  if (!(this instanceof BigQuery.date)) {
+    return new BigQuery.date(value);
+  }
+
+  if (is.object(value)) {
+    value = BigQuery.datetime(value).value;
+  }
+
+  this.value = value;
+};
+
+/**
  * A `DATETIME` data type represents a point in time. Unlike a `TIMESTAMP`, a
  * this does not refer to an absolute instance in time. Instead, it is the civil
  * time, or the time that a user would see on a watch or calendar.
@@ -118,14 +157,14 @@ BigQuery.prototype.datetime = function(value) {
     var time;
 
     if (value.hours) {
-      time = BigQuery.time(value);
+      time = BigQuery.time(value).value;
     }
 
     value = format('{y}-{m}-{d}{time}', {
       y: value.year,
       m: value.month,
       d: value.day,
-      time: time ? ' ' + time.value : ''
+      time: time ? ' ' + time : ''
     });
   }
 
@@ -175,6 +214,30 @@ BigQuery.prototype.time = function(value) {
 };
 
 /**
+ * A timestamp represents an absolute point in time, independent of any time
+ * zone or convention such as Daylight Savings Time.
+ *
+ * @param {date} value - The time.
+ *
+ * @example
+ * var timestamp = bigquery.timestamp(new Date());
+ */
+BigQuery.timestamp =
+BigQuery.prototype.timestamp = function(value) {
+  if (!(this instanceof BigQuery.timestamp)) {
+    return new BigQuery.timestamp(value);
+  }
+
+  value = value || new Date();
+
+  if (is.date(value)) {
+    value = value.toJSON().replace(/^(.*)T(.*)Z$/, '$1 $2');
+  }
+
+  this.value = value;
+};
+
+/**
  * Detect a value's type.
  *
  * @private
@@ -185,12 +248,20 @@ BigQuery.prototype.time = function(value) {
  * @return {string} - The type detected from the value.
  */
 BigQuery.getType_ = function(value) {
+  if (value instanceof BigQuery.date) {
+    return 'DATE';
+  }
+
   if (value instanceof BigQuery.datetime) {
     return 'DATETIME';
   }
 
   if (value instanceof BigQuery.time) {
     return 'TIME';
+  }
+
+  if (value instanceof BigQuery.timestamp) {
+    return 'TIMESTAMP';
   }
 
   if (value instanceof Buffer) {
@@ -203,10 +274,6 @@ BigQuery.getType_ = function(value) {
 
   if (is.bool(value)) {
     return 'BOOL';
-  }
-
-  if (is.date(value)) {
-    return 'TIMESTAMP';
   }
 
   if (is.number(value)) {
@@ -231,6 +298,10 @@ BigQuery.getType_ = function(value) {
  * @return {object} - A properly-formed `queryParameter` object.
  */
 BigQuery.valueToQueryParameter_ = function(value) {
+  if (is.date(value)) {
+    value = this.timestamp(value);
+  }
+
   var type = BigQuery.getType_(value);
 
   var queryParameter = {
@@ -240,10 +311,7 @@ BigQuery.valueToQueryParameter_ = function(value) {
     parameterValue: {}
   };
 
-  if (type === 'TIMESTAMP') {
-    // @TODO - Not sure why .toJSON() doesn't just work.
-    value = new Date(value).toJSON().replace(/(.*)T(.*)Z$/, '$1 $2');
-  } else if (type === 'DATETIME' || type === 'TIME') {
+  if (type.indexOf('TIME') > -1 || type.indexOf('DATE') > -1) {
     value = value.value;
   }
 
