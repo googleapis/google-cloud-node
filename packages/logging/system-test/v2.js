@@ -57,9 +57,8 @@ describe('loggingV2', function() {
       var resourceName = client.parentPath(projectId);
 
       var myLogMessage = 'My new test message';
-      var resource = {'type': 'global'};
+      var resource = {type: 'global'};
       var entries = [{textPayload: myLogMessage, logName: logName}];
-      var start = new Date();
       var filter = 'logName="' + logName + '"';
       client.writeLogEntries({
         entries: entries,
@@ -110,7 +109,7 @@ describe('loggingV2', function() {
   describe('configServiceV2Client', function() {
     var client;
     var bucket;
-    var bucketName = projectId + "-" + (new Date()).getTime();
+    var bucketName = projectId + '-' + (new Date()).getTime();
 
     beforeEach(function(done) {
       client = loggingV2(env).configServiceV2Client();
@@ -121,7 +120,7 @@ describe('loggingV2', function() {
 
     afterEach(function(done) {
       bucket.delete().then(function() { done(); });
-    })
+    });
 
     it('creates, gets, lists, and deletes sink', function(done) {
       var parent = client.parentPath(projectId);
@@ -183,12 +182,13 @@ describe('loggingV2', function() {
       var filter = 'resource.type=global';
       var metric = {name: name, filter: filter};
 
-      client.createLogMetric({parent: parent, metric: metric}).then(function(resp) {
+      client.createLogMetric({parent: parent, metric: metric}).then(function() {
         return client.getLogMetric({metricName: metricName});
       }).then(function(resp) {
         assert.strictEqual(resp[0].filter, filter);
         var newMetric = {name: name, filter: filter, description: 'for test'};
-        return client.updateLogMetric({metricName: metricName, metric: newMetric});
+        return client.updateLogMetric(
+            {metricName: metricName, metric: newMetric});
       }).then(function() {
         return client.listLogMetrics({parent: parent});
       }).then(function(resp) {
@@ -209,7 +209,8 @@ describe('loggingV2', function() {
         return client.getLogMetric({metricName: metricName});
       }).then(function() {
         done(new Error(
-          'The last getLogMetric should not succeed because it is already deleted'));
+          'The last getLogMetric should not succeed because it ' +
+          'is already deleted'));
       }).catch(function(err) {
         // Successfully failed to getLogMetric.
         assert(err);
