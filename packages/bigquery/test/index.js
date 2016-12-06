@@ -77,6 +77,7 @@ describe('BigQuery', function() {
   var JOB_ID = 'JOB_ID';
   var PROJECT_ID = 'test-project';
 
+  var BigQueryCached;
   var BigQuery;
   var bq;
 
@@ -89,9 +90,11 @@ describe('BigQuery', function() {
         util: fakeUtil
       }
     });
+    BigQueryCached = extend({}, BigQuery);
   });
 
   beforeEach(function() {
+    BigQuery = extend(BigQuery, BigQueryCached);
     bq = new BigQuery({ projectId: PROJECT_ID });
   });
 
@@ -140,6 +143,332 @@ describe('BigQuery', function() {
         'https://www.googleapis.com/auth/bigquery'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+    });
+  });
+
+  describe('date', function() {
+    var INPUT_STRING = '2017-1-1';
+    var INPUT_OBJ = {
+      year: 2017,
+      month: 1,
+      day: 1
+    };
+
+    it('should expose static and instance constructors', function() {
+      var staticD = BigQuery.date();
+      assert(staticD instanceof BigQuery.date);
+      assert(staticD instanceof bq.date);
+
+      var instanceD = bq.date();
+      assert(instanceD instanceof BigQuery.date);
+      assert(instanceD instanceof bq.date);
+    });
+
+    it('should accept a string', function() {
+      var date = bq.date(INPUT_STRING);
+      assert.strictEqual(date.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var date = bq.date(INPUT_OBJ);
+      assert.strictEqual(date.value, INPUT_STRING);
+    });
+  });
+
+  describe('datetime', function() {
+    var INPUT_STRING = '2017-1-1 14:2:38.883388';
+    var INPUT_OBJ = {
+      year: 2017,
+      month: 1,
+      day: 1,
+      hours: 14,
+      minutes: 2,
+      seconds: 38,
+      fractional: 883388
+    };
+
+    it('should expose static and instance constructors', function() {
+      var staticDt = BigQuery.datetime();
+      assert(staticDt instanceof BigQuery.datetime);
+      assert(staticDt instanceof bq.datetime);
+
+      var instanceDt = bq.datetime();
+      assert(instanceDt instanceof BigQuery.datetime);
+      assert(instanceDt instanceof bq.datetime);
+    });
+
+    it('should accept a string', function() {
+      var datetime = bq.datetime(INPUT_STRING);
+      assert.strictEqual(datetime.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var datetime = bq.datetime(INPUT_OBJ);
+      assert.strictEqual(datetime.value, INPUT_STRING);
+    });
+
+    it('should not include time if hours not provided', function() {
+      var datetime = bq.datetime({
+        year: 2016,
+        month: 1,
+        day: 1
+      });
+
+      assert.strictEqual(datetime.value, '2016-1-1');
+    });
+  });
+
+  describe('time', function() {
+    var INPUT_STRING = '14:2:38.883388';
+    var INPUT_OBJ = {
+      hours: 14,
+      minutes: 2,
+      seconds: 38,
+      fractional: 883388
+    };
+
+    it('should expose static and instance constructors', function() {
+      var staticT = BigQuery.time();
+      assert(staticT instanceof BigQuery.time);
+      assert(staticT instanceof bq.time);
+
+      var instanceT = bq.time();
+      assert(instanceT instanceof BigQuery.time);
+      assert(instanceT instanceof bq.time);
+    });
+
+    it('should accept a string', function() {
+      var time = bq.time(INPUT_STRING);
+      assert.strictEqual(time.value, INPUT_STRING);
+    });
+
+    it('should accept an object', function() {
+      var time = bq.time(INPUT_OBJ);
+      assert.strictEqual(time.value, INPUT_STRING);
+    });
+
+    it('should default minutes and seconds to 0', function() {
+      var time = bq.time({
+        hours: 14
+      });
+      assert.strictEqual(time.value, '14:0:0');
+    });
+
+    it('should not include fractional digits if not provided', function() {
+      var input = extend({}, INPUT_OBJ);
+      delete input.fractional;
+
+      var time = bq.time(input);
+      assert.strictEqual(time.value, '14:2:38');
+    });
+  });
+
+  describe('timestamp', function() {
+    var INPUT_STRING = '2016-12-06 12:00:00.000+0';
+    var INPUT_DATE = new Date(INPUT_STRING);
+
+    it('should expose static and instance constructors', function() {
+      var staticT = BigQuery.timestamp();
+      assert(staticT instanceof BigQuery.timestamp);
+      assert(staticT instanceof bq.timestamp);
+
+      var instanceT = bq.timestamp();
+      assert(instanceT instanceof BigQuery.timestamp);
+      assert(instanceT instanceof bq.timestamp);
+    });
+
+    it('should accept a string', function() {
+      var timestamp = bq.timestamp(INPUT_STRING);
+      assert.strictEqual(timestamp.value, INPUT_STRING);
+    });
+
+    it('should accept a Date object', function() {
+      var timestamp = bq.timestamp(INPUT_DATE);
+      assert.strictEqual(timestamp.value, INPUT_STRING.replace('+0', ''));
+    });
+
+    it('should default to now', function() {
+      var now = new Date();
+      var timestamp = new Date(bq.timestamp().value + '+0');
+
+      var expectedTimestampBoundaries = {
+        start: new Date(now.getTime() - 1000),
+        end: new Date(now.getTime() + 1000)
+      };
+
+      assert(timestamp >= expectedTimestampBoundaries.start);
+      assert(timestamp <= expectedTimestampBoundaries.end);
+    });
+  });
+
+  describe('getType_', function() {
+    it('should return correct types', function() {
+      assert.strictEqual(BigQuery.getType_(bq.date()), 'DATE');
+      assert.strictEqual(BigQuery.getType_(bq.datetime()), 'DATETIME');
+      assert.strictEqual(BigQuery.getType_(bq.time()), 'TIME');
+      assert.strictEqual(BigQuery.getType_(bq.timestamp()), 'TIMESTAMP');
+      assert.strictEqual(BigQuery.getType_(new Buffer(2)), 'BYTES');
+      assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
+      assert.strictEqual(BigQuery.getType_(true), 'BOOL');
+      assert.strictEqual(BigQuery.getType_(8), 'INT64');
+      assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
+      assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
+      assert.strictEqual(BigQuery.getType_('hi'), 'STRING');
+    });
+
+    it('should throw if a type cannot be detected', function() {
+      var expectedError = new RegExp([
+        'This value could not be translated to a BigQuery data type.',
+        undefined
+      ].join('\n'));
+
+      assert.throws(function() {
+        BigQuery.getType_(undefined);
+      }, expectedError);
+    });
+  });
+
+  describe('valueToQueryParameter_', function() {
+    it('should get the type', function(done) {
+      var value = {};
+
+      BigQuery.getType_ = function(value_) {
+        assert.strictEqual(value_, value);
+        done();
+      };
+
+      BigQuery.valueToQueryParameter_(value);
+    });
+
+    it('should format a Date', function() {
+      var date = new Date();
+      var expectedValue = date.toJSON().replace(/(.*)T(.*)Z$/, '$1 $2');
+
+      BigQuery.timestamp = function(value) {
+        assert.strictEqual(value, date);
+        return {
+          value: expectedValue
+        }
+      };
+
+      BigQuery.getType_ = function() {
+        return 'TIMESTAMP';
+      };
+
+      var queryParameter = BigQuery.valueToQueryParameter_(date);
+      assert.strictEqual(queryParameter.parameterValue.value, expectedValue);
+    });
+
+    it('should locate the value on DATETIME objects', function() {
+      var datetime = {
+        value: 'value'
+      };
+
+      BigQuery.getType_ = function() {
+        return 'DATETIME';
+      };
+
+      var queryParameter = BigQuery.valueToQueryParameter_(datetime);
+      assert.strictEqual(queryParameter.parameterValue.value, datetime.value);
+    });
+
+    it('should locate the value on TIME objects', function() {
+      var time = {
+        value: 'value'
+      };
+
+      BigQuery.getType_ = function() {
+        return 'TIME';
+      };
+
+      var queryParameter = BigQuery.valueToQueryParameter_(time);
+      assert.strictEqual(queryParameter.parameterValue.value, time.value);
+    });
+
+    it('should format an array', function() {
+      var array = [1];
+
+      var type = 'ARRAY';
+      var firstElementType = 'an-int';
+
+      BigQuery.getType_ = function() {
+        BigQuery.getType_ = function(value) {
+          assert.strictEqual(value, array[0]);
+          return firstElementType;
+        };
+
+        return type;
+      };
+
+      assert.deepEqual(BigQuery.valueToQueryParameter_(array), {
+        parameterType: {
+          type: type,
+          arrayType: {
+            type: firstElementType
+          }
+        },
+        parameterValue: {
+          arrayValues: [
+            {
+              value: array[0]
+            }
+          ]
+        }
+      });
+    });
+
+    it('should format a struct', function() {
+      var struct = {
+        key: 'value'
+      };
+
+      var type = 'STRUCT';
+      var firstElementType = 'a-string';
+
+      BigQuery.getType_ = function() {
+        BigQuery.getType_ = function(value) {
+          assert.strictEqual(value, struct.key);
+          return firstElementType;
+        };
+
+        return type;
+      };
+
+      assert.deepEqual(BigQuery.valueToQueryParameter_(struct), {
+        parameterType: {
+          type: type,
+          structTypes: [
+            {
+              name: 'key',
+              type: firstElementType
+            }
+          ]
+        },
+        parameterValue: {
+          structValues: {
+            key: {
+              value: struct.key
+            }
+          }
+        }
+      });
+    });
+
+    it('should format all other types', function() {
+      var type = 'ANY-TYPE';
+
+      BigQuery.getType_ = function() {
+        return type;
+      };
+
+      assert.deepEqual(BigQuery.valueToQueryParameter_(8), {
+        parameterType: {
+          type: type
+        },
+        parameterValue: {
+          value: 8
+        }
+      });
     });
   });
 
@@ -508,6 +837,105 @@ describe('BigQuery', function() {
       };
 
       bq.query(options, assert.ifError);
+    });
+
+    describe('SQL parameters', function() {
+      var NAMED_PARAMS = {
+        key: 'value'
+      };
+
+      var POSITIONAL_PARAMS = ['value'];
+
+      it('should disable legacySql', function(done) {
+        bq.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.useLegacySql, false);
+          done();
+        };
+
+        bq.query({
+          query: QUERY_STRING,
+          params: NAMED_PARAMS
+        }, assert.ifError);
+      });
+
+      it('should delete the params option', function(done) {
+        bq.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.params, undefined);
+          done();
+        };
+
+        bq.query({
+          query: QUERY_STRING,
+          params: NAMED_PARAMS
+        }, assert.ifError);
+      });
+
+      describe('named', function() {
+        it('should set the correct parameter mode', function(done) {
+          bq.request = function(reqOpts) {
+            assert.strictEqual(reqOpts.json.parameterMode, 'named');
+            done();
+          };
+
+          bq.query({
+            query: QUERY_STRING,
+            params: NAMED_PARAMS
+          }, assert.ifError);
+        });
+
+        it('should get set the correct query parameters', function(done) {
+          var queryParameter = {};
+
+          BigQuery.valueToQueryParameter_ = function(value) {
+            assert.strictEqual(value, NAMED_PARAMS.key);
+            return queryParameter;
+          };
+
+          bq.request = function(reqOpts) {
+            assert.strictEqual(reqOpts.json.queryParameters[0], queryParameter);
+            assert.strictEqual(reqOpts.json.queryParameters[0].name, 'key');
+            done();
+          };
+
+          bq.query({
+            query: QUERY_STRING,
+            params: NAMED_PARAMS
+          }, assert.ifError);
+        });
+      });
+
+      describe('positional', function() {
+        it('should set the correct parameter mode', function(done) {
+          bq.request = function(reqOpts) {
+            assert.strictEqual(reqOpts.json.parameterMode, 'positional');
+            done();
+          };
+
+          bq.query({
+            query: QUERY_STRING,
+            params: POSITIONAL_PARAMS
+          }, assert.ifError);
+        });
+
+        it('should get set the correct query parameters', function(done) {
+          var queryParameter = {};
+
+          BigQuery.valueToQueryParameter_ = function(value) {
+            assert.strictEqual(value, POSITIONAL_PARAMS[0]);
+            return queryParameter;
+          };
+
+          bq.request = function(reqOpts) {
+            assert.strictEqual(reqOpts.json.queryParameters[0], queryParameter);
+            done();
+          };
+
+          bq.query({
+            query: QUERY_STRING,
+            params: POSITIONAL_PARAMS
+          }, assert.ifError);
+        });
+      });
     });
 
     describe('job is incomplete', function() {

@@ -22,6 +22,7 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
@@ -74,6 +75,284 @@ function BigQuery(options) {
 }
 
 util.inherits(BigQuery, common.Service);
+
+/**
+ * The `DATE` type represents a logical calendar date, independent of time zone.
+ * It does not represent a specific 24-hour time period. Rather, a given DATE
+ * value represents a different 24-hour period when interpreted in different
+ * time zones, and may represent a shorter or longer day during Daylight Savings
+ * Time transitions.
+ *
+ * @param {object|string} value - The date. If a string, this should be in the
+ *     format the API describes: `YYYY-[M]M-[D]D`.
+ *     Otherwise, provide an object.
+ * @param {string|number} value.year - Four digits.
+ * @param {string|number} value.month - One or two digits.
+ * @param {string|number} value.day - One or two digits.
+ *
+ * @example
+ * var date = bigquery.date('2017-01-01');
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var date = bigquery.date({
+ *   year: 2017,
+ *   month: 1,
+ *   day: 1
+ * });
+ */
+BigQuery.date =
+BigQuery.prototype.date = function(value) {
+  if (!(this instanceof BigQuery.date)) {
+    return new BigQuery.date(value);
+  }
+
+  if (is.object(value)) {
+    value = BigQuery.datetime(value).value;
+  }
+
+  this.value = value;
+};
+
+/**
+ * A `DATETIME` data type represents a point in time. Unlike a `TIMESTAMP`,
+ * this does not refer to an absolute instance in time. Instead, it is the civil
+ * time, or the time that a user would see on a watch or calendar.
+ *
+ * @param {object|string} value - The time. If a string, this should be in the
+ *     format the API describes: `YYYY-[M]M-[D]D[ [H]H:[M]M:[S]S[.DDDDDD]]`.
+ *     Otherwise, provide an object.
+ * @param {string|number} value.year - Four digits.
+ * @param {string|number} value.month - One or two digits.
+ * @param {string|number} value.day - One or two digits.
+ * @param {string=|number=} value.hours - One or two digits (`00` - `23`).
+ * @param {string=|number=} value.minutes - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.seconds - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.fractional - Up to six digits for microsecond
+ *     precision.
+ *
+ * @example
+ * var datetime = bigquery.datetime('2017-01-01');
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var datetime = bigquery.datetime({
+ *   year: 2017,
+ *   month: 1,
+ *   day: 1,
+ *   hours: 14,
+ *   minutes: 0,
+ *   seconds: 0
+ * });
+ */
+BigQuery.datetime =
+BigQuery.prototype.datetime = function(value) {
+  if (!(this instanceof BigQuery.datetime)) {
+    return new BigQuery.datetime(value);
+  }
+
+  if (is.object(value)) {
+    var time;
+
+    if (value.hours) {
+      time = BigQuery.time(value).value;
+    }
+
+    value = format('{y}-{m}-{d}{time}', {
+      y: value.year,
+      m: value.month,
+      d: value.day,
+      time: time ? ' ' + time : ''
+    });
+  }
+
+  this.value = value;
+};
+
+/**
+ * A `TIME` data type represents a time, independent of a specific date.
+ *
+ * @param {object|string} value - The time. If a string, this should be in the
+ *     format the API describes: `[H]H:[M]M:[S]S[.DDDDDD]`. Otherwise, provide
+ *     an object.
+ * @param {string=|number=} value.hours - One or two digits (`00` - `23`).
+ * @param {string=|number=} value.minutes - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.seconds - One or two digits (`00` - `59`).
+ * @param {string=|number=} value.fractional - Up to six digits for microsecond
+ *     precision.
+ *
+ * @example
+ * var time = bigquery.time('14:00:00'); // 2:00 PM
+ *
+ * //-
+ * // Alternatively, provide an object.
+ * //-
+ * var time = bigquery.time({
+ *   hours: 14,
+ *   minutes: 0,
+ *   seconds: 0
+ * });
+ */
+BigQuery.time =
+BigQuery.prototype.time = function(value) {
+  if (!(this instanceof BigQuery.time)) {
+    return new BigQuery.time(value);
+  }
+
+  if (is.object(value)) {
+    value = format('{h}:{m}:{s}{f}', {
+      h: value.hours,
+      m: value.minutes || 0,
+      s: value.seconds || 0,
+      f: is.defined(value.fractional) ? '.' + value.fractional : ''
+    });
+  }
+
+  this.value = value;
+};
+
+/**
+ * A timestamp represents an absolute point in time, independent of any time
+ * zone or convention such as Daylight Savings Time.
+ *
+ * @param {date} value - The time.
+ *
+ * @example
+ * var timestamp = bigquery.timestamp(new Date());
+ */
+BigQuery.timestamp =
+BigQuery.prototype.timestamp = function(value) {
+  if (!(this instanceof BigQuery.timestamp)) {
+    return new BigQuery.timestamp(value);
+  }
+
+  value = value || new Date();
+
+  if (is.date(value)) {
+    value = value.toJSON().replace(/^(.*)T(.*)Z$/, '$1 $2');
+  }
+
+  this.value = value;
+};
+
+/**
+ * Detect a value's type.
+ *
+ * @private
+ *
+ * @throws {error} If the type could not be detected.
+ *
+ * @resource [Data Type]{@link https://cloud.google.com/bigquery/data-types}
+ *
+ * @param {*} value - The value.
+ * @return {string} - The type detected from the value.
+ */
+BigQuery.getType_ = function(value) {
+  if (value instanceof BigQuery.date) {
+    return 'DATE';
+  }
+
+  if (value instanceof BigQuery.datetime) {
+    return 'DATETIME';
+  }
+
+  if (value instanceof BigQuery.time) {
+    return 'TIME';
+  }
+
+  if (value instanceof BigQuery.timestamp) {
+    return 'TIMESTAMP';
+  }
+
+  if (value instanceof Buffer) {
+    return 'BYTES';
+  }
+
+  if (is.array(value)) {
+    return 'ARRAY';
+  }
+
+  if (is.bool(value)) {
+    return 'BOOL';
+  }
+
+  if (is.number(value)) {
+    return value % 1 === 0 ? 'INT64' : 'FLOAT64';
+  }
+
+  if (is.object(value)) {
+    return 'STRUCT';
+  }
+
+  if (is.string(value)) {
+    return 'STRING';
+  }
+
+  throw new Error([
+    'This value could not be translated to a BigQuery data type.',
+    value
+  ].join('\n'));
+};
+
+/**
+ * Convert a value into a `queryParameter` object.
+ *
+ * @private
+ *
+ * @resource [Jobs.query API Reference Docs (see `queryParameters`)]{@link https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#request-body}
+ *
+ * @param {*} value - The value.
+ * @return {object} - A properly-formed `queryParameter` object.
+ */
+BigQuery.valueToQueryParameter_ = function(value) {
+  if (is.date(value)) {
+    value = BigQuery.timestamp(value);
+  }
+
+  var type = BigQuery.getType_(value);
+
+  var queryParameter = {
+    parameterType: {
+      type: type
+    },
+    parameterValue: {}
+  };
+
+  if (type.indexOf('TIME') > -1 || type.indexOf('DATE') > -1) {
+    value = value.value;
+  }
+
+  if (type === 'ARRAY') {
+    queryParameter.parameterType.arrayType = {
+      type: BigQuery.getType_(value[0])
+    };
+    queryParameter.parameterValue.arrayValues = value.map(function(value) {
+      return {
+        value: value
+      };
+    });
+  } else if (type === 'STRUCT') {
+    queryParameter.parameterType.structTypes = [];
+    queryParameter.parameterValue.structValues = {};
+
+    for (var prop in value) {
+      queryParameter.parameterType.structTypes.push({
+        name: prop,
+        type: BigQuery.getType_(value[prop])
+      });
+
+      queryParameter.parameterValue.structValues[prop] = {
+        value: value[prop]
+      };
+    }
+  } else {
+    queryParameter.parameterValue.value = value;
+  }
+
+  return queryParameter;
+};
 
 /**
  * Create a dataset.
@@ -429,6 +708,12 @@ BigQuery.prototype.job = function(id) {
  *     automatically. Default: true.
  * @param {number} options.maxApiCalls - Maximum number of API calls to make.
  * @param {number} options.maxResults - Maximum number of results to read.
+ * @param {object|*[]} options.params - For positional SQL parameters, provide
+ *     an array of values. For named SQL parameters, provide an object which
+ *     maps each named parameter to its value. The supported types are integers,
+ *     floats, {module:bigquery#date} objects, {module:bigquery#datetime}
+ *     objects, {module:bigquery#time} objects, {module:bigquery#timestamp}
+ *     objects, Strings, Booleans, and Objects.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
  * @param {number} options.timeoutMs - How long to wait for the query to
@@ -448,6 +733,42 @@ BigQuery.prototype.job = function(id) {
  *     // Handle results here.
  *   }
  * });
+ *
+ * //-
+ * // Positional SQL parameters are supported.
+ * //-
+ * bigquery.query({
+ *   query: [
+ *     'SELECT url',
+ *     'FROM `publicdata.samples.github_nested`',
+ *     'WHERE repository.owner = ?'
+ *   ].join(' '),
+ *
+ *   params: [
+ *     'google'
+ *   ]
+ * }, callback);
+ *
+ * //-
+ * // Or if you prefer to name them, that's also supported.
+ * //-
+ * bigquery.query({
+ *   query: [
+ *     'SELECT url',
+ *     'FROM `publicdata.samples.github_nested`',
+ *     'WHERE repository.owner = @owner'
+ *   ].join(' '),
+
+ *   params: {
+ *     owner: 'google'
+ *   }
+ * }, callback);
+ *
+ * //-
+ * // If you need to use a `DATE`, `DATETIME`, `TIME`, or `TIMESTAMP` type in
+ * // your query, see {module:bigquery#date}, {module:bigquery#datetime},
+ * // {module:bigquery#time}, and {module:bigquery#timestamp}.
+ * //-
  *
  * //-
  * // To control how many API requests are made and page through the results
@@ -481,6 +802,27 @@ BigQuery.prototype.query = function(options, callback) {
   }
 
   options = options || {};
+
+  if (options.params) {
+    options.useLegacySql = false;
+    options.parameterMode = is.array(options.params) ? 'positional' : 'named';
+
+    if (options.parameterMode === 'named') {
+      options.queryParameters = [];
+
+      for (var namedParamater in options.params) {
+        var value = options.params[namedParamater];
+        var queryParameter = BigQuery.valueToQueryParameter_(value);
+        queryParameter.name = namedParamater;
+        options.queryParameters.push(queryParameter);
+      }
+    } else {
+      options.queryParameters = options.params
+        .map(BigQuery.valueToQueryParameter_);
+    }
+
+    delete options.params;
+  }
 
   var job = options.job;
 

@@ -596,6 +596,334 @@ describe('BigQuery', function() {
         });
       });
 
+      describe('SQL parameters', function() {
+        describe('positional', function() {
+          it('should work with strings', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE repository.owner = ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: ['google']
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with ints', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE repository.forks > ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [1]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with floats', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT snow_depth',
+                'FROM `publicdata.samples.gsod`',
+                'WHERE snow_depth >= ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [12.5]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with booleans', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE public = ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [true]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with dates', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT subject',
+                'FROM `bigquery-public-data.github_repos.commits`',
+                'WHERE author.date < ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [new Date()]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with arrays', function(done) {
+            bigquery.query({
+              query: 'SELECT * FROM UNNEST (?)',
+              params: [
+                [
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ]
+              ]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 5);
+              done();
+            });
+          });
+
+          it.skip('should work with structs', function(done) {
+            bigquery.query({
+              query: '??',
+              params: []
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: []
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with TIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: []
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with multiple types', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url FROM `publicdata.samples.github_nested`',
+                'WHERE repository.owner = ?',
+                'AND repository.forks > ?',
+                'AND public = ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [
+                'google',
+                1,
+                true
+              ]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+        });
+
+        describe('named', function() {
+          it('should work with strings', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url FROM `publicdata.samples.github_nested`',
+                'WHERE repository.owner = @owner',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                owner: 'google'
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with ints', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE repository.forks > @forks',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                forks: 1
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with floats', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT snow_depth',
+                'FROM `publicdata.samples.gsod`',
+                'WHERE snow_depth >= @depth',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                depth: 12.5
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with booleans', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE public = @isPublic',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                isPublic: true
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with dates', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT subject',
+                'FROM `bigquery-public-data.github_repos.commits`',
+                'WHERE author.date < @time',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                time: new Date()
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with arrays', function(done) {
+            bigquery.query({
+              query: 'SELECT * FROM UNNEST (@nums)',
+              params: {
+                nums: [
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ]
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 5);
+              done();
+            });
+          });
+
+          it.skip('should work with structs', function(done) {
+            bigquery.query({
+              query: '??',
+              params: {
+                struct: {}
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: {
+                datetime: {}
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it.skip('should work with TIME types', function(done) {
+            bigquery.query({
+              query: '??',
+              params: {
+                time: {}
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with multiple types', function(done) {
+            bigquery.query({
+              query: [
+                'SELECT url',
+                'FROM `publicdata.samples.github_nested`',
+                'WHERE repository.owner = @owner',
+                'AND repository.forks > @forks',
+                'AND public = @isPublic',
+                'LIMIT 1'
+              ].join(' '),
+              params: {
+                owner: 'google',
+                forks: 1,
+                isPublic: true
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+        });
+      });
+
       it('should export data to a file in your bucket', function(done) {
         var file = bucket.file('kitten-test-data-backup.json');
 
