@@ -681,10 +681,20 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with structs', function(done) {
+          it('should work with structs', function(done) {
             bigquery.query({
-              query: '??',
-              params: []
+              query: 'SELECT ? obj',
+              params: [
+                {
+                  b: true,
+                  arr: [2,3,4],
+                  d: bigquery.date('2016-12-7'),
+                  f: 3.14,
+                  nested: {
+                    a: 3
+                  }
+                }
+              ]
             }, function(err, rows) {
               assert.ifError(err);
               assert.equal(rows.length, 1);
@@ -860,11 +870,19 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with structs', function(done) {
+          it('should work with structs', function(done) {
             bigquery.query({
-              query: '??',
+              query: 'SELECT @obj obj',
               params: {
-                struct: {}
+                obj: {
+                  b: true,
+                  arr: [2,3,4],
+                  d: bigquery.date('2016-12-7'),
+                  f: 3.14,
+                  nested: {
+                    a: 3
+                  }
+                }
               }
             }, function(err, rows) {
               assert.ifError(err);
