@@ -133,7 +133,7 @@ BigQuery.prototype.date = function(value) {
  *     precision.
  *
  * @example
- * var datetime = bigquery.datetime('2017-01-01');
+ * var datetime = bigquery.datetime('2017-01-01 13:00:00');
  *
  * //-
  * // Alternatively, provide an object.
@@ -1002,7 +1002,14 @@ common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(BigQuery, {
-  exclude: ['dataset', 'job']
+  exclude: [
+    'dataset',
+    'date',
+    'datetime',
+    'job',
+    'time',
+    'timestamp'
+  ]
 });
 
 BigQuery.Dataset = Dataset;

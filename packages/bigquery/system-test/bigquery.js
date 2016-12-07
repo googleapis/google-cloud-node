@@ -662,22 +662,6 @@ describe('BigQuery', function() {
             });
           });
 
-          it('should work with dates', function(done) {
-            bigquery.query({
-              query: [
-                'SELECT subject',
-                'FROM `bigquery-public-data.github_repos.commits`',
-                'WHERE author.date < ?',
-                'LIMIT 1'
-              ].join(' '),
-              params: [new Date()]
-            }, function(err, rows) {
-              assert.ifError(err);
-              assert.equal(rows.length, 1);
-              done();
-            });
-          });
-
           it('should work with arrays', function(done) {
             bigquery.query({
               query: 'SELECT * FROM UNNEST (?)',
@@ -708,10 +692,15 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with DATETIME types', function(done) {
+          it('should work with TIMESTAMP types', function(done) {
             bigquery.query({
-              query: '??',
-              params: []
+              query: [
+                'SELECT subject',
+                'FROM `bigquery-public-data.github_repos.commits`',
+                'WHERE author.date < ?',
+                'LIMIT 1'
+              ].join(' '),
+              params: [new Date()]
             }, function(err, rows) {
               assert.ifError(err);
               assert.equal(rows.length, 1);
@@ -719,10 +708,38 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with TIME types', function(done) {
+          it('should work with DATE types', function(done) {
             bigquery.query({
-              query: '??',
-              params: []
+              query: 'SELECT ? date',
+              params: [
+                bigquery.date('2016-12-7')
+              ]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: 'SELECT ? datetime',
+              params: [
+                bigquery.datetime('2016-12-7 14:00:00')
+              ]
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with TIME types', function(done) {
+            bigquery.query({
+              query: 'SELECT ? time',
+              params: [
+                bigquery.time('14:00:00')
+              ]
             }, function(err, rows) {
               assert.ifError(err);
               assert.equal(rows.length, 1);
@@ -824,24 +841,6 @@ describe('BigQuery', function() {
             });
           });
 
-          it('should work with dates', function(done) {
-            bigquery.query({
-              query: [
-                'SELECT subject',
-                'FROM `bigquery-public-data.github_repos.commits`',
-                'WHERE author.date < @time',
-                'LIMIT 1'
-              ].join(' '),
-              params: {
-                time: new Date()
-              }
-            }, function(err, rows) {
-              assert.ifError(err);
-              assert.equal(rows.length, 1);
-              done();
-            });
-          });
-
           it('should work with arrays', function(done) {
             bigquery.query({
               query: 'SELECT * FROM UNNEST (@nums)',
@@ -874,11 +873,16 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with DATETIME types', function(done) {
+          it('should work with TIMESTAMP types', function(done) {
             bigquery.query({
-              query: '??',
+              query: [
+                'SELECT subject',
+                'FROM `bigquery-public-data.github_repos.commits`',
+                'WHERE author.date < @time',
+                'LIMIT 1'
+              ].join(' '),
               params: {
-                datetime: {}
+                time: new Date()
               }
             }, function(err, rows) {
               assert.ifError(err);
@@ -887,11 +891,37 @@ describe('BigQuery', function() {
             });
           });
 
-          it.skip('should work with TIME types', function(done) {
+          it('should work with DATE types', function(done) {
             bigquery.query({
-              query: '??',
+              query: 'SELECT @date date',
               params: {
-                time: {}
+                date: bigquery.date('2016-12-7')
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with DATETIME types', function(done) {
+            bigquery.query({
+              query: 'SELECT @datetime datetime',
+              params: {
+                datetime: bigquery.datetime('2016-12-7 14:00:00')
+              }
+            }, function(err, rows) {
+              assert.ifError(err);
+              assert.equal(rows.length, 1);
+              done();
+            });
+          });
+
+          it('should work with TIME types', function(done) {
+            bigquery.query({
+              query: 'SELECT @time time',
+              params: {
+                time: bigquery.time('14:00:00')
               }
             }, function(err, rows) {
               assert.ifError(err);
