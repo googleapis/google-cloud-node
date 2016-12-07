@@ -310,17 +310,42 @@ describe('BigQuery', function() {
 
   describe('getType_', function() {
     it('should return correct types', function() {
-      assert.strictEqual(BigQuery.getType_(bq.date()), 'DATE');
-      assert.strictEqual(BigQuery.getType_(bq.datetime()), 'DATETIME');
-      assert.strictEqual(BigQuery.getType_(bq.time()), 'TIME');
-      assert.strictEqual(BigQuery.getType_(bq.timestamp()), 'TIMESTAMP');
-      assert.strictEqual(BigQuery.getType_(new Buffer(2)), 'BYTES');
-      assert.strictEqual(BigQuery.getType_([]), 'ARRAY');
-      assert.strictEqual(BigQuery.getType_(true), 'BOOL');
-      assert.strictEqual(BigQuery.getType_(8), 'INT64');
-      assert.strictEqual(BigQuery.getType_(8.1), 'FLOAT64');
-      assert.strictEqual(BigQuery.getType_({}), 'STRUCT');
-      assert.strictEqual(BigQuery.getType_('hi'), 'STRING');
+      assert.strictEqual(BigQuery.getType_(bq.date()).type, 'DATE');
+      assert.strictEqual(BigQuery.getType_(bq.datetime()).type, 'DATETIME');
+      assert.strictEqual(BigQuery.getType_(bq.time()).type, 'TIME');
+      assert.strictEqual(BigQuery.getType_(bq.timestamp()).type, 'TIMESTAMP');
+      assert.strictEqual(BigQuery.getType_(new Buffer(2)).type, 'BYTES');
+      assert.strictEqual(BigQuery.getType_(true).type, 'BOOL');
+      assert.strictEqual(BigQuery.getType_(8).type, 'INT64');
+      assert.strictEqual(BigQuery.getType_(8.1).type, 'FLOAT64');
+      assert.strictEqual(BigQuery.getType_('hi').type, 'STRING');
+    });
+
+    it('should return correct type for an array', function() {
+      var type = BigQuery.getType_([1]);
+
+      assert.deepEqual(type, {
+        type: 'ARRAY',
+        arrayType: {
+          type: 'INT64'
+        }
+      });
+    });
+
+    it('should return correct type for a struct', function() {
+      var type = BigQuery.getType_({ prop: 1 });
+
+      assert.deepEqual(type, {
+        type: 'STRUCT',
+        structTypes: [
+          {
+            name: 'prop',
+            type: {
+              type: 'INT64'
+            }
+          }
+        ]
+      });
     });
 
     it('should throw if a type cannot be detected', function() {
@@ -341,7 +366,10 @@ describe('BigQuery', function() {
 
       BigQuery.getType_ = function(value_) {
         assert.strictEqual(value_, value);
-        done();
+        setImmediate(done);
+        return {
+          type: ''
+        };
       };
 
       BigQuery.valueToQueryParameter_(value);
@@ -359,7 +387,9 @@ describe('BigQuery', function() {
       };
 
       BigQuery.getType_ = function() {
-        return 'TIMESTAMP';
+        return {
+          type: 'TIMESTAMP'
+        };
       };
 
       var queryParameter = BigQuery.valueToQueryParameter_(date);
@@ -372,7 +402,9 @@ describe('BigQuery', function() {
       };
 
       BigQuery.getType_ = function() {
-        return 'DATETIME';
+        return {
+          type: 'DATETIME'
+        };
       };
 
       var queryParameter = BigQuery.valueToQueryParameter_(datetime);
@@ -385,7 +417,9 @@ describe('BigQuery', function() {
       };
 
       BigQuery.getType_ = function() {
-        return 'TIME';
+        return {
+          type: 'TIME'
+        };
       };
 
       var queryParameter = BigQuery.valueToQueryParameter_(time);
@@ -395,33 +429,20 @@ describe('BigQuery', function() {
     it('should format an array', function() {
       var array = [1];
 
-      var type = 'ARRAY';
-      var firstElementType = 'an-int';
-
       BigQuery.getType_ = function() {
-        BigQuery.getType_ = function(value) {
-          assert.strictEqual(value, array[0]);
-          return firstElementType;
+        return {
+          type: 'ARRAY'
         };
-
-        return type;
       };
 
-      assert.deepEqual(BigQuery.valueToQueryParameter_(array), {
-        parameterType: {
-          type: type,
-          arrayType: {
-            type: firstElementType
-          }
-        },
-        parameterValue: {
-          arrayValues: [
-            {
-              value: array[0]
-            }
-          ]
+      var queryParameter = BigQuery.valueToQueryParameter_(array);
+      var arrayValues = queryParameter.parameterValue.arrayValues;
+
+      assert.deepEqual(arrayValues, [
+        {
+          value: array[0]
         }
-      });
+      ]);
     });
 
     it('should format a struct', function() {
@@ -429,48 +450,39 @@ describe('BigQuery', function() {
         key: 'value'
       };
 
-      var type = 'STRUCT';
-      var firstElementType = 'a-string';
+      var expectedParameterValue = {};
 
       BigQuery.getType_ = function() {
-        BigQuery.getType_ = function(value) {
+        BigQuery.valueToQueryParameter_ = function(value) {
           assert.strictEqual(value, struct.key);
-          return firstElementType;
+          return {
+            parameterValue: expectedParameterValue
+          };
         };
 
-        return type;
+        return {
+          type: 'STRUCT'
+        };
       };
 
-      assert.deepEqual(BigQuery.valueToQueryParameter_(struct), {
-        parameterType: {
-          type: type,
-          structTypes: [
-            {
-              name: 'key',
-              type: firstElementType
-            }
-          ]
-        },
-        parameterValue: {
-          structValues: {
-            key: {
-              value: struct.key
-            }
-          }
-        }
-      });
+      var queryParameter = BigQuery.valueToQueryParameter_(struct);
+      var structValues = queryParameter.parameterValue.structValues;
+
+      assert.strictEqual(structValues.key, expectedParameterValue);
     });
 
     it('should format all other types', function() {
-      var type = 'ANY-TYPE';
+      var typeName = 'ANY-TYPE';
 
       BigQuery.getType_ = function() {
-        return type;
+        return {
+          type: typeName
+        };
       };
 
       assert.deepEqual(BigQuery.valueToQueryParameter_(8), {
         parameterType: {
-          type: type
+          type: typeName
         },
         parameterValue: {
           value: 8

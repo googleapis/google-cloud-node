@@ -250,50 +250,51 @@ BigQuery.prototype.timestamp = function(value) {
  * @return {string} - The type detected from the value.
  */
 BigQuery.getType_ = function(value) {
+  var typeName;
+
   if (value instanceof BigQuery.date) {
-    return 'DATE';
+    typeName = 'DATE';
+  } else if (value instanceof BigQuery.datetime) {
+    typeName = 'DATETIME';
+  } else if (value instanceof BigQuery.time) {
+    typeName = 'TIME';
+  } else if (value instanceof BigQuery.timestamp) {
+    typeName = 'TIMESTAMP';
+  } else if (value instanceof Buffer) {
+    typeName = 'BYTES';
+  } else if (is.array(value)) {
+    return {
+      type: 'ARRAY',
+      arrayType: BigQuery.getType_(value[0])
+    };
+  } else if (is.bool(value)) {
+    typeName = 'BOOL';
+  } else if (is.number(value)) {
+    typeName = value % 1 === 0 ? 'INT64' : 'FLOAT64';
+  } else if (is.object(value)) {
+    return {
+      type: 'STRUCT',
+      structTypes: Object.keys(value).map(function(prop) {
+        return {
+          name: prop,
+          type: BigQuery.getType_(value[prop])
+        };
+      })
+    };
+  } else if (is.string(value)) {
+    typeName = 'STRING';
   }
 
-  if (value instanceof BigQuery.datetime) {
-    return 'DATETIME';
+  if (!typeName) {
+    throw new Error([
+      'This value could not be translated to a BigQuery data type.',
+      value
+    ].join('\n'));
   }
 
-  if (value instanceof BigQuery.time) {
-    return 'TIME';
-  }
-
-  if (value instanceof BigQuery.timestamp) {
-    return 'TIMESTAMP';
-  }
-
-  if (value instanceof Buffer) {
-    return 'BYTES';
-  }
-
-  if (is.array(value)) {
-    return 'ARRAY';
-  }
-
-  if (is.bool(value)) {
-    return 'BOOL';
-  }
-
-  if (is.number(value)) {
-    return value % 1 === 0 ? 'INT64' : 'FLOAT64';
-  }
-
-  if (is.object(value)) {
-    return 'STRUCT';
-  }
-
-  if (is.string(value)) {
-    return 'STRING';
-  }
-
-  throw new Error([
-    'This value could not be translated to a BigQuery data type.',
-    value
-  ].join('\n'));
+  return {
+    type: typeName
+  };
 };
 
 /**
@@ -311,42 +312,30 @@ BigQuery.valueToQueryParameter_ = function(value) {
     value = BigQuery.timestamp(value);
   }
 
-  var type = BigQuery.getType_(value);
-
   var queryParameter = {
-    parameterType: {
-      type: type
-    },
+    parameterType: BigQuery.getType_(value),
     parameterValue: {}
   };
 
-  if (type.indexOf('TIME') > -1 || type.indexOf('DATE') > -1) {
+  var typeName = queryParameter.parameterType.type;
+
+  if (typeName.indexOf('TIME') > -1 || typeName.indexOf('DATE') > -1) {
     value = value.value;
   }
 
-  if (type === 'ARRAY') {
-    queryParameter.parameterType.arrayType = {
-      type: BigQuery.getType_(value[0])
-    };
+  if (typeName === 'ARRAY') {
     queryParameter.parameterValue.arrayValues = value.map(function(value) {
       return {
         value: value
       };
     });
-  } else if (type === 'STRUCT') {
-    queryParameter.parameterType.structTypes = [];
-    queryParameter.parameterValue.structValues = {};
-
-    for (var prop in value) {
-      queryParameter.parameterType.structTypes.push({
-        name: prop,
-        type: BigQuery.getType_(value[prop])
-      });
-
-      queryParameter.parameterValue.structValues[prop] = {
-        value: value[prop]
-      };
-    }
+  } else if (typeName === 'STRUCT') {
+    queryParameter.parameterValue.structValues = Object.keys(value)
+      .reduce(function(structValues, prop) {
+        var nestedQueryParameter = BigQuery.valueToQueryParameter_(value[prop]);
+        structValues[prop] = nestedQueryParameter.parameterValue;
+        return structValues;
+      }, {});
   } else {
     queryParameter.parameterValue.value = value;
   }
