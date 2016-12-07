@@ -34,7 +34,14 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['dataset', 'job']);
+    assert.deepEqual(options.exclude, [
+      'dataset',
+      'date',
+      'datetime',
+      'job',
+      'time',
+      'timestamp'
+    ]);
   }
 });
 
@@ -348,7 +355,7 @@ describe('BigQuery', function() {
         assert.strictEqual(value, date);
         return {
           value: expectedValue
-        }
+        };
       };
 
       BigQuery.getType_ = function() {
