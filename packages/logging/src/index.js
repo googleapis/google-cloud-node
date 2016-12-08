@@ -47,12 +47,6 @@ var Log = require('./log.js');
 var Sink = require('./sink.js');
 
 /**
- * <p class="notice">
- *   **This is a Beta release of Stackdriver Logging.** This API is not covered
- *   by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
  * [Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to
  * store, search, analyze, monitor, and alert on log data and events from Google
  * Cloud Platform and Amazon Web Services (AWS).

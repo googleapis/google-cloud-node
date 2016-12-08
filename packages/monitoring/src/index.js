@@ -21,12 +21,6 @@
 'use strict';
 
 /**
- * <p class="notice">
- *   **This is a Beta release of Stackdriver Monitoring.** This API is not
- *   covered by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
  * [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects
  * metrics, events, and metadata from Google Cloud Platform, Amazon Web Services
  * (AWS), hosted uptime probes, application instrumentation, and a variety of

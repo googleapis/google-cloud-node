@@ -132,12 +132,6 @@ var apis = {
    * API provides natural language understanding technologies to developers,
    * including sentiment analysis, entity recognition, and syntax analysis.
    *
-   * <p class="notice">
-   *   **This is a Beta release of Google Cloud Natural Language.** This API is
-   *   not covered by any SLA or deprecation policy and may be subject to
-   *   backward-incompatible changes.
-   * </p>
-   *
    * @type {module:language}
    *
    * @return {module:language}
@@ -155,12 +149,6 @@ var apis = {
    * [Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to
    * store, search, analyze, monitor, and alert on log data and events from
    * Google Cloud Platform and Amazon Web Services (AWS).
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Stackdriver Logging.** This API is not
-   *   covered by any SLA or deprecation policy and may be subject to backward-
-   *   incompatible changes.
-   * </p>
    *
    * @type {module:logging}
    *
@@ -182,12 +170,6 @@ var apis = {
    * variety of common application components including Cassandra, Nginx, Apache
    * Web Server, Elasticsearch and many others. Stackdriver ingests that data
    * and generates insights via dashboards, charts, and alerts.
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Stackdriver Monitoring.** This API is not
-   *   covered by any SLA or deprecation policy and may be subject to
-   *   backward-incompatible changes.
-   * </p>
    *
    * <h2>This is an auto-generated API</h2>
    *
@@ -258,7 +240,7 @@ var apis = {
   pubsub: require('@google-cloud/pubsub'),
 
   /**
-   * [The Cloud Resource Manager](https://cloud.google.com/resource-manager/)
+   * The [Cloud Resource Manager](https://cloud.google.com/resource-manager/)
    * provides methods that you can use to programmatically manage your projects
    * in the Google Cloud Platform. With this API, you can do the following:
    *
@@ -267,12 +249,6 @@ var apis = {
    *   - Update existing projects.
    *   - Delete projects.
    *   - Recover projects.
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Cloud Resource Manager.** This feature is not
-   *   covered by any SLA or deprecation policy and may be subject to backward-
-   *   incompatible changes.
-   * </p>
    *
    * @type {module:resource}
    *
@@ -292,12 +268,6 @@ var apis = {
    * integration of Google speech recognition technologies into developer
    * applications. Send audio and receive a text transcription from the Cloud
    * Speech API service.
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Google Cloud Speech.** This feature is not
-   *   covered by any SLA or deprecation policy and may be subject to
-   *   backward-incompatible changes.
-   * </p>
    *
    * @type {module:speech}
    *
@@ -337,13 +307,6 @@ var apis = {
    * The Google Translate API lets websites and programs integrate with Google
    * Translate programmatically.
    *
-   * Google Translate API is available as a paid service. See the
-   * [Pricing](https://cloud.google.com/translate/v2/pricing.html) and
-   * [FAQ](https://cloud.google.com/translate/v2/faq.html) pages for details.
-   *
-   * **An API key is required for Translate.** See
-   * [Identifying your application to Google](https://cloud.google.com/translate/v2/using_rest#auth).
-   *
    * @type {module:translate}
    *
    * @return {module:translate}
@@ -361,12 +324,6 @@ var apis = {
    * integration of vision detection features, including image labeling, face
    * and landmark detection, optical character recognition (OCR), and tagging of
    * explicit content.
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Google Cloud Vision.** This API is not
-   *   covered by any SLA or deprecation policy and may be subject to backward-
-   *   incompatible changes.
-   * </p>
    *
    * To learn more about the Vision API, see the
    * [Getting Started guide](https://cloud.google.com/vision/docs/getting-started).

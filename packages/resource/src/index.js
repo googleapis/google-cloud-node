@@ -31,14 +31,8 @@ var util = require('util');
  */
 var Project = require('./project.js');
 
-/**
- * <p class="notice">
- *   **This is a Beta release of Cloud Resource Manager.** This feature is not
- *   covered by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
- * [The Cloud Resource Manager](https://cloud.google.com/resource-manager/)
+/** *
+ * The [Cloud Resource Manager](https://cloud.google.com/resource-manager/)
  * provides methods that you can use to programmatically manage your projects
  * in the Google Cloud Platform. With this API, you can do the following:
  *
