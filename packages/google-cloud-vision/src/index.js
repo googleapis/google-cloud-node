@@ -39,12 +39,6 @@ var LIKELY = 3;
 var VERY_LIKELY = 4;
 
 /**
- * <p class="notice">
- *   **This is a Beta release of Google Cloud Vision.** This API is not covered
- *   by any SLA or deprecation policy and may be subject to backward-
- *   incompatible changes.
- * </p>
- *
  * The [Cloud Vision API](https://cloud.google.com/vision/docs) allows easy
  * integration of vision detection features, including image labeling, face and
  * landmark detection, optical character recognition (OCR), and tagging of
