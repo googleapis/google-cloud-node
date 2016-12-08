@@ -95,7 +95,7 @@ function MetricsServiceV2Client(gaxGrpc, grpcClients, opts) {
   var metricsServiceV2Stub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClients.metricsServiceV2Client.google.logging.v2.MetricsServiceV2,
+      grpcClients.google.logging.v2.MetricsServiceV2,
       {sslCreds: sslCreds});
   var metricsServiceV2StubMethods = [
     'listLogMetrics',
@@ -116,31 +116,31 @@ function MetricsServiceV2Client(gaxGrpc, grpcClients, opts) {
 
 // Path templates
 
-var PARENT_PATH_TEMPLATE = new gax.PathTemplate(
+var PROJECT_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}');
 
 var METRIC_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}/metrics/{metric}');
 
 /**
- * Returns a fully-qualified parent resource name string.
+ * Returns a fully-qualified project resource name string.
  * @param {String} project
  * @returns {String}
  */
-MetricsServiceV2Client.prototype.parentPath = function(project) {
-  return PARENT_PATH_TEMPLATE.render({
+MetricsServiceV2Client.prototype.projectPath = function(project) {
+  return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
 };
 
 /**
- * Parses the parentName from a parent resource.
- * @param {String} parentName
- *   A fully-qualified path representing a parent resources.
+ * Parses the projectName from a project resource.
+ * @param {String} projectName
+ *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-MetricsServiceV2Client.prototype.matchProjectFromParentName = function(parentName) {
-  return PARENT_PATH_TEMPLATE.match(parentName).project;
+MetricsServiceV2Client.prototype.matchProjectFromProjectName = function(projectName) {
+  return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
@@ -219,7 +219,7 @@ MetricsServiceV2Client.prototype.matchMetricFromMetricName = function(metricName
  * @example
  *
  * var client = loggingV2.metricsServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
  * client.listLogMetrics({parent: formattedParent}).then(function(responses) {
  *     var resources = responses[0];
@@ -299,7 +299,7 @@ MetricsServiceV2Client.prototype.listLogMetrics = function(request, options, cal
  * @example
  *
  * var client = loggingV2.metricsServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * client.listLogMetricsStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
@@ -387,7 +387,7 @@ MetricsServiceV2Client.prototype.getLogMetric = function(request, options, callb
  * @example
  *
  * var client = loggingV2.metricsServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * var metric = {};
  * var request = {
  *     parent: formattedParent,
@@ -516,9 +516,6 @@ function MetricsServiceV2ClientBuilder(gaxGrpc) {
   }]);
   extend(this, metricsServiceV2Client.google.logging.v2);
 
-  var grpcClients = {
-    metricsServiceV2Client: metricsServiceV2Client
-  };
 
   /**
    * Build a new instance of {@link MetricsServiceV2Client}.
@@ -539,7 +536,7 @@ function MetricsServiceV2ClientBuilder(gaxGrpc) {
    *   The version of the calling service.
    */
   this.metricsServiceV2Client = function(opts) {
-    return new MetricsServiceV2Client(gaxGrpc, grpcClients, opts);
+    return new MetricsServiceV2Client(gaxGrpc, metricsServiceV2Client, opts);
   };
   extend(this.metricsServiceV2Client, MetricsServiceV2Client);
 }

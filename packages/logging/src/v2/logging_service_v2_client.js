@@ -99,7 +99,7 @@ function LoggingServiceV2Client(gaxGrpc, grpcClients, opts) {
   var loggingServiceV2Stub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClients.loggingServiceV2Client.google.logging.v2.LoggingServiceV2,
+      grpcClients.google.logging.v2.LoggingServiceV2,
       {sslCreds: sslCreds});
   var loggingServiceV2StubMethods = [
     'deleteLog',
@@ -119,31 +119,31 @@ function LoggingServiceV2Client(gaxGrpc, grpcClients, opts) {
 
 // Path templates
 
-var PARENT_PATH_TEMPLATE = new gax.PathTemplate(
+var PROJECT_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}');
 
 var LOG_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}/logs/{log}');
 
 /**
- * Returns a fully-qualified parent resource name string.
+ * Returns a fully-qualified project resource name string.
  * @param {String} project
  * @returns {String}
  */
-LoggingServiceV2Client.prototype.parentPath = function(project) {
-  return PARENT_PATH_TEMPLATE.render({
+LoggingServiceV2Client.prototype.projectPath = function(project) {
+  return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
 };
 
 /**
- * Parses the parentName from a parent resource.
- * @param {String} parentName
- *   A fully-qualified path representing a parent resources.
+ * Parses the projectName from a project resource.
+ * @param {String} projectName
+ *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-LoggingServiceV2Client.prototype.matchProjectFromParentName = function(parentName) {
-  return PARENT_PATH_TEMPLATE.match(parentName).project;
+LoggingServiceV2Client.prototype.matchProjectFromProjectName = function(projectName) {
+  return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
@@ -633,9 +633,6 @@ function LoggingServiceV2ClientBuilder(gaxGrpc) {
   }]);
   extend(this, loggingServiceV2Client.google.logging.v2);
 
-  var grpcClients = {
-    loggingServiceV2Client: loggingServiceV2Client
-  };
 
   /**
    * Build a new instance of {@link LoggingServiceV2Client}.
@@ -656,7 +653,7 @@ function LoggingServiceV2ClientBuilder(gaxGrpc) {
    *   The version of the calling service.
    */
   this.loggingServiceV2Client = function(opts) {
-    return new LoggingServiceV2Client(gaxGrpc, grpcClients, opts);
+    return new LoggingServiceV2Client(gaxGrpc, loggingServiceV2Client, opts);
   };
   extend(this.loggingServiceV2Client, LoggingServiceV2Client);
 }
