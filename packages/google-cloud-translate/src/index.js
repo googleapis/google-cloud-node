@@ -37,17 +37,11 @@ var PKG = require('../package.json');
  * The Google Translate API lets websites and programs integrate with Google
  * Translate programmatically.
  *
- * Google Translate API is available as a paid service. See the
- * [Pricing](https://cloud.google.com/translate/v2/pricing.html) and
- * [FAQ](https://cloud.google.com/translate/v2/faq.html) pages for details.
- *
  * @constructor
  * @alias module:translate
  *
  * @resource [Getting Started]{@link https://cloud.google.com/translate/v2/getting_started}
  * @resource [Identifying your application to Google]{@link https://cloud.google.com/translate/v2/using_rest#auth}
- *
- * @throws {Error} If an API key is not provided.
  *
  * @param {object} options - [Configuration object](#/docs).
  * @param {string=} options.key - An API key.
