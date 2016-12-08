@@ -96,7 +96,7 @@ function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
   var configServiceV2Stub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClients.configServiceV2Client.google.logging.v2.ConfigServiceV2,
+      grpcClients.google.logging.v2.ConfigServiceV2,
       {sslCreds: sslCreds});
   var configServiceV2StubMethods = [
     'listSinks',
@@ -117,31 +117,31 @@ function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
 
 // Path templates
 
-var PARENT_PATH_TEMPLATE = new gax.PathTemplate(
+var PROJECT_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}');
 
 var SINK_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}/sinks/{sink}');
 
 /**
- * Returns a fully-qualified parent resource name string.
+ * Returns a fully-qualified project resource name string.
  * @param {String} project
  * @returns {String}
  */
-ConfigServiceV2Client.prototype.parentPath = function(project) {
-  return PARENT_PATH_TEMPLATE.render({
+ConfigServiceV2Client.prototype.projectPath = function(project) {
+  return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
 };
 
 /**
- * Parses the parentName from a parent resource.
- * @param {String} parentName
- *   A fully-qualified path representing a parent resources.
+ * Parses the projectName from a project resource.
+ * @param {String} projectName
+ *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-ConfigServiceV2Client.prototype.matchProjectFromParentName = function(parentName) {
-  return PARENT_PATH_TEMPLATE.match(parentName).project;
+ConfigServiceV2Client.prototype.matchProjectFromProjectName = function(projectName) {
+  return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
@@ -221,7 +221,7 @@ ConfigServiceV2Client.prototype.matchSinkFromSinkName = function(sinkName) {
  * @example
  *
  * var client = loggingV2.configServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
  * client.listSinks({parent: formattedParent}).then(function(responses) {
  *     var resources = responses[0];
@@ -302,7 +302,7 @@ ConfigServiceV2Client.prototype.listSinks = function(request, options, callback)
  * @example
  *
  * var client = loggingV2.configServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * client.listSinksStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
@@ -396,7 +396,7 @@ ConfigServiceV2Client.prototype.getSink = function(request, options, callback) {
  * @example
  *
  * var client = loggingV2.configServiceV2Client();
- * var formattedParent = client.parentPath("[PROJECT]");
+ * var formattedParent = client.projectPath("[PROJECT]");
  * var sink = {};
  * var request = {
  *     parent: formattedParent,
@@ -537,9 +537,6 @@ function ConfigServiceV2ClientBuilder(gaxGrpc) {
   }]);
   extend(this, configServiceV2Client.google.logging.v2);
 
-  var grpcClients = {
-    configServiceV2Client: configServiceV2Client
-  };
 
   /**
    * Build a new instance of {@link ConfigServiceV2Client}.
@@ -560,7 +557,7 @@ function ConfigServiceV2ClientBuilder(gaxGrpc) {
    *   The version of the calling service.
    */
   this.configServiceV2Client = function(opts) {
-    return new ConfigServiceV2Client(gaxGrpc, grpcClients, opts);
+    return new ConfigServiceV2Client(gaxGrpc, configServiceV2Client, opts);
   };
   extend(this.configServiceV2Client, ConfigServiceV2Client);
 }
