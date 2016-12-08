@@ -1789,10 +1789,38 @@ describe('GrpcService', function() {
         });
       });
 
-      it('should update projectId', function(done) {
+      it('should set projectId', function(done) {
         grpcService.getGrpcCredentials_(function(err) {
           assert.ifError(err);
           assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
+          done();
+        });
+      });
+
+      it('should not change projectId that was already set', function(done) {
+        grpcService.projectId = 'project-id';
+
+        grpcService.getGrpcCredentials_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
+          done();
+        });
+      });
+
+      it('should not update projectId if it was not found', function(done) {
+        grpcService.projectId = 'project-id';
+
+        grpcService.authClient = {
+          getAuthClient: function(callback) {
+            callback(null, {
+              projectId: undefined
+            });
+          }
+        };
+
+        grpcService.getGrpcCredentials_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(grpcService.projectId, grpcService.projectId);
           done();
         });
       });
