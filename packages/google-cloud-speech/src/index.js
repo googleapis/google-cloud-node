@@ -46,12 +46,6 @@ var v1beta1 = require('./v1beta1');
  * @alias module:speech
  *
  * @classdesc
- * <p class="notice">
- *   **This is a Beta release of Google Cloud Speech.** This feature is not
- *   covered by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
  * To learn more about the Speech API, see the
  * [Getting Started guide](https://cloud.google.com/speech/docs/getting-started).
  *
