@@ -442,11 +442,11 @@ function build(name, version) {
   git.checkout('-');
 
   if (builder.isRelease) {
-    builder.updateManifest();
-
     if (!builder.isUmbrella) {
       Bundler.updateDep(builder);
     }
+
+    builder.updateManifest();
   }
 }
 

@@ -27,6 +27,7 @@ var run = helpers.run;
 var args = process.argv.splice(1);
 var moduleName = args[1] || '';
 var version = args[2] || '';
+var tagName = getTagName(moduleName, version);
 
 var ghpages = git.submodule('gh-pages');
 
@@ -35,8 +36,11 @@ run(['npm run docs', moduleName, version]);
 cp('-rf', 'docs/json/*', 'gh-pages/json');
 cp('docs/manifest.json', 'gh-pages');
 
+git.add('docs/manifest.json');
+git.commit('Update manifest for ' + tagName);
+
 ghpages.add('manifest.json', 'json');
-ghpages.commit('Update docs for ' + getTagName(moduleName, version));
+ghpages.commit('Update docs for ' + tagName);
 
 console.log(multiline(function() {/*
 
