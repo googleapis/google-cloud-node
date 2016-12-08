@@ -251,7 +251,7 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   }
 
   try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
   } catch(e) {
     callback(e);
     return;
@@ -757,7 +757,9 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
       grpc.credentials.createFromGoogleCredential(authClient)
     );
 
-    self.projectId = authClient.projectId;
+    if (authClient.projectId) {
+      self.projectId = authClient.projectId;
+    }
 
     callback(null, credentials);
   });

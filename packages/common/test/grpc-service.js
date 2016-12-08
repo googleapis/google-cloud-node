@@ -1796,6 +1796,24 @@ describe('GrpcService', function() {
           done();
         });
       });
+
+      it('should not update projectId if it was not found', function(done) {
+        grpcService.projectId = 'project-id';
+
+        grpcService.authClient = {
+          getAuthClient: function(callback) {
+            callback(null, {
+              projectId: undefined
+            });
+          }
+        };
+
+        grpcService.getGrpcCredentials_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(grpcService.projectId, grpcService.projectId);
+          done();
+        });
+      });
     });
   });
 
