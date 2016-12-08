@@ -369,7 +369,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
         if (!responseEmitted) {
           responseEmitted = true;
           shouldRetryStream.emit('response', resp);
-        } else {
+        } else if (resp.code !== 200) {
           // retry-request has already handled a response from this request. We
           // need to consider this an error that should end the user's stream.
           stream.destroy(resp);
@@ -378,18 +378,19 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
 
       return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
         // Errors are handled in the `status` event handler.
-        .on('error', function() {})
+        .on('error', function(err) {
+          var grpcError = GrpcService.decorateError_(err);
+          onResponse(grpcError);
+        })
 
         // Status is emitted at the end of every gRPC request stream.
         .on('status', function(status) {
-          var grpcError = GrpcService.decorateError_(status);
+          var grpcStatus = GrpcService.decorateStatus_(status);
 
-          if (grpcError) {
-            onResponse(grpcError);
-            return;
+          if (grpcStatus.code === 200) {
+            onResponse(grpcStatus);
+            shouldRetryStream.uncork();
           }
-
-          shouldRetryStream.uncork();
         })
 
         .pipe(shouldRetryStream)
@@ -398,10 +399,9 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
         // data. The closest mechanism grpc provides is a metadata event, but
         // this does not provide any kind of response status. So we're saying
         // here: if we receive a data event, things must be going well.
-        .on('data', function(chunk, enc, next) {
+        .once('data', function(chunk, enc) {
           var grpcStatus = GrpcService.decorateStatus_({ code: 0 });
           onResponse(grpcStatus);
-          next(null, chunk);
         })
 
         // A gRPC stream will end before it emits the status event. Stop the
