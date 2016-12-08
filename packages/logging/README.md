@@ -1,4 +1,4 @@
-# @google-cloud/logging ([Alpha][versioning])
+# @google-cloud/logging ([Beta][versioning])
 > Google Stackdriver Logging Client Library for Node.js
 
 *Looking for more Google APIs than just Logging? You might want to check out [`google-cloud`][google-cloud].*
