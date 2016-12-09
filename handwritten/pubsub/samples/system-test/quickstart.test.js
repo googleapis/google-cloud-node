@@ -17,7 +17,7 @@
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const pubsub = proxyquire(`@google-cloud/pubsub`, {})();
-const uuid = require(`node-uuid`);
+const uuid = require(`uuid`);
 
 const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const projectId = process.env.GCLOUD_PROJECT;

@@ -16,7 +16,7 @@
 'use strict';
 
 const pubsub = require(`@google-cloud/pubsub`)();
-const uuid = require(`node-uuid`);
+const uuid = require(`uuid`);
 const path = require(`path`);
 const run = require(`../../utils`).run;
 
@@ -69,7 +69,7 @@ describe(`pubsub:topics`, () => {
   });
 
   it(`should publish a JSON message`, () => {
-    return pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true })
+    return pubsub.topic(topicName).subscribe(subscriptionName)
       .then((results) => {
         const subscription = results[0];
         run(`${cmd} publish ${topicName} '${JSON.stringify(message)}'`, cwd);
@@ -85,7 +85,7 @@ describe(`pubsub:topics`, () => {
     const topics = require(`../topics`);
     let subscription;
 
-    return pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true })
+    return pubsub.topic(topicName).subscribe(subscriptionName)
       .then((results) => {
         subscription = results[0];
         return topics.publishOrderedMessage(topicName, message.data);

@@ -8,11 +8,11 @@
     "test": "cd ..; npm run st -- pubsub/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "0.5.0",
-    "yargs": "6.4.0"
+    "@google-cloud/pubsub": "0.7.0",
+    "yargs": "6.5.0"
   },
   "devDependencies": {
-    "node-uuid": "1.4.7"
+    "uuid": "3.0.1"
   },
   "engines": {
     "node": ">=4.3.2"

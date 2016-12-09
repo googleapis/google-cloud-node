@@ -16,7 +16,7 @@
 'use strict';
 
 const pubsub = require(`@google-cloud/pubsub`)();
-const uuid = require(`node-uuid`);
+const uuid = require(`uuid`);
 const path = require(`path`);
 const run = require(`../../utils`).run;
 
