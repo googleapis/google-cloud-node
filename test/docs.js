@@ -162,8 +162,6 @@ modules.forEach(function(mod) {
     });
 
     after(function() {
-      delete global.GCLOUD_SANDBOX_ENV;
-
       // Re-enable the network.
       MITM.disable();
     });
