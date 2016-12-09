@@ -9,14 +9,14 @@
     "system-test": "cd ..; npm run st -- logging/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/logging": "0.5.1",
-    "@google-cloud/storage": "0.5.0",
+    "@google-cloud/logging": "0.6.0",
+    "@google-cloud/storage": "0.6.0",
     "express": "4.14.0",
     "fluent-logger": "2.2.0",
-    "yargs": "6.4.0"
+    "yargs": "6.5.0"
   },
   "devDependencies": {
-    "node-uuid": "1.4.7"
+    "uuid": "3.0.1"
   },
   "engines": {
     "node": ">=4.3.2"
