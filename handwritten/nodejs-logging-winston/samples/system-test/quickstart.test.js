@@ -17,7 +17,7 @@
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const logging = proxyquire(`@google-cloud/logging`, {})();
-const uuid = require(`node-uuid`);
+const uuid = require(`uuid`);
 
 const logName = `nodejs-docs-samples-test-${uuid.v4()}`;
 

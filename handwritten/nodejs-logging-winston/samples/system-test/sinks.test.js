@@ -15,7 +15,7 @@
 
 var Logging = require('@google-cloud/logging');
 var Storage = require('@google-cloud/storage');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 var program = require('../sinks');
 
 var logging = Logging();
