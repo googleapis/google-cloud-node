@@ -23,7 +23,7 @@
  * - First we check to see if there is either a code change OR a release. If
  *   neither is happening (could be a markdown update), we'll exit early.
  *
- * - If this is the first job being ran on Travis, we'll install dependencies
+ * - If this is the first job being ran on circleci, we'll install dependencies
  *   for everything and run coveralls.
  *
  * - For each module that has code changes, we'll then install its dependencies
@@ -54,7 +54,7 @@ if (!modules.length && !ci.isReleaseBuild()) {
   exit();
 }
 
-// If this is the first pass (travis only), let's get the code coverage
+// If this is the first pass (AppVeyor only), let's get the code coverage
 if (ci.isFirstPass()) {
   Module.installAll();
   Module.runCoveralls();

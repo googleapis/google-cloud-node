@@ -28,7 +28,7 @@ require('shelljs/global');
  *
  * @alias ci.PR_NUMBER;
  */
-var PR_NUMBER = process.env.TRAVIS_PULL_REQUEST ||
+var PR_NUMBER = process.env.CIRCLE_PR_NUMBER ||
   process.env.APPVEYOR_PULL_REQUEST_NUMBER;
 
 /**
@@ -467,7 +467,7 @@ module.exports.git = new Git();
  *
  * @alias ci.BRANCH
  */
-var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
+var BRANCH = process.env.CIRCLE_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
 /**
  * Returns the tag name (assuming this is a release)
@@ -476,7 +476,7 @@ var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
  * @return {string|null}
  */
 function getTagName() {
-  return process.env.TRAVIS_TAG || process.env.APPVEYOR_REPO_TAG_NAME;
+  return process.env.CIRCLE_TAG || process.env.APPVEYOR_REPO_TAG_NAME;
 }
 
 /**
@@ -521,13 +521,13 @@ function isPushToMaster() {
 }
 
 /**
- * Checks to see if this the CI's first pass (Travis only)
+ * Checks to see if this the CI's first pass (AppVeyor only).
  *
  * @alias ci.isFirstPass
  * @return {boolean}
  */
 function isFirstPass() {
-  return /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
+  return process.env.APPVEYOR && /^v0\.12/.test(process.version);
 }
 
 module.exports.ci = {
