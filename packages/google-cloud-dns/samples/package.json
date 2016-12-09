@@ -9,8 +9,8 @@
     "system-test": "cd ..; npm run st -- dns/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/dns": "0.2.0",
-    "yargs": "6.4.0"
+    "@google-cloud/dns": "0.4.0",
+    "yargs": "6.5.0"
   },
   "devDependencies": {
     "uuid": "2.0.3"
