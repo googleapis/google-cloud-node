@@ -13,6 +13,7 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
+        "0.45.0",
         "0.44.2",
         "0.44.0",
         "0.43.0",
@@ -72,6 +73,7 @@
       "name": "@google-cloud/bigquery",
       "defaultService": "bigquery",
       "versions": [
+        "0.6.0",
         "0.5.0",
         "0.4.0",
         "0.3.0",
