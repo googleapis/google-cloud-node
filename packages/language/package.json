@@ -52,7 +52,7 @@
     "language"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.8.0",
+    "@google-cloud/common": "^0.9.0",
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.10.0",
