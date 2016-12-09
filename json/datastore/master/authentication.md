@@ -11,18 +11,21 @@ var config = {
 
 ### The `config` object
 
-A `config` object requires the following properties:
+A `config` object is not required if you are in an environment which supports [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials). This could be your own development machine when using the [gcloud SDK](https://cloud.google.com/sdk) or within Google App Engine and Compute Engine.
 
-1. `projectId`
+If this doesn't describe your environment, the `config` object expects the following properties:
 
-  If you wish, you can set an environment variable (`GCLOUD_PROJECT`) in place of specifying this inline.
-
-2. One of the following:
-  1. `config.credentials` object containing `client_email` and `private_key` properties.
-  2. `config.keyFilename` path to a .json, .pem, or .p12 key file.
+1. One of the following:
+  1. `credentials` object containing `client_email` and `private_key` properties.
+  2. `keyFilename` path to a .json, .pem, or .p12 key file.
   3. `GOOGLE_APPLICATION_CREDENTIALS` environment variable with a full path to your key file.
 
+2. `projectId`
+
+  If you wish, you can set an environment variable (`GCLOUD_PROJECT`) in place of specifying this inline. Or, if you have provided a service account JSON key file as the `config.keyFilename` property explained above, your project ID will be detected automatically.
+
 **Note**: When using a .pem or .p12 key file, `config.email` is also required.
+
 
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
