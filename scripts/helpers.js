@@ -527,7 +527,7 @@ function isPushToMaster() {
  * @return {boolean}
  */
 function isFirstPass() {
-  return process.env.APPVEYOR && /^v0\.12/.test(process.version);
+  return process.env.APPVEYOR && /^v4/.test(process.version);
 }
 
 module.exports.ci = {
