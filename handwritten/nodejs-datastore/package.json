@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/datastore",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "author": "Google Inc.",
   "description": "Google Cloud Datastore Client Library for Node.js",
   "contributors": [
