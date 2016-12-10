@@ -18,6 +18,8 @@
  * @module common/metadata
  */
 
+'use strict';
+
 var request = require('request');
 var util = require('./util.js');
 
@@ -28,12 +30,14 @@ var metadata = module.exports;
 function getMetadataValue(path, headers, callback) {
   headers['Metadata-Flavor'] = 'Google';
 
-  util.makeRequest(request, {
+  util.makeRequest({
     url: METADATA_URL + path,
     headers: headers,
     method: 'GET'
   }, callback);
 }
+
+metadata.getMetadataValue = getMetadataValue;
 
 /**
  * Attempts to retreive the project id for the current active project from the
@@ -49,7 +53,7 @@ function getProjectId(headers, callback) {
     headers = {};
   }
   getMetadataValue('/project/project-id', headers,
-    function (err, response, projectId) {
+    function (err, projectId, response) {
       if (!err && response.statusCode === 200) {
         return callback(null, projectId);
       } else if (err && err.code === 'ENOTFOUND') {
@@ -59,6 +63,8 @@ function getProjectId(headers, callback) {
       return callback(err || new Error('Error discovering project id'), null);
   });
 }
+
+metadata.getProjectId = getProjectId;
 
 /**
  * Attempts to retrieve the GCE instance hostname for the current active project
@@ -74,10 +80,7 @@ function getHostname(headers, callback) {
     callback = headers;
     headers = {};
   }
-  getMetadataValue('/instance/hostname',
-      headers, function(err, response, hostname) {
-    callback(err, hostname);
-  });
+  getMetadataValue('/instance/hostname', headers, callback);
 }
 
 metadata.getHostname = getHostname;
@@ -96,10 +99,7 @@ function getInstanceId(headers, callback) {
     callback = headers;
     headers = {};
   }
-  getMetadataValue('/instance/id',
-      headers, function(err, response, id) {
-    callback(err, id);
-  });
+  getMetadataValue('/instance/id', headers, callback);
 }
 
 metadata.getInstanceId = getInstanceId;
