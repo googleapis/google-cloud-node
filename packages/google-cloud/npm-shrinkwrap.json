@@ -1,6 +1,6 @@
 {
   "name": "google-cloud",
-  "version": "0.45.0",
+  "version": "0.45.1",
   "dependencies": {
     "@google-cloud/bigquery": {
       "version": "0.6.0",
@@ -20,9 +20,9 @@
       }
     },
     "@google-cloud/common": {
-      "version": "0.9.0",
+      "version": "0.9.1",
       "from": "@google-cloud/common@>=0.9.0 <0.10.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.9.0.tgz"
+      "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.9.1.tgz"
     },
     "@google-cloud/compute": {
       "version": "0.4.0",
@@ -65,9 +65,9 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.7.0.tgz"
     },
     "@google-cloud/resource": {
-      "version": "0.5.0",
+      "version": "0.5.1",
       "from": "@google-cloud/resource@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/resource/-/resource-0.5.0.tgz"
+      "resolved": "https://registry.npmjs.org/@google-cloud/resource/-/resource-0.5.1.tgz"
     },
     "@google-cloud/speech": {
       "version": "0.5.0",
@@ -640,9 +640,9 @@
       }
     },
     "google-p12-pem": {
-      "version": "0.1.0",
+      "version": "0.1.1",
       "from": "google-p12-pem@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/google-p12-pem/-/google-p12-pem-0.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/google-p12-pem/-/google-p12-pem-0.1.1.tgz"
     },
     "google-proto-files": {
       "version": "0.8.5",
@@ -1011,7 +1011,7 @@
     },
     "node-forge": {
       "version": "0.6.46",
-      "from": "node-forge@>=0.6.33 <0.7.0",
+      "from": "node-forge@>=0.6.46 <0.7.0",
       "resolved": "https://registry.npmjs.org/node-forge/-/node-forge-0.6.46.tgz"
     },
     "node-int64": {
