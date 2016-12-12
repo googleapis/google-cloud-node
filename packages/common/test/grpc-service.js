@@ -1807,6 +1807,16 @@ describe('GrpcService', function() {
         });
       });
 
+      it('should change placeholder projectId', function(done) {
+        grpcService.projectId = '{{projectId}}';
+
+        grpcService.getGrpcCredentials_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
+          done();
+        });
+      });
+
       it('should not update projectId if it was not found', function(done) {
         grpcService.projectId = 'project-id';
 

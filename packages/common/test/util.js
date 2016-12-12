@@ -1275,46 +1275,97 @@ describe('common/util', function() {
       assert.strictEqual(decoratedReqOpts.json.autoPaginateVal, undefined);
     });
 
-    describe('projectId placeholder', function() {
-      var PROJECT_ID = 'project-id';
+    it('should decorate the request', function() {
+      var config = {
+        projectId: 'project-id'
+      };
+      var reqOpts = {};
+      var decoratedReqOpts = {};
 
-      it('should replace any {{projectId}} it finds', function() {
-        assert.deepEqual(util.decorateRequest({
+      utilOverrides.replaceProjectIdToken = function(reqOpts_, projectId) {
+        assert.strictEqual(reqOpts_, reqOpts);
+        assert.strictEqual(projectId, config.projectId);
+        return decoratedReqOpts;
+      };
+
+      assert.strictEqual(
+        util.decorateRequest(reqOpts, config),
+        decoratedReqOpts
+      );
+    });
+  });
+
+  describe('projectId placeholder', function() {
+    var PROJECT_ID = 'project-id';
+
+    it('should replace any {{projectId}} it finds', function() {
+      assert.deepEqual(util.replaceProjectIdToken({
+        here: 'A {{projectId}} Z',
+        nested: {
           here: 'A {{projectId}} Z',
           nested: {
+            here: 'A {{projectId}} Z'
+          }
+        },
+        array: [
+          {
             here: 'A {{projectId}} Z',
             nested: {
               here: 'A {{projectId}} Z'
-            }
+            },
+            nestedArray: [
+              {
+                here: 'A {{projectId}} Z',
+                nested: {
+                  here: 'A {{projectId}} Z'
+                }
+              }
+            ]
           }
-        }, { projectId: PROJECT_ID }),
-        {
+        ]
+      }, PROJECT_ID),
+      {
+        here: 'A ' + PROJECT_ID + ' Z',
+        nested: {
           here: 'A ' + PROJECT_ID + ' Z',
           nested: {
+            here: 'A ' + PROJECT_ID + ' Z'
+          }
+        },
+        array: [
+          {
             here: 'A ' + PROJECT_ID + ' Z',
             nested: {
               here: 'A ' + PROJECT_ID + ' Z'
-            }
+            },
+            nestedArray: [
+              {
+                here: 'A ' + PROJECT_ID + ' Z',
+                nested: {
+                  here: 'A ' + PROJECT_ID + ' Z'
+                }
+              }
+            ]
           }
-        });
+        ]
       });
+    });
 
-      it('should replace more than one {{projectId}}', function() {
-        assert.deepEqual(util.decorateRequest({
-          here: 'A {{projectId}} M {{projectId}} Z',
-        }, { projectId: PROJECT_ID }),
-        {
-          here: 'A ' + PROJECT_ID + ' M ' + PROJECT_ID + ' Z'
-        });
+    it('should replace more than one {{projectId}}', function() {
+      assert.deepEqual(util.replaceProjectIdToken({
+        here: 'A {{projectId}} M {{projectId}} Z',
+      }, PROJECT_ID),
+      {
+        here: 'A ' + PROJECT_ID + ' M ' + PROJECT_ID + ' Z'
       });
+    });
 
-      it('should throw if it needs a projectId and cannot find it', function() {
-        assert.throws(function() {
-          util.decorateRequest({
-            here: '{{projectId}}'
-          });
-        }, new RegExp(util.missingProjectIdError));
-      });
+    it('should throw if it needs a projectId and cannot find it', function() {
+      assert.throws(function() {
+        util.replaceProjectIdToken({
+          here: '{{projectId}}'
+        });
+      }, new RegExp(util.missingProjectIdError));
     });
   });
 

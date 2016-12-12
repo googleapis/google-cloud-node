@@ -493,23 +493,45 @@ function decorateRequest(reqOpts, config) {
     delete reqOpts.json.autoPaginateVal;
   }
 
-  for (var opt in reqOpts) {
-    if (is.string(reqOpts[opt])) {
-      if (reqOpts[opt].indexOf('{{projectId}}') > -1) {
-        if (!config.projectId) {
-          throw util.missingProjectIdError;
-        }
-        reqOpts[opt] = reqOpts[opt].replace(/{{projectId}}/g, config.projectId);
-      }
-    } else if (is.object(reqOpts[opt])) {
-      decorateRequest(reqOpts[opt], config);
-    }
-  }
-
-  return reqOpts;
+  return util.replaceProjectIdToken(reqOpts, config.projectId);
 }
 
 util.decorateRequest = decorateRequest;
+
+/**
+ * Populate the `{{projectId}}` placeholder.
+ *
+ * @throws {Error} If a projectId is required, but one is not provided.
+ *
+ * @param {*} - Any input value that may contain a placeholder. Arrays and
+ *     objects will be looped.
+ * @param {string} projectId - A projectId. If not provided
+ * @return {*} - The original argument with all placeholders populated.
+ */
+function replaceProjectIdToken(value, projectId) {
+  if (is.array(value)) {
+    value = value.map(function(val) {
+      return replaceProjectIdToken(val, projectId);
+    });
+  }
+
+  if (is.object(value)) {
+    for (var opt in value) {
+      value[opt] = replaceProjectIdToken(value[opt], projectId);
+    }
+  }
+
+  if (is.string(value) && value.indexOf('{{projectId}}') > -1) {
+    if (!projectId) {
+      throw util.missingProjectIdError;
+    }
+    value = value.replace(/{{projectId}}/g, projectId);
+  }
+
+  return value;
+}
+
+util.replaceProjectIdToken = replaceProjectIdToken;
 
 /**
  * Extend a global configuration object with user options provided at the time
