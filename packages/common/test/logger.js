@@ -40,14 +40,14 @@ describe('logger base-functionality', function() {
   });
 
   it('should return a logger through the create function', function() {
-    var l = logger.create(logger.DEBUG, __filename);
+    var l = logger.create('debug', __filename);
     assert.ok(l);
     assert.ok(l.error);
     assert.ok(typeof l.error === 'function');
   });
 
   it('should generate log messages successfully', function() {
-    var l = logger.create(logger.SILLY, 'foobar');
+    var l = logger.create('silly', 'foobar');
     l.error('a');
     assert.ok(/ERROR.*: a/.test(buffer.pop()));
     l.warn('b', 'c');
@@ -63,7 +63,7 @@ describe('logger base-functionality', function() {
   it('should not log when the default level is lower', function() {
     buffer = [];
 
-    var l = logger.create(logger.WARN, 'foobar');
+    var l = logger.create('warn', 'foobar');
 
     l.error('a');
     assert.ok(buffer.length === 1);

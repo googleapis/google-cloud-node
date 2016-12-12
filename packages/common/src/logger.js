@@ -16,47 +16,29 @@
 
  'use strict';
 
-var slice = Array.prototype.slice;
+var splice = Array.prototype.splice;
+var join = Array.prototype.join;
+var makeLogger = require('log-driver');
 
 module.exports = {
-  /** @const {number} */ ERROR: 1,
-  /** @const {number} */ WARN: 2,
-  /** @const {number} */ INFO: 3,
-  /** @const {number} */ DEBUG: 4,
-  /** @const {number} */ SILLY: 5,
-
-  /** @const {Array.<?string>} */
-  LEVEL_NAMES: [null, 'ERROR', 'WARN ', 'INFO ', 'DEBUG', 'SILLY'],
-
   /**
    * Factory method that returns a new logger.
    *
-   * @param {number=} level Log level for reporting to the console.
+   * @param {string=} level Log level for reporting to the console.
    * @param {?string=} prefix to use in log messages.
    */
   create: function(level, prefix) {
-    var level_ = level || 0;
     var prefix_ = prefix || '';
 
-    /**
-     * Logs any passed in arguments.
-     * @private
-     */
-    var log = function(level, args) {
-      if (level_ < level) {
-        return;
+    return makeLogger({
+      levels: ['error', 'warn', 'info', 'debug', 'silly'],
+      level: level || 'error',
+      format: function() {
+        arguments[0] = arguments[0].toUpperCase();
+        splice.call(arguments, 1, 0, ':', prefix_, ':');
+        return join.call(arguments, ' ');
       }
-      args.unshift(module.exports.LEVEL_NAMES[level] + ':' + prefix_ + ':');
-      console.log.apply(console, args);
-    };
-
-    return {
-      error: function() { log(module.exports.ERROR, slice.call(arguments)); },
-      warn: function()  { log(module.exports.WARN, slice.call(arguments));  },
-      info: function()  { log(module.exports.INFO, slice.call(arguments));  },
-      debug: function() { log(module.exports.DEBUG, slice.call(arguments)); },
-      silly: function() { log(module.exports.SILLY, slice.call(arguments)); },
-    };
+    });
   } /* create */
 
 }; /* module.exports */
