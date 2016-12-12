@@ -1286,7 +1286,23 @@ describe('common/util', function() {
             nested: {
               here: 'A {{projectId}} Z'
             }
-          }
+          },
+          array: [
+            {
+              here: 'A {{projectId}} Z',
+              nested: {
+                here: 'A {{projectId}} Z'
+              },
+              nestedArray: [
+                {
+                  here: 'A {{projectId}} Z',
+                  nested: {
+                    here: 'A {{projectId}} Z'
+                  }
+                }
+              ]
+            }
+          ]
         }, { projectId: PROJECT_ID }),
         {
           here: 'A ' + PROJECT_ID + ' Z',
@@ -1295,7 +1311,23 @@ describe('common/util', function() {
             nested: {
               here: 'A ' + PROJECT_ID + ' Z'
             }
-          }
+          },
+          array: [
+            {
+              here: 'A ' + PROJECT_ID + ' Z',
+              nested: {
+                here: 'A ' + PROJECT_ID + ' Z'
+              },
+              nestedArray: [
+                {
+                  here: 'A ' + PROJECT_ID + ' Z',
+                  nested: {
+                    here: 'A ' + PROJECT_ID + ' Z'
+                  }
+                }
+              ]
+            }
+          ]
         });
       });
 

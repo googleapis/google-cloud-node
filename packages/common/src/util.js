@@ -501,6 +501,10 @@ function decorateRequest(reqOpts, config) {
         }
         reqOpts[opt] = reqOpts[opt].replace(/{{projectId}}/g, config.projectId);
       }
+    } else if (is.array(reqOpts[opt])) {
+      reqOpts[opt] = reqOpts[opt].map(function(value) {
+        return decorateRequest(value, config);
+      });
     } else if (is.object(reqOpts[opt])) {
       decorateRequest(reqOpts[opt], config);
     }

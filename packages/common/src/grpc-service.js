@@ -757,7 +757,9 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
       grpc.credentials.createFromGoogleCredential(authClient)
     );
 
-    self.projectId = self.projectId || authClient.projectId;
+    if (!self.projectId || self.projectId === '{{projectId}}') {
+      self.projectId = authClient.projectId;
+    }
 
     callback(null, credentials);
   });
