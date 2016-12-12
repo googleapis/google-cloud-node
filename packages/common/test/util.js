@@ -79,6 +79,10 @@ describe('common/util', function() {
         return (utilOverrides[utilMethod] || utilCached[utilMethod])
           .apply(this, arguments);
       };
+
+      util[utilMethod].unoverride_ = function() {
+        util[utilMethod] = utilCached[utilMethod];
+      };
     });
 
     duplexify = require('duplexify');
@@ -90,6 +94,15 @@ describe('common/util', function() {
     retryRequestOverride = null;
     streamEventsOverride = null;
     utilOverrides = {};
+  });
+
+  after(function() {
+    // Set each function in util to its original value
+    Object.keys(util).forEach(function (utilMethod) {
+      if (util[utilMethod].unoverride_) {
+        util[utilMethod].unoverride_();
+      }
+    })
   });
 
   it('should have set correct defaults on Request', function() {

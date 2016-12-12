@@ -20,11 +20,13 @@ var path = require('path');
 var proxyquire = require('proxyquire');
 
 describe('common/metadata', function() {
+  var util;
   var metadata;
+  var origMakeRequest;
 
   before(function() {
-    var util = require('../src/util');
-    var origMakeRequest = util.makeRequest;
+    util = require('../src/util');
+    origMakeRequest = util.makeRequest;
     // Monkeypatch makeRequest to not auto-retry on failure.
     util.makeRequest = function(reqOpts, config, callback) {
       if (typeof config === 'function') {
@@ -35,14 +37,16 @@ describe('common/metadata', function() {
       origMakeRequest(reqOpts, config, callback);
     };
 
-    metadata = require('../src/metadata', {
+    metadata = proxyquire('../src/metadata', {
       './util.js': util
     });
+
     nock.disableNetConnect();
   });
 
   after(function() {
     nock.enableNetConnect();
+    util.makeRequest = origMakeRequest;
   });
 
   describe('getProjectId', function() {
