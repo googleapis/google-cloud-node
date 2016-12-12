@@ -129,10 +129,6 @@ describe('Resource', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should localize the projectId', function() {
-      assert.equal(resource.defaultProjectId_, PROJECT_ID);
-    });
-
     it('should inherit from Service', function() {
       assert(resource instanceof FakeService);
 

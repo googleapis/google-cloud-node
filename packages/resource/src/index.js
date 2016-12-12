@@ -65,8 +65,6 @@ function Resource(options) {
   };
 
   common.Service.call(this, config, options);
-
-  this.defaultProjectId_ = options.projectId;
 }
 
 util.inherits(Resource, common.Service);
@@ -305,7 +303,7 @@ Resource.prototype.operation = function(name) {
  * var project = resource.project('grape-spaceship-123');
  */
 Resource.prototype.project = function(id) {
-  id = id || this.defaultProjectId_;
+  id = id || this.projectId;
 
   if (!id) {
     throw new Error('A project ID is required.');
