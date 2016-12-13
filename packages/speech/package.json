@@ -57,7 +57,7 @@
     "@google-cloud/common": "^0.9.0",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
-    "google-gax": "^0.10.2",
+    "google-gax": "^0.10.4",
     "google-proto-files": "^0.8.0",
     "is": "^3.1.0",
     "propprop": "^0.3.1",
