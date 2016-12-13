@@ -16,7 +16,6 @@
 'use strict';
 var assert = require('assert');
 var nock = require('nock');
-var path = require('path');
 var proxyquire = require('proxyquire');
 
 describe('common/metadata', function() {
@@ -62,7 +61,7 @@ describe('common/metadata', function() {
           done();
         });
       });
-    
+
     it('should be able handle 500\'s from the service',
       function(done) {
         var scope = nock('http://metadata.google.internal')
@@ -83,11 +82,11 @@ describe('common/metadata', function() {
     it('should accept an optional headers parameter', function(done) {
       var scope =
         nock('http://metadata.google.internal', {
-            reqheaders: {'Flux': 'Capacitor'}
+            reqheaders: { Flux: 'Capacitor' }
           })
           .get('/computeMetadata/v1/project/project-id')
           .reply(200, 'a-stub-project-id');
-      metadata.getProjectId({'Flux': 'Capacitor'}, function(err, project) {
+      metadata.getProjectId({ Flux: 'Capacitor' }, function(err, project) {
         assert.ok(!err);
         assert.strictEqual(project, 'a-stub-project-id');
         scope.done();
@@ -95,14 +94,14 @@ describe('common/metadata', function() {
       });
     });
 
-    it('Should callback with ENOTFOUND', function (done) {
+    it('should callback with ENOTFOUND', function(done) {
       var oldEnv = process.env.GCLOUD_PROJECT;
       process.env.GCLOUD_PROJECT = './this-should-not-exist.json';
       var scope = nock('http://metadata.google.internal')
         .get('/computeMetadata/v1/project/project-id')
         .once()
-        .replyWithError({'message': 'Not Found', code: 'ENOTFOUND'});
-      metadata.getProjectId(function (e, result) {
+        .replyWithError({ message: 'Not Found', code: 'ENOTFOUND' });
+      metadata.getProjectId(function(e, result) {
         assert.ok(e instanceof Error, 'e should be an instance of Error');
         assert.deepEqual(result, null);
         process.env.GCLOUD_PROJECT = oldEnv;
@@ -114,14 +113,14 @@ describe('common/metadata', function() {
 
   describe('getInstanceId - valid cases', function() {
     var STUB_ID = 'a-stub-instance-id';
-    it(
-      'Should be able to get the instance id without additional headers supplied',
-      function (done) {
+    it('should be able to get the instance id without additional headers ' +
+       'supplied',
+      function(done) {
         var mock = nock('http://metadata.google.internal/computeMetadata/v1')
           .get('/instance/id')
           .once()
           .reply(200, STUB_ID);
-        metadata.getInstanceId(function (err, id) {
+        metadata.getInstanceId(function(err, id) {
           assert.deepEqual(err, null, 'Error should be null');
           assert.deepEqual(STUB_ID, id, 'The id should be the stub id');
           mock.done();
@@ -129,15 +128,14 @@ describe('common/metadata', function() {
         });
       }
     );
-    it(
-      'Should be able to get the instance id with additional headers supplied',
-      function (done) {
+    it('should be able to get the instance id with additional headers supplied',
+      function(done) {
         var mock = nock('http://metadata.google.internal/computeMetadata/v1',
           {reqHeaders: {'x-custom-header': 'true'}})
           .get('/instance/id')
           .once()
           .reply(200, STUB_ID);
-        metadata.getInstanceId({'x-custom-header': 'true'}, function (err, id) {
+        metadata.getInstanceId({'x-custom-header': 'true'}, function(err, id) {
           assert.deepEqual(err, null, 'Error should be null');
           assert.deepEqual(STUB_ID, id, 'The id should be the stub id');
           mock.done();
@@ -149,14 +147,13 @@ describe('common/metadata', function() {
 
   describe('getHostname - valid cases', function() {
     var STUB_HOSTNAME = 'a-stub-hostname';
-    it(
-      'Should be able to get the hostname without additional headers supplied',
-      function (done) {
+    it('should be able to get the hostname without additional headers supplied',
+      function(done) {
         var mock = nock('http://metadata.google.internal/computeMetadata/v1')
           .get('/instance/hostname')
           .once()
           .reply(200, STUB_HOSTNAME);
-        metadata.getHostname(function (err, id) {
+        metadata.getHostname(function(err, id) {
           assert.deepEqual(err, null, 'Error should be null');
           assert.deepEqual(STUB_HOSTNAME, id,
             'The hostname should be the stub hostname');
@@ -165,15 +162,14 @@ describe('common/metadata', function() {
         });
       }
     );
-    it(
-      'Should be able to get the hostname with additional headers supplied',
-      function (done) {
+    it('should be able to get the hostname with additional headers supplied',
+      function(done) {
         var mock = nock('http://metadata.google.internal/computeMetadata/v1',
           {reqHeaders: {'x-custom-header': 'true'}})
           .get('/instance/hostname')
           .once()
           .reply(200, STUB_HOSTNAME);
-        metadata.getHostname({'x-custom-header': 'true'}, function (err, id) {
+        metadata.getHostname({'x-custom-header': 'true'}, function(err, id) {
           assert.deepEqual(err, null, 'Error should be null');
           assert.deepEqual(STUB_HOSTNAME, id,
             'The hostname should be the stub hostname');

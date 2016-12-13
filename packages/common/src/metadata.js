@@ -20,7 +20,6 @@
 
 'use strict';
 
-var request = require('request');
 var util = require('./util.js');
 
 var METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1';
@@ -42,7 +41,7 @@ metadata.getMetadataValue = getMetadataValue;
 /**
  * Attempts to retreive the project id for the current active project from the
  * metadata service (See https://cloud.google.com/compute/docs/metadata).
- * 
+ *
  * @param {Object} [headers] - An optional set of headers to include in the http
  *  request. This function may mutate the given headers object.
  * @param {function(?, number):?} callback an (err, result) style callback
@@ -53,15 +52,16 @@ function getProjectId(headers, callback) {
     headers = {};
   }
   getMetadataValue('/project/project-id', headers,
-    function (err, projectId, response) {
+    function(err, projectId, response) {
       if (!err && response.statusCode === 200) {
         return callback(null, projectId);
-      } else if (err && err.code === 'ENOTFOUND') {
+      }
+      if (err && err.code === 'ENOTFOUND') {
         return callback(new Error('Could not auto-discover project-id.' +
           'Please export GCLOUD_PROJECT with your project name'), null);
       }
       return callback(err || new Error('Error discovering project id'), null);
-  });
+    });
 }
 
 metadata.getProjectId = getProjectId;

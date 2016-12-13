@@ -49,7 +49,7 @@ function override(name, object) {
       return cachedObject[methodName].apply(this, args);
     };
 
-    object[methodName].unoverride_ = function () {
+    object[methodName].unoverride_ = function() {
       object[methodName] = cachedObject[methodName];
     };
   });
@@ -57,14 +57,14 @@ function override(name, object) {
 
 // Reverses the override function.
 function unoverride(object) {
-  Object.keys(object).forEach(function (methodName) {
+  Object.keys(object).forEach(function(methodName) {
     if (object[methodName].unoverride_) {
       object[methodName].unoverride_();
     }
   });
 }
 
-// Resets all overridden functions. 
+// Resets all overridden functions.
 function resetOverrides() {
   overrides = Object.keys(overrides).reduce(function(acc, name) {
     acc[name] = {};

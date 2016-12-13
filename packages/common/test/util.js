@@ -98,11 +98,11 @@ describe('common/util', function() {
 
   after(function() {
     // Set each function in util to its original value
-    Object.keys(util).forEach(function (utilMethod) {
+    Object.keys(util).forEach(function(utilMethod) {
       if (util[utilMethod].unoverride_) {
         util[utilMethod].unoverride_();
       }
-    })
+    });
   });
 
   it('should have set correct defaults on Request', function() {
