@@ -1916,6 +1916,8 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
 
       formattedFaceAnnotation[shortenedProp] =
         Vision.gteLikelihood_(LIKELY, faceAnnotation[prop]);
+
+      formattedFaceAnnotation[prop] = faceAnnotation[prop];
     }
   }
 
