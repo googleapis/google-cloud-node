@@ -1,5 +1,5 @@
-/**
- * Copyright 2015 Google Inc. All Rights Reserved.
+/*!
+ * Copyright 2016 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,68 +15,67 @@
  */
 
 'use strict';
+
 var assert = require('assert');
+var proxyquire = require('proxyquire');
+
+function fakeLogDriver(config) {
+  return config;
+}
 
 describe('logger base-functionality', function() {
-  var buffer;
   var logger;
-  var originalConsoleWrite;
 
   before(function() {
-    buffer = [];
-    logger = require('../src/logger.js');
-    originalConsoleWrite = console._stdout.write;
-    /* Stub console.log for testing */
-    console._stdout.write = function() {
-      buffer.push(arguments[0]);
-      if (arguments[0].indexOf('foobar') === -1) {
-        originalConsoleWrite.apply(this, arguments);
-      }
-    };
+    logger = proxyquire('../src/logger.js', {
+      'log-driver': fakeLogDriver
+    });
   });
 
-  after(function() {
-    console._stdout.write = originalConsoleWrite;
+  it('should create a logger with the correct levels', function() {
+    assert.deepEqual(logger().levels, [
+      'error',
+      'warn',
+      'info',
+      'debug',
+      'silly'
+    ]);
   });
 
-  it('should return a logger through the create function', function() {
-    var l = logger.create('debug', __filename);
-    assert.ok(l);
-    assert.ok(l.error);
-    assert.ok(typeof l.error === 'function');
+  it('should use a specified level', function() {
+    var level = 'level';
+    assert.strictEqual(logger({ level: level }).level, level);
   });
 
-  it('should generate log messages successfully', function() {
-    var l = logger.create('silly', 'foobar');
-    l.error('a');
-    assert.ok(/ERROR.*: a/.test(buffer.pop()));
-    l.warn('b', 'c');
-    assert.ok(/WARN.*: b c/.test(buffer.pop()));
-    l.info('d', 'e', 'f');
-    assert.ok(/INFO.*: d e f/.test(buffer.pop()));
-    l.debug('g');
-    assert.ok(/DEBUG.*: g/.test(buffer.pop()));
-    l.silly('h');
-    assert.ok(/SILLY.*: h/.test(buffer.pop()));
+  it('should treat a single arguments as the level', function() {
+    var level = 'level';
+    assert.strictEqual(logger(level).level, level);
   });
 
-  it('should not log when the default level is lower', function() {
-    buffer = [];
+  it('should default level to error', function() {
+    assert.strictEqual(logger().level, 'error');
+  });
 
-    var l = logger.create('warn', 'foobar');
+  describe('formatting', function() {
+    var LEVEL = 'level-name';
+    var TAG = 'tag-name';
+    var MESSAGES = [
+      'message-1',
+      'message-2'
+    ];
 
-    l.error('a');
-    assert.ok(buffer.length === 1);
-    buffer.pop();
+    it('should correctly format without a tag', function() {
+      var formatted = logger().format(LEVEL, MESSAGES[0], MESSAGES[1]);
 
-    l.warn('b');
-    assert.ok(buffer.length === 1);
-    buffer.pop();
+      assert.strictEqual(formatted, 'LEVEL-NAME message-1 message-2');
+    });
 
-    l.info('c');
-    assert.ok(buffer.length === 0);
+    it('should correctly format with a tag', function() {
+      var formatted = logger({
+        tag: TAG
+      }).format(LEVEL, MESSAGES[0], MESSAGES[1]);
 
-    l.debug('d');
-    assert.ok(buffer.length === 0);
+      assert.strictEqual(formatted, 'LEVEL-NAME:tag-name: message-1 message-2');
+    });
   });
 });

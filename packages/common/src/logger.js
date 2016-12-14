@@ -1,5 +1,5 @@
-/**
- * Copyright 2014, 2015 Google Inc. All Rights Reserved.
+/*!
+ * Copyright 2016 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,53 @@
 
  'use strict';
 
-var splice = Array.prototype.splice;
-var join = Array.prototype.join;
-var makeLogger = require('log-driver');
+/*!
+ * @module common/logger
+ */
 
-module.exports = {
-  /**
-   * Factory method that returns a new logger.
-   *
-   * @param {string=} level Log level for reporting to the console.
-   * @param {?string=} prefix to use in log messages.
-   */
-  create: function(level, prefix) {
-    var prefix_ = prefix || '';
+var format = require('string-format-obj');
+var is = require('is');
+var logDriver = require('log-driver');
 
-    return makeLogger({
-      levels: ['error', 'warn', 'info', 'debug', 'silly'],
-      level: level || 'error',
-      format: function() {
-        arguments[0] = arguments[0].toUpperCase();
-        splice.call(arguments, 1, 0, ':', prefix_, ':');
-        return join.call(arguments, ' ');
-      }
-    });
-  } /* create */
+/**
+ * Create a logger to print output to the console.
+ *
+ * @param {string=|object=} options - Configuration object. If a string, it is
+ *     treated as `options.level`.
+ * @param {string=} options.level - The minimum log level that will print to the
+ *     console. (Default: `error`)
+ * @param {string=} options.tag - A tag to use in log messages.
+ */
+function logger(options) {
+  if (is.string(options)) {
+    options = {
+      level: options
+    };
+  }
 
-}; /* module.exports */
+  options = options || {};
 
+  return logDriver({
+    levels: [
+      'error',
+      'warn',
+      'info',
+      'debug',
+      'silly'
+    ],
 
+    level: options.level || 'error',
+
+    format: function() {
+      var args = [].slice.call(arguments);
+
+      return format('{level}{tag} {message}', {
+        level: args.shift().toUpperCase(),
+        tag: options.tag ? ':' + options.tag + ':' : '',
+        message: args.join(' ')
+      });
+    }
+  });
+}
+
+module.exports = logger;

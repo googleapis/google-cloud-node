@@ -51,11 +51,11 @@ describe('common', function() {
       GrpcOperation: fakeGrpcOperation,
       GrpcService: fakeGrpcService,
       GrpcServiceObject: fakeGrpcServiceObject,
-      Logger: fakeLogger,
+      logger: fakeLogger,
       Operation: fakeOperation,
+      paginator: fakePaginator,
       Service: fakeService,
       ServiceObject: fakeServiceObject,
-      paginator: fakePaginator,
       util: fakeUtil
     });
   });
