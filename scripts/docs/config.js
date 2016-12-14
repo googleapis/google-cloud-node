@@ -78,7 +78,7 @@ module.exports = {
       instanceName: 'gcs'
     },
     translate: {
-      title: 'Google Translate API'
+      title: 'Google Cloud Translation API'
     },
     vision: {
       title: 'Google Cloud Vision'
