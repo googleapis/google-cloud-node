@@ -50,6 +50,7 @@
     "google-proto-files": "^0.8.0",
     "grpc": "^1.0.0",
     "is": "^3.0.1",
+    "log-driver": "^1.2.5",
     "methmeth": "^1.0.0",
     "modelo": "^4.2.0",
     "request": "^2.70.0",
