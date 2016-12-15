@@ -33,15 +33,15 @@ __Usage:__ `node translate.js --help`
 
 ```
 Commands:
-  detect <input..>              Detects the language of one or more strings.
-  list [target]                 Lists available translation languages. To return
-                                language names in a language other thanEnglish,
-                                specify a target language.
-  translate <toLang> <input..>  Translates one or more strings into the target
-                                language.
+  detect <input..>                                 Detects the language of one or more strings.
+  list [target]                                    Lists available translation languages. To return language names in a
+                                                   language other than English, specify a target language.
+  translate <toLang> <input..>                     Translates one or more strings into the target language.
+  translate-with-model <toLang> <model> <input..>  Translates one or more strings into the target language using the
+                                                   specified model.
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
   node translate.js detect "Hello world!"                       Detects the language of a string.
@@ -52,6 +52,8 @@ Examples:
                                                                 Spanish.
   node translate.js translate ru "Good morning!"                Translates a string into Russian.
   node translate.js translate ru "Good morning!" "Good night!"  Translates multiple strings into Russian.
+  node translate.js translate-with-model ru nmt "Good           Translates multiple strings into Russian using the
+  morning!" "Good night!"                                       Premium model.
 
 For more information, see https://cloud.google.com/translate/docs
 ```
