@@ -23,7 +23,6 @@ var fakeGrpcOperation = {};
 var fakeGrpcService = {};
 var fakeGrpcServiceObject = {};
 var fakeLogger = {};
-var fakeMetadata = {};
 var fakeOperation = {};
 var fakePaginator = {};
 var fakeService = {};
@@ -39,7 +38,6 @@ describe('common', function() {
       './grpc-service.js': fakeGrpcService,
       './grpc-service-object.js': fakeGrpcServiceObject,
       './logger.js': fakeLogger,
-      './metadata.js': fakeMetadata,
       './operation.js': fakeOperation,
       './paginator.js': fakePaginator,
       './service.js': fakeService,

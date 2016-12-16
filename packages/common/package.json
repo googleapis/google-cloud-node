@@ -62,7 +62,6 @@
   },
   "devDependencies": {
     "mocha": "^3.0.1",
-    "nock": "^9.0.2",
     "proxyquire": "^1.7.10",
     "sinon": "^1.17.4",
     "uuid": "^3.0.1"

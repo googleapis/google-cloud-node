@@ -39,12 +39,6 @@ exports.GrpcServiceObject = require('./grpc-service-object.js');
 exports.logger = require('./logger.js');
 
 /**
- * @type {module:common/metadata}
- * @private
- */
-exports.Metadata = require('./metadata.js');
-
-/**
  * @type {module:common/operation}
  * @private
  */
