@@ -12,9 +12,9 @@ $ npm install --save @google-cloud/logging-winston
 ```
 ``` js
 var winston = require('winston');
-var stackdriverTransport = require('@google-cloud/logging-winston');
+var transport = require('@google-cloud/logging-winston');
 
-winston.add(stackdriverTransport, {
+winston.add(transport, {
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json',
   level: 'warning', // log at 'warning' and above
@@ -37,9 +37,9 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 
 ``` js
 var winston = require('winston');
-var stackdriverTransport = require('@google-cloud/logging-winston');
+var transport = require('@google-cloud/logging-winston');
 
-winston.add(stackdriverTransport);
+winston.add(transport);
 
 // ...you're good to go!
 ```
@@ -58,9 +58,9 @@ If you are not running this client on Google Cloud Platform, you need a Google D
 
 ``` js
 var winston = require('winston');
-var stackdriverTransport = require('@google-cloud/logging-winston');
+var transport = require('@google-cloud/logging-winston');
 
-winston.add(stackdriverTransport, {
+winston.add(transport, {
   projectId: 'grape-spaceship-123',
 
   // The path to your key file:

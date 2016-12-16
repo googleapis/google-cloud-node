@@ -84,9 +84,9 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *
  * @example
  * var winston = require('winston');
- * var stackdriverTransport = require('@google-cloud/logging-winston');
+ * var transport = require('@google-cloud/logging-winston');
  *
- * winston.add(stackdriverTransport, {
+ * winston.add(transport, {
  *   projectId: 'grape-spaceship-123',
  *   keyFilename: '/path/to/keyfile.json',
  *   level: 'warning', // log at 'warning' and above
@@ -95,7 +95,7 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *   }
  * });
  *
- * winston.emerg('antimatter containment field collapse in 10 seconds');
+ * winston.emerg('antimatter containment field collapse imminent');
  */
 function LoggingWinston(options) {
   if (!(this instanceof LoggingWinston)) {
