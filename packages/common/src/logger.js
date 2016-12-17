@@ -25,6 +25,18 @@ var is = require('is');
 var logDriver = require('log-driver');
 
 /**
+ * A list of log levels.
+ * @type {Array}
+ */
+var logLevels = [
+  'error',
+  'warn',
+  'info',
+  'debug',
+  'silly'
+];
+
+/**
  * Create a logger to print output to the console.
  *
  * @param {string=|object=} options - Configuration object. If a string, it is
@@ -43,13 +55,7 @@ function logger(options) {
   options = options || {};
 
   return logDriver({
-    levels: [
-      'error',
-      'warn',
-      'info',
-      'debug',
-      'silly'
-    ],
+    levels: logLevels,
 
     level: options.level || 'error',
 
@@ -66,3 +72,4 @@ function logger(options) {
 }
 
 module.exports = logger;
+module.exports.logLevels = logLevels;
