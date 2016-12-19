@@ -19,6 +19,14 @@
 var assert = require('assert');
 var proxyquire = require('proxyquire');
 
+var LEVELS = [
+  'error',
+  'warn',
+  'info',
+  'debug',
+  'silly'
+];
+
 function fakeLogDriver(config) {
   return config;
 }
@@ -32,14 +40,12 @@ describe('logger base-functionality', function() {
     });
   });
 
+  it('should expose the default list of levels', function() {
+    assert.deepEqual(logger.LEVELS, LEVELS);
+  });
+
   it('should create a logger with the correct levels', function() {
-    assert.deepEqual(logger().levels, [
-      'error',
-      'warn',
-      'info',
-      'debug',
-      'silly'
-    ]);
+    assert.deepEqual(logger().levels, LEVELS);
   });
 
   it('should use a specified level', function() {
