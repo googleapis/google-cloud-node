@@ -26,9 +26,9 @@ var logDriver = require('log-driver');
 
 /**
  * A list of log levels.
- * @type {Array}
+ * @type {string[]}
  */
-var logLevels = [
+var LEVELS = [
   'error',
   'warn',
   'info',
@@ -55,7 +55,7 @@ function logger(options) {
   options = options || {};
 
   return logDriver({
-    levels: logLevels,
+    levels: LEVELS,
 
     level: options.level || 'error',
 
@@ -72,4 +72,4 @@ function logger(options) {
 }
 
 module.exports = logger;
-module.exports.logLevels = logLevels;
+module.exports.LEVELS = LEVELS;
