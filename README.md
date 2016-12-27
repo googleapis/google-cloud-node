@@ -24,11 +24,11 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Google Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
 * [Google Cloud Speech](#google-cloud-speech-alpha) (Alpha)
+* [Google Cloud Translation API](#google-cloud-translation-api-alpha) (Alpha)
 * [Google Cloud Vision](#google-cloud-vision-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
-* [Google Translate API](#google-translate-api-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -84,9 +84,9 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Google Cloud Speech API
   * Google Cloud Storage
   * Google Cloud Storage JSON API
+  * Google Cloud Translation API
   * Google Cloud Vision API
   * Google Compute Engine API
-  * Google Translate API
   * Prediction API
   * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
@@ -795,6 +795,75 @@ fs.createReadStream('./audio.raw')
 ```
 
 
+## Google Cloud Translation API (Alpha)
+
+- [API Documentation][gcloud-translate-docs]
+- [Official Documentation][cloud-translate-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var translate = gcloud.translate;
+```
+
+#### Using the Google Translate API module
+
+```
+$ npm install --save @google-cloud/translate
+```
+
+```js
+var translate = require('@google-cloud/translate');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var translateClient = translate({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Translate a string of text.
+translateClient.translate('Hello', 'es', function(err, translation) {
+  if (!err) {
+    // translation = 'Hola'
+  }
+});
+
+// Detect a language from a string of text.
+translateClient.detect('Hello', function(err, results) {
+  if (!err) {
+    // results = {
+    //   language: 'en',
+    //   confidence: 1,
+    //   input: 'Hello'
+    // }
+  }
+});
+
+// Get a list of supported languages.
+translateClient.getLanguages(function(err, languages) {
+  if (!err) {
+    // languages = [
+    //   'af',
+    //   'ar',
+    //   'az',
+    //   ...
+    // ]
+  }
+});
+```
+
+
 ## Google Cloud Vision (Alpha)
 
 - [API Documentation][gcloud-vision-docs]
@@ -1088,75 +1157,6 @@ var monitoringClient = monitoring.v3({
 ```
 
 
-## Google Translate API (Alpha)
-
-- [API Documentation][gcloud-translate-docs]
-- [Official Documentation][cloud-translate-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var translate = gcloud.translate;
-```
-
-#### Using the Google Translate API module
-
-```
-$ npm install --save @google-cloud/translate
-```
-
-```js
-var translate = require('@google-cloud/translate');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var translateClient = translate({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Translate a string of text.
-translateClient.translate('Hello', 'es', function(err, translation) {
-  if (!err) {
-    // translation = 'Hola'
-  }
-});
-
-// Detect a language from a string of text.
-translateClient.detect('Hello', function(err, results) {
-  if (!err) {
-    // results = {
-    //   language: 'en',
-    //   confidence: 1,
-    //   input: 'Hello'
-    // }
-  }
-});
-
-// Get a list of supported languages.
-translateClient.getLanguages(function(err, languages) {
-  if (!err) {
-    // languages = [
-    //   'af',
-    //   'ar',
-    //   'az',
-    //   ...
-    // ]
-  }
-});
-```
-
-
 ## Versioning
 
 This library follows [Semantic Versioning][semver].
@@ -1166,7 +1166,6 @@ Please note it is currently under active development. Any release versioned 0.x.
 **Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
 
 **Alpha**: Libraries defined at an Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
-
 
 
 ## Contributing

@@ -301,11 +301,11 @@ var apis = {
   storage: require('@google-cloud/storage'),
 
   /**
-   * With [Google Translate](https://cloud.google.com/translate), you can
-   * dynamically translate text between thousands of language pairs.
+   * With [Google Cloud Translation](https://cloud.google.com/translate), you
+   * can dynamically translate text between thousands of language pairs.
    *
-   * The Google Translate API lets websites and programs integrate with Google
-   * Translate programmatically.
+   * This API lets websites and programs integrate with Google Cloud Translation
+   * API programmatically.
    *
    * @type {module:translate}
    *
