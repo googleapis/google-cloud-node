@@ -49,6 +49,11 @@ describe('logger base-functionality', function() {
     assert.deepEqual(logger().levels, LEVELS);
   });
 
+  it('should create a logger with custom levels', function() {
+    var customLevels = [ 'level-1', 'level-2', 'level-3' ];
+    assert.deepEqual(logger({ levels: customLevels }).levels, customLevels);
+  });
+
   it('should use a specified level', function() {
     var level = 'level';
     assert.strictEqual(logger({ level: level }).level, level);
