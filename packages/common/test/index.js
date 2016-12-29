@@ -52,7 +52,6 @@ describe('common', function() {
       GrpcService: fakeGrpcService,
       GrpcServiceObject: fakeGrpcServiceObject,
       logger: fakeLogger,
-      Metadata: fakeMetadata,
       Operation: fakeOperation,
       paginator: fakePaginator,
       Service: fakeService,

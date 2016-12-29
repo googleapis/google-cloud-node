@@ -24,12 +24,10 @@ var through = require('through2');
 var uuid = require('uuid');
 
 var paginator = require('../src/paginator.js');
-var util = require('../src/util.js');
+var util = extend({}, require('../src/util.js'));
 
 var overrides = {};
 
-// Makes the given object's member functions overridable by mutating a field
-// in overrides.
 function override(name, object) {
   var cachedObject = extend({}, object);
   overrides[name] = {};
@@ -48,23 +46,9 @@ function override(name, object) {
 
       return cachedObject[methodName].apply(this, args);
     };
-
-    object[methodName].unoverride_ = function() {
-      object[methodName] = cachedObject[methodName];
-    };
   });
 }
 
-// Reverses the override function.
-function unoverride(object) {
-  Object.keys(object).forEach(function(methodName) {
-    if (object[methodName].unoverride_) {
-      object[methodName].unoverride_();
-    }
-  });
-}
-
-// Resets all overridden functions.
 function resetOverrides() {
   overrides = Object.keys(overrides).reduce(function(acc, name) {
     acc[name] = {};
@@ -91,9 +75,7 @@ describe('paginator', function() {
   });
 
   after(function() {
-    // Set each function in each overridden module to its original value
-    unoverride(util);
-    unoverride(paginator);
+    resetOverrides();
   });
 
   describe('extend', function() {
