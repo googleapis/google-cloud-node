@@ -20,6 +20,7 @@ var assert = require('assert');
 var proxyquire = require('proxyquire');
 
 var LEVELS = [
+  'silent',
   'error',
   'warn',
   'info',
