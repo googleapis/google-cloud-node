@@ -25,10 +25,11 @@ var is = require('is');
 var logDriver = require('log-driver');
 
 /**
- * A list of log levels.
+ * The default list of log levels.
  * @type {string[]}
  */
 var LEVELS = [
+  'silent',
   'error',
   'warn',
   'info',
@@ -43,6 +44,8 @@ var LEVELS = [
  *     treated as `options.level`.
  * @param {string=} options.level - The minimum log level that will print to the
  *     console. (Default: `error`)
+ * @param {string[]=} options.levels - The list of levels to use. (Default:
+ *     logger.LEVELS)
  * @param {string=} options.tag - A tag to use in log messages.
  */
 function logger(options) {
@@ -55,7 +58,7 @@ function logger(options) {
   options = options || {};
 
   return logDriver({
-    levels: LEVELS,
+    levels: options.levels || LEVELS,
 
     level: options.level || 'error',
 
