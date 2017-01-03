@@ -104,6 +104,23 @@ function LoggingWinston(options) {
 
   options = options || {};
 
+  // options.levels must be a map from level names to stackdriver severities.
+  if (options.levels) {
+    for (var key in options.levels) {
+      var level = options.levels[key];
+      if (!is.number(level) || level < 0 || level > 7) {
+        throw new Error('invalid options.levels: ' + key + ':' + level);
+      }
+    }
+  }
+
+  this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
+
+  // options.level must be a valid entry from the levels_.
+  if (options.level && !this.levels_[options.level]) {
+    throw new Error('invalid options.level: ' + options.level);
+  }
+
   var logName = options.logName || 'winston_log';
 
   winston.Transport.call(this, {
@@ -111,7 +128,6 @@ function LoggingWinston(options) {
     name: logName
   });
 
-  this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
   this.log_ = logging(options).log(logName);
   this.resource_ = options.resource;
 }
