@@ -5,8 +5,7 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "cd ..; npm run t -- monitoring/test/*.test.js",
-    "system-test": "cd ..; npm run st -- monitoring/system-test/*.test.js"
+    "test": "cd ..; npm run st -- monitoring/system-test/*.test.js"
   },
   "dependencies": {
     "async":"2.1.2",
