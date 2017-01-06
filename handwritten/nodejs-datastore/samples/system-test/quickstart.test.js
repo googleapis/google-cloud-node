@@ -15,6 +15,8 @@
 
 'use strict';
 
+require(`../../system-test/_setup`);
+
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const datastore = proxyquire(`@google-cloud/datastore`, {})();
 const entity = { description: `Buy milk` };
@@ -22,37 +24,45 @@ const kind = `Task`;
 const name = `sampletask1`;
 const key = datastore.key([kind, name]);
 
-describe(`datastore:quickstart`, () => {
-  before(() => datastore.delete(key).catch(() => {}));
-  after(() => datastore.delete(key).catch(() => {}));
+test.before(async () => {
+  try {
+    await datastore.delete(key);
+  } catch (err) {} // ignore error
+});
+test.after(async () => {
+  try {
+    await datastore.delete(key);
+  } catch (err) {} // ignore error
+});
 
-  it(`should get a task from Datastore`, (done) => {
-    const datastoreMock = {
-      key: (...args) => datastore.key(...args),
+test.beforeEach(stubConsole);
+test.afterEach(restoreConsole);
 
-      save: (_task) => {
-        assert.equal(_task.key.kind, kind);
-        assert.equal(_task.key.name, name);
-        assert.deepEqual(_task.data, entity);
+test.cb(`should get a task from Datastore`, (t) => {
+  const datastoreMock = {
+    key: (...args) => datastore.key(...args),
 
-        return datastore.save(_task)
-          .then(() => {
-            setTimeout(() => {
-              datastore.get(key)
-                .then((results) => {
-                  const task = results[0];
-                  assert.deepEqual(task, entity);
-                  assert.equal(console.log.calledWith(`Saved ${name}: ${entity.description}`), true);
-                  done();
-                })
-                .catch(done);
-            }, 200);
-          }, done);
-      }
-    };
+    save: (_task) => {
+      t.is(_task.key.kind, kind);
+      t.is(_task.key.name, name);
+      t.deepEqual(_task.data, entity);
 
-    proxyquire(`../quickstart`, {
-      '@google-cloud/datastore': sinon.stub().returns(datastoreMock)
-    });
+      return datastore.save(_task)
+        .then(() => {
+          setTimeout(() => {
+            datastore.get(key)
+              .then(([task]) => {
+                t.deepEqual(task, entity);
+                t.true(console.log.calledWith(`Saved ${name}: ${entity.description}`));
+                t.end();
+              })
+              .catch(t.end);
+          }, 200);
+        }, t.end);
+    }
+  };
+
+  proxyquire(`../quickstart`, {
+    '@google-cloud/datastore': sinon.stub().returns(datastoreMock)
   });
 });

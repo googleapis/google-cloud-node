@@ -15,54 +15,54 @@
 
 'use strict';
 
+require(`../../system-test/_setup`);
+
 const path = require(`path`);
 const datastore = require(`@google-cloud/datastore`)();
-const run = require(`../../utils`).run;
 
 const cmd = `node tasks.js`;
 const cwd = path.join(__dirname, `..`);
 
-describe(`datastore:tasks`, () => {
-  const description = `description`;
-  let key;
+const description = `description`;
+let key;
 
-  after(() => datastore.delete(key).catch(() => {}));
+test.after(async () => {
+  try {
+    await datastore.delete(key);
+  } catch (err) {} // ignore error
+});
 
-  it(`should add a task`, () => {
-    const expected = /^Task (\d+) created successfully.$/;
-    const parts = run(`${cmd} new "${description}"`, cwd).match(expected);
-    assert.equal(expected.test(parts[0]), true);
-    return datastore.get(datastore.key([`Task`, parseInt(parts[1], 10)]))
-      .then((results) => {
-        const task = results[0];
-        key = task[datastore.KEY];
-        assert.equal(task.description, description);
-      });
-  });
+test.beforeEach(stubConsole);
+test.afterEach(restoreConsole);
 
-  it(`should mark a task as done`, () => {
-    const expected = `Task ${key.id} updated successfully.`;
-    assert.equal(run(`${cmd} done ${key.id}`, cwd), expected);
-    return datastore.get(key)
-      .then((results) => {
-        assert.equal(results[0].done, true);
-      });
-  });
+test.serial(`should add a task`, async (t) => {
+  const expected = /^Task (\d+) created successfully.$/;
+  const parts = run(`${cmd} new "${description}"`, cwd).match(expected);
+  t.true(expected.test(parts[0]));
+  const [task] = await datastore.get(datastore.key([`Task`, parseInt(parts[1], 10)]));
+  key = task[datastore.KEY];
+  t.is(task.description, description);
+});
 
-  it(`should list tasks`, (done) => {
-    setTimeout(() => {
-      const output = run(`${cmd} list`, cwd);
-      assert.equal(output.includes(key.id), true);
-      done();
-    }, 5000);
-  });
+test.serial(`should mark a task as done`, async (t) => {
+  const expected = `Task ${key.id} updated successfully.`;
+  const output = await runAsync(`${cmd} done ${key.id}`, cwd);
+  t.is(output, expected);
+  const [task] = await datastore.get(key);
+  t.true(task.done);
+});
 
-  it(`should delete a task`, () => {
-    const expected = `Task ${key.id} deleted successfully.`;
-    assert.equal(run(`${cmd} delete ${key.id}`, cwd), expected);
-    return datastore.get(key)
-      .then((results) => {
-        assert.equal(results[0], undefined);
-      });
-  });
+test.serial(`should list tasks`, async (t) => {
+  await tryTest(async () => {
+    const output = await runAsync(`${cmd} list`, cwd);
+    t.true(output.includes(key.id));
+  }).start();
+});
+
+test.serial(`should delete a task`, async (t) => {
+  const expected = `Task ${key.id} deleted successfully.`;
+  const output = await runAsync(`${cmd} delete ${key.id}`, cwd);
+  t.is(output, expected);
+  const [task] = await datastore.get(key);
+  t.is(task, undefined);
 });

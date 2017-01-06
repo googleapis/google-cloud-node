@@ -15,17 +15,15 @@
 
 'use strict';
 
+require(`../../system-test/_setup`);
+
 const error = require('../error');
 
-describe(`datastore:error`, () => {
-  it(`should have an error`, () => {
-    return error.runQuery()
-      .then(() => {
-        assert.fail(`should have failed!`);
-      })
-      .catch((err) => {
-        assert(err);
-        assert.equal(err.code, 400);
-      });
-  });
+test.beforeEach(stubConsole);
+test.afterEach(restoreConsole);
+
+test(`should have an error`, async (t) => {
+  const err = await t.throws(error.runQuery());
+  t.truthy(err);
+  t.is(err.code, 400);
 });
