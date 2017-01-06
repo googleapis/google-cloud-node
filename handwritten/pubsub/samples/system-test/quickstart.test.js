@@ -15,6 +15,8 @@
 
 'use strict';
 
+require(`../../system-test/_setup`);
+
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const pubsub = proxyquire(`@google-cloud/pubsub`, {})();
 const uuid = require(`uuid`);
@@ -23,33 +25,38 @@ const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 
-describe(`pubsub:quickstart`, () => {
-  after(() => pubsub.topic(topicName).delete().catch(() => {}));
+test.before(stubConsole);
+test.after(() => {
+  restoreConsole();
+  return pubsub.topic(topicName).delete().catch(() => {});
+});
 
-  it(`should create a topic`, (done) => {
-    const expectedTopicName = `my-new-topic`;
-    const pubsubMock = {
-      createTopic: (_topicName) => {
-        assert.equal(_topicName, expectedTopicName);
+test.cb(`should create a topic`, (t) => {
+  const expectedTopicName = `my-new-topic`;
+  const pubsubMock = {
+    createTopic: (_topicName) => {
+      t.is(_topicName, expectedTopicName);
 
-        return pubsub.createTopic(topicName)
-          .then((results) => {
-            const topic = results[0];
-            assert.equal(topic.name, fullTopicName);
+      return pubsub.createTopic(topicName)
+        .then(([topic]) => {
+          t.is(topic.name, fullTopicName);
 
-            setTimeout(() => {
-              assert.equal(console.log.callCount, 1);
-              assert.deepEqual(console.log.getCall(0).args, [`Topic ${topic.name} created.`]);
-              done();
-            }, 200);
+          setTimeout(() => {
+            try {
+              t.is(console.log.callCount, 1);
+              t.deepEqual(console.log.getCall(0).args, [`Topic ${topic.name} created.`]);
+              t.end();
+            } catch (err) {
+              t.end(err);
+            }
+          }, 200);
 
-            return results;
-          });
-      }
-    };
+          return [topic];
+        });
+    }
+  };
 
-    proxyquire(`../quickstart`, {
-      '@google-cloud/pubsub': sinon.stub().returns(pubsubMock)
-    });
+  proxyquire(`../quickstart`, {
+    '@google-cloud/pubsub': sinon.stub().returns(pubsubMock)
   });
 });
