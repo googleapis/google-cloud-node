@@ -28,13 +28,11 @@ const resourceClient = Resource({
 });
 
 // Lists current projects
-resourceClient.getProjects((err, projects) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
+resourceClient.getProjects()
+  .then((results) => {
+    const projects = results[0];
 
-  console.log('Projects:');
-  projects.forEach((project) => console.log(project.id));
-});
+    console.log('Projects:');
+    projects.forEach((project) => console.log(project.id));
+  });
 // [END resource_quickstart]

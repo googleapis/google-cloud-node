@@ -5,12 +5,11 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "cd ..; npm run t -- resource/test/*.test.js",
-    "system-test": "cd ..; npm run st -- resource/system-test/*.test.js"
+    "test": "cd ..; npm run st -- resource/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/resource": "0.5.0",
-    "yargs": "6.5.0"
+    "@google-cloud/resource": "0.5.1",
+    "yargs": "6.6.0"
   },
   "engines": {
     "node": ">=4.3.2"
