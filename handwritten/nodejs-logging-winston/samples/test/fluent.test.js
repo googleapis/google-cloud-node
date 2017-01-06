@@ -13,40 +13,40 @@
 
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
-var request = require('supertest');
+require(`../../test/_setup`);
 
-describe('logging:fluent', function () {
-  it('should log error', function (done) {
-    var loggerCalled = false;
+const proxyquire = require(`proxyquire`).noPreserveCache();
+const request = require(`supertest`);
 
-    var structuredLogger = {
-      emit: function (name) {
-        loggerCalled = true;
-        assert(name === 'errors');
+test.cb(`should log error`, (t) => {
+  let loggerCalled = false;
+
+  const structuredLogger = {
+    emit: (name) => {
+      loggerCalled = true;
+      t.is(name, `errors`);
+    }
+  };
+
+  const app = proxyquire(`../fluent`, {
+    'fluent-logger': {
+      createFluentSender: (name, options) => {
+        t.is(name, `myapp`);
+        t.deepEqual(options, {
+          host: `localhost`,
+          port: 24224,
+          timeout: 3.0
+        });
+        return structuredLogger;
       }
-    };
-
-    var app = proxyquire('../fluent', {
-      'fluent-logger': {
-        createFluentSender: function (name, options) {
-          assert(name === 'myapp');
-          assert.deepEqual(options, {
-            host: 'localhost',
-            port: 24224,
-            timeout: 3.0
-          });
-          return structuredLogger;
-        }
-      }
-    });
-
-    request(app)
-      .get('/')
-      .expect(500)
-      .expect(function () {
-        assert(loggerCalled, 'structuredLogger.emit should have been called');
-      })
-      .end(done);
+    }
   });
+
+  request(app)
+    .get(`/`)
+    .expect(500)
+    .expect(() => {
+      t.true(loggerCalled, `structuredLogger.emit should have been called`);
+    })
+    .end(t.end);
 });

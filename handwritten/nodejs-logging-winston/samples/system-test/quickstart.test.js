@@ -15,54 +15,59 @@
 
 'use strict';
 
+require(`../../system-test/_setup`);
+
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const logging = proxyquire(`@google-cloud/logging`, {})();
 const uuid = require(`uuid`);
 
 const logName = `nodejs-docs-samples-test-${uuid.v4()}`;
 
-describe(`logging:quickstart`, () => {
-  let logMock, loggingMock, LoggingMock;
+test.after(async () => {
+  try {
+    await logging.log(logName).delete();
+  } catch (err) {} // ignore error
+});
 
-  after((done) => {
-    logging.log(logName).delete(() => {
-      // Ignore any error, the topic might not have been created
-      done();
-    });
-  });
+test.beforeEach(stubConsole);
+test.afterEach(restoreConsole);
 
-  it(`should log an entry`, (done) => {
-    const expectedlogName = `my-log`;
+test.cb(`should log an entry`, (t) => {
+  const expectedlogName = `my-log`;
 
-    logMock = {
-      entry: sinon.stub().returns({}),
-      write: (_entry, _callback) => {
-        assert.deepEqual(_entry, {});
-        assert.equal(typeof _callback, 'function');
+  const logMock = {
+    entry: sinon.stub().returns({}),
+    write: (_entry) => {
+      t.deepEqual(_entry, {});
 
-        const log = logging.log(logName);
-        const text = `Hello, world!`;
-        const entry = log.entry({ resource: { type: `global` } }, text);
-        log.write(entry, (err, apiResponse) => {
-          _callback(err, apiResponse);
-          assert.ifError(err);
-          assert.notEqual(apiResponse, undefined);
-          assert.equal(console.log.calledOnce, true);
-          assert.deepEqual(console.log.firstCall.args, [`Logged: ${text}`]);
-          done();
+      const log = logging.log(logName);
+      const text = `Hello, world!`;
+      const entry = log.entry({ resource: { type: `global` } }, text);
+
+      return log.write(entry)
+        .then((results) => {
+          setTimeout(() => {
+            try {
+              t.true(console.log.calledOnce);
+              t.deepEqual(console.log.firstCall.args, [`Logged: ${text}`]);
+              t.end();
+            } catch (err) {
+              t.end(err);
+            }
+          }, 200);
+
+          return results;
         });
-      }
-    };
-    loggingMock = {
-      log: (_logName) => {
-        assert.equal(_logName, expectedlogName);
-        return logMock;
-      }
-    };
-    LoggingMock = sinon.stub().returns(loggingMock);
+    }
+  };
+  const loggingMock = {
+    log: (_logName) => {
+      t.is(_logName, expectedlogName);
+      return logMock;
+    }
+  };
 
-    proxyquire(`../quickstart`, {
-      '@google-cloud/logging': LoggingMock
-    });
+  proxyquire(`../quickstart`, {
+    '@google-cloud/logging': sinon.stub().returns(loggingMock)
   });
 });

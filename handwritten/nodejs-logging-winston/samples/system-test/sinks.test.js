@@ -13,113 +13,114 @@
 
 'use strict';
 
-var Logging = require('@google-cloud/logging');
-var Storage = require('@google-cloud/storage');
-var uuid = require('uuid');
-var program = require('../sinks');
+require(`../../system-test/_setup`);
 
-var logging = Logging();
-var storage = Storage();
+const Logging = require(`@google-cloud/logging`);
+const Storage = require(`@google-cloud/storage`);
+const uuid = require(`uuid`);
+const program = require(`../sinks`);
 
-var bucketName = 'nodejs-docs-samples-test-' + uuid.v4();
-var sinkName = 'nodejs-docs-samples-test-' + uuid.v4();
-var filter = 'severity > WARNING';
+const logging = Logging();
+const storage = Storage();
 
-describe('logging:sinks', function () {
-  before(function (done) {
-    storage.createBucket(bucketName, done);
+const bucketName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const sinkName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const filter = `severity > WARNING`;
+
+test.before(async (t) => {
+  await storage.createBucket(bucketName);
+});
+
+test.after(async (t) => {
+  try {
+    await logging.sink(sinkName).delete();
+  } catch (err) {} // ignore error
+  try {
+    await storage.bucket(bucketName).delete();
+  } catch (err) {} // ignore error
+});
+
+test.beforeEach(stubConsole);
+test.afterEach(restoreConsole);
+
+test.cb.serial(`should create a new sink`, (t) => {
+  program.createSink(sinkName, bucketName, filter, (err, sink, apiResponse) => {
+    t.ifError(err);
+    t.truthy(sink);
+    t.is(sink.name, sinkName);
+    t.not(apiResponse, undefined);
+    t.end();
   });
+});
 
-  after(function (done) {
-    logging.sink(sinkName).delete(function () {
-      // Don't check for error, the sink might already have been deleted
-      storage.bucket(bucketName).delete(function () {
-        // Don't check for error, the bucket might already have been deleted
-        done();
+test.cb.serial(`should get the metadata for a sink`, (t) => {
+  const expected = {
+    name: sinkName,
+    destination: `storage.googleapis.com/${bucketName}`,
+    filter: filter,
+    outputVersionFormat: `V2`,
+    writerIdentity: `serviceAccount:cloud-logs@system.gserviceaccount.com`
+  };
+
+  program.getSinkMetadata(sinkName, (err, metadata) => {
+    t.ifError(err);
+    for (let key in expected) {
+      t.is(metadata[key], expected[key]);
+    }
+    t.end();
+  });
+});
+
+test.serial(`should list sinks`, async (t) => {
+  await tryTest(async () => {
+    await new Promise((resolve, reject) => {
+      program.listSinks((err, sinks) => {
+        try {
+          t.ifError(err);
+          t.true(Array.isArray(sinks));
+          t.true(sinks.some((sink) => sink.name === sinkName));
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
       });
     });
-  });
+  }).start();
+});
 
-  describe('createSink', function () {
-    it('should create a new sink', function (done) {
-      program.createSink(sinkName, bucketName, filter, function (err, sink, apiResponse) {
-        assert.ifError(err);
-        assert(sink, 'sink should be defined');
-        assert.equal(sink.name, sinkName, 'should have received the new sink');
-        assert.notEqual(apiResponse, undefined);
-        done();
-      });
+test.cb.serial(`should update metdata for a sink`, (t) => {
+  const newFilter = `severity > ALERT`;
+  const expected = {
+    name: sinkName,
+    destination: `storage.googleapis.com/${bucketName}`,
+    filter: newFilter,
+    outputVersionFormat: `V2`,
+    writerIdentity: `serviceAccount:cloud-logs@system.gserviceaccount.com`
+  };
+
+  program.updateSink(sinkName, newFilter, (err, apiResponse) => {
+    t.ifError(err);
+    t.not(apiResponse, undefined);
+
+    program.getSinkMetadata(sinkName, (err, metadata) => {
+      t.ifError(err);
+      for (let key in expected) {
+        t.is(metadata[key], expected[key]);
+      }
+      t.end();
     });
   });
+});
 
-  describe('getSink', function () {
-    it('should get the metadata for a sink', function (done) {
-      var expected = {
-        name: sinkName,
-        destination: 'storage.googleapis.com/' + bucketName,
-        filter: filter,
-        outputVersionFormat: 'V2',
-        writerIdentity: 'serviceAccount:cloud-logs@system.gserviceaccount.com'
-      };
+test.cb.serial(`should delete a sink`, (t) => {
+  program.deleteSink(sinkName, (err, apiResponse) => {
+    t.ifError(err);
+    t.not(apiResponse, undefined);
 
-      program.getSinkMetadata(sinkName, function (err, metadata) {
-        assert.ifError(err);
-        assert.deepEqual(metadata, expected, 'should have received sink metadata');
-        done();
-      });
-    });
-  });
-
-  describe('listSinks', function () {
-    it('should list sinks', function (done) {
-      program.listSinks(function (err, sinks) {
-        assert.ifError(err);
-        assert(Array.isArray(sinks), '"sinks" should be an array.');
-        var matchingSinks = sinks.map(function (sink) {
-          return sink.name === sinkName;
-        });
-        assert.equal(matchingSinks.length, 1, 'Newly created sink should be in list.');
-        done();
-      });
-    });
-  });
-
-  describe('updateSink', function () {
-    it('should update metdata for a sink', function (done) {
-      var newFilter = 'severity > ALERT';
-      var expected = {
-        name: sinkName,
-        destination: 'storage.googleapis.com/' + bucketName,
-        filter: newFilter,
-        outputVersionFormat: 'V2',
-        writerIdentity: 'serviceAccount:cloud-logs@system.gserviceaccount.com'
-      };
-
-      program.updateSink(sinkName, newFilter, function (err, apiResponse) {
-        assert.ifError(err);
-        assert.notEqual(apiResponse, undefined);
-
-        program.getSinkMetadata(sinkName, function (err, metadata) {
-          assert.ifError(err);
-          assert.deepEqual(metadata, expected, 'Sink should have new metadata.');
-          done();
-        });
-      });
-    });
-  });
-
-  describe('deleteSink', function () {
-    it('should delete a sink', function (done) {
-      program.deleteSink(sinkName, function (err, apiResponse) {
-        assert.ifError(err);
-        assert.notEqual(apiResponse, undefined);
-
-        program.getSinkMetadata(sinkName, function (err) {
-          assert(err, 'Should be an error.');
-          assert.equal(err.code, 404, 'Should be a "not found" error.');
-          done();
-        });
-      });
+    program.getSinkMetadata(sinkName, (err) => {
+      t.truthy(err);
+      t.is(err.code, 404);
+      t.end();
     });
   });
 });
