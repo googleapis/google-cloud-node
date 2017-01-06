@@ -15,7 +15,6 @@
 
 'use strict';
 
-const assert = require('power-assert');
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
@@ -436,7 +435,7 @@ class Index extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testExplodingProperties () {
+  testExplodingProperties (t) {
     const original = datastore.key;
     datastore.key = this.datastore.key;
 
@@ -464,14 +463,14 @@ class Index extends TestHelper {
 
     return this.datastore.save(task)
       .then(() => {
-        assert(task.key);
-        assert(task.key.id);
+        t.truthy(task.key);
+        t.truthy(task.key.id);
       });
   }
 }
 
 class Metadata extends TestHelper {
-  testNamespaceRunQuery () {
+  testNamespaceRunQuery (t) {
     const datastore = this.datastore;
 
     const startNamespace = 'Animals';
@@ -511,11 +510,11 @@ class Metadata extends TestHelper {
         return runNamespaceQuery(startNamespace, endNamespace);
       })
       .then((namespaces) => {
-        assert.deepEqual(namespaces, ['Animals']);
+        t.deepEqual(namespaces, ['Animals']);
       });
   }
 
-  testKindRunQuery () {
+  testKindRunQuery (t) {
     const datastore = this.datastore;
 
     // [START kind_run_query]
@@ -538,11 +537,11 @@ class Metadata extends TestHelper {
 
     return runKindQuery()
       .then((kinds) => {
-        assert.equal(kinds.includes('Account'), true);
+        t.true(kinds.includes('Account'));
       });
   }
 
-  testPropertyRunQuery () {
+  testPropertyRunQuery (t) {
     const datastore = this.datastore;
 
     // [START property_run_query]
@@ -576,11 +575,11 @@ class Metadata extends TestHelper {
 
     return runPropertyQuery()
       .then((propertiesByKind) => {
-        assert.deepEqual(propertiesByKind.Account, ['balance']);
+        t.deepEqual(propertiesByKind.Account, ['balance']);
       });
   }
 
-  testPropertyByKindRunQuery () {
+  testPropertyByKindRunQuery (t) {
     const datastore = this.datastore;
 
     // [START property_by_kind_run_query]
@@ -616,7 +615,7 @@ class Metadata extends TestHelper {
 
     return runPropertyByKindQuery()
       .then((propertiesByKind) => {
-        assert.deepEqual(propertiesByKind, {
+        t.deepEqual(propertiesByKind, {
           balance: ['INT64']
         });
       });
@@ -951,7 +950,7 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testCursorPaging () {
+  testCursorPaging (t) {
     const datastore = this.datastore;
     const pageSize = 1;
 
@@ -992,7 +991,7 @@ class Query extends TestHelper {
     return runPageQuery()
       .then((results) => {
         const entities = results[0];
-        assert.equal(Array.isArray(entities), true);
+        t.true(Array.isArray(entities));
         const info = results[1];
         if (!info || !info.endCursor) {
           throw new Error('An `info` with an `endCursor` is not present.');
@@ -1060,7 +1059,7 @@ class Transaction extends TestHelper {
     return this.datastore.save(entities);
   }
 
-  testTransactionalUpdate () {
+  testTransactionalUpdate (t) {
     const fromKey = this.fromKey;
     const toKey = this.toKey;
     const originalBalance = this.originalBalance;
@@ -1080,8 +1079,8 @@ class Transaction extends TestHelper {
         const accounts = results.map((result) => result[0]);
         // Restore `datastore` to the mock API.
         datastore = datastoreMock;
-        assert.equal(accounts[0].balance, originalBalance - amountToTransfer);
-        assert.equal(accounts[1].balance, originalBalance + amountToTransfer);
+        t.is(accounts[0].balance, originalBalance - amountToTransfer);
+        t.is(accounts[1].balance, originalBalance + amountToTransfer);
       })
       .catch((err) => {
         // Restore `datastore` to the mock API.
@@ -1141,7 +1140,7 @@ class Transaction extends TestHelper {
       });
   }
 
-  testTransactionalGetOrCreate () {
+  testTransactionalGetOrCreate (t) {
     const taskKey = this.datastore.key(['Task', Date.now()]);
 
     // Overwrite so the real Datastore instance is used in `transferFunds`.
@@ -1177,11 +1176,11 @@ class Transaction extends TestHelper {
 
     return getOrCreate(taskKey, {})
       .then((task) => {
-        assert(task, 'Should have a task.');
+        t.truthy(task, 'Should have a task.');
         return getOrCreate(taskKey, {});
       })
       .then((task) => {
-        assert(task, 'Should have a task.');
+        t.truthy(task, 'Should have a task.');
         // Restore `datastore` to the mock API.
         datastore = datastoreMock;
       })
@@ -1192,7 +1191,7 @@ class Transaction extends TestHelper {
       });
   }
 
-  testSingleEntityGroupReadOnly () {
+  testSingleEntityGroupReadOnly (t) {
     // Overwrite so the real Datastore instance is used in `transferFunds`.
     const datastoreMock = datastore;
     datastore = this.datastore;
@@ -1225,8 +1224,8 @@ class Transaction extends TestHelper {
       .then((results) => {
         // Restore `datastore` to the mock API.
         datastore = datastoreMock;
-        assert.equal(results.length, 2);
-        assert.equal(Array.isArray(results[1]), true);
+        t.is(results.length, 2);
+        t.true(Array.isArray(results[1]));
       }, (err) => {
         // Restore `datastore` to the mock API.
         datastore = datastoreMock;
