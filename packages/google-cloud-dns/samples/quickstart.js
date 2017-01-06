@@ -28,13 +28,11 @@ const dnsClient = DNS({
 });
 
 // Lists all zones in the current project
-dnsClient.getZones((err, zones) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
+dnsClient.getZones()
+  .then((results) => {
+    const zones = results[0];
 
-  console.log('Zones:');
-  zones.forEach((zone) => console.log(zone.name));
-});
+    console.log('Zones:');
+    zones.forEach((zone) => console.log(zone.name));
+  });
 // [END dns_quickstart]

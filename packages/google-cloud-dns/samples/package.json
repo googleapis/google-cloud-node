@@ -5,8 +5,7 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "cd ..; npm run t -- dns/test/*.test.js",
-    "system-test": "cd ..; npm run st -- dns/system-test/*.test.js"
+    "test": "cd ..; npm run st -- dns/system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/dns": "0.4.0",
