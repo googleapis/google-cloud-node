@@ -40,12 +40,8 @@ const metadata = { resource: { type: 'global' } };
 const entry = log.entry(metadata, text);
 
 // Writes the log entry
-log.write(entry, (err) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(`Logged: ${text}`);
-});
+log.write(entry)
+  .then(() => {
+    console.log(`Logged: ${text}`);
+  });
 // [END logging_quickstart]
