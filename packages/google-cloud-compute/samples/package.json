@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@google-cloud/compute": "0.4.0",
-    "googleapis": "^12.2.0",
-    "nodemailer": "^2.4.1",
-    "nodemailer-smtp-transport": "^2.5.0",
-    "sendgrid": "^4.0.1"
+    "googleapis": "16.0.0",
+    "nodemailer": "2.7.0",
+    "nodemailer-smtp-transport": "2.7.2",
+    "sendgrid": "4.7.1"
   }
 }
