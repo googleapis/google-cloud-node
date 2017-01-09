@@ -56,19 +56,27 @@ describe('translate', function() {
     var INPUT = [
       {
         input: 'Hello!',
-        expectedTranslation: '¡Hola!'
+        expectedTranslation: 'Hola'
       },
       {
         input: 'How are you today?',
-        expectedTranslation: '¿Cómo estás hoy?'
+        expectedTranslation: 'Cómo estás hoy'
       }
     ];
+
+    function removeSymbols(input) {
+      // Remove the leading and trailing ! or ? symbols. The API has been known
+      // to switch back and forth between returning "Cómo estás hoy" and
+      // "¿Cómo estás hoy?", so let's just not depend on that.
+      return input.replace(/^\W|\W*$/g, '');
+    }
 
     it('should translate input', function(done) {
       var input = INPUT.map(prop('input'));
 
       translate.translate(input, 'es', function(err, results) {
         assert.ifError(err);
+        results = results.map(removeSymbols);
         assert.strictEqual(results[0], INPUT[0].expectedTranslation);
         assert.strictEqual(results[1], INPUT[1].expectedTranslation);
         done();
@@ -85,6 +93,7 @@ describe('translate', function() {
 
       translate.translate(input, opts, function(err, results) {
         assert.ifError(err);
+        results = results.map(removeSymbols);
         assert.strictEqual(results[0], INPUT[0].expectedTranslation);
         assert.strictEqual(results[1], INPUT[1].expectedTranslation);
         done();
@@ -93,11 +102,6 @@ describe('translate', function() {
 
     it('should autodetect HTML', function(done) {
       var input = '<body>' + INPUT[0].input + '</body>';
-      var expectedTranslation = [
-        '<body>',
-        INPUT[0].expectedTranslation,
-        '</body>'
-      ].join(' ');
 
       var opts = {
         from: 'en',
@@ -106,7 +110,14 @@ describe('translate', function() {
 
       translate.translate(input, opts, function(err, results) {
         assert.ifError(err);
-        assert.strictEqual(results, expectedTranslation);
+
+        var translation = results.split(/<\/*body>/g)[1].trim();
+
+        assert.strictEqual(
+          removeSymbols(translation),
+          INPUT[0].expectedTranslation
+        );
+
         done();
       });
     });
