@@ -18,8 +18,10 @@
 
 var assert = require('assert');
 var async = require('async');
-var env = require('../../../system-test/env.js');
+var util = require('util');
 var winston = require('winston');
+
+var env = require('../../../system-test/env.js');
 
 var logging = require('@google-cloud/logging')(env);
 var loggingWinston = require('../');
@@ -59,7 +61,7 @@ describe('LoggingWinston', function() {
 
           assert.strictEqual(
             entry.metadata.labels.testTimestamp,
-            JSON.stringify(testTimestamp)
+            util.inspect(testTimestamp)
           );
         }
       }
