@@ -19,28 +19,10 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-var util = require('util');
+var util = require('@google-cloud/common').util;
 
 describe('logging-winston', function() {
-  var fakeLogEntry_;
-  var fakeLogLevel_;
-
-  var fakeLogInstance = {
-    entry: function(metadata, message) {
-      return {metadata: metadata, message: message}
-    },
-  };
-
-  ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info',
-   'debug']
-      .forEach(function(level) {
-        fakeLogInstance[level] = function(entry, cb) {
-          fakeLogLevel_ = level;
-          fakeLogEntry_ = entry;
-          setImmediate(cb);
-        }
-      });
-
+  var fakeLogInstance = {};
   var fakeLoggingOptions_;
   var fakeLogName_;
 
@@ -67,9 +49,10 @@ describe('logging-winston', function() {
   var loggingWinston;
 
   var OPTIONS = {
-    level: 'levelThree',
-    levels: {levelOne: 1, levelTwo: 2, levelThree: 3, levelFour: 4},
     logName: 'log-name',
+    levels: {
+      one: 1
+    },
     resource: {}
   };
 
@@ -81,8 +64,7 @@ describe('logging-winston', function() {
   });
 
   beforeEach(function() {
-    fakeLogEntry_ = null;
-    fakeLogLevel_ = null;
+    fakeLogInstance = {};
     fakeLoggingOptions_ = null;
     fakeLogName_ = null;
     loggingWinston = new LoggingWinston(OPTIONS);
@@ -116,7 +98,6 @@ describe('logging-winston', function() {
     it('should default to npm levels', function() {
       var optionsWithoutLevels = extend({}, OPTIONS);
       delete optionsWithoutLevels.levels;
-      delete optionsWithoutLevels.level;
 
       var loggingWinston = new LoggingWinston(optionsWithoutLevels);
       assert.deepEqual(loggingWinston.levels_, {
@@ -149,81 +130,73 @@ describe('logging-winston', function() {
     it('should localize the provided resource', function() {
       assert.strictEqual(loggingWinston.resource_, OPTIONS.resource);
     });
-
-    it('should throw on invalid options.level', function() {
-      var optionsWithoutLevels = extend({}, OPTIONS);
-      delete optionsWithoutLevels.levels;
-
-      assert.throws(function () {
-        new LoggingWinston(optionsWithoutLevels);
-      }, /invalid options\.level: levelThree/);
-
-      assert.throws(function () {
-        new LoggingWinston(extend({}, OPTIONS, {level: 'err'}));
-      }, /invalid options\.level: err/);
-
-    });
-
-    it('should throw on invalid options.levels', function() {
-      assert.throws(function() {
-        new LoggingWinston(
-            extend({}, OPTIONS, {levels: {a: 0, b: 1, c: 3, d: 6, e: 9}}));
-      }, /invalid options\.levels: e:9/);
-      assert.throws(function() {
-        new LoggingWinston(
-            extend({}, OPTIONS, {levels: {9: 0, 7: 1, 8: 3, 1: 'foo', 0: 6}}));
-      }, /invalid options\.levels: 1:foo/);
-    });
   });
 
   describe('log', function() {
+    var LEVEL = Object.keys(OPTIONS.levels)[0];
+    var STACKDRIVER_LEVEL = 'alert'; // (code 1)
+    var MESSAGE = 'message';
+    var METADATA = {
+      value: function() {}
+    };
+
+    beforeEach(function() {
+      fakeLogInstance.entry = util.noop;
+      loggingWinston.log_[STACKDRIVER_LEVEL] = util.noop;
+    });
+
     it('should throw on a bad log level', function() {
       assert.throws(function() {
-        loggingWinston.log('non-existent-level', 'test log message');
-      }, /Unknown log level/);
+        loggingWinston.log(
+          'non-existent-level',
+          MESSAGE,
+          METADATA,
+          assert.ifError
+        );
+      }, /Unknown log level: non-existent-level/);
     });
 
-    it('should call back once completed', function(done) {
-      loggingWinston.log('levelOne', 'level one message', function(err) {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('should call into stackdriver logging properly formatted entry',
-       function(done) {
-         var message = 'a message to be logged';
-         loggingWinston.log('levelOne', message, function(err) {
-           assert.strictEqual(fakeLogLevel_, 'alert');
-           assert.deepEqual(fakeLogEntry_, {
-             message: message,
-             metadata: {resource: OPTIONS.resource, labels: {}}
-           });
-           done();
-         });
-       });
-
-    it('should convert metadata values using util.inspect', function(done) {
-      var message = 'test message with labels';
-      var metadata = {
-        testDate: new Date(1),
-        testFunction: function foo() { return 'some value'; },
-        deepObject: {a: {b: {c: {d: {e: 1}}}}},
-        testNumber: 5
-      };
-      loggingWinston.log('levelTwo', message, metadata, function(err) {
-        assert.strictEqual(fakeLogLevel_, 'critical');
-        var expectedLabels = {};
-        for (var key in metadata) {
-          expectedLabels[key] = util.inspect(metadata[key]);
-        }
-        assert.deepEqual(fakeLogEntry_, {
-          message: message,
-          metadata: {resource: OPTIONS.resource, labels: expectedLabels}
+    it('should properly create an entry', function(done) {
+      loggingWinston.log_.entry = function(entryMetadata, message) {
+        assert.deepEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          labels: {
+            value: '[Function: value]'
+          }
         });
+        assert.strictEqual(message, MESSAGE);
         done();
-      });
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
+    it('should not require metadata', function(done) {
+      loggingWinston.log_.entry = function(entryMetadata, message) {
+        assert.deepEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          labels: {}
+        });
+        assert.strictEqual(message, MESSAGE);
+        done();
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, assert.ifError);
+    });
+
+    it('should write to the log', function(done) {
+      var entry = {};
+
+      loggingWinston.log_.entry = function() {
+        return entry;
+      };
+
+      loggingWinston.log_[STACKDRIVER_LEVEL] = function(entry_, callback) {
+        assert.strictEqual(entry_, entry);
+        callback(); // done()
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, done);
+    });
   });
 });
