@@ -22,17 +22,22 @@ const uuid = require(`uuid`);
 const path = require(`path`);
 
 const cwd = path.join(__dirname, `..`);
-const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
+const topicNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
 const subscriptionNameOne = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
 const subscriptionNameTwo = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
+const subscriptionNameThree = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
 const projectId = process.env.GCLOUD_PROJECT;
-const fullTopicName = `projects/${projectId}/topics/${topicName}`;
+const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
 const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
 const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
 const cmd = `node subscriptions.js`;
 
 test.before(async () => {
-  await pubsub.createTopic(topicName);
+  await Promise.all([
+    pubsub.createTopic(topicNameOne),
+    pubsub.createTopic(topicNameTwo)
+  ]);
 });
 
 test.after(async () => {
@@ -43,7 +48,13 @@ test.after(async () => {
     await pubsub.subscription(subscriptionNameTwo).delete();
   } catch (err) {} // ignore error
   try {
-    await pubsub.topic(topicName).delete();
+    await pubsub.subscription(subscriptionNameThree).delete();
+  } catch (err) {} // ignore error
+  try {
+    await pubsub.topic(topicNameOne).delete();
+  } catch (err) {} // ignore error
+  try {
+    await pubsub.topic(topicNameTwo).delete();
   } catch (err) {} // ignore error
 });
 
@@ -51,14 +62,14 @@ test.beforeEach(stubConsole);
 test.afterEach(restoreConsole);
 
 test.serial(`should create a subscription`, async (t) => {
-  const output = await runAsync(`${cmd} create ${topicName} ${subscriptionNameOne}`, cwd);
+  const output = await runAsync(`${cmd} create ${topicNameOne} ${subscriptionNameOne}`, cwd);
   t.is(output, `Subscription ${fullSubscriptionNameOne} created.`);
   const results = await pubsub.subscription(subscriptionNameOne).exists();
   t.true(results[0]);
 });
 
 test.serial(`should create a push subscription`, async (t) => {
-  const output = await runAsync(`${cmd} create-push ${topicName} ${subscriptionNameTwo}`, cwd);
+  const output = await runAsync(`${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`, cwd);
   t.is(output, `Subscription ${fullSubscriptionNameTwo} created.`);
   const results = await pubsub.subscription(subscriptionNameTwo).exists();
   t.true(results[0]);
@@ -67,7 +78,7 @@ test.serial(`should create a push subscription`, async (t) => {
 test.serial(`should get metadata for a subscription`, async (t) => {
   const output = await runAsync(`${cmd} get ${subscriptionNameOne}`, cwd);
   const expected = `Subscription: ${fullSubscriptionNameOne}` +
-    `\nTopic: ${fullTopicName}` +
+    `\nTopic: ${fullTopicNameOne}` +
     `\nPush config: ` +
     `\nAck deadline: 10s`;
   t.is(output, expected);
@@ -83,15 +94,15 @@ test.serial(`should list all subscriptions`, async (t) => {
 });
 
 test.serial(`should list subscriptions for a topic`, async (t) => {
-  const output = await runAsync(`${cmd} list ${topicName}`, cwd);
-  t.true(output.includes(`Subscriptions for ${topicName}:`));
+  const output = await runAsync(`${cmd} list ${topicNameOne}`, cwd);
+  t.true(output.includes(`Subscriptions for ${topicNameOne}:`));
   t.true(output.includes(fullSubscriptionNameOne));
   t.true(output.includes(fullSubscriptionNameTwo));
 });
 
 test.serial(`should pull messages`, async (t) => {
   const expected = `Hello, world!`;
-  const results = await pubsub.topic(topicName).publish(expected);
+  const results = await pubsub.topic(topicNameOne).publish(expected);
   const messageIds = results[0];
   const expectedOutput = `Received ${messageIds.length} messages.\n* ${messageIds[0]} "${expected}" {}`;
   const output = await runAsync(`${cmd} pull ${subscriptionNameOne}`, cwd);
@@ -102,23 +113,25 @@ test.serial(`should pull ordered messages`, async (t) => {
   const subscriptions = require('../subscriptions');
   const expected = `Hello, world!`;
   const publishedMessageIds = [];
-
-  let results = await pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '3' } }, { raw: true });
+  await pubsub.topic(topicNameTwo).subscribe(subscriptionNameThree);
+  let results = await pubsub.topic(topicNameTwo).publish({ data: expected, attributes: { counterId: '3' } }, { raw: true });
   publishedMessageIds.push(results[0][0]);
-  await subscriptions.pullOrderedMessages(subscriptionNameOne);
+  await subscriptions.pullOrderedMessages(subscriptionNameThree);
   t.is(console.log.callCount, 0);
-  results = await pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
+  results = await pubsub.topic(topicNameTwo).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
   publishedMessageIds.push(results[0][0]);
-  await subscriptions.pullOrderedMessages(subscriptionNameOne);
+  await subscriptions.pullOrderedMessages(subscriptionNameThree);
   t.is(console.log.callCount, 1);
   t.deepEqual(console.log.firstCall.args, [`* %d %j %j`, publishedMessageIds[1], expected, { counterId: '1' }]);
-  results = await pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
-  results = await pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '2' } }, { raw: true });
+  results = await pubsub.topic(topicNameTwo).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
+  results = await pubsub.topic(topicNameTwo).publish({ data: expected, attributes: { counterId: '2' } }, { raw: true });
   publishedMessageIds.push(results[0][0]);
-  await subscriptions.pullOrderedMessages(subscriptionNameOne);
-  t.is(console.log.callCount, 3);
-  t.deepEqual(console.log.secondCall.args, [`* %d %j %j`, publishedMessageIds[2], expected, { counterId: '2' }]);
-  t.deepEqual(console.log.thirdCall.args, [`* %d %j %j`, publishedMessageIds[0], expected, { counterId: '3' }]);
+  await tryTest(async () => {
+    await subscriptions.pullOrderedMessages(subscriptionNameThree);
+    t.is(console.log.callCount, 3);
+    t.deepEqual(console.log.secondCall.args, [`* %d %j %j`, publishedMessageIds[2], expected, { counterId: '2' }]);
+    t.deepEqual(console.log.thirdCall.args, [`* %d %j %j`, publishedMessageIds[0], expected, { counterId: '3' }]);
+  });
 });
 
 test.serial(`should set the IAM policy for a subscription`, async (t) => {
