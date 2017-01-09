@@ -58,7 +58,13 @@ describe('Resource', function() {
     it('should get metadata', function(done) {
       project.getMetadata(function(err, metadata) {
         assert.ifError(err);
-        assert.strictEqual(metadata.projectId, project.id);
+
+        assert.notStrictEqual(metadata.projectId, undefined);
+
+        if (env.projectId) {
+          assert.strictEqual(metadata.projectId, env.projectId);
+        }
+
         done();
       });
     });
