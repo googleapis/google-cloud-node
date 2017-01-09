@@ -5,7 +5,7 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "cd ..; npm run st -- resource/system-test/*.test.js"
+    "test": "cd ..; npm run st -- --verbose resource/system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/resource": "0.5.1",
