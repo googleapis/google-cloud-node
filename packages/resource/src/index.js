@@ -227,7 +227,7 @@ Resource.prototype.getProjects = function(options, callback) {
     }
 
     var projects = (resp.projects || []).map(function(project) {
-      var projectInstance = self.project(project.name);
+      var projectInstance = self.project(project.projectId);
       projectInstance.metadata = project;
       return projectInstance;
     });

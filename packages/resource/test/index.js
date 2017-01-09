@@ -194,7 +194,6 @@ describe('Resource', function() {
 
     describe('success', function() {
       var apiResponse = {
-        projectId: PROJECT_ID,
         name: 'operation-name'
       };
 
@@ -317,7 +316,7 @@ describe('Resource', function() {
         var project = {};
 
         resource.project = function(name) {
-          assert.strictEqual(name, apiResponse.projects[0].name);
+          assert.strictEqual(name, apiResponse.projects[0].projectId);
           return project;
         };
 
@@ -365,6 +364,7 @@ describe('Resource', function() {
     });
 
     it('should use the project ID from the resource', function() {
+      resource.projectId = PROJECT_ID;
       var project = resource.project();
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[1], PROJECT_ID);
