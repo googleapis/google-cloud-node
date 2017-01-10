@@ -20,7 +20,7 @@ require(`../../system-test/_setup`);
 const error = require('../error');
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test(`should have an error`, async (t) => {
   const err = await t.throws(error.runQuery());

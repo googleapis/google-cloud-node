@@ -26,14 +26,14 @@ const cwd = path.join(__dirname, `..`);
 const description = `description`;
 let key;
 
-test.after(async () => {
+test.after.always(async () => {
   try {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.serial(`should add a task`, async (t) => {
   const expected = /^Task (\d+) created successfully.$/;

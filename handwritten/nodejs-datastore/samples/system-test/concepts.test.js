@@ -41,7 +41,7 @@ test.before((t) => {
   query = new Query(projectId);
 });
 
-test.after(async () => {
+test.after.always(async () => {
   const datastore = transaction.datastore;
   const query = datastore.createQuery(`Task`).select(`__key__`);
   const [entities] = await datastore.runQuery(query);
@@ -49,7 +49,7 @@ test.after(async () => {
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 // Transactions
 test.serial(`performs a transactional update`, (t) => transaction.testTransactionalUpdate(t));
