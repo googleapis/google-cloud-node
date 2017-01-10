@@ -17,6 +17,7 @@
 'use strict';
 
 var path = require('path');
+var semver = require('semver');
 
 require('shelljs/global');
 
@@ -33,6 +34,22 @@ var args = process.argv.splice(1);
 var moduleName = args[1];
 var newVersion = args[2].replace(/^v*/, '');
 var tagName = [moduleName, newVersion].join('-');
+
+var npmModuleName = moduleName === 'google-cloud' ? '' : '@google-cloud/';
+npmModuleName += moduleName;
+
+var versions = exec('npm show ' + npmModuleName + ' versions --json', {
+  cwd: cwd,
+  silent: true
+}).stdout;
+
+var latestVersion = JSON.parse(versions).pop();
+
+if (semver.lte(newVersion, latestVersion)) {
+  throw new Error([
+    'A newer version of `' + npmModuleName +'` is on npm: ' + latestVersion
+  ].join(''));
+}
 
 if (moduleName === 'google-cloud') {
   if (npmVersion < 3) {
