@@ -50,7 +50,7 @@
     "bigtable"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.9.0",
+    "@google-cloud/common": "^0.11.0",
     "arrify": "^1.0.0",
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
