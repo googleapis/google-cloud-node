@@ -79,7 +79,8 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
     'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
-  var operationsClient = new gax.lro({
+
+  this.operationsClient = new gax.lro({
     auth: gaxGrpc.auth,
     grpc: gaxGrpc.grpc
   }).operationsClient({
@@ -91,9 +92,9 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
     appVersion: appVersion
   });
 
-  var longrunningDescriptors = {
+  this.longrunningDescriptors = {
     asyncRecognize: new gax.LongrunningDescriptor(
-      operationsClient,
+      this.operationsClient,
       grpcClients.google.cloud.speech.v1beta1.AsyncRecognizeResponse.decode,
       grpcClients.google.cloud.speech.v1beta1.AsyncRecognizeMetadata.decode)
   };
@@ -103,6 +104,8 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
       configData,
       clientConfig,
       {'x-goog-api-client': googleApiClient});
+
+  var self = this;
 
   var speechStub = gaxGrpc.createStub(
       servicePath,
@@ -115,13 +118,16 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
     'streamingRecognize'
   ];
   speechStubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       speechStub.then(function(speechStub) {
-        return speechStub[methodName].bind(speechStub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return speechStub[methodName].apply(speechStub, args);
+        }
       }),
       defaults[methodName],
-      STREAM_DESCRIPTORS[methodName] || longrunningDescriptors[methodName]);
-  }.bind(this));
+      STREAM_DESCRIPTORS[methodName] || self.longrunningDescriptors[methodName]);
+  });
 }
 
 // Service calls

@@ -580,10 +580,6 @@ describe('Speech', function() {
     });
 
     it('should delete verbose option from request object', function(done) {
-      var stream = speech.createRecognizeStream({
-        verbose: true
-      });
-
       speech.api.Speech = {
         streamingRecognize: function() {
           var stream = through.obj();
@@ -599,6 +595,32 @@ describe('Speech', function() {
         }
       };
 
+      var stream = speech.createRecognizeStream({
+        verbose: true
+      });
+      stream.emit('writing');
+    });
+
+    it('should accept the optional timeout parameter', function(done) {
+      var timeout = 200000;
+
+      speech.api.Speech = {
+        streamingRecognize: function(opts) {
+          assert.deepEqual(opts.timeout, timeout);
+          var stream = through.obj();
+
+          stream.on('data', function(data) {
+            assert.deepEqual(data, {
+              streamingConfig: {} // No `timeout` property.
+            });
+            done();
+          });
+
+          return stream;
+        }
+      };
+
+      var stream = speech.createRecognizeStream({timeout: timeout});
       stream.emit('writing');
     });
   });

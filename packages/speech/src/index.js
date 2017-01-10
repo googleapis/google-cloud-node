@@ -364,13 +364,21 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     property, a `confidence` score from `0` - `100`, and an `alternatives`
  *     array consisting of other transcription possibilities.
  *
+ * Note that speech API sets the limits for the audio duration.
+ * See [Content Limits]{@link https://cloud.google.com/speech/limits#content} for the details.
+ *
  * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
+ * @resource [Content Limits]{@link https://cloud.google.com/speech/limits#content}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
+ * @param {number=} config.timeout - Customize the timeout number in milliseconds
+ *     for underlying gRPC call. This will affect the audio duration; when longer
+ *     timeout needs to be specified when the audio input is longer. By default,
+ *     it will use the timeout enough for 60 seconds audio.
  *
  * @example
  * var fs = require('fs');
@@ -469,10 +477,16 @@ Speech.prototype.createRecognizeStream = function(config) {
   var verboseMode = config.verbose === true;
   delete config.verbose;
 
+  var callOptions = null;
+  if ('timeout' in config) {
+    callOptions = {timeout: timeout};
+    delete config.timeout;
+  }
+
   var recognizeStream = streamEvents(pumpify.obj());
 
   recognizeStream.once('writing', function() {
-    var requestStream = self.api.Speech.streamingRecognize();
+    var requestStream = self.api.Speech.streamingRecognize(callOptions);
 
     requestStream.on('response', function(response) {
       recognizeStream.emit('response', response);
