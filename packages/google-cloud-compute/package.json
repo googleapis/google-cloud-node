@@ -50,7 +50,7 @@
     "compute engine"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.9.0",
+    "@google-cloud/common": "^0.11.0",
     "arrify": "^1.0.0",
     "async": "^2.0.1",
     "create-error-class": "^3.0.2",
