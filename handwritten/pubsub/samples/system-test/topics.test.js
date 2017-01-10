@@ -37,7 +37,7 @@ test.before(async () => {
   } catch (err) {} // ignore error
 });
 
-test.after(async () => {
+test.after.always(async () => {
   try {
     await pubsub.subscription(subscriptionNameOne).delete();
   } catch (err) {} // ignore error

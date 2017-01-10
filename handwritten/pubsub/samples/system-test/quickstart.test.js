@@ -26,7 +26,7 @@ const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 
 test.before(stubConsole);
-test.after(() => {
+test.after.always(() => {
   restoreConsole();
   return pubsub.topic(topicName).delete().catch(() => {});
 });

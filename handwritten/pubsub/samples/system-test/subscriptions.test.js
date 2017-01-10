@@ -40,7 +40,7 @@ test.before(async () => {
   ]);
 });
 
-test.after(async () => {
+test.after.always(async () => {
   try {
     await pubsub.subscription(subscriptionNameOne).delete();
   } catch (err) {} // ignore error
@@ -59,7 +59,7 @@ test.after(async () => {
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.serial(`should create a subscription`, async (t) => {
   const output = await runAsync(`${cmd} create ${topicNameOne} ${subscriptionNameOne}`, cwd);
