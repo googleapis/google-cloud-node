@@ -29,14 +29,14 @@ test.before(async () => {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
-test.after(async () => {
+test.after.always(async () => {
   try {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.cb(`should get a task from Datastore`, (t) => {
   const datastoreMock = {
