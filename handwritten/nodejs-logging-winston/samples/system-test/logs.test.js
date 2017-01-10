@@ -24,7 +24,7 @@ const filter = `resource.type="global" AND logName="projects/${projectId}/logs/$
 const message = `Hello world!`;
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.cb.serial(`should write a log entry`, (t) => {
   const options = {

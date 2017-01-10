@@ -31,7 +31,7 @@ test.before(async (t) => {
   await storage.createBucket(bucketName);
 });
 
-test.after(async (t) => {
+test.after.always(async (t) => {
   try {
     await logging.sink(sinkName).delete();
   } catch (err) {} // ignore error
@@ -41,7 +41,7 @@ test.after(async (t) => {
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.cb.serial(`should create a new sink`, (t) => {
   program.createSink(sinkName, bucketName, filter, (err, sink, apiResponse) => {

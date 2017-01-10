@@ -23,14 +23,14 @@ const uuid = require(`uuid`);
 
 const logName = `nodejs-docs-samples-test-${uuid.v4()}`;
 
-test.after(async () => {
+test.after.always(async () => {
   try {
     await logging.log(logName).delete();
   } catch (err) {} // ignore error
 });
 
 test.beforeEach(stubConsole);
-test.afterEach(restoreConsole);
+test.afterEach.always(restoreConsole);
 
 test.cb(`should log an entry`, (t) => {
   const expectedlogName = `my-log`;
