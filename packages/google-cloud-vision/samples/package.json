@@ -5,13 +5,15 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "cd ..; npm run st -- --verbose vision/system-test/*.test.js"
+    "test": "cd ..; npm run st -- --verbose vision/system-test/detect.test.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "0.6.0",
     "@google-cloud/vision": "0.7.0",
     "async": "2.1.4",
     "natural": "0.4.0",
-    "redis": "2.6.3"
+    "redis": "2.6.3",
+    "yargs": "6.6.0"
   },
   "optionalDependencies": {
     "canvas": "1.6.2"
