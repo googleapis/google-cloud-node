@@ -375,10 +375,10 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
- * @param {number=} config.timeout - Customize the timeout number in milliseconds
- *     for underlying gRPC call. This will affect the audio duration; when longer
- *     timeout needs to be specified when the audio input is longer. By default,
- *     it will use the timeout enough for 60 seconds audio.
+ * @param {number=} config.timeout - Customize the timeout number in
+ *     milliseconds for underlying gRPC call. This will affect the input audio
+ *     duration; longer timeout needs to be specified when the audio input is
+ *     longer. By default, it will use the timeout enough for 60 seconds audio.
  *
  * @example
  * var fs = require('fs');
