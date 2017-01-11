@@ -479,7 +479,7 @@ Speech.prototype.createRecognizeStream = function(config) {
 
   var callOptions = null;
   if ('timeout' in config) {
-    callOptions = {timeout: timeout};
+    callOptions = {timeout: config.timeout};
     delete config.timeout;
   }
 
