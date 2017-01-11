@@ -123,7 +123,7 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
         return function() {
           var args = Array.prototype.slice.call(arguments, 0);
           return speechStub[methodName].apply(speechStub, args);
-        }
+        };
       }),
       defaults[methodName],
       STREAM_DESCRIPTORS[methodName] || self.longrunningDescriptors[methodName]);
