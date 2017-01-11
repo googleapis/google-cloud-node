@@ -48,7 +48,7 @@ var errorMessage = format([
   'connection.'
 ].join(' '), {
   baseUrl: 'https://googlecloudplatform.github.io/google-cloud-node/#',
-  path: '/docs/guides/authentication'
+  path: 'docs/guides/authentication'
 });
 
 var missingProjectIdError = new Error(errorMessage);
