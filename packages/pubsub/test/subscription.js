@@ -301,6 +301,38 @@ describe('Subscription', function() {
       });
     });
 
+    it('should work if nanos is 0', function() {
+      var obj = { hi: 'there' };
+      var stringified = new Buffer(JSON.stringify(obj)).toString('base64');
+      var attributes = {};
+      var publishTime = {
+        seconds: '1480413405',
+        nanos: 0
+      };
+
+      var seconds = parseInt(publishTime.seconds, 10);
+      var milliseconds = parseInt(publishTime.nanos, 10) / 1e6;
+      var expectedDate = new Date(seconds * 1000 + milliseconds);
+
+      var msg = Subscription.formatMessage_({
+        ackId: 'abc',
+        message: {
+          data: stringified,
+          messageId: 7,
+          attributes: attributes,
+          publishTime: publishTime
+        }
+      });
+
+      assert.deepEqual(msg, {
+        ackId: 'abc',
+        id: 7,
+        data: obj,
+        attributes: attributes,
+        timestamp: expectedDate
+      });
+    });
+
     it('should decode buffer to string', function() {
       var msg = Subscription.formatMessage_(messageObj.receivedMessages[0]);
       assert.deepEqual(msg, expectedMessage);
