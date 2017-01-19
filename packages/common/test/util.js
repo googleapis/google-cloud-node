@@ -110,7 +110,7 @@ describe('common/util', function() {
       'an authenticated connection.'
     ].join(' '), {
       baseUrl: 'https://googlecloudplatform.github.io/google-cloud-node/#',
-      path: '/docs/guides/authentication'
+      path: 'docs/guides/authentication'
     });
 
     var missingProjectIdError = new Error(errorMessage);
