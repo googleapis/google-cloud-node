@@ -96,6 +96,7 @@ describe('common/util', function() {
     assert.deepEqual(REQUEST_DEFAULT_CONF, {
       timeout: 60000,
       gzip: true,
+      forever: true,
       pool: {
         maxSockets: Infinity
       }
