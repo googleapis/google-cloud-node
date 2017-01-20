@@ -1,0 +1,23 @@
+# Test against this version of Node.js
+environment:
+  matrix:
+  # node.js
+  - nodejs_version: "4"
+  - nodejs_version: "6"
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install
+  # set GCLOUD_PROJECT
+  - SET GCLOUD_PROJECT=0
+
+# Post-install test scripts.
+test_script:
+  # run tests
+  - ps: node_modules/.bin/mocha test --timeout 4000 --R
+
+# Don't actually build using MSBuild
+build: off

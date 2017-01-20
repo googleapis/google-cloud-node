@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "transpile.js",
+  "sourceRoot": "",
+  "sources": [
+    "transpile.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAA,GAAA,GAAM,SAAC,CAAD;IACJ,IAAY,CAAA,KAAK,CAAjB;AAAA,aAAO,EAAP;;IACA,CAAA,CAAE,gBAAF;AACA,WAAO;EAHH;;EAKN,CAAA,GAAI,SAAC,CAAD;WACF;EADE;;EAGJ,MAAM,CAAC,OAAO,CAAC,GAAf,GAAqB;AARrB"
+}
