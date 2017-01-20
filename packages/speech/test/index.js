@@ -606,7 +606,7 @@ describe('Speech', function() {
 
       speech.api.Speech = {
         streamingRecognize: function(opts) {
-          assert.deepEqual(opts.timeout, timeout);
+          assert.strictEqual(opts.timeout, timeout);
           var stream = through.obj();
 
           stream.on('data', function(data) {
@@ -620,7 +620,9 @@ describe('Speech', function() {
         }
       };
 
-      var stream = speech.createRecognizeStream({timeout: timeout});
+      var stream = speech.createRecognizeStream({
+        timeout: timeout
+      });
       stream.emit('writing');
     });
   });

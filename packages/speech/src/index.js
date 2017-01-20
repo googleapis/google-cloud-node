@@ -477,16 +477,16 @@ Speech.prototype.createRecognizeStream = function(config) {
   var verboseMode = config.verbose === true;
   delete config.verbose;
 
-  var callOptions = null;
+  var gaxOptions = {};
   if ('timeout' in config) {
-    callOptions = {timeout: config.timeout};
+    gaxOptions.timeout = config.timeout;
     delete config.timeout;
   }
 
   var recognizeStream = streamEvents(pumpify.obj());
 
   recognizeStream.once('writing', function() {
-    var requestStream = self.api.Speech.streamingRecognize(callOptions);
+    var requestStream = self.api.Speech.streamingRecognize(gaxOptions);
 
     requestStream.on('response', function(response) {
       recognizeStream.emit('response', response);
