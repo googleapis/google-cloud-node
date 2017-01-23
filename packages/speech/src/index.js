@@ -364,8 +364,9 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     property, a `confidence` score from `0` - `100`, and an `alternatives`
  *     array consisting of other transcription possibilities.
  *
- * Note that speech API sets the limits for the audio duration.
- * See [Content Limits]{@link https://cloud.google.com/speech/limits#content} for the details.
+ * Google Cloud Speech sets the limits for the audio duration. For more
+ * information, see
+ * [Content Limits]{@link https://cloud.google.com/speech/limits#content}.
  *
  * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
@@ -373,12 +374,12 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
+ * @param {number=} config.timeout - In seconds, the amount of time before the
+ *     underlying API request times out. The default value, `190`, is sufficient
+ *     for audio input of 60 seconds or less. If your input is longer, consider
+ *     using a higher timeout value.
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
- * @param {number=} config.timeout - Customize the timeout number in
- *     milliseconds for underlying gRPC call. This will affect the input audio
- *     duration; longer timeout needs to be specified when the audio input is
- *     longer. By default, it will use the timeout enough for 60 seconds audio.
  *
  * @example
  * var fs = require('fs');
@@ -478,8 +479,9 @@ Speech.prototype.createRecognizeStream = function(config) {
   delete config.verbose;
 
   var gaxOptions = {};
-  if ('timeout' in config) {
-    gaxOptions.timeout = config.timeout;
+
+  if (is.number(config.timeout)) {
+    gaxOptions.timeout = config.timeout * 1000;
     delete config.timeout;
   }
 
