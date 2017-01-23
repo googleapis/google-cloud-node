@@ -24,7 +24,7 @@ var through = require('through2');
 var uuid = require('uuid');
 
 var paginator = require('../src/paginator.js');
-var util = require('../src/util.js');
+var util = extend({}, require('../src/util.js'));
 
 var overrides = {};
 
@@ -56,14 +56,13 @@ function resetOverrides() {
   }, {});
 }
 
-override('util', util);
-
 describe('paginator', function() {
   var UUID = uuid.v1();
 
   function FakeClass() {}
 
   before(function() {
+    override('util', util);
     paginator = proxyquire('../src/paginator.js', {
       './util.js': util
     });
