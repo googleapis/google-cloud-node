@@ -364,7 +364,7 @@ Subscription.formatMessage_ = function(msg, encoding) {
     if (innerMessage.publishTime) {
       var publishTime = innerMessage.publishTime;
 
-      if (publishTime.seconds && publishTime.nanos) {
+      if (is.defined(publishTime.seconds) && is.defined(publishTime.nanos)) {
         var seconds = parseInt(publishTime.seconds, 10);
         var milliseconds = parseInt(publishTime.nanos, 10) / 1e6;
         message.timestamp = new Date(seconds * 1000 + milliseconds);
