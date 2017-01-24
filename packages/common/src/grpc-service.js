@@ -362,17 +362,52 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
-        .on('metadata', function() {
-          // retry-request requires a server response before it starts emitting
-          // data. The closest mechanism grpc provides is a metadata event, but
-          // this does not provide any kind of response status. So we're faking
-          // it here with code `0` which translates to HTTP 200.
-          //
-          // https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1444#discussion_r71812636
-          var grcpStatus = GrpcService.decorateStatus_({ code: 0 });
+      var shouldRetryStream = through({ objectMode: objectMode });
 
-          this.emit('response', grcpStatus);
+      var responseEmitted = false;
+      function onResponse(resp) {
+        if (!responseEmitted) {
+          responseEmitted = true;
+          shouldRetryStream.emit('response', resp);
+        } else if (resp.code !== 200) {
+          // retry-request has already handled a response from this request. We
+          // need to consider this an error that should end the user's stream.
+          stream.destroy(resp);
+        }
+      }
+
+      return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
+        // Errors are handled in the `status` event handler.
+        .on('error', function(err) {
+          var grpcError = GrpcService.decorateError_(err);
+          onResponse(grpcError);
+        })
+
+        // Status is emitted at the end of every gRPC request stream.
+        .on('status', function(status) {
+          var grpcStatus = GrpcService.decorateStatus_(status);
+
+          if (grpcStatus.code === 200) {
+            onResponse(grpcStatus);
+            shouldRetryStream.uncork();
+          }
+        })
+
+        .pipe(shouldRetryStream)
+
+        // retry-request requires a server response before it starts emitting
+        // data. The closest mechanism grpc provides is a metadata event, but
+        // this does not provide any kind of response status. So we're saying
+        // here: if we receive a data event, things must be going well.
+        .once('data', function(chunk, enc) {
+          var grpcStatus = GrpcService.decorateStatus_({ code: 0 });
+          onResponse(grpcStatus);
+        })
+
+        // A gRPC stream will end before it emits the status event. Stop the
+        // stream so we can be sure we should continue.
+        .on('prefinish', function() {
+          this.cork();
         });
     }
   };
@@ -380,8 +415,12 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
   return retryRequest(null, retryOpts)
     .on('error', function(err) {
       var grpcError = GrpcService.decorateError_(err);
-
       stream.destroy(grpcError || err);
+    })
+    .on('response', function(resp) {
+      if (resp.code !== 200) {
+        this.emit('error', resp);
+      }
     })
     .pipe(stream);
 };
@@ -625,7 +664,7 @@ GrpcService.decorateStatus_ = function(status) {
  * @return {boolean} shouldRetry
  */
 GrpcService.shouldRetryRequest_ = function(response) {
-  return [429, 500, 502, 503].indexOf(response.code) > -1;
+  return [429, 500, 502, 503, 504].indexOf(response.code) > -1;
 };
 
 /**
