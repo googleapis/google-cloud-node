@@ -364,11 +364,20 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     property, a `confidence` score from `0` - `100`, and an `alternatives`
  *     array consisting of other transcription possibilities.
  *
+ * Google Cloud Speech sets the limits for the audio duration. For more
+ * information, see
+ * [Content Limits]{@link https://cloud.google.com/speech/limits#content}.
+ *
  * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
+ * @resource [Content Limits]{@link https://cloud.google.com/speech/limits#content}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
+ * @param {number=} config.timeout - In seconds, the amount of time before the
+ *     underlying API request times out. The default value, `190`, is sufficient
+ *     for audio input of 60 seconds or less. If your input is longer, consider
+ *     using a higher timeout value.
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
  *
@@ -469,10 +478,17 @@ Speech.prototype.createRecognizeStream = function(config) {
   var verboseMode = config.verbose === true;
   delete config.verbose;
 
+  var gaxOptions = {};
+
+  if (is.number(config.timeout)) {
+    gaxOptions.timeout = config.timeout * 1000;
+    delete config.timeout;
+  }
+
   var recognizeStream = streamEvents(pumpify.obj());
 
   recognizeStream.once('writing', function() {
-    var requestStream = self.api.Speech.streamingRecognize();
+    var requestStream = self.api.Speech.streamingRecognize(gaxOptions);
 
     requestStream.on('response', function(response) {
       recognizeStream.emit('response', response);
