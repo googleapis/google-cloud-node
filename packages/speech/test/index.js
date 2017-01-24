@@ -589,15 +589,52 @@ describe('Speech', function() {
           var stream = through.obj();
 
           stream.on('data', function(data) {
-            assert.deepEqual(data, {
-              streamingConfig: {} // No `verbose` property.
-            });
+            assert.strictEqual(data.streamingConfig.verbose, undefined);
             done();
           });
 
           return stream;
         }
       };
+
+      stream.emit('writing');
+    });
+
+    it('should allow specifying a timeout', function(done) {
+      var timeout = 200;
+      var expectedTimeout = 200 * 1000;
+
+      speech.api.Speech = {
+        streamingRecognize: function(opts) {
+          assert.strictEqual(opts.timeout, expectedTimeout);
+          done();
+        }
+      };
+
+      var stream = speech.createRecognizeStream({
+        timeout: timeout
+      });
+
+      stream.emit('writing');
+    });
+
+    it('should delete timeout option from request object', function(done) {
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var stream = through.obj();
+
+          stream.on('data', function(data) {
+            assert.strictEqual(data.streamingConfig.timeout, undefined);
+            done();
+          });
+
+          return stream;
+        }
+      };
+
+      var stream = speech.createRecognizeStream({
+        timeout: 90
+      });
 
       stream.emit('writing');
     });
