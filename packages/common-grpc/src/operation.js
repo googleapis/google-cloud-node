@@ -15,30 +15,25 @@
  */
 
 /*!
- * @module common/grpcOperation
+ * @module commonGrpc/operation
  */
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var modelo = require('modelo');
 
 /**
- * @type {module:common/grpcServiceObject}
+ * @type {module:commonGrpc/serviceObject}
  * @private
  */
-var GrpcServiceObject = require('./grpc-service-object.js');
+var ServiceObject = require('./service-object.js');
 
 /**
- * @type {module:common/operation}
+ * @type {module:commonGrpc/service}
  * @private
  */
-var Operation = require('./operation.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = require('./util.js');
+var Service = require('./service.js');
 
 // jscs:disable maximumLineLength
 /**
@@ -48,13 +43,13 @@ var util = require('./util.js');
  * @constructor
  * @alias module:common/grpcOperation
  *
- * @param {module:common/grpcService|module:common/grpcServiceObject} parent - The
+ * @param {module:commonGrpc/service|module:commonGrpc/serviceObject} parent - The
  *     parent object. This should be configured to use the longrunning.operation
  *     service.
  * @param {string} name - The operation name.
  */
 // jscs:enable maximumLineLength
-function GrpcOperation(parent, name) {
+function Operation(parent, name) {
   var methods = {
 
     /**
@@ -100,11 +95,11 @@ function GrpcOperation(parent, name) {
     methods: methods
   };
 
-  Operation.call(this, config);
-  GrpcServiceObject.call(this, config);
+  common.Operation.call(this, config);
+  ServiceObject.call(this, config);
 }
 
-modelo.inherits(GrpcOperation, GrpcServiceObject, Operation);
+modelo.inherits(Operation, ServiceObject, common.Operation);
 
 /**
  * Cancel the operation.
@@ -114,7 +109,7 @@ modelo.inherits(GrpcOperation, GrpcServiceObject, Operation);
  *     request.
  * @param {object} callback.apiResponse - The full API response.
  */
-GrpcOperation.prototype.cancel = function(callback) {
+Operation.prototype.cancel = function(callback) {
   var protoOpts = {
     service: 'Operations',
     method: 'cancelOperation'
@@ -124,7 +119,34 @@ GrpcOperation.prototype.cancel = function(callback) {
     name: this.id
   };
 
-  this.request(protoOpts, reqOpts, callback || util.noop);
+  this.request(protoOpts, reqOpts, callback || common.util.noop);
 };
 
-module.exports = GrpcOperation;
+/**
+ * Poll for a status update. Execute the callback:
+ *
+ *   - callback(err): Operation failed
+ *   - callback(): Operation incomplete
+ *   - callback(null, metadata): Operation complete
+ *
+ * @private
+ *
+ * @param {function} callback
+ */
+Operation.prototype.poll_ = function(callback) {
+  this.getMetadata(function(err, resp) {
+    if (err || resp.error) {
+      callback(err || Service.decorateGrpcStatus_(resp.error));
+      return;
+    }
+
+    if (!resp.done) {
+      callback();
+      return;
+    }
+
+    callback(null, resp);
+  });
+};
+
+module.exports = Operation;

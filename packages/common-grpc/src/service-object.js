@@ -15,25 +15,15 @@
  */
 
 /*!
- * @module common/grpc-service-object
+ * @module commonGrpc/serviceObject
  */
 
 'use strict';
 
 var extend = require('extend');
 var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = require('./service-object.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = require('./util.js');
+var ServiceObject = require('@google-cloud/common').ServiceObject;
+var util = require('@google-cloud/common').util;
 
 /**
  * GrpcServiceObject is a base class, meant to be inherited from by a service

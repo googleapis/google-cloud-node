@@ -19,8 +19,7 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-
-var util = require('../src/util.js');
+var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
@@ -44,9 +43,11 @@ describe('GrpcServiceObject', function() {
   var REQ_OPTS = {};
 
   before(function() {
-    GrpcServiceObject = proxyquire('../src/grpc-service-object.js', {
-      './service-object.js': FakeServiceObject,
-      './util.js': fakeUtil
+    GrpcServiceObject = proxyquire('../src/service-object.js', {
+      '@google-cloud/common': {
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
+      }
     });
   });
 

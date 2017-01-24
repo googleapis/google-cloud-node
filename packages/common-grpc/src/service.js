@@ -15,7 +15,7 @@
  */
 
 /*!
- * @module common/grpc-service
+ * @module commonGrpc/service
  */
 
 'use strict';
@@ -29,19 +29,9 @@ var is = require('is');
 var nodeutil = require('util');
 var path = require('path');
 var retryRequest = require('retry-request');
+var Service = require('@google-cloud/common').Service;
 var through = require('through2');
-
-/**
- * @type {module:common/service}
- * @private
- */
-var Service = require('./service.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = require('./util.js');
+var util = require('@google-cloud/common').util;
 
 /**
  * @const {object} - A map of protobuf codes to HTTP status codes.

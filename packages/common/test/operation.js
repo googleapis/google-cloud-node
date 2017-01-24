@@ -29,12 +29,6 @@ var fakeModelo = {
   }
 };
 
-var decorateGrpcStatusOverride_;
-function FakeGrpcService() {}
-FakeGrpcService.decorateGrpcStatus_ = function() {
-  return (decorateGrpcStatusOverride_ || util.noop).apply(null, arguments);
-};
-
 function FakeServiceObject() {
   this.serviceObjectArguments_ = arguments;
 }
@@ -49,7 +43,6 @@ describe('Operation', function() {
   before(function() {
     Operation = proxyquire('../src/operation.js', {
       modelo: fakeModelo,
-      './grpc-service.js': FakeGrpcService,
       './service-object.js': FakeServiceObject
     });
   });
@@ -60,7 +53,6 @@ describe('Operation', function() {
       id: OPERATION_ID
     });
     operation.Promise = Promise;
-    decorateGrpcStatusOverride_ = null;
   });
 
   describe('instantiation', function() {
@@ -207,6 +199,82 @@ describe('Operation', function() {
     });
   });
 
+  describe('poll_', function() {
+    it('should call getMetdata', function(done) {
+      operation.getMetadata = function() {
+        done();
+      };
+
+      operation.poll_(assert.ifError);
+    });
+
+    describe('could not get metadata', function() {
+      it('should callback with an error', function(done) {
+        var error = new Error('Error.');
+
+        operation.getMetadata = function(callback) {
+          callback(error);
+        };
+
+        operation.poll_(function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should callback with the operation error', function(done) {
+        var apiResponse = {
+          error: {}
+        };
+
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+
+        operation.poll_(function(err) {
+          assert.strictEqual(err, apiResponse.error);
+          done();
+        });
+      });
+    });
+
+    describe('operation incomplete', function() {
+      var apiResponse = { done: false };
+
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should callback with no arguments', function(done) {
+        operation.poll_(function(err, resp) {
+          assert.strictEqual(err, undefined);
+          assert.strictEqual(resp, undefined);
+          done();
+        });
+      });
+    });
+
+    describe('operation complete', function() {
+      var apiResponse = { done: true };
+
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should emit complete with metadata', function(done) {
+        operation.poll_(function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
   describe('startPolling_', function() {
     var listenForEvents_;
 
@@ -258,34 +326,6 @@ describe('Operation', function() {
       it('should emit the error', function(done) {
         operation.on('error', function(err) {
           assert.strictEqual(err, error);
-          done();
-        });
-
-        operation.startPolling_();
-      });
-    });
-
-    describe('operation failure', function() {
-      var apiResponse = {
-        error: {}
-      };
-
-      beforeEach(function() {
-        operation.getMetadata = function(callback) {
-          callback(null, apiResponse, apiResponse);
-        };
-      });
-
-      it('should emit the operation error', function(done) {
-        var decoratedGrpcStatus = {};
-
-        decorateGrpcStatusOverride_ = function(status) {
-          assert.strictEqual(status, apiResponse.error);
-          return decoratedGrpcStatus;
-        };
-
-        operation.on('error', function(err) {
-          assert.strictEqual(err, decoratedGrpcStatus);
           done();
         });
 
