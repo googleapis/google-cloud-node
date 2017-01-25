@@ -28,6 +28,57 @@ including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
 ## Samples
 
+### Metrics
+
+View the [documentation][metrics_docs] or the [source code][metrics_code].
+
+__Usage:__ `node metrics.js --help`
+
+```
+Commands:
+  create [projectId]                       Creates an example 'custom.googleapis.com/stores/daily_sales' custom metric
+                                           descriptor.
+  list [projectId]                         Lists metric descriptors.
+  get <metricId> [projectId]               Get a metric descriptor.
+  delete <metricId> [projectId]            Deletes a custom metric descriptor.
+  write [projectId]                        Writes example time series data to
+                                           'custom.googleapis.com/stores/daily_sales'.
+  read <filter> [projectId]                Reads time series data that matches the given filter.
+  read-fields [projectId]                  Reads headers of time series data that matches
+                                           'compute.googleapis.com/instance/cpu/utilization'.
+  read-aggregate [projectId]               Aggregates time series data that matches
+                                           'compute.googleapis.com/instance/cpu/utilization'.
+  read-reduce [projectId]                  Reduces time series data that matches
+                                           'compute.googleapis.com/instance/cpu/utilization'.
+  list-resources [projectId]               Lists monitored resource descriptors.
+  get-resource <resourceType> [projectId]  Get a monitored resource descriptor.
+
+Options:
+  --help           Show help                                                                                   [boolean]
+  --projectId, -p                                                                                               [string]
+
+Examples:
+  node metrics.js create
+  node metrics.js list
+  node metrics.js get logging.googleapis.com/log_entry_count
+  node metrics.js delete
+  custom.googleapis.com/stores/daily_sales
+  node metrics.js list-resources
+  node metrics.js get-resource cloudsql_database
+  node metrics.js write
+  node metrics.js read
+  'metric.type="compute.googleapis.com/instance/cpu/utilizatio
+  n"'
+  node metrics.js read-fields
+  node metrics.js read-aggregate
+  node metrics.js read-reduce
+
+For more information, see https://cloud.google.com/monitoring/docs
+```
+
+[metrics_docs]: https://cloud.google.com/monitoring/docs
+[metrics_code]: metrics.js
+
 ### List resources
 
 `list_resources.js` is a command-line program to demonstrate connecting to the Google
