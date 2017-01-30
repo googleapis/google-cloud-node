@@ -25,12 +25,6 @@ var extend = require('extend');
 var modelo = require('modelo');
 
 /**
- * @type {module:common/service}
- * @private
- */
-var GrpcService = require('./grpc-service.js');
-
-/**
  * @type {module:common/serviceObject}
  * @private
  */
@@ -151,7 +145,7 @@ Operation.prototype.listenForEvents_ = function() {
 Operation.prototype.poll_ = function(callback) {
   this.getMetadata(function(err, resp) {
     if (err || resp.error) {
-      callback(err || GrpcService.decorateGrpcStatus_(resp.error));
+      callback(err || resp.error);
       return;
     }
 

@@ -27,8 +27,8 @@ var proxyquire = require('proxyquire');
 var retryRequest = require('retry-request');
 var sinon = require('sinon').sandbox.create();
 var through = require('through2');
+var util = require('@google-cloud/common').util;
 
-var util = require('../src/util.js');
 var fakeUtil = extend({}, util);
 
 function FakeService() {
@@ -117,12 +117,14 @@ describe('GrpcService', function() {
   fakeGoogleProtoFiles[CONFIG.service][CONFIG.apiVersion] = PROTO_FILE_PATH;
 
   before(function() {
-    GrpcService = proxyquire('../src/grpc-service.js', {
+    GrpcService = proxyquire('../src/service.js', {
       'google-proto-files': fakeGoogleProtoFiles,
       'retry-request': fakeRetryRequest,
       grpc: fakeGrpc,
-      './service.js': FakeService,
-      './util.js': fakeUtil
+      '@google-cloud/common': {
+        Service: FakeService,
+        util: fakeUtil
+      }
     });
     GrpcServiceCached = extend(true, {}, GrpcService);
   });

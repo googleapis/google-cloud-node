@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,38 +14,23 @@
  * limitations under the License.
  */
 
-/**
- * @type {module:common/logger}
- * @private
+/*!
+ * @module commonGrpc
  */
-exports.logger = require('./logger.js');
+
+'use strict';
 
 /**
- * @type {module:common/operation}
- * @private
+ * @type {module:commonGrpc/operation}
  */
 exports.Operation = require('./operation.js');
 
 /**
- * @type {module:common/paginator}
- * @private
- */
-exports.paginator = require('./paginator.js');
-
-/**
- * @type {module:common/service}
- * @private
- */
-exports.Service = require('./service.js');
-
-/**
- * @type {module:common/serviceObject}
- * @private
+ * @type {module:commonGrpc/serviceObject}
  */
 exports.ServiceObject = require('./service-object.js');
 
 /**
- * @type {module:common/util}
- * @private
+ * @type {module:commonGrpc/service}
  */
-exports.util = require('./util.js');
+exports.Service = require('./service.js');

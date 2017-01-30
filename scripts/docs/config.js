@@ -23,6 +23,7 @@ module.exports = {
   TOC: 'toc.json',
   IGNORE: [
     'common',
+    'common-grpc',
     'datastore/src/entity.js',
     'datastore/src/request.js',
     'logging/src/metadata.js',

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +19,26 @@
 var assert = require('assert');
 var proxyquire = require('proxyquire');
 
-var fakeLogger = {};
 var fakeOperation = {};
-var fakePaginator = {};
 var fakeService = {};
 var fakeServiceObject = {};
-var fakeUtil = {};
 
-describe('common', function() {
-  var common;
+describe('grpc-common', function() {
+  var grpcCommon;
 
   before(function() {
-    common = proxyquire('../src/index.js', {
-      './logger.js': fakeLogger,
+    grpcCommon = proxyquire('../src/index.js', {
       './operation.js': fakeOperation,
-      './paginator.js': fakePaginator,
       './service.js': fakeService,
-      './service-object.js': fakeServiceObject,
-      './util.js': fakeUtil
+      './service-object.js': fakeServiceObject
     });
   });
 
   it('should correctly export the common modules', function() {
-    assert.deepEqual(common, {
-      logger: fakeLogger,
+    assert.deepEqual(grpcCommon, {
       Operation: fakeOperation,
-      paginator: fakePaginator,
       Service: fakeService,
-      ServiceObject: fakeServiceObject,
-      util: fakeUtil
+      ServiceObject: fakeServiceObject
     });
   });
 });
