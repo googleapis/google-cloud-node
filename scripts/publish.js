@@ -41,11 +41,11 @@ npmModuleName += moduleName;
 var versions = exec('npm show ' + npmModuleName + ' versions --json', {
   cwd: cwd,
   silent: true
-}).stdout;
+}).stdout || '[]';
 
 var latestVersion = JSON.parse(versions).pop();
 
-if (semver.lte(newVersion, latestVersion)) {
+if (latestVersion && semver.lte(newVersion, latestVersion)) {
   throw new Error([
     'A newer version of `' + npmModuleName +'` is on npm: ' + latestVersion
   ].join(''));
@@ -101,7 +101,7 @@ setTimeout(function() {
   });
 
   // Publish the module
-  exec('npm publish', {
+  exec('npm publish --access public', {
     cwd: cwd
   });
 
