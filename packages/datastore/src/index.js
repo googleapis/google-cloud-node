@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
 var modelo = require('modelo');
 
@@ -318,10 +319,10 @@ function Datastore(options) {
     }
   };
 
-  common.GrpcService.call(this, config, options);
+  commonGrpc.Service.call(this, config, options);
 }
 
-modelo.inherits(Datastore, DatastoreRequest, common.GrpcService);
+modelo.inherits(Datastore, DatastoreRequest, commonGrpc.Service);
 
 /**
  * Helper function to get a Datastore Double object.
