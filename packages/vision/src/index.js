@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var async = require('async');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
@@ -1450,7 +1451,7 @@ Vision.formatEntityAnnotation_ = function(entityAnnotation, options) {
  * @private
  */
 Vision.formatError_ = function(err) {
-  var httpError = common.GrpcService.GRPC_ERROR_CODE_TO_HTTP[err.code];
+  var httpError = commonGrpc.Service.GRPC_ERROR_CODE_TO_HTTP[err.code];
 
   if (httpError) {
     err.code = httpError.code;
