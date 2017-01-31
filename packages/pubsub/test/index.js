@@ -77,9 +77,11 @@ describe('PubSub', function() {
     delete process.env.PUBSUB_EMULATOR_HOST;
     PubSub = proxyquire('../', {
       '@google-cloud/common': {
-        GrpcService: FakeGrpcService,
         paginator: fakePaginator,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        Service: FakeGrpcService
       },
       './subscription.js': Subscription,
       './topic.js': Topic

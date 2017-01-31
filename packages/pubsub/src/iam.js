@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
 var util = require('util');
 
@@ -79,10 +80,10 @@ function IAM(pubsub, id) {
 
   this.id = id;
 
-  common.GrpcService.call(this, config, pubsub.options);
+  commonGrpc.Service.call(this, config, pubsub.options);
 }
 
-util.inherits(IAM, common.GrpcService);
+util.inherits(IAM, commonGrpc.Service);
 
 /**
  * Get the IAM policy

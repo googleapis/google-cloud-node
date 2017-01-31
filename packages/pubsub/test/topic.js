@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
+var GrpcServiceObject = require('@google-cloud/common-grpc').ServiceObject;
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
@@ -60,11 +60,13 @@ describe('Topic', function() {
 
   before(function() {
     Topic = proxyquire('../src/topic.js', {
-      './iam.js': FakeIAM,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
-      }
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject
+      },
+      './iam.js': FakeIAM
     });
   });
 

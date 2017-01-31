@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var events = require('events');
 var is = require('is');
 var modelo = require('modelo');
@@ -270,7 +271,7 @@ function Subscription(pubsub, options) {
     config.methods.create = true;
   }
 
-  common.GrpcServiceObject.call(this, config);
+  commonGrpc.ServiceObject.call(this, config);
   events.EventEmitter.call(this);
 
   this.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;
@@ -331,7 +332,7 @@ function Subscription(pubsub, options) {
   this.listenForEvents_();
 }
 
-modelo.inherits(Subscription, common.GrpcServiceObject, events.EventEmitter);
+modelo.inherits(Subscription, commonGrpc.ServiceObject, events.EventEmitter);
 
 /**
  * Simplify a message from an API response to have five properties: `id`,
