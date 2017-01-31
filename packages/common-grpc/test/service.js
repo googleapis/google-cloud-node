@@ -524,6 +524,36 @@ describe('GrpcService', function() {
           { stringValue: String(date) }
         );
       });
+
+      it('should pass options to encoding values of a object', function() {
+        var object = { date: new Date() };
+        var encodedObject = {
+          structValue: {
+            fields: {
+              date: { stringValue: String(object.date) }
+            }
+          }
+        };
+
+        assert.deepEqual(
+          GrpcService.encodeValue_(object, OPTIONS),
+          encodedObject
+        );
+      });
+
+      it('should pass options to encoding values of an array', function() {
+        var array = [new Date()];
+        var encodedArray = {
+          listValue: {
+            values: [{ stringValue: String(array[0]) }]
+          }
+        };
+
+        assert.deepEqual(
+          GrpcService.encodeValue_(array, OPTIONS),
+          encodedArray
+        );
+      });
     });
   });
 
