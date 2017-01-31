@@ -70,8 +70,10 @@ describe('Datastore', function() {
   before(function() {
     Datastore = proxyquire('../', {
       '@google-cloud/common': {
-        GrpcService: FakeGrpcService,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        Service: FakeGrpcService
       },
       './entity.js': fakeEntity,
       './query.js': FakeQuery,
