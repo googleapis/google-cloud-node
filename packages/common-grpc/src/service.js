@@ -519,7 +519,7 @@ GrpcService.encodeValue_ = function(value, options) {
     convertedValue = {
       listValue: {
         values: value.map(function(value) {
-            return GrpcService.encodeValue_(value, options)
+          return GrpcService.encodeValue_(value, options);
         })
       }
     };

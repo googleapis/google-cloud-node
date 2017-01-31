@@ -525,13 +525,13 @@ describe('GrpcService', function() {
         );
       });
 
-      it('should return a string if the value is not recognized in a nested object', function() {
+      it('should pass options to encoding values of a object', function() {
         var object = { date: new Date() };
         var encodedObject = {
           structValue: {
-              fields: {
-                  date: { stringValue: String(object.date) }
-              }
+            fields: {
+              date: { stringValue: String(object.date) }
+            }
           }
         };
 
@@ -541,11 +541,11 @@ describe('GrpcService', function() {
         );
       });
 
-      it('should return a string if the value is not recognized in an array', function() {
+      it('should pass options to encoding values of an array', function() {
         var array = [new Date()];
         var encodedArray = {
           listValue: {
-              values: [{ stringValue: String(array[0]) }]
+            values: [{ stringValue: String(array[0]) }]
           }
         };
 
