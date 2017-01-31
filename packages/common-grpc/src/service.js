@@ -513,12 +513,14 @@ GrpcService.encodeValue_ = function(value, options) {
     };
   } else if (is.object(value)) {
     convertedValue = {
-      structValue: GrpcService.objToStruct_(value)
+      structValue: GrpcService.objToStruct_(value, options)
     };
   } else if (is.array(value)) {
     convertedValue = {
       listValue: {
-        values: value.map(GrpcService.encodeValue_)
+        values: value.map(function(value) {
+            return GrpcService.encodeValue_(value, options)
+        })
       }
     };
   } else {
