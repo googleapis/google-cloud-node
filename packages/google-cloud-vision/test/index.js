@@ -21,7 +21,7 @@ var async = require('async');
 var deepStrictEqual = require('deep-strict-equal');
 var extend = require('extend');
 var fs = require('fs');
-var GrpcService = require('@google-cloud/common').GrpcService;
+var GrpcService = require('@google-cloud/common-grpc').Service;
 var nodeutil = require('util');
 var prop = require('propprop');
 var proxyquire = require('proxyquire');
@@ -60,11 +60,11 @@ describe('Vision', function() {
 
   before(function() {
     Vision = proxyquire('../', {
-      request: fakeRequest,
       '@google-cloud/common': {
         Service: FakeService,
         util: fakeUtil
-      }
+      },
+      request: fakeRequest
     });
 
     VisionCached = extend({}, Vision);
