@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "Google Inc.",
   "description": "Stackdriver Logging Client Library for Node.js",
   "contributors": [
