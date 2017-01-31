@@ -88,6 +88,7 @@
       "name": "@google-cloud/bigtable",
       "defaultService": "bigtable",
       "versions": [
+        "0.8.0",
         "0.7.0",
         "0.6.0",
         "0.5.0",
@@ -163,6 +164,7 @@
       "name": "@google-cloud/logging",
       "defaultService": "logging",
       "versions": [
+        "0.7.0",
         "0.6.0",
         "0.5.1",
         "0.5.0",
@@ -203,6 +205,7 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
+        "0.8.0",
         "0.7.0",
         "0.6.0",
         "0.5.0",
@@ -231,6 +234,7 @@
       "name": "@google-cloud/speech",
       "defaultService": "speech",
       "versions": [
+        "0.6.0",
         "0.5.0",
         "0.4.1",
         "0.4.0",
@@ -273,6 +277,7 @@
       "name": "@google-cloud/vision",
       "defaultService": "vision",
       "versions": [
+        "0.8.0",
         "0.7.0",
         "0.6.0",
         "0.5.0",
