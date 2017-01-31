@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -234,10 +235,10 @@ function Instance(bigtable, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, config);
+  commonGrpc.ServiceObject.call(this, config);
 }
 
-util.inherits(Instance, common.GrpcServiceObject);
+util.inherits(Instance, commonGrpc.ServiceObject);
 
 /**
  * Create a cluster.

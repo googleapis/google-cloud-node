@@ -25,6 +25,7 @@ var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var Cluster = require('../src/cluster.js');
 var Instance = require('../src/instance.js');
 
@@ -58,7 +59,7 @@ function createFake(Class) {
   return Fake;
 }
 
-var FakeGrpcService = createFake(common.GrpcService);
+var FakeGrpcService = createFake(commonGrpc.Service);
 var FakeCluster = createFake(Cluster);
 var FakeInstance = createFake(Instance);
 var FakeGrpcOperation = createFake(function() {});
@@ -72,10 +73,12 @@ describe('Bigtable', function() {
   before(function() {
     Bigtable = proxyquire('../', {
       '@google-cloud/common': {
-        GrpcService: FakeGrpcService,
-        GrpcOperation: FakeGrpcOperation,
         paginator: fakePaginator,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        Service: FakeGrpcService,
+        Operation: FakeGrpcOperation
       },
       './cluster.js': FakeCluster,
       './instance.js': FakeInstance

@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var createErrorClass = require('create-error-class');
 var dotProp = require('dot-prop');
 var extend = require('extend');
@@ -94,12 +95,12 @@ function Row(table, key) {
     id: key
   };
 
-  common.GrpcServiceObject.call(this, config);
+  commonGrpc.ServiceObject.call(this, config);
 
   this.data = {};
 }
 
-util.inherits(Row, common.GrpcServiceObject);
+util.inherits(Row, commonGrpc.ServiceObject);
 
 /**
  * Formats the row chunks into friendly format. Chunks contain 3 properties:

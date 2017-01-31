@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
@@ -351,12 +352,12 @@ function Bigtable(options) {
     packageJson: require('../package.json')
   };
 
-  common.GrpcService.call(this, config, options);
+  commonGrpc.Service.call(this, config, options);
 
   this.projectName = 'projects/' + this.projectId;
 }
 
-util.inherits(Bigtable, common.GrpcService);
+util.inherits(Bigtable, commonGrpc.Service);
 
 /**
  * Create a Compute instance.
@@ -589,7 +590,7 @@ Bigtable.prototype.instance = function(name) {
  * @return {Operation}
  */
 Bigtable.prototype.operation = function(name) {
-  return new common.GrpcOperation(this, name);
+  return new commonGrpc.Operation(this, name);
 };
 
 /*! Developer Documentation

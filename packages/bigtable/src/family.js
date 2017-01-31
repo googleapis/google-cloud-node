@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var createErrorClass = require('create-error-class');
 var util = require('util');
 
@@ -158,10 +159,10 @@ function Family(table, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, config);
+  commonGrpc.ServiceObject.call(this, config);
 }
 
-util.inherits(Family, common.GrpcServiceObject);
+util.inherits(Family, commonGrpc.ServiceObject);
 
 /**
  * Format the Column Family name into the expected proto format.

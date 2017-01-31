@@ -23,6 +23,7 @@ var proxyquire = require('proxyquire');
 var util = require('util');
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
@@ -33,7 +34,7 @@ var fakeUtil = extend({}, common.util, {
   }
 });
 
-var GrpcServiceObject = common.GrpcServiceObject;
+var GrpcServiceObject = commonGrpc.ServiceObject;
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
@@ -62,8 +63,10 @@ describe('Bigtable/Cluster', function() {
   before(function() {
     Cluster = proxyquire('../src/cluster.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject
       }
     });
   });
