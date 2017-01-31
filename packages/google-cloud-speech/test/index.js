@@ -76,9 +76,11 @@ describe('Speech', function() {
   before(function() {
     Speech = proxyquire('../', {
       '@google-cloud/common': {
-        GrpcOperation: FakeGrpcOperation,
-        GrpcService: FakeGrpcService,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        Operation: FakeGrpcOperation,
+        Service: FakeGrpcService
       },
       request: fakeRequest,
       './v1beta1': fakeV1Beta1

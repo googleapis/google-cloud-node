@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var eventsIntercept = require('events-intercept');
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -85,10 +86,10 @@ function Speech(options) {
     packageJson: require('../package.json')
   };
 
-  common.GrpcService.call(this, config, options);
+  commonGrpc.Service.call(this, config, options);
 }
 
-util.inherits(Speech, common.GrpcService);
+util.inherits(Speech, commonGrpc.Service);
 
 /**
  * The endpointer types that the Speech API will return while processing a
@@ -521,7 +522,7 @@ Speech.prototype.createRecognizeStream = function(config) {
 
 /*! Developer Documentation
  *
- * @returns {module:common/grpcOperation}
+ * @returns {module:commonGrpc/Operation}
  */
 /**
  * Get a reference to an existing operation.
@@ -538,7 +539,7 @@ Speech.prototype.operation = function(name) {
     throw new Error('A name must be specified for an operation.');
   }
 
-  return new common.GrpcOperation(this, name);
+  return new commonGrpc.Operation(this, name);
 };
 
 /**
