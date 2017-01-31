@@ -23,7 +23,8 @@ var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 
 var common = require('@google-cloud/common');
-var GrpcServiceObject = common.GrpcServiceObject;
+var commonGrpc = require('@google-cloud/common-grpc');
+var GrpcServiceObject = commonGrpc.ServiceObject;
 var Mutation = require('../src/mutation.js');
 
 var promisified = false;
@@ -82,8 +83,10 @@ describe('Bigtable/Row', function() {
   before(function() {
     Row = proxyquire('../src/row.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject,
       },
       './mutation.js': FakeMutation,
       './filter.js': FakeFilter

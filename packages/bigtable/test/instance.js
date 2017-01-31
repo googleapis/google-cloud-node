@@ -23,7 +23,9 @@ var proxyquire = require('proxyquire');
 var util = require('util');
 
 var common = require('@google-cloud/common');
-var GrpcServiceObject = common.GrpcServiceObject;
+var commonGrpc = require('@google-cloud/common-grpc');
+var GrpcServiceObject = commonGrpc.ServiceObject;
+
 var Cluster = require('../src/cluster.js');
 var Family = require('../src/family.js');
 var Table = require('../src/table.js');
@@ -81,9 +83,11 @@ describe('Bigtable/Instance', function() {
   before(function() {
     Instance = proxyquire('../src/instance.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         paginator: fakePaginator,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject
       },
       './cluster.js': FakeCluster,
       './family.js': FakeFamily,

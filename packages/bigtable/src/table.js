@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var concat = require('concat-stream');
 var flatten = require('lodash.flatten');
 var is = require('is');
@@ -180,10 +181,10 @@ function Table(instance, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, config);
+  commonGrpc.ServiceObject.call(this, config);
 }
 
-util.inherits(Table, common.GrpcServiceObject);
+util.inherits(Table, commonGrpc.ServiceObject);
 
 /**
  * The view to be applied to the returned table's fields.
@@ -925,7 +926,7 @@ Table.prototype.mutate = function(entries, callback) {
           return;
         }
 
-        var status = common.GrpcService.decorateStatus_(entry.status);
+        var status = commonGrpc.Service.decorateStatus_(entry.status);
         status.entry = entries[entry.index];
 
         mutationErrors.push(status);
