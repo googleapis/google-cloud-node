@@ -20,6 +20,7 @@ var assert = require('assert');
 var extend = require('extend');
 var GrpcService = require('@google-cloud/common').GrpcService;
 var proxyquire = require('proxyquire');
+var util = require('@google-cloud/common').util;
 
 function FakeGrpcService() {}
 
@@ -32,8 +33,8 @@ describe('Entry', function() {
 
   before(function() {
     Entry = proxyquire('../src/entry.js', {
-      '@google-cloud/common': {
-        GrpcService: FakeGrpcService
+      '@google-cloud/common-grpc': {
+        Service: FakeGrpcService
       }
     });
   });
@@ -132,6 +133,10 @@ describe('Entry', function() {
   });
 
   describe('toJSON', function() {
+    beforeEach(function() {
+      FakeGrpcService.objToStruct_ = util.noop;
+    });
+
     it('should not modify the original instance', function() {
       var entryBefore = extend(true, {}, entry);
       entry.toJSON();

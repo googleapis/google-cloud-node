@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var async = require('async');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -98,14 +99,14 @@ function Log(logging, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, {
+  commonGrpc.ServiceObject.call(this, {
     parent: logging,
     id: this.name,
     methods: methods
   });
 }
 
-util.inherits(Log, common.GrpcServiceObject);
+util.inherits(Log, commonGrpc.ServiceObject);
 
 /**
  * Return an array of log entries with the desired severity assigned.

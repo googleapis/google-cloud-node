@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
@@ -80,10 +81,10 @@ function Logging(options) {
     packageJson: require('../package.json')
   };
 
-  common.GrpcService.call(this, config, options);
+  commonGrpc.Service.call(this, config, options);
 }
 
-util.inherits(Logging, common.GrpcService);
+util.inherits(Logging, commonGrpc.Service);
 
 // jscs:disable maximumLineLength
 /**

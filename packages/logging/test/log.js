@@ -70,12 +70,14 @@ describe('Log', function() {
 
   before(function() {
     Log = proxyquire('../src/log.js', {
-      './entry.js': Entry,
-      './metadata.js': FakeMetadata,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
-      }
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject,
+      },
+      './entry.js': Entry,
+      './metadata.js': FakeMetadata
     });
     var assignSeverityToEntries_ = Log.assignSeverityToEntries_;
     Log.assignSeverityToEntries_ = function() {

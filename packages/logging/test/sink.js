@@ -30,7 +30,6 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
 }
@@ -48,8 +47,10 @@ describe('Sink', function() {
   before(function() {
     Sink = proxyquire('../src/sink.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        ServiceObject: FakeGrpcServiceObject,
       }
     });
   });

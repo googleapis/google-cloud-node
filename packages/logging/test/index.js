@@ -91,9 +91,11 @@ describe('Logging', function() {
   before(function() {
     Logging = proxyquire('../', {
       '@google-cloud/common': {
-        GrpcService: FakeGrpcService,
         paginator: fakePaginator,
         util: fakeUtil
+      },
+      '@google-cloud/common-grpc': {
+        Service: FakeGrpcService
       },
       './log.js': FakeLog,
       './entry.js': FakeEntry,
