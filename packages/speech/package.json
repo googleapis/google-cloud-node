@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/speech",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Google Inc.",
   "description": "Google Cloud Speech Client Library for Node.js",
   "contributors": [
