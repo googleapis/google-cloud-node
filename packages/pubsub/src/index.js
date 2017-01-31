@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -76,10 +77,10 @@ function PubSub(options) {
 
   this.options = options;
 
-  common.GrpcService.call(this, config, options);
+  commonGrpc.Service.call(this, config, options);
 }
 
-util.inherits(PubSub, common.GrpcService);
+util.inherits(PubSub, commonGrpc.Service);
 
 /**
  * Create a topic with the given name.

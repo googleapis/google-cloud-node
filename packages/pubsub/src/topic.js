@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -180,7 +181,7 @@ function Topic(pubsub, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, {
+  commonGrpc.ServiceObject.call(this, {
     parent: pubsub,
     id: this.name,
     createMethod: pubsub.createTopic.bind(pubsub),
@@ -224,7 +225,7 @@ function Topic(pubsub, name) {
   this.iam = new IAM(pubsub, this.name);
 }
 
-util.inherits(Topic, common.GrpcServiceObject);
+util.inherits(Topic, commonGrpc.ServiceObject);
 
 /**
  * Format a message object as the upstream API expects it.
