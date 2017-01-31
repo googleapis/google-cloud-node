@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var util = require('util');
 
@@ -146,7 +147,7 @@ function Sink(logging, name) {
     }
   };
 
-  common.GrpcServiceObject.call(this, {
+  commonGrpc.ServiceObject.call(this, {
     parent: logging,
     baseUrl: '/sinks',
     id: name,
@@ -155,7 +156,7 @@ function Sink(logging, name) {
   });
 }
 
-util.inherits(Sink, common.GrpcServiceObject);
+util.inherits(Sink, commonGrpc.ServiceObject);
 
 /**
  * Set the sink's filter.

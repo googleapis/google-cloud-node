@@ -20,7 +20,7 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
+var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 var isCircular = require('is-circular');
@@ -103,7 +103,7 @@ Entry.fromApiResponse_ = function(entry) {
   var data = entry[entry.payload];
 
   if (entry.payload === 'jsonPayload') {
-    data = common.GrpcService.structToObj_(data);
+    data = commonGrpc.Service.structToObj_(data);
   }
 
   var serializedEntry = new Entry(entry, data);
@@ -130,7 +130,7 @@ Entry.prototype.toJSON = function() {
   var entry = extend(true, {}, this.metadata);
 
   if (is.object(this.data)) {
-    entry.jsonPayload = common.GrpcService.objToStruct_(this.data, {
+    entry.jsonPayload = commonGrpc.Service.objToStruct_(this.data, {
       stringify: true
     });
   } else if (is.string(this.data)) {
