@@ -8,7 +8,8 @@
     "test": "cd ..; npm run st -- --verbose speech/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/speech": "0.5.0",
+    "@google-cloud/speech": "0.6.0",
+    "@google-cloud/storage": "0.6.1",
     "node-record-lpcm16": "0.2.0",
     "yargs": "6.6.0"
   },
