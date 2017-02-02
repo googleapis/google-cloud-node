@@ -161,8 +161,16 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
  * @example
  *
  * var client = speechV1beta1.speechClient();
- * var config = {};
- * var audio = {};
+ * var encoding = speechV1beta1.RecognitionConfig.AudioEncoding.FLAC;
+ * var sampleRate = 44100;
+ * var config = {
+ *     encoding : encoding,
+ *     sampleRate : sampleRate
+ * };
+ * var uri = 'gs://bucket_name/file_name.flac';
+ * var audio = {
+ *     uri : uri
+ * };
  * var request = {
  *     config: config,
  *     audio: audio
@@ -217,8 +225,16 @@ SpeechClient.prototype.syncRecognize = function(request, options, callback) {
  * @example
  *
  * var client = speechV1beta1.speechClient();
- * var config = {};
- * var audio = {};
+ * var encoding = speechV1beta1.RecognitionConfig.AudioEncoding.FLAC;
+ * var sampleRate = 44100;
+ * var config = {
+ *     encoding : encoding,
+ *     sampleRate : sampleRate
+ * };
+ * var uri = 'gs://bucket_name/file_name.flac';
+ * var audio = {
+ *     uri : uri
+ * };
  * var request = {
  *     config: config,
  *     audio: audio
