@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/compute",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": "Google Inc.",
   "description": "Google Compute Engine Client Library for Node.js",
   "contributors": [
