@@ -120,4 +120,4 @@ setTimeout(function() {
   });
 
   console.log('Now push to master: git push origin master --follow-tags"');
-}, 10000);
+}, 0);
