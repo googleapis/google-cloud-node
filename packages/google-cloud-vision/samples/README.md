@@ -15,8 +15,6 @@ content.
 * [Samples](#samples)
   * [Detection snippets](#detection-snippets)
   * [Face detection](#face-detection)
-  * [Label detection](#label-detection)
-  * [Landmark detection](#landmark-detection)
   * [Text detection](#text-detection)
 
 ## Setup
@@ -79,7 +77,7 @@ For more information, see https://cloud.google.com/vision/docs
 [detect_docs]: https://cloud.google.com/vision/docs
 [detect_code]: detect.js
 
-### Face detection
+### Face detection tutorial
 
 View the [documentation][face_docs] or the [source code][face_code].
 
@@ -101,37 +99,7 @@ Example:
 [face_docs]: https://cloud.google.com/vision/docs/face-tutorial
 [face_code]: faceDetection.js
 
-### Label detection
-
-View the [documentation][label_docs] or the [source code][label_code].
-
-__Run the sample:__
-
-Usage: `node labelDetection <path-to-image-file>`
-
-Example:
-
-    node labelDetection "./resources/wakeupcat.jpg"
-
-[label_docs]: https://cloud.google.com/vision/docs/label-tutorial
-[label_code]: labelDetection.js
-
-### Landmark detection
-
-View the [documentation][landmark_docs] or the [source code][landmark_code].
-
-__Run the sample:__
-
-Usage: `node landmarkDetection <image-uri>`
-
-Example:
-
-    node landmarkDetection "https://cloud-samples-tests.storage.googleapis.com/vision/water.jpg"
-
-[landmark_docs]: https://cloud.google.com/vision/docs/landmark-tutorial
-[landmark_code]: landmarkDetection.js
-
-### Text detection sample
+### Text detection tutorial
 
 View the [source code][text_code].
 
