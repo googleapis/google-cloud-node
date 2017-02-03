@@ -280,7 +280,9 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     }
   };
 
-  retryRequest(null, retryOpts, function(err, resp) {
+  // Return the request object to allow abort()-ing long-running requests (e.g.
+  // pub/sub pulls)
+  return retryRequest(null, retryOpts, function(err, resp) {
     if (!err && resp === respError) {
       err = respError;
       resp = null;
