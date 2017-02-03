@@ -648,6 +648,18 @@ describe('GrpcService', function() {
       delete global.GCLOUD_SANDBOX_ENV;
     });
 
+    it('should return request object with abort() method', function(done) {
+      grpcService.protos.Service = {
+        service: function() {
+          setImmediate(done);
+          return new ProtoService();
+        }
+      };
+
+      var request = grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+      assert.strictEqual(typeof request.abort, 'function');
+    });
+
     it('should access the specified service proto object', function(done) {
       grpcService.protos.CustomService = {
         CustomService: function() {
