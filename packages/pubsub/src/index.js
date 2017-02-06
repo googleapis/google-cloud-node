@@ -90,7 +90,7 @@ util.inherits(PubSub, commonGrpc.Service);
  * @param {string} name - Name of the topic.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {module:pubsub/topic} callback.topic - The newly created topic.
+ * @param {?module:pubsub/topic} callback.topic - The newly created topic.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
  *
@@ -157,9 +157,9 @@ PubSub.prototype.createTopic = function(name, callback) {
  * @param {string} options.pageToken - Page token.
  * @param {string|module:pubsub/topic} options.topic - The name of the topic to
  *     list subscriptions from.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {module:pubsub/subscription[]} callback.subscriptions - The list of
+ * @param {?module:pubsub/subscription[]} callback.subscriptions - The list of
  *     subscriptions in your project.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
@@ -297,9 +297,9 @@ PubSub.prototype.getSubscriptionsStream =
  * @param {number} options.maxResults - Maximum number of results to return.
  * @param {number} query.pageSize - Max number of results to return.
  * @param {string} query.pageToken - Page token.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {module:pubsub/topic[]} callback.topics - The list of topics returned.
+ * @param {?module:pubsub/topic[]} callback.topics - The list of topics returned.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
  *
@@ -438,9 +438,9 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  * @param {number} options.timeout - Set a maximum amount of time in
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:pubsub/subscription} callback.subscription - The subscription.
+ * @param {?module:pubsub/subscription} callback.subscription - The subscription.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
