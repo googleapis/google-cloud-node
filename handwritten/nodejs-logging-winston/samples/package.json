@@ -9,9 +9,9 @@
     "system-test": "cd ..; npm run st -- --verbose logging/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/logging": "0.6.0",
-    "@google-cloud/storage": "0.6.0",
-    "express": "4.14.0",
+    "@google-cloud/logging": "0.7.0",
+    "@google-cloud/storage": "0.7.0",
+    "express": "4.14.1",
     "fluent-logger": "2.2.0",
     "yargs": "6.6.0"
   },
