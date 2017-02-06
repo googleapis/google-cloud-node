@@ -384,8 +384,8 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  *     your messages.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {?string[]} callback.messageIds - An array of message ids corresponding
- *     to the published messages.
+ * @param {?string[]} callback.messageIds - An array of message ids
+ *     corresponding to the published messages.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -517,7 +517,8 @@ Topic.prototype.publish = function(messages, options, callback) {
  *     response before the connection is broken.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {?module:pubsub/subscription} callback.subscription - The subscription.
+ * @param {?module:pubsub/subscription} callback.subscription - The
+ *     subscription.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

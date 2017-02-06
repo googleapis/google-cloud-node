@@ -299,7 +299,8 @@ PubSub.prototype.getSubscriptionsStream =
  * @param {string} query.pageToken - Page token.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
- * @param {?module:pubsub/topic[]} callback.topics - The list of topics returned.
+ * @param {?module:pubsub/topic[]} callback.topics - The list of topics
+ *     returned.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
  *
@@ -440,7 +441,8 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *     response before the connection is broken.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {?module:pubsub/subscription} callback.subscription - The subscription.
+ * @param {?module:pubsub/subscription} callback.subscription - The
+ *     subscription.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
