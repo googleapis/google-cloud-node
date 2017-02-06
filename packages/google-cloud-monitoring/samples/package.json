@@ -10,7 +10,7 @@
   "dependencies": {
     "@google-cloud/monitoring": "0.1.4",
     "async": "2.1.4",
-    "googleapis": "16.0.0",
+    "googleapis": "16.1.0",
     "yargs": "6.6.0"
   }
 }
