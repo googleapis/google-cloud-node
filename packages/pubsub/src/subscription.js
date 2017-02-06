@@ -152,10 +152,9 @@ function Subscription(pubsub, options) {
     /**
      * Check if the subscription exists.
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the subscription exists or
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {?boolean} callback.exists - Whether the subscription exists or
      *     not.
      *
      * @example
@@ -184,6 +183,10 @@ function Subscription(pubsub, options) {
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {?module:pubsub/topic} callback.subscription - The subscription.
+     * @param {object} callback.apiResponse - The full API response.
      *
      * @example
      * subscription.get(function(err, subscription, apiResponse) {
@@ -205,12 +208,11 @@ function Subscription(pubsub, options) {
      *
      * @resource [Subscriptions: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/get}
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error from the API call, may be null.
      * @param {?object} callback.metadata - Metadata of the subscription from
      *     the API.
-     * @param {object} callback.apiResponse - Raw API response.
+     * @param {object} callback.apiResponse - The full API response.
      *
      * @example
      * subscription.getMetadata(function(err, metadata, apiResponse) {});
@@ -410,6 +412,8 @@ Subscription.generateName_ = function() {
  *
  * @param {string|string[]} ackIds - An ackId or array of ackIds.
  * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var ackId = 'ePHEESyhuE8e...';
@@ -496,9 +500,8 @@ Subscription.prototype.decorateMessage_ = function(message) {
  * @resource [Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/delete}
  *
  * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * subscription.delete(function(err, apiResponse) {});
@@ -555,7 +558,10 @@ Subscription.prototype.delete = function(callback) {
  * @param {boolean} options.returnImmediately - If set, the system will respond
  *     immediately. Otherwise, wait until new messages are available. Returns if
  *     timeout is reached.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {?object[]} callback.messages - An array of messages.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * //-
@@ -666,7 +672,9 @@ Subscription.prototype.pull = function(options, callback) {
  * @param {string|string[]} options.ackIds - The ack id(s) to change.
  * @param {number} options.seconds - Number of seconds after call is made to
  *     set the deadline of the ack.
- * @param {Function=} callback - The callback function.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var options = {

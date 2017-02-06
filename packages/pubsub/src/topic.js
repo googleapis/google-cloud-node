@@ -81,7 +81,7 @@ function Topic(pubsub, name) {
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error from the API call, may be null.
-     * @param {module:pubsub/topic} callback.topic - The newly created topic.
+     * @param {?module:pubsub/topic} callback.topic - The newly created topic.
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
@@ -108,8 +108,7 @@ function Topic(pubsub, name) {
      * Check if the topic exists.
      *
      * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
+     * @param {?error} callback.err - An error from the API call, may be null.
      * @param {boolean} callback.exists - Whether the topic exists or not.
      *
      * @example
@@ -136,9 +135,8 @@ function Topic(pubsub, name) {
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {module:pubsub/topic} callback.topic - The topic.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {?module:pubsub/topic} callback.topic - The topic.
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
@@ -162,9 +160,8 @@ function Topic(pubsub, name) {
      * @resource [Topics: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/get}
      *
      * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The metadata of the Topic.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {?object} callback.metadata - The metadata of the Topic.
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
@@ -285,9 +282,8 @@ Topic.formatName_ = function(projectId, name) {
  * @param {number} options.pageSize - Maximum number of results to return.
  * @param {string} options.pageToken - Page token.
  * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {module:pubsub/subscription[]} callback.subscriptions - An array of
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {?module:pubsub/subscription[]} callback.subscriptions - An array of
  *     subscriptions.
  * @param {?object} callback.nextQuery - See example below for usage.
  * @param {object} callback.apiResponse - The full API response.
@@ -387,9 +383,8 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  * @param {boolean} options.raw - Enable if you require setting attributes on
  *     your messages.
  * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {string[]} callback.messageIds - An array of message ids corresponding
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {?string[]} callback.messageIds - An array of message ids corresponding
  *     to the published messages.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -521,8 +516,7 @@ Topic.prototype.publish = function(messages, options, callback) {
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken.
  * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
+ * @param {?error} callback.err - An error from the API call, may be null.
  * @param {?module:pubsub/subscription} callback.subscription - The subscription.
  * @param {object} callback.apiResponse - The full API response.
  *
