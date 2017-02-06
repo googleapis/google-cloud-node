@@ -8,7 +8,7 @@
     "test": "cd ..; npm run st -- --verbose resource/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/resource": "0.5.1",
+    "@google-cloud/resource": "0.6.0",
     "yargs": "6.6.0"
   },
   "engines": {
