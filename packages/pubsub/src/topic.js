@@ -80,6 +80,9 @@ function Topic(pubsub, name) {
      * @resource [Topics: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/delete}
      *
      * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {module:pubsub/topic} callback.topic - The newly created topic.
+     * @param {object} callback.apiResponse - The full API response.
      *
      * @example
      * topic.delete(function(err, apiResponse) {});
@@ -104,7 +107,7 @@ function Topic(pubsub, name) {
     /**
      * Check if the topic exists.
      *
-     * @param {function} callback - The callback function.
+     * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the topic exists or not.
@@ -132,6 +135,11 @@ function Topic(pubsub, name) {
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {module:pubsub/topic} callback.topic - The topic.
+     * @param {object} callback.apiResponse - The full API response.
      *
      * @example
      * topic.get(function(err, topic, apiResponse) {
@@ -153,7 +161,7 @@ function Topic(pubsub, name) {
      *
      * @resource [Topics: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/get}
      *
-     * @param {function} callback - The callback function.
+     * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {object} callback.metadata - The metadata of the Topic.
@@ -276,7 +284,13 @@ Topic.formatName_ = function(projectId, name) {
  * @param {number} options.maxResults - Maximum number of results to return.
  * @param {number} options.pageSize - Maximum number of results to return.
  * @param {string} options.pageToken - Page token.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {module:pubsub/subscription[]} callback.subscriptions - An array of
+ *     subscriptions.
+ * @param {?object} callback.nextQuery - See example below for usage.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * topic.getSubscriptions(function(err, subscriptions) {
@@ -373,6 +387,11 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  * @param {boolean} options.raw - Enable if you require setting attributes on
  *     your messages.
  * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {string[]} callback.messageIds - An array of message ids corresponding
+ *     to the published messages.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * topic.publish('Hello, world!', function(err, messageIds, apiResponse) {});
@@ -501,7 +520,11 @@ Topic.prototype.publish = function(messages, options, callback) {
  * @param {number} options.timeout - Set a maximum amount of time in
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {?module:pubsub/subscription} callback.subscription - The subscription.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * // Without specifying any options.
