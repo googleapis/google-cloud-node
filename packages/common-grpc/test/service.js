@@ -649,9 +649,12 @@ describe('GrpcService', function() {
     });
 
     it('should access the specified service proto object', function(done) {
+      retryRequestOverride = util.noop;
+
       grpcService.getService_ = function(protoOpts) {
         assert.strictEqual(protoOpts, PROTO_OPTS);
-        done();
+        setImmediate(done);
+        return ProtoService;
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -892,95 +895,97 @@ describe('GrpcService', function() {
       });
     });
 
-    it('should make the correct request on the proto service', function(done) {
-      grpcService.getService_ = function() {
-        return {
-          method: function(reqOpts) {
-            assert.strictEqual(reqOpts, REQ_OPTS);
-            done();
-          }
-        };
-      };
-
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
-    });
-
-    it('should pass the grpc metadata with the request', function(done) {
-      grpcService.getService_ = function() {
-        return {
-          method: function(reqOpts, metadata) {
-            assert.strictEqual(metadata, grpcService.grpcMetadata);
-            done();
-          }
-        };
-      };
-
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
-    });
-
-    it('should set a deadline if a timeout is provided', function(done) {
-      var expectedDeadlineRange = [
-        Date.now() + PROTO_OPTS.timeout - 250,
-        Date.now() + PROTO_OPTS.timeout + 250
-      ];
-
-      grpcService.getService_ = function() {
-        return {
-          method: function(reqOpts, metadata, grpcOpts) {
-            assert(is.date(grpcOpts.deadline));
-
-            assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
-            assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
-
-            done();
-          }
-        };
-      };
-
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
-    });
-
-    describe('request response error', function() {
-      it('should look up the http status from the code', function() {
-        /*jshint loopfunc:true */
-        for (var grpcErrorCode in GrpcService.GRPC_ERROR_CODE_TO_HTTP) {
-          var grpcError = { code: grpcErrorCode };
-          var httpError = GrpcService.GRPC_ERROR_CODE_TO_HTTP[grpcErrorCode];
-
-          grpcService.getService_ = function() {
-            return {
-              method: function(reqOpts, metadata, grpcOpts, callback) {
-                callback(grpcError);
-              }
-            };
-          };
-
-          grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
-            assert.strictEqual(err.code, httpError.code);
-          });
-        }
-        /*jshint loopfunc:false */
-      });
-    });
-
-    describe('request response success', function() {
-      var RESPONSE = {};
-
-      beforeEach(function() {
+    describe('retry request', function() {
+      it('should make the correct request on the service', function(done) {
         grpcService.getService_ = function() {
           return {
-            method: function(reqOpts, metadata, grpcOpts, callback) {
-              callback(null, RESPONSE);
+            method: function(reqOpts) {
+              assert.strictEqual(reqOpts, REQ_OPTS);
+              done();
             }
           };
         };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
       });
 
-      it('should execute callback with response', function(done) {
-        grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
-          assert.ifError(err);
-          assert.strictEqual(resp, RESPONSE);
-          done();
+      it('should pass the grpc metadata with the request', function(done) {
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata) {
+              assert.strictEqual(metadata, grpcService.grpcMetadata);
+              done();
+            }
+          };
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+      });
+
+      it('should set a deadline if a timeout is provided', function(done) {
+        var expectedDeadlineRange = [
+          Date.now() + PROTO_OPTS.timeout - 250,
+          Date.now() + PROTO_OPTS.timeout + 250
+        ];
+
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts) {
+              assert(is.date(grpcOpts.deadline));
+
+              assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
+              assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
+
+              done();
+            }
+          };
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+      });
+
+      describe('request response error', function() {
+        it('should look up the http status from the code', function() {
+          /*jshint loopfunc:true */
+          for (var grpcErrorCode in GrpcService.GRPC_ERROR_CODE_TO_HTTP) {
+            var grpcError = { code: grpcErrorCode };
+            var httpError = GrpcService.GRPC_ERROR_CODE_TO_HTTP[grpcErrorCode];
+
+            grpcService.getService_ = function() {
+              return {
+                method: function(reqOpts, metadata, grpcOpts, callback) {
+                  callback(grpcError);
+                }
+              };
+            };
+
+            grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
+              assert.strictEqual(err.code, httpError.code);
+            });
+          }
+          /*jshint loopfunc:false */
+        });
+      });
+
+      describe('request response success', function() {
+        var RESPONSE = {};
+
+        beforeEach(function() {
+          grpcService.getService_ = function() {
+            return {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
+                callback(null, RESPONSE);
+              }
+            };
+          };
+        });
+
+        it('should execute callback with response', function(done) {
+          grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
+            assert.ifError(err);
+            assert.strictEqual(resp, RESPONSE);
+            done();
+          });
         });
       });
     });
