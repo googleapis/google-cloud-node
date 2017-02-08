@@ -100,7 +100,7 @@
     "@google-cloud/bigquery": "^0.7.0",
     "@google-cloud/bigtable": "^0.8.0",
     "@google-cloud/compute": "^0.5.0",
-    "@google-cloud/datastore": "^0.6.1",
+    "@google-cloud/datastore": "^0.7.0",
     "@google-cloud/dns": "^0.5.0",
     "@google-cloud/language": "^0.8.0",
     "@google-cloud/logging": "^0.7.0",
