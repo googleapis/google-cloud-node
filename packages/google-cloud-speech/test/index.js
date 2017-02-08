@@ -608,8 +608,13 @@ describe('Speech', function() {
 
       speech.api.Speech = {
         streamingRecognize: function(opts) {
+          var requestStream = through.obj();
+          requestStream._write = util.noop;
+
           assert.strictEqual(opts.timeout, expectedTimeout);
-          done();
+          setImmediate(done);
+
+          return requestStream;
         }
       };
 
