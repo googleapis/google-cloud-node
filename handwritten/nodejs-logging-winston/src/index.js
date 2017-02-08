@@ -1,4 +1,4 @@
-/**
+/*!
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ */
+
+/*!
+ * @module logging-winston
  */
 
 'use strict';
@@ -65,6 +69,9 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  * on-premise, or on another cloud provider, you will need to provide additional
  * configuration.
  *
+ * @constructor
+ * @alias module:logging-winston
+ *
  * @param {object} options - [Configuration object](#/docs). Refer to this link
  *     for authentication information.
  * @param {object=} options.level - The default log level. Winston will filter
@@ -83,8 +90,8 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
  *
  * @example
- * var winston = require('winston');
  * var transport = require('@google-cloud/logging-winston');
+ * var winston = require('winston');
  *
  * winston.add(transport, {
  *   projectId: 'grape-spaceship-123',
