@@ -262,25 +262,29 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     request: function(_, onResponse) {
       respError = null;
 
-      service[protoOpts.method](reqOpts, metadata, grpcOpts, function(e, resp) {
-        if (e) {
-          respError = GrpcService.decorateError_(e);
+      return service[protoOpts.method](
+        reqOpts,
+        metadata,
+        grpcOpts,
+        function(err, resp) {
+          if (err) {
+            respError = GrpcService.decorateError_(err);
 
-          if (respError) {
-            onResponse(null, respError);
+            if (respError) {
+              onResponse(null, respError);
+              return;
+            }
+
+            onResponse(err, resp);
             return;
           }
 
-          onResponse(e, resp);
-          return;
-        }
-
-        onResponse(null, resp);
-      });
+          onResponse(null, resp);
+        });
     }
   };
 
-  retryRequest(null, retryOpts, function(err, resp) {
+  return retryRequest(null, retryOpts, function(err, resp) {
     if (!err && resp === respError) {
       err = respError;
       resp = null;

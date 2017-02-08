@@ -732,8 +732,8 @@ Subscription.prototype.listenForEvents_ = function() {
     if (event === 'message' && --self.messageListeners === 0) {
       self.closed = true;
 
-      if (self.activeRequest_ && self.activeRequest_.cancel) {
-        self.activeRequest_.cancel();
+      if (self.activeRequest_ && self.activeRequest_.abort) {
+        self.activeRequest_.abort();
       }
     }
   });

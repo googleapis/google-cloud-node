@@ -961,11 +961,11 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.closed, true);
     });
 
-    it('should cancel the HTTP request when listeners removed', function(done) {
+    it('should abort the HTTP request when listeners removed', function(done) {
       subscription.startPulling_ = util.noop;
 
       subscription.activeRequest_ = {
-        cancel: done
+        abort: done
       };
 
       subscription.on('message', util.noop);

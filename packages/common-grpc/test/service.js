@@ -637,9 +637,9 @@ describe('GrpcService', function() {
     beforeEach(function() {
       grpcService.grpcCredentials = GRPC_CREDENTIALS;
 
-      grpcService.baseUrl = 'http://base-url';
-      grpcService.proto = {};
-      grpcService.proto.service = ProtoService;
+      grpcService.getService_ = function() {
+        return ProtoService;
+      };
     });
 
     it('should not run in the gcloud sandbox environment', function() {
@@ -649,18 +649,23 @@ describe('GrpcService', function() {
     });
 
     it('should access the specified service proto object', function(done) {
-      grpcService.protos.CustomService = {
-        CustomService: function() {
-          setImmediate(done);
-          return new ProtoService();
-        }
+      grpcService.getService_ = function(protoOpts) {
+        assert.strictEqual(protoOpts, PROTO_OPTS);
+        done();
       };
 
-      var protoOpts = extend(true, {}, PROTO_OPTS, {
-        service: 'CustomService'
-      });
+      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+    });
 
-      grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
+    it('should use and return retry-request', function() {
+      var retryRequestInstance = {};
+
+      retryRequestOverride = function() {
+        return retryRequestInstance;
+      };
+
+      var request = grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError)
+      assert.strictEqual(request, retryRequestInstance);
     });
 
     describe('getting gRPC credentials', function() {
@@ -695,74 +700,15 @@ describe('GrpcService', function() {
         });
 
         it('should make the gRPC request again', function(done) {
-          grpcService.protos.Service = {
-            service: function() {
-              assert.strictEqual(grpcService.grpcCredentials, authClient);
-
-              setImmediate(done);
-
-              return new ProtoService();
-            }
+          grpcService.getService_ = function() {
+            assert.strictEqual(grpcService.grpcCredentials, authClient);
+            setImmediate(done);
+            return new ProtoService();
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
         });
       });
-    });
-
-    it('should create an instance of the proto service', function(done) {
-      grpcService.protos.Service = {
-        service: function(baseUrl, credentials) {
-          assert.strictEqual(baseUrl, grpcService.baseUrl);
-          assert.strictEqual(credentials, GRPC_CREDENTIALS);
-
-          setImmediate(done);
-
-          return new ProtoService();
-        }
-      };
-
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
-    });
-
-    it('should accept the name of a proto service', function(done) {
-      grpcService.protos.Service = {
-        service: function(baseUrl, credentials) {
-          assert.strictEqual(baseUrl, grpcService.baseUrl);
-          assert.strictEqual(credentials, GRPC_CREDENTIALS);
-
-          setImmediate(done);
-
-          return new ProtoService();
-        }
-      };
-
-      var protoOpts = extend(true, {}, PROTO_OPTS, {
-        service: 'service'
-      });
-
-      grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
-    });
-
-    it('should cache the service', function(done) {
-      grpcService.protos.Service = {
-        service: function() {
-          var protoService = new ProtoService();
-
-          setImmediate(function() {
-            assert.strictEqual(
-              grpcService.activeServiceMap_.get(PROTO_OPTS.service),
-              protoService
-            );
-
-            done();
-          });
-
-          return protoService;
-        }
-      };
-
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
     describe('retry strategy', function() {
@@ -771,10 +717,6 @@ describe('GrpcService', function() {
       var retryRequestCallback;
 
       beforeEach(function() {
-        grpcService.protos.Service = {
-          service: util.noop
-        };
-
         retryRequestOverride = function(reqOpts, options, callback) {
           retryRequestReqOpts = reqOpts;
           retryRequestOptions = options;
@@ -828,14 +770,12 @@ describe('GrpcService', function() {
       it('should treat a retriable error as an HTTP response', function(done) {
         var grpcError500 = { code: 2 };
 
-        grpcService.protos.Service = {
-          service: function() {
-            return {
-              method: function(reqOpts, metadata, grpcOpts, callback) {
-                callback(grpcError500);
-              }
-            };
-          }
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts, callback) {
+              callback(grpcError500);
+            }
+          };
         };
 
         grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -850,17 +790,32 @@ describe('GrpcService', function() {
         retryRequestOptions.request({}, onResponse);
       });
 
+      it('should return grpc request', function() {
+        var grpcRequest = {};
+
+        grpcService.getService_ = function() {
+          return {
+            method: function() {
+              return grpcRequest;
+            }
+          };
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+
+        var request = retryRequestOptions.request();
+        assert.strictEqual(request, grpcRequest);
+      });
+
       it('should exec callback with response error as error', function(done) {
         var grpcError500 = { code: 2 };
 
-        grpcService.protos.Service = {
-          service: function() {
-            return {
-              method: function(reqOpts, metadata, grpcOpts, callback) {
-                callback(grpcError500);
-              }
-            };
-          }
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts, callback) {
+              callback(grpcError500);
+            }
+          };
         };
 
         grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
@@ -877,14 +832,12 @@ describe('GrpcService', function() {
       it('should exec callback with unknown error', function(done) {
         var unknownError = { a: 'a' };
 
-        grpcService.protos.Service = {
-          service: function() {
-            return {
-              method: function(reqOpts, metadata, grpcOpts, callback) {
-                callback(unknownError, null);
-              }
-            };
-          }
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts, callback) {
+              callback(unknownError, null);
+            }
+          };
         };
 
         grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
@@ -900,16 +853,6 @@ describe('GrpcService', function() {
     });
 
     describe('request option decoration', function() {
-      beforeEach(function() {
-        grpcService.protos.Service = {
-          service: function() {
-            return {
-              method: util.noop
-            };
-          }
-        };
-      });
-
       describe('decoration success', function() {
         it('should decorate the request', function(done) {
           var decoratedRequest = {};
@@ -920,15 +863,13 @@ describe('GrpcService', function() {
             return decoratedRequest;
           };
 
-          grpcService.protos.Service = {
-            service: function() {
-              return {
-                method: function(reqOpts) {
-                  assert.strictEqual(reqOpts, decoratedRequest);
-                  done();
-                }
-              };
-            }
+          grpcService.getService_ = function() {
+            return {
+              method: function(reqOpts) {
+                assert.strictEqual(reqOpts, decoratedRequest);
+                done();
+              }
+            };
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -952,30 +893,26 @@ describe('GrpcService', function() {
     });
 
     it('should make the correct request on the proto service', function(done) {
-      grpcService.protos.Service = {
-        service: function() {
-          return {
-            method: function(reqOpts) {
-              assert.strictEqual(reqOpts, REQ_OPTS);
-              done();
-            }
-          };
-        }
+      grpcService.getService_ = function() {
+        return {
+          method: function(reqOpts) {
+            assert.strictEqual(reqOpts, REQ_OPTS);
+            done();
+          }
+        };
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
     it('should pass the grpc metadata with the request', function(done) {
-      grpcService.protos.Service = {
-        service: function() {
-          return {
-            method: function(reqOpts, metadata) {
-              assert.strictEqual(metadata, grpcService.grpcMetadata);
-              done();
-            }
-          };
-        }
+      grpcService.getService_ = function() {
+        return {
+          method: function(reqOpts, metadata) {
+            assert.strictEqual(metadata, grpcService.grpcMetadata);
+            done();
+          }
+        };
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -987,19 +924,17 @@ describe('GrpcService', function() {
         Date.now() + PROTO_OPTS.timeout + 250
       ];
 
-      grpcService.protos.Service = {
-        service: function() {
-          return {
-            method: function(reqOpts, metadata, grpcOpts) {
-              assert(is.date(grpcOpts.deadline));
+      grpcService.getService_ = function() {
+        return {
+          method: function(reqOpts, metadata, grpcOpts) {
+            assert(is.date(grpcOpts.deadline));
 
-              assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
-              assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
+            assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
+            assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
 
-              done();
-            }
-          };
-        }
+            done();
+          }
+        };
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -1012,14 +947,12 @@ describe('GrpcService', function() {
           var grpcError = { code: grpcErrorCode };
           var httpError = GrpcService.GRPC_ERROR_CODE_TO_HTTP[grpcErrorCode];
 
-          grpcService.protos.Service = {
-            service: function() {
-              return {
-                method: function(reqOpts, metadata, grpcOpts, callback) {
-                  callback(grpcError);
-                }
-              };
-            }
+          grpcService.getService_ = function() {
+            return {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
+                callback(grpcError);
+              }
+            };
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
@@ -1034,14 +967,12 @@ describe('GrpcService', function() {
       var RESPONSE = {};
 
       beforeEach(function() {
-        grpcService.protos.Service = {
-          service: function() {
-            return {
-              method: function(reqOpts, metadata, grpcOpts, callback) {
-                callback(null, RESPONSE);
-              }
-            };
-          }
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts, callback) {
+              callback(null, RESPONSE);
+            }
+          };
         };
       });
 
