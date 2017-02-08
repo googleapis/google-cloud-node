@@ -60,7 +60,7 @@ module.exports = {
       title: 'Google Cloud Logging'
     },
     'logging-winston': {
-      title: 'Google Cloud Logging Winston'
+      skip: true
     },
     monitoring: {
       title: 'Google Cloud Monitoring'

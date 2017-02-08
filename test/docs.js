@@ -107,6 +107,9 @@ var FakeBluebird = function() {
   return Promise;
 };
 
+// For {module:logging-winston} docs.
+var fakeWinston = '{ add: function() {}, emerg: function() {} }';
+
 var modules;
 
 if (process.env.TEST_MODULE) {
@@ -204,6 +207,10 @@ function getDocs(mod) {
 function createInstantiationCode(mod) {
   var config = overviews[mod] || {};
 
+  if (config.skip) {
+    return;
+  }
+
   return format(multiline.stripIndent(function() {/*
     var {instanceName} = require('{path}')({config});
 
@@ -238,6 +245,10 @@ function createSnippet(mod, instantiation, method) {
       'require(\'../packages/google-cloud\')'
     )
     .replace(
+      'require(\'@google-cloud/logging-winston\')',
+      '{}'
+    )
+    .replace(
       /require\('(@google-cloud\/[^']*)/g,
       'require(\'../packages/' + mod + '/node_modules/$1'
     )
@@ -248,6 +259,7 @@ function createSnippet(mod, instantiation, method) {
     .replace('require(\'express\')', FakeExpress.toString())
     .replace('require(\'level\')', FakeLevel.toString())
     .replace('require(\'bluebird\')', FakeBluebird.toString())
+    .replace('require(\'winston\')', fakeWinston)
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
 
