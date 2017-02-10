@@ -165,7 +165,10 @@ describe('PubSub', function() {
     });
 
     it('should localize the options provided', function() {
-      assert.strictEqual(pubsub.options, OPTIONS);
+      var expected = extend({}, OPTIONS, {
+        libVersion: require('../package.json').version
+      });
+      assert.deepStrictEqual(pubsub.options, expected);
     });
   });
 

@@ -309,6 +309,10 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
+  options = extend({}, options, {
+    libVersion: require('../package.json').version
+  });
+
   var baseUrl = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
