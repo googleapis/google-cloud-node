@@ -335,6 +335,8 @@ util.inherits(File, common.ServiceObject);
  *
  * @param {string|module:storage/bucket|module:storage/file} destination -
  *     Destination file.
+ * @param {object=} options - Configuration object. See an
+ *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file} callback.copiedFile - The copied File.
@@ -477,7 +479,8 @@ File.prototype.copy = function(destination, options, callback) {
       bucketName: destBucket.name,
       fileName: encodeURIComponent(destName)
     }),
-    qs: query
+    qs: query,
+    json: options
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -1642,6 +1645,8 @@ File.prototype.makePublic = function(callback) {
  *
  * @param {string|module:storage/bucket|module:storage/file} destination -
  *     Destination file.
+ * @param {object=} options - Configuration object. See an
+ *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file} callback.destinationFile - The destination File.
@@ -1729,12 +1734,17 @@ File.prototype.makePublic = function(callback) {
  *   var apiResponse = data[1];
  * });
  */
-File.prototype.move = function(destination, callback) {
+File.prototype.move = function(destination, options, callback) {
   var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
 
   callback = callback || common.util.noop;
 
-  this.copy(destination, function(err, destinationFile, apiResponse) {
+  this.copy(destination, options, function(err, destinationFile, apiResponse) {
     if (err) {
       callback(err, null, apiResponse);
       return;
@@ -1782,6 +1792,55 @@ File.prototype.save = function(data, options, callback) {
     .on('error', callback)
     .on('finish', callback)
     .end(data);
+};
+
+/**
+ * Set the storage class for this file.
+ *
+ * @resource [Per-Object Storage Class]{@link https://cloud.google.com/storage/docs/per-object-storage-class}
+ * @resource [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
+ *
+ * @param {string} storageClass - The new storage class. (`multi_regional`,
+ *     `regional`, `nearline`, `coldline`)
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ *
+ * @example
+ * file.setStorageClass('regional', function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // The storage class was updated successfully.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.setStorageClass('regional').then(function() {});
+ */
+File.prototype.setStorageClass = function(storageClass, callback) {
+  var self = this;
+
+  // In case we get input like `storageClass`, convert to `storage_class`.
+  storageClass = storageClass
+    .replace(/-/g, '_')
+    .replace(/([a-z])([A-Z])/g, function(_, low, up) {
+      return low + '_' + up.toLowerCase();
+    });
+
+  this.copy(this, {
+    storageClass: storageClass
+  }, function(err, file, apiResponse) {
+    if (err) {
+      callback(err, apiResponse);
+      return;
+    }
+
+    self.metadata = file.metadata;
+
+    callback(null, apiResponse);
+  });
 };
 
 /**

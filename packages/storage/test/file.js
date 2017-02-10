@@ -299,6 +299,18 @@ describe('File', function() {
       versionedFile.copy(newFile, assert.ifError);
     });
 
+    it('should accept an options object', function(done) {
+      var newFile = new File(BUCKET, 'name');
+      var options = {};
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json, options);
+        done();
+      };
+
+      file.copy(newFile, options, assert.ifError);
+    });
+
     describe('destination types', function() {
       function assertPathEquals(file, expectedPath, callback) {
         file.request = function(reqOpts) {
@@ -2195,9 +2207,21 @@ describe('File', function() {
         file.move(newFile);
       });
 
+      it('should accept an options object', function(done) {
+        var newFile = new File(BUCKET, 'name');
+        var options = {};
+
+        file.copy = function(destination, options_) {
+          assert.strictEqual(options_, options);
+          done();
+        };
+
+        file.move(newFile, options, assert.ifError);
+      });
+
       it('should fail if copy fails', function(done) {
         var error = new Error('Error.');
-        file.copy = function(destination, callback) {
+        file.copy = function(destination, options, callback) {
           callback(error);
         };
         file.move('new-filename', function(err) {
@@ -2209,7 +2233,7 @@ describe('File', function() {
 
     describe('delete original file', function() {
       it('should delete if copy is successful', function(done) {
-        file.copy = function(destination, callback) {
+        file.copy = function(destination, options, callback) {
           callback(null);
         };
         file.delete = function() {
@@ -2221,7 +2245,7 @@ describe('File', function() {
 
       it('should not delete if copy fails', function(done) {
         var deleteCalled = false;
-        file.copy = function(destination, callback) {
+        file.copy = function(destination, options, callback) {
           callback(new Error('Error.'));
         };
         file.delete = function() {
@@ -2235,7 +2259,7 @@ describe('File', function() {
 
       it('should fail if delete fails', function(done) {
         var error = new Error('Error.');
-        file.copy = function(destination, callback) {
+        file.copy = function(destination, options, callback) {
           callback();
         };
         file.delete = function(callback) {
@@ -2308,6 +2332,91 @@ describe('File', function() {
       };
 
       file.save(DATA, assert.ifError);
+    });
+  });
+
+  describe('setStorageClass', function() {
+    var STORAGE_CLASS = 'new_storage_class';
+
+    it('should make the correct copy request', function(done) {
+      file.copy = function(newFile, options) {
+        assert.strictEqual(newFile, file);
+        assert.deepEqual(options, {
+          storageClass: STORAGE_CLASS
+        });
+        done();
+      };
+
+      file.setStorageClass(STORAGE_CLASS, assert.ifError);
+    });
+
+    it('should convert camelCase to snake_case', function(done) {
+      file.copy = function(newFile, options) {
+        assert.strictEqual(options.storageClass, 'camel_case');
+        done();
+      };
+
+      file.setStorageClass('camelCase', assert.ifError);
+    });
+
+    it('should convert hyphenate to snake_case', function(done) {
+      file.copy = function(newFile, options) {
+        assert.strictEqual(options.storageClass, 'hyphenated_class');
+        done();
+      };
+
+      file.setStorageClass('hyphenated-class', assert.ifError);
+    });
+
+    describe('error', function() {
+      var ERROR = new Error('Error.');
+      var API_RESPONSE = {};
+
+      beforeEach(function() {
+        file.copy = function(newFile, options, callback) {
+          callback(ERROR, null, API_RESPONSE);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        file.setStorageClass(STORAGE_CLASS, function(err, apiResponse) {
+          assert.strictEqual(err, ERROR);
+          assert.strictEqual(apiResponse, API_RESPONSE);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var METADATA = {};
+
+      var COPIED_FILE = {
+        metadata: METADATA
+      };
+
+      var API_RESPONSE = {};
+
+      beforeEach(function() {
+        file.copy = function(newFile, options, callback) {
+          callback(null, COPIED_FILE, API_RESPONSE);
+        };
+      });
+
+      it('should update the metadata on the file', function(done) {
+        file.setStorageClass(STORAGE_CLASS, function(err) {
+          assert.ifError(err);
+          assert.strictEqual(file.metadata, METADATA);
+          done();
+        });
+      });
+
+      it('should execute callback with api response', function(done) {
+        file.setStorageClass(STORAGE_CLASS, function(err, apiResponse) {
+          assert.ifError(err);
+          assert.strictEqual(apiResponse, API_RESPONSE);
+          done();
+        });
+      });
     });
   });
 
