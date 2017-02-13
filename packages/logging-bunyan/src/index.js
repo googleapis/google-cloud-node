@@ -38,7 +38,7 @@ var BUNYAN_TO_STACKDRIVER = {
 };
 
 /**
- * This module provides support for streaming your bunyan logs to
+ * This module provides support for streaming your Bunyan logs to
  * [Stackdriver Logging]{@link https://cloud.google.com/logging}.
  *
  * If your app is running on Google Cloud Platform, all configuration and
@@ -59,23 +59,25 @@ var BUNYAN_TO_STACKDRIVER = {
  * @param {object=} options.resource - The monitored resource that the log
  *     stream corresponds to. On Google Cloud Platform, this is detected
  *     automatically, but you may optionally specify a specific monitored
- *     resource. For more infromation see the
- *     [official documentation]{@link
- * https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}
+ *     resource. For more information, see the
+ *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}
  *
  * @example
  * var bunyan = require('bunyan');
+ *
  * var loggingBunyan = require('@google-cloud/logging-bunyan')({
- *    projectId: 'grape-spaceship-123',
- *    keyFilename: '/path/to/keyfile.json',
- *    resource: {
- *       type: 'global'
- *    }
+ *   projectId: 'grape-spaceship-123',
+ *   keyFilename: '/path/to/keyfile.json',
+ *   resource: {
+ *     type: 'global'
+ *   }
  * });
  *
  * var logger = bunyan.createLogger({
  *   name: 'my-service',
- *   streams: [loggingBunyan.stream('info')]
+ *   streams: [
+ *     loggingBunyan.stream('info')
+ *   ]
  * });
  *
  */
@@ -88,6 +90,7 @@ function LoggingBunyan(options) {
 
   this.logName_ = options.logName || 'bunyan_log';
   this.resource_ = options.resource;
+
   this.log_ = logging(options).log(this.logName_);
 }
 
@@ -95,40 +98,52 @@ function LoggingBunyan(options) {
  * Convenience method that Builds a bunyan stream object that you can put in
  * the bunyan streams list.
  *
+ * @param {string|number} level - A bunyan logging level. Log entries at or
+ *     above this level will be routed to Stackdriver Logging.
+ *
  * @example
- * var bunyan = reuqire('bunyan');
- * var stackdriverBunyan = require('@google-cloud/logging-bunyan')(options);
  * var logger = bunyan.createLogger({
  *   name: 'my-service',
- *   streams: [ stackdriverBunyan.stream('info') ]
+ *   streams: [
+ *     loggingBunyan.stream('info')
+ *   ]
  * });
- *
- * @param {(string|number)} level - A bunyan logging level. Log entries at or
- *     above this level would be routed to Stackdriver Logging.
  */
 LoggingBunyan.prototype.stream = function(level) {
-  return {level: level, type: 'raw', stream: this};
+  return {
+    level: level,
+    type: 'raw',
+    stream: this
+  };
 };
 
 /**
  * Relay a log entry to the logging agent. This is normally called by bunyan.
  *
- * @param {object} rec - Bunyan log record.
+ * @param {object} record - Bunyan log record.
+ *
  * @private
  */
-LoggingBunyan.prototype.write = function(rec) {
-  if (typeof rec === 'string') {
+LoggingBunyan.prototype.write = function(record) {
+  if (typeof record === 'string') {
     throw new Error(
-        '@google-cloud/logging-bunyan only works as a raw bunyan stream type.');
+      '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
+    );
   }
-  var level = BUNYAN_TO_STACKDRIVER[rec.level];
-  var entryMetadata = {resource: this.resource_, timestamp: rec.time};
 
-  var entry = this.log_.entry(entryMetadata, rec);
+  var level = BUNYAN_TO_STACKDRIVER[record.level];
 
-  // Pass a no-op function because otherwise we get an unnecessary promise
-  // allocated and returned to us.
-  this.log_[level](entry, function() {});
+  var entryMetadata = {
+    resource: this.resource_,
+    timestamp: record.time
+  };
+
+  var entry = this.log_.entry(entryMetadata, record);
+
+  this.log_[level](entry, function() {
+    // no-op to avoid a promise being returned.
+  });
 };
 
 module.exports = LoggingBunyan;
+module.exports.BUNYAN_TO_STACKDRIVER = BUNYAN_TO_STACKDRIVER;

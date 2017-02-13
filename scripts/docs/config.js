@@ -59,6 +59,9 @@ module.exports = {
     logging: {
       title: 'Google Cloud Logging'
     },
+    'logging-bunyan': {
+      skip: true
+    },
     'logging-winston': {
       skip: true
     },

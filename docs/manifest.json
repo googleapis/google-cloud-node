@@ -160,6 +160,14 @@
       ]
     },
     {
+      "id": "logging-bunyan",
+      "name": "@google-cloud/logging-bunyan",
+      "defaultService": "logging-bunyan",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "logging-winston",
       "name": "@google-cloud/logging-winston",
       "defaultService": "logging-winston",

@@ -7,24 +7,18 @@ For lower-level access to the Stackdriver Logging API, see [@google-cloud/loggin
 
 > *This module is experimental and should be used by early adopters. This module uses APIs that may be undocumented and subject to change without notice.*
 
-First, install `@google-cloud/logging-bunyan` with npm:
-
 ``` sh
 $ npm install --save @google-cloud/logging-bunyan
 ```
-
-If you are running your app on Google Cloud Platform, you won't need to worry about supplying connection configuration options to `@google-cloud/logging-bunyan` — we figure that out for you.
-
-However, if you're running your app elsewhere, you will need to provide project details to authenticate API requests.
-
-
 ``` js
 var bunyan = require('bunyan');
 var loggingBunyan = require('@google-cloud/logging-bunyan')();
 
 var logger = bunyan.createLogger({
   name: 'my-service',
-  streams: [loggingBunyan.stream('info')]
+  streams: [
+    loggingBunyan.stream('info')
+  ]
 });
 
 logger.error('warp nacelles offline');
@@ -35,19 +29,12 @@ logger.info('shields at 99%');
 
 It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
-### On Google Cloud Platform
+### On Google Compute Engine
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-var bunyan = require('bunyan');
 var loggingBunyan = require('@google-cloud/logging-bunyan')();
-
-var logger = bunyan.createLogger({
-  name: 'my-service',
-  streams: [loggingBunyan.stream('info')]
-});
-
 // ...you're good to go!
 ```
 
@@ -64,20 +51,16 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
 ``` js
-var bunyan = require('bunyan');
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+
 var loggingBunyan = require('@google-cloud/logging-bunyan')({
-  projectId: 'grape-spaceship-123',
+  projectId: projectId,
 
   // The path to your key file:
   keyFilename: '/path/to/keyfile.json'
 
   // Or the contents of the key file:
   credentials: require('./path/to/keyfile.json')
-});
-
-var logger = bunyan.createLogger({
-  name: 'my-service',
-  streams: [loggingBunyan.stream('info')]
 });
 
 // ...you're good to go!

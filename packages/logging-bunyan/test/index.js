@@ -17,9 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var bunyan = require('bunyan');
+var extend = require('extend');
 var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
 
 describe('logging-bunyan', function() {
   var fakeLogInstance = {};
@@ -36,20 +35,29 @@ describe('logging-bunyan', function() {
     };
   }
 
+  var LoggingBunyanCached;
   var LoggingBunyan;
   var loggingBunyan;
 
-  var OPTIONS = {logName: 'log-name', resource: {}};
+  var OPTIONS = {
+    logName: 'log-name',
+    resource: {}
+  };
 
   before(function() {
-    LoggingBunyan =
-        proxyquire('../src/index.js', {'@google-cloud/logging': fakeLogging});
+    LoggingBunyan = proxyquire('../src/index.js', {
+      '@google-cloud/logging': fakeLogging
+    });
+
+    LoggingBunyanCached = extend(true, {}, LoggingBunyan);
   });
 
   beforeEach(function() {
     fakeLogInstance = {};
     fakeLoggingOptions_ = null;
     fakeLogName_ = null;
+
+    extend(true, LoggingBunyan, LoggingBunyanCached);
     loggingBunyan = new LoggingBunyan(OPTIONS);
   });
 
@@ -60,167 +68,100 @@ describe('logging-bunyan', function() {
       assert(loggingBunyan instanceof LoggingBunyan);
     });
 
-    it('should localize Log instance using default name', function() {
+    it('should localize the provided resource', function() {
+      assert.strictEqual(loggingBunyan.resource_, OPTIONS.resource);
+    });
+
+    it('should localize Log instance using provided name', function() {
       assert.strictEqual(fakeLoggingOptions_, OPTIONS);
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
-    it('should localize the provided resource', function() {
-      assert.strictEqual(loggingBunyan.resource_, OPTIONS.resource);
+    it('should localize Log instance using default name', function() {
+      var optionsWithoutLogName = extend({}, OPTIONS);
+      delete optionsWithoutLogName.logName;
+
+      new LoggingBunyan(optionsWithoutLogName);
+
+      assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
+      assert.strictEqual(fakeLogName_, 'bunyan_log');
     });
   });
 
   describe('stream', function() {
     it('should return a properly formatted object', function() {
-      var LEVEL = 'info';
-      var stream = loggingBunyan.stream(LEVEL);
-      assert.deepStrictEqual(
-          stream, {level: LEVEL, type: 'raw', stream: loggingBunyan});
+      var level = 'info';
+      var stream = loggingBunyan.stream(level);
+
+      assert.strictEqual(stream.level, level);
+      assert.strictEqual(stream.type, 'raw');
+      assert.strictEqual(stream.stream, loggingBunyan);
     });
   });
 
   describe('write', function() {
     var STACKDRIVER_LEVEL = 'info';
+
     var RECORD = {
       level: 30,
-      name: 'foo',
-      pid: '5666',
-      msg: 'hello',
       time: '2012-06-19T21:34:19.906Z'
     };
 
     beforeEach(function() {
-      fakeLogInstance.entry = util.noop;
-      loggingBunyan.log_[STACKDRIVER_LEVEL] = util.noop;
+      fakeLogInstance.entry = function() {};
+      loggingBunyan.log_[STACKDRIVER_LEVEL] = function() {};
+    });
+
+    it('should throw an error if record is a string', function() {
+      assert.throws(function() {
+        loggingBunyan.write('string record');
+      }, new RegExp(
+        '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
+      ));
     });
 
     it('should properly create an entry', function(done) {
       loggingBunyan.log_.entry = function(entryMetadata, message) {
         assert.deepEqual(entryMetadata, {
           resource: loggingBunyan.resource_,
-          // record.time should be transported to metadata.timestamp
           timestamp: RECORD.time
         });
-        assert.deepEqual(message, RECORD);
+        assert.strictEqual(message, RECORD);
         done();
       };
 
       loggingBunyan.write(RECORD);
     });
 
-    it('should write to the log', function(done) {
+    it('should write to the correct log', function(done) {
+      var customLevel = 'custom-level';
       var entry = {};
 
-      loggingBunyan.log_.entry = function() { return entry; };
+      loggingBunyan.log_.entry = function() {
+        return entry;
+      };
 
-      loggingBunyan.log_[STACKDRIVER_LEVEL] = function(entry_, callback) {
+      LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level] = customLevel;
+
+      loggingBunyan.log_[customLevel] = function(entry_) {
         assert.strictEqual(entry_, entry);
-        callback();
         done();
       };
 
       loggingBunyan.write(RECORD);
     });
-
   });
 
-  describe('level translation', function() {
-    var STACKDRIVER_LEVELS = {
-      emergency: 0,
-      alert: 1,
-      critical: 2,
-      error: 3,
-      warning: 4,
-      notice: 5,
-      info: 6,
-      debug: 7
-    };
-
-    // Bunyan to stackdriver mapping.
-    var LEVEL_MAP = {
-      'fatal': 'critical',
-      'error': 'error',
-      'warn': 'warning',
-      'info': 'info',
-      'debug': 'debug',
-      'trace': 'debug'
-    };
-
-    var buffer;
-    var logger;
-
-    before(function() {
-      // Add mock functions for each log level.
-      Object.keys(STACKDRIVER_LEVELS)
-          .forEach(function(level) {
-            loggingBunyan.log_[level] = function(entry, cb) {
-              buffer.push({level: level, entry: entry});
-              setImmediate(function() { cb(null, true); });
-            };
-          });
-
-      // Use a logger at the highest level so that everything gets logged.
-      logger = bunyan.createLogger(
-          {name: 'testLog', streams: [loggingBunyan.stream('trace')]});
-    });
-
-    // Clear buffer before each test.
-    beforeEach(function() { buffer = []; });
-
-    Object.keys(LEVEL_MAP).forEach(function(bunyanLevel) {
-      var stackdriverLevel = LEVEL_MAP[bunyanLevel];
-
-      it('should use correct logging level for bunyan level ' + bunyanLevel,
-         function(done) {
-           logger[bunyanLevel]('hello');
-           setTimeout(function() {
-             assert.strictEqual(buffer[0].level, stackdriverLevel);
-             done();
-           }, 10);
-         });
-
-    });
-  });
-
-  describe('multiple loggers', function() {
-    var buffer;
-
-    beforeEach(function() {
-      buffer = [];
-      loggingBunyan.log_.entry = function(meta, data) {
-        return {meta: meta, data: data};
-      };
-      loggingBunyan.log_.info = function(entry, cb) {
-        buffer.push(entry);
-        setImmediate(function() { cb(null, true); });
-      };
-    });
-
-    it('should function for multiple loggers', function(done) {
-      var logs = ['logA', 'logA', 'logB'];
-      var loggers = logs.map(function(logName) {
-        return bunyan.createLogger(
-            {name: logName, streams: [loggingBunyan.stream('trace')]});
+  describe('BUNYAN_TO_STACKDRIVER', function() {
+    it('should correctly map to Stackdriver Logging levels', function() {
+      assert.deepEqual(LoggingBunyan.BUNYAN_TO_STACKDRIVER, {
+        60: 'critical',
+        50: 'error',
+        40: 'warning',
+        30: 'info',
+        20: 'debug',
+        10: 'debug'
       });
-
-
-      // For each logger, write a message
-      for (var i = 0; i < logs.length; i++) {
-        loggers[i].info(logs[i]);
-      }
-
-      setTimeout(function() {
-        assert.equal(buffer.length, loggers.length);
-        var logA = buffer.filter(function(payload) {
-          return payload.data.msg === 'logA';
-        });
-        var logB = buffer.filter(function(payload) {
-          return payload.data.msg === 'logB';
-        });
-        assert.equal(logA.length, 2);
-        assert.equal(logB.length, 1);
-        done();
-      }, 10);
     });
   });
 });

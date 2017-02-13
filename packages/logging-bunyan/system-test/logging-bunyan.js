@@ -27,70 +27,86 @@ var loggingBunyan = require('../')(env);
 describe('LoggingBunyan', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 20000;
 
-  var logger = bunyan.createLogger(
-      {name: 'system-test', streams: [loggingBunyan.stream('info')]});
+  var logger = bunyan.createLogger({
+    name: 'google-cloud-node-system-test',
+    streams: [
+      loggingBunyan.stream('info')
+    ]
+  });
 
-  describe('write', function() {
+  it('should properly write log entries', function(done) {
+    var timestamp = new Date();
 
-    it('should properly write log entries', function(done) {
-      var timestamp = new Date();
-
-      var testData = [
-        {
-          args: ['first'],
-          verify: function(entry) {
-            assert.strictEqual(entry.data.msg, 'first');
-            assert.strictEqual(entry.data.pid, process.pid);
-          }
-        },
-
-        {
-          args: [new Error('second')],
-          verify: function(entry) {
-            assert.strictEqual(entry.data.msg, 'second');
-            assert.strictEqual(entry.data.pid, process.pid);
-          }
-        },
-      ];
-
-      var earliest = {
-        args: [{time: timestamp}, 'earliest'],
+    var testData = [
+      {
+        args: [
+          'first'
+        ],
         verify: function(entry) {
-          assert.strictEqual(entry.data.msg, 'earliest');
+          assert.strictEqual(entry.data.msg, 'first');
           assert.strictEqual(entry.data.pid, process.pid);
-          assert.strictEqual(entry.metadata.timestamp.toString(),
-                             timestamp.toString());
         }
-      };
+      },
 
-      // Forcibly insert a delay to cause 'third' to have a deterministically
-      // earlier timestamp.
-      setTimeout(function() {
-        testData.forEach(function(test) {
-          logger.info.apply(logger, test.args);
+      {
+        args: [
+          new Error('second')
+        ],
+        verify: function(entry) {
+          assert.strictEqual(entry.data.msg, 'second');
+          assert.strictEqual(entry.data.pid, process.pid);
+        }
+      },
+    ];
+
+    var earliest = {
+      args: [
+        {
+          time: timestamp
+        },
+        'earliest'
+      ],
+      verify: function(entry) {
+        assert.strictEqual(entry.data.msg, 'earliest');
+        assert.strictEqual(entry.data.pid, process.pid);
+        assert.strictEqual(
+          entry.metadata.timestamp.toString(),
+          timestamp.toString()
+        );
+      }
+    };
+
+    // Forcibly insert a delay to cause 'third' to have a deterministically
+    // earlier timestamp.
+    setTimeout(function() {
+      testData.forEach(function(test) {
+        logger.info.apply(logger, test.args);
+      });
+
+      // `earliest` is sent last, but it should show up as the earliest entry.
+      logger.info.apply(logger, earliest.args);
+
+      // insert into list as the earliest entry.
+      testData.unshift(earliest);
+    }, 10);
+
+    setTimeout(function() {
+      var log = logging.log('bunyan_log');
+
+      log.getEntries({
+        pageSize: testData.length
+      }, function(err, entries) {
+        assert.ifError(err);
+        assert.strictEqual(entries.length, testData.length);
+
+        // Make sure entries are valid and are in the correct order.
+        entries.reverse().forEach(function(entry, index) {
+          var test = testData[index];
+          test.verify(entry);
         });
-        // `earliest` is sent last, but it should show up as the earliest entry.
-        logger.info.apply(logger, earliest.args);
-        // insert into list as the earliest entry.
-        testData.unshift(earliest);
-      }, 10);
 
-      setTimeout(function() {
-        logging.log('bunyan_log')
-            .getEntries({pageSize: testData.length}, function(err, entries) {
-              assert.ifError(err);
-              assert.strictEqual(entries.length, testData.length);
-
-              // Make sure entries are valid and are in the correct order.
-              entries.reverse().forEach(function(entry, index) {
-                var test = testData[index];
-                test.verify(entry);
-              });
-
-              done();
-            });
-      }, WRITE_CONSISTENCY_DELAY_MS);
-    });
-
+        done();
+      });
+    }, WRITE_CONSISTENCY_DELAY_MS);
   });
 });
