@@ -24,12 +24,16 @@ var winston = require('winston');
 var env = require('../../../system-test/env.js');
 
 var logging = require('@google-cloud/logging')(env);
-var loggingWinston = require('../');
+var LoggingWinston = require('../');
 
 describe('LoggingWinston', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 20000;
 
-  winston.add(loggingWinston, env);
+  var logger = new winston.Logger({
+    transports: [
+      new LoggingWinston(env)
+    ]
+  });
 
   describe('log', function() {
     var testTimestamp = new Date();
@@ -69,7 +73,7 @@ describe('LoggingWinston', function() {
 
     it('should properly write log entries', function(done) {
       async.each(testData, function(test, callback) {
-        winston.info.apply(winston, test.args.concat(callback));
+        logger.info.apply(logger, test.args.concat(callback));
       }, function(err) {
         assert.ifError(err);
 
