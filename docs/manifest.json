@@ -164,6 +164,7 @@
       "name": "@google-cloud/logging-winston",
       "defaultService": "logging-winston",
       "versions": [
+        "0.1.0",
         "master"
       ]
     },
