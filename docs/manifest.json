@@ -160,6 +160,14 @@
       ]
     },
     {
+      "id": "logging-winston",
+      "name": "@google-cloud/logging-winston",
+      "defaultService": "logging-winston",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "logging",
       "name": "@google-cloud/logging",
       "defaultService": "logging",
