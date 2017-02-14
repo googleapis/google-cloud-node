@@ -1,30 +1,28 @@
-# @google-cloud/logging-winston
-> Stackdriver Logging transport for [Winston][winston]
+# @google-cloud/logging-bunyan
+> Stackdriver Logging stream for [Bunyan][bunyan]
 
-This module provides an easy to use, higher-level layer for working with Stackdriver Logging, compatible with Winston. Simply attach this as a transport to your existing Winston loggers.
+This module provides an easy to use, higher-level layer for working with Stackdriver Logging, compatible with Bunyan. Simply use this as a raw stream with your existing Bunyan loggers.
 
 For lower-level access to the Stackdriver Logging API, see [@google-cloud/logging][@google-cloud/logging].
 
 > *This module is experimental and should be used by early adopters. This module uses APIs that may be undocumented and subject to change without notice.*
 
 ``` sh
-$ npm install --save @google-cloud/logging-winston
+$ npm install --save @google-cloud/logging-bunyan
 ```
 ``` js
-var winston = require('winston');
-var transport = require('@google-cloud/logging-winston');
+var bunyan = require('bunyan');
+var loggingBunyan = require('@google-cloud/logging-bunyan')();
 
-winston.add(transport, {
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json',
-  level: 'warning', // log at 'warning' and above
-  resource: {
-    type: 'global'
-  }
+var logger = bunyan.createLogger({
+  name: 'my-service',
+  streams: [
+    loggingBunyan.stream('info')
+  ]
 });
 
-winston.error('warp nacelles offline');
-winston.verbose('sheilds at 99%');
+logger.error('warp nacelles offline');
+logger.info('shields at 99%');
 ```
 
 ## Authentication
@@ -36,11 +34,7 @@ It's incredibly easy to get authenticated and start using Google's APIs. You can
 If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-var winston = require('winston');
-var transport = require('@google-cloud/logging-winston');
-
-winston.add(transport);
-
+var loggingBunyan = require('@google-cloud/logging-bunyan')();
 // ...you're good to go!
 ```
 
@@ -57,11 +51,10 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
 ``` js
-var winston = require('winston');
-var transport = require('@google-cloud/logging-winston');
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-winston.add(transport, {
-  projectId: 'grape-spaceship-123',
+var loggingBunyan = require('@google-cloud/logging-bunyan')({
+  projectId: projectId,
 
   // The path to your key file:
   keyFilename: '/path/to/keyfile.json'
@@ -73,7 +66,7 @@ winston.add(transport, {
 // ...you're good to go!
 ```
 
-[winston]: https://github.com/winstonjs/winston
+[bunyan]: https://github.com/trentm/node-bunyan
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
