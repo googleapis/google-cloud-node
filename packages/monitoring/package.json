@@ -54,7 +54,7 @@
   "dependencies": {
     "extend": "^3.0.0",
     "google-gax": "^0.10.0",
-    "google-proto-files": "^0.8.3"
+    "google-proto-files": "^0.9.1"
   },
   "devDependencies": {
     "mocha": "^3.1.2"

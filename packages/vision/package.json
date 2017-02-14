@@ -56,7 +56,7 @@
     "async": "^2.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.10.0",
-    "google-proto-files": "^0.8.0",
+    "google-proto-files": "^0.9.1",
     "is": "^3.0.1",
     "propprop": "^0.3.0",
     "request": "^2.70.0",
