@@ -183,7 +183,7 @@ Speech.findFile_ = function(file, callback) {
   }
 
   if (is.string(file) && file.indexOf('gs://') === 0) {
-    // File is a Google Cloud Storage URI.
+    // File is a Cloud Storage URI.
     callback(null, {
       uri: file
     });
@@ -365,7 +365,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     property, a `confidence` score from `0` - `100`, and an `alternatives`
  *     array consisting of other transcription possibilities.
  *
- * Google Cloud Speech sets the limits for the audio duration. For more
+ * Cloud Speech sets the limits for the audio duration. For more
  * information, see
  * [Content Limits]{@link https://cloud.google.com/speech/limits#content}.
  *

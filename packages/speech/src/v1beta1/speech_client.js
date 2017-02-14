@@ -50,7 +50,7 @@ var ALL_SCOPES = [
 ];
 
 /**
- * Service that implements Google Cloud Speech API.
+ * Service that implements Cloud Speech API.
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.

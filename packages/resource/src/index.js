@@ -45,7 +45,7 @@ var Project = require('./project.js');
  * @alias module:resource
  * @constructor
  *
- * @resource [What is the Google Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
+ * @resource [What is the Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
  *
  * @param {object} options - [Configuration object](#/docs).
  */

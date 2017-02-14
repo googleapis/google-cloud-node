@@ -1,4 +1,4 @@
-# Google Cloud Node.js Client
+# Cloud Node.js Client
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![NPM Version](https://img.shields.io/npm/v/google-cloud.svg)](https://www.npmjs.org/package/google-cloud)
@@ -12,21 +12,21 @@
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [Google BigQuery](#google-bigquery-beta) (Beta)
-* [Google Cloud Datastore](#google-cloud-datastore-beta) (Beta)
-* [Google Cloud Storage](#google-cloud-storage-beta) (Beta)
+* [Cloud Datastore](#google-cloud-datastore-beta) (Beta)
+* [Cloud Storage](#google-cloud-storage-beta) (Beta)
 * [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
-* [Google Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
-* [Google Cloud DNS](#google-cloud-dns-alpha) (Alpha)
-* [Google Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
-* [Google Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
-* [Google Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
-* [Google Cloud Speech](#google-cloud-speech-alpha) (Alpha)
-* [Google Cloud Translation API](#google-cloud-translation-api-alpha) (Alpha)
-* [Google Cloud Vision](#google-cloud-vision-alpha) (Alpha)
+* [Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
+* [Cloud DNS](#google-cloud-dns-alpha) (Alpha)
+* [Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
+* [Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
+* [Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
+* [Cloud Speech](#google-cloud-speech-alpha) (Alpha)
+* [Cloud Translation API](#google-cloud-translation-api-alpha) (Alpha)
+* [Cloud Vision](#google-cloud-vision-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
@@ -54,7 +54,7 @@ $ npm install --save google-cloud
 
 ## Authentication
 
-With `google-cloud` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+With `google-cloud` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
 
 ### On Google Cloud Platform
 
@@ -78,16 +78,16 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Cloud Bigtable Admin API
   * Cloud Bigtable Table Admin API
   * Cloud Spanner API
-  * Google Cloud Datastore API
-  * Google Cloud DNS API
-  * Google Cloud Natural Language API
-  * Google Cloud Pub/Sub API
-  * Google Cloud Resource Manager API
-  * Google Cloud Speech API
-  * Google Cloud Storage
-  * Google Cloud Storage JSON API
-  * Google Cloud Translation API
-  * Google Cloud Vision API
+  * Cloud Datastore API
+  * Cloud DNS API
+  * Cloud Natural Language API
+  * Cloud Pub/Sub API
+  * Cloud Resource Manager API
+  * Cloud Speech API
+  * Cloud Storage
+  * Cloud Storage JSON API
+  * Cloud Translation API
+  * Cloud Vision API
   * Google Compute Engine API
   * Prediction API
   * Stackdriver Logging API
@@ -173,12 +173,12 @@ job.getQueryResults().on('data', function(row) {});
 ```
 
 
-## Google Cloud Datastore (Beta)
+## Cloud Datastore (Beta)
 
 - [API Documentation][gcloud-datastore-docs]
 - [Official Documentation][cloud-datastore-docs]
 
-*Follow the [activation instructions][cloud-datastore-activation] to use the Google Cloud Datastore API with your project.*
+*Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
 
 #### Using the all-in-one module
 
@@ -247,7 +247,7 @@ datastoreClient.save({
 ```
 
 
-## Google Cloud Storage (Beta)
+## Cloud Storage (Beta)
 
 - [API Documentation][gcloud-storage-docs]
 - [Official Documentation][cloud-storage-docs]
@@ -482,12 +482,12 @@ database.runStream('SELECT * FROM Singers')
 ```
 
 
-## Google Cloud Bigtable (Alpha)
+## Cloud Bigtable (Alpha)
 
 - [API Documentation][gcloud-bigtable-docs]
 - [Official Documentation][cloud-bigtable-docs]
 
-*You may need to [create a cluster][cloud-bigtable-cluster] to use the Google Cloud Bigtable API with your project.*
+*You may need to [create a cluster][cloud-bigtable-cluster] to use the Cloud Bigtable API with your project.*
 
 #### Using the all-in-one module
 
@@ -553,7 +553,7 @@ row.save('follows:gwashington', 1, function(err) {
 ```
 
 
-## Google Cloud DNS (Alpha)
+## Cloud DNS (Alpha)
 
 - [API Documentation][gcloud-dns-docs]
 - [Official Documentation][cloud-dns-docs]
@@ -612,7 +612,7 @@ zone.export('/zonefile.zone', function(err) {});
 ```
 
 
-## Google Cloud Natural Language (Alpha)
+## Cloud Natural Language (Alpha)
 
 - [API Documentation][gcloud-language-docs]
 - [Official Documentation][cloud-language-docs]
@@ -694,7 +694,7 @@ document.annotate(function(err, annotations) {
 ```
 
 
-## Google Cloud Pub/Sub (Alpha)
+## Cloud Pub/Sub (Alpha)
 
 - [API Documentation][gcloud-pubsub-docs]
 - [Official Documentation][cloud-pubsub-docs]
@@ -752,7 +752,7 @@ topic.subscribe('subscription-name', function(err, subscription) {
 ```
 
 
-## Google Cloud Resource Manager (Alpha)
+## Cloud Resource Manager (Alpha)
 
 - [API Documentation][gcloud-resource-docs]
 - [Official Documentation][cloud-resource-docs]
@@ -805,7 +805,7 @@ project.getMetadata(function(err, metadata) {
 ```
 
 
-## Google Cloud Speech (Alpha)
+## Cloud Speech (Alpha)
 
 - [API Documentation][gcloud-speech-docs]
 - [Official Documentation][cloud-speech-docs]
@@ -888,7 +888,7 @@ fs.createReadStream('./audio.raw')
 ```
 
 
-## Google Cloud Translation API (Alpha)
+## Cloud Translation API (Alpha)
 
 - [API Documentation][gcloud-translate-docs]
 - [Official Documentation][cloud-translate-docs]
@@ -957,7 +957,7 @@ translateClient.getLanguages(function(err, languages) {
 ```
 
 
-## Google Cloud Vision (Alpha)
+## Cloud Vision (Alpha)
 
 - [API Documentation][gcloud-vision-docs]
 - [Official Documentation][cloud-vision-docs]

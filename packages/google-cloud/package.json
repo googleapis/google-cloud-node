@@ -2,7 +2,7 @@
   "name": "google-cloud",
   "version": "0.47.0",
   "author": "Google Inc.",
-  "description": "Google Cloud APIs Client Library for Node.js",
+  "description": "Cloud APIs Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

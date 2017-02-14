@@ -33,7 +33,7 @@ var util = require('util');
 var Zone = require('./zone.js');
 
 /**
- * [Google Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
+ * [Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
  * performance, resilient, global DNS service that provides a cost-effective way
  * to make your applications and services available to your users. This
  * programmable, authoritative DNS service can be used to easily publish and
@@ -42,7 +42,7 @@ var Zone = require('./zone.js');
  * @constructor
  * @alias module:dns
  *
- * @resource [What is Google Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
+ * @resource [What is Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
  *
  * @param {object} options - [Configuration object](#/docs).
  */

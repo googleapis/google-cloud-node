@@ -1,5 +1,5 @@
 # @google-cloud/vision ([Alpha][versioning])
-> Google Cloud Vision Client Library for Node.js
+> Cloud Vision Client Library for Node.js
 
 *Looking for more Google APIs than just Vision? You might want to check out [`google-cloud`][google-cloud].*
 
@@ -120,7 +120,7 @@ var vision = require('@google-cloud/vision')({
 
 ## Authentication
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
 
 ### On Google Cloud Platform
 
@@ -138,7 +138,7 @@ If you are not running this client on Google Cloud Platform, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Vision API
+  * Cloud Vision API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.

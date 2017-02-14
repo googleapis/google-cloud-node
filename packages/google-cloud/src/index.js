@@ -88,7 +88,7 @@ var apis = {
   compute: require('@google-cloud/compute'),
 
   /**
-   * [Google Cloud Datastore](https://developers.google.com/datastore/) is a
+   * [Cloud Datastore](https://developers.google.com/datastore/) is a
    * fully managed, schemaless database for storing non-relational data. Use
    * this object to create a Dataset to interact with your data, an "Int", and a
    * "Double" representation.
@@ -107,7 +107,7 @@ var apis = {
   datastore: require('@google-cloud/datastore'),
 
   /**
-   * [Google Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a
+   * [Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a
    * high-performance, resilient, global DNS service that provides a cost-
    * effective way to make your applications and services available to your
    * users. This programmable, authoritative DNS service can be used to easily
@@ -128,7 +128,7 @@ var apis = {
   dns: require('@google-cloud/dns'),
 
   /**
-   * The [Google Cloud Natural Language](https://cloud.google.com/natural-language/docs)
+   * The [Cloud Natural Language](https://cloud.google.com/natural-language/docs)
    * API provides natural language understanding technologies to developers,
    * including sentiment analysis, entity recognition, and syntax analysis.
    *
@@ -222,8 +222,8 @@ var apis = {
   prediction: require('@google-cloud/prediction'),
 
   /**
-   * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
-   * reliable, many-to-many, asynchronous messaging service from Google Cloud
+   * [Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
+   * reliable, many-to-many, asynchronous messaging service from Cloud
    * Platform.
    *
    * @type {module:pubsub}
@@ -303,8 +303,8 @@ var apis = {
   speech: require('@google-cloud/speech'),
 
   /**
-   * Google Cloud Storage allows you to store data on Google infrastructure.
-   * Read [Google Cloud Storage API docs](https://developers.google.com/storage)
+   * Cloud Storage allows you to store data on Google infrastructure.
+   * Read [Cloud Storage API docs](https://developers.google.com/storage)
    * for more information.
    *
    * @type {module:storage}
@@ -321,10 +321,10 @@ var apis = {
   storage: require('@google-cloud/storage'),
 
   /**
-   * With [Google Cloud Translation](https://cloud.google.com/translate), you
+   * With [Cloud Translation](https://cloud.google.com/translate), you
    * can dynamically translate text between thousands of language pairs.
    *
-   * This API lets websites and programs integrate with Google Cloud Translation
+   * This API lets websites and programs integrate with Cloud Translation
    * API programmatically.
    *
    * @type {module:translate}

@@ -2,7 +2,7 @@
   "name": "@google-cloud/vision",
   "version": "0.8.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Vision Client Library for Node.js",
+  "description": "Cloud Vision Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

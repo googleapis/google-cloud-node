@@ -32,7 +32,7 @@ var v1 = require('./v1');
 var Document = require('./document.js');
 
 /**
- * The [Google Cloud Natural Language](https://cloud.google.com/natural-language/docs)
+ * The [Cloud Natural Language](https://cloud.google.com/natural-language/docs)
  * API provides natural language understanding technologies to developers,
  * including sentiment analysis, entity recognition, and syntax analysis. This
  * API is part of the larger Cloud Machine Learning API.
@@ -47,7 +47,7 @@ var Document = require('./document.js');
  * @constructor
  * @alias module:language
  *
- * @resource [Google Cloud Natural Language API Documentation]{@link https://cloud.google.com/natural-language/docs}
+ * @resource [Cloud Natural Language API Documentation]{@link https://cloud.google.com/natural-language/docs}
  *
  * @param {object} options - [Configuration object](#/docs).
  */
@@ -94,7 +94,7 @@ function Language(options) {
  * language.annotate('Hello!', callback);
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -186,7 +186,7 @@ Language.prototype.annotate = function(content, options, callback) {
  * language.detectEntities('Axel Foley is from Detroit', callback);
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -277,7 +277,7 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * language.detectSentiment('Hello!', callback);
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -359,7 +359,7 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  * language.detectSyntax('Axel Foley is from Detroit', callback);
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -440,7 +440,7 @@ Language.prototype.detectSyntax = function(content, options, callback) {
  * var document = language.document('Inline content of an unknown type.');
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -485,7 +485,7 @@ Language.prototype.document = function(config) {
  * var document = language.html('&lt;h1>Document Title&lt;/h1>');
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
@@ -535,7 +535,7 @@ Language.prototype.html = function(content, options) {
  * var document = language.text('This is using inline text content.');
  *
  * //-
- * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * // Or, provide a reference to a file hosted on Cloud Storage.
  * //-
  * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'

@@ -2,7 +2,7 @@
   "name": "@google-cloud/translate",
   "version": "0.7.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Translation API Client Library for Node.js",
+  "description": "Cloud Translation API Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

@@ -45,7 +45,7 @@ var Instance = require('./instance.js');
  * @constructor
  *
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
- * @resource [Google Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
+ * @resource [Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used

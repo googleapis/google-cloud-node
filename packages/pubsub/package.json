@@ -2,7 +2,7 @@
   "name": "@google-cloud/pubsub",
   "version": "0.8.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Pub/Sub Client Library for Node.js",
+  "description": "Cloud Pub/Sub Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

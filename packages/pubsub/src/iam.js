@@ -49,7 +49,7 @@ var util = require('util');
  *
  * *The IAM access control features described in this document are Beta,
  * including the API methods to get and set IAM policies, and to test IAM
- * permissions. Google Cloud Pub/Sub's use of IAM features is not covered by any
+ * permissions. Cloud Pub/Sub's use of IAM features is not covered by any
  * SLA or deprecation policy, and may be subject to backward-incompatible
  * changes.*
  *

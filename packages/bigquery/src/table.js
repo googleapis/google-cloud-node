@@ -552,7 +552,7 @@ Table.prototype.createWriteStream = function(metadata) {
 };
 
 /**
- * Export table to Google Cloud Storage.
+ * Export table to Cloud Storage.
  *
  * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
  *

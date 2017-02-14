@@ -44,57 +44,57 @@ module.exports = {
       instanceName: 'gcloud'
     },
     bigquery: {
-      title: 'Google BigQuery'
+      title: 'BigQuery'
     },
     bigtable: {
-      title: 'Google Cloud Bigtable'
+      title: 'Cloud Bigtable'
     },
     compute: {
       title: 'Google Compute Engine',
       instanceName: 'gce'
     },
     datastore: {
-      title: 'Google Cloud Datastore'
+      title: 'Cloud Datastore'
     },
     dns: {
-      title: 'Google Cloud DNS'
+      title: 'Cloud DNS'
     },
     language: {
-      title: 'Google Cloud Natural Language'
+      title: 'Cloud Natural Language'
     },
     logging: {
-      title: 'Google Cloud Logging'
+      title: 'Cloud Logging'
     },
     'logging-winston': {
       skip: true
     },
     monitoring: {
-      title: 'Google Cloud Monitoring'
+      title: 'Cloud Monitoring'
     },
     prediction: {
-      title: 'Google Prediction API'
+      title: 'Prediction API'
     },
     pubsub: {
-      title: 'Google Cloud Pub/Sub'
+      title: 'Cloud Pub/Sub'
     },
     resource: {
-      title: 'Google Cloud Resource Manager'
+      title: 'Cloud Resource Manager'
     },
     spanner: {
       title: 'Cloud Spanner'
     },
     speech: {
-      title: 'Google Cloud Speech API'
+      title: 'Cloud Speech API'
     },
     storage: {
-      title: 'Google Cloud Storage',
+      title: 'Cloud Storage',
       instanceName: 'gcs'
     },
     translate: {
-      title: 'Google Cloud Translation API'
+      title: 'Cloud Translation API'
     },
     vision: {
-      title: 'Google Cloud Vision'
+      title: 'Cloud Vision'
     }
   }
 };

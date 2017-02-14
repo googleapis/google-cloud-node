@@ -1095,7 +1095,7 @@ InstanceAdminClient.prototype.getIamPolicy = function(request, options, callback
  *
  * Attempting this RPC on a non-existent Cloud Spanner instance resource will
  * result in a NOT_FOUND error if the user has `spanner.instances.list`
- * permission on the containing Google Cloud Project. Otherwise returns an
+ * permission on the containing Cloud Project. Otherwise returns an
  * empty set of permissions.
  *
  * @param {Object} request
