@@ -518,7 +518,9 @@ function replaceProjectIdToken(value, projectId) {
 
   if (is.object(value)) {
     for (var opt in value) {
-      value[opt] = replaceProjectIdToken(value[opt], projectId);
+      if (value.hasOwnProperty(opt)) {
+        value[opt] = replaceProjectIdToken(value[opt], projectId);
+      }
     }
   }
 
