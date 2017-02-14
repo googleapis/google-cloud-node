@@ -133,6 +133,26 @@ LoggingBunyan.prototype.write = function(record) {
     );
   }
 
+  // Stackdriver Logs Viewer picks up the summary line from the 'message' field
+  // of the payload.
+  // https://cloud.google.com/logging/docs/view/logs_viewer_v2#expanding
+  //
+  // Furthermore, for error messages at severity 'error' and higher, Stackdriver
+  // Error Reporting will pick up error messages if the full stack trace is
+  // included in the textPayload or in the `message` property of the
+  // jsonPaylod. See:
+  // https://cloud.google.com/error-reporting/docs/formatting-error-messages
+  //
+  // We only do this if the user hasn't provided a message property themselves.
+  //
+  if (!record.message) {
+    if (record.err && record.err.stack) {
+      record.message = record.err.stack;
+    } else {
+      record.message = record.msg;
+    }
+  }
+
   var level = BUNYAN_TO_STACKDRIVER[record.level];
 
   var entryMetadata = {

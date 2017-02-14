@@ -41,6 +41,7 @@ describe('LoggingWinston', function() {
     var testData = [
       {
         args: ['first'],
+        level: 'info',
         verify: function(entry) {
           assert.strictEqual(entry.data, 'first');
         }
@@ -48,6 +49,7 @@ describe('LoggingWinston', function() {
 
       {
         args: ['second'],
+        level: 'info',
         verify: function(entry) {
           assert.strictEqual(entry.data, 'second');
         }
@@ -60,6 +62,7 @@ describe('LoggingWinston', function() {
             testTimestamp: testTimestamp
           }
         ],
+        level: 'info',
         verify: function(entry) {
           assert.strictEqual(entry.data, 'third');
 
@@ -68,34 +71,48 @@ describe('LoggingWinston', function() {
             util.inspect(testTimestamp)
           );
         }
-      }
+      },
+
+      {
+        args: [ new Error('forth') ],
+        level: 'error',
+        verify: function(entry) {
+          assert.ok(entry.data.startsWith('Error: forth'));
+        }
+      },
+
+      {
+        args: [ 'fifth message', new Error('fifth') ],
+        level: 'error',
+        verify: function(entry) {
+          assert.ok(entry.data.startsWith('fifth message: Error: fifth'));
+        }
+      },
     ];
 
     it('should properly write log entries', function(done) {
-      async.each(testData, function(test, callback) {
-        logger.info.apply(logger, test.args.concat(callback));
-      }, function(err) {
-        assert.ifError(err);
-
-        setTimeout(function() {
-          logging.log('winston_log').getEntries({
-            pageSize: testData.length
-          }, function(err, entries) {
-            assert.ifError(err);
-
-            assert.strictEqual(entries.length, testData.length);
-
-            entries
-              .reverse()
-              .forEach(function(entry, index) {
-                var test = testData[index];
-                test.verify(entry);
-              });
-
-            done();
-          });
-        }, WRITE_CONSISTENCY_DELAY_MS);
+      testData.forEach(function(test) {
+        logger[test.level].apply(logger, test.args);
       });
+
+      setTimeout(function() {
+        logging.log('winston_log').getEntries({
+          pageSize: testData.length
+        }, function(err, entries) {
+          assert.ifError(err);
+
+          assert.strictEqual(entries.length, testData.length);
+
+          entries
+            .reverse()
+            .forEach(function(entry, index) {
+              var test = testData[index];
+              test.verify(entry);
+            });
+
+          done();
+        });
+      }, WRITE_CONSISTENCY_DELAY_MS);
     });
   });
 });
