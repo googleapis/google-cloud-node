@@ -239,6 +239,15 @@
       ]
     },
     {
+      "id": "spanner",
+      "name": "@google-cloud/spanner",
+      "defaultService": "spanner",
+      "versions": [
+        "0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "speech",
       "name": "@google-cloud/speech",
       "defaultService": "speech",

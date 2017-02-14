@@ -63,7 +63,7 @@ var ABORTED = 10;
  *
  * @constructor
  * @alias module:spanner/transaction
- * @mixes module:spanner/transactionRequest
+ * @mixes module:spanner/transaction-request
  *
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
