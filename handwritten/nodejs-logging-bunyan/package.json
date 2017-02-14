@@ -37,7 +37,7 @@
     "proxyquire": "^1.7.11"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js logging-winston",
+    "publish-module": "node ../../scripts/publish.js logging-bunyan",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
