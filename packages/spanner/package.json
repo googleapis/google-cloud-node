@@ -61,7 +61,7 @@
     "uuid": "^3.0.1"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js resource",
+    "publish-module": "node ../../scripts/publish.js spanner",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
