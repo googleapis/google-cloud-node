@@ -208,6 +208,13 @@ Speech.findFile_ = function(file, callback) {
     return;
   }
 
+  if (Buffer.isBuffer(file)) {
+    callback(null, {
+      content: file
+    });
+    return;
+  }
+
   if (is.object(file)) {
     // This might be a RecognitionAudio object.
     if (!file.content && !file.uri) {
