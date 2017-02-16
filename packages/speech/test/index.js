@@ -299,6 +299,20 @@ describe('Speech', function() {
       });
     });
 
+    it('should accept a buffer', function(done) {
+      var file = new Buffer('abc');
+
+      Speech.findFile_(file, function(err, foundFile) {
+        assert.ifError(err);
+
+        assert.deepEqual(foundFile, {
+          content: file
+        });
+
+        done();
+      });
+    });
+
     it('should validate RecognitionAudio object', function(done) {
       var file = {};
 
