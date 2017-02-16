@@ -458,6 +458,12 @@ describe('Speech', function() {
       };
     });
 
+    it('should throw if an object is not provided', function() {
+      assert.throws(function() {
+        speech.createRecognizeStream();
+      }, /A recognize request requires a configuration object\./);
+    });
+
     it('should make the correct request once writing started', function(done) {
       speech.api.Speech = {
         streamingRecognize: function() {
@@ -682,6 +688,12 @@ describe('Speech', function() {
       speech.api.Speech = {
         syncRecognize: util.noop
       };
+    });
+
+    it('should throw if an object is not provided', function() {
+      assert.throws(function() {
+        speech.recognize(FILE, assert.ifError);
+      }, /A recognize request requires a configuration object\./);
     });
 
     it('should find the files', function(done) {

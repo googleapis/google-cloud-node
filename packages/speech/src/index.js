@@ -476,6 +476,10 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
 Speech.prototype.createRecognizeStream = function(config) {
   var self = this;
 
+  if (!config) {
+    throw new Error('A recognize request requires a configuration object.');
+  }
+
   var verboseMode = config.verbose === true;
   delete config.verbose;
 
@@ -649,6 +653,10 @@ Speech.prototype.operation = function(name) {
  */
 Speech.prototype.recognize = function(file, config, callback) {
   var self = this;
+
+  if (!is.object(config)) {
+    throw new Error('A recognize request requires a configuration object.');
+  }
 
   config = extend({}, config);
 
