@@ -667,7 +667,7 @@ describe('GrpcService', function() {
         return retryRequestInstance;
       };
 
-      var request = grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError)
+      var request = grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
       assert.strictEqual(request, retryRequestInstance);
     });
 
