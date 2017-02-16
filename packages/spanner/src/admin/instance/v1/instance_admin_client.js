@@ -30,7 +30,6 @@
 var configData = require('./instance_admin_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
-var path = require('path');
 
 var SERVICE_ADDRESS = 'spanner.googleapis.com';
 
