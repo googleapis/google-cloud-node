@@ -244,6 +244,16 @@ describe('GrpcService', function() {
     });
   });
 
+  describe('grpc request options', function() {
+    it('should define the correct default options', function() {
+      assert.deepEqual(GrpcService.GRPC_REQUEST_OPTIONS, {
+        'grpc.max_send_message_length': -1,
+        'grpc.max_receive_message_length': -1,
+        'grpc.initial_reconnect_backoff_ms': 5000
+      });
+    });
+  });
+
   describe('instantiation', function() {
     it('should inherit from Service', function() {
       assert(grpcService instanceof FakeService);
@@ -922,6 +932,22 @@ describe('GrpcService', function() {
         grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
       });
 
+      it('should set proper default grpc options', function(done) {
+        var protoOpts = extend({}, PROTO_OPTS);
+        delete protoOpts.timeout;
+
+        grpcService.getService_ = function() {
+          return {
+            method: function(reqOpts, metadata, grpcOpts) {
+              assert.deepEqual(grpcOpts, GrpcService.GRPC_REQUEST_OPTIONS);
+              done();
+            }
+          };
+        };
+
+        grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
+      });
+
       it('should set a deadline if a timeout is provided', function(done) {
         var expectedDeadlineRange = [
           Date.now() + PROTO_OPTS.timeout - 250,
@@ -1087,6 +1113,22 @@ describe('GrpcService', function() {
       };
 
       grpcService.requestStream(PROTO_OPTS, REQ_OPTS, assert.ifError);
+    });
+
+    it('should set proper default grpc options', function(done) {
+      var protoOpts = extend({}, PROTO_OPTS);
+      delete protoOpts.timeout;
+
+      ProtoService.prototype.method = function(reqOpts, metadata, grpcOpts) {
+        assert.deepEqual(grpcOpts, GrpcService.GRPC_REQUEST_OPTIONS);
+        done();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestStream(protoOpts, REQ_OPTS);
     });
 
     it('should set the deadline', function(done) {
@@ -1299,6 +1341,22 @@ describe('GrpcService', function() {
       grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
     });
 
+    it('should set proper default grpc options', function(done) {
+      var protoOpts = extend({}, PROTO_OPTS);
+      delete protoOpts.timeout;
+
+      ProtoService.prototype.method = function(reqOpts, metadata, grpcOpts) {
+        assert.deepEqual(grpcOpts, GrpcService.GRPC_REQUEST_OPTIONS);
+        done();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestWritableStream(protoOpts, REQ_OPTS);
+    });
+
     it('should set the deadline', function(done) {
       var createDeadline = GrpcService.createDeadline_;
       var fakeDeadline = createDeadline(PROTO_OPTS.timeout);
@@ -1308,12 +1366,26 @@ describe('GrpcService', function() {
         return fakeDeadline;
       };
 
-      ProtoService.prototype.method = function(reqOpts, grpcOpts) {
+      ProtoService.prototype.method = function(reqOpts, metadata, grpcOpts) {
         assert.strictEqual(grpcOpts.deadline, fakeDeadline);
 
         GrpcService.createDeadline_ = createDeadline;
         setImmediate(done);
 
+        return through.obj();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+    });
+
+    it('should pass the grpc metadata with the request', function(done) {
+      ProtoService.prototype.method = function(reqOpts, metadata) {
+        assert.strictEqual(metadata, grpcService.grpcMetadata);
+        setImmediate(done);
         return through.obj();
       };
 
