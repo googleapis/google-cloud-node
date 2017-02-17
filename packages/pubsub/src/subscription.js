@@ -21,9 +21,11 @@
 'use strict';
 
 var arrify = require('arrify');
+var async = require('async');
 var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var events = require('events');
+var exec = require('methmeth');
 var is = require('is');
 var modelo = require('modelo');
 var prop = require('propprop');
@@ -274,6 +276,7 @@ function Subscription(pubsub, options) {
   commonGrpc.ServiceObject.call(this, config);
   events.EventEmitter.call(this);
 
+  this.activeRequests_ = [];
   this.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;
   this.closed = true;
   this.encoding = options.encoding || 'utf-8';
@@ -452,7 +455,7 @@ Subscription.prototype.ack = function(ackIds, callback) {
         delete self.inProgressAckIds[ackId];
       });
 
-      self.refreshPausedStatus_();
+      self.pauseResumeQueue_();
     }
 
     callback(err, resp);
@@ -464,7 +467,7 @@ Subscription.prototype.ack = function(ackIds, callback) {
  * ability to `ack` and `skip` the message.
  *
  * This also records the message as being "in progress". See
- * {module:subscription#refreshPausedStatus_}.
+ * {module:subscription#pauseResumeQueue_}.
  *
  * @private
  *
@@ -483,7 +486,7 @@ Subscription.prototype.decorateMessage_ = function(message) {
 
   message.skip = function() {
     delete self.inProgressAckIds[message.ackId];
-    self.refreshPausedStatus_();
+    self.pauseResumeQueue_();
   };
 
   return message;
@@ -619,8 +622,10 @@ Subscription.prototype.pull = function(options, callback) {
     maxMessages: options.maxResults
   };
 
-  this.activeRequest_ = this.request(protoOpts, reqOpts, function(err, resp) {
-    self.activeRequest_ = null;
+  var requestIndex;
+
+  var request = this.request(protoOpts, reqOpts, function(err, resp) {
+    self.activeRequests_.splice(requestIndex, 1);
 
     if (err) {
       if (err.code === 504) {
@@ -640,7 +645,7 @@ Subscription.prototype.pull = function(options, callback) {
       })
       .map(self.decorateMessage_.bind(self));
 
-    self.refreshPausedStatus_();
+    self.pauseResumeQueue_();
 
     if (self.autoAck && messages.length !== 0) {
       var ackIds = messages.map(prop('ackId'));
@@ -652,6 +657,8 @@ Subscription.prototype.pull = function(options, callback) {
       callback(null, messages, resp);
     }
   });
+
+  requestIndex = this.activeRequests_.push(request) - 1;
 };
 
 /**
@@ -721,9 +728,11 @@ Subscription.prototype.listenForEvents_ = function() {
   this.on('newListener', function(event) {
     if (event === 'message') {
       self.messageListeners++;
+
       if (self.closed) {
         self.closed = false;
-        self.startPulling_();
+        self.pullRequestQueue_ = self.createPullRequestQueue_();
+        self.pullRequestQueue_.resume();
       }
     }
   });
@@ -731,10 +740,8 @@ Subscription.prototype.listenForEvents_ = function() {
   this.on('removeListener', function(event) {
     if (event === 'message' && --self.messageListeners === 0) {
       self.closed = true;
-
-      if (self.activeRequest_ && self.activeRequest_.abort) {
-        self.activeRequest_.abort();
-      }
+      self.activeRequests_.forEach(exec('abort'));
+      self.pullRequestQueue_.kill();
     }
   });
 };
@@ -750,14 +757,22 @@ Subscription.prototype.listenForEvents_ = function() {
  *
  * @private
  */
-Subscription.prototype.refreshPausedStatus_ = function() {
+Subscription.prototype.pauseResumeQueue_ = function() {
   var isCurrentlyPaused = this.paused;
   var inProgress = Object.keys(this.inProgressAckIds).length;
 
   this.paused = inProgress >= this.maxInProgress;
 
-  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {
-    this.startPulling_();
+  if (!this.pullRequestQueue_) {
+    return;
+  }
+
+  if (!isCurrentlyPaused && this.paused) {
+    this.pullRequestQueue_.pause();
+  }
+
+  if (this.messageListeners > 0 && isCurrentlyPaused && !this.paused) {
+    this.pullRequestQueue_.resume();
   }
 };
 
@@ -768,45 +783,54 @@ Subscription.prototype.refreshPausedStatus_ = function() {
  *
  * If messages are received, they are emitted on the `message` event.
  *
- * Note: This method is automatically called once a message event handler is
- * assigned to the description.
- *
- * To stop pulling, see {module:pubsub/subscription#close}.
- *
  * @private
- *
- * @example
- * subscription.startPulling_();
  */
-Subscription.prototype.startPulling_ = function() {
+Subscription.prototype.createPullRequestQueue_ = function() {
   var self = this;
 
-  if (this.closed || this.paused) {
-    return;
-  }
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1974#issuecomment-278436496
+  var MAX_PARALLEL_LIMIT = 10;
 
-  var maxResults;
+  var pullRequestQueue = async.queue(function(_, done) {
+    var maxResults;
 
-  if (this.maxInProgress < Infinity) {
-    maxResults = this.maxInProgress - Object.keys(this.inProgressAckIds).length;
-  }
-
-  this.pull({
-    returnImmediately: false,
-    maxResults: maxResults
-  }, function(err, messages, apiResponse) {
-    if (err) {
-      self.emit('error', err, apiResponse);
+    if (self.maxInProgress < Infinity) {
+      var numActiveMessages = Object.keys(self.inProgressAckIds).length;
+      maxResults = self.maxInProgress - numActiveMessages;
     }
 
-    if (messages) {
-      messages.forEach(function(message) {
-        self.emit('message', message, apiResponse);
-      });
-    }
+    self.pull({
+      returnImmediately: false,
+      maxResults: maxResults
+    }, function(err, messages, apiResponse) {
+      if (err) {
+        self.emit('error', err, apiResponse);
+      }
 
-    setTimeout(self.startPulling_.bind(self), self.interval);
-  });
+      if (messages) {
+        messages.forEach(function(message) {
+          self.emit('message', message, apiResponse);
+        });
+      }
+
+      queuePullRequest();
+      done();
+    });
+  }, MAX_PARALLEL_LIMIT);
+
+  // We are only preparing the queue. It will be resumed and paused from other
+  // methods.
+  pullRequestQueue.pause();
+
+  function queuePullRequest() {
+    pullRequestQueue.push({});
+  }
+
+  for (var i = 0; i < MAX_PARALLEL_LIMIT; i++) {
+    queuePullRequest();
+  }
+
+  return pullRequestQueue;
 };
 
 /*! Developer Documentation
