@@ -97,7 +97,6 @@ util.inherits(Table, TransactionRequest);
  *   .then(function() {
  *     // Table created successfully.
  *   });
- * });
  */
 Table.prototype.create = function(schema, callback) {
   this.database.createTable(schema, callback);
@@ -154,7 +153,10 @@ Table.prototype.create = function(schema, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * table.createReadStream()
+ * table.createReadStream({
+ *     keys: ['1'],
+ *     columns: ['SingerId', 'name']
+ *   })
  *   .on('data', function(row) {
  *     this.end();
  *   });
