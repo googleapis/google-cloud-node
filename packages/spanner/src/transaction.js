@@ -519,7 +519,7 @@ Transaction.prototype.run = function(query, callback) {
  *   transaction.runStream(query)
  *     .on('error', function(err) {})
  *     .on('data', function(row) {})
- *     .on('end', function() {})
+ *     .on('end', function() {});
  * });
  *
  * //-

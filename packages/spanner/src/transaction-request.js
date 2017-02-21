@@ -119,7 +119,7 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
  * @return {Stream}
  *
  * @example
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -150,7 +150,7 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
  * // Rows are returned as an array of object arrays. Each object has a `name`
  * // and `value` property. To get a serialized object, call `toJSON()`.
  * //-
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -236,25 +236,41 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
  * @example
  * var keys = ['Id1', 'Id2', 'Id3'];
  *
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
  *
- *   transaction.deleteRows('Singers', keys, function(err, apiResponse) {});
+ *   // Queue this mutation until later calling `commit`.
+ *   // Note that a callback is not passed to `deleteRows`.
+ *   transaction.deleteRows('Singers', keys);
+ *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The rows were deleted successfully.
+ *     }
+ *   });
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // If you are using a Promise to retrieve the transaction.
  * //-
  * database.runTransaction()
  *   .then(function(data) {
  *     var transaction = data[0];
  *
- *     transaction.deleteRows('Singers', keys)
- *       .then(function(data) {
- *         var apiResponse = data[0];
- *       });
+ *     // Queue this mutation until later calling `commit`.
+ *     // Note that a callback is not passed to `deleteRows`.
+ *     transaction.deleteRows('Singers', keys);
+ *
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   })
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *
+ *     // The rows were deleted successfully.
  *   });
  */
 TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
@@ -312,6 +328,13 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
  *   // Queue this mutation until later calling `commit`.
  *   // Note that a callback is not passed to `insert`.
  *   transaction.insert(row);
+ *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The row was inserted successfully.
+ *     }
+ *   });
  * });
  *
  * //-
@@ -333,7 +356,34 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
  *     row,
  *     row2
  *   ]);
+ *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The rows were inserted successfully.
+ *     }
+ *   });
  * });
+ *
+ * //-
+ * // If you are using a Promise to retrieve the transaction.
+ * //-
+ * database.runTransaction()
+ *   .then(function(data) {
+ *     var transaction = data[0];
+ *
+ *     // Queue this mutation until later calling `commit`.
+ *     // Note that a callback is not passed to `insert`.
+ *     transaction.insert(row);
+ *
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   })
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *
+ *     // The row was inserted successfully.
+ *   });
  */
 TransactionRequest.prototype.insert = function(table, keyVals, callback) {
   return this.mutate_('insert', table, keyVals, callback);
@@ -473,8 +523,14 @@ TransactionRequest.prototype.read = function(table, keyVals, callback) {
  *   // Queue this mutation until later calling `commit`.
  *   // Note that a callback is not passed to `replace`.
  *   transaction.replace('Singers', row);
- * });
  *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The row was replaced successfully.
+ *     }
+ *   });
+ * });
  *
  * //-
  * // If you are using a Promise to retrieve the transaction.
@@ -486,6 +542,14 @@ TransactionRequest.prototype.read = function(table, keyVals, callback) {
  *     // Queue this mutation until later calling `commit`.
  *     // Note that a callback is not passed to `replace`.
  *     transaction.replace('Singers', row);
+ *
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   })
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *
+ *     // The row was replaced successfully.
  *   });
  */
 TransactionRequest.prototype.replace = function(table, keyVals, callback) {
@@ -537,8 +601,14 @@ TransactionRequest.prototype.requestStream = function() {};
  *   // Queue this mutation until later calling `commit`.
  *   // Note that a callback is not passed to `update`.
  *   transaction.update('Singers', row);
- * });
  *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The row was updated successfully.
+ *     }
+ *   });
+ * });
  *
  * //-
  * // If you are using a Promise to retrieve the transaction.
@@ -550,6 +620,14 @@ TransactionRequest.prototype.requestStream = function() {};
  *     // Queue this mutation until later calling `commit`.
  *     // Note that a callback is not passed to `update`.
  *     transaction.update('Singers', row);
+ *
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   })
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *
+ *     // The row was updated successfully.
  *   });
  */
 TransactionRequest.prototype.update = function(table, keyVals, callback) {
@@ -583,8 +661,14 @@ TransactionRequest.prototype.update = function(table, keyVals, callback) {
  *   // Queue this mutation until later calling `commit`.
  *   // Note that a callback is not passed to `upsert`.
  *   transaction.upsert('Singers', row);
- * });
  *
+ *   // Commit the transaction.
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // The row was updated or inserted successfully.
+ *     }
+ *   });
+ * });
  *
  * //-
  * // If you are using a Promise to retrieve the transaction.
@@ -596,6 +680,14 @@ TransactionRequest.prototype.update = function(table, keyVals, callback) {
  *     // Queue this mutation until later calling `commit`.
  *     // Note that a callback is not passed to `upsert`.
  *     transaction.upsert('Singers', row);
+ *
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   })
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *
+ *     // The row was updated or inserted successfully.
  *   });
  */
 TransactionRequest.prototype.upsert = function(table, keyVals, callback) {

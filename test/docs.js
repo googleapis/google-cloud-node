@@ -50,7 +50,7 @@ var DocsError = createErrorClass('DocsError', function(err, code) {
 
 var JSHintError = createErrorClass('JSHintError', function(err) {
   this.message = format('"{evidence}" - {reason}', {
-    evidence: err.evidence.trim(),
+    evidence: err.evidence && err.evidence.trim(),
     reason: err.reason
   });
 
@@ -218,7 +218,9 @@ function createInstantiationCode(mod) {
     if (api) {
       Object.keys(api).forEach(function(apiName) {
         Object.keys(api[apiName]).forEach(function(method) {
-          api[apiName][method] = function() {};
+          api[apiName][method] = function() {
+            return Promise.resolve();
+          };
         });
       });
     }

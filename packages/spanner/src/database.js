@@ -571,7 +571,7 @@ Database.prototype.run = function(query, options, callback) {
  * database.runStream(query)
  *   .on('error', function(err) {})
  *   .on('data', function(row) {})
- *   .on('end', function() {})
+ *   .on('end', function() {});
  *
  * //-
  * // If you anticipate many results, you can end a stream early to prevent
@@ -804,7 +804,7 @@ Database.prototype.table = function(name) {
  *   ') PRIMARY KEY(SingerId)'
  * ];
  *
- * database.setSchema(statements, function(err, operation, apiResponse) {
+ * database.updateSchema(statements, function(err, operation, apiResponse) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -819,7 +819,7 @@ Database.prototype.table = function(name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * database.setSchema(statements)
+ * database.updateSchema(statements)
  *   .then(function(data) {
  *     var operation = data[0];
  *     return operation.promise();
