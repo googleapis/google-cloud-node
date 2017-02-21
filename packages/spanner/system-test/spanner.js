@@ -122,6 +122,42 @@ describe('Spanner', function() {
       });
     });
 
+    it('should correctly decode structs', function(done) {
+      var query =
+        'SELECT 1 as id, ARRAY(select as struct 2 as id, "hello" as name)';
+
+      database.run(query, function(err, rows) {
+        assert.ifError(err);
+        assert.deepEqual(rows[0], [
+          {
+            name: 'id',
+            value: {
+              value: '1'
+            }
+          },
+          {
+            name: '',
+            value: [
+              [
+                {
+                  name: 'id',
+                  value: {
+                    value: '2'
+                  }
+                },
+                {
+                  name: 'name',
+                  value: 'hello'
+                }
+              ]
+            ]
+          }
+        ]);
+        done();
+      });
+    });
+
+
     it('should handle Infinity', function(done) {
       insert({ Float: Infinity }, function(err, row) {
         assert.ifError(err);
