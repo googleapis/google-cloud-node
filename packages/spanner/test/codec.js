@@ -231,6 +231,45 @@ describe('codec', function() {
         fieldName: int
       });
     });
+
+    it('should decode STRUCT and inner members by index', function() {
+      var value = [
+        '1'
+      ];
+
+      var int = { int: true };
+      codec.Int = function(value_) {
+        assert.strictEqual(value_, value[0]);
+        return int;
+      };
+
+      var decoded = codec.decode(value, {
+        type: {
+          code: 'STRUCT',
+          structType: {
+            fields: [
+              {
+                name: 'fieldName',
+                type: {
+                  code: 'INT64'
+                }
+              }
+            ]
+          }
+        }
+      });
+
+      assert.deepEqual(decoded, [
+        {
+          name: 'fieldName',
+          value: int
+        }
+      ]);
+
+      assert.deepEqual(decoded.toJSON(), {
+        fieldName: int
+      });
+    });
   });
 
   describe('encode', function() {

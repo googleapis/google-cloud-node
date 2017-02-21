@@ -93,9 +93,11 @@ function decode(value, field) {
         var fields = type.structType.fields;
 
         fields.forEach(function(field, index) {
+          var value = decoded[field.name] || decoded[index];
+
           var column = {
             name: field.name,
-            value: decodeValue_(decoded[field.name || index], field.type)
+            value: decodeValue_(value, field.type)
           };
 
           formattedRow.push(column);
