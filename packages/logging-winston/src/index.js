@@ -156,18 +156,7 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
 
   var labels = {};
 
-  // For error messages at severity 'error' and higher, Stackdriver
-  // Error Reporting will pick up error messages if the full stack trace is
-  // included in the textPayload or the message property of the jsonPayload.
-  // https://cloud.google.com/error-reporting/docs/formatting-error-messages
-  //
-  if (is.error(metadata)) {
-    if (msg.length === 0) {
-      msg = metadata.stack;
-    } else {
-      msg = msg + ': ' + metadata.stack;
-    }
-  } else if (is.object(metadata)) {
+  if (is.object(metadata)) {
     // We attach properties as labels on the log entry. Logging proto requires
     // that the label values be strings, so we convert using util.inspect.
     for (var key in metadata) {
@@ -180,11 +169,24 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     labels: labels
   };
 
-  // Stackdriver Logs Viewer picks up the summary line from the `msg` which
-  // gets passed as the textPayload.
+  // Stackdriver Logs Viewer picks up the summary line from the `message`
+  // property of the jsonPayload.
   // https://cloud.google.com/logging/docs/view/logs_viewer_v2#expanding.
   //
-  var entry = this.log_.entry(entryMetadata, msg);
+  // For error messages at severity 'error' and higher, Stackdriver
+  // Error Reporting will pick up error messages if the full stack trace is
+  // included in the textPayload or the message property of the jsonPayload.
+  // https://cloud.google.com/error-reporting/docs/formatting-error-messages
+  // We prefer to format messages as jsonPayload (by putting it as a message
+  // property on an object) as that works is accepted by Error Reporting in
+  // for more resource types.
+  var data = {
+    message:
+        (metadata && metadata.stack) ?
+            (msg.length === 0 ? metadata.stack : msg + ': ' + metadata.stack) :
+            msg
+  };
+  var entry = this.log_.entry(entryMetadata, data);
   this.log_[stackdriverLevel](entry, callback);
 };
 

@@ -43,7 +43,7 @@ describe('LoggingWinston', function() {
         args: ['first'],
         level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'first');
+          assert.deepStrictEqual(entry.data, {message: 'first'});
         }
       },
 
@@ -51,20 +51,15 @@ describe('LoggingWinston', function() {
         args: ['second'],
         level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'second');
+          assert.deepStrictEqual(entry.data, {message: 'second'});
         }
       },
 
       {
-        args: [
-          'third',
-          {
-            testTimestamp: testTimestamp
-          }
-        ],
+        args: ['third', {testTimestamp: testTimestamp}],
         level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'third');
+          assert.deepStrictEqual(entry.data, {message: 'third'});
 
           assert.strictEqual(
             entry.metadata.labels.testTimestamp,
@@ -74,18 +69,19 @@ describe('LoggingWinston', function() {
       },
 
       {
-        args: [ new Error('forth') ],
+        args: [new Error('forth')],
         level: 'error',
         verify: function(entry) {
-          assert.ok(entry.data.startsWith('Error: forth'));
+          assert.ok(entry.data.message.startsWith('Error: forth'));
         }
       },
 
       {
-        args: [ 'fifth message', new Error('fifth') ],
+        args: ['fifth message', new Error('fifth')],
         level: 'error',
         verify: function(entry) {
-          assert.ok(entry.data.startsWith('fifth message: Error: fifth'));
+          assert.ok(
+              entry.data.message.startsWith('fifth message: Error: fifth'));
         }
       },
     ];
