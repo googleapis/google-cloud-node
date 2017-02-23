@@ -1,0 +1,52 @@
+{
+  "name": "@google/cloud-errors",
+  "version": "0.1.0",
+  "description": "Node.js module for Google Stackdriver Error Reporting",
+  "main": "index.js",
+  "repository": "GoogleCloudPlatform/cloud-errors-nodejs",
+  "scripts": {
+    "test": "$(npm bin)/nyc --exclude=\"fuzzer.js\" $(npm bin)/mocha ./test/unit/*.js",
+    "integration-tests": "$(npm bin)/nyc --exclude=\"error-message.js\" $(npm bin)/mocha ./test/system-test/*.js",
+    "style": "$(npm bin)/jshint lib index.js",
+    "coverage": "./bin/test.sh -l",
+    "coveralls": "./bin/test.sh",
+    "docs": "$(npm bin)/jsdoc -d docs index.js src/"
+  },
+  "author": "Google Inc.",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "body-parser": "^1.15.1",
+    "coveralls": "^2.11.11",
+    "express": "^4.13.4",
+    "hapi": "^13.4.1",
+    "istanbul": "^0.4.3",
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
+    "jshint": "^2.9.2",
+    "koa": "^1.2.0",
+    "lodash.assign": "^4.2.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.indexof": "^4.0.5",
+    "lodash.maxby": "^4.6.0",
+    "lodash.merge": "^4.6.0",
+    "lodash.omit": "^4.5.0",
+    "lodash.omitby": "^4.6.0",
+    "lodash.random": "^3.2.0",
+    "lodash.without": "^4.4.0",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.0",
+    "nyc": "^10.0.0",
+    "restify": "^4.1.0",
+    "tape": "^4.5.1"
+  },
+  "dependencies": {
+    "@google/cloud-diagnostics-common": "0.3.0",
+    "extend": "^3.0.0",
+    "is": "^3.2.0",
+    "lodash.has": "^4.5.2"
+  },
+  "nyc": {
+    "exclude": [
+      "./utils/fuzzer.js"
+    ]
+  }
+}
