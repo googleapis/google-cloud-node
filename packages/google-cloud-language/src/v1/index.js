@@ -1,11 +1,11 @@
-/*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+/*
+ * Copyright 2016 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,8 @@
 'use strict';
 
 var languageServiceClient = require('./language_service_client');
-var extend = require('extend');
 var gax = require('google-gax');
+var extend = require('extend');
 
 function v1(options) {
   options = extend({
@@ -29,4 +29,5 @@ function v1(options) {
 
 v1.SERVICE_ADDRESS = languageServiceClient.SERVICE_ADDRESS;
 v1.ALL_SCOPES = languageServiceClient.ALL_SCOPES;
+
 module.exports = v1;
