@@ -129,11 +129,15 @@ describe('Speech', function() {
       var expectedSpeechService = {};
 
       fakeV1Beta1Override = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        var expected = extend({}, OPTIONS, {
+          libName: 'gccl',
+          libVersion: require('../package.json').version
+        });
+        assert.deepStrictEqual(options, expected);
 
         return {
           speechClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expected);
             return expectedSpeechService;
           }
         };
