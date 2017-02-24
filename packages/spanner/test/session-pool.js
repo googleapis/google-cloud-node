@@ -195,6 +195,7 @@ describe('SessionPool', function() {
 
       it('should assign max and min to writePoolOptions', function(done) {
         SessionPool.createPool_ = function(writePoolOptions) {
+          SessionPool.createPool_ = util.noop;
           assert.strictEqual(writePoolOptions.max, options.writes);
           assert.strictEqual(writePoolOptions.min, Math.ceil(MIN / 2));
           done();
@@ -906,7 +907,8 @@ describe('SessionPool', function() {
       it('should assign session to request options', function(done) {
         CONFIG.method = function(reqOpts) {
           assert.strictEqual(reqOpts.session, SESSION.formattedName_);
-          done();
+          setImmediate(done);
+          return through.obj();
         };
 
         sessionPool.requestStream(CONFIG)

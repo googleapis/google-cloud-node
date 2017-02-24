@@ -107,8 +107,20 @@ var FakeBluebird = function() {
   return Promise;
 };
 
+// For {module:logging-bunyan} docs.
+var fakeBunyan = function() {
+  return {
+    createLogger: function() {}
+  };
+};
+
 // For {module:logging-winston} docs.
-var fakeWinston = '{ add: function() {}, emerg: function() {} }';
+var fakeWinston = function() {
+  return {
+    add: function() {},
+    emerg: function() {}
+  };
+};
 
 var modules;
 
@@ -247,8 +259,12 @@ function createSnippet(mod, instantiation, method) {
       'require(\'../packages/google-cloud\')'
     )
     .replace(
+      'require(\'@google-cloud/logging-bunyan\')',
+      'require(\'../packages/logging-bunyan/src/index.js\')'
+    )
+    .replace(
       'require(\'@google-cloud/logging-winston\')',
-      '{}'
+      'require(\'../packages/logging-winston/src/index.js\')'
     )
     .replace(
       /require\('(@google-cloud\/[^']*)/g,
@@ -261,7 +277,8 @@ function createSnippet(mod, instantiation, method) {
     .replace('require(\'express\')', FakeExpress.toString())
     .replace('require(\'level\')', FakeLevel.toString())
     .replace('require(\'bluebird\')', FakeBluebird.toString())
-    .replace('require(\'winston\')', fakeWinston)
+    .replace('require(\'bunyan\')', '(' + fakeBunyan.toString() + '())')
+    .replace('require(\'winston\')', '(' + fakeWinston.toString() + '())')
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
 
