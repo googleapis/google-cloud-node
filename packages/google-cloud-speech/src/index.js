@@ -61,6 +61,11 @@ function Speech(options) {
     return new Speech(options);
   }
 
+  options = extend({}, options, {
+    libName: 'gccl',
+    libVersion: require('../package.json').version
+  });
+
   this.api = {
     Speech: v1beta1(options).speechClient(options)
   };
