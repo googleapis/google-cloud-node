@@ -66,10 +66,6 @@ function Logging(options) {
     return new Logging(options);
   }
 
-  options = extend({}, options, {
-    libVersion: require('../package.json').version
-  });
-
   var config = {
     baseUrl: 'logging.googleapis.com',
     service: 'logging',

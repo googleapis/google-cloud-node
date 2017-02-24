@@ -25,7 +25,6 @@ var duplexify = require('duplexify');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
-var grpcVersion = require('grpc/package.json').version;
 var is = require('is');
 var nodeutil = require('util');
 var path = require('path');
@@ -158,11 +157,6 @@ function GrpcService(config, options) {
   }
 
   this.grpcMetadata = new grpc.Metadata();
-  this.grpcMetadata.add('x-goog-api-client', [
-    'gl-node/' + process.versions.node,
-    'gccl/' + (options.libVersion || ''),
-    'grpc/' + grpcVersion
-  ].join(' '));
 
   if (config.grpcMetadata) {
     for (var prop in config.grpcMetadata) {
