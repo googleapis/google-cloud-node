@@ -103,11 +103,15 @@ describe('Language', function() {
       var expectedLanguageService = {};
 
       fakeV1Override = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        var expected = {
+          libName: 'gccl',
+          libVersion: require('../package.json').version
+        };
+        assert.deepStrictEqual(options, expected);
 
         return {
           languageServiceClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expected);
             return expectedLanguageService;
           }
         };

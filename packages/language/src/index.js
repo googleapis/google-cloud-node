@@ -57,6 +57,11 @@ function Language(options) {
     return new Language(options);
   }
 
+  options = extend({}, options, {
+    libName: 'gccl',
+    libVersion: require('../package.json').version
+  });
+
   this.api = {
     Language: v1(options).languageServiceClient(options)
   };
