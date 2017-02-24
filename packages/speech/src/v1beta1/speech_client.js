@@ -65,32 +65,29 @@ var ALL_SCOPES = [
  * @class
  */
 function SpeechClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
-    CODE_GEN_NAME_VERSION,
+    'gl-node/' + process.versions.node,
+    CODE_GEN_NAME_VERSION
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
 
   this.operationsClient = new gax.lro({
     auth: gaxGrpc.auth,
     grpc: gaxGrpc.grpc
-  }).operationsClient({
-    servicePath: servicePath,
-    port: port,
-    sslCreds: sslCreds,
-    clientConfig: clientConfig,
-    appName: appName,
-    appVersion: appVersion
-  });
+  }).operationsClient(opts);
 
   this.longrunningDescriptors = {
     asyncRecognize: new gax.LongrunningDescriptor(
@@ -102,16 +99,15 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
   var defaults = gaxGrpc.constructSettings(
       'google.cloud.speech.v1beta1.Speech',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
   var self = this;
 
+  this.auth = gaxGrpc.auth;
   var speechStub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.cloud.speech.v1beta1.Speech,
-      {sslCreds: sslCreds});
+      opts);
   var speechStubMethods = [
     'syncRecognize',
     'asyncRecognize',
@@ -129,6 +125,15 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
       STREAM_DESCRIPTORS[methodName] || self.longrunningDescriptors[methodName]);
   });
 }
+
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+SpeechClient.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
+};
 
 // Service calls
 
@@ -352,10 +357,6 @@ function SpeechClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.speechClient = function(opts) {
     return new SpeechClient(gaxGrpc, speechClient, opts);

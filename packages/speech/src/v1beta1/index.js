@@ -1,5 +1,5 @@
-/*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+/*
+ * Copyright 2016 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ function v1beta1(options) {
   var gaxGrpc = gax.grpc(options);
   return speechClient(gaxGrpc);
 }
+
 v1beta1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
 v1beta1.ALL_SCOPES = speechClient.ALL_SCOPES;
+
 module.exports = v1beta1;
