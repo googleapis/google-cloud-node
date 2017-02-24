@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -158,11 +159,13 @@ describe('logging-winston', function() {
 
     it('should properly create an entry', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, message) {
+        var expectedLabels = {};
+        for (var prop in METADATA) {
+          expectedLabels[prop] = nodeutil.inspect(METADATA[prop]);
+        }
         assert.deepEqual(entryMetadata, {
           resource: loggingWinston.resource_,
-          labels: {
-            value: '[Function: value]'
-          }
+          labels: expectedLabels
         });
         assert.strictEqual(message, MESSAGE);
         done();
