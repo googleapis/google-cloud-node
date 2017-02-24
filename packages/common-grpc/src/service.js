@@ -125,6 +125,26 @@ var GRPC_ERROR_CODE_TO_HTTP = {
 };
 
 /**
+ * The default configuration for all gRPC requests.
+ *
+ * @resource [All options]{@link https://github.com/grpc/grpc/blob/13e185419cd177b7fb552601665e43820321a96b/include/grpc/impl/codegen/grpc_types.h#L148}
+ *
+ * @private
+ *
+ * @type {object}
+ */
+var GRPC_REQUEST_OPTIONS = {
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1991
+  'grpc.max_send_message_length': -1, // unlimited
+  'grpc.max_receive_message_length': -1, // unlimited
+
+  // RE: https://github.com/grpc/grpc/issues/8839
+  // RE: https://github.com/grpc/grpc/issues/8382
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1991
+  'grpc.initial_reconnect_backoff_ms': 5000
+};
+
+/**
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
  *
@@ -232,10 +252,9 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   }
 
   var service = this.getService_(protoOpts);
-
   var metadata = this.grpcMetadata;
+  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
 
-  var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
   }
@@ -335,7 +354,8 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
   var objectMode = !!reqOpts.objectMode;
 
   var service = this.getService_(protoOpts);
-  var grpcOpts = {};
+  var grpcMetadata = this.grpcMetadata;
+  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
@@ -356,7 +376,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
+      return service[protoOpts.method](reqOpts, grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
           // data. The closest mechanism grpc provides is a metadata event, but
@@ -415,7 +435,8 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
   }
 
   var service = this.getService_(protoOpts);
-  var grpcOpts = {};
+  var grpcMetadata = this.grpcMetadata;
+  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
@@ -430,7 +451,7 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
     return stream;
   }
 
-  var grpcStream = service[protoOpts.method](reqOpts, grpcOpts)
+  var grpcStream = service[protoOpts.method](reqOpts, grpcMetadata, grpcOpts)
     .on('status', function(status) {
       var grcpStatus = GrpcService.decorateStatus_(status);
       stream.emit('response', grcpStatus || status);
@@ -831,3 +852,4 @@ GrpcService.prototype.getService_ = function(protoOpts) {
 
 module.exports = GrpcService;
 module.exports.GRPC_ERROR_CODE_TO_HTTP = GRPC_ERROR_CODE_TO_HTTP;
+module.exports.GRPC_REQUEST_OPTIONS = GRPC_REQUEST_OPTIONS;
