@@ -60,6 +60,10 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
+  options = extend({}, options, {
+    libVersion: require('../package.json').version
+  });
+
   this.defaultBaseUrl_ = 'pubsub.googleapis.com';
   this.determineBaseUrl_();
 

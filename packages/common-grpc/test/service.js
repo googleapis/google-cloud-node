@@ -21,6 +21,7 @@ var duplexify = require('duplexify');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
+var grpcVersion = require('grpc/package.json').version;
 var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
@@ -259,34 +260,62 @@ describe('GrpcService', function() {
       assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
     });
 
-    it('should default grpcMetadata to empty metadata', function() {
-      var fakeGrpcMetadata = {};
+    it('should default grpcMetadata to contain x-goog-api-client', function() {
+      var expectedMetadata = {
+        'x-goog-api-client':
+            'gl-node/' + process.versions.node + ' gccl/ grpc/' + grpcVersion
+      };
 
-      GrpcMetadataOverride = function() {
-        return fakeGrpcMetadata;
+      GrpcMetadataOverride = function() {};
+      GrpcMetadataOverride.prototype.add = function(prop, value) {
+        this[prop] = value;
       };
 
       var config = extend({}, CONFIG);
       delete config.grpcMetadata;
 
       var grpcService = new GrpcService(config, OPTIONS);
-      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.deepEqual(grpcService.grpcMetadata, expectedMetadata);
+    });
+
+    it('should customize library version', function() {
+      var expectedMetadata = {
+        'x-goog-api-client':
+            'gl-node/' + process.versions.node + ' gccl/0.1.2 grpc/' +
+            grpcVersion
+      };
+
+      GrpcMetadataOverride = function() {};
+      GrpcMetadataOverride.prototype.add = function(prop, value) {
+        this[prop] = value;
+      };
+
+      var config = extend({}, CONFIG);
+      delete config.grpcMetadata;
+
+      var options = extend({}, OPTIONS, {
+        libVersion: '0.1.2'
+      });
+      var grpcService = new GrpcService(config, options);
+      assert.deepEqual(grpcService.grpcMetadata, expectedMetadata);
     });
 
     it('should create and localize grpcMetadata', function() {
-      var fakeGrpcMetadata = {
-        add: function(prop, value) {
-          assert.strictEqual(prop, Object.keys(CONFIG.grpcMetadata)[0]);
-          assert.strictEqual(value, CONFIG.grpcMetadata[prop]);
-        }
+      var expectedMetadata = {
+        'x-goog-api-client':
+            'gl-node/' + process.versions.node + ' gccl/ grpc/' + grpcVersion
       };
+      Object.keys(CONFIG.grpcMetadata).forEach(function(prop) {
+        expectedMetadata[prop] = CONFIG.grpcMetadata[prop];
+      });
 
-      GrpcMetadataOverride = function() {
-        return fakeGrpcMetadata;
+      GrpcMetadataOverride = function() {};
+      GrpcMetadataOverride.prototype.add = function(prop, value) {
+        this[prop] = value;
       };
 
       var grpcService = new GrpcService(CONFIG, OPTIONS);
-      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.deepEqual(grpcService.grpcMetadata, expectedMetadata);
     });
 
     it('should localize maxRetries', function() {
