@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
+var extend = require('extend');
 var is = require('is');
 var modelo = require('modelo');
 
@@ -299,6 +300,10 @@ function Datastore(options) {
     });
     return new Datastore(options);
   }
+
+  options = extend({}, options, {
+    libVersion: require('../package.json').version
+  });
 
   this.defaultBaseUrl_ = 'datastore.googleapis.com';
   this.determineBaseUrl_(options.apiEndpoint);
