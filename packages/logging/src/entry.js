@@ -21,9 +21,12 @@
 'use strict';
 
 var commonGrpc = require('@google-cloud/common-grpc');
+var EventId = require('eventid');
 var extend = require('extend');
 var is = require('is');
 var isCircular = require('is-circular');
+
+var eventId = new EventId();
 
 /**
  * Create an entry object to define new data to insert into a log.
@@ -86,6 +89,19 @@ function Entry(metadata, data) {
   this.metadata = extend({
     timestamp: new Date()
   }, metadata);
+
+  if (this.metadata.insertId === undefined) {
+    // JavaScript date has a very coarse granularity (millisecond), which makes
+    // it quite likely that multiple log entries would have the same timestamp.
+    // The Logging API doesn't guarantee to preserve insertion order for entries
+    // with the same timestamp. The service does use `insertId` as a secondary
+    // ordering for entries with the same timestamp. `insertId` needs to be
+    // globally unique (within the project) however.
+    //
+    // We use a globally unique monotonically increasing EventId as the
+    // insertId.
+    this.metadata.insertId = eventId.new();
+  }
 
   this.data = data;
 }

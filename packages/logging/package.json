@@ -56,6 +56,7 @@
     "@google-cloud/common-grpc": "^0.1.1",
     "arrify": "^1.0.0",
     "async": "^2.1.4",
+    "eventid": "^0.1.0",
     "extend": "^3.0.0",
     "google-gax": "^0.12.2",
     "google-proto-files": "^0.10.0",
