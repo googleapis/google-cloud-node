@@ -87,14 +87,22 @@ Module.getUpdated = function() {
   var args = ['diff'];
 
   if (!isPushToMaster()) {
-    run('git remote rm temp');
+    var remotes = spawn('git', ['remote', '-v'], {
+      cwd: ROOT_DIR,
+      stdio: null
+    });
 
-    run([
-      'git remote add temp',
-      'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
-    ]);
+    var remotesStdout = remotes.stdout && remotes.stdout.toString();
 
-    run('git fetch -q temp');
+    if (remotesStdout && remotesStdout.indexOf('temp') === -1) {
+      run([
+        'git remote add temp',
+        'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
+      ]);
+
+      run('git fetch -q temp');
+    }
+
     args.push('HEAD', 'temp/master');
   } else {
     args.push('HEAD^');
