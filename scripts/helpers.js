@@ -87,6 +87,8 @@ Module.getUpdated = function() {
   var args = ['diff'];
 
   if (!isPushToMaster()) {
+    run('git remote rm temp');
+
     run([
       'git remote add temp',
       'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
