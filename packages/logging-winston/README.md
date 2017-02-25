@@ -17,10 +17,7 @@ var transport = require('@google-cloud/logging-winston');
 winston.add(transport, {
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json',
-  level: 'warning', // log at 'warning' and above
-  resource: {
-    type: 'global'
-  }
+  level: 'warn', // log at 'warn' and above
 });
 
 winston.error('warp nacelles offline');
