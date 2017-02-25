@@ -1348,7 +1348,8 @@ describe('GrpcService', function() {
 
       ProtoService.prototype.method = function(reqOpts, metadata, grpcOpts) {
         assert.deepEqual(grpcOpts, GrpcService.GRPC_REQUEST_OPTIONS);
-        done();
+        setImmediate(done);
+        return through.obj();
       };
 
       retryRequestOverride = function(_, retryOpts) {
