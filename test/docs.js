@@ -33,6 +33,12 @@ var noop = function() {};
 
 var DocsError = createErrorClass('DocsError', function(err, code) {
   var lineCol = err.stack.match('assert-code\.vm:(.+)');
+
+  if (!lineCol) {
+    this.message = err.message;
+    return;
+  }
+
   lineCol.line = lineCol[1];
 
   var lines = code
