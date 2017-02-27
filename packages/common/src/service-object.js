@@ -205,14 +205,30 @@ ServiceObject.prototype.get = function(config, callback) {
   var autoCreate = config.autoCreate && is.fn(this.create);
   delete config.autoCreate;
 
-  this.getMetadata(function(err, metadata) {
+  function onCreate(err, instance, apiResponse) {
+    if (err) {
+      if (err.code === 409) {
+        self.get(config, callback);
+        return;
+      }
+
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    callback(null, instance, apiResponse);
+  }
+
+  this.getMetadata(function(err, metadata, apiResponse) {
     if (err) {
       if (err.code === 404 && autoCreate) {
-        var args = [callback];
+        var args = [];
 
         if (!is.empty(config)) {
-          args.unshift(config);
+          args.push(config);
         }
+
+        args.push(onCreate);
 
         self.create.apply(self, args);
         return;
