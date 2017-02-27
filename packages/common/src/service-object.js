@@ -219,7 +219,7 @@ ServiceObject.prototype.get = function(config, callback) {
     callback(null, instance, apiResponse);
   }
 
-  this.getMetadata(function(err, metadata, apiResponse) {
+  this.getMetadata(function(err, metadata) {
     if (err) {
       if (err.code === 404 && autoCreate) {
         var args = [];
