@@ -14,20 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
-if [ "${IS_PUSH_TO_MASTER}" != "true" ]
+if [ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUESTS}" == "" ]
 then
-  exit 0
+  export IS_PUSH_TO_MASTER="true"
+  echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
+  export GCLOUD_TESTS_KEY="$(pwd)/key.json"
 fi
-
-git config user.name "circle-ci"
-git config user.email "circle-ci@circleci.com"
-
-npm run prepare-ghpages
-git push origin master --follow-tags
-
-cd gh-pages
-git push origin gh-pages
-
-set +e
