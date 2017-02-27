@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUESTS}" == "" ]
+if [ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ]
 then
   export IS_PUSH_TO_MASTER="true"
   echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
