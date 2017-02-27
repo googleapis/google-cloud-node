@@ -16,10 +16,14 @@
 
 set -e
 
-if [ "${IS_PUSH_TO_MASTER}" != "true" ]
+if [ "${CIRCLE_BRANCH}" != "master" ] && [ "${CI_PULL_REQUEST}" != "" ]
 then
+  # Not a push to master, so no system tests or doc updates required.
   exit 0
 fi
+
+echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
+export GCLOUD_TESTS_KEY="$(pwd)/key.json"
 
 git config user.name "circle-ci"
 git config user.email "circle-ci@circleci.com"
