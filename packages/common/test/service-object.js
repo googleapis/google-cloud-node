@@ -442,6 +442,46 @@ describe('ServiceObject', function() {
 
         serviceObject.get(AUTO_CREATE_CONFIG, done);
       });
+
+      describe('error', function() {
+        it('should execute callback with error & API response', function(done) {
+          var error = new Error('Error.');
+          var apiResponse = {};
+
+          serviceObject.create = function(callback) {
+            serviceObject.get = function(config, callback) {
+              assert.deepEqual(config, {});
+              callback(); // done()
+            };
+
+            callback(error, null, apiResponse);
+          };
+
+          serviceObject.get(AUTO_CREATE_CONFIG, function(err, instance, resp) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(instance, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
+        });
+
+        it('should refresh the metadata after a 409', function(done) {
+          var error = {
+            code: 409
+          };
+
+          serviceObject.create = function(callback) {
+            serviceObject.get = function(config, callback) {
+              assert.deepEqual(config, {});
+              callback(); // done()
+            };
+
+            callback(error);
+          };
+
+          serviceObject.get(AUTO_CREATE_CONFIG, done);
+        });
+      });
     });
   });
 
