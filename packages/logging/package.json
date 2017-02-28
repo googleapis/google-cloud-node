@@ -57,10 +57,11 @@
     "arrify": "^1.0.0",
     "async": "^2.1.4",
     "extend": "^3.0.0",
-    "google-gax": "^0.10.0",
+    "google-gax": "^0.12.2",
     "google-proto-files": "^0.9.1",
     "is": "^3.0.1",
     "is-circular": "^1.0.1",
+    "lodash.union": "^4.6.0",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
