@@ -15,19 +15,11 @@
  */
 'use strict';
 
-// Check if Koa is usable
-var useKoa = true;
-try {
-  eval('(function *() {})');
-} catch (e) {
-  useKoa = false;
-}
-
 var Configuration = require('./src/configuration.js');
 var AuthClient = require('./src/google-apis/auth-client.js');
 // Begin error reporting interfaces
 
-var koa = useKoa ? require('./src/interfaces/koa.js') : null;
+var koa = require('./src/interfaces/koa.js');
 var hapi = require('./src/interfaces/hapi.js');
 var manual = require('./src/interfaces/manual.js');
 var express = require('./src/interfaces/express.js');
@@ -99,10 +91,7 @@ function Errors(initConfiguration) {
   this.express = express(client, config);
   this.restify = restify(client, config);
   this.event = messageBuilder(config);
-
-  if (koa) {
-    this.koa = koa(client, config);
-  }
+  this.koa = koa(client, config); 
 }
 
 module.exports = Errors;
