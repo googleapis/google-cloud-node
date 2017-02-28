@@ -2,17 +2,15 @@
   "interfaces": {
     "google.pubsub.v1.Publisher": {
       "retry_codes": {
-        "retry_codes_def": {
-          "idempotent": [
-            "DEADLINE_EXCEEDED",
-            "UNAVAILABLE"
-          ],
-          "one_plus_delivery": [
-            "DEADLINE_EXCEEDED",
-            "UNAVAILABLE"
-          ],
-          "non_idempotent": []
-        }
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "one_plus_delivery": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "non_idempotent": []
       },
       "retry_params": {
         "default": {
