@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var assert = require('assert');
 var ErrorMessage = require('../../src/classes/error-message.js');
 var handleNumberAsError = require('../../src/error-handlers/number.js');

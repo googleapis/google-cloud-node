@@ -17,7 +17,6 @@
 'use strict';
 var assert = require('assert');
 var is = require('is');
-var isNull = is.null;
 var isString = is.string;
 var isNumber = is.number;
 var forEach = require('lodash.foreach');
@@ -47,7 +46,7 @@ function setEnv (serviceName, serviceVersion, moduleName, moduleVersion, functio
     GAE_MODULE_NAME: moduleName,
     GAE_MODULE_VERSION: moduleVersion,
     FUNCTION_NAME: functionName
-  }, function (val) {return !isString(val)}));
+  }, function (val) {return !isString(val);}));
 }
 function restoreEnv () {
   assign(process.env, env);

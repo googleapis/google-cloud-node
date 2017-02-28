@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var has = require('lodash.has');
 var is = require('is');
 var isFunction = is.fn;
@@ -24,7 +26,6 @@ var ErrorMessage = require('../../src/classes/error-message.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 var EventEmitter = require('events').EventEmitter;
 var Configuration = require('../fixtures/configuration.js');
-var createLogger = require('../../src/logger.js');
 
 describe('Hapi interface', function () {
   describe('Fuzzing the setup handler', function () {
@@ -39,7 +40,7 @@ describe('Hapi interface', function () {
   describe('Providing valid input to the setup handler', function () {
     var givenConfig = {getVersion: function () {return '1';}};
     var plugin;
-    beforeEach(function () {plugin = hapiInterface(null, givenConfig)});
+    beforeEach(function () {plugin = hapiInterface(null, givenConfig);});
     it('should have plain object as plugin', function () {
       assert(isObject(plugin));
     });
@@ -83,7 +84,7 @@ describe('Hapi interface', function () {
           return '1';
         },
         getServiceContext: function () {
-          return {service: 'node'}
+          return {service: 'node'};
         }
       });
       plugin.register(fakeServer, null, null, null);

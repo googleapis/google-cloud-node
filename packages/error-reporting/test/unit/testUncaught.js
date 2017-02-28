@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var assert = require('assert');
 var isString = require('is').string;
 var uncaughtSetup = require('../../src/interfaces/uncaught.js');
@@ -67,15 +69,14 @@ describe('Uncaught exception handler behvaiour', function () {
   });
   describe('Uncaught exception handling shutdown behaviour', function () {
     before(function () {
-      if (!isString(process.env.GOOGLE_APPLICATION_CREDENTIALS)
-        || !isString(process.env.GCLOUD_PROJECT)) {
-        this.skip();
-        return;
+      if (!isString(process.env.GOOGLE_APPLICATION_CREDENTIALS) ||
+        !isString(process.env.GCLOUD_PROJECT)) {
+        return this.skip();
       }
     });
     after(function () {
       reattachOriginalListeners();
-    })
+    });
     it('Should terminate before 2500ms', function (done) {
       var TERMINATE_MSG = 'Should terminate before 2500ms';
       this.timeout(3500);

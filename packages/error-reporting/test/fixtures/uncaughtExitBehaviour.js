@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
 var uncaughtSetup = require('../../src/interfaces/uncaught.js');
-var assert = require('assert');
 var nock = require('nock');
 var createLogger = require('../../src/logger.js');
 var isString = require('is').string;
@@ -41,7 +41,6 @@ function restoreEnv () {
 }
 
 describe('Uncaught Exception exit behaviour', function () {
-  var metadataUrl
    before(function () {
     process.removeAllListeners(UNCAUGHT);
     if (!isString(process.env.GCLOUD_PROJECT)) {
@@ -63,17 +62,17 @@ describe('Uncaught Exception exit behaviour', function () {
   });
   it('Should attempt to report the uncaught exception', function (done) {
     var id = 'xyz';
-    var metadataId = nock(
+    nock(
       'http://metadata.google.internal/computeMetadata/v1/project'
     ).get('/project-id').times(1).reply(200, id);
-    var metadataToken = nock('https://accounts.google.com:443/o/oauth2')
-      .post('/token').query(function () {return true}).reply(200, {
+    nock('https://accounts.google.com:443/o/oauth2')
+      .post('/token').query(function () {return true;}).reply(200, {
         refresh_token: 'hello',
         access_token: 'goodbye',
         expiry_date: new Date(9999, 1, 1)
       });
     this.timeout(2000);
-    var s = nock(
+    nock(
       'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+id
     ).post('/events:report').once().reply(200, function () {
       done();

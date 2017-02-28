@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var assert = require('assert');
 var extractFromObject = require('../../src/error-extractors/object.js');
 var ErrorMessage = require('../../src/classes/error-message.js');

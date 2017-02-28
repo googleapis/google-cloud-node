@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var Configuration = require('../../src/configuration.js');
 
 var FakeConfiguration = function(config) {

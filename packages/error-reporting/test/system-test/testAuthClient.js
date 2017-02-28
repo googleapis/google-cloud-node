@@ -27,7 +27,6 @@ var isString = is.string;
 var isEmpty = is.empty;
 var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
-var client;
 
 
 describe('Behvaiour acceptance testing', function () {
@@ -55,7 +54,7 @@ describe('Behvaiour acceptance testing', function () {
     nock.cleanAll();
   });
   describe('Request/Response lifecycle mocking', function () {
-    var sampleError = new Error("_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__");
+    var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
     var errorMessage = new ErrorMessage().setMessage(sampleError);
     var fakeService, client, logger;
     beforeEach(function () {
@@ -125,7 +124,7 @@ describe('Behvaiour acceptance testing', function () {
     });
   });
   describe('System-live integration testing', function () {
-    var sampleError = new Error("_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__");
+    var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
     var oldEnv = {
       GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
@@ -295,7 +294,7 @@ describe('Behvaiour acceptance testing', function () {
       });
     });
     describe('Success behaviour', function () {
-      var er = new Error("_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__");
+      var er = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
       var em = new ErrorMessage().setMessage(er.stack);
       describe('Given a valid project id', function () {
         var logger, client, cfg;

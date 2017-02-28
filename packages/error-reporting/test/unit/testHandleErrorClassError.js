@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var assert = require('assert');
 var ErrorMessage = require('../../src/classes/error-message.js');
 var handleErrorClassError = require('../../src/error-handlers/error.js');
@@ -26,7 +28,7 @@ describe('Behaviour under various type inputs', function () {
   var adversarialObjectInputTwo = {
     stack: []
   };
-  beforeEach(function () {em = new ErrorMessage()});
+  beforeEach(function () {em = new ErrorMessage();});
   it('Should not throw given undefined', function () {
     assert.doesNotThrow(handleErrorClassError.bind(null, undefined, em));
   });

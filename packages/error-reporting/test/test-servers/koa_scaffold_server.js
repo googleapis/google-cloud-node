@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// jscs doesn't understand koa..
+// jscs:disable
+'use strict';
+
 var errorHandler = require('../../index.js')({
   onUncaughtException: 'report'
 });
@@ -24,28 +28,30 @@ app.use(errorHandler.koa);
 app.use(function *(next) {
   //This will set status and message
   this.throw('Error Message', 500);
+  yield next;
 });
 
 
 app.use(function *(next){
-  var start = new Date;
+  var start = new Date();
   yield next;
-  var ms = new Date - start;
+  var ms = new Date() - start;
   this.set('X-Response-Time', ms + 'ms');
 });
 
 // logger
 
 app.use(function *(next){
-  var start = new Date;
+  var start = new Date();
   yield next;
-  var ms = new Date - start;
+  var ms = new Date() - start;
   console.log('%s %s - %s', this.method, this.url, ms);
 });
 
 // response
-app.use(function *(){
+app.use(function *(next){
   this.body = 'Hello World';
+  yield next;
 });
 
 app.listen(3000);

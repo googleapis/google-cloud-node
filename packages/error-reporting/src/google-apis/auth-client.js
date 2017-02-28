@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*jshint unused:false*/
 
 'use strict';
 var commonDiag = require('@google/cloud-diagnostics-common');

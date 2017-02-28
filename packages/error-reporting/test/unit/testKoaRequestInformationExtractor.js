@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var assert = require('assert');
 var koaRequestInformationExtractor = require('../../src/request-extractors/koa.js');
 var Fuzzer = require('../../utils/fuzzer.js');

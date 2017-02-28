@@ -29,14 +29,6 @@ var nock = require('nock');
 
 var METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/project';
 
-var originalHandlers = process.listeners('uncaughtException');
-
-function reattachOriginalListeners() {
-  for (var i = 0; i < originalHandlers.length; i++) {
-    process.on('uncaughtException', originalHandlers[i]);
-  }
-}
-
 process.removeAllListeners('uncaughtException');
 var env = {
   NODE_ENV: process.env.NODE_ENV,
@@ -270,7 +262,7 @@ describe('Configuration class', function () {
       restoreEnv();
     });
     describe('via env', function () {
-      before(function() {sterilizeEnv();})
+      before(function() {sterilizeEnv();});
       afterEach(function () {sterilizeEnv();});
       describe('projectId', function () {
         var c;

@@ -266,8 +266,8 @@ Configuration.prototype._checkLocalServiceContext = function() {
 Configuration.prototype._gatherLocalConfiguration = function() {
   if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
     this._shouldReportErrorsToAPI = true;
-  } else if (has(this._givenConfiguration, 'ignoreEnvironmentCheck') 
-    && !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
+  } else if (has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+    !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
       throw new Error('config.ignoreEnvironmentCheck must be a boolean');
   } else {
     this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';

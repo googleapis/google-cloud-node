@@ -59,7 +59,7 @@ describe('Testing use of runtime configurations', function () {
       reportUncaughtExceptions: false,
       projectId: '0'
     };
-    var scope = nock('https://accounts.google.com/o/oauth2')
+    nock('https://accounts.google.com/o/oauth2')
       .post('/token', function(body) {
         assert.strictEqual(body.client_id, credentials.client_id);
         assert.strictEqual(body.client_secret, credentials.client_secret);
