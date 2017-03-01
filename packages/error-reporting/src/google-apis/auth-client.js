@@ -82,7 +82,7 @@ class RequestHandler extends common.Service {
   static noOp(err, response, body) {
     return null;
   }
-  /** 
+  /**
    * @constructor
    * @param {Configuration} config - an instance of the Configuration class
    * @param {Logger} logger - an instance of logger
@@ -117,13 +117,13 @@ class RequestHandler extends common.Service {
         if (err) {
           setImmediate(function() { cb(err, null, null); });
           this._logger.error([
-            'Unable to retrieve a project id from the Google Metadata Service or',
-            'the local environment. Client will not be able to communicate with',
-            'the Stackdriver Error Reporting API without a valid project id',
-            'Please make sure to supply a project id either through the',
-            'GCLOUD_PROJECT environmental variable or through the configuration',
-            'object given to this library on startup if not running on Google',
-            'Cloud Platform.'
+            'Unable to retrieve a project id from the Google Metadata Service',
+            'or the local environment. Client will not be able to communicate',
+            'with the Stackdriver Error Reporting API without a valid project',
+            'id. Please make sure to supply a project id either through the',
+            'GCLOUD_PROJECT environmental variable or through the',
+            'configuration object given to this library on startup if not',
+            'running on Google Cloud Platform.'
           ].join(' '));
           return;
         }
@@ -134,8 +134,8 @@ class RequestHandler extends common.Service {
         }, (err, body, response) => {
           if (err) {
             this._logger.error([
-              'Encountered an error while attempting to transmit an error to the',
-              'Stackdriver Error Reporting API.'
+              'Encountered an error while attempting to transmit an error to',
+              'the Stackdriver Error Reporting API.'
             ].join(' '), err);
           }
           cb(err, response, body);
@@ -144,9 +144,9 @@ class RequestHandler extends common.Service {
     } else {
       cb(new Error([
         'Stackdriver error reporting client has not been configured to send',
-        'errors, please check the NODE_ENV environment variable and make sure it',
-        'is set to "production" or set the ignoreEnvironmentCheck property to ',
-        'true in the runtime configuration object'
+        'errors, please check the NODE_ENV environment variable and make sure',
+        'it is set to "production" or set the ignoreEnvironmentCheck property',
+        'to true in the runtime configuration object'
       ].join(' ')), null, null);
     }
   }

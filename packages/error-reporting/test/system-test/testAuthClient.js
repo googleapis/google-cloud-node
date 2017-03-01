@@ -248,7 +248,7 @@ describe('Behvaiour acceptance testing', function() {
           'Stackdriver error reporting client has not been configured to send',
           'errors, please check the NODE_ENV environment variable and make',
           'sure it is set to "production" or set the ignoreEnvironmentCheck',
-          'property to  true in the runtime configuration object'
+          'property to true in the runtime configuration object'
         ].join(' ');
         var logger, client;
         before(function() {
