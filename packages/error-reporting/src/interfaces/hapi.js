@@ -95,7 +95,7 @@ function makeHapiPlugin(client, config) {
             em = hapiErrorHandler(request, new Error(request.response.message),
                                   config);
 
-            if (!config.lacksCredentials()) {                     
+            if (!config.lacksCredentials()) {
               client.sendError(em);
             }
           }

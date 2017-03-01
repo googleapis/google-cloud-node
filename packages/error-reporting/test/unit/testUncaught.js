@@ -80,7 +80,7 @@ describe('Uncaught exception handler behvaiour', function () {
     it('Should terminate before 2500ms', function (done) {
       var TERMINATE_MSG = 'Should terminate before 2500ms';
       this.timeout(3500);
-      var isolate = spawn('./node_modules/mocha/bin/mocha', 
+      var isolate = spawn('./node_modules/mocha/bin/mocha',
         ['../../test/fixtures/uncaughtExitBehaviour.js'], {env: process.env});
       isolate.on('close', function () {
         done();

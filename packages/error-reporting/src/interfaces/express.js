@@ -47,7 +47,7 @@ function makeExpressHandler(client, config) {
   function expressErrorHandler(err, req, res, next) {
     var ctxService = '';
     var ctxVersion = '';
-    
+
     if (config.lacksCredentials()) {
       next(err);
     }

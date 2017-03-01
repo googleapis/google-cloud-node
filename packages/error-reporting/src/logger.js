@@ -45,7 +45,7 @@ function createLogger(initConfiguration) {
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
     level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL;
-  } else if (isObject(initConfiguration) 
+  } else if (isObject(initConfiguration)
     && has(initConfiguration, 'logLevel')) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer

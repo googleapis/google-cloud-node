@@ -140,7 +140,7 @@ describe('Manual handler', function () {
     it('Should accept builder instance as only argument', function () {
       var msg = 'test';
       var r = report(new ErrorMessage().setMessage(msg));
-      assert.strictEqual(r.message, msg, 
+      assert.strictEqual(r.message, msg,
         'string message should propagate from error message instance');
     });
     it('Should accept builder and request as arguments', function () {
@@ -151,7 +151,7 @@ describe('Manual handler', function () {
         new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
         newReq
       );
-      assert.strictEqual(r.message, msg, 
+      assert.strictEqual(r.message, msg,
         'string message should propagate from error message instance');
       assert.strictEqual(r.context.httpRequest.method, newReq.method,
         [
@@ -167,7 +167,7 @@ describe('Manual handler', function () {
         new ErrorMessage().setMessage(oldMsg),
         newMsg
       );
-      assert.strictEqual(r.message, newMsg, 
+      assert.strictEqual(r.message, newMsg,
         [
           'message argument supplied at report invocation should propagte and, if',
           'supplied, should overwrite any prexisting data in the message field.'

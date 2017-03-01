@@ -100,7 +100,7 @@ RequestHandler.prototype.sendError = function(errorMessage, userCb) {
         self._logger.error([
           'Unable to retrieve a project id from the Google Metadata Service or',
           'the local environment. Client will not be able to communicate with',
-          'the Stackdriver Error Reporting API without a valid project id', 
+          'the Stackdriver Error Reporting API without a valid project id',
           'Please make sure to supply a project id either through the',
           'GCLOUD_PROJECT environmental variable or through the configuration',
           'object given to this library on startup if not running on Google',

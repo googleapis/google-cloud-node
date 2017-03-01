@@ -33,7 +33,7 @@ describe('Writing and reading ErrorMessage properties', function () {
       );
     });
   });
-  describe('User field', function () { 
+  describe('User field', function () {
     var em, err;
     var TEST_USER_INVALID = 12;
     beforeEach(function () {

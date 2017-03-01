@@ -52,7 +52,7 @@ describe('expressInterface', function () {
     var client = {
       sendError: function () {
         return;
-      } 
+      }
     };
     var testError = new Error('This is a test');
     var validBoundHandler = expressInterface(client, stubbedConfig);

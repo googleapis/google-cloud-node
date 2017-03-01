@@ -34,7 +34,7 @@ app.post('/testErrorHandling', function ( req, res, next ) {
 
 
     if ( has(req.body, 'test') && req.body.test !== true ) {
-      
+
       return next(new Error('Error on Express Regular Error POST Route'));
     } else {
 
@@ -74,7 +74,7 @@ app.get(
 
 app.get(
   '/getError', function ( req, res, next ) {
-    
+
     return next(new Error('Error on Express Regular Error GET Route'));
   }
 );
@@ -92,7 +92,7 @@ function reportManualError ( ) {
     new Error('This is a manually reported error'), null, null, function ( err, res ) {
 
       if ( err ) {
-        
+
         console.log(WARNING_HEADER);
         console.log('Got an error in sending error information to the API');
         console.log(err);

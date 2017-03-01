@@ -103,7 +103,7 @@ ErrorMessage.prototype.setEventTimeToNow = function() {
  * @function setServiceContext
  * @chainable
  * @param {String} service - the service the error was reported on
- * @param {String|Undefined} version - the version the service was on when the 
+ * @param {String|Undefined} version - the version the service was on when the
  *  error was reported
  * @returns {this} - returns the instance for chaining
  */

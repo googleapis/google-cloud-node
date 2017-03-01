@@ -22,7 +22,7 @@ var ErrorMessage = require('../../src/classes/error-message.js');
 describe('Instantiating a new ErrorMessage', function () {
   var em;
   beforeEach(function () {em = new ErrorMessage();});
-  
+
   it('Should have a default service context', function () {
     assert.deepEqual(
       em.serviceContext,
@@ -73,7 +73,7 @@ describe('Fuzzing against setServiceContext', function () {
   var DEFAULT_SERVICE_VALUE = 'node';
   var em;
   beforeEach(function () {em = new ErrorMessage()});
-  
+
   it('Should set the value for service context', function () {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, AFFIRMATIVE_TEST_VALUE);
     assert.deepEqual(
@@ -661,7 +661,7 @@ describe('Fuzzing against consumeRequestInformation', function () {
       );
     }
   );
-  it('Should return the instance on calling consumeRequestInformation', 
+  it('Should return the instance on calling consumeRequestInformation',
     function () {
       assert(
         em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE) instanceof ErrorMessage

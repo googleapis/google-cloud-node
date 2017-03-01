@@ -56,14 +56,14 @@ describe('Testing service configuration', function () {
   beforeEach(function () {sterilizeEnv();});
   after(function () {restoreEnv();});
   it(
-    'A Configuration uses the function name as the service name on GCF ' + 
+    'A Configuration uses the function name as the service name on GCF ' +
     'if the service name is not given in the given config',
     function () {
       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
         'someFunction');
       var c = new Configuration({}, logger);
       assert.deepEqual(c.getServiceContext().service, 'someFunction');
-      // FUNCTION_NAME is set and the user didn't specify a version, and so 
+      // FUNCTION_NAME is set and the user didn't specify a version, and so
       // the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
@@ -76,7 +76,7 @@ describe('Testing service configuration', function () {
       setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
       var c = new Configuration({}, logger);
       assert.deepEqual(c.getServiceContext().service, 'someFunction');
-      // The user didn't specify a version and FUNCTION_NAME is defined, and 
+      // The user didn't specify a version and FUNCTION_NAME is defined, and
       // so the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
@@ -89,7 +89,7 @@ describe('Testing service configuration', function () {
       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
       var c = new Configuration({}, logger);
       assert.deepEqual(c.getServiceContext().service, 'someModuleName');
-      // The user didn't specify a version, and FUNCTION_NAME is not defined, 
+      // The user didn't specify a version, and FUNCTION_NAME is not defined,
       // and so use the GAE_MODULE_VERSION
       assert.deepEqual(c.getServiceContext().version, '1.0');
     }
@@ -107,7 +107,7 @@ describe('Testing service configuration', function () {
         }
       }, logger);
       assert.deepEqual(c.getServiceContext().service, 'customService');
-      // The user didn't specify a version, but FUNCTION_NAME is defined, and 
+      // The user didn't specify a version, but FUNCTION_NAME is defined, and
       // so the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
@@ -141,7 +141,7 @@ describe('Testing service configuration', function () {
         }
       }, logger);
       assert.deepEqual(c.getServiceContext().service, 'customService');
-      // The user didn't specify a version and FUNCTION_NAME is not defined 
+      // The user didn't specify a version and FUNCTION_NAME is not defined
       // and so the GAE_MODULE_VERSION should be used
       assert.deepEqual(c.getServiceContext().version, '1.0');
     }
@@ -173,7 +173,7 @@ describe('Testing service configuration', function () {
         }
       }, logger);
       assert.deepEqual(c.getServiceContext().service, 'customService');
-      // The user didn't specify a version and thus because FUNCTION_NAME is 
+      // The user didn't specify a version and thus because FUNCTION_NAME is
       // defined the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
@@ -255,13 +255,13 @@ describe('Testing service configuration', function () {
   // // The following tests always have GAE_SERVICE and GAE_VERSION not set
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
-  //   'A Configuration uses the function name as the service name on GCF ' + 
+  //   'A Configuration uses the function name as the service name on GCF ' +
   //   'if the service name is not given in the given config',
   //   makeTest(null, null, 'someModuleName', '1.0', 'someFunction',
   //     function(done) {
   //       var c = new Configuration({}, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'someFunction');
-  //       // FUNCTION_NAME is set and the user didn't specify a version, and so 
+  //       // FUNCTION_NAME is set and the user didn't specify a version, and so
   //       // the version should not be defined
   //       assert.deepEqual(c.getServiceContext().version, undefined);
 
@@ -278,7 +278,7 @@ describe('Testing service configuration', function () {
   //     function(done) {
   //       var c = new Configuration({}, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'someFunction');
-  //       // The user didn't specify a version and FUNCTION_NAME is defined, and 
+  //       // The user didn't specify a version and FUNCTION_NAME is defined, and
   //       // so the version should not be defined
   //       assert.deepEqual(c.getServiceContext().version, undefined);
 
@@ -295,7 +295,7 @@ describe('Testing service configuration', function () {
   //     function(done) {
   //       var c = new Configuration({}, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'someModuleName');
-  //       // The user didn't specify a version, and FUNCTION_NAME is not defined, 
+  //       // The user didn't specify a version, and FUNCTION_NAME is not defined,
   //       // and so use the GAE_MODULE_VERSION
   //       assert.deepEqual(c.getServiceContext().version, '1.0');
 
@@ -316,7 +316,7 @@ describe('Testing service configuration', function () {
   //         }
   //       }, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'customService');
-  //       // The user didn't specify a version, but FUNCTION_NAME is defined, and 
+  //       // The user didn't specify a version, but FUNCTION_NAME is defined, and
   //       // so the version should not be defined
   //       assert.deepEqual(c.getServiceContext().version, undefined);
 
@@ -357,7 +357,7 @@ describe('Testing service configuration', function () {
   //         }
   //       }, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'customService');
-  //       // The user didn't specify a version and FUNCTION_NAME is not defined 
+  //       // The user didn't specify a version and FUNCTION_NAME is not defined
   //       // and so the GAE_MODULE_VERSION should be used
   //       assert.deepEqual(c.getServiceContext().version, '1.0');
 
@@ -397,7 +397,7 @@ describe('Testing service configuration', function () {
   //         }
   //       }, logger);
   //       assert.deepEqual(c.getServiceContext().service, 'customService');
-  //       // The user didn't specify a version and thus because FUNCTION_NAME is 
+  //       // The user didn't specify a version and thus because FUNCTION_NAME is
   //       // defined the version should not be defined
   //       assert.deepEqual(c.getServiceContext().version, undefined);
 

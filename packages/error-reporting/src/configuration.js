@@ -77,10 +77,10 @@ var Configuration = function(givenConfig, logger) {
    * the Stackdriver error reporting library will actually try to report Errors
    * to the Stackdriver Error API. The value of this property is derived from
    * the `NODE_ENV` environmental variable or the value of ignoreEnvironmentChec
-   * property if present in the runtime configuration. If either the `NODE_ENV` 
-   * variable is set to 'production' or the ignoreEnvironmentCheck propery on 
+   * property if present in the runtime configuration. If either the `NODE_ENV`
+   * variable is set to 'production' or the ignoreEnvironmentCheck propery on
    * the runtime configuration is set to true then the error reporting library
-   * attempt to send errors to the Error API. Otherwise the value will remain 
+   * attempt to send errors to the Error API. Otherwise the value will remain
    * false and errors will not be reported to the API.
    * @memberof Configuration
    * @private
@@ -191,7 +191,7 @@ var Configuration = function(givenConfig, logger) {
  * names, if these are not set then it will defer to the _givenConfiguration
  * property if it is set on the instance. The function will check env variables
  * `GAE_MODULE_NAME` and `GAE_MODULE_VERSION` for `_serviceContext.service` and
- * `_serviceContext.version` respectively. If these are not set the 
+ * `_serviceContext.version` respectively. If these are not set the
  * `_serviceContext` properties will be left at default unless the given runtime
  * configuration supplies any values as substitutes.
  * @memberof Configuration
@@ -201,15 +201,15 @@ var Configuration = function(givenConfig, logger) {
  */
 Configuration.prototype._checkLocalServiceContext = function() {
   // Note: The GAE_MODULE_NAME environment variable is set on GAE.
-  //       If the code is, in particular, running on GCF, then the 
+  //       If the code is, in particular, running on GCF, then the
   //       FUNCTION_NAME environment variable is set.
   //
   // To determine the service name to use:
-  //   If the user specified a service name it should be used, otherwise 
-  //   if the FUNCTION_NAME environment variable is set (indicating that the 
-  //   code is running on GCF) then the FUNCTION_NAME value should be used as 
-  //   the service name.  If neither of these conditions are true, the 
-  //   value of the GAE_MODULE_NAME environment variable should be used as the 
+  //   If the user specified a service name it should be used, otherwise
+  //   if the FUNCTION_NAME environment variable is set (indicating that the
+  //   code is running on GCF) then the FUNCTION_NAME value should be used as
+  //   the service name.  If neither of these conditions are true, the
+  //   value of the GAE_MODULE_NAME environment variable should be used as the
   //   service name.
   //
   // To determine the service version to use:

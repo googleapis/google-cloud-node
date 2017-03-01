@@ -24,7 +24,7 @@ describe('RequestInformationContainer', function () {
   var f = new Fuzzer();
   var cbFn, ric;
   beforeEach(function () {ric = new RequestInformationContainer();});
-  describe('Fuzzing against RequestInformationContainer for negative cases', function () {    
+  describe('Fuzzing against RequestInformationContainer for negative cases', function () {
     it('Should return the RequestInformationContainer.url propertym as an empty string',
       function () {
         cbFn = function () {
