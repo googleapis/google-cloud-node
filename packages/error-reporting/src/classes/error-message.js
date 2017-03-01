@@ -43,7 +43,7 @@ var isObject = is.object;
  * @property {Object} serviceContext - The service information for the error
  * @property {String} serviceContext.service - The service that the error was
  *  was produced on
- * @property {String|Undefined} serviceContext.version - The service version 
+ * @property {String|Undefined} serviceContext.version - The service version
  *  that the error was produced on
  * @property {String} message - The error message
  * @property {Object} context - the request, user and report context
@@ -67,19 +67,19 @@ var isObject = is.object;
 function ErrorMessage() {
 
   this.eventTime = (new Date()).toISOString();
-  this.serviceContext = {service : 'node', version : undefined};
+  this.serviceContext = {service: 'node', version: undefined};
   this.message = '';
   this.context = {
-    httpRequest : {
-      method : '',
-      url : '',
-      userAgent : '',
-      referrer : '',
-      responseStatusCode : 0,
-      remoteIp : ''
+    httpRequest: {
+      method: '',
+      url: '',
+      userAgent: '',
+      referrer: '',
+      responseStatusCode: 0,
+      remoteIp: ''
     },
     user : '',
-    reportLocation : {filePath : '', lineNumber : 0, functionName : ''}
+    reportLocation : {filePath: '', lineNumber: 0, functionName: ''}
   };
 }
 

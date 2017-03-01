@@ -76,10 +76,10 @@ var Configuration = function(givenConfig, logger) {
    * The _shouldReportErrorsToAPI property is meant to denote whether or not
    * the Stackdriver error reporting library will actually try to report Errors
    * to the Stackdriver Error API. The value of this property is derived from
-   * the `NODE_ENV` environmental variable or the value of the ignoreEnvironmentCheck
+   * the `NODE_ENV` environmental variable or the value of ignoreEnvironmentChec
    * property if present in the runtime configuration. If either the `NODE_ENV` 
    * variable is set to 'production' or the ignoreEnvironmentCheck propery on 
-   * the runtime configuration is set to true then the error reporting library will 
+   * the runtime configuration is set to true then the error reporting library
    * attempt to send errors to the Error API. Otherwise the value will remain 
    * false and errors will not be reported to the API.
    * @memberof Configuration
@@ -220,14 +220,12 @@ Configuration.prototype._checkLocalServiceContext = function() {
   var service;
   var version;
 
-  if (env.FUNCTION_NAME){
+  if (env.FUNCTION_NAME) {
     service = env.FUNCTION_NAME;
-  }
-  else if (env.GAE_SERVICE){
+  } else if (env.GAE_SERVICE){
     service = env.GAE_SERVICE;
     version = env.GAE_VERSION;
-  }
-  else if (env.GAE_MODULE_NAME){
+  } else if (env.GAE_MODULE_NAME){
     service = env.GAE_MODULE_NAME;
     version = env.GAE_MODULE_VERSION;
   }
@@ -237,7 +235,7 @@ Configuration.prototype._checkLocalServiceContext = function() {
 
   if (isObject(this._givenConfiguration.serviceContext)) {
     if (isString(this._givenConfiguration.serviceContext.service)) {
-      this._serviceContext.service = 
+      this._serviceContext.service =
         this._givenConfiguration.serviceContext.service;
     } else if (has(this._givenConfiguration.serviceContext, 'service')) {
       throw new Error('config.serviceContext.service must be a string');
@@ -268,7 +266,7 @@ Configuration.prototype._gatherLocalConfiguration = function() {
     this._shouldReportErrorsToAPI = true;
   } else if (has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
     !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
-      throw new Error('config.ignoreEnvironmentCheck must be a boolean');
+    throw new Error('config.ignoreEnvironmentCheck must be a boolean');
   } else {
     this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';
   }
@@ -313,11 +311,11 @@ Configuration.prototype._gatherLocalConfiguration = function() {
   * @function _checkAuthConfiguration
   * @returns {Undefined} - does not return anything
   */
-Configuration.prototype._checkAuthConfiguration = function () {
+Configuration.prototype._checkAuthConfiguration = function() {
   if (!isNull(this._key) || !isNull(this._keyFilename) ||
-    !isNull(this._credentials) || 
+    !isNull(this._credentials) ||
     !isEmpty(process.env.GOOGLE_APPLICATION_CREDENTIALS)) {
-      this._lacksValidCredentials = false;
+    this._lacksValidCredentials = false;
   } else {
     this._logger.warn([
       'Unable to find credential information on instance. This library will',
@@ -404,11 +402,11 @@ Configuration.prototype.getShouldReportErrorsToAPI = function() {
 Configuration.prototype.getProjectId = function(cb) {
   var self = this;
   if (!isNull(this._projectId)) {
-    setImmediate(function () {
+    setImmediate(function() {
       cb(null, self._projectId);
     });
   } else {
-    utils.getProjectId(function (err, projectId) {
+    utils.getProjectId(function(err, projectId) {
        if (err) {
         self._checkLocalProjectId(cb);
       } else {

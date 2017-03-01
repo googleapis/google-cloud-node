@@ -42,21 +42,21 @@ function errorHandlerRouter(err, em) {
   }
 
   switch (typeof err) {
-  case 'object':
-
-    handleObjectAsError(err, em);
-    break;
-  case 'string':
-
-    handleStringAsError(err, em);
-    break;
-  case 'number':
-
-    handleNumberAsError(err, em);
-    break;
-  default:
-
-    handleUnknownAsError(err, em);
+    case 'object': {
+      handleObjectAsError(err, em);
+      break;
+    }
+    case 'string': {
+      handleStringAsError(err, em);
+      break;
+    }
+    case 'number': {
+      handleNumberAsError(err, em);
+      break;
+    }
+    default: {
+      handleUnknownAsError(err, em);
+    }
   }
 }
 

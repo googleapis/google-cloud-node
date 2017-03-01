@@ -39,13 +39,14 @@ var logger = require('@google/cloud-diagnostics-common').logger;
  * @returns {Object} - returns an instance of the logger created with the given/
  *  default options
  */
-function createLogger (initConfiguration) {
+function createLogger(initConfiguration) {
   // Default to log level: warn (2)
   var level = logger.WARN;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
     level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL;
-  } else if (isObject(initConfiguration) && has(initConfiguration, 'logLevel')) {
+  } else if (isObject(initConfiguration) 
+    && has(initConfiguration, 'logLevel')) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer
       level = ~~initConfiguration.logLevel;

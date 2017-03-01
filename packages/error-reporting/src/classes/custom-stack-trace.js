@@ -32,7 +32,7 @@ var isFunction = is.fn;
  */
 function stubbedNoOp() {
 
-  return JSON.stringify({error : 'Unable to capture stack trace information'});
+  return JSON.stringify({error: 'Unable to capture stack trace information'});
 }
 
 /**

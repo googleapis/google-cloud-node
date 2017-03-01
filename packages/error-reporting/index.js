@@ -74,7 +74,7 @@ var createLogger = require('./src/logger.js');
  *     reporting configuration
  */
 function Errors(initConfiguration) {
-  if (!(this instanceof Errors)){
+  if (!(this instanceof Errors)) {
     return new Errors(initConfiguration);
   }
 
@@ -91,7 +91,7 @@ function Errors(initConfiguration) {
   this.express = express(client, config);
   this.restify = restify(client, config);
   this.event = messageBuilder(config);
-  this.koa = koa(client, config); 
+  this.koa = koa(client, config);
 }
 
 module.exports = Errors;
