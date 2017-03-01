@@ -81,12 +81,12 @@ app.get(
 
 app.use(errorHandler.express);
 
-function throwUncaughtError () {
+function throwUncaughtError() {
   console.log('Throwing an uncaught error..');
   throw new Error('This is an uncaught error');
 }
 
-function reportManualError () {
+function reportManualError() {
   console.log('Reporting a manual error..');
   errorHandler.report(
     new Error('This is a manually reported error'), null, null, function(err, res) {

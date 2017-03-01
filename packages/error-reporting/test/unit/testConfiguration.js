@@ -36,19 +36,19 @@ var env = {
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION
 };
-function sterilizeEnv () {
+function sterilizeEnv() {
   delete process.env.NODE_ENV;
   delete process.env.GCLOUD_PROJECT;
   delete process.env.GAE_MODULE_NAME;
   delete process.env.GAE_MODULE_VERSION;
 }
-function restoreEnv () {
+function restoreEnv() {
   process.env.NODE_ENV = env.NODE_ENV;
   process.env.GCLOUD_PROJECT = env.GCLOUD_PROJECT;
   process.env.GAE_MODULE_NAME = env.GAE_MODULE_NAME;
   process.env.GAE_MODULE_VERSION = env.GAE_MODULE_VERSION;
 }
-function createDeadMetadataService () {
+function createDeadMetadataService() {
   return nock(METADATA_URL).get('/project-id').times(1).reply(500);
 }
 

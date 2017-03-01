@@ -46,7 +46,7 @@ describe('Behvaiour acceptance testing', function() {
       this.skip();
     } else if (process.env.NODE_ENV !== 'production') {
       console.error(
-        'The NODE_ENV is not set to production as an env variable. Please set '+
+        'The NODE_ENV is not set to production as an env variable. Please set ' +
         'NODE_ENV to production');
       this.skip();
     }
@@ -59,7 +59,7 @@ describe('Behvaiour acceptance testing', function() {
     var fakeService, client, logger;
     beforeEach(function() {
       fakeService = nock(
-        'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+
+        'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
         process.env.GCLOUD_PROJECT
      ).persist().post('/events:report');
       logger = createLogger({logLevel: 5});
@@ -90,7 +90,7 @@ describe('Behvaiour acceptance testing', function() {
         var intendedTries = 5;
         fakeService.reply(429, function() {
           tries += 1;
-          console.log('Mock Server Received Request:', tries+'/'+intendedTries);
+          console.log('Mock Server Received Request:', tries+'/' +intendedTries);
           return {error: 'Please try again later'};
         });
         client.sendError(errorMessage, function(err, response, body) {
@@ -106,7 +106,7 @@ describe('Behvaiour acceptance testing', function() {
           {key: key, ignoreEnvironmentCheck: true},
           createLogger({logLevel: 5})));
         fakeService.query({key: key}).reply(200, function(uri) {
-          assert(uri.indexOf('key='+key) > -1);
+          assert(uri.indexOf('key=' +key) > -1);
           return {};
         });
         client.sendError(errorMessage, function() {
@@ -131,12 +131,12 @@ describe('Behvaiour acceptance testing', function() {
       STUBBED_PROJECT_NUM: process.env.STUBBED_PROJECT_NUM,
       NODE_ENV: process.env.NODE_ENV
     };
-    function sterilizeEnv () {
+    function sterilizeEnv() {
       forEach(oldEnv, function(val, key) {
         delete process.env[key];
       });
     }
-    function restoreEnv () {
+    function restoreEnv() {
       assign(process.env, oldEnv);
     }
     describe('Client creation', function() {

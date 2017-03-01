@@ -19,7 +19,7 @@ var assert = require('assert');
 var CustomStackTrace = require('../../src/classes/custom-stack-trace.js');
 
 describe('Fuzzing the CustomStackTrace class', function() {
-  var testFunction = function testFunction () {
+  var testFunction = function testFunction() {
     return '';
   };
   var cs;

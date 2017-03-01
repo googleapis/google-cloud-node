@@ -25,7 +25,7 @@ var originalHandlers = process.listeners('uncaughtException');
 var UNCAUGHT  = 'uncaughtException';
 var client;
 
-function reattachOriginalListeners () {
+function reattachOriginalListeners() {
   for (var i = 0; i < originalHandlers.length; i++) {
     process.on(UNCAUGHT, originalHandlers[i]);
   }
@@ -33,10 +33,10 @@ function reattachOriginalListeners () {
 var env = {
   NODE_ENV: process.env.NODE_ENV
 };
-function setEnv () {
+function setEnv() {
   process.env.NODE_ENV = 'production';
 }
-function restoreEnv () {
+function restoreEnv() {
   process.env.NODE_ENV = env.NODE_ENV;
 }
 
@@ -73,7 +73,7 @@ describe('Uncaught Exception exit behaviour', function() {
       });
     this.timeout(2000);
     nock(
-      'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+id
+      'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +id
    ).post('/events:report').once().reply(200, function() {
       done();
       return {success: true};

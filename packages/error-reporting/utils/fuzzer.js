@@ -29,7 +29,7 @@ var isArray = is.array;
 var isNull = is.null;
 var isFunction = is.function;
 
-function Fuzzer () { }
+function Fuzzer() { }
 
 Fuzzer.prototype.generate = {};
 
