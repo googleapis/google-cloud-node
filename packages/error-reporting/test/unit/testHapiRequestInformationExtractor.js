@@ -39,7 +39,7 @@ describe('hapiRequestInformationExtractor behaviour', function() {
         hapiRequestInformationExtractor,
         ['object'],
         cbFn
-      );
+     );
     });
   });
   describe('behaviour given valid input', function() {
@@ -120,7 +120,7 @@ describe('hapiRequestInformationExtractor behaviour', function() {
       assert.deepEqual(
         hapiRequestInformationExtractor(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
         ANOTHER_PARTIAL_REQ_EXPECTED_VALUE
-      );
+     );
     });
   });
 });

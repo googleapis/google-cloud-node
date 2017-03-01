@@ -33,10 +33,10 @@ describe('expressInterface', function() {
           function() {
             f.fuzzFunctionForTypes(
               expressInterface, ['object', 'object']
-            );
+           );
             return;
           }
-        );
+       );
       });
     });
   });
@@ -65,8 +65,8 @@ describe('expressInterface', function() {
             stubbedConfig._serviceContext.service,
             stubbedConfig._serviceContext.version),
           {eventTime: res.eventTime}
-        )
-      );
+       )
+     );
     });
     describe('Calling back to express builtins', function() {
       it('Should callback to next', function(done) {

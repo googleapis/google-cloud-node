@@ -124,7 +124,7 @@ describe('Testing use of runtime configurations', function() {
         });
       });
     }
-  );
+ );
   it('Should ignore credentials if keyFilename is provided', function(done) {
     var correctCredentials = require('../fixtures/gcloud-credentials.json');
     var config = {

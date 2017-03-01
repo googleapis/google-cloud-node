@@ -21,7 +21,7 @@ errors.report('Sample test string', (err, response, body) => {
     'Callback from report:\n',
     '\tError: ', err, '\n',
     '\tResponse Body:', body
-  );
+ );
 });
 
 var express = require('express');

@@ -30,7 +30,7 @@ describe('Fuzzing the CustomStackTrace class', function() {
       cs.filePath === 'test',
       'Setting a valid string on the CustomStackTrace.filePath instance ' +
       'should result in assignment'
-    );
+   );
   });
   it('Should reject invalid type for file path', function() {
     cs.setFilePath(null);
@@ -38,7 +38,7 @@ describe('Fuzzing the CustomStackTrace class', function() {
       cs.filePath === '',
       'Setting an invalid type on the CustomStackTrace.filePath instance ' +
       'should result in default value of an empty string'
-    );
+   );
   });
   it('Should accept value for line number', function() {
     cs.setLineNumber(10);
@@ -46,7 +46,7 @@ describe('Fuzzing the CustomStackTrace class', function() {
       cs.lineNumber === 10,
       'Setting a valid number on the CustomStackTrace.lineNumber instance ' +
       'should result in assignment'
-    );
+   );
   });
   it('Should reject invalid type for line number', function() {
     cs.setLineNumber('10');
@@ -54,7 +54,7 @@ describe('Fuzzing the CustomStackTrace class', function() {
       cs.lineNumber === 0,
       'Setting an invalid type on the CustomStackTrace.lineNumber instance ' +
       'should result in default value of number 0'
-    );
+   );
   });
   it('Should accept value for call list', function() {
     cs.setStringifyStructuredCallList(testFunction);
@@ -63,7 +63,7 @@ describe('Fuzzing the CustomStackTrace class', function() {
       testFunction,
       'Setting a valid function on the CustomStackTrace. ' +
       'setStringifyStructuredCallList should result in assignment'
-    );
+   );
   });
   it('Should reject incalid value for call list', function() {
     cs.setStringifyStructuredCallList(null);
@@ -72,6 +72,6 @@ describe('Fuzzing the CustomStackTrace class', function() {
       'Setting an invalid setStringifyStructuredCallList on the ' +
       'CustomStackTrace. setStringifyStructuredCallList should result in a ' +
       'default value of a function'
-    );
+   );
   });
 });

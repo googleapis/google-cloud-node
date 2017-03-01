@@ -148,7 +148,7 @@ var app = express();
 // Will create a errors instance based off env variables
 var errors = require('@google/cloud-errors')();
 
-app.get('/error', function( req, res, next ) {
+app.get('/error', function(req, res, next) {
     res.send('Something broke!');
     next(new Error('Custom error message'));
 });
@@ -175,7 +175,7 @@ server.start();
 server.route({
   method: 'GET',
   path: '/error',
-  handler: function( request, reply ) {
+  handler: function(request, reply) {
     throw new Error('Custom error message');
     reply('Something broke!');
   }

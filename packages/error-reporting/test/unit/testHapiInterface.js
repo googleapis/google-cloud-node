@@ -52,26 +52,26 @@ describe('Hapi interface', function() {
         assert(has(plugin.register, 'attributes') &&
           isObject(plugin.register.attributes));
       }
-    );
+   );
     it('the plugin\'s attribute property should have a name property',
       function() {
         assert(has(plugin.register.attributes, 'name'));
         assert.strictEqual(plugin.register.attributes.name,
           '@google/cloud-errors');
       }
-    );
+   );
     it('the plugin\'s attribute property should have a version property',
       function() {
         assert(has(plugin.register.attributes, 'version'));
       }
-    );
+   );
   });
   describe('hapiRegisterFunction behaviour', function() {
     var fakeServer;
     beforeEach(function() {fakeServer = new EventEmitter();});
     it('Should call sendError when the request-error event is emitted', function() {
       var fakeClient = {
-        sendError: function( errMsg ) {
+        sendError: function(errMsg) {
           assert(errMsg instanceof ErrorMessage,
             'The value given to sendError should be an instance of Error message');
         }
@@ -121,7 +121,7 @@ describe('Hapi interface', function() {
             done();
           }
         }
-      );
+     );
     });
     it('Should call sendError when a boom response is received', function(done) {
       var fakeClient = {

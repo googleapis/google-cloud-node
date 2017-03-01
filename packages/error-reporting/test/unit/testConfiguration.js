@@ -69,7 +69,7 @@ describe('Configuration class', function() {
               assert.deepEqual(c._givenConfiguration, {});
             },
             ['object']
-          );
+         );
         });
       });
       describe('valid config and default values', function() {
@@ -174,7 +174,7 @@ describe('Configuration class', function() {
         });
       });
     }
-  );
+ );
   describe('Configuration resource aquisition', function() {
     before(function() {sterilizeEnv();});
     describe('project id from configuration instance', function() {

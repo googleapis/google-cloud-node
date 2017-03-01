@@ -30,7 +30,7 @@ describe('Writing and reading ErrorMessage properties', function() {
       extractFromErrorClass(err, em);
       assert.deepEqual(em.message, err.stack, 'Given a valid message the ' +
         'error message should absorb the error stack as the message'
-      );
+     );
     });
   });
   describe('User field', function() {

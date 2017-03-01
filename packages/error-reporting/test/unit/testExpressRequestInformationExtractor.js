@@ -104,7 +104,7 @@ describe('Behaviour under varying input',
       };
       var headerFactory = function(toDeriveFrom) {
         var lrn = extend({}, toDeriveFrom);
-        lrn.header = function( toRet ) {
+        lrn.header = function(toRet) {
           if (lrn.hasOwnProperty(toRet)) {
             return lrn[toRet];
           }
@@ -115,7 +115,7 @@ describe('Behaviour under varying input',
       var tmpOutput = expressRequestInformationExtractor(
         headerFactory(FULL_REQ_DERIVATION_VALUE),
         FULL_RES_DERIVATION_VALUE
-      );
+     );
       assert.deepEqual(tmpOutput, FULL_REQ_EXPECTED_VALUE,
         [
           'Given a valid object input for the request parameter and an',
@@ -123,11 +123,11 @@ describe('Behaviour under varying input',
           'the expected full req output and the \'x-forwarded-for\' value',
           'as the value for the \'remoteAddress\' property.'
         ].join(' ')
-      );
+     );
       tmpOutput = expressRequestInformationExtractor(
         headerFactory(PARTIAL_REQ_DERIVATION_VALUE),
         PARTIAL_RES_DERIVATION_VALUE
-      );
+     );
       assert.deepEqual(
         tmpOutput,
         PARTIAL_REQ_EXPECTED_VALUE,
@@ -137,11 +137,11 @@ describe('Behaviour under varying input',
           'the expected parital req output and the remoteAddress value',
           'as the value for the \'remoteAddress\' property.'
         ].join(' ')
-      );
+     );
       tmpOutput = expressRequestInformationExtractor(
         headerFactory(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
         ANOTHER_PARTIAL_RES_DERIVATION_VALUE
-      );
+     );
       assert.deepEqual(
         tmpOutput,
         ANOTHER_PARTIAL_REQ_EXPECTED_VALUE,
@@ -151,7 +151,7 @@ describe('Behaviour under varying input',
           'the request extractor should return an empty string',
           'as the value for the \'remoteAddress\' property.'
         ].join(' ')
-      );
+     );
     }
-  );
+ );
 });

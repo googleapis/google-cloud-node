@@ -29,11 +29,11 @@ var isArray = is.array;
 var isNull = is.null;
 var isFunction = is.function;
 
-function Fuzzer ( ) { }
+function Fuzzer () { }
 
 Fuzzer.prototype.generate = {};
 
-Fuzzer.prototype.generate.types = function( ) {
+Fuzzer.prototype.generate.types = function() {
   return [
     "object",
     "array",
@@ -46,11 +46,11 @@ Fuzzer.prototype.generate.types = function( ) {
   ];
 }
 
-Fuzzer.prototype.generate.string = function( len ) {
+Fuzzer.prototype.generate.string = function(len) {
   var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
 
-  for ( var i = 0; i < lenChecked; i++ ) {
+  for (var i = 0; i < lenChecked; i++) {
 
     chars.push(String.fromCharCode(random(32, 126)));
   }
@@ -58,18 +58,18 @@ Fuzzer.prototype.generate.string = function( len ) {
   return chars.join("");
 };
 
-Fuzzer.prototype.generate.boolean = function( ) {
+Fuzzer.prototype.generate.boolean = function() {
 
   return !!random(0, 1);
 }
 
-Fuzzer.prototype.generate.alphaNumericString = function( len ) {
+Fuzzer.prototype.generate.alphaNumericString = function(len) {
   var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
   var thisRange = [];
   var ranges = [[48, 57], [65, 90], [97, 122]];
 
-  for ( var i = 0; i < lenChecked; i++ ) {
+  for (var i = 0; i < lenChecked; i++) {
 
     thisRange = ranges[random(0, 2)];
     chars.push(
@@ -77,27 +77,27 @@ Fuzzer.prototype.generate.alphaNumericString = function( len ) {
         random(
           thisRange[0]
           , thisRange[1]
-        )
-      )
-    );
+       )
+     )
+   );
   }
 
   return chars.join("");
 }
 
-Fuzzer.prototype.generate.function = function( ) {
+Fuzzer.prototype.generate.function = function() {
 
   var availableTypes = without(this.types(), "function");
   var typeToGen = this.types()[random(0, availableTypes.length-1)];
   var fnToCall = this[typeToGen];
 
-  return function( ) {
+  return function() {
 
     return fnToCall();
   };
 }
 
-Fuzzer.prototype.generate.number = function( lower, upper ) {
+Fuzzer.prototype.generate.number = function(lower, upper) {
 
   var lowerChecked = isNumber(lower) ? lower : 0;
   var upperChecked = isNumber(upper) ? upper : 100;
@@ -105,17 +105,17 @@ Fuzzer.prototype.generate.number = function( lower, upper ) {
   return random(lowerChecked, upperChecked);
 }
 
-Fuzzer.prototype.generate.null = function( ) {
+Fuzzer.prototype.generate.null = function() {
 
   return null;
 }
 
-Fuzzer.prototype.generate.undefined = function( ) {
+Fuzzer.prototype.generate.undefined = function() {
 
   return undefined;
 }
 
-Fuzzer.prototype.generate.array = function( len, ofOneType, currentDepth, allowedDepth ) {
+Fuzzer.prototype.generate.array = function(len, ofOneType, currentDepth, allowedDepth) {
 
   var lenChecked = isNumber(len) ? len : random(1, 10);
   var availableTypes = (isString(ofOneType) && (indexOf(this.types(), ofOneType) > -1)) ? [ofOneType] : this.types();
@@ -126,24 +126,24 @@ Fuzzer.prototype.generate.array = function( len, ofOneType, currentDepth, allowe
   currentDepthChecked += 1;
 
   // Deny the ability to nest more objects
-  if ( currentDepthChecked >= allowedDepthChecked ) {
+  if (currentDepthChecked >= allowedDepthChecked) {
 
     availableTypes = without(this.types(), "object", "array");
   }
 
-  for ( var i = 0; i < lenChecked; i++ ) {
+  for (var i = 0; i < lenChecked; i++) {
     currentTypeBeingGenerated = availableTypes[random(0, availableTypes.length-1)];
 
-    if ( currentTypeBeingGenerated === "object" ) {
+    if (currentTypeBeingGenerated === "object") {
 
       arr.push(
         this[currentTypeBeingGenerated](
           null
           , currentDepthChecked
           , allowedDepthChecked
-        )
-      );
-    } else if ( currentTypeBeingGenerated === "array" ) {
+       )
+     );
+    } else if (currentTypeBeingGenerated === "array") {
 
       arr.push(
         this[currentTypeBeingGenerated](
@@ -151,8 +151,8 @@ Fuzzer.prototype.generate.array = function( len, ofOneType, currentDepth, allowe
           , ofOneType
           , currentDepthChecked
           , allowedDepthChecked
-        )
-      );
+       )
+     );
     } else {
 
       arr.push(this[currentTypeBeingGenerated]());
@@ -162,7 +162,7 @@ Fuzzer.prototype.generate.array = function( len, ofOneType, currentDepth, allowe
   return arr;
 }
 
-Fuzzer.prototype.generate.object = function( numProperties, currentDepth, allowedDepth ) {
+Fuzzer.prototype.generate.object = function(numProperties, currentDepth, allowedDepth) {
 
   var numPropertiesChecked = isNumber(numProperties) ? numProperties : random(1, 10);
   var currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
@@ -173,22 +173,22 @@ Fuzzer.prototype.generate.object = function( numProperties, currentDepth, allowe
   var availableTypes = this.types()
 
   // Deny the ability to nest more objects
-  if ( currentDepth >= allowedDepth ) {
+  if (currentDepth >= allowedDepth) {
     availableTypes = without(availableTypes, "object", "array");
   }
 
   var currentTypeBeingGenerated = 0;
   var currentKey = "";
 
-  for ( var i = 0; i < numPropertiesChecked; i++ ) {
+  for (var i = 0; i < numPropertiesChecked; i++) {
 
     currentTypeBeingGenerated = availableTypes[random(0, availableTypes.length-1)];
     currentKey = this.alphaNumericString(random(1, 10));
 
-    if ( currentTypeBeingGenerated === "object" ) {
+    if (currentTypeBeingGenerated === "object") {
 
       obj[currentKey] = this[currentTypeBeingGenerated](null, currentDepthChecked, allowedDepthChecked);
-    } else if ( currentTypeBeingGenerated === "array" ) {
+    } else if (currentTypeBeingGenerated === "array") {
 
       obj[currentKey] = this[currentTypeBeingGenerated](null, null, currentDepthChecked, allowedDepthChecked);
     } else {
@@ -200,21 +200,21 @@ Fuzzer.prototype.generate.object = function( numProperties, currentDepth, allowe
   return obj;
 }
 
-Fuzzer.prototype._backFillUnevenTypesArrays = function( argsTypesArray ) {
+Fuzzer.prototype._backFillUnevenTypesArrays = function(argsTypesArray) {
 
   var largestIndex = 0;
   var largestLength = (maxBy(
     argsTypesArray
-    , function( o ) { return o.length }
-  )).length;
+    , function(o) { return o.length }
+ )).length;
 
-  for ( var i = 0; i < argsTypesArray.length; i++ ) {
-    if ( argsTypesArray[i].length !== largestLength ) {
+  for (var i = 0; i < argsTypesArray.length; i++) {
+    if (argsTypesArray[i].length !== largestLength) {
 
-      while ( argsTypesArray[i].length < largestLength ) {
+      while (argsTypesArray[i].length < largestLength) {
         argsTypesArray[i].push(
           argsTypesArray[i][random(0, argsTypesArray[i].length-1)]
-        );
+       );
       }
     }
   }
@@ -222,49 +222,49 @@ Fuzzer.prototype._backFillUnevenTypesArrays = function( argsTypesArray ) {
   return argsTypesArray;
 }
 
-Fuzzer.prototype._normalizeTypesArrayLengths = function( argsTypesArray ) {
+Fuzzer.prototype._normalizeTypesArrayLengths = function(argsTypesArray) {
 
   var allAreTheSameLength = true;
   var lastLength = argsTypesArray[0].length;
 
-  for ( var i = 1; i < argsTypesArray.length; i++ ) {
+  for (var i = 1; i < argsTypesArray.length; i++) {
 
-    if ( argsTypesArray[i].length !== lastLength ) {
+    if (argsTypesArray[i].length !== lastLength) {
 
       allAreTheSameLength = false;
       break;
     }
   }
 
-  if ( allAreTheSameLength ) {
+  if (allAreTheSameLength) {
 
     return argsTypesArray;
   }
 
-  return this._backFillUnevenTypesArrays( argsTypesArray );
+  return this._backFillUnevenTypesArrays(argsTypesArray);
 }
 
-Fuzzer.prototype._generateTypesToFuzzWith = function( expectsArgTypes ) {
+Fuzzer.prototype._generateTypesToFuzzWith = function(expectsArgTypes) {
   var argsTypesArray = [];
   var tmpArray = this.generate.types();
 
-  for ( var i = 0; i < expectsArgTypes.length; i++ ) {
+  for (var i = 0; i < expectsArgTypes.length; i++) {
 
-    if ( !isArray(expectsArgTypes[i]) ) {
+    if (!isArray(expectsArgTypes[i])) {
       argsTypesArray.push(
         without(
           this.generate.types()
           , expectsArgTypes[i]
-        )
-      );
+       )
+     );
     } else {
 
-      for ( var j = 0; j < expectsArgTypes[i].length; j++ ) {
+      for (var j = 0; j < expectsArgTypes[i].length; j++) {
 
         tmpArray = without(
           tmpArray
           , expectsArgTypes[i][j]
-        );
+       );
       }
 
       argsTypesArray.push([].concat(tmpArray));
@@ -276,11 +276,11 @@ Fuzzer.prototype._generateTypesToFuzzWith = function( expectsArgTypes ) {
   return argsTypesArray;
 }
 
-Fuzzer.prototype._generateValuesForFuzzTyping = function( typesToFuzzOnEach, index ) {
+Fuzzer.prototype._generateValuesForFuzzTyping = function(typesToFuzzOnEach, index) {
   var args = [];
   var typeToGen = "";
 
-  for ( var i = 0; i < typesToFuzzOnEach.length; i++ ) {
+  for (var i = 0; i < typesToFuzzOnEach.length; i++) {
     typeToGen = typesToFuzzOnEach[i][index];
 
     args.push(this.generate[typeToGen]());
@@ -289,21 +289,21 @@ Fuzzer.prototype._generateValuesForFuzzTyping = function( typesToFuzzOnEach, ind
   return args;
 }
 
-Fuzzer.prototype.fuzzFunctionForTypes = function( fnToFuzz, expectsArgTypes, cb, withContext ) {
+Fuzzer.prototype.fuzzFunctionForTypes = function(fnToFuzz, expectsArgTypes, cb, withContext) {
   var expectsArgTypesChecked = isArray(expectsArgTypes) ? expectsArgTypes : [];
-  var typesToFuzzOnEach = this._generateTypesToFuzzWith( expectsArgTypesChecked );
+  var typesToFuzzOnEach = this._generateTypesToFuzzWith(expectsArgTypesChecked);
   var withContextChecked = (withContext !== undefined) ? withContext : null;
 
   var returnValue = undefined;
 
-  for ( var i = 0; i < typesToFuzzOnEach[0].length; i++ ) {
+  for (var i = 0; i < typesToFuzzOnEach[0].length; i++) {
 
     returnValue = fnToFuzz.apply(
       withContext
       , this._generateValuesForFuzzTyping(typesToFuzzOnEach, i)
-    );
+   );
 
-    if ( isFunction(cb) ) {
+    if (isFunction(cb)) {
 
       cb(returnValue);
     }

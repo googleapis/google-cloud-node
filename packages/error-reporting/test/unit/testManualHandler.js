@@ -150,7 +150,7 @@ describe('Manual handler', function() {
       var r = report(
         new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
         newReq
-      );
+     );
       assert.strictEqual(r.message, msg,
         'string message should propagate from error message instance');
       assert.strictEqual(r.context.httpRequest.method, newReq.method,
@@ -158,7 +158,7 @@ describe('Manual handler', function() {
           'request argument supplied at report invocation should propagte and, if',
           'supplied, should overwrite any prexisting data in the field.'
         ].join('\n')
-      );
+     );
     });
     it('Should accept message and additional message params as arguments', function() {
       var oldMsg = 'test';
@@ -166,7 +166,7 @@ describe('Manual handler', function() {
       var r = report(
         new ErrorMessage().setMessage(oldMsg),
         newMsg
-      );
+     );
       assert.strictEqual(r.message, newMsg,
         [
           'message argument supplied at report invocation should propagte and, if',
@@ -178,7 +178,7 @@ describe('Manual handler', function() {
       report(
         new ErrorMessage().setMessage(oldMsg),
         function() { done(); }
-      );
+     );
     });
   });
 });

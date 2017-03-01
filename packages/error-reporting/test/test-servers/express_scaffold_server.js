@@ -30,10 +30,10 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-app.post('/testErrorHandling', function( req, res, next ) {
+app.post('/testErrorHandling', function(req, res, next) {
 
 
-    if ( has(req.body, 'test') && req.body.test !== true ) {
+    if (has(req.body, 'test') && req.body.test !== true) {
 
       return next(new Error('Error on Express Regular Error POST Route'));
     } else {
@@ -45,12 +45,12 @@ app.post('/testErrorHandling', function( req, res, next ) {
 );
 
 app.get(
-  '/customError', function( req, res, next ) {
+  '/customError', function(req, res, next) {
 
     errorHandler.report(
-      'Error on Express Custom Error GET Route', function( err, res ) {
+      'Error on Express Custom Error GET Route', function(err, res) {
 
-        if ( err ) {
+        if (err) {
 
           console.log(WARNING_HEADER);
           console.log('Error in sending custom get error to api');
@@ -63,7 +63,7 @@ app.get(
           console.log(EXCLAMATION_LN);
         }
       }
-    );
+   );
 
     res.send('Success');
     res.end();
@@ -73,7 +73,7 @@ app.get(
 );
 
 app.get(
-  '/getError', function( req, res, next ) {
+  '/getError', function(req, res, next) {
 
     return next(new Error('Error on Express Regular Error GET Route'));
   }
@@ -81,17 +81,17 @@ app.get(
 
 app.use(errorHandler.express);
 
-function throwUncaughtError ( ) {
+function throwUncaughtError () {
   console.log('Throwing an uncaught error..');
   throw new Error('This is an uncaught error');
 }
 
-function reportManualError ( ) {
+function reportManualError () {
   console.log('Reporting a manual error..');
   errorHandler.report(
-    new Error('This is a manually reported error'), null, null, function( err, res ) {
+    new Error('This is a manually reported error'), null, null, function(err, res) {
 
-      if ( err ) {
+      if (err) {
 
         console.log(WARNING_HEADER);
         console.log('Got an error in sending error information to the API');
@@ -104,11 +104,11 @@ function reportManualError ( ) {
         console.log(EXCLAMATION_LN);
       }
 
-      if ( process.env.THROW_ON_STARTUP ) {
+      if (process.env.THROW_ON_STARTUP) {
         throwUncaughtError();
       }
     }
-  );
+ );
 }
 console.log('reporting a manual error first');
 errorHandler.report(
@@ -125,7 +125,7 @@ errorHandler.report(
 
 app.listen(
   3000,
-  function( ) {
+  function() {
     console.log('Scaffold Server has been started on port 3000');
     reportManualError();
   }

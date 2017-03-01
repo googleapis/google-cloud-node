@@ -24,7 +24,7 @@ var createLogger = require('../../src/logger.js');
 var originalHandlers = process.listeners('uncaughtException');
 var spawn = require('child_process').spawn;
 
-function reattachOriginalListeners ( ) {
+function reattachOriginalListeners () {
   for (var i = 0; i < originalHandlers.length; i++) {
     process.on('uncaughtException', originalHandlers[i]);
   }

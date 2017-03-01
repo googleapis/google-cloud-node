@@ -27,7 +27,7 @@ describe('Instantiating a new ErrorMessage', function() {
     assert.deepEqual(
       em.serviceContext,
       { service: 'node', version: undefined }
-    );
+   );
   });
   it('Should have a default message', function() {
     assert.strictEqual(em.message, '');
@@ -43,7 +43,7 @@ describe('Instantiating a new ErrorMessage', function() {
         responseStatusCode: 0,
         remoteIp: ''
       }
-    );
+   );
   });
   it('Should have a default reportLocation', function() {
     assert.deepEqual(
@@ -53,7 +53,7 @@ describe('Instantiating a new ErrorMessage', function() {
         lineNumber: 0,
         functionName: ''
       }
-    );
+   );
   })
 });
 
@@ -86,7 +86,7 @@ describe('Fuzzing against setServiceContext', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should set the default values', function() {
     em.setServiceContext(DEFAULT_TEST_VALUE, DEFAULT_TEST_VALUE);
@@ -100,7 +100,7 @@ describe('Fuzzing against setServiceContext', function() {
         'In resetting to default valid values the instance should reflect the'
         , 'value update'
       ].join(' ')
-    );
+   );
   });
   it('Should still set version with affirmative value', function() {
     em.setServiceContext(null, AFFIRMATIVE_TEST_VALUE);
@@ -115,7 +115,7 @@ describe('Fuzzing against setServiceContext', function() {
         , 'setServiceContext should set the service property as an empty string'
         , 'but set the version property to the affirmative value.'
       ].join(' ')
-    );
+   );
   });
   it('Should still set service with affirmative value', function() {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, null);
@@ -130,7 +130,7 @@ describe('Fuzzing against setServiceContext', function() {
         , 'setServiceContext should set the version property as an empty string'
         , 'but set the service property to the affirmative value.'
       ].join(' ')
-    );
+   );
   });
   it('Should set default values on both', function() {
     em.setServiceContext(null, null);
@@ -144,7 +144,7 @@ describe('Fuzzing against setServiceContext', function() {
         'Providing null as the value to both arguments should set both'
         , 'properties as empty strings.'
       ].join(' ')
-    );
+   );
   });
   it('Should set default values on both', function() {
     em.setServiceContext(2, 1.3);
@@ -158,7 +158,7 @@ describe('Fuzzing against setServiceContext', function() {
         'Providing numbers as the value to both arguments should set both'
         , 'properties as empty strings.'
       ].join(' ')
-    );
+   );
   });
   it('Should set as default', function() {
     em.setServiceContext({ test: 'true' }, []);
@@ -172,7 +172,7 @@ describe('Fuzzing against setServiceContext', function() {
         'Providing arrays or objects as the value to both arguments'
         , 'should set both properties as empty strings.'
       ].join(' ')
-    );
+   );
   });
   it('Should set as default', function() {
     em.setServiceContext();
@@ -183,7 +183,7 @@ describe('Fuzzing against setServiceContext', function() {
         , version: DEFAULT_VERSION_VALUE
       }
       , 'Providing no arguments should set both properties as empty strings'
-    );
+   );
   })
 });
 
@@ -203,7 +203,7 @@ describe(
           'In the affirmative case the value should be settable to a valid string'
           , 'and by setting this value this should mutate the instance'
         ].join(' ')
-      );
+     );
     });
     it('Should default', function() {
       em.setMessage();
@@ -213,7 +213,7 @@ describe(
           'By providing no argument (undefined) to setMessage the property'
           , 'message should be set to an empty string on the instance'
         ].join(' ')
-      );
+     );
     });
   }
 );
@@ -233,7 +233,7 @@ describe(
           'In the affirmative case the value should be settable to a valid string'
           , 'and by setting this value this should mutate the instance'
         ].join(' ')
-      );
+     );
     });
     it('Should default', function() {
       em.setHttpMethod();
@@ -243,7 +243,7 @@ describe(
           'By providing no argument (undefined) to setHttpMethod the property'
           , 'message should be set to an empty string on the instance'
         ].join(' ')
-      );
+     );
     });
   }
 );
@@ -263,7 +263,7 @@ describe(
           'In the affirmative case the value should be settable to a valid string'
           , 'and by setting this value this should mutate the instance'
         ].join(' ')
-      );
+     );
     });
     it('Should default', function() {
       em.setUrl();
@@ -273,7 +273,7 @@ describe(
           'By providing no argument (undefined) to setUrl the property'
           , 'message should be set to an empty string on the instance'
         ].join(' ')
-      );
+     );
     });
   }
 );
@@ -294,7 +294,7 @@ describe(
           'In the affirmative case the value should be settable to a valid string'
           , 'and by setting this value this should mutate the instance'
         ].join(' ')
-      );
+     );
     });
     it('Should default', function() {
       em.setUserAgent();
@@ -304,7 +304,7 @@ describe(
           'By providing no argument (undefined) to setUserAgent the property'
           , 'message should be set to an empty string on the instance'
         ].join(' ')
-      );
+     );
     });
   }
 );
@@ -322,7 +322,7 @@ describe('Fuzzing against setReferrer', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setReferrer();
@@ -332,7 +332,7 @@ describe('Fuzzing against setReferrer', function() {
         'By providing no argument (undefined) to setReferrer the property'
         , 'message should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -349,7 +349,7 @@ describe('Fuzzing against setResponseStatusCode', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setResponseStatusCode();
@@ -359,7 +359,7 @@ describe('Fuzzing against setResponseStatusCode', function() {
         'By providing no argument (undefined) to setResponseStatusCode the property'
         , 'message should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -376,7 +376,7 @@ describe('Fuzzing against setRemoteIp', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setRemoteIp();
@@ -386,7 +386,7 @@ describe('Fuzzing against setRemoteIp', function() {
         'By providing no argument (undefined) to setRemoteIp the property'
         , 'message should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -405,7 +405,7 @@ describe(
           'In the affirmative case the value should be settable to a valid string'
           , 'and by setting this value this should mutate the instance'
         ].join(' ')
-      );
+     );
     });
     it('Should default', function() {
       em.setUser();
@@ -415,7 +415,7 @@ describe(
           'By providing no argument (undefined) to setUser the property'
           , 'user should be set to an empty string on the instance'
         ].join(' ')
-      );
+     );
     });
   }
 );
@@ -433,7 +433,7 @@ describe('Fuzzing against setFilePath', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setFilePath();
@@ -443,7 +443,7 @@ describe('Fuzzing against setFilePath', function() {
         'By providing no argument (undefined) to setFilePath the property'
         , 'filePath should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -460,7 +460,7 @@ describe('Fuzzing against setLineNumber', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setLineNumber();
@@ -470,7 +470,7 @@ describe('Fuzzing against setLineNumber', function() {
         'By providing no argument (undefined) to setLineNumber the property'
         , 'lineNumber should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -487,7 +487,7 @@ describe('Fuzzing against setFunctionName', function() {
         'In the affirmative case the value should be settable to a valid string'
         , 'and by setting this value this should mutate the instance'
       ].join(' ')
-    );
+   );
   });
   it('Should default', function() {
     em.setFunctionName();
@@ -497,7 +497,7 @@ describe('Fuzzing against setFunctionName', function() {
         'By providing no argument (undefined) to setFunctionName the property'
         , 'functionName should be set to an empty string on the instance'
       ].join(' ')
-    );
+   );
   });
 });
 
@@ -532,42 +532,42 @@ describe('Fuzzing against consumeRequestInformation', function() {
         'The error messages method, given a valid string, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.url === A_VALID_STRING
       , [
         'The error messages url, given a valid string, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.userAgent === A_VALID_STRING
       , [
         'The error messages userAgent, given a valid string, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.referrer === A_VALID_STRING
       , [
         'The error messages referrer, given a valid string, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.responseStatusCode === A_VALID_NUMBER
       , [
         'The error messages responseStatusCode, given a valid number, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.remoteIp === A_VALID_STRING
       , [
         'The error messages remoteAddress, given a valid string, should be'
         , 'set to that value'
       ].join(' ')
-    );
+   );
   });
   it('Should default when consuming a malformed request object', function() {
     em.consumeRequestInformation(null);
@@ -577,42 +577,42 @@ describe('Fuzzing against consumeRequestInformation', function() {
         'The error messages method, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.url === A_VALID_STRING
       , [
         'The error messages url, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.userAgent === A_VALID_STRING
       , [
         'The error messages userAgent, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.referrer === A_VALID_STRING
       , [
         'The error messages referrer, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.responseStatusCode === A_VALID_NUMBER
       , [
         'The error messages responseStatusCode, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
     assert(
       em.context.httpRequest.remoteIp === A_VALID_STRING
       , [
         'The error messages remoteAddress, given an invalid type a the top-level'
         , 'should remain untouched'
       ].join(' ')
-    );
+   );
   });
   it('Should default when consuming mistyped response object properties',
     function() {
@@ -623,44 +623,44 @@ describe('Fuzzing against consumeRequestInformation', function() {
           'The error messages method, given an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
       assert(
         em.context.httpRequest.url === NEGATIVE_STRING_CASE
         , [
           'The error messages url, given an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
       assert(
         em.context.httpRequest.userAgent === NEGATIVE_STRING_CASE
         , [
           'The error messages userAgent, ggiven an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
       assert(
         em.context.httpRequest.referrer === NEGATIVE_STRING_CASE
         , [
           'The error messages referrer, given an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
       assert(
         em.context.httpRequest.responseStatusCode === NEGATIVE_NUMBER_CASE
         , [
           'The error messages responseStatusCode, given an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
       assert(
         em.context.httpRequest.remoteIp === NEGATIVE_STRING_CASE
         , [
           'The error messages remoteAddress, given an invalid input should default to'
           , 'the negative value'
         ].join(' ')
-      );
+     );
     }
-  );
+ );
   it('Should return the instance on calling consumeRequestInformation',
     function() {
       assert(
@@ -669,14 +669,14 @@ describe('Fuzzing against consumeRequestInformation', function() {
             'Calling consumeRequestInformation with valid input should return'
             , 'the ErrorMessage instance'
           ].join(' ')
-      );
+     );
       assert(
         em.consumeRequestInformation() instanceof ErrorMessage
         , [
             'Calling consumeRequestInformation with invalid input should return'
             , 'the ErrorMessage instance'
           ].join(' ')
-      );
+     );
     }
-  );
+ );
 });

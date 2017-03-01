@@ -58,7 +58,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input object these values should be reflected by',
           'the output of the request extraction'
         ].join(' ')
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'method')),
         extend({}, FULL_VALID_INPUT, {method: ''}),
@@ -66,7 +66,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input object sans the method property these values',
           'should be reflected by the output of the request extraction'
         ].join(' ')
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'url')),
         extend({}, FULL_VALID_INPUT, {url: ''}),
@@ -74,7 +74,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input sans the url property these values should be',
           'reflected by the output of the request extraction'
         ]
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'userAgent')),
         extend({}, FULL_VALID_INPUT, {'userAgent': ''}),
@@ -82,7 +82,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input sans the userAgent property these values',
           'should be reflected by the output of the request extraction'
         ]
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'referrer')),
         extend({}, FULL_VALID_INPUT, {referrer: ''}),
@@ -90,7 +90,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input sans the referrer property these values',
           'should be reflected by the output of the request extraction'
         ]
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'statusCode')),
         extend({}, FULL_VALID_INPUT, {statusCode: 0}),
@@ -98,7 +98,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input sans the statusCode property these values',
           'should be reflected by the output of the request extraction'
         ]
-      );
+     );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'remoteAddress')),
         extend({}, FULL_VALID_INPUT, {remoteAddress: ''}),
@@ -106,7 +106,7 @@ describe('manualRequestInformationExtractor', function() {
           'Given a full valid input sans the remoteAddress property these values',
           'should be reflected by the output of the request extraction'
         ]
-      );
+     );
     });
   });
 });

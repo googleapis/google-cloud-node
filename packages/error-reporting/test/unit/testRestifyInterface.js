@@ -85,7 +85,7 @@ describe('restifyInterface', function() {
         }
       };
       var config = {
-        getServiceContext: function( ) {
+        getServiceContext: function() {
           assert(true, 'getServiceContext should be called');
           return {
             service: 'stub-service',

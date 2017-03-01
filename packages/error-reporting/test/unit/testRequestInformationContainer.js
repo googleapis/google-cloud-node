@@ -32,33 +32,33 @@ describe('RequestInformationContainer', function() {
         };
         f.fuzzFunctionForTypes(ric.setUrl, ['string'], cbFn, ric);
       }
-    );
+   );
     it('Should return the method property as an empty string', function() {
-      cbFn = function( returnValue ) {
+      cbFn = function(returnValue) {
         assert.deepEqual(ric.method, '');
       };
       f.fuzzFunctionForTypes(ric.setMethod, ['string'], cbFn, ric);
     });
     it('Should return the referrer property as an empty string', function() {
-      cbFn = function( returnValue ) {
+      cbFn = function(returnValue) {
         assert.deepEqual(ric.referrer, '');
       };
       f.fuzzFunctionForTypes(ric.setReferrer, ['string'], cbFn, ric);
     });
     it('Should return the userAgent property as an empty string', function() {
-      cbFn = function( returnValue ) {
+      cbFn = function(returnValue) {
         assert.deepEqual(ric.userAgent, '');
       };
       f.fuzzFunctionForTypes(ric.setUserAgent, ['string'], cbFn, ric);
     });
     it('Should return the remoteAddress property as an empty string', function() {
-      cbFn = function( returnValue ) {
+      cbFn = function(returnValue) {
         assert.deepEqual(ric.remoteAddress, '');
       };
       f.fuzzFunctionForTypes(ric.setRemoteAddress, ['string'], cbFn, ric);
     });
     it('Should return the default value for statusCode', function() {
-      cbFn = function( returnValue ) {
+      cbFn = function(returnValue) {
         assert.strictEqual(ric.statusCode, 0);
       };
       f.fuzzFunctionForTypes(ric.setStatusCode, ['number'], cbFn, ric);

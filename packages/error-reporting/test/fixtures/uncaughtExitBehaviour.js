@@ -25,7 +25,7 @@ var originalHandlers = process.listeners('uncaughtException');
 var UNCAUGHT  = 'uncaughtException';
 var client;
 
-function reattachOriginalListeners ( ) {
+function reattachOriginalListeners () {
   for (var i = 0; i < originalHandlers.length; i++) {
     process.on(UNCAUGHT, originalHandlers[i]);
   }
@@ -64,7 +64,7 @@ describe('Uncaught Exception exit behaviour', function() {
     var id = 'xyz';
     nock(
       'http://metadata.google.internal/computeMetadata/v1/project'
-    ).get('/project-id').times(1).reply(200, id);
+   ).get('/project-id').times(1).reply(200, id);
     nock('https://accounts.google.com:443/o/oauth2')
       .post('/token').query(function() {return true;}).reply(200, {
         refresh_token: 'hello',
@@ -74,7 +74,7 @@ describe('Uncaught Exception exit behaviour', function() {
     this.timeout(2000);
     nock(
       'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+id
-    ).post('/events:report').once().reply(200, function() {
+   ).post('/events:report').once().reply(200, function() {
       done();
       return {success: true};
     });

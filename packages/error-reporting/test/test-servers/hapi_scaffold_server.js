@@ -22,8 +22,8 @@ var server = new hapi.Server();
 server.connection({ port: 3000 });
 
 server.start(
-  ( err ) => {
-    if ( err ) {
+  (err) => {
+    if (err) {
       throw err;
     }
     console.log(
@@ -32,14 +32,14 @@ server.start(
 );
 
 server.route({
-  method: 'GET', path: '/get', handler: function( request, reply ) {
+  method: 'GET', path: '/get', handler: function(request, reply) {
     console.log('Got a GET');
     throw new Error('an error');
   }
 });
 
 server.route({
-  method: 'POST', path: '/post', handler: function( request, reply ) {
+  method: 'POST', path: '/post', handler: function(request, reply) {
     console.log('Got a POST', request.payload);
     throw new Error('An error on the hapi post route');
   }
@@ -47,8 +47,8 @@ server.route({
 
 
 server.register(
-  { register: errorHandler.hapi }, ( err ) => {
-    if ( err ) {
+  { register: errorHandler.hapi }, (err) => {
+    if (err) {
       console.error('There was an error in registering the plugin', err);
     }
   }

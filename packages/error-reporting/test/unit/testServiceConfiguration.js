@@ -67,7 +67,7 @@ describe('Testing service configuration', function() {
       // the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the function name as the service name on GCF ' +
     'if the service name is not given in the given config ' +
@@ -80,7 +80,7 @@ describe('Testing service configuration', function() {
       // so the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the GAE_SERVICE env value as the service name ' +
     'if the FUNCTION_NAME env variable is not set and the given config ' +
@@ -93,7 +93,7 @@ describe('Testing service configuration', function() {
       // and so use the GAE_MODULE_VERSION
       assert.deepEqual(c.getServiceContext().version, '1.0');
     }
-  );
+ );
   it(
     'A Configuration uses the service name in the given config if it ' +
     'was specified and both the GAE_SERVICE and FUNCTION_NAME ' +
@@ -111,7 +111,7 @@ describe('Testing service configuration', function() {
       // so the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the service name and version in the given config if ' +
     'they were both specified and both the GAE_SERVICE and FUNCTION_NAME ' +
@@ -129,7 +129,7 @@ describe('Testing service configuration', function() {
       // The user specified version should be used
       assert.deepEqual(c.getServiceContext().version, '2.0');
     }
-  );
+ );
   it(
     'A Configuration uses the service name in the given config if it ' +
     'was specified and only the GAE_SERVICE env var is set',
@@ -145,7 +145,7 @@ describe('Testing service configuration', function() {
       // and so the GAE_MODULE_VERSION should be used
       assert.deepEqual(c.getServiceContext().version, '1.0');
     }
-  );
+ );
   it(
     'A Configuration uses the service name and version in the given config if ' +
     'they were both specified and only the GAE_SERVICE env var is set',
@@ -161,7 +161,7 @@ describe('Testing service configuration', function() {
       // The user specified version should be used
       assert.deepEqual(c.getServiceContext().version, '2.0');
     }
-  );
+ );
   it(
     'A Configuration uses the service name in the given config if it ' +
     'was specified and only the FUNCTION_NAME env var is set',
@@ -177,7 +177,7 @@ describe('Testing service configuration', function() {
       // defined the version should not be defined
       assert.deepEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the service name and version in the given config if ' +
     'they were both specified and only the FUNCTION_NAME env var is set',
@@ -193,7 +193,7 @@ describe('Testing service configuration', function() {
       // The user specified version should be used
       assert.strictEqual(c.getServiceContext().version, '2.0');
     }
-  );
+ );
   it(
     'A Configuration uses the service name "node" and no version if ' +
     'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has '+
@@ -203,7 +203,7 @@ describe('Testing service configuration', function() {
       assert.strictEqual(c.getServiceContext().service, 'node');
       assert.strictEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the service name "node" and no version if ' +
     'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has '+
@@ -215,7 +215,7 @@ describe('Testing service configuration', function() {
       assert.strictEqual(c.getServiceContext().service, 'node');
       assert.strictEqual(c.getServiceContext().version, undefined);
     }
-  );
+ );
   it(
     'A Configuration uses the service name "node" and the user specified ' +
     'version if GAE_SERVICE is not set, FUNCTION_NAME is not set, and the ' +
@@ -229,7 +229,7 @@ describe('Testing service configuration', function() {
       assert.deepEqual(c.getServiceContext().service, 'node');
       assert.deepEqual(c.getServiceContext().version, '2.0');
     }
-  );
+ );
 
   // it(
   //   'A Configuration uses the service name "node" and the user specified ' +
@@ -250,7 +250,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // // The following tests always have GAE_SERVICE and GAE_VERSION not set
   // it(
@@ -267,7 +267,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -284,7 +284,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -301,7 +301,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -322,7 +322,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -343,7 +343,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -363,7 +363,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -383,7 +383,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -403,7 +403,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -423,7 +423,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -438,7 +438,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -454,7 +454,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -473,7 +473,7 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 
   // it(
   //   'With GAE_SERVICE and GAE_VERSION not set: ' +
@@ -493,5 +493,5 @@ describe('Testing service configuration', function() {
 
   //       done();
   //   })
-  // );
+  //);
 });
