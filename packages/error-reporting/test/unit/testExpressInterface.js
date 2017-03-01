@@ -24,13 +24,13 @@ var Fuzzer = require('../../utils/fuzzer.js');
 var Configuration = require('../fixtures/configuration.js');
 var createLogger = require('../../src/logger.js');
 
-describe('expressInterface', function () {
-  describe('Exception handling', function () {
-    describe('Given invalid input', function () {
-      it('Should not throw errors', function () {
+describe('expressInterface', function() {
+  describe('Exception handling', function() {
+    describe('Given invalid input', function() {
+      it('Should not throw errors', function() {
         var f = new Fuzzer();
         assert.doesNotThrow(
-          function () {
+          function() {
             f.fuzzFunctionForTypes(
               expressInterface, ['object', 'object']
             );
@@ -40,23 +40,23 @@ describe('expressInterface', function () {
       });
     });
   });
-  describe('Intended behaviour', function () {
+  describe('Intended behaviour', function() {
     var stubbedConfig = new Configuration({
       serviceContext: {
         service: 'a_test_service', version: 'a_version'
       }
     }, createLogger({logLevel: 4}));
-    stubbedConfig.lacksCredentials = function () {
+    stubbedConfig.lacksCredentials = function() {
       return false;
     };
     var client = {
-      sendError: function () {
+      sendError: function() {
         return;
       }
     };
     var testError = new Error('This is a test');
     var validBoundHandler = expressInterface(client, stubbedConfig);
-    it('Should return the error message', function () {
+    it('Should return the error message', function() {
       var res = validBoundHandler(testError, null, null, null);
       assert.deepEqual(
         res,
@@ -68,22 +68,22 @@ describe('expressInterface', function () {
         )
       );
     });
-    describe('Calling back to express builtins', function () {
-      it('Should callback to next', function (done) {
-        var nextCb = function () {
+    describe('Calling back to express builtins', function() {
+      it('Should callback to next', function(done) {
+        var nextCb = function() {
           done();
         };
         validBoundHandler(testError, null, null, nextCb);
       });
-      it('Should callback to sendError', function (done) {
-        var sendError = function () {
+      it('Should callback to sendError', function(done) {
+        var sendError = function() {
           done();
         };
         var client = {
           sendError: sendError
         };
         var handler = expressInterface(client, stubbedConfig);
-        handler(testError, null, null, function (){return;});
+        handler(testError, null, null, function(){return;});
       });
     });
   });

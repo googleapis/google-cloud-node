@@ -29,8 +29,8 @@ var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
 
 
-describe('Behvaiour acceptance testing', function () {
-  before(function () {
+describe('Behvaiour acceptance testing', function() {
+  before(function() {
     // Before starting the suite make sure we have the proper resources
     if (!isString(process.env.GCLOUD_PROJECT)) {
       console.error(
@@ -53,11 +53,11 @@ describe('Behvaiour acceptance testing', function () {
     // In case we are running after unit mocks which were not destroyed properly
     nock.cleanAll();
   });
-  describe('Request/Response lifecycle mocking', function () {
+  describe('Request/Response lifecycle mocking', function() {
     var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
     var errorMessage = new ErrorMessage().setMessage(sampleError);
     var fakeService, client, logger;
-    beforeEach(function () {
+    beforeEach(function() {
       fakeService = nock(
         'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+
         process.env.GCLOUD_PROJECT
@@ -66,13 +66,13 @@ describe('Behvaiour acceptance testing', function () {
       client = new RequestHandler(
         new Configuration({ignoreEnvironmentCheck: true}, logger), logger);
     });
-    afterEach(function () {
+    afterEach(function() {
       nock.cleanAll();
     });
-    describe('Receiving non-retryable errors', function () {
-      it('Should fail', function (done) {
+    describe('Receiving non-retryable errors', function() {
+      it('Should fail', function(done) {
         this.timeout(5000);
-        client.sendError({}, function (err, response, body) {
+        client.sendError({}, function(err, response, body) {
           assert(err instanceof Error);
           assert.strictEqual(err.message.toLowerCase(),
             'message cannot be empty.');
@@ -83,47 +83,47 @@ describe('Behvaiour acceptance testing', function () {
         });
       });
     });
-    describe('Receiving retryable errors', function () {
-      it('Should retry', function (done) {
+    describe('Receiving retryable errors', function() {
+      it('Should retry', function(done) {
         this.timeout(25000);
         var tries = 0;
         var intendedTries = 5;
-        fakeService.reply(429, function () {
+        fakeService.reply(429, function() {
           tries += 1;
           console.log('Mock Server Received Request:', tries+'/'+intendedTries);
           return {error: 'Please try again later'};
         });
-        client.sendError(errorMessage, function (err, response, body) {
+        client.sendError(errorMessage, function(err, response, body) {
           assert.strictEqual(tries, intendedTries);
           done();
         });
       });
     });
-    describe('Using an API key', function () {
-      it('Should provide the key as a query string on outgoing requests', function (done) {
+    describe('Using an API key', function() {
+      it('Should provide the key as a query string on outgoing requests', function(done) {
         var key = process.env.STUBBED_API_KEY;
         var client = new RequestHandler(new Configuration(
           {key: key, ignoreEnvironmentCheck: true},
           createLogger({logLevel: 5})));
-        fakeService.query({key: key}).reply(200, function (uri) {
+        fakeService.query({key: key}).reply(200, function(uri) {
           assert(uri.indexOf('key='+key) > -1);
           return {};
         });
-        client.sendError(errorMessage, function () {
+        client.sendError(errorMessage, function() {
           done();
         });
       });
     });
-    describe('Callback-less invocation', function () {
-      it('Should still execute the request', function (done) {
-        fakeService.reply(200, function () {
+    describe('Callback-less invocation', function() {
+      it('Should still execute the request', function(done) {
+        fakeService.reply(200, function() {
           done();
         });
         client.sendError(errorMessage);
       });
     });
   });
-  describe('System-live integration testing', function () {
+  describe('System-live integration testing', function() {
     var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
     var oldEnv = {
@@ -132,29 +132,29 @@ describe('Behvaiour acceptance testing', function () {
       NODE_ENV: process.env.NODE_ENV
     };
     function sterilizeEnv () {
-      forEach(oldEnv, function (val, key) {
+      forEach(oldEnv, function(val, key) {
         delete process.env[key];
       });
     }
     function restoreEnv () {
       assign(process.env, oldEnv);
     }
-    describe('Client creation', function () {
-      describe('Using only project id', function () {
-        describe('As a runtime argument', function () {
+    describe('Client creation', function() {
+      describe('Using only project id', function() {
+        describe('As a runtime argument', function() {
           var cfg, logger;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({projectId: oldEnv.GCLOUD_PROJECT,
               ignoreEnvironmentCheck: true}, logger);
           });
           after(restoreEnv);
-          it('Should not throw on initialization', function (done) {
+          it('Should not throw on initialization', function(done) {
             this.timeout(10000);
-            assert.doesNotThrow(function () {
+            assert.doesNotThrow(function() {
               (new RequestHandler(cfg, logger)).sendError(errorMessage,
-                function (err, response, body) {
+                function(err, response, body) {
                   assert.strictEqual(err, null);
                   assert.strictEqual(response.statusCode, 200);
                   assert(isObject(body) && isEmpty(body));
@@ -164,20 +164,20 @@ describe('Behvaiour acceptance testing', function () {
             });
           });
         });
-        describe('As an env variable', function () {
+        describe('As an env variable', function() {
           var cfg, logger;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
           });
           after(restoreEnv);
-          it('Should not throw on initialization', function (done) {
+          it('Should not throw on initialization', function(done) {
             this.timeout(10000);
-            assert.doesNotThrow(function () {
+            assert.doesNotThrow(function() {
               (new RequestHandler(cfg, logger)).sendError(errorMessage,
-                function (err, response, body) {
+                function(err, response, body) {
                   assert.strictEqual(err, null);
                   assert.strictEqual(response.statusCode, 200);
                   assert(isObject(body) && isEmpty(body));
@@ -188,21 +188,21 @@ describe('Behvaiour acceptance testing', function () {
           });
         });
       });
-      describe('Using only project number', function () {
-        describe('As a runtime argument', function () {
+      describe('Using only project number', function() {
+        describe('As a runtime argument', function() {
           var cfg, logger;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({projectId: parseInt(oldEnv.STUBBED_PROJECT_NUM),
               ignoreEnvironmentCheck: true}, logger);
           });
           after(restoreEnv);
-          it('Should not throw on initialization', function (done) {
+          it('Should not throw on initialization', function(done) {
             this.timeout(10000);
-            assert.doesNotThrow(function () {
+            assert.doesNotThrow(function() {
               (new RequestHandler(cfg, logger)).sendError(errorMessage,
-                function (err, response, body) {
+                function(err, response, body) {
                   assert.strictEqual(err, null);
                   assert.strictEqual(response.statusCode, 200);
                   assert(isObject(body) && isEmpty(body));
@@ -212,20 +212,20 @@ describe('Behvaiour acceptance testing', function () {
             });
           });
         });
-        describe('As an env variable', function () {
+        describe('As an env variable', function() {
           var cfg, logger;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             process.env.GCLOUD_PROJECT = oldEnv.STUBBED_PROJECT_NUM;
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
           });
           after(restoreEnv);
-          it('Should not throw on initialization', function (done) {
+          it('Should not throw on initialization', function(done) {
             this.timeout(10000);
-            assert.doesNotThrow(function () {
+            assert.doesNotThrow(function() {
               (new RequestHandler(cfg, logger)).sendError(errorMessage,
-                function (err, response, body) {
+                function(err, response, body) {
                   assert.strictEqual(err, null);
                   assert.strictEqual(response.statusCode, 200);
                   assert(isObject(body) && isEmpty(body));
@@ -237,8 +237,8 @@ describe('Behvaiour acceptance testing', function () {
         });
       });
     });
-    describe('Error behvaiour', function () {
-      describe('With a configuration to not report errors', function () {
+    describe('Error behvaiour', function() {
+      describe('With a configuration to not report errors', function() {
         var ERROR_STRING = [
           'Stackdriver error reporting client has not been configured to send',
           'errors, please check the NODE_ENV environment variable and make sure',
@@ -246,17 +246,17 @@ describe('Behvaiour acceptance testing', function () {
           'to  true in the runtime configuration object'
         ].join(' ');
         var logger, client;
-        before(function () {
+        before(function() {
           delete process.env.NODE_ENV;
           logger = createLogger({logLevel: 5});
           client = new RequestHandler(new Configuration(undefined, logger),
             logger);
         });
-        after(function () {
+        after(function() {
           process.env.NODE_ENV = oldEnv.NODE_ENV;
         });
-        it('Should callback with an error', function (done) {
-          client.sendError({}, function (err, response, body) {
+        it('Should callback with an error', function(done) {
+          client.sendError({}, function(err, response, body) {
             assert(err instanceof Error);
             assert.strictEqual(err.message, ERROR_STRING);
             assert.strictEqual(body, null);
@@ -265,7 +265,7 @@ describe('Behvaiour acceptance testing', function () {
           });
         });
       });
-      describe('An invalid env configuration', function () {
+      describe('An invalid env configuration', function() {
         var ERROR_STRING = [
           'Unable to find the project Id for communication with the Stackdriver',
           'Error Reporting service. This app will be unable to send errors to',
@@ -273,17 +273,17 @@ describe('Behvaiour acceptance testing', function () {
           'runtime configuration or the GCLOUD_PROJECT environmental variable.'
         ].join(' ');
         var logger, client;
-        before(function () {
+        before(function() {
           delete process.env.GCLOUD_PROJECT;
           logger = createLogger({logLevel: 5});
           client = new RequestHandler(new Configuration(
             {ignoreEnvironmentCheck: true}, logger), logger);
         });
-        after(function () {
+        after(function() {
           process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
         });
-        it('Should callback with an error', function (done) {
-          client.sendError(errorMessage, function (err, response, body) {
+        it('Should callback with an error', function(done) {
+          client.sendError(errorMessage, function(err, response, body) {
             assert(err instanceof Error);
             assert.strictEqual(err.message, ERROR_STRING);
             assert.strictEqual(response, null);
@@ -293,12 +293,12 @@ describe('Behvaiour acceptance testing', function () {
         });
       });
     });
-    describe('Success behaviour', function () {
+    describe('Success behaviour', function() {
       var er = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
       var em = new ErrorMessage().setMessage(er.stack);
-      describe('Given a valid project id', function () {
+      describe('Given a valid project id', function() {
         var logger, client, cfg;
-        before(function () {
+        before(function() {
           sterilizeEnv();
           logger = createLogger({logLevel: 5});
           cfg = new Configuration({
@@ -308,8 +308,8 @@ describe('Behvaiour acceptance testing', function () {
           client = new RequestHandler(cfg, logger);
         });
         after(restoreEnv);
-        it('Should succeed in its request', function (done) {
-          client.sendError(em, function (err, response, body) {
+        it('Should succeed in its request', function(done) {
+          client.sendError(em, function(err, response, body) {
             assert.strictEqual(err, null);
             assert(isObject(body));
             assert(isEmpty(body));
@@ -318,10 +318,10 @@ describe('Behvaiour acceptance testing', function () {
           });
         });
       });
-      describe('Given a valid project number', function () {
+      describe('Given a valid project number', function() {
         var logger, client, cfg;
-        before(function () {
-          forEach(oldEnv, function (val, key) {
+        before(function() {
+          forEach(oldEnv, function(val, key) {
             delete process.env[key];
           });
           logger = createLogger({logLevel: 5});
@@ -331,11 +331,11 @@ describe('Behvaiour acceptance testing', function () {
           }, logger);
           client = new RequestHandler(cfg, logger);
         });
-        after(function () {
+        after(function() {
           assign(process.env, oldEnv);
         });
-        it('Should succeed in its request', function (done) {
-          client.sendError(em, function (err, response, body) {
+        it('Should succeed in its request', function(done) {
+          client.sendError(em, function(err, response, body) {
             assert.strictEqual(err, null);
             assert(isObject(body));
             assert(isEmpty(body));

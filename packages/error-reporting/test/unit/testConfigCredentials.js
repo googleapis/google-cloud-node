@@ -32,8 +32,8 @@ function reattachOriginalListeners() {
 
 var oldg, olde;
 
-describe('Testing use of runtime configurations', function () {
-  before(function () {
+describe('Testing use of runtime configurations', function() {
+  before(function() {
     nock.cleanAll();
     nock.disableNetConnect();
     process.removeAllListeners('uncaughtException');
@@ -42,16 +42,16 @@ describe('Testing use of runtime configurations', function () {
     delete process.env.GCLOUD_PROJECT;
     process.env.NODE_ENV = 'production';
   });
-  after(function () {
+  after(function() {
     nock.enableNetConnect();
     process.env.GCLOUD_PROJECT = oldg;
     process.env.NODE_ENV = olde;
   });
-  afterEach(function () {
+  afterEach(function() {
     nock.cleanAll();
     process.removeAllListeners('uncaughtException');
   });
-  it('Should use the keyFilename field of the config object', function (done) {
+  it('Should use the keyFilename field of the config object', function(done) {
     this.timeout(25000);
     var credentials = require('../fixtures/gcloud-credentials.json');
     var config = {
@@ -76,22 +76,22 @@ describe('Testing use of runtime configurations', function () {
     });
   describe(
     'use of the credentials field of the config object',
-    function () {
-      before(function () {
+    function() {
+      before(function() {
         process.env.GCLOUD_PROJECT = '0';
       });
-      after(function () {
+      after(function() {
         delete process.env.GCLOUD_PROJECT;
         nock.cleanAll();
       });
-      it('Should use the credentials field of the config object', function (done) {
+      it('Should use the credentials field of the config object', function(done) {
         var config = {
           credentials: require('../fixtures/gcloud-credentials.json'),
           reportUncaughtExceptions: false
         };
         var agent = new Errors(config);
         var app = express();
-        app.use('/', function () {
+        app.use('/', function() {
           throw '0';
         });
         app.use(agent.express);
@@ -125,7 +125,7 @@ describe('Testing use of runtime configurations', function () {
       });
     }
   );
-  it('Should ignore credentials if keyFilename is provided', function (done) {
+  it('Should ignore credentials if keyFilename is provided', function(done) {
     var correctCredentials = require('../fixtures/gcloud-credentials.json');
     var config = {
       keyFilename: path.join('test', 'fixtures', 'gcloud-credentials.json'),
@@ -138,7 +138,7 @@ describe('Testing use of runtime configurations', function () {
       },
       reportUncaughtExceptions: true
     };
-    ['client_id', 'client_secret', 'refresh_token'].forEach(function (field) {
+    ['client_id', 'client_secret', 'refresh_token'].forEach(function(field) {
       assert(correctCredentials.hasOwnProperty(field));
       assert(config.credentials.hasOwnProperty(field));
       assert.notEqual(config.credentials[field],
@@ -146,7 +146,7 @@ describe('Testing use of runtime configurations', function () {
     });
     var agent = new Errors(config);
     var app = express();
-    app.use('/', function () {
+    app.use('/', function() {
       throw '0';
     });
     app.use(agent.express);

@@ -20,87 +20,87 @@ var assert = require('assert');
 var extractFromObject = require('../../src/error-extractors/object.js');
 var ErrorMessage = require('../../src/classes/error-message.js');
 
-describe('Object value extraction as error message', function () {
+describe('Object value extraction as error message', function() {
   var em, err;
-  beforeEach(function () {
+  beforeEach(function() {
     em = new ErrorMessage();
     err = {};
   });
-  describe('Message field', function () {
-    it('Should write to the field given valid input', function () {
+  describe('Message field', function() {
+    it('Should write to the field given valid input', function() {
       var MESSAGE = 'test';
       err = {message: MESSAGE};
       extractFromObject(err, em);
       assert.strictEqual(em.message, MESSAGE);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.strictEqual(em.message, '');
     });
   });
-  describe('User field', function () {
-    it('Should write to the field given valid input', function () {
+  describe('User field', function() {
+    it('Should write to the field given valid input', function() {
       var USER = 'test';
       err.user = USER;
       extractFromObject(err, em);
       assert.strictEqual(em.context.user, USER);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.strictEqual(em.context.user, '');
     });
   });
-  describe('filePath field', function () {
-    it('Should write to the field given valid input', function () {
+  describe('filePath field', function() {
+    it('Should write to the field given valid input', function() {
       var PATH = 'test';
       err.filePath = PATH;
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.filePath, PATH);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.filePath, '');
     });
   });
-  describe('lineNumber field', function () {
-    it('Should write to the field given valid input', function () {
+  describe('lineNumber field', function() {
+    it('Should write to the field given valid input', function() {
       var LINE_NUMBER = 10;
       err.lineNumber = LINE_NUMBER;
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.lineNumber, LINE_NUMBER);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.lineNumber, 0);
     });
   });
-  describe('functionName field', function () {
-    it('Should write to the field given valid input', function () {
+  describe('functionName field', function() {
+    it('Should write to the field given valid input', function() {
       var FUNCTION_NAME = 'test';
       err.functionName = FUNCTION_NAME;
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.functionName, FUNCTION_NAME);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.strictEqual(em.context.reportLocation.functionName, '');
     });
   });
-  describe('serviceContext field', function () {
+  describe('serviceContext field', function() {
     var TEST_SERVICE_DEFAULT = {service: 'node', version: undefined};
-    it('Should write to the field given valid input', function () {
+    it('Should write to the field given valid input', function() {
       var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
       err.serviceContext = TEST_SERVICE_VALID;
       extractFromObject(err, em);
       assert.deepEqual(em.serviceContext, TEST_SERVICE_VALID);
     });
-    it('Should default the field given invalid input', function () {
+    it('Should default the field given invalid input', function() {
       var TEST_SERVICE_INVALID = 12;
       err.serviceContext = TEST_SERVICE_INVALID;
       extractFromObject(err, em);
       assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
     });
-    it('Should default the field given lack-of input', function () {
+    it('Should default the field given lack-of input', function() {
       extractFromObject(err, em);
       assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
     });

@@ -33,7 +33,7 @@ function Fuzzer ( ) { }
 
 Fuzzer.prototype.generate = {};
 
-Fuzzer.prototype.generate.types = function ( ) {
+Fuzzer.prototype.generate.types = function( ) {
   return [
     "object",
     "array",
@@ -46,7 +46,7 @@ Fuzzer.prototype.generate.types = function ( ) {
   ];
 }
 
-Fuzzer.prototype.generate.string = function ( len ) {
+Fuzzer.prototype.generate.string = function( len ) {
   var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
 
@@ -58,12 +58,12 @@ Fuzzer.prototype.generate.string = function ( len ) {
   return chars.join("");
 };
 
-Fuzzer.prototype.generate.boolean = function ( ) {
+Fuzzer.prototype.generate.boolean = function( ) {
 
   return !!random(0, 1);
 }
 
-Fuzzer.prototype.generate.alphaNumericString = function ( len ) {
+Fuzzer.prototype.generate.alphaNumericString = function( len ) {
   var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
   var thisRange = [];
@@ -85,19 +85,19 @@ Fuzzer.prototype.generate.alphaNumericString = function ( len ) {
   return chars.join("");
 }
 
-Fuzzer.prototype.generate.function = function ( ) {
+Fuzzer.prototype.generate.function = function( ) {
 
   var availableTypes = without(this.types(), "function");
   var typeToGen = this.types()[random(0, availableTypes.length-1)];
   var fnToCall = this[typeToGen];
 
-  return function ( ) {
+  return function( ) {
 
     return fnToCall();
   };
 }
 
-Fuzzer.prototype.generate.number = function ( lower, upper ) {
+Fuzzer.prototype.generate.number = function( lower, upper ) {
 
   var lowerChecked = isNumber(lower) ? lower : 0;
   var upperChecked = isNumber(upper) ? upper : 100;
@@ -105,17 +105,17 @@ Fuzzer.prototype.generate.number = function ( lower, upper ) {
   return random(lowerChecked, upperChecked);
 }
 
-Fuzzer.prototype.generate.null = function ( ) {
+Fuzzer.prototype.generate.null = function( ) {
 
   return null;
 }
 
-Fuzzer.prototype.generate.undefined = function ( ) {
+Fuzzer.prototype.generate.undefined = function( ) {
 
   return undefined;
 }
 
-Fuzzer.prototype.generate.array = function ( len, ofOneType, currentDepth, allowedDepth ) {
+Fuzzer.prototype.generate.array = function( len, ofOneType, currentDepth, allowedDepth ) {
 
   var lenChecked = isNumber(len) ? len : random(1, 10);
   var availableTypes = (isString(ofOneType) && (indexOf(this.types(), ofOneType) > -1)) ? [ofOneType] : this.types();
@@ -162,7 +162,7 @@ Fuzzer.prototype.generate.array = function ( len, ofOneType, currentDepth, allow
   return arr;
 }
 
-Fuzzer.prototype.generate.object = function ( numProperties, currentDepth, allowedDepth ) {
+Fuzzer.prototype.generate.object = function( numProperties, currentDepth, allowedDepth ) {
 
   var numPropertiesChecked = isNumber(numProperties) ? numProperties : random(1, 10);
   var currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
@@ -200,12 +200,12 @@ Fuzzer.prototype.generate.object = function ( numProperties, currentDepth, allow
   return obj;
 }
 
-Fuzzer.prototype._backFillUnevenTypesArrays = function ( argsTypesArray ) {
+Fuzzer.prototype._backFillUnevenTypesArrays = function( argsTypesArray ) {
 
   var largestIndex = 0;
   var largestLength = (maxBy(
     argsTypesArray
-    , function ( o ) { return o.length }
+    , function( o ) { return o.length }
   )).length;
 
   for ( var i = 0; i < argsTypesArray.length; i++ ) {
@@ -222,7 +222,7 @@ Fuzzer.prototype._backFillUnevenTypesArrays = function ( argsTypesArray ) {
   return argsTypesArray;
 }
 
-Fuzzer.prototype._normalizeTypesArrayLengths = function ( argsTypesArray ) {
+Fuzzer.prototype._normalizeTypesArrayLengths = function( argsTypesArray ) {
 
   var allAreTheSameLength = true;
   var lastLength = argsTypesArray[0].length;
@@ -244,7 +244,7 @@ Fuzzer.prototype._normalizeTypesArrayLengths = function ( argsTypesArray ) {
   return this._backFillUnevenTypesArrays( argsTypesArray );
 }
 
-Fuzzer.prototype._generateTypesToFuzzWith = function ( expectsArgTypes ) {
+Fuzzer.prototype._generateTypesToFuzzWith = function( expectsArgTypes ) {
   var argsTypesArray = [];
   var tmpArray = this.generate.types();
 
@@ -276,7 +276,7 @@ Fuzzer.prototype._generateTypesToFuzzWith = function ( expectsArgTypes ) {
   return argsTypesArray;
 }
 
-Fuzzer.prototype._generateValuesForFuzzTyping = function ( typesToFuzzOnEach, index ) {
+Fuzzer.prototype._generateValuesForFuzzTyping = function( typesToFuzzOnEach, index ) {
   var args = [];
   var typeToGen = "";
 
@@ -289,7 +289,7 @@ Fuzzer.prototype._generateValuesForFuzzTyping = function ( typesToFuzzOnEach, in
   return args;
 }
 
-Fuzzer.prototype.fuzzFunctionForTypes = function ( fnToFuzz, expectsArgTypes, cb, withContext ) {
+Fuzzer.prototype.fuzzFunctionForTypes = function( fnToFuzz, expectsArgTypes, cb, withContext ) {
   var expectsArgTypesChecked = isArray(expectsArgTypes) ? expectsArgTypes : [];
   var typesToFuzzOnEach = this._generateTypesToFuzzWith( expectsArgTypesChecked );
   var withContextChecked = (withContext !== undefined) ? withContext : null;

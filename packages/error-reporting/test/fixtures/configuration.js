@@ -19,7 +19,7 @@
 var Configuration = require('../../src/configuration.js');
 
 var FakeConfiguration = function(config) {
-  return Configuration.call(this, config, { warn: function () {} });
+  return Configuration.call(this, config, { warn: function() {} });
 };
 
 FakeConfiguration.prototype = Object.create(Configuration.prototype);

@@ -94,9 +94,9 @@ RequestHandler.prototype.sendError = function(errorMessage, userCb) {
   var self = this;
   var cb = isFunction(userCb) ? userCb : function() {};
   if (self._config.getShouldReportErrorsToAPI()) {
-    self._config.getProjectId(function (err, id) {
+    self._config.getProjectId(function(err, id) {
       if (err) {
-        setImmediate(function () { cb(err, null, null); });
+        setImmediate(function() { cb(err, null, null); });
         self._logger.error([
           'Unable to retrieve a project id from the Google Metadata Service or',
           'the local environment. Client will not be able to communicate with',
@@ -112,7 +112,7 @@ RequestHandler.prototype.sendError = function(errorMessage, userCb) {
         url: getErrorReportURL(id, self._config.getKey()),
         method: 'POST',
         json: errorMessage
-      }, function (err, response, body) {
+      }, function(err, response, body) {
         if (err) {
           self._logger.error([
             'Encountered an error while attempting to transmit an error to the',

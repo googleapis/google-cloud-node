@@ -20,7 +20,7 @@ var assert = require('assert');
 var ErrorMessage = require('../../src/classes/error-message.js');
 var handleErrorClassError = require('../../src/error-handlers/error.js');
 
-describe('Behaviour under various type inputs', function () {
+describe('Behaviour under various type inputs', function() {
   var em;
   var adversarialObjectInput = {
     stack: {}
@@ -28,29 +28,29 @@ describe('Behaviour under various type inputs', function () {
   var adversarialObjectInputTwo = {
     stack: []
   };
-  beforeEach(function () {em = new ErrorMessage();});
-  it('Should not throw given undefined', function () {
+  beforeEach(function() {em = new ErrorMessage();});
+  it('Should not throw given undefined', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, undefined, em));
   });
-  it('Should not throw given null', function () {
+  it('Should not throw given null', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, null, em));
   });
-  it('Should not throw given a string', function () {
+  it('Should not throw given a string', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, 'string_test', em));
   });
-  it('Should not throw given a number', function () {
+  it('Should not throw given a number', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, 1.2, em));
   });
-  it('Should not throw given an array', function () {
+  it('Should not throw given an array', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, [], em));
   });
-  it('Should not throw given an object of invalid form', function () {
+  it('Should not throw given an object of invalid form', function() {
     assert.doesNotThrow(
       handleErrorClassError.bind(null, adversarialObjectInput, em));
     assert.doesNotThrow(
       handleErrorClassError.bind(null, adversarialObjectInputTwo, em));
   });
-  it('Should not throw given valid input', function () {
+  it('Should not throw given valid input', function() {
     assert.doesNotThrow(handleErrorClassError.bind(null, new Error(), em));
   });
 });

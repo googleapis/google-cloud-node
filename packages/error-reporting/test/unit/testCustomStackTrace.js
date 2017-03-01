@@ -18,13 +18,13 @@
 var assert = require('assert');
 var CustomStackTrace = require('../../src/classes/custom-stack-trace.js');
 
-describe('Fuzzing the CustomStackTrace class', function () {
+describe('Fuzzing the CustomStackTrace class', function() {
   var testFunction = function testFunction () {
     return '';
   };
   var cs;
-  beforeEach(function () { cs = new CustomStackTrace(); });
-  it('Should accept value for file path', function () {
+  beforeEach(function() { cs = new CustomStackTrace(); });
+  it('Should accept value for file path', function() {
     cs.setFilePath('test');
     assert(
       cs.filePath === 'test',
@@ -32,7 +32,7 @@ describe('Fuzzing the CustomStackTrace class', function () {
       'should result in assignment'
     );
   });
-  it('Should reject invalid type for file path', function () {
+  it('Should reject invalid type for file path', function() {
     cs.setFilePath(null);
     assert(
       cs.filePath === '',
@@ -40,7 +40,7 @@ describe('Fuzzing the CustomStackTrace class', function () {
       'should result in default value of an empty string'
     );
   });
-  it('Should accept value for line number', function () {
+  it('Should accept value for line number', function() {
     cs.setLineNumber(10);
     assert(
       cs.lineNumber === 10,
@@ -48,7 +48,7 @@ describe('Fuzzing the CustomStackTrace class', function () {
       'should result in assignment'
     );
   });
-  it('Should reject invalid type for line number', function () {
+  it('Should reject invalid type for line number', function() {
     cs.setLineNumber('10');
     assert(
       cs.lineNumber === 0,
@@ -56,7 +56,7 @@ describe('Fuzzing the CustomStackTrace class', function () {
       'should result in default value of number 0'
     );
   });
-  it('Should accept value for call list', function () {
+  it('Should accept value for call list', function() {
     cs.setStringifyStructuredCallList(testFunction);
     assert.strictEqual(
       cs.stringifyStucturedCallList,
@@ -65,7 +65,7 @@ describe('Fuzzing the CustomStackTrace class', function () {
       'setStringifyStructuredCallList should result in assignment'
     );
   });
-  it('Should reject incalid value for call list', function () {
+  it('Should reject incalid value for call list', function() {
     cs.setStringifyStructuredCallList(null);
     assert(
       ((typeof cs.setStringifyStructuredCallList) === 'function'),

@@ -22,9 +22,9 @@ var extend = require('extend');
 var manualRequestInformationExtractor = require('../../src/request-extractors/manual.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 
-describe('manualRequestInformationExtractor', function () {
-  describe('Behaviour given invalid input', function () {
-    it('Should return default values', function () {
+describe('manualRequestInformationExtractor', function() {
+  describe('Behaviour given invalid input', function() {
+    it('Should return default values', function() {
       var DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
@@ -34,14 +34,14 @@ describe('manualRequestInformationExtractor', function () {
         remoteAddress: ''
       };
       var f = new Fuzzer();
-      var cbFn = function (value) {
+      var cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(manualRequestInformationExtractor, ['object'],
         cbFn);
     });
   });
-  describe('Behaviour given valid input', function () {
+  describe('Behaviour given valid input', function() {
     var FULL_VALID_INPUT = {
       method: 'GET',
       url: 'http://0.0.0.0/myTestRoute',
@@ -50,7 +50,7 @@ describe('manualRequestInformationExtractor', function () {
       statusCode: 500,
       remoteAddress: '0.0.0.1'
     };
-    it('Should return expected output', function () {
+    it('Should return expected output', function() {
       assert.deepEqual(
         manualRequestInformationExtractor(FULL_VALID_INPUT),
         FULL_VALID_INPUT,

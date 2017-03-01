@@ -20,9 +20,9 @@ var assert = require('assert');
 var koaRequestInformationExtractor = require('../../src/request-extractors/koa.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 
-describe('koaRequestInformationExtractor', function () {
-  describe('Behaviour under invalid input', function () {
-    it('Should produce a default value', function () {
+describe('koaRequestInformationExtractor', function() {
+  describe('Behaviour under invalid input', function() {
+    it('Should produce a default value', function() {
       var DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
@@ -32,15 +32,15 @@ describe('koaRequestInformationExtractor', function () {
         remoteAddress: ''
       };
       var f = new Fuzzer();
-      var cbFn = function (value) {
+      var cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(koaRequestInformationExtractor,
         ['object', 'object'], cbFn);
     });
   });
-  describe('Behaviour under valid input', function () {
-    it('Should produce the expected value', function () {
+  describe('Behaviour under valid input', function() {
+    it('Should produce the expected value', function() {
       var FULL_REQ_DERIVATION_VALUE = {
         method: 'STUB_METHOD',
         url: 'www.TEST-URL.com',

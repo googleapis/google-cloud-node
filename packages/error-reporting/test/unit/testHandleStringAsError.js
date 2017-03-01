@@ -20,25 +20,25 @@ var assert = require('assert');
 var ErrorMessage = require('../../src/classes/error-message.js');
 var handleStringAsError = require('../../src/error-handlers/string.js');
 
-describe('handleStringAsError behaviour under varying inputs', function () {
+describe('handleStringAsError behaviour under varying inputs', function() {
   var em;
-  beforeEach(function () {em = new ErrorMessage();});
-  it('Should not throw given undefined', function () {
+  beforeEach(function() {em = new ErrorMessage();});
+  it('Should not throw given undefined', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, undefined, em));
   });
-  it('Should not throw given null', function () {
+  it('Should not throw given null', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, null, em));
   });
-  it('Should not throw given an object', function () {
+  it('Should not throw given an object', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, {}, em));
   });
-  it('Should not throw given an array', function () {
+  it('Should not throw given an array', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, [], em));
   });
-  it('Should not throw given an instance of Error', function () {
+  it('Should not throw given an instance of Error', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, 1.3, em));
   });
-  it('Should not throw given valid input', function () {
+  it('Should not throw given valid input', function() {
     assert.doesNotThrow(handleStringAsError.bind(null, 'test', em));
   });
 });

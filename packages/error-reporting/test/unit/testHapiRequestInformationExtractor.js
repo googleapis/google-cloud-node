@@ -20,9 +20,9 @@ var assert = require('assert');
 var hapiRequestInformationExtractor = require('../../src/request-extractors/hapi.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 
-describe('hapiRequestInformationExtractor behaviour', function () {
-  describe('behaviour given invalid input', function () {
-    it('Should produce the default value', function () {
+describe('hapiRequestInformationExtractor behaviour', function() {
+  describe('behaviour given invalid input', function() {
+    it('Should produce the default value', function() {
       var DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
@@ -32,7 +32,7 @@ describe('hapiRequestInformationExtractor behaviour', function () {
         remoteAddress: ''
       };
       var f = new Fuzzer();
-      var cbFn = function (value) {
+      var cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
@@ -42,7 +42,7 @@ describe('hapiRequestInformationExtractor behaviour', function () {
       );
     });
   });
-  describe('behaviour given valid input', function () {
+  describe('behaviour given valid input', function() {
     var FULL_REQ_DERIVATION_VALUE = {
       method: 'STUB_METHOD',
       url: 'www.TEST-URL.com',
@@ -106,17 +106,17 @@ describe('hapiRequestInformationExtractor behaviour', function () {
       remoteAddress: '',
       statusCode: 0
     };
-    it('Should produce the full request input', function () {
+    it('Should produce the full request input', function() {
       assert.deepEqual(
         hapiRequestInformationExtractor(FULL_REQ_DERIVATION_VALUE),
         FULL_REQ_EXPECTED_VALUE);
     });
-    it('Should produce the partial request input', function () {
+    it('Should produce the partial request input', function() {
       assert.deepEqual(
         hapiRequestInformationExtractor(PARTIAL_REQ_DERIVATION_VALUE),
         PARTIAL_REQ_EXPECTED_VALUE);
     });
-    it('Should produce the second partial request input', function () {
+    it('Should produce the second partial request input', function() {
       assert.deepEqual(
         hapiRequestInformationExtractor(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
         ANOTHER_PARTIAL_REQ_EXPECTED_VALUE

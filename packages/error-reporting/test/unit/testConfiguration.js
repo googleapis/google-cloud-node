@@ -52,19 +52,19 @@ function createDeadMetadataService () {
   return nock(METADATA_URL).get('/project-id').times(1).reply(500);
 }
 
-describe('Configuration class', function () {
-  before(function () {sterilizeEnv();});
-  after(function () {restoreEnv();});
+describe('Configuration class', function() {
+  before(function() {sterilizeEnv();});
+  after(function() {restoreEnv();});
   describe(
     'Initialization',
-    function () {
+    function() {
       var f = new Fuzzer();
       var stubConfig = {test: true};
-      describe('fuzzing the constructor', function () {
-        it('Should return default values', function () {
+      describe('fuzzing the constructor', function() {
+        it('Should return default values', function() {
           var c;
           f.fuzzFunctionForTypes(
-            function (givenConfigFuzz) {
+            function(givenConfigFuzz) {
               c = new Configuration(givenConfigFuzz, logger);
               assert.deepEqual(c._givenConfiguration, {});
             },
@@ -72,102 +72,102 @@ describe('Configuration class', function () {
           );
         });
       });
-      describe('valid config and default values', function () {
+      describe('valid config and default values', function() {
         var c;
-        before(function () {process.env.NODE_ENV = 'development';});
-        after(function () {sterilizeEnv();});
-        it('Should not throw with a valid configuration', function () {
-          assert.doesNotThrow(function () {
+        before(function() {process.env.NODE_ENV = 'development';});
+        after(function() {sterilizeEnv();});
+        it('Should not throw with a valid configuration', function() {
+          assert.doesNotThrow(function() {
             c = new Configuration(stubConfig, logger);
           });
         });
-        it('Should have a property reflecting the config argument', function () {
+        it('Should have a property reflecting the config argument', function() {
           assert.deepEqual(c._givenConfiguration, stubConfig);
         });
-        it('Should reportUncaughtExceptions', function () {
+        it('Should reportUncaughtExceptions', function() {
           assert.strictEqual(c.getReportUncaughtExceptions(), true);
         });
-        it('Should not reportUncaughtExceptions', function () {
+        it('Should not reportUncaughtExceptions', function() {
           assert.strictEqual(c.getShouldReportErrorsToAPI(), false);
         });
-        it('Should not have a project id', function () {
+        it('Should not have a project id', function() {
           assert.strictEqual(c._projectId, null);
         });
-        it('Should not have a key', function () {
+        it('Should not have a key', function() {
           assert.strictEqual(c.getKey(), null);
         });
-        it('Should have a default service context', function () {
+        it('Should have a default service context', function() {
           assert.deepEqual(c.getServiceContext(),
             {service: 'node', version: undefined});
         });
-        it('Should have a version corresponding to package.json', function () {
+        it('Should have a version corresponding to package.json', function() {
             assert.strictEqual(c.getVersion(), version);
         });
       });
-      describe('with ignoreEnvironmentCheck', function () {
+      describe('with ignoreEnvironmentCheck', function() {
         var conf = merge({}, stubConfig, {ignoreEnvironmentCheck: true});
         var c = new Configuration(conf, logger);
-        it('Should reportErrorsToAPI', function () {
+        it('Should reportErrorsToAPI', function() {
           assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
         });
       });
-      describe('without ignoreEnvironmentCheck', function () {
-        describe('Exception behvaiour without proper resources', function () {
+      describe('without ignoreEnvironmentCheck', function() {
+        describe('Exception behvaiour without proper resources', function() {
           var c;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             c = new Configuration(stubConfig, logger);
           });
-          after(function () {sterilizeEnv();});
-          it('Should error without proper config resource', function (done) {
+          after(function() {sterilizeEnv();});
+          it('Should error without proper config resource', function(done) {
             this.timeout(3500);
-            c.getProjectId(function (err, id) {
+            c.getProjectId(function(err, id) {
               assert(err instanceof Error);
               assert.strictEqual(id, null);
               done();
             });
           });
         });
-        describe('report behaviour with production env', function () {
+        describe('report behaviour with production env', function() {
           var c;
-          before(function () {
+          before(function() {
             sterilizeEnv();
             process.env.NODE_ENV = 'production';
             c = new Configuration(undefined, logger);
           });
-          after(function () {sterilizeEnv();});
-          it('Should reportErrorsToAPI', function () {
+          after(function() {sterilizeEnv();});
+          it('Should reportErrorsToAPI', function() {
             assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
           });
         });
-        describe('exception behaviour', function () {
-          it('Should throw if invalid type for reportUncaughtExceptions', function () {
-            assert.throws(function () {
+        describe('exception behaviour', function() {
+          it('Should throw if invalid type for reportUncaughtExceptions', function() {
+            assert.throws(function() {
               new Configuration({reportUncaughtExceptions: 1}, logger);
             });
           });
-          it('Should throw if invalid type for key', function () {
-            assert.throws(function () {
+          it('Should throw if invalid type for key', function() {
+            assert.throws(function() {
               new Configuration({key: null}, logger);
             });
           });
-          it('Should throw if invalid type for ignoreEnvironmentCheck', function () {
-            assert.throws(function () {
+          it('Should throw if invalid type for ignoreEnvironmentCheck', function() {
+            assert.throws(function() {
               new Configuration({ignoreEnvironmentCheck: null}, logger);
             });
           });
-          it('Should throw if invalid type for serviceContext.service', function () {
-            assert.throws(function () {
+          it('Should throw if invalid type for serviceContext.service', function() {
+            assert.throws(function() {
               new Configuration({serviceContext: {service: false}}, logger);
             });
           });
-          it('Should throw if invalid type for serviceContext.version', function () {
-            assert.throws(function () {
+          it('Should throw if invalid type for serviceContext.version', function() {
+            assert.throws(function() {
               new Configuration({serviceContext: {version: true}}, logger);
             });
           });
-          it('Should not throw given an empty object for serviceContext', function () {
-            assert.doesNotThrow(function () {
+          it('Should not throw given an empty object for serviceContext', function() {
+            assert.doesNotThrow(function() {
               new Configuration({serviceContext: {}}, logger);
             });
           });
@@ -175,35 +175,35 @@ describe('Configuration class', function () {
       });
     }
   );
-  describe('Configuration resource aquisition', function () {
-    before(function () {sterilizeEnv();});
-    describe('project id from configuration instance', function () {
+  describe('Configuration resource aquisition', function() {
+    before(function() {sterilizeEnv();});
+    describe('project id from configuration instance', function() {
       var pi = 'test';
       var serve, c;
-      before(function () {
+      before(function() {
         serve = createDeadMetadataService();
         c = new Configuration({projectId: pi}, logger);
       });
-      after(function () {nock.cleanAll();});
-      it('Should return the project id', function (done) {
-        c.getProjectId(function (err, id) {
+      after(function() {nock.cleanAll();});
+      it('Should return the project id', function(done) {
+        c.getProjectId(function(err, id) {
           assert.strictEqual(err, null);
           assert.strictEqual(id, pi);
           done();
         });
       });
     });
-    describe('project number from configuration instance', function () {
+    describe('project number from configuration instance', function() {
       var pn = 1234;
       var serve, c;
-      before(function () {
+      before(function() {
         sterilizeEnv();
         serve = createDeadMetadataService();
         c = new Configuration({projectId: pn}, logger);
       });
-      after(function () {nock.cleanAll(); sterilizeEnv();});
-      it('Should return the project number', function (done) {
-        c.getProjectId(function (err, id) {
+      after(function() {nock.cleanAll(); sterilizeEnv();});
+      it('Should return the project number', function(done) {
+        c.getProjectId(function(err, id) {
           assert.strictEqual(err, null);
           assert.strictEqual(pn.toString(), id);
           done();
@@ -211,39 +211,39 @@ describe('Configuration class', function () {
       });
     });
   });
-  describe('Exception behaviour', function () {
-    describe('While lacking a project id', function () {
+  describe('Exception behaviour', function() {
+    describe('While lacking a project id', function() {
       var serve, c;
-      before(function () {
+      before(function() {
         sterilizeEnv();
         serve = createDeadMetadataService();
         c = new Configuration(undefined, logger);
       });
-      after(function () {
+      after(function() {
         nock.cleanAll();
         sterilizeEnv();
       });
-      it('Should error', function (done) {
-        c.getProjectId(function (err, id) {
+      it('Should error', function(done) {
+        c.getProjectId(function(err, id) {
           assert(err instanceof Error);
           assert.strictEqual(id, null);
           done();
         });
       });
     });
-    describe('Invalid type for projectId in runtime config', function () {
+    describe('Invalid type for projectId in runtime config', function() {
       var serve, c;
-      before(function () {
+      before(function() {
         sterilizeEnv();
         serve = createDeadMetadataService();
         c = new Configuration({projectId: null}, logger);
       });
-      after(function () {
+      after(function() {
         nock.cleanAll();
         sterilizeEnv();
       });
-      it('Should error', function (done) {
-        c.getProjectId(function (err, id) {
+      it('Should error', function(done) {
+        c.getProjectId(function(err, id) {
           assert(err instanceof Error);
           assert.strictEqual(id, null);
           done();
@@ -251,8 +251,8 @@ describe('Configuration class', function () {
       });
     });
   });
-  describe('Resource aquisition', function () {
-    after(function () {
+  describe('Resource aquisition', function() {
+    after(function() {
       /*
        * !! IMPORTANT !!
        * THE restoreEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE EXITS
@@ -261,102 +261,102 @@ describe('Configuration class', function () {
        */
       restoreEnv();
     });
-    describe('via env', function () {
+    describe('via env', function() {
       before(function() {sterilizeEnv();});
-      afterEach(function () {sterilizeEnv();});
-      describe('projectId', function () {
+      afterEach(function() {sterilizeEnv();});
+      describe('projectId', function() {
         var c;
         var projectId = 'test-xyz';
-        before(function () {
+        before(function() {
           process.env.GCLOUD_PROJECT = projectId;
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', function (done) {
-          c.getProjectId(function (err, id) {
+        it('Should assign', function(done) {
+          c.getProjectId(function(err, id) {
             assert.strictEqual(err, null);
             assert.strictEqual(id, projectId);
             done();
           });
         });
       });
-      describe('serviceContext', function () {
+      describe('serviceContext', function() {
         var c;
         var projectId = 'test-abc';
         var serviceContext = {
           service: 'test',
           version: '1.x'
         };
-        before(function () {
+        before(function() {
           process.env.GCLOUD_PROJECT = projectId;
           process.env.GAE_MODULE_NAME = serviceContext.service;
           process.env.GAE_MODULE_VERSION = serviceContext.version;
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', function () {
+        it('Should assign', function() {
           assert.deepEqual(c.getServiceContext(), serviceContext);
         });
       });
     });
-    describe('via runtime configuration', function () {
-      before(function () {sterilizeEnv();});
-      describe('serviceContext', function () {
+    describe('via runtime configuration', function() {
+      before(function() {sterilizeEnv();});
+      describe('serviceContext', function() {
         var c;
         var projectId = 'xyz123';
         var serviceContext = {
           service: 'evaluation',
           version: '2.x'
         };
-        before(function () {
+        before(function() {
           c = new Configuration({
             projectId: projectId,
             serviceContext: serviceContext
           });
         });
-        it('Should assign', function () {
+        it('Should assign', function() {
           assert.deepEqual(c.getServiceContext(), serviceContext);
         });
       });
-      describe('api key', function () {
+      describe('api key', function() {
         var c;
         var projectId = '987abc';
         var key = '1337-api-key';
-        before(function () {
+        before(function() {
           c = new Configuration({
             key: key,
             projectId: projectId
           }, logger);
         });
-        it('Should assign', function () {
+        it('Should assign', function() {
           assert.strictEqual(c.getKey(), key);
         });
       });
-      describe('reportUncaughtExceptions', function () {
+      describe('reportUncaughtExceptions', function() {
         var c;
         var projectId = '123-xyz';
         var reportUncaughtExceptions = false;
-        before(function () {
+        before(function() {
           c = new Configuration({
             projectId: projectId,
             reportUncaughtExceptions: reportUncaughtExceptions
           });
         });
-        it('Should assign', function () {
+        it('Should assign', function() {
           assert.strictEqual(c.getReportUncaughtExceptions(),
             reportUncaughtExceptions);
         });
       });
     });
-    describe('via the metadata service', function () {
-      before(function () {sterilizeEnv();});
-      describe('project id', function () {
+    describe('via the metadata service', function() {
+      before(function() {sterilizeEnv();});
+      describe('project id', function() {
         var serve, c;
         var id = '6789';
-        before(function () {
+        before(function() {
           serve = nock(METADATA_URL).get('/project-id').times(1).reply(200, id);
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', function (done) {
-          c.getProjectId(function (err, projectId) {
+        it('Should assign', function(done) {
+          c.getProjectId(function(err, projectId) {
             assert.strictEqual(err, null);
             assert.strictEqual(id, projectId);
             assert(serve.isDone());

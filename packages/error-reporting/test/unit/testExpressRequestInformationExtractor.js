@@ -23,7 +23,7 @@ var Fuzzer = require('../../utils/fuzzer.js');
 var extend = require('extend');
 
 describe('Behaviour under varying input',
-  function () {
+  function() {
     var f;
     var DEFAULT_RETURN_VALUE = {
       method: '',
@@ -33,15 +33,15 @@ describe('Behaviour under varying input',
       statusCode: 0,
       remoteAddress: ''
     };
-    beforeEach(function () {f = new Fuzzer();});
-    it('Should return a default value given invalid input', function () {
-      var cbFn = function (value) {
+    beforeEach(function() {f = new Fuzzer();});
+    it('Should return a default value given invalid input', function() {
+      var cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(expressRequestInformationExtractor,
         ['object', 'object'], cbFn);
     });
-    it('Should return valid request object given valid input', function () {
+    it('Should return valid request object given valid input', function() {
       var FULL_REQ_DERIVATION_VALUE = {
         method: 'STUB_METHOD',
         url: 'www.TEST-URL.com',
@@ -102,9 +102,9 @@ describe('Behaviour under varying input',
         remoteAddress: '',
         statusCode: 201
       };
-      var headerFactory = function (toDeriveFrom) {
+      var headerFactory = function(toDeriveFrom) {
         var lrn = extend({}, toDeriveFrom);
-        lrn.header = function ( toRet ) {
+        lrn.header = function( toRet ) {
           if (lrn.hasOwnProperty(toRet)) {
             return lrn[toRet];
           }

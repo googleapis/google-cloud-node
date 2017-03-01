@@ -36,56 +36,56 @@ function getConfig(reportUncaughtExceptions) {
   var c = new Configuration({
     reportUncaughtExceptions: reportUncaughtExceptions
   }, createLogger({logLevel: 4}));
-  c.lacksCredentials = function () {
+  c.lacksCredentials = function() {
     return false;
   };
   return c;
 }
 
-describe('Uncaught exception handler behvaiour', function () {
+describe('Uncaught exception handler behvaiour', function() {
   var UNCAUGHT  = 'uncaughtException';
-  describe('Instantiation', function () {
-    beforeEach(function () {process.removeAllListeners(UNCAUGHT);});
-    it('Should throw without a configuration', function () {
+  describe('Instantiation', function() {
+    beforeEach(function() {process.removeAllListeners(UNCAUGHT);});
+    it('Should throw without a configuration', function() {
       assert.throws(uncaughtSetup);
     });
-    it('Should not throw given a valid configuration', function () {
+    it('Should not throw given a valid configuration', function() {
       assert.doesNotThrow(uncaughtSetup.bind(null, {}, getConfig(false)));
       assert.doesNotThrow(uncaughtSetup.bind(null, {}, getConfig(true)));
     });
-    it('Should return the process object after instantiation', function () {
+    it('Should return the process object after instantiation', function() {
       assert.strictEqual(process, uncaughtSetup({}, getConfig(true)));
     });
     it('Should not attach a listener to the uncaughtException event if ' +
-      'reportUncaughtExceptions is false', function () {
+      'reportUncaughtExceptions is false', function() {
         uncaughtSetup({}, getConfig(false));
         assert.strictEqual(process.listeners(UNCAUGHT).length, 0);
     });
     it('Should attach a listener to the uncaughtException event if ' +
-      'reportUncaughtExceptions is true', function () {
+      'reportUncaughtExceptions is true', function() {
         uncaughtSetup({}, getConfig(true));
         assert.strictEqual(process.listeners(UNCAUGHT).length, 1);
     });
   });
-  describe('Uncaught exception handling shutdown behaviour', function () {
-    before(function () {
+  describe('Uncaught exception handling shutdown behaviour', function() {
+    before(function() {
       if (!isString(process.env.GOOGLE_APPLICATION_CREDENTIALS) ||
         !isString(process.env.GCLOUD_PROJECT)) {
         return this.skip();
       }
     });
-    after(function () {
+    after(function() {
       reattachOriginalListeners();
     });
-    it('Should terminate before 2500ms', function (done) {
+    it('Should terminate before 2500ms', function(done) {
       var TERMINATE_MSG = 'Should terminate before 2500ms';
       this.timeout(3500);
       var isolate = spawn('./node_modules/mocha/bin/mocha',
         ['../../test/fixtures/uncaughtExitBehaviour.js'], {env: process.env});
-      isolate.on('close', function () {
+      isolate.on('close', function() {
         done();
       });
-      isolate.on('error', function () {
+      isolate.on('error', function() {
         console.log('Test isolate encountered error:', '\n', arguments);
         assert(false, TERMINATE_MSG);
         done();

@@ -40,8 +40,8 @@ function restoreEnv () {
   process.env.NODE_ENV = env.NODE_ENV;
 }
 
-describe('Uncaught Exception exit behaviour', function () {
-   before(function () {
+describe('Uncaught Exception exit behaviour', function() {
+   before(function() {
     process.removeAllListeners(UNCAUGHT);
     if (!isString(process.env.GCLOUD_PROJECT)) {
       // The gcloud project id (GCLOUD_PROJECT) was not set as an env variable
@@ -54,19 +54,19 @@ describe('Uncaught Exception exit behaviour', function () {
     }
     setEnv();
   });
-  after(function () {
+  after(function() {
     nock.cleanAll();
     nock.enableNetConnect();
     reattachOriginalListeners();
     restoreEnv();
   });
-  it('Should attempt to report the uncaught exception', function (done) {
+  it('Should attempt to report the uncaught exception', function(done) {
     var id = 'xyz';
     nock(
       'http://metadata.google.internal/computeMetadata/v1/project'
     ).get('/project-id').times(1).reply(200, id);
     nock('https://accounts.google.com:443/o/oauth2')
-      .post('/token').query(function () {return true;}).reply(200, {
+      .post('/token').query(function() {return true;}).reply(200, {
         refresh_token: 'hello',
         access_token: 'goodbye',
         expiry_date: new Date(9999, 1, 1)
@@ -74,18 +74,18 @@ describe('Uncaught Exception exit behaviour', function () {
     this.timeout(2000);
     nock(
       'https://clouderrorreporting.googleapis.com/v1beta1/projects/'+id
-    ).post('/events:report').once().reply(200, function () {
+    ).post('/events:report').once().reply(200, function() {
       done();
       return {success: true};
     });
     var cfg = new Configuration(
       {reportUncaughtExceptions: true, projectId: 'xyz'});
-    cfg.lacksCredentials = function () {
+    cfg.lacksCredentials = function() {
       return false;
     };
     client = new RequestHandler(cfg, createLogger({logLevel: 4}));
     uncaughtSetup(client, cfg);
-    setTimeout(function () {
+    setTimeout(function() {
       throw new Error('This error was supposed to be thrown');
     }, 10);
   });

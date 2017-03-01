@@ -20,25 +20,25 @@ var assert = require('assert');
 var ErrorMessage = require('../../src/classes/error-message.js');
 var handleNumberAsError = require('../../src/error-handlers/number.js');
 
-describe('handleNumberAsError behaviour under varying input', function () {
+describe('handleNumberAsError behaviour under varying input', function() {
   var em;
-  beforeEach(function () {em = new ErrorMessage();});
-  it('Should not throw given undefined', function () {
+  beforeEach(function() {em = new ErrorMessage();});
+  it('Should not throw given undefined', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, undefined, em));
   });
-  it('Should not throw given null', function () {
+  it('Should not throw given null', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, null, em));
   });
-  it('Should not throw given a string', function () {
+  it('Should not throw given a string', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, 'test', em));
   });
-  it('Should not throw given an instance of Error', function () {
+  it('Should not throw given an instance of Error', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, new Error(), em));
   });
-  it('Should not throw given an object', function () {
+  it('Should not throw given an object', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, {}, em));
   });
-  it('Should not throw given valid input', function () {
+  it('Should not throw given valid input', function() {
     assert.doesNotThrow(handleNumberAsError.bind(null, 1.3, em));
   });
 });

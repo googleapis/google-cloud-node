@@ -18,44 +18,44 @@
 var assert = require('assert');
 var createLogger = require('../../src/logger.js');
 
-describe('logger', function () {
-  describe('Initialization', function () {
+describe('logger', function() {
+  describe('Initialization', function() {
     var oldEnv;
-    before(function () {
+    before(function() {
       oldEnv = process.env.GCLOUD_ERRORS_LOGLEVEL;
       delete process.env.GCLOUD_ERRORS_LOGLEVEL;
     });
-    after(function () {process.env.GCLOUD_ERRORS_LOGLEVEL = oldEnv;});
-    describe('Exception handling', function () {
-      it('Should not throw given undefined', function () {
+    after(function() {process.env.GCLOUD_ERRORS_LOGLEVEL = oldEnv;});
+    describe('Exception handling', function() {
+      it('Should not throw given undefined', function() {
         assert.doesNotThrow(createLogger, createLogger());
       });
-      it('Should not throw given an empty object', function () {
+      it('Should not throw given an empty object', function() {
         assert.doesNotThrow(createLogger.bind(null, {}), createLogger());
       });
-      it('Should not throw given logLevel as a number', function () {
+      it('Should not throw given logLevel as a number', function() {
         assert.doesNotThrow(createLogger.bind(null, {logLevel: 3}),
           createLogger({logLevel: 3}));
       });
-      it('Should not throw given logLevel as a string', function () {
+      it('Should not throw given logLevel as a string', function() {
         assert.doesNotThrow(createLogger.bind(null, {logLevel: '3'}),
           createLogger({logLevel: 3}));
       });
-      it('Should not throw given an env variable to use', function () {
+      it('Should not throw given an env variable to use', function() {
         process.env.GCLOUD_ERRORS_LOGLEVEL = 4;
         assert.doesNotThrow(createLogger, createLogger({logLevel: 4}));
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });
-      it('Should thow given logLevel as null', function () {
+      it('Should thow given logLevel as null', function() {
         assert.throws(createLogger.bind(null, {logLevel: null}),
           undefined);
       });
     });
-    describe('Default log level', function () {
-      it('Should be WARN', function () {
+    describe('Default log level', function() {
+      it('Should be WARN', function() {
         var buf = [];
         var orig = console._stdout.write;
-        console._stdout.write = function () {
+        console._stdout.write = function() {
           buf.push(arguments[0]);
           orig.apply(this, arguments);
         };
