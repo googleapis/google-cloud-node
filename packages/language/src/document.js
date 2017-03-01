@@ -232,18 +232,18 @@ Document.PART_OF_SPEECH = {
  *
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
- * @param {boolean} options.extractEntities - Extract entities from the document.
- *     By default, all features (`extractEntities`, `extractDocumentSentiment`,
- *     and `extractSyntax`) are enabled. By overriding any of these values, all
- *     defaults are switched to `false`.
- * @param {number} options.extractDocumentSentiment - Extract document-level sentiment.
- *     By default, all features (`extractEntities`, `extractDocumentSentiment`,
- *     and `extractSyntax`) are enabled. By overriding any of these values, all
- *     defaults are switched to `false`.
+ * @param {boolean} options.extractEntities - Extract entities from the
+ *     document. By default, all features (`extractEntities`,
+ *     `extractDocumentSentiment`, and `extractSyntax`) are enabled. By
+ *     overriding any of these values, all defaults are switched to `false`.
+ * @param {number} options.extractDocumentSentiment - Extract document-level
+ *     sentiment. By default, all features (`extractEntities`,
+ *     `extractDocumentSentiment`, and `extractSyntax`) are enabled. By
+ *     overriding any of these values, all defaults are switched to `false`.
  * @param {boolean} options.extractSyntax - Extract syntax information from
  *     this document. By default, all features (`extractEntities`,
- *     `extractDocumentSentiment`, and `extractSyntax`) are enabled. By overriding
- *     any of these values, all defaults are switched to `false`.
+ *     `extractDocumentSentiment`, and `extractSyntax`) are enabled. By
+ *     overriding any of these values, all defaults are switched to `false`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
