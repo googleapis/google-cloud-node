@@ -92,7 +92,7 @@ function getErrorReportURL(projectId, key) {
  */
 RequestHandler.prototype.sendError = function(errorMessage, userCb) {
   var self = this;
-  var cb = isFunction(userCb) ? userCb : function() {};
+  var cb = isFunction(userCb) ? userCb: function() {};
   if (self._config.getShouldReportErrorsToAPI()) {
     self._config.getProjectId(function(err, id) {
       if (err) {

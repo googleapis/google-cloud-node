@@ -112,13 +112,13 @@ function makeHapiPlugin(client, config) {
     }
   }
 
-  var hapiPlugin = {register : hapiRegisterFunction};
+  var hapiPlugin = {register: hapiRegisterFunction};
   var version = (isObject(config) && config.getVersion()) ?
-    config.getVersion() : '0.0.0';
+    config.getVersion(): '0.0.0';
 
   hapiPlugin.register.attributes = {
-    name : '@google/cloud-errors',
-    version : version
+    name: '@google/cloud-errors',
+    version: version
   };
 
   return hapiPlugin;

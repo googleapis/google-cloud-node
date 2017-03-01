@@ -78,8 +78,8 @@ function ErrorMessage() {
       responseStatusCode: 0,
       remoteIp: ''
     },
-    user : '',
-    reportLocation : {filePath: '', lineNumber: 0, functionName: ''}
+    user: '',
+    reportLocation: {filePath: '', lineNumber: 0, functionName: ''}
   };
 }
 
@@ -109,8 +109,8 @@ ErrorMessage.prototype.setEventTimeToNow = function() {
  */
 ErrorMessage.prototype.setServiceContext = function(service, version) {
 
-  this.serviceContext.service = isString(service) ? service : 'node';
-  this.serviceContext.version = isString(version) ? version : undefined;
+  this.serviceContext.service = isString(service) ? service: 'node';
+  this.serviceContext.version = isString(version) ? version: undefined;
 
   return this;
 };
@@ -123,7 +123,7 @@ ErrorMessage.prototype.setServiceContext = function(service, version) {
  */
 ErrorMessage.prototype.setMessage = function(message) {
 
-  this.message = isString(message) ? message : '';
+  this.message = isString(message) ? message: '';
 
   return this;
 };
@@ -137,7 +137,7 @@ ErrorMessage.prototype.setMessage = function(message) {
  */
 ErrorMessage.prototype.setHttpMethod = function(method) {
 
-  this.context.httpRequest.method = isString(method) ? method : '';
+  this.context.httpRequest.method = isString(method) ? method: '';
 
   return this;
 };
@@ -150,7 +150,7 @@ ErrorMessage.prototype.setHttpMethod = function(method) {
  */
 ErrorMessage.prototype.setUrl = function(url) {
 
-  this.context.httpRequest.url = isString(url) ? url : '';
+  this.context.httpRequest.url = isString(url) ? url: '';
 
   return this;
 };
@@ -163,7 +163,7 @@ ErrorMessage.prototype.setUrl = function(url) {
  */
 ErrorMessage.prototype.setUserAgent = function(userAgent) {
 
-  this.context.httpRequest.userAgent = isString(userAgent) ? userAgent : '';
+  this.context.httpRequest.userAgent = isString(userAgent) ? userAgent: '';
 
   return this;
 };
@@ -176,7 +176,7 @@ ErrorMessage.prototype.setUserAgent = function(userAgent) {
  */
 ErrorMessage.prototype.setReferrer = function(referrer) {
 
-  this.context.httpRequest.referrer = isString(referrer) ? referrer : '';
+  this.context.httpRequest.referrer = isString(referrer) ? referrer: '';
 
   return this;
 };
@@ -190,7 +190,7 @@ ErrorMessage.prototype.setReferrer = function(referrer) {
 ErrorMessage.prototype.setResponseStatusCode = function(responseStatusCode) {
 
   this.context.httpRequest.responseStatusCode =
-      isNumber(responseStatusCode) ? responseStatusCode : 0;
+      isNumber(responseStatusCode) ? responseStatusCode: 0;
 
   return this;
 };
@@ -203,7 +203,7 @@ ErrorMessage.prototype.setResponseStatusCode = function(responseStatusCode) {
  */
 ErrorMessage.prototype.setRemoteIp = function(remoteIp) {
 
-  this.context.httpRequest.remoteIp = isString(remoteIp) ? remoteIp : '';
+  this.context.httpRequest.remoteIp = isString(remoteIp) ? remoteIp: '';
 
   return this;
 };
@@ -216,7 +216,7 @@ ErrorMessage.prototype.setRemoteIp = function(remoteIp) {
  */
 ErrorMessage.prototype.setUser = function(user) {
 
-  this.context.user = isString(user) ? user : '';
+  this.context.user = isString(user) ? user: '';
 
   return this;
 };
@@ -229,7 +229,7 @@ ErrorMessage.prototype.setUser = function(user) {
  */
 ErrorMessage.prototype.setFilePath = function(filePath) {
 
-  this.context.reportLocation.filePath = isString(filePath) ? filePath : '';
+  this.context.reportLocation.filePath = isString(filePath) ? filePath: '';
 
   return this;
 };
@@ -243,7 +243,7 @@ ErrorMessage.prototype.setFilePath = function(filePath) {
 ErrorMessage.prototype.setLineNumber = function(lineNumber) {
 
   this.context.reportLocation.lineNumber =
-      isNumber(lineNumber) ? lineNumber : 0;
+      isNumber(lineNumber) ? lineNumber: 0;
 
   return this;
 };
@@ -257,7 +257,7 @@ ErrorMessage.prototype.setLineNumber = function(lineNumber) {
 ErrorMessage.prototype.setFunctionName = function(functionName) {
 
   this.context.reportLocation.functionName =
-      isString(functionName) ? functionName : '';
+      isString(functionName) ? functionName: '';
 
   return this;
 };

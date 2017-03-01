@@ -57,7 +57,7 @@ function RequestInformationContainer() {
  */
 RequestInformationContainer.prototype.setUrl = function(url) {
 
-  this.url = isString(url) ? url : '';
+  this.url = isString(url) ? url: '';
 
   return this;
 };
@@ -70,7 +70,7 @@ RequestInformationContainer.prototype.setUrl = function(url) {
  */
 RequestInformationContainer.prototype.setMethod = function(method) {
 
-  this.method = isString(method) ? method : '';
+  this.method = isString(method) ? method: '';
 
   return this;
 };
@@ -83,7 +83,7 @@ RequestInformationContainer.prototype.setMethod = function(method) {
  */
 RequestInformationContainer.prototype.setReferrer = function(referrer) {
 
-  this.referrer = isString(referrer) ? referrer : '';
+  this.referrer = isString(referrer) ? referrer: '';
 
   return this;
 };
@@ -96,7 +96,7 @@ RequestInformationContainer.prototype.setReferrer = function(referrer) {
  */
 RequestInformationContainer.prototype.setUserAgent = function(userAgent) {
 
-  this.userAgent = isString(userAgent) ? userAgent : '';
+  this.userAgent = isString(userAgent) ? userAgent: '';
 
   return this;
 };
@@ -109,7 +109,7 @@ RequestInformationContainer.prototype.setUserAgent = function(userAgent) {
  */
 RequestInformationContainer.prototype.setRemoteAddress = function(remoteIp) {
 
-  this.remoteAddress = isString(remoteIp) ? remoteIp : '';
+  this.remoteAddress = isString(remoteIp) ? remoteIp: '';
 
   return this;
 };
@@ -122,7 +122,7 @@ RequestInformationContainer.prototype.setRemoteAddress = function(remoteIp) {
  */
 RequestInformationContainer.prototype.setStatusCode = function(statusCode) {
 
-  this.statusCode = isNumber(statusCode) ? statusCode : 0;
+  this.statusCode = isNumber(statusCode) ? statusCode: 0;
 
   return this;
 };
