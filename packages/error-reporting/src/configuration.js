@@ -222,10 +222,10 @@ Configuration.prototype._checkLocalServiceContext = function() {
 
   if (env.FUNCTION_NAME) {
     service = env.FUNCTION_NAME;
-  } else if (env.GAE_SERVICE){
+  } else if (env.GAE_SERVICE) {
     service = env.GAE_SERVICE;
     version = env.GAE_VERSION;
-  } else if (env.GAE_MODULE_NAME){
+  } else if (env.GAE_MODULE_NAME) {
     service = env.GAE_MODULE_NAME;
     version = env.GAE_MODULE_VERSION;
   }
@@ -407,7 +407,7 @@ Configuration.prototype.getProjectId = function(cb) {
     });
   } else {
     utils.getProjectId(function(err, projectId) {
-       if (err) {
+      if (err) {
         self._checkLocalProjectId(cb);
       } else {
         self._projectId = projectId;

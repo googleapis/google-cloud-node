@@ -19,7 +19,8 @@
 var assert = require('assert');
 var omit = require('lodash.omit');
 var extend = require('extend');
-var manualRequestInformationExtractor = require('../../src/request-extractors/manual.js');
+var manualRequestInformationExtractor =
+  require('../../src/request-extractors/manual.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 
 describe('manualRequestInformationExtractor', function() {
@@ -63,7 +64,7 @@ describe('manualRequestInformationExtractor', function() {
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'method')),
         extend({}, FULL_VALID_INPUT, {method: ''}),
         [
-          'Given a full valid input object sans the method property these values',
+          'Given a full valid input object sans the method property values',
           'should be reflected by the output of the request extraction'
         ].join(' ')
      );
@@ -71,13 +72,13 @@ describe('manualRequestInformationExtractor', function() {
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'url')),
         extend({}, FULL_VALID_INPUT, {url: ''}),
         [
-          'Given a full valid input sans the url property these values should be',
+          'Given a valid input sans the url property these values should be',
           'reflected by the output of the request extraction'
         ]
      );
       assert.deepEqual(
         manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'userAgent')),
-        extend({}, FULL_VALID_INPUT, {'userAgent': ''}),
+        extend({}, FULL_VALID_INPUT, {userAgent: ''}),
         [
           'Given a full valid input sans the userAgent property these values',
           'should be reflected by the output of the request extraction'
@@ -100,10 +101,11 @@ describe('manualRequestInformationExtractor', function() {
         ]
      );
       assert.deepEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'remoteAddress')),
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT,
+          'remoteAddress')),
         extend({}, FULL_VALID_INPUT, {remoteAddress: ''}),
         [
-          'Given a full valid input sans the remoteAddress property these values',
+          'Given a valid input sans the remoteAddress property these values',
           'should be reflected by the output of the request extraction'
         ]
      );

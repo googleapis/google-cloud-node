@@ -68,7 +68,7 @@ describe('restifyInterface', function() {
           requestHandlerInstance(req, res, noOp);
         });
       });
-      it('Should have 1 listener on the finish event after handling req/res', function() {
+      it('Should have 1 listener', function() {
         assert.strictEqual(res.listenerCount(FINISH), 1);
       });
       it('Should not throw when emitting the finish event', function() {
@@ -112,7 +112,7 @@ describe('restifyInterface', function() {
           requestHandlerInstance(req, res, noOp);
         });
       });
-      it('Should have 1 listener on the finish event after instantiation', function() {
+      it('Should have 1 listener on the finish event', function() {
         assert.strictEqual(res.listenerCount(FINISH), 1);
       });
       it('Should not throw on emission of the finish event', function() {
@@ -121,7 +121,7 @@ describe('restifyInterface', function() {
         });
       });
       describe('Exercise the uncaughtException event path', function() {
-        it('Should call the sendError function property on the client', function(done) {
+        it('Should call the sendError function property', function(done) {
           client.sendError = function() {
             assert(true, 'sendError should be called');
             done();

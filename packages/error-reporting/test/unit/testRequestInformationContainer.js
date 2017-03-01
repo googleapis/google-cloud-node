@@ -17,15 +17,16 @@
 'use strict';
 
 var assert = require('assert');
-var RequestInformationContainer = require('../../src/classes/request-information-container.js');
+var RequestInformationContainer =
+  require('../../src/classes/request-information-container.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 
 describe('RequestInformationContainer', function() {
   var f = new Fuzzer();
   var cbFn, ric;
   beforeEach(function() {ric = new RequestInformationContainer();});
-  describe('Fuzzing against RequestInformationContainer for negative cases', function() {
-    it('Should return the RequestInformationContainer.url propertym as an empty string',
+  describe('Fuzzing against RequestInformationContainer', function() {
+    it('Should return the property as an empty string',
       function() {
         cbFn = function() {
           assert.deepEqual(ric.url, '');
@@ -51,7 +52,7 @@ describe('RequestInformationContainer', function() {
       };
       f.fuzzFunctionForTypes(ric.setUserAgent, ['string'], cbFn, ric);
     });
-    it('Should return the remoteAddress property as an empty string', function() {
+    it('Should return the property as an empty string', function() {
       cbFn = function(returnValue) {
         assert.deepEqual(ric.remoteAddress, '');
       };
@@ -64,7 +65,7 @@ describe('RequestInformationContainer', function() {
       f.fuzzFunctionForTypes(ric.setStatusCode, ['number'], cbFn, ric);
     });
   });
-  describe('Fuzzing against RequestInformationContainer for positive cases', function() {
+  describe('Fuzzing against for positive cases', function() {
     var VALID_STRING_INPUT = 'valid';
     var VALID_NUMBER_INPUT = 500;
     it('Should assign the value to the url property', function() {

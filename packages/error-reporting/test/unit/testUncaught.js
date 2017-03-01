@@ -60,12 +60,12 @@ describe('Uncaught exception handler behvaiour', function() {
       'reportUncaughtExceptions is false', function() {
         uncaughtSetup({}, getConfig(false));
         assert.strictEqual(process.listeners(UNCAUGHT).length, 0);
-    });
+      });
     it('Should attach a listener to the uncaughtException event if ' +
       'reportUncaughtExceptions is true', function() {
         uncaughtSetup({}, getConfig(true));
         assert.strictEqual(process.listeners(UNCAUGHT).length, 1);
-    });
+      });
   });
   describe('Uncaught exception handling shutdown behaviour', function() {
     before(function() {

@@ -101,7 +101,7 @@ describe('Configuration class', function() {
             {service: 'node', version: undefined});
         });
         it('Should have a version corresponding to package.json', function() {
-            assert.strictEqual(c.getVersion(), version);
+          assert.strictEqual(c.getVersion(), version);
         });
       });
       describe('with ignoreEnvironmentCheck', function() {
@@ -141,7 +141,7 @@ describe('Configuration class', function() {
           });
         });
         describe('exception behaviour', function() {
-          it('Should throw if invalid type for reportUncaughtExceptions', function() {
+          it('Should throw', function() {
             assert.throws(function() {
               new Configuration({reportUncaughtExceptions: 1}, logger);
             });
@@ -151,26 +151,28 @@ describe('Configuration class', function() {
               new Configuration({key: null}, logger);
             });
           });
-          it('Should throw if invalid type for ignoreEnvironmentCheck', function() {
+          it('Should throw if invalid for ignoreEnvironmentCheck', function() {
             assert.throws(function() {
               new Configuration({ignoreEnvironmentCheck: null}, logger);
             });
           });
-          it('Should throw if invalid type for serviceContext.service', function() {
+          it('Should throw if invalid for serviceContext.service', function() {
             assert.throws(function() {
               new Configuration({serviceContext: {service: false}}, logger);
             });
           });
-          it('Should throw if invalid type for serviceContext.version', function() {
+          it('Should throw if invalid for serviceContext.version', function() {
             assert.throws(function() {
               new Configuration({serviceContext: {version: true}}, logger);
             });
           });
-          it('Should not throw given an empty object for serviceContext', function() {
-            assert.doesNotThrow(function() {
-              new Configuration({serviceContext: {}}, logger);
-            });
-          });
+          it('Should not throw given an empty object for serviceContext',
+            function() {
+              assert.doesNotThrow(function() {
+                new Configuration({serviceContext: {}}, logger);
+              });
+            }
+          );
         });
       });
     }

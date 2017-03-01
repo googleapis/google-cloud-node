@@ -41,14 +41,15 @@ function restoreEnv() {
 }
 
 describe('Uncaught Exception exit behaviour', function() {
-   before(function() {
+  before(function() {
     process.removeAllListeners(UNCAUGHT);
     if (!isString(process.env.GCLOUD_PROJECT)) {
       // The gcloud project id (GCLOUD_PROJECT) was not set as an env variable
       this.skip();
       process.exit(1);
     } else if (!isString(process.env.GOOGLE_APPLICATION_CREDENTIALS)) {
-      // The app credentials (GOOGLE_APPLICATION_CREDENTIALS) was not set as an env variable
+      // The app credentials (GOOGLE_APPLICATION_CREDENTIALS)
+      // was not set as an env variable
       this.skip();
       process.exit(1);
     }
@@ -73,7 +74,7 @@ describe('Uncaught Exception exit behaviour', function() {
       });
     this.timeout(2000);
     nock(
-      'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +id
+      'https://clouderrorreporting.googleapis.com/v1beta1/projects/' + id
    ).post('/events:report').once().reply(200, function() {
       done();
       return {success: true};

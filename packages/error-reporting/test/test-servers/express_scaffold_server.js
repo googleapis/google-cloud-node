@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// jscs:disable requireEarlyReturn
 
 'use strict';
 
@@ -33,15 +34,15 @@ app.use(bodyParser.json());
 app.post('/testErrorHandling', function(req, res, next) {
 
 
-    if (has(req.body, 'test') && req.body.test !== true) {
+  if (has(req.body, 'test') && req.body.test !== true) {
 
-      return next(new Error('Error on Express Regular Error POST Route'));
-    } else {
+    return next(new Error('Error on Express Regular Error POST Route'));
+  } else {
 
-      res.send('Success');
-      res.end();
-    }
+    res.send('Success');
+    res.end();
   }
+}
 );
 
 app.get(
@@ -89,37 +90,38 @@ function throwUncaughtError() {
 function reportManualError() {
   console.log('Reporting a manual error..');
   errorHandler.report(
-    new Error('This is a manually reported error'), null, null, function(err, res) {
+    new Error('This is a manually reported error'), null, null,
+      function(err, res) {
 
-      if (err) {
+        if (err) {
 
-        console.log(WARNING_HEADER);
-        console.log('Got an error in sending error information to the API');
-        console.log(err);
-        console.log(EXCLAMATION_LN);
-      } else {
+          console.log(WARNING_HEADER);
+          console.log('Got an error in sending error information to the API');
+          console.log(err);
+          console.log(EXCLAMATION_LN);
+        } else {
 
-        console.log(EXCLAMATION_LN);
-        console.log('Successfully sent error information to the API');
-        console.log(EXCLAMATION_LN);
+          console.log(EXCLAMATION_LN);
+          console.log('Successfully sent error information to the API');
+          console.log(EXCLAMATION_LN);
+        }
+
+        if (process.env.THROW_ON_STARTUP) {
+          throwUncaughtError();
+        }
       }
-
-      if (process.env.THROW_ON_STARTUP) {
-        throwUncaughtError();
-      }
-    }
- );
+  );
 }
 console.log('reporting a manual error first');
 errorHandler.report(
     new Error('This is a test'),
     (err, res) => {
-        console.log('reported first manual error');
-        if (err) {
-            console.log('Error was unable to be reported', err);
-        } else {
-            console.log('Error reported!');
-        }
+      console.log('reported first manual error');
+      if (err) {
+        console.log('Error was unable to be reported', err);
+      } else {
+        console.log('Error reported!');
+      }
     }
 );
 

@@ -39,13 +39,13 @@ function sterilizeEnv() {
     delete process.env[key];
   });
 }
-function setEnv(serviceName, serviceVersion, moduleName, moduleVersion, functionName) {
+function setEnv(serviceName, serviceVersion, moduleName, mv, fn) {
   assign(process.env, omitBy({
     GAE_SERVICE: serviceName,
     GAE_VERSION: serviceVersion,
     GAE_MODULE_NAME: moduleName,
-    GAE_MODULE_VERSION: moduleVersion,
-    FUNCTION_NAME: functionName
+    GAE_MODULE_VERSION: mv,
+    FUNCTION_NAME: fn
   }, function(val) {return !isString(val);}));
 }
 function restoreEnv() {
@@ -113,7 +113,7 @@ describe('Testing service configuration', function() {
     }
  );
   it(
-    'A Configuration uses the service name and version in the given config if ' +
+    'A Configuration uses the service name and version in the given config' +
     'they were both specified and both the GAE_SERVICE and FUNCTION_NAME ' +
     'env vars are set',
     function() {
@@ -147,7 +147,7 @@ describe('Testing service configuration', function() {
     }
  );
   it(
-    'A Configuration uses the service name and version in the given config if ' +
+    'A Configuration uses the service name and version in the given config ' +
     'they were both specified and only the GAE_SERVICE env var is set',
     function() {
       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
@@ -179,8 +179,8 @@ describe('Testing service configuration', function() {
     }
  );
   it(
-    'A Configuration uses the service name and version in the given config if ' +
-    'they were both specified and only the FUNCTION_NAME env var is set',
+    'A Configuration uses the service name and version in the given config ' +
+    'if they were both specified and only the FUNCTION_NAME env var is set',
     function() {
       setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
       var c = new Configuration({

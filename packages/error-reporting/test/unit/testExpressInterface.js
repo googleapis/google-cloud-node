@@ -83,7 +83,7 @@ describe('expressInterface', function() {
           sendError: sendError
         };
         var handler = expressInterface(client, stubbedConfig);
-        handler(testError, null, null, function(){return;});
+        handler(testError, null, null, function() {return;});
       });
     });
   });

@@ -69,11 +69,11 @@ describe('Hapi interface', function() {
   describe('hapiRegisterFunction behaviour', function() {
     var fakeServer;
     beforeEach(function() {fakeServer = new EventEmitter();});
-    it('Should call sendError when the request-error event is emitted', function() {
+    it('Should call fn when the request-error event is emitted', function() {
       var fakeClient = {
         sendError: function(errMsg) {
           assert(errMsg instanceof ErrorMessage,
-            'The value given to sendError should be an instance of Error message');
+            'should be an instance of Error message');
         }
       };
       var plugin = hapiInterface(fakeClient, {
@@ -93,7 +93,8 @@ describe('Hapi interface', function() {
   });
   describe('Behaviour around the request/response lifecycle', function() {
     var EVENT = 'onPreResponse';
-    var fakeServer, config, plugin, fakeClient = {sendError: function() {}};
+    var fakeClient = {sendError: function() {}};
+    var fakeServer, config, plugin;
     before(function() {
       config = new Configuration({
         projectId: 'xyz',
@@ -112,7 +113,7 @@ describe('Hapi interface', function() {
     afterEach(function() {
       fakeServer.removeAllListeners();
     });
-    it('Should call continue when a boom preResponse is emitted', function(done) {
+    it('Should call continue when a boom is emitted', function(done) {
       plugin.register(fakeServer, null, function() {});
       fakeServer.emit(EVENT, {response: {isBoom: true}},
         {
@@ -123,7 +124,7 @@ describe('Hapi interface', function() {
         }
      );
     });
-    it('Should call sendError when a boom response is received', function(done) {
+    it('Should call sendError when a boom is received', function(done) {
       var fakeClient = {
         sendError: function(err) {
           assert(err instanceof ErrorMessage);
@@ -132,7 +133,7 @@ describe('Hapi interface', function() {
       };
       var plugin = hapiInterface(fakeClient, config);
       plugin.register(fakeServer, null, function() {});
-      fakeServer.emit('onPreResponse', {response:{isBoom: true}});
+      fakeServer.emit('onPreResponse', {response: {isBoom: true}});
     });
     it('Should call next when completing a request', function(done) {
       plugin.register(fakeServer, null, function(err) {

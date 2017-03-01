@@ -148,8 +148,8 @@ RequestHandler.prototype.sendError = function(errorMessage, userCb) {
  *  invoked once the transaction has completed
  * @param {Error|Null} err - The error, if applicable, generated during the
  *  transaction
- * @param {Object|Undefined|Null} response - The response, if applicable, received
- *  during the transaction
+ * @param {Object|Undefined|Null} response - The response, if applicable,
+ *  received during the transaction
  * @param {Any} body - The response body if applicable
  */
 

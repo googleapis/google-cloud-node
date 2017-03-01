@@ -71,9 +71,9 @@ describe('Testing use of runtime configurations', function() {
         access_token: 'goodbye',
         expiry_date: new Date(9999, 1, 1)
       });
-      var agent = new Errors(config);
-      agent.report(new Error('a b c'));
-    });
+    var agent = new Errors(config);
+    agent.report(new Error('a b c'));
+  });
   describe(
     'use of the credentials field of the config object',
     function() {
@@ -84,7 +84,7 @@ describe('Testing use of runtime configurations', function() {
         delete process.env.GCLOUD_PROJECT;
         nock.cleanAll();
       });
-      it('Should use the credentials field of the config object', function(done) {
+      it('Should use the credentials field of the object', function(done) {
         var config = {
           credentials: require('../fixtures/gcloud-credentials.json'),
           reportUncaughtExceptions: false
@@ -99,9 +99,12 @@ describe('Testing use of runtime configurations', function() {
           nock.enableNetConnect('localhost');
           var scope = nock('https://accounts.google.com/o/oauth2')
             .intercept('/token', 'POST', function(body) {
-              assert.strictEqual(body.client_id, config.credentials.client_id);
-              assert.strictEqual(body.client_secret, config.credentials.client_secret);
-              assert.strictEqual(body.refresh_token, config.credentials.refresh_token);
+              assert.strictEqual(body.client_id,
+                config.credentials.client_id);
+              assert.strictEqual(body.client_secret,
+                config.credentials.client_secret);
+              assert.strictEqual(body.refresh_token,
+                config.credentials.refresh_token);
               return true;
             }).reply(200, {
               refresh_token: 'hello',
@@ -109,7 +112,7 @@ describe('Testing use of runtime configurations', function() {
               expiry_date: new Date(9999, 1, 1)
             });
 
-          // Since we have to get an auth token, this always gets intercepted second
+          // Since we have to get an auth token -- this gets intercepted second
           nock('https://clouderrorreporting.googleapis.com/v1beta1/projects/0')
             .post('/events:report', function() {
               assert(scope.isDone());
@@ -156,8 +159,10 @@ describe('Testing use of runtime configurations', function() {
       var scope = nock('https://accounts.google.com/o/oauth2')
         .intercept('/token', 'POST', function(body) {
           assert.strictEqual(body.client_id, correctCredentials.client_id);
-          assert.strictEqual(body.client_secret, correctCredentials.client_secret);
-          assert.strictEqual(body.refresh_token, correctCredentials.refresh_token);
+          assert.strictEqual(body.client_secret,
+            correctCredentials.client_secret);
+          assert.strictEqual(body.refresh_token,
+            correctCredentials.refresh_token);
           return true;
         }).reply(200, {
           refresh_token: 'hello',

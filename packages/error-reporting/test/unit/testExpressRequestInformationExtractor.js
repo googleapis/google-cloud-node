@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var expressRequestInformationExtractor = require('../../src/request-extractors/express.js');
-
+var expressRequestInformationExtractor =
+  require('../../src/request-extractors/express.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 var extend = require('extend');
 
@@ -53,7 +53,7 @@ describe('Behaviour under varying input',
         }
       };
       var FULL_RES_DERIVATION_VALUE = {
-        'statusCode': 200
+        statusCode: 200
       };
       var FULL_REQ_EXPECTED_VALUE = {
         method: 'STUB_METHOD',
@@ -154,4 +154,4 @@ describe('Behaviour under varying input',
      );
     }
  );
-});
+  });

@@ -27,6 +27,7 @@ var isString = is.string;
 var isEmpty = is.empty;
 var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
+const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
 
 
 describe('Behvaiour acceptance testing', function() {
@@ -34,7 +35,7 @@ describe('Behvaiour acceptance testing', function() {
     // Before starting the suite make sure we have the proper resources
     if (!isString(process.env.GCLOUD_PROJECT)) {
       console.error(
-        'The gcloud project id (GCLOUD_PROJECT) was not set as an env variable');
+        'The gcloud project id (GCLOUD_PROJECT) was not set in the env');
       this.skip();
     } else if (!isString(process.env.STUBBED_API_KEY)) {
       console.error(
@@ -42,19 +43,19 @@ describe('Behvaiour acceptance testing', function() {
       this.skip();
     } else if (!isString(process.env.STUBBED_PROJECT_NUM)) {
       console.error(
-        'The project number (STUBBED_PROJECT_NUM) was not set as an env variable');
+        'The project number (STUBBED_PROJECT_NUM) was not set in the env');
       this.skip();
     } else if (process.env.NODE_ENV !== 'production') {
       console.error(
-        'The NODE_ENV is not set to production as an env variable. Please set ' +
-        'NODE_ENV to production');
+        'The NODE_ENV is not set to production as an env variable. Please ' +
+        'set NODE_ENV to production');
       this.skip();
     }
     // In case we are running after unit mocks which were not destroyed properly
     nock.cleanAll();
   });
   describe('Request/Response lifecycle mocking', function() {
-    var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
+    var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError);
     var fakeService, client, logger;
     beforeEach(function() {
@@ -90,7 +91,8 @@ describe('Behvaiour acceptance testing', function() {
         var intendedTries = 5;
         fakeService.reply(429, function() {
           tries += 1;
-          console.log('Mock Server Received Request:', tries+'/' +intendedTries);
+          console.log('Mock Server Received Request:', tries + '/' +
+            intendedTries);
           return {error: 'Please try again later'};
         });
         client.sendError(errorMessage, function(err, response, body) {
@@ -100,19 +102,21 @@ describe('Behvaiour acceptance testing', function() {
       });
     });
     describe('Using an API key', function() {
-      it('Should provide the key as a query string on outgoing requests', function(done) {
-        var key = process.env.STUBBED_API_KEY;
-        var client = new RequestHandler(new Configuration(
-          {key: key, ignoreEnvironmentCheck: true},
-          createLogger({logLevel: 5})));
-        fakeService.query({key: key}).reply(200, function(uri) {
-          assert(uri.indexOf('key=' +key) > -1);
-          return {};
-        });
-        client.sendError(errorMessage, function() {
-          done();
-        });
-      });
+      it('Should provide the key as a query string on outgoing requests',
+        function(done) {
+          var key = process.env.STUBBED_API_KEY;
+          var client = new RequestHandler(new Configuration(
+            {key: key, ignoreEnvironmentCheck: true},
+            createLogger({logLevel: 5})));
+          fakeService.query({key: key}).reply(200, function(uri) {
+            assert(uri.indexOf('key=' + key) > -1);
+            return {};
+          });
+          client.sendError(errorMessage, function() {
+            done();
+          });
+        }
+      );
     });
     describe('Callback-less invocation', function() {
       it('Should still execute the request', function(done) {
@@ -124,7 +128,7 @@ describe('Behvaiour acceptance testing', function() {
     });
   });
   describe('System-live integration testing', function() {
-    var sampleError = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
+    var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
     var oldEnv = {
       GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
@@ -194,8 +198,10 @@ describe('Behvaiour acceptance testing', function() {
           before(function() {
             sterilizeEnv();
             logger = createLogger({logLevel: 5});
-            cfg = new Configuration({projectId: parseInt(oldEnv.STUBBED_PROJECT_NUM),
-              ignoreEnvironmentCheck: true}, logger);
+            cfg = new Configuration({
+              projectId: parseInt(oldEnv.STUBBED_PROJECT_NUM),
+              ignoreEnvironmentCheck: true
+            }, logger);
           });
           after(restoreEnv);
           it('Should not throw on initialization', function(done) {
@@ -241,9 +247,9 @@ describe('Behvaiour acceptance testing', function() {
       describe('With a configuration to not report errors', function() {
         var ERROR_STRING = [
           'Stackdriver error reporting client has not been configured to send',
-          'errors, please check the NODE_ENV environment variable and make sure',
-          'it is set to "production" or set the ignoreEnvironmentCheck property',
-          'to  true in the runtime configuration object'
+          'errors, please check the NODE_ENV environment variable and make',
+          'sure it is set to "production" or set the ignoreEnvironmentCheck',
+          'property to  true in the runtime configuration object'
         ].join(' ');
         var logger, client;
         before(function() {
@@ -267,10 +273,11 @@ describe('Behvaiour acceptance testing', function() {
       });
       describe('An invalid env configuration', function() {
         var ERROR_STRING = [
-          'Unable to find the project Id for communication with the Stackdriver',
-          'Error Reporting service. This app will be unable to send errors to',
-          'the reporting service unless a valid project Id is supplied via',
-          'runtime configuration or the GCLOUD_PROJECT environmental variable.'
+          'Unable to find the project Id for communication with the',
+          'Stackdriver Error Reporting service. This app will be unable to',
+          'send errors to the reporting service unless a valid project Id',
+          'is supplied via runtime configuration or the GCLOUD_PROJECT',
+          'environmental variable.'
         ].join(' ');
         var logger, client;
         before(function() {
@@ -294,7 +301,7 @@ describe('Behvaiour acceptance testing', function() {
       });
     });
     describe('Success behaviour', function() {
-      var er = new Error('_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__');
+      var er = new Error(ERR_TOKEN);
       var em = new ErrorMessage().setMessage(er.stack);
       describe('Given a valid project id', function() {
         var logger, client, cfg;
