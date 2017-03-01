@@ -258,7 +258,7 @@ Table.encodeValue_ = function(value) {
  * @param {array} rows
  * @return {array} Fields using their matching names from the table's schema.
  */
-Table.mergeSchemaWithRows_ = function(schema, rows) {
+Table.mergeSchemaWithRows_ = function(BigQuery, schema, rows) {
   return arrify(rows).map(mergeSchema).map(flattenRows);
 
   function mergeSchema(row) {
@@ -303,11 +303,23 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
         break;
       }
       case 'RECORD': {
-        value = Table.mergeSchemaWithRows_(schemaField, value).pop();
+        value = Table.mergeSchemaWithRows_(BigQuery, schemaField, value).pop();
+        break;
+      }
+      case 'DATE': {
+        value = BigQuery.date(value);
+        break;
+      }
+      case 'DATETIME': {
+        value = BigQuery.datetime(value);
+        break;
+      }
+      case 'TIME': {
+        value = BigQuery.time(value);
         break;
       }
       case 'TIMESTAMP': {
-        value = new Date(value * 1000);
+        value = BigQuery.timestamp(new Date(value * 1000));
         break;
       }
     }
@@ -780,7 +792,11 @@ Table.prototype.getRows = function(options, callback) {
       return;
     }
 
-    rows = Table.mergeSchemaWithRows_(self.metadata.schema, rows || []);
+    rows = Table.mergeSchemaWithRows_(
+      self.bigQuery,
+      self.metadata.schema,
+      rows || []
+    );
 
     callback(null, rows, nextQuery, resp);
   }
