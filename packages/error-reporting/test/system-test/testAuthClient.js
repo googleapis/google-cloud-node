@@ -75,7 +75,6 @@ describe('Behvaiour acceptance testing', function() {
         this.timeout(5000);
         client.sendError({}, function(err, response, body) {
           assert(err instanceof Error);
-          console.log('here is the message', err.message.toLowerCase(), body, response.statusCode);
           assert.strictEqual(err.message.toLowerCase(),
             'message cannot be empty.');
           assert(isObject(response));

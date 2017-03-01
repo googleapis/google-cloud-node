@@ -127,7 +127,6 @@ class RequestHandler extends common.Service {
           ].join(' '));
           return;
         }
-        console.log('SENDING', JSON.stringify(errorMessage, null, 2))
         this.request({
           uri: RequestHandler.getErrorReportURL(id, this._config.getKey()),
           method: 'POST',
