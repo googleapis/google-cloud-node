@@ -300,8 +300,8 @@ describe('Document', function() {
       };
 
       document.annotate({
-        entities: true,
-        syntax: true
+        extractEntities: true,
+        extractSyntax: true
       }, assert.ifError);
     });
 
@@ -475,8 +475,8 @@ describe('Document', function() {
         };
 
         document.annotate({
-          entities: true,
-          sentiment: true
+          extractEntities: true,
+          extractDocumentSentiment: true
         }, function(err, annotation) {
           assert.ifError(err);
 
