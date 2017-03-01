@@ -72,13 +72,13 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
   }, opts);
 
   var googleApiClient = [
-    'gl-node/' + process.versions.node,
-    CODE_GEN_NAME_VERSION
+    'gl-node/' + process.versions.node
   ];
   if (opts.libName && opts.libVersion) {
     googleApiClient.push(opts.libName + '/' + opts.libVersion);
   }
   googleApiClient.push(
+    CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
     'grpc/' + gaxGrpc.grpcVersion
   );
