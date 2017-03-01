@@ -39,6 +39,7 @@
     "tape": "^4.5.1"
   },
   "dependencies": {
+    "@google-cloud/common": "^0.12.0",
     "@google/cloud-diagnostics-common": "0.3.0",
     "extend": "^3.0.0",
     "is": "^3.2.0",

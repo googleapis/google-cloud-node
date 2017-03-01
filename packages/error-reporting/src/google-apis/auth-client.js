@@ -16,7 +16,8 @@
 /*jshint unused:false*/
 
 'use strict';
-var commonDiag = require('@google/cloud-diagnostics-common');
+const common = require('@google-cloud/common');
+const pkg = require('../../package.json');
 var logger = require('../logger.js');
 var is = require('is');
 var isFunction = is.fn;
@@ -53,84 +54,105 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
  *  address the correct project in the Error Reporting API
  * @property {Object} _logger - the instance-cached logger instance
  */
-function RequestHandler(config, logger) {
-  this._request = commonDiag.utils.authorizedRequestFactory(SCOPES, {
-    keyFile: config.getKeyFilename(),
-    credentials: config.getCredentials()
-  });
-  this._config = config;
-  this._logger = logger;
-}
-
-/**
- * Compute the URL that errors should be reported to given the projectId and
- * optional key.
- * @param {String} projectId - the project id of the application.
- * @param {String|Null} [key] - the API key used to authenticate against the
- *  service in place of application default credentials.
- * @returns {String} computed URL that the errors should be reported to.
- * @private
- */
-function getErrorReportURL(projectId, key) {
-  var url = [API, projectId, 'events:report'].join('/');
-  if (isString(key)) {
-    url += '?key=' + key;
+class RequestHandler extends common.Service {
+  /**
+   * Compute the URL that errors should be reported to given the projectId and
+   * optional key.
+   * @param {String} projectId - the project id of the application.
+   * @param {String|Null} [key] - the API key used to authenticate against the
+   *  service in place of application default credentials.
+   * @returns {String} computed URL that the errors should be reported to.
+   * @static
+   */
+  static getErrorReportURL(projectId, key) {
+    var url = [API, projectId, 'events:report'].join('/');
+    if (isString(key)) {
+      url += '?key=' + key;
+    }
+    return url;
   }
-  return url;
-}
-
-/**
- * Creates a request options object given the value of the error message and
- * will callback to the user supplied callback if given one. If a callback is
- * not given then the request will execute and silently dissipate.
- * @function sendError
- * @param {ErrorMessage} payload - the ErrorMessage instance to JSON.stringify
- *  for submission to the service
- * @param {RequestHandler~requestCallback} [userCb] - function called when the
- *  request has succeeded or failed.
- * @returns {Undefined} - does not return anything
- */
-RequestHandler.prototype.sendError = function(errorMessage, userCb) {
-  var self = this;
-  var cb = isFunction(userCb) ? userCb: function() {};
-  if (self._config.getShouldReportErrorsToAPI()) {
-    self._config.getProjectId(function(err, id) {
-      if (err) {
-        setImmediate(function() { cb(err, null, null); });
-        self._logger.error([
-          'Unable to retrieve a project id from the Google Metadata Service or',
-          'the local environment. Client will not be able to communicate with',
-          'the Stackdriver Error Reporting API without a valid project id',
-          'Please make sure to supply a project id either through the',
-          'GCLOUD_PROJECT environmental variable or through the configuration',
-          'object given to this library on startup if not running on Google',
-          'Cloud Platform.'
-        ].join(' '));
-        return;
-      }
-      self._request({
-        url: getErrorReportURL(id, self._config.getKey()),
-        method: 'POST',
-        json: errorMessage
-      }, function(err, response, body) {
+  /**
+   * No-operation stub function for user callback substitution
+   * @param {Error|Null} err - the error
+   * @param {Object|Null} response - the response object
+   * @param {Any} body - the response body
+   * @returns {Null}
+   * @static
+   */
+  static noOp(err, response, body) {
+    return null;
+  }
+  /** 
+   * @constructor
+   * @param {Configuration} config - an instance of the Configuration class
+   * @param {Logger} logger - an instance of logger
+   */
+  constructor(config, logger) {
+    super({
+      packageJson: pkg,
+      projectIdRequired: false,
+      baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1/',
+      scopes: SCOPES
+    }, config);
+    this._config = config;
+    this._logger = logger;
+  }
+  /**
+   * Creates a request options object given the value of the error message and
+   * will callback to the user supplied callback if given one. If a callback is
+   * not given then the request will execute and silently dissipate.
+   * @function sendError
+   * @param {ErrorMessage} payload - the ErrorMessage instance to JSON.stringify
+   *  for submission to the service
+   * @param {RequestHandler~requestCallback} [userCb] - function called when the
+   *  request has succeeded or failed.
+   * @returns {Undefined} - does not return anything
+   * @instance
+   */
+  sendError(errorMessage, userCb) {
+    var self = this;
+    var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
+    if (this._config.getShouldReportErrorsToAPI()) {
+      this._config.getProjectId((err, id) => {
         if (err) {
-          self._logger.error([
-            'Encountered an error while attempting to transmit an error to the',
-            'Stackdriver Error Reporting API.'
-          ].join(' '), err);
+          setImmediate(function() { cb(err, null, null); });
+          this._logger.error([
+            'Unable to retrieve a project id from the Google Metadata Service or',
+            'the local environment. Client will not be able to communicate with',
+            'the Stackdriver Error Reporting API without a valid project id',
+            'Please make sure to supply a project id either through the',
+            'GCLOUD_PROJECT environmental variable or through the configuration',
+            'object given to this library on startup if not running on Google',
+            'Cloud Platform.'
+          ].join(' '));
+          return;
         }
-        cb(err, response, body);
+        console.log('SENDING', JSON.stringify(errorMessage, null, 2))
+        this.request({
+          uri: RequestHandler.getErrorReportURL(id, this._config.getKey()),
+          method: 'POST',
+          json: errorMessage
+        }, (err, body, response) => {
+          if (err) {
+            this._logger.error([
+              'Encountered an error while attempting to transmit an error to the',
+              'Stackdriver Error Reporting API.'
+            ].join(' '), err);
+          }
+          cb(err, response, body);
+        });
       });
-    });
-  } else {
-    cb(new Error([
-      'Stackdriver error reporting client has not been configured to send',
-      'errors, please check the NODE_ENV environment variable and make sure it',
-      'is set to "production" or set the ignoreEnvironmentCheck property to ',
-      'true in the runtime configuration object'
-    ].join(' ')), null, null);
+    } else {
+      cb(new Error([
+        'Stackdriver error reporting client has not been configured to send',
+        'errors, please check the NODE_ENV environment variable and make sure it',
+        'is set to "production" or set the ignoreEnvironmentCheck property to ',
+        'true in the runtime configuration object'
+      ].join(' ')), null, null);
+    }
   }
-};
+}
+
 /**
  * The requestCallback callback function is called on completion of an API
  * request whether that completion is success or failure. The request can either
