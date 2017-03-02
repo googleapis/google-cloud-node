@@ -734,6 +734,28 @@ describe('Vision', function() {
       });
     });
 
+    it('should return the raw annotation for unknown types', function(done) {
+      var anno = { a: 'b', c: 'd' };
+
+      var annotations = [
+        {
+          faceAnnotations: anno
+        }
+      ];
+
+      Vision.formatFaceAnnotation_ = null;
+
+      vision.annotate = function(config, callback) {
+        callback(null, annotations);
+      };
+
+      vision.detect(IMAGE, 'faces', function(err, detections) {
+        assert.ifError(err);
+        assert.strictEqual(detections, anno);
+        done();
+      });
+    });
+
     it('should return an error from annotate()', function(done) {
       var error = new Error('Error.');
       var apiResponse = {};
