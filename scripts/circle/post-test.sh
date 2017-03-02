@@ -32,15 +32,9 @@ set +e # allows `git` commands during prepare-ghpages to fail
 
 npm run prepare-ghpages
 
-git push origin master --follow-tags
-
 cd gh-pages
 git push origin master --follow-tags
 
-set -e
-
 cd ..
-
 npm run remove-ghpages
-
-set +e
+git push origin master --follow-tags
