@@ -102,7 +102,7 @@ var Transaction = require('./transaction.js');
  * // can be used to model relationships. The simplest key has a string `kind`
  * // value, and either a numeric `id` value, or a string `name` value.
  * //
- * // A single record can be retrieved with {module:datastore/key} and
+ * // A single record can be retrieved with {module:datastore#key} and
  * // {module:datastore#get}.
  * //-
  * var key = datastore.key(['Company', 'Google']);
