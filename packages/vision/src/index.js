@@ -535,7 +535,11 @@ Vision.prototype.detect = function(images, options, callback) {
             textAnnotations: Vision.formatEntityAnnotation_
           };
 
-          return formatMethodMap[type](annotation, options);
+          var formatMethod = formatMethodMap[type] || function(annotation) {
+            return annotation;
+          };
+
+          return formatMethod(annotation, options);
         };
       }
 
