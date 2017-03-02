@@ -18,16 +18,16 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
-* [Cloud DNS](#google-cloud-dns-alpha) (Alpha)
-* [Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
-* [Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
-* [Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
+* [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
+* [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Cloud Natural Language](#cloud-natural-language-alpha) (Alpha)
+* [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
+* [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
-* [Cloud Speech](#google-cloud-speech-alpha) (Alpha)
-* [Cloud Translation API](#google-cloud-translation-api-alpha) (Alpha)
-* [Cloud Vision](#google-cloud-vision-alpha) (Alpha)
-* [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
+* [Cloud Speech](#cloud-speech-alpha) (Alpha)
+* [Cloud Translation API](#cloud-translation-api-alpha) (Alpha)
+* [Cloud Vision](#cloud-vision-alpha) (Alpha)
+* [Google Compute Engine](#compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
 
@@ -77,18 +77,18 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Cloud Bigtable API
   * Cloud Bigtable Admin API
   * Cloud Bigtable Table Admin API
-  * Cloud Datastore API
-  * Cloud DNS API
-  * Cloud Natural Language API
-  * Cloud Pub/Sub API
-  * Cloud Resource Manager API
   * Cloud Spanner API
-  * Cloud Speech API
-  * Cloud Storage
-  * Cloud Storage JSON API
-  * Cloud Translation API
-  * Cloud Vision API
-  * Compute Engine API
+  * Google Cloud Datastore API
+  * Google Cloud DNS API
+  * Google Cloud Natural Language API
+  * Google Cloud Pub/Sub API
+  * Google Cloud Resource Manager API
+  * Google Cloud Speech API
+  * Google Cloud Storage
+  * Google Cloud Storage JSON API
+  * Google Cloud Translation API
+  * Google Cloud Vision API
+  * Google Compute Engine API
   * Prediction API
   * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
