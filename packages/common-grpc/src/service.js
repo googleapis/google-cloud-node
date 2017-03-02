@@ -496,24 +496,64 @@ GrpcService.decodeValue_ = function(value) {
 };
 
 /**
+ * A class that can be used tp convert an object to a struct. Optionally this
+ * class can be used to erase/throw on circular references during conversion.
+ *
+ * @private
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.removeCircular - Remove circular references in the
+ * object with a placeholder string.
+ * @param {boolean} options.stringify - Stringify un-recognized types.
+ */
+function ObjectToStruct(options) {
+  options = options || {};
+
+  this.seenObjects = new Set();
+  this.removeCircular = options.removeCircular;
+  this.stringify = options.stringify;
+}
+
+ObjectToStruct.prototype.convert = function(obj) {
+  var convertedObject = {
+    fields: {}
+  };
+
+  this.seenObjects.add(obj);
+
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      var value = obj[prop];
+
+      if (is.undefined(value)) {
+        continue;
+      }
+
+      convertedObject.fields[prop] = this.encodeValue(value);
+    }
+  }
+
+  this.seenObjects.delete(obj);
+
+  return convertedObject;
+};
+
+/**
  * Convert a raw value to a type-denoted protobuf message-friendly object.
  *
  * @private
  *
  * @param {*} value - The input value.
- * @param {object=} options - Configuration object.
- * @param {boolean} options.stringify - Stringify un-recognized types.
  * @return {*} - The encoded value.
  *
  * @example
- * GrpcService.encodeValue_('Hi');
+ * objectToStruct.convert('Hi');
  * // {
  * //   stringValue: 'Hello!'
  * // }
  */
-GrpcService.encodeValue_ = function(value, options) {
-  options = options || {};
-
+ObjectToStruct.prototype.encodeValue = function(value) {
+  var self = this;
   var convertedValue;
 
   if (is.null(value)) {
@@ -537,19 +577,30 @@ GrpcService.encodeValue_ = function(value, options) {
       blobValue: value
     };
   } else if (is.object(value)) {
-    convertedValue = {
-      structValue: GrpcService.objToStruct_(value, options)
-    };
+    if (this.seenObjects.has(value)) {
+      // Circular reference.
+      if (!this.removeCircular) {
+        throw new Error(
+            'Object has a circular reference – cannot encode as a struct');
+      }
+      convertedValue = {
+        stringValue: '[Circular]'
+      };
+    } else {
+      convertedValue = {
+        structValue: this.convert(value)
+      };
+    }
   } else if (is.array(value)) {
     convertedValue = {
       listValue: {
         values: value.map(function(value) {
-          return GrpcService.encodeValue_(value, options);
+          return self.encodeValue(value);
         })
       }
     };
   } else {
-    if (!options.stringify) {
+    if (!this.stringify) {
       throw new Error('Value of type ' + typeof value + ' not recognized.');
     }
 
@@ -557,7 +608,6 @@ GrpcService.encodeValue_ = function(value, options) {
       stringValue: String(value)
     };
   }
-
   return convertedValue;
 };
 
@@ -652,6 +702,8 @@ GrpcService.shouldRetryRequest_ = function(response) {
  *
  * @param {object} obj - An object to convert.
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.removeCircular - Remove circular references in the
+ * object with a placeholder string.
  * @param {boolean} options.stringify - Stringify un-recognized types.
  * @return {array} - The converted object.
  *
@@ -696,25 +748,9 @@ GrpcService.shouldRetryRequest_ = function(response) {
  * // }
  */
 GrpcService.objToStruct_ = function(obj, options) {
-  options = options || {};
-
-  var convertedObject = {
-    fields: {}
-  };
-
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      var value = obj[prop];
-
-      if (is.undefined(value)) {
-        continue;
-      }
-
-      convertedObject.fields[prop] = GrpcService.encodeValue_(value, options);
-    }
-  }
-
-  return convertedObject;
+  console.log('common-grpc.Service.objToStruct');
+  var converter = new ObjectToStruct(options || {});
+  return converter.convert(obj);
 };
 
 /**
@@ -851,5 +887,6 @@ GrpcService.prototype.getService_ = function(protoOpts) {
 };
 
 module.exports = GrpcService;
+module.exports.ObjectToStruct = ObjectToStruct;
 module.exports.GRPC_ERROR_CODE_TO_HTTP = GRPC_ERROR_CODE_TO_HTTP;
 module.exports.GRPC_REQUEST_OPTIONS = GRPC_REQUEST_OPTIONS;
