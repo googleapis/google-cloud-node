@@ -18,12 +18,12 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
 * [Cloud DNS](#google-cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
 * [Cloud Pub/Sub](#google-cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#google-cloud-resource-manager-alpha) (Alpha)
+* [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Cloud Speech](#google-cloud-speech-alpha) (Alpha)
 * [Cloud Translation API](#google-cloud-translation-api-alpha) (Alpha)
 * [Cloud Vision](#google-cloud-vision-alpha) (Alpha)
@@ -77,18 +77,18 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Cloud Bigtable API
   * Cloud Bigtable Admin API
   * Cloud Bigtable Table Admin API
-  * Cloud Spanner API
   * Cloud Datastore API
   * Cloud DNS API
   * Cloud Natural Language API
   * Cloud Pub/Sub API
   * Cloud Resource Manager API
+  * Cloud Spanner API
   * Cloud Speech API
   * Cloud Storage
   * Cloud Storage JSON API
   * Cloud Translation API
   * Cloud Vision API
-  * Google Compute Engine API
+  * Compute Engine API
   * Prediction API
   * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
@@ -388,97 +388,6 @@ loggingClient.getEntries(function(err, entries) {
     // `entries` contains all of the entries from the logs in your project.
   }
 });
-```
-
-
-## Cloud Spanner (Alpha)
-
-- [API Documentation][gcloud-spanner-docs]
-- [Official Documentation][cloud-spanner-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var spanner = gcloud.spanner;
-```
-
-#### Using the Cloud Spanner API module
-
-```
-$ npm install --save @google-cloud/spanner
-```
-
-```js
-var spanner = require('@google-cloud/spanner');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var spannerClient = spanner({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var instance = spannerClient.instance('my-instance');
-var database = instance.database('my-database');
-
-// Create a table.
-var schema =
-  'CREATE TABLE Singers (' +
-  '  SingerId INT64 NOT NULL,' +
-  '  FirstName STRING(1024),' +
-  '  LastName STRING(1024),' +
-  '  SingerInfo BYTES(MAX),' +
-  ') PRIMARY KEY(SingerId)';
-
-database.createTable(schema, function(err, table, operation) {
-  if (err) {
-    // Error handling omitted.
-  }
-
-  operation
-    .on('error', function(err) {})
-    .on('complete', function() {
-      // Table created successfully.
-    });
-});
-
-// Insert data into the table.
-var table = database.table('Singers');
-
-table.insert({
-  SingerId: 10,
-  FirstName: 'Eddie',
-  LastName: 'Wilson'
-}, function(err) {
-  if (!err) {
-    // Row inserted successfully.
-  }
-});
-
-// Run a query as a readable object stream.
-database.runStream('SELECT * FROM Singers')
-  .on('error', function(err) {})
-  .on('data', function(row) {
-    // row.toJSON() = {
-    //   SingerId: 10,
-    //   FirstName: 'Eddie',
-    //   LastName: 'Wilson'
-    // }
-  }
-  })
-  .on('end', function() {
-    // All results retrieved.
-  });
 ```
 
 
@@ -802,6 +711,97 @@ var project = resourceClient.project();
 project.getMetadata(function(err, metadata) {
   // `metadata` describes your project.
 });
+```
+
+
+## Cloud Spanner (Alpha)
+
+- [API Documentation][gcloud-spanner-docs]
+- [Official Documentation][cloud-spanner-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var spanner = gcloud.spanner;
+```
+
+#### Using the Cloud Spanner API module
+
+```
+$ npm install --save @google-cloud/spanner
+```
+
+```js
+var spanner = require('@google-cloud/spanner');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var spannerClient = spanner({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var instance = spannerClient.instance('my-instance');
+var database = instance.database('my-database');
+
+// Create a table.
+var schema =
+  'CREATE TABLE Singers (' +
+  '  SingerId INT64 NOT NULL,' +
+  '  FirstName STRING(1024),' +
+  '  LastName STRING(1024),' +
+  '  SingerInfo BYTES(MAX),' +
+  ') PRIMARY KEY(SingerId)';
+
+database.createTable(schema, function(err, table, operation) {
+  if (err) {
+    // Error handling omitted.
+  }
+
+  operation
+    .on('error', function(err) {})
+    .on('complete', function() {
+      // Table created successfully.
+    });
+});
+
+// Insert data into the table.
+var table = database.table('Singers');
+
+table.insert({
+  SingerId: 10,
+  FirstName: 'Eddie',
+  LastName: 'Wilson'
+}, function(err) {
+  if (!err) {
+    // Row inserted successfully.
+  }
+});
+
+// Run a query as a readable object stream.
+database.runStream('SELECT * FROM Singers')
+  .on('error', function(err) {})
+  .on('data', function(row) {
+    // row.toJSON() = {
+    //   SingerId: 10,
+    //   FirstName: 'Eddie',
+    //   LastName: 'Wilson'
+    // }
+  }
+  })
+  .on('end', function() {
+    // All results retrieved.
+  });
 ```
 
 

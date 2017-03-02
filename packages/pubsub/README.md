@@ -67,7 +67,7 @@ If you are not running this client on Google Cloud Platform, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Cloud Pub/Sub API
+  * Google Cloud Pub/Sub API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
