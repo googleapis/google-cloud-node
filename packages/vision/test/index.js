@@ -22,10 +22,8 @@ var deepStrictEqual = require('deep-strict-equal');
 var extend = require('extend');
 var fs = require('fs');
 var GrpcService = require('@google-cloud/common-grpc').Service;
-var nodeutil = require('util');
 var prop = require('propprop');
 var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
 var tmp = require('tmp');
 var util = require('@google-cloud/common').util;
 
@@ -38,17 +36,16 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
+var fakeV1Override;
+function fakeV1() {
+  if (fakeV1Override) {
+    return fakeV1Override.apply(null, arguments);
+  }
+
+  return {
+    imageAnnotatorClient: util.noop
+  };
 }
-
-nodeutil.inherits(FakeService, Service);
-
-var requestOverride = null;
-var fakeRequest = function() {
-  return (requestOverride || util.noop).apply(this, arguments);
-};
 
 describe('Vision', function() {
   var IMAGE = './image.jpg';
@@ -58,29 +55,34 @@ describe('Vision', function() {
   var VisionCached;
   var vision;
 
+  var OPTIONS = {
+    projectId: PROJECT_ID
+  };
+
   before(function() {
     Vision = proxyquire('../', {
       '@google-cloud/common': {
-        Service: FakeService,
         util: fakeUtil
       },
-      request: fakeRequest
+      './v1': fakeV1
     });
 
     VisionCached = extend({}, Vision);
   });
 
   beforeEach(function() {
-    requestOverride = null;
+    fakeV1Override = null;
+
+    vision = new Vision(OPTIONS);
 
     extend(Vision, VisionCached);
-
-    vision = new Vision({
-      projectId: PROJECT_ID
-    });
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
@@ -100,22 +102,25 @@ describe('Vision', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from Service', function() {
-      assert(vision instanceof Service);
+    it('should create a gax api client', function() {
+      var expectedVisionClient = {};
 
-      var calledWith = vision.calledWith_[0];
+      fakeV1Override = function(options) {
+        assert.strictEqual(options, OPTIONS);
 
-      var baseUrl = 'https://vision.googleapis.com/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.strictEqual(calledWith.projectIdRequired, false);
-      assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/cloud-platform'
-      ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
-    });
+        return {
+          imageAnnotatorClient: function(options) {
+            assert.strictEqual(options, OPTIONS);
+            return expectedVisionClient;
+          }
+        };
+      };
 
-    it('should promisify all the things', function() {
-      assert(promisified);
+      var vision = new Vision(OPTIONS);
+
+      assert.deepEqual(vision.api, {
+        Vision: expectedVisionClient
+      });
     });
   });
 
@@ -133,26 +138,16 @@ describe('Vision', function() {
     var REQ = {};
 
     it('should arrify request objects', function(done) {
-      vision.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json.requests[0], REQ);
-        done();
+      vision.api.Vision = {
+        batchAnnotateImages: function(reqOpts) {
+          assert.deepEqual(reqOpts, {
+            requests: [REQ]
+          });
+          done();
+        }
       };
 
       vision.annotate(REQ, assert.ifError);
-    });
-
-    it('should make the correct API request', function(done) {
-      var requests = [REQ, REQ];
-
-      vision.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, 'images:annotate');
-        assert.strictEqual(reqOpts.json.requests, requests);
-
-        done();
-      };
-
-      vision.annotate(requests, assert.ifError);
     });
 
     describe('error', function() {
@@ -160,8 +155,10 @@ describe('Vision', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        vision.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
+        vision.api.Vision = {
+          batchAnnotateImages: function(reqOpts, callback) {
+            callback(error, apiResponse);
+          }
         };
       });
 
@@ -181,8 +178,10 @@ describe('Vision', function() {
       };
 
       beforeEach(function() {
-        vision.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
+        vision.api.Vision = {
+          batchAnnotateImages: function(reqOpts, callback) {
+            callback(null, apiResponse);
+          }
         };
       });
 
@@ -200,12 +199,6 @@ describe('Vision', function() {
   });
 
   describe('detect', function() {
-    var findImages_;
-    var formatFaceAnnotation_;
-    var formatImagePropertiesAnnotation_;
-    var formatEntityAnnotation_;
-    var formatSafeSearchAnnotation_;
-
     var TYPES = [
       'face',
       'label'
@@ -222,28 +215,11 @@ describe('Vision', function() {
       IMAGES[0]
     ];
 
-    before(function() {
-      findImages_ = Vision.findImages_;
-      formatFaceAnnotation_ = Vision.formatFaceAnnotation_;
-      formatImagePropertiesAnnotation_ =
-        Vision.formatImagePropertiesAnnotation_;
-      formatEntityAnnotation_ = Vision.formatEntityAnnotation_;
-      formatSafeSearchAnnotation_ = Vision.formatSafeSearchAnnotation_;
-    });
 
     beforeEach(function() {
       Vision.findImages_ = function(images, callback) {
         callback(null, IMAGES);
       };
-    });
-
-    after(function() {
-      Vision.findImages_ = findImages_;
-      Vision.formatFaceAnnotation_ = formatFaceAnnotation_;
-      Vision.formatImagePropertiesAnnotation_ =
-        formatImagePropertiesAnnotation_;
-      Vision.formatEntityAnnotation_ = formatEntityAnnotation_;
-      Vision.formatSafeSearchAnnotation_ = formatSafeSearchAnnotation_;
     });
 
     it('should find the images', function(done) {
@@ -279,6 +255,12 @@ describe('Vision', function() {
 
     it('should format the correct config', function(done) {
       var typeShortNameToFullName = {
+        crop: 'CROP_HINTS',
+        crops: 'CROP_HINTS',
+
+        doc: 'DOCUMENT_TEXT_DETECTION',
+        document: 'DOCUMENT_TEXT_DETECTION',
+
         face: 'FACE_DETECTION',
         faces: 'FACE_DETECTION',
 
@@ -295,6 +277,8 @@ describe('Vision', function() {
 
         safeSearch: 'SAFE_SEARCH_DETECTION',
 
+        similar: 'WEB_DETECTION',
+
         text: 'TEXT_DETECTION'
       };
 
@@ -305,9 +289,11 @@ describe('Vision', function() {
           assert.deepEqual(config, [
             {
               image: IMAGES[0],
-              features: {
-                type: typeShortNameToFullName[shortName]
-              }
+              features: [
+                {
+                  type: typeShortNameToFullName[shortName]
+                }
+              ]
             }
           ]);
 
@@ -338,9 +324,11 @@ describe('Vision', function() {
         assert.deepEqual(config, [
           {
             image: IMAGES[0],
-            features: {
-              type: 'LABEL_DETECTION'
-            },
+            features: [
+              {
+                type: 'LABEL_DETECTION'
+              }
+            ],
             imageContext: imageContext
           }
         ]);
@@ -361,10 +349,12 @@ describe('Vision', function() {
         assert.deepEqual(config, [
           {
             image: IMAGES[0],
-            features: {
-              type: 'FACE_DETECTION',
-              maxResults: 10
-            }
+            features: [
+              {
+                type: 'FACE_DETECTION',
+                maxResults: 10
+              }
+            ]
           }
         ]);
 
@@ -398,35 +388,55 @@ describe('Vision', function() {
     it('should return the correct detections', function(done) {
       var annotations = [
         {
-          faceAnnotations: {}
+          cropHintsAnnotation: { anno: true }
         },
         {
-          imagePropertiesAnnotation: {}
+          faceAnnotations: { anno: true }
         },
         {
-          labelAnnotations: {}
+          fullTextAnnotation: { anno: true }
         },
         {
-          landmarkAnnotations: {}
+          imagePropertiesAnnotation: { anno: true }
         },
         {
-          logoAnnotations: {}
+          labelAnnotations: { anno: true }
         },
         {
-          safeSearchAnnotation: {}
+          landmarkAnnotations: { anno: true }
         },
         {
-          textAnnotations: {}
+          logoAnnotations: { anno: true }
+        },
+        {
+          safeSearchAnnotation: { anno: true }
+        },
+        {
+          textAnnotations: { anno: true }
+        },
+        {
+          webDetection: { anno: true }
         }
       ];
 
+      var cropHintsAnnotation = {};
       var faceAnnotation = {};
+      var fullTextAnnotation = {};
       var imagePropertiesAnnotation = {};
       var entityAnnotation = {};
       var safeSearchAnnotation = {};
+      var webDetection = {};
+
+      Vision.formatCropHintsAnnotation_ = function() {
+        return cropHintsAnnotation;
+      };
 
       Vision.formatFaceAnnotation_ = function() {
         return faceAnnotation;
+      };
+
+      Vision.formatFullTextAnnotation_ = function() {
+        return fullTextAnnotation;
       };
 
       Vision.formatImagePropertiesAnnotation_ = function() {
@@ -441,27 +451,32 @@ describe('Vision', function() {
         return safeSearchAnnotation;
       };
 
+      Vision.formatWebDetection_ = function() {
+        return webDetection;
+      };
+
       vision.annotate = function(config, callback) {
         callback(null, annotations);
       };
 
       var expected = {
+        crops: cropHintsAnnotation,
         faces: faceAnnotation,
+        document: fullTextAnnotation,
         properties: imagePropertiesAnnotation,
         labels: entityAnnotation,
         landmarks: entityAnnotation,
         logos: entityAnnotation,
         safeSearch: safeSearchAnnotation,
-        text: entityAnnotation
+        text: entityAnnotation,
+        similar: webDetection
       };
 
       var types = Object.keys(expected);
 
       vision.detect(IMAGE, types, function(err, detections) {
         assert.ifError(err);
-
         assert(deepStrictEqual(detections, expected));
-
         done();
       });
     });
@@ -495,8 +510,8 @@ describe('Vision', function() {
     });
 
     it('should return partial failure errors', function(done) {
-      var error1 = {};
-      var error2 = {};
+      var error1 = { error: true };
+      var error2 = { error: true };
 
       var annotations = [
         { error: error1 },
@@ -540,10 +555,10 @@ describe('Vision', function() {
     });
 
     it('should return partial failure errors for multi images', function(done) {
-      var error1 = {};
-      var error2 = {};
-      var error3 = {};
-      var error4 = {};
+      var error1 = { error: true };
+      var error2 = { error: true };
+      var error3 = { error: true };
+      var error4 = { error: true };
 
       var annotations = [
         { error: error1 },
@@ -802,6 +817,25 @@ describe('Vision', function() {
     });
   });
 
+  describe('detectCrops', function() {
+    it('should accept a callback only', function(done) {
+      vision.detect = testWithoutOptions('crops');
+
+      vision.detectCrops(IMAGE, done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      vision.detect = testWithOptions('crops', options);
+
+      vision.detectCrops(IMAGE, options, done);
+    });
+  });
+
   describe('detectFaces', function() {
     it('should accept a callback only', function(done) {
       vision.detect = testWithoutOptions('faces');
@@ -916,6 +950,25 @@ describe('Vision', function() {
     });
   });
 
+  describe('detectSimilar', function() {
+    it('should accept a callback only', function(done) {
+      vision.detect = testWithoutOptions('similar');
+
+      vision.detectSimilar(IMAGE, done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      vision.detect = testWithOptions('similar', options);
+
+      vision.detectSimilar(IMAGE, options, done);
+    });
+  });
+
   describe('detectText', function() {
     it('should accept a callback only', function(done) {
       vision.detect = testWithoutOptions('text');
@@ -932,6 +985,25 @@ describe('Vision', function() {
       vision.detect = testWithOptions('text', options);
 
       vision.detectText(IMAGE, options, done);
+    });
+  });
+
+  describe('readDocument', function() {
+    it('should accept a callback only', function(done) {
+      vision.detect = testWithoutOptions('document');
+
+      vision.readDocument(IMAGE, done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      vision.detect = testWithOptions('document', options);
+
+      vision.readDocument(IMAGE, options, done);
     });
   });
 
@@ -968,40 +1040,18 @@ describe('Vision', function() {
       });
     });
 
-    it('should get a file from a URL', function(done) {
+    it('should properly format a URL', function(done) {
       var imageUri = 'http://www.google.com/logo.png';
-      var body = 'body';
-
-      requestOverride = function(reqOpts, callback) {
-        assert.strictEqual(reqOpts.method, 'GET');
-        assert.strictEqual(reqOpts.uri, imageUri);
-        assert.strictEqual(reqOpts.encoding, 'base64');
-
-        callback(null, {}, body);
-      };
 
       Vision.findImages_(imageUri, function(err, images) {
         assert.ifError(err);
         assert.deepEqual(images, [
           {
-            content: body
+            source: {
+              imageUri: imageUri
+            }
           }
         ]);
-        done();
-      });
-    });
-
-    it('should return an error from reading a URL', function(done) {
-      var imageUri = 'http://www.google.com/logo.png';
-
-      var error = new Error('Error.');
-
-      requestOverride = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      Vision.findImages_(imageUri, function(err) {
-        assert.strictEqual(err, error);
         done();
       });
     });
@@ -1060,6 +1110,53 @@ describe('Vision', function() {
     });
   });
 
+  describe('formatCropHintsAnnotation_', function() {
+    var VERTICES = [
+      { x: 0, y: 0 },
+      { x: 0, y: 0 }
+    ];
+
+    var CONFIDENCE = 0.3;
+
+    var cropHintsAnnotation = {
+      cropHints: [
+        {
+          boundingPoly: {
+            vertices: VERTICES
+          },
+          confidence: CONFIDENCE
+        }
+      ]
+    };
+
+    describe('verbose: false', function() {
+      var opts = {};
+
+      it('should format the annotation', function() {
+        var fmtd = Vision.formatCropHintsAnnotation_(cropHintsAnnotation, opts);
+
+        assert.deepEqual(fmtd, [
+          VERTICES
+        ]);
+      });
+    });
+
+    describe('verbose: true', function() {
+      var opts = { verbose: true };
+
+      it('should format the annotation', function() {
+        var fmtd = Vision.formatCropHintsAnnotation_(cropHintsAnnotation, opts);
+
+        assert.deepEqual(fmtd, [
+          {
+            bounds: VERTICES,
+            confidence: CONFIDENCE
+          }
+        ]);
+      });
+    });
+  });
+
   describe('formatEntityAnnotation_', function() {
     var entityAnnotation = {
       description: 'description',
@@ -1109,7 +1206,10 @@ describe('Vision', function() {
   describe('formatError_', function() {
     var error = {
       code: 1,
-      message: 'Oh no!'
+      message: 'Oh no!',
+      details: [
+        'these should be clipped'
+      ]
     };
 
     it('should format an error', function() {
@@ -1123,174 +1223,170 @@ describe('Vision', function() {
   });
 
   describe('formatFaceAnnotation_', function() {
-    var faceAnnotation;
+    var faceAnnotation = {
+      panAngle: {},
+      rollAngle: {},
+      tiltAngle: {},
 
-    before(function() {
-      faceAnnotation = {
-        panAngle: {},
-        rollAngle: {},
-        tiltAngle: {},
+      boundingPoly: {
+        vertices: {}
+      },
+      fdBoundingPoly: {
+        vertices: {}
+      },
 
-        boundingPoly: {
-          vertices: {}
+      landmarkingConfidence: 0.2,
+
+      landmarks: [
+        {
+          type: 'CHIN_GNATHION',
+          position: {}
         },
-        fdBoundingPoly: {
-          vertices: {}
+        {
+          type: 'CHIN_LEFT_GONION',
+          position: {}
         },
+        {
+          type: 'CHIN_RIGHT_GONION',
+          position: {}
+        },
+        {
+          type: 'LEFT_EAR_TRAGION',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EAR_TRAGION',
+          position: {}
+        },
+        {
+          type: 'LEFT_OF_LEFT_EYEBROW',
+          position: {}
+        },
+        {
+          type: 'RIGHT_OF_LEFT_EYEBROW',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYEBROW_UPPER_MIDPOINT',
+          position: {}
+        },
+        {
+          type: 'LEFT_OF_RIGHT_EYEBROW',
+          position: {}
+        },
+        {
+          type: 'RIGHT_OF_RIGHT_EYEBROW',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYEBROW_UPPER_MIDPOINT',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE_BOTTOM_BOUNDARY',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE_LEFT_CORNER',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE_PUPIL',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE_RIGHT_CORNER',
+          position: {}
+        },
+        {
+          type: 'LEFT_EYE_TOP_BOUNDARY',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE_BOTTOM_BOUNDARY',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE_LEFT_CORNER',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE_PUPIL',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE_RIGHT_CORNER',
+          position: {}
+        },
+        {
+          type: 'RIGHT_EYE_TOP_BOUNDARY',
+          position: {}
+        },
+        {
+          type: 'FOREHEAD_GLABELLA',
+          position: {}
+        },
+        {
+          type: 'LOWER_LIP',
+          position: {}
+        },
+        {
+          type: 'UPPER_LIP',
+          position: {}
+        },
+        {
+          type: 'MOUTH_CENTER',
+          position: {}
+        },
+        {
+          type: 'MOUTH_LEFT',
+          position: {}
+        },
+        {
+          type: 'MOUTH_RIGHT',
+          position: {}
+        },
+        {
+          type: 'NOSE_BOTTOM_CENTER',
+          position: {}
+        },
+        {
+          type: 'NOSE_BOTTOM_LEFT',
+          position: {}
+        },
+        {
+          type: 'NOSE_BOTTOM_RIGHT',
+          position: {}
+        },
+        {
+          type: 'NOSE_TIP',
+          position: {}
+        },
+        {
+          type: 'MIDPOINT_BETWEEN_EYES',
+          position: {}
+        }
+      ],
 
-        landmarkingConfidence: 0.2,
+      detectionConfidence: 0.2,
+      blurredLikelihood: 'LIKELY',
+      underExposedLikelihood: 'LIKELY',
+      joyLikelihood: 'LIKELY',
+      headwearLikelihood: 'LIKELY',
+      angerLikelihood: 'LIKELY',
+      sorrowLikelihood: 'LIKELY',
+      surpriseLikelihood: 'LIKELY',
 
-        landmarks: [
-          {
-            type: 'CHIN_GNATHION',
-            position: {}
-          },
-          {
-            type: 'CHIN_LEFT_GONION',
-            position: {}
-          },
-          {
-            type: 'CHIN_RIGHT_GONION',
-            position: {}
-          },
-          {
-            type: 'LEFT_EAR_TRAGION',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EAR_TRAGION',
-            position: {}
-          },
-          {
-            type: 'LEFT_OF_LEFT_EYEBROW',
-            position: {}
-          },
-          {
-            type: 'RIGHT_OF_LEFT_EYEBROW',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYEBROW_UPPER_MIDPOINT',
-            position: {}
-          },
-          {
-            type: 'LEFT_OF_RIGHT_EYEBROW',
-            position: {}
-          },
-          {
-            type: 'RIGHT_OF_RIGHT_EYEBROW',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYEBROW_UPPER_MIDPOINT',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE_BOTTOM_BOUNDARY',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE_LEFT_CORNER',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE_PUPIL',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE_RIGHT_CORNER',
-            position: {}
-          },
-          {
-            type: 'LEFT_EYE_TOP_BOUNDARY',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE_BOTTOM_BOUNDARY',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE_LEFT_CORNER',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE_PUPIL',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE_RIGHT_CORNER',
-            position: {}
-          },
-          {
-            type: 'RIGHT_EYE_TOP_BOUNDARY',
-            position: {}
-          },
-          {
-            type: 'FOREHEAD_GLABELLA',
-            position: {}
-          },
-          {
-            type: 'LOWER_LIP',
-            position: {}
-          },
-          {
-            type: 'UPPER_LIP',
-            position: {}
-          },
-          {
-            type: 'MOUTH_CENTER',
-            position: {}
-          },
-          {
-            type: 'MOUTH_LEFT',
-            position: {}
-          },
-          {
-            type: 'MOUTH_RIGHT',
-            position: {}
-          },
-          {
-            type: 'NOSE_BOTTOM_CENTER',
-            position: {}
-          },
-          {
-            type: 'NOSE_BOTTOM_LEFT',
-            position: {}
-          },
-          {
-            type: 'NOSE_BOTTOM_RIGHT',
-            position: {}
-          },
-          {
-            type: 'NOSE_TIP',
-            position: {}
-          },
-          {
-            type: 'MIDPOINT_BETWEEN_EYES',
-            position: {}
-          }
-        ],
-
-        detectionConfidence: 0.2,
-        blurredLikelihood: 'LIKELY',
-        underExposedLikelihood: 'LIKELY',
-        joyLikelihood: 'LIKELY',
-        headwearLikelihood: 'LIKELY',
-        angerLikelihood: 'LIKELY',
-        sorrowLikelihood: 'LIKELY',
-        surpriseLikelihood: 'LIKELY',
-
-        nonExistentLikelihood: 'LIKELY'
-      };
-    });
+      nonExistentLikelihood: 'LIKELY'
+    };
 
     function findLandmark(type) {
       var landmarks = faceAnnotation.landmarks;
@@ -1395,6 +1491,127 @@ describe('Vision', function() {
     });
   });
 
+  describe('formatFullTextAnnotation_', function() {
+    var BLOCK_TYPE = 'block type';
+
+    var LANGUAGE_CODE = 'language code';
+
+    var TEXT = 'F';
+
+    var VERTICES = [
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 }
+    ];
+
+    var fullTextAnnotation = {
+      text: 'Full text',
+      pages: [
+        {
+          property: {
+            detectedLanguages: [
+              {
+                languageCode: LANGUAGE_CODE
+              }
+            ]
+          },
+          width: 50,
+          height: 100,
+          blocks: [
+            {
+              blockType: BLOCK_TYPE,
+              boundingBox: {
+                vertices: VERTICES
+              },
+              paragraphs: [
+                {
+                  boundingBox: {
+                    vertices: VERTICES
+                  },
+                  words: [
+                    {
+                      boundingBox: {
+                        vertices: VERTICES
+                      },
+                      symbols: [
+                        {
+                          boundingBox: {
+                            vertices: VERTICES
+                          },
+                          text: TEXT
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    describe('verbose: false', function() {
+      var opts = {};
+
+      it('should return text property', function() {
+        var fmtd = Vision.formatFullTextAnnotation_(fullTextAnnotation, opts);
+
+        assert.strictEqual(fmtd, fullTextAnnotation.text);
+      });
+    });
+
+    describe('verbose: true', function() {
+      var opts = { verbose: true };
+
+      it('should return formatted annotation', function() {
+        var fmtd = Vision.formatFullTextAnnotation_(fullTextAnnotation, opts);
+
+        assert.deepEqual(fmtd, [
+          {
+            languages: [
+              LANGUAGE_CODE
+            ],
+            width: 50,
+            height: 100,
+            blocks: [
+              {
+                type: BLOCK_TYPE,
+                bounds: VERTICES,
+                paragraphs: [
+                  {
+                    bounds: VERTICES,
+                    words: [
+                      {
+                        bounds: VERTICES,
+                        symbols: [
+                          {
+                            bounds: VERTICES,
+                            text: TEXT
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]);
+      });
+
+      it('should not require a bounding block box', function() {
+        var annoWithoutBounding = extend(true, {}, fullTextAnnotation);
+        delete annoWithoutBounding.pages[0].blocks[0].boundingBox;
+
+        var fmtd = Vision.formatFullTextAnnotation_(annoWithoutBounding, opts);
+
+        assert.deepEqual(fmtd[0].blocks[0].bounds, []);
+      });
+    });
+  });
+
   describe('formatImagePropertiesAnnotation_', function() {
     var imgAnnotation = {
       dominantColors: {
@@ -1449,16 +1666,12 @@ describe('Vision', function() {
   });
 
   describe('formatSafeSearchAnnotation_', function() {
-    var safeSearchAnno;
-
-    before(function() {
-      safeSearchAnno = {
-        adult: 'LIKELY',
-        medical: 'LIKELY',
-        spoof: 'LIKELY',
-        violence: 'LIKELY'
-      };
-    });
+    var safeSearchAnno = {
+      adult: 'LIKELY',
+      medical: 'LIKELY',
+      spoof: 'LIKELY',
+      violence: 'LIKELY'
+    };
 
     describe('verbose: false', function() {
       var opts = {};
@@ -1484,6 +1697,90 @@ describe('Vision', function() {
         var fmtd = Vision.formatSafeSearchAnnotation_(safeSearchAnno, opts);
 
         assert.strictEqual(fmtd, safeSearchAnno);
+      });
+    });
+  });
+
+  describe('formatWebDetection_', function() {
+    var webDetection = {
+      webEntities: [
+        {
+          description: 'description'
+        },
+      ],
+
+      fullMatchingImages: [
+        {
+          score: 0,
+          url: 'http://full-0'
+        },
+        {
+          score: 1,
+          url: 'http://full-1'
+        }
+      ],
+
+      partialMatchingImages: [
+        {
+          score: 0,
+          url: 'http://partial-0'
+        },
+        {
+          score: 1,
+          url: 'http://partial-1'
+        }
+      ],
+
+      pagesWithMatchingImages: [
+        {
+          score: 0,
+          url: 'http://page-0'
+        },
+        {
+          score: 1,
+          url: 'http://page-1'
+        }
+      ]
+    };
+
+    describe('verbose: false', function() {
+      var opts = {};
+
+      it('should return sorted & combined image urls', function() {
+        var fmtd = Vision.formatWebDetection_(webDetection, opts);
+
+        assert.deepEqual(fmtd, [
+          'http://full-1',
+          'http://full-0',
+          'http://partial-1',
+          'http://partial-0'
+        ]);
+      });
+    });
+
+    describe('verbose: true', function() {
+      var opts = {
+        verbose: true
+      };
+
+      it('should return entities, pages & individual, sorted urls', function() {
+        var fmtd = Vision.formatWebDetection_(webDetection, opts);
+
+        assert.deepEqual(fmtd, {
+          entities: webDetection.webEntities.map(prop('description')),
+          fullMatches: [
+            'http://full-1',
+            'http://full-0'
+          ],
+          partialMatches: [
+            'http://partial-1',
+            'http://partial-0'
+          ],
+          pages: [
+            'http://page-1',
+            'http://page-0'
+          ]
+        });
       });
     });
   });
