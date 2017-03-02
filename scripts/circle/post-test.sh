@@ -28,10 +28,19 @@ export GCLOUD_TESTS_KEY="$(pwd)/key.json"
 git config user.name "circle-ci"
 git config user.email "circle-ci@circleci.com"
 
+set +e # allows `git` commands during prepare-ghpages to fail
+
 npm run prepare-ghpages
+
 git push origin master --follow-tags
 
 cd gh-pages
-git push origin gh-pages
+git push origin master --follow-tags
+
+set -e
+
+cd ..
+
+npm run remove-ghpages
 
 set +e
