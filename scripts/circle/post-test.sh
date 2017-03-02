@@ -37,5 +37,14 @@ git push origin master --follow-tags
 
 cd ..
 npm run remove-ghpages
-git commit --amend -C HEAD -n # removes gh-pages directory from commit
+
+# amend will remove `gh-pages` directory from previous commit
+# if it fails, that means the commit would be empty
+git commit --amend -C HEAD -n
+
+if [ $? != 0 ]
+then
+  exit 0
+fi
+
 git push origin master --follow-tags
