@@ -2,7 +2,7 @@
   "name": "@google-cloud/speech",
   "version": "0.6.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Speech Client Library for Node.js",
+  "description": "Cloud Speech Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
