@@ -29,9 +29,10 @@ var format = require('string-format-obj');
 var fs = require('fs');
 var is = require('is');
 var prop = require('propprop');
-var request = require('request');
+var propAssign = require('prop-assign');
 var rgbHex = require('rgb-hex');
-var util = require('util');
+
+var v1 = require('./v1');
 
 var VERY_UNLIKELY = 0;
 var UNLIKELY = 1;
@@ -59,19 +60,10 @@ function Vision(options) {
     return new Vision(options);
   }
 
-  var config = {
-    baseUrl: 'https://vision.googleapis.com/v1',
-    projectIdRequired: false,
-    scopes: [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
+  this.api = {
+    Vision: v1(options).imageAnnotatorClient(options)
   };
-
-  common.Service.call(this, config, options);
 }
-
-util.inherits(Vision, common.Service);
 
 Vision.likelihood = {
   VERY_UNLIKELY: VERY_UNLIKELY,
@@ -118,12 +110,8 @@ Vision.likelihood = {
  * });
  */
 Vision.prototype.annotate = function(requests, callback) {
-  this.request({
-    method: 'POST',
-    uri: 'images:annotate',
-    json: {
-      requests: arrify(requests)
-    }
+  this.api.Vision.batchAnnotateImages({
+    requests: arrify(requests)
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -170,8 +158,9 @@ Vision.prototype.annotate = function(requests, callback) {
  * @param {number} options.maxResults - The maximum number of results, per type,
  *     to return in the response.
  * @param {string[]} options.types - An array of feature types to detect from
- *     the provided images. Acceptable values: `faces`, `landmarks`, `labels`,
- *     `logos`, `properties`, `safeSearch`, `text`.
+ *     the provided images. Acceptable values: `crops`, `document`, `faces`,
+ *     `landmarks`, `labels`, `logos`, `properties`, `safeSearch`, `similar`,
+ *     `text`.
  * @param {boolean=} options.verbose - Use verbose mode, which returns a less-
  *     simplistic representation of the annotation (default: `false`).
  * @param {function} callback - The callback function.
@@ -203,12 +192,9 @@ Vision.prototype.annotate = function(requests, callback) {
  *
  * //-
  * // Run feature detection over a remote image.
- * //
- * // *Note: This is not an officially supported feature of the Vision API. Our
- * // library will make a request to the URL given, convert it to base64, and
- * // send that upstream.*
  * //-
  * var img = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
+ *
  * vision.detect(img, types, function(err, detection, apiResponse) {});
  *
  * //-
@@ -308,6 +294,12 @@ Vision.prototype.detect = function(images, options, callback) {
   var types = arrify(options.types);
 
   var typeShortNameToFullName = {
+    crop: 'CROP_HINTS',
+    crops: 'CROP_HINTS',
+
+    doc: 'DOCUMENT_TEXT_DETECTION',
+    document: 'DOCUMENT_TEXT_DETECTION',
+
     face: 'FACE_DETECTION',
     faces: 'FACE_DETECTION',
 
@@ -324,10 +316,18 @@ Vision.prototype.detect = function(images, options, callback) {
 
     safeSearch: 'SAFE_SEARCH_DETECTION',
 
+    similar: 'WEB_DETECTION',
+
     text: 'TEXT_DETECTION'
   };
 
   var typeShortNameToRespName = {
+    crop: 'cropHintsAnnotation',
+    crops: 'cropHintsAnnotation',
+
+    doc: 'fullTextAnnotation',
+    document: 'fullTextAnnotation',
+
     face: 'faceAnnotations',
     faces: 'faceAnnotations',
 
@@ -344,17 +344,22 @@ Vision.prototype.detect = function(images, options, callback) {
 
     safeSearch: 'safeSearchAnnotation',
 
+    similar: 'webDetection',
+
     text: 'textAnnotations'
   };
 
   var typeRespNameToShortName = {
+    cropHintsAnnotation: 'crops',
     faceAnnotations: 'faces',
+    fullTextAnnotation: 'document',
     imagePropertiesAnnotation: 'properties',
     labelAnnotations: 'labels',
     landmarkAnnotations: 'landmarks',
     logoAnnotations: 'logos',
     safeSearchAnnotation: 'safeSearch',
-    textAnnotations: 'text'
+    textAnnotations: 'text',
+    webDetection: 'similar'
   };
 
   Vision.findImages_(images, function(err, foundImages) {
@@ -375,9 +380,11 @@ Vision.prototype.detect = function(images, options, callback) {
 
         var cfg = {
           image: image,
-          features: {
-            type: typeName
-          }
+          features: [
+            {
+              type: typeName
+            }
+          ]
         };
 
         if (is.object(options.imageContext)) {
@@ -385,7 +392,7 @@ Vision.prototype.detect = function(images, options, callback) {
         }
 
         if (is.number(options.maxResults)) {
-          cfg.features.maxResults = options.maxResults;
+          cfg.features.map(propAssign('maxResults', options.maxResults));
         }
 
         config.push(cfg);
@@ -403,6 +410,7 @@ Vision.prototype.detect = function(images, options, callback) {
 
       var detections = foundImages
         .map(groupDetectionsByImage)
+        .map(removeExtraneousAnnotationObjects)
         .map(assignTypeToEmptyAnnotations)
         .map(removeDetectionsWithErrors)
         .map(flattenAnnotations)
@@ -443,6 +451,37 @@ Vision.prototype.detect = function(images, options, callback) {
         //   ]
         // ]
         return annotations.splice(0, types.length);
+      }
+
+      function removeExtraneousAnnotationObjects(annotations) {
+        // The API response includes empty annotations for features that weren't
+        // requested.
+        //
+        // Before:
+        //   [
+        //     {
+        //       faceAnnotations: {},
+        //       labelAnnotations: {}
+        //     }
+        //   ]
+        //
+        // After:
+        //   [
+        //     {
+        //       faceAnnotations: {}
+        //     }
+        //   ]
+        return annotations.map(function(annotation, index) {
+          var requestedAnnotationType = typeShortNameToRespName[types[index]];
+
+          for (var prop in annotation) {
+            if (prop !== requestedAnnotationType && prop !== 'error') {
+              delete annotation[prop];
+            }
+          }
+
+          return annotation;
+        });
       }
 
       function assignTypeToEmptyAnnotations(annotations) {
@@ -492,9 +531,7 @@ Vision.prototype.detect = function(images, options, callback) {
         var errors = [];
 
         annotations.forEach(function(annotation, index) {
-          var annotationKey = Object.keys(annotation)[0];
-
-          if (annotationKey === 'error') {
+          if (!is.empty(annotation.error)) {
             var userInputType = types[index];
             var respNameType = typeShortNameToRespName[userInputType];
             annotation.error.type = typeRespNameToShortName[respNameType];
@@ -525,14 +562,17 @@ Vision.prototype.detect = function(images, options, callback) {
           }
 
           var formatMethodMap = {
-            errors: Vision.formatError_,
+            cropHintsAnnotation: Vision.formatCropHintsAnnotation_,
+            error: Vision.formatError_,
             faceAnnotations: Vision.formatFaceAnnotation_,
+            fullTextAnnotation: Vision.formatFullTextAnnotation_,
             imagePropertiesAnnotation: Vision.formatImagePropertiesAnnotation_,
             labelAnnotations: Vision.formatEntityAnnotation_,
             landmarkAnnotations: Vision.formatEntityAnnotation_,
             logoAnnotations: Vision.formatEntityAnnotation_,
             safeSearchAnnotation: Vision.formatSafeSearchAnnotation_,
-            textAnnotations: Vision.formatEntityAnnotation_
+            textAnnotations: Vision.formatEntityAnnotation_,
+            webDetection: Vision.formatWebDetection_
           };
 
           var formatMethod = formatMethodMap[type] || function(annotation) {
@@ -570,7 +610,7 @@ Vision.prototype.detect = function(images, options, callback) {
         if (types.length === 1) {
           // Only a single detection type was asked for, so no need to box in
           // the results. Make them accessible without using a key.
-          var key = Object.keys(annotations)[0];
+          var key = typeRespNameToShortName[typeShortNameToRespName[types[0]]];
           annotations = annotations[key];
         }
 
@@ -579,7 +619,93 @@ Vision.prototype.detect = function(images, options, callback) {
     });
   });
 };
+
 // jscs:enable maximumLineLength
+
+/**
+ * Detect the crop hints within an image.
+ *
+ * <h4>Parameters</h4>
+ *
+ * See {module:vision#detect}.
+ *
+ * @resource [CropHintsAnnotation JSON respresentation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#CropHintsAnnotation}
+ *
+ * @example
+ * vision.detectCrops('image.jpg', function(err, crops, apiResponse) {
+ *   // crops = [
+ *   //   [
+ *   //     {
+ *   //       x: 1
+ *   //     },
+ *   //     {
+ *   //       x: 295
+ *   //     },
+ *   //     {
+ *   //       x: 295,
+ *   //       y: 301
+ *   //     },
+ *   //     {
+ *   //       x: 1,
+ *   //       y: 301
+ *   //     }
+ *   //   ],
+ *   //   // ...
+ *   // ]
+ * });
+ *
+ * //-
+ * // Activate `verbose` mode for a more detailed response.
+ * //-
+ * var options = {
+ *   verbose: true
+ * };
+ *
+ * vision.detectCrops('image.jpg', options, function(err, crops, apiResponse) {
+ *   // crops = [
+ *   //   {
+ *   //     bounds: [
+ *   //       {
+ *   //         x: 1
+ *   //       },
+ *   //       {
+ *   //         x: 295
+ *   //       },
+ *   //       {
+ *   //         x: 295,
+ *   //         y: 301
+ *   //       },
+ *   //       {
+ *   //         x: 1,
+ *   //         y: 301
+ *   //       }
+ *   //     ],
+ *   //     confidence: 0.799999995
+ *   //   },
+ *   //   // ...
+ *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectCrops('image.jpg').then(function(data) {
+ *   var crops = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Vision.prototype.detectCrops = function(images, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    types: ['crops']
+  });
+
+  this.detect(images, options, callback);
+};
 
 /**
  * Run face detection against an image.
@@ -1275,6 +1401,76 @@ Vision.prototype.detectSafeSearch = function(images, options, callback) {
 };
 
 /**
+ * Detect similar images from the internet.
+ *
+ * <h4>Parameters</h4>
+ *
+ * See {module:vision#detect}.
+ *
+ * @resource [WebAnnotation JSON representation]{@link https://cloud.google.com/vision/docs/reference/rest/v1/images/annotate#WebAnnotation}
+ *
+ * @example
+ * vision.detectSimilar('image.jpg', function(err, images, apiResponse) {
+ *   // images = [
+ *   //   'http://www.example.com/most-similar-image',
+ *   //   // ...
+ *   //   'http://www.example.com/least-similar-image'
+ *   // ]
+ * });
+ *
+ * //-
+ * // Activate `verbose` mode for a more detailed response.
+ * //-
+ * var opts = {
+ *   verbose: true
+ * };
+ *
+ * vision.detectSimilar('image.jpg', opts, function(err, similar, apiResponse) {
+ *   // similar = {
+ *   //   entities: [
+ *   //     'Logo',
+ *   //     // ...
+ *   //   ],
+ *   //   fullMatches: [
+ *   //     'http://www.example.com/most-similar-image',
+ *   //     // ...
+ *   //     'http://www.example.com/least-similar-image'
+ *   //   ],
+ *   //   partialMatches: [
+ *   //     'http://www.example.com/most-similar-image',
+ *   //     // ...
+ *   //     'http://www.example.com/least-similar-image'
+ *   //   ],
+ *   //   pages: [
+ *   //     'http://www.example.com/page-with-most-similar-image',
+ *   //     // ...
+ *   //     'http://www.example.com/page-with-least-similar-image'
+ *   //   ]
+ *   // }
+  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectSimilar('image.jpg').then(function(data) {
+ *   var images = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Vision.prototype.detectSimilar = function(images, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    types: ['similar']
+  });
+
+  this.detect(images, options, callback);
+};
+
+/**
  * Detect the text within an image.
  *
  * <h4>Parameters</h4>
@@ -1301,20 +1497,20 @@ Vision.prototype.detectSafeSearch = function(images, options, callback) {
  *   //     desc: 'This was text found in the image',
  *   //     bounds: [
  *   //       {
- *   //          x: 4,
- *   //          y: 5
+ *   //         x: 4,
+ *   //         y: 5
  *   //       },
  *   //       {
- *   //          x: 493,
- *   //          y: 5
+ *   //         x: 493,
+ *   //         y: 5
  *   //       },
  *   //       {
- *   //          x: 493,
- *   //          y: 89
+ *   //         x: 493,
+ *   //         y: 89
  *   //       },
  *   //       {
- *   //          x: 4,
- *   //          y: 89
+ *   //         x: 4,
+ *   //         y: 89
  *   //       }
  *   //     ]
  *   //   }
@@ -1343,10 +1539,158 @@ Vision.prototype.detectText = function(images, options, callback) {
 };
 
 /**
+ * Annotate a document.
+ *
+ * <h4>Parameters</h4>
+ *
+ * See {module:vision#detect}.
+ *
+ * @resource [FullTextAnnotation JSON representation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#FullTextAnnotation}
+ *
+ * @example
+ * vision.readDocument('image.jpg', function(err, text, apiResponse) {
+ *   // text = 'This paragraph was extracted from image.jpg';
+ * });
+ *
+ * //-
+ * // Activate `verbose` mode for a more detailed response.
+ * //-
+ * var opts = {
+ *   verbose: true
+ * };
+ *
+ * vision.readDocument('image.jpg', opts, function(err, pages, apiResponse) {
+ *   // pages = [
+ *   //   {
+ *   //     languages: [
+ *   //       'en'
+ *   //     ],
+ *   //     width: 688,
+ *   //     height: 1096,
+ *   //     blocks: [
+ *   //       {
+ *   //         type: 'TEXT',
+ *   //         bounds: [
+ *   //           {
+ *   //             x: 4,
+ *   //             y: 5
+ *   //           },
+ *   //           {
+ *   //             x: 493,
+ *   //             y: 5
+ *   //           },
+ *   //           {
+ *   //             x: 493,
+ *   //             y: 89
+ *   //           },
+ *   //           {
+ *   //             x: 4,
+ *   //             y: 89
+ *   //           }
+ *   //         ],
+ *   //         paragraphs: [
+ *   //           {
+ *   //             bounds: [
+ *   //               {
+ *   //                 x: 4,
+ *   //                 y: 5
+ *   //               },
+ *   //               {
+ *   //                 x: 493,
+ *   //                 y: 5
+ *   //               },
+ *   //               {
+ *   //                 x: 493,
+ *   //                 y: 89
+ *   //               },
+ *   //               {
+ *   //                 x: 4,
+ *   //                 y: 89
+ *   //               }
+ *   //             ],
+ *   //             words: [
+ *   //               {
+ *   //                 bounds: [
+ *   //                   {
+ *   //                     x: 4,
+ *   //                     y: 5
+ *   //                   },
+ *   //                   {
+ *   //                     x: 493,
+ *   //                     y: 5
+ *   //                   },
+ *   //                   {
+ *   //                     x: 493,
+ *   //                     y: 89
+ *   //                   },
+ *   //                   {
+ *   //                     x: 4,
+ *   //                     y: 89
+ *   //                   }
+ *   //                 ],
+ *   //                 symbols: [
+ *   //                   {
+ *   //                     bounds: [
+ *   //                       {
+ *   //                         x: 4,
+ *   //                         y: 5
+ *   //                       },
+ *   //                       {
+ *   //                         x: 493,
+ *   //                         y: 5
+ *   //                       },
+ *   //                       {
+ *   //                         x: 493,
+ *   //                         y: 89
+ *   //                       },
+ *   //                       {
+ *   //                         x: 4,
+ *   //                         y: 89
+ *   //                       }
+ *   //                     ],
+ *   //                     text: 'T'
+ *   //                   },
+ *   //                   // ...
+ *   //                 ]
+ *   //               },
+ *   //               // ...
+ *   //             ]
+ *   //           },
+ *   //           // ...
+ *   //         ]
+ *   //       },
+ *   //       // ...
+ *   //     ]
+ *   //   }
+ *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.readDocument('image.jpg').then(function(data) {
+ *   var pages = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Vision.prototype.readDocument = function(images, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    types: ['document']
+  });
+
+  this.detect(images, options, callback);
+};
+
+/**
  * Determine the type of image the user is asking to be annotated. If a
  * {module:storage/file}, convert to its "gs://{bucket}/{file}" URL. If a remote
- * URL, read the contents and convert to a base64 string. If a file path to a
- * local file, convert to a base64 string.
+ * URL, format as the API expects. If a file path to a local file, convert to a
+ * base64 string.
  *
  * @private
  */
@@ -1371,25 +1715,16 @@ Vision.findImages_ = function(images, callback) {
           })
         }
       });
-
       return;
     }
 
     // File is a URL.
     if (/^http/.test(image)) {
-      request({
-        method: 'GET',
-        uri: image,
-        encoding: 'base64'
-      }, function(err, resp, body) {
-        if (err) {
-          callback(err);
-          return;
+      callback(null, {
+        source: {
+          imageUri: image
         }
-
-        callback(null, { content: body });
       });
-
       return;
     }
 
@@ -1405,6 +1740,22 @@ Vision.findImages_ = function(images, callback) {
   }
 
   async.mapLimit(images, MAX_PARALLEL_LIMIT, findImage, callback);
+};
+
+/**
+ * Format a raw crop hint annotation response from the API.
+ *
+ * @private
+ */
+Vision.formatCropHintsAnnotation_ = function(cropHintsAnnotation, options) {
+  return cropHintsAnnotation.cropHints.map(function(cropHint) {
+    cropHint = {
+      bounds: cropHint.boundingPoly.vertices,
+      confidence: cropHint.confidence
+    };
+
+    return options.verbose ? cropHint : cropHint.bounds;
+  });
 };
 
 /**
@@ -1460,6 +1811,8 @@ Vision.formatError_ = function(err) {
   if (httpError) {
     err.code = httpError.code;
   }
+
+  delete err.details;
 
   return err;
 };
@@ -1570,6 +1923,49 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
 };
 
 /**
+ * Format a raw full text annotation response from the API.
+ *
+ * @private
+ */
+Vision.formatFullTextAnnotation_ = function(fullTextAnnotation, options) {
+  if (!options.verbose) {
+    return fullTextAnnotation.text;
+  }
+
+  return fullTextAnnotation.pages
+    .map(function(page) {
+      return {
+        languages: page.property.detectedLanguages.map(prop('languageCode')),
+        width: page.width,
+        height: page.height,
+        blocks: page.blocks.map(function(block) {
+          return {
+            type: block.blockType,
+            bounds: block.boundingBox && block.boundingBox.vertices || [],
+            paragraphs: arrify(block.paragraphs)
+              .map(function(paragraph) {
+                return {
+                  bounds: paragraph.boundingBox.vertices,
+                  words: paragraph.words.map(function(word) {
+                    return {
+                      bounds: word.boundingBox.vertices,
+                      symbols: word.symbols.map(function(symbol) {
+                        return {
+                          bounds: symbol.boundingBox.vertices,
+                          text: symbol.text
+                        };
+                      })
+                    };
+                  })
+                };
+              })
+          };
+        })
+      };
+    });
+};
+
+/**
  * Format a raw image properties annotation response from the API.
  *
  * @private
@@ -1625,6 +2021,41 @@ Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
 };
 
 /**
+ * Format a raw web detection response from the API.
+ *
+ * @private
+ */
+Vision.formatWebDetection_ = function(webDetection, options) {
+  function sortByScore(a, b) {
+    return a.score < b.score ? 1 : a.score > b.score ? -1 : 0;
+  }
+
+  var formattedWebDetection = {
+    entities: arrify(webDetection.webEntities).map(prop('description')),
+
+    fullMatches: arrify(webDetection.fullMatchingImages)
+      .sort(sortByScore)
+      .map(prop('url')),
+
+    partialMatches: arrify(webDetection.partialMatchingImages)
+      .sort(sortByScore)
+      .map(prop('url')),
+
+    pages: arrify(webDetection.pagesWithMatchingImages)
+      .sort(sortByScore)
+      .map(prop('url'))
+  };
+
+  if (!options.verbose) {
+    // Combine all matches.
+    formattedWebDetection = formattedWebDetection.fullMatches
+      .concat(formattedWebDetection.partialMatches);
+  }
+
+  return formattedWebDetection;
+};
+
+/**
  * Convert a "likelihood" value to a boolean representation, based on the lowest
  * likelihood provided.
  *
@@ -1649,4 +2080,4 @@ Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
 common.util.promisifyAll(Vision);
 
 module.exports = Vision;
-module.exports.v1 = require('./v1');
+module.exports.v1 = v1;
