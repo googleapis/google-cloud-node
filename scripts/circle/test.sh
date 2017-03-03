@@ -29,7 +29,7 @@ if [ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ]
 then
   # This is a push to master, so system tests will be run.
   echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
-  export GCLOUD_TESTS_KEY="$(pwd)/key.json"
+  export GCLOUD_TESTS_KEY="$(HOME)/key.json"
 fi
 
 git config --global user.name "circle-ci"
