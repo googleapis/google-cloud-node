@@ -18,12 +18,9 @@ set -e
 
 if [ "${CIRCLE_BRANCH}" != "master" ] && [ "${CI_PULL_REQUEST}" != "" ]
 then
-  # Not a push to master, so no system tests or doc updates required.
+  # Not a push to master, so no doc updates required.
   exit 0
 fi
-
-echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
-export GCLOUD_TESTS_KEY="$(pwd)/key.json"
 
 git config user.name "circle-ci"
 git config user.email "circle-ci@circleci.com"
@@ -33,7 +30,7 @@ set +e # allows `git` commands during prepare-ghpages to fail
 npm run prepare-ghpages
 
 cd gh-pages
-git push origin master --follow-tags
+git push origin master
 
 cd ..
 npm run remove-ghpages
