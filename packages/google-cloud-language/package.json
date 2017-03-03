@@ -2,7 +2,7 @@
   "name": "@google-cloud/language",
   "version": "0.8.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Natural Language Client Library for Node.js",
+  "description": "Cloud Natural Language Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
