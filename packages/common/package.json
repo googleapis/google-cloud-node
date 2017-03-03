@@ -42,12 +42,10 @@
     "arrify": "^1.0.1",
     "concat-stream": "^1.6.0",
     "create-error-class": "^3.0.2",
-    "dot-prop": "^2.4.0",
     "duplexify": "^3.5.0",
     "ent": "^2.2.0",
     "extend": "^3.0.0",
     "google-auto-auth": "^0.5.2",
-    "google-proto-files": "^0.9.1",
     "is": "^3.2.0",
     "log-driver": "^1.2.5",
     "methmeth": "^1.1.0",
@@ -62,7 +60,6 @@
   "devDependencies": {
     "mocha": "^3.2.0",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.7",
     "uuid": "^3.0.1"
   },
   "scripts": {
