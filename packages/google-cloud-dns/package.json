@@ -2,7 +2,7 @@
   "name": "@google-cloud/dns",
   "version": "0.5.0",
   "author": "Google Inc.",
-  "description": "Google Cloud DNS Client Library for Node.js",
+  "description": "Cloud DNS Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
