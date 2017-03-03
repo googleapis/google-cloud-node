@@ -118,10 +118,8 @@ util.inherits(Log, commonGrpc.ServiceObject);
  */
 Log.assignSeverityToEntries_ = function(entries, severity) {
   return arrify(entries).map(function(entry) {
-    var entry = extend(new Entry(), entry);
-    entry.metadata = entry.metadata || {};
-    entry.metadata.severity = severity;
-    return entry;
+    var metadata = extend(true, {}, entry.metadata, { severity: severity });
+    return extend(new Entry(), entry, {metadata: metadata });
   });
 };
 
