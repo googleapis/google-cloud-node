@@ -38,12 +38,12 @@ var tagName = [moduleName, newVersion].join('-');
 var npmModuleName = moduleName === 'google-cloud' ? '' : '@google-cloud/';
 npmModuleName += moduleName;
 
-var versions = exec('npm show ' + npmModuleName + ' versions --json', {
+var distTags = exec('npm show ' + npmModuleName + ' dist-tags --json', {
   cwd: cwd,
   silent: true
-}).stdout || '[]';
+}).stdout || '{}';
 
-var latestVersion = JSON.parse(versions).pop();
+var latestVersion = JSON.parse(distTags).latest;
 
 if (latestVersion && semver.lte(newVersion, latestVersion)) {
   throw new Error([
