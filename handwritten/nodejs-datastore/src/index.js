@@ -55,7 +55,7 @@ var Transaction = require('./transaction.js');
  * @alias module:datastore
  * @mixes module:datastore/request
  *
- * @resource [Google Cloud Datastore Concepts Overview]{@link https://cloud.google.com/datastore/docs/concepts/overview}
+ * @resource [Cloud Datastore Concepts Overview]{@link https://cloud.google.com/datastore/docs/concepts/overview}
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used
