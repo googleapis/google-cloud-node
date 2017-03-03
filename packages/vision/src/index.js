@@ -628,7 +628,7 @@ Vision.prototype.detect = function(images, options, callback) {
  * <h4>Parameters</h4>
  *
  * See {module:vision#detect}.
- * 
+ *
  * @resource [CropHintsAnnotation JSON respresentation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#CropHintsAnnotation}
  *
  * @example
