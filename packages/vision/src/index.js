@@ -532,7 +532,8 @@ Vision.prototype.detect = function(images, options, callback) {
             landmarkAnnotations: Vision.formatEntityAnnotation_,
             logoAnnotations: Vision.formatEntityAnnotation_,
             safeSearchAnnotation: Vision.formatSafeSearchAnnotation_,
-            textAnnotations: Vision.formatEntityAnnotation_
+            textAnnotations: Vision.formatEntityAnnotation_,
+            fullTextAnnotation: Vision.formatEntityAnnotation_
           };
 
           var formatMethod = formatMethodMap[type] || function(annotation) {
