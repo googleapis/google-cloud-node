@@ -1826,8 +1826,9 @@ File.prototype.setStorageClass = function(storageClass, callback) {
   storageClass = storageClass
     .replace(/-/g, '_')
     .replace(/([a-z])([A-Z])/g, function(_, low, up) {
-      return low + '_' + up.toLowerCase();
-    });
+      return low + '_' + up;
+    })
+    .toUpperCase();
 
   this.copy(this, {
     storageClass: storageClass

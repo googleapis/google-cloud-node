@@ -2342,7 +2342,7 @@ describe('File', function() {
       file.copy = function(newFile, options) {
         assert.strictEqual(newFile, file);
         assert.deepEqual(options, {
-          storageClass: STORAGE_CLASS
+          storageClass: STORAGE_CLASS.toUpperCase()
         });
         done();
       };
@@ -2352,7 +2352,7 @@ describe('File', function() {
 
     it('should convert camelCase to snake_case', function(done) {
       file.copy = function(newFile, options) {
-        assert.strictEqual(options.storageClass, 'camel_case');
+        assert.strictEqual(options.storageClass, 'CAMEL_CASE');
         done();
       };
 
@@ -2361,7 +2361,7 @@ describe('File', function() {
 
     it('should convert hyphenate to snake_case', function(done) {
       file.copy = function(newFile, options) {
-        assert.strictEqual(options.storageClass, 'hyphenated_class');
+        assert.strictEqual(options.storageClass, 'HYPHENATED_CLASS');
         done();
       };
 
