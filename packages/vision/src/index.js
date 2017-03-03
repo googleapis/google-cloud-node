@@ -623,14 +623,16 @@ Vision.prototype.detect = function(images, options, callback) {
 // jscs:enable maximumLineLength
 
 /**
- * Detect the crops within an image.
+ * Detect the crop hints within an image.
  *
  * <h4>Parameters</h4>
  *
  * See {module:vision#detect}.
+ * 
+ * @resource [CropHintsAnnotation JSON respresentation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#CropHintsAnnotation}
  *
  * @example
- * vision.detectText('image.jpg', function(err, crops, apiResponse) {
+ * vision.detectCrops('image.jpg', function(err, crops, apiResponse) {
  *   // crops = [
  *   //   [
  *   //     {
@@ -1405,7 +1407,7 @@ Vision.prototype.detectSafeSearch = function(images, options, callback) {
  *
  * See {module:vision#detect}.
  *
- * @resource [TextAnnotation JSON representation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#TextAnnotation}
+ * @resource [WebAnnotation JSON representation]{@link https://cloud.google.com/vision/docs/reference/rest/v1/images/annotate#WebAnnotation}
  *
  * @example
  * vision.detectSimilar('image.jpg', function(err, images, apiResponse) {
@@ -1543,7 +1545,7 @@ Vision.prototype.detectText = function(images, options, callback) {
  *
  * See {module:vision#detect}.
  *
- * @resource [TextAnnotation JSON representation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#TextAnnotation}
+ * @resource [FullTextAnnotation JSON representation]{@link https://cloud.google.com/vision/reference/rest/v1/images/annotate#FullTextAnnotation}
  *
  * @example
  * vision.readDocument('image.jpg', function(err, text, apiResponse) {
