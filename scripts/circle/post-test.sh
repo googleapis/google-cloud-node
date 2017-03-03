@@ -22,9 +22,6 @@ then
   exit 0
 fi
 
-git config user.name "circle-ci"
-git config user.email "circle-ci@circleci.com"
-
 set +e # allows `git` commands during prepare-ghpages to fail
 
 npm run prepare-ghpages
@@ -41,6 +38,7 @@ git commit --amend -C HEAD -n
 
 if [ $? != 0 ]
 then
+  echo "No changes to master branch."
   exit 0
 fi
 

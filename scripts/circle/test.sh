@@ -32,6 +32,9 @@ then
   export GCLOUD_TESTS_KEY="$(pwd)/key.json"
 fi
 
+git config --global user.name "circle-ci"
+git config --global user.email "circle-ci@circleci.com"
+
 nvm use v4
 npm install
 npm run lint
