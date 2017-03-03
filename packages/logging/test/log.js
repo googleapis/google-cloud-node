@@ -142,9 +142,13 @@ describe('Log', function() {
   });
 
   describe('assignSeverityToEntries_', function() {
+    var circular = {};
+    circular.circular = circular;
+
     var ENTRIES = [
       { data: { a: 'b' } },
-      { data: { c: 'd' } }
+      { data: { c: 'd' } },
+      { data: { e: circular }}
     ];
 
     var SEVERITY = 'severity';
@@ -164,6 +168,7 @@ describe('Log', function() {
           .map(prop('metadata'))
           .map(prop('severity')),
         [
+          SEVERITY,
           SEVERITY,
           SEVERITY
         ]
