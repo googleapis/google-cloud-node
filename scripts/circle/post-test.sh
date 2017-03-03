@@ -27,7 +27,7 @@ set +e # allows `git` commands during prepare-ghpages to fail
 npm run prepare-ghpages
 
 cd gh-pages
-git push origin master
+git push origin gh-pages
 
 cd ..
 npm run remove-ghpages
