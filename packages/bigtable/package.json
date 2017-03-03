@@ -2,7 +2,7 @@
   "name": "@google-cloud/bigtable",
   "version": "0.8.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Bigtable Client Library for Node.js",
+  "description": "Cloud Bigtable Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

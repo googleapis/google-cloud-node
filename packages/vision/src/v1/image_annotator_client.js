@@ -46,7 +46,7 @@ var ALL_SCOPES = [
 ];
 
 /**
- * Service that performs Google Cloud Vision API detection tasks, such as face,
+ * Service that performs Cloud Vision API detection tasks, such as face,
  * landmark, logo, label, and text detection, over client images, and returns
  * detected entities from the images.
  *

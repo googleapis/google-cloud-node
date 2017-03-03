@@ -1,12 +1,12 @@
 # @google-cloud/datastore ([Beta][versioning])
-> Google Cloud Datastore Client Library for Node.js
+> Cloud Datastore Client Library for Node.js
 
 *Looking for more Google APIs than just Datastore? You might want to check out [`google-cloud`][google-cloud].*
 
 - [API Documentation][gcloud-datastore-docs]
 - [Official Documentation][cloud-datastore-docs]
 
-*Follow the [activation instructions][cloud-datastore-activation] to use the Google Cloud Datastore API with your project.*
+*Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
 
 ```sh
 $ npm install --save @google-cloud/datastore
@@ -67,7 +67,7 @@ var datastore = require('@google-cloud/datastore')({
 
 ## Authentication
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
 
 ### On Google Cloud Platform
 
@@ -85,7 +85,7 @@ If you are not running this client on Google Cloud Platform, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Datastore API
+  * Cloud Datastore API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.

@@ -52,7 +52,7 @@ var File = require('./file.js');
 var RESUMABLE_THRESHOLD = 5000000;
 
 /**
- * Create a Bucket object to interact with a Google Cloud Storage bucket.
+ * Create a Bucket object to interact with a Cloud Storage bucket.
  *
  * @constructor
  * @alias module:storage/bucket
@@ -242,7 +242,7 @@ function Bucket(storage, name) {
   this.storage = storage;
 
   /**
-   * Google Cloud Storage uses access control lists (ACLs) to manage object and
+   * Cloud Storage uses access control lists (ACLs) to manage object and
    * bucket access. ACLs are the mechanism you use to share objects with other
    * users and allow other users to access your buckets and objects.
    *
@@ -294,7 +294,7 @@ function Bucket(storage, name) {
   });
 
   /**
-   * Google Cloud Storage Buckets have [default ACLs](http://goo.gl/YpGdyv) for
+   * Cloud Storage Buckets have [default ACLs](http://goo.gl/YpGdyv) for
    * all created files. You can add, delete, get, and update entities and
    * permissions for these as well. The method signatures and examples are all
    * the same, after only prefixing the method call with `default`.

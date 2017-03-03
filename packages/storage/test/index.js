@@ -137,7 +137,7 @@ describe('Storage', function() {
     it('should throw if no name was provided', function() {
       assert.throws(function() {
         storage.bucket();
-      }, /A bucket name is needed to use Google Cloud Storage\./);
+      }, /A bucket name is needed to use Cloud Storage\./);
     });
 
     it('should accept a string for a name', function() {
