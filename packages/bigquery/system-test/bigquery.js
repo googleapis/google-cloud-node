@@ -501,68 +501,9 @@ describe('BigQuery', function() {
           });
       });
 
-      it('should convert values to their schema types', function(done) {
-        var data = {
-          name: 'dave',
-          breed: 'husky',
-          id: 99,
-          dob: new Date(),
-          around: true,
-          buffer: new Buffer('test'),
-          arrayOfInts: [1, 3, 5],
-          recordOfRecords: {
-            records: [
-              {
-                record: true
-              }
-            ]
-          }
-        };
-
-        table.insert(data, function(err) {
-          assert.ifError(err);
-
-          function query(callback) {
-            var query = {
-              query: 'SELECT * FROM ' + table.id + ' WHERE id = ' + data.id,
-              useLegacySql: false
-            };
-            var row;
-
-            table.createQueryStream(query)
-              .on('error', callback)
-              .once('data', function(row_) { row = row_; })
-              .on('end', function() {
-                if (!row) {
-                  callback(new Error('Query returned 0 results.'));
-                  return;
-                }
-
-                assert.deepEqual(row, data);
-                callback();
-              });
-          }
-
-          async.retry({ times: 3, interval: 2000 }, query, done);
-        });
-      });
-
       it('should return partial errors', function(done) {
         var data = {
-          name: 'dave',
-          breed: 'british husky',
-          id: 99,
-          dob: new Date(),
-          around: true,
-          buffer: new Buffer('test'),
-          arrayOfInts: [1, 3, 5],
-          recordOfRecords: {
-            records: [
-              {
-                record: true
-              }
-            ]
-          }
+          name: 'dave'
         };
 
         var improperData = {
@@ -984,6 +925,121 @@ describe('BigQuery', function() {
               done();
             });
         });
+      });
+    });
+  });
+
+  describe('Provided Tests', function() {
+    var table = dataset.table(generateName('table'));
+    var schema = require('./data/schema.json');
+    var testData = require('./data/schema-test-data.json');
+
+    var EXPECTED_ROWS = {
+      Bilbo: {
+        Name: 'Bilbo',
+        Age: 111,
+        Weight: 67.2,
+        IsMagic: false,
+        Spells: [],
+        TeaTime: bigquery.time('10:00:00'),
+        NextVacation: bigquery.date('2017-09-22'),
+        FavoriteTime: bigquery.datetime('2031-04-01T05:09:27')
+      },
+
+      Gandalf: {
+        Name: 'Gandalf',
+        Age: 1000,
+        Weight: 198.6,
+        IsMagic: true,
+        Spells: [
+          {
+            Name: 'Skydragon',
+            LastUsed: bigquery.timestamp('2015-10-31T23:59:56.000Z'),
+            DiscoveredBy: 'Firebreather',
+            Properties: [
+              {
+                Name: 'Flying',
+                Power: 1
+              },
+              {
+                Name: 'Creature',
+                Power: 1
+              },
+              {
+                Name: 'Explodey',
+                Power: 11
+              }
+            ],
+            Icon: new Buffer(testData[1].Spells[0].Icon, 'base64')
+          }
+        ],
+        TeaTime: bigquery.time('15:00:00'),
+        NextVacation: bigquery.date('2666-06-06'),
+        FavoriteTime: bigquery.datetime('2001-12-19T23:59:59')
+      },
+
+      Sabrina: {
+        Name: 'Sabrina',
+        Age: 17,
+        Weight: 128.3,
+        IsMagic: true,
+        Spells: [
+          {
+            Name: 'Talking cats',
+            LastUsed: bigquery.timestamp('2017-02-14T12:07:23.000Z'),
+            DiscoveredBy: 'Salem',
+            Properties: [
+              {
+                Name: 'Makes you look crazy',
+                Power: 1
+              }
+            ],
+            Icon: new Buffer(testData[2].Spells[0].Icon, 'base64')
+          }
+        ],
+        TeaTime: bigquery.time('12:00:00'),
+        NextVacation: bigquery.date('2017-03-14'),
+        FavoriteTime: bigquery.datetime('2000-10-31T23:27:46')
+      }
+    };
+
+    before(function(done) {
+      async.series([
+        function(next) {
+          table.create({
+            schema: schema
+          }, next);
+        },
+
+        function(next) {
+          table.insert(testData, next);
+        },
+
+        function(next) {
+          setTimeout(next, 15000);
+        }
+      ], done);
+    });
+
+    after(function(done) {
+      table.delete(done);
+    });
+
+    it('should convert rows back correctly', function(done) {
+      table.getRows(function(err, rows) {
+        assert.ifError(err);
+
+        if (rows.length === 0) {
+          done(new Error('Rows not returned from the API.'));
+          return;
+        }
+
+        rows.forEach(function(row) {
+          var expectedRow = EXPECTED_ROWS[row.Name];
+          assert.deepEqual(row, expectedRow);
+        });
+
+        done();
       });
     });
   });

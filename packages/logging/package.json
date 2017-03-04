@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": "Google Inc.",
   "description": "Stackdriver Logging Client Library for Node.js",
   "contributors": [
@@ -58,7 +58,7 @@
     "async": "^2.1.4",
     "extend": "^3.0.0",
     "google-gax": "^0.12.2",
-    "google-proto-files": "^0.9.1",
+    "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
     "is-circular": "^1.0.1",
     "lodash.union": "^4.6.0",

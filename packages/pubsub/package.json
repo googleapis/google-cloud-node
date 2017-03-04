@@ -1,8 +1,8 @@
 {
   "name": "@google-cloud/pubsub",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": "Google Inc.",
-  "description": "Google Cloud Pub/Sub Client Library for Node.js",
+  "description": "Cloud Pub/Sub Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -54,8 +54,8 @@
     "@google-cloud/common-grpc": "^0.1.1",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
-    "google-gax": "^0.10.0",
-    "google-proto-files": "^0.9.1",
+    "google-gax": "^0.12.2",
+    "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
     "modelo": "^4.2.0",
     "propprop": "^0.3.0",

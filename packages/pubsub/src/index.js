@@ -40,8 +40,8 @@ var Subscription = require('./subscription.js');
 var Topic = require('./topic.js');
 
 /**
- * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
- * reliable, many-to-many, asynchronous messaging service from Google Cloud
+ * [Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
+ * reliable, many-to-many, asynchronous messaging service from Cloud
  * Platform.
  *
  * The `PUBSUB_EMULATOR_HOST` environment variable from the gcloud SDK is
@@ -50,7 +50,7 @@ var Topic = require('./topic.js');
  * @constructor
  * @alias module:pubsub
  *
- * @resource [Google Cloud Pub/Sub overview]{@link https://developers.google.com/pubsub/overview}
+ * @resource [Cloud Pub/Sub overview]{@link https://developers.google.com/pubsub/overview}
  *
  * @param {object} options - [Configuration object](#/docs).
  */

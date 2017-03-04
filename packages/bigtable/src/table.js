@@ -56,7 +56,7 @@ var Mutation = require('./mutation.js');
 var Row = require('./row.js');
 
 /**
- * Create a Table object to interact with a Google Cloud Bigtable table.
+ * Create a Table object to interact with a Cloud Bigtable table.
  *
  * @constructor
  * @alias module:bigtable/table

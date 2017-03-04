@@ -166,6 +166,8 @@ BigQuery.prototype.datetime = function(value) {
       d: value.day,
       time: time ? ' ' + time : ''
     });
+  } else {
+    value = value.replace(/^(.*)T(.*)Z$/, '$1 $2');
   }
 
   this.value = value;
@@ -228,11 +230,8 @@ BigQuery.prototype.timestamp = function(value) {
     return new BigQuery.timestamp(value);
   }
 
-  value = value || new Date();
-
-  if (is.date(value)) {
-    value = value.toJSON().replace(/^(.*)T(.*)Z$/, '$1 $2');
-  }
+  value = new Date(value);
+  value = value.toJSON().replace(/^(.*)T(.*)Z$/, '$1 $2');
 
   this.value = value;
 };
@@ -841,7 +840,7 @@ BigQuery.prototype.query = function(options, callback) {
 
     var rows = [];
     if (resp.schema && resp.rows) {
-      rows = Table.mergeSchemaWithRows_(resp.schema, resp.rows);
+      rows = Table.mergeSchemaWithRows_(BigQuery, resp.schema, resp.rows);
     }
 
     var nextQuery = null;

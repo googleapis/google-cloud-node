@@ -2,7 +2,7 @@
   "name": "@google-cloud/storage",
   "version": "0.7.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Storage Client Library for Node.js",
+  "description": "Cloud Storage Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

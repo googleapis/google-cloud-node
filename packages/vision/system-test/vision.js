@@ -19,7 +19,6 @@
 var assert = require('assert');
 var async = require('async');
 var fs = require('fs');
-var http = require('http');
 var is = require('is');
 var multiline = require('multiline');
 var normalizeNewline = require('normalize-newline');
@@ -32,6 +31,7 @@ var Vision = require('../');
 
 describe('Vision', function() {
   var IMAGES = {
+    document: path.join(__dirname, 'data/document.jpg'),
     logo: path.join(__dirname, 'data/logo.jpg'),
     rushmore: path.join(__dirname, 'data/rushmore.jpg'),
     text: path.join(__dirname, 'data/text.png'),
@@ -82,25 +82,14 @@ describe('Vision', function() {
   });
 
   it('should detect from a URL', function(done) {
-    var server = http.createServer(function(req, res) {
-      fs.readFile(IMAGES.logo, function(err, resp) {
-        assert.ifError(err);
-        res.end(resp);
-      });
-    });
+    var url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
 
-    server.listen(8800, function(err) {
+    vision.detect(url, ['logos'], function(err, logos) {
       assert.ifError(err);
 
-      var url = 'http://localhost:8800/logo.png';
+      assert.deepEqual(logos, ['Google']);
 
-      vision.detect(url, ['logos'], function(err, logos) {
-        assert.ifError(err);
-
-        assert.deepEqual(logos, ['Google']);
-
-        done();
-      });
+      done();
     });
   });
 
@@ -241,6 +230,59 @@ describe('Vision', function() {
 
         var image2detections = detections[1];
         assert.deepEqual(image2detections, {});
+
+        done();
+      });
+    });
+  });
+
+  describe('crops', function() {
+    it('should detect crops from an image', function(done) {
+      vision.detectCrops(IMAGES.logo, function(err, crops) {
+        assert.ifError(err);
+        assert.strictEqual(crops.length, 1);
+        assert.strictEqual(crops[0].length, 4);
+        done();
+      });
+    });
+
+    it('should detect crops from multiple images', function(done) {
+      vision.detectCrops([
+        IMAGES.logo,
+        IMAGES.rushmore
+      ], function(err, crops) {
+        assert.ifError(err);
+
+        assert.strictEqual(crops.length, 2);
+        assert.strictEqual(crops[0][0].length, 4);
+        assert.strictEqual(crops[1][0].length, 4);
+
+        done();
+      });
+    });
+  });
+
+  describe('documents', function() {
+    it('should detect text from a document', function(done) {
+      vision.readDocument(IMAGES.document, function(err, text) {
+        assert.ifError(err);
+
+        assert.strictEqual(typeof text, 'string');
+
+        done();
+      });
+    });
+
+    it('should detect pages from multiple documents', function(done) {
+      vision.readDocument([
+        IMAGES.document,
+        IMAGES.logo
+      ], function(err, pages) {
+        assert.ifError(err);
+
+        assert.strictEqual(pages.length, 2);
+        assert(typeof pages[0], 'object');
+        assert(typeof pages[1], 'object');
 
         done();
       });
@@ -502,6 +544,32 @@ describe('Vision', function() {
         assert.ifError(err);
 
         assert(!is.boolean(ss.adult));
+
+        done();
+      });
+    });
+  });
+
+  describe('similar', function() {
+    it('should detect similar images from the internet', function(done) {
+      vision.detectSimilar(IMAGES.logo, function(err, images) {
+        assert.ifError(err);
+        assert(images.length > -1);
+        done();
+      });
+    });
+
+    it('should detect similar images from multiple images', function(done) {
+      vision.detectSimilar([
+        IMAGES.logo,
+        IMAGES.rushmore
+      ], function(err, images) {
+        assert.ifError(err);
+
+        assert.strictEqual(images.length, 2);
+
+        assert(images[0].length > -1);
+        assert(images[1].length > -1);
 
         done();
       });

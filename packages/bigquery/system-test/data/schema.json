@@ -1,0 +1,81 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "Name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Age",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "Weight",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "IsMagic",
+    "type": "BOOLEAN"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "Name",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "LastUsed",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "DiscoveredBy",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "Name",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "Power",
+            "type": "FLOAT"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "Properties",
+        "type": "RECORD"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "Icon",
+        "type": "BYTES"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "Spells",
+    "type": "RECORD"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "TeaTime",
+    "type": "TIME"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "NextVacation",
+    "type": "DATE"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "FavoriteTime",
+    "type": "DATETIME"
+  }
+]

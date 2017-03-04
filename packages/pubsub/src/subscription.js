@@ -60,7 +60,7 @@ var PUBSUB_API_TIMEOUT = 90000;
  *     response before the connection is broken. (default: 90000)
  */
 /**
- * A Subscription object will give you access to your Google Cloud Pub/Sub
+ * A Subscription object will give you access to your Cloud Pub/Sub
  * subscription.
  *
  * Subscriptions are sometimes retrieved when using various methods:
@@ -302,7 +302,7 @@ function Subscription(pubsub, options) {
    *
    * *The IAM access control features described in this document are Beta,
    * including the API methods to get and set IAM policies, and to test IAM
-   * permissions. Google Cloud Pub/Sub's use of IAM features is not covered by
+   * permissions. Cloud Pub/Sub's use of IAM features is not covered by
    * any SLA or deprecation policy, and may be subject to backward-incompatible
    * changes.*
    *

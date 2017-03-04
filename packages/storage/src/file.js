@@ -274,7 +274,7 @@ function File(bucket, name, options) {
   }
 
   /**
-   * Google Cloud Storage uses access control lists (ACLs) to manage object and
+   * Cloud Storage uses access control lists (ACLs) to manage object and
    * bucket access. ACLs are the mechanism you use to share objects with other
    * users and allow other users to access your buckets and objects.
    *
@@ -1629,7 +1629,7 @@ File.prototype.makePublic = function(callback) {
  * a Bucket or File object or a URL beginning with "gs://".
  *
  * **Warning**:
- * There is currently no atomic `move` method in the Google Cloud Storage API,
+ * There is currently no atomic `move` method in the Cloud Storage API,
  * so this method is a composition of {module:storage/file#copy} (to the new
  * location) and {module:storage/file#delete} (from the old location). While
  * unlikely, it is possible that an error returned to your callback could be

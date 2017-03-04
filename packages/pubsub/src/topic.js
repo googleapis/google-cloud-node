@@ -39,7 +39,7 @@ var IAM = require('./iam.js');
  * @param {string} name - Name of the topic.
  */
 /**
- * A Topic object allows you to interact with a Google Cloud Pub/Sub topic.
+ * A Topic object allows you to interact with a Cloud Pub/Sub topic.
  *
  * @constructor
  * @alias module:pubsub/topic
@@ -197,7 +197,7 @@ function Topic(pubsub, name) {
    *
    * *The IAM access control features described in this document are Beta,
    * including the API methods to get and set IAM policies, and to test IAM
-   * permissions. Google Cloud Pub/Sub's use of IAM features is not covered by
+   * permissions. Cloud Pub/Sub's use of IAM features is not covered by
    * any SLA or deprecation policy, and may be subject to backward-incompatible
    * changes.*
    *
