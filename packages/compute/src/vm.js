@@ -838,7 +838,7 @@ VM.prototype.request = function(reqOpts, callback) {
  * Poll `getMetadata` to check the VM's status. This runs a loop to ping
  * the API on an interval.
  *
- * Note: This method is automatically called when a `waitFor()` call 
+ * Note: This method is automatically called when a `waitFor()` call
  * is made.
  *
  * @private
@@ -856,13 +856,12 @@ VM.prototype.startPolling_ = function() {
       if (err) {
         self.waiters[index].callback(err, null);
         self.waiters.splice(index, 1);
-      }
-      else if (metadata && metadata.status === self.waiters[index].status) {
+      } else if (metadata && metadata.status === self.waiters[index].status) {
         self.waiters[index].callback(null, metadata);
         self.waiters.splice(index, 1);
-      }
-      else {
-        if ((now.getTime() / 1000) - self.waiters[index].startTime >= self.waiters[index].timeout) {
+      } else {
+        if ((now.getTime() / 1000) - self.waiters[index].startTime >=
+              self.waiters[index].timeout) {
           self.waiters[index].callback({
             name: 'WaitForTimeout'
           },null);
@@ -872,8 +871,7 @@ VM.prototype.startPolling_ = function() {
     }
     if (self.waiters.length <= 0) {
       self.hasActiveWaiters = false;
-    }
-    else {
+    } else {
       setTimeout(self.startPolling_.bind(self), WAIT_FOR_POLLING_INTERVAL);
     }
   });
@@ -881,7 +879,7 @@ VM.prototype.startPolling_ = function() {
 
 /**
  * This function will callback when the VM is in the specified state.
- * 
+ *
  * Will time out after the specified time (default: 300 seconds).
  *
  * @param {string} status - The status to wait for. This can be:
@@ -894,12 +892,13 @@ VM.prototype.startPolling_ = function() {
  *  - "TERMINATED"
  * @param {object=} options - Configuration object.
  * @param {number} options.timeout - The number of seconds to wait until
- *     timing out. 
+ *     timing out.
  *     Default: `300`
  *     Maximum: `600`
  * @param {function} callback - The callback function.
  * @param {object} callback.metadata - The instance's metadata.
- * @param {?error} callback.err - An error returned while waiting for the status.
+ * @param {?error} callback.err - An error returned while waiting
+ *     for the status.
  *
  * @example
  * vm.waitFor('RUNNING', function(err, metadata, apiResponse) {
@@ -936,34 +935,33 @@ VM.prototype.waitFor = function(status, options, callback) {
     options = {};
   }
   options = options || {};
-  //If timeout not set, set to default of 300 seconds.
+  // If timeout not set, set to default of 300 seconds.
   if (!options.timeout) {
     options.timeout = 300;
   }
-  //If timeout is more than 600 seconds, set to 600 seconds.
+  // If timeout is more than 600 seconds, set to 600 seconds.
   else if (options.timeout > 600) {
     options.timeout = 600;
   }
-  //If timeout is less than 0, set to 0 seconds.
+  // If timeout is less than 0, set to 0 seconds.
   else if (options.timeout < 0) {
     options.timeout = 0;
   }
 
-  if (VALID_STATUSES.indexOf(status) === -1){
+  if (VALID_STATUSES.indexOf(status) === -1) {
     callback({
-      name : 'StatusNotValid'
+      name: 'StatusNotValid'
     }, null);
   }
   var now = new Date();
   this.waiters.push({
-    status : status,
-    timeout : options.timeout,
-    startTime : now.getTime() / 1000,
-    callback : callback
+    status: status,
+    timeout: options.timeout,
+    startTime: now.getTime() / 1000,
+    callback: callback
   });
 
-  if (this.hasActiveWaiters === false)
-  {
+  if (this.hasActiveWaiters === false) {
     this.hasActiveWaiters = true;
     this.startPolling_();
   }
