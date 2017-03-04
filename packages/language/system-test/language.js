@@ -224,13 +224,13 @@ describe('Language', function() {
 
             it('should return only a single feature', function(done) {
               DOC.annotate({
-                entities: true
+                extractEntities: true
               }, validateAnnotationSingleFeatureSimple(done));
             });
 
             it('should return a single feat in verbose mode', function(done) {
               DOC.annotate({
-                entities: true,
+                extractEntities: true,
                 verbose: true
               }, validateAnnotationSingleFeatureVerbose(done));
             });
