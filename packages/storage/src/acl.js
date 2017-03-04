@@ -26,7 +26,7 @@ var is = require('is');
 var util = require('util');
 
 /**
- * Google Cloud Storage uses access control lists (ACLs) to manage object and
+ * Cloud Storage uses access control lists (ACLs) to manage object and
  * bucket access. ACLs are the mechanism you use to share objects with other
  * users and allow other users to access your buckets and objects.
  *

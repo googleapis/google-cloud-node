@@ -1,8 +1,8 @@
 {
   "name": "@google-cloud/speech",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Speech Client Library for Node.js",
+  "description": "Cloud Speech Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -59,7 +59,7 @@
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.12.0",
-    "google-proto-files": "^0.9.1",
+    "google-proto-files": "^0.10.0",
     "is": "^3.1.0",
     "propprop": "^0.3.1",
     "pumpify": "^1.3.5",

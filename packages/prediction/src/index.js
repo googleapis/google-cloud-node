@@ -109,7 +109,7 @@ util.inherits(Prediction, common.Service);
  * });
  *
  * //-
- * // Create a model, using an existing CSV file in a Google Cloud Storage
+ * // Create a model, using an existing CSV file in a Cloud Storage
  * // bucket as training data.
  * //-
  * var gcs = require('@google-cloud/storage')({

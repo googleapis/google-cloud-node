@@ -1,8 +1,8 @@
 {
   "name": "@google-cloud/common-grpc",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Google Inc.",
-  "description": "Common components for Google Cloud APIs Node.js Client Libraries that require gRPC",
+  "description": "Common components for Cloud APIs Node.js Client Libraries that require gRPC",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -42,7 +42,7 @@
     "dot-prop": "^2.4.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.0",
-    "google-proto-files": "^0.9.1",
+    "google-proto-files": "^0.10.0",
     "grpc": "^1.1.1",
     "is": "^3.2.0",
     "modelo": "^4.2.0",

@@ -37,10 +37,10 @@ cp('-rf', 'docs/json/*', 'gh-pages/json');
 cp('docs/manifest.json', 'gh-pages');
 
 git.add('docs/manifest.json');
-git.commit('Update manifest for ' + tagName + ' [skip ci]');
+git.commit('Update manifest for ' + tagName);
 
 ghpages.add('manifest.json', 'json');
-ghpages.commit('Update docs for ' + tagName + ' [skip ci]');
+ghpages.commit('Update docs for ' + tagName);
 
 console.log(multiline(function() {/*
 

@@ -39,7 +39,7 @@ function Metadata(logging) {
 }
 
 /**
- * Create a descriptor for Google Cloud Functions.
+ * Create a descriptor for Cloud Functions.
  *
  * @param {string} projectId - The project ID.
  * @returns {object}

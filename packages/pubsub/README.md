@@ -1,5 +1,5 @@
 # @google-cloud/pubsub ([Alpha][versioning])
-> Google Cloud Pub/Sub Client Library for Node.js
+> Cloud Pub/Sub Client Library for Node.js
 
 *Looking for more Google APIs than just Pub/Sub? You might want to check out [`google-cloud`][google-cloud].*
 
@@ -49,7 +49,7 @@ var pubsub = require('@google-cloud/pubsub')({
 
 ## Authentication
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
 
 ### On Google Cloud Platform
 

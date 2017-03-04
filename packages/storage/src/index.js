@@ -54,7 +54,7 @@ var File = require('./file.js');
  */
 /**
  * <h4>ACLs</h4>
- * Google Cloud Storage uses access control lists (ACLs) to manage object and
+ * Cloud Storage uses access control lists (ACLs) to manage object and
  * bucket access. ACLs are the mechanism you use to share files with other users
  * and allow other users to access your buckets and files.
  *
@@ -64,7 +64,7 @@ var File = require('./file.js');
  * @alias module:storage
  * @constructor
  *
- * @resource [Google Cloud Storage overview]{@link https://cloud.google.com/storage/docs/overview}
+ * @resource [Cloud Storage overview]{@link https://cloud.google.com/storage/docs/overview}
  * @resource [Access Control]{@link https://cloud.google.com/storage/docs/access-control}
  *
  * @param {object} options - [Configuration object](#/docs).
@@ -90,7 +90,7 @@ function Storage(options) {
 util.inherits(Storage, common.Service);
 
 /**
- * Google Cloud Storage uses access control lists (ACLs) to manage object and
+ * Cloud Storage uses access control lists (ACLs) to manage object and
  * bucket access. ACLs are the mechanism you use to share objects with other
  * users and allow other users to access your buckets and objects.
  *
@@ -148,7 +148,7 @@ Storage.acl = {
 Storage.prototype.acl = Storage.acl;
 
 /**
- * Get a reference to a Google Cloud Storage bucket.
+ * Get a reference to a Cloud Storage bucket.
  *
  * @param {object|string} name - Name of the bucket.
  * @return {module:storage/bucket}
@@ -159,7 +159,7 @@ Storage.prototype.acl = Storage.acl;
  */
 Storage.prototype.bucket = function(name) {
   if (!name) {
-    throw new Error('A bucket name is needed to use Google Cloud Storage.');
+    throw new Error('A bucket name is needed to use Cloud Storage.');
   }
 
   return new Bucket(this, name);
@@ -182,7 +182,7 @@ Storage.prototype.channel = function(id, resourceId) {
 /**
  * Create a bucket.
  *
- * Google Cloud Storage uses a flat namespace, so you can't create a bucket with
+ * Cloud Storage uses a flat namespace, so you can't create a bucket with
  * a name that is already in use. For more information, see
  * [Bucket Naming Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
  *

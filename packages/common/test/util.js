@@ -105,7 +105,7 @@ describe('common/util', function() {
 
   it('should export an error for module instantiation errors', function() {
     var errorMessage = format([
-      'Sorry, we cannot connect to Google Cloud Services without a project ID.',
+      'Sorry, we cannot connect to Cloud Services without a project ID.',
       'You may specify one with an environment variable named',
       '"GCLOUD_PROJECT". See {baseUrl}/{path} for a detailed guide on creating',
       'an authenticated connection.'

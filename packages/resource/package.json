@@ -2,7 +2,7 @@
   "name": "@google-cloud/resource",
   "version": "0.6.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Resource Manager Client Library for Node.js",
+  "description": "Cloud Resource Manager Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -57,7 +57,7 @@
   "devDependencies": {
     "arrify": "^1.0.0",
     "async": "^2.1.2",
-    "google-auto-auth": "^0.2.4",
+    "google-auto-auth": "^0.5.2",
     "methmeth": "^1.1.0",
     "mocha": "^3.0.1",
     "proxyquire": "^1.7.10",

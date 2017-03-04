@@ -28,7 +28,7 @@ var util = require('util');
  * @param {module:storage} storage - The Storage instance.
  */
 /**
- * Create a channel object to interact with a Google Cloud Storage channel.
+ * Create a channel object to interact with a Cloud Storage channel.
  *
  * @resource [Object Change Notification]{@link https://cloud.google.com/storage/docs/object-change-notification}
  *

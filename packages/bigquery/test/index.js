@@ -183,7 +183,8 @@ describe('BigQuery', function() {
   });
 
   describe('datetime', function() {
-    var INPUT_STRING = '2017-1-1 14:2:38.883388';
+    var INPUT_STRING = '2017-1-1T14:2:38.883388Z';
+
     var INPUT_OBJ = {
       year: 2017,
       month: 1,
@@ -194,24 +195,21 @@ describe('BigQuery', function() {
       fractional: 883388
     };
 
+    var EXPECTED_VALUE = '2017-1-1 14:2:38.883388';
+
     it('should expose static and instance constructors', function() {
-      var staticDt = BigQuery.datetime();
+      var staticDt = BigQuery.datetime(INPUT_OBJ);
       assert(staticDt instanceof BigQuery.datetime);
       assert(staticDt instanceof bq.datetime);
 
-      var instanceDt = bq.datetime();
+      var instanceDt = bq.datetime(INPUT_OBJ);
       assert(instanceDt instanceof BigQuery.datetime);
       assert(instanceDt instanceof bq.datetime);
     });
 
-    it('should accept a string', function() {
-      var datetime = bq.datetime(INPUT_STRING);
-      assert.strictEqual(datetime.value, INPUT_STRING);
-    });
-
     it('should accept an object', function() {
       var datetime = bq.datetime(INPUT_OBJ);
-      assert.strictEqual(datetime.value, INPUT_STRING);
+      assert.strictEqual(datetime.value, EXPECTED_VALUE);
     });
 
     it('should not include time if hours not provided', function() {
@@ -222,6 +220,11 @@ describe('BigQuery', function() {
       });
 
       assert.strictEqual(datetime.value, '2016-1-1');
+    });
+
+    it('should accept a string', function() {
+      var datetime = bq.datetime(INPUT_STRING);
+      assert.strictEqual(datetime.value, EXPECTED_VALUE);
     });
   });
 
@@ -271,49 +274,37 @@ describe('BigQuery', function() {
   });
 
   describe('timestamp', function() {
-    var INPUT_STRING = '2016-12-06 12:00:00.000+0';
+    var INPUT_STRING = '2016-12-06T12:00:00.000Z';
     var INPUT_DATE = new Date(INPUT_STRING);
+    var EXPECTED_VALUE = '2016-12-06 12:00:00.000';
 
     it('should expose static and instance constructors', function() {
-      var staticT = BigQuery.timestamp();
+      var staticT = BigQuery.timestamp(INPUT_DATE);
       assert(staticT instanceof BigQuery.timestamp);
       assert(staticT instanceof bq.timestamp);
 
-      var instanceT = bq.timestamp();
+      var instanceT = bq.timestamp(INPUT_DATE);
       assert(instanceT instanceof BigQuery.timestamp);
       assert(instanceT instanceof bq.timestamp);
     });
 
     it('should accept a string', function() {
       var timestamp = bq.timestamp(INPUT_STRING);
-      assert.strictEqual(timestamp.value, INPUT_STRING);
+      assert.strictEqual(timestamp.value, EXPECTED_VALUE);
     });
 
     it('should accept a Date object', function() {
       var timestamp = bq.timestamp(INPUT_DATE);
-      assert.strictEqual(timestamp.value, INPUT_STRING.replace('+0', ''));
-    });
-
-    it('should default to now', function() {
-      var now = new Date();
-      var timestamp = new Date(bq.timestamp().value + '+0');
-
-      var expectedTimestampBoundaries = {
-        start: new Date(now.getTime() - 1000),
-        end: new Date(now.getTime() + 1000)
-      };
-
-      assert(timestamp >= expectedTimestampBoundaries.start);
-      assert(timestamp <= expectedTimestampBoundaries.end);
+      assert.strictEqual(timestamp.value, EXPECTED_VALUE);
     });
   });
 
   describe('getType_', function() {
     it('should return correct types', function() {
       assert.strictEqual(BigQuery.getType_(bq.date()).type, 'DATE');
-      assert.strictEqual(BigQuery.getType_(bq.datetime()).type, 'DATETIME');
+      assert.strictEqual(BigQuery.getType_(bq.datetime('')).type, 'DATETIME');
       assert.strictEqual(BigQuery.getType_(bq.time()).type, 'TIME');
-      assert.strictEqual(BigQuery.getType_(bq.timestamp()).type, 'TIMESTAMP');
+      assert.strictEqual(BigQuery.getType_(bq.timestamp(0)).type, 'TIMESTAMP');
       assert.strictEqual(BigQuery.getType_(new Buffer(2)).type, 'BYTES');
       assert.strictEqual(BigQuery.getType_(true).type, 'BOOL');
       assert.strictEqual(BigQuery.getType_(8).type, 'INT64');
@@ -1034,8 +1025,9 @@ describe('BigQuery', function() {
       var rows = [{ row: 'a' }, { row: 'b' }, { row: 'c' }];
       var schema = [{ fields: [] }];
 
-      mergeSchemaWithRowsOverride = function(s, r) {
+      mergeSchemaWithRowsOverride = function(bq, s, r) {
         mergeSchemaWithRowsOverride = null;
+        assert.strictEqual(bq, BigQuery);
         assert.deepEqual(s, schema);
         assert.deepEqual(r, rows);
         done();

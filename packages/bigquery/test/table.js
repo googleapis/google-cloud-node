@@ -69,11 +69,43 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
+function fakeDate(input) {
+  return {
+    type: 'fakeDate',
+    input: input
+  };
+}
+
+function fakeDatetime(input) {
+  return {
+    type: 'fakeDatetime',
+    input: input
+  };
+}
+
+function fakeTime(input) {
+  return {
+    type: 'fakeTime',
+    input: input
+  };
+}
+
+function fakeTimestamp(input) {
+  return {
+    type: 'fakeTimestamp',
+    input: input
+  };
+}
+
 describe('BigQuery/Table', function() {
   var DATASET = {
     id: 'dataset-id',
     createTable: util.noop,
     bigQuery: {
+      date: fakeDate,
+      datetime: fakeDatetime,
+      time: fakeTime,
+      timestamp: fakeTimestamp,
       projectId: 'project-id',
       job: function(id) {
         return { id: id };
@@ -274,13 +306,19 @@ describe('BigQuery/Table', function() {
                     }
                   }
                 ]
-              }
+              },
+              { v: 'date-input' },
+              { v: 'datetime-input' },
+              { v: 'time-input' }
             ]
           },
           expected: {
             id: 3,
             name: 'Milo',
-            dob: now,
+            dob: {
+              input: now,
+              type: 'fakeTimestamp'
+            },
             has_claws: false,
             hair_count: 5.222330009847,
             arr: [10],
@@ -292,7 +330,19 @@ describe('BigQuery/Table', function() {
                   nested_property: 'nested_value'
                 }
               }
-            ]
+            ],
+            date: {
+              input: 'date-input',
+              type: 'fakeDate'
+            },
+            datetime: {
+              input: 'datetime-input',
+              type: 'fakeDatetime'
+            },
+            time: {
+              input: 'time-input',
+              type: 'fakeTime'
+            }
           }
         }
       ];
@@ -334,8 +384,27 @@ describe('BigQuery/Table', function() {
         ]
       });
 
+      schemaObject.fields.push({
+        name: 'date',
+        type: 'DATE'
+      });
+
+      schemaObject.fields.push({
+        name: 'datetime',
+        type: 'DATETIME'
+      });
+
+      schemaObject.fields.push({
+        name: 'time',
+        type: 'TIME'
+      });
+
       var rawRows = rows.map(prop('raw'));
-      var mergedRows = Table.mergeSchemaWithRows_(schemaObject, rawRows);
+      var mergedRows = Table.mergeSchemaWithRows_(
+        DATASET.bigQuery,
+        schemaObject,
+        rawRows
+      );
 
       mergedRows.forEach(function(mergedRow, index) {
         assert.deepEqual(mergedRow, rows[index].expected);
