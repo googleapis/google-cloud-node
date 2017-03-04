@@ -54,13 +54,13 @@ var WAIT_FOR_POLLING_INTERVAL = 2000;
  * The statuses that a VM can be in.
  */
 var VALID_STATUSES = [
-     "PROVISIONING",
-     "STAGING",
-     "RUNNING",
-     "STOPPING",
-     "SUSPENDING",
-     "SUSPENDED",
-     "TERMINATED"
+     'PROVISIONING',
+     'STAGING',
+     'RUNNING',
+     'STOPPING',
+     'SUSPENDING',
+     'SUSPENDED',
+     'TERMINATED'
    ];
 
 /*! Developer Documentation
@@ -854,17 +854,17 @@ VM.prototype.startPolling_ = function() {
     var now = new Date();
     for (var index in self.waiters) {
       if (err) {
-        self.waiters[index].callback(err, null)
+        self.waiters[index].callback(err, null);
         self.waiters.splice(index, 1);
       }
       else if (metadata && metadata.status === self.waiters[index].status) {
-        self.waiters[index].callback(null, metadata)
+        self.waiters[index].callback(null, metadata);
         self.waiters.splice(index, 1);
       }
       else {
         if ((now.getTime() / 1000) - self.waiters[index].startTime >= self.waiters[index].timeout) {
           self.waiters[index].callback({
-            name: "WaitForTimeout"
+            name: 'WaitForTimeout'
           },null);
           self.waiters.splice(index, 1);
         }
@@ -946,12 +946,12 @@ VM.prototype.waitFor = function(status, options, callback) {
   }
   //If timeout is less than 0, set to 0 seconds.
   else if (options.timeout < 0) {
-    options.timeout = 0
+    options.timeout = 0;
   }
 
   if (VALID_STATUSES.indexOf(status) === -1){
     callback({
-      name : "StatusNotValid"
+      name : 'StatusNotValid'
     }, null);
   }
   var now = new Date();
