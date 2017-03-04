@@ -45,6 +45,24 @@ var DetachDiskError = createErrorClass('DetachDiskError', function(message) {
   this.message = message;
 });
 
+/**
+ * Interval for polling during waitFor.
+ */
+var WAIT_FOR_POLLING_INTERVAL = 2000;
+
+/**
+ * The statuses that a VM can be in.
+ */
+var VALID_STATUSES = [
+     "PROVISIONING",
+     "STAGING",
+     "RUNNING",
+     "STOPPING",
+     "SUSPENDING",
+     "SUSPENDED",
+     "TERMINATED"
+   ];
+
 /*! Developer Documentation
  *
  * @param {module:zone} zone - Zone object this instance belongs to.
@@ -185,6 +203,8 @@ function VM(zone, name) {
     createMethod: zone.createVM.bind(zone),
     methods: methods
   });
+  this.hasActiveWaiters = false;
+  this.waiters = [];
 }
 
 util.inherits(VM, common.ServiceObject);
@@ -812,6 +832,141 @@ VM.prototype.request = function(reqOpts, callback) {
 
     callback(null, operation, resp);
   });
+};
+
+/**
+ * Poll `getMetadata` to check the VM's status. This runs a loop to ping
+ * the API on an interval.
+ *
+ * Note: This method is automatically called when a `waitFor()` call 
+ * is made.
+ *
+ * @private
+ */
+VM.prototype.startPolling_ = function() {
+  var self = this;
+
+  if (!this.hasActiveWaiters) {
+    return;
+  }
+
+  this.getMetadata(function(err, metadata) {
+    var now = new Date();
+    for (var index in self.waiters) {
+      if (err) {
+        self.waiters[index].callback(err, null)
+        self.waiters.splice(index, 1);
+      }
+      else if (metadata && metadata.status === self.waiters[index].status) {
+        self.waiters[index].callback(null, metadata)
+        self.waiters.splice(index, 1);
+      }
+      else {
+        if ((now.getTime() / 1000) - self.waiters[index].startTime >= self.waiters[index].timeout) {
+          self.waiters[index].callback({
+            name: "WaitForTimeout"
+          },null);
+          self.waiters.splice(index, 1);
+        }
+      }
+    }
+    if (self.waiters.length <= 0) {
+      self.hasActiveWaiters = false;
+    }
+    else {
+      setTimeout(self.startPolling_.bind(self), WAIT_FOR_POLLING_INTERVAL);
+    }
+  });
+};
+
+/**
+ * This function will callback when the VM is in the specified state.
+ * 
+ * Will time out after the specified time (default: 300 seconds).
+ *
+ * @param {string} status - The status to wait for. This can be:
+ *  - "PROVISIONING"
+ *  - "STAGING"
+ *  - "RUNNING"
+ *  - "STOPPING"
+ *  - "SUSPENDING"
+ *  - "SUSPENDED"
+ *  - "TERMINATED"
+ * @param {object=} options - Configuration object.
+ * @param {number} options.timeout - The number of seconds to wait until
+ *     timing out. 
+ *     Default: `300`
+ *     Maximum: `600`
+ * @param {function} callback - The callback function.
+ * @param {object} callback.metadata - The instance's metadata.
+ * @param {?error} callback.err - An error returned while waiting for the status.
+ *
+ * @example
+ * vm.waitFor('RUNNING', function(err, metadata, apiResponse) {
+ *   if (!err) {
+ *     // The VM is running.
+ *   }
+ * });
+ *
+ * vm.waitFor('STOPPED', options, function(err, apiResponse) {
+ *   if (!err) {
+ *     // The VM is stopped.
+ *   }
+ * });
+ *
+ * //-
+ * // By default, `waitFor` will timeout after 300 seconds after waiting for
+ * // the desired state to occur. This can be changed to any number between
+ * // 0 and 600
+ * //-
+ * var options = {
+ *   timeout: 300
+ * };
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.waitFor('RUNNING', options).then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+VM.prototype.waitFor = function(status, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+  options = options || {};
+  //If timeout not set, set to default of 300 seconds.
+  if (!options.timeout) {
+    options.timeout = 300;
+  }
+  //If timeout is more than 600 seconds, set to 600 seconds.
+  else if (options.timeout > 600) {
+    options.timeout = 600;
+  }
+  //If timeout is less than 0, set to 0 seconds.
+  else if (options.timeout < 0) {
+    options.timeout = 0
+  }
+
+  if (VALID_STATUSES.indexOf(status) === -1){
+    callback({
+      name : "StatusNotValid"
+    }, null);
+  }
+  var now = new Date();
+  this.waiters.push({
+    status : status,
+    timeout : options.timeout,
+    startTime : now.getTime() / 1000,
+    callback : callback
+  });
+
+  if (this.hasActiveWaiters === false)
+  {
+    this.hasActiveWaiters = true;
+    this.startPolling_();
+  }
 };
 
 /*! Developer Documentation
