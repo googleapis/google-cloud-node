@@ -305,6 +305,26 @@ describe('Document', function() {
       }, assert.ifError);
     });
 
+    it('should honor raw API terminology', function(done) {
+      document.api.Language = {
+        annotateText: function(reqOpts) {
+          assert.deepEqual(reqOpts.features, {
+            extractDocumentSentiment: true,
+            extractEntities: true,
+            extractSyntax: true
+          });
+
+          done();
+        }
+      };
+
+      document.annotate({
+        extractDocumentSentiment: true,
+        extractEntities: true,
+        extractSyntax: true
+      }, assert.ifError);
+    });
+
     describe('error', function() {
       var apiResponse = {};
       var error = new Error('Error.');
