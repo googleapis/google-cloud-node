@@ -24,7 +24,7 @@ require('shelljs/global');
 
 var directories = fs.readdirSync(path.join(__dirname, '../packages'));
 var PARALLEL_LIMIT = Math.floor(directories.length / 2);
-var MAX_RETRIES = 1;
+var MAX_RETRIES = 2;
 
 // This is a helper method which will install each module's dependencies.
 
