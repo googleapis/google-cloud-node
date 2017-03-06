@@ -61,7 +61,6 @@
     "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
     "is-circular": "^1.0.1",
-    "lodash.union": "^4.6.0",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {

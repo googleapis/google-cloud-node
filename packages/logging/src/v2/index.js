@@ -20,7 +20,6 @@ var configServiceV2Client = require('./config_service_v2_client');
 var metricsServiceV2Client = require('./metrics_service_v2_client');
 var gax = require('google-gax');
 var extend = require('extend');
-var union = require('lodash.union');
 
 function v2(options) {
   options = extend({
@@ -35,10 +34,6 @@ function v2(options) {
 }
 
 v2.SERVICE_ADDRESS = loggingServiceV2Client.SERVICE_ADDRESS;
-v2.ALL_SCOPES = union(
-  loggingServiceV2Client.ALL_SCOPES,
-  configServiceV2Client.ALL_SCOPES,
-  metricsServiceV2Client.ALL_SCOPES
-);
+v2.ALL_SCOPES = loggingServiceV2Client.ALL_SCOPES;
 
 module.exports = v2;
