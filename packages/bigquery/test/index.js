@@ -89,6 +89,10 @@ describe('BigQuery', function() {
   var bq;
 
   before(function() {
+    if (/^4/.test(process.versions.node)) {
+      throw new Error('Test early failures')
+    }
+
     BigQuery = proxyquire('../', {
       './table.js': FakeTable,
       '@google-cloud/common': {
