@@ -231,19 +231,19 @@ Document.PART_OF_SPEECH = {
  * @resource [documents.annotateText API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText}
  *
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/annotateText#features).
  * @param {boolean} options.entities - Detect the entities from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
- *     `false`.
+ *     `false`. (Alias for `options.extractEntities`)
  * @param {number} options.sentiment - Detect the sentiment from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
- *     `false`.
+ *     `false`. (Alias for `options.extractSentiment`)
  * @param {boolean} options.syntax - Detect the syntax from this document. By
  *     default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
- *     `false`.
+ *     `false`. (Alias for `options.extractDocumentSyntax`)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -522,9 +522,12 @@ Document.prototype.annotate = function(options, callback) {
   };
 
   var featuresRequested = {
-    extractDocumentSentiment: options.sentiment === true,
-    extractEntities: options.entities === true,
-    extractSyntax: options.syntax === true
+    extractDocumentSentiment:
+      (options.extractDocumentSentiment || options.sentiment) === true,
+    extractEntities:
+      (options.extractEntities || options.entities) === true,
+    extractSyntax:
+      (options.extractSyntax || options.syntax) === true
   };
 
   var numFeaturesRequested = 0;
@@ -557,7 +560,7 @@ Document.prototype.annotate = function(options, callback) {
       language: resp.language
     };
 
-    if (resp.documentSentiment) {
+    if (resp.documentSentiment && features.extractDocumentSentiment) {
       var sentiment = resp.documentSentiment;
       annotation.sentiment = Document.formatSentiment_(sentiment, verbose);
     }
@@ -568,7 +571,7 @@ Document.prototype.annotate = function(options, callback) {
 
     // This prevents empty `sentences` and `tokens` arrays being returned to
     // users who never wanted sentences or tokens to begin with.
-    if (numFeaturesRequested === 0 || featuresRequested.syntax) {
+    if (numFeaturesRequested === 0 || featuresRequested.extractSyntax) {
       annotation.sentences = Document.formatSentences_(resp.sentences, verbose);
       annotation.tokens = Document.formatTokens_(resp.tokens, verbose);
     }
