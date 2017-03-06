@@ -26,11 +26,11 @@ function v2(options) {
     scopes: v2.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
-  var result = {};
-  extend(result, loggingServiceV2Client(gaxGrpc));
-  extend(result, configServiceV2Client(gaxGrpc));
-  extend(result, metricsServiceV2Client(gaxGrpc));
-  return result;
+  return extend(
+      {},
+      loggingServiceV2Client(gaxGrpc),
+      configServiceV2Client(gaxGrpc),
+      metricsServiceV2Client(gaxGrpc));
 }
 
 v2.SERVICE_ADDRESS = loggingServiceV2Client.SERVICE_ADDRESS;
