@@ -57,8 +57,6 @@
     "google-gax": "^0.12.2",
     "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
-    "lodash.merge": "^4.6.0",
-    "lodash.union": "^4.6.0",
     "modelo": "^4.2.0",
     "propprop": "^0.3.0",
     "uuid": "^3.0.1"

@@ -30,7 +30,6 @@
 var configData = require('./publisher_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
-var merge = require('lodash.merge');
 
 var SERVICE_ADDRESS = 'pubsub.googleapis.com';
 
@@ -855,7 +854,8 @@ function PublisherClientBuilder(gaxGrpc) {
   }]);
   extend(this, publisherClient.google.pubsub.v1);
 
-  var grpcClients = merge(
+  var grpcClients = extend(
+    true,
     {},
     iamPolicyClient,
     publisherClient
