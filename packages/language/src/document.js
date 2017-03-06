@@ -534,12 +534,11 @@ Document.prototype.annotate = function(options, callback) {
     };
 
     if (resp.documentSentiment && features.extractDocumentSentiment) {
-      var sentiment = resp.documentSentiment;
-      annotation.sentiment = Document.formatSentiment_(sentiment);
+      annotation.sentiment = resp.documentSentiment;
     }
 
     if (resp.entities) {
-      annotation.entities = Document.formatEntities_(resp.entities);
+      annotation.entities = resp.entities;
     }
 
     // This prevents empty `sentences` and `tokens` arrays being returned to
@@ -659,10 +658,7 @@ Document.prototype.detectEntities = function(options, callback) {
       return;
     }
 
-    var originalResp = extend(true, {}, resp);
-    var groupedEntities = Document.formatEntities_(resp.entities);
-
-    callback(null, groupedEntities, originalResp);
+    callback(null, resp.entities, resp);
   });
 };
 
@@ -731,15 +727,7 @@ Document.prototype.detectSentiment = function(options, callback) {
       return;
     }
 
-    var originalResp = extend(true, {}, resp);
-    var sentiment = Document.formatSentiment_(resp.documentSentiment);
-
-    sentiment = extend(sentiment, {
-      sentences: resp.sentences,
-      language: resp.language
-    });
-
-    callback(null, sentiment, originalResp);
+    callback(null, resp.documentSentiment, resp);
   });
 };
 
@@ -843,89 +831,8 @@ Document.prototype.detectSyntax = function(options, callback) {
       return;
     }
 
-    var originalResp = extend(true, {}, resp);
-    var tokens = resp.tokens;
-
-    var syntax = {
-      tokens: syntax,
-      sentences: resp.sentences,
-      language: resp.language
-    };
-
-    callback(null, syntax, originalResp);
+    callback(null, resp.tokens, resp);
   });
-};
-
-/**
- * Take a raw response from the API and make it more user-friendly.
- *
- * @private
- *
- * @param {object} entities - A group of entities returned from the API.
- * @return {object} - The formatted entity object.
- */
-Document.formatEntities_ = function(entities) {
-  var GROUP_NAME_TO_TYPE = {
-    UNKNOWN: 'unknown',
-    PERSON: 'people',
-    LOCATION: 'places',
-    ORGANIZATION: 'organizations',
-    EVENT: 'events',
-    WORK_OF_ART: 'art',
-    CONSUMER_GOOD: 'goods',
-    OTHER: 'other'
-  };
-
-  return entities.reduce(function(acc, entity) {
-    entity = extend(true, {}, entity);
-
-    var groupName = GROUP_NAME_TO_TYPE[entity.type];
-
-    acc[groupName] = arrify(acc[groupName]);
-    acc[groupName].push(entity);
-    acc[groupName].sort(Document.sortByProperty_('salience'));
-
-    return acc;
-  }, {});
-};
-
-/**
- * Take a raw response from the API and make it more user-friendly.
- *
- * @private
- *
- * @param {object} sentiment - An analysis of the document's sentiment from the
- *     API.
- * @return {number|object} - The sentiment represented as an object containing
- *     `score` and `magnitude` measurements.
- */
-Document.formatSentiment_ = function(sentiment) {
-  return {
-    score: sentiment.score,
-    magnitude: sentiment.magnitude
-  };
-};
-
-/**
- * Comparator function to sort an array of objects by a property.
- *
- * @private
- *
- * @param {string} propertyName - The name of the property to sort by.
- * @return {function} - The comparator function.
- */
-Document.sortByProperty_ = function(propertyName) {
-  return function(entityA, entityB) {
-    if (entityA[propertyName] < entityB[propertyName]) {
-      return 1;
-    }
-
-    if (entityA[propertyName] > entityB[propertyName]) {
-      return -1;
-    }
-
-    return 0;
-  };
 };
 
 /**
