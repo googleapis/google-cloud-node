@@ -27,6 +27,8 @@ set +e # allows `git` commands during prepare-ghpages to fail
 npm run prepare-ghpages
 
 cd gh-pages
+git fetch origin
+git rebase origin/gh-pages
 git push origin gh-pages
 
 cd ..
@@ -42,4 +44,6 @@ then
   exit 0
 fi
 
+git fetch origin
+git rebase origin/master
 git push origin master --follow-tags

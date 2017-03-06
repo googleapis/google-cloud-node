@@ -916,6 +916,36 @@ describe('storage', function() {
         });
       });
     });
+
+    it('should allow changing the storage class', function(done) {
+      var file = bucket.file(generateName());
+
+      async.series([
+        function(next) {
+          bucket.upload(FILES.logo.path, { destination: file }, next);
+        },
+
+        function(next) {
+          file.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(metadata.storageClass, 'STANDARD');
+            next();
+          });
+        },
+
+        function(next) {
+          file.setStorageClass('multi-regional', next);
+        }
+      ], function(err) {
+        assert.ifError(err);
+
+        file.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
+          done();
+        });
+      });
+    });
   });
 
   describe('channels', function() {
