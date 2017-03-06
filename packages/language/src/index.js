@@ -81,8 +81,9 @@ function Language(options) {
  *     File object.
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -173,8 +174,9 @@ Language.prototype.annotate = function(content, options, callback) {
  *     File object.
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -264,8 +266,9 @@ Language.prototype.detectEntities = function(content, options, callback) {
  *     File object.
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -346,8 +349,9 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  *     File object.
  * @param {object=} options - Configuration object. See
  *     [documents.analyzeSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -436,8 +440,6 @@ Language.prototype.detectSyntax = function(content, options, callback) {
  *     object to specify the encoding and/or language of the document, use this
  *     property to pass the inline content of the document or a Storage File
  *     object.
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -481,8 +483,6 @@ Language.prototype.document = function(config) {
  * @param {string|module:storage/file} content - Inline HTML content or a
  *     Storage File object.
  * @param {object=} options - Configuration object.
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -531,8 +531,6 @@ Language.prototype.html = function(content, options) {
  * @param {string|module:storage/file} content - Inline text content or a
  *     Storage File object.
  * @param {object=} options - Configuration object.
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
