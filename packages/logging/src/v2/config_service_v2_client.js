@@ -73,31 +73,36 @@ var ALL_SCOPES = [
  * @class
  */
 function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
   var defaults = gaxGrpc.constructSettings(
       'google.logging.v2.ConfigServiceV2',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
+  var self = this;
+
+  this.auth = gaxGrpc.auth;
   var configServiceV2Stub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.logging.v2.ConfigServiceV2,
-      {sslCreds: sslCreds});
+      opts);
   var configServiceV2StubMethods = [
     'listSinks',
     'getSink',
@@ -106,13 +111,16 @@ function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
     'deleteSink'
   ];
   configServiceV2StubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       configServiceV2Stub.then(function(configServiceV2Stub) {
-        return configServiceV2Stub[methodName].bind(configServiceV2Stub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return configServiceV2Stub[methodName].apply(configServiceV2Stub, args);
+        };
       }),
       defaults[methodName],
       PAGE_DESCRIPTORS[methodName]);
-  }.bind(this));
+  });
 }
 
 // Path templates
@@ -177,6 +185,15 @@ ConfigServiceV2Client.prototype.matchSinkFromSinkName = function(sinkName) {
   return SINK_PATH_TEMPLATE.match(sinkName).sink;
 };
 
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+ConfigServiceV2Client.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
+};
+
 // Service calls
 
 /**
@@ -185,10 +202,8 @@ ConfigServiceV2Client.prototype.matchSinkFromSinkName = function(sinkName) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name where this sink was created:
- *
- *       "projects/[PROJECT_ID]"
- *       "organizations/[ORGANIZATION_ID]"
+ *   Required. The parent resource whose sinks are to be listed.
+ *   Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -283,10 +298,8 @@ ConfigServiceV2Client.prototype.listSinks = function(request, options, callback)
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name where this sink was created:
- *
- *       "projects/[PROJECT_ID]"
- *       "organizations/[ORGANIZATION_ID]"
+ *   Required. The parent resource whose sinks are to be listed.
+ *   Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -323,10 +336,12 @@ ConfigServiceV2Client.prototype.listSinksStream = function(request, options) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.sinkName
- *   Required. The resource name of the sink to return:
+ *   Required. The parent resource name of the sink:
  *
  *       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
  *       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+ *
+ *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -362,7 +377,11 @@ ConfigServiceV2Client.prototype.getSink = function(request, options, callback) {
 };
 
 /**
- * Creates a sink.
+ * Creates a sink that exports specified log entries to a destination.  The
+ * export of newly-ingested log entries begins immediately, unless the current
+ * time is outside the sink's start and end times or the sink's
+ * `writer_identity` is not permitted to write to the destination.  A sink can
+ * export log entries only from the resource owning the sink.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -371,17 +390,25 @@ ConfigServiceV2Client.prototype.getSink = function(request, options, callback) {
  *
  *       "projects/[PROJECT_ID]"
  *       "organizations/[ORGANIZATION_ID]"
+ *
+ *   Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
  * @param {Object} request.sink
  *   Required. The new sink, whose `name` parameter is a sink identifier that
  *   is not already in use.
  *
  *   This object should have the same structure as [LogSink]{@link LogSink}
  * @param {boolean=} request.uniqueWriterIdentity
- *   Optional. Whether the sink will have a dedicated service account returned
- *   in the sink's writer_identity. Set this field to be true to export
- *   logs from one project to a different project. This field is ignored for
- *   non-project sinks (e.g. organization sinks) because those sinks are
- *   required to have dedicated service accounts.
+ *   Optional. Determines the kind of IAM identity returned as `writer_identity`
+ *   in the new sink.  If this value is omitted or set to false, and if the
+ *   sink's parent is a project, then the value returned as `writer_identity` is
+ *   `cloud-logs@google.com`, the same identity used before the addition of
+ *   writer identities to this API. The sink's destination must be in the same
+ *   project as the sink itself.
+ *
+ *   If this field is set to true, or if the sink is owned by a non-project
+ *   resource such as an organization, then the value of `writer_identity` will
+ *   be a unique service account used only for exports from the new sink.  For
+ *   more information, see `writer_identity` in {@link LogSink}.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -422,13 +449,20 @@ ConfigServiceV2Client.prototype.createSink = function(request, options, callback
 };
 
 /**
- * Updates or creates a sink.
+ * Updates a sink. If the named sink doesn't exist, then this method is
+ * identical to
+ * [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create).
+ * If the named sink does exist, then this method replaces the following
+ * fields in the existing sink with values from the new sink: `destination`,
+ * `filter`, `output_version_format`, `start_time`, and `end_time`.
+ * The updated filter might also have a new `writer_identity`; see the
+ * `unique_writer_identity` field.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.sinkName
- *   Required. The resource name of the sink to update, including the parent
- *   resource and the sink identifier:
+ *   Required. The full resource name of the sink to update, including the
+ *   parent resource and the sink identifier:
  *
  *       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
  *       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -436,16 +470,22 @@ ConfigServiceV2Client.prototype.createSink = function(request, options, callback
  *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
  * @param {Object} request.sink
  *   Required. The updated sink, whose name is the same identifier that appears
- *   as part of `sinkName`.  If `sinkName` does not exist, then
+ *   as part of `sink_name`.  If `sink_name` does not exist, then
  *   this method creates a new sink.
  *
  *   This object should have the same structure as [LogSink]{@link LogSink}
  * @param {boolean=} request.uniqueWriterIdentity
- *   Optional. Whether the sink will have a dedicated service account returned
- *   in the sink's writer_identity. Set this field to be true to export
- *   logs from one project to a different project. This field is ignored for
- *   non-project sinks (e.g. organization sinks) because those sinks are
- *   required to have dedicated service accounts.
+ *   Optional. See
+ *   [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
+ *   for a description of this field.  When updating a sink, the effect of this
+ *   field on the value of `writer_identity` in the updated sink depends on both
+ *   the old and new values of this field:
+ *
+ *   +   If the old and new values of this field are both false or both true,
+ *       then there is no change to the sink's `writer_identity`.
+ *   +   If the old value was false and the new value is true, then
+ *       `writer_identity` is changed to a unique service account.
+ *   +   It is an error if the old value was true and the new value is false.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -486,18 +526,21 @@ ConfigServiceV2Client.prototype.updateSink = function(request, options, callback
 };
 
 /**
- * Deletes a sink.
+ * Deletes a sink. If the sink has a unique `writer_identity`, then that
+ * service account is also deleted.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.sinkName
- *   Required. The resource name of the sink to delete, including the parent
- *   resource and the sink identifier:
+ *   Required. The full resource name of the sink to delete, including the
+ *   parent resource and the sink identifier:
  *
  *       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
  *       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
  *
- *   It is an error if the sink does not exist.
+ *   It is an error if the sink does not exist.  Example:
+ *   `"projects/my-project-id/sinks/my-sink-id"`.  It is an error if
+ *   the sink does not exist.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -551,10 +594,6 @@ function ConfigServiceV2ClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.configServiceV2Client = function(opts) {
     return new ConfigServiceV2Client(gaxGrpc, configServiceV2Client, opts);

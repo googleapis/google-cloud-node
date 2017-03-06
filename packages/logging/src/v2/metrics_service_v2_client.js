@@ -72,31 +72,36 @@ var ALL_SCOPES = [
  * @class
  */
 function MetricsServiceV2Client(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
   var defaults = gaxGrpc.constructSettings(
       'google.logging.v2.MetricsServiceV2',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
+  var self = this;
+
+  this.auth = gaxGrpc.auth;
   var metricsServiceV2Stub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.logging.v2.MetricsServiceV2,
-      {sslCreds: sslCreds});
+      opts);
   var metricsServiceV2StubMethods = [
     'listLogMetrics',
     'getLogMetric',
@@ -105,13 +110,16 @@ function MetricsServiceV2Client(gaxGrpc, grpcClients, opts) {
     'deleteLogMetric'
   ];
   metricsServiceV2StubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       metricsServiceV2Stub.then(function(metricsServiceV2Stub) {
-        return metricsServiceV2Stub[methodName].bind(metricsServiceV2Stub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return metricsServiceV2Stub[methodName].apply(metricsServiceV2Stub, args);
+        };
       }),
       defaults[methodName],
       PAGE_DESCRIPTORS[methodName]);
-  }.bind(this));
+  });
 }
 
 // Path templates
@@ -174,6 +182,15 @@ MetricsServiceV2Client.prototype.matchProjectFromMetricName = function(metricNam
  */
 MetricsServiceV2Client.prototype.matchMetricFromMetricName = function(metricName) {
   return METRIC_PATH_TEMPLATE.match(metricName).metric;
+};
+
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+MetricsServiceV2Client.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
 };
 
 // Service calls
@@ -530,10 +547,6 @@ function MetricsServiceV2ClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.metricsServiceV2Client = function(opts) {
     return new MetricsServiceV2Client(gaxGrpc, metricsServiceV2Client, opts);

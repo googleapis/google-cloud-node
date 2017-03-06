@@ -45,7 +45,11 @@ var PAGE_DESCRIPTORS = {
   listMonitoredResourceDescriptors: new gax.PageDescriptor(
       'pageToken',
       'nextPageToken',
-      'resourceDescriptors')
+      'resourceDescriptors'),
+  listLogs: new gax.PageDescriptor(
+      'pageToken',
+      'nextPageToken',
+      'logNames')
 };
 
 /**
@@ -76,45 +80,66 @@ var ALL_SCOPES = [
  * @class
  */
 function LoggingServiceV2Client(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
+
+  var bundleDescriptors = {
+    writeLogEntries: new gax.BundleDescriptor(
+      'entries',
+      [
+        'logName',
+        'resource',
+        'labels'
+      ],
+      null,
+      gax.createByteLengthFunction(grpcClients.google.logging.v2.LogEntry))
+  };
 
   var defaults = gaxGrpc.constructSettings(
       'google.logging.v2.LoggingServiceV2',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
+  var self = this;
+
+  this.auth = gaxGrpc.auth;
   var loggingServiceV2Stub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.logging.v2.LoggingServiceV2,
-      {sslCreds: sslCreds});
+      opts);
   var loggingServiceV2StubMethods = [
     'deleteLog',
     'writeLogEntries',
     'listLogEntries',
-    'listMonitoredResourceDescriptors'
+    'listMonitoredResourceDescriptors',
+    'listLogs'
   ];
   loggingServiceV2StubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       loggingServiceV2Stub.then(function(loggingServiceV2Stub) {
-        return loggingServiceV2Stub[methodName].bind(loggingServiceV2Stub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return loggingServiceV2Stub[methodName].apply(loggingServiceV2Stub, args);
+        };
       }),
       defaults[methodName],
-      PAGE_DESCRIPTORS[methodName]);
-  }.bind(this));
+      PAGE_DESCRIPTORS[methodName] || bundleDescriptors[methodName]);
+  });
 }
 
 // Path templates
@@ -177,6 +202,15 @@ LoggingServiceV2Client.prototype.matchProjectFromLogName = function(logName) {
  */
 LoggingServiceV2Client.prototype.matchLogFromLogName = function(logName) {
   return LOG_PATH_TEMPLATE.match(logName).log;
+};
+
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+LoggingServiceV2Client.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
 };
 
 // Service calls
@@ -313,14 +347,14 @@ LoggingServiceV2Client.prototype.writeLogEntries = function(request, options, ca
 };
 
 /**
- * Lists log entries.  Use this method to retrieve log entries from Cloud
- * Logging.  For ways to export log entries, see
+ * Lists log entries.  Use this method to retrieve log entries from
+ * Stackdriver Logging.  For ways to export log entries, see
  * [Exporting Logs](https://cloud.google.com/logging/docs/export).
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string[]} request.resourceNames
- *   Required. One or more cloud resources from which to retrieve log
+ *   Required. Names of one or more resources from which to retrieve log
  *   entries:
  *
  *       "projects/[PROJECT_ID]"
@@ -328,15 +362,18 @@ LoggingServiceV2Client.prototype.writeLogEntries = function(request, options, ca
  *
  *   Projects listed in the `project_ids` field are added to this list.
  * @param {string[]=} request.projectIds
- *   Deprecated. One or more project identifiers or project numbers from which
- *   to retrieve log entries.  Example: `"my-project-1A"`. If
- *   present, these project identifiers are converted to resource format and
- *   added to the list of resources in `resourceNames`. Callers should use
- *   `resourceNames` rather than this parameter.
+ *   Deprecated. Use `resource_names` instead.  One or more project identifiers
+ *   or project numbers from which to retrieve log entries.  Example:
+ *   `"my-project-1A"`. If present, these project identifiers are converted to
+ *   resource name format and added to the list of resources in
+ *   `resource_names`.
  * @param {string=} request.filter
  *   Optional. A filter that chooses which log entries to return.  See [Advanced
  *   Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).  Only log entries that
- *   match the filter are returned.  An empty filter matches all log entries.
+ *   match the filter are returned.  An empty filter matches all log entries in
+ *   the resources listed in `resource_names`. Referencing a parent resource
+ *   that is not listed in `resource_names` will cause the filter to return no
+ *   results.
  *   The maximum length of the filter is 20000 characters.
  * @param {string=} request.orderBy
  *   Optional. How the results should be sorted.  Presently, the only permitted
@@ -439,7 +476,7 @@ LoggingServiceV2Client.prototype.listLogEntries = function(request, options, cal
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string[]} request.resourceNames
- *   Required. One or more cloud resources from which to retrieve log
+ *   Required. Names of one or more resources from which to retrieve log
  *   entries:
  *
  *       "projects/[PROJECT_ID]"
@@ -447,15 +484,18 @@ LoggingServiceV2Client.prototype.listLogEntries = function(request, options, cal
  *
  *   Projects listed in the `project_ids` field are added to this list.
  * @param {string[]=} request.projectIds
- *   Deprecated. One or more project identifiers or project numbers from which
- *   to retrieve log entries.  Example: `"my-project-1A"`. If
- *   present, these project identifiers are converted to resource format and
- *   added to the list of resources in `resourceNames`. Callers should use
- *   `resourceNames` rather than this parameter.
+ *   Deprecated. Use `resource_names` instead.  One or more project identifiers
+ *   or project numbers from which to retrieve log entries.  Example:
+ *   `"my-project-1A"`. If present, these project identifiers are converted to
+ *   resource name format and added to the list of resources in
+ *   `resource_names`.
  * @param {string=} request.filter
  *   Optional. A filter that chooses which log entries to return.  See [Advanced
  *   Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).  Only log entries that
- *   match the filter are returned.  An empty filter matches all log entries.
+ *   match the filter are returned.  An empty filter matches all log entries in
+ *   the resources listed in `resource_names`. Referencing a parent resource
+ *   that is not listed in `resource_names` will cause the filter to return no
+ *   results.
  *   The maximum length of the filter is 20000 characters.
  * @param {string=} request.orderBy
  *   Optional. How the results should be sorted.  Presently, the only permitted
@@ -495,7 +535,8 @@ LoggingServiceV2Client.prototype.listLogEntriesStream = function(request, option
 };
 
 /**
- * Lists the monitored resource descriptors used by Stackdriver Logging.
+ * Lists the descriptors for monitored resource types used by Stackdriver
+ * Logging.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -622,6 +663,145 @@ LoggingServiceV2Client.prototype.listMonitoredResourceDescriptorsStream = functi
   return PAGE_DESCRIPTORS.listMonitoredResourceDescriptors.createStream(this._listMonitoredResourceDescriptors, request, options);
 };
 
+/**
+ * Lists the logs in projects or organizations.
+ * Only logs that have entries are listed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name that owns the logs:
+ *
+ *       "projects/[PROJECT_ID]"
+ *       "organizations/[ORGANIZATION_ID]"
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is Array of string.
+ *
+ *   When autoPaginate: false is specified through options, it contains the result
+ *   in a single response. If the response indicates the next page exists, the third
+ *   parameter is set to be used for the next request object. The fourth parameter keeps
+ *   the raw response object of an object representing [ListLogsResponse]{@link ListLogsResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of string.
+ *
+ *   When autoPaginate: false is specified through options, the array has three elements.
+ *   The first element is Array of string in a single response.
+ *   The second element is the next request object if the response
+ *   indicates the next page exists, or null. The third element is
+ *   an object representing [ListLogsResponse]{@link ListLogsResponse}.
+ *
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ * @example
+ *
+ * var client = loggingV2.loggingServiceV2Client();
+ * var formattedParent = client.projectPath("[PROJECT]");
+ * // Iterate over all elements.
+ * client.listLogs({parent: formattedParent}).then(function(responses) {
+ *     var resources = responses[0];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i])
+ *     }
+ * }).catch(function(err) {
+ *     console.error(err);
+ * });
+ *
+ * // Or obtain the paged response.
+ * var options = {autoPaginate: false};
+ * function callback(responses) {
+ *     // The actual resources in a response.
+ *     var resources = responses[0];
+ *     // The next request if the response shows there's more responses.
+ *     var nextRequest = responses[1];
+ *     // The actual response object, if necessary.
+ *     // var rawResponse = responses[2];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i]);
+ *     }
+ *     if (nextRequest) {
+ *         // Fetch the next page.
+ *         return client.listLogs(nextRequest, options).then(callback);
+ *     }
+ * }
+ * client.listLogs({parent: formattedParent}, options)
+ *     .then(callback)
+ *     .catch(function(err) {
+ *         console.error(err);
+ *     });
+ */
+LoggingServiceV2Client.prototype.listLogs = function(request, options, callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+
+  return this._listLogs(request, options, callback);
+};
+
+/**
+ * Equivalent to {@link listLogs}, but returns a NodeJS Stream object.
+ *
+ * This fetches the paged responses for {@link listLogs} continuously
+ * and invokes the callback registered for 'data' event for each element in the
+ * responses.
+ *
+ * The returned object has 'end' method when no more elements are required.
+ *
+ * autoPaginate option will be ignored.
+ *
+ * @see {@link https://nodejs.org/api/stream.html}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name that owns the logs:
+ *
+ *       "projects/[PROJECT_ID]"
+ *       "organizations/[ORGANIZATION_ID]"
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @return {Stream}
+ *   An object stream which emits a string on 'data' event.
+ *
+ * @example
+ *
+ * var client = loggingV2.loggingServiceV2Client();
+ * var formattedParent = client.projectPath("[PROJECT]");
+ * client.listLogsStream({parent: formattedParent}).on('data', function(element) {
+ *     // doThingsWith(element)
+ * }).on('error', function(err) {
+ *     console.error(err);
+ * });
+ */
+LoggingServiceV2Client.prototype.listLogsStream = function(request, options) {
+  if (options === undefined) {
+    options = {};
+  }
+
+  return PAGE_DESCRIPTORS.listLogs.createStream(this._listLogs, request, options);
+};
+
 function LoggingServiceV2ClientBuilder(gaxGrpc) {
   if (!(this instanceof LoggingServiceV2ClientBuilder)) {
     return new LoggingServiceV2ClientBuilder(gaxGrpc);
@@ -647,10 +827,6 @@ function LoggingServiceV2ClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.loggingServiceV2Client = function(opts) {
     return new LoggingServiceV2Client(gaxGrpc, loggingServiceV2Client, opts);
