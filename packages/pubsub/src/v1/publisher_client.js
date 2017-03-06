@@ -74,60 +74,66 @@ var ALL_SCOPES = [
  * @class
  */
 function PublisherClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
   var bundleDescriptors = {
     publish: new gax.BundleDescriptor(
-        'messages',
-        [
-          'topic'
-        ],
-        'messageIds',
-        gax.createByteLengthFunction(grpcClients.publisherClient.google.pubsub.v1.PubsubMessage))
+      'messages',
+      [
+        'topic'
+      ],
+      'messageIds',
+      gax.createByteLengthFunction(grpcClients.google.pubsub.v1.PubsubMessage))
   };
 
   var defaults = gaxGrpc.constructSettings(
       'google.pubsub.v1.Publisher',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
+  var self = this;
+
+  this.auth = gaxGrpc.auth;
   var iamPolicyStub = gaxGrpc.createStub(
-      servicePath,
-      port,
-      grpcClients.iamPolicyClient.google.iam.v1.IAMPolicy,
-      {sslCreds: sslCreds});
+      grpcClients.google.iam.v1.IAMPolicy,
+      opts);
   var iamPolicyStubMethods = [
     'setIamPolicy',
     'getIamPolicy',
     'testIamPermissions'
   ];
   iamPolicyStubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       iamPolicyStub.then(function(iamPolicyStub) {
-        return iamPolicyStub[methodName].bind(iamPolicyStub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return iamPolicyStub[methodName].apply(iamPolicyStub, args);
+        };
       }),
       defaults[methodName],
       PAGE_DESCRIPTORS[methodName] || bundleDescriptors[methodName]);
-  }.bind(this));
+  });
 
   var publisherStub = gaxGrpc.createStub(
-      servicePath,
-      port,
-      grpcClients.publisherClient.google.pubsub.v1.Publisher,
-      {sslCreds: sslCreds});
+      grpcClients.google.pubsub.v1.Publisher,
+      opts);
   var publisherStubMethods = [
     'createTopic',
     'publish',
@@ -137,13 +143,16 @@ function PublisherClient(gaxGrpc, grpcClients, opts) {
     'deleteTopic'
   ];
   publisherStubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       publisherStub.then(function(publisherStub) {
-        return publisherStub[methodName].bind(publisherStub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return publisherStub[methodName].apply(publisherStub, args);
+        };
       }),
       defaults[methodName],
       PAGE_DESCRIPTORS[methodName] || bundleDescriptors[methodName]);
-  }.bind(this));
+  });
 }
 
 // Path templates
@@ -208,6 +217,15 @@ PublisherClient.prototype.matchTopicFromTopicName = function(topicName) {
   return TOPIC_PATH_TEMPLATE.match(topicName).topic;
 };
 
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+PublisherClient.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
+};
+
 // Service calls
 
 /**
@@ -265,6 +283,7 @@ PublisherClient.prototype.createTopic = function(request, options, callback) {
  *   The request object that will be sent.
  * @param {string} request.topic
  *   The messages in the request will be published on this topic.
+ *   Format is `projects/{project}/topics/{topic}`.
  * @param {Object[]} request.messages
  *   The messages to publish.
  *
@@ -319,6 +338,7 @@ PublisherClient.prototype.publish = function(request, options, callback) {
  *   The request object that will be sent.
  * @param {string} request.topic
  *   The name of the topic to get.
+ *   Format is `projects/{project}/topics/{topic}`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -360,6 +380,7 @@ PublisherClient.prototype.getTopic = function(request, options, callback) {
  *   The request object that will be sent.
  * @param {string} request.project
  *   The name of the cloud project that topics belong to.
+ *   Format is `projects/{project}`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -455,6 +476,7 @@ PublisherClient.prototype.listTopics = function(request, options, callback) {
  *   The request object that will be sent.
  * @param {string} request.project
  *   The name of the cloud project that topics belong to.
+ *   Format is `projects/{project}`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -492,6 +514,7 @@ PublisherClient.prototype.listTopicsStream = function(request, options) {
  *   The request object that will be sent.
  * @param {string} request.topic
  *   The name of the topic that subscriptions are attached to.
+ *   Format is `projects/{project}/topics/{topic}`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -587,6 +610,7 @@ PublisherClient.prototype.listTopicSubscriptions = function(request, options, ca
  *   The request object that will be sent.
  * @param {string} request.topic
  *   The name of the topic that subscriptions are attached to.
+ *   Format is `projects/{project}/topics/{topic}`.
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -628,6 +652,7 @@ PublisherClient.prototype.listTopicSubscriptionsStream = function(request, optio
  *   The request object that will be sent.
  * @param {string} request.topic
  *   Name of the topic to delete.
+ *   Format is `projects/{project}/topics/{topic}`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -759,6 +784,8 @@ PublisherClient.prototype.getIamPolicy = function(request, options, callback) {
 
 /**
  * Returns permissions that a caller has on the specified resource.
+ * If the resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -827,10 +854,12 @@ function PublisherClientBuilder(gaxGrpc) {
   }]);
   extend(this, publisherClient.google.pubsub.v1);
 
-  var grpcClients = {
-    iamPolicyClient: iamPolicyClient,
-    publisherClient: publisherClient
-  };
+  var grpcClients = extend(
+    true,
+    {},
+    iamPolicyClient,
+    publisherClient
+  );
 
   /**
    * Build a new instance of {@link PublisherClient}.
@@ -845,10 +874,6 @@ function PublisherClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.publisherClient = function(opts) {
     return new PublisherClient(gaxGrpc, grpcClients, opts);
