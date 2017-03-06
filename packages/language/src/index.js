@@ -87,8 +87,6 @@ function Language(options) {
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - See {module:language/document#annotate}.
  *
  * @example
@@ -129,15 +127,6 @@ function Language(options) {
  * };
  *
  * language.annotate('¿Dónde está la sede de Google?', options, callback);
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * language.annotate('Hello!', options, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -181,8 +170,6 @@ Language.prototype.annotate = function(content, options, callback) {
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - See {module:language/document#detectEntities}.
  *
  * @example
@@ -222,15 +209,6 @@ Language.prototype.annotate = function(content, options, callback) {
  * };
  *
  * language.detectEntities('Axel Foley es de Detroit', options, callback);
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * language.detectEntities('Axel Foley is from Detroit', options, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -274,8 +252,6 @@ Language.prototype.detectEntities = function(content, options, callback) {
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - See {module:language/document#detectSentiment}.
  *
  * @example
@@ -306,15 +282,6 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * };
  *
  * language.detectSentiment('&lt;h1>Document Title&lt;/h1>', options, callback);
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * language.detectSentiment('Hello!', options, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -358,8 +325,6 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - See {module:language/document#detectSyntax}.
  *
  * @example
@@ -399,15 +364,6 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  * };
  *
  * language.detectSyntax('Axel Foley es de Detroit', options, callback);
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * language.detectSyntax('Axel Foley is from Detroit', options, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.

@@ -324,98 +324,6 @@ Document.PART_OF_SPEECH = {
  *
  *   // annotation = {
  *   //   language: 'en',
- *   //   sentiment: 1,
- *   //   entities: {
- *   //     organizations: [
- *   //       'Google'
- *   //     ],
- *   //     places: [
- *   //       'American'
- *   //     ]
- *   //   },
- *   //   sentences: [
- *   //     'Google is an American multinational technology company ' +
- *   //     'specializing in Internet-related services and products.'
- *   //   ],
- *   //   tokens: [
- *   //     {
- *   //       text: 'Google',
- *   //       partOfSpeech: 'Noun (common and proper)',
- *   //       tag: 'NOUN',
- *   //       aspect: 'PERFECTIVE',
- *   //       case: 'ADVERBIAL',
- *   //       form: 'ADNOMIAL',
- *   //       gender: 'FEMININE',
- *   //       mood: 'IMPERATIVE',
- *   //       number: 'SINGULAR',
- *   //       person: 'FIRST',
- *   //       proper: 'PROPER',
- *   //       reciprocity: 'RECIPROCAL',
- *   //       tense: 'PAST',
- *   //       voice: 'PASSIVE'
- *   //     },
- *   //     {
- *   //       text: 'is',
- *   //       partOfSpeech: 'Verb (all tenses and modes)',
- *   //       tag: 'VERB',
- *   //       aspect: 'PERFECTIVE',
- *   //       case: 'ADVERBIAL',
- *   //       form: 'ADNOMIAL',
- *   //       gender: 'FEMININE',
- *   //       mood: 'IMPERATIVE',
- *   //       number: 'SINGULAR',
- *   //       person: 'FIRST',
- *   //       proper: 'PROPER',
- *   //       reciprocity: 'RECIPROCAL',
- *   //       tense: 'PAST',
- *   //       voice: 'PASSIVE'
- *   //     },
- *   //     ...
- *   //   ]
- *   // }
- * });
- *
- * //-
- * // To request only certain annotation types, provide an options object.
- * //-
- * var options = {
- *   entities: true,
- *   sentiment: true
- * };
- *
- * document.annotate(options, function(err, annotation) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   // annotation = {
- *   //   language: 'en',
- *   //   sentiment: 1,
- *   //   entities: {
- *   //     organizations: [
- *   //       'Google'
- *   //     ],
- *   //     places: [
- *   //       'American'
- *   //     ]
- *   //   }
- *   // }
- * });
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * document.annotate(options, function(err, annotation) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   // annotation = {
- *   //   language: 'en',
  *   //   sentiment: {
  *   //     score: 1,
  *   //     magnitude: 4
@@ -505,6 +413,70 @@ Document.PART_OF_SPEECH = {
  * });
  *
  * //-
+ * // To request only certain annotation types, provide an options object.
+ * //-
+ * var options = {
+ *   entities: true,
+ *   sentiment: true
+ * };
+ *
+ * document.annotate(function(err, annotation) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // annotation = {
+ *   //   language: 'en',
+ *   //   sentiment: {
+ *   //     score: 1,
+ *   //     magnitude: 4
+ *   //   },
+ *   //   entities: {
+ *   //     organizations: [
+ *   //       {
+ *   //         name: 'Google',
+ *   //         type: 'ORGANIZATION',
+ *   //         metadata: {
+ *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //         },
+ *   //         salience: 0.65137446,
+ *   //         mentions: [
+ *   //           {
+ *   //             text: {
+ *   //               content: 'Google',
+ *   //               beginOffset: -1
+ *   //             },
+ *   //             type: 'PROPER'
+ *   //           }
+ *   //         ]
+ *   //       }
+ *   //     ],
+ *   //     places: [
+ *   //       {
+ *   //         name: 'American',
+ *   //         type: 'LOCATION',
+ *   //         metadata: {
+ *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/United_States'
+ *   //         },
+ *   //         salience: 0.13947370648384094,
+ *   //         mentions: [
+ *   //           {
+ *   //             text: [
+ *   //               {
+ *   //                 content: 'American',
+ *   //                 beginOffset: -1
+ *   //               },
+ *   //               type: 'PROPER'
+ *   //             ]
+ *   //           }
+ *   //         ]
+ *   //       }
+ *   //     ]
+ *   //   },
+ *   // }
+ * });
+ *
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * document.annotate().then(function(data) {
@@ -545,8 +517,6 @@ Document.prototype.annotate = function(options, callback) {
     features = featuresRequested;
   }
 
-  var verbose = options.verbose === true;
-
   this.api.Language.annotateText({
     document: this.document,
     features: features,
@@ -565,18 +535,18 @@ Document.prototype.annotate = function(options, callback) {
 
     if (resp.documentSentiment && features.extractDocumentSentiment) {
       var sentiment = resp.documentSentiment;
-      annotation.sentiment = Document.formatSentiment_(sentiment, verbose);
+      annotation.sentiment = Document.formatSentiment_(sentiment);
     }
 
     if (resp.entities) {
-      annotation.entities = Document.formatEntities_(resp.entities, verbose);
+      annotation.entities = Document.formatEntities_(resp.entities);
     }
 
     // This prevents empty `sentences` and `tokens` arrays being returned to
     // users who never wanted sentences or tokens to begin with.
     if (numFeaturesRequested === 0 || featuresRequested.extractSyntax) {
-      annotation.sentences = Document.formatSentences_(resp.sentences, verbose);
-      annotation.tokens = Document.formatTokens_(resp.tokens, verbose);
+      annotation.sentences = resp.sentences;
+      annotation.tokens = resp.tokens;
     }
 
     callback(null, annotation, originalResp);
@@ -622,28 +592,6 @@ Document.prototype.annotate = function(options, callback) {
  *
  * @example
  * document.detectEntities(function(err, entities) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   // entities = {
- *   //   organizations: [
- *   //     'Google'
- *   //   ],
- *   //   places: [
- *   //     'American'
- *   //   ]
- *   // }
- * });
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * document.detectEntities(options, function(err, entities) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -702,8 +650,6 @@ Document.prototype.detectEntities = function(options, callback) {
     options = {};
   }
 
-  var verbose = options.verbose === true;
-
   this.api.Language.analyzeEntities({
     document: this.document,
     encodingType: this.detectEncodingType_(options)
@@ -714,7 +660,7 @@ Document.prototype.detectEntities = function(options, callback) {
     }
 
     var originalResp = extend(true, {}, resp);
-    var groupedEntities = Document.formatEntities_(resp.entities, verbose);
+    var groupedEntities = Document.formatEntities_(resp.entities);
 
     callback(null, groupedEntities, originalResp);
   });
@@ -741,21 +687,6 @@ Document.prototype.detectEntities = function(options, callback) {
  *
  * @example
  * document.detectSentiment(function(err, sentiment) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   // sentiment = 1
- * });
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * document.detectSentiment(options, function(err, sentiment) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -791,8 +722,6 @@ Document.prototype.detectSentiment = function(options, callback) {
     options = {};
   }
 
-  var verbose = options.verbose === true;
-
   this.api.Language.analyzeSentiment({
     document: this.document,
     encodingType: this.detectEncodingType_(options)
@@ -803,14 +732,12 @@ Document.prototype.detectSentiment = function(options, callback) {
     }
 
     var originalResp = extend(true, {}, resp);
-    var sentiment = Document.formatSentiment_(resp.documentSentiment, verbose);
+    var sentiment = Document.formatSentiment_(resp.documentSentiment);
 
-    if (verbose) {
-      sentiment = extend(sentiment, {
-        sentences: Document.formatSentences_(resp.sentences, verbose),
-        language: resp.language
-      });
-    }
+    sentiment = extend(sentiment, {
+      sentences: resp.sentences,
+      language: resp.language
+    });
 
     callback(null, sentiment, originalResp);
   });
@@ -842,62 +769,6 @@ Document.prototype.detectSentiment = function(options, callback) {
  *
  * @example
  * document.detectSyntax(function(err, syntax) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   // syntax = {
- *   //   sentences: [
- *   //     'Google is an American multinational technology company ' +
- *   //     'specializing in Internet-related services and products.'
- *   //   ],
- *   //   tokens: [
- *   //     {
- *   //       text: 'Google',
- *   //       partOfSpeech: 'Noun (common and proper)',
- *   //       tag: 'NOUN',
- *   //       aspect: 'PERFECTIVE',
- *   //       case: 'ADVERBIAL',
- *   //       form: 'ADNOMIAL',
- *   //       gender: 'FEMININE',
- *   //       mood: 'IMPERATIVE',
- *   //       number: 'SINGULAR',
- *   //       person: 'FIRST',
- *   //       proper: 'PROPER',
- *   //       reciprocity: 'RECIPROCAL',
- *   //       tense: 'PAST',
- *   //       voice: 'PASSIVE'
- *   //     },
- *   //     {
- *   //       text: 'is',
- *   //       partOfSpeech: 'Verb (all tenses and modes)',
- *   //       tag: 'VERB',
- *   //       aspect: 'PERFECTIVE',
- *   //       case: 'ADVERBIAL',
- *   //       form: 'ADNOMIAL',
- *   //       gender: 'FEMININE',
- *   //       mood: 'IMPERATIVE',
- *   //       number: 'SINGULAR',
- *   //       person: 'FIRST',
- *   //       proper: 'PROPER',
- *   //       reciprocity: 'RECIPROCAL',
- *   //       tense: 'PAST',
- *   //       voice: 'PASSIVE'
- *   //     },
- *   //     ...
- *   //   ],
- *   //   language: 'en'
- *   // }
- * });
- *
- * //-
- * // Verbose mode may also be enabled for more detailed results.
- * //-
- * var options = {
- *   verbose: true
- * };
- *
- * document.detectSyntax(options, function(err, syntax) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -963,8 +834,6 @@ Document.prototype.detectSyntax = function(options, callback) {
     options = {};
   }
 
-  var verbose = options.verbose === true;
-
   this.api.Language.analyzeSyntax({
     document: this.document,
     encodingType: this.detectEncodingType_(options)
@@ -975,15 +844,13 @@ Document.prototype.detectSyntax = function(options, callback) {
     }
 
     var originalResp = extend(true, {}, resp);
-    var syntax = Document.formatTokens_(resp.tokens, verbose);
+    var tokens = resp.tokens;
 
-    if (verbose) {
-      syntax = {
-        tokens: syntax,
-        sentences: Document.formatSentences_(resp.sentences, verbose),
-        language: resp.language
-      };
-    }
+    var syntax = {
+      tokens: syntax,
+      sentences: resp.sentences,
+      language: resp.language
+    };
 
     callback(null, syntax, originalResp);
   });
@@ -995,10 +862,9 @@ Document.prototype.detectSyntax = function(options, callback) {
  * @private
  *
  * @param {object} entities - A group of entities returned from the API.
- * @param {boolean} verbose - Enable verbose mode for more detailed results.
  * @return {object} - The formatted entity object.
  */
-Document.formatEntities_ = function(entities, verbose) {
+Document.formatEntities_ = function(entities) {
   var GROUP_NAME_TO_TYPE = {
     UNKNOWN: 'unknown',
     PERSON: 'people',
@@ -1010,7 +876,7 @@ Document.formatEntities_ = function(entities, verbose) {
     OTHER: 'other'
   };
 
-  var groupedEntities = entities.reduce(function(acc, entity) {
+  return entities.reduce(function(acc, entity) {
     entity = extend(true, {}, entity);
 
     var groupName = GROUP_NAME_TO_TYPE[entity.type];
@@ -1021,37 +887,6 @@ Document.formatEntities_ = function(entities, verbose) {
 
     return acc;
   }, {});
-
-  if (!verbose) {
-    // Simplify the response to only include an array of `name`s.
-    for (var groupName in groupedEntities) {
-      if (groupedEntities.hasOwnProperty(groupName)) {
-        groupedEntities[groupName] =
-          groupedEntities[groupName].map(prop('name'));
-      }
-    }
-  }
-
-  return groupedEntities;
-};
-
-/**
- * Take a raw response from the API and make it more user-friendly.
- *
- * @private
- *
- * @param {object[]} sentences - A group of sentence detections returned from
- *     the API.
- * @param {boolean} verbose - Enable verbose mode for more detailed results.
- * @return {object[]|string[]} - The formatted sentences or sentence descriptor
- *     objects in verbose mode.
- */
-Document.formatSentences_ = function(sentences, verbose) {
-  if (!verbose) {
-    sentences = sentences.map(prop('text')).map(prop('content'));
-  }
-
-  return sentences;
 };
 
 /**
@@ -1061,62 +896,14 @@ Document.formatSentences_ = function(sentences, verbose) {
  *
  * @param {object} sentiment - An analysis of the document's sentiment from the
  *     API.
- * @param {boolean} verbose - Enable verbose mode for more detailed results.
- * @return {number|object} - The sentiment represented as a number in the range
- *     of `-1` to `1` or an object containing `score` and `magnitude`
- *     measurements in verbose mode.
+ * @return {number|object} - The sentiment represented as an object containing
+ *     `score` and `magnitude` measurements.
  */
-Document.formatSentiment_ = function(sentiment, verbose) {
-  sentiment = {
+Document.formatSentiment_ = function(sentiment) {
+  return {
     score: sentiment.score,
     magnitude: sentiment.magnitude
   };
-
-  if (!verbose) {
-    sentiment = sentiment.score;
-  }
-
-  return sentiment;
-};
-
-/**
- * Take a raw response from the API and make it more user-friendly.
- *
- * @private
- *
- * @param {object[]} tokens - A group of syntax detections returned from the
- *     API.
- * @param {boolean} verbose - Enable verbose mode for more detailed results.
- * @return {number|object} - A slimmed down, simplified object or the original
- *     object in verbose mode.
- */
-Document.formatTokens_ = function(tokens, verbose) {
-  if (!verbose) {
-    tokens = tokens.map(function(rawToken) {
-      var token = extend({}, rawToken.partOfSpeech, {
-        text: rawToken.text.content,
-        partOfSpeech: Document.PART_OF_SPEECH[rawToken.partOfSpeech.tag]
-      });
-
-      if (rawToken.dependencyEdge) {
-        var label = rawToken.dependencyEdge.label;
-
-        token.dependencyEdge = extend({}, rawToken.dependencyEdge, {
-          description: Document.LABEL_DESCRIPTIONS[label]
-        });
-      }
-
-      for (var part in token) {
-        if (token.hasOwnProperty(part) && /UNKNOWN/.test(token[part])) {
-          token[part] = undefined;
-        }
-      }
-
-      return token;
-    });
-  }
-
-  return tokens;
 };
 
 /**
