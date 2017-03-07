@@ -67,6 +67,29 @@ describe('Entry', function() {
       assert.strictEqual(entry.metadata.timestamp, timestamp);
     });
 
+    it('should assign insertId to metadata', function() {
+      assert(typeof entry.metadata.insertId === 'string');
+    });
+
+    it('should generate monotonically increasing insertIds', function() {
+      var entries = Array(256).fill({}).map(() => { return new Entry(); });
+      entries.reduce((prev, entry) => {
+        assert(typeof entry.metadata.insertId === 'string');
+        assert(entry.metadata.insertId > prev);
+        return entry.metadata.insertId;
+      }, '');
+    });
+
+    it('should not assign insertId if one is already set', function() {
+      var insertId = 'fake-insert-id';
+
+      var entry = new Entry({
+        insertId: insertId
+      });
+
+      assert.strictEqual(entry.metadata.insertId, insertId);
+    });
+
     it('should localize data', function() {
       assert.strictEqual(entry.data, DATA);
     });
