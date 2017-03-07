@@ -496,7 +496,7 @@ GrpcService.decodeValue_ = function(value) {
 };
 
 /**
- * A class that can be used tp convert an object to a struct. Optionally this
+ * A class that can be used to convert an object to a struct. Optionally this
  * class can be used to erase/throw on circular references during conversion.
  *
  * @private
@@ -581,7 +581,8 @@ ObjectToStruct.prototype.encodeValue = function(value) {
       // Circular reference.
       if (!this.removeCircular) {
         throw new Error(
-            'Object has a circular reference – cannot encode as a struct');
+            'This object contains a circular reference. To automatically ' +
+            'remove it, set removeCircular to true');
       }
       convertedValue = {
         stringValue: '[Circular]'
@@ -703,7 +704,7 @@ GrpcService.shouldRetryRequest_ = function(response) {
  * @param {object} obj - An object to convert.
  * @param {object=} options - Configuration object.
  * @param {boolean} options.removeCircular - Remove circular references in the
- * object with a placeholder string.
+ *     object with a placeholder string.
  * @param {boolean} options.stringify - Stringify un-recognized types.
  * @return {array} - The converted object.
  *
@@ -748,7 +749,6 @@ GrpcService.shouldRetryRequest_ = function(response) {
  * // }
  */
 GrpcService.objToStruct_ = function(obj, options) {
-  console.log('common-grpc.Service.objToStruct');
   var converter = new ObjectToStruct(options || {});
   return converter.convert(obj);
 };
