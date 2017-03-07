@@ -1,5 +1,5 @@
-/*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+/*
+ * Copyright 2016 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,8 @@ function v3(options) {
   extend(result, metricServiceClient(gaxGrpc));
   return result;
 }
+
 v3.SERVICE_ADDRESS = groupServiceClient.SERVICE_ADDRESS;
 v3.ALL_SCOPES = groupServiceClient.ALL_SCOPES;
+
 module.exports = v3;

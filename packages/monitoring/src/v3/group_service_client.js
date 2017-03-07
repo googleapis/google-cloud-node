@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'monitoring.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
+var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
 
 var PAGE_DESCRIPTORS = {
   listGroups: new gax.PageDescriptor(
@@ -86,31 +86,36 @@ var ALL_SCOPES = [
  * @class
  */
 function GroupServiceClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
   var defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.GroupService',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
+  var self = this;
+
+  this.auth = gaxGrpc.auth;
   var groupServiceStub = gaxGrpc.createStub(
-      servicePath,
-      port,
-      grpcClients.groupServiceClient.google.monitoring.v3.GroupService,
-      {sslCreds: sslCreds});
+      grpcClients.google.monitoring.v3.GroupService,
+      opts);
   var groupServiceStubMethods = [
     'listGroups',
     'getGroup',
@@ -120,13 +125,16 @@ function GroupServiceClient(gaxGrpc, grpcClients, opts) {
     'listGroupMembers'
   ];
   groupServiceStubMethods.forEach(function(methodName) {
-    this['_' + methodName] = gax.createApiCall(
+    self['_' + methodName] = gax.createApiCall(
       groupServiceStub.then(function(groupServiceStub) {
-        return groupServiceStub[methodName].bind(groupServiceStub);
+        return function() {
+          var args = Array.prototype.slice.call(arguments, 0);
+          return groupServiceStub[methodName].apply(groupServiceStub, args);
+        };
       }),
       defaults[methodName],
       PAGE_DESCRIPTORS[methodName]);
-  }.bind(this));
+  });
 }
 
 // Path templates
@@ -189,6 +197,15 @@ GroupServiceClient.prototype.matchProjectFromGroupName = function(groupName) {
  */
 GroupServiceClient.prototype.matchGroupFromGroupName = function(groupName) {
   return GROUP_PATH_TEMPLATE.match(groupName).group;
+};
+
+/**
+ * Get the project ID used by this class.
+ * @aram {function(Error, string)} callback - the callback to be called with
+ *   the current project Id.
+ */
+GroupServiceClient.prototype.getProjectId = function(callback) {
+  return this.auth.getProjectId(callback);
 };
 
 // Service calls
@@ -711,9 +728,6 @@ function GroupServiceClientBuilder(gaxGrpc) {
   }]);
   extend(this, groupServiceClient.google.monitoring.v3);
 
-  var grpcClients = {
-    groupServiceClient: groupServiceClient
-  };
 
   /**
    * Build a new instance of {@link GroupServiceClient}.
@@ -728,13 +742,9 @@ function GroupServiceClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.groupServiceClient = function(opts) {
-    return new GroupServiceClient(gaxGrpc, grpcClients, opts);
+    return new GroupServiceClient(gaxGrpc, groupServiceClient, opts);
   };
   extend(this.groupServiceClient, GroupServiceClient);
 }
