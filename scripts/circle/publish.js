@@ -17,7 +17,6 @@
 'use strict';
 
 var path = require('path');
-var semver = require('semver');
 
 require('shelljs/global');
 

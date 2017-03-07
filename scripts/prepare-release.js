@@ -16,13 +16,11 @@
 
 'use strict';
 
-var path = require('path');
 var semver = require('semver');
 
 require('shelljs/global');
 
 var cwd = pwd().toString();
-var npmVersion = parseInt(exec('npm --version', { silent: true }), 10);
 
 var args = process.argv.splice(1);
 var moduleName = args[1];
