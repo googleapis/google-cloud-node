@@ -45,6 +45,12 @@ var zlib = require('zlib');
 var Acl = require('./acl.js');
 
 /**
+ * @type {module:storage/iam}
+ * @private
+ */
+var Iam = require('./iam.js');
+
+/**
  * Custom error type for errors related to getting signed errors and policies.
  *
  * @private
@@ -314,6 +320,8 @@ function File(bucket, name, options) {
     request: this.request.bind(this),
     pathPrefix: '/acl'
   });
+
+  this.iam = new Iam(this);
 }
 
 util.inherits(File, common.ServiceObject);

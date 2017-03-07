@@ -475,6 +475,36 @@ describe('storage', function() {
     });
   });
 
+  describe('iam', function() {
+    describe('buckets', function() {
+      it('should get a policy', function() {
+
+      });
+
+      it('should set a policy', function() {
+
+      });
+
+      it('should test permissions', function() {
+
+      });
+    });
+
+    describe('files', function() {
+      it('should get a policy', function() {
+
+      });
+
+      it('should set a policy', function() {
+
+      });
+
+      it('should test permissions', function() {
+
+      });
+    });
+  });
+
   describe('getting buckets', function() {
     var bucketsToCreate = [
       generateName(),

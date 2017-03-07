@@ -43,6 +43,12 @@ var Acl = require('./acl.js');
 var File = require('./file.js');
 
 /**
+ * @type {module:storage/iam}
+ * @private
+ */
+var Iam = require('./iam.js');
+
+/**
  * The size of a file (in bytes) must be greater than this number to
  * automatically trigger a resumable upload.
  *
@@ -306,6 +312,8 @@ function Bucket(storage, name) {
     request: this.request.bind(this),
     pathPrefix: '/defaultObjectAcl'
   });
+
+  this.iam = new Iam(this);
 }
 
 util.inherits(Bucket, common.ServiceObject);
