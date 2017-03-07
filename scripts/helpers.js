@@ -521,13 +521,13 @@ function isPushToMaster() {
 }
 
 /**
- * Checks to see if this the CI's first pass (AppVeyor only).
+ * Checks to see if this the CI's first pass (Circle only).
  *
  * @alias ci.isFirstPass
  * @return {boolean}
  */
 function isFirstPass() {
-  return process.env.APPVEYOR && /^v4/.test(process.version);
+  return process.env.CIRCLECI && /^v4/.test(process.version);
 }
 
 module.exports.ci = {

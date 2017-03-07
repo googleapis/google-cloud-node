@@ -54,7 +54,7 @@ if (!modules.length && !ci.isReleaseBuild()) {
   exit();
 }
 
-// If this is the first pass (AppVeyor only), let's get the code coverage
+// If this is the first pass (Circle only), let's get the code coverage
 if (ci.isFirstPass()) {
   Module.installAll();
   Module.runCoveralls();
