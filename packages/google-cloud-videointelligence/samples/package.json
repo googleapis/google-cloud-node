@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-docs-samples-videointelligence",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "scripts": {
+    "test": "cd ..; npm run st -- --verbose video/system-test/*.test.js"
+  },
+  "dependencies": {
+    "@google-cloud/videointelligence": "https://storage.googleapis.com/videointelligence-alpha/videointelligence-nodejs.tar.gz",
+    "yargs": "6.6.0"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  }
+}
