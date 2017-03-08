@@ -181,6 +181,28 @@ describe('Datastore', function() {
       });
     });
 
+    it('should save and get with a string ID', function(done) {
+      var longIdKey = datastore.key([
+        'Post',
+        datastore.int('100000000000001234')
+      ]);
+
+      datastore.save({
+        key: longIdKey,
+        data: {
+          test: true
+        }
+      }, function(err) {
+        assert.ifError(err);
+
+        datastore.get(longIdKey, function(err, entity) {
+          assert.ifError(err);
+          assert.strictEqual(entity.test, true);
+          done();
+        });
+      });
+    });
+
     it('should fail explicitly set second insert on save', function(done) {
       var postKey = datastore.key('Post');
 
