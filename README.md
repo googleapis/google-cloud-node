@@ -16,7 +16,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Datastore](#google-cloud-datastore-beta) (Beta)
 * [Cloud Storage](#google-cloud-storage-beta) (Beta)
 * [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
-* Cloud Vision (Beta)
+* [Cloud Vision](#google-cloud-vision-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -28,7 +28,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
 * [Cloud Translation API](#cloud-translation-api-alpha) (Alpha)
-* [Google Compute Engine](#compute-engine-alpha) (Alpha)
+* [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
 
@@ -388,6 +388,135 @@ loggingClient.getEntries(function(err, entries) {
   if (!err) {
     // `entries` contains all of the entries from the logs in your project.
   }
+});
+```
+
+
+## Cloud Vision (Beta)
+
+- [API Documentation][gcloud-vision-docs]
+- [Official Documentation][cloud-vision-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var vision = gcloud.vision;
+```
+
+#### Using the Cloud Vision API module
+
+```
+$ npm install --save @google-cloud/vision
+```
+
+```js
+var vision = require('@google-cloud/vision');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var visionClient = vision({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Read the text from an image.
+visionClient.detectText('./image.jpg', function(err, text) {
+  // text = [
+  //   'This was text found in the image',
+  //   'This was more text found in the image'
+  // ]
+});
+
+// Detect faces and the locations of their features in an image.
+visionClient.detectFaces('./image.jpg', function(err, faces) {
+  // faces = [
+  //   {
+  //     angles: {pan,tilt,roll},
+  //     bounds: {
+  //       head: [{x,y},{x,y},{x,y},{x,y}],
+  //       face: [{x,y},{x,y},{x,y},{x,y}]
+  //     },
+  //     features: {
+  //       confidence: 34.489909,
+  //       chin: {
+  //         center: {x,y,z},
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       ears: {
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       eyebrows: {
+  //         left: {
+  //           left: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         },
+  //         right: {
+  //           left: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         }
+  //       },
+  //       eyes: {
+  //         left: {
+  //           bottom: {x,y,z},
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           pupil: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         },
+  //         right: {
+  //           bottom: {x,y,z},
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           pupil: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         }
+  //       },
+  //       forehead: {x,y,z},
+  //       lips: {
+  //         bottom: {x,y,z},
+  //         top: {x,y,z}
+  //       },
+  //       mouth: {
+  //         center: {x,y,z},
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       nose: {
+  //         bottom: {
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           right: {x,y,z}
+  //         },
+  //         tip: {x,y,z},
+  //         top: {x,y,z}
+  //       }
+  //     },
+  //     confidence: 56.748849,
+  //     blurry: false,
+  //     dark: false,
+  //     happy: false,
+  //     hat: false,
+  //     mad: false,
+  //     sad: false,
+  //     surprised: false
+  //   }
+  // ]
 });
 ```
 
@@ -954,135 +1083,6 @@ translateClient.getLanguages(function(err, languages) {
     //   ...
     // ]
   }
-});
-```
-
-
-## Cloud Vision (Alpha)
-
-- [API Documentation][gcloud-vision-docs]
-- [Official Documentation][cloud-vision-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var vision = gcloud.vision;
-```
-
-#### Using the Cloud Vision API module
-
-```
-$ npm install --save @google-cloud/vision
-```
-
-```js
-var vision = require('@google-cloud/vision');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var visionClient = vision({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Read the text from an image.
-visionClient.detectText('./image.jpg', function(err, text) {
-  // text = [
-  //   'This was text found in the image',
-  //   'This was more text found in the image'
-  // ]
-});
-
-// Detect faces and the locations of their features in an image.
-visionClient.detectFaces('./image.jpg', function(err, faces) {
-  // faces = [
-  //   {
-  //     angles: {pan,tilt,roll},
-  //     bounds: {
-  //       head: [{x,y},{x,y},{x,y},{x,y}],
-  //       face: [{x,y},{x,y},{x,y},{x,y}]
-  //     },
-  //     features: {
-  //       confidence: 34.489909,
-  //       chin: {
-  //         center: {x,y,z},
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       ears: {
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       eyebrows: {
-  //         left: {
-  //           left: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         },
-  //         right: {
-  //           left: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         }
-  //       },
-  //       eyes: {
-  //         left: {
-  //           bottom: {x,y,z},
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           pupil: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         },
-  //         right: {
-  //           bottom: {x,y,z},
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           pupil: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         }
-  //       },
-  //       forehead: {x,y,z},
-  //       lips: {
-  //         bottom: {x,y,z},
-  //         top: {x,y,z}
-  //       },
-  //       mouth: {
-  //         center: {x,y,z},
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       nose: {
-  //         bottom: {
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           right: {x,y,z}
-  //         },
-  //         tip: {x,y,z},
-  //         top: {x,y,z}
-  //       }
-  //     },
-  //     confidence: 56.748849,
-  //     blurry: false,
-  //     dark: false,
-  //     happy: false,
-  //     hat: false,
-  //     mad: false,
-  //     sad: false,
-  //     surprised: false
-  //   }
-  // ]
 });
 ```
 
