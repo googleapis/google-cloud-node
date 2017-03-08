@@ -35,6 +35,16 @@ function SpannerDate(value) {
 
 codec.SpannerDate = SpannerDate;
 
+function Double(value) {
+  this.value = value;
+}
+
+Double.prototype.valueOf = function() {
+  return this.value;
+};
+
+codec.Double = Double;
+
 function Int(value) {
   this.value = value.toString();
 }
@@ -67,12 +77,12 @@ function decode(value, field) {
         decoded = new Buffer(decoded, 'base64');
         break;
       }
-      case 'INT64': {
-        decoded = new codec.Int(decoded);
+      case 'FLOAT64': {
+        decoded = new codec.Double(decoded);
         break;
       }
-      case 'FLOAT64': {
-        decoded = parseFloat(decoded, 10);
+      case 'INT64': {
+        decoded = new codec.Int(decoded);
         break;
       }
       case 'TIMESTAMP': // falls through
@@ -129,52 +139,45 @@ function decode(value, field) {
 codec.decode = decode;
 
 /**
- * Re-encode after the generic gRPC encoding step.
+ * Encode a value in the format the API expects.
  *
  * @private
  */
 function encode(value) {
-  function encodeValue_(encoded) {
-    // BYTES
-    if (is.defined(encoded.blobValue)) {
-      encoded.stringValue = encoded.blobValue.toString('base64');
-      delete encoded.blobValue;
-    }
+  function preEncode(value) {
+    var numberShouldBeStringified =
+      !(value instanceof Double) &&
+      is.int(value) ||
+      value instanceof Int ||
+      is.infinite(value) ||
+      Number.isNaN(value);
 
-    // INT64, Infinity, -Infinity, NaN types are encoded as strings
-    if (is.defined(encoded.numberValue)) {
-      var value = encoded.numberValue;
-
-      if (is.infinite(value) || Number.isNaN(value) || value % 1 === 0) {
-        encoded.stringValue = value.toString();
-        delete encoded.numberValue;
+    if (is.date(value)) {
+      value = value.toJSON();
+    } else if (value instanceof SpannerDate ||
+               value instanceof Double ||
+               value instanceof Int) {
+      value = value.value;
+    } else if (Buffer.isBuffer(value)) {
+      value = value.toString('base64');
+    } else if (is.array(value)) {
+      value = value.map(preEncode);
+    } else if (is.object(value) && is.fn(value.hasOwnProperty)) {
+      for (var prop in value) {
+        if (value.hasOwnProperty(prop)) {
+          value[prop] = preEncode(value[prop]);
+        }
       }
     }
 
-    // ARRAY
-    if (is.defined(encoded.listValue)) {
-      encoded.listValue.values = encoded.listValue.values.map(encodeValue_);
+    if (numberShouldBeStringified) {
+      value = value.toString();
     }
 
-    return encoded;
+    return value;
   }
 
-  // TIMESTAMP
-  if (is.date(value)) {
-    value = value.toJSON();
-  }
-
-  // DATE
-  if (value instanceof SpannerDate) {
-    value = value.value;
-  }
-
-  // INT
-  if (value instanceof Int) {
-    value = value.value;
-  }
-
-  return encodeValue_(commonGrpc.Service.encodeValue_(value));
+  return commonGrpc.Service.encodeValue_(preEncode(value));
 }
 
 codec.encode = encode;

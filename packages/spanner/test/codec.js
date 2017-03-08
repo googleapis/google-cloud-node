@@ -129,6 +129,19 @@ describe('codec', function() {
       assert.deepEqual(decoded, new Buffer(value, 'base64'));
     });
 
+    it('should decode FLOAT64', function() {
+      var value = 'Infinity';
+
+      var decoded = codec.decode(value, {
+        type: {
+          code: 'FLOAT64'
+        }
+      });
+
+      assert(decoded instanceof codec.Double);
+      assert.strictEqual(decoded.value, value);
+    });
+
     it('should decode INT64', function() {
       var value = '64';
 
@@ -140,18 +153,6 @@ describe('codec', function() {
 
       assert(decoded instanceof codec.Int);
       assert.strictEqual(decoded.value, value);
-    });
-
-    it('should decode FLOAT64', function() {
-      var value = 'Infinity';
-
-      var decoded = codec.decode(value, {
-        type: {
-          code: 'FLOAT64'
-        }
-      });
-
-      assert.strictEqual(decoded, parseFloat(Infinity));
     });
 
     it('should decode TIMESTAMP', function() {
@@ -295,77 +296,53 @@ describe('codec', function() {
     it('should encode BYTES', function() {
       var value = new Buffer('bytes value');
 
-      var encoded = codec.encode({
-        blobValue: value
-      });
+      var encoded = codec.encode(value);
 
-      assert.strictEqual(encoded.stringValue, value.toString('base64'));
-      assert.strictEqual(encoded.blobValue, undefined);
+      assert.strictEqual(encoded, value.toString('base64'));
     });
 
     it('should stringify Infinity', function() {
       var value = Infinity;
 
-      var encoded = codec.encode({
-        numberValue: value
-      });
+      var encoded = codec.encode(value);
 
-      assert.deepEqual(encoded, {
-        stringValue: value.toString()
-      });
+      assert.strictEqual(encoded, value.toString());
     });
 
     it('should stringify -Infinity', function() {
       var value = -Infinity;
 
-      var encoded = codec.encode({
-        numberValue: value
-      });
+      var encoded = codec.encode(value);
 
-      assert.deepEqual(encoded, {
-        stringValue: value.toString()
-      });
+      assert.strictEqual(encoded, value.toString());
     });
 
     it('should stringify NaN', function() {
       var value = NaN;
 
-      var encoded = codec.encode({
-        numberValue: value
-      });
+      var encoded = codec.encode(value);
 
-      assert.deepEqual(encoded, {
-        stringValue: value.toString()
-      });
+      assert.strictEqual(encoded, value.toString());
     });
 
     it('should stringify INT64', function() {
       var value = 5;
 
-      var encoded = codec.encode({
-        numberValue: value
-      });
+      var encoded = codec.encode(value);
 
-      assert.deepEqual(encoded, {
-        stringValue: value.toString()
-      });
+      assert.strictEqual(encoded, value.toString());
     });
 
     it('should encode ARRAY and inner members', function() {
       var value = [
-        {
-          numberValue: 5
-        }
+        5
       ];
 
-      var encoded = codec.encode({
-        listValue: {
-          values: value
-        }
-      });
+      var encoded = codec.encode(value);
 
-      assert.deepEqual(encoded.listValue.values, value);
-      assert.strictEqual(encoded.listValue.values[0].stringValue, '5');
+      assert.deepEqual(encoded, [
+        value.toString() // (tests that it is stringified)
+      ]);
     });
 
     it('should encode TIMESTAMP', function() {
@@ -389,7 +366,15 @@ describe('codec', function() {
 
       var encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.value);
+      assert.strictEqual(encoded, '10');
+    });
+
+    it('should encode FLOAT64', function() {
+      var value = new codec.Double(10);
+
+      var encoded = codec.encode(value);
+
+      assert.strictEqual(encoded, 10);
     });
   });
 });

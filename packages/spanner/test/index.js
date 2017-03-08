@@ -37,8 +37,10 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, [
+      'double',
       'getInstanceConfigs',
       'instance',
+      'int',
       'operation'
     ]);
   }

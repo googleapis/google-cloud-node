@@ -109,6 +109,19 @@ Spanner.prototype.date = Spanner.date = function(value) {
 };
 
 /**
+ * Helper function to get a Cloud Spanner Float64 object.
+ *
+ * @param {string|number} value - The int as a number or string.
+ * @return {object}
+ *
+ * @example
+ * var date = spanner.int(10);
+ */
+Spanner.prototype.double = Spanner.double = function(value) {
+  return new codec.Double(value);
+};
+
+/**
  * Helper function to get a Cloud Spanner Int64 object.
  *
  * @param {string|number} value - The int as a number or string.
@@ -480,8 +493,10 @@ Spanner.prototype.operation = function(name) {
  */
 common.util.promisifyAll(Spanner, {
   exclude: [
+    'double',
     'getInstanceConfigs',
     'instance',
+    'int',
     'operation'
   ]
 });
