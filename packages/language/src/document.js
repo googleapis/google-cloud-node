@@ -67,7 +67,7 @@ function Document(language, config) {
   var content = config.content || config;
 
   this.api = language.api;
-  this.encodingType = 'UTF16';
+  this.encodingType = this.detectEncodingType_(config);
 
   this.document = {};
 
@@ -232,7 +232,8 @@ Document.PART_OF_SPEECH = {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/annotateText#features).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.entities - Detect the entities from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
@@ -590,7 +591,8 @@ Document.prototype.annotate = function(options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
@@ -726,7 +728,8 @@ Document.prototype.detectEntities = function(options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
@@ -821,7 +824,8 @@ Document.prototype.detectSentiment = function(options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
@@ -1142,12 +1146,13 @@ Document.sortByProperty_ = function(propertyName) {
  *
  * @param {object} options - Configuration object.
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @return {string} - The encodingType, as understood by the API.
  */
 Document.prototype.detectEncodingType_ = function(options) {
-  var encoding = this.encodingType || options.encoding || options.encodingType;
+  var encoding = options.encoding || options.encodingType || this.encodingType;
 
   if (!encoding) {
     return;

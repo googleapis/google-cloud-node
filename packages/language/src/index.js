@@ -82,7 +82,8 @@ function Language(options) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
@@ -175,7 +176,8 @@ Language.prototype.annotate = function(content, options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
@@ -267,7 +269,8 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
@@ -350,7 +353,8 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  * @param {object=} options - Configuration object. See
  *     [documents.analyzeSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
  * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
- *     `string`), or `UTF32`. (Alias for `options.encodingType`). See
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
