@@ -57,16 +57,14 @@ describe('Document', function() {
     });
 
     DocumentCache = extend(true, {}, Document);
+    DocumentCache.prototype = extend(true, {}, Document.prototype);
   });
 
   beforeEach(function() {
     isCustomTypeOverride = null;
 
-    for (var property in DocumentCache) {
-      if (DocumentCache.hasOwnProperty(property)) {
-        Document[property] = DocumentCache[property];
-      }
-    }
+    extend(Document, DocumentCache);
+    Document.prototype = extend({}, DocumentCache.prototype);
 
     document = new Document(LANGUAGE, CONFIG);
   });
@@ -80,20 +78,27 @@ describe('Document', function() {
       assert(promisified);
     });
 
+    it('should set the correct encodingType', function() {
+      var detectedEncodingType = 'detected-encoding-type';
+      var config = {
+        content: CONFIG
+      };
+
+      Document.prototype.detectEncodingType_ = function(options) {
+        assert.strictEqual(options, config);
+        return detectedEncodingType;
+      };
+
+      var document = new Document(LANGUAGE, config);
+
+      assert.strictEqual(document.encodingType, detectedEncodingType);
+    });
+
     it('should set the correct document for inline content', function() {
       assert.deepEqual(document.document, {
         content: CONFIG,
         type: 'PLAIN_TEXT'
       });
-    });
-
-    it('should set and uppercase the correct encodingType', function() {
-      var document = new Document(LANGUAGE, {
-        content: CONFIG,
-        encoding: 'utf-8'
-      });
-
-      assert.strictEqual(document.encodingType, 'UTF8');
     });
 
     it('should set the correct document for content with language', function() {
@@ -151,6 +156,14 @@ describe('Document', function() {
         '/',
         encodeURIComponent(file.id),
       ].join(''));
+    });
+
+    it('should default the encodingType to UTF8 if a Buffer', function() {
+      var document = new Document(LANGUAGE, {
+        content: new Buffer([])
+      });
+
+      assert.strictEqual(document.encodingType, 'UTF8');
     });
   });
 
@@ -266,6 +279,13 @@ describe('Document', function() {
 
   describe('annotate', function() {
     it('should make the correct API request', function(done) {
+      var detectedEncodingType = 'detected-encoding-type';
+
+      document.detectEncodingType_ = function(options) {
+        assert.deepEqual(options, {});
+        return detectedEncodingType;
+      };
+
       document.api.Language = {
         annotateText: function(reqOpts) {
           assert.strictEqual(reqOpts.document, document.document);
@@ -276,13 +296,12 @@ describe('Document', function() {
             extractSyntax: true
           });
 
-          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          assert.strictEqual(reqOpts.encodingType, detectedEncodingType);
 
           done();
         }
       };
 
-      document.encodingType = 'encoding-type';
       document.annotate(assert.ifError);
     });
 
@@ -542,15 +561,21 @@ describe('Document', function() {
 
   describe('detectEntities', function() {
     it('should make the correct API request', function(done) {
+      var detectedEncodingType = 'detected-encoding-type';
+
+      document.detectEncodingType_ = function(options) {
+        assert.deepEqual(options, {});
+        return detectedEncodingType;
+      };
+
       document.api.Language = {
         analyzeEntities: function(reqOpts) {
           assert.strictEqual(reqOpts.document, document.document);
-          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          assert.strictEqual(reqOpts.encodingType, detectedEncodingType);
           done();
         }
       };
 
-      document.encodingType = 'encoding-type';
       document.detectEntities(assert.ifError);
     });
 
@@ -631,10 +656,17 @@ describe('Document', function() {
 
   describe('detectSentiment', function() {
     it('should make the correct API request', function(done) {
+      var detectedEncodingType = 'detected-encoding-type';
+
+      document.detectEncodingType_ = function(options) {
+        assert.deepEqual(options, {});
+        return detectedEncodingType;
+      };
+
       document.api.Language = {
         analyzeSentiment: function(reqOpts) {
           assert.strictEqual(reqOpts.document, document.document);
-          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          assert.strictEqual(reqOpts.encodingType, detectedEncodingType);
           done();
         }
       };
@@ -747,10 +779,17 @@ describe('Document', function() {
 
   describe('detectSyntax', function() {
     it('should make the correct API request', function(done) {
+      var detectedEncodingType = 'detected-encoding-type';
+
+      document.detectEncodingType_ = function(options) {
+        assert.deepEqual(options, {});
+        return detectedEncodingType;
+      };
+
       document.api.Language = {
         analyzeSyntax: function(reqOpts) {
           assert.strictEqual(reqOpts.document, document.document);
-          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          assert.strictEqual(reqOpts.encodingType, detectedEncodingType);
           done();
         }
       };
@@ -1100,6 +1139,71 @@ describe('Document', function() {
         sortFn({ sortedProperty: 0 }, { sortedProperty: 0 }),
         0
       );
+    });
+  });
+
+  describe('detectEncodingType_', function() {
+    it('should return if no encoding type is set', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encoding: ''
+      }), undefined);
+
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: ''
+      }), undefined);
+
+      document.encodingType = '';
+      assert.strictEqual(document.detectEncodingType_({}), undefined);
+    });
+
+    it('should return UTF8 for BUFFER input', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'buffer'
+      }), 'UTF8');
+    });
+
+    it('should return UTF16 for STRING input', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'string'
+      }), 'UTF16');
+    });
+
+    it('should return original value', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'UTF32'
+      }), 'UTF32');
+    });
+
+    it('should capitilize and remove whitespace and hyphens', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'utf32'
+      }), 'UTF32');
+
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'UTF 32'
+      }), 'UTF32');
+
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'UTF-32'
+      }), 'UTF32');
+    });
+
+    it('should accept options.encoding', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encoding: 'UTF32'
+      }), 'UTF32');
+    });
+
+    it('should accept options.encodingType', function() {
+      assert.strictEqual(document.detectEncodingType_({
+        encodingType: 'UTF32'
+      }), 'UTF32');
+    });
+
+    it('should default to encodingType instance property', function() {
+      document.encodingType = 'utf-32';
+
+      assert.strictEqual(document.detectEncodingType_({}), 'UTF32');
     });
   });
 });
