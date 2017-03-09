@@ -1,0 +1,40 @@
+{
+  "name": "dlp-cli",
+  "description": "Command-line interface for Google Cloud Platform's Data Loss Prevention API",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "contributors": [
+    {
+      "name": "Ace Nassri",
+      "email": "anassri@google.com"
+    },
+    {
+      "name": "Jason Dobry",
+      "email": "jason.dobry@gmail.com"
+    },
+    {
+      "name": "Jon Wayne Parrott",
+      "email": "jonwayne@google.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
+  },
+  "scripts": {
+    "test": "ava system-test/*.test.js -c 20 -T 240s"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "dependencies": {
+    "google-auth-library": "^0.10.0",
+    "google-auto-auth": "^0.5.2",
+    "mime": "1.3.4",
+    "request": "2.79.0",
+    "request-promise": "4.1.1",
+    "yargs": "6.6.0"
+  }
+}
