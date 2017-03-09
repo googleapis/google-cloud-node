@@ -19,13 +19,10 @@
     "lodash.flatten": "^4.3.0",
     "lodash.template": "^4.3.0",
     "mitm": "^1.1.0",
-    "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
     "multiline": "^1.0.2",
     "package-json": "^2.4.0",
     "propprop": "^0.3.1",
-    "proxyquire": "^1.7.10",
-    "request": "^2.70.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.3",
     "string-format-obj": "^1.0.0",
@@ -44,7 +41,7 @@
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -x 'packages/*/src/v*/*.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
-    "coveralls": "npm run cover && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "npm run cover && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "Apache-2.0",
   "engines": {

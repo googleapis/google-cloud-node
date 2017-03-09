@@ -40,6 +40,11 @@ npm install
 npm run lint
 node ./scripts/build.js
 
+export COVERALLS_REPO_TOKEN="kEhKxvu3L9Z4GiClA9LcKYk7G9i9dl83k"
+export CIRCLE_ARTIFACTS="$(pwd)/coverage"
+npm run postinstall # installs all modules
+npm run coveralls
+
 nvm use v6
 rebuild
 npm run lint
