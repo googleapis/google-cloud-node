@@ -44,8 +44,6 @@ var prop = require('propprop');
  *     object to specify the encoding and/or language of the document, use this
  *     property to pass the inline content of the document or a Storage File
  *     object.
- * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -69,12 +67,9 @@ function Document(language, config) {
   var content = config.content || config;
 
   this.api = language.api;
+  this.encodingType = this.detectEncodingType_(config);
 
   this.document = {};
-
-  if (config.encoding) {
-    this.encodingType = config.encoding.toUpperCase().replace(/[ -]/g, '');
-  }
 
   if (config.language) {
     this.document.language = config.language;
@@ -98,6 +93,10 @@ function Document(language, config) {
     });
   } else {
     this.document.content = content;
+
+    if (Buffer.isBuffer(content)) {
+      this.encodingType = 'UTF8';
+    }
   }
 }
 
@@ -232,6 +231,10 @@ Document.PART_OF_SPEECH = {
  *
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/annotateText#features).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.entities - Detect the entities from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
@@ -547,7 +550,7 @@ Document.prototype.annotate = function(options, callback) {
   this.api.Language.annotateText({
     document: this.document,
     features: features,
-    encodingType: this.encodingType
+    encodingType: this.detectEncodingType_(options)
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -587,6 +590,10 @@ Document.prototype.annotate = function(options, callback) {
  *
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -699,7 +706,7 @@ Document.prototype.detectEntities = function(options, callback) {
 
   this.api.Language.analyzeEntities({
     document: this.document,
-    encodingType: this.encodingType
+    encodingType: this.detectEncodingType_(options)
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -720,6 +727,10 @@ Document.prototype.detectEntities = function(options, callback) {
  *
  * @param {object=} options - Configuration object. See
  *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -784,7 +795,7 @@ Document.prototype.detectSentiment = function(options, callback) {
 
   this.api.Language.analyzeSentiment({
     document: this.document,
-    encodingType: this.encodingType
+    encodingType: this.detectEncodingType_(options)
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -812,6 +823,10 @@ Document.prototype.detectSentiment = function(options, callback) {
  *
  * @param {object=} options - Configuration object. See
  *     [documents.annotateSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -952,7 +967,7 @@ Document.prototype.detectSyntax = function(options, callback) {
 
   this.api.Language.analyzeSyntax({
     document: this.document,
-    encodingType: this.encodingType
+    encodingType: this.detectEncodingType_(options)
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -1124,6 +1139,36 @@ Document.sortByProperty_ = function(propertyName) {
 
     return 0;
   };
+};
+
+/**
+ * Check if the user provided an encodingType, and map it to its API value.
+ *
+ * @param {object} options - Configuration object.
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
+ * @return {string} - The encodingType, as understood by the API.
+ */
+Document.prototype.detectEncodingType_ = function(options) {
+  var encoding = options.encoding || options.encodingType || this.encodingType;
+
+  if (!encoding) {
+    return;
+  }
+
+  encoding = encoding.toUpperCase().replace(/[ -]/g, '');
+
+  if (encoding === 'BUFFER') {
+    encoding = 'UTF8';
+  }
+
+  if (encoding === 'STRING') {
+    encoding = 'UTF16';
+  }
+
+  return encoding;
 };
 
 /*! Developer Documentation
