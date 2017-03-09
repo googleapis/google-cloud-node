@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'spanner.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
+var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
 
 var PAGE_DESCRIPTORS = {
   listInstanceConfigs: new gax.PageDescriptor(
@@ -85,7 +85,7 @@ var ALL_SCOPES = [
  * @see {@link instanceAdminClient}
  *
  * @example
- * var spannerV1 = require('@google-cloud/spanner').v1.admin.instance({
+ * var spannerV1 = require('@google-cloud/spanner').admin.instance.v1({
  *   // optional auth parameters.
  * });
  * var client = spannerV1.instanceAdminClient();
@@ -93,32 +93,29 @@ var ALL_SCOPES = [
  * @class
  */
 function InstanceAdminClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
 
   this.operationsClient = new gax.lro({
     auth: gaxGrpc.auth,
     grpc: gaxGrpc.grpc
-  }).operationsClient({
-    servicePath: servicePath,
-    port: port,
-    sslCreds: sslCreds,
-    clientConfig: clientConfig,
-    appName: appName,
-    appVersion: appVersion
-  });
+  }).operationsClient(opts);
 
   this.longrunningDescriptors = {
     createInstance: new gax.LongrunningDescriptor(
@@ -134,17 +131,15 @@ function InstanceAdminClient(gaxGrpc, grpcClients, opts) {
   var defaults = gaxGrpc.constructSettings(
       'google.spanner.admin.instance.v1.InstanceAdmin',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
   var self = this;
 
   this.auth = gaxGrpc.auth;
   var instanceAdminStub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.spanner.admin.instance.v1.InstanceAdmin,
-      {sslCreds: sslCreds});
+      opts);
   var instanceAdminStubMethods = [
     'listInstanceConfigs',
     'getInstanceConfig',
@@ -319,7 +314,7 @@ InstanceAdminClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedParent = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
  * client.listInstanceConfigs({parent: formattedParent}).then(function(responses) {
@@ -399,7 +394,7 @@ InstanceAdminClient.prototype.listInstanceConfigs = function(request, options, c
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedParent = client.projectPath("[PROJECT]");
  * client.listInstanceConfigsStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
@@ -436,7 +431,7 @@ InstanceAdminClient.prototype.listInstanceConfigsStream = function(request, opti
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedName = client.instanceConfigPath("[PROJECT]", "[INSTANCE_CONFIG]");
  * client.getInstanceConfig({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
@@ -516,7 +511,7 @@ InstanceAdminClient.prototype.getInstanceConfig = function(request, options, cal
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedParent = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
  * client.listInstances({parent: formattedParent}).then(function(responses) {
@@ -615,7 +610,7 @@ InstanceAdminClient.prototype.listInstances = function(request, options, callbac
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedParent = client.projectPath("[PROJECT]");
  * client.listInstancesStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
@@ -652,7 +647,7 @@ InstanceAdminClient.prototype.listInstancesStream = function(request, options) {
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedName = client.instancePath("[PROJECT]", "[INSTANCE]");
  * client.getInstance({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
@@ -736,7 +731,7 @@ InstanceAdminClient.prototype.getInstance = function(request, options, callback)
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedParent = client.projectPath("[PROJECT]");
  * var instanceId = '';
  * var instance = {};
@@ -872,7 +867,7 @@ InstanceAdminClient.prototype.createInstance = function(request, options, callba
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var instance = {};
  * var fieldMask = {};
  * var request = {
@@ -965,7 +960,7 @@ InstanceAdminClient.prototype.updateInstance = function(request, options, callba
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedName = client.instancePath("[PROJECT]", "[INSTANCE]");
  * client.deleteInstance({name: formattedName}).catch(function(err) {
  *     console.error(err);
@@ -1016,7 +1011,7 @@ InstanceAdminClient.prototype.deleteInstance = function(request, options, callba
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedResource = client.instancePath("[PROJECT]", "[INSTANCE]");
  * var policy = {};
  * var request = {
@@ -1068,7 +1063,7 @@ InstanceAdminClient.prototype.setIamPolicy = function(request, options, callback
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedResource = client.instancePath("[PROJECT]", "[INSTANCE]");
  * client.getIamPolicy({resource: formattedResource}).then(function(responses) {
  *     var response = responses[0];
@@ -1094,7 +1089,7 @@ InstanceAdminClient.prototype.getIamPolicy = function(request, options, callback
  *
  * Attempting this RPC on a non-existent Cloud Spanner instance resource will
  * result in a NOT_FOUND error if the user has `spanner.instances.list`
- * permission on the containing Cloud Project. Otherwise returns an
+ * permission on the containing Google Cloud Project. Otherwise returns an
  * empty set of permissions.
  *
  * @param {Object} request
@@ -1121,7 +1116,7 @@ InstanceAdminClient.prototype.getIamPolicy = function(request, options, callback
  *
  * @example
  *
- * var client = spannerAdmin.instanceAdminClient();
+ * var client = spannerV1.instanceAdminClient();
  * var formattedResource = client.instancePath("[PROJECT]", "[INSTANCE]");
  * var permissions = [];
  * var request = {
@@ -1172,10 +1167,6 @@ function InstanceAdminClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.instanceAdminClient = function(opts) {
     return new InstanceAdminClient(gaxGrpc, instanceAdminClient, opts);

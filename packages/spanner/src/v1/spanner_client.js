@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'spanner.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
+var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
 
 var STREAM_DESCRIPTORS = {
   executeStreamingSql: new gax.StreamDescriptor(gax.StreamType.SERVER_STREAMING),
@@ -70,34 +70,36 @@ var ALL_SCOPES = [
  * @class
  */
 function SpannerClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
   var defaults = gaxGrpc.constructSettings(
       'google.spanner.v1.Spanner',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
   var self = this;
 
   this.auth = gaxGrpc.auth;
   var spannerStub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.spanner.v1.Spanner,
-      {sslCreds: sslCreds});
+      opts);
   var spannerStubMethods = [
     'createSession',
     'getSession',
@@ -258,10 +260,9 @@ SpannerClient.prototype.getProjectId = function(callback) {
  *
  * Cloud Spanner limits the number of sessions that can exist at any given
  * time; thus, it is a good idea to delete idle and/or unneeded sessions.
- * Aside from explicit deletes, Cloud Spanner can delete sessions for
- * which no operations are sent for more than an hour, or due to
- * internal errors. If a session is deleted, requests to it
- * return `NOT_FOUND`.
+ * Aside from explicit deletes, Cloud Spanner can delete sessions for which no
+ * operations are sent for more than an hour. If a session is deleted,
+ * requests to it return `NOT_FOUND`.
  *
  * Idle sessions can be kept alive by sending a trivial SQL query
  * periodically, e.g., `"SELECT 1"`.
@@ -944,10 +945,6 @@ function SpannerClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.spannerClient = function(opts) {
     return new SpannerClient(gaxGrpc, spannerClient, opts);

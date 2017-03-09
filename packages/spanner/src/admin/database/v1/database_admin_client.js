@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'spanner.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
+var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
 
 var PAGE_DESCRIPTORS = {
   listDatabases: new gax.PageDescriptor(
@@ -65,7 +65,7 @@ var ALL_SCOPES = [
  * @see {@link databaseAdminClient}
  *
  * @example
- * var spannerV1 = require('@google-cloud/spanner').v1.admin.database({
+ * var spannerV1 = require('@google-cloud/spanner').admin.database.v1({
  *   // optional auth parameters.
  * });
  * var client = spannerV1.databaseAdminClient();
@@ -73,32 +73,29 @@ var ALL_SCOPES = [
  * @class
  */
 function DatabaseAdminClient(gaxGrpc, grpcClients, opts) {
-  opts = opts || {};
-  var servicePath = opts.servicePath || SERVICE_ADDRESS;
-  var port = opts.port || DEFAULT_SERVICE_PORT;
-  var sslCreds = opts.sslCreds || null;
-  var clientConfig = opts.clientConfig || {};
-  var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.version;
+  opts = extend({
+    servicePath: SERVICE_ADDRESS,
+    port: DEFAULT_SERVICE_PORT,
+    clientConfig: {}
+  }, opts);
 
   var googleApiClient = [
-    appName + '/' + appVersion,
+    'gl-node/' + process.versions.node
+  ];
+  if (opts.libName && opts.libVersion) {
+    googleApiClient.push(opts.libName + '/' + opts.libVersion);
+  }
+  googleApiClient.push(
     CODE_GEN_NAME_VERSION,
     'gax/' + gax.version,
-    'nodejs/' + process.version].join(' ');
+    'grpc/' + gaxGrpc.grpcVersion
+  );
 
 
   this.operationsClient = new gax.lro({
     auth: gaxGrpc.auth,
     grpc: gaxGrpc.grpc
-  }).operationsClient({
-    servicePath: servicePath,
-    port: port,
-    sslCreds: sslCreds,
-    clientConfig: clientConfig,
-    appName: appName,
-    appVersion: appVersion
-  });
+  }).operationsClient(opts);
 
   this.longrunningDescriptors = {
     createDatabase: new gax.LongrunningDescriptor(
@@ -114,17 +111,15 @@ function DatabaseAdminClient(gaxGrpc, grpcClients, opts) {
   var defaults = gaxGrpc.constructSettings(
       'google.spanner.admin.database.v1.DatabaseAdmin',
       configData,
-      clientConfig,
-      {'x-goog-api-client': googleApiClient});
+      opts.clientConfig,
+      {'x-goog-api-client': googleApiClient.join(' ')});
 
   var self = this;
 
   this.auth = gaxGrpc.auth;
   var databaseAdminStub = gaxGrpc.createStub(
-      servicePath,
-      port,
       grpcClients.google.spanner.admin.database.v1.DatabaseAdmin,
-      {sslCreds: sslCreds});
+      opts);
   var databaseAdminStubMethods = [
     'listDatabases',
     'createDatabase',
@@ -285,7 +280,7 @@ DatabaseAdminClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedParent = client.instancePath("[PROJECT]", "[INSTANCE]");
  * // Iterate over all elements.
  * client.listDatabases({parent: formattedParent}).then(function(responses) {
@@ -364,7 +359,7 @@ DatabaseAdminClient.prototype.listDatabases = function(request, options, callbac
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedParent = client.instancePath("[PROJECT]", "[INSTANCE]");
  * client.listDatabasesStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
@@ -417,7 +412,7 @@ DatabaseAdminClient.prototype.listDatabasesStream = function(request, options) {
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedParent = client.instancePath("[PROJECT]", "[INSTANCE]");
  * var createStatement = '';
  * var request = {
@@ -503,7 +498,7 @@ DatabaseAdminClient.prototype.createDatabase = function(request, options, callba
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedName = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * client.getDatabase({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
@@ -554,7 +549,7 @@ DatabaseAdminClient.prototype.getDatabase = function(request, options, callback)
  *   {@link longrunning.Operation}: `<database>/operations/<operation_id>`.
  *
  *   `operation_id` should be unique within the database, and must be
- *   a valid identifier: `[a-zA-Z][a-zA-Z0-9_]*`. Note that
+ *   a valid identifier: `[a-z][a-z0-9_]*`. Note that
  *   automatically-generated operation IDs always begin with an
  *   underscore. If the named operation already exists,
  *   {@link UpdateDatabaseDdl} returns
@@ -572,7 +567,7 @@ DatabaseAdminClient.prototype.getDatabase = function(request, options, callback)
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedDatabase = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * var statements = [];
  * var request = {
@@ -654,7 +649,7 @@ DatabaseAdminClient.prototype.updateDatabaseDdl = function(request, options, cal
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedDatabase = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * client.dropDatabase({database: formattedDatabase}).catch(function(err) {
  *     console.error(err);
@@ -694,7 +689,7 @@ DatabaseAdminClient.prototype.dropDatabase = function(request, options, callback
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedDatabase = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * client.getDatabaseDdl({database: formattedDatabase}).then(function(responses) {
  *     var response = responses[0];
@@ -748,7 +743,7 @@ DatabaseAdminClient.prototype.getDatabaseDdl = function(request, options, callba
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedResource = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * var policy = {};
  * var request = {
@@ -800,7 +795,7 @@ DatabaseAdminClient.prototype.setIamPolicy = function(request, options, callback
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedResource = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * client.getIamPolicy({resource: formattedResource}).then(function(responses) {
  *     var response = responses[0];
@@ -853,7 +848,7 @@ DatabaseAdminClient.prototype.getIamPolicy = function(request, options, callback
  *
  * @example
  *
- * var client = spannerAdmin.databaseAdminClient();
+ * var client = spannerV1.databaseAdminClient();
  * var formattedResource = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * var permissions = [];
  * var request = {
@@ -904,10 +899,6 @@ function DatabaseAdminClientBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.appName
-   *   The codename of the calling service.
-   * @param {String=} opts.appVersion
-   *   The version of the calling service.
    */
   this.databaseAdminClient = function(opts) {
     return new DatabaseAdminClient(gaxGrpc, databaseAdminClient, opts);

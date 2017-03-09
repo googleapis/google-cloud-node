@@ -150,31 +150,37 @@ describe('Spanner', function() {
       var gaxInstanceClient = {};
       var gaxSpannerClient = {};
 
+      var expectedOptions = {
+        libName: 'gccl',
+        libVersion: require('../package.json').version,
+        projectId: OPTIONS.projectId
+      };
+
       fakeV1Override = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        assert.deepStrictEqual(options, expectedOptions);
         return {
           spannerClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expectedOptions);
             return gaxSpannerClient;
           }
         };
       };
 
       fakeV1.admin.database = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        assert.deepStrictEqual(options, expectedOptions);
         return {
           databaseAdminClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expectedOptions);
             return gaxDatabaseClient;
           }
         };
       };
 
       fakeV1.admin.instance = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        assert.deepStrictEqual(options, expectedOptions);
         return {
           instanceAdminClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expectedOptions);
             return gaxInstanceClient;
           }
         };

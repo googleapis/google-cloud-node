@@ -64,6 +64,11 @@ function Spanner(options) {
     return new Spanner(options);
   }
 
+  options = extend({}, options, {
+    libName: 'gccl',
+    libVersion: require('../package.json').version
+  });
+
   this.api = {
     Database: v1.admin.database(options).databaseAdminClient(options),
     Instance: v1.admin.instance(options).instanceAdminClient(options),
