@@ -535,15 +535,17 @@ function SessionEvictor(pool) {
  *
  * @return {boolean}
  */
-SessionEvictor.prototype.evict = function(config, session, available) {
+SessionEvictor.prototype.evict = function(config, resource, available) {
+  var session = resource.obj;
+
   if (session.evicted_) {
     return true;
   }
 
-  var needsKeepAlive = this.evictor.evict(config, session, available);
+  var needsKeepAlive = this.evictor.evict(config, resource, available);
 
   if (needsKeepAlive) {
-    session.run('SELECT 1', function(err) {
+    session.keepAlive(function(err) {
       session.evicted_ = !!err;
     });
   }

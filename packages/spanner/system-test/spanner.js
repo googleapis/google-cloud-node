@@ -396,6 +396,10 @@ describe('Spanner', function() {
         done();
       });
     });
+
+    it('should keep the session alive', function(done) {
+      session.keepAlive(done);
+    });
   });
 
   describe('Tables', function() {
