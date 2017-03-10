@@ -826,7 +826,7 @@ ObjectToStructConverter.prototype.convert = function(obj) {
     }
   }
 
-  this.seenObjects.clear();
+  this.seenObjects.delete(obj);
 
   return convertedObject;
 };

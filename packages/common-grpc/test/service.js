@@ -1992,7 +1992,8 @@ describe('GrpcService', function() {
           add: function(obj) {
             objectAdded = obj;
           },
-          clear: function() {
+          delete: function(obj_) {
+            assert.strictEqual(obj_, obj);
             assert.strictEqual(objectAdded, obj);
             done();
           }
