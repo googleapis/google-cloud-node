@@ -17,7 +17,6 @@
   "undef": true,
   "unused": "vars",
   "globals": {
-    /* Mocha-provided globals */
     "describe": false,
     "it": false,
     "before": false,
