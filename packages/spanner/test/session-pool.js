@@ -1533,55 +1533,72 @@ describe('SessionEvictor', function() {
 
   describe('evict', function() {
     var CONFIG = {};
-    var SESSION = {
-      evicted_: false,
-      run: util.noop
-    };
     var AVAILABLE = false;
+    var RESOURCE;
+
+    beforeEach(function() {
+      RESOURCE = {
+        obj: {
+          evicted_: false,
+          keepAlive: util.noop
+        }
+      };
+    });
 
     it('should return true if already evicted', function() {
-      var session = extend({}, SESSION, {
-        evicted_: true
-      });
+      RESOURCE.obj.evicted_ = true;
 
-      var evictReturnValue = sessionEvictor.evict(CONFIG, session, AVAILABLE);
+      var evictReturnValue = sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
       assert.strictEqual(evictReturnValue, true);
     });
 
     it('should evict from the DefaultEvictor', function(done) {
-      sessionEvictor.evictor.evict = function(config, session, available) {
+      sessionEvictor.evictor.evict = function(config, resource, available) {
         assert.strictEqual(config, CONFIG);
-        assert.strictEqual(session, SESSION);
+        assert.strictEqual(resource, RESOURCE);
         assert.strictEqual(available, AVAILABLE);
         done();
       };
 
-      sessionEvictor.evict(CONFIG, SESSION, AVAILABLE);
+      sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
     });
 
-    it('should run a query & update evicted status on session', function(done) {
+    it('should set evicted to true when a session expires', function(done) {
       sessionEvictor.evictor.evict = function() {
         return true;
       };
 
-      var session = extend({}, SESSION, {
-        run: function(query, callback) {
-          assert.strictEqual(query, 'SELECT 1');
+      RESOURCE.obj.keepAlive = function(callback) {
+        callback(new Error('Error.'));
 
-          callback(new Error('Error.'));
+        setImmediate(function() {
+          assert.strictEqual(RESOURCE.obj.evicted_, true);
+          done();
+        });
+      };
 
-          setImmediate(function() {
-            assert.strictEqual(session.evicted_, true);
-            done();
-          });
-        }
-      });
+      sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
+    });
 
-      sessionEvictor.evict(CONFIG, session, AVAILABLE);
+    it('should set evicted to false when sessions dont expire', function(done) {
+      sessionEvictor.evictor.evict = function() {
+        return true;
+      };
+
+      RESOURCE.obj.keepAlive = function(callback) {
+        callback(null);
+
+        setImmediate(function() {
+          assert.strictEqual(RESOURCE.obj.evicted_, false);
+          done();
+        });
+      };
+
+      sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
     });
 
     it('should return false if still active', function() {
-      var evictReturnValue = sessionEvictor.evict(CONFIG, SESSION, AVAILABLE);
+      var evictReturnValue = sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
       assert.strictEqual(evictReturnValue, false);
     });
   });

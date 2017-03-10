@@ -252,6 +252,27 @@ Session.prototype.getMetadata = function(callback) {
 };
 
 /**
+ * Ping the session with `SELECT 1` to prevent it from expiring.
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * session.keepAlive(function(err) {
+ *   if (err) {
+ *     // An error occurred while trying to keep this session alive.
+ *   }
+ * });
+ */
+Session.prototype.keepAlive = function(callback) {
+  return this.api.Spanner.executeSql({
+    session: this.formattedName_,
+    sql: 'SELECT 1'
+  }, callback);
+};
+
+/**
  * Create a Transaction object.
  *
  * @throws {Error} If an ID is not provided.

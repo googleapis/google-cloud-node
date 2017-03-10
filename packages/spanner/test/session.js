@@ -231,6 +231,28 @@ describe('Session', function() {
     });
   });
 
+  describe('keepAlive', function() {
+    it('should correctly call and return the gax API', function() {
+      var gaxReturnValue = {};
+
+      function callback() {}
+
+      session.api.Spanner = {
+        executeSql: function(reqOpts, callback_) {
+          assert.deepEqual(reqOpts, {
+            session: session.formattedName_,
+            sql: 'SELECT 1'
+          });
+          assert.strictEqual(callback_, callback);
+          return gaxReturnValue;
+        }
+      };
+
+      var returnValue = session.keepAlive(callback);
+      assert.strictEqual(returnValue, gaxReturnValue);
+    });
+  });
+
   describe('transaction', function() {
     var ID = 'transaction-id';
 
