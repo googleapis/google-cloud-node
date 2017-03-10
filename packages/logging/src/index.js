@@ -27,7 +27,12 @@ var extend = require('extend');
 var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
+var pumpify = require('pumpify');
+var streamEvents = require('stream-events');
+var through = require('through2');
 var util = require('util');
+
+var v2 = require('./v2');
 
 /**
  * @type {module:logging/entry}
@@ -65,6 +70,11 @@ function Logging(options) {
     options = common.util.normalizeArguments(this, options);
     return new Logging(options);
   }
+
+  this.api = {
+    Config: v2(options).configServiceV2Client(options),
+    Logging: v2(options).loggingServiceV2Client(options)
+  };
 
   var config = {
     baseUrl: 'logging.googleapis.com',
@@ -161,17 +171,10 @@ Logging.prototype.createSink = function(name, config, callback) {
     return;
   }
 
-  var protoOpts = {
-    service: 'ConfigServiceV2',
-    method: 'createSink'
-  };
-
-  var reqOpts = {
+  this.api.Config.createSink({
     parent: 'projects/' + this.projectId,
     sink: extend({}, config, { name: name })
-  };
-
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -288,34 +291,24 @@ Logging.prototype.getEntries = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'LoggingServiceV2',
-    method: 'listLogEntries'
-  };
-
   var reqOpts = extend({
     orderBy: 'timestamp desc'
   }, options);
   reqOpts.projectIds = arrify(reqOpts.projectIds);
   reqOpts.projectIds.push(this.projectId);
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  delete reqOpts.autoPaginate;
+  delete reqOpts.maxApiCalls;
+  delete reqOpts.maxResults;
+
+  this.api.Logging.listLogEntries(reqOpts, options, function() {
+    var entries = arguments[1];
+
+    if (entries) {
+      arguments[1] = entries.map(Entry.fromApiResponse_);
     }
 
-    var nextQuery = null;
-
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, reqOpts, {
-        pageToken: resp.nextPageToken
-      });
-    }
-
-    var entries = arrify(resp.entries).map(Entry.fromApiResponse_);
-
-    callback(null, entries, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -347,7 +340,40 @@ Logging.prototype.getEntries = function(options, callback) {
  *     this.end();
  *   });
  */
-Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
+Logging.prototype.getEntriesStream = function(options) {
+  var self = this;
+
+  var requestStream;
+
+  var userStream = streamEvents(pumpify.obj());
+
+  userStream.abort = function() {
+    if (requestStream) {
+      requestStream.abort();
+    }
+  };
+
+  var toEntryStream = through.obj(function(entry, _, next) {
+    next(null, Entry.fromApiResponse_(entry));
+  });
+
+  userStream.once('reading', function() {
+    var reqOpts = extend({
+      orderBy: 'timestamp desc'
+    }, options);
+    reqOpts.projectIds = arrify(reqOpts.projectIds);
+    reqOpts.projectIds.push(this.projectId);
+
+    delete reqOpts.maxApiCalls;
+    delete reqOpts.maxResults;
+
+    requestStream = self.api.Config.listLogEntriesStream(reqOpts, options);
+
+    userStream.setPipeline(requestStream, toEntryStream);
+  });
+
+  return userStream;
+};
 
 /**
  * Get the sinks associated with this project.
@@ -384,36 +410,26 @@ Logging.prototype.getSinks = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'ConfigServiceV2',
-    method: 'listSinks'
-  };
-
   var reqOpts = extend({}, options, {
     parent: 'projects/' + this.projectId
   });
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  delete reqOpts.autoPaginate;
+  delete reqOpts.maxApiCalls;
+  delete reqOpts.maxResults;
 
-    var nextQuery = null;
+  this.api.Config.listSinks(reqOpts, options, function() {
+    var sinks = arguments[1];
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+    if (sinks) {
+      arguments[1] = sinks.map(function(sink) {
+        var sinkInstance = self.sink(sink.name);
+        sinkInstance.metadata = sink;
+        return sinkInstance;
       });
     }
 
-    var sinks = arrify(resp.sinks).map(function(sink) {
-      var sinkInstance = self.sink(sink.name);
-      sinkInstance.metadata = sink;
-      return sinkInstance;
-    });
-
-    callback(null, sinks, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -444,7 +460,40 @@ Logging.prototype.getSinks = function(options, callback) {
  *     this.end();
  *   });
  */
-Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
+Logging.prototype.getSinksStream = function(options) {
+  var self = this;
+
+  var requestStream;
+
+  var userStream = streamEvents(pumpify.obj());
+
+  userStream.abort = function() {
+    if (requestStream) {
+      requestStream.abort();
+    }
+  };
+
+  var toSinkStream = through.obj(function(sink, _, next) {
+    var sinkInstance = self.sink(sink.name);
+    sink.metadata = sink;
+    next(null, sinkInstance);
+  });
+
+  userStream.once('reading', function() {
+    var reqOpts = extend({}, options, {
+      parent: 'projects/' + self.projectId
+    });
+
+    delete reqOpts.maxApiCalls;
+    delete reqOpts.maxResults;
+
+    requestStream = self.api.Config.listSinksStream(reqOpts, options);
+
+    userStream.setPipeline(requestStream, toSinkStream);
+  });
+
+  return userStream;
+};
 
 /**
  * Get a reference to a Stackdriver Logging log.
@@ -612,4 +661,4 @@ Logging.Logging = Logging;
 Logging.Sink = Sink;
 
 module.exports = Logging;
-module.exports.v2 = require('./v2');
+module.exports.v2 = v2;

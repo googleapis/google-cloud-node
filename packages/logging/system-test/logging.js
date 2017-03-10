@@ -276,7 +276,7 @@ describe('Logging', function() {
       }
     };
 
-    it('should list log entries', function(done) {
+    it.only('should list log entries', function(done) {
       logging.getEntries({ pageSize: 1 }, function(err, entries) {
         assert.ifError(err);
         assert.strictEqual(entries.length, 1);
