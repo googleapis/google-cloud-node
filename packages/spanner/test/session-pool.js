@@ -1563,7 +1563,7 @@ describe('SessionEvictor', function() {
       sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
     });
 
-    it('should run a query & update evicted status on session', function(done) {
+    it('should set evicted to true when a session expires', function(done) {
       sessionEvictor.evictor.evict = function() {
         return true;
       };
@@ -1573,6 +1573,23 @@ describe('SessionEvictor', function() {
 
         setImmediate(function() {
           assert.strictEqual(RESOURCE.obj.evicted_, true);
+          done();
+        });
+      };
+
+      sessionEvictor.evict(CONFIG, RESOURCE, AVAILABLE);
+    });
+
+    it('should set evicted to false when sessions dont expire', function(done) {
+      sessionEvictor.evictor.evict = function() {
+        return true;
+      };
+
+      RESOURCE.obj.keepAlive = function(callback) {
+        callback(null);
+
+        setImmediate(function() {
+          assert.strictEqual(RESOURCE.obj.evicted_, false);
           done();
         });
       };

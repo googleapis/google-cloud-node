@@ -232,7 +232,7 @@ describe('Session', function() {
   });
 
   describe('keepAlive', function() {
-    it('should correctl call and return the gax API', function() {
+    it('should correctly call and return the gax API', function() {
       var gaxReturnValue = {};
 
       function callback() {}
