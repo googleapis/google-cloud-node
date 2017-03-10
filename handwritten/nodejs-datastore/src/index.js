@@ -360,11 +360,22 @@ Datastore.prototype.geoPoint = Datastore.geoPoint = function(coordindates) {
 /**
  * Helper function to get a Datastore Integer object.
  *
+ * This is also useful when using an ID outside the bounds of a JavaScript
+ * Number object.
+ *
  * @param {number} value - The integer value.
  * @return {object}
  *
  * @example
  * var sevenInteger = datastore.int(7);
+ *
+ * //-
+ * // Create an Int to support long Key IDs.
+ * //-
+ * var key = datastore.key([
+ *   'Kind',
+ *   datastore.int('100000000000001234')
+ * ]);
  */
 Datastore.prototype.int = Datastore.int = function(value) {
   return new entity.Int(value);
@@ -459,6 +470,15 @@ Datastore.prototype.createQuery = function(namespace, kind) {
  * // Create a complete key with a kind value of `Company` and id `123`.
  * //-
  * var key = datastore.key(['Company', 123]);
+ *
+ * //-
+ * // If the ID integer is outside the bounds of a JavaScript Number object,
+ * // create an Int.
+ * //-
+ * var key = datastore.key([
+ *   'Company',
+ *   datastore.int('100000000000001234')
+ * ]);
  *
  * //-
  * // Create a complete key with a kind value of `Company` and name `Google`.

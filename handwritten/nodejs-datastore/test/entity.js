@@ -48,21 +48,12 @@ describe('entity', function() {
     });
   });
 
-  describe('Double', function() {
-    it('should store the value', function() {
-      var value = 8.3;
-
-      var double = new entity.Double(value);
-      assert.strictEqual(double.value, value);
-    });
-  });
-
   describe('Int', function() {
-    it('should store the value', function() {
+    it('should store the stringified value', function() {
       var value = 8;
 
       var int = new entity.Int(value);
-      assert.strictEqual(int.value, value);
+      assert.strictEqual(int.value, value.toString());
     });
   });
 
@@ -95,6 +86,12 @@ describe('entity', function() {
       var id = 11;
       var key = new entity.Key({ path: ['Kind', id] });
       assert.strictEqual(key.id, id);
+    });
+
+    it('should assign the ID from an Int', function() {
+      var id = new entity.Int(11);
+      var key = new entity.Key({ path: ['Kind', id] });
+      assert.strictEqual(key.id, id.value);
     });
 
     it('should assign the name', function() {
@@ -607,10 +604,12 @@ describe('entity', function() {
       },
       path: [
         {
+          id_type: 'id',
           kind: 'Kind',
           id: '111'
         },
         {
+          id_type: 'name',
           kind: 'Kind2',
           name: 'name'
         }
@@ -632,7 +631,7 @@ describe('entity', function() {
           namespace: NAMESPACE,
           path: [
             'Kind',
-            111,
+            new entity.Int(111),
             'Kind2',
             'name'
           ]
@@ -683,7 +682,7 @@ describe('entity', function() {
   describe('keyToKeyProto', function() {
     it('should handle hierarchical key definitions', function() {
       var key = new entity.Key({
-        path: ['Kind1', 1, 'Kind2', 'name']
+        path: ['Kind1', 1, 'Kind2', 'name', 'Kind3', new entity.Int(3)]
       });
 
       var keyProto = entity.keyToKeyProto(key);
@@ -697,6 +696,10 @@ describe('entity', function() {
       assert.strictEqual(keyProto.path[1].kind, 'Kind2');
       assert.strictEqual(keyProto.path[1].id, undefined);
       assert.strictEqual(keyProto.path[1].name, 'name');
+
+      assert.strictEqual(keyProto.path[2].kind, 'Kind3');
+      assert.strictEqual(keyProto.path[2].id, new entity.Int(3).value);
+      assert.strictEqual(keyProto.path[2].name, undefined);
     });
 
     it('should detect the namespace of the hierarchical keys', function() {

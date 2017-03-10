@@ -45,7 +45,7 @@ var InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
 entity.KEY_SYMBOL = Symbol('KEY');
 
 /**
- * Build a Datastore Double object.
+ * Build a Datastore Double object. For long doubles, a string can be provided.
  *
  * @constructor
  * @param {number} value - The double value.
@@ -60,16 +60,16 @@ function Double(value) {
 entity.Double = Double;
 
 /**
- * Build a Datastore Int object.
+ * Build a Datastore Int object. For long integers, a string can be provided.
  *
  * @constructor
- * @param {number} value - The integer value.
+ * @param {number|string} value - The integer value.
  *
  * @example
  * var anInt = new Int(7);
  */
 function Int(value) {
-  this.value = value;
+  this.value = value.toString();
 }
 
 entity.Int = Int;
@@ -116,8 +116,8 @@ function Key(options) {
   if (options.path.length % 2 === 0) {
     var identifier = options.path.pop();
 
-    if (is.number(identifier)) {
-      this.id = identifier;
+    if (is.number(identifier) || identifier instanceof entity.Int) {
+      this.id = identifier.value || identifier;
     } else if (is.string(identifier)) {
       this.name = identifier;
     }
@@ -467,11 +467,15 @@ function keyFromKeyProto(keyProto) {
   }
 
   keyProto.path.forEach(function(path, index) {
-    var id = path.name || Number(path.id);
-
     keyOptions.path.push(path.kind);
 
-    if (id) {
+    var id = path[path.id_type];
+
+    if (path.id_type === 'id') {
+      id = new entity.Int(id);
+    }
+
+    if (is.defined(id)) {
       keyOptions.path.push(id);
     } else if (index < keyProto.path.length - 1) {
       throw new InvalidKeyError({
@@ -503,7 +507,7 @@ entity.keyFromKeyProto = keyFromKeyProto;
  * // }
  */
 function keyToKeyProto(key) {
-  if (!is.string(key.path[0])) {
+  if (is.undefined(key.kind)) {
     throw new InvalidKeyError({
       code: 'MISSING_KIND'
     });
@@ -519,28 +523,31 @@ function keyToKeyProto(key) {
     };
   }
 
-  for (var i = 0; i < key.path.length; i += 2) {
-    var pathElement = {
-      kind: key.path[i]
-    };
+  var numKeysWalked = 0;
 
-    var value = key.path[i + 1];
-
-    if (value) {
-      if (is.number(value)) {
-        pathElement.id = value;
-      } else {
-        pathElement.name = value;
-      }
-    } else if (i < key.path.length - 2) {
+  // Reverse-iterate over the Key objects.
+  do {
+    if (numKeysWalked > 0 && is.undefined(key.id) && is.undefined(key.name)) {
       // This isn't just an incomplete key. An ancestor key is incomplete.
       throw new InvalidKeyError({
         code: 'MISSING_ANCESTOR_ID'
       });
     }
 
-    keyProto.path.push(pathElement);
-  }
+    var pathElement = {
+      kind: key.kind
+    };
+
+    if (is.defined(key.id)) {
+      pathElement.id = key.id;
+    }
+
+    if (is.defined(key.name)) {
+      pathElement.name = key.name;
+    }
+
+    keyProto.path.unshift(pathElement);
+  } while ((key = key.parent) && ++numKeysWalked);
 
   return keyProto;
 }

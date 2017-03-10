@@ -152,7 +152,7 @@ describe('Request', function() {
     var incompleteKey;
     var apiResponse = {
       keys: [
-        { path: [{ kind: 'Kind', id: 123 }] }
+        { path: [{ id_type: 'id', kind: 'Kind', id: 123 }] }
       ]
     };
 
@@ -173,7 +173,7 @@ describe('Request', function() {
       request.allocateIds(incompleteKey, 1, function(err, keys) {
         assert.ifError(err);
         var generatedKey = keys[0];
-        assert.strictEqual(generatedKey.path.pop(), 123);
+        assert.strictEqual(generatedKey.path.pop(), '123');
         done();
       });
     });
