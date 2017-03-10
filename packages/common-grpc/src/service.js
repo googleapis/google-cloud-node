@@ -496,123 +496,6 @@ GrpcService.decodeValue_ = function(value) {
 };
 
 /**
- * A class that can be used to convert an object to a struct. Optionally this
- * class can be used to erase/throw on circular references during conversion.
- *
- * @private
- *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.removeCircular - Remove circular references in the
- * object with a placeholder string.
- * @param {boolean} options.stringify - Stringify un-recognized types.
- */
-function ObjectToStruct(options) {
-  options = options || {};
-
-  this.seenObjects = new Set();
-  this.removeCircular = options.removeCircular;
-  this.stringify = options.stringify;
-}
-
-ObjectToStruct.prototype.convert = function(obj) {
-  var convertedObject = {
-    fields: {}
-  };
-
-  this.seenObjects.add(obj);
-
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      var value = obj[prop];
-
-      if (is.undefined(value)) {
-        continue;
-      }
-
-      convertedObject.fields[prop] = this.encodeValue(value);
-    }
-  }
-
-  this.seenObjects.delete(obj);
-
-  return convertedObject;
-};
-
-/**
- * Convert a raw value to a type-denoted protobuf message-friendly object.
- *
- * @private
- *
- * @param {*} value - The input value.
- * @return {*} - The encoded value.
- *
- * @example
- * objectToStruct.convert('Hi');
- * // {
- * //   stringValue: 'Hello!'
- * // }
- */
-ObjectToStruct.prototype.encodeValue = function(value) {
-  var self = this;
-  var convertedValue;
-
-  if (is.null(value)) {
-    convertedValue = {
-      nullValue: 0
-    };
-  } else if (is.number(value)) {
-    convertedValue = {
-      numberValue: value
-    };
-  } else if (is.string(value)) {
-    convertedValue = {
-      stringValue: value
-    };
-  } else if (is.boolean(value)) {
-    convertedValue = {
-      boolValue: value
-    };
-  } else if (Buffer.isBuffer(value)) {
-    convertedValue = {
-      blobValue: value
-    };
-  } else if (is.object(value)) {
-    if (this.seenObjects.has(value)) {
-      // Circular reference.
-      if (!this.removeCircular) {
-        throw new Error(
-            'This object contains a circular reference. To automatically ' +
-            'remove it, set removeCircular to true');
-      }
-      convertedValue = {
-        stringValue: '[Circular]'
-      };
-    } else {
-      convertedValue = {
-        structValue: this.convert(value)
-      };
-    }
-  } else if (is.array(value)) {
-    convertedValue = {
-      listValue: {
-        values: value.map(function(value) {
-          return self.encodeValue(value);
-        })
-      }
-    };
-  } else {
-    if (!this.stringify) {
-      throw new Error('Value of type ' + typeof value + ' not recognized.');
-    }
-
-    convertedValue = {
-      stringValue: String(value)
-    };
-  }
-  return convertedValue;
-};
-
-/**
  * Creates a deadline.
  *
  * @private
@@ -749,8 +632,7 @@ GrpcService.shouldRetryRequest_ = function(response) {
  * // }
  */
 GrpcService.objToStruct_ = function(obj, options) {
-  var converter = new ObjectToStruct(options || {});
-  return converter.convert(obj);
+  return new GrpcService.ObjectToStructConverter(options).convert(obj);
 };
 
 /**
@@ -886,7 +768,143 @@ GrpcService.prototype.getService_ = function(protoOpts) {
   return service;
 };
 
+/**
+ * A class that can be used to convert an object to a struct. Optionally this
+ * class can be used to erase/throw on circular references during conversion.
+ *
+ * @private
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.removeCircular - Remove circular references in the
+ *     object with a placeholder string. (Default: `false`)
+ * @param {boolean} options.stringify - Stringify un-recognized types. (Default:
+ *     `false`)
+ */
+function ObjectToStructConverter(options) {
+  options = options || {};
+
+  this.seenObjects = new Set();
+  this.removeCircular = options.removeCircular === true;
+  this.stringify = options.stringify === true;
+}
+
+/**
+ * Begin the conversion process from a JS object to an encoded gRPC Value
+ * message.
+ *
+ * @param {*} value - The input value.
+ * @return {object} - The encoded value.
+ *
+ * @example
+ * ObjectToStructConverter.convert({
+ *   aString: 'Hi'
+ * });
+ * // {
+ * //   fields: {
+ * //     aString: {
+ * //       stringValue: 'Hello!'
+ * //     }
+ * //   }
+ * // }
+ */
+ObjectToStructConverter.prototype.convert = function(obj) {
+  var convertedObject = {
+    fields: {}
+  };
+
+  this.seenObjects.add(obj);
+
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      var value = obj[prop];
+
+      if (is.undefined(value)) {
+        continue;
+      }
+
+      convertedObject.fields[prop] = this.encodeValue_(value);
+    }
+  }
+
+  this.seenObjects.clear();
+
+  return convertedObject;
+};
+
+/**
+ * Convert a raw value to a type-denoted protobuf message-friendly object.
+ *
+ * @private
+ *
+ * @param {*} value - The input value.
+ * @return {*} - The encoded value.
+ *
+ * @example
+ * ObjectToStructConverter.encodeValue('Hi');
+ * // {
+ * //   stringValue: 'Hello!'
+ * // }
+ */
+ObjectToStructConverter.prototype.encodeValue_ = function(value) {
+  var convertedValue;
+
+  if (is.null(value)) {
+    convertedValue = {
+      nullValue: 0
+    };
+  } else if (is.number(value)) {
+    convertedValue = {
+      numberValue: value
+    };
+  } else if (is.string(value)) {
+    convertedValue = {
+      stringValue: value
+    };
+  } else if (is.boolean(value)) {
+    convertedValue = {
+      boolValue: value
+    };
+  } else if (Buffer.isBuffer(value)) {
+    convertedValue = {
+      blobValue: value
+    };
+  } else if (is.object(value)) {
+    if (this.seenObjects.has(value)) {
+      // Circular reference.
+      if (!this.removeCircular) {
+        throw new Error([
+          'This object contains a circular reference. To automatically',
+          'remove it, set the `removeCircular` option to true.'
+        ].join(' '));
+      }
+      convertedValue = {
+        stringValue: '[Circular]'
+      };
+    } else {
+      convertedValue = {
+        structValue: this.convert(value)
+      };
+    }
+  } else if (is.array(value)) {
+    convertedValue = {
+      listValue: {
+        values: value.map(this.encodeValue_.bind(this))
+      }
+    };
+  } else {
+    if (!this.stringify) {
+      throw new Error('Value of type ' + typeof value + ' not recognized.');
+    }
+
+    convertedValue = {
+      stringValue: String(value)
+    };
+  }
+
+  return convertedValue;
+};
+
 module.exports = GrpcService;
-module.exports.ObjectToStruct = ObjectToStruct;
 module.exports.GRPC_ERROR_CODE_TO_HTTP = GRPC_ERROR_CODE_TO_HTTP;
 module.exports.GRPC_REQUEST_OPTIONS = GRPC_REQUEST_OPTIONS;
+module.exports.ObjectToStructConverter = ObjectToStructConverter;
