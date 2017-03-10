@@ -66,7 +66,7 @@ function CustomStackTrace() {
  */
 CustomStackTrace.prototype.setFilePath = function(filePath) {
 
-  this.filePath = isString(filePath) ? filePath: '';
+  this.filePath = isString(filePath) ? filePath : '';
 
   return this;
 };
@@ -80,7 +80,7 @@ CustomStackTrace.prototype.setFilePath = function(filePath) {
  */
 CustomStackTrace.prototype.setLineNumber = function(lineNumber) {
 
-  this.lineNumber = isNumber(lineNumber) ? lineNumber: 0;
+  this.lineNumber = isNumber(lineNumber) ? lineNumber : 0;
 
   return this;
 };
@@ -94,7 +94,7 @@ CustomStackTrace.prototype.setLineNumber = function(lineNumber) {
  */
 CustomStackTrace.prototype.setFunctionName = function(functionName) {
 
-  this.functionName = isString(functionName) ? functionName: '';
+  this.functionName = isString(functionName) ? functionName : '';
 
   return this;
 };
@@ -109,7 +109,7 @@ CustomStackTrace.prototype.setFunctionName = function(functionName) {
  */
 CustomStackTrace.prototype.setStringifyStructuredCallList = function(op) {
 
-  this.stringifyStucturedCallList = isFunction(op) ? op: stubbedNoOp;
+  this.stringifyStucturedCallList = isFunction(op) ? op : stubbedNoOp;
 
   return this;
 };

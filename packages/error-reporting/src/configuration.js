@@ -180,7 +180,7 @@ var Configuration = function(givenConfig, logger) {
    * @type {Object|Null}
    * @defaultvalue null
    */
-  this._givenConfiguration = isObject(givenConfig) ? givenConfig: {};
+  this._givenConfiguration = isObject(givenConfig) ? givenConfig : {};
   this._checkLocalServiceContext();
   this._gatherLocalConfiguration();
 };
@@ -230,8 +230,8 @@ Configuration.prototype._checkLocalServiceContext = function() {
     version = env.GAE_MODULE_VERSION;
   }
 
-  this._serviceContext.service = isString(service) ? service: 'node';
-  this._serviceContext.version = isString(version) ? version: undefined;
+  this._serviceContext.service = isString(service) ? service : 'node';
+  this._serviceContext.version = isString(version) ? version : undefined;
 
   if (isObject(this._givenConfiguration.serviceContext)) {
     if (isString(this._givenConfiguration.serviceContext.service)) {

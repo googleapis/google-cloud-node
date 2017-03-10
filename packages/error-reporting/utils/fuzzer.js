@@ -47,7 +47,7 @@ Fuzzer.prototype.generate.types = function() {
 }
 
 Fuzzer.prototype.generate.string = function(len) {
-  var lenChecked = isNumber(len) ? len: 10;
+  var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
 
   for (var i = 0; i < lenChecked; i++) {
@@ -64,7 +64,7 @@ Fuzzer.prototype.generate.boolean = function() {
 }
 
 Fuzzer.prototype.generate.alphaNumericString = function(len) {
-  var lenChecked = isNumber(len) ? len: 10;
+  var lenChecked = isNumber(len) ? len : 10;
   var chars = [];
   var thisRange = [];
   var ranges = [[48, 57], [65, 90], [97, 122]];
@@ -99,8 +99,8 @@ Fuzzer.prototype.generate.function = function() {
 
 Fuzzer.prototype.generate.number = function(lower, upper) {
 
-  var lowerChecked = isNumber(lower) ? lower: 0;
-  var upperChecked = isNumber(upper) ? upper: 100;
+  var lowerChecked = isNumber(lower) ? lower : 0;
+  var upperChecked = isNumber(upper) ? upper : 100;
 
   return random(lowerChecked, upperChecked);
 }
@@ -117,10 +117,10 @@ Fuzzer.prototype.generate.undefined = function() {
 
 Fuzzer.prototype.generate.array = function(len, ofOneType, currentDepth, allowedDepth) {
 
-  var lenChecked = isNumber(len) ? len: random(1, 10);
+  var lenChecked = isNumber(len) ? len : random(1, 10);
   var availableTypes = (isString(ofOneType) && (indexOf(this.types(), ofOneType) > -1)) ? [ofOneType]: this.types();
-  var currentDepthChecked = isNumber(currentDepth) ? currentDepth: 0;
-  var allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth: 3;
+  var currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
+  var allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth : 3;
   var arr = [];
   var currentTypeBeingGenerated = "";
   currentDepthChecked += 1;
@@ -164,9 +164,9 @@ Fuzzer.prototype.generate.array = function(len, ofOneType, currentDepth, allowed
 
 Fuzzer.prototype.generate.object = function(numProperties, currentDepth, allowedDepth) {
 
-  var numPropertiesChecked = isNumber(numProperties) ? numProperties: random(1, 10);
-  var currentDepthChecked = isNumber(currentDepth) ? currentDepth: 0;
-  var allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth: 3;
+  var numPropertiesChecked = isNumber(numProperties) ? numProperties : random(1, 10);
+  var currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
+  var allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth : 3;
   var obj = {};
   currentDepthChecked += 1;
 
@@ -290,9 +290,9 @@ Fuzzer.prototype._generateValuesForFuzzTyping = function(typesToFuzzOnEach, inde
 }
 
 Fuzzer.prototype.fuzzFunctionForTypes = function(fnToFuzz, expectsArgTypes, cb, withContext) {
-  var expectsArgTypesChecked = isArray(expectsArgTypes) ? expectsArgTypes: [];
+  var expectsArgTypesChecked = isArray(expectsArgTypes) ? expectsArgTypes : [];
   var typesToFuzzOnEach = this._generateTypesToFuzzWith(expectsArgTypesChecked);
-  var withContextChecked = (withContext !== undefined) ? withContext: null;
+  var withContextChecked = (withContext !== undefined) ? withContext : null;
 
   var returnValue = undefined;
 
