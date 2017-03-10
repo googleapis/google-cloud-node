@@ -1,9 +1,5 @@
-<h1 align="center">
-  :warning: `gcloud` is deprecated! :warning:
-</h1>
-<h3 align="center">
-  Use <a href="https://www.npmjs.com/package/google-cloud">google-cloud</a> instead.
-</h3>
+# `gcloud` is deprecated!
+## Use [google-cloud](https://www.npmjs.com/package/google-cloud) instead.
 
 # Google Cloud Node.js Client
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
