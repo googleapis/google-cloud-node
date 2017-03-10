@@ -1932,6 +1932,12 @@ describe('GrpcService', function() {
     });
 
     describe('instantiation', function() {
+      it('should not require an options object', function() {
+        assert.doesNotThrow(function() {
+          new ObjectToStructConverter();
+        });
+      });
+
       it('should localize an empty Set for seenObjects', function() {
         assert(objectToStructConverter.seenObjects instanceof Set);
         assert.strictEqual(objectToStructConverter.seenObjects.size, 0);
