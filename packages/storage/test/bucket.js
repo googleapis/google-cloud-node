@@ -900,7 +900,9 @@ describe('Bucket', function() {
     var basename = 'testfile.json';
     var filepath = path.join(__dirname, 'testdata/' + basename);
     var textFilepath = path.join(__dirname, 'testdata/textfile.txt');
-    var metadata = { a: 'b', c: 'd' };
+    var metadata = {
+      metadata: {a: 'b', c: 'd'}
+    };
 
     beforeEach(function() {
       bucket.file = function(name, metadata) {
