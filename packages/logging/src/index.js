@@ -294,8 +294,8 @@ Logging.prototype.getEntries = function(options, callback) {
   var reqOpts = extend({
     orderBy: 'timestamp desc'
   }, options);
-  reqOpts.projectIds = arrify(reqOpts.projectIds);
-  reqOpts.projectIds.push(this.projectId);
+  reqOpts.resourceNames = arrify(reqOpts.resourceNames);
+  reqOpts.resourceNames.push('projects/' + this.projectId);
 
   delete reqOpts.autoPaginate;
   delete reqOpts.maxApiCalls;
