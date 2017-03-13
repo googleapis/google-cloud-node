@@ -1091,7 +1091,9 @@ Bucket.prototype.makePublic = function(options, callback) {
  *   resumable: true,
  *   validation: 'crc32c',
  *   metadata: {
- *     event: 'Fall trip to the zoo'
+ *     metadata: {
+ *       event: 'Fall trip to the zoo'
+ *     }
  *   }
  * };
  *
