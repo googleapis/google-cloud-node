@@ -51,7 +51,7 @@
   ],
   "dependencies": {
     "@google-cloud/common": "^0.12.0",
-    "@google-cloud/common-grpc": "^0.1.1",
+    "@google-cloud/common-grpc": "^0.2.0",
     "arrify": "^1.0.0",
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
