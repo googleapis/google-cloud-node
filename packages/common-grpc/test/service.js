@@ -1485,6 +1485,25 @@ describe('GrpcService', function() {
     });
   });
 
+  describe('encodeValue_', function() {
+    it('should encode value using ObjectToStructConverter fn', function() {
+      var obj = {};
+
+      var convertedObject = {};
+
+      GrpcService.ObjectToStructConverter = function() {
+        return {
+          encodeValue_: function(obj_) {
+            assert.strictEqual(obj_, obj);
+            return convertedObject;
+          }
+        };
+      };
+
+      assert.strictEqual(GrpcService.encodeValue_(obj), convertedObject);
+    });
+  });
+
   describe('createDeadline_', function() {
     var nowTimestamp = Date.now();
     var now;

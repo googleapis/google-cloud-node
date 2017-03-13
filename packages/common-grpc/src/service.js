@@ -496,6 +496,24 @@ GrpcService.decodeValue_ = function(value) {
 };
 
 /**
+ * Convert a raw value to a type-denoted protobuf message-friendly object.
+ *
+ * @private
+ *
+ * @param {*} value - The input value.
+ * @return {*} - The encoded value.
+ *
+ * @example
+ * ObjectToStructConverter.encodeValue('Hi');
+ * // {
+ * //   stringValue: 'Hello!'
+ * // }
+ */
+GrpcService.encodeValue_ = function(value) {
+  return new GrpcService.ObjectToStructConverter().encodeValue_(value);
+};
+
+/**
  * Creates a deadline.
  *
  * @private
