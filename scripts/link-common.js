@@ -17,21 +17,26 @@
 
 /*! Developer Documentation
  *
- * Anytime a change is made to @google-cloud/common it is wise to test if said
- * changes are compatible with with all other modules (bigquery, compute, etc.)
+ * Anytime a change is made to @google-cloud/common or
+ * @google-cloud/common-grpc, it is wise to test if said changes are compatible
+ * with with all other modules (bigquery, compute, etc.)
  *
- * All this script aims to do is link your local version of @google-cloud/common
- * to all the local modules to make integration testing easier.
+ * All this script aims to do is link your local version of these modules to all
+ * of the local modules to make integration testing easier.
  */
 'use strict';
 
 var Module = require('./helpers').Module;
 
 var common = new Module('common');
+var commonGrpc = new Module('common-grpc');
+
 var packages = Module.getAll();
 
 common.link();
+commonGrpc.link();
 
-packages.forEach(function(pack) {
-  pack.link(common);
+packages.forEach(function(pkg) {
+  pkg.link(common);
+  pkg.link(commonGrpc);
 });
