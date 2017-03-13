@@ -203,61 +203,44 @@ describe('Language', function() {
           describe('annotation', function() {
             it('should work without creating a document', function(done) {
               if (!CONTENT_TYPE) {
-                language.annotate(CONTENT, validateAnnotationSimple(done));
+                language.annotate(CONTENT, validateAnnotation(done));
                 return;
               }
 
               language.annotate(
                 CONTENT,
                 { type: CONTENT_TYPE },
-                validateAnnotationSimple(done)
+                validateAnnotation(done)
               );
             });
 
             it('should return the correct simplified response', function(done) {
-              DOC.annotate(validateAnnotationSimple(done));
-            });
-
-            it('should support verbose mode', function(done) {
-              DOC.annotate({ verbose: true }, validateAnnotationVerbose(done));
+              DOC.annotate(validateAnnotation(done));
             });
 
             it('should return only a single feature', function(done) {
               DOC.annotate({
                 entities: true
-              }, validateAnnotationSingleFeatureSimple(done));
-            });
-
-            it('should return a single feat in verbose mode', function(done) {
-              DOC.annotate({
-                entities: true,
-                verbose: true
-              }, validateAnnotationSingleFeatureVerbose(done));
+              }, validateAnnotationSingleFeature(done));
             });
           });
 
           describe('entities', function() {
             it('should work without creating a document', function(done) {
               if (!CONTENT_TYPE) {
-                language.detectEntities(CONTENT, validateEntitiesSimple(done));
+                language.detectEntities(CONTENT, validateEntities(done));
                 return;
               }
 
               language.detectEntities(
                 CONTENT,
                 { type: CONTENT_TYPE },
-                validateEntitiesSimple(done)
+                validateEntities(done)
               );
             });
 
             it('should return the correct simplified response', function(done) {
-              DOC.detectEntities(validateEntitiesSimple(done));
-            });
-
-            it('should support verbose mode', function(done) {
-              DOC.detectEntities({
-                verbose: true
-              }, validateEntitiesVerbose(done));
+              DOC.detectEntities(validateEntities(done));
             });
           });
 
@@ -266,7 +249,7 @@ describe('Language', function() {
               if (!CONTENT_TYPE) {
                 language.detectSentiment(
                   CONTENT,
-                  validateSentimentSimple(done)
+                  validateSentiment(done)
                 );
                 return;
               }
@@ -274,18 +257,12 @@ describe('Language', function() {
               language.detectSentiment(
                 CONTENT,
                 { type: CONTENT_TYPE },
-                validateSentimentSimple(done)
+                validateSentiment(done)
               );
             });
 
             it('should return the correct simplified response', function(done) {
-              DOC.detectSentiment(validateSentimentSimple(done));
-            });
-
-            it('should support verbose mode', function(done) {
-              DOC.detectSentiment({
-                verbose: true
-              }, validateSentimentVerbose(done));
+              DOC.detectSentiment(validateSentiment(done));
             });
           });
 
@@ -294,7 +271,7 @@ describe('Language', function() {
               if (!CONTENT_TYPE) {
                 language.detectSyntax(
                   CONTENT,
-                  validateSyntaxSimple(done)
+                  validateSyntax(done)
                 );
                 return;
               }
@@ -302,18 +279,12 @@ describe('Language', function() {
               language.detectSyntax(
                 CONTENT,
                 { type: CONTENT_TYPE },
-                validateSyntaxSimple(done)
+                validateSyntax(done)
               );
             });
 
             it('should return the correct simplified response', function(done) {
-              DOC.detectSyntax(validateSyntaxSimple(done));
-            });
-
-            it('should support verbose mode', function(done) {
-              DOC.detectSyntax({
-                verbose: true
-              }, validateSyntaxVerbose(done));
+              DOC.detectSyntax(validateSyntax(done));
             });
           });
         });
@@ -339,46 +310,16 @@ describe('Language', function() {
     });
   }
 
-  function validateAnnotationSimple(callback) {
+  function validateAnnotation(callback) {
     return function(err, annotation, apiResponse) {
       try {
         assert.ifError(err);
 
-        assert.strictEqual(annotation.language, 'en');
-
-        assert(is.number(annotation.sentiment));
-
-        assert.deepEqual(annotation.entities, {
-          people: ['stephen', 'david'],
-          places: ['michigan']
-        });
-
-        assert.deepEqual(annotation.sentences, TEXT_CONTENT_SENTENCES);
-
-        assert(is.array(annotation.tokens));
-        assert.deepEqual(annotation.tokens[0], {
-          text: 'Hello',
-          partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          tag: 'X',
-          aspect: undefined,
-          case: undefined,
-          form: undefined,
-          gender: undefined,
-          mood: undefined,
-          number: undefined,
-          person: undefined,
-          proper: undefined,
-          reciprocity: undefined,
-          tense: undefined,
-          voice: undefined,
-          dependencyEdge: {
-            description: 'Root',
-            label: 'ROOT',
-            headTokenIndex: 0
-          }
-        });
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(annotation.language, apiResponse.language);
+        assert.deepEqual(annotation.sentiment, apiResponse.documentSentiment);
+        assert.deepEqual(annotation.entities, apiResponse.entities);
+        assert.deepEqual(annotation.sentences, apiResponse.sentences);
+        assert.deepEqual(annotation.tokens, apiResponse.tokens);
 
         callback();
       } catch(e) {
@@ -387,46 +328,13 @@ describe('Language', function() {
     };
   }
 
-  function validateAnnotationVerbose(callback) {
+  function validateAnnotationSingleFeature(callback) {
     return function(err, annotation, apiResponse) {
       try {
         assert.ifError(err);
 
-        assert.strictEqual(annotation.language, 'en');
-
-        assert(is.object(annotation.sentiment));
-
-        assert(is.array(annotation.entities.people));
-        assert.strictEqual(annotation.entities.people.length, 2);
-        assert(is.object(annotation.entities.people[0]));
-
-        assert(is.array(annotation.sentences));
-        assert(is.object(annotation.sentences[0]));
-
-        assert(is.array(annotation.tokens));
-        assert(is.object(annotation.tokens[0]));
-        assert.strictEqual(annotation.tokens[0].text.content, 'Hello');
-
-        assert(is.object(apiResponse));
-
-        callback();
-      } catch(e) {
-        callback(e);
-      }
-    };
-  }
-
-  function validateAnnotationSingleFeatureSimple(callback) {
-    return function(err, annotation, apiResponse) {
-      try {
-        assert.ifError(err);
-
-        assert.strictEqual(annotation.language, 'en');
-
-        assert.deepEqual(annotation.entities, {
-          people: ['stephen', 'david'],
-          places: ['michigan']
-        });
+        assert.strictEqual(annotation.language, apiResponse.language);
+        assert.deepEqual(annotation.entities, apiResponse.entities);
 
         assert.strictEqual(annotation.sentences, undefined);
         assert.strictEqual(annotation.sentiment, undefined);
@@ -441,41 +349,11 @@ describe('Language', function() {
     };
   }
 
-  function validateAnnotationSingleFeatureVerbose(callback) {
-    return function(err, annotation, apiResponse) {
-      try {
-        assert.ifError(err);
-
-        assert.strictEqual(annotation.language, 'en');
-
-        assert(is.array(annotation.entities.people));
-        assert.strictEqual(annotation.entities.people.length, 2);
-        assert(is.object(annotation.entities.people[0]));
-
-        assert.strictEqual(annotation.sentences, undefined);
-        assert.strictEqual(annotation.sentiment, undefined);
-        assert.strictEqual(annotation.tokens, undefined);
-
-        assert(is.object(apiResponse));
-
-        callback();
-      } catch(e) {
-        callback(e);
-      }
-    };
-  }
-
-  function validateEntitiesSimple(callback) {
+  function validateEntities(callback) {
     return function(err, entities, apiResponse) {
       try {
         assert.ifError(err);
-
-        assert.deepEqual(entities, {
-          people: ['stephen', 'david'],
-          places: ['michigan']
-        });
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(entities, apiResponse.entities);
 
         callback();
       } catch(e) {
@@ -484,31 +362,11 @@ describe('Language', function() {
     };
   }
 
-  function validateEntitiesVerbose(callback) {
-    return function(err, entities, apiResponse) {
-      try {
-        assert.ifError(err);
-
-        assert(is.array(entities.people));
-        assert.strictEqual(entities.people.length, 2);
-        assert(is.object(entities.people[0]));
-
-        assert(is.object(apiResponse));
-
-        callback();
-      } catch(e) {
-        callback(e);
-      }
-    };
-  }
-
-  function validateSentimentSimple(callback) {
+  function validateSentiment(callback) {
     return function(err, sentiment, apiResponse) {
       try {
         assert.ifError(err);
-
-        assert(is.number(sentiment));
-        assert(is.object(apiResponse));
+        assert.strictEqual(sentiment, apiResponse.documentSentiment);
 
         callback();
       } catch(e) {
@@ -517,73 +375,11 @@ describe('Language', function() {
     };
   }
 
-  function validateSentimentVerbose(callback) {
-    return function(err, sentiment, apiResponse) {
-      try {
-        assert.ifError(err);
-
-        assert(is.object(sentiment));
-        assert(is.number(sentiment.score));
-        assert(is.number(sentiment.magnitude));
-        assert.strictEqual(sentiment.language, 'en');
-        assert.strictEqual(sentiment.sentences.length, 2);
-
-        assert(is.object(apiResponse));
-
-        callback();
-      } catch(e) {
-        callback(e);
-      }
-    };
-  }
-
-  function validateSyntaxSimple(callback) {
-    return function(err, tokens, apiResponse) {
-      try {
-        assert.ifError(err);
-        assert.strictEqual(tokens.length, 17);
-        assert.deepEqual(tokens[0], {
-          aspect: undefined,
-          case: undefined,
-          form: undefined,
-          gender: undefined,
-          mood: undefined,
-          number: undefined,
-          partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          person: undefined,
-          proper: undefined,
-          reciprocity: undefined,
-          tag: 'X',
-          tense: undefined,
-          text: 'Hello',
-          voice: undefined,
-          dependencyEdge: {
-            description: 'Root',
-            headTokenIndex: 0,
-            label: 'ROOT'
-          }
-        });
-
-        assert(is.object(apiResponse));
-
-        callback();
-      } catch (e) {
-        callback(e);
-      }
-    };
-  }
-
-  function validateSyntaxVerbose(callback) {
+  function validateSyntax(callback) {
     return function(err, syntax, apiResponse) {
       try {
         assert.ifError(err);
-        assert.strictEqual(syntax.sentences.length, 2);
-        assert(is.object(syntax.sentences[0]));
-        assert.strictEqual(syntax.tokens.length, 17);
-        assert(is.object(syntax.tokens[0]));
-        assert.strictEqual(syntax.language, 'en');
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(syntax, apiResponse.tokens);
 
         callback();
       } catch (e) {
