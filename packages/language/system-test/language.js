@@ -315,24 +315,11 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert.strictEqual(annotation.language, 'en');
-
-        assert(is.object(annotation.sentiment));
-        assert(is.number(annotation.sentiment.score));
-        assert(is.number(annotation.sentiment.magnitude));
-
-        assert(is.array(annotation.entities));
-        assert.strictEqual(annotation.entities.length, 3);
-        assert(is.object(annotation.entities[0]));
-
-        assert(is.array(annotation.sentences));
-        assert(is.object(annotation.sentences[0]));
-
-        assert(is.array(annotation.tokens));
-        assert(is.object(annotation.tokens[0]));
-        assert.strictEqual(annotation.tokens[0].text.content, 'Hello');
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(annotation.language, apiResponse.language);
+        assert.deepEqual(annotation.sentiment, apiResponse.documentSentiment);
+        assert.deepEqual(annotation.entities, apiResponse.entities);
+        assert.deepEqual(annotation.sentences, apiResponse.sentences);
+        assert.deepEqual(annotation.tokens, apiResponse.tokens);
 
         callback();
       } catch(e) {
@@ -346,11 +333,8 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert.strictEqual(annotation.language, 'en');
-
-        assert(is.array(annotation.entities));
-        assert.strictEqual(annotation.entities.length, 3);
-        assert(is.object(annotation.entities[0]));
+        assert.strictEqual(annotation.language, apiResponse.language);
+        assert.deepEqual(annotation.entities, apiResponse.entities);
 
         assert.strictEqual(annotation.sentences, undefined);
         assert.strictEqual(annotation.sentiment, undefined);
@@ -369,12 +353,7 @@ describe('Language', function() {
     return function(err, entities, apiResponse) {
       try {
         assert.ifError(err);
-
-        assert(is.array(entities));
-        assert.strictEqual(entities.length, 3);
-        assert(is.object(entities[0]));
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(entities, apiResponse.entities);
 
         callback();
       } catch(e) {
@@ -387,13 +366,7 @@ describe('Language', function() {
     return function(err, sentiment, apiResponse) {
       try {
         assert.ifError(err);
-        assert(is.object(sentiment));
-        assert(is.number(sentiment.score));
-        assert(is.number(sentiment.magnitude));
-        assert.strictEqual(apiResponse.language, 'en');
-        assert.strictEqual(apiResponse.sentences.length, 2);
-
-        assert(is.object(apiResponse));
+        assert.strictEqual(sentiment, apiResponse.documentSentiment);
 
         callback();
       } catch(e) {
@@ -406,14 +379,7 @@ describe('Language', function() {
     return function(err, syntax, apiResponse) {
       try {
         assert.ifError(err);
-
-        assert.strictEqual(syntax.length, 17);
-        assert(is.object(syntax[0]));
-
-        assert(is.object(apiResponse));
-        assert.strictEqual(apiResponse.language, 'en');
-        assert.strictEqual(apiResponse.sentences.length, 2);
-        assert(is.object(apiResponse.sentences[0]));
+        assert.strictEqual(syntax, apiResponse.tokens);
 
         callback();
       } catch (e) {
