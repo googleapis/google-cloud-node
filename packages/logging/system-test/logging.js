@@ -371,6 +371,7 @@ describe('Logging', function() {
 
     it('should preserve order for sequential write calls', function(done) {
       var messages =  ['1', '2', '3', '4', '5'];
+
       messages.forEach(function(message) {
         log.write(log.entry(message));
       });
@@ -379,6 +380,7 @@ describe('Logging', function() {
         log.getEntries({ pageSize: messages.length }, function(err, entries) {
           assert.ifError(err);
           assert.deepEqual(entries.reverse().map(prop('data')), messages);
+          done();
         });
       }, WRITE_CONSISTENCY_DELAY_MS);
     });
