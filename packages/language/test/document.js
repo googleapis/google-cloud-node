@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
