@@ -960,12 +960,19 @@ Vision.prototype.detectCrops = function(images, options, callback) {
  *   //     },
  *   //     confidence: 56.748849,
  *   //     anger: false,
+ *   //     angerLikelihood: 1,
  *   //     blurred: false,
+ *   //     blurredLikelihood: 1,
  *   //     headwear: false,
+ *   //     headwearLikelihood: 1,
  *   //     joy: false,
+ *   //     joyLikelihood: 1,
  *   //     sorrow: false,
+ *   //     sorrowLikelihood: 1,
  *   //     surprise: false,
- *   //     underExposed: false
+ *   //     surpriseLikelihood: 1,
+ *   //     underExposed: false,
+ *   //     underExposedLikelihood: 1
  *   //   }
  *   // ]
  * });
@@ -1916,6 +1923,8 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
 
       formattedFaceAnnotation[shortenedProp] =
         Vision.gteLikelihood_(LIKELY, faceAnnotation[prop]);
+
+      formattedFaceAnnotation[prop] = Vision.likelihood[faceAnnotation[prop]];
     }
   }
 

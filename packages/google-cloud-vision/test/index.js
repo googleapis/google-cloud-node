@@ -1474,15 +1474,23 @@ describe('Vision', function() {
         confidence: faceAnnotation.detectionConfidence * 100,
 
         anger: true,
+        angerLikelihood: 3,
         blurred: true,
+        blurredLikelihood: 3,
         headwear: true,
+        headwearLikelihood: 3,
         joy: true,
+        joyLikelihood: 3,
         sorrow: true,
+        sorrowLikelihood: 3,
         surprise: true,
+        surpriseLikelihood: 3,
         underExposed: true,
+        underExposedLikelihood: 3,
 
         // Checks that *any* property that ends in `Likelihood` is shortened.
-        nonExistent: true
+        nonExistent: true,
+        nonExistentLikelihood: 3
       };
 
       var formatted = Vision.formatFaceAnnotation_(faceAnnotation);
