@@ -902,7 +902,8 @@ describe('Bucket', function() {
     var textFilepath = path.join(__dirname, 'testdata/textfile.txt');
     var metadata = {
       metadata: {
-        a: 'b', c: 'd'
+        a: 'b',
+        c: 'd'
       }
     };
 
