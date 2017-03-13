@@ -90,6 +90,8 @@ describe('GrpcService', function() {
   var GrpcService;
   var grpcService;
 
+  var ObjectToStructConverter;
+
   var CONFIG = {
     proto: {},
     service: 'Service',
@@ -118,15 +120,16 @@ describe('GrpcService', function() {
 
   before(function() {
     GrpcService = proxyquire('../src/service.js', {
-      'google-proto-files': fakeGoogleProtoFiles,
-      'retry-request': fakeRetryRequest,
-      grpc: fakeGrpc,
       '@google-cloud/common': {
         Service: FakeService,
         util: fakeUtil
-      }
+      },
+      'google-proto-files': fakeGoogleProtoFiles,
+      grpc: fakeGrpc,
+      'retry-request': fakeRetryRequest
     });
     GrpcServiceCached = extend(true, {}, GrpcService);
+    ObjectToStructConverter = GrpcService.ObjectToStructConverter;
   });
 
   beforeEach(function() {
@@ -463,154 +466,28 @@ describe('GrpcService', function() {
     });
   });
 
-  describe('encodeValue_', function() {
-    it('should convert primitive values correctly', function() {
-      var buffer = new Buffer('Value');
+  describe('objToStruct_', function() {
+    it('should convert the object using ObjectToStructConverter', function() {
+      var options = {};
+      var obj = {};
 
-      assert.deepEqual(GrpcService.encodeValue_(null), {
-        nullValue: 0
-      });
+      var convertedObject = {};
 
-      assert.deepEqual(GrpcService.encodeValue_(1), {
-        numberValue: 1
-      });
+      GrpcService.ObjectToStructConverter = function(options_) {
+        assert.strictEqual(options_, options);
 
-      assert.deepEqual(GrpcService.encodeValue_('Hi'), {
-        stringValue: 'Hi'
-      });
-
-      assert.deepEqual(GrpcService.encodeValue_(true), {
-        boolValue: true
-      });
+        return {
+          convert: function(obj_) {
+            assert.strictEqual(obj_, obj);
+            return convertedObject;
+          }
+        };
+      };
 
       assert.strictEqual(
-        GrpcService.encodeValue_(buffer).blobValue.toString(),
-        'Value'
+        GrpcService.objToStruct_(obj, options),
+        convertedObject
       );
-    });
-
-    it('should convert objects', function() {
-      var value = {};
-
-      GrpcService.objToStruct_ = function() {
-        return value;
-      };
-
-      var convertedValue = GrpcService.encodeValue_(value);
-
-      assert.deepEqual(convertedValue, {
-        structValue: value
-      });
-    });
-
-    it('should convert arrays', function() {
-      var convertedValue = GrpcService.encodeValue_([1, 2, 3]);
-
-      assert.deepEqual(convertedValue.listValue, {
-        values: [
-          GrpcService.encodeValue_(1),
-          GrpcService.encodeValue_(2),
-          GrpcService.encodeValue_(3)
-        ]
-      });
-    });
-
-    it('should throw if a type is not recognized', function() {
-      assert.throws(function() {
-        GrpcService.encodeValue_();
-      }, 'Value of type undefined not recognized.');
-    });
-
-    describe('options.stringify', function() {
-      var OPTIONS = {
-        stringify: true
-      };
-
-      it('should return a string if the value is not recognized', function() {
-        var date = new Date();
-
-        assert.deepEqual(
-          GrpcService.encodeValue_(date, OPTIONS),
-          { stringValue: String(date) }
-        );
-      });
-
-      it('should pass options to encoding values of a object', function() {
-        var object = { date: new Date() };
-        var encodedObject = {
-          structValue: {
-            fields: {
-              date: { stringValue: String(object.date) }
-            }
-          }
-        };
-
-        assert.deepEqual(
-          GrpcService.encodeValue_(object, OPTIONS),
-          encodedObject
-        );
-      });
-
-      it('should pass options to encoding values of an array', function() {
-        var array = [new Date()];
-        var encodedArray = {
-          listValue: {
-            values: [{ stringValue: String(array[0]) }]
-          }
-        };
-
-        assert.deepEqual(
-          GrpcService.encodeValue_(array, OPTIONS),
-          encodedArray
-        );
-      });
-    });
-  });
-
-  describe('objToStruct_', function() {
-    it('should convert values in an Object', function() {
-      var inputValue = {};
-      var convertedValue = {};
-
-      GrpcService.encodeValue_ = function(value) {
-        assert.strictEqual(value, inputValue);
-        return convertedValue;
-      };
-
-      var struct = GrpcService.objToStruct_({
-        a: inputValue
-      });
-
-      assert.strictEqual(struct.fields.a, convertedValue);
-    });
-
-    it('should not include undefined values', function() {
-      var inputValue = {};
-      var convertedValue = {};
-
-      GrpcService.encodeValue_ = function(value) {
-        assert.strictEqual(value, inputValue);
-        return convertedValue;
-      };
-
-      var struct = GrpcService.objToStruct_({
-        a: undefined,
-        b: inputValue
-      });
-
-      assert.strictEqual(struct.fields.a, undefined);
-      assert.strictEqual(struct.fields.b, convertedValue);
-    });
-
-    it('should pass options to encodeValue', function(done) {
-      var options = {};
-
-      GrpcService.encodeValue_ = function(value, options_) {
-        assert.strictEqual(options_, options);
-        done();
-      };
-
-      GrpcService.objToStruct_({ a: {} }, options);
     });
   });
 
@@ -2044,6 +1921,210 @@ describe('GrpcService', function() {
 
       var service = grpcService.getService_({ service: 'Service' });
       assert.strictEqual(service, fakeService);
+    });
+  });
+
+  describe('ObjectToStructConverter', function() {
+    var objectToStructConverter;
+
+    beforeEach(function() {
+      objectToStructConverter = new ObjectToStructConverter(OPTIONS);
+    });
+
+    describe('instantiation', function() {
+      it('should not require an options object', function() {
+        assert.doesNotThrow(function() {
+          new ObjectToStructConverter();
+        });
+      });
+
+      it('should localize an empty Set for seenObjects', function() {
+        assert(objectToStructConverter.seenObjects instanceof Set);
+        assert.strictEqual(objectToStructConverter.seenObjects.size, 0);
+      });
+
+      it('should localize options', function() {
+        var objectToStructConverter = new ObjectToStructConverter({
+          removeCircular: true,
+          stringify: true
+        });
+
+        assert.strictEqual(objectToStructConverter.removeCircular, true);
+        assert.strictEqual(objectToStructConverter.stringify, true);
+      });
+
+      it('should set correct defaults', function() {
+        assert.strictEqual(objectToStructConverter.removeCircular, false);
+        assert.strictEqual(objectToStructConverter.stringify, false);
+      });
+    });
+
+    describe('convert', function() {
+      it('should encode values in an Object', function() {
+        var inputValue = {};
+        var convertedValue = {};
+
+        objectToStructConverter.encodeValue_ = function(value) {
+          assert.strictEqual(value, inputValue);
+          return convertedValue;
+        };
+
+        var struct = objectToStructConverter.convert({
+          a: inputValue
+        });
+
+        assert.strictEqual(struct.fields.a, convertedValue);
+      });
+
+      it('should not include undefined values', function(done) {
+        objectToStructConverter.encodeValue_ = function() {
+          done(new Error('Should not be called'));
+        };
+
+        var struct = objectToStructConverter.convert({
+          a: undefined
+        });
+
+        assert.deepEqual(struct.fields, {});
+
+        done();
+      });
+
+      it('should add seen objects to set then empty set', function(done) {
+        var obj = {};
+        var objectAdded;
+
+        objectToStructConverter.seenObjects = {
+          add: function(obj) {
+            objectAdded = obj;
+          },
+          delete: function(obj_) {
+            assert.strictEqual(obj_, obj);
+            assert.strictEqual(objectAdded, obj);
+            done();
+          }
+        };
+
+        objectToStructConverter.convert(obj);
+      });
+    });
+
+    describe('encodeValue_', function() {
+      it('should convert primitive values correctly', function() {
+        var buffer = new Buffer('Value');
+
+        assert.deepEqual(objectToStructConverter.encodeValue_(null), {
+          nullValue: 0
+        });
+
+        assert.deepEqual(objectToStructConverter.encodeValue_(1), {
+          numberValue: 1
+        });
+
+        assert.deepEqual(objectToStructConverter.encodeValue_('Hi'), {
+          stringValue: 'Hi'
+        });
+
+        assert.deepEqual(objectToStructConverter.encodeValue_(true), {
+          boolValue: true
+        });
+
+        assert.strictEqual(
+          objectToStructConverter.encodeValue_(buffer).blobValue.toString(),
+          'Value'
+        );
+      });
+
+      it('should convert arrays', function() {
+        var convertedValue = objectToStructConverter.encodeValue_([1, 2, 3]);
+
+        assert.deepEqual(convertedValue.listValue, {
+          values: [
+            objectToStructConverter.encodeValue_(1),
+            objectToStructConverter.encodeValue_(2),
+            objectToStructConverter.encodeValue_(3)
+          ]
+        });
+      });
+
+      it('should throw if a type is not recognized', function() {
+        assert.throws(function() {
+          objectToStructConverter.encodeValue_();
+        }, 'Value of type undefined not recognized.');
+      });
+
+      describe('objects', function() {
+        var VALUE = {
+          circularReference: VALUE
+        };
+
+        it('should convert objects', function() {
+          var convertedValue = {};
+
+          objectToStructConverter.convert = function(value) {
+            assert.strictEqual(value, VALUE);
+            return convertedValue;
+          };
+
+          assert.deepStrictEqual(
+            objectToStructConverter.encodeValue_(VALUE),
+            { structValue: convertedValue }
+          );
+        });
+
+        describe('circular references', function() {
+          it('should throw if circular', function() {
+            var errorMessage = [
+              'This object contains a circular reference. To automatically',
+              'remove it, set the `removeCircular` option to true.'
+            ].join(' ');
+
+            objectToStructConverter.seenObjects.add(VALUE);
+
+            assert.throws(function() {
+              objectToStructConverter.encodeValue_(VALUE);
+            }, new RegExp(errorMessage));
+          });
+
+          describe('options.removeCircular', function() {
+            var objectToStructConverter;
+
+            beforeEach(function() {
+              objectToStructConverter = new ObjectToStructConverter({
+                removeCircular: true
+              });
+
+              objectToStructConverter.seenObjects.add(VALUE);
+            });
+
+            it('should replace circular reference with [Circular]', function() {
+              assert.deepStrictEqual(
+                objectToStructConverter.encodeValue_(VALUE),
+                { stringValue: '[Circular]' }
+              );
+            });
+          });
+        });
+      });
+
+      describe('options.stringify', function() {
+        var objectToStructConverter;
+
+        beforeEach(function() {
+          objectToStructConverter = new ObjectToStructConverter({
+            stringify: true
+          });
+        });
+
+        it('should return a string if the value is not recognized', function() {
+          var date = new Date();
+
+          assert.deepEqual(
+            objectToStructConverter.encodeValue_(date, OPTIONS),
+            { stringValue: String(date) }
+          );
+        });
+      });
     });
   });
 });
