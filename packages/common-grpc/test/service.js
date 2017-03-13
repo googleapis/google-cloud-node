@@ -1924,7 +1924,7 @@ describe('GrpcService', function() {
     });
   });
 
-  describe('ObjectToStruct', function() {
+  describe('ObjectToStructConverter', function() {
     var objectToStructConverter;
 
     beforeEach(function() {
