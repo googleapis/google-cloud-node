@@ -118,7 +118,7 @@ Fuzzer.prototype.generate.undefined = function() {
 Fuzzer.prototype.generate.array = function(len, ofOneType, currentDepth, allowedDepth) {
 
   var lenChecked = isNumber(len) ? len : random(1, 10);
-  var availableTypes = (isString(ofOneType) && (indexOf(this.types(), ofOneType) > -1)) ? [ofOneType]: this.types();
+  var availableTypes = (isString(ofOneType) && (indexOf(this.types(), ofOneType) > -1)) ? [ofOneType] : this.types();
   var currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
   var allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth : 3;
   var arr = [];
