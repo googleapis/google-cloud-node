@@ -247,73 +247,19 @@ Document.PART_OF_SPEECH = {
  *     default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
  *     `false`. (Alias for `options.extractDocumentSyntax`)
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
  * @param {object} callback.annotation - The formatted API response.
  * @param {string} callback.annotation.language - The language detected from the
  *     text.
- * @param {number} callback.annotation.sentiment - A value in the range of
- *     `-1` (negative) to `1` (positive).
+ * @param {number} callback.annotation.sentiment - An object representing the
+ *     overall sentiment of the text.
  * @param {object} callback.annotation.entities - The recognized entities from
  *     the text, grouped by the type of entity.
- * @param {string[]} callback.annotation.entities.art - Art entities detected
- *     from the text. This is only present if detections of this type were
- *     found.
- * @param {string[]} callback.annotation.entities.events - Event entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.annotation.entities.goods - Consumer good entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.annotation.entities.organizations - Organization
- *     entities detected from the text. This is only present if detections of
- *     this type were found.
- * @param {string[]} callback.annotation.entities.other - Other entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.annotation.entities.people - People entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.annotation.entities.places - Place entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.annotation.entities.unknown - Unknown entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
  * @param {string[]} callback.annotation.sentences - Sentences detected from the
  *     text.
  * @param {object[]} callback.annotation.tokens - Parts of speech that were
  *     detected from the text.
- * @param {string} callback.annotation.tokens[].text - The piece of text
- *     analyzed.
- * @param {string} callback.annotation.tokens[].partOfSpeech - A description of
- *     the part of speech (`Noun (common and propert)`,
- *     `Verb (all tenses and modes)`, etc.).
- * @param {string} callback.annotation.tokens[].tag - A short code
- *     for the type of speech (`NOUN`, `VERB`, etc.).
- * @param {string} callback.annotations.tokens[].aspect - The characteristic of
- *     a verb that expresses time flow during an event.
- * @param {string} callback.annotations.tokens[].case - The grammatical function
- *     performed by a noun or pronoun in a phrase, clause, or sentence.
- * @param {string} callback.annotations.tokens[].form - Form categorizes
- *     different forms of verbs, adjectives, adverbs, etc.
- * @param {string} callback.annotations.tokens[].gender - Gender classes of
- *     nouns reflected in the behaviour of associated words
- * @param {string} callback.annotations.tokens[].mood - The grammatical feature
- *     of verbs, used for showing modality and attitude.
- * @param {string} callback.annotations.tokens[].number - Count distinctions.
- * @param {string} callback.annotations.tokens[].person - The distinction
- *     between the speaker, second person, third person, etc.
- * @param {string} callback.annotations.tokens[].proper - This category shows if
- *     the token is part of a proper name.
- * @param {string} callback.annotations.tokens[].reciprocity - Reciprocal
- *     features of a pronoun
- * @param {string} callback.annotations.tokens[].tense - Time reference.
- * @param {string} callback.annotations.tokens[].voice - The relationship
- *     between the action that a verb expresses and the participants identified
- *     by its arguments.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -569,24 +515,6 @@ Document.prototype.annotate = function(options, callback) {
  * @param {?error} callback.err - An error occurred while making this request.
  * @param {object} callback.entities - The recognized entities from the text,
  *     grouped by the type of entity.
- * @param {string[]} callback.entities.art - Art entities detected from the
- *     text. This is only present if detections of this type were found.
- * @param {string[]} callback.entities.events - Event entities detected from the
- *     text. This is only present if detections of this type were found.
- * @param {string[]} callback.entities.goods - Consumer good entities detected
- *     from the text. This is only present if detections of this type were
- *     found.
- * @param {string[]} callback.entities.organizations - Organization entities
- *     detected from the text. This is only present if detections of this type
- *     were found.
- * @param {string[]} callback.entities.other - Other entities detected from the
- *     text. This is only present if detections of this type were found.
- * @param {string[]} callback.entities.people - People entities detected from
- *     the text. This is only present if detections of this type were found.
- * @param {string[]} callback.entities.places - Place entities detected from the
- *     text. This is only present if detections of this type were found.
- * @param {string[]} callback.entities.unknown - Unknown entities detected from
- *     the text. This is only present if detections of this type were found.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -673,12 +601,10 @@ Document.prototype.detectEntities = function(options, callback) {
  *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
  *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {number} callback.sentiment - A value in the range of `-1` (negative)
- *     to `1` (positive).
+ * @param {number} callback.sentiment - An object representing the overall
+ *     sentiment of the text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -742,17 +668,9 @@ Document.prototype.detectSentiment = function(options, callback) {
  *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
  *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
  * @param {object} callback.syntax - The syntax recognized from the text.
- * @param {string} callback.syntax.language - The language detected from the
- *     text.
- * @param {string[]} callback.syntax.sentences - Sentences detected from the
- *     text.
- * @param {object[]} callback.syntax.tokens - Parts of speech that were
- *     detected from the text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
