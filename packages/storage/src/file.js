@@ -1515,7 +1515,7 @@ File.prototype.getSignedUrl = function(config, callback) {
     }
 
     var signedUrl = format('{host}/{name}{id}{exp}{sig}{type}{disp}{gen}', {
-      host: host.replace(/\/*$/, ''), // Remove trailing slashes.
+      host: host.replace(/[/]*$/, ''), // Remove trailing slashes.
       name: name,
       id: '?GoogleAccessId=' + credentials.client_email,
       exp: '&Expires=' + expiresInSeconds,
