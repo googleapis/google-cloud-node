@@ -351,8 +351,8 @@ describe('Logging', function() {
       var entry1 = log.entry('1');
 
       setTimeout(function() {
-        var entry3 = log.entry('3');
-        var entry2 = log.entry({ timestamp: entry3.metadata.timestamp }, '2');
+        var entry2 = log.entry('2');
+        var entry3 = log.entry({ timestamp: entry2.metadata.timestamp }, '3');
 
         // Re-arrange to confirm the timestamp is sent and honored.
         log.write([entry2, entry3, entry1], options, function(err) {
@@ -367,6 +367,22 @@ describe('Logging', function() {
           }, WRITE_CONSISTENCY_DELAY_MS);
         });
       }, 1000);
+    });
+
+    it('should preserve order for sequential write calls', function(done) {
+      var messages =  ['1', '2', '3', '4', '5'];
+
+      messages.forEach(function(message) {
+        log.write(log.entry(message));
+      });
+
+      setTimeout(function() {
+        log.getEntries({ pageSize: messages.length }, function(err, entries) {
+          assert.ifError(err);
+          assert.deepEqual(entries.reverse().map(prop('data')), messages);
+          done();
+        });
+      }, WRITE_CONSISTENCY_DELAY_MS);
     });
 
     it('should write an entry with primitive values', function(done) {

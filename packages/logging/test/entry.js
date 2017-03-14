@@ -24,6 +24,13 @@ var util = require('@google-cloud/common').util;
 
 function FakeGrpcService() {}
 
+var fakeEventIdNewOverride;
+
+function FakeEventId() {}
+FakeEventId.prototype.new = function() {
+  return (fakeEventIdNewOverride || util.noop).apply(null, arguments);
+};
+
 describe('Entry', function() {
   var Entry;
   var entry;
@@ -35,11 +42,13 @@ describe('Entry', function() {
     Entry = proxyquire('../src/entry.js', {
       '@google-cloud/common-grpc': {
         Service: FakeGrpcService
-      }
+      },
+      'eventid': FakeEventId
     });
   });
 
   beforeEach(function() {
+    fakeEventIdNewOverride = null;
     extend(FakeGrpcService, GrpcService);
     entry = new Entry(METADATA, DATA);
   });
@@ -65,6 +74,34 @@ describe('Entry', function() {
       });
 
       assert.strictEqual(entry.metadata.timestamp, timestamp);
+    });
+
+    it('should assign insertId to metadata', function() {
+      var eventId = 'event-id';
+
+      fakeEventIdNewOverride = function() {
+        return eventId;
+      };
+
+      var entry = new Entry();
+
+      assert.strictEqual(entry.metadata.insertId, eventId);
+    });
+
+    it('should not assign insertId if one is already set', function() {
+      var eventId = 'event-id';
+
+      fakeEventIdNewOverride = function() {
+        return eventId;
+      };
+
+      var userDefinedInsertId = 'user-defined-insert-id';
+
+      var entry = new Entry({
+        insertId: userDefinedInsertId
+      });
+
+      assert.strictEqual(entry.metadata.insertId, userDefinedInsertId);
     });
 
     it('should localize data', function() {
