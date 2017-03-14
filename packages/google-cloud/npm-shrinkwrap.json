@@ -50,19 +50,48 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.5.0.tgz"
     },
     "@google-cloud/language": {
-      "version": "0.8.0",
-      "from": "@google-cloud/language@>=0.8.0 <0.9.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.8.0.tgz"
-    },
-    "@google-cloud/logging": {
-      "version": "0.7.1",
-      "from": "@google-cloud/logging@>=0.7.0 <0.8.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/logging/-/logging-0.7.1.tgz",
+      "version": "0.9.0",
+      "from": "@google-cloud/language@0.9.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.9.0.tgz",
       "dependencies": {
         "google-gax": {
-          "version": "0.12.2",
-          "from": "google-gax@>=0.12.2 <0.13.0",
-          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.2.tgz",
+          "version": "0.12.3",
+          "from": "google-gax@>=0.12.0 <0.13.0",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.3.tgz",
+          "dependencies": {
+            "google-proto-files": {
+              "version": "0.9.1",
+              "from": "google-proto-files@>=0.9.1 <0.10.0",
+              "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.9.1.tgz"
+            }
+          }
+        },
+        "google-proto-files": {
+          "version": "0.10.0",
+          "from": "google-proto-files@>=0.10.0 <0.11.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.10.0.tgz"
+        }
+      }
+    },
+    "@google-cloud/logging": {
+      "version": "0.8.0",
+      "from": "@google-cloud/logging@0.8.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/logging/-/logging-0.8.0.tgz",
+      "dependencies": {
+        "@google-cloud/common-grpc": {
+          "version": "0.2.1",
+          "from": "@google-cloud/common-grpc@>=0.2.1 <0.3.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common-grpc/-/common-grpc-0.2.1.tgz"
+        },
+        "dot-prop": {
+          "version": "2.4.0",
+          "from": "dot-prop@>=2.4.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-2.4.0.tgz"
+        },
+        "google-gax": {
+          "version": "0.12.3",
+          "from": "google-gax@^0.12.2",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.3.tgz",
           "dependencies": {
             "google-proto-files": {
               "version": "0.9.1",
@@ -89,14 +118,24 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/prediction/-/prediction-0.5.0.tgz"
     },
     "@google-cloud/pubsub": {
-      "version": "0.8.1",
-      "from": "@google-cloud/pubsub@>=0.8.1 <0.9.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.8.1.tgz",
+      "version": "0.8.3",
+      "from": "@google-cloud/pubsub@0.8.3",
+      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.8.3.tgz",
       "dependencies": {
+        "@google-cloud/common-grpc": {
+          "version": "0.2.1",
+          "from": "@google-cloud/common-grpc@^0.2.1",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common-grpc/-/common-grpc-0.2.1.tgz"
+        },
+        "dot-prop": {
+          "version": "2.4.0",
+          "from": "dot-prop@^2.4.0",
+          "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-2.4.0.tgz"
+        },
         "google-gax": {
-          "version": "0.12.2",
-          "from": "google-gax@>=0.12.2 <0.13.0",
-          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.2.tgz",
+          "version": "0.12.3",
+          "from": "google-gax@^0.12.2",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.3.tgz",
           "dependencies": {
             "google-proto-files": {
               "version": "0.9.1",
@@ -154,9 +193,9 @@
       }
     },
     "@google-cloud/storage": {
-      "version": "0.7.0",
-      "from": "@google-cloud/storage@>=0.7.0 <0.8.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/storage/-/storage-0.7.0.tgz"
+      "version": "0.8.0",
+      "from": "@google-cloud/storage@0.8.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/storage/-/storage-0.8.0.tgz"
     },
     "@google-cloud/translate": {
       "version": "0.7.0",
@@ -164,14 +203,24 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.7.0.tgz"
     },
     "@google-cloud/vision": {
-      "version": "0.9.0",
-      "from": "@google-cloud/vision@>=0.9.0 <0.10.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/vision/-/vision-0.9.0.tgz",
+      "version": "0.10.0",
+      "from": "@google-cloud/vision@0.10.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/vision/-/vision-0.10.0.tgz",
       "dependencies": {
+        "@google-cloud/common-grpc": {
+          "version": "0.2.1",
+          "from": "@google-cloud/common-grpc@^0.2.1",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common-grpc/-/common-grpc-0.2.1.tgz"
+        },
+        "dot-prop": {
+          "version": "2.4.0",
+          "from": "dot-prop@^2.4.0",
+          "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-2.4.0.tgz"
+        },
         "google-gax": {
-          "version": "0.12.2",
-          "from": "google-gax@>=0.12.1 <0.13.0",
-          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.2.tgz",
+          "version": "0.12.3",
+          "from": "google-gax@^0.12.1",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.12.3.tgz",
           "dependencies": {
             "google-proto-files": {
               "version": "0.9.1",
@@ -494,6 +543,11 @@
       "from": "cryptiles@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/cryptiles/-/cryptiles-2.0.5.tgz"
     },
+    "d64": {
+      "version": "1.0.0",
+      "from": "d64@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/d64/-/d64-1.0.0.tgz"
+    },
     "dashdash": {
       "version": "1.14.1",
       "from": "dashdash@>=1.12.0 <2.0.0",
@@ -589,6 +643,11 @@
       "version": "1.0.5",
       "from": "escape-string-regexp@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
+    },
+    "eventid": {
+      "version": "0.1.0",
+      "from": "eventid@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/eventid/-/eventid-0.1.0.tgz"
     },
     "events-intercept": {
       "version": "2.0.0",
