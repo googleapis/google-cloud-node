@@ -180,6 +180,10 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   // We prefer to format messages as jsonPayload (by putting it as a message
   // property on an object) as that works is accepted by Error Reporting in
   // for more resource types.
+  //
+  // TODO(ofrobots): when resource.type is 'global' we need to additionally
+  // provide serviceContext.service as part of the entry for Error Reporting to
+  // automatically pick up the error.
   var data = {
     message:
         (metadata && metadata.stack) ?

@@ -145,6 +145,9 @@ LoggingBunyan.prototype.write = function(record) {
   //
   // We only do this if the user hasn't provided a message property themselves.
   //
+  // TODO(ofrobots): when resource.type is 'global' we need to additionally
+  // provide serviceContext.service as part of the entry for Error Reporting to
+  // automatically pick up the error.
   if (!record.message) {
     if (record.err && record.err.stack) {
       record.message = record.err.stack;
