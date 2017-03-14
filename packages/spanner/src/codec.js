@@ -35,15 +35,15 @@ function SpannerDate(value) {
 
 codec.SpannerDate = SpannerDate;
 
-function Double(value) {
+function Float(value) {
   this.value = value;
 }
 
-Double.prototype.valueOf = function() {
+Float.prototype.valueOf = function() {
   return this.value;
 };
 
-codec.Double = Double;
+codec.Float = Float;
 
 function Int(value) {
   this.value = value.toString();
@@ -78,7 +78,7 @@ function decode(value, field) {
         break;
       }
       case 'FLOAT64': {
-        decoded = new codec.Double(decoded);
+        decoded = new codec.Float(decoded);
         break;
       }
       case 'INT64': {
@@ -146,7 +146,7 @@ codec.decode = decode;
 function encode(value) {
   function preEncode(value) {
     var numberShouldBeStringified =
-      !(value instanceof Double) &&
+      !(value instanceof Float) &&
       is.int(value) ||
       value instanceof Int ||
       is.infinite(value) ||
@@ -155,7 +155,7 @@ function encode(value) {
     if (is.date(value)) {
       value = value.toJSON();
     } else if (value instanceof SpannerDate ||
-               value instanceof Double ||
+               value instanceof Float ||
                value instanceof Int) {
       value = value.value;
     } else if (Buffer.isBuffer(value)) {

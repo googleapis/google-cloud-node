@@ -638,6 +638,7 @@ describe('Spanner', function() {
 
       var EXPECTED_ROW = extend(true, {}, INSERT_ROW);
       EXPECTED_ROW.DOB = DATE;
+      EXPECTED_ROW.Float = Spanner.float(FLOAT);
       EXPECTED_ROW.Int = Spanner.int(INT);
       EXPECTED_ROW.PhoneNumbers = [
         Spanner.int(PHONE_NUMBERS[0]),

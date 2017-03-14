@@ -138,7 +138,7 @@ describe('codec', function() {
         }
       });
 
-      assert(decoded instanceof codec.Double);
+      assert(decoded instanceof codec.Float);
       assert.strictEqual(decoded.value, value);
     });
 
@@ -370,7 +370,7 @@ describe('codec', function() {
     });
 
     it('should encode FLOAT64', function() {
-      var value = new codec.Double(10);
+      var value = new codec.Float(10);
 
       var encoded = codec.encode(value);
 
