@@ -351,8 +351,8 @@ describe('Logging', function() {
       var entry1 = log.entry('1');
 
       setTimeout(function() {
-        var entry3 = log.entry('3');
-        var entry2 = log.entry({ timestamp: entry3.metadata.timestamp }, '2');
+        var entry2 = log.entry('2');
+        var entry3 = log.entry({ timestamp: entry2.metadata.timestamp }, '3');
 
         // Re-arrange to confirm the timestamp is sent and honored.
         log.write([entry2, entry3, entry1], options, function(err) {
