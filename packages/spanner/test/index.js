@@ -237,6 +237,25 @@ describe('Spanner', function() {
     });
   });
 
+  describe('float', function() {
+    it('should create a SpannerDate instance', function() {
+      var value = {};
+      var customValue = {};
+
+      fakeCodec.Float = function(value_) {
+        assert.strictEqual(value_, value);
+        return customValue;
+      };
+
+      var float = spanner.float(value);
+      assert.strictEqual(float, customValue);
+    });
+
+    it('should be a static method', function() {
+      assert(Spanner.date() instanceof fakeCodec.SpannerDate);
+    });
+  });
+
   describe('int', function() {
     it('should create an Int instance', function() {
       var value = {};
