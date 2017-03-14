@@ -477,30 +477,111 @@ describe('storage', function() {
 
   describe('iam', function() {
     describe('buckets', function() {
-      it('should get a policy', function() {
+      it('should get a policy', function(done) {
+        bucket.iam.getPolicy(function(err, policy) {
+          assert.ifError(err);
 
+          assert.deepEqual(policy.bindings, []);
+          assert.strictEqual(policy.etag, 'ACAB');
+          assert.strictEqual(policy.version, 0);
+
+          done();
+        });
       });
 
-      it('should set a policy', function() {
+      it('should set a policy', function(done) {
+        var policy = {
+          bindings: [
+            {
+              role: 'roles/storage.admin',
+              members: [
+                'serviceAccount:gmail-api-push@system.gserviceaccount.com'
+              ]
+            }
+          ]
+        };
 
+        bucket.iam.setPolicy(policy, function(err, newPolicy) {
+          assert.ifError(err);
+          assert.deepEqual(newPolicy.bindings, policy.bindings);
+          done();
+        });
       });
 
-      it('should test permissions', function() {
+      it('should test the iam permissions', function(done) {
+        var testPermissions = [
+          'storage.buckets.get',
+          'storage.buckets.update'
+        ];
 
+        bucket.iam.testPermissions(testPermissions, function(err, permissions) {
+          assert.ifError(err);
+
+          assert.deepEqual(permissions, {
+            'storage.buckets.get': true,
+            'storage.buckets.update': true
+          });
+
+          done();
+        });
       });
     });
 
     describe('files', function() {
-      it('should get a policy', function() {
+      var file;
 
+      before(function(done) {
+        file = bucket.file('new-file');
+        file.save('dummy-data', done);
       });
 
-      it('should set a policy', function() {
+      it('should get a policy', function(done) {
+        file.iam.getPolicy(function(err, policy) {
+          assert.ifError(err);
 
+          assert.deepEqual(policy.bindings, []);
+          assert.strictEqual(policy.etag, 'ACAB');
+          assert.strictEqual(policy.version, 0);
+
+          done();
+        });
       });
 
-      it('should test permissions', function() {
+      it('should set a policy', function(done) {
+        var policy = {
+          bindings: [
+            {
+              role: 'roles/storage.admin',
+              members: [
+                'serviceAccount:gmail-api-push@system.gserviceaccount.com'
+              ]
+            }
+          ]
+        };
 
+        file.iam.setPolicy(policy, function(err, newPolicy) {
+          assert.ifError(err);
+          assert.deepEqual(newPolicy.bindings, policy.bindings);
+          done();
+        });
+      });
+
+      it('should test the iam permissions', function(done) {
+        var testPermissions = [
+          'storage.objects.get',
+          'storage.objects.update'
+        ];
+
+        file.iam.testPermissions(testPermissions, function(err, permissions) {
+          assert.ifError(err);
+
+          assert.deepEqual(permissions, {
+            'storage.objects.get': true,
+            'storoage.objects.update': true
+          });
+
+          done();
+        });
       });
     });
   });

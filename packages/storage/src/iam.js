@@ -26,14 +26,32 @@ var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
 
+/*! Developer Documentation
+ *
+ * @param {module:storage/bucket|module:storage/file} resourceInstance - The
+ *     parent instance.
+ */
 /**
+ * Get and set IAM policies for your Cloud Storage buckets and objects.
+ *
+ * @resource [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
+ * @resource [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
+ * @resource [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+ *
  * @constructor
  * @alias module:storage/iam
+ *
+ * @example
+ * var bucket = gcs.bucket('my-bucket');
+ * // bucket.iam
+ *
+ * var file = bucket.file('my-file');
+ * // file.iam
  */
 function Iam(resourceInstance) {
   this.request_ = resourceInstance.request.bind(resourceInstance);
 
-  if (common.util.isCustomType(resourceInstance, 'bucket')) {
+  if (common.util.isCustomType(resourceInstance, 'Bucket')) {
     var bucket = resourceInstance;
     this.resourceId_ = 'buckets/' + bucket.id;
   } else {
@@ -51,11 +69,11 @@ function Iam(resourceInstance) {
  *
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.policy - The [policy](https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy).
+ * @param {object} callback.policy - The policy.
  * @param {object} callback.apiResponse - The full API response.
  *
- * @resource [Topics: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/getIamPolicy}
- * @resource [Subscriptions: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/getIamPolicy}
+ * @resource [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy}
+ * @resource [Objects: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/getIamPolicy}
  *
  * @example
  * bucket.iam.getPolicy(function(err, policy, apiResponse) {});
@@ -81,7 +99,7 @@ Iam.prototype.getPolicy = function(callback) {
  *
  * @throws {Error} If no policy is provided.
  *
- * @param {object} policy - The [policy](https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy).
+ * @param {object} policy - The policy.
  * @param {array=} policy.bindings - Bindings associate members with roles.
  * @param {string=} policy.etag - Etags are used to perform a read-modify-write.
  * @param {function} callback - The callback function.
@@ -90,8 +108,8 @@ Iam.prototype.getPolicy = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @resource [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy}
- * @resource [Objects: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy}
- * @resource [Policy]{@link https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy}
+ * @resource [Objects: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/setIamPolicy}
+ * @resource [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
  *
  * @example
  * var myPolicy = {
@@ -138,7 +156,7 @@ Iam.prototype.setPolicy = function(policy, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {array} callback.permissions - A subset of permissions that the caller
- *     is allowed
+ *     is allowed.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @resource [Buckets: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions}
