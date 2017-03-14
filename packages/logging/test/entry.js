@@ -43,7 +43,7 @@ describe('Entry', function() {
       '@google-cloud/common-grpc': {
         Service: FakeGrpcService
       },
-      'eventid': FakeEventId
+      eventid: FakeEventId
     });
   });
 
