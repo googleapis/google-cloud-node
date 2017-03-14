@@ -40,7 +40,7 @@
     "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -x 'packages/*/src/*/*.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -x 'packages/*/src/*{/*,/**/*}.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
     "coveralls": "npm run cover && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "Apache-2.0",
