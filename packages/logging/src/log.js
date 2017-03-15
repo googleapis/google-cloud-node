@@ -52,7 +52,8 @@ var Metadata = require('./metadata.js');
  * @alias module:logging/log
  * @constructor
  *
- * @param {object} options - [Configuration object](#/docs).
+ * @param {module:logging} logging - parent Logging instance.
+ * @param {string} name - name of the log.
  *
  * @example
  * var log = logging.log('syslog');
