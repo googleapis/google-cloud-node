@@ -120,6 +120,9 @@ var fakeBunyan = function() {
   };
 };
 
+// For {module:storage} docs.
+var fakeRequest = function() {};
+
 // For {module:logging-winston} docs.
 var fakeWinston = function() {
   return {
@@ -282,6 +285,7 @@ function createSnippet(mod, instantiation, method) {
     .replace('require(\'level\')', FakeLevel.toString())
     .replace('require(\'bluebird\')', FakeBluebird.toString())
     .replace('require(\'bunyan\')', '(' + fakeBunyan.toString() + '())')
+    .replace('require(\'request\')', '(' + fakeRequest.toString() + '())')
     .replace('require(\'winston\')', '(' + fakeWinston.toString() + '())')
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
