@@ -101,6 +101,10 @@ describe('Log', function() {
       assert.strictEqual(log.name, LOG_NAME_ENCODED);
     });
 
+    it('should localize removeCircular_ to default value', function() {
+      assert.strictEqual(log.removeCircular_, false);
+    });
+
     it('should localize the formatted name', function() {
       var formattedName = 'formatted-name';
 
@@ -144,7 +148,7 @@ describe('Log', function() {
       assert.strictEqual(log.removeCircular_, false);
 
       var options = { removeCircular: true };
-      log = new Log(LOGGING, LOG_NAME_FORMATTED, options);
+      var log = new Log(LOGGING, LOG_NAME_FORMATTED, options);
       assert.strictEqual(log.removeCircular_, true);
     });
   });

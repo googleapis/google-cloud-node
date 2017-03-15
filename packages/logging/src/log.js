@@ -57,9 +57,9 @@ var Metadata = require('./metadata.js');
  * @constructor
  *
  * @param {string} name - Name of the log.
- * @param {object} options - Configuration object.
+ * @param {object=} options - Configuration object.
  * @param {boolean} options.removeCircular - Replace circular references in an
- *     logged objects with a string value, `[Circular]`.
+ *     logged objects with a string value, `[Circular]`. (Default: false)
  *
  * @example
  * var log = logging.log('syslog');
@@ -630,7 +630,9 @@ Log.prototype.decorateEntries_ = function(entries, callback) {
       entry = self.entry(entry);
     }
 
-    var decoratedEntry = entry.toJSON({ removeCircular: self.removeCircular_ });
+    var decoratedEntry = entry.toJSON({
+      removeCircular: self.removeCircular_
+    });
     decoratedEntry.logName = self.formattedName_;
 
     self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
