@@ -24,7 +24,6 @@ var commonGrpc = require('@google-cloud/common-grpc');
 var EventId = require('eventid');
 var extend = require('extend');
 var is = require('is');
-var isCircular = require('is-circular');
 
 var eventId = new EventId();
 
