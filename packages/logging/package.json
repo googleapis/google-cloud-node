@@ -61,7 +61,6 @@
     "google-gax": "^0.12.2",
     "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
-    "is-circular": "^1.0.1",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {

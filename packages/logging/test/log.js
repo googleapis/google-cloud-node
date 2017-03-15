@@ -321,7 +321,7 @@ describe('Log', function() {
     };
 
     beforeEach(function() {
-      log.decorateEntries_ = function(entries, callback) {
+      log.decorateEntries_ = function(entries, options, callback) {
         callback(null, entries);
       };
     });
@@ -343,7 +343,7 @@ describe('Log', function() {
     it('should arrify & decorate the entries', function(done) {
       var decoratedEntries = [];
 
-      log.decorateEntries_ = function(entries, callback) {
+      log.decorateEntries_ = function(entries, options, callback) {
         assert.strictEqual(entries[0], ENTRY);
         callback(null, decoratedEntries);
       };
@@ -379,6 +379,15 @@ describe('Log', function() {
       };
 
       log.write(ENTRY, done);
+    });
+
+    it('should pass options.removeCircular to decorateEntries', function(done) {
+      log.decorateEntries_ = function(entries, options) {
+        assert.strictEqual(options.removeCircular, true);
+        done();
+      };
+
+      log.write(ENTRY, { removeCircular: true }, assert.ifError);
     });
   });
 
@@ -671,6 +680,19 @@ describe('Log', function() {
         assert.strictEqual(decoratedEntries[0], toJSONResponse);
         done();
       });
+    });
+
+    it('should pass options to toJSON', function(done) {
+      var options = {};
+
+      var entry = new Entry();
+      entry.toJSON = function(options_) {
+        assert.strictEqual(options_, options);
+        setImmediate(done);
+        return {};
+      };
+
+      log.decorateEntries_([entry], options, assert.ifError);
     });
 
     it('should assign the log name', function(done) {
