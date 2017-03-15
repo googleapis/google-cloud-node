@@ -58,8 +58,8 @@ var Metadata = require('./metadata.js');
  *
  * @param {string} name - Name of the log.
  * @param {object=} options - Configuration object.
- * @param {boolean} options.removeCircular - Replace circular references in an
- *     logged objects with a string value, `[Circular]`. (Default: false)
+ * @param {boolean} options.removeCircular - Replace circular references in
+ *     logged object with a string value, `[Circular]`. (Default: false)
  *
  * @example
  * var log = logging.log('syslog');

@@ -453,8 +453,8 @@ Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
  *
  * @param {string} name - Name of the existing log.
  * @param {object} options - Configuration object.
- * @param {boolean} options.removeCircular - Replace circular references in an
- *     logged objects with a string value, `[Circular]`.
+ * @param {boolean} options.removeCircular - Replace circular references in
+ *     logged objects with a string value, `[Circular]`. (Default: false)
  * @return {module:logging/log}
  *
  * @example
