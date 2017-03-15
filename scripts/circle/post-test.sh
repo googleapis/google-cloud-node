@@ -16,15 +16,28 @@
 
 set -e
 
-if [ "${CIRCLE_BRANCH}" != "master" ] && [ "${CI_PULL_REQUEST}" != "" ]
+if [ "${CIRCLE_BRANCH}" != "master" ] &&
+   [ "${CI_PULL_REQUEST}" != "" ] &&
+   [ "${CIRCLE_TAG}" == "" ]
 then
   # Not a push to master, so no doc updates required.
   exit 0
 fi
 
+# For a tagged build, we will build the docs for the associated module.
+# Otherwise, it will build for master.
+export TAGGED_MODULE_NAME=${CIRCLE_TAG/-*}
+export TAGGED_MODULE_VERSION=${CIRCLE_TAG/*-}
+
+if [ "${CIRCLE_TAG:0:1}" == "v" ]
+then
+  export TAGGED_MODULE_NAME="google-cloud"
+  export TAGGED_MODULE_VERSION=${CIRCLE_TAG:1}
+fi
+
 set +e # allows `git` commands during prepare-ghpages to fail
 
-npm run prepare-ghpages
+npm run prepare-ghpages $TAGGED_MODULE_NAME $TAGGED_MODULE_VERSION
 
 cd gh-pages
 git fetch origin
