@@ -40,6 +40,10 @@ var Entry = require('./entry.js');
  */
 var Metadata = require('./metadata.js');
 
+/*! Developer Documentation
+ *
+ * @param {module:logging} logging - Parent Logging instance.
+ */
 /**
  * A log is a named collection of entries, each entry representing a timestamped
  * event. Logs can be produced by Google Cloud Platform services, by third-party
@@ -52,8 +56,7 @@ var Metadata = require('./metadata.js');
  * @alias module:logging/log
  * @constructor
  *
- * @param {module:logging} logging - parent Logging instance.
- * @param {string} name - name of the log.
+ * @param {string} name - Name of the log.
  *
  * @example
  * var log = logging.log('syslog');
