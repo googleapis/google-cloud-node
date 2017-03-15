@@ -51,6 +51,8 @@ function FakeTransaction() {
   this.calledWith_ = arguments;
 }
 
+function FakeV1() {}
+
 describe('Datastore', function() {
   var Datastore;
   var datastore;
@@ -77,7 +79,8 @@ describe('Datastore', function() {
       },
       './entity.js': fakeEntity,
       './query.js': FakeQuery,
-      './transaction.js': FakeTransaction
+      './transaction.js': FakeTransaction,
+      './v1': FakeV1
     });
   });
 
@@ -86,6 +89,10 @@ describe('Datastore', function() {
       projectId: PROJECT_ID,
       namespace: NAMESPACE
     });
+  });
+
+  it('should export GAX client', function() {
+    assert.strictEqual(Datastore.v1, FakeV1);
   });
 
   describe('instantiation', function() {

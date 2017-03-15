@@ -545,3 +545,4 @@ Datastore.Query = Query;
 Datastore.Transaction = Transaction;
 
 module.exports = Datastore;
+module.exports.v1 = require('./v1');
