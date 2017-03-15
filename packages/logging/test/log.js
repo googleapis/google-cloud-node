@@ -321,7 +321,7 @@ describe('Log', function() {
     };
 
     beforeEach(function() {
-      log.decorateEntries_ = function(entries, callback) {
+      log.decorateEntries_ = function(entries, options, callback) {
         callback(null, entries);
       };
     });
@@ -343,7 +343,7 @@ describe('Log', function() {
     it('should arrify & decorate the entries', function(done) {
       var decoratedEntries = [];
 
-      log.decorateEntries_ = function(entries, callback) {
+      log.decorateEntries_ = function(entries, options, callback) {
         assert.strictEqual(entries[0], ENTRY);
         callback(null, decoratedEntries);
       };
@@ -379,6 +379,24 @@ describe('Log', function() {
       };
 
       log.write(ENTRY, done);
+    });
+
+    it('should pass options.removeCircular to decorateEntries', function(done) {
+      var decoratedEntries = [];
+      var justRemoveCircular = { removeCircular: 42 };
+      var optionsWithRemoveCircular = extend({}, justRemoveCircular, OPTIONS);
+
+      log.decorateEntries_ = function(entries, options, callback) {
+        assert.deepStrictEqual(options, justRemoveCircular);
+        callback(null, decoratedEntries);
+      };
+
+      log.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.entries, decoratedEntries);
+        done();
+      };
+
+      log.write(ENTRY, optionsWithRemoveCircular, assert.ifError);
     });
   });
 
@@ -667,6 +685,26 @@ describe('Log', function() {
       };
 
       log.decorateEntries_([entry], function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0], toJSONResponse);
+        done();
+      });
+    });
+
+    it('should pass options to toJSON', function(done) {
+      var OPTIONS = { a: 'b' };
+
+      log.entry = function() {
+        done(); // will result in multiple done() calls and fail the test.
+      };
+
+      var entry = new Entry();
+      entry.toJSON = function(options) {
+        assert.strictEqual(options, OPTIONS);
+        return toJSONResponse;
+      };
+
+      log.decorateEntries_([entry], OPTIONS, function(err, decoratedEntries) {
         assert.ifError(err);
         assert.strictEqual(decoratedEntries[0], toJSONResponse);
         done();

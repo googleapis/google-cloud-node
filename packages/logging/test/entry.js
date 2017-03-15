@@ -188,6 +188,7 @@ describe('Entry', function() {
       FakeGrpcService.objToStruct_ = function(obj, options) {
         assert.strictEqual(obj, input);
         assert.deepEqual(options, {
+          removeCircular: false,
           stringify: true
         });
         return converted;
@@ -198,13 +199,22 @@ describe('Entry', function() {
       assert.strictEqual(json.jsonPayload, converted);
     });
 
-    it('should throw with a struct with a circular reference', function() {
-      entry.data = { val: true };
-      entry.data.data = entry.data;
+    it('should pass removeCircular to objToStruct_ as boolean', function() {
+      var input = {};
+      var converted = {};
 
-      assert.throws(function() {
-        entry.toJSON();
-      }, /The JSON data for this entry has a circular reference\./);
+      FakeGrpcService.objToStruct_ = function(obj, options) {
+        assert.strictEqual()
+        assert.deepStrictEqual(options, {
+          removeCircular: true,
+          stringify: true
+        });
+        return converted;
+      };
+
+      entry.data = input;
+      var json = entry.toJSON({ removeCircular: 'truthy value' });
+      assert.strictEqual(json.jsonPayload, converted);
     });
 
     it('should assign string data as textPayload', function() {

@@ -134,17 +134,18 @@ Entry.fromApiResponse_ = function(entry) {
 /**
  * Serialize an entry to the format the API expects.
  *
+ * @param {object} options
+ * @param {boolean} options.removeCircular
  * @private
  */
-Entry.prototype.toJSON = function() {
-  if (is.object(this.data) && isCircular([this.data])) {
-    throw new Error('The JSON data for this entry has a circular reference.');
-  }
+Entry.prototype.toJSON = function(options) {
+  options = options || {};
 
   var entry = extend(true, {}, this.metadata);
 
   if (is.object(this.data)) {
     entry.jsonPayload = commonGrpc.Service.objToStruct_(this.data, {
+      removeCircular: !!options.removeCircular,
       stringify: true
     });
   } else if (is.string(this.data)) {
