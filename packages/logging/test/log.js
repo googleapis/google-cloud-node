@@ -145,8 +145,6 @@ describe('Log', function() {
     });
 
     it('should accept and localize options.removeCircular', function() {
-      assert.strictEqual(log.removeCircular_, false);
-
       var options = { removeCircular: true };
       var log = new Log(LOGGING, LOG_NAME_FORMATTED, options);
       assert.strictEqual(log.removeCircular_, true);
