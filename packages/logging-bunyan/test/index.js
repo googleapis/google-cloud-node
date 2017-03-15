@@ -24,12 +24,14 @@ describe('logging-bunyan', function() {
   var fakeLogInstance = {};
   var fakeLoggingOptions_;
   var fakeLogName_;
+  var fakeLogOptions_;
 
   function fakeLogging(options) {
     fakeLoggingOptions_ = options;
     return {
-      log: function(logName) {
+      log: function(logName, options) {
         fakeLogName_ = logName;
+        fakeLogOptions_ = options;
         return fakeLogInstance;
       }
     };
@@ -77,7 +79,7 @@ describe('logging-bunyan', function() {
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
-    it('should localize Log instance using default name', function() {
+    it('should localize Log instance using default name, options', function() {
       var optionsWithoutLogName = extend({}, OPTIONS);
       delete optionsWithoutLogName.logName;
 
@@ -85,6 +87,7 @@ describe('logging-bunyan', function() {
 
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
       assert.strictEqual(fakeLogName_, 'bunyan_log');
+      assert.deepStrictEqual(fakeLogOptions_, { removeCircular: true });
     });
   });
 
