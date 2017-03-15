@@ -382,21 +382,12 @@ describe('Log', function() {
     });
 
     it('should pass options.removeCircular to decorateEntries', function(done) {
-      var decoratedEntries = [];
-      var justRemoveCircular = { removeCircular: 42 };
-      var optionsWithRemoveCircular = extend({}, justRemoveCircular, OPTIONS);
-
-      log.decorateEntries_ = function(entries, options, callback) {
-        assert.deepStrictEqual(options, justRemoveCircular);
-        callback(null, decoratedEntries);
-      };
-
-      log.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.entries, decoratedEntries);
+      log.decorateEntries_ = function(entries, options) {
+        assert.strictEqual(options.removeCircular, true);
         done();
       };
 
-      log.write(ENTRY, optionsWithRemoveCircular, assert.ifError);
+      log.write(ENTRY, { removeCircular: true }, assert.ifError);
     });
   });
 
@@ -692,23 +683,16 @@ describe('Log', function() {
     });
 
     it('should pass options to toJSON', function(done) {
-      var OPTIONS = { a: 'b' };
-
-      log.entry = function() {
-        done(); // will result in multiple done() calls and fail the test.
-      };
+      var options = {};
 
       var entry = new Entry();
-      entry.toJSON = function(options) {
-        assert.strictEqual(options, OPTIONS);
-        return toJSONResponse;
+      entry.toJSON = function(options_) {
+        assert.strictEqual(options_, options);
+        setImmediate(done);
+        return {};
       };
 
-      log.decorateEntries_([entry], OPTIONS, function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], toJSONResponse);
-        done();
-      });
+      log.decorateEntries_([entry], options, assert.ifError);
     });
 
     it('should assign the log name', function(done) {

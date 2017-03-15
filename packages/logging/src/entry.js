@@ -133,8 +133,9 @@ Entry.fromApiResponse_ = function(entry) {
 /**
  * Serialize an entry to the format the API expects.
  *
- * @param {object} options
- * @param {boolean} options.removeCircular
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.removeCircular - Replace circular references in an
+ *     object with a string value, `[Circular]`.
  * @private
  */
 Entry.prototype.toJSON = function(options) {

@@ -199,22 +199,14 @@ describe('Entry', function() {
       assert.strictEqual(json.jsonPayload, converted);
     });
 
-    it('should pass removeCircular to objToStruct_ as boolean', function() {
-      var input = {};
-      var converted = {};
-
+    it('should pass removeCircular to objToStruct_', function(done) {
       FakeGrpcService.objToStruct_ = function(obj, options) {
-        assert.strictEqual()
-        assert.deepStrictEqual(options, {
-          removeCircular: true,
-          stringify: true
-        });
-        return converted;
+        assert.strictEqual(options.removeCircular, true);
+        done();
       };
 
-      entry.data = input;
-      var json = entry.toJSON({ removeCircular: 'truthy value' });
-      assert.strictEqual(json.jsonPayload, converted);
+      entry.data = {};
+      entry.toJSON({ removeCircular: true });
     });
 
     it('should assign string data as textPayload', function() {
