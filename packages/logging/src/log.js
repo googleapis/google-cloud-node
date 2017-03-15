@@ -57,13 +57,19 @@ var Metadata = require('./metadata.js');
  * @constructor
  *
  * @param {string} name - Name of the log.
+ * @param {object} options - Configuration object.
+ * @param {boolean} options.removeCircular - Replace circular references in an
+ *     logged objects with a string value, `[Circular]`.
  *
  * @example
  * var log = logging.log('syslog');
  */
-function Log(logging, name) {
+function Log(logging, name, options) {
+  options = options || {};
+
   this.formattedName_ = Log.formatName_(logging.projectId, name);
   this.name = this.formattedName_.split('/').pop();
+  this.removeCircular_ = !!options.removeCircular;
 
   this.metadata_ = new Metadata(logging);
 
@@ -520,8 +526,6 @@ Log.prototype.warning = function(entry, options, callback) {
  * @param {object[]} options.labels - Labels to set on the log.
  * @param {object} options.resource - A default monitored resource for entries
  *     where one isn't specified.
- * @param {boolean} options.removeCircular - Replace circular references in an
- *     object with a string value, `[Circular]`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -599,9 +603,7 @@ Log.prototype.write = function(entry, options, callback) {
 
   var entries = arrify(entry);
 
-  this.decorateEntries_(entries, {
-    removeCircular: options.removeCircular
-  }, function(err, decoratedEntries) {
+  this.decorateEntries_(entries, function(err, decoratedEntries) {
     // Ignore errors (the API will speak up if it has an issue).
 
     reqOpts.entries = decoratedEntries;
@@ -619,24 +621,16 @@ Log.prototype.write = function(entry, options, callback) {
  * @private
  *
  * @param {object} entry - An entry object.
- * @param {object} options - configuration object
- * @param {boolean} options.removeCircular - Replace circular references in an
- *     object with a string value, `[Circular]`.
  */
-Log.prototype.decorateEntries_ = function(entries, options, callback) {
+Log.prototype.decorateEntries_ = function(entries, callback) {
   var self = this;
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
 
   async.map(entries, function(entry, callback) {
     if (!(entry instanceof Entry)) {
       entry = self.entry(entry);
     }
 
-    var decoratedEntry = entry.toJSON(options);
+    var decoratedEntry = entry.toJSON({ removeCircular: self.removeCircular_ });
     decoratedEntry.logName = self.formattedName_;
 
     self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {

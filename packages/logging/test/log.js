@@ -139,6 +139,14 @@ describe('Log', function() {
         }
       });
     });
+
+    it('should accept and localize options.removeCircular', function() {
+      assert.strictEqual(log.removeCircular_, false);
+
+      var options = { removeCircular: true };
+      log = new Log(LOGGING, LOG_NAME_FORMATTED, options);
+      assert.strictEqual(log.removeCircular_, true);
+    });
   });
 
   describe('assignSeverityToEntries_', function() {
@@ -321,7 +329,7 @@ describe('Log', function() {
     };
 
     beforeEach(function() {
-      log.decorateEntries_ = function(entries, options, callback) {
+      log.decorateEntries_ = function(entries, callback) {
         callback(null, entries);
       };
     });
@@ -343,7 +351,7 @@ describe('Log', function() {
     it('should arrify & decorate the entries', function(done) {
       var decoratedEntries = [];
 
-      log.decorateEntries_ = function(entries, options, callback) {
+      log.decorateEntries_ = function(entries, callback) {
         assert.strictEqual(entries[0], ENTRY);
         callback(null, decoratedEntries);
       };
@@ -379,15 +387,6 @@ describe('Log', function() {
       };
 
       log.write(ENTRY, done);
-    });
-
-    it('should pass options.removeCircular to decorateEntries', function(done) {
-      log.decorateEntries_ = function(entries, options) {
-        assert.strictEqual(options.removeCircular, true);
-        done();
-      };
-
-      log.write(ENTRY, { removeCircular: true }, assert.ifError);
     });
   });
 
@@ -682,17 +681,17 @@ describe('Log', function() {
       });
     });
 
-    it('should pass options to toJSON', function(done) {
-      var options = {};
+    it('should pass log.removeCircular to toJSON', function(done) {
+      log.removeCircular_ = true;
 
       var entry = new Entry();
       entry.toJSON = function(options_) {
-        assert.strictEqual(options_, options);
+        assert.deepStrictEqual(options_, { removeCircular: true });
         setImmediate(done);
         return {};
       };
 
-      log.decorateEntries_([entry], options, assert.ifError);
+      log.decorateEntries_([entry], assert.ifError);
     });
 
     it('should assign the log name', function(done) {
