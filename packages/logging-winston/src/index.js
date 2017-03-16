@@ -184,11 +184,12 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   // TODO(ofrobots): when resource.type is 'global' we need to additionally
   // provide serviceContext.service as part of the entry for Error Reporting to
   // automatically pick up the error.
+  if (metadata && metadata.stack) {
+    msg += (msg ? ': ' : '') + metadata.stack;
+  }
+
   var data = {
-    message:
-        (metadata && metadata.stack) ?
-            (msg.length === 0 ? metadata.stack : msg + ': ' + metadata.stack) :
-            msg
+    message: msg
   };
   var entry = this.log_.entry(entryMetadata, data);
   this.log_[stackdriverLevel](entry, callback);
