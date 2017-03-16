@@ -1276,22 +1276,66 @@ describe('common/util', function() {
       assert.strictEqual(decoratedReqOpts.json.autoPaginateVal, undefined);
     });
 
+    it('should replace project ID tokens for qs object', function() {
+      var config = {
+        projectId: 'project-id'
+      };
+      var reqOpts = {
+        uri: 'http://',
+        qs: {}
+      };
+      var decoratedQs = {};
+
+      utilOverrides.replaceProjectIdToken = function(qs, projectId) {
+        utilOverrides = {};
+        assert.strictEqual(qs, reqOpts.qs);
+        assert.strictEqual(projectId, config.projectId);
+        return decoratedQs;
+      };
+
+      var decoratedRequest = util.decorateRequest(reqOpts, config);
+      assert.strictEqual(decoratedRequest.qs, decoratedQs);
+    });
+
+    it('should replace project ID tokens for json object', function() {
+      var config = {
+        projectId: 'project-id'
+      };
+      var reqOpts = {
+        uri: 'http://',
+        json: {}
+      };
+      var decoratedJson = {};
+
+      utilOverrides.replaceProjectIdToken = function(json, projectId) {
+        utilOverrides = {};
+        assert.strictEqual(reqOpts.json, json);
+        assert.strictEqual(projectId, config.projectId);
+        return decoratedJson;
+      };
+
+      var decoratedRequest = util.decorateRequest(reqOpts, config);
+      assert.strictEqual(decoratedRequest.json, decoratedJson);
+    });
+
     it('should decorate the request', function() {
       var config = {
         projectId: 'project-id'
       };
-      var reqOpts = {};
-      var decoratedReqOpts = {};
+      var reqOpts = {
+        uri: 'http://'
+      };
+      var decoratedUri = 'http://decorated';
 
-      utilOverrides.replaceProjectIdToken = function(reqOpts_, projectId) {
-        assert.strictEqual(reqOpts_, reqOpts);
+      utilOverrides.replaceProjectIdToken = function(uri, projectId) {
+        assert.strictEqual(uri, reqOpts.uri);
         assert.strictEqual(projectId, config.projectId);
-        return decoratedReqOpts;
+        return decoratedUri;
       };
 
-      assert.strictEqual(
+      assert.deepEqual(
         util.decorateRequest(reqOpts, config),
-        decoratedReqOpts
+        { uri: decoratedUri }
       );
     });
   });

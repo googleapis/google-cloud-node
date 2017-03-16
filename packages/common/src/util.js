@@ -487,14 +487,18 @@ function decorateRequest(reqOpts, config) {
   if (is.object(reqOpts.qs)) {
     delete reqOpts.qs.autoPaginate;
     delete reqOpts.qs.autoPaginateVal;
+    reqOpts.qs = util.replaceProjectIdToken(reqOpts.qs, config.projectId);
   }
 
   if (is.object(reqOpts.json)) {
     delete reqOpts.json.autoPaginate;
     delete reqOpts.json.autoPaginateVal;
+    reqOpts.json = util.replaceProjectIdToken(reqOpts.json, config.projectId);
   }
 
-  return util.replaceProjectIdToken(reqOpts, config.projectId);
+  reqOpts.uri = util.replaceProjectIdToken(reqOpts.uri, config.projectId);
+
+  return reqOpts;
 }
 
 util.decorateRequest = decorateRequest;

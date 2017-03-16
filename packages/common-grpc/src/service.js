@@ -260,7 +260,7 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   }
 
   try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+    reqOpts = this.decorateRequest_(reqOpts);
   } catch(e) {
     callback(e);
     return;
@@ -362,7 +362,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
   }
 
   try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+    reqOpts = this.decorateRequest_(reqOpts);
   } catch(e) {
     setImmediate(function() {
       stream.destroy(e);
@@ -443,7 +443,7 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
   }
 
   try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+    reqOpts = this.decorateRequest_(reqOpts);
   } catch (e) {
     setImmediate(function() {
       stream.destroy(e);
@@ -688,6 +688,22 @@ GrpcService.structToObj_ = function(struct) {
 };
 
 /**
+ * Assign a projectId if one is specified to all request options.
+ *
+ * @param {object} reqOpts - The request options.
+ * @return {object} - The decorated request object.
+ */
+GrpcService.prototype.decorateRequest_ = function(reqOpts) {
+  reqOpts = extend({}, reqOpts);
+
+  delete reqOpts.autoPaginate;
+  delete reqOpts.autoPaginateVal;
+  delete reqOpts.objectMode;
+
+  return util.replaceProjectIdToken(reqOpts, this.projectId);
+};
+
+/**
  * To authorize requests through gRPC, we must get the raw google-auth-library
  * auth client object.
  *
@@ -711,7 +727,7 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
     );
 
     if (!self.projectId || self.projectId === '{{projectId}}') {
-      self.projectId = authClient.projectId;
+      self.projectId = self.authClient.projectId;
     }
 
     callback(null, credentials);

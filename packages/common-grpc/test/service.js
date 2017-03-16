@@ -515,7 +515,7 @@ describe('GrpcService', function() {
 
   describe('request', function() {
     var PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
-    var REQ_OPTS = {};
+    var REQ_OPTS = { reqOpts: true };
     var GRPC_CREDENTIALS = {};
 
     function ProtoService() {}
@@ -747,9 +747,8 @@ describe('GrpcService', function() {
         it('should decorate the request', function(done) {
           var decoratedRequest = {};
 
-          fakeUtil.decorateRequest = function(reqOpts, config) {
-            assert.strictEqual(reqOpts, REQ_OPTS);
-            assert.deepEqual(config, { projectId: grpcService.projectId });
+          grpcService.decorateRequest_ = function(reqOpts) {
+            assert.deepEqual(reqOpts, REQ_OPTS);
             return decoratedRequest;
           };
 
@@ -770,7 +769,7 @@ describe('GrpcService', function() {
         var error = new Error('Error.');
 
         it('should return a thrown error to the callback', function(done) {
-          fakeUtil.decorateRequest = function() {
+          grpcService.decorateRequest_ = function() {
             throw error;
           };
 
@@ -787,7 +786,7 @@ describe('GrpcService', function() {
         grpcService.getService_ = function() {
           return {
             method: function(reqOpts) {
-              assert.strictEqual(reqOpts, REQ_OPTS);
+              assert.deepEqual(reqOpts, REQ_OPTS);
               done();
             }
           };
@@ -1063,9 +1062,8 @@ describe('GrpcService', function() {
         it('should decorate the request', function(done) {
           var decoratedRequest = {};
 
-          fakeUtil.decorateRequest = function(reqOpts, config) {
+          grpcService.decorateRequest_ = function(reqOpts) {
             assert.strictEqual(reqOpts, REQ_OPTS);
-            assert.deepEqual(config, { projectId: grpcService.projectId });
             return decoratedRequest;
           };
 
@@ -1084,7 +1082,7 @@ describe('GrpcService', function() {
         it('should end stream with a thrown error', function(done) {
           var error = new Error('Error.');
 
-          fakeUtil.decorateRequest = function() {
+          grpcService.decorateRequest_ = function() {
             throw error;
           };
 
@@ -1340,9 +1338,8 @@ describe('GrpcService', function() {
         it('should decorate the request', function(done) {
           var decoratedRequest = {};
 
-          fakeUtil.decorateRequest = function(reqOpts, config) {
+          grpcService.decorateRequest_ = function(reqOpts) {
             assert.strictEqual(reqOpts, REQ_OPTS);
-            assert.deepEqual(config, { projectId: grpcService.projectId });
             return decoratedRequest;
           };
 
@@ -1360,7 +1357,7 @@ describe('GrpcService', function() {
         var error = new Error('Error.');
 
         it('should end stream with a thrown error', function(done) {
-          fakeUtil.decorateRequest = function() {
+          grpcService.decorateRequest_ = function() {
             throw error;
           };
 
@@ -1660,6 +1657,41 @@ describe('GrpcService', function() {
     });
   });
 
+  describe('decorateRequest_', function() {
+    it('should delete custom API values without modifying object', function() {
+      var reqOpts = {
+        autoPaginate: true,
+        autoPaginateVal: true,
+        objectMode: true
+      };
+
+      var originalReqOpts = extend({}, reqOpts);
+
+      assert.deepEqual(grpcService.decorateRequest_(reqOpts), {});
+      assert.deepEqual(reqOpts, originalReqOpts);
+    });
+
+    it('should execute and return replaceProjectIdToken', function() {
+      var reqOpts = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var replacedReqOpts = {};
+
+      fakeUtil.replaceProjectIdToken = function(reqOpts_, projectId) {
+        assert.deepEqual(reqOpts_, reqOpts);
+        assert.strictEqual(projectId, grpcService.projectId);
+        return replacedReqOpts;
+      };
+
+      assert.strictEqual(
+        grpcService.decorateRequest_(reqOpts),
+        replacedReqOpts
+      );
+    });
+  });
+
   describe('getGrpcCredentials_', function() {
     it('should get credentials from the auth client', function(done) {
       grpcService.authClient = {
@@ -1698,6 +1730,7 @@ describe('GrpcService', function() {
       beforeEach(function() {
         grpcService.authClient = {
           getAuthClient: function(callback) {
+            grpcService.authClient = AUTH_CLIENT;
             callback(null, AUTH_CLIENT);
           }
         };
