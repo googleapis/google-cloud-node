@@ -91,7 +91,9 @@ function LoggingBunyan(options) {
   this.logName_ = options.logName || 'bunyan_log';
   this.resource_ = options.resource;
 
-  this.log_ = logging(options).log(this.logName_);
+  this.log_ = logging(options).log(this.logName_, {
+    removeCircular: true
+  });
 }
 
 /**
