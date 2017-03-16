@@ -157,6 +157,13 @@ describe('Spanner', function() {
       });
     });
 
+    it('should accept a Float object with an Int-like value', function(done) {
+      insert({ Float: spanner.float(8) }, function(err, row) {
+        assert.ifError(err);
+        assert.deepEqual(row.toJSON().Float, spanner.float(8));
+        done();
+      });
+    });
 
     it('should handle Infinity', function(done) {
       insert({ Float: Infinity }, function(err, row) {
@@ -638,6 +645,7 @@ describe('Spanner', function() {
 
       var EXPECTED_ROW = extend(true, {}, INSERT_ROW);
       EXPECTED_ROW.DOB = DATE;
+      EXPECTED_ROW.Float = Spanner.float(FLOAT);
       EXPECTED_ROW.Int = Spanner.int(INT);
       EXPECTED_ROW.PhoneNumbers = [
         Spanner.int(PHONE_NUMBERS[0]),

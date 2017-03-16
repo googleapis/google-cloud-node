@@ -37,8 +37,11 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, [
+      'date',
+      'float',
       'getInstanceConfigs',
       'instance',
+      'int',
       'operation'
     ]);
   }
@@ -227,6 +230,25 @@ describe('Spanner', function() {
 
       var date = spanner.date(value);
       assert.strictEqual(date, customValue);
+    });
+
+    it('should be a static method', function() {
+      assert(Spanner.date() instanceof fakeCodec.SpannerDate);
+    });
+  });
+
+  describe('float', function() {
+    it('should create a SpannerDate instance', function() {
+      var value = {};
+      var customValue = {};
+
+      fakeCodec.Float = function(value_) {
+        assert.strictEqual(value_, value);
+        return customValue;
+      };
+
+      var float = spanner.float(value);
+      assert.strictEqual(float, customValue);
     });
 
     it('should be a static method', function() {
