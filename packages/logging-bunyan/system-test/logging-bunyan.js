@@ -46,7 +46,7 @@ describe.skip('LoggingBunyan', function() {
         ],
         level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data.msg, 'first');
+          assert.strictEqual(entry.data.message, 'first');
           assert.strictEqual(entry.data.pid, process.pid);
         }
       },
@@ -89,7 +89,7 @@ describe.skip('LoggingBunyan', function() {
       ],
       level: 'info',
       verify: function(entry) {
-        assert.strictEqual(entry.data.msg, 'earliest');
+        assert.strictEqual(entry.data.message, 'earliest');
         assert.strictEqual(entry.data.pid, process.pid);
         assert.strictEqual(
           entry.metadata.timestamp.toString(),

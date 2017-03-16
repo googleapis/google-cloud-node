@@ -20,6 +20,7 @@
 
 'use strict';
 
+var extend = require('extend');
 var logging = require('@google-cloud/logging');
 
 /**
@@ -133,26 +134,27 @@ LoggingBunyan.prototype.write = function(record) {
     );
   }
 
-  // Stackdriver Logs Viewer picks up the summary line from the 'message' field
-  // of the payload.
-  // https://cloud.google.com/logging/docs/view/logs_viewer_v2#expanding
-  //
-  // Furthermore, for error messages at severity 'error' and higher, Stackdriver
-  // Error Reporting will pick up error messages if the full stack trace is
-  // included in the textPayload or in the `message` property of the
-  // jsonPaylod. See:
-  // https://cloud.google.com/error-reporting/docs/formatting-error-messages
-  //
-  // We only do this if the user hasn't provided a message property themselves.
-  //
-  // TODO(ofrobots): when resource.type is 'global' we need to additionally
-  // provide serviceContext.service as part of the entry for Error Reporting to
-  // automatically pick up the error.
+  // Stackdriver Log Viewer picks up the summary line from the 'message' field
+  // of the payload. Unless the user has provided a 'message' property also,
+  // move the 'msg' to 'message'.
   if (!record.message) {
+    // Clone the object before modifying it.
+    record = extend({}, record);
+
+    // If this is an error, report the full stack trace. This allows Stackdriver
+    // Error Reporting to pick up errors automatically (for severity 'error' or
+    // higher). In this case we leave the 'msg' property intact.
+    // https://cloud.google.com/error-reporting/docs/formatting-error-messages
+    //
+    // TODO(ofrobots): when resource.type is 'global' we need to additionally
+    // provide serviceContext.service as part of the entry for Error Reporting
+    // to automatically pick up the error.
     if (record.err && record.err.stack) {
       record.message = record.err.stack;
-    } else {
+    } else if (record.msg) {
+      // Simply rename `msg` to `message`.
       record.message = record.msg;
+      delete record.msg;
     }
   }
 

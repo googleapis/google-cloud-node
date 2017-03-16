@@ -28,7 +28,8 @@
     "winston"
   ],
   "dependencies": {
-    "@google-cloud/logging": "^0.7.0"
+    "@google-cloud/logging": "^0.7.0",
+    "extend": "^3.0.0"
   },
   "devDependencies": {
     "bunyan": "^1.8.5",
