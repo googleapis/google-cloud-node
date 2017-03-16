@@ -452,13 +452,16 @@ Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
  * @resource [Log Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs}
  *
  * @param {string} name - Name of the existing log.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.removeCircular - Replace circular references in
+ *     logged objects with a string value, `[Circular]`. (Default: false)
  * @return {module:logging/log}
  *
  * @example
  * var log = logging.log('my-log');
  */
-Logging.prototype.log = function(name) {
-  return new Log(this, name);
+Logging.prototype.log = function(name, options) {
+  return new Log(this, name, options);
 };
 
 /**
