@@ -36,6 +36,8 @@ describe('LoggingBunyan', function() {
 
   it('should properly write log entries', function(done) {
     var timestamp = new Date();
+    var circular = {};
+    circular.circular = circular;
 
     var testData = [
       {
@@ -57,6 +59,22 @@ describe('LoggingBunyan', function() {
           assert.strictEqual(entry.data.pid, process.pid);
         }
       },
+
+      {
+        args: [
+          {
+            test: circular
+          },
+          'third'
+        ],
+        verify: function(entry) {
+          assert.strictEqual(entry.data.msg, 'third');
+          assert.strictEqual(entry.data.pid, process.pid);
+          assert.deepStrictEqual(entry.data.test, {
+            circular: '[Circular]'
+          });
+        }
+      }
     ];
 
     var earliest = {
