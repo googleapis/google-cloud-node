@@ -55,6 +55,23 @@ describe('codec', function() {
     });
   });
 
+  describe('Float', function() {
+    it('should store the value', function() {
+      var value = 8;
+      var float = new codec.Float(value);
+
+      assert.strictEqual(float.value, value);
+    });
+
+    it('should return as a float', function() {
+      var value = '8.2';
+      var float = new codec.Float(value);
+
+      assert.strictEqual(float.valueOf(), parseFloat(value));
+      assert.strictEqual(float + 2, parseFloat(value) + 2);
+    });
+  });
+
   describe('Int', function() {
     it('should stringify the value', function() {
       var value = 8;

@@ -40,7 +40,7 @@ function Float(value) {
 }
 
 Float.prototype.valueOf = function() {
-  return this.value;
+  return parseFloat(this.value);
 };
 
 codec.Float = Float;

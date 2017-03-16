@@ -168,7 +168,7 @@ describe('Spanner', function() {
     it('should handle Infinity', function(done) {
       insert({ Float: Infinity }, function(err, row) {
         assert.ifError(err);
-        assert.strictEqual(row.toJSON().Float, Infinity);
+        assert.deepEqual(row.toJSON().Float, spanner.float(Infinity));
         done();
       });
     });
@@ -176,7 +176,7 @@ describe('Spanner', function() {
     it('should handled -Infinity', function(done) {
       insert({ Float: -Infinity }, function(err, row) {
         assert.ifError(err);
-        assert.strictEqual(row.toJSON().Float, -Infinity);
+        assert.deepEqual(row.toJSON().Float, spanner.float(-Infinity));
         done();
       });
     });
@@ -184,7 +184,7 @@ describe('Spanner', function() {
     it('should handle NaN', function(done) {
       insert({ Float: NaN }, function(err, row) {
         assert.ifError(err);
-        assert(Number.isNaN(row.toJSON().Float));
+        assert(isNaN(row.toJSON().Float));
         done();
       });
     });
