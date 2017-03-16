@@ -696,6 +696,20 @@ describe('Log', function() {
       log.decorateEntries_([entry], assert.ifError);
     });
 
+    it('should exec callback with error from serialization', function(done) {
+      var error = new Error('Error.');
+
+      var entry = new Entry();
+      entry.toJSON = function() {
+        throw error;
+      };
+
+      log.decorateEntries_([entry], function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
     it('should assign the log name', function(done) {
       log.decorateEntries_([{}], function(err, decoratedEntries) {
         assert.ifError(err);

@@ -630,9 +630,17 @@ Log.prototype.decorateEntries_ = function(entries, callback) {
       entry = self.entry(entry);
     }
 
-    var decoratedEntry = entry.toJSON({
-      removeCircular: self.removeCircular_
-    });
+    var decoratedEntry;
+
+    try {
+      decoratedEntry = entry.toJSON({
+        removeCircular: self.removeCircular_
+      });
+    } catch(e) {
+      callback(e);
+      return;
+    }
+
     decoratedEntry.logName = self.formattedName_;
 
     self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
