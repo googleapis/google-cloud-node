@@ -1676,5 +1676,19 @@ describe('common/util', function() {
         assert.strictEqual(arg, fakeArg);
       });
     });
+
+    it('should ignore singular when multiple args are present', function() {
+      var fakeArgs = ['a', 'b'];
+
+      func = util.promisify(function(callback) {
+        callback.apply(this, [null].concat(fakeArgs));
+      }, {
+        singular: true
+      });
+
+      return func().then(function(args) {
+        assert.deepEqual(args, fakeArgs);
+      });
+    });
   });
 });
