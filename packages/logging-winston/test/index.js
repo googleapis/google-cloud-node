@@ -174,7 +174,7 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
-    it('should append the stack when metadata is an error', function(done) {
+    it('should append stack when metadata is an error', function(done) {
       var error = {
         stack: 'the stack'
       };
@@ -189,7 +189,7 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, error, assert.ifError);
     });
 
-    it('should append the stack when metadata is an error, empty message',
+    it('should append stack when metadata is err with empty message',
       function(done) {
         var error = {
           stack: 'the stack'
@@ -197,7 +197,7 @@ describe('logging-winston', function() {
 
         loggingWinston.log_.entry = function(entryMetadata, data) {
           assert.deepStrictEqual(data, {
-            message: ' ' + error.stack
+            message: error.stack
           });
           done();
         };

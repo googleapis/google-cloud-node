@@ -71,7 +71,7 @@ describe('LoggingWinston', function() {
         args: [new Error('forth')],
         level: 'error',
         verify: function(entry) {
-          assert.ok(entry.data.message.startsWith(' Error: forth'));
+          assert(entry.data.message.startsWith('Error: forth'));
         }
       },
 
@@ -79,8 +79,7 @@ describe('LoggingWinston', function() {
         args: ['fifth message', new Error('fifth')],
         level: 'error',
         verify: function(entry) {
-          assert.ok(
-              entry.data.message.startsWith('fifth message Error: fifth'));
+          assert(entry.data.message.startsWith('fifth message Error: fifth'));
         }
       },
     ];
