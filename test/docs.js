@@ -122,9 +122,11 @@ var fakeBunyan = function() {
 
 // For various docs.
 var fakeRequest = function() {
+  var stream = require('stream');
+
   return {
     get: function() {
-      return new require('stream').PassThrough();
+      return new stream.PassThrough();
     }
   };
 };
