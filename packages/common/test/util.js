@@ -1578,7 +1578,7 @@ describe('common/util', function() {
       assert(FakeClass2.prototype.method.promisified_);
     });
 
-    it('should pass the options object to promsify', function(done) {
+    it('should pass the options object to promisify', function(done) {
       var promisify = util.promisify;
       var fakeOptions = {
         a: 'a'
