@@ -21,6 +21,7 @@ var async = require('async');
 var concat = require('concat-stream');
 var is = require('is');
 var prop = require('propprop');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var Compute = require('../');
@@ -864,8 +865,8 @@ describe('Compute', function() {
 
     it('should have created the right rule', function(done) {
       var target = [
-        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
-        '/global/targetHttpProxies/' + TARGET_PROXY_NAME
+        'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
+        TARGET_PROXY_NAME
       ].join('');
 
       rule.getMetadata(function(err, metadata) {
@@ -873,7 +874,12 @@ describe('Compute', function() {
         assert.strictEqual(metadata.name, RULE_NAME);
         assert.strictEqual(metadata.IPProtocol, 'TCP');
         assert.strictEqual(metadata.portRange, '8080-8080');
+
+        // The projectId may have been replaced depending on how the system
+        // tests are being run, so let's not care about that.
+        metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
         assert.strictEqual(metadata.target, target);
+
         done();
       });
     });
@@ -889,7 +895,13 @@ describe('Compute', function() {
 
         rule.getMetadata(function(err, metadata) {
           assert.ifError(err);
+
+          // The projectId may have been replaced depending on how the system
+          // tests are being run, so let's not care about that.
+          target = target.replace(/projects\/[^/]*\//, '');
+          metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
           assert.strictEqual(metadata.target, target);
+
           done();
         });
       }));
@@ -944,6 +956,11 @@ describe('Compute', function() {
         assert.strictEqual(metadata.name, RULE_NAME);
         assert.strictEqual(metadata.IPProtocol, 'TCP');
         assert.strictEqual(metadata.portRange, '8000-9000');
+
+        // The projectId may have been replaced depending on how the system
+        // tests are being run, so let's not care about that.
+        target = target.replace(/projects\/[^/]*\//, '');
+        metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
         assert.strictEqual(metadata.target, target);
         done();
       });
@@ -1226,14 +1243,17 @@ describe('Compute', function() {
           assert.ifError(err);
 
           var expectedMachineType = [
-            'https://www.googleapis.com/compute/v1/projects',
-            env.projectId,
+            'https://www.googleapis.com/compute/v1',
             'zones',
             zone.id,
             'machineTypes',
             machineType
           ].join('/');
 
+          // The projectId may have been replaced depending on how the system
+          // tests are being run, so let's not care about that.
+          metadata.machineType =
+            metadata.machineType.replace(/projects\/[^/]*\//, '');
           assert.strictEqual(metadata.machineType, expectedMachineType);
 
           done();
@@ -1344,7 +1364,13 @@ describe('Compute', function() {
   });
 
   function generateName(customPrefix) {
-    return TESTS_PREFIX + customPrefix + '-' + Date.now();
+    return [
+      TESTS_PREFIX,
+      customPrefix + '-',
+      uuid.v4().replace('-', '')
+    ]
+    .join('')
+    .substr(0, 61);
   }
 
   function deleteAllTestObjects(callback) {
