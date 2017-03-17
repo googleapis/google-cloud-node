@@ -39,9 +39,8 @@ var is = require('is');
  * @param {object|string|module:storage/file} config - Configuration object, the
  *     inline content of the document, or a Storage File object.
  * @param {string|module:storage/file} options.content - If using `config` as an
- *     object to specify the encoding and/or language of the document, use this
- *     property to pass the inline content of the document or a Storage File
- *     object.
+ *     object to specify the language of the document, use this property to pass
+ *     the inline content of the document or a Storage File object.
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
