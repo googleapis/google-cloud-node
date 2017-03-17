@@ -24,7 +24,7 @@ var env = require('../../../system-test/env.js');
 var logging = require('@google-cloud/logging')(env);
 var loggingBunyan = require('../')(env);
 
-describe('LoggingBunyan', function() {
+describe.skip('LoggingBunyan', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 20000;
 
   var logger = bunyan.createLogger({
