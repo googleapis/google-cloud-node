@@ -687,12 +687,17 @@ util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
  * Wraps a callback style function to conditionally return a promise.
  *
  * @param {function} originalMethod - The method to promisify.
+ * @param {object=} options - Promise options.
+ * @param {boolean} options.singular - Resolve the promise with single arg
+ *     instead of an array.
  * @return {function} wrapped
  */
-function promisify(originalMethod) {
+function promisify(originalMethod, options) {
   if (originalMethod.promisified_) {
     return originalMethod;
   }
+
+  options = options || {};
 
   var slice = Array.prototype.slice;
 
@@ -723,7 +728,11 @@ function promisify(originalMethod) {
           return reject(err);
         }
 
-        resolve(callbackArgs);
+        if (options.singular && callbackArgs.length === 1) {
+          resolve(callbackArgs[0]);
+        } else {
+          resolve(callbackArgs);
+        }
       });
 
       originalMethod.apply(context, args);
@@ -758,7 +767,7 @@ function promisifyAll(Class, options) {
     var originalMethod = Class.prototype[methodName];
 
     if (!originalMethod.promisified_) {
-      Class.prototype[methodName] = util.promisify(originalMethod);
+      Class.prototype[methodName] = util.promisify(originalMethod, options);
     }
   });
 }

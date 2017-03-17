@@ -1578,6 +1578,25 @@ describe('common/util', function() {
       assert(FakeClass2.prototype.method.promisified_);
     });
 
+    it('should pass the options object to promsify', function(done) {
+      var promisify = util.promisify;
+      var fakeOptions = {
+        a: 'a'
+      };
+
+      util.promisify = function(method, options) {
+        assert.strictEqual(method, FakeClass2.prototype.method);
+        assert.strictEqual(options, fakeOptions);
+        util.promisify = promisify;
+        done();
+      };
+
+      function FakeClass2() {}
+      FakeClass2.prototype.method = function() {};
+
+      util.promisifyAll(FakeClass2, fakeOptions);
+    });
+
     it('should not re-promisify methods', function() {
       var method = FakeClass.prototype.methodName;
 
@@ -1642,6 +1661,20 @@ describe('common/util', function() {
       var promise = func.call({ Promise: FakePromise });
 
       assert(promise instanceof FakePromise);
+    });
+
+    it('should resolve singular arguments', function() {
+      var fakeArg = 'hi';
+
+      func = util.promisify(function(callback) {
+        callback.apply(this, [null, fakeArg]);
+      }, {
+        singular: true
+      });
+
+      return func().then(function(arg) {
+        assert.strictEqual(arg, fakeArg);
+      });
     });
   });
 });
