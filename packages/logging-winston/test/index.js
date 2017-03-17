@@ -180,7 +180,9 @@ describe('logging-winston', function() {
       };
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
-        assert.deepStrictEqual(data, { message: MESSAGE + ': ' + error.stack });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE + ' ' + error.stack
+        });
         done();
       };
 
@@ -194,7 +196,9 @@ describe('logging-winston', function() {
         };
 
         loggingWinston.log_.entry = function(entryMetadata, data) {
-          assert.deepStrictEqual(data, { message: error.stack });
+          assert.deepStrictEqual(data, {
+            message: ' ' + error.stack
+          });
           done();
         };
 

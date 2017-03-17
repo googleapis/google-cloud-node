@@ -185,7 +185,7 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   // provide serviceContext.service as part of the entry for Error Reporting to
   // automatically pick up the error.
   if (metadata && metadata.stack) {
-    msg += (msg ? ': ' : '') + metadata.stack;
+    msg += ' ' + metadata.stack;
   }
 
   var data = {
