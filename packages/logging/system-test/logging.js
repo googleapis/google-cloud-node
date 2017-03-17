@@ -21,7 +21,6 @@ var async = require('async');
 var BigQuery = require('@google-cloud/bigquery');
 var exec = require('methmeth');
 var extend = require('extend');
-var format = require('string-format-obj');
 var is = require('is');
 var prop = require('propprop');
 var PubSub = require('@google-cloud/pubsub');
@@ -137,11 +136,12 @@ describe('Logging', function() {
       }, function(err, sink, apiResponse) {
         assert.ifError(err);
 
-        var destination = format('{baseUrl}/projects/{pId}/datasets/{dId}', {
-          baseUrl: 'bigquery.googleapis.com',
-          pId: dataset.parent.projectId,
-          dId: dataset.id
-        });
+        var destination = 'bigquery.googleapis.com/datasets/' + dataset.id;
+
+        // The projectId may have been replaced depending on how the system
+        // tests are being run, so let's not care about that.
+        apiResponse.destination =
+          apiResponse.destination.replace(/projects\/[^/]*\//, '');
 
         assert.strictEqual(apiResponse.destination, destination);
 
@@ -158,7 +158,13 @@ describe('Logging', function() {
         assert.ifError(err);
 
         var destination = 'pubsub.googleapis.com/' + topic.name;
-        assert.strictEqual(apiResponse.destination, destination);
+
+        // The projectId may have been replaced depending on how the system
+        // tests are being run, so let's not care about that.
+        assert.strictEqual(
+          apiResponse.destination.replace(/projects\/[^/]*\//, ''),
+          destination.replace(/projects\/[^/]*\//, '')
+        );
 
         done();
       });

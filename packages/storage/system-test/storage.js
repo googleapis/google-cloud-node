@@ -1169,6 +1169,11 @@ describe('storage', function() {
     var file;
 
     before(function(done) {
+      if (!env.credentials && !env.keyFilename) {
+        this.skip();
+        return;
+      }
+
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
@@ -1211,6 +1216,11 @@ describe('storage', function() {
     var file;
 
     before(function(done) {
+      if (!env.credentials && !env.keyFilename) {
+        this.skip();
+        return;
+      }
+
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
@@ -1218,8 +1228,10 @@ describe('storage', function() {
         .on('finish', done.bind(null, null));
     });
 
-    after(function(done) {
-      file.delete(done);
+    beforeEach(function() {
+      if (!storage.projectId) {
+        this.skip();
+      }
     });
 
     it('should create a policy', function(done) {

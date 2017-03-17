@@ -507,7 +507,7 @@ describe('BigQuery', function() {
         };
 
         var improperData = {
-          name: 11
+          name: true
         };
 
         table.insert([data, improperData], function(err) {
@@ -516,7 +516,7 @@ describe('BigQuery', function() {
           assert.deepEqual(err.errors[0], {
             errors: [
               {
-                message: 'Conversion from int64 to string is unsupported.',
+                message: 'Conversion from bool to string is unsupported.',
                 reason: 'invalid'
               }
             ],
@@ -526,7 +526,7 @@ describe('BigQuery', function() {
           assert.deepEqual(err.errors[1], {
             errors: [
               {
-                message: undefined,
+                message: '',
                 reason: 'stopped'
               }
             ],

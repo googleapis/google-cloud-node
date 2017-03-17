@@ -30,7 +30,7 @@ var Spanner = require('../');
 var PREFIX = 'gcloud-tests-';
 var spanner = new Spanner(env);
 
-describe('Spanner', function() {
+(env.projectId ? describe : describe.skip)('Spanner', function() {
   var instance = spanner.instance(generateName('instance'));
 
   before(function(done) {
