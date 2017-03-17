@@ -189,8 +189,7 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, error, assert.ifError);
     });
 
-    it('should append stack when metadata is err with empty message',
-      function(done) {
+    it('should use stack when metadata is err without message', function(done) {
         var error = {
           stack: 'the stack'
         };
