@@ -120,8 +120,14 @@ var fakeBunyan = function() {
   };
 };
 
-// For {module:storage} docs.
-var fakeRequest = function() {};
+// For various docs.
+var fakeRequest = function() {
+  return {
+    get: function() {
+      return new require('stream').PassThrough();
+    }
+  };
+};
 
 // For {module:logging-winston} docs.
 var fakeWinston = function() {
