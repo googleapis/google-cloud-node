@@ -155,8 +155,8 @@ describe('logging-bunyan', function() {
     });
 
     it('should rename the msg property to message', function(done) {
-      var recordWithMsg = { msg: 'msg' };
-      var recordWithMessage = { message: 'msg' };
+      var recordWithMsg = extend({ msg: 'msg' }, RECORD);
+      var recordWithMessage = extend({ message: 'msg' }, RECORD);
 
       loggingBunyan.log_.entry = function(entryMetadata, record) {
         assert.deepStrictEqual(record, recordWithMessage);
@@ -167,19 +167,19 @@ describe('logging-bunyan', function() {
     });
 
     it('should inject the error stack as the message', function(done) {
-      var record = {
+      var record = extend({
         msg: 'msg',
         err: {
           stack: 'the stack'
         }
-      };
-      var expectedRecord = {
+      }, RECORD);
+      var expectedRecord = extend({
         msg: 'msg',
         err: {
           stack: 'the stack'
         },
         message: 'the stack'
-      };
+      }, RECORD);
 
       loggingBunyan.log_.entry = function(entryMetadata, record_) {
         assert.deepStrictEqual(record_, expectedRecord);
@@ -190,13 +190,13 @@ describe('logging-bunyan', function() {
     });
 
     it('should leave message property intact when present', function(done) {
-      var record = {
+      var record = extend({
         msg: 'msg',
         message: 'message',
         err: {
           stack: 'the stack'
         }
-      };
+      }, RECORD);
 
       loggingBunyan.log_.entry = function(entryMetadata, record_) {
         assert.deepStrictEqual(record_, record);
