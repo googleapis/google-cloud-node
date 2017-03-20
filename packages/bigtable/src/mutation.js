@@ -110,11 +110,11 @@ Mutation.createTimeRange = function(start, end) {
   var range = {};
 
   if (is.date(start)) {
-    range.startTimestampMicros = start.getTime();
+    range.startTimestampMicros = start.getTime() * 1000;
   }
 
   if (is.date(end)) {
-    range.endTimestampMicros = end.getTime();
+    range.endTimestampMicros = end.getTime() * 1000;
   }
 
   return range;
