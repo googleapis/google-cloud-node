@@ -20,6 +20,7 @@
 
 'use strict';
 
+var extend = require('extend');
 var logging = require('@google-cloud/logging');
 
 /**
@@ -131,6 +132,30 @@ LoggingBunyan.prototype.write = function(record) {
     throw new Error(
       '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
     );
+  }
+
+  // Stackdriver Log Viewer picks up the summary line from the 'message' field
+  // of the payload. Unless the user has provided a 'message' property also,
+  // move the 'msg' to 'message'.
+  if (!record.message) {
+    // Clone the object before modifying it.
+    record = extend({}, record);
+
+    // If this is an error, report the full stack trace. This allows Stackdriver
+    // Error Reporting to pick up errors automatically (for severity 'error' or
+    // higher). In this case we leave the 'msg' property intact.
+    // https://cloud.google.com/error-reporting/docs/formatting-error-messages
+    //
+    // TODO(ofrobots): when resource.type is 'global' we need to additionally
+    // provide serviceContext.service as part of the entry for Error Reporting
+    // to automatically pick up the error.
+    if (record.err && record.err.stack) {
+      record.message = record.err.stack;
+    } else if (record.msg) {
+      // Simply rename `msg` to `message`.
+      record.message = record.msg;
+      delete record.msg;
+    }
   }
 
   var level = BUNYAN_TO_STACKDRIVER[record.level];
