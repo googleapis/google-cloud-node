@@ -44,8 +44,9 @@ describe.skip('LoggingBunyan', function() {
         args: [
           'first'
         ],
+        level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data.msg, 'first');
+          assert.strictEqual(entry.data.message, 'first');
           assert.strictEqual(entry.data.pid, process.pid);
         }
       },
@@ -54,9 +55,11 @@ describe.skip('LoggingBunyan', function() {
         args: [
           new Error('second')
         ],
+        level: 'error',
         verify: function(entry) {
           assert.strictEqual(entry.data.msg, 'second');
           assert.strictEqual(entry.data.pid, process.pid);
+          assert.ok(entry.data.message.startsWith('Error: second'));
         }
       },
 
@@ -84,8 +87,9 @@ describe.skip('LoggingBunyan', function() {
         },
         'earliest'
       ],
+      level: 'info',
       verify: function(entry) {
-        assert.strictEqual(entry.data.msg, 'earliest');
+        assert.strictEqual(entry.data.message, 'earliest');
         assert.strictEqual(entry.data.pid, process.pid);
         assert.strictEqual(
           entry.metadata.timestamp.toString(),
@@ -98,11 +102,11 @@ describe.skip('LoggingBunyan', function() {
     // earlier timestamp.
     setTimeout(function() {
       testData.forEach(function(test) {
-        logger.info.apply(logger, test.args);
+        logger[test.level].apply(logger, test.args);
       });
 
       // `earliest` is sent last, but it should show up as the earliest entry.
-      logger.info.apply(logger, earliest.args);
+      logger[earliest.level].apply(logger, earliest.args);
 
       // insert into list as the earliest entry.
       testData.unshift(earliest);

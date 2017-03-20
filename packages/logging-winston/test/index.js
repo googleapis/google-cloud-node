@@ -158,7 +158,7 @@ describe('logging-winston', function() {
     });
 
     it('should properly create an entry', function(done) {
-      loggingWinston.log_.entry = function(entryMetadata, message) {
+      loggingWinston.log_.entry = function(entryMetadata, data) {
         var expectedLabels = {};
         for (var prop in METADATA) {
           expectedLabels[prop] = nodeutil.inspect(METADATA[prop]);
@@ -167,20 +167,50 @@ describe('logging-winston', function() {
           resource: loggingWinston.resource_,
           labels: expectedLabels
         });
-        assert.strictEqual(message, MESSAGE);
+        assert.deepStrictEqual(data, { message: MESSAGE });
         done();
       };
 
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
+    it('should append stack when metadata is an error', function(done) {
+      var error = {
+        stack: 'the stack'
+      };
+
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(data, {
+          message: MESSAGE + ' ' + error.stack
+        });
+        done();
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, error, assert.ifError);
+    });
+
+    it('should use stack when metadata is err without message', function(done) {
+        var error = {
+          stack: 'the stack'
+        };
+
+        loggingWinston.log_.entry = function(entryMetadata, data) {
+          assert.deepStrictEqual(data, {
+            message: error.stack
+          });
+          done();
+        };
+
+        loggingWinston.log(LEVEL, '', error, assert.ifError);
+      });
+
     it('should not require metadata', function(done) {
-      loggingWinston.log_.entry = function(entryMetadata, message) {
+      loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepEqual(entryMetadata, {
           resource: loggingWinston.resource_,
           labels: {}
         });
-        assert.strictEqual(message, MESSAGE);
+        assert.deepStrictEqual(data, { message: MESSAGE });
         done();
       };
 

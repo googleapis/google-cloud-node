@@ -156,9 +156,9 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
 
   var labels = {};
 
-  // Logging proto requires that the label values be strings, so we convert
-  // using util.inspect.
   if (is.object(metadata)) {
+    // We attach properties as labels on the log entry. Logging proto requires
+    // that the label values be strings, so we convert using util.inspect.
     for (var key in metadata) {
       labels[key] = util.inspect(metadata[key]);
     }
@@ -169,7 +169,29 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     labels: labels
   };
 
-  var entry = this.log_.entry(entryMetadata, msg);
+  // Stackdriver Logs Viewer picks up the summary line from the `message`
+  // property of the jsonPayload.
+  // https://cloud.google.com/logging/docs/view/logs_viewer_v2#expanding.
+  //
+  // For error messages at severity 'error' and higher, Stackdriver
+  // Error Reporting will pick up error messages if the full stack trace is
+  // included in the textPayload or the message property of the jsonPayload.
+  // https://cloud.google.com/error-reporting/docs/formatting-error-messages
+  // We prefer to format messages as jsonPayload (by putting it as a message
+  // property on an object) as that works is accepted by Error Reporting in
+  // for more resource types.
+  //
+  // TODO(ofrobots): when resource.type is 'global' we need to additionally
+  // provide serviceContext.service as part of the entry for Error Reporting to
+  // automatically pick up the error.
+  if (metadata && metadata.stack) {
+    msg += (msg ? ' ' : '') + metadata.stack;
+  }
+
+  var data = {
+    message: msg
+  };
+  var entry = this.log_.entry(entryMetadata, data);
   this.log_[stackdriverLevel](entry, callback);
 };
 
