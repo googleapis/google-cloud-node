@@ -1,9 +1,9 @@
 {
-  "name": "@google/cloud-errors",
+  "name": "@google-cloud/error-reporting",
   "version": "0.1.0",
-  "description": "Node.js module for Google Stackdriver Error Reporting",
+  "description": "Stackdriver Error Reporting Client Library for Node.js",
   "main": "index.js",
-  "repository": "GoogleCloudPlatform/cloud-errors-nodejs",
+  "repository": "GoogleCloudPlatform/google-cloud-node",
   "scripts": {
     "test": "$(npm bin)/nyc --exclude=\"fuzzer.js\" $(npm bin)/mocha ./test/unit/*.js",
     "integration-tests": "$(npm bin)/nyc --exclude=\"error-message.js\" $(npm bin)/mocha ./test/system-test/*.js",
@@ -48,5 +48,8 @@
     "exclude": [
       "./utils/fuzzer.js"
     ]
+  },
+  "engines": {
+    "node": ">=4.0"
   }
 }
