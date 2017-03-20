@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var async = require('async');
 var util = require('util');
 var winston = require('winston');
 
@@ -41,61 +40,73 @@ describe('LoggingWinston', function() {
     var testData = [
       {
         args: ['first'],
+        level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'first');
+          assert.deepStrictEqual(entry.data, {message: 'first'});
         }
       },
 
       {
         args: ['second'],
+        level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'second');
+          assert.deepStrictEqual(entry.data, {message: 'second'});
         }
       },
 
       {
-        args: [
-          'third',
-          {
-            testTimestamp: testTimestamp
-          }
-        ],
+        args: ['third', {testTimestamp: testTimestamp}],
+        level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data, 'third');
+          assert.deepStrictEqual(entry.data, {message: 'third'});
 
           assert.strictEqual(
             entry.metadata.labels.testTimestamp,
             util.inspect(testTimestamp)
           );
         }
-      }
+      },
+
+      {
+        args: [new Error('forth')],
+        level: 'error',
+        verify: function(entry) {
+          assert(entry.data.message.startsWith('Error: forth'));
+        }
+      },
+
+      {
+        args: ['fifth message', new Error('fifth')],
+        level: 'error',
+        verify: function(entry) {
+          assert(entry.data.message.startsWith('fifth message Error: fifth'));
+        }
+      },
     ];
 
     it('should properly write log entries', function(done) {
-      async.each(testData, function(test, callback) {
-        logger.info.apply(logger, test.args.concat(callback));
-      }, function(err) {
-        assert.ifError(err);
-
-        setTimeout(function() {
-          logging.log('winston_log').getEntries({
-            pageSize: testData.length
-          }, function(err, entries) {
-            assert.ifError(err);
-
-            assert.strictEqual(entries.length, testData.length);
-
-            entries
-              .reverse()
-              .forEach(function(entry, index) {
-                var test = testData[index];
-                test.verify(entry);
-              });
-
-            done();
-          });
-        }, WRITE_CONSISTENCY_DELAY_MS);
+      testData.forEach(function(test) {
+        logger[test.level].apply(logger, test.args);
       });
+
+      setTimeout(function() {
+        logging.log('winston_log').getEntries({
+          pageSize: testData.length
+        }, function(err, entries) {
+          assert.ifError(err);
+
+          assert.strictEqual(entries.length, testData.length);
+
+          entries
+            .reverse()
+            .forEach(function(entry, index) {
+              var test = testData[index];
+              test.verify(entry);
+            });
+
+          done();
+        });
+      }, WRITE_CONSISTENCY_DELAY_MS);
     });
   });
 });
