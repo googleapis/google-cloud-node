@@ -111,8 +111,8 @@ describe('Bigtable/Mutation', function() {
       var dateObj = new Date(timestamp);
       var range = Mutation.createTimeRange(dateObj, dateObj);
 
-      assert.strictEqual(range.startTimestampMicros, timestamp);
-      assert.strictEqual(range.endTimestampMicros, timestamp);
+      assert.strictEqual(range.startTimestampMicros, timestamp * 1000);
+      assert.strictEqual(range.endTimestampMicros, timestamp * 1000);
     });
   });
 
