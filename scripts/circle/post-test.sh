@@ -37,6 +37,8 @@ fi
 
 set +e # allows `git` commands during prepare-ghpages to fail
 
+git fetch origin
+
 npm run prepare-ghpages $TAGGED_MODULE_NAME $TAGGED_MODULE_VERSION
 
 cd gh-pages

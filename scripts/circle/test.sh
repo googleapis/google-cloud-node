@@ -25,7 +25,8 @@ rebuild () {
   done
 }
 
-if [ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ]
+if [ "${CIRCLE_BRANCH}" == "master" ] &&
+   ([ "${CI_PULL_REQUEST}" == "" ] || [ "${CIRCLE_TAG}" != "" ])
 then
   # This is a push to master, so system tests will be run.
   echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
