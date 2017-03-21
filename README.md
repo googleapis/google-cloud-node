@@ -37,8 +37,32 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 
 ## Quick Start
 
+We recommend installing the individual packages that you need, which are
+provided under the `@google-cloud` namespace. For example:
+
+```sh
+$ npm install --save @google-cloud/datastore
+$ npm install --save @google-cloud/storage
+```
+
+#### The google-cloud meta-package
+
+We also provide a meta-package, `google-cloud`, which provides all of the
+individual APIs. However, in order to keep file size and memory use low, the
+use of this package is not recommended.
+
+If you want the kitchen sink, however, get it with:
+
 ```sh
 $ npm install --save google-cloud
+```
+
+If you use the meta-package, then the individual packages are available
+on the namespace of the required meta-package module:
+
+```javascript
+var datastore = require('google-cloud').datastore;
+var storage = require('google-cloud').storage;
 ```
 
 
@@ -124,16 +148,6 @@ You can also set auth on a per-API-instance basis. The examples below show you h
 - [API Documentation][gcloud-bigquery-docs]
 - [Official Documentation][cloud-bigquery-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var bigquery = gcloud.bigquery;
-```
 
 #### Using the BigQuery API module
 
@@ -180,17 +194,6 @@ job.getQueryResults().on('data', function(row) {});
 - [Official Documentation][cloud-datastore-docs]
 
 *Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var datastore = gcloud.datastore;
-```
 
 #### Using the Cloud Datastore API module
 
@@ -253,17 +256,6 @@ datastoreClient.save({
 - [API Documentation][gcloud-storage-docs]
 - [Official Documentation][cloud-storage-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var storage = gcloud.storage;
-```
-
 #### Using the Cloud Storage API module
 
 ```
@@ -325,17 +317,6 @@ localReadStream.pipe(remoteWriteStream);
 - [API Documentation][gcloud-logging-docs]
 - [Official Documentation][cloud-logging-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var logging = gcloud.logging;
-```
-
 #### Using the Google Stackdriver Logging API module
 
 ```
@@ -396,17 +377,6 @@ loggingClient.getEntries(function(err, entries) {
 
 - [API Documentation][gcloud-vision-docs]
 - [Official Documentation][cloud-vision-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var vision = gcloud.vision;
-```
 
 #### Using the Cloud Vision API module
 
@@ -528,16 +498,6 @@ visionClient.detectFaces('./image.jpg', function(err, faces) {
 
 *You may need to [create a cluster][cloud-bigtable-cluster] to use the Cloud Bigtable API with your project.*
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var bigtable = gcloud.bigtable;
-```
 
 #### Using the Cloud Bigtable API module
 
@@ -597,17 +557,6 @@ row.save('follows:gwashington', 1, function(err) {
 - [API Documentation][gcloud-dns-docs]
 - [Official Documentation][cloud-dns-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var dns = gcloud.dns;
-```
-
 #### Using the Cloud DNS API module
 
 ```
@@ -655,17 +604,6 @@ zone.export('/zonefile.zone', function(err) {});
 
 - [API Documentation][gcloud-language-docs]
 - [Official Documentation][cloud-language-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var language = gcloud.language;
-```
 
 #### Using the Natural Language API module
 
@@ -738,17 +676,6 @@ document.annotate(function(err, annotations) {
 - [API Documentation][gcloud-pubsub-docs]
 - [Official Documentation][cloud-pubsub-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var pubsub = gcloud.pubsub;
-```
-
 #### Using the Cloud Pub/Sub API module
 
 ```
@@ -796,17 +723,6 @@ topic.subscribe('subscription-name', function(err, subscription) {
 - [API Documentation][gcloud-resource-docs]
 - [Official Documentation][cloud-resource-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var resource = gcloud.resource;
-```
-
 #### Using the Cloud Resource Manager API module
 
 ```
@@ -848,17 +764,6 @@ project.getMetadata(function(err, metadata) {
 
 - [API Documentation][gcloud-spanner-docs]
 - [Official Documentation][cloud-spanner-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var spanner = gcloud.spanner;
-```
 
 #### Using the Cloud Spanner API module
 
@@ -940,17 +845,6 @@ database.runStream('SELECT * FROM Singers')
 - [API Documentation][gcloud-speech-docs]
 - [Official Documentation][cloud-speech-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var speech = gcloud.speech;
-```
-
 #### Using the Cloud Speech API module
 
 ```
@@ -1023,17 +917,6 @@ fs.createReadStream('./audio.raw')
 - [API Documentation][gcloud-translate-docs]
 - [Official Documentation][cloud-translate-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var translate = gcloud.translate;
-```
-
 #### Using the Google Translate API module
 
 ```
@@ -1092,17 +975,6 @@ translateClient.getLanguages(function(err, languages) {
 - [API Documentation][gcloud-compute-docs]
 - [Official Documentation][cloud-compute-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var compute = gcloud.compute;
-```
-
 #### Using the Compute Engine API module
 
 ```
@@ -1145,17 +1017,6 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 
 - [API Documentation][gcloud-prediction-docs]
 - [Official Documentation][cloud-prediction-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var prediction = gcloud.prediction;
-```
 
 #### Using the Prediction API module
 
@@ -1219,17 +1080,6 @@ It does not follow the conventions you're familiar with from other parts of our 
 The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
 
 - [Official Documentation][cloud-monitoring-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var monitoring = gcloud.monitoring;
-```
 
 #### Using the Google Stackdriver Monitoring API module
 
