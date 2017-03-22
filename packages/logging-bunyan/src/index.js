@@ -22,6 +22,8 @@
 
 var extend = require('extend');
 var logging = require('@google-cloud/logging');
+var util = require('util');
+var Writable = require('stream').Writable;
 
 /**
  * Map of Stackdriver logging levels.
@@ -95,7 +97,12 @@ function LoggingBunyan(options) {
   this.log_ = logging(options).log(this.logName_, {
     removeCircular: true
   });
+
+  Writable.call(this, {
+    objectMode: true
+  });
 }
+util.inherits(LoggingBunyan, Writable);
 
 /**
  * Convenience method that Builds a bunyan stream object that you can put in
@@ -121,13 +128,13 @@ LoggingBunyan.prototype.stream = function(level) {
 };
 
 /**
- * Relay a log entry to the logging agent. This is normally called by bunyan.
+ * Format a bunyan record into a Stackdriver log entry.
  *
  * @param {object} record - Bunyan log record.
  *
  * @private
  */
-LoggingBunyan.prototype.write = function(record) {
+LoggingBunyan.prototype.formatEntry_ = function(record) {
   if (typeof record === 'string') {
     throw new Error(
       '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
@@ -158,19 +165,29 @@ LoggingBunyan.prototype.write = function(record) {
     }
   }
 
-  var level = BUNYAN_TO_STACKDRIVER[record.level];
-
   var entryMetadata = {
     resource: this.resource_,
     timestamp: record.time
   };
 
-  var entry = this.log_.entry(entryMetadata, record);
-
-  this.log_[level](entry, function() {
-    // no-op to avoid a promise being returned.
-  });
+  return this.log_.entry(entryMetadata, record);
 };
+
+/**
+ * Relay a log entry to the logging agent. This is called by bunyan through
+ * Writable#write.
+ *
+ * @param {object} record - Bunyan log record.
+ *
+ * @private
+ */
+LoggingBunyan.prototype._write = function(record, encoding, callback) {
+  var entry = this.formatEntry_(record);
+  var level = BUNYAN_TO_STACKDRIVER[record.level];
+  this.log_[level](entry, callback);
+};
+
+// TODO(ofrobots): implement _writev as well.
 
 module.exports = LoggingBunyan;
 module.exports.BUNYAN_TO_STACKDRIVER = BUNYAN_TO_STACKDRIVER;
