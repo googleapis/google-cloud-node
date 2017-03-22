@@ -24,7 +24,7 @@ var env = require('../../../system-test/env.js');
 var logging = require('@google-cloud/logging')(env);
 var loggingBunyan = require('../')(env);
 
-describe.skip('LoggingBunyan', function() {
+describe('LoggingBunyan', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 20000;
 
   var logger = bunyan.createLogger({
@@ -57,9 +57,8 @@ describe.skip('LoggingBunyan', function() {
         ],
         level: 'error',
         verify: function(entry) {
-          assert.strictEqual(entry.data.msg, 'second');
+          assert(entry.data.message.startsWith('Error: second'));
           assert.strictEqual(entry.data.pid, process.pid);
-          assert.ok(entry.data.message.startsWith('Error: second'));
         }
       },
 
@@ -70,8 +69,9 @@ describe.skip('LoggingBunyan', function() {
           },
           'third'
         ],
+        level: 'info',
         verify: function(entry) {
-          assert.strictEqual(entry.data.msg, 'third');
+          assert.strictEqual(entry.data.message, 'third');
           assert.strictEqual(entry.data.pid, process.pid);
           assert.deepStrictEqual(entry.data.test, {
             circular: '[Circular]'

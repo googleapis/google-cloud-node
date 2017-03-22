@@ -28,7 +28,7 @@
     "winston"
   ],
   "dependencies": {
-    "@google-cloud/logging": "^0.8.0",
+    "@google-cloud/logging": "^0.8.1",
     "extend": "^3.0.0"
   },
   "devDependencies": {
