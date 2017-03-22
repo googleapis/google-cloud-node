@@ -902,9 +902,7 @@ var spanner = new Spanner(env);
   });
 
   describe('Transactions', function() {
-    var database = instance.database(generateName('database'), {
-      max: 2
-    });
+    var database = instance.database(generateName('database'));
 
     var session = database.session_();
     var transaction = session.transaction();

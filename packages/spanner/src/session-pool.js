@@ -45,6 +45,8 @@ var util = require('util');
  *     at any given time. (Default: `0`)
  * @param {number} options.keepAlive - How often to ping idle sessions, in
  *     minutes. Must be less than 1 hour.
+ * @param {number} options.acquireTimeout - Time before giving up trying to
+ *     acquire a session.
  * @param {number} options.writes - Pre-allocate transactions for the number of
  *     sessions specified.
  */
@@ -58,6 +60,9 @@ function SessionPool(database, options) {
   this.database = database;
   this.maxIdle = options.maxIdle || 1;
   this.fail = !!options.fail;
+
+  this.pendingAcquires = [];
+  this.acquireTimeout = options.acquireTimeout || 0;
 
   var poolOptions = SessionPool.getPoolOptions_(options);
   var writePoolOptions;
@@ -141,7 +146,7 @@ SessionPool.getPoolOptions_ = function(userOptions) {
   var poolOptions = {
     idleTimeoutMillis: 59 * 60000,
     testOnBorrow: true,
-    max: userOptions.max || 1,
+    max: userOptions.max || Number.MAX_SAFE_INTEGER,
     min: userOptions.min || 0,
     numTestsPerRun: Infinity
   };
@@ -489,9 +494,53 @@ SessionPool.prototype.getNextAvailableSession_ = function(options, callback) {
     return;
   }
 
-  this.once('available', function() {
-    self.getNextAvailableSession_(options, callback);
+  this.pollForSession_(callback);
+};
+
+/**
+ *
+ */
+SessionPool.prototype.pollForSession_ = function(callback) {
+  this.pendingAcquires.push({
+    callback: callback,
+    timeout: this.acquireTimeout
   });
+
+  if (this.acquireInterval) {
+    return;
+  }
+
+  var self = this;
+  var intervalSpeed = 30000;
+
+  this.acquireInterval = setInterval(checkForSession, intervalSpeed);
+
+  function checkForSession() {
+    var hasFreeSession = self.pool.free ||
+      self.writePool && self.writePool.free;
+
+    if (hasFreeSession) {
+      self.getNextAvailableSession_(self.pendingAcquires.shift().callback);
+    }
+
+    if (!self.pendingAcquires.length) {
+      clearInterval(self.acquireInterval);
+      self.acquireInterval = null;
+    } else if (self.acquireTimeout) {
+      var err = new Error('Unable to acquire Session, timeout occured.');
+      var acquire;
+
+      for (var i = self.pendingAcquires.length - 1; i > -1; i--) {
+        acquire = self.pendingAcquires[i];
+        acquire.timeout -= intervalSpeed;
+
+        if (acquire.timeout < 0) {
+          acquire.callback(err);
+          self.pendingAcquires.splice(i, 1);
+        }
+      }
+    }
+  }
 };
 
 /**
