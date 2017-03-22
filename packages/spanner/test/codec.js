@@ -53,6 +53,12 @@ describe('codec', function() {
       var spannerDate = new codec.SpannerDate(date);
       assert.strictEqual(spannerDate.value, date.toJSON().replace(/T.+/, ''));
     });
+
+    it('should choke on an integer', function() {
+      assert.throws(function() {
+        new codec.SpannerDate(2017);
+      }, /The spanner\.date function accepts a Date object,/);
+    });
   });
 
   describe('Float', function() {
