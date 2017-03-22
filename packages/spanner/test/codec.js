@@ -54,9 +54,9 @@ describe('codec', function() {
       assert.strictEqual(spannerDate.value, date.toJSON().replace(/T.+/, ''));
     });
 
-    it('should choke on an integer', function() {
+    it('should choke on multiple arguments', function() {
       assert.throws(function() {
-        new codec.SpannerDate(2017);
+        new codec.SpannerDate(2012, 3, 21);
       }, /The spanner\.date function accepts a Date object,/);
     });
   });
