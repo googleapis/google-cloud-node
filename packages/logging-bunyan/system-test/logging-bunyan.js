@@ -25,7 +25,7 @@ var logging = require('@google-cloud/logging')(env);
 var loggingBunyan = require('../')(env);
 
 describe('LoggingBunyan', function() {
-  var WRITE_CONSISTENCY_DELAY_MS = 20000;
+  var WRITE_CONSISTENCY_DELAY_MS = 90000;
 
   var logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
