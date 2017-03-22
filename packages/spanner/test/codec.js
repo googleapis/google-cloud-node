@@ -43,6 +43,17 @@ describe('codec', function() {
   });
 
   describe('SpannerDate', function() {
+    it('should choke on multiple arguments', function() {
+      var expectedErrorMessage = [
+        'The spanner.date function accepts a Date object or a',
+        'single argument parseable by Date\'s constructor.'
+      ].join(' ');
+
+      assert.throws(function() {
+        new codec.SpannerDate(2012, 3, 21);
+      }, new RegExp(expectedErrorMessage));
+    });
+
     it('should create an instance from a string', function() {
       var spannerDate = new codec.SpannerDate('08-20-1969');
       assert.strictEqual(spannerDate.value, '1969-08-20');
@@ -52,12 +63,6 @@ describe('codec', function() {
       var date = new Date();
       var spannerDate = new codec.SpannerDate(date);
       assert.strictEqual(spannerDate.value, date.toJSON().replace(/T.+/, ''));
-    });
-
-    it('should choke on multiple arguments', function() {
-      assert.throws(function() {
-        new codec.SpannerDate(2012, 3, 21);
-      }, /The spanner\.date function accepts a Date object,/);
     });
   });
 
