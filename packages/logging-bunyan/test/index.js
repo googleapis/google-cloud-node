@@ -38,16 +38,16 @@ describe('logging-bunyan', function() {
     };
   }
 
-  function fakeWritable(options) {
+  function FakeWritable(options) {
     fakeWritableOptions_ = options;
   }
 
-  fakeWritable.prototype.write = function(chunk, encoding, callback) {
+  FakeWritable.prototype.write = function(chunk, encoding, callback) {
     setImmediate(callback);
   };
 
   var fakeStream = {
-    Writable: fakeWritable
+    Writable: FakeWritable
   };
 
   var LoggingBunyanCached;
@@ -90,7 +90,7 @@ describe('logging-bunyan', function() {
     });
 
     it('should be an object mode Writable', function() {
-      assert(loggingBunyan instanceof fakeWritable);
+      assert(loggingBunyan instanceof FakeWritable);
       assert.deepStrictEqual(fakeWritableOptions_, { objectMode: true });
     });
 
@@ -126,11 +126,11 @@ describe('logging-bunyan', function() {
     });
   });
 
-  describe('_formatEntry', function() {
+  describe('formatEntry_', function() {
 
     it('should throw an error if record is a string', function() {
       assert.throws(function() {
-        loggingBunyan._formatEntry('string record');
+        loggingBunyan.formatEntry_('string record');
       }, new RegExp(
         '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
       ));
@@ -146,7 +146,7 @@ describe('logging-bunyan', function() {
         done();
       };
 
-      loggingBunyan._formatEntry(RECORD);
+      loggingBunyan.formatEntry_(RECORD);
     });
 
     it('should rename the msg property to message', function(done) {
@@ -158,7 +158,7 @@ describe('logging-bunyan', function() {
         done();
       };
 
-      loggingBunyan._formatEntry(recordWithMsg);
+      loggingBunyan.formatEntry_(recordWithMsg);
     });
 
     it('should inject the error stack as the message', function(done) {
@@ -181,7 +181,7 @@ describe('logging-bunyan', function() {
         done();
       };
 
-      loggingBunyan._formatEntry(record);
+      loggingBunyan.formatEntry_(record);
     });
 
     it('should leave message property intact when present', function(done) {
@@ -198,7 +198,7 @@ describe('logging-bunyan', function() {
         done();
       };
 
-      loggingBunyan._formatEntry(record);
+      loggingBunyan.formatEntry_(record);
     });
   });
 
@@ -211,7 +211,7 @@ describe('logging-bunyan', function() {
     });
 
     it('should format the record', function(done) {
-      loggingBunyan._formatEntry = function(record) {
+      loggingBunyan.formatEntry_ = function(record) {
         assert.strictEqual(record, RECORD);
         done();
       };
@@ -229,15 +229,14 @@ describe('logging-bunyan', function() {
 
       LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level] = customLevel;
 
-      loggingBunyan.log_[customLevel] = function(entry_) {
+      loggingBunyan.log_[customLevel] = function(entry_, callback) {
         assert.strictEqual(entry_, entry);
-        done();
+        callback(); // done()
       };
 
-      loggingBunyan._write(RECORD, '', assert.ifError);
+      loggingBunyan._write(RECORD, '', done);
     });
   });
-
 
   describe('BUNYAN_TO_STACKDRIVER', function() {
     it('should correctly map to Stackdriver Logging levels', function() {

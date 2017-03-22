@@ -130,11 +130,11 @@ LoggingBunyan.prototype.stream = function(level) {
 /**
  * Format a bunyan record into a Stackdriver log entry.
  *
- * @param {object} - Bunyan log record.
+ * @param {object} record - Bunyan log record.
  *
  * @private
  */
-LoggingBunyan.prototype._formatEntry = function(record) {
+LoggingBunyan.prototype.formatEntry_ = function(record) {
   if (typeof record === 'string') {
     throw new Error(
       '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
@@ -182,7 +182,7 @@ LoggingBunyan.prototype._formatEntry = function(record) {
  * @private
  */
 LoggingBunyan.prototype._write = function(record, encoding, callback) {
-  var entry = this._formatEntry(record);
+  var entry = this.formatEntry_(record);
   var level = BUNYAN_TO_STACKDRIVER[record.level];
   this.log_[level](entry, callback);
 };
