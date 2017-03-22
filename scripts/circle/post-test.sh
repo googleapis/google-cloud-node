@@ -26,13 +26,19 @@ fi
 
 # For a tagged build, we will build the docs for the associated module.
 # Otherwise, it will build for master.
-export TAGGED_MODULE_NAME=${CIRCLE_TAG/-*}
+export TAGGED_MODULE_NAME=$(node -p "process.env.CIRCLE_TAG.replace(/-\d.*/, '')")
 export TAGGED_MODULE_VERSION=${CIRCLE_TAG/*-}
 
 if [ "${CIRCLE_TAG:0:1}" == "v" ]
 then
   export TAGGED_MODULE_NAME="google-cloud"
   export TAGGED_MODULE_VERSION=${CIRCLE_TAG:1}
+fi
+
+if [ "${TAGGED_MODULE_NAME:0:6}" == "common" ]
+then
+  echo "This module does not require documentation to be built."
+  exit 0
 fi
 
 set +e # allows `git` commands during prepare-ghpages to fail
