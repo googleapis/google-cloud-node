@@ -26,6 +26,13 @@ var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
 
 function SpannerDate(value) {
+  if (arguments.length > 1) {
+    throw new TypeError([
+      'The spanner.date function accepts a Date object or a',
+      'single argument parseable by Date\'s constructor.'
+    ].join(' '));
+  }
+
   if (is.undefined(value)) {
     value = new Date();
   }
