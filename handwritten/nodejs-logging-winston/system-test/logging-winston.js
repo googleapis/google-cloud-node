@@ -26,7 +26,7 @@ var logging = require('@google-cloud/logging')(env);
 var LoggingWinston = require('../');
 
 describe('LoggingWinston', function() {
-  var WRITE_CONSISTENCY_DELAY_MS = 20000;
+  var WRITE_CONSISTENCY_DELAY_MS = 90000;
 
   var logger = new winston.Logger({
     transports: [
