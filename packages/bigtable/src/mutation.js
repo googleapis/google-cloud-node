@@ -169,7 +169,7 @@ Mutation.encodeSetCell = function(data) {
       var timestamp = cell.timestamp;
 
       if (is.date(timestamp)) {
-        timestamp = timestamp.getTime();
+        timestamp = timestamp.getTime() * 1000;
       }
 
       var setCell = {
