@@ -67,21 +67,14 @@ var Metadata = require('./metadata.js');
 function Log(logging, name, options) {
   options = options || {};
 
-  this.api = logging.api;
-
   this.formattedName_ = Log.formatName_(logging.projectId, name);
-  this.name = this.formattedName_.split('/').pop();
-  this.removeCircular_ = !!options.removeCircular;
-
+  this.removeCircular_ = options.removeCircular === true;
   this.metadata_ = new Metadata(logging);
 
-  commonGrpc.ServiceObject.call(this, {
-    parent: logging,
-    id: this.name
-  });
+  this.api = logging.api;
+  this.logging = logging;
+  this.name = this.formattedName_.split('/').pop();
 }
-
-util.inherits(Log, commonGrpc.ServiceObject);
 
 /**
  * Return an array of log entries with the desired severity assigned.
@@ -310,7 +303,7 @@ Log.prototype.entry = function(metadata, data) {
     logName: this.formattedName_
   });
 
-  return this.parent.entry(metadata, data);
+  return this.logging.entry(metadata, data);
 };
 
 /**
@@ -400,7 +393,7 @@ Log.prototype.getEntries = function(options, callback) {
     filter: 'logName="' + this.formattedName_ + '"'
   }, options);
 
-  return this.parent.getEntries(options, callback);
+  return this.logging.getEntries(options, callback);
 };
 
 /**
@@ -436,7 +429,7 @@ Log.prototype.getEntriesStream = function(options) {
     filter: 'logName="' + this.formattedName_ + '"'
   }, options);
 
-  return this.parent.getEntriesStream(options);
+  return this.logging.getEntriesStream(options);
 };
 
 /**
