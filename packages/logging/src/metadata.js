@@ -35,7 +35,7 @@
  * @param {module:logging} logging - The parent Logging instance.
  */
 function Metadata(logging) {
-  this.logging_ = logging;
+  this.logging = logging;
 }
 
 /**
@@ -157,13 +157,13 @@ Metadata.prototype.assignDefaultResource = function(entryJson, callback) {
 Metadata.prototype.getDefaultResource = function(callback) {
   var self = this;
 
-  this.getProjectId(function(err, projectId) {
+  this.logging.auth.getProjectId(function(err, projectId) {
     if (err) {
       callback(err);
       return;
     }
 
-    self.logging_.authClient.getEnvironment(function(err, env) {
+    self.logging.auth.getEnvironment(function(err, env) {
       var defaultResource;
 
       if (env.IS_APP_ENGINE) {
@@ -181,28 +181,6 @@ Metadata.prototype.getDefaultResource = function(callback) {
       callback(null, defaultResource);
     });
   });
-};
-
-/**
- * Attempt to retrieve the project ID from the auth client.
- *
- * @param {function} callback - The callback function.
- */
-Metadata.prototype.getProjectId = function(callback) {
-  if (global.GCLOUD_SANDBOX_ENV) {
-    return;
-  }
-
-  var self = this;
-
-  if (this.logging_.projectId) {
-    setImmediate(function() {
-      callback(null, self.logging_.projectId);
-    });
-    return;
-  }
-
-  this.logging_.authClient.getProjectId(callback);
 };
 
 module.exports = Metadata;

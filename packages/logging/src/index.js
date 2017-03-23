@@ -22,15 +22,13 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
-var googleProtoFiles = require('google-proto-files');
+var googleAuth = require('google-auto-auth');
 var is = require('is');
 var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
 var through = require('through2');
-var util = require('util');
 
 var v2 = require('./v2');
 
@@ -71,30 +69,13 @@ function Logging(options) {
     return new Logging(options);
   }
 
-  this.api = {
-    Config: v2(options).configServiceV2Client(options),
-    Logging: v2(options).loggingServiceV2Client(options)
-  };
+  options.scopes = v2.ALL_SCOPES;
 
-  var config = {
-    baseUrl: 'logging.googleapis.com',
-    service: 'logging',
-    apiVersion: 'v2',
-    protoServices: {
-      ConfigServiceV2:
-        googleProtoFiles('logging', 'v2', 'logging_config.proto'),
-      LoggingServiceV2: googleProtoFiles.logging.v2
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
-  };
-
-  commonGrpc.Service.call(this, config, options);
+  this.api = {};
+  this.auth = googleAuth(options);
+  this.options = options;
+  this.projectId = options.projectId || '{{projectId}}';
 }
-
-util.inherits(Logging, commonGrpc.Service);
 
 // jscs:disable maximumLineLength
 /**
@@ -174,7 +155,7 @@ Logging.prototype.createSink = function(name, config, callback) {
   }
 
   var gaxOptions = extend({
-    timeout: 5000 // "Deadline Exceeded" errors without.
+    timeout: 1000 // "Deadline Exceeded" errors without.
   }, config.gaxOptions);
 
   delete config.gaxOptions;
@@ -184,7 +165,12 @@ Logging.prototype.createSink = function(name, config, callback) {
     sink: extend({}, config, { name: name })
   };
 
-  this.api.Config.createSink(reqOpts, gaxOptions, function(err, resp) {
+  this.request({
+    client: 'configServiceV2Client',
+    method: 'createSink',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -314,7 +300,12 @@ Logging.prototype.getEntries = function(options, callback) {
     autoPaginate: options.autoPaginate
   }, options.gaxOptions);
 
-  this.api.Logging.listLogEntries(reqOpts, gaxOptions, function() {
+  this.request({
+    client: 'loggingServiceV2Client',
+    method: 'listLogEntries',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function() {
     var entries = arguments[1];
 
     if (entries) {
@@ -370,7 +361,7 @@ Logging.prototype.getEntriesStream = function(options) {
     next(null, Entry.fromApiResponse_(entry));
   });
 
-  userStream.once('reading', function() {
+  userStream.on('reading', function() {
     var reqOpts = extend({
       orderBy: 'timestamp desc'
     }, options);
@@ -383,7 +374,12 @@ Logging.prototype.getEntriesStream = function(options) {
       autoPaginate: options.autoPaginate
     }, options.gaxOptions);
 
-    requestStream = self.api.Logging.listLogEntriesStream(reqOpts, gaxOptions);
+    requestStream = self.request({
+      client: 'loggingServiceV2Client',
+      method: 'listLogEntriesStream',
+      reqOpts: reqOpts,
+      gaxOpts: gaxOptions
+    });
 
     userStream.setPipeline(requestStream, toEntryStream);
   });
@@ -436,7 +432,12 @@ Logging.prototype.getSinks = function(options, callback) {
     autoPaginate: options.autoPaginate
   }, options.gaxOptions);
 
-  this.api.Config.listSinks(reqOpts, gaxOptions, function() {
+  this.request({
+    client: 'configServiceV2Client',
+    method: 'listSinks',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function() {
     var sinks = arguments[1];
 
     if (sinks) {
@@ -506,7 +507,12 @@ Logging.prototype.getSinksStream = function(options) {
       autoPaginate: options.autoPaginate
     }, options.gaxOptions);
 
-    requestStream = self.api.Config.listSinksStream(reqOpts, gaxOptions);
+    requestStream = self.request({
+      client: 'configServiceV2Client',
+      method: 'listSinksStream',
+      reqOpts: reqOpts,
+      gaxOpts: gaxOptions
+    });
 
     userStream.setPipeline(requestStream, toSinkStream);
   });
@@ -545,6 +551,72 @@ Logging.prototype.log = function(name, options) {
  */
 Logging.prototype.sink = function(name) {
   return new Sink(this, name);
+};
+
+/**
+ * Funnel all API requests through this method, to be sure we have a project ID.
+ *
+ * @param {object} config - Configuration object.
+ * @param {object} config.gaxOpts - GAX options.
+ * @param {function} config.method - The gax method to call.
+ * @param {object} config.reqOpts - Request options.
+ * @param {function=} callback - The callback function.
+ */
+Logging.prototype.request = function(config, callback) {
+  var self = this;
+  var gaxStream;
+  var stream;
+
+  if (!callback) {
+    stream = streamEvents(through.obj());
+
+    stream.abort = function() {
+      if (gaxStream && gaxStream.cancel) {
+        gaxStream.cancel();
+      }
+    };
+
+    stream.on('reading', makeRequest);
+  } else {
+    makeRequest();
+  }
+
+  function makeRequest() {
+    self.auth.getProjectId(function(err, projectId) {
+      if (err) {
+        if (callback) {
+          callback(err);
+        } else {
+          stream.destroy(err);
+        }
+        return;
+      }
+
+      var reqOpts = extend(true, {}, config.reqOpts);
+      reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+
+      if (!self.api[config.client]) {
+        // Lazily instantiate client.
+        self.api[config.client] = v2(self.options)[config.client](self.options);
+      }
+
+      var client = self.api[config.client];
+
+      var gaxRequest = client[config.method](reqOpts, config.gaxOpts, callback);
+
+      if (!callback) {
+        gaxStream = gaxRequest;
+
+        gaxStream
+          .on('error', function(err) {
+            stream.destroy(err);
+          })
+          .pipe(stream);
+      }
+    });
+  }
+
+  return stream;
 };
 
 /**
@@ -671,7 +743,12 @@ common.paginator.extend(Logging, ['getEntries', 'getSinks']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Logging, {
-  exclude: ['entry', 'log', 'sink']
+  exclude: [
+    'entry',
+    'log',
+    'request',
+    'sink'
+  ]
 });
 
 Logging.Entry = Entry;

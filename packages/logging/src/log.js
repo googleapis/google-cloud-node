@@ -23,10 +23,8 @@
 var arrify = require('arrify');
 var async = require('async');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
-var util = require('util');
 
 /**
  * @type {module:logging/entry}
@@ -71,7 +69,6 @@ function Log(logging, name, options) {
   this.removeCircular_ = options.removeCircular === true;
   this.metadata_ = new Metadata(logging);
 
-  this.api = logging.api;
   this.logging = logging;
   this.name = this.formattedName_.split('/').pop();
 }
@@ -216,11 +213,21 @@ Log.prototype.debug = function(entry, options, callback) {
  * });
  */
 Log.prototype.delete = function(gaxOptions, callback) {
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
+
   var reqOpts = {
     logName: this.formattedName_
   };
 
-  this.api.Logging.deleteLog(reqOpts, gaxOptions, callback);
+  this.logging.request({
+    client: 'loggingServiceV2Client',
+    method: 'deleteLog',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, callback);
 };
 
 /**
@@ -596,7 +603,12 @@ Log.prototype.write = function(entry, options, callback) {
 
     delete reqOpts.gaxOptions;
 
-    self.api.Logging.writeLogEntries(reqOpts, options.gaxOptions, callback);
+    self.logging.request({
+      client: 'loggingServiceV2Client',
+      method: 'writeLogEntries',
+      reqOpts: reqOpts,
+      gaxOpts: options.gaxOptions
+    }, callback);
   });
 };
 

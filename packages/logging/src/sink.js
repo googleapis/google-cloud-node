@@ -21,9 +21,8 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
-var util = require('util');
+var is = require('is');
 
 /*! Developer Documentation
  *
@@ -47,116 +46,135 @@ var util = require('util');
  * var sink = logging.sink('my-sink');
  */
 function Sink(logging, name) {
+  this.logging = logging;
   this.name = name;
   this.formattedName_ = 'projects/' + logging.projectId + '/sinks/' + name;
-
-  var methods = {
-    /**
-     * Create a sink.
-     *
-     * @param {object} config - See {module:logging#createSink}.
-     *
-     * @example
-     * var config = {
-     *   destination: {
-     *     // ...
-     *   }
-     * };
-     *
-     * sink.create(config, function(err, sink, apiResponse) {
-     *   if (!err) {
-     *     // The sink was created successfully.
-     *   }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * sink.create(config).then(function(data) {
-     *   var sink = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    create: true,
-
-    /**
-     * Delete the sink.
-     *
-     * @resource [projects.sink.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/delete}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * sink.delete(function(err, apiResponse) {
-     *   if (!err) {
-     *     // The log was deleted.
-     *   }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * sink.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: {
-      protoOpts: {
-        service: 'ConfigServiceV2',
-        method: 'deleteSink'
-      },
-      reqOpts: {
-        sinkName: this.formattedName_
-      }
-    },
-
-    /**
-     * Get the sink's metadata.
-     *
-     * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink}
-     * @resource [projects.sink.get API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/get}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The sink's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * sink.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * sink.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    getMetadata: {
-      protoOpts: {
-        service: 'ConfigServiceV2',
-        method: 'getSink'
-      },
-      reqOpts: {
-        sinkName: this.formattedName_
-      }
-    }
-  };
-
-  commonGrpc.ServiceObject.call(this, {
-    parent: logging,
-    baseUrl: '/sinks',
-    id: name,
-    createMethod: logging.createSink.bind(logging),
-    methods: methods
-  });
 }
 
-util.inherits(Sink, commonGrpc.ServiceObject);
+/**
+ * Create a sink.
+ *
+ * @param {object} config - See {module:logging#createSink}.
+ *
+ * @example
+ * var config = {
+ *   destination: {
+ *     // ...
+ *   }
+ * };
+ *
+ * sink.create(config, function(err, sink, apiResponse) {
+ *   if (!err) {
+ *     // The sink was created successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * sink.create(config).then(function(data) {
+ *   var sink = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Sink.prototype.create = function(config, callback) {
+  this.logging.createSink(this.name, config, callback);
+};
+
+/**
+ * Delete the sink.
+ *
+ * @resource [projects.sink.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/delete}
+ *
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * sink.delete(function(err, apiResponse) {
+ *   if (!err) {
+ *     // The log was deleted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * sink.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Sink.prototype.delete = function(gaxOptions, callback) {
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
+
+  var reqOpts = {
+    sinkName: this.formattedName_
+  };
+
+  this.logging.request({
+    client: 'configServiceV2Client',
+    method: 'deleteSink',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, callback);
+};
+
+/**
+ * Get the sink's metadata.
+ *
+ * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink}
+ * @resource [projects.sink.get API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/get}
+ *
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.metadata - The sink's metadata.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * sink.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * sink.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Sink.prototype.getMetadata = function(gaxOptions, callback) {
+  var self = this;
+
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
+
+  var reqOpts = {
+    sinkName: this.formattedName_
+  };
+
+  this.logging.request({
+    client: 'configServiceV2Client',
+    method: 'getSink',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function() {
+    if (arguments[1]) {
+      self.metadata = arguments[1];
+    }
+
+    callback.apply(null, arguments);
+  });
+};
 
 /**
  * Set the sink's filter.
@@ -197,6 +215,8 @@ Sink.prototype.setFilter = function(filter, callback) {
  *
  * @param {object} metadata - See a
  *     [Sink resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink).
+ * @param {object=} metadata.gaxOptions - Request configuration options,
+ *     outlined here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -227,17 +247,19 @@ Sink.prototype.setMetadata = function(metadata, callback) {
       return;
     }
 
-    var protoOpts = {
-      service: 'ConfigServiceV2',
-      method: 'updateSink'
-    };
-
     var reqOpts = {
       sinkName: self.formattedName_,
       sink: extend({}, currentMetadata, metadata)
     };
 
-    self.request(protoOpts, reqOpts, function(err, apiResponse) {
+    delete reqOpts.sink.gaxOptions;
+
+    self.logging.request({
+      client: 'configServiceV2Client',
+      method: 'updateSink',
+      reqOpts: reqOpts,
+      gaxOpts: metadata.gaxOptions
+    }, function(err, apiResponse) {
       if (err) {
         callback(err, apiResponse);
         return;

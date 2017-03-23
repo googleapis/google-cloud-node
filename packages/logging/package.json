@@ -58,6 +58,7 @@
     "async": "^2.1.4",
     "eventid": "^0.1.0",
     "extend": "^3.0.0",
+    "google-auto-auth": "^0.5.4",
     "google-gax": "^0.12.2",
     "google-proto-files": "^0.10.0",
     "is": "^3.0.1",
