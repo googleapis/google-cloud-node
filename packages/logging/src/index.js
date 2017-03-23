@@ -110,6 +110,8 @@ util.inherits(Logging, commonGrpc.Service);
  * @param {string} name - Name of the sink.
  * @param {object} config - See a
  *     [Sink resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink).
+ * @param {object} config.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {module:storage/bucket|module:bigquery/dataset|module:pubsub/topic} config.destination -
  *     The destination. The proper ACL scopes will be granted to the provided
  *     destination.
@@ -171,10 +173,18 @@ Logging.prototype.createSink = function(name, config, callback) {
     return;
   }
 
-  this.api.Config.createSink({
+  var gaxOptions = extend({
+    timeout: 5000 // "Deadline Exceeded" errors without.
+  }, config.gaxOptions);
+
+  delete config.gaxOptions;
+
+  var reqOpts = {
     parent: 'projects/' + this.projectId,
     sink: extend({}, config, { name: name })
-  }, function(err, resp) {
+  };
+
+  this.api.Config.createSink(reqOpts, gaxOptions, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -244,8 +254,8 @@ Logging.prototype.entry = function(resource, data) {
  * @param {string} options.filter - An
  *     [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters).
  *     An empty filter matches all log entries.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {string} options.orderBy - How the results should be sorted,
  *     `timestamp` (oldest first) and `timestamp desc` (newest first,
  *     **default**).
@@ -294,14 +304,17 @@ Logging.prototype.getEntries = function(options, callback) {
   var reqOpts = extend({
     orderBy: 'timestamp desc'
   }, options);
+
   reqOpts.resourceNames = arrify(reqOpts.resourceNames);
   reqOpts.resourceNames.push('projects/' + this.projectId);
 
   delete reqOpts.autoPaginate;
-  delete reqOpts.maxApiCalls;
-  delete reqOpts.maxResults;
 
-  this.api.Logging.listLogEntries(reqOpts, options, function() {
+  var gaxOptions = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOptions);
+
+  this.api.Logging.listLogEntries(reqOpts, gaxOptions, function() {
     var entries = arguments[1];
 
     if (entries) {
@@ -361,13 +374,16 @@ Logging.prototype.getEntriesStream = function(options) {
     var reqOpts = extend({
       orderBy: 'timestamp desc'
     }, options);
-    reqOpts.projectIds = arrify(reqOpts.projectIds);
-    reqOpts.projectIds.push(this.projectId);
+    reqOpts.resourceNames = arrify(reqOpts.resourceNames);
+    reqOpts.resourceNames.push('projects/' + self.projectId);
 
-    delete reqOpts.maxApiCalls;
-    delete reqOpts.maxResults;
+    delete reqOpts.autoPaginate;
 
-    requestStream = self.api.Config.listLogEntriesStream(reqOpts, options);
+    var gaxOptions = extend({
+      autoPaginate: options.autoPaginate
+    }, options.gaxOptions);
+
+    requestStream = self.api.Logging.listLogEntriesStream(reqOpts, gaxOptions);
 
     userStream.setPipeline(requestStream, toEntryStream);
   });
@@ -383,8 +399,8 @@ Logging.prototype.getEntriesStream = function(options) {
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:logging/sink[]} callback.sinks - Sink objects.
@@ -415,10 +431,12 @@ Logging.prototype.getSinks = function(options, callback) {
   });
 
   delete reqOpts.autoPaginate;
-  delete reqOpts.maxApiCalls;
-  delete reqOpts.maxResults;
 
-  this.api.Config.listSinks(reqOpts, options, function() {
+  var gaxOptions = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOptions);
+
+  this.api.Config.listSinks(reqOpts, gaxOptions, function() {
     var sinks = arguments[1];
 
     if (sinks) {
@@ -484,10 +502,11 @@ Logging.prototype.getSinksStream = function(options) {
       parent: 'projects/' + self.projectId
     });
 
-    delete reqOpts.maxApiCalls;
-    delete reqOpts.maxResults;
+    var gaxOptions = extend({
+      autoPaginate: options.autoPaginate
+    }, options.gaxOptions);
 
-    requestStream = self.api.Config.listSinksStream(reqOpts, options);
+    requestStream = self.api.Config.listSinksStream(reqOpts, gaxOptions);
 
     userStream.setPipeline(requestStream, toSinkStream);
   });
