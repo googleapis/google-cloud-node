@@ -185,7 +185,7 @@ describe('Bigtable/Mutation', function() {
         setCell: {
           familyName: 'follows',
           columnQualifier: 'gwashington',
-          timestampMicros: timestamp,
+          timestampMicros: timestamp * 1000, // Convert ms to ms
           value: 1
         }
       }]);
