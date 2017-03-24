@@ -23,6 +23,8 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var utilCached = extend({}, util);
+
 var promisified = false;
 var fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
@@ -46,7 +48,12 @@ describe('VM', function() {
   var Disk;
   var DISK;
 
-  var COMPUTE = { projectId: 'project-id' };
+  var COMPUTE = {
+    authClient: {
+      projectId: 'project-id'
+    },
+    projectId: 'project-id'
+  };
   var ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
@@ -70,6 +77,7 @@ describe('VM', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, utilCached);
     vm = new VM(ZONE, VM_NAME);
     DISK = new Disk(ZONE, 'disk-name');
   });
@@ -229,7 +237,7 @@ describe('VM', function() {
     beforeEach(function() {
       DEVICE_NAME = DISK.formattedName;
 
-      METADATA = METADATA = {
+      METADATA = {
         disks: [
           {
             source: DEVICE_NAME,
@@ -252,6 +260,36 @@ describe('VM', function() {
         vm.getMetadata = util.noop;
         vm.detachDisk(DISK);
       });
+    });
+
+    it('should replace projectId token in disk name', function(done) {
+      var REPLACED_DEVICE_NAME = 'replaced-device-name';
+
+      fakeUtil.replaceProjectIdToken = function(value, projectId) {
+        assert.strictEqual(value, DISK.formattedName);
+        assert.strictEqual(projectId, COMPUTE.authClient.projectId);
+        return REPLACED_DEVICE_NAME;
+      };
+
+      vm.getMetadata = function(callback) {
+        var metadata = {
+          disks: [
+            {
+              source: REPLACED_DEVICE_NAME,
+              deviceName: REPLACED_DEVICE_NAME
+            }
+          ]
+        };
+
+        callback(null, metadata, metadata);
+      };
+
+      vm.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.deviceName, REPLACED_DEVICE_NAME);
+        done();
+      };
+
+      vm.detachDisk(DISK, assert.ifError);
     });
 
     it('should return an error if device name not found', function(done) {

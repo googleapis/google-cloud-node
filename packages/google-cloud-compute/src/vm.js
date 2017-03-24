@@ -342,6 +342,11 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
+    var diskName = common.util.replaceProjectIdToken(
+      disk.formattedName,
+      self.zone.compute.authClient.projectId
+    );
+
     var deviceName;
     var baseUrl = 'https://www.googleapis.com/compute/v1/';
     var disks = metadata.disks || [];
@@ -352,7 +357,7 @@ VM.prototype.detachDisk = function(disk, callback) {
       var attachedDisk = disks[i];
       var source = attachedDisk.source.replace(baseUrl, '');
 
-      if (source === disk.formattedName) {
+      if (source === diskName) {
         deviceName = attachedDisk.deviceName;
       }
     }
