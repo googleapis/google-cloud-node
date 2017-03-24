@@ -32,6 +32,7 @@ var prop = require('propprop');
 var propAssign = require('prop-assign');
 var rgbHex = require('rgb-hex');
 
+var curation = require('./curation');
 var v1 = require('./v1');
 
 var VERY_UNLIKELY = 0;
@@ -321,6 +322,7 @@ Vision.prototype.detect = function(images, options, callback) {
     text: 'TEXT_DETECTION'
   };
 
+  /* DELETE ME */
   var typeShortNameToRespName = {
     crop: 'cropHintsAnnotation',
     crops: 'cropHintsAnnotation',
@@ -410,7 +412,9 @@ Vision.prototype.detect = function(images, options, callback) {
 
       var detections = foundImages
         .map(groupDetectionsByImage)
-        .map(removeExtraneousAnnotationObjects)
+        .map(function(image) {
+          return curation.removeExtraneousAnnotations(image, options.types);
+        })
         .map(assignTypeToEmptyAnnotations)
         .map(removeDetectionsWithErrors)
         .map(flattenAnnotations)
@@ -451,37 +455,6 @@ Vision.prototype.detect = function(images, options, callback) {
         //   ]
         // ]
         return annotations.splice(0, types.length);
-      }
-
-      function removeExtraneousAnnotationObjects(annotations) {
-        // The API response includes empty annotations for features that weren't
-        // requested.
-        //
-        // Before:
-        //   [
-        //     {
-        //       faceAnnotations: {},
-        //       labelAnnotations: {}
-        //     }
-        //   ]
-        //
-        // After:
-        //   [
-        //     {
-        //       faceAnnotations: {}
-        //     }
-        //   ]
-        return annotations.map(function(annotation, index) {
-          var requestedAnnotationType = typeShortNameToRespName[types[index]];
-
-          for (var prop in annotation) {
-            if (prop !== requestedAnnotationType && prop !== 'error') {
-              delete annotation[prop];
-            }
-          }
-
-          return annotation;
-        });
       }
 
       function assignTypeToEmptyAnnotations(annotations) {
@@ -2080,6 +2053,7 @@ Vision.formatWebDetection_ = function(webDetection, options) {
 Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
   return Vision.likelihood[likelihood] >= baseLikelihood;
 };
+
 
 /*! Developer Documentation
  *
