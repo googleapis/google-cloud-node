@@ -52,16 +52,9 @@ describe('logger', function() {
       });
     });
     describe('Default log level', function() {
-      it('Should be WARN', function() {
-        var buf = [];
-        var orig = console._stdout.write;
-        console._stdout.write = function() {
-          buf.push(arguments[0]);
-          orig.apply(this, arguments);
-        };
-        var logger = createLogger({});
+      it('Should be able to WARN by default', function() {
+        var logger = createLogger();
         logger.warn('test warning message');
-        assert(buf.pop().match(/test warning message/));
       });
     });
   });

@@ -92,7 +92,8 @@ class RequestHandler extends common.Service {
       packageJson: pkg,
       projectIdRequired: false,
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1/',
-      scopes: SCOPES
+      scopes: SCOPES,
+      projectId: config.getProjectId()
     }, config);
     this._config = config;
     this._logger = logger;

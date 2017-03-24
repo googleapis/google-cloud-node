@@ -21,7 +21,7 @@ var is = require('is');
 var isObject = is.object;
 var isString = is.string;
 var isNumber = is.number;
-var logger = require('@google/cloud-diagnostics-common').logger;
+var logger = require('@google-cloud/common').logger;
 /**
  * Creates an instance of the Google Cloud Diagnostics logger class. This
  * instance will be configured to log at the level given by the environment or
@@ -44,20 +44,21 @@ function createLogger(initConfiguration) {
   var level = logger.WARN;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
-    level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL;
+    level = logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL] || 
+      logger.LEVELS.warn;
   } else if (isObject(initConfiguration) &&
     has(initConfiguration, 'logLevel')) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer
-      level = ~~initConfiguration.logLevel;
+      level = logger.LEVELS[~~initConfiguration.logLevel] || logger.LEVELS.warn;
     } else if (isNumber(initConfiguration.logLevel)) {
-      level = initConfiguration.logLevel;
+      level = logger.LEVELS[initConfiguration.logLevel] || logger.LEVELS.warn;
     } else {
       throw new Error('config.logLevel must be a number or decimal ' +
         'representation of a number in string form');
     }
   }
-  return logger.create(level, '@google/cloud-errors');
+  return logger({level: level, tag: '@google/cloud-errors'});
 }
 
 module.exports = createLogger;

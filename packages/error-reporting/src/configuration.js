@@ -16,8 +16,6 @@
 
 'use strict';
 var env = process.env;
-var commonDiag = require('@google/cloud-diagnostics-common');
-var utils = commonDiag.utils;
 var has = require('lodash.has');
 var is = require('is');
 var isObject = is.object;
@@ -348,29 +346,15 @@ Configuration.prototype._checkAuthConfiguration = function() {
 Configuration.prototype._checkLocalProjectId = function(cb) {
   if (isString(this._projectId)) {
     // already has been set by the metadata service
-    cb(null, this._projectId);
+    return this._projectId;
   } else if (has(this._givenConfiguration, 'projectId')) {
     if (isString(this._givenConfiguration.projectId)) {
       this._projectId = this._givenConfiguration.projectId;
-      cb(null, this._projectId);
     } else if (isNumber(this._givenConfiguration.projectId)) {
       this._projectId = this._givenConfiguration.projectId.toString();
-      cb(null, this._projectId);
-    } else {
-      cb(new Error('config.projectId must be a string or number'), null);
     }
-  } else if (isString(env.GCLOUD_PROJECT) && !isEmpty(env.GCLOUD_PROJECT)) {
-    // GCLOUD_PROJECT is set, set on instance
-    this._projectId = env.GCLOUD_PROJECT;
-    cb(null, this._projectId);
-  } else {
-    cb(new Error([
-      'Unable to find the project Id for communication with the Stackdriver',
-      'Error Reporting service. This app will be unable to send errors to the',
-      'reporting service unless a valid project Id is supplied via runtime',
-      'configuration or the GCLOUD_PROJECT environmental variable.'
-    ].join(' ')), null);
   }
+  return this._projectId;
 };
 /**
  * Returns the _reportUncaughtExceptions property on the instance.
@@ -400,21 +384,7 @@ Configuration.prototype.getShouldReportErrorsToAPI = function() {
  * @returns {String|Null} - returns the _projectId property
  */
 Configuration.prototype.getProjectId = function(cb) {
-  var self = this;
-  if (!isNull(this._projectId)) {
-    setImmediate(function() {
-      cb(null, self._projectId);
-    });
-  } else {
-    utils.getProjectId(function(err, projectId) {
-      if (err) {
-        self._checkLocalProjectId(cb);
-      } else {
-        self._projectId = projectId;
-        cb(null, self._projectId);
-      }
-    });
-  }
+  return this._checkLocalProjectId();
 };
 /**
  * Returns the _key property on the instance.
