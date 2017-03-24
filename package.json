@@ -13,7 +13,7 @@
     "glob": "^5.0.9",
     "globby": "^3.0.1",
     "is": "^3.1.0",
-    "istanbul": "^0.3.5",
+    "istanbul": "^0.4.5",
     "jscs": "^2.1.1",
     "jshint": "^2.9.1",
     "lodash.flatten": "^4.3.0",
@@ -41,7 +41,8 @@
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -x 'packages/*/src/*{/*,/**/*}.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
-    "coveralls": "npm run cover && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "cover-html": "istanbul cover node_modules/mocha/bin/_mocha --report html -x 'packages/*/src/*{/*,/**/*}.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
+    "coveralls": "npm run cover && cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "Apache-2.0",
   "engines": {
