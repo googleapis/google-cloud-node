@@ -3,6 +3,6 @@ packages/*/AUTHORS
 packages/*/CONTRIBUTORS
 packages/*/COPYING
 **/node_modules
-**/coverage/*
+**/.coverage/*
 docs/json
 *.log
