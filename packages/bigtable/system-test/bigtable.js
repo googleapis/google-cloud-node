@@ -42,7 +42,7 @@ describe('Bigtable', function() {
       clusters: [
         {
           name: CLUSTER_NAME,
-          location: 'us-central1-b',
+          location: 'us-central1-c',
           nodes: 3
         }
       ]
