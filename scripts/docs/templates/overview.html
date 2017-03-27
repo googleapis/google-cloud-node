@@ -2,6 +2,21 @@
   This class allows you interact with <%= title %>.
 </p>
 
+<% if (umbrellaView) { %>
+<div class="notice">
+  <strong><code>google-cloud</code> is deprecated</strong>
+  <p>
+    Due to the scope of our API rapidly increasing, you may notice a decrease in performance if you continue to use the bundled module, `google-cloud`.
+  </p>
+  <p>
+    Going forward, please install only the individual service modules that you need, such as <code><%= pkgJson.name %></code>.
+  </p>
+  <p>
+    The instructions below are here for reference, however, we will soon stop releasing updates to the bundled package.
+  </p>
+</div>
+<% } %>
+
 <p>
   First, install <code><%= pkgJson.name %></code> with npm:
 </p>
@@ -16,7 +31,7 @@
   However, if you're running your app elsewhere, you will need to provide project details to authenticate API requests.
 </p>
 
-<h4>Compute Engine</h4>
+<h4>Google Cloud Platform</h4>
 <div hljs language="javascript"><% if (!umbrellaView) { %>
 var <%= instanceName || className %> = require('<%= pkgJson.name %>')();<% } else { %>
 var gcloud = require('google-cloud');
@@ -39,4 +54,3 @@ var <%= instanceName || className %> = gcloud.<%= className %>({
 <p>
   The full set of options which can be passed to <code><%= pkgJson.name %></code> are outlined in our <a href="#/docs/<%= umbrellaView ? umbrellaPkg : className %>/<%= pkgJson.version %>/guides/authentication">Authentication guide</a>.
 </p>
-
