@@ -86,6 +86,10 @@ var ABORTED = 10;
  * var database = instance.database('my-database');
  *
  * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
  *   // The `transaction` object is ready for use.
  * });
  */
@@ -223,25 +227,26 @@ Transaction.prototype.begin = function(callback) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     // Queue a mutation (note that there is no callback passed to `insert`).
- *     transaction.insert('Singers', {
- *       SingerId: 'Id3b',
- *       Name: 'Joe West'
- *     });
- *
- *     return transaction.commit();
- *   })
- *   .then(function(data) {
- *     var apiResponse = data[0];
- *
- *     // Mutations were committed successfully.
+ *   // Queue a mutation (note that there is no callback passed to `insert`).
+ *   transaction.insert('Singers', {
+ *     SingerId: 'Id3b',
+ *     Name: 'Joe West'
  *   });
+ *
+ *   return transaction.commit();
+ * })
+ * .then(function(data) {
+ *   var apiResponse = data[0];
+ *
+ *   // Mutations were committed successfully.
+ * });
  */
 Transaction.prototype.commit = function(callback) {
   var self = this;
@@ -344,17 +349,18 @@ Transaction.prototype.requestStream = function(config) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     return transaction.rollback();
- *   })
- *   .then(function() {
- *     // Transaction rolled back successfully.
- *   });
+ *   return transaction.rollback();
+ * })
+ * .then(function() {
+ *   // Transaction rolled back successfully.
+ * });
  */
 Transaction.prototype.rollback = function(callback) {
   var self = this;
@@ -442,17 +448,18 @@ Transaction.prototype.rollback = function(callback) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     transaction.run(query)
- *       .then(function(data) {
- *         var rows = data[0];
- *       });
- *   });
+ *   return transaction.run(query)
+ *     .then(function(data) {
+ *       var rows = data[0];
+ *     });
+ * });
  */
 Transaction.prototype.run = function(query, callback) {
   var rows = [];
@@ -482,7 +489,7 @@ Transaction.prototype.run = function(query, callback) {
  * @example
  * var query = 'SELECT * FROM Singers';
  *
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -504,7 +511,7 @@ Transaction.prototype.run = function(query, callback) {
  * // The SQL query string can contain parameter placeholders. A parameter
  * // placeholder consists of '@' followed by the parameter name.
  * //-
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -526,16 +533,19 @@ Transaction.prototype.run = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     transaction.runStream(query)
- *       .on('data', function(row) {})
- *       .on('end', function() {
- *         // All results retrieved.
- *       });
- *   });
+ *   transaction.runStream(query)
+ *     .on('data', function(row) {
+ *       this.end();
+ *     })
+ *     .on('end', function() {
+ *       // All results retrieved.
+ *     });
+ * });
  */
 Transaction.prototype.runStream = function(query) {
   var self = this;

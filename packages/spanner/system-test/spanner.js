@@ -976,17 +976,18 @@ var spanner = new Spanner(env);
       var id = generateName('id');
       var name = generateName('name');
 
-      return database.runTransaction()
-        .then(function(data) {
-          var transaction = data[0];
+      return database.runTransaction(function(err, transaction) {
+        if (err) {
+          return Promise.reject(err);
+        }
 
-          transaction.insert('Singers', {
-            SingerId: id,
-            Name: name
-          });
-
-          return transaction.commit();
+        transaction.insert('Singers', {
+          SingerId: id,
+          Name: name
         });
+
+        return transaction.commit();
+      });
     });
 
     it('should retry an aborted transaction', function(done) {
@@ -1063,13 +1064,14 @@ var spanner = new Spanner(env);
         readOnly: true
       };
 
-      return database.runTransaction(options)
-        .then(function(data) {
-          var transaction = data[0];
+      return database.runTransaction(options, function(err, transaction) {
+        if (err) {
+          return Promise.reject(err);
+        }
 
-          return transaction.run('SELECT * FROM Singers')
-            .then(transaction.end.bind(transaction));
-        });
+        return transaction.run('SELECT * FROM Singers')
+          .then(transaction.end.bind(transaction));
+      });
     });
   });
 });

@@ -599,6 +599,18 @@ describe('Database', function() {
   });
 
   describe('runTransaction', function() {
+    it('should promisify getTransaction_', function(done) {
+      var promisify = fakeUtil.promisify;
+
+      fakeUtil.promisify = function(fn) {
+        assert.strictEqual(fn, database.getTransaction_);
+        fakeUtil.promisify = promisify;
+        done();
+      };
+
+      database.runTransaction(assert.ifError);
+    });
+
     it('should get a Transaction object', function(done) {
       database.getTransaction_ = function() {
         done();
@@ -638,6 +650,32 @@ describe('Database', function() {
         assert.strictEqual(err, null);
         assert.strictEqual(transaction_, transaction);
         done();
+      });
+    });
+
+    it('should return a promise', function() {
+      var resolveValue = {};
+
+      var transaction = {
+        run_: function(runFn) {
+          return runFn();
+        }
+      };
+
+      database.getTransaction_ = function(options, callback) {
+        callback(null, transaction);
+      };
+
+      return database.runTransaction(function(err, transaction_) {
+        if (err) {
+          return Promise.reject(err);
+        }
+
+        assert.strictEqual(transaction, transaction_);
+        return Promise.resolve(resolveValue);
+      })
+      .then(function(value) {
+        assert.strictEqual(value, resolveValue);
       });
     });
   });

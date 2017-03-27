@@ -713,28 +713,28 @@ Database.prototype.runStream = function(query, options) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     // Run a transactional query.
- *     return transaction.run('SELECT * FROM Singers')
- *       .then(function() {
- *         // Queue a mutation (note there is no callback passed to `insert`).
- *         transaction.insert('Singers', {
- *           SingerId: 'Id3b',
- *           Name: 'Joe West'
- *         });
- *
- *         // Commit the transaction.
- *         return transaction.commit();
+ *   // Run a transactional query.
+ *   return transaction.run('SELECT * FROM Singers')
+ *     .then(function() {
+ *       // Queue a mutation (note there is no callback passed to `insert`).
+ *       transaction.insert('Singers', {
+ *         SingerId: 'Id3b',
+ *         Name: 'Joe West'
  *       });
- *   })
- *   .then(function() {
- *     // Transaction committed successfully.
- *   });
+ *       // Commit the transaction.
+ *       return transaction.commit();
+ *     });
+ * })
+ * .then(function() {
+ *   // Transaction committed successfully.
+ * });
  */
 Database.prototype.runTransaction = function(options, runFn) {
   if (is.fn(options)) {
@@ -742,16 +742,15 @@ Database.prototype.runTransaction = function(options, runFn) {
     options = null;
   }
 
-  this.getTransaction_(options, function(err, transaction) {
-    if (err) {
-      runFn(err);
-      return;
-    }
+  return common.util.promisify(this.getTransaction_)
+    .call(this, options)
+    .then(function(data) {
+      var transaction = data[0];
 
-    transaction.run_(function() {
-      runFn(null, transaction);
-    });
-  });
+      return transaction.run_(function() {
+        return runFn(null, transaction);
+      });
+    }, runFn);
 };
 
 /**
