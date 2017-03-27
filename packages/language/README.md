@@ -18,10 +18,43 @@ var language = require('@google-cloud/language')({
 
 // Get the entities from a sentence.
 language.detectEntities('Stephen of Michigan!', function(err, entities) {
-  // entities = {
-  //   people: ['Stephen'],
-  //   places: ['Michigan']
-  // }
+  // entities = [
+  //   {
+  //     name: 'Stephen',
+  //     type: 'PERSON',
+  //     metadata: {
+  //       mid: '/m/05d8y4q'
+  //     },
+  //     salience: 0.7309288382530212,
+  //     mentions: [
+  //       {
+  //         text: {
+  //           content: 'Stephen',
+  //           beginOffset: -1
+  //         },
+  //         type: 'PROPER'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     name: 'Michigan',
+  //     type: 'LOCATION',
+  //     metadata: {
+  //       mid: '/m/04rrx',
+  //       wikipedia_url: 'http://en.wikipedia.org/wiki/Michigan'
+  //     },
+  //     salience: 0.26907116174697876,
+  //     mentions: [
+  //       {
+  //         text: {
+  //           content: 'Michigan',
+  //           beginOffset: -1
+  //         },
+  //         type: 'PROPER'
+  //       }
+  //     ]
+  //   }
+  // ]
 });
 
 // Create a document if you plan to run multiple detections.
@@ -29,31 +62,124 @@ var document = language.document('Contributions welcome!');
 
 // Analyze the sentiment of the document.
 document.detectSentiment(function(err, sentiment) {
-  // sentiment = 100 // Large numbers represent more positive sentiments.
+  // sentiment = {
+  //   magnitude: 0.30000001192092896,
+  //   score: 0.30000001192092896
+  // }
 });
 
 // Parse the syntax of the document.
 document.annotate(function(err, annotations) {
   // annotations = {
   //   language: 'en',
-  //   sentiment: 100,
-  //   entities: {},
-  //   sentences: ['Contributions welcome!'],
+  //   sentiment: {
+  //     magnitude: 0.30000001192092896,
+  //     score: 0.30000001192092896
+  //   },
+  //   entities: [
+  //     {
+  //       name: 'Contributions',
+  //       type: 'OTHER',
+  //       metadata: {},
+  //       salience: 1,
+  //       mentions: [
+  //         {
+  //           text: {
+  //             content: 'Contributions',
+  //             beginOffset: -1
+  //           },
+  //           type: 'COMMON'
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   sentences: [
+  //     {
+  //       text: {
+  //         content: 'Contributions welcome!',
+  //         beginOffset: -1
+  //       },
+  //       sentiment: {
+  //         magnitude: 0.30000001192092896,
+  //         score: 0.30000001192092896
+  //       }
+  //     }
+  //   ],
   //   tokens: [
   //     {
-  //       text: 'Contributions',
-  //       partOfSpeech: 'Noun (common and proper)',
-  //       partOfSpeechTag: 'NOUN'
+  //       text: {
+  //         content: 'Contributions',
+  //         beginOffset: -1
+  //       },
+  //       partOfSpeech: {
+  //         tag: 'NOUN',
+  //         aspect: 'ASPECT_UNKNOWN',
+  //         case: 'CASE_UNKNOWN',
+  //         form: 'FORM_UNKNOWN',
+  //         gender: 'GENDER_UNKNOWN',
+  //         mood: 'MOOD_UNKNOWN',
+  //         number: 'PLURAL',
+  //         person: 'PERSON_UNKNOWN',
+  //         proper: 'PROPER_UNKNOWN',
+  //         reciprocity: 'RECIPROCITY_UNKNOWN',
+  //         tense: 'TENSE_UNKNOWN',
+  //         voice: 'VOICE_UNKNOWN'
+  //       },
+  //       dependencyEdge: {
+  //         headTokenIndex: 1,
+  //         label: 'NSUBJ'
+  //       },
+  //       lemma: 'contribution'
   //     },
   //     {
-  //       text: 'welcome',
-  //       partOfSpeech: 'Verb (all tenses and modes)',
-  //       partOfSpeechTag: 'VERB'
+  //       text: {
+  //         content: 'welcome',
+  //         beginOffset: -1
+  //       },
+  //       partOfSpeech: {
+  //         tag: 'VERB',
+  //         aspect: 'ASPECT_UNKNOWN',
+  //         case: 'CASE_UNKNOWN',
+  //         form: 'FORM_UNKNOWN',
+  //         gender: 'GENDER_UNKNOWN',
+  //         mood: 'INDICATIVE',
+  //         number: 'NUMBER_UNKNOWN',
+  //         person: 'PERSON_UNKNOWN',
+  //         proper: 'PROPER_UNKNOWN',
+  //         reciprocity: 'RECIPROCITY_UNKNOWN',
+  //         tense: 'PRESENT',
+  //         voice: 'VOICE_UNKNOWN'
+  //       },
+  //       dependencyEdge: {
+  //         headTokenIndex: 1,
+  //         label: 'ROOT'
+  //       },
+  //       lemma: 'welcome'
   //     },
   //     {
-  //       text: '!',
-  //       partOfSpeech: 'Punctuation',
-  //       partOfSpeechTag: 'PUNCT'
+  //       text: {
+  //         content: '!',
+  //         beginOffset: -1
+  //       },
+  //       partOfSpeech: {
+  //         tag: 'PUNCT',
+  //         aspect: 'ASPECT_UNKNOWN',
+  //         case: 'CASE_UNKNOWN',
+  //         form: 'FORM_UNKNOWN',
+  //         gender: 'GENDER_UNKNOWN',
+  //         mood: 'MOOD_UNKNOWN',
+  //         number: 'NUMBER_UNKNOWN',
+  //         person: 'PERSON_UNKNOWN',
+  //         proper: 'PROPER_UNKNOWN',
+  //         reciprocity: 'RECIPROCITY_UNKNOWN',
+  //         tense: 'TENSE_UNKNOWN',
+  //         voice: 'VOICE_UNKNOWN'
+  //       },
+  //       dependencyEdge: {
+  //         headTokenIndex: 1,
+  //         label: 'P'
+  //       },
+  //       lemma: '!'
   //     }
   //   ]
   // }
