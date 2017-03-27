@@ -25,6 +25,27 @@
 
 var arrify = require('arrify');
 
+
+/**
+ * Swap the keys and values of a dictionary like object.
+ * If there are duplicate values, use the `resolve` callback to choose one.
+ */
+var swap = function(dict, resolve) {
+  var answer = {};
+  for (var key in dict) {
+    var value = dict[key];
+    if (typeof answer[value] === 'undefined') {
+      answer[value] = key;
+    }
+    else {
+      answer[value] = resolve(value, key, answer[value]);
+    }
+  }
+  return answer;
+}
+
+// A mapping between the short names used within the client library,
+// and the long names used in the API.
 var TYPE_SHORT_NAME_TO_RESPONSE_NAME = {
   crop: 'cropHintsAnnotation',
   crops: 'cropHintsAnnotation',
@@ -53,48 +74,137 @@ var TYPE_SHORT_NAME_TO_RESPONSE_NAME = {
   text: 'textAnnotations'
 };
 
+// A reverse-mapping of the above.
+// When resolving duplicate short names, we consistently use the longer
+// candidate (e.g. "document", not "doc"; "logos", not "logo").
+var TYPE_RESPONSE_NAME_TO_SHORT_NAME = swap(
+  TYPE_SHORT_NAME_TO_RESPONSE_NAME,
+  function(key, a, b) {
+    if (a.length > b.length) {
+      return a;
+    }
+    return b;
+  }
+);
+
+/**
+ * Return the "preferred" short name (the one returned from the
+ * TYPE_RESPONSE_NAME_TO_SHORT_NAME mapping).
+ *
+ * @private
+ *
+ * @param {string} shortName - The short name.
+ *
+ * @return {string} - The preferred short name.
+ *
+ * @example
+ * preferredShortName('label')   // 'labels'
+ * preferredShortName('labels')  // 'labels'
+ */
+var preferredShortName = function(shortName) {
+  return TYPE_RESPONSE_NAME_TO_SHORT_NAME[
+    TYPE_SHORT_NAME_TO_RESPONSE_NAME[shortName]
+  ];
+}
 
 
 module.exports = {
+  /**
+   * Denote the expected type of each annotation.
+   *
+   * The arrays for annotations and types are expected to be the same
+   * length, and this function essentially "zips" them together by applying
+   * the type onto the annotation object itself.
+   *
+   * @private
+   *
+   * @param {array} annotations - A list of annotations to have their
+         type denoted.
+   * @param {array} types - A list of types.
+   *
+   * @return {array} A list of modified annotations with their types added.
+   */
+  applyTypeToAnnotations: function(annotations, types) {
+    return annotations.map(function(ann, index) {
+      return Object.assign({}, ann, {_type: types[index]});
+    });
+  },
+
+
+  /**
+   * Remove detections that contain errors.
+   *
+   * @private
+   *
+   * @param {array} annotations - A list of typed annotations to map.
+   *
+   * @example
+   * Vision.curations.removeDetectionsWithErrors([
+   *   {
+   *     faceAnnotations: [],
+   *   },
+   *   {
+   *     error: {...},
+   *     labelAnnotations: {}
+   *   }
+   * ]);
+   * // [{ faceAnnotations: []}, undefined]
+   */
+  removeDetectionsWithErrors: function(annotations) {
+    var errors = [];
+
+    // Iterate over each annotation, looking for errata.
+    annotations.forEach(function(annotation) {
+      if (!is.empty(annotation.error)) {
+        annotation.error.type = preferredShortName(annotation._type);
+        errors.push(Vision.formatError_(annotation.error));
+      }
+    });
+
+    if (errors.length > 0) {
+      partialFailureErrors.push({
+        image: isSingleImage ? images : images[index],
+        errors: errors
+      });
+
+      return;
+    }
+
+    return annotations;
+  }
+
+
   /**
    * Remove annotation objects for features that were not requested.
    *
    * @private
    *
-   * @param {array} annotations - A list of annotations to map.
-   * @param {array} expectedTypes - A whitelist of annotation types that
-   *      are retained.
+   * @param {array} annotations - A list of typed annotations to map.
    *
    * @example
-   * Vision.removeExtraneousAnnotationObjects_([{
-   *   faceAnnotations: {},
+   * Vision.curation.removeExtraneousAnnotations([{
+   *   faceAnnotations: [],
    *   labelAnnotations: {}
-   * }], [types]);
-   * // [{ faceAnnotations: {}}]
+   *   _type: 'face',
+   * }]);
+   * // [{ faceAnnotations: [], _type: 'face'}]
    */
-  removeExtraneousAnnotations: function(annotations, expectedTypes) {
-    expectedTypes = arrify(expectedTypes);
+  removeExtraneousAnnotations: function(annotations) {
+    // Return a clone of the annotation with only the annotation types that
+    // were asked for.
+    return annotations.map(function(annotation) {
+      annotation = Object.assign({}, annotation);
 
-    // Sanity check: If there are no expected types, simply return
-    // the unmodified annotations.
-    if (expectedTypes.length === 0) {
-      return annotations;
-    }
-
-    // Return only the annotation types that were asked for.
-    return annotations.map(function(annotation, index) {
-      // Convert the list of expected types to the list of types that
-      // will be attached to the response annotations.
-      var requestedTypes = expectedTypes.map(function(typeName) {
-        return TYPE_SHORT_NAME_TO_RESPONSE_NAME[typeName];
-      });
-
-      // Additionally, we do not remove errors.
-      requestedTypes.push('error');
+      // Declare the list of keys on this annotation that are retained.
+      var whitelist = [
+        '_type',
+        'error',
+        TYPE_SHORT_NAME_TO_RESPONSE_NAME[annotation._type]
+      ];
 
       // Remove any properties that are not on our requested types whitelist.
       for (var prop in annotation) {
-        if (requestedTypes.indexOf(prop) === -1) {
+        if (whitelist.indexOf(prop) === -1) {
           delete annotation[prop];
         }
       }

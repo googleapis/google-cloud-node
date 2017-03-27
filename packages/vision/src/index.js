@@ -410,13 +410,27 @@ Vision.prototype.detect = function(images, options, callback) {
       var originalResp = extend(true, {}, resp);
       var partialFailureErrors = [];
 
-      var detections = foundImages
-        .map(groupDetectionsByImage)
-        .map(function(image) {
-          return curation.removeExtraneousAnnotations(image, options.types);
-        })
-        .map(assignTypeToEmptyAnnotations)
-        .map(removeDetectionsWithErrors)
+      // Group the images appropriately and return "detections".
+      var detections = foundImages.map(groupDetectionsByImage);
+
+      // Take the list of annotations and the list of types and
+      // conflate them into a single list of annotations with their type
+      // added to the object.
+      detections = detections.map(function(det) {
+        return curation.applyTypeToAnnotations(det, options.types);
+      });
+
+      // Remove any aspects of the response that the user did not
+      // actually request.
+      detections = detections.map(curation.removeExtraneousAnnotations(det));
+
+        .map(assignTypeToEmptyAnnotations);
+
+      // Iterate over each detection, looking for errors.
+      // If an error is found, remove the detection from th
+        .map(function(det, index) {
+          return curation.removeDetectionsWithErrors(det, index);
+        })removeDetectionsWithErrors)
         .map(flattenAnnotations)
         .map(decorateAnnotations);
 
@@ -480,48 +494,6 @@ Vision.prototype.detect = function(images, options, callback) {
 
           return annotation;
         });
-      }
-
-      function removeDetectionsWithErrors(annotations, index) {
-        // Before:
-        //   [
-        //     {
-        //       faceAnnotations: []
-        //     },
-        //     {
-        //       error: {...},
-        //       imagePropertiesAnnotation: {}
-        //     }
-        //   ]
-
-        // After:
-        //   [
-        //     {
-        //       faceAnnotations: []
-        //     },
-        //     undefined
-        //   ]
-        var errors = [];
-
-        annotations.forEach(function(annotation, index) {
-          if (!is.empty(annotation.error)) {
-            var userInputType = types[index];
-            var respNameType = typeShortNameToRespName[userInputType];
-            annotation.error.type = typeRespNameToShortName[respNameType];
-            errors.push(Vision.formatError_(annotation.error));
-          }
-        });
-
-        if (errors.length > 0) {
-          partialFailureErrors.push({
-            image: isSingleImage ? images : images[index],
-            errors: errors
-          });
-
-          return;
-        }
-
-        return annotations;
       }
 
       function flattenAnnotations(annotations) {
