@@ -202,6 +202,12 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
     table: table
   }, query);
 
+  if (this.transaction && this.id) {
+    reqOpts.transaction = {
+      id: this.id
+    };
+  }
+
   if (query.keys) {
     reqOpts.keySet = {
       keys: [
