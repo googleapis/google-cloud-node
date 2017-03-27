@@ -30,7 +30,7 @@ var fakeGenericPool = {
 };
 var originalFakeGenericPool = extend({}, fakeGenericPool);
 
-describe.only('SessionPool', function() {
+describe('SessionPool', function() {
   var SessionPoolCached;
   var SessionPool;
   var sessionPool;
