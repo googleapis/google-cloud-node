@@ -1648,6 +1648,32 @@ describe('common/util', function() {
 
       assert.strictEqual(FakeClass.prototype.methodName, method);
     });
+
+    describe('trailing undefined arguments', function() {
+      it('should not return a promise in callback mode', function(done) {
+        var func = util.promisify(function(optional, callback) {
+          assert(is.fn(optional));
+          optional(null);
+        });
+
+        var returnVal = func(function() {
+          assert(!returnVal);
+          done();
+        });
+      });
+
+      it('should return a promise when callback omitted', function(done) {
+        var func = util.promisify(function(optional, callback) {
+          assert.strictEqual(arguments.length, 1);
+          assert(is.fn(optional));
+          optional(null);
+        });
+
+        var returnVal = func(undefined, undefined).then(function() {
+          done();
+        });
+      });
+    });
   });
 
   describe('promisify', function() {
