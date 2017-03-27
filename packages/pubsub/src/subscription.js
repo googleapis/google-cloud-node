@@ -437,14 +437,13 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
     ].join(''));
   }
 
-  if (!callback) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    } else {
-      callback = common.util.noop;
-    }
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
   }
+
+  options = options || {};
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Subscriber',

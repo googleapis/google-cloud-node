@@ -53,7 +53,8 @@ describe('Subscription', function() {
   var SUB_NAME = 'test-subscription';
   var SUB_FULL_NAME = 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME;
   var PUBSUB = {
-    projectId: PROJECT_ID
+    projectId: PROJECT_ID,
+    request: util.noop
   };
   var message = 'howdy';
   var messageBuffer = new Buffer(message).toString('base64');
@@ -421,6 +422,15 @@ describe('Subscription', function() {
       };
 
       subscription.ack('abc', options, assert.ifError);
+    });
+
+    it('should not require a callback', function() {
+      assert.doesNotThrow(function() {
+        subscription.ack('abc');
+        subscription.ack('abc', {
+          timeout: 10
+        });
+      });
     });
 
     it('should unmark the ack ids as being in progress', function(done) {
