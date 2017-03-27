@@ -82,7 +82,7 @@ Iam.prototype.getPolicy = function(callback) {
  * @throws {Error} If no policy is provided.
  *
  * @param {object} policy - The policy.
- * @param {array=} policy.bindings - Bindings associate members with roles.
+ * @param {array} policy.bindings - Bindings associate members with roles.
  * @param {string=} policy.etag - Etags are used to perform a read-modify-write.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
