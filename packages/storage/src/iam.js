@@ -28,11 +28,10 @@ var is = require('is');
 
 /*! Developer Documentation
  *
- * @param {module:storage/bucket|module:storage/file} resourceInstance - The
- *     parent instance.
+ * @param {module:storage/bucket} bucket - The parent instance.
  */
 /**
- * Get and set IAM policies for your Cloud Storage buckets and objects.
+ * Get and set IAM policies for your Cloud Storage bucket.
  *
  * @resource [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
  * @resource [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
@@ -44,24 +43,10 @@ var is = require('is');
  * @example
  * var bucket = gcs.bucket('my-bucket');
  * // bucket.iam
- *
- * var file = bucket.file('my-file');
- * // file.iam
  */
-function Iam(resourceInstance) {
-  this.request_ = resourceInstance.request.bind(resourceInstance);
-
-  if (common.util.isCustomType(resourceInstance, 'Bucket')) {
-    var bucket = resourceInstance;
-    this.resourceId_ = 'buckets/' + bucket.id;
-  } else {
-    var file = resourceInstance;
-    this.resourceId_ = format('buckets/{bucket}/objects/{object}{generation}', {
-      bucket: file.parent.id,
-      object: file.id,
-      generation: is.defined(file.generation) ? '#' + file.generation : ''
-    });
-  }
+function Iam(bucket) {
+  this.request_ = bucket.request.bind(bucket);
+  this.resourceId_ = 'buckets/' + bucket.id;
 }
 
 /**
@@ -73,12 +58,9 @@ function Iam(resourceInstance) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @resource [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy}
- * @resource [Objects: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/getIamPolicy}
  *
  * @example
  * bucket.iam.getPolicy(function(err, policy, apiResponse) {});
- *
- * file.iam.getPolicy(function(err, policy, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -108,7 +90,6 @@ Iam.prototype.getPolicy = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @resource [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy}
- * @resource [Objects: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/setIamPolicy}
  * @resource [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
  *
  * @example
@@ -122,8 +103,6 @@ Iam.prototype.getPolicy = function(callback) {
  * };
  *
  * bucket.iam.setPolicy(myPolicy, function(err, policy, apiResponse) {});
- *
- * file.iam.setPolicy(myPolicy, function(err, policy, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -160,7 +139,6 @@ Iam.prototype.setPolicy = function(policy, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @resource [Buckets: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions}
- * @resource [Objects: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/testIamPermissions}
  *
  * @example
  * //-
@@ -179,15 +157,15 @@ Iam.prototype.setPolicy = function(policy, callback) {
  * // Test several permissions at once.
  * //-
  * var tests = [
- *   'storage.objects.delete',
- *   'storage.objects.get'
+ *   'storage.buckets.delete',
+ *   'storage.buckets.get'
  * ];
  *
- * file.iam.testPermissions(tests, function(err, permissions) {
+ * bucket.iam.testPermissions(tests, function(err, permissions) {
  *   console.log(permissions);
  *   // {
- *   //   "storage.objects.delete": false,
- *   //   "storage.objects.get": true
+ *   //   "storage.buckets.delete": false,
+ *   //   "storage.buckets.get": true
  *   // }
  * });
  *
@@ -207,10 +185,11 @@ Iam.prototype.testPermissions = function(permissions, callback) {
   permissions = arrify(permissions);
 
   this.request_({
-    uri: '/testIamPermissions',
+    uri: '/iam/testPermissions',
     qs: {
       permissions: permissions
-    }
+    },
+    useQuerystring: true
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);

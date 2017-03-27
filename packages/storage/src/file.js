@@ -320,33 +320,6 @@ function File(bucket, name, options) {
     request: this.request.bind(this),
     pathPrefix: '/acl'
   });
-
-  /**
-   * Get and set IAM policies for your file.
-   *
-   * @mixes module:storage/iam
-   *
-   * @resource [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
-   * @resource [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
-   * @resource [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
-   *
-   * @example
-   * //-
-   * // Get the IAM policy for your file.
-   * //-
-   * file.iam.getPolicy(function(err, policy) {
-   *   console.log(policy);
-   * });
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.iam.getPolicy().then(function(data) {
-   *   var policy = data[0];
-   *   var apiResponse = data[1];
-   * });
-   */
-  this.iam = new Iam(this);
 }
 
 util.inherits(File, common.ServiceObject);
