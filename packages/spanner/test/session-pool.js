@@ -30,7 +30,7 @@ var fakeGenericPool = {
 };
 var originalFakeGenericPool = extend({}, fakeGenericPool);
 
-describe('SessionPool', function() {
+describe.only('SessionPool', function() {
   var SessionPoolCached;
   var SessionPool;
   var sessionPool;
@@ -261,6 +261,21 @@ describe('SessionPool', function() {
         sessionPool = new SessionPool(DATABASE, options);
       });
     });
+
+    describe('acquireTimeout', function() {
+      it('should default to 0', function() {
+        assert.strictEqual(sessionPool.acquireTimeout, 0);
+      });
+
+      it('should localize the fail setting', function() {
+        var options = extend({}, OPTIONS, {
+          acquireTimeout: 60000
+        });
+
+        var sessionPool = new SessionPool(DATABASE, options);
+        assert.strictEqual(sessionPool.acquireTimeout, options.acquireTimeout);
+      });
+    });
   });
 
   describe('createPool_', function() {
@@ -321,9 +336,9 @@ describe('SessionPool', function() {
       assert.deepEqual(SessionPool.getPoolOptions_({}), {
         idleTimeoutMillis: 59 * 60000,
         testOnBorrow: true,
-        max: 1,
+        max: Number.MAX_SAFE_INTEGER,
         min: 0,
-        numTestsPerRun: 1
+        numTestsPerRun: Number.MAX_SAFE_INTEGER
       });
     });
 
@@ -641,31 +656,18 @@ describe('SessionPool', function() {
           });
         });
 
-        it('should destroy from the write pool', function(done) {
+        it('should destroy from the write pool', function() {
+          var returnPromise = Promise.resolve();
+
           sessionPool.writePool = {
             destroy: function(session_) {
               assert.strictEqual(session_, session);
-              setImmediate(done);
-              return Promise.resolve();
+              return returnPromise;
             }
           };
 
-          sessionPool.release(session);
-        });
-
-        it('should emit available when release is complete', function(done) {
-          sessionPool.writePool = {
-            destroy: function() {
-              return Promise.resolve();
-            }
-          };
-
-          sessionPool.emit = function(event) {
-            assert.strictEqual(event, 'available');
-            done();
-          };
-
-          sessionPool.release(session);
+          var returnVal = sessionPool.release(session);
+          assert.strictEqual(returnVal, returnPromise);
         });
       });
 
@@ -678,27 +680,16 @@ describe('SessionPool', function() {
           });
         });
 
-        it('should destroy from the pool', function(done) {
+        it('should destroy from the pool', function() {
+          var returnPromise = Promise.resolve();
+
           sessionPool.pool.destroy = function(session_) {
             assert.strictEqual(session_, session);
-            setImmediate(done);
-            return Promise.resolve();
+            return returnPromise;
           };
 
-          sessionPool.release(session);
-        });
-
-        it('should emit available when release is complete', function(done) {
-          sessionPool.pool.destroy = function() {
-            return Promise.resolve();
-          };
-
-          sessionPool.emit = function(event) {
-            assert.strictEqual(event, 'available');
-            done();
-          };
-
-          sessionPool.release(session);
+          var returnVal = sessionPool.release(session);
+          assert.strictEqual(returnVal, returnPromise);
         });
       });
     });
@@ -712,51 +703,29 @@ describe('SessionPool', function() {
         });
       });
 
-      it('should release the write session', function(done) {
+      it('should release the write session', function() {
+        var returnPromise = Promise.resolve();
+
         sessionPool.releaseWriteSession_ = function(session_) {
           assert.strictEqual(session_, session);
-          setImmediate(done);
-          return Promise.resolve();
+          return returnPromise;
         };
 
-        sessionPool.release(session);
-      });
-
-      it('should emit available when the release is complete', function(done) {
-        sessionPool.releaseWriteSession_ = function() {
-          return Promise.resolve();
-        };
-
-        sessionPool.emit = function(event) {
-          assert.strictEqual(event, 'available');
-          done();
-        };
-
-        sessionPool.release(session);
+        var returnVal = sessionPool.release(session);
+        assert.strictEqual(returnVal, returnPromise);
       });
     });
 
-    it('should destroy from the pool', function(done) {
+    it('should destroy from the pool', function() {
+      var returnPromise = Promise.resolve();
+
       sessionPool.pool.release = function(session) {
         assert.strictEqual(session, SESSION);
-        setImmediate(done);
-        return Promise.resolve();
+        return returnPromise;
       };
 
-      sessionPool.release(SESSION);
-    });
-
-    it('should emit available when the release is complete', function(done) {
-      sessionPool.pool.release = function() {
-        return Promise.resolve();
-      };
-
-      sessionPool.emit = function(event) {
-        assert.strictEqual(event, 'available');
-        done();
-      };
-
-      sessionPool.release(SESSION);
+      var returnVal = sessionPool.release(SESSION);
+      assert.strictEqual(returnVal, returnPromise);
     });
   });
 
@@ -1376,23 +1345,143 @@ describe('SessionPool', function() {
       });
     });
 
-    describe('listens for next opening', function() {
-      it('should call itself again when available is emitted', function(done) {
-        sessionPool.once = function(event, onAvailable) {
-          sessionPool.once = util.noop;
-
-          assert.strictEqual(event, 'available');
-
-          assert.strictEqual(
-            onAvailable(),
-            sessionPool.getNextAvailableSession_(OPTIONS, assert.ifError)
-          );
-
-          done();
+    describe('polls for next opening', function() {
+      it('should poll for the next available session', function(done) {
+        sessionPool.pollForSession_ = function(callback) {
+          callback();
         };
 
-        sessionPool.getNextAvailableSession_(OPTIONS, assert.ifError);
+        sessionPool.getNextAvailableSession_(OPTIONS, done);
       });
+    });
+  });
+
+  describe('pollForSession_', function() {
+    var setInterval_;
+
+    beforeEach(function() {
+      setInterval_ = global.setInterval;
+      global.setInterval = function(cb) {
+        global.setInterval.calledWith_ = arguments;
+        setImmediate(cb);
+        return 1;
+      };
+    });
+
+    afterEach(function() {
+      global.setInterval = setInterval_;
+    });
+
+    it('should capture the acquire request', function() {
+      var callback = function() {};
+
+      sessionPool.pollForSession_(callback);
+      assert.strictEqual(sessionPool.pendingAcquires.length, 1);
+
+      var pendingAcquire = sessionPool.pendingAcquires[0];
+
+      assert.strictEqual(pendingAcquire.callback, callback);
+      assert.strictEqual(pendingAcquire.timeout, sessionPool.acquireTimeout);
+    });
+
+    it('should bail if it detects an acquire interval exists', function() {
+      var callback = function() {};
+
+      sessionPool.acquireInterval = 1;
+      sessionPool.pollForSession_(callback);
+
+      assert.strictEqual(global.setInterval.calledWith_, undefined);
+    });
+
+    it('should poll for a free session', function() {
+      var callback = function() {};
+
+      sessionPool.pollForSession_(callback);
+
+      var intervalArgs = global.setInterval.calledWith_;
+
+      assert.strictEqual(sessionPool.acquireInterval, 1);
+      assert.strictEqual(typeof intervalArgs[0], 'function');
+      assert.strictEqual(intervalArgs[1], 30000);
+    });
+
+    it('should call getNextAvailableSession_ if a read free', function(done) {
+      sessionPool.getNextAvailableSession_ = function(callback) {
+        callback();
+      };
+
+      sessionPool.pool = { free: true };
+      sessionPool.pollForSession_(done);
+    });
+
+    it('should call getNextAvailableSession_ if a write free', function(done) {
+      sessionPool.getNextAvailableSession_ = function(callback) {
+        callback();
+      };
+
+      sessionPool.pool = { free: false };
+      sessionPool.writePool = { free: true };
+      sessionPool.pollForSession_(done);
+    });
+
+    it('should clear the interval when no pending acquires', function(done) {
+      var clearInterval_ = global.clearInterval;
+      var clearCalled = false;
+
+      sessionPool.pool = { free: true };
+
+      sessionPool.getNextAvailableSession_ = function() {
+        sessionPool.pendingAcquires = [];
+      };
+
+      global.clearInterval = function(handle) {
+        assert.strictEqual(handle, sessionPool.acquireInterval);
+
+        setImmediate(function() {
+          assert.strictEqual(sessionPool.acquireInterval, null);
+
+          global.clearInterval = clearInterval_;
+          done();
+        });
+      };
+
+      sessionPool.pollForSession_(assert.ifError);
+    });
+
+    it('should not clear the interval when pending acquires', function(done) {
+      var clearInterval_ = global.clearInterval;
+      var clearCalled = false;
+
+      sessionPool.pool = { free: true };
+
+      sessionPool.getNextAvailableSession_ = function() {
+        sessionPool.pendingAcquires = [{}, {}, {}];
+
+        setImmediate(function() {
+          assert.strictEqual(sessionPool.acquireInterval, 1);
+
+          global.clearInterval = clearInterval_;
+          done();
+        });
+      };
+
+      global.clearInterval = function() {
+        done(new Error('clearInterval should not be called'));
+      };
+
+      sessionPool.pollForSession_(assert.ifError);
+    });
+
+    it('should return an error if a timeout occurs', function(done) {
+      var callback = function(err) {
+        assert(err instanceof Error);
+        assert.strictEqual(err.message,
+          'Unable to acquire Session, timeout occurred.');
+        done();
+      };
+
+      sessionPool.acquireTimeout = 1;
+      sessionPool.pollForSession_(callback);
     });
   });
 

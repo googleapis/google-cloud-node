@@ -35,18 +35,18 @@ var util = require('util');
  *
  * @param {module:spanner/database} database - The DB instance.
  * @param {object=} options - Configuration options.
+ * @param {number} options.acquireTimeout - Time in milliseconds before giving
+ *     up trying to acquire a session.
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: `1`)
+ *     given time. (Default: Infinity)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
  *     in the pool at any given time.
  * @param {number} options.min - Minimum number of resources to keep in the pool
  *     at any given time. (Default: `0`)
  * @param {number} options.keepAlive - How often to ping idle sessions, in
  *     minutes. Must be less than 1 hour.
- * @param {number} options.acquireTimeout - Time before giving up trying to
- *     acquire a session.
  * @param {number} options.writes - Pre-allocate transactions for the number of
  *     sessions specified.
  */
@@ -283,16 +283,14 @@ SessionPool.prototype.release = function(session) {
 
   if (this.available >= this.maxIdle) {
     var pool = session.isWriteSession_ ? this.writePool : this.pool;
-    promise = pool.destroy(session);
-  } else if (session.isWriteSession_) {
-    promise = this.releaseWriteSession_(session);
-  } else {
-    promise = this.pool.release(session);
+    return pool.destroy(session);
   }
 
-  promise.then(function() {
-    self.emit('available');
-  });
+  if (session.isWriteSession_) {
+    return this.releaseWriteSession_(session);
+  }
+
+  return this.pool.release(session);
 };
 
 /**
@@ -498,7 +496,12 @@ SessionPool.prototype.getNextAvailableSession_ = function(options, callback) {
 };
 
 /**
+ * Polls pools for first available session.
  *
+ * @private
+ *
+ * @param {function} callback - The callback function to be executed when a
+ *     session is available.
  */
 SessionPool.prototype.pollForSession_ = function(callback) {
   this.pendingAcquires.push({
@@ -527,7 +530,7 @@ SessionPool.prototype.pollForSession_ = function(callback) {
       clearInterval(self.acquireInterval);
       self.acquireInterval = null;
     } else if (self.acquireTimeout) {
-      var err = new Error('Unable to acquire Session, timeout occured.');
+      var err = new Error('Unable to acquire Session, timeout occurred.');
       var acquire;
 
       for (var i = self.pendingAcquires.length - 1; i > -1; i--) {
