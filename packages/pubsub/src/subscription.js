@@ -409,6 +409,9 @@ Subscription.generateName_ = function() {
  * @throws {Error} If at least one ackId is not provided.
  *
  * @param {string|string[]} ackIds - An ackId or array of ackIds.
+ * @param {options=} options - Configuration object.
+ * @param {number} options.timeout - Set a maximum amount of time in
+ *     milliseconds before giving up if no response is received.
  * @param {function=} callback - The callback function.
  *
  * @example
@@ -423,7 +426,7 @@ Subscription.generateName_ = function() {
  *   var apiResponse = data[0];
  * });
  */
-Subscription.prototype.ack = function(ackIds, callback) {
+Subscription.prototype.ack = function(ackIds, options, callback) {
   var self = this;
 
   ackIds = arrify(ackIds);
@@ -434,12 +437,22 @@ Subscription.prototype.ack = function(ackIds, callback) {
     ].join(''));
   }
 
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
   callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Subscriber',
     method: 'acknowledge'
   };
+
+  if (options && is.number(options.timeout)) {
+    protoOpts.timeout = options.timeout;
+  }
 
   var reqOpts = {
     subscription: this.name,
