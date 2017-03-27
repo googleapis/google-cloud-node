@@ -203,11 +203,11 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
 
   if (query.keys) {
     reqOpts.keySet = {
-      keys: [
-        {
-          values: arrify(query.keys).map(codec.encode)
-        }
-      ]
+      keys: arrify(query.keys).map(function(key) {
+        return {
+          values: arrify(key).map(codec.encode)
+        };
+      })
     };
     delete reqOpts.keys;
   }
@@ -279,11 +279,11 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
   mutation['delete'] = {
     table: table,
     keySet: {
-      keys: [
-        {
-          values: arrify(keys).map(commonGrpc.Service.encodeValue_)
-        }
-      ]
+      keys: arrify(keys).map(function(key) {
+        return {
+          values: arrify(key).map(commonGrpc.Service.encodeValue_)
+        };
+      })
     }
   };
 

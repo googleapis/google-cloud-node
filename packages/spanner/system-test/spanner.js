@@ -511,6 +511,46 @@ var spanner = new Spanner(env);
       });
     });
 
+    it('should insert and delete multiple rows', function(done) {
+      var id = generateName('id');
+      var id2 = generateName('id2');
+
+      var name = generateName('name');
+
+      table.insert([
+        {
+          SingerId: id,
+          Name: name
+        },
+        {
+          SingerId: id2,
+          Name: name
+        }
+      ], function(err) {
+        assert.ifError(err);
+
+        table.deleteRows([id, id2], function(err) {
+          assert.ifError(err);
+
+          var rows = [];
+
+          table
+            .createReadStream({
+              keys: [id, id2],
+              columns: ['SingerId']
+            })
+            .on('error', done)
+            .on('data', function(row) {
+              rows.push(row);
+            })
+            .on('end', function() {
+              assert.strictEqual(rows.length, 0);
+              done();
+            });
+        });
+      });
+    });
+
     it('should insert and query multiple rows', function(done) {
       var id1 = generateName('id');
       var name1 = generateName('name');
