@@ -410,6 +410,19 @@ describe('Subscription', function() {
       subscription.ack(IDS, assert.ifError);
     });
 
+    it('should honor the timeout setting', function(done) {
+      var options = {
+        timeout: 10
+      };
+
+      subscription.request = function(protoOpts) {
+        assert.strictEqual(protoOpts.timeout, options.timeout);
+        done();
+      };
+
+      subscription.ack('abc', options, assert.ifError);
+    });
+
     it('should unmark the ack ids as being in progress', function(done) {
       subscription.request = function(protoOpts, reqOpts, callback) {
         callback();
