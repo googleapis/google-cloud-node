@@ -327,7 +327,7 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
  *
  *   // Queue this mutation until later calling `commit`.
  *   // Note that a callback is not passed to `insert`.
- *   transaction.insert(row);
+ *   transaction.insert('Singers', row);
  *
  *   // Commit the transaction.
  *   transaction.commit(function(err) {
@@ -352,7 +352,7 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
  *
  *   // Queue multiple mutations until later calling `commit`.
  *   // Note that a callback is not passed to `insert`.
- *   transaction.insert([
+ *   transaction.insert('Singers', [
  *     row,
  *     row2
  *   ]);
@@ -374,7 +374,7 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
  *
  *     // Queue this mutation until later calling `commit`.
  *     // Note that a callback is not passed to `insert`.
- *     transaction.insert(row);
+ *     transaction.insert('Singers', row);
  *
  *     // Commit the transaction.
  *     return transaction.commit();
