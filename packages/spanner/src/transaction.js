@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var delay = require('delay');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -277,18 +278,12 @@ Transaction.prototype.commit = function(callback) {
     var shouldRetry = err.code === ABORTED && is.fn(self.runFn_) && delay;
 
     if (!shouldRetry) {
+      self.end();
       callback(err, resp);
       return;
     }
 
-    self.retry_(delay, function(err) {
-      if (err) {
-        // Only execute the callback if there's an error.
-        // If there wasn't an error, `commit` will eventually be called again
-        // when the user's "runFn" is retried.
-        callback(err);
-      }
-    });
+    self.retry_(delay, callback);
   });
 };
 
@@ -659,14 +654,17 @@ Transaction.prototype.retry_ = function(timeout, callback) {
 
   this.retries_++;
 
-  this.begin(function(err) {
-    if (!err) {
+  this.begin()
+    .then(delay(timeout))
+    .then(function() {
       self.queuedMutations_ = [];
-      setTimeout(self.runFn_.bind(self), timeout);
-    }
-
-    callback(err);
-  });
+      return self.runFn_();
+    })
+    .then(function(data) {
+      data = data || [];
+      data.unshift(null);
+      callback.apply(null, data);
+    }, callback);
 };
 
 /**

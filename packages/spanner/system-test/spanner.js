@@ -1035,9 +1035,56 @@ var spanner = new Spanner(env);
 
             transaction.commit(function(err) {
               assert.ifError(err);
-
-              firstTransaction.commit(done);
+              firstTransaction.commit(assert.ifError);
             });
+          });
+        });
+      }
+    });
+
+    it('should retry an aborted transaction in promise mode', function() {
+      var id = generateName('id');
+      var name = generateName('name');
+      var attempts = 0;
+
+      return database.runTransaction(function(err, transaction) {
+        if (err) {
+          return Promise.reject(err);
+        }
+
+        attempts += 1;
+
+        return transaction.run('SELECT * FROM Singers').then(function() {
+          transaction.insert('Singers', {
+            SingerId: id,
+            Name: name
+          });
+
+          if (attempts < 2) {
+            return runOtherTransaction(transaction);
+          }
+
+          return transaction.commit();
+        });
+      }).then(function(data) {
+        assert.strictEqual(attempts, 2);
+      });
+
+      function runOtherTransaction(firstTransaction) {
+        return database.runTransaction(function(err, transaction) {
+          if (err) {
+            return Promise.reject(err);
+          }
+
+          return transaction.run('SELECT * FROM Singers').then(function() {
+            transaction.insert('Singers', {
+              SingerId: generateName('id'),
+              Name: generateName('name')
+            });
+
+            return transaction.commit();
+          }).then(function() {
+            return firstTransaction.commit();
           });
         });
       }

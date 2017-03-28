@@ -37,6 +37,7 @@
     "@google-cloud/common-grpc": "^0.2.1",
     "arrify": "^1.0.1",
     "checkpoint-stream": "^0.1.0",
+    "delay": "^2.0.0",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
     "generic-pool": "^3.1.4",
