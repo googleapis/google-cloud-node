@@ -721,16 +721,15 @@ Database.prototype.runStream = function(query, options) {
  *   }
  *
  *   // Run a transactional query.
- *   return transaction.run('SELECT * FROM Singers')
- *     .then(function() {
- *       // Queue a mutation (note there is no callback passed to `insert`).
- *       transaction.insert('Singers', {
- *         SingerId: 'Id3b',
- *         Name: 'Joe West'
- *       });
- *       // Commit the transaction.
- *       return transaction.commit();
+ *   return transaction.run('SELECT * FROM Singers').then(function() {
+ *     // Queue a mutation (note there is no callback passed to `insert`).
+ *     transaction.insert('Singers', {
+ *       SingerId: 'Id3b',
+ *       Name: 'Joe West'
  *     });
+ *     // Commit the transaction.
+ *     return transaction.commit();
+ *   });
  * })
  * .then(function() {
  *   // Transaction committed successfully.
