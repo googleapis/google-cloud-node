@@ -30,13 +30,13 @@ var eventId = new EventId();
 /**
  * Create an entry object to define new data to insert into a log.
  *
- * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
+ * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry}
  *
  * @alias module:logging/entry
  * @constructor
  *
  * @param {object=} metadata - See a
- *     [LogEntry Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
+ *     [LogEntry Resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  *
@@ -109,7 +109,7 @@ function Entry(metadata, data) {
  * @private
  *
  * @param {object} entry - An API representation of an entry. See a
- *     [LogEntry](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
+ *     [LogEntry](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
  * @return {module:logging/entry}
  */
 Entry.fromApiResponse_ = function(entry) {
