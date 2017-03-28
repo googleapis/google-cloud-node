@@ -22,7 +22,6 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
 
@@ -112,8 +111,9 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
  *     [`ReadRequest`](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.ReadRequest).
  * @param {string[]} query.columns - The columns of the table to be returned for
  *     each row matching this query.
- * @param {string[]} query.keys - The primary keys of the rows in this table to
- *     be yielded.
+ * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
+ *     be yielded. If using a composite key, provide an array within this array.
+ *     See the example below.
  * @param {string[]=} query.index - The name of an index on the table.
  * @param {number=} query.limit - The number of rows to yield.
  * @return {Stream}
@@ -145,6 +145,23 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
  *       // All results retrieved.
  *     });
  * });
+ *
+ * //-
+ * // Provide an array for `query.keys` to read with a composite key.
+ * //-
+ * var query = {
+ *   keys: [
+ *     [
+ *       'Id1',
+ *       'Name1'
+ *     ],
+ *     [
+ *       'Id2',
+ *       'Name2'
+ *     ]
+ *   ],
+ *   // ...
+ * };
  *
  * //-
  * // Rows are returned as an array of object arrays. Each object has a `name`
@@ -228,7 +245,8 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
  * @resource [Commit API Documentation](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.Spanner.Commit)
  *
  * @param {string} table - The name of the table.
- * @param {string[]} keys - The keys for the rows to delete.
+ * @param {*[]|*[][]} keys - The keys for the rows to delete. If using a
+ *     composite key, provide an array within this array. See the example below.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -252,6 +270,20 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
  *     }
  *   });
  * });
+ *
+ * //-
+ * // Provide an array for `keys` to read with a composite key.
+ * //-
+ * var keys = [
+ *   [
+ *     'Id1',
+ *     'Name1'
+ *   ],
+ *   [
+ *     'Id2',
+ *     'Name2'
+ *   ]
+ * ];
  *
  * //-
  * // If you are using a Promise to retrieve the transaction.
@@ -281,7 +313,7 @@ TransactionRequest.prototype.deleteRows = function(table, keys, callback) {
     keySet: {
       keys: arrify(keys).map(function(key) {
         return {
-          values: arrify(key).map(commonGrpc.Service.encodeValue_)
+          values: arrify(key).map(codec.encode)
         };
       })
     }
@@ -397,8 +429,9 @@ TransactionRequest.prototype.insert = function(table, keyVals, callback) {
  *     the table.
  * @param {string[]} query.columns - The columns of the table to be returned for
  *     each row matching this query.
- * @param {string[]} query.keys - The primary keys of the rows in this table to
- *     be yielded.
+ * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
+ *     be yielded. If using a composite key, provide an array within this array.
+ *     See the example below.
  * @param {string[]=} query.index - The name of an index on the table.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
@@ -440,6 +473,23 @@ TransactionRequest.prototype.insert = function(table, keyVals, callback) {
  *     transaction.end();
  *   });
  * });
+ *
+ * //-
+ * // Provide an array for `query.keys` to read with a composite key.
+ * //-
+ * var query = {
+ *   keys: [
+ *     [
+ *       'Id1',
+ *       'Name1'
+ *     ],
+ *     [
+ *       'Id2',
+ *       'Name2'
+ *     ]
+ *   ],
+ *   // ...
+ * };
  *
  * //-
  * // Rows are returned as an array of object arrays. Each object has a `name`
