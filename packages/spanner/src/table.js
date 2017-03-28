@@ -117,7 +117,7 @@ Table.prototype.create = function(schema, callback) {
  * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
  *     be yielded. If using a composite key, provide an array within this array.
  *     See the example below.
- * @param {string[]=} query.index - The name of an index on the table.
+ * @param {string=} query.index - The name of an index on the table.
  * @param {number} query.limit - The number of rows to return.
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
@@ -251,7 +251,7 @@ Table.prototype.delete = function(callback) {
  * table.deleteRows(keys, function(err, apiResponse) {});
  *
  * //-
- * // Provide an array for `keys` to read with a composite key.
+ * // Provide an array for `keys` to delete rows with a composite key.
  * //-
  * var keys = [
  *   [
@@ -346,7 +346,7 @@ Table.prototype.insert = function(keyVals, callback) {
  * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
  *     be yielded. If using a composite key, provide an array within this array.
  *     See the example below.
- * @param {string[]=} query.index - The name of an index on the table.
+ * @param {string=} query.index - The name of an index on the table.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
