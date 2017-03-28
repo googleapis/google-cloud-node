@@ -318,9 +318,16 @@ describe('Transaction', function() {
       });
 
       it('should execute callback with error and API response', function(done) {
+        var endCalled = false;
+
+        transaction.end = function() {
+          endCalled = true;
+        };
+
         transaction.commit(function(err, apiResponse) {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(apiResponse, API_RESPONSE);
+          assert(endCalled);
           done();
         });
       });
@@ -830,8 +837,8 @@ describe('Transaction', function() {
     it('should return an error if transaction cannot begin', function(done) {
       var error = new Error('Error.');
 
-      transaction.begin = function(callback) {
-        callback(error);
+      transaction.begin = function() {
+        return Promise.reject(error);
       };
 
       transaction.retry_(TIMEOUT, function(err) {
@@ -844,8 +851,8 @@ describe('Transaction', function() {
       beforeEach(function() {
         transaction.runFn_ = function() {};
 
-        transaction.begin = function(callback) {
-          callback();
+        transaction.begin = function() {
+          return Promise.resolve();
         };
       });
 

@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var delay = require('delay');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -86,6 +87,10 @@ var ABORTED = 10;
  * var database = instance.database('my-database');
  *
  * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
  *   // The `transaction` object is ready for use.
  * });
  */
@@ -223,25 +228,26 @@ Transaction.prototype.begin = function(callback) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     // Queue a mutation (note that there is no callback passed to `insert`).
- *     transaction.insert('Singers', {
- *       SingerId: 'Id3b',
- *       Name: 'Joe West'
- *     });
- *
- *     return transaction.commit();
- *   })
- *   .then(function(data) {
- *     var apiResponse = data[0];
- *
- *     // Mutations were committed successfully.
+ *   // Queue a mutation (note that there is no callback passed to `insert`).
+ *   transaction.insert('Singers', {
+ *     SingerId: 'Id3b',
+ *     Name: 'Joe West'
  *   });
+ *
+ *   return transaction.commit();
+ * })
+ * .then(function(data) {
+ *   var apiResponse = data[0];
+ *
+ *   // Mutations were committed successfully.
+ * });
  */
 Transaction.prototype.commit = function(callback) {
   var self = this;
@@ -272,18 +278,12 @@ Transaction.prototype.commit = function(callback) {
     var shouldRetry = err.code === ABORTED && is.fn(self.runFn_) && delay;
 
     if (!shouldRetry) {
+      self.end();
       callback(err, resp);
       return;
     }
 
-    self.retry_(delay, function(err) {
-      if (err) {
-        // Only execute the callback if there's an error.
-        // If there wasn't an error, `commit` will eventually be called again
-        // when the user's "runFn" is retried.
-        callback(err);
-      }
-    });
+    self.retry_(delay, callback);
   });
 };
 
@@ -344,17 +344,18 @@ Transaction.prototype.requestStream = function(config) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     return transaction.rollback();
- *   })
- *   .then(function() {
- *     // Transaction rolled back successfully.
- *   });
+ *   return transaction.rollback();
+ * })
+ * .then(function() {
+ *   // Transaction rolled back successfully.
+ * });
  */
 Transaction.prototype.rollback = function(callback) {
   var self = this;
@@ -442,17 +443,18 @@ Transaction.prototype.rollback = function(callback) {
  * });
  *
  * //-
- * // If the callback is omitted, we'll return a Promise.
+ * // To use promises, simply return a Promise.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     transaction.run(query)
- *       .then(function(data) {
- *         var rows = data[0];
- *       });
- *   });
+ *   return transaction.run(query)
+ *     .then(function(data) {
+ *       var rows = data[0];
+ *     });
+ * });
  */
 Transaction.prototype.run = function(query, callback) {
   var rows = [];
@@ -482,7 +484,7 @@ Transaction.prototype.run = function(query, callback) {
  * @example
  * var query = 'SELECT * FROM Singers';
  *
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -504,7 +506,7 @@ Transaction.prototype.run = function(query, callback) {
  * // The SQL query string can contain parameter placeholders. A parameter
  * // placeholder consists of '@' followed by the parameter name.
  * //-
- * database.runTransaction(function(err) {
+ * database.runTransaction(function(err, transaction) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
@@ -526,16 +528,19 @@ Transaction.prototype.run = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
+ * database.runTransaction(function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
  *
- *     transaction.runStream(query)
- *       .on('data', function(row) {})
- *       .on('end', function() {
- *         // All results retrieved.
- *       });
- *   });
+ *   transaction.runStream(query)
+ *     .on('data', function(row) {
+ *       this.end();
+ *     })
+ *     .on('end', function() {
+ *       // All results retrieved.
+ *     });
+ * });
  */
 Transaction.prototype.runStream = function(query) {
   var self = this;
@@ -649,14 +654,17 @@ Transaction.prototype.retry_ = function(timeout, callback) {
 
   this.retries_++;
 
-  this.begin(function(err) {
-    if (!err) {
+  this.begin()
+    .then(delay(timeout))
+    .then(function() {
       self.queuedMutations_ = [];
-      setTimeout(self.runFn_.bind(self), timeout);
-    }
-
-    callback(err);
-  });
+      return self.runFn_();
+    })
+    .then(function(data) {
+      data = data || [];
+      data.unshift(null);
+      callback.apply(null, data);
+    }, callback);
 };
 
 /**
