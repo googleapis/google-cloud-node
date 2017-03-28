@@ -208,8 +208,17 @@ Vision.prototype.annotate = function(requests, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   vision.detect(image, function(err, detection, apiResponse) {});
+ *   vision.detect(image, types, function(err, detection, apiResponse) {});
  * });
+ *
+ * //-
+ * // If you have a base64 string, provide it in a Buffer.
+ * //-
+ * var myBase64ImageRepresentation = '...';
+ *
+ * var image = new Buffer(myBase64ImageRepresentation, 'base64');
+ *
+ * vision.detect(image, types, function(err, detection, apiResponse) {});
  *
  * //-
  * // Supply multiple images for feature detection.
