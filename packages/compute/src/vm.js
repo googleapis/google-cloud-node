@@ -916,7 +916,8 @@ VM.prototype.startPolling_ = function() {
  * //-
  * // By default, `waitFor` will timeout after 300 seconds after waiting for
  * // the desired state to occur. This can be changed to any number between
- * // 0 and 600
+ * // 0 and 600. If the timeout is set to 0, it will poll once
+ * // for status and then timeout if desired the state is not reached.
  * //-
  * var options = {
  *   timeout: 300
@@ -935,18 +936,14 @@ VM.prototype.waitFor = function(status, options, callback) {
     options = {};
   }
   options = options || {};
-  // If timeout not set, set to default of 300 seconds.
-  if (!options.timeout) {
+
+  // The timeout should default to five minutes, be less than or equal to
+  // 10 minutes, and be greater than or equal to 0 seconds.
+  if (options.timeout === null || options.timeout === undefined) {
     options.timeout = 300;
   }
-  // If timeout is more than 600 seconds, set to 600 seconds.
-  else if (options.timeout > 600) {
-    options.timeout = 600;
-  }
-  // If timeout is less than 0, set to 0 seconds.
-  else if (options.timeout < 0) {
-    options.timeout = 0;
-  }
+  options.timeout = Math.max(options.timeout, 0);
+  options.timeout = Math.min(options.timeout, 600);
 
   if (VALID_STATUSES.indexOf(status) === -1) {
     callback({
