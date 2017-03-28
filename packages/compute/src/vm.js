@@ -47,11 +47,15 @@ var DetachDiskError = createErrorClass('DetachDiskError', function(message) {
 
 /**
  * Interval for polling during waitFor.
+ *
+ * @private
  */
 var WAIT_FOR_POLLING_INTERVAL = 2000;
 
 /**
  * The statuses that a VM can be in.
+ *
+ * @private
  */
 var VALID_STATUSES = [
      'PROVISIONING',
