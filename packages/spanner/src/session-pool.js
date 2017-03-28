@@ -36,11 +36,12 @@ var util = require('util');
  * @param {module:spanner/database} database - The DB instance.
  * @param {object=} options - Configuration options.
  * @param {number} options.acquireTimeout - Time in milliseconds before giving
- *     up trying to acquire a session.
+ *     up trying to acquire a session. If the specified value is `0`, a timeout
+ *     will not occur.
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: Infinity)
+ *     given time. (Default: Number.MAX_SAFE_INTEGER)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
  *     in the pool at any given time.
  * @param {number} options.min - Minimum number of resources to keep in the pool
@@ -148,7 +149,7 @@ SessionPool.getPoolOptions_ = function(userOptions) {
     testOnBorrow: true,
     max: userOptions.max || Number.MAX_SAFE_INTEGER,
     min: userOptions.min || 0,
-    numTestsPerRun: Infinity
+    numTestsPerRun: Number.MAX_SAFE_INTEGER
   };
 
   poolOptions.numTestsPerRun = poolOptions.max;
@@ -278,9 +279,6 @@ SessionPool.prototype.getWriteSession = function(callback) {
  * @param {module:spanner/session} session - The session to be released.
  */
 SessionPool.prototype.release = function(session) {
-  var self = this;
-  var promise;
-
   if (this.available >= this.maxIdle) {
     var pool = session.isWriteSession_ ? this.writePool : this.pool;
     return pool.destroy(session);
@@ -509,14 +507,14 @@ SessionPool.prototype.pollForSession_ = function(callback) {
     timeout: this.acquireTimeout
   });
 
-  if (this.acquireInterval) {
+  if (this.acquireIntervalId) {
     return;
   }
 
   var self = this;
   var intervalSpeed = 30000;
 
-  this.acquireInterval = setInterval(checkForSession, intervalSpeed);
+  this.acquireIntervalId = setInterval(checkForSession, intervalSpeed);
 
   function checkForSession() {
     var hasFreeSession = self.pool.free ||
@@ -527,8 +525,8 @@ SessionPool.prototype.pollForSession_ = function(callback) {
     }
 
     if (!self.pendingAcquires.length) {
-      clearInterval(self.acquireInterval);
-      self.acquireInterval = null;
+      clearInterval(self.acquireIntervalId);
+      self.acquireIntervalId = null;
     } else if (self.acquireTimeout) {
       var err = new Error('Unable to acquire Session, timeout occurred.');
       var acquire;
@@ -538,8 +536,8 @@ SessionPool.prototype.pollForSession_ = function(callback) {
         acquire.timeout -= intervalSpeed;
 
         if (acquire.timeout < 0) {
-          acquire.callback(err);
           self.pendingAcquires.splice(i, 1);
+          acquire.callback(err);
         }
       }
     }

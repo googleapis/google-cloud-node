@@ -66,6 +66,10 @@ describe('SessionPool', function() {
       assert.strictEqual(sessionPool.database, DATABASE);
     });
 
+    it('should initialize pendingAcquires', function() {
+      assert.deepEqual(sessionPool.pendingAcquires, []);
+    });
+
     it('should get pool options and create a pool', function(done) {
       var poolOptions = {};
 
@@ -1348,7 +1352,7 @@ describe('SessionPool', function() {
     describe('polls for next opening', function() {
       it('should poll for the next available session', function(done) {
         sessionPool.pollForSession_ = function(callback) {
-          callback();
+          callback(); // done
         };
 
         sessionPool.getNextAvailableSession_(OPTIONS, done);
@@ -1357,19 +1361,25 @@ describe('SessionPool', function() {
   });
 
   describe('pollForSession_', function() {
+    var SET_INTERVAL_ID = 1;
+
     var setInterval_;
+    var clearInterval_;
 
     beforeEach(function() {
       setInterval_ = global.setInterval;
+      clearInterval_ = global.clearInterval;
+
       global.setInterval = function(cb) {
         global.setInterval.calledWith_ = arguments;
         setImmediate(cb);
-        return 1;
+        return SET_INTERVAL_ID;
       };
     });
 
     afterEach(function() {
       global.setInterval = setInterval_;
+      global.clearInterval = clearInterval_;
     });
 
     it('should capture the acquire request', function() {
@@ -1387,7 +1397,7 @@ describe('SessionPool', function() {
     it('should bail if it detects an acquire interval exists', function() {
       var callback = function() {};
 
-      sessionPool.acquireInterval = 1;
+      sessionPool.acquireIntervalId = SET_INTERVAL_ID;
       sessionPool.pollForSession_(callback);
 
       assert.strictEqual(global.setInterval.calledWith_, undefined);
@@ -1400,14 +1410,14 @@ describe('SessionPool', function() {
 
       var intervalArgs = global.setInterval.calledWith_;
 
-      assert.strictEqual(sessionPool.acquireInterval, 1);
+      assert.strictEqual(sessionPool.acquireIntervalId, SET_INTERVAL_ID);
       assert.strictEqual(typeof intervalArgs[0], 'function');
       assert.strictEqual(intervalArgs[1], 30000);
     });
 
     it('should call getNextAvailableSession_ if a read free', function(done) {
       sessionPool.getNextAvailableSession_ = function(callback) {
-        callback();
+        callback(); // done
       };
 
       sessionPool.pool = { free: true };
@@ -1416,7 +1426,7 @@ describe('SessionPool', function() {
 
     it('should call getNextAvailableSession_ if a write free', function(done) {
       sessionPool.getNextAvailableSession_ = function(callback) {
-        callback();
+        callback(); // done
       };
 
       sessionPool.pool = { free: false };
@@ -1425,9 +1435,6 @@ describe('SessionPool', function() {
     });
 
     it('should clear the interval when no pending acquires', function(done) {
-      var clearInterval_ = global.clearInterval;
-      var clearCalled = false;
-
       sessionPool.pool = { free: true };
 
       sessionPool.getNextAvailableSession_ = function() {
@@ -1435,12 +1442,10 @@ describe('SessionPool', function() {
       };
 
       global.clearInterval = function(handle) {
-        assert.strictEqual(handle, sessionPool.acquireInterval);
+        assert.strictEqual(handle, sessionPool.acquireIntervalId);
 
         setImmediate(function() {
-          assert.strictEqual(sessionPool.acquireInterval, null);
-
-          global.clearInterval = clearInterval_;
+          assert.strictEqual(sessionPool.acquireIntervalId, null);
           done();
         });
       };
@@ -1449,18 +1454,13 @@ describe('SessionPool', function() {
     });
 
     it('should not clear the interval when pending acquires', function(done) {
-      var clearInterval_ = global.clearInterval;
-      var clearCalled = false;
-
       sessionPool.pool = { free: true };
 
       sessionPool.getNextAvailableSession_ = function() {
         sessionPool.pendingAcquires = [{}, {}, {}];
 
         setImmediate(function() {
-          assert.strictEqual(sessionPool.acquireInterval, 1);
-
-          global.clearInterval = clearInterval_;
+          assert.strictEqual(sessionPool.acquireIntervalId, SET_INTERVAL_ID);
           done();
         });
       };
@@ -1472,16 +1472,42 @@ describe('SessionPool', function() {
       sessionPool.pollForSession_(assert.ifError);
     });
 
-    it('should return an error if a timeout occurs', function(done) {
-      var callback = function(err) {
-        assert(err instanceof Error);
-        assert.strictEqual(err.message,
-          'Unable to acquire Session, timeout occurred.');
-        done();
-      };
+    describe('timeouts', function() {
+      beforeEach(function() {
+        sessionPool.acquireTimeout = 1;
+      });
 
-      sessionPool.acquireTimeout = 1;
-      sessionPool.pollForSession_(callback);
+      it('should adjust the acquire request timeoout', function(done) {
+        var acquireRequest;
+
+        var callback = function() {
+          assert.strictEqual(acquireRequest.timeout, -29999);
+          done();
+        };
+
+        sessionPool.pollForSession_(callback);
+        acquireRequest = sessionPool.pendingAcquires[0];
+      });
+
+      it('should remove the acquire request from the queue', function(done) {
+        var callback = function() {
+          assert.strictEqual(sessionPool.pendingAcquires.length, 0);
+          done();
+        };
+
+        sessionPool.pollForSession_(callback);
+      });
+
+      it('should return an error if a timeout occurs', function(done) {
+        var callback = function(err) {
+          assert(err instanceof Error);
+          assert.strictEqual(err.message,
+            'Unable to acquire Session, timeout occurred.');
+          done();
+        };
+
+        sessionPool.pollForSession_(callback);
+      });
     });
   });
 
