@@ -208,7 +208,7 @@ Vision.prototype.annotate = function(requests, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   vision.detect(image, function(err, detection, apiResponse) {});
+ *   vision.detect(image, types, function(err, detection, apiResponse) {});
  * });
  *
  * //-
@@ -218,7 +218,7 @@ Vision.prototype.annotate = function(requests, callback) {
  *
  * var image = new Buffer(myBase64ImageRepresentation, 'base64');
  *
- * vision.detect(image, function(err, detection, apiResponse) {});
+ * vision.detect(image, types, function(err, detection, apiResponse) {});
  *
  * //-
  * // Supply multiple images for feature detection.
