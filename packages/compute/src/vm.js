@@ -914,9 +914,9 @@ VM.prototype.startPolling_ = function() {
  *   }
  * });
  *
- * vm.waitFor('STOPPED', options, function(err, apiResponse) {
+ * vm.waitFor('TERMINATED', options, function(err, apiResponse) {
  *   if (!err) {
- *     // The VM is stopped.
+ *     // The VM is terminated.
  *   }
  * });
  *
