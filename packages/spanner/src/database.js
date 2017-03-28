@@ -71,10 +71,13 @@ var TransactionRequest = require('./transaction-request.js');
  *
  * @param {string} name - Name of the database.
  * @param {object=} options - Session pool configuration options.
+ * @param {number} options.acquireTimeout - Time in milliseconds before giving
+ *     up trying to acquire a session. If the specified value is `0`, a timeout
+ *     will not occur. (Default: `0`)
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: `1`)
+ *     given time. (Default: Number.MAX_SAFE_INTEGER)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
  *     in the pool at any given time.
  * @param {number} options.min - Minimum number of resources to keep in the pool

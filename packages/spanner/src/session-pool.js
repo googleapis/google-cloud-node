@@ -35,10 +35,13 @@ var util = require('util');
  *
  * @param {module:spanner/database} database - The DB instance.
  * @param {object=} options - Configuration options.
+ * @param {number} options.acquireTimeout - Time in milliseconds before giving
+ *     up trying to acquire a session. If the specified value is `0`, a timeout
+ *     will not occur. (Default: `0`)
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: `1`)
+ *     given time. (Default: Number.MAX_SAFE_INTEGER)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
  *     in the pool at any given time.
  * @param {number} options.min - Minimum number of resources to keep in the pool
@@ -58,6 +61,9 @@ function SessionPool(database, options) {
   this.database = database;
   this.maxIdle = options.maxIdle || 1;
   this.fail = !!options.fail;
+
+  this.pendingAcquires = [];
+  this.acquireTimeout = options.acquireTimeout || 0;
 
   var poolOptions = SessionPool.getPoolOptions_(options);
   var writePoolOptions;
@@ -141,9 +147,9 @@ SessionPool.getPoolOptions_ = function(userOptions) {
   var poolOptions = {
     idleTimeoutMillis: 59 * 60000,
     testOnBorrow: true,
-    max: userOptions.max || 1,
+    max: userOptions.max || Number.MAX_SAFE_INTEGER,
     min: userOptions.min || 0,
-    numTestsPerRun: Infinity
+    numTestsPerRun: Number.MAX_SAFE_INTEGER
   };
 
   poolOptions.numTestsPerRun = poolOptions.max;
@@ -273,21 +279,16 @@ SessionPool.prototype.getWriteSession = function(callback) {
  * @param {module:spanner/session} session - The session to be released.
  */
 SessionPool.prototype.release = function(session) {
-  var self = this;
-  var promise;
-
   if (this.available >= this.maxIdle) {
     var pool = session.isWriteSession_ ? this.writePool : this.pool;
-    promise = pool.destroy(session);
-  } else if (session.isWriteSession_) {
-    promise = this.releaseWriteSession_(session);
-  } else {
-    promise = this.pool.release(session);
+    return pool.destroy(session);
   }
 
-  promise.then(function() {
-    self.emit('available');
-  });
+  if (session.isWriteSession_) {
+    return this.releaseWriteSession_(session);
+  }
+
+  return this.pool.release(session);
 };
 
 /**
@@ -489,9 +490,58 @@ SessionPool.prototype.getNextAvailableSession_ = function(options, callback) {
     return;
   }
 
-  this.once('available', function() {
-    self.getNextAvailableSession_(options, callback);
+  this.pollForSession_(callback);
+};
+
+/**
+ * Polls pools for first available session.
+ *
+ * @private
+ *
+ * @param {function} callback - The callback function to be executed when a
+ *     session is available.
+ */
+SessionPool.prototype.pollForSession_ = function(callback) {
+  this.pendingAcquires.push({
+    callback: callback,
+    timeout: this.acquireTimeout
   });
+
+  if (this.acquireIntervalId) {
+    return;
+  }
+
+  var self = this;
+  var intervalSpeed = 30000;
+
+  this.acquireIntervalId = setInterval(checkForSession, intervalSpeed);
+
+  function checkForSession() {
+    var hasFreeSession = self.pool.free ||
+      self.writePool && self.writePool.free;
+
+    if (hasFreeSession) {
+      self.getNextAvailableSession_(self.pendingAcquires.shift().callback);
+    }
+
+    if (!self.pendingAcquires.length) {
+      clearInterval(self.acquireIntervalId);
+      self.acquireIntervalId = null;
+    } else if (self.acquireTimeout) {
+      var err = new Error('Unable to acquire Session, timeout occurred.');
+      var acquire;
+
+      for (var i = self.pendingAcquires.length - 1; i > -1; i--) {
+        acquire = self.pendingAcquires[i];
+        acquire.timeout -= intervalSpeed;
+
+        if (acquire.timeout < 0) {
+          self.pendingAcquires.splice(i, 1);
+          acquire.callback(err);
+        }
+      }
+    }
+  }
 };
 
 /**
