@@ -866,9 +866,12 @@ VM.prototype.startPolling_ = function() {
       } else {
         if ((now.getTime() / 1000) - self.waiters[index].startTime >=
               self.waiters[index].timeout) {
-          self.waiters[index].callback({
-            name: 'WaitForTimeout'
-          },null);
+          var message = 'waitFor() timed out waiting for VM ' + self.name +
+              ' to be in status ' + self.waiters[index].status;
+          var error = new Error(message);
+          error.code = 'WAIT_FOR_TIMEOUT';
+          error.name = 'WaitForTimeout';
+          self.waiters[index].callback(error, null);
           self.waiters.splice(index, 1);
         }
       }
@@ -950,9 +953,7 @@ VM.prototype.waitFor = function(status, options, callback) {
   options.timeout = Math.min(options.timeout, 600);
 
   if (VALID_STATUSES.indexOf(status) === -1) {
-    callback({
-      name: 'StatusNotValid'
-    }, null);
+    throw new Error('Status passed to waitFor() is invalid');
   }
   var now = new Date();
   this.waiters.push({
