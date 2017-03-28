@@ -261,6 +261,43 @@ describe('codec', function() {
       });
     });
 
+    it('should skip falsy struct keys in JSON', function() {
+      var value = {
+        undefined: '1'
+      };
+
+      var int = { int: true };
+      codec.Int = function(value_) {
+        assert.strictEqual(value_, value[undefined]);
+        return int;
+      };
+
+      var decoded = codec.decode(value, {
+        type: {
+          code: 'STRUCT',
+          structType: {
+            fields: [
+              {
+                name: undefined,
+                type: {
+                  code: 'INT64'
+                }
+              }
+            ]
+          }
+        }
+      });
+
+      assert.deepEqual(decoded, [
+        {
+          name: undefined,
+          value: int
+        }
+      ]);
+
+      assert.deepEqual(decoded.toJSON(), {});
+    });
+
     it('should decode STRUCT and inner members by index', function() {
       var value = [
         '1'
