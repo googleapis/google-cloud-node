@@ -706,17 +706,25 @@ function promisify(originalMethod, options) {
   var slice = Array.prototype.slice;
 
   var wrapper = function() {
+    var context = this;
     var last;
+
     for (last = arguments.length - 1; last >= 0; last--) {
       var arg = arguments[last];
-      if (arg === undefined) continue;  // skip trailing undefined.
-      if (!is.fn(arg)) break;           // non-callback last argument found.
-      return originalMethod.apply(this, arguments);
+
+      if (is.undefined(arg)) {
+        continue; // skip trailing undefined.
+      }
+
+      if (!is.fn(arg)) {
+        break; // non-callback last argument found.
+      }
+
+      return originalMethod.apply(context, arguments);
     }
 
     // peel trailing undefined.
     var args = slice.call(arguments, 0, last + 1);
-    var context = this;
 
     var PromiseCtor = Promise;
 
