@@ -714,30 +714,6 @@ Database.prototype.runStream = function(query, options) {
  *     transaction.end();
  *   });
  * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * database.runTransaction()
- *   .then(function(data) {
- *     var transaction = data[0];
- *
- *     // Run a transactional query.
- *     return transaction.run('SELECT * FROM Singers')
- *       .then(function() {
- *         // Queue a mutation (note there is no callback passed to `insert`).
- *         transaction.insert('Singers', {
- *           SingerId: 'Id3b',
- *           Name: 'Joe West'
- *         });
- *
- *         // Commit the transaction.
- *         return transaction.commit();
- *       });
- *   })
- *   .then(function() {
- *     // Transaction committed successfully.
- *   });
  */
 Database.prototype.runTransaction = function(options, runFn) {
   if (is.fn(options)) {
@@ -1020,6 +996,7 @@ common.util.promisifyAll(Database, {
   exclude: [
     'delete',
     'getMetadata',
+    'runTransaction',
     'table',
     'updateSchema',
     'session_'

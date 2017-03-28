@@ -168,6 +168,30 @@ describe('TransactionRequest', function() {
       makeRequestFn();
     });
 
+    it('should set the transaction id', function(done) {
+      var ID = 'abc';
+
+      transactionRequest.transaction = true;
+      transactionRequest.id = ID;
+
+      var expectedReqOpts = {
+        table: TABLE,
+        transaction: {
+          id: ID
+        }
+      };
+
+      transactionRequest.requestStream = function(options) {
+        assert.deepEqual(options.reqOpts, expectedReqOpts);
+        done();
+      };
+
+      var stream = transactionRequest.createReadStream(TABLE, {});
+      var makeRequestFn = stream.calledWith_[0];
+
+      makeRequestFn();
+    });
+
     describe('query.keys', function() {
       it('should encode and map input to keySet.keys[].values', function(done) {
         var query = {

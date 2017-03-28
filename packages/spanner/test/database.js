@@ -33,6 +33,7 @@ var fakeUtil = extend({}, util, {
     assert.deepEqual(options.exclude, [
       'delete',
       'getMetadata',
+      'runTransaction',
       'table',
       'updateSchema',
       'session_'
