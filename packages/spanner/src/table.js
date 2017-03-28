@@ -114,9 +114,10 @@ Table.prototype.create = function(schema, callback) {
  *     [`ReadRequest`](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.ReadRequest).
  * @param {string[]} query.columns - The columns of the table to be returned for
  *     each row matching this query.
- * @param {string[]} query.keys - The primary keys of the rows in this table to
- *     be yielded.
- * @param {string[]=} query.index - The name of an index on the table.
+ * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
+ *     be yielded. If using a composite key, provide an array within this array.
+ *     See the example below.
+ * @param {string=} query.index - The name of an index on the table.
  * @param {number} query.limit - The number of rows to return.
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
@@ -148,6 +149,23 @@ Table.prototype.create = function(schema, callback) {
  *   .on('end', function() {
  *     // All results retrieved.
  *   });
+ *
+ * //-
+ * // Provide an array for `query.keys` to read with a composite key.
+ * //-
+ * var query = {
+ *   keys: [
+ *     [
+ *       'Id1',
+ *       'Name1'
+ *     ],
+ *     [
+ *       'Id2',
+ *       'Name2'
+ *     ]
+ *   ],
+ *   // ...
+ * };
  *
  * //-
  * // If you anticipate many results, you can end a stream early to prevent
@@ -221,7 +239,8 @@ Table.prototype.delete = function(callback) {
  *
  * @resource [Commit API Documentation](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.Spanner.Commit)
  *
- * @param {string[]} keys - The keys for the rows to delete.
+ * @param {*[]|*[][]} keys - The keys for the rows to delete. If using a
+ *     composite key, provide an array within this array. See the example below.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -230,6 +249,20 @@ Table.prototype.delete = function(callback) {
  * var keys = ['Id1', 'Id2', 'Id3'];
  *
  * table.deleteRows(keys, function(err, apiResponse) {});
+ *
+ * //-
+ * // Provide an array for `keys` to delete rows with a composite key.
+ * //-
+ * var keys = [
+ *   [
+ *     'Id1',
+ *     'Name1'
+ *   ],
+ *   [
+ *     'Id2',
+ *     'Name2'
+ *   ]
+ * ];
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -310,9 +343,10 @@ Table.prototype.insert = function(keyVals, callback) {
  *     the table.
  * @param {string[]} query.columns - The columns of the table to be returned for
  *     each row matching this query.
- * @param {string[]} query.keys - The primary keys of the rows in this table to
- *     be yielded.
- * @param {string[]=} query.index - The name of an index on the table.
+ * @param {*[]|*[][]} query.keys - The primary keys of the rows in this table to
+ *     be yielded. If using a composite key, provide an array within this array.
+ *     See the example below.
+ * @param {string=} query.index - The name of an index on the table.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -358,6 +392,23 @@ Table.prototype.insert = function(keyVals, callback) {
  *   //   }
  *   // ]
  * });
+ *
+ * //-
+ * // Provide an array for `query.keys` to read with a composite key.
+ * //-
+ * var query = {
+ *   keys: [
+ *     [
+ *       'Id1',
+ *       'Name1'
+ *     ],
+ *     [
+ *       'Id2',
+ *       'Name2'
+ *     ]
+ *   ],
+ *   // ...
+ * };
  *
  * //-
  * // Rows are returned as an array of object arrays. Each object has a `name`

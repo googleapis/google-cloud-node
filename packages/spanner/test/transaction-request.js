@@ -171,20 +171,52 @@ describe('TransactionRequest', function() {
     describe('query.keys', function() {
       it('should encode and map input to keySet.keys[].values', function(done) {
         var query = {
-          keys: ['key']
+          keys: [
+            'key',
+            ['composite', 'key']
+          ]
         };
 
         var encodedValue = {};
+        var numEncodeRequests = 0;
+
         fakeCodec.encode = function(key) {
-          assert.strictEqual(key, query.keys[0]);
+          numEncodeRequests++;
+
+          switch (numEncodeRequests) {
+            case 1: {
+              assert.strictEqual(key, query.keys[0]);
+              break;
+            }
+            case 2: {
+              assert.strictEqual(key, query.keys[1][0]);
+              break;
+            }
+            case 3: {
+              assert.strictEqual(key, query.keys[1][1]);
+              break;
+            }
+          }
+
           return encodedValue;
         };
 
         transactionRequest.requestStream = function(options) {
-          assert.strictEqual(
-            options.reqOpts.keySet.keys[0].values[0],
-            encodedValue
-          );
+          var expectedKeys = [
+            {
+              values: [
+                encodedValue
+              ]
+            },
+            {
+              values: [
+                encodedValue,
+                encodedValue
+              ]
+            }
+          ];
+
+          assert.deepStrictEqual(options.reqOpts.keySet.keys, expectedKeys);
           done();
         };
 
@@ -321,7 +353,10 @@ describe('TransactionRequest', function() {
 
   describe('deleteRows', function() {
     var TABLE = 'table-name';
-    var KEYS = ['key'];
+    var KEYS = [
+      'key',
+      ['composite', 'key']
+    ];
 
     var ENCODED_VALUE = {
       encoded: true
@@ -336,6 +371,12 @@ describe('TransactionRequest', function() {
               values: [
                 ENCODED_VALUE
               ]
+            },
+            {
+              values: [
+                ENCODED_VALUE,
+                ENCODED_VALUE
+              ]
             }
           ]
         }
@@ -343,7 +384,7 @@ describe('TransactionRequest', function() {
     };
 
     beforeEach(function() {
-      FakeGrpcService.encodeValue_ = function() {
+      fakeCodec.encode = function() {
         return ENCODED_VALUE;
       };
     });
@@ -353,8 +394,26 @@ describe('TransactionRequest', function() {
 
       function callback() {}
 
-      FakeGrpcService.encodeValue_ = function(key) {
-        assert.strictEqual(key, KEYS[0]);
+      var numEncodeRequests = 0;
+
+      fakeCodec.encode = function(key) {
+        numEncodeRequests++;
+
+        switch (numEncodeRequests) {
+          case 1: {
+            assert.strictEqual(key, KEYS[0]);
+            break;
+          }
+          case 2: {
+            assert.strictEqual(key, KEYS[1][0]);
+            break;
+          }
+          case 3: {
+            assert.strictEqual(key, KEYS[1][1]);
+            break;
+          }
+        }
+
         return ENCODED_VALUE;
       };
 
@@ -395,12 +454,18 @@ describe('TransactionRequest', function() {
       var encodedValue = {
         encoded: true
       };
-      FakeGrpcService.encodeValue_ = function() {
+      fakeCodec.encode = function() {
         return encodedValue;
       };
 
       transactionRequest.queue_ = function(mutation) {
-        assert.deepEqual(mutation, EXPECTED_MUTATION);
+        var expectedSingleMutation = extend(true, {}, EXPECTED_MUTATION);
+
+        // Pop out the second mutation. We're only expecting one.
+        expectedSingleMutation.delete.keySet.keys.pop();
+
+        assert.deepEqual(mutation, expectedSingleMutation);
+
         done();
       };
 
