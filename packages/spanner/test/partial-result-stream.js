@@ -76,6 +76,15 @@ describe('PartialResultStream', function() {
       {}
     ]
   };
+  var RESULT_WITHOUT_VALUE = {
+    resumeToken: '...',
+    values: []
+  }
+  var RESULT_WITH_MULTIPLE_ROWS = {
+    metadata: {rowType: {fields: [{name: 'foo'}]}},
+    resumeToken: '...',
+    values: [1, 2],
+  }
 
   before(function() {
     partialResultStreamModule = proxyquire('../src/partial-result-stream.js', {
@@ -134,21 +143,22 @@ describe('PartialResultStream', function() {
       fakeRequestStream.push(null);
     });
 
+    it('should effectively skip rows without values', function(done) {
+      fakeRequestStream.push(RESULT_WITHOUT_VALUE);
+      fakeRequestStream.push(null);
+
+      partialResultStream
+        .on('error', done)
+        .pipe(concat(function(rows) {
+          assert.strictEqual(rows.length, 0);
+          done();
+        }));
+    });
+
     it('should not queue more than 10 results', function(done) {
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 1
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 2
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 3
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 4
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 5
-
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 6
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 7
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 8
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 9
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 10
-
-      fakeRequestStream.push(RESULT_WITHOUT_TOKEN); // 11
-
+      for (var i = 0; i < 11; i += 1) {
+        fakeRequestStream.push(RESULT_WITHOUT_TOKEN);
+      }
       fakeRequestStream.push(null);
 
       partialResultStream
@@ -221,6 +231,28 @@ describe('PartialResultStream', function() {
         .pipe(concat(function(rows) {
           assert.strictEqual(rows[0], formattedRows[0]);
           assert.strictEqual(rows[1], formattedRows[1]);
+          done();
+        }));
+    });
+
+    it('should correctly handle multiple rows', function(done) {
+      var formattedRows = [[
+        {},
+        {}
+      ]];
+
+      partialResultStreamModule.formatRow_ = function() {
+        return formattedRows;
+      };
+
+      fakeRequestStream.push(RESULT_WITH_TOKEN);
+      fakeRequestStream.push(null);
+
+      partialResultStream
+        .on('error', done)
+        .pipe(concat(function(rows) {
+          assert.strictEqual(rows[0], formattedRows[0][0]);
+          assert.strictEqual(rows[1], formattedRows[0][1]);
           done();
         }));
     });
@@ -323,6 +355,22 @@ describe('PartialResultStream', function() {
       partialResultStream.abort();
     });
 
+    it('should silently no-op abort if no active request', function(done) {
+      // If no request is ever made, then there should be no active
+      // stream to be aborted.
+      fakeRequestStream.abort = function() {
+        done(new Error('No request ever made; nothing to abort.'));
+      };
+
+      // Create a partial result stream and then abort it, without
+      // ever sending a request.
+      var partialResultStream = partialResultStreamModule(function() {
+        return fakeRequestStream;
+      });
+      partialResultStream.abort();
+      done();
+    });
+
     it('should let user abort the most recent request', function(done) {
       fakeRequestStream.abort = function() {
         done(new Error('Wrong stream was aborted.'));
@@ -383,6 +431,31 @@ describe('PartialResultStream', function() {
       },
       values: VALUES
     };
+
+    it('should omit rows from JSON representation with no name', function() {
+      // Define the second field to have no name.
+      var row = {
+        metadata: {rowType: {fields: [
+          {name: 'field-1'}, {}
+        ]}},
+        values: ['value-1', 'value-2'],
+      };
+      // Override our `decode` function to pass through the value.
+      decodeValueOverride = function(value) {
+        return value;
+      };
+
+      // Format the row.
+      var formattedRows = partialResultStreamModule.formatRow_(row);
+
+      // Both fields should exist in the formattedRows array.
+      assert.strictEqual(formattedRows.length, 2);
+      assert.strictEqual(formattedRows[0].value, 'value-1');
+      assert.strictEqual(formattedRows[1].value, 'value-2');
+
+      // Only the field with a name should exist in the JSON serialization.
+      assert.deepEqual(formattedRows.toJSON(), {'field-1': 'value-1'});
+    });
 
     it('should chunk rows with more values than fields', function() {
       decodeValueOverride = function(value) {
