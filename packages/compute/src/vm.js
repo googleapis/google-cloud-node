@@ -903,20 +903,14 @@ VM.prototype.startPolling_ = function() {
  *     Default: `300`
  *     Maximum: `600`
  * @param {function} callback - The callback function.
- * @param {object} callback.metadata - The instance's metadata.
  * @param {?error} callback.err - An error returned while waiting
  *     for the status.
+ * @param {object} callback.metadata - The instance's metadata.
  *
  * @example
- * vm.waitFor('RUNNING', function(err, metadata, apiResponse) {
+ * vm.waitFor('RUNNING', function(err, metadata) {
  *   if (!err) {
  *     // The VM is running.
- *   }
- * });
- *
- * vm.waitFor('TERMINATED', options, function(err, apiResponse) {
- *   if (!err) {
- *     // The VM is terminated.
  *   }
  * });
  *
@@ -929,6 +923,12 @@ VM.prototype.startPolling_ = function() {
  * var options = {
  *   timeout: 300
  * };
+ *
+ * vm.waitFor('TERMINATED', options, function(err, metadata) {
+ *   if (!err) {
+ *     // The VM is terminated.
+ *   }
+ * });
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
