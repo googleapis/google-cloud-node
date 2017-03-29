@@ -51,7 +51,7 @@ var Metadata = require('./metadata.js');
  * produced by the Apache Web Server, but the log
  * `compute.googleapis.com/activity_log` is produced by Google Compute Engine.
  *
- * @resource [Introduction to Logs]{@link https://cloud.google.com/logging/docs/api/#logs}
+ * @resource [Introduction to Logs]{@link https://cloud.google.com/logging/docs/basic-concepts#logs}
  *
  * @alias module:logging/log
  * @constructor
@@ -77,7 +77,7 @@ function Log(logging, name, options) {
     /**
      * Delete the log.
      *
-     * @resource [projects.logs.delete API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs/delete}
+     * @resource [projects.logs.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.logs/delete}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -263,10 +263,10 @@ Log.prototype.emergency = function(entry, options, callback) {
  * use the object returned in other API calls, such as
  * {module:logging/log#write}.
  *
- * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
+ * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry}
  *
  * @param {object=} metadata - See a
- *     [LogEntry Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
+ *     [LogEntry Resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  * @return {module:logging/entry}
@@ -342,7 +342,7 @@ Log.prototype.error = function(entry, options, callback) {
  * This method is a wrapper around {module:logging#getEntries}, but with a
  * filter specified to only return entries from this log.
  *
- * @resource [entries.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}
+ * @resource [entries.list API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/entries/list}
  *
  * @param {object=} options - Filtering options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -518,7 +518,7 @@ Log.prototype.warning = function(entry, options, callback) {
  * While you may write a single entry at a time, batching multiple entries
  * together is preferred to avoid reaching the queries per second limit.
  *
- * @resource [entries.write API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/write}
+ * @resource [entries.write API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/entries/write}
  *
  * @param {module:logging/entry|module:logging/entry[]} entry - A log entry, or
  *     array of entries, to write.
