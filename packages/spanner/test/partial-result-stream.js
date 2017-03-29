@@ -79,12 +79,7 @@ describe('PartialResultStream', function() {
   var RESULT_WITHOUT_VALUE = {
     resumeToken: '...',
     values: []
-  }
-  var RESULT_WITH_MULTIPLE_ROWS = {
-    metadata: {rowType: {fields: [{name: 'foo'}]}},
-    resumeToken: '...',
-    values: [1, 2],
-  }
+  };
 
   before(function() {
     partialResultStreamModule = proxyquire('../src/partial-result-stream.js', {

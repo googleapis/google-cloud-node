@@ -453,13 +453,15 @@ describe('codec', function() {
 
     it('should only encode public properties of objects', function() {
       var obj = {
-        hasOwnProperty: function(key) { return key === 'public' },
+        hasOwnProperty: function(key) {  // jshint ignore:line
+          return key === 'public';
+        },
         _private: new codec.Int(10),
         public: new codec.Int(10),
-      }
+      };
       var encoded = codec.encode(obj);
       assert.deepEqual(encoded._private, obj._private);
       assert.deepEqual(encoded.public, 10);
-    })
+    });
   });
 });
