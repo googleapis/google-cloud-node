@@ -123,7 +123,7 @@ util.PartialFailureError = createErrorClass('PartialFailureError', function(b) {
  * @param {function} callback - The callback function.
  */
 function handleResp(err, resp, body, callback) {
-  callback = callback || noop;
+  callback = callback || util.noop;
 
   var parsedResp = extend(
     true,
@@ -217,8 +217,7 @@ util.parseHttpRespBody = parseHttpRespBody;
  *     stream has completed.
  */
 function makeWritableStream(dup, options, onComplete) {
-  onComplete = onComplete || noop;
-  options = options || {};
+  onComplete = onComplete || util.noop;
 
   var writeStream = through();
   dup.setWritable(writeStream);

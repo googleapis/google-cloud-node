@@ -363,6 +363,13 @@ describe('ServiceObject', function() {
       serviceObject.get(assert.ifError);
     });
 
+    it('handles not getting a config', function(done) {
+      serviceObject.getMetadata = function() {
+        done();
+      };
+      serviceObject.get(undefined, assert.ifError);
+    });
+
     it('should execute callback with error & metadata', function(done) {
       var error = new Error('Error.');
       var metadata = {};
