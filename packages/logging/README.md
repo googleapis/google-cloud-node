@@ -1,6 +1,10 @@
 # @google-cloud/logging ([Beta][versioning])
 > Google Stackdriver Logging Client Library for Node.js
 
+This module allows you to work with the Stackdriver Logging API. If you are already using [`winston`][winston]
+or [`Bunyan`][bunyan] for logging, you might want to check out [`@google-cloud/logging-winston`][logging-winston] and
+[`@google-cloud/logging-bunyan`][logging-bunyan] as higher level starting points.
+
 *Looking for more Google APIs than just Logging? You might want to check out [`google-cloud`][google-cloud].*
 
 - [API Documentation][gcloud-logging-docs]
@@ -113,3 +117,7 @@ var logging = require('@google-cloud/logging')({
 [dev-console]: https://console.developers.google.com/project
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
 [cloud-logging-docs]: https://cloud.google.com/logging/docs
+[winston]: https://github.com/winstonjs/winston
+[bunyan]: https://github.com/trentm/node-bunyan
+[logging-winston]: https://www.npmjs.com/package/@google-cloud/logging-winston
+[logging-bunyan]: https://www.npmjs.com/package/@google-cloud/logging-bunyan
