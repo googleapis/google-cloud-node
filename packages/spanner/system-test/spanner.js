@@ -1069,23 +1069,6 @@ var spanner = new Spanner(env);
       });
     });
 
-    it('should run a transaction in promise mode', function() {
-      var id = generateName('id');
-      var name = generateName('name');
-
-      return database.runTransaction()
-        .then(function(data) {
-          var transaction = data[0];
-
-          transaction.insert('Singers', {
-            SingerId: id,
-            Name: name
-          });
-
-          return transaction.commit();
-        });
-    });
-
     it('should retry an aborted transaction', function(done) {
       var id = generateName('id');
       var name = generateName('name');
@@ -1105,7 +1088,9 @@ var spanner = new Spanner(env);
           });
 
           if (attempts < 2) {
-            runOtherTransaction(transaction);
+            runOtherTransaction(function() {
+              transaction.commit(assert.ifError);
+            });
             return;
           }
 
@@ -1117,7 +1102,7 @@ var spanner = new Spanner(env);
         });
       });
 
-      function runOtherTransaction(firstTransaction) {
+      function runOtherTransaction(callback) {
         database.runTransaction(function(err, transaction) {
           assert.ifError(err);
 
@@ -1131,8 +1116,7 @@ var spanner = new Spanner(env);
 
             transaction.commit(function(err) {
               assert.ifError(err);
-
-              firstTransaction.commit(done);
+              callback();
             });
           });
         });
@@ -1153,20 +1137,6 @@ var spanner = new Spanner(env);
           done();
         });
       });
-    });
-
-    it('should run a read only transaction in promise mode', function() {
-      var options = {
-        readOnly: true
-      };
-
-      return database.runTransaction(options)
-        .then(function(data) {
-          var transaction = data[0];
-
-          return transaction.run('SELECT * FROM Singers')
-            .then(transaction.end.bind(transaction));
-        });
     });
   });
 });
