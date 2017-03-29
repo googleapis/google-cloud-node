@@ -366,7 +366,7 @@ describe('ServiceObject', function() {
     it('handles not getting a config', function(done) {
       serviceObject.getMetadata = function() {
         done();
-      }
+      };
       serviceObject.get(undefined, assert.ifError);
     });
 
