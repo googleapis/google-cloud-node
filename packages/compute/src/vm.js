@@ -856,26 +856,31 @@ VM.prototype.startPolling_ = function() {
 
   this.getMetadata(function(err, metadata) {
     var now = new Date();
-    for (var index in self.waiters) {
+    var waitersToRemove = [];
+    for (var waiter of self.waiters) {
       if (err) {
-        self.waiters[index].callback(err, null);
-        self.waiters.splice(index, 1);
-      } else if (metadata && metadata.status === self.waiters[index].status) {
-        self.waiters[index].callback(null, metadata);
-        self.waiters.splice(index, 1);
+        waiter.callback(err, null);
+        waitersToRemove.push(waiter);
+      } else if (metadata && metadata.status === waiter.status) {
+        waiter.callback(null, metadata);
+        waitersToRemove.push(waiter);
       } else {
-        if ((now.getTime() / 1000) - self.waiters[index].startTime >=
-              self.waiters[index].timeout) {
+        if ((now.getTime() / 1000) - waiter.startTime >= waiter.timeout) {
           var message = 'waitFor() timed out waiting for VM ' + self.name +
-              ' to be in status ' + self.waiters[index].status;
+              ' to be in status ' + waiter.status;
           var error = new Error(message);
           error.code = 'WAIT_FOR_TIMEOUT';
           error.name = 'WaitForTimeout';
-          self.waiters[index].callback(error, null);
-          self.waiters.splice(index, 1);
+          waiter.callback(error, null);
+          waitersToRemove.push(waiter);
         }
       }
     }
+
+    for (var waiterToRemove of waitersToRemove) {
+      self.waiters.splice(self.waiters.indexOf(waiterToRemove), 1);
+    }
+
     if (self.waiters.length <= 0) {
       self.hasActiveWaiters = false;
     } else {
