@@ -1051,10 +1051,22 @@ Table.prototype.import = function(source, metadata, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.insert(rows).then(function(data) {
- *   var insertErrors = data[0];
- *   var apiResponse = data[1];
- * });
+ * table.insert(rows)
+ *   .then(function(data) {
+ *     var apiResponse = data[0];
+ *   })
+ *   .catch(function(err) {
+ *     // An API error or partial failure occurred.
+ *
+ *     if (err.name === 'PartialFailureError') {
+ *       // Some rows failed to insert, while others may have succeeded.
+ *
+ *       // err.errors (object[]):
+ *       // err.errors[].row (original row object passed to `insert`)
+ *       // err.errors[].errors[].reason
+ *       // err.errors[].errors[].message
+ *     }
+ *   });
  */
 Table.prototype.insert = function(rows, options, callback) {
   if (is.fn(options)) {
