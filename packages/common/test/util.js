@@ -338,6 +338,10 @@ describe('common/util', function() {
       });
     });
 
+    it('uses a no-op callback if none is sent', function() {
+      util.handleResp(undefined, {}, '');
+    });
+
     it('should parse response', function(done) {
       var err = { a: 'b', c: 'd' };
       var resp = { a: 'b', c: 'd' };
@@ -1756,6 +1760,18 @@ describe('common/util', function() {
         });
 
         func(undefined, undefined).then(function() {
+          done();
+        });
+      });
+
+      it('should not mistake non-function args for callbacks', function(done) {
+        var func = util.promisify(function(foo, optional) {
+          assert.strictEqual(arguments.length, 2);
+          assert(is.fn(optional));
+          optional(null);
+        });
+
+        func('foo').then(function() {
           done();
         });
       });
