@@ -20,6 +20,3 @@ module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
   keyFilename: process.env.GCLOUD_TESTS_KEY
 };
-
-console.log('google-cloud-node configuration');
-console.log(module.exports);
