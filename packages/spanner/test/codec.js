@@ -441,5 +441,27 @@ describe('codec', function() {
 
       assert.strictEqual(encoded, 10);
     });
+
+    it('should encode each key in a dictionary-like object', function() {
+      var obj = {
+        f: new codec.Float(10),
+        i: new codec.Int(10),
+      };
+      var encoded = codec.encode(obj);
+      assert.deepEqual(encoded, {f: 10, i: '10'});
+    });
+
+    it('should only encode public properties of objects', function() {
+      var obj = {
+        hasOwnProperty: function(key) {  // jshint ignore:line
+          return key === 'public';
+        },
+        _private: new codec.Int(10),
+        public: new codec.Int(10),
+      };
+      var encoded = codec.encode(obj);
+      assert.deepEqual(encoded._private, obj._private);
+      assert.deepEqual(encoded.public, 10);
+    });
   });
 });
