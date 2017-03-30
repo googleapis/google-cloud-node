@@ -97,14 +97,14 @@ Metadata.getGCEDescriptor = function(projectId) {
  * @param {string} projectId - The project ID.
  * @return {object}
  */
-Metadata.getGKEDescriptor = function(projectId, callback) {
+Metadata.getGKEDescriptor = function(projectId) {
   return {
     type: 'container',
     labels: {
       project_id: projectId,
     }
-  }
-}
+  };
+};
 
 /**
  * Create a global descriptor.
