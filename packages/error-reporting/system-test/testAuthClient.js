@@ -17,10 +17,10 @@
 'use strict';
 var assert = require('assert');
 var nock = require('nock');
-var RequestHandler = require('../../src/google-apis/auth-client.js');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var Configuration = require('../fixtures/configuration.js');
-var createLogger = require('../../src/logger.js');
+var RequestHandler = require('../src/google-apis/auth-client.js');
+var ErrorMessage = require('../src/classes/error-message.js');
+var Configuration = require('../test/fixtures/configuration.js');
+var createLogger = require('../src/logger.js');
 var is = require('is');
 var isObject = is.object;
 var isString = is.string;
@@ -34,22 +34,18 @@ describe('Behvaiour acceptance testing', function() {
   before(function() {
     // Before starting the suite make sure we have the proper resources
     if (!isString(process.env.GCLOUD_PROJECT)) {
-      console.error(
+      throw new Error(
         'The gcloud project id (GCLOUD_PROJECT) was not set in the env');
-      this.skip();
     } else if (!isString(process.env.STUBBED_API_KEY)) {
-      console.error(
+      throw new Error(
         'The api key (STUBBED_API_KEY) was not set as an env variable');
-      this.skip();
     } else if (!isString(process.env.STUBBED_PROJECT_NUM)) {
-      console.error(
+      throw new Error(
         'The project number (STUBBED_PROJECT_NUM) was not set in the env');
-      this.skip();
     } else if (process.env.NODE_ENV !== 'production') {
-      console.error(
+      throw new Error(
         'The NODE_ENV is not set to production as an env variable. Please ' +
         'set NODE_ENV to production');
-      this.skip();
     }
     // In case we are running after unit mocks which were not destroyed properly
     nock.cleanAll();
@@ -269,33 +265,33 @@ describe('Behvaiour acceptance testing', function() {
           });
         });
       });
-      describe('An invalid env configuration', function() {
-        var ERROR_STRING = [
-          'Unable to find the project Id for communication with the',
-          'Stackdriver Error Reporting service. This app will be unable to',
-          'send errors to the reporting service unless a valid project Id',
-          'is supplied via runtime configuration or the GCLOUD_PROJECT',
-          'environmental variable.'
-        ].join(' ');
-        var logger, client;
-        before(function() {
-          delete process.env.GCLOUD_PROJECT;
-          logger = createLogger({logLevel: 5});
-          client = new RequestHandler(new Configuration(
-            {ignoreEnvironmentCheck: true}, logger), logger);
-        });
-        after(function() {
-          process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
-        });
-        it('Should callback with an error', function(done) {
-          client.sendError(errorMessage, function(err, response, body) {
-            assert(err instanceof Error);
-            assert.strictEqual(err.message, ERROR_STRING);
-            assert.strictEqual(response, null);
-            done();
-          });
-        });
-      });
+      // describe('An invalid env configuration', function() {
+      //   var ERROR_STRING = [
+      //     'Unable to find the project Id for communication with the',
+      //     'Stackdriver Error Reporting service. This app will be unable to',
+      //     'send errors to the reporting service unless a valid project Id',
+      //     'is supplied via runtime configuration or the GCLOUD_PROJECT',
+      //     'environmental variable.'
+      //   ].join(' ');
+      //   var logger, client;
+      //   before(function() {
+      //     delete process.env.GCLOUD_PROJECT;
+      //     logger = createLogger({logLevel: 5});
+      //     client = new RequestHandler(new Configuration(
+      //       {ignoreEnvironmentCheck: true}, logger), logger);
+      //   });
+      //   after(function() {
+      //     process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
+      //   });
+      //   it('Should callback with an error', function(done) {
+      //     client.sendError(errorMessage, function(err, response, body) {
+      //       assert(err instanceof Error);
+      //       assert.strictEqual(err.message, ERROR_STRING);
+      //       assert.strictEqual(response, null);
+      //       done();
+      //     });
+      //   });
+      // });
     });
     describe('Success behaviour', function() {
       var er = new Error(ERR_TOKEN);

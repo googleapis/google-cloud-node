@@ -56,20 +56,19 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
  */
 class RequestHandler extends common.Service {
   /**
-   * Compute the URL that errors should be reported to given the projectId and
-   * optional key.
-   * @param {String} projectId - the project id of the application.
+   * Returns a query-string request object if a string key is given, otherwise
+   * will return null.
    * @param {String|Null} [key] - the API key used to authenticate against the
    *  service in place of application default credentials.
-   * @returns {String} computed URL that the errors should be reported to.
+   * @returns {Object|Null} api key query string object for use with request or
+   *  null in case no api key is given
    * @static
    */
-  static getErrorReportURL(projectId, key) {
-    var url = [API, projectId, 'events:report'].join('/');
+  static manufactureQueryString(key) {
     if (isString(key)) {
-      url += '?key=' + key;
+      return {key: key};
     }
-    return url;
+    return null;
   }
   /**
    * No-operation stub function for user callback substitution
@@ -88,12 +87,13 @@ class RequestHandler extends common.Service {
    * @param {Logger} logger - an instance of logger
    */
   constructor(config, logger) {
+    var pid = config.getProjectId();
     super({
       packageJson: pkg,
-      projectIdRequired: false,
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1/',
       scopes: SCOPES,
-      projectId: config.getProjectId()
+      projectId: pid !== null ? pid : undefined,
+      projectIdRequired: true
     }, config);
     this._config = config;
     this._logger = logger;
@@ -114,33 +114,19 @@ class RequestHandler extends common.Service {
     var self = this;
     var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
     if (this._config.getShouldReportErrorsToAPI()) {
-      this._config.getProjectId((err, id) => {
+      this.request({
+        uri: 'events:report',
+        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+        method: 'POST',
+        json: errorMessage
+      }, (err, body, response) => {
         if (err) {
-          setImmediate(function() { cb(err, null, null); });
           this._logger.error([
-            'Unable to retrieve a project id from the Google Metadata Service',
-            'or the local environment. Client will not be able to communicate',
-            'with the Stackdriver Error Reporting API without a valid project',
-            'id. Please make sure to supply a project id either through the',
-            'GCLOUD_PROJECT environmental variable or through the',
-            'configuration object given to this library on startup if not',
-            'running on Google Cloud Platform.'
-          ].join(' '));
-          return;
+            'Encountered an error while attempting to transmit an error to',
+            'the Stackdriver Error Reporting API.'
+          ].join(' '), err);
         }
-        this.request({
-          uri: RequestHandler.getErrorReportURL(id, this._config.getKey()),
-          method: 'POST',
-          json: errorMessage
-        }, (err, body, response) => {
-          if (err) {
-            this._logger.error([
-              'Encountered an error while attempting to transmit an error to',
-              'the Stackdriver Error Reporting API.'
-            ].join(' '), err);
-          }
-          cb(err, response, body);
-        });
+        cb(err, response, body);
       });
     } else {
       cb(new Error([

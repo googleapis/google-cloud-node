@@ -6,7 +6,7 @@
 > **This is not an official Google product.** This module is experimental and may not be ready for use.
 > This module uses APIs that may be undocumented and are subject to change without notice.
 
-This modules provides Stackdriver Error Reporting support for Node.js applications.
+This module provides Stackdriver Error Reporting support for Node.js applications.
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
 applications running in almost any environment. Here's an introductory video:
@@ -64,7 +64,7 @@ If you already have VMs that were created without API access and do not wish to 
 
 Container Engine nodes need to also be created with the `https://www.googleapis.com/auth/cloud-platform` scope, which is configurable during cluster creation. Alternatively, you can follow the instructions for using a service account under [running elsewhere](#running-elsewhere). It's recommended that you store the service account credentials as [Kubernetes Secret](http://kubernetes.io/v1.1/docs/user-guide/secrets.html).
 
-## Running elsewhere
+## Running Elsewhere
 
 If your application is running outside of Google Cloud Platform, such as locally, on-premise, or on another cloud provider, you can still use Stackdriver Errors.
 
@@ -80,16 +80,16 @@ If your application is running outside of Google Cloud Platform, such as locally
   * If you are running your application on a development machine or test environment where you are using the [`gcloud` command line tools][gcloud-sdk], and are logged using `gcloud beta auth application-default login`, you already have sufficient credentials, and a service account key is not required.
   * Alternatively, you may set the `keyFilename` or `credentials` configuration field to the full path or contents to the key file, respectively. Setting either of these fields will override either setting `GOOGLE_APPLICATION_CREDENTIALS` or logging in using `gcloud`. For example:
 
-    ```JS
-    // Require and start the agent with configuration options
-    var errors = require('@google-cloud/error-reporting')({
-      // The path to your key file:
-      keyFilename: '/path/to/keyfile.json',
+```js
+  // Require and start the agent with configuration options
+  var errors = require('@google-cloud/error-reporting')({
+    // The path to your key file:
+    keyFilename: '/path/to/keyfile.json',
 
-      // Or the contents of the key file:
-      credentials: require('./path/to/keyfile.json')
-    });
-    ```
+    // Or the contents of the key file:
+    credentials: require('./path/to/keyfile.json')
+  });
+```
 
 When running on Google Cloud Platform, we handle these for you automatically.
 
@@ -123,7 +123,7 @@ var errors = require('@google-cloud/error-reporting')({
 
 ### Reporting Manually
 
-```JS
+```js
 var errors = require('@google-cloud/error-reporting')();
 // Use the error message builder to custom set all message fields
 var errorEvt = errors.event()
@@ -138,18 +138,18 @@ errors.report('My error message');
 
 ### Using Express
 
-```JS
+```js
 var express = require('express');
 var app = express();
-// Will create a errors instance based off env variables
+// Will create an errors instance based off env variables
 var errors = require('@google-cloud/error-reporting')();
 
-app.get('/error', function(req, res, next) {
+app.get('/error', (req, res, next) => {
     res.send('Something broke!');
     next(new Error('Custom error message'));
 });
 
-app.get('/exception', function() {
+app.get('/exception', () => {
     JSON.parse('{\"malformedJson\": true');
 });
 
@@ -160,7 +160,7 @@ app.listen(3000);
 
 ### Using Hapi
 
-```JS
+```js
 var hapi = require('hapi');
 var errors = require('@google-cloud/error-reporting')();
 
@@ -171,9 +171,9 @@ server.start();
 server.route({
   method: 'GET',
   path: '/error',
-  handler: function(request, reply) {
-    throw new Error('Custom error message');
+  handler: (request, reply) => {
     reply('Something broke!');
+    throw new Error('Custom error message');
   }
 });
 
@@ -182,7 +182,7 @@ server.register({ register: errors.hapi });
 
 ### Using Koa
 
-```JS
+```js
 var errors = require('@google-cloud/error-reporting')();
 var koa = require('koa');
 var app = koa();
@@ -204,7 +204,7 @@ app.listen(3000);
 
 ### Using Restify
 
-```JS
+```js
 function respond(req, res, next) {
   next(new Error('this is a restify error'));
 }
