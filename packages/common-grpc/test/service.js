@@ -21,7 +21,6 @@ var duplexify = require('duplexify');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
-var grpcVersion = require('grpc/package.json').version;
 var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
@@ -111,6 +110,11 @@ describe('GrpcService', function() {
   };
   var ROOT_DIR = '/root/dir';
   var PROTO_FILE_PATH = 'filepath.proto';
+  var EXPECTED_API_CLIENT_HEADER = [
+    'gl-node/' + process.versions.node,
+    'gccl/' + CONFIG.packageJson.version,
+    'grpc/' + require('grpc/package.json').version
+  ].join(' ');
 
   var MOCK_GRPC_API = { google: {} };
   MOCK_GRPC_API.google[CONFIG.service] = {};
@@ -275,11 +279,7 @@ describe('GrpcService', function() {
 
     it('should default grpcMetadata to empty metadata', function() {
       var fakeGrpcMetadata = {
-        'x-goog-api-client': [
-          'gl-node/' + process.versions.node,
-          'gccl/' + CONFIG.packageJson.version,
-          'grpc/' + grpcVersion
-        ].join(' ')
+        'x-goog-api-client': EXPECTED_API_CLIENT_HEADER
       };
 
       GrpcMetadataOverride = function() {};
@@ -296,11 +296,7 @@ describe('GrpcService', function() {
 
     it('should create and localize grpcMetadata', function() {
       var fakeGrpcMetadata = extend({
-        'x-goog-api-client': [
-          'gl-node/' + process.versions.node,
-          'gccl/' + CONFIG.packageJson.version,
-          'grpc/' + grpcVersion
-        ].join(' ')
+        'x-goog-api-client': EXPECTED_API_CLIENT_HEADER
       }, CONFIG.grpcMetadata);
 
       GrpcMetadataOverride = function() {};
