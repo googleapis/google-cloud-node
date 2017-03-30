@@ -32,6 +32,7 @@ var prop = require('propprop');
 var propAssign = require('prop-assign');
 var rgbHex = require('rgb-hex');
 
+var curation = require('./curation');
 var v1 = require('./v1');
 
 var VERY_UNLIKELY = 0;
@@ -330,6 +331,7 @@ Vision.prototype.detect = function(images, options, callback) {
     text: 'TEXT_DETECTION'
   };
 
+  /* DELETE ME */
   var typeShortNameToRespName = {
     crop: 'cropHintsAnnotation',
     crops: 'cropHintsAnnotation',
@@ -417,11 +419,27 @@ Vision.prototype.detect = function(images, options, callback) {
       var originalResp = extend(true, {}, resp);
       var partialFailureErrors = [];
 
-      var detections = foundImages
-        .map(groupDetectionsByImage)
-        .map(removeExtraneousAnnotationObjects)
-        .map(assignTypeToEmptyAnnotations)
-        .map(removeDetectionsWithErrors)
+      // Group the images appropriately and return "detections".
+      var detections = foundImages.map(groupDetectionsByImage);
+
+      // Take the list of annotations and the list of types and
+      // conflate them into a single list of annotations with their type
+      // added to the object.
+      detections = detections.map(function(det) {
+        return curation.applyTypeToAnnotations(det, options.types);
+      });
+
+      // Remove any aspects of the response that the user did not
+      // actually request.
+      detections = detections.map(curation.removeExtraneousAnnotations(det));
+
+        .map(assignTypeToEmptyAnnotations);
+
+      // Iterate over each detection, looking for errors.
+      // If an error is found, remove the detection from th
+        .map(function(det, index) {
+          return curation.removeDetectionsWithErrors(det, index);
+        })removeDetectionsWithErrors)
         .map(flattenAnnotations)
         .map(decorateAnnotations);
 
@@ -462,37 +480,6 @@ Vision.prototype.detect = function(images, options, callback) {
         return annotations.splice(0, types.length);
       }
 
-      function removeExtraneousAnnotationObjects(annotations) {
-        // The API response includes empty annotations for features that weren't
-        // requested.
-        //
-        // Before:
-        //   [
-        //     {
-        //       faceAnnotations: {},
-        //       labelAnnotations: {}
-        //     }
-        //   ]
-        //
-        // After:
-        //   [
-        //     {
-        //       faceAnnotations: {}
-        //     }
-        //   ]
-        return annotations.map(function(annotation, index) {
-          var requestedAnnotationType = typeShortNameToRespName[types[index]];
-
-          for (var prop in annotation) {
-            if (prop !== requestedAnnotationType && prop !== 'error') {
-              delete annotation[prop];
-            }
-          }
-
-          return annotation;
-        });
-      }
-
       function assignTypeToEmptyAnnotations(annotations) {
         // Before:
         //   [
@@ -516,48 +503,6 @@ Vision.prototype.detect = function(images, options, callback) {
 
           return annotation;
         });
-      }
-
-      function removeDetectionsWithErrors(annotations, index) {
-        // Before:
-        //   [
-        //     {
-        //       faceAnnotations: []
-        //     },
-        //     {
-        //       error: {...},
-        //       imagePropertiesAnnotation: {}
-        //     }
-        //   ]
-
-        // After:
-        //   [
-        //     {
-        //       faceAnnotations: []
-        //     },
-        //     undefined
-        //   ]
-        var errors = [];
-
-        annotations.forEach(function(annotation, index) {
-          if (!is.empty(annotation.error)) {
-            var userInputType = types[index];
-            var respNameType = typeShortNameToRespName[userInputType];
-            annotation.error.type = typeRespNameToShortName[respNameType];
-            errors.push(Vision.formatError_(annotation.error));
-          }
-        });
-
-        if (errors.length > 0) {
-          partialFailureErrors.push({
-            image: isSingleImage ? images : images[index],
-            errors: errors
-          });
-
-          return;
-        }
-
-        return annotations;
       }
 
       function flattenAnnotations(annotations) {
@@ -2089,6 +2034,7 @@ Vision.formatWebDetection_ = function(webDetection, options) {
 Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
   return Vision.likelihood[likelihood] >= baseLikelihood;
 };
+
 
 /*! Developer Documentation
  *
