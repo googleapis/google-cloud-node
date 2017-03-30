@@ -101,6 +101,17 @@ describe('metadata', function() {
     });
   });
 
+  describe('getGKEDescriptor', function() {
+    it('should return the correct descriptor', function() {
+      assert.deepEqual(Metadata.getGKEDescriptor(PROJECT_ID), {
+        type: 'container',
+        labels: {
+          project_id: PROJECT_ID
+        }
+      });
+    });
+  });
+
   describe('getGCEDescriptor', function() {
     it('should return the correct descriptor', function() {
       assert.deepEqual(Metadata.getGCEDescriptor(PROJECT_ID), {
@@ -288,6 +299,31 @@ describe('metadata', function() {
         });
       });
 
+      describe('container engine', function() {
+        it('should return correct descriptor', function(done) {
+          var DESCRIPTOR = {};
+
+          Metadata.getGKEDescriptor = function(projectId) {
+            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            return DESCRIPTOR;
+          };
+
+          metadata.logging_.authClient = {
+            getEnvironment: function(callback) {
+              callback(null, {
+                IS_CONTAINER_ENGINE: true
+              });
+            }
+          };
+
+          metadata.getDefaultResource(function(err, defaultResource) {
+            assert.ifError(err);
+            assert.strictEqual(defaultResource, DESCRIPTOR);
+            done();
+          });
+        });
+      });
+
       describe('global', function() {
         it('should return correct descriptor', function(done) {
           var DESCRIPTOR = {};
@@ -302,7 +338,8 @@ describe('metadata', function() {
               callback(null, {
                 IS_APP_ENGINE: false,
                 IS_CLOUD_FUNCTION: false,
-                IS_COMPUTE_ENGINE: false
+                IS_COMPUTE_ENGINE: false,
+                IS_CONTAINER_ENGINE: false
               });
             }
           };
