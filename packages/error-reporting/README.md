@@ -28,21 +28,21 @@ runtime configuration object is set to `true`.
 
   In your project, on the command line:
 
-	```shell
-	# Install through npm while saving to the local 'package.json'
-	npm install --save @google-cloud/error-reporting
+	```
+	  # Install through npm while saving to the local 'package.json'
+	  npm install --save @google-cloud/error-reporting
 	```
 1. **Instrument your application:**
 
-	```JS
-	// Require the library and initialize the error handler
-	var errors = require('@google-cloud/error-reporting')({
-		serviceContext: {service: 'my-service'} // not needed on Google Cloud
-	});
+```js
+// Require the library and initialize the error handler
+var errors = require('@google-cloud/error-reporting')({
+  serviceContext: {service: 'my-service'} // not needed on Google Cloud
+});
 
-	// Report an error to the Stackdriver Error Reporting API
-	errors.report(new Error('Something broke!'));
-	```
+// Report an error to the Stackdriver Error Reporting API
+errors.report(new Error('Something broke!'));
+```
 
 1. **View reported errors:**
 
@@ -99,23 +99,23 @@ The following code snippet lists all available configuration options. All config
 
 ```js
 var errors = require('@google-cloud/error-reporting')({
-    projectId: 'my-project-id',
-    keyFilename: '/path/to/keyfile.json',
-    credentials: require('./path/to/keyfile.json'),
-    // if true library will attempt to report errors to the service regardless
-    // of the value of NODE_ENV
-    // defaults to false
-    ignoreEnvironmentCheck: false,
-    // determines if the library will attempt to report uncaught exceptions
-    // defaults to true
-    reportUncaughtExceptions: true,
-    // determines the logging level internal to the library; levels range 0-5
-    // defaults to 2 (warnings)
-    logLevel: 2,
-    serviceContext: {
-        service: 'my-service',
-        version: 'my-service-version'
-    }
+  projectId: 'my-project-id',
+  keyFilename: '/path/to/keyfile.json',
+  credentials: require('./path/to/keyfile.json'),
+  // if true library will attempt to report errors to the service regardless
+  // of the value of NODE_ENV
+  // defaults to false
+  ignoreEnvironmentCheck: false,
+  // determines if the library will attempt to report uncaught exceptions
+  // defaults to true
+  reportUncaughtExceptions: true,
+  // determines the logging level internal to the library; levels range 0-5
+  // defaults to 2 (warnings)
+  logLevel: 2,
+  serviceContext: {
+      service: 'my-service',
+      version: 'my-service-version'
+  }
 });
 ```
 
@@ -145,12 +145,12 @@ var app = express();
 var errors = require('@google-cloud/error-reporting')();
 
 app.get('/error', (req, res, next) => {
-    res.send('Something broke!');
-    next(new Error('Custom error message'));
+  res.send('Something broke!');
+  next(new Error('Custom error message'));
 });
 
 app.get('/exception', () => {
-    JSON.parse('{\"malformedJson\": true');
+  JSON.parse('{\"malformedJson\": true');
 });
 
 app.use(errors.express);
