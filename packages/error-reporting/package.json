@@ -1,6 +1,5 @@
 {
   "name": "@google-cloud/error-reporting",
-  "version": "0.1.0",
   "description": "Stackdriver Error Reporting Client Library for Node.js",
   "main": "index.js",
   "repository": "GoogleCloudPlatform/google-cloud-node",
@@ -8,7 +7,6 @@
     "test": "nyc --exclude=\"fuzzer.js\" $(npm bin)/mocha ./test/unit/*.js",
     "system-test": "nyc --exclude=\"error-message.js\" $(npm bin)/mocha ./test/system-test/*.js",
     "lint": "jshint src/ index.js",
-    "coverage": "./bin/test.sh -l",
     "docs": "jsdoc -d docs index.js src/",
     "publish-module": "node ../../scripts/publish.js error-reporting"
   },
