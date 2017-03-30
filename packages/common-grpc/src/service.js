@@ -178,6 +178,12 @@ function GrpcService(config, options) {
 
   this.grpcMetadata = new grpc.Metadata();
 
+  this.grpcMetadata.add('x-goog-api-client', [
+    'gl-node/' + process.versions.node,
+    'gccl/' + config.packageJson.version,
+    'grpc/' + require('grpc/package.json').version
+  ].join(' '));
+
   if (config.grpcMetadata) {
     for (var prop in config.grpcMetadata) {
       if (config.grpcMetadata.hasOwnProperty(prop)) {

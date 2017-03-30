@@ -110,6 +110,11 @@ describe('GrpcService', function() {
   };
   var ROOT_DIR = '/root/dir';
   var PROTO_FILE_PATH = 'filepath.proto';
+  var EXPECTED_API_CLIENT_HEADER = [
+    'gl-node/' + process.versions.node,
+    'gccl/' + CONFIG.packageJson.version,
+    'grpc/' + require('grpc/package.json').version
+  ].join(' ');
 
   var MOCK_GRPC_API = { google: {} };
   MOCK_GRPC_API.google[CONFIG.service] = {};
@@ -273,33 +278,34 @@ describe('GrpcService', function() {
     });
 
     it('should default grpcMetadata to empty metadata', function() {
-      var fakeGrpcMetadata = {};
+      var fakeGrpcMetadata = {
+        'x-goog-api-client': EXPECTED_API_CLIENT_HEADER
+      };
 
-      GrpcMetadataOverride = function() {
-        return fakeGrpcMetadata;
+      GrpcMetadataOverride = function() {};
+      GrpcMetadataOverride.prototype.add = function(prop, val) {
+        this[prop] = val;
       };
 
       var config = extend({}, CONFIG);
       delete config.grpcMetadata;
 
       var grpcService = new GrpcService(config, OPTIONS);
-      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.deepEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
     });
 
     it('should create and localize grpcMetadata', function() {
-      var fakeGrpcMetadata = {
-        add: function(prop, value) {
-          assert.strictEqual(prop, Object.keys(CONFIG.grpcMetadata)[0]);
-          assert.strictEqual(value, CONFIG.grpcMetadata[prop]);
-        }
-      };
+      var fakeGrpcMetadata = extend({
+        'x-goog-api-client': EXPECTED_API_CLIENT_HEADER
+      }, CONFIG.grpcMetadata);
 
-      GrpcMetadataOverride = function() {
-        return fakeGrpcMetadata;
+      GrpcMetadataOverride = function() {};
+      GrpcMetadataOverride.prototype.add = function(prop, val) {
+        this[prop] = val;
       };
 
       var grpcService = new GrpcService(CONFIG, OPTIONS);
-      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.deepEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
     });
 
     it('should localize maxRetries', function() {
