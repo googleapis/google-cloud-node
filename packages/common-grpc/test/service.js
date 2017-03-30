@@ -278,7 +278,8 @@ describe('GrpcService', function() {
         'x-goog-api-client': [
           'gl-node/' + process.versions.node,
           'gccl/' + CONFIG.packageJson.version,
-          'grpc/' + grpcVersion].join(' ')
+          'grpc/' + grpcVersion
+        ].join(' ')
       };
 
       GrpcMetadataOverride = function() {};
@@ -298,7 +299,8 @@ describe('GrpcService', function() {
         'x-goog-api-client': [
           'gl-node/' + process.versions.node,
           'gccl/' + CONFIG.packageJson.version,
-          'grpc/' + grpcVersion].join(' ')
+          'grpc/' + grpcVersion
+        ].join(' ')
       }, CONFIG.grpcMetadata);
 
       GrpcMetadataOverride = function() {};
