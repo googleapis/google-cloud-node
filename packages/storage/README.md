@@ -1,4 +1,4 @@
-# @google-cloud/storage ([Beta][versioning])
+# @google-cloud/storage ([GA][versioning])
 > Cloud Storage Client Library for Node.js
 
 *Looking for more Google APIs than just Storage? You might want to check out [`google-cloud`][google-cloud].*
