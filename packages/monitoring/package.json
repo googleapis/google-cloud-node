@@ -1,7 +1,7 @@
 {
   "repository": "googlecloudplatform/google-cloud-node",
   "name": "@google-cloud/monitoring",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "author": "Google Inc.",
   "description": "Stackdriver Monitoring Client Library for Node.js",
   "contributors": [
