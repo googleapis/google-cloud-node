@@ -28,5 +28,8 @@ if (test('-e', '.gitmodules')) {
   git.remove('-rf', '.gitmodules');
 }
 
-git.remove('-rf', 'gh-pages');
-rm('-rf', '.git/modules/gh-pages');
+if (test('-d', SUBMODULE_NAME)) {
+  git.remove('-rf', '--cached', SUBMODULE_NAME);
+}
+
+// rm('-rf', '.git/modules/gh-pages');
