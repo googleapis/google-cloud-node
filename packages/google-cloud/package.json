@@ -100,22 +100,22 @@
     "vision"
   ],
   "dependencies": {
-    "@google-cloud/bigquery": "^0.8.0",
-    "@google-cloud/bigtable": "^0.8.0",
-    "@google-cloud/compute": "^0.5.0",
-    "@google-cloud/datastore": "^0.7.0",
-    "@google-cloud/dns": "^0.5.0",
-    "@google-cloud/language": "^0.9.0",
-    "@google-cloud/logging": "^0.8.0",
-    "@google-cloud/monitoring": "^0.1.4",
-    "@google-cloud/prediction": "^0.5.0",
-    "@google-cloud/pubsub": "^0.8.3",
-    "@google-cloud/resource": "^0.6.0",
-    "@google-cloud/spanner": "^0.1.0",
-    "@google-cloud/speech": "^0.7.0",
-    "@google-cloud/storage": "^0.8.0",
-    "@google-cloud/translate": "^0.7.0",
-    "@google-cloud/vision": "^0.10.0",
+    "@google-cloud/bigquery": "^0.9.0",
+    "@google-cloud/bigtable": "^0.9.0",
+    "@google-cloud/compute": "^0.6.0",
+    "@google-cloud/datastore": "^0.8.0",
+    "@google-cloud/dns": "^0.6.0",
+    "@google-cloud/language": "^0.10.0",
+    "@google-cloud/logging": "^0.9.0",
+    "@google-cloud/monitoring": "^0.2.0",
+    "@google-cloud/prediction": "^0.6.0",
+    "@google-cloud/pubsub": "^0.9.0",
+    "@google-cloud/resource": "^0.7.0",
+    "@google-cloud/spanner": "^0.3.0",
+    "@google-cloud/speech": "^0.8.0",
+    "@google-cloud/storage": "^1.0.0",
+    "@google-cloud/translate": "^0.8.0",
+    "@google-cloud/vision": "^0.11.0",
     "extend": "^3.0.0"
   },
   "devDependencies": {
@@ -128,6 +128,6 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=0.4.0"
+    "node": ">=4.0.0"
   }
 }
