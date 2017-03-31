@@ -38,7 +38,10 @@ require('shelljs/global');
  * @type {string[]}
  */
 var BLACKLIST = [
-  'dns-zonefile'
+  'dns-zonefile',
+  // @TODO: update the code that uses these to use the promise format
+  'dot-prop',
+  'rgb-hex'
 ];
 
 /**

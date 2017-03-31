@@ -50,8 +50,8 @@
     "pubsub"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.12.0",
-    "@google-cloud/common-grpc": "^0.2.1",
+    "@google-cloud/common": "^0.13.0",
+    "@google-cloud/common-grpc": "^0.3.0",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.12.2",
@@ -73,6 +73,6 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=4.0.0"
   }
 }
