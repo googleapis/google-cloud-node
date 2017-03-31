@@ -268,58 +268,39 @@ Document.PART_OF_SPEECH = {
  *   // annotation = {
  *   //   language: 'en',
  *   //   sentiment: {
- *   //     score: 1,
- *   //     magnitude: 4
+ *   //     magnitude: 0.5,
+ *   //     score: 0.5
  *   //   },
- *   //   entities: {
- *   //     organizations: [
- *   //       {
- *   //         name: 'Google',
- *   //         type: 'ORGANIZATION',
- *   //         metadata: {
- *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //   entities: [
+ *   //     {
+ *   //       name: 'Google',
+ *   //       type: 'ORGANIZATION',
+ *   //       metadata: {
+ *   //         mid: '/m/045c7b',
+ *   //         wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //       },
+ *   //       salience: 0.7532734870910645,
+ *   //       mentions: [
+ *   //         {
+ *   //           text: {
+ *   //             content: 'Google',
+ *   //             beginOffset: -1
+ *   //           },
+ *   //           type: 'PROPER'
  *   //         },
- *   //         salience: 0.65137446,
- *   //         mentions: [
- *   //           {
- *   //             text: {
- *   //               content: 'Google',
- *   //               beginOffset: -1
- *   //             },
- *   //             type: 'PROPER'
- *   //           }
- *   //         ]
+ *   //         // ...
  *   //       }
- *   //     ],
- *   //     places: [
- *   //       {
- *   //         name: 'American',
- *   //         type: 'LOCATION',
- *   //         metadata: {
- *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/United_States'
- *   //         },
- *   //         salience: 0.13947370648384094,
- *   //         mentions: [
- *   //           {
- *   //             text: [
- *   //               {
- *   //                 content: 'American',
- *   //                 beginOffset: -1
- *   //               },
- *   //               type: 'PROPER'
- *   //             ]
- *   //           }
- *   //         ]
- *   //       }
- *   //     ]
- *   //   },
+ *   //     }
+ *   //   ],
  *   //   sentences: [
  *   //     {
  *   //       text: {
- *   //         content:
- *   //           'Google is an American multinational technology company' +
- *   //           'specializing in Internet-related services and products.',
+ *   //         content: 'Google is an American multinational technology...',
  *   //         beginOffset: -1
+ *   //       },
+ *   //       sentiment: {
+ *   //         magnitude: 0.5,
+ *   //         score: 0.5
  *   //       }
  *   //     }
  *   //   ],
@@ -331,26 +312,25 @@ Document.PART_OF_SPEECH = {
  *   //       },
  *   //       partOfSpeech: {
  *   //         tag: 'NOUN',
- *   //         aspect: 'PERFECTIVE',
- *   //         case: 'ADVERBIAL',
- *   //         form: 'ADNOMIAL',
- *   //         gender: 'FEMININE',
- *   //         mood: 'IMPERATIVE',
+ *   //         aspect: 'ASPECT_UNKNOWN',
+ *   //         case: 'CASE_UNKNOWN',
+ *   //         form: 'FORM_UNKNOWN',
+ *   //         gender: 'GENDER_UNKNOWN',
+ *   //         mood: 'MOOD_UNKNOWN',
  *   //         number: 'SINGULAR',
- *   //         person: 'FIRST',
+ *   //         person: 'PERSON_UNKNOWN',
  *   //         proper: 'PROPER',
- *   //         reciprocity: 'RECIPROCAL',
- *   //         tense: 'PAST',
- *   //         voice: 'PASSIVE'
+ *   //         reciprocity: 'RECIPROCITY_UNKNOWN',
+ *   //         tense: 'TENSE_UNKNOWN',
+ *   //         voice: 'VOICE_UNKNOWN'
  *   //       },
  *   //       dependencyEdge: {
  *   //         headTokenIndex: 1,
- *   //         label: 'NSUBJ',
- *   //         description: 'Nominal subject'
+ *   //         label: 'NSUBJ'
  *   //       },
  *   //       lemma: 'Google'
  *   //     },
- *   //     ...
+ *   //     // ...
  *   //   ]
  *   // }
  * });
@@ -371,51 +351,30 @@ Document.PART_OF_SPEECH = {
  *   // annotation = {
  *   //   language: 'en',
  *   //   sentiment: {
- *   //     score: 1,
- *   //     magnitude: 4
+ *   //     magnitude: 0.5,
+ *   //     score: 0.5
  *   //   },
- *   //   entities: {
- *   //     organizations: [
- *   //       {
- *   //         name: 'Google',
- *   //         type: 'ORGANIZATION',
- *   //         metadata: {
- *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //   entities: [
+ *   //     {
+ *   //       name: 'Google',
+ *   //       type: 'ORGANIZATION',
+ *   //       metadata: {
+ *   //         mid: '/m/045c7b',
+ *   //         wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //       },
+ *   //       salience: 0.7532734870910645,
+ *   //       mentions: [
+ *   //         {
+ *   //           text: {
+ *   //             content: 'Google',
+ *   //             beginOffset: -1
+ *   //           },
+ *   //           type: 'PROPER'
  *   //         },
- *   //         salience: 0.65137446,
- *   //         mentions: [
- *   //           {
- *   //             text: {
- *   //               content: 'Google',
- *   //               beginOffset: -1
- *   //             },
- *   //             type: 'PROPER'
- *   //           }
- *   //         ]
+ *   //         // ...
  *   //       }
- *   //     ],
- *   //     places: [
- *   //       {
- *   //         name: 'American',
- *   //         type: 'LOCATION',
- *   //         metadata: {
- *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/United_States'
- *   //         },
- *   //         salience: 0.13947370648384094,
- *   //         mentions: [
- *   //           {
- *   //             text: [
- *   //               {
- *   //                 content: 'American',
- *   //                 beginOffset: -1
- *   //               },
- *   //               type: 'PROPER'
- *   //             ]
- *   //           }
- *   //         ]
- *   //       }
- *   //     ]
- *   //   },
+ *   //     }
+ *   //   ]
  *   // }
  * });
  *
@@ -520,44 +479,28 @@ Document.prototype.annotate = function(options, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   // entities = {
- *   //   organizations: [
- *   //     {
- *   //       name: 'Google',
- *   //       type: 'ORGANIZATION',
- *   //       metadata: {
- *   //         wikipedia_url: 'http: *   //en.wikipedia.org/wiki/Google'
+ *   // entities = [
+ *   //   {
+ *   //     name: 'Google',
+ *   //     type: 'ORGANIZATION',
+ *   //     metadata: {
+ *   //       mid: '/m/045c7b',
+ *   //       wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //     },
+ *   //     salience: 0.7532734870910645,
+ *   //     mentions: [
+ *   //       {
+ *   //         text: {
+ *   //           content: 'Google',
+ *   //           beginOffset: -1
+ *   //         },
+ *   //         type: 'PROPER'
  *   //       },
- *   //       salience: 0.65137446,
- *   //       mentions: [
- *   //         {
- *   //           text: {
- *   //             content: 'Google',
- *   //             beginOffset: -1
- *   //           }
- *   //         }
- *   //       ]
+ *   //       // ...
  *   //     }
- *   //   ],
- *   //   places: [
- *   //     {
- *   //       name: 'American',
- *   //       type: 'LOCATION',
- *   //       metadata: {
- *   //         wikipedia_url: 'http: *   //en.wikipedia.org/wiki/United_States'
- *   //       },
- *   //       salience: 0.13947371,
- *   //       mentions: [
- *   //         {
- *   //           text: {
- *   //             content: 'American',
- *   //             beginOffset: -1
- *   //           }
- *   //         }
- *   //       ]
- *   //     }
- *   //   ]
- *   // }
+ *   //   },
+ *   //   // ...
+ *   // ]
  * });
  *
  * //-
@@ -611,19 +554,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *   }
  *
  *   // sentiment = {
- *   //   score: 1,
- *   //   magnitude: 4,
- *   //   sentences: [
- *   //     {
- *   //       text: {
- *   //         content:
- *   //           'Google is an American multinational technology company' +
- *   //           'specializing in Internet-related services and products.',
- *   //         beginOffset: -1
- *   //       }
- *   //     }
- *   //   ],
- *   //   language: 'en'
+ *   //   magnitude: 0.5,
+ *   //   score: 0.5
  *   // }
  * });
  *
@@ -667,7 +599,7 @@ Document.prototype.detectSentiment = function(options, callback) {
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {object} callback.syntax - The syntax recognized from the text.
+ * @param {object[]} callback.syntax - The syntax recognized from the text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -676,51 +608,34 @@ Document.prototype.detectSentiment = function(options, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   // syntax = {
- *   //   sentences: [
- *   //     {
- *   //       text: {
- *   //         content:
- *   //           'Google is an American multinational technology company' +
- *   //           'specializing in Internet-related services and products.',
- *   //         beginOffset: -1
- *   //       },
- *   //       sentiment: {
- *   //         score: 1
- *   //         magnitude: 4
- *   //       }
- *   //     }
- *   //   ],
- *   //   tokens: [
- *   //     {
- *   //       text: {
- *   //         content: 'Google',
- *   //         beginOffset: -1
- *   //       },
- *   //       partOfSpeech: {
- *   //         tag: 'NOUN',
- *   //         aspect: 'PERFECTIVE',
- *   //         case: 'ADVERBIAL',
- *   //         form: 'ADNOMIAL',
- *   //         gender: 'FEMININE',
- *   //         mood: 'IMPERATIVE',
- *   //         number: 'SINGULAR',
- *   //         person: 'FIRST',
- *   //         proper: 'PROPER',
- *   //         reciprocity: 'RECIPROCAL',
- *   //         tense: 'PAST',
- *   //         voice: 'PASSIVE'
- *   //       },
- *   //       dependencyEdge: {
- *   //         headTokenIndex: 1,
- *   //         label: 'NSUBJ',
- *   //         description: 'Nominal subject'
- *   //       },
- *   //       lemme: 'Google'
- *   //     }
- *   //   ],
- *   //   language: 'en'
- *   // }
+ *   // syntax = [
+ *   //   {
+ *   //     text: {
+ *   //       content: 'Google',
+ *   //       beginOffset: -1
+ *   //     },
+ *   //     partOfSpeech: {
+ *   //       tag: 'NOUN',
+ *   //       aspect: 'ASPECT_UNKNOWN',
+ *   //       case: 'CASE_UNKNOWN',
+ *   //       form: 'FORM_UNKNOWN',
+ *   //       gender: 'GENDER_UNKNOWN',
+ *   //       mood: 'MOOD_UNKNOWN',
+ *   //       number: 'SINGULAR',
+ *   //       person: 'PERSON_UNKNOWN',
+ *   //       proper: 'PROPER',
+ *   //       reciprocity: 'RECIPROCITY_UNKNOWN',
+ *   //       tense: 'TENSE_UNKNOWN',
+ *   //       voice: 'VOICE_UNKNOWN'
+ *   //     },
+ *   //     dependencyEdge: {
+ *   //       headTokenIndex: 1,
+ *   //       label: 'NSUBJ'
+ *   //     },
+ *   //     lemma: 'Google'
+ *   //   },
+ *   //   // ...
+ *   // ]
  * });
  *
  * //-
