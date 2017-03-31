@@ -10,24 +10,27 @@
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
 
+This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
+
+* [Cloud Storage](#cloud-storage-ga) (GA)
+
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Google BigQuery](#google-bigquery-beta) (Beta)
 * [Cloud Datastore](#cloud-datastore-beta) (Beta)
-* [Cloud Storage](#cloud-storage-beta) (Beta)
-* [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
+* [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
+* [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
+* [Google BigQuery](#google-bigquery-beta) (Beta)
+* [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Cloud Natural Language](#cloud-natural-language-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
-* [Cloud Translation API](#cloud-translation-api-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
@@ -37,32 +40,39 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 
 ## Quick Start
 
-We recommend installing the individual packages that you need, which are
-provided under the `@google-cloud` namespace. For example:
+We recommend installing the individual packages that you need, which are provided under the `@google-cloud` namespace. For example:
 
 ```sh
 $ npm install --save @google-cloud/datastore
 $ npm install --save @google-cloud/storage
 ```
+```js
+var config = {
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+};
+
+var datastore = require('@google-cloud/datastore')(config);
+var storage = require('@google-cloud/storage')(config);
+```
 
 #### The google-cloud meta-package
 
-We also provide a meta-package, `google-cloud`, which provides all of the
-individual APIs. However, in order to keep file size and memory use low, the
-use of this package is not recommended.
+We also provide a meta-package, `google-cloud`, which provides all of the individual APIs. However, in order to keep file size and memory use low, the use of this package is not recommended.
 
 If you want the kitchen sink, however, get it with:
 
 ```sh
 $ npm install --save google-cloud
 ```
+```js
+var gcloud = require('google-cloud')({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
 
-If you use the meta-package, then the individual packages are available
-on the namespace of the required meta-package module:
-
-```javascript
-var datastore = require('google-cloud').datastore;
-var storage = require('google-cloud').storage;
+var datastore = gcloud.datastore();
+var storage = gcloud.storage();
 ```
 
 
@@ -83,7 +93,7 @@ With `google-cloud` it's incredibly easy to get authenticated and start using Go
 
 ### On Google Cloud Platform
 
-If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
 var gcloud = require('google-cloud');
@@ -143,48 +153,64 @@ var gcloud = require('google-cloud')({
 You can also set auth on a per-API-instance basis. The examples below show you how.
 
 
-## Google BigQuery (Beta)
+## Cloud Storage (GA)
 
-- [API Documentation][gcloud-bigquery-docs]
-- [Official Documentation][cloud-bigquery-docs]
+- [API Documentation][gcloud-storage-docs]
+- [Official Documentation][cloud-storage-docs]
 
-
-#### Using the BigQuery API module
+#### Using the Cloud Storage API module
 
 ```
-$ npm install --save @google-cloud/bigquery
+$ npm install --save @google-cloud/storage
 ```
 
 ```js
-var bigquery = require('@google-cloud/bigquery');
+var storage = require('@google-cloud/storage');
 ```
 
 #### Preview
 
 ```js
+var fs = require('fs');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var bigqueryClient = bigquery({
+var gcs = storage({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Access an existing dataset and table.
-var schoolsDataset = bigqueryClient.dataset('schools');
-var schoolsTable = schoolsDataset.table('schoolsData');
+// Create a new bucket.
+gcs.createBucket('my-new-bucket', function(err, bucket) {
+  if (!err) {
+    // "my-new-bucket" was successfully created.
+  }
+});
 
-// Import data into a table.
-schoolsTable.import('/local/file.json', function(err, job) {});
+// Reference an existing bucket.
+var bucket = gcs.bucket('my-existing-bucket');
 
-// Get results from a query job.
-var job = bigqueryClient.job('job-id');
+// Upload a local file to a new file to be created in your bucket.
+bucket.upload('/photos/zoo/zebra.jpg', function(err, file) {
+  if (!err) {
+    // "zebra.jpg" is now in your bucket.
+  }
+});
 
-// Use a callback.
-job.getQueryResults(function(err, rows) {});
+// Download a file from your bucket.
+bucket.file('giraffe.jpg').download({
+  destination: '/photos/zoo/giraffe.jpg'
+}, function(err) {});
 
-// Or get the same results as a readable stream.
-job.getQueryResults().on('data', function(row) {});
+// Streams are also supported for reading and writing files.
+var remoteReadStream = bucket.file('giraffe.jpg').createReadStream();
+var localWriteStream = fs.createWriteStream('/photos/zoo/giraffe.jpg');
+remoteReadStream.pipe(localWriteStream);
+
+var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
+var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
+localReadStream.pipe(remoteWriteStream);
 ```
 
 
@@ -251,123 +277,130 @@ datastoreClient.save({
 ```
 
 
-## Cloud Storage (Beta)
+## Cloud Natural Language (Beta)
 
-- [API Documentation][gcloud-storage-docs]
-- [Official Documentation][cloud-storage-docs]
+- [API Documentation][gcloud-language-docs]
+- [Official Documentation][cloud-language-docs]
 
-#### Using the Cloud Storage API module
+#### Using the Natural Language API module
 
 ```
-$ npm install --save @google-cloud/storage
+$ npm install --save @google-cloud/language
 ```
 
 ```js
-var storage = require('@google-cloud/storage');
+var language = require('@google-cloud/language');
 ```
 
 #### Preview
 
 ```js
-var fs = require('fs');
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
 
+var languageClient = language({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Get the entities from a sentence.
+languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
+  // entities = {
+  //   people: ['Stephen'],
+  //   places: ['Michigan']
+  // }
+});
+
+// Create a document if you plan to run multiple detections.
+var document = languageClient.document('Contributions welcome!');
+
+// Analyze the sentiment of the document.
+document.detectSentiment(function(err, sentiment) {
+  // sentiment = 100 // Large numbers represent more positive sentiments.
+});
+
+// Parse the syntax of the document.
+document.annotate(function(err, annotations) {
+  // annotations = {
+  //   language: 'en',
+  //   sentiment: 100,
+  //   entities: {},
+  //   sentences: ['Contributions welcome!'],
+  //   tokens: [
+  //     {
+  //       text: 'Contributions',
+  //       partOfSpeech: 'Noun (common and proper)',
+  //       partOfSpeechTag: 'NOUN'
+  //     },
+  //     {
+  //       text: 'welcome',
+  //       partOfSpeech: 'Verb (all tenses and modes)',
+  //       partOfSpeechTag: 'VERB'
+  //     },
+  //     {
+  //       text: '!',
+  //       partOfSpeech: 'Punctuation',
+  //       partOfSpeechTag: 'PUNCT'
+  //     }
+  //   ]
+  // }
+});
+```
+
+
+## Cloud Translation API (Beta)
+
+- [API Documentation][gcloud-translate-docs]
+- [Official Documentation][cloud-translate-docs]
+
+#### Using the Google Translate API module
+
+```
+$ npm install --save @google-cloud/translate
+```
+
+```js
+var translate = require('@google-cloud/translate');
+```
+
+#### Preview
+
+```js
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var gcs = storage({
+var translateClient = translate({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Create a new bucket.
-gcs.createBucket('my-new-bucket', function(err, bucket) {
+// Translate a string of text.
+translateClient.translate('Hello', 'es', function(err, translation) {
   if (!err) {
-    // "my-new-bucket" was successfully created.
+    // translation = 'Hola'
   }
 });
 
-// Reference an existing bucket.
-var bucket = gcs.bucket('my-existing-bucket');
-
-// Upload a local file to a new file to be created in your bucket.
-bucket.upload('/photos/zoo/zebra.jpg', function(err, file) {
+// Detect a language from a string of text.
+translateClient.detect('Hello', function(err, results) {
   if (!err) {
-    // "zebra.jpg" is now in your bucket.
+    // results = {
+    //   language: 'en',
+    //   confidence: 1,
+    //   input: 'Hello'
+    // }
   }
 });
 
-// Download a file from your bucket.
-bucket.file('giraffe.jpg').download({
-  destination: '/photos/zoo/giraffe.jpg'
-}, function(err) {});
-
-// Streams are also supported for reading and writing files.
-var remoteReadStream = bucket.file('giraffe.jpg').createReadStream();
-var localWriteStream = fs.createWriteStream('/photos/zoo/giraffe.jpg');
-remoteReadStream.pipe(localWriteStream);
-
-var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
-var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
-localReadStream.pipe(remoteWriteStream);
-```
-
-
-## Google Stackdriver Logging (Beta)
-
-- [API Documentation][gcloud-logging-docs]
-- [Official Documentation][cloud-logging-docs]
-
-#### Using the Google Stackdriver Logging API module
-
-```
-$ npm install --save @google-cloud/logging
-```
-
-```js
-var logging = require('@google-cloud/logging');
-```
-
-#### Preview
-
-```js
-// Authenticating on a global-basis. You can also authenticate on a per-API-
-// basis (see Authentication section above).
-
-var loggingClient = logging({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a sink using a Bucket as a destination.
-var gcs = storage();
-
-loggingClient.createSink('my-new-sink', {
-  destination: gcs.bucket('my-sink')
-}, function(err, sink) {});
-
-// Write a critical entry to a log.
-var syslog = loggingClient.log('syslog');
-
-var metadata = {
-  resource: {
-    type: 'gce_instance',
-    labels: {
-      zone: 'global',
-      instance_id: '3'
-    }
-  }
-};
-
-var entry = syslog.entry(metadata, {
-  delegate: process.env.user
-});
-
-syslog.critical(entry, function(err) {});
-
-// Get all entries in your project.
-loggingClient.getEntries(function(err, entries) {
+// Get a list of supported languages.
+translateClient.getLanguages(function(err, languages) {
   if (!err) {
-    // `entries` contains all of the entries from the logs in your project.
+    // languages = [
+    //   'af',
+    //   'ar',
+    //   'az',
+    //   ...
+    // ]
   }
 });
 ```
@@ -491,6 +524,112 @@ visionClient.detectFaces('./image.jpg', function(err, faces) {
 ```
 
 
+## Google BigQuery (Beta)
+
+- [API Documentation][gcloud-bigquery-docs]
+- [Official Documentation][cloud-bigquery-docs]
+
+
+#### Using the BigQuery API module
+
+```
+$ npm install --save @google-cloud/bigquery
+```
+
+```js
+var bigquery = require('@google-cloud/bigquery');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var bigqueryClient = bigquery({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Access an existing dataset and table.
+var schoolsDataset = bigqueryClient.dataset('schools');
+var schoolsTable = schoolsDataset.table('schoolsData');
+
+// Import data into a table.
+schoolsTable.import('/local/file.json', function(err, job) {});
+
+// Get results from a query job.
+var job = bigqueryClient.job('job-id');
+
+// Use a callback.
+job.getQueryResults(function(err, rows) {});
+
+// Or get the same results as a readable stream.
+job.getQueryResults().on('data', function(row) {});
+```
+
+
+## Google Stackdriver Logging (Beta)
+
+- [API Documentation][gcloud-logging-docs]
+- [Official Documentation][cloud-logging-docs]
+
+#### Using the Google Stackdriver Logging API module
+
+```
+$ npm install --save @google-cloud/logging
+```
+
+```js
+var logging = require('@google-cloud/logging');
+```
+
+#### Preview
+
+```js
+// Authenticating on a global-basis. You can also authenticate on a per-API-
+// basis (see Authentication section above).
+
+var loggingClient = logging({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Create a sink using a Bucket as a destination.
+var gcs = storage();
+
+loggingClient.createSink('my-new-sink', {
+  destination: gcs.bucket('my-sink')
+}, function(err, sink) {});
+
+// Write a critical entry to a log.
+var syslog = loggingClient.log('syslog');
+
+var metadata = {
+  resource: {
+    type: 'gce_instance',
+    labels: {
+      zone: 'global',
+      instance_id: '3'
+    }
+  }
+};
+
+var entry = syslog.entry(metadata, {
+  delegate: process.env.user
+});
+
+syslog.critical(entry, function(err) {});
+
+// Get all entries in your project.
+loggingClient.getEntries(function(err, entries) {
+  if (!err) {
+    // `entries` contains all of the entries from the logs in your project.
+  }
+});
+```
+
+
 ## Cloud Bigtable (Alpha)
 
 - [API Documentation][gcloud-bigtable-docs]
@@ -597,77 +736,6 @@ zone.addRecord(nsRecord, function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
-```
-
-
-## Cloud Natural Language (Alpha)
-
-- [API Documentation][gcloud-language-docs]
-- [Official Documentation][cloud-language-docs]
-
-#### Using the Natural Language API module
-
-```
-$ npm install --save @google-cloud/language
-```
-
-```js
-var language = require('@google-cloud/language');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
-
-var languageClient = language({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Get the entities from a sentence.
-languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
-  // entities = {
-  //   people: ['Stephen'],
-  //   places: ['Michigan']
-  // }
-});
-
-// Create a document if you plan to run multiple detections.
-var document = languageClient.document('Contributions welcome!');
-
-// Analyze the sentiment of the document.
-document.detectSentiment(function(err, sentiment) {
-  // sentiment = 100 // Large numbers represent more positive sentiments.
-});
-
-// Parse the syntax of the document.
-document.annotate(function(err, annotations) {
-  // annotations = {
-  //   language: 'en',
-  //   sentiment: 100,
-  //   entities: {},
-  //   sentences: ['Contributions welcome!'],
-  //   tokens: [
-  //     {
-  //       text: 'Contributions',
-  //       partOfSpeech: 'Noun (common and proper)',
-  //       partOfSpeechTag: 'NOUN'
-  //     },
-  //     {
-  //       text: 'welcome',
-  //       partOfSpeech: 'Verb (all tenses and modes)',
-  //       partOfSpeechTag: 'VERB'
-  //     },
-  //     {
-  //       text: '!',
-  //       partOfSpeech: 'Punctuation',
-  //       partOfSpeechTag: 'PUNCT'
-  //     }
-  //   ]
-  // }
-});
 ```
 
 
@@ -912,64 +980,6 @@ fs.createReadStream('./audio.raw')
 ```
 
 
-## Cloud Translation API (Alpha)
-
-- [API Documentation][gcloud-translate-docs]
-- [Official Documentation][cloud-translate-docs]
-
-#### Using the Google Translate API module
-
-```
-$ npm install --save @google-cloud/translate
-```
-
-```js
-var translate = require('@google-cloud/translate');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var translateClient = translate({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Translate a string of text.
-translateClient.translate('Hello', 'es', function(err, translation) {
-  if (!err) {
-    // translation = 'Hola'
-  }
-});
-
-// Detect a language from a string of text.
-translateClient.detect('Hello', function(err, results) {
-  if (!err) {
-    // results = {
-    //   language: 'en',
-    //   confidence: 1,
-    //   input: 'Hello'
-    // }
-  }
-});
-
-// Get a list of supported languages.
-translateClient.getLanguages(function(err, languages) {
-  if (!err) {
-    // languages = [
-    //   'af',
-    //   'ar',
-    //   'az',
-    //   ...
-    // ]
-  }
-});
-```
-
-
 ## Google Compute Engine (Alpha)
 
 - [API Documentation][gcloud-compute-docs]
@@ -1105,11 +1115,15 @@ var monitoringClient = monitoring.v3({
 
 This library follows [Semantic Versioning][semver].
 
-Please note it is currently under active development. Any release versioned 0.x.y is subject to backwards incompatible changes at any time.
+Please note it is currently under active development. Any release versioned `0.x.y` is subject to backwards-incompatible changes at any time.
 
-**Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
+**GA**: Libraries defined at the GA (general availability) quality level are stable. The code surface will not change in backwards-incompatible ways unless absolutely necessary (e.g. because of critical security issues) or with an extensive deprecation period. Issues and requests against GA libraries are addressed with the highest priority.
 
-**Alpha**: Libraries defined at an Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
+Please note that the auto-generated portions of the GA libraries (the ones in modules such as `v1` or `v2`) are considered to be of **Beta** quality, even if the libraries that wrap them are GA.
+
+**Beta**: Libraries defined at the Beta quality level are expected to be mostly stable, while we work towards their release candidate. We will address issues and requests with a higher priority.
+
+**Alpha**: Libraries defined at the Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
 
 
 ## Contributing
