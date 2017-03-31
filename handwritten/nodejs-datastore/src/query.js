@@ -74,7 +74,7 @@ function Query(scope, namespace, kinds) {
  *
  * *To filter by ancestors, see {module:datastore/query#hasAncestor}.*
  *
- * @resource [Datastore Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}
+ * @resource [Datastore Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-property-filter-nodejs}
  *
  * @param {string} property - The field name.
  * @param {string=} operator - Operator (=, <, >, <=, >=). Default: `=`
@@ -119,7 +119,7 @@ Query.prototype.filter = function(property, operator, value) {
 /**
  * Filter a query by ancestors.
  *
- * @resource [Datastore Ancestor Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}
+ * @resource [Datastore Ancestor Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ancestor-query-nodejs}
  *
  * @param {Key} key - Key object to filter by.
  * @return {module:datastore/query}
@@ -136,7 +136,7 @@ Query.prototype.hasAncestor = function(key) {
  * Sort the results by a property name in ascending or descending order. By
  * default, an ascending sort order will be used.
  *
- * @resource [Datastore Sort Orders]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}
+ * @resource [Datastore Sort Orders]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ascending-sort-nodejs}
  *
  * @param {string} property - The property to order by.
  * @param {object=} options - Options object.
@@ -200,7 +200,7 @@ Query.prototype.select = function(fieldNames) {
 /**
  * Set a starting cursor to a query.
  *
- * @resource [Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}
+ * @resource [Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets}
  *
  * @param {string} cursorToken - The starting cursor token.
  * @return {module:datastore/query}
@@ -238,7 +238,7 @@ Query.prototype.end = function(end) {
 /**
  * Set a limit on a query.
  *
- * @resource [Query Limits]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}
+ * @resource [Query Limits]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs}
  *
  * @param {number} n - The number of results to limit the query to.
  * @return {module:datastore/query}
@@ -255,7 +255,7 @@ Query.prototype.limit = function(n) {
 /**
  * Set an offset on a query.
  *
- * @resource [Query Offsets]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}
+ * @resource [Query Offsets]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs}
  *
  * @param {number} n - The offset to start from after the start cursor.
  * @return {module:datastore/query}
