@@ -1,4 +1,0 @@
-[submodule "gh-pages"]
-	path = gh-pages
-	url = https://github.com/GoogleCloudPlatform/google-cloud-node.git
-	branch = gh-pages
