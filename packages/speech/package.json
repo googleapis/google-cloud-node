@@ -54,8 +54,8 @@
     "speech"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.12.0",
-    "@google-cloud/common-grpc": "^0.2.1",
+    "@google-cloud/common": "^0.13.0",
+    "@google-cloud/common-grpc": "^0.3.0",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.12.0",
