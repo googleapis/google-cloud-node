@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/common-grpc",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": "Google Inc.",
   "description": "Common components for Cloud APIs Node.js Client Libraries that require gRPC",
   "contributors": [
