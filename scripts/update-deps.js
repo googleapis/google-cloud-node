@@ -38,7 +38,8 @@ require('shelljs/global');
  * @type {string[]}
  */
 var BLACKLIST = [
-  'dns-zonefile'
+  'dns-zonefile',
+  'dot-prop'
 ];
 
 /**
