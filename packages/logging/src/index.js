@@ -90,16 +90,16 @@ util.inherits(Logging, commonGrpc.Service);
 /**
  * Create a sink.
  *
- * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks}
+ * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks}
  * @resource [Advanced Logs Filters]{@link https://cloud.google.com/logging/docs/view/advanced_filters}
- * @resource [projects.sinks.create API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/create}
+ * @resource [projects.sinks.create API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/create}
  *
  * @throws {Error} if a name is not provided.
  * @throws {Error} if a config object is not provided.
  *
  * @param {string} name - Name of the sink.
  * @param {object} config - See a
- *     [Sink resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks#LogSink).
+ *     [Sink resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink).
  * @param {module:storage/bucket|module:bigquery/dataset|module:pubsub/topic} config.destination -
  *     The destination. The proper ACL scopes will be granted to the provided
  *     destination.
@@ -191,10 +191,10 @@ Logging.prototype.createSink = function(name, config, callback) {
  * use the object returned in other API calls, such as
  * {module:logging/log#write}.
  *
- * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
+ * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry}
  *
  * @param {object=|string=} resource - See a
- *     [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).
+ *     [Monitored Resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/MonitoredResource).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  * @return {module:logging/entry}
@@ -233,7 +233,7 @@ Logging.prototype.entry = function(resource, data) {
 /**
  * List the entries in your logs.
  *
- * @resource [entries.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}
+ * @resource [entries.list API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/entries/list}
  *
  * @param {object=} options - Filtering options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -352,7 +352,7 @@ Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
 /**
  * Get the sinks associated with this project.
  *
- * @resource [projects.sinks.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/list}
+ * @resource [projects.sinks.list API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/list}
  *
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -449,7 +449,7 @@ Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
 /**
  * Get a reference to a Stackdriver Logging log.
  *
- * @resource [Log Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs}
+ * @resource [Log Overview]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.logs}
  *
  * @param {string} name - Name of the existing log.
  * @param {object=} options - Configuration object.
@@ -467,7 +467,7 @@ Logging.prototype.log = function(name, options) {
 /**
  * Get a reference to a Stackdriver Logging sink.
  *
- * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks}
+ * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks}
  *
  * @param {string} name - Name of the existing sink.
  * @return {module:logging/sink}

@@ -256,14 +256,14 @@ function Bucket(storage, name) {
    * the ACLs defined on your bucket, as well as set, update, and delete them.
    *
    * Buckets also have
-   * [default ACLs](https://cloud.google.com/storage/docs/accesscontrol#default)
+   * [default ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
    * for all created files. Default ACLs specify permissions that all new
    * objects added to the bucket will inherit by default. You can add, delete,
    * get, and update entities and permissions for these as well with
    * {module:storage/bucket#acl.default}.
    *
    * @resource [About Access Control Lists]{@link http://goo.gl/6qBBPO}
-   * @resource [Default ACLs]{@link https://cloud.google.com/storage/docs/accesscontrol#default}
+   * @resource [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
    *
    * @mixes module:storage/acl
    *
@@ -294,8 +294,8 @@ function Bucket(storage, name) {
   });
 
   /**
-   * Cloud Storage Buckets have [default ACLs](http://goo.gl/YpGdyv) for
-   * all created files. You can add, delete, get, and update entities and
+   * Cloud Storage Buckets have [default ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
+   * for all created files. You can add, delete, get, and update entities and
    * permissions for these as well. The method signatures and examples are all
    * the same, after only prefixing the method call with `default`.
    *

@@ -36,7 +36,7 @@ var util = require('util');
  * storage), Google BigQuery datasets (for log analysis), Google Pub/Sub (for
  * streaming to other applications).
  *
- * @resource [Introduction to Sinks]{@link https://cloud.google.com/logging/docs/api/#sinks}
+ * @resource [Introduction to Sinks]{@link https://cloud.google.com/logging/docs/basic-concepts#sinks}
  *
  * @alias module:logging/sink
  * @constructor
@@ -82,7 +82,7 @@ function Sink(logging, name) {
     /**
      * Delete the sink.
      *
-     * @resource [projects.sink.delete API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/delete}
+     * @resource [projects.sink.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/delete}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -116,8 +116,8 @@ function Sink(logging, name) {
     /**
      * Get the sink's metadata.
      *
-     * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks#LogSink}
-     * @resource [projects.sink.get API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/get}
+     * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink}
+     * @resource [projects.sink.get API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/get}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -192,11 +192,11 @@ Sink.prototype.setFilter = function(filter, callback) {
 /**
  * Set the sink's metadata.
  *
- * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks#LogSink}
- * @resource [projects.sink.update API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/update}
+ * @resource [Sink Resource]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink}
+ * @resource [projects.sink.update API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks/update}
  *
  * @param {object} metadata - See a
- *     [Sink resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks#LogSink).
+ *     [Sink resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.

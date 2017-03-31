@@ -101,7 +101,7 @@ util.inherits(Storage, common.Service);
  *   - `gcs.acl.READER_ROLE` - ("READER")
  *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
  *
- * @resource [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}
+ * @resource [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
  *
  * @type {object}
  *

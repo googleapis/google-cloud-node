@@ -744,7 +744,7 @@ File.prototype.createReadStream = function(options) {
  * Create a unique resumable upload session URI. This is the first step when
  * performing a resumable upload.
  *
- * See the [Resumable upload guide](https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable)
+ * See the [Resumable upload guide](https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload)
  * for more on how the entire process works.
  *
  * <h4>Note</h4>
@@ -753,7 +753,7 @@ File.prototype.createReadStream = function(options) {
  * any of the details, see {module:storage/createWriteStream}. Resumable uploads
  * are performed by default.
  *
- * @resource [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}
+ * @resource [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
  *
  * @param {object=} options - Configuration object.
  * @param {object} options.metadata - Metadata to set on the file.
@@ -843,7 +843,7 @@ File.prototype.createResumableUpload = function(options, callback) {
  * NOTE: Writable streams will emit the `finish` event when the file is fully
  * uploaded.
  *
- * @resource [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}
+ * @resource [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload}
  * @resource [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
  *
  * @param {object=} options - Configuration object.
@@ -1183,7 +1183,7 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  * Get a signed policy document to allow a user to upload data with a POST
  * request.
  *
- * @resource [Policy Document Reference]{@link https://cloud.google.com/storage/docs/reference-methods#policydocument}
+ * @resource [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
  *
  * @throws {Error} If an expiration timestamp from the past is given.
  * @throws {Error} If options.equals has an array with less or more than two
@@ -1351,7 +1351,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
 /**
  * Get a signed URL to allow limited time access to the file.
  *
- * @resource [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control#Signed-URLs}
+ * @resource [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
  *
  * @throws {Error} if an expiration timestamp from the past is given.
  *
