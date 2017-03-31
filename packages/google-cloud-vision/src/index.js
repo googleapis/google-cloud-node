@@ -485,6 +485,7 @@ Vision.prototype.detect = function(images, options, callback) {
 
           for (var prop in annotation) {
             if (prop !== requestedAnnotationType && prop !== 'error') {
+              /* istanbul ignore next */
               delete annotation[prop];
             }
           }
