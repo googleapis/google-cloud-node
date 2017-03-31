@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging-winston",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Google Inc.",
   "description": "Stackdriver Logging transport for Winston",
   "main": "./src/index.js",
