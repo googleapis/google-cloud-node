@@ -36,24 +36,7 @@ language.detectEntities('Stephen of Michigan!', function(err, entities) {
   //       }
   //     ]
   //   },
-  //   {
-  //     name: 'Michigan',
-  //     type: 'LOCATION',
-  //     metadata: {
-  //       mid: '/m/04rrx',
-  //       wikipedia_url: 'http://en.wikipedia.org/wiki/Michigan'
-  //     },
-  //     salience: 0.26907116174697876,
-  //     mentions: [
-  //       {
-  //         text: {
-  //           content: 'Michigan',
-  //           beginOffset: -1
-  //         },
-  //         type: 'PROPER'
-  //       }
-  //     ]
-  //   }
+  //   // ...
   // ]
 });
 
@@ -69,8 +52,8 @@ document.detectSentiment(function(err, sentiment) {
 });
 
 // Parse the syntax of the document.
-document.annotate(function(err, annotations) {
-  // annotations = {
+document.annotate(function(err, annotation) {
+  // annotation = {
   //   language: 'en',
   //   sentiment: {
   //     magnitude: 0.30000001192092896,
@@ -131,56 +114,7 @@ document.annotate(function(err, annotations) {
   //       },
   //       lemma: 'contribution'
   //     },
-  //     {
-  //       text: {
-  //         content: 'welcome',
-  //         beginOffset: -1
-  //       },
-  //       partOfSpeech: {
-  //         tag: 'VERB',
-  //         aspect: 'ASPECT_UNKNOWN',
-  //         case: 'CASE_UNKNOWN',
-  //         form: 'FORM_UNKNOWN',
-  //         gender: 'GENDER_UNKNOWN',
-  //         mood: 'INDICATIVE',
-  //         number: 'NUMBER_UNKNOWN',
-  //         person: 'PERSON_UNKNOWN',
-  //         proper: 'PROPER_UNKNOWN',
-  //         reciprocity: 'RECIPROCITY_UNKNOWN',
-  //         tense: 'PRESENT',
-  //         voice: 'VOICE_UNKNOWN'
-  //       },
-  //       dependencyEdge: {
-  //         headTokenIndex: 1,
-  //         label: 'ROOT'
-  //       },
-  //       lemma: 'welcome'
-  //     },
-  //     {
-  //       text: {
-  //         content: '!',
-  //         beginOffset: -1
-  //       },
-  //       partOfSpeech: {
-  //         tag: 'PUNCT',
-  //         aspect: 'ASPECT_UNKNOWN',
-  //         case: 'CASE_UNKNOWN',
-  //         form: 'FORM_UNKNOWN',
-  //         gender: 'GENDER_UNKNOWN',
-  //         mood: 'MOOD_UNKNOWN',
-  //         number: 'NUMBER_UNKNOWN',
-  //         person: 'PERSON_UNKNOWN',
-  //         proper: 'PROPER_UNKNOWN',
-  //         reciprocity: 'RECIPROCITY_UNKNOWN',
-  //         tense: 'TENSE_UNKNOWN',
-  //         voice: 'VOICE_UNKNOWN'
-  //       },
-  //       dependencyEdge: {
-  //         headTokenIndex: 1,
-  //         label: 'P'
-  //       },
-  //       lemma: '!'
-  //     }
+  //     // ...
   //   ]
   // }
 });
