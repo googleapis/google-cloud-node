@@ -90,6 +90,23 @@ Metadata.getGCEDescriptor = function(projectId) {
 };
 
 /**
+ * Create a descriptor for Google Container Engine.
+ *
+ * @private
+ *
+ * @param {string} projectId - The project ID.
+ * @return {object}
+ */
+Metadata.getGKEDescriptor = function(projectId) {
+  return {
+    type: 'container',
+    labels: {
+      project_id: projectId,
+    }
+  };
+};
+
+/**
  * Create a global descriptor.
  *
  * @private
@@ -153,6 +170,8 @@ Metadata.prototype.getDefaultResource = function(callback) {
         defaultResource = Metadata.getGAEDescriptor(projectId);
       } else if (env.IS_CLOUD_FUNCTION) {
         defaultResource = Metadata.getCloudFunctionDescriptor(projectId);
+      } else if (env.IS_CONTAINER_ENGINE) {
+        defaultResource = Metadata.getGKEDescriptor(projectId);
       } else if (env.IS_COMPUTE_ENGINE) {
         defaultResource = Metadata.getGCEDescriptor(projectId);
       } else {
