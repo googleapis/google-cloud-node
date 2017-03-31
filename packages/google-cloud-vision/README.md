@@ -1,4 +1,4 @@
-# @google-cloud/vision ([Alpha][versioning])
+# @google-cloud/vision ([Beta][versioning])
 > Cloud Vision Client Library for Node.js
 
 *Looking for more Google APIs than just Vision? You might want to check out [`google-cloud`][google-cloud].*
