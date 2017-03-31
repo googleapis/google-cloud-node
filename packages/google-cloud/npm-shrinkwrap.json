@@ -119,7 +119,7 @@
     },
     "@google-cloud/pubsub": {
       "version": "0.8.3",
-      "from": "@google-cloud/pubsub@0.8.3",
+      "from": "@google-cloud/pubsub@>=0.8.3 <0.9.0",
       "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.8.3.tgz",
       "dependencies": {
         "@google-cloud/common-grpc": {
@@ -145,9 +145,9 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/resource/-/resource-0.6.0.tgz"
     },
     "@google-cloud/spanner": {
-      "version": "0.2.0",
-      "from": "@google-cloud/spanner@0.2.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/spanner/-/spanner-0.2.0.tgz",
+      "version": "0.1.2",
+      "from": "@google-cloud/spanner@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/spanner/-/spanner-0.1.2.tgz",
       "dependencies": {
         "@google-cloud/common-grpc": {
           "version": "0.2.1",
