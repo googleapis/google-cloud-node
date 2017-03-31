@@ -1,4 +1,4 @@
-# @google-cloud/language ([Alpha][versioning])
+# @google-cloud/language ([Beta][versioning])
 > Cloud Natural Language Client Library for Node.js
 
 *Looking for more Google APIs than just Natural Language? You might want to check out [`google-cloud`][google-cloud].*
