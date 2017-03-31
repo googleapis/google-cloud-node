@@ -489,7 +489,7 @@ Transaction.prototype.run = function(query, callback) {
  *       this.end();
  *     })
  *     .on('end', function() {});
- *   });
+ * });
  */
 Transaction.prototype.runStream = function(query) {
   var self = this;
@@ -645,23 +645,6 @@ Transaction.prototype.retry_ = function(timeout, callback) {
  *       }
  *     });
  *   });
- * });
- *
- * //-
- * // You can also omit the callback and return a Promise.
- * //-
- * transaction.run_(function() {
- *   return transaction.run('SELECT * FROM Singers')
- *     .then(function() {
- *       transaction.insert('Singers', {
- *         SingerId: 'Id3b',
- *         Name: 'Joe West'
- *       });
- *
- *       return transaction.commit();
- *     });
- * }).then(function() {
- *   // Transaction committed successfully.
  * });
  */
 Transaction.prototype.run_ = function(fn) {
