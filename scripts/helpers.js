@@ -236,7 +236,13 @@ Module.prototype.runSnippetTests = function() {
  * Runs system tests for this module via `npm run system-test`
  */
 Module.prototype.runSystemTests = function() {
-  if (this.name === 'common' || this.name === 'common-grpc') {
+  var modulesExcludedFromSystemTests = [
+    'common',
+    'common-grpc',
+    'monitoring'
+  ];
+
+  if (modulesExcludedFromSystemTests.indexOf(this.name) > -1) {
     return;
   }
 
