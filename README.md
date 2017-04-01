@@ -1014,23 +1014,23 @@ fs.createReadStream('./audio.raw')
     interimResults: false
   }))
   .on('error', console.error)
-  .on('data', function(data) {
-    // The first "data" event emitted might look like:
-    //   data = {
+  .on('response', function(response) {
+    // The first "response" event emitted might look like:
+    //   response = {
     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
     //     results: "",
     //     ...
     //   }
     //
-    // A later "data" event emitted might look like:
-    //   data = {
+    // A later "response" event emitted might look like:
+    //   response = {
     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
     //     results: "",
     //     ...
     //   }
     //
-    // A final "data" event emitted might look like:
-    //   data = {
+    // A final "response" event emitted might look like:
+    //   response = {
     //     endpointerType:
     //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
     //     results: "how old is the Brooklyn Bridge",

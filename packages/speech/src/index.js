@@ -99,7 +99,7 @@ util.inherits(Speech, commonGrpc.Service);
 /**
  * The endpointer types that the Speech API will return while processing a
  * {module:speech#createRecognizeStream} request. You can track the progress of
- * audio recognition by comparing the `data.endpointerType` property with these
+ * audio recognition by comparing the `response.endpointerType` property with these
  * values.
  *
  *   - `Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED`: No endpointer
@@ -367,7 +367,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * Perform bidirectional streaming speech-recognition: receive results while
  * sending audio.
  *
- * Each emitted `data` event is a
+ * Each emitted `response` event is a
  * [`StreamingRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#streamingrecognizeresponse)
  * object, containing these properties:
  *
@@ -415,23 +415,23 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   .on('error', console.error)
  *   .pipe(speech.createRecognizeStream(request))
  *   .on('error', console.error)
- *   .on('data', function(data) {
- *     // The first "data" event emitted might look like:
- *     //   data = {
+ *   .on('response', function(response) {
+ *     // The first "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
  *     //     results: "",
  *     //     ...
  *     //   }
  *
- *     // A later "data" event emitted might look like:
- *     //   data = {
+ *     // A later "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
  *     //     results: "",
  *     //     ...
  *     //   }
  *
- *     // A final "data" event emitted might look like:
- *     //   data = {
+ *     // A final "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType:
  *     //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
  *     //     results: "how old is the Brooklyn Bridge",
@@ -456,23 +456,23 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   .on('error', console.error)
  *   .pipe(speech.createRecognizeStream(request))
  *   .on('error', console.error)
- *   .on('data', function(data) {
- *     // The first "data" event emitted might look like:
- *     //   data = {
+ *   .on('response', function(response) {
+ *     // The first "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
  *     //     results: [],
  *     //     ...
  *     //   }
  *
- *     // A later "data" event emitted might look like:
- *     //   data = {
+ *     // A later "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
  *     //     results: [],
  *     //     ...
  *     //   }
  *
- *     // A final "data" event emitted might look like:
- *     //   data = {
+ *     // A final "response" event emitted might look like:
+ *     //   response = {
  *     //     endpointerType:
  *     //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
  *     //     results: [
