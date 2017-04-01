@@ -20,8 +20,9 @@
     "allowUrlComments": true
   },
   "excludeFiles": [
-    "system-test/data/*",
-    "test/testdata/*",
+    "**/src/*/**/*",
+    "**/system-test/*/**/*",
+    "**/test/*/**/*",
     "**/node_modules/"
   ]
 }
