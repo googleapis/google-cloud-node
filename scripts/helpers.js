@@ -348,11 +348,15 @@ Git.prototype.checkout = function(branch) {
 Git.prototype.submodule = function(branch, alias) {
   alias = alias || branch;
 
-  run(['git submodule add -q -b', branch, Git.REPO, alias], {
-    cwd: this.cwd
-  });
+  var submodulePath = path.join(this.cwd, alias);
 
-  var git = new Git(path.join(this.cwd, alias));
+  if (!test('-d', submodulePath)) {
+    run(['git submodule add -q -b', branch, Git.REPO, alias], {
+      cwd: this.cwd
+    });
+  }
+
+  var git = new Git(submodulePath);
 
   git.branch.current = branch;
   git.alias = alias;
