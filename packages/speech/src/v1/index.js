@@ -19,15 +19,15 @@ var speechClient = require('./speech_client');
 var gax = require('google-gax');
 var extend = require('extend');
 
-function v1beta1(options) {
+function v1(options) {
   options = extend({
-    scopes: v1beta1.ALL_SCOPES
+    scopes: v1.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
   return speechClient(gaxGrpc);
 }
 
-v1beta1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
-v1beta1.ALL_SCOPES = speechClient.ALL_SCOPES;
+v1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
+v1.ALL_SCOPES = speechClient.ALL_SCOPES;
 
-module.exports = v1beta1;
+module.exports = v1;

@@ -47,10 +47,10 @@ function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
 
-var fakeV1Beta1Override;
-function fakeV1Beta1() {
-  if (fakeV1Beta1Override) {
-    return fakeV1Beta1Override.apply(null, arguments);
+var fakeV1Override;
+function fakeV1() {
+  if (fakeV1Override) {
+    return fakeV1Override.apply(null, arguments);
   }
 
   return {
@@ -83,7 +83,7 @@ describe('Speech', function() {
         Service: FakeGrpcService
       },
       request: fakeRequest,
-      './v1beta1': fakeV1Beta1
+      './v1': fakeV1
     });
 
     originalStaticMembers = Object.keys(Speech).reduce(function(statics, key) {
@@ -93,7 +93,7 @@ describe('Speech', function() {
   });
 
   beforeEach(function() {
-    fakeV1Beta1Override = null;
+    fakeV1Override = null;
     requestOverride = null;
 
     speech = new Speech(OPTIONS);
@@ -128,7 +128,7 @@ describe('Speech', function() {
     it('should create a gax api client', function() {
       var expectedSpeechService = {};
 
-      fakeV1Beta1Override = function(options) {
+      fakeV1Override = function(options) {
         var expected = extend({}, OPTIONS, {
           libName: 'gccl',
           libVersion: require('../package.json').version
@@ -160,11 +160,6 @@ describe('Speech', function() {
         projectIdRequired: false,
         service: 'speech',
         protoServices: {
-          Speech: {
-            path: googleProtoFiles.speech.v1beta1,
-            service: 'cloud.speech',
-            apiVersion: 'v1beta1'
-          },
           Operations: {
             path: googleProtoFiles('longrunning', 'operations.proto'),
             service: 'longrunning'
@@ -178,21 +173,18 @@ describe('Speech', function() {
     });
   });
 
-  describe('endpointerTypes', function() {
-    var ENDPOINTER_TYPES = {
-      END_OF_AUDIO: 'END_OF_AUDIO',
-      END_OF_SPEECH: 'END_OF_SPEECH',
-      END_OF_UTTERANCE: 'END_OF_UTTERANCE',
-      ENDPOINTER_EVENT_UNSPECIFIED: 'ENDPOINTER_EVENT_UNSPECIFIED',
-      START_OF_SPEECH: 'START_OF_SPEECH'
+  describe('eventTypes', function() {
+    var EVENT_TYPES = {
+      END_OF_SINGLE_UTTERANCE: 'END_OF_SINGLE_UTTERANCE',
+      ENDPOINTER_EVENT_UNSPECIFIED: 'ENDPOINTER_EVENT_UNSPECIFIED'
     };
 
-    it('should export static endpointerTypes', function() {
-      assert.deepEqual(Speech.endpointerTypes, ENDPOINTER_TYPES);
+    it('should export static eventTypes', function() {
+      assert.deepEqual(Speech.eventTypes, EVENT_TYPES);
     });
 
-    it('should export instance endpointerTypes', function() {
-      assert.deepEqual(speech.endpointerTypes, ENDPOINTER_TYPES);
+    it('should export instance eventTypes', function() {
+      assert.deepEqual(speech.eventTypes, EVENT_TYPES);
     });
   });
 
@@ -493,6 +485,29 @@ describe('Speech', function() {
       stream.emit('writing');
     });
 
+    it('should destroy user stream if request stream errors', function(done) {
+      var error = new Error('Error.');
+
+      stream.on('error', function(err) {
+        assert.strictEqual(error, err);
+        done();
+      });
+
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var requestStream = through.obj();
+
+          setImmediate(function() {
+            requestStream.destroy(error);
+          });
+
+          return requestStream;
+        }
+      };
+
+      stream.emit('writing');
+    });
+
     it('should emit the response event on the user stream', function(done) {
       var response = {};
 
@@ -523,7 +538,11 @@ describe('Speech', function() {
 
           requestStream.once('data', function(data) {
             assert.deepEqual(data, {
-              streamingConfig: CONFIG
+              streamingConfig: extend(true, {
+                config: {
+                  languageCode: 'en-US'
+                }
+              }, CONFIG)
             });
             done();
           });
@@ -669,6 +688,34 @@ describe('Speech', function() {
 
       stream.emit('writing');
     });
+
+    it('should allow specifying a languageCode', function(done) {
+      var languageCode = 'uk';
+
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var stream = through.obj();
+
+          stream.on('data', function(data) {
+            assert.strictEqual(
+              data.streamingConfig.config.languageCode,
+              languageCode
+            );
+            done();
+          });
+
+          return stream;
+        }
+      };
+
+      var stream = speech.createRecognizeStream({
+        config: {
+          languageCode: languageCode
+        }
+      });
+
+      stream.emit('writing');
+    });
   });
 
   describe('operation', function() {
@@ -704,7 +751,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        syncRecognize: util.noop
+        recognize: util.noop
       };
     });
 
@@ -725,10 +772,11 @@ describe('Speech', function() {
 
     it('should make the correct request', function(done) {
       speech.api.Speech = {
-        syncRecognize: function(reqOpts) {
-          var expectedConfig = extend({}, CONFIG, {
-            encoding: DETECTED_ENCODING
-          });
+        recognize: function(reqOpts) {
+          var expectedConfig = extend({
+            encoding: DETECTED_ENCODING,
+            languageCode: 'en-US'
+          }, CONFIG);
 
           assert.deepEqual(reqOpts.config, expectedConfig);
           assert.strictEqual(reqOpts.audio, FOUND_FILE);
@@ -738,6 +786,23 @@ describe('Speech', function() {
       };
 
       speech.recognize(FILE, CONFIG, assert.ifError);
+    });
+
+    it('should allow setting a languageCode', function(done) {
+      var languageCode = 'uk';
+
+      var config = {
+        languageCode: languageCode
+      };
+
+      speech.api.Speech = {
+        recognize: function(reqOpts) {
+          assert.strictEqual(reqOpts.config.languageCode, languageCode);
+          done();
+        }
+      };
+
+      speech.recognize(FILE, config, assert.ifError);
     });
 
     it('should respect the provided encoding', function(done) {
@@ -750,7 +815,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        syncRecognize: function(reqOpts) {
+        recognize: function(reqOpts) {
           assert.strictEqual(reqOpts.config.encoding, config.encoding);
           done();
         }
@@ -768,7 +833,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        syncRecognize: function(reqOpts) {
+        recognize: function(reqOpts) {
           assert.strictEqual(reqOpts.config.encoding, expectedEncoding);
           done();
         }
@@ -796,7 +861,7 @@ describe('Speech', function() {
 
       beforeEach(function() {
         speech.api.Speech = {
-          syncRecognize: function(reqOpts, callback) {
+          recognize: function(reqOpts, callback) {
             callback(error, apiResponse);
           }
         };
@@ -816,43 +881,23 @@ describe('Speech', function() {
       var apiResponse = {
         results: []
       };
-      var decodedResponse = {
-        results: []
-      };
       var formattedResults = [];
 
       beforeEach(function() {
-        speech.protos = {
-          Speech: {
-            SyncRecognizeResponse: function() {
-              return decodedResponse;
-            }
-          }
-        };
-
         Speech.formatResults_ = function() {
           return formattedResults;
         };
 
         speech.api.Speech = {
-          syncRecognize: function(reqOpts, callback) {
+          recognize: function(reqOpts, callback) {
             callback(null, apiResponse);
           }
         };
       });
 
       it('should return the detections & API response', function(done) {
-        speech.protos = {
-          Speech: {
-            SyncRecognizeResponse: function(response) {
-              assert.strictEqual(response, apiResponse);
-              return decodedResponse;
-            }
-          }
-        };
-
         Speech.formatResults_ = function(results, verboseMode) {
-          assert.strictEqual(results, decodedResponse.results);
+          assert.strictEqual(results, apiResponse.results);
           assert.strictEqual(verboseMode, false);
           return formattedResults;
         };
@@ -893,7 +938,7 @@ describe('Speech', function() {
 
       it('should delete verbose option from request object', function(done) {
         speech.api.Speech = {
-          syncRecognize: function(reqOpts) {
+          recognize: function(reqOpts) {
             assert.strictEqual(reqOpts.config.verbose, undefined);
             done();
           }
@@ -924,7 +969,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        asyncRecognize: util.noop
+        longRunningRecognize: util.noop
       };
     });
 
@@ -939,9 +984,10 @@ describe('Speech', function() {
 
     it('should make the correct request', function(done) {
       speech.api.Speech = {
-        asyncRecognize: function(reqOpts) {
+        longRunningRecognize: function(reqOpts) {
           var expectedConfig = extend({}, CONFIG, {
-            encoding: DETECTED_ENCODING
+            encoding: DETECTED_ENCODING,
+            languageCode: 'en-US'
           });
 
           assert.deepEqual(reqOpts.config, expectedConfig);
@@ -954,6 +1000,23 @@ describe('Speech', function() {
       speech.startRecognition(FILE, CONFIG, assert.ifError);
     });
 
+    it('should respect the provided language code', function(done) {
+      var languageCode = 'uk';
+
+      var config = {
+        languageCode: languageCode
+      };
+
+      speech.api.Speech = {
+        longRunningRecognize: function(reqOpts) {
+          assert.strictEqual(reqOpts.config.languageCode, languageCode);
+          done();
+        }
+      };
+
+      speech.startRecognition(FILE, config, assert.ifError);
+    });
+
     it('should respect the provided encoding', function(done) {
       var config = {
         encoding: 'LINEAR32'
@@ -964,7 +1027,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        asyncRecognize: function(reqOpts) {
+        longRunningRecognize: function(reqOpts) {
           assert.strictEqual(reqOpts.config.encoding, config.encoding);
           done();
         }
@@ -982,7 +1045,7 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        asyncRecognize: function(reqOpts) {
+        longRunningRecognize: function(reqOpts) {
           assert.strictEqual(reqOpts.config.encoding, expectedEncoding);
           done();
         }
@@ -1010,7 +1073,7 @@ describe('Speech', function() {
 
       it('should return the error & API response', function(done) {
         speech.api.Speech = {
-          asyncRecognize: function(reqOpts, callback) {
+          longRunningRecognize: function(reqOpts, callback) {
             callback(error, null, apiResponse);
           }
         };
@@ -1034,7 +1097,7 @@ describe('Speech', function() {
 
       it('should format the results', function(done) {
         speech.api.Speech = {
-          asyncRecognize: function(reqOpts, callback) {
+          longRunningRecognize: function(reqOpts, callback) {
             var operation = through.obj();
             callback(null, operation, apiResponse);
           }
@@ -1064,7 +1127,7 @@ describe('Speech', function() {
 
       it('should format results in verbose mode', function(done) {
         speech.api.Speech = {
-          asyncRecognize: function(reqOpts, callback) {
+          longRunningRecognize: function(reqOpts, callback) {
             var operation = through.obj();
             callback(null, operation, apiResponse);
           }
@@ -1088,7 +1151,7 @@ describe('Speech', function() {
 
       it('should delete verbose option from request object', function(done) {
         speech.api.Speech = {
-          asyncRecognize: function(reqOpts) {
+          longRunningRecognize: function(reqOpts) {
             assert.strictEqual(reqOpts.config.verbose, undefined);
             done();
           }

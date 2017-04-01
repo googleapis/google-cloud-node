@@ -35,7 +35,7 @@ var request = require('request');
 var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
-var v1beta1 = require('./v1beta1');
+var v1 = require('./v1');
 
 /**
  * The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy
@@ -67,7 +67,7 @@ function Speech(options) {
   });
 
   this.api = {
-    Speech: v1beta1(options).speechClient(options)
+    Speech: v1(options).speechClient(options)
   };
 
   var config = {
@@ -75,11 +75,6 @@ function Speech(options) {
     projectIdRequired: false,
     service: 'speech',
     protoServices: {
-      Speech: {
-        path: googleProtoFiles.speech.v1beta1,
-        service: 'cloud.speech',
-        apiVersion: 'v1beta1'
-      },
       Operations: {
         path: googleProtoFiles('longrunning', 'operations.proto'),
         service: 'longrunning'
@@ -97,20 +92,13 @@ function Speech(options) {
 util.inherits(Speech, commonGrpc.Service);
 
 /**
- * The endpointer types that the Speech API will return while processing a
+ * The event types that the Speech API will return while processing a
  * {module:speech#createRecognizeStream} request. You can track the progress of
- * audio recognition by comparing the `data.endpointerType` property with these
+ * audio recognition by comparing the `data.eventType` property with these
  * values.
  *
- *   - `Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED`: No endpointer
- *     event specified.
- *   - `Speech.endpointerTypes.START_OF_SPEECH`: Speech has been detected in the
- *     audio stream.
- *   - `Speech.endpointerTypes.END_OF_SPEECH`: Speech has ceased to be detected
- *     in the audio stream.
- *   - `Speech.endpointerTypes.END_OF_AUDIO`: The end of the audio stream has
- *     been reached and it is being processed.
- *   - `Speech.endpointerTypes.END_OF_UTTERANCE`: This event is only sent when
+ *   - `Speech.eventTypes.ENDPOINTER_EVENT_UNSPECIFIED`: No event specified.
+ *   - `Speech.eventTypes.END_OF_SINGLE_UTTERANCE`: This event is only sent when
  *     `config.singleUtterance` passed to {module:speech#createRecognizeStream}
  *     is `true`. It indicates that the server has detected the end of the
  *     user's speech utterance and expects no additional speech. Therefore, the
@@ -119,13 +107,10 @@ util.inherits(Speech, commonGrpc.Service);
  *
  * @type {object}
  */
-Speech.endpointerTypes =
-Speech.prototype.endpointerTypes = {
-  END_OF_AUDIO: 'END_OF_AUDIO',
-  END_OF_SPEECH: 'END_OF_SPEECH',
-  END_OF_UTTERANCE: 'END_OF_UTTERANCE',
-  ENDPOINTER_EVENT_UNSPECIFIED: 'ENDPOINTER_EVENT_UNSPECIFIED',
-  START_OF_SPEECH: 'START_OF_SPEECH'
+Speech.eventTypes =
+Speech.prototype.eventTypes = {
+  END_OF_SINGLE_UTTERANCE: 'END_OF_SINGLE_UTTERANCE',
+  ENDPOINTER_EVENT_UNSPECIFIED: 'ENDPOINTER_EVENT_UNSPECIFIED'
 };
 
 /**
@@ -371,7 +356,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * [`StreamingRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#streamingrecognizeresponse)
  * object, containing these properties:
  *
- *   - **`endpointerType`** See {module:speech#endpointerTypes}.
+ *   - **`eventType`** See {module:speech#eventTypes}.
  *   - **`results`** By default, a combined string of transcripts. When
  *     `config.verbose` is enabled, this is an object including a `transcript`
  *     property, a `confidence` score from `0` - `100`, and an `alternatives`
@@ -405,7 +390,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var request = {
  *   config: {
  *     encoding: 'LINEAR16',
- *     sampleRate: 16000
+ *     sampleRateHertz: 16000
  *   },
  *   singleUtterance: false,
  *   interimResults: false
@@ -416,27 +401,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   .pipe(speech.createRecognizeStream(request))
  *   .on('error', console.error)
  *   .on('data', function(data) {
- *     // The first "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
- *     //     results: "",
- *     //     ...
- *     //   }
- *
- *     // A later "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
- *     //     results: "",
- *     //     ...
- *     //   }
- *
- *     // A final "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType:
- *     //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
- *     //     results: "how old is the Brooklyn Bridge",
- *     //     ...
- *     //   }
+ *     // data.results = "how old is the Brooklyn Bridge"
  *   });
  *
  * //-
@@ -445,7 +410,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var request = {
  *   config: {
  *     encoding: 'LINEAR16',
- *     sampleRate: 16000
+ *     sampleRateHertz: 16000
  *   },
  *   singleUtterance: false,
  *   interimResults: false,
@@ -457,32 +422,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   .pipe(speech.createRecognizeStream(request))
  *   .on('error', console.error)
  *   .on('data', function(data) {
- *     // The first "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
- *     //     results: [],
- *     //     ...
- *     //   }
- *
- *     // A later "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
- *     //     results: [],
- *     //     ...
- *     //   }
- *
- *     // A final "data" event emitted might look like:
- *     //   data = {
- *     //     endpointerType:
- *     //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
- *     //     results: [
- *     //       {
- *     //         transcript: "how old is the Brooklyn Bridge",
- *     //         confidence: 88.15
- *     //       }
- *     //     ],
- *     //     ...
- *     //   }
+ *     // data.results = "how old is the Brooklyn Bridge"
  *   });
  */
 Speech.prototype.createRecognizeStream = function(config) {
@@ -491,6 +431,12 @@ Speech.prototype.createRecognizeStream = function(config) {
   if (!config) {
     throw new Error('A recognize request requires a configuration object.');
   }
+
+  config = extend(true, {
+    config: {
+      languageCode: 'en-US'
+    }
+  }, config);
 
   var verboseMode = config.verbose === true;
   delete config.verbose;
@@ -506,6 +452,10 @@ Speech.prototype.createRecognizeStream = function(config) {
 
   recognizeStream.once('writing', function() {
     var requestStream = self.api.Speech.streamingRecognize(gaxOptions);
+
+    requestStream.on('error', function(err) {
+      recognizeStream.destroy(err);
+    });
 
     requestStream.on('response', function(response) {
       recognizeStream.emit('response', response);
@@ -564,8 +514,8 @@ Speech.prototype.operation = function(name) {
  * larger files, you will need to use {module:speech#startRecognition} or
  * {module:speech#createRecognizeStream}.
  *
- * @resource [SyncRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.SyncRecognize}
- * @resource [SyncRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SyncRecognizeRequest}
+ * @resource [Recognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.Recognize}
+ * @resource [RecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognizeRequest}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
@@ -585,12 +535,12 @@ Speech.prototype.operation = function(name) {
  *     array consisting of other transcription possibilities. See the examples
  *     below for more.
  * @param {object} callback.apiResponse - Raw API response. See
- *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
+ *     [`RecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#recognizeresponse).
  *
  * @example
  * var config = {
  *   encoding: 'LINEAR16',
- *   sampleRate: 16000
+ *   sampleRateHertz: 16000
  * };
  *
  * function callback(err, transcript, apiResponse) {
@@ -632,7 +582,7 @@ Speech.prototype.operation = function(name) {
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
- *   sampleRate: 16000,
+ *   sampleRateHertz: 16000,
  *   verbose: true
  * };
  *
@@ -670,7 +620,9 @@ Speech.prototype.recognize = function(file, config, callback) {
     throw new Error('A recognize request requires a configuration object.');
   }
 
-  config = extend({}, config);
+  config = extend({
+    languageCode: 'en-US'
+  }, config);
 
   if (!config.encoding) {
     config.encoding = Speech.detectEncoding_(file);
@@ -685,7 +637,7 @@ Speech.prototype.recognize = function(file, config, callback) {
       return;
     }
 
-    self.api.Speech.syncRecognize({
+    self.api.Speech.recognize({
       config: config,
       audio: foundFile
     }, function(err, resp) {
@@ -694,8 +646,7 @@ Speech.prototype.recognize = function(file, config, callback) {
         return;
       }
 
-      var response = new self.protos.Speech.SyncRecognizeResponse(resp);
-      var results = Speech.formatResults_(response.results, verboseMode);
+      var results = Speech.formatResults_(resp.results, verboseMode);
 
       callback(null, results, resp);
     });
@@ -710,9 +661,9 @@ Speech.prototype.recognize = function(file, config, callback) {
  * events to see how the operation finishes. Follow along with the examples
  * below.
  *
- * @resource [AsyncRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.AsyncRecognize}
- * @resource [AsyncRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeRequest}
- * @resource [AsyncRecognizeResponse API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeResponse}
+ * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.Speech.LongRunningRecognize}
+ * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.LongRunningRecognizeRequest}
+ * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.LongRunningRecognizeResponse}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
@@ -732,7 +683,7 @@ Speech.prototype.recognize = function(file, config, callback) {
  * @example
  * var config = {
  *   encoding: 'LINEAR16',
- *   sampleRate: 16000
+ *   sampleRateHertz: 16000
  * };
  *
  * function callback(err, operation, apiResponse) {
@@ -781,7 +732,7 @@ Speech.prototype.recognize = function(file, config, callback) {
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
- *   sampleRate: 16000,
+ *   sampleRateHertz: 16000,
  *   verbose: true
  * };
  *
@@ -813,7 +764,9 @@ Speech.prototype.recognize = function(file, config, callback) {
 Speech.prototype.startRecognition = function(file, config, callback) {
   var self = this;
 
-  config = extend({}, config);
+  config = extend({
+    languageCode: 'en-US'
+  }, config);
 
   if (!config.encoding) {
     config.encoding = Speech.detectEncoding_(file);
@@ -828,7 +781,7 @@ Speech.prototype.startRecognition = function(file, config, callback) {
       return;
     }
 
-    self.api.Speech.asyncRecognize({
+    self.api.Speech.longRunningRecognize({
       config: config,
       audio: foundFile
     }, function(err, operation, resp) {
@@ -857,4 +810,4 @@ common.util.promisifyAll(Speech, {
 });
 
 module.exports = Speech;
-module.exports.v1beta1 = v1beta1;
+module.exports.v1 = v1;
