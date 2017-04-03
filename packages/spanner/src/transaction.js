@@ -566,7 +566,7 @@ Transaction.prototype.createRetryDelay_ = function() {
  *     // Error handling omitted.
  *   }
  *
- *   transaction.runQuery('SELECT * FROM Singers', function(err, rows) {
+ *   transaction.run('SELECT * FROM Singers', function(err, rows) {
  *     if (err) {
  *       // Error handling omitted.
  *     }
