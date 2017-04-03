@@ -36,6 +36,11 @@ function isPublic(block) {
   return !block.isPrivate && !block.ignore;
 }
 
+function isMethod(block) {
+  var tag = block.tags[0];
+  return tag && tag.type !== 'typedef';
+}
+
 function detectLinks(str) {
   var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
 
@@ -118,7 +123,7 @@ function getName(block) {
     return alias.string;
   }
 
-  return block.ctx.name;
+  return block.ctx && block.ctx.name;
 }
 
 function getClassDesc(block) {
@@ -302,6 +307,7 @@ function parseFile(fileName, contents, umbrellaMode) {
     parent: parent,
     children: getChildren(id),
     methods: comments
+      .filter(isMethod)
       .map(createMethod.bind(null, fileName, id))
       .concat(getMixinMethods(comments))
       .reduce(createUniqueMethodList, [])

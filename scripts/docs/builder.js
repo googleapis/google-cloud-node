@@ -76,12 +76,17 @@ Builder.prototype.build = function() {
   mkdir('-p', this.dir);
   cp(MARKDOWN, this.dir);
 
-  var docs = globby.sync(path.join(this.name, 'src/*.js'), {
+  var globs = [
+    path.join(this.name, 'src/*.js'),
+    path.join(this.name, 'index.js')
+  ];
+
+  var docs = globby.sync(globs, {
     cwd: PACKAGES_ROOT,
     ignore: config.IGNORE
   }).map(function(file) {
     var json = self.parseFile(file);
-    var outputFile = file.replace(/^.+src\//, '') + 'on';
+    var outputFile = path.basename(file) + 'on';
 
     json.path = path.basename(outputFile);
     self.write(outputFile, json);
