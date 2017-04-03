@@ -49,12 +49,14 @@ describe('Speech', function() {
 
   var OPTIONS = {
     encoding: 'LINEAR16',
-    sampleRate: 16000
+    sampleRateHertz: 16000
   };
 
   var OPTIONS_VERBOSE = extend({}, OPTIONS, {
     verbose: true
   });
+
+  var TRANSCRIPTION = 'how old is the Brooklyn Bridge';
 
   before(function(done) {
     async.waterfall([
@@ -125,7 +127,7 @@ describe('Speech', function() {
     it('recognizes speech from local file', function(done) {
       speech.recognize(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
-        sampleRate: 16000
+        sampleRateHertz: 16000
       }, assertSimplifiedResponse(done));
     });
 
@@ -178,7 +180,7 @@ describe('Speech', function() {
     it('recognizes speech from local file', function(done) {
       var options = {
         // encoding should be automatically detected
-        sampleRate: 16000
+        sampleRateHertz: 16000
       };
 
       var path = AUDIO_FILES.bridge.path;
@@ -229,7 +231,7 @@ describe('Speech', function() {
 
   describe('createRecognizeStream', function() {
     it('recognizes speech from raw audio', function(done) {
-      var correctDetectionsEmitted = 0;
+      var transcribed = false;
       var responseEmitted = false;
 
       fs.createReadStream(AUDIO_FILES.bridge.path)
@@ -244,41 +246,23 @@ describe('Speech', function() {
           responseEmitted = true;
         })
         .on('data', function(data) {
-          switch (data.endpointerType) {
-            case Speech.endpointerTypes.START_OF_SPEECH: {
-              if (data.results.length === 0) {
-                correctDetectionsEmitted++;
-              }
-              return;
-            }
-
-            case Speech.endpointerTypes.END_OF_AUDIO: {
-              if (data.results.length === 0) {
-                correctDetectionsEmitted++;
-              }
-              return;
-            }
-
-            case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
-              var transcript = data.results;
-              if (transcript === 'how old is the Brooklyn Bridge') {
-                correctDetectionsEmitted++;
-              }
-              return;
+          if (data.speechEventType === 'SPEECH_EVENT_UNSPECIFIED') {
+            if (data.results === TRANSCRIPTION) {
+              transcribed = true;
             }
           }
         })
         .on('end', function() {
           setTimeout(function() {
             assert.strictEqual(responseEmitted, true);
-            assert.strictEqual(correctDetectionsEmitted, 3);
+            assert.strictEqual(transcribed, true);
             done();
           }, 1500);
         });
     });
 
     it('recognizes speech from raw audio in verbose mode', function(done) {
-      var correctDetectionsEmitted = 0;
+      var transcribed = false;
       var responseEmitted = false;
 
       fs.createReadStream(AUDIO_FILES.bridge.path)
@@ -294,34 +278,16 @@ describe('Speech', function() {
           responseEmitted = true;
         })
         .on('data', function(data) {
-          switch (data.endpointerType) {
-            case Speech.endpointerTypes.START_OF_SPEECH: {
-              if (data.results.length === 0) {
-                correctDetectionsEmitted++;
-              }
-              return;
-            }
-
-            case Speech.endpointerTypes.END_OF_AUDIO: {
-              if (data.results.length === 0) {
-                correctDetectionsEmitted++;
-              }
-              return;
-            }
-
-            case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
-              var transcript = data.results[0].transcript;
-              if (transcript === 'how old is the Brooklyn Bridge') {
-                correctDetectionsEmitted++;
-              }
-              return;
+          if (data.speechEventType === 'SPEECH_EVENT_UNSPECIFIED') {
+            if (data.results[0].transcript === TRANSCRIPTION) {
+              transcribed = true;
             }
           }
         })
         .on('end', function() {
           setTimeout(function() {
             assert.strictEqual(responseEmitted, true);
-            assert.strictEqual(correctDetectionsEmitted, 3);
+            assert.strictEqual(transcribed, true);
             done();
           }, 1500);
         });
@@ -331,7 +297,7 @@ describe('Speech', function() {
   function assertSimplifiedResponse(done) {
     return function(err, transcript) {
       assert.ifError(err);
-      assert.strictEqual(transcript, 'how old is the Brooklyn Bridge');
+      assert.strictEqual(transcript, TRANSCRIPTION);
       done();
     };
   }
@@ -343,7 +309,7 @@ describe('Speech', function() {
       assert(results.length > 0);
 
       var transcript = results[0].transcript;
-      assert.strictEqual(transcript, 'how old is the Brooklyn Bridge');
+      assert.strictEqual(transcript, TRANSCRIPTION);
 
       done();
     };
