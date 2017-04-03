@@ -997,7 +997,7 @@ var speechClient = speech({
 // Detect the speech in an audio file.
 speechClient.recognize('./audio.raw', {
   encoding: 'LINEAR16',
-  sampleRate: 16000
+  sampleRateHertz: 16000
 }, function(err, transcript) {
   // transcript = 'how old is the Brooklyn Bridge'
 });
@@ -1008,34 +1008,14 @@ fs.createReadStream('./audio.raw')
   .pipe(speechClient.createRecognizeStream({
     config: {
       encoding: 'LINEAR16',
-      sampleRate: 16000
+      sampleRateHertz: 16000
     },
     singleUtterance: false,
     interimResults: false
   }))
   .on('error', console.error)
   .on('data', function(data) {
-    // The first "data" event emitted might look like:
-    //   data = {
-    //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
-    //     results: "",
-    //     ...
-    //   }
-    //
-    // A later "data" event emitted might look like:
-    //   data = {
-    //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
-    //     results: "",
-    //     ...
-    //   }
-    //
-    // A final "data" event emitted might look like:
-    //   data = {
-    //     endpointerType:
-    //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
-    //     results: "how old is the Brooklyn Bridge",
-    //     ...
-    //   }
+    // data.results = "how old is the Brooklyn Bridge"
   });
 ```
 
