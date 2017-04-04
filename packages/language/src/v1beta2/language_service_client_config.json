@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.language.v1.LanguageService": {
+    "google.cloud.language.v1beta2.LanguageService": {
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
@@ -28,6 +28,11 @@
           "retry_params_name": "default"
         },
         "AnalyzeEntities": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "AnalyzeEntitySentiment": {
           "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
