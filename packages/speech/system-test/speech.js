@@ -49,6 +49,7 @@ describe('Speech', function() {
 
   var OPTIONS = {
     encoding: 'LINEAR16',
+    languageCode: 'en-US',
     sampleRateHertz: 16000
   };
 
@@ -109,7 +110,7 @@ describe('Speech', function() {
         assert.ifError(err);
 
         speech.recognize({
-          content: audioFile
+          content: audioFile,
         }, OPTIONS, assertSimplifiedResponse(done));
       });
     });
@@ -119,7 +120,7 @@ describe('Speech', function() {
         assert.ifError(err);
 
         speech.recognize({
-          content: audioFile
+          content: audioFile,
         }, OPTIONS_VERBOSE, assertVerboseResponse(done));
       });
     });
@@ -127,6 +128,7 @@ describe('Speech', function() {
     it('recognizes speech from local file', function(done) {
       speech.recognize(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
+        languageCode: 'en-US',
         sampleRateHertz: 16000
       }, assertSimplifiedResponse(done));
     });

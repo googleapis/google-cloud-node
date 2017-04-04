@@ -413,6 +413,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var request = {
  *   config: {
  *     encoding: 'LINEAR16',
+ *     languageCode: 'en-US',
  *     sampleRateHertz: 16000
  *   },
  *   singleUtterance: false,
