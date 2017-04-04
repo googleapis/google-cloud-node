@@ -81,7 +81,7 @@ Builder.prototype.build = function() {
     ignore: config.IGNORE
   }).map(function(file) {
     var json = self.parseFile(file);
-    var outputFile = file.replace(/^.+src\//, '') + 'on';
+    var outputFile = path.basename(file) + 'on';
 
     json.path = path.basename(outputFile);
     self.write(outputFile, json);
