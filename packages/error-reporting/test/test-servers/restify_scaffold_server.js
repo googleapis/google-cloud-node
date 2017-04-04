@@ -20,7 +20,7 @@ function respond(req, res, next) {
 }
 
 var restify = require('restify');
-var errorHandler = require('../../index.js')();
+var errorHandler = require('../../src/index.js')();
 
 var server = restify.createServer();
 

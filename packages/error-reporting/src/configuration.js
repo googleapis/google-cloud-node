@@ -411,7 +411,7 @@ Configuration.prototype.getKeyFilename = function() {
  * @memberof Configuration
  * @public
  * @function getCredentials
- * @returns {Credentials\Null} - returns the _credentials property
+ * @returns {Credentials|Null} - returns the _credentials property
  */
 Configuration.prototype.getCredentials = function() {
   return this._credentials;

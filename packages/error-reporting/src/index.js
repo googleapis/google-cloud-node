@@ -1,4 +1,4 @@
-/**
+/*!
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,9 +69,11 @@ var createLogger = require('./src/logger.js');
  * this function will also return an interface which can be used manually via
  * the `report` function property, with hapi via the `hapi` object property or
  * with express via the `express` function property.
- * @function initConfiguration
+ * @function Errors
  * @param {ConfigurationOptions} initConfiguration - the desired project/error
  *     reporting configuration
+ * @constructor
+ * @alias module:error-reporting
  */
 function Errors(initConfiguration) {
   if (!(this instanceof Errors)) {
@@ -86,11 +88,58 @@ function Errors(initConfiguration) {
   uncaughtException(client, config);
 
   // Build the application interfaces for use by the hosting application
-  this.hapi = hapi(client, config);
+  /** 
+   * @example
+   * // Use to report errors manually like so
+   * var errors = require('@google-cloud/error-reporting')();
+   * errors.report(new Error('xyz'), () => console.log('done!'));
+   */
   this.report = manual(client, config);
-  this.express = express(client, config);
-  this.restify = restify(client, config);
+  /**
+   * @example
+   * // Use to create and report errors manually with a high-degree
+   * // of manual control
+   * var errors = require('@google-cloud/error-reporting')();
+   * var err = errors.event()
+   *  .setMessage('My error message')
+   *  .setUser('root@nexus');
+   * errors.report(err, () => console.log('done!'));
+   */
   this.event = messageBuilder(config);
+  /**
+   * @example
+   * var errors = require('@google-cloud/error-reporting')();
+   * var server = new hapi.Server();
+   * server.connection({ port: 3000 });
+   * server.start();
+   * // AFTER ALL OTHER ROUTE HANDLERS
+   * server.register({register: errors.hapi});
+   */
+  this.hapi = hapi(client, config);
+  /**
+   * @example
+   * var errors = require('@google-cloud/error-reporting')();
+   * var app = express();
+   * // AFTER ALL OTHER ROUTE HANDLERS
+   * app.use(errors.express);
+   * app.listen(3000);
+   */
+  this.express = express(client, config);
+  /**
+   * @example
+   * var errors = require('@google-cloud/error-reporting')();
+   * var server = restify.createServer();
+   * // BEFORE ALL OTHER ROUTE HANDLERS
+   * server.use(errors.restify(server));
+   */
+  this.restify = restify(client, config);
+  /**
+   * @example
+   * var errors = require('@google-cloud/error-reporting')();
+   * var app = koa();
+   * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
+   * app.use(errors.koa);
+   */
   this.koa = koa(client, config);
 }
 

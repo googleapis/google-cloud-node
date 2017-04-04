@@ -22,7 +22,7 @@ var EXCLAMATION_LN = '\n!!';
 var has = require('lodash.has');
 var express = require('express');
 var app = express();
-var errorHandler = require('../../index.js')({
+var errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report',
   key: process.env.STUBBED_API_KEY,
   projectId: process.env.STUBBED_PROJECT_NUM

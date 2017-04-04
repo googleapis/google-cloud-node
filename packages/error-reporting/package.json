@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/error-reporting",
   "description": "Stackdriver Error Reporting Client Library for Node.js",
-  "main": "index.js",
+  "main": "./src/index.js",
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "scripts": {
     "test": "nyc --exclude=\"fuzzer.js\" mocha ./test/unit/*.js",

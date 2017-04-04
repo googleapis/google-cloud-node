@@ -17,7 +17,7 @@
 // jscs:disable
 'use strict';
 
-var errorHandler = require('../../index.js')({
+var errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report'
 });
 var koa = require('koa');

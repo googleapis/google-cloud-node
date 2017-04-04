@@ -46,6 +46,10 @@ module.exports = {
       title: 'Google Cloud',
       instanceName: 'gcloud'
     },
+    'error-reporting': {
+      title: 'Error Reporting',
+      instanceName: 'errors'
+    },
     bigquery: {
       title: 'BigQuery'
     },

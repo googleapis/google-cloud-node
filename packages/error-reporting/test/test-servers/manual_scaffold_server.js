@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const errors = require('../../index.js')();
+const errors = require('../../src/index.js')();
 errors.report('Sample test string', (err, response, body) => {
   console.log(
     'Callback from report:\n',

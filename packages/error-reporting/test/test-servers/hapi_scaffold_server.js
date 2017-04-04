@@ -16,7 +16,7 @@
 'use strict';
 
 var hapi = require('hapi');
-var errorHandler = require('../../index.js')();
+var errorHandler = require('../../src/index.js')();
 
 var server = new hapi.Server();
 server.connection({ port: 3000 });
