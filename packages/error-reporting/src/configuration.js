@@ -347,7 +347,8 @@ Configuration.prototype._checkLocalProjectId = function(cb) {
   if (isString(this._projectId)) {
     // already has been set by the metadata service
     return this._projectId;
-  } else if (has(this._givenConfiguration, 'projectId')) {
+  }
+  if (has(this._givenConfiguration, 'projectId')) {
     if (isString(this._givenConfiguration.projectId)) {
       this._projectId = this._givenConfiguration.projectId;
     } else if (isNumber(this._givenConfiguration.projectId)) {

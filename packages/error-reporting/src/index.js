@@ -88,7 +88,7 @@ function Errors(initConfiguration) {
   uncaughtException(client, config);
 
   // Build the application interfaces for use by the hosting application
-  /** 
+  /**
    * @example
    * // Use to report errors manually like so
    * var errors = require('@google-cloud/error-reporting')();
