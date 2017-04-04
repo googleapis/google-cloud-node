@@ -451,7 +451,7 @@ describe('Speech', function() {
   });
 
   describe('createRecognizeStream', function() {
-    var CONFIG = {};
+    var CONFIG = {languageCode: 'en-US'};
     var stream;
     var requestStream;
 
@@ -472,6 +472,12 @@ describe('Speech', function() {
       assert.throws(function() {
         speech.createRecognizeStream();
       }, /A recognize request requires a configuration object\./);
+    });
+
+    it('should throw if a language code is not provided', function() {
+      assert.throws(function() {
+        speech.createRecognizeStream({});
+      }, /languageCode/);
     });
 
     it('should make the correct request once writing started', function(done) {
@@ -603,6 +609,7 @@ describe('Speech', function() {
 
     it('should format results from the API in verbose mode', function(done) {
       var stream = speech.createRecognizeStream({
+        languageCode: 'en-US',
         verbose: true
       });
 
@@ -626,6 +633,7 @@ describe('Speech', function() {
 
     it('should delete verbose option from request object', function(done) {
       var stream = speech.createRecognizeStream({
+        languageCode: 'en-US',
         verbose: true
       });
 
@@ -662,6 +670,7 @@ describe('Speech', function() {
       };
 
       var stream = speech.createRecognizeStream({
+        languageCode: 'en-US',
         timeout: timeout
       });
 
@@ -683,6 +692,7 @@ describe('Speech', function() {
       };
 
       var stream = speech.createRecognizeStream({
+        languageCode: 'en-US',
         timeout: 90
       });
 
@@ -738,7 +748,10 @@ describe('Speech', function() {
   describe('recognize', function() {
     var FILE = {};
     var FOUND_FILE = {};
-    var CONFIG = { a: 'b' };
+    var CONFIG = {
+      a: 'b',
+      languageCode: 'en-US',
+    };
     var DETECTED_ENCODING = 'LINEAR16';
 
     beforeEach(function() {
@@ -788,8 +801,14 @@ describe('Speech', function() {
       speech.recognize(FILE, CONFIG, assert.ifError);
     });
 
+    it('should fail if no language code is set', function() {
+      assert.throws(function() {
+        speech.recognize(FILE, {});
+      }, /languageCode/);
+    });
+
     it('should allow setting a languageCode', function(done) {
-      var languageCode = 'uk';
+      var languageCode = 'en-GB';
 
       var config = {
         languageCode: languageCode
@@ -807,7 +826,8 @@ describe('Speech', function() {
 
     it('should respect the provided encoding', function(done) {
       var config = {
-        encoding: 'LINEAR32'
+        encoding: 'LINEAR32',
+        languageCode: 'en-US'
       };
 
       Speech.detectEncoding_ = function() {
@@ -839,7 +859,7 @@ describe('Speech', function() {
         }
       };
 
-      speech.recognize(FILE, {}, assert.ifError);
+      speech.recognize(FILE, {languageCode: 'en-US'}, assert.ifError);
     });
 
     it('should return an error from findFile_', function(done) {
@@ -956,7 +976,10 @@ describe('Speech', function() {
   describe('startRecognition', function() {
     var FILE = {};
     var FOUND_FILE = {};
-    var CONFIG = { a: 'b' };
+    var CONFIG = {
+      a: 'b',
+      languageCode: 'en-US'
+    };
     var DETECTED_ENCODING = 'LINEAR16';
 
     beforeEach(function() {
@@ -1000,8 +1023,14 @@ describe('Speech', function() {
       speech.startRecognition(FILE, CONFIG, assert.ifError);
     });
 
+    it('should error if no language code is given', function() {
+      assert.throws(function() {
+        speech.startRecognition(FILE, {});
+      }, /languageCode/);
+    });
+
     it('should respect the provided language code', function(done) {
-      var languageCode = 'uk';
+      var languageCode = 'en-GB';
 
       var config = {
         languageCode: languageCode
@@ -1019,7 +1048,8 @@ describe('Speech', function() {
 
     it('should respect the provided encoding', function(done) {
       var config = {
-        encoding: 'LINEAR32'
+        encoding: 'LINEAR32',
+        languageCode: 'en-US'
       };
 
       Speech.detectEncoding_ = function() {
@@ -1051,7 +1081,7 @@ describe('Speech', function() {
         }
       };
 
-      speech.startRecognition(FILE, {}, assert.ifError);
+      speech.startRecognition(FILE, {languageCode: 'en-US'}, assert.ifError);
     });
 
     it('should return an error from findFile_', function(done) {
