@@ -373,7 +373,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
  * @param {string} config.languageCode - The language of the supplied audio as
- *     BCP-47 language tag. Example: 'en-US'.
+*     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {number=} config.timeout - In seconds, the amount of time before the
  *     underlying API request times out. The default value, `190`, is sufficient
  *     for audio input of 60 seconds or less. If your input is longer, consider
@@ -536,7 +536,7 @@ Speech.prototype.operation = function(name) {
  * @param {object} config - A `RecognitionConfig` object. See
  *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
  * @param {string} config.languageCode - The language of the supplied audio as
- *     BCP-47 language tag. Example: 'en-US'.
+ *     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
  * @param {function} callback - The callback function.
@@ -691,7 +691,7 @@ Speech.prototype.recognize = function(file, config, callback) {
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
  * @param {string} config.languageCode - The language of the supplied audio as
- *     BCP-47 language tag. Example: 'en-US'.
+ *     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:speech/operation} callback.operation - An operation object
