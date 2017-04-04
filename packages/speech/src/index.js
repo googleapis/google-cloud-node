@@ -597,6 +597,7 @@ Speech.prototype.operation = function(name) {
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
+ *   languageCode: 'en-US',
  *   sampleRateHertz: 16000,
  *   verbose: true
  * };
@@ -752,6 +753,7 @@ Speech.prototype.recognize = function(file, config, callback) {
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
+ *   languageCode: 'en-US',
  *   sampleRateHertz: 16000,
  *   verbose: true
  * };
