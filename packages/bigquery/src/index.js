@@ -569,7 +569,8 @@ BigQuery.prototype.getDatasetsStream =
  *     of selected fields. Acceptable values are "full", for all job data, and
  *     "minimal", to not include the job configuration.
  * @param {string=} options.stateFilter - Filter for job state. Acceptable
- *     values are "done", "pending", and "running".
+ *     values are "done", "pending", and "running". Sending an array to this
+ *     option performs a disjunction.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/job[]} callback.jobs - The list of jobs in your
@@ -617,7 +618,8 @@ BigQuery.prototype.getJobs = function(options, callback) {
 
   this.request({
     uri: '/jobs',
-    qs: options
+    qs: options,
+    useQueryString: true
   }, function(err, resp) {
     if (err) {
       callback(err, null, null, resp);
