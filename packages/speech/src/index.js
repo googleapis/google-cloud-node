@@ -372,6 +372,8 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
+ * @param {string} config.languageCode - The language of the supplied audio as
+ *     BCP-47 language tag. Example: 'en-US'.
  * @param {number=} config.timeout - In seconds, the amount of time before the
  *     underlying API request times out. The default value, `190`, is sufficient
  *     for audio input of 60 seconds or less. If your input is longer, consider
@@ -390,6 +392,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var request = {
  *   config: {
  *     encoding: 'LINEAR16',
+ *     languageCode: 'en-US',
  *     sampleRateHertz: 16000
  *   },
  *   singleUtterance: false,
@@ -432,11 +435,19 @@ Speech.prototype.createRecognizeStream = function(config) {
     throw new Error('A recognize request requires a configuration object.');
   }
 
-  config = extend(true, {
-    config: {
-      languageCode: 'en-US'
-    }
-  }, config);
+  // As of Speech v1, a language code is required; throw an exception if we
+  // did not receive one.
+  //
+  // This is expected within a nested config, but in the interest of user
+  // sanity, accept it in the outer config object.
+  config.config = config.config || {};
+  if (config.languageCode) {
+    config.config.languageCode = config.languageCode;
+    delete config.languageCode;
+  }
+  if (is.undefined(config.config.languageCode)) {
+    throw new Error('A `languageCode` is required in the config object.');
+  }
 
   var verboseMode = config.verbose === true;
   delete config.verbose;
@@ -524,6 +535,8 @@ Speech.prototype.operation = function(name) {
  *     object.
  * @param {object} config - A `RecognitionConfig` object. See
  *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
+ * @param {string} config.languageCode - The language of the supplied audio as
+ *     BCP-47 language tag. Example: 'en-US'.
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
  * @param {function} callback - The callback function.
@@ -540,6 +553,7 @@ Speech.prototype.operation = function(name) {
  * @example
  * var config = {
  *   encoding: 'LINEAR16',
+ *   languageCode: 'en-US',
  *   sampleRateHertz: 16000
  * };
  *
@@ -620,9 +634,11 @@ Speech.prototype.recognize = function(file, config, callback) {
     throw new Error('A recognize request requires a configuration object.');
   }
 
-  config = extend({
-    languageCode: 'en-US'
-  }, config);
+  // As of Speech v1, a language code is required; throw an exception if we
+  // did not receive one.
+  if (is.undefined(config.languageCode)) {
+    throw new Error('A `languageCode` is required in the config object.');
+  }
 
   if (!config.encoding) {
     config.encoding = Speech.detectEncoding_(file);
@@ -674,6 +690,8 @@ Speech.prototype.recognize = function(file, config, callback) {
  *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
+ * @param {string} config.languageCode - The language of the supplied audio as
+ *     BCP-47 language tag. Example: 'en-US'.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:speech/operation} callback.operation - An operation object
@@ -683,6 +701,7 @@ Speech.prototype.recognize = function(file, config, callback) {
  * @example
  * var config = {
  *   encoding: 'LINEAR16',
+ *   languageCode: 'en-US',
  *   sampleRateHertz: 16000
  * };
  *
@@ -764,9 +783,11 @@ Speech.prototype.recognize = function(file, config, callback) {
 Speech.prototype.startRecognition = function(file, config, callback) {
   var self = this;
 
-  config = extend({
-    languageCode: 'en-US'
-  }, config);
+  // As of Speech v1, a language code is required; throw an exception if we
+  // did not receive one.
+  if (is.undefined(config.languageCode)) {
+    throw new Error('A `languageCode` is required in the config object.');
+  }
 
   if (!config.encoding) {
     config.encoding = Speech.detectEncoding_(file);
