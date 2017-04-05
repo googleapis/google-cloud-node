@@ -8,7 +8,7 @@
     "test": "cd ..; npm run st -- --verbose translate/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/translate": "0.7.0",
+    "@google-cloud/translate": "0.8.0",
     "yargs": "6.6.0"
   },
   "engines": {
