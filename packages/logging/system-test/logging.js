@@ -219,7 +219,7 @@ describe('Logging', function() {
         });
       });
 
-      it.skip('should list sinks as a stream', function(done) {
+      it('should list sinks as a stream', function(done) {
         logging.getSinksStream({ pageSize: 1 })
           .on('error', done)
           .once('data', function() {
@@ -288,7 +288,7 @@ describe('Logging', function() {
       });
     });
 
-    it.skip('should list log entries as a stream', function(done) {
+    it('should list log entries as a stream', function(done) {
       logging.getEntriesStream({
           autoPaginate: false,
           pageSize: 1
@@ -316,7 +316,7 @@ describe('Logging', function() {
         });
       });
 
-      it.skip('should list log entries as a stream', function(done) {
+      it('should list log entries as a stream', function(done) {
         log.getEntriesStream({
             autoPaginate: false,
             pageSize: 1

@@ -69,11 +69,13 @@ function Logging(options) {
     return new Logging(options);
   }
 
-  options.scopes = v2.ALL_SCOPES;
+  var options_ = extend({
+    scopes: v2.ALL_SCOPES
+  }, options);
 
   this.api = {};
   this.auth = googleAuth(options);
-  this.options = options;
+  this.options = options_;
   this.projectId = options.projectId || '{{projectId}}';
 }
 

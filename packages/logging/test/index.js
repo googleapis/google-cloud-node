@@ -19,9 +19,10 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
+
+var v2 = require('../src/v2/index.js');
 
 var extended = false;
 var fakePaginator = {
@@ -42,6 +43,11 @@ var fakePaginator = {
   }
 };
 
+var googleAutoAuthOverride;
+function fakeGoogleAutoAuth() {
+  return (googleAutoAuthOverride || util.noop).apply(null, arguments);
+}
+
 var isCustomTypeOverride;
 var promisifed = false;
 var fakeUtil = extend({}, util, {
@@ -58,7 +64,12 @@ var fakeUtil = extend({}, util, {
     }
 
     promisifed = true;
-    assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
+    assert.deepEqual(options.exclude, [
+      'entry',
+      'log',
+      'request',
+      'sink'
+    ]);
   }
 });
 
@@ -78,10 +89,6 @@ function FakeSink() {
   this.calledWith_ = arguments;
 }
 
-function FakeGrpcService() {
-  this.calledWith_ = arguments;
-}
-
 describe('Logging', function() {
   var Logging;
   var logging;
@@ -94,9 +101,7 @@ describe('Logging', function() {
         paginator: fakePaginator,
         util: fakeUtil
       },
-      '@google-cloud/common-grpc': {
-        Service: FakeGrpcService
-      },
+      'google-auto-auth': fakeGoogleAutoAuth,
       './log.js': FakeLog,
       './entry.js': FakeEntry,
       './sink.js': FakeSink
@@ -104,6 +109,7 @@ describe('Logging', function() {
   });
 
   beforeEach(function() {
+    googleAutoAuthOverride = null;
     isCustomTypeOverride = null;
 
     logging = new Logging({
@@ -120,11 +126,6 @@ describe('Logging', function() {
 
     it('should promisify all the things', function() {
       assert(promisifed);
-    });
-
-    it('should streamify the correct methods', function() {
-      assert.strictEqual(logging.getEntriesStream, 'getEntries');
-      assert.strictEqual(logging.getSinksStream, 'getSinks');
     });
 
     it('should normalize the arguments', function() {
@@ -152,23 +153,43 @@ describe('Logging', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from GrpcService', function() {
-      assert(logging instanceof FakeGrpcService);
+    it('should initialize the API object', function() {
+      assert.deepEqual(logging.api, {});
+    });
 
-      var calledWith = logging.calledWith_[0];
+    it('should cache a local google-auto-auth instance', function() {
+      var fakeGoogleAutoAuthInstance = {};
 
-      assert.strictEqual(calledWith.baseUrl, 'logging.googleapis.com');
-      assert.strictEqual(calledWith.service, 'logging');
-      assert.strictEqual(calledWith.apiVersion, 'v2');
-      assert.deepEqual(calledWith.protoServices, {
-        ConfigServiceV2:
-          googleProtoFiles('logging', 'v2', 'logging_config.proto'),
-        LoggingServiceV2: googleProtoFiles.logging.v2
-      });
-      assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/cloud-platform'
-      ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      googleAutoAuthOverride = function() {
+        return fakeGoogleAutoAuthInstance;
+      };
+
+      var logging = new Logging({});
+      assert.strictEqual(logging.auth, fakeGoogleAutoAuthInstance);
+    });
+
+    it('should localize the options', function() {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var logging = new Logging(options);
+
+      assert.notStrictEqual(logging.options, options);
+
+      assert.deepEqual(logging.options, extend({
+        scopes: v2.ALL_SCOPES
+      }, options));
+    });
+
+    it('should set the projectId', function() {
+      assert.strictEqual(logging.projectId, PROJECT_ID);
+    });
+
+    it('should default the projectId to the token', function() {
+      var logging = new Logging({});
+      assert.strictEqual(logging.projectId, '{{projectId}}');
     });
   });
 
