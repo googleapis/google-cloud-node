@@ -92,7 +92,7 @@ function Errors(initConfiguration) {
    * @example
    * // Use to report errors manually like so
    * var errors = require('@google-cloud/error-reporting')();
-   * errors.report(new Error('xyz'), () => console.log('done!'));
+   * errors.report(new Error('xyz'), function () {console.log('done!')});
    */
   this.report = manual(client, config);
   /**
@@ -103,7 +103,7 @@ function Errors(initConfiguration) {
    * var err = errors.event()
    *  .setMessage('My error message')
    *  .setUser('root@nexus');
-   * errors.report(err, () => console.log('done!'));
+   * errors.report(err, function () {console.log('done!')});
    */
   this.event = messageBuilder(config);
   /**
