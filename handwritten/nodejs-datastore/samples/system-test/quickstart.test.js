@@ -23,6 +23,8 @@ const entity = { description: `Buy milk` };
 const kind = `Task`;
 const name = `sampletask1`;
 const key = datastore.key([kind, name]);
+const datastoreEntity = Object.assign({}, entity);
+datastoreEntity[datastore.KEY] = key;
 
 test.before(async () => {
   try {
@@ -52,7 +54,7 @@ test.cb(`should get a task from Datastore`, (t) => {
           setTimeout(() => {
             datastore.get(key)
               .then(([task]) => {
-                t.deepEqual(task, entity);
+                t.deepEqual(task, datastoreEntity);
                 t.true(console.log.calledWith(`Saved ${name}: ${entity.description}`));
                 t.end();
               })
