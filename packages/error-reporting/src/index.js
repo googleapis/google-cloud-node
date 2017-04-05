@@ -15,18 +15,18 @@
  */
 'use strict';
 
-var Configuration = require('./src/configuration.js');
-var AuthClient = require('./src/google-apis/auth-client.js');
+var Configuration = require('./configuration.js');
+var AuthClient = require('./google-apis/auth-client.js');
 // Begin error reporting interfaces
 
-var koa = require('./src/interfaces/koa.js');
-var hapi = require('./src/interfaces/hapi.js');
-var manual = require('./src/interfaces/manual.js');
-var express = require('./src/interfaces/express.js');
-var restify = require('./src/interfaces/restify');
-var messageBuilder = require('./src/interfaces/message-builder.js');
-var uncaughtException = require('./src/interfaces/uncaught.js');
-var createLogger = require('./src/logger.js');
+var koa = require('./interfaces/koa.js');
+var hapi = require('./interfaces/hapi.js');
+var manual = require('./interfaces/manual.js');
+var express = require('./interfaces/express.js');
+var restify = require('./interfaces/restify');
+var messageBuilder = require('./interfaces/message-builder.js');
+var uncaughtException = require('./interfaces/uncaught.js');
+var createLogger = require('./logger.js');
 
 /**
  * @typedef ConfigurationOptions
@@ -92,7 +92,9 @@ function Errors(initConfiguration) {
    * @example
    * // Use to report errors manually like so
    * var errors = require('@google-cloud/error-reporting')();
-   * errors.report(new Error('xyz'), function () {console.log('done!')});
+   * errors.report(new Error('xyz'), function () {
+   *  console.log('done!');
+   * });
    */
   this.report = manual(client, config);
   /**
@@ -103,7 +105,9 @@ function Errors(initConfiguration) {
    * var err = errors.event()
    *  .setMessage('My error message')
    *  .setUser('root@nexus');
-   * errors.report(err, function () {console.log('done!')});
+   * errors.report(err, function () {
+   *  console.log('done!');
+   * });
    */
   this.event = messageBuilder(config);
   /**
