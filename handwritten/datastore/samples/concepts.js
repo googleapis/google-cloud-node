@@ -510,7 +510,7 @@ class Metadata extends TestHelper {
         return runNamespaceQuery(startNamespace, endNamespace);
       })
       .then((namespaces) => {
-        t.deepEqual(namespaces, ['Animals']);
+        t.true(namespaces.includes('Animals'));
       });
   }
 
