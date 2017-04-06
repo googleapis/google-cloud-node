@@ -110,6 +110,7 @@ function Errors(initConfiguration) {
   this.event = messageBuilder(config);
   /**
    * @example
+   * var hapi = require('hapi');
    * var server = new hapi.Server();
    * server.connection({ port: 3000 });
    * server.start();
@@ -119,6 +120,7 @@ function Errors(initConfiguration) {
   this.hapi = hapi(client, config);
   /**
    * @example
+   * var express = require('express');
    * var app = express();
    * // AFTER ALL OTHER ROUTE HANDLERS
    * app.use(errors.express);
@@ -127,6 +129,7 @@ function Errors(initConfiguration) {
   this.express = express(client, config);
   /**
    * @example
+   * var restify = require('restify');
    * var server = restify.createServer();
    * // BEFORE ALL OTHER ROUTE HANDLERS
    * server.use(errors.restify(server));
@@ -134,6 +137,7 @@ function Errors(initConfiguration) {
   this.restify = restify(client, config);
   /**
    * @example
+   * var koa = require('koa');
    * var app = koa();
    * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
    * app.use(errors.koa);
