@@ -73,30 +73,33 @@ const env = (function(injectedEnv) {
       assign(process.env, this._originalEnv);
       return this;
     }
-    injected () {
+    injected() {
       return assign({}, injectedEnv);
     }
   }
   return new InstancedEnv();
 }(require('../../../system-test/env.js')));
-const SHOULD_RUN = (function () {
+const SHOULD_RUN = (function() {
   if (!isString(env.injected().projectId)) {
     return new Error('The project id (projectId) was not set in the env');
-  } else if (!isString(env.injected().apiKey)) {
+  }
+  if (!isString(env.injected().apiKey)) {
     return new Error('The api key (apiKey) was not set as an env variable');
-  } else if (!isString(env.injected().projectNumber)) {
+  }
+  if (!isString(env.injected().projectNumber)) {
     return new Error(
       'The project number (projectNumber) was not set in the env');
-  } else if (!isString(env.injected().keyFilename)) {
+  }
+  if (!isString(env.injected().keyFilename)) {
     return new Error(
       'The key filename (keyFilename) was not set in the env');
   }
   return true;
 }());
-const TEST_RUNNER = (function () {
+const TEST_RUNNER = (function() {
   if (SHOULD_RUN instanceof Error) {
     console.log('Skipping error-reporting system tests:');
-    console.log('  '+SHOULD_RUN.message);
+    console.log('  ' + SHOULD_RUN.message);
     return describe.skip;
   }
   return describe;
@@ -183,19 +186,6 @@ const TEST_RUNNER = (function () {
   describe('System-live integration testing', function() {
     var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
-    // var oldEnv = {
-    //   GCLOUD_PROJECT: env.projectId,
-    //   STUBBED_PROJECT_NUM: env.projectNumber,
-    //   NODE_ENV: process.env.NODE_ENV
-    // };
-    // function sterilizeEnv() {
-    //   forEach(oldEnv, function(val, key) {
-    //     delete process.env[key];
-    //   });
-    // }
-    // function restoreEnv() {
-    //   assign(process.env, oldEnv);
-    // }
     describe('Client creation', function() {
       describe('Using only project id', function() {
         describe('As a runtime argument', function() {
