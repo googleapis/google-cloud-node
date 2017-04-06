@@ -1,0 +1,9 @@
+node_modules
+coverage
+npm-debug.log
+.DS_Store
+.eslintrc.js
+docs
+tests/configuration
+.nyc_output
+*.patch

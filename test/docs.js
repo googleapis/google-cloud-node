@@ -69,12 +69,45 @@ var FakeConsole = Object.keys(console)
     return console;
   }, {});
 
-// For {module:datastore} docs.
+// For {module:datastore && module:error-reporting} docs.
 var FakeExpress = function() {
   return {
     get: function(route, callback) {
       callback({ query: {} }, {});
+    },
+    use: function() {},
+    listen: function() {}
+  };
+};
+
+// For {module:error-reporting} docs.
+var FakeHapi = function() {
+  return {
+    Server: function() {
+      return {
+        connection: function() {},
+        start: function() {},
+        register: function() {}
+      };
     }
+  };
+};
+
+// For {module:error-reporting} docs.
+var FakeRestify = function() {
+  return {
+    createServer: function() {
+      return {
+        use: function() {},
+        on: function() {}
+      };
+    }
+  };
+};
+
+var FakeKoa = function() {
+  return {
+    use: function() {}
   };
 };
 
@@ -290,6 +323,9 @@ function createSnippet(mod, instantiation, method) {
       'keyFilename: \'\''
     )
     .replace('require(\'express\')', FakeExpress.toString())
+    .replace('require(\'hapi\')', '(' + FakeHapi.toString() + '())')
+    .replace('require(\'restify\')', '(' + FakeRestify.toString() +  '())')
+    .replace('require(\'koa\')', FakeKoa.toString())
     .replace('require(\'level\')', FakeLevel.toString())
     .replace('require(\'bluebird\')', FakeBluebird.toString())
     .replace('require(\'bunyan\')', '(' + fakeBunyan.toString() + '())')

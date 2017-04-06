@@ -1,0 +1,53 @@
+{
+  "name": "@google-cloud/error-reporting",
+  "description": "Stackdriver Error Reporting Client Library for Node.js",
+  "main": "./src/index.js",
+  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "scripts": {
+    "test": "nyc --exclude=\"fuzzer.js\" mocha ./test/unit/*.js",
+    "system-test": "nyc --exclude=\"error-message.js\" mocha ./system-test/*.js",
+    "lint": "jshint src/ index.js",
+    "publish-module": "node ../../scripts/publish.js error-reporting"
+  },
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "hapi": "^16.1.0",
+    "jshint": "^2.9.2",
+    "koa": "^1.2.0",
+    "lodash.assign": "^4.2.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.indexof": "^4.0.5",
+    "lodash.maxby": "^4.6.0",
+    "lodash.merge": "^4.6.0",
+    "lodash.omit": "^4.5.0",
+    "lodash.omitby": "^4.6.0",
+    "lodash.random": "^3.2.0",
+    "lodash.without": "^4.4.0",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.0",
+    "nyc": "^10.0.0",
+    "restify": "^4.1.0"
+  },
+  "dependencies": {
+    "@google-cloud/common": "^0.12.0",
+    "extend": "^3.0.0",
+    "is": "^3.2.0",
+    "lodash.has": "^4.5.2"
+  },
+  "nyc": {
+    "exclude": [
+      "./utils/fuzzer.js"
+    ]
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "files": [
+    "src",
+    "utils",
+    "index.js"
+  ]
+}
