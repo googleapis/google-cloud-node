@@ -27,54 +27,89 @@ var isString = is.string;
 var isEmpty = is.empty;
 var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
+var pick = require('lodash.pick');
+var omitBy = require('lodash.omitby');
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
 const env = (function(injectedEnv) {
+  const envKeys = ['GOOGLE_APPLICATION_CREDENTIALS', 'GCLOUD_PROJECT',
+    'NODE_ENV'];
   class InstancedEnv {
     constructor() {
       assign(this, injectedEnv);
-      this._assignNodeEnv();
+      this._originalEnv = this._captureProcessProperties();
     }
-    _assignNodeEnv() {
-      this.NODE_ENV = 'production';
+    _captureProcessProperties() {
+      return omitBy(pick(process.env, envKeys), value => !isString(value));
     }
-    sterilize() {
-      forEach(Object.keys(injectedEnv).concat(['NODE_ENV']), (v, k) => delete this[k]);
+    sterilizeProcess() {
+      forEach(envKeys, (v, k) => delete process.env[k]);
       return this;
     }
-    restore() {
-      assign(this, injectedEnv);
-      this._assignNodeEnv();
+    setProjectId() {
+      assign(process.env, {
+        GCLOUD_PROJECT: injectedEnv.projectId
+      });
       return this;
+    }
+    setProjectNumber() {
+      assign(process.env, {
+        GCLOUD_PROJECT: injectedEnv.projectNumber
+      });
+      return this;
+    }
+    setKeyFilename() {
+      assign(process.env, {
+        GOOGLE_APPLICATION_CREDENTIALS: injectedEnv.keyFilename
+      });
+      return this;
+    }
+    setProduction() {
+      assign(process.env, {
+        NODE_ENV: 'production'
+      });
+      return this;
+    }
+    restoreProcessToOriginalState() {
+      assign(process.env, this._originalEnv);
+      return this;
+    }
+    injected () {
+      return assign({}, injectedEnv);
     }
   }
   return new InstancedEnv();
 }(require('../../../system-test/env.js')));
+const SHOULD_RUN = (function () {
+  if (!isString(env.injected().projectId)) {
+    return new Error('The project id (projectId) was not set in the env');
+  } else if (!isString(env.injected().apiKey)) {
+    return new Error('The api key (apiKey) was not set as an env variable');
+  } else if (!isString(env.injected().projectNumber)) {
+    return new Error(
+      'The project number (projectNumber) was not set in the env');
+  } else if (!isString(env.injected().keyFilename)) {
+    return new Error(
+      'The key filename (keyFilename) was not set in the env');
+  }
+  return true;
+}());
+const TEST_RUNNER = (function () {
+  if (SHOULD_RUN instanceof Error) {
+    console.log('Skipping error-reporting system tests:');
+    console.log('  '+SHOULD_RUN.message);
+    return describe.skip;
+  }
+  return describe;
+}());
 
-describe('Behvaiour acceptance testing', function() {
-  before(function() {
-    // Before starting the suite make sure we have the proper resources
-    if (!isString(env.projectId)) {
-      throw new Error(
-        'The gcloud project id (projectId) was not set in the env');
-    } else if (!isString(env.apiKey)) {
-      throw new Error(
-        'The api key (apiKey) was not set as an env variable');
-    } else if (!isString(env.projectNumber)) {
-      throw new Error(
-        'The project number (projectNumber) was not set in the env');
-    } else if (env.NODE_ENV !== 'production') {
-      throw new Error(
-        'The NODE_ENV is not set to production as an env variable. Please ' +
-        'set NODE_ENV to production');
-    }
-    // In case we are running after unit mocks which were not destroyed properly
-    nock.cleanAll();
-  });
+(TEST_RUNNER)('Errors system tests', function() {
   describe('Request/Response lifecycle mocking', function() {
     var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError);
     var fakeService, client, logger;
+    before(() => env.sterilizeProcess());
     beforeEach(function() {
+      env.setProjectId().setKeyFilename().setProduction();
       fakeService = nock(
         'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
         env.projectId
@@ -84,8 +119,10 @@ describe('Behvaiour acceptance testing', function() {
         new Configuration({ignoreEnvironmentCheck: true}, logger), logger);
     });
     afterEach(function() {
+      env.sterilizeProcess();
       nock.cleanAll();
     });
+    after(() => env.restoreProcessToOriginalState());
     describe('Receiving non-retryable errors', function() {
       it('Should fail', function(done) {
         this.timeout(5000);
@@ -119,6 +156,7 @@ describe('Behvaiour acceptance testing', function() {
     describe('Using an API key', function() {
       it('Should provide the key as a query string on outgoing requests',
         function(done) {
+          env.sterilizeProcess().setProjectId().setProduction();
           var key = env.apiKey;
           var client = new RequestHandler(new Configuration(
             {key: key, ignoreEnvironmentCheck: true},
@@ -145,30 +183,30 @@ describe('Behvaiour acceptance testing', function() {
   describe('System-live integration testing', function() {
     var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
-    var oldEnv = {
-      GCLOUD_PROJECT: env.projectId,
-      STUBBED_PROJECT_NUM: env.projectNumber,
-      NODE_ENV: process.env.NODE_ENV
-    };
-    function sterilizeEnv() {
-      forEach(oldEnv, function(val, key) {
-        delete process.env[key];
-      });
-    }
-    function restoreEnv() {
-      assign(process.env, oldEnv);
-    }
+    // var oldEnv = {
+    //   GCLOUD_PROJECT: env.projectId,
+    //   STUBBED_PROJECT_NUM: env.projectNumber,
+    //   NODE_ENV: process.env.NODE_ENV
+    // };
+    // function sterilizeEnv() {
+    //   forEach(oldEnv, function(val, key) {
+    //     delete process.env[key];
+    //   });
+    // }
+    // function restoreEnv() {
+    //   assign(process.env, oldEnv);
+    // }
     describe('Client creation', function() {
       describe('Using only project id', function() {
         describe('As a runtime argument', function() {
           var cfg, logger;
           before(function() {
-            sterilizeEnv();
+            env.sterilizeProcess().setKeyFilename();
             logger = createLogger({logLevel: 5});
-            cfg = new Configuration({projectId: oldEnv.GCLOUD_PROJECT,
+            cfg = new Configuration({projectId: env.injected().projectId,
               ignoreEnvironmentCheck: true}, logger);
           });
-          after(restoreEnv);
+          after(() => env.sterilizeProcess());
           it('Should not throw on initialization', function(done) {
             this.timeout(10000);
             assert.doesNotThrow(function() {
@@ -186,12 +224,11 @@ describe('Behvaiour acceptance testing', function() {
         describe('As an env variable', function() {
           var cfg, logger;
           before(function() {
-            sterilizeEnv();
-            env.projectId = oldEnv.GCLOUD_PROJECT;
+            env.sterilizeProcess().setProjectId().setKeyFilename();
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
           });
-          after(restoreEnv);
+          after(() => env.sterilizeProcess());
           it('Should not throw on initialization', function(done) {
             this.timeout(10000);
             assert.doesNotThrow(function() {
@@ -211,14 +248,14 @@ describe('Behvaiour acceptance testing', function() {
         describe('As a runtime argument', function() {
           var cfg, logger;
           before(function() {
-            sterilizeEnv();
+            env.sterilizeProcess().setKeyFilename();
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({
-              projectId: parseInt(oldEnv.STUBBED_PROJECT_NUM),
+              projectId: parseInt(env.injected().projectNumber),
               ignoreEnvironmentCheck: true
             }, logger);
           });
-          after(restoreEnv);
+          after(() => env.sterilizeProcess());
           it('Should not throw on initialization', function(done) {
             this.timeout(10000);
             assert.doesNotThrow(function() {
@@ -236,12 +273,11 @@ describe('Behvaiour acceptance testing', function() {
         describe('As an env variable', function() {
           var cfg, logger;
           before(function() {
-            sterilizeEnv();
-            process.env.GCLOUD_PROJECT = oldEnv.STUBBED_PROJECT_NUM;
+            env.sterilizeProcess().setKeyFilename().setProjectNumber();
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
           });
-          after(restoreEnv);
+          after(() => env.sterilizeProcess());
           it('Should not throw on initialization', function(done) {
             this.timeout(10000);
             assert.doesNotThrow(function() {
@@ -268,14 +304,13 @@ describe('Behvaiour acceptance testing', function() {
         ].join(' ');
         var logger, client;
         before(function() {
-          delete process.env.NODE_ENV;
+          env.sterilizeProcess().setKeyFilename().setProjectId();
+          process.env.NODE_ENV = 'null';
           logger = createLogger({logLevel: 5});
           client = new RequestHandler(new Configuration(undefined, logger),
             logger);
         });
-        after(function() {
-          process.env.NODE_ENV = oldEnv.NODE_ENV;
-        });
+        after(() => env.sterilizeProcess());
         it('Should callback with an error', function(done) {
           client.sendError({}, function(err, response, body) {
             assert(err instanceof Error);
@@ -292,15 +327,15 @@ describe('Behvaiour acceptance testing', function() {
       describe('Given a valid project id', function() {
         var logger, client, cfg;
         before(function() {
-          sterilizeEnv();
+          env.sterilizeProcess();
           logger = createLogger({logLevel: 5});
           cfg = new Configuration({
-            projectId: oldEnv.GCLOUD_PROJECT,
+            projectId: env.injected().projectId,
             ignoreEnvironmentCheck: true
           }, logger);
           client = new RequestHandler(cfg, logger);
         });
-        after(restoreEnv);
+        after(() => env.sterilizeProcess());
         it('Should succeed in its request', function(done) {
           client.sendError(em, function(err, response, body) {
             assert.strictEqual(err, null);
@@ -314,19 +349,15 @@ describe('Behvaiour acceptance testing', function() {
       describe('Given a valid project number', function() {
         var logger, client, cfg;
         before(function() {
-          forEach(oldEnv, function(val, key) {
-            delete process.env[key];
-          });
+          env.sterilizeProcess();
           logger = createLogger({logLevel: 5});
           cfg = new Configuration({
-            projectId: parseInt(oldEnv.STUBBED_PROJECT_NUM),
+            projectId: parseInt(env.injected().projectNumber),
             ignoreEnvironmentCheck: true
           }, logger);
           client = new RequestHandler(cfg, logger);
         });
-        after(function() {
-          assign(process.env, oldEnv);
-        });
+        after(() => env.sterilizeProcess());
         it('Should succeed in its request', function(done) {
           client.sendError(em, function(err, response, body) {
             assert.strictEqual(err, null);
