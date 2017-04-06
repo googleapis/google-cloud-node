@@ -91,7 +91,6 @@ function Errors(initConfiguration) {
   /**
    * @example
    * // Use to report errors manually like so
-   * var errors = require('@google-cloud/error-reporting')();
    * errors.report(new Error('xyz'), function () {
    *  console.log('done!');
    * });
@@ -101,7 +100,6 @@ function Errors(initConfiguration) {
    * @example
    * // Use to create and report errors manually with a high-degree
    * // of manual control
-   * var errors = require('@google-cloud/error-reporting')();
    * var err = errors.event()
    *  .setMessage('My error message')
    *  .setUser('root@nexus');
@@ -112,7 +110,6 @@ function Errors(initConfiguration) {
   this.event = messageBuilder(config);
   /**
    * @example
-   * var errors = require('@google-cloud/error-reporting')();
    * var server = new hapi.Server();
    * server.connection({ port: 3000 });
    * server.start();
@@ -122,7 +119,6 @@ function Errors(initConfiguration) {
   this.hapi = hapi(client, config);
   /**
    * @example
-   * var errors = require('@google-cloud/error-reporting')();
    * var app = express();
    * // AFTER ALL OTHER ROUTE HANDLERS
    * app.use(errors.express);
@@ -131,7 +127,6 @@ function Errors(initConfiguration) {
   this.express = express(client, config);
   /**
    * @example
-   * var errors = require('@google-cloud/error-reporting')();
    * var server = restify.createServer();
    * // BEFORE ALL OTHER ROUTE HANDLERS
    * server.use(errors.restify(server));
@@ -139,7 +134,6 @@ function Errors(initConfiguration) {
   this.restify = restify(client, config);
   /**
    * @example
-   * var errors = require('@google-cloud/error-reporting')();
    * var app = koa();
    * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
    * app.use(errors.koa);
