@@ -35,7 +35,9 @@ describe('metadata', function() {
   });
 
   beforeEach(function() {
-    LOGGING = {};
+    LOGGING = {
+      auth: {}
+    };
     extend(Metadata, MetadataCached);
     metadata = new Metadata(LOGGING);
   });
@@ -46,7 +48,7 @@ describe('metadata', function() {
 
   describe('instantiation', function() {
     it('should localize Logging instance', function() {
-      assert.strictEqual(metadata.logging_, LOGGING);
+      assert.strictEqual(metadata.logging, LOGGING);
     });
   });
 
@@ -187,13 +189,13 @@ describe('metadata', function() {
     var RETURNED_PROJECT_ID = 'project-id';
 
     beforeEach(function() {
-      metadata.getProjectId = function(callback) {
+      metadata.logging.auth.getProjectId = function(callback) {
         callback(null, RETURNED_PROJECT_ID);
       };
     });
 
     it('should get the project ID', function(done) {
-      metadata.getProjectId = function() {
+      metadata.logging.auth.getProjectId = function() {
         done();
       };
 
@@ -203,7 +205,7 @@ describe('metadata', function() {
     it('should return error from getProjectId', function(done) {
       var error = new Error('Error.');
 
-      metadata.getProjectId = function(callback) {
+      metadata.logging.auth.getProjectId = function(callback) {
         callback(error);
       };
 
@@ -214,10 +216,8 @@ describe('metadata', function() {
     });
 
     it('should get the environment from auth client', function(done) {
-      metadata.logging_.authClient = {
-        getEnvironment: function() {
-          done();
-        }
+      metadata.logging.auth.getEnvironment = function() {
+        done();
       };
 
       metadata.getDefaultResource(assert.ifError);
@@ -233,12 +233,10 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging_.authClient = {
-            getEnvironment: function(callback) {
-              callback(null, {
-                IS_APP_ENGINE: true
-              });
-            }
+          metadata.logging.auth.getEnvironment = function(callback) {
+            callback(null, {
+              IS_APP_ENGINE: true
+            });
           };
 
           metadata.getDefaultResource(function(err, defaultResource) {
@@ -258,12 +256,10 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging_.authClient = {
-            getEnvironment: function(callback) {
-              callback(null, {
-                IS_CLOUD_FUNCTION: true
-              });
-            }
+          metadata.logging.auth.getEnvironment = function(callback) {
+            callback(null, {
+              IS_CLOUD_FUNCTION: true
+            });
           };
 
           metadata.getDefaultResource(function(err, defaultResource) {
@@ -283,12 +279,10 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging_.authClient = {
-            getEnvironment: function(callback) {
-              callback(null, {
-                IS_COMPUTE_ENGINE: true
-              });
-            }
+          metadata.logging.auth.getEnvironment = function(callback) {
+            callback(null, {
+              IS_COMPUTE_ENGINE: true
+            });
           };
 
           metadata.getDefaultResource(function(err, defaultResource) {
@@ -308,12 +302,10 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging_.authClient = {
-            getEnvironment: function(callback) {
-              callback(null, {
-                IS_CONTAINER_ENGINE: true
-              });
-            }
+          metadata.logging.auth.getEnvironment = function(callback) {
+            callback(null, {
+              IS_CONTAINER_ENGINE: true
+            });
           };
 
           metadata.getDefaultResource(function(err, defaultResource) {
@@ -333,15 +325,13 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging_.authClient = {
-            getEnvironment: function(callback) {
-              callback(null, {
-                IS_APP_ENGINE: false,
-                IS_CLOUD_FUNCTION: false,
-                IS_COMPUTE_ENGINE: false,
-                IS_CONTAINER_ENGINE: false
-              });
-            }
+          metadata.logging.auth.getEnvironment = function(callback) {
+            callback(null, {
+              IS_APP_ENGINE: false,
+              IS_CLOUD_FUNCTION: false,
+              IS_COMPUTE_ENGINE: false,
+              IS_CONTAINER_ENGINE: false
+            });
           };
 
           metadata.getDefaultResource(function(err, defaultResource) {
@@ -351,36 +341,6 @@ describe('metadata', function() {
           });
         });
       });
-    });
-  });
-
-  describe('getProjectId', function() {
-    var CACHED_PROJECT_ID = 'cached-project-id';
-
-    it('should exit early if in the sandbox environment', function() {
-      global.GCLOUD_SANDBOX_ENV = true;
-      assert.strictEqual(metadata.getProjectId(), undefined);
-      global.GCLOUD_SANDBOX_ENV = false;
-    });
-
-    it('should return cached projectId from Logging instance', function(done) {
-      metadata.logging_.projectId = CACHED_PROJECT_ID;
-
-      metadata.getProjectId(function(err, projectId) {
-        assert.ifError(err);
-        assert.strictEqual(projectId, CACHED_PROJECT_ID);
-        done();
-      });
-    });
-
-    it('should get project ID from auth client', function(done) {
-      metadata.logging_.authClient = {
-        getProjectId: function(callback) {
-          callback(); // done()
-        }
-      };
-
-      metadata.getProjectId(done);
     });
   });
 });
