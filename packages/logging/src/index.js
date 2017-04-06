@@ -156,22 +156,18 @@ Logging.prototype.createSink = function(name, config, callback) {
     return;
   }
 
-  var gaxOptions = extend({
-    timeout: 1000 // "Deadline Exceeded" errors without.
-  }, config.gaxOptions);
-
-  delete config.gaxOptions;
-
   var reqOpts = {
     parent: 'projects/' + this.projectId,
     sink: extend({}, config, { name: name })
   };
 
+  delete reqOpts.sink.gaxOptions;
+
   this.request({
     client: 'configServiceV2Client',
     method: 'createSink',
     reqOpts: reqOpts,
-    gaxOpts: gaxOptions
+    gaxOpts: config.gaxOptions
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -297,6 +293,7 @@ Logging.prototype.getEntries = function(options, callback) {
   reqOpts.resourceNames.push('projects/' + this.projectId);
 
   delete reqOpts.autoPaginate;
+  delete reqOpts.gaxOptions;
 
   var gaxOptions = extend({
     autoPaginate: options.autoPaginate
@@ -363,7 +360,7 @@ Logging.prototype.getEntriesStream = function(options) {
     next(null, Entry.fromApiResponse_(entry));
   });
 
-  userStream.on('reading', function() {
+  userStream.once('reading', function() {
     var reqOpts = extend({
       orderBy: 'timestamp desc'
     }, options);
@@ -371,6 +368,7 @@ Logging.prototype.getEntriesStream = function(options) {
     reqOpts.resourceNames.push('projects/' + self.projectId);
 
     delete reqOpts.autoPaginate;
+    delete reqOpts.gaxOptions;
 
     var gaxOptions = extend({
       autoPaginate: options.autoPaginate
@@ -429,6 +427,7 @@ Logging.prototype.getSinks = function(options, callback) {
   });
 
   delete reqOpts.autoPaginate;
+  delete reqOpts.gaxOptions;
 
   var gaxOptions = extend({
     autoPaginate: options.autoPaginate
@@ -484,8 +483,9 @@ Logging.prototype.getSinks = function(options, callback) {
 Logging.prototype.getSinksStream = function(options) {
   var self = this;
 
-  var requestStream;
+  options = options || {};
 
+  var requestStream;
   var userStream = streamEvents(pumpify.obj());
 
   userStream.abort = function() {
@@ -496,7 +496,7 @@ Logging.prototype.getSinksStream = function(options) {
 
   var toSinkStream = through.obj(function(sink, _, next) {
     var sinkInstance = self.sink(sink.name);
-    sink.metadata = sink;
+    sinkInstance.metadata = sink;
     next(null, sinkInstance);
   });
 
@@ -504,6 +504,8 @@ Logging.prototype.getSinksStream = function(options) {
     var reqOpts = extend({}, options, {
       parent: 'projects/' + self.projectId
     });
+
+    delete reqOpts.gaxOptions;
 
     var gaxOptions = extend({
       autoPaginate: options.autoPaginate
@@ -566,10 +568,12 @@ Logging.prototype.sink = function(name) {
  */
 Logging.prototype.request = function(config, callback) {
   var self = this;
+  var isStreamMode = !callback;
+
   var gaxStream;
   var stream;
 
-  if (!callback) {
+  if (isStreamMode) {
     stream = streamEvents(through.obj());
 
     stream.abort = function() {
@@ -578,43 +582,64 @@ Logging.prototype.request = function(config, callback) {
       }
     };
 
-    stream.on('reading', makeRequest);
+    stream.once('reading', makeRequestStream);
   } else {
-    makeRequest();
+    makeRequestCallback();
   }
 
-  function makeRequest() {
+  function prepareGaxRequest(callback) {
     self.auth.getProjectId(function(err, projectId) {
       if (err) {
-        if (callback) {
-          callback(err);
-        } else {
-          stream.destroy(err);
-        }
+        callback(err);
         return;
+      }
+
+      var gaxClient = self.api[config.client];
+
+      if (!gaxClient) {
+        // Lazily instantiate client.
+        gaxClient = v2(self.options)[config.client](self.options);
+        self.api[config.client] = gaxClient;
       }
 
       var reqOpts = extend(true, {}, config.reqOpts);
       reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
 
-      if (!self.api[config.client]) {
-        // Lazily instantiate client.
-        self.api[config.client] = v2(self.options)[config.client](self.options);
+      var requestFn = gaxClient[config.method].bind(
+        gaxClient,
+        reqOpts,
+        config.gaxOpts
+      );
+
+      callback(null, requestFn);
+    });
+  }
+
+  function makeRequestCallback() {
+    prepareGaxRequest(function(err, requestFn) {
+      if (err) {
+        callback(err);
+        return;
       }
 
-      var client = self.api[config.client];
+      requestFn(callback);
+    });
+  }
 
-      var gaxRequest = client[config.method](reqOpts, config.gaxOpts, callback);
-
-      if (!callback) {
-        gaxStream = gaxRequest;
-
-        gaxStream
-          .on('error', function(err) {
-            stream.destroy(err);
-          })
-          .pipe(stream);
+  function makeRequestStream() {
+    prepareGaxRequest(function(err, requestFn) {
+      if (err) {
+        stream.destroy(err);
+        return;
       }
+
+      gaxStream = requestFn();
+
+      gaxStream
+        .on('error', function(err) {
+          stream.destroy(err);
+        })
+        .pipe(stream);
     });
   }
 
