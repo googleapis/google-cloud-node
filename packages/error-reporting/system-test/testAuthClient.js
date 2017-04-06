@@ -28,21 +28,41 @@ var isEmpty = is.empty;
 var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
-
+const env = (function(injectedEnv) {
+  class InstancedEnv {
+    constructor() {
+      assign(this, injectedEnv);
+      this._assignNodeEnv();
+    }
+    _assignNodeEnv() {
+      this.NODE_ENV = 'production';
+    }
+    sterilize() {
+      forEach(Object.keys(injectedEnv).concat(['NODE_ENV']), (v, k) => delete this[k]);
+      return this;
+    }
+    restore() {
+      assign(this, injectedEnv);
+      this._assignNodeEnv();
+      return this;
+    }
+  }
+  return new InstancedEnv();
+}(require('../../../system-test/env.js')));
 
 describe('Behvaiour acceptance testing', function() {
   before(function() {
     // Before starting the suite make sure we have the proper resources
-    if (!isString(process.env.GCLOUD_PROJECT)) {
+    if (!isString(env.projectId)) {
       throw new Error(
-        'The gcloud project id (GCLOUD_PROJECT) was not set in the env');
-    } else if (!isString(process.env.STUBBED_API_KEY)) {
+        'The gcloud project id (projectId) was not set in the env');
+    } else if (!isString(env.apiKey)) {
       throw new Error(
-        'The api key (STUBBED_API_KEY) was not set as an env variable');
-    } else if (!isString(process.env.STUBBED_PROJECT_NUM)) {
+        'The api key (apiKey) was not set as an env variable');
+    } else if (!isString(env.projectNumber)) {
       throw new Error(
-        'The project number (STUBBED_PROJECT_NUM) was not set in the env');
-    } else if (process.env.NODE_ENV !== 'production') {
+        'The project number (projectNumber) was not set in the env');
+    } else if (env.NODE_ENV !== 'production') {
       throw new Error(
         'The NODE_ENV is not set to production as an env variable. Please ' +
         'set NODE_ENV to production');
@@ -57,7 +77,7 @@ describe('Behvaiour acceptance testing', function() {
     beforeEach(function() {
       fakeService = nock(
         'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
-        process.env.GCLOUD_PROJECT
+        env.projectId
      ).persist().post('/events:report');
       logger = createLogger({logLevel: 5});
       client = new RequestHandler(
@@ -99,7 +119,7 @@ describe('Behvaiour acceptance testing', function() {
     describe('Using an API key', function() {
       it('Should provide the key as a query string on outgoing requests',
         function(done) {
-          var key = process.env.STUBBED_API_KEY;
+          var key = env.apiKey;
           var client = new RequestHandler(new Configuration(
             {key: key, ignoreEnvironmentCheck: true},
             createLogger({logLevel: 5})));
@@ -126,8 +146,8 @@ describe('Behvaiour acceptance testing', function() {
     var sampleError = new Error(ERR_TOKEN);
     var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
     var oldEnv = {
-      GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
-      STUBBED_PROJECT_NUM: process.env.STUBBED_PROJECT_NUM,
+      GCLOUD_PROJECT: env.projectId,
+      STUBBED_PROJECT_NUM: env.projectNumber,
       NODE_ENV: process.env.NODE_ENV
     };
     function sterilizeEnv() {
@@ -167,7 +187,7 @@ describe('Behvaiour acceptance testing', function() {
           var cfg, logger;
           before(function() {
             sterilizeEnv();
-            process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
+            env.projectId = oldEnv.GCLOUD_PROJECT;
             logger = createLogger({logLevel: 5});
             cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
           });
@@ -265,33 +285,6 @@ describe('Behvaiour acceptance testing', function() {
           });
         });
       });
-      // describe('An invalid env configuration', function() {
-      //   var ERROR_STRING = [
-      //     'Unable to find the project Id for communication with the',
-      //     'Stackdriver Error Reporting service. This app will be unable to',
-      //     'send errors to the reporting service unless a valid project Id',
-      //     'is supplied via runtime configuration or the GCLOUD_PROJECT',
-      //     'environmental variable.'
-      //   ].join(' ');
-      //   var logger, client;
-      //   before(function() {
-      //     delete process.env.GCLOUD_PROJECT;
-      //     logger = createLogger({logLevel: 5});
-      //     client = new RequestHandler(new Configuration(
-      //       {ignoreEnvironmentCheck: true}, logger), logger);
-      //   });
-      //   after(function() {
-      //     process.env.GCLOUD_PROJECT = oldEnv.GCLOUD_PROJECT;
-      //   });
-      //   it('Should callback with an error', function(done) {
-      //     client.sendError(errorMessage, function(err, response, body) {
-      //       assert(err instanceof Error);
-      //       assert.strictEqual(err.message, ERROR_STRING);
-      //       assert.strictEqual(response, null);
-      //       done();
-      //     });
-      //   });
-      // });
     });
     describe('Success behaviour', function() {
       var er = new Error(ERR_TOKEN);
