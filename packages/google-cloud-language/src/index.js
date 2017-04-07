@@ -24,6 +24,7 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
 var v1 = require('./v1');
+var v1beta2 = require('./v1beta2');
 
 /**
  * @type {module:language/document}
@@ -543,3 +544,4 @@ common.util.promisifyAll(Language, {
 
 module.exports = Language;
 module.exports.v1 = v1;
+module.exports.v1beta2 = v1beta2;
