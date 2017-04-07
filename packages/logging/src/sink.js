@@ -259,15 +259,12 @@ Sink.prototype.setMetadata = function(metadata, callback) {
       method: 'updateSink',
       reqOpts: reqOpts,
       gaxOpts: metadata.gaxOptions
-    }, function(err, apiResponse) {
-      if (err) {
-        callback(err, apiResponse);
-        return;
+    }, function() {
+      if (arguments[1]) {
+        self.metadata = arguments[1];
       }
 
-      self.metadata = apiResponse;
-
-      callback(null, apiResponse);
+      callback.apply(null, arguments);
     });
   });
 };
