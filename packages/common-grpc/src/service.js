@@ -125,7 +125,7 @@ var GRPC_ERROR_CODE_TO_HTTP = {
 };
 
 /**
- * The default configuration for all gRPC requests.
+ * The default configuration for all gRPC Service instantions.
  *
  * @resource [All options]{@link https://github.com/grpc/grpc/blob/13e185419cd177b7fb552601665e43820321a96b/include/grpc/impl/codegen/grpc_types.h#L148}
  *
@@ -133,7 +133,7 @@ var GRPC_ERROR_CODE_TO_HTTP = {
  *
  * @type {object}
  */
-var GRPC_REQUEST_OPTIONS = {
+var GRPC_SERVICE_OPTIONS = {
   // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1991
   'grpc.max_send_message_length': -1, // unlimited
   'grpc.max_receive_message_length': -1, // unlimited
@@ -259,7 +259,7 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
 
   var service = this.getService_(protoOpts);
   var metadata = this.grpcMetadata;
-  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
+  var grpcOpts = {};
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
@@ -361,7 +361,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
 
   var service = this.getService_(protoOpts);
   var grpcMetadata = this.grpcMetadata;
-  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
+  var grpcOpts = {};
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
@@ -442,7 +442,7 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
 
   var service = this.getService_(protoOpts);
   var grpcMetadata = this.grpcMetadata;
-  var grpcOpts = extend({}, GRPC_REQUEST_OPTIONS);
+  var grpcOpts = {};
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
@@ -799,7 +799,9 @@ GrpcService.prototype.getService_ = function(protoOpts) {
     service = new proto[protoOpts.service](
       proto.baseUrl || this.baseUrl,
       this.grpcCredentials,
-      { 'grpc.primary_user_agent': this.userAgent }
+      extend({
+        'grpc.primary_user_agent': this.userAgent
+      }, GRPC_SERVICE_OPTIONS)
     );
 
     this.activeServiceMap_.set(protoOpts.service, service);
@@ -946,5 +948,5 @@ ObjectToStructConverter.prototype.encodeValue_ = function(value) {
 
 module.exports = GrpcService;
 module.exports.GRPC_ERROR_CODE_TO_HTTP = GRPC_ERROR_CODE_TO_HTTP;
-module.exports.GRPC_REQUEST_OPTIONS = GRPC_REQUEST_OPTIONS;
+module.exports.GRPC_SERVICE_OPTIONS = GRPC_SERVICE_OPTIONS;
 module.exports.ObjectToStructConverter = ObjectToStructConverter;
