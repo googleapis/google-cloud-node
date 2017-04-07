@@ -221,6 +221,7 @@ Document.PART_OF_SPEECH = {
  * other methods from our API:
  *
  *   - {module:language#detectEntities}
+ *   - {module:language#detectEntitySentiment}
  *   - {module:language#detectSentiment}
  *   - {module:language#detectSyntax}
  *
@@ -465,12 +466,9 @@ Document.prototype.annotate = function(options, callback) {
  *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
  *     'UTF8' if a Buffer, otherwise 'UTF16'. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
- * @param {boolean} options.verbose - Enable verbose mode for more detailed
- *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {object} callback.entities - The recognized entities from the text,
- *     grouped by the type of entity.
+ * @param {object} callback.entities - The recognized entities from the text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -518,6 +516,86 @@ Document.prototype.detectEntities = function(options, callback) {
   }
 
   this.api.Language.analyzeEntities({
+    document: this.document,
+    encodingType: this.detectEncodingType_(options)
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    callback(null, resp.entities, resp);
+  });
+};
+
+/**
+ * Detect the entities from a block of text, similar to
+ * {module:language/document#detectEntities}, and analyzes sentiment associated
+ * with each entity and its mentions.
+ *
+ * @param {object=} options - Configuration object.
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error occurred while making this request.
+ * @param {object} callback.entities - The recognized entities from the text.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * document.detectEntitySentiment(function(err, entities) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // entities = [
+ *   //   {
+ *   //     name: 'Google',
+ *   //     type: 'ORGANIZATION',
+ *   //     metadata: {
+ *   //       mid: '/m/045c7b',
+ *   //       wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
+ *   //     },
+ *   //     salience: 0.7532734870910645,
+ *   //     mentions: [
+ *   //       {
+ *   //         text: {
+ *   //           content: 'Google',
+ *   //           beginOffset: -1
+ *   //         },
+ *   //         type: 'PROPER',
+ *   //         sentiment: {
+ *   //           magnitude: 0,
+ *   //           score: 0
+ *   //         }
+ *   //       },
+ *   //       // ...
+ *   //     ],
+ *   //     sentiment: {
+ *   //       magnitude: 0,
+ *   //       score: 0
+ *   //     }
+ *   //   },
+ *   //   // ...
+ *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * document.detectEntitySentiment().then(function(data) {
+ *   var entities = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Document.prototype.detectEntitySentiment = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.api.LanguageBeta.analyzeEntitySentiment({
     document: this.document,
     encodingType: this.detectEncodingType_(options)
   }, function(err, resp) {

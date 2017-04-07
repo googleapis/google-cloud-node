@@ -64,7 +64,8 @@ function Language(options) {
   });
 
   this.api = {
-    Language: v1(options).languageServiceClient(options)
+    Language: v1(options).languageServiceClient(options),
+    LanguageBeta: v1beta2(options).languageServiceClient(options)
   };
 }
 
@@ -231,6 +232,92 @@ Language.prototype.detectEntities = function(content, options, callback) {
 
   var document = this.document(options);
   document.detectEntities(options, callback);
+};
+
+/**
+ * Detect the entities from a block of text, similar to
+ * {module:language#detectEntities}, and analyzes sentiment associated with
+ * each entity and its mentions.
+ *
+ * NOTE: This is a convenience method which doesn't require creating a
+ * {module:language/document} object. If you are only running a single
+ * detection, this may be more convenient. However, if you plan to run multiple
+ * detections, it's easier to create a {module:language/document} object.
+ *
+ * @param {string|module:storage/file} content - Inline content or a Storage
+ *     File object.
+ * @param {object=} options - Configuration object.
+ * @param {string} options.encoding - `UTF8` (also, `buffer`), `UTF16` (also
+ *     `string`), or `UTF32`. (Alias for `options.encodingType`). Default:
+ *     'UTF8' if a Buffer, otherwise 'UTF16'. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType)
+ * @param {string} options.language - The language of the text.
+ * @param {string} options.type - The type of document, either `html` or `text`.
+ * @param {function} callback - See
+ *     {module:language/document#detectEntitySentiment}.
+ *
+ * @example
+ * //-
+ * // See {module:language/document#detectEntitySentiment} for a detailed
+ * // breakdown of the arguments your callback will be executed with.
+ * //-
+ * var content = 'Axel Foley is from Detroit';
+ *
+ * function callback(err, entities, apiResponse) {}
+ *
+ * language.detectEntitySentiment(content, callback);
+ *
+ * //-
+ * // Or, provide a reference to a file hosted on Cloud Storage.
+ * //-
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
+ * var bucket = gcs.bucket('my-bucket');
+ * var file = bucket.file('my-file');
+ *
+ * language.detectEntitySentiment(file, callback);
+ *
+ * //-
+ * // Specify HTML content.
+ * //-
+ * var options = {
+ *   type: 'html'
+ * };
+ *
+ * language.detectEntitySentiment(content, options, callback);
+ *
+ * //-
+ * // Specify the language the text is written in.
+ * //-
+ * var content = 'Axel Foley es de Detroit';
+ *
+ * var options = {
+ *   language: 'es'
+ * };
+ *
+ * language.detectEntitySentiment(content, options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * language.detectEntitySentiment(content).then(function(data) {
+ *   var entities = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Language.prototype.detectEntitySentiment = function(content, opts, callback) {
+  if (is.fn(opts)) {
+    callback = opts;
+    opts = {};
+  }
+
+  opts = extend({}, opts, {
+    content: content
+  });
+
+  var document = this.document(opts);
+  document.detectEntitySentiment(opts, callback);
 };
 
 /**
