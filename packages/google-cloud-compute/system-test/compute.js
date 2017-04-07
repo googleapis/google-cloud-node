@@ -1290,8 +1290,16 @@ describe('Compute', function() {
       vm.start(compute.execAfterOperation_(done));
     });
 
-    it('should stop', function(done) {
-      vm.stop(compute.execAfterOperation_(done));
+    it('should stop and trigger STOPPING `waitFor` event', function(done) {
+      async.parallel([
+        function(callback) {
+          vm.waitFor('STOPPING', { timeout: 600 }, callback);
+        },
+
+        function(callback) {
+          vm.stop(compute.execAfterOperation_(callback));
+        }
+      ], done);
     });
   });
 
