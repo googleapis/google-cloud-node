@@ -30,7 +30,7 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-describe.only('Sink', function() {
+describe('Sink', function() {
   var Sink;
   var sink;
 
