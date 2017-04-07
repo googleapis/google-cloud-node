@@ -530,7 +530,7 @@ Document.prototype.detectEntities = function(options, callback) {
 
 /**
  * Detect the entities from a block of text, similar to
- * {module:language/document#detectEntities}, and analyzes sentiment associated
+ * {module:language/document#detectEntities}, and analyze sentiment associated
  * with each entity and its mentions.
  *
  * @param {object=} options - Configuration object.

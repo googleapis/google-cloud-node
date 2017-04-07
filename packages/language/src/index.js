@@ -236,7 +236,7 @@ Language.prototype.detectEntities = function(content, options, callback) {
 
 /**
  * Detect the entities from a block of text, similar to
- * {module:language#detectEntities}, and analyzes sentiment associated with
+ * {module:language#detectEntities}, and analyze sentiment associated with
  * each entity and its mentions.
  *
  * NOTE: This is a convenience method which doesn't require creating a
