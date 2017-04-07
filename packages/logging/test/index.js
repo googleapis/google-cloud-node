@@ -877,7 +877,10 @@ describe('Logging', function() {
         logging.api[CONFIG.client][CONFIG.method] = {
           bind: function(gaxClient, reqOpts) {
             assert.strictEqual(reqOpts, replacedReqOpts);
-            done();
+
+            setImmediate(done);
+
+            return util.noop;
           }
         };
 
@@ -892,7 +895,10 @@ describe('Logging', function() {
             assert.strictEqual(gaxClient, logging.api[CONFIG.client]);
             assert.deepEqual(reqOpts, CONFIG.reqOpts);
             assert.strictEqual(gaxOpts, CONFIG.gaxOpts);
-            done();
+
+            setImmediate(done);
+
+            return util.noop;
           }
         };
 
@@ -952,7 +958,12 @@ describe('Logging', function() {
             assert.strictEqual(gaxClient, logging.api[CONFIG.client]);
             assert.deepEqual(reqOpts, CONFIG.reqOpts);
             assert.strictEqual(gaxOpts, CONFIG.gaxOpts);
-            done();
+
+            setImmediate(done);
+
+            return function() {
+              return GAX_STREAM;
+            };
           }
         };
 
