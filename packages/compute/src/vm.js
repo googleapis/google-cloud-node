@@ -882,7 +882,7 @@ VM.prototype.waitFor = function(status, options, callback) {
     timeout = Math.min(Math.max(options.timeout, 0), 600);
   }
 
-  if (!VALID_STATUSES.includes(status)) {
+  if (VALID_STATUSES.indexOf(status) === -1) {
     throw new Error('Status passed to waitFor is invalid.');
   }
 
