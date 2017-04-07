@@ -100,6 +100,14 @@ describe('VM', function() {
       assert.strictEqual(vm.name, VM_NAME);
     });
 
+    it('should initialize hasActiveWaiters to false', function() {
+      assert.strictEqual(vm.hasActiveWaiters, false);
+    });
+
+    it('should initialize an empty waiter array', function() {
+      assert.deepEqual(vm.waiters, []);
+    });
+
     it('should localize the URL of the VM', function() {
       assert.strictEqual(vm.url, [
         'https://www.googleapis.com/compute/v1/projects',
@@ -842,6 +850,268 @@ describe('VM', function() {
       };
 
       vm.stop();
+    });
+  });
+
+  describe('waitFor', function() {
+    var VALID_STATUSES = [
+      'PROVISIONING',
+      'STAGING',
+      'RUNNING',
+      'STOPPING',
+      'SUSPENDING',
+      'SUSPENDED',
+      'TERMINATED'
+    ];
+
+    beforeEach(function() {
+      vm.startPolling_ = util.noop;
+    });
+
+    it('should throw if an invalid status is passed', function() {
+      assert.throws(function() {
+        vm.waitFor('It', assert.ifError);
+      }, new RegExp('Status passed to waitFor is invalid.'));
+    });
+
+    it('should accept valid statuses', function() {
+      assert.doesNotThrow(function() {
+        VALID_STATUSES.forEach(function(status) {
+          vm.waitFor(status, assert.ifError);
+        });
+      });
+    });
+
+    it('should accept lowercase status', function() {
+      assert.doesNotThrow(function() {
+        vm.waitFor('ProVisioning', assert.ifError);
+        assert.strictEqual(vm.waiters.pop().status, 'PROVISIONING');
+      });
+    });
+
+    it('should not allow an out of bounds timeout', function() {
+      vm.waitFor(VALID_STATUSES[0], { timeout: -1 }, assert.ifError);
+      assert.strictEqual(vm.waiters.pop().timeout, 0);
+
+      vm.waitFor(VALID_STATUSES[0], { timeout: 601 }, assert.ifError);
+      assert.strictEqual(vm.waiters.pop().timeout, 600);
+    });
+
+    it('should create a waiter', function(done) {
+      var now = new Date() / 1000;
+      vm.waitFor(VALID_STATUSES[0], done);
+
+      var createdWaiter = vm.waiters.pop();
+
+      assert.strictEqual(createdWaiter.status, VALID_STATUSES[0]);
+      assert.strictEqual(createdWaiter.timeout, 300);
+
+      assert(createdWaiter.startTime > now - 1000);
+      assert(createdWaiter.startTime < now + 1000);
+
+      createdWaiter.callback(); // done()
+    });
+
+    it('should flip hasActiveWaiters to true', function() {
+      assert.strictEqual(vm.hasActiveWaiters, false);
+      vm.waitFor(VALID_STATUSES[0], assert.ifError);
+      assert.strictEqual(vm.hasActiveWaiters, true);
+    });
+
+    it('should start polling', function(done) {
+      vm.startPolling_ = done;
+
+      vm.waitFor(VALID_STATUSES[0], assert.ifError);
+    });
+
+    it('should not start polling if already polling', function(done) {
+      vm.hasActiveWaiters = true;
+
+      vm.startPolling_ = function() {
+        done(new Error('Should not have called startPolling_.'));
+      };
+
+      vm.waitFor(VALID_STATUSES[0], assert.ifError);
+      done();
+    });
+  });
+
+  describe('startPolling_', function() {
+    var METADATA = {};
+
+    beforeEach(function() {
+      vm.hasActiveWaiters = true;
+
+      vm.getMetadata = function(callback) {
+        callback(null, METADATA);
+      };
+    });
+
+    it('should only poll if there are active waiters', function(done) {
+      vm.hasActiveWaiters = false;
+
+      vm.getMetadata = function() {
+        done(new Error('Should not have refreshed metadata.'));
+      };
+
+      vm.startPolling_();
+      done();
+    });
+
+    it('should refresh metadata', function(done) {
+      vm.getMetadata = function() {
+        done();
+      };
+
+      vm.startPolling_();
+    });
+
+    describe('metadata refresh error', function() {
+      var ERROR = new Error('Error.');
+
+      beforeEach(function() {
+        vm.getMetadata = function(callback) {
+          callback(ERROR);
+        };
+
+        vm.waiters.push({
+          callback: util.noop
+        });
+      });
+
+      it('should execute waiter with error', function(done) {
+        vm.waiters[0].callback = function(err) {
+          assert.strictEqual(err, ERROR);
+          done();
+        };
+
+        vm.startPolling_();
+      });
+
+      it('should remove waiter', function() {
+        assert.strictEqual(vm.waiters.length, 1);
+        vm.startPolling_();
+        assert.strictEqual(vm.waiters.length, 0);
+      });
+
+      it('should flip hasActiveWaiters to false', function() {
+        assert.strictEqual(vm.hasActiveWaiters, true);
+        vm.startPolling_();
+        assert.strictEqual(vm.hasActiveWaiters, false);
+      });
+    });
+
+    describe('desired status reached', function() {
+      var STATUS = 'status';
+      var METADATA = {
+        status: STATUS
+      };
+
+      beforeEach(function() {
+        vm.getMetadata = function(callback) {
+          callback(null, METADATA);
+        };
+
+        vm.waiters.push({
+          status: STATUS,
+          callback: util.noop
+        });
+      });
+
+      it('should execute callback with metadata', function(done) {
+        vm.waiters[0].callback = function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata, METADATA);
+          done();
+        };
+
+        vm.startPolling_();
+      });
+
+      it('should remove waiter', function() {
+        assert.strictEqual(vm.waiters.length, 1);
+        vm.startPolling_();
+        assert.strictEqual(vm.waiters.length, 0);
+      });
+
+      it('should flip hasActiveWaiters to false', function() {
+        assert.strictEqual(vm.hasActiveWaiters, true);
+        vm.startPolling_();
+        assert.strictEqual(vm.hasActiveWaiters, false);
+      });
+    });
+
+    describe('timeout exceeded', function() {
+      var STATUS = 'status';
+
+      beforeEach(function() {
+        vm.waiters.push({
+          status: STATUS,
+          startTime: Date.now() / 1000 - 20,
+          timeout: 10,
+          callback: util.noop
+        });
+      });
+
+      it('should execute callback with WaitForTimeoutError', function(done) {
+        vm.waiters[0].callback = function(err) {
+          assert.strictEqual(err.name, 'WaitForTimeoutError');
+          assert.strictEqual(err.message, [
+            'waitFor timed out waiting for VM ' + vm.name,
+            'to be in status: ' + STATUS
+          ].join(' '));
+
+          done();
+        };
+
+        vm.startPolling_();
+      });
+
+      it('should remove waiter', function() {
+        assert.strictEqual(vm.waiters.length, 1);
+        vm.startPolling_();
+        assert.strictEqual(vm.waiters.length, 0);
+      });
+
+      it('should flip hasActiveWaiters to false', function() {
+        assert.strictEqual(vm.hasActiveWaiters, true);
+        vm.startPolling_();
+        assert.strictEqual(vm.hasActiveWaiters, false);
+      });
+    });
+
+    describe('desired status not reached yet', function() {
+      var STATUS = 'status';
+      var setTimeout = global.setTimeout;
+
+      beforeEach(function() {
+        vm.waiters.push({
+          status: STATUS,
+          startTime: Date.now() / 1000,
+          timeout: 500
+        });
+      });
+
+      after(function() {
+        global.setTimeout = setTimeout;
+      });
+
+      it('should check for the status again after interval', function(done) {
+        global.setTimeout = function(fn, interval) {
+          assert.strictEqual(interval, 2000);
+
+          vm.getMetadata = function() {
+            // Confirms startPolling_() was called again.
+            done();
+          };
+
+          fn(); // startPolling_()
+        };
+
+        assert.strictEqual(vm.waiters.length, 1);
+        vm.startPolling_();
+        assert.strictEqual(vm.waiters.length, 1);
+      });
     });
   });
 

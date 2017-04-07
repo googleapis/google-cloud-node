@@ -41,9 +41,40 @@ var Disk = require('./disk.js');
  * @param {string} message - Custom error message.
  * @return {Error}
  */
-var DetachDiskError = createErrorClass('DetachDiskError', function(message) {
-  this.message = message;
-});
+var DetachDiskError = createErrorClass('DetachDiskError');
+
+/**
+ * Custom error type for when `waitFor()` does not return a status in a timely
+ * fashion.
+ *
+ * @private
+ *
+ * @param {string} message - Custom error message.
+ * @return {Error}
+ */
+var WaitForTimeoutError = createErrorClass('WaitForTimeoutError');
+
+/**
+ * The statuses that a VM can be in.
+ *
+ * @private
+ */
+var VALID_STATUSES = [
+  'PROVISIONING',
+  'STAGING',
+  'RUNNING',
+  'STOPPING',
+  'SUSPENDING',
+  'SUSPENDED',
+  'TERMINATED'
+];
+
+/**
+ * Interval for polling during waitFor.
+ *
+ * @private
+ */
+var WAIT_FOR_POLLING_INTERVAL_MS = 2000;
 
 /*! Developer Documentation
  *
@@ -68,6 +99,9 @@ var DetachDiskError = createErrorClass('DetachDiskError', function(message) {
 function VM(zone, name) {
   this.name = name.replace(/.*\/([^/]+)$/, '$1'); // Just the instance name.
   this.zone = zone;
+
+  this.hasActiveWaiters = false;
+  this.waiters = [];
 
   this.url = format('{base}/{project}/zones/{zone}/instances/{name}', {
     base: 'https://www.googleapis.com/compute/v1/projects',
@@ -778,6 +812,145 @@ VM.prototype.stop = function(callback) {
     uri: '/stop'
   }, callback || common.util.noop);
 };
+
+/**
+ * This function will callback when the VM is in the specified state.
+ *
+ * Will time out after the specified time (default: 300 seconds).
+ *
+ * @param {string} status - The status to wait for. This can be:
+ *     - "PROVISIONING"
+ *     - "STAGING"
+ *     - "RUNNING"
+ *     - "STOPPING"
+ *     - "SUSPENDING"
+ *     - "SUSPENDED"
+ *     - "TERMINATED"
+ * @param {object=} options - Configuration object.
+ * @param {number} options.timeout - The number of seconds to wait until timing
+ *     out, between `0` and `600`. Default: `300`
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while waiting for the
+ *     status.
+ * @param {object} callback.metadata - The instance's metadata.
+ *
+ * @example
+ * vm.waitFor('RUNNING', function(err, metadata) {
+ *   if (!err) {
+ *     // The VM is running.
+ *   }
+ * });
+ *
+ * //-
+ * // By default, `waitFor` will timeout after 300 seconds while waiting for the
+ * // desired state to occur. This can be changed to any number between 0 and
+ * // 600. If the timeout is set to 0, it will poll once for status and then
+ * // timeout if the desired state is not reached.
+ * //-
+ * var options = {
+ *   timeout: 600
+ * };
+ *
+ * vm.waitFor('TERMINATED', options, function(err, metadata) {
+ *   if (!err) {
+ *     // The VM is terminated.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.waitFor('RUNNING', options).then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+VM.prototype.waitFor = function(status, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  status = status.toUpperCase();
+
+  // The timeout should default to five minutes, be less than or equal to 10
+  // minutes, and be greater than or equal to 0 seconds.
+  var timeout = 300;
+
+  if (is.number(options.timeout)) {
+    timeout = Math.min(Math.max(options.timeout, 0), 600);
+  }
+
+  if (VALID_STATUSES.indexOf(status) === -1) {
+    throw new Error('Status passed to waitFor is invalid.');
+  }
+
+  this.waiters.push({
+    status: status,
+    timeout: timeout,
+    startTime: new Date() / 1000,
+    callback: callback
+  });
+
+  if (!this.hasActiveWaiters) {
+    this.hasActiveWaiters = true;
+    this.startPolling_();
+  }
+};
+
+/**
+ * Poll `getMetadata` to check the VM's status. This runs a loop to ping
+ * the API on an interval.
+ *
+ * Note: This method is automatically called when a `waitFor()` call
+ * is made.
+ *
+ * @private
+ */
+VM.prototype.startPolling_ = function() {
+  var self = this;
+
+  if (!this.hasActiveWaiters) {
+    return;
+  }
+
+  this.getMetadata(function(err, metadata) {
+    var now = new Date() / 1000;
+
+    var waitersToRemove = self.waiters.filter(function(waiter) {
+      if (err) {
+        waiter.callback(err);
+        return true;
+      }
+
+      if (metadata.status === waiter.status) {
+        waiter.callback(null, metadata);
+        return true;
+      }
+
+      if (now - waiter.startTime >= waiter.timeout) {
+        var waitForTimeoutError = new WaitForTimeoutError([
+          'waitFor timed out waiting for VM ' + self.name,
+          'to be in status: ' + waiter.status
+        ].join(' '));
+        waiter.callback(waitForTimeoutError);
+        return true;
+      }
+    });
+
+    waitersToRemove.forEach(function(waiter) {
+      self.waiters.splice(self.waiters.indexOf(waiter), 1);
+    });
+
+    self.hasActiveWaiters = self.waiters.length > 0;
+
+    if (self.hasActiveWaiters) {
+      setTimeout(self.startPolling_.bind(self), WAIT_FOR_POLLING_INTERVAL_MS);
+    }
+  });
+};
+
 
 /**
  * Make a new request object from the provided arguments and wrap the callback
