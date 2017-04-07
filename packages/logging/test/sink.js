@@ -30,10 +30,6 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-function FakeGrpcServiceObject() {
-  this.calledWith_ = arguments;
-}
-
 describe('Sink', function() {
   var Sink;
   var sink;
@@ -48,9 +44,6 @@ describe('Sink', function() {
     Sink = proxyquire('../src/sink.js', {
       '@google-cloud/common': {
         util: fakeUtil
-      },
-      '@google-cloud/common-grpc': {
-        ServiceObject: FakeGrpcServiceObject,
       }
     });
   });
@@ -60,48 +53,12 @@ describe('Sink', function() {
   });
 
   describe('instantiation', function() {
-    it('should inherit from GrpcServiceObject', function() {
-      var loggingInstance = extend({}, LOGGING, {
-        createSink: {
-          bind: function(context) {
-            assert.strictEqual(context, loggingInstance);
-          }
-        }
-      });
-
-      var sink = new Sink(loggingInstance, SINK_NAME);
-      assert(sink instanceof FakeGrpcServiceObject);
-
-      var calledWith = sink.calledWith_[0];
-
-      assert.strictEqual(calledWith.parent, loggingInstance);
-      assert.strictEqual(calledWith.baseUrl, '/sinks');
-      assert.strictEqual(calledWith.id, SINK_NAME);
-      assert.deepEqual(calledWith.methods, {
-        create: true,
-        delete: {
-          protoOpts: {
-            service: 'ConfigServiceV2',
-            method: 'deleteSink'
-          },
-          reqOpts: {
-            sinkName: sink.formattedName_
-          }
-        },
-        getMetadata: {
-          protoOpts: {
-            service: 'ConfigServiceV2',
-            method: 'getSink'
-          },
-          reqOpts: {
-            sinkName: sink.formattedName_
-          }
-        }
-      });
-    });
-
     it('should promisify all the things', function() {
       assert(promisifed);
+    });
+
+    it('should localize Logging instance', function() {
+      assert.strictEqual(sink.logging, LOGGING);
     });
 
     it('should localize the name', function() {
@@ -113,6 +70,106 @@ describe('Sink', function() {
         sink.formattedName_,
         'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME
       );
+    });
+  });
+
+  describe('create', function() {
+    it('should call parent createSink', function(done) {
+      var config = {};
+
+      sink.logging.createSink = function(name, config_, callback) {
+        assert.strictEqual(name, sink.name);
+        assert.strictEqual(config_, config);
+        callback(); // done()
+      };
+
+      sink.create(config, done);
+    });
+  });
+
+  describe('delete', function() {
+    it('should accept gaxOptions', function(done) {
+      sink.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'configServiceV2Client');
+        assert.strictEqual(config.method, 'deleteSink');
+
+        assert.deepEqual(config.reqOpts, {
+          sinkName: sink.formattedName_
+        });
+
+        assert.deepEqual(config.gaxOpts, {});
+
+        callback(); // done()
+      };
+
+      sink.delete(done);
+    });
+
+    it('should accept gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      sink.logging.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      sink.delete(gaxOptions, assert.ifError);
+    });
+  });
+
+  describe('getMetadata', function() {
+    it('should make correct request', function(done) {
+      sink.logging.request = function(config) {
+        assert.strictEqual(config.client, 'configServiceV2Client');
+        assert.strictEqual(config.method, 'getSink');
+
+        assert.deepEqual(config.reqOpts, {
+          sinkName: sink.formattedName_
+        });
+
+        assert.deepEqual(config.gaxOpts, {});
+
+        done();
+      };
+
+      sink.getMetadata(assert.ifError);
+    });
+
+    it('should accept gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      sink.logging.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      sink.delete(gaxOptions, assert.ifError);
+    });
+
+    it('should update metadata', function(done) {
+      var metadata = {};
+
+      sink.logging.request = function(config, callback) {
+        callback(null, metadata);
+      };
+
+      sink.getMetadata(function() {
+        assert.strictEqual(sink.metadata, metadata);
+        done();
+      });
+    });
+
+    it('should execute callback with original arguments', function(done) {
+      var args = [{}, {}, {}];
+
+      sink.logging.request = function(config, callback) {
+        callback.apply(null, args);
+      };
+
+      sink.getMetadata(function() {
+        assert.deepStrictEqual([].slice.call(arguments), args);
+        done();
+      });
     });
   });
 
@@ -131,6 +188,12 @@ describe('Sink', function() {
 
   describe('setMetadata', function() {
     var METADATA = { a: 'b', c: 'd' };
+
+    beforeEach(function() {
+      sink.getMetadata = function(callback) {
+        callback(null, METADATA);
+      };
+    });
 
     it('should refresh the metadata', function(done) {
       sink.getMetadata = function() {
@@ -162,14 +225,16 @@ describe('Sink', function() {
         callback(null, currentMetadata);
       };
 
-      sink.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
-        assert.strictEqual(protoOpts.method, 'updateSink');
+      sink.logging.request = function(config) {
+        assert.strictEqual(config.client, 'configServiceV2Client');
+        assert.strictEqual(config.method, 'updateSink');
 
-        assert.strictEqual(reqOpts.sinkName, sink.formattedName_);
+        assert.deepEqual(config.reqOpts, {
+          sinkName: sink.formattedName_,
+          sink: extend({}, currentMetadata, METADATA)
+        });
 
-        var expectedMetadata = extend({}, currentMetadata, METADATA);
-        assert.deepEqual(reqOpts.sink, expectedMetadata);
+        assert.strictEqual(config.gaxOpts, undefined);
 
         done();
       };
@@ -177,50 +242,43 @@ describe('Sink', function() {
       sink.setMetadata(METADATA, assert.ifError);
     });
 
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      beforeEach(function() {
-        sink.getMetadata = function(callback) {
-          callback();
-        };
-
-        sink.request = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
-        };
+    it('should accept gaxOptions', function(done) {
+      var metadata = extend({}, METADATA, {
+        gaxOptions: {}
       });
 
-      it('should execute callback with error & API response', function(done) {
-        sink.setMetadata(METADATA, function(err, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
+      sink.logging.request = function(config) {
+        assert.strictEqual(config.reqOpts.sink.gaxOptions, undefined);
+        assert.strictEqual(config.gaxOpts, metadata.gaxOptions);
+        done();
+      };
 
-          done();
-        });
+      sink.setMetadata(metadata, assert.ifError);
+    });
+
+    it('should update metadata', function(done) {
+      var metadata = {};
+
+      sink.logging.request = function(config, callback) {
+        callback(null, metadata);
+      };
+
+      sink.setMetadata(metadata, function() {
+        assert.strictEqual(sink.metadata, metadata);
+        done();
       });
     });
 
-    describe('success', function() {
-      var apiResponse = {};
+    it('should execute callback with original arguments', function(done) {
+      var args = [{}, {}, {}];
 
-      beforeEach(function() {
-        sink.getMetadata = function(callback) {
-          callback();
-        };
+      sink.logging.request = function(config, callback) {
+        callback.apply(null, args);
+      };
 
-        sink.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with API resp', function(done) {
-        sink.setMetadata(METADATA, function(err, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(apiResponse_, apiResponse);
-
-          done();
-        });
+      sink.setMetadata(METADATA, function() {
+        assert.deepStrictEqual([].slice.call(arguments), args);
+        done();
       });
     });
   });

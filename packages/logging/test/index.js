@@ -19,9 +19,11 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
+var through = require('through2');
 var util = require('@google-cloud/common').util;
+
+var v2 = require('../src/v2/index.js');
 
 var extended = false;
 var fakePaginator = {
@@ -42,8 +44,14 @@ var fakePaginator = {
   }
 };
 
+var googleAutoAuthOverride;
+function fakeGoogleAutoAuth() {
+  return (googleAutoAuthOverride || util.noop).apply(null, arguments);
+}
+
 var isCustomTypeOverride;
 var promisifed = false;
+var replaceProjectIdTokenOverride;
 var fakeUtil = extend({}, util, {
   isCustomType: function() {
     if (isCustomTypeOverride) {
@@ -58,9 +66,26 @@ var fakeUtil = extend({}, util, {
     }
 
     promisifed = true;
-    assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
+    assert.deepEqual(options.exclude, [
+      'entry',
+      'log',
+      'request',
+      'sink'
+    ]);
+  },
+  replaceProjectIdToken: function(reqOpts) {
+    if (replaceProjectIdTokenOverride) {
+      return replaceProjectIdTokenOverride.apply(null, arguments);
+    }
+
+    return reqOpts;
   }
 });
+
+var v2Override;
+function fakeV2() {
+  return (v2Override || util.noop).apply(null, arguments);
+}
 
 function FakeEntry() {
   this.calledWith_ = arguments;
@@ -78,10 +103,6 @@ function FakeSink() {
   this.calledWith_ = arguments;
 }
 
-function FakeGrpcService() {
-  this.calledWith_ = arguments;
-}
-
 describe('Logging', function() {
   var Logging;
   var logging;
@@ -94,23 +115,23 @@ describe('Logging', function() {
         paginator: fakePaginator,
         util: fakeUtil
       },
-      '@google-cloud/common-grpc': {
-        Service: FakeGrpcService
-      },
+      'google-auto-auth': fakeGoogleAutoAuth,
       './log.js': FakeLog,
       './entry.js': FakeEntry,
-      './sink.js': FakeSink
+      './sink.js': FakeSink,
+      './v2': fakeV2
     });
   });
 
   beforeEach(function() {
+    googleAutoAuthOverride = null;
     isCustomTypeOverride = null;
+    replaceProjectIdTokenOverride = null;
+    v2Override = null;
 
     logging = new Logging({
       projectId: PROJECT_ID
     });
-    logging.projectId = PROJECT_ID;
-    logging.request = util.noop;
   });
 
   describe('instantiation', function() {
@@ -120,11 +141,6 @@ describe('Logging', function() {
 
     it('should promisify all the things', function() {
       assert(promisifed);
-    });
-
-    it('should streamify the correct methods', function() {
-      assert.strictEqual(logging.getEntriesStream, 'getEntries');
-      assert.strictEqual(logging.getSinksStream, 'getSinks');
     });
 
     it('should normalize the arguments', function() {
@@ -152,23 +168,43 @@ describe('Logging', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from GrpcService', function() {
-      assert(logging instanceof FakeGrpcService);
+    it('should initialize the API object', function() {
+      assert.deepEqual(logging.api, {});
+    });
 
-      var calledWith = logging.calledWith_[0];
+    it('should cache a local google-auto-auth instance', function() {
+      var fakeGoogleAutoAuthInstance = {};
 
-      assert.strictEqual(calledWith.baseUrl, 'logging.googleapis.com');
-      assert.strictEqual(calledWith.service, 'logging');
-      assert.strictEqual(calledWith.apiVersion, 'v2');
-      assert.deepEqual(calledWith.protoServices, {
-        ConfigServiceV2:
-          googleProtoFiles('logging', 'v2', 'logging_config.proto'),
-        LoggingServiceV2: googleProtoFiles.logging.v2
-      });
-      assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/cloud-platform'
-      ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      googleAutoAuthOverride = function() {
+        return fakeGoogleAutoAuthInstance;
+      };
+
+      var logging = new Logging({});
+      assert.strictEqual(logging.auth, fakeGoogleAutoAuthInstance);
+    });
+
+    it('should localize the options', function() {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var logging = new Logging(options);
+
+      assert.notStrictEqual(logging.options, options);
+
+      assert.deepEqual(logging.options, extend({
+        scopes: v2.ALL_SCOPES
+      }, options));
+    });
+
+    it('should set the projectId', function() {
+      assert.strictEqual(logging.projectId, PROJECT_ID);
+    });
+
+    it('should default the projectId to the token', function() {
+      var logging = new Logging({});
+      assert.strictEqual(logging.projectId, '{{projectId}}');
     });
   });
 
@@ -250,7 +286,6 @@ describe('Logging', function() {
       logging.createSink(SINK_NAME, CONFIG, done);
     });
 
-
     describe('API request', function() {
       it('should make the correct API request', function(done) {
         var config = {
@@ -262,14 +297,32 @@ describe('Logging', function() {
           name: SINK_NAME
         });
 
-        logging.request = function(protoOpts, reqOpts) {
-          assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
-          assert.strictEqual(protoOpts.method, 'createSink');
+        logging.request = function(config) {
+          assert.strictEqual(config.client, 'configServiceV2Client');
+          assert.strictEqual(config.method, 'createSink');
 
           var expectedParent = 'projects/' + logging.projectId;
-          assert.strictEqual(reqOpts.parent, expectedParent);
-          assert.deepEqual(reqOpts.sink, expectedConfig);
+          assert.strictEqual(config.reqOpts.parent, expectedParent);
+          assert.deepEqual(config.reqOpts.sink, expectedConfig);
 
+          assert.strictEqual(config.gaxOpts, undefined);
+
+          done();
+        };
+
+        logging.createSink(SINK_NAME, config, assert.ifError);
+      });
+
+      it('should accept GAX options', function(done) {
+        var config = {
+          a: 'b',
+          c: 'd',
+          gaxOptions: {}
+        };
+
+        logging.request = function(config_) {
+          assert.strictEqual(config_.reqOpts.sink.gaxOptions, undefined);
+          assert.strictEqual(config_.gaxOpts, config.gaxOptions);
           done();
         };
 
@@ -281,7 +334,7 @@ describe('Logging', function() {
         var apiResponse = {};
 
         beforeEach(function() {
-          logging.request = function(protoOpts, reqOpts, callback) {
+          logging.request = function(config, callback) {
             callback(error, apiResponse);
           };
         });
@@ -303,7 +356,7 @@ describe('Logging', function() {
         };
 
         beforeEach(function() {
-          logging.request = function(protoOpts, reqOpts, callback) {
+          logging.request = function(config, callback) {
             callback(null, apiResponse);
           };
         });
@@ -344,10 +397,10 @@ describe('Logging', function() {
 
   describe('getEntries', function() {
     it('should accept only a callback', function(done) {
-      logging.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts, {
+      logging.request = function(config) {
+        assert.deepEqual(config.reqOpts, {
           orderBy: 'timestamp desc',
-          projectIds: [logging.projectId]
+          resourceNames: ['projects/' + logging.projectId]
         });
         done();
       };
@@ -358,14 +411,18 @@ describe('Logging', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      logging.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'LoggingServiceV2');
-        assert.strictEqual(protoOpts.method, 'listLogEntries');
+      logging.request = function(config) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'listLogEntries');
 
-        assert.deepEqual(reqOpts, extend(options, {
+        assert.deepEqual(config.reqOpts, extend(options, {
           orderBy: 'timestamp desc',
-          projectIds: [logging.projectId]
+          resourceNames: ['projects/' + logging.projectId]
         }));
+
+        assert.deepStrictEqual(config.gaxOpts, {
+          autoPaginate: undefined
+        });
 
         done();
       };
@@ -378,8 +435,26 @@ describe('Logging', function() {
         orderBy: 'timestamp asc'
       };
 
-      logging.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts.orderBy, options.orderBy);
+      logging.request = function(config) {
+        assert.deepEqual(config.reqOpts.orderBy, options.orderBy);
+        done();
+      };
+
+      logging.getEntries(options, assert.ifError);
+    });
+
+    it('should accept GAX options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd',
+        gaxOptions: {
+          autoPaginate: true
+        }
+      };
+
+      logging.request = function(config) {
+        assert.strictEqual(config.reqOpts.gaxOptions, undefined);
+        assert.deepStrictEqual(config.gaxOpts, options.gaxOptions);
         done();
       };
 
@@ -387,77 +462,52 @@ describe('Logging', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      var ARGS = [
+        new Error('Error.'),
+        [],
+        {}
+      ];
 
       beforeEach(function() {
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+        logging.request = function(config, callback) {
+          callback.apply(null, ARGS);
         };
       });
 
       it('should execute callback with error & API response', function(done) {
-        logging.getEntries({}, function(err, entries, nextQuery, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(entries, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-
+        logging.getEntries({}, function() {
+          var args = [].slice.call(arguments);
+          assert.deepStrictEqual(args, ARGS);
           done();
         });
       });
     });
 
     describe('success', function() {
-      var apiResponse = {
-        entries: [
+      var ARGS = [
+        null,
+        [
           {
             logName: 'syslog'
           }
         ]
-      };
+      ];
 
       beforeEach(function() {
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponse);
+        logging.request = function(config, callback) {
+          callback.apply(null, ARGS);
         };
-      });
-
-      it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
-        });
-        var expectedNextQuery = {
-          orderBy: 'timestamp desc',
-          projectIds: [logging.projectId],
-          pageToken: nextPageToken
-        };
-
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
-        };
-
-        logging.getEntries({}, function(err, entries, nextQuery) {
-          assert.ifError(err);
-
-          assert.deepEqual(nextQuery, expectedNextQuery);
-
-          done();
-        });
       });
 
       it('should execute callback with entries & API resp', function(done) {
-        logging.getEntries({}, function(err, entries, nextQuery, apiResponse_) {
+        logging.getEntries({}, function(err, entries) {
           assert.ifError(err);
 
           var argsPassedToFromApiResponse_ = entries[0];
           assert.strictEqual(
             argsPassedToFromApiResponse_[0],
-            apiResponse.entries[0]
+            ARGS[1][0]
           );
-
-          assert.strictEqual(apiResponse_, apiResponse);
 
           done();
         });
@@ -465,7 +515,94 @@ describe('Logging', function() {
     });
   });
 
+  describe('getEntriesStream', function() {
+    var OPTIONS = {
+      a: 'b',
+      c: 'd',
+      gaxOptions: {
+        a: 'b',
+        c: 'd'
+      }
+    };
+
+    var REQUEST_STREAM;
+    var RESULT = {};
+
+    beforeEach(function() {
+      REQUEST_STREAM = through.obj();
+      REQUEST_STREAM.push(RESULT);
+
+      logging.request = function() {
+        return REQUEST_STREAM;
+      };
+    });
+
+    it('should make request once reading', function(done) {
+      logging.request = function(config) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'listLogEntriesStream');
+
+        assert.deepEqual(config.reqOpts, {
+          resourceNames: [
+            'projects/' + logging.projectId
+          ],
+          orderBy: 'timestamp desc',
+          a: 'b',
+          c: 'd'
+        });
+
+        assert.deepEqual(config.gaxOpts, {
+          autoPaginate: undefined,
+          a: 'b',
+          c: 'd'
+        });
+
+        setImmediate(done);
+
+        return REQUEST_STREAM;
+      };
+
+      var stream = logging.getEntriesStream(OPTIONS);
+      stream.emit('reading');
+    });
+
+    it('should convert results from request to Entry', function(done) {
+      var stream = logging.getEntriesStream(OPTIONS);
+
+      stream.on('data', function(entry) {
+        var argsPassedToFromApiResponse_ = entry[0];
+        assert.strictEqual(
+          argsPassedToFromApiResponse_,
+          RESULT
+        );
+
+        done();
+      });
+
+      stream.emit('reading');
+    });
+
+    it('should expose abort function', function(done) {
+      REQUEST_STREAM.abort = done;
+
+      var stream = logging.getEntriesStream(OPTIONS);
+
+      stream.emit('reading');
+
+      stream.abort();
+    });
+  });
+
   describe('getSinks', function() {
+    var OPTIONS = {
+      a: 'b',
+      c: 'd',
+      gaxOptions: {
+        a: 'b',
+        c: 'd'
+      }
+    };
+
     it('should accept only a callback', function(done) {
       logging.request = function() {
         done();
@@ -475,97 +612,164 @@ describe('Logging', function() {
     });
 
     it('should make the correct API request', function(done) {
-      logging.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
-        assert.strictEqual(protoOpts.method, 'listSinks');
+      logging.request = function(config) {
+        assert.strictEqual(config.client, 'configServiceV2Client');
+        assert.strictEqual(config.method, 'listSinks');
 
-        var expectedParent = 'projects/' + logging.projectId;
-        assert.strictEqual(reqOpts.parent, expectedParent);
+        assert.deepEqual(config.reqOpts, {
+          parent: 'projects/' + logging.projectId,
+          a: 'b',
+          c: 'd'
+        });
+
+        assert.deepEqual(config.gaxOpts, {
+          autoPaginate: undefined,
+          a: 'b',
+          c: 'd'
+        });
 
         done();
       };
 
-      logging.getSinks({}, assert.ifError);
+      logging.getSinks(OPTIONS, assert.ifError);
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      var ARGS = [
+        new Error('Error.'),
+        [],
+        {}
+      ];
 
       beforeEach(function() {
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+        logging.request = function(config, callback) {
+          callback.apply(null, ARGS);
         };
       });
 
       it('should execute callback with error & API response', function(done) {
-        logging.getSinks({}, function(err, sinks, nextQuery, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(sinks, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-
+        logging.getEntries(OPTIONS, function() {
+          var args = [].slice.call(arguments);
+          assert.deepStrictEqual(args, ARGS);
           done();
         });
       });
     });
 
     describe('success', function() {
-      var apiResponse = {
-        sinks: [
+      var ARGS = [
+        null,
+        [
           {
             name: 'sink-name'
           }
-        ]
-      };
+        ],
+        {}
+      ];
 
       beforeEach(function() {
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponse);
+        logging.request = function(config, callback) {
+          callback.apply(null, ARGS);
         };
-      });
-
-      it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
-        });
-        var expectedNextQuery = {
-          pageToken: nextPageToken
-        };
-
-        logging.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
-        };
-
-        logging.getSinks({}, function(err, sinks, nextQuery) {
-          assert.ifError(err);
-
-          assert.deepEqual(nextQuery, expectedNextQuery);
-
-          done();
-        });
       });
 
       it('should execute callback with Logs & API resp', function(done) {
-        var log = {};
+        var sinkInstance = {};
 
         logging.sink = function(name) {
-          assert.strictEqual(name, apiResponse.sinks[0].name);
-          return log;
+          assert.strictEqual(name, ARGS[1][0].name);
+          return sinkInstance;
         };
 
-        logging.getSinks({}, function(err, sinks, nextQuery, apiResponse_) {
+        logging.getSinks(OPTIONS, function(err, sinks) {
           assert.ifError(err);
 
-          assert.strictEqual(sinks[0], log);
-          assert.strictEqual(sinks[0].metadata, apiResponse.sinks[0]);
-
-          assert.strictEqual(apiResponse_, apiResponse);
+          assert.strictEqual(sinks[0], sinkInstance);
+          assert.strictEqual(sinks[0].metadata, ARGS[1][0]);
 
           done();
         });
       });
+    });
+  });
+
+  describe('getSinksStream', function() {
+    var OPTIONS = {
+      a: 'b',
+      c: 'd',
+      gaxOptions: {
+        a: 'b',
+        c: 'd'
+      }
+    };
+
+    var REQUEST_STREAM;
+    var RESULT = {
+      name: 'sink-name'
+    };
+
+    beforeEach(function() {
+      REQUEST_STREAM = through.obj();
+      REQUEST_STREAM.push(RESULT);
+
+      logging.request = function() {
+        return REQUEST_STREAM;
+      };
+    });
+
+    it('should make request once reading', function(done) {
+      logging.request = function(config) {
+        assert.strictEqual(config.client, 'configServiceV2Client');
+        assert.strictEqual(config.method, 'listSinksStream');
+
+        assert.deepEqual(config.reqOpts, {
+          parent: 'projects/' + logging.projectId,
+          a: 'b',
+          c: 'd'
+        });
+
+        assert.deepEqual(config.gaxOpts, {
+          autoPaginate: undefined,
+          a: 'b',
+          c: 'd'
+        });
+
+        setImmediate(done);
+
+        return REQUEST_STREAM;
+      };
+
+      var stream = logging.getSinksStream(OPTIONS);
+      stream.emit('reading');
+    });
+
+    it('should convert results from request to Sink', function(done) {
+      var stream = logging.getSinksStream(OPTIONS);
+
+      var sinkInstance = {};
+
+      logging.sink = function(name) {
+        assert.strictEqual(name, RESULT.name);
+        return sinkInstance;
+      };
+
+      stream.on('data', function(sink) {
+        assert.strictEqual(sink, sinkInstance);
+        assert.strictEqual(sink.metadata, RESULT);
+        done();
+      });
+
+      stream.emit('reading');
+    });
+
+    it('should expose abort function', function(done) {
+      REQUEST_STREAM.abort = done;
+
+      var stream = logging.getSinksStream(OPTIONS);
+
+      stream.emit('reading');
+
+      stream.abort();
     });
   });
 
@@ -577,6 +781,225 @@ describe('Logging', function() {
       assert(log instanceof FakeLog);
       assert.strictEqual(log.calledWith_[0], logging);
       assert.strictEqual(log.calledWith_[1], NAME);
+    });
+  });
+
+  describe('request', function() {
+    var CONFIG = {
+      client: 'client',
+      method: 'method',
+      reqOpts: {
+        a: 'b',
+        c: 'd'
+      },
+      gaxOpts: {}
+    };
+
+    var PROJECT_ID = 'project-id';
+
+    beforeEach(function() {
+      logging.auth = {
+        getProjectId: function(callback) {
+          callback(null, PROJECT_ID);
+        }
+      };
+
+      logging.api[CONFIG.client] = {
+        [CONFIG.method]: util.noop
+      };
+    });
+
+    describe('prepareGaxRequest', function() {
+      it('should get the project ID', function(done) {
+        logging.auth.getProjectId = function() {
+          done();
+        };
+
+        logging.request(CONFIG, assert.ifError);
+      });
+
+      it('should return error if getting project ID failed', function(done) {
+        var error = new Error('Error.');
+
+        logging.auth.getProjectId = function(callback) {
+          callback(error);
+        };
+
+        logging.request(CONFIG, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should initiate and cache the client', function() {
+        var fakeClient = {
+          [CONFIG.method]: util.noop
+        };
+
+        v2Override = function(options) {
+          assert.strictEqual(options, logging.options);
+
+          return {
+            [CONFIG.client]: function(options) {
+              assert.strictEqual(options, logging.options);
+              return fakeClient;
+            }
+          };
+        };
+
+        logging.api = {};
+
+        logging.request(CONFIG, assert.ifError);
+
+        assert.strictEqual(logging.api[CONFIG.client], fakeClient);
+      });
+
+      it('should use the cached client', function(done) {
+        v2Override = function() {
+          done(new Error('Should not re-instantiate a GAX client.'));
+        };
+
+        logging.request(CONFIG);
+        done();
+      });
+
+      it('should replace the project ID token', function(done) {
+        var replacedReqOpts = {};
+
+        replaceProjectIdTokenOverride = function(reqOpts, projectId) {
+          assert.notStrictEqual(reqOpts, CONFIG.reqOpts);
+          assert.deepEqual(reqOpts, CONFIG.reqOpts);
+          assert.strictEqual(projectId, PROJECT_ID);
+
+          return replacedReqOpts;
+        };
+
+        logging.api[CONFIG.client][CONFIG.method] = {
+          bind: function(gaxClient, reqOpts) {
+            assert.strictEqual(reqOpts, replacedReqOpts);
+
+            setImmediate(done);
+
+            return util.noop;
+          }
+        };
+
+        logging.request(CONFIG, assert.ifError);
+      });
+    });
+
+    describe('makeRequestCallback', function() {
+      it('should prepare the request', function(done) {
+        logging.api[CONFIG.client][CONFIG.method] = {
+          bind: function(gaxClient, reqOpts, gaxOpts) {
+            assert.strictEqual(gaxClient, logging.api[CONFIG.client]);
+            assert.deepEqual(reqOpts, CONFIG.reqOpts);
+            assert.strictEqual(gaxOpts, CONFIG.gaxOpts);
+
+            setImmediate(done);
+
+            return util.noop;
+          }
+        };
+
+        logging.request(CONFIG, assert.ifError);
+      });
+
+      it('should execute callback with error', function(done) {
+        var error = new Error('Error.');
+
+        logging.api[CONFIG.client][CONFIG.method] = function() {
+          var callback = [].slice.call(arguments).pop();
+          callback(error);
+        };
+
+        logging.request(CONFIG, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should execute the request function', function() {
+        logging.api[CONFIG.client][CONFIG.method] = function(done) {
+          var callback = [].slice.call(arguments).pop();
+          callback(null, done); // so it ends the test
+        };
+
+        logging.request(CONFIG, assert.ifError);
+      });
+    });
+
+    describe('makeRequestStream', function() {
+      var GAX_STREAM;
+
+      beforeEach(function() {
+        GAX_STREAM = through();
+
+        logging.api[CONFIG.client][CONFIG.method] = {
+          bind: function() {
+            return function() {
+              return GAX_STREAM;
+            };
+          }
+        };
+      });
+
+      it('should expose an abort function', function(done) {
+        GAX_STREAM.cancel = done;
+
+        var requestStream = logging.request(CONFIG);
+        requestStream.emit('reading');
+        requestStream.abort();
+      });
+
+      it('should prepare the request once reading', function(done) {
+        logging.api[CONFIG.client][CONFIG.method] = {
+          bind: function(gaxClient, reqOpts, gaxOpts) {
+            assert.strictEqual(gaxClient, logging.api[CONFIG.client]);
+            assert.deepEqual(reqOpts, CONFIG.reqOpts);
+            assert.strictEqual(gaxOpts, CONFIG.gaxOpts);
+
+            setImmediate(done);
+
+            return function() {
+              return GAX_STREAM;
+            };
+          }
+        };
+
+        var requestStream = logging.request(CONFIG);
+        requestStream.emit('reading');
+      });
+
+      it('should destroy the stream with prepare error', function(done) {
+        var error = new Error('Error.');
+
+        logging.auth.getProjectId = function(callback) {
+          callback(error);
+        };
+
+        var requestStream = logging.request(CONFIG);
+        requestStream.emit('reading');
+
+        requestStream.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should destroy the stream with GAX error', function(done) {
+        var error = new Error('Error.');
+
+        var requestStream = logging.request(CONFIG);
+        requestStream.emit('reading');
+
+        requestStream.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+
+        GAX_STREAM.emit('error', error);
+      });
     });
   });
 

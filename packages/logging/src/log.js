@@ -23,10 +23,8 @@
 var arrify = require('arrify');
 var async = require('async');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
-var util = require('util');
 
 /**
  * @type {module:logging/entry}
@@ -68,55 +66,12 @@ function Log(logging, name, options) {
   options = options || {};
 
   this.formattedName_ = Log.formatName_(logging.projectId, name);
-  this.name = this.formattedName_.split('/').pop();
-  this.removeCircular_ = !!options.removeCircular;
-
+  this.removeCircular_ = options.removeCircular === true;
   this.metadata_ = new Metadata(logging);
 
-  var methods = {
-    /**
-     * Delete the log.
-     *
-     * @resource [projects.logs.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.logs/delete}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * log.delete(function(err, apiResponse) {
-     *   if (!err) {
-     *     // The log was deleted.
-     *   }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * log.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: {
-      protoOpts: {
-        service: 'LoggingServiceV2',
-        method: 'deleteLog'
-      },
-      reqOpts: {
-        logName: this.formattedName_
-      }
-    }
-  };
-
-  commonGrpc.ServiceObject.call(this, {
-    parent: logging,
-    id: this.name,
-    methods: methods
-  });
+  this.logging = logging;
+  this.name = this.formattedName_.split('/').pop();
 }
-
-util.inherits(Log, commonGrpc.ServiceObject);
 
 /**
  * Return an array of log entries with the desired severity assigned.
@@ -232,6 +187,50 @@ Log.prototype.debug = function(entry, options, callback) {
 };
 
 /**
+ * Delete the log.
+ *
+ * @resource [projects.logs.delete API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.logs/delete}
+ *
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * log.delete(function(err, apiResponse) {
+ *   if (!err) {
+ *     // The log was deleted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * log.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Log.prototype.delete = function(gaxOptions, callback) {
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
+
+  var reqOpts = {
+    logName: this.formattedName_
+  };
+
+  this.logging.request({
+    client: 'loggingServiceV2Client',
+    method: 'deleteLog',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, callback);
+};
+
+/**
  * Write a log entry with a severity of "EMERGENCY".
  *
  * This is a simple wrapper around {module:logging/log#write}. All arguments are
@@ -311,7 +310,7 @@ Log.prototype.entry = function(metadata, data) {
     logName: this.formattedName_
   });
 
-  return this.parent.entry(metadata, data);
+  return this.logging.entry(metadata, data);
 };
 
 /**
@@ -401,7 +400,7 @@ Log.prototype.getEntries = function(options, callback) {
     filter: 'logName="' + this.formattedName_ + '"'
   }, options);
 
-  return this.parent.getEntries(options, callback);
+  return this.logging.getEntries(options, callback);
 };
 
 /**
@@ -437,7 +436,7 @@ Log.prototype.getEntriesStream = function(options) {
     filter: 'logName="' + this.formattedName_ + '"'
   }, options);
 
-  return this.parent.getEntriesStream(options);
+  return this.logging.getEntriesStream(options);
 };
 
 /**
@@ -523,6 +522,8 @@ Log.prototype.warning = function(entry, options, callback) {
  * @param {module:logging/entry|module:logging/entry[]} entry - A log entry, or
  *     array of entries, to write.
  * @param {object=} options - Configuration object.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {object[]} options.labels - Labels to set on the log.
  * @param {object} options.resource - A default monitored resource for entries
  *     where one isn't specified.
@@ -592,25 +593,22 @@ Log.prototype.write = function(entry, options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'LoggingServiceV2',
-    method: 'writeLogEntries'
-  };
-
-  var reqOpts = extend({
-    logName: this.formattedName_
-  }, options);
-
-  var entries = arrify(entry);
-
-  this.decorateEntries_(entries, function(err, decoratedEntries) {
+  this.decorateEntries_(arrify(entry), function(err, decoratedEntries) {
     // Ignore errors (the API will speak up if it has an issue).
 
-    reqOpts.entries = decoratedEntries;
+    var reqOpts = extend({
+      logName: self.formattedName_,
+      entries: decoratedEntries
+    }, options);
 
-    self.request(protoOpts, reqOpts, function(err, resp) {
-      callback(err, resp);
-    });
+    delete reqOpts.gaxOptions;
+
+    self.logging.request({
+      client: 'loggingServiceV2Client',
+      method: 'writeLogEntries',
+      reqOpts: reqOpts,
+      gaxOpts: options.gaxOptions
+    }, callback);
   });
 };
 

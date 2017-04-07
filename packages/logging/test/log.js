@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
@@ -41,11 +40,6 @@ function FakeMetadata() {
   this.calledWith_ = arguments;
 }
 
-function FakeGrpcServiceObject() {
-  this.calledWith_ = arguments;
-  this.parent = {};
-}
-
 describe('Log', function() {
   var Log;
   var log;
@@ -60,11 +54,7 @@ describe('Log', function() {
     LOG_NAME_ENCODED
    ].join('/');
 
-  var LOGGING = {
-    projectId: PROJECT_ID,
-    entry: util.noop,
-    request: util.noop
-  };
+  var LOGGING;
 
   var assignSeverityToEntriesOverride = null;
 
@@ -72,9 +62,6 @@ describe('Log', function() {
     Log = proxyquire('../src/log.js', {
       '@google-cloud/common': {
         util: fakeUtil
-      },
-      '@google-cloud/common-grpc': {
-        ServiceObject: FakeGrpcServiceObject,
       },
       './entry.js': Entry,
       './metadata.js': FakeMetadata
@@ -88,7 +75,13 @@ describe('Log', function() {
 
   beforeEach(function() {
     assignSeverityToEntriesOverride = null;
-    extend(FakeGrpcServiceObject, GrpcServiceObject);
+
+    LOGGING = {
+      projectId: PROJECT_ID,
+      entry: util.noop,
+      request: util.noop
+    };
+
     log = new Log(LOGGING, LOG_NAME_FORMATTED);
   });
 
@@ -124,30 +117,18 @@ describe('Log', function() {
       assert.strictEqual(log.metadata_.calledWith_[0], LOGGING);
     });
 
-    it('should inherit from GrpcServiceObject', function() {
-      assert(log instanceof FakeGrpcServiceObject);
-
-      var calledWith = log.calledWith_[0];
-
-      assert.strictEqual(calledWith.parent, LOGGING);
-      assert.strictEqual(calledWith.id, LOG_NAME_ENCODED);
-      assert.deepEqual(calledWith.methods, {
-        delete: {
-          protoOpts: {
-            service: 'LoggingServiceV2',
-            method: 'deleteLog'
-          },
-          reqOpts: {
-            logName: log.formattedName_
-          }
-        }
-      });
-    });
-
     it('should accept and localize options.removeCircular', function() {
       var options = { removeCircular: true };
       var log = new Log(LOGGING, LOG_NAME_FORMATTED, options);
       assert.strictEqual(log.removeCircular_, true);
+    });
+
+    it('should localize the Logging instance', function() {
+      assert.strictEqual(log.logging, LOGGING);
+    });
+
+    it('should localize the name', function() {
+      assert.strictEqual(log.name, LOG_NAME_FORMATTED.split('/').pop());
     });
   });
 
@@ -219,6 +200,36 @@ describe('Log', function() {
     });
   });
 
+  describe('delete', function() {
+    it('should accept gaxOptions', function(done) {
+      log.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'deleteLog');
+
+        assert.deepEqual(config.reqOpts, {
+          logName: log.formattedName_
+        });
+
+        assert.deepEqual(config.gaxOpts, {});
+
+        callback(); // done()
+      };
+
+      log.delete(done);
+    });
+
+    it('should accept gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      log.logging.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      log.delete(gaxOptions, assert.ifError);
+    });
+  });
+
   describe('entry', function() {
     it('should return an entry from Logging', function() {
       var metadata = {
@@ -228,7 +239,7 @@ describe('Log', function() {
 
       var entryObject = {};
 
-      log.parent.entry = function(metadata_, data_) {
+      log.logging.entry = function(metadata_, data_) {
         assert.deepEqual(metadata_, extend({}, metadata, {
           logName: log.formattedName_
         }));
@@ -241,7 +252,7 @@ describe('Log', function() {
     });
 
     it('should attach the log name to the entry', function(done) {
-      log.parent.entry = function(metadata) {
+      log.logging.entry = function(metadata) {
         assert.strictEqual(metadata.logName, log.formattedName_);
         done();
       };
@@ -252,7 +263,7 @@ describe('Log', function() {
     it('should assume one argument means data', function(done) {
       var data = {};
 
-      log.parent.entry = function(metadata, data_) {
+      log.logging.entry = function(metadata, data_) {
         assert.strictEqual(data_, data);
         done();
       };
@@ -267,7 +278,7 @@ describe('Log', function() {
     };
 
     it('should call Logging getEntries with defaults', function(done) {
-      log.parent.getEntries = function(options, callback) {
+      log.logging.getEntries = function(options, callback) {
         assert.deepEqual(options, EXPECTED_OPTIONS);
         callback(); // done()
       };
@@ -281,7 +292,7 @@ describe('Log', function() {
         filter: 'custom filter'
       };
 
-      log.parent.getEntries = function(options_, callback) {
+      log.logging.getEntries = function(options_, callback) {
         assert.deepEqual(options_, extend({}, EXPECTED_OPTIONS, options));
         callback(); // done()
       };
@@ -297,7 +308,7 @@ describe('Log', function() {
     };
 
     it('should call Logging getEntriesStream with defaults', function(done) {
-      log.parent.getEntriesStream = function(options) {
+      log.logging.getEntriesStream = function(options) {
         assert.deepEqual(options, EXPECTED_OPTIONS);
         setImmediate(done);
         return fakeStream;
@@ -313,7 +324,7 @@ describe('Log', function() {
         filter: 'custom filter'
       };
 
-      log.parent.getEntriesStream = function(options_) {
+      log.logging.getEntriesStream = function(options_) {
         assert.deepEqual(options_, extend({}, EXPECTED_OPTIONS, options));
         setImmediate(done);
         return fakeStream;
@@ -337,17 +348,22 @@ describe('Log', function() {
     });
 
     it('should make the correct API request', function(done) {
-      log.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'LoggingServiceV2');
-        assert.strictEqual(protoOpts.method, 'writeLogEntries');
+      log.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'writeLogEntries');
 
-        assert.strictEqual(reqOpts.logName, log.formattedName_);
-        assert.strictEqual(reqOpts.entries[0], ENTRY);
+        assert.deepEqual(config.reqOpts, {
+          logName: log.formattedName_,
+          entries: [ENTRY],
+          resource: {}
+        });
 
-        done();
+        assert.strictEqual(config.gaxOpts, undefined);
+
+        callback();
       };
 
-      log.write(ENTRY, OPTIONS, assert.ifError);
+      log.write(ENTRY, OPTIONS, done);
     });
 
     it('should arrify & decorate the entries', function(done) {
@@ -358,33 +374,16 @@ describe('Log', function() {
         callback(null, decoratedEntries);
       };
 
-      log.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.entries, decoratedEntries);
+      log.logging.request = function(config) {
+        assert.strictEqual(config.reqOpts.entries, decoratedEntries);
         done();
       };
 
       log.write(ENTRY, OPTIONS, assert.ifError);
     });
 
-    it('should exec callback with only error and API response', function(done) {
-      var args = [1, 2, 3, 4];
-
-      log.request = function(protoOpts, reqOpts, callback) {
-        callback.apply(null, args);
-      };
-
-      log.write(ENTRY, OPTIONS, function() {
-        assert.strictEqual(arguments.length, 2);
-
-        assert.strictEqual(arguments[0], args[0]);
-        assert.strictEqual(arguments[1], args[1]);
-
-        done();
-      });
-    });
-
     it('should not require options', function(done) {
-      log.request = function(protoOpts, reqOpts, callback) {
+      log.logging.request = function(config, callback) {
         callback(); // done()
       };
 

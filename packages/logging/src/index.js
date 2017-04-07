@@ -22,12 +22,15 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
-var googleProtoFiles = require('google-proto-files');
+var googleAuth = require('google-auto-auth');
 var is = require('is');
-var util = require('util');
+var pumpify = require('pumpify');
+var streamEvents = require('stream-events');
+var through = require('through2');
+
+var v2 = require('./v2');
 
 /**
  * @type {module:logging/entry}
@@ -66,25 +69,15 @@ function Logging(options) {
     return new Logging(options);
   }
 
-  var config = {
-    baseUrl: 'logging.googleapis.com',
-    service: 'logging',
-    apiVersion: 'v2',
-    protoServices: {
-      ConfigServiceV2:
-        googleProtoFiles('logging', 'v2', 'logging_config.proto'),
-      LoggingServiceV2: googleProtoFiles.logging.v2
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
-  };
+  var options_ = extend({
+    scopes: v2.ALL_SCOPES
+  }, options);
 
-  commonGrpc.Service.call(this, config, options);
+  this.api = {};
+  this.auth = googleAuth(options);
+  this.options = options_;
+  this.projectId = options.projectId || '{{projectId}}';
 }
-
-util.inherits(Logging, commonGrpc.Service);
 
 // jscs:disable maximumLineLength
 /**
@@ -100,6 +93,8 @@ util.inherits(Logging, commonGrpc.Service);
  * @param {string} name - Name of the sink.
  * @param {object} config - See a
  *     [Sink resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.sinks#LogSink).
+ * @param {object} config.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {module:storage/bucket|module:bigquery/dataset|module:pubsub/topic} config.destination -
  *     The destination. The proper ACL scopes will be granted to the provided
  *     destination.
@@ -161,17 +156,19 @@ Logging.prototype.createSink = function(name, config, callback) {
     return;
   }
 
-  var protoOpts = {
-    service: 'ConfigServiceV2',
-    method: 'createSink'
-  };
-
   var reqOpts = {
     parent: 'projects/' + this.projectId,
     sink: extend({}, config, { name: name })
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  delete reqOpts.sink.gaxOptions;
+
+  this.request({
+    client: 'configServiceV2Client',
+    method: 'createSink',
+    reqOpts: reqOpts,
+    gaxOpts: config.gaxOptions
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -241,8 +238,8 @@ Logging.prototype.entry = function(resource, data) {
  * @param {string} options.filter - An
  *     [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters).
  *     An empty filter matches all log entries.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {string} options.orderBy - How the results should be sorted,
  *     `timestamp` (oldest first) and `timestamp desc` (newest first,
  *     **default**).
@@ -288,34 +285,33 @@ Logging.prototype.getEntries = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'LoggingServiceV2',
-    method: 'listLogEntries'
-  };
-
   var reqOpts = extend({
     orderBy: 'timestamp desc'
   }, options);
-  reqOpts.projectIds = arrify(reqOpts.projectIds);
-  reqOpts.projectIds.push(this.projectId);
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  reqOpts.resourceNames = arrify(reqOpts.resourceNames);
+  reqOpts.resourceNames.push('projects/' + this.projectId);
+
+  delete reqOpts.autoPaginate;
+  delete reqOpts.gaxOptions;
+
+  var gaxOptions = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOptions);
+
+  this.request({
+    client: 'loggingServiceV2Client',
+    method: 'listLogEntries',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function() {
+    var entries = arguments[1];
+
+    if (entries) {
+      arguments[1] = entries.map(Entry.fromApiResponse_);
     }
 
-    var nextQuery = null;
-
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, reqOpts, {
-        pageToken: resp.nextPageToken
-      });
-    }
-
-    var entries = arrify(resp.entries).map(Entry.fromApiResponse_);
-
-    callback(null, entries, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -347,7 +343,49 @@ Logging.prototype.getEntries = function(options, callback) {
  *     this.end();
  *   });
  */
-Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
+Logging.prototype.getEntriesStream = function(options) {
+  var self = this;
+
+  var requestStream;
+
+  var userStream = streamEvents(pumpify.obj());
+
+  userStream.abort = function() {
+    if (requestStream) {
+      requestStream.abort();
+    }
+  };
+
+  var toEntryStream = through.obj(function(entry, _, next) {
+    next(null, Entry.fromApiResponse_(entry));
+  });
+
+  userStream.once('reading', function() {
+    var reqOpts = extend({
+      orderBy: 'timestamp desc'
+    }, options);
+    reqOpts.resourceNames = arrify(reqOpts.resourceNames);
+    reqOpts.resourceNames.push('projects/' + self.projectId);
+
+    delete reqOpts.autoPaginate;
+    delete reqOpts.gaxOptions;
+
+    var gaxOptions = extend({
+      autoPaginate: options.autoPaginate
+    }, options.gaxOptions);
+
+    requestStream = self.request({
+      client: 'loggingServiceV2Client',
+      method: 'listLogEntriesStream',
+      reqOpts: reqOpts,
+      gaxOpts: gaxOptions
+    });
+
+    userStream.setPipeline(requestStream, toEntryStream);
+  });
+
+  return userStream;
+};
 
 /**
  * Get the sinks associated with this project.
@@ -357,8 +395,8 @@ Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:logging/sink[]} callback.sinks - Sink objects.
@@ -384,36 +422,34 @@ Logging.prototype.getSinks = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'ConfigServiceV2',
-    method: 'listSinks'
-  };
-
   var reqOpts = extend({}, options, {
     parent: 'projects/' + this.projectId
   });
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  delete reqOpts.autoPaginate;
+  delete reqOpts.gaxOptions;
 
-    var nextQuery = null;
+  var gaxOptions = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOptions);
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+  this.request({
+    client: 'configServiceV2Client',
+    method: 'listSinks',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function() {
+    var sinks = arguments[1];
+
+    if (sinks) {
+      arguments[1] = sinks.map(function(sink) {
+        var sinkInstance = self.sink(sink.name);
+        sinkInstance.metadata = sink;
+        return sinkInstance;
       });
     }
 
-    var sinks = arrify(resp.sinks).map(function(sink) {
-      var sinkInstance = self.sink(sink.name);
-      sinkInstance.metadata = sink;
-      return sinkInstance;
-    });
-
-    callback(null, sinks, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -444,7 +480,49 @@ Logging.prototype.getSinks = function(options, callback) {
  *     this.end();
  *   });
  */
-Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
+Logging.prototype.getSinksStream = function(options) {
+  var self = this;
+
+  options = options || {};
+
+  var requestStream;
+  var userStream = streamEvents(pumpify.obj());
+
+  userStream.abort = function() {
+    if (requestStream) {
+      requestStream.abort();
+    }
+  };
+
+  var toSinkStream = through.obj(function(sink, _, next) {
+    var sinkInstance = self.sink(sink.name);
+    sinkInstance.metadata = sink;
+    next(null, sinkInstance);
+  });
+
+  userStream.once('reading', function() {
+    var reqOpts = extend({}, options, {
+      parent: 'projects/' + self.projectId
+    });
+
+    delete reqOpts.gaxOptions;
+
+    var gaxOptions = extend({
+      autoPaginate: options.autoPaginate
+    }, options.gaxOptions);
+
+    requestStream = self.request({
+      client: 'configServiceV2Client',
+      method: 'listSinksStream',
+      reqOpts: reqOpts,
+      gaxOpts: gaxOptions
+    });
+
+    userStream.setPipeline(requestStream, toSinkStream);
+  });
+
+  return userStream;
+};
 
 /**
  * Get a reference to a Stackdriver Logging log.
@@ -477,6 +555,95 @@ Logging.prototype.log = function(name, options) {
  */
 Logging.prototype.sink = function(name) {
   return new Sink(this, name);
+};
+
+/**
+ * Funnel all API requests through this method, to be sure we have a project ID.
+ *
+ * @param {object} config - Configuration object.
+ * @param {object} config.gaxOpts - GAX options.
+ * @param {function} config.method - The gax method to call.
+ * @param {object} config.reqOpts - Request options.
+ * @param {function=} callback - The callback function.
+ */
+Logging.prototype.request = function(config, callback) {
+  var self = this;
+  var isStreamMode = !callback;
+
+  var gaxStream;
+  var stream;
+
+  if (isStreamMode) {
+    stream = streamEvents(through.obj());
+
+    stream.abort = function() {
+      if (gaxStream && gaxStream.cancel) {
+        gaxStream.cancel();
+      }
+    };
+
+    stream.once('reading', makeRequestStream);
+  } else {
+    makeRequestCallback();
+  }
+
+  function prepareGaxRequest(callback) {
+    self.auth.getProjectId(function(err, projectId) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var gaxClient = self.api[config.client];
+
+      if (!gaxClient) {
+        // Lazily instantiate client.
+        gaxClient = v2(self.options)[config.client](self.options);
+        self.api[config.client] = gaxClient;
+      }
+
+      var reqOpts = extend(true, {}, config.reqOpts);
+      reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+
+      var requestFn = gaxClient[config.method].bind(
+        gaxClient,
+        reqOpts,
+        config.gaxOpts
+      );
+
+      callback(null, requestFn);
+    });
+  }
+
+  function makeRequestCallback() {
+    prepareGaxRequest(function(err, requestFn) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      requestFn(callback);
+    });
+  }
+
+  function makeRequestStream() {
+    prepareGaxRequest(function(err, requestFn) {
+      if (err) {
+        stream.destroy(err);
+        return;
+      }
+
+      gaxStream = requestFn();
+
+      gaxStream
+        .on('error', function(err) {
+          stream.destroy(err);
+        })
+        .pipe(stream);
+    });
+  }
+
+  return stream;
 };
 
 /**
@@ -603,7 +770,12 @@ common.paginator.extend(Logging, ['getEntries', 'getSinks']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Logging, {
-  exclude: ['entry', 'log', 'sink']
+  exclude: [
+    'entry',
+    'log',
+    'request',
+    'sink'
+  ]
 });
 
 Logging.Entry = Entry;
@@ -612,4 +784,4 @@ Logging.Logging = Logging;
 Logging.Sink = Sink;
 
 module.exports = Logging;
-module.exports.v2 = require('./v2');
+module.exports.v2 = v2;

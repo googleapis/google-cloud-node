@@ -18,13 +18,13 @@
 
 var assert = require('assert');
 var async = require('async');
-var BigQuery = require('@google-cloud/bigquery');
+var bigqueryLibrary = require('@google-cloud/bigquery');
 var exec = require('methmeth');
 var extend = require('extend');
 var is = require('is');
 var prop = require('propprop');
-var PubSub = require('@google-cloud/pubsub');
-var Storage = require('@google-cloud/storage');
+var pubsubLibrary = require('@google-cloud/pubsub');
+var storageLibrary = require('@google-cloud/storage');
 var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
@@ -34,10 +34,11 @@ describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';
   var WRITE_CONSISTENCY_DELAY_MS = 90000;
 
+  var bigQuery = bigqueryLibrary(env);
+  var pubsub = pubsubLibrary(env);
+  var storage = storageLibrary(env);
+
   var logging = new Logging(env);
-  var bigQuery = new BigQuery(env);
-  var pubsub = new PubSub(env);
-  var storage = new Storage(env);
 
   // Create the possible destinations for sinks that we will create.
   var bucket = storage.bucket(generateName());
@@ -104,7 +105,7 @@ describe('Logging', function() {
         }
 
         objects = objects.filter(function(object) {
-          return object.id.indexOf(TESTS_PREFIX) === 0;
+          return (object.name || object.id).indexOf(TESTS_PREFIX) === 0;
         });
 
         async.each(objects, exec('delete'), callback);
@@ -277,7 +278,10 @@ describe('Logging', function() {
     };
 
     it('should list log entries', function(done) {
-      logging.getEntries({ pageSize: 1 }, function(err, entries) {
+      logging.getEntries({
+        autoPaginate: false,
+        pageSize: 1
+      }, function(err, entries) {
         assert.ifError(err);
         assert.strictEqual(entries.length, 1);
         done();
@@ -285,12 +289,15 @@ describe('Logging', function() {
     });
 
     it('should list log entries as a stream', function(done) {
-      logging.getEntriesStream({ pageSize: 1 })
+      logging.getEntriesStream({
+          autoPaginate: false,
+          pageSize: 1
+        })
         .on('error', done)
         .once('data', function() {
           this.end();
-          done();
-        });
+        })
+        .on('end', done);
     });
 
     describe('log-specific entries', function() {
@@ -299,7 +306,10 @@ describe('Logging', function() {
       });
 
       it('should list log entries', function(done) {
-        log.getEntries({ pageSize: 1 }, function(err, entries) {
+        log.getEntries({
+          autoPaginate: false,
+          pageSize: 1
+        }, function(err, entries) {
           assert.ifError(err);
           assert.strictEqual(entries.length, 1);
           done();
@@ -307,7 +317,10 @@ describe('Logging', function() {
       });
 
       it('should list log entries as a stream', function(done) {
-        log.getEntriesStream({ pageSize: 1 })
+        log.getEntriesStream({
+            autoPaginate: false,
+            pageSize: 1
+          })
           .on('error', done)
           .once('data', function() {
             this.end();
@@ -326,6 +339,7 @@ describe('Logging', function() {
 
         setTimeout(function() {
           log.getEntries({
+            autoPaginate: false,
             pageSize: logEntries.length
           }, function(err, entries) {
             assert.ifError(err);
@@ -365,7 +379,10 @@ describe('Logging', function() {
           assert.ifError(err);
 
           setTimeout(function() {
-            log.getEntries({ pageSize: 3 }, function(err, entries) {
+            log.getEntries({
+              autoPaginate: false,
+              pageSize: 3
+            }, function(err, entries) {
               assert.ifError(err);
               assert.deepEqual(entries.map(prop('data')), [ '3', '2', '1' ]);
               done();
@@ -383,7 +400,10 @@ describe('Logging', function() {
       });
 
       setTimeout(function() {
-        log.getEntries({ pageSize: messages.length }, function(err, entries) {
+        log.getEntries({
+          autoPaginate: false,
+          pageSize: messages.length
+        }, function(err, entries) {
           assert.ifError(err);
           assert.deepEqual(entries.reverse().map(prop('data')), messages);
           done();
@@ -403,7 +423,10 @@ describe('Logging', function() {
         assert.ifError(err);
 
         setTimeout(function() {
-          log.getEntries({ pageSize: 1 }, function(err, entries) {
+          log.getEntries({
+            autoPaginate: false,
+            pageSize: 1
+          }, function(err, entries) {
             assert.ifError(err);
 
             var entry = entries[0];
@@ -435,7 +458,10 @@ describe('Logging', function() {
         assert.ifError(err);
 
         setTimeout(function() {
-          log.getEntries({ pageSize: 1 }, function(err, entries) {
+          log.getEntries({
+            autoPaginate: false,
+            pageSize: 1
+          }, function(err, entries) {
             assert.ifError(err);
 
             var entry = entries[0];
@@ -457,7 +483,10 @@ describe('Logging', function() {
         assert.ifError(err);
 
         setTimeout(function() {
-          log.getEntries({ pageSize: 1 }, function(err, entries) {
+          log.getEntries({
+            autoPaginate: false,
+            pageSize: 1
+          }, function(err, entries) {
             assert.ifError(err);
 
             var entry = entries[0];
