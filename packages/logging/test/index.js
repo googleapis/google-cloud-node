@@ -557,7 +557,9 @@ describe('Logging', function() {
           c: 'd'
         });
 
-        done();
+        setImmediate(done);
+
+        return REQUEST_STREAM;
       };
 
       var stream = logging.getEntriesStream(OPTIONS);
