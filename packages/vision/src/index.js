@@ -1719,7 +1719,7 @@ Vision.findImages_ = function(images, callback) {
       }
     ]);
     return;
-  };
+  }
 
   var MAX_PARALLEL_LIMIT = 5;
   images = arrify(images);
