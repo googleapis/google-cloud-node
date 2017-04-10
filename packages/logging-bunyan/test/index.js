@@ -234,6 +234,41 @@ describe('logging-bunyan', function() {
     });
   });
 
+  describe('_writev', function() {
+    var RECORDS = [ RECORD, RECORD ];
+    beforeEach(function() {
+      fakeLogInstance.entry = function() {};
+      fakeLogInstance.write = function() {};
+    });
+
+    it('should format the records', function(done) {
+      var numFormatted = 0;
+      loggingBunyan.formatEntry_ = function(record) {
+        assert.strictEqual(record, RECORD);
+        if (++numFormatted === RECORDS.length) {
+          done();
+        }
+      };
+
+      loggingBunyan._writev(RECORDS, assert.ifError);
+    });
+
+    it('should write the records to the log instance', function(done) {
+      var entry = {};
+
+      loggingBunyan.log_.entry = function() {
+        return entry;
+      };
+
+      loggingBunyan.log_.write = function(entries, callback) {
+        assert.deepStrictEqual(entries, [entry, entry]);
+        callback(); // done()
+      };
+
+      loggingBunyan._writev(RECORDS, done);
+    });
+  });
+
   describe('BUNYAN_TO_STACKDRIVER', function() {
     it('should correctly map to Stackdriver Logging levels', function() {
       assert.deepEqual(LoggingBunyan.BUNYAN_TO_STACKDRIVER, {

@@ -187,7 +187,23 @@ LoggingBunyan.prototype._write = function(record, encoding, callback) {
   this.log_.write(entry, callback);
 };
 
-// TODO(ofrobots): implement _writev as well.
+/**
+ * Relay an array of log entries to the logging agent. This is called by bunyan
+ * through Writable#write.
+ *
+ * @param {object[]} records - Array of Bunyan log records.
+ *
+ * @private
+ */
+LoggingBunyan.prototype._writev = function(records, callback) {
+  var self = this;
+
+  var entries = records.map(function(record) {
+    return self.formatEntry_(record);
+  });
+
+  this.log_.write(entries, callback);
+};
 
 module.exports = LoggingBunyan;
 module.exports.BUNYAN_TO_STACKDRIVER = BUNYAN_TO_STACKDRIVER;
