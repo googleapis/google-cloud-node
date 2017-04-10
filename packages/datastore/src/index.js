@@ -22,10 +22,12 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
+var extend = require('extend');
+var googleAuth = require('google-auto-auth');
 var is = require('is');
-var modelo = require('modelo');
-var path = require('path');
+var util = require('util');
+
+var v1 = require('./v1');
 
 /**
  * @type {module:datastore/request}
@@ -301,34 +303,27 @@ function Datastore(options) {
     return new Datastore(options);
   }
 
-  this.defaultBaseUrl_ = 'datastore.googleapis.com';
-  this.determineBaseUrl_(options.apiEndpoint);
+  var options_ = extend({
+    scopes: v1.ALL_SCOPES
+  }, options);
+
+  this.api = {};
+  this.auth = googleAuth(options_);
+  this.datastore = this;
+  this.options = options_;
 
   this.namespace = options.namespace;
-  this.projectId = process.env.DATASTORE_PROJECT_ID || options.projectId;
+  this.projectId = process.env.DATASTORE_PROJECT_ID ||
+    options.projectId ||
+    '{{projectId}}';
 
-  var config = {
-    projectIdRequired: false,
-    baseUrl: this.baseUrl_,
-    customEndpoint: this.customEndpoint_,
-    protosDir: path.resolve(__dirname, '../protos'),
-    protoServices: {
-      Datastore: {
-        path: 'google/datastore/v1/datastore.proto',
-        service: 'datastore.v1'
-      }
-    },
-    scopes: ['https://www.googleapis.com/auth/datastore'],
-    packageJson: require('../package.json'),
-    grpcMetadata: {
-      'google-cloud-resource-prefix': 'projects/' + this.projectId
-    }
-  };
-
-  commonGrpc.Service.call(this, config, options);
+  // @TODO
+  // 'google-cloud-resource-prefix': 'projects/' + this.projectId
+  // this.defaultBaseUrl_ = 'datastore.googleapis.com';
+  // this.determineBaseUrl_(options.apiEndpoint);
 }
 
-modelo.inherits(Datastore, DatastoreRequest, commonGrpc.Service);
+util.inherits(Datastore, DatastoreRequest);
 
 /**
  * Helper function to get a Datastore Double object.
@@ -551,4 +546,4 @@ Datastore.Query = Query;
 Datastore.Transaction = Transaction;
 
 module.exports = Datastore;
-module.exports.v1 = require('./v1');
+module.exports.v1 = v1;
