@@ -973,7 +973,7 @@ describe('Logging', function() {
         var returnValue = logging.request(CONFIG);
         returnValue.emit('reading');
         delete global.GCLOUD_SANDBOX_ENV;
-        
+
         assert(returnValue instanceof require('stream'));
         done();
       });
