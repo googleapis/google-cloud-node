@@ -56,7 +56,7 @@ function FakeTransaction() {
 
 function FakeV1() {}
 
-describe.only('Datastore', function() {
+describe('Datastore', function() {
   var Datastore;
   var datastore;
 
@@ -131,6 +131,10 @@ describe.only('Datastore', function() {
 
       var datastore = new Datastore({});
       assert.strictEqual(datastore.auth, fakeGoogleAutoAuthInstance);
+    });
+
+    it('should alias itself to the datastore property', function() {
+      assert.strictEqual(datastore.datastore, datastore);
     });
 
     it('should localize the options', function() {
