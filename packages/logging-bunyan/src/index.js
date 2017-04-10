@@ -167,7 +167,8 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
 
   var entryMetadata = {
     resource: this.resource_,
-    timestamp: record.time
+    timestamp: record.time,
+    severity: BUNYAN_TO_STACKDRIVER[record.level]
   };
 
   return this.log_.entry(entryMetadata, record);
@@ -183,8 +184,7 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
  */
 LoggingBunyan.prototype._write = function(record, encoding, callback) {
   var entry = this.formatEntry_(record);
-  var level = BUNYAN_TO_STACKDRIVER[record.level];
-  this.log_[level](entry, callback);
+  this.log_.write(entry, callback);
 };
 
 // TODO(ofrobots): implement _writev as well.

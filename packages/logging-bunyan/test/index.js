@@ -140,7 +140,8 @@ describe('logging-bunyan', function() {
       loggingBunyan.log_.entry = function(entryMetadata, record) {
         assert.deepEqual(entryMetadata, {
           resource: loggingBunyan.resource_,
-          timestamp: RECORD.time
+          timestamp: RECORD.time,
+          severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level]
         });
         assert.deepStrictEqual(record, RECORD);
         done();
@@ -203,11 +204,9 @@ describe('logging-bunyan', function() {
   });
 
   describe('_write', function() {
-    var STACKDRIVER_LEVEL = 'info';
-
     beforeEach(function() {
       fakeLogInstance.entry = function() {};
-      loggingBunyan.log_[STACKDRIVER_LEVEL] = function() {};
+      fakeLogInstance.write = function() {};
     });
 
     it('should format the record', function(done) {
@@ -219,18 +218,15 @@ describe('logging-bunyan', function() {
       loggingBunyan._write(RECORD, '', assert.ifError);
     });
 
-    it('should write to the correct log', function(done) {
-      var customLevel = 'custom-level';
+    it('should write the record to the log instance', function(done) {
       var entry = {};
 
       loggingBunyan.log_.entry = function() {
         return entry;
       };
 
-      LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level] = customLevel;
-
-      loggingBunyan.log_[customLevel] = function(entry_, callback) {
-        assert.strictEqual(entry_, entry);
+      loggingBunyan.log_.write = function(entries, callback) {
+        assert.strictEqual(entries, entry);
         callback(); // done()
       };
 
