@@ -239,6 +239,7 @@ Module.prototype.runSystemTests = function() {
   var modulesExcludedFromSystemTests = [
     'common',
     'common-grpc',
+    'error-reporting',
     'monitoring'
   ];
 
