@@ -111,7 +111,9 @@ DatastoreRequest.prepareEntityObject_ = function(obj) {
  * Generate IDs without creating entities.
  *
  * @param {Key} incompleteKey - The key object to complete.
- * @param {number} n - How many IDs to generate.
+ * @param {number|object} options - Either the number of IDs to allocate or
+ *     an options object for further customization of the request.
+ * @param {number} options.allocations - How many IDs to allocate.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.keys - The generated IDs
@@ -179,14 +181,13 @@ DatastoreRequest.prototype.allocateIds = function(key, options, callback) {
 
   if (is.number(options)) {
     options = {
-      numIncompleteKeys: options
+      allocations: options
     };
   }
 
   var incompleteKeys = [];
-  for (var i = 0; i < options.numIncompleteKeys; i++) {
-    incompleteKeys.push(entity.keyToKeyProto(key));
-  }
+  incompleteKeys.length = options.allocations;
+  incompleteKeys.fill(entity.keyToKeyProto(key));
 
   this.request_({
     client: 'datastoreClient',
@@ -201,7 +202,7 @@ DatastoreRequest.prototype.allocateIds = function(key, options, callback) {
       return;
     }
 
-    var keys = (resp.keys || []).map(entity.keyFromKeyProto);
+    var keys = arrify(resp.keys).map(entity.keyFromKeyProto);
 
     callback(null, keys, resp);
   });
@@ -670,7 +671,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
       client: 'datastoreClient',
       method: 'runQuery',
       reqOpts: reqOpts,
-      gaxOptions: options.gaxOptions
+      gaxOpts: options.gaxOptions
     }, onResultSet);
   }
 
