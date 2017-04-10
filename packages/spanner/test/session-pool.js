@@ -752,6 +752,20 @@ describe('SessionPool', function() {
       sessionPool.release = util.noop;
     });
 
+    it('should return if in the snippet sandbox', function(done) {
+      sessionPool.getSession = function() {
+        done(new Error('Should not get a session in the sandbox.'));
+      };
+
+      global.GCLOUD_SANDBOX_ENV = true;
+      var returnValue = sessionPool.request(CONFIG, assert.ifError);
+      delete global.GCLOUD_SANDBOX_ENV;
+
+      assert.strictEqual(returnValue, undefined);
+
+      done();
+    });
+
     it('should get a session', function(done) {
       sessionPool.getSession = function() {
         done();
@@ -836,6 +850,22 @@ describe('SessionPool', function() {
 
       sessionPool.getSession = util.noop;
       sessionPool.release = util.noop;
+    });
+
+    it('should return if in the snippet sandbox', function(done) {
+      sessionPool.getSession = function() {
+        done(new Error('Should not get a session in the sandbox.'));
+      };
+
+      global.GCLOUD_SANDBOX_ENV = true;
+      var returnValue = sessionPool.requestStream(CONFIG);
+      delete global.GCLOUD_SANDBOX_ENV;
+
+      assert(returnValue instanceof require('stream'));
+
+      returnValue.emit('reading');
+
+      done();
     });
 
     it('should get a session when stream opens', function(done) {

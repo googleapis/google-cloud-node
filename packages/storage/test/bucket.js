@@ -913,6 +913,13 @@ describe('Bucket', function() {
       };
     });
 
+    it('should return early in snippet sandbox', function() {
+      global.GCLOUD_SANDBOX_ENV = true;
+      var returnValue = bucket.upload(filepath, assert.ifError);
+      delete global.GCLOUD_SANDBOX_ENV;
+      assert.strictEqual(returnValue, undefined);
+    });
+
     it('should accept a path & cb', function(done) {
       bucket.upload(filepath, function(err, file) {
         assert.ifError(err);

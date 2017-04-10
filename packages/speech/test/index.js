@@ -211,6 +211,21 @@ describe('Speech', function() {
   });
 
   describe('findFile_', function() {
+    it('should return buffer for snippet sandbox', function(done) {
+      global.GCLOUD_SANDBOX_ENV = true;
+
+      Speech.findFile_({}, function(err, foundFile) {
+        delete global.GCLOUD_SANDBOX_ENV;
+        assert.ifError(err);
+
+        assert.deepEqual(foundFile, {
+          content: new Buffer('')
+        });
+
+        done();
+      });
+    });
+
     it('should convert a File object', function(done) {
       var file = {
         bucket: {

@@ -591,6 +591,13 @@ describe('Logging', function() {
 
       stream.abort();
     });
+
+    it('should not require an options object', function() {
+      assert.doesNotThrow(function() {
+        var stream = logging.getEntriesStream();
+        stream.emit('reading');
+      });
+    });
   });
 
   describe('getSinks', function() {

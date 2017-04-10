@@ -346,6 +346,8 @@ Logging.prototype.getEntries = function(options, callback) {
 Logging.prototype.getEntriesStream = function(options) {
   var self = this;
 
+  options = options || {};
+
   var requestStream;
 
   var userStream = streamEvents(pumpify.obj());
@@ -616,6 +618,10 @@ Logging.prototype.request = function(config, callback) {
   }
 
   function makeRequestCallback() {
+    if (global.GCLOUD_SANDBOX_ENV) {
+      return;
+    }
+
     prepareGaxRequest(function(err, requestFn) {
       if (err) {
         callback(err);
@@ -627,6 +633,10 @@ Logging.prototype.request = function(config, callback) {
   }
 
   function makeRequestStream() {
+    if (global.GCLOUD_SANDBOX_ENV) {
+      return through.obj();
+    }
+
     prepareGaxRequest(function(err, requestFn) {
       if (err) {
         stream.destroy(err);
