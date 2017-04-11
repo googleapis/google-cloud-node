@@ -182,6 +182,7 @@ describe('Speech', function() {
     it('recognizes speech from local file', function(done) {
       var options = {
         // encoding should be automatically detected
+        languageCode: 'en-US',
         sampleRateHertz: 16000
       };
 
