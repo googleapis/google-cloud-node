@@ -48,6 +48,17 @@ function fakeV1() {
   };
 }
 
+var fakeV1Beta2Override;
+function fakeV1Beta2() {
+  if (fakeV1Beta2Override) {
+    return fakeV1Beta2Override.apply(null, arguments);
+  }
+
+  return {
+    languageServiceClient: util.noop
+  };
+}
+
 describe('Language', function() {
   var Language;
   var language;
@@ -60,12 +71,14 @@ describe('Language', function() {
         util: fakeUtil
       },
       './document.js': FakeDocument,
-      './v1': fakeV1
+      './v1': fakeV1,
+      './v1beta2': fakeV1Beta2
     });
   });
 
   beforeEach(function() {
     fakeV1Override = null;
+    fakeV1Beta2Override = null;
     language = new Language(OPTIONS);
   });
 
@@ -122,6 +135,45 @@ describe('Language', function() {
       assert.deepEqual(language.api, {
         Language: expectedLanguageService
       });
+    });
+
+    it('should create a gax api client for v1beta2', function() {
+      var expectedLanguageService = {};
+
+      fakeV1Override = function() {
+        throw new Error('v1 should not be initialized.');
+      };
+
+      fakeV1Beta2Override = function(options) {
+        var expected = {
+          libName: 'gccl',
+          libVersion: require('../package.json').version
+        };
+        assert.deepStrictEqual(options, expected);
+
+        return {
+          languageServiceClient: function(options) {
+            assert.deepStrictEqual(options, expected);
+            return expectedLanguageService;
+          }
+        };
+      };
+
+      var language = new Language({
+        apiVersion: 'v1beta2'
+      });
+
+      assert.deepEqual(language.api, {
+        Language: expectedLanguageService
+      });
+    });
+
+    it('should not accept an unrecognized version', function() {
+      assert.throws(function() {
+        new Language({
+          apiVersion: 'v1beta42'
+        });
+      }, new RegExp('Invalid `apiVersion` specified. Use "v1" or "v1beta2".'));
     });
   });
 
