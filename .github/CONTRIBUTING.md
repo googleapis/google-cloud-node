@@ -108,7 +108,7 @@ $ npm login
 ```
 ### Release Notes
 
-If you're thinking "this library needs a nifty, CI-driven, changelog-generator supertool", hold the phone. First, "nifty"? Second, it's important to make our library as human as possible. So, please, take a few minutes and pretend that you're the user. What would you want to see?
+If you're thinking "this library needs a schwifty, CI-driven, changelog-generator supertool", hold the phone. It's important to make our library as human as possible. So, please, take a few minutes and pretend that you're the user. What would you want to see?
 
   1. [Draft a new release](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/new)
   1. Use the following template as a starting point. Remove sections that aren't relevant. Feel free to make improvements.
@@ -170,7 +170,7 @@ Checklist:
   - [ ] I checked that all links work
   - [ ] I removed any sections that weren't relevant (e.g., if there weren't any "Fixes" in this release, remove the heading entirely)
   - [ ] I made sure all breaking changes are noted
-  - [x] I'm not going to say "nifty" anymore
+  - [x] Never stop saying "schwifty"
 
 ### Updating Documentation
 
