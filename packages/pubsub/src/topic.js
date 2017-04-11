@@ -369,6 +369,9 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  *     box your message in to an object with a `data` and `attributes` property.
  *     `data` will be the raw message value you want to publish, and
  *     `attributes` is a key/value pair of attributes to apply to the message.
+ *     All messages not provided as `Buffer` will be published in JSON format.
+ *     If your receiving end uses another library, make sure it parses the
+ *     message properly.
  * @param {object=} options - Configuration object.
  * @param {boolean} options.raw - Enable if you require setting attributes on
  *     your messages.
