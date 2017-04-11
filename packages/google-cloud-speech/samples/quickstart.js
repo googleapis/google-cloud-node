@@ -30,10 +30,11 @@ const speechClient = Speech({
 // The name of the audio file to transcribe
 const fileName = './resources/audio.raw';
 
-// The audio file's encoding and sample rate
+// The audio file's encoding, sample rate in hertz, and BCP-47 language code
 const options = {
   encoding: 'LINEAR16',
-  sampleRate: 16000
+  sampleRateHertz: 16000,
+  languageCode: 'en-US'
 };
 
 // Detects speech in the audio file
