@@ -560,6 +560,73 @@ describe('Document', function() {
     });
   });
 
+  describe('detectEntitySentiment', function() {
+    it('should make the correct API request', function(done) {
+      var detectedEncodingType = 'detected-encoding-type';
+
+      document.detectEncodingType_ = function(options) {
+        assert.deepEqual(options, {});
+        return detectedEncodingType;
+      };
+
+      document.api.LanguageBeta = {
+        analyzeEntitySentiment: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
+          assert.strictEqual(reqOpts.encodingType, detectedEncodingType);
+          done();
+        }
+      };
+
+      document.detectEntitySentiment(assert.ifError);
+    });
+
+    describe('error', function() {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      beforeEach(function() {
+        document.api.LanguageBeta = {
+          analyzeEntitySentiment: function(reqOpts, callback) {
+            callback(error, apiResponse);
+          }
+        };
+      });
+
+      it('should exec callback with error and API response', function(done) {
+        document.detectEntitySentiment(function(err, entities, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(entities, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        entities: []
+      };
+
+      beforeEach(function() {
+        document.api.LanguageBeta = {
+          analyzeEntitySentiment: function(reqOpts, callback) {
+            callback(null, apiResponse);
+          }
+        };
+      });
+
+      it('should return the entities', function(done) {
+        document.detectEntitySentiment(function(err, entities, apiResponse_) {
+          assert.ifError(err);
+
+          assert.strictEqual(entities, apiResponse.entities);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
   describe('detectSentiment', function() {
     it('should make the correct API request', function(done) {
       var detectedEncodingType = 'detected-encoding-type';

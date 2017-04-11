@@ -244,6 +244,25 @@ describe('Language', function() {
             });
           });
 
+          describe('entity sentiment', function() {
+            it('should work without creating a document', function(done) {
+              if (!CONTENT_TYPE) {
+                language.detectEntitySentiment(CONTENT, validateEntities(done));
+                return;
+              }
+
+              language.detectEntitySentiment(
+                CONTENT,
+                { type: CONTENT_TYPE },
+                validateEntities(done)
+              );
+            });
+
+            it('should return the correct simplified response', function(done) {
+              DOC.detectEntitySentiment(validateEntities(done));
+            });
+          });
+
           describe('sentiment', function() {
             it('should work without creating a document', function(done) {
               if (!CONTENT_TYPE) {

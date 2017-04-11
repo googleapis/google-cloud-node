@@ -37,10 +37,10 @@ function FakeDocument() {
   this.calledWith_ = arguments;
 }
 
-var fakeV1Override;
-function fakeV1() {
-  if (fakeV1Override) {
-    return fakeV1Override.apply(null, arguments);
+var fakeGapicOverride;
+function fakeGapic() {
+  if (fakeGapicOverride) {
+    return fakeGapicOverride.apply(null, arguments);
   }
 
   return {
@@ -60,12 +60,13 @@ describe('Language', function() {
         util: fakeUtil
       },
       './document.js': FakeDocument,
-      './v1': fakeV1
+      './v1': fakeGapic,
+      './v1beta2': fakeGapic
     });
   });
 
   beforeEach(function() {
-    fakeV1Override = null;
+    fakeGapicOverride = null;
     language = new Language(OPTIONS);
   });
 
@@ -102,7 +103,7 @@ describe('Language', function() {
     it('should create a gax api client', function() {
       var expectedLanguageService = {};
 
-      fakeV1Override = function(options) {
+      fakeGapicOverride = function(options) {
         var expected = {
           libName: 'gccl',
           libVersion: require('../package.json').version
@@ -120,7 +121,8 @@ describe('Language', function() {
       var language = new Language(OPTIONS);
 
       assert.deepEqual(language.api, {
-        Language: expectedLanguageService
+        Language: expectedLanguageService,
+        LanguageBeta: expectedLanguageService
       });
     });
   });
@@ -216,6 +218,53 @@ describe('Language', function() {
       };
 
       language.detectEntities(CONTENT, done);
+    });
+  });
+
+  describe('detectEntitySentiment', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call detectEntitySentiment on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          detectEntitySentiment: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectEntitySentiment(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          detectEntitySentiment: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectEntitySentiment(CONTENT, done);
     });
   });
 
