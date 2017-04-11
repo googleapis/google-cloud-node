@@ -161,6 +161,13 @@ Speech.detectEncoding_ = function(filename) {
  * @private
  */
 Speech.findFile_ = function(file, callback) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    callback(null, {
+      content: new Buffer('')
+    });
+    return;
+  }
+
   if (common.util.isCustomType(file, 'storage/file')) {
     // File is an instance of module:storage/file.
     callback(null, {
