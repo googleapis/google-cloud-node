@@ -235,7 +235,7 @@ describe('logging-bunyan', function() {
   });
 
   describe('_writev', function() {
-    var RECORDS = [ RECORD, RECORD ];
+    var RECORDS = [ { chunk: RECORD }, { chunk: RECORD } ];
     beforeEach(function() {
       fakeLogInstance.entry = function() {};
       fakeLogInstance.write = function() {};
@@ -272,12 +272,12 @@ describe('logging-bunyan', function() {
   describe('BUNYAN_TO_STACKDRIVER', function() {
     it('should correctly map to Stackdriver Logging levels', function() {
       assert.deepEqual(LoggingBunyan.BUNYAN_TO_STACKDRIVER, {
-        60: 'critical',
-        50: 'error',
-        40: 'warning',
-        30: 'info',
-        20: 'debug',
-        10: 'debug'
+        60: 'CRITICAL',
+        50: 'ERROR',
+        40: 'WARNING',
+        30: 'INFO',
+        20: 'DEBUG',
+        10: 'DEBUG'
       });
     });
   });

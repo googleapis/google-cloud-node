@@ -32,12 +32,12 @@ var Writable = require('stream').Writable;
  * @private
  */
 var BUNYAN_TO_STACKDRIVER = {
-  60: 'critical',
-  50: 'error',
-  40: 'warning',
-  30: 'info',
-  20: 'debug',
-  10: 'debug'
+  60: 'CRITICAL',
+  50: 'ERROR',
+  40: 'WARNING',
+  30: 'INFO',
+  20: 'DEBUG',
+  10: 'DEBUG'
 };
 
 /**
@@ -191,15 +191,15 @@ LoggingBunyan.prototype._write = function(record, encoding, callback) {
  * Relay an array of log entries to the logging agent. This is called by bunyan
  * through Writable#write.
  *
- * @param {object[]} records - Array of Bunyan log records.
+ * @param {object[]} records - Array of WritableStream WriteReq objects.
  *
  * @private
  */
-LoggingBunyan.prototype._writev = function(records, callback) {
+LoggingBunyan.prototype._writev = function(chunks, callback) {
   var self = this;
 
-  var entries = records.map(function(record) {
-    return self.formatEntry_(record);
+  var entries = chunks.map(function(request) {
+    return self.formatEntry_(request.chunk);
   });
 
   this.log_.write(entries, callback);
