@@ -35,8 +35,6 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "extend": "^3.0.0",
-    "is-subset": "^0.1.1",
     "mocha": "^3.2.0",
     "proxyquire": "^1.7.10"
   },
