@@ -167,7 +167,8 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
 
   var entryMetadata = {
     resource: this.resource_,
-    timestamp: record.time
+    timestamp: record.time,
+    severity: BUNYAN_TO_STACKDRIVER[record.level]
   };
 
   return this.log_.entry(entryMetadata, record);
@@ -183,11 +184,26 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
  */
 LoggingBunyan.prototype._write = function(record, encoding, callback) {
   var entry = this.formatEntry_(record);
-  var level = BUNYAN_TO_STACKDRIVER[record.level];
-  this.log_[level](entry, callback);
+  this.log_.write(entry, callback);
 };
 
-// TODO(ofrobots): implement _writev as well.
+/**
+ * Relay an array of log entries to the logging agent. This is called by bunyan
+ * through Writable#write.
+ *
+ * @param {object[]} records - Array of Bunyan log records.
+ *
+ * @private
+ */
+LoggingBunyan.prototype._writev = function(records, callback) {
+  var self = this;
+
+  var entries = records.map(function(record) {
+    return self.formatEntry_(record);
+  });
+
+  this.log_.write(entries, callback);
+};
 
 module.exports = LoggingBunyan;
 module.exports.BUNYAN_TO_STACKDRIVER = BUNYAN_TO_STACKDRIVER;
