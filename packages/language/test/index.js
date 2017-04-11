@@ -68,21 +68,21 @@ describe('Language', function() {
     fakeV1Override = null;
     language = new Language(OPTIONS);
   });
-  
+
   describe('instantiation', function() {
     it('should promisify all the things', function() {
       assert(promisified);
     });
-    
+
     it('should accept an apiVersion "v1beta2"', function() {
       var RealLanguage = require('../src/index.js');
-      
+
       // The v1beta2 GAPIC adds a new `analyzeEntitySentiment` function.
       var langBeta = new RealLanguage({apiVersion: 'v1beta2'});
       assert.strictEqual(typeof langBeta.api.Language.analyzeEntitySentiment,
                          'function');
     });
-    
+
     it('should not accept an unrecognized version', function() {
       assert.throws(function() {
         new Language({apiVersion: 'v1beta42'});

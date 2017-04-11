@@ -29,7 +29,7 @@ var v1beta2 = require('./v1beta2');
 var _GAPICS = {
   v1: v1,
   v1beta2: v1beta2
-}
+};
 
 /**
  * @type {module:language/document}
@@ -56,18 +56,20 @@ var Document = require('./document.js');
  * @resource [Cloud Natural Language API Documentation]{@link https://cloud.google.com/natural-language/docs}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string} options.apiVersion - API version. Defaults to "v1";
+ *   the only other valid value is "v1beta2".
  */
 function Language(options) {
   if (!(this instanceof Language)) {
     options = common.util.normalizeArguments(this, options);
     return new Language(options);
   }
-  
+
   options = extend({}, options, {
     libName: 'gccl',
     libVersion: require('../package.json').version
   });
-  
+
   // Determine the version to be used.
   // We default to "v1", but use "v1beta2" if explicitly requested. Both
   // GAPICs are packaged with the library.
