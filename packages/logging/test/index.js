@@ -174,12 +174,19 @@ describe('Logging', function() {
 
     it('should cache a local google-auto-auth instance', function() {
       var fakeGoogleAutoAuthInstance = {};
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
 
-      googleAutoAuthOverride = function() {
+      googleAutoAuthOverride = function(options_) {
+        assert.deepEqual(options_, extend({
+          scopes: v2.ALL_SCOPES
+        }, options));
         return fakeGoogleAutoAuthInstance;
       };
 
-      var logging = new Logging({});
+      var logging = new Logging(options);
       assert.strictEqual(logging.auth, fakeGoogleAutoAuthInstance);
     });
 

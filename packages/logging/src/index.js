@@ -74,7 +74,7 @@ function Logging(options) {
   }, options);
 
   this.api = {};
-  this.auth = googleAuth(options);
+  this.auth = googleAuth(options_);
   this.options = options_;
   this.projectId = options.projectId || '{{projectId}}';
 }
