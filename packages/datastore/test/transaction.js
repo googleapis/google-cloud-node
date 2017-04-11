@@ -66,7 +66,7 @@ describe('Transaction', function() {
   var NAMESPACE = 'a-namespace';
 
   var DATASTORE = {
-    request: function() {},
+    request_: function() {},
     projectId: PROJECT_ID,
     namespace: NAMESPACE
   };
@@ -109,7 +109,7 @@ describe('Transaction', function() {
       var transaction;
 
       var fakeDataset = {
-        request: {
+        request_: {
           bind: function(context) {
             assert.strictEqual(context, fakeDataset);
 
@@ -139,12 +139,24 @@ describe('Transaction', function() {
     });
 
     it('should commit', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.equal(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'commit');
+      transaction.request_ = function(config) {
+        assert.equal(config.client, 'datastoreClient');
+        assert.equal(config.method, 'commit');
+        assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
       transaction.commit();
+    });
+
+    it('should accept gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.commit(gaxOptions);
     });
 
     it('should skip the commit', function(done) {
@@ -168,8 +180,7 @@ describe('Transaction', function() {
           callback(rollbackError, rollbackApiResponse);
         };
 
-        transaction.request_ = function(protoOpts, reqOpts, callback) {
-          callback = callback || reqOpts;
+        transaction.request_ = function(config, callback) {
           callback(error, apiResponse);
         };
       });
@@ -185,8 +196,7 @@ describe('Transaction', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
       transaction.commit(function(err, apiResponse) {
@@ -277,8 +287,8 @@ describe('Transaction', function() {
         }
       ];
 
-      transaction.request_ = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts, {
+      transaction.request_ = function(config) {
+        assert.deepEqual(config.reqOpts, {
           mutations: [
             { a: 'b' },
             { c: 'd' },
@@ -301,7 +311,7 @@ describe('Transaction', function() {
         function() { cb2Called = true; }
       ];
 
-      transaction.request_ = function(protoOpts, reqOpts, cb) {
+      transaction.request_ = function(config, cb) {
         cb();
       };
 
@@ -357,18 +367,29 @@ describe('Transaction', function() {
     });
 
     it('should rollback', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'rollback');
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.equal(config.method, 'rollback');
+        assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
       transaction.rollback();
     });
 
+    it('should allow setting gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.rollback(gaxOptions);
+    });
+
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(error);
       };
       transaction.rollback(function(err) {
@@ -379,8 +400,7 @@ describe('Transaction', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
       transaction.rollback(function(err, apiResponse) {
@@ -391,8 +411,7 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback();
       };
       transaction.rollback(function() {
@@ -402,8 +421,7 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit when rollback errors', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(new Error('Error.'));
       };
       transaction.rollback(function() {
@@ -415,16 +433,25 @@ describe('Transaction', function() {
 
   describe('run', function() {
     it('should make the correct API request', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Datastore',
-          method: 'beginTransaction'
-        });
-
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'beginTransaction');
+        assert.deepEqual(config.gaxOpts, {});
         done();
       };
 
       transaction.run(assert.ifError);
+    });
+
+    it('should allow setting gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.run(gaxOptions);
     });
 
     describe('error', function() {
@@ -432,7 +459,7 @@ describe('Transaction', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(config, callback) {
           callback(error, apiResponse);
         };
       });
@@ -453,7 +480,7 @@ describe('Transaction', function() {
       };
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(config, callback) {
           callback(null, apiResponse);
         };
       });
