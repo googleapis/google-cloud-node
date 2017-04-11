@@ -56,7 +56,7 @@
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.0",
-    "google-gax": "^0.12.3",
+    "google-gax": "^0.13.0",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
     "modelo": "^4.2.0",
