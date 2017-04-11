@@ -26,6 +26,11 @@ var is = require('is');
 var v1 = require('./v1');
 var v1beta2 = require('./v1beta2');
 
+var GAPIC_APIS = {
+  v1: v1,
+  v1beta2: v1beta2
+};
+
 /**
  * @type {module:language/document}
  * @private
@@ -51,6 +56,10 @@ var Document = require('./document.js');
  * @resource [Cloud Natural Language API Documentation]{@link https://cloud.google.com/natural-language/docs}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string} options.apiVersion - Either `v1` or `v1beta2`. `v1beta2` is a
+ *     *newer* release than `v1`, and still in beta. By choosing it, you are
+ *     opting into new, back-end behavior which is not officially supported by
+ *     the design of this API. (Default: `v1`)
  */
 function Language(options) {
   if (!(this instanceof Language)) {
@@ -63,8 +72,16 @@ function Language(options) {
     libVersion: require('../package.json').version
   });
 
+  var gapic = GAPIC_APIS[options.apiVersion || 'v1'];
+
+  if (!gapic) {
+    throw new Error('Invalid `apiVersion` specified. Use "v1" or "v1beta2".');
+  }
+
+  delete options.apiVersion;
+
   this.api = {
-    Language: v1(options).languageServiceClient(options)
+    Language: gapic(options).languageServiceClient(options)
   };
 }
 
