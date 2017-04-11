@@ -53,7 +53,9 @@ function Snapshot(parent, name) {
     methods: methods
   };
 
-  if (is.fn(parent.createSnapshot)) {
+  var isSubscription = is.fn(parent.createSnapshot);
+
+  if (isSubscription) {
     config.createMethod = parent.createSnapshot.bind(parent);
 
     /**
