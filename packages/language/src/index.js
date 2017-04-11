@@ -26,6 +26,11 @@ var is = require('is');
 var v1 = require('./v1');
 var v1beta2 = require('./v1beta2');
 
+var _GAPICS = {
+  v1: v1,
+  v1beta2: v1beta2
+}
+
 /**
  * @type {module:language/document}
  * @private
@@ -57,14 +62,24 @@ function Language(options) {
     options = common.util.normalizeArguments(this, options);
     return new Language(options);
   }
-
+  
   options = extend({}, options, {
     libName: 'gccl',
     libVersion: require('../package.json').version
   });
+  
+  // Determine the version to be used.
+  // We default to "v1", but use "v1beta2" if explicitly requested. Both
+  // GAPICs are packaged with the library.
+  var apiVersion = options.apiVersion || 'v1';
+  var gapic = _GAPICS[apiVersion];
+  if (is.undefined(gapic)) {
+    throw new Error('Invalid api_version: use "v1" or "v1beta2".');
+  }
+  delete options.apiVersion;
 
   this.api = {
-    Language: v1(options).languageServiceClient(options)
+    Language: gapic(options).languageServiceClient(options)
   };
 }
 
