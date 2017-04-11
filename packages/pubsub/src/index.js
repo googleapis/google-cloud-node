@@ -28,6 +28,11 @@ var is = require('is');
 var util = require('util');
 
 /**
+ *
+ */
+var Snapshot = require('./snapshot.js');
+
+/**
  * @type {module:pubsub/subscription}
  * @private
  */
@@ -135,6 +140,55 @@ PubSub.prototype.createTopic = function(name, callback) {
     callback(null, topic, resp);
   });
 };
+
+/**
+ *
+ */
+PubSub.prototype.getSnapshots = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var protoOpts = {
+    service: 'Subscriber',
+    method: 'listSnapshots'
+  };
+
+  var reqOpts = extend({}, options);
+
+  reqOpts.project = 'projects/' + this.projectId;
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var snapshots = resp.snapshots.map(function(snapshot) {
+      var snapshotInstance = self.snapshot(snapshot.name);
+      snapshotInstance.metadata = snapshot;
+      return snapshotInstance;
+    });
+
+    var nextQuery = null;
+
+    if (resp.nextPageToken) {
+      nextQuery = options;
+      nextQuery.pageToken = resp.nextPageToken;
+    }
+
+    callback(null, snapshots, nextQuery, resp);
+  });
+};
+
+/**
+ *
+ */
+PubSub.prototype.getSnapshotsStream =
+  common.paginator.streamify('getSnapshots');
 
 /**
  * Get a list of the subscriptions registered to all of your project's topics.
@@ -541,6 +595,13 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
 };
 
 /**
+ *
+ */
+PubSub.prototype.snapshot = function(name, options) {
+  return new Snapshot(this, name, options);
+};
+
+/**
  * Create a Subscription object. This command by itself will not run any API
  * requests. You will receive a {module:pubsub/subscription} object,
  * which will allow you to interact with a subscription.
@@ -645,7 +706,7 @@ common.paginator.extend(PubSub, ['getSubscriptions', 'getTopics']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(PubSub, {
-  exclude: ['subscription', 'topic']
+  exclude: ['snapshot', 'subscription', 'topic']
 });
 
 PubSub.Subscription = Subscription;

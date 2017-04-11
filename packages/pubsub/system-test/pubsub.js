@@ -471,4 +471,59 @@ describe('pubsub', function() {
       });
     });
   });
+
+  describe('Snapshot', function() {
+    var SNAPSHOT_NAME = 'test-snapshot-' + uuid.v4();
+
+    var topic;
+    var subscription;
+    var snapshot;
+
+    before(function(done) {
+      topic = pubsub.topic(TOPIC_NAMES[0]);
+      subscription = topic.subscription(generateSubName());
+      snapshot = subscription.snapshot(SNAPSHOT_NAME);
+      subscription.create(done);
+    });
+
+    after(function(done) {
+      snapshot.delete(done);
+    });
+
+    it('should create a snapshot', function(done) {
+      snapshot.create(done);
+    });
+
+    it('should get a list of snapshot', function(done) {
+      pubsub.getSnapshots(function(err, snapshots) {
+        assert.ifError(err);
+        assert.strictEqual(snapshots.length, 1);
+        assert.strictEqual(snapshots[0].name.split('/').pop(), SNAPSHOT_NAME);
+        done();
+      });
+    });
+
+    it('should get a list of snapshots as a stream', function(done) {
+      var snapshots = [];
+
+      pubsub.getSnapshotsStream()
+        .on('error', done)
+        .on('data', function(snapshot) {
+          snapshots.push(snapshot);
+        })
+        .on('end', function() {
+          assert.strictEqual(snapshots.length, 1);
+          assert.strictEqual(snapshots[0].name.split('/').pop(), SNAPSHOT_NAME);
+          done();
+        });
+    });
+
+    it('should seek to a snapshot', function(done) {
+      subscription.seek(SNAPSHOT_NAME, done);
+    });
+
+    it('should seek to a date', function(done) {
+      subscription.seek(new Date(), done);
+    });
+  });
 });

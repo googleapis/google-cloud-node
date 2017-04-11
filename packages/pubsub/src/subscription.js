@@ -36,6 +36,11 @@ var uuid = require('uuid');
 var IAM = require('./iam.js');
 
 /**
+ *
+ */
+var Snapshot = require('./snapshot.js');
+
+/**
  * @const {number} - The amount of time a subscription pull HTTP connection to
  *     Pub/Sub stays open.
  * @private
@@ -473,6 +478,39 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
 };
 
 /**
+ *
+ */
+Subscription.prototype.createSnapshot = function(name, callback) {
+  var self = this;
+
+  if (!is.string(name)) {
+    throw new Error('Must provide a name for the snapshot.');
+  }
+
+  var protoOpts = {
+    service: 'Subscriber',
+    method: 'createSnapshot'
+  };
+
+  var reqOpts = {
+    name: Snapshot.formatName_(this.parent.projectId, name),
+    subscription: this.name
+  };
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var snapshot = self.snapshot(name);
+    snapshot.metadata = resp;
+
+    callback(null, snapshot, resp);
+  });
+};
+
+/**
  * Add functionality on top of a message returned from the API, including the
  * ability to `ack` and `skip` the message.
  *
@@ -668,6 +706,42 @@ Subscription.prototype.pull = function(options, callback) {
 };
 
 /**
+ *
+ */
+Subscription.prototype.snapshot = function(name) {
+  return new Snapshot(this.parent, name, {
+    subscription: this
+  });
+};
+
+/**
+ *
+ */
+Subscription.prototype.seek = function(snapshot, callback) {
+  var protoOpts = {
+    service: 'Subscriber',
+    method: 'seek'
+  };
+
+  var reqOpts = {
+    subscription: this.name
+  };
+
+  if (is.string(snapshot)) {
+    reqOpts.snapshot = Snapshot.formatName_(this.parent.projectId, snapshot);
+  } else if (is.date(snapshot)) {
+    reqOpts.time = {
+      seconds: Math.floor(snapshot.getTime() / 1000),
+      nanos: snapshot.getMilliseconds() * 1e6
+    };
+  } else {
+    throw new Error('Either a snapshot name or Date is needed to seek to.');
+  }
+
+  this.request(protoOpts, reqOpts, callback);
+};
+
+/**
  * Modify the ack deadline for a specific message. This method is useful to
  * indicate that more time is needed to process a message by the subscriber, or
  * to make the message available for redelivery if the processing was
@@ -827,6 +901,8 @@ Subscription.prototype.startPulling_ = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Subscription);
+common.util.promisifyAll(Subscription, {
+  exclude: ['snapshot']
+});
 
 module.exports = Subscription;
