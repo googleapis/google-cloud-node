@@ -1,6 +1,6 @@
 {
   "name": "google-cloud",
-  "version": "0.51.0",
+  "version": "0.51.1",
   "dependencies": {
     "@google-cloud/bigquery": {
       "version": "0.9.1",
@@ -50,9 +50,9 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.6.0.tgz"
     },
     "@google-cloud/language": {
-      "version": "0.10.1",
+      "version": "0.10.2",
       "from": "@google-cloud/language@>=0.10.0 <0.11.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.10.1.tgz",
+      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.10.2.tgz",
       "dependencies": {
         "google-auto-auth": {
           "version": "0.5.4",
