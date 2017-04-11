@@ -21,19 +21,16 @@
 'use strict';
 
 var commonGrpc = require('@google-cloud/common-grpc');
+var is = require('is');
 var util = require('util');
 
 /**
  *
  */
-function Snapshot(pubsub, name, options) {
-  if (!name) {
-    throw new Error('You must supply a valid name for the snapshot.');
-  }
+function Snapshot(parent, name) {
+  var projectId = parent.projectId || parent.parent.projectId;
 
-  options = options || {};
-
-  this.name = Snapshot.formatName_(pubsub.projectId, name);
+  this.name = Snapshot.formatName_(projectId, name);
 
   var methods = {
     /**
@@ -51,14 +48,13 @@ function Snapshot(pubsub, name, options) {
   };
 
   var config = {
-    parent: pubsub,
+    parent: parent,
     id: this.name,
     methods: methods
   };
 
-  if (options.subscription) {
-    config.createMethod =
-      options.subscription.createSnapshot.bind(options.subscription);
+  if (is.fn(parent.createSnapshot)) {
+    config.createMethod = parent.createSnapshot.bind(parent);
 
     /**
      *

@@ -486,15 +486,19 @@ describe('pubsub', function() {
       subscription.create(done);
     });
 
-    after(function(done) {
-      snapshot.delete(done);
+    after(function() {
+      return pubsub.getSnapshots().then(function(data) {
+        return Promise.all(data[0].map(function(snapshot) {
+          return snapshot.delete();
+        }));
+      });
     });
 
     it('should create a snapshot', function(done) {
       snapshot.create(done);
     });
 
-    it('should get a list of snapshot', function(done) {
+    it('should get a list of snapshots', function(done) {
       pubsub.getSnapshots(function(err, snapshots) {
         assert.ifError(err);
         assert.strictEqual(snapshots.length, 1);

@@ -484,7 +484,7 @@ Subscription.prototype.createSnapshot = function(name, callback) {
   var self = this;
 
   if (!is.string(name)) {
-    throw new Error('Must provide a name for the snapshot.');
+    throw new Error('A name is required to create a snapshot.');
   }
 
   var protoOpts = {
@@ -709,9 +709,7 @@ Subscription.prototype.pull = function(options, callback) {
  *
  */
 Subscription.prototype.snapshot = function(name) {
-  return new Snapshot(this.parent, name, {
-    subscription: this
-  });
+  return this.parent.snapshot.call(this, name);
 };
 
 /**

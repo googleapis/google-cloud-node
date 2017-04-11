@@ -598,6 +598,10 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
  *
  */
 PubSub.prototype.snapshot = function(name, options) {
+  if (!is.string(name)) {
+    throw new Error('You must supply a valid name for the snapshot.');
+  }
+
   return new Snapshot(this, name, options);
 };
 
