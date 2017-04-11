@@ -123,7 +123,7 @@ describe('Storage', function() {
 
       var calledWith = storage.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com/storage/v1';
+      var baseUrl = 'https://www.googleapis.com./storage/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepEqual(calledWith.scopes, [

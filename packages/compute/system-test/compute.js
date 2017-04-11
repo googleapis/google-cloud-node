@@ -121,7 +121,7 @@ describe('Compute', function() {
           createInstanceGroupManager(
             INSTANCE_GROUP_MANAGER_NAME,
             [
-              'https://www.googleapis.com/compute/v1/projects',
+              'https://www.googleapis.com./compute/v1/projects',
               compute.projectId,
               'global/instanceTemplates',
               INSTANCE_TEMPLATE_NAME
@@ -865,7 +865,7 @@ describe('Compute', function() {
 
     it('should have created the right rule', function(done) {
       var target = [
-        'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
+        'https://www.googleapis.com./compute/v1/global/targetHttpProxies/',
         TARGET_PROXY_NAME
       ].join('');
 
@@ -886,7 +886,7 @@ describe('Compute', function() {
 
     it('should set a new target', function(done) {
       var target = [
-        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
+        'https://www.googleapis.com./compute/v1/projects/' + compute.projectId,
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME
       ].join('');
 
@@ -947,7 +947,7 @@ describe('Compute', function() {
 
     it('should have created the right rule', function(done) {
       var target = [
-        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
+        'https://www.googleapis.com./compute/v1/projects/' + compute.projectId,
         '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME
       ].join('');
 
@@ -1243,7 +1243,7 @@ describe('Compute', function() {
           assert.ifError(err);
 
           var expectedMachineType = [
-            'https://www.googleapis.com/compute/v1',
+            'https://www.googleapis.com./compute/v1',
             'zones',
             zone.id,
             'machineTypes',

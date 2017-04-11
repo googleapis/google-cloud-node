@@ -31,7 +31,7 @@ var configData = require('./metric_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'monitoring.googleapis.com';
+var SERVICE_ADDRESS = 'monitoring.googleapis.com.';
 
 var DEFAULT_SERVICE_PORT = 443;
 
@@ -452,7 +452,7 @@ MetricServiceClient.prototype.getMonitoredResourceDescriptor = function(request,
  *   returned. For example, the following filter matches all
  *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
  *
- *       metric.type = starts_with("custom.googleapis.com/")
+ *       metric.type = starts_with("custom.googleapis.com./")
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -557,7 +557,7 @@ MetricServiceClient.prototype.listMetricDescriptors = function(request, options,
  *   returned. For example, the following filter matches all
  *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
  *
- *       metric.type = starts_with("custom.googleapis.com/")
+ *       metric.type = starts_with("custom.googleapis.com./")
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -597,7 +597,7 @@ MetricServiceClient.prototype.listMetricDescriptorsStream = function(request, op
  *   The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example value of `{metric_id}` is
- *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
+ *   `"compute.googleapis.com./instance/disk/read_bytes_count"`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -696,7 +696,7 @@ MetricServiceClient.prototype.createMetricDescriptor = function(request, options
  *   The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example of `{metric_id}` is:
- *   `"custom.googleapis.com/my_test_metric"`.
+ *   `"custom.googleapis.com./my_test_metric"`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -739,7 +739,7 @@ MetricServiceClient.prototype.deleteMetricDescriptor = function(request, options
  *   and can additionally specify metric labels and other information. For
  *   example:
  *
- *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+ *       metric.type = "compute.googleapis.com./instance/cpu/usage_time" AND
  *           metric.label.instance_name = "my-instance-name"
  * @param {Object} request.interval
  *   The time interval for which results should be returned. Only time series
@@ -872,7 +872,7 @@ MetricServiceClient.prototype.listTimeSeries = function(request, options, callba
  *   and can additionally specify metric labels and other information. For
  *   example:
  *
- *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+ *       metric.type = "compute.googleapis.com./instance/cpu/usage_time" AND
  *           metric.label.instance_name = "my-instance-name"
  * @param {Object} request.interval
  *   The time interval for which results should be returned. Only time series

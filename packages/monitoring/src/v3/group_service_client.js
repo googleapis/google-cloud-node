@@ -31,7 +31,7 @@ var configData = require('./group_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'monitoring.googleapis.com';
+var SERVICE_ADDRESS = 'monitoring.googleapis.com.';
 
 var DEFAULT_SERVICE_PORT = 443;
 

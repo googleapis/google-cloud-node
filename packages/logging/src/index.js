@@ -674,7 +674,7 @@ Logging.prototype.setAclForBucket_ = function(name, config, callback) {
       return;
     }
 
-    config.destination = 'storage.googleapis.com/' + bucket.name;
+    config.destination = 'storage.googleapis.com./' + bucket.name;
 
     self.createSink(name, config, callback);
   });
@@ -715,7 +715,7 @@ Logging.prototype.setAclForDataset_ = function(name, config, callback) {
       }
 
       config.destination = format('{baseUrl}/projects/{pId}/datasets/{dId}', {
-        baseUrl: 'bigquery.googleapis.com',
+        baseUrl: 'bigquery.googleapis.com.',
         pId: dataset.parent.projectId,
         dId: dataset.id
       });
@@ -759,7 +759,7 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
       }
 
       config.destination = format('{baseUrl}/{topicName}', {
-        baseUrl: 'pubsub.googleapis.com',
+        baseUrl: 'pubsub.googleapis.com.',
         topicName: topic.name
       });
 

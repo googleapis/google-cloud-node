@@ -390,7 +390,7 @@ describe('GrpcService', function() {
     });
 
     it('should store the baseUrl properly', function() {
-      var fakeBaseUrl = 'a.googleapis.com';
+      var fakeBaseUrl = 'a.googleapis.com.';
 
       grpcLoadOverride = function() {
         return MOCK_GRPC_API;
@@ -1914,7 +1914,7 @@ describe('GrpcService', function() {
     });
 
     it('should use the baseUrl override if applicable', function() {
-      var fakeBaseUrl = 'a.googleapis.com';
+      var fakeBaseUrl = 'a.googleapis.com.';
       var fakeService = {};
 
       grpcService.protos = {

@@ -156,7 +156,7 @@ describe('Speech', function() {
       var calledWith = speech.calledWith_[0];
 
       assert.deepEqual(calledWith, {
-        baseUrl: 'speech.googleapis.com',
+        baseUrl: 'speech.googleapis.com.',
         projectIdRequired: false,
         service: 'speech',
         protoServices: {

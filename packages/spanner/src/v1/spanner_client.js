@@ -31,7 +31,7 @@ var configData = require('./spanner_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'spanner.googleapis.com';
+var SERVICE_ADDRESS = 'spanner.googleapis.com.';
 
 var DEFAULT_SERVICE_PORT = 443;
 

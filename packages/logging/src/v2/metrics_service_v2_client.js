@@ -31,7 +31,7 @@ var configData = require('./metrics_service_v2_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'logging.googleapis.com';
+var SERVICE_ADDRESS = 'logging.googleapis.com.';
 
 var DEFAULT_SERVICE_PORT = 443;
 

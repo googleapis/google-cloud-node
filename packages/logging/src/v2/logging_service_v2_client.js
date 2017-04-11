@@ -31,7 +31,7 @@ var configData = require('./logging_service_v2_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'logging.googleapis.com';
+var SERVICE_ADDRESS = 'logging.googleapis.com.';
 
 var DEFAULT_SERVICE_PORT = 443;
 
@@ -229,7 +229,7 @@ LoggingServiceV2Client.prototype.getProjectId = function(callback) {
  *
  *   `[LOG_ID]` must be URL-encoded. For example,
  *   `"projects/my-project-id/logs/syslog"`,
- *   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+ *   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com.%2Factivity"`.
  *   For more information about log names, see
  *   {@link LogEntry}.
  * @param {Object=} options
@@ -287,7 +287,7 @@ LoggingServiceV2Client.prototype.deleteLog = function(request, options, callback
  *
  *   `[LOG_ID]` must be URL-encoded. For example,
  *   `"projects/my-project-id/logs/syslog"` or
- *   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+ *   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com.%2Factivity"`.
  *   For more information about log names, see
  *   {@link LogEntry}.
  * @param {Object=} request.resource

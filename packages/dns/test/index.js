@@ -125,7 +125,7 @@ describe('DNS', function() {
 
       var calledWith = dns.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com/dns/v1';
+      var baseUrl = 'https://www.googleapis.com./dns/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',

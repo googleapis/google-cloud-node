@@ -104,7 +104,7 @@ function VM(zone, name) {
   this.waiters = [];
 
   this.url = format('{base}/{project}/zones/{zone}/instances/{name}', {
-    base: 'https://www.googleapis.com/compute/v1/projects',
+    base: 'https://www.googleapis.com./compute/v1/projects',
     project: zone.compute.projectId,
     zone: zone.name,
     name: this.name
@@ -382,7 +382,7 @@ VM.prototype.detachDisk = function(disk, callback) {
     );
 
     var deviceName;
-    var baseUrl = 'https://www.googleapis.com/compute/v1/';
+    var baseUrl = 'https://www.googleapis.com./compute/v1/';
     var disks = metadata.disks || [];
 
     // Try to find the deviceName by matching the source of the attached disks

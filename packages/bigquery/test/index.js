@@ -144,7 +144,7 @@ describe('BigQuery', function() {
 
       var calledWith = bq.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com/bigquery/v2';
+      var baseUrl = 'https://www.googleapis.com./bigquery/v2';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigquery'
