@@ -1008,6 +1008,23 @@ describe('Vision', function() {
   });
 
   describe('findImages_', function() {
+    it('should return buffer for snippet sandbox', function(done) {
+      global.GCLOUD_SANDBOX_ENV = true;
+
+      Vision.findImages_({}, function(err, images) {
+        delete global.GCLOUD_SANDBOX_ENV;
+        assert.ifError(err);
+
+        assert.deepEqual(images, [
+          {
+            content: new Buffer('')
+          }
+        ]);
+
+        done();
+      });
+    });
+
     it('should convert a File object', function(done) {
       var file = {
         name: 'file-name',

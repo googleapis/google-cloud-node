@@ -591,6 +591,13 @@ describe('Logging', function() {
 
       stream.abort();
     });
+
+    it('should not require an options object', function() {
+      assert.doesNotThrow(function() {
+        var stream = logging.getEntriesStream();
+        stream.emit('reading');
+      });
+    });
   });
 
   describe('getSinks', function() {
@@ -889,6 +896,19 @@ describe('Logging', function() {
     });
 
     describe('makeRequestCallback', function() {
+      it('should return if in snippet sandbox', function(done) {
+        logging.auth.getProjectId = function() {
+          done(new Error('Should not have gotten project ID.'));
+        };
+
+        global.GCLOUD_SANDBOX_ENV = true;
+        var returnValue = logging.request(CONFIG, assert.ifError);
+        delete global.GCLOUD_SANDBOX_ENV;
+
+        assert.strictEqual(returnValue, undefined);
+        done();
+      });
+
       it('should prepare the request', function(done) {
         logging.api[CONFIG.client][CONFIG.method] = {
           bind: function(gaxClient, reqOpts, gaxOpts) {
@@ -942,6 +962,20 @@ describe('Logging', function() {
             };
           }
         };
+      });
+
+      it('should return if in snippet sandbox', function(done) {
+        logging.auth.getProjectId = function() {
+          done(new Error('Should not have gotten project ID.'));
+        };
+
+        global.GCLOUD_SANDBOX_ENV = true;
+        var returnValue = logging.request(CONFIG);
+        returnValue.emit('reading');
+        delete global.GCLOUD_SANDBOX_ENV;
+
+        assert(returnValue instanceof require('stream'));
+        done();
       });
 
       it('should expose an abort function', function(done) {

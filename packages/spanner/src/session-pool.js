@@ -295,6 +295,10 @@ SessionPool.prototype.release = function(session) {
  * Make an API request, first assuring an active session is used.
  */
 SessionPool.prototype.request = function(config, callback) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return;
+  }
+
   var self = this;
 
   this.getSession(function(err, session) {
@@ -316,6 +320,10 @@ SessionPool.prototype.request = function(config, callback) {
  * Make an API request as a stream, first assuring an active session is used.
  */
 SessionPool.prototype.requestStream = function(config) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return through.obj();
+  }
+
   var self = this;
 
   var requestStream;

@@ -1167,6 +1167,10 @@ Bucket.prototype.makePublic = function(options, callback) {
  * });
  */
 Bucket.prototype.upload = function(localPath, options, callback) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return;
+  }
+
   if (is.fn(options)) {
     callback = options;
     options = {};
