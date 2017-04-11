@@ -380,7 +380,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
  * @param {string} config.languageCode - The language of the supplied audio as
-*     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
+ *     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {number=} config.timeout - In seconds, the amount of time before the
  *     underlying API request times out. The default value, `190`, is sufficient
  *     for audio input of 60 seconds or less. If your input is longer, consider
@@ -443,17 +443,18 @@ Speech.prototype.createRecognizeStream = function(config) {
     throw new Error('A recognize request requires a configuration object.');
   }
 
-  // As of Speech v1, a language code is required; throw an exception if we
-  // did not receive one.
-  //
-  // This is expected within a nested config, but in the interest of user
-  // sanity, accept it in the outer config object.
-  config.config = config.config || {};
+  config = extend(true, {
+    config: {}
+  }, config);
+
+  // As of Speech v1, a language code is required; throw an exception if we did
+  // not receive one.
   if (config.languageCode) {
     config.config.languageCode = config.languageCode;
     delete config.languageCode;
   }
-  if (is.undefined(config.config.languageCode)) {
+
+  if (!config.config.languageCode) {
     throw new Error('A `languageCode` is required in the config object.');
   }
 
@@ -643,6 +644,8 @@ Speech.prototype.recognize = function(file, config, callback) {
     throw new Error('A recognize request requires a configuration object.');
   }
 
+  config = extend(true, {}, config);
+
   // As of Speech v1, a language code is required; throw an exception if we
   // did not receive one.
   if (is.undefined(config.languageCode)) {
@@ -792,6 +795,8 @@ Speech.prototype.recognize = function(file, config, callback) {
  */
 Speech.prototype.startRecognition = function(file, config, callback) {
   var self = this;
+
+  config = extend(true, {}, config);
 
   // As of Speech v1, a language code is required; throw an exception if we
   // did not receive one.

@@ -466,7 +466,9 @@ describe('Speech', function() {
   });
 
   describe('createRecognizeStream', function() {
-    var CONFIG = {languageCode: 'en-US'};
+    var CONFIG = {
+      languageCode: 'en-US'
+    };
     var stream;
     var requestStream;
 
@@ -558,12 +560,15 @@ describe('Speech', function() {
           var requestStream = through.obj();
 
           requestStream.once('data', function(data) {
+            var expected = extend(true, {
+              config: {
+                languageCode: 'en-US'
+              }
+            }, CONFIG);
+            delete expected.languageCode;
+
             assert.deepEqual(data, {
-              streamingConfig: extend(true, {
-                config: {
-                  languageCode: 'en-US'
-                }
-              }, CONFIG)
+              streamingConfig: expected
             });
             done();
           });
