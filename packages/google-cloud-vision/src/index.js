@@ -1712,6 +1712,15 @@ Vision.prototype.readDocument = function(images, options, callback) {
  * @private
  */
 Vision.findImages_ = function(images, callback) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    callback(null, [
+      {
+        content: new Buffer('')
+      }
+    ]);
+    return;
+  }
+
   var MAX_PARALLEL_LIMIT = 5;
   images = arrify(images);
 
