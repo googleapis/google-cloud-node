@@ -43,6 +43,10 @@ function FakeIAM() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+function FakeSnapshot() {
+  this.calledWith_ = arguments;
+}
+
 var formatMessageOverride;
 
 describe('Subscription', function() {
@@ -87,7 +91,8 @@ describe('Subscription', function() {
       '@google-cloud/common-grpc': {
         ServiceObject: FakeGrpcServiceObject
       },
-      './iam.js': FakeIAM
+      './iam.js': FakeIAM,
+      './snapshot.js': FakeSnapshot
     });
 
     var formatMessage = Subscription.formatMessage_;
@@ -504,6 +509,80 @@ describe('Subscription', function() {
     });
   });
 
+  describe('createSnapshot', function() {
+    var SNAPSHOT_NAME = 'a';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        subscription.createSnapshot();
+      }, /A name is required to create a snapshot\./);
+    });
+
+    it('should make the correct api request', function(done) {
+      var FULL_SNAPSHOT_NAME = 'a/b/c/d';
+
+      FakeSnapshot.formatName_ = function(projectId, name) {
+        assert.strictEqual(projectId, PROJECT_ID);
+        assert.strictEqual(name, SNAPSHOT_NAME);
+        return FULL_SNAPSHOT_NAME;
+      };
+
+      subscription.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Subscriber');
+        assert.strictEqual(protoOpts.method, 'createSnapshot');
+
+        assert.strictEqual(reqOpts.name, FULL_SNAPSHOT_NAME);
+        assert.strictEqual(reqOpts.subscription, subscription.name);
+
+        done();
+      };
+
+      subscription.createSnapshot(SNAPSHOT_NAME, assert.ifError);
+    });
+
+    it('should return an error to the callback', function(done) {
+      var error = new Error('err');
+      var resp = {};
+
+      subscription.request = function(protoOpts, reqOpts, callback) {
+        callback(error, resp);
+      };
+
+      function callback(err, snapshot, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(snapshot, null);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      }
+
+      subscription.createSnapshot(SNAPSHOT_NAME, callback);
+    });
+
+    it('should return a snapshot object to the callback', function(done) {
+      var fakeSnapshot = {};
+      var resp = {};
+
+      subscription.request = function(protoOpts, reqOpts, callback) {
+        callback(null, resp);
+      };
+
+      subscription.snapshot = function(name) {
+        assert.strictEqual(name, SNAPSHOT_NAME);
+        return fakeSnapshot;
+      };
+
+      function callback(err, snapshot, apiResponse) {
+        assert.strictEqual(err, null);
+        assert.strictEqual(snapshot, fakeSnapshot);
+        assert.strictEqual(snapshot.metadata, resp);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      }
+
+      subscription.createSnapshot(SNAPSHOT_NAME, callback);
+    });
+  });
+
   describe('delete', function() {
     it('should delete a subscription', function(done) {
       subscription.request = function(protoOpts, reqOpts) {
@@ -817,6 +896,55 @@ describe('Subscription', function() {
     });
   });
 
+  describe('seek', function() {
+    it('should throw if a name or date is not provided', function() {
+      assert.throws(function() {
+        subscription.seek();
+      }, /Either a snapshot name or Date is needed to seek to\./);
+    });
+
+    it('should make the correct api request', function(done) {
+      var FAKE_SNAPSHOT_NAME = 'a';
+      var FAKE_FULL_SNAPSHOT_NAME = 'a/b/c/d';
+
+      FakeSnapshot.formatName_ = function(projectId, name) {
+        assert.strictEqual(projectId, PROJECT_ID);
+        assert.strictEqual(name, FAKE_SNAPSHOT_NAME);
+        return FAKE_FULL_SNAPSHOT_NAME;
+      };
+
+      subscription.request = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(protoOpts.service, 'Subscriber');
+        assert.strictEqual(protoOpts.method, 'seek');
+
+        assert.strictEqual(reqOpts.subscription, subscription.name);
+        assert.strictEqual(reqOpts.snapshot, FAKE_FULL_SNAPSHOT_NAME);
+
+        // done function
+        callback();
+      };
+
+      subscription.seek(FAKE_SNAPSHOT_NAME, done);
+    });
+
+    it('should optionally accept a Date object', function(done) {
+      var date = new Date();
+
+      subscription.request = function(protoOpts, reqOpts, callback) {
+        var seconds = Math.floor(date.getTime() / 1000);
+        assert.strictEqual(reqOpts.time.seconds, seconds);
+
+        var nanos = date.getMilliseconds() * 1e6;
+        assert.strictEqual(reqOpts.time.nanos, nanos);
+
+        // done function
+        callback();
+      };
+
+      subscription.seek(date, done);
+    });
+  });
+
   describe('setAckDeadline', function() {
     it('should set the ack deadline', function(done) {
       subscription.request = function(protoOpts, reqOpts) {
@@ -851,6 +979,22 @@ describe('Subscription', function() {
         assert.deepEqual(resp, apiResponse);
         done();
       });
+    });
+  });
+
+  describe('snapshot', function() {
+    it('should call through to pubsub#snapshot', function() {
+      var FAKE_SNAPSHOT_NAME = 'a';
+      var FAKE_SNAPSHOT = {};
+
+      PUBSUB.snapshot = function(name) {
+        assert.strictEqual(this, subscription);
+        assert.strictEqual(name, FAKE_SNAPSHOT_NAME);
+        return FAKE_SNAPSHOT;
+      };
+
+      var snapshot = subscription.snapshot(FAKE_SNAPSHOT_NAME);
+      assert.strictEqual(snapshot, FAKE_SNAPSHOT);
     });
   });
 

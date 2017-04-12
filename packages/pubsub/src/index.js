@@ -209,7 +209,7 @@ PubSub.prototype.getSnapshots = function(options, callback) {
       return;
     }
 
-    var snapshots = resp.snapshots.map(function(snapshot) {
+    var snapshots = arrify(resp.snapshots).map(function(snapshot) {
       var snapshotInstance = self.snapshot(snapshot.name);
       snapshotInstance.metadata = snapshot;
       return snapshotInstance;
@@ -779,7 +779,11 @@ PubSub.prototype.determineBaseUrl_ = function() {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(PubSub, ['getSubscriptions', 'getTopics']);
+common.paginator.extend(PubSub, [
+  'getSnapshots',
+  'getSubscriptions',
+  'getTopics'
+]);
 
 /*! Developer Documentation
  *

@@ -22,6 +22,8 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var Snapshot = require('../src/snapshot.js');
+
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
 
@@ -40,7 +42,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['subscription', 'topic']);
+    assert.deepEqual(options.exclude, ['snapshot', 'subscription', 'topic']);
   }
 });
 
@@ -57,7 +59,12 @@ var fakePaginator = {
 
     methods = arrify(methods);
     assert.equal(Class.name, 'PubSub');
-    assert.deepEqual(methods, ['getSubscriptions', 'getTopics']);
+    assert.deepEqual(methods, [
+      'getSnapshots',
+      'getSubscriptions',
+      'getTopics'
+    ]);
+
     extended = true;
   },
   streamify: function(methodName) {
@@ -83,6 +90,7 @@ describe('PubSub', function() {
       '@google-cloud/common-grpc': {
         Service: FakeGrpcService
       },
+      './snapshot.js': Snapshot,
       './subscription.js': Subscription,
       './topic.js': Topic
     });
@@ -106,6 +114,7 @@ describe('PubSub', function() {
     });
 
     it('should streamify the correct methods', function() {
+      assert.strictEqual(pubsub.getSnapshotsStream, 'getSnapshots');
       assert.strictEqual(pubsub.getSubscriptionsStream, 'getSubscriptions');
       assert.strictEqual(pubsub.getTopicsStream, 'getTopics');
     });
@@ -243,6 +252,100 @@ describe('PubSub', function() {
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });
+      });
+    });
+  });
+
+  describe('getSnapshots', function() {
+    var SNAPSHOT_NAME = 'fake-snapshot';
+    var apiResponse = { snapshots: [{ name: SNAPSHOT_NAME }]};
+
+    beforeEach(function() {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+    });
+
+    it('should accept a query and a callback', function(done) {
+      pubsub.getSnapshots({}, done);
+    });
+
+    it('should accept just a callback', function(done) {
+      pubsub.getSnapshots(done);
+    });
+
+    it('should build the right request', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var originalOptions = extend({}, options);
+      var expectedOptions = extend({}, options, {
+        project: 'projects/' + pubsub.projectId
+      });
+
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Subscriber');
+        assert.strictEqual(protoOpts.method, 'listSnapshots');
+        assert.deepEqual(reqOpts, expectedOptions);
+        assert.deepEqual(options, originalOptions);
+        done();
+      };
+
+      pubsub.getSnapshots(options, function() {});
+    });
+
+    it('should return Snapshot instances with metadata', function(done) {
+      var snapshot = {};
+
+      pubsub.snapshot = function(name) {
+        assert.strictEqual(name, SNAPSHOT_NAME);
+        return snapshot;
+      };
+
+      pubsub.getSnapshots(function(err, snapshots) {
+        assert.ifError(err);
+        assert.strictEqual(snapshots[0], snapshot);
+        assert.strictEqual(snapshots[0].metadata, apiResponse.snapshots[0]);
+        done();
+      });
+    });
+
+    it('should return a query if more results exist', function() {
+      var token = 'next-page-token';
+
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, { nextPageToken: token });
+      };
+
+      var query = { pageSize: 1 };
+
+      pubsub.getSnapshots(query, function(err, snapshots, nextQuery) {
+        assert.ifError(err);
+        assert.strictEqual(query.pageSize, nextQuery.pageSize);
+        assert.equal(query.pageToken, token);
+      });
+    });
+
+    it('should pass error if api returns an error', function() {
+      var error = new Error('Error');
+
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(error);
+      };
+
+      pubsub.getSnapshots(function(err) {
+        assert.equal(err, error);
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, resp);
+      };
+
+      pubsub.getSnapshots(function(err, snapshots, nextQuery, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
       });
     });
   });
@@ -696,6 +799,18 @@ describe('PubSub', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('snapshot', function() {
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        pubsub.snapshot();
+      }, /You must supply a valid name for the snapshot\./);
+    });
+
+    it('should return a Snapshot object', function() {
+      assert(pubsub.snapshot('new-snapshot') instanceof Snapshot);
     });
   });
 

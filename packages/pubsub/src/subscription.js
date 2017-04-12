@@ -732,24 +732,6 @@ Subscription.prototype.pull = function(options, callback) {
 };
 
 /**
- * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
- * create a topic.
- *
- * @throws {Error} If a name is not provided.
- *
- * @param {string} name - The name of the snapshot.
- * @return {module:pubsub/snapshot}
- *
- * @example
- * var snapshot = subscription.snapshot('my-snapshot');
- *
- * snapshot.create(function() {});
- */
-Subscription.prototype.snapshot = function(name) {
-  return this.parent.snapshot.call(this, name);
-};
-
-/**
  * Seeks an existing subscription to a point in time or a given snapshot.
  *
  * @param {string|date} snapshot - The point to seek to.
@@ -847,6 +829,24 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
   this.request(protoOpts, reqOpts, function(err, resp) {
     callback(err, resp);
   });
+};
+
+/**
+ * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
+ * create a topic.
+ *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the snapshot.
+ * @return {module:pubsub/snapshot}
+ *
+ * @example
+ * var snapshot = subscription.snapshot('my-snapshot');
+ *
+ * snapshot.create(function() {});
+ */
+Subscription.prototype.snapshot = function(name) {
+  return this.parent.snapshot.call(this, name);
 };
 
 /**
