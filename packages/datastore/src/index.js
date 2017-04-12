@@ -312,6 +312,11 @@ function Datastore(options) {
   this.datastore = this;
   this.options = options_;
 
+  this.defaultBaseUrl_ = 'datastore.googleapis.com';
+  this.determineBaseUrl_(options_.apiEndpoint);
+
+  console.log('??', this.baseUrl_, this.port_)
+
   this.namespace = options.namespace;
   this.projectId = process.env.DATASTORE_PROJECT_ID ||
     options.projectId ||
@@ -319,8 +324,6 @@ function Datastore(options) {
 
   // @TODO
   // 'google-cloud-resource-prefix': 'projects/' + this.projectId
-  // this.defaultBaseUrl_ = 'datastore.googleapis.com';
-  // this.determineBaseUrl_(options.apiEndpoint);
 }
 
 util.inherits(Datastore, DatastoreRequest);
@@ -527,6 +530,7 @@ Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
   var baseUrl = this.defaultBaseUrl_;
   var leadingProtocol = new RegExp('^https*://');
   var trailingSlashes = new RegExp('/*$');
+  var port = new RegExp(':(\\d+)');
 
   if (customApiEndpoint) {
     baseUrl = customApiEndpoint;
@@ -536,8 +540,13 @@ Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
     this.customEndpoint_ = true;
   }
 
+  if (port.test(baseUrl)) {
+    this.port_ = baseUrl.match(port)[1];
+  }
+
   this.baseUrl_ = baseUrl
     .replace(leadingProtocol, '')
+    .replace(port, '')
     .replace(trailingSlashes, '');
 };
 

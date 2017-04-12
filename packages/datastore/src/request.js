@@ -24,6 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
 var extend = require('extend');
+var grpc = require('grpc');
 var is = require('is');
 var propAssign = require('prop-assign');
 var split = require('split-array-stream');
@@ -1120,9 +1121,18 @@ DatastoreRequest.prototype.request_ = function(config, callback) {
 
     var gaxClient = datastore.api[config.client];
 
+    var clientOptions = extend({
+      servicePath: datastore.baseUrl_,
+      port: datastore.port_
+    }, datastore.options);
+
+    if (datastore.customEndpoint_) {
+      clientOptions.sslCreds = grpc.credentials.createInsecure();
+    }
+
     if (!gaxClient) {
       // Lazily instantiate client.
-      gaxClient = v1(datastore.options)[config.client](datastore.options);
+      gaxClient = v1(clientOptions)[config.client](clientOptions);
       datastore.api[config.client] = gaxClient;
     }
 
