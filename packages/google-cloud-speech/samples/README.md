@@ -50,7 +50,7 @@ Options:
 
 Examples:
   node recognize.js sync ./resources/audio.raw -e LINEAR16 -r 16000
-  node recognize.js async-gcs gs://my-bucket/audio.raw -e LINEAR16 -r 16000
+  node recognize.js async-gcs gs://gcs-test-data/vr.flac -e FLAC -r 16000
   node recognize.js stream ./resources/audio.raw  -e LINEAR16 -r 16000
   node recognize.js listen
 
