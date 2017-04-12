@@ -33,12 +33,12 @@ __Usage:__ `node translate.js --help`
 
 ```
 Commands:
-  detect <input..>                                 Detects the language of one or more strings.
-  list [target]                                    Lists available translation languages. To return language names in a
-                                                   language other than English, specify a target language.
-  translate <toLang> <input..>                     Translates one or more strings into the target language.
-  translate-with-model <toLang> <model> <input..>  Translates one or more strings into the target language using the
-                                                   specified model.
+  detect <text..>                                 Detects the language of one or more strings.
+  list [target]                                   Lists available translation languages. To language names in a language
+                                                  other than English, specify a target language.
+  translate <toLang> <text..>                     Translates one or more strings into the target language.
+  translate-with-model <toLang> <model> <text..>  Translates one or more strings into the target language using the
+                                                  specified model.
 
 Options:
   --help  Show help                                                                                            [boolean]

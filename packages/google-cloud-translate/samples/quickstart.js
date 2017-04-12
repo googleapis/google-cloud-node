@@ -39,5 +39,8 @@ translateClient.translate(text, target)
 
     console.log(`Text: ${text}`);
     console.log(`Translation: ${translation}`);
+  })
+  .catch((err) => {
+    console.error('ERROR:', err);
   });
 // [END translate_quickstart]
