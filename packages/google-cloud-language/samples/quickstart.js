@@ -23,7 +23,7 @@ const Language = require('@google-cloud/language');
 const projectId = 'YOUR_PROJECT_ID';
 
 // Instantiates a client
-const languageClient = Language({
+const language = Language({
   projectId: projectId
 });
 
@@ -31,11 +31,15 @@ const languageClient = Language({
 const text = 'Hello, world!';
 
 // Detects the sentiment of the text
-languageClient.detectSentiment(text)
+language.detectSentiment(text)
   .then((results) => {
     const sentiment = results[0];
 
     console.log(`Text: ${text}`);
-    console.log(`Sentiment: ${sentiment}`);
+    console.log(`Sentiment score: ${sentiment.score}`);
+    console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
+  })
+  .catch((err) => {
+    console.error('ERROR:', err);
   });
 // [END language_quickstart]

@@ -8,9 +8,9 @@
     "test": "cd ..; npm run st -- --verbose language/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/language": "0.8.0",
-    "@google-cloud/storage": "0.7.0",
-    "yargs": "6.6.0"
+    "@google-cloud/language": "0.10.2",
+    "@google-cloud/storage": "1.0.0",
+    "yargs": "7.0.2"
   },
   "engines": {
     "node": ">=4.3.2"

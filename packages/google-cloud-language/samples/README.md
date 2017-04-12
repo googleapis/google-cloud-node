@@ -36,25 +36,22 @@ __Usage:__ `node analyze.js --help`
 
 ```
 Commands:
-  sentiment-text <text>               Detects sentiment of a string.
-  sentiment-file <bucket> <filename>  Detects sentiment in a file in Google Cloud Storage.
-  entities-text <text>                Detects entities in a string.
-  entities-file <bucket> <filename>   Detects entities in a file in Google Cloud Storage.
-  syntax-text <text>                  Detects syntax of a string.
-  syntax-file <bucket> <filename>     Detects syntax in a file in Google Cloud Storage.
+  sentiment-text <text>                   Detects sentiment of a string.
+  sentiment-file <bucketName> <fileName>  Detects sentiment in a file in Google Cloud Storage.
+  entities-text <text>                    Detects entities in a string.
+  entities-file <bucketName> <fileName>   Detects entities in a file in Google Cloud Storage.
+  syntax-text <text>                      Detects syntax of a string.
+  syntax-file <bucketName> <fileName>     Detects syntax in a file in Google Cloud Storage.
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
-  node analyze.js sentiment-text "President Obama is speaking
-  at the White House."
+  node analyze.js sentiment-text "President Obama is speaking at the White House."
   node analyze.js sentiment-file my-bucket file.txt             Detects sentiment in gs://my-bucket/file.txt
-  node analyze.js entities-text "President Obama is speaking
-  at the White House."
+  node analyze.js entities-text "President Obama is speaking at the White House."
   node analyze.js entities-file my-bucket file.txt              Detects entities in gs://my-bucket/file.txt
-  node analyze.js syntax-text "President Obama is speaking at
-  the White House."
+  node analyze.js syntax-text "President Obama is speaking at the White House."
   node analyze.js syntax-file my-bucket file.txt                Detects syntax in gs://my-bucket/file.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
