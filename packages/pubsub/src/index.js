@@ -28,7 +28,8 @@ var is = require('is');
 var util = require('util');
 
 /**
- *
+ * @type {module:pubsub/snapshot}
+ * @private
  */
 var Snapshot = require('./snapshot.js');
 
@@ -142,7 +143,48 @@ PubSub.prototype.createTopic = function(name, callback) {
 };
 
 /**
+ * Get a list of snapshots.
  *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {number} options.pageSize - Maximum number of results to return.
+ * @param {string} options.pageToken - Page token.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {module:pubsub/snapshot[]} callback.snapshots - The list of snapshots
+ *     in your project.
+ *
+ * @example
+ * pubsub.getSnapshots(function(err, snapshots) {
+ *   if (!err) {
+ *     // snapshots is an array of Snapshot objects.
+ *   }
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * var callback = function(err, snapshots, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     pubsub.getSnapshots(nextQuery, callback);
+ *   }
+ * };
+ *
+ * pubsub.getSnapshots({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.getSnapshots().then(function(data) {
+ *   var snapshots = data[0];
+ * });
  */
 PubSub.prototype.getSnapshots = function(options, callback) {
   var self = this;
@@ -185,7 +227,31 @@ PubSub.prototype.getSnapshots = function(options, callback) {
 };
 
 /**
+ * Get a list of the {module:pubsub/snapshot} objects as a readable object
+ * stream.
  *
+ * @param {object=} options - Configuration object. See
+ *     {module:pubsub#getSnapshots} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * pubsub.getSnapshotsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(snapshot) {
+ *     // snapshot is a Snapshot object.
+ *   })
+ *   .on('end', function() {
+ *     // All snapshots retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * pubsub.getSnapshotsStream()
+ *   .on('data', function(snapshot) {
+ *     this.end();
+ *   });
  */
 PubSub.prototype.getSnapshotsStream =
   common.paginator.streamify('getSnapshots');
@@ -331,7 +397,7 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
  * // unnecessary processing and API requests.
  * //-
  * pubsub.getSubscriptionsStream()
- *   .on('data', function(topic) {
+ *   .on('data', function(subscription) {
  *     this.end();
  *   });
  */
@@ -595,14 +661,25 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
 };
 
 /**
+ * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
+ * create a topic.
  *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the snapshot.
+ * @return {module:pubsub/snapshot}
+ *
+ * @example
+ * var snapshot = pubsub.snapshot('my-snapshot');
+ *
+ * snapshot.delete(function() {});
  */
-PubSub.prototype.snapshot = function(name, options) {
+PubSub.prototype.snapshot = function(name) {
   if (!is.string(name)) {
     throw new Error('You must supply a valid name for the snapshot.');
   }
 
-  return new Snapshot(this, name, options);
+  return new Snapshot(this, name);
 };
 
 /**
@@ -654,7 +731,7 @@ PubSub.prototype.subscription = function(name, options) {
 };
 
 /**
- * Create a Topic object. See {module:pubsub/createTopic} to create a topic.
+ * Create a Topic object. See {module:pubsub#createTopic} to create a topic.
  *
  * @throws {Error} If a name is not provided.
  *

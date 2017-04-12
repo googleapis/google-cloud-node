@@ -36,7 +36,8 @@ var uuid = require('uuid');
 var IAM = require('./iam.js');
 
 /**
- *
+ * @type {module:pubsub/snapshot}
+ * @private
  */
 var Snapshot = require('./snapshot.js');
 
@@ -478,7 +479,32 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
 };
 
 /**
+ * Create a snapshot with the given name.
  *
+ * @param {string} name - Name of the snapshot.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {module:pubsub/snapshot} callback.snapshot - The newly created
+ *     snapshot.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var callback = function(err, snapshot, apiResponse) {
+ *   if (!err) {
+ *     // The snapshot was created successfully.
+ *   }
+ * };
+ *
+ * subscription.createSnapshot('my-snapshot', callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.createSnapshot('my-snapshot').then(function(data) {
+ *   var snapshot = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Subscription.prototype.createSnapshot = function(name, callback) {
   var self = this;
@@ -706,14 +732,50 @@ Subscription.prototype.pull = function(options, callback) {
 };
 
 /**
+ * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
+ * create a topic.
  *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the snapshot.
+ * @return {module:pubsub/snapshot}
+ *
+ * @example
+ * var snapshot = subscription.snapshot('my-snapshot');
+ *
+ * snapshot.create(function() {});
  */
 Subscription.prototype.snapshot = function(name) {
   return this.parent.snapshot.call(this, name);
 };
 
 /**
+ * Seeks an existing subscription to a point in time or a given snapshot.
  *
+ * @param {string|date} snapshot - The point to seek to.
+ *     This will accept a {module:pubsub/snapshot} instance, the name of the
+ *     snapshot or a Date object.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var callback = function(err, resp) {
+ *   if (!err) {
+ *     // Seek was successful.
+ *   }
+ * };
+ *
+ * subscription.seek('my-snapshot', callback);
+ *
+ * //-
+ * // Alternatively, to specify a certain point in time, you can provide a Date
+ * // object.
+ * //-
+ * var date = new Date('October 21 2015');
+ *
+ * subscription.seek(date, callback);
  */
 Subscription.prototype.seek = function(snapshot, callback) {
   var protoOpts = {
