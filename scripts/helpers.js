@@ -240,6 +240,7 @@ Module.prototype.runSystemTests = function() {
     'common',
     'common-grpc',
     'error-reporting',
+    'google-cloud',
     'monitoring'
   ];
 
