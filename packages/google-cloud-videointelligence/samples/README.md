@@ -28,11 +28,10 @@ detection, and shot change detection.
 View the [documentation][analyze_docs] or the [source code][analyze_code].
 
 ```
-node analyze.js
 Commands:
-  faces <gcsPath>   Analyzes faces in a video using the Cloud Video Intelligence API.
-  shots <gcsPath>   Analyzes shot angles in a video using the Cloud Video Intelligence API.
-  labels <gcsPath>  Labels objects in a video using the Cloud Video Intelligence API.
+  faces <gcsUri>   Analyzes faces in a video using the Cloud Video Intelligence API.
+  shots <gcsUri>   Analyzes shot angles in a video using the Cloud Video Intelligence API.
+  labels <gcsUri>  Labels objects in a video using the Cloud Video Intelligence API.
 
 Options:
   --help  Show help                                                                                            [boolean]
@@ -42,6 +41,7 @@ Examples:
   node analyze.js shots gs://my-bucket/my-video.mp4
   node analyze.js labels gs://my-bucket/my-video.mp4
 
+For more information, see https://cloud.google.com/video-intelligence/docs
 ```
 
 [analyze_docs]: https://cloud.google.com/video-intelligence/docs

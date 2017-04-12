@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@google-cloud/videointelligence": "https://storage.googleapis.com/videointelligence-alpha/videointelligence-nodejs.tar.gz",
-    "yargs": "6.6.0"
+    "yargs": "7.0.2"
   },
   "engines": {
     "node": ">=4.3.2"
