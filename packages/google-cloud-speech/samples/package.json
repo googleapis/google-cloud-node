@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@google-cloud/speech": "0.9.0",
-    "@google-cloud/storage": "0.7.0",
-    "node-record-lpcm16": "0.2.0",
-    "yargs": "6.6.0"
+    "@google-cloud/storage": "1.0.0",
+    "node-record-lpcm16": "0.3.0",
+    "yargs": "7.0.2"
   },
   "engines": {
     "node": ">=4.3.2"

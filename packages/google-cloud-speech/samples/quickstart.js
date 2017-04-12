@@ -42,5 +42,8 @@ speechClient.recognize(fileName, options)
   .then((results) => {
     const transcription = results[0];
     console.log(`Transcription: ${transcription}`);
+  })
+  .catch((err) => {
+    console.error('ERROR:', err);
   });
 // [END speech_quickstart]

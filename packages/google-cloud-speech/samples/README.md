@@ -42,9 +42,10 @@ Commands:
   listen              Detects speech in a microphone input stream.
 
 Options:
-  --help            Show help                                                                                  [boolean]
+  --help                 Show help                                                                             [boolean]
   --encoding, -e                                                                          [string] [default: "LINEAR16"]
-  --sampleRate, -r                                                                             [number] [default: 16000]
+  --sampleRateHertz, -r                                                                        [number] [default: 16000]
+  --languageCode, -l                                                                         [string] [default: "en-US"]
 
 Examples:
   node recognize.js sync ./resources/audio.raw -e LINEAR16 -r 16000
