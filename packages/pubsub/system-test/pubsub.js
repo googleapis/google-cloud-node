@@ -43,6 +43,10 @@ describe('pubsub', function() {
     TOPICS[2].name
   ];
 
+  function generateSnapshotName() {
+    return 'test-snapshot-' + uuid.v4();
+  }
+
   function generateSubName() {
     return 'test-subscription-' + uuid.v4();
   }
@@ -473,7 +477,7 @@ describe('pubsub', function() {
   });
 
   describe('Snapshot', function() {
-    var SNAPSHOT_NAME = 'test-snapshot-' + uuid.v4();
+    var SNAPSHOT_NAME = generateSnapshotName();
 
     var topic;
     var subscription;
@@ -522,12 +526,49 @@ describe('pubsub', function() {
         });
     });
 
-    it('should seek to a snapshot', function(done) {
-      subscription.seek(SNAPSHOT_NAME, done);
-    });
+    describe('seeking', function() {
+      var subscription;
+      var messageId;
 
-    it('should seek to a date', function(done) {
-      subscription.seek(new Date(), done);
+      beforeEach(function() {
+        subscription = topic.subscription();
+
+        return subscription.create().then(function() {
+          return topic.publish('Hello, world!');
+        }).then(function(data) {
+          messageId = data[0][0];
+        });
+      });
+
+      function checkMessage() {
+        return subscription.pull().then(function(data) {
+          var message = data[0][0];
+          assert.strictEqual(message.id, messageId);
+          return message.ack();
+        });
+      }
+
+      it('should seek to a snapshot', function() {
+        var snapshotName = generateSnapshotName();
+
+        return subscription.createSnapshot(snapshotName).then(function() {
+          return checkMessage();
+        }).then(function() {
+          return subscription.seek(snapshotName);
+        }).then(function() {
+          return checkMessage();
+        });
+      });
+
+      it('should seek to a date', function() {
+        var date = new Date();
+
+        return checkMessage().then(function() {
+          return subscription.seek(date);
+        }).then(function() {
+          return checkMessage();
+        });
+      });
     });
   });
 });
