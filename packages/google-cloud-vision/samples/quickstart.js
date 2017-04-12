@@ -37,5 +37,8 @@ visionClient.detectLabels(fileName)
 
     console.log('Labels:');
     labels.forEach((label) => console.log(label));
+  })
+  .catch((err) => {
+    console.error('ERROR:', err);
   });
 // [END vision_quickstart]

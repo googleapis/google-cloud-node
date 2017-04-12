@@ -37,20 +37,26 @@ __Usage:__ `node detect.js --help`
 
 ```
 Commands:
-  faces <fileName>                     Detects faces in a local image file.
-  faces-gcs <bucket> <fileName>        Detects faces in an image in Google Cloud Storage.
-  labels <fileName>                    Detects labels in a local image file.
-  labels-gcs <bucket> <fileName>       Detects labels in an image in Google Cloud Storage.
-  landmarks <fileName>                 Detects landmarks in a local image file.
-  landmarks-gcs <bucket> <fileName>    Detects landmarks in an image in Google Cloud Storage.
-  text <fileName>                      Detects text in a local image file.
-  text-gcs <bucket> <fileName>         Detects text in an image in Google Cloud Storage.
-  logos <fileName>                     Detects logos in a local image file.
-  logos-gcs <bucket> <fileName>        Detects logos in an image in Google Cloud Storage.
-  properties <fileName>                Detects image properties in a local image file.
-  properties-gcs <bucket> <fileName>   Detects image properties in an image in Google Cloud Storage.
-  safe-search <fileName>               Detects safe search properties in a local image file.
-  safe-search-gcs <bucket> <fileName>  Detects safe search properties in an image in Google Cloud Storage.
+  faces <fileName>                         Detects faces in a local image file.
+  faces-gcs <bucketName> <fileName>        Detects faces in an image in Google Cloud Storage.
+  labels <fileName>                        Detects labels in a local image file.
+  labels-gcs <bucketName> <fileName>       Detects labels in an image in Google Cloud Storage.
+  landmarks <fileName>                     Detects landmarks in a local image file.
+  landmarks-gcs <bucketName> <fileName>    Detects landmarks in an image in Google Cloud Storage.
+  text <fileName>                          Detects text in a local image file.
+  text-gcs <bucketName> <fileName>         Detects text in an image in Google Cloud Storage.
+  logos <fileName>                         Detects logos in a local image file.
+  logos-gcs <bucketName> <fileName>        Detects logos in an image in Google Cloud Storage.
+  properties <fileName>                    Detects image properties in a local image file.
+  properties-gcs <bucketName> <fileName>   Detects image properties in an image in Google Cloud Storage.
+  safe-search <fileName>                   Detects safe search properties in a local image file.
+  safe-search-gcs <bucketName> <fileName>  Detects safe search properties in an image in Google Cloud Storage.
+  crops <fileName>                         Detects crop hints in a local image file.
+  crops-gcs <bucketName> <fileName>        Detects crop hints in an image in Google Cloud Storage.
+  web <fileName>                           Finds similar photos on the web for a local image file.
+  web-gcs <bucketName> <fileName>          Finds similar photos on the web for an image in Google Cloud Storage.
+  fulltext <fileName>                      Extracts full text from a local image file.
+  fulltext-gcs <bucketName> <fileName>     Extracts full text from an image in Google Cloud Storage.
 
 Options:
   --help  Show help                                                                                            [boolean]
@@ -70,6 +76,12 @@ Examples:
   node detect.js properties-gcs my-bucket your-image.jpg
   node detect.js safe-search ./resources/wakeupcat.jpg
   node detect.js safe-search-gcs my-bucket your-image.jpg
+  node detect.js crops ./resources/wakeupcat.jpg
+  node detect.js crops-gcs my-bucket your-image.jpg
+  node detect.js web ./resources/wakeupcat.jpg
+  node detect.js web-gcs my-bucket your-image.jpg
+  node detect.js fulltext ./resources/wakeupcat.jpg
+  node detect.js fulltext-gcs my-bucket your-image.jpg
 
 For more information, see https://cloud.google.com/vision/docs
 ```
