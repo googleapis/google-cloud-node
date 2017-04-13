@@ -17,20 +17,14 @@
 'use strict';
 
 var assert = require('assert');
-var GrpcServiceObject = require('@google-cloud/common-grpc').ServiceObject;
 var proxyquire = require('proxyquire');
-var util = require('util');
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
-  GrpcServiceObject.apply(this, arguments);
 }
-
-util.inherits(FakeGrpcServiceObject, GrpcServiceObject);
 
 describe('Snapshot', function() {
   var Snapshot;
-  var snapshot;
 
   var SNAPSHOT_NAME = 'a';
   var PROJECT_ID = 'grape-spaceship-123';
@@ -39,12 +33,10 @@ describe('Snapshot', function() {
     projectId: PROJECT_ID
   };
 
-  var fakeCreateSnapshotReturn = 'a/b/c/d';
   var SUBSCRIPTION = {
     parent: PUBSUB,
-    createSnapshot: function() {
-      return fakeCreateSnapshotReturn;
-    }
+    createSnapshot: function() {},
+    seek: function() {}
   };
 
   before(function() {
@@ -55,20 +47,13 @@ describe('Snapshot', function() {
     });
   });
 
-  beforeEach(function() {
-    snapshot = new Snapshot(PUBSUB, SNAPSHOT_NAME);
-  });
-
   describe('initialization', function() {
     var FULL_SNAPSHOT_NAME = 'a/b/c/d';
     var formatName_;
 
     before(function() {
       formatName_ = Snapshot.formatName_;
-
-      Snapshot.formatName_ = function(projectId, name) {
-        assert.strictEqual(projectId, PROJECT_ID);
-        assert.strictEqual(name, SNAPSHOT_NAME);
+      Snapshot.formatName_ = function() {
         return FULL_SNAPSHOT_NAME;
       };
     });
@@ -77,15 +62,35 @@ describe('Snapshot', function() {
       Snapshot.formatName_ = formatName_;
     });
 
-    it('should create and cache the full name', function() {
-      assert.strictEqual(snapshot.name, FULL_SNAPSHOT_NAME);
+    describe('name', function() {
+      it('should create and cache the full name', function() {
+        Snapshot.formatName_ = function(projectId, name) {
+          assert.strictEqual(projectId, PROJECT_ID);
+          assert.strictEqual(name, SNAPSHOT_NAME);
+          return FULL_SNAPSHOT_NAME;
+        };
+
+        var snapshot = new Snapshot(PUBSUB, SNAPSHOT_NAME);
+        assert.strictEqual(snapshot.name, FULL_SNAPSHOT_NAME);
+      });
+
+      it('should pull the projectId from subscription parent', function() {
+        Snapshot.formatName_ = function(projectId, name) {
+          assert.strictEqual(projectId, PROJECT_ID);
+          assert.strictEqual(name, SNAPSHOT_NAME);
+          return FULL_SNAPSHOT_NAME;
+        };
+
+        var snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
+        assert.strictEqual(snapshot.name, FULL_SNAPSHOT_NAME);
+      });
     });
 
     it('should inherit from GrpcServiceObject', function() {
-      assert(snapshot instanceof FakeGrpcServiceObject);
-
+      var snapshot = new Snapshot(PUBSUB, SNAPSHOT_NAME);
       var calledWith = snapshot.calledWith_[0];
 
+      assert(snapshot instanceof FakeGrpcServiceObject);
       assert.strictEqual(calledWith.parent, PUBSUB);
       assert.strictEqual(calledWith.id, FULL_SNAPSHOT_NAME);
       assert.deepEqual(calledWith.methods, {
@@ -102,21 +107,26 @@ describe('Snapshot', function() {
     });
 
     describe('with Subscription parent', function() {
-      beforeEach(function() {
-        snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
-      });
+      it('should include the create method', function(done) {
+        SUBSCRIPTION.createSnapshot = function(callback) {
+          callback(); // The done function
+        };
 
-      it('should pull the projectId from pubsub', function() {
-        assert.strictEqual(snapshot.name, FULL_SNAPSHOT_NAME);
-      });
-
-      it('should include the create method', function() {
+        var snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
         var calledWith = snapshot.calledWith_[0];
 
         assert(calledWith.methods.create);
+        calledWith.createMethod(done);
+      });
 
-        var createMethodReturn = calledWith.createMethod();
-        assert.strictEqual(createMethodReturn, fakeCreateSnapshotReturn);
+      it('should create a seek method', function(done) {
+        SUBSCRIPTION.seek = function(name, callback) {
+          assert.strictEqual(name, SNAPSHOT_NAME);
+          callback(); // The done function
+        };
+
+        var snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
+        snapshot.seek(done);
       });
     });
   });

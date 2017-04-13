@@ -734,9 +734,8 @@ Subscription.prototype.pull = function(options, callback) {
 /**
  * Seeks an existing subscription to a point in time or a given snapshot.
  *
- * @param {string|date} snapshot - The point to seek to.
- *     This will accept a {module:pubsub/snapshot} instance, the name of the
- *     snapshot or a Date object.
+ * @param {string|date} snapshot - The point to seek to. This will accept the
+ *     name of the snapshot or a Date object.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {object} callback.apiResponse - The full API response from the
@@ -833,7 +832,7 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
 
 /**
  * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
- * create a topic.
+ * create a snapshot.
  *
  * @throws {Error} If a name is not provided.
  *
@@ -842,8 +841,6 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
  *
  * @example
  * var snapshot = subscription.snapshot('my-snapshot');
- *
- * snapshot.create(function() {});
  */
 Subscription.prototype.snapshot = function(name) {
   return this.parent.snapshot.call(this, name);

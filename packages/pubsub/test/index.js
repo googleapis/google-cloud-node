@@ -22,8 +22,6 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var Snapshot = require('../src/snapshot.js');
-
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
 
@@ -47,6 +45,10 @@ var fakeUtil = extend({}, util, {
 });
 
 function FakeGrpcService() {
+  this.calledWith_ = arguments;
+}
+
+function FakeSnapshot() {
   this.calledWith_ = arguments;
 }
 
@@ -90,7 +92,7 @@ describe('PubSub', function() {
       '@google-cloud/common-grpc': {
         Service: FakeGrpcService
       },
-      './snapshot.js': Snapshot,
+      './snapshot.js': FakeSnapshot,
       './subscription.js': Subscription,
       './topic.js': Topic
     });
@@ -289,7 +291,7 @@ describe('PubSub', function() {
         done();
       };
 
-      pubsub.getSnapshots(options, function() {});
+      pubsub.getSnapshots(options, assert.ifError);
     });
 
     it('should return Snapshot instances with metadata', function(done) {
@@ -324,7 +326,7 @@ describe('PubSub', function() {
       });
     });
 
-    it('should pass error if api returns an error', function() {
+    it('should pass error if api returns an error', function(done) {
       var error = new Error('Error');
 
       pubsub.request = function(protoOpts, reqOpts, callback) {
@@ -333,6 +335,7 @@ describe('PubSub', function() {
 
       pubsub.getSnapshots(function(err) {
         assert.equal(err, error);
+        done();
       });
     });
 
@@ -344,6 +347,7 @@ describe('PubSub', function() {
       };
 
       pubsub.getSnapshots(function(err, snapshots, nextQuery, apiResponse) {
+        assert.ifError(err);
         assert.equal(resp, apiResponse);
         done();
       });
@@ -810,7 +814,13 @@ describe('PubSub', function() {
     });
 
     it('should return a Snapshot object', function() {
-      assert(pubsub.snapshot('new-snapshot') instanceof Snapshot);
+      var SNAPSHOT_NAME = 'new-snapshot';
+      var snapshot = pubsub.snapshot(SNAPSHOT_NAME);
+      var args = snapshot.calledWith_;
+
+      assert(snapshot instanceof FakeSnapshot);
+      assert.strictEqual(args[0], pubsub);
+      assert.strictEqual(args[1], SNAPSHOT_NAME);
     });
   });
 

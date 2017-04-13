@@ -46,40 +46,40 @@ var util = require('util');
  *
  * @example
  * //-
- * // From {module:pubsub#getSnapshots}
+ * // From {module:pubsub#getSnapshots}:
  * //-
  * pubsub.getSnapshots(function(err, snapshots) {
- *   // snapshots is an array of Snapshot objects.
+ *   // `snapshots` is an array of Snapshot objects.
  * });
  *
  * //-
- * // From {module:pubsub#getSnapshotsStream}
+ * // From {module:pubsub#getSnapshotsStream}:
  * //-
  * pubsub.getSnapshotsStream()
  *   .on('error', console.error)
  *   .on('data', function(snapshot) {
- *     // snapshot is a Snapshot object.
+ *     // `snapshot` is a Snapshot object.
  *   });
  *
  * //-
- * // From {module:pubsub#snapshot}
+ * // From {module:pubsub#snapshot}:
  * //-
  * var snapshot = pubsub.snapshot('my-snapshot');
  * // snapshot is a Snapshot object.
  *
  * //-
- * // Create a snapshot with {module:pubsub/subscription#createSnapshot}
+ * // Create a snapshot with {module:pubsub/subscription#createSnapshot}:
  * //-
  * var subscription = pubsub.subscription('my-subscription');
  *
  * subscription.createSnapshot('my-snapshot', function(err, snapshot) {
  *   if (!err) {
- *     // snapshot is a Snapshot object.
+ *     // `snapshot` is a Snapshot object.
  *   }
  * });
  *
  * //-
- * // Seek to your snapshot.
+ * // Seek to your snapshot:
  * //-
  * var subscription = pubsub.subscription('my-subscription');
  *
@@ -175,6 +175,32 @@ function Snapshot(parent, name) {
      * });
      */
     methods.create = true;
+
+    /**
+     * Seeks an existing subscription to the snapshot.
+     *
+     * **This is only available if you accessed this object through
+     * {module:pubsub/subscription#snapshot}.**
+     *
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error from the API call, may be null.
+     * @param {object} callback.apiResponse - The full API response from the
+     *     service.
+     *
+     * @example
+     * var subscription = pubsub.subscription('my-subscription');
+     * var snapshot = subscription.snapshot('my-snapshot');
+     *
+     * snapshot.seek(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * snapshot.seek().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
+     */
+    this.seek = parent.seek.bind(parent, name);
   }
 
   commonGrpc.ServiceObject.call(this, config);

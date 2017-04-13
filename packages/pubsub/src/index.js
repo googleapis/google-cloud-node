@@ -662,7 +662,7 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
 
 /**
  * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
- * create a topic.
+ * create a snapshot.
  *
  * @throws {Error} If a name is not provided.
  *
@@ -671,8 +671,6 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
  *
  * @example
  * var snapshot = pubsub.snapshot('my-snapshot');
- *
- * snapshot.delete(function() {});
  */
 PubSub.prototype.snapshot = function(name) {
   if (!is.string(name)) {
