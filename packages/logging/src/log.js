@@ -47,7 +47,7 @@ var Metadata = require('./metadata.js');
  * event. Logs can be produced by Google Cloud Platform services, by third-party
  * services, or by your applications. For example, the log `apache-access` is
  * produced by the Apache Web Server, but the log
- * `compute.googleapis.com./activity_log` is produced by Google Compute Engine.
+ * `compute.googleapis.com/activity_log` is produced by Google Compute Engine.
  *
  * @resource [Introduction to Logs]{@link https://cloud.google.com/logging/docs/basic-concepts#logs}
  *
@@ -545,7 +545,7 @@ Log.prototype.warning = function(entry, options, callback) {
  * //-
  * // You may also pass multiple log entries to write.
  * //-
- * var secondEntry = log.entry('compute.googleapis.com.', {
+ * var secondEntry = log.entry('gce_instance', {
  *   user: 'my_username'
  * });
  *
@@ -573,7 +573,7 @@ Log.prototype.warning = function(entry, options, callback) {
  * ];
  *
  * var options = {
- *   resource: 'compute.googleapis.com.'
+ *   resource: 'compute.googleapis.com'
  * };
  *
  * log.write(entries, options, function(err, apiResponse) {});

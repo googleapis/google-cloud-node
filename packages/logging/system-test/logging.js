@@ -122,7 +122,7 @@ describe('Logging', function() {
       }, function(err, sink, apiResponse) {
         assert.ifError(err);
 
-        var destination = 'storage.googleapis.com./' + bucket.name;
+        var destination = 'storage.googleapis.com/' + bucket.name;
         assert.strictEqual(apiResponse.destination, destination);
 
         done();
@@ -137,7 +137,7 @@ describe('Logging', function() {
       }, function(err, sink, apiResponse) {
         assert.ifError(err);
 
-        var destination = 'bigquery.googleapis.com./datasets/' + dataset.id;
+        var destination = 'bigquery.googleapis.com/datasets/' + dataset.id;
 
         // The projectId may have been replaced depending on how the system
         // tests are being run, so let's not care about that.
@@ -158,7 +158,7 @@ describe('Logging', function() {
       }, function(err, sink, apiResponse) {
         assert.ifError(err);
 
-        var destination = 'pubsub.googleapis.com./' + topic.name;
+        var destination = 'pubsub.googleapis.com/' + topic.name;
 
         // The projectId may have been replaced depending on how the system
         // tests are being run, so let's not care about that.

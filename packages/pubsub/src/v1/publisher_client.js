@@ -31,7 +31,7 @@ var configData = require('./publisher_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 
-var SERVICE_ADDRESS = 'pubsub.googleapis.com.';
+var SERVICE_ADDRESS = 'pubsub.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 

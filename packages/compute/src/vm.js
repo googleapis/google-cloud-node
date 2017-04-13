@@ -382,7 +382,7 @@ VM.prototype.detachDisk = function(disk, callback) {
     );
 
     var deviceName;
-    var baseUrl = 'https://www.googleapis.com./compute/v1/';
+    var baseUrl = 'https://www.googleapis.com/compute/v1/';
     var disks = metadata.disks || [];
 
     // Try to find the deviceName by matching the source of the attached disks
