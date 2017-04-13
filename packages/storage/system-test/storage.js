@@ -490,7 +490,7 @@ describe('storage', function() {
       });
     });
 
-    describe.only('buckets', function() {
+    describe('buckets', function() {
       it('should get a policy', function(done) {
         bucket.iam.getPolicy(function(err, policy) {
           assert.ifError(err);
@@ -515,11 +515,11 @@ describe('storage', function() {
         });
       });
 
-      it.only('should set a policy', function(done) {
+      it('should set a policy', function(done) {
         var policy = {
           bindings: [
             {
-              role: 'roles/storage.objectViewer',
+              role: 'roles/storage.legacyBucketReader',
               members: [
                 'allUsers'
               ]
@@ -545,7 +545,7 @@ describe('storage', function() {
 
           assert.deepEqual(permissions, {
             'storage.buckets.get': true,
-            'storage.buckets.update': true
+            'storage.buckets.update': false
           });
 
           done();
@@ -1120,8 +1120,9 @@ describe('storage', function() {
       async.each(NEW_FILES, deleteFile, done);
     });
 
-    it('should get files', function(done) {
+    it.only('should get files', function(done) {
       bucket.getFiles(function(err, files) {
+        require('fs').writeFileSync('./blah.json', JSON.stringify(files[0]))
         assert.ifError(err);
         assert.equal(files.length, NEW_FILES.length);
         done();
