@@ -18,5 +18,7 @@
 
 module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
-  keyFilename: process.env.GCLOUD_TESTS_KEY
+  keyFilename: process.env.GCLOUD_TESTS_KEY,
+  apiKey: process.env.GCLOUD_TESTS_API_KEY,
+  projectNumber: process.env.GCLOUD_TESTS_PROJECT_NUMBER
 };
