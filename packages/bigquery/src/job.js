@@ -225,9 +225,6 @@ Job.prototype.cancel = function(callback) {
  *     do not pass a callback.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The results of a job.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * //-
@@ -250,16 +247,16 @@ Job.prototype.cancel = function(callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, rows, nextQuery, apiResponse) {
+ * function manualPaginationCallback(err, rows, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
- *     job.getQueryResults(nextQuery, callback);
+ *     job.getQueryResults(nextQuery, manualPaginationCallback);
  *   }
- * };
+ * }
  *
  * job.getQueryResults({
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
