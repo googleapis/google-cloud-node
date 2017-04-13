@@ -20,6 +20,7 @@
 
 'use strict';
 
+var extend = require('extend');
 var is = require('is');
 var logging = require('@google-cloud/logging');
 var util = require('util');
@@ -109,7 +110,9 @@ function LoggingWinston(options) {
     return new LoggingWinston(options);
   }
 
-  options = options || {};
+  options = extend({
+    scopes: ['https://www.googleapis.com/auth/logging.write']
+  }, options);
 
   var logName = options.logName || 'winston_log';
 

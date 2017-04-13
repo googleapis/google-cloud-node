@@ -111,6 +111,23 @@ describe('logging-winston', function() {
       });
     });
 
+    it('should default to logging.write scope', function() {
+      assert.deepEqual(fakeLoggingOptions_.scopes, [
+        'https://www.googleapis.com/auth/logging.write'
+      ]);
+    });
+
+    it('should initialize Log instance using provided scopes', function() {
+      var fakeScope = 'fake scope';
+
+      var optionsWithScopes = extend({}, OPTIONS);
+      optionsWithScopes.scopes = fakeScope;
+
+      new LoggingWinston(optionsWithScopes);
+
+      assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
+    });
+
     it('should localize Log instance using provided name', function() {
       var logName = 'log-name-override';
 
@@ -119,12 +136,18 @@ describe('logging-winston', function() {
 
       new LoggingWinston(optionsWithLogName);
 
-      assert.strictEqual(fakeLoggingOptions_, optionsWithLogName);
+      var loggingOptions = extend({}, fakeLoggingOptions_);
+      delete loggingOptions.scopes;
+
+      assert.deepEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
     });
 
     it('should localize Log instance using default name', function() {
-      assert.strictEqual(fakeLoggingOptions_, OPTIONS);
+      var loggingOptions = extend({}, fakeLoggingOptions_);
+      delete loggingOptions.scopes;
+
+      assert.deepEqual(loggingOptions, OPTIONS);
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
