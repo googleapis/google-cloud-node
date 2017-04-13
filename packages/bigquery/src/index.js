@@ -455,7 +455,6 @@ BigQuery.prototype.dataset = function(id) {
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/dataset[]} callback.datasets - The list of datasets
  *     in your project.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * bigquery.getDatasets(function(err, datasets) {
@@ -468,16 +467,16 @@ BigQuery.prototype.dataset = function(id) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, datasets, nextQuery, apiResponse) {
+ * function manualPaginationCallback(err, datasets, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
- *     bigquery.getDatasets(nextQuery, callback);
+ *     bigquery.getDatasets(nextQuery, manualPaginationCallback);
  *   }
- * };
+ * }
  *
  * bigquery.getDatasets({
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -575,7 +574,6 @@ BigQuery.prototype.getDatasetsStream =
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/job[]} callback.jobs - The list of jobs in your
  *     project.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * bigquery.getJobs(function(err, jobs) {
@@ -588,16 +586,16 @@ BigQuery.prototype.getDatasetsStream =
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, jobs, nextQuery, apiRespose) {
+ * function manualPaginationCallback(err, jobs, nextQuery, apiRespose) {
  *   if (nextQuery) {
  *     // More results exist.
- *     bigquery.getJobs(nextQuery, callback);
+ *     bigquery.getJobs(nextQuery, manualPaginationCallback);
  *   }
- * };
+ * }
  *
  * bigquery.getJobs({
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -713,14 +711,13 @@ BigQuery.prototype.job = function(id) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
  *
  * bigquery.query(query, function(err, rows) {
  *   if (!err) {
- *     // Handle results here.
+ *     // rows is an array of results.
  *   }
  * });
  *
@@ -737,7 +734,7 @@ BigQuery.prototype.job = function(id) {
  *   params: [
  *     'google'
  *   ]
- * }, callback);
+ * }, function(err, rows) {});
  *
  * //-
  * // Or if you prefer to name them, that's also supported.
@@ -752,7 +749,7 @@ BigQuery.prototype.job = function(id) {
  *   params: {
  *     owner: 'google'
  *   }
- * }, callback);
+ * }, function(err, rows) {});
  *
  * //-
  * // If you need to use a `DATE`, `DATETIME`, `TIME`, or `TIMESTAMP` type in
@@ -764,16 +761,16 @@ BigQuery.prototype.job = function(id) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, rows, nextQuery, apiResponse) {
+ * function manualPaginationCallback(err, rows, nextQuery, apiResponse) {
  *   if (nextQuery) {
- *     bigquery.query(nextQuery, callback);
+ *     bigquery.query(nextQuery, manualPaginationCallback);
  *   }
- * };
+ * }
  *
  * bigquery.query({
  *   query: query,
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.

@@ -357,7 +357,6 @@ Dataset.prototype.delete = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/table[]} callback.tables - The list of tables from
  *     your Dataset.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * dataset.getTables(function(err, tables) {
@@ -368,16 +367,16 @@ Dataset.prototype.delete = function(options, callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * function callback(err, tables, nextQuery, apiResponse) {
+ * function manualPaginationCallback(err, tables, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
- *     dataset.getTables(nextQuery, callback);
+ *     dataset.getTables(nextQuery, manualPaginationCallback);
  *   }
  * }
  *
  * dataset.getTables({
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.

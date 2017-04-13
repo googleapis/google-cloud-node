@@ -711,12 +711,11 @@ Table.prototype.export = function(destination, options, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The table data from specified set of rows.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * table.getRows(function(err, rows) {
  *   if (!err) {
- *     // Handle results here.
+ *     // rows is an array of results.
  *   }
  * });
  *
@@ -724,16 +723,16 @@ Table.prototype.export = function(destination, options, callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, rows, nextQuery, apiResponse) {
+ * function manualPaginationCallback(err, rows, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
- *     table.getRows(nextQuery, callback);
+ *     table.getRows(nextQuery, manualPaginationCallback);
  *   }
- * };
+ * }
  *
  * table.getRows({
  *   autoPaginate: false
- * }, callback);
+ * }, manualPaginationCallback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
