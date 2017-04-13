@@ -1122,7 +1122,7 @@ describe('Logging', function() {
 
             assert.strictEqual(config, CONFIG);
 
-            var expectedDestination = 'storage.googleapis.com./' + bucket.name;
+            var expectedDestination = 'storage.googleapis.com/' + bucket.name;
             assert.strictEqual(config.destination, expectedDestination);
 
             callback(); // done()
@@ -1237,7 +1237,7 @@ describe('Logging', function() {
           it('should call createSink with string destination', function(done) {
             logging.createSink = function(name, config, callback) {
               var expectedDestination = [
-                'bigquery.googleapis.com.',
+                'bigquery.googleapis.com',
                 'projects',
                 dataset.parent.projectId,
                 'datasets',
@@ -1361,7 +1361,7 @@ describe('Logging', function() {
 
           it('should call createSink with string destination', function(done) {
             logging.createSink = function(name, config, callback) {
-              var expectedDestination = 'pubsub.googleapis.com./' + topic.name;
+              var expectedDestination = 'pubsub.googleapis.com/' + topic.name;
               assert.strictEqual(name, SINK_NAME);
               assert.strictEqual(config, CONFIG);
               assert.strictEqual(config.destination, expectedDestination);
