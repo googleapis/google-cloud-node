@@ -58,19 +58,6 @@ var Configuration = function(givenConfig, logger) {
    */
   this._logger = logger;
   /**
-   * The _reportUncaughtExceptions property is meant to contain the optional
-   * runtime configuration property reportUncaughtExceptions. This property will
-   * default to true if not given false through the runtime configuration
-   * meaning that the default behavior is to catch uncaught exceptions, report
-   * them to the Stackdriver Errors API and then exit. If given false uncaught
-   * exceptions will not be listened for and not be caught or reported.
-   * @memberof Configuration
-   * @private
-   * @type {Boolean}
-   * @defaultvalue true
-   */
-  this._reportUncaughtExceptions = true;
-  /**
    * The _shouldReportErrorsToAPI property is meant to denote whether or not
    * the Stackdriver error reporting library will actually try to report Errors
    * to the Stackdriver Error API. The value of this property is derived from
@@ -276,12 +263,6 @@ Configuration.prototype._gatherLocalConfiguration = function() {
       'true in the runtime configuration object'
     ].join(' '));
   }
-  if (isBoolean(this._givenConfiguration.reportUncaughtExceptions)) {
-    this._reportUncaughtExceptions = this._givenConfiguration
-      .reportUncaughtExceptions;
-  } else if (has(this._givenConfiguration, 'reportUncaughtExceptions'))  {
-    throw new Error('config.reportUncaughtExceptions must be a boolean');
-  }
   if (isString(this._givenConfiguration.key)) {
     this._key = this._givenConfiguration.key;
   } else if (has(this._givenConfiguration, 'key')) {
@@ -356,16 +337,6 @@ Configuration.prototype._checkLocalProjectId = function(cb) {
     }
   }
   return this._projectId;
-};
-/**
- * Returns the _reportUncaughtExceptions property on the instance.
- * @memberof Configuration
- * @public
- * @function getReportUncaughtExceptions
- * @returns {Boolean} - returns the _reportUncaughtExceptions property
- */
-Configuration.prototype.getReportUncaughtExceptions = function() {
-  return this._reportUncaughtExceptions;
 };
 /**
  * Returns the _shouldReportErrorsToAPI property on the instance.
