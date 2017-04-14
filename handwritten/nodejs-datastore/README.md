@@ -1,4 +1,4 @@
-# @google-cloud/datastore ([Beta][versioning])
+# @google-cloud/datastore ([GA][versioning])
 > Cloud Datastore Client Library for Node.js
 
 *Looking for more Google APIs than just Datastore? You might want to check out [`google-cloud`][google-cloud].*
