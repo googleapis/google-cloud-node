@@ -43,6 +43,12 @@ var Acl = require('./acl.js');
 var File = require('./file.js');
 
 /**
+ * @type {module:storage/iam}
+ * @private
+ */
+var Iam = require('./iam.js');
+
+/**
  * The size of a file (in bytes) must be greater than this number to
  * automatically trigger a resumable upload.
  *
@@ -306,6 +312,33 @@ function Bucket(storage, name) {
     request: this.request.bind(this),
     pathPrefix: '/defaultObjectAcl'
   });
+
+  /**
+   * Get and set IAM policies for your bucket.
+   *
+   * @mixes module:storage/iam
+   *
+   * @resource [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
+   * @resource [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
+   * @resource [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+   *
+   * @example
+   * //-
+   * // Get the IAM policy for your bucket.
+   * //-
+   * bucket.iam.getPolicy(function(err, policy) {
+   *   console.log(policy);
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.iam.getPolicy().then(function(data) {
+   *   var policy = data[0];
+   *   var apiResponse = data[1];
+   * });
+   */
+  this.iam = new Iam(this);
 }
 
 util.inherits(Bucket, common.ServiceObject);

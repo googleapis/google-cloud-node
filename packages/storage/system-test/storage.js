@@ -475,6 +475,85 @@ describe('storage', function() {
     });
   });
 
+  describe('iam', function() {
+    var PROJECT_ID;
+
+    before(function(done) {
+      storage.authClient.getProjectId(function(err, projectId) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        PROJECT_ID = projectId;
+        done();
+      });
+    });
+
+    describe('buckets', function() {
+      it('should get a policy', function(done) {
+        bucket.iam.getPolicy(function(err, policy) {
+          assert.ifError(err);
+
+          assert.deepEqual(policy.bindings, [
+            {
+              members: [
+                'projectEditor:' + PROJECT_ID,
+                'projectOwner:' + PROJECT_ID
+              ],
+              role: 'roles/storage.legacyBucketOwner'
+            },
+            {
+              members: [
+                'projectViewer:' + PROJECT_ID
+              ],
+              role: 'roles/storage.legacyBucketReader'
+            }
+          ]);
+
+          done();
+        });
+      });
+
+      it('should set a policy', function(done) {
+        var policy = {
+          bindings: [
+            {
+              role: 'roles/storage.legacyBucketReader',
+              members: [
+                'allUsers'
+              ]
+            }
+          ]
+        };
+
+        bucket.iam.setPolicy(policy, function(err, newPolicy) {
+          assert.ifError(err);
+          assert.deepEqual(newPolicy.bindings, policy.bindings);
+          done();
+        });
+      });
+
+      it('should test the iam permissions', function(done) {
+        var testPermissions = [
+          'storage.buckets.get',
+          'storage.buckets.update'
+        ];
+
+        bucket.iam.testPermissions(testPermissions, function(err, permissions) {
+          assert.ifError(err);
+
+          assert.deepEqual(permissions, {
+            'storage.buckets.get': true,
+            'storage.buckets.update': true
+          });
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getting buckets', function() {
     var bucketsToCreate = [
       generateName(),
