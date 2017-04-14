@@ -104,7 +104,7 @@ function VM(zone, name) {
   this.waiters = [];
 
   this.url = format('{base}/{project}/zones/{zone}/instances/{name}', {
-    base: 'https://www.googleapis.com/compute/v1/projects',
+    base: 'https://www.googleapis.com./compute/v1/projects',
     project: zone.compute.projectId,
     zone: zone.name,
     name: this.name
