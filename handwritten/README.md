@@ -44,6 +44,20 @@ var errors = require('@google-cloud/error-reporting')({
 errors.report(new Error('Something broke!'));
 ```
 
+- **One may even catch and report application-wide uncaught errors:**
+  - *It is recommended to catch uncaughtExceptions for production-deployed applications*
+  - To read more about uncaught exception handling in Node.js and what it means for your application [please click here](https://nodejs.org/api/process.html#process_event_uncaughtexception)
+
+```js
+var errors = require('@google-cloud/error-reporting')();
+process.on('uncaughtException', (e) => {
+  // Write the error to stderr.
+  console.error(e);
+  // Report that same error the Stackdriver Error Service
+  errors.report(e);
+});
+```
+
 1. **View reported errors:**
 
   Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.

@@ -25,7 +25,6 @@ var manual = require('./interfaces/manual.js');
 var express = require('./interfaces/express.js');
 var restify = require('./interfaces/restify');
 var messageBuilder = require('./interfaces/message-builder.js');
-var uncaughtException = require('./interfaces/uncaught.js');
 var createLogger = require('./logger.js');
 
 /**
@@ -83,9 +82,6 @@ function Errors(initConfiguration) {
   var logger = createLogger(initConfiguration);
   var config = new Configuration(initConfiguration, logger);
   var client = new AuthClient(config, logger);
-
-  // Setup the uncaught exception handler
-  uncaughtException(client, config);
 
   // Build the application interfaces for use by the hosting application
   /**
