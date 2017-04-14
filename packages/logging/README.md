@@ -1,4 +1,4 @@
-# @google-cloud/logging ([Beta][versioning])
+# @google-cloud/logging ([GA][versioning])
 > Google Stackdriver Logging Client Library for Node.js
 
 This module allows you to work with the Stackdriver Logging API. If you are already using [`winston`][winston]

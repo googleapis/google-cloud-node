@@ -12,16 +12,16 @@
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
+* [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
+* [Google Stackdriver Logging](#google-stackdriver-logging-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Cloud Datastore](#cloud-datastore-beta) (Beta)
 * [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
 * [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
-* [Google Stackdriver Logging](#google-stackdriver-logging-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -153,6 +153,69 @@ var gcloud = require('google-cloud')({
 You can also set auth on a per-API-instance basis. The examples below show you how.
 
 
+## Cloud Datastore (GA)
+
+- [API Documentation][gcloud-datastore-docs]
+- [Official Documentation][cloud-datastore-docs]
+
+*Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
+
+#### Using the Cloud Datastore API module
+
+```
+$ npm install --save @google-cloud/datastore
+```
+
+```js
+var datastore = require('@google-cloud/datastore');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var datastoreClient = datastore({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var key = datastoreClient.key(['Product', 'Computer']);
+
+datastoreClient.get(key, function(err, entity) {
+  console.log(err || entity);
+});
+
+// Save data to Datastore.
+var blogPostData = {
+  title: 'How to make the perfect homemade pasta',
+  author: 'Andrew Chilton',
+  isDraft: true
+};
+
+var blogPostKey = datastoreClient.key('BlogPost');
+
+datastoreClient.save({
+  key: blogPostKey,
+  data: blogPostData
+}, function(err) {
+  // `blogPostKey` has been updated with an ID so you can do more operations
+  // with it, such as an update.
+  blogPostData.isDraft = false;
+
+  datastoreClient.save({
+    key: blogPostKey,
+    data: blogPostData
+  }, function(err) {
+    if (!err) {
+      // The blog post is now published!
+    }
+  });
+});
+```
+
+
 ## Cloud Storage (GA)
 
 - [API Documentation][gcloud-storage-docs]
@@ -214,65 +277,63 @@ localReadStream.pipe(remoteWriteStream);
 ```
 
 
-## Cloud Datastore (Beta)
+## Google Stackdriver Logging (Beta)
 
-- [API Documentation][gcloud-datastore-docs]
-- [Official Documentation][cloud-datastore-docs]
+- [API Documentation][gcloud-logging-docs]
+- [Official Documentation][cloud-logging-docs]
 
-*Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
-
-#### Using the Cloud Datastore API module
+#### Using the Google Stackdriver Logging API module
 
 ```
-$ npm install --save @google-cloud/datastore
+$ npm install --save @google-cloud/logging
 ```
 
 ```js
-var datastore = require('@google-cloud/datastore');
+var logging = require('@google-cloud/logging');
 ```
 
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
+// Authenticating on a global-basis. You can also authenticate on a per-API-
+// basis (see Authentication section above).
 
-var datastoreClient = datastore({
+var loggingClient = logging({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-var key = datastoreClient.key(['Product', 'Computer']);
+// Create a sink using a Bucket as a destination.
+var gcs = storage();
 
-datastoreClient.get(key, function(err, entity) {
-  console.log(err || entity);
-});
+loggingClient.createSink('my-new-sink', {
+  destination: gcs.bucket('my-sink')
+}, function(err, sink) {});
 
-// Save data to Datastore.
-var blogPostData = {
-  title: 'How to make the perfect homemade pasta',
-  author: 'Andrew Chilton',
-  isDraft: true
+// Write a critical entry to a log.
+var syslog = loggingClient.log('syslog');
+
+var metadata = {
+  resource: {
+    type: 'gce_instance',
+    labels: {
+      zone: 'global',
+      instance_id: '3'
+    }
+  }
 };
 
-var blogPostKey = datastoreClient.key('BlogPost');
+var entry = syslog.entry(metadata, {
+  delegate: process.env.user
+});
 
-datastoreClient.save({
-  key: blogPostKey,
-  data: blogPostData
-}, function(err) {
-  // `blogPostKey` has been updated with an ID so you can do more operations
-  // with it, such as an update.
-  blogPostData.isDraft = false;
+syslog.critical(entry, function(err) {});
 
-  datastoreClient.save({
-    key: blogPostKey,
-    data: blogPostData
-  }, function(err) {
-    if (!err) {
-      // The blog post is now published!
-    }
-  });
+// Get all entries in your project.
+loggingClient.getEntries(function(err, entries) {
+  if (!err) {
+    // `entries` contains all of the entries from the logs in your project.
+  }
 });
 ```
 
@@ -626,67 +687,6 @@ job.getQueryResults(function(err, rows) {});
 
 // Or get the same results as a readable stream.
 job.getQueryResults().on('data', function(row) {});
-```
-
-
-## Google Stackdriver Logging (Beta)
-
-- [API Documentation][gcloud-logging-docs]
-- [Official Documentation][cloud-logging-docs]
-
-#### Using the Google Stackdriver Logging API module
-
-```
-$ npm install --save @google-cloud/logging
-```
-
-```js
-var logging = require('@google-cloud/logging');
-```
-
-#### Preview
-
-```js
-// Authenticating on a global-basis. You can also authenticate on a per-API-
-// basis (see Authentication section above).
-
-var loggingClient = logging({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a sink using a Bucket as a destination.
-var gcs = storage();
-
-loggingClient.createSink('my-new-sink', {
-  destination: gcs.bucket('my-sink')
-}, function(err, sink) {});
-
-// Write a critical entry to a log.
-var syslog = loggingClient.log('syslog');
-
-var metadata = {
-  resource: {
-    type: 'gce_instance',
-    labels: {
-      zone: 'global',
-      instance_id: '3'
-    }
-  }
-};
-
-var entry = syslog.entry(metadata, {
-  delegate: process.env.user
-});
-
-syslog.critical(entry, function(err) {});
-
-// Get all entries in your project.
-loggingClient.getEntries(function(err, entries) {
-  if (!err) {
-    // `entries` contains all of the entries from the logs in your project.
-  }
-});
 ```
 
 
