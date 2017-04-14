@@ -36,6 +36,12 @@ var uuid = require('uuid');
 var IAM = require('./iam.js');
 
 /**
+ * @type {module:pubsub/snapshot}
+ * @private
+ */
+var Snapshot = require('./snapshot.js');
+
+/**
  * @const {number} - The amount of time a subscription pull HTTP connection to
  *     Pub/Sub stays open.
  * @private
@@ -473,6 +479,64 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
 };
 
 /**
+ * Create a snapshot with the given name.
+ *
+ * @param {string} name - Name of the snapshot.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {module:pubsub/snapshot} callback.snapshot - The newly created
+ *     snapshot.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var callback = function(err, snapshot, apiResponse) {
+ *   if (!err) {
+ *     // The snapshot was created successfully.
+ *   }
+ * };
+ *
+ * subscription.createSnapshot('my-snapshot', callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.createSnapshot('my-snapshot').then(function(data) {
+ *   var snapshot = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Subscription.prototype.createSnapshot = function(name, callback) {
+  var self = this;
+
+  if (!is.string(name)) {
+    throw new Error('A name is required to create a snapshot.');
+  }
+
+  var protoOpts = {
+    service: 'Subscriber',
+    method: 'createSnapshot'
+  };
+
+  var reqOpts = {
+    name: Snapshot.formatName_(this.parent.projectId, name),
+    subscription: this.name
+  };
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var snapshot = self.snapshot(name);
+    snapshot.metadata = resp;
+
+    callback(null, snapshot, resp);
+  });
+};
+
+/**
  * Add functionality on top of a message returned from the API, including the
  * ability to `ack` and `skip` the message.
  *
@@ -668,6 +732,57 @@ Subscription.prototype.pull = function(options, callback) {
 };
 
 /**
+ * Seeks an existing subscription to a point in time or a given snapshot.
+ *
+ * @param {string|date} snapshot - The point to seek to. This will accept the
+ *     name of the snapshot or a Date object.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call, may be null.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var callback = function(err, resp) {
+ *   if (!err) {
+ *     // Seek was successful.
+ *   }
+ * };
+ *
+ * subscription.seek('my-snapshot', callback);
+ *
+ * //-
+ * // Alternatively, to specify a certain point in time, you can provide a Date
+ * // object.
+ * //-
+ * var date = new Date('October 21 2015');
+ *
+ * subscription.seek(date, callback);
+ */
+Subscription.prototype.seek = function(snapshot, callback) {
+  var protoOpts = {
+    service: 'Subscriber',
+    method: 'seek'
+  };
+
+  var reqOpts = {
+    subscription: this.name
+  };
+
+  if (is.string(snapshot)) {
+    reqOpts.snapshot = Snapshot.formatName_(this.parent.projectId, snapshot);
+  } else if (is.date(snapshot)) {
+    reqOpts.time = {
+      seconds: Math.floor(snapshot.getTime() / 1000),
+      nanos: snapshot.getMilliseconds() * 1e6
+    };
+  } else {
+    throw new Error('Either a snapshot name or Date is needed to seek to.');
+  }
+
+  this.request(protoOpts, reqOpts, callback);
+};
+
+/**
  * Modify the ack deadline for a specific message. This method is useful to
  * indicate that more time is needed to process a message by the subscriber, or
  * to make the message available for redelivery if the processing was
@@ -713,6 +828,22 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
   this.request(protoOpts, reqOpts, function(err, resp) {
     callback(err, resp);
   });
+};
+
+/**
+ * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
+ * create a snapshot.
+ *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the snapshot.
+ * @return {module:pubsub/snapshot}
+ *
+ * @example
+ * var snapshot = subscription.snapshot('my-snapshot');
+ */
+Subscription.prototype.snapshot = function(name) {
+  return this.parent.snapshot.call(this, name);
 };
 
 /**
@@ -827,6 +958,8 @@ Subscription.prototype.startPulling_ = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Subscription);
+common.util.promisifyAll(Subscription, {
+  exclude: ['snapshot']
+});
 
 module.exports = Subscription;

@@ -43,6 +43,10 @@ describe('pubsub', function() {
     TOPICS[2].name
   ];
 
+  function generateSnapshotName() {
+    return 'test-snapshot-' + uuid.v4();
+  }
+
   function generateSubName() {
     return 'test-subscription-' + uuid.v4();
   }
@@ -468,6 +472,102 @@ describe('pubsub', function() {
           'pubsub.topics.update': true
         });
         done();
+      });
+    });
+  });
+
+  describe('Snapshot', function() {
+    var SNAPSHOT_NAME = generateSnapshotName();
+
+    var topic;
+    var subscription;
+    var snapshot;
+
+    before(function(done) {
+      topic = pubsub.topic(TOPIC_NAMES[0]);
+      subscription = topic.subscription(generateSubName());
+      snapshot = subscription.snapshot(SNAPSHOT_NAME);
+      subscription.create(done);
+    });
+
+    after(function() {
+      return pubsub.getSnapshots().then(function(data) {
+        return Promise.all(data[0].map(function(snapshot) {
+          return snapshot.delete();
+        }));
+      });
+    });
+
+    it('should create a snapshot', function(done) {
+      snapshot.create(done);
+    });
+
+    it('should get a list of snapshots', function(done) {
+      pubsub.getSnapshots(function(err, snapshots) {
+        assert.ifError(err);
+        assert.strictEqual(snapshots.length, 1);
+        assert.strictEqual(snapshots[0].name.split('/').pop(), SNAPSHOT_NAME);
+        done();
+      });
+    });
+
+    it('should get a list of snapshots as a stream', function(done) {
+      var snapshots = [];
+
+      pubsub.getSnapshotsStream()
+        .on('error', done)
+        .on('data', function(snapshot) {
+          snapshots.push(snapshot);
+        })
+        .on('end', function() {
+          assert.strictEqual(snapshots.length, 1);
+          assert.strictEqual(snapshots[0].name.split('/').pop(), SNAPSHOT_NAME);
+          done();
+        });
+    });
+
+    describe('seeking', function() {
+      var subscription;
+      var messageId;
+
+      beforeEach(function() {
+        subscription = topic.subscription();
+
+        return subscription.create().then(function() {
+          return topic.publish('Hello, world!');
+        }).then(function(data) {
+          messageId = data[0][0];
+        });
+      });
+
+      function checkMessage() {
+        return subscription.pull().then(function(data) {
+          var message = data[0][0];
+          assert.strictEqual(message.id, messageId);
+          return message.ack();
+        });
+      }
+
+      it('should seek to a snapshot', function() {
+        var snapshotName = generateSnapshotName();
+
+        return subscription.createSnapshot(snapshotName).then(function() {
+          return checkMessage();
+        }).then(function() {
+          return subscription.seek(snapshotName);
+        }).then(function() {
+          return checkMessage();
+        });
+      });
+
+      it('should seek to a date', function() {
+        var date = new Date();
+
+        return checkMessage().then(function() {
+          return subscription.seek(date);
+        }).then(function() {
+          return checkMessage();
+        });
       });
     });
   });
