@@ -95,7 +95,7 @@ function Compute(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/compute/v1',
+    baseUrl: 'https://www.googleapis.com./compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json')
   };

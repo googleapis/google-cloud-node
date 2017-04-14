@@ -545,7 +545,7 @@ Log.prototype.warning = function(entry, options, callback) {
  * //-
  * // You may also pass multiple log entries to write.
  * //-
- * var secondEntry = log.entry('compute.googleapis.com', {
+ * var secondEntry = log.entry('gce_instance', {
  *   user: 'my_username'
  * });
  *

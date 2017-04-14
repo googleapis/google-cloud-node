@@ -665,7 +665,7 @@ describe('BigQuery/Table', function() {
 
       it('should pass the correct request uri', function(done) {
         makeWritableStreamOverride = function(stream, options) {
-          var uri = 'https://www.googleapis.com/upload/bigquery/v2/projects/' +
+          var uri = 'https://www.googleapis.com./upload/bigquery/v2/projects/' +
             table.bigQuery.projectId + '/jobs';
           assert.equal(options.request.uri, uri);
           done();

@@ -94,7 +94,7 @@ describe('Translate', function() {
       assert(translate instanceof FakeService);
 
       var calledWith = translate.calledWith_[0];
-      var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
+      var baseUrl = 'https://translation.googleapis.com./language/translate/v2';
 
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [

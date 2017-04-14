@@ -53,7 +53,7 @@ function DNS(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/dns/v1',
+    baseUrl: 'https://www.googleapis.com./dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
       'https://www.googleapis.com/auth/cloud-platform'

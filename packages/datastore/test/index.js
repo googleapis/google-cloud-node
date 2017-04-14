@@ -116,7 +116,10 @@ describe('Datastore', function() {
     });
 
     it('should set the default base URL', function() {
-      assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
+      assert.strictEqual(
+        datastore.defaultBaseUrl_,
+        'datastore.googleapis.com.'
+      );
     });
 
     it('should set default API connection details', function(done) {

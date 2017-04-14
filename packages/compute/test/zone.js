@@ -286,7 +286,7 @@ describe('Zone', function() {
 
         zone.request = function(reqOpts) {
           var expectedTarget = [
-            'https://content.googleapis.com/compute/v1/projects/',
+            'https://content.googleapis.com./compute/v1/projects/',
             COMPUTE.projectId,
             '/zones/',
             zone.name,

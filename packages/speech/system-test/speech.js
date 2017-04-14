@@ -39,7 +39,7 @@ FILENAMES.forEach(function(filename) {
     name: name,
     path: path.join(__dirname, 'data/' + name),
     gcsUri: 'gs://' + BUCKET_NAME + '/' + name,
-    httpUri: 'https://storage.googleapis.com/' + BUCKET_NAME + '/' + name
+    httpUri: 'https://storage.googleapis.com./' + BUCKET_NAME + '/' + name
   };
 });
 

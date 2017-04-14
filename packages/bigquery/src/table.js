@@ -548,7 +548,7 @@ Table.prototype.createWriteStream = function(metadata) {
       },
       request: {
         uri: format('{base}/{projectId}/jobs', {
-          base: 'https://www.googleapis.com/upload/bigquery/v2/projects',
+          base: 'https://www.googleapis.com./upload/bigquery/v2/projects',
           projectId: self.bigQuery.projectId
         })
       }
