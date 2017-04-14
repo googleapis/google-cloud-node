@@ -13,7 +13,7 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
-        "0.52.0",
+        "v0.52.0",
         "0.51.1",
         "0.51.0",
         "0.50.0",
@@ -80,7 +80,6 @@
       "name": "@google-cloud/bigquery",
       "defaultService": "bigquery",
       "versions": [
-        "0.9.2",
         "0.9.1",
         "0.9.0",
         "0.8.0",
@@ -99,7 +98,6 @@
       "name": "@google-cloud/bigtable",
       "defaultService": "bigtable",
       "versions": [
-        "0.9.1",
         "0.9.0",
         "0.8.0",
         "0.7.0",
@@ -118,7 +116,6 @@
       "name": "@google-cloud/compute",
       "defaultService": "compute",
       "versions": [
-        "0.7.1",
         "0.7.0",
         "0.6.0",
         "0.4.0",
@@ -134,7 +131,6 @@
       "name": "@google-cloud/datastore",
       "defaultService": "datastore",
       "versions": [
-        "1.0.0",
         "0.8.0",
         "0.7.1",
         "0.7.0",
@@ -154,7 +150,6 @@
       "name": "@google-cloud/dns",
       "defaultService": "dns",
       "versions": [
-        "0.6.1",
         "0.6.0",
         "0.4.0",
         "0.3.1",
@@ -169,7 +164,6 @@
       "name": "@google-cloud/language",
       "defaultService": "language",
       "versions": [
-        "0.10.3",
         "0.10.2",
         "0.10.1",
         "0.10.0",
@@ -192,7 +186,6 @@
       "name": "@google-cloud/logging-bunyan",
       "defaultService": "logging-bunyan",
       "versions": [
-        "0.4.2",
         "0.4.1",
         "0.4.0",
         "0.3.0",
@@ -204,8 +197,6 @@
       "name": "@google-cloud/logging-winston",
       "defaultService": "logging-winston",
       "versions": [
-        "0.4.1",
-        "0.4.0",
         "0.3.1",
         "0.3.0",
         "0.1.0",
@@ -217,7 +208,6 @@
       "name": "@google-cloud/logging",
       "defaultService": "logging",
       "versions": [
-        "1.0.0",
         "0.10.0",
         "0.9.0",
         "0.8.0",
@@ -250,7 +240,6 @@
       "name": "@google-cloud/prediction",
       "defaultService": "prediction",
       "versions": [
-        "0.6.1",
         "0.6.0",
         "0.4.0",
         "0.3.1",
@@ -266,7 +255,6 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
-        "0.10.0",
         "0.9.0",
         "0.8.1",
         "0.8.0",
@@ -285,7 +273,6 @@
       "name": "@google-cloud/resource",
       "defaultService": "resource",
       "versions": [
-        "0.7.1",
         "0.7.0",
         "0.5.0",
         "0.4.0",
@@ -300,7 +287,6 @@
       "name": "@google-cloud/spanner",
       "defaultService": "spanner",
       "versions": [
-        "0.4.2",
         "0.4.1",
         "0.4.0",
         "0.3.0",
@@ -314,7 +300,6 @@
       "name": "@google-cloud/speech",
       "defaultService": "speech",
       "versions": [
-        "0.9.1",
         "0.9.0",
         "0.8.0",
         "0.7.0",
@@ -332,7 +317,6 @@
       "name": "@google-cloud/storage",
       "defaultService": "storage",
       "versions": [
-        "1.1.0",
         "1.0.0",
         "0.8.0",
         "0.7.0",
@@ -350,7 +334,6 @@
       "name": "@google-cloud/translate",
       "defaultService": "translate",
       "versions": [
-        "0.8.1",
         "0.8.0",
         "0.6.0",
         "0.5.1",
