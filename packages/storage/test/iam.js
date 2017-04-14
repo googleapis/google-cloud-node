@@ -37,11 +37,6 @@ describe('storage/iam', function() {
   var BUCKET_INSTANCE;
 
   before(function() {
-    BUCKET_INSTANCE = {
-      id: 'bucket-id',
-      request: util.noop
-    };
-
     Iam = proxyquire('../src/iam.js', {
       '@google-cloud/common': {
         util: fakeUtil
@@ -50,6 +45,11 @@ describe('storage/iam', function() {
   });
 
   beforeEach(function() {
+    BUCKET_INSTANCE = {
+      id: 'bucket-id',
+      request: util.noop
+    };
+
     iam = new Iam(BUCKET_INSTANCE);
   });
 
