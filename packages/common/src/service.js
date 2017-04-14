@@ -115,8 +115,10 @@ Service.prototype.request_ = function(reqOpts, callback) {
 
   delete reqOpts.interceptors_;
 
+  var pkg = this.packageJson;
   reqOpts.headers = extend({}, reqOpts.headers, {
-    'User-Agent': util.getUserAgentFromPackageJson(this.packageJson)
+    'User-Agent': util.getUserAgentFromPackageJson(pkg),
+    'x-goog-api-client': `gl-node/${process.versions.node} gccl/${pkg.version}`
   });
 
   return this.makeAuthenticatedRequest(reqOpts, callback);

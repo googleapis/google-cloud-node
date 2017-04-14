@@ -254,6 +254,19 @@ describe('Service', function() {
       service.request_(reqOpts, assert.ifError);
     });
 
+    it('should add the api-client header', function(done) {
+      service.makeAuthenticatedRequest = function(reqOpts) {
+        var pkg = service.packageJson;
+        assert.strictEqual(
+          reqOpts.headers['x-goog-api-client'],
+          `gl-node/${process.versions.node} gccl/${pkg.version}`
+        );
+        done();
+      };
+
+      service.request_(reqOpts, assert.ifError);
+    });
+
     describe('projectIdRequired', function() {
       describe('false', function() {
         it('should include the projectId', function(done) {
