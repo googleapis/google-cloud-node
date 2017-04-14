@@ -29,7 +29,6 @@ var nock = require('nock');
 
 var METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/project';
 
-process.removeAllListeners('uncaughtException');
 var env = {
   NODE_ENV: process.env.NODE_ENV,
   GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
@@ -84,12 +83,6 @@ describe('Configuration class', function() {
         it('Should have a property reflecting the config argument', function() {
           assert.deepEqual(c._givenConfiguration, stubConfig);
         });
-        it('Should reportUncaughtExceptions', function() {
-          assert.strictEqual(c.getReportUncaughtExceptions(), true);
-        });
-        it('Should not reportUncaughtExceptions', function() {
-          assert.strictEqual(c.getShouldReportErrorsToAPI(), false);
-        });
         it('Should not have a project id', function() {
           assert.strictEqual(c._projectId, null);
         });
@@ -125,11 +118,6 @@ describe('Configuration class', function() {
           });
         });
         describe('exception behaviour', function() {
-          it('Should throw', function() {
-            assert.throws(function() {
-              new Configuration({reportUncaughtExceptions: 1}, logger);
-            });
-          });
           it('Should throw if invalid type for key', function() {
             assert.throws(function() {
               new Configuration({key: null}, logger);
@@ -292,21 +280,6 @@ describe('Configuration class', function() {
         });
         it('Should assign', function() {
           assert.strictEqual(c.getKey(), key);
-        });
-      });
-      describe('reportUncaughtExceptions', function() {
-        var c;
-        var projectId = '123-xyz';
-        var reportUncaughtExceptions = false;
-        before(function() {
-          c = new Configuration({
-            projectId: projectId,
-            reportUncaughtExceptions: reportUncaughtExceptions
-          });
-        });
-        it('Should assign', function() {
-          assert.strictEqual(c.getReportUncaughtExceptions(),
-            reportUncaughtExceptions);
         });
       });
     });
