@@ -62,7 +62,8 @@ describe('storage/iam', function() {
       BUCKET_INSTANCE.request = {
         bind: function(context) {
           assert.strictEqual(context, BUCKET_INSTANCE);
-          done();
+          setImmediate(done);
+          return util.noop;
         }
       };
 
