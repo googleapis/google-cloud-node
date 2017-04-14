@@ -59,16 +59,13 @@ describe('storage/iam', function() {
     });
 
     it('should localize the request function', function(done) {
-      BUCKET_INSTANCE.request = {
-        bind: function(context) {
-          assert.strictEqual(context, BUCKET_INSTANCE);
-          setImmediate(done);
-          return util.noop;
-        }
+      BUCKET_INSTANCE.request = function(callback) {
+        assert.strictEqual(this, BUCKET_INSTANCE);
+        callback(); // done()
       };
 
       var iam = new Iam(BUCKET_INSTANCE);
-      iam.request_();
+      iam.request_(done);
     });
 
     it('should localize the resource ID', function() {
