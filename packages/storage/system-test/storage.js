@@ -545,7 +545,7 @@ describe('storage', function() {
 
           assert.deepEqual(permissions, {
             'storage.buckets.get': true,
-            'storage.buckets.update': false
+            'storage.buckets.update': true
           });
 
           done();
@@ -1120,9 +1120,8 @@ describe('storage', function() {
       async.each(NEW_FILES, deleteFile, done);
     });
 
-    it.only('should get files', function(done) {
+    it('should get files', function(done) {
       bucket.getFiles(function(err, files) {
-        require('fs').writeFileSync('./blah.json', JSON.stringify(files[0]))
         assert.ifError(err);
         assert.equal(files.length, NEW_FILES.length);
         done();

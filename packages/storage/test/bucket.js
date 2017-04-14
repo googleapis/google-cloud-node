@@ -102,6 +102,10 @@ function FakeAcl() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+function FakeIam() {
+  this.calledWith_ = arguments;
+}
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -128,7 +132,8 @@ describe('Bucket', function() {
         util: fakeUtil
       },
       './acl.js': FakeAcl,
-      './file.js': FakeFile
+      './file.js': FakeFile,
+      './iam.js': FakeIam
     });
   });
 
@@ -213,6 +218,11 @@ describe('Bucket', function() {
         getMetadata: true,
         setMetadata: true
       });
+    });
+
+    it('should localize an Iam instance', function() {
+      assert(bucket.iam instanceof FakeIam);
+      assert.deepStrictEqual(bucket.iam.calledWith_[0], bucket);
     });
   });
 

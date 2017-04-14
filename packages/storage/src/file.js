@@ -45,12 +45,6 @@ var zlib = require('zlib');
 var Acl = require('./acl.js');
 
 /**
- * @type {module:storage/iam}
- * @private
- */
-var Iam = require('./iam.js');
-
-/**
  * Custom error type for errors related to getting signed errors and policies.
  *
  * @private
