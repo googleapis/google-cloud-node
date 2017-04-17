@@ -60,6 +60,11 @@ function Vision(options) {
     return new Vision(options);
   }
 
+  options = extend({}, options, {
+    libName: 'gccl',
+    libVersion: require('../package.json').version
+  });
+
   this.api = {
     Vision: v1(options).imageAnnotatorClient(options)
   };
