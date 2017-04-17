@@ -28,11 +28,12 @@ runtime configuration object is set to `true`.
 
   In your project, on the command line:
 
-	```
-	  # Install through npm while saving to the local 'package.json'
-	  npm install --save @google-cloud/error-reporting
-	```
-1. **Instrument your application:**
+```bash
+  # Install through npm while saving to the local 'package.json'
+  npm install --save @google-cloud/error-reporting
+```
+
+2. **Instrument your application:**
 
 ```js
 // Require the library and initialize the error handler
@@ -45,8 +46,8 @@ errors.report(new Error('Something broke!'));
 ```
 
 - **One may even catch and report application-wide uncaught errors:**
-  - *It is recommended to catch uncaughtExceptions for production-deployed applications*
-  - To read more about uncaught exception handling in Node.js and what it means for your application [please click here](https://nodejs.org/api/process.html#process_event_uncaughtexception)
+  - *It is recommended to catch uncaughtExceptions for production-deployed applications.*
+  - To read more about uncaught exception handling in Node.js and what it means for your application [please click here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
@@ -58,7 +59,7 @@ process.on('uncaughtException', (e) => {
 });
 ```
 
-1. **View reported errors:**
+3. **View reported errors:**
 
   Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.
 
