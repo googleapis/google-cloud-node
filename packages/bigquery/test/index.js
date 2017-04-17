@@ -692,9 +692,9 @@ describe('BigQuery', function() {
   describe('getJobs', function() {
     it('should get jobs from the api', function(done) {
       bq.request = function(reqOpts) {
-        assert.equal(reqOpts.uri, '/jobs');
-        assert.deepEqual(reqOpts.qs, {});
-
+        assert.strictEqual(reqOpts.uri, '/jobs');
+        assert.deepStrictEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.useQuerystring, true);
         done();
       };
 
