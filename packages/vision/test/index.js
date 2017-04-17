@@ -106,11 +106,15 @@ describe('Vision', function() {
       var expectedVisionClient = {};
 
       fakeV1Override = function(options) {
-        assert.strictEqual(options, OPTIONS);
+        var expected = extend({}, OPTIONS, {
+          libName: 'gccl',
+          libVersion: require('../package.json').version
+        });
+        assert.deepStrictEqual(options, expected);
 
         return {
           imageAnnotatorClient: function(options) {
-            assert.strictEqual(options, OPTIONS);
+            assert.deepStrictEqual(options, expected);
             return expectedVisionClient;
           }
         };
