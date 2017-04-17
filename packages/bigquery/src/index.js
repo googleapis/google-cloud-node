@@ -617,7 +617,7 @@ BigQuery.prototype.getJobs = function(options, callback) {
   this.request({
     uri: '/jobs',
     qs: options,
-    useQueryString: true
+    useQuerystring: true
   }, function(err, resp) {
     if (err) {
       callback(err, null, null, resp);
