@@ -27,6 +27,7 @@ function v1(options) {
   return imageAnnotatorClient(gaxGrpc);
 }
 
+v1.GAPIC_VERSION = '0.7.1';
 v1.SERVICE_ADDRESS = imageAnnotatorClient.SERVICE_ADDRESS;
 v1.ALL_SCOPES = imageAnnotatorClient.ALL_SCOPES;
 
