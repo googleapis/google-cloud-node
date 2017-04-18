@@ -53,6 +53,7 @@
   ],
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
+    "@google-cloud/common-gax": "^0.1.0",
     "@google-cloud/common-grpc": "^0.3.0",
     "arrify": "^1.0.0",
     "async": "^2.1.4",

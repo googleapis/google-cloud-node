@@ -189,13 +189,14 @@ describe('metadata', function() {
     var RETURNED_PROJECT_ID = 'project-id';
 
     beforeEach(function() {
-      metadata.logging.auth.getProjectId = function(callback) {
+      metadata.logging.authClient = {};
+      metadata.logging.authClient.getProjectId = function(callback) {
         callback(null, RETURNED_PROJECT_ID);
       };
     });
 
     it('should get the project ID', function(done) {
-      metadata.logging.auth.getProjectId = function() {
+      metadata.logging.authClient.getProjectId = function() {
         done();
       };
 
@@ -205,7 +206,7 @@ describe('metadata', function() {
     it('should return error from getProjectId', function(done) {
       var error = new Error('Error.');
 
-      metadata.logging.auth.getProjectId = function(callback) {
+      metadata.logging.authClient.getProjectId = function(callback) {
         callback(error);
       };
 
@@ -216,7 +217,7 @@ describe('metadata', function() {
     });
 
     it('should get the environment from auth client', function(done) {
-      metadata.logging.auth.getEnvironment = function() {
+      metadata.logging.authClient.getEnvironment = function() {
         done();
       };
 
@@ -233,7 +234,7 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging.auth.getEnvironment = function(callback) {
+          metadata.logging.authClient.getEnvironment = function(callback) {
             callback(null, {
               IS_APP_ENGINE: true
             });
@@ -256,7 +257,7 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging.auth.getEnvironment = function(callback) {
+          metadata.logging.authClient.getEnvironment = function(callback) {
             callback(null, {
               IS_CLOUD_FUNCTION: true
             });
@@ -279,7 +280,7 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging.auth.getEnvironment = function(callback) {
+          metadata.logging.authClient.getEnvironment = function(callback) {
             callback(null, {
               IS_COMPUTE_ENGINE: true
             });
@@ -302,7 +303,7 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging.auth.getEnvironment = function(callback) {
+          metadata.logging.authClient.getEnvironment = function(callback) {
             callback(null, {
               IS_CONTAINER_ENGINE: true
             });
@@ -325,7 +326,7 @@ describe('metadata', function() {
             return DESCRIPTOR;
           };
 
-          metadata.logging.auth.getEnvironment = function(callback) {
+          metadata.logging.authClient.getEnvironment = function(callback) {
             callback(null, {
               IS_APP_ENGINE: false,
               IS_CLOUD_FUNCTION: false,
