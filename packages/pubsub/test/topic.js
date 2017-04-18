@@ -259,7 +259,7 @@ describe('Topic', function() {
         timeout: 10
       };
 
-      topic.request = function(protoOpts, reqOpts) {
+      topic.request = function(protoOpts) {
         assert.strictEqual(protoOpts.timeout, options.timeout);
         done();
       };
