@@ -264,7 +264,7 @@ describe('Topic', function() {
         done();
       };
 
-      topic.publish(message, assert.ifError);
+      topic.publish(message, options, assert.ifError);
     });
 
     it('should send correct api request for raw message', function(done) {
