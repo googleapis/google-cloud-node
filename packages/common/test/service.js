@@ -167,6 +167,50 @@ describe('Service', function() {
     });
   });
 
+  describe('getProjectId', function() {
+    it('should get the project ID from the auth client', function(done) {
+      service.authClient = {
+        getProjectId: function() {
+          done();
+        }
+      };
+
+      service.getProjectId(assert.ifError);
+    });
+
+    it('should return error from auth client', function(done) {
+      var error = new Error('Error.');
+
+      service.authClient = {
+        getProjectId: function(callback) {
+          callback(error);
+        }
+      };
+
+      service.getProjectId(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should update and return the project ID if found', function(done) {
+      var projectId = 'detected-project-id';
+
+      service.authClient = {
+        getProjectId: function(callback) {
+          callback(null, projectId);
+        }
+      };
+
+      service.getProjectId(function(err, projectId_) {
+        assert.ifError(err);
+        assert.strictEqual(service.projectId, projectId);
+        assert.strictEqual(projectId_, projectId);
+        done();
+      });
+    });
+  });
+
   describe('request_', function() {
     var reqOpts;
 

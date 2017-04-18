@@ -29,6 +29,8 @@ var extend = require('extend');
  */
 var util = require('./util.js');
 
+var PROJECT_ID_TOKEN = '{{projectId}}';
+
 /**
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
@@ -57,10 +59,32 @@ function Service(config, options) {
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];
   this.packageJson = config.packageJson;
-  this.projectId = options.projectId || '{{projectId}}';
+  this.projectId = options.projectId || PROJECT_ID_TOKEN;
   this.projectIdRequired = config.projectIdRequired !== false;
   this.Promise = options.promise || Promise;
 }
+
+/**
+ * Get and update the Service's project ID.
+ *
+ * @param {function} callback - The callback function.
+ */
+Service.prototype.getProjectId = function(callback) {
+  var self = this;
+
+  this.authClient.getProjectId(function(err, projectId) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    if (self.projectId === PROJECT_ID_TOKEN && projectId) {
+      self.projectId = projectId;
+    }
+
+    callback(null, self.projectId);
+  });
+};
 
 /**
  * Make an authenticated API request.
