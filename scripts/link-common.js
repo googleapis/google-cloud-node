@@ -29,14 +29,17 @@
 var Module = require('./helpers').Module;
 
 var common = new Module('common');
+var commonGax = new Module('common-gax');
 var commonGrpc = new Module('common-grpc');
 
 var packages = Module.getAll();
 
 common.link();
+commonGax.link();
 commonGrpc.link();
 
 packages.forEach(function(pkg) {
   pkg.link(common);
+  pkg.link(commonGax);
   pkg.link(commonGrpc);
 });
