@@ -456,6 +456,10 @@ Topic.prototype.publish = function(messages, options, callback) {
     method: 'publish',
   };
 
+  if (options && is.number(options.timeout)) {
+     protoOpts.timeout = options.timeout;
+  }
+
   var reqOpts = {
     topic: this.name,
     messages: messages
