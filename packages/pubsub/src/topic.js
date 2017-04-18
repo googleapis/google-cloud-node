@@ -457,7 +457,7 @@ Topic.prototype.publish = function(messages, options, callback) {
   };
 
   if (is.number(options.timeout)) {
-     protoOpts.timeout = options.timeout;
+    protoOpts.timeout = options.timeout;
   }
 
   var reqOpts = {
