@@ -254,6 +254,19 @@ describe('Topic', function() {
       topic.publish(message, assert.ifError);
     });
 
+    it('should honor the timeout setting', function(done) {
+      var options = {
+        timeout: 10
+      };
+
+      topic.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.timeout, options.timeout);
+        done();
+      };
+
+      topic.publish(message, assert.ifError);
+    });
+
     it('should send correct api request for raw message', function(done) {
       topic.request = function(protoOpts, reqOpts) {
         assert.deepEqual(reqOpts.messages, [
