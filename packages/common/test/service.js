@@ -194,6 +194,7 @@ describe('Service', function() {
     });
 
     it('should update and return the project ID if found', function(done) {
+      var service = new Service({}, {});
       var projectId = 'detected-project-id';
 
       service.authClient = {
