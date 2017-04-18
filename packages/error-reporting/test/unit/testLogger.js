@@ -52,9 +52,33 @@ describe('logger', function() {
       });
     });
     describe('Default log level', function() {
+      var oldLog;
+      var text;
+      beforeEach(function() {
+        oldLog = console.log;
+        text = '';
+        console.log = function() {
+          oldLog.apply(this, arguments);
+          for (var i=0; i<arguments.length; i++) {
+            text += arguments[i];
+          }
+        };
+      });
+     afterEach(function() {
+        text = undefined;
+        console.log = oldLog;
+      });
       it('Should be able to WARN by default', function() {
         var logger = createLogger();
         logger.warn('test warning message');
+        assert.strictEqual(text,
+          'WARN:@google/cloud-errors: test warning message');
+      });
+      it('Should be able to ERROR by default', function() {
+        var logger = createLogger();
+        logger.error('test error message');
+        assert.strictEqual(text,
+          'ERROR:@google/cloud-errors: test error message');
       });
     });
   });

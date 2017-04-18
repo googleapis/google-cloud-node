@@ -41,18 +41,19 @@ var logger = require('@google-cloud/common').logger;
  */
 function createLogger(initConfiguration) {
   // Default to log level: warn (2)
-  var level = logger.WARN;
+  var DEFAULT_LEVEL = logger.LEVELS[2];
+  var level = DEFAULT_LEVEL;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
     level = logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL] ||
-      logger.LEVELS.warn;
+      DEFAULT_LEVEL;
   } else if (isObject(initConfiguration) &&
     has(initConfiguration, 'logLevel')) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer
-      level = logger.LEVELS[~~initConfiguration.logLevel] || logger.LEVELS.warn;
+      level = logger.LEVELS[~~initConfiguration.logLevel] || DEFAULT_LEVEL;
     } else if (isNumber(initConfiguration.logLevel)) {
-      level = logger.LEVELS[initConfiguration.logLevel] || logger.LEVELS.warn;
+      level = logger.LEVELS[initConfiguration.logLevel] || DEFAULT_LEVEL;
     } else {
       throw new Error('config.logLevel must be a number or decimal ' +
         'representation of a number in string form');
