@@ -375,6 +375,8 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  * @param {object=} options - Configuration object.
  * @param {boolean} options.raw - Enable if you require setting attributes on
  *     your messages.
+ * @param {number} options.timeout - Set a maximum amount of time in
+ *     milliseconds before giving up if no response is received.
  * @param {function=} callback - The callback function.
  *
  * @example
@@ -435,6 +437,7 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  *   var messageIds = data[0];
  *   var apiResponse = data[1];
  * });
+ *
  */
 Topic.prototype.publish = function(messages, options, callback) {
   messages = arrify(messages);
