@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
+var moment = require('moment');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -723,6 +724,7 @@ describe('PubSub', function() {
         encoding: 'utf-8',
         interval: 3,
         maxInProgress: 5,
+        retainAckedMessages: true,
         pushEndpoint: 'https://domain/push',
         timeout: 30000
       };
@@ -762,6 +764,53 @@ describe('PubSub', function() {
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, options, assert.ifError);
+    });
+
+    describe('message retention', function() {
+      it('should accept a Date', function(done) {
+        var expiration = moment().add(3.009, 'days');
+
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.retainAckedMessages, true);
+
+          var expectedSecs = (expiration - new Date()) / 1000;
+          assert(reqOpts.messageRetentionDuration.seconds >= expectedSecs - 2);
+          assert(reqOpts.messageRetentionDuration.seconds <= expectedSecs + 2);
+
+          var expectedNanos =
+            Math.floor(expectedSecs - Math.floor(expectedSecs)) * 1e9;
+          assert(reqOpts.messageRetentionDuration.nanos >= expectedNanos - 2);
+          assert(reqOpts.messageRetentionDuration.nanos <= expectedNanos + 2);
+
+          done();
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, {
+          messageRetentionDuration: expiration
+        }, assert.ifError);
+      });
+
+      it('should accept a number', function(done) {
+        var duration = moment.duration(3.009, 'days').asSeconds();
+
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.retainAckedMessages, true);
+
+          var expectedSecs = Math.floor(duration);
+          assert(reqOpts.messageRetentionDuration.seconds >= expectedSecs - 2);
+          assert(reqOpts.messageRetentionDuration.seconds <= expectedSecs + 2);
+
+          var expectedNanos = Math.floor(duration - expectedSecs) * 1e9;
+          assert(reqOpts.messageRetentionDuration.nanos >= expectedNanos - 2);
+          assert(reqOpts.messageRetentionDuration.nanos <= expectedNanos + 2);
+
+          done();
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, {
+          messageRetentionDuration: duration
+        }, assert.ifError);
+      });
     });
 
     describe('error', function() {

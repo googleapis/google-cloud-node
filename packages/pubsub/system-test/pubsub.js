@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var moment = require('moment');
 var Subscription = require('../src/subscription.js');
 var uuid = require('uuid');
 
@@ -310,6 +311,34 @@ describe('pubsub', function() {
       topic.subscribe(function(err, sub) {
         assert.ifError(err);
         sub.delete(done);
+      });
+    });
+
+    it('should create a subscription with message retention', function(done) {
+      var expiration = moment().add(3.009, 'days');
+
+      topic.subscribe({
+        messageRetentionDuration: expiration
+      }, function(err, sub) {
+        assert.ifError(err);
+
+        sub.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          assert.strictEqual(metadata.retainAckedMessages, true);
+
+          var expectedSecs = (expiration - new Date()) / 1000;
+          assert(metadata.messageRetentionDuration.seconds >= expectedSecs - 2);
+          assert(metadata.messageRetentionDuration.seconds <= expectedSecs + 2);
+
+          var expectedNanos =
+            Math.floor(expectedSecs - Math.floor(expectedSecs)) * 1e9;
+          assert(metadata.messageRetentionDuration.nanos >= expectedNanos - 2);
+          assert(metadata.messageRetentionDuration.nanos <= expectedNanos + 2);
+
+
+          sub.delete(done);
+        });
       });
     });
 
