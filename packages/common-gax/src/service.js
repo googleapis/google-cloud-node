@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*!
+ * @module common-gax/service
+ */
+
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -22,6 +26,17 @@ var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
 
+/**
+ * GaxService is a base class, meant to be inherited from by a "service" that
+ * uses GAX.
+ *
+ * @constructor
+ * @alias module:common-gax/service
+ *
+ * @param {object} config - Configuration object.
+ * @param {*} config.module - The generated module.
+ * @param {object} options - [Configuration object](#/docs/?method=gcloud).
+ */
 function GaxService(config, options) {
   if (global.GCLOUD_SANDBOX_ENV) {
     return;

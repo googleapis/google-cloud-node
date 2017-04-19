@@ -23,6 +23,7 @@ module.exports = {
   TOC: 'toc.json',
   IGNORE: [
     'common',
+    'common-gax',
     'common-grpc',
     'bigtable/src/mutation.js',
     'datastore/src/entity.js',

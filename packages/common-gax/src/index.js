@@ -15,12 +15,12 @@
  */
 
 /*!
- * @module commonGax
+ * @module common-gax
  */
 
 'use strict';
 
 /**
- * @type {module:commonGax/service}
+ * @type {module:common-gax/service}
  */
 exports.Service = require('./service.js');
