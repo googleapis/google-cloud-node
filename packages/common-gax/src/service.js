@@ -38,10 +38,6 @@ var util = require('util');
  * @param {object} options - [Configuration object](#/docs/?method=gcloud).
  */
 function GaxService(config, options) {
-  if (global.GCLOUD_SANDBOX_ENV) {
-    return;
-  }
-
   config = extend({
     scopes: config.module.ALL_SCOPES
   }, config);
