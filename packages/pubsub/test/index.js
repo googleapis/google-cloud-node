@@ -778,7 +778,7 @@ describe('PubSub', function() {
           assert(reqOpts.messageRetentionDuration.seconds <= expectedSecs + 2);
 
           var expectedNanos =
-            Math.floor(expectedSecs - Math.floor(expectedSecs)) * 1e9;
+            Math.floor((expectedSecs - Math.floor(expectedSecs)) * 1e9);
           assert(reqOpts.messageRetentionDuration.nanos >= expectedNanos - 2);
           assert(reqOpts.messageRetentionDuration.nanos <= expectedNanos + 2);
 
@@ -800,7 +800,7 @@ describe('PubSub', function() {
           assert(reqOpts.messageRetentionDuration.seconds >= expectedSecs - 2);
           assert(reqOpts.messageRetentionDuration.seconds <= expectedSecs + 2);
 
-          var expectedNanos = Math.floor(duration - expectedSecs) * 1e9;
+          var expectedNanos = Math.floor((duration - expectedSecs) * 1e9);
           assert(reqOpts.messageRetentionDuration.nanos >= expectedNanos - 2);
           assert(reqOpts.messageRetentionDuration.nanos <= expectedNanos + 2);
 
