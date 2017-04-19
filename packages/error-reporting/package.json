@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc --exclude=\"fuzzer.js\" mocha ./test/unit/*.js",
     "system-test": "nyc --exclude=\"error-message.js\" mocha ./system-test/*.js",
-    "lint": "jshint src/ index.js",
+    "lint": "jshint -c ../../.jshintrc src system-test test utils && jscs -c ../../.jscsrc src system-test test utils",
     "publish-module": "node ../../scripts/publish.js error-reporting"
   },
   "author": "Google Inc.",
@@ -15,6 +15,7 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "hapi": "^16.1.0",
+    "jscs": "^3.0.7",
     "jshint": "^2.9.2",
     "koa": "^1.2.0",
     "lodash.assign": "^4.2.0",
