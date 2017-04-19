@@ -64,7 +64,7 @@ describe('logger', function() {
           }
         };
       });
-     afterEach(function() {
+      afterEach(function() {
         text = undefined;
         console.log = oldLog;
       });
