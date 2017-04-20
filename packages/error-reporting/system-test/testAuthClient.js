@@ -129,7 +129,8 @@ const TEST_RUNNER = (function() {
     describe('Receiving non-retryable errors', function() {
       it('Should fail', function(done) {
         this.timeout(5000);
-        client.sendError({}, function(err, response, body) {
+        client.sendError({}, function(err, response,
+          /* jshint unused:false */ body) {
           assert(err instanceof Error);
           assert.strictEqual(err.message.toLowerCase(),
             'message cannot be empty.');
@@ -150,7 +151,8 @@ const TEST_RUNNER = (function() {
             intendedTries);
           return {error: 'Please try again later'};
         });
-        client.sendError(errorMessage, function(err, response, body) {
+        client.sendError(errorMessage, function(err, response,
+          /* jshint unused:false */ body) {
           assert.strictEqual(tries, intendedTries);
           done();
         });
@@ -302,7 +304,8 @@ const TEST_RUNNER = (function() {
         });
         after(() => env.sterilizeProcess());
         it('Should callback with an error', function(done) {
-          client.sendError({}, function(err, response, body) {
+          client.sendError({}, function(err, response,
+            /* jshint unused:false */ body) {
             assert(err instanceof Error);
             assert.strictEqual(err.message, ERROR_STRING);
             assert.strictEqual(response, null);
