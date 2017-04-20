@@ -927,7 +927,7 @@ describe('PubSub', function() {
     });
   });
 
-  describe.only('request', function() {
+  describe('request', function() {
     var TIMEOUT = Math.random();
 
     beforeEach(function() {
