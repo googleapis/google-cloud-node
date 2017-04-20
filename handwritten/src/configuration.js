@@ -324,7 +324,7 @@ Configuration.prototype._checkAuthConfiguration = function() {
  *  id or error encountered during id capture
  * @returns {Undefined} - does not return anything
  */
-Configuration.prototype._checkLocalProjectId = function(cb) {
+Configuration.prototype._checkLocalProjectId = function() {
   if (isString(this._projectId)) {
     // already has been set by the metadata service
     return this._projectId;
@@ -355,7 +355,7 @@ Configuration.prototype.getShouldReportErrorsToAPI = function() {
  * @function getProjectId
  * @returns {String|Null} - returns the _projectId property
  */
-Configuration.prototype.getProjectId = function(cb) {
+Configuration.prototype.getProjectId = function() {
   return this._checkLocalProjectId();
 };
 /**
