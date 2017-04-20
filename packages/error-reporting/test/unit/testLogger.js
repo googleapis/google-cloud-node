@@ -68,13 +68,13 @@ describe('logger', function() {
         text = undefined;
         console.log = oldLog;
       });
-      it('Should be able to WARN by default', function() {
+      it('Should print WARN logs by default', function() {
         var logger = createLogger();
         logger.warn('test warning message');
         assert.strictEqual(text,
           'WARN:@google/cloud-errors: test warning message');
       });
-      it('Should be able to ERROR by default', function() {
+      it('Should print ERROR logs by default', function() {
         var logger = createLogger();
         logger.error('test error message');
         assert.strictEqual(text,
