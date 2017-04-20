@@ -762,6 +762,24 @@ PubSub.prototype.topic = function(name) {
 };
 
 /**
+ * Intercept the call to {module:common/grpc-service#request}, making sure the
+ * correct timeouts are set.
+ *
+ * @private
+ */
+PubSub.prototype.request = function(protoOpts) {
+  var method = protoOpts.method;
+  var camelCaseMethod = method[0].toUpperCase() + method.substr(1);
+  var config = GAX_CONFIG[protoOpts.service].methods[camelCaseMethod];
+
+  if (is.undefined(arguments[0].timeout)) {
+    arguments[0].timeout = config.timeout_millis;
+  }
+
+  commonGrpc.Service.prototype.request.apply(this, arguments);
+};
+
+/**
  * Determine the appropriate endpoint to use for API requests, first trying the
  * local Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise
  * the default JSON API.
@@ -781,24 +799,6 @@ PubSub.prototype.determineBaseUrl_ = function() {
   this.baseUrl_ = baseUrl
     .replace(leadingProtocol, '')
     .replace(trailingSlashes, '');
-};
-
-/**
- * Intercept the call to {module:common/grpc-service#request}, making sure the
- * correct timeouts are set.
- *
- * @private
- */
-PubSub.prototype.request = function(protoOpts) {
-  var method = protoOpts.method;
-  var camelCaseMethod = method[0].toUpperCase() + method.substr(1);
-  var config = GAX_CONFIG[protoOpts.service].methods[camelCaseMethod];
-
-  if (is.undefined(arguments[0].timeout)) {
-    arguments[0].timeout = config.timeout_millis;
-  }
-
-  commonGrpc.Service.prototype.request.apply(this, arguments);
 };
 
 /*! Developer Documentation

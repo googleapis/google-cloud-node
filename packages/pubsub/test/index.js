@@ -40,13 +40,23 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['snapshot', 'subscription', 'topic']);
+    assert.deepEqual(options.exclude, [
+      'request',
+      'snapshot',
+      'subscription',
+      'topic'
+    ]);
   }
 });
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
+
+var grpcServiceRequestOverride;
+FakeGrpcService.prototype.request = function() {
+  return (grpcServiceRequestOverride || util.noop).apply(this, arguments);
+};
 
 function FakeSnapshot() {
   this.calledWith_ = arguments;
@@ -74,6 +84,22 @@ var fakePaginator = {
   }
 };
 
+var GAX_CONFIG_PUBLISHER_OVERRIDE = {};
+var GAX_CONFIG_SUBSCRIBER_OVERRIDE = {};
+
+var GAX_CONFIG = {
+  Publisher: {
+    interfaces: {
+      'google.pubsub.v1.Publisher': GAX_CONFIG_PUBLISHER_OVERRIDE
+    }
+  },
+  Subscriber: {
+    interfaces: {
+      'google.pubsub.v1.Subscriber': GAX_CONFIG_SUBSCRIBER_OVERRIDE
+    }
+  }
+};
+
 describe('PubSub', function() {
   var PubSub;
   var PROJECT_ID = 'test-project';
@@ -94,7 +120,10 @@ describe('PubSub', function() {
       },
       './snapshot.js': FakeSnapshot,
       './subscription.js': Subscription,
-      './topic.js': Topic
+      './topic.js': Topic,
+
+      './v1/publisher_client_config.json': GAX_CONFIG.Publisher,
+      './v1/subscriber_client_config.json': GAX_CONFIG.Subscriber
     });
   });
 
@@ -105,6 +134,7 @@ describe('PubSub', function() {
   });
 
   beforeEach(function() {
+    grpcServiceRequestOverride = null;
     SubscriptionOverride = null;
     pubsub = new PubSub(OPTIONS);
     pubsub.projectId = PROJECT_ID;
@@ -894,6 +924,86 @@ describe('PubSub', function() {
 
     it('should return a Topic object', function() {
       assert(pubsub.topic('new-topic') instanceof Topic);
+    });
+  });
+
+  describe.only('request', function() {
+    var TIMEOUT = Math.random();
+
+    beforeEach(function() {
+      GAX_CONFIG_PUBLISHER_OVERRIDE.methods = {
+        MethodName: {
+          timeout_millis: TIMEOUT
+        }
+      };
+    });
+
+    after(function() {
+      GAX_CONFIG_PUBLISHER_OVERRIDE.methods = {};
+    });
+
+    it('should pass through the request', function(done) {
+      var args = [
+        {
+          service: 'Publisher',
+          method: 'MethodName'
+        },
+        {
+          value: true
+        },
+        {
+          anotherValue: true
+        }
+      ];
+
+      grpcServiceRequestOverride = function() {
+        assert.strictEqual(this, pubsub);
+        assert.strictEqual(args[0], arguments[0]);
+        assert.strictEqual(args[1], arguments[1]);
+        assert.strictEqual(args[2], arguments[2]);
+        done();
+      };
+
+      pubsub.request.apply(pubsub, args);
+    });
+
+    it('should assign a timeout', function(done) {
+      grpcServiceRequestOverride = function(protoOpts) {
+        assert.strictEqual(protoOpts.timeout, TIMEOUT);
+        done();
+      };
+
+      pubsub.request({
+        service: 'Publisher',
+        method: 'MethodName'
+      });
+    });
+
+    it('should not override a timeout if set', function(done) {
+      var timeout = 0;
+
+      grpcServiceRequestOverride = function(protoOpts) {
+        assert.strictEqual(protoOpts.timeout, timeout);
+        done();
+      };
+
+      pubsub.request({
+        service: 'Publisher',
+        method: 'MethodName',
+        timeout: timeout
+      });
+    });
+
+    it('should camel case the method name', function(done) {
+      grpcServiceRequestOverride = function(protoOpts) {
+        assert.strictEqual(protoOpts.timeout, TIMEOUT);
+        done();
+      };
+
+      pubsub.request({
+        service: 'Publisher',
+        method: 'methodName'
+      });
     });
   });
 

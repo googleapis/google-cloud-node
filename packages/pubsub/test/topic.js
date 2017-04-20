@@ -72,6 +72,7 @@ describe('Topic', function() {
 
   beforeEach(function() {
     topic = new Topic(PUBSUB, TOPIC_NAME);
+    topic.parent = PUBSUB;
   });
 
   describe('initialization', function() {
@@ -128,10 +129,6 @@ describe('Topic', function() {
       };
       new Topic(PUBSUB, TOPIC_NAME);
     });
-
-    it('should assign pubsub object to `this`', function() {
-      assert.deepEqual(topic.pubsub, PUBSUB);
-    });
   });
 
   describe('formatMessage_', function() {
@@ -170,7 +167,7 @@ describe('Topic', function() {
 
   describe('getSubscriptions', function() {
     it('should accept just a callback', function(done) {
-      topic.pubsub.getSubscriptions = function(options, callback) {
+      topic.parent.getSubscriptions = function(options, callback) {
         assert.deepEqual(options, { topic: topic });
         callback();
       };
@@ -181,7 +178,7 @@ describe('Topic', function() {
     it('should pass correct args to pubsub#getSubscriptions', function(done) {
       var opts = { a: 'b', c: 'd' };
 
-      topic.pubsub = {
+      topic.parent = {
         getSubscriptions: function(options, callback) {
           assert.deepEqual(options, opts);
           assert.deepEqual(options.topic, topic);
@@ -197,7 +194,7 @@ describe('Topic', function() {
     it('should return a stream', function(done) {
       var fakeStream = {};
 
-      topic.pubsub.getSubscriptionsStream = function(options) {
+      topic.parent.getSubscriptionsStream = function(options) {
         assert.deepEqual(options, { topic: topic });
         setImmediate(done);
         return fakeStream;
@@ -210,7 +207,7 @@ describe('Topic', function() {
     it('should pass correct args to getSubscriptionsStream', function(done) {
       var opts = { a: 'b', c: 'd' };
 
-      topic.pubsub = {
+      topic.parent = {
         getSubscriptionsStream: function(options) {
           assert.deepEqual(options, opts);
           assert.deepEqual(options.topic, topic);
@@ -239,7 +236,7 @@ describe('Topic', function() {
     });
 
     it('should send correct api request', function(done) {
-      topic.request = function(protoOpts, reqOpts) {
+      topic.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Publisher');
         assert.strictEqual(protoOpts.method, 'publish');
 
@@ -259,7 +256,7 @@ describe('Topic', function() {
         timeout: 10
       };
 
-      topic.request = function(protoOpts) {
+      topic.parent.request = function(protoOpts) {
         assert.strictEqual(protoOpts.timeout, options.timeout);
         done();
       };
@@ -268,7 +265,7 @@ describe('Topic', function() {
     });
 
     it('should send correct api request for raw message', function(done) {
-      topic.request = function(protoOpts, reqOpts) {
+      topic.parent.request = function(protoOpts, reqOpts) {
         assert.deepEqual(reqOpts.messages, [
           {
             data: new Buffer(JSON.stringify(message)).toString('base64'),
@@ -291,7 +288,7 @@ describe('Topic', function() {
       };
       var originalMessage = extend({}, message);
 
-      topic.request = function() {
+      topic.parent.request = function() {
         assert.deepEqual(message, originalMessage);
         done();
       };
@@ -300,7 +297,7 @@ describe('Topic', function() {
     });
 
     it('should execute callback', function(done) {
-      topic.request = function(protoOpts, reqOpts, callback) {
+      topic.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, {});
       };
 
@@ -311,7 +308,7 @@ describe('Topic', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      topic.request = function(protoOpts, reqOpts, callback) {
+      topic.parent.request = function(protoOpts, reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -327,7 +324,7 @@ describe('Topic', function() {
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
 
-      topic.request = function(protoOpts, reqOpts, callback) {
+      topic.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -343,7 +340,7 @@ describe('Topic', function() {
       var subscriptionName = 'subName';
       var opts = {};
 
-      topic.pubsub.subscribe = function(t, subName, options, callback) {
+      topic.parent.subscribe = function(t, subName, options, callback) {
         assert.deepEqual(t, topic);
         assert.equal(subName, subscriptionName);
         assert.deepEqual(options, opts);
@@ -359,7 +356,7 @@ describe('Topic', function() {
       var subscriptionName = 'subName';
       var opts = {};
 
-      topic.pubsub.subscription = function(name, options) {
+      topic.parent.subscription = function(name, options) {
         assert.equal(name, subscriptionName);
         assert.deepEqual(options, opts);
         done();
@@ -369,7 +366,7 @@ describe('Topic', function() {
     });
 
     it('should attach the topic instance to the options', function(done) {
-      topic.pubsub.subscription = function(name, options) {
+      topic.parent.subscription = function(name, options) {
         assert.strictEqual(options.topic, topic);
         done();
       };
@@ -378,7 +375,7 @@ describe('Topic', function() {
     });
 
     it('should return the result', function(done) {
-      topic.pubsub.subscription = function() {
+      topic.parent.subscription = function() {
         return done;
       };
 
