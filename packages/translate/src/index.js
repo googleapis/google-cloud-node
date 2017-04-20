@@ -309,6 +309,10 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     refer to the upstream documentation for possible values.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
+ * @param {string} options.format - This optional parameter allows you to indicate the text
+ *     to be translated is either plain-text or HTML.
+ *     A value of 'html' indicates HTML and a value of 'text' indicates plain-text.
+ *     Defaults to 'html' if not specified.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object|object[]} callback.translations - If a single string input was
@@ -332,7 +336,8 @@ Translate.prototype.getLanguages = function(target, callback) {
  * //-
  * var options = {
  *   from: 'en',
- *   to: 'es'
+ *   to: 'es',
+ *   format: 'text'
  * };
  *
  * translate.translate('Hello', options, function(err, translation) {
@@ -388,6 +393,10 @@ Translate.prototype.translate = function(input, options, callback) {
 
     if (options.model) {
       body.model = options.model;
+    }
+
+    if (options.format) {
+      query.format = options.format;
     }
   }
 
