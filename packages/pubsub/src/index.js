@@ -47,6 +47,7 @@ var Topic = require('./topic.js');
 
 /**
  * @type {object} - GAX's default configuration.
+ * @private
  */
 var GAX_CONFIG = {
   Publisher: require('./v1/publisher_client_config.json').
