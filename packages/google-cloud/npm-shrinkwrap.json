@@ -13,21 +13,10 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/bigtable/-/bigtable-0.9.1.tgz"
     },
     "@google-cloud/common": {
-      "version": "0.13.1",
-      "from": "@google-cloud/common@>=0.13.0 <0.14.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.13.1.tgz"
+      "version": "0.13.2"
     },
     "@google-cloud/common-grpc": {
-      "version": "0.3.2",
-      "from": "@google-cloud/common-grpc@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/common-grpc/-/common-grpc-0.3.2.tgz",
-      "dependencies": {
-        "dot-prop": {
-          "version": "2.4.0",
-          "from": "dot-prop@>=2.4.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-2.4.0.tgz"
-        }
-      }
+      "version": "0.3.3"
     },
     "@google-cloud/compute": {
       "version": "0.7.1",
@@ -89,9 +78,9 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/prediction/-/prediction-0.6.1.tgz"
     },
     "@google-cloud/pubsub": {
-      "version": "0.10.0",
-      "from": "@google-cloud/pubsub@>=0.10.0 <0.11.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.10.0.tgz",
+      "version": "0.11.0",
+      "from": "@google-cloud/pubsub@0.11.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.11.0.tgz",
       "dependencies": {
         "uuid": {
           "version": "3.0.1",
@@ -1491,7 +1480,7 @@
         },
         "once": {
           "version": "1.4.0",
-          "from": "once@>=1.0.0 <2.0.0",
+          "from": "once@>=1.3.3 <2.0.0",
           "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
           "dependencies": {
             "wrappy": {
