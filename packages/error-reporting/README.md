@@ -1,9 +1,9 @@
-# Node.js module for Stackdriver Error Reporting
+# Stackdriver Error Reporting for Node.js
 
 [![NPM Version][npm-image]][npm-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 
-> **This is not an official Google product.** This module is experimental and may not be ready for use.
+> This module is experimental, and should be used by early adopters.
 > This module uses APIs that may be undocumented and are subject to change without notice.
 
 This module provides Stackdriver Error Reporting support for Node.js applications.
@@ -16,11 +16,12 @@ applications running in almost any environment. Here's an introductory video:
 ## Prerequisites
 
 1. Your application needs to use Node.js version 4.x or greater.
-1. You need a [Google Cloud project](https://console.cloud.google.com). Your application can run anywhere, but errors are reported to a particular project.
-1. [Enable the Stackdriver Error Reporting API](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview) for your project.
-1. The module will only send errors when the `NODE_ENV` environment variable is
+2. You need a [Google Cloud project](https://console.cloud.google.com). Your application can run anywhere, but errors are reported to a particular project.
+3. [Enable the Stackdriver Error Reporting API](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview) for your project.
+
+**Note:** The module will only send errors when the `NODE_ENV` environment variable is
 set to `production` or the `ignoreEnvironmentCheck` property given in the
-runtime configuration object is set to `true`.
+runtime configuration object is set to `true`.  See the [Configuration](#configuration) section for more details.
 
 ## Quick Start
 
@@ -33,7 +34,7 @@ runtime configuration object is set to `true`.
   npm install --save @google-cloud/error-reporting
 ```
 
-2. **Instrument your application:**
+2. **Require the module:**
 
 ```js
 // Require the library and initialize the error handler
@@ -45,9 +46,13 @@ var errors = require('@google-cloud/error-reporting')({
 errors.report(new Error('Something broke!'));
 ```
 
-- **One may even catch and report application-wide uncaught errors:**
-  - *It is recommended to catch uncaughtExceptions for production-deployed applications.*
-  - To read more about uncaught exception handling in Node.js and what it means for your application [please click here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
+3. **View reported errors:**
+
+  Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.
+
+## Catching and Reporting Application-wide Uncaught Errors
+
+*It is recommended to catch `uncaughtExceptions` for production-deployed applications.*
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
@@ -59,11 +64,11 @@ process.on('uncaughtException', (e) => {
 });
 ```
 
-3. **View reported errors:**
-
-  Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.
+More information about uncaught exception handling in Node.js and what it means for your application can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
 
 ## Running on Google Cloud Platform
+
+All information in this section assumes that the items in the [Prerequisites](#prerequisites) section above have been completed.
 
 ### Google App Engine Flexible environment
 
@@ -84,14 +89,14 @@ Container Engine nodes need to also be created with the `https://www.googleapis.
 If your application is running outside of Google Cloud Platform, such as locally, on-premise, or on another cloud provider, you can still use Stackdriver Errors.
 
 1. You will need to specify your project ID when starting the errors agent.
-
-        GCLOUD_PROJECT=particular-future-12345 node myapp.js
-
-1. You need to provide service account credentials to your application.
+```
+  GCLOUD_PROJECT=particular-future-12345 node myapp.js
+```
+2. You need to provide service account credentials to your application by using one of the three options below:
   * The recommended way is via [Application Default Credentials][app-default-credentials].
     1. [Create a new JSON service account key][service-account].
-    1. Copy the key somewhere your application can access it. Be sure not to expose the key publicly.
-    1. Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to the full path to the key. The trace agent will automatically look for this environment variable.
+    2. Copy the key somewhere your application can access it. Be sure not to expose the key publicly.
+    3. Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to the full path to the key. The Error Reporting library will automatically look for this environment variable.
   * If you are running your application on a development machine or test environment where you are using the [`gcloud` command line tools][gcloud-sdk], and are logged using `gcloud beta auth application-default login`, you already have sufficient credentials, and a service account key is not required.
   * Alternatively, you may set the `keyFilename` or `credentials` configuration field to the full path or contents to the key file, respectively. Setting either of these fields will override either setting `GOOGLE_APPLICATION_CREDENTIALS` or logging in using `gcloud`. For example:
 
@@ -110,7 +115,7 @@ When running on Google Cloud Platform, we handle these for you automatically.
 
 ## Configuration
 
-The following code snippet lists all available configuration options. All configuration options are optional.
+The following code snippet lists all available configuration options. Except for the `keyFilename` and `credentials` options, all configuration options are optional.  Whether or not the `keyFilename` and `credentials` options are required is outlined in the [Running on Google Cloud Platform](#running-on-google-cloud-platform) section above.
 
 ```js
 var errors = require('@google-cloud/error-reporting')({
@@ -121,10 +126,9 @@ var errors = require('@google-cloud/error-reporting')({
   // of the value of NODE_ENV
   // defaults to false
   ignoreEnvironmentCheck: false,
-  // determines if the library will attempt to report uncaught exceptions
-  // defaults to true
-  reportUncaughtExceptions: true,
   // determines the logging level internal to the library; levels range 0-5
+  // where 0 indicates no logs should be reported and 5 indicates all logs
+  // should be reported
   // defaults to 2 (warnings)
   logLevel: 2,
   serviceContext: {
@@ -140,13 +144,16 @@ var errors = require('@google-cloud/error-reporting')({
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
+
 // Use the error message builder to custom set all message fields
 var errorEvt = errors.event()
-  .setMessage('My error message')
-  .setUser('root@nexus');
+                     .setMessage('My error message')
+                     .setUser('root@nexus');
 errors.report(errorEvt, () => console.log('done!'));
+
 // Or just use a regular error
 errors.report(new Error('My error message'), () => console.log('done!'));
+
 // One can even just use a string
 errors.report('My error message');
 ```
