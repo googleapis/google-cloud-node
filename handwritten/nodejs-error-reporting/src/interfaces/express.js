@@ -48,10 +48,6 @@ function makeExpressHandler(client, config) {
     var ctxService = '';
     var ctxVersion = '';
 
-    if (config.lacksCredentials()) {
-      next(err);
-    }
-
     if (isObject(config)) {
       ctxService = config.getServiceContext().service;
       ctxVersion = config.getServiceContext().version;

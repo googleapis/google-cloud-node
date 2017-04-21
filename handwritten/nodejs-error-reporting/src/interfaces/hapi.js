@@ -78,26 +78,18 @@ function makeHapiPlugin(client, config) {
     if (isObject(server)) {
       if (isFunction(server.on)) {
         server.on('request-error', function(req, err) {
-          var em = hapiErrorHandler(req, err, config);
-
-          if (!config.lacksCredentials()) {
-            client.sendError(em);
-          }
+          client.sendError(hapiErrorHandler(req, err, config));
         });
       }
 
       if (isFunction(server.ext)) {
         server.ext('onPreResponse', function(request, reply) {
-          var em = null;
-
           if (isObject(request) && isObject(request.response) &&
               request.response.isBoom) {
-            em = hapiErrorHandler(request, new Error(request.response.message),
-                                  config);
-
-            if (!config.lacksCredentials()) {
-              client.sendError(em);
-            }
+            var em = hapiErrorHandler(request,
+                                      new Error(request.response.message),
+                                      config);
+            client.sendError(em);
           }
 
           if (isObject(reply) && isFunction(reply.continue)) {
