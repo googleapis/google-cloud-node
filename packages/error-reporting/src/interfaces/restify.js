@@ -128,9 +128,6 @@ function restifyRequestHandler(client, config, req, res, next) {
 function serverErrorHandler(client, config, server) {
 
   server.on('uncaughtException', function(req, res, reqConfig, err) {
-    if (config.lacksCredentials()) {
-      return;
-    }
     var em = new ErrorMessage().consumeRequestInformation(
         expressRequestInformationExtractor(req, res));
 

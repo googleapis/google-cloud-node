@@ -22,8 +22,6 @@ var isObject = is.object;
 var isBoolean = is.boolean;
 var isString = is.string;
 var isNumber = is.number;
-var isEmpty = is.empty;
-var isNull = is.null;
 var version = require('../package.json').version;
 
 /**
@@ -147,15 +145,6 @@ var Configuration = function(givenConfig, logger) {
    */
   this._version = version;
   /**
-    * Boolean flag indicating whether or not the configuration instance was able
-    * to find a set of usable credentials to attempt authorization against the
-    * Stackdriver API.
-    * @memberof Configuration
-    * @private
-    * @type {Boolean}
-    */
-  this._lacksValidCredentials = true;
-  /**
    * The _givenConfiguration property holds a ConfigurationOptions object
    * which, if valid, will be merged against by the values taken from the meta-
    * data service. If the _givenConfiguration property is not valid then only
@@ -278,29 +267,6 @@ Configuration.prototype._gatherLocalConfiguration = function() {
   } else if (has(this._givenConfiguration, 'credentials')) {
     throw new Error('config.credentials must be a valid credentials object');
   }
-  this._checkAuthConfiguration();
-};
-/**
-  * The _checkAuthConfiguration function is responsible for determining whether
-  * or not a configuration instance, after having gathered configuration from
-  * environment and runtime, has credentials information enough to attempt
-  * authorization with the Stackdriver Errors API.
-  * @memberof Configuration
-  * @private
-  * @function _checkAuthConfiguration
-  * @returns {Undefined} - does not return anything
-  */
-Configuration.prototype._checkAuthConfiguration = function() {
-  if (!isNull(this._key) || !isNull(this._keyFilename) ||
-    !isNull(this._credentials) ||
-    !isEmpty(process.env.GOOGLE_APPLICATION_CREDENTIALS)) {
-    this._lacksValidCredentials = false;
-  } else {
-    this._logger.warn([
-      'Unable to find credential information on instance. This library will',
-      'be unable to communicate with the Stackdriver API to save errors.'
-    ].join(' '));
-  }
 };
 /**
  * The _checkLocalProjectId function is responsible for determing whether the
@@ -407,15 +373,5 @@ Configuration.prototype.getServiceContext = function() {
  */
 Configuration.prototype.getVersion = function() {
   return this._version;
-};
-/**
- * Returns the _lacksValidCredentials property on the instance.
- * @memberof Configuration
- * @public
- * @function getVersion
- * @returns {Boolean} - returns the _lacksValidCredentials property
- */
-Configuration.prototype.lacksCredentials = function() {
-  return this._lacksValidCredentials;
 };
 module.exports = Configuration;

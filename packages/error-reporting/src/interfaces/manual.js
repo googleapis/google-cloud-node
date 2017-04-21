@@ -56,9 +56,6 @@ function handlerSetup(client, config) {
    */
   function reportManualError(err, request, additionalMessage, callback) {
     var em;
-    if (config.lacksCredentials()) {
-      return;
-    }
     if (isString(request)) {
       // no request given
       callback = additionalMessage;
