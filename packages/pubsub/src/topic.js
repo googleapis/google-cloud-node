@@ -49,7 +49,6 @@ var IAM = require('./iam.js');
  */
 function Topic(pubsub, name) {
   this.name = Topic.formatName_(pubsub.projectId, name);
-  this.pubsub = pubsub;
 
   var methods = {
     /**
@@ -319,7 +318,7 @@ Topic.prototype.getSubscriptions = function(options, callback) {
   options = options || {};
   options.topic = this;
 
-  return this.pubsub.getSubscriptions(options, callback);
+  return this.parent.getSubscriptions(options, callback);
 };
 
 /**
@@ -353,7 +352,7 @@ Topic.prototype.getSubscriptionsStream = function(options) {
   options = options || {};
   options.topic = this;
 
-  return this.pubsub.getSubscriptionsStream(options);
+  return this.parent.getSubscriptionsStream(options);
 };
 
 /**
@@ -475,7 +474,7 @@ Topic.prototype.publish = function(messages, options, callback) {
       .map(Topic.formatMessage_)
   };
 
-  this.request(protoOpts, reqOpts, function(err, result) {
+  this.parent.request(protoOpts, reqOpts, function(err, result) {
     if (err) {
       callback(err, null, result);
       return;
@@ -541,7 +540,7 @@ Topic.prototype.publish = function(messages, options, callback) {
  * });
  */
 Topic.prototype.subscribe = function(subName, options, callback) {
-  this.pubsub.subscribe(this, subName, options, callback);
+  this.parent.subscribe(this, subName, options, callback);
 };
 
 /**
@@ -574,7 +573,7 @@ Topic.prototype.subscription = function(name, options) {
   options = options || {};
   options.topic = this;
 
-  return this.pubsub.subscription(name, options);
+  return this.parent.subscription(name, options);
 };
 
 /*! Developer Documentation

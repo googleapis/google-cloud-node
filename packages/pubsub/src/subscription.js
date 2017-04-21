@@ -465,7 +465,7 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
     ackIds: ackIds
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  this.parent.request(protoOpts, reqOpts, function(err, resp) {
     if (!err) {
       ackIds.forEach(function(ackId) {
         delete self.inProgressAckIds[ackId];
@@ -523,7 +523,7 @@ Subscription.prototype.createSnapshot = function(name, callback) {
     subscription: this.name
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  this.parent.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -601,7 +601,7 @@ Subscription.prototype.delete = function(callback) {
     subscription: this.name
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  this.parent.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
       callback(err, resp);
       return;
@@ -696,8 +696,10 @@ Subscription.prototype.pull = function(options, callback) {
     maxMessages: options.maxResults
   };
 
-  this.activeRequest_ = this.request(protoOpts, reqOpts, function(err, resp) {
+  this.activeRequest_ = this.parent.request(protoOpts, reqOpts, function(err) {
     self.activeRequest_ = null;
+
+    var resp = arguments[1];
 
     if (err) {
       if (err.code === 504) {
@@ -779,7 +781,7 @@ Subscription.prototype.seek = function(snapshot, callback) {
     throw new Error('Either a snapshot name or Date is needed to seek to.');
   }
 
-  this.request(protoOpts, reqOpts, callback);
+  this.parent.request(protoOpts, reqOpts, callback);
 };
 
 /**
@@ -825,7 +827,7 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
     ackDeadlineSeconds: options.seconds
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  this.parent.request(protoOpts, reqOpts, function(err, resp) {
     callback(err, resp);
   });
 };

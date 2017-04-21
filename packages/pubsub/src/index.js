@@ -46,6 +46,16 @@ var Subscription = require('./subscription.js');
 var Topic = require('./topic.js');
 
 /**
+ * @type {object} - GAX's default configuration.
+ */
+var GAX_CONFIG = {
+  Publisher: require('./v1/publisher_client_config.json').
+    interfaces['google.pubsub.v1.Publisher'],
+  Subscriber: require('./v1/subscriber_client_config.json').
+    interfaces['google.pubsub.v1.Subscriber']
+};
+
+/**
  * [Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
  * reliable, many-to-many, asynchronous messaging service from Cloud
  * Platform.
@@ -752,6 +762,24 @@ PubSub.prototype.topic = function(name) {
 };
 
 /**
+ * Intercept the call to {module:common/grpc-service#request}, making sure the
+ * correct timeouts are set.
+ *
+ * @private
+ */
+PubSub.prototype.request = function(protoOpts) {
+  var method = protoOpts.method;
+  var camelCaseMethod = method[0].toUpperCase() + method.substr(1);
+  var config = GAX_CONFIG[protoOpts.service].methods[camelCaseMethod];
+
+  if (is.undefined(arguments[0].timeout)) {
+    arguments[0].timeout = config.timeout_millis;
+  }
+
+  commonGrpc.Service.prototype.request.apply(this, arguments);
+};
+
+/**
  * Determine the appropriate endpoint to use for API requests, first trying the
  * local Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise
  * the default JSON API.
@@ -775,7 +803,7 @@ PubSub.prototype.determineBaseUrl_ = function() {
 
 /*! Developer Documentation
  *
- * These methods can be auto-paginated.
+ * These methods can be agto-paginated.
  */
 common.paginator.extend(PubSub, [
   'getSnapshots',
@@ -789,7 +817,12 @@ common.paginator.extend(PubSub, [
  * that a callback is omitted.
  */
 common.util.promisifyAll(PubSub, {
-  exclude: ['snapshot', 'subscription', 'topic']
+  exclude: [
+    'request',
+    'snapshot',
+    'subscription',
+    'topic'
+  ]
 });
 
 PubSub.Subscription = Subscription;

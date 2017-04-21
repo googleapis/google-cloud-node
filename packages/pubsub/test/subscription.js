@@ -18,8 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var GrpcServiceObject = require('@google-cloud/common-grpc').ServiceObject;
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -34,10 +32,7 @@ var fakeUtil = extend({}, util, {
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
-  GrpcServiceObject.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
 
 function FakeIAM() {
   this.calledWith_ = [].slice.call(arguments);
@@ -103,6 +98,8 @@ describe('Subscription', function() {
 
   beforeEach(function() {
     subscription = new Subscription(PUBSUB, { name: SUB_NAME });
+    PUBSUB.request = util.noop;
+    subscription.parent = PUBSUB;
   });
 
   afterEach(function() {
@@ -231,7 +228,7 @@ describe('Subscription', function() {
     });
 
     it('should inherit from GrpcServiceObject', function() {
-      assert(subscription instanceof GrpcServiceObject);
+      assert(subscription instanceof FakeGrpcServiceObject);
 
       var calledWith = subscription.calledWith_[0];
 
@@ -269,7 +266,6 @@ describe('Subscription', function() {
         name: SUB_NAME,
         topic: topicInstance
       });
-      assert(subscription instanceof GrpcServiceObject);
 
       var calledWith = subscription.calledWith_[0];
       assert.deepEqual(calledWith.methods.create, true);
@@ -377,14 +373,12 @@ describe('Subscription', function() {
 
     it('should accept a single id', function() {
       assert.doesNotThrow(function() {
-        subscription.request = util.noop;
         subscription.ack(1, util.noop);
       });
     });
 
     it('should accept an array of ids', function() {
       assert.doesNotThrow(function() {
-        subscription.request = util.noop;
         subscription.ack([1], util.noop);
       });
     });
@@ -392,7 +386,7 @@ describe('Subscription', function() {
     it('should make an array out of ids', function(done) {
       var ID = 'abc';
 
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.deepEqual(reqOpts.ackIds, [ID]);
         done();
       };
@@ -403,7 +397,7 @@ describe('Subscription', function() {
     it('should make correct api request', function(done) {
       var IDS = [1, 2, 3];
 
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'acknowledge');
 
@@ -421,7 +415,7 @@ describe('Subscription', function() {
         timeout: 10
       };
 
-      subscription.request = function(protoOpts) {
+      subscription.parent.request = function(protoOpts) {
         assert.strictEqual(protoOpts.timeout, options.timeout);
         done();
       };
@@ -439,7 +433,7 @@ describe('Subscription', function() {
     });
 
     it('should unmark the ack ids as being in progress', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
 
@@ -458,7 +452,7 @@ describe('Subscription', function() {
     });
 
     it('should not unmark if there was an error', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(new Error('Error.'));
       };
 
@@ -475,7 +469,7 @@ describe('Subscription', function() {
     });
 
     it('should refresh paused status', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
 
@@ -487,7 +481,7 @@ describe('Subscription', function() {
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(error);
       };
 
@@ -499,7 +493,7 @@ describe('Subscription', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
       subscription.ack(1, function(err, apiResponse) {
@@ -527,7 +521,7 @@ describe('Subscription', function() {
         return FULL_SNAPSHOT_NAME;
       };
 
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'createSnapshot');
 
@@ -544,7 +538,7 @@ describe('Subscription', function() {
       var error = new Error('err');
       var resp = {};
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(error, resp);
       };
 
@@ -562,7 +556,7 @@ describe('Subscription', function() {
       var fakeSnapshot = {};
       var resp = {};
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -585,7 +579,7 @@ describe('Subscription', function() {
 
   describe('delete', function() {
     it('should delete a subscription', function(done) {
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'deleteSubscription');
 
@@ -598,7 +592,7 @@ describe('Subscription', function() {
     });
 
     it('should close a subscription once deleted', function() {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
       subscription.closed = false;
@@ -607,7 +601,7 @@ describe('Subscription', function() {
     });
 
     it('should remove all listeners', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
       subscription.removeAllListeners = function() {
@@ -617,7 +611,7 @@ describe('Subscription', function() {
     });
 
     it('should execute callback when deleted', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
       subscription.delete(done);
@@ -625,7 +619,7 @@ describe('Subscription', function() {
 
     it('should execute callback with an api error', function(done) {
       var error = new Error('Error.');
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(error);
       };
       subscription.delete(function(err) {
@@ -636,7 +630,7 @@ describe('Subscription', function() {
 
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
       subscription.delete(function(err, apiResponse) {
@@ -649,7 +643,7 @@ describe('Subscription', function() {
   describe('pull', function() {
     beforeEach(function() {
       subscription.ack = util.noop;
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, messageObj);
       };
     });
@@ -659,7 +653,7 @@ describe('Subscription', function() {
     });
 
     it('should default returnImmediately to false', function(done) {
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(reqOpts.returnImmediately, false);
         done();
       };
@@ -667,7 +661,7 @@ describe('Subscription', function() {
     });
 
     it('should honor options', function(done) {
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(reqOpts.returnImmediately, true);
         done();
       };
@@ -675,7 +669,7 @@ describe('Subscription', function() {
     });
 
     it('should make correct api request', function(done) {
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'pull');
         assert.strictEqual(protoOpts.timeout, 92000);
@@ -698,9 +692,11 @@ describe('Subscription', function() {
         timeout: timeout
       });
 
-      subscription.request = function(protoOpts) {
-        assert.strictEqual(protoOpts.timeout, 30000);
-        done();
+      subscription.parent = {
+        request: function(protoOpts) {
+          assert.strictEqual(protoOpts.timeout, 30000);
+          done();
+        }
       };
 
       subscription.pull(assert.ifError);
@@ -709,7 +705,7 @@ describe('Subscription', function() {
     it('should store the active request', function() {
       var requestInstance = {};
 
-      subscription.request = function() {
+      subscription.parent.request = function() {
         return requestInstance;
       };
 
@@ -720,7 +716,7 @@ describe('Subscription', function() {
     it('should clear the active request', function(done) {
       var requestInstance = {};
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         setImmediate(function() {
           callback(null, {});
           assert.strictEqual(subscription.activeRequest_, null);
@@ -735,7 +731,7 @@ describe('Subscription', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(error);
       };
       subscription.pull(function(err) {
@@ -745,7 +741,7 @@ describe('Subscription', function() {
     });
 
     it('should not return messages if request timed out', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback({ code: 504 });
       };
 
@@ -831,7 +827,7 @@ describe('Subscription', function() {
       });
 
       it('should not autoAck if no messages returned', function(done) {
-        subscription.request = function(protoOpts, reqOpts, callback) {
+        subscription.parent.request = function(protoOpts, reqOpts, callback) {
           callback(null, { receivedMessages: [] });
         };
         subscription.ack = function() {
@@ -884,7 +880,7 @@ describe('Subscription', function() {
           callback(null, { success: true });
         };
 
-        subscription.request = function(protoOpts, reqOpts, callback) {
+        subscription.parent.request = function(protoOpts, reqOpts, callback) {
           callback(null, resp);
         };
 
@@ -913,7 +909,7 @@ describe('Subscription', function() {
         return FAKE_FULL_SNAPSHOT_NAME;
       };
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'seek');
 
@@ -930,7 +926,7 @@ describe('Subscription', function() {
     it('should optionally accept a Date object', function(done) {
       var date = new Date();
 
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         var seconds = Math.floor(date.getTime() / 1000);
         assert.strictEqual(reqOpts.time.seconds, seconds);
 
@@ -947,7 +943,7 @@ describe('Subscription', function() {
 
   describe('setAckDeadline', function() {
     it('should set the ack deadline', function(done) {
-      subscription.request = function(protoOpts, reqOpts) {
+      subscription.parent.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'Subscriber');
         assert.strictEqual(protoOpts.method, 'modifyAckDeadline');
 
@@ -964,7 +960,7 @@ describe('Subscription', function() {
     });
 
     it('should execute the callback', function(done) {
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback();
       };
       subscription.setAckDeadline({}, done);
@@ -972,7 +968,7 @@ describe('Subscription', function() {
 
     it('should execute the callback with apiResponse', function(done) {
       var resp = { success: true };
-      subscription.request = function(protoOpts, reqOpts, callback) {
+      subscription.parent.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
       subscription.setAckDeadline({}, function(err, apiResponse) {
