@@ -41,18 +41,13 @@ function koaErrorHandler(client, config) {
    * @returns {Undefined} does not return anything
    */
   return function *(next) {
-    var em;
     var svc = config.getServiceContext();
 
     try {
 
       yield next;
     } catch (err) {
-      if (config.lacksCredentials()) {
-        return;
-      }
-
-      em = new ErrorMessage()
+      var em = new ErrorMessage()
                .consumeRequestInformation(
                    koaRequestInformationExtractor(this.request, this.response))
                .setServiceContext(svc.service,
