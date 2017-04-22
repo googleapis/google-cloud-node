@@ -16,8 +16,8 @@ applications running in almost any environment. Here's an introductory video:
 ## Prerequisites
 
 1. Your application needs to use Node.js version 4.x or greater.
-2. You need a [Google Cloud project](https://console.cloud.google.com). Your application can run anywhere, but errors are reported to a particular project.
-3. [Enable the Stackdriver Error Reporting API](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview) for your project.
+1. You need a [Google Cloud project](https://console.cloud.google.com). Your application can run anywhere, but errors are reported to a particular project.
+1. [Enable the Stackdriver Error Reporting API](https://console.cloud.google.com/apis/api/clouderrorreporting.googleapis.com/overview) for your project.
 
 **Note:** The module will only send errors when the `NODE_ENV` environment variable is
 set to `production` or the `ignoreEnvironmentCheck` property given in the
@@ -89,14 +89,14 @@ Container Engine nodes need to also be created with the `https://www.googleapis.
 If your application is running outside of Google Cloud Platform, such as locally, on-premise, or on another cloud provider, you can still use Stackdriver Errors.
 
 1. You will need to specify your project ID when starting the errors agent.
-```
-  GCLOUD_PROJECT=particular-future-12345 node myapp.js
-```
-2. You need to provide service account credentials to your application by using one of the three options below:
+
+       GCLOUD_PROJECT=particular-future-12345 node myapp.js
+
+1. You need to provide service account credentials to your application by using one of the three options below:
   * The recommended way is via [Application Default Credentials][app-default-credentials].
     1. [Create a new JSON service account key][service-account].
-    2. Copy the key somewhere your application can access it. Be sure not to expose the key publicly.
-    3. Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to the full path to the key. The Error Reporting library will automatically look for this environment variable.
+    1. Copy the key somewhere your application can access it. Be sure not to expose the key publicly.
+    1. Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to the full path to the key. The Error Reporting library will automatically look for this environment variable.
   * If you are running your application on a development machine or test environment where you are using the [`gcloud` command line tools][gcloud-sdk], and are logged using `gcloud beta auth application-default login`, you already have sufficient credentials, and a service account key is not required.
   * Alternatively, you may set the `keyFilename` or `credentials` configuration field to the full path or contents to the key file, respectively. Setting either of these fields will override either setting `GOOGLE_APPLICATION_CREDENTIALS` or logging in using `gcloud`. For example:
 
@@ -115,7 +115,7 @@ When running on Google Cloud Platform, we handle these for you automatically.
 
 ## Configuration
 
-The following code snippet lists all available configuration options. Except for the `keyFilename` and `credentials` options, all configuration options are optional.  Whether or not the `keyFilename` and `credentials` options are required is outlined in the [Running on Google Cloud Platform](#running-on-google-cloud-platform) section above.
+The following code snippet lists all available configuration options.  All configuration options are optional.
 
 ```js
 var errors = require('@google-cloud/error-reporting')({
