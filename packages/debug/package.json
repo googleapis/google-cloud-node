@@ -1,0 +1,56 @@
+{
+  "name": "@google-cloud/debug",
+  "version": "0.10.0",
+  "author": "Google Inc.",
+  "description": "Stackdriver Debug Agent for Node.js",
+  "main": "./src/index.js",
+  "repository": "googlecloudplatform/google-cloud-node",
+  "keywords": [
+    "google",
+    "debugger",
+    "debug",
+    "cloud",
+    "cloud debug",
+    "cloud debugger",
+    "stackdriver debug",
+    "stackdriver debugger",
+    "stackdriver"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "devDependencies": {
+    "changelog-maker": "^2.2.2",
+    "closure-npc": "*",
+    "coveralls": "^2.11.2",
+    "extend": "^3.0.0",
+    "istanbul": "^0.4.1",
+    "jshint": "^2.7.0",
+    "mocha": "^3.0.0",
+    "nock": "^9.0.0",
+    "proxyquire": "^1.4.0"
+  },
+  "dependencies": {
+    "@google-cloud/common": "^0.11.0",
+    "acorn": "^4.0.3",
+    "async": "^2.1.2",
+    "coffee-script": "^1.9.3",
+    "findit2": "^2.2.3",
+    "gcp-metadata": "^0.1.0",
+    "google-auth-library": "^0.9.5",
+    "lodash": "^4.12.0",
+    "request": "^2.61.0",
+    "semver": "^5.1.0",
+    "source-map": "^0.5.1",
+    "split": "^1.0.0"
+  },
+  "scripts": {
+    "test": "./bin/run-test.sh",
+    "system-test": "./bin/run-system-test.sh",
+    "changelog": "./bin/run-changelog.sh",
+    "coverage": "./bin/run-test.sh -c",
+    "bump": "./bin/run-bump.sh",
+    "closure": "./node_modules/.bin/closure-npc"
+  }
+}

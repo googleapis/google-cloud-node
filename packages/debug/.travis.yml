@@ -1,0 +1,9 @@
+language: node_js
+dist: trusty
+node_js:
+- '0.12'
+- '4'
+- '6'
+- '7'
+script:
+- ./bin/run-test.sh -c
