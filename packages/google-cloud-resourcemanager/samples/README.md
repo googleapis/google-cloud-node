@@ -16,13 +16,20 @@ programmatically manage these container resources.
 * [Setup](#setup)
 * [Samples](#samples)
   * [Projects](#projects)
+* [Running the tests](#running-the-tests)
 
 ## Setup
 
-1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1. Install dependencies:
+1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1.  Install dependencies:
+
+    With `npm`:
 
         npm install
+
+    With `yarn`:
+
+        yarn install
 
 [prereq]: ../README.md#prerequisities
 [run]: ../README.md#how-to-run-a-sample
@@ -37,16 +44,31 @@ __Usage:__ `node projects --help`
 
 ```
 Commands:
-  list  List all projects the authenticated user has access to.
+  list  List all current projects.
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
-  node projects list  List projects.
+  node projects.js list  Lists all current projects.
 
-For more information, see https://cloud.google.com/resource-manager/docs/
+For more information, see https://cloud.google.com/resource-manager/docs
 ```
 
 [projects_docs]: https://cloud.google.com/resource-manager/docs/
 [projects_code]: projects.js
+
+## Running the tests
+
+1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
+    variables.
+
+1.  Run the tests:
+
+    With `npm`:
+
+        npm test
+
+    With `yarn`:
+
+        yarn test

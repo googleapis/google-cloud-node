@@ -2,16 +2,33 @@
   "name": "nodejs-docs-samples-resource-manager",
   "version": "0.0.1",
   "private": true,
-  "license": "Apache Version 2.0",
+  "license": "Apache-2.0",
   "author": "Google Inc.",
-  "scripts": {
-    "test": "cd ..; npm run st -- --verbose resource/system-test/*.test.js"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
   },
-  "dependencies": {
-    "@google-cloud/resource": "0.6.0",
-    "yargs": "6.6.0"
+  "cloud": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
   },
   "engines": {
     "node": ">=4.3.2"
+  },
+  "scripts": {
+    "lint": "samples lint",
+    "pretest": "npm run lint",
+    "system-test": "ava -T 20s --verbose system-test/*.test.js",
+    "test": "npm run system-test"
+  },
+  "dependencies": {
+    "@google-cloud/resource": "0.7.1",
+    "yargs": "7.1.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "ava": "0.19.1",
+    "proxyquire": "1.7.11",
+    "sinon": "2.1.0"
   }
 }
