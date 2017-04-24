@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,11 +15,11 @@
 
 'use strict';
 
-require(`../../system-test/_setup`);
-
-const pubsub = require(`@google-cloud/pubsub`)();
-const uuid = require(`uuid`);
 const path = require(`path`);
+const pubsub = require(`@google-cloud/pubsub`)();
+const test = require(`ava`);
+const tools = require(`@google-cloud/nodejs-repo-tools`);
+const uuid = require(`uuid`);
 
 const cwd = path.join(__dirname, `..`);
 const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
@@ -31,6 +31,7 @@ const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
 const message = { data: `Hello, world!` };
 const cmd = `node topics.js`;
 
+test.before(tools.checkCredentials);
 test.before(async () => {
   try {
     await pubsub.createTopic(topicNameTwo);
@@ -53,15 +54,15 @@ test.after.always(async () => {
 });
 
 test.serial(`should create a topic`, async (t) => {
-  const output = await runAsync(`${cmd} create ${topicNameOne}`, cwd);
+  const output = await tools.runAsync(`${cmd} create ${topicNameOne}`, cwd);
   t.is(output, `Topic ${fullTopicNameOne} created.`);
   const [exists] = await pubsub.topic(topicNameOne).exists();
   t.true(exists);
 });
 
 test.serial(`should list topics`, async (t) => {
-  await tryTest(async () => {
-    const output = await runAsync(`${cmd} list`, cwd);
+  await tools.tryTest(async () => {
+    const output = await tools.runAsync(`${cmd} list`, cwd);
     t.true(output.includes(`Topics:`));
     t.true(output.includes(fullTopicNameOne));
   }).start();
@@ -69,14 +70,14 @@ test.serial(`should list topics`, async (t) => {
 
 test.serial(`should publish a simple message`, async (t) => {
   const [subscription] = await pubsub.topic(topicNameOne).subscribe(subscriptionNameOne);
-  await runAsync(`${cmd} publish ${topicNameOne} "${message.data}"`, cwd);
+  await tools.runAsync(`${cmd} publish ${topicNameOne} "${message.data}"`, cwd);
   const [messages] = await subscription.pull();
   t.is(messages[0].data, message.data);
 });
 
 test.serial(`should publish a JSON message`, async (t) => {
   const [subscription] = await pubsub.topic(topicNameOne).subscribe(subscriptionNameOne);
-  await runAsync(`${cmd} publish ${topicNameOne} '${JSON.stringify(message)}'`, cwd);
+  await tools.runAsync(`${cmd} publish ${topicNameOne} '${JSON.stringify(message)}'`, cwd);
   const [messages] = await subscription.pull();
   t.deepEqual(messages[0].data, message);
 });
@@ -99,7 +100,7 @@ test.serial(`should publish ordered messages`, async (t) => {
 });
 
 test.serial(`should set the IAM policy for a topic`, async (t) => {
-  await runAsync(`${cmd} set-policy ${topicNameOne}`, cwd);
+  await tools.runAsync(`${cmd} set-policy ${topicNameOne}`, cwd);
   const results = await pubsub.topic(topicNameOne).iam.getPolicy();
   const policy = results[0];
   t.deepEqual(policy.bindings, [
@@ -116,17 +117,17 @@ test.serial(`should set the IAM policy for a topic`, async (t) => {
 
 test.serial(`should get the IAM policy for a topic`, async (t) => {
   const [policy] = await pubsub.topic(topicNameOne).iam.getPolicy();
-  const output = await runAsync(`${cmd} get-policy ${topicNameOne}`, cwd);
+  const output = await tools.runAsync(`${cmd} get-policy ${topicNameOne}`, cwd);
   t.is(output, `Policy for topic: ${JSON.stringify(policy.bindings)}.`);
 });
 
 test.serial(`should test permissions for a topic`, async (t) => {
-  const output = await runAsync(`${cmd} test-permissions ${topicNameOne}`, cwd);
+  const output = await tools.runAsync(`${cmd} test-permissions ${topicNameOne}`, cwd);
   t.true(output.includes(`Tested permissions for topic`));
 });
 
 test.serial(`should delete a topic`, async (t) => {
-  const output = await runAsync(`${cmd} delete ${topicNameOne}`, cwd);
+  const output = await tools.runAsync(`${cmd} delete ${topicNameOne}`, cwd);
   t.is(output, `Topic ${fullTopicNameOne} deleted.`);
   const [exists] = await pubsub.topic(topicNameOne).exists();
   t.false(exists);

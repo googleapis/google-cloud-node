@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,5 +35,8 @@ pubsubClient.createTopic(topicName)
   .then((results) => {
     const topic = results[0];
     console.log(`Topic ${topic.name} created.`);
+  })
+  .catch((err) => {
+    console.error('ERROR:', err);
   });
 // [END pubsub_quickstart]
