@@ -64,7 +64,6 @@
   "devDependencies": {
     "async": "^2.1.4",
     "mocha": "^3.0.1",
-    "moment": "^2.18.1",
     "proxyquire": "^1.7.10"
   },
   "scripts": {

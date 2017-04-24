@@ -315,10 +315,10 @@ describe('pubsub', function() {
     });
 
     it('should create a subscription with message retention', function(done) {
-      var expiration = moment().add(3.009, 'days');
+      var threeDaysInSeconds = 3 * 24 * 60 * 60;
 
       topic.subscribe({
-        messageRetentionDuration: expiration
+        messageRetentionDuration: threeDaysInSeconds
       }, function(err, sub) {
         assert.ifError(err);
 
@@ -326,16 +326,14 @@ describe('pubsub', function() {
           assert.ifError(err);
 
           assert.strictEqual(metadata.retainAckedMessages, true);
-
-          var expectedSecs = (expiration - new Date()) / 1000;
-          assert(metadata.messageRetentionDuration.seconds >= expectedSecs - 2);
-          assert(metadata.messageRetentionDuration.seconds <= expectedSecs + 2);
-
-          var expectedNanos =
-            Math.floor(expectedSecs - Math.floor(expectedSecs)) * 1e9;
-          assert(metadata.messageRetentionDuration.nanos >= expectedNanos - 2);
-          assert(metadata.messageRetentionDuration.nanos <= expectedNanos + 2);
-
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.seconds, 10),
+            threeDaysInSeconds
+          );
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.nanos, 10),
+            0
+          );
 
           sub.delete(done);
         });

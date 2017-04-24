@@ -565,9 +565,8 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  * @param {number} options.maxInProgress - Maximum messages to consume
  *     simultaneously.
  * @param {number|date} options.messageRetentionDuration - Set this to override
- *     the default duration of 7 days. This value is expected in seconds (length
- *     of retention) or a Date (expiration of retention). Acceptable values are
- *     in the range of 10 minutes and 7 days.
+ *     the default duration of 7 days. This value is expected in seconds.
+ *     Acceptable values are in the range of 10 minutes and 7 days.
  * @param {string} options.pushEndpoint - A URL to a custom endpoint that
  *     messages should be pushed to.
  * @param {boolean} options.retainAckedMessages - If set, acked messages are
@@ -658,18 +657,9 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
   if (reqOpts.messageRetentionDuration) {
     reqOpts.retainAckedMessages = true;
 
-    var duration = reqOpts.messageRetentionDuration;
-
-    if (!is.number(duration)) {
-      duration = duration || duration.toDate(); // toDate() from a moment object
-      duration = (duration - new Date()) / 1000;
-    }
-
-    var secondsRounded = Math.floor(duration);
-
     reqOpts.messageRetentionDuration = {
-      seconds: secondsRounded,
-      nanos: Math.floor((duration - secondsRounded) * 1e9)
+      seconds: reqOpts.messageRetentionDuration,
+      nanos: 0
     };
   }
 
