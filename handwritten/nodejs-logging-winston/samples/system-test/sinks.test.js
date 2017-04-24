@@ -1,32 +1,33 @@
-// Copyright 2015-2016, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2017, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 'use strict';
 
-require(`../../system-test/_setup`);
-
-const Logging = require(`@google-cloud/logging`);
-const Storage = require(`@google-cloud/storage`);
+const logging = require(`@google-cloud/logging`)();
+const storage = require(`@google-cloud/storage`)();
+const test = require(`ava`);
+const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
-const program = require(`../sinks`);
 
-const logging = Logging();
-const storage = Storage();
+const program = require(`../sinks`);
 
 const bucketName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const sinkName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const filter = `severity > WARNING`;
 
+test.before(tools.checkCredentials);
 test.before(async (t) => {
   await storage.createBucket(bucketName);
 });
@@ -40,8 +41,8 @@ test.after.always(async (t) => {
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(stubConsole);
-test.afterEach.always(restoreConsole);
+test.beforeEach(tools.stubConsole);
+test.afterEach.always(tools.restoreConsole);
 
 test.cb.serial(`should create a new sink`, (t) => {
   program.createSink(sinkName, bucketName, filter, (err, sink, apiResponse) => {
@@ -72,7 +73,7 @@ test.cb.serial(`should get the metadata for a sink`, (t) => {
 });
 
 test.serial(`should list sinks`, async (t) => {
-  await tryTest(async () => {
+  await tools.tryTest(async () => {
     await new Promise((resolve, reject) => {
       program.listSinks((err, sinks) => {
         try {
@@ -119,7 +120,7 @@ test.cb.serial(`should delete a sink`, (t) => {
 
     program.getSinkMetadata(sinkName, (err) => {
       t.truthy(err);
-      t.is(err.code, 404);
+      t.true(err.code === 404 || err.code === 5);
       t.end();
     });
   });

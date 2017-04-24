@@ -1,15 +1,17 @@
-// Copyright 2015-2016, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2017, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 'use strict';
 
@@ -91,7 +93,7 @@ function listLogEntries (logName, callback) {
   });
 }
 
-function listLogEntriesAdvanced (filter, pageSize, orderBy, callback) {
+function listLogEntriesAdvanced (filter, pageSize, orderBy) {
   var logging = Logging();
   var options = {};
 
@@ -107,14 +109,12 @@ function listLogEntriesAdvanced (filter, pageSize, orderBy, callback) {
   }
 
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging?method=getEntries
-  logging.getEntries(options, function (err, entries) {
-    if (err) {
-      return callback(err);
-    }
-
-    console.log('Found %d entries!', entries.length);
-    return callback(null, entries);
-  });
+  return logging.getEntries(options)
+    .then((results) => {
+      const entries = results[0];
+      console.log('Found %d entries!', entries.length);
+      return entries;
+    });
 }
 
 function deleteLog (logName, callback) {
@@ -136,7 +136,6 @@ function deleteLog (logName, callback) {
 
 // The command-line program
 var cli = require('yargs');
-var utils = require('../utils');
 
 var program = module.exports = {
   writeLogEntry: writeLogEntry,
@@ -144,9 +143,9 @@ var program = module.exports = {
   listLogEntries: listLogEntries,
   listLogEntriesAdvanced: listLogEntriesAdvanced,
   deleteLog: deleteLog,
-  main: function (args) {
+  main: (args) => {
     // Run the command-line program
-    cli.help().strict().parse(args).argv;
+    cli.help().strict().parse(args).argv; // eslint-disable-line
   }
 };
 
@@ -171,24 +170,24 @@ cli
       requiresArg: true,
       description: 'Sort results.'
     }
-  }, function (options) {
-    program.listLogEntriesAdvanced(options.filter, options.limit, options.sort, utils.makeHandler());
+  }, (opts) => {
+    program.listLogEntriesAdvanced(opts.filter, opts.limit, opts.sort);
   })
-  .command('write <logName> <resource> <entry>', 'Writes a log entry to the specified log.', {}, function (options) {
+  .command('write <logName> <resource> <entry>', 'Writes a log entry to the specified log.', {}, (opts) => {
     try {
-      options.resource = JSON.parse(options.resource);
+      opts.resource = JSON.parse(opts.resource);
     } catch (err) {
       return console.error('"resource" must be a valid JSON string!');
     }
 
     try {
-      options.entry = JSON.parse(options.entry);
+      opts.entry = JSON.parse(opts.entry);
     } catch (err) {}
 
-    program.writeLogEntryAdvanced(options.logName, utils.pick(options, ['resource', 'entry']), utils.makeHandler(false));
+    program.writeLogEntryAdvanced(opts.logName, opts, console.log);
   })
-  .command('delete <logName>', 'Deletes the specified Log.', {}, function (options) {
-    program.deleteLog(options.logName, utils.makeHandler(false));
+  .command('delete <logName>', 'Deletes the specified Log.', {}, (opts) => {
+    program.deleteLog(opts.logName, console.log);
   })
   .example('node $0 list', 'List all log entries.')
   .example('node $0 list -f "severity=ERROR" -s "timestamp" -l 2', 'List up to 2 error entries, sorted by timestamp ascending.')
