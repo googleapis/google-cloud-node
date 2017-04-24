@@ -20,35 +20,45 @@ var proxyquire = require('proxyquire');
 
 var Configuration = require('../../src/configuration.js');
 
-class ServiceStub {
-  constructor() {
-    this.authClient = {
-      getToken: function(cb) {
-        cb(new Error('Test Error'));
-      }
-    };
+function verifyWarningMessage(errToReturn, expectedWarn) {
+  class ServiceStub {
+    constructor() {
+      this.authClient = {
+        getToken: function(cb) {
+          cb(errToReturn);
+        }
+      };
+    }
   }
-}
 
-var RequestHandler = proxyquire('../../src/google-apis/auth-client.js', {
-  '@google-cloud/common': {
-    Service: ServiceStub
-  }
-});
+  var RequestHandler = proxyquire('../../src/google-apis/auth-client.js', {
+    '@google-cloud/common': {
+      Service: ServiceStub
+    }
+  });
+
+  var warnText = '';
+  var logger = {
+    warn: function(text) {
+      warnText += text;
+    }
+  };
+  var config = new Configuration({ ignoreEnvironmentCheck: true }, logger);
+  new RequestHandler(config, logger);
+  assert.strictEqual(warnText, expectedWarn);
+}
 
 describe('RequestHandler', function() {
   it('should issue a warning if it cannot communicate with the API', function() {
-    var warnText = '';
-    var logger = {
-      warn: function(text) {
-        warnText += text;
-      }
-    };
-    var config = new Configuration({ ignoreEnvironmentCheck: true }, logger);
-    new RequestHandler(config, logger);
-    assert.strictEqual(warnText,
+    var message = 'Test Error';
+    verifyWarningMessage(new Error(message),
       'Unable to find credential information on instance. This library ' +
       'will be unable to communicate with the Stackdriver API to save ' +
-      'errors.  Message: Test Error');
+      'errors.  Message: ' + message);
+  });
+
+  it('should not issue a warning if it can communicate with the API', function() {
+    verifyWarningMessage(null, '');
+    verifyWarningMessage(undefined, '');
   });
 });
