@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,9 +15,9 @@
 
 'use strict';
 
-require(`../../system-test/_setup`);
-
 const concepts = require(`../concepts`);
+const test = require(`ava`);
+const tools = require(`@google-cloud/nodejs-repo-tools`);
 
 let transaction;
 let metadata;
@@ -31,6 +31,7 @@ const Index = concepts.Index;
 const Entity = concepts.Entity;
 const Query = concepts.Query;
 
+test.before(tools.checkCredentials);
 test.before((t) => {
   const projectId = process.env.GCLOUD_PROJECT;
   t.truthy(projectId, `You must set the GCLOUD_PROJECT env var!`);
@@ -48,8 +49,8 @@ test.after.always(async () => {
   await datastore.delete(entities.map((entity) => entity[datastore.KEY]));
 });
 
-test.beforeEach(stubConsole);
-test.afterEach.always(restoreConsole);
+test.beforeEach(tools.stubConsole);
+test.afterEach.always(tools.restoreConsole);
 
 // Transactions
 test.serial(`performs a transactional update`, (t) => transaction.testTransactionalUpdate(t));
@@ -128,7 +129,10 @@ test.serial(`saves with a named key`, (t) => entity.testNamedKey(t));
 test.serial(`saves a key with a parent`, (t) => entity.testKeyWithParent(t));
 test.serial(`saves a key with multiple parents`, (t) => entity.testKeyWithMultiLevelParent(t));
 test.serial(`saves an entity with a parent`, (t) => entity.testEntityWithParent(t));
-test.serial(`saves an entity with properties`, (t) => entity.testProperties(t));
+test.serial(`saves an entity with properties`, (t) => {
+  t.plan(0);
+  return entity.testProperties(t);
+});
 test.serial(`saves an entity with arrays`, (t) => entity.testArrayValue(t));
 test.serial(`saves a basic entity`, (t) => entity.testBasicEntity(t));
 test.serial(`saves with an upsert`, (t) => entity.testUpsert(t));
@@ -136,6 +140,9 @@ test.serial(`saves with an insert`, (t) => entity.testInsert(t));
 test.serial(`performs a lookup`, (t) => entity.testLookup(t));
 test.serial(`saves with an update`, (t) => entity.testUpdate(t));
 test.serial(`deletes an entity`, (t) => entity.testDelete(t));
-test.serial(`performs a batch upsert`, (t) => entity.testBatchUpsert(t));
+test.serial(`performs a batch upsert`, (t) => {
+  t.plan(0);
+  return entity.testBatchUpsert(t);
+});
 test.serial(`performs a batch lookup`, (t) => entity.testBatchLookup(t));
 test.serial(`performs a batch delete`, (t) => entity.testBatchDelete(t));

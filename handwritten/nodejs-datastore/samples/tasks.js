@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -85,10 +85,12 @@ function addTask (description) {
     ]
   };
 
-  return datastore.save(entity)
+  datastore.save(entity)
     .then(() => {
       console.log(`Task ${taskKey.id} created successfully.`);
-      return taskKey;
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
 }
 // [END add_entity]
@@ -101,7 +103,7 @@ function markDone (taskId) {
     taskId
   ]);
 
-  return transaction.run()
+  transaction.run()
     .then(() => transaction.get(taskKey))
     .then((results) => {
       const task = results[0];
@@ -125,7 +127,7 @@ function listTasks () {
   const query = datastore.createQuery('Task')
     .order('created');
 
-  return datastore.runQuery(query)
+  datastore.runQuery(query)
     .then((results) => {
       const tasks = results[0];
 
@@ -134,8 +136,9 @@ function listTasks () {
         const taskKey = task[datastore.KEY];
         console.log(taskKey.id, task);
       });
-
-      return tasks;
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
 }
 // [END retrieve_entities]
@@ -147,14 +150,17 @@ function deleteTask (taskId) {
     taskId
   ]);
 
-  return datastore.delete(taskKey)
+  datastore.delete(taskKey)
     .then(() => {
       console.log(`Task ${taskId} deleted successfully.`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
 }
 // [END delete_entity]
 
-require(`yargs`)
+require(`yargs`) // eslint-disable-line
   .demand(1)
   .command(
     `new <description>`,
