@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var async = require('async');
-var moment = require('moment');
 var Subscription = require('../src/subscription.js');
 var uuid = require('uuid');
 
