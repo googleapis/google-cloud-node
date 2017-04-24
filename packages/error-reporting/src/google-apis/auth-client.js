@@ -101,9 +101,9 @@ class RequestHandler extends common.Service {
     var that = this;
     this.authClient.getToken(function(err, token) {
       if (err) {
-        that._logger.warn([
-          'Unable to find credential information on instance. This library ' +
-          'will be unable to communicate with the Stackdriver API to save ' +
+        that._logger.error([
+          'Unable to find credential information on instance. This library',
+          'will be unable to communicate with the Stackdriver API to save',
           'errors.  Message: ' + err.message
         ].join(' '));
       }

@@ -20,7 +20,7 @@ var proxyquire = require('proxyquire');
 
 var Configuration = require('../../src/configuration.js');
 
-function verifyWarningMessage(errToReturn, expectedWarn) {
+function verifyReportedMessage(errToReturn, expectedMessage) {
   class ServiceStub {
     constructor() {
       this.authClient = {
@@ -37,28 +37,28 @@ function verifyWarningMessage(errToReturn, expectedWarn) {
     }
   });
 
-  var warnText = '';
+  var message = '';
   var logger = {
-    warn: function(text) {
-      warnText += text;
+    error: function(text) {
+      message += text;
     }
   };
   var config = new Configuration({ ignoreEnvironmentCheck: true }, logger);
   new RequestHandler(config, logger);
-  assert.strictEqual(warnText, expectedWarn);
+  assert.strictEqual(message, expectedMessage);
 }
 
 describe('RequestHandler', function() {
   it('should issue a warning if it cannot communicate with the API', function() {
     var message = 'Test Error';
-    verifyWarningMessage(new Error(message),
+    verifyReportedMessage(new Error(message),
       'Unable to find credential information on instance. This library ' +
       'will be unable to communicate with the Stackdriver API to save ' +
       'errors.  Message: ' + message);
   });
 
   it('should not issue a warning if it can communicate with the API', function() {
-    verifyWarningMessage(null, '');
-    verifyWarningMessage(undefined, '');
+    verifyReportedMessage(null, '');
+    verifyReportedMessage(undefined, '');
   });
 });
