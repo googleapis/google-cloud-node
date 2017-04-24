@@ -15,13 +15,20 @@ Learning API.
 * [Samples](#samples)
   * [Analyze](#analyze)
   * [Slackbot](#slackbot)
+* [Running the tests](#running-the-tests)
 
 ## Setup
 
-1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1. Install dependencies:
+1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1.  Install dependencies:
+
+    With `npm`:
 
         npm install
+
+    With `yarn`:
+
+        yarn install
 
 [prereq]: ../README.md#prerequisities
 [run]: ../README.md#how-to-run-a-sample
@@ -67,3 +74,18 @@ The example in the [slackbot](./slackbot) subdirectory shows a Slack bot built u
 It runs on a Google Container Engine (Kubernetes) cluster, and uses one of the Google Cloud Platform's ML
 APIs, the Natural Language (NL) API, to interact in a Slack channel.
 See its [README](./slackbot/README.md) for more information.
+
+## Running the tests
+
+1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
+    variables.
+
+1.  Run the tests:
+
+    With `npm`:
+
+        npm test
+
+    With `yarn`:
+
+        yarn test

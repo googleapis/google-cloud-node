@@ -2,17 +2,34 @@
   "name": "nodejs-docs-samples-language",
   "version": "0.0.1",
   "private": true,
-  "license": "Apache Version 2.0",
+  "license": "Apache-2.0",
   "author": "Google Inc.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
+  },
+  "cloud": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
   "scripts": {
-    "test": "cd ..; npm run st -- --verbose language/system-test/*.test.js"
+    "lint": "samples lint \"*.js\" \"system-test/*.js\" \"slackbot/*.js\" \"slackbot/system-test/*.js\"",
+    "pretest": "npm run lint",
+    "system-test": "ava -T 20s --verbose system-test/*.test.js",
+    "test": "npm run system-test"
   },
   "dependencies": {
     "@google-cloud/language": "0.10.3",
     "@google-cloud/storage": "1.1.0",
     "yargs": "7.1.0"
   },
-  "engines": {
-    "node": ">=4.3.2"
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "ava": "0.19.1",
+    "proxyquire": "1.7.11",
+    "sinon": "2.1.0"
   }
 }
