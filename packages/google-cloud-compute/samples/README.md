@@ -15,13 +15,20 @@ Google infrastructure.
   * [Sending mail with Mailjet](#sending-mail-with-mailjet)
   * [Listing instances (recommended)](#listing-instances-recommended)
   * [Listing instances](#listing-instances)
+* [Running the tests](#running-the-tests)
 
 ## Setup
 
-1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1. Install dependencies:
+1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1.  Install dependencies:
+
+    With `npm`:
 
         npm install
+
+    With `yarn`:
+
+        yarn install
 
 [prereq]: ../README.md#prerequisities
 [run]: ../README.md#how-to-run-a-sample
@@ -91,3 +98,18 @@ __Run the sample:__
 
 [vms_api_docs]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
 [vms_api_code]: vms_api.js
+
+## Running the tests
+
+1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
+    variables.
+
+1.  Run the tests:
+
+    With `npm`:
+
+        npm test
+
+    With `yarn`:
+
+        yarn test

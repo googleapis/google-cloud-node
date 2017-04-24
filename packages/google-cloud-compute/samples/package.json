@@ -2,17 +2,36 @@
   "name": "nodejs-docs-samples-computeengine",
   "version": "0.0.1",
   "private": true,
-  "license": "Apache Version 2.0",
+  "license": "Apache-2.0",
   "author": "Google Inc.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
+  },
+  "cloud": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
   "scripts": {
-    "test": "cd ..; npm run t -- computeengine/test/*.test.js",
-    "system-test": "cd ..; npm run t -- computeengine/system-test/*.test.js"
+    "lint": "samples lint",
+    "pretest": "npm run lint",
+    "unit-test": "ava -T 20s --verbose test/*.test.js",
+    "system-test": "ava -T 20s --verbose system-test/*.test.js",
+    "test": "npm run unit-test && npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/compute": "0.6.0",
-    "googleapis": "18.0.0",
-    "nodemailer": "2.7.0",
-    "nodemailer-smtp-transport": "2.7.2",
-    "sendgrid": "4.7.1"
+    "@google-cloud/compute": "0.7.1",
+    "googleapis": "19.0.0",
+    "nodemailer": "4.0.1",
+    "nodemailer-smtp-transport": "2.7.4",
+    "sendgrid": "5.0.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "ava": "0.19.1",
+    "proxyquire": "1.7.11"
   }
 }
