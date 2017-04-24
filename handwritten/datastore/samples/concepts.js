@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-'use strict';
+const sinon = require('sinon');
 
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
@@ -118,35 +118,40 @@ class Entity extends TestHelper {
     return task;
   }
 
-  testIncompleteKey () {
+  testIncompleteKey (t) {
+    t.plan(0);
     return this.datastore.save({
       key: this.incompleteKey,
       data: {}
     });
   }
 
-  testNamedKey () {
+  testNamedKey (t) {
+    t.plan(0);
     return this.datastore.save({
       key: this.namedKey,
       data: {}
     });
   }
 
-  testKeyWithParent () {
+  testKeyWithParent (t) {
+    t.plan(0);
     return this.datastore.save({
       key: this.keyWithParent,
       data: {}
     });
   }
 
-  testKeyWithMultiLevelParent () {
+  testKeyWithMultiLevelParent (t) {
+    t.plan(0);
     return this.datastore.save({
       key: this.keyWithMultiLevelParent,
       data: {}
     });
   }
 
-  testEntityWithParent () {
+  testEntityWithParent (t) {
+    t.plan(0);
     const taskKey = this.keyWithParent;
 
     // [START entity_with_parent]
@@ -164,7 +169,7 @@ class Entity extends TestHelper {
     return this.datastore.save(task);
   }
 
-  testProperties () {
+  testProperties (t) {
     // [START properties]
     const task = [
       {
@@ -201,7 +206,8 @@ class Entity extends TestHelper {
     });
   }
 
-  testArrayValue () {
+  testArrayValue (t) {
+    t.plan(0);
     // [START array_value]
     const task = {
       tags: [
@@ -221,14 +227,16 @@ class Entity extends TestHelper {
     });
   }
 
-  testBasicEntity () {
+  testBasicEntity (t) {
+    t.plan(0);
     return this.datastore.save({
       key: this.getIncompleteKey(),
       data: this.getTask()
     });
   }
 
-  testUpsert () {
+  testUpsert (t) {
+    t.plan(0);
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
@@ -250,7 +258,8 @@ class Entity extends TestHelper {
     });
   }
 
-  testInsert () {
+  testInsert (t) {
+    t.plan(0);
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
@@ -273,7 +282,8 @@ class Entity extends TestHelper {
     });
   }
 
-  testLookup () {
+  testLookup (t) {
+    t.plan(0);
     const taskKey = this.getIncompleteKey();
 
     // [START lookup]
@@ -299,7 +309,8 @@ class Entity extends TestHelper {
     }).then(() => this.datastore.get(taskKey));
   }
 
-  testUpdate () {
+  testUpdate (t) {
+    t.plan(0);
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
@@ -322,7 +333,8 @@ class Entity extends TestHelper {
     }).then(() => this.datastore.update({ key: taskKey, data: task }));
   }
 
-  testDelete () {
+  testDelete (t) {
+    t.plan(0);
     const taskKey = this.getIncompleteKey();
 
     // [START delete]
@@ -339,7 +351,7 @@ class Entity extends TestHelper {
     }).then(() => this.datastore.delete(taskKey));
   }
 
-  testBatchUpsert () {
+  testBatchUpsert (t) {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -387,7 +399,8 @@ class Entity extends TestHelper {
     ]);
   }
 
-  testBatchLookup () {
+  testBatchLookup (t) {
+    t.plan(0);
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -406,7 +419,8 @@ class Entity extends TestHelper {
     return this.datastore.get([taskKey1, taskKey2]);
   }
 
-  testBatchDelete () {
+  testBatchDelete (t) {
+    t.plan(0);
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -424,7 +438,8 @@ class Entity extends TestHelper {
 }
 
 class Index extends TestHelper {
-  testUnindexedPropertyQuery () {
+  testUnindexedPropertyQuery (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START unindexed_property_query]
@@ -670,7 +685,8 @@ class Query extends TestHelper {
     return query;
   }
 
-  testRunQuery () {
+  testRunQuery (t) {
+    t.plan(0);
     const query = this.basicQuery;
 
     // [START run_query]
@@ -687,7 +703,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testPropertyFilter () {
+  testPropertyFilter (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START property_filter]
@@ -698,7 +715,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testCompositeFilter () {
+  testCompositeFilter (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START composite_filter]
@@ -710,7 +728,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testKeyFilter () {
+  testKeyFilter (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START key_filter]
@@ -721,7 +740,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testAscendingSort () {
+  testAscendingSort (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START ascending_sort]
@@ -732,7 +752,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testDescendingSort () {
+  testDescendingSort (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START descending_sort]
@@ -745,7 +766,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testMultiSort () {
+  testMultiSort (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START multi_sort]
@@ -759,7 +781,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testKindlessQuery () {
+  testKindlessQuery (t) {
+    t.plan(0);
     const datastore = this.datastore;
     const lastSeenKey = this.datastore.key(['Task', Date.now()]);
 
@@ -801,7 +824,8 @@ class Query extends TestHelper {
     return runProjectionQuery();
   }
 
-  testKeysOnlyQuery () {
+  testKeysOnlyQuery (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START keys_only_query]
@@ -813,7 +837,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testDistinctQuery () {
+  testDistinctQuery (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START distinct_query]
@@ -826,7 +851,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testDistinctOnQuery () {
+  testDistinctOnQuery (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START distinct_on_query]
@@ -839,7 +865,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testArrayValueInequalityRange () {
+  testArrayValueInequalityRange (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START array_value_inequality_range]
@@ -851,7 +878,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testArrayValueEquality () {
+  testArrayValueEquality (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START array_value_equality]
@@ -863,7 +891,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testInequalityRange () {
+  testInequalityRange (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START inequality_range]
@@ -887,7 +916,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testEqualAndInequalityRange () {
+  testEqualAndInequalityRange (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START equal_and_inequality_range]
@@ -901,7 +931,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testInequalitySort () {
+  testInequalitySort (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START inequality_sort]
@@ -926,7 +957,7 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testInequalitySortInvalidNotFirst () {
+  testInequalitySortInvalidNotFirst (t) {
     const datastore = this.datastore;
 
     // [START inequality_sort_invalid_not_first]
@@ -939,7 +970,8 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testLimit () {
+  testLimit (t) {
+    t.plan(0);
     const datastore = this.datastore;
 
     // [START limit]
@@ -999,7 +1031,8 @@ class Query extends TestHelper {
       });
   }
 
-  testEventualConsistentQuery () {
+  testEventualConsistentQuery (t) {
+    t.plan(0);
     // [START eventual_consistent_query]
     // Read consistency cannot be specified in google-cloud-node.
     // [END eventual_consistent_query]
@@ -1089,7 +1122,8 @@ class Transaction extends TestHelper {
       });
   }
 
-  testTransactionalRetry () {
+  testTransactionalRetry (t) {
+    t.plan(0);
     // Overwrite so the real Datastore instance is used in `transferFunds`.
     const datastoreMock = datastore;
     datastore = this.datastore;
