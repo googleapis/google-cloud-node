@@ -344,7 +344,7 @@ describe('Subscription', function() {
 
     it('should decode buffer to specified encoding', function() {
       var msg = Subscription
-        .formatMessage_(messageObj.receivedMessages[0], 'binary');
+        .formatMessage_(messageObj.receivedMessages[0], 'base64');
       assert.deepEqual(msg, expectedMessageAsBinary);
     });
   });
