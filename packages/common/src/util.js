@@ -293,9 +293,9 @@ function shouldRetryRequest(err) {
         }
       }
     }
-    
+
     // Underlying socket throws "Error: read ECONNRESET" for a TCP hangup.
-    if (err.toString().indexOf('ECONNRESET' !== -1) {
+    if (err.toString().indexOf('ECONNRESET' !== -1)) {
       return true;
     }
   }
