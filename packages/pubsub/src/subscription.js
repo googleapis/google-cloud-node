@@ -361,7 +361,8 @@ Subscription.formatMessage_ = function(msg, encoding) {
         // Prevent decoding and then re-encoding to base64
         message.data = innerMessage.data;
       } else {
-        message.data = new Buffer(innerMessage.data, 'base64').toString(encoding);
+        message.data =
+            new Buffer(innerMessage.data, 'base64').toString(encoding);
 
         try {
           message.data = JSON.parse(message.data);
