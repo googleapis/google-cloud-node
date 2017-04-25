@@ -31,6 +31,7 @@
     "mocha": "^3.2.0",
     "nock": "^9.0.0",
     "nyc": "^10.0.0",
+    "proxyquire": "^1.7.11",
     "restify": "^4.1.0"
   },
   "dependencies": {
