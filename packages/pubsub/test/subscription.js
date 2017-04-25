@@ -77,6 +77,11 @@ describe('Subscription', function() {
     data: messageBinary,
     id: 7
   };
+  var expectedMessageAsBase64 = {
+    ackId: 'abc',
+    data: messageBuffer,
+    id: 7
+  };
 
   before(function() {
     Subscription = proxyquire('../src/subscription.js', {
@@ -340,6 +345,12 @@ describe('Subscription', function() {
     it('should decode buffer to string', function() {
       var msg = Subscription.formatMessage_(messageObj.receivedMessages[0]);
       assert.deepEqual(msg, expectedMessage);
+    });
+
+    it('should decode buffer to base64', function() {
+      var msg = Subscription
+        .formatMessage_(messageObj.receivedMessages[0], 'base64');
+      assert.deepEqual(msg, expectedMessageAsBase64);
     });
 
     it('should decode buffer to specified encoding', function() {

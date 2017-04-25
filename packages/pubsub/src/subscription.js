@@ -347,7 +347,7 @@ modelo.inherits(Subscription, commonGrpc.ServiceObject, events.EventEmitter);
  *
  * @private
  */
-Subscription.formatMessage_ = function(msg, encoding) {
+Subscription.formatMessage_ = function(msg, enc) {
   var innerMessage = msg.message;
   var message = {
     ackId: msg.ackId
@@ -357,11 +357,16 @@ Subscription.formatMessage_ = function(msg, encoding) {
     message.id = innerMessage.messageId;
 
     if (innerMessage.data) {
-      message.data = new Buffer(innerMessage.data, 'base64').toString(encoding);
+      if (enc === 'base64') {
+        // Prevent decoding and then re-encoding to base64.
+        message.data = innerMessage.data;
+      } else {
+        message.data = Buffer.from(innerMessage.data, 'base64').toString(enc);
 
-      try {
-        message.data = JSON.parse(message.data);
-      } catch(e) {}
+        try {
+          message.data = JSON.parse(message.data);
+        } catch(e) {}
+      }
     }
 
     if (innerMessage.attributes) {
