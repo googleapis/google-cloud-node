@@ -281,7 +281,7 @@ function shouldRetryRequest(err) {
     if ([429, 500, 502, 503].indexOf(err.code) !== -1) {
       return true;
     }
-
+    
     if (err.errors) {
       for (var i in err.errors) {
         var reason = err.errors[i].reason;
@@ -292,6 +292,11 @@ function shouldRetryRequest(err) {
           return true;
         }
       }
+    }
+    
+    // Underlying socket throws "Error: read ECONNRESET" for a TCP hangup.
+    if (err.toString().indexOf('ECONNRESET' !== -1) {
+      return true;
     }
   }
 
