@@ -357,11 +357,16 @@ Subscription.formatMessage_ = function(msg, encoding) {
     message.id = innerMessage.messageId;
 
     if (innerMessage.data) {
-      message.data = new Buffer(innerMessage.data, 'base64').toString(encoding);
+      if (encoding === 'base64') {
+        // Prevent decoding and then re-encoding to base64
+        message.data = innerMessage.data;
+      } else {
+        message.data = new Buffer(innerMessage.data, 'base64').toString(encoding);
 
-      try {
-        message.data = JSON.parse(message.data);
-      } catch(e) {}
+        try {
+          message.data = JSON.parse(message.data);
+        } catch(e) {}
+      }
     }
 
     if (innerMessage.attributes) {
