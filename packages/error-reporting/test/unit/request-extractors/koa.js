@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var koaRequestInformationExtractor =
-  require('../../src/request-extractors/koa.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+  require('../../../src/request-extractors/koa.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('koaRequestInformationExtractor', function() {
   describe('Behaviour under invalid input', function() {

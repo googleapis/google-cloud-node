@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var handleUnknownAsError = require('../../src/error-handlers/unknown.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var handleUnknownAsError = require('../../../src/error-handlers/unknown.js');
 
 describe('handleUnknownAsError behvaiour under varying input', function() {
   var em;

@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var handleStringAsError = require('../../src/error-handlers/string.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var handleStringAsError = require('../../../src/error-handlers/string.js');
 
 describe('handleStringAsError behaviour under varying inputs', function() {
   var em;

@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var handleObjectAsError = require('../../src/error-handlers/object.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var handleObjectAsError = require('../../../src/error-handlers/object.js');
 
 describe('handleObjectAsError behaviour under varying inputs', function() {
   var em;
