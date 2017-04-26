@@ -18,11 +18,11 @@
 
 var assert = require('assert');
 var merge = require('lodash.merge');
-var expressInterface = require('../../src/interfaces/express.js');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var Fuzzer = require('../../utils/fuzzer.js');
-var Configuration = require('../fixtures/configuration.js');
-var createLogger = require('../../src/logger.js');
+var expressInterface = require('../../../src/interfaces/express.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
+var Configuration = require('../../fixtures/configuration.js');
+var createLogger = require('../../../src/logger.js');
 
 describe('expressInterface', function() {
   describe('Exception handling', function() {

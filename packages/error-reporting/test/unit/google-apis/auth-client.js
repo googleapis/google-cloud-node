@@ -18,7 +18,7 @@
 var assert = require('assert');
 var proxyquire = require('proxyquire');
 
-var Configuration = require('../../src/configuration.js');
+var Configuration = require('../../../src/configuration.js');
 
 function verifyReportedMessage(errToReturn, expectedMessage) {
   class ServiceStub {
@@ -31,7 +31,7 @@ function verifyReportedMessage(errToReturn, expectedMessage) {
     }
   }
 
-  var RequestHandler = proxyquire('../../src/google-apis/auth-client.js', {
+  var RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
     '@google-cloud/common': {
       Service: ServiceStub
     }
