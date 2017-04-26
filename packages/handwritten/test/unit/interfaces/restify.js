@@ -18,7 +18,7 @@
 
 var EventEmitter = require('events').EventEmitter;
 var assert = require('assert');
-var restifyInterface = require('../../src/interfaces/restify.js');
+var restifyInterface = require('../../../src/interfaces/restify.js');
 
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {

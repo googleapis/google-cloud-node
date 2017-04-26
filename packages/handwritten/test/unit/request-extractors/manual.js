@@ -20,8 +20,8 @@ var assert = require('assert');
 var omit = require('lodash.omit');
 var extend = require('extend');
 var manualRequestInformationExtractor =
-  require('../../src/request-extractors/manual.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+  require('../../../src/request-extractors/manual.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('manualRequestInformationExtractor', function() {
   describe('Behaviour given invalid input', function() {

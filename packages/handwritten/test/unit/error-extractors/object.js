@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var extractFromObject = require('../../src/error-extractors/object.js');
-var ErrorMessage = require('../../src/classes/error-message.js');
+var extractFromObject = require('../../../src/error-extractors/object.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
 
 describe('Object value extraction as error message', function() {
   var em, err;
