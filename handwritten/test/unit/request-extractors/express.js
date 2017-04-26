@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var expressRequestInformationExtractor =
-  require('../../src/request-extractors/express.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+  require('../../../src/request-extractors/express.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 var extend = require('extend');
 
 describe('Behaviour under varying input',
