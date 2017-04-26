@@ -21,11 +21,11 @@ var is = require('is');
 var isFunction = is.fn;
 var isObject = is.object;
 var assert = require('assert');
-var hapiInterface = require('../../src/interfaces/hapi.js');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+var hapiInterface = require('../../../src/interfaces/hapi.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 var EventEmitter = require('events').EventEmitter;
-var Configuration = require('../fixtures/configuration.js');
+var Configuration = require('../../fixtures/configuration.js');
 
 describe('Hapi interface', function() {
   describe('Fuzzing the setup handler', function() {

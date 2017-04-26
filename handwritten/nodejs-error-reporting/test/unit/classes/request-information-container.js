@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var RequestInformationContainer =
-  require('../../src/classes/request-information-container.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+  require('../../../src/classes/request-information-container.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('RequestInformationContainer', function() {
   var f = new Fuzzer();
