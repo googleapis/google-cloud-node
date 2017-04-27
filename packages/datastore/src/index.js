@@ -440,8 +440,8 @@ Datastore.NO_MORE_RESULTS = 'NO_MORE_RESULTS';
  * var query = datastore.createQuery('Company');
  */
 Datastore.prototype.createQuery = function(namespace, kind) {
-  if (arguments.length === 1) {
-    kind = arrify(namespace);
+  if (arguments.length < 2) {
+    kind = namespace;
     namespace = this.namespace;
   }
 
