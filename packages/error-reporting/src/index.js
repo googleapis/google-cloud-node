@@ -79,9 +79,9 @@ function Errors(initConfiguration) {
     return new Errors(initConfiguration);
   }
 
-  var logger = createLogger(initConfiguration);
-  var config = new Configuration(initConfiguration, logger);
-  var client = new AuthClient(config, logger);
+  this._logger = createLogger(initConfiguration);
+  this._config = new Configuration(initConfiguration, this._logger);
+  this._client = new AuthClient(this._config, this._logger);
 
   // Build the application interfaces for use by the hosting application
   /**
@@ -91,7 +91,7 @@ function Errors(initConfiguration) {
    *  console.log('done!');
    * });
    */
-  this.report = manual(client, config);
+  this.report = manual(this._client, this._config);
   /**
    * @example
    * // Use to create and report errors manually with a high-degree
@@ -103,7 +103,7 @@ function Errors(initConfiguration) {
    *  console.log('done!');
    * });
    */
-  this.event = messageBuilder(config);
+  this.event = messageBuilder(this._config);
   /**
    * @example
    * var hapi = require('hapi');
@@ -113,7 +113,7 @@ function Errors(initConfiguration) {
    * // AFTER ALL OTHER ROUTE HANDLERS
    * server.register({register: errors.hapi});
    */
-  this.hapi = hapi(client, config);
+  this.hapi = hapi(this._client, this._config);
   /**
    * @example
    * var express = require('express');
@@ -122,7 +122,7 @@ function Errors(initConfiguration) {
    * app.use(errors.express);
    * app.listen(3000);
    */
-  this.express = express(client, config);
+  this.express = express(this._client, this._config);
   /**
    * @example
    * var restify = require('restify');
@@ -130,7 +130,7 @@ function Errors(initConfiguration) {
    * // BEFORE ALL OTHER ROUTE HANDLERS
    * server.use(errors.restify(server));
    */
-  this.restify = restify(client, config);
+  this.restify = restify(this._client, this._config);
   /**
    * @example
    * var koa = require('koa');
@@ -138,7 +138,7 @@ function Errors(initConfiguration) {
    * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
    * app.use(errors.koa);
    */
-  this.koa = koa(client, config);
+  this.koa = koa(this._client, this._config);
 }
 
 module.exports = Errors;
