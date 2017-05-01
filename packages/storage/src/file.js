@@ -103,7 +103,7 @@ function File(bucket, name, options) {
 
   Object.defineProperty(this, 'name', {
     enumerable: true,
-    value: name
+    value: name.replace(/^\/+/, '') // Remove leading slashes.
   });
 
   var generation = parseInt(options.generation, 10);

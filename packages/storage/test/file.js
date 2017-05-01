@@ -161,6 +161,11 @@ describe('File', function() {
       assert.strictEqual(file.storage, BUCKET.storage);
     });
 
+    it('should strip a single leading slash', function() {
+      var file = new File(BUCKET, '/name');
+      assert.strictEqual(file.name, 'name');
+    });
+
     it('should accept specifying a generation', function() {
       var file = new File(BUCKET, 'name', { generation: 2 });
       assert.equal(file.generation, 2);
