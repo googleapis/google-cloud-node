@@ -723,6 +723,7 @@ describe('PubSub', function() {
         encoding: 'utf-8',
         interval: 3,
         maxInProgress: 5,
+        retainAckedMessages: true,
         pushEndpoint: 'https://domain/push',
         timeout: 30000
       };
@@ -762,6 +763,29 @@ describe('PubSub', function() {
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, options, assert.ifError);
+    });
+
+    describe('message retention', function() {
+      it('should accept a number', function(done) {
+        var threeDaysInSeconds = 3 * 24 * 60 * 60;
+
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.retainAckedMessages, true);
+
+          assert.strictEqual(
+            reqOpts.messageRetentionDuration.seconds,
+            threeDaysInSeconds
+          );
+
+          assert.strictEqual(reqOpts.messageRetentionDuration.nanos, 0);
+
+          done();
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, {
+          messageRetentionDuration: threeDaysInSeconds
+        }, assert.ifError);
+      });
     });
 
     describe('error', function() {

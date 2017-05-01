@@ -313,6 +313,32 @@ describe('pubsub', function() {
       });
     });
 
+    it('should create a subscription with message retention', function(done) {
+      var threeDaysInSeconds = 3 * 24 * 60 * 60;
+
+      topic.subscribe({
+        messageRetentionDuration: threeDaysInSeconds
+      }, function(err, sub) {
+        assert.ifError(err);
+
+        sub.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          assert.strictEqual(metadata.retainAckedMessages, true);
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.seconds, 10),
+            threeDaysInSeconds
+          );
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.nanos, 10),
+            0
+          );
+
+          sub.delete(done);
+        });
+      });
+    });
+
     it('should re-use an existing subscription', function(done) {
       pubsub.subscribe(topic, SUB_NAMES[0], done);
     });
