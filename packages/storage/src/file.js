@@ -101,6 +101,10 @@ function File(bucket, name, options) {
   this.bucket = bucket;
   this.storage = bucket.parent;
 
+  if (typeof name === 'string' && name.charAt(0) === '/' && name.length > 1) {
+    name = name.substring(1);
+  }
+
   Object.defineProperty(this, 'name', {
     enumerable: true,
     value: name
