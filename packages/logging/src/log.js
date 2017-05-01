@@ -21,7 +21,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var async = require('async');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');

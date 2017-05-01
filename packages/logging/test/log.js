@@ -335,7 +335,7 @@ describe('Log', function() {
       };
       log.metadata_.getDefaultResource = function(callback) {
         callback(null, FAKE_RESOURCE);
-      }
+      };
     });
 
     it('should forward options.resource to request', function(done) {
