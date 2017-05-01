@@ -284,6 +284,14 @@ describe('Datastore', function() {
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
       assert.deepEqual(query.calledWith_[2], kind);
     });
+
+    it('should include the default namespace in a kindless query', function() {
+      var query = datastore.createQuery();
+
+      assert.strictEqual(query.calledWith_[0], datastore);
+      assert.strictEqual(query.calledWith_[1], datastore.namespace);
+      assert.deepEqual(query.calledWith_[2], []);
+    });
   });
 
   describe('key', function() {
