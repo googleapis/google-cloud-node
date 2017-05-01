@@ -89,6 +89,7 @@ var spanner = new Spanner(env);
             SingerId STRING(1024) NOT NULL,
             Int INT64,
             Float FLOAT64,
+            String STRING(1024),
           ) PRIMARY KEY(SingerId)
         */})
       }, execAfterOperationComplete(done));
@@ -173,7 +174,7 @@ var spanner = new Spanner(env);
       });
     });
 
-    it('should handled -Infinity', function(done) {
+    it('should handle -Infinity', function(done) {
       insert({ Float: -Infinity }, function(err, row) {
         assert.ifError(err);
         assert.deepEqual(row.toJSON().Float, spanner.float(-Infinity));
@@ -195,6 +196,14 @@ var spanner = new Spanner(env);
       insert({ Int: value }, function(err, row) {
         assert.ifError(err);
         assert.strictEqual(row.toJSON().Int.value, value);
+        done();
+      });
+    });
+
+    it('should handle null', function(done) {
+      insert({ String: null }, function(err, row) {
+        assert.ifError(err);
+        assert.strictEqual(row.toJSON().String, null);
         done();
       });
     });
