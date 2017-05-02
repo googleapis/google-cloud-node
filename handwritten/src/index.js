@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module error-reporting
+ */
+
 'use strict';
 
 var Configuration = require('./configuration.js');
@@ -29,7 +34,7 @@ var createLogger = require('./logger.js');
 
 /**
  * @typedef ConfigurationOptions
- * @type Object
+ * @type {Object}
  * @property {String} [projectId] - the projectId of the project deployed
  * @property {String} [keyFilename] - path to a key file to use for an API key
  * @property {String|Number} logLevel - a integer between and including 0-5 or a
@@ -50,29 +55,39 @@ var createLogger = require('./logger.js');
  */
 
 /**
- * @typedef ApplicationErrorReportingInterface
- * @type Object
- * @property {Object} hapi - The hapi plugin for Stackdriver Error Reporting
+ * @typedef Errors
+ * @type {Object}
  * @property {Function} report - The manual interface to report Errors to the
  *  Stackdriver Error Reporting Service
+ * @property {ErrorMessage} event - Returns a new ErrorMessage class instance
+ *  to use to create custom messages
  * @property {Function} express - The express plugin for Stackdriver Error
  *  Reporting
- * @property {Function} message - Returns a new ErrorMessage class instance
+ * @property {Object} hapi - The hapi plugin for Stackdriver Error Reporting
+ * @property {Function} koa - The koa plugin for Stackdriver Error Reporting
+ * @property {Function} restify - The restify plugin for Stackdriver Error
+ *  Reporting
  */
 
-// TODO: Update this documentation
 /**
- * The entry point for initializing the Error Reporting Middleware. This
+ * This module provides Stackdriver Error Reporting support for Node.js
+ * applications.
+ * [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is
+ * a feature of Google Cloud Platform that allows in-depth monitoring and
+ * viewing of errors reported by applications running in almost any environment.
+ *
+ * This is the entry point for initializing the error reporting middleware. This
  * function will invoke configuration gathering and attempt to create a API
- * client which will send errors to the Error Reporting Service. Invocation of
- * this function will also return an interface which can be used manually via
- * the `report` function property, with hapi via the `hapi` object property or
- * with express via the `express` function property.
- * @function Errors
- * @param {ConfigurationOptions} initConfiguration - the desired project/error
- *     reporting configuration
- * @constructor
+ * client which will send errors to the Error Reporting Service.
+ *
  * @alias module:error-reporting
+ * @constructor
+ *
+ * @resource [What is Stackdriver Error Reporting]{@link
+ * https://cloud.google.com/error-reporting/}
+ *
+ * @param {ConfigurationOptions} initConfiguration - The desired project/error
+ *     reporting configuration.
  */
 function Errors(initConfiguration) {
   if (!(this instanceof Errors)) {
