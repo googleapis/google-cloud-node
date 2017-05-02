@@ -8,10 +8,6 @@
     "type": "git",
     "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
   },
-  "cloud": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true
-  },
   "engines": {
     "node": ">=4.3.2"
   },
@@ -22,13 +18,42 @@
     "test": "npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/datastore": "1.0.0",
+    "@google-cloud/datastore": "1.0.1",
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "@google-cloud/nodejs-repo-tools": "1.4.7",
     "ava": "0.19.1",
     "proxyquire": "1.7.11",
     "sinon": "2.1.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true,
+    "product": "datastore",
+    "samples": [
+      {
+        "id": "tasks",
+        "name": "Tasks",
+        "file": "tasks.js",
+        "docs_link": "https://cloud.google.com/datastore/docs/datastore-api-tutorial",
+        "usage": "node tasks.js --help"
+      },
+      {
+        "id": "concepts",
+        "name": "Concepts",
+        "file": "concepts.js",
+        "docs_link": "https://cloud.google.com/datastore/docs/concepts/entities"
+      },
+      {
+        "id": "error",
+        "name": "Errors and Error Handling",
+        "file": "error.js",
+        "docs_link": "https://cloud.google.com/datastore/docs/concepts/errors",
+        "usage": {
+          "text": "node error.js"
+        }
+      }
+    ]
   }
 }
