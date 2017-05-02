@@ -2,10 +2,9 @@
 
 # Google Cloud Pub/Sub Node.js Samples
 
-[Cloud Pub/Sub][pubsub_docs] is a fully-managed real-time messaging service that
-allows you to send and receive messages between independent applications.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-pubsub.svg)]()
 
-[pubsub_docs]: https://cloud.google.com/pubsub/docs/
+[Cloud Pub/Sub](https://cloud.google.com/pubsub/docs) is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.
 
 ## Table of Contents
 
@@ -35,7 +34,8 @@ allows you to send and receive messages between independent applications.
 
 ### Topics
 
-View the [documentation][topics_docs] or the [source code][topics_code].
+
+View the [documentation][topics_0_docs] or the [source code][topics_0_code].
 
 __Usage:__ `node topics.js --help`
 
@@ -51,7 +51,7 @@ Commands:
   test-permissions <topicName>           Tests the permissions for a topic.
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
   node topics.js list
@@ -66,12 +66,13 @@ Examples:
 For more information, see https://cloud.google.com/pubsub/docs
 ```
 
-[topics_docs]: https://cloud.google.com/pubsub/publisher
-[topics_code]: topics.js
+[topics_0_docs]: https://cloud.google.com/pubsub/publisher
+[topics_0_code]: topics.js
 
 ### Subscriptions
 
-View the [documentation][subscriptions_docs] or the [source code][subscriptions_code].
+
+View the [documentation][subscriptions_1_docs] or the [source code][subscriptions_1_code].
 
 __Usage:__ `node subscriptions.js --help`
 
@@ -89,7 +90,7 @@ Commands:
   test-permissions <subscriptionName>         Tests the permissions for a subscription.
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
   node subscriptions.js list
@@ -106,8 +107,8 @@ Examples:
 For more information, see https://cloud.google.com/pubsub/docs
 ```
 
-[subscriptions_docs]: https://cloud.google.com/pubsub/subscriber
-[subscriptions_code]: subscriptions.js
+[subscriptions_1_docs]: https://cloud.google.com/pubsub/subscriber
+[subscriptions_1_code]: subscriptions.js
 
 ## Running the tests
 
