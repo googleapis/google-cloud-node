@@ -1,15 +1,10 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Resource Manager Node.js Samples
+# Google Cloud Resource Manager API Node.js Samples
 
-Google Cloud Platform provides container resources such as Organizations and
-Projects, that allow you to group and hierarchically organize other Cloud
-Platform resources. This hierarchical organization lets you easily manage common
-aspects of your resources such as access control and configuration settings. The
-[Google Cloud Resource Manager API][resource_docs] enables you to
-programmatically manage these container resources.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-resource-manager.svg)]()
 
-[resource_docs]: https://cloud.google.com/resource-manager/docs/
+Google Cloud Platform provides container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. The [Google Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs) enables you to programmatically manage these container resources.
 
 ## Table of Contents
 
@@ -38,9 +33,10 @@ programmatically manage these container resources.
 
 ### Projects
 
-View the [documentation][projects_docs] or the [source code][projects_code].
 
-__Usage:__ `node projects --help`
+View the [documentation][projects_0_docs] or the [source code][projects_0_code].
+
+__Usage:__ `node projects.js --help`
 
 ```
 Commands:
@@ -55,8 +51,8 @@ Examples:
 For more information, see https://cloud.google.com/resource-manager/docs
 ```
 
-[projects_docs]: https://cloud.google.com/resource-manager/docs/
-[projects_code]: projects.js
+[projects_0_docs]: https://cloud.google.com/resource-manager/docs
+[projects_0_code]: projects.js
 
 ## Running the tests
 
