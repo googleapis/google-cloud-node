@@ -8,15 +8,16 @@
     "type": "git",
     "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
   },
-  "cloud": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true
-  },
   "engines": {
     "node": ">=4.3.2"
   },
+  "semistandard": {
+    "ignore": [
+      "node_modules"
+    ]
+  },
   "scripts": {
-    "lint": "samples lint \"*.js\" \"system-test/*.js\" \"slackbot/*.js\" \"slackbot/system-test/*.js\"",
+    "lint": "samples lint",
     "pretest": "npm run lint",
     "system-test": "ava -T 20s --verbose system-test/*.test.js",
     "test": "npm run system-test"
@@ -27,9 +28,35 @@
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "@google-cloud/nodejs-repo-tools": "1.4.7",
     "ava": "0.19.1",
     "proxyquire": "1.7.11",
     "sinon": "2.1.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true,
+    "product": "nl",
+    "samples": [
+      {
+        "id": "analyze-v1",
+        "name": "Analyze v1",
+        "file": "analyze.v1.js",
+        "docs_link": "https://cloud.google.com/natural-language/docs/",
+        "usage": "node analyze.v1.js --help"
+      },
+      {
+        "id": "analyze-v1beta2",
+        "name": "Analyze v1beta2",
+        "file": "analyze.v1beta2.js",
+        "docs_link": "https://cloud.google.com/natural-language/docs/",
+        "usage": "node analyze.v1beta2.js --help"
+      },
+      {
+        "id": "slackbot",
+        "name": "Slack Bot",
+        "ref": "slackbot/README.md"
+      }
+    ]
   }
 }

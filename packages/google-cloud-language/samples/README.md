@@ -2,19 +2,17 @@
 
 # Google Cloud Natural Language API Node.js Samples
 
-[Cloud Natural Language API][language_docs] provides natural language
-understanding technologies to developers, including sentiment analysis, entity
-recognition, and syntax analysis. This API is part of the larger Cloud Machine
-Learning API.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-language.svg)]()
 
-[language_docs]: https://cloud.google.com/natural-language/docs/
+[Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity recognition, and syntax analysis. This API is part of the larger Cloud Machine Learning API.
 
 ## Table of Contents
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Analyze](#analyze)
-  * [Slackbot](#slackbot)
+  * [Analyze v1](#analyze-v1)
+  * [Analyze v1beta2](#analyze-v1beta2)
+  * [Slack Bot](#slack-bot)
 * [Running the tests](#running-the-tests)
 
 ## Setup
@@ -35,11 +33,12 @@ Learning API.
 
 ## Samples
 
-### Analyze
+### Analyze v1
 
-View the [documentation][analyze_docs] or the [source code][analyze_code].
 
-__Usage:__ `node analyze.js --help`
+View the [documentation][analyze-v1_0_docs] or the [source code][analyze-v1_0_code].
+
+__Usage:__ `node analyze.v1.js --help`
 
 ```
 Commands:
@@ -54,26 +53,62 @@ Options:
   --help  Show help                                                                                            [boolean]
 
 Examples:
-  node analyze.js sentiment-text "President Obama is speaking at the White House."
-  node analyze.js sentiment-file my-bucket file.txt             Detects sentiment in gs://my-bucket/file.txt
-  node analyze.js entities-text "President Obama is speaking at the White House."
-  node analyze.js entities-file my-bucket file.txt              Detects entities in gs://my-bucket/file.txt
-  node analyze.js syntax-text "President Obama is speaking at the White House."
-  node analyze.js syntax-file my-bucket file.txt                Detects syntax in gs://my-bucket/file.txt
+  node analyze.v1.js sentiment-text "President Obama is speaking at the White House."
+  node analyze.v1.js sentiment-file my-bucket file.txt          Detects sentiment in gs://my-bucket/file.txt
+  node analyze.v1.js entities-text "President Obama is speaking at the White House."
+  node analyze.v1.js entities-file my-bucket file.txt           Detects entities in gs://my-bucket/file.txt
+  node analyze.v1.js syntax-text "President Obama is speaking at the White House."
+  node analyze.v1.js syntax-file my-bucket file.txt             Detects syntax in gs://my-bucket/file.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
 
-[analyze_docs]: https://cloud.google.com/natural-language/docs
-[analyze_code]: analyze.js
+[analyze-v1_0_docs]: https://cloud.google.com/natural-language/docs/
+[analyze-v1_0_code]: analyze.v1.js
 
-### Slackbot
+### Analyze v1beta2
 
-The example in the [slackbot](./slackbot) subdirectory shows a Slack bot built using the
-[Botkit](https://github.com/howdyai/botkit) library.
-It runs on a Google Container Engine (Kubernetes) cluster, and uses one of the Google Cloud Platform's ML
-APIs, the Natural Language (NL) API, to interact in a Slack channel.
-See its [README](./slackbot/README.md) for more information.
+
+View the [documentation][analyze-v1beta2_1_docs] or the [source code][analyze-v1beta2_1_code].
+
+__Usage:__ `node analyze.v1beta2.js --help`
+
+```
+Commands:
+  sentiment-text <text>                          Detects sentiment of a string.
+  sentiment-file <bucketName> <fileName>         Detects sentiment in a file in Google Cloud Storage.
+  entities-text <text>                           Detects entities in a string.
+  entities-file <bucketName> <fileName>          Detects entities in a file in Google Cloud Storage.
+  syntax-text <text>                             Detects syntax of a string.
+  syntax-file <bucketName> <fileName>            Detects syntax in a file in Google Cloud Storage.
+  entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
+  entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google Cloud Storage.
+
+Options:
+  --help  Show help                                                                                            [boolean]
+
+Examples:
+  node analyze.v1beta2.js sentiment-text "President Obama is speaking at the White House."
+  node analyze.v1beta2.js sentiment-file my-bucket file.txt     Detects sentiment in gs://my-bucket/file.txt
+  node analyze.v1beta2.js entities-text "President Obama is speaking at the White House."
+  node analyze.v1beta2.js entities-file my-bucket file.txt      Detects entities in gs://my-bucket/file.txt
+  node analyze.v1beta2.js syntax-text "President Obama is speaking at the White House."
+  node analyze.v1beta2.js syntax-file my-bucket file.txt        Detects syntax in gs://my-bucket/file.txt
+  node analyze.v1beta2.js entity-sentiment-text "President Obama is speaking at the White House."
+  node analyze.v1beta2.js entity-sentiment-file my-bucket       Detects sentiment of entities in gs://my-bucket/file.txt
+  file.txt
+
+For more information, see https://cloud.google.com/natural-language/docs
+```
+
+[analyze-v1beta2_1_docs]: https://cloud.google.com/natural-language/docs/
+[analyze-v1beta2_1_code]: analyze.v1beta2.js
+
+### Slack Bot
+
+
+View the [README](slackbot/README.md).
+
 
 ## Running the tests
 
