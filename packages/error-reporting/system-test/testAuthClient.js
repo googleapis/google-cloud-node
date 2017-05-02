@@ -391,6 +391,11 @@ describe('error-reporting', function() {
   });
 
   it('Should correctly publish errors', function(done) {
+    // After an error is reported, this test waits TIMEOUT ms before
+    // verifying the error has been reported to ensure the system had
+    // enough time to receive the error report and process it.
+    // As such, this test is set to fail due to a timeout only if sufficiently
+    // more than TIMEOUT ms has elapsed to avoid test fragility.
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('message');
     errors.report(new Error(errorId), function(err, response, body) {
