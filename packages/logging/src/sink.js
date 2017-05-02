@@ -117,12 +117,7 @@ Sink.prototype.delete = function(gaxOptions, callback) {
     sinkName: this.formattedName_
   };
 
-  this.logging.request({
-    client: 'configServiceV2Client',
-    method: 'deleteSink',
-    reqOpts: reqOpts,
-    gaxOpts: gaxOptions
-  }, callback);
+  this.logging.api.Config.deleteSink(reqOpts, gaxOptions, callback);
 };
 
 /**
@@ -162,12 +157,7 @@ Sink.prototype.getMetadata = function(gaxOptions, callback) {
     sinkName: this.formattedName_
   };
 
-  this.logging.request({
-    client: 'configServiceV2Client',
-    method: 'getSink',
-    reqOpts: reqOpts,
-    gaxOpts: gaxOptions
-  }, function() {
+  this.logging.api.Config.getSink(reqOpts, gaxOptions, function() {
     if (arguments[1]) {
       self.metadata = arguments[1];
     }
@@ -254,18 +244,16 @@ Sink.prototype.setMetadata = function(metadata, callback) {
 
     delete reqOpts.sink.gaxOptions;
 
-    self.logging.request({
-      client: 'configServiceV2Client',
-      method: 'updateSink',
-      reqOpts: reqOpts,
-      gaxOpts: metadata.gaxOptions
-    }, function() {
-      if (arguments[1]) {
-        self.metadata = arguments[1];
-      }
+    self.logging.api.Config.updateSink(
+      reqOpts,
+      metadata.gaxOptions,
+      function() {
+        if (arguments[1]) {
+          self.metadata = arguments[1];
+        }
 
-      callback.apply(null, arguments);
-    });
+        callback.apply(null, arguments);
+      });
   });
 };
 
