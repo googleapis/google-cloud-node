@@ -2,16 +2,15 @@
 
 # Google Cloud Speech API Node.js Samples
 
-The [Cloud Speech API][speech_docs] enables easy integration of Google speech
-recognition technologies into developer applications.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-speech.svg)]()
 
-[speech_docs]: https://cloud.google.com/speech/
+The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integration of Google speech recognition technologies into developer applications.
 
 ## Table of Contents
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Recognize](#recognize)
+  * [Speech Recognition](#speech-recognition)
 * [Running the tests](#running-the-tests)
 
 ## Setup
@@ -32,9 +31,10 @@ recognition technologies into developer applications.
 
 ## Samples
 
-### Recognize
+### Speech Recognition
 
-View the [documentation][recognize_docs] or the [source code][recognize_code].
+
+View the [documentation][recognize_0_docs] or the [source code][recognize_0_code].
 
 __Usage:__ `node recognize.js --help`
 
@@ -64,10 +64,8 @@ Examples:
 For more information, see https://cloud.google.com/speech/docs
 ```
 
-**Note:** The `listen` command requires that you have SoX installed and available in your $PATH. See https://www.npmjs.com/package/node-record-lpcm16#dependencies.
-
-[recognize_docs]: https://cloud.google.com/speech/docs
-[recognize_code]: recognize.js
+[recognize_0_docs]: https://cloud.google.com/speech/docs
+[recognize_0_code]: recognize.js
 
 ## Running the tests
 
