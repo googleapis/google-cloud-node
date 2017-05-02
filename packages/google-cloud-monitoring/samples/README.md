@@ -1,18 +1,16 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Stackdriver Monitoring Node.js samples
+# Stackdriver Monitoring Node.js Samples
 
-[Stackdriver Monitoring][monitoring_docs] collects metrics, events, and metadata
-from Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes,
-application instrumentation, and a variety of common application components
-including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-monitoring.svg)]()
 
-[monitoring_docs]: https://cloud.google.com/monitoring/docs/
+[Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
 ## Table of Contents
 
 * [Setup](#setup)
 * [Samples](#samples)
+  * [Metrics](#metrics)
   * [Listing resources](#listing-resources)
   * [Custom metrics](#custom-metrics)
 * [Running the tests](#running-the-tests)
@@ -37,7 +35,8 @@ including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
 ### Metrics
 
-View the [documentation][metrics_docs] or the [source code][metrics_code].
+
+View the [documentation][metrics_0_docs] or the [source code][metrics_0_code].
 
 __Usage:__ `node metrics.js --help`
 
@@ -68,14 +67,11 @@ Examples:
   node metrics.js create
   node metrics.js list
   node metrics.js get logging.googleapis.com/log_entry_count
-  node metrics.js delete
-  custom.googleapis.com/stores/daily_sales
+  node metrics.js delete custom.googleapis.com/stores/daily_sales
   node metrics.js list-resources
   node metrics.js get-resource cloudsql_database
   node metrics.js write
-  node metrics.js read
-  'metric.type="compute.googleapis.com/instance/cpu/utilizatio
-  n"'
+  node metrics.js read 'metric.type="compute.googleapis.com/instance/cpu/utilization"'
   node metrics.js read-fields
   node metrics.js read-aggregate
   node metrics.js read-reduce
@@ -83,36 +79,42 @@ Examples:
 For more information, see https://cloud.google.com/monitoring/docs
 ```
 
-[metrics_docs]: https://cloud.google.com/monitoring/docs
-[metrics_code]: metrics.js
+[metrics_0_docs]: https://cloud.google.com/monitoring/docs
+[metrics_0_code]: metrics.js
 
-### List resources
+### Listing resources
 
-`list_resources.js` is a command-line program to demonstrate connecting to the Google
-Monitoring API to retrieve API data.
 
-View the [documentation][list_docs] or the [source code][list_code].
+View the [documentation][list_1_docs] or the [source code][list_1_code].
 
-__Run the sample:__
+`list_resources.js` is a command-line program to demonstrate connecting to the
+Google Monitoring API to retrieve API data.
 
-    node list_resources <your-project-id>
+__Usage:__ `node list_resources <YOUR_PROJECT_ID>`
 
-[list_docs]: https://cloud.google.com/monitoring/demos/#hello-world
-[list_code]: list_resources.js
+```
+node list_resources my-cool-project
+```
 
-### Custom metric
+[list_1_docs]: https://cloud.google.com/monitoring/demos/#hello-world
+[list_1_code]: list_resources.js
 
-`create_custom_metric.js` demonstrates how to create a custom metric, write a timeseries value to it,
-and read it back.
+### Custom metrics
 
-View the [documentation][custom_docs] or the [source code][custom_code].
 
-__Run the sample:__
+View the [documentation][metrics_2_docs] or the [source code][metrics_2_code].
 
-    node create_custom_metric <your-project-id>
+`create_custom_metric.js` demonstrates how to create a custom metric, write a
+timeseries value to it, and read it back.
 
-[custom_docs]: https://cloud.google.com/monitoring/demos/#custom_metrics
-[custom_code]: create_custom_metric.js
+__Usage:__ `node create_custom_metric <YOUR_PROJECT_ID>`
+
+```
+node create_custom_metric my-cool-project
+```
+
+[metrics_2_docs]: https://cloud.google.com/monitoring/demos/#custom_metrics
+[metrics_2_code]: create_custom_metric.js
 
 ## Running the tests
 

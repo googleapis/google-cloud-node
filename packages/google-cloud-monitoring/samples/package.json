@@ -8,17 +8,13 @@
     "type": "git",
     "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
   },
-  "cloud": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true
-  },
   "engines": {
     "node": ">=4.3.2"
   },
   "scripts": {
     "lint": "samples lint",
     "pretest": "npm run lint",
-    "system-test": "ava -T 2m --verbose system-test/*.test.js",
+    "system-test": "ava -T 3m --verbose system-test/*.test.js",
     "test": "npm run system-test"
   },
   "dependencies": {
@@ -28,9 +24,45 @@
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.3.1",
+    "@google-cloud/nodejs-repo-tools": "1.4.7",
     "ava": "0.19.1",
     "proxyquire": "1.7.11",
     "sinon": "2.1.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true,
+    "product": "monitoring",
+    "samples": [
+      {
+        "id": "metrics",
+        "name": "Metrics",
+        "file": "metrics.js",
+        "docs_link": "https://cloud.google.com/monitoring/docs",
+        "usage": "node metrics.js --help"
+      },
+      {
+        "id": "list",
+        "name": "Listing resources",
+        "file": "list_resources.js",
+        "docs_link": "https://cloud.google.com/monitoring/demos/#hello-world",
+        "description": "`list_resources.js` is a command-line program to demonstrate connecting to the\nGoogle Monitoring API to retrieve API data.",
+        "usage": {
+          "text": "node list_resources <YOUR_PROJECT_ID>"
+        },
+        "help": "node list_resources my-cool-project"
+      },
+      {
+        "id": "metrics",
+        "name": "Custom metrics",
+        "file": "create_custom_metric.js",
+        "docs_link": "https://cloud.google.com/monitoring/demos/#custom_metrics",
+        "description": "`create_custom_metric.js` demonstrates how to create a custom metric, write a\ntimeseries value to it, and read it back.",
+        "usage": {
+          "text": "node create_custom_metric <YOUR_PROJECT_ID>"
+        },
+        "help": "node create_custom_metric my-cool-project"
+      }
+    ]
   }
 }
