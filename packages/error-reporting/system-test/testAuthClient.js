@@ -19,6 +19,7 @@
 var assert = require('assert');
 var nock = require('nock');
 var RequestHandler = require('../src/google-apis/auth-client.js');
+var ErrorsApiTransport = require('../utils/errors-api-transport.js');
 var ErrorMessage = require('../src/classes/error-message.js');
 var Configuration = require('../test/fixtures/configuration.js');
 var createLogger = require('../src/logger.js');
@@ -32,6 +33,7 @@ var pick = require('lodash.pick');
 var omitBy = require('lodash.omitby');
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
+const TIMEOUT = 20000;
 
 const envKeys = ['GOOGLE_APPLICATION_CREDENTIALS', 'GCLOUD_PROJECT',
     'NODE_ENV'];
@@ -354,6 +356,77 @@ describe('Expected Behavior', function() {
       assert(isEmpty(body));
       assert.strictEqual(response.statusCode, 200);
       done();
+    });
+  });
+});
+
+describe('error-reporting', function() {
+  const TIMESTAMP = Date.now();
+  const BASE_NAME = 'error-reporting-system-test';
+  function buildName(suffix) {
+    return [TIMESTAMP, BASE_NAME, suffix].join('_');
+  }
+
+  const SERVICE_NAME = buildName('service-name');
+  const SERVICE_VERSION = buildName('service-version');
+
+  var errors;
+  var transport;
+  before(function() {
+    errors = require('../src/index.js')({
+      ignoreEnvironmentCheck: true,
+      serviceContext: {
+        service: SERVICE_NAME,
+        version: SERVICE_VERSION
+      }
+    });
+    transport = new ErrorsApiTransport(errors._config, errors._logger);
+  });
+
+  after(function(done) {
+    transport.deleteAllEvents(function(err) {
+      assert.ifError(err);
+      done();
+    });
+  });
+
+  it('Should correctly publish errors', function(done) {
+    // After an error is reported, this test waits TIMEOUT ms before
+    // verifying the error has been reported to ensure the system had
+    // enough time to receive the error report and process it.
+    // As such, this test is set to fail due to a timeout only if sufficiently
+    // more than TIMEOUT ms has elapsed to avoid test fragility.
+    this.timeout(TIMEOUT * 2);
+    var errorId = buildName('message');
+    errors.report(new Error(errorId), function(err, response, body) {
+      assert.ifError(err);
+      assert(isObject(response));
+      assert.deepEqual(body, {});
+
+      setTimeout(function() {
+        transport.getAllGroups(function(err, groups) {
+          assert.ifError(err);
+          assert.ok(groups);
+
+          var matchedErrors = groups.filter(function(errItem) {
+            return errItem && errItem.representative &&
+              errItem.representative.message.startsWith('Error: ' + errorId);
+          });
+
+          // The error should have been reported exactly once
+          assert.strictEqual(matchedErrors.length, 1);
+          var errItem = matchedErrors[0];
+          assert.ok(errItem);
+          assert.equal(errItem.count, 1);
+          var rep = errItem.representative;
+          assert.ok(rep);
+          var context = rep.serviceContext;
+          assert.ok(context);
+          assert.strictEqual(context.service, SERVICE_NAME);
+          assert.strictEqual(context.version, SERVICE_VERSION);
+          done();
+        });
+      }, TIMEOUT);
     });
   });
 });
