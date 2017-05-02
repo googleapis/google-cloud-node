@@ -2,10 +2,9 @@
 
 # Google Translate API Node.js Samples
 
-With the [Google Translate API][translate_docs], you can dynamically translate
-text between thousands of language pairs.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-translate.svg)]()
 
-[translate_docs]: https://cloud.google.com/translate/docs/
+With the [Google Translate API](https://cloud.google.com/translate/docs), you can dynamically translate text between thousands of language pairs.
 
 ## Table of Contents
 
@@ -34,7 +33,8 @@ text between thousands of language pairs.
 
 ### Translate
 
-View the [documentation][translate_docs] or the [source code][translate_code].
+
+View the [documentation][translate_0_docs] or the [source code][translate_0_code].
 
 __Usage:__ `node translate.js --help`
 
@@ -65,8 +65,8 @@ Examples:
 For more information, see https://cloud.google.com/translate/docs
 ```
 
-[translate_docs]: https://cloud.google.com/translate/docs
-[translate_code]: translate.js
+[translate_0_docs]: https://cloud.google.com/translate/docs
+[translate_0_code]: translate.js
 
 ## Running the tests
 
