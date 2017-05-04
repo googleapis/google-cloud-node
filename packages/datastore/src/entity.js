@@ -165,7 +165,7 @@ entity.Key = Key;
  * // <Buffer 68 65 6c 6c 6f>
  */
 function decodeValueProto(valueProto) {
-  var valueType = valueProto.valueType;
+  var valueType = valueProto.value_type;
   var value = valueProto[valueType];
 
   switch (valueType) {
@@ -328,7 +328,7 @@ entity.encodeValue = encodeValue;
  *     map: {
  *       name: {
  *         value: {
- *           valueType: 'stringValue',
+ *           value_type: 'stringValue',
  *           stringValue: 'Stephen'
  *         }
  *       }
@@ -469,9 +469,9 @@ function keyFromKeyProto(keyProto) {
   keyProto.path.forEach(function(path, index) {
     keyOptions.path.push(path.kind);
 
-    var id = path[path.idType];
+    var id = path[path.id_type];
 
-    if (path.idType === 'id') {
+    if (path.id_type === 'id') {
       id = new entity.Int(id);
     }
 
