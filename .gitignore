@@ -1,8 +1,9 @@
+**/*.log
+**/node_modules
+.coverage
+.nyc_output
+docs/json
 packages/google-cloud/README.md
 packages/*/AUTHORS
 packages/*/CONTRIBUTORS
 packages/*/COPYING
-**/node_modules
-**/.coverage/*
-docs/json
-*.log
