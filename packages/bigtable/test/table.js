@@ -636,6 +636,21 @@ describe('Bigtable/Table', function() {
             done();
           });
       });
+
+      it('should allow a stream to end early', function(done) {
+        var rows = [];
+
+        table.createReadStream()
+          .on('error', done)
+          .on('data', function(row) {
+            rows.push(row);
+            this.end();
+          })
+          .on('end', function() {
+            assert.strictEqual(rows.length, 1);
+            done();
+          });
+      });
     });
 
     describe('error', function() {

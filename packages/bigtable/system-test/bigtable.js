@@ -379,37 +379,36 @@ describe('Bigtable', function() {
   });
 
   describe('rows', function() {
+    var ROWS = [{
+      key: 'gwashington',
+      data: {
+        follows: {
+          jadams: 1
+        }
+      }
+    }, {
+      key: 'tjefferson',
+      data: {
+        follows: {
+          gwashington: 1,
+          jadams: 1
+        }
+      }
+    }, {
+      key: 'jadams',
+      data: {
+        follows: {
+          gwashington: 1,
+          tjefferson: 1
+        }
+      }
+    }];
+
+    before(function(done) {
+      TABLE.insert(ROWS, done);
+    });
 
     describe('inserting data', function() {
-
-      it('should insert rows', function(done) {
-        var rows = [{
-          key: 'gwashington',
-          data: {
-            follows: {
-              jadams: 1
-            }
-          }
-        }, {
-          key: 'tjefferson',
-          data: {
-            follows: {
-              gwashington: 1,
-              jadams: 1
-            }
-          }
-        }, {
-          key: 'jadams',
-          data: {
-            follows: {
-              gwashington: 1,
-              tjefferson: 1
-            }
-          }
-        }];
-
-        TABLE.insert(rows, done);
-      });
 
       it('should create an individual row', function(done) {
         var row = TABLE.row('alincoln');
@@ -510,7 +509,7 @@ describe('Bigtable', function() {
       it('should get rows', function(done) {
         TABLE.getRows(function(err, rows) {
           assert.ifError(err);
-          assert.strictEqual(rows.length, 4);
+          assert(rows.length >= ROWS.length);
           assert(rows[0] instanceof Row);
           done();
         });
@@ -524,9 +523,10 @@ describe('Bigtable', function() {
           .on('data', function(row) {
             assert(row instanceof Row);
             rows.push(row);
+            this.end();
           })
           .on('end', function() {
-            assert.strictEqual(rows.length, 4);
+            assert.strictEqual(rows.length, 1);
             done();
           });
       });
