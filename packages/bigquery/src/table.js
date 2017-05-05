@@ -442,7 +442,7 @@ Table.prototype.copy = function(destination, metadata, callback) {
  * @throws {Error} If a source other than a Table object is provided.
  *
  * @example
- * var sourceTables = p
+ * var sourceTables = [
  *   dataset.table('your-table'),
  *   dataset.table('your-second-table')
  * ];
