@@ -692,11 +692,11 @@ BigQuery.prototype.job = function(id) {
  * @param {string|object} options - A string SQL query or configuration object.
  *     For all available options, see
  *     [Jobs: query request body](https://cloud.google.com/bigquery/docs/reference/v2/jobs/query#request-body).
- * @param {boolean} options.autoPaginate - Have pagination handled
+ * @param {boolean=} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to read.
- * @param {object|*[]} options.params - For positional SQL parameters, provide
+ * @param {number=} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number=} options.maxResults - Maximum number of results to read.
+ * @param {object|*[]=} options.params - For positional SQL parameters, provide
  *     an array of values. For named SQL parameters, provide an object which
  *     maps each named parameter to its value. The supported types are integers,
  *     floats, {module:bigquery#date} objects, {module:bigquery#datetime}
@@ -704,11 +704,11 @@ BigQuery.prototype.job = function(id) {
  *     objects, Strings, Booleans, and Objects.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
- * @param {number} options.timeoutMs - How long to wait for the query to
+ * @param {number=} options.timeoutMs - How long to wait for the query to
  *     complete, in milliseconds, before returning. Default is to return
  *     immediately. If the timeout passes before the job completes, the request
  *     will fail with a `TIMEOUT` error.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
  *
