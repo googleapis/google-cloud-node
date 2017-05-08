@@ -464,6 +464,83 @@ describe('BigQuery', function() {
       });
     });
 
+    describe('copying', function() {
+      var TABLES = {
+        1: {
+          data: {
+            tableId: 1
+          }
+        },
+
+        2: {}
+      };
+
+      var SCHEMA = 'tableId:integer';
+
+      before(function(done) {
+        TABLES[1].table = dataset.table(generateName('table'));
+        TABLES[2].table = dataset.table(generateName('table'));
+
+        async.each(TABLES, function(tableObject, next) {
+          var tableInstance = tableObject.table;
+
+          tableInstance.create({
+            schema: SCHEMA
+          }, next);
+        }, function(err) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          var table1Instance = TABLES[1].table;
+          table1Instance.insert(TABLES[1].data, done);
+        });
+      });
+
+      it('should copy data from current table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table1Instance.copy(table2Instance, function(err, job) {
+          assert.ifError(err);
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              // Data may take up to 90 minutes to be copied*, so we cannot test
+              // to see that anything but the request was successful.
+              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
+              done();
+            });
+        });
+      });
+
+      it('should copy data from another table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table2Instance.copyFrom(table1Instance, function(err, job) {
+          assert.ifError(err);
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              // Data may take up to 90 minutes to be copied*, so we cannot test
+              // to see that anything but the request was successful.
+              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
+              done();
+            });
+        });
+      });
+    });
+
     describe('importing & exporting', function() {
       var file = bucket.file('kitten-test-data-backup.json');
 

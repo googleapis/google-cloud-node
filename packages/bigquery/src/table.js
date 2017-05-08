@@ -360,8 +360,8 @@ Table.mergeSchemaWithRows_ = function(BigQuery, schema, rows) {
  * });
  *
  * //-
- * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for all
- * // available options.
+ * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
+ * // all available options.
  * //-
  * var metadata = {
  *   createDisposition: 'CREATE_NEVER',
@@ -410,7 +410,107 @@ Table.prototype.copy = function(destination, metadata, callback) {
   this.bigQuery.request({
     method: 'POST',
     uri: '/jobs',
-    json: body,
+    json: body
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var job = self.bigQuery.job(resp.jobReference.jobId);
+    job.metadata = resp;
+
+    callback(null, job, resp);
+  });
+};
+
+/**
+ * Copy data from multiple tables into this table.
+ *
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {module:bigquery/table|module:bigquery/table[]} sourceTables - The
+ *     source table(s) to copy data from.
+ * @param {object=} metadata - Metadata to set with the copy operation. The
+ *     metadata object should be in the format of the
+ *     [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:bigquery/job} callback.job - The job used to copy your table.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @throws {Error} If a source other than a Table object is provided.
+ *
+ * @example
+ * var sourceTables = [
+ *   dataset.table('your-table'),
+ *   dataset.table('your-second-table')
+ * ];
+ *
+ * table.copyFrom(sourceTables, function(err, job, apiResponse) {
+ *   // `job` is a Job object that can be used to check the status of the
+ *   // request.
+ * });
+ *
+ * //-
+ * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
+ * // all available options.
+ * //-
+ * var metadata = {
+ *   createDisposition: 'CREATE_NEVER',
+ *   writeDisposition: 'WRITE_TRUNCATE'
+ * };
+ *
+ * table.copyFrom(sourceTables, metadata, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.copyFrom(sourceTables, metadata).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
+  var self = this;
+
+  sourceTables = arrify(sourceTables);
+
+  sourceTables.forEach(function(sourceTable) {
+    if (!(sourceTable instanceof Table)) {
+      throw new Error('Source must be a Table object.');
+    }
+  });
+
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = {};
+  }
+
+  var body = {
+    configuration: {
+      copy: extend(true, metadata || {}, {
+        destinationTable: {
+          datasetId: this.dataset.id,
+          projectId: this.bigQuery.projectId,
+          tableId: this.id
+        },
+
+        sourceTables: sourceTables.map(function(sourceTable) {
+          return {
+            datasetId: sourceTable.dataset.id,
+            projectId: sourceTable.bigQuery.projectId,
+            tableId: sourceTable.id
+          };
+        })
+      })
+    }
+  };
+
+  this.bigQuery.request({
+    method: 'POST',
+    uri: '/jobs',
+    json: body
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
