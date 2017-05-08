@@ -1199,7 +1199,7 @@ describe('common/util', function() {
         var response = { a: 'b', c: 'd' };
         var body = response.a;
 
-        requestOverride = function(rOpts, callback) {
+        retryRequestOverride = function(rOpts, opts, callback) {
           callback(error, response, body);
         };
 
