@@ -300,7 +300,7 @@ function Datastore(options) {
     return new Datastore(options);
   }
 
-  this.defaultBaseUrl_ = 'datastore.googleapis.com.';
+  this.defaultBaseUrl_ = 'datastore.googleapis.com';
   this.determineBaseUrl_(options.apiEndpoint);
 
   this.namespace = options.namespace;

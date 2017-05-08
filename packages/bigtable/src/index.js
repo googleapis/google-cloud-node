@@ -309,8 +309,8 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
-  var baseUrl = 'bigtable.googleapis.com.';
-  var adminBaseUrl = 'bigtableadmin.googleapis.com.';
+  var baseUrl = 'bigtable.googleapis.com';
+  var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
   var customEndpoint = options.apiEndpoint ||
     process.env.BIGTABLE_EMULATOR_HOST;

@@ -622,7 +622,7 @@ describe('File', function() {
     describe('authenticating', function() {
       it('should create an authenticated request', function(done) {
         var expectedPath = format('https://{host}/{b}/{o}', {
-          host: 'storage.googleapis.com.',
+          host: 'storage.googleapis.com',
           b: file.bucket.name,
           o: encodeURIComponent(file.name)
         });
@@ -2588,7 +2588,7 @@ describe('File', function() {
             name: file.name,
             predefinedAcl: options.predefinedAcl
           },
-          uri: 'https://www.googleapis.com./upload/storage/v1/b/' +
+          uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
             file.bucket.name + '/o'
         });
         done();
