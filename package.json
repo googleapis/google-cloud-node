@@ -41,7 +41,7 @@
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
     "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js",
-    "coveralls": "nyc --reporter=text-lcov mocha --no-timeouts packages/*/test/*.js | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov mocha --no-timeouts packages/*/test/*.js | coveralls"
   },
   "nyc": {
     "exclude": [
