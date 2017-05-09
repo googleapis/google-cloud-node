@@ -202,7 +202,7 @@ describe('Spanner', function() {
       var calledWith = spanner.calledWith_[0];
 
       assert.deepEqual(calledWith, {
-        baseUrl: 'spanner.googleapis.com.',
+        baseUrl: 'spanner.googleapis.com',
         protoServices: {
           Operations: {
             path: googleProtoFiles('longrunning', 'operations.proto'),

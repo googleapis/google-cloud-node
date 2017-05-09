@@ -257,7 +257,7 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
 
   if (!/^https*:/.test(json.target)) {
     json.target = [
-      'https://content.googleapis.com./compute/v1/projects/',
+      'https://content.googleapis.com/compute/v1/projects/',
       this.compute.projectId,
       '/zones/',
       this.name,
@@ -554,7 +554,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  *       boot: true,
  *       initializeParams: {
  *         sourceImage:
- *           'https://www.googleapis.com./compute/v1/projects' +
+ *           'https://www.googleapis.com/compute/v1/projects' +
  *           '/debian-cloud/global/images/debian-7-wheezy-v20150710'
  *       }
  *     }

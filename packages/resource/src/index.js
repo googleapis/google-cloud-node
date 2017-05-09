@@ -58,7 +58,7 @@ function Resource(options) {
   }
 
   var config = {
-    baseUrl: 'https://cloudresourcemanager.googleapis.com./v1',
+    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
     packageJson: require('../package.json')

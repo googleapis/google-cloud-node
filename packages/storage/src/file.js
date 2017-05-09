@@ -60,13 +60,13 @@ var SigningError = createErrorClass('SigningError', function(message) {
  * @const {string}
  * @private
  */
-var STORAGE_DOWNLOAD_BASE_URL = 'https://storage.googleapis.com.';
+var STORAGE_DOWNLOAD_BASE_URL = 'https://storage.googleapis.com';
 
 /**
  * @const {string}
  * @private
  */
-var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com./upload/storage/v1/b';
+var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';
 
 /**
  * @const {RegExp}

@@ -76,7 +76,7 @@ function Spanner(options) {
   };
 
   var config = {
-    baseUrl: 'spanner.googleapis.com.',
+    baseUrl: 'spanner.googleapis.com',
     protoServices: {
       Operations: {
         path: googleProtoFiles('longrunning/operations.proto'),
