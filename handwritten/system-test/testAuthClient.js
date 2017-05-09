@@ -135,7 +135,7 @@ describe('Request/Response lifecycle mocking', function() {
   beforeEach(function() {
     env.setProjectId().setKeyFilename().setProduction();
     fakeService = nock(
-      'https://clouderrorreporting.googleapis.com./v1beta1/projects/' +
+      'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
       process.env.GCLOUD_PROJECT
     ).persist().post('/events:report');
     logger = createLogger({logLevel: 5});
