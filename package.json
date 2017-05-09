@@ -40,12 +40,14 @@
     "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
-    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js",
-    "coveralls": "nyc report --reporter=text-lcov mocha --no-timeouts packages/*/test/*.js | coveralls"
+    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js && nyc report",
+    "coveralls": "npm run cover && npm report --reporter=text-lcov | coveralls"
   },
   "nyc": {
+    "report-dir": "./.coverage",
     "exclude": [
-      "packages/*/src/*{/*,/**/*}.js"
+      "packages/*/src/*{/*,/**/*}.js",
+      "packages/*/test/**/*.js"
     ],
     "watermarks": {
       "branches": [
