@@ -4,7 +4,7 @@
 
 [![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-language.svg)]()
 
-[Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity recognition, and syntax analysis. This API is part of the larger Cloud Machine Learning API.
+[Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
 ## Table of Contents
 
@@ -20,11 +20,11 @@
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -34,7 +34,6 @@
 ## Samples
 
 ### Analyze v1
-
 
 View the [documentation][analyze-v1_0_docs] or the [source code][analyze-v1_0_code].
 
@@ -67,7 +66,6 @@ For more information, see https://cloud.google.com/natural-language/docs
 [analyze-v1_0_code]: analyze.v1.js
 
 ### Analyze v1beta2
-
 
 View the [documentation][analyze-v1beta2_1_docs] or the [source code][analyze-v1beta2_1_code].
 
@@ -110,17 +108,17 @@ For more information, see https://cloud.google.com/natural-language/docs
 View the [README](slackbot/README.md).
 
 
+
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
