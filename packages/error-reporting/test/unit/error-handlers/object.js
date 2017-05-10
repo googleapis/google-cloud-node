@@ -17,31 +17,28 @@
 'use strict';
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var handleUnknownAsError = require('../../src/error-handlers/unknown.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var handleObjectAsError = require('../../../src/error-handlers/object.js');
 
-describe('handleUnknownAsError behvaiour under varying input', function() {
+describe('handleObjectAsError behaviour under varying inputs', function() {
   var em;
   beforeEach(function() {em = new ErrorMessage();});
   it('Should not throw given undefined', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, undefined, em));
+    assert.doesNotThrow(handleObjectAsError.bind(null, undefined, em));
   });
   it('Should not throw given null', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, null, em));
-  });
-  it('Should not throw given an object', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, {}, em));
-  });
-  it('Should not throw given an array', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, [], em));
-  });
-  it('Should not throw given an instance of Error', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, new Error(), em));
-  });
-  it('Should not throw given a number', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, 1.3, em));
+    assert.doesNotThrow(handleObjectAsError.bind(null, null, em));
   });
   it('Should not throw given a string', function() {
-    assert.doesNotThrow(handleUnknownAsError.bind(null, 'msg', em));
+    assert.doesNotThrow(handleObjectAsError.bind(null, 'msg', em));
+  });
+  it('Should not throw given an instance of Error', function() {
+    assert.doesNotThrow(handleObjectAsError.bind(null, new Error(), em));
+  });
+  it('Should not throw given a number', function() {
+    assert.doesNotThrow(handleObjectAsError.bind(null, 1.3, em));
+  });
+  it('Should not throw given valid input', function() {
+    assert.doesNotThrow(handleObjectAsError.bind(null, {}, em));
   });
 });

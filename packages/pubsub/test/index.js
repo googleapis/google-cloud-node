@@ -179,7 +179,7 @@ describe('PubSub', function() {
 
       var calledWith = pubsub.calledWith_[0];
 
-      var baseUrl = 'pubsub.googleapis.com.';
+      var baseUrl = 'pubsub.googleapis.com';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.strictEqual(calledWith.service, 'pubsub');
       assert.strictEqual(calledWith.apiVersion, 'v1');
@@ -191,7 +191,7 @@ describe('PubSub', function() {
     });
 
     it('should set the defaultBaseUrl_', function() {
-      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com.');
+      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com');
     });
 
     it('should use the PUBSUB_EMULATOR_HOST env var', function() {
@@ -723,6 +723,7 @@ describe('PubSub', function() {
         encoding: 'utf-8',
         interval: 3,
         maxInProgress: 5,
+        retainAckedMessages: true,
         pushEndpoint: 'https://domain/push',
         timeout: 30000
       };
@@ -762,6 +763,29 @@ describe('PubSub', function() {
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, options, assert.ifError);
+    });
+
+    describe('message retention', function() {
+      it('should accept a number', function(done) {
+        var threeDaysInSeconds = 3 * 24 * 60 * 60;
+
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.retainAckedMessages, true);
+
+          assert.strictEqual(
+            reqOpts.messageRetentionDuration.seconds,
+            threeDaysInSeconds
+          );
+
+          assert.strictEqual(reqOpts.messageRetentionDuration.nanos, 0);
+
+          done();
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, {
+          messageRetentionDuration: threeDaysInSeconds
+        }, assert.ifError);
+      });
     });
 
     describe('error', function() {

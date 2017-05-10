@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
-var handleNumberAsError = require('../../src/error-handlers/number.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
+var handleNumberAsError = require('../../../src/error-handlers/number.js');
 
 describe('handleNumberAsError behaviour under varying input', function() {
   var em;

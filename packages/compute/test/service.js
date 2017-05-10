@@ -205,7 +205,7 @@ describe('Service', function() {
         service.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json, {
             group: [
-              'https://www.googleapis.com./compute/v1/projects/',
+              'https://www.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,
               '/zones/',
               group.zone,
@@ -232,7 +232,7 @@ describe('Service', function() {
         service.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json, {
             group: [
-              'https://www.googleapis.com./compute/v1/projects/',
+              'https://www.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,
               '/zones/',
               group.zone.name,

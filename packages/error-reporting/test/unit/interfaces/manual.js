@@ -17,13 +17,13 @@
 'use strict';
 
 var assert = require('assert');
-var manual = require('../../src/interfaces/manual.js');
-var Configuration = require('../fixtures/configuration.js');
+var manual = require('../../../src/interfaces/manual.js');
+var Configuration = require('../../fixtures/configuration.js');
 var config = new Configuration({});
 config.lacksCredentials = function() {
   return false;
 };
-var ErrorMessage = require('../../src/classes/error-message.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
 // var nock = require('nock');
 
 describe('Manual handler', function() {

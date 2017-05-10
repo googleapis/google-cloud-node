@@ -125,7 +125,7 @@ describe('Prediction', function() {
 
       var calledWith = prediction.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com./prediction/v1.6';
+      var baseUrl = 'https://www.googleapis.com/prediction/v1.6';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/prediction',

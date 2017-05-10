@@ -17,7 +17,7 @@
 // jshint ignore: start
 
 var assert = require('assert');
-var ErrorMessage = require('../../src/classes/error-message.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
 
 describe('Instantiating a new ErrorMessage', function() {
   var em;

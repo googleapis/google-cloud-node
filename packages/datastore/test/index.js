@@ -116,10 +116,7 @@ describe('Datastore', function() {
     });
 
     it('should set the default base URL', function() {
-      assert.strictEqual(
-        datastore.defaultBaseUrl_,
-        'datastore.googleapis.com.'
-      );
+      assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
     });
 
     it('should set default API connection details', function(done) {
@@ -283,6 +280,14 @@ describe('Datastore', function() {
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
       assert.deepEqual(query.calledWith_[2], kind);
+    });
+
+    it('should include the default namespace in a kindless query', function() {
+      var query = datastore.createQuery();
+
+      assert.strictEqual(query.calledWith_[0], datastore);
+      assert.strictEqual(query.calledWith_[1], datastore.namespace);
+      assert.deepEqual(query.calledWith_[2], []);
     });
   });
 

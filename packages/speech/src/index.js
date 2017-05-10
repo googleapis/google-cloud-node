@@ -71,7 +71,7 @@ function Speech(options) {
   };
 
   var config = {
-    baseUrl: 'speech.googleapis.com.',
+    baseUrl: 'speech.googleapis.com',
     projectIdRequired: false,
     service: 'speech',
     protoServices: {

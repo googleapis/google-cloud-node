@@ -16,7 +16,7 @@
 'use strict';
 
 var assert = require('assert');
-var CustomStackTrace = require('../../src/classes/custom-stack-trace.js');
+var CustomStackTrace = require('../../../src/classes/custom-stack-trace.js');
 
 describe('Fuzzing the CustomStackTrace class', function() {
   var testFunction = function testFunction() {

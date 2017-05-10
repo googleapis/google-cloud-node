@@ -77,7 +77,7 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
-  this.defaultBaseUrl_ = 'pubsub.googleapis.com.';
+  this.defaultBaseUrl_ = 'pubsub.googleapis.com';
   this.determineBaseUrl_();
 
   var config = {
@@ -564,8 +564,14 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *     messages. (default: 10)
  * @param {number} options.maxInProgress - Maximum messages to consume
  *     simultaneously.
+ * @param {number|date} options.messageRetentionDuration - Set this to override
+ *     the default duration of 7 days. This value is expected in seconds.
+ *     Acceptable values are in the range of 10 minutes and 7 days.
  * @param {string} options.pushEndpoint - A URL to a custom endpoint that
  *     messages should be pushed to.
+ * @param {boolean} options.retainAckedMessages - If set, acked messages are
+ *     retained in the subscription's backlog for 7 days (unless overriden by
+ *     `options.messageRetentionDuration`). Default: `false`
  * @param {number} options.timeout - Set a maximum amount of time in
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken.
@@ -647,6 +653,15 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
     topic: topic.name,
     name: subscription.name
   });
+
+  if (reqOpts.messageRetentionDuration) {
+    reqOpts.retainAckedMessages = true;
+
+    reqOpts.messageRetentionDuration = {
+      seconds: reqOpts.messageRetentionDuration,
+      nanos: 0
+    };
+  }
 
   if (reqOpts.pushEndpoint) {
     reqOpts.pushConfig = {

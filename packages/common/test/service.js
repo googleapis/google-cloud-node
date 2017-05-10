@@ -165,6 +165,17 @@ describe('Service', function() {
     it('should localize the native Promise object by default', function() {
       assert.strictEqual(service.Promise, global.Promise);
     });
+
+    it('should disable forever agent for Cloud Function envs', function() {
+      process.env.FUNCTION_NAME = 'cloud-function-name';
+      var service = new Service(CONFIG, OPTIONS);
+      delete process.env.FUNCTION_NAME;
+
+      var interceptor = service.interceptors[0];
+
+      var modifiedReqOpts = interceptor.request({ forever: true });
+      assert.strictEqual(modifiedReqOpts.forever, false);
+    });
   });
 
   describe('getProjectId', function() {

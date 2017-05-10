@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var extractFromErrorClass = require('../../src/error-extractors/error.js');
-var ErrorMessage = require('../../src/classes/error-message.js');
+var extractFromErrorClass = require('../../../src/error-extractors/error.js');
+var ErrorMessage = require('../../../src/classes/error-message.js');
 
 
 describe('Writing and reading ErrorMessage properties', function() {

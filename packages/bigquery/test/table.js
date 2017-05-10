@@ -526,6 +526,150 @@ describe('BigQuery/Table', function() {
     });
   });
 
+  describe('copyFrom', function() {
+    var SOURCE_TABLE;
+
+    before(function() {
+      SOURCE_TABLE = new Table(DATASET, 'source-table');
+    });
+
+    it('should throw if a source is not a Table', function() {
+      assert.throws(function() {
+        table.copyFrom(['table']);
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.copyFrom([SOURCE_TABLE, 'table']);
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.copyFrom({});
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.copyFrom(function() {});
+      }, /Source must be a Table/);
+    });
+
+    it('should send correct request to the API', function(done) {
+      table.bigQuery.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/jobs');
+        assert.deepEqual(reqOpts.json, {
+          configuration: {
+            copy: {
+              a: 'b',
+              c: 'd',
+              destinationTable: {
+                datasetId: table.dataset.id,
+                projectId: table.bigQuery.projectId,
+                tableId: table.id
+              },
+              sourceTables: [
+                {
+                  datasetId: SOURCE_TABLE.dataset.id,
+                  projectId: SOURCE_TABLE.bigQuery.projectId,
+                  tableId: SOURCE_TABLE.id
+                }
+              ]
+            }
+          }
+        });
+
+        done();
+      };
+
+      table.copyFrom(SOURCE_TABLE, { a: 'b', c: 'd' }, assert.ifError);
+    });
+
+    it('should accept multiple source tables', function(done) {
+      table.bigQuery.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json.configuration.copy.sourceTables, [
+          {
+            datasetId: SOURCE_TABLE.dataset.id,
+            projectId: SOURCE_TABLE.bigQuery.projectId,
+            tableId: SOURCE_TABLE.id
+          },
+          {
+            datasetId: SOURCE_TABLE.dataset.id,
+            projectId: SOURCE_TABLE.bigQuery.projectId,
+            tableId: SOURCE_TABLE.id
+          }
+        ]);
+
+        done();
+      };
+
+      table.copyFrom([
+        SOURCE_TABLE,
+        SOURCE_TABLE
+      ], assert.ifError);
+    });
+
+    it('should create and return a Job', function(done) {
+      var jobId = 'job-id';
+
+      table.bigQuery.request = function(reqOpts, callback) {
+        callback(null, { jobReference: { jobId: jobId } });
+      };
+
+      table.copy(SOURCE_TABLE, function(err, job) {
+        assert.ifError(err);
+        assert.equal(job.id, jobId);
+        done();
+      });
+    });
+
+    it('should assign metadata on the job', function(done) {
+      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+
+      table.bigQuery.request = function(reqOpts, callback) {
+        callback(null, jobMetadata);
+      };
+
+      table.copy(SOURCE_TABLE, function(err, job) {
+        assert.ifError(err);
+        assert.deepEqual(job.metadata, jobMetadata);
+        done();
+      });
+    });
+
+    it('should accept just a source and callback', function(done) {
+      table.bigQuery.request = function(reqOpts, callback) {
+        callback(null, { jobReference: { jobId: 'job-id' } });
+      };
+
+      table.copy(SOURCE_TABLE, done);
+    });
+
+    it('should pass an error to the callback', function(done) {
+      var error = new Error('Error.');
+
+      table.bigQuery.request = function(reqOpts, callback) {
+        callback(error);
+      };
+
+      table.copy(SOURCE_TABLE, function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should pass an apiResponse to the callback', function(done) {
+      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+
+      table.bigQuery.request = function(reqOpts, callback) {
+        callback(null, jobMetadata);
+      };
+
+      table.copy(SOURCE_TABLE, function(err, job, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, jobMetadata);
+        done();
+      });
+    });
+  });
+
   describe('createQueryStream', function() {
     it('should call datasetInstance.createQueryStream()', function(done) {
       table.dataset.createQueryStream = function(a) {
@@ -665,7 +809,7 @@ describe('BigQuery/Table', function() {
 
       it('should pass the correct request uri', function(done) {
         makeWritableStreamOverride = function(stream, options) {
-          var uri = 'https://www.googleapis.com./upload/bigquery/v2/projects/' +
+          var uri = 'https://www.googleapis.com/upload/bigquery/v2/projects/' +
             table.bigQuery.projectId + '/jobs';
           assert.equal(options.request.uri, uri);
           done();

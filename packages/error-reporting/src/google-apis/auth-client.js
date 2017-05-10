@@ -27,7 +27,7 @@ var isString = is.string;
 var SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
 
 /* @const {String} Base Error Reporting API */
-var API = 'https://clouderrorreporting.googleapis.com./v1beta1/projects';
+var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 
 /**
  * The RequestHandler constructor initializes several properties on the
@@ -90,7 +90,7 @@ class RequestHandler extends common.Service {
     var pid = config.getProjectId();
     super({
       packageJson: pkg,
-      baseUrl: 'https://clouderrorreporting.googleapis.com./v1beta1/',
+      baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1/',
       scopes: SCOPES,
       projectId: pid !== null ? pid : undefined,
       projectIdRequired: true

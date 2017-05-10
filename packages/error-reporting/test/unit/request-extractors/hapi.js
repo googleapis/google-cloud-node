@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var hapiRequestInformationExtractor =
-  require('../../src/request-extractors/hapi.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+  require('../../../src/request-extractors/hapi.js');
+var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('hapiRequestInformationExtractor behaviour', function() {
   describe('behaviour given invalid input', function() {

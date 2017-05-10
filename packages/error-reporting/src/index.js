@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module error-reporting
+ */
+
 'use strict';
 
 var Configuration = require('./configuration.js');
@@ -29,7 +34,7 @@ var createLogger = require('./logger.js');
 
 /**
  * @typedef ConfigurationOptions
- * @type Object
+ * @type {Object}
  * @property {String} [projectId] - the projectId of the project deployed
  * @property {String} [keyFilename] - path to a key file to use for an API key
  * @property {String|Number} logLevel - a integer between and including 0-5 or a
@@ -50,38 +55,48 @@ var createLogger = require('./logger.js');
  */
 
 /**
- * @typedef ApplicationErrorReportingInterface
- * @type Object
- * @property {Object} hapi - The hapi plugin for Stackdriver Error Reporting
+ * @typedef Errors
+ * @type {Object}
  * @property {Function} report - The manual interface to report Errors to the
  *  Stackdriver Error Reporting Service
+ * @property {ErrorMessage} event - Returns a new ErrorMessage class instance
+ *  to use to create custom messages
  * @property {Function} express - The express plugin for Stackdriver Error
  *  Reporting
- * @property {Function} message - Returns a new ErrorMessage class instance
+ * @property {Object} hapi - The hapi plugin for Stackdriver Error Reporting
+ * @property {Function} koa - The koa plugin for Stackdriver Error Reporting
+ * @property {Function} restify - The restify plugin for Stackdriver Error
+ *  Reporting
  */
 
-// TODO: Update this documentation
 /**
- * The entry point for initializing the Error Reporting Middleware. This
+ * This module provides Stackdriver Error Reporting support for Node.js
+ * applications.
+ * [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is
+ * a feature of Google Cloud Platform that allows in-depth monitoring and
+ * viewing of errors reported by applications running in almost any environment.
+ *
+ * This is the entry point for initializing the error reporting middleware. This
  * function will invoke configuration gathering and attempt to create a API
- * client which will send errors to the Error Reporting Service. Invocation of
- * this function will also return an interface which can be used manually via
- * the `report` function property, with hapi via the `hapi` object property or
- * with express via the `express` function property.
- * @function Errors
- * @param {ConfigurationOptions} initConfiguration - the desired project/error
- *     reporting configuration
- * @constructor
+ * client which will send errors to the Error Reporting Service.
+ *
  * @alias module:error-reporting
+ * @constructor
+ *
+ * @resource [What is Stackdriver Error Reporting]{@link
+ * https://cloud.google.com/error-reporting/}
+ *
+ * @param {ConfigurationOptions} initConfiguration - The desired project/error
+ *     reporting configuration.
  */
 function Errors(initConfiguration) {
   if (!(this instanceof Errors)) {
     return new Errors(initConfiguration);
   }
 
-  var logger = createLogger(initConfiguration);
-  var config = new Configuration(initConfiguration, logger);
-  var client = new AuthClient(config, logger);
+  this._logger = createLogger(initConfiguration);
+  this._config = new Configuration(initConfiguration, this._logger);
+  this._client = new AuthClient(this._config, this._logger);
 
   // Build the application interfaces for use by the hosting application
   /**
@@ -91,7 +106,7 @@ function Errors(initConfiguration) {
    *  console.log('done!');
    * });
    */
-  this.report = manual(client, config);
+  this.report = manual(this._client, this._config);
   /**
    * @example
    * // Use to create and report errors manually with a high-degree
@@ -103,7 +118,7 @@ function Errors(initConfiguration) {
    *  console.log('done!');
    * });
    */
-  this.event = messageBuilder(config);
+  this.event = messageBuilder(this._config);
   /**
    * @example
    * var hapi = require('hapi');
@@ -113,7 +128,7 @@ function Errors(initConfiguration) {
    * // AFTER ALL OTHER ROUTE HANDLERS
    * server.register({register: errors.hapi});
    */
-  this.hapi = hapi(client, config);
+  this.hapi = hapi(this._client, this._config);
   /**
    * @example
    * var express = require('express');
@@ -122,7 +137,7 @@ function Errors(initConfiguration) {
    * app.use(errors.express);
    * app.listen(3000);
    */
-  this.express = express(client, config);
+  this.express = express(this._client, this._config);
   /**
    * @example
    * var restify = require('restify');
@@ -130,7 +145,7 @@ function Errors(initConfiguration) {
    * // BEFORE ALL OTHER ROUTE HANDLERS
    * server.use(errors.restify(server));
    */
-  this.restify = restify(client, config);
+  this.restify = restify(this._client, this._config);
   /**
    * @example
    * var koa = require('koa');
@@ -138,7 +153,7 @@ function Errors(initConfiguration) {
    * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
    * app.use(errors.koa);
    */
-  this.koa = koa(client, config);
+  this.koa = koa(this._client, this._config);
 }
 
 module.exports = Errors;
