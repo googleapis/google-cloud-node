@@ -19,11 +19,11 @@
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -33,7 +33,6 @@
 ## Samples
 
 ### Topics
-
 
 View the [documentation][topics_0_docs] or the [source code][topics_0_code].
 
@@ -70,7 +69,6 @@ For more information, see https://cloud.google.com/pubsub/docs
 [topics_0_code]: topics.js
 
 ### Subscriptions
-
 
 View the [documentation][subscriptions_1_docs] or the [source code][subscriptions_1_code].
 
@@ -112,15 +110,14 @@ For more information, see https://cloud.google.com/pubsub/docs
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
