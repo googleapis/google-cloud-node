@@ -4,7 +4,7 @@
 
 [![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-speech.svg)]()
 
-The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integration of Google speech recognition technologies into developer applications.
+The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integration of Google speech recognition technologies into developer applications. Send audio and receive a text transcription from the Cloud Speech API service.
 
 ## Table of Contents
 
@@ -18,21 +18,20 @@ The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integr
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
-[prereq]: ../README.md#prerequisites
+[prereq]: ../README.md#prerequisities
 [run]: ../README.md#how-to-run-a-sample
 
 ## Samples
 
 ### Speech Recognition
-
 
 View the [documentation][recognize_0_docs] or the [source code][recognize_0_code].
 
@@ -69,15 +68,14 @@ For more information, see https://cloud.google.com/speech/docs
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
