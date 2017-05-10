@@ -80,18 +80,18 @@ module.exports = apiVersion => {
     }
 
     // Call the GAPIC batch annotation function.
-    return this.batchAnnotateImages([request], options).then(response => {
+    return this.batchAnnotateImages([request], options).then(r => {
       // We are guaranteed to only have one response element, since we
       // only sent one image.
-      var r = response[0];
+      var response = r[0].responses[0];
 
       // Fire the callback if applicable.
       if (is.function(callback)) {
-        callback(undefined, r);
+        callback(undefined, response);
       }
 
       // Return the response.
-      return r;
+      return response;
     }).catch(err => {
       // Fire the callback if applicable.
       if (is.function(callback)) {
@@ -124,7 +124,7 @@ module.exports = apiVersion => {
     methods[methodName] = function(image, options) {
       return this.annotateImage({
         image: image,
-        features: [featureValue],
+        features: [{type: featureValue}],
       }, options);
     }
   }
