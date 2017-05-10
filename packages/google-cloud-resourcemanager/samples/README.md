@@ -4,7 +4,7 @@
 
 [![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-resource-manager.svg)]()
 
-Google Cloud Platform provides container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. The [Google Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs) enables you to programmatically manage these container resources.
+Google Cloud Platform provides container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/) enables you to programmatically manage these container resources.
 
 ## Table of Contents
 
@@ -18,11 +18,11 @@ Google Cloud Platform provides container resources such as Organizations and Pro
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -32,7 +32,6 @@ Google Cloud Platform provides container resources such as Organizations and Pro
 ## Samples
 
 ### Projects
-
 
 View the [documentation][projects_0_docs] or the [source code][projects_0_code].
 
@@ -56,15 +55,14 @@ For more information, see https://cloud.google.com/resource-manager/docs
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
