@@ -20,11 +20,11 @@
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -34,7 +34,6 @@
 ## Samples
 
 ### Metrics
-
 
 View the [documentation][metrics_0_docs] or the [source code][metrics_0_code].
 
@@ -84,7 +83,6 @@ For more information, see https://cloud.google.com/monitoring/docs
 
 ### Listing resources
 
-
 View the [documentation][list_1_docs] or the [source code][list_1_code].
 
 `list_resources.js` is a command-line program to demonstrate connecting to the
@@ -100,7 +98,6 @@ node list_resources my-cool-project
 [list_1_code]: list_resources.js
 
 ### Custom metrics
-
 
 View the [documentation][metrics_2_docs] or the [source code][metrics_2_code].
 
@@ -118,15 +115,14 @@ node create_custom_metric my-cool-project
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
