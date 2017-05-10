@@ -41,7 +41,7 @@
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
     "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js && nyc report",
-    "coveralls": "npm run cover && npm report --reporter=text-lcov | coveralls"
+    "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "report-dir": "./.coverage",
