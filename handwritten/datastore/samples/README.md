@@ -1,10 +1,10 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Datastore Node.js Samples
+# Google Cloud Datastore Node.js Samples
 
 [![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-datastore.svg)]()
 
-[Cloud Datastore](https://cloud.google.com/datastore/docs) is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
+[Cloud Datastore](https://cloud.google.com/datastore/docs) is a NoSQL document database built for automatic scaling, high performance, and ease of application development. While the Cloud Datastore interface has many of the same features as traditional databases, as a NoSQL database it differs from them in the way it describes relationships between data objects.
 
 ## Table of Contents
 
@@ -20,11 +20,11 @@
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -34,7 +34,6 @@
 ## Samples
 
 ### Tasks
-
 
 View the [documentation][tasks_0_docs] or the [source code][tasks_0_code].
 
@@ -64,12 +63,10 @@ For more information, see https://cloud.google.com/datastore/docs
 
 ### Concepts
 
-
 View the [documentation][concepts_1_docs] or the [source code][concepts_1_code].[concepts_1_docs]: https://cloud.google.com/datastore/docs/concepts/entities
 [concepts_1_code]: concepts.js
 
 ### Errors and Error Handling
-
 
 View the [documentation][error_2_docs] or the [source code][error_2_code].
 
@@ -79,15 +76,14 @@ __Usage:__ `node error.js`
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
