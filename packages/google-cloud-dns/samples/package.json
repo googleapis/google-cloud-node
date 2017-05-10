@@ -22,13 +22,23 @@
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.7",
+    "@google-cloud/nodejs-repo-tools": "1.4.13",
     "ava": "0.19.1",
     "proxyquire": "1.7.11",
     "sinon": "2.1.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
-    "requiresProjectId": true
+    "requiresProjectId": true,
+    "product": "dns",
+    "samples": [
+      {
+        "id": "zones",
+        "name": "Zones",
+        "file": "zones.js",
+        "docs_link": "https://cloud.google.com/dns/docs",
+        "usage": "node zones.js --help"
+      }
+    ]
   }
 }

@@ -2,12 +2,9 @@
 
 # Google Cloud DNS Node.js Samples
 
-Publish your domain names using Google's infrastructure for production-quality,
-high-volume DNS services. Google's global network of anycast name servers
-provide reliable, low-latency authoritative name lookups for your domains from
-anywhere in the world. Read more about [Google Cloud DNS][dns_docs].
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-dns.svg)]()
 
-[dns_docs]: https://cloud.google.com/dns/docs
+[Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
 
 ## Table of Contents
 
@@ -21,11 +18,11 @@ anywhere in the world. Read more about [Google Cloud DNS][dns_docs].
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -36,9 +33,9 @@ anywhere in the world. Read more about [Google Cloud DNS][dns_docs].
 
 ### Zones
 
-View the [documentation][zones_docs] or the [source code][zones_code].
+View the [documentation][zones_0_docs] or the [source code][zones_0_code].
 
-__Usage:__ `node zones --help`
+__Usage:__ `node zones.js --help`
 
 ```
 Commands:
@@ -53,20 +50,19 @@ Examples:
 For more information, see https://cloud.google.com/dns/docs
 ```
 
-[zones_docs]: https://cloud.google.com/dns/docs
-[zones_code]: zones.js
+[zones_0_docs]: https://cloud.google.com/dns/docs
+[zones_0_code]: zones.js
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
