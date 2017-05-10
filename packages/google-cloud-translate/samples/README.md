@@ -1,10 +1,10 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Translate API Node.js Samples
+# Google Cloud Translation API Node.js Samples
 
 [![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-translate.svg)]()
 
-With the [Google Translate API](https://cloud.google.com/translate/docs), you can dynamically translate text between thousands of language pairs.
+The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynamically translate text between thousands of language pairs. The Cloud Translation API lets websites and programs integrate with the translation service programmatically. The Cloud Translation API is part of the larger Cloud Machine Learning API family.
 
 ## Table of Contents
 
@@ -18,11 +18,11 @@ With the [Google Translate API](https://cloud.google.com/translate/docs), you ca
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -32,7 +32,6 @@ With the [Google Translate API](https://cloud.google.com/translate/docs), you ca
 ## Samples
 
 ### Translate
-
 
 View the [documentation][translate_0_docs] or the [source code][translate_0_code].
 
@@ -70,15 +69,14 @@ For more information, see https://cloud.google.com/translate/docs
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test
