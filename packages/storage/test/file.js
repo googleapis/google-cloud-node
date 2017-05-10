@@ -2427,13 +2427,18 @@ describe('File', function() {
 
   describe('setEncryptionKey', function() {
     var KEY = crypto.randomBytes(32);
+    var _file;
 
     beforeEach(function() {
-      file.setEncryptionKey(KEY);
+      _file = file.setEncryptionKey(KEY);
     });
 
     it('should localize the key', function() {
       assert.strictEqual(file.encryptionKey, KEY);
+    });
+
+    it('should return the file instance', function() {
+      assert.strictEqual(_file, file);
     });
 
     it('should push the correct request interceptor', function(done) {
