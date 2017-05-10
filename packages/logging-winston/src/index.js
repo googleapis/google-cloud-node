@@ -23,6 +23,7 @@
 var extend = require('extend');
 var is = require('is');
 var logging = require('@google-cloud/logging');
+var mapValues = require('lodash.mapvalues');
 var util = require('util');
 var winston = require('winston');
 
@@ -89,6 +90,8 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     but you may optionally specify a specific monitored resource. For more
  *     information see the
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
+ * @param {boolean=} options.inspectMetadata - whether to serialize winston
+ *     provided log metadata using `util.inspect`. Default: false
  *
  * @example
  * var transport = require('@google-cloud/logging-winston');
@@ -124,6 +127,7 @@ function LoggingWinston(options) {
   this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
   this.log_ = logging(options).log(logName);
   this.resource_ = options.resource;
+  this.inspectMetadata_ = options.inspectMetadata || false;
 }
 
 winston.transports.StackdriverLogging = LoggingWinston;
@@ -157,19 +161,8 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var levelCode = this.levels_[levelName];
   var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
-  var labels = {};
-
-  if (is.object(metadata)) {
-    // We attach properties as labels on the log entry. Logging proto requires
-    // that the label values be strings, so we convert using util.inspect.
-    for (var key in metadata) {
-      labels[key] = util.inspect(metadata[key]);
-    }
-  }
-
   var entryMetadata = {
     resource: this.resource_,
-    labels: labels
   };
 
   // Stackdriver Logs Viewer picks up the summary line from the `message`
@@ -194,6 +187,13 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var data = {
     message: msg
   };
+  if (is.object(metadata)) {
+    data.metadata =
+        this.inspectMetadata_ ?
+            mapValues(metadata, function(v) { return util.inspect(v); }) :
+            metadata;
+  }
+
   var entry = this.log_.entry(entryMetadata, data);
   this.log_[stackdriverLevel](entry, callback);
 };

@@ -154,6 +154,19 @@ describe('logging-winston', function() {
     it('should localize the provided resource', function() {
       assert.strictEqual(loggingWinston.resource_, OPTIONS.resource);
     });
+
+    it('should localize inspectMetadata to default value', function() {
+      assert.strictEqual(loggingWinston.inspectMetadata_, false);
+    });
+
+    it('should localize the provided options.inspectMetadata', function() {
+      var optionsWithInspectMetadata = extend({}, OPTIONS);
+      optionsWithInspectMetadata.inspectMetadata = true;
+
+      var loggingWinston = new LoggingWinston(optionsWithInspectMetadata);
+      assert.strictEqual(loggingWinston.inspectMetadata_,
+                         optionsWithInspectMetadata.inspectMetadata);
+    });
   });
 
   describe('log', function() {
@@ -182,15 +195,36 @@ describe('logging-winston', function() {
 
     it('should properly create an entry', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
-        var expectedLabels = {};
+        assert.deepEqual(entryMetadata, {
+          resource: loggingWinston.resource_
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+        done();
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+    });
+
+    it('should inspect metadata when inspectMetadata is set', function(done) {
+      var optionsWithInspectMetadata = extend({}, OPTIONS);
+      optionsWithInspectMetadata.inspectMetadata = true;
+
+      var loggingWinston = new LoggingWinston(optionsWithInspectMetadata);
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        var expectedWinstonMetadata = {};
         for (var prop in METADATA) {
-          expectedLabels[prop] = nodeutil.inspect(METADATA[prop]);
+          expectedWinstonMetadata[prop] = nodeutil.inspect(METADATA[prop]);
         }
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_,
-          labels: expectedLabels
+          resource: loggingWinston.resource_
         });
-        assert.deepStrictEqual(data, { message: MESSAGE });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: expectedWinstonMetadata
+        });
         done();
       };
 
@@ -204,7 +238,8 @@ describe('logging-winston', function() {
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
-          message: MESSAGE + ' ' + error.stack
+          message: MESSAGE + ' ' + error.stack,
+          metadata: error
         });
         done();
       };
@@ -219,7 +254,8 @@ describe('logging-winston', function() {
 
         loggingWinston.log_.entry = function(entryMetadata, data) {
           assert.deepStrictEqual(data, {
-            message: error.stack
+            message: error.stack,
+            metadata: error
           });
           done();
         };
@@ -230,10 +266,12 @@ describe('logging-winston', function() {
     it('should not require metadata', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_,
-          labels: {}
+          resource: loggingWinston.resource_
         });
-        assert.deepStrictEqual(data, { message: MESSAGE });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: {}
+        });
         done();
       };
 
