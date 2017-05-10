@@ -47,7 +47,7 @@ video.annotateVideo(request)
     // Gets faces for video from its annotations
     const faces = annotations.faceAnnotations;
     faces.forEach((face, faceIdx) => {
-      console.log('Thumbnail size:', face.thumbnail.buffer.length);
+      console.log('Thumbnail size:', face.thumbnail.length);
       face.segments.forEach((segment, segmentIdx) => {
         console.log(`Track ${segmentIdx} of face ${faceIdx}: frames ${segment.startTimeOffset} to ${segment.endTimeOffset}`);
       });
