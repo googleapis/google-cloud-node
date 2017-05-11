@@ -83,6 +83,8 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     Logging level. Each property should have an integer value between 0 (most
  *     severe) and 7 (least severe). If you are passing a list of levels to your
  *     winston logger, you should provide the same list here.
+ * @param {boolean=} options.inspectMetadata - Serialize winston-provided log
+ *     metadata using `util.inspect`. Default: false
  * @param {string=} options.logName - The name of the log that will receive
  *     messages written to this transport. Default: `winston_log`
  * @param {object=} options.resource - The monitored resource that the transport
@@ -90,8 +92,6 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     but you may optionally specify a specific monitored resource. For more
  *     information see the
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
- * @param {boolean=} options.inspectMetadata - whether to serialize winston
- *     provided log metadata using `util.inspect`. Default: false
  *
  * @example
  * var transport = require('@google-cloud/logging-winston');
@@ -124,10 +124,10 @@ function LoggingWinston(options) {
     name: logName
   });
 
+  this.inspectMetadata_ = options.inspectMetadata === true;
   this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
   this.log_ = logging(options).log(logName);
   this.resource_ = options.resource;
-  this.inspectMetadata_ = options.inspectMetadata || false;
 }
 
 winston.transports.StackdriverLogging = LoggingWinston;
@@ -187,11 +187,10 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var data = {
     message: msg
   };
+
   if (is.object(metadata)) {
     data.metadata =
-        this.inspectMetadata_ ?
-            mapValues(metadata, function(v) { return util.inspect(v); }) :
-            metadata;
+      this.inspectMetadata_ ? mapValues(metadata, util.inspect) : metadata;
   }
 
   var entry = this.log_.entry(entryMetadata, data);
