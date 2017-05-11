@@ -16,6 +16,7 @@
 
 var is = require('is');
 
+var promisify = require('@google-cloud/common').util.promisify;
 var gax = require('google-gax');
 var protoFiles = require('google-proto-files');
 
@@ -71,7 +72,7 @@ module.exports = apiVersion => {
    *   console.error(err);
    * });
    */
-  methods.annotateImage = function(request, options, callback) {
+  methods.annotateImage = promisify(function(request, options, callback) {
     // If a callback was provided and options were skipped, normalize
     // the argument names.
     if (is.undefined(callback) && is.function(options)) {
@@ -80,28 +81,20 @@ module.exports = apiVersion => {
     }
 
     // Call the GAPIC batch annotation function.
-    return this.batchAnnotateImages([request], options).then(r => {
+    return this.batchAnnotateImages([request], options, (err, r) => {
+      // If there is an error, handle it.
+      if (err) {
+        return callback(err);
+      }
+
       // We are guaranteed to only have one response element, since we
       // only sent one image.
-      var response = r[0].responses[0];
+      var response = r.responses[0];
 
       // Fire the callback if applicable.
-      if (is.function(callback)) {
-        callback(undefined, response);
-      }
-
-      // Return the response.
-      return response;
-    }).catch(err => {
-      // Fire the callback if applicable.
-      if (is.function(callback)) {
-        callback(err);
-      }
-      else {
-        throw new Error(err);
-      }
+      return callback(undefined, response);
     });
-  };
+  });
 
   // Get a list of features available on the API, and iterate over them
   // and create single-feature methods for each.
@@ -121,12 +114,12 @@ module.exports = apiVersion => {
     });
 
     // Assign the single-feature method to the `methods` object.
-    methods[methodName] = function(image, options) {
+    methods[methodName] = promisify(function(image, options) {
       return this.annotateImage({
         image: image,
         features: [{type: featureValue}],
       }, options);
-    }
+    });
   }
 
   // Done; return the dictionary of methods.

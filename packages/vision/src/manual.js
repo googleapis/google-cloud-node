@@ -2113,8 +2113,5 @@ Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
  */
 common.util.promisifyAll(Vision);
 
-module.exports = util.deprecate(Vision,
-  'This portion of the Vision client library has been deprecated. ' +
-  "Please use require('@google-cloud/vision').v1() instead."
-);
+module.exports = Vision;
 module.exports.v1 = v1;

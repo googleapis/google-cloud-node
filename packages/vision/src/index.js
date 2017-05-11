@@ -20,10 +20,16 @@
 
 'use strict';
 
+var is = require('is');
+var util = require('util');
+
 var manual = require('./manual');
 var gapic = {
   v1: require('./v1'),
 };
+var helpers = require('./helpers');
+
+const VERSION = require('../package.json').version;
 
 
 /**
@@ -42,12 +48,22 @@ var gapic = {
  *   {@link gax.constructSettings} for the format.
  */
 function vision_v1(opts) {
+  // Define the header options.
+  opts = opts || {};
+  opts.libName = 'gccl';
+  opts.libVersion = VERSION
+
   // Create the image annotator client with the provided options.
   var client = gapic.v1(opts).imageAnnotatorClient(opts);
-  Object.assign(client.constructor.prototype, require('./helpers')('v1'));
+  if (is.undefined(client.annotateImage)) {
+    Object.assign(client.constructor.prototype, helpers('v1'));
+  }
   return client;
 }
 
 
-module.exports = manual;
+module.exports = util.deprecate(manual,
+  'This portion of the Vision client library has been deprecated. ' +
+  "Please use require('@google-cloud/vision').v1() instead."
+);
 module.exports.v1 = vision_v1;
