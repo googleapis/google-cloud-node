@@ -65,15 +65,20 @@
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
+    "chai": "^3.5.0",
     "deep-strict-equal": "^0.2.0",
     "mocha": "^3.0.1",
     "multiline": "^1.0.2",
     "node-uuid": "^1.4.7",
     "normalize-newline": "^2.0.0",
+    "nyc": "^10.3.0",
     "proxyquire": "^1.7.10",
+    "sinon": "^2.2.0",
+    "sinon-chai": "^2.10.0",
     "tmp": "^0.0.31"
   },
   "scripts": {
+    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts test/*.js && nyc report",
     "publish-module": "node ../../scripts/publish.js vision",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"

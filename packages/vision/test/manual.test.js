@@ -47,7 +47,7 @@ function fakeV1() {
   };
 }
 
-describe('Vision', function() {
+describe('Vision Deprecated Manual Layer', function() {
   var IMAGE = './image.jpg';
   var PROJECT_ID = 'project-id';
 
@@ -60,7 +60,7 @@ describe('Vision', function() {
   };
 
   before(function() {
-    Vision = proxyquire('../', {
+    Vision = proxyquire('../src/manual', {
       '@google-cloud/common': {
         util: fakeUtil
       },
