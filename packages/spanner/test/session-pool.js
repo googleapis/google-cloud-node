@@ -342,7 +342,7 @@ describe('SessionPool', function() {
         testOnBorrow: true,
         max: 100,
         min: 0,
-        numTestsPerRun: Number.MAX_SAFE_INTEGER
+        numTestsPerRun: 100
       });
     });
 

@@ -149,7 +149,7 @@ SessionPool.getPoolOptions_ = function(userOptions) {
     testOnBorrow: true,
     max: userOptions.max || 100,
     min: userOptions.min || 0,
-    numTestsPerRun: Number.MAX_SAFE_INTEGER
+    numTestsPerRun: 100
   };
 
   poolOptions.numTestsPerRun = poolOptions.max;
