@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var expect = require('chai').use(require('sinon-chai')).expect;
 var sinon = require('sinon');
 

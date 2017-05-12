@@ -14,11 +14,32 @@
  * limitations under the License.
  */
 
+'use strict';
+
 var is = require('is');
 
 var promisify = require('@google-cloud/common').util.promisify;
 var gax = require('google-gax');
 var protoFiles = require('google-proto-files');
+
+
+/**
+ * Return a method that calls annotateImage asking for a single feature.
+ *
+ * @param {Number} featureValue - The feature being requested. This is taken
+ *   from the Feature.Type enum, and will be an integer.
+ *
+ * @return {Function} - The function that, when called, will call annotateImage
+ *   asking for the single feature annotation.
+ */
+var _createSingleFeatureMethod = featureValue => {
+  return function(image, options) {
+    return this.annotateImage({
+      image: image,
+      features: [{type: featureValue}],
+    }, options);
+  }
+}
 
 
 /**
@@ -31,7 +52,7 @@ var protoFiles = require('google-proto-files');
  *   onto the pure GAPIC.
  */
 module.exports = apiVersion => {
-  var methods = {}
+  var methods = {};
 
   /**
    * Annotate a single image with the requested features.
@@ -100,8 +121,8 @@ module.exports = apiVersion => {
   // and create single-feature methods for each.
   var features = gax.grpc().load([{
     root: protoFiles('..'),
-    file: 'google/cloud/vision/v1/image_annotator.proto',
-  }]).google.cloud.vision.v1.Feature.Type;
+    file: `google/cloud/vision/${apiVersion}/image_annotator.proto`,
+  }]).google.cloud.vision[apiVersion].Feature.Type;
   for (let feature of Object.keys(features)) {
     // Determine the method name that should be used for the helper method,
     // based on the Feature.Type enum in the proto.
@@ -114,12 +135,7 @@ module.exports = apiVersion => {
     });
 
     // Assign the single-feature method to the `methods` object.
-    methods[methodName] = promisify(function(image, options) {
-      return this.annotateImage({
-        image: image,
-        features: [{type: featureValue}],
-      }, options);
-    });
+    methods[methodName] = promisify(_createSingleFeatureMethod(featureValue));
   }
 
   // Done; return the dictionary of methods.

@@ -51,7 +51,7 @@ function vision_v1(opts) {
   // Define the header options.
   opts = opts || {};
   opts.libName = 'gccl';
-  opts.libVersion = VERSION
+  opts.libVersion = VERSION;
 
   // Create the image annotator client with the provided options.
   var client = gapic.v1(opts).imageAnnotatorClient(opts);
