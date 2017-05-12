@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/googleapis/googleapis",
   "name": "@google-cloud/video-intelligence",
-  "version": "0.7.1",
+  "version": "0.1.0",
   "author": "Google Inc",
   "description": "Google Cloud Video Intelligence API client for Node.js",
   "main": "src/index.js",

@@ -13,15 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
-// Include each version packaged with this module.
-var v1beta1 = require('./v1beta1');
+ 'use strict';
+
+ var gapic = {
+   v1beta1: require('./v1beta1'),
+ };
+
+ const VERSION = require('../package.json').version;
+
+
+ /**
+  * Create an imageAnnotatorClient with additional helpers for common
+  * tasks.
+  *
+  * @param {Object=} opts - The optional parameters.
+  * @param {String=} opts.servicePath
+  *   The domain name of the API remote host.
+  * @param {number=} opts.port
+  *   The port on which to connect to the remote host.
+  * @param {grpc.ClientCredentials=} opts.sslCreds
+  *   A ClientCredentials for use with an SSL-enabled channel.
+  * @param {Object=} opts.clientConfig
+  *   The customized config to build the call settings. See
+  *   {@link gax.constructSettings} for the format.
+  */
+ function videointelligence_v1beta1(opts) {
+   // Define the header options.
+   opts = opts || {};
+   opts.libName = 'gccl';
+   opts.libVersion = VERSION;
+
+   // Create the image annotator client with the provided options.
+   var client = gapic.v1beta1(opts).videoIntelligenceServiceClient(opts);
+   return client;
+ }
 
 // The default export should be the latest version.
 // Assign all versions as version properties on the default.
-var default_ = v1beta1;
-default_.v1beta1 = v1beta1;
-
-// Export
-module.exports = default_;
+module.exports = videointelligence_v1beta1;
+module.exports.v1beta1 = videointelligence_v1beta1;

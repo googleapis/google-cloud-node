@@ -15,7 +15,7 @@
  */
 
 var assert = require('assert');
-var videointelligenceV1beta1 = require('../src/').v1beta1();
+var videointelligenceV1beta1 = require('../src/v1beta1')();
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
