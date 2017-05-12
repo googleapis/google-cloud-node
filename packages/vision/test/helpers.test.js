@@ -70,7 +70,9 @@ describe('Vision helper methods', () => {
         image: {content: new Buffer('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
-      return vision.annotateImage(request, {foo: 'bar'}).then(([response]) => {
+      return vision.annotateImage(request, {foo: 'bar'}).then(r => {
+        var response = r[0];
+
         // Ensure that we got the slice of the response that we expected.
         assert.deepEqual(response, {
           logoAnnotations: [{description: 'Google'}],
