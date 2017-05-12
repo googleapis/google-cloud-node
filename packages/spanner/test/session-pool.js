@@ -340,9 +340,9 @@ describe('SessionPool', function() {
       assert.deepEqual(SessionPool.getPoolOptions_({}), {
         idleTimeoutMillis: 59 * 60000,
         testOnBorrow: true,
-        max: Number.MAX_SAFE_INTEGER,
+        max: 100,
         min: 0,
-        numTestsPerRun: Number.MAX_SAFE_INTEGER
+        numTestsPerRun: 100
       });
     });
 
