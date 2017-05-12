@@ -47,7 +47,7 @@ const VERSION = require('../package.json').version;
  *   The customized config to build the call settings. See
  *   {@link gax.constructSettings} for the format.
  */
-function vision_v1(opts) {
+function visionV1(opts) {
   // Define the header options.
   opts = opts || {};
   opts.libName = 'gccl';
@@ -64,6 +64,6 @@ function vision_v1(opts) {
 
 module.exports = util.deprecate(manual,
   'This portion of the Vision client library has been deprecated. ' +
-  "Please use require('@google-cloud/vision').v1() instead."
+  'Please use require(\'@google-cloud/vision\').v1() instead.'
 );
-module.exports.v1 = vision_v1;
+module.exports.v1 = visionV1;

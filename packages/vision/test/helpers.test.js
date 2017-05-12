@@ -16,7 +16,8 @@
 
 'use strict';
 
-var expect = require('chai').use(require('sinon-chai')).expect;
+var assert = require('assert');
+var is = require('is');
 var sinon = require('sinon');
 
 var Vision = require('../');
@@ -45,15 +46,14 @@ describe('Vision helper methods', () => {
       };
       return vision.annotateImage(request).then(([response]) => {
         // Ensure that we got the slice of the response that we expected.
-        expect(response).deep.equal({
+        assert.deepEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
         // Inspect the calls to batchAnnotateImages and ensure they matched
         // the expected signature.
-        expect(batchAnnotate)
-          .callCount(1)
-          .calledWith([request]);
+        assert(batchAnnotate.callCount === 1);
+        assert(batchAnnotate.calledWith([request]));
       });
     });
 
@@ -72,15 +72,14 @@ describe('Vision helper methods', () => {
       };
       return vision.annotateImage(request, {foo: 'bar'}).then(([response]) => {
         // Ensure that we got the slice of the response that we expected.
-        expect(response).deep.equal({
+        assert.deepEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
         // Inspect the calls to batchAnnotateImages and ensure they matched
         // the expected signature.
-        expect(batchAnnotate)
-          .callCount(1)
-          .calledWith([request], {foo: 'bar'});
+        assert(batchAnnotate.callCount === 1);
+        assert(batchAnnotate.calledWith([request], {foo: 'bar'}));
       });
     });
 
@@ -99,16 +98,15 @@ describe('Vision helper methods', () => {
       };
       vision.annotateImage(request, function(err, response) {
         // Establish that we got the expected response.
-        expect(err).undefined;
-        expect(response).deep.equal({
+        assert(is.undefined(err));
+        assert.deepEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
         // Inspect the calls to batchAnnotate and ensure that they match
         // what we expected.
-        expect(batchAnnotate)
-          .callCount(1)
-          .calledWith([request], undefined);
+        assert(batchAnnotate.callCount === 1);
+        assert(batchAnnotate.calledWith([request], undefined));
         done();
       });
     });
@@ -126,13 +124,12 @@ describe('Vision helper methods', () => {
       };
       return vision.annotateImage(request).catch(err => {
         // Establish that we got the expected response.
-        expect(err).deep.equal({message: 'Bad things!'});
+        assert.deepEqual(err, {message: 'Bad things!'});
 
         // Inspect the calls to batchAnnotate and ensure that they match
         // what we expected.
-        expect(batchAnnotate)
-          .callCount(1)
-          .calledWith([request], undefined);
+        assert(batchAnnotate.callCount === 1);
+        assert(batchAnnotate.calledWith([request], undefined));
       });
     });
   });
@@ -151,18 +148,18 @@ describe('Vision helper methods', () => {
       var image = {content: new Buffer('bogus==')};
       return vision.logoDetection(image).then(([response]) => {
         // Ensure that we got the slice of the response that we expected.
-        expect(response).deep.equal({
+        assert.deepEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
         // Inspect the calls to annotateImage and batchAnnotateImages and
         // ensure they matched the expected signature.
-        expect(annotate)
-          .callCount(1)
-          .calledWith({image: image, features: [{type: 3}]});
-        expect(batchAnnotate)
-          .callCount(1)
-          .calledWith([{image: image, features: [{type: 3}]}]);
+        assert(annotate.callCount === 1);
+        assert(annotate.calledWith({image: image, features: [{type: 3}]}));
+        assert(batchAnnotate.callCount === 1);
+        assert(batchAnnotate.calledWith(
+          [{image: image, features: [{type: 3}]}]
+        ));
       });
     });
   });
