@@ -31,7 +31,6 @@ var is = require('is');
 var prop = require('propprop');
 var propAssign = require('prop-assign');
 var rgbHex = require('rgb-hex');
-var util = require('util');
 
 var v1 = require('./v1');
 
