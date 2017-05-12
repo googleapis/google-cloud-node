@@ -38,8 +38,8 @@ var _createSingleFeatureMethod = featureValue => {
       image: image,
       features: [{type: featureValue}],
     }, options);
-  }
-}
+  };
+};
 
 
 /**
@@ -140,4 +140,4 @@ module.exports = apiVersion => {
 
   // Done; return the dictionary of methods.
   return methods;
-}
+};
