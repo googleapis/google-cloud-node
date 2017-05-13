@@ -306,10 +306,6 @@ Log.prototype.entry = function(metadata, data) {
     metadata = {};
   }
 
-  metadata = extend({}, metadata, {
-    logName: this.formattedName_
-  });
-
   return this.logging.entry(metadata, data);
 };
 
@@ -638,8 +634,6 @@ Log.prototype.decorateEntries_ = function(entries, callback) {
       callback(e);
       return;
     }
-
-    decoratedEntry.logName = self.formattedName_;
 
     self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
       // Ignore errors (the API will speak up if it has an issue).

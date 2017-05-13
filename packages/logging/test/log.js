@@ -240,24 +240,13 @@ describe('Log', function() {
       var entryObject = {};
 
       log.logging.entry = function(metadata_, data_) {
-        assert.deepEqual(metadata_, extend({}, metadata, {
-          logName: log.formattedName_
-        }));
+        assert.deepEqual(metadata_, metadata);
         assert.strictEqual(data_, data);
         return entryObject;
       };
 
       var entry = log.entry(metadata, data);
       assert.strictEqual(entry, entryObject);
-    });
-
-    it('should attach the log name to the entry', function(done) {
-      log.logging.entry = function(metadata) {
-        assert.strictEqual(metadata.logName, log.formattedName_);
-        done();
-      };
-
-      log.entry({}, {});
     });
 
     it('should assume one argument means data', function(done) {
@@ -705,14 +694,6 @@ describe('Log', function() {
 
       log.decorateEntries_([entry], function(err) {
         assert.strictEqual(err, error);
-        done();
-      });
-    });
-
-    it('should assign the log name', function(done) {
-      log.decorateEntries_([{}], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0].logName, log.formattedName_);
         done();
       });
     });
