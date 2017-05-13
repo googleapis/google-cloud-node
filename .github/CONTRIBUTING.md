@@ -102,7 +102,7 @@ To publish this module, you must be signed into an npm account that is part of t
 $ npm run publish-module {{version}}
 ```
 
-  - **version** In the format of `0.2.0`
+  - **version** In the format of `0.2.0` or an npm-recognized alias: "major", "minor", or "patch"
 
 This will:
 
