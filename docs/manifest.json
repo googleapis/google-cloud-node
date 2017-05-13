@@ -13,6 +13,7 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
+        "v0.54.0",
         "v0.53.0",
         "0.52.0",
         "0.51.1",
