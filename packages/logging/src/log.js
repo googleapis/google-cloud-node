@@ -222,12 +222,7 @@ Log.prototype.delete = function(gaxOptions, callback) {
     logName: this.formattedName_
   };
 
-  this.logging.request({
-    client: 'loggingServiceV2Client',
-    method: 'deleteLog',
-    reqOpts: reqOpts,
-    gaxOpts: gaxOptions
-  }, callback);
+  this.logging.api.Logging.deleteLog(reqOpts, gaxOptions, callback);
 };
 
 /**
@@ -599,12 +594,11 @@ Log.prototype.write = function(entry, options, callback) {
 
     delete reqOpts.gaxOptions;
 
-    self.logging.request({
-      client: 'loggingServiceV2Client',
-      method: 'writeLogEntries',
-      reqOpts: reqOpts,
-      gaxOpts: options.gaxOptions
-    }, callback);
+    self.logging.api.Logging.writeLogEntries(
+      reqOpts,
+      options.gaxOptions,
+      callback
+    );
   });
 };
 

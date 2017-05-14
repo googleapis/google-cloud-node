@@ -24,7 +24,6 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
-var googleAuth = require('google-auto-auth');
 var is = require('is');
 var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
@@ -69,14 +68,18 @@ function Logging(options) {
     return new Logging(options);
   }
 
-  var options_ = extend({
-    scopes: v2.ALL_SCOPES
+  options = extend({
+    projectId: '{{projectId}}'
   }, options);
 
-  this.api = {};
-  this.auth = googleAuth(options_);
-  this.options = options_;
-  this.projectId = options.projectId || '{{projectId}}';
+  this.projectId = options.projectId;
+
+  var gax = v2(options);
+
+  this.api = {
+    Config: gax.configServiceV2Client(),
+    Logging: gax.loggingServiceV2Client()
+  };
 }
 
 // jscs:disable maximumLineLength
@@ -163,12 +166,7 @@ Logging.prototype.createSink = function(name, config, callback) {
 
   delete reqOpts.sink.gaxOptions;
 
-  this.request({
-    client: 'configServiceV2Client',
-    method: 'createSink',
-    reqOpts: reqOpts,
-    gaxOpts: config.gaxOptions
-  }, function(err, resp) {
+  this.api.Config.createSink(reqOpts, config.gaxOptions, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -299,12 +297,7 @@ Logging.prototype.getEntries = function(options, callback) {
     autoPaginate: options.autoPaginate
   }, options.gaxOptions);
 
-  this.request({
-    client: 'loggingServiceV2Client',
-    method: 'listLogEntries',
-    reqOpts: reqOpts,
-    gaxOpts: gaxOptions
-  }, function() {
+  this.api.Logging.listLogEntries(reqOpts, gaxOptions, function() {
     var entries = arguments[1];
 
     if (entries) {
@@ -435,12 +428,7 @@ Logging.prototype.getSinks = function(options, callback) {
     autoPaginate: options.autoPaginate
   }, options.gaxOptions);
 
-  this.request({
-    client: 'configServiceV2Client',
-    method: 'listSinks',
-    reqOpts: reqOpts,
-    gaxOpts: gaxOptions
-  }, function() {
+  this.api.Config.listSinks(reqOpts, gaxOptions, function() {
     var sinks = arguments[1];
 
     if (sinks) {
@@ -513,12 +501,7 @@ Logging.prototype.getSinksStream = function(options) {
       autoPaginate: options.autoPaginate
     }, options.gaxOptions);
 
-    requestStream = self.request({
-      client: 'configServiceV2Client',
-      method: 'listSinksStream',
-      reqOpts: reqOpts,
-      gaxOpts: gaxOptions
-    });
+    requestStream = self.api.Config.listSinksStream(reqOpts, gaxOptions);
 
     userStream.setPipeline(requestStream, toSinkStream);
   });
@@ -569,91 +552,6 @@ Logging.prototype.sink = function(name) {
  * @param {function=} callback - The callback function.
  */
 Logging.prototype.request = function(config, callback) {
-  var self = this;
-  var isStreamMode = !callback;
-
-  var gaxStream;
-  var stream;
-
-  if (isStreamMode) {
-    stream = streamEvents(through.obj());
-
-    stream.abort = function() {
-      if (gaxStream && gaxStream.cancel) {
-        gaxStream.cancel();
-      }
-    };
-
-    stream.once('reading', makeRequestStream);
-  } else {
-    makeRequestCallback();
-  }
-
-  function prepareGaxRequest(callback) {
-    self.auth.getProjectId(function(err, projectId) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var gaxClient = self.api[config.client];
-
-      if (!gaxClient) {
-        // Lazily instantiate client.
-        gaxClient = v2(self.options)[config.client](self.options);
-        self.api[config.client] = gaxClient;
-      }
-
-      var reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
-
-      var requestFn = gaxClient[config.method].bind(
-        gaxClient,
-        reqOpts,
-        config.gaxOpts
-      );
-
-      callback(null, requestFn);
-    });
-  }
-
-  function makeRequestCallback() {
-    if (global.GCLOUD_SANDBOX_ENV) {
-      return;
-    }
-
-    prepareGaxRequest(function(err, requestFn) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      requestFn(callback);
-    });
-  }
-
-  function makeRequestStream() {
-    if (global.GCLOUD_SANDBOX_ENV) {
-      return through.obj();
-    }
-
-    prepareGaxRequest(function(err, requestFn) {
-      if (err) {
-        stream.destroy(err);
-        return;
-      }
-
-      gaxStream = requestFn();
-
-      gaxStream
-        .on('error', function(err) {
-          stream.destroy(err);
-        })
-        .pipe(stream);
-    });
-  }
-
-  return stream;
 };
 
 /**

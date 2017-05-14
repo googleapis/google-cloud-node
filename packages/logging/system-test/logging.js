@@ -47,6 +47,7 @@ describe('Logging', function() {
 
   before(function(done) {
     async.parallel([
+      deleteSinks,
       bucket.create.bind(bucket),
       dataset.create.bind(dataset),
       topic.create.bind(topic)
@@ -60,57 +61,6 @@ describe('Logging', function() {
       deleteTopics,
       deleteSinks
     ], done);
-
-    function deleteBuckets(callback) {
-      storage.getBuckets({
-        prefix: TESTS_PREFIX
-      }, function(err, buckets) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        function deleteBucket(bucket, callback) {
-          bucket.deleteFiles(function(err) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            bucket.delete(callback);
-          });
-        }
-
-        async.each(buckets, deleteBucket, callback);
-      });
-    }
-
-    function deleteDatasets(callback) {
-      getAndDelete(bigQuery.getDatasets.bind(bigQuery), callback);
-    }
-
-    function deleteTopics(callback) {
-      getAndDelete(pubsub.getTopics.bind(pubsub), callback);
-    }
-
-    function deleteSinks(callback) {
-      getAndDelete(logging.getSinks.bind(logging), callback);
-    }
-
-    function getAndDelete(method, callback) {
-      method(function(err, objects) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        objects = objects.filter(function(object) {
-          return (object.name || object.id).indexOf(TESTS_PREFIX) === 0;
-        });
-
-        async.each(objects, exec('delete'), callback);
-      });
-    }
   });
 
   describe('sinks', function() {
@@ -540,5 +490,56 @@ describe('Logging', function() {
 
   function generateName() {
     return TESTS_PREFIX + uuid.v1();
+  }
+
+  function deleteBuckets(callback) {
+    storage.getBuckets({
+      prefix: TESTS_PREFIX
+    }, function(err, buckets) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      function deleteBucket(bucket, callback) {
+        bucket.deleteFiles(function(err) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          bucket.delete(callback);
+        });
+      }
+
+      async.each(buckets, deleteBucket, callback);
+    });
+  }
+
+  function deleteDatasets(callback) {
+    getAndDelete(bigQuery.getDatasets.bind(bigQuery), callback);
+  }
+
+  function deleteTopics(callback) {
+    getAndDelete(pubsub.getTopics.bind(pubsub), callback);
+  }
+
+  function deleteSinks(callback) {
+    getAndDelete(logging.getSinks.bind(logging), callback);
+  }
+
+  function getAndDelete(method, callback) {
+    method(function(err, objects) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      objects = objects.filter(function(object) {
+        return (object.name || object.id).indexOf(TESTS_PREFIX) === 0;
+      });
+
+      async.each(objects, exec('delete'), callback);
+    });
   }
 });

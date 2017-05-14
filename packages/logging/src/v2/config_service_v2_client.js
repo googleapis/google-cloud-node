@@ -100,9 +100,7 @@ function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
   var self = this;
 
   this.auth = gaxGrpc.auth;
-  var configServiceV2Stub = gaxGrpc.createStub(
-      grpcClients.google.logging.v2.ConfigServiceV2,
-      opts);
+
   var configServiceV2StubMethods = [
     'listSinks',
     'getSink',
@@ -110,17 +108,86 @@ function ConfigServiceV2Client(gaxGrpc, grpcClients, opts) {
     'updateSink',
     'deleteSink'
   ];
+
+  var configServiceV2Stub;
+
   configServiceV2StubMethods.forEach(function(methodName) {
-    self['_' + methodName] = gax.createApiCall(
-      configServiceV2Stub.then(function(configServiceV2Stub) {
-        return function() {
-          var args = Array.prototype.slice.call(arguments, 0);
-          return configServiceV2Stub[methodName].apply(configServiceV2Stub, args);
-        };
-      }),
-      defaults[methodName],
-      PAGE_DESCRIPTORS[methodName]);
+    self['_' + methodName] = function() {
+      var args = [].slice.call(arguments);
+      var cb;
+
+      if (typeof args[args.length - 1] === 'function') {
+        cb = args.pop();
+      }
+
+      var promise = getStub().then(function(stub) {
+        var apiCall = gax.createApiCall(
+          configServiceV2Stub.then(function(configServiceV2Stub) {
+            return function() {
+              var args = Array.prototype.slice.call(arguments, 0);
+              var reqOpts = args[0];
+
+              try {
+                reqOpts = replaceProjectIdToken(reqOpts, self.auth.projectId);
+              } catch(e) {
+                var callback = args[args.length - 1];
+                callback(e);
+                return;
+              }
+
+              return configServiceV2Stub[methodName].apply(configServiceV2Stub, args);
+            };
+          }),
+          defaults[methodName],
+          PAGE_DESCRIPTORS[methodName]);
+
+        return apiCall.apply(self, args);
+      });
+
+      if (!cb) {
+        return promise;
+      }
+
+      promise.then(cb.bind(null, null), cb);
+    };
   });
+
+  function getStub() {
+    if (configServiceV2Stub) {
+      return Promise.resolve(configServiceV2Stub);
+    }
+
+    configServiceV2Stub = gaxGrpc.createStub(
+      grpcClients.google.logging.v2.ConfigServiceV2, opts);
+
+    return configServiceV2Stub;
+  }
+
+  function replaceProjectIdToken(value, projectId) {
+    if (Array.isArray(value)) {
+      value = value.map(function(val) {
+        return replaceProjectIdToken(val, projectId);
+      });
+    }
+
+    if (value && typeof value === 'object' && typeof value.hasOwnProperty === 'function') {
+      for (var opt in value) {
+        if (value.hasOwnProperty(opt)) {
+          value[opt] = replaceProjectIdToken(value[opt], projectId);
+        }
+      }
+    }
+
+    if (typeof value === 'string' && value.indexOf('{{projectId}}') > -1) {
+      if (!projectId) {
+        throw new Error('Sorry, we cannot connect to Cloud Services without a project ID.');
+      }
+
+      value = value.replace(/{{projectId}}/g, projectId);
+    }
+
+    return value;
+  }
 }
 
 // Path templates
