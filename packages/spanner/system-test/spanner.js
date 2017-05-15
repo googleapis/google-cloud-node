@@ -59,7 +59,7 @@ var spanner = new Spanner(env);
     function insert(insertData, callback) {
       var id = generateName('id');
 
-      insertData.SingerId = id;
+      insertData.Key = id;
 
       table.insert(insertData, function(err) {
         if (err) {
@@ -68,7 +68,7 @@ var spanner = new Spanner(env);
         }
 
         database.run({
-          sql: 'SELECT * FROM `' + table.name + '` WHERE SingerId = @id',
+          sql: 'SELECT * FROM `' + table.name + '` WHERE Key = @id',
           params: {
             id: id
           }
@@ -87,127 +87,466 @@ var spanner = new Spanner(env);
       database.create({
         schema: multiline.stripIndent(function() {/*
           CREATE TABLE TypeCheck (
-            SingerId STRING(1024) NOT NULL,
-            Int INT64,
-            Float FLOAT64,
-            String STRING(1024),
-          ) PRIMARY KEY(SingerId)
+            Key STRING(MAX) NOT NULL,
+            BytesValue BYTES(MAX),
+            BoolValue BOOL,
+            DateValue DATE,
+            FloatValue FLOAT64,
+            IntValue INT64,
+            StringValue STRING(MAX),
+            TimestampValue TIMESTAMP,
+            BytesArray ARRAY<BYTES(MAX)>,
+            BoolArray ARRAY<BOOL>,
+            DateArray ARRAY<DATE>,
+            FloatArray ARRAY<FLOAT64>,
+            IntArray ARRAY<INT64>,
+            StringArray ARRAY<STRING(MAX)>,
+            TimestampArray ARRAY<TIMESTAMP>
+          ) PRIMARY KEY (Key)
         */})
       }, execAfterOperationComplete(done));
     });
 
-    it('should correctly decode structs', function(done) {
-      var query = 'SELECT ARRAY(SELECT as struct 1, "hello")';
+    describe('structs', function() {
+      it('should correctly decode structs', function(done) {
+        var query = 'SELECT ARRAY(SELECT as struct 1, "hello")';
 
-      database.run(query, function(err, rows) {
-        assert.ifError(err);
-        assert.deepEqual(rows[0], [
-          {
-            name: '',
-            value: [
-              [
-                {
-                  name: '',
-                  value: {
-                    value: '1'
+        database.run(query, function(err, rows) {
+          assert.ifError(err);
+          assert.deepEqual(rows[0], [
+            {
+              name: '',
+              value: [
+                [
+                  {
+                    name: '',
+                    value: {
+                      value: '1'
+                    }
+                  },
+                  {
+                    name: '',
+                    value: 'hello'
                   }
-                },
-                {
-                  name: '',
-                  value: 'hello'
-                }
+                ]
               ]
-            ]
-          }
-        ]);
-        done();
-      });
-    });
-
-    it('should correctly decode structs', function(done) {
-      var query =
-        'SELECT 1 as id, ARRAY(select as struct 2 as id, "hello" as name)';
-
-      database.run(query, function(err, rows) {
-        assert.ifError(err);
-        assert.deepEqual(rows[0], [
-          {
-            name: 'id',
-            value: {
-              value: '1'
             }
-          },
-          {
-            name: '',
-            value: [
-              [
-                {
-                  name: 'id',
-                  value: {
-                    value: '2'
+          ]);
+          done();
+        });
+      });
+
+      it('should correctly decode structs', function(done) {
+        var query =
+          'SELECT 1 as id, ARRAY(select as struct 2 as id, "hello" as name)';
+
+        database.run(query, function(err, rows) {
+          assert.ifError(err);
+          assert.deepEqual(rows[0], [
+            {
+              name: 'id',
+              value: {
+                value: '1'
+              }
+            },
+            {
+              name: '',
+              value: [
+                [
+                  {
+                    name: 'id',
+                    value: {
+                      value: '2'
+                    }
+                  },
+                  {
+                    name: 'name',
+                    value: 'hello'
                   }
-                },
-                {
-                  name: 'name',
-                  value: 'hello'
-                }
+                ]
               ]
-            ]
-          }
-        ]);
+            }
+          ]);
+          done();
+        });
+      });
+    });
+
+    describe('booleans', function() {
+      it('should write boolean values', function(done) {
+        insert({ BoolValue: true }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().BoolValue, true);
+          done();
+        });
+      });
+
+      it('should write null boolean values', function(done) {
+        insert({ BoolValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().BoolValue, null);
+          done();
+        });
+      });
+
+      it('should write empty boolean array values', function(done) {
+        insert({ BoolArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BoolArray, []);
+          done();
+        });
+      });
+
+      it('should write null boolean array values', function(done) {
+        insert({ BoolArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BoolArray, [null]);
+          done();
+        });
+      });
+
+      it('should write boolean array values', function(done) {
+        insert({ BoolArray: [true, false] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BoolArray, [true, false]);
+          done();
+        });
+      });
+    });
+
+    describe('int64s', function() {
+      it('should write int64 values', function(done) {
+        insert({ IntValue: spanner.int(1234) }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().IntValue, spanner.int(1234));
+          done();
+        });
+      });
+
+      it('should write null int64 values', function(done) {
+        insert({ IntValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().IntValue, null);
+          done();
+        });
+      });
+
+
+      it('should handle out of bounds integers', function(done) {
+        var value = '9223372036854775807';
+
+        insert({ IntValue: value }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().IntValue.value, value);
+          done();
+        });
+      });
+
+      it('should write empty in64 array values', function(done) {
+        insert({ IntArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().IntArray, []);
+          done();
+        });
+      });
+
+      it('should write null int64 array values', function(done) {
+        insert({ IntArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().IntArray, [null]);
+          done();
+        });
+      });
+
+      it('should write int64 array values', function(done) {
+        var values = [1, 2, 3];
+
+        insert({ IntArray: values }, function(err, row) {
+          assert.ifError(err);
+
+          var expected = values.map(spanner.int);
+          assert.deepEqual(row.toJSON().IntArray, expected);
+          done();
+        });
+      });
+    });
+
+    describe('float64s', function() {
+      it('should write float64 values', function(done) {
+        insert({ FloatValue: spanner.float(8.2) }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatValue, spanner.float(8.2));
+          done();
+        });
+      });
+
+      it('should write null float64 values', function(done) {
+        insert({ FloatValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().FloatValue, null);
+          done();
+        });
+      });
+
+      it('should accept a Float object with an Int-like value', function(done) {
+        insert({ FloatValue: spanner.float(8) }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatValue, spanner.float(8));
+          done();
+        });
+      });
+
+      it('should handle Infinity', function(done) {
+        insert({ FloatValue: Infinity }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatValue, spanner.float(Infinity));
+          done();
+        });
+      });
+
+      it('should handle -Infinity', function(done) {
+        insert({ FloatValue: -Infinity }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatValue, spanner.float(-Infinity));
+          done();
+        });
+      });
+
+      it('should handle NaN', function(done) {
+        insert({ FloatValue: NaN }, function(err, row) {
+          assert.ifError(err);
+          assert(isNaN(row.toJSON().FloatValue));
+          done();
+        });
+      });
+
+      it('should write empty float64 array values', function(done) {
+        insert({ FloatArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatArray, []);
+          done();
+        });
+      });
+
+      it('should write null float64 array values', function(done) {
+        insert({ FloatArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().FloatArray, [null]);
+          done();
+        });
+      });
+
+      it('should write float64 array values', function(done) {
+        var values = [1.2, 2.3, 3.4];
+
+        insert({ FloatArray: values }, function(err, row) {
+          assert.ifError(err);
+
+          var expected = values.map(spanner.float);
+          assert.deepEqual(row.toJSON().FloatArray, expected);
+          done();
+        });
+      });
+    });
+
+    describe('strings', function() {
+      it('should write string values', function(done) {
+        insert({ StringValue: 'abc' }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().StringValue, 'abc');
+          done();
+        });
+      });
+
+      it('should write null string values', function(done) {
+        insert({ StringValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().StringValue, null);
+          done();
+        });
+      });
+
+      it('should write empty string array values', function(done) {
+        insert({ StringArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().StringArray, []);
+          done();
+        });
+      });
+
+      it('should write null string array values', function(done) {
+        insert({ StringArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().StringArray, [null]);
+          done();
+        });
+      });
+
+      it('should write string array values', function(done) {
+        insert({ StringArray: ['abc', 'def'] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().StringArray, ['abc', 'def']);
+          done();
+        });
+      });
+    });
+
+    describe('bytes', function() {
+      it('should write bytes values', function(done) {
+        insert({ BytesValue: new Buffer('abc') }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BytesValue, new Buffer('abc'));
+          done();
+        });
+      });
+
+      it('should write null bytes values', function(done) {
+        insert({ BytesValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().BytesValue, null);
+          done();
+        });
+      });
+
+      it('should write empty bytes array values', function(done) {
+        insert({ BytesArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BytesArray, []);
+          done();
+        });
+      });
+
+      it('should write null bytes array values', function(done) {
+        insert({ BytesArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BytesArray, [null]);
+          done();
+        });
+      });
+
+      it('should write bytes array values', function(done) {
+        var values = [
+          new Buffer('a'),
+          new Buffer('b')
+        ];
+
+        insert({ BytesArray: values }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().BytesArray, values);
+          done();
+        });
+      });
+    });
+
+    describe('timestamps', function() {
+      it('should write timestamp values', function(done) {
+        var date = new Date();
+
+        insert({ TimestampValue: date }, function(err, row) {
+          assert.ifError(err);
+          var time = row.toJSON().TimestampValue.getTime();
+          assert.strictEqual(time, date.getTime());
+          done();
+        });
+      });
+
+      it('should write null timestamp values', function(done) {
+        insert({ TimestampValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().TimestampValue, null);
+          done();
+        });
+      });
+
+      it('should write empty timestamp array values', function(done) {
+        insert({ TimestampArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().TimestampArray, []);
+          done();
+        });
+      });
+
+      it('should write null timestamp array values', function(done) {
+        insert({ TimestampArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().TimestampArray, [null]);
+          done();
+        });
+      });
+
+      it('should write timestamp array values', function(done) {
+        var values = [
+          new Date(),
+          new Date('3-3-1933')
+        ];
+
+        insert({ TimestampArray: values }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().TimestampArray, values);
+          done();
+        });
+      });
+    });
+
+    describe('dates', function() {
+      it('should write date values', function(done) {
+        var date = spanner.date();
+
+        insert({ DateValue: date }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(spanner.date(row.toJSON().DateValue), date);
+          done();
+        });
+      });
+
+      it('should write null date values', function(done) {
+        insert({ DateValue: null }, function(err, row) {
+          assert.ifError(err);
+          assert.strictEqual(row.toJSON().DateValue, null);
+          done();
+        });
+      });
+
+      it('should write empty date array values', function(done) {
+        insert({ DateArray: [] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().DateArray, []);
+          done();
+        });
+      });
+
+      it('should write null date array values', function(done) {
+        insert({ DateArray: [null] }, function(err, row) {
+          assert.ifError(err);
+          assert.deepEqual(row.toJSON().DateArray, [null]);
+          done();
+        });
+      });
+
+      it('should write date array values', function(done) {
+        var values = [
+          spanner.date(),
+          spanner.date('3-3-1933')
+        ];
+
+        insert({ DateArray: values }, function(err, row) {
+          assert.ifError(err);
+
+          var returnedValues = row.toJSON().DateArray.map(spanner.date);
+          assert.deepEqual(returnedValues, values);
+
+          done();
+        });
+      });
+    });
+
+    it('should throw an error for incorrect value types', function(done) {
+      table.insert({ BoolValue: 'abc' }, function(err) {
+        assert(err);
         done();
       });
     });
 
-    it('should accept a Float object with an Int-like value', function(done) {
-      insert({ Float: spanner.float(8) }, function(err, row) {
-        assert.ifError(err);
-        assert.deepEqual(row.toJSON().Float, spanner.float(8));
-        done();
-      });
-    });
-
-    it('should handle Infinity', function(done) {
-      insert({ Float: Infinity }, function(err, row) {
-        assert.ifError(err);
-        assert.deepEqual(row.toJSON().Float, spanner.float(Infinity));
-        done();
-      });
-    });
-
-    it('should handle -Infinity', function(done) {
-      insert({ Float: -Infinity }, function(err, row) {
-        assert.ifError(err);
-        assert.deepEqual(row.toJSON().Float, spanner.float(-Infinity));
-        done();
-      });
-    });
-
-    it('should handle NaN', function(done) {
-      insert({ Float: NaN }, function(err, row) {
-        assert.ifError(err);
-        assert(isNaN(row.toJSON().Float));
-        done();
-      });
-    });
-
-    it('should handle out of bounds integers', function(done) {
-      var value = '9223372036854775807';
-
-      insert({ Int: value }, function(err, row) {
-        assert.ifError(err);
-        assert.strictEqual(row.toJSON().Int.value, value);
-        done();
-      });
-    });
-
-    it('should handle null', function(done) {
-      insert({ String: null }, function(err, row) {
-        assert.ifError(err);
-        assert.strictEqual(row.toJSON().String, null);
-        done();
-      });
-    });
   });
 
   describe('Instances', function() {
@@ -451,6 +790,27 @@ var spanner = new Spanner(env);
         .then(function() {
           return database.delete();
         });
+    });
+
+    it('should throw an error for non-existant tables', function(done) {
+      var table = database.table(generateName('nope'));
+
+      table.insert({
+        SingerId: generateName('id')
+      }, function(err) {
+        assert.strictEqual(err.code, 5);
+        done();
+      });
+    });
+
+    it('should throw an error for non-existant columns', function(done) {
+      table.insert({
+        SingerId: generateName('id'),
+        Nope: 'abc'
+      }, function(err) {
+        assert.strictEqual(err.code, 5);
+        done();
+      });
     });
 
     it('should read rows as a stream', function(done) {
