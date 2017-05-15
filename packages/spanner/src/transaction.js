@@ -501,20 +501,61 @@ Transaction.prototype.runStream = function(query) {
   }
 
   var reqOpts = extend({
-    transaction: {}
+    transaction: {},
+    session: this.formattedName_
   }, query);
 
+  var fields = {};
+
   if (reqOpts.params) {
-    var fields = {};
+    reqOpts.types = reqOpts.types || {};
 
     for (var prop in reqOpts.params) {
       var field = reqOpts.params[prop];
+
+      if (!reqOpts.types[prop]) {
+        reqOpts.types[prop] = codec.getType(field);
+      }
+
       fields[prop] = codec.encode(field);
     }
 
     reqOpts.params = {
       fields: fields
     };
+  }
+
+  if (reqOpts.types) {
+    var types = {};
+
+    for (var prop in reqOpts.types) {
+      var type = reqOpts.types[prop]
+      var child;
+
+      if (is.object(type)) {
+        child = codec.TYPES.indexOf(type.child);
+        type = type.type;
+      }
+
+      var code = codec.TYPES.indexOf(type);
+
+      if (code === -1) {
+        code = 0; // unspecified
+      }
+
+      types[prop] = { code: code };
+
+      if (child === -1) {
+        child = 0; // unspecified
+      }
+
+      if (is.number(child)) {
+        types[prop].arrayElementType = { code: child };
+      }
+    }
+
+    reqOpts.paramTypes = types;
+    delete reqOpts.types;
   }
 
   if (this.id) {

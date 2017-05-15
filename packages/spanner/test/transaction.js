@@ -639,29 +639,240 @@ describe('Transaction', function() {
       makeRequestFn();
     });
 
-    it('should encode query parameters', function(done) {
-      var query = {
-        sql: QUERY,
-        params: {
-          test: 'value'
-        }
-      };
+    describe('query parameters', function() {
+      beforeEach(function() {
+        fakeCodec.encode = function() {};
+      });
 
-      var encodedValue = {};
+      it('should encode query parameters', function(done) {
+        var query = {
+          sql: QUERY,
+          params: {
+            test: 'value'
+          }
+        };
 
-      fakeCodec.encode = function(field) {
-        assert.strictEqual(field, query.params.test);
-        return encodedValue;
-      };
+        var encodedValue = {};
 
-      transaction.requestStream = function(options) {
-        assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
-        done();
-      };
+        fakeCodec.encode = function(field) {
+          assert.strictEqual(field, query.params.test);
+          return encodedValue;
+        };
 
-      var stream = transaction.runStream(query);
-      var makeRequestFn = stream.calledWith_[0];
-      makeRequestFn();
+        transaction.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should attempt to guess the parameter types', function(done) {
+        var params = {
+          unspecified: null,
+          bool: true,
+          int64: 1234,
+          float64: 2.2,
+          timestamp: new Date(),
+          date: new fakeCodec.SpannerDate(),
+          string: 'abc',
+          bytes: new Buffer('abc')
+        };
+
+        var types = Object.keys(params);
+
+        var query = {
+          sql: QUERY,
+          params: params
+        };
+
+        var getTypeCallCount = 0;
+
+        fakeCodec.getType = function(field) {
+          var type = types[getTypeCallCount++];
+
+          assert.strictEqual(params[type], field);
+          return type;
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            unspecified: {
+              code: 0
+            },
+            bool: {
+              code: 1
+            },
+            int64: {
+              code: 2
+            },
+            float64: {
+              code: 3
+            },
+            timestamp: {
+              code: 4
+            },
+            date: {
+              code: 5
+            },
+            string: {
+              code: 6
+            },
+            bytes: {
+              code: 7
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should not overwrite existing type definitions', function(done) {
+        var query = {
+          params: {
+            test: 123
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        fakeCodec.getType = function() {
+          throw new Error('Should not be called');
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 6
+            }
+          });
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should set type to unspecified for unknown types', function(done) {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'unicorn'
+          }
+        };
+
+        fakeCodec.getType = function() {
+          throw new Error('Should not be called');
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 0
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should attempt to guess array types', function(done) {
+        var query = {
+          params: {
+            test: ['abc']
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'string'
+          };
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 8,
+              arrayElementType: {
+                code: 6
+              }
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should set the child to unspecified if unsure', function(done) {
+        var query = {
+          params: {
+            test: [null]
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'unicorn'
+          };
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 8,
+              arrayElementType: {
+                code: 0
+              }
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should delete the type map from the request options', function(done) {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        transaction.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.types, undefined);
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
     });
 
     it('should not require a transaction ID', function(done) {

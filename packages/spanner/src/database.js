@@ -476,6 +476,22 @@ Database.prototype.getSchema = function(callback) {
  * database.run(query, function(err, rows) {});
  *
  * //-
+ * // If you need to enforce a specific param type, a types map can be provided.
+ * // This is typically useful if your param value can be null.
+ * //-
+ * var query = {
+ *   sql: 'SELECT * FROM Singers WHERE name = @name',
+ *   params: {
+ *     name: 'Eddie Wilson'
+ *   },
+ *   types: {
+ *     name: 'string'
+ *   }
+ * };
+ *
+ * database.run(query, function(err, rows) {});
+ *
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * database.run(query).then(function(data) {
@@ -577,6 +593,25 @@ Database.prototype.run = function(query, options, callback) {
  *   .on('end', function() {});
  *
  * //-
+ * // If you need to enforce a specific param type, a types map can be provided.
+ * // This is typically useful if your param value can be null.
+ * //-
+ * var query = {
+ *   sql: 'SELECT * FROM Singers WHERE name = @name',
+ *   params: {
+ *     name: 'Eddie Wilson'
+ *   },
+ *   types: {
+ *     name: 'string'
+ *   }
+ * };
+ *
+ * database.runStream(query)
+ *   .on('error', function(err) {})
+ *   .on('data', function(row) {})
+ *   .on('end', function() {});
+ *
+ * //-
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
@@ -598,17 +633,57 @@ Database.prototype.runStream = function(query, options) {
     session: this.formattedName_
   });
 
+  var fields = {};
+
   if (reqOpts.params) {
-    var fields = {};
+    reqOpts.types = reqOpts.types || {};
 
     for (var prop in reqOpts.params) {
       var field = reqOpts.params[prop];
+
+      if (!reqOpts.types[prop]) {
+        reqOpts.types[prop] = codec.getType(field);
+      }
+
       fields[prop] = codec.encode(field);
     }
 
     reqOpts.params = {
       fields: fields
     };
+  }
+
+  if (reqOpts.types) {
+    var types = {};
+
+    for (var prop in reqOpts.types) {
+      var type = reqOpts.types[prop]
+      var child;
+
+      if (is.object(type)) {
+        child = codec.TYPES.indexOf(type.child);
+        type = type.type;
+      }
+
+      var code = codec.TYPES.indexOf(type);
+
+      if (code === -1) {
+        code = 0; // unspecified
+      }
+
+      types[prop] = { code: code };
+
+      if (child === -1) {
+        child = 0; // unspecified
+      }
+
+      if (is.number(child)) {
+        types[prop].arrayElementType = { code: child };
+      }
+    }
+
+    reqOpts.paramTypes = types;
+    delete reqOpts.types;
   }
 
   if (options) {

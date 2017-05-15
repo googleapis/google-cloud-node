@@ -858,7 +858,7 @@ var spanner = new Spanner(env);
       });
     });
 
-    describe.only('read', function() {
+    describe('read', function() {
       var table = database.table('ReadTestTable');
 
       var ALL_COLUMNS = [
