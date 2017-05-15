@@ -16,6 +16,7 @@
 
 'use strict';
 
+var fs = require('fs');
 var is = require('is');
 
 var promisify = require('@google-cloud/common').util.promisify;
@@ -61,8 +62,12 @@ module.exports = apiVersion => {
    *   A representation of the request being sent to the Vision API.
    * @param {Object=} request.image
    *   A dictionary-like object representing the image. This should have a
-   *   single key (`source`), which is another object containing `image_uri`
-   *   or `content`.
+   *   single key (`source`, `content`).
+   *
+   *   If the key is `source`, the value should be another object containing
+   *   `image_uri` or `filename` as a key and a string as a value.
+   *
+   *   If the key is `content`, the value should be a Buffer.
    * @param {Array} request.features
    *   An array of the specific annotation features being requested.
    * @param {Object=} options
@@ -99,6 +104,19 @@ module.exports = apiVersion => {
     if (is.undefined(callback) && is.function(options)) {
       callback = options;
       options = undefined;
+    }
+
+    // If there is no image, throw an exception.
+    if (is.undefined(request.image)) {
+      throw new Error('Attempted to call `annotateImage` with no image.');
+    }
+
+    // If we got a filename for the image, open the file and transform
+    // it to content.
+    if (request.image.source && request.image.source.filename) {
+      request.image = {
+        content: fs.readFileSync(request.image.source.filename),
+      };
     }
 
     // Call the GAPIC batch annotation function.
