@@ -352,11 +352,13 @@ SessionPool.prototype.requestStream = function(config) {
         return;
       }
 
+      var gaxOptions = config.reqOpts.gaxOptions;
+
       session = session_;
-
       config.reqOpts.session = session_.formattedName_;
+      delete config.reqOpts.gaxOptions;
 
-      requestStream = config.method(config.reqOpts);
+      requestStream = config.method(config.reqOpts, gaxOptions);
 
       requestStream
         .on('error', releaseSession)

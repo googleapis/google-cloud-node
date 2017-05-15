@@ -333,6 +333,104 @@ describe('TransactionRequest', function() {
       });
     });
 
+    describe('query.ranges', function() {
+      it('should encode/map the inputs', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'key',
+            endClosed: ['composite', 'key']
+          }]
+        };
+
+        var encodedValue = {};
+        var numEncodeRequests = 0;
+
+        fakeCodec.encode = function(key) {
+          var keys = ['key', 'composite', 'key'];
+
+          assert.strictEqual(key, keys[numEncodeRequests++]);
+          return encodedValue;
+        };
+
+        transactionRequest.requestStream = function(options) {
+          var expectedRanges = [
+            {
+              startOpen: {
+                values: [encodedValue]
+              },
+              endClosed: {
+                values: [encodedValue, encodedValue]
+              }
+            }
+          ];
+
+          assert.strictEqual(numEncodeRequests, 3);
+          assert.deepStrictEqual(options.reqOpts.keySet.ranges, expectedRanges);
+          done();
+        }
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should arrify query.ranges', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'start',
+            endClosed: 'end'
+          }]
+        };
+
+        var encodedValue = {};
+        var numEncodeRequests = 0;
+
+        fakeCodec.encode = function(key) {
+          assert.strictEqual(key, ['start', 'end'][numEncodeRequests++]);
+          return encodedValue;
+        };
+
+        transactionRequest.requestStream = function(options) {
+          var expectedRanges = [
+            {
+              startOpen: {
+                values: [encodedValue]
+              },
+              endClosed: {
+                values: [encodedValue]
+              }
+            }
+          ];
+
+          assert.strictEqual(numEncodeRequests, 2);
+          assert.deepStrictEqual(options.reqOpts.keySet.ranges, expectedRanges);
+          done();
+        };
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should remove the ranges property from the query', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'start',
+            endClosed: 'end'
+          }]
+        };
+
+        transactionRequest.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.ranges, undefined);
+          done();
+        };
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+    });
+
     describe('PartialResultStream', function() {
       it('should return PartialResultStream', function() {
         var stream = transactionRequest.createReadStream(TABLE, QUERY);

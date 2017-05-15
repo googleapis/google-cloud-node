@@ -918,6 +918,23 @@ describe('SessionPool', function() {
           .emit('reading');
       });
 
+      it('should respect gax options', function(done) {
+        var fakeGaxOptions = {};
+        var config = extend({}, CONFIG);
+
+        config.reqOpts.gaxOptions = fakeGaxOptions;
+
+        config.method = function(reqOpts, gaxOptions) {
+          assert.deepEqual(reqOpts, CONFIG.reqOpts);
+          assert.strictEqual(gaxOptions, fakeGaxOptions);
+          setImmediate(done);
+          return through.obj();
+        };
+
+        sessionPool.requestStream(config)
+          .emit('reading');
+      });
+
       it('should make request and pipe to the stream', function(done) {
         var responseData = new Buffer('response-data');
 

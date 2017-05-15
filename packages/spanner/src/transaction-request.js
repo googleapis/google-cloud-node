@@ -225,15 +225,32 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
     };
   }
 
+  if (query.keys || query.ranges) {
+    reqOpts.keySet = {};
+  }
+
   if (query.keys) {
-    reqOpts.keySet = {
-      keys: arrify(query.keys).map(function(key) {
-        return {
-          values: arrify(key).map(codec.encode)
-        };
-      })
-    };
+    reqOpts.keySet.keys = arrify(query.keys).map(function(key) {
+      return {
+        values: arrify(key).map(codec.encode)
+      };
+    });
     delete reqOpts.keys;
+  }
+
+  if (query.ranges) {
+    reqOpts.keySet.ranges = arrify(query.ranges).map(function(rawRange) {
+      var range = extend({}, rawRange);
+
+      for (var bound in range) {
+        range[bound] = {
+          values: arrify(range[bound]).map(codec.encode)
+        };
+      }
+
+      return range;
+    });
+    delete reqOpts.ranges;
   }
 
   function makeRequest(resumeToken) {

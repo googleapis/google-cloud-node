@@ -857,6 +857,340 @@ var spanner = new Spanner(env);
         });
       });
     });
+
+    describe.only('read', function() {
+      var table = database.table('ReadTestTable');
+
+      var ALL_COLUMNS = [
+        'Key',
+        'StringValue'
+      ];
+
+      before(function() {
+        return table.create(multiline.stripIndent(function() {/*
+            CREATE TABLE ReadTestTable (
+              Key STRING(MAX) NOT NULL,
+              StringValue STRING(MAX)
+            ) PRIMARY KEY (Key)
+          */}))
+          .then(onPromiseOperationComplete)
+          .then(function() {
+            return database.updateSchema(multiline.stripIndent(function() {/*
+              CREATE INDEX ReadByValue ON ReadTestTable(StringValue)
+            */}));
+          })
+          .then(onPromiseOperationComplete)
+          .then(function() {
+            var data = [];
+
+            for (var i = 0; i < 15; ++i) {
+              data.push({
+                Key: 'k' + i,
+                StringValue: 'v' + i
+              });
+            }
+
+            return table.insert(data);
+          });
+      });
+
+      // all of these tests require testing with and without an index,
+      // to cut back on duplication, the core sections of the tests have been
+      // turned into configurations
+      [
+        {
+          test: 'should perform an empty read',
+          query: {
+            ranges: [{
+              startClosed: 'k99',
+              endOpen: 'z'
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 0);
+          }
+        },
+        {
+          test: 'should read a single key',
+          query: {
+            keys: ['k1'],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+
+            var row = rows[0].toJSON();
+
+            assert.strictEqual(row.Key, 'k1');
+            assert.strictEqual(row.StringValue, 'v1');
+          }
+        },
+        {
+          test: 'should read a non-existant single key',
+          query: {
+            keys: ['k999'],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 0);
+          }
+        },
+        {
+          test: 'should read using partial keys',
+          query: {
+            ranges: [{
+              startClosed: 'k7',
+              endClosed: null
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+
+            assert.strictEqual(rows.length, 3);
+
+            rows = rows.map(function(row) {
+              return row.toJSON();
+            });
+
+            assert.strictEqual(rows[0].Key, 'k7');
+            assert.strictEqual(rows[1].Key, 'k8');
+            assert.strictEqual(rows[2].Key, 'k9');
+          }
+        },
+        {
+          test: 'should read using an open-open range',
+          query: {
+            ranges: [{
+              startOpen: 'k3',
+              endOpen: 'k5'
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+
+            var row = rows[0].toJSON();
+
+            assert.strictEqual(row.Key, 'k4');
+          }
+        },
+        {
+          test: 'should read using an open-closed range',
+          query: {
+            ranges: [{
+              startOpen: 'k3',
+              endClosed: 'k5'
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+
+            rows = rows.map(function(row) {
+              return row.toJSON();
+            });
+
+            assert.strictEqual(rows[0].Key, 'k4');
+            assert.strictEqual(rows[1].Key, 'k5');
+          }
+        },
+        {
+          test:'should read using a closed-closed range',
+          query: {
+            ranges: [{
+              startClosed: 'k3',
+              endClosed: 'k5'
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 3);
+
+            rows = rows.map(function(row) {
+              return row.toJSON();
+            });
+
+            assert.strictEqual(rows[0].Key, 'k3');
+            assert.strictEqual(rows[1].Key, 'k4');
+            assert.strictEqual(rows[2].Key, 'k5');
+          }
+        },
+        {
+          test: 'should read using a closed-open range',
+          query: {
+            ranges: [{
+              startClosed: 'k3',
+              endOpen: 'k5'
+            }],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+
+            rows = rows.map(function(row) {
+              return row.toJSON();
+            });
+
+            assert.strictEqual(rows[0].Key, 'k3');
+            assert.strictEqual(rows[1].Key, 'k4');
+          }
+        },
+        {
+          test: 'should accept a limit',
+          query: {
+            ranges: [{
+              startClosed: 'k3',
+              endClosed: 'k7'
+            }],
+            columns: ALL_COLUMNS,
+            limit: 2
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+          }
+        },
+        {
+          test: 'should ignore limits of 0',
+          query: {
+            ranges: [{
+              startClosed: 'k3',
+              endClosed: 'k7'
+            }],
+            columns: ALL_COLUMNS,
+            limit: 0
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 5);
+          }
+        },
+        {
+          test: 'should read using point keys',
+          query: {
+            keys: ['k3', 'k5', 'k7'],
+            columns: ALL_COLUMNS
+          },
+          assertions: function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 3);
+
+            rows = rows.map(function(row) {
+              return row.toJSON();
+            });
+
+            assert.strictEqual(rows[0].Key, 'k3');
+            assert.strictEqual(rows[1].Key, 'k5');
+            assert.strictEqual(rows[2].Key, 'k7');
+          }
+        }
+      ].forEach(function(test) {
+        // test normally
+        it(test.test, function(done) {
+          table.read(test.query, function(err, rows) {
+            test.assertions(err, rows);
+            done();
+          });
+        });
+
+        // test using an index
+        it(test.test + ' with an index', function(done) {
+          var query = extend({
+            index: 'ReadByValue'
+          }, test.query);
+
+          if (query.keys) {
+            query.keys = query.keys.map(function(key) {
+              return key.replace('k', 'v');
+            });
+          }
+
+          if (query.ranges) {
+            query.ranges = query.ranges.map(function(range_) {
+              var range = extend({}, range_);
+
+              Object.keys(range).forEach(function(bound) {
+                if (range[bound]) {
+                  range[bound] = range[bound].replace('k', 'v');
+                }
+              });
+
+              return range;
+            });
+          }
+
+          table.read(query, function(err, rows) {
+            test.assertions(err, rows);
+            done();
+          });
+        });
+      });
+
+      it('should read over invalid database fails', function(done) {
+        var database = instance.database(generateName('invalid'));
+        var table = database.table('ReadTestTable');
+
+        var query = {
+          keys: ['k1'],
+          columns: ALL_COLUMNS
+        };
+
+        table.read(query, function(err) {
+          assert.strictEqual(err.code, 5);
+          done();
+        });
+      });
+
+      it('should read over invalid table fails', function(done) {
+        var table = database.table('ReadTestTablezzz');
+
+        var query = {
+          keys: ['k1'],
+          columns: ALL_COLUMNS
+        };
+
+        table.read(query, function(err) {
+          assert.strictEqual(err.code, 5);
+          done();
+        });
+      });
+
+      it('should read over invalid column fails', function(done) {
+        var query = {
+          keys: ['k1'],
+          columns: ['ohnoes']
+        };
+
+        table.read(query, function(err) {
+          assert.strictEqual(err.code, 5);
+          done();
+        });
+      });
+
+      it('should fail if deadline exceeds', function(done) {
+        var query = {
+          keys: ['k1'],
+          columns: ALL_COLUMNS,
+          gaxOptions: {
+            timeout: 10
+          }
+        };
+
+        table.read(query, function(err) {
+          assert.strictEqual(err.code, 4);
+          done();
+        });
+      });
+    });
   });
 
   describe('SessionPool', function() {
