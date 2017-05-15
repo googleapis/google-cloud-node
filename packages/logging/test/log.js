@@ -723,43 +723,5 @@ describe('Log', function() {
         done();
       });
     });
-
-    it('should return extended entry with default resource', function(done) {
-      var entry = new FakeEntry();
-      entry.toJSON = function() {
-        return toJSONResponse;
-      };
-
-      var entryWithDefaultResource = {};
-
-      log.metadata_.assignDefaultResource = function(entryJson, callback) {
-        assert.strictEqual(entryJson, toJSONResponse);
-        callback(null, entryWithDefaultResource);
-      };
-
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], entryWithDefaultResource);
-        done();
-      });
-    });
-
-    it('should return original entry without resource', function(done) {
-      var entry = new Entry();
-      entry.toJSON = function() {
-        return toJSONResponse;
-      };
-
-      log.metadata_.assignDefaultResource = function(entryJson, callback) {
-        assert.strictEqual(entryJson, toJSONResponse);
-        callback();
-      };
-
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], toJSONResponse);
-        done();
-      });
-    });
   });
 });

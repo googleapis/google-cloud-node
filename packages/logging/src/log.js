@@ -647,10 +647,7 @@ Log.prototype.decorateEntries_ = function(entries, callback) {
       return;
     }
 
-    self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
-      // Ignore errors (the API will speak up if it has an issue).
-      callback(null, entry || decoratedEntry);
-    });
+    callback(null, decoratedEntry);
   }, callback);
 };
 
