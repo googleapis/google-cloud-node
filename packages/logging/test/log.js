@@ -326,14 +326,40 @@ describe('Log', function() {
 
   describe('write', function() {
     var ENTRY = {};
-    var OPTIONS = {
-      resource: {}
-    };
+    var OPTIONS = {};
+    var FAKE_RESOURCE = 'fake-resource';
 
     beforeEach(function() {
       log.decorateEntries_ = function(entries, callback) {
         callback(null, entries);
       };
+      log.metadata_.getDefaultResource = function(callback) {
+        callback(null, FAKE_RESOURCE);
+      }
+    });
+
+    it('should forward options.resource to request', function(done) {
+      var CUSTOM_RESOURCE = 'custom-resource';
+      var optionsWithResource = extend({}, OPTIONS, {
+        resource: CUSTOM_RESOURCE
+      });
+
+      log.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'writeLogEntries');
+
+        assert.deepEqual(config.reqOpts, {
+          logName: log.formattedName_,
+          entries: [ENTRY],
+          resource: CUSTOM_RESOURCE
+        });
+
+        assert.strictEqual(config.gaxOpts, undefined);
+
+        callback();
+      };
+
+      log.write(ENTRY, optionsWithResource, done);
     });
 
     it('should make the correct API request', function(done) {
@@ -344,7 +370,7 @@ describe('Log', function() {
         assert.deepEqual(config.reqOpts, {
           logName: log.formattedName_,
           entries: [ENTRY],
-          resource: {}
+          resource: FAKE_RESOURCE
         });
 
         assert.strictEqual(config.gaxOpts, undefined);

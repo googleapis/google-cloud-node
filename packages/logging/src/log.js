@@ -589,23 +589,35 @@ Log.prototype.write = function(entry, options, callback) {
     options = {};
   }
 
-  this.decorateEntries_(arrify(entry), function(err, decoratedEntries) {
-    // Ignore errors (the API will speak up if it has an issue).
+  if (!options.resource) {
+    this.metadata_.getDefaultResource(function(err, resource) {
+      // Ignore errors (the API will speak up it has an issue).
+      writeWithResource(resource);
+    });
+  } else {
+    writeWithResource(options.resource);
+  }
 
-    var reqOpts = extend({
-      logName: self.formattedName_,
-      entries: decoratedEntries
-    }, options);
+  function writeWithResource(resource) {
+    self.decorateEntries_(arrify(entry), function(err, decoratedEntries) {
+      // Ignore errors (the API will speak up if it has an issue).
 
-    delete reqOpts.gaxOptions;
+      var reqOpts = extend({
+        logName: self.formattedName_,
+        entries: decoratedEntries,
+        resource: resource
+      }, options);
 
-    self.logging.request({
-      client: 'loggingServiceV2Client',
-      method: 'writeLogEntries',
-      reqOpts: reqOpts,
-      gaxOpts: options.gaxOptions
-    }, callback);
-  });
+      delete reqOpts.gaxOptions;
+
+      self.logging.request({
+        client: 'loggingServiceV2Client',
+        method: 'writeLogEntries',
+        reqOpts: reqOpts,
+        gaxOpts: options.gaxOptions
+      }, callback);
+    });
+  }
 };
 
 /**
