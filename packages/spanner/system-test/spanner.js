@@ -21,6 +21,7 @@ var async = require('async');
 var concat = require('concat-stream');
 var exec = require('methmeth');
 var extend = require('extend');
+var is = require('is');
 var multiline = require('multiline');
 var uuid = require('uuid');
 
@@ -797,17 +798,826 @@ var spanner = new Spanner(env);
           });
       });
 
-      it('should query with query parameters', function(done) {
-        database.run({
-          sql: 'SELECT * FROM Singers WHERE Float > @float AND Int > @int',
-          params: {
-            float: FLOAT - 1,
-            int: INT - 1
-          }
-        }, function(err, rows) {
-          assert.ifError(err);
-          assert.deepEqual(rows.shift().toJSON(), EXPECTED_ROW);
+      it('should allow "SELECT 1" queries', function(done) {
+        database.run('SELECT 1', done);
+      });
+
+      it('should fail invalid queries', function(done) {
+        database.run('SELECT Apples AND Oranges', function(err) {
+          assert.strictEqual(err.code, 3);
           done();
+        });
+      });
+
+      it('should query an array of structs', function(done) {
+        var query = multiline.stripIndent(function() {/*
+          SELECT ARRAY(SELECT AS STRUCT C1, C2
+            FROM (SELECT 'a' AS C1, 1 AS C2 UNION ALL SELECT 'b' AS C1, 2 AS C2)
+            ORDER BY C1 ASC)
+        */});
+
+        database.run(query, function(err, rows) {
+          assert.ifError(err);
+
+          var values = rows[0][0].value;
+          assert.strictEqual(values.length, 2);
+
+          assert.strictEqual(values[0][0].value, 'a');
+          assert.deepEqual(values[0][1].value, { value: 1 });
+
+          assert.strictEqual(values[1][0].value, 'b');
+          assert.deepEqual(values[1][1].value, { value: 2 });
+
+          done();
+        });
+      });
+
+      it('should query an empty array of structs', function(done) {
+        var query = multiline.stripIndent(function() {/*
+          SELECT ARRAY(SELECT AS STRUCT * FROM (SELECT 'a', 1) WHERE 0 = 1)
+        */});
+
+        database.run(query, function(err, rows) {
+          assert.ifError(err);
+          assert.strictEqual(rows[0][0].value.length, 0);
+          done();
+        });
+      });
+
+      describe('params', function() {
+        describe('boolean', function() {
+          it('should bind the value', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: true
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, true);
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'bool'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [false, true, false];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'bool'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'bool'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+        });
+
+        describe('int64', function() {
+          it('should bind the value', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: 1234
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value.value, '1234');
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'int64'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [1, 2, 3, null];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+
+              var expected = values.map(function(val) {
+                return is.number(val) ? { value: val } : val;
+              });
+
+              assert.deepEqual(rows[0][0].value, expected);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'int64'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'int64'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+        });
+
+        describe('float64', function() {
+          it('should bind the value', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: 2.2
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value.value, 2.2);
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'float64'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [null, 1.1, 2.3, 3.5, null];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+
+              var expected = values.map(function(val) {
+                return is.number(val) ? { value: val } : val;
+              });
+
+              assert.deepEqual(rows[0][0].value, expected);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'float64'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'float64'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind Infinity', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: Infinity
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value.value, 'Infinity');
+              done();
+            });
+          });
+
+          it('should bind -Infinity', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: -Infinity
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value.value, '-Infinity');
+              done();
+            });
+          });
+
+          it('should bind NaN', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: NaN
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value.value, 'NaN');
+              done();
+            });
+          });
+
+          it('should bind an array of Infinity and NaN', function(done) {
+            var values = [Infinity, -Infinity, NaN];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+
+              var expected = values.map(function(val) {
+                return is.number(val) ? { value: val + '' } : val;
+              });
+
+              assert.deepEqual(rows[0][0].value, expected);
+              done();
+            });
+          });
+        });
+
+        describe('string', function() {
+          it('should bind the value', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: 'abc'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, 'abc');
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'string'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = ['a', 'b', 'c', null];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'string'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'string'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+        });
+
+        describe('bytes', function() {
+          it('should bind the value', function(done) {
+            var buffer = new Buffer('abc');
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: buffer
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, buffer);
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'bytes'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [
+              new Buffer('a'),
+              new Buffer('b'),
+              null
+            ];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'bytes'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'bytes'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+        });
+
+        describe('timestamp', function() {
+          it('should bind the value', function(done) {
+            var timestamp = new Date();
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: timestamp
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, timestamp);
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'timestamp'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [
+              new Date(),
+              new Date('3-3-1999'),
+              null
+            ];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'timestamp'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'timestamp'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+        });
+
+        describe('date', function() {
+          it('should bind the value', function(done) {
+            var date = spanner.date();
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: date
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+
+              var returnedDate = spanner.date(rows[0][0].value);
+              assert.deepEqual(returnedDate, date);
+
+              done();
+            });
+          });
+
+          it('should allow for null values', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: 'date'
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.strictEqual(rows[0][0].value, null);
+              done();
+            });
+          });
+
+          it('should bind arrays', function(done) {
+            var values = [
+              spanner.date(),
+              spanner.date(new Date('3-3-1999')),
+              null
+            ];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+
+              var returnedValues = rows[0][0].value.map(function(val) {
+                return is.nil(val) ? val : spanner.date(val);
+              });
+
+              assert.deepEqual(returnedValues, values);
+              done();
+            });
+          });
+
+          it('should bind empty arrays', function(done) {
+            var values = [];
+
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: values
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'date'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, values);
+              done();
+            });
+          });
+
+          it('should bind null arrays', function(done) {
+            var query = {
+              sql: 'SELECT @v',
+              params: {
+                v: null
+              },
+              types: {
+                v: {
+                  type: 'array',
+                  child: 'date'
+                }
+              }
+            };
+
+            database.run(query, function(err, rows) {
+              assert.ifError(err);
+              assert.deepEqual(rows[0][0].value, null);
+              done();
+            });
+          });
         });
       });
     });
