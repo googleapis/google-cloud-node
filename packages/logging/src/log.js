@@ -591,7 +591,7 @@ Log.prototype.write = function(entry, options, callback) {
 
   if (!options.resource) {
     this.metadata_.getDefaultResource(function(err, resource) {
-      // Ignore errors (the API will speak up it has an issue).
+      // Ignore errors (the API will speak up if it has an issue).
       writeWithResource(resource);
     });
   } else {
@@ -599,56 +599,51 @@ Log.prototype.write = function(entry, options, callback) {
   }
 
   function writeWithResource(resource) {
-    self.decorateEntries_(arrify(entry), function(err, decoratedEntries) {
+    var decoratedEntries;
+    try {
+      decoratedEntries = self.decorateEntries_(arrify(entry));
+    } catch (err) {
       // Ignore errors (the API will speak up if it has an issue).
+    }
 
-      var reqOpts = extend({
-        logName: self.formattedName_,
-        entries: decoratedEntries,
-        resource: resource
-      }, options);
+    var reqOpts = extend({
+      logName: self.formattedName_,
+      entries: decoratedEntries,
+      resource: resource
+    }, options);
 
-      delete reqOpts.gaxOptions;
+    delete reqOpts.gaxOptions;
 
-      self.logging.request({
-        client: 'loggingServiceV2Client',
-        method: 'writeLogEntries',
-        reqOpts: reqOpts,
-        gaxOpts: options.gaxOptions
-      }, callback);
-    });
+    self.logging.request({
+      client: 'loggingServiceV2Client',
+      method: 'writeLogEntries',
+      reqOpts: reqOpts,
+      gaxOpts: options.gaxOptions
+    }, callback);
   }
 };
 
 /**
- * All entries are passed through here to make sure this log is attached to the
- * entry.
+ * All entries are passed through here in order to get them serialized.
  *
  * @private
  *
- * @param {object} entry - An entry object.
+ * @param {object[]} entries - array of entry objects
+ * @return {object[]} serialized entries.
+ * @throws if there is an error during serialization.
  */
-Log.prototype.decorateEntries_ = function(entries, callback) {
+Log.prototype.decorateEntries_ = function(entries) {
   var self = this;
 
-  async.map(entries, function(entry, callback) {
+  return entries.map(function(entry) {
     if (!(entry instanceof Entry)) {
       entry = self.entry(entry);
     }
 
-    var decoratedEntry;
-
-    try {
-      decoratedEntry = entry.toJSON({
-        removeCircular: self.removeCircular_
-      });
-    } catch(e) {
-      callback(e);
-      return;
-    }
-
-    callback(null, decoratedEntry);
-  }, callback);
+    return entry.toJSON({
+      removeCircular: self.removeCircular_
+    });
+  });
 };
 
 /*! Developer Documentation
