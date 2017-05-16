@@ -19,6 +19,7 @@
 var assert = require('assert');
 var async = require('async');
 var concat = require('concat-stream');
+var crypto = require('crypto');
 var exec = require('methmeth');
 var extend = require('extend');
 var is = require('is');
@@ -1977,6 +1978,108 @@ var spanner = new Spanner(env);
               assert.deepEqual(rows[0][0].value, null);
               done();
             });
+          });
+        });
+      });
+
+      describe('large reads', function() {
+        var table = database.table('LargeReads');
+
+        var expectedRow = {
+          Key: generateName('key'),
+          StringValue: string(),
+          StringArray: [string(), string(), string(), string()],
+          BytesValue: bytes(),
+          BytesArray: [bytes(), bytes(), bytes(), bytes()]
+        };
+
+        function string() {
+          var offset = Math.floor(Math.random() * 500);
+
+          return Array(25000 + offset)
+            .fill('The quick brown fox jumps over the lazy dog.')
+            .join('\n');
+        }
+
+        function bytes() {
+          var offset = Math.floor(Math.random() * 2048);
+
+          return crypto.randomBytes(1024 * 1024 + offset);
+        }
+
+        function base64ToBuffer(bytes) {
+          return new Buffer(bytes, 'base64');
+        }
+
+        before(function() {
+          return table.create(multiline.stripIndent(function() {/*
+            CREATE TABLE LargeReads (
+              Key STRING(MAX) NOT NULL,
+              StringValue STRING(MAX),
+              StringArray ARRAY<STRING(MAX)>,
+              BytesValue BYTES(MAX),
+              BytesArray ARRAY<BYTES(MAX)>
+            ) PRIMARY KEY (Key)
+          */}))
+          .then(onPromiseOperationComplete)
+          .then(function() {
+            return table.insert(expectedRow);
+          });
+        });
+
+        it('should read large datasets', function(done) {
+          table.read({
+            keys: [expectedRow.Key],
+            columns: [
+              'Key',
+              'StringValue',
+              'StringArray',
+              'BytesValue',
+              'BytesArray'
+            ]
+          }, function(err, rows) {
+            assert.ifError(err);
+
+            var row = rows[0].toJSON();
+
+            assert.strictEqual(row.Key, expectedRow.Key);
+            assert.strictEqual(row.StringValue, expectedRow.StringValue);
+            assert.deepEqual(row.StringArray, expectedRow.StringArray);
+
+            row.BytesValue = base64ToBuffer(row.BytesValue);
+            row.BytesArray = row.BytesArray.map(base64ToBuffer);
+
+            assert.deepEqual(row.BytesValue, expectedRow.BytesValue);
+            assert.deepEqual(row.BytesArray, expectedRow.BytesArray);
+
+            done();
+          });
+        });
+
+        it('should query large datasets', function(done) {
+          var query = {
+            sql: 'SELECT * FROM ' + table.name + ' WHERE Key = @key',
+            params: {
+              key: expectedRow.Key
+            }
+          };
+
+          database.run(query, function(err, rows) {
+            assert.ifError(err);
+
+            var row = rows[0].toJSON();
+
+            assert.strictEqual(row.Key, expectedRow.Key);
+            assert.strictEqual(row.StringValue, expectedRow.StringValue);
+            assert.deepEqual(row.StringArray, expectedRow.StringArray);
+
+            row.BytesValue = base64ToBuffer(row.BytesValue);
+            row.BytesArray = row.BytesArray.map(base64ToBuffer);
+
+            assert.deepEqual(row.BytesValue, expectedRow.BytesValue);
+            assert.deepEqual(row.BytesArray, expectedRow.BytesArray);
+
+            done();
           });
         });
       });
