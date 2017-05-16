@@ -9,7 +9,11 @@
 This module provides Stackdriver Error Reporting support for Node.js applications.
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
-applications running in almost any environment. Here's an introductory video:
+applications running in almost any environment. 
+
+![Stackdriver Error Reporting overview](doc/images/errors-overview.png)
+
+Here's an introductory video that provides some more details:
 
 [![Learn about Error Reporting in Stackdriver](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
 
@@ -212,13 +216,13 @@ var app = koa();
 app.use(errors.koa);
 
 app.use(function *(next) {
-	//This will set status and message
-	this.throw('Error Message', 500);
+  //This will set status and message
+  this.throw('Error Message', 500);
 });
 
 // response
 app.use(function *(){
-	this.body = 'Hello World';
+  this.body = 'Hello World';
 });
 
 app.listen(3000);
