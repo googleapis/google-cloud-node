@@ -144,6 +144,21 @@ describe('TransactionRequest', function() {
     });
   });
 
+  describe('fromProtoTimestamp_', function() {
+    it('should format into a date object', function() {
+      var now = new Date();
+
+      var protoTimestamp = {
+        seconds: Math.floor(now.getTime() / 1000),
+        nanos: now.getMilliseconds() * 1e6
+      };
+
+      var date = TransactionRequest.fromProtoTimestamp_(protoTimestamp);
+
+      assert.deepEqual(date, now);
+    });
+  });
+
   describe('createReadStream', function() {
     var TABLE = 'table-name';
     var QUERY = {};

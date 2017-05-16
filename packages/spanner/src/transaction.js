@@ -169,7 +169,9 @@ Transaction.prototype.begin = function(callback) {
     };
   } else {
     options = {
-      readOnly: this.options
+      readOnly: extend({
+        returnReadTimestamp: true
+      }, this.options)
     };
   }
 
@@ -188,6 +190,12 @@ Transaction.prototype.begin = function(callback) {
 
     self.id = resp.id;
     self.metadata = resp;
+
+    if (resp.readTimestamp) {
+      self.readTimestamp = TransactionRequest.fromProtoTimestamp_(
+        resp.readTimestamp
+      );
+    }
 
     callback(null, resp);
   });
@@ -295,7 +303,10 @@ Transaction.prototype.requestStream = function(config) {
     session: this.session.formattedName_
   }, config.reqOpts);
 
-  return config.method(reqOpts);
+  var gaxOptions = reqOpts.gaxOptions;
+  delete reqOpts.gaxOptions;
+
+  return config.method(reqOpts, gaxOptions);
 };
 
 /**
@@ -562,7 +573,7 @@ Transaction.prototype.runStream = function(query) {
     reqOpts.transaction.id = this.id;
   } else {
     reqOpts.transaction.singleUse = {
-      readOnly: this.options || {}
+      readOnly: extend({}, this.options, options)
     };
   }
 
@@ -597,6 +608,9 @@ Transaction.prototype.createRetryDelay_ = function() {
  * Let the client know you're done with a particular transaction. This should
  * only be called for read-only transactions.
  *
+ * @param {function=} callback - Optional callback function to be called after
+ *     transaction has ended.
+ *
  * @example
  * var options = {
  *   readOnly: true
@@ -617,11 +631,15 @@ Transaction.prototype.createRetryDelay_ = function() {
  *   });
  * });
  */
-Transaction.prototype.end = function() {
+Transaction.prototype.end = function(callback) {
   this.queuedMutations_ = [];
   this.retries_ = 0;
   this.runFn_ = null;
   delete this.id;
+
+  if (is.fn(callback)) {
+    callback();
+  }
 };
 
 /**

@@ -809,7 +809,11 @@ describe('Database', function() {
       };
 
       database.pool_.requestStream = function(options) {
-        assert.deepEqual(options.reqOpts.transaction.begin, FORMATTED_OPTIONS);
+        assert.deepEqual(
+          options.reqOpts.transaction.singleUse.readOnly,
+          FORMATTED_OPTIONS
+        );
+
         done();
       };
 

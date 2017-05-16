@@ -688,7 +688,9 @@ Database.prototype.runStream = function(query, options) {
 
   if (options) {
     reqOpts.transaction = {
-      begin: TransactionRequest.formatTimestampOptions_(options)
+      singleUse: {
+        readOnly: TransactionRequest.formatTimestampOptions_(options)
+      }
     };
   }
 

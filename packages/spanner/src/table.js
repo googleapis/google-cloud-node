@@ -188,7 +188,9 @@ Table.prototype.createReadStream = function(query, options) {
 
   if (options) {
     query.transaction = {
-      begin: TransactionRequest.formatTimestampOptions_(options)
+      singleUse: {
+        readOnly: TransactionRequest.formatTimestampOptions_(options)
+      }
     };
   }
 
@@ -347,10 +349,10 @@ Table.prototype.insert = function(keyVals, callback) {
  *     be yielded. If using a composite key, provide an array within this array.
  *     See the example below.
  * @param {string=} query.index - The name of an index on the table.
+ * @param {number} query.limit - The number of rows to return.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
- * @param {number} query.limit - The number of rows to return.
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
  *     that is `exactStaleness` old.

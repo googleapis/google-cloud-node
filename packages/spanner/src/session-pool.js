@@ -404,9 +404,9 @@ SessionPool.prototype.createTransaction_ = function(session, options) {
   var transaction = session.transaction(options);
   var end = transaction.end.bind(transaction);
 
-  transaction.end = function() {
+  transaction.end = function(callback) {
     self.release(session);
-    end();
+    end(callback);
   };
 
   return transaction;

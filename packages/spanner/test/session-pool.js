@@ -1111,13 +1111,14 @@ describe('SessionPool', function() {
       assert.strictEqual(transaction, TRANSACTION);
     });
 
-    it('should release the session when destroyed', function() {
+    it('should release the session when destroyed', function(done) {
       var destroyed = false;
       var released = false;
 
-      TRANSACTION.end = function() {
+      TRANSACTION.end = function(callback) {
         assert.strictEqual(this, TRANSACTION);
         destroyed = true;
+        setImmediate(done);
       };
 
       sessionPool.release = function(session) {
@@ -1126,7 +1127,7 @@ describe('SessionPool', function() {
       };
 
       var transaction = sessionPool.createTransaction_(SESSION);
-      transaction.end();
+      transaction.end(done);
 
       assert.strictEqual(destroyed, true);
       assert.strictEqual(released, true);

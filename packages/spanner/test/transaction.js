@@ -262,6 +262,28 @@ describe('Transaction', function() {
           done();
         });
       });
+
+      it('should set the timestamp if applicable', function(done) {
+        var fakeProtoTimestamp = {};
+        var fakeDate = new Date();
+
+        transaction.request = function(config, callback) {
+          callback(null, extend({
+            readTimestamp: fakeProtoTimestamp
+          }, API_RESPONSE));
+        };
+
+        FakeTransactionRequest.fromProtoTimestamp_ = function(value) {
+          assert.strictEqual(value, fakeProtoTimestamp);
+          return fakeDate;
+        };
+
+        transaction.begin(function(err, apiResponse) {
+          assert.ifError(err);
+          assert.strictEqual(transaction.readTimestamp, fakeDate);
+          done();
+        });
+      });
     });
   });
 
@@ -453,6 +475,26 @@ describe('Transaction', function() {
 
       var returnValue = transaction.requestStream(config);
       assert.strictEqual(returnValue, methodReturnValue);
+    });
+
+    it('should support gaxOptions', function(done) {
+      var fakeGaxOptions = {};
+
+      var fakeReqOpts = {
+        a: 'a',
+        gaxOptions: fakeGaxOptions
+      };
+
+      var config = {
+        reqOpts: fakeReqOpts,
+        method: function(reqOpts, gaxOptions) {
+          assert.strictEqual(reqOpts.gaxOptions, undefined);
+          assert.deepEqual(gaxOptions, fakeGaxOptions);
+          done();
+        }
+      };
+
+      transaction.requestStream(config);
     });
   });
 
@@ -1004,6 +1046,10 @@ describe('Transaction', function() {
       transaction.end();
 
       assert.strictEqual(transaction.id, undefined);
+    });
+
+    it('should optionally execute a callback', function(done) {
+      transaction.end(done);
     });
   });
 
