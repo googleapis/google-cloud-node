@@ -628,8 +628,8 @@ Log.prototype.write = function(entry, options, callback) {
  *
  * @private
  *
- * @param {object[]} entries - array of entry objects
- * @return {object[]} serialized entries.
+ * @param {object[]} entries - Entry objects.
+ * @return {object[]} Serialized entries.
  * @throws if there is an error during serialization.
  */
 Log.prototype.decorateEntries_ = function(entries) {
