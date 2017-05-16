@@ -26,7 +26,7 @@ Google Cloud Platform provides container resources such as Organizations and Pro
 
         yarn install
 
-[prereq]: ../README.md#prerequisities
+[prereq]: ../README.md#prerequisites
 [run]: ../README.md#how-to-run-a-sample
 
 ## Samples
