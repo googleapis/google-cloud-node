@@ -26,7 +26,7 @@ The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integr
 
         yarn install
 
-[prereq]: ../README.md#prerequisities
+[prereq]: ../README.md#prerequisites
 [run]: ../README.md#how-to-run-a-sample
 
 ## Samples
