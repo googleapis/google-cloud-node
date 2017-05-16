@@ -26,19 +26,21 @@ var RowBuilderCached = extend({}, RowBuilder);
 describe('RowBuilder', function() {
   var rowBuilder;
 
+  var METADATA = {
+    rowType: {
+      fields: []
+    }
+  };
+
   var CHUNKS = [
     {
-      metadata: {
-        rowType: {
-          fields: []
-        }
-      }
+      metadata: METADATA
     }
   ];
 
   beforeEach(function() {
     extend(RowBuilder, RowBuilderCached);
-    rowBuilder = new RowBuilder(CHUNKS);
+    rowBuilder = new RowBuilder(METADATA, CHUNKS);
   });
 
   describe('acceptance tests', function() {
@@ -46,8 +48,9 @@ describe('RowBuilder', function() {
 
     TESTS.forEach(function(test) {
       it('should pass acceptance test: ' + test.name, function() {
+        var metadata = JSON.parse(test.chunks[0]).metadata;
         var chunkJson = JSON.parse('[' + test.chunks.join() + ']');
-        var builder = new RowBuilder(chunkJson);
+        var builder = new RowBuilder(metadata, chunkJson);
 
         builder.build();
 
@@ -86,6 +89,40 @@ describe('RowBuilder', function() {
 
       rowBuilder.rows.push(rows[1]);
       assert.strictEqual(rowBuilder.currentRow, rows[1]);
+    });
+  });
+
+  describe('getValue', function() {
+    it('should do nothing to plain values', function() {
+      var value = 'hi';
+
+      assert.strictEqual(RowBuilder.getValue(value), value);
+    });
+
+    it('should detect value objects', function() {
+      var value = {
+        kind: 'stringValue',
+        stringValue: 'hi'
+      };
+
+      assert.strictEqual(RowBuilder.getValue(value), value.stringValue);
+    });
+
+    it('should detect value objects containing arrays', function() {
+      var value = {
+        kind: 'listValue',
+        listValue: {
+          values: [{}, {}]
+        }
+      };
+
+      assert.strictEqual(RowBuilder.getValue(value), value.listValue.values);
+    });
+
+    it('should accept null values', function() {
+      var value = null;
+
+      assert.strictEqual(RowBuilder.getValue(value), value);
     });
   });
 
