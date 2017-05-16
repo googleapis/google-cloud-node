@@ -26,7 +26,7 @@ The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynami
 
         yarn install
 
-[prereq]: ../README.md#prerequisities
+[prereq]: ../README.md#prerequisites
 [run]: ../README.md#how-to-run-a-sample
 
 ## Samples
