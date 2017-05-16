@@ -28,7 +28,7 @@
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.13",
+    "@google-cloud/nodejs-repo-tools": "1.4.14",
     "ava": "0.19.1",
     "proxyquire": "1.7.11",
     "sinon": "2.1.0"
