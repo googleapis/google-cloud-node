@@ -573,7 +573,7 @@ Transaction.prototype.runStream = function(query) {
     reqOpts.transaction.id = this.id;
   } else {
     reqOpts.transaction.singleUse = {
-      readOnly: extend({}, this.options, options)
+      readOnly: this.options || {}
     };
   }
 
