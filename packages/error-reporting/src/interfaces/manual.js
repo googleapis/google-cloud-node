@@ -74,6 +74,13 @@ function handlerSetup(client, config) {
     }
 
     if (err instanceof ErrorMessage) {
+      // The API expects the error to contain a stack trace, but the
+      // user does not explicitly provide one.  Instead, the code below
+      // creates an error with the user supplied message and updates
+      // the stack trace to not include the second line of the stack trace
+      // since that line only involves the internals of the error-reporting
+      // library.  The stack trace without the error-reporting internals
+      // is then used as the stack trace for the message.
       var fauxError = new Error(err.message);
       var fullStack = fauxError.stack.split('\n');
       var cleanedStack = fullStack.slice(0, 1).concat(fullStack.slice(2)).join('\n');
