@@ -124,32 +124,6 @@ Metadata.getGlobalDescriptor = function(projectId) {
 };
 
 /**
- * Assigns an entry with a default resource object.
- *
- * @param {object} entryJson - The entry object to assign a resource to.
- * @param {function} callback - The callback function.
- */
-Metadata.prototype.assignDefaultResource = function(entryJson, callback) {
-  if (entryJson.resource) {
-    setImmediate(function() {
-      callback(null, entryJson);
-    });
-    return;
-  }
-
-  this.getDefaultResource(function(err, resource) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    entryJson.resource = resource;
-
-    callback(null, entryJson);
-  });
-};
-
-/**
  * Retrieve a resource object describing the current environment.
  *
  * @param {function} callback - The callback function.
