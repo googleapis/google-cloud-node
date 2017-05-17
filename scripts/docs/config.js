@@ -39,6 +39,7 @@ module.exports = {
     'spanner/src/session.js',
     'spanner/src/transaction-request.js',
     'storage/src/acl.js'
+    'videointelligence',
   ],
   OVERVIEW_TEMPLATE: 'templates/overview.html',
   OVERVIEW: {
