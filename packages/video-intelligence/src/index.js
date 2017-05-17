@@ -50,5 +50,5 @@ function videointelligenceV1beta1(opts) {
 
 // The default export should be the latest version.
 // Assign all versions as version properties on the default.
-module.exports = videointelligence_v1beta1;
+module.exports = videointelligenceV1beta1;
 module.exports.v1beta1 = videointelligenceV1beta1;
