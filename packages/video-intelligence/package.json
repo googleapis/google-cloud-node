@@ -22,6 +22,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
+    "publish-module": "node ../../scripts/publish.js video-intelligence",
     "test": "mocha"
   }
 }
