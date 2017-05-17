@@ -101,7 +101,7 @@ var gcloud = require('google-cloud');
 ```
 
 
-### Elsewhere
+### Elsewhere (ie, where do I get keyfile.json?)
 
 If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
 
