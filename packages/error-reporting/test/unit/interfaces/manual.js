@@ -142,7 +142,7 @@ describe('Manual handler', function() {
     it('Should accept builder inst as only argument', function() {
       var msg = 'test';
       var r = report(new ErrorMessage().setMessage(msg));
-      assert.strictEqual(r.message, msg,
+      assert(r.message.startsWith('Error: ' + msg),
         'string message should propagate from error message inst');
     });
     it('Should accept builder and request as arguments', function() {
@@ -153,7 +153,7 @@ describe('Manual handler', function() {
         new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
         newReq
      );
-      assert.strictEqual(r.message, msg,
+      assert(r.message.startsWith('Error: ' + msg),
         'string message should propagate from error message inst');
       assert.strictEqual(r.context.httpRequest.method, newReq.method,
         [

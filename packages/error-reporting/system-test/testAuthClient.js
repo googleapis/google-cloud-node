@@ -431,7 +431,7 @@ describe('error-reporting', function() {
   it('Should correctly publish errors using the Error constructor',
     function(done) {
     this.timeout(TIMEOUT * 2);
-    var errorId = buildName('message');
+    var errorId = buildName('with-error-constructor');
     var errOb = new Error(errorId);
     var expectedMessage = 'Error: ' + errorId;
     verifyReporting(errOb, expectedMessage, TIMEOUT, done);
@@ -439,13 +439,13 @@ describe('error-reporting', function() {
 
   it('Should correctly publish errors using a string', function(done) {
     this.timeout(TIMEOUT * 2);
-    var errorId = buildName('message');
+    var errorId = buildName('with-string');
     verifyReporting(errorId, errorId, TIMEOUT, done);
   });
 
   it('Should correctly publish errors using an error builder', function(done) {
     this.timeout(TIMEOUT * 2);
-    var errorId = buildName('message');
+    var errorId = buildName('with-error-builder');
     var expectedMessage = 'Error: ' + errorId;
     var errOb = errors.event()
                       .setMessage(errorId);
