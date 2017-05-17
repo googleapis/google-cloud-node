@@ -162,9 +162,9 @@ errors.report('My error message');
 
 ```js
 var express = require('express');
-var app = express();
-// Will create an errors instance based off env variables
 var errors = require('@google-cloud/error-reporting')();
+
+var app = express();
 
 app.get('/error', (req, res, next) => {
   res.send('Something broke!');
@@ -199,7 +199,7 @@ server.route({
   }
 });
 
-server.register({ register: errors.hapi });
+server.register(errors.hapi);
 ```
 
 ### Using Koa
@@ -207,18 +207,18 @@ server.register({ register: errors.hapi });
 ```js
 var errors = require('@google-cloud/error-reporting')();
 var koa = require('koa');
-var app = koa();
+var app = new koa();
 
 app.use(errors.koa);
 
 app.use(function *(next) {
-	//This will set status and message
-	this.throw('Error Message', 500);
+  //This will set status and message
+  this.throw('Error Message', 500);
 });
 
 // response
 app.use(function *(){
-	this.body = 'Hello World';
+  this.body = 'Hello World';
 });
 
 app.listen(3000);
@@ -227,12 +227,12 @@ app.listen(3000);
 ### Using Restify
 
 ```js
+var restify = require('restify');
+var errors = require('@google-cloud/error-reporting')();
+
 function respond(req, res, next) {
   next(new Error('this is a restify error'));
 }
-
-var restify = require('restify');
-var errors = require('@google-cloud/error-reporting')();
 
 var server = restify.createServer();
 
@@ -240,7 +240,7 @@ server.use(errors.restify(server));
 server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 
-server.listen(8080);
+server.listen(3000);
 ```
 
 [gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
