@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,14 @@
  'use strict';
 
  var gapic = {
-   v1beta1: require('./v1beta1'),
+   v1beta1: require('./v1beta1/index.js'),
  };
 
  const VERSION = require('../package.json').version;
 
 
  /**
-  * Create an imageAnnotatorClient with additional helpers for common
-  * tasks.
+  * Create an imageAnnotatorClientfor the appropriate version.
   *
   * @param {Object=} opts - The optional parameters.
   * @param {String=} opts.servicePath
