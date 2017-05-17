@@ -77,7 +77,7 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
-  this.defaultBaseUrl_ = 'pubsub.googleapis.com.';
+  this.defaultBaseUrl_ = 'pubsub.googleapis.com';
   this.determineBaseUrl_();
 
   var config = {

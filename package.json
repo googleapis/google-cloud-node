@@ -13,7 +13,6 @@
     "glob": "^5.0.9",
     "globby": "^3.0.1",
     "is": "^3.1.0",
-    "istanbul": "^0.4.5",
     "jscs": "^2.1.1",
     "jshint": "^2.9.1",
     "lodash.flatten": "^4.3.0",
@@ -21,6 +20,7 @@
     "mitm": "^1.1.0",
     "mocha": "^2.5.3",
     "multiline": "^1.0.2",
+    "nyc": "^10.3.0",
     "package-json": "^2.4.0",
     "propprop": "^0.3.1",
     "semver": "^5.3.0",
@@ -40,9 +40,33 @@
     "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -x 'packages/*/src/*{/*,/**/*}.js' -- --no-timeouts packages/*/test/*.js -R spec",
-    "cover-html": "istanbul cover node_modules/mocha/bin/_mocha --report html -x 'packages/*/src/*{/*,/**/*}.js' -- --no-timeouts packages/*/test/*.js -R spec",
-    "coveralls": "npm run cover && cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js && nyc report",
+    "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
+  },
+  "nyc": {
+    "report-dir": "./.coverage",
+    "exclude": [
+      "packages/*/src/*{/*,/**/*}.js",
+      "packages/*/test/**/*.js"
+    ],
+    "watermarks": {
+      "branches": [
+        95,
+        100
+      ],
+      "functions": [
+        95,
+        100
+      ],
+      "lines": [
+        95,
+        100
+      ],
+      "statements": [
+        95,
+        100
+      ]
+    }
   },
   "license": "Apache-2.0",
   "engines": {

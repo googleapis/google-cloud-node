@@ -62,7 +62,7 @@ function Translate(options) {
     return new Translate(options);
   }
 
-  var baseUrl = 'https://translation.googleapis.com./language/translate/v2';
+  var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
   if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
     baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT

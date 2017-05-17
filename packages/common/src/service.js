@@ -62,6 +62,17 @@ function Service(config, options) {
   this.projectId = options.projectId || PROJECT_ID_TOKEN;
   this.projectIdRequired = config.projectIdRequired !== false;
   this.Promise = options.promise || Promise;
+
+  var isCloudFunctionEnv = !!process.env.FUNCTION_NAME;
+
+  if (isCloudFunctionEnv) {
+    this.interceptors.push({
+      request: function(reqOpts) {
+        reqOpts.forever = false;
+        return reqOpts;
+      }
+    });
+  }
 }
 
 /**

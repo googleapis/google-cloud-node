@@ -66,7 +66,7 @@ function BigQuery(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com./bigquery/v2',
+    baseUrl: 'https://www.googleapis.com/bigquery/v2',
     scopes: ['https://www.googleapis.com/auth/bigquery'],
     packageJson: require('../package.json')
   };

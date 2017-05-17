@@ -41,7 +41,7 @@ var util = require('util');
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: Number.MAX_SAFE_INTEGER)
+ *     given time. (Default: 100)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
  *     in the pool at any given time.
  * @param {number} options.min - Minimum number of resources to keep in the pool
@@ -147,9 +147,9 @@ SessionPool.getPoolOptions_ = function(userOptions) {
   var poolOptions = {
     idleTimeoutMillis: 59 * 60000,
     testOnBorrow: true,
-    max: userOptions.max || Number.MAX_SAFE_INTEGER,
+    max: userOptions.max || 100,
     min: userOptions.min || 0,
-    numTestsPerRun: Number.MAX_SAFE_INTEGER
+    numTestsPerRun: 100
   };
 
   poolOptions.numTestsPerRun = poolOptions.max;

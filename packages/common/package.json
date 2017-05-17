@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/common",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "author": "Google Inc.",
   "description": "Common components for Cloud APIs Node.js Client Libraries",
   "contributors": [
@@ -45,7 +45,7 @@
     "duplexify": "^3.5.0",
     "ent": "^2.2.0",
     "extend": "^3.0.0",
-    "google-auto-auth": "^0.6.0",
+    "google-auto-auth": "^0.7.0",
     "is": "^3.2.0",
     "log-driver": "^1.2.5",
     "methmeth": "^1.1.0",

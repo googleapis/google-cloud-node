@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var util = require('util');
 var winston = require('winston');
 
 var env = require('../../../system-test/env.js');
@@ -42,7 +41,10 @@ describe('LoggingWinston', function() {
         args: ['first'],
         level: 'info',
         verify: function(entry) {
-          assert.deepStrictEqual(entry.data, {message: 'first'});
+          assert.deepStrictEqual(entry.data, {
+            message: 'first',
+            metadata: {}
+          });
         }
       },
 
@@ -50,7 +52,10 @@ describe('LoggingWinston', function() {
         args: ['second'],
         level: 'info',
         verify: function(entry) {
-          assert.deepStrictEqual(entry.data, {message: 'second'});
+          assert.deepStrictEqual(entry.data, {
+            message: 'second',
+            metadata: {}
+          });
         }
       },
 
@@ -58,12 +63,12 @@ describe('LoggingWinston', function() {
         args: ['third', {testTimestamp: testTimestamp}],
         level: 'info',
         verify: function(entry) {
-          assert.deepStrictEqual(entry.data, {message: 'third'});
-
-          assert.strictEqual(
-            entry.metadata.labels.testTimestamp,
-            util.inspect(testTimestamp)
-          );
+          assert.deepStrictEqual(entry.data, {
+            message: 'third',
+            metadata: {
+              testTimestamp: String(testTimestamp)
+            }
+          });
         }
       },
 

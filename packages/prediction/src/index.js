@@ -63,7 +63,7 @@ function Prediction(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com./prediction/v1.6',
+    baseUrl: 'https://www.googleapis.com/prediction/v1.6',
     scopes: [
       'https://www.googleapis.com/auth/prediction',
       'https://www.googleapis.com/auth/devstorage.read_only'

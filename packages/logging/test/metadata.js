@@ -136,55 +136,6 @@ describe('metadata', function() {
     });
   });
 
-  describe('assignDefaultResource', function() {
-    var ENTRY_JSON = {};
-
-    it('should return entry if it already has a resource', function(done) {
-      var entryJson = { resource: {} };
-
-      metadata.assignDefaultResource(entryJson, function(err, entryJson_) {
-        assert.ifError(err);
-        assert.strictEqual(entryJson_, entryJson);
-        done();
-      });
-    });
-
-    it('should get the default resource', function(done) {
-      metadata.getDefaultResource = function() {
-        done();
-      };
-
-      metadata.assignDefaultResource(ENTRY_JSON, assert.ifError);
-    });
-
-    it('should return error from getDefaultResource', function(done) {
-      var error = new Error('Error.');
-
-      metadata.getDefaultResource = function(callback) {
-        callback(error);
-      };
-
-      metadata.assignDefaultResource(ENTRY_JSON, function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-
-    it('should assign default resource to entry', function(done) {
-      var defaultResource = {};
-
-      metadata.getDefaultResource = function(callback) {
-        callback(null, defaultResource);
-      };
-
-      metadata.assignDefaultResource(ENTRY_JSON, function(err, entryJson) {
-        assert.ifError(err);
-        assert.strictEqual(entryJson.resource, defaultResource);
-        done();
-      });
-    });
-  });
-
   describe('getDefaultResource', function() {
     var RETURNED_PROJECT_ID = 'project-id';
 

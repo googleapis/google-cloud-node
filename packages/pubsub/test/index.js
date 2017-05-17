@@ -179,7 +179,7 @@ describe('PubSub', function() {
 
       var calledWith = pubsub.calledWith_[0];
 
-      var baseUrl = 'pubsub.googleapis.com.';
+      var baseUrl = 'pubsub.googleapis.com';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.strictEqual(calledWith.service, 'pubsub');
       assert.strictEqual(calledWith.apiVersion, 'v1');
@@ -191,7 +191,7 @@ describe('PubSub', function() {
     });
 
     it('should set the defaultBaseUrl_', function() {
-      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com.');
+      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com');
     });
 
     it('should use the PUBSUB_EMULATOR_HOST env var', function() {

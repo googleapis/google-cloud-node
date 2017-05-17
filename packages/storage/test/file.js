@@ -622,7 +622,7 @@ describe('File', function() {
     describe('authenticating', function() {
       it('should create an authenticated request', function(done) {
         var expectedPath = format('https://{host}/{b}/{o}', {
-          host: 'storage.googleapis.com.',
+          host: 'storage.googleapis.com',
           b: file.bucket.name,
           o: encodeURIComponent(file.name)
         });
@@ -2427,13 +2427,18 @@ describe('File', function() {
 
   describe('setEncryptionKey', function() {
     var KEY = crypto.randomBytes(32);
+    var _file;
 
     beforeEach(function() {
-      file.setEncryptionKey(KEY);
+      _file = file.setEncryptionKey(KEY);
     });
 
     it('should localize the key', function() {
       assert.strictEqual(file.encryptionKey, KEY);
+    });
+
+    it('should return the file instance', function() {
+      assert.strictEqual(_file, file);
     });
 
     it('should push the correct request interceptor', function(done) {
@@ -2588,7 +2593,7 @@ describe('File', function() {
             name: file.name,
             predefinedAcl: options.predefinedAcl
           },
-          uri: 'https://www.googleapis.com./upload/storage/v1/b/' +
+          uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
             file.bucket.name + '/o'
         });
         done();

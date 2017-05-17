@@ -136,7 +136,7 @@ describe('Bigtable', function() {
 
       var calledWith = bigtable.calledWith_[0];
 
-      assert.strictEqual(calledWith.baseUrl, 'bigtable.googleapis.com.');
+      assert.strictEqual(calledWith.baseUrl, 'bigtable.googleapis.com');
       assert.strictEqual(calledWith.service, 'bigtable');
       assert.strictEqual(calledWith.apiVersion, 'v2');
       assert.strictEqual(calledWith.customEndpoint, false);
@@ -144,20 +144,20 @@ describe('Bigtable', function() {
       assert.deepEqual(calledWith.protoServices, {
         Bigtable: googleProtoFiles('bigtable/v2/bigtable.proto'),
         BigtableTableAdmin: {
-          baseUrl: 'bigtableadmin.googleapis.com.',
+          baseUrl: 'bigtableadmin.googleapis.com',
           path: googleProtoFiles(
             'bigtable/admin/v2/bigtable_table_admin.proto'),
           service: 'bigtable.admin'
         },
         BigtableInstanceAdmin: {
-          baseUrl: 'bigtableadmin.googleapis.com.',
+          baseUrl: 'bigtableadmin.googleapis.com',
           path: googleProtoFiles(
             'bigtable/admin/v2/bigtable_instance_admin.proto'
           ),
           service: 'bigtable.admin'
         },
         Operations: {
-          baseUrl: 'bigtableadmin.googleapis.com.',
+          baseUrl: 'bigtableadmin.googleapis.com',
           path: googleProtoFiles('longrunning/operations.proto'),
           service: 'longrunning',
           apiVersion: 'v1'

@@ -76,7 +76,7 @@ function Storage(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com./storage/v1',
+    baseUrl: 'https://www.googleapis.com/storage/v1',
     projectIdRequired: false,
     scopes: [
       'https://www.googleapis.com/auth/devstorage.full_control'
