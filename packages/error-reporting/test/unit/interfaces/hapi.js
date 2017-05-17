@@ -113,7 +113,8 @@ describe('Hapi interface', function() {
     afterEach(function() {
       fakeServer.removeAllListeners();
     });
-    it('Should call continue when a boom is emitted', function(done) {
+    it('Should call continue when a boom is emitted if reply is an object',
+    function(done) {
       plugin.register(fakeServer, null, function() {});
       fakeServer.emit(EVENT, {response: {isBoom: true}},
         {
@@ -123,6 +124,21 @@ describe('Hapi interface', function() {
           }
         }
      );
+    });
+    it('Should call continue when a boom is emitted if reply is a function',
+    function(done) {
+      // Manually testing has shown that in actual usage the `reply` object
+      // provided to listeners of the `onPreResponse` event can be a function
+      // that has a `continue` property that is a function.
+      // If `reply.continue()` is not invoked in this situation, the Hapi
+      // app will become unresponsive.
+      plugin.register(fakeServer, null, function() {});
+      var reply = function() {};
+      reply.continue = function() {
+        // The continue function should be called
+        done();
+      };
+      fakeServer.emit(EVENT, {response: {isBoom: true}}, reply);
     });
     it('Should call sendError when a boom is received', function(done) {
       var fakeClient = {
