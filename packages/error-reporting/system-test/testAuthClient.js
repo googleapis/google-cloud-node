@@ -361,10 +361,9 @@ describe('Expected Behavior', function() {
 });
 
 describe('error-reporting', function() {
-  const TIMESTAMP = Date.now();
   const BASE_NAME = 'error-reporting-system-test';
   function buildName(suffix) {
-    return [TIMESTAMP, BASE_NAME, suffix].join('_');
+    return [Date.now(), BASE_NAME, suffix].join('_');
   }
 
   const SERVICE_NAME = buildName('service-name');
@@ -390,15 +389,8 @@ describe('error-reporting', function() {
     });
   });
 
-  it('Should correctly publish errors', function(done) {
-    // After an error is reported, this test waits TIMEOUT ms before
-    // verifying the error has been reported to ensure the system had
-    // enough time to receive the error report and process it.
-    // As such, this test is set to fail due to a timeout only if sufficiently
-    // more than TIMEOUT ms has elapsed to avoid test fragility.
-    this.timeout(TIMEOUT * 2);
-    var errorId = buildName('message');
-    errors.report(new Error(errorId), function(err, response, body) {
+  function verifyReporting(errOb, expectedMessage, timeout, cb) {
+    errors.report(errOb, function(err, response, body) {
       assert.ifError(err);
       assert(isObject(response));
       assert.deepEqual(body, {});
@@ -410,7 +402,7 @@ describe('error-reporting', function() {
 
           var matchedErrors = groups.filter(function(errItem) {
             return errItem && errItem.representative &&
-              errItem.representative.message.startsWith('Error: ' + errorId);
+              errItem.representative.message.startsWith(expectedMessage);
           });
 
           // The error should have been reported exactly once
@@ -424,9 +416,39 @@ describe('error-reporting', function() {
           assert.ok(context);
           assert.strictEqual(context.service, SERVICE_NAME);
           assert.strictEqual(context.version, SERVICE_VERSION);
-          done();
+          cb();
         });
-      }, TIMEOUT);
+      }, timeout);
     });
+  }
+
+  // For each test below, after an error is reported, the test waits
+  // TIMEOUT ms before verifying the error has been reported to ensure
+  // the system had enough time to receive the error report and process it.
+  // As such, each test is set to fail due to a timeout only if sufficiently
+  // more than TIMEOUT ms has elapsed to avoid test fragility.
+
+  it('Should correctly publish errors using the Error constructor',
+    function(done) {
+    this.timeout(TIMEOUT * 2);
+    var errorId = buildName('message');
+    var errOb = new Error(errorId);
+    var expectedMessage = 'Error: ' + errorId;
+    verifyReporting(errOb, expectedMessage, TIMEOUT, done);
+  });
+
+  it('Should correctly publish errors using a string', function(done) {
+    this.timeout(TIMEOUT * 2);
+    var errorId = buildName('message');
+    verifyReporting(errorId, errorId, TIMEOUT, done);
+  });
+
+  it('Should correctly publish errors using an error builder', function(done) {
+    this.timeout(TIMEOUT * 2);
+    var errorId = buildName('message');
+    var expectedMessage = 'Error: ' + errorId;
+    var errOb = errors.event()
+                      .setMessage(errorId);
+    verifyReporting(errOb, expectedMessage, TIMEOUT, done);
   });
 });

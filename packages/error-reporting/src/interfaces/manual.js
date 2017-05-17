@@ -74,6 +74,10 @@ function handlerSetup(client, config) {
     }
 
     if (err instanceof ErrorMessage) {
+      var fauxError = new Error(err.message);
+      var fullStack = fauxError.stack.split('\n');
+      var cleanedStack = fullStack.slice(0, 1).concat(fullStack.slice(2)).join('\n');
+      err.setMessage(cleanedStack);
       em = err;
     } else {
       em = new ErrorMessage();
