@@ -366,6 +366,13 @@
       ]
     },
     {
+      "id": "video-intelligence",
+      "name": "@google-cloud/video-intelligence",
+      "defaultService": "video-intelligence",
+      "versions": [
+      ]
+    },
+    {
       "id": "vision",
       "name": "@google-cloud/vision",
       "defaultService": "vision",
