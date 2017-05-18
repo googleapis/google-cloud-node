@@ -22,7 +22,9 @@
   "excludeFiles": [
     "**/src/*/**/*",
     "**/system-test/*/**/*",
+    "**/test/**/gapic-*.js",
     "**/test/*/**/*",
-    "**/node_modules/"
+    "**/node_modules/",
+    "**/.coverage/**/*.js",
   ]
 }
