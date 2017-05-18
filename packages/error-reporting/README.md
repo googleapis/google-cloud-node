@@ -205,8 +205,9 @@ server.register(errors.hapi);
 ### Using Koa
 
 ```js
-var errors = require('@google-cloud/error-reporting')();
 var Koa = require('koa');
+var errors = require('@google-cloud/error-reporting')();
+
 var app = new Koa();
 
 app.use(errors.koa);
