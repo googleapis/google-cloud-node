@@ -17,15 +17,15 @@
 
 // [START videointelligence_quickstart]
 // Imports the Google Cloud Video Intelligence library
-const Video = require('@google-cloud/videointelligence').v1beta1();
+const Video = require('@google-cloud/video-intelligence');
 
 // Instantiates a client
-const video = Video.videoIntelligenceServiceClient({
+const video = Video({
   projectId: process.env.GCLOUD_PROJECT // Replace with your Google Cloud project ID
 });
 
 // The GCS filepath of the video to analyze
-const gcsUri = 'gs://demomaker/volleyball_court.mp4';
+const gcsUri = 'gs://demomaker/tomatoes.mp4';
 
 // Construct request
 const request = {
@@ -48,42 +48,54 @@ video.annotateVideo(request)
     const faces = annotations.faceAnnotations;
     faces.forEach((face, faceIdx) => {
       console.log('Thumbnail size:', face.thumbnail.length);
-      face.segments.forEach((segment, segmentIdx) => {
-        console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
-        if (segment.startTimeOffset === -1 && segment.endTimeOffset === -1) {
-          console.log(`\tEntire video`);
-        } else {
+
+      const isEntireVideo = face.segments.some((segment) =>
+        segment.startTimeOffset.toNumber() === -1 &&
+        segment.endTimeOffset.toNumber() === -1
+      );
+
+      if (isEntireVideo) {
+        console.log(`Face #${faceIdx}`);
+        console.log(`\tEntire video`);
+      } else {
+        face.segments.forEach((segment, segmentIdx) => {
+          console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
           console.log(`\tStart: ${segment.startTimeOffset / 1e6}s`);
           console.log(`\tEnd: ${segment.endTimeOffset / 1e6}s`);
-        }
-      });
+        });
+      }
     });
 
     // Gets labels for video from its annotations
     const labels = annotations.labelAnnotations;
     labels.forEach((label) => {
       console.log(`Label ${label.description} occurs at:`);
-      label.locations.forEach((location) => {
-        if (location.segment.startTimeOffset === -1 && location.segment.endTimeOffset === -1) {
-          console.log(`\tEntire video`);
-        } else {
+      const isEntireVideo = label.locations.some((location) =>
+        location.segment.startTimeOffset.toNumber() === -1 &&
+        location.segment.endTimeOffset.toNumber() === -1
+      );
+
+      if (isEntireVideo) {
+        console.log(`\tEntire video`);
+      } else {
+        label.locations.forEach((location) => {
           console.log(`\tStart: ${location.segment.startTimeOffset / 1e6}s`);
           console.log(`\tEnd: ${location.segment.endTimeOffset / 1e6}s`);
-        }
-      });
+        });
+      }
     });
 
     // Gets shot changes for video from its annotations
     const shotChanges = annotations.shotAnnotations;
-    shotChanges.forEach((shot, shotIdx) => {
-      console.log(`Scene ${shotIdx} occurs from:`);
-      if (shot.startTimeOffset === -1 && shot.endTimeOffset === -1) {
-        console.log(`\tEntire video`);
-      } else {
+    if (shotChanges.length === 1) {
+      console.log(`The entire video is one scene.`);
+    } else {
+      shotChanges.forEach((shot, shotIdx) => {
+        console.log(`Scene ${shotIdx} occurs from:`);
         console.log(`\tStart: ${shot.startTimeOffset / 1e6}s`);
         console.log(`\tEnd: ${shot.endTimeOffset / 1e6}s`);
-      }
-    });
+      });
+    }
   })
   .catch((err) => {
     console.error('ERROR:', err);
