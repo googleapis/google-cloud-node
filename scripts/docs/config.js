@@ -38,8 +38,7 @@ module.exports = {
     'spanner/src/session-pool.js',
     'spanner/src/session.js',
     'spanner/src/transaction-request.js',
-    'storage/src/acl.js',
-    'video-intelligence'
+    'storage/src/acl.js'
   ],
   OVERVIEW_TEMPLATE: 'templates/overview.html',
   OVERVIEW: {
