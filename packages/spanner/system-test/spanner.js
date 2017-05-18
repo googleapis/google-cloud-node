@@ -2629,7 +2629,8 @@ var spanner = new Spanner(env);
           return table.create(multiline.stripIndent(function() {/*
             CREATE TABLE TxnTable (
               Key STRING(MAX) NOT NULL,
-              StringValue STRING(MAX)
+              StringValue STRING(MAX),
+              NumberValue INT64
             ) PRIMARY KEY (Key)
           */}));
         })
@@ -2915,58 +2916,241 @@ var spanner = new Spanner(env);
         });
       });
 
-      it.skip('should retry an aborted transaction', function(done) {
-        // var id = generateName('id');
-        // var name = generateName('name');
-        // var attempts = 0;
+      describe('concurrent transactions', function() {
+        var defaultRowValues = {
+          Key: 'k0',
+          NumberValue: 0
+        };
 
-        // database.runTransaction(function(err, transaction) {
-        //   assert.ifError(err);
+        beforeEach(function() {
+          return table.update(defaultRowValues);
+        });
 
-        //   attempts++;
+        it('should handle concurrent transactions with read', function(done) {
+          database.runTransaction(function(err, transaction) {
+            assert.ifError(err);
 
-        //   transaction.run('SELECT * FROM TxnTable', function(err) {
-        //     assert.ifError(err);
+            incrementValue(function(err) {
+              assert.ifError(err);
 
-        //     transaction.insert('TxnTable', {
-        //       Key: id,
-        //       Name: name
-        //     });
+              getValue(transaction, function(err, value) {
+                assert.ifError(err);
+                assert.strictEqual(value, defaultRowValues.NumberValue + 1);
+                done();
+              });
+            });
+          });
 
-        //     if (attempts < 2) {
-        //       runOtherTransaction(function() {
-        //         transaction.commit(assert.ifError);
-        //       });
-        //       return;
-        //     }
+          function incrementValue(callback) {
+            database.runTransaction(function(err, transaction) {
+              assert.ifError(err);
 
-        //     transaction.commit(function(err) {
-        //       assert.ifError(err);
-        //       assert.strictEqual(attempts, 2);
-        //       done();
-        //     });
-        //   });
-        // });
+              getValue(transaction, function(err, value) {
+                if (err) {
+                  callback(err);
+                  return;
+                }
 
-        // function runOtherTransaction(callback) {
-        //   database.runTransaction(function(err, transaction) {
-        //     assert.ifError(err);
+                transaction.update(table.name, {
+                  Key: defaultRowValues.Key,
+                  NumberValue: value + 1
+                });
 
-        //     transaction.run('SELECT * FROM Singers', function(err) {
-        //       assert.ifError(err);
+                transaction.commit(callback);
+              });
+            });
+          }
 
-        //       transaction.insert('Singers', {
-        //         SingerId: generateName('id'),
-        //         Name: generateName('name')
-        //       });
+          function getValue(txn, callback) {
+            txn.read(table.name, {
+              keys: [defaultRowValues.Key],
+              columns: ['NumberValue']
+            }, function(err, rows) {
+              if (err) {
+                callback(err);
+                return;
+              }
 
-        //       transaction.commit(function(err) {
-        //         assert.ifError(err);
-        //         callback();
-        //       });
-        //     });
-        //   });
-        // }
+              var row = rows[0].toJSON();
+              callback(null, parseInt(row.NumberValue.value, 10));
+            });
+          }
+        });
+
+        it('should handle concurrent transactions with query', function(done) {
+          database.runTransaction(function(err, transaction) {
+            assert.ifError(err);
+
+            incrementValue(function(err) {
+              assert.ifError(err);
+
+              getValue(transaction, function(err, value) {
+                assert.ifError(err);
+                assert.strictEqual(value, defaultRowValues.NumberValue + 1);
+                done();
+              });
+            });
+          });
+
+          function incrementValue(callback) {
+            database.runTransaction(function(err, transaction) {
+              assert.ifError(err);
+
+              getValue(transaction, function(err, value) {
+                if (err) {
+                  callback(err);
+                  return;
+                }
+
+                transaction.update(table.name, {
+                  Key: defaultRowValues.Key,
+                  NumberValue: value + 1
+                });
+
+                transaction.commit(callback);
+              });
+            });
+          }
+
+          function getValue(txn, callback) {
+            txn.run({
+              sql: 'SELECT * FROM ' + table.name + ' WHERE Key = @key',
+              params: {
+                key: defaultRowValues.Key
+              }
+            }, function(err, rows) {
+              if (err) {
+                callback(err);
+                return;
+              }
+
+              var row = rows[0].toJSON();
+              callback(null, parseInt(row.NumberValue.value, 10));
+            });
+          }
+        });
+      });
+
+      it('should retry an aborted transaction', function(done) {
+        var query = `SELECT * FROM ${table.name}`;
+        var attempts = 0;
+
+        var expectedRow = {
+          Key: 'k999',
+          NumberValue: null,
+          StringValue: 'abc'
+        };
+
+        database.runTransaction(function(err, transaction) {
+          assert.ifError(err);
+
+          transaction.run(query, function(err, rows) {
+            assert.ifError(err);
+
+            transaction.insert(table.name, {
+              Key: generateName('key'),
+              StringValue: generateName('val')
+            });
+
+            if (attempts++ === 0) {
+              runOtherTransaction(function(err) {
+                assert.ifError(err);
+                transaction.commit(done); // should not execute callback
+              });
+              return;
+            }
+
+            transaction.commit(function(err) {
+              assert.ifError(err);
+
+              var lastRow = rows.pop().toJSON();
+
+              assert.deepEqual(lastRow, expectedRow);
+              assert.strictEqual(attempts, 2);
+
+              done();
+            });
+          });
+        });
+
+        function runOtherTransaction(callback) {
+          database.runTransaction(function(err, transaction) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            transaction.run(query, function(err) {
+              if (err) {
+                callback(err);
+                return;
+              }
+
+              transaction.insert(table.name, expectedRow);
+              transaction.commit(callback);
+            });
+          });
+        }
+      });
+
+      it('should return a deadline error instead of aborted', function(done) {
+        var options = {
+          timeout: 10
+        };
+
+        var query = `SELECT * FROM ${table.name}`;
+        var attempts = 0;
+
+        database.runTransaction(options, function(err, transaction) {
+          if (attempts++ === 1) {
+            assert.strictEqual(err.code, 4);
+            assert
+              .strictEqual(err.message, 'Deadline for Transaction exceeded.');
+
+            done();
+            return;
+          }
+
+          assert.ifError(err);
+
+          transaction.run(query, function(err) {
+            assert.ifError(err);
+
+            transaction.insert(table.name, {
+              Key: generateName('key')
+            });
+
+            runOtherTransaction(function(err) {
+              assert.ifError(err);
+
+              transaction.commit(function(err) {
+                done(new Error('Should not have been called.'))
+              });
+            });
+          });
+        });
+
+        function runOtherTransaction(callback) {
+          database.runTransaction(function(err, transaction) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            transaction.run(query, function(err) {
+              if (err) {
+                callback(err);
+                return;
+              }
+
+              transaction.insert(table.name, {
+                Key: generateName('key')
+              });
+
+              transaction.commit(callback);
+            });
+          });
+        }
       });
     });
   });
