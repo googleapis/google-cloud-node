@@ -2,17 +2,15 @@
 
 # Google Cloud Video Intelligence API Node.js Samples
 
-The [Cloud Video Intelligence API][video_docs] allows developers to easily
-integrate video analysis within applications, including video labeling, safe search
-, and shot change detection.
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-videointelligence.svg)]()
 
-[video_docs]: https://cloud.google.com/video-intelligence/docs/
+The [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence) allows developers to use Google video analysis technology as part of their applications.
 
 ## Table of Contents
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Analyze](#analyze)
+  * [Video Intelligence](#video-intelligence)
 * [Running the tests](#running-the-tests)
 
 ## Setup
@@ -20,11 +18,11 @@ integrate video analysis within applications, including video labeling, safe sea
 1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1.  Install dependencies:
 
-    With `npm`:
+    With **npm**:
 
         npm install
 
-    With `yarn`:
+    With **yarn**:
 
         yarn install
 
@@ -33,45 +31,47 @@ integrate video analysis within applications, including video labeling, safe sea
 
 ## Samples
 
-### Analyze
+### Video Intelligence
 
-View the [documentation][analyze_docs] or the [source code][analyze_code].
+View the [documentation][video_0_docs] or the [source code][video_0_code].
 
 __Usage:__ `node analyze.js --help`
 
 ```
 Commands:
+  faces <gcsUri>        Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
   shots <gcsUri>        Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video
                         Intelligence API.
   labels-gcs <gcsUri>   Labels objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
   labels-file <gcsUri>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
+  safe-search <gcsUri>  Detects adult content in a video stored in Google Cloud Storage.
 
 Options:
   --help  Show help                                                                                            [boolean]
 
 Examples:
-  node analyze.js shots gs://my-bucket/my-video.mp4
-  node analyze.js labels-gcs gs://my-bucket/my-video.mp4
-  node analyze.js labels-file my-video.mp4
-  node analyze.js unsafe-content gs://my-bucket/my-video.mp4
+  node analyze.js faces gs://demomaker/volleyball_court.mp4
+  node analyze.js shots gs://demomaker/volleyball_court.mp4
+  node analyze.js labels-gcs gs://demomaker/volleyball_court.mp4
+  node analyze.js labels-file cat.mp4
+  node analyze.js safe-search gs://demomaker/volleyball_court.mp4
 
 For more information, see https://cloud.google.com/video-intelligence/docs
 ```
 
-[analyze_docs]: https://cloud.google.com/video-intelligence/docs
-[analyze_code]: analyze.js
+[video_0_docs]: https://cloud.google.com/video-intelligence/docs
+[video_0_code]: analyze.js
 
 ## Running the tests
 
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
 
 1.  Run the tests:
 
-    With `npm`:
+    With **npm**:
 
         npm test
 
-    With `yarn`:
+    With **yarn**:
 
         yarn test

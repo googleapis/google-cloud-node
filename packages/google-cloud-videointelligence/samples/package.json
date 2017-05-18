@@ -19,14 +19,27 @@
   },
   "dependencies": {
     "@google-cloud/videointelligence": "https://storage.googleapis.com/videointelligence-alpha/videointelligence-nodejs.tar.gz",
+    "googleapis": "19.0.0",
+    "safe-buffer": "5.0.1",
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.7",
-    "ava": "0.19.1"
+    "@google-cloud/nodejs-repo-tools": "1.4.13",
+    "ava": "0.19.1",
+    "proxyquire": "1.7.11"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
-    "requiresProjectId": true
+    "requiresProjectId": true,
+    "product": "video",
+    "samples": [
+      {
+        "id": "video",
+        "name": "Video Intelligence",
+        "file": "analyze.js",
+        "docs_link": "https://cloud.google.com/video-intelligence/docs",
+        "usage": "node analyze.js --help"
+      }
+    ]
   }
 }

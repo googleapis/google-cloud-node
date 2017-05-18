@@ -25,7 +25,7 @@ const video = Video.videoIntelligenceServiceClient({
 });
 
 // The GCS filepath of the video to analyze
-const gcsUri = 'gs://nodejs-docs-samples/videointelligence_quickstart.mp4';
+const gcsUri = 'gs://demomaker/volleyball_court.mp4';
 
 // Construct request
 const request = {
@@ -49,26 +49,40 @@ video.annotateVideo(request)
     faces.forEach((face, faceIdx) => {
       console.log('Thumbnail size:', face.thumbnail.length);
       face.segments.forEach((segment, segmentIdx) => {
-        console.log(`Track ${segmentIdx} of face ${faceIdx}: frames ${segment.startTimeOffset} to ${segment.endTimeOffset}`);
+        console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
+        if (segment.startTimeOffset === -1 && segment.endTimeOffset === -1) {
+          console.log(`\tEntire video`);
+        } else {
+          console.log(`\tStart: ${segment.startTimeOffset / 1e6}s`);
+          console.log(`\tEnd: ${segment.endTimeOffset / 1e6}s`);
+        }
       });
     });
 
     // Gets labels for video from its annotations
     const labels = annotations.labelAnnotations;
     labels.forEach((label) => {
-      console.log('Label description:', label.description);
-      console.log('Locations:');
+      console.log(`Label ${label.description} occurs at:`);
       label.locations.forEach((location) => {
-        console.log(`\tFrames ${location.segment.startTimeOffset} to ${location.segment.endTimeOffset}`);
+        if (location.segment.startTimeOffset === -1 && location.segment.endTimeOffset === -1) {
+          console.log(`\tEntire video`);
+        } else {
+          console.log(`\tStart: ${location.segment.startTimeOffset / 1e6}s`);
+          console.log(`\tEnd: ${location.segment.endTimeOffset / 1e6}s`);
+        }
       });
     });
 
     // Gets shot changes for video from its annotations
     const shotChanges = annotations.shotAnnotations;
     shotChanges.forEach((shot, shotIdx) => {
-      console.log(`Scene ${shotIdx}:`);
-      console.log(`\tStart: ${shot.startTimeOffset}`);
-      console.log(`\tEnd: ${shot.endTimeOffset}`);
+      console.log(`Scene ${shotIdx} occurs from:`);
+      if (shot.startTimeOffset === -1 && shot.endTimeOffset === -1) {
+        console.log(`\tEntire video`);
+      } else {
+        console.log(`\tStart: ${shot.startTimeOffset / 1e6}s`);
+        console.log(`\tEnd: ${shot.endTimeOffset / 1e6}s`);
+      }
     });
   })
   .catch((err) => {
