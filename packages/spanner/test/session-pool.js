@@ -1118,7 +1118,7 @@ describe('SessionPool', function() {
       TRANSACTION.end = function(callback) {
         assert.strictEqual(this, TRANSACTION);
         destroyed = true;
-        setImmediate(done);
+        setImmediate(callback); // done
       };
 
       sessionPool.release = function(session) {

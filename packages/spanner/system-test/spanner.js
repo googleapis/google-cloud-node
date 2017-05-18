@@ -2275,7 +2275,7 @@ var spanner = new Spanner(env);
           }
         },
         {
-          test:'should read using a closed-closed range',
+          test: 'should read using a closed-closed range',
           query: {
             ranges: [{
               startClosed: 'k3',
@@ -2636,29 +2636,27 @@ var spanner = new Spanner(env);
         })
         .then(onPromiseOperationComplete)
         .then(function() {
-          var promise = Promise.resolve();
+          var data = [];
 
           for (var i = 0; i < 5; i++) {
-            (function(i) {
-              promise = promise.then(function() {
-                var data = {
-                  Key: 'k' + i,
-                  StringValue: 'v' + i
-                };
-
-                var record = extend({
-                  timestamp: new Date()
-                }, data);
-
-                records.push(record);
-
-                return table.insert(data)
-                  .then(wait.bind(null, 1000));
-              });
-            }(i));
+            data.push({
+              Key: 'k' + i,
+              StringValue: 'v' + i
+            });
           }
 
-          return promise;
+          return data.reduce(function(promise, entry) {
+            return promise.then(function() {
+              var record = extend({
+                timestamp: new Date()
+              }, entry);
+
+              records.push(record);
+
+              return table.insert(entry)
+                .then(wait.bind(null, 1000));
+            });
+          }, Promise.resolve());
         });
     });
 
@@ -3123,8 +3121,8 @@ var spanner = new Spanner(env);
             runOtherTransaction(function(err) {
               assert.ifError(err);
 
-              transaction.commit(function(err) {
-                done(new Error('Should not have been called.'))
+              transaction.commit(function() {
+                done(new Error('Should not have been called.'));
               });
             });
           });

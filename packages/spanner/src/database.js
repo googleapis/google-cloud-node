@@ -634,11 +634,12 @@ Database.prototype.runStream = function(query, options) {
   });
 
   var fields = {};
+  var prop;
 
   if (reqOpts.params) {
     reqOpts.types = reqOpts.types || {};
 
-    for (var prop in reqOpts.params) {
+    for (prop in reqOpts.params) {
       var field = reqOpts.params[prop];
 
       if (!reqOpts.types[prop]) {
@@ -656,8 +657,8 @@ Database.prototype.runStream = function(query, options) {
   if (reqOpts.types) {
     var types = {};
 
-    for (var prop in reqOpts.types) {
-      var type = reqOpts.types[prop]
+    for (prop in reqOpts.types) {
+      var type = reqOpts.types[prop];
       var child;
 
       if (is.object(type)) {

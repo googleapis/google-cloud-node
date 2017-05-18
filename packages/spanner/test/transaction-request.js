@@ -395,7 +395,7 @@ describe('TransactionRequest', function() {
           assert.strictEqual(numEncodeRequests, 3);
           assert.deepStrictEqual(options.reqOpts.keySet.ranges, expectedRanges);
           done();
-        }
+        };
 
         var stream = transactionRequest.createReadStream(TABLE, query);
         var makeRequestFn = stream.calledWith_[0];

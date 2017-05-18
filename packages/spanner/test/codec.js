@@ -492,11 +492,11 @@ describe('codec', function() {
     });
 
     it('should determine if the value is a timestamp', function() {
-      assert.strictEqual(codec.getType(new Date), 'timestamp');
+      assert.strictEqual(codec.getType(new Date()), 'timestamp');
     });
 
     it('should determine if the value is a date', function() {
-      assert.strictEqual(codec.getType(new codec.SpannerDate), 'date');
+      assert.strictEqual(codec.getType(new codec.SpannerDate()), 'date');
     });
 
     it('should attempt to determine arrays and their values', function() {

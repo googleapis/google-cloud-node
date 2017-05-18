@@ -278,7 +278,7 @@ describe('Transaction', function() {
           return fakeDate;
         };
 
-        transaction.begin(function(err, apiResponse) {
+        transaction.begin(function(err) {
           assert.ifError(err);
           assert.strictEqual(transaction.readTimestamp, fakeDate);
           done();
@@ -431,7 +431,7 @@ describe('Transaction', function() {
           c: 'd',
           gaxOptions: {}
         },
-        method: function(reqOpts, gaxOptions, callback) {
+        method: function(reqOpts, gaxOptions) {
           var expectedReqOpts = extend({}, config.reqOpts, {
             session: transaction.session.formattedName_
           });
