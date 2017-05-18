@@ -92,7 +92,7 @@ function makeHapiPlugin(client, config) {
             client.sendError(em);
           }
 
-          if (isObject(reply) && isFunction(reply.continue)) {
+          if (reply && isFunction(reply.continue)) {
             reply.continue();
           }
         });
