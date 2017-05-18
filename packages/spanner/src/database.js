@@ -724,6 +724,10 @@ Database.prototype.runStream = function(query, options) {
  * @resource [Timestamp Bounds](https://cloud.google.com/spanner/docs/timestamp-bounds)
  *
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
+ * @param {number} options.timeout - Specify a timeout for the transaction. The
+ *     transaction will be ran in its entirety, however if an abort error is
+ *     returned the transaction will be retried if the timeout has not been met.
+ *     Default: `60000` (milliseconds)
  * @param {boolean} options.readOnly - Specifies if the transaction is
  *     read-only.
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
@@ -798,15 +802,23 @@ Database.prototype.runTransaction = function(options, runFn) {
     options = null;
   }
 
+  options = extend({}, options);
+
   this.getTransaction_(options, function(err, transaction) {
     if (err) {
       runFn(err);
       return;
     }
 
-    transaction.run_(function() {
-      runFn(null, transaction);
-    });
+    transaction.beginTime_ = Date.now();
+    transaction.runFn_ = runFn;
+
+    if (options && options.timeout) {
+      transaction.timeout_ = options.timeout;
+      delete options.timeout;
+    }
+
+    runFn(null, transaction);
   });
 };
 

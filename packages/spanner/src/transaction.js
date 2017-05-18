@@ -98,38 +98,39 @@ function Transaction(session, options) {
   this.retries_ = 0;
   this.runFn_ = null;
 
+  this.timeout_ = 60000;
+  this.beginTime_ = null;
+
   TransactionRequest.call(this, options);
 }
 
 util.inherits(Transaction, TransactionRequest);
 
 /**
- * Extract the retry info from the grpc error object.
+ * In the event that a Transaction is aborted and the deadline has been
+ * exceeded, we'll alter the error from aborted to deadline exceeded.
  *
  * @private
  *
- * @param {error} err - The error object.
- * @return {number|null}
+ * @param {error} err - The original error.
+ * @return {object}
  */
-Transaction.getRetryDelay_ = function(err) {
-  if (!err.details) {
-    return null;
-  }
-
-  var retryInfo = err.details.filter(function(elem) {
-    var typeUrlParts = elem.typeUrl.split('/');
-
-    return typeUrlParts.pop() === 'google.rpc.RetryInfo';
+Transaction.createDeadlineError_ = function(err) {
+  return extend({}, err, {
+    code: 4,
+    message: 'Deadline for Transaction exceeded.'
   });
+};
 
-  if (!retryInfo.length) {
-    return null;
-  }
-
-  var duration = retryInfo[0].retryDelay;
-  var milliseconds = parseInt(duration.nanos, 10) / 1e6;
-
-  return parseInt(duration.seconds, 10) * 1000 + milliseconds;
+/**
+ * Create a retry backoff time based on the number of attempts already made.
+ *
+ * @private
+ *
+ * @return {?number}
+ */
+Transaction.createRetryDelay_ = function(retries) {
+  return (Math.pow(2, retries) * 1000) + Math.floor(Math.random() * 1000);
 };
 
 /**
@@ -251,27 +252,57 @@ Transaction.prototype.commit = function(callback) {
   }, function(err, resp) {
     if (!err) {
       self.end();
-      callback(null, resp);
-      return;
     }
 
-    var delay = Transaction.getRetryDelay_(err) || self.createRetryDelay_();
-    var shouldRetry = err.code === ABORTED && is.fn(self.runFn_) && delay;
-
-    if (!shouldRetry) {
-      callback(err, resp);
-      return;
-    }
-
-    self.retry_(delay, function(err) {
-      if (err) {
-        // Only execute the callback if there's an error.
-        // If there wasn't an error, `commit` will eventually be called again
-        // when the user's "runFn" is retried.
-        callback(err);
-      }
-    });
+    callback(err, resp);
   });
+};
+
+/**
+ * Let the client know you're done with a particular transaction. This should
+ * only be called for read-only transactions.
+ *
+ * @param {function=} callback - Optional callback function to be called after
+ *     transaction has ended.
+ *
+ * @example
+ * var options = {
+ *   readOnly: true
+ * };
+ *
+ * database.runTransaction(options, function(err, transaction) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   transaction.run('SELECT * FROM Singers', function(err, rows) {
+ *     if (err) {
+ *       // Error handling omitted.
+ *     }
+ *
+ *     // End the transaction. Note that no callback is provided.
+ *     transaction.end();
+ *   });
+ * });
+ */
+Transaction.prototype.end = function(callback) {
+  this.queuedMutations_ = [];
+  this.retries_ = 0;
+  this.runFn_ = null;
+  delete this.id;
+
+  if (is.fn(callback)) {
+    callback();
+  }
+};
+
+/**
+ * Queue a mutation until {module:spanner/transaction#commit} is called.
+ *
+ * @private
+ */
+Transaction.prototype.queue_ = function(mutation) {
+  this.queuedMutations_.push(mutation);
 };
 
 /**
@@ -283,11 +314,28 @@ Transaction.prototype.commit = function(callback) {
  * @param {function} callback - The callback function.
  */
 Transaction.prototype.request = function(config, callback) {
+  var self = this;
+
   var reqOpts = extend({
     session: this.session.formattedName_
   }, config.reqOpts);
 
-  config.method(reqOpts, callback);
+  var gaxOptions = reqOpts.gaxOptions;
+  delete reqOpts.gaxOptions;
+
+  config.method(reqOpts, gaxOptions, function(err, resp) {
+    if (err && err.code === ABORTED) {
+      if (self.shouldRetry_(err)) {
+        self.retry_();
+        return;
+      }
+
+      self.runFn_(Transaction.createDeadlineError_(err));
+      return;
+    }
+
+    callback(err, resp);
+  });
 };
 
 /**
@@ -307,6 +355,32 @@ Transaction.prototype.requestStream = function(config) {
   delete reqOpts.gaxOptions;
 
   return config.method(reqOpts, gaxOptions);
+};
+
+/**
+ * Retry the transaction by running the original "runFn" after a pre-
+ * determined delay.
+ *
+ * @private
+ */
+Transaction.prototype.retry_ = function() {
+  var self = this;
+
+  this.begin(function(err) {
+    if (err) {
+      self.runFn_(err);
+      return;
+    }
+
+    var timeout = Transaction.createRetryDelay_(self.retries_);
+
+    self.retries_ += 1;
+    self.queuedMutations_ = [];
+
+    setTimeout(function() {
+      self.runFn_(null, self);
+    }, timeout)
+  });
 };
 
 /**
@@ -588,127 +662,15 @@ Transaction.prototype.runStream = function(query) {
 };
 
 /**
- * Create a retry backoff time based on the number of attempts already made.
+ * Determines whether or not this Transaction should be retried in the event
+ * of an ABORTED error.
  *
- * @private
- *
- * @return {?number}
+ * @param {error} err - The request error.
+ * @return {boolean}
  */
-Transaction.prototype.createRetryDelay_ = function() {
-  var MAX_RETRIES = 2;
-
-  if (this.retries_ >= MAX_RETRIES) {
-    return null;
-  }
-
-  return (Math.pow(2, this.retries_) * 1000) + Math.floor(Math.random() * 1000);
-};
-
-/**
- * Let the client know you're done with a particular transaction. This should
- * only be called for read-only transactions.
- *
- * @param {function=} callback - Optional callback function to be called after
- *     transaction has ended.
- *
- * @example
- * var options = {
- *   readOnly: true
- * };
- *
- * database.runTransaction(options, function(err, transaction) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   transaction.run('SELECT * FROM Singers', function(err, rows) {
- *     if (err) {
- *       // Error handling omitted.
- *     }
- *
- *     // End the transaction. Note that no callback is provided.
- *     transaction.end();
- *   });
- * });
- */
-Transaction.prototype.end = function(callback) {
-  this.queuedMutations_ = [];
-  this.retries_ = 0;
-  this.runFn_ = null;
-  delete this.id;
-
-  if (is.fn(callback)) {
-    callback();
-  }
-};
-
-/**
- * Queue a mutation until {module:spanner/transaction#commit} is called.
- *
- * @private
- */
-Transaction.prototype.queue_ = function(mutation) {
-  this.queuedMutations_.push(mutation);
-};
-
-/**
- * Retry the transaction by running the original "runFn" after a pre-
- * determined delay.
- *
- * @private
- */
-Transaction.prototype.retry_ = function(timeout, callback) {
-  var self = this;
-
-  this.retries_++;
-
-  this.begin(function(err) {
-    if (!err) {
-      self.queuedMutations_ = [];
-      setTimeout(self.runFn_.bind(self), timeout);
-    }
-
-    callback(err);
-  });
-};
-
-/**
- * Run a set of reads/writes and then commits all changes. In the event of a
- * concurrency issue where the commit is aborted, it will retry running all
- * reads/writes.
- *
- * Call {module:spanner/transaction#rollback} to cancel any queued mutations.
- *
- * @private
- *
- * @param {function} fn - The function containing the read/write logic.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * transaction.run_(function() {
- *   transaction.run('SELECT * FROM Singers', function(err) {
- *     if (err) {
- *       done(err);
- *       return;
- *     }
- *
- *     transaction.insert('Singers', {
- *       SingerId: 'Id3b',
- *       Name: 'Joe West'
- *     });
- *
- *     transaction.commit(function(err) {
- *       if (!err) {
- *         // Transaction has successfully been committed.
- *       }
- *     });
- *   });
- * });
- */
-Transaction.prototype.run_ = function(fn) {
-  this.runFn_ = fn;
-  return fn();
+Transaction.prototype.shouldRetry_ = function(err) {
+  return err.code === ABORTED && is.fn(this.runFn_) &&
+    (Date.now() - this.beginTime_ < this.timeout_);
 };
 
 /*! Developer Documentation

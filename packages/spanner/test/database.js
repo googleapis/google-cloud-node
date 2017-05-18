@@ -846,22 +846,49 @@ describe('Database', function() {
     });
 
     it('should run the transaction', function(done) {
-      var OPTIONS = {};
+      var TRANSACTION = {};
+      var OPTIONS = {
+        a: 'a'
+      };
 
-      var transaction = {
-        run_: function(runFn) {
-          runFn();
-        }
+      var dateNow = Date.now;
+      var fakeDate = 123445668382;
+
+      Date.now = function() {
+        return fakeDate;
       };
 
       database.getTransaction_ = function(options, callback) {
-        assert.strictEqual(options, OPTIONS);
-        callback(null, transaction);
+        assert.deepEqual(options, OPTIONS);
+        callback(null, TRANSACTION);
       };
 
-      database.runTransaction(OPTIONS, function(err, transaction_) {
+      function runFn(err, transaction) {
         assert.strictEqual(err, null);
-        assert.strictEqual(transaction_, transaction);
+        assert.strictEqual(transaction, TRANSACTION);
+        assert.strictEqual(transaction.runFn_, runFn);
+        assert.strictEqual(transaction.beginTime_, fakeDate);
+
+        Date.now = dateNow;
+        done();
+      }
+
+      database.runTransaction(OPTIONS, runFn);
+    });
+
+    it('should capture the timeout', function(done) {
+      var TRANSACTION = {};
+      var OPTIONS = {
+        timeout: 1000
+      };
+
+      database.getTransaction_ = function(options, callback) {
+        callback(null, TRANSACTION);
+      };
+
+      database.runTransaction(OPTIONS, function(err, txn) {
+        assert.ifError(err);
+        assert.strictEqual(txn.timeout_, OPTIONS.timeout);
         done();
       });
     });

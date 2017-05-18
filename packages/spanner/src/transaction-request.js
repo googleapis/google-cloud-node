@@ -49,7 +49,7 @@ var PartialResultStream = require('./partial-result-stream.js');
  * @param {object=} options - Timestamp options.
  */
 function TransactionRequest(options) {
-  if (options) {
+  if (options && !is.empty(options)) {
     this.options = TransactionRequest.formatTimestampOptions_(options);
   }
 }

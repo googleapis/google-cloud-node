@@ -102,6 +102,19 @@ describe('TransactionRequest', function() {
       TransactionRequest.formatTimestampOptions_ = formatTimestamp;
     });
 
+    it('should not localize an empty options object', function() {
+      var formatTimestamp = TransactionRequest.formatTimestampOptions_;
+
+      TransactionRequest.formatTimestampOptions_ = function() {
+        throw new Error('Should not have been called.');
+      };
+
+      var transaction = new TransactionRequest({});
+
+      assert.strictEqual(transaction.options, undefined);
+      TransactionRequest.formatTimestampOptions_ = formatTimestamp;
+    });
+
     it('should promisify all the things', function() {
       assert(promisified);
     });
