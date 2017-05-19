@@ -37,7 +37,21 @@ describe('Manual handler', function() {
       }
     }
   };
-  var report = manual(client, config);
+  var report = manual(client, config, {
+    warn: function(message) {
+      // The use of `report` in this class should issue the following warning
+      // becasue the `report` class is used directly and, as such, cannot
+      // by itself have information where a ErrorMesasge was constructed.  It
+      // only knows that an error has been reported.
+      // Thus, the ErrorMessage objects given to the `report` method in the
+      // tests do not have construction site information to verify that if
+      // that information is not available, the user is issued a warning.
+      assert.strictEqual(message, 'Encountered a manually constructed error ' +
+        'with message "builder test" but without a construction site stack ' +
+        'trace.  This error might not be visible in the error reporting ' +
+        'console.');
+    }
+  });
   describe('Report invocation behaviour', function() {
     it('Should allow argument-less invocation', function() {
       var r = report();
@@ -140,20 +154,20 @@ describe('Manual handler', function() {
 
   describe('Custom Payload Builder', function() {
     it('Should accept builder inst as only argument', function() {
-      var msg = 'test';
+      var msg = 'builder test';
       var r = report(new ErrorMessage().setMessage(msg));
-      assert(r.message.startsWith('Error: ' + msg),
+      assert(r.message.startsWith(msg),
         'string message should propagate from error message inst');
     });
     it('Should accept builder and request as arguments', function() {
-      var msg = 'test';
+      var msg = 'builder test';
       var oldReq = {method: 'GET'};
       var newReq = {method: 'POST'};
       var r = report(
         new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
         newReq
      );
-      assert(r.message.startsWith('Error: ' + msg),
+      assert(r.message.startsWith(msg),
         'string message should propagate from error message inst');
       assert.strictEqual(r.context.httpRequest.method, newReq.method,
         [
@@ -163,7 +177,7 @@ describe('Manual handler', function() {
      );
     });
     it('Should accept message and additional message params as', function() {
-      var oldMsg = 'test';
+      var oldMsg = 'builder test';
       var newMsg = 'analysis';
       var r = report(
         new ErrorMessage().setMessage(oldMsg),
@@ -176,7 +190,7 @@ describe('Manual handler', function() {
         ].join('\n'));
     });
     it('Should accept message and callback function', function(done) {
-      var oldMsg = 'test';
+      var oldMsg = 'builder test';
       report(
         new ErrorMessage().setMessage(oldMsg),
         function() { done(); }

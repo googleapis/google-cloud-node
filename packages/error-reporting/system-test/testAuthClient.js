@@ -389,7 +389,7 @@ describe('error-reporting', function() {
     });
   });
 
-  function verifyReporting(errOb, expectedMessage, timeout, cb) {
+  function verifyReporting(errOb, messageTest, timeout, cb) {
     errors.report(errOb, function(err, response, body) {
       assert.ifError(err);
       assert(isObject(response));
@@ -402,7 +402,7 @@ describe('error-reporting', function() {
 
           var matchedErrors = groups.filter(function(errItem) {
             return errItem && errItem.representative &&
-              errItem.representative.message.startsWith(expectedMessage);
+              messageTest(errItem.representative.message);
           });
 
           // The error should have been reported exactly once
@@ -433,22 +433,36 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-constructor');
     var errOb = new Error(errorId);
-    var expectedMessage = 'Error: ' + errorId;
-    verifyReporting(errOb, expectedMessage, TIMEOUT, done);
+    verifyReporting(errOb, function(message) {
+      return message.startsWith('Error: ' + errorId);
+    }, TIMEOUT, done);
   });
 
   it('Should correctly publish errors using a string', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-string');
-    verifyReporting(errorId, errorId, TIMEOUT, done);
+    verifyReporting(errorId, function(message) {
+      return message.startsWith(errorId);
+    }, TIMEOUT, done);
   });
 
   it('Should correctly publish errors using an error builder', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-builder');
-    var expectedMessage = 'Error: ' + errorId;
-    var errOb = errors.event()
-                      .setMessage(errorId);
-    verifyReporting(errOb, expectedMessage, TIMEOUT, done);
+    var errOb = (function definitionSiteFunction() {
+      return errors.event()
+                   .setMessage(errorId);
+    })();
+    (function callingSiteFunction() {
+      verifyReporting(errOb, function(message) {
+        // Verify that the stack trace of the constructed error
+        // uses the stack trace at the point where the error was constructed
+        // and not the stack trace at the point where the `report` method
+        // was called.
+        return message.startsWith(errorId) &&
+          message.indexOf('callingSiteFunction') === -1 &&
+          message.indexOf('definitionSiteFunction') !== -1;
+      }, TIMEOUT, done);
+    })();
   });
 });
