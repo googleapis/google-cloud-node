@@ -1164,7 +1164,7 @@ File.prototype.download = function(options, callback) {
  * });
  */
 File.prototype.setEncryptionKey = function(encryptionKey, options) {
-  options = options || {}
+  options = options || {};
   options.baseHeader = options.baseHeader || 'x-goog-encryption';
   this.encryptionKey = encryptionKey;
 

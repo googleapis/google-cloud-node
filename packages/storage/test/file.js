@@ -2427,10 +2427,9 @@ describe('File', function() {
 
   describe('setEncryptionKey', function() {
     var KEY = crypto.randomBytes(32);
-    var _file;
 
     it('should localize the key', function() {
-      var _file = file.setEncryptionKey(KEY);
+      file.setEncryptionKey(KEY);
       assert.strictEqual(file.encryptionKey, KEY);
     });
 
@@ -2440,7 +2439,7 @@ describe('File', function() {
     });
 
     it('should push the correct request interceptor', function(done) {
-      var _file = file.setEncryptionKey(KEY);
+      file.setEncryptionKey(KEY);
       var base64Key = new Buffer(KEY).toString('base64');
       var base64KeyHash = crypto.createHash('sha256');
       base64KeyHash.update(base64Key, 'base64');
@@ -2457,14 +2456,15 @@ describe('File', function() {
     });
 
     it('should allow a different base header', function(done) {
-      var _file = file.setEncryptionKey(KEY, {
+      file.setEncryptionKey(KEY, {
         baseHeader: 'x-goog-copy-source-encryption',
       });
       var base64Key = new Buffer(KEY).toString('base64');
       var base64KeyHash = crypto.createHash('sha256');
       base64KeyHash.update(base64Key, 'base64');
 
-      assert.deepEqual(file.interceptors[0].request({}), {
+      assert.deepEqual(
+        file.interceptors[0].request({}), {
         headers: {
           'x-goog-copy-source-encryption-algorithm': 'AES256',
           'x-goog-copy-source-encryption-key': base64Key,
