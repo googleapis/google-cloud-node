@@ -1135,6 +1135,9 @@ File.prototype.download = function(options, callback) {
  * @resource [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
  *
  * @param {string|buffer} encryptionKey - An AES-256 encryption key.
+ * @param {Object=} options - Optional configuration.
+ * @param {string} options.baseHeader - The prefix of the header being set.
+ *   Defaults to 'x-goog-encryption'.
  * @return {module:storage/file}
  *
  * @example
@@ -1160,7 +1163,9 @@ File.prototype.download = function(options, callback) {
  *   });
  * });
  */
-File.prototype.setEncryptionKey = function(encryptionKey) {
+File.prototype.setEncryptionKey = function(encryptionKey, options) {
+  options = options || {}
+  options.baseHeader = options.baseHeader || 'x-goog-encryption';
   this.encryptionKey = encryptionKey;
 
   encryptionKey = new Buffer(encryptionKey).toString('base64');
@@ -1171,9 +1176,9 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
   this.interceptors.push({
     request: function(reqOpts) {
       reqOpts.headers = reqOpts.headers || {};
-      reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
-      reqOpts.headers['x-goog-encryption-key'] = encryptionKey;
-      reqOpts.headers['x-goog-encryption-key-sha256'] = hash;
+      reqOpts.headers[options.baseHeader + '-algorithm'] = 'AES256';
+      reqOpts.headers[options.baseHeader + '-key'] = encryptionKey;
+      reqOpts.headers[options.baseHeader + '-key-sha256'] = hash;
       return reqOpts;
     }
   });
