@@ -565,6 +565,106 @@ describe('Transaction', function() {
 
       transaction.requestStream(config);
     });
+
+    describe('runTransaction mode', function() {
+      var fakeStream;
+
+      var config = {
+        reqOpts: {},
+        method: function() {
+          return fakeStream;
+        }
+      };
+
+      beforeEach(function() {
+        fakeStream = through.obj();
+        transaction.runFn_ = function() {};
+      });
+
+      it('should pipe the request stream to the user stream', function(done) {
+        var fakeData = {
+          a: 'a'
+        };
+
+        transaction.requestStream(config)
+          .on('error', done)
+          .on('data', function(data) {
+            assert.strictEqual(data, fakeData);
+            done();
+          });
+
+        fakeStream.push(fakeData);
+      });
+
+      it('should emit non-abort errors to the user stream', function(done) {
+        var error = new Error('ohnoes');
+
+        transaction.requestStream(config)
+          .on('error', function(err) {
+            assert.strictEqual(err, error);
+            done();
+          });
+
+        fakeStream.emit('error', error);
+      });
+
+      it('should retry the transaction', function(done) {
+        var error = { code: 10 };
+        var stream;
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, error);
+          return true;
+        };
+
+        transaction.runFn_ = done; // should not be called
+
+        transaction.retry_ = function() {
+          assert(fakeStream._destroyed);
+          assert(stream._destroyed);
+          done();
+        };
+
+        stream = transaction.requestStream(config);
+        stream.on('error', done); // should not be called
+
+        fakeStream.emit('error', error);
+      });
+
+      it('should send a deadline error to the runFn', function(done) {
+        var error = { code: 10 };
+        var stream;
+
+        var deadlineError = {};
+        var createDeadlineError = Transaction.createDeadlineError_;
+
+        Transaction.createDeadlineError_ = function(err) {
+          assert.strictEqual(err, error);
+          return deadlineError;
+        };
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, error);
+          return false;
+        };
+
+        transaction.retry_ = done; // should not be called
+
+        transaction.runFn_ = function(err) {
+          assert.strictEqual(err, deadlineError);
+          assert(fakeStream._destroyed);
+          assert(stream._destroyed);
+
+          Transaction.createDeadlineError_ = createDeadlineError;
+          done();
+        };
+
+        stream = transaction.requestStream(config);
+        stream.on('error', done); // should not be called
+
+        fakeStream.emit('error', error);
+      });
+    });
   });
 
   describe('rollback', function() {

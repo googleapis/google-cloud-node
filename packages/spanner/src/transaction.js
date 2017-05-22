@@ -23,6 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
+var through = require('through2');
 var util = require('util');
 
 /**
@@ -324,17 +325,17 @@ Transaction.prototype.request = function(config, callback) {
   delete reqOpts.gaxOptions;
 
   config.method(reqOpts, gaxOptions, function(err, resp) {
-    if (err && err.code === ABORTED) {
-      if (self.shouldRetry_(err)) {
-        self.retry_();
-        return;
-      }
-
-      self.runFn_(Transaction.createDeadlineError_(err));
+    if (!err || err.code !== ABORTED) {
+      callback(err, resp);
       return;
     }
 
-    callback(err, resp);
+    if (self.shouldRetry_(err)) {
+      self.retry_();
+      return;
+    }
+
+    self.runFn_(Transaction.createDeadlineError_(err));
   });
 };
 
@@ -347,6 +348,8 @@ Transaction.prototype.request = function(config, callback) {
  * @return {stream}
  */
 Transaction.prototype.requestStream = function(config) {
+  var self = this;
+
   var reqOpts = extend({
     session: this.session.formattedName_
   }, config.reqOpts);
@@ -354,7 +357,33 @@ Transaction.prototype.requestStream = function(config) {
   var gaxOptions = reqOpts.gaxOptions;
   delete reqOpts.gaxOptions;
 
-  return config.method(reqOpts, gaxOptions);
+  // return config.method(reqOpts, gaxOptions);
+  var requestStream = config.method(reqOpts, gaxOptions);
+
+  if (!is.fn(self.runFn_)) {
+    return requestStream;
+  }
+
+  var userStream = through.obj();
+
+  requestStream.on('error', function(err) {
+    if (err.code !== ABORTED) {
+      userStream.emit('error', err);
+      return;
+    }
+
+    requestStream.destroy();
+    userStream.destroy();
+
+    if (self.shouldRetry_(err)) {
+      self.retry_();
+      return;
+    }
+
+    self.runFn_(Transaction.createDeadlineError_(err));
+  });
+
+  return requestStream.pipe(userStream);
 };
 
 /**
