@@ -34,8 +34,8 @@ function handlerSetup(config) {
    */
   function newMessage() {
     // The API expects a reported error to contain a stack trace.
-    // However, users do not need to provide a stack trace for stack
-    // traces built using the message builder.  Instead, here we store
+    // However, users do not need to provide a stack trace for ErrorMessage
+    // objects built using the message builder.  Instead, here we store
     // the stack trace with the parts that reference the error-reporting's
     // internals removed.  Then when the error is reported, the stored
     // stack trace will be appended to the user's message for the error.
