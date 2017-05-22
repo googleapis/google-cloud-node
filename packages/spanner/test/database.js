@@ -667,7 +667,7 @@ describe('Database', function() {
         makeRequestFn();
       });
 
-      it('should set type to unspecified for unknown types', function(done) {
+      it('should throw an error for unknown types', function() {
         var query = {
           params: {
             test: 'abc'
@@ -677,23 +677,9 @@ describe('Database', function() {
           }
         };
 
-        fakeCodec.getType = function() {
-          throw new Error('Should not be called');
-        };
-
-        database.pool_.requestStream = function(options) {
-          assert.deepEqual(options.reqOpts.paramTypes, {
-            test: {
-              code: 0
-            }
-          });
-
-          done();
-        };
-
-        var stream = database.runStream(query);
-        var makeRequestFn = stream.calledWith_[0];
-        makeRequestFn();
+        assert.throws(function() {
+          database.runStream(query);
+        }, /Unknown param type\: unicorn/);
       });
 
       it('should attempt to guess array types', function(done) {
@@ -728,7 +714,7 @@ describe('Database', function() {
         makeRequestFn();
       });
 
-      it('should set the child to unspecified if unsure', function(done) {
+      it('should throw an error for unknown child types', function() {
         var query = {
           params: {
             test: [null]
@@ -742,22 +728,9 @@ describe('Database', function() {
           };
         };
 
-        database.pool_.requestStream = function(options) {
-          assert.deepEqual(options.reqOpts.paramTypes, {
-            test: {
-              code: 8,
-              arrayElementType: {
-                code: 0
-              }
-            }
-          });
-
-          done();
-        };
-
-        var stream = database.runStream(query);
-        var makeRequestFn = stream.calledWith_[0];
-        makeRequestFn();
+        assert.throws(function() {
+          database.runStream(query);
+        }, /Unknown param type\: unicorn/);
       });
 
       it('should delete the type map from the request options', function(done) {

@@ -659,23 +659,25 @@ Database.prototype.runStream = function(query, options) {
 
     for (prop in reqOpts.types) {
       var type = reqOpts.types[prop];
+      var childType;
       var child;
 
       if (is.object(type)) {
-        child = codec.TYPES.indexOf(type.child);
+        childType = type.child;
+        child = codec.TYPES.indexOf(childType);
         type = type.type;
       }
 
       var code = codec.TYPES.indexOf(type);
 
       if (code === -1) {
-        code = 0; // unspecified
+        throw new Error('Unknown param type: ' + type);
       }
 
       types[prop] = { code: code };
 
       if (child === -1) {
-        child = 0; // unspecified
+        throw new Error('Unknown param type: ' + childType);
       }
 
       if (is.number(child)) {

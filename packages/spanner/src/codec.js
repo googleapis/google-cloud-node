@@ -207,7 +207,7 @@ function getType(field) {
   }
 
   var isSpecialNumber = is.infinite(field) ||
-    (typeof field === 'number' && isNaN(field));
+    (is.number(field) && isNaN(field));
 
   if (is.decimal(field) || isSpecialNumber || field instanceof Float) {
     return 'float64';

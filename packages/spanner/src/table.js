@@ -350,9 +350,6 @@ Table.prototype.insert = function(keyVals, callback) {
  *     See the example below.
  * @param {string=} query.index - The name of an index on the table.
  * @param {number} query.limit - The number of rows to return.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
  *     that is `exactStaleness` old.
@@ -366,6 +363,9 @@ Table.prototype.insert = function(keyVals, callback) {
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
  *     committed transactions are visible.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
  * @param {array[]} callback.rows - Rows are returned as an array of object
  *     arrays. Each object has a `name` and `value` property. To get a
  *     serialized object, call `toJSON()`.
