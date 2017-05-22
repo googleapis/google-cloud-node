@@ -160,7 +160,7 @@ errors.report('My error message');
 
 The stack trace associated with an error can be viewed in the error reporting console.
 * If the `errors.report` method is given an `ErrorMessage` object built using the `errors.event` method, the stack trace at the point where the error event was constructed will be used.
-* If the `errors.report` method is given an `Error` object, the stack trace where the error originated will be used.
+* If the `errors.report` method is given an `Error` object, the stack trace where the error was instantiated will be used.
 * If the `errors.report` method is given a string, the stack trace at the point where `errors.report` is invoked will be used.
 
 ### Using Express
