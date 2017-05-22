@@ -201,6 +201,28 @@ describe('logging-bunyan', function() {
 
       loggingBunyan.formatEntry_(record);
     });
+
+    it('should promote the httpRequest property to metadata', function(done) {
+      var HTTP_REQUEST = {
+        statusCode: 418
+      };
+      var recordWithRequest = extend({
+        httpRequest: HTTP_REQUEST,
+      }, RECORD);
+
+      loggingBunyan.log_.entry = function(entryMetadata, record) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingBunyan.resource_,
+          timestamp: RECORD.time,
+          severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level],
+          httpRequest: HTTP_REQUEST
+        });
+        assert.deepStrictEqual(record, RECORD);
+        done();
+      }
+
+      loggingBunyan.formatEntry_(recordWithRequest);
+    });
   });
 
   describe('_write', function() {

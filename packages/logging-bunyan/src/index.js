@@ -141,13 +141,12 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
     );
   }
 
+  record = extend({}, record);
+
   // Stackdriver Log Viewer picks up the summary line from the 'message' field
   // of the payload. Unless the user has provided a 'message' property also,
   // move the 'msg' to 'message'.
   if (!record.message) {
-    // Clone the object before modifying it.
-    record = extend({}, record);
-
     // If this is an error, report the full stack trace. This allows Stackdriver
     // Error Reporting to pick up errors automatically (for severity 'error' or
     // higher). In this case we leave the 'msg' property intact.
@@ -170,6 +169,17 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
     timestamp: record.time,
     severity: BUNYAN_TO_STACKDRIVER[record.level]
   };
+
+  // If the record contains a httpRequest property, provide it on the entry
+  // metadata. This allows Stackdriver to use request log formatting.
+  // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+  // Note that the httpRequest field must properly validate as a HttpRequest 
+  // proto message, or the log entry would be rejected by the API. We do no
+  // validation here.
+  if (record.httpRequest) {
+    entryMetadata.httpRequest = record.httpRequest;
+    delete record.httpRequest;
+  }
 
   return this.log_.entry(entryMetadata, record);
 };
