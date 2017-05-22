@@ -149,18 +149,23 @@ var errors = require('@google-cloud/error-reporting')({
 ```js
 var errors = require('@google-cloud/error-reporting')();
 
-// Use the error message builder to custom set all message fields
+// Use the error message builder to customize all fields ...
 var errorEvt = errors.event()
                      .setMessage('My error message')
                      .setUser('root@nexus');
 errors.report(errorEvt, () => console.log('done!'));
 
-// Or just use a regular error
+// or just use a regular error ...
 errors.report(new Error('My error message'), () => console.log('done!'));
 
-// One can even just use a string
+// or one can even just use a string.
 errors.report('My error message');
 ```
+
+The stack trace associated with an error can be viewed in the error reporting console.
+* If the `errors.report` method is given an `ErrorMessage` object built using the `errors.event` method, the stack trace at the point where the error event was constructed will be used.
+* If the `errors.report` method is given an `Error` object, the stack trace where the error was instantiated will be used.
+* If the `errors.report` method is given a string, the stack trace at the point where `errors.report` is invoked will be used.
 
 ### Using Express
 
