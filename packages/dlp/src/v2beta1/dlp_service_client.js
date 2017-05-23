@@ -58,7 +58,7 @@ var ALL_SCOPES = [
  * @see {@link dlpServiceClient}
  *
  * @example
- * var dlpV2beta1 = require('dlp.v2beta1').v2beta1({
+ * var dlpV2beta1 = require('@google-cloud/dlp').v2beta1({
  *   // optional auth parameters.
  * });
  * var client = dlpV2beta1.dlpServiceClient();
@@ -485,7 +485,10 @@ function DlpServiceClientBuilder(gaxGrpc) {
     return new DlpServiceClientBuilder(gaxGrpc);
   }
 
-  var dlpServiceClient = require('grpc-google-privacy-dlp-v2beta1').client;
+  var dlpServiceClient = gaxGrpc.load([{
+    root: require('google-proto-files')('..'),
+    file: 'google/privacy/dlp/v2beta1/dlp.proto'
+  }]);
   extend(this, dlpServiceClient.google.privacy.dlp.v2beta1);
 
 
