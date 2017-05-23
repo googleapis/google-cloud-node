@@ -116,7 +116,7 @@ Speech.prototype.eventTypes = {
 /**
  * Guess the audio encoding from the file's extension.
  *
- * @resource [AudioEncoding API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#audioencoding}
+ * @resource [AudioEncoding API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.AudioEncoding}
  * @private
  *
  * @throws {Error} If an encoding type could not be determined from the file's
@@ -239,8 +239,8 @@ Speech.findFile_ = function(file, callback) {
 /**
  * Simplify the transcription results from the API.
  *
- * @resource [SpeechRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult}
- * @resource [StreamingRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult}
+ * @resource [SpeechRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.SpeechRecognitionResult}
+ * @resource [StreamingRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognitionResult}
  *
  * @private
  *
@@ -360,7 +360,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * sending audio.
  *
  * Each emitted `data` event is a
- * [`StreamingRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#streamingrecognizeresponse)
+ * [`StreamingRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognizeResponse)
  * object, containing these properties:
  *
  *   - **`eventType`** See {module:speech#eventTypes}.
@@ -373,12 +373,12 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * information, see
  * [Content Limits]{@link https://cloud.google.com/speech/limits#content}.
  *
- * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
- * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
+ * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.Speech.StreamingRecognize}
+ * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognizeRequest}
  * @resource [Content Limits]{@link https://cloud.google.com/speech/limits#content}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
- *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
+ *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognitionConfig).
  * @param {string} config.languageCode - The language of the supplied audio as
  *     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {number=} config.timeout - In seconds, the amount of time before the
@@ -392,7 +392,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var fs = require('fs');
  *
  * //-
- * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest">
+ * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognizeRequest">
  * // `StreamingRecognizeRequest`</a> for all of the available configuration
  * // options.
  * //-
@@ -534,16 +534,16 @@ Speech.prototype.operation = function(name) {
  * larger files, you will need to use {module:speech#startRecognition} or
  * {module:speech#createRecognizeStream}.
  *
- * @resource [Recognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.Recognize}
- * @resource [RecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognizeRequest}
+ * @resource [Recognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.Speech.Recognize}
+ * @resource [RecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognizeRequest}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
  *     Cloud Storage URI, a Cloud Storage File object, or a
- *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
+ *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognitionAudio)
  *     object.
  * @param {object} config - A `RecognitionConfig` object. See
- *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
+ *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognitionConfig).
  * @param {string} config.languageCode - The language of the supplied audio as
  *     [BCP-47 language tag](http://bit.ly/1ZHeENX). Example: 'en-US'.
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
@@ -557,7 +557,7 @@ Speech.prototype.operation = function(name) {
  *     array consisting of other transcription possibilities. See the examples
  *     below for more.
  * @param {object} callback.apiResponse - Raw API response. See
- *     [`RecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#recognizeresponse).
+ *     [`RecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognizeResponse).
  *
  * @example
  * var config = {
@@ -689,17 +689,17 @@ Speech.prototype.recognize = function(file, config, callback) {
  * events to see how the operation finishes. Follow along with the examples
  * below.
  *
- * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.Speech.LongRunningRecognize}
- * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.LongRunningRecognizeRequest}
- * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1.LongRunningRecognizeResponse}
+ * @resource [LongRunningRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.Speech.LongRunningRecognize}
+ * @resource [LongRunningRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.LongRunningRecognizeRequest}
+ * @resource [LongRunningRecognizeResponse API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.LongRunningRecognizeResponse}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
  *     Cloud Storage URI, a Cloud Storage File object, or a
- *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
+ *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognitionAudio)
  *     object.
  * @param {object} config - A `RecognitionConfig` object. See
- *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
+ *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.RecognitionConfig).
  * @param {boolean=} config.verbose - Enable verbose mode for a more detailed
  *     response. See the examples below. Default: `false`.
  * @param {string} config.languageCode - The language of the supplied audio as
