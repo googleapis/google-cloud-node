@@ -613,7 +613,7 @@ describe('BigQuery/Table', function() {
         callback(null, { jobReference: { jobId: jobId } });
       };
 
-      table.copy(SOURCE_TABLE, function(err, job) {
+      table.copyFrom(SOURCE_TABLE, function(err, job) {
         assert.ifError(err);
         assert.equal(job.id, jobId);
         done();
@@ -627,7 +627,7 @@ describe('BigQuery/Table', function() {
         callback(null, jobMetadata);
       };
 
-      table.copy(SOURCE_TABLE, function(err, job) {
+      table.copyFrom(SOURCE_TABLE, function(err, job) {
         assert.ifError(err);
         assert.deepEqual(job.metadata, jobMetadata);
         done();
@@ -639,7 +639,7 @@ describe('BigQuery/Table', function() {
         callback(null, { jobReference: { jobId: 'job-id' } });
       };
 
-      table.copy(SOURCE_TABLE, done);
+      table.copyFrom(SOURCE_TABLE, done);
     });
 
     it('should pass an error to the callback', function(done) {
@@ -649,7 +649,7 @@ describe('BigQuery/Table', function() {
         callback(error);
       };
 
-      table.copy(SOURCE_TABLE, function(err) {
+      table.copyFrom(SOURCE_TABLE, function(err) {
         assert.equal(err, error);
         done();
       });
@@ -662,7 +662,7 @@ describe('BigQuery/Table', function() {
         callback(null, jobMetadata);
       };
 
-      table.copy(SOURCE_TABLE, function(err, job, apiResponse) {
+      table.copyFrom(SOURCE_TABLE, function(err, job, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(apiResponse, jobMetadata);
         done();
