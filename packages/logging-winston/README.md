@@ -74,7 +74,7 @@ winston.add(transport, {
 
 To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
 
-+![Request Log Example](/doc/images/request-log.png)
+![Request Log Example](/packages/logging-winston/doc/images/request-log.png)
 
 ```js
 winston.info(`${req.url} endpoint hit`, {
