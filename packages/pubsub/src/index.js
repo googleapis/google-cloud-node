@@ -61,7 +61,7 @@ var GAX_CONFIG = {
  * reliable, many-to-many, asynchronous messaging service from Cloud
  * Platform.
  *
- * The `host` from options will set the host. If not set, the
+ * The `apiEndpoint` from options will set the host. If not set, the
  * `PUBSUB_EMULATOR_HOST` environment variable from the gcloud SDK is
  * honored, otherwise the actual API endpoint will be used.
  *
@@ -79,7 +79,7 @@ function PubSub(options) {
   }
 
   this.defaultBaseUrl_ = 'pubsub.googleapis.com';
-  this.determineBaseUrl_(options.host);
+  this.determineBaseUrl_(options.apiEndpoint);
 
   var config = {
     baseUrl: this.baseUrl_,
@@ -798,19 +798,20 @@ PubSub.prototype.request = function(protoOpts) {
 
 /**
  * Determine the appropriate endpoint to use for API requests, first trying the
- * local Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise
- * the default JSON API.
+ * local `apiEndpoint` parameter. If the `apiEndpoint` parameter is null we try
+ * Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise the
+ * default JSON API.
  *
  * @private
  */
-PubSub.prototype.determineBaseUrl_ = function(host) {
+PubSub.prototype.determineBaseUrl_ = function(apiEndpoint) {
   var baseUrl = this.defaultBaseUrl_;
   var leadingProtocol = new RegExp('^https*://');
   var trailingSlashes = new RegExp('/*$');
 
-  if (host || process.env.PUBSUB_EMULATOR_HOST) {
+  if (apiEndpoint || process.env.PUBSUB_EMULATOR_HOST) {
     this.customEndpoint_ = true;
-    baseUrl = host || process.env.PUBSUB_EMULATOR_HOST;
+    baseUrl = apiEndpoint || process.env.PUBSUB_EMULATOR_HOST;
   }
 
   this.baseUrl_ = baseUrl
