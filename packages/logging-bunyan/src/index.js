@@ -173,7 +173,7 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
   // If the record contains a httpRequest property, provide it on the entry
   // metadata. This allows Stackdriver to use request log formatting.
   // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
-  // Note that the httpRequest field must properly validate as a HttpRequest 
+  // Note that the httpRequest field must properly validate as a HttpRequest
   // proto message, or the log entry would be rejected by the API. We do no
   // validation here.
   if (record.httpRequest) {

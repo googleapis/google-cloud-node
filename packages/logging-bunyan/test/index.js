@@ -219,7 +219,7 @@ describe('logging-bunyan', function() {
         });
         assert.deepStrictEqual(record, RECORD);
         done();
-      }
+      };
 
       loggingBunyan.formatEntry_(recordWithRequest);
     });
