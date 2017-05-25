@@ -1043,6 +1043,8 @@ describe('PubSub', function() {
     it('should set base url to parameter sent', function() {
       var defaultBaseUrl_ = 'defaulturl';
       var testingUrl = 'localhost:8085';
+
+      setHost(defaultBaseUrl_);
       pubsub.defaultBaseUrl_ = defaultBaseUrl_;
 
       pubsub.determineBaseUrl_(testingUrl);
