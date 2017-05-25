@@ -273,6 +273,28 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
+    it('should promote httpRequest property to metadata', function(done) {
+      var HTTP_REQUEST = {
+        statusCode: 418
+      };
+      const metadataWithRequest = extend({
+        httpRequest: HTTP_REQUEST
+      }, METADATA);
+
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          httpRequest: HTTP_REQUEST
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+        done();
+      };
+      loggingWinston.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
+    });
+
     it('should write to the log', function(done) {
       var entry = {};
 
