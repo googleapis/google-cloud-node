@@ -142,8 +142,10 @@ util.inherits(LoggingWinston, winston.Transport);
  *     appropriate Stackdriver logging severity level.
  * @param {string} msg - The message to be logged.
  * @param {object=} metadata - Winston-provided metadata that should be attached
- *     to the log entry. Each property will be converted to a string using
- *     `util.inspect`.
+ *     to the log entry. If a `httpRequest` property is set, it will be treated
+ *     as a [HttpRequest]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest}
+ *     request log message. If `options.inspectMetadata` is set, we will convert
+ *     the remaining properties to `string`s before reporting.
  * @param {function=} callback - A callback that is invoked when the logging
  *     agent either succeeds or gives up writing the log entry to the remote
  *     server.
@@ -191,6 +193,17 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   if (is.object(metadata)) {
     data.metadata =
       this.inspectMetadata_ ? mapValues(metadata, util.inspect) : metadata;
+
+    // If the metadata contains a httpRequest property, promote it to the entry
+    // metadata. This allows Stackdriver to use request log formatting.
+    // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+    // Note that the httpRequest field must properly validate as HttpRequest
+    // proto message, or the log entry would be rejected by the API. We no do
+    // validation here.
+    if (metadata.httpRequest) {
+      entryMetadata.httpRequest = metadata.httpRequest;
+      delete data.metadata.httpRequest;
+    }
   }
 
   var entry = this.log_.entry(entryMetadata, data);

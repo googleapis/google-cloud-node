@@ -1040,6 +1040,17 @@ describe('PubSub', function() {
       delete process.env.PUBSUB_EMULATOR_HOST;
     });
 
+    it('should set base url to parameter sent', function() {
+      var defaultBaseUrl_ = 'defaulturl';
+      var testingUrl = 'localhost:8085';
+
+      setHost(defaultBaseUrl_);
+      pubsub.defaultBaseUrl_ = defaultBaseUrl_;
+
+      pubsub.determineBaseUrl_(testingUrl);
+      assert.strictEqual(pubsub.baseUrl_, testingUrl);
+    });
+
     it('should default to defaultBaseUrl_', function() {
       var defaultBaseUrl_ = 'defaulturl';
       pubsub.defaultBaseUrl_ = defaultBaseUrl_;

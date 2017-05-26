@@ -326,14 +326,40 @@ describe('Log', function() {
 
   describe('write', function() {
     var ENTRY = {};
-    var OPTIONS = {
-      resource: {}
-    };
+    var OPTIONS = {};
+    var FAKE_RESOURCE = 'fake-resource';
 
     beforeEach(function() {
-      log.decorateEntries_ = function(entries, callback) {
-        callback(null, entries);
+      log.decorateEntries_ = function(entries) {
+        return entries;
       };
+      log.metadata_.getDefaultResource = function(callback) {
+        callback(null, FAKE_RESOURCE);
+      };
+    });
+
+    it('should forward options.resource to request', function(done) {
+      var CUSTOM_RESOURCE = 'custom-resource';
+      var optionsWithResource = extend({}, OPTIONS, {
+        resource: CUSTOM_RESOURCE
+      });
+
+      log.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'writeLogEntries');
+
+        assert.deepEqual(config.reqOpts, {
+          logName: log.formattedName_,
+          entries: [ENTRY],
+          resource: CUSTOM_RESOURCE
+        });
+
+        assert.strictEqual(config.gaxOpts, undefined);
+
+        callback();
+      };
+
+      log.write(ENTRY, optionsWithResource, done);
     });
 
     it('should make the correct API request', function(done) {
@@ -344,7 +370,7 @@ describe('Log', function() {
         assert.deepEqual(config.reqOpts, {
           logName: log.formattedName_,
           entries: [ENTRY],
-          resource: {}
+          resource: FAKE_RESOURCE
         });
 
         assert.strictEqual(config.gaxOpts, undefined);
@@ -358,9 +384,9 @@ describe('Log', function() {
     it('should arrify & decorate the entries', function(done) {
       var decoratedEntries = [];
 
-      log.decorateEntries_ = function(entries, callback) {
+      log.decorateEntries_ = function(entries) {
         assert.strictEqual(entries[0], ENTRY);
-        callback(null, decoratedEntries);
+        return decoratedEntries;
       };
 
       log.logging.request = function(config) {
@@ -639,7 +665,7 @@ describe('Log', function() {
       };
     });
 
-    it('should create an Entry object if one is not provided', function(done) {
+    it('should create an Entry object if one is not provided', function() {
       var entry = {};
 
       log.entry = function(entry_) {
@@ -647,16 +673,13 @@ describe('Log', function() {
         return new FakeEntry();
       };
 
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], toJSONResponse);
-        done();
-      });
+      var decoratedEntries = log.decorateEntries_([entry]);
+      assert.strictEqual(decoratedEntries[0], toJSONResponse);
     });
 
-    it('should get JSON format from Entry object', function(done) {
+    it('should get JSON format from Entry object', function() {
       log.entry = function() {
-        done(); // will result in multiple done() calls and fail the test.
+        throw new Error('should not be called');
       };
 
       var entry = new Entry();
@@ -664,11 +687,8 @@ describe('Log', function() {
         return toJSONResponse;
       };
 
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], toJSONResponse);
-        done();
-      });
+      var decoratedEntries = log.decorateEntries_([entry]);
+      assert.strictEqual(decoratedEntries[0], toJSONResponse);
     });
 
     it('should pass log.removeCircular to toJSON', function(done) {
@@ -681,10 +701,10 @@ describe('Log', function() {
         return {};
       };
 
-      log.decorateEntries_([entry], assert.ifError);
+      log.decorateEntries_([entry]);
     });
 
-    it('should exec callback with error from serialization', function(done) {
+    it('should throw error from serialization', function() {
       var error = new Error('Error.');
 
       var entry = new Entry();
@@ -692,48 +712,11 @@ describe('Log', function() {
         throw error;
       };
 
-      log.decorateEntries_([entry], function(err) {
+      try {
+        log.decorateEntries_([entry]);
+      } catch (err) {
         assert.strictEqual(err, error);
-        done();
-      });
-    });
-
-    it('should return extended entry with default resource', function(done) {
-      var entry = new FakeEntry();
-      entry.toJSON = function() {
-        return toJSONResponse;
-      };
-
-      var entryWithDefaultResource = {};
-
-      log.metadata_.assignDefaultResource = function(entryJson, callback) {
-        assert.strictEqual(entryJson, toJSONResponse);
-        callback(null, entryWithDefaultResource);
-      };
-
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], entryWithDefaultResource);
-        done();
-      });
-    });
-
-    it('should return original entry without resource', function(done) {
-      var entry = new Entry();
-      entry.toJSON = function() {
-        return toJSONResponse;
-      };
-
-      log.metadata_.assignDefaultResource = function(entryJson, callback) {
-        assert.strictEqual(entryJson, toJSONResponse);
-        callback();
-      };
-
-      log.decorateEntries_([entry], function(err, decoratedEntries) {
-        assert.ifError(err);
-        assert.strictEqual(decoratedEntries[0], toJSONResponse);
-        done();
-      });
+      }
     });
   });
 });

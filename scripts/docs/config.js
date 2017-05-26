@@ -103,6 +103,10 @@ module.exports = {
     translate: {
       title: 'Cloud Translation API'
     },
+    'video-intelligence': {
+      title: 'Cloud Video Intelligence',
+      instanceName: 'video'
+    },
     vision: {
       title: 'Cloud Vision'
     }

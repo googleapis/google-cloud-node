@@ -66,7 +66,29 @@ var loggingBunyan = require('@google-cloud/logging-bunyan')({
 // ...you're good to go!
 ```
 
+## Formatting Request Logs
+
+To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
+
+![Request Log Example](doc/images/request-log.png)
+
+```js
+logger.info({ 
+  httpRequest: {
+    status: res.statusCode,
+    requestUrl: req.url,
+    requestMethod: req.method,
+    remoteIp: req.connection.remoteAddress,
+    // etc.
+  }
+}, req.path);
+```
+
+The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message.
+
+
 [bunyan]: https://github.com/trentm/node-bunyan
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
+[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
 [dev-console]: https://console.developers.google.com/project

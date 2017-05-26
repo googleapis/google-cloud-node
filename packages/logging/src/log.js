@@ -21,7 +21,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var async = require('async');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
@@ -589,12 +588,27 @@ Log.prototype.write = function(entry, options, callback) {
     options = {};
   }
 
-  this.decorateEntries_(arrify(entry), function(err, decoratedEntries) {
-    // Ignore errors (the API will speak up if it has an issue).
+  if (!options.resource) {
+    this.metadata_.getDefaultResource(function(err, resource) {
+      // Ignore errors (the API will speak up if it has an issue).
+      writeWithResource(resource);
+    });
+  } else {
+    writeWithResource(options.resource);
+  }
+
+  function writeWithResource(resource) {
+    var decoratedEntries;
+    try {
+      decoratedEntries = self.decorateEntries_(arrify(entry));
+    } catch (err) {
+      // Ignore errors (the API will speak up if it has an issue).
+    }
 
     var reqOpts = extend({
       logName: self.formattedName_,
-      entries: decoratedEntries
+      entries: decoratedEntries,
+      resource: resource
     }, options);
 
     delete reqOpts.gaxOptions;
@@ -605,41 +619,30 @@ Log.prototype.write = function(entry, options, callback) {
       reqOpts: reqOpts,
       gaxOpts: options.gaxOptions
     }, callback);
-  });
+  }
 };
 
 /**
- * All entries are passed through here to make sure this log is attached to the
- * entry.
+ * All entries are passed through here in order to get them serialized.
  *
  * @private
  *
- * @param {object} entry - An entry object.
+ * @param {object[]} entries - Entry objects.
+ * @return {object[]} Serialized entries.
+ * @throws if there is an error during serialization.
  */
-Log.prototype.decorateEntries_ = function(entries, callback) {
+Log.prototype.decorateEntries_ = function(entries) {
   var self = this;
 
-  async.map(entries, function(entry, callback) {
+  return entries.map(function(entry) {
     if (!(entry instanceof Entry)) {
       entry = self.entry(entry);
     }
 
-    var decoratedEntry;
-
-    try {
-      decoratedEntry = entry.toJSON({
-        removeCircular: self.removeCircular_
-      });
-    } catch(e) {
-      callback(e);
-      return;
-    }
-
-    self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
-      // Ignore errors (the API will speak up if it has an issue).
-      callback(null, entry || decoratedEntry);
+    return entry.toJSON({
+      removeCircular: self.removeCircular_
     });
-  }, callback);
+  });
 };
 
 /*! Developer Documentation

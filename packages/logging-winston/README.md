@@ -70,7 +70,28 @@ winston.add(transport, {
 // ...you're good to go!
 ```
 
+## Formatting Request Logs
+
+To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
+
+![Request Log Example](/packages/logging-winston/doc/images/request-log.png)
+
+```js
+winston.info(`${req.url} endpoint hit`, {
+  httpRequest: {
+    status: res.statusCode,
+    requestUrl: req.url,
+    requestMethod: req.method,
+    remoteIp: req.connection.remoteAddress,
+    // etc.
+  }
+});
+```
+
+The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message.
+
 [winston]: https://github.com/winstonjs/winston
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
+[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest

@@ -35,7 +35,7 @@ describe('Vision', function() {
     logo: path.join(__dirname, 'data/logo.jpg'),
     rushmore: path.join(__dirname, 'data/rushmore.jpg'),
     text: path.join(__dirname, 'data/text.png'),
-    malformed: path.join(__dirname, 'data/index.yaml')
+    malformed: __filename
   };
 
   var TESTS_PREFIX = 'gcloud-vision-test';

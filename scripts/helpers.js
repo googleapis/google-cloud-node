@@ -241,7 +241,8 @@ Module.prototype.runSystemTests = function() {
     'common-grpc',
     'error-reporting',
     'google-cloud',
-    'monitoring'
+    'monitoring',
+    'video-intelligence'
   ];
 
   if (modulesExcludedFromSystemTests.indexOf(this.name) > -1) {
