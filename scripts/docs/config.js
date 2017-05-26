@@ -63,6 +63,9 @@ module.exports = {
     datastore: {
       title: 'Cloud Datastore'
     },
+    dlp: {
+      title: 'DLP API'
+    },
     dns: {
       title: 'Cloud DNS'
     },
