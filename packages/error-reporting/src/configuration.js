@@ -104,7 +104,7 @@ var Configuration = function(givenConfig, logger) {
    */
   this._key = null;
   /**
-   * The _keyFilename property is meant to contain a path to a file containing
+   * The keyFilename property is meant to contain a path to a file containing
    * user or service account credentials, which will be used in place of
    * application default credentials. This property will remain null if no
    * value for keyFilename is given in the runtime configuration.
@@ -113,9 +113,9 @@ var Configuration = function(givenConfig, logger) {
    * @type {String|Null}
    * @defaultvalue null
    */
-  this._keyFilename = null;
+  this.keyFilename = null;
   /**
-   * The _credentials property is meant to contain an object representation of
+   * The credentials property is meant to contain an object representation of
    * user or service account credentials, which will be used in place of
    * application default credentials. This property will remain null if no
    * value for credentials is given in the runtime configuration.
@@ -124,7 +124,7 @@ var Configuration = function(givenConfig, logger) {
    * @type {Credentials|Null}
    * @defaultvalue null
    */
-  this._credentials = null;
+  this.credentials = null;
   /**
    * The _serviceContext property is meant to contain the optional service
    * context information which may be given in the runtime configuration. If
@@ -258,12 +258,12 @@ Configuration.prototype._gatherLocalConfiguration = function() {
     throw new Error('config.key must be a string');
   }
   if (isString(this._givenConfiguration.keyFilename)) {
-    this._keyFilename = this._givenConfiguration.keyFilename;
+    this.keyFilename = this._givenConfiguration.keyFilename;
   } else if (has(this._givenConfiguration, 'keyFilename')) {
     throw new Error('config.keyFilename must be a string');
   }
   if (isObject(this._givenConfiguration.credentials)) {
-    this._credentials = this._givenConfiguration.credentials;
+    this.credentials = this._givenConfiguration.credentials;
   } else if (has(this._givenConfiguration, 'credentials')) {
     throw new Error('config.credentials must be a valid credentials object');
   }
@@ -335,24 +335,24 @@ Configuration.prototype.getKey = function() {
   return this._key;
 };
 /**
- * Returns the _keyFilename property on the instance.
+ * Returns the keyFilename property on the instance.
  * @memberof Configuration
  * @public
  * @function getKeyFilename
- * @returns {String|Null} - returns the _keyFilename property
+ * @returns {String|Null} - returns the keyFilename property
  */
 Configuration.prototype.getKeyFilename = function() {
-  return this._keyFilename;
+  return this.keyFilename;
 };
 /**
- * Returns the _credentials property on the instance.
+ * Returns the credentials property on the instance.
  * @memberof Configuration
  * @public
  * @function getCredentials
- * @returns {Credentials|Null} - returns the _credentials property
+ * @returns {Credentials|Null} - returns the credentials property
  */
 Configuration.prototype.getCredentials = function() {
-  return this._credentials;
+  return this.credentials;
 };
 /**
  * Returns the _serviceContext property on the instance.
