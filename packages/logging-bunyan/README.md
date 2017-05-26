@@ -66,6 +66,10 @@ var loggingBunyan = require('@google-cloud/logging-bunyan')({
 // ...you're good to go!
 ```
 
+## Error Reporting
+
+Any `Error` objects you log at severity `error` at higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. You may also want to see [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
+
 ## Formatting Request Logs
 
 To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
@@ -92,3 +96,5 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
 [dev-console]: https://console.developers.google.com/project
+[error-reporting]: https://cloud.google.com/error-reporting/
+[@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
