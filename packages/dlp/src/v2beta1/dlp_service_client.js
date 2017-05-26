@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'dlp.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.0.0';
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in

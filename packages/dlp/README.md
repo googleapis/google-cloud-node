@@ -8,12 +8,12 @@ Idiomatic Node.js client for [DLP API][Product Documentation]
 In order to use this library, you first need to go through the following steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable the dlp api.](https://console.cloud.google.com/apis/api/dlp)
+2. [Enable the DLP API.](https://console.cloud.google.com/apis/api/dlp)
 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
 ```
-$ npm install @google-cloud/dlp
+$ npm install --save @google-cloud/dlp
 ```
 
 ### Next Steps

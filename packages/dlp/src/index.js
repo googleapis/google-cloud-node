@@ -34,8 +34,10 @@ const VERSION = require('../package.json').version;
  * scheduling of data scans on Google Cloud Platform based data sets.
  *
  * @param {object=} options - [Configuration object](#/docs).
- * @param {number=} options.port - The port on which to connect to the remote host.
- * @param {string=} options.servicePath - The domain name of the API remote host.
+ * @param {number=} options.port - The port on which to connect to
+ *     the remote host.
+ * @param {string=} options.servicePath - The domain name of the
+ *     API remote host.
  */
 function dlpV2beta1(options) {
   // Define the header options.
