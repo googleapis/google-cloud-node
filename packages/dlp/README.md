@@ -1,6 +1,6 @@
 # Node.js Client for DLP API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
-Idiomatic Node.js client for [DLP API][Product Documentation]
+[DLP API][Product Documentation]: The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
