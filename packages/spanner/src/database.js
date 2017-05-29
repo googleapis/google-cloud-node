@@ -480,11 +480,13 @@ Database.prototype.getSchema = function(callback) {
  * // This is typically useful if your param value can be null.
  * //-
  * var query = {
- *   sql: 'SELECT * FROM Singers WHERE name = @name',
- *   params: {
- *     name: 'Eddie Wilson'
+ *   sql: 'SELECT * FROM Singers WHERE name = @name AND id = @id',
+ *   params: {,
+ *     id: spanner.int(8),
+ *     name: null
  *   },
  *   types: {
+ *     id: 'int64',
  *     name: 'string'
  *   }
  * };
@@ -662,6 +664,8 @@ Database.prototype.runStream = function(query, options) {
       var childType;
       var child;
 
+      // if a type is an ARRAY, then we'll accept an object specifying
+      // the type and the child type
       if (is.object(type)) {
         childType = type.child;
         child = codec.TYPES.indexOf(childType);

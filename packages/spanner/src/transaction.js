@@ -368,7 +368,7 @@ Transaction.prototype.requestStream = function(config) {
 
   requestStream.on('error', function(err) {
     if (err.code !== ABORTED) {
-      userStream.emit('error', err);
+      userStream.destroy(err);
       return;
     }
 

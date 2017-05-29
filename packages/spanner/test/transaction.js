@@ -598,12 +598,12 @@ describe('Transaction', function() {
 
       it('should emit non-abort errors to the user stream', function(done) {
         var error = new Error('ohnoes');
+        var userStream = transaction.requestStream(config);
 
-        transaction.requestStream(config)
-          .on('error', function(err) {
-            assert.strictEqual(err, error);
-            done();
-          });
+        userStream.destroy = function(err) {
+          assert.strictEqual(err, error);
+          done();
+        };
 
         fakeStream.emit('error', error);
       });
