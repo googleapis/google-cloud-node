@@ -792,7 +792,7 @@ var nsRecord = zone.record('ns', {
   data: 'ns-cloud1.googledomains.com.'
 });
 
-zone.addRecords([nsRecord], function(err, change) {});
+zone.addRecord(nsRecord, function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
