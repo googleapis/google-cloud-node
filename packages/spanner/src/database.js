@@ -481,7 +481,7 @@ Database.prototype.getSchema = function(callback) {
  * //-
  * var query = {
  *   sql: 'SELECT * FROM Singers WHERE name = @name AND id = @id',
- *   params: {,
+ *   params: {
  *     id: spanner.int(8),
  *     name: null
  *   },
