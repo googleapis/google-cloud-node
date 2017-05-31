@@ -1128,7 +1128,7 @@ model.query('Hello', function(err, results) {
 - [GitHub Repo][stackdriver-debug-nodejs-repo]
 - [Official Documentation][stackdriver-debug-docs]
 
-*The source code for the Node.js Cloud Debugger Agent lives in a [separate repo][cloud-debug-nodejs-repo].*
+*The source code for the Node.js Cloud Debugger Agent lives in a [separate repo][stackdriver-debug-nodejs-repo].*
 
 
 #### Using the Stackdriver Debug Agent module
