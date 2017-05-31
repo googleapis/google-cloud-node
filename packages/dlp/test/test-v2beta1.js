@@ -131,19 +131,21 @@ describe('DlpServiceClient', function() {
 
       // Mock response
       var name = 'name3373707';
-      var done = true;
       var expectedResponse = {
-          name : name,
-          done : done
+          name : name
       };
 
       // Mock Grpc layer
-      client._createInspectOperation = mockSimpleGrpcMethod(request, expectedResponse);
+      client._createInspectOperation = mockLongRunningGrpcMethod(request, expectedResponse);
 
-      client.createInspectOperation(request, function(err, response) {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
+      client.createInspectOperation(request).then(function(responses) {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(function(responses) {
+        assert.deepStrictEqual(responses[0], expectedResponse);
         done();
+      }).catch(function(err) {
+        done(err);
       });
     });
 
@@ -160,9 +162,14 @@ describe('DlpServiceClient', function() {
       };
 
       // Mock Grpc layer
-      client._createInspectOperation = mockSimpleGrpcMethod(request, null, error);
+      client._createInspectOperation = mockLongRunningGrpcMethod(request, null, error);
 
-      client.createInspectOperation(request, function(err, response) {
+      client.createInspectOperation(request).then(function(responses) {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(function(responses) {
+        assert.fail();
+      }).catch(function(err) {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
         done();
@@ -312,5 +319,23 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
     } else {
       callback(null);
     }
+  };
+}
+
+function mockLongRunningGrpcMethod(expectedRequest, response, error) {
+  return function(request) {
+    assert.deepStrictEqual(request, expectedRequest);
+    var mockOperation = {
+      promise: function() {
+        return new Promise(function(resolve, reject) {
+          if (error) {
+            reject(error)
+          } else {
+            resolve([response]);
+          }
+        });
+      }
+    };
+    return Promise.resolve([mockOperation]);
   };
 }
