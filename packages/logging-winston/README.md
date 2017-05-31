@@ -72,7 +72,7 @@ winston.add(transport, {
 
 ## Error Reporting
 
-Any `Error` objects you log at severity `error` at higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. You may also want to see [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
 
 ## Formatting Request Logs
 
