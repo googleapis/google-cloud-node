@@ -70,6 +70,10 @@ winston.add(transport, {
 // ...you're good to go!
 ```
 
+## Error Reporting
+
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
+
 ## Formatting Request Logs
 
 To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
@@ -95,3 +99,5 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
 [http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+[error-reporting]: https://cloud.google.com/error-reporting/
+[@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
