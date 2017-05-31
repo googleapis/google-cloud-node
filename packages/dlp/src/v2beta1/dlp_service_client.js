@@ -84,6 +84,18 @@ function DlpServiceClient(gaxGrpc, grpcClients, opts) {
     'grpc/' + gaxGrpc.grpcVersion
   );
 
+  this.operationsClient = new gax.lro({
+    auth: gaxGrpc.auth,
+    grpc: gaxGrpc.grpc
+  }).operationsClient(opts);
+
+  this.longrunningDescriptors = {
+    createInspectOperation: new gax.LongrunningDescriptor(
+      this.operationsClient,
+      grpcClients.google.privacy.dlp.v2beta1.InspectOperationResult.decode,
+      grpcClients.google.privacy.dlp.v2beta1.InspectOperationMetadata.decode)
+  };
+
   var defaults = gaxGrpc.constructSettings(
       'google.privacy.dlp.v2beta1.DlpService',
       configData,
@@ -113,7 +125,7 @@ function DlpServiceClient(gaxGrpc, grpcClients, opts) {
         };
       }),
       defaults[methodName],
-      null);
+      self.longrunningDescriptors[methodName]);
   });
 }
 
@@ -302,9 +314,9 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [google.longrunning.Operation]{@link external:"google.longrunning.Operation"}.
+ *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
  * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [google.longrunning.Operation]{@link external:"google.longrunning.Operation"}.
+ *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
@@ -318,9 +330,48 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *     storageConfig: storageConfig,
  *     outputConfig: outputConfig
  * };
+ *
+ * // Handle the operation using the promise pattern.
  * client.createInspectOperation(request).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
+ *     var operation = responses[0];
+ *     var initialApiResponse = responses[1];
+ *
+ *     // Operation#promise starts polling for the completion of the LRO.
+ *     return operation.promise();
+ * }).then(function(responses) {
+ *     // The final result of the operation.
+ *     var result = responses[0];
+ *
+ *     // The metadata value of the completed operation.
+ *     var metadata = responses[1];
+ *
+ *     // The response of the api call returning the complete operation.
+ *     var finalApiResponse = responses[2];
+ * }).catch(function(err) {
+ *     console.error(err);
+ * });
+ *
+ * // Handle the operation using the event emitter pattern.
+ * client.createInspectOperation(request).then(function(responses) {
+ *     var operation = responses[0];
+ *     var initialApiResponse = responses[1];
+ *
+ *     // Adding a listener for the "complete" event starts polling for the
+ *     // completion of the operation.
+ *     operation.on('complete', function(result, metadata, finalApiResponse) {
+ *       // doSomethingWith(result);
+ *     });
+ *
+ *     // Adding a listener for the "progress" event causes the callback to be
+ *     // called on any change in metadata when the operation is polled.
+ *     operation.on('progress', function(metadata, apiResponse) {
+ *       // doSomethingWith(metadata)
+ *     })
+ *
+ *     // Adding a listener for the "error" event handles any errors found during polling.
+ *     operation.on('error', function(err) {
+ *       // throw(err);
+ *     })
  * }).catch(function(err) {
  *     console.error(err);
  * });
