@@ -9,13 +9,20 @@
 This module provides Stackdriver Error Reporting support for Node.js applications.
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
-applications running in almost any environment. 
+applications running in almost any environment.
 
 ![Stackdriver Error Reporting overview](doc/images/errors-overview.png)
 
 Here's an introductory video that provides some more details:
 
 [![Learn about Error Reporting in Stackdriver](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
+
+Note that [@google-cloud/logging-winston][logging-winston] and
+[@google-cloud/logging-bunyan][logging-bunyan] automatically integrate with the
+Error Reporting service for Error objects logged at severity `error` or higher,
+for applications running on Google Cloud Platform. If you are already using
+Winston or Bunyan in your application, and don't need direct access/control of
+error reporting, you may want to check those modules as well.
 
 ## Prerequisites
 
@@ -48,6 +55,9 @@ var errors = require('@google-cloud/error-reporting')({
 
 // Report an error to the Stackdriver Error Reporting API
 errors.report(new Error('Something broke!'));
+
+// We also provide error handling middleware for express, hapi, restify & koa.
+// See sections below.
 ```
 
 3. **View reported errors:**
@@ -184,6 +194,8 @@ app.get('/exception', () => {
   JSON.parse('{\"malformedJson\": true');
 });
 
+// Note that express error handling middleware should be attached after all
+// the other routes and use() calls. See [express docs][express-error-docs].
 app.use(errors.express);
 
 app.listen(3000);
@@ -253,10 +265,13 @@ server.head('/hello/:name', respond);
 server.listen(3000);
 ```
 
-[gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
 [app-default-credentials]: https://developers.google.com/identity/protocols/application-default-credentials
-[service-account]: https://console.developers.google.com/apis/credentials/serviceaccountkey
+[express-error-docs]: https://expressjs.com/en/guide/error-handling.html
+[gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
+[logging-bunyan]: https://www.npmjs.com/package/@google-cloud/logging-bunyan
+[logging-winston]: https://www.npmjs.com/package/@google-cloud/logging-winston
 [npm-image]: https://badge.fury.io/js/%40google-cloud%2Ferror-reporting.svg
 [npm-url]: https://npmjs.org/package/@google-cloud/error-reporting
+[service-account]: https://console.developers.google.com/apis/credentials/serviceaccountkey
 [snyk-image]: https://snyk.io/test/npm/@google-cloud/error-reporting/badge.svg
 [snyk-url]: https://snyk.io/test/npm/@google-cloud/error-reporting
