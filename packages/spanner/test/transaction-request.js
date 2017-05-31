@@ -102,6 +102,19 @@ describe('TransactionRequest', function() {
       TransactionRequest.formatTimestampOptions_ = formatTimestamp;
     });
 
+    it('should not localize an empty options object', function() {
+      var formatTimestamp = TransactionRequest.formatTimestampOptions_;
+
+      TransactionRequest.formatTimestampOptions_ = function() {
+        throw new Error('Should not have been called.');
+      };
+
+      var transaction = new TransactionRequest({});
+
+      assert.strictEqual(transaction.options, undefined);
+      TransactionRequest.formatTimestampOptions_ = formatTimestamp;
+    });
+
     it('should promisify all the things', function() {
       assert(promisified);
     });
@@ -141,6 +154,21 @@ describe('TransactionRequest', function() {
 
       var formatted = TransactionRequest.formatTimestampOptions_(options);
       assert.deepEqual(formatted, expected);
+    });
+  });
+
+  describe('fromProtoTimestamp_', function() {
+    it('should format into a date object', function() {
+      var now = new Date();
+
+      var protoTimestamp = {
+        seconds: Math.floor(now.getTime() / 1000),
+        nanos: now.getMilliseconds() * 1e6
+      };
+
+      var date = TransactionRequest.fromProtoTimestamp_(protoTimestamp);
+
+      assert.deepEqual(date, now);
     });
   });
 
@@ -324,6 +352,104 @@ describe('TransactionRequest', function() {
 
         transactionRequest.requestStream = function(options) {
           assert.strictEqual(options.reqOpts.keys, undefined);
+          done();
+        };
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+    });
+
+    describe('query.ranges', function() {
+      it('should encode/map the inputs', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'key',
+            endClosed: ['composite', 'key']
+          }]
+        };
+
+        var encodedValue = {};
+        var numEncodeRequests = 0;
+
+        fakeCodec.encode = function(key) {
+          var keys = ['key', 'composite', 'key'];
+
+          assert.strictEqual(key, keys[numEncodeRequests++]);
+          return encodedValue;
+        };
+
+        transactionRequest.requestStream = function(options) {
+          var expectedRanges = [
+            {
+              startOpen: {
+                values: [encodedValue]
+              },
+              endClosed: {
+                values: [encodedValue, encodedValue]
+              }
+            }
+          ];
+
+          assert.strictEqual(numEncodeRequests, 3);
+          assert.deepStrictEqual(options.reqOpts.keySet.ranges, expectedRanges);
+          done();
+        };
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should arrify query.ranges', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'start',
+            endClosed: 'end'
+          }]
+        };
+
+        var encodedValue = {};
+        var numEncodeRequests = 0;
+
+        fakeCodec.encode = function(key) {
+          assert.strictEqual(key, ['start', 'end'][numEncodeRequests++]);
+          return encodedValue;
+        };
+
+        transactionRequest.requestStream = function(options) {
+          var expectedRanges = [
+            {
+              startOpen: {
+                values: [encodedValue]
+              },
+              endClosed: {
+                values: [encodedValue]
+              }
+            }
+          ];
+
+          assert.strictEqual(numEncodeRequests, 2);
+          assert.deepStrictEqual(options.reqOpts.keySet.ranges, expectedRanges);
+          done();
+        };
+
+        var stream = transactionRequest.createReadStream(TABLE, query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should remove the ranges property from the query', function(done) {
+        var query = {
+          ranges: [{
+            startOpen: 'start',
+            endClosed: 'end'
+          }]
+        };
+
+        transactionRequest.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.ranges, undefined);
           done();
         };
 

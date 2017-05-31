@@ -464,4 +464,71 @@ describe('codec', function() {
       assert.deepEqual(encoded.public, 10);
     });
   });
+
+  describe('getType', function() {
+    it('should determine if the value is a boolean', function() {
+      assert.strictEqual(codec.getType(true), 'bool');
+    });
+
+    it('should determine if the value is a float', function() {
+      assert.strictEqual(codec.getType(NaN), 'float64');
+      assert.strictEqual(codec.getType(Infinity), 'float64');
+      assert.strictEqual(codec.getType(-Infinity), 'float64');
+      assert.strictEqual(codec.getType(2.2), 'float64');
+      assert.strictEqual(codec.getType(new codec.Float(1.1)), 'float64');
+    });
+
+    it('should determine if the value is an int', function() {
+      assert.strictEqual(codec.getType(1234), 'int64');
+      assert.strictEqual(codec.getType(new codec.Int(1)), 'int64');
+    });
+
+    it('should determine if the value is a string', function() {
+      assert.strictEqual(codec.getType('abc'), 'string');
+    });
+
+    it('should determine if the value is bytes', function() {
+      assert.strictEqual(codec.getType(new Buffer('abc')), 'bytes');
+    });
+
+    it('should determine if the value is a timestamp', function() {
+      assert.strictEqual(codec.getType(new Date()), 'timestamp');
+    });
+
+    it('should determine if the value is a date', function() {
+      assert.strictEqual(codec.getType(new codec.SpannerDate()), 'date');
+    });
+
+    it('should attempt to determine arrays and their values', function() {
+      assert.deepEqual(codec.getType([Infinity]), {
+        type: 'array',
+        child: 'float64'
+      });
+    });
+
+    it('should return unspecified for unknown values', function() {
+      assert.strictEqual(codec.getType(null), 'unspecified');
+
+      assert.deepEqual(codec.getType([null]), {
+        type: 'array',
+        child: 'unspecified'
+      });
+    });
+  });
+
+  describe('TYPES', function() {
+    it('should export types', function() {
+      assert.deepEqual(codec.TYPES, [
+        'unspecified',
+        'bool',
+        'int64',
+        'float64',
+        'timestamp',
+        'date',
+        'string',
+        'bytes',
+        'array'
+      ]);
+    });
+  });
 });

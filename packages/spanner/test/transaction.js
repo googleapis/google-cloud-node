@@ -142,39 +142,39 @@ describe('Transaction', function() {
     });
   });
 
-  describe('getRetryDelay_', function() {
-    it('should return null if error object has no details', function() {
-      var grpcError = {};
-
-      assert.strictEqual(Transaction.getRetryDelay_(grpcError), null);
-    });
-
-    it('should return null if it cannot locate the retry info', function() {
-      var grpcError = {
-        details: []
+  describe('createDeadlineError_', function() {
+    it('should augment the error', function() {
+      var originalError = {
+        code: 10,
+        message: 'Transaction aborted.',
+        a: 'a',
+        b: 'b'
       };
 
-      assert.strictEqual(Transaction.getRetryDelay_(grpcError), null);
-    });
-
-    it('should return the correct retry delay', function() {
-      var now = Date.now();
-
-      var grpcError = {
-        details: [
-          {
-            typeUrl: 'type-url/google.rpc.RetryInfo',
-            retryDelay: {
-              nanos: '100', // string to confirm it is parsed
-              seconds: String(now) // string to confirm it is parsed
-            }
-          }
-        ]
+      var expectedError = {
+        code: 4,
+        message: 'Deadline for Transaction exceeded.',
+        a: 'a',
+        b: 'b'
       };
 
-      var expectedDelay = now * 1000 + 100 / 1e6;
+      var formattedError = Transaction.createDeadlineError_(originalError);
 
-      assert.strictEqual(Transaction.getRetryDelay_(grpcError), expectedDelay);
+      assert.deepEqual(expectedError, formattedError);
+      assert.notStrictEqual(originalError, formattedError);
+    });
+  });
+
+  describe('createRetryDelay_', function() {
+    it('should return exponential retry delay', function() {
+      [0, 1].forEach(function(retries) {
+        var min = (Math.pow(2, retries) * 1000);
+        var max = (Math.pow(2, retries) * 1000) + 1000;
+
+        var time = Transaction.createRetryDelay_(retries);
+
+        assert(time >= min && time <= max);
+      });
     });
   });
 
@@ -262,6 +262,28 @@ describe('Transaction', function() {
           done();
         });
       });
+
+      it('should set the timestamp if applicable', function(done) {
+        var fakeProtoTimestamp = {};
+        var fakeDate = new Date();
+
+        transaction.request = function(config, callback) {
+          callback(null, extend({
+            readTimestamp: fakeProtoTimestamp
+          }, API_RESPONSE));
+        };
+
+        FakeTransactionRequest.fromProtoTimestamp_ = function(value) {
+          assert.strictEqual(value, fakeProtoTimestamp);
+          return fakeDate;
+        };
+
+        transaction.begin(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(transaction.readTimestamp, fakeDate);
+          done();
+        });
+      });
     });
   });
 
@@ -324,66 +346,6 @@ describe('Transaction', function() {
           done();
         });
       });
-
-      describe('aborted', function() {
-        var ABORTED_ERROR = {
-          code: 10
-        };
-
-        var DELAY = 100;
-
-        beforeEach(function() {
-          transaction.runFn_ = util.noop;
-
-          transaction.request = function(config, callback) {
-            callback(ABORTED_ERROR, API_RESPONSE);
-          };
-        });
-
-        it('should retry after a delay set by the error', function(done) {
-          Transaction.getRetryDelay_ = function(err) {
-            assert.strictEqual(err, ABORTED_ERROR);
-            return DELAY;
-          };
-
-          transaction.retry_ = function(delay) {
-            assert.strictEqual(delay, DELAY);
-            done();
-          };
-
-          transaction.commit(assert.ifError);
-        });
-
-        it('should retry after an exponential delay', function(done) {
-          Transaction.getRetryDelay_ = function() {
-            return false;
-          };
-
-          transaction.createRetryDelay_ = function() {
-            return DELAY;
-          };
-
-          transaction.retry_ = function(delay) {
-            assert.strictEqual(delay, DELAY);
-            done();
-          };
-
-          transaction.commit(assert.ifError);
-        });
-
-        it('should execute callback if retry failed', function(done) {
-          var error = new Error('Error.');
-
-          transaction.retry_ = function(delay, callback) {
-            callback(error);
-          };
-
-          transaction.commit(function(err) {
-            assert.strictEqual(err, error);
-            done();
-          });
-        });
-      });
     });
 
     describe('success', function() {
@@ -410,24 +372,153 @@ describe('Transaction', function() {
     });
   });
 
+
+  describe('end', function() {
+    it('should empty the queue', function() {
+      transaction.queuedMutations_ = [{}, {}];
+
+      transaction.end();
+
+      assert.strictEqual(transaction.queuedMutations_.length, 0);
+    });
+
+    it('should reset the retry counter', function() {
+      transaction.retries_ = 10;
+
+      transaction.end();
+
+      assert.strictEqual(transaction.retries_, 0);
+    });
+
+    it('should nullify the run function', function() {
+      transaction.runFn_ = function() {};
+
+      transaction.end();
+
+      assert.strictEqual(transaction.runFn_, null);
+    });
+
+    it('should delete the ID', function() {
+      transaction.id = 'transaction-id';
+
+      transaction.end();
+
+      assert.strictEqual(transaction.id, undefined);
+    });
+
+    it('should optionally execute a callback', function(done) {
+      transaction.end(done);
+    });
+  });
+
+  describe('queue_', function() {
+    it('should push a mutation object into the queue array', function() {
+      var mutation = {};
+
+      assert.deepEqual(transaction.queuedMutations_, []);
+
+      transaction.queue_(mutation);
+
+      assert.strictEqual(transaction.queuedMutations_[0], mutation);
+    });
+  });
+
   describe('request', function() {
     it('should make the correct request', function(done) {
       var config = {
         reqOpts: {
           a: 'b',
-          c: 'd'
+          c: 'd',
+          gaxOptions: {}
         },
-        method: function(reqOpts, callback) {
+        method: function(reqOpts, gaxOptions) {
           var expectedReqOpts = extend({}, config.reqOpts, {
             session: transaction.session.formattedName_
           });
 
+          delete expectedReqOpts.gaxOptions;
+
           assert.deepEqual(reqOpts, expectedReqOpts);
-          callback(); // done()
+          assert.strictEqual(gaxOptions, config.reqOpts.gaxOptions);
+          done();
         }
       };
 
-      transaction.request(config, done);
+      transaction.request(config, assert.ifError);
+    });
+
+    it('should pass the response back to the callback', function(done) {
+      var resp = {};
+
+      var config = {
+        reqOpts: {},
+        method: function(reqOpts, gaxOptions, callback) {
+          callback(null, resp);
+        }
+      };
+
+      transaction.request(config, function(err, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      });
+    });
+
+    describe('aborted errors', function() {
+      var abortedError = { code: 10 };
+      var resp = {};
+      var config;
+
+      beforeEach(function() {
+        config = {
+          method: function(reqOpts, gaxOptions, callback) {
+            callback(abortedError, resp);
+          }
+        };
+      });
+
+      it('should retry the txn if abort occurs', function(done) {
+        transaction.retry_ = done;
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, abortedError);
+          return true;
+        };
+
+        transaction.request(config, function() {
+          done(new Error('Should not have been called.'));
+        });
+      });
+
+      it('should return a deadline error if not retrying', function(done) {
+        transaction.retry_ = function() {
+          done(new Error('Should not have been called.'));
+        };
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, abortedError);
+          return false;
+        };
+
+        var createDeadlineError = Transaction.createDeadlineError_;
+        var deadlineError = {};
+
+        Transaction.createDeadlineError_ = function(err) {
+          assert.strictEqual(err, abortedError);
+          return deadlineError;
+        };
+
+        transaction.runFn_ = function(err) {
+          assert.strictEqual(err, deadlineError);
+
+          Transaction.createDeadlineError_ = createDeadlineError;
+          done();
+        };
+
+        transaction.request(config, function() {
+          done(new Error('Should not have been called.'));
+        });
+      });
     });
   });
 
@@ -453,6 +544,126 @@ describe('Transaction', function() {
 
       var returnValue = transaction.requestStream(config);
       assert.strictEqual(returnValue, methodReturnValue);
+    });
+
+    it('should support gaxOptions', function(done) {
+      var fakeGaxOptions = {};
+
+      var fakeReqOpts = {
+        a: 'a',
+        gaxOptions: fakeGaxOptions
+      };
+
+      var config = {
+        reqOpts: fakeReqOpts,
+        method: function(reqOpts, gaxOptions) {
+          assert.strictEqual(reqOpts.gaxOptions, undefined);
+          assert.deepEqual(gaxOptions, fakeGaxOptions);
+          done();
+        }
+      };
+
+      transaction.requestStream(config);
+    });
+
+    describe('runTransaction mode', function() {
+      var fakeStream;
+
+      var config = {
+        reqOpts: {},
+        method: function() {
+          return fakeStream;
+        }
+      };
+
+      beforeEach(function() {
+        fakeStream = through.obj();
+        transaction.runFn_ = function() {};
+      });
+
+      it('should pipe the request stream to the user stream', function(done) {
+        var fakeData = {
+          a: 'a'
+        };
+
+        transaction.requestStream(config)
+          .on('error', done)
+          .on('data', function(data) {
+            assert.strictEqual(data, fakeData);
+            done();
+          });
+
+        fakeStream.push(fakeData);
+      });
+
+      it('should emit non-abort errors to the user stream', function(done) {
+        var error = new Error('ohnoes');
+        var userStream = transaction.requestStream(config);
+
+        userStream.destroy = function(err) {
+          assert.strictEqual(err, error);
+          done();
+        };
+
+        fakeStream.emit('error', error);
+      });
+
+      it('should retry the transaction', function(done) {
+        var error = { code: 10 };
+        var stream;
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, error);
+          return true;
+        };
+
+        transaction.runFn_ = done; // should not be called
+
+        transaction.retry_ = function() {
+          assert(fakeStream._destroyed);
+          assert(stream._destroyed);
+          done();
+        };
+
+        stream = transaction.requestStream(config);
+        stream.on('error', done); // should not be called
+
+        fakeStream.emit('error', error);
+      });
+
+      it('should send a deadline error to the runFn', function(done) {
+        var error = { code: 10 };
+        var stream;
+
+        var deadlineError = {};
+        var createDeadlineError = Transaction.createDeadlineError_;
+
+        Transaction.createDeadlineError_ = function(err) {
+          assert.strictEqual(err, error);
+          return deadlineError;
+        };
+
+        transaction.shouldRetry_ = function(err) {
+          assert.strictEqual(err, error);
+          return false;
+        };
+
+        transaction.retry_ = done; // should not be called
+
+        transaction.runFn_ = function(err) {
+          assert.strictEqual(err, deadlineError);
+          assert(fakeStream._destroyed);
+          assert(stream._destroyed);
+
+          Transaction.createDeadlineError_ = createDeadlineError;
+          done();
+        };
+
+        stream = transaction.requestStream(config);
+        stream.on('error', done); // should not be called
+
+        fakeStream.emit('error', error);
+      });
     });
   });
 
@@ -639,29 +850,240 @@ describe('Transaction', function() {
       makeRequestFn();
     });
 
-    it('should encode query parameters', function(done) {
-      var query = {
-        sql: QUERY,
-        params: {
-          test: 'value'
-        }
-      };
+    describe('query parameters', function() {
+      beforeEach(function() {
+        fakeCodec.encode = function() {};
+      });
 
-      var encodedValue = {};
+      it('should encode query parameters', function(done) {
+        var query = {
+          sql: QUERY,
+          params: {
+            test: 'value'
+          }
+        };
 
-      fakeCodec.encode = function(field) {
-        assert.strictEqual(field, query.params.test);
-        return encodedValue;
-      };
+        var encodedValue = {};
 
-      transaction.requestStream = function(options) {
-        assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
-        done();
-      };
+        fakeCodec.encode = function(field) {
+          assert.strictEqual(field, query.params.test);
+          return encodedValue;
+        };
 
-      var stream = transaction.runStream(query);
-      var makeRequestFn = stream.calledWith_[0];
-      makeRequestFn();
+        transaction.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should attempt to guess the parameter types', function(done) {
+        var params = {
+          unspecified: null,
+          bool: true,
+          int64: 1234,
+          float64: 2.2,
+          timestamp: new Date(),
+          date: new fakeCodec.SpannerDate(),
+          string: 'abc',
+          bytes: new Buffer('abc')
+        };
+
+        var types = Object.keys(params);
+
+        var query = {
+          sql: QUERY,
+          params: params
+        };
+
+        var getTypeCallCount = 0;
+
+        fakeCodec.getType = function(field) {
+          var type = types[getTypeCallCount++];
+
+          assert.strictEqual(params[type], field);
+          return type;
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            unspecified: {
+              code: 0
+            },
+            bool: {
+              code: 1
+            },
+            int64: {
+              code: 2
+            },
+            float64: {
+              code: 3
+            },
+            timestamp: {
+              code: 4
+            },
+            date: {
+              code: 5
+            },
+            string: {
+              code: 6
+            },
+            bytes: {
+              code: 7
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should not overwrite existing type definitions', function(done) {
+        var query = {
+          params: {
+            test: 123
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        fakeCodec.getType = function() {
+          throw new Error('Should not be called');
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 6
+            }
+          });
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should set type to unspecified for unknown types', function(done) {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'unicorn'
+          }
+        };
+
+        fakeCodec.getType = function() {
+          throw new Error('Should not be called');
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 0
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should attempt to guess array types', function(done) {
+        var query = {
+          params: {
+            test: ['abc']
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'string'
+          };
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 8,
+              arrayElementType: {
+                code: 6
+              }
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should set the child to unspecified if unsure', function(done) {
+        var query = {
+          params: {
+            test: [null]
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'unicorn'
+          };
+        };
+
+        transaction.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 8,
+              arrayElementType: {
+                code: 0
+              }
+            }
+          });
+
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should delete the type map from the request options', function(done) {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        transaction.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.types, undefined);
+          done();
+        };
+
+        var stream = transaction.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
     });
 
     it('should not require a transaction ID', function(done) {
@@ -732,99 +1154,13 @@ describe('Transaction', function() {
     });
   });
 
-  describe('createRetryDelay_', function() {
-    var MAX_RETRIES = 2;
-
-    it('should return null if equal to the retry limit', function() {
-      transaction.retries_ = MAX_RETRIES;
-
-      assert.strictEqual(transaction.createRetryDelay_(), null);
-    });
-
-    it('should return null if over the retry limit', function() {
-      transaction.retries_ = MAX_RETRIES + 1;
-
-      assert.strictEqual(transaction.createRetryDelay_(), null);
-    });
-
-
-    it('should return exponential retry delay', function() {
-      [0, 1].forEach(function(retries) {
-        transaction.retries_ = retries;
-
-        var min = (Math.pow(2, retries) * 1000);
-        var max = (Math.pow(2, retries) * 1000) + 1000;
-
-        var time = transaction.createRetryDelay_();
-
-        assert(time >= min && time <= max);
-      });
-    });
-  });
-
-  describe('end', function() {
-    it('should empty the queue', function() {
-      transaction.queuedMutations_ = [{}, {}];
-
-      transaction.end();
-
-      assert.strictEqual(transaction.queuedMutations_.length, 0);
-    });
-
-    it('should reset the retry counter', function() {
-      transaction.retries_ = 10;
-
-      transaction.end();
-
-      assert.strictEqual(transaction.retries_, 0);
-    });
-
-    it('should nullify the run function', function() {
-      transaction.runFn_ = function() {};
-
-      transaction.end();
-
-      assert.strictEqual(transaction.runFn_, null);
-    });
-
-    it('should delete the ID', function() {
-      transaction.id = 'transaction-id';
-
-      transaction.end();
-
-      assert.strictEqual(transaction.id, undefined);
-    });
-  });
-
-  describe('queue_', function() {
-    it('should push a mutation object into the queue array', function() {
-      var mutation = {};
-
-      assert.deepEqual(transaction.queuedMutations_, []);
-
-      transaction.queue_(mutation);
-
-      assert.strictEqual(transaction.queuedMutations_[0], mutation);
-    });
-  });
-
   describe('retry_', function() {
-    var TIMEOUT = 1000;
-
-    it('should increment the retry counter', function() {
-      transaction.retries_ = 0;
-
-      transaction.retry_(TIMEOUT);
-
-      assert.strictEqual(transaction.retries_, 1);
-    });
-
     it('should begin the transaction', function(done) {
       transaction.begin = function() {
         done();
       };
 
-      transaction.retry_(TIMEOUT);
+      transaction.retry_();
     });
 
     it('should return an error if transaction cannot begin', function(done) {
@@ -834,10 +1170,12 @@ describe('Transaction', function() {
         callback(error);
       };
 
-      transaction.retry_(TIMEOUT, function(err) {
+      transaction.runFn_ = function(err) {
         assert.strictEqual(err, error);
         done();
-      });
+      };
+
+      transaction.retry_();
     });
 
     describe('transaction began successfully', function() {
@@ -849,52 +1187,85 @@ describe('Transaction', function() {
         };
       });
 
-      it('should execute callback without an error', function(done) {
-        transaction.retry_(TIMEOUT, done);
+      it('should increment the retry counter', function(done) {
+        transaction.retries_ = 0;
+
+        transaction.begin = function(callback) {
+          callback(null);
+          setImmediate(done);
+        };
+
+        transaction.retry_();
+        assert.strictEqual(transaction.retries_, 1);
       });
 
-      it('should empty queued mutations', function(done) {
+      it('should empty queued mutations', function() {
         transaction.queuedMutations_ = [{}];
+        transaction.retry_();
 
-        transaction.retry_(TIMEOUT, function(err) {
-          assert.ifError(err);
-          assert.deepEqual(transaction.queuedMutations_, []);
-          done();
-        });
+        assert.deepEqual(transaction.queuedMutations_, []);
       });
 
       it('should execute run function after timeout', function(done) {
-        var now = Date.now();
+        var createRetryDelay = Transaction.createRetryDelay_;
+        var fakeDelay = 1123123;
 
-        var lowerBoundsForHonoredTimeout = now + TIMEOUT - 100;
-        var upperBoundsForHonoredTimeout = now + TIMEOUT + 100;
+        Transaction.createRetryDelay_ = function(retries) {
+          assert.strictEqual(retries, transaction.retries_);
+          return fakeDelay;
+        };
 
-        transaction.runFn_ = function() {
-          var calledAt = Date.now();
+        var _setTimeout = global.setTimeout;
 
-          assert(calledAt >= lowerBoundsForHonoredTimeout);
-          assert(calledAt <= upperBoundsForHonoredTimeout);
+        global.setTimeout = function(cb, timeout) {
+          assert.strictEqual(timeout, fakeDelay);
+          cb();
+        };
 
+        transaction.runFn_ = function(err, txn) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(txn, transaction);
+
+          Transaction.createRetryDelay_ = createRetryDelay;
+          global.setTimeout = _setTimeout;
           done();
         };
 
-        transaction.retry_(TIMEOUT, assert.ifError);
+        transaction.retry_();
       });
     });
   });
 
-  describe('run_', function() {
-    it('should set and execute the local run function', function() {
-      var runReturnValue = {};
+  describe('shouldRetry_', function() {
+    var abortedError = { code: 10 };
 
-      function runFn() {
-        return runReturnValue;
-      }
+    it('should not retry if non-aborted error', function() {
+      var shouldRetry = transaction.shouldRetry_({ code: 4});
+      assert.strictEqual(shouldRetry, false);
+    });
 
-      var returnValue = transaction.run_(runFn);
-      assert.strictEqual(returnValue, runReturnValue);
+    it('should not retry if runFn is missing', function() {
+      transaction.runFn_ = null;
 
-      assert.strictEqual(transaction.runFn_, runFn);
+      var shouldRetry = transaction.shouldRetry_(abortedError);
+      assert.strictEqual(shouldRetry, false);
+    });
+
+    it('should not retry if deadline is exceeded', function() {
+      transaction.timeout_ = 1;
+      transaction.beginTime_ = Date.now() - 2;
+
+      var shouldRetry = transaction.shouldRetry_(abortedError);
+      assert.strictEqual(shouldRetry, false);
+    });
+
+    it('should retry if all conditions are met', function() {
+      transaction.runFn_ = function() {};
+      transaction.timeout_ = 1000;
+      transaction.beginTime_ = Date.now() - 2;
+
+      var shouldRetry = transaction.shouldRetry_(abortedError);
+      assert.strictEqual(shouldRetry, true);
     });
   });
 });

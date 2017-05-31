@@ -27,12 +27,12 @@ var is = require('is');
  *
  * @private
  */
-function RowBuilder(chunks) {
-  this.chunks = chunks;
-  this.rows = [[]];
-
-  this.metadata = chunks[0].metadata;
+function RowBuilder(metadata, chunks) {
+  this.metadata = metadata;
   this.fields = this.metadata.rowType.fields;
+  this.chunks = chunks;
+
+  this.rows = [[]];
 
   Object.defineProperty(this, 'currentRow', {
     get: function() {
@@ -40,6 +40,23 @@ function RowBuilder(chunks) {
     }
   });
 }
+
+/**
+ * Extracts value from chunk.
+ */
+RowBuilder.getValue = function(obj) {
+  var value = obj;
+
+  if (obj && obj.kind) {
+    value = obj[obj.kind];
+  }
+
+  if (value && value.values) {
+    value = value.values;
+  }
+
+  return value;
+};
 
 /**
  * Format a value into the expected structure, e.g. turn struct values into an
@@ -67,6 +84,10 @@ RowBuilder.formatValue = function(field, value) {
  */
 RowBuilder.merge = function(type, head, tail) {
   var code = type.code;
+
+  head = RowBuilder.getValue(head);
+  tail = RowBuilder.getValue(tail);
+
   var isMergeable = !is.nil(head) && !is.nil(tail) && code !== 'FLOAT64';
   var merged = [];
   var mergedItems;
@@ -98,10 +119,10 @@ RowBuilder.merge = function(type, head, tail) {
  */
 RowBuilder.prototype.append = function(value) {
   if (this.currentRow.length === this.fields.length) {
-    this.rows.push([value]);
-  } else {
-    this.currentRow.push(value);
+    this.rows.push([]);
   }
+
+  this.currentRow.push(value);
 };
 
 /**
@@ -123,7 +144,9 @@ RowBuilder.prototype.build = function() {
       merged.forEach(self.append.bind(self));
     }
 
-    chunk.values.forEach(self.append.bind(self));
+    chunk.values.map(RowBuilder.getValue)
+      .forEach(self.append.bind(self));
+
     previousChunk = chunk;
   });
 };

@@ -476,6 +476,24 @@ Database.prototype.getSchema = function(callback) {
  * database.run(query, function(err, rows) {});
  *
  * //-
+ * // If you need to enforce a specific param type, a types map can be provided.
+ * // This is typically useful if your param value can be null.
+ * //-
+ * var query = {
+ *   sql: 'SELECT * FROM Singers WHERE name = @name AND id = @id',
+ *   params: {
+ *     id: spanner.int(8),
+ *     name: null
+ *   },
+ *   types: {
+ *     id: 'int64',
+ *     name: 'string'
+ *   }
+ * };
+ *
+ * database.run(query, function(err, rows) {});
+ *
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * database.run(query).then(function(data) {
@@ -577,6 +595,25 @@ Database.prototype.run = function(query, options, callback) {
  *   .on('end', function() {});
  *
  * //-
+ * // If you need to enforce a specific param type, a types map can be provided.
+ * // This is typically useful if your param value can be null.
+ * //-
+ * var query = {
+ *   sql: 'SELECT * FROM Singers WHERE name = @name',
+ *   params: {
+ *     name: 'Eddie Wilson'
+ *   },
+ *   types: {
+ *     name: 'string'
+ *   }
+ * };
+ *
+ * database.runStream(query)
+ *   .on('error', function(err) {})
+ *   .on('data', function(row) {})
+ *   .on('end', function() {});
+ *
+ * //-
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
@@ -598,11 +635,19 @@ Database.prototype.runStream = function(query, options) {
     session: this.formattedName_
   });
 
-  if (reqOpts.params) {
-    var fields = {};
+  var fields = {};
+  var prop;
 
-    for (var prop in reqOpts.params) {
+  if (reqOpts.params) {
+    reqOpts.types = reqOpts.types || {};
+
+    for (prop in reqOpts.params) {
       var field = reqOpts.params[prop];
+
+      if (!reqOpts.types[prop]) {
+        reqOpts.types[prop] = codec.getType(field);
+      }
+
       fields[prop] = codec.encode(field);
     }
 
@@ -611,9 +656,48 @@ Database.prototype.runStream = function(query, options) {
     };
   }
 
+  if (reqOpts.types) {
+    var types = {};
+
+    for (prop in reqOpts.types) {
+      var type = reqOpts.types[prop];
+      var childType;
+      var child;
+
+      // if a type is an ARRAY, then we'll accept an object specifying
+      // the type and the child type
+      if (is.object(type)) {
+        childType = type.child;
+        child = codec.TYPES.indexOf(childType);
+        type = type.type;
+      }
+
+      var code = codec.TYPES.indexOf(type);
+
+      if (code === -1) {
+        throw new Error('Unknown param type: ' + type);
+      }
+
+      types[prop] = { code: code };
+
+      if (child === -1) {
+        throw new Error('Unknown param type: ' + childType);
+      }
+
+      if (is.number(child)) {
+        types[prop].arrayElementType = { code: child };
+      }
+    }
+
+    reqOpts.paramTypes = types;
+    delete reqOpts.types;
+  }
+
   if (options) {
     reqOpts.transaction = {
-      begin: TransactionRequest.formatTimestampOptions_(options)
+      singleUse: {
+        readOnly: TransactionRequest.formatTimestampOptions_(options)
+      }
     };
   }
 
@@ -647,6 +731,10 @@ Database.prototype.runStream = function(query, options) {
  * @resource [Timestamp Bounds](https://cloud.google.com/spanner/docs/timestamp-bounds)
  *
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
+ * @param {number} options.timeout - Specify a timeout for the transaction. The
+ *     transaction will be ran in its entirety, however if an abort error is
+ *     returned the transaction will be retried if the timeout has not been met.
+ *     Default: `60000` (milliseconds)
  * @param {boolean} options.readOnly - Specifies if the transaction is
  *     read-only.
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
@@ -721,15 +809,23 @@ Database.prototype.runTransaction = function(options, runFn) {
     options = null;
   }
 
+  options = extend({}, options);
+
   this.getTransaction_(options, function(err, transaction) {
     if (err) {
       runFn(err);
       return;
     }
 
-    transaction.run_(function() {
-      runFn(null, transaction);
-    });
+    transaction.beginTime_ = Date.now();
+    transaction.runFn_ = runFn;
+
+    if (options && options.timeout) {
+      transaction.timeout_ = options.timeout;
+      delete options.timeout;
+    }
+
+    runFn(null, transaction);
   });
 };
 

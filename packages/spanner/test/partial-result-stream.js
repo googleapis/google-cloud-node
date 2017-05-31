@@ -105,7 +105,7 @@ describe('PartialResultStream', function() {
 
   describe('stream', function() {
     beforeEach(function() {
-      partialResultStreamModule.formatRow_ = function(row) {
+      partialResultStreamModule.formatRow_ = function(metadata, row) {
         return row;
       };
     });
@@ -173,7 +173,7 @@ describe('PartialResultStream', function() {
       var builtRow = {};
 
       FakeRowBuilderOverrides.toJSON = function() {
-        assert.deepEqual(this.calledWith_[0], chunks);
+        assert.deepEqual(this.calledWith_[1], chunks);
         return builtRow;
       };
 
@@ -192,7 +192,7 @@ describe('PartialResultStream', function() {
     it('should return the formatted row', function(done) {
       var formattedRow = {};
 
-      partialResultStreamModule.formatRow_ = function(row) {
+      partialResultStreamModule.formatRow_ = function(metadata, row) {
         assert.strictEqual(row, RESULT_WITH_TOKEN);
         return formattedRow;
       };
@@ -413,35 +413,45 @@ describe('PartialResultStream', function() {
       }
     ];
 
+    var METADATA = {
+      rowType: {
+        fields: FIELDS
+      }
+    };
+
     var VALUES = [
       'value-1',
       'value-2'
     ];
 
     var ROW = {
-      metadata: {
-        rowType: {
-          fields: FIELDS
-        }
-      },
+      metadata: METADATA,
       values: VALUES
     };
 
     it('should omit rows from JSON representation with no name', function() {
       // Define the second field to have no name.
+      var metadata = {
+        rowType: {
+          fields: [
+            { name: 'field-1' },
+            {}
+          ]
+        }
+      };
+
       var row = {
-        metadata: {rowType: {fields: [
-          {name: 'field-1'}, {}
-        ]}},
+        metadata: metadata,
         values: ['value-1', 'value-2'],
       };
+
       // Override our `decode` function to pass through the value.
       decodeValueOverride = function(value) {
         return value;
       };
 
       // Format the row.
-      var formattedRows = partialResultStreamModule.formatRow_(row);
+      var formattedRows = partialResultStreamModule.formatRow_(metadata, row);
 
       // Both fields should exist in the formattedRows array.
       assert.strictEqual(formattedRows.length, 2);
@@ -460,7 +470,7 @@ describe('PartialResultStream', function() {
       var row = extend({}, ROW);
       row.values = row.values.concat(row.values);
 
-      var formattedRows = partialResultStreamModule.formatRow_(row);
+      var formattedRows = partialResultStreamModule.formatRow_(METADATA, row);
 
       assert.deepEqual(formattedRows[0], [
         {
@@ -506,7 +516,7 @@ describe('PartialResultStream', function() {
         }
       };
 
-      var formattedRow = partialResultStreamModule.formatRow_(ROW);
+      var formattedRow = partialResultStreamModule.formatRow_(METADATA, ROW);
 
       assert.deepEqual(formattedRow, [
         {

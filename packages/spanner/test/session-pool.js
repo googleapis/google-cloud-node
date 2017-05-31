@@ -918,6 +918,23 @@ describe('SessionPool', function() {
           .emit('reading');
       });
 
+      it('should respect gax options', function(done) {
+        var fakeGaxOptions = {};
+        var config = extend({}, CONFIG);
+
+        config.reqOpts.gaxOptions = fakeGaxOptions;
+
+        config.method = function(reqOpts, gaxOptions) {
+          assert.deepEqual(reqOpts, CONFIG.reqOpts);
+          assert.strictEqual(gaxOptions, fakeGaxOptions);
+          setImmediate(done);
+          return through.obj();
+        };
+
+        sessionPool.requestStream(config)
+          .emit('reading');
+      });
+
       it('should make request and pipe to the stream', function(done) {
         var responseData = new Buffer('response-data');
 
@@ -1094,13 +1111,14 @@ describe('SessionPool', function() {
       assert.strictEqual(transaction, TRANSACTION);
     });
 
-    it('should release the session when destroyed', function() {
+    it('should release the session when destroyed', function(done) {
       var destroyed = false;
       var released = false;
 
-      TRANSACTION.end = function() {
+      TRANSACTION.end = function(callback) {
         assert.strictEqual(this, TRANSACTION);
         destroyed = true;
+        setImmediate(callback); // done
       };
 
       sessionPool.release = function(session) {
@@ -1109,7 +1127,7 @@ describe('SessionPool', function() {
       };
 
       var transaction = sessionPool.createTransaction_(SESSION);
-      transaction.end();
+      transaction.end(done);
 
       assert.strictEqual(destroyed, true);
       assert.strictEqual(released, true);
