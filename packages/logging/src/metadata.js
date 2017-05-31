@@ -131,13 +131,13 @@ Metadata.getGlobalDescriptor = function(projectId) {
 Metadata.prototype.getDefaultResource = function(callback) {
   var self = this;
 
-  this.logging.auth.getProjectId(function(err, projectId) {
+  this.logging.authClient.getProjectId(function(err, projectId) {
     if (err) {
       callback(err);
       return;
     }
 
-    self.logging.auth.getEnvironment(function(err, env) {
+    self.logging.authClient.getEnvironment(function(err, env) {
       var defaultResource;
 
       if (env.IS_APP_ENGINE) {

@@ -69,7 +69,6 @@ var fakeUtil = extend({}, util, {
     assert.deepEqual(options.exclude, [
       'entry',
       'log',
-      'request',
       'sink'
     ]);
   },
@@ -103,17 +102,27 @@ function FakeSink() {
   this.calledWith_ = arguments;
 }
 
+function FakeGaxService() {
+  this.calledWith_ = arguments;
+}
+
 describe('Logging', function() {
   var Logging;
   var logging;
 
   var PROJECT_ID = 'project-id';
+  var OPTIONS = {
+    projectId: PROJECT_ID
+  };
 
   before(function() {
     Logging = proxyquire('../', {
       '@google-cloud/common': {
         paginator: fakePaginator,
         util: fakeUtil
+      },
+      '@google-cloud/common-gax': {
+        Service: FakeGaxService
       },
       'google-auto-auth': fakeGoogleAutoAuth,
       './log.js': FakeLog,
@@ -129,9 +138,7 @@ describe('Logging', function() {
     replaceProjectIdTokenOverride = null;
     v2Override = null;
 
-    logging = new Logging({
-      projectId: PROJECT_ID
-    });
+    logging = new Logging(OPTIONS);
   });
 
   describe('instantiation', function() {
@@ -168,50 +175,12 @@ describe('Logging', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should initialize the API object', function() {
-      assert.deepEqual(logging.api, {});
-    });
+    it('should inherit from GaxService', function() {
+      assert(logging instanceof FakeGaxService);
 
-    it('should cache a local google-auto-auth instance', function() {
-      var fakeGoogleAutoAuthInstance = {};
-      var options = {
-        a: 'b',
-        c: 'd'
-      };
-
-      googleAutoAuthOverride = function(options_) {
-        assert.deepEqual(options_, extend({
-          scopes: v2.ALL_SCOPES
-        }, options));
-        return fakeGoogleAutoAuthInstance;
-      };
-
-      var logging = new Logging(options);
-      assert.strictEqual(logging.auth, fakeGoogleAutoAuthInstance);
-    });
-
-    it('should localize the options', function() {
-      var options = {
-        a: 'b',
-        c: 'd'
-      };
-
-      var logging = new Logging(options);
-
-      assert.notStrictEqual(logging.options, options);
-
-      assert.deepEqual(logging.options, extend({
-        scopes: v2.ALL_SCOPES
-      }, options));
-    });
-
-    it('should set the projectId', function() {
-      assert.strictEqual(logging.projectId, PROJECT_ID);
-    });
-
-    it('should default the projectId to the token', function() {
-      var logging = new Logging({});
-      assert.strictEqual(logging.projectId, '{{projectId}}');
+      assert.strictEqual(logging.calledWith_[0], logging);
+      assert.strictEqual(logging.calledWith_[1], v2);
+      assert.strictEqual(logging.calledWith_[2], OPTIONS);
     });
   });
 
@@ -539,13 +508,13 @@ describe('Logging', function() {
       REQUEST_STREAM = through.obj();
       REQUEST_STREAM.push(RESULT);
 
-      logging.request = function() {
+      logging.requestStream = function() {
         return REQUEST_STREAM;
       };
     });
 
     it('should make request once reading', function(done) {
-      logging.request = function(config) {
+      logging.requestStream = function(config) {
         assert.strictEqual(config.client, 'loggingServiceV2Client');
         assert.strictEqual(config.method, 'listLogEntriesStream');
 
@@ -726,13 +695,13 @@ describe('Logging', function() {
       REQUEST_STREAM = through.obj();
       REQUEST_STREAM.push(RESULT);
 
-      logging.request = function() {
+      logging.requestStream = function() {
         return REQUEST_STREAM;
       };
     });
 
     it('should make request once reading', function(done) {
-      logging.request = function(config) {
+      logging.requestStream = function(config) {
         assert.strictEqual(config.client, 'configServiceV2Client');
         assert.strictEqual(config.method, 'listSinksStream');
 
