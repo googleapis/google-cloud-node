@@ -790,27 +790,6 @@ BigQuery.prototype.query = function(options, callback) {
 
   options = options || {};
 
-  if (options.params) {
-    options.useLegacySql = false;
-    options.parameterMode = is.array(options.params) ? 'positional' : 'named';
-
-    if (options.parameterMode === 'named') {
-      options.queryParameters = [];
-
-      for (var namedParamater in options.params) {
-        var value = options.params[namedParamater];
-        var queryParameter = BigQuery.valueToQueryParameter_(value);
-        queryParameter.name = namedParamater;
-        options.queryParameters.push(queryParameter);
-      }
-    } else {
-      options.queryParameters = options.params
-        .map(BigQuery.valueToQueryParameter_);
-    }
-
-    delete options.params;
-  }
-
   var job = options.job;
 
   var requestQuery = extend({}, options);
@@ -818,11 +797,35 @@ BigQuery.prototype.query = function(options, callback) {
 
   if (job) {
     // Get results of the query.
+    delete requestQuery.params;
+    delete requestQuery.query;
+
     self.request({
       uri: '/queries/' + job.id,
       qs: requestQuery
     }, responseHandler);
   } else {
+    if (options.params) {
+      options.useLegacySql = false;
+      options.parameterMode = is.array(options.params) ? 'positional' : 'named';
+
+      if (options.parameterMode === 'named') {
+        options.queryParameters = [];
+
+        for (var namedParamater in options.params) {
+          var value = options.params[namedParamater];
+          var queryParameter = BigQuery.valueToQueryParameter_(value);
+          queryParameter.name = namedParamater;
+          options.queryParameters.push(queryParameter);
+        }
+      } else {
+        options.queryParameters = options.params
+          .map(BigQuery.valueToQueryParameter_);
+      }
+
+      delete options.params;
+    }
+
     // Create a job.
     self.request({
       method: 'POST',
