@@ -33,6 +33,9 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
+* [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
+* [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
+* [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
@@ -277,7 +280,7 @@ localReadStream.pipe(remoteWriteStream);
 ```
 
 
-## Google Stackdriver Logging (Beta)
+## Google Stackdriver Logging (GA)
 
 - [API Documentation][gcloud-logging-docs]
 - [Official Documentation][cloud-logging-docs]
@@ -1120,6 +1123,52 @@ model.query('Hello', function(err, results) {
 });
 ```
 
+## Google Stackdriver Debugger (Alpha)
+
+- [GitHub Repo][stackdriver-debug-nodejs-repo]
+- [Official Documentation][stackdriver-debug-docs]
+
+*The source code for the Node.js Cloud Debugger Agent lives in a [separate repo][stackdriver-debug-nodejs-repo].*
+
+
+#### Using the Stackdriver Debug Agent module
+
+```
+$ npm install --save @google-cloud/debug-agent
+```
+
+```js
+require('@google-cloud/debug-agent').start({ allowExpressions: true });
+```
+
+For more details on API usage, please see the [Stackdriver Debug Agent Github Repository][stackdriver-debug-nodejs-repo].
+
+
+## Google Stackdriver Error Reporting (Alpha)
+
+- [API Documentation][stackdriver-errors-module]
+- [Official Documentation][stackdriver-errors-docs]
+
+
+#### Using the Stackdriver Error Reporting module
+
+```
+$ npm install --save @google-cloud/error-reporting
+```
+
+The module provides automatic [uncaught exception handling][stackdriver-errors-uncaught], [manual error reporting][stackdriver-errors-manual], and integration with common frameworks like [express][stackdriver-errors-express] and [hapi][stackdriver-errors-hapi].
+
+```js
+var errors = require('@google-cloud/error-reporting')();
+```
+
+#### Preview
+
+```js
+errors.report(new Error('Something broke!'));
+```
+
+For more details on API usage, please see the [documentation][stackdriver-errors-module].
 
 ## Google Stackdriver Monitoring (Alpha)
 
@@ -1149,6 +1198,26 @@ var monitoringClient = monitoring.v3({
   keyFilename: '/path/to/keyfile.json'
 });
 ```
+
+## Google Stackdriver Trace (Alpha)
+
+- [GitHub Repo][stackdriver-trace-nodejs-repo]
+- [Official Documentation][stackdriver-trace-docs]
+
+*The source code for the Node.js Cloud Trace Agent lives in a [separate repo][stackdriver-trace-nodejs-repo].*
+
+
+#### Using the Stackdriver Trace Agent module
+
+```
+$ npm install --save @google-cloud/trace-agent
+```
+
+```js
+var trace = require('@google-cloud/trace-agent').start();
+```
+
+For more details on API usage, please see the [Stackdriver Trace Agent Github Repository][stackdriver-trace-nodejs-repo].
 
 
 ## Versioning
@@ -1248,6 +1317,17 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [cloud-vision-docs]: https://cloud.google.com/vision/docs
 
 [semver]: http://semver.org
+
+[stackdriver-debug-nodejs-repo]: https://github.com/GoogleCloudPlatform/cloud-debug-nodejs
+[stackdriver-debug-docs]: https://cloud.google.com/debugger/docs/
+[stackdriver-trace-nodejs-repo]: https://github.com/GoogleCloudPlatform/cloud-trace-nodejs
+[stackdriver-trace-docs]: https://cloud.google.com/trace/docs/
+[stackdriver-errors-docs]: https://cloud.google.com/error-reporting/docs/
+[stackdriver-errors-uncaught]:  https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting#catching-and-reporting-application-wide-uncaught-errors
+[stackdriver-errors-manual]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting#reporting-manually
+[stackdriver-errors-express]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting#using-express
+[stackdriver-errors-hapi]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting#using-hapi
+[stackdriver-errors-module]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting
 
 [contributing]: .github/CONTRIBUTING.md
 
