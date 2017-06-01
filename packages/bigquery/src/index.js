@@ -790,6 +790,24 @@ BigQuery.prototype.query = function(options, callback) {
 
   options = options || {};
 
+  var job = options.job;
+
+  var requestQuery = extend({}, options);
+  delete requestQuery.job;
+
+  if (job) {
+    // Get results of the query.
+    delete requestQuery.params;
+    delete requestQuery.query;
+
+    self.request({
+      uri: '/queries/' + job.id,
+      qs: requestQuery
+    }, responseHandler);
+
+    return;
+  }
+
   if (options.params) {
     options.useLegacySql = false;
     options.parameterMode = is.array(options.params) ? 'positional' : 'named';
@@ -811,25 +829,12 @@ BigQuery.prototype.query = function(options, callback) {
     delete options.params;
   }
 
-  var job = options.job;
-
-  var requestQuery = extend({}, options);
-  delete requestQuery.job;
-
-  if (job) {
-    // Get results of the query.
-    self.request({
-      uri: '/queries/' + job.id,
-      qs: requestQuery
-    }, responseHandler);
-  } else {
-    // Create a job.
-    self.request({
-      method: 'POST',
-      uri: '/queries',
-      json: options
-    }, responseHandler);
-  }
+  // Create a job.
+  self.request({
+    method: 'POST',
+    uri: '/queries',
+    json: options
+  }, responseHandler);
 
   function responseHandler(err, resp) {
     if (err) {

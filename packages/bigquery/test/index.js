@@ -849,6 +849,30 @@ describe('BigQuery', function() {
       bq.query(options, assert.ifError);
     });
 
+    it('should not include query info in result query', function(done) {
+      var options = {
+        job: bq.job(JOB_ID),
+        maxResults: 10,
+        timeoutMs: 8,
+
+        // should be removed:
+        params: {},
+        query: '...'
+      };
+
+      var expectedRequestQuery = {
+        maxResults: 10,
+        timeoutMs: 8
+      };
+
+      bq.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, expectedRequestQuery);
+        done();
+      };
+
+      bq.query(options, assert.ifError);
+    });
+
     describe('SQL parameters', function() {
       var NAMED_PARAMS = {
         key: 'value'
