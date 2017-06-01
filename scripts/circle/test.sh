@@ -56,4 +56,9 @@ rebuild
 npm run lint
 node ./scripts/build.js
 
+nvm install v8 && nvm use v8
+rebuild
+npm run lint
+node ./scripts/build.js
+
 set +e
