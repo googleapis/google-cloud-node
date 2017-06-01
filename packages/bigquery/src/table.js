@@ -941,7 +941,7 @@ Table.prototype.getRows = function(options, callback) {
  * //-
  * var metadata = {
  *   encoding: 'ISO-8859-1',
- *   sourceFormat: 'NEWLINE_DELIMITED_JSON'
+ *   format: 'JSON'
  * };
  *
  * table.import('./my-data.csv', metadata, function(err, job, apiResponse) {});
