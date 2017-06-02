@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
 var assert = require('assert');
 var dlpV2beta1 = require('../src/v2beta1')();
@@ -20,7 +21,6 @@ var dlpV2beta1 = require('../src/v2beta1')();
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
 error.code = FAKE_STATUS_CODE;
-
 describe('DlpServiceClient', function() {
   describe('inspectContent', function() {
     it('invokes inspectContent without error', function(done) {
@@ -329,7 +329,7 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
       promise: function() {
         return new Promise(function(resolve, reject) {
           if (error) {
-            reject(error)
+            reject(error);
           } else {
             resolve([response]);
           }
