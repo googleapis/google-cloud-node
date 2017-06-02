@@ -31,13 +31,13 @@ var nsRecord = zone.record('ns', {
   data: 'ns-cloud1.googledomains.com.'
 });
 
-zone.addRecord(nsRecord, function(err, change) {});
+zone.addRecords([nsRecord], function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
 
 // Promises are also supported by omitting callbacks.
-zone.addRecords(nsRecord).then(function(data) {
+zone.addRecords([nsRecord]).then(function(data) {
   var change = data[0];
 });
 
