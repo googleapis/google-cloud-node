@@ -152,6 +152,14 @@
       ]
     },
     {
+      "id": "dlp",
+      "name": "@google-cloud/dlp",
+      "defaultService": "dlp",
+      "versions": [
+        "0.1.0"
+      ]
+    },
+    {
       "id": "dns",
       "name": "@google-cloud/dns",
       "defaultService": "dns",
