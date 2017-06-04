@@ -116,7 +116,7 @@
     "@google-cloud/logging": "^1.0.0",
     "@google-cloud/monitoring": "^0.2.0",
     "@google-cloud/prediction": "^0.6.0",
-    "@google-cloud/pubsub": "^0.12.0",
+    "@google-cloud/pubsub": "^0.13.0",
     "@google-cloud/resource": "^0.7.0",
     "@google-cloud/spanner": "^0.4.0",
     "@google-cloud/speech": "^0.9.0",

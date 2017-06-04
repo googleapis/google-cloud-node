@@ -89,10 +89,15 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/prediction/-/prediction-0.6.2.tgz"
     },
     "@google-cloud/pubsub": {
-      "version": "0.12.0",
-      "from": "@google-cloud/pubsub@>=0.12.0 <0.13.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.12.0.tgz",
+      "version": "0.13.0",
+      "from": "@google-cloud/pubsub@0.13.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.13.0.tgz",
       "dependencies": {
+        "google-proto-files": {
+          "version": "0.12.0",
+          "from": "google-proto-files@>=0.12.0 <0.13.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.12.0.tgz"
+        },
         "uuid": {
           "version": "3.0.1",
           "from": "uuid@^3.0.1",
