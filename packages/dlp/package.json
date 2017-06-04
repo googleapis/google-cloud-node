@@ -1,7 +1,7 @@
 {
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/dlp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Google Inc",
   "description": "DLP API client for Node.js",
   "main": "src/index.js",
