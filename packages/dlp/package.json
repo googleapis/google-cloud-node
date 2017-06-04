@@ -30,8 +30,7 @@
     "extend": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
-    "through2": "^2.0.3"
+    "mocha": "^3.2.0"
   },
   "scripts": {
     "test": "mocha",
