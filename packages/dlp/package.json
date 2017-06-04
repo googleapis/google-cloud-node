@@ -1,0 +1,44 @@
+{
+  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "name": "@google-cloud/dlp",
+  "version": "0.0.0",
+  "author": "Google Inc",
+  "description": "DLP API client for Node.js",
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "AUTHORS",
+    "CONTRIBUTING",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google dlp",
+    "dlp",
+    "DLP API"
+  ],
+  "dependencies": {
+    "google-proto-files": "^0.12.0",
+    "google-gax": "^0.13.2",
+    "extend": "^3.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "through2": "^2.0.3"
+  },
+  "scripts": {
+    "test": "mocha",
+    "publish-module": "node ../../scripts/publish.js dlp"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
