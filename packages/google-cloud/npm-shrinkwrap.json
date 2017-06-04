@@ -39,6 +39,18 @@
       "from": "@google-cloud/datastore@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/@google-cloud/datastore/-/datastore-1.0.2.tgz"
     },
+    "@google-cloud/dlp": {
+      "version": "0.1.0",
+      "from": "@google-cloud/dlp@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/dlp/-/dlp-0.1.0.tgz",
+      "dependencies": {
+        "google-proto-files": {
+          "version": "0.12.0",
+          "from": "google-proto-files@>=0.12.0 <0.13.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.12.0.tgz"
+        }
+      }
+    },
     "@google-cloud/dns": {
       "version": "0.6.2",
       "from": "@google-cloud/dns@>=0.6.0 <0.7.0",
@@ -112,6 +124,18 @@
       "version": "0.8.2",
       "from": "@google-cloud/translate@>=0.8.0 <0.9.0",
       "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.8.2.tgz"
+    },
+    "@google-cloud/video-intelligence": {
+      "version": "0.1.0",
+      "from": "@google-cloud/video-intelligence@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/video-intelligence/-/video-intelligence-0.1.0.tgz",
+      "dependencies": {
+        "google-proto-files": {
+          "version": "0.12.0",
+          "from": "google-proto-files@>=0.12.0 <0.13.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.12.0.tgz"
+        }
+      }
     },
     "@google-cloud/vision": {
       "version": "0.11.2",
