@@ -57,7 +57,7 @@
     "create-error-class": "^3.0.2",
     "dot-prop": "^3.0.0",
     "extend": "^3.0.0",
-    "google-proto-files": "^0.11.0",
+    "google-proto-files": "^0.12.0",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
     "node-int64": "^0.4.0",
