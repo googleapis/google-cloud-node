@@ -107,6 +107,28 @@ var apis = {
   datastore: require('@google-cloud/datastore'),
 
   /**
+   * The [Data Loss Prevention (DLP) API](https://cloud.google.com/dlp) allows
+   * clients to detect the presence of Personally Identifiable Information (PII)
+   * and other privacy-sensitive data in user-supplied, unstructured data
+   * streams, like text blocks or images.
+   *
+   * The service also includes methods for sensitive data redaction and
+   * scheduling of data scans on Google Cloud Platform based data sets.
+   *
+   * @type {module:dlp}
+   *
+   * @return {module:dlp}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var dlp = gcloud.dlp({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  dlp: require('@google-cloud/dlp'),
+
+  /**
    * [Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a
    * high-performance, resilient, global DNS service that provides a cost-
    * effective way to make your applications and services available to your
@@ -338,6 +360,29 @@ var apis = {
    * });
    */
   translate: require('@google-cloud/translate'),
+
+  /**
+   * [Google Cloud Video Intelligence API](https://cloud.google.com/video-intelligence)
+   * makes videos searchable, and discoverable, by extracting metadata with an
+   * easy to use REST API. You can now search every moment of every video file
+   * in your catalog and find every occurrence as well as its significance. It
+   * quickly annotates videos stored in Google Cloud Storage, and helps you
+   * identify key nouns entities of your video, and when they occur within the
+   * video. Separate signal from noise, by retrieving relevant information at
+   * the video, shot or per frame.
+   *
+   * @type {module:video-intelligence}
+   *
+   * @return {module:video-intelligence}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var video = gcloud.videoIntelligence({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  videoIntelligence: require('@google-cloud/video-intelligence'),
 
   /**
    * The [Cloud Vision API](https://cloud.google.com/vision/docs) allows easy
