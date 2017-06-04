@@ -220,6 +220,15 @@ describe('gcloud', function() {
       });
     });
 
+    describe('dlp', function() {
+      it('should create a new DNS', function() {
+        var dlp = localGcloud.dlp(options);
+
+        assert(dlp instanceof FakeDLP);
+        assert.strictEqual(dlp.calledWith_[0], options);
+      });
+    });
+
     describe('dns', function() {
       it('should create a new DNS', function() {
         var dns = localGcloud.dns(options);
@@ -307,6 +316,15 @@ describe('gcloud', function() {
 
         assert(translate instanceof FakeTranslate);
         assert.strictEqual(translate.calledWith_[0], options);
+      });
+    });
+
+    describe('video intelligence', function() {
+      it('should create a new VideoIntelligence', function() {
+        var videoIntelligence = localGcloud.videoIntelligence(options);
+
+        assert(videoIntelligence instanceof FakeVideoIntelligence);
+        assert.strictEqual(videoIntelligence.calledWith_[0], options);
       });
     });
 
