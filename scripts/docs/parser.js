@@ -16,14 +16,17 @@
 
 'use strict';
 
+var camel = require('lodash.camelcase');
 var dox = require('dox');
-var globby = require('globby');
 var fs = require('fs');
-var path = require('path');
-var format = require('string-format-obj');
-var prop = require('propprop');
 var extend = require('extend');
+var format = require('string-format-obj');
+var globby = require('globby');
+var path = require('path');
+var prop = require('propprop');
 var template = require('lodash.template');
+var upperFirst = require('lodash.upperfirst');
+
 var config = require('./config');
 var baseToc = require('./templates/toc.json');
 
@@ -52,7 +55,7 @@ function detectLinks(str) {
 function formatHtml(html) {
   var formatted = (html || '')
     .replace(/\s+/g, ' ')
-    .replace(/<br *\/*>/g, ' ')
+    .replace(/<br *\/*>/g, ' ') /* TODO: remove. fixing a sublime text bug */
     .replace(/`([^`]*)`/g, '<code>$1</code>');
 
   return detectLinks(detectCustomType(formatted));
@@ -63,6 +66,7 @@ function detectCustomType(str) {
   var templateFn = format.bind(null, tmpl);
   var rCustomType = /\{*module\:([^\}|\>]*)\}*/g;
   var rArray = /Array\.<(.+)>/g;
+  var rProtoType = /{@link ([A-Z][^}]*)}/;
 
   return str
     .replace(rArray, function(match, module) {
@@ -76,6 +80,15 @@ function detectCustomType(str) {
         method: parts[1] || '',
         text: module
       });
+    })
+    .replace(rProtoType, function(match, protoType) {
+      return protoType;
+      // // @TODO link-ability
+      // return templateFn({
+      //   module: 'data_types',
+      //   method: protoType,
+      //   text: protoType
+      // });
     });
 }
 
@@ -251,6 +264,20 @@ function createReturn(tag) {
 function createMethod(fileName, parent, block) {
   var name = getName(block);
 
+  var allParams = getTagsByType(block, 'param')
+    .concat(getTagsByType(block, 'property'))
+    .map(createParam);
+
+  var isGapic = fileName.includes('doc_');
+  var isRequestOrResponse =
+    name && (name.includes('Request') || name.includes('Response'));
+
+  if (isGapic && isRequestOrResponse) {
+    // Ignore descriptions that have links we don't want, e.g.
+    // "The request for {@link Datastore.AllocateIds}."
+    block.description = {};
+  }
+
   return {
     id: name,
     name: name,
@@ -259,7 +286,7 @@ function createMethod(fileName, parent, block) {
     source: path.normalize(fileName) + '#L' + block.codeStart,
     resources: getTagsByType(block, 'resource').map(createResource),
     examples: createExamples(block),
-    params: getTagsByType(block, 'param').map(createParam),
+    params: allParams,
     exceptions: getTagsByType(block, 'throws').map(createException),
     returns: getTagsByType(block, 'return').map(createReturn)
   };
@@ -316,29 +343,67 @@ function parseFile(fileName, contents, umbrellaMode) {
 
 function createTypesDictionary(docs) {
   return docs.map(function(service) {
+    var isGapic = /_client$/.test(service.id);
+
+    var titleParts = [];
     var id = service.id;
-    var title = [id === config.UMBRELLA_PACKAGE ? 'Google Cloud' : service.name];
     var contents = service.path;
+
+    if (id === config.UMBRELLA_PACKAGE) {
+      titleParts.push('Google Cloud');
+    } else {
+      titleParts.push(service.name);
+    }
+
+    if (isGapic) {
+      var gapicVersion;
+      var gapicPath = service.id.split('/');
+      var versionIndex;
+
+      gapicPath.forEach(function(gapicPathPart, index) {
+        if (/v\d/.test(gapicPathPart)) {
+          gapicVersion = gapicPathPart;
+          versionIndex = index;
+        }
+      });
+
+      titleParts = [gapicVersion];
+
+      var nestedTitle = [].slice.call(gapicPath).slice(1, versionIndex);
+
+      if (nestedTitle.length > 0) {
+        nestedTitle = nestedTitle.map(upperFirst).join('/');
+        titleParts.push(nestedTitle);
+      }
+    }
 
     if (service.parent) {
       for (var i = 0, l = docs.length; i < l; i++) {
         if (docs[i].id === service.parent) {
-          title.unshift(docs[i].name);
+          titleParts.unshift(docs[i].name);
         }
       }
     }
 
     return {
       id: id,
-      title: title,
+      title: titleParts,
       contents: contents
     };
   });
 }
 
 function createToc(types, collapse) {
+  var PATH_VERSION_REGEX = /\/(v[^/]*)/;
+
   var toc = extend(true, {}, baseToc);
+
+  var generatedTypes = types.filter(type => / v\d/.test(type.title.join(' ')));
+  var protos = types.filter(type => type.id.includes('/doc/'));
+  var protosGroupedByVersion = {};
+
   var services = types
+    .filter(type => !generatedTypes.includes(type) && !protos.includes(type))
     .map(function(type) {
       return {
         type: type.id,
@@ -356,6 +421,65 @@ function createToc(types, collapse) {
 
       return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
     });
+
+  if (protos.length > 0) {
+    protos.forEach(function(proto) {
+      var version = proto.id.match(PATH_VERSION_REGEX)[1];
+      protosGroupedByVersion[version] = protosGroupedByVersion[version] || [];
+      protosGroupedByVersion[version].push(proto);
+    });
+  }
+
+  if (generatedTypes.length > 0) {
+    // Push the generated types to the bottom of the navigation.
+    var generatedTypesByVersion = {};
+
+    generatedTypes.forEach(function(generatedType) {
+      var version = generatedType.title[1];
+      generatedTypesByVersion[version] = generatedTypesByVersion[version] || [];
+      generatedTypesByVersion[version].push(generatedType);
+    });
+
+    for (var version in generatedTypesByVersion) {
+      var generatedTypesGrouped = generatedTypesByVersion[version]
+        .sort(function(a, b) {
+          if (a.title.length < b.title.length) { // e.g. ['Spanner', 'v1']
+            return -1;
+          }
+
+          if (b.title.length < a.title.length) {
+            return 1;
+          }
+
+          var titleA = a.title[a.title.length - 1];
+          var titleB = b.title[b.title.length - 1];
+
+          return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
+        });
+
+      var parent = generatedTypesGrouped.shift();
+
+      var serviceObject = {
+        title: version,
+        type: parent.id,
+        nav: generatedTypesGrouped.map(function(generatedType) {
+          return {
+            title: generatedType.title[generatedType.title.length - 1],
+            type: generatedType.id
+          };
+        })
+      };
+
+      serviceObject.nav.push({
+        title: 'Data Types',
+        type: parent.id.replace(/\/\w+_client$/, '/data_types')
+      });
+
+      services.push(serviceObject);
+    }
+  }
+
+  services = services.filter(service => !service.type.includes('data_types'));
 
   if (!collapse) {
     toc.services = services;

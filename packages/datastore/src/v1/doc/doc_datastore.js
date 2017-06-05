@@ -22,21 +22,14 @@
 /**
  * The request for {@link Datastore.Lookup}.
  *
- * @property {string} projectId
- *   The ID of the project against which to make the request.
- *
- * @property {Object} readOptions
- *   The options for this lookup request.
- *
- *   This object should have the same structure as [ReadOptions]{@link ReadOptions}
- *
- * @property {Object[]} keys
- *   Keys of entities to look up.
- *
- *   This object should have the same structure as [Key]{@link Key}
+ * @property {string} projectId - The ID of the project against which to make the request.
+ * @property {Object} readOptions - The options for this lookup request.
+ *     This object should have the same structure as [ReadOptions]{@link ReadOptions}
+ * @property {Object[]} keys Keys of entities to look up.
+ *     This object should have the same structure as [Key]{@link Key}
  *
  * @class
- * @see [google.datastore.v1.LookupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.LookupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var LookupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -45,14 +38,14 @@ var LookupRequest = {
 /**
  * The response for {@link Datastore.Lookup}.
  *
- * @property {Object[]} found
+ * @param {Object[]} found
  *   Entities found as `ResultType.FULL` entities. The order of results in this
  *   field is undefined and has no relation to the order of the keys in the
  *   input.
  *
  *   This object should have the same structure as [EntityResult]{@link EntityResult}
  *
- * @property {Object[]} missing
+ * @param {Object[]} missing
  *   Entities not found as `ResultType.KEY_ONLY` entities. The order of results
  *   in this field is undefined and has no relation to the order of the keys
  *   in the input.
@@ -67,7 +60,7 @@ var LookupRequest = {
  *   This object should have the same structure as [Key]{@link Key}
  *
  * @class
- * @see [google.datastore.v1.LookupResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.LookupResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var LookupResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -103,7 +96,7 @@ var LookupResponse = {
  *   This object should have the same structure as [GqlQuery]{@link GqlQuery}
  *
  * @class
- * @see [google.datastore.v1.RunQueryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.RunQueryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var RunQueryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -123,7 +116,7 @@ var RunQueryRequest = {
  *   This object should have the same structure as [Query]{@link Query}
  *
  * @class
- * @see [google.datastore.v1.RunQueryResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.RunQueryResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var RunQueryResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -136,7 +129,7 @@ var RunQueryResponse = {
  *   The ID of the project against which to make the request.
  *
  * @class
- * @see [google.datastore.v1.BeginTransactionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.BeginTransactionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var BeginTransactionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -149,7 +142,7 @@ var BeginTransactionRequest = {
  *   The transaction identifier (always present).
  *
  * @class
- * @see [google.datastore.v1.BeginTransactionResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.BeginTransactionResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var BeginTransactionResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -166,7 +159,7 @@ var BeginTransactionResponse = {
  *   {@link Datastore.BeginTransaction}.
  *
  * @class
- * @see [google.datastore.v1.RollbackRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.RollbackRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var RollbackRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -176,7 +169,7 @@ var RollbackRequest = {
  * The response for {@link Datastore.Rollback}.
  * (an empty message).
  * @class
- * @see [google.datastore.v1.RollbackResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.RollbackResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var RollbackResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -216,7 +209,7 @@ var RollbackResponse = {
  *   This object should have the same structure as [Mutation]{@link Mutation}
  *
  * @class
- * @see [google.datastore.v1.CommitRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.CommitRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var CommitRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -260,7 +253,7 @@ var CommitRequest = {
  *   updated.
  *
  * @class
- * @see [google.datastore.v1.CommitResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.CommitResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var CommitResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -279,7 +272,7 @@ var CommitResponse = {
  *   This object should have the same structure as [Key]{@link Key}
  *
  * @class
- * @see [google.datastore.v1.AllocateIdsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.AllocateIdsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var AllocateIdsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -295,7 +288,7 @@ var AllocateIdsRequest = {
  *   This object should have the same structure as [Key]{@link Key}
  *
  * @class
- * @see [google.datastore.v1.AllocateIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.AllocateIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var AllocateIdsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -333,7 +326,7 @@ var AllocateIdsResponse = {
  *   does not match the current version on the server, the mutation conflicts.
  *
  * @class
- * @see [google.datastore.v1.Mutation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.Mutation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var Mutation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -360,7 +353,7 @@ var Mutation = {
  *   conflict detection strategy field is not set in the mutation.
  *
  * @class
- * @see [google.datastore.v1.MutationResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.MutationResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var MutationResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -381,7 +374,7 @@ var MutationResult = {
  *   {@link Datastore.BeginTransaction}.
  *
  * @class
- * @see [google.datastore.v1.ReadOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
+ * @resource [google.datastore.v1.ReadOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
 var ReadOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.

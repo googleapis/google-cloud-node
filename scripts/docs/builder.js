@@ -76,7 +76,13 @@ Builder.prototype.build = function() {
   mkdir('-p', this.dir);
   cp(MARKDOWN, this.dir);
 
-  var docs = globby.sync(path.join(this.name, 'src/*.js'), {
+  var docsPaths = [
+    path.join(this.name, 'src/*.js'),
+    path.join(this.name, 'src/**/v*/doc/*.js'),
+    path.join(this.name, 'src/**/v*/*_client.js')
+  ];
+
+  var docs = globby.sync(docsPaths, {
     cwd: PACKAGES_ROOT,
     ignore: config.IGNORE
   }).map(function(file) {
@@ -88,6 +94,54 @@ Builder.prototype.build = function() {
 
     return json;
   });
+
+  var gapicVersions = docs.reduce((grouped, doc) => {
+    var gapicVersion = doc.id.match(/\/(v[^\/]*)/);
+
+    if (gapicVersion) {
+      gapicVersion = gapicVersion[1];
+      mkdir('-p', `${self.dir}/${gapicVersion}`);
+
+      if (doc.id.includes('doc_')) {
+        grouped[gapicVersion] = grouped[gapicVersion] || [];
+        grouped[gapicVersion].push(doc);
+      } else if (doc.id.includes('_client')) {
+        // Move client file to a separate path.
+        doc.path = `${gapicVersion}/${doc.path}`;
+        self.write(doc.path, doc);
+      }
+    }
+
+    return grouped;
+  }, {});
+
+  // @TODO delete extra files
+  docs = docs.filter(doc => !doc.source.includes('doc_'));
+
+  for (var gapicVersion in gapicVersions) {
+    var gapicFiles = gapicVersions[gapicVersion];
+
+    var dataTypesFile = gapicFiles.reduce((dataTypesFile, gapicFile) => {
+      if (!dataTypesFile.id) {
+        var idParts = gapicFile.id.split('/');
+        idParts.pop();
+        idParts.pop();
+        idParts.push('data_types');
+        dataTypesFile.id = idParts.join('/');
+      }
+
+      dataTypesFile.methods = dataTypesFile.methods.concat(gapicFile.methods);
+
+      return dataTypesFile;
+    }, {
+      methods: [],
+      path: `${gapicVersion}/data_types.json`
+    });
+
+    this.write(`${gapicVersion}/data_types.json`, dataTypesFile);
+
+    docs.push(dataTypesFile);
+  }
 
   var types = parser.createTypesDictionary(docs);
   var toc = parser.createToc(types);
