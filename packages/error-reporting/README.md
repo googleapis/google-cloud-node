@@ -66,7 +66,7 @@ errors.report(new Error('Something broke!'));
 
 ## Catching and Reporting Application-wide Uncaught Errors
 
-*It is recommended to catch `uncaughtExceptions` for production-deployed applications.*
+Uncaught exceptions and unhandled rejections are not reported by default.  *It is recommended to process `uncaughtException`s and `unhandledRejection`s for production-deployed applications.*
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
@@ -76,9 +76,13 @@ process.on('uncaughtException', (e) => {
   // Report that same error the Stackdriver Error Service
   errors.report(e);
 });
+
+process.on('unhandledRejection', (reason, p) => {
+  errors.report('Unhandled rejection of promise: ' + p + ', reason: ' + reason);
+});
 ```
 
-More information about uncaught exception handling in Node.js and what it means for your application can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
+More information on uncaught exception handling in Node.js can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception), and more information on unhandled promise handling can be found [here](https://nodejs.org/api/process.html#process_event_unhandledrejection).
 
 ## Running on Google Cloud Platform
 
