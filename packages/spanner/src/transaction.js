@@ -357,7 +357,6 @@ Transaction.prototype.requestStream = function(config) {
   var gaxOptions = reqOpts.gaxOptions;
   delete reqOpts.gaxOptions;
 
-  // return config.method(reqOpts, gaxOptions);
   var requestStream = config.method(reqOpts, gaxOptions);
 
   if (!is.fn(self.runFn_)) {
