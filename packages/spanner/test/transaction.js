@@ -612,6 +612,14 @@ describe('Transaction', function() {
         var error = { code: 10 };
         var stream;
 
+        var end = fakeStream.end;
+        var ended = false;
+
+        fakeStream.end = function() {
+          ended = true;
+          return end.call(fakeStream);
+        };
+
         transaction.shouldRetry_ = function(err) {
           assert.strictEqual(err, error);
           return true;
@@ -620,7 +628,7 @@ describe('Transaction', function() {
         transaction.runFn_ = done; // should not be called
 
         transaction.retry_ = function() {
-          assert(fakeStream._destroyed);
+          assert(ended);
           assert(stream._destroyed);
           done();
         };
@@ -634,6 +642,14 @@ describe('Transaction', function() {
       it('should send a deadline error to the runFn', function(done) {
         var error = { code: 10 };
         var stream;
+
+        var end = fakeStream.end;
+        var ended = false;
+
+        fakeStream.end = function() {
+          ended = true;
+          return end.call(fakeStream);
+        };
 
         var deadlineError = {};
         var createDeadlineError = Transaction.createDeadlineError_;
@@ -652,7 +668,7 @@ describe('Transaction', function() {
 
         transaction.runFn_ = function(err) {
           assert.strictEqual(err, deadlineError);
-          assert(fakeStream._destroyed);
+          assert(ended);
           assert(stream._destroyed);
 
           Transaction.createDeadlineError_ = createDeadlineError;
