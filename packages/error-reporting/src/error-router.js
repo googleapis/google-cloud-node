@@ -21,6 +21,7 @@ var isObject = is.object;
 var isString = is.string;
 var isNumber = is.number;
 var isFunction = is.function;
+var buildStackTrace = require('./build-stack-trace.js');
 
 /**
  * The Error handler router is responsible for taking an object of some type and
@@ -137,16 +138,7 @@ function populateFromObject(ob, errorMessage) {
  * @returns {Undefined} - does not return anything
  */
 function populateFromString(ob, errorMessage) {
-  var fauxError = new Error();
-  var fullStack = fauxError.stack.split('\n');
-  var cleanedStack = fullStack.slice(0, 1).concat(fullStack.slice(4));
-  var errChecked = '';
-
-  // Replace the generic error message with the user-provided string
-  cleanedStack[0] = ob;
-  errChecked = cleanedStack.join('\n');
-
-  errorMessage.setMessage(errChecked);
+  errorMessage.setMessage(buildStackTrace(ob));
 }
 
 /**
@@ -161,14 +153,8 @@ function populateFromString(ob, errorMessage) {
  * @returns {Undefined} - does not return anything
  */
 function populateFromNumber(ob, errorMessage) {
-  var fauxError = new Error();
-  var errChecked = fauxError.stack;
-
-  if (isNumber(ob) && isFunction(ob.toString)) {
-    errChecked = ob.toString();
-  }
-
-  errorMessage.setMessage(errChecked);
+  var message = isNumber(ob) && isFunction(ob.toString) ? ob.toString() : '';
+  errorMessage.setMessage(buildStackTrace(message));
 }
 
 /**
@@ -184,9 +170,7 @@ function populateFromNumber(ob, errorMessage) {
  * @returns {Undefined} - does not return anything
  */
 function populateFromUnknown(ob, errorMessage) {
-  var fauxError = new Error();
-
-  errorMessage.setMessage(fauxError.stack);
+  errorMessage.setMessage(buildStackTrace());
 }
 
 module.exports = errorHandlerRouter;

@@ -16,6 +16,7 @@
 
 'use strict';
 var ErrorMessage = require('../classes/error-message.js');
+var buildStackTrace = require('../build-stack-trace.js');
 
 /**
  * The handler setup function serves to produce a bound instance of the
@@ -44,9 +45,7 @@ function handlerSetup(config) {
     //       error is used instead of the stack trace where the error is
     //       reported to be consistent with the behavior of reporting a
     //       an error when reporting an actual Node.js Error object.
-    var fauxError = new Error('');
-    var fullStack = fauxError.stack.split('\n');
-    var cleanedStack = fullStack.slice(2).join('\n');
+    var cleanedStack = buildStackTrace();
 
     var em = new ErrorMessage().setServiceContext(
                          config.getServiceContext().service,
