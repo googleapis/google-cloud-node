@@ -35,20 +35,15 @@ var isFunction = is.function;
 function errorHandlerRouter(ob, em) {
   if (ob === null || ob === undefined) {
     populateFromUnknown(ob, em);
-  }
-  else if (ob instanceof Error) {
+  } else if (ob instanceof Error) {
     populateFromError(ob, em);
-  }
-  else if (typeof ob === 'object' && isObject(ob)) {
+  } else if (typeof ob === 'object' && isObject(ob)) {
     populateFromObject(ob, em);
-  }
-  else if (typeof ob === 'string' && isString(ob)) {
+  } else if (typeof ob === 'string' && isString(ob)) {
     populateFromString(ob, em);
-  }
-  else if (typeof ob === 'number') {
+  } else if (typeof ob === 'number') {
     populateFromNumber(ob, em);
-  }
-  else {
+  } else {
     populateFromUnknown(ob, em);
   }
 
