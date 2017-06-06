@@ -147,6 +147,34 @@ function Instance(spanner, name) {
 util.inherits(Instance, commonGrpc.ServiceObject);
 
 /**
+ * Cache of instance objects - while usually this isn't necessary, to avoid
+ * re-creating session pools we need to cache both instance and database
+ * objects so that the user does not have to.
+ *
+ * @private
+ */
+Instance.cache_ = {};
+
+/**
+ * Either creates a new instance or retrieves a pre-existing instance from
+ * the instance cache.
+ *
+ * @private
+ *
+ * @param {object} parent - The parent object.
+ * @param {string} name - The name of the instance.
+ *
+ * @return {module:spanner/instance}
+ */
+Instance.get_ = function(parent, name) {
+  if (!Instance.cache_[name]) {
+    Instance.cache_[name] = new Instance(parent, name)
+  }
+
+  return Instance.cache_[name];
+};
+
+/**
  * Format the instance name to include the project ID.
  *
  * @private
@@ -283,7 +311,7 @@ Instance.prototype.database = function(name, poolOptions) {
     throw new Error('A name is required to access a Database object.');
   }
 
-  return new Database(this, name, poolOptions);
+  return Database.get_(this, name, poolOptions);
 };
 
 /**
@@ -312,9 +340,19 @@ Instance.prototype.database = function(name, poolOptions) {
  * });
  */
 Instance.prototype.delete = function(callback) {
-  return this.api.Instance.deleteInstance({
+  var self = this;
+
+  var reqOpts = {
     name: this.formattedName_
-  }, callback);
+  };
+
+  return this.api.Instance.deleteInstance(reqOpts, function(err, resp) {
+    if (!err) {
+      delete Instance.cache_[self.id];
+    }
+
+    callback(err, resp);
+  });
 };
 
 /**

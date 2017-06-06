@@ -43,6 +43,7 @@ var Instance = require('./instance.js');
 
 var v1 = require('./v1');
 
+
 /**
  * [Cloud Spanner](https://cloud.google.com/spanner) is a highly scalable,
  * transactional, managed, NewSQL database service. Cloud Spanner solves the
@@ -464,7 +465,7 @@ Spanner.prototype.instance = function(name) {
     throw new Error('A name is required to access an Instance object.');
   }
 
-  return new Instance(this, name);
+  return Instance.get_(this, name);
 };
 
 /**

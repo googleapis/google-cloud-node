@@ -194,6 +194,34 @@ function Database(instance, name, poolOptions) {
 util.inherits(Database, commonGrpc.ServiceObject);
 
 /**
+ * Cache of database objects - while usually this isn't necessary, to avoid
+ * re-creating session pools we need to cache both instance and database
+ * objects so that the user does not have to.
+ *
+ * @private
+ */
+Database.cache_ = {};
+
+/**
+ * Either creates a new database or retrieves a pre-existing database from
+ * the database cache.
+ *
+ * @private
+ *
+ * @param {object} parent - The parent object.
+ * @param {string} name - The name of the database.
+ *
+ * @return {module:spanner/database}
+ */
+Database.get_ = function(parent, name, poolOptions) {
+  if (!Database.cache_[name]) {
+    Database.cache_[name] = new Database(parent, name, poolOptions);
+  }
+
+  return Database.cache_[name];
+};
+
+/**
  * Format the database name to include the instance name.
  *
  * @private
@@ -232,7 +260,11 @@ Database.formatName_ = function(instanceName, name) {
  * });
  */
 Database.prototype.close = function(callback) {
+  var self = this;
+
   this.pool_.clear().then(function() {
+    delete Database.cache_[self.id];
+
     callback(null);
   }, function(err) {
     callback(err || new Error('Unable to close database connection.'));
@@ -327,9 +359,19 @@ Database.prototype.createTable = function(schema, callback) {
  * });
  */
 Database.prototype.delete = function(callback) {
-  return this.api.Database.dropDatabase({
+  var self = this;
+
+  var reqOpts = {
     database: this.formattedName_
-  }, callback);
+  };
+
+  return this.api.Database.dropDatabase(reqOpts, function(err, resp) {
+    if (!err) {
+      delete Database.cache_[self.id];
+    }
+
+    callback(err, resp);
+  });
 };
 
 /**
