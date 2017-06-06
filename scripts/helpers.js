@@ -238,6 +238,7 @@ Module.prototype.runSnippetTests = function() {
 Module.prototype.runSystemTests = function() {
   var modulesExcludedFromSystemTests = [
     'common',
+    'common-gax',
     'common-grpc',
     'dlp',
     'error-reporting',

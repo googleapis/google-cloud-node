@@ -1,0 +1,38 @@
+{
+  "name": "@google-cloud/common-gax",
+  "version": "0.0.0",
+  "author": "Google Inc.",
+  "description": "Common components for Cloud APIs Node.js Client Libraries that require google-gax",
+  "contributors": [
+    {
+      "name": "Stephen Sawchuk",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
+  "main": "./src/index.js",
+  "files": [
+    "src",
+    "AUTHORS",
+    "CONTRIBUTORS",
+    "COPYING"
+  ],
+  "repository": "googlecloudplatform/google-cloud-node",
+  "dependencies": {
+    "@google-cloud/common": "^0.13.1",
+    "extend": "^3.0.0",
+    "stream-events": "^1.0.1",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.10"
+  },
+  "scripts": {
+    "publish-module": "node ../../scripts/publish.js common-gax",
+    "test": "mocha test/*.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
