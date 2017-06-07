@@ -57,6 +57,7 @@ function errorHandlerRouter(ob, em) {
  * will check before accessing any part of the error for propety presence but
  * will not check the types of these property values that is instead work that
  * is allocated to the error message instance itself.
+ * @function populateFromError
  * @param {Error} err - the error instance
  * @param {ErrorMessage} errorMessage - the error message instance to have the
  *  error information marshaled into
@@ -80,20 +81,20 @@ function populateFromError(err, errorMessage) {
  * error. This function will check presence of each property before attempting
  * to access the given property on the object but will not check for type
  * compliance as that is allocated to the instance of the error message itself.
- * @function extractFromObject
- * @param {Object} err - the Object given as the content of the error
- * @param {String} [err.message] - the error message
- * @param {String} [err.user] - the user the error occurred for
- * @param {String} [err.filePath] - the file path and file where the error
+ * @function populateFromObject
+ * @param {Object} ob - the Object given as the content of the error
+ * @param {String} [ob.message] - the error message
+ * @param {String} [ob.user] - the user the error occurred for
+ * @param {String} [ob.filePath] - the file path and file where the error
  *  occurred at
- * @param {Number} [err.lineNumber] - the line number where the error occurred
+ * @param {Number} [ob.lineNumber] - the line number where the error occurred
  *  at
- * @param {String} [err.functionName] - the function where the error occurred at
- * @param {Object} [err.serviceContext] - the service context object of the
+ * @param {String} [ob.functionName] - the function where the error occurred at
+ * @param {Object} [ob.serviceContext] - the service context object of the
  *  error
- * @param {String} [err.serviceContext.service] - the service the error occurred
+ * @param {String} [ob.serviceContext.service] - the service the error occurred
  *  on
- * @param {String} [err.serviceContext.version] - the version of the application
+ * @param {String} [ob.serviceContext.version] - the version of the application
  *  that the error occurred on
  * @param {ErrorMessage} errorMessage - the error message instance to marshal
  *  error information into
@@ -102,6 +103,8 @@ function populateFromError(err, errorMessage) {
 function populateFromObject(ob, errorMessage) {
   if (has(ob, 'message')) {
     errorMessage.setMessage(ob.message);
+  } else {
+    errorMessage.setMessage(buildStackTrace('' + ob, 3));
   }
 
   if (has(ob, 'user')) {
@@ -131,14 +134,14 @@ function populateFromObject(ob, errorMessage) {
  * This function will create a new instance of the Error class to produce a
  * stack trace for submission to the API and check to confirm that the given
  * value is of type string.
- * @function handleStringAsError
- * @param {String} err - the String indicated as the content of the error
+ * @function populateFromString
+ * @param {String} str - the String indicated as the content of the error
  * @param {ErrorMessage} errorMessage - the error message instance to marshal
  *  error information into.
  * @returns {Undefined} - does not return anything
  */
-function populateFromString(ob, errorMessage) {
-  errorMessage.setMessage(buildStackTrace(ob));
+function populateFromString(str, errorMessage) {
+  errorMessage.setMessage(buildStackTrace(str, 3));
 }
 
 /**
@@ -146,15 +149,15 @@ function populateFromString(ob, errorMessage) {
  * to be of type Number. This handler will manufacture a new Error to create
  * a stack-trace for submission to the Error API and will attempt to caste the
  * given number to a string for submission to the Error API.
- * @function handleNumberAsError
- * @param {Number} err - the number submitted as content for the error message
+ * @function populateFromNumber
+ * @param {Number} num - the number submitted as content for the error message
  * @param {ErrorMessage} errorMessage - the error messag instance to marshall
  *  error information into.
  * @returns {Undefined} - does not return anything
  */
-function populateFromNumber(ob, errorMessage) {
-  var message = isNumber(ob) && isFunction(ob.toString) ? ob.toString() : '';
-  errorMessage.setMessage(buildStackTrace(message));
+function populateFromNumber(num, errorMessage) {
+  var message = isNumber(num) && isFunction(num.toString) ? num.toString() : '';
+  errorMessage.setMessage(buildStackTrace(message, 3));
 }
 
 /**
@@ -162,15 +165,15 @@ function populateFromNumber(ob, errorMessage) {
  * the problem-space is not defined for this path the library only attempts to
  * manufacture a stack trace for submission to the API and discards the input
  * that was given as the error content.
- * @function handleUnknownAsError
- * @param {Any} err - the unknown/unsupported input indicated as the content of
+ * @function populateFromUnknown
+ * @param {Any} ob - the unknown/unsupported input indicated as the content of
  *  the error.
  * @param {ErrorMessage} errorMessage - the error message instance to marshal
  *  error information into.
  * @returns {Undefined} - does not return anything
  */
 function populateFromUnknown(ob, errorMessage) {
-  errorMessage.setMessage(buildStackTrace());
+  errorMessage.setMessage(buildStackTrace('' + ob, 3));
 }
 
 module.exports = errorHandlerRouter;

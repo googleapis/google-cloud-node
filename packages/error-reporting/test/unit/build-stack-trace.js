@@ -20,17 +20,27 @@ var assert = require('assert');
 var buildStackTrace = require('../../src/build-stack-trace.js');
 
 describe('build-stack-trace', function() {
-  it('Should not have a message attached if none is given', function() {
+  it('Should not have a message attached if none is given without specifying to skip frames', function() {
     assert(buildStackTrace().startsWith('    at'));
     assert(!buildStackTrace(undefined).startsWith('undefined'));
     assert(!buildStackTrace(null).startsWith('null'));
   });
 
-  it('Should attach a message if given', function() {
+  it('Should not have a message attached if none is given with specifying to skip frames', function() {
+    assert(buildStackTrace().startsWith('    at'), 2);
+    assert(!buildStackTrace(undefined).startsWith('undefined'), 2);
+    assert(!buildStackTrace(null).startsWith('null'), 2);
+  });
+
+  it('Should attach a message if given without specifying to skip frames', function() {
     assert(buildStackTrace('Some Message').startsWith('Some Message\n'));
   });
 
-  it('Should not contain error-reporting specific frames', function() {
+  it('Should attach a message if given with specifying to skip frames', function() {
+    assert(buildStackTrace('Some Message').startsWith('Some Message\n'), 2);
+  });
+
+  it('Should not contain error-reporting specific frames without specifying to skip frames', function() {
     var internalFileName = 'build-stack-trace';
     var stackTrace = buildStackTrace();
     var firstIndex = stackTrace.indexOf(internalFileName);
@@ -44,7 +54,7 @@ describe('build-stack-trace', function() {
     assert.strictEqual(firstIndex, lastIndex);
   });
 
-  it('Should return the stack trace', function() {
+  it('Should return the stack trace without specifying to skip frames', function() {
     (function functionA() {
       (function functionB() {
         (function functionC() {
@@ -53,6 +63,23 @@ describe('build-stack-trace', function() {
           assert.notStrictEqual(stackTrace.indexOf('functionA'), -1);
           assert.notStrictEqual(stackTrace.indexOf('functionB'), -1);
           assert.notStrictEqual(stackTrace.indexOf('functionC'), -1);
+        })();
+      })();
+    })();
+  });
+
+  it('Should return the stack trace with the correct number of frames skipped', function() {
+    (function functionA() {
+      (function functionB() {
+        (function functionC() {
+          var stackTrace = buildStackTrace('', 2);
+          assert(stackTrace);
+          // The stack trace should not contain the frames for
+          // functionC or functionB because 2 frames were specified as being
+          // skipped.  It should, however, contain functionA.
+          assert.notStrictEqual(stackTrace.indexOf('functionA'), -1);
+          assert.strictEqual(stackTrace.indexOf('functionB'), -1);
+          assert.strictEqual(stackTrace.indexOf('functionC'), -1);
         })();
       })();
     })();

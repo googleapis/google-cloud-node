@@ -367,8 +367,8 @@ describe('error-reporting', function() {
     return [Date.now(), BASE_NAME, suffix].join('_');
   }
 
-  const SERVICE_NAME = buildName('service-name');
-  const SERVICE_VERSION = buildName('service-version');
+  const SERVICE = buildName('service-name');
+  const VERSION = buildName('service-version');
 
   var errors;
   var transport;
@@ -396,8 +396,8 @@ describe('error-reporting', function() {
     var config = Object.assign({
       ignoreEnvironmentCheck: true,
       serviceContext: {
-        service: SERVICE_NAME,
-        version: SERVICE_VERSION
+        service: SERVICE,
+        version: VERSION
       }
     }, extraConfig || {});
     errors = require('../src/index.js')(config);
@@ -426,6 +426,9 @@ describe('error-reporting', function() {
 
         var matchedErrors = groups.filter(function(errItem) {
           return errItem && errItem.representative &&
+            errItem.representative.serviceContext &&
+            errItem.representative.serviceContext.service === SERVICE &&
+            errItem.representative.serviceContext.version === VERSION &&
             messageTest(errItem.representative.message);
         });
 
@@ -445,8 +448,8 @@ describe('error-reporting', function() {
       assert.ok(rep);
       var context = rep.serviceContext;
       assert.ok(context);
-      assert.strictEqual(context.service, SERVICE_NAME);
-      assert.strictEqual(context.version, SERVICE_VERSION);
+      assert.strictEqual(context.service, SERVICE);
+      assert.strictEqual(context.version, VERSION);
       cb();
     });
   }
@@ -466,21 +469,61 @@ describe('error-reporting', function() {
   // As such, each test is set to fail due to a timeout only if sufficiently
   // more than TIMEOUT ms has elapsed to avoid test fragility.
 
-  it('Should correctly publish errors using the Error constructor',
-    function(done) {
+  it('Should correctly publish an error that is an Error object',
+    function verifyErrors(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-constructor');
     var errOb = new Error(errorId);
     verifyReporting(errOb, function(message) {
-      return message.startsWith('Error: ' + errorId);
+      return message.startsWith('Error: ' + errorId +
+        '\n    at Context.verifyErrors');
     }, TIMEOUT, done);
   });
 
-  it('Should correctly publish errors using a string', function(done) {
+  it('Should correctly publish an error that is a string', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-string');
     verifyReporting(errorId, function(message) {
-      return message.startsWith(errorId);
+      return message.startsWith(errorId + '\n    at verifyReporting');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is undefined', function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting(undefined, function(message) {
+      return message.startsWith('undefined\n    at verifyReporting');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is null', function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting(null, function(message) {
+      return message.startsWith('null\n    at verifyReporting');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is a plain object',
+  function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting({ someKey: 'someValue' }, function(message) {
+      return message.startsWith('[object Object]\n    at verifyReporting');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is a number', function(done) {
+    this.timeout(TIMEOUT * 2);
+    var num = (new Date()).getTime();
+    verifyReporting(num, function(message) {
+      return message.startsWith('' + num + '\n    at verifyReporting');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is of an unknown type',
+  function(done) {
+    this.timeout(TIMEOUT * 2);
+    var bool = true;
+    verifyReporting(bool, function(message) {
+      return message.startsWith('true\n    at verifyReporting');
     }, TIMEOUT, done);
   });
 
