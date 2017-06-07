@@ -77,7 +77,8 @@ describe('populate-error-message', function() {
       populateErrorMessage.bind(null, adversarialObjectInputTwo, em));
   });
 
-  it('Message field: Should set the message as the stack of the given error', function() {
+  it('Message Field: Should set the message as the stack given an Error',
+  function() {
     var err = new Error(TEST_MESSAGE);
     populateErrorMessage(err, em);
     assert.deepEqual(em.message, err.stack, 'Given a valid message the ' +
@@ -85,7 +86,24 @@ describe('populate-error-message', function() {
    );
   });
 
-  it('User field: Should set the user field if given valid input', function() {
+  it('Message Field: Should set the field given valid input given an object',
+  function() {
+    var err = {};
+    var MESSAGE = 'test';
+    err = {message: MESSAGE};
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.message, MESSAGE);
+  });
+
+  it('Message Field: Should default the field given lack-of input given ' +
+    'an object', function() {
+    var err = {};
+    populateErrorMessage(err, em);
+    assert(em.message.startsWith('[object Object]'));
+  });
+
+  it('User Field: Should set the field given valid input given an Error',
+  function() {
     var err = new Error();
     var TEST_USER_VALID = 'TEST_USER';
     err.user = TEST_USER_VALID;
@@ -93,14 +111,32 @@ describe('populate-error-message', function() {
     assert.strictEqual(em.context.user, TEST_USER_VALID);
   });
 
-  it('User field: Should default the user field if given invalid input', function() {
+  it('User Field: Should default the field given invalid input given an Error',
+  function() {
     var err = new Error();
     err.user = TEST_USER_INVALID;
     populateErrorMessage(err, em);
     assert.strictEqual(em.context.user, '');
   });
 
-  it('Service field: Should set the field if given valid input', function() {
+  it('User Field: Should set the field given valid input given an object',
+  function() {
+    var err = {};
+    var USER = 'test';
+    err.user = USER;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.user, USER);
+  });
+
+  it('User Field: Should default the field given lack-of input given an ' +
+    'object', function() {
+    var err = {};
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.user, '');
+  });
+
+  it('ServiceContext Field: Should set the field given valid input given ' +
+    'an Error', function() {
     var err = new Error();
     var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
     err.serviceContext = TEST_SERVICE_VALID;
@@ -108,7 +144,8 @@ describe('populate-error-message', function() {
     assert.deepEqual(err.serviceContext, TEST_SERVICE_VALID);
   });
 
-  it('Service field: Should default the field if given invalid input', function() {
+  it('ServiceContext Field: Should default the field given invalid input ' +
+  'given an Error', function() {
     var err = new Error();
     var TEST_SERVICE_INVALID = 12;
     err.serviceContext = TEST_SERVICE_INVALID;
@@ -116,13 +153,40 @@ describe('populate-error-message', function() {
     assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
   });
 
-  it('Service field: Should default the field if not given input', function() {
+  it('ServiceContext Field: Should default the field if not given input ' +
+  'given an Error', function() {
     var err = new Error();
     populateErrorMessage(err, em);
     assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
   });
 
-  it('Report location field: Should default the field if given invalid input', function() {
+  it('ServiceContext Field: Should set the field given valid input given an ' +
+  'object', function() {
+    var err = {};
+    var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
+    err.serviceContext = TEST_SERVICE_VALID;
+    populateErrorMessage(err, em);
+    assert.deepEqual(em.serviceContext, TEST_SERVICE_VALID);
+  });
+
+  it('ServiceContext Field: Should default the field given invalid input ' +
+  'given an object', function() {
+    var err = {};
+    var TEST_SERVICE_INVALID = 12;
+    err.serviceContext = TEST_SERVICE_INVALID;
+    populateErrorMessage(err, em);
+    assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+  });
+
+  it('ServiceContext Field: Should default the field given lack-of input ' +
+  'given an object', function() {
+    var err = {};
+    populateErrorMessage(err, em);
+    assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+  });
+
+  it('Report location Field: Should default the field if given invalid input ' +
+  'given an Error', function() {
     var TEST_STACK_INVALID_CONTENTS = {
       filePath: null,
       lineNumber: '2',
@@ -134,7 +198,8 @@ describe('populate-error-message', function() {
     assert.deepEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
   });
 
-  it('Report location field: Should default field if not given a valid type', function() {
+  it('Report location Field: Should default field if not given a valid type ' +
+  'given an Error', function() {
     var err = new Error();
     var TEST_STACK_INVALID_TYPE = [];
     err.stack = TEST_STACK_INVALID_TYPE;
@@ -142,35 +207,8 @@ describe('populate-error-message', function() {
     assert.deepEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
   });
 
-  it('Message Field: Should write to the field given valid input', function() {
-    var err = {};
-    var MESSAGE = 'test';
-    err = {message: MESSAGE};
-    populateErrorMessage(err, em);
-    assert.strictEqual(em.message, MESSAGE);
-  });
-
-  it('Message Field: Should default the field given lack-of input', function() {
-    var err = {};
-    populateErrorMessage(err, em);
-    assert(em.message.startsWith('[object Object]'));
-  });
-
-  it('User field: Should write to the field given valid input', function() {
-    var err = {};
-    var USER = 'test';
-    err.user = USER;
-    populateErrorMessage(err, em);
-    assert.strictEqual(em.context.user, USER);
-  });
-
-  it('User field: Should default the field given lack-of input', function() {
-    var err = {};
-    populateErrorMessage(err, em);
-    assert.strictEqual(em.context.user, '');
-  });
-
-  it('FilePath Field: Should write to the field given valid input', function() {
+  it('FilePath Field: Should set the field given valid input given an object',
+  function() {
     var err = {};
     var PATH = 'test';
     err.filePath = PATH;
@@ -178,13 +216,15 @@ describe('populate-error-message', function() {
     assert.strictEqual(em.context.reportLocation.filePath, PATH);
   });
 
-  it('FilePath Field: Should default the field given lack-of input', function() {
+  it('FilePath Field: Should default the field given lack-of input given ' +
+  'an object', function() {
     var err = {};
     populateErrorMessage(err, em);
     assert.strictEqual(em.context.reportLocation.filePath, '');
   });
 
-  it('LineNumber Field: Should write to the field given valid input', function() {
+  it('LineNumber Field: Should set the field given valid input given an object',
+  function() {
     var err = {};
     var LINE_NUMBER = 10;
     err.lineNumber = LINE_NUMBER;
@@ -192,13 +232,15 @@ describe('populate-error-message', function() {
     assert.strictEqual(em.context.reportLocation.lineNumber, LINE_NUMBER);
   });
 
-  it('LineNumber Field: Should default the field given lack-of input', function() {
+  it('LineNumber Field: Should default the field given lack-of input given ' +
+  'an object', function() {
     var err = {};
     populateErrorMessage(err, em);
     assert.strictEqual(em.context.reportLocation.lineNumber, 0);
   });
 
-  it('FunctionName Field: Should write to the field given valid input', function() {
+  it('FunctionName Field: Should set the field given valid input given ' +
+  'an object', function() {
     var err = {};
     var FUNCTION_NAME = 'test';
     err.functionName = FUNCTION_NAME;
@@ -206,31 +248,10 @@ describe('populate-error-message', function() {
     assert.strictEqual(em.context.reportLocation.functionName, FUNCTION_NAME);
   });
 
-  it('FunctionName Field: Should default the field given lack-of input', function() {
+  it('FunctionName Field: Should default the field given lack-of input given ' +
+  'an object', function() {
     var err = {};
     populateErrorMessage(err, em);
     assert.strictEqual(em.context.reportLocation.functionName, '');
-  });
-
-  it('ServiceContext Field: Should write to the field given valid input', function() {
-    var err = {};
-    var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
-    err.serviceContext = TEST_SERVICE_VALID;
-    populateErrorMessage(err, em);
-    assert.deepEqual(em.serviceContext, TEST_SERVICE_VALID);
-  });
-
-  it('ServiceContext Field: Should default the field given invalid input', function() {
-    var err = {};
-    var TEST_SERVICE_INVALID = 12;
-    err.serviceContext = TEST_SERVICE_INVALID;
-    populateErrorMessage(err, em);
-    assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-  });
-
-  it('ServiceContext Field: Should default the field given lack-of input', function() {
-    var err = {};
-    populateErrorMessage(err, em);
-    assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
   });
 });
