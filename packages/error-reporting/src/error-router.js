@@ -27,13 +27,13 @@ var buildStackTrace = require('./build-stack-trace.js');
  * The Error handler router is responsible for taking an object of some type and
  * and Error message container, analyzing the type of the object and marshalling
  * the object's information into the error message container.
- * @function errorHandlerRouter
+ * @function populateErrorMessage
  * @param {Any} ob - the object information to extract from
  * @param {ErrorMessage} em - an instance of ErrorMessage to marshal object
  *  information into
  * @returns {Undefined} - does not return a value
  */
-function errorHandlerRouter(ob, em) {
+function populateErrorMessage(ob, em) {
   if (ob === null || ob === undefined) {
     populateFromUnknown(ob, em);
   } else if (ob instanceof Error) {
@@ -176,4 +176,4 @@ function populateFromUnknown(ob, errorMessage) {
   errorMessage.setMessage(buildStackTrace('' + ob, 3));
 }
 
-module.exports = errorHandlerRouter;
+module.exports = populateErrorMessage;

@@ -21,7 +21,7 @@ var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var expressRequestInformationExtractor =
     require('../request-extractors/express.js');
-var errorHandlerRouter = require('../error-router.js');
+var populateErrorMessage = require('../error-router.js');
 
 /**
  * Returns a function that can be used as an express error handling middleware.
@@ -58,7 +58,7 @@ function makeExpressHandler(client, config) {
                      expressRequestInformationExtractor(req, res))
                  .setServiceContext(ctxService, ctxVersion);
 
-    errorHandlerRouter(err, em);
+    populateErrorMessage(err, em);
 
     if (isObject(client) && isFunction(client.sendError)) {
       client.sendError(em);

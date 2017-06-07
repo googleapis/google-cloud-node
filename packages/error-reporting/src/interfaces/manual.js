@@ -22,7 +22,7 @@ var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var manualRequestInformationExtractor =
     require('../request-extractors/manual.js');
-var errorHandlerRouter = require('../error-router.js');
+var populateErrorMessage = require('../error-router.js');
 
 /**
  * The handler setup function serves to produce a bound instance of the
@@ -96,7 +96,7 @@ function handlerSetup(client, config, logger) {
       em = new ErrorMessage();
       em.setServiceContext(config.getServiceContext().service,
                           config.getServiceContext().version);
-      errorHandlerRouter(err, em);
+      populateErrorMessage(err, em);
     }
 
     if (isObject(request)) {
