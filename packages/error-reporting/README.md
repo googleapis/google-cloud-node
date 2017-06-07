@@ -40,7 +40,7 @@ runtime configuration object is set to `true`.  See the [Configuration](#configu
 
   In your project, on the command line:
 
-```bash
+```sh
   # Install through npm while saving to the local 'package.json'
   npm install --save @google-cloud/error-reporting
 ```
@@ -96,7 +96,16 @@ If you already have VMs that were created without API access and do not wish to 
 
 ### Google Container Engine
 
-Container Engine nodes need to also be created with the `https://www.googleapis.com/auth/cloud-platform` scope, which is configurable during cluster creation. Alternatively, you can follow the instructions for using a service account under [running elsewhere](#running-elsewhere). It's recommended that you store the service account credentials as [Kubernetes Secret](http://kubernetes.io/v1.1/docs/user-guide/secrets.html).
+As with Compute Engine, Container Engine nodes need to be created with the `https://www.googleapis.com/auth/cloud-platform` scope, which is configurable during cluster creation:
+* If the cluster is being created with the `gcloud` CLI, pass the scope to the command with the `--scopes` command (multiple scopes can be [delimited with a comma](https://cloud.google.com/sdk/gcloud/reference/container/clusters/create)):
+
+  ```sh
+  gcloud container clusters create example-cluster-name --scopes https://www.googleapis.com/auth/cloud-platform
+  ```
+
+* If the cluster is being created through the Cloud Console UI, ensure that the "Cloud Platform" project access is set to "Enabled" (it's disabled by default).
+
+Alternatively, you can also follow the instructions for using a service account under [running elsewhere](#running-elsewhere). It's recommended that you store the service account credentials as [Kubernetes Secret](http://kubernetes.io/v1.1/docs/user-guide/secrets.html).
 
 ## Running Elsewhere
 
@@ -104,7 +113,9 @@ If your application is running outside of Google Cloud Platform, such as locally
 
 1. You will need to specify your project ID when starting the errors agent.
 
-       GCLOUD_PROJECT=particular-future-12345 node myapp.js
+    ```sh
+    GCLOUD_PROJECT=particular-future-12345 node myapp.js
+    ```
 
 1. You need to provide service account credentials to your application by using one of the three options below:
   * The recommended way is via [Application Default Credentials][app-default-credentials].
@@ -114,16 +125,16 @@ If your application is running outside of Google Cloud Platform, such as locally
   * If you are running your application on a development machine or test environment where you are using the [`gcloud` command line tools][gcloud-sdk], and are logged using `gcloud beta auth application-default login`, you already have sufficient credentials, and a service account key is not required.
   * Alternatively, you may set the `keyFilename` or `credentials` configuration field to the full path or contents to the key file, respectively. Setting either of these fields will override either setting `GOOGLE_APPLICATION_CREDENTIALS` or logging in using `gcloud`. For example:
 
-```js
-  // Require and start the agent with configuration options
-  var errors = require('@google-cloud/error-reporting')({
-    // The path to your key file:
-    keyFilename: '/path/to/keyfile.json',
+    ```js
+    // Require and start the agent with configuration options
+    var errors = require('@google-cloud/error-reporting')({
+      // The path to your key file:
+      keyFilename: '/path/to/keyfile.json',
 
-    // Or the contents of the key file:
-    credentials: require('./path/to/keyfile.json')
-  });
-```
+      // Or the contents of the key file:
+      credentials: require('./path/to/keyfile.json')
+    });
+    ```
 
 When running on Google Cloud Platform, we handle these for you automatically.
 
