@@ -68,7 +68,9 @@ var loggingBunyan = require('@google-cloud/logging-bunyan')({
 
 ## Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. Make sure to add logs to your [uncaught exception][uncaught] and [unhandled rejection][unhandled] handlers if you want to see those errors too.
+
+You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
 
 ## Formatting Request Logs
 
@@ -98,3 +100,5 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 [dev-console]: https://console.developers.google.com/project
 [error-reporting]: https://cloud.google.com/error-reporting/
 [@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
+[uncaught]: https://nodejs.org/api/process.html#process_event_uncaughtexception
+[unhandled]: https://nodejs.org/api/process.html#process_event_unhandledrejection
