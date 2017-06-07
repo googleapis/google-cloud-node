@@ -17,7 +17,7 @@
 'use strict';
 var ErrorMessage = require('../classes/error-message.js');
 var koaRequestInformationExtractor = require('../request-extractors/koa.js');
-var populateErrorMessage = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware

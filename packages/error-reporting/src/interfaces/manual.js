@@ -22,7 +22,7 @@ var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var manualRequestInformationExtractor =
     require('../request-extractors/manual.js');
-var populateErrorMessage = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * The handler setup function serves to produce a bound instance of the

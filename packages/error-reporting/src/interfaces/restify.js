@@ -21,7 +21,7 @@ var isFunction = is.function;
 var ErrorMessage = require('../classes/error-message.js');
 var expressRequestInformationExtractor =
     require('../request-extractors/express.js');
-var populateErrorMessage = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting

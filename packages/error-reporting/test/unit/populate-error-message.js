@@ -19,7 +19,7 @@
 var assert = require('assert');
 
 var ErrorMessage = require('../../src/classes/error-message.js');
-var populateErrorMessage = require('../../src/error-router.js');
+var populateErrorMessage = require('../../src/populate-error-message.js');
 
 var TEST_USER_INVALID = 12;
 var TEST_MESSAGE = 'This is a test';
@@ -30,7 +30,7 @@ var TEST_STACK_DEFAULT = {
       functionName: ''
     };
 
-describe('error-router', function() {
+describe('populate-error-message', function() {
   var em;
   var adversarialObjectInput = {
     stack: {}

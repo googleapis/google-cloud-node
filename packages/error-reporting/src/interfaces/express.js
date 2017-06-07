@@ -21,7 +21,7 @@ var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var expressRequestInformationExtractor =
     require('../request-extractors/express.js');
-var populateErrorMessage = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * Returns a function that can be used as an express error handling middleware.
