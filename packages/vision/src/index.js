@@ -21,7 +21,6 @@
 'use strict';
 
 var is = require('is');
-var util = require('util');
 
 var gapic = {
   v1: require('./v1'),
