@@ -645,13 +645,74 @@ Log.prototype.decorateEntries_ = function(entries) {
   });
 };
 
+/** 
+ * Returns a function that can be used an express request logger middleware.
+ * This will send your request logs to Stackdriver logging. You should install
+ * this before all other routes and middleware so that it can accurate log
+ * request latency.
+ * 
+ * @param {object} options
+ * @param {string=} level Stackdriver log level to use for request logs.
+ * @return {function} express middleware function
+ * 
+ * @example
+ * const app = require('express')();
+ * const logging = require('@google-cloud/logging')();
+ * const log = logging.log('log name');
+ * 
+ * app.use(log.requestLogger());
+ * app.get('/hello', (req, res) => { res.status(200).send('hello'); });
+ * // Will get logged into Stackdriver Logging UI as:
+ * // [INFO  ] [GET  ] [200] [  84 B] [ 19ms] [Chrome 59] [/hello             ]
+ */
+Log.prototype.expressLogger = function(options) {
+  const self = this;
+  options = extend({level: 'info'}, options);
+
+  return function(req, res, next) {
+    const t0 = process.hrtime();
+    const originalEnd = res.end;
+
+    res.end = (chunk, encoding) => {
+      res.end = originalEnd;
+      const returned = res.end(chunk, encoding);
+
+      const elapsed = process.hrtime(t0);
+      const entryMetadata = {
+        httpRequest: {
+        requestUrl: req.originalUrl,
+        requestMethod: req.method,
+        remoteIp: req.ip,
+        referer: req.headers.referer,
+        userAgent: req.headers['user-agent'],
+        status: res.statusCode,
+        latency: {
+          seconds: elapsed[0],
+          nanos: elapsed[1]
+        },
+        responseSize: res.get('content-length')
+        // TODO: We do not provide request size at the moment.
+        }
+      };
+
+      const entry = log(entryMetadata, {});
+
+      // Pass in a nop callback to avoid a promise being allocated.
+      self[options.level](entry, _=>_);      
+      return returned;
+    };
+
+    next();
+  };
+}
+
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
 common.util.promisifyAll(Log, {
-  exclude: ['entry']
+  exclude: ['entry', 'expressLogger']
 });
 
 module.exports = Log;

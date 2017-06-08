@@ -210,4 +210,41 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   this.log_[stackdriverLevel](entry, callback);
 };
 
+/**
+ * Returns a function that can be used an express request logger middleware.
+ * This will send your request logs to Stackdriver logging. You should install
+ * this before all other routes and middleware so that it can accurate log
+ * request latency.
+ * 
+ * @param {object} options Request logging options.
+ * @param {string=} level Winston log level to use for request logs.
+ *     Default: 'info'
+ * @return {function} express middleware function
+ * 
+ * @example
+ * const app = require('express')();
+ * const transport = require('@google-cloud/logging-winston')();
+ * const winston = require('winston');
+ * 
+ * winston.configure({
+ *   transports: [ transport ]
+ * });
+ * 
+ * app.use(transport.expressLogger());
+ * app.get('/hello', (req, res) => { res.status(200).send('hello'); });
+ * // Will get logged into Stackdriver Logging as:
+ * // [INFO  ] [GET  ] [200] [  84 B] [ 19ms] [Chrome 59] [/hello             ]
+ */
+LoggingWinston.prototype.expressLogger = function(options) {
+  options = extend({ level: 'info'}, options);
+
+  if (!this.levels_[options.level]) {
+    throw new Error('Unknown log level: ' + options.level);
+  }
+
+  var levelCode = this.levels_[options.level];
+  var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
+  return this.log_.expressLogger({ level: stackdriverLevel });
+};
+
 module.exports = LoggingWinston;
