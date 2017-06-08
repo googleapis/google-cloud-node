@@ -23,7 +23,6 @@
 var is = require('is');
 var util = require('util');
 
-var manual = require('./manual');
 var gapic = {
   v1: require('./v1'),
 };
@@ -62,8 +61,5 @@ function visionV1(opts) {
 }
 
 
-module.exports = util.deprecate(manual,
-  'This portion of the Vision client library has been deprecated. ' +
-  'Please use require(\'@google-cloud/vision\').v1() instead.'
-);
+module.exports = visionV1;
 module.exports.v1 = visionV1;
