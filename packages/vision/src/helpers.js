@@ -48,7 +48,7 @@ var coerceImage = (image, callback) => {
         callback(err);
         return;
       }
-      callback(null, {content: blob});
+      callback(null, {content: blob.toString('base64')});
     });
     return;
   }
