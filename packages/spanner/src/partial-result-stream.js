@@ -77,9 +77,14 @@ function partialResultStream(requestFn) {
   });
 
   var rowChunks = [];
+  var metadata;
 
   var userStream = streamEvents(through.obj(function(row, _, next) {
     var formattedRows = [];
+
+    if (row.metadata) {
+      metadata = row.metadata;
+    }
 
     if (row.chunkedValue) {
       rowChunks.push(row);
@@ -94,9 +99,11 @@ function partialResultStream(requestFn) {
 
     if (rowChunks.length > 0) {
       // Done getting all the chunks. Put them together.
-      formattedRows.push(new RowBuilder(rowChunks.concat(row)).toJSON());
+      var builder = new RowBuilder(metadata, rowChunks.concat(row));
+      formattedRows = formattedRows.concat(builder.toJSON());
+      rowChunks.length = 0;
     } else {
-      var formattedRow = partialResultStream.formatRow_(row);
+      var formattedRow = partialResultStream.formatRow_(metadata, row);
       var multipleRows = is.array(formattedRow[0]);
 
       if (multipleRows) {
@@ -160,8 +167,8 @@ function partialResultStream(requestFn) {
  *
  * @param {object} row - A `PartialResultSet` object.
  */
-partialResultStream.formatRow_ = function(row) {
-  var fields = row.metadata.rowType.fields;
+partialResultStream.formatRow_ = function(metadata, row) {
+  var fields = metadata.rowType.fields;
 
   if (row.values.length > fields.length) {
     // More than one row exists. Return an array of formatted rows.
@@ -169,7 +176,7 @@ partialResultStream.formatRow_ = function(row) {
 
     return valueSets.map(function(valueSet) {
       row.values = valueSet;
-      return partialResultStream.formatRow_(row);
+      return partialResultStream.formatRow_(metadata, row);
     });
   }
 

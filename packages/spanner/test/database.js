@@ -66,7 +66,10 @@ function FakeTransactionRequest() {
 }
 
 var fakeCodec = {
-  encode: util.noop
+  encode: util.noop,
+  Int: function() {},
+  Float: function() {},
+  SpannerDate: function() {}
 };
 
 describe('Database', function() {
@@ -536,29 +539,219 @@ describe('Database', function() {
       makeRequestFn();
     });
 
-    it('should encode query parameters', function(done) {
-      var query = {
-        sql: QUERY,
-        params: {
-          test: 'value'
-        }
-      };
+    describe('query parameters', function() {
+      var getType;
 
-      var encodedValue = {};
+      before(function() {
+        getType = fakeCodec.getType;
+      });
 
-      fakeCodec.encode = function(field) {
-        assert.strictEqual(field, query.params.test);
-        return encodedValue;
-      };
+      afterEach(function() {
+        fakeCodec.getType = getType;
+      });
 
-      database.pool_.requestStream = function(options) {
-        assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
-        done();
-      };
+      it('should encode query parameters', function(done) {
+        var query = {
+          sql: QUERY,
+          params: {
+            test: 'value'
+          }
+        };
 
-      var stream = database.runStream(query);
-      var makeRequestFn = stream.calledWith_[0];
-      makeRequestFn();
+        var encodedValue = {};
+
+        fakeCodec.encode = function(field) {
+          assert.strictEqual(field, query.params.test);
+          return encodedValue;
+        };
+
+        database.pool_.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.params.fields.test, encodedValue);
+          done();
+        };
+
+        var stream = database.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should attempt to guess the parameter types', function(done) {
+        var params = {
+          unspecified: null,
+          bool: true,
+          int64: 1234,
+          float64: 2.2,
+          timestamp: new Date(),
+          date: new fakeCodec.SpannerDate(),
+          string: 'abc',
+          bytes: new Buffer('abc')
+        };
+
+        var types = Object.keys(params);
+
+        var query = {
+          sql: QUERY,
+          params: params
+        };
+
+        var getTypeCallCount = 0;
+
+        fakeCodec.getType = function(field) {
+          var type = types[getTypeCallCount++];
+
+          assert.strictEqual(params[type], field);
+          return type;
+        };
+
+        database.pool_.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            unspecified: {
+              code: 0
+            },
+            bool: {
+              code: 1
+            },
+            int64: {
+              code: 2
+            },
+            float64: {
+              code: 3
+            },
+            timestamp: {
+              code: 4
+            },
+            date: {
+              code: 5
+            },
+            string: {
+              code: 6
+            },
+            bytes: {
+              code: 7
+            }
+          });
+
+          done();
+        };
+
+        var stream = database.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should not overwrite existing type definitions', function(done) {
+        var query = {
+          params: {
+            test: 123
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        fakeCodec.getType = function() {
+          throw new Error('Should not be called');
+        };
+
+        database.pool_.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 6
+            }
+          });
+          done();
+        };
+
+        var stream = database.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should throw an error for unknown types', function() {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'unicorn'
+          }
+        };
+
+        assert.throws(function() {
+          database.runStream(query);
+        }, /Unknown param type\: unicorn/);
+      });
+
+      it('should attempt to guess array types', function(done) {
+        var query = {
+          params: {
+            test: ['abc']
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'string'
+          };
+        };
+
+        database.pool_.requestStream = function(options) {
+          assert.deepEqual(options.reqOpts.paramTypes, {
+            test: {
+              code: 8,
+              arrayElementType: {
+                code: 6
+              }
+            }
+          });
+
+          done();
+        };
+
+        var stream = database.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
+
+      it('should throw an error for unknown child types', function() {
+        var query = {
+          params: {
+            test: [null]
+          }
+        };
+
+        fakeCodec.getType = function() {
+          return {
+            type: 'array',
+            child: 'unicorn'
+          };
+        };
+
+        assert.throws(function() {
+          database.runStream(query);
+        }, /Unknown param type\: unicorn/);
+      });
+
+      it('should delete the type map from the request options', function(done) {
+        var query = {
+          params: {
+            test: 'abc'
+          },
+          types: {
+            test: 'string'
+          }
+        };
+
+        database.pool_.requestStream = function(options) {
+          assert.strictEqual(options.reqOpts.types, undefined);
+          done();
+        };
+
+        var stream = database.runStream(query);
+        var makeRequestFn = stream.calledWith_[0];
+        makeRequestFn();
+      });
     });
 
     it('should return PartialResultStream', function() {
@@ -589,7 +782,11 @@ describe('Database', function() {
       };
 
       database.pool_.requestStream = function(options) {
-        assert.deepEqual(options.reqOpts.transaction.begin, FORMATTED_OPTIONS);
+        assert.deepEqual(
+          options.reqOpts.transaction.singleUse.readOnly,
+          FORMATTED_OPTIONS
+        );
+
         done();
       };
 
@@ -622,22 +819,49 @@ describe('Database', function() {
     });
 
     it('should run the transaction', function(done) {
-      var OPTIONS = {};
+      var TRANSACTION = {};
+      var OPTIONS = {
+        a: 'a'
+      };
 
-      var transaction = {
-        run_: function(runFn) {
-          runFn();
-        }
+      var dateNow = Date.now;
+      var fakeDate = 123445668382;
+
+      Date.now = function() {
+        return fakeDate;
       };
 
       database.getTransaction_ = function(options, callback) {
-        assert.strictEqual(options, OPTIONS);
-        callback(null, transaction);
+        assert.deepEqual(options, OPTIONS);
+        callback(null, TRANSACTION);
       };
 
-      database.runTransaction(OPTIONS, function(err, transaction_) {
+      function runFn(err, transaction) {
         assert.strictEqual(err, null);
-        assert.strictEqual(transaction_, transaction);
+        assert.strictEqual(transaction, TRANSACTION);
+        assert.strictEqual(transaction.runFn_, runFn);
+        assert.strictEqual(transaction.beginTime_, fakeDate);
+
+        Date.now = dateNow;
+        done();
+      }
+
+      database.runTransaction(OPTIONS, runFn);
+    });
+
+    it('should capture the timeout', function(done) {
+      var TRANSACTION = {};
+      var OPTIONS = {
+        timeout: 1000
+      };
+
+      database.getTransaction_ = function(options, callback) {
+        callback(null, TRANSACTION);
+      };
+
+      database.runTransaction(OPTIONS, function(err, txn) {
+        assert.ifError(err);
+        assert.strictEqual(txn.timeout_, OPTIONS.timeout);
         done();
       });
     });

@@ -36,6 +36,7 @@ var FakeBigQuery = createFakeApi();
 var FakeBigtable = createFakeApi();
 var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
+var FakeDLP = createFakeApi();
 var FakeDNS = createFakeApi();
 var FakeLanguage = createFakeApi();
 var FakeLogging = createFakeApi();
@@ -47,6 +48,7 @@ var FakeSpanner = createFakeApi();
 var FakeSpeech = createFakeApi();
 var FakeStorage = createFakeApi();
 var FakeTranslate = createFakeApi();
+var FakeVideoIntelligence = createFakeApi();
 var FakeVision = createFakeApi();
 
 describe('gcloud', function() {
@@ -58,6 +60,7 @@ describe('gcloud', function() {
       '@google-cloud/bigtable': FakeBigtable,
       '@google-cloud/compute': FakeCompute,
       '@google-cloud/datastore': FakeDatastore,
+      '@google-cloud/dlp': FakeDLP,
       '@google-cloud/dns': FakeDNS,
       '@google-cloud/language': FakeLanguage,
       '@google-cloud/logging': FakeLogging,
@@ -69,6 +72,7 @@ describe('gcloud', function() {
       '@google-cloud/speech': FakeSpeech,
       '@google-cloud/storage': FakeStorage,
       '@google-cloud/translate': FakeTranslate,
+      '@google-cloud/video-intelligence': FakeVideoIntelligence,
       '@google-cloud/vision': FakeVision
     });
   });
@@ -91,6 +95,10 @@ describe('gcloud', function() {
 
   it('should export static datastore', function() {
     assert.strictEqual(gcloud.datastore, FakeDatastore);
+  });
+
+  it('should export static dlp', function() {
+    assert.strictEqual(gcloud.dlp, FakeDLP);
   });
 
   it('should export static dns', function() {
@@ -135,6 +143,10 @@ describe('gcloud', function() {
 
   it('should export static translate', function() {
     assert.strictEqual(gcloud.translate, FakeTranslate);
+  });
+
+  it('should export static video-intelligence', function() {
+    assert.strictEqual(gcloud.videoIntelligence, FakeVideoIntelligence);
   });
 
   it('should export static vision', function() {
@@ -205,6 +217,15 @@ describe('gcloud', function() {
 
         assert(datastore instanceof FakeDatastore);
         assert.strictEqual(datastore.calledWith_[0], options);
+      });
+    });
+
+    describe('dlp', function() {
+      it('should create a new DNS', function() {
+        var dlp = localGcloud.dlp(options);
+
+        assert(dlp instanceof FakeDLP);
+        assert.strictEqual(dlp.calledWith_[0], options);
       });
     });
 
@@ -295,6 +316,15 @@ describe('gcloud', function() {
 
         assert(translate instanceof FakeTranslate);
         assert.strictEqual(translate.calledWith_[0], options);
+      });
+    });
+
+    describe('video intelligence', function() {
+      it('should create a new VideoIntelligence', function() {
+        var videoIntelligence = localGcloud.videoIntelligence(options);
+
+        assert(videoIntelligence instanceof FakeVideoIntelligence);
+        assert.strictEqual(videoIntelligence.calledWith_[0], options);
       });
     });
 

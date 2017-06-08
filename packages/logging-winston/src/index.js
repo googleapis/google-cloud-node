@@ -23,6 +23,7 @@
 var extend = require('extend');
 var is = require('is');
 var logging = require('@google-cloud/logging');
+var mapValues = require('lodash.mapvalues');
 var util = require('util');
 var winston = require('winston');
 
@@ -82,6 +83,8 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     Logging level. Each property should have an integer value between 0 (most
  *     severe) and 7 (least severe). If you are passing a list of levels to your
  *     winston logger, you should provide the same list here.
+ * @param {boolean=} options.inspectMetadata - Serialize winston-provided log
+ *     metadata using `util.inspect`. Default: false
  * @param {string=} options.logName - The name of the log that will receive
  *     messages written to this transport. Default: `winston_log`
  * @param {object=} options.resource - The monitored resource that the transport
@@ -121,6 +124,7 @@ function LoggingWinston(options) {
     name: logName
   });
 
+  this.inspectMetadata_ = options.inspectMetadata === true;
   this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
   this.log_ = logging(options).log(logName);
   this.resource_ = options.resource;
@@ -138,8 +142,10 @@ util.inherits(LoggingWinston, winston.Transport);
  *     appropriate Stackdriver logging severity level.
  * @param {string} msg - The message to be logged.
  * @param {object=} metadata - Winston-provided metadata that should be attached
- *     to the log entry. Each property will be converted to a string using
- *     `util.inspect`.
+ *     to the log entry. If a `httpRequest` property is set, it will be treated
+ *     as a [HttpRequest]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest}
+ *     request log message. If `options.inspectMetadata` is set, we will convert
+ *     the remaining properties to `string`s before reporting.
  * @param {function=} callback - A callback that is invoked when the logging
  *     agent either succeeds or gives up writing the log entry to the remote
  *     server.
@@ -157,19 +163,8 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var levelCode = this.levels_[levelName];
   var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
-  var labels = {};
-
-  if (is.object(metadata)) {
-    // We attach properties as labels on the log entry. Logging proto requires
-    // that the label values be strings, so we convert using util.inspect.
-    for (var key in metadata) {
-      labels[key] = util.inspect(metadata[key]);
-    }
-  }
-
   var entryMetadata = {
     resource: this.resource_,
-    labels: labels
   };
 
   // Stackdriver Logs Viewer picks up the summary line from the `message`
@@ -194,6 +189,23 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var data = {
     message: msg
   };
+
+  if (is.object(metadata)) {
+    data.metadata =
+      this.inspectMetadata_ ? mapValues(metadata, util.inspect) : metadata;
+
+    // If the metadata contains a httpRequest property, promote it to the entry
+    // metadata. This allows Stackdriver to use request log formatting.
+    // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+    // Note that the httpRequest field must properly validate as HttpRequest
+    // proto message, or the log entry would be rejected by the API. We no do
+    // validation here.
+    if (metadata.httpRequest) {
+      entryMetadata.httpRequest = metadata.httpRequest;
+      delete data.metadata.httpRequest;
+    }
+  }
+
   var entry = this.log_.entry(entryMetadata, data);
   this.log_[stackdriverLevel](entry, callback);
 };

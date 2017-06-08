@@ -24,16 +24,15 @@ require('shelljs/global');
 var cwd = pwd().toString();
 var npmVersion = parseInt(exec('npm --version', { silent: true }), 10);
 
+var args = process.argv.splice(1);
+var moduleName = args[1];
+var newVersion = args[2].replace(/^v*/, '');
+
 // Copy the legal files from the root of the repo so they are included in the
 // release
 cp(path.join(__dirname, '../AUTHORS'), cwd);
 cp(path.join(__dirname, '../CONTRIBUTORS'), cwd);
 cp(path.join(__dirname, '../COPYING'), cwd);
-
-var args = process.argv.splice(1);
-var moduleName = args[1];
-var newVersion = args[2].replace(/^v*/, '');
-var tagName = [moduleName, newVersion].join('-');
 
 var npmModuleName = moduleName === 'google-cloud' ? '' : '@google-cloud/';
 npmModuleName += moduleName;
@@ -44,6 +43,13 @@ var distTags = exec('npm show ' + npmModuleName + ' dist-tags --json', {
 }).stdout || '{}';
 
 var latestVersion = JSON.parse(distTags).latest;
+
+if (['major', 'minor', 'patch'].includes(newVersion)) {
+  // De-alias the new version.
+  newVersion = semver.inc(latestVersion, newVersion);
+}
+
+var tagName = [moduleName, newVersion].join('-');
 
 if (latestVersion && semver.lte(newVersion, latestVersion)) {
   throw new Error([

@@ -239,9 +239,11 @@ Module.prototype.runSystemTests = function() {
   var modulesExcludedFromSystemTests = [
     'common',
     'common-grpc',
+    'dlp',
     'error-reporting',
     'google-cloud',
-    'monitoring'
+    'monitoring',
+    'video-intelligence'
   ];
 
   if (modulesExcludedFromSystemTests.indexOf(this.name) > -1) {

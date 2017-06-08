@@ -106,7 +106,7 @@ function Errors(initConfiguration) {
    *  console.log('done!');
    * });
    */
-  this.report = manual(this._client, this._config);
+  this.report = manual(this._client, this._config, this._logger);
   /**
    * @example
    * // Use to create and report errors manually with a high-degree

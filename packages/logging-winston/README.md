@@ -70,7 +70,38 @@ winston.add(transport, {
 // ...you're good to go!
 ```
 
+## Error Reporting
+
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. Make sure to add logs to your [uncaught exception][uncaught] and [unhandled rejection][unhandled] handlers if you want to see those errors too.
+
+You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
+
+## Formatting Request Logs
+
+To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
+
+![Request Log Example](/packages/logging-winston/doc/images/request-log.png)
+
+```js
+winston.info(`${req.url} endpoint hit`, {
+  httpRequest: {
+    status: res.statusCode,
+    requestUrl: req.url,
+    requestMethod: req.method,
+    remoteIp: req.connection.remoteAddress,
+    // etc.
+  }
+});
+```
+
+The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message.
+
 [winston]: https://github.com/winstonjs/winston
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
+[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+[error-reporting]: https://cloud.google.com/error-reporting/
+[@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
+[uncaught]: https://nodejs.org/api/process.html#process_event_uncaughtexception
+[unhandled]: https://nodejs.org/api/process.html#process_event_unhandledrejection

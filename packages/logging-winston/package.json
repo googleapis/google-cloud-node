@@ -32,6 +32,7 @@
     "@google-cloud/logging": "^1.0.0",
     "extend": "^3.0.0",
     "is": "^3.2.0",
+    "lodash.mapvalues": "^4.6.0",
     "winston": "^2.2.0"
   },
   "devDependencies": {

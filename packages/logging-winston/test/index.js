@@ -85,11 +85,41 @@ describe('logging-winston', function() {
       });
     });
 
+    it('should default to logging.write scope', function() {
+      assert.deepEqual(fakeLoggingOptions_.scopes, [
+        'https://www.googleapis.com/auth/logging.write'
+      ]);
+    });
+
+    it('should initialize Log instance using provided scopes', function() {
+      var fakeScope = 'fake scope';
+
+      var optionsWithScopes = extend({}, OPTIONS);
+      optionsWithScopes.scopes = fakeScope;
+
+      new LoggingWinston(optionsWithScopes);
+
+      assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
+    });
+
     it('should assign itself to winston.transports', function() {
       assert.strictEqual(
         fakeWinston.transports.StackdriverLogging,
         LoggingWinston
       );
+    });
+
+    it('should localize inspectMetadata to default value', function() {
+      assert.strictEqual(loggingWinston.inspectMetadata_, false);
+    });
+
+    it('should localize the provided options.inspectMetadata', function() {
+      var optionsWithInspectMetadata = extend({}, OPTIONS, {
+        inspectMetadata: true
+      });
+
+      var loggingWinston = new LoggingWinston(optionsWithInspectMetadata);
+      assert.strictEqual(loggingWinston.inspectMetadata_, true);
     });
 
     it('should localize provided levels', function() {
@@ -111,21 +141,12 @@ describe('logging-winston', function() {
       });
     });
 
-    it('should default to logging.write scope', function() {
-      assert.deepEqual(fakeLoggingOptions_.scopes, [
-        'https://www.googleapis.com/auth/logging.write'
-      ]);
-    });
+    it('should localize Log instance using default name', function() {
+      var loggingOptions = extend({}, fakeLoggingOptions_);
+      delete loggingOptions.scopes;
 
-    it('should initialize Log instance using provided scopes', function() {
-      var fakeScope = 'fake scope';
-
-      var optionsWithScopes = extend({}, OPTIONS);
-      optionsWithScopes.scopes = fakeScope;
-
-      new LoggingWinston(optionsWithScopes);
-
-      assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
+      assert.deepEqual(loggingOptions, OPTIONS);
+      assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
     it('should localize Log instance using provided name', function() {
@@ -141,14 +162,6 @@ describe('logging-winston', function() {
 
       assert.deepEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
-    });
-
-    it('should localize Log instance using default name', function() {
-      var loggingOptions = extend({}, fakeLoggingOptions_);
-      delete loggingOptions.scopes;
-
-      assert.deepEqual(loggingOptions, OPTIONS);
-      assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
     it('should localize the provided resource', function() {
@@ -182,15 +195,13 @@ describe('logging-winston', function() {
 
     it('should properly create an entry', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
-        var expectedLabels = {};
-        for (var prop in METADATA) {
-          expectedLabels[prop] = nodeutil.inspect(METADATA[prop]);
-        }
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_,
-          labels: expectedLabels
+          resource: loggingWinston.resource_
         });
-        assert.deepStrictEqual(data, { message: MESSAGE });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
         done();
       };
 
@@ -204,7 +215,8 @@ describe('logging-winston', function() {
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
-          message: MESSAGE + ' ' + error.stack
+          message: MESSAGE + ' ' + error.stack,
+          metadata: error
         });
         done();
       };
@@ -213,31 +225,74 @@ describe('logging-winston', function() {
     });
 
     it('should use stack when metadata is err without message', function(done) {
-        var error = {
-          stack: 'the stack'
-        };
+      var error = {
+        stack: 'the stack'
+      };
 
-        loggingWinston.log_.entry = function(entryMetadata, data) {
-          assert.deepStrictEqual(data, {
-            message: error.stack
-          });
-          done();
-        };
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(data, {
+          message: error.stack,
+          metadata: error
+        });
+        done();
+      };
 
-        loggingWinston.log(LEVEL, '', error, assert.ifError);
-      });
+      loggingWinston.log(LEVEL, '', error, assert.ifError);
+    });
 
     it('should not require metadata', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_,
-          labels: {}
+          resource: loggingWinston.resource_
         });
-        assert.deepStrictEqual(data, { message: MESSAGE });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: {}
+        });
         done();
       };
 
       loggingWinston.log(LEVEL, MESSAGE, assert.ifError);
+    });
+
+    it('should inspect metadata when inspectMetadata is set', function(done) {
+      loggingWinston.inspectMetadata_ = true;
+
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        var expectedWinstonMetadata = {};
+
+        for (var prop in METADATA) {
+          expectedWinstonMetadata[prop] = nodeutil.inspect(METADATA[prop]);
+        }
+
+        assert.deepStrictEqual(data.metadata, expectedWinstonMetadata);
+
+        done();
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+    });
+
+    it('should promote httpRequest property to metadata', function(done) {
+      var HTTP_REQUEST = {
+        statusCode: 418
+      };
+      const metadataWithRequest = extend({
+        httpRequest: HTTP_REQUEST
+      }, METADATA);
+
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          httpRequest: HTTP_REQUEST
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+        done();
+      };
+      loggingWinston.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
     it('should write to the log', function(done) {
