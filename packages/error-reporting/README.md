@@ -64,9 +64,17 @@ errors.report(new Error('Something broke!'));
 
   Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.
 
+## Unhandled Rejections
+
+Unhandled Rejections are reported by default.  The reporting of unhandled rejections can be disabled using the `reportUnhandledRejections` configuration option.  See the [Configuration](#configuration) section for more details.
+
+If unhandled rejections are set to be reported, then, when an unhandled rejection occurs, a message is printed to standard out indicated that an unhandled rejection had occurred and is being reported, and the value causing the rejection is reported to the error-reporting console.
+
 ## Catching and Reporting Application-wide Uncaught Errors
 
-Uncaught exceptions and unhandled rejections are not reported by default.  *It is recommended to process `uncaughtException`s and `unhandledRejection`s for production-deployed applications.*
+Uncaught exceptions are not reported by default.  *It is recommended to process `uncaughtException`s for production-deployed applications.*
+
+Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  However, whether or not, and if so how, the addition of such a listener influences the execution of an application is specific to that particular application.  As such, it is necessary for `uncaughtException`s to be reported manually.
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
@@ -76,13 +84,9 @@ process.on('uncaughtException', (e) => {
   // Report that same error the Stackdriver Error Service
   errors.report(e);
 });
-
-process.on('unhandledRejection', (reason, p) => {
-  errors.report('Unhandled rejection of promise: ' + p + ', reason: ' + reason);
-});
 ```
 
-More information on uncaught exception handling in Node.js can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception), and more information on unhandled promise handling can be found [here](https://nodejs.org/api/process.html#process_event_unhandledrejection).
+More information about uncaught exception handling in Node.js and what it means for your application can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
 
 ## Running on Google Cloud Platform
 
@@ -160,6 +164,9 @@ var errors = require('@google-cloud/error-reporting')({
   // should be reported
   // defaults to 2 (warnings)
   logLevel: 2,
+  // determines whether or not unhandled rejections are reported to the
+  // error-reporting console.  The default value of this property is true.
+  reportUnhandledRejections: false,
   serviceContext: {
       service: 'my-service',
       version: 'my-service-version'
