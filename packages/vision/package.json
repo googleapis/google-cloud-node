@@ -66,6 +66,7 @@
   "devDependencies": {
     "@google-cloud/storage": "*",
     "deep-strict-equal": "^0.2.0",
+    "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.0.1",
     "multiline": "^1.0.2",
     "node-uuid": "^1.4.7",
@@ -105,7 +106,7 @@
   "scripts": {
     "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts test/*.js && nyc report",
     "publish-module": "node ../../scripts/publish.js vision",
-    "test": "mocha test/*.js",
+    "test": "mocha --require intelli-espower-loader test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
   "license": "Apache-2.0",

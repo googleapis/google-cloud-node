@@ -63,10 +63,12 @@ describe('Vision helper methods', () => {
     it('understands filenames', () => {
       var vision = Vision.v1();
 
-      // Stub out `fs.readFileSync` and return a bogus buffer.
+      // Stub out `fs.readFile` and return a bogus image object.
       // This allows us to test filename detection.
-      var readFile = sandbox.stub(fs, 'readFileSync');
-      readFile.withArgs('image.jpg').returns(new Buffer('fakeImage=='));
+      var readFile = sandbox.stub(fs, 'readFile');
+      readFile.withArgs('image.jpg').callsArgWith(2, null, {
+        content: 'fakeImage==',
+      });
       readFile.callThrough();
 
       // Stub out the batch annotation method as before.
