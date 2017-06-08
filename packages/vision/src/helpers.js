@@ -25,6 +25,41 @@ var protoFiles = require('google-proto-files');
 
 
 /**
+ * Find a given image and fire a callback with the appropriate image structure.
+ *
+ * @param {Object} image - An object representing what is known about the
+ *   image.
+ * @param {Function} callback - The callback to run.
+ */
+var coerceImage = (image, callback) => {
+  // If this is a buffer, read it and send the object
+  // that the Vision API expects.
+  if (Buffer.isBuffer(image)) {
+    callback(null, {
+      content: image.toString('base64')
+    });
+    return;
+  }
+
+  // File exists on disk.
+  if (image.source && image.source.filename) {
+    fs.readFile(image.source.filename, {encoding: 'base64'}, (err, blob) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, {content: blob});
+    });
+    return;
+  }
+
+  // No other options were relevant; return the image with no modification.
+  callback(null, image);
+  return;
+}
+
+
+/**
  * Return a method that calls annotateImage asking for a single feature.
  *
  * @param {Number} featureValue - The feature being requested. This is taken
@@ -113,25 +148,26 @@ module.exports = apiVersion => {
 
     // If we got a filename for the image, open the file and transform
     // it to content.
-    if (request.image.source && request.image.source.filename) {
-      request.image = {
-        content: fs.readFileSync(request.image.source.filename),
-      };
-    }
-
-    // Call the GAPIC batch annotation function.
-    return this.batchAnnotateImages([request], options, (err, r) => {
-      // If there is an error, handle it.
+    return coerceImage(request.image, (err, image) => {
       if (err) {
         return callback(err);
       }
+      request.image = image;
 
-      // We are guaranteed to only have one response element, since we
-      // only sent one image.
-      var response = r.responses[0];
+      // Call the GAPIC batch annotation function.
+      return this.batchAnnotateImages([request], options, (err, r) => {
+        // If there is an error, handle it.
+        if (err) {
+          return callback(err);
+        }
 
-      // Fire the callback if applicable.
-      return callback(undefined, response);
+        // We are guaranteed to only have one response element, since we
+        // only sent one image.
+        var response = r.responses[0];
+
+        // Fire the callback if applicable.
+        return callback(undefined, response);
+      });
     });
   });
 
