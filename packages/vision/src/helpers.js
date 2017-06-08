@@ -56,7 +56,7 @@ var coerceImage = (image, callback) => {
   // No other options were relevant; return the image with no modification.
   callback(null, image);
   return;
-}
+};
 
 
 /**
