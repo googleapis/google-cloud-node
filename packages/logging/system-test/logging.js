@@ -495,7 +495,7 @@ describe('Logging', function() {
             assert.deepEqual(entry.metadata.resource, {
               type: 'global',
               labels: {
-                project_id: logging.projectId
+                project_id: env.projectId
               }
             });
 

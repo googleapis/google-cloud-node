@@ -49,7 +49,7 @@ var PartialResultStream = require('./partial-result-stream.js');
  * @param {object=} options - Timestamp options.
  */
 function TransactionRequest(options) {
-  if (options) {
+  if (options && !is.empty(options)) {
     this.options = TransactionRequest.formatTimestampOptions_(options);
   }
 }
@@ -66,11 +66,11 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
   var formatted = extend({}, options);
 
   if (options.minReadTimestamp) {
-    formatted.minReadTimestamp = formatTimestamp(options.minReadTimestamp);
+    formatted.minReadTimestamp = toProtoTimestamp(options.minReadTimestamp);
   }
 
   if (options.readTimestamp) {
-    formatted.readTimestamp = formatTimestamp(options.readTimestamp);
+    formatted.readTimestamp = toProtoTimestamp(options.readTimestamp);
   }
 
   if (is.number(options.maxStaleness)) {
@@ -89,7 +89,7 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
 
   return formatted;
 
-  function formatTimestamp(date) {
+  function toProtoTimestamp(date) {
     var seconds = date.getTime() / 1000;
 
     return {
@@ -97,6 +97,19 @@ TransactionRequest.formatTimestampOptions_ = function(options) {
       nanos: date.getMilliseconds() * 1e6
     };
   }
+};
+
+/**
+ * Formats a protobuf Timestamp into a Date object.
+ *
+ * @private
+ *
+ * @param {object} value - The protobuf timestamp.
+ * @return {date}
+ */
+TransactionRequest.fromProtoTimestamp_ = function(value) {
+  var milliseconds = parseInt(value.nanos, 10) / 1e6;
+  return new Date(parseInt(value.seconds, 10) * 1000 + milliseconds);
 };
 
 /**
@@ -225,15 +238,32 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
     };
   }
 
+  if (query.keys || query.ranges) {
+    reqOpts.keySet = {};
+  }
+
   if (query.keys) {
-    reqOpts.keySet = {
-      keys: arrify(query.keys).map(function(key) {
-        return {
-          values: arrify(key).map(codec.encode)
-        };
-      })
-    };
+    reqOpts.keySet.keys = arrify(query.keys).map(function(key) {
+      return {
+        values: arrify(key).map(codec.encode)
+      };
+    });
     delete reqOpts.keys;
+  }
+
+  if (query.ranges) {
+    reqOpts.keySet.ranges = arrify(query.ranges).map(function(rawRange) {
+      var range = extend({}, rawRange);
+
+      for (var bound in range) {
+        range[bound] = {
+          values: arrify(range[bound]).map(codec.encode)
+        };
+      }
+
+      return range;
+    });
+    delete reqOpts.ranges;
   }
 
   function makeRequest(resumeToken) {

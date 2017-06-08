@@ -63,6 +63,9 @@ module.exports = {
     datastore: {
       title: 'Cloud Datastore'
     },
+    dlp: {
+      title: 'DLP API'
+    },
     dns: {
       title: 'Cloud DNS'
     },
@@ -102,6 +105,10 @@ module.exports = {
     },
     translate: {
       title: 'Cloud Translation API'
+    },
+    'video-intelligence': {
+      title: 'Cloud Video Intelligence',
+      instanceName: 'video'
     },
     vision: {
       title: 'Cloud Vision'

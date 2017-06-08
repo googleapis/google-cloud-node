@@ -166,7 +166,11 @@ describe('Table', function() {
           FakeTransactionRequest.formatTimestampOptions_ =
             formatTimestampOptions;
 
-          assert.strictEqual(query.transaction.begin, FORMATTED_OPTIONS);
+          assert.strictEqual(
+            query.transaction.singleUse.readOnly,
+            FORMATTED_OPTIONS
+          );
+
           setImmediate(done);
           return {};
         }

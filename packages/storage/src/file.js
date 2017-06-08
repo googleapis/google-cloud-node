@@ -1177,6 +1177,8 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
       return reqOpts;
     }
   });
+
+  return this;
 };
 
 /**

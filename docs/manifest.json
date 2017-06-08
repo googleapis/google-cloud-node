@@ -13,6 +13,8 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
+        "v0.55.0",
+        "v0.54.0",
         "v0.53.0",
         "0.52.0",
         "0.51.1",
@@ -148,6 +150,14 @@
         "0.2.0",
         "0.1.1",
         "master"
+      ]
+    },
+    {
+      "id": "dlp",
+      "name": "@google-cloud/dlp",
+      "defaultService": "dlp",
+      "versions": [
+        "0.1.0"
       ]
     },
     {
@@ -362,6 +372,14 @@
         "0.2.0",
         "0.1.1",
         "master"
+      ]
+    },
+    {
+      "id": "video-intelligence",
+      "name": "@google-cloud/video-intelligence",
+      "defaultService": "video-intelligence",
+      "versions": [
+        "0.1.0"
       ]
     },
     {

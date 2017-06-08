@@ -11,12 +11,29 @@
 
 ### Unit Tests
 
-First, run `npm install` at the root of the repository. To run the unit tests
-(at the root or in one of the sub-packages), simply run:
+After running `npm install` from the root of the repository, start the unit tests:
 
 ```sh
 $ npm test
 ```
+
+If you're only concerned with one module, you can cd into its directory, and run the same command there:
+
+```sh
+$ cd packages/storage
+$ npm test
+```
+
+### Documentation (Snippet) Tests
+
+All of the public methods across our APIs have an `@example` block that shows how the method is intended to be used. These snippets can be smoke-tested for accuracy:
+
+```sh
+$ npm run snippet-test
+```
+
+Note that this command is included as part of the root directory's `npm test`, but is not run if you are only working in a single module's directory.
+
 
 ### System Tests
 
@@ -60,7 +77,7 @@ Generate the coverage report:
 $ npm run cover
 ```
 
-The test coverage report will be available in `coverage/`.
+The test coverage report will be available in `.coverage/`.
 
 ## Contributor License Agreements
 
@@ -71,15 +88,13 @@ Before we can accept your pull requests you'll need to sign a Contributor Licens
 
 You can sign these electronically (just scroll to the bottom). After that, we'll be able to accept your pull requests.
 
+# Maintainer Guides
+
 ## Publishing
 
-To publish this module, you must be logged in as the user `google-cloud`.
+To publish this module, you must be signed into an npm account that is part of the `google-cloud` organization.
 
 ```sh
-$ npm logout
-$ npm login
-# Follow the prompts to login as `google-cloud`
-
 # If publishing a service module:
 #   $ cd packages/bigquery
 # Otherwise stay in the root directory
@@ -87,7 +102,7 @@ $ npm login
 $ npm run publish-module {{version}}
 ```
 
-  - **version** In the format of `0.2.0`
+  - **version** In the format of `0.2.0` or an npm-recognized alias: "major", "minor", or "patch"
 
 This will:
 
@@ -101,12 +116,6 @@ The output from the command will remind you to push to master with a command lik
 $ git push origin master --follow-tags
 ```
 
-Be sure to log back in as your npm user:
-
-```sh
-$ npm logout
-$ npm login
-```
 ### Release Notes
 
 If you're thinking "this library needs a schwifty, CI-driven, changelog-generator supertool", hold the phone. It's important to make our library as human as possible. So, please, take a few minutes and pretend that you're the user. What would you want to see?
@@ -117,18 +126,9 @@ If you're thinking "this library needs a schwifty, CI-driven, changelog-generato
   - **Tag version** Match to the release version.
   - **Release title**
     - `google-cloud` releases: `v0.39.0`
-    - `@google-cloud/module` releases: `@google-cloud/module @ v0.2.0`
+    - `@google-cloud/module` releases: `@google-cloud/module v0.2.0`
 
 <pre>
-#### Updating
-
-```sh
-$ npm install NPM_MODULE_NAME
-```
-
-- [Documentation](https://googlecloudplatform.github.io/google-cloud-node/#/docs/SERVICE_NAME/NEW_VERSION/SERVICE_NAME)
-- [Report an issue](https://github.com/GoogleCloudPlatform/google-cloud-node/issues)
-
 ### :warning: Breaking Changes
 #### We use promises now!
 Issue: #ISSUE_NUMBER

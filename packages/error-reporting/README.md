@@ -9,9 +9,20 @@
 This module provides Stackdriver Error Reporting support for Node.js applications.
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
-applications running in almost any environment. Here's an introductory video:
+applications running in almost any environment.
+
+![Stackdriver Error Reporting overview](doc/images/errors-overview.png)
+
+Here's an introductory video that provides some more details:
 
 [![Learn about Error Reporting in Stackdriver](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
+
+Note that [@google-cloud/logging-winston][logging-winston] and
+[@google-cloud/logging-bunyan][logging-bunyan] automatically integrate with the
+Error Reporting service for Error objects logged at severity `error` or higher,
+for applications running on Google Cloud Platform. If you are already using
+Winston or Bunyan in your application, and don't need direct access/control of
+error reporting, you may want to check those modules as well.
 
 ## Prerequisites
 
@@ -44,6 +55,9 @@ var errors = require('@google-cloud/error-reporting')({
 
 // Report an error to the Stackdriver Error Reporting API
 errors.report(new Error('Something broke!'));
+
+// We also provide error handling middleware for express, hapi, restify & koa.
+// See sections below.
 ```
 
 3. **View reported errors:**
@@ -145,26 +159,31 @@ var errors = require('@google-cloud/error-reporting')({
 ```js
 var errors = require('@google-cloud/error-reporting')();
 
-// Use the error message builder to custom set all message fields
+// Use the error message builder to customize all fields ...
 var errorEvt = errors.event()
                      .setMessage('My error message')
                      .setUser('root@nexus');
 errors.report(errorEvt, () => console.log('done!'));
 
-// Or just use a regular error
+// or just use a regular error ...
 errors.report(new Error('My error message'), () => console.log('done!'));
 
-// One can even just use a string
+// or one can even just use a string.
 errors.report('My error message');
 ```
+
+The stack trace associated with an error can be viewed in the error reporting console.
+* If the `errors.report` method is given an `ErrorMessage` object built using the `errors.event` method, the stack trace at the point where the error event was constructed will be used.
+* If the `errors.report` method is given an `Error` object, the stack trace where the error was instantiated will be used.
+* If the `errors.report` method is given a string, the stack trace at the point where `errors.report` is invoked will be used.
 
 ### Using Express
 
 ```js
 var express = require('express');
-var app = express();
-// Will create an errors instance based off env variables
 var errors = require('@google-cloud/error-reporting')();
+
+var app = express();
 
 app.get('/error', (req, res, next) => {
   res.send('Something broke!');
@@ -175,6 +194,8 @@ app.get('/exception', () => {
   JSON.parse('{\"malformedJson\": true');
 });
 
+// Note that express error handling middleware should be attached after all
+// the other routes and use() calls. See [express docs][express-error-docs].
 app.use(errors.express);
 
 app.listen(3000);
@@ -199,26 +220,27 @@ server.route({
   }
 });
 
-server.register({ register: errors.hapi });
+server.register(errors.hapi);
 ```
 
 ### Using Koa
 
 ```js
+var Koa = require('koa');
 var errors = require('@google-cloud/error-reporting')();
-var koa = require('koa');
-var app = koa();
+
+var app = new Koa();
 
 app.use(errors.koa);
 
 app.use(function *(next) {
-	//This will set status and message
-	this.throw('Error Message', 500);
+  //This will set status and message
+  this.throw('Error Message', 500);
 });
 
 // response
 app.use(function *(){
-	this.body = 'Hello World';
+  this.body = 'Hello World';
 });
 
 app.listen(3000);
@@ -227,12 +249,12 @@ app.listen(3000);
 ### Using Restify
 
 ```js
+var restify = require('restify');
+var errors = require('@google-cloud/error-reporting')();
+
 function respond(req, res, next) {
   next(new Error('this is a restify error'));
 }
-
-var restify = require('restify');
-var errors = require('@google-cloud/error-reporting')();
 
 var server = restify.createServer();
 
@@ -240,13 +262,16 @@ server.use(errors.restify(server));
 server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 
-server.listen(8080);
+server.listen(3000);
 ```
 
-[gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
 [app-default-credentials]: https://developers.google.com/identity/protocols/application-default-credentials
-[service-account]: https://console.developers.google.com/apis/credentials/serviceaccountkey
+[express-error-docs]: https://expressjs.com/en/guide/error-handling.html
+[gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
+[logging-bunyan]: https://www.npmjs.com/package/@google-cloud/logging-bunyan
+[logging-winston]: https://www.npmjs.com/package/@google-cloud/logging-winston
 [npm-image]: https://badge.fury.io/js/%40google-cloud%2Ferror-reporting.svg
 [npm-url]: https://npmjs.org/package/@google-cloud/error-reporting
+[service-account]: https://console.developers.google.com/apis/credentials/serviceaccountkey
 [snyk-image]: https://snyk.io/test/npm/@google-cloud/error-reporting/badge.svg
 [snyk-url]: https://snyk.io/test/npm/@google-cloud/error-reporting

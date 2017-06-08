@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/speech",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "author": "Google Inc.",
   "description": "Cloud Speech Client Library for Node.js",
   "contributors": [
@@ -59,7 +59,7 @@
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.13.0",
-    "google-proto-files": "^0.11.0",
+    "google-proto-files": "^0.12.0",
     "is": "^3.1.0",
     "propprop": "^0.3.1",
     "pumpify": "^1.3.5",

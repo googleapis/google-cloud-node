@@ -188,3 +188,89 @@ function encode(value) {
 }
 
 codec.encode = encode;
+
+/**
+ * Get the corresponding Spanner data type.
+ *
+ * @private
+ *
+ * @param {*} field - The field value.
+ * @return {string}
+ *
+ * @example
+ * Database.getType_(NaN);
+ * // 'float64'
+ */
+function getType(field) {
+  if (is.bool(field)) {
+    return 'bool';
+  }
+
+  var isSpecialNumber = is.infinite(field) ||
+    (is.number(field) && isNaN(field));
+
+  if (is.decimal(field) || isSpecialNumber || field instanceof Float) {
+    return 'float64';
+  }
+
+  if (is.number(field) || field instanceof Int) {
+    return 'int64';
+  }
+
+  if (is.string(field)) {
+    return 'string';
+  }
+
+  if (Buffer.isBuffer(field)) {
+    return 'bytes';
+  }
+
+  if (is.date(field)) {
+    return 'timestamp';
+  }
+
+  if (field instanceof SpannerDate) {
+    return 'date';
+  }
+
+  if (is.array(field)) {
+    var child;
+
+    for (var i = 0; i < field.length; i++) {
+      child = field[i];
+
+      if (!is.nil(child)) {
+        break;
+      }
+    }
+
+    return {
+      type: 'array',
+      child: getType(child)
+    };
+  }
+
+  return 'unspecified';
+}
+
+codec.getType = getType;
+
+/**
+ * A list of available Spanner types. The index of said type in Array aligns
+ * with the type code that query params require.
+ *
+ * @private
+ */
+var TYPES = [
+  'unspecified',
+  'bool',
+  'int64',
+  'float64',
+  'timestamp',
+  'date',
+  'string',
+  'bytes',
+  'array'
+];
+
+codec.TYPES = TYPES;

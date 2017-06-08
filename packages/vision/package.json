@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vision",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "author": "Google Inc.",
   "description": "Cloud Vision Client Library for Node.js",
   "contributors": [
@@ -56,7 +56,7 @@
     "async": "^2.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.13.0",
-    "google-proto-files": "^0.11.0",
+    "google-proto-files": "^0.12.0",
     "is": "^3.0.1",
     "prop-assign": "^1.0.0",
     "propprop": "^0.3.0",
