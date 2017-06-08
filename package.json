@@ -50,32 +50,6 @@
     "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js && nyc report",
     "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
-  "nyc": {
-    "report-dir": "./.coverage",
-    "exclude": [
-      "packages/*/src/*{/*,/**/*}.js",
-      "packages/*/src/v*/*.js",
-      "packages/*/test/**/*.js"
-    ],
-    "watermarks": {
-      "branches": [
-        95,
-        100
-      ],
-      "functions": [
-        95,
-        100
-      ],
-      "lines": [
-        95,
-        100
-      ],
-      "statements": [
-        95,
-        100
-      ]
-    }
-  },
   "license": "Apache-2.0",
   "engines": {
     "node": ">=4.0.0"
