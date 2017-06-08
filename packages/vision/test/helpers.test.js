@@ -28,7 +28,7 @@ describe('Vision helper methods', () => {
   var sandbox = sinon.sandbox.create();
 
   afterEach(() => {
-    sinon.sandbox.restore();
+    sandbox.restore();
   });
 
   describe('annotateImage', () => {
@@ -60,15 +60,49 @@ describe('Vision helper methods', () => {
       });
     });
 
+    it('understands buffers', () => {
+      var vision = Vision.v1();
+
+      // Stub out the batch annotation method.
+      var batchAnnotate = sandbox.stub(vision, 'batchAnnotateImages');
+      batchAnnotate.callsArgWith(2, undefined, {responses: [{
+        logoAnnotations: [{description: 'Google'}],
+      }]});
+
+      // Ensure that the annotateImage method arrifies the request and
+      // passes it through to the batch annotation method.
+      var request = {
+        image: new Buffer('fakeImage'),
+        features: {type: ['LOGO_DETECTION']},
+      };
+      return vision.annotateImage(request).then(r => {
+        var response = r[0];
+
+        // Ensure that we got the slice of the response that we expected.
+        assert.deepEqual(response, {
+          logoAnnotations: [{description: 'Google'}],
+        });
+
+        // Inspect the calls to batchAnnotateImages and ensure they matched
+        // the expected signature.
+        assert(batchAnnotate.callCount === 1);
+        assert.deepEqual(request, {
+          image: {content: 'ZmFrZUltYWdl'},
+          features: {type: ['LOGO_DETECTION']},
+        });
+        assert(batchAnnotate.calledWith([request]));
+      });
+    });
+
     it('understands filenames', () => {
       var vision = Vision.v1();
 
       // Stub out `fs.readFile` and return a bogus image object.
       // This allows us to test filename detection.
       var readFile = sandbox.stub(fs, 'readFile');
-      readFile.withArgs('image.jpg').callsArgWith(2, null, {
-        content: 'fakeImage==',
-      });
+      readFile.withArgs('image.jpg').callsArgWith(2, null,
+        new Buffer('fakeImage')
+      );
       readFile.callThrough();
 
       // Stub out the batch annotation method as before.
@@ -91,7 +125,7 @@ describe('Vision helper methods', () => {
           logoAnnotations: [{description: 'Google'}],
         });
 
-        // Inspect the calls to readFileSync to ensure that they matched
+        // Inspect the calls to `readFile` to ensure that they matched
         // the expected signature.
         assert(readFile.callCount === 1);
         assert(readFile.calledWith('image.jpg'));
@@ -99,7 +133,31 @@ describe('Vision helper methods', () => {
         // Inspect the calls to batchAnnotateImages and ensure they matched
         // the expected signature.
         assert(batchAnnotate.callCount === 1);
+        assert.deepEqual(request, {
+          image: {content: 'ZmFrZUltYWdl'},
+          features: {type: ['LOGO_DETECTION']},
+        });
         assert(batchAnnotate.calledWith([request]));
+      });
+    });
+
+    it('propagates the error if a file is not found', () => {
+      var vision = Vision.v1();
+
+      // Stub out `fs.readFile` and return a bogus image object.
+      // This allows us to test filename detection.
+      var readFile = sandbox.stub(fs, 'readFile');
+      readFile.withArgs('image.jpg').callsArgWith(2, {error: 404});
+      readFile.callThrough();
+
+      // Ensure that the annotateImage method arrifies the request and
+      // passes it through to the batch annotation method.
+      var request = {
+        image: {source: {filename: 'image.jpg'}},
+        features: {type: ['LOGO_DETECTION']},
+      };
+      return vision.annotateImage(request).then(assert.fail).catch(err => {
+        assert.deepEqual(err, {error: 404});
       });
     });
 
