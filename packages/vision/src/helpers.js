@@ -122,14 +122,13 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision').v1();
    * var request = {
    *   image: {source: {image_uri: 'gs://path/to/image.jpg'}},
    *   features: [],
    * };
-   * client.annotateImage(request).then(response => {
+   * vision.annotateImage(request).then(response => {
    *   // doThingsWith(response);
-   * }).catch(function(err) {
+   * }).catch(err => {
    *   console.error(err);
    * });
    */
