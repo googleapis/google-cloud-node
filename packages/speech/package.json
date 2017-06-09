@@ -1,46 +1,16 @@
 {
+  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/speech",
-  "version": "0.9.3",
-  "author": "Google Inc.",
-  "description": "Cloud Speech Client Library for Node.js",
-  "contributors": [
-    {
-      "name": "Burcu Dogan",
-      "email": "jbd@google.com"
-    },
-    {
-      "name": "Jason Dobry",
-      "email": "jason.dobry@gmail.com"
-    },
-    {
-      "name": "Johan Euphrosine",
-      "email": "proppy@google.com"
-    },
-    {
-      "name": "Patrick Costello",
-      "email": "pcostell@google.com"
-    },
-    {
-      "name": "Ryan Seys",
-      "email": "ryan@ryanseys.com"
-    },
-    {
-      "name": "Silvano Luciani",
-      "email": "silvano@google.com"
-    },
-    {
-      "name": "Stephen Sawchuk",
-      "email": "sawchuk@gmail.com"
-    }
-  ],
-  "main": "./src/index.js",
+  "version": "0.10.0",
+  "author": "Google Inc",
+  "description": "Google Cloud Speech API client for Node.js",
+  "main": "src/index.js",
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTORS",
+    "CONTRIBUTING",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -51,36 +21,25 @@
     "google cloud",
     "cloud",
     "google speech",
-    "speech"
+    "speech",
+    "Google Cloud Speech API"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.13.0",
-    "@google-cloud/common-grpc": "^0.3.0",
-    "events-intercept": "^2.0.0",
-    "extend": "^3.0.0",
-    "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",
-    "is": "^3.1.0",
-    "propprop": "^0.3.1",
-    "pumpify": "^1.3.5",
-    "request": "^2.74.0",
-    "stream-events": "^1.0.1",
-    "string-format-obj": "^1.1.0",
-    "through2": "^2.0.1"
+    "google-gax": "^0.13.2",
+    "extend": "^3.0.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "*",
-    "async": "^2.0.1",
-    "methmeth": "^1.1.0",
-    "mocha": "^3.0.2",
-    "proxyquire": "^1.7.10",
-    "tmp": "^0.0.31",
-    "uuid": "^3.0.1"
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.2.0",
+    "nyc": "^10.3.0",
+    "power-assert": "^1.4.2",
+    "sinon": "^2.2.0",
+    "through2": "^2.0.3"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js speech",
-    "test": "mocha test/*.js",
-    "system-test": "mocha system-test/*.js --no-timeouts --bail"
+    "test": "mocha",
+    "publish-module": "node ../../scripts/publish.js speech"
   },
   "license": "Apache-2.0",
   "engines": {
