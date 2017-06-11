@@ -92,6 +92,8 @@ function Spanner(options) {
   };
 
   commonGrpc.Service.call(this, config, options);
+
+  this.instances_ = new Map();
 }
 
 util.inherits(Spanner, commonGrpc.Service);
@@ -465,7 +467,11 @@ Spanner.prototype.instance = function(name) {
     throw new Error('A name is required to access an Instance object.');
   }
 
-  return Instance.get_(this, name);
+  if (!this.instances_.has(name)) {
+    this.instances_.set(name, new Instance(this, name));
+  }
+
+  return this.instances_.get(name);
 };
 
 /**
