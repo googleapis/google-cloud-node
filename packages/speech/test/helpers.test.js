@@ -16,6 +16,7 @@
 
 'use strict';
 
+var assert = require('assert');
 var sinon = require('sinon');
 var stream = require('stream');
 
@@ -43,12 +44,14 @@ describe('Speech helper methods', () => {
       // forwarded as expected.
       var config = {config: {languageCode: 'en-us'}};
       var options = {timeout: Infinity};
-      var answer = speech.streamingRecognize(config, options);
+      speech.streamingRecognize(config, options);
 
       // Establish that the underlying streamingRecognize was called with
       // the options.
-      sr.once().withExactArgs(options);
-      write.once().withExactArgs({streamingConfig: config});
+      assert(sr.calledOnce);
+      assert(sr.calledWithExactly(options));
+      assert(write.calledOnce);
+      assert(write.calledWithExactly({streamingConfig: config}));
     });
   });
 });
