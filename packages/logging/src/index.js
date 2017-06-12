@@ -60,8 +60,6 @@ var Sink = require('./sink.js');
 
  * @resource [What is Stackdriver Logging?]{@link https://cloud.google.com/logging/docs}
  * @resource [Introduction to the Stackdriver Logging API]{@link https://cloud.google.com/logging/docs/api}
- * @resource [Logging to Stackdriver from Bunyan]{@link https://www.npmjs.com/package/@google-cloud/logging-bunyan}
- * @resource [Logging to Stackdriver from Winston]{@link https://www.npmjs.com/package/@google-cloud/logging-winston}
  *
  * @param {object} options - [Configuration object](#/docs).
  */
