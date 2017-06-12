@@ -64,6 +64,7 @@ describe('pubsub', function() {
     options = options || {};
 
     var topic = pubsub.topic(generateTopicName());
+    var publisher = topic.publisher();
     var subscription = topic.subscription(generateSubName());
 
     async.series([
@@ -71,7 +72,7 @@ describe('pubsub', function() {
       subscription.create.bind(subscription),
       function(callback) {
         async.times(6, function(_, callback) {
-          topic.publish(message, options, callback);
+          publisher.publish(new Buffer(message), options, callback);
         }, callback);
       }
     ], function(err) {
@@ -82,7 +83,7 @@ describe('pubsub', function() {
 
       subscription.pull({
         returnImmediately: true,
-        maxResults: 1
+        maxMessages: 1
       }, function(err, messages) {
         if (err) {
           callback(err);
@@ -163,26 +164,27 @@ describe('pubsub', function() {
 
     it('should publish a message', function(done) {
       var topic = pubsub.topic(TOPIC_NAMES[0]);
-      topic.publish('message from me', function(err, messageIds) {
+      var publisher = topic.publisher();
+      var message = new Buffer('message from me');
+
+      publisher.publish(message, function(err, messageId) {
         assert.ifError(err);
-        assert.strictEqual(messageIds.length, 1);
+        assert.strictEqual(typeof messageId, 'string');
         done();
       });
     });
 
     it('should publish a message with attributes', function(done) {
-      var rawMessage = {
-        data: 'raw message data',
-        attributes: {
-          customAttribute: 'value'
-        }
+      var data = new Buffer('raw message data');
+      var attrs = {
+        customAttribute: 'value'
       };
 
-      publishPop(rawMessage, { raw: true }, function(err, message) {
+      publishPop(data, attrs, function(err, message) {
         assert.ifError(err);
 
-        assert.strictEqual(message.data, rawMessage.data);
-        assert.deepEqual(message.attributes, rawMessage.attributes);
+        assert.deepEqual(message.data, data);
+        assert.deepEqual(message.attrs, attrs);
 
         done();
       });
@@ -201,6 +203,7 @@ describe('pubsub', function() {
   describe('Subscription', function() {
     var TOPIC_NAME = generateTopicName();
     var topic = pubsub.topic(TOPIC_NAME);
+    var publisher = topic.publisher();
 
     var SUB_NAMES = [
       generateSubName(),
@@ -227,7 +230,7 @@ describe('pubsub', function() {
           }
 
           async.times(10, function(_, next) {
-            topic.publish('hello', next);
+            publisher.publish(new Buffer('hello'), next);
           }, function(err) {
             if (err) {
               done(err);
@@ -299,24 +302,18 @@ describe('pubsub', function() {
 
     it('should allow creation and deletion of a subscription', function(done) {
       var subName = generateSubName();
-      topic.subscribe(subName, function(err, sub) {
+      topic.createSubscription(subName, function(err, sub) {
         assert.ifError(err);
         assert(sub instanceof Subscription);
         sub.delete(done);
       });
     });
 
-    it('should create a subscription with a generated name', function(done) {
-      topic.subscribe(function(err, sub) {
-        assert.ifError(err);
-        sub.delete(done);
-      });
-    });
-
     it('should create a subscription with message retention', function(done) {
+      var subName = generateSubName();
       var threeDaysInSeconds = 3 * 24 * 60 * 60;
 
-      topic.subscribe({
+      topic.createSubscription(subName, {
         messageRetentionDuration: threeDaysInSeconds
       }, function(err, sub) {
         assert.ifError(err);
@@ -340,14 +337,14 @@ describe('pubsub', function() {
     });
 
     it('should re-use an existing subscription', function(done) {
-      pubsub.subscribe(topic, SUB_NAMES[0], done);
+      pubsub.createSubscription(topic, SUB_NAMES[0], done);
     });
 
     it('should error when using a non-existent subscription', function(done) {
       var subscription = topic.subscription(generateSubName());
 
       subscription.pull(function(err) {
-        assert.equal(err.code, 404);
+        assert.equal(err.code, 5);
         done();
       });
     });
@@ -357,13 +354,14 @@ describe('pubsub', function() {
 
       subscription.pull({
         returnImmediately: true,
-        maxResults: 1
+        maxMessages: 1
       }, function(err, msgs) {
         assert.ifError(err);
-
         assert.strictEqual(msgs.length, 1);
 
-        subscription.ack(msgs[0].ackId, done);
+        var message = msgs[0];
+
+        message.ack(done);
       });
     });
 
@@ -372,18 +370,15 @@ describe('pubsub', function() {
 
       subscription.pull({
         returnImmediately: true,
-        maxResults: 1
+        maxMessages: 1
       }, function(err, msgs) {
         assert.ifError(err);
 
         assert.strictEqual(msgs.length, 1);
 
-        var options = {
-          ackIds: [msgs[0].ackId],
-          seconds: 10
-        };
+        var message = msgs[0];
 
-        subscription.setAckDeadline(options, done);
+        message.modifyAckDeadline(10000, done);
       });
     });
 
@@ -392,63 +387,29 @@ describe('pubsub', function() {
 
       subscription.pull({
         returnImmediately: true,
-        maxResults: 1
+        maxMessages: 1
       }, function(err, msgs) {
         assert.ifError(err);
         assert.strictEqual(msgs.length, 1);
         assert.equal(msgs[0].data, 'hello');
-        subscription.ack(msgs[0].ackId, done);
+
+        msgs[0].ack(done);
       });
     });
 
     it('should receive the chosen amount of results', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
-      var opts = { returnImmediately: true, maxResults: 3 };
+      var maxMessages = 3;
 
-      subscription.pull(opts, function(err, messages) {
+      subscription.pull({
+        returnImmediately: true,
+        maxMessages: maxMessages
+      }, function(err, messages) {
         assert.ifError(err);
 
-        assert.equal(messages.length, opts.maxResults);
+        assert.equal(messages.length, maxMessages);
 
-        var ackIds = messages.map(function(message) {
-          return message.ackId;
-        });
-
-        subscription.ack(ackIds, done);
-      });
-    });
-
-    it('should allow a custom timeout', function(done) {
-      var timeout = 5000;
-
-      // We need to use a topic without any pending messages to allow the
-      // connection to stay open.
-      var topic = pubsub.topic(generateTopicName());
-      var subscription = topic.subscription(generateSubName(), {
-        timeout: timeout
-      });
-
-      async.series([
-        topic.create.bind(topic),
-        subscription.create.bind(subscription),
-      ], function(err) {
-        assert.ifError(err);
-
-        var times = [Date.now()];
-
-        subscription.pull({
-          returnImmediately: false
-        }, function(err) {
-          assert.ifError(err);
-
-          times.push(Date.now());
-          var runTime = times.pop() - times.pop();
-
-          assert(runTime >= timeout - 1000);
-          assert(runTime <= timeout + 1000);
-
-          done();
-        });
+        done();
       });
     });
   });
@@ -506,11 +467,13 @@ describe('pubsub', function() {
     var SNAPSHOT_NAME = generateSnapshotName();
 
     var topic;
+    var publisher;
     var subscription;
     var snapshot;
 
     before(function(done) {
       topic = pubsub.topic(TOPIC_NAMES[0]);
+      publisher = topic.publisher();
       subscription = topic.subscription(generateSubName());
       snapshot = subscription.snapshot(SNAPSHOT_NAME);
       subscription.create(done);
@@ -557,10 +520,10 @@ describe('pubsub', function() {
       var messageId;
 
       beforeEach(function() {
-        subscription = topic.subscription();
+        subscription = topic.subscription(generateSubName());
 
         return subscription.create().then(function() {
-          return topic.publish('Hello, world!');
+          return publisher.publish(new Buffer('Hello, world!'));
         }).then(function(data) {
           messageId = data[0][0];
         });

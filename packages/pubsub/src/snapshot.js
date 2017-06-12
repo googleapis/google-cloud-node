@@ -20,9 +20,7 @@
 
 'use strict';
 
-var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
-var util = require('util');
 
 /**
  * A Snapshot object will give you access to your Cloud Pub/Sub snapshot.
@@ -90,56 +88,10 @@ var util = require('util');
  * });
  */
 function Snapshot(parent, name) {
-  var projectId = parent.projectId;
+  this.api = parent.api;
+  this.name = Snapshot.formatName_(parent.projectId, name);
 
-  if (!projectId && parent.parent) {
-    projectId = parent.parent.projectId;
-  }
-
-  this.name = Snapshot.formatName_(projectId, name);
-
-  var methods = {
-    /**
-     * Delete the snapshot.
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response from the
-     *     service.
-     *
-     * @example
-     * snapshot.delete(function(err, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * snapshot.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: {
-      protoOpts: {
-        service: 'Subscriber',
-        method: 'deleteSnapshot'
-      },
-      reqOpts: {
-        snapshot: this.name
-      }
-    }
-  };
-
-  var config = {
-    parent: parent,
-    id: this.name,
-    methods: methods
-  };
-
-  var isSubscription = is.fn(parent.createSnapshot);
-
-  if (isSubscription) {
-    config.createMethod = parent.createSnapshot.bind(parent);
-
+  if (is.fn(parent.createSnapshot)) {
     /**
      * Create a snapshot with the given name.
      *
@@ -174,8 +126,10 @@ function Snapshot(parent, name) {
      *   var apiResponse = data[1];
      * });
      */
-    methods.create = true;
+    this.create = parent.createSnapshot.bind(parent, name);
+  }
 
+  if (is.fn(parent.seek)) {
     /**
      * Seeks an existing subscription to the snapshot.
      *
@@ -202,11 +156,7 @@ function Snapshot(parent, name) {
      */
     this.seek = parent.seek.bind(parent, name);
   }
-
-  commonGrpc.ServiceObject.call(this, config);
 }
-
-util.inherits(Snapshot, commonGrpc.ServiceObject);
 
 /**
  * Format the name of a snapshot. A snapshot's full name is in the format of
@@ -216,6 +166,33 @@ util.inherits(Snapshot, commonGrpc.ServiceObject);
  */
 Snapshot.formatName_ = function(projectId, name) {
   return 'projects/' + projectId + '/snapshots/' + name.split('/').pop();
+};
+
+/**
+ * Delete the snapshot.
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * snapshot.delete(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * snapshot.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Snapshot.prototype.delete = function(callback) {
+  var reqOpts = {
+    snapshot: this.name
+  };
+
+  this.api.Subscriber.deleteSnapshot(reqOpts, callback);
 };
 
 module.exports = Snapshot;
