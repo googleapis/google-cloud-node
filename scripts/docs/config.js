@@ -73,14 +73,12 @@ module.exports = {
       title: 'Cloud Natural Language'
     },
     logging: {
-      title: 'Stackdriver Logging'
+      title: 'Cloud Logging'
     },
     'logging-bunyan': {
-      title: 'Stackdriver Logging through Bunyan',
       skip: true
     },
     'logging-winston': {
-      title: 'Stackdriver Logging through Winston',
       skip: true
     },
     monitoring: {
