@@ -61,15 +61,7 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
 
 /**
  * This module provides support for streaming your winston logs to
- * [Stackdriver Logging]{@link https://cloud.google.com/logging}.
- *
- * If your app is running on Google Cloud Platform, all configuration and
- * authentication is handled for you. We also auto-detect the appropriate
- * resource descriptor to report the log entries against.
- *
- * If you are running your application in another environment, such as locally,
- * on-premise, or on another cloud provider, you will need to provide additional
- * configuration.
+ * [Stackdriver Logging](https://cloud.google.com/logging).
  *
  * @constructor
  * @alias module:logging-winston
