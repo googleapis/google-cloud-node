@@ -93,7 +93,7 @@ describe('Configuration class', function() {
             {service: 'node', version: undefined});
         });
         it('Should specify to report unhandledRejections', function() {
-          assert.strictEqual(c.getReportUnhandledRejections(), true);
+          assert.strictEqual(c.getReportUnhandledRejections(), false);
         });
       });
       describe('with ignoreEnvironmentCheck', function() {
