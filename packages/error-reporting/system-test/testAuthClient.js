@@ -446,6 +446,10 @@ describe('error-reporting', function() {
       assert.equal(errItem.count, 1);
       var rep = errItem.representative;
       assert.ok(rep);
+      // Ensure the stack trace in the message does not contain frames
+      // specific to the error-reporting library.  The reportManualError
+      // method is the entry point for reporting errors.
+      assert.strictEqual(rep.message.indexOf('reportManualError'), -1);
       var context = rep.serviceContext;
       assert.ok(context);
       assert.strictEqual(context.service, SERVICE);
@@ -475,8 +479,7 @@ describe('error-reporting', function() {
     var errorId = buildName('with-error-constructor');
     var errOb = new Error(errorId);
     verifyReporting(errOb, function(message) {
-      return message.startsWith('Error: ' + errorId +
-        '\n    at Context.verifyErrors');
+      return message.startsWith('Error: ' + errorId + '\n');
     }, TIMEOUT, done);
   });
 
@@ -484,21 +487,21 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-string');
     verifyReporting(errorId, function(message) {
-      return message.startsWith(errorId + '\n    at verifyReporting');
+      return message.startsWith(errorId + '\n');
     }, TIMEOUT, done);
   });
 
   it('Should correctly publish an error that is undefined', function(done) {
     this.timeout(TIMEOUT * 2);
     verifyReporting(undefined, function(message) {
-      return message.startsWith('undefined\n    at verifyReporting');
+      return message.startsWith('undefined\n');
     }, TIMEOUT, done);
   });
 
   it('Should correctly publish an error that is null', function(done) {
     this.timeout(TIMEOUT * 2);
     verifyReporting(null, function(message) {
-      return message.startsWith('null\n    at verifyReporting');
+      return message.startsWith('null\n');
     }, TIMEOUT, done);
   });
 
@@ -506,7 +509,7 @@ describe('error-reporting', function() {
   function(done) {
     this.timeout(TIMEOUT * 2);
     verifyReporting({ someKey: 'someValue' }, function(message) {
-      return message.startsWith('[object Object]\n    at verifyReporting');
+      return message.startsWith('[object Object]\n');
     }, TIMEOUT, done);
   });
 
@@ -514,7 +517,7 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     var num = (new Date()).getTime();
     verifyReporting(num, function(message) {
-      return message.startsWith('' + num + '\n    at verifyReporting');
+      return message.startsWith('' + num + '\n');
     }, TIMEOUT, done);
   });
 
@@ -523,7 +526,7 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     var bool = true;
     verifyReporting(bool, function(message) {
-      return message.startsWith('true\n    at verifyReporting');
+      return message.startsWith('true\n');
     }, TIMEOUT, done);
   });
 
