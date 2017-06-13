@@ -304,8 +304,9 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     not, we set the format as `text`.
  * @param {string} options.from - The ISO 639-1 language code the source input
  *     is written in.
- * @param {string} options.model - Set the model type requested for this translation. Please
- *     refer to the upstream documentation for possible values.
+ * @param {string} options.model - Set the model type requested for this
+ *     translation. Please refer to the upstream documentation for possible
+ *     values.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
  * @param {function} callback - The callback function.
