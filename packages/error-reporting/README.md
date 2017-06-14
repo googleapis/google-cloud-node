@@ -74,7 +74,7 @@ If unhandled rejections are set to be reported, then, when an unhandled rejectio
 
 Uncaught exceptions are not reported by default.  *It is recommended to process `uncaughtException`s for production-deployed applications.*
 
-Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  However, whether or not, and if so how, the addition of such a listener influences the execution of an application is specific to that particular application.  As such, it is necessary for `uncaughtException`s to be reported manually.
+Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  Adding such a listener without knowledge of other `uncaughtException` listeners can cause interference between the event handlers or prevent the process from terminating cleanly.  As such, it is necessary for `uncaughtException`s to be reported manually.
 
 ```js
 var errors = require('@google-cloud/error-reporting')();

@@ -512,7 +512,8 @@ describe('error-reporting', function() {
     setImmediate(function() {
       var expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
         'promise rejection: ' + rejectValue +
-        '.  This rejection has been reported to the error-reporting console.';
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.';
       assert.notStrictEqual(logOutput.indexOf(expected), -1);
       verifyServerResponse(function(message) {
         return message.startsWith(rejectValue);

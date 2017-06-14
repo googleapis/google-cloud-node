@@ -160,7 +160,8 @@ function Errors(initConfiguration) {
     process.on('unhandledRejection', function(reason) {
       console.log('UnhandledPromiseRejectionWarning: ' +
         'Unhandled promise rejection: ' + reason +
-        '.  This rejection has been reported to the error-reporting console.');
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.');
       that.report(reason);
     });
   }
