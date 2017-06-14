@@ -694,8 +694,8 @@ describe('Bucket', function() {
       it('should call setLabels with multiple labels', function(done) {
         bucket.setLabels = function(labels, callback) {
           assert.deepStrictEqual(labels, {
-            'labelonename': null,
-            'labeltwoname': null
+            labelonename: null,
+            labeltwoname: null
           });
           callback(); // done()
         };
