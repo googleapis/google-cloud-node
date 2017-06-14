@@ -107,166 +107,17 @@ function File(bucket, name, options) {
   });
 
   var generation = parseInt(options.generation, 10);
-  var requestQueryObject = {};
+  var requestQueryObject = this.requestQueryObject = {};
 
   if (!isNaN(generation)) {
     requestQueryObject.generation = generation;
     this.generation = generation;
   }
 
-  var methods = {
-    /**
-     * Delete the file.
-     *
-     * @resource [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * file.delete(function(err, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * file.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: {
-      reqOpts: {
-        qs: requestQueryObject
-      }
-    },
-
-    /**
-     * Check if the file exists.
-     *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the file exists or not.
-     *
-     * @example
-     * file.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * file.exists().then(function(data) {
-     *   var exists = data[0];
-     * });
-     */
-    exists: true,
-
-    /**
-     * Get a file object and its metadata if it exists.
-     *
-     * @example
-     * file.get(function(err, file, apiResponse) {
-     *   // file.metadata` has been populated.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * file.get().then(function(data) {
-     *   var file = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    get: true,
-
-    /**
-     * Get the file's metadata.
-     *
-     * @resource [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The File's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * file.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * file.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    getMetadata: {
-      reqOpts: {
-        qs: requestQueryObject
-      }
-    },
-
-    /**
-     * Merge the given metadata with the current remote file's metadata. This
-     * will set metadata if it was previously unset or update previously set
-     * metadata. To unset previously set metadata, set its value to null.
-     *
-     * You can set custom key/value pairs in the metadata key of the given
-     * object, however the other properties outside of this object must adhere
-     * to the [official API documentation](https://goo.gl/BOnnCK).
-     *
-     * See the examples below for more information.
-     *
-     * @resource [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
-     *
-     * @param {object} metadata - The metadata you wish to update.
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * var metadata = {
-     *   contentType: 'application/x-font-ttf',
-     *   metadata: {
-     *     my: 'custom',
-     *     properties: 'go here'
-     *   }
-     * };
-     *
-     * file.setMetadata(metadata, function(err, apiResponse) {});
-     *
-     * // Assuming current metadata = { hello: 'world', unsetMe: 'will do' }
-     * file.setMetadata({
-     *   metadata: {
-     *     abc: '123', // will be set.
-     *     unsetMe: null, // will be unset (deleted).
-     *     hello: 'goodbye' // will be updated from 'hello' to 'goodbye'.
-     *   }
-     * }, function(err, apiResponse) {
-     *   // metadata should now be { abc: '123', hello: 'goodbye' }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * file.setMetadata(metadata).then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    setMetadata: {
-      reqOpts: {
-        qs: requestQueryObject
-      }
-    }
-  };
-
   common.ServiceObject.call(this, {
     parent: bucket,
     baseUrl: '/o',
-    id: encodeURIComponent(name),
-    methods: methods
+    id: encodeURIComponent(name)
   });
 
   if (options.encryptionKey) {
@@ -337,6 +188,9 @@ util.inherits(File, common.ServiceObject);
  *     Destination file.
  * @param {object=} options - Configuration object. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file} callback.copiedFile - The copied File.
@@ -435,7 +289,7 @@ File.prototype.copy = function(destination, options, callback) {
     options = {};
   }
 
-  options = options || {};
+  options = extend(true, options);
   callback = callback || common.util.noop;
 
   var destBucket;
@@ -469,6 +323,10 @@ File.prototype.copy = function(destination, options, callback) {
   }
   if (is.defined(options.token)) {
     query.rewriteToken = options.token;
+  }
+  if (is.defined(options.userProject)) {
+    query.userProject = options.userProject;
+    delete options.userProject;
   }
 
   newFile = newFile || destBucket.file(destName);
@@ -515,6 +373,9 @@ File.prototype.copy = function(destination, options, callback) {
  * downloaded.
  *
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {string|boolean} options.validation - Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
  *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
@@ -607,13 +468,20 @@ File.prototype.createReadStream = function(options) {
   // Authenticate the request, then pipe the remote API request to the stream
   // returned to the user.
   function makeRequest() {
+    var query = {};
+
+    if (options.userProject) {
+      query.userProject = options.userProject;
+    }
+
     var reqOpts = {
       uri: format('{downloadBaseUrl}/{bucketName}/{fileName}', {
         downloadBaseUrl: STORAGE_DOWNLOAD_BASE_URL,
         bucketName: self.bucket.name,
         fileName: encodeURIComponent(self.name)
       }),
-      gzip: true
+      gzip: true,
+      qs: query
     };
 
     if (self.generation) {
@@ -782,6 +650,9 @@ File.prototype.createReadStream = function(options) {
  *     `options.predefinedAcl = 'private'`)
  * @param {boolean} options.public - Make the uploaded file public. (Alias for
  *     `options.predefinedAcl = 'publicRead'`)
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {string} callback.uri - The resumable upload's unique session URI.
@@ -815,7 +686,8 @@ File.prototype.createResumableUpload = function(options, callback) {
     origin: options.origin,
     predefinedAcl: options.predefinedAcl,
     private: options.private,
-    public: options.public
+    public: options.public,
+    userProject: options.userProject
   }, callback);
 };
 
@@ -884,6 +756,9 @@ File.prototype.createResumableUpload = function(options, callback) {
  *     for what makes sense given your input.
  * @param {string} options.uri - The URI for an already-created resumable
  *     upload. See {module:storage/file#createResumableUpload}.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {string|boolean} options.validation - Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
  *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
@@ -1072,12 +947,50 @@ File.prototype.createWriteStream = function(options) {
 };
 
 /**
+ * Delete the file.
+ *
+ * @resource [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * file.delete(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+File.prototype.delete = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, this.requestQueryObject, options);
+
+  this.parent.delete.call(this, options, callback);
+};
+
+/**
  * Convenience method to download a file into memory or to a local destination.
  *
  * @param {object=} options - Optional configuration. The arguments match those
  *     passed to {module:storage/file#createReadStream}.
  * @param {string} options.destination - Local file path to write the file's
  *     contents to.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {buffer} callback.contents - The contents of a File.
@@ -1130,6 +1043,32 @@ File.prototype.download = function(options, callback) {
 };
 
 /**
+ * Check if the file exists.
+ *
+ * @param {options=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {boolean} callback.exists - Whether the file exists or not.
+ *
+ * @example
+ * file.exists(function(err, exists) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.exists().then(function(data) {
+ *   var exists = data[0];
+ * });
+ */
+File.prototype.exists = function(options, callback) {
+  this.parent.exists.call(this, options, callback);
+};
+
+/**
  * The Storage API allows you to use a custom key for server-side encryption.
  *
  * @resource [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
@@ -1179,6 +1118,69 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
   });
 
   return this;
+};
+
+
+/**
+ * Get a file object and its metadata if it exists.
+ *
+ * @param {options=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ *
+ * @example
+ * file.get(function(err, file, apiResponse) {
+ *   // file.metadata` has been populated.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.get().then(function(data) {
+ *   var file = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+File.prototype.get = function(options, callback) {
+  this.parent.get.call(this, options, callback);
+};
+
+/**
+ * Get the file's metadata.
+ *
+ * @resource [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.metadata - The File's metadata.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * file.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+File.prototype.getMetadata = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, this.requestQueryObject, options);
+
+  this.parent.getMetadata.call(this, options, callback);
 };
 
 /**
@@ -1540,6 +1542,9 @@ File.prototype.getSignedUrl = function(config, callback) {
  * @param {object=} options - The configuration object.
  * @param {boolean=} options.strict - If true, set the file to be private to
  *     only the owner user. Otherwise, it will be private to the project.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  *
@@ -1573,29 +1578,16 @@ File.prototype.makePrivate = function(options, callback) {
     predefinedAcl: options.strict ? 'private' : 'projectPrivate'
   };
 
-  // You aren't allowed to set both predefinedAcl & acl properties on a file, so
-  // acl must explicitly be nullified, destroying all previous acls on the file.
-  var metadata = {
+  if (options.userProject) {
+    query.userProject = options.userProject;
+  }
+
+  this.setMetadata({
+    // You aren't allowed to set both predefinedAcl & acl properties on a file,
+    // so acl must explicitly be nullified, destroying all previous acls on the
+    // file.
     acl: null
-  };
-
-  callback = callback || common.util.noop;
-
-  this.request({
-    method: 'PATCH',
-    uri: '',
-    qs: query,
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, resp);
-      return;
-    }
-
-    self.metadata = resp;
-
-    callback(null, resp);
-  });
+  }, query, callback);
 };
 
 /**
@@ -1649,6 +1641,9 @@ File.prototype.makePublic = function(callback) {
  *     Destination file.
  * @param {object=} options - Configuration object. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file} callback.destinationFile - The destination File.
@@ -1797,6 +1792,69 @@ File.prototype.save = function(data, options, callback) {
 };
 
 /**
+ * Merge the given metadata with the current remote file's metadata. This
+ * will set metadata if it was previously unset or update previously set
+ * metadata. To unset previously set metadata, set its value to null.
+ *
+ * You can set custom key/value pairs in the metadata key of the given
+ * object, however the other properties outside of this object must adhere
+ * to the [official API documentation](https://goo.gl/BOnnCK).
+ *
+ * See the examples below for more information.
+ *
+ * @resource [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
+ *
+ * @param {object} metadata - The metadata you wish to update.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var metadata = {
+ *   contentType: 'application/x-font-ttf',
+ *   metadata: {
+ *     my: 'custom',
+ *     properties: 'go here'
+ *   }
+ * };
+ *
+ * file.setMetadata(metadata, function(err, apiResponse) {});
+ *
+ * // Assuming current metadata = { hello: 'world', unsetMe: 'will do' }
+ * file.setMetadata({
+ *   metadata: {
+ *     abc: '123', // will be set.
+ *     unsetMe: null, // will be unset (deleted).
+ *     hello: 'goodbye' // will be updated from 'hello' to 'goodbye'.
+ *   }
+ * }, function(err, apiResponse) {
+ *   // metadata should now be { abc: '123', hello: 'goodbye' }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+File.prototype.setMetadata = function(metadata, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, this.requestQueryObject, options);
+
+  this.parent.setMetadata.call(this, metadata, options, callback);
+};
+
+/**
  * Set the storage class for this file.
  *
  * @resource [Per-Object Storage Class]{@link https://cloud.google.com/storage/docs/per-object-storage-class}
@@ -1804,6 +1862,10 @@ File.prototype.save = function(data, options, callback) {
  *
  * @param {string} storageClass - The new storage class. (`multi_regional`,
  *     `regional`, `nearline`, `coldline`)
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  *
@@ -1821,20 +1883,25 @@ File.prototype.save = function(data, options, callback) {
  * //-
  * file.setStorageClass('regional').then(function() {});
  */
-File.prototype.setStorageClass = function(storageClass, callback) {
+File.prototype.setStorageClass = function(storageClass, options, callback) {
   var self = this;
 
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
   // In case we get input like `storageClass`, convert to `storage_class`.
-  storageClass = storageClass
+  options.storageClass = storageClass
     .replace(/-/g, '_')
     .replace(/([a-z])([A-Z])/g, function(_, low, up) {
       return low + '_' + up;
     })
     .toUpperCase();
 
-  this.copy(this, {
-    storageClass: storageClass
-  }, function(err, file, apiResponse) {
+  this.copy(this, options, function(err, file, apiResponse) {
     if (err) {
       callback(err, apiResponse);
       return;
@@ -1874,7 +1941,8 @@ File.prototype.startResumableUpload_ = function(dup, options) {
     predefinedAcl: options.predefinedAcl,
     private: options.private,
     public: options.public,
-    uri: options.uri
+    uri: options.uri,
+    userProject: options.userProject
   });
 
   uploadStream
@@ -1920,6 +1988,10 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
 
   if (is.defined(this.generation)) {
     reqOpts.qs.ifGenerationMatch = this.generation;
+  }
+
+  if (options.userProject) {
+    reqOpts.qs.userProject = options.userProject;
   }
 
   if (options.predefinedAcl) {

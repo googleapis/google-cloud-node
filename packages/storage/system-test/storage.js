@@ -715,6 +715,89 @@ describe('storage', function() {
     });
   });
 
+  describe('requester pays', function() {
+    var bucket;
+
+    before(function(done) {
+      bucket = storage.bucket(generateName());
+
+      bucket.create({
+        requesterPays: true
+      }, done);
+    });
+
+    after(function(done) {
+      bucket.delete(done);
+    });
+
+    it('should have enabled requesterPays functionality', function(done) {
+      bucket.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.billing.requesterPays, true);
+        done();
+      });
+    });
+
+    describe('existing bucket', function() {
+      var bucket;
+
+      function isRequesterPaysEnabled(callback) {
+        bucket.getMetadata(function(err, metadata) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          var billing = metadata.billing || {};
+          callback(null, !!billing && billing.requesterPays === true);
+        });
+      }
+
+      before(function(done) {
+        bucket = storage.bucket(generateName());
+        bucket.create(done);
+      });
+
+      it('should enable requesterPays', function(done) {
+        isRequesterPaysEnabled(function(err, isEnabled) {
+          assert.ifError(err);
+          assert.strictEqual(isEnabled, false);
+
+          bucket.enableRequesterPays(function(err) {
+            assert.ifError(err);
+
+            isRequesterPaysEnabled(function(err, isEnabled) {
+              assert.ifError(err);
+              assert.strictEqual(isEnabled, true);
+              done();
+            });
+          });
+        });
+      });
+
+      it('should disable requesterPays', function(done) {
+        bucket.enableRequesterPays(function(err) {
+          assert.ifError(err);
+
+          isRequesterPaysEnabled(function(err, isEnabled) {
+            assert.ifError(err);
+            assert.strictEqual(isEnabled, true);
+
+            bucket.disableRequesterPays(function(err) {
+              assert.ifError(err);
+
+              isRequesterPaysEnabled(function(err, isEnabled) {
+                assert.ifError(err);
+                assert.strictEqual(isEnabled, false);
+                done();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
   // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
   (IS_CI ? describe.skip : describe)('write/read/remove files', function() {
     before(function(done) {
