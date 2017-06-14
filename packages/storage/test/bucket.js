@@ -625,6 +625,86 @@ describe('Bucket', function() {
     });
   });
 
+  describe('deleteLabels', function() {
+    describe('all labels', function() {
+      it('should get all of the label names', function(done) {
+        bucket.getLabels = function() {
+          done();
+        };
+
+        bucket.deleteLabels(assert.ifError);
+      });
+
+      it('should return an error from getLabels()', function(done) {
+        var error = new Error('Error.');
+
+        bucket.getLabels = function(callback) {
+          callback(error);
+        };
+
+        bucket.deleteLabels(function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should call setLabels with all label names', function(done) {
+        var labels = {
+          labelone: 'labelonevalue',
+          labeltwo: 'labeltwovalue'
+        };
+
+        bucket.getLabels = function(callback) {
+          callback(null, labels);
+        };
+
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            labelone: null,
+            labeltwo: null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(done);
+      });
+    });
+
+    describe('single label', function() {
+      var LABEL = 'labelname';
+
+      it('should call setLabels with a single label', function(done) {
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            [LABEL]: null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(LABEL, done);
+      });
+    });
+
+    describe('multiple labels', function() {
+      var LABELS = [
+        'labelonename',
+        'labeltwoname'
+      ];
+
+      it('should call setLabels with multiple labels', function(done) {
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            'labelonename': null,
+            'labeltwoname': null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(LABELS, done);
+      });
+    });
+  });
+
   describe('file', function() {
     var FILE_NAME = 'remote-file-name.jpg';
     var file;
@@ -774,6 +854,61 @@ describe('Bucket', function() {
     });
   });
 
+  describe('getLabels', function() {
+    it('should refresh metadata', function(done) {
+      bucket.getMetadata = function() {
+        done();
+      };
+
+      bucket.getLabels(assert.ifError);
+    });
+
+    it('should return error from getMetadata', function(done) {
+      var error = new Error('Error.');
+
+      bucket.getMetadata = function(callback) {
+        callback(error);
+      };
+
+      bucket.getLabels(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should return labels metadata property', function(done) {
+      var metadata = {
+        labels: {
+          label: 'labelvalue'
+        }
+      };
+
+      bucket.getMetadata = function(callback) {
+        callback(null, metadata);
+      };
+
+      bucket.getLabels(function(err, labels) {
+        assert.ifError(err);
+        assert.strictEqual(labels, metadata.labels);
+        done();
+      });
+    });
+
+    it('should return empty object if no labels exist', function(done) {
+      var metadata = {};
+
+      bucket.getMetadata = function(callback) {
+        callback(null, metadata);
+      };
+
+      bucket.getLabels(function(err, labels) {
+        assert.ifError(err);
+        assert.deepStrictEqual(labels, {});
+        done();
+      });
+    });
+  });
+
   describe('makePrivate', function() {
     it('should set predefinedAcl & privatize files', function(done) {
       var didSetPredefinedAcl = false;
@@ -903,6 +1038,19 @@ describe('Bucket', function() {
         assert.equal(err, error);
         done();
       });
+    });
+  });
+
+  describe('setLabels', function() {
+    it('should correctly call setMetadata', function(done) {
+      var labels = {};
+
+      bucket.setMetadata = function(metadata, callback) {
+        assert.strictEqual(metadata.labels, labels);
+        callback(); // done()
+      };
+
+      bucket.setLabels(labels, done);
     });
   });
 
