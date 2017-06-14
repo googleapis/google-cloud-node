@@ -66,7 +66,7 @@ errors.report(new Error('Something broke!'));
 
 ## Unhandled Rejections
 
-Unhandled Rejections are reported by default.  The reporting of unhandled rejections can be disabled using the `reportUnhandledRejections` configuration option.  See the [Configuration](#configuration) section for more details.
+Unhandled Rejections are not reported by default.  The reporting of unhandled rejections can be enabled using the `reportUnhandledRejections` configuration option.  See the [Configuration](#configuration) section for more details.
 
 If unhandled rejections are set to be reported, then, when an unhandled rejection occurs, a message is printed to standard out indicated that an unhandled rejection had occurred and is being reported, and the value causing the rejection is reported to the error-reporting console.
 
