@@ -135,6 +135,14 @@ var Configuration = function(givenConfig, logger) {
    */
   this._serviceContext = {service: 'nodejs', version: ''};
   /**
+   * The _reportUnhandledRejections property is meant to specify whether or
+   * not unhandled rejections should be reported to the error-reporting console.
+   * @memberof Configuration
+   * @private
+   * @type {Boolean}
+   */
+  this._reportUnhandledRejections = false;
+  /**
    * The _givenConfiguration property holds a ConfigurationOptions object
    * which, if valid, will be merged against by the values taken from the meta-
    * data service. If the _givenConfiguration property is not valid then only
@@ -257,6 +265,12 @@ Configuration.prototype._gatherLocalConfiguration = function() {
   } else if (has(this._givenConfiguration, 'credentials')) {
     throw new Error('config.credentials must be a valid credentials object');
   }
+  if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
+    this._reportUnhandledRejections =
+      this._givenConfiguration.reportUnhandledRejections;
+  } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
+    throw new Error('config.reportUnhandledRejections must be a boolean');
+  }
 };
 /**
  * The _checkLocalProjectId function is responsible for determing whether the
@@ -353,5 +367,15 @@ Configuration.prototype.getCredentials = function() {
  */
 Configuration.prototype.getServiceContext = function() {
   return this._serviceContext;
+};
+/**
+ * Returns the _reportUnhandledRejections property on the instance.
+ * @memberof Configuration
+ * @public
+ * @function getReportUnhandledRejections
+ * @returns {Boolean} - returns the _reportUnhandledRejections property
+ */
+Configuration.prototype.getReportUnhandledRejections = function() {
+  return this._reportUnhandledRejections;
 };
 module.exports = Configuration;
