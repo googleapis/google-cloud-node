@@ -52,7 +52,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "arrify": "^1.0.0",
-    "duplexify": "^3.2.0",
+    "duplexify": "^3.5.0",
     "extend": "^3.0.0",
     "is": "^3.0.1",
     "stream-events": "^1.0.1",

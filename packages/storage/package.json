@@ -55,7 +55,7 @@
     "async": "^2.0.1",
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
-    "duplexify": "^3.2.0",
+    "duplexify": "^3.5.0",
     "extend": "^3.0.0",
     "gcs-resumable-upload": "^0.7.1",
     "hash-stream-validation": "^0.2.1",
