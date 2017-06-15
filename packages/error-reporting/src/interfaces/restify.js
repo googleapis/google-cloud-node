@@ -21,7 +21,7 @@ var isFunction = is.function;
 var ErrorMessage = require('../classes/error-message.js');
 var expressRequestInformationExtractor =
     require('../request-extractors/express.js');
-var errorHandlerRouter = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting
@@ -41,7 +41,7 @@ function restifyErrorHandler(client, config, err, em) {
   var svc = config.getServiceContext();
   em.setServiceContext(svc.service, svc.version);
 
-  errorHandlerRouter(err, em);
+  populateErrorMessage(err, em);
 
   client.sendError(em);
 }
