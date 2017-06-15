@@ -92,7 +92,7 @@ describe('Configuration class', function() {
           assert.deepEqual(c.getServiceContext(),
             {service: 'node', version: undefined});
         });
-        it('Should specify to report unhandledRejections', function() {
+        it('Should specify to not report unhandledRejections', function() {
           assert.strictEqual(c.getReportUnhandledRejections(), false);
         });
       });
