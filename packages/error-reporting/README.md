@@ -165,8 +165,8 @@ var errors = require('@google-cloud/error-reporting')({
   // defaults to 2 (warnings)
   logLevel: 2,
   // determines whether or not unhandled rejections are reported to the
-  // error-reporting console.  The default value of this property is true.
-  reportUnhandledRejections: false,
+  // error-reporting console
+  reportUnhandledRejections: true,
   serviceContext: {
       service: 'my-service',
       version: 'my-service-version'
