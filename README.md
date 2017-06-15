@@ -698,7 +698,7 @@ job.getQueryResults().on('data', function(row) {});
 - [API Documentation][gcloud-bigtable-docs]
 - [Official Documentation][cloud-bigtable-docs]
 
-*You may need to [create a cluster][cloud-bigtable-cluster] to use the Cloud Bigtable API with your project.*
+*You may need to [create an instance][cloud-bigtable-instance] to use the Cloud Bigtable API with your project.*
 
 
 #### Using the Cloud Bigtable API module
@@ -1284,7 +1284,7 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
 
 [cloud-bigtable-docs]: https://cloud.google.com/bigtable/docs
-[cloud-bigtable-cluster]: https://cloud.google.com/bigtable/docs/creating-compute-instance
+[cloud-bigtable-instance]: https://cloud.google.com/bigtable/docs/creating-instance
 
 [cloud-compute-docs]: https://cloud.google.com/compute/docs
 
