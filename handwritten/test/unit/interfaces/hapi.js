@@ -57,7 +57,7 @@ describe('Hapi interface', function() {
       function() {
         assert(has(plugin.register.attributes, 'name'));
         assert.strictEqual(plugin.register.attributes.name,
-          '@google/cloud-errors');
+          '@google-cloud/error-reporting');
       }
    );
     it('the plugin\'s attribute property should have a version property',
