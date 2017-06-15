@@ -4,7 +4,7 @@
   "main": "./src/index.js",
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "scripts": {
-    "test": "nyc --exclude=\"fuzzer.js\" mocha ./test/unit/**/*.js",
+    "test": "nyc --exclude=\"fuzzer.js\" mocha ./test/unit/*.js ./test/unit/**/*.js",
     "system-test": "nyc --exclude=\"error-message.js\" mocha ./system-test/*.js",
     "lint": "jshint -c ../../.jshintrc src system-test test utils && jscs -c ../../.jscsrc src system-test test utils",
     "publish-module": "node ../../scripts/publish.js error-reporting"
