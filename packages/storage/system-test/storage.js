@@ -537,7 +537,7 @@ describe('storage', function() {
       it('should test the iam permissions', function(done) {
         var testPermissions = [
           'storage.buckets.get',
-          'storage.buckets.update'
+          'storage.buckets.getIamPolicy'
         ];
 
         bucket.iam.testPermissions(testPermissions, function(err, permissions) {
@@ -545,7 +545,7 @@ describe('storage', function() {
 
           assert.deepEqual(permissions, {
             'storage.buckets.get': true,
-            'storage.buckets.update': true
+            'storage.buckets.getIamPolicy': true
           });
 
           done();
