@@ -64,9 +64,17 @@ errors.report(new Error('Something broke!'));
 
   Open Stackdriver Error Reporting at https://console.cloud.google.com/errors to view the reported errors.
 
+## Unhandled Rejections
+
+Unhandled Rejections are not reported by default.  The reporting of unhandled rejections can be enabled using the `reportUnhandledRejections` configuration option.  See the [Configuration](#configuration) section for more details.
+
+If unhandled rejections are set to be reported, then, when an unhandled rejection occurs, a message is printed to standard out indicated that an unhandled rejection had occurred and is being reported, and the value causing the rejection is reported to the error-reporting console.
+
 ## Catching and Reporting Application-wide Uncaught Errors
 
-*It is recommended to catch `uncaughtExceptions` for production-deployed applications.*
+Uncaught exceptions are not reported by default.  *It is recommended to process `uncaughtException`s for production-deployed applications.*
+
+Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  Adding such a listener without knowledge of other `uncaughtException` listeners can cause interference between the event handlers or prevent the process from terminating cleanly.  As such, it is necessary for `uncaughtException`s to be reported manually.
 
 ```js
 var errors = require('@google-cloud/error-reporting')();
@@ -156,6 +164,9 @@ var errors = require('@google-cloud/error-reporting')({
   // should be reported
   // defaults to 2 (warnings)
   logLevel: 2,
+  // determines whether or not unhandled rejections are reported to the
+  // error-reporting console
+  reportUnhandledRejections: true,
   serviceContext: {
       service: 'my-service',
       version: 'my-service-version'
