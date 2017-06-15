@@ -92,6 +92,9 @@ describe('Configuration class', function() {
           assert.deepEqual(c.getServiceContext(),
             {service: 'node', version: undefined});
         });
+        it('Should specify to not report unhandledRejections', function() {
+          assert.strictEqual(c.getReportUnhandledRejections(), false);
+        });
       });
       describe('with ignoreEnvironmentCheck', function() {
         var conf = merge({}, stubConfig, {ignoreEnvironmentCheck: true});
@@ -132,6 +135,13 @@ describe('Configuration class', function() {
           it('Should throw if invalid for serviceContext.version', function() {
             assert.throws(function() {
               new Configuration({serviceContext: {version: true}}, logger);
+            });
+          });
+          it('Should throw if invalid for reportUnhandledRejections',
+          function() {
+            assert.throws(function() {
+              new Configuration({ reportUnhandledRejections: 'INVALID' },
+                logger);
             });
           });
           it('Should not throw given an empty object for serviceContext',
@@ -276,6 +286,19 @@ describe('Configuration class', function() {
         });
         it('Should assign', function() {
           assert.strictEqual(c.getKey(), key);
+        });
+      });
+      describe('reportUnhandledRejections', function() {
+        var c;
+        var reportRejections = false;
+        before(function() {
+          c = new Configuration({
+            reportUnhandledRejections: reportRejections
+          });
+        });
+        it('Should assign', function() {
+          assert.strictEqual(c.getReportUnhandledRejections(),
+            reportRejections);
         });
       });
     });
