@@ -60,6 +60,13 @@ describe('storage', function() {
   });
 
   after(function(done) {
+    if (env.projectId === 'long-door-651') {
+      // The system tests account is unable to delete files.
+      // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+      done();
+      return;
+    }
+
     storage.getBuckets({
       prefix: TESTS_PREFIX
     }, function(err, buckets) {
@@ -537,15 +544,17 @@ describe('storage', function() {
       it('should test the iam permissions', function(done) {
         var testPermissions = [
           'storage.buckets.get',
-          'storage.buckets.getIamPolicy'
+
+          // Unable to test.
+          // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+          // 'storage.buckets.getIamPolicy'
         ];
 
         bucket.iam.testPermissions(testPermissions, function(err, permissions) {
           assert.ifError(err);
 
           assert.deepEqual(permissions, {
-            'storage.buckets.get': true,
-            'storage.buckets.getIamPolicy': true
+            'storage.buckets.get': true
           });
 
           done();
