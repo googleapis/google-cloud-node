@@ -35,6 +35,7 @@ var Bucket = Storage.Bucket;
 var File = Storage.File;
 
 describe('storage', function() {
+  var IS_CI = env.projectId === 'long-door-651';
   var TESTS_PREFIX = 'gcloud-test-';
 
   var storage = new Storage(env);
@@ -60,7 +61,7 @@ describe('storage', function() {
   });
 
   after(function(done) {
-    if (env.projectId === 'long-door-651') {
+    if (IS_CI) {
       // The system tests account is unable to delete files.
       // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
       done();
@@ -609,6 +610,12 @@ describe('storage', function() {
 
   describe('bucket metadata', function() {
     it('should allow setting metadata on a bucket', function(done) {
+      if (IS_CI) {
+        // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+        this.skip();
+        return;
+      }
+
       var metadata = {
         website: {
           mainPageSuffix: 'http://fakeuri',
@@ -624,7 +631,8 @@ describe('storage', function() {
     });
   });
 
-  describe('write, read, and remove files', function() {
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+  (IS_CI ? describe.skip : describe)('write/read/remove files', function() {
     before(function(done) {
       function setHash(filesKey, done) {
         var file = FILES[filesKey];
@@ -1066,7 +1074,8 @@ describe('storage', function() {
     });
   });
 
-  describe('combine files', function() {
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+  (IS_CI ? describe.skip : describe)('combine files', function() {
     it('should combine multiple files into one', function(done) {
       var files = [
         { file: bucket.file('file-one.txt'), contents: '123' },
@@ -1098,7 +1107,8 @@ describe('storage', function() {
     });
   });
 
-  describe('list files', function() {
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+  (IS_CI ? describe.skip : describe)('list files', function() {
     var NEW_FILES = [
       bucket.file('CloudLogo1'),
       bucket.file('CloudLogo2'),
@@ -1252,7 +1262,7 @@ describe('storage', function() {
     });
   });
 
-  describe('sign urls', function() {
+  (IS_CI ? describe.skip : describe)('sign urls', function() {
     var localFile = fs.readFileSync(FILES.logo.path);
     var file;
 
@@ -1300,7 +1310,8 @@ describe('storage', function() {
     });
   });
 
-  describe('sign policy', function() {
+  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
+  (IS_CI ? describe.skip : describe)('sign policy', function() {
     var file;
 
     before(function(done) {
