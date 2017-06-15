@@ -19,7 +19,6 @@ var assert = require('assert');
 var isNumber = require('is').number;
 var merge = require('lodash.merge');
 var Configuration = require('../fixtures/configuration.js');
-var version = require('../../package.json').version;
 var Fuzzer = require('../../utils/fuzzer.js');
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 var logger = require('../../src/logger.js')({
@@ -92,9 +91,6 @@ describe('Configuration class', function() {
         it('Should have a default service context', function() {
           assert.deepEqual(c.getServiceContext(),
             {service: 'node', version: undefined});
-        });
-        it('Should have a version corresponding to package.json', function() {
-          assert.strictEqual(c.getVersion(), version);
         });
       });
       describe('with ignoreEnvironmentCheck', function() {
