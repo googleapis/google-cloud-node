@@ -32,6 +32,7 @@ var assign = require('lodash.assign');
 var pick = require('lodash.pick');
 var omitBy = require('lodash.omitby');
 var util = require('util');
+var path = require('path');
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
 const TIMEOUT = 30000;
@@ -362,9 +363,11 @@ describe('Expected Behavior', function() {
 });
 
 describe('error-reporting', function() {
+  const SRC_ROOT = path.join(__dirname, '..', 'src');
+  const TIMESTAMP = Date.now();
   const BASE_NAME = 'error-reporting-system-test';
   function buildName(suffix) {
-    return [Date.now(), BASE_NAME, suffix].join('_');
+    return [TIMESTAMP, BASE_NAME, suffix].join('_');
   }
 
   const SERVICE = buildName('service-name');
@@ -446,10 +449,16 @@ describe('error-reporting', function() {
       assert.equal(errItem.count, 1);
       var rep = errItem.representative;
       assert.ok(rep);
-      // Ensure the stack trace in the message does not contain frames
-      // specific to the error-reporting library.  The reportManualError
-      // method is the entry point for reporting errors.
-      assert.strictEqual(rep.message.indexOf('reportManualError'), -1);
+      // Ensure the stack trace in the message does not contain any frames
+      // specific to the error-reporting library.
+      assert.strictEqual(rep.message.indexOf(SRC_ROOT), -1);
+      // Ensure the stack trace in the mssage contains the frame corresponding
+      // to the 'expectedTopOfStack' function because that is the name of
+      // function used in this file that is the topmost function in the call
+      // stack that is not internal to the error-reporting library.
+      // This ensures that only the frames specific to the
+      // error-reporting library are removed from the stack trace.
+      assert.notStrictEqual(rep.message.indexOf('expectedTopOfStack'), -1);
       var context = rep.serviceContext;
       assert.ok(context);
       assert.strictEqual(context.service, SERVICE);
@@ -459,12 +468,14 @@ describe('error-reporting', function() {
   }
 
   function verifyReporting(errOb, messageTest, timeout, cb) {
-    errors.report(errOb, function(err, response, body) {
-      assert.ifError(err);
-      assert(isObject(response));
-      assert.deepEqual(body, {});
-      verifyServerResponse(messageTest, timeout, cb);
-    });
+    (function expectedTopOfStack() {
+      errors.report(errOb, function(err, response, body) {
+        assert.ifError(err);
+        assert(isObject(response));
+        assert.deepEqual(body, {});
+        verifyServerResponse(messageTest, timeout, cb);
+      });
+    })();
   }
 
   // For each test below, after an error is reported, the test waits
@@ -477,7 +488,9 @@ describe('error-reporting', function() {
     function verifyErrors(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-constructor');
-    var errOb = new Error(errorId);
+    var errOb = (function expectedTopOfStack() {
+      return new Error(errorId);
+    })();
     verifyReporting(errOb, function(message) {
       return message.startsWith('Error: ' + errorId + '\n');
     }, TIMEOUT, done);
@@ -533,9 +546,17 @@ describe('error-reporting', function() {
   it('Should correctly publish errors using an error builder', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-builder');
+    // Use an IIFE with the name `definitionSiteFunction` to use later to ensure
+    // the stack trace of the point where the error message was constructed is
+    // used.
+    // Use an IIFE with the name `expectedTopOfStack` so that the test can
+    // verify that the stack trace used does not contain any frames
+    // specific to the error-reporting library.
     var errOb = (function definitionSiteFunction() {
-      return errors.event()
-                   .setMessage(errorId);
+      return (function expectedTopOfStack() {
+        return errors.event()
+                     .setMessage(errorId);
+      })();
     })();
     (function callingSiteFunction() {
       verifyReporting(errOb, function(message) {
@@ -554,15 +575,22 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     reinitialize({ reportUnhandledRejections: true });
     var rejectValue = buildName('promise-rejection');
-    Promise.reject(rejectValue);
+    (function expectedTopOfStack() {
+      // An Error is used for the rejection value so that it's stack
+      // contains the stack trace at the point the rejection occured and is
+      // rejected within a function named `expectedTopOfStack` so that the
+      // test can verify that the collected stack is correct.
+      Promise.reject(new Error(rejectValue));
+    })();
+    var rejectText = 'Error: ' + rejectValue;
     setImmediate(function() {
       var expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
-        'promise rejection: ' + rejectValue +
+        'promise rejection: ' + rejectText +
         '.  This rejection has been reported to the ' +
         'Google Cloud Platform error-reporting console.';
       assert.notStrictEqual(logOutput.indexOf(expected), -1);
       verifyServerResponse(function(message) {
-        return message.startsWith(rejectValue);
+        return message.startsWith(rejectText);
       }, TIMEOUT, done);
     });
   });
@@ -571,7 +599,9 @@ describe('error-reporting', function() {
     this.timeout(TIMEOUT * 2);
     reinitialize({ reportUnhandledRejections: false });
     var rejectValue = buildName('promise-rejection');
-    Promise.reject(rejectValue);
+    (function expectedTopOfStack() {
+      Promise.reject(rejectValue);
+    })();
     setImmediate(function() {
       var notExpected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
         'promise rejection: ' + rejectValue +

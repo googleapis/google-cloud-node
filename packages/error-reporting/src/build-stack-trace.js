@@ -16,32 +16,27 @@
 
 'use strict';
 
-var is = require('is');
+const SRC_ROOT = __dirname;
 
 /**
  * Constructs a string representation of the stack trace at the point where
  * this function was invoked.  Note that the stack trace will not include any
- * references to this function itself.
+ * references to frames specific to this error-reporting library itself.
  * @param {String?} message - The message that should appear as the first line
  *   of the stack trace.  This value defaults to the empty string.
- * @param {Number?} numSkip - The number of additional lines to not display
- *   in the stack trace.  That is, the stack trace returned will have the
- *   specified message with the top `numSkip` lines of the stack not displayed.
- *   This value defaults to 0 if it is not defined or is not a number.
  * @returns {String} - A string representation of the stack trace at the point
  *   where this method was invoked.
  */
-function buildStackTrace(message, numSkip) {
+function buildStackTrace(message) {
   var target = {};
   // Build a stack trace without the frames associated with `buildStackTrace`.
   // The stack is located at `target.stack`.
   Error.captureStackTrace(target, buildStackTrace);
-  // Ignore the first line, which contains the error message, because we will
-  // add our own error message later.
-  var fullStack = target.stack.split('\n').slice(1);
   var prefix = message ? message + '\n' : '';
-  var realNumSkip = is.number(numSkip) ? numSkip : 0;
-  return prefix + fullStack.slice(realNumSkip).join('\n');
+  return prefix + target.stack.split('\n').slice(1).filter(function(line) {
+    // Filter out all frames that are specific to the error-reporting library
+    return !line || line.indexOf(SRC_ROOT) === -1;
+  }).join('\n');
 }
 
 module.exports = buildStackTrace;

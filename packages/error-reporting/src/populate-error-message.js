@@ -32,13 +32,13 @@ var buildStackTrace = require('./build-stack-trace.js');
  */
 function populateErrorMessage(ob, em) {
   if (ob === null || ob === undefined) {
-    em.setMessage(buildStackTrace('' + ob, 3));
+    em.setMessage(buildStackTrace('' + ob));
   } else if (ob.stack) {
     populateFromError(ob, em);
   } else if (typeof ob === 'object' && isObject(ob)) {
     populateFromObject(ob, em);
   } else {
-    em.setMessage(buildStackTrace(ob.toString(), 3));
+    em.setMessage(buildStackTrace(ob.toString()));
   }
 
   return em;
@@ -97,7 +97,7 @@ function populateFromObject(ob, errorMessage) {
   if (has(ob, 'message')) {
     errorMessage.setMessage(ob.message);
   } else {
-    errorMessage.setMessage(buildStackTrace('' + ob, 3));
+    errorMessage.setMessage(buildStackTrace('' + ob));
   }
 
   if (has(ob, 'user')) {
