@@ -39,9 +39,9 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default",
           "bundling": {
-            "element_count_threshold": 100,
-            "request_byte_threshold": 1024,
-            "delay_threshold_millis": 10
+            "element_count_threshold": 1000,
+            "request_byte_threshold": 1048576,
+            "delay_threshold_millis": 50
           }
         },
         "ListLogEntries": {
