@@ -22,7 +22,6 @@ var isObject = is.object;
 var isBoolean = is.boolean;
 var isString = is.string;
 var isNumber = is.number;
-var version = require('../package.json').version;
 
 /**
  * The Configuration constructor function initializes several internal
@@ -135,15 +134,6 @@ var Configuration = function(givenConfig, logger) {
    * @type {Object}
    */
   this._serviceContext = {service: 'nodejs', version: ''};
-  /**
-   * The _version of the Error reporting library that is currently being run.
-   * This information will be logged in errors communicated to the Stackdriver
-   * Error API.
-   * @memberof Configuration
-   * @private
-   * @type {String}
-   */
-  this._version = version;
   /**
    * The _givenConfiguration property holds a ConfigurationOptions object
    * which, if valid, will be merged against by the values taken from the meta-
@@ -363,15 +353,5 @@ Configuration.prototype.getCredentials = function() {
  */
 Configuration.prototype.getServiceContext = function() {
   return this._serviceContext;
-};
-/**
- * Returns the _version property on the instance.
- * @memberof Configuration
- * @public
- * @function getVersion
- * @returns {String} - returns the _version property
- */
-Configuration.prototype.getVersion = function() {
-  return this._version;
 };
 module.exports = Configuration;

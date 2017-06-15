@@ -72,13 +72,13 @@ describe('logger', function() {
         var logger = createLogger();
         logger.warn('test warning message');
         assert.strictEqual(text,
-          'WARN:@google/cloud-errors: test warning message');
+          'WARN:@google-cloud/error-reporting: test warning message');
       });
       it('Should print ERROR logs by default', function() {
         var logger = createLogger();
         logger.error('test error message');
         assert.strictEqual(text,
-          'ERROR:@google/cloud-errors: test error message');
+          'ERROR:@google-cloud/error-reporting: test error message');
       });
     });
   });

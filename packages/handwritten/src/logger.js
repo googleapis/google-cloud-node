@@ -22,6 +22,8 @@ var isObject = is.object;
 var isString = is.string;
 var isNumber = is.number;
 var logger = require('@google-cloud/common').logger;
+var packageJson = require('../package.json');
+
 /**
  * Creates an instance of the Google Cloud Diagnostics logger class. This
  * instance will be configured to log at the level given by the environment or
@@ -59,7 +61,7 @@ function createLogger(initConfiguration) {
         'representation of a number in string form');
     }
   }
-  return logger({level: level, tag: '@google/cloud-errors'});
+  return logger({level: level, tag: packageJson.name });
 }
 
 module.exports = createLogger;
