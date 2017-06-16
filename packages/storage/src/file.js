@@ -1567,8 +1567,6 @@ File.prototype.getSignedUrl = function(config, callback) {
  * });
  */
 File.prototype.makePrivate = function(options, callback) {
-  var self = this;
-
   if (is.fn(options)) {
     callback = options;
     options = {};
