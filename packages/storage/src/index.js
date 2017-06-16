@@ -258,7 +258,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
     metadata = {};
   }
 
-  var body = extend(metadata, {
+  var body = extend({}, metadata, {
     name: name
   });
 
