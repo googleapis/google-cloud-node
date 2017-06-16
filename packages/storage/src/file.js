@@ -107,11 +107,12 @@ function File(bucket, name, options) {
   });
 
   var generation = parseInt(options.generation, 10);
-  var requestQueryObject = this.requestQueryObject = {};
 
   if (!isNaN(generation)) {
-    requestQueryObject.generation = generation;
     this.generation = generation;
+    this.requestQueryObject = {
+      generation: this.generation
+    };
   }
 
   common.ServiceObject.call(this, {
@@ -289,7 +290,7 @@ File.prototype.copy = function(destination, options, callback) {
     options = {};
   }
 
-  options = extend(true, options);
+  options = extend(true, {}, options);
   callback = callback || common.util.noop;
 
   var destBucket;
@@ -468,12 +469,6 @@ File.prototype.createReadStream = function(options) {
   // Authenticate the request, then pipe the remote API request to the stream
   // returned to the user.
   function makeRequest() {
-    var query = {};
-
-    if (options.userProject) {
-      query.userProject = options.userProject;
-    }
-
     var reqOpts = {
       uri: format('{downloadBaseUrl}/{bucketName}/{fileName}', {
         downloadBaseUrl: STORAGE_DOWNLOAD_BASE_URL,
@@ -481,13 +476,15 @@ File.prototype.createReadStream = function(options) {
         fileName: encodeURIComponent(self.name)
       }),
       gzip: true,
-      qs: query
+      qs: {}
     };
 
     if (self.generation) {
-      reqOpts.qs = {
-        generation: self.generation
-      };
+      reqOpts.qs.generation = self.generation;
+    }
+
+    if (options.userProject) {
+      reqOpts.qs.userProject = options.userProject;
     }
 
     if (rangeRequest) {
@@ -1889,7 +1886,7 @@ File.prototype.setStorageClass = function(storageClass, options, callback) {
     options = {};
   }
 
-  options = options || {};
+  options = extend(true, {}, options);
 
   // In case we get input like `storageClass`, convert to `storage_class`.
   options.storageClass = storageClass

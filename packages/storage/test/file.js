@@ -171,6 +171,13 @@ describe('File', function() {
       assert.equal(file.generation, 2);
     });
 
+    it('should build a requestQueryObject from generation', function() {
+      var file = new File(BUCKET, 'name', { generation: 2 });
+      assert.deepStrictEqual(file.requestQueryObject, {
+        generation: 2
+      });
+    });
+
     it('should inherit from ServiceObject', function() {
       assert(file instanceof ServiceObject);
 
@@ -179,61 +186,6 @@ describe('File', function() {
       assert.strictEqual(calledWith.parent, BUCKET);
       assert.strictEqual(calledWith.baseUrl, '/o');
       assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
-      assert.deepEqual(calledWith.methods, {
-        delete: {
-          reqOpts: {
-            qs: {}
-          }
-        },
-        exists: true,
-        get: true,
-        getMetadata: {
-          reqOpts: {
-            qs: {}
-          }
-        },
-        setMetadata: {
-          reqOpts: {
-            qs: {}
-          }
-        }
-      });
-    });
-
-    it('should set generation on the request methods', function() {
-      var options = {
-        generation: 82834
-      };
-
-      var file = new File(BUCKET, 'name', options);
-
-      var calledWith = file.calledWith_[0];
-
-      assert.deepEqual(calledWith.methods, {
-        delete: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        },
-        exists: true,
-        get: true,
-        getMetadata: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        },
-        setMetadata: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        }
-      });
     });
 
     it('should set a custom encryption key', function(done) {
@@ -306,10 +258,29 @@ describe('File', function() {
 
     it('should accept an options object', function(done) {
       var newFile = new File(BUCKET, 'name');
-      var options = {};
+      var options = {
+        option: true
+      };
 
       file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json, options);
+        assert.deepStrictEqual(reqOpts.json, options);
+        done();
+      };
+
+      file.copy(newFile, options, assert.ifError);
+    });
+
+    it('should pass through userProject', function(done) {
+      var options = {
+        userProject: 'user-project'
+      };
+      var originalOptions = extend({}, options);
+      var newFile = new File(BUCKET, 'new-file');
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+        assert.strictEqual(reqOpts.json.userProject, undefined);
+        assert.deepStrictEqual(options, originalOptions);
         done();
       };
 
@@ -583,6 +554,20 @@ describe('File', function() {
       };
 
       versionedFile.createReadStream().resume();
+    });
+
+    it('should send query.userProject if provided', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      file.requestStream = function(rOpts) {
+        assert.strictEqual(rOpts.qs.userProject, options.userProject);
+        setImmediate(done);
+        return duplexify();
+      };
+
+      file.createReadStream(options).resume();
     });
 
     it('should end request stream on error', function(done) {
@@ -1044,7 +1029,8 @@ describe('File', function() {
         metadata: {
           contentType: 'application/json'
         },
-        origin: '*'
+        origin: '*',
+        userProject: 'user-project-id'
       };
 
       file.generation = 3;
@@ -1061,6 +1047,7 @@ describe('File', function() {
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.metadata, options.metadata);
           assert.strictEqual(opts.origin, options.origin);
+          assert.strictEqual(opts.userProject, options.userProject);
 
           callback();
         }
@@ -1399,6 +1386,56 @@ describe('File', function() {
     });
   });
 
+  describe('delete', function() {
+    it('should make the correct request', function(done) {
+      file.parent.delete = function(options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.delete(done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.delete = function(options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.delete(options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.delete = function(options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.delete(options, assert.ifError);
+    });
+  });
+
   describe('download', function() {
     var fileReadStream;
 
@@ -1528,6 +1565,82 @@ describe('File', function() {
           });
         });
       });
+    });
+  });
+
+  describe('exists', function() {
+    it('should call parent exists function', function(done) {
+      var options = {};
+
+      file.parent.exists = function(options_, callback) {
+        assert.strictEqual(options_, options);
+        callback(); // done()
+      };
+
+      file.exists(options, done);
+    });
+  });
+
+  describe('get', function() {
+    it('should call parent get function', function(done) {
+      var options = {};
+
+      file.parent.get = function(options_, callback) {
+        assert.strictEqual(options_, options);
+        callback(); // done()
+      };
+
+      file.get(options, done);
+    });
+  });
+
+  describe('getMetadata', function() {
+    it('should make the correct request', function(done) {
+      file.parent.getMetadata = function(options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.getMetadata(done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.getMetadata = function(options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.getMetadata(options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.getMetadata = function(options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.getMetadata(options, assert.ifError);
     });
   });
 
@@ -2117,7 +2230,7 @@ describe('File', function() {
     it('should execute callback with API response', function(done) {
       var apiResponse = {};
 
-      file.request = function(reqOpts, callback) {
+      file.setMetadata = function(metadata, query, callback) {
         callback(null, apiResponse);
       };
 
@@ -2133,7 +2246,7 @@ describe('File', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      file.request = function(reqOpts, callback) {
+      file.setMetadata = function(metadata, query, callback) {
         callback(error, apiResponse);
       };
 
@@ -2146,11 +2259,9 @@ describe('File', function() {
     });
 
     it('should make the file private to project by default', function(done) {
-      file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'projectPrivate' });
-        assert.deepEqual(reqOpts.json, { acl: null });
+      file.setMetadata = function(metadata, query) {
+        assert.deepStrictEqual(metadata, { acl: null });
+        assert.deepEqual(query, { predefinedAcl: 'projectPrivate' });
         done();
       };
 
@@ -2158,12 +2269,25 @@ describe('File', function() {
     });
 
     it('should make the file private to user if strict = true', function(done) {
-      file.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'private' });
+      file.setMetadata = function(metadata, query) {
+        assert.deepEqual(query, { predefinedAcl: 'private' });
         done();
       };
 
       file.makePrivate({ strict: true }, util.noop);
+    });
+
+    it('should accept userProject', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      file.setMetadata = function(metadata, query) {
+        assert.strictEqual(query.userProject, options.userProject);
+        done();
+      };
+
+      file.makePrivate(options, assert.ifError);
     });
   });
 
@@ -2340,6 +2464,58 @@ describe('File', function() {
     });
   });
 
+  describe('setMetadata', function() {
+    it('should make the correct request', function(done) {
+      var metadata = {};
+
+      file.parent.setMetadata = function(metadata, options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.setMetadata(metadata, done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.setMetadata = function(metadata, options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.setMetadata({}, options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.setMetadata = function(metadata, options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.setMetadata({}, options, assert.ifError);
+    });
+  });
+
   describe('setStorageClass', function() {
     var STORAGE_CLASS = 'new_storage_class';
 
@@ -2353,6 +2529,26 @@ describe('File', function() {
       };
 
       file.setStorageClass(STORAGE_CLASS, assert.ifError);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        storageClass: STORAGE_CLASS.toUpperCase()
+      };
+
+      file.copy = function(newFile, options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.setStorageClass(STORAGE_CLASS, options, assert.ifError);
     });
 
     it('should convert camelCase to snake_case', function(done) {
@@ -2467,7 +2663,8 @@ describe('File', function() {
           public: true,
           private: false,
           predefinedAcl: 'allUsers',
-          uri: 'http://resumable-uri'
+          uri: 'http://resumable-uri',
+          userProject: 'user-project-id'
         };
 
         file.generation = 3;
@@ -2489,6 +2686,7 @@ describe('File', function() {
           assert.strictEqual(opts.private, options.private);
           assert.strictEqual(opts.public, options.public);
           assert.strictEqual(opts.uri, options.uri);
+          assert.strictEqual(opts.userProject, options.userProject);
 
           setImmediate(done);
           return through();
@@ -2629,6 +2827,19 @@ describe('File', function() {
       };
 
       versionedFile.startSimpleUpload_(duplexify(), {});
+    });
+
+    it('should send userProject if set', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      makeWritableStreamOverride = function(stream, options_) {
+        assert.equal(options_.request.qs.userProject, options.userProject);
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), options);
     });
 
     describe('request', function() {
