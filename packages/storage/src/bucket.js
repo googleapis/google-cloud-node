@@ -814,7 +814,7 @@ Bucket.prototype.get = function(options, callback) {
     callback(null, bucket, apiResponse);
   }
 
-  this.getMetadata(function(err, metadata) {
+  this.getMetadata(options, function(err, metadata) {
     if (err) {
       if (err.code === 404 && autoCreate) {
         var args = [];
@@ -1071,13 +1071,13 @@ Bucket.prototype.getMetadata = function(options, callback) {
     qs: options
   }, function(err, resp) {
     if (err) {
-      callback(err, resp);
+      callback(err, null, resp);
       return;
     }
 
     self.metadata = resp;
 
-    callback(null, resp);
+    callback(null, self.metadata, resp);
   });
 };
 
