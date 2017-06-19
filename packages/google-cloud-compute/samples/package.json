@@ -19,16 +19,16 @@
     "test": "npm run unit-test && npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/compute": "0.7.1",
+    "@google-cloud/compute": "0.7.2",
     "googleapis": "19.0.0",
     "nodemailer": "4.0.1",
     "nodemailer-smtp-transport": "2.7.4",
-    "sendgrid": "5.0.0"
+    "sendgrid": "5.1.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.14",
+    "@google-cloud/nodejs-repo-tools": "1.4.15",
     "ava": "0.19.1",
-    "proxyquire": "1.7.11"
+    "proxyquire": "1.8.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
