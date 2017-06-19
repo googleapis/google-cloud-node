@@ -18,14 +18,14 @@
     "test": "npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/dns": "0.5.0",
-    "yargs": "7.1.0"
+    "@google-cloud/dns": "0.6.2",
+    "yargs": "8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.14",
+    "@google-cloud/nodejs-repo-tools": "1.4.15",
     "ava": "0.19.1",
-    "proxyquire": "1.7.11",
-    "sinon": "2.1.0"
+    "proxyquire": "1.8.0",
+    "sinon": "2.3.4"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
