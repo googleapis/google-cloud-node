@@ -21,13 +21,13 @@
     "@google-cloud/video-intelligence": "0.1.0",
     "googleapis": "19.0.0",
     "long": "^3.2.0",
-    "safe-buffer": "5.0.1",
-    "yargs": "7.1.0"
+    "safe-buffer": "5.1.0",
+    "yargs": "8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.13",
+    "@google-cloud/nodejs-repo-tools": "1.4.15",
     "ava": "0.19.1",
-    "proxyquire": "1.7.11"
+    "proxyquire": "1.8.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
