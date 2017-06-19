@@ -19,17 +19,17 @@
     "test": "npm run unit-test && npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/logging": "1.0.0",
-    "@google-cloud/storage": "1.1.0",
-    "express": "4.15.2",
-    "fluent-logger": "2.3.0",
-    "yargs": "7.1.0"
+    "@google-cloud/logging": "1.0.2",
+    "@google-cloud/storage": "1.1.1",
+    "express": "4.15.3",
+    "fluent-logger": "2.4.0",
+    "yargs": "8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.14",
+    "@google-cloud/nodejs-repo-tools": "1.4.15",
     "ava": "0.19.1",
-    "proxyquire": "1.7.11",
-    "sinon": "2.1.0",
+    "proxyquire": "1.8.0",
+    "sinon": "2.3.4",
     "supertest": "3.0.0",
     "uuid": "3.0.1"
   },
