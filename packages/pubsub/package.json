@@ -60,6 +60,8 @@
     "is": "^3.0.1",
     "modelo": "^4.2.0",
     "propprop": "^0.3.1",
+    "stream-events": "^1.0.2",
+    "through2": "^2.0.3",
     "uuid": "^3.0.1"
   },
   "devDependencies": {

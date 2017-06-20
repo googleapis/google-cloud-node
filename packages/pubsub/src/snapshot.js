@@ -88,6 +88,7 @@ var is = require('is');
  * });
  */
 function Snapshot(parent, name) {
+  this.parent = parent;
   this.api = parent.api;
   this.name = Snapshot.formatName_(parent.projectId, name);
 
@@ -192,7 +193,11 @@ Snapshot.prototype.delete = function(callback) {
     snapshot: this.name
   };
 
-  this.api.Subscriber.deleteSnapshot(reqOpts, callback);
+  this.parent.request({
+    client: 'subscriberClient',
+    method: 'deleteSnapshot',
+    reqOpts: reqOpts
+  }, callback);
 };
 
 module.exports = Snapshot;

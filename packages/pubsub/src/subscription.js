@@ -147,7 +147,7 @@ function Subscription(pubsub, name, options) {
   options = options || {};
 
   this.pubsub = pubsub;
-  this.api = pubsub.api;
+  this.request = pubsub.request.bind(pubsub);
   this.projectId = pubsub.projectId;
 
   this.name = Subscription.formatName_(pubsub.projectId, name);
@@ -239,9 +239,15 @@ Subscription.prototype.ack_ = function(messages, callback) {
     return;
   }
 
-  this.api.Subscriber.acknowledge({
+  var reqOpts = {
     ackIds: ackIds,
     subscription: this.name
+  };
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'acknowledge',
+    reqOpts: reqOpts
   }, callback);
 };
 
@@ -288,11 +294,16 @@ Subscription.prototype.closeConnection_ = function() {
  *   var apiResponse = data[1];
  * });
  */
-Subscription.prototype.createSnapshot = function(name, callback) {
+Subscription.prototype.createSnapshot = function(name, gaxOpts, callback) {
   var self = this;
 
   if (!is.string(name)) {
     throw new Error('A name is required to create a snapshot.');
+  }
+
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
   }
 
   var snapshot = self.snapshot(name);
@@ -302,7 +313,12 @@ Subscription.prototype.createSnapshot = function(name, callback) {
     subscription: this.name
   };
 
-  this.api.Subscriber.createSnapshot(reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'createSnapshot',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -334,17 +350,26 @@ Subscription.prototype.createSnapshot = function(name, callback) {
  *   var apiResponse = data[0];
  * });
  */
-Subscription.prototype.delete = function(callback) {
+Subscription.prototype.delete = function(gaxOpts, callback) {
   var self = this;
+
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
 
   var reqOpts = {
     subscription: this.name
   };
 
-  this.api.Subscriber.deleteSubscription(reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'deleteSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (!err) {
-      self.closed = true;
-      self.removeAllListeners();
+      self.closeConnection_();
     }
 
     callback(err, resp);
@@ -357,12 +382,22 @@ Subscription.prototype.delete = function(callback) {
  *     request.
  * @param {object} callback.apiResponse - Raw API response.
  */
-Subscription.prototype.getMetadata = function(callback) {
+Subscription.prototype.getMetadata = function(gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     subscription: this.name
   };
 
-  this.api.Subscriber.getSubscription(reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'getSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -403,13 +438,23 @@ Subscription.prototype.listenForEvents_ = function() {
  * @param {string} config.pushEndpoint
  * @param {object} config.attributes
  */
-Subscription.prototype.modifyPushConfig = function(config, callback) {
+Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     subscription: this.name,
     pushConfig: config
   };
 
-  this.api.Subscriber.modifyPushConfig(reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'modifyPushConfig',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -423,12 +468,19 @@ Subscription.prototype.openConnection_ = function() {
     streamAckDeadlineSeconds: this.ackDeadline
   };
 
-  var grpcOpts = {
-    timeout: Number.MAX_NUMBER
-  };
+  this.request({
+    client: 'subscriberClient',
+    method: 'streamingPull',
+    returnFn: true
+  }, function(err, requestFn) {
+    if (err) {
+      self.emit('error', err);
+      return;
+    }
 
-  this.connection = this.api.Subscriber.streamingPull(grpcOpts)
-    .on('error', function(err) {
+    self.connection = requestFn();
+
+    self.connection.on('error', function(err) {
       var retryCodes = [2, 4, 14];
 
       if (retryCodes.indexOf(err.code) > -1) {
@@ -437,14 +489,16 @@ Subscription.prototype.openConnection_ = function() {
       }
 
       self.emit('error', err);
-    })
-    .on('data', function(data) {
+    });
+
+    self.connection.on('data', function(data) {
       data.receivedMessages.forEach(function(message) {
         self.emit('message', new Message(self, message));
       });
     });
 
-  this.connection.write(reqOpts);
+    self.connection.write(reqOpts);
+  });
 };
 
 /**
@@ -515,10 +569,16 @@ Subscription.prototype.pull = function(options, callback) {
   var reqOpts = extend({
     subscription: this.name,
   }, options);
+  delete reqOpts.gaxOpts;
 
-  this.api.Subscriber.pull(reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'pull',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
-      if (err.code !== 504) {
+      if (err.code !== 4) {
         callback(err, null, resp);
         return;
       }
@@ -564,7 +624,12 @@ Subscription.prototype.pull = function(options, callback) {
  *
  * subscription.seek(date, callback);
  */
-Subscription.prototype.seek = function(snapshot, callback) {
+Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     subscription: this.name
   };
@@ -580,19 +645,34 @@ Subscription.prototype.seek = function(snapshot, callback) {
     throw new Error('Either a snapshot name or Date is needed to seek to.');
   }
 
-  this.api.Subscriber.seek(reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'seek',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback)
 };
 
 /**
  *
  */
-Subscription.prototype.setMetadata = function(metadata, callback) {
+Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     subscription: this.name,
     updateMask: metadata
   };
 
-  this.api.Subscriber.updateSubscription(reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'updateSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**

@@ -53,7 +53,7 @@ function Topic(pubsub, name, options) {
   this.name = Topic.formatName_(pubsub.projectId, name);
   this.pubsub = pubsub;
   this.projectId = pubsub.projectId;
-  this.api = pubsub.api;
+  this.request = pubsub.request.bind(pubsub);
 
   /**
    * [IAM (Identity and Access Management)](https://cloud.google.com/pubsub/access_control)
@@ -214,12 +214,22 @@ Topic.prototype.createSubscription = function(name, options, callback) {
  *   var apiResponse = data[0];
  * });
  */
-Topic.prototype.delete = function(callback) {
+Topic.prototype.delete = function(gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     topic: this.name
   };
 
-  this.api.Publisher.deleteTopic(reqOpts, callback);
+  this.request({
+    client: 'publisherClient',
+    method: 'deleteTopic',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -244,12 +254,22 @@ Topic.prototype.delete = function(callback) {
  *   var apiResponse = data[1];
  * });
  */
-Topic.prototype.getMetadata = function(callback) {
+Topic.prototype.getMetadata = function(gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
   var reqOpts = {
     topic: this.name
   };
 
-  this.api.Publisher.getTopic(reqOpts, callback);
+  this.request({
+    client: 'publisherClient',
+    method: 'getTopic',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -303,15 +323,41 @@ Topic.prototype.getMetadata = function(callback) {
  * });
  */
 Topic.prototype.getSubscriptions = function(options, callback) {
+  var self = this;
+
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  options = options || {};
-  options.topic = this;
+  var reqOpts = extend({}, options);
+  delete reqOpts.gaxOpts;
 
-  return this.pubsub.getSubscriptions(options, callback);
+  this.request({
+    client: 'publisherClient',
+    method: 'listTopicSubscriptions',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function() {
+    var subscriptions = arguments[1];
+
+    if (subscriptions) {
+      arguments[1] = subscriptions.map(function(sub) {
+        // Depending on if we're using a subscriptions.list or
+        // topics.subscriptions.list API endpoint, we will get back a
+        // Subscription resource or just the name of the subscription.
+        var subscriptionInstance = self.subscription(sub.name || sub);
+
+        if (sub.name) {
+          subscriptionInstance.metadata = sub;
+        }
+
+        return subscriptionInstance;
+      });
+    }
+
+    callback.apply(null, arguments);
+  });
 };
 
 /**

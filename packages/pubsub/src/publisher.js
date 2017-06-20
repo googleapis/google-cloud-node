@@ -84,7 +84,11 @@ Publisher.prototype.publish_ = function(messages, done) {
     })
   };
 
-  this.api.Publisher.publish(reqOpts, function(err, resp) {
+  this.topic.request({
+    client: 'publisherClient',
+    method: 'publish',
+    reqOpts: reqOpts
+  }, function(err, resp) {
     if (err) {
       done(err);
       return;

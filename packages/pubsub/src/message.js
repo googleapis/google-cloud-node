@@ -59,6 +59,10 @@ Message.prototype.modifyAckDeadline = function(milliseconds, callback) {
       modifyDeadlineAckIds: [this.ackId],
       modifyDeadlineSeconds: [seconds]
     });
+
+    if (is.fn(callback)) {
+      setImmediate(callback);
+    }
     return;
   }
 
@@ -70,7 +74,11 @@ Message.prototype.modifyAckDeadline = function(milliseconds, callback) {
     ackDeadlineSeconds: seconds
   };
 
-  this.api.Subscriber.modifyAckDeadline(reqOpts, callback);
+  this.subscription.request({
+    client: 'subscriberClient',
+    method: 'modifyAckDeadline',
+    reqOpts: reqOpts
+  }, callback)
 };
 
 /**

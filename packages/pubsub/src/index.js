@@ -22,9 +22,10 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var googleAuth = require('google-auto-auth');
 var is = require('is');
-var path = require('path');
-var util = require('util');
+var streamEvents = require('stream-events');
+var through = require('through2');
 
 var v1 = require('./v1');
 
@@ -68,6 +69,10 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
+  this.options = extend({
+    scopes: v1.ALL_SCOPES
+  }, options);
+
   this.defaultBaseUrl_ = 'pubsub.googleapis.com';
 
   if (options.servicePath) {
@@ -78,13 +83,9 @@ function PubSub(options) {
     }
   }
 
-  this.api = {
-    Publisher: v1(options).publisherClient(options),
-    Subscriber: v1(options).subscriberClient(options)
-  };
-
-  this.options = options;
-  this.projectId = options.projectId;
+  this.api = {};
+  this.auth = googleAuth(this.options);
+  this.projectId = this.options.projectId || '{{projectId}}';
 }
 
 /**
@@ -179,6 +180,8 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
     name: subscription.name
   }, options);
 
+  delete reqOpts.gaxOpts;
+
   if (reqOpts.messageRetentionDuration) {
     reqOpts.retainAckedMessages = true;
 
@@ -194,7 +197,12 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
     };
   }
 
-  this.api.Subscriber.createSubscription(reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'createSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function(err, resp) {
     if (err && err.code !== 6) {
       callback(err, null, resp);
       return;
@@ -232,14 +240,24 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
  *   var apiResponse = data[1];
  * });
  */
-PubSub.prototype.createTopic = function(name, callback) {
+PubSub.prototype.createTopic = function(name, gaxOpts, callback) {
   var topic = this.topic(name);
 
   var reqOpts = {
     name: topic.name
   };
 
-  this.api.Publisher.createTopic(reqOpts, function(err, resp) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
+  this.request({
+    client: 'publisherClient',
+    method: 'createTopic',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -306,7 +324,14 @@ PubSub.prototype.getSnapshots = function(options, callback) {
     project: 'projects/' + this.projectId
   }, options);
 
-  this.api.Subscriber.listSnapshots(reqOpts, function() {
+  delete reqOpts.gaxOpts;
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'listSnapshots',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function() {
     var snapshots = arguments[1];
 
     if (snapshots) {
@@ -416,21 +441,28 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
     options = {};
   }
 
-  var reqOpts = extend({}, options);
-  var method;
+  var topic = options.topic;
 
-  if (options.topic) {
-    if (options.topic instanceof Topic) {
-      reqOpts.topic = options.topic.name;
+  if (topic) {
+    if (!(topic instanceof Topic)) {
+      topic = this.topic(topic);
     }
 
-    method = this.api.Publisher.listTopicSubscriptions.bind(this.api.Publisher);
-  } else {
-    reqOpts.project = 'projects/' + this.projectId;
-    method = this.api.Subscriber.listSubscriptions.bind(this.api.Subscriber);
+    return topic.getSubscriptions(options, callback);
   }
 
-  method(reqOpts, function() {
+
+  var reqOpts = extend({}, options);
+
+  reqOpts.project = 'projects/' + this.projectId;
+  delete reqOpts.gaxOpts;
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'listSubscriptions',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function() {
     var subscriptions = arguments[1];
 
     if (subscriptions) {
@@ -549,11 +581,14 @@ PubSub.prototype.getTopics = function(options, callback) {
     project: 'projects/' + this.projectId
   }, options);
 
-  var options = {
-    autoPaginate: !is.number(reqOpts.pageSize)
-  };
+  delete reqOpts.gaxOpts
 
-  this.api.Publisher.listTopics(reqOpts, options, function() {
+  this.request({
+    client: 'publisherClient',
+    method: 'listTopics',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function() {
     var topics = arguments[1];
 
     if (topics) {
@@ -596,6 +631,68 @@ PubSub.prototype.getTopics = function(options, callback) {
  *   });
  */
 PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
+
+/**
+ * Funnel all API requests through this method, to be sure we have a project ID.
+ *
+ * @param {object} config - Configuration object.
+ * @param {object} config.gaxOpts - GAX options.
+ * @param {function} config.method - The gax method to call.
+ * @param {object} config.reqOpts - Request options.
+ * @param {function=} callback - The callback function.
+ */
+PubSub.prototype.request = function(config, callback) {
+  var self = this;
+
+  if (config.returnFn) {
+    prepareGaxRequest(callback);
+  } else {
+    makeRequestCallback();
+  }
+
+  function prepareGaxRequest(callback) {
+    self.auth.getProjectId(function(err, projectId) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var gaxClient = self.api[config.client];
+
+      if (!gaxClient) {
+        // Lazily instantiate client.
+        gaxClient = v1(self.options)[config.client](self.options);
+        self.api[config.client] = gaxClient;
+      }
+
+      var reqOpts = extend(true, {}, config.reqOpts);
+      reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+
+      var requestFn = gaxClient[config.method].bind(
+        gaxClient,
+        reqOpts,
+        config.gaxOpts
+      );
+
+      callback(null, requestFn);
+    });
+  }
+
+  function makeRequestCallback() {
+    if (global.GCLOUD_SANDBOX_ENV) {
+      return;
+    }
+
+    prepareGaxRequest(function(err, requestFn) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      requestFn(callback);
+    });
+  }
+};
 
 /**
  * Create a Snapshot object. See {module:pubsub/subscription#createSnapshot} to
@@ -692,6 +789,7 @@ common.paginator.extend(PubSub, [
  */
 common.util.promisifyAll(PubSub, {
   exclude: [
+    'request',
     'snapshot',
     'subscription',
     'topic'
