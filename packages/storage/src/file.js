@@ -1629,9 +1629,9 @@ File.prototype.makePublic = function(callback) {
 };
 
 /**
- * Move this file to another location. By default, this will move the file to
- * the same bucket, but you can choose to move it to another Bucket by providing
- * a Bucket or File object or a URL beginning with "gs://".
+ * Move this file to another location. By default, this will rename the file
+ * and keep it in the same bucket, but you can choose to move it to another
+ * Bucket by providing a Bucket or File object or a URL beginning with "gs://".
  *
  * **Warning**:
  * There is currently no atomic `move` method in the Cloud Storage API,
