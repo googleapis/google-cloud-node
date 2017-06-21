@@ -25,6 +25,7 @@ var common = require('@google-cloud/common');
 var events = require('events');
 var extend = require('extend');
 var is = require('is');
+var os = require('os');
 var util = require('util');
 
 /**
@@ -154,6 +155,12 @@ function Subscription(pubsub, name, options) {
   this.connection = null;
   this.encoding = options.encoding || 'utf-8';
   this.ackDeadline = options.ackDeadline || 600;
+  this.messages_ = [];
+
+  this.flowControl = extend({
+    highWaterMark: 16,
+    maxMessages: Infinity
+  }, options.flowControl);
 
   events.EventEmitter.call(this);
 
@@ -230,13 +237,15 @@ Subscription.formatName_ = function(projectId, name) {
  * This should never be called directly.
  */
 Subscription.prototype.ack_ = function(messages, callback) {
+  var self = this;
   var ackIds = messages.reduce(function(ackIds, message) {
-    return ackIds.concat(message);
+    ackIds.push(message.ackId);
+    return ackIds;
   }, []);
 
   if (this.connection) {
     this.connection.write({ ackIds: ackIds });
-    setImmediate(callback);
+    setImmediate(onComplete);
     return;
   }
 
@@ -249,7 +258,19 @@ Subscription.prototype.ack_ = function(messages, callback) {
     client: 'subscriberClient',
     method: 'acknowledge',
     reqOpts: reqOpts
-  }, callback);
+  }, onComplete);
+
+  function onComplete(err, resp) {
+    messages.forEach(function(message) {
+      self.messages_.delete(message);
+    });
+
+    if (self.connection.isPaused()) {
+      self.connection.resume();
+    }
+
+    callback(err, resp);
+  }
 };
 
 /**
@@ -430,6 +451,15 @@ Subscription.prototype.listenForEvents_ = function() {
 /**
  *
  */
+Subscription.prototype.message_ = function(data) {
+  var message = new Message(self, data);
+  this.messages_.push(message);
+  return message;
+};
+
+/**
+ *
+ */
 Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
   var self = this;
   var reqOpts;
@@ -520,7 +550,10 @@ Subscription.prototype.openConnection_ = function() {
   this.request({
     client: 'subscriberClient',
     method: 'streamingPull',
-    returnFn: true
+    returnFn: true,
+    reqOpts: {
+      highWaterMark: self.flowControl.highWaterMark
+    }
   }, function(err, requestFn) {
     if (err) {
       self.emit('error', err);
@@ -541,9 +574,13 @@ Subscription.prototype.openConnection_ = function() {
     });
 
     self.connection.on('data', function(data) {
-      data.receivedMessages.forEach(function(message) {
-        self.emit('message', new Message(self, message));
+      arrify(data.receivedMessages).forEach(function(message) {
+        self.emit('message', self.message_(message)));
       });
+
+      if (self.messages_.length >= self.flowControl.maxMessages) {
+        self.connection.pause();
+      }
     });
 
     self.connection.write(reqOpts);

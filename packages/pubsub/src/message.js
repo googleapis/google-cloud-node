@@ -32,6 +32,7 @@ function Message(subscription, resp) {
   this.id = resp.message.messageId;
   this.data = resp.message.data;
   this.attrs = resp.message.attributes;
+  this.deadline = null;
 
   var pt = resp.message.publishTime;
   var milliseconds = parseInt(pt.nanos, 10) / 1e6;
@@ -43,17 +44,15 @@ function Message(subscription, resp) {
  *
  */
 Message.prototype.ack = function() {
-  this.subscription.ackQueue_.add([this.ackId]);
+  this.subscription.ackQueue_.add(this);
 };
 
 /**
  *
  */
 Message.prototype.modifyAckDeadline = function(milliseconds) {
-  this.subscription.modifyQueue_.add({
-    ackId: this.ackId,
-    deadline: milliseconds / 1000
-  });
+  this.deadline = milliseconds / 1000;
+  this.subscription.modifyQueue_.add(this);
 };
 
 /**
