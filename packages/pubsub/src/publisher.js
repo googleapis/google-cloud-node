@@ -51,7 +51,7 @@ function Publisher(topic, options) {
  */
 Publisher.prototype.publish = function(data, attrs, callback) {
   if (!(data instanceof Buffer)) {
-    throw new Error('Data must be in the form of a Buffer.');
+    throw new TypeError('Data must be in the form of a Buffer.');
   }
 
   if (is.fn(attrs)) {
