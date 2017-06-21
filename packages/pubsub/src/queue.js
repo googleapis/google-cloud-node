@@ -15,7 +15,7 @@
  */
 
 /*!
- * @module pubsub/batch
+ * @module pubsub/queue
  */
 
 'use strict';
@@ -23,13 +23,13 @@
 var prop = require('propprop');
 
 /**
- * Semi-generic Batch object used to queue up multiple requests while limiting
+ * Semi-generic Queue object used to queue up multiple requests while limiting
  * the number of concurrent requests.
  *
  * @constructor
- * @alias module:pubsub/batch
+ * @alias module:pubsub/queue
  *
- * @param {object} options - Batch configuration settings.
+ * @param {object} options - Queue configuration settings.
  * @param {number} options.maxBytes - Max size of data to be sent per request.
  * @param {number} options.maxMessages - Max number of messages to be sent per
  *     request.
@@ -38,10 +38,10 @@ var prop = require('propprop');
  * @param {number} options.maxRequests - Max number of concurrent requests
  *     allowed.
  * @param {function(messages, callback)} options.sendHandler - Function to be
- *     called with message batch.
+ *     called with message queue.
  *
  * @example
- * var batch = new Batch({
+ * var queue = new Queue({
  *   maxBytes: Math.pow(1024, 2) * 5,
  *   maxMessages: 1000,
  *   maxMilliseconds: 1000,
@@ -70,11 +70,10 @@ var prop = require('propprop');
  *   }
  * });
  */
-function Batch(options) {
+function Queue(options) {
   this.maxBytes = options.maxBytes || Math.pow(1024, 2) * 5;
   this.maxMessages = options.maxMessages || 1000;
   this.maxMilliseconds = options.maxMilliseconds || 1000;
-  this.maxRequests = options.maxRequests || 5;
   this.sendHandler = options.send;
 
   this.inventory = {
@@ -87,7 +86,7 @@ function Batch(options) {
       var size = 0;
 
       this.queued.forEach(function(message) {
-        size += message.size;
+        size += message.data.size;
       });
 
       return size;
@@ -95,7 +94,6 @@ function Batch(options) {
   });
 
   this.intervalHandle_ = null;
-  this.activeRequests_ = 0;
 }
 
 /**
@@ -105,32 +103,31 @@ function Batch(options) {
  * @param {function} callback - Callback to be ran once message is sent.
  *
  * @example
- * batch.add(1234, function(err, resp) {});
+ * queue.add(1234, function(err, resp) {});
  */
-Batch.prototype.add = function(data, callback) {
+Queue.prototype.add = function(data, callback) {
+  var hasMaxMessages = (this.inventory.queued.size + 1) >= this.maxMessages;
+  var hasMaxBytes = (this.inventory.queueBytes + data.size) >= this.maxBytes;
+
+  if (hasMaxMessages || hasMaxBytes) {
+    this.send(this.getNextMessageBatch());
+  } else if (!this.intervalHandle_) {
+    this.startSendInterval();
+  }
+
   this.inventory.queued.add({
     data: data,
     callback: callback
   });
-
-  var reachedMaxMessages = this.inventory.queued.size >= this.maxMessages;
-  var reachedMaxBytes = this.inventory.queueBytes >= this.maxBytes;
-  var reachedMaxRequests = this.activeRequests_ >= this.maxRequests;
-
-  if ((reachedMaxMessages || reachedMaxBytes) && !reachedMaxRequests) {
-    this.send(this.getNextMessageBatch());
-  } else if (!this.intervalHandle_) {
-    this.beginSending();
-  }
 };
 
 /**
  * Starts the send interval.
  *
  * @example
- * batch.beginSending();
+ * queue.startSendInterval();
  */
-Batch.prototype.beginSending = function() {
+Queue.prototype.startSendInterval = function() {
   if (this.intervalHandle_) {
     return;
   }
@@ -148,33 +145,18 @@ Batch.prototype.beginSending = function() {
 };
 
 /**
- * Prepares next batch of messages to be sent.
+ * Prepares next queue of messages to be sent.
  *
  * @return array
  *
  * @example
- * var messages = batch.getNextMessageBatch();
- * batch.send(messages);
+ * var messages = queue.getNextMessageBatch();
+ * queue.send(messages);
  */
-Batch.prototype.getNextMessageBatch = function() {
-  var size = 0;
-  var messages = [];
+Queue.prototype.getNextMessageBatch = function() {
+  var messages = Array.from(this.inventory.queued);
 
-  var queued = this.inventory.queued[Symbol.iterator]();
-  var message;
-
-  while (message = queued.next().value) {
-    var isOverSizeLimit = (size + message.size) > this.maxBytes;
-    var isOverMessageLimit = (messages.length + 1) > this.maxMessages;
-
-    if (isOverSizeLimit || isOverMessageLimit) {
-      break;
-    }
-
-    this.inventory.queued.delete(message);
-    messages.push(message);
-  }
-
+  this.inventory.queued.clear();
   return messages;
 };
 
@@ -189,9 +171,9 @@ Batch.prototype.getNextMessageBatch = function() {
  *   callback: function(err, resp) {}
  * }];
  *
- * batch.send(messages);
+ * queue.send(messages);
  */
-Batch.prototype.send = function(messages) {
+Queue.prototype.send = function(messages) {
   if (this.activeRequests_ >= this.maxRequests) {
     this.scheduleSend();
     return;
@@ -203,11 +185,7 @@ Batch.prototype.send = function(messages) {
     self.inventory.inFlight.add(message);
   });
 
-  this.activeRequests_ += 1;
-
   this.sendHandler(messages.map(prop('data')), function(err, resp) {
-    self.activeRequests_ -= 1;
-
     messages.forEach(function(message, i) {
       var response = resp && resp.responses ? resp.responses[i] : resp;
 
@@ -217,4 +195,4 @@ Batch.prototype.send = function(messages) {
   });
 };
 
-module.exports = Batch;
+module.exports = Queue;

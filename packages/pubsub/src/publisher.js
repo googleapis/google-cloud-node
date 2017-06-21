@@ -28,7 +28,7 @@ var is = require('is');
 /**
  *
  */
-var Batch = require('./batch.js');
+var Queue = require('./queue.js');
 
 /**
  *
@@ -39,11 +39,11 @@ function Publisher(topic, options) {
   this.topic = topic;
   this.api = topic.api;
 
-  var batchOptions = extend(options.batching, {
+  var queueOptions = extend(options.batching, {
     send: this.publish_.bind(this)
   });
 
-  this.batch_ = new Batch(batchOptions);
+  this.queue_ = new Queue(queueOptions);
 }
 
 /**
@@ -65,7 +65,7 @@ Publisher.prototype.publish = function(data, attrs, callback) {
     size: data.length
   };
 
-  this.batch_.add(message, callback);
+  this.queue_.add(message, callback);
 };
 
 /**

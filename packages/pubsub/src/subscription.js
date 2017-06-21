@@ -28,12 +28,6 @@ var is = require('is');
 var util = require('util');
 
 /**
- * @type {module:pubsub/batch}
- * @private
- */
-var Batch = require('./batch.js');
-
-/**
  * @type {module:pubsub/iam}
  * @private
  */
@@ -44,6 +38,12 @@ var IAM = require('./iam.js');
  * @private
  */
 var Message = require('./message.js');
+
+/**
+ * @type {module:pubsub/queue}
+ * @private
+ */
+var Queue = require('./queue.js');
 
 /**
  * @type {module:pubsub/snapshot}
@@ -197,11 +197,11 @@ function Subscription(pubsub, name, options) {
    */
   this.iam = new IAM(pubsub, this.name);
 
-  var batchOptions = extend(options.batching, {
+  var queueOptions = extend(options.batching, {
     send: this.ack_.bind(this)
   });
 
-  this.batch_ = new Batch(batchOptions);
+  this.queue_ = new Queue(queueOptions);
   this.listenForEvents_();
 }
 
@@ -255,7 +255,7 @@ Subscription.prototype.ack_ = function(messages, callback) {
  *
  */
 Subscription.prototype.ack = function(ackIds, callback) {
-  this.batch_.add(arrify(ackIds), callback);
+  this.queue_.add(arrify(ackIds), callback);
 };
 
 /**
