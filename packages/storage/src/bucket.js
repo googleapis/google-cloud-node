@@ -646,12 +646,15 @@ Bucket.prototype.deleteFiles = function(query, callback) {
  * //-
  * // Delete a single label.
  * //-
- * bucket.deleteLabels('label', function(err, metadata) {});
+ * bucket.deleteLabels('labelone', function(err, metadata) {});
  *
  * //-
  * // Delete a specific set of labels.
  * //-
- * bucket.deleteLabels(['label', 'labeltwo'], function(err, metadata) {});
+ * bucket.deleteLabels([
+ *   'labelone',
+ *   'labeltwo'
+ * ], function(err, metadata) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -1148,7 +1151,7 @@ Bucket.prototype.makePublic = function(options, callback) {
  *
  * @example
  * var labels = {
- *   label: 'labelvalue',
+ *   labelone: 'labelonevalue',
  *   labeltwo: 'labeltwovalue'
  * };
  *
