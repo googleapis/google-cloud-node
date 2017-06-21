@@ -20,6 +20,7 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var prop = require('propprop');
 
 /**
@@ -117,7 +118,7 @@ Queue.prototype.add = function(data, callback) {
 
   this.inventory.queued.add({
     data: data,
-    callback: callback
+    callback: callback || common.util.noop
   });
 };
 
@@ -187,9 +188,10 @@ Queue.prototype.send = function(messages) {
 
   this.sendHandler(messages.map(prop('data')), function(err, resp) {
     messages.forEach(function(message, i) {
+      var error = Array.isArray(err) ? err[i] : err;
       var response = resp && resp.responses ? resp.responses[i] : resp;
 
-      message.callback(err, response);
+      message.callback(error, response);
       self.inventory.inFlight.delete(message);
     });
   });

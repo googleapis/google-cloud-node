@@ -197,11 +197,15 @@ function Subscription(pubsub, name, options) {
    */
   this.iam = new IAM(pubsub, this.name);
 
-  var queueOptions = extend(options.batching, {
+  this.ackQueue_ = new Queue(extend({
     send: this.ack_.bind(this)
-  });
+  }, options.batching));
 
-  this.queue_ = new Queue(queueOptions);
+  this.modifyQueue_ = new Queue(extend({
+    send: this.modifyAckDeadline_.bind(this)
+  }, options.batching));
+
+
   this.listenForEvents_();
 }
 
@@ -232,10 +236,7 @@ Subscription.prototype.ack_ = function(messages, callback) {
 
   if (this.connection) {
     this.connection.write({ ackIds: ackIds });
-
-    if (is.fn(callback)) {
-      setImmediate(callback);
-    }
+    setImmediate(callback);
     return;
   }
 
@@ -249,13 +250,6 @@ Subscription.prototype.ack_ = function(messages, callback) {
     method: 'acknowledge',
     reqOpts: reqOpts
   }, callback);
-};
-
-/**
- *
- */
-Subscription.prototype.ack = function(ackIds, callback) {
-  this.queue_.add(arrify(ackIds), callback);
 };
 
 /**
@@ -431,6 +425,61 @@ Subscription.prototype.listenForEvents_ = function() {
       self.closeConnection_();
     }
   });
+};
+
+/**
+ *
+ */
+Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
+  var self = this;
+  var reqOpts;
+
+  if (this.connection) {
+    reqOpts = messages.reduce(function(reqOpts, message) {
+      message.modifyDeadlineAckIds.push(message.ackId);
+      message.modifyDeadlineSeconds.push(message.deadline);
+      return reqOpts;
+    }, {
+      modifyDeadlineAckIds: [],
+      modifyDeadlineSeconds: []
+    });
+
+    this.connection.write(reqOpts);
+    setImmediate(callback);
+    return;
+  }
+
+  var requests = groupByDeadline(messages).map(function(reqOpts) {
+    return self.request({
+      client: 'subscriberClient',
+      method: 'modifyAckDeadline',
+      reqOpts: reqOpts
+    }).catch(function(err) {
+      self.emit('error', err);
+    });
+  });
+
+  Promise.all(requests)
+    .then(callback.bind(null, null), callback);
+
+  function groupByDeadline(messages) {
+    var requests = new Map();
+
+    messages.forEach(function(message) {
+      if (!requests.has(message.deadline)) {
+        requests.set(message.deadline, {
+          subscription: self.name,
+          ackIds: [],
+          ackDeadlineSeconds: message.deadline
+        });
+      }
+
+      var request = requests.get(message.deadline);
+      request.ackIds.push(message.ackId);
+    });
+
+    return Array.from(requests.values());
+  }
 };
 
 /**

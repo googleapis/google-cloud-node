@@ -20,8 +20,6 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-
 /**
  *
  */
@@ -44,56 +42,25 @@ function Message(subscription, resp) {
 /**
  *
  */
-Message.prototype.ack = function(callback) {
-  this.subscription.ack(this.ackId, callback)
+Message.prototype.ack = function() {
+  this.subscription.ackQueue_.add([this.ackId]);
 };
 
 /**
  *
  */
-Message.prototype.modifyAckDeadline = function(milliseconds, callback) {
-  var seconds = milliseconds / 1000;
-
-  if (this.subscription.connection) {
-    this.subscription.connection.write({
-      modifyDeadlineAckIds: [this.ackId],
-      modifyDeadlineSeconds: [seconds]
-    });
-
-    if (is.fn(callback)) {
-      setImmediate(callback);
-    }
-
-    return;
-  }
-
-  callback = callback || common.util.noop;
-
-  reqOpts = {
-    subscription: this.subscription.name,
-    ackIds: [this.ackId],
-    ackDeadlineSeconds: seconds
-  };
-
-  this.subscription.request({
-    client: 'subscriberClient',
-    method: 'modifyAckDeadline',
-    reqOpts: reqOpts
-  }, callback)
+Message.prototype.modifyAckDeadline = function(milliseconds) {
+  this.subscription.modifyQueue_.add({
+    ackId: this.ackId,
+    deadline: milliseconds / 1000
+  });
 };
 
 /**
  *
  */
-Message.prototype.nack = function(callback) {
-  this.modifyAckDeadline(0, callback);
+Message.prototype.nack = function() {
+  this.modifyAckDeadline(0);
 };
-
-/*! Developer Documentation
- *
- * All async methods (except for streams) will return a Promise in the event
- * that a callback is omitted.
- */
-common.util.promisifyAll(Message);
 
 module.exports = Message;
