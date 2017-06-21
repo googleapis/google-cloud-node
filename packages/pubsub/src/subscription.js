@@ -384,7 +384,7 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
     gaxOpts: gaxOpts
   }, function(err, resp) {
     if (!err) {
-      self.closeConnection_();
+      self.removeAllListeners('message');
     }
 
     callback(err, resp);
