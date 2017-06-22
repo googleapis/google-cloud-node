@@ -155,7 +155,7 @@ function Subscription(pubsub, name, options) {
   this.connection = null;
   this.encoding = options.encoding || 'utf-8';
   this.ackDeadline = options.ackDeadline || 600;
-  this.messages_ = [];
+  this.messages_ = new Set();
 
   this.flowControl = extend({
     highWaterMark: 16,
@@ -451,9 +451,9 @@ Subscription.prototype.listenForEvents_ = function() {
 /**
  *
  */
-Subscription.prototype.message_ = function(data) {
+Subscription.prototype.createMessage_ = function(data) {
   var message = new Message(self, data);
-  this.messages_.push(message);
+  this.messages_.add(message);
   return message;
 };
 
@@ -475,7 +475,7 @@ Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
     });
 
     this.connection.write(reqOpts);
-    setImmediate(callback);
+    setImmediate(onComplete);
     return;
   }
 
@@ -490,7 +490,7 @@ Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
   });
 
   Promise.all(requests)
-    .then(callback.bind(null, null), callback);
+    .then(onComplete.bind(null, null), onComplete);
 
   function groupByDeadline(messages) {
     var requests = new Map();
@@ -509,6 +509,22 @@ Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
     });
 
     return Array.from(requests.values());
+  }
+
+  function onComplete(err, resp) {
+    messages.forEach(function(message) {
+      if (message.deadline === 0) {
+        self.messages_.delete(message);
+      }
+    });
+
+    if (self.connection.isPaused()) {
+      if (self.messages_.size < self.flowControl.maxMessages) {
+        self.connection.resume();
+      }
+    }
+
+    callback(err, resp);
   }
 };
 
@@ -581,11 +597,13 @@ Subscription.prototype.openConnection_ = function() {
 
     self.connection.on('data', function(data) {
       arrify(data.receivedMessages).forEach(function(message) {
-        self.emit('message', self.message_(message)));
+        self.emit('message', self.createMessage_(message)));
       });
 
-      if (self.messages_.length >= self.flowControl.maxMessages) {
-        self.connection.pause();
+      if (!self.connection.isPaused()) {
+        if (self.messages_.size >= self.flowControl.maxMessages) {
+          self.connection.pause();
+        }
       }
     });
 
@@ -682,7 +700,7 @@ Subscription.prototype.pull = function(options, callback) {
     }
 
     var messages = arrify(resp.receivedMessages).map(function(message) {
-      return new Message(self, message);
+      return self.createMessage_(message);
     });
 
     callback(null, messages, resp);
