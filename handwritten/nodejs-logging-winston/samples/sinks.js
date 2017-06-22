@@ -157,7 +157,7 @@ function updateSink (sinkName, filter) {
 }
 
 function deleteSink (sinkName) {
-  // [START logging_update_sink]
+  // [START logging_delete_sink]
   // Imports the Google Cloud client library
   const Logging = require('@google-cloud/logging');
 
@@ -177,7 +177,7 @@ function deleteSink (sinkName) {
     .catch((err) => {
       console.error('ERROR:', err);
     });
-  // [END logging_update_sink]
+  // [END logging_delete_sink]
 }
 
 // The command-line program
