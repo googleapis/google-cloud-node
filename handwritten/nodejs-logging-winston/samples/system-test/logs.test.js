@@ -15,53 +15,25 @@
 
 'use strict';
 
+const path = require(`path`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
-const program = require(`../logs`);
+const cwd = path.join(__dirname, `..`);
+const cmd = `node logs.js`;
 
 const logName = `nodejs-docs-samples-test-${uuid.v4()}`;
-const projectId = process.env.GCLOUD_PROJECT;
-const filter = `resource.type="global" AND logName="projects/${projectId}/logs/${logName}"`;
 const message = `Hello world!`;
 
 test.before(tools.checkCredentials);
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
 
-test.cb.serial(`should write a log entry`, (t) => {
-  const options = {
-    resource: {
-      type: `global`
-    },
-    entry: {
-      message: message
-    }
-  };
-
-  program.writeLogEntryAdvanced(logName, options, (err, apiResponse) => {
-    t.ifError(err);
-    t.not(apiResponse, undefined);
-    t.end();
-  });
+test.serial(`should write a log entry`, async (t) => {
+  const output = await tools.runAsync(`${cmd} write ${logName} '{"type":"global"}' '{"message":"${message}"}'`, cwd);
+  t.is(output, `Wrote to ${logName}`);
 });
 
-test.serial(`should list log entries`, async (t) => {
-  t.plan(0);
-  await tools.tryTest(async (assert) => {
-    const entries = await program.listLogEntriesAdvanced(filter, 5, null);
-    assert(entries.some((entry) => entry.data && entry.data.message === message));
-  }).start();
-});
-
-test.cb.serial(`should delete a log`, (t) => {
-  program.deleteLog(logName, (err, apiResponse) => {
-    // Ignore "Not Found" error
-    if (err && err.code !== 5) {
-      t.ifError(err);
-      t.not(apiResponse, undefined);
-    }
-    t.end();
-  });
+test.serial(`should write a simple log entry`, async (t) => {
+  const output = await tools.runAsync(`${cmd} write-simple ${logName}`, cwd);
+  t.is(output, `Wrote to ${logName}`);
 });

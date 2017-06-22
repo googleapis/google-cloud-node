@@ -15,30 +15,31 @@
 
 'use strict';
 
-// [START setup]
-// By default, the client will authenticate using the service account file
-// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
-// the project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/latest/guides/authentication
-var Logging = require('@google-cloud/logging');
-// [END setup]
+function writeLogEntry (logName) {
+  // [START logging_write_log_entry]
+  // Imports the Google Cloud client library
+  const Logging = require('@google-cloud/logging');
 
-function writeLogEntry (logName, callback) {
-  var logging = Logging();
-  var log = logging.log(logName);
+  // Instantiates a client
+  const logging = Logging();
+
+  // The log to write to, e.g. "my-log"
+  // const logName = "my-log";
+
+  const log = logging.log(logName);
 
   // Modify this resource to match a resource in your project
   // See https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
-  var resource = {
+  const resource = {
     // This example targets the "global" resource for simplicity
     type: 'global'
   };
 
   // A text log entry
-  var entry = log.entry({ resource: resource }, 'Hello, world!');
+  const entry = log.entry({ resource: resource }, 'Hello, world!');
 
   // A structured log entry
-  var secondEntry = log.entry({ resource: resource }, {
+  const secondEntry = log.entry({ resource: resource }, {
     name: 'King Arthur',
     quest: 'Find the Holy Grail',
     favorite_color: 'Blue'
@@ -46,110 +47,190 @@ function writeLogEntry (logName, callback) {
 
   // Save the two log entries. You can write entries one at a time, but it is
   // best to write multiple entires together in a batch.
-  log.write([
-    entry,
-    secondEntry
-  ], function (err, apiResponse) {
-    if (err) {
-      return callback(err);
-    }
-
-    console.log('Wrote to %s', logName);
-    return callback(null, apiResponse);
-  });
+  log.write([entry, secondEntry])
+    .then(() => {
+      console.log(`Wrote to ${logName}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+  // [END logging_write_log_entry]
 }
 
-function writeLogEntryAdvanced (logName, options, callback) {
-  var logging = Logging();
-  var log = logging.log(logName);
+function loggingBunyan () {
+  // [START logging_bunyan]
+  const bunyan = require('bunyan');
+
+  // Imports the Google Cloud client library for Bunyan
+  const LoggingBunyan = require('@google-cloud/logging-bunyan');
+
+  // Instantiates a client
+  const loggingBunyan = LoggingBunyan();
+
+  // Create a Bunyan logger that streams to Stackdriver Logging
+  const logger = bunyan.createLogger({
+    name: 'my-service',
+    streams: [
+      loggingBunyan.stream('info')
+    ]
+  });
+
+  // Writes some log entries
+  logger.error('warp nacelles offline');
+  logger.info('shields at 99%');
+  // [END logging_bunyan]
+}
+
+function loggingWinston () {
+  // [START logging_winston]
+  const winston = require('winston');
+
+  // Imports the Google Cloud client library for Winston
+  const LoggingWinston = require('@google-cloud/logging-winston');
+
+  // Adds a transport that streams to Stackdriver Logging
+  winston.add(LoggingWinston, {
+    level: 'info' // log at 'warn' and above
+  });
+
+  // Writes some log entries
+  winston.error('warp nacelles offline');
+  winston.info('shields at 99%');
+  // [END logging_winston]
+}
+
+function writeLogEntryAdvanced (logName, options) {
+  // [START logging_write_log_entry_advanced]
+  // Imports the Google Cloud client library
+  const Logging = require('@google-cloud/logging');
+
+  // Instantiates a client
+  const logging = Logging();
+
+  // The log to write to, e.g. "my-log"
+  // const logName = "my-log";
+
+  // The request options
+  // const options = {
+  //   resource: {...},
+  //   entry: 'Hello, world!'
+  // };
+
+  const log = logging.log(logName);
 
   // Prepare the entry
-  var entry = log.entry({ resource: options.resource }, options.entry);
+  const entry = log.entry({ resource: options.resource }, options.entry);
 
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/log?method=write
-  log.write(entry, function (err, apiResponse) {
-    if (err) {
-      return callback(err);
-    }
-
-    console.log('Wrote entry to log: %s', logName);
-    return callback(null, apiResponse);
-  });
+  log.write(entry)
+    .then(() => {
+      console.log(`Wrote to ${logName}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+  // [END logging_write_log_entry_advanced]
 }
 
-function listLogEntries (logName, callback) {
-  var logging = Logging();
-  var log = logging.log(logName);
+function listLogEntries (logName) {
+  // [START logging_list_log_entries]
+  // Imports the Google Cloud client library
+  const Logging = require('@google-cloud/logging');
+
+  // Instantiates a client
+  const logging = Logging();
+
+  // The log from which to list entries, e.g. "my-log"
+  // const logName = "my-log";
+
+  const log = logging.log(logName);
 
   // List the most recent entries for a given log
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging?method=getEntries
-  log.getEntries(function (err, entries) {
-    if (err) {
-      return callback(err);
-    }
+  log.getEntries()
+    .then((results) => {
+      const entries = results[0];
 
-    console.log('Found %d entries!', entries.length);
-    return callback(null, entries);
-  });
+      console.log('Logs:');
+      entries.forEach((entry) => {
+        const metadata = entry.metadata;
+        console.log(`${metadata.timestamp}:`, metadata[metadata.payload]);
+      });
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+  // [END logging_list_log_entries]
 }
 
 function listLogEntriesAdvanced (filter, pageSize, orderBy) {
-  var logging = Logging();
-  var options = {};
+  // [START logging_list_log_entries_advanced]
+  // Imports the Google Cloud client library
+  const Logging = require('@google-cloud/logging');
 
-  if (filter) {
-    // See https://cloud.google.com/logging/docs/view/advanced_filters for more filter information.
-    options.filter = filter;
-  }
-  if (pageSize) {
-    options.pageSize = pageSize;
-  }
-  if (orderBy) {
-    options.orderBy = orderBy;
-  }
+  // Instantiates a client
+  const logging = Logging();
+
+  // Filter results, e.g. "severity=ERROR"
+  // See https://cloud.google.com/logging/docs/view/advanced_filters for more filter information.
+  // const filter = 'severity=ERROR';
+
+  // const pageSize = 5;
+
+  // Sort results
+  // const orderBy = 'timestamp';
+
+  const options = {
+    filter: filter,
+    pageSize: pageSize,
+    orderBy: orderBy
+  };
 
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging?method=getEntries
-  return logging.getEntries(options)
+  logging.getEntries(options)
     .then((results) => {
       const entries = results[0];
-      console.log('Found %d entries!', entries.length);
-      return entries;
+
+      console.log('Logs:');
+      entries.forEach((entry) => {
+        const metadata = entry.metadata;
+        console.log(`${metadata.timestamp}:`, metadata[metadata.payload]);
+      });
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
+  // [START logging_list_log_entries_advanced]
 }
 
-function deleteLog (logName, callback) {
-  var logging = Logging();
-  var log = logging.log(logName);
+function deleteLog (logName) {
+  // [START logging_delete_log]
+  // Imports the Google Cloud client library
+  const Logging = require('@google-cloud/logging');
+
+  // Instantiates a client
+  const logging = Logging();
+
+  // The log to delete, e.g. "my-log"
+  // const logName = "my-log";
+
+  const log = logging.log(logName);
 
   // Deletes a logger and all its entries.
   // Note that a deletion can take several minutes to take effect.
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/log?method=delete
-  log.delete(function (err, apiResponse) {
-    if (err) {
-      return callback(err);
-    }
-
-    console.log('Deleted log: %s', logName);
-    return callback(null, apiResponse);
-  });
+  log.delete()
+    .then(() => {
+      console.log(`Deleted log: ${logName}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+  // [END logging_delete_log]
 }
 
 // The command-line program
-var cli = require('yargs');
-
-var program = module.exports = {
-  writeLogEntry: writeLogEntry,
-  writeLogEntryAdvanced: writeLogEntryAdvanced,
-  listLogEntries: listLogEntries,
-  listLogEntriesAdvanced: listLogEntriesAdvanced,
-  deleteLog: deleteLog,
-  main: (args) => {
-    // Run the command-line program
-    cli.help().strict().parse(args).argv; // eslint-disable-line
-  }
-};
-
-cli
+const cli = require(`yargs`)
   .demand(1)
   .command('list', 'Lists log entries, optionally filtering, limiting, and sorting results.', {
     filter: {
@@ -171,34 +252,47 @@ cli
       description: 'Sort results.'
     }
   }, (opts) => {
-    program.listLogEntriesAdvanced(opts.filter, opts.limit, opts.sort);
+    listLogEntriesAdvanced(opts.filter, opts.limit, opts.sort);
   })
+  .command('list-simple <logName>', 'Lists log entries.', {}, (opts) => listLogEntries(opts.logName))
   .command('write <logName> <resource> <entry>', 'Writes a log entry to the specified log.', {}, (opts) => {
     try {
       opts.resource = JSON.parse(opts.resource);
     } catch (err) {
-      return console.error('"resource" must be a valid JSON string!');
+      console.error('"resource" must be a valid JSON string!');
+      return;
     }
 
     try {
       opts.entry = JSON.parse(opts.entry);
     } catch (err) {}
 
-    program.writeLogEntryAdvanced(opts.logName, opts, console.log);
+    writeLogEntryAdvanced(opts.logName, opts);
+  })
+  .command('write-simple <logName>', 'Writes a basic log entry to the specified log.', {}, (opts) => {
+    writeLogEntry(opts.logName);
+  })
+  .command('bunyan', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, () => {
+    loggingBunyan();
+  })
+  .command('winston', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, () => {
+    loggingWinston();
   })
   .command('delete <logName>', 'Deletes the specified Log.', {}, (opts) => {
-    program.deleteLog(opts.logName, console.log);
+    deleteLog(opts.logName);
   })
   .example('node $0 list', 'List all log entries.')
   .example('node $0 list -f "severity=ERROR" -s "timestamp" -l 2', 'List up to 2 error entries, sorted by timestamp ascending.')
-  .example('node $0 list -f \'logName="my-log"\' -l 2', 'List up to 2 log entries from the "my-log" log.')
+  .example(`node $0 list -f 'logName="my-log"' -l 2`, 'List up to 2 log entries from the "my-log" log.')
   .example('node $0 write my-log \'{"type":"gae_app","labels":{"module_id":"default"}}\' \'"Hello World!"\'', 'Write a string log entry.')
   .example('node $0 write my-log \'{"type":"global"}\' \'{"message":"Hello World!"}\'', 'Write a JSON log entry.')
   .example('node $0 delete my-log', 'Delete "my-log".')
   .wrap(120)
   .recommendCommands()
-  .epilogue('For more information, see https://cloud.google.com/logging/docs');
+  .epilogue(`For more information, see https://cloud.google.com/logging/docs`)
+  .help()
+  .strict();
 
 if (module === require.main) {
-  program.main(process.argv.slice(2));
+  cli.parse(process.argv.slice(2));
 }

@@ -15,13 +15,15 @@
 
 'use strict';
 
-const logging = require(`@google-cloud/logging`)();
-const storage = require(`@google-cloud/storage`)();
+const logging = require('@google-cloud/logging')();
+const path = require(`path`);
+const storage = require('@google-cloud/storage')();
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
-const program = require(`../sinks`);
+const cwd = path.join(__dirname, `..`);
+const cmd = `node sinks.js`;
 
 const bucketName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const sinkName = `nodejs-docs-samples-test-${uuid.v4()}`;
@@ -41,87 +43,41 @@ test.after.always(async (t) => {
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
-
-test.cb.serial(`should create a new sink`, (t) => {
-  program.createSink(sinkName, bucketName, filter, (err, sink, apiResponse) => {
-    t.ifError(err);
-    t.truthy(sink);
-    t.is(sink.name, sinkName);
-    t.not(apiResponse, undefined);
-    t.end();
-  });
+test.serial(`should create a sink`, async (t) => {
+  const output = await tools.runAsync(`${cmd} create ${sinkName} ${bucketName} "${filter}"`, cwd);
+  t.is(output, `Created sink ${sinkName} to ${bucketName}`);
+  const [metadata] = await logging.sink(sinkName).getMetadata();
+  t.is(metadata.name, sinkName);
+  t.is(metadata.destination.includes(bucketName), true);
+  t.is(metadata.filter, filter);
 });
 
-test.cb.serial(`should get the metadata for a sink`, (t) => {
-  const expected = {
-    name: sinkName,
-    destination: `storage.googleapis.com/${bucketName}`,
-    filter: filter,
-    outputVersionFormat: `V2`,
-    writerIdentity: `serviceAccount:cloud-logs@system.gserviceaccount.com`
-  };
-
-  program.getSinkMetadata(sinkName, (err, metadata) => {
-    t.ifError(err);
-    for (let key in expected) {
-      t.is(metadata[key], expected[key]);
-    }
-    t.end();
-  });
+test.serial(`should get a sink`, async (t) => {
+  const output = await tools.runAsync(`${cmd} get ${sinkName}`, cwd);
+  t.is(output.includes(sinkName), true);
 });
 
 test.serial(`should list sinks`, async (t) => {
-  await tools.tryTest(async () => {
-    await new Promise((resolve, reject) => {
-      program.listSinks((err, sinks) => {
-        try {
-          t.ifError(err);
-          t.true(Array.isArray(sinks));
-          t.true(sinks.some((sink) => sink.name === sinkName));
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
+  t.plan(0);
+  await tools.tryTest(async (assert) => {
+    const output = await tools.runAsync(`${cmd} list`, cwd);
+    assert(output.includes(`Sinks:`));
+    assert(output.includes(sinkName));
   }).start();
 });
 
-test.cb.serial(`should update metdata for a sink`, (t) => {
-  const newFilter = `severity > ALERT`;
-  const expected = {
-    name: sinkName,
-    destination: `storage.googleapis.com/${bucketName}`,
-    filter: newFilter,
-    outputVersionFormat: `V2`,
-    writerIdentity: `serviceAccount:cloud-logs@system.gserviceaccount.com`
-  };
-
-  program.updateSink(sinkName, newFilter, (err, apiResponse) => {
-    t.ifError(err);
-    t.not(apiResponse, undefined);
-
-    program.getSinkMetadata(sinkName, (err, metadata) => {
-      t.ifError(err);
-      for (let key in expected) {
-        t.is(metadata[key], expected[key]);
-      }
-      t.end();
-    });
-  });
+test.serial(`should update a sink`, async (t) => {
+  const newFilter = 'severity >= WARNING';
+  const output = await tools.runAsync(`${cmd} update ${sinkName} "${newFilter}"`, cwd);
+  t.is(output, `Sink ${sinkName} updated.`);
+  const [metadata] = await logging.sink(sinkName).getMetadata();
+  t.is(metadata.name, sinkName);
+  t.is(metadata.destination.includes(bucketName), true);
+  t.is(metadata.filter, newFilter);
 });
 
-test.cb.serial(`should delete a sink`, (t) => {
-  program.deleteSink(sinkName, (err, apiResponse) => {
-    t.ifError(err);
-    t.not(apiResponse, undefined);
-
-    program.getSinkMetadata(sinkName, (err) => {
-      t.truthy(err);
-      t.true(err.code === 404 || err.code === 5);
-      t.end();
-    });
-  });
+test.serial(`should delete a sink`, async (t) => {
+  const output = await tools.runAsync(`${cmd} delete ${sinkName}`, cwd);
+  t.is(output, `Sink ${sinkName} deleted.`);
+  await t.throws(logging.sink(sinkName).getMetadata());
 });

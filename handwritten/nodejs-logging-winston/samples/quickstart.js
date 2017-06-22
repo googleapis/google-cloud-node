@@ -23,14 +23,14 @@ const Logging = require('@google-cloud/logging');
 const projectId = 'YOUR_PROJECT_ID';
 
 // Instantiates a client
-const loggingClient = Logging({
+const logging = Logging({
   projectId: projectId
 });
 
 // The name of the log to write to
 const logName = 'my-log';
 // Selects the log to write to
-const log = loggingClient.log(logName);
+const log = logging.log(logName);
 
 // The data to write to the log
 const text = 'Hello, world!';
