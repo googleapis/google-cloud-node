@@ -94,7 +94,7 @@ function loggingWinston () {
   // Adds a transport that streams to Stackdriver Logging
   // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
   winston.add(LoggingWinston, {
-    level: 'info' // log at 'warn' and above
+    level: 'info' // log at 'info' and above
   });
 
   // Writes some log entries
