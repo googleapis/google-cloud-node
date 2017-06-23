@@ -64,17 +64,22 @@ function loggingBunyan () {
   // Imports the Google Cloud client library for Bunyan
   const LoggingBunyan = require('@google-cloud/logging-bunyan');
 
-  // Instantiates a client
+  // Instantiates a Bunyan Stackdriver Logging client
   const loggingBunyan = LoggingBunyan();
 
   // Create a Bunyan logger that streams to Stackdriver Logging
   // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/bunyan_log"
   const logger = bunyan.createLogger({
-    // The JSON payload of the log as it appears in Stackdriver
-    // Logging will contain "name": "my-service"
-    name: 'my-service', 
+    // The JSON payload of the log as it appears in Stackdriver Logging
+    // will contain "name": "my-service"
+    name: 'my-service',
+    // log at 'info' and above
+    level: 'info',
     streams: [
-      loggingBunyan.stream('info')
+      // Log to the console
+      { stream: process.stdout },
+      // And log to Stackdriver Logging
+      loggingBunyan.stream()
     ]
   });
 
@@ -87,19 +92,30 @@ function loggingBunyan () {
 function loggingWinston () {
   // [START logging_winston]
   const winston = require('winston');
+  const Logger = winston.Logger;
+  const Console = winston.transports.Console;
 
   // Imports the Google Cloud client library for Winston
   const LoggingWinston = require('@google-cloud/logging-winston');
 
-  // Adds a transport that streams to Stackdriver Logging
+  // Instantiates a Winston Stackdriver Logging client
+  const loggingWinston = LoggingWinston();
+
+  // Create a Winston logger that streams to Stackdriver Logging
   // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
-  winston.add(LoggingWinston, {
-    level: 'info' // log at 'info' and above
+  const logger = new Logger({
+    level: 'info', // log at 'info' and above
+    transports: [
+      // Log to the console
+      new Console(),
+      // And log to Stackdriver Logging
+      loggingWinston
+    ]
   });
 
   // Writes some log entries
-  winston.error('warp nacelles offline');
-  winston.info('shields at 99%');
+  logger.error('warp nacelles offline');
+  logger.info('shields at 99%');
   // [END logging_winston]
 }
 
@@ -119,17 +135,17 @@ function bunyanSetupExplicit () {
 
 function winstonSetupExplicit () {
   // [START logging_winston_setup_explicit]
-  const winston = require('winston');
-
   // Imports the Google Cloud client library for Winston
   const LoggingWinston = require('@google-cloud/logging-winston');
 
-  winston.add(LoggingWinston, {
+  // Instantiates a client
+  const loggingWinston = LoggingWinston({
     projectId: 'your-project-id',
-    keyFilename: '/path/to/key.json',
-    level: 'info' // log at 'info' and above
+    keyFilename: '/path/to/key.json'
   });
+
   // [END logging_winston_setup_explicit]
+  console.log(loggingWinston);
 }
 
 function writeLogEntryAdvanced (logName, options) {
