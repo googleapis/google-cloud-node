@@ -130,8 +130,7 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {Object} request.document
- *   Input document. Currently, `analyzeSentiment` only supports English text
- *   ({@link Document.language}="EN").
+ *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
  * @param {number=} request.encodingType
