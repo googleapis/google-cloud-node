@@ -35,7 +35,6 @@ var Bucket = Storage.Bucket;
 var File = Storage.File;
 
 describe('storage', function() {
-  var IS_CI = env.projectId === 'long-door-651';
   var TESTS_PREFIX = 'gcloud-test-';
 
   var storage = new Storage(env);
@@ -61,13 +60,6 @@ describe('storage', function() {
   });
 
   after(function(done) {
-    if (IS_CI) {
-      // The system tests account is unable to delete files.
-      // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-      done();
-      return;
-    }
-
     storage.getBuckets({
       prefix: TESTS_PREFIX
     }, function(err, buckets) {
@@ -499,6 +491,13 @@ describe('storage', function() {
     });
 
     describe('buckets', function() {
+      var bucket;
+
+      before(function() {
+        bucket = storage.bucket(generateName('bucket'));
+        return bucket.create();
+      });
+
       it('should get a policy', function(done) {
         bucket.iam.getPolicy(function(err, policy) {
           assert.ifError(err);
@@ -524,38 +523,36 @@ describe('storage', function() {
       });
 
       it('should set a policy', function(done) {
-        var policy = {
-          bindings: [
-            {
-              role: 'roles/storage.legacyBucketReader',
-              members: [
-                'allUsers'
-              ]
-            }
-          ]
-        };
-
-        bucket.iam.setPolicy(policy, function(err, newPolicy) {
+        bucket.iam.getPolicy(function(err, policy) {
           assert.ifError(err);
-          assert.deepEqual(newPolicy.bindings, policy.bindings);
-          done();
+
+          policy.bindings.push({
+            role: 'roles/storage.legacyBucketReader',
+            members: [
+              'allUsers'
+            ]
+          });
+
+          bucket.iam.setPolicy(policy, function(err, newPolicy) {
+            assert.ifError(err);
+            assert.deepEqual(newPolicy.bindings, policy.bindings);
+            done();
+          });
         });
       });
 
       it('should test the iam permissions', function(done) {
         var testPermissions = [
           'storage.buckets.get',
-
-          // Unable to test.
-          // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-          // 'storage.buckets.getIamPolicy'
+          'storage.buckets.getIamPolicy'
         ];
 
         bucket.iam.testPermissions(testPermissions, function(err, permissions) {
           assert.ifError(err);
 
           assert.deepEqual(permissions, {
-            'storage.buckets.get': true
+            'storage.buckets.get': true,
+            'storage.buckets.getIamPolicy': true
           });
 
           done();
@@ -610,12 +607,6 @@ describe('storage', function() {
 
   describe('bucket metadata', function() {
     it('should allow setting metadata on a bucket', function(done) {
-      if (IS_CI) {
-        // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-        this.skip();
-        return;
-      }
-
       var metadata = {
         website: {
           mainPageSuffix: 'http://fakeuri',
@@ -631,8 +622,7 @@ describe('storage', function() {
     });
   });
 
-  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-  (IS_CI ? describe.skip : describe)('write/read/remove files', function() {
+  describe('write, read, and remove files', function() {
     before(function(done) {
       function setHash(filesKey, done) {
         var file = FILES[filesKey];
@@ -1074,8 +1064,7 @@ describe('storage', function() {
     });
   });
 
-  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-  (IS_CI ? describe.skip : describe)('combine files', function() {
+  describe('combine files', function() {
     it('should combine multiple files into one', function(done) {
       var files = [
         { file: bucket.file('file-one.txt'), contents: '123' },
@@ -1107,8 +1096,7 @@ describe('storage', function() {
     });
   });
 
-  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-  (IS_CI ? describe.skip : describe)('list files', function() {
+  describe('list files', function() {
     var NEW_FILES = [
       bucket.file('CloudLogo1'),
       bucket.file('CloudLogo2'),
@@ -1262,7 +1250,7 @@ describe('storage', function() {
     });
   });
 
-  (IS_CI ? describe.skip : describe)('sign urls', function() {
+  describe('sign urls', function() {
     var localFile = fs.readFileSync(FILES.logo.path);
     var file;
 
@@ -1310,8 +1298,7 @@ describe('storage', function() {
     });
   });
 
-  // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/2224
-  (IS_CI ? describe.skip : describe)('sign policy', function() {
+  describe('sign policy', function() {
     var file;
 
     before(function(done) {
