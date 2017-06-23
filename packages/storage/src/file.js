@@ -1742,7 +1742,7 @@ File.prototype.move = function(destination, options, callback) {
       return;
     }
 
-    self.delete(function(err, apiResponse) {
+    self.delete(options, function(err, apiResponse) {
       callback(err, destinationFile, apiResponse);
     });
   });

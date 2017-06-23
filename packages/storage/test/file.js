@@ -2386,12 +2386,27 @@ describe('File', function() {
         });
       });
 
+      it('should pass options to delete', function(done) {
+        var options = {};
+
+        file.copy = function(destination, options, callback) {
+          callback();
+        };
+
+        file.delete = function(options_) {
+          assert.strictEqual(options_, options);
+          done();
+        };
+
+        file.move('new-filename', options, assert.ifError);
+      });
+
       it('should fail if delete fails', function(done) {
         var error = new Error('Error.');
         file.copy = function(destination, options, callback) {
           callback();
         };
-        file.delete = function(callback) {
+        file.delete = function(options, callback) {
           callback(error);
         };
         file.move('new-filename', function(err) {

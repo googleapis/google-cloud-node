@@ -21,6 +21,7 @@ var async = require('async');
 var crypto = require('crypto');
 var extend = require('extend');
 var fs = require('fs');
+var is = require('is');
 var normalizeNewline = require('normalize-newline');
 var path = require('path');
 var prop = require('propprop');
@@ -30,6 +31,7 @@ var tmp = require('tmp');
 var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
+var util = require('@google-cloud/common').util;
 
 var Storage = require('../');
 var Bucket = Storage.Bucket;
@@ -75,26 +77,6 @@ describe('storage', function() {
       if (err) {
         done(err);
         return;
-      }
-
-      function deleteBucket(bucket, callback) {
-        // After files are deleted, eventual consistency may require a bit of a
-        // delay to ensure that the bucket recognizes that the files don't exist
-        // anymore.
-        var CONSISTENCY_DELAY_MS = 250;
-
-        bucket.deleteFiles({
-          versions: true
-        }, function(err) {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          setTimeout(function() {
-            bucket.delete(callback);
-          }, CONSISTENCY_DELAY_MS);
-        });
       }
 
       async.eachLimit(buckets, 10, deleteBucket, done);
@@ -225,7 +207,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          writeToFile(bucket.file(generateName() + '.txt'), content, callback);
+          bucket.file(generateName() + '.txt').save(content, callback);
         }
 
         function isFilePublic(file, callback) {
@@ -280,7 +262,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          writeToFile(bucket.file(generateName() + '.txt'), content, callback);
+          bucket.file(generateName() + '.txt').save(content, callback);
         }
 
         function isFilePrivate(file, callback) {
@@ -738,8 +720,15 @@ describe('storage', function() {
       });
     });
 
+    // These tests will verify that the requesterPays functionality works from
+    // the perspective of another project.
     describe('existing bucket', function() {
-      var bucket;
+      var storageNonWhitelist = new Storage({
+        projectId: env.nonWhitelistProjectId,
+        keyFilename: env.nonWhitelistKeyFilename
+      });
+      var bucket; // the source bucket, which will have requesterPays enabled.
+      var bucketNonWhitelist; // the bucket object from the requesting user.
 
       function isRequesterPaysEnabled(callback) {
         bucket.getMetadata(function(err, metadata) {
@@ -755,6 +744,7 @@ describe('storage', function() {
 
       before(function(done) {
         bucket = storage.bucket(generateName());
+        bucketNonWhitelist = storageNonWhitelist.bucket(bucket.name);
         bucket.create(done);
       });
 
@@ -794,6 +784,177 @@ describe('storage', function() {
             });
           });
         });
+      });
+
+      describe('methods that accept userProject', function() {
+        var file;
+        var USER_PROJECT_OPTIONS = {
+          userProject: env.nonWhitelistProjectId
+        };
+
+        // This acts as a test for the following methods:
+        //
+        // - file.save()
+        //   -> file.createWriteStream()
+        before(function() {
+          file = bucketNonWhitelist.file(generateName('file'));
+
+          return bucket.enableRequesterPays()
+            .then(() => bucket.iam.getPolicy())
+            .then(data => {
+              var policy = data[0];
+              var clientEmail = require(env.nonWhitelistKeyFilename)
+                .client_email;
+
+              policy.bindings.push({
+                role: 'roles/storage.admin',
+                members: [`serviceAccount:${clientEmail}`]
+              });
+
+              return bucket.iam.setPolicy(policy);
+            })
+            .then(() => file.save('abc', USER_PROJECT_OPTIONS));
+        });
+
+        // This acts as a test for the following methods:
+        //
+        //  - bucket.delete({ userProject: ... })
+        //    -> bucket.deleteFiles({ userProject: ... })
+        //       -> bucket.getFiles({ userProject: ... })
+        //          -> file.delete({ userProject: ... })
+        after(function(done) {
+          deleteBucket(bucketNonWhitelist, USER_PROJECT_OPTIONS, done);
+        });
+
+        function doubleTest(testFunction) {
+          var failureMessage =
+            'Bucket is requester pays bucket but no user project provided.';
+
+          return function(done) {
+            async.series([
+              function(next) {
+                testFunction({}, function(err) {
+                  assert.strictEqual(err.message, failureMessage);
+                  next();
+                });
+              },
+
+              function(next) {
+                testFunction(USER_PROJECT_OPTIONS, next);
+              }
+            ], done);
+          };
+        }
+
+        it('bucket#combine', function(done) {
+          var files = [
+            { file: bucketNonWhitelist.file('file-one.txt'), contents: '123' },
+            { file: bucketNonWhitelist.file('file-two.txt'), contents: '456' }
+          ];
+
+          async.each(files, createFile, function(err) {
+            assert.ifError(err);
+
+            var sourceFiles = files.map(prop('file'));
+            var destinationFile = bucketNonWhitelist.file('file-one-n-two.txt');
+
+            bucketNonWhitelist.combine(
+              sourceFiles,
+              destinationFile,
+              USER_PROJECT_OPTIONS,
+              done
+            );
+          });
+
+          function createFile(fileObject, callback) {
+            fileObject.file.save(
+              fileObject.contents,
+              USER_PROJECT_OPTIONS,
+              callback
+            );
+          }
+        });
+
+        it('bucket#exists', doubleTest(function(options, done) {
+          bucketNonWhitelist.exists(options, done);
+        }));
+
+        it('bucket#get', doubleTest(function(options, done) {
+          bucketNonWhitelist.get(options, done);
+        }));
+
+        it('bucket#getMetadata', doubleTest(function(options, done) {
+          bucketNonWhitelist.get(options, done);
+        }));
+
+        it('bucket#makePrivate', doubleTest(function(options, done) {
+          bucketNonWhitelist.makePrivate(options, done);
+        }));
+
+        it('bucket#setMetadata', doubleTest(function(options, done) {
+          bucketNonWhitelist.setMetadata({ newMetadata: true }, options, done);
+        }));
+
+        it('bucket#upload', doubleTest(function(options, done) {
+          bucketNonWhitelist.upload(FILES.big.path, options, done);
+        }));
+
+        it('file#copy', doubleTest(function(options, done) {
+          file.copy('new-file.txt', options, done);
+        }));
+
+        it.skip('file#createReadStream', doubleTest(function(options, done) {
+          file.createReadStream(options)
+            .on('error', done)
+            .on('end', done)
+            .on('data', util.noop);
+        }));
+
+        it('file#createResumableUpload', doubleTest(function(opts, done) {
+          file.createResumableUpload(opts, done);
+        }));
+
+        it.skip('file#download', doubleTest(function(options, done) {
+          file.download(options, done);
+        }));
+
+        it('file#exists', doubleTest(function(options, done) {
+          file.exists(options, done);
+        }));
+
+        it('file#get', doubleTest(function(options, done) {
+          file.get(options, done);
+        }));
+
+        it('file#getMetadata', doubleTest(function(options, done) {
+          file.getMetadata(options, done);
+        }));
+
+        it('file#makePrivate', doubleTest(function(options, done) {
+          file.makePrivate(options, done);
+        }));
+
+        it('file#move', doubleTest(function(options, done) {
+          var newFile = bucketNonWhitelist.file(generateName('file'));
+
+          file.move(newFile, options, function(err) {
+            if (err) {
+              done(err);
+              return;
+            }
+
+            // Re-create the file. The tests need it.
+            file.save('newcontent', done);
+          });
+        }));
+
+        it('file#setMetadata', doubleTest(function(options, done) {
+          file.setMetadata({ newMetadata: true }, options, done);
+        }));
+
+        it('file#setStorageClass', doubleTest(function(options, done) {
+          file.setStorageClass('multi-regional', options, done);
+        }));
       });
     });
   });
@@ -1269,7 +1430,7 @@ describe('storage', function() {
       });
 
       function createFile(fileObject, callback) {
-        writeToFile(fileObject.file, fileObject.contents, callback);
+        fileObject.file.save(fileObject.contents, callback);
       }
     });
   });
@@ -1373,7 +1534,7 @@ describe('storage', function() {
     it('should overwrite file, then get older version', function(done) {
       var versionedFile = bucketWithVersioning.file(generateName());
 
-      writeToFile(versionedFile, 'a', function(err) {
+      versionedFile.save('a', function(err) {
         assert.ifError(err);
 
         versionedFile.getMetadata(function(err, metadata) {
@@ -1381,7 +1542,7 @@ describe('storage', function() {
 
           var initialGeneration = metadata.generation;
 
-          writeToFile(versionedFile, 'b', function(err) {
+          versionedFile.save('b', function(err) {
             assert.ifError(err);
 
             var firstGenFile = bucketWithVersioning.file(versionedFile.name, {
@@ -1424,7 +1585,7 @@ describe('storage', function() {
       });
 
       function createFile(fileObject, callback) {
-        writeToFile(fileObject.file, fileObject.contents, callback);
+        fileObject.file.save(fileObject.contents, callback);
       }
     });
   });
@@ -1531,18 +1692,38 @@ describe('storage', function() {
     });
   });
 
+  function deleteBucket(bucket, options, callback) {
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
+
+    // After files are deleted, eventual consistency may require a bit of a
+    // delay to ensure that the bucket recognizes that the files don't exist
+    // anymore.
+    var CONSISTENCY_DELAY_MS = 250;
+
+    options = extend({}, options, {
+      versions: true
+    });
+
+    bucket.deleteFiles(options, function(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      setTimeout(function() {
+        bucket.delete(options, callback);
+      }, CONSISTENCY_DELAY_MS);
+    });
+  }
+
   function deleteFile(file, callback) {
     file.delete(callback);
   }
 
   function generateName() {
     return TESTS_PREFIX + uuid.v1();
-  }
-
-  function writeToFile(file, contents, callback) {
-    var writeStream = file.createWriteStream();
-    writeStream.once('error', callback);
-    writeStream.once('finish', callback.bind(null, null));
-    writeStream.end(contents);
   }
 });
