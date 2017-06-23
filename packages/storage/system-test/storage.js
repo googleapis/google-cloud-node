@@ -35,7 +35,7 @@ var Bucket = Storage.Bucket;
 var File = Storage.File;
 
 describe('storage', function() {
-  var TESTS_PREFIX = 'gcloud-test-';
+  var TESTS_PREFIX = 'gcloud-tests-';
 
   var storage = new Storage(env);
   var bucket = storage.bucket(generateName());
@@ -535,7 +535,14 @@ describe('storage', function() {
 
           bucket.iam.setPolicy(policy, function(err, newPolicy) {
             assert.ifError(err);
-            assert.deepEqual(newPolicy.bindings, policy.bindings);
+
+            var legacyBucketReaderBinding = newPolicy.bindings
+              .filter(function(binding) {
+                return binding.role === 'roles/storage.legacyBucketReader';
+              })[0];
+
+            assert(legacyBucketReaderBinding.members.includes('allUsers'));
+
             done();
           });
         });
