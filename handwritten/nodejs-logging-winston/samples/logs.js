@@ -68,8 +68,11 @@ function loggingBunyan () {
   const loggingBunyan = LoggingBunyan();
 
   // Create a Bunyan logger that streams to Stackdriver Logging
+  // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/bunyan_log"
   const logger = bunyan.createLogger({
-    name: 'my-service',
+    // The JSON payload of the log as it appears in Stackdriver
+    // Logging will contain "name": "my-service"
+    name: 'my-service', 
     streams: [
       loggingBunyan.stream('info')
     ]
@@ -89,6 +92,7 @@ function loggingWinston () {
   const LoggingWinston = require('@google-cloud/logging-winston');
 
   // Adds a transport that streams to Stackdriver Logging
+  // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
   winston.add(LoggingWinston, {
     level: 'info' // log at 'warn' and above
   });
