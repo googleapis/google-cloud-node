@@ -2716,7 +2716,7 @@ var spanner = new Spanner(env);
           transaction.run('SELECT * FROM TxnTable', function(err, rows) {
             assert.ifError(err);
 
-            assert.strictEqual(rows.length, 1);
+            assert.strictEqual(rows.length, 2);
 
             var row = rows[0].toJSON();
 
@@ -2747,7 +2747,7 @@ var spanner = new Spanner(env);
       it('should accept an exact staleness', function(done) {
         var options = {
           readOnly: true,
-          exactStaleness: 4
+          exactStaleness: Math.ceil((Date.now() - records[2].timestamp) / 1000)
         };
 
         database.runTransaction(options, function(err, transaction) {
@@ -2757,9 +2757,7 @@ var spanner = new Spanner(env);
             assert.ifError(err);
             assert.strictEqual(rows.length, 2);
 
-            rows = rows.map(function(row) {
-              return row.toJSON();
-            });
+            rows = rows.map(exec('toJSON'));
 
             assert.strictEqual(rows[0].Key, 'k0');
             assert.strictEqual(rows[0].StringValue, 'v0');
@@ -2835,19 +2833,21 @@ var spanner = new Spanner(env);
           transaction.run(query, function(err, rows) {
             assert.ifError(err);
 
-            var row = rows[0].toJSON();
+            var originalRows = extend(true, {}, rows);
 
+            // Make arbitrary update.
             table.update({
-              Key: row.Key,
-              StringValue: 'v33'
+              Key: rows[0].toJSON().Key,
+              StringValue: 'overridden value'
             }, function(err) {
               assert.ifError(err);
 
               transaction.run(query, function(err, rows_) {
                 assert.ifError(err);
 
-                var row = rows_.pop().toJSON();
-                assert.strictEqual(row.StringValue, 'v3');
+                rows_ = extend(true, {}, rows_);
+
+                assert.deepStrictEqual(rows_, originalRows);
 
                 transaction.end(done);
               });
@@ -2859,7 +2859,7 @@ var spanner = new Spanner(env);
       it('should read with staleness & concurrent updates', function(done) {
         var options = {
           readOnly: true,
-          exactStaleness: 6
+          exactStaleness: Math.ceil((Date.now() - records[1].timestamp) / 1000)
         };
 
         database.runTransaction(options, function(err, transaction) {
@@ -2869,13 +2869,13 @@ var spanner = new Spanner(env);
 
           transaction.run(query, function(err, rows) {
             assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
 
             table.update({
               Key: 'k4',
-              StringValue: 'v444'
+              StringValue: 'overridden value'
             }, function(err) {
               assert.ifError(err);
-              assert.strictEqual(rows.length, 1);
 
               transaction.run(query, function(err, rows) {
                 assert.ifError(err);
