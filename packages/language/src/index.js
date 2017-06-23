@@ -20,6 +20,7 @@ var gapic = {
   v1: require('./v1'),
   v1beta2: require('./v1beta2')
 };
+var gaxGrpc = require('google-gax').grpc();
 
 const VERSION = require('../package.json').version;
 
@@ -73,6 +74,23 @@ function languageV1beta2(options) {
   return client;
 }
 
+var v1Protos = {};
+
+extend(v1Protos, gaxGrpc.load([{
+  root: require('google-proto-files')('..'),
+  file: 'google/cloud/language/v1/language_service.proto'
+}]).google.cloud.language.v1);
+
+var v1beta2Protos = {};
+
+extend(v1beta2Protos, gaxGrpc.load([{
+  root: require('google-proto-files')('..'),
+  file: 'google/cloud/language/v1beta2/language_service.proto'
+}]).google.cloud.language.v1beta2);
+
 module.exports = languageV1;
+module.exports.types = v1Protos;
 module.exports.v1 = languageV1;
+module.exports.v1.types = v1Protos;
 module.exports.v1beta2 = languageV1beta2;
+module.exports.v1beta2.types = v1beta2Protos;
