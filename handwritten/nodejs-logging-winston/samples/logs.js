@@ -103,6 +103,35 @@ function loggingWinston () {
   // [END logging_winston]
 }
 
+function bunyanSetupExplicit () {
+  // [START logging_bunyan_setup_explicit]
+  // Imports the Google Cloud client library for Bunyan
+  const LoggingBunyan = require('@google-cloud/logging-bunyan');
+
+  // Instantiates a client
+  const loggingBunyan = LoggingBunyan({
+    projectId: 'your-project-id',
+    keyFilename: '/path/to/key.json'
+  });
+  // [END logging_bunyan_setup_explicit]
+  console.log(loggingBunyan);
+}
+
+function winstonSetupExplicit () {
+  // [START logging_winston_setup_explicit]
+  const winston = require('winston');
+
+  // Imports the Google Cloud client library for Winston
+  const LoggingWinston = require('@google-cloud/logging-winston');
+
+  winston.add(LoggingWinston, {
+    projectId: 'your-project-id',
+    keyFilename: '/path/to/key.json',
+    level: 'info' // log at 'info' and above
+  });
+  // [END logging_winston_setup_explicit]
+}
+
 function writeLogEntryAdvanced (logName, options) {
   // [START logging_write_log_entry_advanced]
   // Imports the Google Cloud client library
@@ -276,12 +305,10 @@ const cli = require(`yargs`)
   .command('write-simple <logName>', 'Writes a basic log entry to the specified log.', {}, (opts) => {
     writeLogEntry(opts.logName);
   })
-  .command('bunyan', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, () => {
-    loggingBunyan();
-  })
-  .command('winston', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, () => {
-    loggingWinston();
-  })
+  .command('bunyan', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, loggingBunyan)
+  .command('bunyan-setup', 'Setup up the Bunyan logger with explicit credentianls.', {}, bunyanSetupExplicit)
+  .command('winston', 'Writes some logs entries to Stackdriver Logging via Winston.', {}, loggingWinston)
+  .command('winston-setup', 'Setup up the Winston logger with explicit credentianls.', {}, winstonSetupExplicit)
   .command('delete <logName>', 'Deletes the specified Log.', {}, (opts) => {
     deleteLog(opts.logName);
   })
