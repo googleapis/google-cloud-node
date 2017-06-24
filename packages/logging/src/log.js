@@ -509,9 +509,6 @@ Log.prototype.warning = function(entry, options, callback) {
 /**
  * Write log entries to Stackdriver Logging.
  *
- * While you may write a single entry at a time, batching multiple entries
- * together is preferred to avoid reaching the queries per second limit.
- *
  * @resource [entries.write API Documentation]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/entries/write}
  *
  * @param {module:logging/entry|module:logging/entry[]} entry - A log entry, or
