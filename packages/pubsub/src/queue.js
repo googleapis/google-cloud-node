@@ -109,7 +109,7 @@ function Queue(options) {
  * queue.add(1234, function(err, resp) {});
  */
 Queue.prototype.add = function(data, callback) {
-  var hasMaxMessages = (this.inventory.queued.size + 1) >= this.maxMessages;
+  var hasMaxMessages = this.inventory.queued.size >= this.maxMessages;
   var hasMaxBytes = (this.inventory.queueBytes + data.size) >= this.maxBytes;
 
   if (hasMaxMessages || hasMaxBytes) {
