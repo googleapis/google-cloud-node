@@ -798,7 +798,7 @@ describe('Database', function() {
 
   describe('runTransaction', function() {
     it('should get a Transaction object', function(done) {
-      database.getTransaction_ = function() {
+      database.getTransaction = function() {
         done();
       };
 
@@ -808,7 +808,7 @@ describe('Database', function() {
     it('should execute callback with error', function(done) {
       var error = new Error('Error.');
 
-      database.getTransaction_ = function(options, callback) {
+      database.getTransaction = function(options, callback) {
         callback(error);
       };
 
@@ -831,7 +831,7 @@ describe('Database', function() {
         return fakeDate;
       };
 
-      database.getTransaction_ = function(options, callback) {
+      database.getTransaction = function(options, callback) {
         assert.deepEqual(options, OPTIONS);
         callback(null, TRANSACTION);
       };
@@ -855,7 +855,7 @@ describe('Database', function() {
         timeout: 1000
       };
 
-      database.getTransaction_ = function(options, callback) {
+      database.getTransaction = function(options, callback) {
         callback(null, TRANSACTION);
       };
 
@@ -1045,7 +1045,7 @@ describe('Database', function() {
     });
   });
 
-  describe('getTransaction_', function() {
+  describe('getTransaction', function() {
     describe('write mode', function() {
       it('should get a session from the pool', function(done) {
         var error = new Error('Error.');
@@ -1058,7 +1058,7 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(function(err, transaction_) {
+        database.getTransaction(function(err, transaction_) {
           assert.strictEqual(err, error);
           assert.strictEqual(transaction_, transaction);
           done();
@@ -1079,7 +1079,7 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(OPTIONS, assert.ifError);
+        database.getTransaction(OPTIONS, assert.ifError);
       });
 
       it('should return an error if could not get session', function(done) {
@@ -1091,7 +1091,7 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(OPTIONS, function(err) {
+        database.getTransaction(OPTIONS, function(err) {
           assert.strictEqual(err, error);
           done();
         });
@@ -1121,7 +1121,7 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(OPTIONS, assert.ifError);
+        database.getTransaction(OPTIONS, assert.ifError);
       });
 
       it('should begin a transaction', function(done) {
@@ -1141,7 +1141,7 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(OPTIONS, function(err, transaction) {
+        database.getTransaction(OPTIONS, function(err, transaction) {
           assert.ifError(err);
           assert.strictEqual(transaction, TRANSACTION);
           done();
@@ -1150,11 +1150,15 @@ describe('Database', function() {
 
       it('should return an error if transaction cannot begin', function(done) {
         var error = new Error('err');
+        var endCalled = false;
 
         var SESSION = {};
         var TRANSACTION = {
           begin: function(callback) {
             callback(error);
+          },
+          end: function() {
+            endCalled = true;
           }
         };
 
@@ -1167,8 +1171,9 @@ describe('Database', function() {
           }
         };
 
-        database.getTransaction_(OPTIONS, function(err) {
+        database.getTransaction(OPTIONS, function(err) {
           assert.strictEqual(err, error);
+          assert.strictEqual(endCalled, true);
           done();
         });
       });

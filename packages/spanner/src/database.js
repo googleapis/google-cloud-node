@@ -400,6 +400,77 @@ Database.prototype.getSchema = function(callback) {
 };
 
 /**
+ * Get a read/write ready Transaction object.
+ *
+ * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
+ * @param {number} options.timeout - Specify a timeout for the transaction. The
+ *     transaction will be ran in its entirety, however if an abort error is
+ *     returned the transaction will be retried if the timeout has not been met.
+ *     Default: `60000` (milliseconds)
+ * @param {boolean} options.readOnly - Specifies if the transaction is
+ *     read-only. Default: `false`.
+ * @param {number} options.exactStaleness - Executes all reads at the timestamp
+ *     that is `exactStaleness` old.
+ * @param {date} options.readTimestamp - Execute all reads at the given
+ *     timestamp.
+ * @param {boolean} options.returnTimestamp - If `true`, returns the read
+ *     timestamp.
+ * @param {boolean} options.strong - Read at the timestamp where all previously
+ *     committed transactions are visible.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while getting the
+ *     transaction object.
+ * @param {module:spanner/transaction} transaction - The transaction object.
+ *
+ * @example
+ * database.getTransaction(function(err, transaction) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * database.getTransaction().then(function(data) {
+ *   var transaction = data[0];
+ * });
+ */
+Database.prototype.getTransaction = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = null;
+  }
+
+  if (!options || !options.readOnly) {
+    this.pool_.getWriteSession(function(err, session, transaction) {
+      callback(err, transaction);
+    });
+    return;
+  }
+
+  this.pool_.getSession(function(err, session) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    options = extend({}, options);
+    delete options.readOnly;
+
+    var transaction = self.pool_.createTransaction_(session, options);
+
+    transaction.begin(function(err) {
+      if (err) {
+        transaction.end();
+        callback(err);
+        return;
+      }
+
+      callback(null, transaction);
+    });
+  });
+};
+
+/**
  * Execute a SQL statement on this database.
  *
  * @resource [Query Syntax](https://cloud.google.com/spanner/docs/query-syntax)
@@ -811,7 +882,7 @@ Database.prototype.runTransaction = function(options, runFn) {
 
   options = extend({}, options);
 
-  this.getTransaction_(options, function(err, transaction) {
+  this.getTransaction(options, function(err, transaction) {
     if (err) {
       runFn(err);
       return;
@@ -1002,66 +1073,6 @@ Database.prototype.createSession_ = function(options, callback) {
  */
 Database.prototype.getSession_ = function(callback) {
   this.pool_.getSession(callback);
-};
-
-/**
- * Get a read/write ready Transaction object.
- *
- * @private
- *
- * @param {object=} options - Transaction options.
- * @param {boolean} options.readOnly - Specifies if the transaction is read
- *     only.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while getting the
- *     transaction object.
- * @param {module:spanner/transaction} transaction - The transaction object.
- *
- * @example
- * database.getTransaction(function(err, transaction) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * database.getTransaction().then(function(data) {
- *   var transaction = data[0];
- * });
- */
-Database.prototype.getTransaction_ = function(options, callback) {
-  var self = this;
-
-  if (is.fn(options)) {
-    callback = options;
-    options = null;
-  }
-
-  if (!options || !options.readOnly) {
-    this.pool_.getWriteSession(function(err, session, transaction) {
-      callback(err, transaction);
-    });
-    return;
-  }
-
-  this.pool_.getSession(function(err, session) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    options = extend({}, options);
-    delete options.readOnly;
-
-    var transaction = self.pool_.createTransaction_(session, options);
-
-    transaction.begin(function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      callback(null, transaction);
-    });
-  });
 };
 
 /**

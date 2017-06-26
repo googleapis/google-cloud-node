@@ -325,7 +325,7 @@ Transaction.prototype.request = function(config, callback) {
   delete reqOpts.gaxOptions;
 
   config.method(reqOpts, gaxOptions, function(err, resp) {
-    if (!err || err.code !== ABORTED) {
+    if (!self.runFn_ || !err || err.code !== ABORTED) {
       callback(err, resp);
       return;
     }

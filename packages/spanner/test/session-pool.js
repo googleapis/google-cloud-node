@@ -940,7 +940,7 @@ describe('SessionPool', function() {
 
         sessionPool.requestStream(CONFIG)
           .on('data', function(data) {
-            assert.strictEqual(data, responseData);
+            assert.deepEqual(data, responseData);
             done();
           });
 
