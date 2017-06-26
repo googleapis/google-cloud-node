@@ -903,15 +903,15 @@ describe('storage', function() {
           file.copy('new-file.txt', options, done);
         }));
 
-        it.skip('file#createReadStream', doubleTest(function(options, done) {
+        it.only('file#createReadStream', doubleTest(function(options, done) {
           file.createReadStream(options)
             .on('error', done)
             .on('end', done)
             .on('data', util.noop);
         }));
 
-        it('file#createResumableUpload', doubleTest(function(opts, done) {
-          file.createResumableUpload(opts, done);
+        it('file#createResumableUpload', doubleTest(function(options, done) {
+          file.createResumableUpload(options, done);
         }));
 
         it.skip('file#download', doubleTest(function(options, done) {
