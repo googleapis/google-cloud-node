@@ -402,9 +402,21 @@ Database.prototype.getSchema = function(callback) {
 /**
  * Get a read/write ready Transaction object.
  *
- * @param {object=} options - Transaction options.
- * @param {boolean} options.readOnly - Specifies if the transaction is read
- *     only.
+ * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
+ * @param {number} options.timeout - Specify a timeout for the transaction. The
+ *     transaction will be ran in its entirety, however if an abort error is
+ *     returned the transaction will be retried if the timeout has not been met.
+ *     Default: `60000` (milliseconds)
+ * @param {boolean} options.readOnly - Specifies if the transaction is
+ *     read-only. Default: `false`.
+ * @param {number} options.exactStaleness - Executes all reads at the timestamp
+ *     that is `exactStaleness` old.
+ * @param {date} options.readTimestamp - Execute all reads at the given
+ *     timestamp.
+ * @param {boolean} options.returnTimestamp - If `true`, returns the read
+ *     timestamp.
+ * @param {boolean} options.strong - Read at the timestamp where all previously
+ *     committed transactions are visible.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while getting the
  *     transaction object.
@@ -448,6 +460,7 @@ Database.prototype.getTransaction = function(options, callback) {
 
     transaction.begin(function(err) {
       if (err) {
+        transaction.end();
         callback(err);
         return;
       }

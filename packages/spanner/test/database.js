@@ -1150,11 +1150,15 @@ describe('Database', function() {
 
       it('should return an error if transaction cannot begin', function(done) {
         var error = new Error('err');
+        var endCalled = false;
 
         var SESSION = {};
         var TRANSACTION = {
           begin: function(callback) {
             callback(error);
+          },
+          end: function() {
+            endCalled = true;
           }
         };
 
@@ -1169,6 +1173,7 @@ describe('Database', function() {
 
         database.getTransaction(OPTIONS, function(err) {
           assert.strictEqual(err, error);
+          assert.strictEqual(endCalled, true);
           done();
         });
       });
