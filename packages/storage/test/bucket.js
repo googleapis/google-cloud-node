@@ -1164,10 +1164,21 @@ describe('Bucket', function() {
       bucket.getLabels(assert.ifError);
     });
 
+    it('should accept an options object', function(done) {
+      var options = {};
+
+      bucket.getMetadata = function(options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.getLabels(options, assert.ifError);
+    });
+
     it('should return error from getMetadata', function(done) {
       var error = new Error('Error.');
 
-      bucket.getMetadata = function(callback) {
+      bucket.getMetadata = function(options, callback) {
         callback(error);
       };
 
@@ -1184,7 +1195,7 @@ describe('Bucket', function() {
         }
       };
 
-      bucket.getMetadata = function(callback) {
+      bucket.getMetadata = function(options, callback) {
         callback(null, metadata);
       };
 
@@ -1198,7 +1209,7 @@ describe('Bucket', function() {
     it('should return empty object if no labels exist', function(done) {
       var metadata = {};
 
-      bucket.getMetadata = function(callback) {
+      bucket.getMetadata = function(options, callback) {
         callback(null, metadata);
       };
 
@@ -1424,12 +1435,24 @@ describe('Bucket', function() {
     it('should correctly call setMetadata', function(done) {
       var labels = {};
 
-      bucket.setMetadata = function(metadata, callback) {
+      bucket.setMetadata = function(metadata, options, callback) {
         assert.strictEqual(metadata.labels, labels);
         callback(); // done()
       };
 
       bucket.setLabels(labels, done);
+    });
+
+    it('should accept an options object', function(done) {
+      var labels = {};
+      var options = {};
+
+      bucket.setMetadata = function(metadata, options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.setLabels(labels, options, done);
     });
   });
 

@@ -1310,7 +1310,6 @@ Bucket.prototype.makePublic = function(options, callback) {
 };
 
 /**
-<<<<<<< HEAD
  * Set labels on the bucket.
  *
  * This makes an underlying call to {module:storage/bucket#setMetadata}, which
@@ -1318,7 +1317,11 @@ Bucket.prototype.makePublic = function(options, callback) {
  * unmentioned labels will not be touched.
  *
  * @param {type} labels - Labels to set on the bucket.
- * @param {function} callback - The callback function.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.metadata - The bucket's metadata.
  *
@@ -1333,7 +1336,26 @@ Bucket.prototype.makePublic = function(options, callback) {
  *     // Labels set successfully.
  *   }
  * });
-=======
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.setLabels(labels).then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+Bucket.prototype.setLabels = function(labels, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  callback = callback || common.util.noop;
+
+  this.setMetadata({labels}, options, callback);
+};
+
+/**
  * Set the bucket's metadata.
  *
  * @resource [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
@@ -1368,19 +1390,10 @@ Bucket.prototype.makePublic = function(options, callback) {
  *     enabled: true
  *   }
  * }, function(err, apiResponse) {});
->>>>>>> storage: introduce requesterPays
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
-<<<<<<< HEAD
- * bucket.setLabels(labels).then(function(data) {
- *   var metadata = data[0];
- * });
- */
-Bucket.prototype.setLabels = function(labels, callback) {
-  this.setMetadata({labels}, callback);
-=======
  * bucket.setMetadata(metadata).then(function(data) {
  *   var apiResponse = data[0];
  * });
@@ -1410,7 +1423,6 @@ Bucket.prototype.setMetadata = function(metadata, options, callback) {
 
     callback(null, resp);
   });
->>>>>>> storage: introduce requesterPays
 };
 
 /**
