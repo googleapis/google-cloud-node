@@ -72,8 +72,10 @@ var prop = require('propprop');
  * });
  */
 function Queue(options) {
-  this.maxBytes = options.maxBytes || Math.pow(1024, 2) * 5;
-  this.maxMessages = options.maxMessages || 1000;
+  var maxBytes = options.maxBytes || Math.pow(1024, 2) * 5;
+
+  this.maxBytes = Math.min(maxBytes, Math.pow(1024, 2) * 9);
+  this.maxMessages = Math.min(options.maxMessages || 1000, 1000);
   this.maxMilliseconds = options.maxMilliseconds || 1000;
   this.sendHandler = options.send;
 
