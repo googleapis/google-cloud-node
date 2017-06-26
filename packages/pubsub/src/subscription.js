@@ -466,8 +466,8 @@ Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
 
   if (this.connection) {
     reqOpts = messages.reduce(function(reqOpts, message) {
-      message.modifyDeadlineAckIds.push(message.ackId);
-      message.modifyDeadlineSeconds.push(message.deadline);
+      reqOpts.modifyDeadlineAckIds.push(message.ackId);
+      reqOpts.modifyDeadlineSeconds.push(message.deadline / 1000);
       return reqOpts;
     }, {
       modifyDeadlineAckIds: [],
@@ -500,7 +500,7 @@ Subscription.prototype.modifyAckDeadline_ = function(messages, callback) {
         requests.set(message.deadline, {
           subscription: self.name,
           ackIds: [],
-          ackDeadlineSeconds: message.deadline
+          ackDeadlineSeconds: message.deadline / 1000
         });
       }
 

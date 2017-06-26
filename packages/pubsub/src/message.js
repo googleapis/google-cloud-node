@@ -51,7 +51,7 @@ Message.prototype.ack = function() {
  *
  */
 Message.prototype.modifyAckDeadline = function(milliseconds) {
-  this.deadline = milliseconds / 1000;
+  this.deadline = milliseconds;
   this.subscription.modifyQueue_.add(this);
 };
 
