@@ -627,6 +627,75 @@ Bucket.prototype.deleteFiles = function(query, callback) {
   });
 };
 
+
+/**
+ * Delete one or more labels from this bucket.
+ *
+ * @param {string=|string[]=} labels - The labels to delete. If no labels are
+ *     provided, all of the labels are removed.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.metadata - The bucket's metadata.
+ *
+ * @example
+ * //-
+ * // Delete all of the labels from this bucket.
+ * //-
+ * bucket.deleteLabels(function(err, metadata) {});
+ *
+ * //-
+ * // Delete a single label.
+ * //-
+ * bucket.deleteLabels('labelone', function(err, metadata) {});
+ *
+ * //-
+ * // Delete a specific set of labels.
+ * //-
+ * bucket.deleteLabels([
+ *   'labelone',
+ *   'labeltwo'
+ * ], function(err, metadata) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.deleteLabels().then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+Bucket.prototype.deleteLabels = function(labels, callback) {
+  var self = this;
+
+  if (is.fn(labels)) {
+    callback = labels;
+    labels = [];
+  }
+
+  labels = arrify(labels);
+
+  if (labels.length === 0) {
+    this.getLabels(function(err, labels) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      deleteLabels(Object.keys(labels));
+    });
+  } else {
+    deleteLabels(labels);
+  }
+
+  function deleteLabels(labels) {
+    var nullLabelMap = labels.reduce(function(nullLabelMap, labelKey) {
+      nullLabelMap[labelKey] = null;
+      return nullLabelMap;
+    }, {});
+
+    self.setLabels(nullLabelMap, callback);
+  }
+};
+
 /**
  * Create a File object. See {module:storage/file} to see how to handle
  * the different use cases you may have.
@@ -793,6 +862,43 @@ Bucket.prototype.getFiles = function(query, callback) {
  *   });
  */
 Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
+
+/**
+ * Get the labels from this bucket.
+ *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.labels - The labels currently set on this bucket.
+ *
+ * @example
+ * bucket.getLabels(function(err, labels) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // labels = {
+ *   //   label: 'labelValue',
+ *   //   ...
+ *   // }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.getLabels().then(function(data) {
+ *   var labels = data[0];
+ * });
+ */
+Bucket.prototype.getLabels = function(callback) {
+  this.getMetadata(function(err, metadata) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, metadata.labels || {});
+  });
+};
 
 /**
  * Make the bucket listing private.
@@ -1029,6 +1135,41 @@ Bucket.prototype.makePublic = function(options, callback) {
 
     self.makeAllFilesPublicPrivate_(options, done);
   }
+};
+
+/**
+ * Set labels on the bucket.
+ *
+ * This makes an underlying call to {module:storage/bucket#setMetadata}, which
+ * is a PATCH request. This means an individual label can be overwritten, but
+ * unmentioned labels will not be touched.
+ *
+ * @param {type} labels - Labels to set on the bucket.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.metadata - The bucket's metadata.
+ *
+ * @example
+ * var labels = {
+ *   labelone: 'labelonevalue',
+ *   labeltwo: 'labeltwovalue'
+ * };
+ *
+ * bucket.setLabels(labels, function(err, metadata) {
+ *   if (!err) {
+ *     // Labels set successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.setLabels(labels).then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+Bucket.prototype.setLabels = function(labels, callback) {
+  this.setMetadata({labels}, callback);
 };
 
 /**

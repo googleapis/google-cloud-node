@@ -19,6 +19,7 @@
 var assert = require('assert');
 var async = require('async');
 var crypto = require('crypto');
+var extend = require('extend');
 var fs = require('fs');
 var normalizeNewline = require('normalize-newline');
 var path = require('path');
@@ -627,6 +628,89 @@ describe('storage', function() {
         assert.ifError(err);
         assert.deepEqual(meta.website, metadata.website);
         done();
+      });
+    });
+
+    describe('labels', function() {
+      var LABELS = {
+        label: 'labelvalue', // no caps or spaces allowed (?)
+        labeltwo: 'labelvaluetwo'
+      };
+
+      beforeEach(function(done) {
+        bucket.deleteLabels(done);
+      });
+
+      it('should set labels', function(done) {
+        bucket.setLabels(LABELS, function(err) {
+          assert.ifError(err);
+
+          bucket.getLabels(function(err, labels) {
+            assert.ifError(err);
+            assert.deepStrictEqual(labels, LABELS);
+            done();
+          });
+        });
+      });
+
+      it('should update labels', function(done) {
+        var newLabels = {
+          siblinglabel: 'labelvalue'
+        };
+
+        bucket.setLabels(LABELS, function(err) {
+          assert.ifError(err);
+
+          bucket.setLabels(newLabels, function(err) {
+            assert.ifError(err);
+
+            bucket.getLabels(function(err, labels) {
+              assert.ifError(err);
+              assert.deepStrictEqual(labels, extend({}, LABELS, newLabels));
+              done();
+            });
+          });
+        });
+      });
+
+      it('should delete a single label', function(done) {
+        if (LABELS.length <= 1) {
+          done(new Error('Maintainer Error: `LABELS` needs 2 labels.'));
+          return;
+        }
+
+        var labelKeyToDelete = Object.keys(LABELS)[0];
+
+        bucket.setLabels(LABELS, function(err) {
+          assert.ifError(err);
+
+          bucket.deleteLabels(labelKeyToDelete, function(err) {
+            assert.ifError(err);
+
+            bucket.getLabels(function(err, labels) {
+              assert.ifError(err);
+
+              var expectedLabels = extend({}, LABELS);
+              delete expectedLabels[labelKeyToDelete];
+
+              assert.deepStrictEqual(labels, expectedLabels);
+
+              done();
+            });
+          });
+        });
+      });
+
+      it('should delete all labels', function(done) {
+        bucket.deleteLabels(function(err) {
+          assert.ifError(err);
+
+          bucket.getLabels(function(err, labels) {
+            assert.ifError(err);
+            assert.deepStrictEqual(labels, {});
+            done();
+          });
+        });
       });
     });
   });
