@@ -440,7 +440,7 @@ function makeRequest(reqOpts, config, callback) {
     }
   };
 
-  console.log(JSON.stringify(reqOpts, null, 2))
+  // console.log(JSON.stringify(reqOpts, null, 2))
 
   if (config.stream) {
     var dup = config.stream;

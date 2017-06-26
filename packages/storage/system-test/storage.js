@@ -698,6 +698,7 @@ describe('storage', function() {
   });
 
   describe('requester pays', function() {
+    var HAS_2ND_PROJECT = is.defined(env.nonWhitelistProjectId);
     var bucket;
 
     before(function(done) {
@@ -722,7 +723,7 @@ describe('storage', function() {
 
     // These tests will verify that the requesterPays functionality works from
     // the perspective of another project.
-    describe('existing bucket', function() {
+    (HAS_2ND_PROJECT ? describe : describe.skip)('existing bucket', function() {
       var storageNonWhitelist = new Storage({
         projectId: env.nonWhitelistProjectId,
         keyFilename: env.nonWhitelistKeyFilename
