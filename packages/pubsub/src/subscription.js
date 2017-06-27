@@ -159,7 +159,7 @@ function Subscription(pubsub, name, options) {
   this.ackDeadline = options.ackDeadline || 10000;
 
   this.inventory_ = {
-    lease: new Set(),
+    lease: [],
     ack: [],
     nack: []
   };
@@ -247,7 +247,7 @@ Subscription.prototype.ack_ = function(message) {
     return;
   }
 
-  this.inventory_.ack.push(message);
+  this.inventory_.ack.push(message.ackId);
   this.setFlushTimeout_();
 };
 
@@ -255,13 +255,14 @@ Subscription.prototype.ack_ = function(message) {
  *
  */
 Subscription.prototype.breakLease_ = function(message) {
-  this.inventory_.lease.delete(message);
+  var messageIndex = this.inventory_.lease.indexOf(message.ackId);
+  this.inventory_.lease.splice(0, messageIndex);
 
   if (this.connection && this.connection.isPaused()) {
     this.connection.resume();
   }
 
-  if (!this.inventory_.lease.size) {
+  if (!this.inventory_.lease.length) {
     clearTimeout(this.leaseTimeoutHandle_);
     this.leaseTimeoutHandle_ = null;
   }
@@ -420,17 +421,15 @@ Subscription.prototype.flushQueues_ = function() {
   this.inventory_.ack = [];
   this.inventory_.nack = [];
 
-  var getAckId = prop('ackId');
-
   if (this.connection) {
     var reqOpts = {};
 
     if (acks.length) {
-      reqOpts.ackIds = acks.map(getAckId);
+      reqOpts.ackIds = acks;
     }
 
     if (nacks.length) {
-      reqOpts.modifyDeadlineAckIds = nacks.map(getAckId);
+      reqOpts.modifyDeadlineAckIds = nacks;
       reqOpts.modifyDeadlineSeconds = Array(nacks.length).fill(0);
     }
 
@@ -446,7 +445,7 @@ Subscription.prototype.flushQueues_ = function() {
       method: 'acknowledge',
       reqOpts: {
         subscription: this.name,
-        ackIds: acks.map(getAckId)
+        ackIds: acks
       }
     }, function(err) {
       if (err) {
@@ -461,7 +460,7 @@ Subscription.prototype.flushQueues_ = function() {
       method: 'modifyAckDeadline',
       reqOpts: {
         subscription: this.name,
-        ackIds: nacks.map(getAckId),
+        ackIds: nacks,
         ackDeadlineSeconds: 0
       }
     }, function(err) {
@@ -503,7 +502,7 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
 Subscription.prototype.leaseMessage_ = function(data) {
   var message = new Message(this, data);
 
-  this.inventory_.lease.add(message);
+  this.inventory_.lease.push(message.ackId);
   this.setLeaseTimeout_();
 
   return message;
@@ -580,7 +579,7 @@ Subscription.prototype.nack_ = function(message) {
     return;
   }
 
-  this.inventory_.nack.push(message);
+  this.inventory_.nack.push(message.ackId);
   this.setFlushTimeout_();
 }
 
@@ -633,7 +632,7 @@ Subscription.prototype.openConnection_ = function() {
         self.emit('message', self.leaseMessage_(message));
       });
 
-      if (self.inventory_.lease.size >= self.flowControl.maxMessages) {
+      if (self.inventory_.lease.length >= self.flowControl.maxMessages) {
         connection.pause();
       }
     });
@@ -669,12 +668,11 @@ Subscription.prototype.renewLeases_ = function() {
 
   this.leaseTimeoutHandle_ = null;
 
-  if (!this.inventory_.lease.size) {
+  if (!this.inventory_.lease.length) {
     return;
   }
 
-  var ackIds = Array.from(this.inventory_.lease).map(prop('ackId'));
-
+  var ackIds = this.inventory_.lease;
   this.ackDeadline = this.histogram.percentile(99);
   var ackDeadlineSeconds = this.ackDeadline / 1000;
 

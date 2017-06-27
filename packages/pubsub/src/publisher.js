@@ -24,6 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
+var prop = require('propprop');
 
 /**
  *
@@ -108,6 +109,8 @@ Publisher.prototype.publish_ = function() {
   var self = this;
 
   var messages = this.inventory_.queued;
+  var callbacks = messages.map(prop('callback'));
+
   this.inventory_.queued = [];
 
   var reqOpts = {
@@ -127,8 +130,8 @@ Publisher.prototype.publish_ = function() {
   }, function(err, resp) {
     var messageIds = arrify(resp && resp.messageIds);
 
-    messages.forEach(function(message, i) {
-      message.callback(err, messageIds[i]);
+    callbacks.forEach(function(callback, i) {
+      callback(err, messageIds[i]);
     });
   });
 };
