@@ -86,6 +86,8 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   var hasMaxBytes = (this.inventory_.queueBytes + data.size) >= opts.maxBytes;
 
   if (hasMaxMessages || hasMaxBytes) {
+    clearTimeout(this.timeoutHandle_);
+    this.timeoutHandle_ = null;
     this.publish_();
   } else if (!this.timeoutHandle_) {
     this.timeoutHandle_ = setTimeout(
