@@ -36,7 +36,15 @@ describe('Vision', () => {
       // Assert that some of the expected single-feature helper methods
       // are present on the object.
       assert(vision.faceDetection instanceof Function);
+      assert(vision.landmarkDetection instanceof Function);
       assert(vision.logoDetection instanceof Function);
+      assert(vision.labelDetection instanceof Function);
+      assert(vision.textDetection instanceof Function);
+      assert(vision.documentTextDetection instanceof Function);
+      assert(vision.safeSearchDetection instanceof Function);
+      assert(vision.imageProperties instanceof Function);
+      assert(vision.cropHints instanceof Function);
+      assert(vision.webDetection instanceof Function);
     });
   });
 });
