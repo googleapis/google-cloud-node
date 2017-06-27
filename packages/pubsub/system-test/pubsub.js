@@ -81,16 +81,10 @@ describe('pubsub', function() {
         return;
       }
 
-      subscription.pull({
-        returnImmediately: true,
-        maxMessages: 1
-      }, function(err, messages) {
-        if (err) {
-          callback(err);
-          return;
-        }
+      subscription.on('error', callback);
 
-        callback(null, messages.pop());
+      subscription.once('message', function(message) {
+        callback(null, message);
       });
     });
   }
@@ -145,11 +139,9 @@ describe('pubsub', function() {
     it('should allow manual paging', function(done) {
       pubsub.getTopics({
         pageSize: TOPIC_NAMES.length - 1
-      }, function(err, topics, nextQuery) {
+      }, function(err, topics) {
         assert.ifError(err);
         assert(topics.length, TOPIC_NAMES.length - 1);
-        assert(nextQuery.pageSize, TOPIC_NAMES.length - 1);
-        assert(!!nextQuery.pageToken, true);
         done();
       });
     });
@@ -343,74 +335,59 @@ describe('pubsub', function() {
     it('should error when using a non-existent subscription', function(done) {
       var subscription = topic.subscription(generateSubName());
 
-      subscription.pull(function(err) {
-        assert.equal(err.code, 5);
-        done();
+      subscription.on('error', function(err) {
+        assert.strictEqual(err.code, 5);
+        subscription.close(done);
+      });
+
+      subscription.on('message', function() {
+        done(new Error('Should not have been called.'));
       });
     });
 
-    it('should be able to pull and ack', function(done) {
-      var subscription = topic.subscription(SUB_NAMES[0]);
+    it('should receive the published messages', function(done) {
+      var subscription = topic.subscription(SUB_NAMES[1]);
+      var messageCount = 0;
 
-      subscription.pull({
-        returnImmediately: true,
-        maxMessages: 1
-      }, function(err, msgs) {
-        assert.ifError(err);
-        assert.strictEqual(msgs.length, 1);
+      subscription.on('error', done);
 
-        var message = msgs[0];
+      subscription.on('message', function(message) {
+        assert.deepEqual(message.data, new Buffer('hello'));
 
-        message.ack(done);
+        if (++messageCount === 10) {
+          subscription.close(done);
+        }
       });
     });
 
-    it('should be able to set a new ack deadline', function(done) {
-      var subscription = topic.subscription(SUB_NAMES[0]);
-
-      subscription.pull({
-        returnImmediately: true,
-        maxMessages: 1
-      }, function(err, msgs) {
-        assert.ifError(err);
-
-        assert.strictEqual(msgs.length, 1);
-
-        var message = msgs[0];
-
-        message.modifyAckDeadline(10000, done);
-      });
-    });
-
-    it('should receive the published message', function(done) {
+    it('should ack the message', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
 
-      subscription.pull({
-        returnImmediately: true,
-        maxMessages: 1
-      }, function(err, msgs) {
-        assert.ifError(err);
-        assert.strictEqual(msgs.length, 1);
-        assert.equal(msgs[0].data, 'hello');
+      subscription.on('error', done);
+      subscription.on('message', ack);
 
-        msgs[0].ack(done);
-      });
+      function ack(message) {
+        // remove listener to we only ack first message
+        subscription.removeListener('message', ack);
+
+        message.ack();
+        setTimeout(() => subscription.close(done), 2500);
+      }
     });
 
-    it('should receive the chosen amount of results', function(done) {
+    it('should nack the message', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
-      var maxMessages = 3;
 
-      subscription.pull({
-        returnImmediately: true,
-        maxMessages: maxMessages
-      }, function(err, messages) {
-        assert.ifError(err);
+      subscription.on('error', done);
+      subscription.on('message', nack);
 
-        assert.equal(messages.length, maxMessages);
+      function nack(message) {
+        // remove listener to we only ack first message
+        subscription.removeListener('message', nack);
 
-        done();
-      });
+        message.nack();
+        setTimeout(() => subscription.close(done), 2500);
+      }
     });
   });
 
@@ -471,20 +448,35 @@ describe('pubsub', function() {
     var subscription;
     var snapshot;
 
-    before(function(done) {
-      topic = pubsub.topic(TOPIC_NAMES[0]);
-      publisher = topic.publisher();
-      subscription = topic.subscription(generateSubName());
-      snapshot = subscription.snapshot(SNAPSHOT_NAME);
-      subscription.create(done);
-    });
-
-    after(function() {
+    function deleteAllSnapshots() {
       return pubsub.getSnapshots().then(function(data) {
         return Promise.all(data[0].map(function(snapshot) {
           return snapshot.delete();
         }));
       });
+    }
+
+    function wait(milliseconds) {
+      return function() {
+        return new Promise(function(resolve) {
+          setTimeout(resolve, milliseconds);
+        });
+      }
+    }
+
+    before(function() {
+      topic = pubsub.topic(TOPIC_NAMES[0]);
+      publisher = topic.publisher();
+      subscription = topic.subscription(generateSubName());
+      snapshot = subscription.snapshot(SNAPSHOT_NAME);
+
+      return deleteAllSnapshots()
+        .then(wait(2500))
+        .then(subscription.create.bind(subscription));
+    });
+
+    after(function() {
+      return deleteAllSnapshots();
     });
 
     it('should create a snapshot', function(done) {
@@ -530,10 +522,19 @@ describe('pubsub', function() {
       });
 
       function checkMessage() {
-        return subscription.pull().then(function(data) {
-          var message = data[0][0];
-          assert.strictEqual(message.id, messageId);
-          return message.ack();
+        return new Promise(function(resolve, reject) {
+          function onError(err) {
+            subscription.removeListener('message', onMessage);
+            reject(err);
+          }
+
+          function onMessage(message) {
+            subscription.removeListener('error', onError);
+            resolve(message);
+          }
+
+          subscription.once('error', onError);
+          subscription.once('message', onMessage);
         });
       }
 
