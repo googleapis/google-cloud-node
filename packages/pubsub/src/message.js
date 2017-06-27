@@ -25,41 +25,31 @@
  */
 function Message(subscription, resp) {
   this.subscription = subscription;
-  this.api = subscription.api;
 
   this.ackId = resp.ackId;
-
   this.id = resp.message.messageId;
   this.data = resp.message.data;
   this.attrs = resp.message.attributes;
-  this.deadline = null;
 
   var pt = resp.message.publishTime;
   var milliseconds = parseInt(pt.nanos, 10) / 1e6;
 
   this.publishTime = new Date(parseInt(pt.seconds, 10) * 1000 + milliseconds);
+  this.received_ = Date.now();
 }
 
 /**
  *
  */
 Message.prototype.ack = function() {
-  this.subscription.ackQueue_.add(this);
-};
-
-/**
- *
- */
-Message.prototype.modifyAckDeadline = function(milliseconds) {
-  this.deadline = milliseconds;
-  this.subscription.modifyQueue_.add(this);
+  this.subscription.ack_(this);
 };
 
 /**
  *
  */
 Message.prototype.nack = function() {
-  this.modifyAckDeadline(0);
+  this.subscription.nack_(this);
 };
 
 module.exports = Message;
