@@ -28,22 +28,43 @@ var is = require('is');
 /**
  *
  */
-var Queue = require('./queue.js');
-
-/**
- *
- */
 function Publisher(topic, options) {
-  options = options || {};
+  options = extend(true, {
+    batching: {
+      maxBytes: Math.pow(1024, 2) * 5,
+      maxMessages: 1000,
+      maxMilliseconds: 1000
+    }
+  }, options);
 
   this.topic = topic;
   this.api = topic.api;
 
-  var queueOptions = extend(options.batching, {
-    send: this.publish_.bind(this)
+  this.inventory_ = {
+    queued: []
+  };
+
+  Object.defineProperty(this.inventory_, 'queueBytes', {
+    get: function() {
+      var size = 0;
+
+      this.queued.forEach(function(message) {
+        size += message.data.size;
+      });
+
+      return size;
+    }
   });
 
-  this.queue_ = new Queue(queueOptions);
+  this.settings = {
+    batching: {
+      maxBytes: Math.min(options.batching.maxBytes, Math.pow(1024, 2) * 9),
+      maxMessages: Math.min(options.batching.maxMessages, 1000),
+      maxMilliseconds: options.maxMilliseconds
+    }
+  };
+
+  this.timeoutHandle_ = null;
 }
 
 /**
@@ -59,20 +80,33 @@ Publisher.prototype.publish = function(data, attrs, callback) {
     attrs = {};
   }
 
-  var message = {
+  var opts = this.settings.batching;
+
+  var hasMaxMessages = this.inventory_.queued.length >= opts.maxMessages;
+  var hasMaxBytes = (this.inventory_.queueBytes + data.size) >= opts.maxBytes;
+
+  if (hasMaxMessages || hasMaxBytes) {
+    this.publish_();
+  } else if (!this.timeoutHandle_) {
+    this.timeoutHandle_ = setTimeout(
+      this.publish_.bind(this), opts.maxMilliseconds);
+  }
+
+  this.inventory_.queued.push({
     data: data,
     attrs: attrs,
-    size: data.length
-  };
-
-  this.queue_.add(message, callback);
+    callback: callback
+  });
 };
 
 /**
  * This should never be called directly.
  */
-Publisher.prototype.publish_ = function(messages, done) {
+Publisher.prototype.publish_ = function() {
   var self = this;
+
+  var messages = this.inventory_.queued;
+  this.inventory_.queued = [];
 
   var reqOpts = {
     topic: this.topic.name,
@@ -89,13 +123,10 @@ Publisher.prototype.publish_ = function(messages, done) {
     method: 'publish',
     reqOpts: reqOpts
   }, function(err, resp) {
-    if (err) {
-      done(err);
-      return;
-    }
+    var messageIds = arrify(resp && resp.messageIds);
 
-    done(null, {
-      responses: resp.messageIds
+    messages.forEach(function(message, i) {
+      message.callback(err, messageIds[i]);
     });
   });
 };
