@@ -610,20 +610,6 @@ Subscription.prototype.openConnection_ = function() {
     var connection = requestFn();
 
     connection.on('error', function(err) {
-      // in the event of a connection error, we will attempt to re-establish
-      // a new connection if the grpc error code is something safe to retry on
-      var retryCodes = [
-        2, // Unknown Error
-        4, // DeadlineExceeded
-        14 // Unavailable
-      ];
-
-      if (retryCodes.indexOf(err.code) > -1) {
-        self.closeConnection_();
-        self.openConnection_();
-        return;
-      }
-
       self.emit('error', err);
     });
 
