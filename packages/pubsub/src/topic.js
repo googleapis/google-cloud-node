@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var is = require('is');
 
 /**
@@ -330,7 +331,10 @@ Topic.prototype.getSubscriptions = function(options, callback) {
     options = {};
   }
 
-  var reqOpts = extend({}, options);
+  var reqOpts = extend({
+    topic: this.name
+  }, options);
+
   delete reqOpts.gaxOpts;
 
   this.request({
@@ -387,12 +391,8 @@ Topic.prototype.getSubscriptions = function(options, callback) {
  *     this.end();
  *   });
  */
-Topic.prototype.getSubscriptionsStream = function(options) {
-  options = options || {};
-  options.topic = this;
-
-  return this.pubsub.getSubscriptionsStream(options);
-};
+Topic.prototype.getSubscriptionsStream =
+  common.paginator.streamify('getSubscriptions');
 
 /**
  *
