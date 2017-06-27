@@ -449,6 +449,8 @@ File.prototype.createReadStream = function(options) {
   var crc32c = true;
   var md5 = false;
 
+  var refreshedMetadata = false;
+
   if (is.string(options.validation)) {
     options.validation = options.validation.toLowerCase();
     crc32c = options.validation === 'crc32c';
@@ -470,13 +472,11 @@ File.prototype.createReadStream = function(options) {
   // returned to the user.
   function makeRequest() {
     var reqOpts = {
-      uri: format('{downloadBaseUrl}/{bucketName}/{fileName}', {
-        downloadBaseUrl: STORAGE_DOWNLOAD_BASE_URL,
-        bucketName: self.bucket.name,
-        fileName: encodeURIComponent(self.name)
-      }),
+      uri: '',
       gzip: true,
-      qs: {}
+      qs: {
+        alt: 'media'
+      }
     };
 
     if (self.generation) {
@@ -509,6 +509,13 @@ File.prototype.createReadStream = function(options) {
     function onResponse(err, body, res) {
       if (err) {
         requestStream.unpipe(throughStream);
+
+        // Get error message from the body.
+        res.pipe(concat(function(body) {
+          err.message = body.toString();
+          throughStream.destroy(err);
+        }));
+
         return;
       }
 
@@ -525,9 +532,8 @@ File.prototype.createReadStream = function(options) {
     // This is hooked to the `complete` event from the request stream. This is
     // our chance to validate the data and let the user know if anything went
     // wrong.
-    function onComplete(err, body, res) {
+    function onComplete(err) {
       if (err) {
-        throughStream.destroy(err);
         return;
       }
 
@@ -535,11 +541,20 @@ File.prototype.createReadStream = function(options) {
         return;
       }
 
-      var hashes = {};
-      res.headers['x-goog-hash'].split(',').forEach(function(hash) {
-        var hashType = hash.split('=')[0].trim();
-        hashes[hashType] = hash.substr(hash.indexOf('=') + 1);
-      });
+      if (!refreshedMetadata) {
+        refreshedMetadata = true;
+
+        self.getMetadata(function() {
+          onComplete(err);
+        });
+
+        return;
+      }
+
+      var hashes = {
+        crc32c: self.metadata.crc32c,
+        md5: self.metadata.md5Hash
+      };
 
       // If we're doing validation, assume the worst-- a data integrity
       // mismatch. If not, these tests won't be performed, and we can assume the

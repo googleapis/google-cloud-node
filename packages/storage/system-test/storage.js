@@ -904,7 +904,7 @@ describe('storage', function() {
           file.copy('new-file.txt', options, done);
         }));
 
-        it.only('file#createReadStream', doubleTest(function(options, done) {
+        it('file#createReadStream', doubleTest(function(options, done) {
           file.createReadStream(options)
             .on('error', done)
             .on('end', done)
@@ -915,7 +915,7 @@ describe('storage', function() {
           file.createResumableUpload(options, done);
         }));
 
-        it.skip('file#download', doubleTest(function(options, done) {
+        it('file#download', doubleTest(function(options, done) {
           file.download(options, done);
         }));
 
@@ -1256,7 +1256,10 @@ describe('storage', function() {
 
       it('should not download from the unencrypted file', function(done) {
         unencryptedFile.download(function(err) {
-          assert.strictEqual(err.message, 'Bad Request');
+          assert.strictEqual(err.message, [
+            'The target object is encrypted by a',
+            'customer-supplied encryption key.'
+          ].join(' '));
           done();
         });
       });
