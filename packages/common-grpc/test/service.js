@@ -1858,6 +1858,7 @@ describe('GrpcService', function() {
             assert.strictEqual(baseUrl, grpcService.baseUrl);
             assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
             assert.deepEqual(userAgent, extend({
+              'grpc.lb_policy_name': 'round_robin',
               'grpc.primary_user_agent': grpcService.userAgent
             }, GrpcService.GRPC_SERVICE_OPTIONS));
 
