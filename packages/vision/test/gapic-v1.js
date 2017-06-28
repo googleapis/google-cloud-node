@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
 var assert = require('assert');
-var visionV1 = require('../src/v1')();
+var vision = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
@@ -24,7 +25,8 @@ error.code = FAKE_STATUS_CODE;
 describe('ImageAnnotatorClient', function() {
   describe('batchAnnotateImages', function() {
     it('invokes batchAnnotateImages without error', function(done) {
-      var client = visionV1.imageAnnotatorClient();
+      var client = vision.v1();
+
       // Mock request
       var requests = [];
       var request = {
@@ -45,7 +47,8 @@ describe('ImageAnnotatorClient', function() {
     });
 
     it('invokes batchAnnotateImages with error', function(done) {
-      var client = visionV1.imageAnnotatorClient();
+      var client = vision.v1();
+
       // Mock request
       var requests = [];
       var request = {

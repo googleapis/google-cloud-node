@@ -1,8 +1,9 @@
 {
+  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/vision",
+  "author": "Google Inc",
+  "description": "Google Cloud Vision API client for Node.js",
   "version": "0.11.5",
-  "author": "Google Inc.",
-  "description": "Cloud Vision Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -29,14 +30,14 @@
       "email": "sawchuk@gmail.com"
     }
   ],
-  "main": "./src/index.js",
+  "author": "Google Inc",
+  "main": "src/index.js",
   "files": [
     "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -47,7 +48,8 @@
     "google cloud",
     "cloud",
     "google vision",
-    "vision"
+    "vision",
+    "Google Cloud Vision API"
   ],
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
@@ -55,13 +57,9 @@
     "arrify": "^1.0.0",
     "async": "^2.0.1",
     "extend": "^3.0.0",
-    "google-gax": "^0.13.0",
+    "google-gax": "^0.13.2",
     "google-proto-files": "^0.12.0",
-    "is": "^3.0.1",
-    "prop-assign": "^1.0.0",
-    "propprop": "^0.3.0",
-    "rgb-hex": "^1.0.0",
-    "string-format-obj": "^1.0.0"
+    "is": "^3.0.1"
   },
   "devDependencies": {
     "@google-cloud/storage": "*",

@@ -21,10 +21,13 @@
 'use strict';
 
 var is = require('is');
+var extend = require('extend');
 
 var gapic = {
   v1: require('./v1'),
 };
+var gaxGrpc = require('google-gax').grpc();
+
 var helpers = require('./helpers');
 
 const VERSION = require('../package.json').version;
@@ -63,6 +66,14 @@ function visionV1(opts) {
   return client;
 }
 
+var v1Protos = {};
+
+extend(v1Protos, gaxGrpc.load([{
+  root: require('google-proto-files')('..'),
+  file: 'google/cloud/vision/v1/image_annotator.proto'
+}]).google.cloud.vision.v1);
 
 module.exports = visionV1;
+module.exports.types = v1Protos;
 module.exports.v1 = visionV1;
+module.exports.v1.types = v1Protos;
