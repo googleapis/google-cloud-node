@@ -66,7 +66,7 @@ function detectCustomType(str) {
   var templateFn = format.bind(null, tmpl);
   var rCustomType = /\{*module\:([^\}|\>]*)\}*/g;
   var rArray = /Array\.<(.+)>/g;
-  var rProtoType = /{@link ([A-Z][^}]*)}/;
+  var rProtoType = /\[\w+\]{@link ([A-Z][^}]*)}/g;
 
   return str
     .replace(rArray, function(match, module) {
@@ -81,9 +81,9 @@ function detectCustomType(str) {
         text: module
       });
     })
+    // @TODO link-ability
     .replace(rProtoType, function(match, protoType) {
       return protoType;
-      // // @TODO link-ability
       // return templateFn({
       //   module: 'data_types',
       //   method: protoType,

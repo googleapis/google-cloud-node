@@ -127,7 +127,9 @@ Builder.prototype.build = function() {
         idParts.pop();
         idParts.pop();
         idParts.push('data_types');
+
         dataTypesFile.id = idParts.join('/');
+        dataTypesFile.name = 'Data Types';
       }
 
       dataTypesFile.methods = dataTypesFile.methods.concat(gapicFile.methods);
