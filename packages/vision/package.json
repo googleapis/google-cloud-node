@@ -1,9 +1,9 @@
 {
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/vision",
+  "version": "0.12.0",
   "author": "Google Inc",
   "description": "Google Cloud Vision API client for Node.js",
-  "version": "0.11.5",
   "contributors": [
     {
       "name": "Burcu Dogan",
