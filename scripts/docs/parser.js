@@ -181,6 +181,10 @@ function getMethodType(block) {
     return 'constructor';
   }
 
+  if (block.ctx && block.ctx.name.endsWith('Client')) {
+    return 'constructor';
+  }
+
   if (getTagsByType(block, 'static').length > 0) {
     return 'static';
   }
