@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
+/*!
+ * @module speech/helpers
+ */
+
 'use strict';
 
+var pumpify = require('pumpify');
+var streamEvents = require('stream-events');
+var through = require('through2');
 
 /**
  * Return a dictionary-like object with helpers to augment the Speech
@@ -50,7 +57,8 @@ module.exports = () => {
    *
    * @example
    *
-   * var client = speechV1.speechClient();
+   * var client = require('@google-cloud/speech')();
+   *
    * var stream = client.streamingRecognize({
    *   config: {
    *     encoding: 'LINEAR16',
@@ -69,13 +77,44 @@ module.exports = () => {
       options = {};
     }
 
-    var stream = this._streamingRecognize(options);
+    var requestStream = this._streamingRecognize(options);
 
-    // Write the initial configuration to the stream, then return it.
-    stream.write({streamingConfig: config});
-    return stream;
+    // Format the audio content as input request for pipeline
+    var recognizeStream = streamEvents(pumpify.obj());
+
+    recognizeStream.once('writing', function() {
+      requestStream.on('error', function(err) {
+        recognizeStream.destroy(err);
+      });
+
+      requestStream.on('response', function(response) {
+        recognizeStream.emit('response', response);
+      });
+
+      // Write the initial configuration to the stream,
+      requestStream.write({
+        streamingConfig: config
+      });
+
+      this.setPipeline([
+        // Format the user's input.
+        through.obj(function(obj, _, next) {
+          next(null, {
+            audioContent: obj
+          });
+        }),
+
+        requestStream,
+
+        // Pass through the results.
+        through.obj(function(obj, _, next) {
+          next(null, obj);
+        })
+      ]);
+    });
+
+    return recognizeStream;
   };
 
-  // Done; return the dictionary of methods.
   return methods;
 };
