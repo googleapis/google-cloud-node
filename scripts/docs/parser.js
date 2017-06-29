@@ -52,10 +52,6 @@ function detectLinks(str) {
       return `@link ${link}`;
     })
     .replace(reg, function(match, title, link) {
-      // str =  `
-      //   [gax.CallOptions]{@link <a href="https://googleapis.github.io/gax-nodejs/global.html#CallOptions}">https://googleapis.github.io/gax-nodejs/global.html#CallOptions}</a>
-      // `
-
       if (link.startsWith('external')) {
         return title;
       }
