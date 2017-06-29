@@ -44,11 +44,26 @@ function isMethod(block) {
 }
 
 function detectLinks(str) {
+  var linkInsideLink = /@link <a href="(.+)".+<\/a>/g;
   var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
 
-  return str.replace(reg, function(match, title, link) {
-    return '<a href="' + link.trim() + '">' + title.trim() + '</a>';
-  });
+  return str
+    .replace(linkInsideLink, function(match, link) {
+      return `@link ${link}`;
+    })
+    .replace(reg, function(match, title, link) {
+      // str =  `
+      //   [gax.CallOptions]{@link <a href="https://googleapis.github.io/gax-nodejs/global.html#CallOptions}">https://googleapis.github.io/gax-nodejs/global.html#CallOptions}</a>
+      // `
+
+      if (link.startsWith('external')) {
+        return title;
+      }
+
+      link = link.replace('<a href="', '');
+
+      return '<a href="' + link.trim() + '">' + title.trim() + '</a>';
+    });
 }
 
 function formatHtml(html) {
