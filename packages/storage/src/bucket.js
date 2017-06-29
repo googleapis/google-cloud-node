@@ -663,7 +663,9 @@ Bucket.prototype.disableRequesterPays = function(callback) {
  *   </p>
  * </div>
  *
- * Enable `requesterPays` functionality for this bucket.
+ * Enable `requesterPays` functionality for this bucket. This enables you, the
+ * bucket owner, to have the requesting user assume the charges for the access
+ * to your bucket and its contents.
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.

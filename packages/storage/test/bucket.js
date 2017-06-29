@@ -816,7 +816,6 @@ describe('Bucket', function() {
   describe('exists', function() {
     it('should call get', function(done) {
       bucket.get = function() {
-        assert.strictEqual();
         done();
       };
 
