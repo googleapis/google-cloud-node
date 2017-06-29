@@ -181,8 +181,12 @@ function getMethodType(block) {
     return 'constructor';
   }
 
-  if (block.ctx && block.ctx.name.endsWith('Client')) {
-    return 'constructor';
+  if (block.ctx) {
+    var name = block.ctx.name;
+
+    if (/^[A-Z]/.test(name) && name.endsWith('Client')) {
+      return 'constructor';
+    }
   }
 
   if (getTagsByType(block, 'static').length > 0) {
