@@ -89,7 +89,6 @@ function detectCustomType(str) {
           method: '${protoType}'
         })">${protoType}</a>
       `.trim();
-      return protoType;
     });
 }
 

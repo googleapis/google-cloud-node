@@ -121,7 +121,44 @@ Builder.prototype.build = function() {
   for (var gapicVersion in gapicVersions) {
     var gapicFiles = gapicVersions[gapicVersion];
 
-    var dataTypesFile = gapicFiles.reduce((dataTypesFile, gapicFile) => {
+    var dataTypesFile = {
+      name: 'Data Types',
+      methods: [],
+      path: `${gapicVersion}/data_types.json`,
+      description: `
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="method in service.methods" ng-if="method.name">
+              <td>
+                <a ui-sref="docs.service({ method: method.id })" class="skip-external-link">
+                  {{method.name}}
+                </a>
+              </td>
+              <td>
+                <span ng-bind-html="method.description">
+                  {{method.description}}
+                </span>
+                <span ng-if="!method.description && method.name.includes('Request')">
+                  The request for {{method.name}}.
+                </span>
+                <span ng-if="!method.description && method.name.includes('Response')">
+                  The response for {{method.name}}.
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      `
+    };
+
+    /*jshint loopfunc:true*/
+    gapicFiles.forEach(gapicFile => {
       if (!dataTypesFile.id) {
         var idParts = gapicFile.id.split('/');
         idParts.pop();
@@ -131,49 +168,7 @@ Builder.prototype.build = function() {
       }
 
       dataTypesFile.methods = dataTypesFile.methods.concat(gapicFile.methods);
-
-      return dataTypesFile;
-    }, {
-      name: 'Data Types',
-      methods: [],
-      path: `${gapicVersion}/data_types.json`
     });
-
-    var description = `
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Class</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="method in service.methods" ng-if="method.name">
-            <td>
-              <a ui-sref="docs.service({ method: method.id })" class="skip-external-link">
-                {{method.name}}
-              </a>
-            </td>
-            <td>
-              <span ng-bind-html="method.description">
-                {{method.description}}
-              </span>
-              <span ng-if="!method.description && method.name.includes('Request')">
-                The request for {{method.name}}.
-              </span>
-              <span ng-if="!method.description && method.name.includes('Response')">
-                The response for {{method.name}}.
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-    dataTypesFile.description = description;
-
-    // dataTypesFile.description = dataTypesFile.methods.reduce((desc, method) => {
-    //   desc +=
-    // }, description);
 
     this.write(`${gapicVersion}/data_types.json`, dataTypesFile);
 
