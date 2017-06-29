@@ -83,12 +83,13 @@ function detectCustomType(str) {
     })
     // @TODO link-ability
     .replace(rProtoType, function(match, protoType) {
+      return `
+        <a ui-sref="docs.service({
+          serviceId: '{{ service.parent }}/{{service.path.split('/').shift()}}/data_types',
+          method: '${protoType}'
+        })">${protoType}</a>
+      `.trim();
       return protoType;
-      // return templateFn({
-      //   module: 'data_types',
-      //   method: protoType,
-      //   text: protoType
-      // });
     });
 }
 
