@@ -16,7 +16,6 @@
 
 'use strict';
 
-var camel = require('lodash.camelcase');
 var dox = require('dox');
 var fs = require('fs');
 var extend = require('extend');
