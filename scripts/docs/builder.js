@@ -22,6 +22,7 @@ var chalk = require('chalk');
 var flatten = require('lodash.flatten');
 var fs = require('fs');
 var globby = require('globby');
+var is = require('is');
 var path = require('path');
 var semver = require('semver');
 
@@ -95,6 +96,7 @@ Builder.prototype.build = function() {
     return json;
   });
 
+
   var gapicVersions = docs.reduce((grouped, doc) => {
     var gapicVersion = doc.id.match(/\/(v[^\/]*)/);
 
@@ -120,6 +122,48 @@ Builder.prototype.build = function() {
 
   for (var gapicVersion in gapicVersions) {
     var gapicFiles = gapicVersions[gapicVersion];
+
+    this.write(`${gapicVersion}/index.json`, {
+      name: gapicVersion,
+      methods: [],
+      path: `${gapicVersion}/index.json`,
+      description: `
+        <h1>{{docs.services[0].title}} API Contents</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="client in docs.services[docs.services.length - 1].nav"
+              ng-if="client.title.includes('Client')">
+              <td>
+                <a ui-sref="docs.service({
+                  serviceId: client.type
+                })">{{client.title}}</a>
+              </td>
+              <td>
+                Create a {{client.title}} to interact with the {{docs.services[0].title}} API.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a ui-sref="docs.service({
+                  serviceId: '{{docs.services[0].type}}/{{service.path.split('/').shift()}}/data_types'
+                })">Data Types</a>
+              </td>
+              <td>
+                Data types for {{docs.services[0].title}} {{service.path.split('/').shift()}}.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      `
+    });
 
     var dataTypesFile = {
       name: 'Data Types',
@@ -170,9 +214,10 @@ Builder.prototype.build = function() {
       dataTypesFile.methods = dataTypesFile.methods.concat(gapicFile.methods);
     });
 
-    this.write(`${gapicVersion}/data_types.json`, dataTypesFile);
-
-    docs.push(dataTypesFile);
+    if (!is.empty(dataTypesFile.methods)) {
+      this.write(`${gapicVersion}/data_types.json`, dataTypesFile);
+      docs.push(dataTypesFile);
+    }
   }
 
   var types = parser.createTypesDictionary(docs);

@@ -16,6 +16,7 @@
 
 'use strict';
 
+var camel = require('lodash.camelcase');
 var dox = require('dox');
 var fs = require('fs');
 var extend = require('extend');
@@ -360,7 +361,10 @@ function parseFile(fileName, contents, umbrellaMode) {
 }
 
 function createTypesDictionary(docs) {
-  return docs.map(function(service) {
+  var types = [];
+  var gapicVersions = [];
+
+  docs.forEach(function(service) {
     var isGapic = /_client$/.test(service.id);
 
     var titleParts = [];
@@ -385,13 +389,16 @@ function createTypesDictionary(docs) {
         }
       });
 
+      if (!gapicVersions.includes(gapicVersion)) {
+        gapicVersions.push(gapicVersion);
+      }
+
       titleParts = [gapicVersion];
 
-      var nestedTitle = [].slice.call(gapicPath).slice(1, versionIndex);
+      var nestedTitle = [].slice.call(gapicPath, versionIndex + 1);
 
       if (nestedTitle.length > 0) {
-        nestedTitle = nestedTitle.map(upperFirst).join('/');
-        titleParts.push(nestedTitle);
+        titleParts.push(upperFirst(camel(nestedTitle.join('/'))));
       }
     }
 
@@ -403,12 +410,22 @@ function createTypesDictionary(docs) {
       }
     }
 
-    return {
+    types.push({
       id: id,
       title: titleParts,
       contents: contents
-    };
+    });
   });
+
+  gapicVersions.forEach(gapicVersion => {
+    types.push({
+      id: gapicVersion,
+      title: [gapicVersion],
+      contents: `${gapicVersion}/index.json`
+    });
+  });
+
+  return types;
 }
 
 function createToc(types, collapse) {
@@ -421,7 +438,8 @@ function createToc(types, collapse) {
   var protosGroupedByVersion = {};
 
   var services = types
-    .filter(type => !generatedTypes.includes(type) && !protos.includes(type))
+    .filter(type => !generatedTypes.includes(type))
+    .filter(type => !protos.includes(type))
     .map(function(type) {
       return {
         type: type.id,
@@ -475,11 +493,12 @@ function createToc(types, collapse) {
           return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
         });
 
-      var parent = generatedTypesGrouped.shift();
+      /*jshint loopfunc:true*/
+      services = services.filter(service => service.type !== version);
 
       var serviceObject = {
         title: version,
-        type: parent.id,
+        type: version,
         nav: generatedTypesGrouped.map(function(generatedType) {
           return {
             title: generatedType.title[generatedType.title.length - 1],
@@ -490,7 +509,7 @@ function createToc(types, collapse) {
 
       serviceObject.nav.push({
         title: 'Data Types',
-        type: parent.id.replace(/\/\w+_client$/, '/data_types')
+        type: generatedTypes[0].id.replace(/\/\w+_client$/, '/data_types')
       });
 
       services.push(serviceObject);
