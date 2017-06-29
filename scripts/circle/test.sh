@@ -31,6 +31,9 @@ then
   # This is a tagged build or a push to master, so system tests will be run.
   echo $GCLOUD_TESTS_KEY | base64 --decode > ${HOME}/key.json
   export GCLOUD_TESTS_KEY="$HOME/key.json"
+
+  echo $GCLOUD_TESTS_KEY_NON_WHITELIST | base64 --decode > ${HOME}/key.non-whitelist.json
+  export GCLOUD_TESTS_KEY_NON_WHITELIST="$HOME/key.non-whitelist.json"
 fi
 
 git config --global user.name "circle-ci"

@@ -171,6 +171,13 @@ describe('File', function() {
       assert.equal(file.generation, 2);
     });
 
+    it('should build a requestQueryObject from generation', function() {
+      var file = new File(BUCKET, 'name', { generation: 2 });
+      assert.deepStrictEqual(file.requestQueryObject, {
+        generation: 2
+      });
+    });
+
     it('should inherit from ServiceObject', function() {
       assert(file instanceof ServiceObject);
 
@@ -179,61 +186,6 @@ describe('File', function() {
       assert.strictEqual(calledWith.parent, BUCKET);
       assert.strictEqual(calledWith.baseUrl, '/o');
       assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
-      assert.deepEqual(calledWith.methods, {
-        delete: {
-          reqOpts: {
-            qs: {}
-          }
-        },
-        exists: true,
-        get: true,
-        getMetadata: {
-          reqOpts: {
-            qs: {}
-          }
-        },
-        setMetadata: {
-          reqOpts: {
-            qs: {}
-          }
-        }
-      });
-    });
-
-    it('should set generation on the request methods', function() {
-      var options = {
-        generation: 82834
-      };
-
-      var file = new File(BUCKET, 'name', options);
-
-      var calledWith = file.calledWith_[0];
-
-      assert.deepEqual(calledWith.methods, {
-        delete: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        },
-        exists: true,
-        get: true,
-        getMetadata: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        },
-        setMetadata: {
-          reqOpts: {
-            qs: {
-              generation: options.generation
-            }
-          }
-        }
-      });
     });
 
     it('should set a custom encryption key', function(done) {
@@ -306,10 +258,29 @@ describe('File', function() {
 
     it('should accept an options object', function(done) {
       var newFile = new File(BUCKET, 'name');
-      var options = {};
+      var options = {
+        option: true
+      };
 
       file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json, options);
+        assert.deepStrictEqual(reqOpts.json, options);
+        done();
+      };
+
+      file.copy(newFile, options, assert.ifError);
+    });
+
+    it('should pass through userProject', function(done) {
+      var options = {
+        userProject: 'user-project'
+      };
+      var originalOptions = extend({}, options);
+      var newFile = new File(BUCKET, 'new-file');
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+        assert.strictEqual(reqOpts.json.userProject, undefined);
+        assert.deepStrictEqual(options, originalOptions);
         done();
       };
 
@@ -542,6 +513,12 @@ describe('File', function() {
       return FakeFailedRequest;
     }
 
+    beforeEach(function() {
+      requestOverride = function() {
+        return through();
+      };
+    });
+
     it('should throw if both a range and validation is given', function() {
       assert.throws(function() {
         file.createReadStream({
@@ -585,6 +562,20 @@ describe('File', function() {
       versionedFile.createReadStream().resume();
     });
 
+    it('should send query.userProject if provided', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      file.requestStream = function(rOpts) {
+        assert.strictEqual(rOpts.qs.userProject, options.userProject);
+        setImmediate(done);
+        return duplexify();
+      };
+
+      file.createReadStream(options).resume();
+    });
+
     it('should end request stream on error', function(done) {
       file.requestStream = getFakeSuccessfulRequest('body', { body: null });
 
@@ -621,14 +612,14 @@ describe('File', function() {
 
     describe('authenticating', function() {
       it('should create an authenticated request', function(done) {
-        var expectedPath = format('https://{host}/{b}/{o}', {
-          host: 'storage.googleapis.com',
-          b: file.bucket.name,
-          o: encodeURIComponent(file.name)
-        });
-
         file.requestStream = function(opts) {
-          assert.equal(opts.uri, expectedPath);
+          assert.deepEqual(opts, {
+            uri: '',
+            gzip: true,
+            qs: {
+              alt: 'media'
+            }
+          });
           setImmediate(function() {
             done();
           });
@@ -655,7 +646,7 @@ describe('File', function() {
 
         beforeEach(function() {
           file.requestStream = function(opts) {
-            var stream = (requestOverride || request)(opts);
+            var stream = requestOverride(opts);
 
             setImmediate(function() {
               stream.emit('error', ERROR);
@@ -726,6 +717,7 @@ describe('File', function() {
       });
 
       it('should unpipe stream from an error on the response', function(done) {
+        var rawResponseStream = through();
         var requestStream = through();
         var readStream = file.createReadStream();
 
@@ -743,7 +735,7 @@ describe('File', function() {
           assert.strictEqual(requestStream._readableState.pipes, readStream);
 
           // Triggers the unpipe.
-          callback(new Error());
+          callback(new Error(), null, rawResponseStream);
 
           setImmediate(function() {
             assert.strictEqual(requestStream._readableState.pipesCount, 0);
@@ -791,40 +783,65 @@ describe('File', function() {
             })
             .resume();
         });
+
+        it('should parse a response stream for a better error', function(done) {
+          var rawResponsePayload = 'error message from body';
+          var rawResponseStream = through();
+          var requestStream = through();
+
+          handleRespOverride = function(err, res, body, callback) {
+            callback(ERROR, null, res);
+
+            setImmediate(function() {
+              rawResponseStream.end(rawResponsePayload);
+            });
+          };
+
+          file.requestStream = function() {
+            setImmediate(function() {
+              requestStream.emit('response', rawResponseStream);
+            });
+            return requestStream;
+          };
+
+          file.createReadStream()
+            .once('error', function(err) {
+              assert.strictEqual(err, ERROR);
+              assert.strictEqual(err.message, rawResponsePayload);
+              done();
+            })
+            .resume();
+        });
       });
     });
 
     describe('validation', function() {
       var data = 'test';
 
-      var fakeResponse = {
-        crc32c: {
-          headers: { 'x-goog-hash': 'crc32c=####wA==' }
-        },
-        md5: {
-          headers: { 'x-goog-hash': 'md5=CY9rzUYh03PK3k6DJie09g==' }
-        }
-      };
-
       beforeEach(function() {
         file.metadata.mediaLink = 'http://uri';
 
-        file.request = function(opts, cb) {
-          if (cb) {
-            (cb.onAuthenticated || cb)(null, {});
-          } else {
-            return (requestOverride || requestCached)(opts);
-          }
+        file.getMetadata = function(callback) {
+          file.metadata = {
+            crc32c: '####wA==',
+            md5Hash: 'CY9rzUYh03PK3k6DJie09g=='
+          };
+          callback();
         };
       });
 
       it('should destroy the stream on error', function(done) {
+        var rawResponseStream = through();
         var error = new Error('Error.');
 
         file.requestStream = getFakeSuccessfulRequest('data');
 
         handleRespOverride = function(err, resp, body, callback) {
-          callback(error);
+          callback(error, null, rawResponseStream);
+
+          setImmediate(function() {
+            rawResponseStream.end();
+          });
         };
 
         file.createReadStream({ validation: 'crc32c' })
@@ -841,8 +858,7 @@ describe('File', function() {
       });
 
       it('should validate with crc32c', function(done) {
-        file.requestStream =
-          getFakeSuccessfulRequest(data, fakeResponse.crc32c);
+        file.requestStream = getFakeSuccessfulRequest(data, {});
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
@@ -851,10 +867,7 @@ describe('File', function() {
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
-        file.requestStream = getFakeSuccessfulRequest(
-          'bad-data',
-          fakeResponse.crc32c
-        );
+        file.requestStream = getFakeSuccessfulRequest('bad-data', {});
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', function(err) {
@@ -865,7 +878,7 @@ describe('File', function() {
       });
 
       it('should validate with md5', function(done) {
-        file.requestStream = getFakeSuccessfulRequest(data, fakeResponse.md5);
+        file.requestStream = getFakeSuccessfulRequest(data, {});
 
         file.createReadStream({ validation: 'md5' })
           .on('error', done)
@@ -874,8 +887,7 @@ describe('File', function() {
       });
 
       it('should emit an error if md5 validation fails', function(done) {
-        file.requestStream =
-          getFakeSuccessfulRequest('bad-data', fakeResponse.md5);
+        file.requestStream = getFakeSuccessfulRequest('bad-data', {});
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {
@@ -886,9 +898,14 @@ describe('File', function() {
       });
 
       it('should default to crc32c validation', function(done) {
-        file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
-        });
+        file.getMetadata = function(callback) {
+          file.metadata = {
+            crc32c: file.metadata.crc32c
+          };
+          callback();
+        };
+
+        file.requestStream = getFakeSuccessfulRequest(data, {});
 
         file.createReadStream()
           .on('error', function(err) {
@@ -899,9 +916,7 @@ describe('File', function() {
       });
 
       it('should ignore a data mismatch if validation: false', function(done) {
-        file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
-        });
+        file.requestStream = getFakeSuccessfulRequest(data, {});
 
         file.createReadStream({ validation: false })
           .resume()
@@ -911,10 +926,7 @@ describe('File', function() {
 
       describe('destroying the through stream', function() {
         it('should destroy after failed validation', function(done) {
-          file.requestStream = getFakeSuccessfulRequest(
-            'bad-data',
-            fakeResponse.md5
-          );
+          file.requestStream = getFakeSuccessfulRequest('bad-data', {});
 
           var readStream = file.createReadStream({ validation: 'md5' });
           readStream.destroy = function(err) {
@@ -925,10 +937,14 @@ describe('File', function() {
         });
 
         it('should destroy if MD5 is requested but absent', function(done) {
-          file.requestStream = getFakeSuccessfulRequest(
-            'bad-data',
-            fakeResponse.crc32c
-          );
+          file.getMetadata = function(callback) {
+            file.metadata = {
+              crc32c: file.metadata.crc32c
+            };
+            callback();
+          };
+
+          file.requestStream = getFakeSuccessfulRequest('bad-data', {});
 
           var readStream = file.createReadStream({ validation: 'md5' });
           readStream.destroy = function(err) {
@@ -1044,7 +1060,8 @@ describe('File', function() {
         metadata: {
           contentType: 'application/json'
         },
-        origin: '*'
+        origin: '*',
+        userProject: 'user-project-id'
       };
 
       file.generation = 3;
@@ -1061,6 +1078,7 @@ describe('File', function() {
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.metadata, options.metadata);
           assert.strictEqual(opts.origin, options.origin);
+          assert.strictEqual(opts.userProject, options.userProject);
 
           callback();
         }
@@ -1399,6 +1417,56 @@ describe('File', function() {
     });
   });
 
+  describe('delete', function() {
+    it('should make the correct request', function(done) {
+      file.parent.delete = function(options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.delete(done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.delete = function(options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.delete(options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.delete = function(options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.delete(options, assert.ifError);
+    });
+  });
+
   describe('download', function() {
     var fileReadStream;
 
@@ -1528,6 +1596,82 @@ describe('File', function() {
           });
         });
       });
+    });
+  });
+
+  describe('exists', function() {
+    it('should call parent exists function', function(done) {
+      var options = {};
+
+      file.parent.exists = function(options_, callback) {
+        assert.strictEqual(options_, options);
+        callback(); // done()
+      };
+
+      file.exists(options, done);
+    });
+  });
+
+  describe('get', function() {
+    it('should call parent get function', function(done) {
+      var options = {};
+
+      file.parent.get = function(options_, callback) {
+        assert.strictEqual(options_, options);
+        callback(); // done()
+      };
+
+      file.get(options, done);
+    });
+  });
+
+  describe('getMetadata', function() {
+    it('should make the correct request', function(done) {
+      file.parent.getMetadata = function(options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.getMetadata(done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.getMetadata = function(options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.getMetadata(options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.getMetadata = function(options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.getMetadata(options, assert.ifError);
     });
   });
 
@@ -2117,7 +2261,7 @@ describe('File', function() {
     it('should execute callback with API response', function(done) {
       var apiResponse = {};
 
-      file.request = function(reqOpts, callback) {
+      file.setMetadata = function(metadata, query, callback) {
         callback(null, apiResponse);
       };
 
@@ -2133,7 +2277,7 @@ describe('File', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      file.request = function(reqOpts, callback) {
+      file.setMetadata = function(metadata, query, callback) {
         callback(error, apiResponse);
       };
 
@@ -2146,11 +2290,9 @@ describe('File', function() {
     });
 
     it('should make the file private to project by default', function(done) {
-      file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'projectPrivate' });
-        assert.deepEqual(reqOpts.json, { acl: null });
+      file.setMetadata = function(metadata, query) {
+        assert.deepStrictEqual(metadata, { acl: null });
+        assert.deepEqual(query, { predefinedAcl: 'projectPrivate' });
         done();
       };
 
@@ -2158,12 +2300,25 @@ describe('File', function() {
     });
 
     it('should make the file private to user if strict = true', function(done) {
-      file.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'private' });
+      file.setMetadata = function(metadata, query) {
+        assert.deepEqual(query, { predefinedAcl: 'private' });
         done();
       };
 
       file.makePrivate({ strict: true }, util.noop);
+    });
+
+    it('should accept userProject', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      file.setMetadata = function(metadata, query) {
+        assert.strictEqual(query.userProject, options.userProject);
+        done();
+      };
+
+      file.makePrivate(options, assert.ifError);
     });
   });
 
@@ -2262,12 +2417,27 @@ describe('File', function() {
         });
       });
 
+      it('should pass options to delete', function(done) {
+        var options = {};
+
+        file.copy = function(destination, options, callback) {
+          callback();
+        };
+
+        file.delete = function(options_) {
+          assert.strictEqual(options_, options);
+          done();
+        };
+
+        file.move('new-filename', options, assert.ifError);
+      });
+
       it('should fail if delete fails', function(done) {
         var error = new Error('Error.');
         file.copy = function(destination, options, callback) {
           callback();
         };
-        file.delete = function(callback) {
+        file.delete = function(options, callback) {
           callback(error);
         };
         file.move('new-filename', function(err) {
@@ -2340,6 +2510,58 @@ describe('File', function() {
     });
   });
 
+  describe('setMetadata', function() {
+    it('should make the correct request', function(done) {
+      var metadata = {};
+
+      file.parent.setMetadata = function(metadata, options, callback) {
+        assert.strictEqual(this, file);
+        assert.deepEqual(options, {});
+        callback(); // done()
+      };
+
+      file.setMetadata(metadata, done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.parent.setMetadata = function(metadata, options_) {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      file.setMetadata({}, options, assert.ifError);
+    });
+
+    it('should use requestQueryObject', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      file.requestQueryObject = {
+        generation: 2
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        generation: 2
+      };
+
+      file.parent.setMetadata = function(metadata, options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.setMetadata({}, options, assert.ifError);
+    });
+  });
+
   describe('setStorageClass', function() {
     var STORAGE_CLASS = 'new_storage_class';
 
@@ -2353,6 +2575,26 @@ describe('File', function() {
       };
 
       file.setStorageClass(STORAGE_CLASS, assert.ifError);
+    });
+
+    it('should accept options', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var expectedOptions = {
+        a: 'b',
+        c: 'd',
+        storageClass: STORAGE_CLASS.toUpperCase()
+      };
+
+      file.copy = function(newFile, options) {
+        assert.deepStrictEqual(options, expectedOptions);
+        done();
+      };
+
+      file.setStorageClass(STORAGE_CLASS, options, assert.ifError);
     });
 
     it('should convert camelCase to snake_case', function(done) {
@@ -2467,7 +2709,8 @@ describe('File', function() {
           public: true,
           private: false,
           predefinedAcl: 'allUsers',
-          uri: 'http://resumable-uri'
+          uri: 'http://resumable-uri',
+          userProject: 'user-project-id'
         };
 
         file.generation = 3;
@@ -2489,6 +2732,7 @@ describe('File', function() {
           assert.strictEqual(opts.private, options.private);
           assert.strictEqual(opts.public, options.public);
           assert.strictEqual(opts.uri, options.uri);
+          assert.strictEqual(opts.userProject, options.userProject);
 
           setImmediate(done);
           return through();
@@ -2629,6 +2873,19 @@ describe('File', function() {
       };
 
       versionedFile.startSimpleUpload_(duplexify(), {});
+    });
+
+    it('should send userProject if set', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      makeWritableStreamOverride = function(stream, options_) {
+        assert.equal(options_.request.qs.userProject, options.userProject);
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), options);
     });
 
     describe('request', function() {

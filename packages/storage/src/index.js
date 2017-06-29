@@ -200,6 +200,8 @@ Storage.prototype.channel = function(id, resourceId) {
  *     Multi-Regional.
  * @param {boolean} metadata.nearline - Specify the storage class as Nearline.
  * @param {boolean} metadata.regional - Specify the storage class as Regional.
+ * @param {boolean} metadata.requesterPays - **Early Access Testers Only**
+ *     Enable billing the requesting user's project.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/bucket} callback.bucket - The newly created Bucket.
@@ -256,7 +258,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
     metadata = {};
   }
 
-  var body = extend(metadata, {
+  var body = extend({}, metadata, {
     name: name
   });
 
@@ -274,6 +276,13 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
       delete body[storageClass];
     }
   });
+
+  if (body.requesterPays) {
+    body.billing = {
+      requesterPays: body.requesterPays
+    };
+    delete body.requesterPays;
+  }
 
   this.request({
     method: 'POST',
