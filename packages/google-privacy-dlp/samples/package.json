@@ -18,6 +18,10 @@
     "system-test": "ava -T 1m --verbose system-test/*.test.js",
     "test": "npm run system-test"
   },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  },
   "dependencies": {
     "@google-cloud/dlp": "^0.1.0",
     "google-auth-library": "0.10.0",
@@ -35,6 +39,30 @@
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
-    "requiresProjectId": true
+    "requiresProjectId": true,
+    "product": "dlp",
+    "samples": [
+      {
+        "id": "inspect",
+        "name": "Inspect",
+        "file": "inspect.js",
+        "docs_link": "https://cloud.google.com/dlp/docs",
+        "usage": "node inspect.js --help"
+      },
+      {
+        "id": "redact",
+        "name": "Redact",
+        "file": "redact.js",
+        "docs_link": "https://cloud.google.com/dlp/docs",
+        "usage": "node redact.js --help"
+      },
+      {
+        "id": "metadata",
+        "name": "Metadata",
+        "file": "metadata.js",
+        "docs_link": "https://cloud.google.com/dlp/docs",
+        "usage": "node metadata.js --help"
+      }
+    ]
   }
 }
