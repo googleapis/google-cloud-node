@@ -35,7 +35,6 @@
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTORS",
     "COPYING"
   ],
   "keywords": [
@@ -79,6 +78,7 @@
     "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts --require intelli-espower-loader test/*.js && nyc report",
     "publish-module": "node ../../scripts/publish.js vision",
     "test": "mocha --require intelli-espower-loader test/*.js",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
     "system-test": "mocha system-test/*.js --require intelli-espower-loader --no-timeouts --bail"
   },
   "license": "Apache-2.0",

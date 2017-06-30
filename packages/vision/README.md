@@ -1,4 +1,4 @@
-# Node.js Client for Google Cloud Vision API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+# Node.js Client for Google Cloud Vision API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
 [Google Cloud Vision API][Product Documentation]: Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
 - [Client Library Documentation][]
@@ -45,7 +45,8 @@ $ npm install --save @google-cloud/vision
  client.batchAnnotateImages({requests: requests}).then(function(responses) {
      var response = responses[0];
      // doThingsWith(response)
- }).catch(function(err) {
+ })
+ .catch(function(err) {
      console.error(err);
  });
 ```

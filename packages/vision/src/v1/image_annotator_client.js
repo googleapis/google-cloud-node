@@ -144,7 +144,8 @@ ImageAnnotatorClient.prototype.getProjectId = function(callback) {
  * client.batchAnnotateImages({requests: requests}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
