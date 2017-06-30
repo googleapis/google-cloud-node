@@ -1,6 +1,6 @@
-# Node.js Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+# Node.js Client for Google Cloud Video Intelligence API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
-Idiomatic Node.js client for [Google Cloud Video Intelligence API][Product Documentation]
+[Google Cloud Video Intelligence API][Product Documentation]: Google Cloud Video Intelligence API.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
@@ -8,12 +8,12 @@ Idiomatic Node.js client for [Google Cloud Video Intelligence API][Product Docum
 In order to use this library, you first need to go through the following steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable the video-intelligence api.](https://console.cloud.google.com/apis/api/video-intelligence)
+2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
 ```
-$ npm install @google-cloud/video-intelligence
+$ npm install --save @google-cloud/videointelligence
 ```
 
 ### Next Steps

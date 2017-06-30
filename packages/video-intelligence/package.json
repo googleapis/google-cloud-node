@@ -1,4 +1,5 @@
 {
+  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/video-intelligence",
   "version": "0.1.0",
   "author": "Google Inc",
@@ -7,10 +8,8 @@
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -20,20 +19,22 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google video intelligence",
-    "video intelligence",
-    "video"
+    "google video-intelligence",
+    "video-intelligence",
+    "Google Cloud Video Intelligence API"
   ],
   "dependencies": {
-    "extend": "^3.0.0",
+    "google-proto-files": "^0.12.0",
     "google-gax": "^0.13.2",
-    "google-proto-files": "^0.12.0"
+    "extend": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "through2": "^2.0.3"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js video-intelligence",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
     "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
