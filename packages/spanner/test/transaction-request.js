@@ -760,22 +760,36 @@ describe('TransactionRequest', function() {
     var METHOD = 'methodName';
     var TABLE = 'table-name';
     var KEYVALS = [
-      { key: 'value', nullable: true },
-      { key: 'value' } // missing nullable value
+      {
+        key: '1-key-value',
+        anotherNullable: '1-anotherNullable-value',
+        nonNullable: '1-nonNullable-value',
+        nullable: '1-nullable-value'
+      },
+      { /* keys defined in different order */
+        key: '2-key-value',
+        nullable: null,
+        nonNullable: '2-nonNullable-value',
+        anotherNullable: null
+      }
     ];
 
     var EXPECTED_MUTATION = {};
     EXPECTED_MUTATION[METHOD] = {
       table: TABLE,
-      columns: ['key', 'nullable'],
+      columns: ['anotherNullable', 'key', 'nonNullable', 'nullable'],
       values: [
         [
+          KEYVALS[0].anotherNullable,
           KEYVALS[0].key,
+          KEYVALS[0].nonNullable,
           KEYVALS[0].nullable
         ],
         [
+          KEYVALS[1].anotherNullable,
           KEYVALS[1].key,
-          null
+          KEYVALS[1].nonNullable,
+          KEYVALS[1].nullable
         ]
       ]
     };
@@ -797,22 +811,35 @@ describe('TransactionRequest', function() {
 
         switch (numEncodeRequests) {
           case 1: {
+            assert.strictEqual(value, KEYVALS[0].anotherNullable);
+            break;
+          }
+          case 2: {
             assert.strictEqual(value, KEYVALS[0].key);
             break;
           }
-
-          case 2: {
+          case 3: {
+            assert.strictEqual(value, KEYVALS[0].nonNullable);
+            break;
+          }
+          case 4: {
             assert.strictEqual(value, KEYVALS[0].nullable);
             break;
           }
-
-          case 3: {
+          case 5: {
+            assert.strictEqual(value, KEYVALS[1].anotherNullable);
+            break;
+          }
+          case 6: {
             assert.strictEqual(value, KEYVALS[1].key);
             break;
           }
-
-          case 4: {
-            assert.strictEqual(value, null);
+          case 7: {
+            assert.strictEqual(value, KEYVALS[1].nonNullable);
+            break;
+          }
+          case 8: {
+            assert.strictEqual(value, KEYVALS[1].nullable);
             break;
           }
         }

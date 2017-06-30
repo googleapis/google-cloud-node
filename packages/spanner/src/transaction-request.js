@@ -687,9 +687,9 @@ TransactionRequest.prototype.mutate_ = function(method, table, keyVals, cb) {
   var columns = uniq(flatten(keyVals.map(Object.keys))).sort();
 
   var values = keyVals.map(function(keyVal) {
-    return columns.map(function(key) {
-      var value = keyVal[key];
-      return codec.encode(is.undefined(value) ? null : value);
+    return columns.map(function(column) {
+      var value = keyVal[column];
+      return codec.encode(value);
     });
   });
 
