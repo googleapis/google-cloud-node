@@ -19,8 +19,10 @@
     "test": "npm run system-test"
   },
   "dependencies": {
+    "@google-cloud/dlp": "^0.1.0",
     "google-auth-library": "0.10.0",
     "google-auto-auth": "0.7.0",
+    "google-proto-files": "0.12.0",
     "mime": "1.3.6",
     "request": "2.81.0",
     "request-promise": "4.2.1",
