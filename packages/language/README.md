@@ -1,4 +1,4 @@
-# Node.js Client for Google Cloud Natural Language API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+# Node.js Client for Google Cloud Natural Language API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
 [Google Cloud Natural Language API][Product Documentation]: Google Cloud Natural Language API provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, and text annotations.
 - [Client Library Documentation][]
@@ -14,6 +14,30 @@ In order to use this library, you first need to go through the following steps:
 ### Installation
 ```
 $ npm install --save @google-cloud/language
+```
+
+### Preview
+#### LanguageServiceClient
+```js
+ var language = require('@google-cloud/language');
+
+ var client = language({
+    // optional auth parameters.
+ });
+
+ var content = 'Hello, world!';
+ var type = language.v1.types.Document.Type.PLAIN_TEXT;
+ var document = {
+     content : content,
+     type : type
+ };
+ client.analyzeSentiment({document: document}).then(function(responses) {
+     var response = responses[0];
+     // doThingsWith(response)
+ })
+ .catch(function(err) {
+     console.error(err);
+ });
 ```
 
 ### Next Steps

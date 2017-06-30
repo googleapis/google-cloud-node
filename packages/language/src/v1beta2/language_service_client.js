@@ -152,7 +152,8 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  * client.analyzeSentiment({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -211,7 +212,8 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  * client.analyzeEntities(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -269,7 +271,8 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  * client.analyzeEntitySentiment(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -328,7 +331,8 @@ LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, optio
  * client.analyzeSyntax(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -392,7 +396,8 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  * client.annotateText(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */

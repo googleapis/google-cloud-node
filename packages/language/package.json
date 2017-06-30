@@ -34,7 +34,6 @@
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTING",
     "COPYING"
   ],
   "keywords": [
@@ -60,8 +59,9 @@
     "through2": "^2.0.3"
   },
   "scripts": {
-    "test": "mocha",
-    "publish-module": "node ../../scripts/publish.js language"
+    "publish-module": "node ../../scripts/publish.js language",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
