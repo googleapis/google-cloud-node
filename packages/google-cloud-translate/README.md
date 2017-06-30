@@ -1,4 +1,4 @@
-# @google-cloud/translate ([Beta][versioning])
+# @google-cloud/translate ([GA][versioning])
 > Cloud Translation API Client Library for Node.js
 
 *Looking for more Google APIs than just Translation? You might want to check out [`google-cloud`][google-cloud].*
