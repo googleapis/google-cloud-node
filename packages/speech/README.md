@@ -1,4 +1,4 @@
-# Node.js Client for Google Cloud Speech API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+# Node.js Client for Google Cloud Speech API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
 [Google Cloud Speech API][Product Documentation]: Google Cloud Speech API.
 - [Client Library Documentation][]
@@ -14,6 +14,40 @@ In order to use this library, you first need to go through the following steps:
 ### Installation
 ```
 $ npm install --save @google-cloud/speech
+```
+
+### Preview
+#### SpeechClient
+```js
+ var speech = require('@google-cloud/speech');
+
+ var client = speech({
+    // optional auth parameters.
+ });
+
+ var languageCode = 'en-US';
+ var sampleRateHertz = 44100;
+ var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
+ var config = {
+     languageCode : languageCode,
+     sampleRateHertz : sampleRateHertz,
+     encoding : encoding
+ };
+ var uri = 'gs://gapic-toolkit/hello.flac';
+ var audio = {
+     uri : uri
+ };
+ var request = {
+     config: config,
+     audio: audio
+ };
+ client.recognize(request).then(function(responses) {
+     var response = responses[0];
+     // doThingsWith(response)
+ })
+ .catch(function(err) {
+     console.error(err);
+ });
 ```
 
 ### Next Steps

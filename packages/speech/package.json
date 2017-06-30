@@ -8,7 +8,6 @@
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTING",
     "COPYING"
   ],
   "keywords": [
@@ -40,8 +39,9 @@
     "sinon": "^2.2.0"
   },
   "scripts": {
-    "test": "mocha",
-    "publish-module": "node ../../scripts/publish.js speech"
+    "publish-module": "node ../../scripts/publish.js speech",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {

@@ -19,6 +19,7 @@ var extend = require('extend');
 var gapic = {
   v1: require('./v1')
 };
+var gaxGrpc = require('google-gax').grpc();
 var helpers = require('./helpers');
 
 const VERSION = require('../package.json').version;
@@ -48,5 +49,14 @@ function speechV1(options) {
   return client;
 }
 
+var v1Protos = {};
+
+extend(v1Protos, gaxGrpc.load([{
+  root: require('google-proto-files')('..'),
+  file: 'google/cloud/speech/v1/cloud_speech.proto'
+}]).google.cloud.speech.v1);
+
 module.exports = speechV1;
+module.exports.types = v1Protos;
 module.exports.v1 = speechV1;
+module.exports.v1.types = v1Protos;
