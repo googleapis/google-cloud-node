@@ -25,6 +25,7 @@ var globby = require('globby');
 var is = require('is');
 var path = require('path');
 var semver = require('semver');
+var stringIncludes = require('string-includes');
 
 var config = require('./config');
 var helpers = require('../helpers');
@@ -104,10 +105,10 @@ Builder.prototype.build = function() {
       gapicVersion = gapicVersion[1];
       mkdir('-p', `${self.dir}/${gapicVersion}`);
 
-      if (doc.id.includes('doc_')) {
+      if (stringIncludes(doc.id, 'doc_')) {
         grouped[gapicVersion] = grouped[gapicVersion] || [];
         grouped[gapicVersion].push(doc);
-      } else if (doc.id.includes('_client')) {
+      } else if (stringIncludes(doc.id, '_client')) {
         // Move client file to a separate path.
         doc.path = `${gapicVersion}/${doc.path}`;
         self.write(doc.path, doc);
@@ -118,7 +119,7 @@ Builder.prototype.build = function() {
   }, {});
 
   // @TODO delete extra files
-  docs = docs.filter(doc => !doc.source.includes('doc_'));
+  docs = docs.filter(doc => !stringIncludes(doc.source, 'doc_'));
 
   for (var gapicVersion in gapicVersions) {
     var gapicFiles = gapicVersions[gapicVersion];

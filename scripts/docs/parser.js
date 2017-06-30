@@ -16,6 +16,7 @@
 
 'use strict';
 
+var arrayIncludes = require('array-includes');
 var camel = require('lodash.camelcase');
 var dox = require('dox');
 var fs = require('fs');
@@ -24,6 +25,7 @@ var format = require('string-format-obj');
 var globby = require('globby');
 var path = require('path');
 var prop = require('propprop');
+var stringIncludes = require('string-includes');
 var template = require('lodash.template');
 var upperFirst = require('lodash.upperfirst');
 
@@ -287,9 +289,9 @@ function createMethod(fileName, parent, block) {
     .concat(getTagsByType(block, 'property'))
     .map(createParam);
 
-  var isGapic = fileName.includes('doc_');
-  var isRequestOrResponse =
-    name && (name.includes('Request') || name.includes('Response'));
+  var isGapic = stringIncludes(fileName, 'doc_');
+  var isRequestOrResponse = name &&
+    (stringIncludes(name, 'Request') || stringIncludes(name, 'Response'));
 
   if (isGapic && isRequestOrResponse) {
     // Ignore descriptions that have links we don't want, e.g.
@@ -389,7 +391,7 @@ function createTypesDictionary(docs) {
         }
       });
 
-      if (!gapicVersions.includes(gapicVersion)) {
+      if (!arrayIncludes(gapicVersions, gapicVersion)) {
         gapicVersions.push(gapicVersion);
       }
 
@@ -434,12 +436,12 @@ function createToc(types, collapse) {
   var toc = extend(true, {}, baseToc);
 
   var generatedTypes = types.filter(type => / v\d/.test(type.title.join(' ')));
-  var protos = types.filter(type => type.id.includes('/doc/'));
+  var protos = types.filter(type => stringIncludes(type.id, '/doc/'));
   var protosGroupedByVersion = {};
 
   var services = types
-    .filter(type => !generatedTypes.includes(type))
-    .filter(type => !protos.includes(type))
+    .filter(type => !arrayIncludes(generatedTypes, type))
+    .filter(type => !arrayIncludes(protos, type))
     .map(function(type) {
       return {
         type: type.id,
@@ -516,7 +518,8 @@ function createToc(types, collapse) {
     }
   }
 
-  services = services.filter(service => !service.type.includes('data_types'));
+  services = services
+    .filter(service => !stringIncludes(service.type, 'data_types'));
 
   if (!collapse) {
     toc.services = services;
