@@ -1,1 +1,1 @@
-[{"id":"speech","title":["Speech"],"contents":"index.json"}]
+[{"id":"speech","title":["Speech"],"contents":"index.json"},{"id":"speech/v1/speech_client","title":["Speech","v1","SpeechClient"],"contents":"v1/speech_client.json"},{"id":"v1","title":["v1"],"contents":"v1/index.json"}]

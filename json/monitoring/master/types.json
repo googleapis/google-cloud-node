@@ -1,1 +1,1 @@
-[{"id":"monitoring","title":["Monitoring"],"contents":"index.json"}]
+[{"id":"monitoring","title":["Monitoring"],"contents":"index.json"},{"id":"monitoring/v3/group_service_client","title":["Monitoring","v3","GroupServiceClient"],"contents":"v3/group_service_client.json"},{"id":"monitoring/v3/metric_service_client","title":["Monitoring","v3","MetricServiceClient"],"contents":"v3/metric_service_client.json"},{"id":"v3","title":["v3"],"contents":"v3/index.json"}]
