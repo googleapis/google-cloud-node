@@ -98,7 +98,7 @@ Builder.prototype.build = function() {
 
 
   var gapicVersions = docs.reduce((grouped, doc) => {
-    var gapicVersion = doc.id.match(/\/(v[^\/]*)/);
+    var gapicVersion = doc.id.match(/[/_](v[^\/]*)/);
 
     if (gapicVersion) {
       gapicVersion = gapicVersion[1];

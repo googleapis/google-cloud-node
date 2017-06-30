@@ -383,7 +383,7 @@ function createTypesDictionary(docs) {
       var versionIndex;
 
       gapicPath.forEach(function(gapicPathPart, index) {
-        if (/v\d/.test(gapicPathPart)) {
+        if (/^v\d/.test(gapicPathPart)) {
           gapicVersion = gapicPathPart;
           versionIndex = index;
         }
