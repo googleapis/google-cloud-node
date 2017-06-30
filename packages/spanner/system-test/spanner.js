@@ -2716,7 +2716,7 @@ var spanner = new Spanner(env);
           transaction.run('SELECT * FROM TxnTable', function(err, rows) {
             assert.ifError(err);
 
-            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(rows.length, 1);
 
             var row = rows[0].toJSON();
 
