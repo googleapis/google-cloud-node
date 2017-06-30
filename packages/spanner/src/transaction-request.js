@@ -684,12 +684,29 @@ TransactionRequest.prototype.mutate_ = function(method, table, keyVals, cb) {
 
   var mutation = {};
 
+  var columns = keyVals.reduce(function(allKeys, keyVal) {
+    var keys = Object.keys(keyVal);
+    var key;
+
+    for (var i = 0, ii = keys.length; i < ii; ++i) {
+      key = keys[i];
+
+      if (allKeys.indexOf(key) === -1) {
+        allKeys.push(key);
+      }
+    }
+
+    return allKeys;
+  }, []).sort();
+
   mutation[method] = {
     table: table,
-    columns: Object.keys(keyVals[0]),
+    columns: columns,
     values: keyVals.map(function(keyVal) {
-      return Object.keys(keyVal).map(function(key) {
-        return codec.encode(keyVal[key]);
+      return columns.map(function(key) {
+        var value = keyVal[key];
+
+        return codec.encode(value === undefined ? null : value);
       });
     })
   };
