@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'monitoring.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.3.0';
 
 var PAGE_DESCRIPTORS = {
   listGroups: new gax.PageDescriptor(
@@ -73,15 +73,6 @@ var ALL_SCOPES = [
  * updated automatically as monitored resources are added and removed
  * from the infrastructure.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link groupServiceClient}
- *
- * @example
- * var monitoringV3 = require('@google-cloud/monitoring').v3({
- *   // optional auth parameters.
- * });
- * var client = monitoringV3.groupServiceClient();
  *
  * @class
  */
@@ -157,16 +148,6 @@ GroupServiceClient.prototype.projectPath = function(project) {
 };
 
 /**
- * Parses the projectName from a project resource.
- * @param {String} projectName
- *   A fully-qualified path representing a project resources.
- * @returns {String} - A string representing the project.
- */
-GroupServiceClient.prototype.matchProjectFromProjectName = function(projectName) {
-  return PROJECT_PATH_TEMPLATE.match(projectName).project;
-};
-
-/**
  * Returns a fully-qualified group resource name string.
  * @param {String} project
  * @param {String} group
@@ -177,6 +158,16 @@ GroupServiceClient.prototype.groupPath = function(project, group) {
     project: project,
     group: group
   });
+};
+
+/**
+ * Parses the projectName from a project resource.
+ * @param {String} projectName
+ *   A fully-qualified path representing a project resources.
+ * @returns {String} - A string representing the project.
+ */
+GroupServiceClient.prototype.matchProjectFromProjectName = function(projectName) {
+  return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
@@ -201,7 +192,7 @@ GroupServiceClient.prototype.matchGroupFromGroupName = function(groupName) {
 
 /**
  * Get the project ID used by this class.
- * @aram {function(Error, string)} callback - the callback to be called with
+ * @param {function(Error, string)} callback - the callback to be called with
  *   the current project Id.
  */
 GroupServiceClient.prototype.getProjectId = function(callback) {
@@ -264,19 +255,29 @@ GroupServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
- * var formattedName = client.projectPath("[PROJECT]");
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * // Iterate over all elements.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
  * client.listGroups({name: formattedName}).then(function(responses) {
  *     var resources = responses[0];
  *     for (var i = 0; i < resources.length; ++i) {
  *         // doThingsWith(resources[i])
  *     }
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
  * // Or obtain the paged response.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
+ *
  * var options = {autoPaginate: false};
  * function callback(responses) {
  *     // The actual resources in a response.
@@ -358,12 +359,18 @@ GroupServiceClient.prototype.listGroups = function(request, options, callback) {
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
- * client.listGroupsStream({name: formattedName}).on('data', function(element) {
+ * client.listGroupsStream({name: formattedName})
+ * .on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
- *     console.error(err);
+ *     console.log(err);
  * });
  */
 GroupServiceClient.prototype.listGroupsStream = function(request, options) {
@@ -395,12 +402,18 @@ GroupServiceClient.prototype.listGroupsStream = function(request, options) {
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
  * client.getGroup({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -444,7 +457,12 @@ GroupServiceClient.prototype.getGroup = function(request, options, callback) {
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
  * var group = {};
  * var request = {
@@ -454,7 +472,8 @@ GroupServiceClient.prototype.getGroup = function(request, options, callback) {
  * client.createGroup(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -496,12 +515,18 @@ GroupServiceClient.prototype.createGroup = function(request, options, callback) 
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var group = {};
  * client.updateGroup({group: group}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -535,7 +560,12 @@ GroupServiceClient.prototype.updateGroup = function(request, options, callback) 
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
  * client.deleteGroup({name: formattedName}).catch(function(err) {
  *     console.error(err);
@@ -607,19 +637,29 @@ GroupServiceClient.prototype.deleteGroup = function(request, options, callback) 
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
- * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * // Iterate over all elements.
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ *
  * client.listGroupMembers({name: formattedName}).then(function(responses) {
  *     var resources = responses[0];
  *     for (var i = 0; i < resources.length; ++i) {
  *         // doThingsWith(resources[i])
  *     }
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
  * // Or obtain the paged response.
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ *
+ *
  * var options = {autoPaginate: false};
  * function callback(responses) {
  *     // The actual resources in a response.
@@ -701,12 +741,18 @@ GroupServiceClient.prototype.listGroupMembers = function(request, options, callb
  *
  * @example
  *
- * var client = monitoringV3.groupServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.group({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
- * client.listGroupMembersStream({name: formattedName}).on('data', function(element) {
+ * client.listGroupMembersStream({name: formattedName})
+ * .on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
- *     console.error(err);
+ *     console.log(err);
  * });
  */
 GroupServiceClient.prototype.listGroupMembersStream = function(request, options) {
