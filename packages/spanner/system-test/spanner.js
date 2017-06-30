@@ -108,6 +108,22 @@ var spanner = new Spanner(env);
       }, execAfterOperationComplete(done));
     });
 
+    describe('uneven rows', function() {
+      it('should allow inserting uneven rows', function(done) {
+        table.insert([
+          {
+            Key: generateName('id'),
+            BoolValue: true
+          },
+          {
+            Key: generateName('id'),
+            BoolValue: true,
+            IntValue: 10
+          }
+        ], done);
+      });
+    });
+
     describe('structs', function() {
       it('should correctly decode structs', function(done) {
         var query = 'SELECT ARRAY(SELECT as struct 1, "hello")';

@@ -23,7 +23,9 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var flatten = require('lodash.flatten');
 var is = require('is');
+var uniq = require('array-uniq');
 
 /**
  * @type {module:spanner/codec}
@@ -682,33 +684,17 @@ TransactionRequest.prototype.upsert = function(table, keyVals, callback) {
 TransactionRequest.prototype.mutate_ = function(method, table, keyVals, cb) {
   keyVals = arrify(keyVals);
 
-  var mutation = {};
+  var columns = uniq(flatten(keyVals.map(Object.keys))).sort();
 
-  var columns = keyVals.reduce(function(allKeys, keyVal) {
-    var keys = Object.keys(keyVal);
-    var key;
+  var values = keyVals.map(function(keyVal) {
+    return columns.map(function(key) {
+      var value = keyVal[key];
+      return codec.encode(is.undefined(value) ? null : value);
+    });
+  });
 
-    for (var i = 0, ii = keys.length; i < ii; ++i) {
-      key = keys[i];
-
-      if (allKeys.indexOf(key) === -1) {
-        allKeys.push(key);
-      }
-    }
-
-    return allKeys;
-  }, []).sort();
-
-  mutation[method] = {
-    table: table,
-    columns: columns,
-    values: keyVals.map(function(keyVal) {
-      return columns.map(function(key) {
-        var value = keyVal[key];
-
-        return codec.encode(value === undefined ? null : value);
-      });
-    })
+  var mutation = {
+    [method]: { table, columns, values }
   };
 
   if (this.transaction) {

@@ -759,26 +759,30 @@ describe('TransactionRequest', function() {
   describe('mutate_', function() {
     var METHOD = 'methodName';
     var TABLE = 'table-name';
-    var KEYVALS = { key: 'value' };
-
-    var ENCODED_VALUE = {
-      encoded: true
-    };
+    var KEYVALS = [
+      { key: 'value', nullable: true },
+      { key: 'value' } // missing nullable value
+    ];
 
     var EXPECTED_MUTATION = {};
     EXPECTED_MUTATION[METHOD] = {
       table: TABLE,
-      columns: Object.keys(KEYVALS),
+      columns: ['key', 'nullable'],
       values: [
         [
-          ENCODED_VALUE
+          KEYVALS[0].key,
+          KEYVALS[0].nullable
+        ],
+        [
+          KEYVALS[1].key,
+          null
         ]
       ]
     };
 
     beforeEach(function() {
-      fakeCodec.encode = function() {
-        return ENCODED_VALUE;
+      fakeCodec.encode = function(value) {
+        return value;
       };
     });
 
@@ -787,9 +791,33 @@ describe('TransactionRequest', function() {
 
       function callback() {}
 
-      fakeCodec.encode = function(key) {
-        assert.strictEqual(key, KEYVALS[Object.keys(KEYVALS)[0]]);
-        return ENCODED_VALUE;
+      var numEncodeRequests = 0;
+      fakeCodec.encode = function(value) {
+        numEncodeRequests++;
+
+        switch (numEncodeRequests) {
+          case 1: {
+            assert.strictEqual(value, KEYVALS[0].key);
+            break;
+          }
+
+          case 2: {
+            assert.strictEqual(value, KEYVALS[0].nullable);
+            break;
+          }
+
+          case 3: {
+            assert.strictEqual(value, KEYVALS[1].key);
+            break;
+          }
+
+          case 4: {
+            assert.strictEqual(value, null);
+            break;
+          }
+        }
+
+        return value;
       };
 
       var expectedReqOpts = {
