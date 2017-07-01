@@ -872,6 +872,31 @@ describe('TransactionRequest', function() {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
+    it('should throw when rows have incorrect amount of columns', function() {
+      var invalidEntry = { key1: 'val' };
+      var caughtError;
+
+      try {
+        transactionRequest.mutate_(METHOD, TABLE, [
+          invalidEntry,
+          { key1: 'val', key2: 'val' }
+        ], assert.ifError);
+      } catch(e) {
+        caughtError = e;
+      } finally {
+        if (!caughtError) {
+          throw new Error('Expected error was not thrown.');
+        }
+
+        var expectedErrorMessage = [
+          'Row at index 0 does not contain the correct number of columns.',
+          'Missing columns: ["key2"]'
+        ].join('\n\n');
+
+        assert.strictEqual(caughtError.message, expectedErrorMessage);
+      }
+    });
+
     it('should push the request to the queue if a transaction', function(done) {
       transactionRequest.transaction = true;
 

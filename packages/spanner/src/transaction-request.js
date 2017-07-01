@@ -686,7 +686,18 @@ TransactionRequest.prototype.mutate_ = function(method, table, keyVals, cb) {
 
   var columns = uniq(flatten(keyVals.map(Object.keys))).sort();
 
-  var values = keyVals.map(function(keyVal) {
+  var values = keyVals.map(function(keyVal, index) {
+    var keys = Object.keys(keyVal);
+
+    var missingColumns = columns.filter(column => keys.indexOf(column) === -1);
+
+    if (missingColumns.length > 0) {
+      throw new Error([
+        `Row at index ${index} does not contain the correct number of columns.`,
+        `Missing columns: ${JSON.stringify(missingColumns)}`
+      ].join('\n\n'));
+    }
+
     return columns.map(function(column) {
       var value = keyVal[column];
       return codec.encode(value);
