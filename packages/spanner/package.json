@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/spanner",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "author": "Google Inc.",
   "description": "Cloud Spanner Client Library for Node.js",
   "contributors": [
