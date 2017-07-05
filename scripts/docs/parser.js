@@ -38,7 +38,9 @@ var templateFile = fs.readFileSync(
 var parser = module.exports = {};
 
 function isPublic(block) {
-  return !block.isPrivate && !block.ignore;
+  return !block.isPrivate && !block.ignore &&
+    !getTagsByType(block, 'protected').length &&
+    !getTagsByType(block, 'package').length;
 }
 
 function isMethod(block) {
