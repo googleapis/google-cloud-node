@@ -180,6 +180,7 @@
       "name": "@google-cloud/language",
       "defaultService": "language",
       "versions": [
+        "0.10.6",
         "0.10.3",
         "0.10.2",
         "0.10.1",
