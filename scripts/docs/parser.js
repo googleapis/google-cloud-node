@@ -340,21 +340,43 @@ function getMixinMethods(comments) {
 }
 
 function parseFile(fileName, contents, umbrellaMode) {
-  var comments = dox.parseComments(contents).filter(isPublic);
+  var comments = dox.parseComments(contents);
   var constructor = comments.filter(prop('isConstructor'))[0];
   var id = getId(fileName);
   var parent = getParent(id);
 
+  var name;
+
+  if (constructor) {
+    name = getName(constructor);
+  } else {
+    // GAPICs don't have constructors.
+    var tags = comments.map(prop('tags'));
+
+    tags.forEach(tags => {
+      var isModuleTag = tags.some(tag => tag.type === 'module');
+
+      if (isModuleTag) {
+        tags.forEach(tag => {
+          if (tag.type === 'name') {
+            name = tag.string;
+          }
+        });
+      }
+    });
+  }
+
   return {
     id: id,
     type: 'class',
-    name: getName(constructor),
+    name: name,
     overview: createOverview(parent || id, umbrellaMode),
     description: getClassDesc(constructor),
     source: path.normalize(fileName),
     parent: parent,
     children: getChildren(id),
     methods: comments
+      .filter(isPublic)
       .filter(isMethod)
       .map(createMethod.bind(null, fileName, id))
       .concat(getMixinMethods(comments))
