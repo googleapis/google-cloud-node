@@ -362,6 +362,7 @@
       "name": "@google-cloud/translate",
       "defaultService": "translate",
       "versions": [
+        "1.0.0",
         "0.8.1",
         "0.8.0",
         "0.6.0",
