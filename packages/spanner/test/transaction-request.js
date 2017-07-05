@@ -759,26 +759,44 @@ describe('TransactionRequest', function() {
   describe('mutate_', function() {
     var METHOD = 'methodName';
     var TABLE = 'table-name';
-    var KEYVALS = { key: 'value' };
-
-    var ENCODED_VALUE = {
-      encoded: true
-    };
+    var KEYVALS = [
+      {
+        key: '1-key-value',
+        anotherNullable: '1-anotherNullable-value',
+        nonNullable: '1-nonNullable-value',
+        nullable: '1-nullable-value'
+      },
+      { /* keys defined in different order */
+        key: '2-key-value',
+        nullable: null,
+        nonNullable: '2-nonNullable-value',
+        anotherNullable: null
+      }
+    ];
 
     var EXPECTED_MUTATION = {};
     EXPECTED_MUTATION[METHOD] = {
       table: TABLE,
-      columns: Object.keys(KEYVALS),
+      columns: ['anotherNullable', 'key', 'nonNullable', 'nullable'],
       values: [
         [
-          ENCODED_VALUE
+          KEYVALS[0].anotherNullable,
+          KEYVALS[0].key,
+          KEYVALS[0].nonNullable,
+          KEYVALS[0].nullable
+        ],
+        [
+          KEYVALS[1].anotherNullable,
+          KEYVALS[1].key,
+          KEYVALS[1].nonNullable,
+          KEYVALS[1].nullable
         ]
       ]
     };
 
     beforeEach(function() {
-      fakeCodec.encode = function() {
-        return ENCODED_VALUE;
+      fakeCodec.encode = function(value) {
+        return value;
       };
     });
 
@@ -787,9 +805,46 @@ describe('TransactionRequest', function() {
 
       function callback() {}
 
-      fakeCodec.encode = function(key) {
-        assert.strictEqual(key, KEYVALS[Object.keys(KEYVALS)[0]]);
-        return ENCODED_VALUE;
+      var numEncodeRequests = 0;
+      fakeCodec.encode = function(value) {
+        numEncodeRequests++;
+
+        switch (numEncodeRequests) {
+          case 1: {
+            assert.strictEqual(value, KEYVALS[0].anotherNullable);
+            break;
+          }
+          case 2: {
+            assert.strictEqual(value, KEYVALS[0].key);
+            break;
+          }
+          case 3: {
+            assert.strictEqual(value, KEYVALS[0].nonNullable);
+            break;
+          }
+          case 4: {
+            assert.strictEqual(value, KEYVALS[0].nullable);
+            break;
+          }
+          case 5: {
+            assert.strictEqual(value, KEYVALS[1].anotherNullable);
+            break;
+          }
+          case 6: {
+            assert.strictEqual(value, KEYVALS[1].key);
+            break;
+          }
+          case 7: {
+            assert.strictEqual(value, KEYVALS[1].nonNullable);
+            break;
+          }
+          case 8: {
+            assert.strictEqual(value, KEYVALS[1].nullable);
+            break;
+          }
+        }
+
+        return value;
       };
 
       var expectedReqOpts = {
@@ -815,6 +870,31 @@ describe('TransactionRequest', function() {
         callback
       );
       assert.strictEqual(returnValue, requestReturnValue);
+    });
+
+    it('should throw when rows have incorrect amount of columns', function() {
+      var invalidEntry = { key1: 'val' };
+      var caughtError;
+
+      try {
+        transactionRequest.mutate_(METHOD, TABLE, [
+          invalidEntry,
+          { key1: 'val', key2: 'val' }
+        ], assert.ifError);
+      } catch(e) {
+        caughtError = e;
+      } finally {
+        if (!caughtError) {
+          throw new Error('Expected error was not thrown.');
+        }
+
+        var expectedErrorMessage = [
+          'Row at index 0 does not contain the correct number of columns.',
+          'Missing columns: ["key2"]'
+        ].join('\n\n');
+
+        assert.strictEqual(caughtError.message, expectedErrorMessage);
+      }
     });
 
     it('should push the request to the queue if a transaction', function(done) {

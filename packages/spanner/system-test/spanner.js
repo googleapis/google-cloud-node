@@ -108,6 +108,47 @@ var spanner = new Spanner(env);
       }, execAfterOperationComplete(done));
     });
 
+    describe('uneven rows', function() {
+      it('should allow differently-ordered rows', function(done) {
+        var data = [
+          {
+            Key: generateName('id'),
+            BoolValue: true,
+            IntValue: spanner.int(10)
+          },
+          {
+            Key: generateName('id'),
+            IntValue: spanner.int(10),
+            BoolValue: true
+          }
+        ];
+
+        table.insert(data, function(err) {
+          assert.ifError(err);
+
+          database.run({
+            sql: `SELECT * FROM \`${table.name}\` WHERE Key = @a OR KEY = @b`,
+            params: {
+              a: data[0].Key,
+              b: data[1].Key
+            }
+          }, function(err, rows) {
+            assert.ifError(err);
+
+            var row1 = rows[0].toJSON();
+            assert.deepStrictEqual(row1.IntValue, data[0].IntValue);
+            assert.deepStrictEqual(row1.BoolValue, data[0].BoolValue);
+
+            var row2 = rows[1].toJSON();
+            assert.deepStrictEqual(row2.IntValue, data[1].IntValue);
+            assert.deepStrictEqual(row2.BoolValue, data[1].BoolValue);
+
+            done();
+          });
+        });
+      });
+    });
+
     describe('structs', function() {
       it('should correctly decode structs', function(done) {
         var query = 'SELECT ARRAY(SELECT as struct 1, "hello")';
