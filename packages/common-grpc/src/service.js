@@ -23,7 +23,6 @@
 var dotProp = require('dot-prop');
 var duplexify = require('duplexify');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
 var is = require('is');
 var nodeutil = require('util');
@@ -195,18 +194,12 @@ function GrpcService(config, options) {
   this.maxRetries = options.maxRetries;
   this.userAgent = util.getUserAgentFromPackageJson(config.packageJson);
 
-  var apiVersion = config.apiVersion;
   var service = this.service = config.service;
 
   this.activeServiceMap_ = new Map();
   this.protos = {};
 
   var protoServices = config.protoServices;
-
-  if (!protoServices) {
-    protoServices = {};
-    protoServices[service] = googleProtoFiles[service][apiVersion];
-  }
 
   var self = this;
 
@@ -751,8 +744,6 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
  * @return {object} protoObject - The loaded proto object.
  */
 GrpcService.prototype.loadProtoFile_ = function(protoConfig, config) {
-  var rootDir = googleProtoFiles('..');
-
   var grpcOpts = {
     binaryAsBase64: true,
     convertFieldsToCamelCase: true
@@ -765,15 +756,14 @@ GrpcService.prototype.loadProtoFile_ = function(protoConfig, config) {
   }
 
   var services = grpc.load({
-    root: rootDir,
-    file: path.relative(rootDir, protoConfig.path)
+    root: config.protosDir,
+    file: protoConfig.path
   }, 'proto', grpcOpts);
 
   var serviceName = protoConfig.service || config.service;
-  var apiVersion = protoConfig.apiVersion || config.apiVersion;
   var service = dotProp.get(services.google, serviceName);
 
-  return service[apiVersion] || service;
+  return service;
 };
 
 /**
@@ -785,14 +775,7 @@ GrpcService.prototype.loadProtoFile_ = function(protoConfig, config) {
  * @return {object} service - The proto service.
  */
 GrpcService.prototype.getService_ = function(protoOpts) {
-  var proto;
-
-  if (this.protos[protoOpts.service]) {
-    proto = this.protos[protoOpts.service];
-  } else {
-    proto = this.protos[this.service];
-  }
-
+  var proto = this.protos[protoOpts.service];
   var service = this.activeServiceMap_.get(protoOpts.service);
 
   if (!service) {

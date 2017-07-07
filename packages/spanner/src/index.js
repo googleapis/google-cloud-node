@@ -25,8 +25,8 @@ var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
-var googleProtoFiles = require('google-proto-files');
 var is = require('is');
+var path = require('path');
 var util = require('util');
 
 /**
@@ -78,11 +78,11 @@ function Spanner(options) {
 
   var config = {
     baseUrl: 'spanner.googleapis.com',
+    protosDir: path.resolve('protos'),
     protoServices: {
       Operations: {
-        path: googleProtoFiles('longrunning/operations.proto'),
-        service: 'longrunning',
-        apiVersion: 'v1'
+        path: 'google/longrunning/operations.proto',
+        service: 'longrunning'
       }
     },
     scopes: [

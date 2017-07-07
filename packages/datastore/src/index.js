@@ -25,6 +25,7 @@ var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
 var modelo = require('modelo');
+var path = require('path');
 
 /**
  * @type {module:datastore/request}
@@ -310,8 +311,13 @@ function Datastore(options) {
     projectIdRequired: false,
     baseUrl: this.baseUrl_,
     customEndpoint: this.customEndpoint_,
-    service: 'datastore',
-    apiVersion: 'v1',
+    protosDir: path.resolve('protos'),
+    protoServices: {
+      Datastore: {
+        path: 'google/datastore/v1/datastore.proto',
+        service: 'datastore.v1'
+      }
+    },
     scopes: ['https://www.googleapis.com/auth/datastore'],
     packageJson: require('../package.json'),
     grpcMetadata: {

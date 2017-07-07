@@ -24,6 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
+var path = require('path');
 var util = require('util');
 
 /*! Developer Documentation
@@ -69,8 +70,13 @@ var util = require('util');
 function IAM(pubsub, id) {
   var config = {
     baseUrl: pubsub.defaultBaseUrl_,
-    service: 'iam',
-    apiVersion: 'v1',
+    protosDir: path.resolve('protos'),
+    protoServices: {
+      IAMPolicy: {
+        path: 'google/iam/v1/iam_policy.proto',
+        service: 'iam.v1'
+      }
+    },
     scopes: [
       'https://www.googleapis.com/auth/pubsub',
       'https://www.googleapis.com/auth/cloud-platform'
