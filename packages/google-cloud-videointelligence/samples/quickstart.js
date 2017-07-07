@@ -48,22 +48,11 @@ video.annotateVideo(request)
     const faces = annotations.faceAnnotations;
     faces.forEach((face, faceIdx) => {
       console.log('Thumbnail size:', face.thumbnail.length);
-
-      const isEntireVideo = face.segments.some((segment) =>
-        segment.startTimeOffset.toNumber() === -1 &&
-        segment.endTimeOffset.toNumber() === -1
-      );
-
-      if (isEntireVideo) {
-        console.log(`Face #${faceIdx}`);
-        console.log(`\tEntire video`);
-      } else {
-        face.segments.forEach((segment, segmentIdx) => {
-          console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
-          console.log(`\tStart: ${segment.startTimeOffset / 1e6}s`);
-          console.log(`\tEnd: ${segment.endTimeOffset / 1e6}s`);
-        });
-      }
+      face.segments.forEach((segment, segmentIdx) => {
+        console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
+        console.log(`\tStart: ${segment.startTimeOffset / 1e6}s`);
+        console.log(`\tEnd: ${segment.endTimeOffset / 1e6}s`);
+      });
     });
 
     // Gets labels for video from its annotations
