@@ -30,6 +30,12 @@ var prop = require('propprop');
 var util = require('util');
 
 /**
+ * @type {module:pubsub/connectionPool}
+ * @private
+ */
+var ConnectionPool = require('./connection-pool.js');
+
+/**
  * @type {module:pubsub/histogram}
  * @private
  */
@@ -40,12 +46,6 @@ var Histogram = require('./histogram.js');
  * @private
  */
 var IAM = require('./iam.js');
-
-/**
- * @type {module:pubsub/message}
- * @private
- */
-var Message = require('./message.js');
 
 /**
  * @type {module:pubsub/snapshot}
@@ -155,8 +155,9 @@ function Subscription(pubsub, name, options) {
   this.projectId = pubsub.projectId;
   this.name = Subscription.formatName_(pubsub.projectId, name);
 
-  this.connection = null;
+  this.connectionPool = null;
   this.ackDeadline = options.ackDeadline || 10000;
+  this.maxConnections = options.maxConnections;
 
   this.inventory_ = {
     lease: [],
@@ -243,13 +244,22 @@ Subscription.prototype.ack_ = function(message) {
   this.breakLease_(message);
   this.histogram.add(Date.now() - message.received_);
 
-  if (this.connection) {
-    this.connection.write({ ackIds: [message.ackId] });
+  if (!this.connectionPool) {
+    this.inventory_.ack.push(message.ackId);
+    this.setFlushTimeout_();
     return;
   }
 
-  this.inventory_.ack.push(message.ackId);
-  this.setFlushTimeout_();
+  var self = this;
+
+  this.connectionPool.acquire(message.connectionId, function(err, connection) {
+    if (err) {
+      self.emit('error', err);
+      return;
+    }
+
+    connection.write({ ackIds: [message.ackId] });
+  });
 };
 
 /**
@@ -261,9 +271,9 @@ Subscription.prototype.breakLease_ = function(message) {
   this.inventory_.lease.splice(0, messageIndex);
   this.inventory_.bytes -= message.data.length;
 
-  if (this.connection) {
-    if (this.connection.isPaused() && !this.hasMaxMessages_()) {
-      this.connection.resume();
+  if (this.connectionPool) {
+    if (this.connectionPool.isPaused && !this.hasMaxMessages_()) {
+      this.connectionPool.resume();
     }
   }
 
@@ -293,9 +303,9 @@ Subscription.prototype.close = function(callback) {
  *
  */
 Subscription.prototype.closeConnection_ = function(callback) {
-  if (this.connection) {
-    this.connection.end(callback || common.util.noop);
-    this.connection = null;
+  if (this.connectionPool) {
+    this.connectionPool.drain(callback || common.util.noop);
+    this.connectionPool = null;
   } else if (is.fn(callback)) {
     setImmediate(callback);
   }
@@ -416,6 +426,8 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
  *
  */
 Subscription.prototype.flushQueues_ = function() {
+  var self = this;
+
   var acks = this.inventory_.ack;
   var nacks = this.inventory_.nack;
 
@@ -423,26 +435,31 @@ Subscription.prototype.flushQueues_ = function() {
     return;
   }
 
-  this.inventory_.ack = [];
-  this.inventory_.nack = [];
+  if (this.connectionPool) {
+    this.connectionPool.acquire(function(err, connection) {
+      if (err) {
+        self.emit('error', err);
+        return;
+      }
 
-  if (this.connection) {
-    var reqOpts = {};
+      var reqOpts = {};
 
-    if (acks.length) {
-      reqOpts.ackIds = acks;
-    }
+      if (acks.length) {
+        reqOpts.ackIds = acks;
+      }
 
-    if (nacks.length) {
-      reqOpts.modifyDeadlineAckIds = nacks;
-      reqOpts.modifyDeadlineSeconds = Array(nacks.length).fill(0);
-    }
+      if (nacks.length) {
+        reqOpts.modifyDeadlineAckIds = nacks;
+        reqOpts.modifyDeadlineSeconds = Array(nacks.length).fill(0);
+      }
 
-    this.connection.write(reqOpts);
+      connection.write(reqOpts);
+
+      self.inventory_.ack = [];
+      self.inventory_.nack = [];
+    });
     return;
   }
-
-  var self = this;
 
   if (acks.length) {
     this.request({
@@ -455,6 +472,8 @@ Subscription.prototype.flushQueues_ = function() {
     }, function(err) {
       if (err) {
         self.emit('error', err);
+      } else {
+        self.inventory_.ack = [];
       }
     });
   }
@@ -471,6 +490,8 @@ Subscription.prototype.flushQueues_ = function() {
     }, function(err) {
       if (err) {
         self.emit('error', err);
+      } else {
+        self.inventory_.nack = [];
       }
     });
   }
@@ -512,9 +533,7 @@ Subscription.prototype.hasMaxMessages_ = function() {
 /**
  *
  */
-Subscription.prototype.leaseMessage_ = function(data) {
-  var message = new Message(this, data);
-
+Subscription.prototype.leaseMessage_ = function(message) {
   this.inventory_.lease.push(message.ackId);
   this.inventory_.bytes += message.data.length;
   this.setLeaseTimeout_();
@@ -585,16 +604,23 @@ Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
 Subscription.prototype.nack_ = function(message) {
   this.breakLease_(message);
 
-  if (this.connection) {
-    this.connection.write({
-      modifyDeadlineAckIds: [message.ackId],
-      modifyDeadlineSeconds: [0]
-    });
+  if (!this.connectionPool) {
+    this.inventory_.nack.push(message.ackId);
+    this.setFlushTimeout_();
     return;
   }
 
-  this.inventory_.nack.push(message.ackId);
-  this.setFlushTimeout_();
+  this.connectionPool.acquire(message.connectionId, function(err, connection) {
+    if (err) {
+      self.emit('error', err);
+      return;
+    }
+console.log('nacking');
+    connection.write({
+      modifyDeadlineAckIds: [message.ackId],
+      modifyDeadlineSeconds: [0]
+    });
+  });
 }
 
 /**
@@ -603,57 +629,27 @@ Subscription.prototype.nack_ = function(message) {
 Subscription.prototype.openConnection_ = function() {
   var self = this;
 
-  var reqOpts = {
-    subscription: this.name,
-    streamAckDeadlineSeconds: this.ackDeadline / 1000
-  };
+  var pool = this.connectionPool = new ConnectionPool(this, {
+    ackDeadline: this.ackDeadline,
+    maxConnections: this.maxConnections
+  });
 
-  this.request({
-    client: 'subscriberClient',
-    method: 'streamingPull',
-    returnFn: true
-  }, function(err, requestFn) {
-    if (err) {
-      self.emit('error', err);
-      return;
+  pool.on('error', function(err) {
+    self.emit('error', err);
+  });
+
+  pool.on('message', function(message) {
+    self.emit('message', self.leaseMessage_(message));
+
+    if (self.hasMaxMessages_()) {
+      pool.pause();
     }
+  });
 
-    var connection = requestFn();
-
-    connection.on('error', function(err) {
-      self.emit('error', err);
-    });
-
-    connection.on('data', function(data) {
-      arrify(data.receivedMessages).forEach(function(message) {
-        self.emit('message', self.leaseMessage_(message));
-      });
-
-      if (self.hasMaxMessages_()) {
-        connection.pause();
-      }
-    });
-
-    // this event is the closest thing that we have to an indication that a
-    // connection was opened successfully. when we know it was opened we'll
-    // expose it to the client. this should prevent writes from happening
-    // before it was opened
-    connection.on('metadata', function() {
-      self.connection = connection;
-
-      clearTimeout(self.flushTimeoutHandle_);
-      self.flushTimeoutHandle_ = null;
-      self.flushQueues_();
-    });
-
-    connection.on('close', function() {
-      if (!self.userClosed_) {
-        self.closeConnection_();
-        self.openConnection_();
-      }
-    });
-
-    connection.write(reqOpts);
+  pool.once('connected', function() {
+    clearTimeout(self.flushTimeoutHandle_);
+    self.flushTimeoutHandle_ = null;
+    self.flushQueues_();
   });
 };
 
@@ -673,10 +669,20 @@ Subscription.prototype.renewLeases_ = function() {
   this.ackDeadline = this.histogram.percentile(99);
   var ackDeadlineSeconds = this.ackDeadline / 1000;
 
-  if (this.connection) {
-    this.connection.write({
-      modifyDeadlineAckIds: ackIds,
-      modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
+  if (this.connectionPool) {
+    this.connectionPool.acquire(function(err, connection) {
+      if (err) {
+        self.emit('error', err);
+        return;
+      }
+console.log({
+        modifyDeadlineAckIds: ackIds,
+        modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
+      });
+      connection.write({
+        modifyDeadlineAckIds: ackIds,
+        modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
+      });
     });
 
     this.setLeaseTimeout_();

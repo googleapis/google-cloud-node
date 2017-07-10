@@ -54,6 +54,7 @@
     "@google-cloud/common": "^0.13.0",
     "@google-cloud/common-grpc": "^0.4.0",
     "arrify": "^1.0.0",
+    "async-each": "^1.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",

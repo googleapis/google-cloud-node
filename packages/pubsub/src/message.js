@@ -23,8 +23,9 @@
 /**
  *
  */
-function Message(subscription, resp) {
+function Message(subscription, connectionId, resp) {
   this.subscription = subscription;
+  this.connectionId = connectionId;
 
   this.ackId = resp.ackId;
   this.id = resp.message.messageId;
