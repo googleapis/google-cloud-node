@@ -161,11 +161,12 @@ function Subscription(pubsub, name, options) {
   this.inventory_ = {
     lease: [],
     ack: [],
-    nack: []
+    nack: [],
+    bytes: 0
   };
 
   this.flowControl = extend({
-    highWaterMark: 16,
+    maxBytes: os.freemem() * 0.2,
     maxMessages: Infinity
   }, options.flowControl);
 
@@ -256,10 +257,14 @@ Subscription.prototype.ack_ = function(message) {
  */
 Subscription.prototype.breakLease_ = function(message) {
   var messageIndex = this.inventory_.lease.indexOf(message.ackId);
-  this.inventory_.lease.splice(0, messageIndex);
 
-  if (this.connection && this.connection.isPaused()) {
-    this.connection.resume();
+  this.inventory_.lease.splice(0, messageIndex);
+  this.inventory_.bytes -= message.data.length;
+
+  if (this.connection) {
+    if (this.connection.isPaused() && !this.hasMaxMessages_()) {
+      this.connection.resume();
+    }
   }
 
   if (!this.inventory_.lease.length) {
@@ -499,10 +504,19 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
 /**
  *
  */
+Subscription.prototype.hasMaxMessages_ = function() {
+  return this.inventory_.lease.length >= this.flowControl.maxMessages ||
+    this.inventory_.bytes >= this.flowControl.maxBytes;
+};
+
+/**
+ *
+ */
 Subscription.prototype.leaseMessage_ = function(data) {
   var message = new Message(this, data);
 
   this.inventory_.lease.push(message.ackId);
+  this.inventory_.bytes += message.data.length;
   this.setLeaseTimeout_();
 
   return message;
@@ -597,10 +611,7 @@ Subscription.prototype.openConnection_ = function() {
   this.request({
     client: 'subscriberClient',
     method: 'streamingPull',
-    returnFn: true,
-    reqOpts: {
-      highWaterMark: self.flowControl.highWaterMark
-    }
+    returnFn: true
   }, function(err, requestFn) {
     if (err) {
       self.emit('error', err);
@@ -618,7 +629,7 @@ Subscription.prototype.openConnection_ = function() {
         self.emit('message', self.leaseMessage_(message));
       });
 
-      if (self.inventory_.lease.length >= self.flowControl.maxMessages) {
+      if (self.hasMaxMessages_()) {
         connection.pause();
       }
     });
