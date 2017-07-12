@@ -460,6 +460,18 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
 
 /**
  * Maps to {module:datastore#save}, forcing the method to be `insert`.
+ *
+ * @throws {Error} If an unrecognized method is provided.
+ *
+ * @param {object|object[]} entities - Datastore key object(s).
+ * @param {Key} entities.key - Datastore key object.
+ * @param {object|object[]} entities.data - Data to save with the provided key.
+ *     If you provide an array of objects, you must use the explicit syntax:
+ *     `name` for the name of the property and `value` for its value. You may
+ *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {object} callback.apiResponse - The full API response.
  */
 DatastoreRequest.prototype.insert = function(entities, callback) {
   entities = arrify(entities)
@@ -990,6 +1002,18 @@ DatastoreRequest.prototype.save = function(entities, callback) {
 
 /**
  * Maps to {module:datastore#save}, forcing the method to be `update`.
+ *
+ * @throws {Error} If an unrecognized method is provided.
+ *
+ * @param {object|object[]} entities - Datastore key object(s).
+ * @param {Key} entities.key - Datastore key object.
+ * @param {object|object[]} entities.data - Data to save with the provided key.
+ *     If you provide an array of objects, you must use the explicit syntax:
+ *     `name` for the name of the property and `value` for its value. You may
+ *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {object} callback.apiResponse - The full API response.
  */
 DatastoreRequest.prototype.update = function(entities, callback) {
   entities = arrify(entities)
@@ -1001,6 +1025,18 @@ DatastoreRequest.prototype.update = function(entities, callback) {
 
 /**
  * Maps to {module:datastore#save}, forcing the method to be `upsert`.
+ *
+ * @throws {Error} If an unrecognized method is provided.
+ *
+ * @param {object|object[]} entities - Datastore key object(s).
+ * @param {Key} entities.key - Datastore key object.
+ * @param {object|object[]} entities.data - Data to save with the provided key.
+ *     If you provide an array of objects, you must use the explicit syntax:
+ *     `name` for the name of the property and `value` for its value. You may
+ *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {object} callback.apiResponse - The full API response.
  */
 DatastoreRequest.prototype.upsert = function(entities, callback) {
   entities = arrify(entities)
