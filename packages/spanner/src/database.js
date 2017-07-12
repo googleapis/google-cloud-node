@@ -77,15 +77,15 @@ var TransactionRequest = require('./transaction-request.js');
  * @param {boolean} options.fail - If set to true, an error will be thrown when
  *     there are no available sessions for a request. (Default: `false`)
  * @param {number} options.max - Maximum number of resources to create at any
- *     given time. (Default: Number.MAX_SAFE_INTEGER)
+ *     given time. (Default: `100`)
  * @param {number} options.maxIdle - Maximum number of idle resources to keep
- *     in the pool at any given time.
+ *     in the pool at any given time. (Default: `1`)
  * @param {number} options.min - Minimum number of resources to keep in the pool
  *     at any given time. (Default: `0`)
  * @param {number} options.keepAlive - How often to ping idle sessions, in
  *     minutes. Must be less than 1 hour.
  * @param {number} options.writes - Pre-allocate transactions for the number of
- *     sessions specified.
+ *     sessions specified. (Default: `0`)
  *
  * @example
  * var instance = spanner.instance('my-instance');
