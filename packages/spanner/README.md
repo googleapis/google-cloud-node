@@ -1,4 +1,4 @@
-# @google-cloud/spanner ([Alpha][versioning])
+# @google-cloud/spanner ([Beta][versioning])
 > Cloud Spanner Client Library for Node.js
 
 *Looking for more Google APIs than just Cloud Spanner? You might want to check out [`google-cloud`][google-cloud].*
@@ -20,13 +20,14 @@ var instance = spanner.instance('my-instance');
 var database = instance.database('my-database');
 
 // Create a table.
-var schema =
-  'CREATE TABLE Singers (' +
-  '  SingerId INT64 NOT NULL,' +
-  '  FirstName STRING(1024),' +
-  '  LastName STRING(1024),' +
-  '  SingerInfo BYTES(MAX),' +
-  ') PRIMARY KEY(SingerId)';
+var schema = `
+  CREATE TABLE Singers (
+    SingerId INT64 NOT NULL,
+    FirstName STRING(1024),
+    LastName STRING(1024),
+    SingerInfo BYTES(MAX),
+  ) PRIMARY KEY(SingerId)
+`;
 
 database.createTable(schema, function(err, table, operation) {
   if (err) {
