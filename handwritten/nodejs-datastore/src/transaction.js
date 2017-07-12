@@ -55,6 +55,7 @@ function Transaction(datastore) {
   this.datastore = datastore;
 
   this.projectId = datastore.projectId;
+  this.namespace = datastore.namespace;
 
   this.request = datastore.request.bind(datastore);
 
