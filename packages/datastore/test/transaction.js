@@ -63,10 +63,12 @@ describe('Transaction', function() {
   var transaction;
   var TRANSACTION_ID = 'transaction-id';
   var PROJECT_ID = 'project-id';
+  var NAMESPACE = 'a-namespace';
 
   var DATASTORE = {
     request: function() {},
-    projectId: PROJECT_ID
+    projectId: PROJECT_ID,
+    namespace: NAMESPACE
   };
 
   function key(path) {
@@ -97,6 +99,10 @@ describe('Transaction', function() {
 
     it('should localize the project ID', function() {
       assert.strictEqual(transaction.projectId, PROJECT_ID);
+    });
+
+    it('should localize the namespace', function() {
+      assert.strictEqual(transaction.namespace, NAMESPACE);
     });
 
     it('should localize request function', function(done) {
