@@ -5,7 +5,7 @@ This module provides an easy to use, higher-level layer for working with Stackdr
 
 For lower-level access to the Stackdriver Logging API, see [@google-cloud/logging][@google-cloud/logging].
 
-> *This module is experimental and should be used by early adopters. This module uses APIs that may be undocumented and subject to change without notice.*
+> **Beta** *This is a Beta release of the Stackdriver Logging libraries for Node.js. These libraries might be changed in backward-incompatible ways and are not subject to any SLA or deprecation policy.*
 
 ``` sh
 $ npm install --save @google-cloud/logging-bunyan
