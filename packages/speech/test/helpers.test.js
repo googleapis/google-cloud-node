@@ -51,7 +51,6 @@ describe('Speech helper methods', () => {
       assert(sr.calledOnce);
       assert(sr.calledWithExactly(options));
       assert(write.calledOnce);
-      //assert(write.calledWithExactly({streamingConfig: config}));
     });
   });
 });
