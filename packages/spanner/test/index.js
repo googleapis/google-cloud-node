@@ -121,6 +121,10 @@ describe('Spanner', function() {
   });
 
   describe('instantiation', function() {
+    it('should localize an instance map', function() {
+      assert(spanner.instances_ instanceof Map);
+    });
+
     it('should promisify all the things', function() {
       assert(promisified);
     });
@@ -639,11 +643,28 @@ describe('Spanner', function() {
       }, /A name is required to access an Instance object\./);
     });
 
-    it('should return an Instance object', function() {
+    it('should create and cache an Instance', function() {
+      var cache = spanner.instances_;
+
+      assert.strictEqual(cache.has(NAME), false);
+
       var instance = spanner.instance(NAME);
+
       assert(instance instanceof FakeInstance);
       assert.strictEqual(instance.calledWith_[0], spanner);
       assert.strictEqual(instance.calledWith_[1], NAME);
+      assert.strictEqual(instance, cache.get(NAME));
+    });
+
+    it('should re-use cached objects', function() {
+      var cache = spanner.instances_;
+      var fakeInstance = {};
+
+      cache.set(NAME, fakeInstance);
+
+      var instance = spanner.instance(NAME);
+
+      assert.strictEqual(instance, fakeInstance);
     });
   });
 
