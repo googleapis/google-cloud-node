@@ -96,144 +96,7 @@ function Bucket(storage, name) {
      *   var apiResponse = data[1];
      * });
      */
-    create: true,
-
-    /**
-     * Delete the bucket.
-     *
-     * @resource [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * bucket.delete(function(err, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: true,
-
-    /**
-     * Check if the bucket exists.
-     *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the bucket exists or not.
-     *
-     * @example
-     * bucket.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.exists().then(function(data) {
-     *   var exists = data[0];
-     * });
-     */
-    exists: true,
-
-    /**
-     * Get a bucket if it exists.
-     *
-     * You may optionally use this to "get or create" an object by providing an
-     * object with `autoCreate` set to `true`. Any extra configuration that is
-     * normally required for the `create` method must be contained within this
-     * object as well.
-     *
-     * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
-     *
-     * @example
-     * bucket.get(function(err, bucket, apiResponse) {
-     *   // `bucket.metadata` has been populated.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.get().then(function(data) {
-     *   var bucket = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    get: true,
-
-    /**
-     * Get the bucket's metadata.
-     *
-     * To set metadata, see {module:storage/bucket#setMetadata}.
-     *
-     * @resource [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The bucket's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * bucket.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    getMetadata: true,
-
-    /**
-     * Set the bucket's metadata.
-     *
-     * @resource [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
-     *
-     * @param {object} metadata - The metadata you wish to set.
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * //-
-     * // Set website metadata field on the bucket.
-     * //-
-     * var metadata = {
-     *   website: {
-     *     mainPageSuffix: 'http://example.com',
-     *     notFoundPage: 'http://example.com/404.html'
-     *   }
-     * };
-     *
-     * bucket.setMetadata(metadata, function(err, apiResponse) {});
-     *
-     * //-
-     * // Enable versioning for your bucket.
-     * //-
-     * bucket.setMetadata({
-     *   versioning: {
-     *     enabled: true
-     *   }
-     * }, function(err, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.setMetadata(metadata).then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    setMetadata: true
+    create: true
   };
 
   common.ServiceObject.call(this, {
@@ -357,6 +220,10 @@ util.inherits(Bucket, common.ServiceObject);
  *     combined.
  * @param {string|module:storage/file} destination - The file you would like the
  *     source files combined into.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file} callback.newFile - The combined file.
@@ -384,7 +251,7 @@ util.inherits(Bucket, common.ServiceObject);
  *   var apiResponse = data[1];
  * });
  */
-Bucket.prototype.combine = function(sources, destination, callback) {
+Bucket.prototype.combine = function(sources, destination, options, callback) {
   if (!is.array(sources) || sources.length < 2) {
     throw new Error('You must provide at least two source files.');
   }
@@ -394,6 +261,11 @@ Bucket.prototype.combine = function(sources, destination, callback) {
   }
 
   var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
 
   sources = sources.map(convertToFile);
   destination = convertToFile(destination);
@@ -429,7 +301,8 @@ Bucket.prototype.combine = function(sources, destination, callback) {
 
         return sourceObject;
       })
-    }
+    },
+    qs: options
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -461,6 +334,10 @@ Bucket.prototype.combine = function(sources, destination, callback) {
  *     [Objects: watchAll request body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
  * @param {string} config.address - The address where notifications are
  *     delivered for this channel.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/channel} callback.channel - The created Channel
@@ -488,7 +365,7 @@ Bucket.prototype.combine = function(sources, destination, callback) {
  *   var apiResponse = data[1];
  * });
  */
-Bucket.prototype.createChannel = function(id, config, callback) {
+Bucket.prototype.createChannel = function(id, config, options, callback) {
   var self = this;
 
   if (!is.string(id)) {
@@ -499,13 +376,19 @@ Bucket.prototype.createChannel = function(id, config, callback) {
     throw new Error('An address is required to create a channel.');
   }
 
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
   this.request({
     method: 'POST',
     uri: '/o/watch',
     json: extend({
       id: id,
       type: 'web_hook'
-    }, config)
+    }, config),
+    qs: options
   }, function(err, apiResponse) {
     if (err) {
       callback(err, null, apiResponse);
@@ -519,6 +402,43 @@ Bucket.prototype.createChannel = function(id, config, callback) {
 
     callback(null, channel, apiResponse);
   });
+};
+
+/**
+ * Delete the bucket.
+ *
+ * @resource [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * bucket.delete(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Bucket.prototype.delete = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.request({
+    method: 'DELETE',
+    uri: '',
+    qs: options
+  }, callback || common.util.noop);
 };
 
 /**
@@ -542,6 +462,9 @@ Bucket.prototype.createChannel = function(id, config, callback) {
  *     for all of the supported properties.
  * @param {boolean} query.force - Suppress errors until all files have been
  *     processed.
+ * @param {boolean} query.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error|?error[]} callback.err - An API error or array of errors from
  *     files that were not able to be deleted.
@@ -599,7 +522,7 @@ Bucket.prototype.deleteFiles = function(query, callback) {
     }
 
     function deleteFile(file, callback) {
-      file.delete(function(err) {
+      file.delete(query, function(err) {
         if (err) {
           if (query.force) {
             errors.push(err);
@@ -627,6 +550,194 @@ Bucket.prototype.deleteFiles = function(query, callback) {
   });
 };
 
+
+/**
+ * Delete one or more labels from this bucket.
+ *
+ * @param {string=|string[]=} labels - The labels to delete. If no labels are
+ *     provided, all of the labels are removed.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.metadata - The bucket's metadata.
+ *
+ * @example
+ * //-
+ * // Delete all of the labels from this bucket.
+ * //-
+ * bucket.deleteLabels(function(err, metadata) {});
+ *
+ * //-
+ * // Delete a single label.
+ * //-
+ * bucket.deleteLabels('labelone', function(err, metadata) {});
+ *
+ * //-
+ * // Delete a specific set of labels.
+ * //-
+ * bucket.deleteLabels([
+ *   'labelone',
+ *   'labeltwo'
+ * ], function(err, metadata) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.deleteLabels().then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+Bucket.prototype.deleteLabels = function(labels, callback) {
+  var self = this;
+
+  if (is.fn(labels)) {
+    callback = labels;
+    labels = [];
+  }
+
+  labels = arrify(labels);
+
+  if (labels.length === 0) {
+    this.getLabels(function(err, labels) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      deleteLabels(Object.keys(labels));
+    });
+  } else {
+    deleteLabels(labels);
+  }
+
+  function deleteLabels(labels) {
+    var nullLabelMap = labels.reduce(function(nullLabelMap, labelKey) {
+      nullLabelMap[labelKey] = null;
+      return nullLabelMap;
+    }, {});
+
+    self.setLabels(nullLabelMap, callback);
+  }
+};
+
+/**
+ * <div class="notice">
+ *   <strong>Early Access Testers Only</strong>
+ *   <p>
+ *     This feature is not yet widely-available.
+ *   </p>
+ * </div>
+ *
+ * Disable `requesterPays` functionality from this bucket.
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * bucket.disableRequesterPays(function(err) {
+ *   if (!err) {
+ *     // requesterPays functionality disabled successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.disableRequesterPays().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Bucket.prototype.disableRequesterPays = function(callback) {
+  this.setMetadata({
+    billing: {
+      requesterPays: false
+    }
+  }, callback || common.util.noop);
+};
+
+/**
+ * <div class="notice">
+ *   <strong>Early Access Testers Only</strong>
+ *   <p>
+ *     This feature is not yet widely-available.
+ *   </p>
+ * </div>
+ *
+ * Enable `requesterPays` functionality for this bucket. This enables you, the
+ * bucket owner, to have the requesting user assume the charges for the access
+ * to your bucket and its contents.
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * bucket.enableRequesterPays(function(err) {
+ *   if (!err) {
+ *     // requesterPays functionality enabled successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.enableRequesterPays().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Bucket.prototype.enableRequesterPays = function(callback) {
+  this.setMetadata({
+    billing: {
+      requesterPays: true
+    }
+  }, callback || common.util.noop);
+};
+
+/**
+ * Check if the bucket exists.
+ *
+ * @param {options=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {boolean} callback.exists - Whether the bucket exists or not.
+ *
+ * @example
+ * bucket.exists(function(err, exists) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.exists().then(function(data) {
+ *   var exists = data[0];
+ * });
+ */
+Bucket.prototype.exists = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.get(options, function(err) {
+    if (err) {
+      if (err.code === 404) {
+        callback(null, false);
+      } else {
+        callback(err);
+      }
+
+      return;
+    }
+
+    callback(null, true);
+  });
+};
+
 /**
  * Create a File object. See {module:storage/file} to see how to handle
  * the different use cases you may have.
@@ -651,6 +762,84 @@ Bucket.prototype.file = function(name, options) {
 };
 
 /**
+ * Get a bucket if it exists.
+ *
+ * You may optionally use this to "get or create" an object by providing an
+ * object with `autoCreate` set to `true`. Any extra configuration that is
+ * normally required for the `create` method must be contained within this
+ * object as well.
+ *
+ * @param {options=} options - Configuration object.
+ * @param {boolean} options.autoCreate - Automatically create the object if
+ *     it does not exist. Default: `false`
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ *
+ * @example
+ * bucket.get(function(err, bucket, apiResponse) {
+ *   // `bucket.metadata` has been populated.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.get().then(function(data) {
+ *   var bucket = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Bucket.prototype.get = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  var autoCreate = options.autoCreate;
+  delete options.autoCreate;
+
+  function onCreate(err, bucket, apiResponse) {
+    if (err) {
+      if (err.code === 409) {
+        self.get(options, callback);
+        return;
+      }
+
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    callback(null, bucket, apiResponse);
+  }
+
+  this.getMetadata(options, function(err, metadata) {
+    if (err) {
+      if (err.code === 404 && autoCreate) {
+        var args = [];
+
+        if (!is.empty(options)) {
+          args.push(options);
+        }
+
+        args.push(onCreate);
+
+        self.create.apply(self, args);
+        return;
+      }
+
+      callback(err, null, metadata);
+      return;
+    }
+
+    callback(null, self, metadata);
+  });
+};
+
+/**
  * Get File objects for the files currently in the bucket.
  *
  * @resource [Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list}
@@ -670,6 +859,9 @@ Bucket.prototype.file = function(name, options) {
  *     return.
  * @param {string} query.pageToken - A previously-returned page token
  *     representing part of the larger set of results to view.
+ * @param {boolean} query.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {boolean} query.versions - If true, returns File objects scoped to
  *     their versions.
  * @param {function=} callback - The callback function.
@@ -795,6 +987,103 @@ Bucket.prototype.getFiles = function(query, callback) {
 Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
 
 /**
+ * Get the labels from this bucket.
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.labels - The labels currently set on this bucket.
+ *
+ * @example
+ * bucket.getLabels(function(err, labels) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // labels = {
+ *   //   label: 'labelValue',
+ *   //   ...
+ *   // }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.getLabels().then(function(data) {
+ *   var labels = data[0];
+ * });
+ */
+Bucket.prototype.getLabels = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.getMetadata(options, function(err, metadata) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, metadata.labels || {});
+  });
+};
+
+/**
+ * Get the bucket's metadata.
+ *
+ * To set metadata, see {module:storage/bucket#setMetadata}.
+ *
+ * @resource [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.metadata - The bucket's metadata.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * bucket.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Bucket.prototype.getMetadata = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.request({
+    uri: '',
+    qs: options
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    self.metadata = resp;
+
+    callback(null, self.metadata, resp);
+  });
+};
+
+/**
  * Make the bucket listing private.
  *
  * You may also choose to make the contents of the bucket private by specifying
@@ -817,6 +1106,9 @@ Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
  *     Default: `false`.
  * @param {boolean} options.force - Queue errors occurred while making files
  *     private until all files have been processed.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/file[]} callback.files - List of files made private.
@@ -884,27 +1176,15 @@ Bucket.prototype.makePrivate = function(options, callback) {
       predefinedAcl: 'projectPrivate'
     };
 
-    // You aren't allowed to set both predefinedAcl & acl properties on a bucket
-    // so acl must explicitly be nullified.
-    var metadata = {
+    if (options.userProject) {
+      query.userProject = options.userProject;
+    }
+
+    self.setMetadata({
+      // You aren't allowed to set both predefinedAcl & acl properties on a
+      // bucket so acl must explicitly be nullified.
       acl: null
-    };
-
-    self.request({
-      method: 'PATCH',
-      uri: '',
-      qs: query,
-      json: metadata
-    }, function(err, resp) {
-      if (err) {
-        done(err);
-        return;
-      }
-
-      self.metadata = resp;
-
-      done();
-    });
+    }, query, done);
   }
 
   function makeFilesPrivate(done) {
@@ -1032,6 +1312,122 @@ Bucket.prototype.makePublic = function(options, callback) {
 };
 
 /**
+ * Set labels on the bucket.
+ *
+ * This makes an underlying call to {module:storage/bucket#setMetadata}, which
+ * is a PATCH request. This means an individual label can be overwritten, but
+ * unmentioned labels will not be touched.
+ *
+ * @param {type} labels - Labels to set on the bucket.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.metadata - The bucket's metadata.
+ *
+ * @example
+ * var labels = {
+ *   labelone: 'labelonevalue',
+ *   labeltwo: 'labeltwovalue'
+ * };
+ *
+ * bucket.setLabels(labels, function(err, metadata) {
+ *   if (!err) {
+ *     // Labels set successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.setLabels(labels).then(function(data) {
+ *   var metadata = data[0];
+ * });
+ */
+Bucket.prototype.setLabels = function(labels, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  callback = callback || common.util.noop;
+
+  this.setMetadata({labels}, options, callback);
+};
+
+/**
+ * Set the bucket's metadata.
+ *
+ * @resource [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+ *
+ * @param {object} metadata - The metadata you wish to set.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * //-
+ * // Set website metadata field on the bucket.
+ * //-
+ * var metadata = {
+ *   website: {
+ *     mainPageSuffix: 'http://example.com',
+ *     notFoundPage: 'http://example.com/404.html'
+ *   }
+ * };
+ *
+ * bucket.setMetadata(metadata, function(err, apiResponse) {});
+ *
+ * //-
+ * // Enable versioning for your bucket.
+ * //-
+ * bucket.setMetadata({
+ *   versioning: {
+ *     enabled: true
+ *   }
+ * }, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Bucket.prototype.setMetadata = function(metadata, options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  callback = callback || common.util.noop;
+
+  this.request({
+    method: 'PATCH',
+    uri: '',
+    json: metadata,
+    qs: options
+  }, function(err, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
+    }
+
+    self.metadata = resp;
+
+    callback(null, resp);
+  });
+};
+
+/**
  * Upload a file to the bucket. This is a convenience method that wraps
  * {module:storage/file#createWriteStream}.
  *
@@ -1092,6 +1488,9 @@ Bucket.prototype.makePublic = function(options, callback) {
  *     true for files larger than 5 MB).
  * @param {string} options.uri - The URI for an already-created resumable
  *     upload. See {module:storage/file#createResumableUpload}.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {string|boolean} options.validation - Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with an
  *     MD5 checksum for maximum reliability. CRC32c will provide better
@@ -1277,6 +1676,9 @@ Bucket.prototype.upload = function(localPath, options, callback) {
  *     processed.
  * @param {boolean} options.private - Make files private.
  * @param {boolean} options.public - Make files public.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
  * @param {function} callback - The callback function.
  */
 Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
@@ -1284,7 +1686,7 @@ Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
   var errors = [];
   var updatedFiles = [];
 
-  this.getFiles(function(err, files) {
+  this.getFiles(options, function(err, files) {
     if (err) {
       callback(err);
       return;
@@ -1294,7 +1696,7 @@ Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
       if (options.public) {
         file.makePublic(processedCallback);
       } else if (options.private) {
-        file.makePrivate(processedCallback);
+        file.makePrivate(options, processedCallback);
       }
 
       function processedCallback(err) {

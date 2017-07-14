@@ -249,6 +249,8 @@ function getDocs(mod) {
   return glob
     .sync('docs/json/' + mod + '/*/*.json', {
       ignore: [
+        '**/doc_*.json',
+        '**/*_client.json',
         '**/toc.json',
         '**/types.json'
       ]

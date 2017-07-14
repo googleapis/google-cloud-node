@@ -19,7 +19,6 @@ var assert = require('assert');
 var isNumber = require('is').number;
 var merge = require('lodash.merge');
 var Configuration = require('../fixtures/configuration.js');
-var version = require('../../package.json').version;
 var Fuzzer = require('../../utils/fuzzer.js');
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 var logger = require('../../src/logger.js')({
@@ -93,8 +92,8 @@ describe('Configuration class', function() {
           assert.deepEqual(c.getServiceContext(),
             {service: 'node', version: undefined});
         });
-        it('Should have a version corresponding to package.json', function() {
-          assert.strictEqual(c.getVersion(), version);
+        it('Should specify to not report unhandledRejections', function() {
+          assert.strictEqual(c.getReportUnhandledRejections(), false);
         });
       });
       describe('with ignoreEnvironmentCheck', function() {
@@ -136,6 +135,13 @@ describe('Configuration class', function() {
           it('Should throw if invalid for serviceContext.version', function() {
             assert.throws(function() {
               new Configuration({serviceContext: {version: true}}, logger);
+            });
+          });
+          it('Should throw if invalid for reportUnhandledRejections',
+          function() {
+            assert.throws(function() {
+              new Configuration({ reportUnhandledRejections: 'INVALID' },
+                logger);
             });
           });
           it('Should not throw given an empty object for serviceContext',
@@ -280,6 +286,19 @@ describe('Configuration class', function() {
         });
         it('Should assign', function() {
           assert.strictEqual(c.getKey(), key);
+        });
+      });
+      describe('reportUnhandledRejections', function() {
+        var c;
+        var reportRejections = false;
+        before(function() {
+          c = new Configuration({
+            reportUnhandledRejections: reportRejections
+          });
+        });
+        it('Should assign', function() {
+          assert.strictEqual(c.getReportUnhandledRejections(),
+            reportRejections);
         });
       });
     });

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/video-intelligence",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Google Inc",
   "description": "Google Cloud Video Intelligence API client for Node.js",
   "main": "src/index.js",

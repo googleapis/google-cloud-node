@@ -485,6 +485,10 @@ describe('Transaction', function() {
           return true;
         };
 
+        transaction.runFn_ = function() {
+          done(new Error('Should not have been called.'));
+        };
+
         transaction.request(config, function() {
           done(new Error('Should not have been called.'));
         });
@@ -517,6 +521,15 @@ describe('Transaction', function() {
 
         transaction.request(config, function() {
           done(new Error('Should not have been called.'));
+        });
+      });
+
+      it('should return the aborted error if no runFn', function(done) {
+        transaction.runFn_ = null;
+
+        transaction.request(config, function(err) {
+          assert.strictEqual(err, abortedError);
+          done();
         });
       });
     });

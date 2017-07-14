@@ -23,7 +23,9 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var flatten = require('lodash.flatten');
 var is = require('is');
+var uniq = require('array-uniq');
 
 /**
  * @type {module:spanner/codec}
@@ -682,16 +684,28 @@ TransactionRequest.prototype.upsert = function(table, keyVals, callback) {
 TransactionRequest.prototype.mutate_ = function(method, table, keyVals, cb) {
   keyVals = arrify(keyVals);
 
-  var mutation = {};
+  var columns = uniq(flatten(keyVals.map(Object.keys))).sort();
 
-  mutation[method] = {
-    table: table,
-    columns: Object.keys(keyVals[0]),
-    values: keyVals.map(function(keyVal) {
-      return Object.keys(keyVal).map(function(key) {
-        return codec.encode(keyVal[key]);
-      });
-    })
+  var values = keyVals.map(function(keyVal, index) {
+    var keys = Object.keys(keyVal);
+
+    var missingColumns = columns.filter(column => keys.indexOf(column) === -1);
+
+    if (missingColumns.length > 0) {
+      throw new Error([
+        `Row at index ${index} does not contain the correct number of columns.`,
+        `Missing columns: ${JSON.stringify(missingColumns)}`
+      ].join('\n\n'));
+    }
+
+    return columns.map(function(column) {
+      var value = keyVal[column];
+      return codec.encode(value);
+    });
+  });
+
+  var mutation = {
+    [method]: { table, columns, values }
   };
 
   if (this.transaction) {

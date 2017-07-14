@@ -14,12 +14,12 @@ This client supports the following Google Cloud Platform services at a [General 
 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
+* [Cloud Translation API](#cloud-translation-api-ga) (GA)
 * [Google Stackdriver Logging](#google-stackdriver-logging-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
-* [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
 
@@ -280,6 +280,64 @@ localReadStream.pipe(remoteWriteStream);
 ```
 
 
+## Cloud Translation API (GA)
+
+- [API Documentation][gcloud-translate-docs]
+- [Official Documentation][cloud-translate-docs]
+
+#### Using the Google Translate API module
+
+```
+$ npm install --save @google-cloud/translate
+```
+
+```js
+var translate = require('@google-cloud/translate');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var translateClient = translate({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Translate a string of text.
+translateClient.translate('Hello', 'es', function(err, translation) {
+  if (!err) {
+    // translation = 'Hola'
+  }
+});
+
+// Detect a language from a string of text.
+translateClient.detect('Hello', function(err, results) {
+  if (!err) {
+    // results = {
+    //   language: 'en',
+    //   confidence: 1,
+    //   input: 'Hello'
+    // }
+  }
+});
+
+// Get a list of supported languages.
+translateClient.getLanguages(function(err, languages) {
+  if (!err) {
+    // languages = [
+    //   'af',
+    //   'ar',
+    //   'az',
+    //   ...
+    // ]
+  }
+});
+```
+
+
 ## Google Stackdriver Logging (GA)
 
 - [API Documentation][gcloud-logging-docs]
@@ -472,64 +530,6 @@ document.annotate(function(err, annotation) {
 ```
 
 
-## Cloud Translation API (Beta)
-
-- [API Documentation][gcloud-translate-docs]
-- [Official Documentation][cloud-translate-docs]
-
-#### Using the Google Translate API module
-
-```
-$ npm install --save @google-cloud/translate
-```
-
-```js
-var translate = require('@google-cloud/translate');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var translateClient = translate({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Translate a string of text.
-translateClient.translate('Hello', 'es', function(err, translation) {
-  if (!err) {
-    // translation = 'Hola'
-  }
-});
-
-// Detect a language from a string of text.
-translateClient.detect('Hello', function(err, results) {
-  if (!err) {
-    // results = {
-    //   language: 'en',
-    //   confidence: 1,
-    //   input: 'Hello'
-    // }
-  }
-});
-
-// Get a list of supported languages.
-translateClient.getLanguages(function(err, languages) {
-  if (!err) {
-    // languages = [
-    //   'af',
-    //   'ar',
-    //   'az',
-    //   ...
-    // ]
-  }
-});
-```
-
-
 ## Cloud Vision (Beta)
 
 - [API Documentation][gcloud-vision-docs]
@@ -698,7 +698,7 @@ job.getQueryResults().on('data', function(row) {});
 - [API Documentation][gcloud-bigtable-docs]
 - [Official Documentation][cloud-bigtable-docs]
 
-*You may need to [create a cluster][cloud-bigtable-cluster] to use the Cloud Bigtable API with your project.*
+*You may need to [create an instance][cloud-bigtable-instance] to use the Cloud Bigtable API with your project.*
 
 
 #### Using the Cloud Bigtable API module
@@ -795,7 +795,7 @@ var nsRecord = zone.record('ns', {
   data: 'ns-cloud1.googledomains.com.'
 });
 
-zone.addRecords([nsRecord], function(err, change) {}); 
+zone.addRecords([nsRecord], function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
@@ -1284,7 +1284,7 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
 
 [cloud-bigtable-docs]: https://cloud.google.com/bigtable/docs
-[cloud-bigtable-cluster]: https://cloud.google.com/bigtable/docs/creating-compute-instance
+[cloud-bigtable-instance]: https://cloud.google.com/bigtable/docs/creating-instance
 
 [cloud-compute-docs]: https://cloud.google.com/compute/docs
 

@@ -22,7 +22,6 @@ var isObject = is.object;
 var isBoolean = is.boolean;
 var isString = is.string;
 var isNumber = is.number;
-var version = require('../package.json').version;
 
 /**
  * The Configuration constructor function initializes several internal
@@ -136,14 +135,13 @@ var Configuration = function(givenConfig, logger) {
    */
   this._serviceContext = {service: 'nodejs', version: ''};
   /**
-   * The _version of the Error reporting library that is currently being run.
-   * This information will be logged in errors communicated to the Stackdriver
-   * Error API.
+   * The _reportUnhandledRejections property is meant to specify whether or
+   * not unhandled rejections should be reported to the error-reporting console.
    * @memberof Configuration
    * @private
-   * @type {String}
+   * @type {Boolean}
    */
-  this._version = version;
+  this._reportUnhandledRejections = false;
   /**
    * The _givenConfiguration property holds a ConfigurationOptions object
    * which, if valid, will be merged against by the values taken from the meta-
@@ -267,6 +265,12 @@ Configuration.prototype._gatherLocalConfiguration = function() {
   } else if (has(this._givenConfiguration, 'credentials')) {
     throw new Error('config.credentials must be a valid credentials object');
   }
+  if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
+    this._reportUnhandledRejections =
+      this._givenConfiguration.reportUnhandledRejections;
+  } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
+    throw new Error('config.reportUnhandledRejections must be a boolean');
+  }
 };
 /**
  * The _checkLocalProjectId function is responsible for determing whether the
@@ -365,13 +369,13 @@ Configuration.prototype.getServiceContext = function() {
   return this._serviceContext;
 };
 /**
- * Returns the _version property on the instance.
+ * Returns the _reportUnhandledRejections property on the instance.
  * @memberof Configuration
  * @public
- * @function getVersion
- * @returns {String} - returns the _version property
+ * @function getReportUnhandledRejections
+ * @returns {Boolean} - returns the _reportUnhandledRejections property
  */
-Configuration.prototype.getVersion = function() {
-  return this._version;
+Configuration.prototype.getReportUnhandledRejections = function() {
+  return this._reportUnhandledRejections;
 };
 module.exports = Configuration;

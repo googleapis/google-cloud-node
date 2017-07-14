@@ -9,6 +9,10 @@ environment:
   GCLOUD_TESTS_KEY_SECRET:
     secure: usGkvXjqCzDNIQHx8oEncrZOmez7GBocB1EXM+g/9rw=
 
+  GCLOUD_TESTS_KEY_NON_WHITELIST: key.appveyor.non-whitelist.json
+  GCLOUD_TESTS_KEY_NON_WHITELIST_SECRET:
+    secure: IRvjqNWclDExf6ngyYKWjqfArffGNtvawuRqqDOLTaT8frozr9BOkxdxHCDYapR1
+
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: >-
@@ -16,6 +20,8 @@ install:
         nuget install secure-file -ExcludeVersion
         secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret $env:GCLOUD_TESTS_KEY_SECRET
         $env:GCLOUD_TESTS_KEY=$env:APPVEYOR_BUILD_FOLDER + '\' + $env:GCLOUD_TESTS_KEY
+        secure-file\tools\secure-file -decrypt key.appveyor.non-whitelist.json.enc -secret $env:GCLOUD_TESTS_KEY_NON_WHITELIST_SECRET
+        $env:GCLOUD_TESTS_KEY_NON_WHITELIST=$env:APPVEYOR_BUILD_FOLDER + '\' + $env:GCLOUD_TESTS_KEY_NON_WHITELIST
       }
   - npm install -g npm # Force using the latest npm to get dedupe during install
   - set PATH=%APPDATA%\npm;%PATH%

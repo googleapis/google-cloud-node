@@ -295,6 +295,20 @@ describe('Storage', function() {
         storage.createBucket(BUCKET_NAME, { regional: true }, assert.ifError);
       });
     });
+
+    describe('requesterPays', function() {
+      it('should accept requesterPays setting', function(done) {
+        var options = {
+          requesterPays: true
+        };
+        storage.request = function(reqOpts) {
+          assert.deepStrictEqual(reqOpts.json.billing, options);
+          assert.strictEqual(reqOpts.json.requesterPays, undefined);
+          done();
+        };
+        storage.createBucket(BUCKET_NAME, options, assert.ifError);
+      });
+    });
   });
 
   describe('getBuckets', function() {

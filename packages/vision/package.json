@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vision",
-  "version": "0.11.3",
+  "version": "0.11.4",
   "author": "Google Inc.",
   "description": "Cloud Vision Client Library for Node.js",
   "contributors": [

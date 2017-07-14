@@ -22,8 +22,10 @@ var chalk = require('chalk');
 var flatten = require('lodash.flatten');
 var fs = require('fs');
 var globby = require('globby');
+var is = require('is');
 var path = require('path');
 var semver = require('semver');
+var stringIncludes = require('string-includes');
 
 var config = require('./config');
 var helpers = require('../helpers');
@@ -76,7 +78,13 @@ Builder.prototype.build = function() {
   mkdir('-p', this.dir);
   cp(MARKDOWN, this.dir);
 
-  var docs = globby.sync(path.join(this.name, 'src/*.js'), {
+  var docsPaths = [
+    path.join(this.name, 'src/*.js'),
+    path.join(this.name, 'src/**/v*/doc/*.js'),
+    path.join(this.name, 'src/**/v*/*_client.js')
+  ];
+
+  var docs = globby.sync(docsPaths, {
     cwd: PACKAGES_ROOT,
     ignore: config.IGNORE
   }).map(function(file) {
@@ -88,6 +96,138 @@ Builder.prototype.build = function() {
 
     return json;
   });
+
+  var gapicVersions = docs.reduce((grouped, doc) => {
+    var gapicVersion = doc.id.match(/[/_](v[^\/]*)/);
+
+    if (gapicVersion) {
+      gapicVersion = gapicVersion[1];
+      grouped[gapicVersion] = grouped[gapicVersion] || [];
+
+      mkdir('-p', `${self.dir}/${gapicVersion}`);
+
+      if (stringIncludes(doc.id, 'doc_')) {
+        grouped[gapicVersion].push(doc);
+      } else if (stringIncludes(doc.id, '_client')) {
+        // Move client file to a separate path.
+        doc.path = `${gapicVersion}/${doc.path}`;
+        self.write(doc.path, doc);
+      }
+    }
+
+    return grouped;
+  }, {});
+
+  // @TODO delete extra files
+  docs = docs.filter(doc => !stringIncludes(doc.source, 'doc_'));
+
+  for (var gapicVersion in gapicVersions) {
+    var gapicDataTypes = gapicVersions[gapicVersion];
+    var dataTypesMarkup = '';
+
+    if (gapicDataTypes.length > 0) {
+      dataTypesMarkup = `
+        <tr>
+          <td>
+            <a ui-sref="docs.service({
+              serviceId: '{{docs.services[0].type}}/{{service.path.split('/').shift()}}/data_types'
+            })">Data Types</a>
+          </td>
+          <td>
+            Data types for {{docs.services[0].title}} {{service.path.split('/').shift()}}.
+          </td>
+        </tr>
+      `;
+
+      var dataTypesFile = {
+        name: 'Data Types',
+        methods: [],
+        path: `${gapicVersion}/data_types.json`,
+        description: `
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="method in service.methods" ng-if="method.name">
+                <td>
+                  <a ui-sref="docs.service({ method: method.id })" class="skip-external-link">
+                    {{method.name}}
+                  </a>
+                </td>
+                <td>
+                  <span ng-bind-html="method.description">
+                    {{method.description}}
+                  </span>
+                  <span ng-if="!method.description && method.name.includes('Request')">
+                    The request for {{method.name}}.
+                  </span>
+                  <span ng-if="!method.description && method.name.includes('Response')">
+                    The response for {{method.name}}.
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      };
+
+      /*jshint loopfunc:true*/
+      gapicDataTypes.forEach(gapicDataType => {
+        if (!dataTypesFile.id) {
+          var idParts = gapicDataType.id.split('/');
+          idParts.pop();
+          idParts.pop();
+          idParts.push('data_types');
+          dataTypesFile.id = idParts.join('/');
+        }
+
+        dataTypesFile.methods = dataTypesFile.methods
+          .concat(gapicDataType.methods);
+      });
+
+      if (!is.empty(dataTypesFile.methods)) {
+        this.write(`${gapicVersion}/data_types.json`, dataTypesFile);
+        docs.push(dataTypesFile);
+      }
+    }
+
+    this.write(`${gapicVersion}/index.json`, {
+      name: gapicVersion,
+      methods: [],
+      path: `${gapicVersion}/index.json`,
+      description: `
+        <h1>{{docs.services[0].title}} API Contents</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="client in docs.services[docs.services.length - 1].nav"
+              ng-if="client.title.includes('Client')">
+              <td>
+                <a ui-sref="docs.service({
+                  serviceId: client.type
+                })">{{client.title}}</a>
+              </td>
+              <td>
+                Create a {{client.title}} to interact with the {{docs.services[0].title}} API.
+              </td>
+            </tr>
+            ${dataTypesMarkup}
+          </tbody>
+        </table>
+      `
+    });
+  }
 
   var types = parser.createTypesDictionary(docs);
   var toc = parser.createToc(types);

@@ -2,9 +2,39 @@
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/speech",
   "version": "0.10.0",
-  "author": "Google Inc",
-  "description": "Google Cloud Speech API client for Node.js",
-  "main": "src/index.js",
+  "author": "Google Inc.",
+  "description": "Cloud Speech Client Library for Node.js",
+  "contributors": [
+    {
+      "name": "Burcu Dogan",
+      "email": "jbd@google.com"
+    },
+    {
+      "name": "Jason Dobry",
+      "email": "jason.dobry@gmail.com"
+    },
+    {
+      "name": "Johan Euphrosine",
+      "email": "proppy@google.com"
+    },
+    {
+      "name": "Patrick Costello",
+      "email": "pcostell@google.com"
+    },
+    {
+      "name": "Ryan Seys",
+      "email": "ryan@ryanseys.com"
+    },
+    {
+      "name": "Silvano Luciani",
+      "email": "silvano@google.com"
+    },
+    {
+      "name": "Stephen Sawchuk",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
+  "main": "./src/index.js",
   "files": [
     "src",
     "AUTHORS",

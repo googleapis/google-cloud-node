@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "author": "Google Inc.",
   "description": "Google BigQuery Client Library for Node.js",
   "contributors": [
@@ -52,7 +52,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "arrify": "^1.0.0",
-    "duplexify": "^3.2.0",
+    "duplexify": "^3.5.0",
     "extend": "^3.0.0",
     "is": "^3.0.1",
     "stream-events": "^1.0.1",

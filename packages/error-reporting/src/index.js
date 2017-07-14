@@ -154,6 +154,17 @@ function Errors(initConfiguration) {
    * app.use(errors.koa);
    */
   this.koa = koa(this._client, this._config);
+
+  if (this._config.getReportUnhandledRejections()) {
+    var that = this;
+    process.on('unhandledRejection', function(reason) {
+      console.log('UnhandledPromiseRejectionWarning: ' +
+        'Unhandled promise rejection: ' + reason +
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.');
+      that.report(reason);
+    });
+  }
 }
 
 module.exports = Errors;

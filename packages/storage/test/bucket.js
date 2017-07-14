@@ -211,12 +211,7 @@ describe('Bucket', function() {
       assert.strictEqual(calledWith.baseUrl, '/b');
       assert.strictEqual(calledWith.id, BUCKET_NAME);
       assert.deepEqual(calledWith.methods, {
-        create: true,
-        delete: true,
-        exists: true,
-        get: true,
-        getMetadata: true,
-        setMetadata: true
+        create: true
       });
     });
 
@@ -373,6 +368,22 @@ describe('Bucket', function() {
       bucket.combine(sources, destination);
     });
 
+    it('should accept userProject option', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = bucket.file('destination.txt');
+
+      destination.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.combine(sources, destination, options, assert.ifError);
+    });
+
     it('should execute the callback', function(done) {
       var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       var destination = bucket.file('destination.txt');
@@ -458,6 +469,19 @@ describe('Bucket', function() {
       bucket.createChannel(ID, config, assert.ifError);
     });
 
+    it('should accept userProject option', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.createChannel(ID, CONFIG, options, assert.ifError);
+    });
+
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
@@ -514,6 +538,39 @@ describe('Bucket', function() {
     });
   });
 
+  describe('delete', function() {
+    it('should make the correct request', function(done) {
+      bucket.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, {});
+        callback(); // done()
+      };
+
+      bucket.delete(done);
+    });
+
+    it('should accept options', function(done) {
+      var options = {};
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.delete(options, assert.ifError);
+    });
+
+    it('should not require a callback', function(done) {
+      bucket.request = function(reqOpts, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      bucket.delete();
+    });
+  });
+
   describe('deleteFiles', function() {
     it('should accept only a callback', function(done) {
       bucket.getFiles = function(query, callback) {
@@ -549,21 +606,24 @@ describe('Bucket', function() {
     });
 
     it('should delete the files', function(done) {
+      var query = {};
       var timesCalled = 0;
 
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(query_, callback) {
         timesCalled++;
+        assert.strictEqual(query_, query);
         callback();
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(query_, callback) {
+        assert.strictEqual(query_, query);
         callback(null, files);
       };
 
-      bucket.deleteFiles({}, function(err) {
+      bucket.deleteFiles(query, function(err) {
         assert.ifError(err);
         assert.equal(timesCalled, files.length);
         done();
@@ -589,7 +649,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(query, callback) {
         callback(error);
       }));
 
@@ -609,7 +669,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(query, callback) {
         callback(error);
       }));
 
@@ -620,6 +680,193 @@ describe('Bucket', function() {
       bucket.deleteFiles({ force: true }, function(errs) {
         assert.strictEqual(errs[0], error);
         assert.strictEqual(errs[1], error);
+        done();
+      });
+    });
+  });
+
+  describe('deleteLabels', function() {
+    describe('all labels', function() {
+      it('should get all of the label names', function(done) {
+        bucket.getLabels = function() {
+          done();
+        };
+
+        bucket.deleteLabels(assert.ifError);
+      });
+
+      it('should return an error from getLabels()', function(done) {
+        var error = new Error('Error.');
+
+        bucket.getLabels = function(callback) {
+          callback(error);
+        };
+
+        bucket.deleteLabels(function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should call setLabels with all label names', function(done) {
+        var labels = {
+          labelone: 'labelonevalue',
+          labeltwo: 'labeltwovalue'
+        };
+
+        bucket.getLabels = function(callback) {
+          callback(null, labels);
+        };
+
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            labelone: null,
+            labeltwo: null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(done);
+      });
+    });
+
+    describe('single label', function() {
+      var LABEL = 'labelname';
+
+      it('should call setLabels with a single label', function(done) {
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            [LABEL]: null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(LABEL, done);
+      });
+    });
+
+    describe('multiple labels', function() {
+      var LABELS = [
+        'labelonename',
+        'labeltwoname'
+      ];
+
+      it('should call setLabels with multiple labels', function(done) {
+        bucket.setLabels = function(labels, callback) {
+          assert.deepStrictEqual(labels, {
+            labelonename: null,
+            labeltwoname: null
+          });
+          callback(); // done()
+        };
+
+        bucket.deleteLabels(LABELS, done);
+      });
+    });
+  });
+
+  describe('disableRequesterPays', function() {
+    it('should call setMetadata correctly', function(done) {
+      bucket.setMetadata = function(metadata, callback) {
+        assert.deepStrictEqual(metadata, {
+          billing: {
+            requesterPays: false
+          }
+        });
+        callback(); // done()
+      };
+
+      bucket.disableRequesterPays(done);
+    });
+
+    it('should not require a callback', function(done) {
+      bucket.setMetadata = function(metadata, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      bucket.disableRequesterPays();
+    });
+  });
+
+  describe('enableRequesterPays', function() {
+    it('should call setMetadata correctly', function(done) {
+      bucket.setMetadata = function(metadata, callback) {
+        assert.deepStrictEqual(metadata, {
+          billing: {
+            requesterPays: true
+          }
+        });
+        callback(); // done()
+      };
+
+      bucket.enableRequesterPays(done);
+    });
+
+    it('should not require a callback', function(done) {
+      bucket.setMetadata = function(metadata, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      bucket.enableRequesterPays();
+    });
+  });
+
+  describe('exists', function() {
+    it('should call get', function(done) {
+      bucket.get = function() {
+        done();
+      };
+
+      bucket.exists(assert.ifError);
+    });
+
+    it('should accept and pass options to get', function(done) {
+      var options = {};
+
+      bucket.get = function(options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.exists(options, assert.ifError);
+    });
+
+    it('should execute callback with false if 404', function(done) {
+      bucket.get = function(options, callback) {
+        callback({ code: 404 });
+      };
+
+      bucket.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should execute callback with error if not 404', function(done) {
+      var error = { code: 500 };
+
+      bucket.get = function(options, callback) {
+        callback(error);
+      };
+
+      bucket.exists(function(err, exists) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(exists, undefined);
+        done();
+      });
+    });
+
+    it('should execute callback with true if no error', function(done) {
+      bucket.get = function(options, callback) {
+        callback();
+      };
+
+      bucket.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
         done();
       });
     });
@@ -654,6 +901,139 @@ describe('Bucket', function() {
 
     it('should pass configuration object to File', function() {
       assert.deepEqual(file.calledWith_[2], options);
+    });
+  });
+
+  describe('get', function() {
+    it('should get the metadata', function(done) {
+      bucket.getMetadata = function() {
+        done();
+      };
+
+      bucket.get(assert.ifError);
+    });
+
+    it('should accept an options object', function(done) {
+      var options = {};
+
+      bucket.getMetadata = function(options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.get(options, assert.ifError);
+    });
+
+    it('should execute callback with error & metadata', function(done) {
+      var error = new Error('Error.');
+      var metadata = {};
+
+      bucket.getMetadata = function(options, callback) {
+        callback(error, metadata);
+      };
+
+      bucket.get(function(err, instance, metadata_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(instance, null);
+        assert.strictEqual(metadata_, metadata);
+
+        done();
+      });
+    });
+
+    it('should execute callback with instance & metadata', function(done) {
+      var metadata = {};
+
+      bucket.getMetadata = function(options, callback) {
+        callback(null, metadata);
+      };
+
+      bucket.get(function(err, instance, metadata_) {
+        assert.ifError(err);
+
+        assert.strictEqual(instance, bucket);
+        assert.strictEqual(metadata_, metadata);
+
+        done();
+      });
+    });
+
+    describe('autoCreate', function() {
+      var AUTO_CREATE_CONFIG;
+
+      var ERROR = { code: 404 };
+      var METADATA = {};
+
+      beforeEach(function() {
+        AUTO_CREATE_CONFIG = {
+          autoCreate: true
+        };
+
+        bucket.getMetadata = function(options, callback) {
+          callback(ERROR, METADATA);
+        };
+      });
+
+      it('should pass config to create if it was provided', function(done) {
+        var config = extend({}, AUTO_CREATE_CONFIG, {
+          maxResults: 5
+        });
+
+        bucket.create = function(config_) {
+          assert.strictEqual(config_, config);
+          done();
+        };
+
+        bucket.get(config, assert.ifError);
+      });
+
+      it('should pass only a callback to create if no config', function(done) {
+        bucket.create = function(callback) {
+          callback(); // done()
+        };
+
+        bucket.get(AUTO_CREATE_CONFIG, done);
+      });
+
+      describe('error', function() {
+        it('should execute callback with error & API response', function(done) {
+          var error = new Error('Error.');
+          var apiResponse = {};
+
+          bucket.create = function(callback) {
+            bucket.get = function(config, callback) {
+              assert.deepEqual(config, {});
+              callback(); // done()
+            };
+
+            callback(error, null, apiResponse);
+          };
+
+          bucket.get(AUTO_CREATE_CONFIG, function(err, instance, resp) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(instance, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
+        });
+
+        it('should refresh the metadata after a 409', function(done) {
+          var error = {
+            code: 409
+          };
+
+          bucket.create = function(callback) {
+            bucket.get = function(config, callback) {
+              assert.deepEqual(config, {});
+              callback(); // done()
+            };
+
+            callback(error);
+          };
+
+          bucket.get(AUTO_CREATE_CONFIG, done);
+        });
+      });
     });
   });
 
@@ -774,17 +1154,148 @@ describe('Bucket', function() {
     });
   });
 
+  describe('getLabels', function() {
+    it('should refresh metadata', function(done) {
+      bucket.getMetadata = function() {
+        done();
+      };
+
+      bucket.getLabels(assert.ifError);
+    });
+
+    it('should accept an options object', function(done) {
+      var options = {};
+
+      bucket.getMetadata = function(options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.getLabels(options, assert.ifError);
+    });
+
+    it('should return error from getMetadata', function(done) {
+      var error = new Error('Error.');
+
+      bucket.getMetadata = function(options, callback) {
+        callback(error);
+      };
+
+      bucket.getLabels(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should return labels metadata property', function(done) {
+      var metadata = {
+        labels: {
+          label: 'labelvalue'
+        }
+      };
+
+      bucket.getMetadata = function(options, callback) {
+        callback(null, metadata);
+      };
+
+      bucket.getLabels(function(err, labels) {
+        assert.ifError(err);
+        assert.strictEqual(labels, metadata.labels);
+        done();
+      });
+    });
+
+    it('should return empty object if no labels exist', function(done) {
+      var metadata = {};
+
+      bucket.getMetadata = function(options, callback) {
+        callback(null, metadata);
+      };
+
+      bucket.getLabels(function(err, labels) {
+        assert.ifError(err);
+        assert.deepStrictEqual(labels, {});
+        done();
+      });
+    });
+  });
+
+  describe('getMetadata', function() {
+    it('should make the correct request', function(done) {
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      bucket.getMetadata(assert.ifError);
+    });
+
+    it('should accept options', function(done) {
+      var options = {};
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.getMetadata(options, assert.ifError);
+    });
+
+    it('should execute callback with error & apiResponse', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
+      };
+
+      bucket.getMetadata(function(err, metadata, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
+    it('should update metadata', function(done) {
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      bucket.getMetadata(function(err) {
+        assert.ifError(err);
+        assert.strictEqual(bucket.metadata, apiResponse);
+        done();
+      });
+    });
+
+    it('should execute callback with metadata & API response', function(done) {
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      bucket.getMetadata(function(err, metadata, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, apiResponse);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+  });
+
   describe('makePrivate', function() {
     it('should set predefinedAcl & privatize files', function(done) {
       var didSetPredefinedAcl = false;
       var didMakeFilesPrivate = false;
 
-      bucket.request = function(reqOpts, callback) {
-        // Correct request.
-        assert.equal(reqOpts.method, 'PATCH');
-        assert.equal(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'projectPrivate' });
-        assert.deepEqual(reqOpts.json, { acl: null });
+      bucket.setMetadata = function(metadata, options, callback) {
+        assert.deepEqual(metadata, { acl: null });
+        assert.deepEqual(options, { predefinedAcl: 'projectPrivate' });
 
         didSetPredefinedAcl = true;
         callback();
@@ -803,6 +1314,19 @@ describe('Bucket', function() {
         assert(didMakeFilesPrivate);
         done();
       });
+    });
+
+    it('should accept userProject', function(done) {
+      var options = {
+        userProject: 'user-project-id'
+      };
+
+      bucket.setMetadata = function(metadata, options_) {
+        assert.strictEqual(options_.userProject, options.userProject);
+        done();
+      };
+
+      bucket.makePrivate(options, assert.ifError);
     });
 
     it('should not make files private by default', function(done) {
@@ -901,6 +1425,110 @@ describe('Bucket', function() {
 
       bucket.makePublic(function(err) {
         assert.equal(err, error);
+        done();
+      });
+    });
+  });
+
+  describe('setLabels', function() {
+    it('should correctly call setMetadata', function(done) {
+      var labels = {};
+
+      bucket.setMetadata = function(metadata, options, callback) {
+        assert.strictEqual(metadata.labels, labels);
+        callback(); // done()
+      };
+
+      bucket.setLabels(labels, done);
+    });
+
+    it('should accept an options object', function(done) {
+      var labels = {};
+      var options = {};
+
+      bucket.setMetadata = function(metadata, options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      bucket.setLabels(labels, options, done);
+    });
+  });
+
+  describe('setMetadata', function() {
+    it('should make the correct request', function(done) {
+      var metadata = {};
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.strictEqual(reqOpts.json, metadata);
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      bucket.setMetadata(metadata, assert.ifError);
+    });
+
+    it('should not require a callback', function(done) {
+      bucket.request = function(reqOpts, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      bucket.setMetadata({});
+    });
+
+    it('should accept options', function(done) {
+      var options = {};
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.setMetadata({}, options, assert.ifError);
+    });
+
+    it('should execute callback with error & apiResponse', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
+      };
+
+      bucket.setMetadata({}, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
+    it('should update metadata', function(done) {
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      bucket.setMetadata({}, function(err) {
+        assert.ifError(err);
+        assert.strictEqual(bucket.metadata, apiResponse);
+        done();
+      });
+    });
+
+    it('should execute callback with metadata & API response', function(done) {
+      var apiResponse = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      bucket.setMetadata({}, function(err, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
@@ -1123,11 +1751,14 @@ describe('Bucket', function() {
 
   describe('makeAllFilesPublicPrivate_', function() {
     it('should get all files from the bucket', function(done) {
-      bucket.getFiles = function() {
+      var options = {};
+
+      bucket.getFiles = function(options_) {
+        assert.strictEqual(options_, options);
         done();
       };
 
-      bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
+      bucket.makeAllFilesPublicPrivate_(options, assert.ifError);
     });
 
     it('should process 10 files at a time', function(done) {
@@ -1136,7 +1767,7 @@ describe('Bucket', function() {
         done();
       };
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(null, []);
       };
 
@@ -1154,7 +1785,7 @@ describe('Bucket', function() {
         callback();
       }));
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(null, files);
       };
 
@@ -1166,21 +1797,24 @@ describe('Bucket', function() {
     });
 
     it('should make files private', function(done) {
+      var options = {
+        private: true
+      };
       var timesCalled = 0;
 
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(propAssign('makePrivate', function(callback) {
+      ].map(propAssign('makePrivate', function(options_, callback) {
         timesCalled++;
         callback();
       }));
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options_, callback) {
         callback(null, files);
       };
 
-      bucket.makeAllFilesPublicPrivate_({ private: true }, function(err) {
+      bucket.makeAllFilesPublicPrivate_(options, function(err) {
         assert.ifError(err);
         assert.equal(timesCalled, files.length);
         done();
@@ -1190,7 +1824,7 @@ describe('Bucket', function() {
     it('should execute callback with error from getting files', function(done) {
       var error = new Error('Error.');
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(error);
       };
 
@@ -1210,7 +1844,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(null, files);
       };
 
@@ -1230,7 +1864,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(null, files);
       };
 
@@ -1260,7 +1894,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(callback) {
+      bucket.getFiles = function(options, callback) {
         callback(null, successFiles.concat(errorFiles));
       };
 

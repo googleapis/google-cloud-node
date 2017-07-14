@@ -31,9 +31,11 @@ var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
 var pick = require('lodash.pick');
 var omitBy = require('lodash.omitby');
+var util = require('util');
+var path = require('path');
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
-const TIMEOUT = 20000;
+const TIMEOUT = 30000;
 
 const envKeys = ['GOOGLE_APPLICATION_CREDENTIALS', 'GCLOUD_PROJECT',
     'NODE_ENV'];
@@ -361,65 +363,119 @@ describe('Expected Behavior', function() {
 });
 
 describe('error-reporting', function() {
+  const SRC_ROOT = path.join(__dirname, '..', 'src');
+  const TIMESTAMP = Date.now();
   const BASE_NAME = 'error-reporting-system-test';
   function buildName(suffix) {
-    return [Date.now(), BASE_NAME, suffix].join('_');
+    return [TIMESTAMP, BASE_NAME, suffix].join('_');
   }
 
-  const SERVICE_NAME = buildName('service-name');
-  const SERVICE_VERSION = buildName('service-version');
+  const SERVICE = buildName('service-name');
+  const VERSION = buildName('service-version');
 
   var errors;
   var transport;
+  var oldLogger;
+  var logOutput = '';
   before(function() {
-    errors = require('../src/index.js')({
+    // This test assumes that only the error-reporting library will be
+    // adding listeners to the 'unhandledRejection' event.  Thus we need to
+    // make sure that no listeners for that event exist.  If this check
+    // fails, then the reinitialize() method below will need to updated to
+    // more carefully reinitialize the error-reporting library without
+    // interfering with existing listeners of the 'unhandledRejection' event.
+    assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
+    oldLogger = console.log;
+    console.log = function() {
+      var text = util.format.apply(null, arguments);
+      oldLogger(text);
+      logOutput += text;
+    };
+    reinitialize();
+  });
+
+  function reinitialize(extraConfig) {
+    process.removeAllListeners('unhandledRejection');
+    var config = Object.assign({
       ignoreEnvironmentCheck: true,
       serviceContext: {
-        service: SERVICE_NAME,
-        version: SERVICE_VERSION
+        service: SERVICE,
+        version: VERSION
       }
-    });
+    }, extraConfig || {});
+    errors = require('../src/index.js')(config);
     transport = new ErrorsApiTransport(errors._config, errors._logger);
-  });
+  }
 
   after(function(done) {
-    transport.deleteAllEvents(function(err) {
-      assert.ifError(err);
-      done();
-    });
+    console.log = oldLogger;
+    if (transport) {
+      transport.deleteAllEvents(function(err) {
+        assert.ifError(err);
+        done();
+      });
+    }
   });
 
-  function verifyReporting(errOb, messageTest, timeout, cb) {
-    errors.report(errOb, function(err, response, body) {
-      assert.ifError(err);
-      assert(isObject(response));
-      assert.deepEqual(body, {});
+  afterEach(function() {
+    logOutput = '';
+  });
 
-      setTimeout(function() {
-        transport.getAllGroups(function(err, groups) {
-          assert.ifError(err);
-          assert.ok(groups);
+  function verifyAllGroups(messageTest, timeout, cb) {
+    setTimeout(function() {
+      transport.getAllGroups(function(err, groups) {
+        assert.ifError(err);
+        assert.ok(groups);
 
-          var matchedErrors = groups.filter(function(errItem) {
-            return errItem && errItem.representative &&
-              messageTest(errItem.representative.message);
-          });
-
-          // The error should have been reported exactly once
-          assert.strictEqual(matchedErrors.length, 1);
-          var errItem = matchedErrors[0];
-          assert.ok(errItem);
-          assert.equal(errItem.count, 1);
-          var rep = errItem.representative;
-          assert.ok(rep);
-          var context = rep.serviceContext;
-          assert.ok(context);
-          assert.strictEqual(context.service, SERVICE_NAME);
-          assert.strictEqual(context.version, SERVICE_VERSION);
-          cb();
+        var matchedErrors = groups.filter(function(errItem) {
+          return errItem && errItem.representative &&
+            errItem.representative.serviceContext &&
+            errItem.representative.serviceContext.service === SERVICE &&
+            errItem.representative.serviceContext.version === VERSION &&
+            messageTest(errItem.representative.message);
         });
-      }, timeout);
+
+        cb(matchedErrors);
+      });
+    }, timeout);
+  }
+
+  function verifyServerResponse(messageTest, timeout, cb) {
+    verifyAllGroups(messageTest, timeout, function(matchedErrors) {
+      // The error should have been reported exactly once
+      assert.strictEqual(matchedErrors.length, 1);
+      var errItem = matchedErrors[0];
+      assert.ok(errItem);
+      assert.equal(errItem.count, 1);
+      var rep = errItem.representative;
+      assert.ok(rep);
+      // Ensure the stack trace in the message does not contain any frames
+      // specific to the error-reporting library.
+      assert.strictEqual(rep.message.indexOf(SRC_ROOT), -1);
+      // Ensure the stack trace in the mssage contains the frame corresponding
+      // to the 'expectedTopOfStack' function because that is the name of
+      // function used in this file that is the topmost function in the call
+      // stack that is not internal to the error-reporting library.
+      // This ensures that only the frames specific to the
+      // error-reporting library are removed from the stack trace.
+      assert.notStrictEqual(rep.message.indexOf('expectedTopOfStack'), -1);
+      var context = rep.serviceContext;
+      assert.ok(context);
+      assert.strictEqual(context.service, SERVICE);
+      assert.strictEqual(context.version, VERSION);
+      cb();
     });
+  }
+
+  function verifyReporting(errOb, messageTest, timeout, cb) {
+    (function expectedTopOfStack() {
+      errors.report(errOb, function(err, response, body) {
+        assert.ifError(err);
+        assert(isObject(response));
+        assert.deepEqual(body, {});
+        verifyServerResponse(messageTest, timeout, cb);
+      });
+    })();
   }
 
   // For each test below, after an error is reported, the test waits
@@ -428,30 +484,79 @@ describe('error-reporting', function() {
   // As such, each test is set to fail due to a timeout only if sufficiently
   // more than TIMEOUT ms has elapsed to avoid test fragility.
 
-  it('Should correctly publish errors using the Error constructor',
-    function(done) {
+  it('Should correctly publish an error that is an Error object',
+    function verifyErrors(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-constructor');
-    var errOb = new Error(errorId);
+    var errOb = (function expectedTopOfStack() {
+      return new Error(errorId);
+    })();
     verifyReporting(errOb, function(message) {
-      return message.startsWith('Error: ' + errorId);
+      return message.startsWith('Error: ' + errorId + '\n');
     }, TIMEOUT, done);
   });
 
-  it('Should correctly publish errors using a string', function(done) {
+  it('Should correctly publish an error that is a string', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-string');
     verifyReporting(errorId, function(message) {
-      return message.startsWith(errorId);
+      return message.startsWith(errorId + '\n');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is undefined', function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting(undefined, function(message) {
+      return message.startsWith('undefined\n');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is null', function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting(null, function(message) {
+      return message.startsWith('null\n');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is a plain object',
+  function(done) {
+    this.timeout(TIMEOUT * 2);
+    verifyReporting({ someKey: 'someValue' }, function(message) {
+      return message.startsWith('[object Object]\n');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is a number', function(done) {
+    this.timeout(TIMEOUT * 2);
+    var num = (new Date()).getTime();
+    verifyReporting(num, function(message) {
+      return message.startsWith('' + num + '\n');
+    }, TIMEOUT, done);
+  });
+
+  it('Should correctly publish an error that is of an unknown type',
+  function(done) {
+    this.timeout(TIMEOUT * 2);
+    var bool = true;
+    verifyReporting(bool, function(message) {
+      return message.startsWith('true\n');
     }, TIMEOUT, done);
   });
 
   it('Should correctly publish errors using an error builder', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-error-builder');
+    // Use an IIFE with the name `definitionSiteFunction` to use later to ensure
+    // the stack trace of the point where the error message was constructed is
+    // used.
+    // Use an IIFE with the name `expectedTopOfStack` so that the test can
+    // verify that the stack trace used does not contain any frames
+    // specific to the error-reporting library.
     var errOb = (function definitionSiteFunction() {
-      return errors.event()
-                   .setMessage(errorId);
+      return (function expectedTopOfStack() {
+        return errors.event()
+                     .setMessage(errorId);
+      })();
     })();
     (function callingSiteFunction() {
       verifyReporting(errOb, function(message) {
@@ -464,5 +569,54 @@ describe('error-reporting', function() {
           message.indexOf('definitionSiteFunction') !== -1;
       }, TIMEOUT, done);
     })();
+  });
+
+  it('Should report unhandledRejections if enabled', function(done) {
+    this.timeout(TIMEOUT * 2);
+    reinitialize({ reportUnhandledRejections: true });
+    var rejectValue = buildName('promise-rejection');
+    (function expectedTopOfStack() {
+      // An Error is used for the rejection value so that it's stack
+      // contains the stack trace at the point the rejection occured and is
+      // rejected within a function named `expectedTopOfStack` so that the
+      // test can verify that the collected stack is correct.
+      Promise.reject(new Error(rejectValue));
+    })();
+    var rejectText = 'Error: ' + rejectValue;
+    setImmediate(function() {
+      var expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+        'promise rejection: ' + rejectText +
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.';
+      assert.notStrictEqual(logOutput.indexOf(expected), -1);
+      verifyServerResponse(function(message) {
+        return message.startsWith(rejectText);
+      }, TIMEOUT, done);
+    });
+  });
+
+  it('Should not report unhandledRejections if disabled', function(done) {
+    this.timeout(TIMEOUT * 2);
+    reinitialize({ reportUnhandledRejections: false });
+    var rejectValue = buildName('promise-rejection');
+    (function expectedTopOfStack() {
+      Promise.reject(rejectValue);
+    })();
+    setImmediate(function() {
+      var notExpected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+        'promise rejection: ' + rejectValue +
+        '.  This rejection has been reported to the error-reporting console.';
+      assert.strictEqual(logOutput.indexOf(notExpected), -1);
+      // Get all groups that that start with the rejection value and hence all
+      // of the groups corresponding to the above rejection (Since the
+      // buildName() creates a string unique enough to single out only the
+      // above rejection.) and verify that there are no such groups reported.
+      verifyAllGroups(function(message) {
+        return message.startsWith(rejectValue);
+      }, TIMEOUT, function(matchedErrors) {
+        assert.strictEqual(matchedErrors.length, 0);
+        done();
+      });
+    });
   });
 });

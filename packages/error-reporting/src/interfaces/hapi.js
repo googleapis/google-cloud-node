@@ -20,7 +20,8 @@ var isObject = is.object;
 var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var hapiRequestInformationExtractor = require('../request-extractors/hapi.js');
-var errorHandlerRouter = require('../error-router.js');
+var populateErrorMessage = require('../populate-error-message.js');
+var packageJson = require('../../package.json');
 
 /**
  * The Hapi error handler function serves simply to create an error message
@@ -45,7 +46,7 @@ function hapiErrorHandler(req, err, config) {
                .consumeRequestInformation(hapiRequestInformationExtractor(req))
                .setServiceContext(service, version);
 
-  errorHandlerRouter(err, em);
+  populateErrorMessage(err, em);
 
   return em;
 }
@@ -105,12 +106,10 @@ function makeHapiPlugin(client, config) {
   }
 
   var hapiPlugin = {register: hapiRegisterFunction};
-  var version = (isObject(config) && config.getVersion()) ?
-    config.getVersion(): '0.0.0';
 
   hapiPlugin.register.attributes = {
-    name: '@google/cloud-errors',
-    version: version
+    name: packageJson.name,
+    version: packageJson.version
   };
 
   return hapiPlugin;
