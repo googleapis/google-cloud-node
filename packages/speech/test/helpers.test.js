@@ -37,7 +37,6 @@ describe('Speech helper methods', () => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       var writable = stream.Writable();
-      var write = sandbox.stub(writable, 'write');
       var sr = sandbox.stub(speech, '_streamingRecognize').returns(writable);
 
       // Call the new helper method and establish that the config was
@@ -50,7 +49,6 @@ describe('Speech helper methods', () => {
       // the options.
       assert(sr.calledOnce);
       assert(sr.calledWithExactly(options));
-      assert(write.calledOnce);
     });
   });
 });
