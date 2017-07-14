@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module speech
+ * @name Speech
+ */
+
 'use strict';
 
 var extend = require('extend');
@@ -29,6 +35,10 @@ const VERSION = require('../package.json').version;
  * tasks.
  *
  * Service that implements Google Cloud Speech API.
+ *
+ * @constructor
+ * @alias module:speech
+ * @mixes module:speech/helpers
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to

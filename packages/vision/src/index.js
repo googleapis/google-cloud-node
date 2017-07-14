@@ -16,6 +16,7 @@
 
 /*!
  * @module vision
+ * @name Vision
  */
 
 'use strict';
@@ -33,6 +34,10 @@ const VERSION = require('../package.json').version;
 /**
  * Create an imageAnnotatorClient with additional helpers for common
  * tasks.
+ *
+ * @constructor
+ * @alias module:vision
+ * @mixes module:vision/helpers
  *
  * @param {Object=} opts - The optional parameters.
  * @param {String=} opts.servicePath
