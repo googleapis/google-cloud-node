@@ -3084,6 +3084,8 @@ var spanner = new Spanner(env);
           assert.ifError(err);
 
           transaction.run(query, function(err) {
+            assert.ifError(err);
+
             var action = attempts++ === 0 ? runOtherTransaction : wrap;
 
             action(function(err) {
