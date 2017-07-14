@@ -461,8 +461,6 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
 /**
  * Maps to {module:datastore#save}, forcing the method to be `insert`.
  *
- * @throws {Error} If an unrecognized method is provided.
- *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
  * @param {object|object[]} entities.data - Data to save with the provided key.
@@ -1003,8 +1001,6 @@ DatastoreRequest.prototype.save = function(entities, callback) {
 /**
  * Maps to {module:datastore#save}, forcing the method to be `update`.
  *
- * @throws {Error} If an unrecognized method is provided.
- *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
  * @param {object|object[]} entities.data - Data to save with the provided key.
@@ -1025,8 +1021,6 @@ DatastoreRequest.prototype.update = function(entities, callback) {
 
 /**
  * Maps to {module:datastore#save}, forcing the method to be `upsert`.
- *
- * @throws {Error} If an unrecognized method is provided.
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
