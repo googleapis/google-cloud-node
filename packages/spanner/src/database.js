@@ -887,7 +887,7 @@ Database.prototype.runTransaction = function(options, runFn) {
 
   options = extend({}, options);
 
-  this.getTransaction_(options, function(err, transaction) {
+  this.getTransaction(options, function(err, transaction) {
     if (err || !transaction) {
       runFn(err || new Error('Unable to create Transaction.'));
       return;
