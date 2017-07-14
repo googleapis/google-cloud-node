@@ -13,6 +13,7 @@
     "extend": "^3.0.0",
     "glob": "^5.0.9",
     "globby": "^3.0.1",
+    "intelli-espower-loader": "^1.0.1",
     "is": "^3.1.0",
     "jscs": "^2.1.1",
     "jshint": "^2.9.1",
@@ -25,9 +26,11 @@
     "multiline": "^1.0.2",
     "nyc": "^10.3.0",
     "package-json": "^2.4.0",
+    "power-assert": "^1.4.2",
     "propprop": "^0.3.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.3",
+    "sinon": "^2.2.0",
     "string-format-obj": "^1.0.0",
     "string-includes": "^2.0.0",
     "through2": "^2.0.0"
@@ -41,36 +44,11 @@
     "remove-ghpages": "node ./scripts/docs/remove.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",
     "test": "npm run unit-test && npm run docs && npm run snippet-test",
-    "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",
+    "unit-test": "mocha --timeout 5000 --bail --require intelli-espower-loader packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
-    "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
-    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts packages/*/test/*.js && nyc report",
+    "system-test": "mocha packages/*/system-test/*.js --require intelli-espower-loader --no-timeouts --bail",
+    "cover": "nyc --reporter=lcov --reporter=html mocha --require intelli-espower-loader --no-timeouts packages/*/test/*.js && nyc report",
     "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
-  },
-  "nyc": {
-    "report-dir": "./.coverage",
-    "exclude": [
-      "packages/*/src/*{/*,/**/*}.js",
-      "packages/*/test/**/*.js"
-    ],
-    "watermarks": {
-      "branches": [
-        95,
-        100
-      ],
-      "functions": [
-        95,
-        100
-      ],
-      "lines": [
-        95,
-        100
-      ],
-      "statements": [
-        95,
-        100
-      ]
-    }
   },
   "license": "Apache-2.0",
   "engines": {

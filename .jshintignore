@@ -2,5 +2,5 @@
 **/system-test/*/**/*
 **/test/*/**/*
 **/node_modules/
-**/coverage
+**/coverage/
 **/gapic*.js
