@@ -22,6 +22,7 @@ module.exports = {
   TYPES_DICT: 'types.json',
   TOC: 'toc.json',
   IGNORE: [
+    '**/helpers.js',
     'common',
     'common-grpc',
     'bigtable/src/mutation.js',

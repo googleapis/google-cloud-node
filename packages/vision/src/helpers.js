@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*!
+ * @module vision/helpers
+ */
+
 'use strict';
 
 var fs = require('fs');
@@ -24,7 +28,7 @@ var gax = require('google-gax');
 var protoFiles = require('google-proto-files');
 
 
-/**
+/*!
  * Find a given image and fire a callback with the appropriate image structure.
  *
  * @param {Object} image - An object representing what is known about the
@@ -59,7 +63,7 @@ var coerceImage = (image, callback) => {
 };
 
 
-/**
+/*!
  * Return a method that calls annotateImage asking for a single feature.
  *
  * @param {Number} featureValue - The feature being requested. This is taken
@@ -78,7 +82,7 @@ var _createSingleFeatureMethod = featureValue => {
 };
 
 
-/**
+/*!
  * Return a dictionary-like object with helpers to augment the Vision
  * GAPIC.
  *

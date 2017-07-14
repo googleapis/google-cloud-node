@@ -24,7 +24,7 @@ var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
 var through = require('through2');
 
-/**
+/*!
  * Return a dictionary-like object with helpers to augment the Speech
  * GAPIC.
  *
