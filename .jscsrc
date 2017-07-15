@@ -26,5 +26,6 @@
     "**/test/*/**/*",
     "**/node_modules/",
     "**/.coverage/**/*.js",
+    "**/smoke-test/**/*.js",
   ]
 }

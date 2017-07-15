@@ -52,15 +52,6 @@ var ALL_SCOPES = [
 /**
  * Service that implements Google Cloud Speech API.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link speechClient}
- *
- * @example
- * var speechV1 = require('@google-cloud/speech').v1({
- *   // optional auth parameters.
- * });
- * var client = speechV1.speechClient();
  *
  * @class
  */
@@ -165,8 +156,13 @@ SpeechClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = speechV1.speechClient();
- * var encoding = speechV1.RecognitionConfig.AudioEncoding.FLAC;
+ * var speech = require('@google-cloud/speech');
+ *
+ * var client = speech.v1({
+ *   // optional auth parameters.
+ * });
+ *
+ * var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
  * var sampleRateHertz = 44100;
  * var languageCode = 'en-US';
  * var config = {
@@ -185,7 +181,8 @@ SpeechClient.prototype.getProjectId = function(callback) {
  * client.recognize(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -231,8 +228,13 @@ SpeechClient.prototype.recognize = function(request, options, callback) {
  *
  * @example
  *
- * var client = speechV1.speechClient();
- * var encoding = speechV1.RecognitionConfig.AudioEncoding.FLAC;
+ * var speech = require('@google-cloud/speech');
+ *
+ * var client = speech.v1({
+ *   // optional auth parameters.
+ * });
+ *
+ * var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
  * var sampleRateHertz = 44100;
  * var languageCode = 'en-US';
  * var config = {
@@ -265,7 +267,8 @@ SpeechClient.prototype.recognize = function(request, options, callback) {
  *
  *     // The response of the api call returning the complete operation.
  *     var finalApiResponse = responses[2];
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
@@ -290,7 +293,8 @@ SpeechClient.prototype.recognize = function(request, options, callback) {
  *     operation.on('error', function(err) {
  *       // throw(err);
  *     })
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -320,9 +324,14 @@ SpeechClient.prototype.longRunningRecognize = function(request, options, callbac
  *
  * @example
  *
- * var client = speechV1.speechClient();
+ * var speech = require('@google-cloud/speech');
+ *
+ * var client = speech.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var stream = client.streamingRecognize().on('data', function(response) {
- *     // doThingsWith(response);
+ *     // doThingsWith(response)
  * });
  * var request = {};
  * // Write request objects.
