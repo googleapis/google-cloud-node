@@ -57,9 +57,7 @@ module.exports = () => {
    *
    * @example
    *
-   * var client = require('@google-cloud/speech')();
-   *
-   * var stream = client.streamingRecognize({
+   * var stream = speech.streamingRecognize({
    *   config: {
    *     encoding: 'LINEAR16',
    *     languageCode: 'en-us',
@@ -104,12 +102,7 @@ module.exports = () => {
           });
         }),
 
-        requestStream,
-
-        // Pass through the results.
-        through.obj(function(obj, _, next) {
-          next(null, obj);
-        })
+        requestStream
       ]);
     });
 

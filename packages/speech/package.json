@@ -1,7 +1,7 @@
 {
   "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/speech",
-  "version": "0.10.0",
+  "version": "0.9.4",
   "author": "Google Inc.",
   "description": "Cloud Speech Client Library for Node.js",
   "contributors": [
@@ -62,9 +62,7 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.2.0",
-    "nyc": "^10.3.0",
     "power-assert": "^1.4.2",
     "sinon": "^2.2.0"
   },
