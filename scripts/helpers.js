@@ -243,6 +243,7 @@ Module.prototype.runSystemTests = function() {
     'error-reporting',
     'google-cloud',
     'monitoring',
+    'speech',
     'video-intelligence'
   ];
 
