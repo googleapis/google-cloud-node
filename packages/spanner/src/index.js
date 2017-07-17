@@ -43,7 +43,6 @@ var Instance = require('./instance.js');
 
 var v1 = require('./v1');
 
-
 /**
  * [Cloud Spanner](https://cloud.google.com/spanner) is a highly scalable,
  * transactional, managed, NewSQL database service. Cloud Spanner solves the
@@ -78,7 +77,7 @@ function Spanner(options) {
 
   var config = {
     baseUrl: 'spanner.googleapis.com',
-    protosDir: path.resolve('protos'),
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Operations: {
         path: 'google/longrunning/operations.proto',
