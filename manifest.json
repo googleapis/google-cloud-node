@@ -338,6 +338,7 @@
       "name": "@google-cloud/speech",
       "defaultService": "speech",
       "versions": [
+        "0.10.1",
         "0.10.0",
         "0.9.4",
         "0.9.1",
