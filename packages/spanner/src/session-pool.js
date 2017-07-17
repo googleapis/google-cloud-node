@@ -500,7 +500,7 @@ SessionPool.prototype.getNextAvailableSession_ = function(options, callback) {
     return;
   }
 
-  this.pollForSession_(callback);
+  this.pollForSession_(options, callback);
 };
 
 /**
@@ -511,8 +511,9 @@ SessionPool.prototype.getNextAvailableSession_ = function(options, callback) {
  * @param {function} callback - The callback function to be executed when a
  *     session is available.
  */
-SessionPool.prototype.pollForSession_ = function(callback) {
+SessionPool.prototype.pollForSession_ = function(options, callback) {
   this.pendingAcquires.push({
+    options: options,
     callback: callback,
     timeout: this.acquireTimeout
   });
@@ -531,7 +532,8 @@ SessionPool.prototype.pollForSession_ = function(callback) {
       self.writePool && self.writePool.free;
 
     if (hasFreeSession) {
-      self.getNextAvailableSession_(self.pendingAcquires.shift().callback);
+      var acquireReq = self.pendingAcquires.shift();
+      self.getNextAvailableSession_(acquireReq.options, acquireReq.callback);
     }
 
     if (!self.pendingAcquires.length) {

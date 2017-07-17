@@ -835,19 +835,6 @@ describe('Database', function() {
       });
     });
 
-    it('should return an error if the txn object is missing', function(done) {
-      var error = new Error('Unable to create Transaction.');
-
-      database.getTransaction = function(options, callback) {
-        callback(null, null);
-      };
-
-      database.runTransaction(function(err) {
-        assert.deepEqual(err, error);
-        done();
-      });
-    });
-
     it('should run the transaction', function(done) {
       var TRANSACTION = {};
       var OPTIONS = {
