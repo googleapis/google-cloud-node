@@ -311,7 +311,7 @@ function Datastore(options) {
     projectIdRequired: false,
     baseUrl: this.baseUrl_,
     customEndpoint: this.customEndpoint_,
-    protosDir: path.resolve('protos'),
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Datastore: {
         path: 'google/datastore/v1/datastore.proto',
