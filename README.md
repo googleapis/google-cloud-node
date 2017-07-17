@@ -20,6 +20,7 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
+* [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
 
@@ -29,7 +30,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
@@ -530,6 +530,87 @@ document.annotate(function(err, annotation) {
 ```
 
 
+## Cloud Spanner (Beta)
+
+- [API Documentation][gcloud-spanner-docs]
+- [Official Documentation][cloud-spanner-docs]
+
+#### Using the Cloud Spanner API module
+
+```
+$ npm install --save @google-cloud/spanner
+```
+
+```js
+var spanner = require('@google-cloud/spanner');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var spannerClient = spanner({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var instance = spannerClient.instance('my-instance');
+var database = instance.database('my-database');
+
+// Create a table.
+var schema = `
+  CREATE TABLE Singers (
+    SingerId INT64 NOT NULL,
+    FirstName STRING(1024),
+    LastName STRING(1024),
+    SingerInfo BYTES(MAX),
+  ) PRIMARY KEY(SingerId)
+`;
+
+database.createTable(schema, function(err, table, operation) {
+  if (err) {
+    // Error handling omitted.
+  }
+
+  operation
+    .on('error', function(err) {})
+    .on('complete', function() {
+      // Table created successfully.
+    });
+});
+
+// Insert data into the table.
+var table = database.table('Singers');
+
+table.insert({
+  SingerId: 10,
+  FirstName: 'Eddie',
+  LastName: 'Wilson'
+}, function(err) {
+  if (!err) {
+    // Row inserted successfully.
+  }
+});
+
+// Run a query as a readable object stream.
+database.runStream('SELECT * FROM Singers')
+  .on('error', function(err) {})
+  .on('data', function(row) {
+    // row.toJSON() = {
+    //   SingerId: 10,
+    //   FirstName: 'Eddie',
+    //   LastName: 'Wilson'
+    // }
+  }
+  })
+  .on('end', function() {
+    // All results retrieved.
+  });
+```
+
+
 ## Cloud Vision (Beta)
 
 - [API Documentation][gcloud-vision-docs]
@@ -888,86 +969,6 @@ var project = resourceClient.project();
 project.getMetadata(function(err, metadata) {
   // `metadata` describes your project.
 });
-```
-
-
-## Cloud Spanner (Alpha)
-
-- [API Documentation][gcloud-spanner-docs]
-- [Official Documentation][cloud-spanner-docs]
-
-#### Using the Cloud Spanner API module
-
-```
-$ npm install --save @google-cloud/spanner
-```
-
-```js
-var spanner = require('@google-cloud/spanner');
-```
-
-#### Preview
-
-```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var spannerClient = spanner({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var instance = spannerClient.instance('my-instance');
-var database = instance.database('my-database');
-
-// Create a table.
-var schema =
-  'CREATE TABLE Singers (' +
-  '  SingerId INT64 NOT NULL,' +
-  '  FirstName STRING(1024),' +
-  '  LastName STRING(1024),' +
-  '  SingerInfo BYTES(MAX),' +
-  ') PRIMARY KEY(SingerId)';
-
-database.createTable(schema, function(err, table, operation) {
-  if (err) {
-    // Error handling omitted.
-  }
-
-  operation
-    .on('error', function(err) {})
-    .on('complete', function() {
-      // Table created successfully.
-    });
-});
-
-// Insert data into the table.
-var table = database.table('Singers');
-
-table.insert({
-  SingerId: 10,
-  FirstName: 'Eddie',
-  LastName: 'Wilson'
-}, function(err) {
-  if (!err) {
-    // Row inserted successfully.
-  }
-});
-
-// Run a query as a readable object stream.
-database.runStream('SELECT * FROM Singers')
-  .on('error', function(err) {})
-  .on('data', function(row) {
-    // row.toJSON() = {
-    //   SingerId: 10,
-    //   FirstName: 'Eddie',
-    //   LastName: 'Wilson'
-    // }
-  }
-  })
-  .on('end', function() {
-    // All results retrieved.
-  });
 ```
 
 
