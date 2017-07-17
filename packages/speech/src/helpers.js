@@ -102,7 +102,9 @@ module.exports = () => {
           });
         }),
 
-        requestStream
+        requestStream,
+
+        through.obj()
       ]);
     });
 
