@@ -78,7 +78,8 @@ describe('Database', function() {
 
   var INSTANCE = {
     api: {},
-    formattedName_: 'instance-name'
+    formattedName_: 'instance-name',
+    databases_: new Map()
   };
 
   var NAME = 'table-name';
@@ -199,14 +200,30 @@ describe('Database', function() {
 
   describe('close', function() {
     describe('success', function() {
-      it('should close the database', function(done) {
+      beforeEach(function() {
+        database.parent = INSTANCE;
         database.pool_ = {
           clear: function() {
             return Promise.resolve();
           }
         };
+      });
 
+      it('should close the database', function(done) {
         database.close(done);
+      });
+
+      it('should remove the database cache', function(done) {
+        var cache = INSTANCE.databases_;
+
+        cache.set(database.id, database);
+        assert(cache.has(database.id));
+
+        database.close(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(cache.has(database.id), false);
+          done();
+        });
       });
     });
 

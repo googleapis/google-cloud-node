@@ -232,7 +232,10 @@ Database.formatName_ = function(instanceName, name) {
  * });
  */
 Database.prototype.close = function(callback) {
+  var self = this;
+
   this.pool_.clear().then(function() {
+    self.parent.databases_.delete(self.id);
     callback(null);
   }, function(err) {
     callback(err || new Error('Unable to close database connection.'));
@@ -327,9 +330,11 @@ Database.prototype.createTable = function(schema, callback) {
  * });
  */
 Database.prototype.delete = function(callback) {
-  return this.api.Database.dropDatabase({
+  var reqOpts = {
     database: this.formattedName_
-  }, callback);
+  };
+
+  return this.api.Database.dropDatabase(reqOpts, callback);
 };
 
 /**

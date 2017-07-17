@@ -142,6 +142,8 @@ function Instance(spanner, name) {
       spanner.createInstance(self.formattedName_, options, callback);
     }
   });
+
+  this.databases_ = new Map();
 }
 
 util.inherits(Instance, commonGrpc.ServiceObject);
@@ -283,7 +285,11 @@ Instance.prototype.database = function(name, poolOptions) {
     throw new Error('A name is required to access a Database object.');
   }
 
-  return new Database(this, name, poolOptions);
+  if (!this.databases_.has(name)) {
+    this.databases_.set(name, new Database(this, name, poolOptions));
+  }
+
+  return this.databases_.get(name);
 };
 
 /**
@@ -312,9 +318,19 @@ Instance.prototype.database = function(name, poolOptions) {
  * });
  */
 Instance.prototype.delete = function(callback) {
-  return this.api.Instance.deleteInstance({
+  var self = this;
+
+  var reqOpts = {
     name: this.formattedName_
-  }, callback);
+  };
+
+  return this.api.Instance.deleteInstance(reqOpts, function(err, resp) {
+    if (!err) {
+      self.parent.instances_.delete(self.id);
+    }
+
+    callback(err, resp);
+  });
 };
 
 /**

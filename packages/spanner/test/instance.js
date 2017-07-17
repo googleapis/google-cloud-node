@@ -58,7 +58,8 @@ describe('Instance', function() {
 
   var SPANNER = {
     api: {},
-    projectId: 'project-id'
+    projectId: 'project-id',
+    instances_: new Map()
   };
 
   var NAME = 'instance-name';
@@ -86,6 +87,10 @@ describe('Instance', function() {
   });
 
   describe('instantiation', function() {
+    it('should localize an database map', function() {
+      assert(instance.databases_ instanceof Map);
+    });
+
     it('should promisify all the things', function() {
       assert(promisified);
     });
@@ -328,32 +333,72 @@ describe('Instance', function() {
       }, /A name is required to access a Database object\./);
     });
 
-    it('should return a Database object', function() {
-      var database = instance.database(NAME);
+    it('should create and cache a Database', function() {
+      var cache = instance.databases_;
+      var poolOptions = {};
+
+      assert.strictEqual(cache.has(NAME), false);
+
+      var database = instance.database(NAME, poolOptions);
+
       assert(database instanceof FakeDatabase);
       assert.strictEqual(database.calledWith_[0], instance);
       assert.strictEqual(database.calledWith_[1], NAME);
+      assert.strictEqual(database.calledWith_[2], poolOptions);
+      assert.strictEqual(database, cache.get(NAME));
+    });
+
+    it('should re-use cached objects', function() {
+      var cache = instance.databases_;
+      var fakeDatabase = {};
+
+      cache.set(NAME, fakeDatabase);
+
+      var database = instance.database(NAME);
+
+      assert.strictEqual(database, fakeDatabase);
     });
   });
 
   describe('delete', function() {
-    it('should correctly call and return the gax API', function() {
+    beforeEach(function() {
+      instance.parent = SPANNER;
+    });
+
+    it('should correctly call and return the gax API', function(done) {
       var gaxReturnValue = {};
 
-      function callback() {}
-
       instance.api.Instance = {
-        deleteInstance: function(reqOpts, callback_) {
+        deleteInstance: function(reqOpts, callback) {
           assert.deepEqual(reqOpts, {
             name: instance.formattedName_
           });
-          assert.strictEqual(callback_, callback);
+          setImmediate(callback);
           return gaxReturnValue;
         }
       };
 
-      var returnValue = instance.delete(callback);
+      var returnValue = instance.delete(done);
       assert.strictEqual(returnValue, gaxReturnValue);
+    });
+
+    it('should remove the Instance from the cache', function(done) {
+      var cache = instance.parent.instances_;
+
+      instance.api.Instance = {
+        deleteInstance: function(reqOpts, callback) {
+          callback(null);
+        }
+      };
+
+      cache.set(instance.id, instance);
+      assert.strictEqual(cache.get(instance.id), instance);
+
+      instance.delete(function(err) {
+        assert.ifError(err);
+        assert.strictEqual(cache.has(instance.id), false);
+        done();
+      });
     });
   });
 

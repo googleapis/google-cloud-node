@@ -3070,7 +3070,75 @@ var spanner = new Spanner(env);
         });
       });
 
-      it('should retry an aborted transaction', function(done) {
+      it('should retry an aborted txn when reading fails', function(done) {
+        var query = `SELECT * FROM ${table.name}`;
+        var attempts = 0;
+
+        var expectedRow = {
+          Key: 'k888',
+          NumberValue: null,
+          StringValue: 'abc'
+        };
+
+        database.runTransaction(function(err, transaction) {
+          assert.ifError(err);
+
+          transaction.run(query, function(err) {
+            assert.ifError(err);
+
+            var action = attempts++ === 0 ? runOtherTransaction : wrap;
+
+            action(function(err) {
+              assert.ifError(err);
+
+              transaction.run(query, function(err, rows) {
+                assert.ifError(err);
+
+                transaction.insert(table.name, {
+                  Key: generateName('key'),
+                  StringValue: generateName('val')
+                });
+
+                transaction.commit(function(err) {
+                  assert.ifError(err);
+
+                  var lastRow = rows.pop().toJSON();
+
+                  assert.deepEqual(lastRow, expectedRow);
+                  assert.strictEqual(attempts, 2);
+
+                  done();
+                });
+              });
+            });
+          });
+        });
+
+        function runOtherTransaction(callback) {
+          database.runTransaction(function(err, transaction) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            transaction.run(query, function(err) {
+              if (err) {
+                callback(err);
+                return;
+              }
+
+              transaction.insert(table.name, expectedRow);
+              transaction.commit(callback);
+            });
+          });
+        }
+
+        function wrap(callback) {
+          setImmediate(callback);
+        }
+      });
+
+      it('should retry an aborted txn when commit fails', function(done) {
         var query = `SELECT * FROM ${table.name}`;
         var attempts = 0;
 

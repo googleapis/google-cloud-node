@@ -1399,7 +1399,8 @@ describe('SessionPool', function() {
 
     describe('polls for next opening', function() {
       it('should poll for the next available session', function(done) {
-        sessionPool.pollForSession_ = function(callback) {
+        sessionPool.pollForSession_ = function(options, callback) {
+          assert.strictEqual(options, OPTIONS);
           callback(); // done
         };
 
@@ -1432,12 +1433,14 @@ describe('SessionPool', function() {
 
     it('should capture the acquire request', function() {
       var callback = function() {};
+      var options = {};
 
-      sessionPool.pollForSession_(callback);
+      sessionPool.pollForSession_(options, callback);
       assert.strictEqual(sessionPool.pendingAcquires.length, 1);
 
       var pendingAcquire = sessionPool.pendingAcquires[0];
 
+      assert.strictEqual(pendingAcquire.options, options);
       assert.strictEqual(pendingAcquire.callback, callback);
       assert.strictEqual(pendingAcquire.timeout, sessionPool.acquireTimeout);
     });
@@ -1533,7 +1536,7 @@ describe('SessionPool', function() {
           done();
         };
 
-        sessionPool.pollForSession_(callback);
+        sessionPool.pollForSession_({}, callback);
         acquireRequest = sessionPool.pendingAcquires[0];
       });
 
@@ -1543,7 +1546,7 @@ describe('SessionPool', function() {
           done();
         };
 
-        sessionPool.pollForSession_(callback);
+        sessionPool.pollForSession_({}, callback);
       });
 
       it('should return an error if a timeout occurs', function(done) {
@@ -1554,7 +1557,7 @@ describe('SessionPool', function() {
           done();
         };
 
-        sessionPool.pollForSession_(callback);
+        sessionPool.pollForSession_({}, callback);
       });
     });
   });

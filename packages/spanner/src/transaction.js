@@ -371,7 +371,6 @@ Transaction.prototype.requestStream = function(config) {
       return;
     }
 
-    requestStream.end();
     userStream.destroy();
 
     if (self.shouldRetry_(err)) {
