@@ -3,8 +3,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 
-> This module is experimental, and should be used by early adopters.
-> This module uses APIs that may be undocumented and are subject to change without notice.
+> **Beta** *This is a Beta release of the Stackdriver Error Reporting libraries for Node.js. These libraries might be changed in backward-incompatible ways and are not subject to any SLA or deprecation policy.*
 
 This module provides Stackdriver Error Reporting support for Node.js applications.
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
