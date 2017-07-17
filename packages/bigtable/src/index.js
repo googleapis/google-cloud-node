@@ -323,7 +323,7 @@ function Bigtable(options) {
   var config = {
     baseUrl: baseUrl,
     customEndpoint: !!customEndpoint,
-    protosDir: path.resolve('protos'),
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Bigtable: 'google/bigtable/v2/bigtable.proto',
       BigtableTableAdmin: {
