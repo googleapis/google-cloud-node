@@ -50,8 +50,7 @@ module.exports = () => {
    *   for the details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts
-   *   [StreamingRecognizeRequest]{@link StreamingRecognizeRequest}-like
-   *   objects for the write() method, and will emit objects representing
+   *   raw audio for the write() method, and will emit objects representing
    *   [StreamingRecognizeResponse]{@link StreamingRecognizeResponse} on the
    *   'data' event asynchronously.
    *
@@ -80,29 +79,39 @@ module.exports = () => {
     // Format the audio content as input request for pipeline
     var recognizeStream = streamEvents(pumpify.obj());
 
-    recognizeStream.once('writing', function() {
-      requestStream.on('error', function(err) {
+    // Attach the events to the request stream, but only do so
+    // when the first write (of data) comes in.
+    //
+    // This also means that the sending of the initial request (with the
+    // config) is delayed until we get the first burst of data.
+    recognizeStream.once('writing', () => {
+      requestStream.on('error', err => {
         recognizeStream.destroy(err);
       });
 
-      requestStream.on('response', function(response) {
+      // Responses must be explicitly forwarded.
+      requestStream.on('response', response => {
         recognizeStream.emit('response', response);
       });
 
-      // Write the initial configuration to the stream,
+      // Write the initial configuration to the stream.
       requestStream.write({
         streamingConfig: config
       });
 
-      this.setPipeline([
+      // Set up appropriate piping between the stream returned by
+      // the underlying API method and the one that we return.
+      recognizeStream.setPipeline([
         // Format the user's input.
-        through.obj(function(obj, _, next) {
+        // This entails that the user sends raw audio; it is wrapped in
+        // the appropriate request structure.
+        through.obj((obj, _, next) => {
           next(null, {
             audioContent: obj
           });
         }),
-
-        requestStream
+        requestStream,
+        through.obj()
       ]);
     });
 
