@@ -101,7 +101,7 @@ module.exports = () => {
 
       // Set up appropriate piping between the stream returned by
       // the underlying API method and the one that we return.
-      this.setPipeline([
+      recognizeStream.setPipeline([
         // Format the user's input.
         // This entails that the user sends raw audio; it is wrapped in
         // the appropriate request structure.
