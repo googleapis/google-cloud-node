@@ -85,7 +85,7 @@ function PubSub(options) {
   var config = {
     baseUrl: this.baseUrl_,
     customEndpoint: this.customEndpoint_,
-    protosDir: path.resolve('protos'),
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Publisher: {
         path: 'google/pubsub/v1/pubsub.proto',

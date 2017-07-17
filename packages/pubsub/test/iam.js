@@ -20,6 +20,7 @@ var assert = require('assert');
 var extend = require('extend');
 var GrpcService = require('@google-cloud/common-grpc').Service;
 var nodeutil = require('util');
+var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -72,8 +73,17 @@ describe('IAM', function() {
       var options = iam.calledWith_[1];
 
       assert.strictEqual(config.baseUrl, PUBSUB.defaultBaseUrl_);
-      assert.strictEqual(config.service, 'iam');
-      assert.strictEqual(config.apiVersion, 'v1');
+
+      var protosDir = path.resolve(__dirname, '../protos');
+      assert.strictEqual(config.protosDir, protosDir);
+
+      assert.deepStrictEqual(config.protoServices, {
+        IAMPolicy: {
+          path: 'google/iam/v1/iam_policy.proto',
+          service: 'iam.v1'
+        }
+      });
+
       assert.deepEqual(config.scopes, [
         'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'

@@ -70,7 +70,7 @@ var util = require('util');
 function IAM(pubsub, id) {
   var config = {
     baseUrl: pubsub.defaultBaseUrl_,
-    protosDir: path.resolve('protos'),
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       IAMPolicy: {
         path: 'google/iam/v1/iam_policy.proto',

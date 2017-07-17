@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
+var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -181,8 +182,21 @@ describe('PubSub', function() {
 
       var baseUrl = 'pubsub.googleapis.com';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.strictEqual(calledWith.service, 'pubsub');
-      assert.strictEqual(calledWith.apiVersion, 'v1');
+
+      var protosDir = path.resolve(__dirname, '../protos');
+      assert.strictEqual(calledWith.protosDir, protosDir);
+
+      assert.deepStrictEqual(calledWith.protoServices, {
+        Publisher: {
+          path: 'google/pubsub/v1/pubsub.proto',
+          service: 'pubsub.v1'
+        },
+        Subscriber: {
+          path: 'google/pubsub/v1/pubsub.proto',
+          service: 'pubsub.v1'
+        }
+      });
+
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'
