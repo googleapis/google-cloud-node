@@ -83,7 +83,7 @@ var TransactionRequest = require('./transaction-request.js');
  * @param {number} options.min - Minimum number of resources to keep in the pool
  *     at any given time. (Default: `0`)
  * @param {number} options.keepAlive - How often to ping idle sessions, in
- *     minutes. Must be less than 1 hour.
+ *     minutes. Must be less than 1 hour. (Default: `59`)
  * @param {number} options.writes - Pre-allocate transactions for the number of
  *     sessions specified. (Default: `0`)
  *
