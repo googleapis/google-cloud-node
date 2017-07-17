@@ -322,6 +322,7 @@
       "name": "@google-cloud/spanner",
       "defaultService": "spanner",
       "versions": [
+        "0.7.0",
         "0.5.0",
         "0.4.2",
         "0.4.1",
