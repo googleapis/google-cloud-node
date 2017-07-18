@@ -299,12 +299,45 @@ describe('Subscription', function() {
           attributes: attributes,
           publishTime: publishTime
         }
-      });
+      }, undefined, true);
 
       assert.deepEqual(msg, {
         ackId: 'abc',
         id: 7,
         data: obj,
+        attributes: attributes,
+        timestamp: expectedDate
+      });
+    });
+
+    it('should not decode stringified JSON to object', function() {
+      var str = '{ "hi": "there" }';
+      var obj = JSON.parse(str);
+      var stringified = new Buffer(str).toString('base64');
+      var attributes = {};
+      var publishTime = {
+        seconds: '1480413405',
+        nanos: 617000000
+      };
+
+      var seconds = parseInt(publishTime.seconds, 10);
+      var milliseconds = parseInt(publishTime.nanos, 10) / 1e6;
+      var expectedDate = new Date(seconds * 1000 + milliseconds);
+
+      var msg = Subscription.formatMessage_({
+        ackId: 'abc',
+        message: {
+          data: stringified,
+          messageId: 7,
+          attributes: attributes,
+          publishTime: publishTime
+        }
+      }, undefined, false);
+
+      assert.deepEqual(msg, {
+        ackId: 'abc',
+        id: 7,
+        data: str,
         attributes: attributes,
         timestamp: expectedDate
       });
@@ -331,7 +364,7 @@ describe('Subscription', function() {
           attributes: attributes,
           publishTime: publishTime
         }
-      });
+      }, undefined, true);
 
       assert.deepEqual(msg, {
         ackId: 'abc',
@@ -343,19 +376,19 @@ describe('Subscription', function() {
     });
 
     it('should decode buffer to string', function() {
-      var msg = Subscription.formatMessage_(messageObj.receivedMessages[0]);
+      var msg = Subscription.formatMessage_(messageObj.receivedMessages[0], undefined, true);
       assert.deepEqual(msg, expectedMessage);
     });
 
     it('should decode buffer to base64', function() {
       var msg = Subscription
-        .formatMessage_(messageObj.receivedMessages[0], 'base64');
+        .formatMessage_(messageObj.receivedMessages[0], 'base64', true);
       assert.deepEqual(msg, expectedMessageAsBase64);
     });
 
     it('should decode buffer to specified encoding', function() {
       var msg = Subscription
-        .formatMessage_(messageObj.receivedMessages[0], 'binary');
+        .formatMessage_(messageObj.receivedMessages[0], 'binary', true);
       assert.deepEqual(msg, expectedMessageAsBinary);
     });
   });
