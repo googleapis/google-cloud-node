@@ -576,6 +576,9 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  * @param {number} options.timeout - Set a maximum amount of time in
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken.
+ * @param {boolean} options.json - If true (default), the body attempted to be
+ *     parsed to JSON. If this is false, the body will not be parsed and will be
+ *     a string. This is ignored if options.encoding is set.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:pubsub/subscription} callback.subscription - The subscription.

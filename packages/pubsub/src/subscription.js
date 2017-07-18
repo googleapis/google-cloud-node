@@ -64,6 +64,9 @@ var PUBSUB_API_TIMEOUT = 90000;
  * @param {number} options.timeout - Set a maximum amount of time in
  *     milliseconds on an HTTP request to pull new messages to wait for a
  *     response before the connection is broken. (default: 90000)
+  * @param {boolean} options.json - If true (default), the body attempted to be
+ *     parsed to JSON. If this is false, the body will not be parsed and will be
+ *     a string. This is ignored if options.encoding is set.
  */
 /**
  * A Subscription object will give you access to your Cloud Pub/Sub
@@ -289,6 +292,7 @@ function Subscription(pubsub, options) {
     is.number(options.maxInProgress) ? options.maxInProgress : Infinity;
   this.messageListeners = 0;
   this.paused = false;
+  this.json = typeof options.json === 'boolean' ? options.json : true;
 
   if (is.number(options.timeout)) {
     this.timeout = options.timeout;
@@ -347,7 +351,7 @@ modelo.inherits(Subscription, commonGrpc.ServiceObject, events.EventEmitter);
  *
  * @private
  */
-Subscription.formatMessage_ = function(msg, enc) {
+Subscription.formatMessage_ = function(msg, enc, json) {
   var innerMessage = msg.message;
   var message = {
     ackId: msg.ackId
@@ -363,9 +367,11 @@ Subscription.formatMessage_ = function(msg, enc) {
       } else {
         message.data = Buffer.from(innerMessage.data, 'base64').toString(enc);
 
-        try {
-          message.data = JSON.parse(message.data);
-        } catch(e) {}
+        if (json) {
+          try {
+            message.data = JSON.parse(message.data);
+          } catch(e) {}
+        }
       }
     }
 
@@ -720,7 +726,7 @@ Subscription.prototype.pull = function(options, callback) {
 
     var messages = arrify(resp.receivedMessages)
       .map(function(msg) {
-        return Subscription.formatMessage_(msg, self.encoding);
+        return Subscription.formatMessage_(msg, self.encoding, self.json);
       })
       .map(self.decorateMessage_.bind(self));
 
