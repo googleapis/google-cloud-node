@@ -143,16 +143,20 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.protosDir, protosDir);
 
       assert.deepEqual(calledWith.protoServices, {
-        Bigtable: 'google/bigtable/v2/bigtable.proto',
+        Bigtable: {
+          baseUrl: 'bigtable.googleapis.com',
+          path: 'google/bigtable/v2/bigtable.proto',
+          service: 'bigtable.v2'
+        },
         BigtableTableAdmin: {
           baseUrl: 'bigtableadmin.googleapis.com',
           path: 'google/bigtable/admin/v2/bigtable_table_admin.proto',
-          service: 'bigtable.admin'
+          service: 'bigtable.admin.v2'
         },
         BigtableInstanceAdmin: {
           baseUrl: 'bigtableadmin.googleapis.com',
           path: 'google/bigtable/admin/v2/bigtable_instance_admin.proto',
-          service: 'bigtable.admin'
+          service: 'bigtable.admin.v2'
         },
         Operations: {
           baseUrl: 'bigtableadmin.googleapis.com',

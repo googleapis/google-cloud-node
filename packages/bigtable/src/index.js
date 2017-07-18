@@ -325,16 +325,20 @@ function Bigtable(options) {
     customEndpoint: !!customEndpoint,
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
-      Bigtable: 'google/bigtable/v2/bigtable.proto',
+      Bigtable: {
+        baseUrl: baseUrl,
+        path: 'google/bigtable/v2/bigtable.proto',
+        service: 'bigtable.v2'
+      },
       BigtableTableAdmin: {
         baseUrl: adminBaseUrl,
         path: 'google/bigtable/admin/v2/bigtable_table_admin.proto',
-        service: 'bigtable.admin'
+        service: 'bigtable.admin.v2'
       },
       BigtableInstanceAdmin: {
         baseUrl: adminBaseUrl,
         path: 'google/bigtable/admin/v2/bigtable_instance_admin.proto',
-        service: 'bigtable.admin'
+        service: 'bigtable.admin.v2'
       },
       Operations: {
         baseUrl: adminBaseUrl,
