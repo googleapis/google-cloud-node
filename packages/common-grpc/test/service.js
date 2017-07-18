@@ -87,7 +87,7 @@ describe.only('GrpcService', function() {
 
   var ROOT_DIR = '/root/dir';
   var PROTO_FILE_PATH = 'filepath.proto';
-  var SERVICE_PATH= 'service.path';
+  var SERVICE_PATH = 'service.path';
 
   var CONFIG = {
     proto: {},
