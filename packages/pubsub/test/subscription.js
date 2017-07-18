@@ -312,7 +312,6 @@ describe('Subscription', function() {
 
     it('should not decode stringified JSON to object', function() {
       var str = '{ "hi": "there" }';
-      var obj = JSON.parse(str);
       var stringified = new Buffer(str).toString('base64');
       var attributes = {};
       var publishTime = {
