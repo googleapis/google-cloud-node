@@ -53,15 +53,6 @@ var ALL_SCOPES = [
  * The service also includes methods for sensitive data redaction and
  * scheduling of data scans on Google Cloud Platform based data sets.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link dlpServiceClient}
- *
- * @example
- * var dlpV2beta1 = require('@google-cloud/dlp').v2beta1({
- *   // optional auth parameters.
- * });
- * var client = dlpV2beta1.dlpServiceClient();
  *
  * @class
  */
@@ -167,7 +158,7 @@ DlpServiceClient.prototype.getProjectId = function(callback) {
 // Service calls
 
 /**
- * Find potentially sensitive info in a list of strings.
+ * Finds potentially sensitive info in a list of strings.
  * This method has limits on input size, processing time, and output size.
  *
  * @param {Object} request
@@ -195,7 +186,12 @@ DlpServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var inspectConfig = {};
  * var items = [];
  * var request = {
@@ -205,7 +201,8 @@ DlpServiceClient.prototype.getProjectId = function(callback) {
  * client.inspectContent(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -222,7 +219,7 @@ DlpServiceClient.prototype.inspectContent = function(request, options, callback)
 };
 
 /**
- * Redact potentially sensitive info from a list of strings.
+ * Redacts potentially sensitive info from a list of strings.
  * This method has limits on input size, processing time, and output size.
  *
  * @param {Object} request
@@ -236,9 +233,14 @@ DlpServiceClient.prototype.inspectContent = function(request, options, callback)
  *
  *   This object should have the same structure as [ContentItem]{@link ContentItem}
  * @param {Object[]} request.replaceConfigs
- *   The strings to replace findings with. Must specify at least one.
+ *   The strings to replace findings text findings with. Must specify at least
+ *   one of these or one ImageRedactionConfig if redacting images.
  *
  *   This object should have the same structure as [ReplaceConfig]{@link ReplaceConfig}
+ * @param {Object[]=} request.imageRedactionConfigs
+ *   The configuration for specifying what content to redact from images.
+ *
+ *   This object should have the same structure as [ImageRedactionConfig]{@link ImageRedactionConfig}
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -252,7 +254,12 @@ DlpServiceClient.prototype.inspectContent = function(request, options, callback)
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var inspectConfig = {};
  * var items = [];
  * var replaceConfigs = [];
@@ -264,7 +271,8 @@ DlpServiceClient.prototype.inspectContent = function(request, options, callback)
  * client.redactContent(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -281,7 +289,8 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
 };
 
 /**
- * Schedule a job scanning content in a Google Cloud Platform data repository.
+ * Schedules a job scanning content in a Google Cloud Platform data
+ * repository.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -297,15 +306,17 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *   Optional location to store findings. The bucket must already exist and
  *   the Google APIs service account for DLP must have write permission to
  *   write to the given bucket.
- *   Results will be split over multiple csv files with each file name matching
- *   the pattern "[operation_id] + [count].csv".
- *   The operation_id will match the identifier for the Operation,
- *   and the [count] is a counter used for tracking the number of files written.
- *   The CSV file(s) contain the following columns regardless of storage type
- *   scanned: id, info_type, likelihood, byte size of finding, quote, time_stamp
- *   For cloud storage the next two columns are: file_path, start_offset
- *   For datastore the next two columns are: project_id, namespace_id, path,
- *       column_name, offset.
+ *   <p>Results are split over multiple csv files with each file name matching
+ *   the pattern "[operation_id]_[count].csv", for example
+ *   `3094877188788974909_1.csv`. The `operation_id` matches the
+ *   identifier for the Operation, and the `count` is a counter used for
+ *   tracking the number of files written. <p>The CSV file(s) contain the
+ *   following columns regardless of storage type scanned: <li>id <li>info_type
+ *   <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
+ *   <p>For Cloud Storage the next columns are: <li>file_path
+ *   <li>start_offset<br/>
+ *   <p>For Cloud Datastore the next columns are: <li>project_id
+ *   <li>namespace_id <li>path <li>column_name <li>offset
  *
  *   This object should have the same structure as [OutputStorageConfig]{@link OutputStorageConfig}
  * @param {Object=} options
@@ -321,7 +332,12 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var inspectConfig = {};
  * var storageConfig = {};
  * var outputConfig = {};
@@ -347,9 +363,19 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *
  *     // The response of the api call returning the complete operation.
  *     var finalApiResponse = responses[2];
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
+ *
+ * var inspectConfig = {};
+ * var storageConfig = {};
+ * var outputConfig = {};
+ * var request = {
+ *     inspectConfig: inspectConfig,
+ *     storageConfig: storageConfig,
+ *     outputConfig: outputConfig
+ * };
  *
  * // Handle the operation using the event emitter pattern.
  * client.createInspectOperation(request).then(function(responses) {
@@ -372,7 +398,8 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *     operation.on('error', function(err) {
  *       // throw(err);
  *     })
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -399,11 +426,19 @@ DlpServiceClient.prototype.createInspectOperation = function(request, options, c
  *   Should be in the format of `inspect/results/{id}.
  * @param {number=} request.pageSize
  *   Maximum number of results to return.
- *   If 0, the implementation will select a reasonable value.
+ *   If 0, the implementation selects a reasonable value.
  * @param {string=} request.pageToken
  *   The value returned by the last `ListInspectFindingsResponse`; indicates
  *   that this is a continuation of a prior `ListInspectFindings` call, and that
  *   the system should return the next page of data.
+ * @param {string=} request.filter
+ *   Restricts findings to items that match. Supports info_type and likelihood.
+ *   <p>Examples:<br/>
+ *   <li>info_type=EMAIL_ADDRESS
+ *   <li>info_type=PHONE_NUMBER,EMAIL_ADDRESS
+ *   <li>likelihood=VERY_LIKELY
+ *   <li>likelihood=VERY_LIKELY,LIKELY
+ *   <li>info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -417,12 +452,18 @@ DlpServiceClient.prototype.createInspectOperation = function(request, options, c
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.resultPath("[RESULT]");
  * client.listInspectFindings({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -462,7 +503,12 @@ DlpServiceClient.prototype.listInspectFindings = function(request, options, call
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var category = '';
  * var languageCode = '';
  * var request = {
@@ -472,7 +518,8 @@ DlpServiceClient.prototype.listInspectFindings = function(request, options, call
  * client.listInfoTypes(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -510,12 +557,18 @@ DlpServiceClient.prototype.listInfoTypes = function(request, options, callback) 
  *
  * @example
  *
- * var client = dlpV2beta1.dlpServiceClient();
+ * var dlp = require('@google-cloud/dlp');
+ *
+ * var client = dlp.v2beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var languageCode = '';
  * client.listRootCategories({languageCode: languageCode}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
