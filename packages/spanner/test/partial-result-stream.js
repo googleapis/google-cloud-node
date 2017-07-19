@@ -189,6 +189,36 @@ describe('PartialResultStream', function() {
         }));
     });
 
+    it('should cache the metadata', function(done) {
+      var METADATA = {};
+
+      var formattedRows = [{}, {}];
+      var formatCalls = 0;
+
+      var chunks = [
+        extend({ metadata: METADATA }, RESULT_WITHOUT_TOKEN),
+        RESULT_WITH_TOKEN
+      ];
+
+      partialResultStreamModule.formatRow_ = function(metadata, row) {
+        assert.strictEqual(metadata, METADATA);
+        assert.strictEqual(row, chunks[formatCalls]);
+        return formattedRows[formatCalls++];
+      };
+
+      fakeRequestStream.push(chunks[0]);
+      fakeRequestStream.push(chunks[1]);
+      fakeRequestStream.push(null);
+
+      partialResultStream
+        .on('error', done)
+        .pipe(concat(function(rows) {
+          assert.strictEqual(rows[0], formattedRows[0]);
+          assert.strictEqual(rows[1], formattedRows[1]);
+          done();
+        }));
+    });
+
     it('should return the formatted row', function(done) {
       var formattedRow = {};
 
