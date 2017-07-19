@@ -18,14 +18,14 @@
     "test": "npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/speech": "0.9.3",
-    "@google-cloud/storage": "1.1.1",
+    "@google-cloud/speech": "^0.10.1",
+    "@google-cloud/storage": "^1.2.0",
     "node-record-lpcm16": "0.3.0",
-    "yargs": "8.0.2"
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.15",
-    "ava": "0.19.1",
+    "@google-cloud/nodejs-repo-tools": "^1.4.15",
+    "ava": "^0.19.1",
     "proxyquire": "1.8.0",
     "sinon": "2.3.4"
   },
