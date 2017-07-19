@@ -25,6 +25,7 @@ var exec = require('methmeth');
 var extend = require('extend');
 var genericPool = require('generic-pool');
 var is = require('is');
+var stackTrace = require('stack-trace');
 var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
@@ -57,6 +58,8 @@ function SessionPool(database, options) {
   events.EventEmitter.call(this);
 
   options = options || {};
+
+  this.traces = new Map();
 
   this.database = database;
   this.maxIdle = options.maxIdle || 1;
@@ -167,6 +170,24 @@ SessionPool.getPoolOptions_ = function(userOptions) {
 };
 
 /**
+ * @private
+ */
+SessionPool.formatTrace_ = function(trace) {
+  trace = trace.map(function(t) {
+    var caller = t.getFunctionName() || t.getMethodName();
+    var location = [
+      t.getFileName(),
+      t.getLineNumber(),
+      t.getColumnNumber()
+    ];
+
+    return `  at ${caller} (${location.join(':')})`;
+  });
+
+  return 'Session leak found!\n' + trace.join('\n');
+};
+
+/**
  * This method is used by `genericPool` to know if a session has been evicted.
  *
  * @private
@@ -211,10 +232,21 @@ SessionPool.prototype.clear = function() {
  * @param {module:spanner/session} callback.session - The session object.
  */
 SessionPool.prototype.getSession = function(callback) {
+  var self = this;
   var pool = this.pool;
+  var trace = stackTrace.get();
 
   if (!pool.free) {
-    this.getNextAvailableSession_(callback);
+    this.getNextAvailableSession_(function(err, session) {
+      if (err) {
+        callback(err, null);
+        return;
+      }
+
+
+      self.traces.set(session.id, trace);
+      callback(null, session);
+    });
     return;
   }
 
@@ -231,8 +263,18 @@ SessionPool.prototype.getSession = function(callback) {
         return;
       }
 
+      self.traces.set(session.id, trace);
       callback(null, session);
     }, callback);
+};
+
+/**
+ *
+ */
+SessionPool.prototype.getSessionLeaks = function() {
+  return Array.from(this.traces.values()).map(function(trace) {
+    return SessionPool.formatTrace_(trace);
+  });
 };
 
 /**
@@ -246,12 +288,21 @@ SessionPool.prototype.getSession = function(callback) {
  *     object.
  */
 SessionPool.prototype.getWriteSession = function(callback) {
+  var self = this;
   var pool = this.writePool;
 
+  var trace = stackTrace.get();
+
   if (!pool || !pool.free) {
-    this.getNextAvailableSession_({
-      write: true
-    }, callback);
+    this.getNextAvailableSession_({ write: true }, function(err, session, txn) {
+      if (err) {
+        callback(err, null, null);
+        return;
+      }
+
+      self.traces.set(session.id, trace);
+      callback(null, session, txn);
+    });
     return;
   }
 
@@ -268,6 +319,7 @@ SessionPool.prototype.getWriteSession = function(callback) {
         return;
       }
 
+      self.traces.set(session.id, trace);
       callback(null, session, session.transaction_);
     })
     .then(null, callback);
@@ -279,6 +331,8 @@ SessionPool.prototype.getWriteSession = function(callback) {
  * @param {module:spanner/session} session - The session to be released.
  */
 SessionPool.prototype.release = function(session) {
+  this.traces.delete(session.id);
+
   if (this.available >= this.maxIdle) {
     var pool = session.isWriteSession_ ? this.writePool : this.pool;
     return pool.destroy(session);

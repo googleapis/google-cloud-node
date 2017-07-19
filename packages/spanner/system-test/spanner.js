@@ -748,6 +748,24 @@ var spanner = new Spanner(env);
         });
       }));
     });
+
+    it('should capture a list of Session leaks', function(done) {
+      database.getTransaction(function(err, txn) {
+        assert.ifError(err);
+        // session is now checked out.
+        database.close(function(err) {
+          assert(err instanceof Error);
+          assert.strictEqual(err.messages.length, 1);
+
+          txn.end();
+
+          database.close(function(err) {
+            assert.ifError(err);
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('Sessions', function() {
