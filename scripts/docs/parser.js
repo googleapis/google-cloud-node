@@ -388,13 +388,14 @@ function parseFile(fileName, contents, umbrellaMode) {
 
 function createTypesDictionary(docs) {
   var types = [];
-  var gapicVersions = [];
+  var gapics = {};
 
   docs.forEach(function(service) {
     var isGapic = /_client$/.test(service.id);
 
     var titleParts = [];
     var id = service.id;
+
     var contents = service.path;
 
     if (id === config.UMBRELLA_PACKAGE) {
@@ -415,16 +416,24 @@ function createTypesDictionary(docs) {
         }
       });
 
-      if (!arrayIncludes(gapicVersions, gapicVersion)) {
-        gapicVersions.push(gapicVersion);
-      }
-
       titleParts = [gapicVersion];
 
       var nestedTitle = [].slice.call(gapicPath, versionIndex + 1);
 
       if (nestedTitle.length > 0) {
         titleParts.push(upperFirst(camel(nestedTitle.join('/'))));
+      }
+
+      var gapicPathWithVersion = [].slice.call(gapicPath)
+        .slice(0, versionIndex + 1).join('/');
+
+      if (!gapics[gapicPathWithVersion]) {
+        gapics[gapicPathWithVersion] = {
+          id: gapicPathWithVersion,
+          title: [
+            gapicVersion
+          ]
+        };
       }
     }
 
@@ -443,25 +452,22 @@ function createTypesDictionary(docs) {
     });
   });
 
-  gapicVersions.forEach(gapicVersion => {
+  for (var gapic in gapics) {
     types.push({
-      id: gapicVersion,
-      title: [gapicVersion],
-      contents: `${gapicVersion}/index.json`
+      id: gapics[gapic].id,
+      title: gapics[gapic].title,
+      contents: `${gapics[gapic].title}/index.json`
     });
-  });
+  }
 
   return types;
 }
 
 function createToc(types, collapse) {
-  var PATH_VERSION_REGEX = /\/(v[^/]*)/;
-
   var toc = extend(true, {}, baseToc);
 
   var generatedTypes = types.filter(type => / v\d/.test(type.title.join(' ')));
   var protos = types.filter(type => stringIncludes(type.id, '/doc/'));
-  var protosGroupedByVersion = {};
 
   var services = types
     .filter(type => !arrayIncludes(generatedTypes, type))
@@ -484,61 +490,73 @@ function createToc(types, collapse) {
       return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
     });
 
-  if (protos.length > 0) {
-    protos.forEach(function(proto) {
-      var version = proto.id.match(PATH_VERSION_REGEX)[1];
-      protosGroupedByVersion[version] = protosGroupedByVersion[version] || [];
-      protosGroupedByVersion[version].push(proto);
-    });
-  }
-
   if (generatedTypes.length > 0) {
     // Push the generated types to the bottom of the navigation.
-    var generatedTypesByVersion = {};
+    var generatedTypesByModuleByVersion = {};
 
     generatedTypes.forEach(function(generatedType) {
+      var module = generatedType.title[0];
+      var moduleObject = generatedTypesByModuleByVersion[module] =
+      generatedTypesByModuleByVersion[module] || {};
+
       var version = generatedType.title[1];
-      generatedTypesByVersion[version] = generatedTypesByVersion[version] || [];
-      generatedTypesByVersion[version].push(generatedType);
+      moduleObject[version] = moduleObject[version] || [];
+      moduleObject[version].push(generatedType);
     });
 
-    for (var version in generatedTypesByVersion) {
-      var generatedTypesGrouped = generatedTypesByVersion[version]
-        .sort(function(a, b) {
-          if (a.title.length < b.title.length) { // e.g. ['Spanner', 'v1']
-            return -1;
-          }
+    for (var module in generatedTypesByModuleByVersion) {
+      var versions = generatedTypesByModuleByVersion[module];
 
-          if (b.title.length < a.title.length) {
-            return 1;
-          }
+      for (var version in versions) {
+        /*jshint loopfunc:true*/
+        var matchingService = services.filter(service => {
+          return service.title.toLowerCase() === module.toLowerCase();
+        })[0];
 
-          var titleA = a.title[a.title.length - 1];
-          var titleB = b.title[b.title.length - 1];
+        var generatedTypesGrouped = versions[version]
+          .sort(function(a, b) {
+            if (a.title.length < b.title.length) { // e.g. ['Spanner', 'v1']
+              return -1;
+            }
 
-          return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
+            if (b.title.length < a.title.length) {
+              return 1;
+            }
+
+            var titleA = a.title[a.title.length - 1];
+            var titleB = b.title[b.title.length - 1];
+
+            return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
+          });
+
+        services = services.filter(service => {
+          return service.type !== version;
         });
 
-      /*jshint loopfunc:true*/
-      services = services.filter(service => service.type !== version);
+        var serviceObject = {
+          title: version,
+          type: version,
+          nav: generatedTypesGrouped.map(function(generatedType) {
+            return {
+              title: generatedType.title[generatedType.title.length - 1],
+              type: generatedType.id
+            };
+          })
+        };
 
-      var serviceObject = {
-        title: version,
-        type: version,
-        nav: generatedTypesGrouped.map(function(generatedType) {
-          return {
-            title: generatedType.title[generatedType.title.length - 1],
-            type: generatedType.id
-          };
-        })
-      };
+        serviceObject.nav.push({
+          title: 'Data Types',
+          type: generatedTypesGrouped[0].id
+            .replace(/\/\w+_client$/, '/data_types')
+        });
 
-      serviceObject.nav.push({
-        title: 'Data Types',
-        type: generatedTypes[0].id.replace(/\/\w+_client$/, '/data_types')
-      });
-
-      services.push(serviceObject);
+        if (collapse) { // Umbrella mode
+          serviceObject.type = `${module.toLowerCase()}/${serviceObject.type}`;
+          matchingService.nav = [serviceObject];
+        } else {
+          services.push(serviceObject);
+        }
+      }
     }
   }
 
