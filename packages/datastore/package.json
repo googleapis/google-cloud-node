@@ -56,10 +56,10 @@
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.0",
-    "google-auto-auth": "^0.6.0",
+    "google-auto-auth": "^0.7.1",
     "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",
-    "grpc": "^1.2.3",
+    "grpc": "^1.4.1",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
     "prop-assign": "^1.0.0",
@@ -72,7 +72,7 @@
     "deep-strict-equal": "^0.2.0",
     "mocha": "^3.0.1",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.6",
+    "sinon": "^2.3.8",
     "through2": "^2.0.0"
   },
   "scripts": {

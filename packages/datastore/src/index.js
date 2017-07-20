@@ -315,15 +315,10 @@ function Datastore(options) {
   this.defaultBaseUrl_ = 'datastore.googleapis.com';
   this.determineBaseUrl_(options_.apiEndpoint);
 
-  console.log('??', this.baseUrl_, this.port_)
-
   this.namespace = options.namespace;
   this.projectId = process.env.DATASTORE_PROJECT_ID ||
     options.projectId ||
     '{{projectId}}';
-
-  // @TODO
-  // 'google-cloud-resource-prefix': 'projects/' + this.projectId
 }
 
 util.inherits(Datastore, DatastoreRequest);

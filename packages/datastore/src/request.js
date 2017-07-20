@@ -1139,7 +1139,13 @@ DatastoreRequest.prototype.request_ = function(config, callback) {
     reqOpts = extend(true, {}, reqOpts);
     reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
 
-    gaxClient[config.method](reqOpts, config.gaxOpts, callback);
+    var gaxOpts = extend(true, {}, config.gaxOpts, {
+      headers: {
+        'google-cloud-resource-prefix': `projects/${projectId}`
+      }
+    });
+
+    gaxClient[config.method](reqOpts, gaxOpts, callback);
   });
 };
 
