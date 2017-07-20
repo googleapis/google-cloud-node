@@ -54,18 +54,6 @@ var ABORTED = 10;
 /*! Developer Documentation
  *
  * @param {module:spanner/session} session - The parent Session object.
- */
-/**
- * Use a Transaction object to read and write against inside of your Cloud
- * Spanner database.
- *
- * **This object is created and returned from
- * {module:database/runTransaction}.**
- *
- * @constructor
- * @alias module:spanner/transaction
- * @mixes module:spanner/transaction-request
- *
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
  *     that is `exactStaleness` old.
@@ -81,6 +69,17 @@ var ABORTED = 10;
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
  *     committed transactions are visible.
+ */
+/**
+ * Use a Transaction object to read and write against inside of your Cloud
+ * Spanner database.
+ *
+ * **This object is created and returned from
+ * {module:spanner/database#runTransaction}.**
+ *
+ * @constructor
+ * @alias module:spanner/transaction
+ * @mixes module:spanner/transaction-request
  *
  * @example
  * var instance = spanner.instance('my-instance');

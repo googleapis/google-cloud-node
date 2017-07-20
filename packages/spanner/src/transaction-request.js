@@ -286,9 +286,6 @@ TransactionRequest.prototype.createReadStream = function(table, query) {
  * @param {string} table - The name of the table.
  * @param {*[]|*[][]} keys - The keys for the rows to delete. If using a
  *     composite key, provide an array within this array. See the example below.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var keys = ['Id1', 'Id2', 'Id3'];
@@ -537,10 +534,6 @@ TransactionRequest.prototype.read = function(table, keyVals, callback) {
  * @param {string} table - The table to read from.
  * @param {object|object[]} keyVals - A map of names to values of data to insert
  *     into this table.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var row = {
@@ -595,10 +588,6 @@ TransactionRequest.prototype.requestStream = function() {};
  * @param {string} table - The table to read from.
  * @param {object|object[]} keyVals - A map of names to values of data to insert
  *     into this table.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var row = {
@@ -635,10 +624,6 @@ TransactionRequest.prototype.update = function(table, keyVals, callback) {
  * @param {string} table - The table to read from.
  * @param {object|object[]} keyVals - A map of names to values of data to insert
  *     into this table.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * var row = {
