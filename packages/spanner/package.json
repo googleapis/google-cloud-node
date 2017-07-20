@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
-    "@google-cloud/common-grpc": "^0.3.0",
+    "@google-cloud/common-grpc": "^0.4.0",
     "array-uniq": "^1.0.3",
     "arrify": "^1.0.1",
     "checkpoint-stream": "^0.1.0",
