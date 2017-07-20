@@ -71,8 +71,8 @@ var ABORTED = 10;
  *     committed transactions are visible.
  */
 /**
- * Use a Transaction object to read and write against inside of your Cloud
- * Spanner database.
+ * Use a Transaction object to read and write against your Cloud Spanner
+ * database.
  *
  * **This object is created and returned from
  * {module:spanner/database#runTransaction}.**
