@@ -1534,6 +1534,41 @@ describe('Bucket', function() {
     });
   });
 
+  describe('setStorageClass', function() {
+    var STORAGE_CLASS = 'NEW_STORAGE_CLASS';
+    var OPTIONS = {};
+    var CALLBACK = util.noop;
+
+    it('should convert camelCase to snake_case', function(done) {
+      bucket.setMetadata = function(metadata) {
+        assert.strictEqual(metadata.storageClass, 'CAMEL_CASE');
+        done();
+      };
+
+      bucket.setStorageClass('camelCase', OPTIONS, CALLBACK);
+    });
+
+    it('should convert hyphenate to snake_case', function(done) {
+      bucket.setMetadata = function(metadata) {
+        assert.strictEqual(metadata.storageClass, 'HYPHENATED_CLASS');
+        done();
+      };
+
+      bucket.setStorageClass('hyphenated-class', OPTIONS, CALLBACK);
+    });
+
+    it('should call setMetdata correctly', function(done) {
+      bucket.setMetadata = function(metadata, options, callback) {
+        assert.deepStrictEqual(metadata, { storageClass: STORAGE_CLASS });
+        assert.strictEqual(options, OPTIONS);
+        assert.strictEqual(callback, CALLBACK);
+        done();
+      };
+
+      bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
+    });
+  });
+
   describe('upload', function() {
     var basename = 'testfile.json';
     var filepath = path.join(__dirname, 'testdata/' + basename);

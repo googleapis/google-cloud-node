@@ -1428,6 +1428,46 @@ Bucket.prototype.setMetadata = function(metadata, options, callback) {
 };
 
 /**
+ * Set the storage class for this bucket.
+ *
+ * @resource [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
+ *
+ * @param {string} storageClass - The new storage class. (`multi_regional`,
+ *     `regional`, `nearline`, `coldline`)
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.userProject - If this bucket has `requesterPays`
+ *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ *
+ * @example
+ * bucket.setStorageClass('regional', function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // The storage class was updated successfully.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.setStorageClass('regional').then(function() {});
+ */
+Bucket.prototype.setStorageClass = function(storageClass, options, callback) {
+  // In case we get input like `storageClass`, convert to `storage_class`.
+  storageClass = storageClass
+    .replace(/-/g, '_')
+    .replace(/([a-z])([A-Z])/g, function(_, low, up) {
+      return low + '_' + up;
+    })
+    .toUpperCase();
+
+  this.setMetadata({ storageClass }, options, callback);
+};
+
+/**
  * Upload a file to the bucket. This is a convenience method that wraps
  * {module:storage/file#createWriteStream}.
  *

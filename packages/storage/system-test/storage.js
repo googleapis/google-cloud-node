@@ -611,6 +611,30 @@ describe('storage', function() {
       });
     });
 
+    it('should allow changing the storage class', function(done) {
+      async.series([
+        function(next) {
+          bucket.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(metadata.storageClass, 'STANDARD');
+            next();
+          });
+        },
+
+        function(next) {
+          bucket.setStorageClass('multi-regional', next);
+        }
+      ], function(err) {
+        assert.ifError(err);
+
+        bucket.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
+          done();
+        });
+      });
+    });
+
     describe('labels', function() {
       var LABELS = {
         label: 'labelvalue', // no caps or spaces allowed (?)
@@ -892,6 +916,10 @@ describe('storage', function() {
 
         it('bucket#setMetadata', doubleTest(function(options, done) {
           bucketNonWhitelist.setMetadata({ newMetadata: true }, options, done);
+        }));
+
+        it('bucket#setStorageClass', doubleTest(function(options, done) {
+          bucketNonWhitelist.setStorageClass('multi-regional', options, done);
         }));
 
         it('bucket#upload', doubleTest(function(options, done) {
