@@ -188,6 +188,13 @@ describe('File', function() {
       assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
     });
 
+    it('should use stripped leading slash name in ServiceObject', function() {
+      var file = new File(BUCKET, '/name');
+      var calledWith = file.calledWith_[0];
+
+      assert.strictEqual(calledWith.id, 'name');
+    });
+
     it('should set a custom encryption key', function(done) {
       var key = 'key';
 

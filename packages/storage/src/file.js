@@ -118,7 +118,7 @@ function File(bucket, name, options) {
   common.ServiceObject.call(this, {
     parent: bucket,
     baseUrl: '/o',
-    id: encodeURIComponent(name)
+    id: encodeURIComponent(this.name)
   });
 
   if (options.encryptionKey) {
