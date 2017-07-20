@@ -78,7 +78,7 @@ var fakeGrpc = {
   }
 };
 
-describe.only('GrpcService', function() {
+describe('GrpcService', function() {
   var GrpcServiceCached;
   var GrpcService;
   var grpcService;
