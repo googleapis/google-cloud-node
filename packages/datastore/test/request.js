@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var grpc = require('grpc');
 var is = require('is');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
@@ -1624,6 +1625,36 @@ describe('Request', function() {
       request.request_(CONFIG, assert.ifError);
 
       assert.strictEqual(request.datastore.api[CONFIG.client], fakeClient);
+    });
+
+    it('should use insecure credentials if custom endpoint', function(done) {
+      request.datastore.customEndpoint_ = true;
+
+      v1Override = function(options) {
+        assert.deepStrictEqual(
+          options.sslCreds,
+          grpc.credentials.createInsecure()
+        );
+
+        return {
+          [CONFIG.client]: function(options) {
+            assert.deepStrictEqual(
+              options.sslCreds,
+              grpc.credentials.createInsecure()
+            );
+
+            setImmediate(done);
+
+            return {
+              [CONFIG.method]: util.noop
+            };
+          }
+        };
+      };
+
+      request.datastore.api = {};
+
+      request.request_(CONFIG, assert.ifError);
     });
 
     it('should use the cached client', function(done) {

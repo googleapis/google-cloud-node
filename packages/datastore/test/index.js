@@ -94,6 +94,10 @@ describe('Datastore', function() {
     });
   });
 
+  after(function() {
+    googleAutoAuthOverride = null;
+  });
+
   it('should export GAX client', function() {
     assert.strictEqual(Datastore.v1, FakeV1);
   });
