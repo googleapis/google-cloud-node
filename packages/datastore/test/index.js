@@ -177,11 +177,11 @@ describe('Datastore', function() {
       assert.strictEqual(datastore.projectId, projectId);
     });
 
-    it.skip('should set the default base URL', function() {
+    it('should set the default base URL', function() {
       assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
     });
 
-    it.skip('should set default API connection details', function(done) {
+    it('should set default API connection details', function(done) {
       var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
       Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
@@ -338,7 +338,7 @@ describe('Datastore', function() {
     });
   });
 
-  describe.skip('determineBaseUrl_', function() {
+  describe('determineBaseUrl_', function() {
     function setHost(host) {
       process.env.DATASTORE_EMULATOR_HOST = host;
     }
@@ -356,25 +356,31 @@ describe('Datastore', function() {
     });
 
     it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost:8080';
+      var expectedBaseUrl = 'localhost';
 
-      setHost('localhost:8080/');
+      setHost('localhost/');
       datastore.determineBaseUrl_();
       assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
 
-      setHost('localhost:8080//');
+      setHost('localhost//');
       datastore.determineBaseUrl_();
       assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
     });
 
     it('should remove the protocol if specified', function() {
-      setHost('http://localhost:8080');
+      setHost('http://localhost');
       datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
+      assert.strictEqual(datastore.baseUrl_, 'localhost');
 
-      setHost('https://localhost:8080');
+      setHost('https://localhost');
       datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
+      assert.strictEqual(datastore.baseUrl_, 'localhost');
+    });
+
+    it('should set port if one was found', function() {
+      setHost('http://localhost:9090');
+      datastore.determineBaseUrl_();
+      assert.strictEqual(datastore.port_, '9090');
     });
 
     it('should not set customEndpoint_ when using default baseurl', function() {
@@ -395,6 +401,8 @@ describe('Datastore', function() {
 
     describe('with DATASTORE_EMULATOR_HOST environment variable', function() {
       var DATASTORE_EMULATOR_HOST = 'localhost:9090';
+      var EXPECTED_BASE_URL = 'localhost';
+      var EXPECTED_PORT = '9090';
 
       beforeEach(function() {
         setHost(DATASTORE_EMULATOR_HOST);
@@ -406,7 +414,8 @@ describe('Datastore', function() {
 
       it('should use the DATASTORE_EMULATOR_HOST env var', function() {
         datastore.determineBaseUrl_();
-        assert.strictEqual(datastore.baseUrl_, DATASTORE_EMULATOR_HOST);
+        assert.strictEqual(datastore.baseUrl_, EXPECTED_BASE_URL);
+        assert.strictEqual(datastore.port_, EXPECTED_PORT);
       });
 
       it('should set customEndpoint_', function() {

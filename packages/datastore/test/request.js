@@ -1553,7 +1553,10 @@ describe('Request', function() {
         a: 'b',
         c: 'd'
       },
-      gaxOpts: {}
+      gaxOpts: {
+        a: 'b',
+        c: 'd'
+      }
     };
 
     var PROJECT_ID = 'project-id';
@@ -1570,6 +1573,11 @@ describe('Request', function() {
           getProjectId: function(callback) {
             callback(null, PROJECT_ID);
           }
+        },
+
+        options: {
+          servicePath: 'baseurl',
+          port: 9999
         }
       };
     });
@@ -1601,11 +1609,11 @@ describe('Request', function() {
       };
 
       v1Override = function(options) {
-        assert.strictEqual(options, request.datastore.options);
+        assert.deepStrictEqual(options, request.datastore.options);
 
         return {
           [CONFIG.client]: function(options) {
-            assert.strictEqual(options, request.datastore.options);
+            assert.deepStrictEqual(options, request.datastore.options);
             return fakeClient;
           }
         };
@@ -1648,6 +1656,27 @@ describe('Request', function() {
         setImmediate(done);
 
         return util.noop;
+      };
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should send gaxOpts', function(done) {
+      request.datastore.api[CONFIG.client][CONFIG.method] = function(_, gaxO) {
+        delete gaxO.headers;
+        assert.deepStrictEqual(gaxO, CONFIG.gaxOpts);
+        done();
+      };
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should send google-cloud-resource-prefix', function(done) {
+      request.datastore.api[CONFIG.client][CONFIG.method] = function(_, gaxO) {
+        assert.deepStrictEqual(gaxO.headers, {
+          'google-cloud-resource-prefix': 'projects/' + PROJECT_ID
+        });
+        done();
       };
 
       request.request_(CONFIG, assert.ifError);
