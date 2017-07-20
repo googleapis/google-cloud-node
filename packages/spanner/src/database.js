@@ -415,13 +415,15 @@ Database.prototype.getSchema = function(callback) {
  * @param {boolean} options.readOnly - Specifies if the transaction is
  *     read-only. Default: `false`.
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
- *     that is `exactStaleness` old.
+ *     that is `exactStaleness` old. This is only applicable for read-only
+ *     transactions.
  * @param {date} options.readTimestamp - Execute all reads at the given
- *     timestamp.
+ *     timestamp. This is only applicable for read-only transactions.
  * @param {boolean} options.returnTimestamp - If `true`, returns the read
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
- *     committed transactions are visible.
+ *     committed transactions are visible. This is only applicable for read-only
+ *     transactions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while getting the
  *     transaction object.
@@ -488,8 +490,6 @@ Database.prototype.getTransaction = function(options, callback) {
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
  *     that is `exactStaleness` old.
  * @param {date} options.readTimestamp - Execute all reads at the given
- *     timestamp.
- * @param {boolean} options.returnTimestamp - If `true`, returns the read
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
  *     committed transactions are visible.
@@ -609,8 +609,6 @@ Database.prototype.run = function(query, options, callback) {
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
  *     that is `exactStaleness` old.
  * @param {date} options.readTimestamp - Execute all reads at the given
- *     timestamp.
- * @param {boolean} options.returnTimestamp - If `true`, returns the read
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
  *     committed transactions are visible.
@@ -797,6 +795,10 @@ Database.prototype.runStream = function(query, options) {
  * object. The Transaction object will let you run queries and queue mutations
  * until you are ready to {module:spanner/transaction#commit}.
  *
+ * In the event that an aborted error occurs, we will re-run the `runFn` in its
+ * entirety. If you prefer to handle aborted errors for yourself please refer to
+ * {module:spanner/database#getTransaction}.
+ *
  * For a more complete listing of functionality available to a Transaction, see
  * the {module:spanner/transaction} API documentation. For a general overview of
  * transactions within Cloud Spanner, see
@@ -814,13 +816,16 @@ Database.prototype.runStream = function(query, options) {
  * @param {boolean} options.readOnly - Specifies if the transaction is
  *     read-only.
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
- *     that is `exactStaleness` old.
+ *     that is `exactStaleness` old. This is only applicable for read-only
+ *     transactions.
  * @param {date} options.readTimestamp - Execute all reads at the given
- *     timestamp.
+ *     timestamp. This is only applicable for read-only
+ *     transactions.
  * @param {boolean} options.returnTimestamp - If `true`, returns the read
  *     timestamp.
  * @param {boolean} options.strong - Read at the timestamp where all previously
- *     committed transactions are visible.
+ *     committed transactions are visible. This is only applicable for read-only
+ *     transactions.
  * @param {function} runFn - A function to execute in the context of a
  *     transaction.
  * @param {?error} runFn.err - An error returned while making this request.
