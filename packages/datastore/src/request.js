@@ -115,6 +115,8 @@ DatastoreRequest.prepareEntityObject_ = function(obj) {
  * @param {number|object} options - Either the number of IDs to allocate or
  *     an options object for further customization of the request.
  * @param {number} options.allocations - How many IDs to allocate.
+ * @param {object} options.gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.keys - The generated IDs
@@ -186,15 +188,11 @@ DatastoreRequest.prototype.allocateIds = function(key, options, callback) {
     };
   }
 
-  var incompleteKeys = [];
-  incompleteKeys.length = options.allocations;
-  incompleteKeys.fill(entity.keyToKeyProto(key));
-
   this.request_({
     client: 'datastoreClient',
     method: 'allocateIds',
     reqOpts: {
-      keys: incompleteKeys
+      keys: new Array(options.allocations).fill(entity.keyToKeyProto(key))
     },
     gaxOpts: options.gaxOptions
   }, function(err, resp) {
