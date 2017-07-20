@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/pubsub",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "author": "Google Inc.",
   "description": "Cloud Pub/Sub Client Library for Node.js",
   "contributors": [
