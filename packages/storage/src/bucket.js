@@ -1428,12 +1428,13 @@ Bucket.prototype.setMetadata = function(metadata, options, callback) {
 };
 
 /**
- * Set the storage class for this bucket.
+ * Set the default storage class for new files in this bucket.
  *
  * @resource [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
  *
  * @param {string} storageClass - The new storage class. (`multi_regional`,
- *     `regional`, `nearline`, `coldline`)
+ *     `regional`, `standard`, `nearline`, `coldline`, or
+ *     `durable_reduced_availability`)
  * @param {object=} options - Configuration object.
  * @param {boolean} options.userProject - If this bucket has `requesterPays`
  *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
