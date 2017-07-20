@@ -205,19 +205,17 @@ describe('Vision', function() {
           errors: [
             {
               code: 400,
-              message:
-                'image-annotator::Bad image data.: Image processing error!',
+              message: 'Bad image data.',
               type: 'faces'
             },
             {
               code: 400,
-              message:
-                'image-annotator::Bad image data.: Image processing error!',
+              message: 'Bad image data.',
               type: 'labels'
             },
             {
-              code: 500,
-              message: 'image-annotator::error(12): Image processing error!',
+              code: 400,
+              message: 'Bad image data.',
               type: 'safeSearch'
             }
           ]
@@ -579,7 +577,7 @@ describe('Vision', function() {
   describe('text', function() {
     var expectedResults = [
       normalizeNewline(multiline.stripIndent(function() {/*
-        Google Cloud Client Library for Node js an idiomatic, intuitive, and
+        Google Cloud Client Library for Node.js - an idiomatic, intuitive, and
         natural way for Node.js developers to integrate with Google Cloud
         Platform services, like Cloud Datastore and Cloud Storage.
 
