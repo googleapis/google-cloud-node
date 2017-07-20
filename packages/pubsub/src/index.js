@@ -25,6 +25,7 @@ var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var is = require('is');
+var path = require('path');
 var util = require('util');
 
 /**
@@ -84,8 +85,17 @@ function PubSub(options) {
   var config = {
     baseUrl: this.baseUrl_,
     customEndpoint: this.customEndpoint_,
-    service: 'pubsub',
-    apiVersion: 'v1',
+    protosDir: path.resolve(__dirname, '../protos'),
+    protoServices: {
+      Publisher: {
+        path: 'google/pubsub/v1/pubsub.proto',
+        service: 'pubsub.v1'
+      },
+      Subscriber: {
+        path: 'google/pubsub/v1/pubsub.proto',
+        service: 'pubsub.v1'
+      }
+    },
     scopes: [
       'https://www.googleapis.com/auth/pubsub',
       'https://www.googleapis.com/auth/cloud-platform'

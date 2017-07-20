@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -207,11 +207,11 @@ describe('Spanner', function() {
 
       assert.deepEqual(calledWith, {
         baseUrl: 'spanner.googleapis.com',
+        protosDir: path.resolve(__dirname, '../protos'),
         protoServices: {
           Operations: {
-            path: googleProtoFiles('longrunning', 'operations.proto'),
-            service: 'longrunning',
-            apiVersion: 'v1'
+            path: 'google/longrunning/operations.proto',
+            service: 'longrunning'
           }
         },
         scopes: [

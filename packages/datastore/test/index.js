@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -160,8 +161,17 @@ describe('Datastore', function() {
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.strictEqual(calledWith.baseUrl, datastore.baseUrl_);
       assert.strictEqual(calledWith.customEndpoint, datastore.customEndpoint_);
-      assert.strictEqual(calledWith.service, 'datastore');
-      assert.strictEqual(calledWith.apiVersion, 'v1');
+
+      var protosDir = path.resolve(__dirname, '../protos');
+      assert.strictEqual(calledWith.protosDir, protosDir);
+
+      assert.deepStrictEqual(calledWith.protoServices, {
+        Datastore: {
+          path: 'google/datastore/v1/datastore.proto',
+          service: 'datastore.v1'
+        }
+      });
+
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/datastore'
       ]);

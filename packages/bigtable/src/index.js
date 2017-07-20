@@ -24,7 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 var is = require('is');
 var util = require('util');
 
@@ -322,26 +322,28 @@ function Bigtable(options) {
 
   var config = {
     baseUrl: baseUrl,
-    service: 'bigtable',
-    apiVersion: 'v2',
     customEndpoint: !!customEndpoint,
+    protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
-      Bigtable: googleProtoFiles.bigtable.v2,
+      Bigtable: {
+        baseUrl: baseUrl,
+        path: 'google/bigtable/v2/bigtable.proto',
+        service: 'bigtable.v2'
+      },
       BigtableTableAdmin: {
         baseUrl: adminBaseUrl,
-        path: googleProtoFiles.bigtable.admin.v2.table,
-        service: 'bigtable.admin'
+        path: 'google/bigtable/admin/v2/bigtable_table_admin.proto',
+        service: 'bigtable.admin.v2'
       },
       BigtableInstanceAdmin: {
         baseUrl: adminBaseUrl,
-        path: googleProtoFiles.bigtable.admin.v2.instance,
-        service: 'bigtable.admin'
+        path: 'google/bigtable/admin/v2/bigtable_instance_admin.proto',
+        service: 'bigtable.admin.v2'
       },
       Operations: {
         baseUrl: adminBaseUrl,
-        path: googleProtoFiles('longrunning/operations.proto'),
-        service: 'longrunning',
-        apiVersion: 'v1'
+        path: 'google/longrunning/operations.proto',
+        service: 'longrunning'
       }
     },
     scopes: [

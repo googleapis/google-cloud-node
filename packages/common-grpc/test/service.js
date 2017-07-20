@@ -19,10 +19,8 @@
 var assert = require('assert');
 var duplexify = require('duplexify');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
 var is = require('is');
-var path = require('path');
 var proxyquire = require('proxyquire');
 var retryRequest = require('retry-request');
 var sinon = require('sinon').sandbox.create();
@@ -33,11 +31,6 @@ var fakeUtil = extend({}, util);
 
 function FakeService() {
   this.calledWith_ = arguments;
-}
-
-var googleProtoFilesOverride;
-function fakeGoogleProtoFiles() {
-  return (googleProtoFilesOverride || googleProtoFiles).apply(null, arguments);
 }
 
 var retryRequestOverride;
@@ -85,17 +78,26 @@ var fakeGrpc = {
   }
 };
 
-describe('GrpcService', function() {
+describe.only('GrpcService', function() {
   var GrpcServiceCached;
   var GrpcService;
   var grpcService;
 
   var ObjectToStructConverter;
 
+  var ROOT_DIR = '/root/dir';
+  var PROTO_FILE_PATH = 'filepath.proto';
+  var SERVICE_PATH = 'service.path';
+
   var CONFIG = {
     proto: {},
-    service: 'Service',
-    apiVersion: 'v1',
+    protosDir: ROOT_DIR,
+    protoServices: {
+      Service: {
+        path: PROTO_FILE_PATH,
+        service: SERVICE_PATH
+      }
+    },
     packageJson: {
       name: '@google-cloud/service',
       version: '0.2.0'
@@ -108,20 +110,20 @@ describe('GrpcService', function() {
   var OPTIONS = {
     maxRetries: 3
   };
-  var ROOT_DIR = '/root/dir';
-  var PROTO_FILE_PATH = 'filepath.proto';
+
   var EXPECTED_API_CLIENT_HEADER = [
     'gl-node/' + process.versions.node,
     'gccl/' + CONFIG.packageJson.version,
     'grpc/' + require('grpc/package.json').version
   ].join(' ');
 
-  var MOCK_GRPC_API = { google: {} };
-  MOCK_GRPC_API.google[CONFIG.service] = {};
-  MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion] = {};
-
-  extend(true, fakeGoogleProtoFiles, MOCK_GRPC_API.google);
-  fakeGoogleProtoFiles[CONFIG.service][CONFIG.apiVersion] = PROTO_FILE_PATH;
+  var MOCK_GRPC_API = {
+    google: {
+      Service: {
+        [SERVICE_PATH]: {}
+      }
+    }
+  };
 
   before(function() {
     GrpcService = proxyquire('../src/service.js', {
@@ -129,7 +131,6 @@ describe('GrpcService', function() {
         Service: FakeService,
         util: fakeUtil
       },
-      'google-proto-files': fakeGoogleProtoFiles,
       grpc: fakeGrpc,
       'retry-request': fakeRetryRequest
     });
@@ -140,10 +141,6 @@ describe('GrpcService', function() {
   beforeEach(function() {
     GrpcMetadataOverride = null;
     retryRequestOverride = null;
-
-    googleProtoFilesOverride = function() {
-      return ROOT_DIR;
-    };
 
     grpcLoadOverride = function() {
       return MOCK_GRPC_API;
@@ -156,7 +153,6 @@ describe('GrpcService', function() {
   });
 
   afterEach(function() {
-    googleProtoFilesOverride = null;
     grpcLoadOverride = null;
     sinon.restore();
   });
@@ -324,16 +320,6 @@ describe('GrpcService', function() {
       assert.strictEqual(grpcService.userAgent, userAgent);
     });
 
-    it('should get the root directory for the proto files', function(done) {
-      googleProtoFilesOverride = function(path) {
-        assert.strictEqual(path, '..');
-        setImmediate(done);
-        return ROOT_DIR;
-      };
-
-      new GrpcService(CONFIG, OPTIONS);
-    });
-
     it('should localize the service', function() {
       assert.strictEqual(grpcService.service, CONFIG.service);
     });
@@ -346,9 +332,7 @@ describe('GrpcService', function() {
     it('should call grpc.load correctly', function() {
       grpcLoadOverride = function(opts, format, grpcOpts) {
         assert.strictEqual(opts.root, ROOT_DIR);
-
-        var expectedFilePath = path.relative(ROOT_DIR, PROTO_FILE_PATH);
-        assert.strictEqual(opts.file, expectedFilePath);
+        assert.strictEqual(opts.file, PROTO_FILE_PATH);
 
         assert.strictEqual(format, 'proto');
         assert.deepEqual(grpcOpts, {
@@ -362,30 +346,28 @@ describe('GrpcService', function() {
       var grpcService = new GrpcService(CONFIG, OPTIONS);
       assert.strictEqual(
         grpcService.protos[CONFIG.service],
-        MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion]
+        MOCK_GRPC_API.google[CONFIG.service]
       );
     });
 
     it('should allow proto file paths to be given', function() {
       grpcLoadOverride = function(opts) {
         assert.strictEqual(opts.root, ROOT_DIR);
-
-        var expectedFilePath = path.relative(ROOT_DIR, '../file/path.proto');
-        assert.strictEqual(opts.file, expectedFilePath);
+        assert.strictEqual(opts.file, '../file/path.proto');
 
         return MOCK_GRPC_API;
       };
 
       var config = extend(true, {}, CONFIG, {
         protoServices: {
-          CustomServiceName: '../file/path.proto'
+          Service: '../file/path.proto'
         }
       });
 
       var grpcService = new GrpcService(config, OPTIONS);
       assert.strictEqual(
-        grpcService.protos.CustomServiceName,
-        MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion]
+        grpcService.protos.Service,
+        MOCK_GRPC_API.google
       );
     });
 
@@ -1767,27 +1749,23 @@ describe('GrpcService', function() {
   describe('loadProtoFile_', function() {
     var fakeServices = {
       google: {
-        FakeService: {
-          v1: {}
-        }
+        FakeService: {}
       }
     };
 
     it('should load a proto file', function() {
       var fakeProtoConfig = {
         path: '/root/dir/path',
-        service: 'FakeService',
-        apiVersion: 'v1'
+        service: 'FakeService'
       };
 
       var fakeMainConfig = {
-        service: 'OtherFakeService',
-        apiVersion: 'v2'
+        protosDir: ROOT_DIR
       };
 
       grpcLoadOverride = function(pathOpts, type, grpOpts) {
-        assert.strictEqual(pathOpts.root, ROOT_DIR);
-        assert.strictEqual(pathOpts.file, 'path');
+        assert.strictEqual(pathOpts.root, fakeMainConfig.protosDir);
+        assert.strictEqual(pathOpts.file, fakeProtoConfig.path);
         assert.strictEqual(type, 'proto');
 
         assert.deepEqual(grpOpts, {
@@ -1799,32 +1777,7 @@ describe('GrpcService', function() {
       };
 
       var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
-      assert.strictEqual(service, fakeServices.google.FakeService.v1);
-    });
-
-    it('should use the main config if protoConfig is not set', function() {
-      var fakeProtoConfig = '/root/dir/path';
-
-      var fakeMainConfig = {
-        service: 'FakeService',
-        apiVersion: 'v1'
-      };
-
-      grpcLoadOverride = function(pathOpts, type, grpOpts) {
-        assert.strictEqual(pathOpts.root, ROOT_DIR);
-        assert.strictEqual(pathOpts.file, 'path');
-        assert.strictEqual(type, 'proto');
-
-        assert.deepEqual(grpOpts, {
-          binaryAsBase64: true,
-          convertFieldsToCamelCase: true
-        });
-
-        return fakeServices;
-      };
-
-      var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
-      assert.strictEqual(service, fakeServices.google.FakeService.v1);
+      assert.strictEqual(service, fakeServices.google.FakeService);
     });
 
     it('should return the services object if invalid version', function() {
@@ -1870,26 +1823,6 @@ describe('GrpcService', function() {
       assert.strictEqual(service, fakeService);
 
       var cachedService = grpcService.activeServiceMap_.get('Service');
-      assert.strictEqual(cachedService, fakeService);
-    });
-
-    it('should return the default service', function() {
-      var fakeService = {};
-
-      grpcService.protos = {
-        Service: {
-          OtherService: function(baseUrl, grpcCredentials) {
-            assert.strictEqual(baseUrl, grpcService.baseUrl);
-            assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
-            return fakeService;
-          }
-        }
-      };
-
-      var service = grpcService.getService_({ service: 'OtherService' });
-      assert.strictEqual(service, fakeService);
-
-      var cachedService = grpcService.activeServiceMap_.get('OtherService');
       assert.strictEqual(cachedService, fakeService);
     });
 

@@ -15,6 +15,7 @@
   ],
   "main": "./src/index.js",
   "files": [
+    "protos",
     "src",
     "AUTHORS",
     "CONTRIBUTORS",
