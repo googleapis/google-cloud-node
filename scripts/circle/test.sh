@@ -47,7 +47,7 @@ node ./scripts/build.js
 export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
 npm run postinstall # installs all modules
-npm run coveralls
+#npm run coveralls
 
 nvm install v6 && nvm use v6
 rebuild
