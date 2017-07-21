@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
 rebuild () {
   for dir in packages/*; do
     test -d "$dir" || continue
@@ -47,7 +45,7 @@ node ./scripts/build.js
 export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
 npm run postinstall # installs all modules
-#npm run coveralls
+npm run coveralls
 
 nvm install v6 && nvm use v6
 rebuild
@@ -63,5 +61,3 @@ nvm install v8 && nvm use v8
 rebuild
 npm run lint
 node ./scripts/build.js
-
-set +e
