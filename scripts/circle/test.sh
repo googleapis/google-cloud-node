@@ -40,7 +40,16 @@ git config --global user.email "circle-ci@circleci.com"
 nvm use v4
 npm install
 npm run lint
+
+set -e
 node ./scripts/build.js
+set +e
+
+if [ "$?" == "1" ]
+then
+  # No code changes. Exit early.
+  exit 0
+fi
 
 export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
