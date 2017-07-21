@@ -39,15 +39,15 @@ fi
 git config --global user.name "circle-ci"
 git config --global user.email "circle-ci@circleci.com"
 
-nvm use v4
-npm install
-npm run lint
-node ./scripts/build.js
+#nvm use v4
+#npm install
+#npm run lint
+#node ./scripts/build.js
 
 export COVERALLS_REPO_TOKEN="kEhKxvu3L9Z4GiClA9LcKYk7G9i9dl83k"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
-npm run postinstall # installs all modules
-npm run coveralls
+#npm run postinstall # installs all modules
+#npm run coveralls
 
 nvm install v6 && nvm use v6
 rebuild
