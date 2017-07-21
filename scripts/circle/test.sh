@@ -49,8 +49,9 @@ export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
 #npm run postinstall # installs all modules
 #npm run coveralls
 
-nvm install v6 && nvm use v6
-#rebuild
+nvm install v6
+nvm use v6
+rebuild
 npm run lint
 node ./scripts/build.js
 
