@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
 rebuild () {
   for dir in packages/*; do
     test -d "$dir" || continue
@@ -44,7 +42,15 @@ npm install
 npm run lint
 node ./scripts/build.js
 
-export COVERALLS_REPO_TOKEN="kEhKxvu3L9Z4GiClA9LcKYk7G9i9dl83k"
+if [ "$?" == "1" ]
+then
+  # No code changes. Exit early.
+  set -e
+  exit 0
+  set +e
+fi
+
+export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
 npm run postinstall # installs all modules
 npm run coveralls
@@ -63,5 +69,3 @@ nvm install v8 && nvm use v8
 rebuild
 npm run lint
 node ./scripts/build.js
-
-set +e
