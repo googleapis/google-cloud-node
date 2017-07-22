@@ -18,8 +18,20 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var proxyquire = require('proxyquire');
 
-var Metadata = require('../src/metadata.js');
+var instanceValueOverride;
+var fakeGcpMetadata = {
+  instance: function(path, cb) {
+    setImmediate(function () {
+      cb(null, null, instanceValueOverride || 'fake-instance-value');
+    });
+  }
+};
+
+var Metadata = proxyquire('../src/metadata.js', {
+  'gcp-metadata': fakeGcpMetadata
+});
 
 describe('metadata', function() {
   var MetadataCached;
@@ -40,6 +52,7 @@ describe('metadata', function() {
     };
     extend(Metadata, MetadataCached);
     metadata = new Metadata(LOGGING);
+    instanceValueOverride = null;
   });
 
   afterEach(function() {
@@ -104,10 +117,13 @@ describe('metadata', function() {
   });
 
   describe('getGKEDescriptor', function() {
+    var CLUSTER_NAME = 'gke-cluster-name';
+
     it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGKEDescriptor(PROJECT_ID), {
+      assert.deepEqual(Metadata.getGKEDescriptor(PROJECT_ID, CLUSTER_NAME), {
         type: 'container',
         labels: {
+          cluster_name: CLUSTER_NAME,
           project_id: PROJECT_ID
         }
       });
@@ -248,10 +264,14 @@ describe('metadata', function() {
 
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
+          var RETURNED_CLUSTER_NAME = 'fake-cluster-name';
           var DESCRIPTOR = {};
 
-          Metadata.getGKEDescriptor = function(projectId) {
+          instanceValueOverride = RETURNED_CLUSTER_NAME;
+
+          Metadata.getGKEDescriptor = function(projectId, clusterName) {
             assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            assert.strictEqual(clusterName, RETURNED_CLUSTER_NAME);
             return DESCRIPTOR;
           };
 
