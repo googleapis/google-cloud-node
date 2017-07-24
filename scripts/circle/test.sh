@@ -43,10 +43,3 @@ done
 npm run lint
 
 node ./scripts/build.js
-
-if [ "$1" == "4" ]
-then
-  export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
-  export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
-  npm run coveralls
-fi
