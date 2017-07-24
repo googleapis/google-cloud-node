@@ -14,14 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-rebuild () {
-  for dir in packages/*; do
-    test -d "$dir" || continue
-    cd $dir
-    npm rebuild --update-binary
-    cd ../../
-  done
-}
+set -e
 
 if [ "${CIRCLE_TAG}" != "" ] ||
    ([ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ])
@@ -37,35 +30,44 @@ fi
 git config --global user.name "circle-ci"
 git config --global user.email "circle-ci@circleci.com"
 
-nvm use v4
-npm install
-npm run lint
-node ./scripts/build.js
-
-if [ "$?" == "1" ]
-then
-  # No code changes. Exit early.
-  set -e
-  exit 0
-  set +e
-fi
-
 export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
 export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
-npm run postinstall # installs all modules
-npm run coveralls
 
-nvm install v6 && nvm use v6
-rebuild
-npm run lint
-node ./scripts/build.js
+declare -a NODE_VERSIONS=(
+  "4"
+  "6"
+  "7"
+  "8"
+)
 
-nvm install v7 && nvm use v7
-rebuild
-npm run lint
-node ./scripts/build.js
+for node_version in "${NODE_VERSIONS[@]}"; do
+  build $node_version
 
-nvm install v8 && nvm use v8
-rebuild
-npm run lint
-node ./scripts/build.js
+  if [ "${node_version}" == "4" ]
+  then
+    npm run coveralls # only run coverage on first build
+  fi
+done
+
+rebuild () {
+  for dir in packages/*; do
+    test -d "$dir" || continue
+    cd $dir
+    npm rebuild --update-binary
+    cd ../../
+  done
+}
+
+build () {
+  echo "Testing on ${1}"
+
+  nvm install "v${1}"
+  nvm use "v${1}"
+  npm install
+  rebuild
+  npm run lint
+
+  node ./scripts/build.js
+}
+
+set +e
