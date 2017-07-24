@@ -14,29 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
-rebuild () {
-  for dir in packages/*; do
-    test -d "$dir" || continue
-    cd $dir
-    npm rebuild --update-binary
-    cd ../../
-  done
-}
-
-build () {
-  echo "Testing on ${1}"
-
-  nvm install "v${1}"
-  nvm use "v${1}"
-  npm install
-  rebuild
-  npm run lint
-
-  node ./scripts/build.js
-}
-
 if [ "${CIRCLE_TAG}" != "" ] ||
    ([ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ])
 then
@@ -51,23 +28,25 @@ fi
 git config --global user.name "circle-ci"
 git config --global user.email "circle-ci@circleci.com"
 
-export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
-export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
+nvm install $1
+nvm use $1
+npm install
 
-declare -a NODE_VERSIONS=(
-  "4"
-  "6"
-  "7"
-  "8"
-)
-
-for node_version in "${NODE_VERSIONS[@]}"; do
-  build $node_version
-
-  if [ "${node_version}" == "4" ]
-  then
-    npm run coveralls # only run coverage on first build
-  fi
+# Re-compile native dependencies
+for dir in packages/*; do
+  test -d "$dir" || continue
+  cd $dir
+  npm rebuild --update-binary
+  cd ../../
 done
 
-set +e
+npm run lint
+
+node ./scripts/build.js
+
+if [ "$1" == "4" ]
+then
+  export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
+  export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
+  npm run coveralls
+fi
