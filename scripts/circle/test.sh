@@ -14,15 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-rebuild () {
-  for dir in packages/*; do
-    test -d "$dir" || continue
-    cd $dir
-    npm rebuild --update-binary
-    cd ../../
-  done
-}
-
 if [ "${CIRCLE_TAG}" != "" ] ||
    ([ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ])
 then
@@ -37,35 +28,18 @@ fi
 git config --global user.name "circle-ci"
 git config --global user.email "circle-ci@circleci.com"
 
-nvm use v4
+nvm install $1
+nvm use $1
 npm install
+
+# Re-compile native dependencies
+for dir in packages/*; do
+  test -d "$dir" || continue
+  cd $dir
+  npm rebuild --update-binary
+  cd ../../
+done
+
 npm run lint
-node ./scripts/build.js
 
-if [ "$?" == "1" ]
-then
-  # No code changes. Exit early.
-  set -e
-  exit 0
-  set +e
-fi
-
-export COVERALLS_REPO_TOKEN="vKZ7a3PpW0lRBRWC12dPw2EiZE5ml962J"
-export CIRCLE_ARTIFACTS="$(pwd)/.coverage"
-npm run postinstall # installs all modules
-npm run coveralls
-
-nvm install v6 && nvm use v6
-rebuild
-npm run lint
-node ./scripts/build.js
-
-nvm install v7 && nvm use v7
-rebuild
-npm run lint
-node ./scripts/build.js
-
-nvm install v8 && nvm use v8
-rebuild
-npm run lint
 node ./scripts/build.js

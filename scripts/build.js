@@ -51,7 +51,7 @@ var modules = Module.getUpdated();
 
 if (!modules.length && !ci.isReleaseBuild()) {
   echo('No code changes found, exiting early.');
-  exit(1);
+  exit();
 }
 
 Module.buildDocs();
