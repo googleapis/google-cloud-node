@@ -16,6 +16,27 @@
 
 set -e
 
+rebuild () {
+  for dir in packages/*; do
+    test -d "$dir" || continue
+    cd $dir
+    npm rebuild --update-binary
+    cd ../../
+  done
+}
+
+build () {
+  echo "Testing on ${1}"
+
+  nvm install "v${1}"
+  nvm use "v${1}"
+  npm install
+  rebuild
+  npm run lint
+
+  node ./scripts/build.js
+}
+
 if [ "${CIRCLE_TAG}" != "" ] ||
    ([ "${CIRCLE_BRANCH}" == "master" ] && [ "${CI_PULL_REQUEST}" == "" ])
 then
@@ -48,26 +69,5 @@ for node_version in "${NODE_VERSIONS[@]}"; do
     npm run coveralls # only run coverage on first build
   fi
 done
-
-rebuild () {
-  for dir in packages/*; do
-    test -d "$dir" || continue
-    cd $dir
-    npm rebuild --update-binary
-    cd ../../
-  done
-}
-
-build () {
-  echo "Testing on ${1}"
-
-  nvm install "v${1}"
-  nvm use "v${1}"
-  npm install
-  rebuild
-  npm run lint
-
-  node ./scripts/build.js
-}
 
 set +e
