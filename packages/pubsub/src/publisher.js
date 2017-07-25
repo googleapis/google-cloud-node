@@ -42,20 +42,9 @@ function Publisher(topic, options) {
   this.api = topic.api;
 
   this.inventory_ = {
-    queued: []
+    queued: [],
+    queuedBytes: 0
   };
-
-  Object.defineProperty(this.inventory_, 'queueBytes', {
-    get: function() {
-      var size = 0;
-
-      this.queued.forEach(function(message) {
-        size += message.data.size;
-      });
-
-      return size;
-    }
-  });
 
   this.settings = {
     batching: {
@@ -100,6 +89,8 @@ Publisher.prototype.publish = function(data, attrs, callback) {
     attrs: attrs,
     callback: callback
   });
+
+  this.inventory_.queueBytes += data.size;
 };
 
 /**
@@ -112,6 +103,7 @@ Publisher.prototype.publish_ = function() {
   var callbacks = messages.map(prop('callback'));
 
   this.inventory_.queued = [];
+  this.inventory_.queuedBytes = 0;
 
   var reqOpts = {
     topic: this.topic.name,
