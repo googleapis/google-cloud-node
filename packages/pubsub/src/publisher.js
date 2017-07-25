@@ -42,6 +42,7 @@ function Publisher(topic, options) {
   this.api = topic.api;
 
   this.inventory_ = {
+    callbacks: [],
     queued: [],
     queuedBytes: 0
   };
@@ -86,11 +87,11 @@ Publisher.prototype.publish = function(data, attrs, callback) {
 
   this.inventory_.queued.push({
     data: data,
-    attrs: attrs,
-    callback: callback
+    attributes: attrs
   });
 
   this.inventory_.queueBytes += data.size;
+  this.inventory_.callbacks.push(callback);
 };
 
 /**
@@ -99,20 +100,16 @@ Publisher.prototype.publish = function(data, attrs, callback) {
 Publisher.prototype.publish_ = function() {
   var self = this;
 
+  var callbacks = this.inventory_.callbacks;
   var messages = this.inventory_.queued;
-  var callbacks = messages.map(prop('callback'));
 
+  this.inventory_.callbacks = [];
   this.inventory_.queued = [];
   this.inventory_.queuedBytes = 0;
 
   var reqOpts = {
     topic: this.topic.name,
-    messages: messages.map(function(message) {
-      return {
-        data: message.data,
-        attributes: message.attrs
-      };
-    })
+    messages: messages
   };
 
   this.topic.request({
