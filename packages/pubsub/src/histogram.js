@@ -37,6 +37,7 @@ function Histogram() {
 Histogram.prototype.add = function(value) {
   value = Math.max(value, MIN_VALUE);
   value = Math.min(value, MAX_VALUE);
+  value = Math.ceil(value / 1000) * 1000;
 
   if (!this.data.has(value)) {
     this.data.set(value, 0);
