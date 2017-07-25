@@ -149,8 +149,8 @@ ConnectionPool.prototype.drain = function(callback) {
   this.isOpen = false;
   callback = callback || common.util.noop;
 
-  each(connections, function(connection, callback) {
-    connection.end(callback);
+  each(connections, function(connection, onEndCallback) {
+    connection.end(onEndCallback);
   }, callback);
 };
 
