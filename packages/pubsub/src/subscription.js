@@ -615,7 +615,7 @@ Subscription.prototype.nack_ = function(message) {
       self.emit('error', err);
       return;
     }
-console.log('nacking');
+
     connection.write({
       modifyDeadlineAckIds: [message.ackId],
       modifyDeadlineSeconds: [0]
@@ -675,10 +675,7 @@ Subscription.prototype.renewLeases_ = function() {
         self.emit('error', err);
         return;
       }
-console.log({
-        modifyDeadlineAckIds: ackIds,
-        modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
-      });
+
       connection.write({
         modifyDeadlineAckIds: ackIds,
         modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
