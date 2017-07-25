@@ -98,7 +98,7 @@ Builder.prototype.build = function() {
   });
 
   var gapicVersions = docs.reduce((grouped, doc) => {
-    var gapicVersion = doc.id.match(/[/_](v[^\/]*)/);
+    var gapicVersion = doc.id.match(/[/_](v\d[^\/]*)/);
 
     if (gapicVersion) {
       gapicVersion = gapicVersion[1];
@@ -200,37 +200,56 @@ Builder.prototype.build = function() {
       methods: [],
       path: `${gapicVersion}/index.json`,
       description: `
-        <h1>{{docs.services[0].title}} API Contents</h1>
+        <div ng-if="docs.services[0].title === 'Google Cloud'">
+          To explore this API, use the links in the navigation bar.
+        </div>
+        <div ng-if="docs.services[0].title !== 'Google Cloud'">
+          <h1>{{docs.services[0].title}} API Contents</h1>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Class</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              ng-repeat="client in docs.services[docs.services.length - 1].nav"
-              ng-if="client.title.includes('Client')">
-              <td>
-                <a ui-sref="docs.service({
-                  serviceId: client.type
-                })">{{client.title}}</a>
-              </td>
-              <td>
-                Create a {{client.title}} to interact with the {{docs.services[0].title}} API.
-              </td>
-            </tr>
-            ${dataTypesMarkup}
-          </tbody>
-        </table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                ng-repeat="client in docs.services[docs.services.length - 1].nav"
+                ng-if="client.title.includes('Client')">
+                <td>
+                  <a ui-sref="docs.service({
+                    serviceId: client.type
+                  })">{{client.title}}</a>
+                </td>
+                <td>
+                  Create a {{client.title}} to interact with the {{docs.services[0].title}} API.
+                </td>
+              </tr>
+              ${dataTypesMarkup}
+            </tbody>
+          </table>
+        </div>
       `
     });
   }
 
   var types = parser.createTypesDictionary(docs);
   var toc = parser.createToc(types);
+
+  var generatedType;
+  toc.services = toc.services.filter(service => {
+    if (/^v\d/.test(service.title)) {
+      if (!service.nav) {
+        generatedType = service.type;
+        return false;
+      } else {
+        service.type = generatedType;
+      }
+    }
+
+    return service;
+  });
 
   toc.tagName = this.getTagName();
   this.write(config.TYPES_DICT, types);
@@ -424,16 +443,26 @@ Bundler.prototype.add = function(builder) {
 
   mkdir('-p', outputFolder);
 
-  globby.sync(path.resolve(builder.dir, '*.json'), {
+  globby.sync(path.resolve(builder.dir, '**/*.json'), {
     ignore: [config.TYPES_DICT, config.TOC].map(function(file) {
       return path.resolve(builder.dir, file);
     })
   }).forEach(function(file) {
     var json = require(file);
-    var service = json.parent || json.id;
-    var outputFile = path.join(builder.name, path.basename(file));
+    var outputFile;
 
-    json.overview = parser.createOverview(service, true);
+    var gapicVersion = file.match(/\/v\d[^/]*/) && file.match(/\/v\d[^/]*/)[0];
+
+    if (gapicVersion) {
+      var versionOutputFolder = path.join(outputFolder, gapicVersion);
+      mkdir('-p', versionOutputFolder);
+      outputFile = path.join(builder.name, gapicVersion, path.basename(file));
+    } else {
+      var service = json.parent || json.id;
+      json.overview = parser.createOverview(service, true);
+      outputFile = path.join(builder.name, path.basename(file));
+    }
+
     self.builder.write(outputFile, json);
   });
 };
@@ -477,6 +506,21 @@ Bundler.prototype.bundle = function() {
 
   var types = baseTypes.concat(flatten(depTypes));
   var toc = parser.createToc(types, true);
+
+  toc.services = toc.services.filter(service => {
+    if (service.nav) {
+      service.nav = service.nav.filter(innerService => {
+        // Empty generated version nav items.
+        if (/^v\d/.test(innerService.title) && !innerService.nav) {
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    return service;
+  });
 
   toc.tagName = this.builder.getTagName();
   this.builder.write(config.TYPES_DICT, types);
