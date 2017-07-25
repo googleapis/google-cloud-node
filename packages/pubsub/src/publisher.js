@@ -72,26 +72,33 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   }
 
   var opts = this.settings.batching;
+  var newPayloadSize = this.inventory_.queueBytes + data.size;
 
-  var hasMaxMessages = this.inventory_.queued.length >= opts.maxMessages;
-  var hasMaxBytes = (this.inventory_.queueBytes + data.size) >= opts.maxBytes;
+  // if this message puts us over the maxBytes option, then let's ship
+  // what we have and add it to the next batch
+  if (newPayloadSize > opts.maxBytes) {
+    this.publishImmediately_();
+    this.queue_(data, attrs, callback);
+    return;
+  }
 
-  if (hasMaxMessages || hasMaxBytes) {
-    clearTimeout(this.timeoutHandle_);
-    this.timeoutHandle_ = null;
-    this.publish_();
-  } else if (!this.timeoutHandle_) {
+  // haven't hit maxBytes? add it to the queue!
+  this.queue_(data, attrs, callback);
+
+  // next lets check if this message brings us to the message cap or if we
+  // magically hit the max byte limit
+  var hasMaxMessages = this.inventory_.queued.length === opts.maxMessages;
+
+  if (newPayloadSize === opts.maxBytes || hasMaxMessages) {
+    this.publishImmediately_();
+    return;
+  }
+
+  // otherwise let's set a timeout to send the next batch
+  if (!this.timeoutHandle_) {
     this.timeoutHandle_ = setTimeout(
       this.publish_.bind(this), opts.maxMilliseconds);
   }
-
-  this.inventory_.queued.push({
-    data: data,
-    attributes: attrs
-  });
-
-  this.inventory_.queueBytes += data.size;
-  this.inventory_.callbacks.push(callback);
 };
 
 /**
@@ -123,6 +130,28 @@ Publisher.prototype.publish_ = function() {
       callback(err, messageIds[i]);
     });
   });
+};
+
+/**
+ *
+ */
+Publisher.prototype.publishImmediately_ = function() {
+  clearTimeout(this.timeoutHandle_);
+  this.timeoutHandle_ = null;
+  this.publish_();
+};
+
+/**
+ *
+ */
+Publisher.prototype.queue_ = function(data, attrs, callback) {
+  this.inventory_.queued.push({
+    data: data,
+    attributes: attrs
+  });
+
+  this.inventory_.queueBytes += data.size;
+  this.inventory_.callbacks.push(callback);
 };
 
 /*! Developer Documentation
