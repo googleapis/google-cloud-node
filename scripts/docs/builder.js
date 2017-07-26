@@ -237,18 +237,18 @@ Builder.prototype.build = function() {
   var types = parser.createTypesDictionary(docs);
   var toc = parser.createToc(types);
 
-  var generatedType;
+  var generatedTypes = {};
   toc.services = toc.services.filter(service => {
     if (/^v\d/.test(service.title)) {
       if (!service.nav) {
-        generatedType = service.type;
+        generatedTypes[service.title] = service.type;
         return false;
       } else {
-        service.type = generatedType;
+        service.type = generatedTypes[service.title];
       }
     }
 
-    return service;
+    return true;
   });
 
   toc.tagName = this.getTagName();

@@ -65,9 +65,6 @@ function languageV1(options) {
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
- * @constructor
- * @alias module:language
- *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
