@@ -1,9 +1,9 @@
 {
   "report-dir": "./.coverage",
   "exclude": [
-    "src/*{/*,/**/*}.js",
-    "src/v*/*.js",
-    "test/**/*.js"
+    "packages/*/src/*{/*,/**/*}.js",
+    "packages/*/src/*/v*/*.js",
+    "packages/*/test/**/*.js"
   ],
   "watermarks": {
     "branches": [
