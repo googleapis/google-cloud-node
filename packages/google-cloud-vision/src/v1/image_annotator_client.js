@@ -50,15 +50,6 @@ var ALL_SCOPES = [
  * images, such as face, landmark, logo, label, and text detection. The
  * ImageAnnotator service returns detected entities from the images.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link imageAnnotatorClient}
- *
- * @example
- * var visionV1 = require('@google-cloud/vision').v1({
- *   // optional auth parameters.
- * });
- * var client = visionV1.imageAnnotatorClient();
  *
  * @class
  */
@@ -143,12 +134,18 @@ ImageAnnotatorClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = visionV1.imageAnnotatorClient();
+ * var vision = require('@google-cloud/vision');
+ *
+ * var client = vision.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var requests = [];
  * client.batchAnnotateImages({requests: requests}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
