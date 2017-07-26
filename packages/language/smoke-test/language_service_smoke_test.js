@@ -15,20 +15,26 @@
  */
 'use strict';
 
-var languageServiceClient = require('./language_service_client');
-var gax = require('google-gax');
-var extend = require('extend');
+describe('LanguageServiceSmokeTest', function() {
 
-function v1(options) {
-  options = extend({
-    scopes: v1.ALL_SCOPES
-  }, options);
-  var gaxGrpc = gax.grpc(options);
-  return languageServiceClient(gaxGrpc);
-}
+  it('successfully makes a call to the service', function(done) {
+    var language = require('../src');
 
-v1.GAPIC_VERSION = '0.7.1';
-v1.SERVICE_ADDRESS = languageServiceClient.SERVICE_ADDRESS;
-v1.ALL_SCOPES = languageServiceClient.ALL_SCOPES;
+    var client = language.v1({
+      // optional auth parameters.
+    });
 
-module.exports = v1;
+    var content = 'Hello, world!';
+    var type = language.v1.types.Document.Type.PLAIN_TEXT;
+    var document = {
+        content : content,
+        type : type
+    };
+    client.analyzeSentiment({document: document}).then(function(responses) {
+        var response = responses[0];
+        console.log(response);
+    })
+    .then(done)
+    .catch(done);
+  });
+});
