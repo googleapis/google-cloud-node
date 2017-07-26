@@ -64,23 +64,29 @@ ConnectionPool.prototype.acquire = function(id, callback) {
 
   if (is.fn(id)) {
     callback = id;
-    id = getFirstConnectionId();
+    id = null;
   }
-
-  id = id || getFirstConnectionId();
 
   if (!this.isOpen) {
     callback(new Error('Connection pool is closed.'));
     return;
   }
 
-  if (this.connections.has(id)) {
-    callback(null, this.connections.get(id));
+  // it's possible that by the time a user acks the connection could have
+  // closed, so in that case we'll just return any connection
+  if (!this.connections.has(id)) {
+    id = getFirstConnectionId();
+  }
+
+  var connection = this.connections.get(id);
+
+  if (connection) {
+    callback(null, connection);
     return;
   }
 
-  this.once('connected', function() {
-    self.acquire(id, callback);
+  this.once('connected', function(connection) {
+    callback(null, connection);
   });
 
   function getFirstConnectionId() {
@@ -91,7 +97,21 @@ ConnectionPool.prototype.acquire = function(id, callback) {
 /**
  *
  */
-ConnectionPool.prototype.createConnection = function(id) {
+ConnectionPool.prototype.close = function(callback) {
+  var connections = Array.from(this.connections.values());
+
+  this.isOpen = false;
+  callback = callback || common.util.noop;
+
+  each(connections, function(connection, onEndCallback) {
+    connection.end(onEndCallback);
+  }, callback);
+};
+
+/**
+ *
+ */
+ConnectionPool.prototype.createConnection = function() {
   var self = this;
 
   this.subscription.request({
@@ -104,6 +124,7 @@ ConnectionPool.prototype.createConnection = function(id) {
       return;
     }
 
+    var id = uuid.v4();
     var connection = requestFn();
 
     connection.on('error', function(err) {
@@ -117,8 +138,7 @@ ConnectionPool.prototype.createConnection = function(id) {
     });
 
     connection.once('metadata', function() {
-      self.connections.set(id, connection);
-      self.emit('connected');
+      self.emit('connected', connection);
     });
 
     connection.once('close', function() {
@@ -137,21 +157,9 @@ ConnectionPool.prototype.createConnection = function(id) {
       subscription: self.subscription.name,
       streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
     });
+
+    self.connections.set(id, connection);
   });
-};
-
-/**
- *
- */
-ConnectionPool.prototype.drain = function(callback) {
-  var connections = Array.from(this.connections.values());
-
-  this.isOpen = false;
-  callback = callback || common.util.noop;
-
-  each(connections, function(connection, onEndCallback) {
-    connection.end(onEndCallback);
-  }, callback);
 };
 
 /**
@@ -159,7 +167,7 @@ ConnectionPool.prototype.drain = function(callback) {
  */
 ConnectionPool.prototype.open = function() {
   for (var i = 0; i < this.settings.maxConnections; i++) {
-    this.createConnection(i);
+    this.createConnection();
   }
 
   this.isOpen = true;
