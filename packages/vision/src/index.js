@@ -16,6 +16,7 @@
 
 /*!
  * @module vision
+ * @name Vision
  */
 
 'use strict';
