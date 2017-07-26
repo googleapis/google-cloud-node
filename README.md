@@ -637,94 +637,29 @@ var visionClient = vision({
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Read the text from an image.
-visionClient.detectText('./image.jpg', function(err, text) {
-  // text = [
-  //   'This was text found in the image',
-  //   'This was more text found in the image'
-  // ]
-});
-
-// Detect faces and the locations of their features in an image.
-visionClient.detectFaces('./image.jpg', function(err, faces) {
-  // faces = [
-  //   {
-  //     angles: {pan,tilt,roll},
-  //     bounds: {
-  //       head: [{x,y},{x,y},{x,y},{x,y}],
-  //       face: [{x,y},{x,y},{x,y},{x,y}]
-  //     },
-  //     features: {
-  //       confidence: 34.489909,
-  //       chin: {
-  //         center: {x,y,z},
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       ears: {
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       eyebrows: {
-  //         left: {
-  //           left: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         },
-  //         right: {
-  //           left: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         }
-  //       },
-  //       eyes: {
-  //         left: {
-  //           bottom: {x,y,z},
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           pupil: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         },
-  //         right: {
-  //           bottom: {x,y,z},
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           pupil: {x,y,z},
-  //           right: {x,y,z},
-  //           top: {x,y,z}
-  //         }
-  //       },
-  //       forehead: {x,y,z},
-  //       lips: {
-  //         bottom: {x,y,z},
-  //         top: {x,y,z}
-  //       },
-  //       mouth: {
-  //         center: {x,y,z},
-  //         left: {x,y,z},
-  //         right: {x,y,z}
-  //       },
-  //       nose: {
-  //         bottom: {
-  //           center: {x,y,z},
-  //           left: {x,y,z},
-  //           right: {x,y,z}
-  //         },
-  //         tip: {x,y,z},
-  //         top: {x,y,z}
-  //       }
-  //     },
-  //     confidence: 56.748849,
-  //     blurry: false,
-  //     dark: false,
-  //     happy: false,
-  //     hat: false,
-  //     mad: false,
-  //     sad: false,
-  //     surprised: false
-  //   }
-  // ]
+var gcsImageUri = 'gs://gapic-toolkit/President_Barack_Obama.jpg';
+var source = {
+    gcsImageUri : gcsImageUri
+};
+var image = {
+    source : source
+};
+var type = vision.v1.types.Feature.Type.FACE_DETECTION;
+var featuresElement = {
+    type : type
+};
+var features = [featuresElement];
+var requestsElement = {
+    image : image,
+    features : features
+};
+var requests = [requestsElement];
+visionClient.batchAnnotateImages({requests: requests}).then(function(responses) {
+    var response = responses[0];
+    // doThingsWith(response)
+})
+.catch(function(err) {
+    console.error(err);
 });
 ```
 
@@ -998,29 +933,29 @@ var speechClient = speech({
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Detect the speech in an audio file.
-speechClient.recognize('./audio.raw', {
-  encoding: 'LINEAR16',
-  sampleRateHertz: 16000
-}, function(err, transcript) {
-  // transcript = 'how old is the Brooklyn Bridge'
+var languageCode = 'en-US';
+var sampleRateHertz = 44100;
+var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
+var config = {
+    languageCode : languageCode,
+    sampleRateHertz : sampleRateHertz,
+    encoding : encoding
+};
+var uri = 'gs://gapic-toolkit/hello.flac';
+var audio = {
+    uri : uri
+};
+var request = {
+    config: config,
+    audio: audio
+};
+speechClient.recognize(request).then(function(responses) {
+    var response = responses[0];
+    // doThingsWith(response)
+})
+.catch(function(err) {
+    console.error(err);
 });
-
-// Detect the speech in an audio file stream.
-fs.createReadStream('./audio.raw')
-  .on('error', console.error)
-  .pipe(speechClient.createRecognizeStream({
-    config: {
-      encoding: 'LINEAR16',
-      sampleRateHertz: 16000
-    },
-    singleUtterance: false,
-    interimResults: false
-  }))
-  .on('error', console.error)
-  .on('data', function(data) {
-    // data.results = "how old is the Brooklyn Bridge"
-  });
 ```
 
 
