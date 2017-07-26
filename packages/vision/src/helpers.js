@@ -119,10 +119,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -205,10 +205,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -234,7 +234,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -246,10 +246,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -275,7 +275,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -287,10 +287,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -316,7 +316,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -328,10 +328,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -357,7 +357,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -369,10 +369,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -398,7 +398,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -410,10 +410,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -439,7 +439,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -451,10 +451,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -480,7 +480,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -492,10 +492,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -521,7 +521,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -533,10 +533,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
@@ -562,7 +562,7 @@ module.exports = apiVersion => {
    *   single key (`source`, `content`).
    *
    *   If the key is `source`, the value should be another object containing
-   *   `imagUri` or `filename` as a key and a string as a value.
+   *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
@@ -574,10 +574,10 @@ module.exports = apiVersion => {
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   *   [AnnotateImagesResponse]{@link AnnotateImagesResponse}.
+   *   [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing
    *   API call.
    *
