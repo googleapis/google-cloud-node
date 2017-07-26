@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'language.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
+var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -49,15 +49,6 @@ var ALL_SCOPES = [
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link languageServiceClient}
- *
- * @example
- * var languageV1 = require('@google-cloud/language').v1({
- *   // optional auth parameters.
- * });
- * var client = languageV1.languageServiceClient();
  *
  * @class
  */
@@ -111,9 +102,10 @@ function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
   });
 }
 
+
 /**
  * Get the project ID used by this class.
- * @aram {function(Error, string)} callback - the callback to be called with
+ * @param {function(Error, string)} callback - the callback to be called with
  *   the current project Id.
  */
 LanguageServiceClient.prototype.getProjectId = function(callback) {
@@ -128,8 +120,7 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {Object} request.document
- *   Input document. Currently, `analyzeSentiment` only supports English text
- *   ({@link Document.language}="EN").
+ *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
  * @param {number=} request.encodingType
@@ -149,12 +140,18 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = languageV1.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
  * client.analyzeSentiment({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -171,8 +168,9 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
 };
 
 /**
- * Finds named entities (currently finds proper names) in the text,
- * entity types, salience, mentions for each entity, and other properties.
+ * Finds named entities (currently proper names and common nouns) in the text
+ * along with entity types, salience, mentions for each entity, and
+ * other properties.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -197,9 +195,14 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  *
  * @example
  *
- * var client = languageV1.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
- * var encodingType = languageV1.EncodingType.NONE;
+ * var encodingType = language.v1.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
@@ -207,7 +210,8 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  * client.analyzeEntities(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -251,9 +255,14 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  *
  * @example
  *
- * var client = languageV1.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
- * var encodingType = languageV1.EncodingType.NONE;
+ * var encodingType = language.v1.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
@@ -261,7 +270,8 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  * client.analyzeSyntax(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -308,10 +318,15 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  *
  * @example
  *
- * var client = languageV1.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
  * var features = {};
- * var encodingType = languageV1.EncodingType.NONE;
+ * var encodingType = language.v1.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     features: features,
@@ -320,7 +335,8 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  * client.annotateText(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */

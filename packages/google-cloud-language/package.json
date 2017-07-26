@@ -1,8 +1,9 @@
 {
+  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/language",
   "version": "0.10.6",
-  "author": "Google Inc.",
-  "description": "Cloud Natural Language Client Library for Node.js",
+  "author": "Google Inc",
+  "description": "Google Cloud Natural Language API client for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -29,14 +30,12 @@
       "email": "sawchuk@gmail.com"
     }
   ],
-  "main": "./src/index.js",
+  "main": "src/index.js",
   "files": [
     "src",
     "AUTHORS",
-    "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -46,30 +45,22 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google cloud natural language",
-    "google cloud language",
-    "natural language",
-    "language"
+    "google language",
+    "language",
+    "Google Cloud Natural Language API"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.13.0",
-    "extend": "^3.0.0",
-    "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",
-    "is": "^3.0.1",
-    "string-format-obj": "^1.1.0"
+    "google-gax": "^0.13.2",
+    "extend": "^3.0.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "*",
-    "mocha": "^3.0.2",
-    "proxyquire": "^1.7.10",
-    "through2": "^2.0.1",
-    "uuid": "^3.0.1"
+    "mocha": "^3.2.0"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js language",
-    "test": "mocha test/*.js",
-    "system-test": "mocha system-test/*.js --no-timeouts --bail"
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
