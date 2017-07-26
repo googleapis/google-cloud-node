@@ -112,8 +112,8 @@ module.exports = apiVersion => {
    *   An array of the specific annotation features being requested.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -198,8 +198,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -239,8 +239,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -280,8 +280,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -321,8 +321,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -362,8 +362,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -403,8 +403,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -444,8 +444,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -485,8 +485,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -526,8 +526,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
@@ -567,8 +567,8 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See [gax.CallOptions]
-   *   {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *   call, e.g, timeout, retries, paginations, etc. See
+   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
    *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
