@@ -221,6 +221,9 @@ modules.forEach(function(mod) {
 
           it('should run ' + name + ' examples without errors', function() {
             jshint(snippet, {
+              // Allow ES6 syntax
+              esversion: 6,
+
               // in several snippets we give an example as to how to access
               // a property (like metadata) without doing anything with it
               // e.g. `list[0].metadata`
