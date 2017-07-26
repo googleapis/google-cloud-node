@@ -127,7 +127,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var request = {
    *   image: {source: {imageUri: 'gs://path/to/image.jpg'}},
    *   features: [],
@@ -213,7 +212,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -254,7 +252,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -295,7 +292,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -336,7 +332,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -377,7 +372,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -418,7 +412,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -459,7 +452,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -500,7 +492,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -541,7 +532,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
@@ -582,7 +572,6 @@ module.exports = apiVersion => {
    *   API call.
    *
    * @example
-   * var vision = require('@google-cloud/vision')();
    * var image = {
    *   source: {imageUri: 'gs://path/to/image.jpg'}
    * };
