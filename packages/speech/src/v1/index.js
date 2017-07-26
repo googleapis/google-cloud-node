@@ -27,7 +27,7 @@ function v1(options) {
   return speechClient(gaxGrpc);
 }
 
-v1.GAPIC_VERSION = '0.7.1';
+v1.GAPIC_VERSION = '0.10.0';
 v1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
 v1.ALL_SCOPES = speechClient.ALL_SCOPES;
 
