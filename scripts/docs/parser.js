@@ -99,8 +99,13 @@ function detectCustomType(str) {
     // @TODO link-ability
     .replace(rProtoType, function(match, protoType) {
       return `
-        <a ui-sref="docs.service({
-          serviceId: '{{ service.parent }}/{{service.path.split('/').shift()}}/data_types',
+        <a ng-if="service.parent" ui-sref="docs.service({
+          serviceId: '{{service.parent}}/{{service.path.split('/').shift()}}/data_types',
+          method: '${protoType}'
+        })">${protoType}</a>
+
+        <a ng-if="!service.parent" ui-sref="docs.service({
+          serviceId: '{{service.title.split('V')[0] + '/v' + service.title.split('V')[1]}}/data_types',
           method: '${protoType}'
         })">${protoType}</a>
       `.trim();
