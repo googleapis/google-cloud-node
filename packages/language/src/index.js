@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module language
+ * @name Language
+ */
+
 'use strict';
 
 var extend = require('extend');
@@ -30,6 +36,9 @@ const VERSION = require('../package.json').version;
  *
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
+ *
+ * @constructor
+ * @alias module:language
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
@@ -55,6 +64,9 @@ function languageV1(options) {
  *
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
+ *
+ * @constructor
+ * @alias module:language
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
