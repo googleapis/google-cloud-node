@@ -431,7 +431,7 @@ var document = {
     content : content,
     type : type
 };
-client.analyzeSentiment({document: document}).then(function(responses) {
+languageClient.analyzeSentiment({document: document}).then(function(responses) {
     var response = responses[0];
     // doThingsWith(response)
 })
