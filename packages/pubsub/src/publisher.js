@@ -41,6 +41,11 @@ function Publisher(topic, options) {
   this.topic = topic;
   this.api = topic.api;
 
+  // this object keeps track of all messages scheduled to be published
+  // queued is essentially the `messages` field for the publish rpc req opts
+  // queuedBytes is used to track the size of the combined payload
+  // callbacks is an array of callbacks - each callback is associated with a
+  // specific message.
   this.inventory_ = {
     callbacks: [],
     queued: [],
@@ -77,7 +82,7 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   // if this message puts us over the maxBytes option, then let's ship
   // what we have and add it to the next batch
   if (newPayloadSize > opts.maxBytes) {
-    this.publishImmediately_();
+    this.publish_();
     this.queue_(data, attrs, callback);
     return;
   }
@@ -90,7 +95,7 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   var hasMaxMessages = this.inventory_.queued.length === opts.maxMessages;
 
   if (newPayloadSize === opts.maxBytes || hasMaxMessages) {
-    this.publishImmediately_();
+    this.publish_();
     return;
   }
 
@@ -106,6 +111,9 @@ Publisher.prototype.publish = function(data, attrs, callback) {
  */
 Publisher.prototype.publish_ = function() {
   var self = this;
+
+  clearTimeout(this.timeoutHandle_);
+  this.timeoutHandle_ = null;
 
   var callbacks = this.inventory_.callbacks;
   var messages = this.inventory_.queued;
@@ -130,15 +138,6 @@ Publisher.prototype.publish_ = function() {
       callback(err, messageIds[i]);
     });
   });
-};
-
-/**
- *
- */
-Publisher.prototype.publishImmediately_ = function() {
-  clearTimeout(this.timeoutHandle_);
-  this.timeoutHandle_ = null;
-  this.publish_();
 };
 
 /**

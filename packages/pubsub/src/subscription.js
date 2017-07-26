@@ -562,6 +562,7 @@ Subscription.prototype.listenForEvents_ = function() {
       self.messageListeners++;
 
       if (!self.connection) {
+        self.userClosed_ = false;
         self.openConnection_();
       }
     }
