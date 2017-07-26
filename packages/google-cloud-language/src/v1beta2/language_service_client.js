@@ -49,15 +49,6 @@ var ALL_SCOPES = [
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link languageServiceClient}
- *
- * @example
- * var languageV1beta2 = require('@google-cloud/language').v1beta2({
- *   // optional auth parameters.
- * });
- * var client = languageV1beta2.languageServiceClient();
  *
  * @class
  */
@@ -130,8 +121,7 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {Object} request.document
- *   Input document. Currently, `analyzeSentiment` only supports English text
- *   ({@link Document.language}="EN").
+ *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
  * @param {number=} request.encodingType
@@ -152,12 +142,18 @@ LanguageServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = languageV1beta2.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
  * client.analyzeSentiment({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -201,9 +197,14 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  *
  * @example
  *
- * var client = languageV1beta2.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
- * var encodingType = languageV1beta2.EncodingType.NONE;
+ * var encodingType = language.v1beta2.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
@@ -211,7 +212,8 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  * client.analyzeEntities(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -254,9 +256,14 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  *
  * @example
  *
- * var client = languageV1beta2.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
- * var encodingType = languageV1beta2.EncodingType.NONE;
+ * var encodingType = language.v1beta2.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
@@ -264,7 +271,8 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  * client.analyzeEntitySentiment(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -308,9 +316,14 @@ LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, optio
  *
  * @example
  *
- * var client = languageV1beta2.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
- * var encodingType = languageV1beta2.EncodingType.NONE;
+ * var encodingType = language.v1beta2.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
@@ -318,7 +331,8 @@ LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, optio
  * client.analyzeSyntax(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -365,10 +379,15 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  *
  * @example
  *
- * var client = languageV1beta2.languageServiceClient();
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
  * var document = {};
  * var features = {};
- * var encodingType = languageV1beta2.EncodingType.NONE;
+ * var encodingType = language.v1beta2.types.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     features: features,
@@ -377,7 +396,8 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  * client.annotateText(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
