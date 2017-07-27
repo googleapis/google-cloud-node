@@ -196,6 +196,7 @@ describe('pubsub', function() {
     var TOPIC_NAME = generateTopicName();
     var topic = pubsub.topic(TOPIC_NAME);
     var publisher = topic.publisher();
+    var subscription;
 
     var SUB_NAMES = [
       generateSubName(),
@@ -203,8 +204,8 @@ describe('pubsub', function() {
     ];
 
     var SUBSCRIPTIONS = [
-      topic.subscription(SUB_NAMES[0], { ackDeadlineSeconds: 30 }),
-      topic.subscription(SUB_NAMES[1], { ackDeadlineSeconds: 60 })
+      topic.subscription(SUB_NAMES[0], { ackDeadline: 30000 }),
+      topic.subscription(SUB_NAMES[1], { ackDeadline: 60000 })
     ];
 
     before(function(done) {
@@ -333,9 +334,11 @@ describe('pubsub', function() {
     });
 
     it('should error when using a non-existent subscription', function(done) {
-      var subscription = topic.subscription(generateSubName());
+      var subscription = topic.subscription(generateSubName(), {
+        maxConnections: 1
+      });
 
-      subscription.on('error', function(err) {
+      subscription.once('error', function(err) {
         assert.strictEqual(err.code, 5);
         subscription.close(done);
       });
@@ -346,8 +349,8 @@ describe('pubsub', function() {
     });
 
     it('should receive the published messages', function(done) {
-      var subscription = topic.subscription(SUB_NAMES[1]);
       var messageCount = 0;
+      var subscription = topic.subscription(SUB_NAMES[1]);
 
       subscription.on('error', done);
 
@@ -516,47 +519,56 @@ describe('pubsub', function() {
 
         return subscription.create().then(function() {
           return publisher.publish(new Buffer('Hello, world!'));
-        }).then(function(data) {
-          messageId = data[0][0];
+        }).then(function(messageIds) {
+          messageId = messageIds[0];
         });
       });
 
-      function checkMessage() {
-        return new Promise(function(resolve, reject) {
-          function onError(err) {
-            subscription.removeListener('message', onMessage);
-            reject(err);
-          }
-
-          function onMessage(message) {
-            subscription.removeListener('error', onError);
-            resolve(message);
-          }
-
-          subscription.once('error', onError);
-          subscription.once('message', onMessage);
-        });
-      }
-
-      it('should seek to a snapshot', function() {
+      it('should seek to a snapshot', function(done) {
         var snapshotName = generateSnapshotName();
 
-        return subscription.createSnapshot(snapshotName).then(function() {
-          return checkMessage();
-        }).then(function() {
-          return subscription.seek(snapshotName);
-        }).then(function() {
-          return checkMessage();
+        subscription.createSnapshot(snapshotName, function(err, snapshot) {
+          assert.ifError(err);
+
+          var messageCount = 0;
+
+          subscription.on('error', done);
+          subscription.on('message', function(message) {
+            assert.strictEqual(message.id, messageId);
+
+            message.ack();
+
+            if (++messageCount === 1) {
+              snapshot.seek(function(err) {
+                assert.ifError(err);
+              });
+              return;
+            }
+
+            assert.strictEqual(messageCount, 2);
+            subscription.close(done);
+          });
         });
       });
 
-      it('should seek to a date', function() {
-        var date = new Date();
+      it('should seek to a date', function(done) {
+        var messageCount = 0;
 
-        return checkMessage().then(function() {
-          return subscription.seek(date);
-        }).then(function() {
-          return checkMessage();
+        subscription.on('error', done);
+        subscription.on('message', function(message) {
+          assert.strictEqual(message.id, messageId);
+
+          message.ack();
+
+          if (++messageCount === 1) {
+            subscription.seek(message.publishTime, function(err) {
+              assert.ifError(err);
+            });
+            return;
+          }
+
+          assert.strictEqual(messageCount, 2);
+          subscription.close(done);
         });
       });
     });

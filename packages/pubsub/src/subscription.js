@@ -303,8 +303,10 @@ Subscription.prototype.close = function(callback) {
  *
  */
 Subscription.prototype.closeConnection_ = function(callback) {
+  callback = callback || common.util.noop;
+
   if (this.connectionPool) {
-    this.connectionPool.drain(callback || common.util.noop);
+    this.connectionPool.close(callback);
     this.connectionPool = null;
   } else if (is.fn(callback)) {
     setImmediate(callback);
@@ -744,10 +746,7 @@ Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
   if (is.string(snapshot)) {
     reqOpts.snapshot = Snapshot.formatName_(this.pubsub.projectId, snapshot);
   } else if (is.date(snapshot)) {
-    reqOpts.time = {
-      seconds: Math.floor(snapshot.getTime() / 1000),
-      nanos: snapshot.getMilliseconds() * 1e6
-    };
+    reqOpts.time = snapshot;
   } else {
     throw new Error('Either a snapshot name or Date is needed to seek to.');
   }
@@ -757,7 +756,7 @@ Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
     method: 'seek',
     reqOpts: reqOpts,
     gaxOpts: gaxOpts
-  }, callback)
+  }, callback);
 };
 
 /**
