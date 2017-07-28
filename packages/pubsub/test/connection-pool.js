@@ -41,7 +41,7 @@ describe('ConnectionPool', function() {
       '@google-cloud/common': {
         util: fakeUtil
       },
-      'uuid': fakeUuid
+      uuid: fakeUuid
     });
   });
 
@@ -102,7 +102,7 @@ describe('ConnectionPool', function() {
         done();
       };
 
-      var pool = new ConnectionPool(SUBSCRIPTION);
+      new ConnectionPool(SUBSCRIPTION);
     });
   });
 

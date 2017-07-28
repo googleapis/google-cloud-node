@@ -196,7 +196,6 @@ describe('pubsub', function() {
     var TOPIC_NAME = generateTopicName();
     var topic = pubsub.topic(TOPIC_NAME);
     var publisher = topic.publisher();
-    var subscription;
 
     var SUB_NAMES = [
       generateSubName(),
@@ -464,7 +463,7 @@ describe('pubsub', function() {
         return new Promise(function(resolve) {
           setTimeout(resolve, milliseconds);
         });
-      }
+      };
     }
 
     before(function() {

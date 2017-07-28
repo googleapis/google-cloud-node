@@ -19,7 +19,6 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -186,7 +185,7 @@ describe('PubSub', function() {
         called = true;
       };
 
-      var pubsub = new PubSub({});
+      new PubSub({});
       assert(called);
     });
 
@@ -358,7 +357,7 @@ describe('PubSub', function() {
         };
       };
 
-      pubsub.request = function(config, callback) {
+      pubsub.request = function(config) {
         assert.notStrictEqual(config.reqOpts, options);
         assert.deepEqual(config.reqOpts, expectedBody);
         done();
@@ -411,9 +410,9 @@ describe('PubSub', function() {
           callback({ code: 6 }, apiResponse);
         };
 
-        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, function(err, subscription) {
+        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, function(err, sub) {
           assert.ifError(err);
-          assert.strictEqual(subscription, SUBSCRIPTION);
+          assert.strictEqual(sub, SUBSCRIPTION);
           done();
         });
       });
@@ -423,12 +422,14 @@ describe('PubSub', function() {
           callback(error, apiResponse);
         };
 
-        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
+        function callback(err, sub, resp) {
           assert.strictEqual(err, error);
           assert.strictEqual(sub, null);
           assert.strictEqual(resp, apiResponse);
           done();
-        });
+        }
+
+        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, callback);
       });
     });
 
@@ -452,12 +453,14 @@ describe('PubSub', function() {
           callback(null, apiResponse);
         };
 
-        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
+        function callback(err, sub, resp) {
           assert.ifError(err);
           assert.strictEqual(sub, subscription);
           assert.strictEqual(resp, apiResponse);
           done();
-        });
+        }
+
+        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, callback);
       });
     });
   });
@@ -571,8 +574,6 @@ describe('PubSub', function() {
     });
 
     it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost:8080';
-
       setHost('localhost:8080/');
       pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options.servicePath, 'localhost');
@@ -630,7 +631,6 @@ describe('PubSub', function() {
 
     it('should build the right request', function(done) {
       var options = { a: 'b', c: 'd', gaxOpts: {} };
-      var originalOptions = extend({}, options);
       var expectedOptions = extend({}, options, {
         project: 'projects/' + pubsub.projectId
       });
@@ -777,7 +777,6 @@ describe('PubSub', function() {
 
     it('should build the right request', function(done) {
       var options = { a: 'b', c: 'd', gaxOpts: {} };
-      var originalOptions = extend({}, options);
       var expectedOptions = extend({}, options, {
         project: 'projects/' + pubsub.projectId
       });

@@ -24,8 +24,6 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var googleAuth = require('google-auto-auth');
 var is = require('is');
-var streamEvents = require('stream-events');
-var through = require('through2');
 
 var v1 = require('./v1');
 
@@ -603,7 +601,7 @@ PubSub.prototype.getTopics = function(options, callback) {
     project: 'projects/' + this.projectId
   }, options);
 
-  delete reqOpts.gaxOpts
+  delete reqOpts.gaxOpts;
 
   this.request({
     client: 'publisherClient',

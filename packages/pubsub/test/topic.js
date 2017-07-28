@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 

@@ -20,13 +20,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var events = require('events');
 var extend = require('extend');
 var is = require('is');
 var os = require('os');
-var prop = require('propprop');
 var util = require('util');
 
 /**
@@ -282,7 +280,7 @@ Subscription.prototype.breakLease_ = function(message) {
     clearTimeout(this.leaseTimeoutHandle_);
     this.leaseTimeoutHandle_ = null;
   }
-}
+};
 
 /**
  *
@@ -625,7 +623,7 @@ Subscription.prototype.nack_ = function(message) {
       modifyDeadlineSeconds: [0]
     });
   });
-}
+};
 
 /**
  * @private

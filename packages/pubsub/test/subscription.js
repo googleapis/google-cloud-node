@@ -208,7 +208,7 @@ describe('Subscription', function() {
         called = true;
       };
 
-      var subscription = new Subscription(PUBSUB, SUB_NAME);
+      new Subscription(PUBSUB, SUB_NAME);
       assert(called);
     });
   });
@@ -299,7 +299,7 @@ describe('Subscription', function() {
         subscription.ack_(MESSAGE);
       });
 
-      it('should emit an error when unable to get a connection', function(done) {
+      it('should emit an error when unable to get a conn', function(done) {
         var error = new Error('err');
 
         subscription.connectionPool = {
@@ -1078,7 +1078,7 @@ describe('Subscription', function() {
         subscription.nack_(MESSAGE);
       });
 
-      it('should emit an error when unable to get a connection', function(done) {
+      it('should emit an error when unable to get a conn', function(done) {
         var error = new Error('err');
 
         subscription.connectionPool = {

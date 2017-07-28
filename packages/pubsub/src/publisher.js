@@ -24,7 +24,6 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var prop = require('propprop');
 
 /**
  *
@@ -107,17 +106,15 @@ Publisher.prototype.publish = function(data, attrs, callback) {
  * This should never be called directly.
  */
 Publisher.prototype.publish_ = function() {
-  var self = this;
-
-  clearTimeout(this.timeoutHandle_);
-  this.timeoutHandle_ = null;
-
   var callbacks = this.inventory_.callbacks;
   var messages = this.inventory_.queued;
 
   this.inventory_.callbacks = [];
   this.inventory_.queued = [];
   this.inventory_.bytes = 0;
+
+  clearTimeout(this.timeoutHandle_);
+  this.timeoutHandle_ = null;
 
   var reqOpts = {
     topic: this.topic.name,

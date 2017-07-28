@@ -165,14 +165,6 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
   var pt = resp.message.publishTime;
   var milliseconds = parseInt(pt.nanos, 10) / 1e6;
 
-  function ack() {
-    self.subscription.ack_(this);
-  }
-
-  function nack() {
-    self.subscription.nack_(this);
-  }
-
   return {
     connectionId: connectionId,
     ackId: resp.ackId,
@@ -181,8 +173,12 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
     attributes: resp.message.attributes,
     publishTime: new Date(parseInt(pt.seconds, 10) * 1000 + milliseconds),
     received: Date.now(),
-    ack: ack,
-    nack: nack
+    ack: function() {
+      self.subscription.ack_(this);
+    },
+    nack: function() {
+      self.subscription.nack_(this);
+    }
   };
 };
 
