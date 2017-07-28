@@ -56,7 +56,7 @@ function FakeSnapshot() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
-describe.only('Subscription', function() {
+describe('Subscription', function() {
   var Subscription;
   var subscription;
 

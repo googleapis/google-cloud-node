@@ -39,24 +39,23 @@ function Publisher(topic, options) {
   }, options);
 
   this.topic = topic;
-  this.api = topic.api;
 
   // this object keeps track of all messages scheduled to be published
   // queued is essentially the `messages` field for the publish rpc req opts
-  // queuedBytes is used to track the size of the combined payload
+  // bytes is used to track the size of the combined payload
   // callbacks is an array of callbacks - each callback is associated with a
   // specific message.
   this.inventory_ = {
     callbacks: [],
     queued: [],
-    queuedBytes: 0
+    bytes: 0
   };
 
   this.settings = {
     batching: {
       maxBytes: Math.min(options.batching.maxBytes, Math.pow(1024, 2) * 9),
       maxMessages: Math.min(options.batching.maxMessages, 1000),
-      maxMilliseconds: options.maxMilliseconds
+      maxMilliseconds: options.batching.maxMilliseconds
     }
   };
 
@@ -77,17 +76,15 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   }
 
   var opts = this.settings.batching;
-  var newPayloadSize = this.inventory_.queueBytes + data.size;
+  var newPayloadSize = this.inventory_.bytes + data.length;
 
   // if this message puts us over the maxBytes option, then let's ship
   // what we have and add it to the next batch
   if (newPayloadSize > opts.maxBytes) {
     this.publish_();
-    this.queue_(data, attrs, callback);
-    return;
   }
 
-  // haven't hit maxBytes? add it to the queue!
+  // add it to the queue!
   this.queue_(data, attrs, callback);
 
   // next lets check if this message brings us to the message cap or if we
@@ -120,7 +117,7 @@ Publisher.prototype.publish_ = function() {
 
   this.inventory_.callbacks = [];
   this.inventory_.queued = [];
-  this.inventory_.queuedBytes = 0;
+  this.inventory_.bytes = 0;
 
   var reqOpts = {
     topic: this.topic.name,
@@ -149,7 +146,7 @@ Publisher.prototype.queue_ = function(data, attrs, callback) {
     attributes: attrs
   });
 
-  this.inventory_.queueBytes += data.size;
+  this.inventory_.bytes += data.length;
   this.inventory_.callbacks.push(callback);
 };
 
