@@ -30,12 +30,6 @@ var util = require('util');
 var uuid = require('uuid');
 
 /**
- * @type {module:pubsub/message}
- * @private
- */
-var Message = require('./message.js');
-
-/**
  *
  */
 function ConnectionPool(subscription, options) {
@@ -133,7 +127,7 @@ ConnectionPool.prototype.createConnection = function() {
 
     connection.on('data', function(data) {
       arrify(data.receivedMessages).forEach(function(message) {
-        self.emit('message', new Message(self.subscription, id, message));
+        self.emit('message', self.createMessage_(id, message));
       });
     });
 
@@ -160,6 +154,36 @@ ConnectionPool.prototype.createConnection = function() {
 
     self.connections.set(id, connection);
   });
+};
+
+/**
+ *
+ */
+ConnectionPool.prototype.createMessage_ = function(connectionId, resp) {
+  var self = this;
+
+  var pt = resp.message.publishTime;
+  var milliseconds = parseInt(pt.nanos, 10) / 1e6;
+
+  function ack() {
+    self.subscription.ack_(this);
+  }
+
+  function nack() {
+    self.subscription.nack_(this);
+  }
+
+  return {
+    connectionId: connectionId,
+    ackId: resp.ackId,
+    id: resp.message.messageId,
+    data: resp.message.data,
+    attributes: resp.message.attributes,
+    publishTime: new Date(parseInt(pt.seconds, 10) * 1000 + milliseconds),
+    received: Date.now(),
+    ack: ack,
+    nack: nack
+  };
 };
 
 /**

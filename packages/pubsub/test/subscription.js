@@ -95,6 +95,10 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.pubsub, PUBSUB);
     });
 
+    it('should localize the project id', function() {
+      assert.strictEqual(subscription.projectId, PROJECT_ID);
+    });
+
     it('should localize pubsub request method', function(done) {
       PUBSUB.request = function(callback) {
         callback(); // the done fn
@@ -224,7 +228,7 @@ describe('Subscription', function() {
   describe('ack_', function() {
     var MESSAGE = {
       ackId: 'abc',
-      received_: 12345,
+      received: 12345,
       connectionId: 'def'
     };
 
@@ -252,7 +256,7 @@ describe('Subscription', function() {
       };
 
       subscription.histogram.add = function(time) {
-        assert.strictEqual(time, fakeNow - MESSAGE.received_);
+        assert.strictEqual(time, fakeNow - MESSAGE.received);
         done();
       };
 
@@ -1019,7 +1023,6 @@ describe('Subscription', function() {
   describe('nack_', function() {
     var MESSAGE = {
       ackId: 'abc',
-      received_: 12345,
       connectionId: 'def'
     };
 

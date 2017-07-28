@@ -149,6 +149,7 @@ function Subscription(pubsub, name, options) {
   options = options || {};
 
   this.pubsub = pubsub;
+  this.projectId = pubsub.projectId;
   this.request = pubsub.request.bind(pubsub);
   this.histogram = new Histogram();
 
@@ -242,7 +243,7 @@ Subscription.formatName_ = function(projectId, name) {
  */
 Subscription.prototype.ack_ = function(message) {
   this.breakLease_(message);
-  this.histogram.add(Date.now() - message.received_);
+  this.histogram.add(Date.now() - message.received);
 
   if (!this.connectionPool) {
     this.inventory_.ack.push(message.ackId);

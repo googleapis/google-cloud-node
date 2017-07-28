@@ -176,7 +176,7 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         assert.deepEqual(message.data, data);
-        assert.deepEqual(message.attrs, attrs);
+        assert.deepEqual(message.attributes, attrs);
 
         done();
       });
