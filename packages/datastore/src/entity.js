@@ -362,14 +362,20 @@ entity.entityFromEntityProto = entityFromEntityProto;
  *
  * @example
  * entityToEntityProto({
- *   name: 'Burcu',
- *   legit: true
+ *   excludeFromIndexes: [
+ *     'name'
+ *   ],
+ *   data: {
+ *     name: 'Burcu',
+ *     legit: true
+ *   }
  * });
  * // {
  * //   key: null,
  * //   properties: {
  * //     name: {
  * //       stringValue: 'Burcu'
+ * //       excludeFromIndexes: true
  * //     },
  * //     legit: {
  * //       booleanValue: true
@@ -378,14 +384,64 @@ entity.entityFromEntityProto = entityFromEntityProto;
  * // }
  */
 function entityToEntityProto(entityObject) {
-  return {
+  var properties = entityObject.data;
+  var excludeFromIndexes = entityObject.excludeFromIndexes;
+
+  var entityProto = {
     key: null,
 
-    properties: Object.keys(entityObject).reduce(function(properties, key) {
-      properties[key] = entity.encodeValue(entityObject[key]);
-      return properties;
+    properties: Object.keys(properties).reduce(function(encoded, key) {
+      encoded[key] = entity.encodeValue(properties[key]);
+      return encoded;
     }, {})
   };
+
+  function excludePathFromEntity(entity, path) {
+    var arrayIndex = path.indexOf('[]');
+    var entityIndex = path.indexOf('.');
+
+    var hasArrayPath = arrayIndex > -1;
+    var hasEntityPath = entityIndex > -1;
+
+    if (!hasArrayPath && !hasEntityPath) {
+      // This is the property to exclude!
+      entity.properties[path].excludeFromIndexes = true;
+      return;
+    }
+
+    var delimiterIndex;
+    if (hasArrayPath && hasEntityPath) {
+      delimiterIndex = Math.min(arrayIndex, entityIndex);
+    } else {
+      delimiterIndex = Math.max(arrayIndex, entityIndex);
+    }
+
+    var firstPathPartIsArray = delimiterIndex === arrayIndex;
+    var firstPathPartIsEntity = delimiterIndex === entityIndex;
+
+    var delimiter = firstPathPartIsArray ? '[]' : '.';
+    var splitPath = path.split(delimiter);
+    var firstPathPart = splitPath.shift();
+    var remainderPath = splitPath.join(delimiter).replace(/^(\.|[])/, '');
+
+    if (firstPathPartIsArray) {
+      var array = entity.properties[firstPathPart].arrayValue;
+      array.values.forEach(function(arrayValue) {
+        excludePathFromEntity(arrayValue.entityValue, remainderPath);
+      });
+    } else if (firstPathPartIsEntity) {
+      var parentEntity = entity.properties[firstPathPart].entityValue;
+      excludePathFromEntity(parentEntity, remainderPath);
+    }
+  }
+
+  if (excludeFromIndexes && excludeFromIndexes.length > 0) {
+    excludeFromIndexes.forEach(function(excludePath) {
+      excludePathFromEntity(entityProto, excludePath);
+    });
+  }
+
+  return entityProto;
 }
 
 entity.entityToEntityProto = entityToEntityProto;

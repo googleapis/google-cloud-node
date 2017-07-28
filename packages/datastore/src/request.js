@@ -951,7 +951,7 @@ DatastoreRequest.prototype.save = function(entities, callback) {
           return acc;
         }, {});
       } else {
-        entityProto = entity.entityToEntityProto(entityObject.data);
+        entityProto = entity.entityToEntityProto(entityObject);
       }
 
       entityProto.key = entity.keyToKeyProto(entityObject.key);
