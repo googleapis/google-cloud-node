@@ -127,7 +127,7 @@ ConnectionPool.prototype.createConnection = function() {
 
     connection.on('data', function(data) {
       arrify(data.receivedMessages).forEach(function(message) {
-        self.emit('message', self.createMessage_(id, message));
+        self.emit('message', self.createMessage(id, message));
       });
     });
 
@@ -139,7 +139,7 @@ ConnectionPool.prototype.createConnection = function() {
       self.connections.delete(id);
 
       if (self.isOpen) {
-        self.createConnection(id);
+        self.createConnection();
       }
     });
 
@@ -159,7 +159,7 @@ ConnectionPool.prototype.createConnection = function() {
 /**
  *
  */
-ConnectionPool.prototype.createMessage_ = function(connectionId, resp) {
+ConnectionPool.prototype.createMessage = function(connectionId, resp) {
   var self = this;
 
   var pt = resp.message.publishTime;
