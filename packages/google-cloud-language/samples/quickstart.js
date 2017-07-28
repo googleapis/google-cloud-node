@@ -19,21 +19,21 @@
 // Imports the Google Cloud client library
 const Language = require('@google-cloud/language');
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
-
 // Instantiates a client
-const language = Language({
-  projectId: projectId
-});
+const language = Language();
 
 // The text to analyze
 const text = 'Hello, world!';
 
+const document = {
+  'content': text,
+  type: 'PLAIN_TEXT'
+};
+
 // Detects the sentiment of the text
-language.detectSentiment(text)
+language.analyzeSentiment({'document': document})
   .then((results) => {
-    const sentiment = results[0];
+    const sentiment = results[0].documentSentiment;
 
     console.log(`Text: ${text}`);
     console.log(`Sentiment score: ${sentiment.score}`);

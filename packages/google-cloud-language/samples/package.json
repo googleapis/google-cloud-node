@@ -23,7 +23,7 @@
     "test": "npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/language": "0.10.5",
+    "@google-cloud/language": "0.11.0",
     "@google-cloud/storage": "1.1.1",
     "yargs": "8.0.2"
   },
