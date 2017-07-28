@@ -186,7 +186,8 @@ describe('metadata', function() {
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
-              IS_APP_ENGINE: true
+              IS_APP_ENGINE: true,
+              IS_COMPUTE_ENGINE: true
             });
           };
 
@@ -209,7 +210,8 @@ describe('metadata', function() {
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
-              IS_CLOUD_FUNCTION: true
+              IS_CLOUD_FUNCTION: true,
+              IS_COMPUTE_ENGINE: true
             });
           };
 
@@ -255,6 +257,7 @@ describe('metadata', function() {
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
+              IS_COMPUTE_ENGINE: true,
               IS_CONTAINER_ENGINE: true
             });
           };
