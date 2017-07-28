@@ -53,7 +53,6 @@ var Publisher = require('./publisher.js');
 function Topic(pubsub, name, options) {
   this.name = Topic.formatName_(pubsub.projectId, name);
   this.pubsub = pubsub;
-  this.projectId = pubsub.projectId;
   this.request = pubsub.request.bind(pubsub);
 
   /**
@@ -347,16 +346,8 @@ Topic.prototype.getSubscriptions = function(options, callback) {
 
     if (subscriptions) {
       arguments[1] = subscriptions.map(function(sub) {
-        // Depending on if we're using a subscriptions.list or
-        // topics.subscriptions.list API endpoint, we will get back a
-        // Subscription resource or just the name of the subscription.
-        var subscriptionInstance = self.subscription(sub.name || sub);
-
-        if (sub.name) {
-          subscriptionInstance.metadata = sub;
-        }
-
-        return subscriptionInstance;
+        // ListTopicSubscriptions only returns sub names
+        return self.subscription(sub);
       });
     }
 
@@ -429,6 +420,14 @@ Topic.prototype.subscription = function(name, options) {
 
   return this.pubsub.subscription(name, options);
 };
+
+/*! Developer Documentation
+ *
+ * These methods can be agto-paginated.
+ */
+common.paginator.extend(Topic, [
+  'getSubscriptions'
+]);
 
 /*! Developer Documentation
  *
