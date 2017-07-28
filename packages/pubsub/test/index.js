@@ -104,7 +104,7 @@ var GAX_CONFIG = {
   }
 };
 
-describe.only('PubSub', function() {
+describe('PubSub', function() {
   var PubSub;
   var PROJECT_ID = 'test-project';
   var pubsub;

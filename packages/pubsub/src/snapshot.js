@@ -89,7 +89,6 @@ var is = require('is');
  */
 function Snapshot(parent, name) {
   this.parent = parent;
-  this.api = parent.api;
   this.name = Snapshot.formatName_(parent.projectId, name);
 
   if (is.fn(parent.createSnapshot)) {
