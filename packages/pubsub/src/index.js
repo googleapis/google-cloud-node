@@ -73,15 +73,7 @@ function PubSub(options) {
     scopes: v1.ALL_SCOPES
   }, options);
 
-  this.defaultBaseUrl_ = 'pubsub.googleapis.com';
-
-  if (options.servicePath) {
-    this.defaultBaseUrl_ = options.servicePath;
-
-    if (options.port) {
-      this.defaultBaseUrl_ += ':' + options.port;
-    }
-  }
+  this.determineBaseUrl_();
 
   this.api = {};
   this.auth = googleAuth(this.options);
@@ -106,8 +98,6 @@ function PubSub(options) {
  *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
  * @param {number} options.ackDeadlineSeconds - The maximum time after receiving
  *     a message that you must ack a message before it is redelivered.
- * @param {string} options.encoding - When pulling for messages, this type is
- *     used when converting a message's data to a string. (default: 'utf-8')
  * @param {number|date} options.messageRetentionDuration - Set this to override
  *     the default duration of 7 days. This value is expected in seconds.
  *     Acceptable values are in the range of 10 minutes and 7 days.
@@ -173,6 +163,8 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
     options = {};
   }
 
+  options = options || {};
+
   var subscription = this.subscription(name, options);
 
   var reqOpts = extend({
@@ -182,18 +174,20 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
 
   delete reqOpts.gaxOpts;
 
-  if (reqOpts.messageRetentionDuration) {
+  if (options.messageRetentionDuration) {
     reqOpts.retainAckedMessages = true;
 
     reqOpts.messageRetentionDuration = {
-      seconds: reqOpts.messageRetentionDuration,
+      seconds: options.messageRetentionDuration,
       nanos: 0
     };
   }
 
-  if (reqOpts.pushEndpoint) {
+  if (options.pushEndpoint) {
+    delete reqOpts.pushEndpoint;
+
     reqOpts.pushConfig = {
-      pushEndpoint: reqOpts.pushEndpoint
+      pushEndpoint: options.pushEndpoint
     };
   }
 
@@ -266,6 +260,34 @@ PubSub.prototype.createTopic = function(name, gaxOpts, callback) {
     topic.metadata = resp;
     callback(null, topic, resp);
   });
+};
+
+/**
+ * Determine the appropriate endpoint to use for API requests, first trying the
+ * local `apiEndpoint` parameter. If the `apiEndpoint` parameter is null we try
+ * Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise the
+ * default JSON API.
+ *
+ * @private
+ */
+PubSub.prototype.determineBaseUrl_ = function() {
+  var apiEndpoint = this.options.apiEndpoint;
+
+  if (!apiEndpoint && !process.env.PUBSUB_EMULATOR_HOST) {
+    return;
+  }
+
+  var baseUrl = apiEndpoint || process.env.PUBSUB_EMULATOR_HOST;
+  var leadingProtocol = new RegExp('^https*://');
+  var trailingSlashes = new RegExp('/*$');
+
+  var baseUrlParts = baseUrl
+    .replace(leadingProtocol, '')
+    .replace(trailingSlashes, '')
+    .split(':');
+
+  this.options.servicePath = baseUrlParts[0];
+  this.options.port = baseUrlParts[1];
 };
 
 /**
@@ -651,6 +673,10 @@ PubSub.prototype.request = function(config, callback) {
   }
 
   function prepareGaxRequest(callback) {
+    if (global.GCLOUD_SANDBOX_ENV) {
+      return;
+    }
+
     self.auth.getProjectId(function(err, projectId) {
       if (err) {
         callback(err);
@@ -679,10 +705,6 @@ PubSub.prototype.request = function(config, callback) {
   }
 
   function makeRequestCallback() {
-    if (global.GCLOUD_SANDBOX_ENV) {
-      return;
-    }
-
     prepareGaxRequest(function(err, requestFn) {
       if (err) {
         callback(err);
