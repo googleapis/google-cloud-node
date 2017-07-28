@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'speech.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.10.0';
 
 var STREAM_DESCRIPTORS = {
   streamingRecognize: new gax.StreamDescriptor(gax.StreamType.BIDI_STREAMING)
@@ -271,6 +271,23 @@ SpeechClient.prototype.recognize = function(request, options, callback) {
  * .catch(function(err) {
  *     console.error(err);
  * });
+ *
+ * var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
+ * var sampleRateHertz = 44100;
+ * var languageCode = 'en-US';
+ * var config = {
+ *     encoding : encoding,
+ *     sampleRateHertz : sampleRateHertz,
+ *     languageCode : languageCode
+ * };
+ * var uri = 'gs://bucket_name/file_name.flac';
+ * var audio = {
+ *     uri : uri
+ * };
+ * var request = {
+ *     config: config,
+ *     audio: audio
+ * };
  *
  * // Handle the operation using the event emitter pattern.
  * client.longRunningRecognize(request).then(function(responses) {
