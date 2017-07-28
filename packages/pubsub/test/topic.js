@@ -60,7 +60,7 @@ var fakePaginator = {
   }
 };
 
-describe.only('Topic', function() {
+describe('Topic', function() {
   var Topic;
   var topic;
 

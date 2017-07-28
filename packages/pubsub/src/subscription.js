@@ -152,12 +152,11 @@ function Subscription(pubsub, name, options) {
   this.request = pubsub.request.bind(pubsub);
   this.histogram = new Histogram();
 
-  this.projectId = pubsub.projectId;
   this.name = Subscription.formatName_(pubsub.projectId, name);
 
   this.connectionPool = null;
   this.ackDeadline = options.ackDeadline || 10000;
-  this.maxConnections = options.maxConnections;
+  this.maxConnections = options.maxConnections || 5;
 
   this.inventory_ = {
     lease: [],
@@ -176,6 +175,7 @@ function Subscription(pubsub, name, options) {
   this.userClosed_ = false;
 
   events.EventEmitter.call(this);
+  this.messageListeners = 0;
 
   if (options.topic) {
     this.create = pubsub.createSubscription.bind(pubsub, options.topic, name);
@@ -268,7 +268,7 @@ Subscription.prototype.ack_ = function(message) {
 Subscription.prototype.breakLease_ = function(message) {
   var messageIndex = this.inventory_.lease.indexOf(message.ackId);
 
-  this.inventory_.lease.splice(0, messageIndex);
+  this.inventory_.lease.splice(messageIndex, 1);
   this.inventory_.bytes -= message.data.length;
 
   if (this.connectionPool) {
@@ -303,10 +303,8 @@ Subscription.prototype.close = function(callback) {
  *
  */
 Subscription.prototype.closeConnection_ = function(callback) {
-  callback = callback || common.util.noop;
-
   if (this.connectionPool) {
-    this.connectionPool.close(callback);
+    this.connectionPool.close(callback || common.util.noop);
     this.connectionPool = null;
   } else if (is.fn(callback)) {
     setImmediate(callback);
@@ -563,7 +561,7 @@ Subscription.prototype.listenForEvents_ = function() {
     if (event === 'message') {
       self.messageListeners++;
 
-      if (!self.connection) {
+      if (!self.connectionPool) {
         self.userClosed_ = false;
         self.openConnection_();
       }
@@ -612,6 +610,8 @@ Subscription.prototype.nack_ = function(message) {
     this.setFlushTimeout_();
     return;
   }
+
+  var self = this;
 
   this.connectionPool.acquire(message.connectionId, function(err, connection) {
     if (err) {
@@ -684,24 +684,21 @@ Subscription.prototype.renewLeases_ = function() {
         modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
       });
     });
-
-    this.setLeaseTimeout_();
-    return;
+  } else {
+    this.request({
+      client: 'subscriberClient',
+      method: 'modifyAckDeadline',
+      reqOpts: {
+        subscription: self.name,
+        ackIds: ackIds,
+        ackDeadlineSeconds: ackDeadlineSeconds
+      }
+    }, function(err) {
+      if (err) {
+        self.emit('error', err);
+      }
+    });
   }
-
-  this.request({
-    client: 'subscriberClient',
-    method: 'modifyAckDeadline',
-    reqOpts: {
-      subscription: self.name,
-      ackIds: ackIds,
-      ackDeadlineSeconds: ackDeadlineSeconds
-    }
-  }, function(err) {
-    if (err) {
-      self.emit('error', err);
-    }
-  });
 
   this.setLeaseTimeout_();
 };
