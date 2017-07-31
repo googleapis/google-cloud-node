@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2017, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,24 +19,26 @@
 // Imports the Google Cloud client library
 const Vision = require('@google-cloud/vision');
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
-
 // Instantiates a client
-const visionClient = Vision({
-  projectId: projectId
-});
+const vision = Vision();
 
 // The name of the image file to annotate
 const fileName = './resources/wakeupcat.jpg';
 
+// Prepare the request object
+const request = {
+  source: {
+    filename: fileName
+  }
+};
+
 // Performs label detection on the image file
-visionClient.detectLabels(fileName)
+vision.labelDetection(request)
   .then((results) => {
-    const labels = results[0];
+    const labels = results[0].labelAnnotations;
 
     console.log('Labels:');
-    labels.forEach((label) => console.log(label));
+    labels.forEach((label) => console.log(label.description));
   })
   .catch((err) => {
     console.error('ERROR:', err);

@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@google-cloud/storage": "1.1.0",
-    "@google-cloud/vision": "0.11.2",
+    "@google-cloud/vision": "^0.12.0",
     "async": "2.3.0",
     "natural": "0.5.1",
     "redis": "2.7.1",
