@@ -329,7 +329,7 @@ describe('PubSub', function() {
 
     it('should pass options to the api request', function(done) {
       var options = {
-        ackDeadlineSeconds: 90,
+        ackDeadline: 90000,
         retainAckedMessages: true,
         pushEndpoint: 'https://domain/push',
       };
@@ -340,9 +340,11 @@ describe('PubSub', function() {
       }, options, {
         pushConfig: {
           pushEndpoint: options.pushEndpoint
-        }
+        },
+        ackDeadlineSeconds: options.ackDeadline / 1000
       });
 
+      delete expectedBody.ackDeadline;
       delete expectedBody.pushEndpoint;
 
       pubsub.topic = function() {
