@@ -17,9 +17,21 @@
 'use strict';
 
 var assert = require('assert');
+var common = require('@google-cloud/common');
+var extend = require('extend');
+var proxyquire = require('proxyquire');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Snapshot') {
+      promisified = true;
+    }
+  }
+});
 
 describe('Snapshot', function() {
-  var Snapshot = require('../src/snapshot.js');
+  var Snapshot;
   var snapshot;
 
   var SNAPSHOT_NAME = 'a';
@@ -32,6 +44,18 @@ describe('Snapshot', function() {
     seek: function() {}
   };
 
+  before(function() {
+    Snapshot = proxyquire('../src/snapshot.js', {
+      '@google-cloud/common': {
+        util: fakeUtil
+      }
+    });
+  });
+
+  beforeEach(function() {
+    snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
+  });
+
   describe('initialization', function() {
     var FULL_SNAPSHOT_NAME = 'a/b/c/d';
     var formatName_;
@@ -43,12 +67,12 @@ describe('Snapshot', function() {
       };
     });
 
-    beforeEach(function() {
-      snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
-    });
-
     after(function() {
       Snapshot.formatName_ = formatName_;
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should localize the parent', function() {
