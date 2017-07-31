@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var flatten = require('lodash.flatten');
+var is = require('is');
 var prop = require('propprop');
 var util = require('util');
 
@@ -57,7 +58,7 @@ function Transaction(datastore) {
   this.projectId = datastore.projectId;
   this.namespace = datastore.namespace;
 
-  this.request = datastore.request.bind(datastore);
+  this.request = datastore.request_.bind(datastore);
 
   // A queue for entity modifications made during the transaction.
   this.modifiedEntities_ = [];
@@ -86,6 +87,8 @@ util.inherits(Transaction, Request);
  *
  * If the commit request fails, we will automatically rollback the transaction.
  *
+ * @param {object=} gaxOptions - Request configuration options, outlined here:
+ *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  *   If the commit fails, we automatically try to rollback the transaction (see
@@ -106,8 +109,13 @@ util.inherits(Transaction, Request);
  *   var apiResponse = data[0];
  * });
  */
-Transaction.prototype.commit = function(callback) {
+Transaction.prototype.commit = function(gaxOptions, callback) {
   var self = this;
+
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
 
   callback = callback || common.util.noop;
 
@@ -175,18 +183,18 @@ Transaction.prototype.commit = function(callback) {
       Request.prototype[method].call(self, args, common.util.noop);
     });
 
-  var protoOpts = {
-    service: 'Datastore',
-    method: 'commit'
-  };
-
   // Take the `req` array built previously, and merge them into one request to
   // send as the final transactional commit.
   var reqOpts = {
     mutations: flatten(this.requests_.map(prop('mutations')))
   };
 
-  this.request_(protoOpts, reqOpts, function(err, resp) {
+  this.request_({
+    client: 'datastoreClient',
+    method: 'commit',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOptions
+  }, function(err, resp) {
     if (err) {
       // Rollback automatically for the user.
       self.rollback(function() {
@@ -292,6 +300,8 @@ Transaction.prototype.delete = function(entities) {
 /**
  * Reverse a transaction remotely and finalize the current transaction instance.
  *
+ * @param {object=} gaxOptions - Request configuration options, outlined here:
+ *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -316,17 +326,21 @@ Transaction.prototype.delete = function(entities) {
  *   var apiResponse = data[0];
  * });
  */
-Transaction.prototype.rollback = function(callback) {
+Transaction.prototype.rollback = function(gaxOptions, callback) {
   var self = this;
+
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
 
   callback = callback || common.util.noop;
 
-  var protoOpts = {
-    service: 'Datastore',
-    method: 'rollback'
-  };
-
-  this.request_(protoOpts, function(err, resp) {
+  this.request_({
+    client: 'datastoreClient',
+    method: 'rollback',
+    gaxOpts: gaxOptions
+  }, function(err, resp) {
     self.skipCommit = true;
 
     callback(err || null, resp);
@@ -337,6 +351,8 @@ Transaction.prototype.rollback = function(callback) {
  * Begin a remote transaction. In the callback provided, run your transactional
  * commands.
  *
+ * @param {object=} gaxOptions - Request configuration options, outlined here:
+ *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
  * @param {function} callback - The function to execute within the context of
  *     a transaction.
  * @param {?error} callback.err - An error returned while making this request.
@@ -373,17 +389,21 @@ Transaction.prototype.rollback = function(callback) {
  *   var apiResponse = data[1];
  * });
  */
-Transaction.prototype.run = function(callback) {
+Transaction.prototype.run = function(gaxOptions, callback) {
   var self = this;
+
+  if (is.fn(gaxOptions)) {
+    callback = gaxOptions;
+    gaxOptions = {};
+  }
 
   callback = callback || common.util.noop;
 
-  var protoOpts = {
-    service: 'Datastore',
-    method: 'beginTransaction'
-  };
-
-  this.request_(protoOpts, function(err, resp) {
+  this.request_({
+    client: 'datastoreClient',
+    method: 'beginTransaction',
+    gaxOpts: gaxOptions
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

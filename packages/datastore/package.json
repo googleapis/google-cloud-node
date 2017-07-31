@@ -52,26 +52,27 @@
   ],
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
-    "@google-cloud/common-grpc": "^0.4.0",
     "arrify": "^1.0.0",
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.0",
+    "google-auto-auth": "^0.7.1",
     "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",
+    "grpc": "^1.4.1",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
-    "modelo": "^4.2.0",
     "prop-assign": "^1.0.0",
     "propprop": "^0.3.0",
-    "split-array-stream": "^1.0.0"
+    "split-array-stream": "^1.0.0",
+    "stream-events": "^1.0.1"
   },
   "devDependencies": {
     "async": "^2.0.1",
     "deep-strict-equal": "^0.2.0",
     "mocha": "^3.0.1",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.6",
+    "sinon": "^2.3.8",
     "through2": "^2.0.0"
   },
   "scripts": {

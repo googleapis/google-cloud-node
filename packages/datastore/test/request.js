@@ -18,10 +18,10 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var grpc = require('grpc');
 var is = require('is');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
-var stream = require('stream');
 var through = require('through2');
 var util = require('@google-cloud/common').util;
 
@@ -36,6 +36,11 @@ var fakeUtil = extend({}, util, {
     }
   }
 });
+
+var v1Override;
+function fakeV1() {
+  return (v1Override || util.noop).apply(null, arguments);
+}
 
 var overrides = {};
 
@@ -86,13 +91,15 @@ describe('Request', function() {
         util: fakeUtil
       },
       './entity.js': entity,
-      './query.js': FakeQuery
+      './query.js': FakeQuery,
+      './v1': fakeV1
     });
 
     override('Request', Request);
   });
 
   after(function() {
+    v1Override = null;
     resetOverrides();
   });
 
@@ -102,6 +109,7 @@ describe('Request', function() {
       path: ['Company', 123]
     });
     FakeQuery.prototype = new Query();
+    v1Override = null;
     resetOverrides();
     request = new Request();
   });
@@ -149,86 +157,130 @@ describe('Request', function() {
   });
 
   describe('allocateIds', function() {
-    var incompleteKey;
-    var apiResponse = {
-      keys: [
-        { path: [{ id_type: 'id', kind: 'Kind', id: 123 }] }
-      ]
+    var INCOMPLETE_KEY = {};
+
+    var ALLOCATIONS = 2;
+    var OPTIONS = {
+      allocations: ALLOCATIONS
     };
 
     beforeEach(function() {
-      incompleteKey = new entity.Key({ namespace: null, path: ['Kind'] });
+      overrides.entity.isKeyComplete = util.noop;
+      overrides.entity.keyToKeyProto = util.noop;
     });
 
-    it('should produce proper allocate IDs req protos', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'allocateIds');
-
-        assert.equal(reqOpts.keys.length, 1);
-
-        callback(null, apiResponse);
+    it('should throw if the key is complete', function() {
+      overrides.entity.isKeyComplete = function(key) {
+        assert.strictEqual(key, INCOMPLETE_KEY);
+        return true;
       };
 
-      request.allocateIds(incompleteKey, 1, function(err, keys) {
-        assert.ifError(err);
-        var generatedKey = keys[0];
-        assert.strictEqual(generatedKey.path.pop(), '123');
-        done();
-      });
-    });
-
-    it('should exec callback with error & API response', function(done) {
-      var error = new Error('Error.');
-
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      request.allocateIds(incompleteKey, 1, function(err, keys, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(keys, null);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should return apiResponse in callback', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        callback(null, apiResponse);
-      };
-
-      request.allocateIds(incompleteKey, 1, function(err, keys, apiResponse_) {
-        assert.ifError(err);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should throw if trying to allocate IDs with complete keys', function() {
       assert.throws(function() {
-        request.allocateIds(key);
+        request.allocateIds(INCOMPLETE_KEY, OPTIONS, assert.ifError);
+      }, new RegExp('An incomplete key should be provided.'));
+    });
+
+    it('should make the correct request', function(done) {
+      var keyProto = {};
+
+      overrides.entity.keyToKeyProto = function(key) {
+        assert.strictEqual(key, INCOMPLETE_KEY);
+        return keyProto;
+      };
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'allocateIds');
+
+        var expectedKeys = [];
+        expectedKeys.length = ALLOCATIONS;
+        expectedKeys.fill(keyProto);
+
+        assert.deepStrictEqual(config.reqOpts.keys, expectedKeys);
+
+        assert.strictEqual(config.gaxOpts, undefined);
+
+        done();
+      };
+
+      request.allocateIds(INCOMPLETE_KEY, OPTIONS, assert.ifError);
+    });
+
+    it('should allow a numeric shorthand for allocations', function(done) {
+      request.request_ = function(config) {
+        assert.strictEqual(config.reqOpts.keys.length, ALLOCATIONS);
+        done();
+      };
+
+      request.allocateIds(INCOMPLETE_KEY, ALLOCATIONS, assert.ifError);
+    });
+
+    it('should allow customization of GAX options', function(done) {
+      var options = extend({}, OPTIONS, {
+        gaxOptions: {}
+      });
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, options.gaxOptions);
+        done();
+      };
+
+      request.allocateIds(INCOMPLETE_KEY, options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var ERROR = new Error('Error.');
+      var API_RESPONSE = {};
+
+      beforeEach(function() {
+        request.request_ = function(config, callback) {
+          callback(ERROR, API_RESPONSE);
+        };
+      });
+
+      it('should exec callback with error & API response', function(done) {
+        request.allocateIds(INCOMPLETE_KEY, OPTIONS, function(err, keys, resp) {
+          assert.strictEqual(err, ERROR);
+          assert.strictEqual(keys, null);
+          assert.strictEqual(resp, API_RESPONSE);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var KEY = {};
+      var API_RESPONSE = {
+        keys: [KEY]
+      };
+
+      beforeEach(function() {
+        request.request_ = function(config, callback) {
+          callback(null, API_RESPONSE);
+        };
+      });
+
+      it('should create and return Keys & API response', function(done) {
+        var key = {};
+
+        overrides.entity.keyFromKeyProto = function(keyProto) {
+          assert.strictEqual(keyProto, API_RESPONSE.keys[0]);
+          return key;
+        };
+
+        request.allocateIds(INCOMPLETE_KEY, OPTIONS, function(err, keys, resp) {
+          assert.ifError(err);
+          assert.deepStrictEqual(keys, [key]);
+          assert.strictEqual(resp, API_RESPONSE);
+          done();
+        });
       });
     });
   });
 
   describe('createReadStream', function() {
     beforeEach(function() {
-      request.request_ = function() {};
-
-      overrides.util.createLimiter = function(makeRequest) {
-        var transformStream = new stream.Transform({ objectMode: true });
-        transformStream.destroy = through.obj().destroy.bind(transformStream);
-
-        setImmediate(function() {
-          transformStream.emit('reading');
-        });
-
-        return {
-          makeRequest: makeRequest,
-          stream: transformStream
-        };
-      };
+      request.request_ = util.noop;
     });
 
     it('should throw if no keys are provided', function() {
@@ -246,56 +298,59 @@ describe('Request', function() {
       request.createReadStream(key).on('error', done);
     });
 
-    it('should create a limiter', function(done) {
-      var options = {};
+    it('should make correct request when stream is ready', function(done) {
+      request.request_ = function(config) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'lookup');
 
-      overrides.util.createLimiter = function(makeRequest, options_) {
-        assert.strictEqual(options_, options);
-
-        setImmediate(done);
-
-        return {
-          makeRequest: makeRequest,
-          stream: through()
-        };
-      };
-
-      request.createReadStream(key, options).on('error', done);
-    });
-
-    it('should make correct request', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'lookup');
-
-        assert.deepEqual(reqOpts.keys[0], entity.keyToKeyProto(key));
+        assert.deepEqual(config.reqOpts.keys[0], entity.keyToKeyProto(key));
 
         done();
       };
 
-      request.createReadStream(key).on('error', done);
+      var stream = request.createReadStream(key);
+
+      stream.emit('reading');
+    });
+
+    it('should allow customization of GAX options', function(done) {
+      var options = {
+        gaxOptions: {}
+      };
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, options.gaxOptions);
+        done();
+      };
+
+      request
+        .createReadStream(key, options)
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should allow setting strong read consistency', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.readOptions.readConsistency, 1);
+      request.request_ = function(config) {
+        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 1);
         done();
       };
 
       request
         .createReadStream(key, { consistency: 'strong' })
-        .on('error', done);
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should allow setting strong eventual consistency', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.readOptions.readConsistency, 2);
+      request.request_ = function(config) {
+        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 2);
         done();
       };
 
       request
         .createReadStream(key, { consistency: 'eventual' })
-        .on('error', done);
+        .on('error', done)
+        .emit('reading');
     });
 
     describe('error', function() {
@@ -303,7 +358,7 @@ describe('Request', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           setImmediate(function() {
             callback(error, apiResponse);
           });
@@ -395,15 +450,8 @@ describe('Request', function() {
       ];
 
       beforeEach(function() {
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           callback(null, apiResponse);
-        };
-
-        overrides.util.createLimiter = function(makeRequest) {
-          return {
-            makeRequest: makeRequest,
-            stream: new stream.Transform({ objectMode: true })
-          };
         };
       });
 
@@ -423,7 +471,7 @@ describe('Request', function() {
       it('should continue looking for deferred results', function(done) {
         var numTimesCalled = 0;
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           numTimesCalled++;
 
           if (numTimesCalled === 1) {
@@ -435,7 +483,7 @@ describe('Request', function() {
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
 
-          assert.deepEqual(reqOpts.keys, expectedKeys);
+          assert.deepEqual(config.reqOpts.keys, expectedKeys);
           done();
         };
 
@@ -458,7 +506,7 @@ describe('Request', function() {
       it('should not push more results if stream was ended', function(done) {
         var entitiesEmitted = 0;
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           setImmediate(function() {
             callback(null, apiResponseWithMultiEntities);
           });
@@ -479,7 +527,7 @@ describe('Request', function() {
       it('should not get more results if stream was ended', function(done) {
         var lookupCount = 0;
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           lookupCount++;
           setImmediate(function() {
             callback(null, apiResponseWithDeferred);
@@ -502,10 +550,10 @@ describe('Request', function() {
 
   describe('delete', function() {
     it('should delete by key', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'commit');
-        assert(is.object(reqOpts.mutations[0].delete));
+      request.request_ = function(config, callback) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'commit');
+        assert(is.object(config.reqOpts.mutations[0].delete));
         callback();
       };
       request.delete(key, done);
@@ -513,7 +561,7 @@ describe('Request', function() {
 
     it('should return apiResponse in callback', function(done) {
       var resp = { success: true };
-      request.request_ = function(protoOpts, reqOpts, callback) {
+      request.request_ = function(config, callback) {
         callback(null, resp);
       };
       request.delete(key, function(err, apiResponse) {
@@ -524,11 +572,22 @@ describe('Request', function() {
     });
 
     it('should multi delete by keys', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.equal(reqOpts.mutations.length, 2);
+      request.request_ = function(config, callback) {
+        assert.equal(config.reqOpts.mutations.length, 2);
         callback();
       };
       request.delete([ key, key ], done);
+    });
+
+    it('should allow customization of GAX options', function(done) {
+      var gaxOptions = {};
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      request.delete(key, gaxOptions, assert.ifError);
     });
 
     describe('transactions', function() {
@@ -679,40 +738,6 @@ describe('Request', function() {
     beforeEach(function() {
       overrides.entity.queryToQueryProto = util.noop;
       request.request_ = util.noop;
-
-      overrides.util.createLimiter = function(makeRequest) {
-        var transformStream = new stream.Transform({ objectMode: true });
-        transformStream.destroy = through.obj().destroy.bind(transformStream);
-
-        setImmediate(function() {
-          transformStream.emit('reading');
-        });
-
-        return {
-          makeRequest: makeRequest,
-          stream: transformStream
-        };
-      };
-    });
-
-    it('should create a limiter', function(done) {
-      var options = {};
-
-      overrides.util.createLimiter = function(makeRequest, options_) {
-        assert.strictEqual(options_, options);
-
-        setImmediate(done);
-
-        return {
-          makeRequest: makeRequest,
-          stream: through()
-        };
-      };
-
-      request
-        .runQueryStream({}, options)
-        .on('error', done)
-        .emit('reading');
     });
 
     it('should clone the query', function(done) {
@@ -732,7 +757,7 @@ describe('Request', function() {
         .emit('reading');
     });
 
-    it('should make correct request', function(done) {
+    it('should make correct request when the stream is ready', function(done) {
       var query = { namespace: 'namespace' };
       var queryProto = {};
 
@@ -740,12 +765,16 @@ describe('Request', function() {
         return queryProto;
       };
 
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'runQuery');
-        assert(is.empty(reqOpts.readOptions));
-        assert.strictEqual(reqOpts.query, queryProto);
-        assert.strictEqual(reqOpts.partitionId.namespaceId, query.namespace);
+      request.request_ = function(config) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'runQuery');
+        assert(is.empty(config.reqOpts.readOptions));
+        assert.strictEqual(config.reqOpts.query, queryProto);
+        assert.strictEqual(
+          config.reqOpts.partitionId.namespaceId,
+          query.namespace
+        );
+        assert.strictEqual(config.gaxOpts, undefined);
 
         done();
       };
@@ -756,9 +785,25 @@ describe('Request', function() {
         .emit('reading');
     });
 
+    it('should allow customization of GAX options', function(done) {
+      var options = {
+        gaxOptions: {}
+      };
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, options.gaxOptions);
+        done();
+      };
+
+      request
+        .runQueryStream({}, options)
+        .on('error', done)
+        .emit('reading');
+    });
+
     it('should allow setting strong read consistency', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.readOptions.readConsistency, 1);
+      request.request_ = function(config) {
+        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 1);
         done();
       };
 
@@ -769,8 +814,8 @@ describe('Request', function() {
     });
 
     it('should allow setting strong eventual consistency', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.readOptions.readConsistency, 2);
+      request.request_ = function(config) {
+        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 2);
         done();
       };
 
@@ -784,7 +829,7 @@ describe('Request', function() {
       var error = new Error('Error.');
 
       beforeEach(function() {
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           callback(error);
         };
       });
@@ -794,7 +839,8 @@ describe('Request', function() {
           .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
-          });
+          })
+          .emit('reading');
       });
     });
 
@@ -814,7 +860,7 @@ describe('Request', function() {
       };
 
       beforeEach(function() {
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           callback(null, apiResponse);
         };
 
@@ -866,7 +912,7 @@ describe('Request', function() {
           return entityResultsPerApiCall[timesRequestCalled];
         };
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           timesRequestCalled++;
 
           var resp = extend(true, {}, apiResponse);
@@ -874,8 +920,8 @@ describe('Request', function() {
             entityResultsPerApiCall[timesRequestCalled];
 
           if (timesRequestCalled === 1) {
-            assert.strictEqual(protoOpts.service, 'Datastore');
-            assert.strictEqual(protoOpts.method, 'runQuery');
+            assert.strictEqual(config.client, 'datastoreClient');
+            assert.strictEqual(config.method, 'runQuery');
 
             resp.batch.moreResults = 'NOT_FINISHED';
 
@@ -883,7 +929,7 @@ describe('Request', function() {
           } else {
             assert.strictEqual(startCalled, true);
             assert.strictEqual(offsetCalled, true);
-            assert.strictEqual(reqOpts.query, queryProto);
+            assert.strictEqual(config.reqOpts.query, queryProto);
 
             resp.batch.moreResults = 'MORE_RESULTS_AFTER_LIMIT';
 
@@ -959,7 +1005,7 @@ describe('Request', function() {
           limitVal: -1
         };
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           var batch;
 
           if (++timesRequestCalled === 2) {
@@ -998,7 +1044,7 @@ describe('Request', function() {
         var timesRequestCalled = 0;
         var entitiesEmitted = 0;
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           timesRequestCalled++;
 
           var resp = extend(true, {}, apiResponse);
@@ -1028,7 +1074,7 @@ describe('Request', function() {
       it('should not get more results if stream was ended', function(done) {
         var timesRequestCalled = 0;
 
-        request.request_ = function(protoOpts, reqOpts, callback) {
+        request.request_ = function(config, callback) {
           timesRequestCalled++;
           callback(null, apiResponse);
         };
@@ -1178,11 +1224,12 @@ describe('Request', function() {
         ]
       };
 
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'commit');
+      request.request_ = function(config, callback) {
+        assert.strictEqual(config.client, 'datastoreClient');
+        assert.strictEqual(config.method, 'commit');
 
-        assert.deepEqual(reqOpts, expectedReq);
+        assert.deepEqual(config.reqOpts, expectedReq);
+        assert.deepEqual(config.gaxOpts, {});
 
         callback();
       };
@@ -1190,6 +1237,20 @@ describe('Request', function() {
         { key: key, data: { k: 'v' } },
         { key: key, data: { k: 'v' } }
       ], done);
+    });
+
+    it('should allow customization of GAX options', function(done) {
+      var gaxOptions = {};
+
+      request.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      request.save({
+        key: key,
+        data: {}
+      }, gaxOptions, assert.ifError);
     });
 
     it('should prepare entity objects', function(done) {
@@ -1215,19 +1276,19 @@ describe('Request', function() {
     });
 
     it('should save with specific method', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.equal(reqOpts.mutations.length, 3);
-        assert(is.object(reqOpts.mutations[0].insert));
-        assert(is.object(reqOpts.mutations[1].update));
-        assert(is.object(reqOpts.mutations[2].upsert));
+      request.request_ = function(config, callback) {
+        assert.equal(config.reqOpts.mutations.length, 3);
+        assert(is.object(config.reqOpts.mutations[0].insert));
+        assert(is.object(config.reqOpts.mutations[1].update));
+        assert(is.object(config.reqOpts.mutations[2].upsert));
 
-        var insert = reqOpts.mutations[0].insert;
+        var insert = config.reqOpts.mutations[0].insert;
         assert.deepEqual(insert.properties.k, { stringValue: 'v' });
 
-        var update = reqOpts.mutations[1].update;
+        var update = config.reqOpts.mutations[1].update;
         assert.deepEqual(update.properties.k2, { stringValue: 'v2' });
 
-        var upsert = reqOpts.mutations[2].upsert;
+        var upsert = config.reqOpts.mutations[2].upsert;
         assert.deepEqual(upsert.properties.k3, { stringValue: 'v3' });
 
         callback();
@@ -1281,7 +1342,7 @@ describe('Request', function() {
     it('should return apiResponse in callback', function(done) {
       var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
       var mockCommitResponse = {};
-      request.request_ = function(protoOpts, reqOpts, callback) {
+      request.request_ = function(config, callback) {
         callback(null, mockCommitResponse);
       };
       request.save({ key: key, data: {} }, function(err, apiResponse) {
@@ -1292,8 +1353,8 @@ describe('Request', function() {
     });
 
     it('should allow setting the indexed value of a property', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        var property = reqOpts.mutations[0].upsert.properties.name;
+      request.request_ = function(config) {
+        var property = config.reqOpts.mutations[0].upsert.properties.name;
         assert.strictEqual(property.stringValue, 'value');
         assert.strictEqual(property.excludeFromIndexes, true);
         done();
@@ -1312,8 +1373,8 @@ describe('Request', function() {
     });
 
     it('should allow setting the indexed value on arrays', function(done) {
-      request.request_ = function(protoOpts, reqOpts) {
-        var property = reqOpts.mutations[0].upsert.properties.name;
+      request.request_ = function(config) {
+        var property = config.reqOpts.mutations[0].upsert.properties.name;
 
         property.arrayValue.values.forEach(function(value) {
           assert.strictEqual(value.excludeFromIndexes, true);
@@ -1354,7 +1415,7 @@ describe('Request', function() {
         ]
       };
 
-      request.request_ = function(protoOpts, reqOpts, callback) {
+      request.request_ = function(config, callback) {
         callback(null, response);
       };
 
@@ -1486,45 +1547,184 @@ describe('Request', function() {
   });
 
   describe('request_', function() {
+    var CONFIG = {
+      client: 'client',
+      method: 'method',
+      reqOpts: {
+        a: 'b',
+        c: 'd'
+      },
+      gaxOpts: {
+        a: 'b',
+        c: 'd'
+      }
+    };
+
     var PROJECT_ID = 'project-id';
-    var PROTO_OPTS = {};
 
     beforeEach(function() {
-      request.projectId = PROJECT_ID;
-    });
+      request.datastore = {
+        api: {
+          [CONFIG.client]: {
+            [CONFIG.method]: util.noop
+          }
+        },
 
-    it('should not require reqOpts', function(done) {
-      request.request = function(protoOpts, reqOpts, callback) {
-        callback(); // done()
+        auth: {
+          getProjectId: function(callback) {
+            callback(null, PROJECT_ID);
+          }
+        },
+
+        options: {
+          servicePath: 'baseurl',
+          port: 9999
+        }
       };
-
-      request.request_(PROTO_OPTS, done);
     });
 
-    it('should make the correct request', function(done) {
-      var reqOpts = {};
-
-      request.request = function(protoOpts, reqOpts_) {
-        assert.strictEqual(protoOpts, PROTO_OPTS);
-        assert.strictEqual(reqOpts_, reqOpts);
-        assert.strictEqual(reqOpts_.projectId, PROJECT_ID);
+    it('should get the project ID', function(done) {
+      request.datastore.auth.getProjectId = function() {
         done();
       };
 
-      request.request_(PROTO_OPTS, reqOpts, assert.ifError);
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should return error if getting project ID failed', function(done) {
+      var error = new Error('Error.');
+
+      request.datastore.auth.getProjectId = function(callback) {
+        callback(error);
+      };
+
+      request.request_(CONFIG, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should initiate and cache the client', function() {
+      var fakeClient = {
+        [CONFIG.method]: util.noop
+      };
+
+      v1Override = function(options) {
+        assert.deepStrictEqual(options, request.datastore.options);
+
+        return {
+          [CONFIG.client]: function(options) {
+            assert.deepStrictEqual(options, request.datastore.options);
+            return fakeClient;
+          }
+        };
+      };
+
+      request.datastore.api = {};
+
+      request.request_(CONFIG, assert.ifError);
+
+      assert.strictEqual(request.datastore.api[CONFIG.client], fakeClient);
+    });
+
+    it('should use insecure credentials if custom endpoint', function(done) {
+      request.datastore.customEndpoint_ = true;
+
+      v1Override = function(options) {
+        assert.deepStrictEqual(
+          options.sslCreds,
+          grpc.credentials.createInsecure()
+        );
+
+        return {
+          [CONFIG.client]: function(options) {
+            assert.deepStrictEqual(
+              options.sslCreds,
+              grpc.credentials.createInsecure()
+            );
+
+            setImmediate(done);
+
+            return {
+              [CONFIG.method]: util.noop
+            };
+          }
+        };
+      };
+
+      request.datastore.api = {};
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should use the cached client', function(done) {
+      v1Override = function() {
+        done(new Error('Should not re-instantiate a GAX client.'));
+      };
+
+      request.request_(CONFIG);
+      done();
+    });
+
+    it('should replace the project ID token', function(done) {
+      var replacedReqOpts = {};
+
+      var expectedReqOpts = extend({}, CONFIG.reqOpts, {
+        projectId: request.projectId
+      });
+
+      overrides.util.replaceProjectIdToken = function(reqOpts, projectId) {
+        assert.notStrictEqual(reqOpts, CONFIG.reqOpts);
+        assert.deepEqual(reqOpts, expectedReqOpts);
+        assert.strictEqual(projectId, PROJECT_ID);
+
+        return replacedReqOpts;
+      };
+
+      request.datastore.api[CONFIG.client][CONFIG.method] = function(reqOpts) {
+        assert.strictEqual(reqOpts, replacedReqOpts);
+
+        setImmediate(done);
+
+        return util.noop;
+      };
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should send gaxOpts', function(done) {
+      request.datastore.api[CONFIG.client][CONFIG.method] = function(_, gaxO) {
+        delete gaxO.headers;
+        assert.deepStrictEqual(gaxO, CONFIG.gaxOpts);
+        done();
+      };
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should send google-cloud-resource-prefix', function(done) {
+      request.datastore.api[CONFIG.client][CONFIG.method] = function(_, gaxO) {
+        assert.deepStrictEqual(gaxO.headers, {
+          'google-cloud-resource-prefix': 'projects/' + PROJECT_ID
+        });
+        done();
+      };
+
+      request.request_(CONFIG, assert.ifError);
     });
 
     describe('commit', function() {
       it('should set the mode', function(done) {
-        var reqOpts = {};
-
-        request.request = function(protoOpts, reqOpts_) {
-          assert.strictEqual(reqOpts_, reqOpts);
-          assert.strictEqual(reqOpts_.mode, 'NON_TRANSACTIONAL');
+        request.datastore.api[CONFIG.client].commit = function(reqOpts) {
+          assert.strictEqual(reqOpts.mode, 'NON_TRANSACTIONAL');
           done();
         };
 
-        request.request_({ method: 'commit' }, reqOpts, assert.ifError);
+        var config = extend({}, CONFIG, {
+          method: 'commit'
+        });
+
+        request.request_(config, assert.ifError);
       });
     });
 
@@ -1536,75 +1736,78 @@ describe('Request', function() {
       });
 
       it('should set the commit transaction info', function(done) {
-        var reqOpts = {};
-
-        request.request = function(protoOpts, reqOpts_) {
-          assert.strictEqual(reqOpts_, reqOpts);
-          assert.strictEqual(reqOpts_.mode, 'TRANSACTIONAL');
-          assert.strictEqual(reqOpts_.transaction, request.id);
+        request.datastore.api[CONFIG.client].commit = function(reqOpts) {
+          assert.strictEqual(reqOpts.mode, 'TRANSACTIONAL');
+          assert.strictEqual(reqOpts.transaction, TRANSACTION_ID);
           done();
         };
 
-        request.id = 'transaction-id';
-        request.request_({ method: 'commit' }, reqOpts, assert.ifError);
+        var config = extend({}, CONFIG, {
+          method: 'commit'
+        });
+
+        request.request_(config, assert.ifError);
       });
 
       it('should set the rollback transaction info', function(done) {
-        var reqOpts = {};
-
-        request.request = function(protoOpts, reqOpts_) {
-          assert.strictEqual(reqOpts_, reqOpts);
-          assert.strictEqual(reqOpts_.transaction, request.id);
+        request.datastore.api[CONFIG.client].rollback = function(reqOpts) {
+          assert.strictEqual(reqOpts.transaction, TRANSACTION_ID);
           done();
         };
 
-        request.id = 'transaction-id';
-        request.request_({ method: 'rollback' }, reqOpts, assert.ifError);
+        var config = extend({}, CONFIG, {
+          method: 'rollback'
+        });
+
+        request.request_(config, assert.ifError);
       });
 
       it('should set the lookup transaction info', function(done) {
-        var reqOpts = {
-          readOptions: {}
-        };
+        var config = extend(true, {}, CONFIG, {
+          method: 'lookup',
+          reqOpts: {
+            readOptions: {}
+          }
+        });
 
-        request.request = function(protoOpts, reqOpts_) {
-          assert.strictEqual(reqOpts_, reqOpts);
-          assert.strictEqual(reqOpts_.readOptions, reqOpts.readOptions);
-          assert.strictEqual(reqOpts_.readOptions.transaction, request.id);
+        request.datastore.api[CONFIG.client].lookup = function(reqOpts) {
+          assert.deepEqual(reqOpts.readOptions, config.reqOpts.readOptions);
+          assert.strictEqual(reqOpts.readOptions.transaction, TRANSACTION_ID);
           done();
         };
 
-        request.id = 'transaction-id';
-        request.request_({ method: 'lookup' }, reqOpts, assert.ifError);
+        request.request_(config, assert.ifError);
       });
 
-      it('should set the lookup transaction info', function(done) {
-        var reqOpts = {
-          readOptions: {}
-        };
+      it('should set the runQuery transaction info', function(done) {
+        var config = extend(true, {}, CONFIG, {
+          method: 'runQuery',
+          reqOpts: {
+            readOptions: {}
+          }
+        });
 
-        request.request = function(protoOpts, reqOpts_) {
-          assert.strictEqual(reqOpts_, reqOpts);
-          assert.strictEqual(reqOpts_.readOptions, reqOpts.readOptions);
-          assert.strictEqual(reqOpts_.readOptions.transaction, request.id);
+        request.datastore.api[CONFIG.client].runQuery = function(reqOpts) {
+          assert.deepEqual(reqOpts.readOptions, config.reqOpts.readOptions);
+          assert.strictEqual(reqOpts.readOptions.transaction, TRANSACTION_ID);
           done();
         };
 
-        request.id = 'transaction-id';
-        request.request_({ method: 'runQuery' }, reqOpts, assert.ifError);
+        request.request_(config, assert.ifError);
       });
 
       it('should throw if read consistency is specified', function() {
-        var reqOpts = {
-          readOptions: {
-            readConsistency: 1
+        var config = extend(true, {}, CONFIG, {
+          method: 'runQuery',
+          reqOpts: {
+            readOptions: {
+              readConsistency: 1
+            }
           }
-        };
-
-        request.id = 'transaction-id';
+        });
 
         assert.throws(function() {
-          request.request_({ method: 'runQuery' }, reqOpts, assert.ifError);
+          request.request_(config, assert.ifError);
         }, /Read consistency cannot be specified in a transaction\./);
       });
     });
