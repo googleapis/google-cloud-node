@@ -847,10 +847,13 @@ var pubsubClient = pubsub({
 var topic = pubsubClient.topic('my-topic');
 
 // Publish a message to the topic.
-topic.publish('New message!', function(err) {});
+var publisher = topic.publisher();
+var message = new Buffer('New message!');
+
+publisher.publish('New message!', function(err, messageId) {});
 
 // Subscribe to the topic.
-topic.subscribe('subscription-name', function(err, subscription) {
+topic.createSubscription('subscription-name', function(err, subscription) {
   // Register listeners to start pulling for messages.
   function onError(err) {}
   function onMessage(message) {}
