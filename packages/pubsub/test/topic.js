@@ -151,12 +151,15 @@ describe('Topic', function() {
 
   describe('create', function() {
     it('should call the parent createTopic method', function(done) {
-      PUBSUB.createTopic = function(name, callback) {
+      var options_ = {};
+
+      PUBSUB.createTopic = function(name, options, callback) {
         assert.strictEqual(name, topic.name);
+        assert.strictEqual(options, options_);
         callback(); // the done fn
       };
 
-      topic.create(done);
+      topic.create(options_, done);
     });
   });
 
