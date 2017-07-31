@@ -76,7 +76,7 @@ var Snapshot = require('./snapshot.js');
  *
  * - {module:pubsub#getSubscriptions}
  * - {module:pubsub/topic#getSubscriptions}
- * - {module:pubsub/topic#subscribe}
+ * - {module:pubsub/topic#createSubscription}
  *
  * Subscription objects may be created directly with:
  *
@@ -573,7 +573,9 @@ Subscription.prototype.flushQueues_ = function() {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.getMetadata().then(function(apiResponse) {});
+ * subscription.getMetadata().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.getMetadata = function(gaxOpts, callback) {
   if (is.fn(gaxOpts)) {
@@ -687,7 +689,9 @@ Subscription.prototype.listenForEvents_ = function() {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.modifyPushConfig(pushConfig).then(function(apiResponse) {});
+ * subscription.modifyPushConfig(pushConfig).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
   if (is.fn(gaxOpts)) {
@@ -930,7 +934,9 @@ Subscription.prototype.setLeaseTimeout_ = function() {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.setMetadata(metadata).then(function(apiResponse) {});
+ * subscription.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
   if (is.fn(gaxOpts)) {

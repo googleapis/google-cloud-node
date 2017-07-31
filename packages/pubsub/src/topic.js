@@ -113,6 +113,10 @@ Topic.formatName_ = function(projectId, name) {
  *
  * @param {object=} gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:pubsub/topic} callback.topic - The topic.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * topic.create(function(err, topic, apiResponse) {
@@ -164,7 +168,7 @@ Topic.prototype.create = function(gaxOpts, callback) {
  *     retained in the subscription's backlog for 7 days (unless overriden by
  *     `options.messageRetentionDuration`). Default: `false`
  * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
+ * @param {?error} callback.err - An error returned while making this request.
  * @param {module:pubsub/subscription} callback.subscription - The subscription.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -238,18 +242,16 @@ Topic.prototype.delete = function(gaxOpts, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
- * @param {object} callback.metadata - The metadata of the Topic.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * topic.getMetadata(function(err, metadata, apiResponse) {});
+ * topic.getMetadata(function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * topic.getMetadata().then(function(data) {
- *   var metadata = data[0];
- *   var apiResponse = data[1];
+ *   var apiResponse = data[0];
  * });
  */
 Topic.prototype.getMetadata = function(gaxOpts, callback) {
@@ -285,6 +287,10 @@ Topic.prototype.getMetadata = function(gaxOpts, callback) {
  * @param {number} options.pageSize - Maximum number of results to return.
  * @param {string} options.pageToken - Page token.
  * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {module:pubsub/subscription[]} callback.subscriptions - List of
+ *     subscriptions.
  *
  * @example
  * topic.getSubscriptions(function(err, subscriptions) {

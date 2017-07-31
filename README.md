@@ -850,7 +850,7 @@ var topic = pubsubClient.topic('my-topic');
 var publisher = topic.publisher();
 var message = new Buffer('New message!');
 
-publisher.publish('New message!', function(err, messageId) {});
+publisher.publish(message, function(err, messageId) {});
 
 // Subscribe to the topic.
 topic.createSubscription('subscription-name', function(err, subscription) {

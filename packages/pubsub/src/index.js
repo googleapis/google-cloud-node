@@ -118,7 +118,7 @@ function PubSub(options) {
  *
  * @example
  * //-
- * // Subscribe to a topic. (Also see {module:pubsub/topic#subscribe}).
+ * // Subscribe to a topic. (Also see {module:pubsub/topic#createSubscription}).
  * //-
  * var topic = 'messageCenter';
  * var name = 'newMessages';
@@ -506,7 +506,7 @@ PubSub.prototype.getSubscriptionsStream =
  * @resource [Topics: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/list}
  *
  * @param {object=} query - Query object.
- * @param {object} options.gaxOpts - Request configuration options, outlined
+ * @param {object} query.gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} query.pageSize - Max number of results to return.
  * @param {string} query.pageToken - Page token.
