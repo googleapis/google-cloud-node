@@ -25,8 +25,30 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
 
-/**
+/*! Developer Documentation.
  *
+ * @param {module:pubsub/topic} topic - The topic associated with this
+ *     publisher.
+ * @param {object=} options - Configuration object.
+ * @param {object} options.batching - Batching settings.
+ * @param {number} options.batching.maxBytes - The maximum number of bytes to
+ *     buffer before sending a payload.
+ * @param {number} options.batching.maxMessages - The maximum number of messages
+ *     to buffer before sending a payload.
+ * @param {number} options.batching.maxMilliseconds - The maximum duration to
+ *     wait before sending a payload.
+ */
+/**
+ * A Publisher object allows you to publish messages to a specific topic.
+ *
+ * @constructor
+ * @alias module:pubsub/publisher
+ *
+ * @resource [Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/publish}
+ *
+ * @example
+ * var topic = pubsub.topic('my-topic');
+ * var publisher = topic.publisher();
  */
 function Publisher(topic, options) {
   options = extend(true, {
@@ -62,7 +84,43 @@ function Publisher(topic, options) {
 }
 
 /**
+ * Publish the provided message.
  *
+ * @throws {TypeError} If data is not a Buffer object.
+ *
+ * @param {buffer} data - The message data. This must come in the form of a
+ *     Buffer object.
+ * @param {object=} attributes - Optional attributes for this message.
+ * @param {function=} callback - The callback function. If omitted a Promise
+ *     will be returned.
+ * @param {?error} callback.error - An error returned while making this request.
+ * @param {string} callback.messageId - The id for the message.
+ *
+ * @example
+ * var data = new Buffer('Hello, world!');
+ *
+ * var callback = function(err, messageId) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * };
+ *
+ * publisher.publish(data, callback);
+ *
+ * //-
+ * // Optionally you can provide an object containing attributes for the
+ * // message.
+ * //-
+ * var attributes = {
+ *   key: 'value'
+ * };
+ *
+ * publisher.publish(data, attributes, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * publisher.publish(data).then(function(messageId) {});
  */
 Publisher.prototype.publish = function(data, attrs, callback) {
   if (!(data instanceof Buffer)) {
@@ -103,7 +161,9 @@ Publisher.prototype.publish = function(data, attrs, callback) {
 };
 
 /**
- * This should never be called directly.
+ * This publishes a batch of messages and should never be called directly.
+ *
+ * @private
  */
 Publisher.prototype.publish_ = function() {
   var callbacks = this.inventory_.callbacks;
@@ -135,7 +195,13 @@ Publisher.prototype.publish_ = function() {
 };
 
 /**
+ * Queues message to be sent to the server.
  *
+ * @private
+ *
+ * @param {buffer} data - The message data.
+ * @param {object} attributes - The message attributes.
+ * @param {function} callback - The callback function.
  */
 Publisher.prototype.queue_ = function(data, attrs, callback) {
   this.inventory_.queued.push({

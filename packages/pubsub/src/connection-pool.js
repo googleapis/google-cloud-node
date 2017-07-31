@@ -30,7 +30,16 @@ var util = require('util');
 var uuid = require('uuid');
 
 /**
+ * ConnectionPool is used to manage the stream connections created via
+ * StreamingPull rpc.
  *
+ * @param {module:pubsub/subscription} subscription - The subscription to create
+ *     connections for.
+ * @param {object=} options - Pool options.
+ * @param {number} options.maxConnections - Number of connections to create.
+ *     Default: 5.
+ * @param {number} options.ackDeadline - The ack deadline to send when
+ *     creating a connection.
  */
 function ConnectionPool(subscription, options) {
   this.subscription = subscription;
@@ -51,7 +60,15 @@ function ConnectionPool(subscription, options) {
 util.inherits(ConnectionPool, events.EventEmitter);
 
 /**
+ * Acquires a connection from the pool. Optionally you can specify an id for a
+ * specific connection, but if it is no longer available it will return the
+ * first available connection.
  *
+ * @param {string=} id - The id of the connection to retrieve.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while acquiring a
+ *     connection.
+ * @param {stream} callback.connection - A duplex stream.
  */
 ConnectionPool.prototype.acquire = function(id, callback) {
   var self = this;
@@ -89,7 +106,11 @@ ConnectionPool.prototype.acquire = function(id, callback) {
 };
 
 /**
+ * Ends each connection in the pool and closes the pool, preventing new
+ * connections from being created.
  *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.error - An error returned while closing the pool.
  */
 ConnectionPool.prototype.close = function(callback) {
   var connections = Array.from(this.connections.values());
@@ -103,7 +124,8 @@ ConnectionPool.prototype.close = function(callback) {
 };
 
 /**
- *
+ * Creates a connection. This is async but instead of providing a callback
+ * a `connected` event will fire once the connection is ready.
  */
 ConnectionPool.prototype.createConnection = function() {
   var self = this;
@@ -157,7 +179,12 @@ ConnectionPool.prototype.createConnection = function() {
 };
 
 /**
+ * Creates a message object for the user.
  *
+ * @param {string} connectionId - The connection id that the message was
+ *     received on.
+ * @param {object} resp - The message response data from StreamingPull.
+ * @return {object} message - The message object.
  */
 ConnectionPool.prototype.createMessage = function(connectionId, resp) {
   var self = this;
@@ -183,7 +210,7 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
 };
 
 /**
- *
+ * Creates specified number of connections and puts pool in open state.
  */
 ConnectionPool.prototype.open = function() {
   for (var i = 0; i < this.settings.maxConnections; i++) {
@@ -194,7 +221,7 @@ ConnectionPool.prototype.open = function() {
 };
 
 /**
- *
+ * Pauses each of the connections, causing `message` events to stop firing.
  */
 ConnectionPool.prototype.pause = function() {
   this.isPaused = true;
@@ -205,7 +232,7 @@ ConnectionPool.prototype.pause = function() {
 };
 
 /**
- *
+ * Calls resume on each connection, allowing `message` events to fire off again.
  */
 ConnectionPool.prototype.resume = function() {
   this.isPaused = false;
