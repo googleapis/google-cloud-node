@@ -1153,8 +1153,32 @@ describe('Subscription', function() {
       };
 
       subscription.openConnection_();
+      subscription.connectionPool.isPaused = false;
       subscription.connectionPool.pause = done;
       subscription.connectionPool.emit('message', message);
+    });
+
+    it('should not re-pause the pool', function(done) {
+      var message = {};
+      var leasedMessage = {};
+
+      subscription.leaseMessage_ = function() {
+        return leasedMessage;
+      };
+
+      subscription.hasMaxMessages_ = function() {
+        return true;
+      };
+
+      subscription.openConnection_();
+      subscription.connectionPool.isPaused = true;
+
+      subscription.connectionPool.pause = function() {
+        done(new Error('Should not have been called.'));
+      };
+
+      subscription.connectionPool.emit('message', message);
+      done();
     });
 
     it('should flush the queue when connected', function(done) {

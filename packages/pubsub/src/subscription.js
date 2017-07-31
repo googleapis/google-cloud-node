@@ -54,10 +54,19 @@ var Snapshot = require('./snapshot.js');
 /*! Developer Documentation
  *
  * @param {module:pubsub} pubsub - PubSub object.
- * @param {object} options - Configuration object.
- * @param {string} options.encoding - When pulling for messages, this type is
- *     used when converting a message's data to a string. (default: 'utf-8')
- * @param {string} options.name - Name of the subscription.
+ * @param {string=} name - The name of the subscription.
+ * @param {object=} options - See a
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
+ * @param {number} options.ackDeadline - The maximum time after receiving a
+ *     message that you must ack a message before it is redelivered.
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
  */
 /**
  * A Subscription object will give you access to your Cloud Pub/Sub
@@ -98,10 +107,10 @@ var Snapshot = require('./snapshot.js');
  * });
  *
  * //-
- * // From {module:pubsub/topic#subscribe}:
+ * // From {module:pubsub/topic#createSubscription}:
  * //-
  * var topic = pubsub.topic('my-topic');
- * topic.subscribe('new-subscription', function(err, subscription) {
+ * topic.createSubscription('new-subscription', function(err, subscription) {
  *   // `subscription` is a Subscription object.
  * });
  *
@@ -131,12 +140,11 @@ var Snapshot = require('./snapshot.js');
  *   // message.timestamp = Timestamp when Pub/Sub received the message.
  *
  *   // Ack the message:
- *   // message.ack(callback);
+ *   // message.ack();
  *
- *   // Skip the message. This is useful with `maxInProgress` option when
- *   // creating your subscription. This doesn't ack the message, but allows
- *   // more messages to be retrieved if your limit was hit.
- *   // message.skip();
+ *   // This doesn't ack the message, but allows more messages to be retrieved
+ *   // if your limit was hit or if you don't want to ack the message.
+ *   // message.nack();
  * }
  * subscription.on('message', onMessage);
  *
@@ -237,7 +245,13 @@ Subscription.formatName_ = function(projectId, name) {
 };
 
 /**
+ * Acks the provided message. If the connection pool is absent, it will be
+ * placed in an internal queue and sent out after 1 second or if the pool is
+ * re-opened before the timeout hits.
  *
+ * @private
+ *
+ * @param {object} message - The message object.
  */
 Subscription.prototype.ack_ = function(message) {
   this.breakLease_(message);
@@ -262,7 +276,15 @@ Subscription.prototype.ack_ = function(message) {
 };
 
 /**
+ * Breaks the lease on a message. Essentially this means we no longer treat the
+ * message as being un-acked and count it towards the flow control limits.
  *
+ * If the pool was previously paused and we freed up space, we'll continue to
+ * recieve messages.
+ *
+ * @private
+ *
+ * @param {object} message - The message object.
  */
 Subscription.prototype.breakLease_ = function(message) {
   var messageIndex = this.inventory_.lease.indexOf(message.ackId);
@@ -283,7 +305,24 @@ Subscription.prototype.breakLease_ = function(message) {
 };
 
 /**
+ * Closes the subscription, once this is called you will no longer receive
+ * message events unless you add a new message listener.
  *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while closing the
+ *     Subscription.
+ *
+ * @example
+ * subscription.close(function(err) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.close().then(function() {});
  */
 Subscription.prototype.close = function(callback) {
   this.userClosed_ = true;
@@ -299,7 +338,12 @@ Subscription.prototype.close = function(callback) {
 };
 
 /**
+ * Closes the connection pool.
  *
+ * @private
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} err - An error returned from this request.
  */
 Subscription.prototype.closeConnection_ = function(callback) {
   if (this.connectionPool) {
@@ -314,6 +358,8 @@ Subscription.prototype.closeConnection_ = function(callback) {
  * Create a snapshot with the given name.
  *
  * @param {string} name - Name of the snapshot.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {module:pubsub/snapshot} callback.snapshot - The newly created
@@ -379,6 +425,8 @@ Subscription.prototype.createSnapshot = function(name, gaxOpts, callback) {
  *
  * @resource [Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/delete}
  *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -422,7 +470,15 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
 };
 
 /**
+ * Flushes internal queues. These can build up if a user attempts to ack/nack
+ * while there is no connection pool (e.g. after they called close).
  *
+ * Typically this will only be called either after a timeout or when a
+ * connection is re-opened.
+ *
+ * Any errors that occur will be emitted via `error` events.
+ *
+ * @private
  */
 Subscription.prototype.flushQueues_ = function() {
   var self = this;
@@ -498,10 +554,26 @@ Subscription.prototype.flushQueues_ = function() {
 
 
 /**
+ * Fetches the subscriptions metadata.
+ *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
  * @param {object} callback.apiResponse - Raw API response.
+ *
+ * @example
+ * subscription.getMetadata(function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.getMetadata().then(function(apiResponse) {});
  */
 Subscription.prototype.getMetadata = function(gaxOpts, callback) {
   if (is.fn(gaxOpts)) {
@@ -522,7 +594,12 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
 };
 
 /**
+ * Checks to see if this Subscription has hit any of the flow control
+ * thresholds.
  *
+ * @private
+ *
+ * @return {boolean}
  */
 Subscription.prototype.hasMaxMessages_ = function() {
   return this.inventory_.lease.length >= this.flowControl.maxMessages ||
@@ -530,7 +607,13 @@ Subscription.prototype.hasMaxMessages_ = function() {
 };
 
 /**
+ * Leases a message. This will add the message to our inventory list and then
+ * modifiy the ack deadline for the user if they exceed the specified ack
+ * deadline.
  *
+ * @private
+ *
+ * @param {object} message - The message object.
  */
 Subscription.prototype.leaseMessage_ = function(message) {
   this.inventory_.lease.push(message.ackId);
@@ -575,9 +658,36 @@ Subscription.prototype.listenForEvents_ = function() {
 };
 
 /**
+ * Modify the push config for the subscription.
+ *
  * @param {object} config - The push config.
  * @param {string} config.pushEndpoint
  * @param {object} config.attributes
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var pushConfig = {
+ *   pushEndpoint: 'https://mydomain.com/push',
+ *   attributes: {
+ *     key: 'value'
+ *   }
+ * };
+ *
+ * subscription.modifyPushConfig(pushConfig, function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.modifyPushConfig(pushConfig).then(function(apiResponse) {});
  */
 Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
   if (is.fn(gaxOpts)) {
@@ -599,7 +709,13 @@ Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
 };
 
 /**
+ * Nacks the provided message. If the connection pool is absent, it will be
+ * placed in an internal queue and sent out after 1 second or if the pool is
+ * re-opened before the timeout hits.
  *
+ * @private
+ *
+ * @param {object} message - The message object.
  */
 Subscription.prototype.nack_ = function(message) {
   this.breakLease_(message);
@@ -626,6 +742,8 @@ Subscription.prototype.nack_ = function(message) {
 };
 
 /**
+ * Opens the ConnectionPool.
+ *
  * @private
  */
 Subscription.prototype.openConnection_ = function() {
@@ -643,7 +761,7 @@ Subscription.prototype.openConnection_ = function() {
   pool.on('message', function(message) {
     self.emit('message', self.leaseMessage_(message));
 
-    if (self.hasMaxMessages_()) {
+    if (self.hasMaxMessages_() && !pool.isPaused) {
       pool.pause();
     }
   });
@@ -656,7 +774,10 @@ Subscription.prototype.openConnection_ = function() {
 };
 
 /**
+ * Modifies the ack deadline on messages that have yet to be acked. We update
+ * the ack deadline to the 99th percentile of known ack times.
  *
+ * @private
  */
 Subscription.prototype.renewLeases_ = function() {
   var self = this;
@@ -707,6 +828,8 @@ Subscription.prototype.renewLeases_ = function() {
  *
  * @param {string|date} snapshot - The point to seek to. This will accept the
  *     name of the snapshot or a Date object.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {object} callback.apiResponse - The full API response from the
@@ -756,7 +879,10 @@ Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
 };
 
 /**
+ * Sets a timeout to flush any acks/nacks that have been made since the pool has
+ * closed.
  *
+ * @private
  */
 Subscription.prototype.setFlushTimeout_ = function() {
   if (!this.flushTimeoutHandle_) {
@@ -765,7 +891,10 @@ Subscription.prototype.setFlushTimeout_ = function() {
 };
 
 /**
+ * Sets a timeout to modify the ack deadlines for any unacked/unnacked messages,
+ * renewing their lease.
  *
+ * @private
  */
 Subscription.prototype.setLeaseTimeout_ = function() {
   if (this.leaseTimeoutHandle_) {
@@ -777,7 +906,31 @@ Subscription.prototype.setLeaseTimeout_ = function() {
 };
 
 /**
+ * Update the subscription object.
  *
+ * @param {object} metadata - The subscription metadata.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var metadata = {
+ *   key: 'value'
+ * };
+ *
+ * subscription.setMetadata(metadata, function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.setMetadata(metadata).then(function(apiResponse) {});
  */
 Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
   if (is.fn(gaxOpts)) {
