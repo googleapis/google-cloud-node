@@ -49,6 +49,9 @@ function Sink(logging, name) {
   this.logging = logging;
   this.name = name;
   this.formattedName_ = 'projects/' + logging.projectId + '/sinks/' + name;
+
+  // @TODO remove
+  this.unused = true;
 }
 
 /**
