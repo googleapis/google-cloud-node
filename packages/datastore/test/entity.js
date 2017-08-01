@@ -501,17 +501,168 @@ describe('entity', function() {
       var value = 'Stephen';
 
       var entityObject = {
-        name: value
+        data: {
+          name: value
+        }
       };
 
       var expectedEntityProto = {
         key: null,
-        properties: entityObject
+        properties: entityObject.data
       };
 
       entity.encodeValue = function(value_) {
         assert.strictEqual(value_, value);
         return value;
+      };
+
+      assert.deepEqual(
+        entity.entityToEntityProto(entityObject),
+        expectedEntityProto
+      );
+    });
+
+    it('should respect excludeFromIndexes', function() {
+      var value = 'Stephen';
+
+      var entityObject = {
+        excludeFromIndexes: [
+          'name',
+          'entity.name',
+          'array[].name',
+          'array[].entity.name',
+          'array[].entity.array[].name',
+          'array[].array[].entity.name'
+        ],
+
+        data: {
+          name: value,
+
+          entity: {
+            name: value
+          },
+
+          array: [
+            {
+              name: value
+            },
+            {
+              entity: {
+                name: value,
+                array: [
+                  {
+                    name: value
+                  }
+                ]
+              }
+            },
+            {
+              array: [
+                {
+                  entity: {
+                    name: value
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      };
+
+      var expectedEntityProto = {
+        key: null,
+        properties: {
+          name: {
+            stringValue: value,
+            excludeFromIndexes: true
+          },
+          entity: {
+            entityValue: {
+              properties: {
+                name: {
+                  stringValue: value,
+                  excludeFromIndexes: true
+                }
+              }
+            }
+          },
+          array: {
+            arrayValue: {
+              values: [
+                {
+                  entityValue: {
+                    properties: {
+                      name: {
+                        stringValue: value,
+                        excludeFromIndexes: true
+                      }
+                    }
+                  }
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      entity: {
+                        entityValue: {
+                          properties: {
+                            name: {
+                              stringValue: value,
+                              excludeFromIndexes: true
+                            },
+                            array: {
+                              arrayValue: {
+                                values: [
+                                  {
+                                    entityValue: {
+                                      properties: {
+                                        name: {
+                                          stringValue: value,
+                                          excludeFromIndexes: true
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      array: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  entity: {
+                                    entityValue: {
+                                      properties: {
+                                        name: {
+                                          stringValue: value,
+                                          excludeFromIndexes: true
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
       };
 
       assert.deepEqual(
