@@ -81,6 +81,75 @@ describe('Datastore', function() {
       }
     };
 
+    it('should excludeFromIndexes correctly', function(done) {
+      var longString = Buffer.alloc(1501, '.').toString();
+      var postKey = datastore.key(['Post', 'post1']);
+
+      var data = {
+        longString: longString,
+        notMetadata: true,
+        metadata: {
+          longString: longString,
+          otherProperty: 'value',
+          obj: {
+            longStringArray: [
+              {
+                longString: longString,
+                nestedLongStringArray: [
+                  {
+                    longString: longString,
+                    nestedProperty: true
+                  },
+                  {
+                    longString: longString
+                  }
+                ]
+              }
+            ]
+          },
+          longStringArray: [
+            {
+              longString: longString,
+              nestedLongStringArray: [
+                {
+                  longString: longString,
+                  nestedProperty: true
+                },
+                {
+                  longString: longString
+                }
+              ]
+            }
+          ]
+        }
+      };
+
+      datastore.save({
+        key: postKey,
+        data: data,
+        excludeFromIndexes: [
+          'longString',
+          'metadata.obj.longString',
+          'metadata.obj.longStringArray[].longString',
+          'metadata.obj.longStringArray[].nestedLongStringArray[].longString',
+          'metadata.longString',
+          'metadata.longStringArray[].longString',
+          'metadata.longStringArray[].nestedLongStringArray[].longString'
+        ]
+      }, function(err) {
+        assert.ifError(err);
+
+        datastore.get(postKey, function(err, entity) {
+          assert.ifError(err);
+
+          assert.deepEqual(entity, data);
+          assert.deepEqual(entity[datastore.KEY], postKey);
+
+          datastore.delete(postKey, done);
+        });
+      });
+    });
+
     it('should save/get/delete with a key name', function(done) {
       var postKey = datastore.key(['Post', 'post1']);
 

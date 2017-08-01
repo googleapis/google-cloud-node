@@ -463,10 +463,11 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
- * @param {object|object[]} entities.data - Data to save with the provided key.
- *     If you provide an array of objects, you must use the explicit syntax:
- *     `name` for the name of the property and `value` for its value. You may
- *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {string[]=} entities.excludeFromIndexes - Exclude properties from
+ *     indexing using a simple JSON path notation. See the examples in
+ *     {module:datastore#save} to see how to target properties at different
+ *     levels of nesting within your entity.
+ * @param {object} entities.data - Data to save with the provided key.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {object} callback.apiResponse - The full API response.
@@ -720,8 +721,8 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * the entity will be updated with the data specified.
  *
  * By default, all properties are indexed. To prevent a property from being
- * included in *all* indexes, you must supply an entity's `data` property as an
- * array. See below for an example.
+ * included in *all* indexes, you must supply an `excludeFromIndexes` array. See
+ * below for an example.
  *
  * @borrows {module:datastore/transaction#save} as save
  *
@@ -729,12 +730,13 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
+ * @param {string[]=} entities.excludeFromIndexes - Exclude properties from
+ *     indexing using a simple JSON path notation. See the example below to see
+ *     how to target properties at different levels of nesting within your
+ *     entity.
  * @param {string=} entities.method - Explicit method to use, either 'insert',
  *     'update', or 'upsert'.
- * @param {object|object[]} entities.data - Data to save with the provided key.
- *     If you provide an array of objects, you must use the explicit syntax:
- *     `name` for the name of the property and `value` for its value. You may
- *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {object} entities.data - Data to save with the provided key.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {object} callback.apiResponse - The full API response.
@@ -840,18 +842,27 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * datastore.save(entity, function(err, apiResponse) {});
  *
  * //-
- * // To specify an `excludeFromIndexes` value for a Datastore entity, pass in
- * // an array for the key's data.
+ * // Use an array, `excludeFromIndexes`, to exclude properties from indexing.
+ * // This will allow storing string values larger than 1500 bytes.
  * //-
  * var entity = {
  *   key: datastore.key('Company'),
- *   data: [
- *     {
- *       name: 'rating',
- *       value: 10,
- *       excludeFromIndexes: true
- *     }
- *   ]
+ *   excludeFromIndexes: [
+ *     'description',
+ *     'embeddedEntity.description',
+ *     'arrayValue[].description'
+ *   ],
+ *   data: {
+ *     description: 'Long string (...)',
+ *     embeddedEntity: {
+ *       description: 'Long string (...)'
+ *     },
+ *     arrayValue: [
+ *       {
+ *         description: 'Long string (...)'
+ *       }
+ *     ]
+ *   }
  * };
  *
  * datastore.save(entity, function(err, apiResponse) {});
@@ -931,6 +942,9 @@ DatastoreRequest.prototype.save = function(entities, callback) {
         insertIndexes[index] = true;
       }
 
+      // @TODO remove in @google-cloud/datastore@2.0.0
+      // This was replaced with a more efficient mechanism in the top-level
+      // `excludeFromIndexes` option.
       if (is.array(entityObject.data)) {
         entityProto.properties = entityObject.data.reduce(function(acc, data) {
           var value = entity.encodeValue(data.value);
@@ -951,7 +965,7 @@ DatastoreRequest.prototype.save = function(entities, callback) {
           return acc;
         }, {});
       } else {
-        entityProto = entity.entityToEntityProto(entityObject.data);
+        entityProto = entity.entityToEntityProto(entityObject);
       }
 
       entityProto.key = entity.keyToKeyProto(entityObject.key);
@@ -1003,10 +1017,11 @@ DatastoreRequest.prototype.save = function(entities, callback) {
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
- * @param {object|object[]} entities.data - Data to save with the provided key.
- *     If you provide an array of objects, you must use the explicit syntax:
- *     `name` for the name of the property and `value` for its value. You may
- *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {string[]=} entities.excludeFromIndexes - Exclude properties from
+ *     indexing using a simple JSON path notation. See the examples in
+ *     {module:datastore#save} to see how to target properties at different
+ *     levels of nesting within your entity.
+ * @param {object} entities.data - Data to save with the provided key.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {object} callback.apiResponse - The full API response.
@@ -1024,10 +1039,11 @@ DatastoreRequest.prototype.update = function(entities, callback) {
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
- * @param {object|object[]} entities.data - Data to save with the provided key.
- *     If you provide an array of objects, you must use the explicit syntax:
- *     `name` for the name of the property and `value` for its value. You may
- *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {string[]=} entities.excludeFromIndexes - Exclude properties from
+ *     indexing using a simple JSON path notation. See the examples in
+ *     {module:datastore#save} to see how to target properties at different
+ *     levels of nesting within your entity.
+ * @param {object} entities.data - Data to save with the provided key.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {object} callback.apiResponse - The full API response.

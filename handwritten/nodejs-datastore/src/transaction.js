@@ -407,15 +407,16 @@ Transaction.prototype.run = function(callback) {
  * the entity will be updated with the data specified.
  *
  * By default, all properties are indexed. To prevent a property from being
- * included in *all* indexes, you must supply an entity's `data` property as an
- * array. See below for an example.
+ * included in *all* indexes, you must supply an `excludeFromIndexes` array. See
+ * below for an example.
  *
  * @param {object|object[]} entities - Datastore key object(s).
  * @param {Key} entities.key - Datastore key object.
- * @param {object|object[]} entities.data - Data to save with the provided key.
- *     If you provide an array of objects, you must use the explicit syntax:
- *     `name` for the name of the property and `value` for its value. You may
- *     also specify an `excludeFromIndexes` property, set to `true` or `false`.
+ * @param {string[]=} entities.excludeFromIndexes - Exclude properties from
+ *     indexing using a simple JSON path notation. See the example below to see
+ *     how to target properties at different levels of nesting within your
+ *     entity.
+ * @param {object} entities.data - Data to save with the provided key.
  *
  * @example
  * //-
@@ -447,8 +448,8 @@ Transaction.prototype.run = function(callback) {
  * });
  *
  * //-
- * // To specify an `excludeFromIndexes` value for a Datastore entity, pass in
- * // an array for the key's data. The above example would then look like:
+ * // Use an array, `excludeFromIndexes`, to exclude properties from indexing.
+ * // This will allow storing string values larger than 1500 bytes.
  * //-
  * transaction.run(function(err) {
  *   if (err) {
@@ -457,13 +458,22 @@ Transaction.prototype.run = function(callback) {
  *
  *   transaction.save({
  *     key: key,
- *     data: [
- *       {
- *         name: 'rating',
- *         value: '10',
- *         excludeFromIndexes: false
- *       }
- *     ]
+ *     excludeFromIndexes: [
+ *       'description',
+ *       'embeddedEntity.description',
+ *       'arrayValue[].description'
+ *     ],
+ *     data: {
+ *       description: 'Long string (...)',
+ *       embeddedEntity: {
+ *         description: 'Long string (...)'
+ *       },
+ *       arrayValue: [
+ *         {
+ *           description: 'Long string (...)'
+ *         }
+ *       ]
+ *     }
  *   });
  *
  *   transaction.commit(function(err) {
