@@ -24,6 +24,36 @@ var spawn = require('child_process').spawnSync;
 require('shelljs/global');
 
 /**
+ * A list of recognized maintainers and Googler contributors to the project.
+ * This is a temporary solution towards trying to get system tests to run on
+ * PRs.
+ *
+ * RE: https://github.com/GoogleCloudPlatform/gcloud-common/issues/222#issuecomment-289064962
+ *
+ * @type {Array}
+ */
+var MAINTAINERS = [
+  'callmehiphop',
+  'cristiancavalli',
+  'danoscarmike',
+  'DominicKramer',
+  'jmdobry',
+  'kjin',
+  'landrito',
+  'lukesneeringer',
+  'ofrobots',
+  'stephenplusplus',
+  'vkedia'
+];
+
+/**
+ * The pull request author's GitHub username.
+ *
+ * @alias ci.PR_USERNAME;
+ */
+var PR_USERNAME = process.env.CIRCLE_PR_USERNAME;
+
+/**
  * The pull request number.
  *
  * @alias ci.PR_NUMBER;
@@ -545,13 +575,23 @@ function isFirstPass() {
   return process.env.CIRCLECI && /^v4/.test(process.version);
 }
 
+/**
+ * @alias ci.isMaintainer
+ * @return {boolean}
+ */
+function isMaintainer() {
+  return MAINTAINERS.indexOf(PR_USERNAME) > -1;
+}
+
 module.exports.ci = {
   BRANCH: BRANCH,
   IS_PR: IS_PR,
   PR_NUMBER: PR_NUMBER,
+  PR_USERNAME: PR_USERNAME,
   getTagName: getTagName,
   isReleaseBuild: isReleaseBuild,
   getRelease: getRelease,
   isPushToMaster: isPushToMaster,
-  isFirstPass: isFirstPass
+  isFirstPass: isFirstPass,
+  isMaintainer: isMaintainer
 };

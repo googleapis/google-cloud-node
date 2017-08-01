@@ -63,7 +63,7 @@ modules.forEach(function(mod) {
 });
 
 // If this is a push to master, let's run system tests
-if (ci.isPushToMaster() && modules.length) {
+if (modules.length && (ci.isMaintainer() || ci.isPushToMaster())) {
   // Run system tests for each module
   // If they pass then create a symlink via npm link
   modules.forEach(function(mod) {
