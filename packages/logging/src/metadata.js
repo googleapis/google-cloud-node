@@ -127,9 +127,7 @@ Metadata.getGlobalDescriptor = function() {
  * @param {function} callback - The callback function.
  */
 Metadata.prototype.getDefaultResource = function(callback) {
-  var self = this;
-
-  self.logging.auth.getEnvironment(function(err, env) {
+  this.logging.auth.getEnvironment(function(err, env) {
     if (env.IS_CONTAINER_ENGINE) {
       Metadata.getGKEDescriptor(callback);
       return;
