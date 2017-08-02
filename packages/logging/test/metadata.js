@@ -136,7 +136,7 @@ describe('metadata', function() {
         done();
       });
     });
-    
+
     it('should return error on failure to acquire metadata', function(done) {
       var FAKE_ERROR = new Error();
       instanceArgsOverride = [ FAKE_ERROR ];
