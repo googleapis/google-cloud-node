@@ -112,7 +112,7 @@ Metadata.getGKEDescriptor = function(projectId, callback) {
         cluster_name: clusterName,
         project_id: projectId
       }
-    })
+    });
   });
 };
 

@@ -23,7 +23,7 @@ var proxyquire = require('proxyquire');
 var instanceValueOverride;
 var fakeGcpMetadata = {
   instance: function(path, cb) {
-    setImmediate(function () {
+    setImmediate(function() {
       cb(null, null, instanceValueOverride || 'fake-instance-value');
     });
   }
