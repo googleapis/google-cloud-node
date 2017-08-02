@@ -18,11 +18,21 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var proxyquire = require('proxyquire');
 
-var Metadata = require('../src/metadata.js');
+var instanceArgsOverride;
+var fakeGcpMetadata = {
+  instance: function(path, cb) {
+    setImmediate(function() {
+      var args = instanceArgsOverride || [null, null, 'fake-instance-value'];
+      cb.apply(fakeGcpMetadata, args);
+    });
+  }
+};
 
 describe('metadata', function() {
   var MetadataCached;
+  var Metadata;
   var metadata;
 
   var PROJECT_ID = 'project-id';
@@ -31,6 +41,10 @@ describe('metadata', function() {
   var ENV_CACHED = extend({}, process.env);
 
   before(function() {
+    Metadata = proxyquire('../src/metadata.js', {
+      'gcp-metadata': fakeGcpMetadata
+    });
+
     MetadataCached = extend({}, Metadata);
   });
 
@@ -40,6 +54,7 @@ describe('metadata', function() {
     };
     extend(Metadata, MetadataCached);
     metadata = new Metadata(LOGGING);
+    instanceArgsOverride = null;
   });
 
   afterEach(function() {
@@ -104,12 +119,31 @@ describe('metadata', function() {
   });
 
   describe('getGKEDescriptor', function() {
-    it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGKEDescriptor(PROJECT_ID), {
-        type: 'container',
-        labels: {
-          project_id: PROJECT_ID
-        }
+    var CLUSTER_NAME = 'gke-cluster-name';
+
+    it('should return the correct descriptor', function(done) {
+      instanceArgsOverride = [null, null, CLUSTER_NAME];
+
+      Metadata.getGKEDescriptor(PROJECT_ID, function(err, descriptor) {
+        assert.ifError(err);
+        assert.deepEqual(descriptor, {
+          type: 'container',
+          labels: {
+            cluster_name: CLUSTER_NAME,
+            project_id: PROJECT_ID
+          }
+        });
+        done();
+      });
+    });
+
+    it('should return error on failure to acquire metadata', function(done) {
+      var FAKE_ERROR = new Error();
+      instanceArgsOverride = [ FAKE_ERROR ];
+
+      Metadata.getGKEDescriptor(PROJECT_ID, function(err) {
+        assert.strictEqual(err, FAKE_ERROR);
+        done();
       });
     });
   });
@@ -248,12 +282,8 @@ describe('metadata', function() {
 
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
-          var DESCRIPTOR = {};
-
-          Metadata.getGKEDescriptor = function(projectId) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
-            return DESCRIPTOR;
-          };
+          var CLUSTER_NAME = 'overridden-value';
+          instanceArgsOverride = [null, null, CLUSTER_NAME];
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -264,7 +294,13 @@ describe('metadata', function() {
 
           metadata.getDefaultResource(function(err, defaultResource) {
             assert.ifError(err);
-            assert.strictEqual(defaultResource, DESCRIPTOR);
+            assert.deepStrictEqual(defaultResource, {
+              type: 'container',
+              labels: {
+                cluster_name: CLUSTER_NAME,
+                project_id: RETURNED_PROJECT_ID
+              }
+            });
             done();
           });
         });

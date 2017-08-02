@@ -57,6 +57,7 @@
     "arrify": "^1.0.0",
     "eventid": "^0.1.0",
     "extend": "^3.0.0",
+    "gcp-metadata": "^0.2.0",
     "google-auto-auth": "^0.7.1",
     "google-gax": "^0.13.0",
     "google-proto-files": "^0.12.0",

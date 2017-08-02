@@ -20,6 +20,8 @@
 
 'use strict';
 
+var gcpMetadata = require('gcp-metadata');
+
 /**
  * The Metadata class attempts to contact the metadata service and determine,
  * based on request success and environment variables, what type of resource
@@ -95,15 +97,25 @@ Metadata.getGCEDescriptor = function(projectId) {
  * @private
  *
  * @param {string} projectId - The project ID.
+ * @param {function} callback - The callback function.
  * @return {object}
  */
-Metadata.getGKEDescriptor = function(projectId) {
-  return {
-    type: 'container',
-    labels: {
-      project_id: projectId,
+Metadata.getGKEDescriptor = function(projectId, callback) {
+  gcpMetadata.instance('attributes/clusterName', function(err, _, clusterName) {
+    if (err) {
+      callback(err);
+      return;
     }
-  };
+
+    callback(null, {
+      type: 'container',
+      labels: {
+        // TODO(ofrobots): it would be good to include the namespace_id as well.
+        cluster_name: clusterName,
+        project_id: projectId
+      }
+    });
+  });
 };
 
 /**
@@ -138,14 +150,17 @@ Metadata.prototype.getDefaultResource = function(callback) {
     }
 
     self.logging.auth.getEnvironment(function(err, env) {
+      if (env.IS_CONTAINER_ENGINE) {
+        Metadata.getGKEDescriptor(projectId, callback);
+        return;
+      }
+
       var defaultResource;
 
       if (env.IS_APP_ENGINE) {
         defaultResource = Metadata.getGAEDescriptor(projectId);
       } else if (env.IS_CLOUD_FUNCTION) {
         defaultResource = Metadata.getCloudFunctionDescriptor(projectId);
-      } else if (env.IS_CONTAINER_ENGINE) {
-        defaultResource = Metadata.getGKEDescriptor(projectId);
       } else if (env.IS_COMPUTE_ENGINE) {
         defaultResource = Metadata.getGCEDescriptor(projectId);
       } else {
