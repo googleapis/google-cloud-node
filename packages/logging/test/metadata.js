@@ -20,11 +20,12 @@ var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
 
-var instanceValueOverride;
+var instanceArgsOverride;
 var fakeGcpMetadata = {
   instance: function(path, cb) {
     setImmediate(function() {
-      cb(null, null, instanceValueOverride || 'fake-instance-value');
+      var args = instanceArgsOverride || [null, null, 'fake-instance-value'];
+      cb.apply(fakeGcpMetadata, args);
     });
   }
 };
@@ -53,7 +54,7 @@ describe('metadata', function() {
     };
     extend(Metadata, MetadataCached);
     metadata = new Metadata(LOGGING);
-    instanceValueOverride = null;
+    instanceArgsOverride = null;
   });
 
   afterEach(function() {
@@ -121,7 +122,7 @@ describe('metadata', function() {
     var CLUSTER_NAME = 'gke-cluster-name';
 
     it('should return the correct descriptor', function(done) {
-      instanceValueOverride = CLUSTER_NAME;
+      instanceArgsOverride = [null, null, CLUSTER_NAME];
 
       Metadata.getGKEDescriptor(PROJECT_ID, function(err, descriptor) {
         assert.ifError(err);
@@ -132,6 +133,16 @@ describe('metadata', function() {
             project_id: PROJECT_ID
           }
         });
+        done();
+      });
+    });
+    
+    it('should return error on failure to acquire metadata', function(done) {
+      var FAKE_ERROR = new Error();
+      instanceArgsOverride = [ FAKE_ERROR ];
+
+      Metadata.getGKEDescriptor(PROJECT_ID, function(err) {
+        assert.strictEqual(err, FAKE_ERROR);
         done();
       });
     });
@@ -271,7 +282,8 @@ describe('metadata', function() {
 
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
-          instanceValueOverride = 'overridden-value';
+          var CLUSTER_NAME = 'overridden-value';
+          instanceArgsOverride = [null, null, CLUSTER_NAME];
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -285,7 +297,7 @@ describe('metadata', function() {
             assert.deepStrictEqual(defaultResource, {
               type: 'container',
               labels: {
-                cluster_name: instanceValueOverride,
+                cluster_name: CLUSTER_NAME,
                 project_id: RETURNED_PROJECT_ID
               }
             });
