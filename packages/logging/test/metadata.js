@@ -119,13 +119,19 @@ describe('metadata', function() {
   describe('getGKEDescriptor', function() {
     var CLUSTER_NAME = 'gke-cluster-name';
 
-    it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGKEDescriptor(PROJECT_ID, CLUSTER_NAME), {
-        type: 'container',
-        labels: {
-          cluster_name: CLUSTER_NAME,
-          project_id: PROJECT_ID
-        }
+    it('should return the correct descriptor', function(done) {
+      instanceValueOverride = CLUSTER_NAME;
+
+      Metadata.getGKEDescriptor(PROJECT_ID, function(err, descriptor) {
+        assert.ifError(err);
+        assert.deepEqual(descriptor, {
+          type: 'container',
+          labels: {
+            cluster_name: CLUSTER_NAME,
+            project_id: PROJECT_ID
+          }
+        });
+        done();
       });
     });
   });
