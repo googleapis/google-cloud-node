@@ -97,18 +97,23 @@ Metadata.getGCEDescriptor = function(projectId) {
  * @private
  *
  * @param {string} projectId - The project ID.
- * @param {string} clusterName - GKE cluster name.
+ * @param {function} callback - The callback function.
  * @return {object}
  */
-Metadata.getGKEDescriptor = function(projectId, clusterName) {
-  return {
-    type: 'container',
-    labels: {
-      // TODO(ofrobots): it would be good to include the namespace_id as well.
-      cluster_name: clusterName,
-      project_id: projectId
+Metadata.getGKEDescriptor = function(projectId, callback) {
+  gcpMetadata.instance('attributes/clusterName', function(err, _, clusterName) {
+    if (err) {
+      return callback(err);
     }
-  };
+    callback(null, {
+      type: 'container',
+      labels: {
+        // TODO(ofrobots): it would be good to include the namespace_id as well.
+        cluster_name: clusterName,
+        project_id: projectId
+      }
+    })
+  });
 };
 
 /**
@@ -144,13 +149,7 @@ Metadata.prototype.getDefaultResource = function(callback) {
 
     self.logging.auth.getEnvironment(function(err, env) {
       if (env.IS_CONTAINER_ENGINE) {
-        gcpMetadata.instance('attributes/clusterName',
-          function (err, _, clusterName) {
-            if (err) {
-              return callback(err);
-            }
-            callback(null, Metadata.getGKEDescriptor(projectId, clusterName));
-          });
+        Metadata.getGKEDescriptor(projectId, callback);
       } else {
         var defaultResource;
 

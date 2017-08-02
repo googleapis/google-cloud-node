@@ -265,15 +265,7 @@ describe('metadata', function() {
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
           var RETURNED_CLUSTER_NAME = 'fake-cluster-name';
-          var DESCRIPTOR = {};
-
           instanceValueOverride = RETURNED_CLUSTER_NAME;
-
-          Metadata.getGKEDescriptor = function(projectId, clusterName) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
-            assert.strictEqual(clusterName, RETURNED_CLUSTER_NAME);
-            return DESCRIPTOR;
-          };
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -284,7 +276,13 @@ describe('metadata', function() {
 
           metadata.getDefaultResource(function(err, defaultResource) {
             assert.ifError(err);
-            assert.strictEqual(defaultResource, DESCRIPTOR);
+            assert.deepStrictEqual(defaultResource, {
+              type: 'container',
+              labels: {
+                cluster_name: RETURNED_CLUSTER_NAME,
+                project_id: RETURNED_PROJECT_ID
+              }
+            });
             done();
           });
         });
