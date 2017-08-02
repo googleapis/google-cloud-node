@@ -29,12 +29,9 @@ var fakeGcpMetadata = {
   }
 };
 
-var Metadata = proxyquire('../src/metadata.js', {
-  'gcp-metadata': fakeGcpMetadata
-});
-
 describe('metadata', function() {
   var MetadataCached;
+  var Metadata;
   var metadata;
 
   var PROJECT_ID = 'project-id';
@@ -43,6 +40,10 @@ describe('metadata', function() {
   var ENV_CACHED = extend({}, process.env);
 
   before(function() {
+    Metadata = proxyquire('../src/metadata.js', {
+      'gcp-metadata': fakeGcpMetadata
+    });
+
     MetadataCached = extend({}, Metadata);
   });
 
@@ -270,8 +271,7 @@ describe('metadata', function() {
 
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
-          var RETURNED_CLUSTER_NAME = 'fake-cluster-name';
-          instanceValueOverride = RETURNED_CLUSTER_NAME;
+          instanceValueOverride = 'overridden-value';
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -285,7 +285,7 @@ describe('metadata', function() {
             assert.deepStrictEqual(defaultResource, {
               type: 'container',
               labels: {
-                cluster_name: RETURNED_CLUSTER_NAME,
+                cluster_name: instanceValueOverride,
                 project_id: RETURNED_PROJECT_ID
               }
             });

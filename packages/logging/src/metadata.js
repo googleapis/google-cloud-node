@@ -103,8 +103,10 @@ Metadata.getGCEDescriptor = function(projectId) {
 Metadata.getGKEDescriptor = function(projectId, callback) {
   gcpMetadata.instance('attributes/clusterName', function(err, _, clusterName) {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
+
     callback(null, {
       type: 'container',
       labels: {
@@ -150,21 +152,22 @@ Metadata.prototype.getDefaultResource = function(callback) {
     self.logging.auth.getEnvironment(function(err, env) {
       if (env.IS_CONTAINER_ENGINE) {
         Metadata.getGKEDescriptor(projectId, callback);
-      } else {
-        var defaultResource;
-
-        if (env.IS_APP_ENGINE) {
-          defaultResource = Metadata.getGAEDescriptor(projectId);
-        } else if (env.IS_CLOUD_FUNCTION) {
-          defaultResource = Metadata.getCloudFunctionDescriptor(projectId);
-        } else if (env.IS_COMPUTE_ENGINE) {
-          defaultResource = Metadata.getGCEDescriptor(projectId);
-        } else {
-          defaultResource = Metadata.getGlobalDescriptor(projectId);
-        }
-
-        callback(null, defaultResource);
+        return;
       }
+
+      var defaultResource;
+
+      if (env.IS_APP_ENGINE) {
+        defaultResource = Metadata.getGAEDescriptor(projectId);
+      } else if (env.IS_CLOUD_FUNCTION) {
+        defaultResource = Metadata.getCloudFunctionDescriptor(projectId);
+      } else if (env.IS_COMPUTE_ENGINE) {
+        defaultResource = Metadata.getGCEDescriptor(projectId);
+      } else {
+        defaultResource = Metadata.getGlobalDescriptor(projectId);
+      }
+
+      callback(null, defaultResource);
     });
   });
 };
