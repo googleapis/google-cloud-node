@@ -138,8 +138,8 @@ describe('pubsub', function() {
 
     it('should allow manual paging', function(done) {
       pubsub.getTopics({
-        autoPaginate: false,
-        pageSize: TOPIC_NAMES.length - 1
+        pageSize: TOPIC_NAMES.length - 1,
+        gaxOpts: { autoPaginate: false }
       }, function(err, topics) {
         assert.ifError(err);
         assert(topics.length, TOPIC_NAMES.length - 1);

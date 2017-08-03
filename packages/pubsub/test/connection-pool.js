@@ -363,8 +363,10 @@ describe('ConnectionPool', function() {
 
   describe('createMessage', function() {
     var message;
+    var globalDateNow;
 
     var CONNECTION_ID = 'abc';
+    var FAKE_DATE_NOW = Date.now();
 
     var PT = {
       seconds: 6838383,
@@ -383,8 +385,19 @@ describe('ConnectionPool', function() {
       }
     };
 
+    before(function() {
+      globalDateNow = global.Date.now;
+      global.Date.now = function() {
+        return FAKE_DATE_NOW;
+      };
+    });
+
     beforeEach(function() {
       message = pool.createMessage(CONNECTION_ID, RESP);
+    });
+
+    after(function() {
+      global.Date.now = globalDateNow;
     });
 
     it('should capture the connection id', function() {
@@ -394,14 +407,13 @@ describe('ConnectionPool', function() {
     it('should capture the message data', function() {
       var expectedPublishTime = new Date(
         parseInt(PT.seconds, 10) * 1000 + parseInt(PT.nanos, 10) / 1e6);
-      var dateNowValue = Date.now();
 
       assert.strictEqual(message.ackId, RESP.ackId);
       assert.strictEqual(message.id, RESP.message.messageId);
       assert.strictEqual(message.data, RESP.message.data);
       assert.strictEqual(message.attributes, RESP.message.attributes);
       assert.deepEqual(message.publishTime, expectedPublishTime);
-      assert.strictEqual(message.received, dateNowValue);
+      assert.strictEqual(message.received, FAKE_DATE_NOW);
     });
 
     it('should create an ack method', function(done) {
