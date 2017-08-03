@@ -739,6 +739,30 @@ describe('Compute', function() {
     });
   });
 
+  describe('project', function() {
+    it('should get the project', function(done) {
+      compute.getProject(function(err, project) {
+        assert.ifError(err);
+        assert(project.metadata);
+        done();
+      });
+    });
+
+    it('should get a list of machine types in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getProjectStream()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+  });
+
   describe('regions', function() {
     it('should get a list of regions', function(done) {
       compute.getRegions(function(err, regions) {
