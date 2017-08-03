@@ -279,8 +279,7 @@ describe('BigQuery', function() {
   });
 
   it('should allow querying in series', function(done) {
-    bigquery.query({
-      query: query,
+    bigquery.query(query, {
       maxResults: 10
     }, function(err, rows, nextQuery) {
       assert.ifError(err);

@@ -20,6 +20,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -75,6 +76,94 @@ function BigQuery(options) {
 }
 
 util.inherits(BigQuery, common.Service);
+
+/**
+ * Merge a rowset returned from the API with a table schema.
+ *
+ * @private
+ *
+ * @param {object} schema
+ * @param {array} rows
+ * @return {array} Fields using their matching names from the table's schema.
+ */
+BigQuery.mergeSchemaWithRows_ =
+BigQuery.prototype.mergeSchemaWithRows_ = function(schema, rows) {
+  return arrify(rows).map(mergeSchema).map(flattenRows);
+
+  function mergeSchema(row) {
+    return row.f.map(function(field, index) {
+      var schemaField = schema.fields[index];
+      var value = field.v;
+
+      if (schemaField.mode === 'REPEATED') {
+        value = value.map(function(val) {
+          return convert(schemaField, val.v);
+        });
+      } else {
+        value = convert(schemaField, value);
+      }
+
+      var fieldObject = {};
+      fieldObject[schemaField.name] = value;
+      return fieldObject;
+    });
+  }
+
+  function convert(schemaField, value) {
+    if (is.nil(value)) {
+      return value;
+    }
+
+    switch (schemaField.type) {
+      case 'BOOLEAN': {
+        value = value === 'true';
+        break;
+      }
+      case 'BYTES': {
+        value = new Buffer(value, 'base64');
+        break;
+      }
+      case 'FLOAT': {
+        value = parseFloat(value);
+        break;
+      }
+      case 'INTEGER': {
+        value = parseInt(value, 10);
+        break;
+      }
+      case 'RECORD': {
+        value = BigQuery.mergeSchemaWithRows_(schemaField, value).pop();
+        break;
+      }
+      case 'DATE': {
+        value = BigQuery.date(value);
+        break;
+      }
+      case 'DATETIME': {
+        value = BigQuery.datetime(value);
+        break;
+      }
+      case 'TIME': {
+        value = BigQuery.time(value);
+        break;
+      }
+      case 'TIMESTAMP': {
+        value = BigQuery.timestamp(new Date(value * 1000));
+        break;
+      }
+    }
+
+    return value;
+  }
+
+  function flattenRows(rows) {
+    return rows.reduce(function(acc, row) {
+      var key = Object.keys(row)[0];
+      acc[key] = row[key];
+      return acc;
+    }, {});
+  }
+};
 
 /**
  * The `DATE` type represents a logical calendar date, independent of time zone.
@@ -779,91 +868,49 @@ BigQuery.prototype.job = function(id) {
  *   var rows = data[0];
  * });
  */
-BigQuery.prototype.query = function(options, callback) {
-  var self = this;
-
-  if (is.string(options)) {
-    options = {
-      query: options
+BigQuery.prototype.query = function(query, options, callback) {
+  if (is.string(query)) {
+    query = {
+      query: query
     };
   }
 
-  options = options || {};
-
-  var job = options.job;
-
-  var requestQuery = extend({}, options);
-  delete requestQuery.job;
-
-  if (job) {
-    // Get results of the query.
-    delete requestQuery.params;
-    delete requestQuery.query;
-
-    self.request({
-      uri: '/queries/' + job.id,
-      qs: requestQuery
-    }, responseHandler);
-
-    return;
+  if (is.fn(options)) {
+    callback = options;
+    options = null;
   }
 
-  if (options.params) {
-    options.useLegacySql = false;
-    options.parameterMode = is.array(options.params) ? 'positional' : 'named';
+  var reqOpts = extend({}, query);
 
-    if (options.parameterMode === 'named') {
-      options.queryParameters = [];
+  if (query.params) {
+    reqOpts.useLegacySql = false;
+    reqOpts.parameterMode = is.array(query.params) ? 'positional' : 'named';
 
-      for (var namedParamater in options.params) {
-        var value = options.params[namedParamater];
+    if (reqOpts.parameterMode === 'named') {
+      reqOpts.queryParameters = [];
+
+      for (var namedParamater in query.params) {
+        var value = query.params[namedParamater];
         var queryParameter = BigQuery.valueToQueryParameter_(value);
         queryParameter.name = namedParamater;
-        options.queryParameters.push(queryParameter);
+        reqOpts.queryParameters.push(queryParameter);
       }
     } else {
-      options.queryParameters = options.params
+      reqOpts.queryParameters = query.params
         .map(BigQuery.valueToQueryParameter_);
     }
 
-    delete options.params;
+    delete reqOpts.params;
   }
 
-  // Create a job.
-  self.request({
-    method: 'POST',
-    uri: '/queries',
-    json: options
-  }, responseHandler);
-
-  function responseHandler(err, resp) {
+  this.startQuery(reqOpts, function(err, job) {
     if (err) {
-      callback(err, null, null, resp);
+      callback(err, null);
       return;
     }
 
-    var rows = [];
-    if (resp.schema && resp.rows) {
-      rows = Table.mergeSchemaWithRows_(BigQuery, resp.schema, resp.rows);
-    }
-
-    var nextQuery = null;
-    if (resp.jobComplete === false) {
-      // Query is still running.
-      nextQuery = extend({}, options);
-    } else if (resp.pageToken) {
-      // More results exist.
-      nextQuery = extend({}, options, {
-        pageToken: resp.pageToken
-      });
-    }
-    if (nextQuery && !nextQuery.job && resp.jobReference.jobId) {
-      // Create a prepared Job to continue the query.
-      nextQuery.job = self.job(resp.jobReference.jobId);
-    }
-
-    callback(null, rows, nextQuery, resp);
-  }
+    job.getQueryResults(options, callback);
+  });
 };
 
 /**
@@ -986,7 +1033,7 @@ BigQuery.prototype.startQuery = function(options, callback) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
+common.paginator.extend(BigQuery, ['getDatasets', 'getJobs']);
 
 /*! Developer Documentation
  *

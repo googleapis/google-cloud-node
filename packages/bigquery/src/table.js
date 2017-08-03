@@ -249,94 +249,6 @@ Table.encodeValue_ = function(value) {
 };
 
 /**
- * Merge a rowset returned from the API with a table schema.
- *
- * @static
- * @private
- *
- * @param {object} schema
- * @param {array} rows
- * @return {array} Fields using their matching names from the table's schema.
- */
-Table.mergeSchemaWithRows_ = function(BigQuery, schema, rows) {
-  return arrify(rows).map(mergeSchema).map(flattenRows);
-
-  function mergeSchema(row) {
-    return row.f.map(function(field, index) {
-      var schemaField = schema.fields[index];
-      var value = field.v;
-
-      if (schemaField.mode === 'REPEATED') {
-        value = value.map(function(val) {
-          return convert(schemaField, val.v);
-        });
-      } else {
-        value = convert(schemaField, value);
-      }
-
-      var fieldObject = {};
-      fieldObject[schemaField.name] = value;
-      return fieldObject;
-    });
-  }
-
-  function convert(schemaField, value) {
-    if (is.nil(value)) {
-      return value;
-    }
-
-    switch (schemaField.type) {
-      case 'BOOLEAN': {
-        value = value === 'true';
-        break;
-      }
-      case 'BYTES': {
-        value = new Buffer(value, 'base64');
-        break;
-      }
-      case 'FLOAT': {
-        value = parseFloat(value);
-        break;
-      }
-      case 'INTEGER': {
-        value = parseInt(value, 10);
-        break;
-      }
-      case 'RECORD': {
-        value = Table.mergeSchemaWithRows_(BigQuery, schemaField, value).pop();
-        break;
-      }
-      case 'DATE': {
-        value = BigQuery.date(value);
-        break;
-      }
-      case 'DATETIME': {
-        value = BigQuery.datetime(value);
-        break;
-      }
-      case 'TIME': {
-        value = BigQuery.time(value);
-        break;
-      }
-      case 'TIMESTAMP': {
-        value = BigQuery.timestamp(new Date(value * 1000));
-        break;
-      }
-    }
-
-    return value;
-  }
-
-  function flattenRows(rows) {
-    return rows.reduce(function(acc, row) {
-      var key = Object.keys(row)[0];
-      acc[key] = row[key];
-      return acc;
-    }, {});
-  }
-};
-
-/**
  * Copy data from one table to another, optionally creating that table.
  *
  * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
@@ -891,12 +803,7 @@ Table.prototype.getRows = function(options, callback) {
       return;
     }
 
-    rows = Table.mergeSchemaWithRows_(
-      self.bigQuery,
-      self.metadata.schema,
-      rows || []
-    );
-
+    rows = self.bigQuery.mergeSchemaWithRows_(self.metadata.schema, rows || []);
     callback(null, rows, nextQuery, resp);
   }
 };
