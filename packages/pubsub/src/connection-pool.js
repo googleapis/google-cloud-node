@@ -24,7 +24,6 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var each = require('async-each');
 var events = require('events');
-var extend = require('extend');
 var is = require('is');
 var util = require('util');
 var uuid = require('uuid');
@@ -41,16 +40,16 @@ var uuid = require('uuid');
  * @param {number} options.ackDeadline - The ack deadline to send when
  *     creating a connection.
  */
-function ConnectionPool(subscription, options) {
+function ConnectionPool(subscription) {
   this.subscription = subscription;
   this.connections = new Map();
   this.isPaused = false;
   this.isOpen = false;
 
-  this.settings = extend({
-    maxConnections: 5,
-    ackDeadline: 10000
-  }, options);
+  this.settings = {
+    maxConnections: subscription.maxConnections || 5,
+    ackDeadline: subscription.ackDeadline || 10000
+  };
 
   events.EventEmitter.call(this);
 
@@ -79,7 +78,7 @@ ConnectionPool.prototype.acquire = function(id, callback) {
   }
 
   if (!this.isOpen) {
-    callback(new Error('Connection pool is closed.'));
+    callback(new Error('No connections available to make request.'));
     return;
   }
 

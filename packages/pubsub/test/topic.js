@@ -196,10 +196,20 @@ describe('Topic', function() {
 
       topic.request = function(config, callback) {
         assert.strictEqual(config.gaxOpts, options);
-        callback();
+        callback(); // the done fn
       };
 
       topic.delete(options, done);
+    });
+
+    it('should optionally accept a callback', function(done) {
+      fakeUtil.noop = done;
+
+      topic.request = function(config, callback) {
+        callback(); // the done fn
+      };
+
+      topic.delete();
     });
   });
 
@@ -288,7 +298,7 @@ describe('Topic', function() {
 
     it('should pass all params to the callback', function(done) {
       var err_ = new Error('err');
-      var subs_ = [];
+      var subs_ = false;
       var nextQuery_ = {};
       var apiResponse_ = {};
 

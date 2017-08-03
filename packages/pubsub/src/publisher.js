@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var each = require('async-each');
 var extend = require('extend');
 var is = require('is');
 
@@ -188,8 +189,11 @@ Publisher.prototype.publish_ = function() {
   }, function(err, resp) {
     var messageIds = arrify(resp && resp.messageIds);
 
-    callbacks.forEach(function(callback, i) {
-      callback(err, messageIds[i]);
+    each(callbacks, function(callback, next) {
+      var messageId = messageIds[callbacks.indexOf(callback)];
+
+      callback(err, messageId);
+      next();
     });
   });
 };

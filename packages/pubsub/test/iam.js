@@ -45,7 +45,6 @@ describe('IAM', function() {
   var iam;
 
   var PUBSUB = {
-    defaultBaseUrl_: 'base-url',
     options: {}
   };
   var ID = 'id';

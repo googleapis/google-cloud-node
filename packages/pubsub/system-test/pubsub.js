@@ -138,6 +138,7 @@ describe('pubsub', function() {
 
     it('should allow manual paging', function(done) {
       pubsub.getTopics({
+        autoPaginate: false,
         pageSize: TOPIC_NAMES.length - 1
       }, function(err, topics) {
         assert.ifError(err);
@@ -474,15 +475,13 @@ describe('pubsub', function() {
 
       return deleteAllSnapshots()
         .then(wait(2500))
-        .then(subscription.create.bind(subscription));
+        .then(subscription.create.bind(subscription))
+        .then(snapshot.create.bind(snapshot))
+        .then(wait(2500));
     });
 
     after(function() {
       return deleteAllSnapshots();
-    });
-
-    it('should create a snapshot', function(done) {
-      snapshot.create(done);
     });
 
     it('should get a list of snapshots', function(done) {

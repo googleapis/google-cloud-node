@@ -52,21 +52,8 @@ var IAM = require('./iam.js');
 var Snapshot = require('./snapshot.js');
 
 /*! Developer Documentation
- *
  * @param {module:pubsub} pubsub - PubSub object.
  * @param {string=} name - The name of the subscription.
- * @param {object=} options - See a
- *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number} options.ackDeadline - The maximum time after receiving a
- *     message that you must ack a message before it is redelivered.
- * @param {object} options.flowControl - Flow control configurations for
- *     receiving messages.
- * @param {number} options.flowControl.maxBytes - The maximum number of bytes
- *     in un-acked messages to allow before the subscription pauses incoming
- *     messages. Defaults to 20% of free memory.
- * @param {number} options.flowControl.maxMessages - The maximum number of
- *     un-acked messages to allow before the subscription pauses incoming
- *     messages. Default: Infinity.
  */
 /**
  * A Subscription object will give you access to your Cloud Pub/Sub
@@ -89,6 +76,21 @@ var Snapshot = require('./snapshot.js');
  *
  * @alias module:pubsub/subscription
  * @constructor
+ *
+ * @param {object=} options - See a
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
+ * @param {number} options.ackDeadline - The maximum time after receiving a
+ *     message that you must ack a message before it is redelivered.
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
+ * @param {number} options.maxConnections - Use this to limit the number of
+ *     connections to be used when sending and receiving messages. Default: 5.
  *
  * @example
  * //-
@@ -450,6 +452,8 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
     gaxOpts = {};
   }
 
+  callback = callback || common.util.noop;
+
   var reqOpts = {
     subscription: this.name
   };
@@ -461,7 +465,7 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
     gaxOpts: gaxOpts
   }, function(err, resp) {
     if (!err) {
-      self.removeAllListeners('message');
+      self.removeAllListeners();
       self.close();
     }
 
@@ -663,8 +667,10 @@ Subscription.prototype.listenForEvents_ = function() {
  * Modify the push config for the subscription.
  *
  * @param {object} config - The push config.
- * @param {string} config.pushEndpoint
- * @param {object} config.attributes
+ * @param {string} config.pushEndpoint - A URL locating the endpoint to which
+ *     messages should be published.
+ * @param {object} config.attributes - A set of API supported attributes that
+ *     can be used to control different aspects of the message delivery.
  * @param {object=} gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
@@ -752,11 +758,7 @@ Subscription.prototype.nack_ = function(message) {
  */
 Subscription.prototype.openConnection_ = function() {
   var self = this;
-
-  var pool = this.connectionPool = new ConnectionPool(this, {
-    ackDeadline: this.ackDeadline,
-    maxConnections: this.maxConnections
-  });
+  var pool = this.connectionPool = new ConnectionPool(this);
 
   pool.on('error', function(err) {
     self.emit('error', err);
@@ -889,9 +891,11 @@ Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
  * @private
  */
 Subscription.prototype.setFlushTimeout_ = function() {
-  if (!this.flushTimeoutHandle_) {
-    this.flushTimeoutHandle_ = setTimeout(this.flushQueues_.bind(this), 1000);
+  if (this.flushTimeoutHandle_) {
+    return;
   }
+
+  this.flushTimeoutHandle_ = setTimeout(this.flushQueues_.bind(this), 1000);
 };
 
 /**

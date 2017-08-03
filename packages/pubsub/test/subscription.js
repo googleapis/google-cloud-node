@@ -82,7 +82,7 @@ describe('Subscription', function() {
   });
 
   beforeEach(function() {
-    PUBSUB.request = fakeUtil.noop;
+    PUBSUB.request = fakeUtil.noop = function() {};
     subscription = new Subscription(PUBSUB, SUB_NAME);
   });
 
@@ -233,6 +233,7 @@ describe('Subscription', function() {
     };
 
     beforeEach(function() {
+      subscription.setFlushTimeout_ = fakeUtil.noop;
       subscription.breakLease_ = fakeUtil.noop;
       subscription.histogram.add = fakeUtil.noop;
     });
@@ -459,7 +460,7 @@ describe('Subscription', function() {
 
       it('should use a noop when callback is absent', function(done) {
         fakeUtil.noop = done;
-        subscription.closeConnection_(done);
+        subscription.closeConnection_();
         assert.strictEqual(subscription.connectionPool, null);
       });
     });
@@ -523,13 +524,16 @@ describe('Subscription', function() {
 
     it('should pass back any errors to the callback', function(done) {
       var error = new Error('err');
+      var apiResponse = {};
 
       subscription.request = function(config, callback) {
-        callback(error);
+        callback(error, apiResponse);
       };
 
-      subscription.createSnapshot(SNAPSHOT_NAME, function(err) {
+      subscription.createSnapshot(SNAPSHOT_NAME, function(err, snapshot, resp) {
         assert.strictEqual(err, error);
+        assert.strictEqual(snapshot, null);
+        assert.strictEqual(resp, apiResponse);
         done();
       });
     });
@@ -588,6 +592,16 @@ describe('Subscription', function() {
         };
       });
 
+      it('should optionally accept a callback', function(done) {
+        fakeUtil.noop = function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        };
+
+        subscription.delete();
+      });
+
       it('should return the api response', function(done) {
         subscription.delete(function(err, resp) {
           assert.ifError(err);
@@ -599,8 +613,7 @@ describe('Subscription', function() {
       it('should remove all message listeners', function(done) {
         var called = false;
 
-        subscription.removeAllListeners = function(name) {
-          assert.strictEqual(name, 'message');
+        subscription.removeAllListeners = function() {
           called = true;
         };
 
@@ -670,6 +683,19 @@ describe('Subscription', function() {
       subscription.inventory_.nack = ['ghi', 'jkl'];
     });
 
+    it('should do nothing if theres nothing to ack/nack', function() {
+      subscription.inventory_.ack = [];
+      subscription.inventory_.nack = [];
+
+      subscription.connectionPool = {
+        acquire: function() {
+          throw new Error('Should not be called.');
+        }
+      };
+
+      subscription.flushQueues_();
+    });
+
     describe('with connection pool', function() {
       var fakeConnection;
 
@@ -683,17 +709,6 @@ describe('Subscription', function() {
             callback(null, fakeConnection);
           }
         };
-      });
-
-      it('should do nothing if theres nothing to ack/nack', function() {
-        subscription.inventory_.ack = [];
-        subscription.inventory_.nack = [];
-
-        subscription.connectionPool.acquire = function() {
-          throw new Error('Should not be called.');
-        };
-
-        subscription.flushQueues_();
       });
 
       it('should emit any connection acquiring errors', function(done) {
@@ -713,20 +728,26 @@ describe('Subscription', function() {
 
       it('should write the acks to the connection', function(done) {
         fakeConnection.write = function(reqOpts) {
-          assert.deepEqual(reqOpts.ackIds, ['abc', 'def']);
+          assert.deepEqual(reqOpts, {
+            ackIds: ['abc', 'def']
+          });
           done();
         };
 
+        subscription.inventory_.nack = [];
         subscription.flushQueues_();
       });
 
       it('should write the nacks to the connection', function(done) {
         fakeConnection.write = function(reqOpts) {
-          assert.deepEqual(reqOpts.modifyDeadlineAckIds, ['ghi', 'jkl']);
-          assert.deepEqual(reqOpts.modifyDeadlineSeconds, [0, 0]);
+          assert.deepEqual(reqOpts, {
+            modifyDeadlineAckIds: ['ghi', 'jkl'],
+            modifyDeadlineSeconds: [0, 0]
+          });
           done();
         };
 
+        subscription.inventory_.ack = [];
         subscription.flushQueues_();
       });
 
@@ -739,17 +760,6 @@ describe('Subscription', function() {
     });
 
     describe('without connection pool', function() {
-      it('should do nothing if theres nothing to ack/nack', function() {
-        subscription.inventory_.ack = [];
-        subscription.inventory_.nack = [];
-
-        subscription.request = function() {
-          throw new Error('Should not be called.');
-        };
-
-        subscription.flushQueues_();
-      });
-
       describe('acking', function() {
         beforeEach(function() {
           subscription.inventory_.nack = [];
@@ -899,6 +909,10 @@ describe('Subscription', function() {
       data: new Buffer('hello')
     };
 
+    beforeEach(function() {
+      subscription.setLeaseTimeout_ = fakeUtil.noop;
+    });
+
     it('should add the ackId to the inventory', function() {
       subscription.leaseMessage_(MESSAGE);
       assert.deepEqual(subscription.inventory_.lease, [MESSAGE.ackId]);
@@ -907,7 +921,7 @@ describe('Subscription', function() {
     it('should update the byte count', function() {
       assert.strictEqual(subscription.inventory_.bytes, 0);
       subscription.leaseMessage_(MESSAGE);
-      assert.strictEqual(subscription.inventory_.bytes, 5);
+      assert.strictEqual(subscription.inventory_.bytes, MESSAGE.data.length);
     });
 
     it('should begin auto-leasing', function(done) {
@@ -1027,6 +1041,7 @@ describe('Subscription', function() {
     };
 
     beforeEach(function() {
+      subscription.setFlushTimeout_ = fakeUtil.noop;
       subscription.breakLease_ = fakeUtil.noop;
     });
 
@@ -1104,10 +1119,6 @@ describe('Subscription', function() {
 
       var args = subscription.connectionPool.calledWith_;
       assert.strictEqual(args[0], subscription);
-      assert.deepEqual(args[1], {
-        ackDeadline: subscription.ackDeadline,
-        maxConnections: subscription.maxConnections
-      });
     });
 
     it('should emit pool errors', function(done) {
@@ -1198,6 +1209,7 @@ describe('Subscription', function() {
 
     beforeEach(function() {
       subscription.inventory_.lease = ['abc', 'def'];
+      subscription.setLeaseTimeout_ = fakeUtil.noop;
 
       subscription.histogram.percentile = function() {
         return fakeDeadline;
@@ -1222,6 +1234,17 @@ describe('Subscription', function() {
       subscription.renewLeases_();
     });
 
+    it('should not renew leases if inventory is empty', function() {
+      subscription.connectionPool = {
+        acquire: function() {
+          throw new Error('Should not have been called.');
+        }
+      };
+
+      subscription.inventory_.lease = [];
+      subscription.renewLeases_();
+    });
+
     describe('with connection pool', function() {
       var fakeConnection;
 
@@ -1235,15 +1258,6 @@ describe('Subscription', function() {
             callback(null, fakeConnection);
           }
         };
-      });
-
-      it('should not renew leases if inventory is empty', function() {
-        subscription.connectionPool.acquire = function() {
-          throw new Error('Should not have been called.');
-        };
-
-        subscription.inventory_.lease = [];
-        subscription.renewLeases_();
       });
 
       it('should emit any pool acquiring errors', function(done) {
@@ -1276,7 +1290,7 @@ describe('Subscription', function() {
 
     describe('without connection pool', function() {
       it('should make the correct request', function(done) {
-        subscription.request = function(config) {
+        subscription.request = function(config, callback) {
           assert.strictEqual(config.client, 'subscriberClient');
           assert.strictEqual(config.method, 'modifyAckDeadline');
           assert.deepEqual(config.reqOpts, {
@@ -1284,8 +1298,13 @@ describe('Subscription', function() {
             ackIds: ['abc', 'def'],
             ackDeadlineSeconds: fakeDeadline / 1000
           });
+          callback();
           done();
         };
+
+        subscription.on('error', function(err) {
+          done(err);
+        });
 
         subscription.renewLeases_();
       });

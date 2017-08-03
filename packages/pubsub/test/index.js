@@ -27,8 +27,6 @@ var v1 = require('../src/v1/index.js');
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
 
-var Topic = require('../src/topic.js');
-
 function Subscription(a, b, c) {
   var OverrideFn = SubscriptionOverride || SubscriptionCached;
   return new OverrideFn(a, b, c);
@@ -52,6 +50,10 @@ var fakeUtil = extend({}, util, {
 });
 
 function FakeSnapshot() {
+  this.calledWith_ = arguments;
+}
+
+function FakeTopic() {
   this.calledWith_ = arguments;
 }
 
@@ -121,7 +123,7 @@ describe('PubSub', function() {
       'google-auto-auth': fakeGoogleAutoAuth,
       './snapshot.js': FakeSnapshot,
       './subscription.js': Subscription,
-      './topic.js': Topic,
+      './topic.js': FakeTopic,
       './v1': fakeV1,
       './v1/publisher_client_config.json': GAX_CONFIG.Publisher,
       './v1/subscriber_client_config.json': GAX_CONFIG.Subscriber
@@ -230,9 +232,9 @@ describe('PubSub', function() {
 
   describe('createSubscription', function() {
     var TOPIC_NAME = 'topic';
-    var TOPIC = {
+    var TOPIC = extend(new FakeTopic(), {
       name: 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME
-    };
+    });
 
     var SUB_NAME = 'subscription';
     var SUBSCRIPTION = {
@@ -260,7 +262,7 @@ describe('PubSub', function() {
         callback(null, apiResponse);
       };
 
-      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, done);
+      pubsub.createSubscription(TOPIC, SUB_NAME, done);
     });
 
     it('should allow undefined/optional configuration options', function(done) {
@@ -268,7 +270,7 @@ describe('PubSub', function() {
         callback(null, apiResponse);
       };
 
-      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, undefined, done);
+      pubsub.createSubscription(TOPIC, SUB_NAME, undefined, done);
     });
 
     it('should create a Subscription', function(done) {
@@ -283,7 +285,7 @@ describe('PubSub', function() {
         return SUBSCRIPTION;
       };
 
-      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, opts, assert.ifError);
     });
 
     it('should create a Topic object from a string', function(done) {
@@ -318,13 +320,13 @@ describe('PubSub', function() {
       pubsub.request = function(config) {
         assert.strictEqual(config.client, 'subscriberClient');
         assert.strictEqual(config.method, 'createSubscription');
-        assert.strictEqual(config.reqOpts.topic, TOPIC_NAME);
+        assert.strictEqual(config.reqOpts.topic, TOPIC.name);
         assert.strictEqual(config.reqOpts.name, SUB_NAME);
         assert.strictEqual(config.gaxOpts, options.gaxOpts);
         done();
       };
 
-      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, options, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
     it('should pass options to the api request', function(done) {
@@ -335,7 +337,7 @@ describe('PubSub', function() {
       };
 
       var expectedBody = extend({
-        topic: TOPIC_NAME,
+        topic: TOPIC.name,
         name: SUB_NAME
       }, options, {
         pushConfig: {
@@ -365,7 +367,7 @@ describe('PubSub', function() {
         done();
       };
 
-      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, options, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
     describe('message retention', function() {
@@ -668,7 +670,7 @@ describe('PubSub', function() {
 
     it('should pass back all parameters', function(done) {
       var err_ = new Error('abc');
-      var snapshots_ = [];
+      var snapshots_ = null;
       var nextQuery_ = {};
       var apiResponse_ = {};
 
@@ -741,7 +743,7 @@ describe('PubSub', function() {
 
     it('should pass back all params', function(done) {
       var err_ = new Error('err');
-      var subs_ = [];
+      var subs_ = false;
       var nextQuery_ = {};
       var apiResponse_ = {};
 
@@ -755,6 +757,45 @@ describe('PubSub', function() {
         assert.strictEqual(nextQuery, nextQuery_);
         assert.strictEqual(apiResponse, apiResponse_);
         done();
+      });
+    });
+
+    describe('with topic', function() {
+      var TOPIC_NAME = 'topic-name';
+
+      it('should call topic.getSubscriptions', function(done) {
+        var topic = new FakeTopic();
+
+        var opts = {
+          topic: topic
+        };
+
+        topic.getSubscriptions = function(options, callback) {
+          assert.strictEqual(options, opts);
+          callback(); // the done fn
+        };
+
+        pubsub.getSubscriptions(opts, done);
+      });
+
+      it('should create a topic instance from a name', function(done) {
+        var opts = {
+          topic: TOPIC_NAME
+        };
+
+        var fakeTopic = {
+          getSubscriptions: function(options, callback) {
+            assert.strictEqual(options, opts);
+            callback(); // the done fn
+          }
+        };
+
+        pubsub.topic = function(name) {
+          assert.strictEqual(name, TOPIC_NAME);
+          return fakeTopic;
+        };
+
+        pubsub.getSubscriptions(opts, done);
       });
     });
   });
@@ -814,7 +855,7 @@ describe('PubSub', function() {
 
     it('should pass back all params', function(done) {
       var err_ = new Error('err');
-      var topics_ = [];
+      var topics_ = false;
       var nextQuery_ = {};
       var apiResponse_ = {};
 
@@ -937,9 +978,9 @@ describe('PubSub', function() {
     });
 
     it('should do nothing if sandbox env var is set', function(done) {
-      process.env.GCLOUD_SANDBOX_ENV = true;
+      global.GCLOUD_SANDBOX_ENV = true;
       pubsub.request(CONFIG, done); // should not fire done
-      process.evn.GCLOUD_SANDBOX_ENV = false;
+      global.GCLOUD_SANDBOX_ENV = false;
       done();
     });
   });
@@ -964,7 +1005,7 @@ describe('PubSub', function() {
 
   describe('subscription', function() {
     var SUB_NAME = 'new-sub-name';
-    var CONFIG = { autoAck: true, interval: 90 };
+    var CONFIG = {};
 
     it('should return a Subscription object', function() {
       SubscriptionOverride = function() {};
@@ -1003,7 +1044,7 @@ describe('PubSub', function() {
     });
 
     it('should return a Topic object', function() {
-      assert(pubsub.topic('new-topic') instanceof Topic);
+      assert(pubsub.topic('new-topic') instanceof FakeTopic);
     });
   });
 });

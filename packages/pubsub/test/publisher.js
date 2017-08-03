@@ -87,12 +87,14 @@ describe('Publisher', function() {
           maxMessages: 11,
           maxMilliseconds: 12
         };
+        var optionsCopy = extend({}, options);
 
         var publisher = new Publisher(TOPIC, {
           batching: options
         });
 
         assert.deepEqual(publisher.settings.batching, options);
+        assert.deepEqual(options, optionsCopy);
       });
 
       it('should cap maxBytes', function() {
@@ -118,6 +120,21 @@ describe('Publisher', function() {
   describe('publish', function() {
     var DATA = new Buffer('hello');
     var ATTRS = { a: 'a' };
+
+    var globalSetTimeout;
+
+    before(function() {
+      globalSetTimeout = global.setTimeout;
+    });
+
+    beforeEach(function() {
+      publisher.publish_ = fakeUtil.noop;
+      global.setTimeout = fakeUtil.noop;
+    });
+
+    after(function() {
+      global.setTimeout = globalSetTimeout;
+    });
 
     it('should throw an error when data is not a buffer', function() {
       assert.throws(function() {

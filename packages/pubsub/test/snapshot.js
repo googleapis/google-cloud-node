@@ -37,7 +37,12 @@ describe('Snapshot', function() {
   var SNAPSHOT_NAME = 'a';
   var PROJECT_ID = 'grape-spaceship-123';
 
+  var PUBSUB = {
+    projectId: PROJECT_ID
+  };
+
   var SUBSCRIPTION = {
+    pubsub: PUBSUB,
     projectId: PROJECT_ID,
     api: {},
     createSnapshot: function() {},
@@ -122,6 +127,22 @@ describe('Snapshot', function() {
 
         var snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
         snapshot.seek(done);
+      });
+    });
+
+    describe('with PubSub parent', function() {
+      var snapshot;
+
+      beforeEach(function() {
+        snapshot = new Snapshot(PUBSUB, SNAPSHOT_NAME);
+      });
+
+      it('should not include the create method', function() {
+        assert.strictEqual(snapshot.create, undefined);
+      });
+
+      it('should not include a seek method', function() {
+        assert.strictEqual(snapshot.seek, undefined);
       });
     });
   });

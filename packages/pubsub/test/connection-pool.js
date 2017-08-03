@@ -85,9 +85,12 @@ describe('ConnectionPool', function() {
         ackDeadline: 100
       };
 
-      var pool = new ConnectionPool(SUBSCRIPTION, options);
+      var subscription = extend({}, SUBSCRIPTION, options);
+      var subscriptionCopy = extend({}, subscription);
+      var pool = new ConnectionPool(subscription);
 
       assert.deepEqual(pool.settings, options);
+      assert.deepEqual(subscription, subscriptionCopy);
     });
 
     it('should inherit from EventEmitter', function() {
@@ -108,11 +111,13 @@ describe('ConnectionPool', function() {
 
   describe('acquire', function() {
     it('should return an error if the pool is closed', function(done) {
+      var expectedErr = 'No connections available to make request.';
+
       pool.isOpen = false;
 
       pool.acquire(function(err) {
         assert(err instanceof Error);
-        assert.strictEqual(err.message, 'Connection pool is closed.');
+        assert.strictEqual(err.message, expectedErr);
         done();
       });
     });
@@ -420,14 +425,17 @@ describe('ConnectionPool', function() {
 
   describe('open', function() {
     it('should make the specified number of connections', function() {
+      var expectedCount = 5;
       var connectionCount = 0;
 
       pool.createConnection = function() {
         connectionCount += 1;
       };
 
+      pool.settings.maxConnections = expectedCount;
       pool.open();
-      assert.strictEqual(pool.settings.maxConnections, connectionCount);
+
+      assert.strictEqual(expectedCount, connectionCount);
     });
 
     it('should set the isOpen flag to true', function() {

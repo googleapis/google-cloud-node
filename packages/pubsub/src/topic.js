@@ -202,7 +202,7 @@ Topic.prototype.createSubscription = function(name, options, callback) {
  *
  * @param {object=} gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
- * @param {function} callback - The callback function.
+ * @param {function=} callback - The callback function.
  *
  * @example
  * topic.delete(function(err, apiResponse) {});
@@ -219,6 +219,8 @@ Topic.prototype.delete = function(gaxOpts, callback) {
     callback = gaxOpts;
     gaxOpts = {};
   }
+
+  callback = callback || common.util.noop;
 
   var reqOpts = {
     topic: this.name

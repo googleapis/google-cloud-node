@@ -41,7 +41,7 @@ describe('Histogram', function() {
   });
 
   describe('add', function() {
-    it('increment a value', function() {
+    it('should increment a value', function() {
       histogram.data.set(MIN_VALUE, 1);
       histogram.add(MIN_VALUE);
 
