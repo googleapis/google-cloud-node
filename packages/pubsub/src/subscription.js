@@ -669,8 +669,7 @@ Subscription.prototype.listenForEvents_ = function() {
  * @param {object} config - The push config.
  * @param {string} config.pushEndpoint - A URL locating the endpoint to which
  *     messages should be published.
- * @param {object} config.attributes - A set of API supported attributes that
- *     can be used to control different aspects of the message delivery.
+ * @param {object} config.attributes - [PushConfig attributes](https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#google.pubsub.v1.PushConfig).
  * @param {object=} gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
