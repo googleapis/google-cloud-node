@@ -21,9 +21,15 @@ var common = require('@google-cloud/common');
 var events = require('events');
 var extend = require('extend');
 var is = require('is');
-var os = require('os');
 var proxyquire = require('proxyquire');
 var util = require('util');
+
+var FAKE_FREE_MEM = 168222720;
+var fakeOs = {
+  freemem: function() {
+    return FAKE_FREE_MEM;
+  }
+};
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
@@ -74,6 +80,7 @@ describe('Subscription', function() {
       '@google-cloud/common': {
         util: fakeUtil
       },
+      os: fakeOs,
       './connection-pool.js': FakeConnectionPool,
       './histogram.js': FakeHistogram,
       './iam.js': FakeIAM,
@@ -157,7 +164,7 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.messageListeners, 0);
 
       assert.deepEqual(subscription.flowControl, {
-        maxBytes: os.freemem() * 0.2,
+        maxBytes: FAKE_FREE_MEM * 0.2,
         maxMessages: Infinity
       });
     });
