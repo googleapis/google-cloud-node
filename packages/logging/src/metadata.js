@@ -43,14 +43,12 @@ function Metadata(logging) {
 /**
  * Create a descriptor for Cloud Functions.
  *
- * @param {string} projectId - The project ID.
  * @returns {object}
  */
-Metadata.getCloudFunctionDescriptor = function(projectId) {
+Metadata.getCloudFunctionDescriptor = function() {
   return {
     type: 'cloud_function',
     labels: {
-      project_id: projectId,
       function_name: process.env.FUNCTION_NAME,
       region: process.env.SUPERVISOR_REGION
     }
@@ -60,14 +58,12 @@ Metadata.getCloudFunctionDescriptor = function(projectId) {
 /**
  * Create a descriptor for Google App Engine.
  *
- * @param {string} projectId - The project ID.
  * @returns {object}
  */
-Metadata.getGAEDescriptor = function(projectId) {
+Metadata.getGAEDescriptor = function() {
   return {
     type: 'gae_app',
     labels: {
-      project_id: projectId,
       module_id: process.env.GAE_SERVICE || process.env.GAE_MODULE_NAME,
       version_id: process.env.GAE_VERSION
     }
@@ -79,15 +75,11 @@ Metadata.getGAEDescriptor = function(projectId) {
  *
  * @private
  *
- * @param {string} projectId - The project ID.
  * @return {object}
  */
-Metadata.getGCEDescriptor = function(projectId) {
+Metadata.getGCEDescriptor = function() {
   return {
-    type: 'gce_instance',
-    labels: {
-      project_id: projectId
-    }
+    type: 'gce_instance'
   };
 };
 
@@ -96,11 +88,10 @@ Metadata.getGCEDescriptor = function(projectId) {
  *
  * @private
  *
- * @param {string} projectId - The project ID.
  * @param {function} callback - The callback function.
  * @return {object}
  */
-Metadata.getGKEDescriptor = function(projectId, callback) {
+Metadata.getGKEDescriptor = function(callback) {
   gcpMetadata.instance('attributes/clusterName', function(err, _, clusterName) {
     if (err) {
       callback(err);
@@ -111,8 +102,7 @@ Metadata.getGKEDescriptor = function(projectId, callback) {
       type: 'container',
       labels: {
         // TODO(ofrobots): it would be good to include the namespace_id as well.
-        cluster_name: clusterName,
-        project_id: projectId
+        cluster_name: clusterName
       }
     });
   });
@@ -123,15 +113,11 @@ Metadata.getGKEDescriptor = function(projectId, callback) {
  *
  * @private
  *
- * @param {string} projectId - The project ID.
  * @returns {object}
  */
-Metadata.getGlobalDescriptor = function(projectId) {
+Metadata.getGlobalDescriptor = function() {
   return {
-    type: 'global',
-    labels: {
-      project_id: projectId
-    }
+    type: 'global'
   };
 };
 
@@ -141,34 +127,25 @@ Metadata.getGlobalDescriptor = function(projectId) {
  * @param {function} callback - The callback function.
  */
 Metadata.prototype.getDefaultResource = function(callback) {
-  var self = this;
-
-  this.logging.auth.getProjectId(function(err, projectId) {
-    if (err) {
-      callback(err);
+  this.logging.auth.getEnvironment(function(err, env) {
+    if (env.IS_CONTAINER_ENGINE) {
+      Metadata.getGKEDescriptor(callback);
       return;
     }
 
-    self.logging.auth.getEnvironment(function(err, env) {
-      if (env.IS_CONTAINER_ENGINE) {
-        Metadata.getGKEDescriptor(projectId, callback);
-        return;
-      }
+    var defaultResource;
 
-      var defaultResource;
+    if (env.IS_APP_ENGINE) {
+      defaultResource = Metadata.getGAEDescriptor();
+    } else if (env.IS_CLOUD_FUNCTION) {
+      defaultResource = Metadata.getCloudFunctionDescriptor();
+    } else if (env.IS_COMPUTE_ENGINE) {
+      defaultResource = Metadata.getGCEDescriptor();
+    } else {
+      defaultResource = Metadata.getGlobalDescriptor();
+    }
 
-      if (env.IS_APP_ENGINE) {
-        defaultResource = Metadata.getGAEDescriptor(projectId);
-      } else if (env.IS_CLOUD_FUNCTION) {
-        defaultResource = Metadata.getCloudFunctionDescriptor(projectId);
-      } else if (env.IS_COMPUTE_ENGINE) {
-        defaultResource = Metadata.getGCEDescriptor(projectId);
-      } else {
-        defaultResource = Metadata.getGlobalDescriptor(projectId);
-      }
-
-      callback(null, defaultResource);
-    });
+    callback(null, defaultResource);
   });
 };
 

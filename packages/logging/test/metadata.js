@@ -35,7 +35,6 @@ describe('metadata', function() {
   var Metadata;
   var metadata;
 
-  var PROJECT_ID = 'project-id';
   var LOGGING;
 
   var ENV_CACHED = extend({}, process.env);
@@ -77,10 +76,9 @@ describe('metadata', function() {
     });
 
     it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getCloudFunctionDescriptor(PROJECT_ID), {
+      assert.deepEqual(Metadata.getCloudFunctionDescriptor(), {
         type: 'cloud_function',
         labels: {
-          project_id: PROJECT_ID,
           function_name: FUNCTION_NAME,
           region: SUPERVISOR_REGION
         }
@@ -100,10 +98,9 @@ describe('metadata', function() {
     });
 
     it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGAEDescriptor(PROJECT_ID), {
+      assert.deepEqual(Metadata.getGAEDescriptor(), {
         type: 'gae_app',
         labels: {
-          project_id: PROJECT_ID,
           module_id: GAE_SERVICE,
           version_id: GAE_VERSION
         }
@@ -113,7 +110,7 @@ describe('metadata', function() {
     it('should use GAE_MODULE_NAME for module_id', function() {
       delete process.env.GAE_SERVICE;
 
-      var moduleId = Metadata.getGAEDescriptor(PROJECT_ID).labels.module_id;
+      var moduleId = Metadata.getGAEDescriptor().labels.module_id;
       assert.strictEqual(moduleId, GAE_MODULE_NAME);
     });
   });
@@ -124,13 +121,12 @@ describe('metadata', function() {
     it('should return the correct descriptor', function(done) {
       instanceArgsOverride = [null, null, CLUSTER_NAME];
 
-      Metadata.getGKEDescriptor(PROJECT_ID, function(err, descriptor) {
+      Metadata.getGKEDescriptor(function(err, descriptor) {
         assert.ifError(err);
         assert.deepEqual(descriptor, {
           type: 'container',
           labels: {
-            cluster_name: CLUSTER_NAME,
-            project_id: PROJECT_ID
+            cluster_name: CLUSTER_NAME
           }
         });
         done();
@@ -141,7 +137,7 @@ describe('metadata', function() {
       var FAKE_ERROR = new Error();
       instanceArgsOverride = [ FAKE_ERROR ];
 
-      Metadata.getGKEDescriptor(PROJECT_ID, function(err) {
+      Metadata.getGKEDescriptor(function(err) {
         assert.strictEqual(err, FAKE_ERROR);
         done();
       });
@@ -150,56 +146,21 @@ describe('metadata', function() {
 
   describe('getGCEDescriptor', function() {
     it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGCEDescriptor(PROJECT_ID), {
-        type: 'gce_instance',
-        labels: {
-          project_id: PROJECT_ID
-        }
+      assert.deepEqual(Metadata.getGCEDescriptor(), {
+        type: 'gce_instance'
       });
     });
   });
 
   describe('getGlobalDescriptor', function() {
     it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGlobalDescriptor(PROJECT_ID), {
-        type: 'global',
-        labels: {
-          project_id: PROJECT_ID
-        }
+      assert.deepEqual(Metadata.getGlobalDescriptor(), {
+        type: 'global'
       });
     });
   });
 
   describe('getDefaultResource', function() {
-    var RETURNED_PROJECT_ID = 'project-id';
-
-    beforeEach(function() {
-      metadata.logging.auth.getProjectId = function(callback) {
-        callback(null, RETURNED_PROJECT_ID);
-      };
-    });
-
-    it('should get the project ID', function(done) {
-      metadata.logging.auth.getProjectId = function() {
-        done();
-      };
-
-      metadata.getDefaultResource(assert.ifError);
-    });
-
-    it('should return error from getProjectId', function(done) {
-      var error = new Error('Error.');
-
-      metadata.logging.auth.getProjectId = function(callback) {
-        callback(error);
-      };
-
-      metadata.getDefaultResource(function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-
     it('should get the environment from auth client', function(done) {
       metadata.logging.auth.getEnvironment = function() {
         done();
@@ -213,8 +174,7 @@ describe('metadata', function() {
         it('should return correct descriptor', function(done) {
           var DESCRIPTOR = {};
 
-          Metadata.getGAEDescriptor = function(projectId) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+          Metadata.getGAEDescriptor = function() {
             return DESCRIPTOR;
           };
 
@@ -237,8 +197,7 @@ describe('metadata', function() {
         it('should return correct descriptor', function(done) {
           var DESCRIPTOR = {};
 
-          Metadata.getCloudFunctionDescriptor = function(projectId) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+          Metadata.getCloudFunctionDescriptor = function() {
             return DESCRIPTOR;
           };
 
@@ -261,8 +220,7 @@ describe('metadata', function() {
         it('should return correct descriptor', function(done) {
           var DESCRIPTOR = {};
 
-          Metadata.getGCEDescriptor = function(projectId) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+          Metadata.getGCEDescriptor = function() {
             return DESCRIPTOR;
           };
 
@@ -297,8 +255,7 @@ describe('metadata', function() {
             assert.deepStrictEqual(defaultResource, {
               type: 'container',
               labels: {
-                cluster_name: CLUSTER_NAME,
-                project_id: RETURNED_PROJECT_ID
+                cluster_name: CLUSTER_NAME
               }
             });
             done();
@@ -310,8 +267,7 @@ describe('metadata', function() {
         it('should return correct descriptor', function(done) {
           var DESCRIPTOR = {};
 
-          Metadata.getGlobalDescriptor = function(projectId) {
-            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+          Metadata.getGlobalDescriptor = function() {
             return DESCRIPTOR;
           };
 
