@@ -46,6 +46,7 @@ var fakeUtil = extend({}, util, {
       'machineType',
       'network',
       'operation',
+      'project',
       'region',
       'rule',
       'service',
@@ -106,6 +107,10 @@ function FakeOperation() {
   this.calledWith_ = slice.call(arguments);
 }
 
+function FakeProject() {
+  this.calledWith_ = slice.call(arguments);
+}
+
 function FakeRegion() {
   this.calledWith_ = slice.call(arguments);
   this.address = function() { return {}; };
@@ -155,6 +160,7 @@ describe('Compute', function() {
       './health-check.js': FakeHealthCheck,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,
+      './project.js': FakeProject,
       './region.js': FakeRegion,
       './rule.js': FakeRule,
       './service.js': FakeServiceClass,
@@ -2542,6 +2548,14 @@ describe('Compute', function() {
       assert(op instanceof FakeOperation);
       assert.strictEqual(op.calledWith_[0], compute);
       assert.strictEqual(op.calledWith_[1], NAME);
+    });
+  });
+
+  describe('project', function() {
+    it('should return a Project object', function() {
+      var project = compute.project();
+      assert(project instanceof FakeProject);
+      assert.strictEqual(project.calledWith_[0], compute);
     });
   });
 

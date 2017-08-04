@@ -739,6 +739,30 @@ describe('Compute', function() {
     });
   });
 
+  describe('project', function() {
+    var project;
+
+    beforeEach(function() {
+      project = compute.project();
+    });
+
+    it('should get the project', function(done) {
+      project.get(function(err, project) {
+        assert.ifError(err);
+        assert(project.metadata);
+        done();
+      });
+    });
+
+    it('should get metadata about the project', function(done) {
+      project.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert(metadata);
+        done();
+      });
+    });
+  });
+
   describe('regions', function() {
     it('should get a list of regions', function(done) {
       compute.getRegions(function(err, regions) {
