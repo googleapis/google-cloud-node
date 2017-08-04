@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ var util = require('util');
  * @param {module:compute} compute - Compute object this project belongs to.
  */
 /**
- * A Projects object allows you to interact with your Google Compute Engine
+ * A Project object allows you to interact with your Google Compute Engine
  * project.
  *
  * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/projects}
@@ -38,25 +38,62 @@ var util = require('util');
  * @alias module:compute/project
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var project = gce.project();
- *
  */
 function Project(compute) {
+  this.id = compute.projectId;
+
+  var methods = {
+    /**
+     * Get a Project object.
+     *
+     * @example
+     * project.get(function(err, project, apiResponse) {
+     *   // `project` is a Project object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.get().then(function(data) {
+     *   var project = data[0];
+     *   var apiResponse = data[1];
+     * });
+     */
+    get: true,
+
+    /**
+     * Get the project's metadata.
+     *
+     * @resource [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
+     * @resource [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+     *
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.metadata - The machine type's metadata.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * project.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
+     */
+    getMetadata: true
+  };
+
   common.ServiceObject.call(this, {
     parent: compute,
-    baseUrl: '/',
-    id: compute.projectId
+    baseUrl: '',
+    id: '',
+    methods: methods
   });
-
-
-  this.name = compute.projectId;
 }
 
 util.inherits(Project, common.ServiceObject);

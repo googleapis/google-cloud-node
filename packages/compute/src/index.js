@@ -1743,84 +1743,6 @@ Compute.prototype.getOperationsStream =
 /**
  * Return the regions available to your project.
  *
- * @resource [Project Overview]{@link https://cloud.google.com/compute/docs/projects}
- *
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/project} callback.project - Project objects with
- *     details
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * gce.getProject(function(err, project) {
- *   // `project` is an object with metadata
- * });
- *
- *
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * gce.getProject().then(function(data) {
- *   var project = data[0];
- * });
- */
-Compute.prototype.getProject = function(options, callback) {
-  var self = this;
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  this.request({
-    uri: '',
-    qs: options
-  }, function(err, resp) {
-
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
-
-    var project = new Project(self);
-    project.metadata = resp;
-
-    callback(null, project, null, resp);
-  });
-};
-
-/**
- * Get a list of global {module:compute/project} objects as a readable object
- * stream.
- *
- * @return {stream}
- *
- * @example
- * gce.getProjectStream()
- *   .on('error', console.error)
- *   .on('data', function(operation) {
- *     // `operation` is a `Operation` object.
- *   })
- *   .on('end', function() {
- *     // All operations retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * gce.getProjectStream()
- *   .on('data', function(operation) {
- *     this.end();
- *   });
- */
-Compute.prototype.getProjectStream =
-  common.paginator.streamify('getProject');
-
-/**
- * Return the regions available to your project.
- *
  * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
  * @resource [Regions: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/list}
  *
@@ -2721,7 +2643,6 @@ Compute.prototype.operation = function(name) {
  *
  * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
  *
- * @param {string} name - Name of the existing operation.
  * @return {module:compute/project}
  *
  * @example
@@ -2845,7 +2766,6 @@ common.paginator.extend(Compute, [
   'getMachineTypes',
   'getNetworks',
   'getOperations',
-  'getProject',
   'getRegions',
   'getRules',
   'getServices',

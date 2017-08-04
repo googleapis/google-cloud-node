@@ -77,7 +77,6 @@ var fakePaginator = {
       'getMachineTypes',
       'getNetworks',
       'getOperations',
-      'getProject',
       'getRegions',
       'getRules',
       'getServices',
@@ -230,7 +229,6 @@ describe('Compute', function() {
       assert.strictEqual(compute.getMachineTypesStream, 'getMachineTypes');
       assert.strictEqual(compute.getNetworksStream, 'getNetworks');
       assert.strictEqual(compute.getOperationsStream, 'getOperations');
-      assert.strictEqual(compute.getProjectStream, 'getProject');
       assert.strictEqual(compute.getRegionsStream, 'getRegions');
       assert.strictEqual(compute.getRulesStream, 'getRules');
       assert.strictEqual(compute.getServicesStream, 'getServices');
@@ -1816,99 +1814,6 @@ describe('Compute', function() {
     });
   });
 
-  describe('getProject', function() {
-    it('should accept only a callback', function(done) {
-      compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
-        done();
-      };
-
-      compute.getProject(assert.ifError);
-    });
-
-    it('should make the correct API request', function(done) {
-      var options = {};
-
-      compute.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.qs, options);
-        done();
-      };
-
-      compute.getProject(options, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        compute.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        compute.getProject({}, function(err, project, nextQuery, resp) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(project, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(resp, apiResponse);
-
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var project = { name: PROJECT_ID };
-      var apiResponse = project;
-
-      beforeEach(function() {
-        compute.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should create Project object from the response', function(done) {
-        compute.project = function(name) {
-          assert.strictEqual(name, project.name);
-          setImmediate(done);
-          return project;
-        };
-
-        compute.getProject({}, (err) => {
-          assert.ifError(err);
-
-          compute.project(PROJECT_ID);
-        });
-      });
-
-      it('shouldn\'t build a nextQuery', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: 'next-page-token'
-        });
-
-        var query = { a: 'b', c: 'd' };
-        var originalQuery = extend({}, query);
-
-        compute.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
-        };
-
-        compute.getProject(query, function(err, project, nextQuery) {
-          assert.ifError(err);
-
-          assert.deepEqual(query, originalQuery);
-
-          assert.strictEqual(nextQuery, null);
-
-          done();
-        });
-      });
-    });
-  });
-
   describe('getRegions', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
@@ -2643,6 +2548,14 @@ describe('Compute', function() {
       assert(op instanceof FakeOperation);
       assert.strictEqual(op.calledWith_[0], compute);
       assert.strictEqual(op.calledWith_[1], NAME);
+    });
+  });
+
+  describe('project', function() {
+    it('should return a Region object', function() {
+      var project = compute.project();
+      assert(project instanceof FakeProject);
+      assert.strictEqual(project.calledWith_[0], compute);
     });
   });
 

@@ -740,26 +740,26 @@ describe('Compute', function() {
   });
 
   describe('project', function() {
+    var project;
+
+    beforeEach(function() {
+      project = compute.project();
+    });
+
     it('should get the project', function(done) {
-      compute.getProject(function(err, project) {
+      project.get(function(err, project) {
         assert.ifError(err);
         assert(project.metadata);
         done();
       });
     });
 
-    it('should get a list of machine types in stream mode', function(done) {
-      var resultsMatched = 0;
-
-      compute.getProjectStream()
-        .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
-          assert(resultsMatched > 0);
-          done();
-        });
+    it('should get metadata about the project', function(done) {
+      project.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert(metadata);
+        done();
+      });
     });
   });
 

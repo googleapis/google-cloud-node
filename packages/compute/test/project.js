@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
 var promisified = false;
@@ -34,10 +32,7 @@ var fakeUtil = extend({}, util, {
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Project', function() {
   var Project;
@@ -67,18 +62,22 @@ describe('Project', function() {
       assert(promisified);
     });
 
-    it('should localize the name', function() {
-      assert.strictEqual(project.name, PROJECT_ID);
+    it('should localize the ID', function() {
+      assert.strictEqual(project.id, PROJECT_ID);
     });
 
     it('should inherit from ServiceObject', function() {
-      assert(project instanceof ServiceObject);
+      assert(project instanceof FakeServiceObject);
 
       var calledWith = project.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
-      assert.strictEqual(calledWith.baseUrl, '/');
-      assert.strictEqual(calledWith.id, PROJECT_ID);
+      assert.strictEqual(calledWith.baseUrl, '');
+      assert.strictEqual(calledWith.id, '');
+      assert.deepStrictEqual(calledWith.methods, {
+        get: true,
+        getMetadata: true
+      });
     });
   });
 });
