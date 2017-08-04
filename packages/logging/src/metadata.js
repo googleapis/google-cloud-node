@@ -75,12 +75,23 @@ Metadata.getGAEDescriptor = function() {
  *
  * @private
  *
+ * @param {function} callback - The callback function.
  * @return {object}
  */
-Metadata.getGCEDescriptor = function() {
-  return {
-    type: 'gce_instance'
-  };
+Metadata.getGCEDescriptor = function(callback) {
+  gcpMetadata.instance('id', function(err, _, instanceId) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, {
+      type: 'gce_instance',
+      labels: {
+        instance_id: instanceId
+      }
+    });
+  });
 };
 
 /**
@@ -130,22 +141,17 @@ Metadata.prototype.getDefaultResource = function(callback) {
   this.logging.auth.getEnvironment(function(err, env) {
     if (env.IS_CONTAINER_ENGINE) {
       Metadata.getGKEDescriptor(callback);
-      return;
-    }
-
-    var defaultResource;
-
-    if (env.IS_APP_ENGINE) {
-      defaultResource = Metadata.getGAEDescriptor();
+    } else if (env.IS_APP_ENGINE) {
+      callback(null, Metadata.getGAEDescriptor());
     } else if (env.IS_CLOUD_FUNCTION) {
-      defaultResource = Metadata.getCloudFunctionDescriptor();
+      callback(null, Metadata.getCloudFunctionDescriptor());
     } else if (env.IS_COMPUTE_ENGINE) {
-      defaultResource = Metadata.getGCEDescriptor();
+      // Test for compute engine should be done after all the rest - everything
+      // runs on top of compute engine.
+      Metadata.getGCEDescriptor(callback);
     } else {
-      defaultResource = Metadata.getGlobalDescriptor();
+      callback(null, Metadata.getGlobalDescriptor());
     }
-
-    callback(null, defaultResource);
   });
 };
 

@@ -145,9 +145,30 @@ describe('metadata', function() {
   });
 
   describe('getGCEDescriptor', function() {
-    it('should return the correct descriptor', function() {
-      assert.deepEqual(Metadata.getGCEDescriptor(), {
-        type: 'gce_instance'
+    var INSTANCE_ID = 'fake-instance-id';
+
+    it('should return the correct descriptor', function(done) {
+      instanceArgsOverride = [null, null, INSTANCE_ID];
+
+      Metadata.getGCEDescriptor(function(err, descriptor) {
+        assert.ifError(err);
+        assert.deepEqual(descriptor, {
+          type: 'gce_instance',
+          labels: {
+            instance_id: INSTANCE_ID
+          }
+        });
+        done();
+      });
+    });
+
+    it('should return error on failure to acquire metadata', function(done) {
+      var FAKE_ERROR = new Error();
+      instanceArgsOverride = [ FAKE_ERROR ];
+
+      Metadata.getGCEDescriptor(function(err) {
+        assert.strictEqual(err, FAKE_ERROR);
+        done();
       });
     });
   });
@@ -218,11 +239,8 @@ describe('metadata', function() {
 
       describe('compute engine', function() {
         it('should return correct descriptor', function(done) {
-          var DESCRIPTOR = {};
-
-          Metadata.getGCEDescriptor = function() {
-            return DESCRIPTOR;
-          };
+          var INSTANCE_ID = 'overridden-value';
+          instanceArgsOverride = [null, null, INSTANCE_ID];
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -232,7 +250,12 @@ describe('metadata', function() {
 
           metadata.getDefaultResource(function(err, defaultResource) {
             assert.ifError(err);
-            assert.strictEqual(defaultResource, DESCRIPTOR);
+            assert.deepStrictEqual(defaultResource, {
+              type: 'gce_instance',
+              labels: {
+                instance_id: INSTANCE_ID
+              }
+            });
             done();
           });
         });
