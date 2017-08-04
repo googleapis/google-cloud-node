@@ -28,6 +28,7 @@ fi
 git config --global user.name "circle-ci"
 git config --global user.email "circle-ci@circleci.com"
 
+echo $1
 nvm install $1
 nvm use $1
 npm install
