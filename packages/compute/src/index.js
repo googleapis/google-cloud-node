@@ -51,6 +51,12 @@ var Network = require('./network.js');
 var Operation = require('./operation.js');
 
 /**
+ * @type {module: compute/project}
+ * @private
+ */
+var Project = require('./project.js');
+
+/**
  * @type {module:compute/region}
  * @private
  */
@@ -2633,6 +2639,20 @@ Compute.prototype.operation = function(name) {
 };
 
 /**
+ * Get a reference to your Google Compute Engine project.
+ *
+ * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+ *
+ * @return {module:compute/project}
+ *
+ * @example
+ * var project = gce.project();
+ */
+Compute.prototype.project = function() {
+  return new Project(this);
+};
+
+/**
  * Get a reference to a Google Compute Engine region.
  *
  * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
@@ -2771,6 +2791,7 @@ common.util.promisifyAll(Compute, {
     'machineType',
     'network',
     'operation',
+    'project',
     'region',
     'rule',
     'service',
@@ -2785,6 +2806,7 @@ Compute.Firewall = Firewall;
 Compute.HealthCheck = HealthCheck;
 Compute.Network = Network;
 Compute.Operation = Operation;
+Compute.Project = Project;
 Compute.Region = Region;
 Compute.Rule = Rule;
 Compute.Service = Service;
