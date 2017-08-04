@@ -2552,7 +2552,7 @@ describe('Compute', function() {
   });
 
   describe('project', function() {
-    it('should return a Region object', function() {
+    it('should return a Project object', function() {
       var project = compute.project();
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[0], compute);
