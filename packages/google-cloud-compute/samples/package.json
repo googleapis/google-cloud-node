@@ -20,14 +20,14 @@
   },
   "dependencies": {
     "@google-cloud/compute": "0.7.2",
-    "googleapis": "19.0.0",
+    "googleapis": "20.1.0",
     "nodemailer": "4.0.1",
     "nodemailer-smtp-transport": "2.7.4",
-    "sendgrid": "5.1.1"
+    "sendgrid": "5.2.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.15",
-    "ava": "0.19.1",
+    "@google-cloud/nodejs-repo-tools": "1.4.16",
+    "ava": "0.21.0",
     "proxyquire": "1.8.0"
   },
   "cloud-repo-tools": {
