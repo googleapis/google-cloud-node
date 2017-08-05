@@ -20,25 +20,6 @@
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
-    "requiresProjectId": true
-  },
-  "dependencies": {
-    "@google-cloud/dlp": "^0.1.0",
-    "google-auth-library": "0.10.0",
-    "google-auto-auth": "0.7.0",
-    "google-proto-files": "0.12.0",
-    "mime": "1.3.6",
-    "request": "2.81.0",
-    "request-promise": "4.2.1",
-    "safe-buffer": "5.1.0",
-    "yargs": "8.0.2"
-  },
-  "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.15",
-    "ava": "0.19.1"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
     "requiresProjectId": true,
     "product": "dlp",
     "samples": [
@@ -64,5 +45,20 @@
         "usage": "node metadata.js --help"
       }
     ]
+  },
+  "dependencies": {
+    "@google-cloud/dlp": "^0.1.0",
+    "google-auth-library": "0.10.0",
+    "google-auto-auth": "0.7.1",
+    "google-proto-files": "0.12.1",
+    "mime": "1.3.6",
+    "request": "2.81.0",
+    "request-promise": "4.2.1",
+    "safe-buffer": "5.1.1",
+    "yargs": "8.0.2"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.4.16",
+    "ava": "0.21.0"
   }
 }
