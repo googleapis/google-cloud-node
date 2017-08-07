@@ -58,6 +58,7 @@ describe('Snapshot', function() {
   });
 
   beforeEach(function() {
+    fakeUtil.noop = function() {};
     snapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
   });
 
@@ -173,6 +174,16 @@ describe('Snapshot', function() {
       };
 
       snapshot.delete(done);
+    });
+
+    it('should optionally accept a callback', function(done) {
+      fakeUtil.noop = done;
+
+      snapshot.parent.request = function(config, callback) {
+        callback(); // the done fn
+      };
+
+      snapshot.delete();
     });
   });
 });

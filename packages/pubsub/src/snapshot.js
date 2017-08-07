@@ -193,6 +193,8 @@ Snapshot.prototype.delete = function(callback) {
     snapshot: this.name
   };
 
+  callback = callback || common.util.noop;
+
   this.parent.request({
     client: 'subscriberClient',
     method: 'deleteSnapshot',
