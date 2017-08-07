@@ -240,22 +240,30 @@ describe('Topic', function() {
   describe('getSubscriptions', function() {
     it('should make the correct request', function(done) {
       var options = {
-        gaxOpts: {},
         a: 'a',
-        b: 'b'
+        b: 'b',
+        gaxOpts: {
+          e: 'f'
+        },
+        autoPaginate: false
       };
 
       var expectedOptions = extend({
         topic: topic.name
       }, options);
 
+      var expectedGaxOpts = extend({
+        autoPaginate: options.autoPaginate
+      }, options.gaxOpts);
+
       delete expectedOptions.gaxOpts;
+      delete expectedOptions.autoPaginate;
 
       topic.request = function(config) {
         assert.strictEqual(config.client, 'publisherClient');
         assert.strictEqual(config.method, 'listTopicSubscriptions');
         assert.deepEqual(config.reqOpts, expectedOptions);
-        assert.strictEqual(config.gaxOpts, options.gaxOpts);
+        assert.deepEqual(config.gaxOpts, expectedGaxOpts);
         done();
       };
 
@@ -265,7 +273,7 @@ describe('Topic', function() {
     it('should accept only a callback', function(done) {
       topic.request = function(config) {
         assert.deepEqual(config.reqOpts, { topic: topic.name });
-        assert.strictEqual(config.gaxOpts, undefined);
+        assert.deepEqual(config.gaxOpts, { autoPaginate: undefined });
         done();
       };
 

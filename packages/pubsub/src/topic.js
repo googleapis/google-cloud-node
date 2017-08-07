@@ -284,6 +284,8 @@ Topic.prototype.getMetadata = function(gaxOpts, callback) {
  * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics.subscriptions/list}
  *
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
  * @param {object} options.gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} options.pageSize - Maximum number of results to return.
@@ -324,12 +326,17 @@ Topic.prototype.getSubscriptions = function(options, callback) {
   }, options);
 
   delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
 
   this.request({
     client: 'publisherClient',
     method: 'listTopicSubscriptions',
     reqOpts: reqOpts,
-    gaxOpts: options.gaxOpts
+    gaxOpts: gaxOpts
   }, function() {
     var subscriptions = arguments[1];
 

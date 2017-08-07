@@ -298,6 +298,8 @@ PubSub.prototype.determineBaseUrl_ = function() {
  * Get a list of snapshots.
  *
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
  * @param {object} options.gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} options.pageSize - Maximum number of results to return.
@@ -334,12 +336,17 @@ PubSub.prototype.getSnapshots = function(options, callback) {
   }, options);
 
   delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
 
   this.request({
     client: 'subscriberClient',
     method: 'listSnapshots',
     reqOpts: reqOpts,
-    gaxOpts: options.gaxOpts
+    gaxOpts: gaxOpts
   }, function() {
     var snapshots = arguments[1];
 
@@ -398,6 +405,8 @@ PubSub.prototype.getSnapshotsStream =
  * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/list}
  *
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
  * @param {object} options.gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} options.pageSize - Maximum number of results to return.
@@ -448,12 +457,17 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
 
   reqOpts.project = 'projects/' + this.projectId;
   delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
 
   this.request({
     client: 'subscriberClient',
     method: 'listSubscriptions',
     reqOpts: reqOpts,
-    gaxOpts: options.gaxOpts
+    gaxOpts: gaxOpts
   }, function() {
     var subscriptions = arguments[1];
 
@@ -506,6 +520,8 @@ PubSub.prototype.getSubscriptionsStream =
  * @resource [Topics: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/list}
  *
  * @param {object=} query - Query object.
+ * @param {boolean} query.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
  * @param {object} query.gaxOpts - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} query.pageSize - Max number of results to return.
@@ -550,12 +566,17 @@ PubSub.prototype.getTopics = function(options, callback) {
   }, options);
 
   delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
 
   this.request({
     client: 'publisherClient',
     method: 'listTopics',
     reqOpts: reqOpts,
-    gaxOpts: options.gaxOpts
+    gaxOpts: gaxOpts
   }, function() {
     var topics = arguments[1];
 

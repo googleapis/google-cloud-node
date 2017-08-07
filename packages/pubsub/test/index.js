@@ -634,18 +634,31 @@ describe('PubSub', function() {
     });
 
     it('should build the right request', function(done) {
-      var options = { a: 'b', c: 'd', gaxOpts: {} };
+      var options = {
+        a: 'b',
+        c: 'd',
+        gaxOpts: {
+          e: 'f'
+        },
+        autoPaginate: false
+      };
+
       var expectedOptions = extend({}, options, {
         project: 'projects/' + pubsub.projectId
       });
 
+      var expectedGaxOpts = extend({
+        autoPaginate: options.autoPaginate
+      }, options.gaxOpts);
+
       delete expectedOptions.gaxOpts;
+      delete expectedOptions.autoPaginate;
 
       pubsub.request = function(config) {
         assert.strictEqual(config.client, 'subscriberClient');
         assert.strictEqual(config.method, 'listSnapshots');
         assert.deepEqual(config.reqOpts, expectedOptions);
-        assert.deepEqual(config.gaxOpts, options.gaxOpts);
+        assert.deepEqual(config.gaxOpts, expectedGaxOpts);
         done();
       };
 
@@ -706,14 +719,24 @@ describe('PubSub', function() {
     });
 
     it('should pass the correct arguments to the API', function(done) {
-      var options = { gaxOpts: {} };
+      var options = {
+        gaxOpts: {
+          a: 'b'
+        },
+        autoPaginate: false
+      };
+
+      var expectedGaxOpts = extend({
+        autoPaginate: options.autoPaginate
+      }, options.gaxOpts);
+
       var project = 'projects/' + pubsub.projectId;
 
       pubsub.request = function(config) {
         assert.strictEqual(config.client, 'subscriberClient');
         assert.strictEqual(config.method, 'listSubscriptions');
         assert.deepEqual(config.reqOpts, { project: project });
-        assert.strictEqual(config.gaxOpts, options.gaxOpts);
+        assert.deepEqual(config.gaxOpts, expectedGaxOpts);
         done();
       };
 
@@ -819,18 +842,31 @@ describe('PubSub', function() {
     });
 
     it('should build the right request', function(done) {
-      var options = { a: 'b', c: 'd', gaxOpts: {} };
+      var options = {
+        a: 'b',
+        c: 'd',
+        gaxOpts: {
+          e: 'f'
+        },
+        autoPaginate: false
+      };
+
       var expectedOptions = extend({}, options, {
         project: 'projects/' + pubsub.projectId
       });
 
+      var expectedGaxOpts = extend({
+        autoPaginate: options.autoPaginate
+      }, options.gaxOpts);
+
       delete expectedOptions.gaxOpts;
+      delete expectedOptions.autoPaginate;
 
       pubsub.request = function(config) {
         assert.strictEqual(config.client, 'publisherClient');
         assert.strictEqual(config.method, 'listTopics');
         assert.deepEqual(config.reqOpts, expectedOptions);
-        assert.strictEqual(config.gaxOpts, options.gaxOpts);
+        assert.deepEqual(config.gaxOpts, expectedGaxOpts);
         done();
       };
 
