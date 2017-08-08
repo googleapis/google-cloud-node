@@ -1003,6 +1003,20 @@ describe('storage', function() {
       async.each(Object.keys(FILES), setHash, done);
     });
 
+    it('should handle unicode file names', function(done) {
+      var file = bucket.file('Café');
+
+      file.save('data', function(err) {
+        assert.ifError(err);
+
+        file.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.name, file.name);
+          file.delete(done);
+        });
+      });
+    });
+
     it('should read/write from/to a file in a directory', function(done) {
       var file = bucket.file('directory/file');
       var contents = 'test';
