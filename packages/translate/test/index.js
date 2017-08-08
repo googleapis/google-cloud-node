@@ -236,6 +236,16 @@ describe('Translate', function() {
           done();
         });
       });
+
+      it('should return an array if input was an array', function(done) {
+        translate.detect([INPUT], function(err, results, apiResponse_) {
+          assert.ifError(err);
+          assert.deepEqual(results, [expectedResults]);
+          assert.strictEqual(apiResponse_, apiResponse);
+          assert.deepEqual(apiResponse_, originalApiResponse);
+          done();
+        });
+      });
     });
   });
 
@@ -489,6 +499,14 @@ describe('Translate', function() {
       it('should execute callback with multiple results', function(done) {
         var input = [INPUT, INPUT];
         translate.translate(input, OPTIONS, function(err, translations) {
+          assert.ifError(err);
+          assert.deepEqual(translations, [expectedResults]);
+          done();
+        });
+      });
+
+      it('should return an array if input was an array', function(done) {
+        translate.translate([INPUT], OPTIONS, function(err, translations) {
           assert.ifError(err);
           assert.deepEqual(translations, [expectedResults]);
           done();
