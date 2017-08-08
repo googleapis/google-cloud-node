@@ -151,6 +151,7 @@ util.inherits(Translate, common.Service);
  * });
  */
 Translate.prototype.detect = function(input, callback) {
+  var inputIsArray = Array.isArray(input);
   input = arrify(input);
 
   this.request({
@@ -176,7 +177,7 @@ Translate.prototype.detect = function(input, callback) {
       return result;
     });
 
-    if (input.length === 1) {
+    if (input.length === 1 && !inputIsArray) {
       results = results[0];
     }
 
@@ -368,6 +369,7 @@ Translate.prototype.getLanguages = function(target, callback) {
  * });
  */
 Translate.prototype.translate = function(input, options, callback) {
+  var inputIsArray = Array.isArray(input);
   input = arrify(input);
 
   var body = {
@@ -407,7 +409,7 @@ Translate.prototype.translate = function(input, options, callback) {
 
     var translations = resp.data.translations.map(prop('translatedText'));
 
-    if (body.q.length === 1) {
+    if (body.q.length === 1 && !inputIsArray) {
       translations = translations[0];
     }
 
