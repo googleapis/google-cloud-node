@@ -1,11 +1,11 @@
 /*
- * Copyright 2017 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ function v1beta1(options) {
   return videoIntelligenceServiceClient(gaxGrpc);
 }
 
-v1beta1.GAPIC_VERSION = '0.7.1';
+v1beta1.GAPIC_VERSION = '0.1.0';
 v1beta1.SERVICE_ADDRESS = videoIntelligenceServiceClient.SERVICE_ADDRESS;
 v1beta1.ALL_SCOPES = videoIntelligenceServiceClient.ALL_SCOPES;
 
