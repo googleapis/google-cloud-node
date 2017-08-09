@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var debug = require('debug');
 var extend = require('extend');
 
 /**
@@ -57,6 +58,7 @@ function Service(config, options) {
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
   this.baseUrl = config.baseUrl;
+  this.debug = debug(config.packageJson.name);
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];

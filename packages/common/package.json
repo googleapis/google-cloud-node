@@ -42,6 +42,7 @@
     "arrify": "^1.0.1",
     "concat-stream": "^1.6.0",
     "create-error-class": "^3.0.2",
+    "debug": "^3.0.0",
     "duplexify": "^3.5.0",
     "ent": "^2.2.0",
     "extend": "^3.0.0",

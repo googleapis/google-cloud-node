@@ -66,6 +66,7 @@ function ServiceObject(config) {
   this.metadata = {};
 
   this.baseUrl = config.baseUrl;
+  this.debug = config.parent.debug;
   this.parent = config.parent; // Parent class.
   this.id = config.id; // Name or ID (e.g. dataset ID, bucket name, etc.)
   this.createMethod = config.createMethod;
