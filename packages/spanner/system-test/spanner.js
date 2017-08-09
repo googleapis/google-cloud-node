@@ -2702,7 +2702,7 @@ var spanner = new Spanner(env);
     });
 
     describe('read only', function() {
-      it('should run a read only transaction', function(done) {
+      it.only('should run a read only transaction', function(done) {
         var options = {
           readOnly: true,
           strong: true

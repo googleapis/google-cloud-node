@@ -889,6 +889,11 @@ Database.prototype.runTransaction = function(options, runFn) {
 
   options = extend({}, options);
 
+  this.debug([
+    'Stating a transaction. Note that nested transactions are not currently',
+    'supported in Cloud Spanner.'
+  ].join(' '));
+
   this.getTransaction(options, function(err, transaction) {
     if (err) {
       runFn(err);
