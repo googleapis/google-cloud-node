@@ -551,6 +551,52 @@ describe('storage', function() {
     });
   });
 
+  describe('unicode validation', function() {
+    var bucket;
+
+    before(function() {
+      bucket = storage.bucket('storage-library-test-bucket');
+    });
+
+    // Normalization form C: a single character for e-acute;
+    // URL should end with Cafe%CC%81
+    it('should not perform normalization form C', function() {
+      var name = 'Caf\u00e9';
+      var file = bucket.file(name);
+
+      var expectedContents = 'Normalization Form C';
+
+      return file.get()
+        .then(function(data) {
+          var receivedFile = data[0];
+          assert.strictEqual(receivedFile.name, name);
+          return receivedFile.download();
+        })
+        .then(function(contents) {
+          assert.strictEqual(contents.toString(), expectedContents);
+        });
+    });
+
+    // Normalization form D: an ASCII character followed by U+0301 combining
+    // character; URL should end with Caf%C3%A9
+    it('should not perform normalization form D', function() {
+      var name = 'Cafe\u0301';
+      var file = bucket.file(name);
+
+      var expectedContents = 'Normalization Form D';
+
+      return file.get()
+        .then(function(data) {
+          var receivedFile = data[0];
+          assert.strictEqual(receivedFile.name, name);
+          return receivedFile.download();
+        })
+        .then(function(contents) {
+          assert.strictEqual(contents.toString(), expectedContents);
+        });
+    });
+  });
+
   describe('getting buckets', function() {
     var bucketsToCreate = [
       generateName(),
