@@ -17,6 +17,7 @@
 /*!
  * @module video-intelligence
  */
+
 'use strict';
 
 var extend = require('extend');
@@ -28,16 +29,17 @@ var gaxGrpc = require('google-gax').grpc();
 const VERSION = require('../package.json').version;
 
 /**
- * Create an videoIntelligenceServiceClient with additional helpers for common
+ * Create a videoIntelligenceServiceClient with additional helpers for common
  * tasks.
  *
- * Service that implements Google Cloud Video Intelligence API.
+ * Use this service to interact with the Google Cloud Video Intelligence API.
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
  * @param {string=} options.servicePath - The domain name of the
  *     API remote host.
+ * @resource [Cloud Video Intelligence](https://cloud.google.com/video-intelligence)
  */
 function videoIntelligenceV1beta1(options) {
   // Define the header options.
