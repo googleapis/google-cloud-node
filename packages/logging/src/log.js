@@ -24,6 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
+var snakeCaseKeys = require('snakecase-keys');
 
 /**
  * @type {module:logging/entry}
@@ -591,6 +592,9 @@ Log.prototype.write = function(entry, options, callback) {
       writeWithResource(resource);
     });
   } else {
+    if (options.resource.labels) {
+      options.resource.labels = snakeCaseKeys(options.resource.labels);
+    }
     writeWithResource(options.resource);
   }
 

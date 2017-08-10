@@ -505,6 +505,18 @@ describe('Logging', function() {
       });
     });
 
+    it('should write a log with camelcase resource label keys', function(done) {
+      log.write(logEntries, {
+        resource: {
+          type: 'gce_instance',
+          labels: {
+            zone: 'global',
+            instanceId: '3'
+          }
+        }
+      }, done);
+    });
+
     it('should write to a log with alert helper', function(done) {
       log.alert(logEntries, options, done);
     });

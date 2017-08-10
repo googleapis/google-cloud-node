@@ -63,6 +63,7 @@
     "google-proto-files": "^0.12.0",
     "is": "^3.0.1",
     "pumpify": "^1.3.5",
+    "snakecase-keys": "^1.1.0",
     "stream-events": "^1.0.1",
     "string-format-obj": "^1.0.0",
     "through2": "^2.0.3"

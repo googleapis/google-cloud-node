@@ -362,6 +362,39 @@ describe('Log', function() {
       log.write(ENTRY, optionsWithResource, done);
     });
 
+    it('should transform camelcase label keys to snake case', function(done) {
+      var CUSTOM_RESOURCE = {
+        labels: {
+          camelCaseKey: 'camel-case-key-val'
+        }
+      };
+      var EXPECTED_RESOURCE = {
+        labels: {
+          camel_case_key: 'camel-case-key-val'
+        }
+      };
+      var optionsWithResource = extend({}, OPTIONS, {
+        resource: CUSTOM_RESOURCE
+      });
+
+      log.logging.request = function(config, callback) {
+        assert.strictEqual(config.client, 'loggingServiceV2Client');
+        assert.strictEqual(config.method, 'writeLogEntries');
+
+        assert.deepEqual(config.reqOpts, {
+          logName: log.formattedName_,
+          entries: [ENTRY],
+          resource: EXPECTED_RESOURCE
+        });
+
+        assert.strictEqual(config.gaxOpts, undefined);
+
+        callback();
+      };
+
+      log.write(ENTRY, optionsWithResource, done);
+    });
+
     it('should make the correct API request', function(done) {
       log.logging.request = function(config, callback) {
         assert.strictEqual(config.client, 'loggingServiceV2Client');
