@@ -69,7 +69,7 @@ var eventId = new EventId();
  * });
  *
  * syslog.alert(entry, function(err, apiResponse) {
- *   if (!error) {
+ *   if (!err) {
  *     // Log entry inserted successfully.
  *   }
  * });
