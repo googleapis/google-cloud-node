@@ -32,7 +32,7 @@ var Logging = require('../');
 
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';
-  var WRITE_CONSISTENCY_DELAY_MS = 90000;
+  var WRITE_CONSISTENCY_DELAY_MS = 120000;
 
   var bigQuery = bigqueryLibrary(env);
   var pubsub = pubsubLibrary(env);
