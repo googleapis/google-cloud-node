@@ -20,11 +20,15 @@ var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
 
-var instanceArgsOverride;
+var instanceOverride;
 var fakeGcpMetadata = {
   instance: function(path, cb) {
     setImmediate(function() {
-      var args = instanceArgsOverride || [null, null, 'fake-instance-value'];
+      if (instanceOverride && instanceOverride.path) {
+        assert.strictEqual(path, instanceOverride.path);
+      }
+      var args = (instanceOverride && instanceOverride.args) ||
+        [null, null, 'fake-instance-value'];
       cb.apply(fakeGcpMetadata, args);
     });
   }
@@ -53,7 +57,7 @@ describe('metadata', function() {
     };
     extend(Metadata, MetadataCached);
     metadata = new Metadata(LOGGING);
-    instanceArgsOverride = null;
+    instanceOverride = null;
   });
 
   afterEach(function() {
@@ -119,7 +123,10 @@ describe('metadata', function() {
     var CLUSTER_NAME = 'gke-cluster-name';
 
     it('should return the correct descriptor', function(done) {
-      instanceArgsOverride = [null, null, CLUSTER_NAME];
+      instanceOverride = {
+        path: 'attributes/cluster-name',
+        args: [null, null, CLUSTER_NAME]
+      };
 
       Metadata.getGKEDescriptor(function(err, descriptor) {
         assert.ifError(err);
@@ -135,7 +142,7 @@ describe('metadata', function() {
 
     it('should return error on failure to acquire metadata', function(done) {
       var FAKE_ERROR = new Error();
-      instanceArgsOverride = [ FAKE_ERROR ];
+      instanceOverride = { args: [ FAKE_ERROR ] };
 
       Metadata.getGKEDescriptor(function(err) {
         assert.strictEqual(err, FAKE_ERROR);
@@ -148,7 +155,10 @@ describe('metadata', function() {
     var INSTANCE_ID = 'fake-instance-id';
 
     it('should return the correct descriptor', function(done) {
-      instanceArgsOverride = [null, null, INSTANCE_ID];
+      instanceOverride = {
+        path: 'id',
+        args: [null, null, INSTANCE_ID]
+      };
 
       Metadata.getGCEDescriptor(function(err, descriptor) {
         assert.ifError(err);
@@ -164,7 +174,7 @@ describe('metadata', function() {
 
     it('should return error on failure to acquire metadata', function(done) {
       var FAKE_ERROR = new Error();
-      instanceArgsOverride = [ FAKE_ERROR ];
+      instanceOverride = { args: [ FAKE_ERROR ] };
 
       Metadata.getGCEDescriptor(function(err) {
         assert.strictEqual(err, FAKE_ERROR);
@@ -240,7 +250,10 @@ describe('metadata', function() {
       describe('compute engine', function() {
         it('should return correct descriptor', function(done) {
           var INSTANCE_ID = 'overridden-value';
-          instanceArgsOverride = [null, null, INSTANCE_ID];
+          instanceOverride = {
+            path: 'id',
+            args: [null, null, INSTANCE_ID]
+          };
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {
@@ -264,7 +277,10 @@ describe('metadata', function() {
       describe('container engine', function() {
         it('should return correct descriptor', function(done) {
           var CLUSTER_NAME = 'overridden-value';
-          instanceArgsOverride = [null, null, CLUSTER_NAME];
+          instanceOverride = {
+            path: 'attributes/cluster-name',
+            args: [null, null, CLUSTER_NAME]
+          };
 
           metadata.logging.auth.getEnvironment = function(callback) {
             callback(null, {

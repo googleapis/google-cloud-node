@@ -103,20 +103,22 @@ Metadata.getGCEDescriptor = function(callback) {
  * @return {object}
  */
 Metadata.getGKEDescriptor = function(callback) {
-  gcpMetadata.instance('attributes/cluster-name', function(err, _, clusterName) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    callback(null, {
-      type: 'container',
-      labels: {
-        // TODO(ofrobots): it would be good to include the namespace_id as well.
-        cluster_name: clusterName
+  gcpMetadata.instance('attributes/cluster-name',
+    function(err, _, clusterName) {
+      if (err) {
+        callback(err);
+        return;
       }
+
+      callback(null, {
+        type: 'container',
+        labels: {
+          // TODO(ofrobots): it would be good to include the namespace_id as
+          // well.
+          cluster_name: clusterName
+        }
+      });
     });
-  });
 };
 
 /**
