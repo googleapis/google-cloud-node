@@ -13,7 +13,7 @@ In order to use this library, you first need to go through the following steps:
 
 ### Installation
 ```
-$ npm install --save @google-cloud/videointelligence
+$ npm install --save @google-cloud/video-intelligence
 ```
 
 ### Next Steps
