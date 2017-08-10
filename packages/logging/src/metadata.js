@@ -103,7 +103,7 @@ Metadata.getGCEDescriptor = function(callback) {
  * @return {object}
  */
 Metadata.getGKEDescriptor = function(callback) {
-  gcpMetadata.instance('attributes/clusterName', function(err, _, clusterName) {
+  gcpMetadata.instance('attributes/cluster-name', function(err, _, clusterName) {
     if (err) {
       callback(err);
       return;
