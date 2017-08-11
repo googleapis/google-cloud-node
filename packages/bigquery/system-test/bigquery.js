@@ -255,6 +255,25 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should honor the job prefix option', function(done) {
+    var options = {
+      query: query,
+      jobPrefix: 'hi-im-a-prefix'
+    };
+
+    bigquery.startQuery(options, function(err, job) {
+      assert.ifError(err);
+      assert.strictEqual(job.id.indexOf(options.jobPrefix), 0);
+
+      job.getQueryResults(function(err, rows) {
+        assert.ifError(err);
+        assert.strictEqual(rows.length, 100);
+        assert.strictEqual(typeof rows[0].url, 'string');
+        done();
+      });
+    });
+  });
+
   it('should query as a stream', function(done) {
     var rowsEmitted = 0;
 

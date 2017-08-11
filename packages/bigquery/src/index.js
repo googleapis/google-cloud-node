@@ -26,6 +26,7 @@ var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
+var uuid = require('uuid');
 
 /**
  * @type {module:bigquery/dataset}
@@ -978,7 +979,7 @@ BigQuery.prototype.query = function(query, options, callback) {
  * });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
-  var that = this;
+  var self = this;
 
   if (is.string(options)) {
     options = {
@@ -986,29 +987,40 @@ BigQuery.prototype.startQuery = function(options, callback) {
     };
   }
 
-  options = options || {};
-
   if (!options.query) {
     throw new Error('A SQL query string is required.');
   }
 
-  var defaults = {};
+  var query = extend(true, {}, options);
 
   if (options.destination) {
     if (!(options.destination instanceof Table)) {
       throw new Error('Destination must be a Table object.');
     }
-    defaults.destinationTable = {
+
+    query.destinationTable = {
       datasetId: options.destination.dataset.id,
       projectId: options.destination.dataset.bigQuery.projectId,
       tableId: options.destination.id
     };
-    delete options.destination;
+
+    delete query.destination;
+  }
+
+  var jobId = uuid.v4();
+
+  if (options.jobPrefix) {
+    jobId = options.jobPrefix + jobId;
+    delete query.jobPrefix;
   }
 
   var body = {
     configuration: {
-      query: extend(true, defaults, options)
+      query: query
+    },
+    jobReference: {
+      projectId: this.projectId,
+      jobId: jobId
     }
   };
 
@@ -1022,7 +1034,7 @@ BigQuery.prototype.startQuery = function(options, callback) {
       return;
     }
 
-    var job = that.job(resp.jobReference.jobId);
+    var job = self.job(jobId);
     job.metadata = resp;
 
     callback(null, job, resp);
