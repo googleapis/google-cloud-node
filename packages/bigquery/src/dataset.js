@@ -277,6 +277,12 @@ Dataset.prototype.createTable = function(id, options, callback) {
     });
   }
 
+  if (is.string(body.timePartitioning)) {
+    body.timePartitioning = {
+      type: body.partitioning.toUpperCase()
+    };
+  }
+
   this.request({
     method: 'POST',
     uri: '/tables',
