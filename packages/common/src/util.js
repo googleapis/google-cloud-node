@@ -353,7 +353,7 @@ function makeAuthenticatedRequestFactory(config) {
             extend({ projectId: authClient.projectId }, config)
           );
         } catch(e) {
-          err = util.missingProjectIdError;
+          err = e;
         }
       }
 
