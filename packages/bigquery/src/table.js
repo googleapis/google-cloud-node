@@ -189,6 +189,17 @@ function Table(dataset, id) {
 
   this.bigQuery = dataset.bigQuery;
   this.dataset = dataset;
+
+  this.interceptors.push({
+    request: function(reqOpts) {
+      if (reqOpts.method === 'PATCH' && reqOpts.json.etag) {
+        reqOpts.headers = reqOpts.headers || {};
+        reqOpts.headers['If-Match'] = reqOpts.json.etag;
+      }
+
+      return reqOpts;
+    }
+  });
 }
 
 util.inherits(Table, common.ServiceObject);

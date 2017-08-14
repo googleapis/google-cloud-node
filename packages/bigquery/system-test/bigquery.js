@@ -363,6 +363,34 @@ describe('BigQuery', function() {
       });
     });
 
+    it('should use etags for locking', function(done) {
+      dataset.getMetadata(function(err) {
+        assert.ifError(err);
+
+        var etag = dataset.metadata.etag;
+
+        dataset.setMetadata({
+          etag: etag,
+          description: 'another description'
+        }, function(err) {
+          assert.ifError(err);
+          // the etag should be updated
+          assert.notStrictEqual(etag, dataset.metadata.etag);
+          done();
+        });
+      });
+    });
+
+    it('should error out for bad etags', function(done) {
+      dataset.setMetadata({
+        etag: 'a-fake-etag',
+        description: 'oh no!'
+      }, function(err) {
+        assert.strictEqual(err.code, 412); // precondition failed
+        done();
+      });
+    });
+
     it('should get tables', function(done) {
       dataset.getTables(function(err, tables) {
         assert.ifError(err);

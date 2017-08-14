@@ -178,6 +178,17 @@ function Dataset(bigQuery, id) {
   });
 
   this.bigQuery = bigQuery;
+
+  this.interceptors.push({
+    request: function(reqOpts) {
+      if (reqOpts.method === 'PATCH' && reqOpts.json.etag) {
+        reqOpts.headers = reqOpts.headers || {};
+        reqOpts.headers['If-Match'] = reqOpts.json.etag;
+      }
+
+      return reqOpts;
+    }
+  });
 }
 
 util.inherits(Dataset, common.ServiceObject);
