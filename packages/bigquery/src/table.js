@@ -1195,20 +1195,7 @@ Table.prototype.setMetadata = function(metadata, callback) {
   var self = this;
   var body = Table.formatMetadata_(metadata);
 
-  this.request({
-    method: 'PUT',
-    uri: '',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, resp);
-      return;
-    }
-
-    self.metadata = resp;
-
-    callback(null, resp);
-  });
+  common.ServiceObject.prototype.setMetadata.call(this, metadata, callback);
 };
 
 /*! Developer Documentation
