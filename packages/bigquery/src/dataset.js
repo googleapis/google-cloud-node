@@ -283,6 +283,13 @@ Dataset.prototype.createTable = function(id, options, callback) {
     };
   }
 
+  if (is.string(body.view)) {
+    body.view = {
+      query: body.view,
+      useLegacySql: false
+    };
+  }
+
   this.request({
     method: 'POST',
     uri: '/tables',
