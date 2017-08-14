@@ -260,46 +260,13 @@ Dataset.prototype.createTable = function(id, options, callback) {
     options = {};
   }
 
-  var body = extend(true, {}, options, {
-    tableReference: {
-      datasetId: this.id,
-      projectId: this.bigQuery.projectId,
-      tableId: id
-    }
-  });
+  var body = Table.formatMetadata_(options);
 
-  if (is.string(options.schema)) {
-    body.schema = Table.createSchemaFromString_(options.schema);
-  }
-
-  if (is.array(options.schema)) {
-    body.schema = {
-      fields: options.schema
-    };
-  }
-
-  if (body.schema && body.schema.fields) {
-    body.schema.fields = body.schema.fields.map(function(field) {
-      if (field.fields) {
-        field.type = 'RECORD';
-      }
-
-      return field;
-    });
-  }
-
-  if (is.string(body.timePartitioning)) {
-    body.timePartitioning = {
-      type: body.partitioning.toUpperCase()
-    };
-  }
-
-  if (is.string(body.view)) {
-    body.view = {
-      query: body.view,
-      useLegacySql: false
-    };
-  }
+  body.tableReference = {
+    datasetId: this.id,
+    projectId: this.bigQuery.projectId,
+    tableId: id
+  };
 
   this.request({
     method: 'POST',

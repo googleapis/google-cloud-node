@@ -260,6 +260,53 @@ Table.encodeValue_ = function(value) {
 };
 
 /**
+ *
+ */
+Table.formatMetadata_ = function(options) {
+  var body = extend(true, {}, options);
+
+  if (options.name) {
+    body.friendlyName = options.name;
+    delete body.name;
+  }
+
+  if (is.string(options.schema)) {
+    body.schema = Table.createSchemaFromString_(options.schema);
+  }
+
+  if (is.array(options.schema)) {
+    body.schema = {
+      fields: options.schema
+    };
+  }
+
+  if (body.schema && body.schema.fields) {
+    body.schema.fields = body.schema.fields.map(function(field) {
+      if (field.fields) {
+        field.type = 'RECORD';
+      }
+
+      return field;
+    });
+  }
+
+  if (is.string(body.timePartitioning)) {
+    body.timePartitioning = {
+      type: body.partitioning.toUpperCase()
+    };
+  }
+
+  if (is.string(body.view)) {
+    body.view = {
+      query: body.view,
+      useLegacySql: false
+    };
+  }
+
+  return body;
+};
+
+/**
  * Copy data from one table to another, optionally creating that table.
  *
  * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
@@ -1146,20 +1193,12 @@ Table.prototype.query = function(query, callback) {
  */
 Table.prototype.setMetadata = function(metadata, callback) {
   var self = this;
-
-  if (metadata.name) {
-    metadata.friendlyName = metadata.name;
-    delete metadata.name;
-  }
-
-  if (is.string(metadata.schema)) {
-    metadata.schema = Table.createSchemaFromString_(metadata.schema);
-  }
+  var body = Table.formatMetadata_(metadata);
 
   this.request({
     method: 'PUT',
     uri: '',
-    json: metadata
+    json: body
   }, function(err, resp) {
     if (err) {
       callback(err, resp);
