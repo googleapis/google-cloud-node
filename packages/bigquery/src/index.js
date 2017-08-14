@@ -516,6 +516,42 @@ BigQuery.prototype.createDataset = function(id, options, callback) {
 BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
 
 /**
+ *
+ */
+BigQuery.prototype.createJob = function(options, callback) {
+  var self = this;
+
+  var reqOpts = extend({}, options);
+  var jobId = uuid.v4();
+
+  if (reqOpts.jobPrefix) {
+    jobId = reqOpts.jobPrefix + jobId;
+    delete reqOpts.jobPrefix;
+  }
+
+  reqOpts.jobReference = {
+    projectId: this.projectId,
+    jobId: jobId
+  };
+
+  this.request({
+    method: 'POST',
+    uri: '/jobs',
+    json: reqOpts
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var job = self.job(jobId);
+    job.metadata = resp;
+
+    callback(null, job, resp);
+  });
+};
+
+/**
  * Create a reference to a dataset.
  *
  * @param {string} id - ID of the dataset.
@@ -979,8 +1015,6 @@ BigQuery.prototype.query = function(query, options, callback) {
  * });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
-  var self = this;
-
   if (is.string(options)) {
     options = {
       query: options
@@ -1007,38 +1041,18 @@ BigQuery.prototype.startQuery = function(options, callback) {
     delete query.destination;
   }
 
-  var jobId = uuid.v4();
-
-  if (options.jobPrefix) {
-    jobId = options.jobPrefix + jobId;
-    delete query.jobPrefix;
-  }
-
-  var body = {
+  var reqOpts = {
     configuration: {
       query: query
-    },
-    jobReference: {
-      projectId: this.projectId,
-      jobId: jobId
     }
   };
 
-  this.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  if (query.jobPrefix) {
+    reqOpts.jobPrefix = query.jobPrefix;
+    delete query.jobPrefix;
+  }
 
-    var job = self.job(jobId);
-    job.metadata = resp;
-
-    callback(null, job, resp);
-  });
+  this.createJob(reqOpts, callback);
 };
 
 /*! Developer Documentation

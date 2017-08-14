@@ -302,6 +302,9 @@ Table.prototype.copy = function(destination, metadata, callback) {
     metadata = {};
   }
 
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
   var body = {
     configuration: {
       copy: extend(true, metadata || {}, {
@@ -316,24 +319,11 @@ Table.prototype.copy = function(destination, metadata, callback) {
           tableId: this.id
         }
       })
-    }
+    },
+    jobPrefix: jobPrefix
   };
 
-  this.bigQuery.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var job = self.bigQuery.job(resp.jobReference.jobId);
-    job.metadata = resp;
-
-    callback(null, job, resp);
-  });
+  this.bigQuery.createJob(body, callback);
 };
 
 /**
@@ -399,6 +389,9 @@ Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
     metadata = {};
   }
 
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
   var body = {
     configuration: {
       copy: extend(true, metadata || {}, {
@@ -416,24 +409,11 @@ Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
           };
         })
       })
-    }
+    },
+    jobPrefix: jobPrefix
   };
 
-  this.bigQuery.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var job = self.bigQuery.job(resp.jobReference.jobId);
-    job.metadata = resp;
-
-    callback(null, job, resp);
-  });
+  this.bigQuery.createJob(body, callback);
 };
 
 /**
@@ -680,6 +660,9 @@ Table.prototype.export = function(destination, options, callback) {
     delete options.gzip;
   }
 
+  var jobPrefix = options.jobPrefix;
+  delete options.jobPrefix;
+
   var body = {
     configuration: {
       extract: extend(true, options, {
@@ -689,24 +672,11 @@ Table.prototype.export = function(destination, options, callback) {
           tableId: this.id
         }
       })
-    }
+    },
+    jobPrefix: jobPrefix
   };
 
-  this.bigQuery.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var job = self.bigQuery.job(resp.jobReference.jobId);
-    job.metadata = resp;
-
-    callback(null, job, resp);
-  });
+  this.bigQuery.createJob(body, callback);
 };
 
 /**
@@ -912,6 +882,9 @@ Table.prototype.import = function(source, metadata, callback) {
       });
   }
 
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
   var body = {
     configuration: {
       load: {
@@ -921,7 +894,8 @@ Table.prototype.import = function(source, metadata, callback) {
           tableId: this.id
         }
       }
-    }
+    },
+    jobPrefix: jobPrefix
   };
 
   extend(true, body.configuration.load, metadata, {
@@ -942,21 +916,7 @@ Table.prototype.import = function(source, metadata, callback) {
     })
   });
 
-  this.bigQuery.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var job = self.bigQuery.job(resp.jobReference.jobId);
-    job.metadata = resp;
-
-    callback(null, job, resp);
-  });
+  this.bigQuery.createJob(body, callback);
 };
 
 /**
