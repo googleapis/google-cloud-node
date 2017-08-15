@@ -16,6 +16,7 @@
 
 /*!
  * @module video-intelligence
+ * @name VideoIntelligence
  */
 
 'use strict';
