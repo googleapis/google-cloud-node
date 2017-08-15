@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'videointelligence.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.0.5';
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -48,15 +48,6 @@ var ALL_SCOPES = [
 /**
  * Service that implements Google Cloud Video Intelligence API.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link videoIntelligenceServiceClient}
- *
- * @example
- * var videointelligenceV1beta1 = require('@google-cloud/videointelligence').v1beta1({
- *   // optional auth parameters.
- * });
- * var client = videointelligenceV1beta1.videoIntelligenceServiceClient();
  *
  * @class
  */
@@ -185,7 +176,12 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = videointelligenceV1beta1.videoIntelligenceServiceClient();
+ * var videointelligence = require('@google-cloud/videointelligence');
+ *
+ * var client = videointelligence.v1beta1({
+ *   // optional auth parameters.
+ * });
+ *
  * var inputUri = '';
  * var features = [];
  * var request = {
@@ -209,9 +205,17 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *
  *     // The response of the api call returning the complete operation.
  *     var finalApiResponse = responses[2];
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
+ *
+ * var inputUri = '';
+ * var features = [];
+ * var request = {
+ *     inputUri: inputUri,
+ *     features: features
+ * };
  *
  * // Handle the operation using the event emitter pattern.
  * client.annotateVideo(request).then(function(responses) {
@@ -234,7 +238,8 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *     operation.on('error', function(err) {
  *       // throw(err);
  *     })
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
