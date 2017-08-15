@@ -16,6 +16,7 @@
 
 /*!
  * @module monitoring
+ * @name Monitoring
  */
 
 'use strict';
@@ -29,7 +30,7 @@ var gaxGrpc = require('google-gax').grpc();
 const VERSION = require('../package.json').version;
 
 /**
- * Create an groupServiceClient with additional helpers for common
+ * Create a groupServiceClient with additional helpers for common
  * tasks.
  *
  * The Group API lets you inspect and manage your
@@ -64,7 +65,7 @@ function groupV3(options) {
 }
 
 /**
- * Create an metricServiceClient with additional helpers for common
+ * Create a metricServiceClient with additional helpers for common
  * tasks.
  *
  * Manages metric descriptors, monitored resource descriptors, and
