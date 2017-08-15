@@ -398,6 +398,7 @@
       "name": "@google-cloud/video-intelligence",
       "defaultService": "video-intelligence",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "0.1.0"
       ]
