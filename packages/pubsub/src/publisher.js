@@ -134,11 +134,10 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   }
 
   var opts = this.settings.batching;
-  var newPayloadSize = this.inventory_.bytes + data.length;
 
   // if this message puts us over the maxBytes option, then let's ship
   // what we have and add it to the next batch
-  if (newPayloadSize > opts.maxBytes) {
+  if ((this.inventory_.bytes + data.length) > opts.maxBytes) {
     this.publish_();
   }
 
@@ -149,7 +148,7 @@ Publisher.prototype.publish = function(data, attrs, callback) {
   // magically hit the max byte limit
   var hasMaxMessages = this.inventory_.queued.length === opts.maxMessages;
 
-  if (newPayloadSize === opts.maxBytes || hasMaxMessages) {
+  if (this.inventory_.bytes === opts.maxBytes || hasMaxMessages) {
     this.publish_();
     return;
   }

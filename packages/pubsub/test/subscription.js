@@ -138,7 +138,6 @@ describe('Subscription', function() {
 
     it('should honor configuration settings', function() {
       var options = {
-        ackDeadline: 5000,
         maxConnections: 2,
         flowControl: {
           maxBytes: 5,
@@ -148,7 +147,6 @@ describe('Subscription', function() {
 
       var subscription = new Subscription(PUBSUB, SUB_NAME, options);
 
-      assert.strictEqual(subscription.ackDeadline, options.ackDeadline);
       assert.strictEqual(subscription.maxConnections, options.maxConnections);
 
       assert.deepEqual(subscription.flowControl, {

@@ -91,10 +91,9 @@ function PubSub(options) {
  * @param {string=} name - The name of the subscription.
  * @param {object=} options - See a
  *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number} options.ackDeadline - The maximum time after receiving a
- *     message that you must ack a message before it is redelivered.
  * @param {object} options.flowControl - Flow control configurations for
- *     receiving messages.
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
  * @param {number} options.flowControl.maxBytes - The maximum number of bytes
  *     in un-acked messages to allow before the subscription pauses incoming
  *     messages. Defaults to 20% of free memory.
@@ -109,8 +108,8 @@ function PubSub(options) {
  * @param {string} options.pushEndpoint - A URL to a custom endpoint that
  *     messages should be pushed to.
  * @param {boolean} options.retainAckedMessages - If set, acked messages are
- *     retained in the subscription's backlog for 7 days (unless overriden by
- *     `options.messageRetentionDuration`). Default: `false`
+ *     retained in the subscription's backlog for the length of time specified
+ *     by `options.messageRetentionDuration`. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:pubsub/subscription} callback.subscription - The subscription.
@@ -170,11 +169,7 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
   }, options);
 
   delete reqOpts.gaxOpts;
-
-  if (options.ackDeadline) {
-    reqOpts.ackDeadlineSeconds = options.ackDeadline / 1000;
-    delete reqOpts.ackDeadline;
-  }
+  delete reqOpts.flowControl;
 
   if (options.messageRetentionDuration) {
     reqOpts.retainAckedMessages = true;

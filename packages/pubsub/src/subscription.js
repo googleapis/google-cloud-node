@@ -79,10 +79,9 @@ var Snapshot = require('./snapshot.js');
  *
  * @param {object=} options - See a
  *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number} options.ackDeadline - The maximum time after receiving a
- *     message that you must ack a message before it is redelivered.
  * @param {object} options.flowControl - Flow control configurations for
- *     receiving messages.
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
  * @param {number} options.flowControl.maxBytes - The maximum number of bytes
  *     in un-acked messages to allow before the subscription pauses incoming
  *     messages. Defaults to 20% of free memory.
@@ -164,7 +163,7 @@ function Subscription(pubsub, name, options) {
   this.name = Subscription.formatName_(pubsub.projectId, name);
 
   this.connectionPool = null;
-  this.ackDeadline = options.ackDeadline || 10000;
+  this.ackDeadline = 10000;
   this.maxConnections = options.maxConnections || 5;
 
   this.inventory_ = {

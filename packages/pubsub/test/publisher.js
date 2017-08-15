@@ -181,17 +181,11 @@ describe('Publisher', function() {
     });
 
     it('should publish if data puts payload at size cap', function(done) {
-      var queueCalled = false;
-
       publisher.queue_ = function() {
-        queueCalled = true;
+        publisher.inventory_.bytes += DATA.length;
       };
 
-      publisher.publish_ = function() {
-        assert(queueCalled);
-        done();
-      };
-
+      publisher.publish_ = done;
       publisher.inventory_.bytes = batchOpts.maxBytes - DATA.length;
       publisher.publish(DATA, fakeUtil.noop);
     });

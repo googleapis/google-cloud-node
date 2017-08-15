@@ -201,6 +201,11 @@ describe('ConnectionPool', function() {
       assert.strictEqual(b.endCalled, true);
     });
 
+    it('should clear the connections map', function(done) {
+      pool.connections.clear = done;
+      pool.close();
+    });
+
     it('should exec a callback when finished closing', function(done) {
       pool.close(done);
     });
@@ -432,6 +437,12 @@ describe('ConnectionPool', function() {
       };
 
       message.nack();
+    });
+
+    it('should not allow data to be overridden', function() {
+      assert.throws(function() {
+        message.data = 'hihihi';
+      });
     });
   });
 

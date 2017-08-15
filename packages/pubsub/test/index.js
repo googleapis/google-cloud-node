@@ -331,7 +331,6 @@ describe('PubSub', function() {
 
     it('should pass options to the api request', function(done) {
       var options = {
-        ackDeadline: 90000,
         retainAckedMessages: true,
         pushEndpoint: 'https://domain/push',
       };
@@ -342,12 +341,41 @@ describe('PubSub', function() {
       }, options, {
         pushConfig: {
           pushEndpoint: options.pushEndpoint
-        },
-        ackDeadlineSeconds: options.ackDeadline / 1000
+        }
       });
 
-      delete expectedBody.ackDeadline;
       delete expectedBody.pushEndpoint;
+
+      pubsub.topic = function() {
+        return {
+          name: TOPIC_NAME
+        };
+      };
+
+      pubsub.subscription = function() {
+        return {
+          name: SUB_NAME
+        };
+      };
+
+      pubsub.request = function(config) {
+        assert.notStrictEqual(config.reqOpts, options);
+        assert.deepEqual(config.reqOpts, expectedBody);
+        done();
+      };
+
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
+    });
+
+    it('should discard flow control options', function(done) {
+      var options = {
+        flowControl: {}
+      };
+
+      var expectedBody = {
+        topic: TOPIC.name,
+        name: SUB_NAME
+      };
 
       pubsub.topic = function() {
         return {

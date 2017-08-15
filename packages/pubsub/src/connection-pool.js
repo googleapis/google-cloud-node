@@ -112,6 +112,7 @@ ConnectionPool.prototype.acquire = function(id, callback) {
  * @param {?error} callback.error - An error returned while closing the pool.
  */
 ConnectionPool.prototype.close = function(callback) {
+  var self = this;
   var connections = Array.from(this.connections.values());
 
   this.isOpen = false;
@@ -119,7 +120,10 @@ ConnectionPool.prototype.close = function(callback) {
 
   each(connections, function(connection, onEndCallback) {
     connection.end(onEndCallback);
-  }, callback);
+  }, function(err) {
+    self.connections.clear();
+    callback(err);
+  });
 };
 
 /**
@@ -190,15 +194,19 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
 
   var pt = resp.message.publishTime;
   var milliseconds = parseInt(pt.nanos, 10) / 1e6;
+  var data = resp.message.data;
 
   return {
     connectionId: connectionId,
     ackId: resp.ackId,
     id: resp.message.messageId,
-    data: resp.message.data,
     attributes: resp.message.attributes,
     publishTime: new Date(parseInt(pt.seconds, 10) * 1000 + milliseconds),
     received: Date.now(),
+    // using get here to prevent user from overwriting data
+    get data() {
+      return data;
+    },
     ack: function() {
       self.subscription.ack_(this);
     },
