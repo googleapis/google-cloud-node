@@ -1777,4 +1777,64 @@ describe('common/util', function() {
       });
     });
   });
+
+  describe('determineBaseUrl', function() {
+    var apiEndpoint = 'http://localhost:8080';
+    var envVarKey = 'GCE_EMULATOR_HOST';
+    var envVarValue = 'http://localhost:9090';
+    var defaultApiEndpoint = 'https://www.googleapis.com';
+
+    beforeEach(function() {
+      process.env[envVarKey] = envVarValue;
+    });
+
+    afterEach(function() {
+      delete process.env[envVarKey];
+    });
+
+    it('should return options.apiEndpoint when defined', function() {
+      var base = util.determineBaseUrl({ apiEndpoint: apiEndpoint },
+        envVarKey, defaultApiEndpoint);
+      assert.strictEqual(base.apiEndpoint, apiEndpoint);
+    });
+
+    it('should classify options.apiEndpoint as customEndpoint', function() {
+      var base = util.determineBaseUrl({ apiEndpoint: apiEndpoint },
+        envVarKey, defaultApiEndpoint);
+      assert(base.customEndpoint);
+    });
+
+    it('should return the value set in the environment ' +
+      'variables when options.apiEndpoint is missing', function() {
+      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      assert.strictEqual(base.apiEndpoint, envVarValue);
+    });
+
+    it('should classify envVar value as customEndpoint', function() {
+      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      assert(base.customEndpoint);
+    });
+
+    it('should fallback to the default value', function() {
+      delete process.env[envVarKey];
+      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      assert.strictEqual(base.apiEndpoint, defaultApiEndpoint);
+    });
+
+    it('should not classify the default value as customEndpoint', function() {
+      delete process.env[envVarKey];
+      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      assert(!base.customEndpoint);
+    });
+
+    it('should remove any trailing slashes in options.apiEndpoint', function() {
+      var baseOneSlash = util.determineBaseUrl({
+        apiEndpoint: apiEndpoint + '/', envVarKey, defaultApiEndpoint});
+      assert.strictEqual(baseOneSlash.apiEndpoint, apiEndpoint);
+      var baseManySlashes = util.determineBaseUrl({
+        apiEndpoint: apiEndpoint + '///', envVarKey, defaultApiEndpoint});
+      assert.strictEqual(baseManySlashes.apiEndpoint, apiEndpoint);
+    });
+  });
+
 });

@@ -788,3 +788,33 @@ function promisifyAll(Class, options) {
 }
 
 util.promisifyAll = promisifyAll;
+
+/**
+ * Determines a service base URL using the following precendence rule:
+ * 1 - Property 'apiEndpoint' in the Service configuration object.
+ * 2 - Environment variable.
+ * 3 - Default endpoint.
+ *
+ * @param {object=} options - Service configuration object.
+ * @param {string=} envVarName - Environment variable to lookup when
+ *     options.apiEndpoint is missing.
+ * @param {string=} defaultApiEndpoint - Default endpoint to use when
+ *     everything else is undefined.
+ * @return {object=} base - Object containg the baseUrl and a boolean
+ *     property indicating whether the baseUrl is a customEndpoint or not
+ * */
+function determineBaseUrl(options, envVarName, defaultApiEndpoint) {
+  var trailingSlashes = new RegExp('/*$');
+  var base = {};
+  if (options.apiEndpoint || process.env[envVarName]) {
+    base.apiEndpoint = options.apiEndpoint || process.env[envVarName];
+    base.customEndpoint = true;
+  } else {
+    base.apiEndpoint = defaultApiEndpoint;
+    base.customEndpoint = false;
+  }
+  base.apiEndpoint = base.apiEndpoint.replace(trailingSlashes, '');
+  return base;
+}
+
+util.determineBaseUrl = determineBaseUrl;

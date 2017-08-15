@@ -55,6 +55,7 @@ function Service(config, options) {
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
   this.baseUrl = config.baseUrl;
+  this.customEndpoint = config.customEndpoint;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];
