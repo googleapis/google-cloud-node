@@ -148,7 +148,7 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     metadata = {};
   }
 
-  if (typeof this.levels_[levelName] === "undefined") {
+  if (typeof this.levels_[levelName] === 'undefined') {
     throw new Error('Unknown log level: ' + levelName);
   }
 
