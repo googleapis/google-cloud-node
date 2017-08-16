@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'monitoring.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.0.5';
 
 var PAGE_DESCRIPTORS = {
   listMonitoredResourceDescriptors: new gax.PageDescriptor(
@@ -67,15 +67,6 @@ var ALL_SCOPES = [
  * Manages metric descriptors, monitored resource descriptors, and
  * time series data.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link metricServiceClient}
- *
- * @example
- * var monitoringV3 = require('@google-cloud/monitoring').v3({
- *   // optional auth parameters.
- * });
- * var client = monitoringV3.metricServiceClient();
  *
  * @class
  */
@@ -156,16 +147,6 @@ MetricServiceClient.prototype.projectPath = function(project) {
 };
 
 /**
- * Parses the projectName from a project resource.
- * @param {String} projectName
- *   A fully-qualified path representing a project resources.
- * @returns {String} - A string representing the project.
- */
-MetricServiceClient.prototype.matchProjectFromProjectName = function(projectName) {
-  return PROJECT_PATH_TEMPLATE.match(projectName).project;
-};
-
-/**
  * Returns a fully-qualified metric_descriptor resource name string.
  * @param {String} project
  * @param {String} metricDescriptor
@@ -176,6 +157,29 @@ MetricServiceClient.prototype.metricDescriptorPath = function(project, metricDes
     project: project,
     metric_descriptor: metricDescriptor
   });
+};
+
+/**
+ * Returns a fully-qualified monitored_resource_descriptor resource name string.
+ * @param {String} project
+ * @param {String} monitoredResourceDescriptor
+ * @returns {String}
+ */
+MetricServiceClient.prototype.monitoredResourceDescriptorPath = function(project, monitoredResourceDescriptor) {
+  return MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.render({
+    project: project,
+    monitored_resource_descriptor: monitoredResourceDescriptor
+  });
+};
+
+/**
+ * Parses the projectName from a project resource.
+ * @param {String} projectName
+ *   A fully-qualified path representing a project resources.
+ * @returns {String} - A string representing the project.
+ */
+MetricServiceClient.prototype.matchProjectFromProjectName = function(projectName) {
+  return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
@@ -196,19 +200,6 @@ MetricServiceClient.prototype.matchProjectFromMetricDescriptorName = function(me
  */
 MetricServiceClient.prototype.matchMetricDescriptorFromMetricDescriptorName = function(metricDescriptorName) {
   return METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metricDescriptorName).metric_descriptor;
-};
-
-/**
- * Returns a fully-qualified monitored_resource_descriptor resource name string.
- * @param {String} project
- * @param {String} monitoredResourceDescriptor
- * @returns {String}
- */
-MetricServiceClient.prototype.monitoredResourceDescriptorPath = function(project, monitoredResourceDescriptor) {
-  return MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.render({
-    project: project,
-    monitored_resource_descriptor: monitoredResourceDescriptor
-  });
 };
 
 /**
@@ -233,7 +224,7 @@ MetricServiceClient.prototype.matchMonitoredResourceDescriptorFromMonitoredResou
 
 /**
  * Get the project ID used by this class.
- * @aram {function(Error, string)} callback - the callback to be called with
+ * @param {function(Error, string)} callback - the callback to be called with
  *   the current project Id.
  */
 MetricServiceClient.prototype.getProjectId = function(callback) {
@@ -289,19 +280,29 @@ MetricServiceClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
- * var formattedName = client.projectPath("[PROJECT]");
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * // Iterate over all elements.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
  * client.listMonitoredResourceDescriptors({name: formattedName}).then(function(responses) {
  *     var resources = responses[0];
  *     for (var i = 0; i < resources.length; ++i) {
  *         // doThingsWith(resources[i])
  *     }
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
  * // Or obtain the paged response.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
+ *
  * var options = {autoPaginate: false};
  * function callback(responses) {
  *     // The actual resources in a response.
@@ -376,12 +377,18 @@ MetricServiceClient.prototype.listMonitoredResourceDescriptors = function(reques
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
- * client.listMonitoredResourceDescriptorsStream({name: formattedName}).on('data', function(element) {
+ * client.listMonitoredResourceDescriptorsStream({name: formattedName})
+ * .on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
- *     console.error(err);
+ *     console.log(err);
  * });
  */
 MetricServiceClient.prototype.listMonitoredResourceDescriptorsStream = function(request, options) {
@@ -415,12 +422,18 @@ MetricServiceClient.prototype.listMonitoredResourceDescriptorsStream = function(
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.monitoredResourceDescriptorPath("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]");
  * client.getMonitoredResourceDescriptor({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -484,19 +497,29 @@ MetricServiceClient.prototype.getMonitoredResourceDescriptor = function(request,
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
- * var formattedName = client.projectPath("[PROJECT]");
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * // Iterate over all elements.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
  * client.listMetricDescriptors({name: formattedName}).then(function(responses) {
  *     var resources = responses[0];
  *     for (var i = 0; i < resources.length; ++i) {
  *         // doThingsWith(resources[i])
  *     }
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
  * // Or obtain the paged response.
+ * var formattedName = client.projectPath("[PROJECT]");
+ *
+ *
  * var options = {autoPaginate: false};
  * function callback(responses) {
  *     // The actual resources in a response.
@@ -572,12 +595,18 @@ MetricServiceClient.prototype.listMetricDescriptors = function(request, options,
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
- * client.listMetricDescriptorsStream({name: formattedName}).on('data', function(element) {
+ * client.listMetricDescriptorsStream({name: formattedName})
+ * .on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
- *     console.error(err);
+ *     console.log(err);
  * });
  */
 MetricServiceClient.prototype.listMetricDescriptorsStream = function(request, options) {
@@ -611,12 +640,18 @@ MetricServiceClient.prototype.listMetricDescriptorsStream = function(request, op
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
  * client.getMetricDescriptor({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -660,7 +695,12 @@ MetricServiceClient.prototype.getMetricDescriptor = function(request, options, c
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
  * var metricDescriptor = {};
  * var request = {
@@ -670,7 +710,8 @@ MetricServiceClient.prototype.getMetricDescriptor = function(request, options, c
  * client.createMetricDescriptor(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -707,7 +748,12 @@ MetricServiceClient.prototype.createMetricDescriptor = function(request, options
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
  * client.deleteMetricDescriptor({name: formattedName}).catch(function(err) {
  *     console.error(err);
@@ -792,28 +838,47 @@ MetricServiceClient.prototype.deleteMetricDescriptor = function(request, options
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
+ * // Iterate over all elements.
  * var formattedName = client.projectPath("[PROJECT]");
  * var filter = '';
  * var interval = {};
- * var view = monitoringV3.ListTimeSeriesRequest.TimeSeriesView.FULL;
+ * var view = monitoring.v3.types.ListTimeSeriesRequest.TimeSeriesView.FULL;
  * var request = {
  *     name: formattedName,
  *     filter: filter,
  *     interval: interval,
  *     view: view
  * };
- * // Iterate over all elements.
+ *
  * client.listTimeSeries(request).then(function(responses) {
  *     var resources = responses[0];
  *     for (var i = 0; i < resources.length; ++i) {
  *         // doThingsWith(resources[i])
  *     }
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  *
  * // Or obtain the paged response.
+ * var formattedName = client.projectPath("[PROJECT]");
+ * var filter = '';
+ * var interval = {};
+ * var view = monitoring.v3.types.ListTimeSeriesRequest.TimeSeriesView.FULL;
+ * var request = {
+ *     name: formattedName,
+ *     filter: filter,
+ *     interval: interval,
+ *     view: view
+ * };
+ *
+ *
  * var options = {autoPaginate: false};
  * function callback(responses) {
  *     // The actual resources in a response.
@@ -908,21 +973,27 @@ MetricServiceClient.prototype.listTimeSeries = function(request, options, callba
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
  * var filter = '';
  * var interval = {};
- * var view = monitoringV3.ListTimeSeriesRequest.TimeSeriesView.FULL;
+ * var view = monitoring.v3.types.ListTimeSeriesRequest.TimeSeriesView.FULL;
  * var request = {
  *     name: formattedName,
  *     filter: filter,
  *     interval: interval,
  *     view: view
  * };
- * client.listTimeSeriesStream(request).on('data', function(element) {
+ * client.listTimeSeriesStream(request)
+ * .on('data', function(element) {
  *     // doThingsWith(element)
  * }).on('error', function(err) {
- *     console.error(err);
+ *     console.log(err);
  * });
  */
 MetricServiceClient.prototype.listTimeSeriesStream = function(request, options) {
@@ -962,7 +1033,12 @@ MetricServiceClient.prototype.listTimeSeriesStream = function(request, options) 
  *
  * @example
  *
- * var client = monitoringV3.metricServiceClient();
+ * var monitoring = require('@google-cloud/monitoring');
+ *
+ * var client = monitoring.v3.metric({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.projectPath("[PROJECT]");
  * var timeSeries = [];
  * var request = {

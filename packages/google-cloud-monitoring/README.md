@@ -1,68 +1,75 @@
-# @google-cloud/monitoring ([Alpha][versioning])
-> Google Stackdriver Monitoring Client Library for Node.js
+# Node.js Clients for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
-*Looking for more Google APIs than just Monitoring? You might want to check out [`google-cloud`][google-cloud].*
+[Stackdriver Monitoring API][Product Documentation]: Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.
 
-- [Official Documentation][cloud-monitoring-docs]
+- [Client Library Documentation][]
+- [Product Documentation][]
 
-## This is an auto-generated API
+## Quick Start
+In order to use this library, you first need to go through the following steps:
 
-It does not follow the conventions you're familiar with from other parts of our library. A handwritten layer is not yet available.
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+2. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/api/monitoring)
+3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/master/guides/authentication)
 
-The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
-
-
-```sh
+### Installation
+```
 $ npm install --save @google-cloud/monitoring
 ```
+
+### Preview
+#### MetricServiceClient
 ```js
-var monitoring = require('@google-cloud/monitoring').v3({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+ var monitoring = require('@google-cloud/monitoring');
+
+ var client = monitoring.metric({
+    // optional auth parameters.
+ });
+
+ // Iterate over all elements.
+ var formattedName = client.projectPath(projectId);
+
+ client.listMonitoredResourceDescriptors({name: formattedName}).then(function(responses) {
+     var resources = responses[0];
+     for (var i = 0; i < resources.length; ++i) {
+         // doThingsWith(resources[i])
+     }
+ })
+ .catch(function(err) {
+     console.error(err);
+ });
+
+ // Or obtain the paged response.
+ var formattedName = client.projectPath(projectId);
+
+
+ var options = {autoPaginate: false};
+ function callback(responses) {
+     // The actual resources in a response.
+     var resources = responses[0];
+     // The next request if the response shows there's more responses.
+     var nextRequest = responses[1];
+     // The actual response object, if necessary.
+     // var rawResponse = responses[2];
+     for (var i = 0; i < resources.length; ++i) {
+         // doThingsWith(resources[i]);
+     }
+     if (nextRequest) {
+         // Fetch the next page.
+         return client.listMonitoredResourceDescriptors(nextRequest, options).then(callback);
+     }
+ }
+ client.listMonitoredResourceDescriptors({name: formattedName}, options)
+     .then(callback)
+     .catch(function(err) {
+         console.error(err);
+     });
 ```
 
+### Next Steps
+- Read the [Client Library Documentation][] for Stackdriver Monitoring API to see other available methods on the client.
+- Read the [Stackdriver Monitoring API Product documentation][Product Documentation] to learn more about the product and see How-to Guides.
+- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/README.md) to see the full list of Cloud APIs that we cover.
 
-## Authentication
-
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
-
-### On Google Cloud Platform
-
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
-
-``` js
-// Authenticating on a global basis.
-var monitoring = require('@google-cloud/monitoring').v3();
-// ...you're good to go!
-```
-
-### Elsewhere
-
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
-
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
-
-``` js
-var monitoring = require('@google-cloud/monitoring').v3({
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
-});
-
-// ...you're good to go!
-```
-
-
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[cloud-monitoring-docs]: https://cloud.google.com/monitoring/docs
-[cloud-monitoring-protos]: https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/monitoring
+[Product Documentation]: https://cloud.google.com/monitoring
