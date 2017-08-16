@@ -16,6 +16,39 @@ In order to use this library, you first need to go through the following steps:
 $ npm install --save @google-cloud/dlp
 ```
 
+### Preview
+#### DlpServiceClient
+```js
+ var dlp = require('@google-cloud/dlp');
+
+ var client = dlp({
+    // optional auth parameters.
+ });
+
+ var minLikelihood = dlp.v2beta1.types.Likelihood.POSSIBLE;
+ var inspectConfig = {
+     minLikelihood : minLikelihood
+ };
+ var type = 'text/plain';
+ var value = 'my phone number is 215-512-1212';
+ var itemsElement = {
+     type : type,
+     value : value
+ };
+ var items = [itemsElement];
+ var request = {
+     inspectConfig: inspectConfig,
+     items: items
+ };
+ client.inspectContent(request).then(function(responses) {
+     var response = responses[0];
+     // doThingsWith(response)
+ })
+ .catch(function(err) {
+     console.error(err);
+ });
+```
+
 ### Next Steps
 - Read the [Client Library Documentation][] for DLP API to see other available methods on the client.
 - Read the [DLP API Product documentation][Product Documentation] to learn more about the product and see How-to Guides.

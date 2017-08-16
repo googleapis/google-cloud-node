@@ -16,15 +16,17 @@
 'use strict';
 
 var assert = require('assert');
-var dlpV2beta1 = require('../src/v2beta1')();
+var dlp = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
 error.code = FAKE_STATUS_CODE;
+
 describe('DlpServiceClient', function() {
   describe('inspectContent', function() {
     it('invokes inspectContent without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var items = [];
@@ -47,7 +49,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes inspectContent with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var items = [];
@@ -69,7 +72,8 @@ describe('DlpServiceClient', function() {
 
   describe('redactContent', function() {
     it('invokes redactContent without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var items = [];
@@ -94,7 +98,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes redactContent with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var items = [];
@@ -118,7 +123,8 @@ describe('DlpServiceClient', function() {
 
   describe('createInspectOperation', function() {
     it('invokes createInspectOperation without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var storageConfig = {};
@@ -150,7 +156,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes createInspectOperation with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var inspectConfig = {};
       var storageConfig = {};
@@ -179,7 +186,8 @@ describe('DlpServiceClient', function() {
 
   describe('listInspectFindings', function() {
     it('invokes listInspectFindings without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var formattedName = client.resultPath("[RESULT]");
       var request = {
@@ -203,7 +211,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes listInspectFindings with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var formattedName = client.resultPath("[RESULT]");
       var request = {
@@ -223,7 +232,8 @@ describe('DlpServiceClient', function() {
 
   describe('listInfoTypes', function() {
     it('invokes listInfoTypes without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var category = 'category50511102';
       var languageCode = 'languageCode-412800396';
@@ -246,7 +256,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes listInfoTypes with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var category = 'category50511102';
       var languageCode = 'languageCode-412800396';
@@ -268,7 +279,8 @@ describe('DlpServiceClient', function() {
 
   describe('listRootCategories', function() {
     it('invokes listRootCategories without error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var languageCode = 'languageCode-412800396';
       var request = {
@@ -289,7 +301,8 @@ describe('DlpServiceClient', function() {
     });
 
     it('invokes listRootCategories with error', function(done) {
-      var client = dlpV2beta1.dlpServiceClient();
+      var client = dlp.v2beta1();
+
       // Mock request
       var languageCode = 'languageCode-412800396';
       var request = {
