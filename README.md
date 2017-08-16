@@ -23,6 +23,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
+* [Google Stackdriver Monitoring](#google-stackdriver-monitoring-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -36,7 +37,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
-* [Google Stackdriver Monitoring](#google-stackdriver-monitoring-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -620,6 +620,75 @@ job.getQueryResults().on('data', function(row) {});
 ```
 
 
+## Google Stackdriver Monitoring (Beta)
+
+### :warning: This is an auto-generated API
+
+It does not follow the conventions you're familiar with from other parts of our library. A handwritten layer is not yet available.
+
+The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
+
+- [API Documentation][gcloud-monitoring-docs]
+- [Official Documentation][cloud-monitoring-docs]
+
+#### Using the Google Stackdriver Monitoring API module
+
+```
+$ npm install --save @google-cloud/monitoring
+```
+
+```js
+var monitoring = require('@google-cloud/monitoring');
+```
+
+#### Preview
+
+```js
+var client = monitoring.metric({
+    // optional auth parameters.
+});
+
+// Iterate over all elements.
+var formattedName = client.projectPath(projectId);
+
+client.listMonitoredResourceDescriptors({name: formattedName}).then(function(responses) {
+    var resources = responses[0];
+    for (var i = 0; i < resources.length; ++i) {
+        // doThingsWith(resources[i])
+    }
+})
+.catch(function(err) {
+    console.error(err);
+});
+
+// Or obtain the paged response.
+var formattedName = client.projectPath(projectId);
+
+
+var options = {autoPaginate: false};
+function callback(responses) {
+    // The actual resources in a response.
+    var resources = responses[0];
+    // The next request if the response shows there's more responses.
+    var nextRequest = responses[1];
+    // The actual response object, if necessary.
+    // var rawResponse = responses[2];
+    for (var i = 0; i < resources.length; ++i) {
+        // doThingsWith(resources[i]);
+    }
+    if (nextRequest) {
+        // Fetch the next page.
+        return client.listMonitoredResourceDescriptors(nextRequest, options).then(callback);
+    }
+}
+client.listMonitoredResourceDescriptors({name: formattedName}, options)
+    .then(callback)
+    .catch(function(err) {
+        console.error(err);
+    });
+```
+
+
 ## Cloud Bigtable (Alpha)
 
 - [API Documentation][gcloud-bigtable-docs]
@@ -1017,34 +1086,6 @@ errors.report(new Error('Something broke!'));
 
 For more details on API usage, please see the [documentation][stackdriver-errors-module].
 
-## Google Stackdriver Monitoring (Alpha)
-
-### :warning: This is an auto-generated API
-
-It does not follow the conventions you're familiar with from other parts of our library. A handwritten layer is not yet available.
-
-The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
-
-- [Official Documentation][cloud-monitoring-docs]
-
-#### Using the Google Stackdriver Monitoring API module
-
-```
-$ npm install --save @google-cloud/monitoring
-```
-
-```js
-var monitoring = require('@google-cloud/monitoring');
-```
-
-#### Preview
-
-```js
-var monitoringClient = monitoring.v3({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-```
 
 ## Google Stackdriver Trace (Alpha)
 
@@ -1104,6 +1145,7 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [gcloud-language-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/language
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
+[gcloud-monitoring-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/monitoring
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
 [gcloud-spanner-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/spanner
