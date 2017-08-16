@@ -28,6 +28,21 @@ var is = require('is');
 var util = require('util');
 var uuid = require('uuid');
 
+var CONFIG = require('./v1/subscriber_client_config.json')
+  .interfaces['google.pubsub.v1.Subscriber'];
+
+// deadline applied to streams
+var STREAM_TIMEOUT = CONFIG.methods.StreamingPull.timeout_millis;
+
+// codes to retry streams
+var RETRY_CODES = [
+  1, // canceled
+  4, // deadline exceeded
+  8, // resource exhausted
+  13, // internal error
+  14 // unavailable
+];
+
 /**
  * ConnectionPool is used to manage the stream connections created via
  * StreamingPull rpc.
@@ -43,14 +58,19 @@ var uuid = require('uuid');
 function ConnectionPool(subscription) {
   this.subscription = subscription;
   this.connections = new Map();
+
   this.isPaused = false;
   this.isOpen = false;
+
+  this.failedConnectionAttempts = 0;
+  this.lastKnownConnection = Date.now();
 
   this.settings = {
     maxConnections: subscription.maxConnections || 5,
     ackDeadline: subscription.ackDeadline || 10000
   };
 
+  this.queue = Promise.resolve();
   events.EventEmitter.call(this);
 
   this.open();
@@ -119,6 +139,7 @@ ConnectionPool.prototype.close = function(callback) {
   callback = callback || common.util.noop;
 
   each(connections, function(connection, onEndCallback) {
+    connection.removeAllListeners();
     connection.end(onEndCallback);
   }, function(err) {
     self.connections.clear();
@@ -130,8 +151,15 @@ ConnectionPool.prototype.close = function(callback) {
  * Creates a connection. This is async but instead of providing a callback
  * a `connected` event will fire once the connection is ready.
  */
-ConnectionPool.prototype.createConnection = function() {
+ConnectionPool.prototype.createConnection = function(callback) {
   var self = this;
+
+  callback = callback || common.util.noop;
+
+  if (!this.isOpen) {
+    callback(new Error('Pool is closed.'));
+    return;
+  }
 
   this.subscription.request({
     client: 'subscriberClient',
@@ -145,27 +173,51 @@ ConnectionPool.prototype.createConnection = function() {
 
     var id = uuid.v4();
     var connection = requestFn();
+    var errorImmediateHandle;
 
     connection.on('error', function(err) {
-      self.emit('error', err);
+      // since this is a bidi stream it's possible that we recieve errors from
+      // reads or writes. We also want to try and cut down on the number of
+      // errors that we emit if other connections are still open. So by using
+      // setImmediate we're able to cancel the error message if it gets passed
+      // to the `status` event where we can check if the connection should be
+      // re-opened or if we should send the error to the user
+      errorImmediateHandle = setImmediate(self.emit.bind(self), 'error', err);
+    });
+
+    connection.on('metadata', function(metadata) {
+      if (metadata.get('date').length) {
+        self.lastKnownConnection = Date.now();
+        self.failedConnectionAttempts = 0;
+        connection.isConnected = true;
+      }
+    });
+
+    connection.on('status', function(status) {
+      clearImmediate(errorImmediateHandle);
+
+      if (!connection.isConnected) {
+        self.failedConnectionAttempts += 1;
+      }
+
+      connection.removeAllListeners();
+      connection.end();
+
+      self.connections.delete(id);
+
+      if (self.shouldReconnect(status)) {
+        self.queueConnection();
+      } else if (self.isOpen && !self.connections.size) {
+        var error = new Error(status.details);
+        error.code = status.code;
+        self.emit('error', error);
+      }
     });
 
     connection.on('data', function(data) {
       arrify(data.receivedMessages).forEach(function(message) {
         self.emit('message', self.createMessage(id, message));
       });
-    });
-
-    connection.once('metadata', function() {
-      self.emit('connected', connection);
-    });
-
-    connection.once('close', function() {
-      self.connections.delete(id);
-
-      if (self.isOpen) {
-        self.createConnection();
-      }
     });
 
     if (self.isPaused) {
@@ -178,6 +230,7 @@ ConnectionPool.prototype.createConnection = function() {
     });
 
     self.connections.set(id, connection);
+    callback(null);
   });
 };
 
@@ -220,8 +273,11 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
  * Creates specified number of connections and puts pool in open state.
  */
 ConnectionPool.prototype.open = function() {
-  for (var i = 0; i < this.settings.maxConnections; i++) {
-    this.createConnection();
+  var existing = this.connections.size;
+  var max = this.settings.maxConnections;
+
+  for (; existing < max; existing++) {
+    this.queueConnection();
   }
 
   this.isOpen = true;
@@ -239,6 +295,26 @@ ConnectionPool.prototype.pause = function() {
 };
 
 /**
+ * Queues a connection to be created. If any previous connections have failed,
+ * it will apply a back off based on the number of failures.
+ */
+ConnectionPool.prototype.queueConnection = function() {
+  var self = this;
+
+  var attempts = this.failedConnectionAttempts / this.settings.maxConnections;
+  var delay = (Math.pow(2, Math.ceil(attempts)) * 1000) +
+    (Math.floor(Math.random() * 1000));
+
+  this.queue = this.queue.then(function() {
+    return common.util.promisify(self.createConnection).call(self);
+  }).then(function() {
+    return new Promise(function(resolve) {
+      setTimeout(resolve, delay);
+    });
+  });
+};
+
+/**
  * Calls resume on each connection, allowing `message` events to fire off again.
  */
 ConnectionPool.prototype.resume = function() {
@@ -247,6 +323,37 @@ ConnectionPool.prototype.resume = function() {
   this.connections.forEach(function(connection) {
     connection.resume();
   });
+};
+
+/**
+ * Inspects a status object to determine whether or not we should try and
+ * reconnect.
+ *
+ * @param {object} status - The gRPC status object.
+ * @return {boolean}
+ */
+ConnectionPool.prototype.shouldReconnect = function(status) {
+  // If the pool was closed, we should definitely not reconnect
+  if (!this.isOpen) {
+    return false;
+  }
+
+  // We should check to see if the status code is a non-recoverable error
+  if (RETRY_CODES.indexOf(status.code) === -1) {
+    return false;
+  }
+
+  // deadline exceeded errors are tricky because gax applies a deadline no
+  // matter what, so it might not be an error at all, the stream could have just
+  // been closed. That being said we need to check if it is a deadline error
+  // and if it is only stop retrying if we've failed to make a connection
+  var elapsed = Date.now() - this.lastKnownConnection;
+
+  if (status.code === 4 && elapsed > (STREAM_TIMEOUT + 300000)) {
+    return false;
+  }
+
+  return true;
 };
 
 module.exports = ConnectionPool;
