@@ -798,12 +798,15 @@ util.promisifyAll = promisifyAll;
  * @param {object=} options - Service configuration object.
  * @param {string=} envVarName - Environment variable to lookup when
  *     options.apiEndpoint is missing.
- * @param {string=} defaultApiEndpoint - Default endpoint to use when
- *     everything else is undefined.
+ * @param {string=} defaultApiEndpoint - Fallback api endpoint to use.
+ * @param {boolean} trimProtocol - If true, trim the leading trimProtocol.
+ *     Useful for grcp based service endpoints.
  * @return {object=} base - Object containg the baseUrl and a boolean
- *     property indicating whether the baseUrl is a customEndpoint or not
+ *     property indicating whether the baseUrl is a customEndpoint or not.
  * */
-function determineBaseUrl(options, envVarName, defaultApiEndpoint) {
+function determineBaseUrl(options, envVarName,
+  defaultApiEndpoint, trimProtocol) {
+  var leadingProtocol = new RegExp('^https*://');
   var trailingSlashes = new RegExp('/*$');
   var base = {};
   if (options.apiEndpoint || process.env[envVarName]) {
@@ -814,6 +817,9 @@ function determineBaseUrl(options, envVarName, defaultApiEndpoint) {
     base.customEndpoint = false;
   }
   base.apiEndpoint = base.apiEndpoint.replace(trailingSlashes, '');
+  if (trimProtocol) {
+    base.apiEndpoint = base.apiEndpoint.replace(leadingProtocol, '');
+  }
   return base;
 }
 

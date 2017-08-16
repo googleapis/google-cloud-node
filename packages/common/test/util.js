@@ -1794,46 +1794,65 @@ describe('common/util', function() {
 
     it('should return options.apiEndpoint when defined', function() {
       var base = util.determineBaseUrl({ apiEndpoint: apiEndpoint },
-        envVarKey, defaultApiEndpoint);
+        envVarKey, defaultApiEndpoint, false);
       assert.strictEqual(base.apiEndpoint, apiEndpoint);
     });
 
     it('should classify options.apiEndpoint as customEndpoint', function() {
       var base = util.determineBaseUrl({ apiEndpoint: apiEndpoint },
-        envVarKey, defaultApiEndpoint);
+        envVarKey, defaultApiEndpoint, false);
       assert(base.customEndpoint);
     });
 
     it('should return the value set in the environment ' +
       'variables when options.apiEndpoint is missing', function() {
-      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      var base = util.determineBaseUrl({}, envVarKey,
+        defaultApiEndpoint, false);
       assert.strictEqual(base.apiEndpoint, envVarValue);
     });
 
     it('should classify envVar value as customEndpoint', function() {
-      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      var base = util.determineBaseUrl({}, envVarKey,
+        defaultApiEndpoint, false);
       assert(base.customEndpoint);
     });
 
     it('should fallback to the default value', function() {
       delete process.env[envVarKey];
-      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      var base = util.determineBaseUrl({}, envVarKey,
+        defaultApiEndpoint, false);
       assert.strictEqual(base.apiEndpoint, defaultApiEndpoint);
     });
 
     it('should not classify the default value as customEndpoint', function() {
       delete process.env[envVarKey];
-      var base = util.determineBaseUrl({}, envVarKey, defaultApiEndpoint);
+      var base = util.determineBaseUrl({}, envVarKey,
+        defaultApiEndpoint, false);
       assert(!base.customEndpoint);
     });
 
-    it('should remove any trailing slashes in options.apiEndpoint', function() {
+    it('should remove any trailing slashes in the return value', function() {
       var baseOneSlash = util.determineBaseUrl({
-        apiEndpoint: apiEndpoint + '/', envVarKey, defaultApiEndpoint});
+        apiEndpoint: apiEndpoint + '/' }, envVarKey,
+        defaultApiEndpoint, false);
       assert.strictEqual(baseOneSlash.apiEndpoint, apiEndpoint);
       var baseManySlashes = util.determineBaseUrl({
-        apiEndpoint: apiEndpoint + '///', envVarKey, defaultApiEndpoint});
+        apiEndpoint: apiEndpoint + '///'}, envVarKey,
+        defaultApiEndpoint, false);
       assert.strictEqual(baseManySlashes.apiEndpoint, apiEndpoint);
+    });
+
+    it('should remove the protocol (http) when indicated', function() {
+      var base = util.determineBaseUrl({ apiEndpoint: apiEndpoint },
+        envVarKey, defaultApiEndpoint, true);
+      assert.strictEqual(base.apiEndpoint, 'localhost:8080');
+    });
+
+    it('should remove the protocol (https) when indicated', function() {
+      delete process.env[envVarKey];
+      var base = util.determineBaseUrl({}, envVarKey,
+        defaultApiEndpoint, true);
+      assert.strictEqual(base.apiEndpoint, 'www.googleapis.com');
     });
   });
 
