@@ -27,7 +27,7 @@ function v2beta1(options) {
   return dlpServiceClient(gaxGrpc);
 }
 
-v2beta1.GAPIC_VERSION = '0.0.0';
+v2beta1.GAPIC_VERSION = '0.0.5';
 v2beta1.SERVICE_ADDRESS = dlpServiceClient.SERVICE_ADDRESS;
 v2beta1.ALL_SCOPES = dlpServiceClient.ALL_SCOPES;
 
