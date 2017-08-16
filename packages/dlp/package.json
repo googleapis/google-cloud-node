@@ -29,8 +29,7 @@
     "google-proto-files": "^0.12.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
-    "through2": "^2.0.3"
+    "mocha": "^3.2.0"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js dlp",
