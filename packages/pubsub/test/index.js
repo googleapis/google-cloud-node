@@ -215,7 +215,8 @@ describe('PubSub', function() {
 
     it('should localize the options provided', function() {
       assert.deepEqual(pubsub.options, extend({
-        scopes: v1.ALL_SCOPES
+        scopes: v1.ALL_SCOPES,
+        'grpc.max_receive_message_length': 20000001
       }, OPTIONS));
     });
 
