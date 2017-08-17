@@ -219,6 +219,35 @@ describe('Compute', function() {
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
 
+    it('should not be considered custom endpoint if default', function() {
+      var calledWith = compute.calledWith_[0];
+      assert.strictEqual(calledWith.customEndpoint, false);
+    });
+
+    it('should use options.apiEndpoint if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+
+      var gce = new Compute({
+        projectId: 'project-id',
+        apiEndpoint: apiEndpoint
+      });
+
+      var calledWith = gce.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/compute/v1');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
+
+    it('should use GOOGLE_CLOUD_GCE_ENDPOINT if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+      process.env.GOOGLE_CLOUD_GCE_ENDPOINT = apiEndpoint;
+      var gce = new Compute({ projectId: 'project-id' });
+      delete process.env.GOOGLE_CLOUD_GCE_ENDPOINT;
+
+      var calledWith = gce.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/compute/v1');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
+
     it('should streamify the correct methods', function() {
       assert.strictEqual(compute.getAddressesStream, 'getAddresses');
       assert.strictEqual(compute.getAutoscalersStream, 'getAutoscalers');
