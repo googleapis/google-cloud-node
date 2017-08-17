@@ -47,6 +47,14 @@ var Instance = require('./instance.js');
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  * @resource [Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_BIGTABLE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
+ * The legacy `BIGTABLE_EMULATOR_HOST` environment variable is still
+ * supported but will be deprecated in future releases. Please use
+ * `GOOGLE_CLOUD_BIGTABLE_ENDPOINT` instead.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used
  *     to reach Bigtable. This is useful for connecting to your local Bigtable
@@ -310,23 +318,39 @@ function Bigtable(options) {
   }
 
   var baseUrl = 'bigtable.googleapis.com';
+
+  var baseInfo = common.util.determineBaseUrl(
+    options,
+    'GOOGLE_CLOUD_BIGTABLE_ENDPOINT',
+    baseUrl,
+    true);
+
+  // In the case where we fallback to the baseUrl
+  // let's check for BIGTABLE_EMULATOR_HOST for backwards
+  // compatibility. In future releases this should go
+  // away.
+  if (baseInfo.apiEndpoint === baseUrl && process.env.BIGTABLE_EMULATOR_HOST) {
+    baseInfo = common.util.determineBaseUrl(
+      options,
+      'BIGTABLE_EMULATOR_HOST',
+      baseUrl,
+      true
+    );
+  }
+
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
-  var customEndpoint = options.apiEndpoint ||
-    process.env.BIGTABLE_EMULATOR_HOST;
-
-  if (customEndpoint) {
-    baseUrl = customEndpoint;
-    adminBaseUrl = baseUrl;
+  if (baseInfo.customEndpoint) {
+    adminBaseUrl = baseInfo.apiEndpoint;
   }
 
   var config = {
-    baseUrl: baseUrl,
-    customEndpoint: !!customEndpoint,
+    baseUrl: baseInfo.apiEndpoint,
+    customEndpoint: baseInfo.customEndpoint,
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Bigtable: {
-        baseUrl: baseUrl,
+        baseUrl: baseInfo.apiEndpoint,
         path: 'google/bigtable/v2/bigtable.proto',
         service: 'bigtable.v2'
       },
