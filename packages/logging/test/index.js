@@ -23,6 +23,7 @@ var proxyquire = require('proxyquire');
 var through = require('through2');
 var util = require('@google-cloud/common').util;
 
+var PKG = require('../package.json');
 var v2 = require('../src/v2/index.js');
 
 var extended = false;
@@ -181,7 +182,9 @@ describe('Logging', function() {
 
       googleAutoAuthOverride = function(options_) {
         assert.deepEqual(options_, extend({
-          scopes: v2.ALL_SCOPES
+          scopes: v2.ALL_SCOPES,
+          libName: 'gccl',
+          libVersion: PKG.version
         }, options));
         return fakeGoogleAutoAuthInstance;
       };
@@ -201,7 +204,9 @@ describe('Logging', function() {
       assert.notStrictEqual(logging.options, options);
 
       assert.deepEqual(logging.options, extend({
-        scopes: v2.ALL_SCOPES
+        scopes: v2.ALL_SCOPES,
+        libName: 'gccl',
+        libVersion: PKG.version
       }, options));
     });
 

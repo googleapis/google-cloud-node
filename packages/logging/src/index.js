@@ -30,6 +30,7 @@ var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
 var through = require('through2');
 
+var PKG = require('../package.json');
 var v2 = require('./v2');
 
 /**
@@ -72,7 +73,9 @@ function Logging(options) {
   }
 
   var options_ = extend({
-    scopes: v2.ALL_SCOPES
+    scopes: v2.ALL_SCOPES,
+    libName: 'gccl',
+    libVersion: PKG.version
   }, options);
 
   this.api = {};
