@@ -133,6 +133,35 @@ describe('DNS', function() {
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
+
+    it('should not be considered custom endpoint if default', function() {
+      var calledWith = dns.calledWith_[0];
+      assert.strictEqual(calledWith.customEndpoint, false);
+    });
+
+    it('should use options.apiEndpoint if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+
+      var dns = new DNS({
+        projectId: 'project-id',
+        apiEndpoint: apiEndpoint
+      });
+
+      var calledWith = dns.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/dns/v1');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
+
+    it('should use GOOGLE_CLOUD_DNS_ENDPOINT if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+      process.env.GOOGLE_CLOUD_DNS_ENDPOINT = apiEndpoint;
+      var dns = new DNS({ projectId: 'project-id' });
+      delete process.env.GOOGLE_CLOUD_DNS_ENDPOINT;
+
+      var calledWith = dns.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/dns/v1');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
   });
 
   describe('createZone', function() {
