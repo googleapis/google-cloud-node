@@ -136,15 +136,12 @@ ConnectionPool.prototype.close = function(callback) {
   var connections = Array.from(this.connections.values());
 
   this.isOpen = false;
+  self.connections.clear();
   callback = callback || common.util.noop;
 
   each(connections, function(connection, onEndCallback) {
-    connection.removeAllListeners();
     connection.end(onEndCallback);
-  }, function(err) {
-    self.connections.clear();
-    callback(err);
-  });
+  }, callback);
 };
 
 /**
@@ -157,7 +154,7 @@ ConnectionPool.prototype.createConnection = function(callback) {
   callback = callback || common.util.noop;
 
   if (!this.isOpen) {
-    callback(new Error('Pool is closed.'));
+    callback();
     return;
   }
 
@@ -200,9 +197,7 @@ ConnectionPool.prototype.createConnection = function(callback) {
         self.failedConnectionAttempts += 1;
       }
 
-      connection.removeAllListeners();
       connection.end();
-
       self.connections.delete(id);
 
       if (self.shouldReconnect(status)) {
@@ -230,7 +225,7 @@ ConnectionPool.prototype.createConnection = function(callback) {
     });
 
     self.connections.set(id, connection);
-    callback(null);
+    callback();
   });
 };
 
