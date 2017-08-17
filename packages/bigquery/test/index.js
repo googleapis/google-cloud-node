@@ -151,6 +151,35 @@ describe('BigQuery', function() {
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
+
+    it('should not be considered custom endpoint if default', function() {
+      var calledWith = bq.calledWith_[0];
+      assert.strictEqual(calledWith.customEndpoint, false);
+    });
+
+    it('should use options.apiEndpoint if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+
+      var bq = new BigQuery({
+        projectId: 'project-id',
+        apiEndpoint: apiEndpoint
+      });
+
+      var calledWith = bq.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/bigquery/v2');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
+
+    it('should use GOOGLE_CLOUD_BIGQUERY_ENDPOINT if defined', function() {
+      var apiEndpoint = 'http://localhost:8080';
+      process.env.GOOGLE_CLOUD_BIGQUERY_ENDPOINT = apiEndpoint;
+      var bq = new BigQuery({ projectId: 'project-id' });
+      delete process.env.GOOGLE_CLOUD_BIGQUERY_ENDPOINT;
+
+      var calledWith = bq.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/bigquery/v2');
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
   });
 
   describe('date', function() {

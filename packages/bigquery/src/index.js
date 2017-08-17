@@ -57,7 +57,13 @@ var Table = require('./table.js');
  *
  * @resource [What is BigQuery?]{@link https://cloud.google.com/bigquery/what-is-bigquery}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_BIGQUERY_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {object} options.apiEndpoint - Override the default API endpoint
+ * to reach BigQuery.
  */
 function BigQuery(options) {
   if (!(this instanceof BigQuery)) {
@@ -65,8 +71,16 @@ function BigQuery(options) {
     return new BigQuery(options);
   }
 
+  var basePath = '/bigquery/v2';
+
+  var baseInfo = common.util.determineBaseUrl(
+      options,
+      'GOOGLE_CLOUD_BIGQUERY_ENDPOINT',
+      'https://www.googleapis.com');
+
   var config = {
-    baseUrl: 'https://www.googleapis.com/bigquery/v2',
+    baseUrl: baseInfo.apiEndpoint + basePath,
+    customEndpoint: baseInfo.customEndpoint,
     scopes: ['https://www.googleapis.com/auth/bigquery'],
     packageJson: require('../package.json')
   };
