@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
@@ -63,7 +64,7 @@ describe('Datastore', function() {
 
   var OPTIONS = {
     projectId: PROJECT_ID,
-    apiEndpoint: 'http://endpoint',
+    apiEndpoint: 'endpoint',
     credentials: {},
     keyFilename: 'key/file',
     email: 'email',
@@ -116,21 +117,23 @@ describe('Datastore', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should set the default base URL', function() {
-      assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
-    });
+    it('should set default API connection details', function() {
+      var apiEndpoint = 'datastore.googleapis.com';
 
-    it('should set default API connection details', function(done) {
-      var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
+      const options = Object.assign({}, OPTIONS);
+      delete options.apiEndpoint;
+      const datastore = new Datastore(options);
+      var calledWith = datastore.calledWith_[0];
 
-      Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
-        Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
-
-        assert.strictEqual(customApiEndpoint, OPTIONS.apiEndpoint);
-        done();
-      };
-
-      new Datastore(OPTIONS);
+      assert.strictEqual(calledWith.baseUrl, apiEndpoint);
+      assert.strictEqual(calledWith.customEndpoint, false);
+      assert.deepStrictEqual(calledWith.protoServices, {
+        Datastore: {
+          baseUrl: apiEndpoint,
+          path: 'google/datastore/v1/datastore.proto',
+          service: 'datastore.v1'
+        }
+      });
     });
 
     it('should localize the namespace', function() {
@@ -159,14 +162,15 @@ describe('Datastore', function() {
       var calledWith = datastore.calledWith_[0];
 
       assert.strictEqual(calledWith.projectIdRequired, false);
-      assert.strictEqual(calledWith.baseUrl, datastore.baseUrl_);
-      assert.strictEqual(calledWith.customEndpoint, datastore.customEndpoint_);
+      assert.strictEqual(calledWith.baseUrl, OPTIONS.apiEndpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
 
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(calledWith.protosDir, protosDir);
 
       assert.deepStrictEqual(calledWith.protoServices, {
         Datastore: {
+          baseUrl: OPTIONS.apiEndpoint,
           path: 'google/datastore/v1/datastore.proto',
           service: 'datastore.v1'
         }
@@ -178,6 +182,73 @@ describe('Datastore', function() {
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
       assert.deepEqual(calledWith.grpcMetadata, {
         'google-cloud-resource-prefix': 'projects/' + datastore.projectId
+      });
+    });
+
+    it('should use GOOGLE_CLOUD_DATASTORE_ENDPOINT if defined', function() {
+      var endpoint = 'localhost:8080';
+      process.env.GOOGLE_CLOUD_DATASTORE_ENDPOINT = endpoint;
+      process.env.DATASTORE_EMULATOR_HOST = 'emulator:8288';
+
+      var datastore = new Datastore({ projectId: PROJECT_ID });
+
+      var calledWith = datastore.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, endpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
+
+      Object.keys(calledWith.protoServices).forEach(function(service) {
+        service = calledWith.protoServices[service];
+
+        if (is.object(service)) {
+          assert.strictEqual(service.baseUrl, endpoint);
+        }
+      });
+
+      delete process.env.GOOGLE_CLOUD_DATASTORE_ENDPOINT;
+      delete process.env.DATASTORE_EMULATOR_HOST;
+    });
+
+    it('should use DATASTORE_EMULATOR_HOST if defined', function() {
+      var endpoint = 'localhost:8080';
+      process.env.DATASTORE_EMULATOR_HOST = endpoint;
+
+      var datastore = new Datastore({ projectId: PROJECT_ID });
+
+      var calledWith = datastore.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, endpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
+
+      Object.keys(calledWith.protoServices).forEach(function(service) {
+        service = calledWith.protoServices[service];
+
+        if (is.object(service)) {
+          assert.strictEqual(service.baseUrl, endpoint);
+        }
+      });
+
+      delete process.env.DATASTORE_EMULATOR_HOST;
+    });
+
+    it('should trim the protocol in custom endpoint', function() {
+      var endpoint = 'local:3888';
+      var endpointWithProtocol = 'http://' + endpoint;
+      var options = {
+        projectId: PROJECT_ID,
+        apiEndpoint: endpointWithProtocol
+      };
+
+      var datastore = new Datastore(options);
+
+      var calledWith = datastore.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, endpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
+
+      Object.keys(calledWith.protoServices).forEach(function(service) {
+        service = calledWith.protoServices[service];
+
+        if (is.object(service)) {
+          assert.strictEqual(service.baseUrl, endpoint);
+        }
       });
     });
   });
@@ -322,84 +393,6 @@ describe('Datastore', function() {
     it('should return a Transaction object', function() {
       var transaction = datastore.transaction();
       assert.strictEqual(transaction.calledWith_[0], datastore);
-    });
-  });
-
-  describe('determineBaseUrl_', function() {
-    function setHost(host) {
-      process.env.DATASTORE_EMULATOR_HOST = host;
-    }
-
-    beforeEach(function() {
-      delete process.env.DATASTORE_EMULATOR_HOST;
-    });
-
-    it('should default to defaultBaseUrl_', function() {
-      var defaultBaseUrl_ = 'defaulturl';
-      datastore.defaultBaseUrl_ = defaultBaseUrl_;
-
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, defaultBaseUrl_);
-    });
-
-    it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost:8080';
-
-      setHost('localhost:8080/');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
-
-      setHost('localhost:8080//');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
-    });
-
-    it('should remove the protocol if specified', function() {
-      setHost('http://localhost:8080');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
-
-      setHost('https://localhost:8080');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
-    });
-
-    it('should not set customEndpoint_ when using default baseurl', function() {
-      var datastore = new Datastore({ projectId: PROJECT_ID });
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.customEndpoint_, undefined);
-    });
-
-    it('should set customEndpoint_ when using custom API endpoint', function() {
-      datastore.determineBaseUrl_('apiEndpoint');
-      assert.strictEqual(datastore.customEndpoint_, true);
-    });
-
-    it('should set baseUrl when using custom API endpoint', function() {
-      datastore.determineBaseUrl_('apiEndpoint');
-      assert.strictEqual(datastore.baseUrl_, 'apiEndpoint');
-    });
-
-    describe('with DATASTORE_EMULATOR_HOST environment variable', function() {
-      var DATASTORE_EMULATOR_HOST = 'localhost:9090';
-
-      beforeEach(function() {
-        setHost(DATASTORE_EMULATOR_HOST);
-      });
-
-      after(function() {
-        delete process.env.DATASTORE_EMULATOR_HOST;
-      });
-
-      it('should use the DATASTORE_EMULATOR_HOST env var', function() {
-        datastore.determineBaseUrl_();
-        assert.strictEqual(datastore.baseUrl_, DATASTORE_EMULATOR_HOST);
-      });
-
-      it('should set customEndpoint_', function() {
-        datastore.determineBaseUrl_();
-        assert.strictEqual(datastore.customEndpoint_, true);
-      });
     });
   });
 });
