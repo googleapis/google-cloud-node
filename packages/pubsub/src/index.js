@@ -626,60 +626,34 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  * @param {object} config.gaxOpts - GAX options.
  * @param {function} config.method - The gax method to call.
  * @param {object} config.reqOpts - Request options.
- * @param {boolean} config.returnFn - Return function as opposed to calling it.
  * @param {function=} callback - The callback function.
  */
 PubSub.prototype.request = function(config, callback) {
   var self = this;
 
-  if (config.returnFn) {
-    prepareGaxRequest(callback);
-  } else {
-    makeRequestCallback();
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return;
   }
 
-  function prepareGaxRequest(callback) {
-    if (global.GCLOUD_SANDBOX_ENV) {
+  self.auth.getProjectId(function(err, projectId) {
+    if (err) {
+      callback(err);
       return;
     }
 
-    self.auth.getProjectId(function(err, projectId) {
-      if (err) {
-        callback(err);
-        return;
-      }
+    var gaxClient = self.api[config.client];
 
-      var gaxClient = self.api[config.client];
+    if (!gaxClient) {
+      // Lazily instantiate client.
+      gaxClient = v1(self.options)[config.client](self.options);
+      self.api[config.client] = gaxClient;
+    }
 
-      if (!gaxClient) {
-        // Lazily instantiate client.
-        gaxClient = v1(self.options)[config.client](self.options);
-        self.api[config.client] = gaxClient;
-      }
+    var reqOpts = extend(true, {}, config.reqOpts);
+    reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
 
-      var reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
-
-      var requestFn = gaxClient[config.method].bind(
-        gaxClient,
-        reqOpts,
-        config.gaxOpts
-      );
-
-      callback(null, requestFn);
-    });
-  }
-
-  function makeRequestCallback() {
-    prepareGaxRequest(function(err, requestFn) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      requestFn(callback);
-    });
-  }
+    gaxClient[config.method](reqOpts, config.gaxOpts, callback);
+  });
 };
 
 /**

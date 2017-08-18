@@ -24,9 +24,12 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var each = require('async-each');
 var events = require('events');
+var grpc = require('grpc');
 var is = require('is');
 var util = require('util');
 var uuid = require('uuid');
+
+var v1 = require('./v1');
 
 var CONFIG = require('./v1/subscriber_client_config.json')
   .interfaces['google.pubsub.v1.Subscriber'];
@@ -63,14 +66,14 @@ function ConnectionPool(subscription) {
   this.isOpen = false;
 
   this.failedConnectionAttempts = 0;
-  this.lastKnownConnection = Date.now();
+  this.noConnectionsTime = Date.now();
 
   this.settings = {
     maxConnections: subscription.maxConnections || 5,
     ackDeadline: subscription.ackDeadline || 10000
   };
 
-  this.queue = Promise.resolve();
+  this.queue = [];
   events.EventEmitter.call(this);
 
   this.open();
@@ -135,9 +138,13 @@ ConnectionPool.prototype.close = function(callback) {
   var self = this;
   var connections = Array.from(this.connections.values());
 
+  callback = callback || common.util.noop;
+
   this.isOpen = false;
   self.connections.clear();
-  callback = callback || common.util.noop;
+
+  this.queue.forEach(clearTimeout);
+  this.queue.length = 0;
 
   each(connections, function(connection, onEndCallback) {
     connection.end(onEndCallback);
@@ -148,28 +155,17 @@ ConnectionPool.prototype.close = function(callback) {
  * Creates a connection. This is async but instead of providing a callback
  * a `connected` event will fire once the connection is ready.
  */
-ConnectionPool.prototype.createConnection = function(callback) {
+ConnectionPool.prototype.createConnection = function() {
   var self = this;
 
-  callback = callback || common.util.noop;
-
-  if (!this.isOpen) {
-    callback();
-    return;
-  }
-
-  this.subscription.request({
-    client: 'subscriberClient',
-    method: 'streamingPull',
-    returnFn: true
-  }, function(err, requestFn) {
+  this.getClient(function(err, client) {
     if (err) {
       self.emit('error', err);
       return;
     }
 
     var id = uuid.v4();
-    var connection = requestFn();
+    var connection = client.streamingPull();
     var errorImmediateHandle;
 
     connection.on('error', function(err) {
@@ -184,21 +180,25 @@ ConnectionPool.prototype.createConnection = function(callback) {
 
     connection.on('metadata', function(metadata) {
       if (metadata.get('date').length) {
-        self.lastKnownConnection = Date.now();
-        self.failedConnectionAttempts = 0;
         connection.isConnected = true;
+        self.noConnectionsTime = 0;
+        self.failedConnectionAttempts = 0;
       }
     });
 
     connection.on('status', function(status) {
       clearImmediate(errorImmediateHandle);
 
+      connection.end();
+      self.connections.delete(id);
+
       if (!connection.isConnected) {
         self.failedConnectionAttempts += 1;
       }
 
-      connection.end();
-      self.connections.delete(id);
+      if (!self.connections.size) {
+        self.noConnectionsTime = Date.now();
+      }
 
       if (self.shouldReconnect(status)) {
         self.queueConnection();
@@ -225,7 +225,6 @@ ConnectionPool.prototype.createConnection = function(callback) {
     });
 
     self.connections.set(id, connection);
-    callback();
   });
 };
 
@@ -264,6 +263,37 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
   };
 };
 
+ConnectionPool.prototype.getClient = function(callback) {
+  if (this.client) {
+    callback(null, this.client);
+    return;
+  }
+
+  var self = this;
+  var pubsub = this.subscription.pubsub;
+
+  pubsub.auth.getAuthClient(function(err, authClient) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    var credentials = grpc.credentials.combineChannelCredentials(
+      grpc.credentials.createSsl(),
+      grpc.credentials.createFromGoogleCredential(authClient)
+    );
+
+    var Subscriber = v1(pubsub.options).Subscriber;
+
+    self.client = new Subscriber(v1.SERVICE_ADDRESS, credentials, {
+      'grpc.max_send_message_length': -1, // unlimited
+      'grpc.max_receive_message_length': -1 // unlimited
+    });
+
+    callback(null, self.client);
+  });
+};
+
 /**
  * Creates specified number of connections and puts pool in open state.
  */
@@ -300,13 +330,13 @@ ConnectionPool.prototype.queueConnection = function() {
   var delay = (Math.pow(2, Math.ceil(attempts)) * 1000) +
     (Math.floor(Math.random() * 1000));
 
-  this.queue = this.queue.then(function() {
-    return common.util.promisify(self.createConnection).call(self);
-  }).then(function() {
-    return new Promise(function(resolve) {
-      setTimeout(resolve, delay);
-    });
-  });
+  var timeoutHandle = setTimeout(createConnection, delay);
+  this.queue.push(timeoutHandle);
+
+  function createConnection() {
+    self.createConnection();
+    self.queue.splice(self.queue.indexOf(timeoutHandle), 1);
+  }
 };
 
 /**
@@ -338,13 +368,11 @@ ConnectionPool.prototype.shouldReconnect = function(status) {
     return false;
   }
 
-  // deadline exceeded errors are tricky because gax applies a deadline no
-  // matter what, so it might not be an error at all, the stream could have just
-  // been closed. That being said we need to check if it is a deadline error
-  // and if it is only stop retrying if we've failed to make a connection
-  var elapsed = Date.now() - this.lastKnownConnection;
+  var hasNoConnections = !this.connections.size;
+  var exceededRetryLimit = this.noConnectionsTime &&
+    Date.now() - this.noConnectionsTime > 300000;
 
-  if (status.code === 4 && elapsed > (STREAM_TIMEOUT + 300000)) {
+  if (hasNoConnections && exceededRetryLimit) {
     return false;
   }
 
