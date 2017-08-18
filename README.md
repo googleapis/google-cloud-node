@@ -2,7 +2,7 @@
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![NPM Version](https://img.shields.io/npm/v/google-cloud.svg)](https://www.npmjs.org/package/google-cloud)
-[![CircleCI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master.svg?style=svg)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master)
+[![CircleCI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master.svg?style=shield)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master)
 [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
 [![Dependency Status](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node/badge)](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/google-cloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/google-cloud-node?branch=master)
