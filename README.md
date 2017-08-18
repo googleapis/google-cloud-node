@@ -98,7 +98,12 @@ With `google-cloud` it's incredibly easy to get authenticated and start using Go
 If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
+var storage = require('@google-cloud/storage')();
+
+// If you're using the google-cloud meta-package:
 var gcloud = require('google-cloud');
+var storage = gcloud.storage();
+
 // ...you're good to go! See the next section to get started using the APIs.
 ```
 
@@ -172,12 +177,13 @@ $ npm install --save @google-cloud/datastore
 var datastore = require('@google-cloud/datastore');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var datastoreClient = datastore({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -233,13 +239,14 @@ $ npm install --save @google-cloud/storage
 var storage = require('@google-cloud/storage');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
 var fs = require('fs');
-
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
 
 var gcs = storage({
   projectId: 'grape-spaceship-123',
@@ -294,12 +301,13 @@ $ npm install --save @google-cloud/translate
 var translate = require('@google-cloud/translate');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var translateClient = translate({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -352,12 +360,13 @@ $ npm install --save @google-cloud/logging
 var logging = require('@google-cloud/logging');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a global-basis. You can also authenticate on a per-API-
-// basis (see Authentication section above).
-
 var loggingClient = logging({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -413,12 +422,13 @@ $ npm install --save @google-cloud/language
 var language = require('@google-cloud/language');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
-
 var languageClient = language({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -455,12 +465,13 @@ $ npm install --save @google-cloud/spanner
 var spanner = require('@google-cloud/spanner');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var spannerClient = spanner({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -536,12 +547,13 @@ $ npm install --save @google-cloud/vision
 var vision = require('@google-cloud/vision');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var visionClient = vision({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -590,12 +602,13 @@ $ npm install --save @google-cloud/bigquery
 var bigquery = require('@google-cloud/bigquery');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var bigqueryClient = bigquery({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -639,6 +652,10 @@ $ npm install --save @google-cloud/monitoring
 ```js
 var monitoring = require('@google-cloud/monitoring');
 ```
+
+#### Authentication
+
+See [Authentication](#authentication).
 
 #### Preview
 
@@ -706,12 +723,13 @@ $ npm install --save @google-cloud/bigtable
 var bigtable = require('@google-cloud/bigtable');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var bigtableClient = bigtable({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -764,12 +782,13 @@ $ npm install --save @google-cloud/dns
 var dns = require('@google-cloud/dns');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var dnsClient = dns({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -812,12 +831,13 @@ $ npm install --save @google-cloud/pubsub
 var pubsub = require('@google-cloud/pubsub');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authentication section above).
-
 var pubsubClient = pubsub({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -859,12 +879,13 @@ $ npm install --save @google-cloud/resource
 var resource = require('@google-cloud/resource');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var resourceClient = resource({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -901,12 +922,13 @@ $ npm install --save @google-cloud/speech
 var speech = require('@google-cloud/speech');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var speechClient = speech({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
@@ -953,12 +975,13 @@ $ npm install --save @google-cloud/compute
 var compute = require('@google-cloud/compute');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var gce = compute({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -996,12 +1019,13 @@ $ npm install --save @google-cloud/prediction
 var prediction = require('@google-cloud/prediction');
 ```
 
+#### Authentication
+
+See [Authentication](#authentication).
+
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
 var predictionClient = prediction({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
@@ -1076,6 +1100,10 @@ The module provides automatic [uncaught exception handling][stackdriver-errors-u
 ```js
 var errors = require('@google-cloud/error-reporting')();
 ```
+
+#### Authentication
+
+See [Authentication](#authentication).
 
 #### Preview
 
