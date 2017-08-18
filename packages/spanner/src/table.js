@@ -349,6 +349,8 @@ Table.prototype.insert = function(keyVals, callback) {
  *     be yielded. If using a composite key, provide an array within this array.
  *     See the example below.
  * @param {string=} query.index - The name of an index on the table.
+ * @param {object=} query.keySet - Defines a collection of keys and/or key
+ *     ranges to read.
  * @param {number} query.limit - The number of rows to return.
  * @param {object=} options - [Transaction options](https://cloud.google.com/spanner/docs/timestamp-bounds).
  * @param {number} options.exactStaleness - Executes all reads at the timestamp
