@@ -179,6 +179,7 @@ describe('logging-winston', function() {
 
     beforeEach(function() {
       fakeLogInstance.entry = util.noop;
+      loggingWinston.log_.emergency = util.noop;
       loggingWinston.log_[STACKDRIVER_LEVEL] = util.noop;
     });
 
@@ -191,6 +192,18 @@ describe('logging-winston', function() {
           assert.ifError
         );
       }, /Unknown log level: non-existent-level/);
+    });
+
+    it('should not throw on `0` log level', function() {
+      var options = extend({}, OPTIONS, {
+        levels: {
+          zero: 0
+        }
+      });
+
+      loggingWinston = new LoggingWinston(options);
+
+      loggingWinston.log('zero', 'test message');
     });
 
     it('should properly create an entry', function(done) {
