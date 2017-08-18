@@ -36,8 +36,25 @@ const VERSION = require('../package.json').version;
  * Use this service to interact with the Google Cloud Video Intelligence API.
  *
  * @param {object=} options - [Configuration object](#/docs).
+ * @param {object=} options.credentials - Credentials object.
+ * @param {string=} options.credentials.client_email
+ * @param {string=} options.credentials.private_key
+ * @param {string=} options.email - Account email address. Required when using a
+ *     .pem or .p12 keyFilename.
+ * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+ *     .p12 key downloaded from the Google Developers Console. If you provide
+ *     a path to a JSON file, the projectId option above is not necessary.
+ *     NOTE: .pem and .p12 require you to specify options.email as well.
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
+ * @param {string=} options.projectId - The project ID from the Google
+ *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
+ *     the environment variable GCLOUD_PROJECT for your project ID. If your
+ *     app is running in an environment which supports
+ *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @param {function=} options.promise - Custom promise module to use instead
+ *     of native Promises.
  * @param {string=} options.servicePath - The domain name of the
  *     API remote host.
  * @resource [Cloud Video Intelligence](https://cloud.google.com/video-intelligence)
