@@ -29,6 +29,7 @@ function v1(options) {
 
 v1.GAPIC_VERSION = '0.7.1';
 v1.SERVICE_ADDRESS = languageServiceClient.SERVICE_ADDRESS;
+v1.DEFAULT_SERVICE_PORT = languageServiceClient.DEFAULT_SERVICE_PORT;
 v1.ALL_SCOPES = languageServiceClient.ALL_SCOPES;
 
 module.exports = v1;
