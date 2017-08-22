@@ -516,7 +516,54 @@ BigQuery.prototype.createDataset = function(id, options, callback) {
 BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
 
 /**
+ * Creates a job. Typically when creating a job you'll have a very specific task
+ * in mind. For this we recommend one of the following methods:
  *
+ * - {module:bigquery#startQuery}
+ * - {module:bigquery/table#copy}
+ * - {module:bigquery/table#copyFrom}
+ * - {module:bigquery/table#export}
+ * - {module:bigquery/table#import}
+ *
+ * However in the event you need a finer level of control over the job creation,
+ * you can use this method to pass in a raw [Job resource](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs)
+ * object.
+ *
+ * @resource [Jobs Overview]{@link https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs}
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {object} options - Object in the form of a [Job resource](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs);
+ * @param {string=} options.jobPrefix - Prefix to apply to the job id.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:bigquery/job} callback.job - The newly created job.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var options = {
+ *   configuration: {
+ *     query: {
+ *       query: 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100'
+ *     }
+ *   }
+ * };
+ *
+ * bigquery.createJob(options, function(err, job) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   job.getQueryResults(function(err, rows) {});
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.createJob().then(function(data) {
+ *   var job = data[0];
+ *
+ *   return job.getQueryResults();
+ * });
  */
 BigQuery.prototype.createJob = function(options, callback) {
   var self = this;
