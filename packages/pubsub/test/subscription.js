@@ -281,10 +281,33 @@ describe('Subscription', function() {
     });
 
     describe('with connection pool', function() {
+      var pool;
+
       beforeEach(function() {
         subscription.setFlushTimeout_ = function() {
           throw new Error('Should not be called.');
         };
+
+        pool = {
+          isConnected: function() {
+            return true;
+          }
+        };
+
+        subscription.connectionPool = pool;
+      });
+
+      it('should set a timeout if pool is not connected', function(done) {
+        subscription.setFlushTimeout_ = function() {
+          assert.deepEqual(subscription.inventory_.ack, [MESSAGE.ackId]);
+          done();
+        };
+
+        pool.isConnected = function() {
+          return false;
+        };
+
+        subscription.ack_(MESSAGE);
       });
 
       it('should write to the connection it came in on', function(done) {
@@ -295,11 +318,9 @@ describe('Subscription', function() {
           }
         };
 
-        subscription.connectionPool = {
-          acquire: function(connectionId, callback) {
-            assert.strictEqual(connectionId, MESSAGE.connectionId);
-            callback(null, fakeConnection);
-          }
+        pool.acquire = function(connectionId, callback) {
+          assert.strictEqual(connectionId, MESSAGE.connectionId);
+          callback(null, fakeConnection);
         };
 
         subscription.ack_(MESSAGE);
@@ -308,10 +329,8 @@ describe('Subscription', function() {
       it('should emit an error when unable to get a conn', function(done) {
         var error = new Error('err');
 
-        subscription.connectionPool = {
-          acquire: function(connectionId, callback) {
-            callback(error);
-          }
+        pool.acquire = function(connectionId, callback) {
+          callback(error);
         };
 
         subscription.on('error', function(err) {
@@ -327,17 +346,18 @@ describe('Subscription', function() {
   describe('breakLease_', function() {
     var MESSAGE = {
       ackId: 'abc',
-      data: new Buffer('hello')
+      data: new Buffer('hello'),
+      length: 5
     };
 
     beforeEach(function() {
       subscription.inventory_.lease.push(MESSAGE.ackId);
-      subscription.inventory_.bytes += MESSAGE.data.length;
+      subscription.inventory_.bytes += MESSAGE.length;
     });
 
     it('should remove the message from the lease array', function() {
       assert.strictEqual(subscription.inventory_.lease.length, 1);
-      assert.strictEqual(subscription.inventory_.bytes, MESSAGE.data.length);
+      assert.strictEqual(subscription.inventory_.bytes, MESSAGE.length);
 
       subscription.breakLease_(MESSAGE);
 
@@ -911,7 +931,8 @@ describe('Subscription', function() {
   describe('leaseMessage_', function() {
     var MESSAGE = {
       ackId: 'abc',
-      data: new Buffer('hello')
+      data: new Buffer('hello'),
+      length: 5
     };
 
     beforeEach(function() {
@@ -926,7 +947,7 @@ describe('Subscription', function() {
     it('should update the byte count', function() {
       assert.strictEqual(subscription.inventory_.bytes, 0);
       subscription.leaseMessage_(MESSAGE);
-      assert.strictEqual(subscription.inventory_.bytes, MESSAGE.data.length);
+      assert.strictEqual(subscription.inventory_.bytes, MESSAGE.length);
     });
 
     it('should begin auto-leasing', function(done) {
@@ -1071,10 +1092,33 @@ describe('Subscription', function() {
     });
 
     describe('with connection pool', function() {
+      var pool;
+
       beforeEach(function() {
         subscription.setFlushTimeout_ = function() {
           throw new Error('Should not be called.');
         };
+
+        pool = {
+          isConnected: function() {
+            return true;
+          }
+        };
+
+        subscription.connectionPool = pool;
+      });
+
+      it('should not write to the pool if not connected', function(done) {
+        subscription.setFlushTimeout_ = function() {
+          assert.deepEqual(subscription.inventory_.nack, [MESSAGE.ackId]);
+          done();
+        };
+
+        pool.isConnected = function() {
+          return false;
+        };
+
+        subscription.nack_(MESSAGE);
       });
 
       it('should write to the connection it came in on', function(done) {
@@ -1088,11 +1132,9 @@ describe('Subscription', function() {
           }
         };
 
-        subscription.connectionPool = {
-          acquire: function(connectionId, callback) {
-            assert.strictEqual(connectionId, MESSAGE.connectionId);
-            callback(null, fakeConnection);
-          }
+        pool.acquire = function(connectionId, callback) {
+          assert.strictEqual(connectionId, MESSAGE.connectionId);
+          callback(null, fakeConnection);
         };
 
         subscription.nack_(MESSAGE);
@@ -1101,10 +1143,8 @@ describe('Subscription', function() {
       it('should emit an error when unable to get a conn', function(done) {
         var error = new Error('err');
 
-        subscription.connectionPool = {
-          acquire: function(connectionId, callback) {
-            callback(error);
-          }
+        pool.acquire = function(connectionId, callback) {
+          callback(error);
         };
 
         subscription.on('error', function(err) {

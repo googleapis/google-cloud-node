@@ -25,6 +25,7 @@ var extend = require('extend');
 var googleAuth = require('google-auto-auth');
 var is = require('is');
 
+var PKG = require('../package.json');
 var v1 = require('./v1');
 
 /**
@@ -69,7 +70,9 @@ function PubSub(options) {
 
   this.options = extend({
     scopes: v1.ALL_SCOPES,
-    'grpc.max_receive_message_length': 20000001
+    'grpc.max_receive_message_length': 20000001,
+    libName: 'gccl',
+    libVersion: PKG.version
   }, options);
 
   this.determineBaseUrl_();
@@ -685,6 +688,17 @@ PubSub.prototype.snapshot = function(name) {
  *
  * @param {string} name - Name of the subscription.
  * @param {object=} options - Configuration object.
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
+ * @param {number} options.maxConnections - Use this to limit the number of
+ *     connections to be used when sending and receiving messages. Default: 5.
  * @return {module:pubsub/subscription}
  *
  * @example

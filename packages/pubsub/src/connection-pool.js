@@ -29,16 +29,12 @@ var is = require('is');
 var util = require('util');
 var uuid = require('uuid');
 
+var PKG = require('../package.json');
 var v1 = require('./v1');
-
-var CONFIG = require('./v1/subscriber_client_config.json')
-  .interfaces['google.pubsub.v1.Subscriber'];
-
-// deadline applied to streams
-var STREAM_TIMEOUT = CONFIG.methods.StreamingPull.timeout_millis;
 
 // codes to retry streams
 var RETRY_CODES = [
+  0, // ok
   1, // canceled
   4, // deadline exceeded
   8, // resource exhausted
@@ -75,6 +71,15 @@ function ConnectionPool(subscription) {
 
   this.queue = [];
   events.EventEmitter.call(this);
+
+  // grpc related fields we need since we're bypassing gax
+  this.metadata_ = new grpc.Metadata();
+
+  this.metadata_.add('x-goog-api-client', [
+    'gl-node/' + process.versions.node,
+    'gccl/' + PKG.version,
+    'grpc/' + require('grpc/package.json').version
+  ].join(' '));
 
   this.open();
 }
@@ -165,7 +170,7 @@ ConnectionPool.prototype.createConnection = function() {
     }
 
     var id = uuid.v4();
-    var connection = client.streamingPull();
+    var connection = client.streamingPull(self.metadata_);
     var errorImmediateHandle;
 
     connection.on('error', function(err) {
@@ -179,11 +184,14 @@ ConnectionPool.prototype.createConnection = function() {
     });
 
     connection.on('metadata', function(metadata) {
-      if (metadata.get('date').length) {
-        connection.isConnected = true;
-        self.noConnectionsTime = 0;
-        self.failedConnectionAttempts = 0;
+      if (!metadata.get('date').length) {
+        return;
       }
+
+      connection.isConnected = true;
+      self.noConnectionsTime = 0;
+      self.failedConnectionAttempts = 0;
+      self.emit('connected', connection);
     });
 
     connection.on('status', function(status) {
@@ -196,7 +204,7 @@ ConnectionPool.prototype.createConnection = function() {
         self.failedConnectionAttempts += 1;
       }
 
-      if (!self.connections.size) {
+      if (!self.isConnected() && !self.noConnectionsTime) {
         self.noConnectionsTime = Date.now();
       }
 
@@ -241,7 +249,7 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
 
   var pt = resp.message.publishTime;
   var milliseconds = parseInt(pt.nanos, 10) / 1e6;
-  var data = resp.message.data;
+  var originalDataLength = resp.message.data.length;
 
   return {
     connectionId: connectionId,
@@ -250,9 +258,10 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
     attributes: resp.message.attributes,
     publishTime: new Date(parseInt(pt.seconds, 10) * 1000 + milliseconds),
     received: Date.now(),
+    data: resp.message.data,
     // using get here to prevent user from overwriting data
-    get data() {
-      return data;
+    get length() {
+      return originalDataLength;
     },
     ack: function() {
       self.subscription.ack_(this);
@@ -263,6 +272,14 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
   };
 };
 
+/**
+ * Gets the Subscriber client. We need to bypass GAX until they allow deadlines
+ * to be optional.
+ *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error occurred while getting the client.
+ * @param {object} callback.client - The Subscriber client.
+ */
 ConnectionPool.prototype.getClient = function(callback) {
   if (this.client) {
     callback(null, this.client);
@@ -286,12 +303,31 @@ ConnectionPool.prototype.getClient = function(callback) {
     var Subscriber = v1(pubsub.options).Subscriber;
 
     self.client = new Subscriber(v1.SERVICE_ADDRESS, credentials, {
-      'grpc.max_send_message_length': -1, // unlimited
-      'grpc.max_receive_message_length': -1 // unlimited
+      'grpc.max_receive_message_length': 20000001,
+      'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
     });
 
     callback(null, self.client);
   });
+};
+
+/**
+ * Check to see if at least one stream in the pool is connected.
+ * @return {boolean}
+ */
+ConnectionPool.prototype.isConnected = function() {
+  var interator = this.connections.values();
+  var connection = interator.next().value;
+
+  while (connection) {
+    if (connection.isConnected) {
+      return true;
+    }
+
+    connection = interator.next().value;
+  }
+
+  return false;
 };
 
 /**
@@ -326,8 +362,7 @@ ConnectionPool.prototype.pause = function() {
 ConnectionPool.prototype.queueConnection = function() {
   var self = this;
 
-  var attempts = this.failedConnectionAttempts / this.settings.maxConnections;
-  var delay = (Math.pow(2, Math.ceil(attempts)) * 1000) +
+  var delay = (Math.pow(2, this.failedConnectionAttempts) * 1000) +
     (Math.floor(Math.random() * 1000));
 
   var timeoutHandle = setTimeout(createConnection, delay);
@@ -368,11 +403,10 @@ ConnectionPool.prototype.shouldReconnect = function(status) {
     return false;
   }
 
-  var hasNoConnections = !this.connections.size;
   var exceededRetryLimit = this.noConnectionsTime &&
     Date.now() - this.noConnectionsTime > 300000;
 
-  if (hasNoConnections && exceededRetryLimit) {
+  if (exceededRetryLimit) {
     return false;
   }
 

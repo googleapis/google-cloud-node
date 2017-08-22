@@ -532,7 +532,9 @@ describe('pubsub', function() {
 
           subscription.on('error', done);
           subscription.on('message', function(message) {
-            assert.strictEqual(message.id, messageId);
+            if (message.id !== messageId) {
+              return;
+            }
 
             message.ack();
 
@@ -554,7 +556,9 @@ describe('pubsub', function() {
 
         subscription.on('error', done);
         subscription.on('message', function(message) {
-          assert.strictEqual(message.id, messageId);
+          if (message.id !== messageId) {
+            return;
+          }
 
           message.ack();
 

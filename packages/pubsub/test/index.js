@@ -22,6 +22,7 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var PKG = require('../package.json');
 var v1 = require('../src/v1/index.js');
 
 var SubscriptionCached = require('../src/subscription.js');
@@ -204,7 +205,10 @@ describe('PubSub', function() {
 
       googleAutoAuthOverride = function(options_) {
         assert.deepEqual(options_, extend({
-          scopes: v1.ALL_SCOPES
+          scopes: v1.ALL_SCOPES,
+          'grpc.max_receive_message_length': 20000001,
+          libName: 'gccl',
+          libVersion: PKG.version
         }, options));
         return fakeGoogleAutoAuthInstance;
       };
@@ -216,7 +220,9 @@ describe('PubSub', function() {
     it('should localize the options provided', function() {
       assert.deepEqual(pubsub.options, extend({
         scopes: v1.ALL_SCOPES,
-        'grpc.max_receive_message_length': 20000001
+        'grpc.max_receive_message_length': 20000001,
+        libName: 'gccl',
+        libVersion: PKG.version
       }, OPTIONS));
     });
 
@@ -998,16 +1004,6 @@ describe('PubSub', function() {
       pubsub.request(CONFIG, assert.ifError);
     });
 
-    it('should call the specified method', function(done) {
-      pubsub.api.fakeClient.fakeMethod = function(reqOpts, gaxOpts, callback) {
-        assert.deepEqual(reqOpts, CONFIG.reqOpts);
-        assert.strictEqual(gaxOpts, CONFIG.gaxOpts);
-        callback(); // the done function
-      };
-
-      pubsub.request(CONFIG, done);
-    });
-
     it('should instantiate the client lazily', function(done) {
       var fakeClientInstance = {
         fakeMethod: function(reqOpts, gaxOpts, callback) {
@@ -1029,17 +1025,6 @@ describe('PubSub', function() {
 
       delete pubsub.api.fakeClient;
       pubsub.request(CONFIG, done);
-    });
-
-    it('should return the rpc function when returnFn is set', function(done) {
-      var config = extend({
-        returnFn: true
-      }, CONFIG);
-
-      pubsub.request(config, function(err, requestFn) {
-        assert.ifError(err);
-        requestFn(done);
-      });
     });
 
     it('should do nothing if sandbox env var is set', function(done) {

@@ -258,7 +258,7 @@ Subscription.prototype.ack_ = function(message) {
   this.breakLease_(message);
   this.histogram.add(Date.now() - message.received);
 
-  if (!this.connectionPool) {
+  if (!this.connectionPool || !this.connectionPool.isConnected()) {
     this.inventory_.ack.push(message.ackId);
     this.setFlushTimeout_();
     return;
@@ -291,7 +291,7 @@ Subscription.prototype.breakLease_ = function(message) {
   var messageIndex = this.inventory_.lease.indexOf(message.ackId);
 
   this.inventory_.lease.splice(messageIndex, 1);
-  this.inventory_.bytes -= message.data.length;
+  this.inventory_.bytes -= message.length;
 
   if (this.connectionPool) {
     if (this.connectionPool.isPaused && !this.hasMaxMessages_()) {
@@ -622,7 +622,7 @@ Subscription.prototype.hasMaxMessages_ = function() {
  */
 Subscription.prototype.leaseMessage_ = function(message) {
   this.inventory_.lease.push(message.ackId);
-  this.inventory_.bytes += message.data.length;
+  this.inventory_.bytes += message.length;
   this.setLeaseTimeout_();
 
   return message;
@@ -728,7 +728,7 @@ Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
 Subscription.prototype.nack_ = function(message) {
   this.breakLease_(message);
 
-  if (!this.connectionPool) {
+  if (!this.connectionPool || !this.connectionPool.isConnected()) {
     this.inventory_.nack.push(message.ackId);
     this.setFlushTimeout_();
     return;
