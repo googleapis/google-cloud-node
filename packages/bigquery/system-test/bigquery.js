@@ -274,6 +274,19 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should honor the dryRun option', function(done) {
+    var options = {
+      query: query,
+      dryRun: true
+    };
+
+    bigquery.startQuery(options, function(err, job) {
+      assert.ifError(err);
+      assert(job.metadata.statistics);
+      done();
+    });
+  });
+
   it('should query as a stream', function(done) {
     var rowsEmitted = 0;
 

@@ -964,6 +964,9 @@ BigQuery.prototype.query = function(query, options, callback) {
  *     string, and all other options are defaulted.
  * @param {module:bigquery/table=} options.destination - The table to save the
  *     query's results to. If omitted, a new table will be created.
+ * @param {boolean} options.dryRun - If set, don't actually run this job. A
+ *     valid query will update the job with processing statistics. These can be
+ *     accessed via `job.metadata`.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
  * @param {function} callback - The callback function.
@@ -1046,6 +1049,11 @@ BigQuery.prototype.startQuery = function(options, callback) {
       query: query
     }
   };
+
+  if (query.dryRun) {
+    reqOpts.configuration.dryRun = query.dryRun;
+    delete query.dryRun;
+  }
 
   if (query.jobPrefix) {
     reqOpts.jobPrefix = query.jobPrefix;
