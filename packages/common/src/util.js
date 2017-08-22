@@ -796,25 +796,35 @@ util.promisifyAll = promisifyAll;
  * 3 - Default endpoint.
  *
  * @param {object=} options - Service configuration object.
- * @param {string=} envVarName - Environment variable to lookup when
- *     options.apiEndpoint is missing.
+ * @param {array} environmentVariables - Array of accepted environment
+ *     variables through which a custom api endpoint can be specified.
  * @param {string=} defaultApiEndpoint - Fallback api endpoint to use.
  * @param {boolean} trimProtocol - If true, trim the leading trimProtocol.
  *     Useful for grcp based service endpoints.
  * @return {object=} base - Object containg the baseUrl and a boolean
  *     property indicating whether the baseUrl is a customEndpoint or not.
  * */
-function determineBaseUrl(options, envVarName,
+function determineBaseUrl(options, environmentVariables,
   defaultApiEndpoint, trimProtocol) {
   var leadingProtocol = new RegExp('^https*://');
   var trailingSlashes = new RegExp('/*$');
   var base = {};
-  if (options.apiEndpoint || process.env[envVarName]) {
-    base.apiEndpoint = options.apiEndpoint || process.env[envVarName];
-    base.customEndpoint = true;
-  } else {
-    base.apiEndpoint = defaultApiEndpoint;
-    base.customEndpoint = false;
+  var candidates = [];
+  candidates.push(options.apiEndpoint);
+  candidates.push(options.servicePath);
+  for (var i = 0; i < environmentVariables.length; i++) {
+    candidates.push(process.env[environmentVariables[i]]);
+  }
+  candidates.push(defaultApiEndpoint);
+  for (var i = 0; i < candidates.length; i++) {
+    if (candidates[i]) {
+      base.apiEndpoint = candidates[i];
+      // The last element in the array is the
+      // default endpoint, everything else is considired
+      // a custom endpoint
+      base.customEndpoint = i !== candidates.length - 1;
+      break;
+    }
   }
   base.apiEndpoint = base.apiEndpoint.replace(trailingSlashes, '');
   if (trimProtocol) {
