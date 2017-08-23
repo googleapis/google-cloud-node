@@ -114,6 +114,19 @@ class RequestHandler extends common.Service {
         }
       });
     } else {
+      this.request({
+        uri: 'events:report',
+        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+        method: 'POST',
+        json: {}
+      }, (err, body, response) => {
+        if (err && err.message !== 'Message cannot be empty.') {
+          this._logger.error([
+            'Encountered an error while attempting to validate the provided',
+            'API key'
+          ].join(' '), err);
+        }
+      });
       that._logger.info('API key provided; skipping OAuth2 token request.');
     }
   }

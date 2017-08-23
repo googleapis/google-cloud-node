@@ -164,7 +164,7 @@ If a key is provided, the module will not attempt to authenticate using the meth
 
 We recommend storing the API key in a file rather than hard-coding it into your application's source code.
 
-**Note:** If the API key provided is invalid, an error will be logged the first time the Error Reporting instance attempts to report an error. To ensure that the API key is valid, you may want to attempt to trigger an error shortly after deploying your app.
+**Note:** The Error Reporting instance will check if the provided API key is invalid shortly after it is instantiated. If the key is invalid, an error-level message will be logged.
 
 ## Configuration
 

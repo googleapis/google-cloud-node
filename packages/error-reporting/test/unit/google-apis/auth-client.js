@@ -28,6 +28,7 @@ function verifyReportedMessage(config, errToReturn, expectedLogs) {
           cb(errToReturn);
         }
       };
+      this.request = function() {};
     }
   }
 
