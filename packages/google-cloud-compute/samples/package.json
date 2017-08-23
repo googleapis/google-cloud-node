@@ -16,7 +16,8 @@
     "pretest": "npm run lint",
     "unit-test": "ava -T 20s --verbose test/*.test.js",
     "system-test": "ava -T 20s --verbose system-test/*.test.js",
-    "test": "npm run unit-test && npm run system-test"
+    "all-test": "npm run unit-test && npm run system-test",
+    "test": "samples test run --cmd npm -- run all-test"
   },
   "dependencies": {
     "@google-cloud/compute": "0.7.2",
