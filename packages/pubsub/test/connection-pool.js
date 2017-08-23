@@ -97,6 +97,8 @@ describe('ConnectionPool', function() {
     PUBSUB.auth.getAuthClient = fakeUtil.noop;
 
     pool = new ConnectionPool(SUBSCRIPTION);
+    pool.queue.forEach(clearTimeout);
+    pool.queue.length = 0;
   });
 
   afterEach(function() {
@@ -116,6 +118,8 @@ describe('ConnectionPool', function() {
       assert(pool.connections instanceof Map);
       assert.strictEqual(pool.isPaused, false);
       assert.strictEqual(pool.isOpen, false);
+      assert.strictEqual(pool.failedConnectionAttempts, 0);
+      assert.strictEqual(pool.noConnectionsTime, 0);
       assert.strictEqual(pool.settings.maxConnections, 5);
       assert.strictEqual(pool.settings.ackDeadline, 10000);
       assert.deepEqual(pool.queue, []);
@@ -270,6 +274,16 @@ describe('ConnectionPool', function() {
       assert.strictEqual(pool.queue.length, 0);
 
       global.clearTimeout = _clearTimeout;
+    });
+
+    it('should reset internally used props', function() {
+      pool.failedConnectionAttempts = 100;
+      pool.noConnectionsTime = Date.now();
+
+      pool.close();
+
+      assert.strictEqual(pool.failedConnectionAttempts, 0);
+      assert.strictEqual(pool.noConnectionsTime, 0);
     });
 
     it('should exec a callback when finished closing', function(done) {
@@ -791,6 +805,10 @@ describe('ConnectionPool', function() {
   });
 
   describe('open', function() {
+    beforeEach(function() {
+      pool.queueConnection = fakeUtil.noop;
+    });
+
     it('should make the specified number of connections', function() {
       var expectedCount = 5;
       var connectionCount = 0;
@@ -808,6 +826,16 @@ describe('ConnectionPool', function() {
     it('should set the isOpen flag to true', function() {
       pool.open();
       assert(pool.isOpen);
+    });
+
+    it('should reset internal used props', function() {
+      pool.failedConnectionAttempts = 100;
+      pool.noConnectionsTime = 0;
+
+      pool.open();
+
+      assert.strictEqual(pool.failedConnectionAttempts, 0);
+      assert.strictEqual(pool.noConnectionsTime, Date.now());
     });
   });
 
@@ -871,7 +899,7 @@ describe('ConnectionPool', function() {
       pool.createConnection = done;
 
       global.setTimeout = function(cb, delay) {
-        assert.strictEqual(delay, 2000);
+        assert.strictEqual(delay, 0);
         cb(); // should call the done fn
       };
 

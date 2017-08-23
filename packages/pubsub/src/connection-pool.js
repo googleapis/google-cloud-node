@@ -62,7 +62,7 @@ function ConnectionPool(subscription) {
   this.isOpen = false;
 
   this.failedConnectionAttempts = 0;
-  this.noConnectionsTime = Date.now();
+  this.noConnectionsTime = 0;
 
   this.settings = {
     maxConnections: subscription.maxConnections || 5,
@@ -147,9 +147,11 @@ ConnectionPool.prototype.close = function(callback) {
 
   this.isOpen = false;
   self.connections.clear();
-
   this.queue.forEach(clearTimeout);
+
   this.queue.length = 0;
+  this.failedConnectionAttempts = 0;
+  this.noConnectionsTime = 0;
 
   each(connections, function(connection, onEndCallback) {
     connection.end(onEndCallback);
@@ -342,6 +344,8 @@ ConnectionPool.prototype.open = function() {
   }
 
   this.isOpen = true;
+  this.failedConnectionAttempts = 0;
+  this.noConnectionsTime = Date.now();
 };
 
 /**
@@ -361,9 +365,12 @@ ConnectionPool.prototype.pause = function() {
  */
 ConnectionPool.prototype.queueConnection = function() {
   var self = this;
+  var delay = 0;
 
-  var delay = (Math.pow(2, this.failedConnectionAttempts) * 1000) +
-    (Math.floor(Math.random() * 1000));
+  if (this.failedConnectionAttempts > 0) {
+    delay = (Math.pow(2, this.failedConnectionAttempts) * 1000) +
+      (Math.floor(Math.random() * 1000));
+  }
 
   var timeoutHandle = setTimeout(createConnection, delay);
   this.queue.push(timeoutHandle);
