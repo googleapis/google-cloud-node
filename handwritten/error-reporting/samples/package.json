@@ -16,8 +16,9 @@
     "pretest": "npm run lint",
     "error-test": "samples test app --msg \"Something broke!\" --url \"http://localhost:33332/error\" --port 33332  -- snippets.js express",
     "exception-test": "samples test app --code 500 --msg SyntaxError --url \"http://localhost:33333/exception\" --port 33333  -- snippets.js express",
-    "system-test": "ava -T 1m --verbose system-test/*.test.js && npm run error-test && npm run exception-test",
-    "test": "npm run system-test"
+    "system-test": "ava -T 1m --verbose system-test/*.test.js",
+    "all-test": "npm run system-test && npm run error-test && npm run exception-test",
+    "test": "samples test run --cmd npm -- run all-test"
   },
   "dependencies": {
     "@google-cloud/error-reporting": "0.2.1",
