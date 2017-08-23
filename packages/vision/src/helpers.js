@@ -74,11 +74,12 @@ var coerceImage = (image, callback) => {
  *   asking for the single feature annotation.
  */
 var _createSingleFeatureMethod = featureValue => {
-  return function(image, options) {
-    return this.annotateImage({
+  return function(image, options = {}, callOptions = undefined) {
+    var request = Object.assign({}, options, {
       image: image,
       features: [{type: featureValue}],
-    }, options);
+    });
+    return this.annotateImage(request, options);
   };
 };
 
@@ -100,6 +101,7 @@ module.exports = apiVersion => {
    *
    * @param {Object=} request
    *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
@@ -110,7 +112,7 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Array} request.features
    *   An array of the specific annotation features being requested.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -137,12 +139,12 @@ module.exports = apiVersion => {
    *   console.error(err);
    * });
    */
-  methods.annotateImage = promisify(function(request, options, callback) {
+  methods.annotateImage = promisify(function(request, callOptions, callback) {
     // If a callback was provided and options were skipped, normalize
     // the argument names.
-    if (is.undefined(callback) && is.function(options)) {
-      callback = options;
-      options = undefined;
+    if (is.undefined(callback) && is.function(callOptions)) {
+      callback = callOptions;
+      callOptions = undefined;
     }
 
     // If there is no image, throw an exception.
@@ -159,7 +161,7 @@ module.exports = apiVersion => {
       request.image = image;
 
       // Call the GAPIC batch annotation function.
-      return this.batchAnnotateImages([request], options, (err, r) => {
+      return this.batchAnnotateImages([request], callOptions, (err, r) => {
         // If there is an error, handle it.
         if (err) {
           return callback(err);
@@ -196,6 +198,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -236,6 +241,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -276,6 +284,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -316,6 +327,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -356,6 +370,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -396,6 +413,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -436,6 +456,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -476,6 +499,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -516,6 +542,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -556,6 +585,9 @@ module.exports = apiVersion => {
    *
    *   If the key is `content`, the value should be a Buffer.
    * @param {Object=} options
+   *   Any additional options which should be mapped onto the
+   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
