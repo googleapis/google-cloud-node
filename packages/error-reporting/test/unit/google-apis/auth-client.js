@@ -20,7 +20,7 @@ var proxyquire = require('proxyquire');
 
 var Configuration = require('../../../src/configuration.js');
 
-function verifyReportedMessage(config, errToReturn, expectedMessage) {
+function verifyReportedMessage(config, errToReturn, expectedLogs) {
   class ServiceStub {
     constructor() {
       this.authClient = {
@@ -37,16 +37,24 @@ function verifyReportedMessage(config, errToReturn, expectedMessage) {
     }
   });
 
-  var message = '';
+  var logs = {};
   var logger = {
     error: function(text) {
-      message += text;
+      if (!logs.error) {
+        logs.error = '';
+      }
+      logs.error += text;
     },
-    info: function() {}
+    info: function(text) {
+      if (!logs.info) {
+        logs.info = '';
+      }
+      logs.info += text;
+    }
   };
   var config = new Configuration(config, logger);
   new RequestHandler(config, logger);
-  assert.strictEqual(message, expectedMessage);
+  assert.deepStrictEqual(logs, expectedLogs);
 }
 describe('RequestHandler', function() {
   it('should not request OAuth2 token if key is provided', function() {
@@ -55,21 +63,24 @@ describe('RequestHandler', function() {
       key: 'key'
     };
     var message = 'Made OAuth2 Token Request';
-    verifyReportedMessage(config, new Error(message), '');
+    verifyReportedMessage(config, new Error(message), {
+      info: 'API key provided; skipping OAuth2 token request.'
+    });
   });
 
   it('should issue a warning if it cannot communicate with the API', function() {
     var config = { ignoreEnvironmentCheck: true };
     var message = 'Test Error';
-    verifyReportedMessage(config, new Error(message),
-      'Unable to find credential information on instance. This library ' +
-      'will be unable to communicate with the Stackdriver API to save ' +
-      'errors.  Message: ' + message);
+    verifyReportedMessage(config, new Error(message), {
+      error: 'Unable to find credential information on instance. This ' +
+        'library will be unable to communicate with the Stackdriver API to ' +
+        'save errors.  Message: ' + message
+    });
   });
 
   it('should not issue a warning if it can communicate with the API', function() {
     var config = { ignoreEnvironmentCheck: true };
-    verifyReportedMessage(config, null, '');
-    verifyReportedMessage(config, undefined, '');
+    verifyReportedMessage(config, null, {});
+    verifyReportedMessage(config, undefined, {});
   });
 });

@@ -56,6 +56,22 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  */
 class RequestHandler extends common.Service {
   /**
+   * Returns a query-string request object if a string key is given, otherwise
+   * will return null.
+   * @param {String|Null} [key] - the API key used to authenticate against the
+   *  service in place of application default credentials.
+   * @returns {Object|Null} api key query string object for use with request or
+   *  null in case no api key is given
+   * @static
+   */
+  static manufactureQueryString(key) {
+    if (isString(key)) {
+      return {key: key};
+    }
+    return null;
+  }
+
+  /**
    * No-operation stub function for user callback substitution
    * @param {Error|Null} err - the error
    * @param {Object|Null} response - the response object
@@ -119,9 +135,7 @@ class RequestHandler extends common.Service {
     if (this._config.getShouldReportErrorsToAPI()) {
       this.request({
         uri: 'events:report',
-        qs: {
-          key: this._config.getKey()
-        },
+        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
         method: 'POST',
         json: errorMessage
       }, (err, body, response) => {
