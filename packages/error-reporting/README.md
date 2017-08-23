@@ -155,7 +155,7 @@ Once you have obtained an API key, you may provide it as part of the Error Repor
 
 ```js
 var errors = require('@google-cloud/error-reporting')({
-  projectId: '{your project's ID}'
+  projectId: '{your project's ID}',
   key: '{your api key}'
 });
 ```
