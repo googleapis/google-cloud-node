@@ -450,6 +450,57 @@ languageClient.analyzeSentiment({document: document}).then(function(responses) {
 ```
 
 
+## Cloud Pub/Sub (Beta)
+
+- [API Documentation][gcloud-pubsub-docs]
+- [Official Documentation][cloud-pubsub-docs]
+
+#### Using the Cloud Pub/Sub API module
+
+```
+$ npm install --save @google-cloud/pubsub
+```
+
+```js
+var pubsub = require('@google-cloud/pubsub');
+```
+
+#### Authentication
+
+See [Authentication](#authentication).
+
+#### Preview
+
+```js
+var pubsubClient = pubsub({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Reference a topic that has been previously created.
+var topic = pubsubClient.topic('my-topic');
+
+// Publish a message to the topic.
+var publisher = topic.publisher();
+var message = new Buffer('New message!');
+
+publisher.publish(message, function(err, messageId) {});
+
+// Subscribe to the topic.
+topic.createSubscription('subscription-name', function(err, subscription) {
+  // Register listeners to start pulling for messages.
+  function onError(err) {}
+  function onMessage(message) {}
+  subscription.on('error', onError);
+  subscription.on('message', onMessage);
+
+  // Remove listeners to stop pulling for messages.
+  subscription.removeListener('message', onMessage);
+  subscription.removeListener('error', onError);
+});
+```
+
+
 ## Cloud Spanner (Beta)
 
 - [API Documentation][gcloud-spanner-docs]
@@ -813,57 +864,6 @@ zone.addRecords([nsRecord], function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
-```
-
-
-## Cloud Pub/Sub (Alpha)
-
-- [API Documentation][gcloud-pubsub-docs]
-- [Official Documentation][cloud-pubsub-docs]
-
-#### Using the Cloud Pub/Sub API module
-
-```
-$ npm install --save @google-cloud/pubsub
-```
-
-```js
-var pubsub = require('@google-cloud/pubsub');
-```
-
-#### Authentication
-
-See [Authentication](#authentication).
-
-#### Preview
-
-```js
-var pubsubClient = pubsub({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Reference a topic that has been previously created.
-var topic = pubsubClient.topic('my-topic');
-
-// Publish a message to the topic.
-var publisher = topic.publisher();
-var message = new Buffer('New message!');
-
-publisher.publish(message, function(err, messageId) {});
-
-// Subscribe to the topic.
-topic.createSubscription('subscription-name', function(err, subscription) {
-  // Register listeners to start pulling for messages.
-  function onError(err) {}
-  function onMessage(message) {}
-  subscription.on('error', onError);
-  subscription.on('message', onMessage);
-
-  // Remove listeners to stop pulling for messages.
-  subscription.removeListener('message', onMessage);
-  subscription.removeListener('error', onError);
-});
 ```
 
 
