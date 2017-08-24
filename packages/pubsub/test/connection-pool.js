@@ -475,6 +475,13 @@ describe('ConnectionPool', function() {
         });
 
         it('should capture the date when no connections are found', function() {
+          var dateNow = global.Date.now;
+
+          var fakeDate = Date.now();
+          global.Date.now = function() {
+            return fakeDate;
+          };
+
           pool.noConnectionsTime = 0;
           pool.isConnected = function() {
             return false;
@@ -483,7 +490,8 @@ describe('ConnectionPool', function() {
           pool.createConnection();
           fakeConnection.emit('status', {});
 
-          assert.strictEqual(pool.noConnectionsTime, Date.now());
+          assert.strictEqual(pool.noConnectionsTime, fakeDate);
+          global.Date.now = dateNow;
         });
 
         it('should not capture the date when already set', function() {
