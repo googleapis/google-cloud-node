@@ -111,10 +111,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with the requested features.
    *
-   * @param {Object=} request
+   * @param {Object} request
    *   A representation of the request being sent to the Vision API.
    *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
-   * @param {Object=} request.image
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -124,6 +124,9 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Array} request.features
    *   An array of the specific annotation features being requested.
+   *   This should take a form such as:
+   *     [{type: vision.types.Feature.Type.FACE_DETECTION},
+   *      {type: vision.types.Feature.Type.WEB_DETECTION}]
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -201,7 +204,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with face detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -209,9 +215,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -244,7 +247,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with landmark detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -252,9 +258,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -287,7 +290,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with logo detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -295,9 +301,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -330,7 +333,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with label detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -338,9 +344,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -373,7 +376,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with text detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -381,9 +387,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -416,7 +419,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with document text detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -424,9 +430,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -459,7 +462,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with safe search detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -467,9 +473,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -502,7 +505,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with image properties.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -510,9 +516,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -545,7 +548,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with crop hints.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -553,9 +559,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
@@ -588,7 +591,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with web detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -596,9 +602,6 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
-   *   Any additional options which should be mapped onto the
-   *   [AnnotateImageRequest]{@link AnnotateImageRequest}.
    * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
