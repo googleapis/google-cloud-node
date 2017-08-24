@@ -141,7 +141,39 @@ function Job(bigQuery, id) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
+
+    /**
+     * Set the metadata for this job. This can be useful for updating job
+     * labels.
+     *
+     * @resource [Jobs: patch API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/patch}
+     *
+     * @param {object} metadata - Metadata to save on the Job.
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * var metadata = {
+     *   configuration: {
+     *     labels: {
+     *       foo: 'bar'
+     *     }
+     *   }
+     * };
+     *
+     * job.setMetadata(metadata, function(err, apiResponse) {})
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
+     */
+    setMetadata: true
   };
 
   common.Operation.call(this, {
