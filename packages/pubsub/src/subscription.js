@@ -473,6 +473,40 @@ Subscription.prototype.delete = function(gaxOpts, callback) {
 };
 
 /**
+ * Check if a subscription exists.
+ *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {boolean} callback.exists - Whether the subscription exists or not.
+ *
+ * @example
+ * subscription.exists(function(err, exists) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.exists().then(function(data) {
+ *   var exists = data[0];
+ * });
+ */
+Subscription.prototype.exists = function(callback) {
+  this.getMetadata(function(err) {
+    if (!err) {
+      callback(null, true);
+      return;
+    }
+
+    if (err.code === 5) {
+      callback(null, false);
+      return;
+    }
+
+    callback(err);
+  });
+};
+
+/**
  * Flushes internal queues. These can build up if a user attempts to ack/nack
  * while there is no connection pool (e.g. after they called close).
  *
@@ -555,6 +589,52 @@ Subscription.prototype.flushQueues_ = function() {
   }
 };
 
+/**
+ * Get a subscription if it exists.
+ *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {boolean} gaxOpts.autoCreate - Automatically create the subscription
+ *     does not already exist. Default: false.
+ *
+ * @example
+ * subscription.get(function(err, subscription, apiResponse) {
+ *   // The `subscription` data has been populated.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.get().then(function(data) {
+ *   var subscription = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Subscription.prototype.get = function(gaxOpts, callback) {
+  var self = this;
+
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
+  var autoCreate = !!gaxOpts.autoCreate && is.fn(this.create);
+  delete gaxOpts.autoCreate;
+
+  this.getMetadata(gaxOpts, function(err, apiResponse) {
+    if (!err) {
+      callback(null, self, apiResponse);
+      return;
+    }
+
+    if (err.code !== 5 || !autoCreate) {
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    self.create(gaxOpts, callback);
+  });
+};
 
 /**
  * Fetches the subscriptions metadata.
@@ -581,6 +661,8 @@ Subscription.prototype.flushQueues_ = function() {
  * });
  */
 Subscription.prototype.getMetadata = function(gaxOpts, callback) {
+  var self = this;
+
   if (is.fn(gaxOpts)) {
     callback = gaxOpts;
     gaxOpts = {};
@@ -595,7 +677,13 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
     method: 'getSubscription',
     reqOpts: reqOpts,
     gaxOpts: gaxOpts
-  }, callback);
+  }, function(err, apiResponse) {
+    if (!err) {
+      self.metadata = apiResponse;
+    }
+
+    callback(err, apiResponse);
+  });
 };
 
 /**

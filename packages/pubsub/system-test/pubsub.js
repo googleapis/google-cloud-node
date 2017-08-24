@@ -93,7 +93,14 @@ describe('pubsub', function() {
     // create all needed topics
     async.each(TOPICS, function(topic, cb) {
       topic.create(cb);
-    }, done);
+    }, function(err) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      setTimeout(done, 5000);
+    });
   });
 
   after(function(done) {
@@ -152,6 +159,32 @@ describe('pubsub', function() {
       pubsub.createTopic(TOPIC_NAME, function(err) {
         assert.ifError(err);
         pubsub.topic(TOPIC_NAME).delete(done);
+      });
+    });
+
+    it('should honor the autoCreate option', function(done) {
+      var topic = pubsub.topic(generateTopicName());
+
+      topic.get({ autoCreate: true }, done);
+    });
+
+    it('should confirm if a topic exists', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+
+      topic.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should confirm if a topic does not exist', function(done) {
+      var topic = pubsub.topic('should-not-exist');
+
+      topic.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
       });
     });
 
@@ -299,6 +332,32 @@ describe('pubsub', function() {
         assert.ifError(err);
         assert(sub instanceof Subscription);
         sub.delete(done);
+      });
+    });
+
+    it('should honor the autoCreate option', function(done) {
+      var sub = topic.subscription(generateSubName());
+
+      sub.get({ autoCreate: true }, done);
+    });
+
+    it('should confirm if a sub exists', function(done) {
+      var sub = topic.subscription(SUB_NAMES[0]);
+
+      sub.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should confirm if a sub does not exist', function(done) {
+      var sub = topic.subscription('should-not-exist');
+
+      sub.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
       });
     });
 

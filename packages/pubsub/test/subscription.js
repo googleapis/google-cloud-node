@@ -702,6 +702,46 @@ describe('Subscription', function() {
     });
   });
 
+  describe('exists', function() {
+    it('should return true if it finds metadata', function(done) {
+      subscription.getMetadata = function(callback) {
+        callback(null, {});
+      };
+
+      subscription.exists(function(err, exists) {
+        assert.ifError(err);
+        assert(exists);
+        done();
+      });
+    });
+
+    it('should return false if a not found error occurs', function(done) {
+      subscription.getMetadata = function(callback) {
+        callback({ code: 5 });
+      };
+
+      subscription.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should pass back any other type of error', function(done) {
+      var error = { code: 4 };
+
+      subscription.getMetadata = function(callback) {
+        callback(error);
+      };
+
+      subscription.exists(function(err, exists) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(exists, undefined);
+        done();
+      });
+    });
+  });
+
   describe('flushQueues_', function() {
     beforeEach(function() {
       subscription.inventory_.ack = ['abc', 'def'];
@@ -878,27 +918,180 @@ describe('Subscription', function() {
     });
   });
 
+  describe('get', function() {
+    beforeEach(function() {
+      subscription.create = fakeUtil.noop;
+    });
+
+    it('should delete the autoCreate option', function(done) {
+      var options = {
+        autoCreate: true,
+        a: 'a'
+      };
+
+      subscription.getMetadata = function(gaxOpts) {
+        assert.strictEqual(gaxOpts, options);
+        assert.strictEqual(gaxOpts.autoCreate, undefined);
+        done();
+      };
+
+      subscription.get(options, assert.ifError);
+    });
+
+    describe('success', function() {
+      var fakeMetadata = {};
+
+      beforeEach(function() {
+        subscription.getMetadata = function(gaxOpts, callback) {
+          callback(null, fakeMetadata);
+        };
+      });
+
+      it('should call through to getMetadata', function(done) {
+        subscription.get(function(err, sub, resp) {
+          assert.ifError(err);
+          assert.strictEqual(sub, subscription);
+          assert.strictEqual(resp, fakeMetadata);
+          done();
+        });
+      });
+
+      it('should optionally accept options', function(done) {
+        var options = {};
+
+        subscription.getMetadata = function(gaxOpts, callback) {
+          assert.strictEqual(gaxOpts, options);
+          callback(); // the done fn
+        };
+
+        subscription.get(options, done);
+      });
+    });
+
+    describe('error', function() {
+      it('should pass back errors when not auto-creating', function(done) {
+        var error = { code: 4 };
+        var apiResponse = {};
+
+        subscription.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        subscription.get(function(err, sub, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should pass back 404 errors if autoCreate is false', function(done) {
+        var error = { code: 5 };
+        var apiResponse = {};
+
+        subscription.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        subscription.get(function(err, sub, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should pass back 404 errors if create doesnt exist', function(done) {
+        var error = { code: 5 };
+        var apiResponse = {};
+
+        subscription.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        delete subscription.create;
+
+        subscription.get(function(err, sub, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should create the sub if 404 + autoCreate is true', function(done) {
+        var error = { code: 5 };
+        var apiResponse = {};
+
+        var fakeOptions = {
+          autoCreate: true
+        };
+
+        subscription.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        subscription.create = function(options, callback) {
+          assert.strictEqual(options, fakeOptions);
+          callback(); // the done fn
+        };
+
+        subscription.get(fakeOptions, done);
+      });
+    });
+  });
+
   describe('getMetadata', function() {
     it('should make the correct request', function(done) {
-      subscription.request = function(config, callback) {
+      subscription.request = function(config) {
         assert.strictEqual(config.client, 'subscriberClient');
         assert.strictEqual(config.method, 'getSubscription');
         assert.deepEqual(config.reqOpts, { subscription: subscription.name });
-        callback(); // the done fn
+        done();
       };
 
-      subscription.getMetadata(done);
+      subscription.getMetadata(assert.ifError);
     });
 
     it('should optionally accept gax options', function(done) {
       var gaxOpts = {};
 
-      subscription.request = function(config, callback) {
+      subscription.request = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOpts);
-        callback(); // the done fn
+        done();
       };
 
-      subscription.getMetadata(gaxOpts, done);
+      subscription.getMetadata(gaxOpts, assert.ifError);
+    });
+
+    it('should pass back any errors that occur', function(done) {
+      var error = new Error('err');
+      var apiResponse = {};
+
+      subscription.request = function(config, callback) {
+        callback(error, apiResponse);
+      };
+
+      subscription.getMetadata(function(err, metadata) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, apiResponse);
+        done();
+      });
+    });
+
+    it('should set the metadata if no error occurs', function(done) {
+      var apiResponse = {};
+
+      subscription.request = function(config, callback) {
+        callback(null, apiResponse);
+      };
+
+      subscription.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, apiResponse);
+        assert.strictEqual(subscription.metadata, apiResponse);
+        done();
+      });
     });
   });
 

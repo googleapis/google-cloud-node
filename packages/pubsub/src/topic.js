@@ -235,6 +235,87 @@ Topic.prototype.delete = function(gaxOpts, callback) {
 };
 
 /**
+ * Check if a topic exists.
+ *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {boolean} callback.exists - Whether the topic exists or not.
+ *
+ * @example
+ * topic.exists(function(err, exists) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.exists().then(function(data) {
+ *   var exists = data[0];
+ * });
+ */
+Topic.prototype.exists = function(callback) {
+  this.getMetadata(function(err) {
+    if (!err) {
+      callback(null, true);
+      return;
+    }
+
+    if (err.code === 5) {
+      callback(null, false);
+      return;
+    }
+
+    callback(err);
+  });
+};
+
+/**
+ * Get a topic if it exists.
+ *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {boolean} gaxOpts.autoCreate - Automatically create the topic does not
+ *     already exist. Default: false.
+ *
+ * @example
+ * topic.get(function(err, topic, apiResponse) {
+ *   // The `topic` data has been populated.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.get().then(function(data) {
+ *   var topic = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Topic.prototype.get = function(gaxOpts, callback) {
+  var self = this;
+
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
+  var autoCreate = !!gaxOpts.autoCreate;
+  delete gaxOpts.autoCreate;
+
+  this.getMetadata(gaxOpts, function(err, apiResponse) {
+    if (!err) {
+      callback(null, self, apiResponse);
+      return;
+    }
+
+    if (err.code !== 5 || !autoCreate) {
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    self.create(gaxOpts, callback);
+  });
+};
+
+/**
  * Get the official representation of this topic from the API.
  *
  * @resource [Topics: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/get}
@@ -257,6 +338,8 @@ Topic.prototype.delete = function(gaxOpts, callback) {
  * });
  */
 Topic.prototype.getMetadata = function(gaxOpts, callback) {
+  var self = this;
+
   if (is.fn(gaxOpts)) {
     callback = gaxOpts;
     gaxOpts = {};
@@ -271,7 +354,13 @@ Topic.prototype.getMetadata = function(gaxOpts, callback) {
     method: 'getTopic',
     reqOpts: reqOpts,
     gaxOpts: gaxOpts
-  }, callback);
+  }, function(err, apiResponse) {
+    if (!err) {
+      self.metadata = apiResponse;
+    }
+
+    callback(err, apiResponse);
+  });
 };
 
 /**
