@@ -290,6 +290,7 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
+        "0.14.0",
         "0.13.1",
         "0.11.0",
         "0.10.0",
