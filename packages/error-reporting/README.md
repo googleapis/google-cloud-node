@@ -116,7 +116,9 @@ Alternatively, you can also follow the instructions for using a service account 
 
 ## Running Elsewhere
 
-If your application is running outside of Google Cloud Platform, such as locally, on-premise, or on another cloud provider, you can still use Stackdriver Errors.
+If your application is running outside of Google Cloud Platform, such as locally, on-premise, or on another cloud provider, you can still use Stackdriver Errors either with locally-stored credentials or with an API Key.
+
+### Using Locally-Stored Credentials
 
 1. You will need to specify your project ID when starting the errors agent.
 
@@ -144,6 +146,25 @@ If your application is running outside of Google Cloud Platform, such as locally
     ```
 
 When running on Google Cloud Platform, we handle these for you automatically.
+
+### Using an API Key
+
+You may use an API key in lieu of locally-stored credentials. Please see [this document][api-key] on how to set up an API key if you do not already have one.
+
+Once you have obtained an API key, you may provide it as part of the Error Reporting instance configuration:
+
+```js
+var errors = require('@google-cloud/error-reporting')({
+  projectId: '{your project ID}',
+  key: '{your api key}'
+});
+```
+
+If a key is provided, the module will not attempt to authenticate using the methods associated with locally-stored credentials as mentioned in the previous section.
+
+We recommend storing the API key in a file rather than hard-coding it into your application's source code.
+
+**Note:** If the API key provided is invalid, an error will be logged the first time the Error Reporting instance attempts to report an error. To ensure that the API key is valid, you may want to attempt to trigger an error shortly after deploying your app.
 
 ## Configuration
 
@@ -286,6 +307,7 @@ server.head('/hello/:name', respond);
 server.listen(3000);
 ```
 
+[api-key]: https://support.google.com/cloud/answer/6158862
 [app-default-credentials]: https://developers.google.com/identity/protocols/application-default-credentials
 [express-error-docs]: https://expressjs.com/en/guide/error-handling.html
 [gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
