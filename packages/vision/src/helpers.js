@@ -73,15 +73,27 @@ var coerceImage = (image, callback) => {
  * @return {Function} - The function that, when called, will call annotateImage
  *   asking for the single feature annotation.
  */
-var _createSingleFeatureMethod = featureValue => {
-  return function(image, options = {}, callOptions = undefined) {
-    var request = Object.assign({}, options, {
-      image: image,
-      features: [{type: featureValue}],
-    });
-    return this.annotateImage(request, options);
-  };
-};
+ var _createSingleFeatureMethod = featureValue => {
+   return function(annotateImageRequest, callOptions) {
+     annotateImageRequest.features = annotateImageRequest.features || [];
+
+     // Ensure the feature value indicated by the user's method choice exists on the
+     // features array; if it does not, add it.
+     var found = false;
+     for (let feature of annotateImageRequest.features) {
+       if (feature.type === featureValue) {
+         found = true;
+         break;
+       }
+     }
+     if (found === false) {
+       annotateImageRequest.features.push({type: featureValue});
+     }
+
+     // Call the underlying #annotateImage method.
+     return this.annotateImage(annotateImageRequest, callOptions);
+   };
+ };
 
 
 /*!

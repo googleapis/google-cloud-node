@@ -260,8 +260,8 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method does *not* pass the callback
       // on to batchAnnotateImages, but rather handles it itself.
-      var image = {content: new Buffer('bogus==')};
-      return vision.logoDetection(image).then(r => {
+      var imageRequest = {image: {content: new Buffer('bogus==')}};
+      return vision.logoDetection(Object.assign({}, imageRequest)).then(r => {
         var response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
@@ -272,10 +272,13 @@ describe('Vision helper methods', () => {
         // Inspect the calls to annotateImage and batchAnnotateImages and
         // ensure they matched the expected signature.
         assert(annotate.callCount === 1);
-        assert(annotate.calledWith({image: image, features: [{type: 3}]}));
+        assert(annotate.calledWith({
+          features: [{type: 3}],
+          image: imageRequest.image,
+        }));
         assert(batchAnnotate.callCount === 1);
         assert(batchAnnotate.calledWith(
-          [{image: image, features: [{type: 3}]}]
+          [{image: imageRequest.image, features: [{type: 3}]}]
         ));
       });
     });
