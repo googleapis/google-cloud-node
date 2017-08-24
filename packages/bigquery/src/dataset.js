@@ -461,6 +461,27 @@ Dataset.prototype.query = function(options, callback) {
 };
 
 /**
+ * Start running a query scoped to your dataset.
+ *
+ * See {module:bigquery#startQuery} for full documentation of this method.
+ */
+Dataset.prototype.startQuery = function(options, callback) {
+  if (is.string(options)) {
+    options = {
+      query: options
+    };
+  }
+
+  options = extend(true, {}, options, {
+    defaultDataset: {
+      datasetId: this.id
+    }
+  });
+
+  return this.bigQuery.startQuery(options, callback);
+};
+
+/**
  * Create a Table object.
  *
  * @param {string} id - The ID of the table.

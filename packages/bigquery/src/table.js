@@ -309,25 +309,19 @@ Table.formatMetadata_ = function(options) {
 /**
  * Copy data from one table to another, optionally creating that table.
  *
- * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
- *
  * @param {module:bigquery/table} destination - The destination table.
  * @param {object=} metadata - Metadata to set with the copy operation. The
  *     metadata object should be in the format of the
  *     [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:bigquery/job} callback.job - The job used to copy your table.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @throws {Error} If a destination other than a Table object is provided.
  *
  * @example
  * var yourTable = dataset.table('your-table');
- * table.copy(yourTable, function(err, job, apiResponse) {
- *   // `job` is a Job object that can be used to check the status of the
- *   // request.
- * });
+ * table.copy(yourTable, function(err, apiResponse) {});
  *
  * //-
  * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
@@ -338,56 +332,32 @@ Table.formatMetadata_ = function(options) {
  *   writeDisposition: 'WRITE_TRUNCATE'
  * };
  *
- * table.copy(yourTable, metadata, function(err, job, apiResponse) {});
+ * table.copy(yourTable, metadata, function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * table.copy(yourTable, metadata).then(function(data) {
- *   var job = data[0];
- *   var apiResponse = data[1];
+ *   var apiResponse = data[0];
  * });
  */
 Table.prototype.copy = function(destination, metadata, callback) {
-  var self = this;
+  this.startCopy(destination, metadata, function(err, job, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
+    }
 
-  if (!(destination instanceof Table)) {
-    throw new Error('Destination must be a Table object.');
-  }
+    job.on('error', callback);
 
-  if (is.fn(metadata)) {
-    callback = metadata;
-    metadata = {};
-  }
-
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
-  var body = {
-    configuration: {
-      copy: extend(true, metadata || {}, {
-        destinationTable: {
-          datasetId: destination.dataset.id,
-          projectId: destination.bigQuery.projectId,
-          tableId: destination.id
-        },
-        sourceTable: {
-          datasetId: this.dataset.id,
-          projectId: this.bigQuery.projectId,
-          tableId: this.id
-        }
-      })
-    },
-    jobPrefix: jobPrefix
-  };
-
-  this.bigQuery.createJob(body, callback);
+    job.on('complete', function(metadata) {
+      callback(null, metadata);
+    });
+  });
 };
 
 /**
  * Copy data from multiple tables into this table.
- *
- * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
  *
  * @param {module:bigquery/table|module:bigquery/table[]} sourceTables - The
  *     source table(s) to copy data from.
@@ -396,7 +366,6 @@ Table.prototype.copy = function(destination, metadata, callback) {
  *     [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:bigquery/job} callback.job - The job used to copy your table.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @throws {Error} If a source other than a Table object is provided.
@@ -407,10 +376,7 @@ Table.prototype.copy = function(destination, metadata, callback) {
  *   dataset.table('your-second-table')
  * ];
  *
- * table.copyFrom(sourceTables, function(err, job, apiResponse) {
- *   // `job` is a Job object that can be used to check the status of the
- *   // request.
- * });
+ * table.copyFrom(sourceTables, function(err, apiResponse) {});
  *
  * //-
  * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
@@ -421,57 +387,28 @@ Table.prototype.copy = function(destination, metadata, callback) {
  *   writeDisposition: 'WRITE_TRUNCATE'
  * };
  *
- * table.copyFrom(sourceTables, metadata, function(err, job, apiResponse) {});
+ * table.copyFrom(sourceTables, metadata, function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * table.copyFrom(sourceTables, metadata).then(function(data) {
- *   var job = data[0];
- *   var apiResponse = data[1];
+ *   var apiResponse = data[0];
  * });
  */
 Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
-  var self = this;
-
-  sourceTables = arrify(sourceTables);
-
-  sourceTables.forEach(function(sourceTable) {
-    if (!(sourceTable instanceof Table)) {
-      throw new Error('Source must be a Table object.');
+  this.startExport(sourceTables, metadata, function(err, job, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
     }
+
+    job.on('error', callback);
+
+    job.on('complete', function(metadata) {
+      callback(null, metadata);
+    });
   });
-
-  if (is.fn(metadata)) {
-    callback = metadata;
-    metadata = {};
-  }
-
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
-  var body = {
-    configuration: {
-      copy: extend(true, metadata || {}, {
-        destinationTable: {
-          datasetId: this.dataset.id,
-          projectId: this.bigQuery.projectId,
-          tableId: this.id
-        },
-
-        sourceTables: sourceTables.map(function(sourceTable) {
-          return {
-            datasetId: sourceTable.dataset.id,
-            projectId: sourceTable.bigQuery.projectId,
-            tableId: sourceTable.id
-          };
-        })
-      })
-    },
-    jobPrefix: jobPrefix
-  };
-
-  this.bigQuery.createJob(body, callback);
 };
 
 /**
@@ -616,8 +553,6 @@ Table.prototype.createWriteStream = function(metadata) {
 /**
  * Export table to Cloud Storage.
  *
- * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
- *
  * @param {module:storage/file} destination - Where the file should be exported
  *     to.
  * @param {object=} options - The configuration object.
@@ -627,7 +562,6 @@ Table.prototype.createWriteStream = function(metadata) {
  *     with GZIP. Default: false.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:bigquery/job} callback.job - The job used to export the table.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @throws {Error} If destination isn't a File object.
@@ -646,10 +580,7 @@ Table.prototype.createWriteStream = function(metadata) {
  * // If you wish to override this, or provide an array of destination files,
  * // you must provide an `options` object.
  * //-
- * table.export(exportedFile, function(err, job, apiResponse) {
- *   // `job` is a Job object that can be used to check the status of the
- *   // request.
- * });
+ * table.export(exportedFile, function(err, apiResponse) {});
  *
  * //-
  * // If you need more customization, pass an `options` object.
@@ -659,7 +590,7 @@ Table.prototype.createWriteStream = function(metadata) {
  *   gzip: true
  * };
  *
- * table.export(exportedFile, options, function(err, job, apiResponse) {});
+ * table.export(exportedFile, options, function(err, apiResponse) {});
  *
  * //-
  * // You can also specify multiple destination files.
@@ -667,74 +598,28 @@ Table.prototype.createWriteStream = function(metadata) {
  * table.export([
  *   gcs.bucket('institutions').file('2014.json'),
  *   gcs.bucket('institutions-copy').file('2014.json')
- * ], options, function(err, job, apiResponse) {});
+ * ], options, function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * table.export(exportedFile, options).then(function(data) {
- *   var job = data[0];
- *   var apiResponse = data[1];
+ *   var apiResponse = data[0];
  * });
  */
 Table.prototype.export = function(destination, options, callback) {
-  var self = this;
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  extend(true, options, {
-    destinationUris: arrify(destination).map(function(dest) {
-      if (!common.util.isCustomType(dest, 'storage/file')) {
-        throw new Error('Destination must be a File object.');
-      }
-
-      // If no explicit format was provided, attempt to find a match from the
-      // file's extension. If no match, don't set, and default upstream to CSV.
-      var format = path.extname(dest.name).substr(1).toLowerCase();
-      if (!options.destinationFormat && !options.format && FORMATS[format]) {
-        options.destinationFormat = FORMATS[format];
-      }
-
-      return 'gs://' + dest.bucket.name + '/' + dest.name;
-    })
-  });
-
-  if (options.format) {
-    options.format = options.format.toLowerCase();
-
-    if (FORMATS[options.format]) {
-      options.destinationFormat = FORMATS[options.format];
-      delete options.format;
-    } else {
-      throw new Error('Destination format not recognized: ' + options.format);
+  this.startExport(destination, options, function(err, job, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
     }
-  }
 
-  if (options.gzip) {
-    options.compression = 'GZIP';
-    delete options.gzip;
-  }
+    job.on('error', callback);
 
-  var jobPrefix = options.jobPrefix;
-  delete options.jobPrefix;
-
-  var body = {
-    configuration: {
-      extract: extend(true, options, {
-        sourceTable: {
-          datasetId: this.dataset.id,
-          projectId: this.bigQuery.projectId,
-          tableId: this.id
-        }
-      })
-    },
-    jobPrefix: jobPrefix
-  };
-
-  this.bigQuery.createJob(body, callback);
+    job.on('complete', function(metadata) {
+      callback(null, metadata);
+    });
+  });
 };
 
 /**
@@ -846,8 +731,6 @@ Table.prototype.getRows = function(options, callback) {
  * Note: The file type will be inferred by the given file's extension. If you
  * wish to override this, you must provide `metadata.format`.
  *
- * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
- *
  * @param {string|module:storage/file} source - The source file to import.
  * @param {object=} metadata - Metadata to set with the load operation. The
  *     metadata object should be in the format of the
@@ -856,7 +739,6 @@ Table.prototype.getRows = function(options, callback) {
  *     Allowed options are "CSV", "JSON", or "AVRO".
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:bigquery/job} callback.job - The job used to import your data.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @throws {Error} If the source isn't a string file name or a File instance.
@@ -865,10 +747,7 @@ Table.prototype.getRows = function(options, callback) {
  * //-
  * // Load data from a local file.
  * //-
- * table.import('./institutions.csv', function(err, job, apiResponse) {
- *   // `job` is a Job object that can be used to check the status of the
- *   // request.
- * });
+ * table.import('./institutions.csv', function(err, apiResponse) {});
  *
  * //-
  * // You may also pass in metadata in the format of a Jobs resource. See
@@ -879,7 +758,7 @@ Table.prototype.getRows = function(options, callback) {
  *   sourceFormat: 'NEWLINE_DELIMITED_JSON'
  * };
  *
- * table.import('./my-data.csv', metadata, function(err, job, apiResponse) {});
+ * table.import('./my-data.csv', metadata, function(err, apiResponse) {});
  *
  * //-
  * // Load data from a file in your Cloud Storage bucket.
@@ -888,7 +767,7 @@ Table.prototype.getRows = function(options, callback) {
  *   projectId: 'grape-spaceship-123'
  * });
  * var data = gcs.bucket('institutions').file('data.csv');
- * table.import(data, function(err, job, apiResponse) {});
+ * table.import(data, function(err, apiResponse) {});
  *
  * //-
  * // Load data from multiple files in your Cloud Storage bucket(s).
@@ -896,85 +775,28 @@ Table.prototype.getRows = function(options, callback) {
  * table.import([
  *   gcs.bucket('institutions').file('2011.csv'),
  *   gcs.bucket('institutions').file('2012.csv')
- * ], function(err, job, apiResponse) {});
+ * ], function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * table.import(data).then(function(data) {
- *   var job = data[0];
- *   var apiResponse = data[1];
+ *   var apiResponse = data[0];
  * });
  */
 Table.prototype.import = function(source, metadata, callback) {
-  var self = this;
-
-  if (is.fn(metadata)) {
-    callback = metadata;
-    metadata = {};
-  }
-
-  callback = callback || common.util.noop;
-  metadata = metadata || {};
-
-  if (metadata.format) {
-    metadata.sourceFormat = FORMATS[metadata.format.toLowerCase()];
-    delete metadata.format;
-  }
-
-  if (is.string(source)) {
-    // A path to a file was given. If a sourceFormat wasn't specified, try to
-    // find a match from the file's extension.
-    var detectedFormat = FORMATS[path.extname(source).substr(1).toLowerCase()];
-    if (!metadata.sourceFormat && detectedFormat) {
-      metadata.sourceFormat = detectedFormat;
+  this.startImport(source, metadata, function(err, job, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
     }
 
-    // Read the file into a new write stream.
-    return fs.createReadStream(source)
-      .pipe(this.createWriteStream(metadata))
-      .on('error', callback)
-      .on('complete', function(resp) {
-        // TODO(ryanseys): Does this have to create a job object?
-        callback(null, resp, resp);
-      });
-  }
+    job.on('error', callback);
 
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
-  var body = {
-    configuration: {
-      load: {
-        destinationTable: {
-          projectId: this.bigQuery.projectId,
-          datasetId: this.dataset.id,
-          tableId: this.id
-        }
-      }
-    },
-    jobPrefix: jobPrefix
-  };
-
-  extend(true, body.configuration.load, metadata, {
-    sourceUris: arrify(source).map(function(src) {
-      if (!common.util.isCustomType(src, 'storage/file')) {
-        throw new Error('Source must be a File object.');
-      }
-
-      // If no explicit format was provided, attempt to find a match from
-      // the file's extension. If no match, don't set, and default upstream
-      // to CSV.
-      var format = FORMATS[path.extname(src.name).substr(1).toLowerCase()];
-      if (!metadata.sourceFormat && format) {
-        body.configuration.load.sourceFormat = format;
-      }
-
-      return 'gs://' + src.bucket.name + '/' + src.name;
-    })
+    job.on('complete', function(metadata) {
+      callback(null, metadata);
+    });
   });
-
-  this.bigQuery.createJob(body, callback);
 };
 
 /**
@@ -1219,6 +1041,448 @@ Table.prototype.setMetadata = function(metadata, callback) {
   var body = Table.formatMetadata_(metadata);
 
   common.ServiceObject.prototype.setMetadata.call(this, metadata, callback);
+};
+
+/**
+ * Copy data from one table to another, optionally creating that table.
+ *
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {module:bigquery/table} destination - The destination table.
+ * @param {object=} metadata - Metadata to set with the copy operation. The
+ *     metadata object should be in the format of the
+ *     [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:bigquery/job} callback.job - The job used to copy your table.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @throws {Error} If a destination other than a Table object is provided.
+ *
+ * @example
+ * var yourTable = dataset.table('your-table');
+ * table.startCopy(yourTable, function(err, job, apiResponse) {
+ *   // `job` is a Job object that can be used to check the status of the
+ *   // request.
+ * });
+ *
+ * //-
+ * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
+ * // all available options.
+ * //-
+ * var metadata = {
+ *   createDisposition: 'CREATE_NEVER',
+ *   writeDisposition: 'WRITE_TRUNCATE'
+ * };
+ *
+ * table.startCopy(yourTable, metadata, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.startCopy(yourTable, metadata).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Table.prototype.startCopy = function(destination, metadata, callback) {
+  var self = this;
+
+  if (!(destination instanceof Table)) {
+    throw new Error('Destination must be a Table object.');
+  }
+
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = {};
+  }
+
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
+  var body = {
+    configuration: {
+      copy: extend(true, metadata || {}, {
+        destinationTable: {
+          datasetId: destination.dataset.id,
+          projectId: destination.bigQuery.projectId,
+          tableId: destination.id
+        },
+        sourceTable: {
+          datasetId: this.dataset.id,
+          projectId: this.bigQuery.projectId,
+          tableId: this.id
+        }
+      })
+    },
+    jobPrefix: jobPrefix
+  };
+
+  this.bigQuery.createJob(body, callback);
+};
+
+/**
+ * Copy data from multiple tables into this table.
+ *
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {module:bigquery/table|module:bigquery/table[]} sourceTables - The
+ *     source table(s) to copy data from.
+ * @param {object=} metadata - Metadata to set with the copy operation. The
+ *     metadata object should be in the format of the
+ *     [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:bigquery/job} callback.job - The job used to copy your table.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @throws {Error} If a source other than a Table object is provided.
+ *
+ * @example
+ * var sourceTables = [
+ *   dataset.table('your-table'),
+ *   dataset.table('your-second-table')
+ * ];
+ *
+ * table.startCopyFrom(sourceTables, function(err, job, apiResponse) {
+ *   // `job` is a Job object that can be used to check the status of the
+ *   // request.
+ * });
+ *
+ * //-
+ * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
+ * // all available options.
+ * //-
+ * var metadata = {
+ *   createDisposition: 'CREATE_NEVER',
+ *   writeDisposition: 'WRITE_TRUNCATE'
+ * };
+ *
+ * table.startCopyFrom(sourceTables, metadata, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.startCopyFrom(sourceTables, metadata).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
+  var self = this;
+
+  sourceTables = arrify(sourceTables);
+
+  sourceTables.forEach(function(sourceTable) {
+    if (!(sourceTable instanceof Table)) {
+      throw new Error('Source must be a Table object.');
+    }
+  });
+
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = {};
+  }
+
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
+  var body = {
+    configuration: {
+      copy: extend(true, metadata || {}, {
+        destinationTable: {
+          datasetId: this.dataset.id,
+          projectId: this.bigQuery.projectId,
+          tableId: this.id
+        },
+
+        sourceTables: sourceTables.map(function(sourceTable) {
+          return {
+            datasetId: sourceTable.dataset.id,
+            projectId: sourceTable.bigQuery.projectId,
+            tableId: sourceTable.id
+          };
+        })
+      })
+    },
+    jobPrefix: jobPrefix
+  };
+
+  this.bigQuery.createJob(body, callback);
+};
+
+/**
+ * Export table to Cloud Storage.
+ *
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {module:storage/file} destination - Where the file should be exported
+ *     to.
+ * @param {object=} options - The configuration object.
+ * @param {string} options.format - The format to export the data in. Allowed
+ *     options are "CSV", "JSON", or "AVRO". Default: "CSV".
+ * @param {boolean} options.gzip - Specify if you would like the file compressed
+ *     with GZIP. Default: false.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:bigquery/job} callback.job - The job used to export the table.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @throws {Error} If destination isn't a File object.
+ * @throws {Error} If destination format isn't recongized.
+ *
+ * @example
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
+ * var exportedFile = gcs.bucket('institutions').file('2014.csv');
+ *
+ * //-
+ * // To use the default options, just pass a {module:storage/file} object.
+ * //
+ * // Note: The exported format type will be inferred by the file's extension.
+ * // If you wish to override this, or provide an array of destination files,
+ * // you must provide an `options` object.
+ * //-
+ * table.startExport(exportedFile, function(err, job, apiResponse) {
+ *   // `job` is a Job object that can be used to check the status of the
+ *   // request.
+ * });
+ *
+ * //-
+ * // If you need more customization, pass an `options` object.
+ * //-
+ * var options = {
+ *   format: 'json',
+ *   gzip: true
+ * };
+ *
+ * table.startExport(exportedFile, options, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // You can also specify multiple destination files.
+ * //-
+ * table.startExport([
+ *   gcs.bucket('institutions').file('2014.json'),
+ *   gcs.bucket('institutions-copy').file('2014.json')
+ * ], options, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.startExport(exportedFile, options).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Table.prototype.startExport = function(destination, options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  extend(true, options, {
+    destinationUris: arrify(destination).map(function(dest) {
+      if (!common.util.isCustomType(dest, 'storage/file')) {
+        throw new Error('Destination must be a File object.');
+      }
+
+      // If no explicit format was provided, attempt to find a match from the
+      // file's extension. If no match, don't set, and default upstream to CSV.
+      var format = path.extname(dest.name).substr(1).toLowerCase();
+      if (!options.destinationFormat && !options.format && FORMATS[format]) {
+        options.destinationFormat = FORMATS[format];
+      }
+
+      return 'gs://' + dest.bucket.name + '/' + dest.name;
+    })
+  });
+
+  if (options.format) {
+    options.format = options.format.toLowerCase();
+
+    if (FORMATS[options.format]) {
+      options.destinationFormat = FORMATS[options.format];
+      delete options.format;
+    } else {
+      throw new Error('Destination format not recognized: ' + options.format);
+    }
+  }
+
+  if (options.gzip) {
+    options.compression = 'GZIP';
+    delete options.gzip;
+  }
+
+  var jobPrefix = options.jobPrefix;
+  delete options.jobPrefix;
+
+  var body = {
+    configuration: {
+      extract: extend(true, options, {
+        sourceTable: {
+          datasetId: this.dataset.id,
+          projectId: this.bigQuery.projectId,
+          tableId: this.id
+        }
+      })
+    },
+    jobPrefix: jobPrefix
+  };
+
+  this.bigQuery.createJob(body, callback);
+};
+
+/**
+ * Load data from a local file or Storage file ({module:storage/file}).
+ *
+ * By loading data this way, you create a load job that will run your data load
+ * asynchronously. If you would like instantaneous access to your data, insert
+ * it using {module:bigquery/table#insert}.
+ *
+ * Note: The file type will be inferred by the given file's extension. If you
+ * wish to override this, you must provide `metadata.format`.
+ *
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {string|module:storage/file} source - The source file to import.
+ * @param {object=} metadata - Metadata to set with the load operation. The
+ *     metadata object should be in the format of the
+ *     [`configuration.load`](http://goo.gl/BVcXk4) property of a Jobs resource.
+ * @param {string} metadata.format - The format the data being imported is in.
+ *     Allowed options are "CSV", "JSON", or "AVRO".
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:bigquery/job} callback.job - The job used to import your data.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @throws {Error} If the source isn't a string file name or a File instance.
+ *
+ * @example
+ * //-
+ * // Load data from a local file.
+ * //-
+ * table.startImport('./institutions.csv', function(err, job, apiResponse) {
+ *   // `job` is a Job object that can be used to check the status of the
+ *   // request.
+ * });
+ *
+ * //-
+ * // You may also pass in metadata in the format of a Jobs resource. See
+ * // (http://goo.gl/BVcXk4) for a full list of supported values.
+ * //-
+ * var metadata = {
+ *   encoding: 'ISO-8859-1',
+ *   sourceFormat: 'NEWLINE_DELIMITED_JSON'
+ * };
+ *
+ * table.startImport('./my-data.csv', metadata, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // Load data from a file in your Cloud Storage bucket.
+ * //-
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
+ * var data = gcs.bucket('institutions').file('data.csv');
+ * table.startImport(data, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // Load data from multiple files in your Cloud Storage bucket(s).
+ * //-
+ * table.startImport([
+ *   gcs.bucket('institutions').file('2011.csv'),
+ *   gcs.bucket('institutions').file('2012.csv')
+ * ], function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.startImport(data).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Table.prototype.startImport = function(source, metadata, callback) {
+  var self = this;
+
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = {};
+  }
+
+  callback = callback || common.util.noop;
+  metadata = metadata || {};
+
+  if (metadata.format) {
+    metadata.sourceFormat = FORMATS[metadata.format.toLowerCase()];
+    delete metadata.format;
+  }
+
+  if (is.string(source)) {
+    // A path to a file was given. If a sourceFormat wasn't specified, try to
+    // find a match from the file's extension.
+    var detectedFormat = FORMATS[path.extname(source).substr(1).toLowerCase()];
+    if (!metadata.sourceFormat && detectedFormat) {
+      metadata.sourceFormat = detectedFormat;
+    }
+
+    // Read the file into a new write stream.
+    return fs.createReadStream(source)
+      .pipe(this.createWriteStream(metadata))
+      .on('error', callback)
+      .on('complete', function(resp) {
+        // TODO(ryanseys): Does this have to create a job object?
+        callback(null, resp, resp);
+      });
+  }
+
+  var jobPrefix = metadata.jobPrefix;
+  delete metadata.jobPrefix;
+
+  var body = {
+    configuration: {
+      load: {
+        destinationTable: {
+          projectId: this.bigQuery.projectId,
+          datasetId: this.dataset.id,
+          tableId: this.id
+        }
+      }
+    },
+    jobPrefix: jobPrefix
+  };
+
+  extend(true, body.configuration.load, metadata, {
+    sourceUris: arrify(source).map(function(src) {
+      if (!common.util.isCustomType(src, 'storage/file')) {
+        throw new Error('Source must be a File object.');
+      }
+
+      // If no explicit format was provided, attempt to find a match from
+      // the file's extension. If no match, don't set, and default upstream
+      // to CSV.
+      var format = FORMATS[path.extname(src.name).substr(1).toLowerCase()];
+      if (!metadata.sourceFormat && format) {
+        body.configuration.load.sourceFormat = format;
+      }
+
+      return 'gs://' + src.bucket.name + '/' + src.name;
+    })
+  });
+
+  this.bigQuery.createJob(body, callback);
+};
+
+/**
+ * Start running a query scoped to your dataset.
+ *
+ * See {module:bigquery#startQuery} for full documentation of this method.
+ */
+Table.prototype.startQuery = function(options, callback) {
+  return this.dataset.startQuery(options, callback);
 };
 
 /*! Developer Documentation
