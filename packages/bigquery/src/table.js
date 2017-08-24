@@ -1100,8 +1100,14 @@ Table.prototype.insert = function(rows, options, callback) {
     options = {};
   }
 
+  rows = arrify(rows);
+
+  if (!rows.length) {
+    throw new Error('You must provide at least 1 row to be inserted.');
+  }
+
   var json = extend(true, options, {
-    rows: arrify(rows)
+    rows: rows
   });
 
   if (!options.raw) {
