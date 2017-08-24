@@ -1093,6 +1093,8 @@ Table.prototype.import = function(source, metadata, callback) {
  *   });
  */
 Table.prototype.insert = function(rows, options, callback) {
+  var self = this;
+
   if (is.fn(options)) {
     callback = options;
     options = {};
@@ -1118,7 +1120,11 @@ Table.prototype.insert = function(rows, options, callback) {
     json: json
   }, function(err, resp) {
     if (err) {
-      callback(err, resp);
+      if (err.code === 404) {
+        createTableAndRetry();
+      } else {
+        callback(err, resp);
+      }
       return;
     }
 
@@ -1143,6 +1149,17 @@ Table.prototype.insert = function(rows, options, callback) {
 
     callback(err, resp);
   });
+
+  function createTableAndRetry() {
+    self.create(function(err, table, resp) {
+      if (err) {
+        callback(err, resp);
+        return;
+      }
+
+      self.insert(rows, options, callback);
+    });
+  }
 };
 
 /**
