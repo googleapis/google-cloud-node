@@ -1,4 +1,4 @@
-# @google-cloud/pubsub ([Alpha][versioning])
+# @google-cloud/pubsub ([Beta][versioning])
 > Cloud Pub/Sub Client Library for Node.js
 
 *Looking for more Google APIs than just Pub/Sub? You might want to check out [`google-cloud`][google-cloud].*
