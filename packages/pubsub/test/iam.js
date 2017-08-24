@@ -45,7 +45,6 @@ describe('IAM', function() {
   var iam;
 
   var PUBSUB = {
-    defaultBaseUrl_: 'base-url',
     options: {}
   };
   var ID = 'id';
@@ -72,7 +71,7 @@ describe('IAM', function() {
       var config = iam.calledWith_[0];
       var options = iam.calledWith_[1];
 
-      assert.strictEqual(config.baseUrl, PUBSUB.defaultBaseUrl_);
+      assert.strictEqual(config.baseUrl, 'pubsub.googleapis.com');
 
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(config.protosDir, protosDir);

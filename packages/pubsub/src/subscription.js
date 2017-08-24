@@ -20,14 +20,24 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var events = require('events');
+var extend = require('extend');
 var is = require('is');
-var modelo = require('modelo');
-var prop = require('propprop');
-var uuid = require('uuid');
+var os = require('os');
+var util = require('util');
+
+/**
+ * @type {module:pubsub/connectionPool}
+ * @private
+ */
+var ConnectionPool = require('./connection-pool.js');
+
+/**
+ * @type {module:pubsub/histogram}
+ * @private
+ */
+var Histogram = require('./histogram.js');
 
 /**
  * @type {module:pubsub/iam}
@@ -41,29 +51,9 @@ var IAM = require('./iam.js');
  */
 var Snapshot = require('./snapshot.js');
 
-/**
- * @const {number} - The amount of time a subscription pull HTTP connection to
- *     Pub/Sub stays open.
- * @private
- */
-var PUBSUB_API_TIMEOUT = 90000;
-
 /*! Developer Documentation
- *
  * @param {module:pubsub} pubsub - PubSub object.
- * @param {object} options - Configuration object.
- * @param {boolean} options.autoAck - Automatically acknowledge the message once
- *     it's pulled. (default: false)
- * @param {string} options.encoding - When pulling for messages, this type is
- *     used when converting a message's data to a string. (default: 'utf-8')
- * @param {number} options.interval - Interval in milliseconds to check for new
- *     messages. (default: 10)
- * @param {string} options.name - Name of the subscription.
- * @param {number} options.maxInProgress - Maximum messages to consume
- *     simultaneously.
- * @param {number} options.timeout - Set a maximum amount of time in
- *     milliseconds on an HTTP request to pull new messages to wait for a
- *     response before the connection is broken. (default: 90000)
+ * @param {string=} name - The name of the subscription.
  */
 /**
  * A Subscription object will give you access to your Cloud Pub/Sub
@@ -73,7 +63,7 @@ var PUBSUB_API_TIMEOUT = 90000;
  *
  * - {module:pubsub#getSubscriptions}
  * - {module:pubsub/topic#getSubscriptions}
- * - {module:pubsub/topic#subscribe}
+ * - {module:pubsub/topic#createSubscription}
  *
  * Subscription objects may be created directly with:
  *
@@ -86,6 +76,20 @@ var PUBSUB_API_TIMEOUT = 90000;
  *
  * @alias module:pubsub/subscription
  * @constructor
+ *
+ * @param {object=} options - See a
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
+ * @param {number} options.maxConnections - Use this to limit the number of
+ *     connections to be used when sending and receiving messages. Default: 5.
  *
  * @example
  * //-
@@ -104,10 +108,10 @@ var PUBSUB_API_TIMEOUT = 90000;
  * });
  *
  * //-
- * // From {module:pubsub/topic#subscribe}:
+ * // From {module:pubsub/topic#createSubscription}:
  * //-
  * var topic = pubsub.topic('my-topic');
- * topic.subscribe('new-subscription', function(err, subscription) {
+ * topic.createSubscription('new-subscription', function(err, subscription) {
  *   // `subscription` is a Subscription object.
  * });
  *
@@ -137,166 +141,52 @@ var PUBSUB_API_TIMEOUT = 90000;
  *   // message.timestamp = Timestamp when Pub/Sub received the message.
  *
  *   // Ack the message:
- *   // message.ack(callback);
+ *   // message.ack();
  *
- *   // Skip the message. This is useful with `maxInProgress` option when
- *   // creating your subscription. This doesn't ack the message, but allows
- *   // more messages to be retrieved if your limit was hit.
- *   // message.skip();
+ *   // This doesn't ack the message, but allows more messages to be retrieved
+ *   // if your limit was hit or if you don't want to ack the message.
+ *   // message.nack();
  * }
  * subscription.on('message', onMessage);
  *
  * // Remove the listener from receiving `message` events.
  * subscription.removeListener('message', onMessage);
  */
-function Subscription(pubsub, options) {
-  var name = options.name || Subscription.generateName_();
+function Subscription(pubsub, name, options) {
+  options = options || {};
+
+  this.pubsub = pubsub;
+  this.projectId = pubsub.projectId;
+  this.request = pubsub.request.bind(pubsub);
+  this.histogram = new Histogram();
 
   this.name = Subscription.formatName_(pubsub.projectId, name);
 
-  var methods = {
-    /**
-     * Check if the subscription exists.
-     *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the subscription exists or
-     *     not.
-     *
-     * @example
-     * subscription.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * subscription.exists().then(function(data) {
-     *   var exists = data[0];
-     * });
-     */
-    exists: true,
+  this.connectionPool = null;
+  this.ackDeadline = 10000;
+  this.maxConnections = options.maxConnections || 5;
 
-    /**
-     * Get a subscription if it exists.
-     *
-     * You may optionally use this to "get or create" an object by providing an
-     * object with `autoCreate` set to `true`. Any extra configuration that is
-     * normally required for the `create` method must be contained within this
-     * object as well.
-     *
-     * **`autoCreate` is only available if you accessed this object
-     * through {module:pubsub/topic#subscription}.**
-     *
-     * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
-     *
-     * @example
-     * subscription.get(function(err, subscription, apiResponse) {
-     *   // `subscription.metadata` has been populated.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * subscription.get().then(function(data) {
-     *   var subscription = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    get: true,
-
-    /**
-     * Get the metadata for the subscription.
-     *
-     * @resource [Subscriptions: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/get}
-     *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {?object} callback.metadata - Metadata of the subscription from
-     *     the API.
-     * @param {object} callback.apiResponse - Raw API response.
-     *
-     * @example
-     * subscription.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * subscription.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    getMetadata: {
-      protoOpts: {
-        service: 'Subscriber',
-        method: 'getSubscription'
-      },
-      reqOpts: {
-        subscription: this.name
-      }
-    }
+  this.inventory_ = {
+    lease: [],
+    ack: [],
+    nack: [],
+    bytes: 0
   };
 
-  var config = {
-    parent: pubsub,
-    id: this.name,
-    methods: methods
-  };
+  this.flowControl = extend({
+    maxBytes: os.freemem() * 0.2,
+    maxMessages: Infinity
+  }, options.flowControl);
+
+  this.flushTimeoutHandle_ = null;
+  this.leaseTimeoutHandle_ = null;
+  this.userClosed_ = false;
+
+  events.EventEmitter.call(this);
+  this.messageListeners = 0;
 
   if (options.topic) {
-    // Only a subscription with knowledge of its topic can be created.
-    config.createMethod = pubsub.subscribe.bind(pubsub, options.topic);
-    delete options.topic;
-
-    /**
-     * Create a subscription.
-     *
-     * **This is only available if you accessed this object through
-     * {module:pubsub/topic#subscription}.**
-     *
-     * @param {object} config - See {module:pubsub#subscribe}.
-     *
-     * @example
-     * subscription.create(function(err, subscription, apiResponse) {
-     *   if (!err) {
-     *     // The subscription was created successfully.
-     *   }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * subscription.create().then(function(data) {
-     *   var subscription = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    config.methods.create = true;
-  }
-
-  commonGrpc.ServiceObject.call(this, config);
-  events.EventEmitter.call(this);
-
-  this.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;
-  this.closed = true;
-  this.encoding = options.encoding || 'utf-8';
-  this.inProgressAckIds = {};
-  this.interval = is.number(options.interval) ? options.interval : 10;
-  this.maxInProgress =
-    is.number(options.maxInProgress) ? options.maxInProgress : Infinity;
-  this.messageListeners = 0;
-  this.paused = false;
-
-  if (is.number(options.timeout)) {
-    this.timeout = options.timeout;
-  } else {
-    // The default timeout used in google-cloud-node is 60s, but a pull request
-    // times out around 90 seconds. Allow an extra couple of seconds to give the
-    // API a chance to respond on its own before terminating the connection.
-    this.timeout = PUBSUB_API_TIMEOUT + 2000;
+    this.create = pubsub.createSubscription.bind(pubsub, options.topic, name);
   }
 
   /**
@@ -338,54 +228,7 @@ function Subscription(pubsub, options) {
   this.listenForEvents_();
 }
 
-modelo.inherits(Subscription, commonGrpc.ServiceObject, events.EventEmitter);
-
-/**
- * Simplify a message from an API response to have five properties: `id`,
- * `ackId`, `data`, `attributes`, and `timestamp`. `data` is always converted to
- * a string.
- *
- * @private
- */
-Subscription.formatMessage_ = function(msg, enc) {
-  var innerMessage = msg.message;
-  var message = {
-    ackId: msg.ackId
-  };
-
-  if (innerMessage) {
-    message.id = innerMessage.messageId;
-
-    if (innerMessage.data) {
-      if (enc === 'base64') {
-        // Prevent decoding and then re-encoding to base64.
-        message.data = innerMessage.data;
-      } else {
-        message.data = Buffer.from(innerMessage.data, 'base64').toString(enc);
-
-        try {
-          message.data = JSON.parse(message.data);
-        } catch(e) {}
-      }
-    }
-
-    if (innerMessage.attributes) {
-      message.attributes = innerMessage.attributes;
-    }
-
-    if (innerMessage.publishTime) {
-      var publishTime = innerMessage.publishTime;
-
-      if (is.defined(publishTime.seconds) && is.defined(publishTime.nanos)) {
-        var seconds = parseInt(publishTime.seconds, 10);
-        var milliseconds = parseInt(publishTime.nanos, 10) / 1e6;
-        message.timestamp = new Date(seconds * 1000 + milliseconds);
-      }
-    }
-  }
-
-  return message;
-};
+util.inherits(Subscription, events.EventEmitter);
 
 /**
  * Format the name of a subscription. A subscription's full name is in the
@@ -403,90 +246,121 @@ Subscription.formatName_ = function(projectId, name) {
 };
 
 /**
- * Generate a random name to use for a name-less subscription.
+ * Acks the provided message. If the connection pool is absent, it will be
+ * placed in an internal queue and sent out after 1 second or if the pool is
+ * re-opened before the timeout hits.
  *
  * @private
+ *
+ * @param {object} message - The message object.
  */
-Subscription.generateName_ = function() {
-  return 'autogenerated-' + uuid.v4();
+Subscription.prototype.ack_ = function(message) {
+  this.breakLease_(message);
+  this.histogram.add(Date.now() - message.received);
+
+  if (!this.connectionPool || !this.connectionPool.isConnected()) {
+    this.inventory_.ack.push(message.ackId);
+    this.setFlushTimeout_();
+    return;
+  }
+
+  var self = this;
+
+  this.connectionPool.acquire(message.connectionId, function(err, connection) {
+    if (err) {
+      self.emit('error', err);
+      return;
+    }
+
+    connection.write({ ackIds: [message.ackId] });
+  });
 };
 
 /**
- * Acknowledge to the backend that the message was retrieved. You must provide
- * either a single ackId or an array of ackIds.
+ * Breaks the lease on a message. Essentially this means we no longer treat the
+ * message as being un-acked and count it towards the flow control limits.
  *
- * @resource [Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/acknowledge}
+ * If the pool was previously paused and we freed up space, we'll continue to
+ * recieve messages.
  *
- * @throws {Error} If at least one ackId is not provided.
+ * @private
  *
- * @param {string|string[]} ackIds - An ackId or array of ackIds.
- * @param {options=} options - Configuration object.
- * @param {number} options.timeout - Set a maximum amount of time in
- *     milliseconds before giving up if no response is received.
+ * @param {object} message - The message object.
+ */
+Subscription.prototype.breakLease_ = function(message) {
+  var messageIndex = this.inventory_.lease.indexOf(message.ackId);
+
+  this.inventory_.lease.splice(messageIndex, 1);
+  this.inventory_.bytes -= message.length;
+
+  if (this.connectionPool) {
+    if (this.connectionPool.isPaused && !this.hasMaxMessages_()) {
+      this.connectionPool.resume();
+    }
+  }
+
+  if (!this.inventory_.lease.length) {
+    clearTimeout(this.leaseTimeoutHandle_);
+    this.leaseTimeoutHandle_ = null;
+  }
+};
+
+/**
+ * Closes the subscription, once this is called you will no longer receive
+ * message events unless you add a new message listener.
+ *
  * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while closing the
+ *     Subscription.
  *
  * @example
- * var ackId = 'ePHEESyhuE8e...';
- *
- * subscription.ack(ackId, function(err, apiResponse) {});
+ * subscription.close(function(err) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.ack(ackId).then(function(data) {
- *   var apiResponse = data[0];
- * });
+ * subscription.close().then(function() {});
  */
-Subscription.prototype.ack = function(ackIds, options, callback) {
-  var self = this;
+Subscription.prototype.close = function(callback) {
+  this.userClosed_ = true;
 
-  ackIds = arrify(ackIds);
+  clearTimeout(this.leaseTimeoutHandle_);
+  this.leaseTimeoutHandle_ = null;
 
-  if (ackIds.length === 0) {
-    throw new Error([
-      'At least one ID must be specified before it can be acknowledged.'
-    ].join(''));
+  clearTimeout(this.flushTimeoutHandle_);
+  this.flushTimeoutHandle_ = null;
+
+  this.flushQueues_();
+  this.closeConnection_(callback);
+};
+
+/**
+ * Closes the connection pool.
+ *
+ * @private
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} err - An error returned from this request.
+ */
+Subscription.prototype.closeConnection_ = function(callback) {
+  if (this.connectionPool) {
+    this.connectionPool.close(callback || common.util.noop);
+    this.connectionPool = null;
+  } else if (is.fn(callback)) {
+    setImmediate(callback);
   }
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  options = options || {};
-  callback = callback || common.util.noop;
-
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'acknowledge'
-  };
-
-  if (options && is.number(options.timeout)) {
-    protoOpts.timeout = options.timeout;
-  }
-
-  var reqOpts = {
-    subscription: this.name,
-    ackIds: ackIds
-  };
-
-  this.parent.request(protoOpts, reqOpts, function(err, resp) {
-    if (!err) {
-      ackIds.forEach(function(ackId) {
-        delete self.inProgressAckIds[ackId];
-      });
-
-      self.refreshPausedStatus_();
-    }
-
-    callback(err, resp);
-  });
 };
 
 /**
  * Create a snapshot with the given name.
  *
  * @param {string} name - Name of the snapshot.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {module:pubsub/snapshot} callback.snapshot - The newly created
@@ -511,64 +385,39 @@ Subscription.prototype.ack = function(ackIds, options, callback) {
  *   var apiResponse = data[1];
  * });
  */
-Subscription.prototype.createSnapshot = function(name, callback) {
+Subscription.prototype.createSnapshot = function(name, gaxOpts, callback) {
   var self = this;
 
   if (!is.string(name)) {
     throw new Error('A name is required to create a snapshot.');
   }
 
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'createSnapshot'
-  };
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
+  var snapshot = self.snapshot(name);
 
   var reqOpts = {
-    name: Snapshot.formatName_(this.parent.projectId, name),
+    name: snapshot.name,
     subscription: this.name
   };
 
-  this.parent.request(protoOpts, reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'createSnapshot',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
     }
 
-    var snapshot = self.snapshot(name);
     snapshot.metadata = resp;
-
     callback(null, snapshot, resp);
   });
-};
-
-/**
- * Add functionality on top of a message returned from the API, including the
- * ability to `ack` and `skip` the message.
- *
- * This also records the message as being "in progress". See
- * {module:subscription#refreshPausedStatus_}.
- *
- * @private
- *
- * @param {object} message - A message object.
- * @return {object} message - The original message after being decorated.
- * @param {function} message.ack - Ack the message.
- * @param {function} message.skip - Increate the number of available messages to
- *     simultaneously receive.
- */
-Subscription.prototype.decorateMessage_ = function(message) {
-  var self = this;
-
-  this.inProgressAckIds[message.ackId] = true;
-
-  message.ack = self.ack.bind(self, message.ackId);
-
-  message.skip = function() {
-    delete self.inProgressAckIds[message.ackId];
-    self.refreshPausedStatus_();
-  };
-
-  return message;
 };
 
 /**
@@ -577,6 +426,8 @@ Subscription.prototype.decorateMessage_ = function(message) {
  *
  * @resource [Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/delete}
  *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -592,150 +443,476 @@ Subscription.prototype.decorateMessage_ = function(message) {
  *   var apiResponse = data[0];
  * });
  */
-Subscription.prototype.delete = function(callback) {
+Subscription.prototype.delete = function(gaxOpts, callback) {
   var self = this;
 
-  callback = callback || common.util.noop;
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
 
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'deleteSubscription'
-  };
+  callback = callback || common.util.noop;
 
   var reqOpts = {
     subscription: this.name
   };
 
-  this.parent.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, resp);
-      return;
+  this.request({
+    client: 'subscriberClient',
+    method: 'deleteSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
+    if (!err) {
+      self.removeAllListeners();
+      self.close();
     }
 
-    self.closed = true;
-    self.removeAllListeners();
-
-    callback(null, resp);
+    callback(err, resp);
   });
 };
 
 /**
- * Pull messages from the subscribed topic. If messages were found, your
- * callback is executed with an array of message objects.
+ * Check if a subscription exists.
  *
- * Note that messages are pulled automatically once you register your first
- * event listener to the subscription, thus the call to `pull` is handled for
- * you. If you don't want to start pulling, simply don't register a
- * `subscription.on('message', function() {})` event handler.
- *
- * @todo Should not be racing with other pull.
- *
- * @resource [Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/pull}
- *
- * @param {object=} options - Configuration object.
- * @param {number} options.maxResults - Limit the amount of messages pulled.
- * @param {boolean} options.returnImmediately - If set, the system will respond
- *     immediately. Otherwise, wait until new messages are available. Returns if
- *     timeout is reached.
  * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {boolean} callback.exists - Whether the subscription exists or not.
  *
  * @example
- * //-
- * // Pull all available messages.
- * //-
- * subscription.pull(function(err, messages) {
- *   // messages = [
- *   //   {
- *   //     ackId: '',     // ID used to acknowledge its receival.
- *   //     id: '',        // Unique message ID.
- *   //     data: '',      // Contents of the message.
- *   //     attributes: {} // Attributes of the message.
- *   //
- *   //     Helper functions:
- *   //     ack(callback): // Ack the message.
- *   //     skip():        // Free up 1 slot on the sub's maxInProgress value.
- *   //   },
- *   //   // ...
- *   // ]
- * });
- *
- * //-
- * // Pull a single message.
- * //-
- * var opts = {
- *   maxResults: 1
- * };
- *
- * subscription.pull(opts, function(err, messages, apiResponse) {});
+ * subscription.exists(function(err, exists) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.pull(opts).then(function(data) {
- *   var messages = data[0];
+ * subscription.exists().then(function(data) {
+ *   var exists = data[0];
+ * });
+ */
+Subscription.prototype.exists = function(callback) {
+  this.getMetadata(function(err) {
+    if (!err) {
+      callback(null, true);
+      return;
+    }
+
+    if (err.code === 5) {
+      callback(null, false);
+      return;
+    }
+
+    callback(err);
+  });
+};
+
+/**
+ * Flushes internal queues. These can build up if a user attempts to ack/nack
+ * while there is no connection pool (e.g. after they called close).
+ *
+ * Typically this will only be called either after a timeout or when a
+ * connection is re-opened.
+ *
+ * Any errors that occur will be emitted via `error` events.
+ *
+ * @private
+ */
+Subscription.prototype.flushQueues_ = function() {
+  var self = this;
+
+  var acks = this.inventory_.ack;
+  var nacks = this.inventory_.nack;
+
+  if (!acks.length && !nacks.length) {
+    return;
+  }
+
+  if (this.connectionPool) {
+    this.connectionPool.acquire(function(err, connection) {
+      if (err) {
+        self.emit('error', err);
+        return;
+      }
+
+      var reqOpts = {};
+
+      if (acks.length) {
+        reqOpts.ackIds = acks;
+      }
+
+      if (nacks.length) {
+        reqOpts.modifyDeadlineAckIds = nacks;
+        reqOpts.modifyDeadlineSeconds = Array(nacks.length).fill(0);
+      }
+
+      connection.write(reqOpts);
+
+      self.inventory_.ack = [];
+      self.inventory_.nack = [];
+    });
+    return;
+  }
+
+  if (acks.length) {
+    this.request({
+      client: 'subscriberClient',
+      method: 'acknowledge',
+      reqOpts: {
+        subscription: this.name,
+        ackIds: acks
+      }
+    }, function(err) {
+      if (err) {
+        self.emit('error', err);
+      } else {
+        self.inventory_.ack = [];
+      }
+    });
+  }
+
+  if (nacks.length) {
+    this.request({
+      client: 'subscriberClient',
+      method: 'modifyAckDeadline',
+      reqOpts: {
+        subscription: this.name,
+        ackIds: nacks,
+        ackDeadlineSeconds: 0
+      }
+    }, function(err) {
+      if (err) {
+        self.emit('error', err);
+      } else {
+        self.inventory_.nack = [];
+      }
+    });
+  }
+};
+
+/**
+ * Get a subscription if it exists.
+ *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {boolean} gaxOpts.autoCreate - Automatically create the subscription
+ *     does not already exist. Default: false.
+ *
+ * @example
+ * subscription.get(function(err, subscription, apiResponse) {
+ *   // The `subscription` data has been populated.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.get().then(function(data) {
+ *   var subscription = data[0];
  *   var apiResponse = data[1];
  * });
  */
-Subscription.prototype.pull = function(options, callback) {
+Subscription.prototype.get = function(gaxOpts, callback) {
   var self = this;
-  var MAX_EVENTS_LIMIT = 1000;
 
-  if (!callback) {
-    callback = options;
-    options = {};
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
   }
 
-  if (!is.number(options.maxResults)) {
-    options.maxResults = MAX_EVENTS_LIMIT;
+  var autoCreate = !!gaxOpts.autoCreate && is.fn(this.create);
+  delete gaxOpts.autoCreate;
+
+  this.getMetadata(gaxOpts, function(err, apiResponse) {
+    if (!err) {
+      callback(null, self, apiResponse);
+      return;
+    }
+
+    if (err.code !== 5 || !autoCreate) {
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    self.create(gaxOpts, callback);
+  });
+};
+
+/**
+ * Fetches the subscriptions metadata.
+ *
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - Raw API response.
+ *
+ * @example
+ * subscription.getMetadata(function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.getMetadata().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Subscription.prototype.getMetadata = function(gaxOpts, callback) {
+  var self = this;
+
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
   }
 
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'pull',
-    timeout: this.timeout
+  var reqOpts = {
+    subscription: this.name
   };
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'getSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, apiResponse) {
+    if (!err) {
+      self.metadata = apiResponse;
+    }
+
+    callback(err, apiResponse);
+  });
+};
+
+/**
+ * Checks to see if this Subscription has hit any of the flow control
+ * thresholds.
+ *
+ * @private
+ *
+ * @return {boolean}
+ */
+Subscription.prototype.hasMaxMessages_ = function() {
+  return this.inventory_.lease.length >= this.flowControl.maxMessages ||
+    this.inventory_.bytes >= this.flowControl.maxBytes;
+};
+
+/**
+ * Leases a message. This will add the message to our inventory list and then
+ * modifiy the ack deadline for the user if they exceed the specified ack
+ * deadline.
+ *
+ * @private
+ *
+ * @param {object} message - The message object.
+ */
+Subscription.prototype.leaseMessage_ = function(message) {
+  this.inventory_.lease.push(message.ackId);
+  this.inventory_.bytes += message.length;
+  this.setLeaseTimeout_();
+
+  return message;
+};
+
+/**
+ * Begin listening for events on the subscription. This method keeps track of
+ * how many message listeners are assigned, and then removed, making sure
+ * polling is handled automatically.
+ *
+ * As long as there is one active message listener, the connection is open. As
+ * soon as there are no more message listeners, the connection is closed.
+ *
+ * @private
+ *
+ * @example
+ * subscription.listenForEvents_();
+ */
+Subscription.prototype.listenForEvents_ = function() {
+  var self = this;
+
+  this.on('newListener', function(event) {
+    if (event === 'message') {
+      self.messageListeners++;
+
+      if (!self.connectionPool) {
+        self.userClosed_ = false;
+        self.openConnection_();
+      }
+    }
+  });
+
+  this.on('removeListener', function(event) {
+    if (event === 'message' && --self.messageListeners === 0) {
+      self.closeConnection_();
+    }
+  });
+};
+
+/**
+ * Modify the push config for the subscription.
+ *
+ * @param {object} config - The push config.
+ * @param {string} config.pushEndpoint - A URL locating the endpoint to which
+ *     messages should be published.
+ * @param {object} config.attributes - [PushConfig attributes](https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#google.pubsub.v1.PushConfig).
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
+ *
+ * @example
+ * var pushConfig = {
+ *   pushEndpoint: 'https://mydomain.com/push',
+ *   attributes: {
+ *     key: 'value'
+ *   }
+ * };
+ *
+ * subscription.modifyPushConfig(pushConfig, function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.modifyPushConfig(pushConfig).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
+ */
+Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
 
   var reqOpts = {
     subscription: this.name,
-    returnImmediately: !!options.returnImmediately,
-    maxMessages: options.maxResults
+    pushConfig: config
   };
 
-  this.activeRequest_ = this.parent.request(protoOpts, reqOpts, function(err) {
-    self.activeRequest_ = null;
+  this.request({
+    client: 'subscriberClient',
+    method: 'modifyPushConfig',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
+};
 
-    var resp = arguments[1];
+/**
+ * Nacks the provided message. If the connection pool is absent, it will be
+ * placed in an internal queue and sent out after 1 second or if the pool is
+ * re-opened before the timeout hits.
+ *
+ * @private
+ *
+ * @param {object} message - The message object.
+ */
+Subscription.prototype.nack_ = function(message) {
+  this.breakLease_(message);
 
+  if (!this.connectionPool || !this.connectionPool.isConnected()) {
+    this.inventory_.nack.push(message.ackId);
+    this.setFlushTimeout_();
+    return;
+  }
+
+  var self = this;
+
+  this.connectionPool.acquire(message.connectionId, function(err, connection) {
     if (err) {
-      if (err.code === 504) {
-        // Simulate a server timeout where no messages were received.
-        resp = {
-          receivedMessages: []
-        };
-      } else {
-        callback(err, null, resp);
-        return;
-      }
+      self.emit('error', err);
+      return;
     }
 
-    var messages = arrify(resp.receivedMessages)
-      .map(function(msg) {
-        return Subscription.formatMessage_(msg, self.encoding);
-      })
-      .map(self.decorateMessage_.bind(self));
+    connection.write({
+      modifyDeadlineAckIds: [message.ackId],
+      modifyDeadlineSeconds: [0]
+    });
+  });
+};
 
-    self.refreshPausedStatus_();
+/**
+ * Opens the ConnectionPool.
+ *
+ * @private
+ */
+Subscription.prototype.openConnection_ = function() {
+  var self = this;
+  var pool = this.connectionPool = new ConnectionPool(this);
 
-    if (self.autoAck && messages.length !== 0) {
-      var ackIds = messages.map(prop('ackId'));
+  pool.on('error', function(err) {
+    self.emit('error', err);
+  });
 
-      self.ack(ackIds, function(err) {
-        callback(err, messages, resp);
-      });
-    } else {
-      callback(null, messages, resp);
+  pool.on('message', function(message) {
+    self.emit('message', self.leaseMessage_(message));
+
+    if (self.hasMaxMessages_() && !pool.isPaused) {
+      pool.pause();
     }
   });
+
+  pool.once('connected', function() {
+    clearTimeout(self.flushTimeoutHandle_);
+    self.flushTimeoutHandle_ = null;
+    self.flushQueues_();
+  });
+};
+
+/**
+ * Modifies the ack deadline on messages that have yet to be acked. We update
+ * the ack deadline to the 99th percentile of known ack times.
+ *
+ * @private
+ */
+Subscription.prototype.renewLeases_ = function() {
+  var self = this;
+
+  this.leaseTimeoutHandle_ = null;
+
+  if (!this.inventory_.lease.length) {
+    return;
+  }
+
+  var ackIds = this.inventory_.lease;
+  this.ackDeadline = this.histogram.percentile(99);
+  var ackDeadlineSeconds = this.ackDeadline / 1000;
+
+  if (this.connectionPool) {
+    this.connectionPool.acquire(function(err, connection) {
+      if (err) {
+        self.emit('error', err);
+        return;
+      }
+
+      connection.write({
+        modifyDeadlineAckIds: ackIds,
+        modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
+      });
+    });
+  } else {
+    this.request({
+      client: 'subscriberClient',
+      method: 'modifyAckDeadline',
+      reqOpts: {
+        subscription: self.name,
+        ackIds: ackIds,
+        ackDeadlineSeconds: ackDeadlineSeconds
+      }
+    }, function(err) {
+      if (err) {
+        self.emit('error', err);
+      }
+    });
+  }
+
+  this.setLeaseTimeout_();
 };
 
 /**
@@ -743,6 +920,8 @@ Subscription.prototype.pull = function(options, callback) {
  *
  * @param {string|date} snapshot - The point to seek to. This will accept the
  *     name of the snapshot or a Date object.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {object} callback.apiResponse - The full API response from the
@@ -765,76 +944,107 @@ Subscription.prototype.pull = function(options, callback) {
  *
  * subscription.seek(date, callback);
  */
-Subscription.prototype.seek = function(snapshot, callback) {
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'seek'
-  };
+Subscription.prototype.seek = function(snapshot, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
 
   var reqOpts = {
     subscription: this.name
   };
 
   if (is.string(snapshot)) {
-    reqOpts.snapshot = Snapshot.formatName_(this.parent.projectId, snapshot);
+    reqOpts.snapshot = Snapshot.formatName_(this.pubsub.projectId, snapshot);
   } else if (is.date(snapshot)) {
-    reqOpts.time = {
-      seconds: Math.floor(snapshot.getTime() / 1000),
-      nanos: snapshot.getMilliseconds() * 1e6
-    };
+    reqOpts.time = snapshot;
   } else {
     throw new Error('Either a snapshot name or Date is needed to seek to.');
   }
 
-  this.parent.request(protoOpts, reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'seek',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
- * Modify the ack deadline for a specific message. This method is useful to
- * indicate that more time is needed to process a message by the subscriber, or
- * to make the message available for redelivery if the processing was
- * interrupted.
+ * Sets a timeout to flush any acks/nacks that have been made since the pool has
+ * closed.
  *
- * @resource [Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/modifyAckDeadline}
+ * @private
+ */
+Subscription.prototype.setFlushTimeout_ = function() {
+  if (this.flushTimeoutHandle_) {
+    return;
+  }
+
+  this.flushTimeoutHandle_ = setTimeout(this.flushQueues_.bind(this), 1000);
+};
+
+/**
+ * Sets a timeout to modify the ack deadlines for any unacked/unnacked messages,
+ * renewing their lease.
  *
- * @param {object} options - The configuration object.
- * @param {string|string[]} options.ackIds - The ack id(s) to change.
- * @param {number} options.seconds - Number of seconds after call is made to
- *     set the deadline of the ack.
- * @param {Function=} callback - The callback function.
+ * @private
+ */
+Subscription.prototype.setLeaseTimeout_ = function() {
+  if (this.leaseTimeoutHandle_) {
+    return;
+  }
+
+  var timeout = Math.random() * this.ackDeadline * 0.9;
+  this.leaseTimeoutHandle_ = setTimeout(this.renewLeases_.bind(this), timeout);
+};
+
+/**
+ * Update the subscription object.
+ *
+ * @param {object} metadata - The subscription metadata.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error from the API call.
+ * @param {object} callback.apiResponse - The full API response from the
+ *     service.
  *
  * @example
- * var options = {
- *   ackIds: ['abc'],
- *   seconds: 10 // Expire in 10 seconds from call.
+ * var metadata = {
+ *   key: 'value'
  * };
  *
- * subscription.setAckDeadline(options, function(err, apiResponse) {});
+ * subscription.setMetadata(metadata, function(err, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ * });
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.setAckDeadline(options).then(function(data) {
+ * subscription.setMetadata(metadata).then(function(data) {
  *   var apiResponse = data[0];
  * });
  */
-Subscription.prototype.setAckDeadline = function(options, callback) {
-  callback = callback || common.util.noop;
-
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'modifyAckDeadline'
-  };
+Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
 
   var reqOpts = {
     subscription: this.name,
-    ackIds: arrify(options.ackIds),
-    ackDeadlineSeconds: options.seconds
+    updateMask: metadata
   };
 
-  this.parent.request(protoOpts, reqOpts, function(err, resp) {
-    callback(err, resp);
-  });
+  this.request({
+    client: 'subscriberClient',
+    method: 'updateSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -850,114 +1060,7 @@ Subscription.prototype.setAckDeadline = function(options, callback) {
  * var snapshot = subscription.snapshot('my-snapshot');
  */
 Subscription.prototype.snapshot = function(name) {
-  return this.parent.snapshot.call(this, name);
-};
-
-/**
- * Begin listening for events on the subscription. This method keeps track of
- * how many message listeners are assigned, and then removed, making sure
- * polling is handled automatically.
- *
- * As long as there is one active message listener, the connection is open. As
- * soon as there are no more message listeners, the connection is closed.
- *
- * @private
- *
- * @example
- * subscription.listenForEvents_();
- */
-Subscription.prototype.listenForEvents_ = function() {
-  var self = this;
-
-  this.on('newListener', function(event) {
-    if (event === 'message') {
-      self.messageListeners++;
-      if (self.closed) {
-        self.closed = false;
-        self.startPulling_();
-      }
-    }
-  });
-
-  this.on('removeListener', function(event) {
-    if (event === 'message' && --self.messageListeners === 0) {
-      self.closed = true;
-
-      if (self.activeRequest_ && self.activeRequest_.abort) {
-        self.activeRequest_.abort();
-      }
-    }
-  });
-};
-
-/**
- * Update the status of `maxInProgress`. Å subscription becomes "paused" (not
- * pulling) when the number of messages that have yet to be ack'd or skipped
- * exceeds the user's specified `maxInProgress` value.
- *
- * This will start pulling when that event reverses: we were paused, but one or
- * more messages were just ack'd or skipped, freeing up room for more messages
- * to be consumed.
- *
- * @private
- */
-Subscription.prototype.refreshPausedStatus_ = function() {
-  var isCurrentlyPaused = this.paused;
-  var inProgress = Object.keys(this.inProgressAckIds).length;
-
-  this.paused = inProgress >= this.maxInProgress;
-
-  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {
-    this.startPulling_();
-  }
-};
-
-/**
- * Poll the backend for new messages. This runs a loop to ping the API at the
- * provided interval from the subscription's instantiation. If one wasn't
- * provided, the default value is 10 milliseconds.
- *
- * If messages are received, they are emitted on the `message` event.
- *
- * Note: This method is automatically called once a message event handler is
- * assigned to the description.
- *
- * To stop pulling, see {module:pubsub/subscription#close}.
- *
- * @private
- *
- * @example
- * subscription.startPulling_();
- */
-Subscription.prototype.startPulling_ = function() {
-  var self = this;
-
-  if (this.closed || this.paused) {
-    return;
-  }
-
-  var maxResults;
-
-  if (this.maxInProgress < Infinity) {
-    maxResults = this.maxInProgress - Object.keys(this.inProgressAckIds).length;
-  }
-
-  this.pull({
-    returnImmediately: false,
-    maxResults: maxResults
-  }, function(err, messages, apiResponse) {
-    if (err) {
-      self.emit('error', err, apiResponse);
-    }
-
-    if (messages) {
-      messages.forEach(function(message) {
-        self.emit('message', message, apiResponse);
-      });
-    }
-
-    setTimeout(self.startPulling_.bind(self), self.interval);
-  });
+  return this.pubsub.snapshot.call(this, name);
 };
 
 /*! Developer Documentation

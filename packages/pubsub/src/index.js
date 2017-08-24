@@ -20,13 +20,13 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
+var googleAuth = require('google-auto-auth');
 var is = require('is');
-var path = require('path');
-var util = require('util');
+
+var PKG = require('../package.json');
+var v1 = require('./v1');
 
 /**
  * @type {module:pubsub/snapshot}
@@ -45,17 +45,6 @@ var Subscription = require('./subscription.js');
  * @private
  */
 var Topic = require('./topic.js');
-
-/**
- * @type {object} - GAX's default configuration.
- * @private
- */
-var GAX_CONFIG = {
-  Publisher: require('./v1/publisher_client_config.json').
-    interfaces['google.pubsub.v1.Publisher'],
-  Subscriber: require('./v1/subscriber_client_config.json').
-    interfaces['google.pubsub.v1.Subscriber']
-};
 
 /**
  * [Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
@@ -79,36 +68,145 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
-  this.defaultBaseUrl_ = 'pubsub.googleapis.com';
-  this.determineBaseUrl_(options.apiEndpoint);
+  this.options = extend({
+    scopes: v1.ALL_SCOPES,
+    'grpc.max_receive_message_length': 20000001,
+    libName: 'gccl',
+    libVersion: PKG.version
+  }, options);
 
-  var config = {
-    baseUrl: this.baseUrl_,
-    customEndpoint: this.customEndpoint_,
-    protosDir: path.resolve(__dirname, '../protos'),
-    protoServices: {
-      Publisher: {
-        path: 'google/pubsub/v1/pubsub.proto',
-        service: 'pubsub.v1'
-      },
-      Subscriber: {
-        path: 'google/pubsub/v1/pubsub.proto',
-        service: 'pubsub.v1'
-      }
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/pubsub',
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
-  };
+  this.determineBaseUrl_();
 
-  this.options = options;
-
-  commonGrpc.Service.call(this, config, options);
+  this.api = {};
+  this.auth = googleAuth(this.options);
+  this.projectId = this.options.projectId || '{{projectId}}';
 }
 
-util.inherits(PubSub, commonGrpc.Service);
+/**
+ * Create a subscription to a topic.
+ *
+ * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/create}
+ *
+ * @throws {Error} If a Topic instance or topic name is not provided.
+ * @throws {Error} If a subscription name is not provided.
+ *
+ * @param {module:pubsub/topic|string} topic - The Topic to create a
+ *     subscription to.
+ * @param {string=} name - The name of the subscription.
+ * @param {object=} options - See a
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
+ * @param {object} options.gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
+ * @param {number|date} options.messageRetentionDuration - Set this to override
+ *     the default duration of 7 days. This value is expected in seconds.
+ *     Acceptable values are in the range of 10 minutes and 7 days.
+ * @param {string} options.pushEndpoint - A URL to a custom endpoint that
+ *     messages should be pushed to.
+ * @param {boolean} options.retainAckedMessages - If set, acked messages are
+ *     retained in the subscription's backlog for the length of time specified
+ *     by `options.messageRetentionDuration`. Default: `false`
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {module:pubsub/subscription} callback.subscription - The subscription.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * //-
+ * // Subscribe to a topic. (Also see {module:pubsub/topic#createSubscription}).
+ * //-
+ * var topic = 'messageCenter';
+ * var name = 'newMessages';
+ *
+ * var callback = function(err, subscription, apiResponse) {};
+ *
+ * pubsub.createSubscription(topic, name, callback);
+ *
+ * //-
+ * // Customize the subscription.
+ * //-
+ * pubsub.createSubscription(topic, name, {
+ *   ackDeadline: 90000 // 90 seconds
+ * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.createSubscription(topic, name).then(function(data) {
+ *   var subscription = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+PubSub.prototype.createSubscription = function(topic, name, options, callback) {
+  if (!is.string(topic) && !(topic instanceof Topic)) {
+    throw new Error('A Topic is required for a new subscription.');
+  }
+
+  if (!is.string(name)) {
+    throw new Error('A subscription name is required.');
+  }
+
+  if (is.string(topic)) {
+    topic = this.topic(topic);
+  }
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  var subscription = this.subscription(name, options);
+
+  var reqOpts = extend({
+    topic: topic.name,
+    name: subscription.name
+  }, options);
+
+  delete reqOpts.gaxOpts;
+  delete reqOpts.flowControl;
+
+  if (options.messageRetentionDuration) {
+    reqOpts.retainAckedMessages = true;
+
+    reqOpts.messageRetentionDuration = {
+      seconds: options.messageRetentionDuration,
+      nanos: 0
+    };
+  }
+
+  if (options.pushEndpoint) {
+    delete reqOpts.pushEndpoint;
+
+    reqOpts.pushConfig = {
+      pushEndpoint: options.pushEndpoint
+    };
+  }
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'createSubscription',
+    reqOpts: reqOpts,
+    gaxOpts: options.gaxOpts
+  }, function(err, resp) {
+    if (err && err.code !== 6) {
+      callback(err, null, resp);
+      return;
+    }
+
+    subscription.metadata = resp;
+    callback(null, subscription, resp);
+  });
+};
 
 /**
  * Create a topic with the given name.
@@ -116,6 +214,8 @@ util.inherits(PubSub, commonGrpc.Service);
  * @resource [Topics: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/create}
  *
  * @param {string} name - Name of the topic.
+ * @param {object=} gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {module:pubsub/topic} callback.topic - The newly created topic.
@@ -137,31 +237,60 @@ util.inherits(PubSub, commonGrpc.Service);
  *   var apiResponse = data[1];
  * });
  */
-PubSub.prototype.createTopic = function(name, callback) {
-  var self = this;
-
-  callback = callback || common.util.noop;
-
-  var protoOpts = {
-    service: 'Publisher',
-    method: 'createTopic'
-  };
+PubSub.prototype.createTopic = function(name, gaxOpts, callback) {
+  var topic = this.topic(name);
 
   var reqOpts = {
-    name: Topic.formatName_(this.projectId, name)
+    name: topic.name
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = {};
+  }
+
+  this.request({
+    client: 'publisherClient',
+    method: 'createTopic',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
     }
 
-    var topic = self.topic(name);
     topic.metadata = resp;
-
     callback(null, topic, resp);
   });
+};
+
+/**
+ * Determine the appropriate endpoint to use for API requests, first trying the
+ * local `apiEndpoint` parameter. If the `apiEndpoint` parameter is null we try
+ * Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise the
+ * default JSON API.
+ *
+ * @private
+ */
+PubSub.prototype.determineBaseUrl_ = function() {
+  var apiEndpoint = this.options.apiEndpoint;
+
+  if (!apiEndpoint && !process.env.PUBSUB_EMULATOR_HOST) {
+    return;
+  }
+
+  var baseUrl = apiEndpoint || process.env.PUBSUB_EMULATOR_HOST;
+  var leadingProtocol = new RegExp('^https*://');
+  var trailingSlashes = new RegExp('/*$');
+
+  var baseUrlParts = baseUrl
+    .replace(leadingProtocol, '')
+    .replace(trailingSlashes, '')
+    .split(':');
+
+  this.options.servicePath = baseUrlParts[0];
+  this.options.port = baseUrlParts[1];
 };
 
 /**
@@ -170,8 +299,8 @@ PubSub.prototype.createTopic = function(name, callback) {
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} options.pageSize - Maximum number of results to return.
  * @param {string} options.pageToken - Page token.
  * @param {function} callback - The callback function.
@@ -185,21 +314,6 @@ PubSub.prototype.createTopic = function(name, callback) {
  *     // snapshots is an array of Snapshot objects.
  *   }
  * });
- *
- * //-
- * // To control how many API requests are made and page through the results
- * // manually, set `autoPaginate` to `false`.
- * //-
- * var callback = function(err, snapshots, nextQuery, apiResponse) {
- *   if (nextQuery) {
- *     // More results exist.
- *     pubsub.getSnapshots(nextQuery, callback);
- *   }
- * };
- *
- * pubsub.getSnapshots({
- *   autoPaginate: false
- * }, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -216,35 +330,34 @@ PubSub.prototype.getSnapshots = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'listSnapshots'
-  };
+  var reqOpts = extend({
+    project: 'projects/' + this.projectId
+  }, options);
 
-  var reqOpts = extend({}, options);
+  delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
 
-  reqOpts.project = 'projects/' + this.projectId;
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request({
+    client: 'subscriberClient',
+    method: 'listSnapshots',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function() {
+    var snapshots = arguments[1];
+
+    if (snapshots) {
+      arguments[1] = snapshots.map(function(snapshot) {
+        var snapshotInstance = self.snapshot(snapshot.name);
+        snapshotInstance.metadata = snapshot;
+        return snapshotInstance;
+      });
     }
 
-    var snapshots = arrify(resp.snapshots).map(function(snapshot) {
-      var snapshotInstance = self.snapshot(snapshot.name);
-      snapshotInstance.metadata = snapshot;
-      return snapshotInstance;
-    });
-
-    var nextQuery = null;
-
-    if (resp.nextPageToken) {
-      nextQuery = options;
-      nextQuery.pageToken = resp.nextPageToken;
-    }
-
-    callback(null, snapshots, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -293,8 +406,8 @@ PubSub.prototype.getSnapshotsStream =
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} options.gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} options.pageSize - Maximum number of results to return.
  * @param {string} options.pageToken - Page token.
  * @param {string|module:pubsub/topic} options.topic - The name of the topic to
@@ -314,21 +427,6 @@ PubSub.prototype.getSnapshotsStream =
  * });
  *
  * //-
- * // To control how many API requests are made and page through the results
- * // manually, set `autoPaginate` to `false`.
- * //-
- * var callback = function(err, subscriptions, nextQuery, apiResponse) {
- *   if (nextQuery) {
- *     // More results exist.
- *     pubsub.getSubscriptions(nextQuery, callback);
- *   }
- * };
- *
- * pubsub.getSubscriptions({
- *   autoPaginate: false
- * }, callback);
- *
- * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * pubsub.getSubscriptions().then(function(data) {
@@ -343,56 +441,44 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
     options = {};
   }
 
-  var protoOpts = {};
-  var reqOpts = extend({}, options);
+  var topic = options.topic;
 
-  if (options.topic) {
-    protoOpts = {
-      service: 'Publisher',
-      method: 'listTopicSubscriptions'
-    };
-
-    if (options.topic instanceof Topic) {
-      reqOpts.topic = options.topic.name;
-    } else {
-      reqOpts.topic = options.topic;
+  if (topic) {
+    if (!(topic instanceof Topic)) {
+      topic = this.topic(topic);
     }
-  } else {
-    protoOpts = {
-      service: 'Subscriber',
-      method: 'listSubscriptions'
-    };
 
-    reqOpts.project = 'projects/' + this.projectId;
+    return topic.getSubscriptions(options, callback);
   }
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
 
-    var subscriptions = arrify(resp.subscriptions).map(function(sub) {
-      // Depending on if we're using a subscriptions.list or
-      // topics.subscriptions.list API endpoint, we will get back a
-      // Subscription resource or just the name of the subscription.
-      var subscriptionInstance = self.subscription(sub.name || sub);
+  var reqOpts = extend({}, options);
 
-      if (sub.name) {
+  reqOpts.project = 'projects/' + this.projectId;
+  delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
+
+  this.request({
+    client: 'subscriberClient',
+    method: 'listSubscriptions',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function() {
+    var subscriptions = arguments[1];
+
+    if (subscriptions) {
+      arguments[1] = subscriptions.map(function(sub) {
+        var subscriptionInstance = self.subscription(sub.name);
         subscriptionInstance.metadata = sub;
-      }
-
-      return subscriptionInstance;
-    });
-
-    var nextQuery = null;
-
-    if (resp.nextPageToken) {
-      nextQuery = options;
-      nextQuery.pageToken = resp.nextPageToken;
+        return subscriptionInstance;
+      });
     }
 
-    callback(null, subscriptions, nextQuery, resp);
+    callback.apply(null, arguments);
   });
 };
 
@@ -433,10 +519,10 @@ PubSub.prototype.getSubscriptionsStream =
  * @resource [Topics: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/list}
  *
  * @param {object=} query - Query object.
- * @param {boolean} options.autoPaginate - Have pagination handled
+ * @param {boolean} query.autoPaginate - Have pagination handled
  *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {object} query.gaxOpts - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {number} query.pageSize - Max number of results to return.
  * @param {string} query.pageToken - Page token.
  * @param {function} callback - The callback function.
@@ -460,63 +546,48 @@ PubSub.prototype.getSubscriptionsStream =
  * }, function(err, topics) {});
  *
  * //-
- * // To control how many API requests are made and page through the results
- * // manually, set `autoPaginate` to `false`.
- * //-
- * var callback = function(err, rows, nextQuery, apiResponse) {
- *   if (nextQuery) {
- *     // More results exist.
- *     pubsub.getTopics(nextQuery, callback);
- *   }
- * };
- *
- * pubsub.getTopics({
- *   autoPaginate: false
- * }, callback);
- *
- * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * pubsub.getTopics().then(function(data) {
  *   var topics = data[0];
  * });
  */
-PubSub.prototype.getTopics = function(query, callback) {
+PubSub.prototype.getTopics = function(options, callback) {
   var self = this;
 
-  if (!callback) {
-    callback = query;
-    query = {};
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
   }
-
-  var protoOpts = {
-    service: 'Publisher',
-    method: 'listTopics'
-  };
 
   var reqOpts = extend({
     project: 'projects/' + this.projectId
-  }, query);
+  }, options);
 
-  this.request(protoOpts, reqOpts, function(err, result) {
-    if (err) {
-      callback(err, null, result);
-      return;
+  delete reqOpts.gaxOpts;
+  delete reqOpts.autoPaginate;
+
+  var gaxOpts = extend({
+    autoPaginate: options.autoPaginate
+  }, options.gaxOpts);
+
+  this.request({
+    client: 'publisherClient',
+    method: 'listTopics',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function() {
+    var topics = arguments[1];
+
+    if (topics) {
+      arguments[1] = topics.map(function(topic) {
+        var topicInstance = self.topic(topic.name);
+        topicInstance.metadata = topic;
+        return topicInstance;
+      });
     }
 
-    var topics = arrify(result.topics).map(function(topic) {
-      var topicInstance = self.topic(topic.name);
-      topicInstance.metadata = topic;
-      return topicInstance;
-    });
-
-    var nextQuery = null;
-    if (result.nextPageToken) {
-      nextQuery = query;
-      nextQuery.pageToken = result.nextPageToken;
-    }
-
-    callback(null, topics, nextQuery, result);
+    callback.apply(null, arguments);
   });
 };
 
@@ -550,150 +621,41 @@ PubSub.prototype.getTopics = function(query, callback) {
 PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
 
 /**
- * Create a subscription to a topic.
+ * Funnel all API requests through this method, to be sure we have a project ID.
  *
- * All generated subscription names share a common prefix, `autogenerated-`.
+ * @private
  *
- * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/create}
- *
- * @throws {Error} If a Topic instance or topic name is not provided.
- * @throws {Error} If a subName is not provided.
- *
- * @param {module:pubsub/topic|string} topic - The Topic to create a
- *     subscription to.
- * @param {string=} subName - The name of the subscription. If a name is not
- *     provided, a random subscription name will be generated and created.
- * @param {object=} options - See a
- *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number} options.ackDeadlineSeconds - The maximum time after receiving
- *     a message that you must ack a message before it is redelivered.
- * @param {boolean} options.autoAck - Automatically acknowledge the message once
- *     it's pulled. (default: false)
- * @param {string} options.encoding - When pulling for messages, this type is
- *     used when converting a message's data to a string. (default: 'utf-8')
- * @param {number} options.interval - Interval in milliseconds to check for new
- *     messages. (default: 10)
- * @param {number} options.maxInProgress - Maximum messages to consume
- *     simultaneously.
- * @param {number|date} options.messageRetentionDuration - Set this to override
- *     the default duration of 7 days. This value is expected in seconds.
- *     Acceptable values are in the range of 10 minutes and 7 days.
- * @param {string} options.pushEndpoint - A URL to a custom endpoint that
- *     messages should be pushed to.
- * @param {boolean} options.retainAckedMessages - If set, acked messages are
- *     retained in the subscription's backlog for 7 days (unless overriden by
- *     `options.messageRetentionDuration`). Default: `false`
- * @param {number} options.timeout - Set a maximum amount of time in
- *     milliseconds on an HTTP request to pull new messages to wait for a
- *     response before the connection is broken.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {module:pubsub/subscription} callback.subscription - The subscription.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * //-
- * // Subscribe to a topic. (Also see {module:pubsub/topic#subscribe}).
- * //-
- * var topic = 'messageCenter';
- * var name = 'newMessages';
- *
- * pubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});
- *
- * //-
- * // Omit the name to have one generated automatically. All generated names
- * // share a common prefix, `autogenerated-`.
- * //-
- * pubsub.subscribe(topic, function(err, subscription, apiResponse) {
- *   // subscription.name = The generated name.
- * });
- *
- * //-
- * // Customize the subscription.
- * //-
- * pubsub.subscribe(topic, name, {
- *   ackDeadlineSeconds: 90,
- *   autoAck: true,
- *   interval: 30
- * }, function(err, subscription, apiResponse) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * pubsub.subscribe(topic, name).then(function(data) {
- *   var subscription = data[0];
- *   var apiResponse = data[1];
- * });
+ * @param {object} config - Configuration object.
+ * @param {object} config.gaxOpts - GAX options.
+ * @param {function} config.method - The gax method to call.
+ * @param {object} config.reqOpts - Request options.
+ * @param {function=} callback - The callback function.
  */
-PubSub.prototype.subscribe = function(topic, subName, options, callback) {
-  if (!is.string(topic) && !(topic instanceof Topic)) {
-    throw new Error('A Topic is required for a new subscription.');
+PubSub.prototype.request = function(config, callback) {
+  var self = this;
+
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return;
   }
 
-  if (is.string(topic)) {
-    topic = this.topic(topic);
-  }
-
-  if (is.object(subName)) {
-    callback = options;
-    options = subName;
-    subName = '';
-  }
-
-  if (is.fn(subName)) {
-    callback = subName;
-    subName = '';
-  }
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  options = options || {};
-
-  var subscription = this.subscription(subName, options);
-
-  var protoOpts = {
-    service: 'Subscriber',
-    method: 'createSubscription',
-    timeout: options.timeout
-  };
-
-  var reqOpts = extend(true, {}, options, {
-    topic: topic.name,
-    name: subscription.name
-  });
-
-  if (reqOpts.messageRetentionDuration) {
-    reqOpts.retainAckedMessages = true;
-
-    reqOpts.messageRetentionDuration = {
-      seconds: reqOpts.messageRetentionDuration,
-      nanos: 0
-    };
-  }
-
-  if (reqOpts.pushEndpoint) {
-    reqOpts.pushConfig = {
-      pushEndpoint: reqOpts.pushEndpoint
-    };
-  }
-
-  delete reqOpts.autoAck;
-  delete reqOpts.encoding;
-  delete reqOpts.interval;
-  delete reqOpts.maxInProgress;
-  delete reqOpts.pushEndpoint;
-  delete reqOpts.timeout;
-
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err && err.code !== 409) {
-      callback(err, null, resp);
+  self.auth.getProjectId(function(err, projectId) {
+    if (err) {
+      callback(err);
       return;
     }
 
-    callback(null, subscription, resp);
+    var gaxClient = self.api[config.client];
+
+    if (!gaxClient) {
+      // Lazily instantiate client.
+      gaxClient = v1(self.options)[config.client](self.options);
+      self.api[config.client] = gaxClient;
+    }
+
+    var reqOpts = extend(true, {}, config.reqOpts);
+    reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+
+    gaxClient[config.method](reqOpts, config.gaxOpts, callback);
   });
 };
 
@@ -722,22 +684,21 @@ PubSub.prototype.snapshot = function(name) {
  * requests. You will receive a {module:pubsub/subscription} object,
  * which will allow you to interact with a subscription.
  *
- * All generated names share a common prefix, `autogenerated-`.
+ * @throws {Error} If subscription name is omitted.
  *
- * @param {string=} name - The name of the subscription. If a name is not
- *     provided, a random subscription name will be generated.
+ * @param {string} name - Name of the subscription.
  * @param {object=} options - Configuration object.
- * @param {boolean} options.autoAck - Automatically acknowledge the message once
- *     it's pulled. (default: false)
- * @param {string} options.encoding - When pulling for messages, this type is
- *     used when converting a message's data to a string. (default: 'utf-8')
- * @param {number} options.interval - Interval in milliseconds to check for new
- *     messages. (default: 10)
- * @param {number} options.maxInProgress - Maximum messages to consume
- *     simultaneously.
- * @param {number} options.timeout - Set a maximum amount of time in
- *     milliseconds on an HTTP request to pull new messages to wait for a
- *     response before the connection is broken.
+ * @param {object} options.flowControl - Flow control configurations for
+ *     receiving messages. Note that these options do not persist across
+ *     subscription instances.
+ * @param {number} options.flowControl.maxBytes - The maximum number of bytes
+ *     in un-acked messages to allow before the subscription pauses incoming
+ *     messages. Defaults to 20% of free memory.
+ * @param {number} options.flowControl.maxMessages - The maximum number of
+ *     un-acked messages to allow before the subscription pauses incoming
+ *     messages. Default: Infinity.
+ * @param {number} options.maxConnections - Use this to limit the number of
+ *     connections to be used when sending and receiving messages. Default: 5.
  * @return {module:pubsub/subscription}
  *
  * @example
@@ -750,19 +711,15 @@ PubSub.prototype.snapshot = function(name) {
  *   // message.ackId = ID used to acknowledge the message receival.
  *   // message.data = Contents of the message.
  *   // message.attributes = Attributes of the message.
- *   // message.timestamp = Timestamp when Pub/Sub received the message.
+ *   // message.publishTime = Timestamp when Pub/Sub received the message.
  * });
  */
 PubSub.prototype.subscription = function(name, options) {
-  if (is.object(name)) {
-    options = name;
-    name = undefined;
+  if (!name) {
+    throw new Error('A name must be specified for a subscription.');
   }
 
-  options = options || {};
-  options.name = name;
-
-  return new Subscription(this, options);
+  return new Subscription(this, name, options);
 };
 
 /**
@@ -775,58 +732,13 @@ PubSub.prototype.subscription = function(name, options) {
  *
  * @example
  * var topic = pubsub.topic('my-topic');
- *
- * topic.publish({
- *   data: 'New message!'
- * }, function(err) {});
  */
-PubSub.prototype.topic = function(name) {
+PubSub.prototype.topic = function(name, options) {
   if (!name) {
-    throw new Error('A name must be specified for a new topic.');
+    throw new Error('A name must be specified for a topic.');
   }
 
-  return new Topic(this, name);
-};
-
-/**
- * Intercept the call to {module:common/grpc-service#request}, making sure the
- * correct timeouts are set.
- *
- * @private
- */
-PubSub.prototype.request = function(protoOpts) {
-  var method = protoOpts.method;
-  var camelCaseMethod = method[0].toUpperCase() + method.substr(1);
-  var config = GAX_CONFIG[protoOpts.service].methods[camelCaseMethod];
-
-  if (is.undefined(arguments[0].timeout)) {
-    arguments[0].timeout = config.timeout_millis;
-  }
-
-  commonGrpc.Service.prototype.request.apply(this, arguments);
-};
-
-/**
- * Determine the appropriate endpoint to use for API requests, first trying the
- * local `apiEndpoint` parameter. If the `apiEndpoint` parameter is null we try
- * Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise the
- * default JSON API.
- *
- * @private
- */
-PubSub.prototype.determineBaseUrl_ = function(apiEndpoint) {
-  var baseUrl = this.defaultBaseUrl_;
-  var leadingProtocol = new RegExp('^https*://');
-  var trailingSlashes = new RegExp('/*$');
-
-  if (apiEndpoint || process.env.PUBSUB_EMULATOR_HOST) {
-    this.customEndpoint_ = true;
-    baseUrl = apiEndpoint || process.env.PUBSUB_EMULATOR_HOST;
-  }
-
-  this.baseUrl_ = baseUrl
-    .replace(leadingProtocol, '')
-    .replace(trailingSlashes, '');
+  return new Topic(this, name, options);
 };
 
 /*! Developer Documentation
@@ -853,8 +765,5 @@ common.util.promisifyAll(PubSub, {
   ]
 });
 
-PubSub.Subscription = Subscription;
-PubSub.Topic = Topic;
-
 module.exports = PubSub;
-module.exports.v1 = require('./v1');
+module.exports.v1 = v1;

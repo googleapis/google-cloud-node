@@ -32,6 +32,8 @@ module.exports = {
     'error-reporting/src/error-router.js',
     'error-reporting/src/logger.js',
     'logging/src/metadata.js',
+    'pubsub/src/connection-pool.js',
+    'pubsub/src/histogram.js',
     'pubsub/src/iam.js',
     'spanner/src/codec.js',
     'spanner/src/partial-result-stream.js',

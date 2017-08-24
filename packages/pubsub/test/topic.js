@@ -18,8 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var GrpcServiceObject = require('@google-cloud/common-grpc').ServiceObject;
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -31,20 +29,35 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['subscription']);
+    assert.deepEqual(options.exclude, [
+      'publisher',
+      'subscription'
+    ]);
   }
 });
-
-function FakeGrpcServiceObject() {
-  this.calledWith_ = arguments;
-  GrpcServiceObject.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
 
 function FakeIAM() {
   this.calledWith_ = [].slice.call(arguments);
 }
+
+function FakePublisher() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+var extended = false;
+var fakePaginator = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'Topic') {
+      return;
+    }
+
+    assert.deepEqual(methods, ['getSubscriptions']);
+    extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
+  }
+};
 
 describe('Topic', function() {
   var Topic;
@@ -53,20 +66,21 @@ describe('Topic', function() {
   var PROJECT_ID = 'test-project';
   var TOPIC_NAME = 'projects/' + PROJECT_ID + '/topics/test-topic';
   var TOPIC_UNFORMATTED_NAME = TOPIC_NAME.split('/').pop();
+
   var PUBSUB = {
     projectId: PROJECT_ID,
-    createTopic: util.noop
+    createTopic: util.noop,
+    request: util.noop
   };
 
   before(function() {
     Topic = proxyquire('../src/topic.js', {
       '@google-cloud/common': {
+        paginator: fakePaginator,
         util: fakeUtil
       },
-      '@google-cloud/common-grpc': {
-        ServiceObject: FakeGrpcServiceObject
-      },
-      './iam.js': FakeIAM
+      './iam.js': FakeIAM,
+      './publisher.js': FakePublisher
     });
   });
 
@@ -76,80 +90,50 @@ describe('Topic', function() {
   });
 
   describe('initialization', function() {
-    it('should inherit from GrpcServiceObject', function() {
-      var pubsubInstance = extend({}, PUBSUB, {
-        createTopic: {
-          bind: function(context) {
-            assert.strictEqual(context, pubsubInstance);
-          }
-        }
-      });
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakePaginator.extend`
+    });
 
-      var topic = new Topic(pubsubInstance, TOPIC_NAME);
-      assert(topic instanceof GrpcServiceObject);
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(topic.getSubscriptionsStream, 'getSubscriptions');
+    });
 
-      var calledWith = topic.calledWith_[0];
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
 
-      assert.strictEqual(calledWith.parent, pubsubInstance);
-      assert.strictEqual(calledWith.id, TOPIC_NAME);
-      assert.deepEqual(calledWith.methods, {
-        create: true,
-        delete: {
-          protoOpts: {
-            service: 'Publisher',
-            method: 'deleteTopic'
-          },
-          reqOpts: {
-            topic: TOPIC_NAME
-          }
-        },
-        exists: true,
-        get: true,
-        getMetadata: {
-          protoOpts: {
-            service: 'Publisher',
-            method: 'getTopic'
-          },
-          reqOpts: {
-            topic: TOPIC_NAME
-          }
-        }
-      });
+    it('should format the name', function() {
+      var formattedName = 'a/b/c/d';
+
+      var formatName_ = Topic.formatName_;
+      Topic.formatName_ = function(projectId, name) {
+        assert.strictEqual(projectId, PROJECT_ID);
+        assert.strictEqual(name, TOPIC_NAME);
+
+        Topic.formatName_ = formatName_;
+
+        return formattedName;
+      };
+
+      var topic = new Topic(PUBSUB, TOPIC_NAME);
+      assert.strictEqual(topic.name, formattedName);
+    });
+
+    it('should localize the parent object', function() {
+      assert.strictEqual(topic.pubsub, PUBSUB);
+    });
+
+    it('should localize the request function', function(done) {
+      PUBSUB.request = function(callback) {
+        callback(); // the done fn
+      };
+
+      var topic = new Topic(PUBSUB, TOPIC_NAME);
+      topic.request(done);
     });
 
     it('should create an iam object', function() {
       assert.deepEqual(topic.iam.calledWith_, [PUBSUB, TOPIC_NAME]);
-    });
-
-    it('should format name', function(done) {
-      var formatName_ = Topic.formatName_;
-      Topic.formatName_ = function() {
-        Topic.formatName_ = formatName_;
-        done();
-      };
-      new Topic(PUBSUB, TOPIC_NAME);
-    });
-  });
-
-  describe('formatMessage_', function() {
-    var messageString = 'string';
-    var messageBuffer = new Buffer(messageString);
-
-    var messageObjectWithString = { data: messageString };
-    var messageObjectWithBuffer = { data: messageBuffer };
-
-    it('should handle string data', function() {
-      assert.deepEqual(
-        Topic.formatMessage_(messageObjectWithString),
-        { data: new Buffer(JSON.stringify(messageString)).toString('base64') }
-      );
-    });
-
-    it('should handle buffer data', function() {
-      assert.deepEqual(
-        Topic.formatMessage_(messageObjectWithBuffer),
-        { data: messageBuffer.toString('base64') }
-      );
     });
   });
 
@@ -165,189 +149,362 @@ describe('Topic', function() {
     });
   });
 
-  describe('getSubscriptions', function() {
-    it('should accept just a callback', function(done) {
-      topic.parent.getSubscriptions = function(options, callback) {
-        assert.deepEqual(options, { topic: topic });
-        callback();
+  describe('create', function() {
+    it('should call the parent createTopic method', function(done) {
+      var options_ = {};
+
+      PUBSUB.createTopic = function(name, options, callback) {
+        assert.strictEqual(name, topic.name);
+        assert.strictEqual(options, options_);
+        callback(); // the done fn
       };
 
-      topic.getSubscriptions(done);
-    });
-
-    it('should pass correct args to pubsub#getSubscriptions', function(done) {
-      var opts = { a: 'b', c: 'd' };
-
-      topic.parent = {
-        getSubscriptions: function(options, callback) {
-          assert.deepEqual(options, opts);
-          assert.deepEqual(options.topic, topic);
-          callback();
-        }
-      };
-
-      topic.getSubscriptions(opts, done);
+      topic.create(options_, done);
     });
   });
 
-  describe('getSubscriptionsStream', function() {
-    it('should return a stream', function(done) {
-      var fakeStream = {};
+  describe('createSubscription', function() {
+    it('should call the parent createSubscription method', function(done) {
+      var NAME = 'sub-name';
+      var OPTIONS = { a: 'a' };
 
-      topic.parent.getSubscriptionsStream = function(options) {
-        assert.deepEqual(options, { topic: topic });
-        setImmediate(done);
-        return fakeStream;
+      PUBSUB.createSubscription = function(topic_, name, options, callback) {
+        assert.strictEqual(topic_, topic);
+        assert.strictEqual(name, NAME);
+        assert.strictEqual(options, OPTIONS);
+        callback(); // the done fn
       };
 
-      var stream = topic.getSubscriptionsStream();
-      assert.strictEqual(stream, fakeStream);
-    });
-
-    it('should pass correct args to getSubscriptionsStream', function(done) {
-      var opts = { a: 'b', c: 'd' };
-
-      topic.parent = {
-        getSubscriptionsStream: function(options) {
-          assert.deepEqual(options, opts);
-          assert.deepEqual(options.topic, topic);
-          done();
-        }
-      };
-
-      topic.getSubscriptionsStream(opts);
+      topic.createSubscription(NAME, OPTIONS, done);
     });
   });
 
-  describe('publish', function() {
-    var message = 'howdy';
-    var attributes = {
-      key: 'value'
-    };
-
-    it('should throw if no message is provided', function() {
-      assert.throws(function() {
-        topic.publish();
-      }, /Cannot publish without a message\./);
-
-      assert.throws(function() {
-        topic.publish([]);
-      }, /Cannot publish without a message\./);
-    });
-
-    it('should send correct api request', function(done) {
-      topic.parent.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'Publisher');
-        assert.strictEqual(protoOpts.method, 'publish');
-
-        assert.strictEqual(reqOpts.topic, topic.name);
-        assert.deepEqual(reqOpts.messages, [
-          { data: new Buffer(JSON.stringify(message)).toString('base64') }
-        ]);
-
-        done();
+  describe('delete', function() {
+    it('should make the proper request', function(done) {
+      topic.request = function(config, callback) {
+        assert.strictEqual(config.client, 'publisherClient');
+        assert.strictEqual(config.method, 'deleteTopic');
+        assert.deepEqual(config.reqOpts, { topic: topic.name });
+        callback(); // the done fn
       };
 
-      topic.publish(message, assert.ifError);
+      topic.delete(done);
     });
 
-    it('should honor the timeout setting', function(done) {
+    it('should optionally accept gax options', function(done) {
+      var options = {};
+
+      topic.request = function(config, callback) {
+        assert.strictEqual(config.gaxOpts, options);
+        callback(); // the done fn
+      };
+
+      topic.delete(options, done);
+    });
+
+    it('should optionally accept a callback', function(done) {
+      fakeUtil.noop = done;
+
+      topic.request = function(config, callback) {
+        callback(); // the done fn
+      };
+
+      topic.delete();
+    });
+  });
+
+  describe('get', function() {
+    it('should delete the autoCreate option', function(done) {
       var options = {
-        timeout: 10
+        autoCreate: true,
+        a: 'a'
       };
 
-      topic.parent.request = function(protoOpts) {
-        assert.strictEqual(protoOpts.timeout, options.timeout);
+      topic.getMetadata = function(gaxOpts) {
+        assert.strictEqual(gaxOpts, options);
+        assert.strictEqual(gaxOpts.autoCreate, undefined);
         done();
       };
 
-      topic.publish(message, options, assert.ifError);
+      topic.get(options, assert.ifError);
     });
 
-    it('should send correct api request for raw message', function(done) {
-      topic.parent.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts.messages, [
-          {
-            data: new Buffer(JSON.stringify(message)).toString('base64'),
-            attributes: attributes
-          }
-        ]);
+    describe('success', function() {
+      var fakeMetadata = {};
 
-        done();
-      };
+      beforeEach(function() {
+        topic.getMetadata = function(gaxOpts, callback) {
+          callback(null, fakeMetadata);
+        };
+      });
 
-      topic.publish({
-        data: message,
-        attributes: attributes
-      }, { raw: true }, assert.ifError);
+      it('should call through to getMetadata', function(done) {
+        topic.get(function(err, _topic, resp) {
+          assert.ifError(err);
+          assert.strictEqual(_topic, topic);
+          assert.strictEqual(resp, fakeMetadata);
+          done();
+        });
+      });
+
+      it('should optionally accept options', function(done) {
+        var options = {};
+
+        topic.getMetadata = function(gaxOpts, callback) {
+          assert.strictEqual(gaxOpts, options);
+          callback(); // the done fn
+        };
+
+        topic.get(options, done);
+      });
     });
 
-    it('should clone the provided message', function(done) {
-      var message = {
-        data: 'data'
-      };
-      var originalMessage = extend({}, message);
+    describe('error', function() {
+      it('should pass back errors when not auto-creating', function(done) {
+        var error = { code: 4 };
+        var apiResponse = {};
 
-      topic.parent.request = function() {
-        assert.deepEqual(message, originalMessage);
-        done();
-      };
+        topic.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
 
-      topic.publish(message, { raw: true }, assert.ifError);
+        topic.get(function(err, _topic, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(_topic, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should pass back 404 errors if autoCreate is false', function(done) {
+        var error = { code: 5 };
+        var apiResponse = {};
+
+        topic.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        topic.get(function(err, _topic, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(_topic, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should create the topic if 404 + autoCreate is true', function(done) {
+        var error = { code: 5 };
+        var apiResponse = {};
+
+        var fakeOptions = {
+          autoCreate: true
+        };
+
+        topic.getMetadata = function(gaxOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        topic.create = function(options, callback) {
+          assert.strictEqual(options, fakeOptions);
+          callback(); // the done fn
+        };
+
+        topic.get(fakeOptions, done);
+      });
     });
+  });
 
-    it('should execute callback', function(done) {
-      topic.parent.request = function(protoOpts, reqOpts, callback) {
+  describe('exists', function() {
+    it('should return true if it finds metadata', function(done) {
+      topic.getMetadata = function(callback) {
         callback(null, {});
       };
 
-      topic.publish(message, done);
-    });
-
-    it('should execute callback with error', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      topic.parent.request = function(protoOpts, reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      topic.publish(message, function(err, ackIds, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(ackIds, null);
-        assert.strictEqual(apiResponse_, apiResponse);
-
+      topic.exists(function(err, exists) {
+        assert.ifError(err);
+        assert(exists);
         done();
       });
     });
 
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-
-      topic.parent.request = function(protoOpts, reqOpts, callback) {
-        callback(null, resp);
+    it('should return false if a not found error occurs', function(done) {
+      topic.getMetadata = function(callback) {
+        callback({ code: 5 });
       };
 
-      topic.publish(message, function(err, ackIds, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
+      topic.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should pass back any other type of error', function(done) {
+      var error = { code: 4 };
+
+      topic.getMetadata = function(callback) {
+        callback(error);
+      };
+
+      topic.exists(function(err, exists) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(exists, undefined);
         done();
       });
     });
   });
 
-  describe('subscribe', function() {
-    it('should pass correct arguments to pubsub#subscribe', function(done) {
-      var subscriptionName = 'subName';
-      var opts = {};
-
-      topic.parent.subscribe = function(t, subName, options, callback) {
-        assert.deepEqual(t, topic);
-        assert.equal(subName, subscriptionName);
-        assert.deepEqual(options, opts);
-        callback();
+  describe('getMetadata', function() {
+    it('should make the proper request', function(done) {
+      topic.request = function(config) {
+        assert.strictEqual(config.client, 'publisherClient');
+        assert.strictEqual(config.method, 'getTopic');
+        assert.deepEqual(config.reqOpts, { topic: topic.name });
+        done();
       };
 
-      topic.subscribe(subscriptionName, opts, done);
+      topic.getMetadata(assert.ifError);
+    });
+
+    it('should optionally accept gax options', function(done) {
+      var options = {};
+
+      topic.request = function(config) {
+        assert.strictEqual(config.gaxOpts, options);
+        done();
+      };
+
+      topic.getMetadata(options, assert.ifError);
+    });
+
+    it('should pass back any errors that occur', function(done) {
+      var error = new Error('err');
+      var apiResponse = {};
+
+      topic.request = function(config, callback) {
+        callback(error, apiResponse);
+      };
+
+      topic.getMetadata(function(err, metadata) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, apiResponse);
+        done();
+      });
+    });
+
+    it('should set the metadata if no error occurs', function(done) {
+      var apiResponse = {};
+
+      topic.request = function(config, callback) {
+        callback(null, apiResponse);
+      };
+
+      topic.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, apiResponse);
+        assert.strictEqual(topic.metadata, apiResponse);
+        done();
+      });
+    });
+  });
+
+  describe('getSubscriptions', function() {
+    it('should make the correct request', function(done) {
+      var options = {
+        a: 'a',
+        b: 'b',
+        gaxOpts: {
+          e: 'f'
+        },
+        autoPaginate: false
+      };
+
+      var expectedOptions = extend({
+        topic: topic.name
+      }, options);
+
+      var expectedGaxOpts = extend({
+        autoPaginate: options.autoPaginate
+      }, options.gaxOpts);
+
+      delete expectedOptions.gaxOpts;
+      delete expectedOptions.autoPaginate;
+
+      topic.request = function(config) {
+        assert.strictEqual(config.client, 'publisherClient');
+        assert.strictEqual(config.method, 'listTopicSubscriptions');
+        assert.deepEqual(config.reqOpts, expectedOptions);
+        assert.deepEqual(config.gaxOpts, expectedGaxOpts);
+        done();
+      };
+
+      topic.getSubscriptions(options, assert.ifError);
+    });
+
+    it('should accept only a callback', function(done) {
+      topic.request = function(config) {
+        assert.deepEqual(config.reqOpts, { topic: topic.name });
+        assert.deepEqual(config.gaxOpts, { autoPaginate: undefined });
+        done();
+      };
+
+      topic.getSubscriptions(assert.ifError);
+    });
+
+    it('should create subscription objects', function(done) {
+      var fakeSubs = ['a', 'b', 'c'];
+
+      topic.subscription = function(name) {
+        return {
+          name: name
+        };
+      };
+
+      topic.request = function(config, callback) {
+        callback(null, fakeSubs);
+      };
+
+      topic.getSubscriptions(function(err, subscriptions) {
+        assert.ifError(err);
+        assert.deepEqual(subscriptions, [
+          { name: 'a' },
+          { name: 'b' },
+          { name: 'c' }
+        ]);
+        done();
+      });
+    });
+
+    it('should pass all params to the callback', function(done) {
+      var err_ = new Error('err');
+      var subs_ = false;
+      var nextQuery_ = {};
+      var apiResponse_ = {};
+
+      topic.request = function(config, callback) {
+        callback(err_, subs_, nextQuery_, apiResponse_);
+      };
+
+      topic.getSubscriptions(function(err, subs, nextQuery, apiResponse) {
+        assert.strictEqual(err, err_);
+        assert.deepEqual(subs, subs_);
+        assert.strictEqual(nextQuery, nextQuery_);
+        assert.strictEqual(apiResponse, apiResponse_);
+        done();
+      });
+    });
+  });
+
+  describe('publisher', function() {
+    it('should return a Publisher instance', function() {
+      var options = {};
+
+      var publisher = topic.publisher(options);
+      var args = publisher.calledWith_;
+
+      assert(publisher instanceof FakePublisher);
+      assert.strictEqual(args[0], topic);
+      assert.strictEqual(args[1], options);
     });
   });
 

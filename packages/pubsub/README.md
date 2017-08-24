@@ -1,4 +1,4 @@
-# @google-cloud/pubsub ([Alpha][versioning])
+# @google-cloud/pubsub ([Beta][versioning])
 > Cloud Pub/Sub Client Library for Node.js
 
 *Looking for more Google APIs than just Pub/Sub? You might want to check out [`google-cloud`][google-cloud].*
@@ -20,10 +20,13 @@ var pubsub = require('@google-cloud/pubsub')({
 var topic = pubsub.topic('my-topic');
 
 // Publish a message to the topic.
-topic.publish('New message!', function(err) {});
+var publisher = topic.publisher();
+var message = new Buffer('New message!');
+
+publisher.publish(message, function(err, messageId) {});
 
 // Subscribe to the topic.
-topic.subscribe('subscription-name', function(err, subscription) {
+topic.createSubscription('subscription-name', function(err, subscription) {
   // Register listeners to start pulling for messages.
   function onError(err) {}
   function onMessage(message) {}
@@ -36,7 +39,7 @@ topic.subscribe('subscription-name', function(err, subscription) {
 });
 
 // Promises are also supported by omitting callbacks.
-topic.publish('New message!').then(function(data) {
+publisher.publish(message).then(function(data) {
   var messageIds = data[0];
 });
 
