@@ -65,6 +65,12 @@ describe('Service', function() {
   });
 
   describe('instantiation', function() {
+    it('should not require options', function() {
+      assert.doesNotThrow(function() {
+        new Service(CONFIG);
+      });
+    });
+
     it('should create an authenticated request factory', function() {
       var authenticatedRequest = {};
 

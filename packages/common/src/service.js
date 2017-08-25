@@ -43,9 +43,11 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
  * @param {string[]} config.scopes - The scopes required for the request.
- * @param {object} options - [Configuration object](#/docs).
+ * @param {object=} options - [Configuration object](#/docs).
  */
 function Service(config, options) {
+  options = options || {};
+
   var reqCfg = extend({}, config, {
     credentials: options.credentials,
     keyFile: options.keyFilename,
