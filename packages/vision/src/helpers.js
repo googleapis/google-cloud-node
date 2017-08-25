@@ -75,19 +75,19 @@ var coerceImage = (image, callback) => {
  */
  var _createSingleFeatureMethod = featureValue => {
    return function(annotateImageRequest, callOptions) {
-     annotateImageRequest.features = annotateImageRequest.features || [];
+     annotateImageRequest.features = annotateImageRequest.features || [{
+       type: featureValue,
+     }];
 
-     // Ensure the feature value indicated by the user's method choice exists on the
-     // features array; if it does not, add it.
-     var found = false;
+     // If the user submitted explicit features that do not line up with
+     // the precise method called, throw an exception.
      for (let feature of annotateImageRequest.features) {
-       if (feature.type === featureValue) {
-         found = true;
-         break;
+       if (feature.type !== featureValue) {
+         throw new Error(
+           'Setting explicit features is not supported on this method. ' +
+           'Use the #annotateImage method instead.'
+         )
        }
-     }
-     if (found === false) {
-       annotateImageRequest.features.push({type: featureValue});
      }
 
      // Call the underlying #annotateImage method.

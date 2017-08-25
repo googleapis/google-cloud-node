@@ -282,5 +282,16 @@ describe('Vision helper methods', () => {
         ));
       });
     });
+
+    it('throws an exception if conflicting features are given', () => {
+      var vision = Vision.v1();
+      var imageRequest = {
+        image: {content: new Buffer('bogus==')},
+        features: [{type: 0}],
+      };
+      vision.logoDetection(imageRequest).then(assert.fail).catch(ex => {
+        assert(ex.message.indexOf('Setting explicit') > -1);
+      });
+    });
   });
 });
