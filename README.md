@@ -19,7 +19,7 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
-* [Cloud Pub/Sub](#cloud-pubsub-alpha) (Beta)
+* [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
