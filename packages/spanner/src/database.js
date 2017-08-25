@@ -460,9 +460,6 @@ Database.prototype.getTransaction = function(options, callback) {
       return;
     }
 
-    options = extend({}, options);
-    delete options.readOnly;
-
     var transaction = self.pool_.createTransaction_(session, options);
 
     transaction.begin(function(err) {

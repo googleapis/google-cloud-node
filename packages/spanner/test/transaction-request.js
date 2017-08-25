@@ -80,6 +80,24 @@ describe('TransactionRequest', function() {
   });
 
   describe('instantiation', function() {
+    var formatTimestamp;
+
+    before(function() {
+      formatTimestamp = TransactionRequest.formatTimestampOptions_;
+    });
+
+    beforeEach(function() {
+      TransactionRequest.formatTimestampOptions_ = function() {};
+    });
+
+    after(function() {
+      TransactionRequest.formatTimestampOptions_ = formatTimestamp;
+    });
+
+    it('should default readOnly to false', function() {
+      assert.strictEqual(transactionRequest.readOnly, false);
+    });
+
     it('should localize the transaction options', function() {
       var UNFORMATTED_OPTIONS = {
         b: 'b'
@@ -89,10 +107,9 @@ describe('TransactionRequest', function() {
         a: 'a'
       };
 
-      var formatTimestamp = TransactionRequest.formatTimestampOptions_;
-
       TransactionRequest.formatTimestampOptions_ = function(options) {
-        assert.strictEqual(options, UNFORMATTED_OPTIONS);
+        assert.deepEqual(options, UNFORMATTED_OPTIONS);
+        assert.notStrictEqual(options, UNFORMATTED_OPTIONS);
         return FORMATTED_OPTIONS;
       };
 
@@ -113,6 +130,18 @@ describe('TransactionRequest', function() {
 
       assert.strictEqual(transaction.options, undefined);
       TransactionRequest.formatTimestampOptions_ = formatTimestamp;
+    });
+
+    it('should capture the readOnly option', function() {
+      TransactionRequest.formatTimestampOptions_ = function(options) {
+        assert.strictEqual(options.readOnly, undefined);
+      };
+
+      var transaction = new TransactionRequest({
+        readOnly: true
+      });
+
+      assert.strictEqual(transaction.readOnly, true);
     });
 
     it('should promisify all the things', function() {
