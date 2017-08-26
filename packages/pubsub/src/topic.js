@@ -147,8 +147,6 @@ Topic.prototype.create = function(gaxOpts, callback) {
  * @param {string=} name - The name of the subscription.
  * @param {object=} options - See a
  *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number} options.ackDeadline - The maximum time after receiving a
- *     message that you must ack a message before it is redelivered.
  * @param {object} options.flowControl - Flow control configurations for
  *     receiving messages.
  * @param {number} options.flowControl.maxBytes - The maximum number of bytes
