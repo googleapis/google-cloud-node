@@ -146,6 +146,10 @@ var GRPC_SERVICE_OPTIONS = {
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
  *
+ * The baseUrl should be specified by the service. Prefer the combination of
+ * options, environmentVariables, defaultApiEndpoint over hardcoding a value
+ * in the config object. The former gives more flexibility to the end user.
+ *
  * This handles making authenticated requests by exposing a `makeReq_` function.
  *
  * @constructor
@@ -153,6 +157,10 @@ var GRPC_SERVICE_OPTIONS = {
  *
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {string[]} config.environmentVariables - Array of environment
+ *     variables containing the hostname(s) to make API requests to.
+ * @param {string} config.defaultApiEndpoint - Defaut hostname to make
+ *     API requests to.
  * @param {object} config.grpcMetadata - Metadata to send with every request.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {string} config.protosDir - The root directory where proto files live.
@@ -166,6 +174,17 @@ function GrpcService(config, options) {
     // any calls to that library from going through.
     // Reference: https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1137#issuecomment-193315047
     return global.GCLOUD_SANDBOX_ENV;
+  }
+
+  if (config.defaultApiEndpoint) {
+    var baseInfo = util.determineBaseUrl(
+      options,
+      config.environmentVariables,
+      config.defaultApiEndpoint,
+      true
+    );
+    config.baseUrl = baseInfo.apiEndpoint;
+    config.customEndpoint = baseInfo.customEndpoint;
   }
 
   Service.call(this, config, options);
@@ -202,11 +221,14 @@ function GrpcService(config, options) {
 
   Object.keys(protoServices).forEach(function(name) {
     var protoConfig = protoServices[name];
-    var service = self.loadProtoFile_(protoConfig, config);
+    var service = GrpcService.prototype.loadProtoFile_
+      .call(self, protoConfig, config);
 
     self.protos[name] = service;
 
-    if (protoConfig.baseUrl) {
+    if (service && config.customEndpoint) {
+      service.baseUrl = config.baseUrl;
+    } else if (service && protoConfig.baseUrl) {
       service.baseUrl = protoConfig.baseUrl;
     }
   });

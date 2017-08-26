@@ -21,6 +21,8 @@ var extend = require('extend');
 var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
+
+var commonGrpc = require('@google-cloud/common-grpc');
 var util = require('@google-cloud/common').util;
 
 var fakeEntity = {
@@ -43,6 +45,7 @@ var fakeUtil = extend({}, util);
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
+  return commonGrpc.Service.apply(this, arguments);
 }
 
 function FakeQuery() {
@@ -124,7 +127,6 @@ describe('Datastore', function() {
       delete options.apiEndpoint;
       const datastore = new Datastore(options);
       var calledWith = datastore.calledWith_[0];
-
       assert.strictEqual(calledWith.baseUrl, apiEndpoint);
       assert.strictEqual(calledWith.customEndpoint, false);
       assert.deepStrictEqual(calledWith.protoServices, {
@@ -159,22 +161,18 @@ describe('Datastore', function() {
     it('should inherit from GrpcService', function() {
       var datastore = new Datastore(OPTIONS);
 
+      // using modelo's isInstance instead of the built-in
+      // instanceof. Required when doing multiple inheritance.
+      assert(datastore.isInstance(FakeGrpcService));
+
       var calledWith = datastore.calledWith_[0];
 
-      assert.strictEqual(calledWith.projectIdRequired, false);
-      assert.strictEqual(calledWith.baseUrl, OPTIONS.apiEndpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(datastore.projectIdRequired, false);
+      assert.strictEqual(datastore.baseUrl, OPTIONS.apiEndpoint);
+      assert.strictEqual(datastore.customEndpoint, true);
 
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(calledWith.protosDir, protosDir);
-
-      assert.deepStrictEqual(calledWith.protoServices, {
-        Datastore: {
-          baseUrl: OPTIONS.apiEndpoint,
-          path: 'google/datastore/v1/datastore.proto',
-          service: 'datastore.v1'
-        }
-      });
 
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/datastore'
@@ -182,6 +180,15 @@ describe('Datastore', function() {
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
       assert.deepEqual(calledWith.grpcMetadata, {
         'google-cloud-resource-prefix': 'projects/' + datastore.projectId
+      });
+
+      Object.keys(calledWith.protoServices).forEach(function(serviceKey) {
+        var service = calledWith.protoServices[serviceKey];
+        var proto = datastore.protos[serviceKey];
+
+        if (is.object(service)) {
+          assert.strictEqual(proto.baseUrl, OPTIONS.apiEndpoint);
+        }
       });
     });
 
@@ -196,11 +203,11 @@ describe('Datastore', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(datastore.protos).forEach(function(proto) {
+        proto = datastore.protos[proto];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
 
@@ -218,11 +225,11 @@ describe('Datastore', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(datastore.protos).forEach(function(proto) {
+        proto = datastore.protos[proto];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
 
@@ -243,11 +250,11 @@ describe('Datastore', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(datastore.protos).forEach(function(proto) {
+        proto = datastore.protos[proto];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
     });

@@ -126,7 +126,7 @@ describe('DNS', function() {
       var calledWith = dns.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/dns/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(dns.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform'
@@ -135,8 +135,7 @@ describe('DNS', function() {
     });
 
     it('should not be considered custom endpoint if default', function() {
-      var calledWith = dns.calledWith_[0];
-      assert.strictEqual(calledWith.customEndpoint, false);
+      assert.strictEqual(dns.customEndpoint, false);
     });
 
     it('should use options.apiEndpoint if defined', function() {
@@ -147,9 +146,8 @@ describe('DNS', function() {
         apiEndpoint: apiEndpoint
       });
 
-      var calledWith = dns.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/dns/v1');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(dns.baseUrl, apiEndpoint + '/dns/v1');
+      assert.strictEqual(dns.customEndpoint, true);
     });
 
     it('should use GOOGLE_CLOUD_DNS_ENDPOINT if defined', function() {
@@ -158,9 +156,8 @@ describe('DNS', function() {
       var dns = new DNS({ projectId: 'project-id' });
       delete process.env.GOOGLE_CLOUD_DNS_ENDPOINT;
 
-      var calledWith = dns.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/dns/v1');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(dns.baseUrl, apiEndpoint + '/dns/v1');
+      assert.strictEqual(dns.customEndpoint, true);
     });
   });
 

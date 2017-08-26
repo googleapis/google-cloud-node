@@ -20,6 +20,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var createErrorClass = require('create-error-class');
 var duplexify = require('duplexify');
 var ent = require('ent');
@@ -792,7 +793,7 @@ util.promisifyAll = promisifyAll;
 /**
  * Determines a service base URL using the following precendence rule:
  * 1 - Property 'apiEndpoint' in the Service configuration object.
- * 2 - Environment variable.
+ * 2 - Environment variables.
  * 3 - Default endpoint.
  *
  * @param {object=} options - Service configuration object.
@@ -812,20 +813,22 @@ function determineBaseUrl(options, environmentVariables,
   var candidates = [];
   candidates.push(options.apiEndpoint);
   candidates.push(options.servicePath);
+  environmentVariables = arrify(environmentVariables);
   for (var i = 0; i < environmentVariables.length; i++) {
     candidates.push(process.env[environmentVariables[i]]);
   }
   candidates.push(defaultApiEndpoint);
-  for (var i = 0; i < candidates.length; i++) {
-    if (candidates[i]) {
-      base.apiEndpoint = candidates[i];
+  for (var j = 0; j < candidates.length; j++) {
+    if (candidates[j]) {
+      base.apiEndpoint = candidates[j];
       // The last element in the array is the
       // default endpoint, everything else is considired
       // a custom endpoint
-      base.customEndpoint = i !== candidates.length - 1;
+      base.customEndpoint = j !== candidates.length - 1;
       break;
     }
   }
+  base.apiEndpoint = base.apiEndpoint || '';
   base.apiEndpoint = base.apiEndpoint.replace(trailingSlashes, '');
   if (trimProtocol) {
     base.apiEndpoint = base.apiEndpoint.replace(leadingProtocol, '');

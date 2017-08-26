@@ -172,6 +172,15 @@ describe('Bigtable', function() {
       ]);
 
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+
+      Object.keys(calledWith.protoServices).forEach(function(serviceKey) {
+        var service = calledWith.protoServices[serviceKey];
+        var proto = bigtable.protos[serviceKey];
+
+        if (is.object(service)) {
+          assert.strictEqual(proto.baseUrl, service.baseUrl);
+        }
+      });
     });
 
     it('should work with the emulator', function() {
@@ -184,11 +193,11 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(bigtable.protos).forEach(function(protoKey) {
+        var proto = bigtable.protos[protoKey];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
 
@@ -206,11 +215,11 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(bigtable.protos).forEach(function(protoKey) {
+        var proto = bigtable.protos[protoKey];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
 
@@ -219,9 +228,10 @@ describe('Bigtable', function() {
     });
 
     it('should work with a custom apiEndpoint', function() {
+      var endpoint = 'local:3888';
       var options = {
         projectId: PROJECT_ID,
-        apiEndpoint: 'local:3888'
+        apiEndpoint: endpoint
       };
 
       var bigtable = new Bigtable(options);
@@ -230,11 +240,11 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.baseUrl, options.apiEndpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(bigtable.protos).forEach(function(protoKey) {
+        var proto = bigtable.protos[protoKey];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, options.apiEndpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
     });
@@ -253,11 +263,11 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.baseUrl, endpoint);
       assert.strictEqual(calledWith.customEndpoint, true);
 
-      Object.keys(calledWith.protoServices).forEach(function(service) {
-        service = calledWith.protoServices[service];
+      Object.keys(bigtable.protos).forEach(function(protoKey) {
+        var proto = bigtable.protos[protoKey];
 
-        if (is.object(service)) {
-          assert.strictEqual(service.baseUrl, endpoint);
+        if (is.object(proto)) {
+          assert.strictEqual(proto.baseUrl, endpoint);
         }
       });
     });

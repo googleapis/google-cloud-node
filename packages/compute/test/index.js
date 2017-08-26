@@ -212,7 +212,7 @@ describe('Compute', function() {
       var calledWith = compute.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/compute/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(compute.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute'
       ]);
@@ -220,8 +220,7 @@ describe('Compute', function() {
     });
 
     it('should not be considered custom endpoint if default', function() {
-      var calledWith = compute.calledWith_[0];
-      assert.strictEqual(calledWith.customEndpoint, false);
+      assert.strictEqual(compute.customEndpoint, false);
     });
 
     it('should use options.apiEndpoint if defined', function() {
@@ -232,9 +231,8 @@ describe('Compute', function() {
         apiEndpoint: apiEndpoint
       });
 
-      var calledWith = gce.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/compute/v1');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(gce.baseUrl, apiEndpoint + '/compute/v1');
+      assert.strictEqual(gce.customEndpoint, true);
     });
 
     it('should use GOOGLE_CLOUD_GCE_ENDPOINT if defined', function() {
@@ -243,9 +241,8 @@ describe('Compute', function() {
       var gce = new Compute({ projectId: 'project-id' });
       delete process.env.GOOGLE_CLOUD_GCE_ENDPOINT;
 
-      var calledWith = gce.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/compute/v1');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(gce.baseUrl, apiEndpoint + '/compute/v1');
+      assert.strictEqual(gce.customEndpoint, true);
     });
 
     it('should streamify the correct methods', function() {

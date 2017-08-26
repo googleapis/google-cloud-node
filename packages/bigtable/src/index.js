@@ -317,40 +317,19 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
-  var baseUrl = 'bigtable.googleapis.com';
-
-  var baseInfo = common.util.determineBaseUrl(
-    options,
-    'GOOGLE_CLOUD_BIGTABLE_ENDPOINT',
-    baseUrl,
-    true);
-
-  // In the case where we fallback to the baseUrl
-  // let's check for BIGTABLE_EMULATOR_HOST for backwards
-  // compatibility. In future releases this should go
-  // away.
-  if (baseInfo.apiEndpoint === baseUrl && process.env.BIGTABLE_EMULATOR_HOST) {
-    baseInfo = common.util.determineBaseUrl(
-      options,
-      'BIGTABLE_EMULATOR_HOST',
-      baseUrl,
-      true
-    );
-  }
-
+  var defaultApiEndpoint = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
-  if (baseInfo.customEndpoint) {
-    adminBaseUrl = baseInfo.apiEndpoint;
-  }
-
   var config = {
-    baseUrl: baseInfo.apiEndpoint,
-    customEndpoint: baseInfo.customEndpoint,
+    environmentVariables: [
+      'GOOGLE_CLOUD_BIGTABLE_ENDPOINT',
+      'BIGTABLE_EMULATOR_HOST'
+    ],
+    defaultApiEndpoint: 'bigtable.googleapis.com',
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Bigtable: {
-        baseUrl: baseInfo.apiEndpoint,
+        baseUrl: defaultApiEndpoint,
         path: 'google/bigtable/v2/bigtable.proto',
         service: 'bigtable.v2'
       },

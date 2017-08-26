@@ -71,16 +71,10 @@ function BigQuery(options) {
     return new BigQuery(options);
   }
 
-  var basePath = '/bigquery/v2';
-
-  var baseInfo = common.util.determineBaseUrl(
-      options,
-      'GOOGLE_CLOUD_BIGQUERY_ENDPOINT',
-      'https://www.googleapis.com');
-
   var config = {
-    baseUrl: baseInfo.apiEndpoint + basePath,
-    customEndpoint: baseInfo.customEndpoint,
+    environmentVariables: ['GOOGLE_CLOUD_BIGQUERY_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com',
+    basePath: '/bigquery/v2',
     scopes: ['https://www.googleapis.com/auth/bigquery'],
     packageJson: require('../package.json')
   };

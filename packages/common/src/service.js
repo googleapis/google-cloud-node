@@ -35,6 +35,10 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
  *
+ * The baseUrl should be specified by the service. Prefer the combination of
+ * options, environmentVariables, defaultApiEndpoint over hardcoding a value
+ * in the config object. The former gives more flexibility to the end user.
+ *
  * This handles making authenticated requests by exposing a `makeReq_` function.
  *
  * @constructor
@@ -42,6 +46,12 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
  *
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {string[]} config.environmentVariables - Array of environment
+ *     variables containing the hostname(s) to make API requests to.
+ * @param {string} config.defaultApiEndpoint - Defaut hostname to make
+ *     API requests to.
+ * @param {string} config.basePath - Base path to make API requests to.
+ *     This and the hostname form the baseUrl
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {object} options - [Configuration object](#/docs).
  */
@@ -52,10 +62,24 @@ function Service(config, options) {
     email: options.email
   });
 
+  // Some services have not been moved to the
+  // new way of passing custom endpoints yet. Let's
+  // keep support for config.baseUrl in case they use it
+  if (!config.baseUrl) {
+    var baseInfo = util.determineBaseUrl(
+      options,
+      config.environmentVariables,
+      config.defaultApiEndpoint,
+      false);
+    this.baseUrl = baseInfo.apiEndpoint + config.basePath;
+    this.customEndpoint = baseInfo.customEndpoint;
+  } else {
+    this.baseUrl = config.baseUrl;
+    this.customEndpoint = config.customEndpoint;
+  }
+
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
-  this.baseUrl = config.baseUrl;
-  this.customEndpoint = config.customEndpoint;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];

@@ -106,16 +106,10 @@ function Compute(options) {
     return new Compute(options);
   }
 
-  var basePath = '/compute/v1';
-
-  var baseInfo = common.util.determineBaseUrl(
-      options,
-      'GOOGLE_CLOUD_GCE_ENDPOINT',
-      'https://www.googleapis.com');
-
   var config = {
-    baseUrl: baseInfo.apiEndpoint + basePath,
-    customEndpoint: baseInfo.customEndpoint,
+    environmentVariables: ['GOOGLE_CLOUD_GCE_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com',
+    basePath: '/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json')
   };

@@ -311,35 +311,24 @@ function Datastore(options) {
 
   var baseUrl = 'datastore.googleapis.com';
 
-  var baseInfo = common.util.determineBaseUrl(
-    options,
-    'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
-    baseUrl,
-    true);
-
-  // In the case where we fallback to the baseUrl
-  // let's check for DATASTORE_EMULATOR_HOST for backwards
-  // compatibility. In future releases this should go
-  // away.
-  if (baseInfo.apiEndpoint === baseUrl && process.env.DATASTORE_EMULATOR_HOST) {
-    baseInfo = common.util.determineBaseUrl(
-      options,
-      'DATASTORE_EMULATOR_HOST',
-      baseUrl,
-      true);
-  }
-
   this.namespace = options.namespace;
   this.projectId = process.env.DATASTORE_PROJECT_ID || options.projectId;
 
+  // Let's set the resolved projectId in the options since
+  // common.Service will look it up there later.
+  options.projectId = this.projectId;
+
   var config = {
+    environmentVariables: [
+      'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
+      'DATASTORE_EMULATOR_HOST'
+    ],
+    defaultApiEndpoint: baseUrl,
     projectIdRequired: false,
-    baseUrl: baseInfo.apiEndpoint,
-    customEndpoint: baseInfo.customEndpoint,
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Datastore: {
-        baseUrl: baseInfo.apiEndpoint,
+        baseUrl: baseUrl,
         path: 'google/datastore/v1/datastore.proto',
         service: 'datastore.v1'
       }

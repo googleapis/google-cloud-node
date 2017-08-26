@@ -58,16 +58,10 @@ function DNS(options) {
     return new DNS(options);
   }
 
-  var basePath = '/dns/v1';
-
-  var baseInfo = common.util.determineBaseUrl(
-      options,
-      'GOOGLE_CLOUD_DNS_ENDPOINT',
-      'https://www.googleapis.com');
-
   var config = {
-    baseUrl: baseInfo.apiEndpoint + basePath,
-    customEndpoint: baseInfo.customEndpoint,
+    environmentVariables: ['GOOGLE_CLOUD_DNS_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com',
+    basePath: '/dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
       'https://www.googleapis.com/auth/cloud-platform'

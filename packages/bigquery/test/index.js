@@ -143,9 +143,8 @@ describe('BigQuery', function() {
       assert(bq instanceof Service);
 
       var calledWith = bq.calledWith_[0];
-
       var baseUrl = 'https://www.googleapis.com/bigquery/v2';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(bq.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigquery'
       ]);
@@ -153,8 +152,7 @@ describe('BigQuery', function() {
     });
 
     it('should not be considered custom endpoint if default', function() {
-      var calledWith = bq.calledWith_[0];
-      assert.strictEqual(calledWith.customEndpoint, false);
+      assert.strictEqual(bq.customEndpoint, false);
     });
 
     it('should use options.apiEndpoint if defined', function() {
@@ -165,9 +163,8 @@ describe('BigQuery', function() {
         apiEndpoint: apiEndpoint
       });
 
-      var calledWith = bq.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/bigquery/v2');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(bq.baseUrl, apiEndpoint + '/bigquery/v2');
+      assert.strictEqual(bq.customEndpoint, true);
     });
 
     it('should use GOOGLE_CLOUD_BIGQUERY_ENDPOINT if defined', function() {
@@ -175,10 +172,8 @@ describe('BigQuery', function() {
       process.env.GOOGLE_CLOUD_BIGQUERY_ENDPOINT = apiEndpoint;
       var bq = new BigQuery({ projectId: 'project-id' });
       delete process.env.GOOGLE_CLOUD_BIGQUERY_ENDPOINT;
-
-      var calledWith = bq.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint + '/bigquery/v2');
-      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(bq.baseUrl, apiEndpoint + '/bigquery/v2');
+      assert.strictEqual(bq.customEndpoint, true);
     });
   });
 
