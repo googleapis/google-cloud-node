@@ -30,14 +30,6 @@ var is = require('is');
  *
  * @param {module:pubsub/topic} topic - The topic associated with this
  *     publisher.
- * @param {object=} options - Configuration object.
- * @param {object} options.batching - Batching settings.
- * @param {number} options.batching.maxBytes - The maximum number of bytes to
- *     buffer before sending a payload.
- * @param {number} options.batching.maxMessages - The maximum number of messages
- *     to buffer before sending a payload.
- * @param {number} options.batching.maxMilliseconds - The maximum duration to
- *     wait before sending a payload.
  */
 /**
  * A Publisher object allows you to publish messages to a specific topic.
@@ -46,6 +38,15 @@ var is = require('is');
  * @alias module:pubsub/publisher
  *
  * @resource [Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/publish}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {object} options.batching - Batching settings.
+ * @param {number} options.batching.maxBytes - The maximum number of bytes to
+ *     buffer before sending a payload.
+ * @param {number} options.batching.maxMessages - The maximum number of messages
+ *     to buffer before sending a payload.
+ * @param {number} options.batching.maxMilliseconds - The maximum duration to
+ *     wait before sending a payload.
  *
  * @example
  * var topic = pubsub.topic('my-topic');
