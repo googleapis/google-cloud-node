@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
 
@@ -127,11 +126,13 @@ describe('Datastore', function() {
       delete options.apiEndpoint;
       const datastore = new Datastore(options);
       var calledWith = datastore.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, apiEndpoint);
-      assert.strictEqual(calledWith.customEndpoint, false);
+      assert.strictEqual(calledWith.defaultApiEndpoint, apiEndpoint);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
+        'DATASTORE_EMULATOR_HOST'
+      ]);
       assert.deepStrictEqual(calledWith.protoServices, {
         Datastore: {
-          baseUrl: apiEndpoint,
           path: 'google/datastore/v1/datastore.proto',
           service: 'datastore.v1'
         }
@@ -168,8 +169,6 @@ describe('Datastore', function() {
       var calledWith = datastore.calledWith_[0];
 
       assert.strictEqual(datastore.projectIdRequired, false);
-      assert.strictEqual(datastore.baseUrl, OPTIONS.apiEndpoint);
-      assert.strictEqual(datastore.customEndpoint, true);
 
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(calledWith.protosDir, protosDir);
@@ -180,82 +179,6 @@ describe('Datastore', function() {
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
       assert.deepEqual(calledWith.grpcMetadata, {
         'google-cloud-resource-prefix': 'projects/' + datastore.projectId
-      });
-
-      Object.keys(calledWith.protoServices).forEach(function(serviceKey) {
-        var service = calledWith.protoServices[serviceKey];
-        var proto = datastore.protos[serviceKey];
-
-        if (is.object(service)) {
-          assert.strictEqual(proto.baseUrl, OPTIONS.apiEndpoint);
-        }
-      });
-    });
-
-    it('should use GOOGLE_CLOUD_DATASTORE_ENDPOINT if defined', function() {
-      var endpoint = 'localhost:8080';
-      process.env.GOOGLE_CLOUD_DATASTORE_ENDPOINT = endpoint;
-      process.env.DATASTORE_EMULATOR_HOST = 'emulator:8288';
-
-      var datastore = new Datastore({ projectId: PROJECT_ID });
-
-      var calledWith = datastore.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(datastore.protos).forEach(function(proto) {
-        proto = datastore.protos[proto];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
-
-      delete process.env.GOOGLE_CLOUD_DATASTORE_ENDPOINT;
-      delete process.env.DATASTORE_EMULATOR_HOST;
-    });
-
-    it('should use DATASTORE_EMULATOR_HOST if defined', function() {
-      var endpoint = 'localhost:8080';
-      process.env.DATASTORE_EMULATOR_HOST = endpoint;
-
-      var datastore = new Datastore({ projectId: PROJECT_ID });
-
-      var calledWith = datastore.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(datastore.protos).forEach(function(proto) {
-        proto = datastore.protos[proto];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
-
-      delete process.env.DATASTORE_EMULATOR_HOST;
-    });
-
-    it('should trim the protocol in custom endpoint', function() {
-      var endpoint = 'local:3888';
-      var endpointWithProtocol = 'http://' + endpoint;
-      var options = {
-        projectId: PROJECT_ID,
-        apiEndpoint: endpointWithProtocol
-      };
-
-      var datastore = new Datastore(options);
-
-      var calledWith = datastore.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(datastore.protos).forEach(function(proto) {
-        proto = datastore.protos[proto];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
       });
     });
   });

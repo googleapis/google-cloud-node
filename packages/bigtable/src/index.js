@@ -317,7 +317,6 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
-  var defaultApiEndpoint = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
   var config = {
@@ -329,7 +328,6 @@ function Bigtable(options) {
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Bigtable: {
-        baseUrl: defaultApiEndpoint,
         path: 'google/bigtable/v2/bigtable.proto',
         service: 'bigtable.v2'
       },

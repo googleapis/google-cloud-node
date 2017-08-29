@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var is = require('is');
 var nodeutil = require('util');
 var path = require('path');
 var proxyquire = require('proxyquire');
@@ -136,15 +135,18 @@ describe('Bigtable', function() {
 
       var calledWith = bigtable.calledWith_[0];
 
-      assert.strictEqual(calledWith.baseUrl, 'bigtable.googleapis.com');
-      assert.strictEqual(calledWith.customEndpoint, false);
-
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(calledWith.protosDir, protosDir);
-
+      assert.strictEqual(
+        calledWith.defaultApiEndpoint,
+        'bigtable.googleapis.com'
+      );
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_BIGTABLE_ENDPOINT',
+        'BIGTABLE_EMULATOR_HOST'
+      ]);
       assert.deepEqual(calledWith.protoServices, {
         Bigtable: {
-          baseUrl: 'bigtable.googleapis.com',
           path: 'google/bigtable/v2/bigtable.proto',
           service: 'bigtable.v2'
         },
@@ -172,104 +174,6 @@ describe('Bigtable', function() {
       ]);
 
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
-
-      Object.keys(calledWith.protoServices).forEach(function(serviceKey) {
-        var service = calledWith.protoServices[serviceKey];
-        var proto = bigtable.protos[serviceKey];
-
-        if (is.object(service)) {
-          assert.strictEqual(proto.baseUrl, service.baseUrl);
-        }
-      });
-    });
-
-    it('should work with the emulator', function() {
-      var endpoint = 'emulator:8288';
-      process.env.BIGTABLE_EMULATOR_HOST = endpoint;
-
-      var bigtable = new Bigtable({ projectId: PROJECT_ID });
-
-      var calledWith = bigtable.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(bigtable.protos).forEach(function(protoKey) {
-        var proto = bigtable.protos[protoKey];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
-
-      delete process.env.BIGTABLE_EMULATOR_HOST;
-    });
-
-    it('should use GOOGLE_CLOUD_BIGTABLE_ENDPOINT if defined', function() {
-      var endpoint = 'localhost:8080';
-      process.env.GOOGLE_CLOUD_BIGTABLE_ENDPOINT = endpoint;
-      process.env.BIGTABLE_EMULATOR_HOST = 'emulator:8288';
-
-      var bigtable = new Bigtable({ projectId: PROJECT_ID });
-
-      var calledWith = bigtable.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(bigtable.protos).forEach(function(protoKey) {
-        var proto = bigtable.protos[protoKey];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
-
-      delete process.env.GOOGLE_CLOUD_BIGTABLE_ENDPOINT;
-      delete process.env.BIGTABLE_EMULATOR_HOST;
-    });
-
-    it('should work with a custom apiEndpoint', function() {
-      var endpoint = 'local:3888';
-      var options = {
-        projectId: PROJECT_ID,
-        apiEndpoint: endpoint
-      };
-
-      var bigtable = new Bigtable(options);
-
-      var calledWith = bigtable.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, options.apiEndpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(bigtable.protos).forEach(function(protoKey) {
-        var proto = bigtable.protos[protoKey];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
-    });
-
-    it('should trim the protocol in custom endpoint', function() {
-      var endpoint = 'local:3888';
-      var endpointWithProtocol = 'http://' + endpoint;
-      var options = {
-        projectId: PROJECT_ID,
-        apiEndpoint: endpointWithProtocol
-      };
-
-      var bigtable = new Bigtable(options);
-
-      var calledWith = bigtable.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, endpoint);
-      assert.strictEqual(calledWith.customEndpoint, true);
-
-      Object.keys(bigtable.protos).forEach(function(protoKey) {
-        var proto = bigtable.protos[protoKey];
-
-        if (is.object(proto)) {
-          assert.strictEqual(proto.baseUrl, endpoint);
-        }
-      });
     });
 
     it('should set the projectName', function() {

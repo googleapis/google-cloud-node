@@ -156,7 +156,6 @@ var GRPC_SERVICE_OPTIONS = {
  * @alias module:common/grpc-service
  *
  * @param {object} config - Configuration object.
- * @param {string} config.baseUrl - The base URL to make API requests to.
  * @param {string[]} config.environmentVariables - Array of environment
  *     variables containing the hostname(s) to make API requests to.
  * @param {string} config.defaultApiEndpoint - Defaut hostname to make
@@ -176,20 +175,11 @@ function GrpcService(config, options) {
     return global.GCLOUD_SANDBOX_ENV;
   }
 
-  if (config.defaultApiEndpoint) {
-    var baseInfo = util.determineBaseUrl(
-      options,
-      config.environmentVariables,
-      config.defaultApiEndpoint,
-      true
-    );
-    config.baseUrl = baseInfo.apiEndpoint;
-    config.customEndpoint = baseInfo.customEndpoint;
-  }
+  config.trimProtocol = true;
 
   Service.call(this, config, options);
 
-  if (config.customEndpoint) {
+  if (this.customEndpoint) {
     this.grpcCredentials = grpc.credentials.createInsecure();
   }
 
@@ -226,10 +216,16 @@ function GrpcService(config, options) {
 
     self.protos[name] = service;
 
-    if (service && config.customEndpoint) {
-      service.baseUrl = config.baseUrl;
+    // If it's a custom endpoint we override every
+    // baseUrl. Otherwise if there is one specified at the proto level
+    // we pick that up. The default baseUrl is used when nothing else
+    // is available
+    if (service && self.customEndpoint) {
+      service.baseUrl = self.baseUrl;
     } else if (service && protoConfig.baseUrl) {
       service.baseUrl = protoConfig.baseUrl;
+    } else if (service) {
+      service.baseUrl = self.baseUrl;
     }
   });
 }

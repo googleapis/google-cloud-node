@@ -309,8 +309,6 @@ function Datastore(options) {
     return new Datastore(options);
   }
 
-  var baseUrl = 'datastore.googleapis.com';
-
   this.namespace = options.namespace;
   this.projectId = process.env.DATASTORE_PROJECT_ID || options.projectId;
 
@@ -323,12 +321,11 @@ function Datastore(options) {
       'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
       'DATASTORE_EMULATOR_HOST'
     ],
-    defaultApiEndpoint: baseUrl,
+    defaultApiEndpoint: 'datastore.googleapis.com',
     projectIdRequired: false,
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Datastore: {
-        baseUrl: baseUrl,
         path: 'google/datastore/v1/datastore.proto',
         service: 'datastore.v1'
       }
