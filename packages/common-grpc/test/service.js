@@ -25,13 +25,23 @@ var proxyquire = require('proxyquire');
 var retryRequest = require('retry-request');
 var sinon = require('sinon').sandbox.create();
 var through = require('through2');
+var nodeutil = require('util');
+
 var util = require('@google-cloud/common').util;
+var common = require('@google-cloud/common');
 
 var fakeUtil = extend({}, util);
 
-function FakeService() {
-  this.calledWith_ = arguments;
+function createFake(Class) {
+  function Fake() {
+    this.calledWith_ = arguments;
+    Class.apply(this, arguments);
+  }
+  nodeutil.inherits(Fake, Class);
+  return Fake;
 }
+
+var FakeService = createFake(common.Service);
 
 var retryRequestOverride;
 function fakeRetryRequest() {
@@ -264,12 +274,14 @@ describe('GrpcService', function() {
 
       var calledWith = grpcService.calledWith_;
       assert.strictEqual(calledWith[0], CONFIG);
+      assert.strictEqual(calledWith[0].trimProtocol, true);
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
     it('should set insecure credentials if using customEndpoint', function() {
-      var config = extend({}, CONFIG, { customEndpoint: true });
-      var grpcService = new GrpcService(config, OPTIONS);
+      var options = extend({}, OPTIONS, { apiEndpoint: 'some.custom' });
+      var grpcService = new GrpcService(CONFIG, options);
+      assert.strictEqual(grpcService.customEndpoint, true);
       assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
     });
 
@@ -373,18 +385,14 @@ describe('GrpcService', function() {
 
     it('should store the baseUrl properly', function() {
       var fakeBaseUrl = 'a.googleapis.com';
-
-      grpcLoadOverride = function() {
-        return MOCK_GRPC_API;
-      };
-
       var config = extend(true, {}, CONFIG, {
         protoServices: {
           CustomServiceName: {
             path: '../file/path.proto',
             baseUrl: fakeBaseUrl
           }
-        }
+        },
+        defaultApiEndpoint: 'some.url'
       });
 
       var grpcService = new GrpcService(config, OPTIONS);
@@ -392,6 +400,70 @@ describe('GrpcService', function() {
       assert.strictEqual(
         grpcService.protos.CustomServiceName.baseUrl,
         fakeBaseUrl
+      );
+    });
+
+    it('should override the baseUrl when using a custom endpoint', function() {
+      grpcLoadOverride = function() {
+        // Let's do a deep clone
+        return JSON.parse(JSON.stringify(MOCK_GRPC_API));
+      };
+
+      var config = extend(true, {}, CONFIG, {
+        protoServices: {
+          CustomServiceName: {
+            path: '../file/path.proto',
+            baseUrl: 'existing.url'
+          },
+          AnotherService: {
+            path: '../file/path.proto'
+          }
+        },
+        environmentVariables: ['MY_ENV_VAR'],
+        defaultApiEndpoint: 'some.url'
+      });
+
+      process.env.MY_ENV_VAR = 'overriden';
+      var grpcService = new GrpcService(config, OPTIONS);
+      delete process.env.MY_ENV_VAR;
+
+      assert.strictEqual(
+        grpcService.protos.CustomServiceName.baseUrl,
+        'overriden'
+      );
+      assert.strictEqual(
+        grpcService.protos.AnotherService.baseUrl,
+        'overriden'
+      );
+    });
+
+    it('should set the baseUrl in services where its missing', function() {
+      grpcLoadOverride = function() {
+        // Let's do a deep clone
+        return JSON.parse(JSON.stringify(MOCK_GRPC_API));
+      };
+      var config = extend(true, {}, CONFIG, {
+        protoServices: {
+          CustomServiceName: {
+            path: '../file/path.proto'
+          },
+          AnotherService: {
+            path: '../file/path.proto',
+            baseUrl: 'existing.url'
+          }
+        },
+        defaultApiEndpoint: 'some.url'
+      });
+
+      var grpcService = new GrpcService(config, OPTIONS);
+
+      assert.strictEqual(
+        grpcService.protos.AnotherService.baseUrl,
+        'existing.url'
+      );
+      assert.strictEqual(
+        grpcService.protos.CustomServiceName.baseUrl,
+        config.defaultApiEndpoint
       );
     });
 

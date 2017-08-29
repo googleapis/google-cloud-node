@@ -92,7 +92,13 @@ var Zone = require('./zone.js');
  *
  * @resource [What is Google Compute Engine?]{@link https://cloud.google.com/compute/docs}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_GCE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ * to reach GCE.
  */
 function Compute(options) {
   if (!(this instanceof Compute)) {
@@ -101,7 +107,8 @@ function Compute(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/compute/v1',
+    environmentVariables: ['GOOGLE_CLOUD_GCE_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json')
   };

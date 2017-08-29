@@ -47,6 +47,14 @@ var Instance = require('./instance.js');
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  * @resource [Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_BIGTABLE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
+ * The legacy `BIGTABLE_EMULATOR_HOST` environment variable is still
+ * supported but will be deprecated in future releases. Please use
+ * `GOOGLE_CLOUD_BIGTABLE_ENDPOINT` instead.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used
  *     to reach Bigtable. This is useful for connecting to your local Bigtable
@@ -309,24 +317,17 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
-  var baseUrl = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
-  var customEndpoint = options.apiEndpoint ||
-    process.env.BIGTABLE_EMULATOR_HOST;
-
-  if (customEndpoint) {
-    baseUrl = customEndpoint;
-    adminBaseUrl = baseUrl;
-  }
-
   var config = {
-    baseUrl: baseUrl,
-    customEndpoint: !!customEndpoint,
+    environmentVariables: [
+      'GOOGLE_CLOUD_BIGTABLE_ENDPOINT',
+      'BIGTABLE_EMULATOR_HOST'
+    ],
+    defaultApiEndpoint: 'bigtable.googleapis.com',
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Bigtable: {
-        baseUrl: baseUrl,
         path: 'google/bigtable/v2/bigtable.proto',
         service: 'bigtable.v2'
       },

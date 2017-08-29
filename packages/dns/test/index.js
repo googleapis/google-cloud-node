@@ -126,7 +126,11 @@ describe('DNS', function() {
       var calledWith = dns.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/dns/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_DNS_ENDPOINT'
+      ]);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform'

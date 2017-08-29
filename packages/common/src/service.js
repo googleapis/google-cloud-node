@@ -41,7 +41,13 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
  * @alias module:common/service
  *
  * @param {object} config - Configuration object.
- * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {string[]} config.environmentVariables - Array of environment
+ *     variables containing the hostname(s) to make API requests to.
+ * @param {string} config.defaultApiEndpoint - Defaut hostname to make
+ *     API requests to.
+ * @param {boolean} config.trimProtocol - If set to true, we
+ *     remove the leading http(s) protocol from the baseUrl. Useful
+ *     for grpc based services.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {object=} options - [Configuration object](#/docs).
  */
@@ -54,9 +60,20 @@ function Service(config, options) {
     email: options.email
   });
 
+  if (!config.baseUrl) {
+    var baseInfo = util.determineBaseUrl(
+      options,
+      config.environmentVariables,
+      config.defaultApiEndpoint,
+      config.trimProtocol);
+    this.baseUrl = baseInfo.apiEndpoint;
+    this.customEndpoint = baseInfo.customEndpoint;
+  } else {
+    this.baseUrl = config.baseUrl;
+    this.customEndpoint = config.customEndpoint;
+  }
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
-  this.baseUrl = config.baseUrl;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];

@@ -20,6 +20,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var createErrorClass = require('create-error-class');
 var duplexify = require('duplexify');
 var ent = require('ent');
@@ -788,3 +789,51 @@ function promisifyAll(Class, options) {
 }
 
 util.promisifyAll = promisifyAll;
+
+/**
+ * Determines a service base URL using the following precendence rule:
+ * 1 - Property 'apiEndpoint' in the Service configuration object.
+ * 2 - Environment variables.
+ * 3 - Default endpoint.
+ *
+ * @param {object=} options - Service configuration object.
+ * @param {array} environmentVariables - Array of accepted environment
+ *     variables through which a custom api endpoint can be specified.
+ * @param {string=} defaultApiEndpoint - Fallback api endpoint to use.
+ * @param {boolean} trimProtocol - If true, trim the leading trimProtocol.
+ *     Useful for grcp based service endpoints.
+ * @return {object=} base - Object containg the baseUrl and a boolean
+ *     property indicating whether the baseUrl is a customEndpoint or not.
+ * */
+function determineBaseUrl(options, environmentVariables,
+  defaultApiEndpoint, trimProtocol) {
+  var leadingProtocol = new RegExp('^https*://');
+  var trailingSlashes = new RegExp('/*$');
+  var base = {};
+  var candidates = [];
+  candidates.push(options.apiEndpoint);
+  candidates.push(options.servicePath);
+  environmentVariables = arrify(environmentVariables);
+  for (var i = 0; i < environmentVariables.length; i++) {
+    candidates.push(process.env[environmentVariables[i]]);
+  }
+  candidates.push(defaultApiEndpoint);
+  for (var j = 0; j < candidates.length; j++) {
+    if (candidates[j]) {
+      base.apiEndpoint = candidates[j];
+      // The last element in the array is the
+      // default endpoint, everything else is considired
+      // a custom endpoint
+      base.customEndpoint = j !== candidates.length - 1;
+      break;
+    }
+  }
+  base.apiEndpoint = base.apiEndpoint || '';
+  base.apiEndpoint = base.apiEndpoint.replace(trailingSlashes, '');
+  if (trimProtocol) {
+    base.apiEndpoint = base.apiEndpoint.replace(leadingProtocol, '');
+  }
+  return base;
+}
+
+util.determineBaseUrl = determineBaseUrl;

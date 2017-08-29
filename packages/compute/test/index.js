@@ -212,7 +212,11 @@ describe('Compute', function() {
       var calledWith = compute.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/compute/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_GCE_ENDPOINT'
+      ]);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute'
       ]);

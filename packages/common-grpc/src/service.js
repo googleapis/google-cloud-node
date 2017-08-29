@@ -146,13 +146,20 @@ var GRPC_SERVICE_OPTIONS = {
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
  *
+ * The baseUrl should be specified by the service. Prefer the combination of
+ * options, environmentVariables, defaultApiEndpoint over hardcoding a value
+ * in the config object. The former gives more flexibility to the end user.
+ *
  * This handles making authenticated requests by exposing a `makeReq_` function.
  *
  * @constructor
  * @alias module:common/grpc-service
  *
  * @param {object} config - Configuration object.
- * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {string[]} config.environmentVariables - Array of environment
+ *     variables containing the hostname(s) to make API requests to.
+ * @param {string} config.defaultApiEndpoint - Defaut hostname to make
+ *     API requests to.
  * @param {object} config.grpcMetadata - Metadata to send with every request.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {string} config.protosDir - The root directory where proto files live.
@@ -168,9 +175,11 @@ function GrpcService(config, options) {
     return global.GCLOUD_SANDBOX_ENV;
   }
 
+  config.trimProtocol = true;
+
   Service.call(this, config, options);
 
-  if (config.customEndpoint) {
+  if (this.customEndpoint) {
     this.grpcCredentials = grpc.credentials.createInsecure();
   }
 
@@ -202,12 +211,21 @@ function GrpcService(config, options) {
 
   Object.keys(protoServices).forEach(function(name) {
     var protoConfig = protoServices[name];
-    var service = self.loadProtoFile_(protoConfig, config);
+    var service = GrpcService.prototype.loadProtoFile_
+      .call(self, protoConfig, config);
 
     self.protos[name] = service;
 
-    if (protoConfig.baseUrl) {
+    // If it's a custom endpoint we override every
+    // baseUrl. Otherwise if there is one specified at the proto level
+    // we pick that up. The default baseUrl is used when nothing else
+    // is available
+    if (service && self.customEndpoint) {
+      service.baseUrl = self.baseUrl;
+    } else if (service && protoConfig.baseUrl) {
       service.baseUrl = protoConfig.baseUrl;
+    } else if (service) {
+      service.baseUrl = self.baseUrl;
     }
   });
 }

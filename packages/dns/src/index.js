@@ -39,12 +39,18 @@ var Zone = require('./zone.js');
  * programmable, authoritative DNS service can be used to easily publish and
  * manage DNS records using the same infrastructure relied upon by Google.
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_DNS_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @constructor
  * @alias module:dns
  *
  * @resource [What is Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ * to reach DNS.
  */
 function DNS(options) {
   if (!(this instanceof DNS)) {
@@ -53,7 +59,8 @@ function DNS(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/dns/v1',
+    environmentVariables: ['GOOGLE_CLOUD_DNS_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com/dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
       'https://www.googleapis.com/auth/cloud-platform'

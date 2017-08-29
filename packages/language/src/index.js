@@ -21,6 +21,7 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var gapic = {
   v1: require('./v1'),
@@ -37,6 +38,10 @@ const VERSION = require('../package.json').version;
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
+ * The servicePath from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_LANGUAGE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @constructor
  * @alias module:language
  *
@@ -47,6 +52,27 @@ const VERSION = require('../package.json').version;
  *     API remote host.
  */
 function languageV1(options) {
+  options.apiEndpoint = options.servicePath;
+  var baseInfo = common.util.determineBaseUrl(
+    options,
+    'GOOGLE_CLOUD_LANGUAGE_ENDPOINT',
+    gapic.v1.SERVICE_ADDRESS,
+    true
+  );
+
+  // The environment variable can take a port
+  // pull it from the apiEnpoint if it's there,
+  // otherwise fallback to SERVICE_PORT
+  var portFromEndpoint;
+  var parts = baseInfo.apiEndpoint.split(':', 2);
+  if (parts.length === 2) {
+    portFromEndpoint = parts[1];
+  }
+  options.servicePath = parts[0];
+  options.customEndpoint = baseInfo.customEndpoint;
+  options.port = options.port || portFromEndpoint ||
+    gapic.v1.DEFAULT_SERVICE_PORT;
+
   // Define the header options.
   options = extend({}, options, {
     libName: 'gccl',
@@ -65,6 +91,10 @@ function languageV1(options) {
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
+ * The servicePath from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_LANGUAGE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
@@ -72,6 +102,27 @@ function languageV1(options) {
  *     API remote host.
  */
 function languageV1beta2(options) {
+  options.apiEndpoint = options.servicePath;
+  var baseInfo = common.util.determineBaseUrl(
+    options,
+    'GOOGLE_CLOUD_LANGUAGE_ENDPOINT',
+    gapic.v1beta2.SERVICE_ADDRESS,
+    true
+  );
+
+  // The environment variable can take a port
+  // pull it from the apiEnpoint if it's there,
+  // otherwise fallback to SERVICE_PORT
+  var portFromEndpoint;
+  var parts = baseInfo.apiEndpoint.split(':', 2);
+  if (parts.length === 2) {
+    portFromEndpoint = parts[1];
+  }
+  options.servicePath = parts[0];
+  options.customEndpoint = baseInfo.customEndpoint;
+  options.port = options.port || portFromEndpoint ||
+    gapic.v1beta2.DEFAULT_SERVICE_PORT;
+
   // Define the header options.
   options = extend({}, options, {
     libName: 'gccl',

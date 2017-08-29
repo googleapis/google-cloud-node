@@ -38,7 +38,7 @@ describe('Service', function() {
 
   var CONFIG = {
     scopes: [],
-    baseUrl: 'base-url',
+    defaultApiEndpoint: 'base-url',
     projectIdRequired: false,
     packageJson: {
       name: '@google-cloud/service',
@@ -104,7 +104,11 @@ describe('Service', function() {
     });
 
     it('should localize the baseUrl', function() {
-      assert.strictEqual(service.baseUrl, CONFIG.baseUrl);
+      assert.strictEqual(service.baseUrl, CONFIG.defaultApiEndpoint);
+    });
+
+    it('should localize the customEndpoint', function() {
+      assert.strictEqual(service.customEndpoint, false);
     });
 
     it('should localize the getCredentials method', function() {

@@ -143,9 +143,13 @@ describe('BigQuery', function() {
       assert(bq instanceof Service);
 
       var calledWith = bq.calledWith_[0];
-
-      var baseUrl = 'https://www.googleapis.com/bigquery/v2';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_BIGQUERY_ENDPOINT'
+      ]);
+      assert.strictEqual(
+        calledWith.defaultApiEndpoint,
+        'https://www.googleapis.com/bigquery/v2'
+      );
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigquery'
       ]);

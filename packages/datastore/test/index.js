@@ -20,6 +20,8 @@ var assert = require('assert');
 var extend = require('extend');
 var path = require('path');
 var proxyquire = require('proxyquire');
+
+var commonGrpc = require('@google-cloud/common-grpc');
 var util = require('@google-cloud/common').util;
 
 var fakeEntity = {
@@ -42,6 +44,7 @@ var fakeUtil = extend({}, util);
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
+  return commonGrpc.Service.apply(this, arguments);
 }
 
 function FakeQuery() {
@@ -63,7 +66,7 @@ describe('Datastore', function() {
 
   var OPTIONS = {
     projectId: PROJECT_ID,
-    apiEndpoint: 'http://endpoint',
+    apiEndpoint: 'endpoint',
     credentials: {},
     keyFilename: 'key/file',
     email: 'email',
@@ -116,21 +119,24 @@ describe('Datastore', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should set the default base URL', function() {
-      assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
-    });
+    it('should set default API connection details', function() {
+      var apiEndpoint = 'datastore.googleapis.com';
 
-    it('should set default API connection details', function(done) {
-      var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
-
-      Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
-        Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
-
-        assert.strictEqual(customApiEndpoint, OPTIONS.apiEndpoint);
-        done();
-      };
-
-      new Datastore(OPTIONS);
+      const options = Object.assign({}, OPTIONS);
+      delete options.apiEndpoint;
+      const datastore = new Datastore(options);
+      var calledWith = datastore.calledWith_[0];
+      assert.strictEqual(calledWith.defaultApiEndpoint, apiEndpoint);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
+        'DATASTORE_EMULATOR_HOST'
+      ]);
+      assert.deepStrictEqual(calledWith.protoServices, {
+        Datastore: {
+          path: 'google/datastore/v1/datastore.proto',
+          service: 'datastore.v1'
+        }
+      });
     });
 
     it('should localize the namespace', function() {
@@ -156,21 +162,16 @@ describe('Datastore', function() {
     it('should inherit from GrpcService', function() {
       var datastore = new Datastore(OPTIONS);
 
+      // using modelo's isInstance instead of the built-in
+      // instanceof. Required when doing multiple inheritance.
+      assert(datastore.isInstance(FakeGrpcService));
+
       var calledWith = datastore.calledWith_[0];
 
-      assert.strictEqual(calledWith.projectIdRequired, false);
-      assert.strictEqual(calledWith.baseUrl, datastore.baseUrl_);
-      assert.strictEqual(calledWith.customEndpoint, datastore.customEndpoint_);
+      assert.strictEqual(datastore.projectIdRequired, false);
 
       var protosDir = path.resolve(__dirname, '../protos');
       assert.strictEqual(calledWith.protosDir, protosDir);
-
-      assert.deepStrictEqual(calledWith.protoServices, {
-        Datastore: {
-          path: 'google/datastore/v1/datastore.proto',
-          service: 'datastore.v1'
-        }
-      });
 
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/datastore'
@@ -322,84 +323,6 @@ describe('Datastore', function() {
     it('should return a Transaction object', function() {
       var transaction = datastore.transaction();
       assert.strictEqual(transaction.calledWith_[0], datastore);
-    });
-  });
-
-  describe('determineBaseUrl_', function() {
-    function setHost(host) {
-      process.env.DATASTORE_EMULATOR_HOST = host;
-    }
-
-    beforeEach(function() {
-      delete process.env.DATASTORE_EMULATOR_HOST;
-    });
-
-    it('should default to defaultBaseUrl_', function() {
-      var defaultBaseUrl_ = 'defaulturl';
-      datastore.defaultBaseUrl_ = defaultBaseUrl_;
-
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, defaultBaseUrl_);
-    });
-
-    it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost:8080';
-
-      setHost('localhost:8080/');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
-
-      setHost('localhost:8080//');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, expectedBaseUrl);
-    });
-
-    it('should remove the protocol if specified', function() {
-      setHost('http://localhost:8080');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
-
-      setHost('https://localhost:8080');
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.baseUrl_, 'localhost:8080');
-    });
-
-    it('should not set customEndpoint_ when using default baseurl', function() {
-      var datastore = new Datastore({ projectId: PROJECT_ID });
-      datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.customEndpoint_, undefined);
-    });
-
-    it('should set customEndpoint_ when using custom API endpoint', function() {
-      datastore.determineBaseUrl_('apiEndpoint');
-      assert.strictEqual(datastore.customEndpoint_, true);
-    });
-
-    it('should set baseUrl when using custom API endpoint', function() {
-      datastore.determineBaseUrl_('apiEndpoint');
-      assert.strictEqual(datastore.baseUrl_, 'apiEndpoint');
-    });
-
-    describe('with DATASTORE_EMULATOR_HOST environment variable', function() {
-      var DATASTORE_EMULATOR_HOST = 'localhost:9090';
-
-      beforeEach(function() {
-        setHost(DATASTORE_EMULATOR_HOST);
-      });
-
-      after(function() {
-        delete process.env.DATASTORE_EMULATOR_HOST;
-      });
-
-      it('should use the DATASTORE_EMULATOR_HOST env var', function() {
-        datastore.determineBaseUrl_();
-        assert.strictEqual(datastore.baseUrl_, DATASTORE_EMULATOR_HOST);
-      });
-
-      it('should set customEndpoint_', function() {
-        datastore.determineBaseUrl_();
-        assert.strictEqual(datastore.customEndpoint_, true);
-      });
     });
   });
 });

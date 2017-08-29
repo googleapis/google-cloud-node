@@ -58,6 +58,14 @@ var Transaction = require('./transaction.js');
  *
  * @resource [Cloud Datastore Concepts Overview]{@link https://cloud.google.com/datastore/docs/concepts/overview}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_DATASTORE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
+ * The legacy `DATASTORE_EMULATOR_HOST` environment variable is still
+ * supported but will be deprecated in future releases. Please use
+ * `GOOGLE_CLOUD_DATASTORE_ENDPOINT` instead.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used
  *     to reach Datastore. This is useful for connecting to your local Datastore
@@ -301,16 +309,20 @@ function Datastore(options) {
     return new Datastore(options);
   }
 
-  this.defaultBaseUrl_ = 'datastore.googleapis.com';
-  this.determineBaseUrl_(options.apiEndpoint);
-
   this.namespace = options.namespace;
   this.projectId = process.env.DATASTORE_PROJECT_ID || options.projectId;
 
+  // Let's set the resolved projectId in the options since
+  // common.Service will look it up there later.
+  options.projectId = this.projectId;
+
   var config = {
+    environmentVariables: [
+      'GOOGLE_CLOUD_DATASTORE_ENDPOINT',
+      'DATASTORE_EMULATOR_HOST'
+    ],
+    defaultApiEndpoint: 'datastore.googleapis.com',
     projectIdRequired: false,
-    baseUrl: this.baseUrl_,
-    customEndpoint: this.customEndpoint_,
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Datastore: {
@@ -517,33 +529,6 @@ Datastore.prototype.key = function(options) {
  */
 Datastore.prototype.transaction = function() {
   return new Transaction(this);
-};
-
-/**
- * Determine the appropriate endpoint to use for API requests. If not explicitly
- * defined, check for the "DATASTORE_EMULATOR_HOST" environment variable, used
- * to connect to a local Datastore server.
- *
- * @private
- *
- * @param {string} customApiEndpoint - Custom API endpoint.
- */
-Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
-  var baseUrl = this.defaultBaseUrl_;
-  var leadingProtocol = new RegExp('^https*://');
-  var trailingSlashes = new RegExp('/*$');
-
-  if (customApiEndpoint) {
-    baseUrl = customApiEndpoint;
-    this.customEndpoint_ = true;
-  } else if (process.env.DATASTORE_EMULATOR_HOST) {
-    baseUrl = process.env.DATASTORE_EMULATOR_HOST;
-    this.customEndpoint_ = true;
-  }
-
-  this.baseUrl_ = baseUrl
-    .replace(leadingProtocol, '')
-    .replace(trailingSlashes, '');
 };
 
 Datastore.DatastoreRequest = DatastoreRequest;
