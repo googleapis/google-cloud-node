@@ -125,11 +125,9 @@ describe('DNS', function() {
 
       var calledWith = dns.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com';
-      var basePath = '/dns/v1';
+      var baseUrl = 'https://www.googleapis.com/dns/v1';
 
       assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
-      assert.strictEqual(calledWith.basePath, basePath);
       assert.deepEqual(calledWith.environmentVariables, [
         'GOOGLE_CLOUD_DNS_ENDPOINT'
       ]);

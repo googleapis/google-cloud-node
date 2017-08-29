@@ -60,8 +60,7 @@ function DNS(options) {
 
   var config = {
     environmentVariables: ['GOOGLE_CLOUD_DNS_ENDPOINT'],
-    defaultApiEndpoint: 'https://www.googleapis.com',
-    basePath: '/dns/v1',
+    defaultApiEndpoint: 'https://www.googleapis.com/dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
       'https://www.googleapis.com/auth/cloud-platform'

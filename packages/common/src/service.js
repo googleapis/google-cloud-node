@@ -45,8 +45,9 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
  *     variables containing the hostname(s) to make API requests to.
  * @param {string} config.defaultApiEndpoint - Defaut hostname to make
  *     API requests to.
- * @param {string} config.basePath - Base path to make API requests to.
- *     This and the hostname form the baseUrl
+ * @param {boolean} config.trimProtocol - If set to true, we
+ *     remove the leading http(s) protocol from the baseUrl. Useful
+ *     for grpc based services.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {object} options - [Configuration object](#/docs).
  */
@@ -63,7 +64,7 @@ function Service(config, options) {
       config.environmentVariables,
       config.defaultApiEndpoint,
       config.trimProtocol);
-    this.baseUrl = baseInfo.apiEndpoint + (config.basePath || '');
+    this.baseUrl = baseInfo.apiEndpoint;
     this.customEndpoint = baseInfo.customEndpoint;
   } else {
     this.baseUrl = config.baseUrl;

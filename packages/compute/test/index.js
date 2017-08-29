@@ -211,11 +211,9 @@ describe('Compute', function() {
 
       var calledWith = compute.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com';
-      var basePath = '/compute/v1';
+      var baseUrl = 'https://www.googleapis.com/compute/v1';
 
       assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
-      assert.strictEqual(calledWith.basePath, basePath);
       assert.deepEqual(calledWith.environmentVariables, [
         'GOOGLE_CLOUD_GCE_ENDPOINT'
       ]);

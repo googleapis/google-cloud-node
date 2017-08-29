@@ -73,8 +73,7 @@ function BigQuery(options) {
 
   var config = {
     environmentVariables: ['GOOGLE_CLOUD_BIGQUERY_ENDPOINT'],
-    defaultApiEndpoint: 'https://www.googleapis.com',
-    basePath: '/bigquery/v2',
+    defaultApiEndpoint: 'https://www.googleapis.com/bigquery/v2',
     scopes: ['https://www.googleapis.com/auth/bigquery'],
     packageJson: require('../package.json')
   };

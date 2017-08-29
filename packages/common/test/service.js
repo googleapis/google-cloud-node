@@ -101,15 +101,6 @@ describe('Service', function() {
       assert.strictEqual(service.baseUrl, CONFIG.defaultApiEndpoint);
     });
 
-    it('should append the basePath to baseUrl if available', function() {
-      const config = extend({}, CONFIG, { basePath: '/service/v1' });
-      var svc = new Service(config, OPTIONS);
-      assert.strictEqual(
-        svc.baseUrl,
-        CONFIG.defaultApiEndpoint + '/service/v1'
-      );
-    });
-
     it('should localize the customEndpoint', function() {
       assert.strictEqual(service.customEndpoint, false);
     });

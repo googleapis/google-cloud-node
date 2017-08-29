@@ -148,9 +148,8 @@ describe('BigQuery', function() {
       ]);
       assert.strictEqual(
         calledWith.defaultApiEndpoint,
-        'https://www.googleapis.com'
+        'https://www.googleapis.com/bigquery/v2'
       );
-      assert.strictEqual(calledWith.basePath, '/bigquery/v2');
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigquery'
       ]);

@@ -108,8 +108,7 @@ function Compute(options) {
 
   var config = {
     environmentVariables: ['GOOGLE_CLOUD_GCE_ENDPOINT'],
-    defaultApiEndpoint: 'https://www.googleapis.com',
-    basePath: '/compute/v1',
+    defaultApiEndpoint: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json')
   };
