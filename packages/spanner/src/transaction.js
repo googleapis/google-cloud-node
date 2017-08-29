@@ -164,7 +164,7 @@ Transaction.prototype.begin = function(callback) {
   var self = this;
   var options;
 
-  if (!this.options) {
+  if (!this.readOnly) {
     options = {
       readWrite: {}
     };

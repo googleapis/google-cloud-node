@@ -51,7 +51,14 @@ var PartialResultStream = require('./partial-result-stream.js');
  * @param {object=} options - Timestamp options.
  */
 function TransactionRequest(options) {
+  this.readOnly = false;
+
   if (options && !is.empty(options)) {
+    options = extend({}, options);
+
+    this.readOnly = !!options.readOnly;
+    delete options.readOnly;
+
     this.options = TransactionRequest.formatTimestampOptions_(options);
   }
 }

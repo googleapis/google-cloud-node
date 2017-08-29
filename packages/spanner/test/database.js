@@ -1126,12 +1126,7 @@ describe('Database', function() {
           },
           createTransaction_: function(session, options) {
             assert.strictEqual(session, SESSION);
-
-            var expectedOptions = extend({}, OPTIONS);
-            delete expectedOptions.readOnly;
-
-            assert.notStrictEqual(options, OPTIONS);
-            assert.deepEqual(options, expectedOptions);
+            assert.strictEqual(options, OPTIONS);
 
             setImmediate(done);
             return TRANSACTION;

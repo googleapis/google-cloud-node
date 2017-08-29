@@ -180,6 +180,7 @@ describe('Transaction', function() {
 
   describe('begin', function() {
     var OPTIONS = {
+      readOnly: true,
       boundOptions: true,
       returnReadTimestamp: true
     };
@@ -193,6 +194,7 @@ describe('Transaction', function() {
     it('should make the correct request', function(done) {
       var transaction = new Transaction(SESSION, OPTIONS);
 
+      transaction.readOnly = true;
       transaction.request = function(config) {
         assert.deepEqual(config.reqOpts, EXPECTED_REQ_OPTS);
         assert.strictEqual(config.method(), util.noop);
@@ -203,6 +205,7 @@ describe('Transaction', function() {
     });
 
     it('should not require options', function(done) {
+      transaction.readOnly = false;
       transaction.request = function(config) {
         assert.deepEqual(config.reqOpts, {
           options: {
