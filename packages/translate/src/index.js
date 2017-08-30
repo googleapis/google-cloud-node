@@ -43,16 +43,14 @@ var PKG = require('../package.json');
  * @resource [Getting Started]{@link https://cloud.google.com/translate/v2/getting_started}
  * @resource [Identifying your application to Google]{@link https://cloud.google.com/translate/v2/using_rest#auth}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_TRANSLATE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
  * @param {string=} options.key - An API key.
- *
- * @example
- * //-
- * // <h3>Custom Translate API</h3>
- * //
- * // The environment variable, `GOOGLE_CLOUD_TRANSLATE_ENDPOINT`, is honored as
- * // a custom backend which our library will send requests to.
- * //-
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach the Resource API.
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {
@@ -62,20 +60,15 @@ function Translate(options) {
     return new Translate(options);
   }
 
-  var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
-
-  if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
-    baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
-      .replace(/\/+$/, '');
-  }
-
   if (options.key) {
     this.options = options;
     this.key = options.key;
   }
 
+  var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
   var config = {
-    baseUrl: baseUrl,
+    defaultApiEndpoint: baseUrl,
+    environmentVariables: [ 'GOOGLE_CLOUD_TRANSLATE_ENDPOINT' ],
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     packageJson: require('../package.json'),
     projectIdRequired: false

@@ -96,7 +96,10 @@ describe('Translate', function() {
       var calledWith = translate.calledWith_[0];
       var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
+      assert.deepStrictEqual(calledWith.environmentVariables,
+        [ 'GOOGLE_CLOUD_TRANSLATE_ENDPOINT' ]
+      );
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
@@ -121,37 +124,6 @@ describe('Translate', function() {
 
       it('should localize the api key', function() {
         assert.strictEqual(translate.key, KEY_OPTIONS.key);
-      });
-    });
-
-    describe('GOOGLE_CLOUD_TRANSLATE_ENDPOINT', function() {
-      var CUSTOM_ENDPOINT = '...';
-      var translate;
-
-      before(function() {
-        process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = CUSTOM_ENDPOINT;
-        translate = new Translate(OPTIONS);
-      });
-
-      after(function() {
-        delete process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT;
-      });
-
-      it('should correctly set the baseUrl', function() {
-        var baseUrl = translate.calledWith_[0].baseUrl;
-
-        assert.strictEqual(baseUrl, CUSTOM_ENDPOINT);
-      });
-
-      it('should remove trailing slashes', function() {
-        var expectedBaseUrl = 'http://localhost:8080';
-
-        process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = 'http://localhost:8080//';
-
-        var translate = new Translate(OPTIONS);
-        var baseUrl = translate.calledWith_[0].baseUrl;
-
-        assert.strictEqual(baseUrl, expectedBaseUrl);
       });
     });
   });
