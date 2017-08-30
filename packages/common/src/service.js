@@ -58,19 +58,16 @@ function Service(config, options) {
     email: options.email
   });
 
-  if (!config.baseUrl) {
-    var baseInfo = util.determineBaseUrl(
-      options,
-      config.environmentVariables,
-      config.defaultApiEndpoint,
-      config.trimProtocol);
-    this.baseUrl = baseInfo.apiEndpoint;
-    this.customEndpoint = baseInfo.customEndpoint;
-  } else {
-    this.baseUrl = config.baseUrl;
-    this.customEndpoint = config.customEndpoint;
-  }
+  var baseInfo = util.determineBaseUrl(
+    options,
+    config.environmentVariables,
+    config.defaultApiEndpoint,
+    config.trimProtocol);
+
+  this.baseUrl = baseInfo.apiEndpoint;
+  this.customEndpoint = baseInfo.customEndpoint;
   reqCfg.customEndpoint = this.customEndpoint;
+
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
