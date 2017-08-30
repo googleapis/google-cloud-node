@@ -45,9 +45,15 @@ var Project = require('./project.js');
  * @alias module:resource
  * @constructor
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_RESOURCE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @resource [What is the Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach the Resource API.
  */
 function Resource(options) {
   if (!(this instanceof Resource)) {
@@ -58,7 +64,8 @@ function Resource(options) {
   }
 
   var config = {
-    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
+    defaultApiEndpoint: 'https://cloudresourcemanager.googleapis.com/v1',
+    environmentVariables: [ 'GOOGLE_CLOUD_RESOURCE_ENDPOINT' ],
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
     packageJson: require('../package.json')

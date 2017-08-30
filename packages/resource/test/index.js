@@ -135,7 +135,10 @@ describe('Resource', function() {
       var calledWith = resource.calledWith_[0];
 
       var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
+      assert.deepStrictEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_RESOURCE_ENDPOINT'
+      ]);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
