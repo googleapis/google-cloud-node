@@ -64,10 +64,16 @@ var File = require('./file.js');
  * @alias module:storage
  * @constructor
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_STORAGE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @resource [Cloud Storage overview]{@link https://cloud.google.com/storage/docs/overview}
  * @resource [Access Control]{@link https://cloud.google.com/storage/docs/access-control}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach the Resource API.
  */
 function Storage(options) {
   if (!(this instanceof Storage)) {
@@ -76,7 +82,8 @@ function Storage(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/storage/v1',
+    defaultApiEndpoint: 'https://www.googleapis.com/storage/v1',
+    environmentVariables: [ 'GOOGLE_CLOUD_STORAGE_ENDPOINT' ],
     projectIdRequired: false,
     scopes: [
       'https://www.googleapis.com/auth/devstorage.full_control'

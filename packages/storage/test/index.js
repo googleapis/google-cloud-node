@@ -124,8 +124,11 @@ describe('Storage', function() {
       var calledWith = storage.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/storage/v1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
       assert.strictEqual(calledWith.projectIdRequired, false);
+      assert.deepStrictEqual(calledWith.environmentVariables,
+        [ 'GOOGLE_CLOUD_STORAGE_ENDPOINT' ]
+      );
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/devstorage.full_control'
       ]);
