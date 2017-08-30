@@ -126,7 +126,10 @@ describe('Prediction', function() {
       var calledWith = prediction.calledWith_[0];
 
       var baseUrl = 'https://www.googleapis.com/prediction/v1.6';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
+      assert.deepEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_PREDICTION_ENDPOINT'
+      ]);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/prediction',
         'https://www.googleapis.com/auth/devstorage.read_only'

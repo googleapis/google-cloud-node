@@ -54,7 +54,13 @@ var Model = require('./model.js');
  * @resource [What is the Google Prediction API?]{@link https://cloud.google.com/prediction/docs/getting-started}
  * @resource [Developers Guide]{@link https://cloud.google.com/prediction/docs/developer-guide}
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_PREDICTION_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {object} options.apiEndpoint - Override the default API endpoint
+ * to reach the Prediction API.
  */
 function Prediction(options) {
   if (!(this instanceof Prediction)) {
@@ -63,7 +69,8 @@ function Prediction(options) {
   }
 
   var config = {
-    baseUrl: 'https://www.googleapis.com/prediction/v1.6',
+    environmentVariables: ['GOOGLE_CLOUD_PREDICTION_ENDPOINT'],
+    defaultApiEndpoint: 'https://www.googleapis.com/prediction/v1.6',
     scopes: [
       'https://www.googleapis.com/auth/prediction',
       'https://www.googleapis.com/auth/devstorage.read_only'
