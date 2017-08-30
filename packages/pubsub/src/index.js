@@ -62,9 +62,13 @@ var GAX_CONFIG = {
  * reliable, many-to-many, asynchronous messaging service from Cloud
  * Platform.
  *
- * The `apiEndpoint` from options will set the host. If not set, the
- * `PUBSUB_EMULATOR_HOST` environment variable from the gcloud SDK is
- * honored, otherwise the actual API endpoint will be used.
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_PUBSUB_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
+ * The legacy `PUBSUB_EMULATOR_HOST` environment variable is still
+ * supported but will be deprecated in future releases. Please use
+ * `GOOGLE_CLOUD_PUBSUB_ENDPOINT` instead.
  *
  * @constructor
  * @alias module:pubsub
@@ -72,6 +76,9 @@ var GAX_CONFIG = {
  * @resource [Cloud Pub/Sub overview]{@link https://developers.google.com/pubsub/overview}
  *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach PubSub. This is useful for connecting to your local PubSub
+ *     emulator.
  */
 function PubSub(options) {
   if (!(this instanceof PubSub)) {
@@ -79,12 +86,12 @@ function PubSub(options) {
     return new PubSub(options);
   }
 
-  this.defaultBaseUrl_ = 'pubsub.googleapis.com';
-  this.determineBaseUrl_(options.apiEndpoint);
-
   var config = {
-    baseUrl: this.baseUrl_,
-    customEndpoint: this.customEndpoint_,
+    defaultApiEndpoint: 'pubsub.googleapis.com',
+    environmentVariables: [
+      'GOOGLE_CLOUD_PUBSUB_ENDPOINT',
+      'PUBSUB_EMULATOR_HOST'
+    ],
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Publisher: {
@@ -804,29 +811,6 @@ PubSub.prototype.request = function(protoOpts) {
   }
 
   commonGrpc.Service.prototype.request.apply(this, arguments);
-};
-
-/**
- * Determine the appropriate endpoint to use for API requests, first trying the
- * local `apiEndpoint` parameter. If the `apiEndpoint` parameter is null we try
- * Pub/Sub emulator environment variable (PUBSUB_EMULATOR_HOST), otherwise the
- * default JSON API.
- *
- * @private
- */
-PubSub.prototype.determineBaseUrl_ = function(apiEndpoint) {
-  var baseUrl = this.defaultBaseUrl_;
-  var leadingProtocol = new RegExp('^https*://');
-  var trailingSlashes = new RegExp('/*$');
-
-  if (apiEndpoint || process.env.PUBSUB_EMULATOR_HOST) {
-    this.customEndpoint_ = true;
-    baseUrl = apiEndpoint || process.env.PUBSUB_EMULATOR_HOST;
-  }
-
-  this.baseUrl_ = baseUrl
-    .replace(leadingProtocol, '')
-    .replace(trailingSlashes, '');
 };
 
 /*! Developer Documentation

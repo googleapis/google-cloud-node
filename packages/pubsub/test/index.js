@@ -181,11 +181,15 @@ describe('PubSub', function() {
       var calledWith = pubsub.calledWith_[0];
 
       var baseUrl = 'pubsub.googleapis.com';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
 
       var protosDir = path.resolve(__dirname, '../protos');
+      assert.strictEqual(calledWith.defaultApiEndpoint, baseUrl);
       assert.strictEqual(calledWith.protosDir, protosDir);
 
+      assert.deepStrictEqual(calledWith.environmentVariables, [
+        'GOOGLE_CLOUD_PUBSUB_ENDPOINT',
+        'PUBSUB_EMULATOR_HOST'
+      ]);
       assert.deepStrictEqual(calledWith.protoServices, {
         Publisher: {
           path: 'google/pubsub/v1/pubsub.proto',
@@ -202,21 +206,6 @@ describe('PubSub', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
-    });
-
-    it('should set the defaultBaseUrl_', function() {
-      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com');
-    });
-
-    it('should use the PUBSUB_EMULATOR_HOST env var', function() {
-      var pubSubHost = 'pubsub-host';
-      process.env.PUBSUB_EMULATOR_HOST = pubSubHost;
-
-      var pubsub = new PubSub({ projectId: 'project-id' });
-      delete process.env.PUBSUB_EMULATOR_HOST;
-
-      var calledWith = pubsub.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, pubSubHost);
     });
 
     it('should localize the options provided', function() {
@@ -1041,85 +1030,6 @@ describe('PubSub', function() {
       pubsub.request({
         service: 'Publisher',
         method: 'methodName'
-      });
-    });
-  });
-
-  describe('determineBaseUrl_', function() {
-    function setHost(host) {
-      process.env.PUBSUB_EMULATOR_HOST = host;
-    }
-
-    beforeEach(function() {
-      delete process.env.PUBSUB_EMULATOR_HOST;
-    });
-
-    it('should set base url to parameter sent', function() {
-      var defaultBaseUrl_ = 'defaulturl';
-      var testingUrl = 'localhost:8085';
-
-      setHost(defaultBaseUrl_);
-      pubsub.defaultBaseUrl_ = defaultBaseUrl_;
-
-      pubsub.determineBaseUrl_(testingUrl);
-      assert.strictEqual(pubsub.baseUrl_, testingUrl);
-    });
-
-    it('should default to defaultBaseUrl_', function() {
-      var defaultBaseUrl_ = 'defaulturl';
-      pubsub.defaultBaseUrl_ = defaultBaseUrl_;
-
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl_, defaultBaseUrl_);
-    });
-
-    it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost:8080';
-
-      setHost('localhost:8080/');
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl_, expectedBaseUrl);
-
-      setHost('localhost:8080//');
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl_, expectedBaseUrl);
-    });
-
-    it('should remove the protocol if specified', function() {
-      setHost('http://localhost:8080');
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl_, 'localhost:8080');
-
-      setHost('https://localhost:8080');
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl_, 'localhost:8080');
-    });
-
-    it('should not set customEndpoint_ when using default baseurl', function() {
-      var pubsub = new PubSub({ projectId: PROJECT_ID });
-      pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.customEndpoint_, undefined);
-    });
-
-    describe('with PUBSUB_EMULATOR_HOST environment variable', function() {
-      var PUBSUB_EMULATOR_HOST = 'localhost:9090';
-
-      beforeEach(function() {
-        setHost(PUBSUB_EMULATOR_HOST);
-      });
-
-      after(function() {
-        delete process.env.PUBSUB_EMULATOR_HOST;
-      });
-
-      it('should use the PUBSUB_EMULATOR_HOST env var', function() {
-        pubsub.determineBaseUrl_();
-        assert.strictEqual(pubsub.baseUrl_, PUBSUB_EMULATOR_HOST);
-      });
-
-      it('should set customEndpoint_', function() {
-        pubsub.determineBaseUrl_();
-        assert.strictEqual(pubsub.customEndpoint_, true);
       });
     });
   });
