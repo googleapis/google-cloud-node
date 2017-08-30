@@ -56,7 +56,13 @@ var v1 = require('./v1');
  * @resource [Cloud Spanner Documentation](https://cloud.google.com/spanner/docs)
  * @resource [Cloud Spanner Concepts](https://cloud.google.com/spanner/docs/concepts)
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_SPANNER_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach the Resource API.
  */
 function Spanner(options) {
   if (!(this instanceof Spanner)) {
@@ -76,7 +82,8 @@ function Spanner(options) {
   };
 
   var config = {
-    baseUrl: 'spanner.googleapis.com',
+    defaultApiEndpoint: 'spanner.googleapis.com',
+    environmentVariables: [ 'GOOGLE_CLOUD_SPANNER_ENDPOINT' ],
     protosDir: path.resolve(__dirname, '../protos'),
     protoServices: {
       Operations: {

@@ -205,8 +205,9 @@ describe('Spanner', function() {
 
       var calledWith = spanner.calledWith_[0];
 
-      assert.deepEqual(calledWith, {
-        baseUrl: 'spanner.googleapis.com',
+      assert.deepStrictEqual(calledWith, {
+        defaultApiEndpoint: 'spanner.googleapis.com',
+        environmentVariables: [ 'GOOGLE_CLOUD_SPANNER_ENDPOINT' ],
         protosDir: path.resolve(__dirname, '../protos'),
         protoServices: {
           Operations: {
