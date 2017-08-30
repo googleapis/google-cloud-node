@@ -1379,4 +1379,51 @@ describe('Logging', function() {
       });
     });
   });
+
+  describe('getCurrentTraceFromAgent', function() {
+    var oldTraceAgent;
+
+    beforeEach(function() {
+      oldTraceAgent = global._google_trace_agent;
+    });
+
+    afterEach(function() {
+      global._google_trace_agent = oldTraceAgent;
+    });
+
+    it('returns null if there is no trace agent', function() {
+      global._google_trace_agent = undefined;
+      assert.strictEqual(Logging.getCurrentTraceFromAgent(), null);
+    });
+
+    it('returns null if agent does not support context methods', function() {
+      global._google_trace_agent = {};
+      assert.strictEqual(Logging.getCurrentTraceFromAgent(), null);
+    });
+
+    it('returns null if context id is missing', function() {
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return null; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      assert.strictEqual(Logging.getCurrentTraceFromAgent(), null);
+    });
+
+    it('returns null if project id is missing', function() {
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return null; }
+      };
+      assert.strictEqual(Logging.getCurrentTraceFromAgent(), null);
+    });
+
+    it('returns trace path if project and context available', function() {
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      assert.strictEqual(Logging.getCurrentTraceFromAgent(),
+          'projects/project1/traces/trace1');
+    });
+  });
 });

@@ -223,6 +223,99 @@ describe('logging-bunyan', function() {
 
       loggingBunyan.formatEntry_(recordWithRequest);
     });
+
+    it('should promote prefixed trace property to metadata', function(done) {
+      var recordWithRequest = extend({
+        'logging.googleapis.com/trace': 'trace1'
+      }, RECORD);
+
+      loggingBunyan.log_.entry = function(entryMetadata, record) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingBunyan.resource_,
+          timestamp: RECORD.time,
+          severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level],
+          trace: 'trace1'
+        });
+        assert.deepStrictEqual(record, RECORD);
+        done();
+      };
+
+      loggingBunyan.formatEntry_(recordWithRequest);
+    });
+  });
+
+  describe('write', function() {
+    var oldWritableWrite;
+    var oldTraceAgent;
+
+    beforeEach(function() {
+      oldWritableWrite = FakeWritable.prototype.write;
+      oldTraceAgent = global._google_trace_agent;
+    });
+
+    afterEach(function() {
+      FakeWritable.prototype.write = oldWritableWrite;
+      global._google_trace_agent = oldTraceAgent;
+    });
+
+    it('should not set trace property if trace unavailable', function(done) {
+      global._google_trace_agent = undefined;
+      FakeWritable.prototype.write = function(record, encoding, callback) {
+        assert.deepStrictEqual(record, RECORD);
+        assert.strictEqual(encoding, 'encoding');
+        assert.strictEqual(callback, assert.ifError);
+        assert.strictEqual(this, loggingBunyan);
+        done();
+      };
+
+      loggingBunyan.write(RECORD, 'encoding', assert.ifError);
+    });
+
+    it('should set prefixed trace property if trace available', function(done) {
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      const recordWithoutTrace = extend({}, RECORD);
+      const recordWithTrace = extend({
+        'logging.googleapis.com/trace': 'projects/project1/traces/trace1'
+      }, RECORD);
+
+      FakeWritable.prototype.write = function(record, encoding, callback) {
+        // Check that trace field added to record before calling Writable.write
+        assert.deepStrictEqual(record, recordWithTrace);
+
+        // Check that the original record passed in was not mutated
+        assert.deepStrictEqual(recordWithoutTrace, RECORD);
+
+        assert.strictEqual(encoding, 'encoding');
+        assert.strictEqual(callback, assert.ifError);
+        assert.strictEqual(this, loggingBunyan);
+        done();
+      };
+
+      loggingBunyan.write(recordWithoutTrace, 'encoding', assert.ifError);
+    });
+
+    it('should leave prefixed trace property as is if set', function(done) {
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace-from-agent'; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      const recordWithTraceAlreadySet = extend({
+        'logging.googleapis.com/trace': 'trace-already-set'
+      }, RECORD);
+
+      FakeWritable.prototype.write = function(record, encoding, callback) {
+        assert.deepStrictEqual(record, recordWithTraceAlreadySet);
+        assert.strictEqual(encoding, '');
+        assert.strictEqual(callback, assert.ifError);
+        assert.strictEqual(this, loggingBunyan);
+        done();
+      };
+
+      loggingBunyan.write(recordWithTraceAlreadySet, '', assert.ifError);
+    });
   });
 
   describe('_write', function() {

@@ -60,6 +60,11 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
 };
 
 /**
+ * Log entry data key to allow users to indicate a trace for the request.
+ */
+var LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
+
+/**
  * This module provides support for streaming your winston logs to
  * [Stackdriver Logging](https://cloud.google.com/logging).
  *
@@ -195,6 +200,16 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     if (metadata.httpRequest) {
       entryMetadata.httpRequest = metadata.httpRequest;
       delete data.metadata.httpRequest;
+    }
+  }
+
+  if (metadata && metadata[LOGGING_TRACE_KEY]) {
+    entryMetadata.trace = metadata[LOGGING_TRACE_KEY];
+    delete data.metadata[LOGGING_TRACE_KEY];
+  } else {
+    var trace = logging.getCurrentTraceFromAgent();
+    if (trace) {
+      entryMetadata.trace = trace;
     }
   }
 
