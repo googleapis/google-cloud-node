@@ -70,6 +70,7 @@ function Service(config, options) {
     this.baseUrl = config.baseUrl;
     this.customEndpoint = config.customEndpoint;
   }
+  reqCfg.customEndpoint = this.customEndpoint;
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;

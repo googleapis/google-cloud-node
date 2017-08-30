@@ -146,10 +146,6 @@ var GRPC_SERVICE_OPTIONS = {
  * Service is a base class, meant to be inherited from by a "service," like
  * BigQuery or Storage.
  *
- * The baseUrl should be specified by the service. Prefer the combination of
- * options, environmentVariables, defaultApiEndpoint over hardcoding a value
- * in the config object. The former gives more flexibility to the end user.
- *
  * This handles making authenticated requests by exposing a `makeReq_` function.
  *
  * @constructor

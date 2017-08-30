@@ -72,7 +72,8 @@ describe('Service', function() {
         var expectedConfig = extend({}, CONFIG, {
           credentials: OPTIONS.credentials,
           keyFile: OPTIONS.keyFilename,
-          email: OPTIONS.email
+          email: OPTIONS.email,
+          customEndpoint: false
         });
 
         assert.deepEqual(config, expectedConfig);
