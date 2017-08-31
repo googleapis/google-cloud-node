@@ -535,6 +535,7 @@ describe('pubsub', function() {
       return deleteAllSnapshots()
         .then(wait(2500))
         .then(subscription.create.bind(subscription))
+        .then(wait(2500))
         .then(snapshot.create.bind(snapshot))
         .then(wait(2500));
     });
