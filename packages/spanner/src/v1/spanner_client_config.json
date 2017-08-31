@@ -28,7 +28,7 @@
           "initial_rpc_timeout_millis": 3600000,
           "rpc_timeout_multiplier": 1.0,
           "max_rpc_timeout_millis": 3600000,
-          "total_timeout_millis": 3600000
+          "total_timeout_millis": 36000000
         }
       },
       "methods": {
@@ -55,7 +55,7 @@
         "ExecuteStreamingSql": {
           "timeout_millis": 3600000,
           "retry_codes_name": "non_idempotent",
-          "retry_params_name": "long_running"
+          "retry_params_name": "default"
         },
         "Read": {
           "timeout_millis": 30000,
@@ -65,7 +65,7 @@
         "StreamingRead": {
           "timeout_millis": 3600000,
           "retry_codes_name": "non_idempotent",
-          "retry_params_name": "long_running"
+          "retry_params_name": "default"
         },
         "BeginTransaction": {
           "timeout_millis": 30000,
