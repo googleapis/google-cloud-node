@@ -56,6 +56,8 @@ var RETRY_CODES = [
  */
 function ConnectionPool(subscription) {
   this.subscription = subscription;
+  this.projectId = subscription.projectId;
+
   this.connections = new Map();
 
   this.isPaused = false;
@@ -230,7 +232,8 @@ ConnectionPool.prototype.createConnection = function() {
     }
 
     connection.write({
-      subscription: self.subscription.name,
+      subscription: common.util.replaceProjectIdToken(
+        self.subscription.name, self.projectId),
       streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
     });
 
@@ -301,6 +304,10 @@ ConnectionPool.prototype.getClient = function(callback) {
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
     );
+
+    if (!self.projectId || self.projectId === '{{projectId}}') {
+      self.projectId = pubsub.auth.projectId;
+    }
 
     var Subscriber = v1(pubsub.options).Subscriber;
 
