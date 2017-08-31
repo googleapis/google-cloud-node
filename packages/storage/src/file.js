@@ -445,6 +445,7 @@ File.prototype.createReadStream = function(options) {
   var rangeRequest = is.number(options.start) || is.number(options.end);
   var tailRequest = options.end < 0;
   var throughStream = streamEvents(through());
+  var validateStream = through();
 
   var crc32c = true;
   var md5 = false;
@@ -466,6 +467,11 @@ File.prototype.createReadStream = function(options) {
     // Range requests can't receive data integrity checks.
     crc32c = false;
     md5 = false;
+  } else {
+    validateStream = hashStreamValidation({
+      crc32c: crc32c,
+      md5: md5
+    });
   }
 
   // Authenticate the request, then pipe the remote API request to the stream
@@ -497,17 +503,12 @@ File.prototype.createReadStream = function(options) {
     }
 
     var requestStream = self.requestStream(reqOpts);
-    var validateStream;
 
-    // We listen to the response event from the request stream so that we can...
-    //
-    //   1) Intercept any data from going to the user if an error occurred.
-    //   2) Calculate the hashes from the http.IncomingMessage response stream,
-    //      which will return the bytes from the source without decompressing
-    //      gzip'd content. The request stream will do the decompression so the
-    //      user receives the expected content.
+    // We listen to the response event from the request stream so that we can
+    // intercept any data from going to the user if an error occurred.
     function onResponse(err, body, res) {
       if (err) {
+        requestStream.unpipe(validateStream);
         requestStream.unpipe(throughStream);
 
         // Get error message from the body.
@@ -515,17 +516,6 @@ File.prototype.createReadStream = function(options) {
           err.message = body.toString();
           throughStream.destroy(err);
         }));
-
-        return;
-      }
-
-      if (!rangeRequest) {
-        validateStream = hashStreamValidation({
-          crc32c: crc32c,
-          md5: md5
-        });
-
-        res.pipe(validateStream).on('data', common.util.noop);
       }
     }
 
@@ -603,6 +593,7 @@ File.prototype.createReadStream = function(options) {
       .on('complete', function(res) {
         common.util.handleResp(null, res, null, onComplete);
       })
+      .pipe(validateStream)
       .pipe(throughStream)
       .on('error', function() {
         // An error can occur before the request stream has been created (during
