@@ -28,7 +28,7 @@ const subscriptionNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
 const subscriptionNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
 const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
-const message = { data: `Hello, world!` };
+const expectedMessage = { data: `Hello, world!` };
 const cmd = `node topics.js`;
 
 test.before(tools.checkCredentials);
@@ -53,11 +53,40 @@ test.after.always(async () => {
   } catch (err) {} // ignore error
 });
 
+// Helper function to pull one message
+const _pullOneMessage = (subscriptionObj, timeout) => {
+  timeout = timeout || 10000; // 10 second timeout by default
+
+  let message;
+  return new Promise((resolve, reject) => {
+    // First message received; ack it + resolve promise
+    const messageHandler = (received) => {
+      received.ack();
+      message = received;
+      return resolve(messageHandler);
+    };
+
+    // Listen for new messages
+    subscriptionObj.on(`message`, messageHandler);
+
+    // Timeout appropriately
+    setTimeout(() => {
+      return reject(new Error(`_pullOneMessage timed out`));
+    }, timeout);
+  }).then((messageHandler) => {
+    subscriptionObj.removeListener('message', messageHandler);
+    return Promise.resolve(message);
+  });
+};
+
 test.serial(`should create a topic`, async (t) => {
+  t.plan(1);
   const output = await tools.runAsync(`${cmd} create ${topicNameOne}`, cwd);
   t.is(output, `Topic ${fullTopicNameOne} created.`);
-  const [exists] = await pubsub.topic(topicNameOne).exists();
-  t.true(exists);
+  await tools.tryTest(async (assert) => {
+    const [topics] = await pubsub.getTopics();
+    assert(topics.some((s) => s.name === fullTopicNameOne));
+  }).start();
 });
 
 test.serial(`should list topics`, async (t) => {
@@ -69,40 +98,43 @@ test.serial(`should list topics`, async (t) => {
 });
 
 test.serial(`should publish a simple message`, async (t) => {
-  const [subscription] = await pubsub.topic(topicNameOne).subscribe(subscriptionNameOne);
-  await tools.runAsync(`${cmd} publish ${topicNameOne} "${message.data}"`, cwd);
-  const [messages] = await subscription.pull();
-  t.is(messages[0].data, message.data);
+  t.plan(1);
+  const [subscription] = await pubsub.topic(topicNameOne).createSubscription(subscriptionNameOne);
+  await tools.runAsync(`${cmd} publish ${topicNameOne} "${expectedMessage.data}"`, cwd);
+  const receivedMessage = await _pullOneMessage(subscription);
+  t.is(receivedMessage.data.toString(), expectedMessage.data);
 });
 
 test.serial(`should publish a JSON message`, async (t) => {
-  const [subscription] = await pubsub.topic(topicNameOne).subscribe(subscriptionNameOne);
-  await tools.runAsync(`${cmd} publish ${topicNameOne} '${JSON.stringify(message)}'`, cwd);
-  const [messages] = await subscription.pull();
-  t.deepEqual(messages[0].data, message);
+  const [subscription] = await pubsub.topic(topicNameOne).createSubscription(subscriptionNameOne);
+  await tools.runAsync(`${cmd} publish ${topicNameOne} '${JSON.stringify(expectedMessage)}'`, cwd);
+  const receivedMessage = await _pullOneMessage(subscription);
+  t.deepEqual(JSON.parse(receivedMessage.data.toString()), expectedMessage);
 });
 
 test.serial(`should publish ordered messages`, async (t) => {
   const topics = require(`../topics`);
 
-  const [subscription] = await pubsub.topic(topicNameTwo).subscribe(subscriptionNameTwo);
-  let messageIds = await topics.publishOrderedMessage(topicNameTwo, message.data);
-  let [messages] = await subscription.pull();
-  t.is(messages[0].id, messageIds[0]);
-  t.is(messages[0].data, message.data);
-  t.is(messages[0].attributes.counterId, '1');
-  messageIds = await topics.publishOrderedMessage(topicNameTwo, message.data);
-  [messages] = await subscription.pull();
-  t.is(messages[0].id, messageIds[0]);
-  t.is(messages[0].data, message.data);
-  t.is(messages[0].attributes.counterId, '2');
-  await topics.publishOrderedMessage(topicNameTwo, message.data);
+  const [subscription] = await pubsub.topic(topicNameTwo).createSubscription(subscriptionNameTwo);
+
+  let messageId = await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
+  let message = await _pullOneMessage(subscription);
+  t.is(message.id, messageId);
+  t.is(message.data.toString(), expectedMessage.data);
+  t.is(message.attributes.counterId, '1');
+
+  messageId = await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
+  message = await _pullOneMessage(subscription);
+  t.is(message.id, messageId);
+  t.is(message.data.toString(), expectedMessage.data);
+  t.is(message.attributes.counterId, '2');
+  await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
 });
 
 test.serial(`should set the IAM policy for a topic`, async (t) => {
   await tools.runAsync(`${cmd} set-policy ${topicNameOne}`, cwd);
   const results = await pubsub.topic(topicNameOne).iam.getPolicy();
-  const policy = results[0];
+  const [policy] = results;
   t.deepEqual(policy.bindings, [
     {
       role: `roles/pubsub.editor`,
@@ -127,8 +159,11 @@ test.serial(`should test permissions for a topic`, async (t) => {
 });
 
 test.serial(`should delete a topic`, async (t) => {
+  t.plan(1);
   const output = await tools.runAsync(`${cmd} delete ${topicNameOne}`, cwd);
   t.is(output, `Topic ${fullTopicNameOne} deleted.`);
-  const [exists] = await pubsub.topic(topicNameOne).exists();
-  t.false(exists);
+  await tools.tryTest(async (assert) => {
+    const [topics] = await pubsub.getTopics();
+    assert(topics.every((s) => s.name !== fullTopicNameOne));
+  }).start();
 });

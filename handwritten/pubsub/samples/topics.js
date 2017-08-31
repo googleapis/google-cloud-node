@@ -84,14 +84,18 @@ function publishMessage (topicName, data) {
   // References an existing topic, e.g. "my-topic"
   const topic = pubsub.topic(topicName);
 
-  // Publishes the message, e.g. "Hello, world!" or { amount: 599.00, status: 'pending' }
-  return topic.publish(data)
+  // Create a publisher for the topic (which can include additional batching configuration)
+  const publisher = topic.publisher();
+
+  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
+  const dataBuffer = Buffer.from(data);
+  return publisher.publish(dataBuffer)
     .then((results) => {
-      const messageIds = results[0];
+      const messageId = results[0];
 
-      console.log(`Message ${messageIds[0]} published.`);
+      console.log(`Message ${messageId} published.`);
 
-      return messageIds;
+      return messageId;
     });
 }
 // [END pubsub_publish_message]
@@ -114,27 +118,27 @@ function publishOrderedMessage (topicName, data) {
   // References an existing topic, e.g. "my-topic"
   const topic = pubsub.topic(topicName);
 
-  const message = {
-    data: data,
+  // Create a publisher for the topic (which can include additional batching configuration)
+  const publisher = topic.publisher();
 
-    // Pub/Sub messages are unordered, so assign an order id to the message to
-    // manually order messages
-    attributes: {
-      counterId: `${getPublishCounterValue()}`
-    }
+  // Creates message parameters
+  const dataBuffer = Buffer.from(data);
+  const attributes = {
+    // Pub/Sub messages are unordered, so assign an order ID and manually order messages
+    counterId: `${getPublishCounterValue()}`
   };
 
-  // Publishes the message, use raw: true to pass a message with attributes
-  return topic.publish(message, { raw: true })
+  // Publishes the message
+  return publisher.publish(dataBuffer, attributes)
     .then((results) => {
-      const messageIds = results[0];
+      const messageId = results[0];
 
       // Update the counter value
-      setPublishCounterValue(parseInt(message.attributes.counterId, 10) + 1);
+      setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
 
-      console.log(`Message ${messageIds[0]} published.`);
+      console.log(`Message ${messageId} published.`);
 
-      return messageIds;
+      return messageId;
     });
 }
 // [END pubsub_publish_ordered_message]
@@ -248,11 +252,6 @@ const cli = require(`yargs`)
     `Publishes a message to a topic.`,
     {},
     (opts) => {
-      try {
-        opts.message = JSON.parse(opts.message);
-      } catch (err) {
-        // Ignore error
-      }
       publishMessage(opts.topicName, opts.message);
     }
   )

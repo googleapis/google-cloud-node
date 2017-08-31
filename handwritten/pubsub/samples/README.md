@@ -82,7 +82,7 @@ Commands:
   create-push <topicName> <subscriptionName>  Creates a new push subscription.
   delete <subscriptionName>                   Deletes a subscription.
   get <subscriptionName>                      Gets the metadata for a subscription.
-  pull <subscriptionName>                     Pulls messages for a subscription.
+  listen <subscriptionName>                   Listens to messages for a subscription.
   get-policy <subscriptionName>               Gets the IAM policy for a subscription.
   set-policy <subscriptionName>               Sets the IAM policy for a subscription.
   test-permissions <subscriptionName>         Tests the permissions for a subscription.

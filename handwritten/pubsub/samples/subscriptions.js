@@ -73,7 +73,7 @@ function createSubscription (topicName, subscriptionName) {
   const topic = pubsub.topic(topicName);
 
   // Creates a new subscription, e.g. "my-new-subscription"
-  return topic.subscribe(subscriptionName)
+  return topic.createSubscription(subscriptionName)
     .then((results) => {
       const subscription = results[0];
 
@@ -101,7 +101,7 @@ function createPushSubscription (topicName, subscriptionName) {
   };
 
   // Creates a new push subscription, e.g. "my-new-subscription"
-  return topic.subscribe(subscriptionName, options)
+  return topic.createSubscription(subscriptionName, options)
     .then((results) => {
       const subscription = results[0];
 
@@ -151,32 +151,34 @@ function getSubscription (subscriptionName) {
 }
 // [END pubsub_get_subscription]
 
-// [START pubsub_pull_messages]
-function pullMessages (subscriptionName) {
+// [START pubsub_listen_messages]
+function listenForMessages (subscriptionName, timeout) {
   // Instantiates a client
   const pubsub = PubSub();
 
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsub.subscription(subscriptionName);
 
-  // Pulls messages. Set returnImmediately to false to block until messages are
-  // received.
-  return subscription.pull()
-    .then((results) => {
-      const messages = results[0];
+  // Create an event handler to handle messages
+  let messageCount = 0;
+  const messageHandler = (message) => {
+    console.log(`Received message ${message.id}:`);
+    console.log(`\tData: ${message.data}`);
+    console.log(`\tAttributes: ${message.attributes}`);
+    messageCount += 1;
 
-      console.log(`Received ${messages.length} messages.`);
+    // "Ack" (acknowledge receipt of) the message
+    message.ack();
+  };
 
-      messages.forEach((message) => {
-        console.log(`* %d %j %j`, message.id, message.data, message.attributes);
-      });
-
-      // Acknowledges received messages. If you do not acknowledge, Pub/Sub will
-      // redeliver the message.
-      return subscription.ack(messages.map((message) => message.ackId));
-    });
+  // Listen for new messages until timeout is hit
+  subscription.on(`message`, messageHandler);
+  setTimeout(() => {
+    subscription.removeListener('message', messageHandler);
+    console.log(`${messageCount} message(s) received.`);
+  }, timeout * 1000);
 }
-// [END pubsub_pull_messages]
+// [END pubsub_listen_messages]
 
 let subscribeCounterValue = 1;
 
@@ -188,54 +190,61 @@ function setSubscribeCounterValue (value) {
   subscribeCounterValue = value;
 }
 
-// [START pubsub_pull_ordered_messages]
+// [START pubsub_listen_ordered_messages]
 const outstandingMessages = {};
 
-function pullOrderedMessages (subscriptionName) {
+function listenForOrderedMessages (subscriptionName, timeout) {
   // Instantiates a client
   const pubsub = PubSub();
 
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsub.subscription(subscriptionName);
 
-  // Pulls messages. Set returnImmediately to false to block until messages are
-  // received.
-  return subscription.pull()
-    .then((results) => {
-      const messages = results[0];
+  // Create an event handler to handle messages
+  const messageHandler = function (message) {
+    // Buffer the message in an object (for later ordering)
+    outstandingMessages[message.attributes.counterId] = message;
 
-      // Pub/Sub messages are unordered, so here we manually order messages by
-      // their "counterId" attribute which was set when they were published.
-      messages.forEach((message) => {
-        outstandingMessages[message.attributes.counterId] = message;
-      });
+    // "Ack" (acknowledge receipt of) the message
+    message.ack();
+  };
 
-      const outstandingIds = Object.keys(outstandingMessages).map((counterId) => parseInt(counterId, 10));
-      outstandingIds.sort();
+  // Listen for new messages until timeout is hit
+  return new Promise((resolve) => {
+    subscription.on(`message`, messageHandler);
+    setTimeout(() => {
+      subscription.removeListener(`message`, messageHandler);
+      resolve();
+    }, timeout * 1000);
+  })
+  .then(() => {
+    // Pub/Sub messages are unordered, so here we manually order messages by
+    // their "counterId" attribute which was set when they were published.
+    const outstandingIds = Object.keys(outstandingMessages).map((counterId) => parseInt(counterId, 10));
+    outstandingIds.sort();
 
-      outstandingIds.forEach((counterId) => {
-        const counter = getSubscribeCounterValue();
-        const message = outstandingMessages[counterId];
+    outstandingIds.forEach((counterId) => {
+      const counter = getSubscribeCounterValue();
+      const message = outstandingMessages[counterId];
 
-        if (counterId < counter) {
-          // The message has already been processed
-          subscription.ack(message.ackId);
-          delete outstandingMessages[counterId];
-        } else if (counterId === counter) {
-          // Process the message
-          console.log(`* %d %j %j`, message.id, message.data, message.attributes);
-
-          setSubscribeCounterValue(counterId + 1);
-          subscription.ack(message.ackId);
-          delete outstandingMessages[counterId];
-        } else {
-          // Have not yet processed the message on which this message is dependent
-          return false;
-        }
-      });
+      if (counterId < counter) {
+        // The message has already been processed
+        message.ack();
+        delete outstandingMessages[counterId];
+      } else if (counterId === counter) {
+        // Process the message
+        console.log(`* %d %j %j`, message.id, message.data.toString(), message.attributes);
+        setSubscribeCounterValue(counterId + 1);
+        message.ack();
+        delete outstandingMessages[counterId];
+      } else {
+        // Have not yet processed the message on which this message is dependent
+        return false;
+      }
     });
+  });
 }
-// [END pubsub_pull_ordered_messages]
+// [END pubsub_listen_ordered_messages]
 
 // [START pubsub_get_subscription_policy]
 function getSubscriptionPolicy (subscriptionName) {
@@ -318,7 +327,7 @@ function testSubscriptionPermissions (subscriptionName) {
 }
 // [END pubsub_test_subscription_permissions]
 
-module.exports = { pullOrderedMessages };
+module.exports = { listenForOrderedMessages };
 
 const cli = require(`yargs`)
   .demand(1)
@@ -359,10 +368,16 @@ const cli = require(`yargs`)
     (opts) => getSubscription(opts.subscriptionName)
   )
   .command(
-    `pull <subscriptionName>`,
-    `Pulls messages for a subscription.`,
-    {},
-    (opts) => pullMessages(opts.subscriptionName)
+    `listen <subscriptionName>`,
+    `Listens to messages for a subscription.`,
+  {
+    timeout: {
+      alias: 't',
+      type: 'number',
+      default: 10
+    }
+  },
+    (opts) => listenForMessages(opts.subscriptionName, opts.timeout)
   )
   .command(
     `get-policy <subscriptionName>`,
