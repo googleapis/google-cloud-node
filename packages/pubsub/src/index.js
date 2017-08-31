@@ -23,6 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var googleAuth = require('google-auto-auth');
+var grpc = require('grpc');
 var is = require('is');
 
 var PKG = require('../package.json');
@@ -291,6 +292,7 @@ PubSub.prototype.determineBaseUrl_ = function() {
 
   this.options.servicePath = baseUrlParts[0];
   this.options.port = baseUrlParts[1];
+  this.options.sslCreds = grpc.credentials.createInsecure()
 };
 
 /**
