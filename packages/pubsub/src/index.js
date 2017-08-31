@@ -292,7 +292,7 @@ PubSub.prototype.determineBaseUrl_ = function() {
 
   this.options.servicePath = baseUrlParts[0];
   this.options.port = baseUrlParts[1];
-  this.options.sslCreds = grpc.credentials.createInsecure()
+  this.options.sslCreds = grpc.credentials.createInsecure();
 };
 
 /**

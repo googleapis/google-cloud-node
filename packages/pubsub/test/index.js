@@ -125,7 +125,7 @@ describe('PubSub', function() {
         util: fakeUtil
       },
       'google-auto-auth': fakeGoogleAutoAuth,
-      'grpc': fakeGrpc,
+      grpc: fakeGrpc,
       './snapshot.js': FakeSnapshot,
       './subscription.js': Subscription,
       './topic.js': FakeTopic,
