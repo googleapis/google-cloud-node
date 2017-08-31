@@ -66,9 +66,12 @@ describe('ConnectionPool', function() {
   var pool;
 
   var FAKE_PUBSUB_OPTIONS = {};
+  var PROJECT_ID = 'grapce-spacheship-123';
 
   var PUBSUB = {
+    projectId: PROJECT_ID,
     auth: {
+      projectId: PROJECT_ID,
       getAuthClient: fakeUtil.noop
     },
     options: FAKE_PUBSUB_OPTIONS
@@ -76,6 +79,7 @@ describe('ConnectionPool', function() {
 
   var SUB_NAME = 'test-subscription';
   var SUBSCRIPTION = {
+    projectId: PROJECT_ID,
     name: SUB_NAME,
     pubsub: PUBSUB,
     request: fakeUtil.noop
@@ -344,6 +348,7 @@ describe('ConnectionPool', function() {
     });
 
     describe('connection', function() {
+      var TOKENIZED_SUB_NAME = 'project/p/subscriptions/' + SUB_NAME;
       var fakeId;
 
       beforeEach(function() {
@@ -352,12 +357,20 @@ describe('ConnectionPool', function() {
         fakeUuid.v4 = function() {
           return fakeId;
         };
+
+        fakeUtil.replaceProjectIdToken = common.util.replaceProjectIdToken;
       });
 
       it('should create a connection', function(done) {
+        fakeUtil.replaceProjectIdToken = function(subName, projectId) {
+          assert.strictEqual(subName, SUB_NAME);
+          assert.strictEqual(projectId, PROJECT_ID);
+          return TOKENIZED_SUB_NAME;
+        };
+
         fakeConnection.write = function(reqOpts) {
           assert.deepEqual(reqOpts, {
-            subscription: SUB_NAME,
+            subscription: TOKENIZED_SUB_NAME,
             streamAckDeadlineSeconds: pool.settings.ackDeadline / 1000
           });
         };
@@ -662,6 +675,7 @@ describe('ConnectionPool', function() {
   });
 
   describe('getClient', function() {
+    var AUTH_PROJECT_ID = 'auth-project-id-123';
     var fakeAuthClient = {};
 
     function FakeSubscriber(address, creds, options) {
@@ -671,6 +685,7 @@ describe('ConnectionPool', function() {
     }
 
     beforeEach(function() {
+      PUBSUB.auth.projectId = AUTH_PROJECT_ID;
       PUBSUB.auth.getAuthClient = function(callback) {
         callback(null, fakeAuthClient);
       };
@@ -730,6 +745,26 @@ describe('ConnectionPool', function() {
         assert.ifError(err);
         assert(client instanceof FakeSubscriber);
         assert.strictEqual(client.creds, fakeCombinedCreds);
+        done();
+      });
+    });
+
+    it('should capture the projectId when falsey', function(done) {
+      delete pool.projectId;
+
+      pool.getClient(function(err) {
+        assert.ifError(err);
+        assert.strictEqual(pool.projectId, AUTH_PROJECT_ID);
+        done();
+      });
+    });
+
+    it('should capture the projectId if it needs tokenization', function(done) {
+      pool.projectId = '{{projectId}}';
+
+      pool.getClient(function(err) {
+        assert.ifError(err);
+        assert.strictEqual(pool.projectId, AUTH_PROJECT_ID);
         done();
       });
     });
