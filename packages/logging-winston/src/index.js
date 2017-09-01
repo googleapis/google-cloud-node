@@ -84,6 +84,15 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *     but you may optionally specify a specific monitored resource. For more
  *     information see the
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
+ * @param {object=} options.serviceContext - For logged errors, we provide this
+ *     as the service context. For more information see
+ *     [this guide]{@link https://cloud.google.com/error-reporting/docs/formatting-error-messages}
+ *     and the [official documentation]{@link https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
+ * @param {string} options.serviceContext.service - An identifier of the
+ *     service, such as the name of the executable, job, or Google App Engine
+ *     service name.
+ * @param {string=} options.serviceContext.version - Represents the version of
+ *     the service.
  *
  * @example
  * var transport = require('@google-cloud/logging-winston');
@@ -120,6 +129,7 @@ function LoggingWinston(options) {
   this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
   this.log_ = logging(options).log(logName);
   this.resource_ = options.resource;
+  this.serviceContext_ = options.serviceContext;
 }
 
 winston.transports.StackdriverLogging = LoggingWinston;
@@ -156,8 +166,10 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
   var entryMetadata = {
-    resource: this.resource_,
+    resource: this.resource_
   };
+
+  var data = {};
 
   // Stackdriver Logs Viewer picks up the summary line from the `message`
   // property of the jsonPayload.
@@ -171,16 +183,12 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   // property on an object) as that works is accepted by Error Reporting in
   // for more resource types.
   //
-  // TODO(ofrobots): when resource.type is 'global' we need to additionally
-  // provide serviceContext.service as part of the entry for Error Reporting to
-  // automatically pick up the error.
   if (metadata && metadata.stack) {
     msg += (msg ? ' ' : '') + metadata.stack;
+    data.serviceContext = this.serviceContext_;
   }
 
-  var data = {
-    message: msg
-  };
+  data.message = msg;
 
   if (is.object(metadata)) {
     data.metadata =
