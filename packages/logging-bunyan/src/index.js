@@ -56,6 +56,12 @@ var BUNYAN_TO_STACKDRIVER = {
  *     automatically, but you may optionally specify a specific monitored
  *     resource. For more information, see the
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}
+ * @param {object=} options.serviceContext - For logged errors, we provide this
+ *     as the service context. For more information see
+ *     [this guide]{@link https://cloud.google.com/error-reporting/docs/formatting-error-messages}
+ *     and the [official documentation]{@link https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
+ * @param {string} options.serviceContext.service
+ * @param {string=} options.serviceContext.version
  *
  * @example
  * var bunyan = require('bunyan');
@@ -85,6 +91,7 @@ function LoggingBunyan(options) {
 
   this.logName_ = options.logName || 'bunyan_log';
   this.resource_ = options.resource;
+  this.serviceContext_ = options.serviceContext;
 
   this.log_ = logging(options).log(this.logName_, {
     removeCircular: true
@@ -144,11 +151,9 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
     // higher). In this case we leave the 'msg' property intact.
     // https://cloud.google.com/error-reporting/docs/formatting-error-messages
     //
-    // TODO(ofrobots): when resource.type is 'global' we need to additionally
-    // provide serviceContext.service as part of the entry for Error Reporting
-    // to automatically pick up the error.
     if (record.err && record.err.stack) {
       record.message = record.err.stack;
+      record.serviceContext = this.serviceContext_;
     } else if (record.msg) {
       // Simply rename `msg` to `message`.
       record.message = record.msg;
