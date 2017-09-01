@@ -54,7 +54,10 @@ describe('logging-winston', function() {
     levels: {
       one: 1
     },
-    resource: {}
+    resource: {},
+    serviceContext: {
+      service: 'fake-service'
+    }
   };
 
   before(function() {
@@ -167,6 +170,11 @@ describe('logging-winston', function() {
     it('should localize the provided resource', function() {
       assert.strictEqual(loggingWinston.resource_, OPTIONS.resource);
     });
+
+    it('should localize the provided service context', function() {
+      assert.strictEqual(loggingWinston.serviceContext_,
+        OPTIONS.serviceContext);
+    });
   });
 
   describe('log', function() {
@@ -229,7 +237,8 @@ describe('logging-winston', function() {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
           message: MESSAGE + ' ' + error.stack,
-          metadata: error
+          metadata: error,
+          serviceContext: OPTIONS.serviceContext
         });
         done();
       };
@@ -245,7 +254,8 @@ describe('logging-winston', function() {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
           message: error.stack,
-          metadata: error
+          metadata: error,
+          serviceContext: OPTIONS.serviceContext
         });
         done();
       };
