@@ -60,8 +60,11 @@ var BUNYAN_TO_STACKDRIVER = {
  *     as the service context. For more information see
  *     [this guide]{@link https://cloud.google.com/error-reporting/docs/formatting-error-messages}
  *     and the [official documentation]{@link https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
- * @param {string} options.serviceContext.service
- * @param {string=} options.serviceContext.version
+ * @param {string} options.serviceContext.service - An identifier of the 
+ *     service, such as the name of the executable, job, or Google App Engine
+ *     service name.
+ * @param {string=} options.serviceContext.version - Represents the version of
+ *     the service.
  *
  * @example
  * var bunyan = require('bunyan');
