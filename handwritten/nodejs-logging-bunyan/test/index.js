@@ -56,7 +56,10 @@ describe('logging-bunyan', function() {
 
   var OPTIONS = {
     logName: 'log-name',
-    resource: {}
+    resource: {},
+    serviceContext: {
+      service: 'fake-service'
+    }
   };
 
   var RECORD = {
@@ -96,6 +99,10 @@ describe('logging-bunyan', function() {
 
     it('should localize the provided resource', function() {
       assert.strictEqual(loggingBunyan.resource_, OPTIONS.resource);
+    });
+
+    it('should localize the provided service context', function() {
+      assert.strictEqual(loggingBunyan.serviceContext_, OPTIONS.serviceContext);
     });
 
     it('should localize Log instance using provided name', function() {
@@ -174,7 +181,8 @@ describe('logging-bunyan', function() {
         err: {
           stack: 'the stack'
         },
-        message: 'the stack'
+        message: 'the stack',
+        serviceContext: OPTIONS.serviceContext
       }, RECORD);
 
       loggingBunyan.log_.entry = function(entryMetadata, record_) {
