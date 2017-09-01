@@ -444,8 +444,9 @@ File.prototype.createReadStream = function(options) {
   var self = this;
   var rangeRequest = is.number(options.start) || is.number(options.end);
   var tailRequest = options.end < 0;
+
+  var validateStream;
   var throughStream = streamEvents(through());
-  var validateStream = through();
 
   var crc32c = true;
   var md5 = false;
@@ -467,7 +468,11 @@ File.prototype.createReadStream = function(options) {
     // Range requests can't receive data integrity checks.
     crc32c = false;
     md5 = false;
-  } else {
+  }
+
+  var shouldRunValidation = !rangeRequest && (crc32c || md5);
+
+  if (shouldRunValidation) {
     validateStream = hashStreamValidation({
       crc32c: crc32c,
       md5: md5
@@ -478,8 +483,11 @@ File.prototype.createReadStream = function(options) {
   // returned to the user.
   function makeRequest() {
     var reqOpts = {
+      forever: false,
       uri: '',
-      gzip: true,
+      headers: {
+        'Accept-Encoding': 'gzip'
+      },
       qs: {
         alt: 'media'
       }
@@ -497,26 +505,57 @@ File.prototype.createReadStream = function(options) {
       var start = is.number(options.start) ? options.start : '0';
       var end = is.number(options.end) ? options.end : '';
 
-      reqOpts.headers = {
-        Range: 'bytes=' + (tailRequest ? end : start + '-' + end)
-      };
+      reqOpts.headers.Range =
+        'bytes=' + (tailRequest ? end : start + '-' + end);
     }
 
-    var requestStream = self.requestStream(reqOpts);
+    var requestStream = self.requestStream(reqOpts)
+      .on('error', function(err) {
+        throughStream.destroy(err);
+      })
+      .on('response', function(res) {
+        throughStream.emit('response', res);
+        common.util.handleResp(null, res, null, onResponse);
+      })
+      .on('complete', function(res) {
+        common.util.handleResp(null, res, null, onComplete);
+      })
+      .resume();
 
-    // We listen to the response event from the request stream so that we can
-    // intercept any data from going to the user if an error occurred.
-    function onResponse(err, body, res) {
+    // We listen to the response event from the request stream so that we can...
+    //
+    //   1) Intercept any data from going to the user if an error occurred.
+    //   2) Calculate the hashes from the http.IncomingMessage response stream,
+    //      which will return the bytes from the source without decompressing
+    //      gzip'd content. We then send it through decompressed, if applicable,
+    //      to the user.
+    function onResponse(err, body, rawResponseStream) {
       if (err) {
-        requestStream.unpipe(validateStream);
-        requestStream.unpipe(throughStream);
-
         // Get error message from the body.
-        res.pipe(concat(function(body) {
+        rawResponseStream.pipe(concat(function(body) {
           err.message = body.toString();
           throughStream.destroy(err);
         }));
+
+        return;
       }
+
+      var headers = rawResponseStream.toJSON().headers;
+      var isCompressed = headers['content-encoding'] === 'gzip';
+
+      rawResponseStream
+        .pipe(shouldRunValidation ? validateStream : through())
+        .pipe(isCompressed ? zlib.createGunzip() : through())
+        .pipe(throughStream, { end: false })
+        .on('error', function() {
+          // An error can occur before the request stream has been created
+          // (during authentication).
+          if (requestStream.abort) {
+            requestStream.abort();
+          }
+
+          requestStream.destroy();
+        });
     }
 
     // This is hooked to the `complete` event from the request stream. This is
@@ -524,20 +563,18 @@ File.prototype.createReadStream = function(options) {
     // wrong.
     function onComplete(err) {
       if (err) {
+        throughStream.destroy(err);
         return;
       }
 
       if (rangeRequest) {
+        throughStream.end();
         return;
       }
 
       if (!refreshedMetadata) {
         refreshedMetadata = true;
-
-        self.getMetadata(function() {
-          onComplete(err);
-        });
-
+        self.getMetadata(onComplete);
         return;
       }
 
@@ -579,31 +616,10 @@ File.prototype.createReadStream = function(options) {
         mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
 
         throughStream.destroy(mismatchError);
+      } else {
+        throughStream.end();
       }
     }
-
-    requestStream
-      .on('error', function(err) {
-        throughStream.destroy(err);
-      })
-      .on('response', function(res) {
-        throughStream.emit('response', res);
-        common.util.handleResp(null, res, null, onResponse);
-      })
-      .on('complete', function(res) {
-        common.util.handleResp(null, res, null, onComplete);
-      })
-      .pipe(validateStream)
-      .pipe(throughStream)
-      .on('error', function() {
-        // An error can occur before the request stream has been created (during
-        // authentication).
-        if (requestStream.abort) {
-          requestStream.abort();
-        }
-
-        requestStream.destroy();
-      });
   }
 
   throughStream.on('reading', makeRequest);

@@ -765,7 +765,7 @@ describe('storage', function() {
     });
   });
 
-  describe('requester pays', function() {
+  describe.skip('requester pays', function() {
     var HAS_2ND_PROJECT = is.defined(env.nonWhitelistProjectId);
     var bucket;
 
@@ -1156,7 +1156,8 @@ describe('storage', function() {
     it('should upload a gzipped file and download it', function(done) {
       var options = {
         metadata: {
-          contentEncoding: 'gzip'
+          contentEncoding: 'gzip',
+          contentType: 'text/html'
         }
       };
 
