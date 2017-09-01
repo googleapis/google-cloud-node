@@ -187,6 +187,30 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
 };
 
 /**
+ * Gets the current fully qualified trace ID when available from the
+ * @google-cloud/trace-agent library in the LogEntry.trace field format of:
+ * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
+ */
+function getCurrentTraceFromAgent() {
+  var agent = global._google_trace_agent;
+  if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
+    return null;
+  }
+
+  var traceId = agent.getCurrentContextId();
+  if (!traceId) {
+    return null;
+  }
+
+  var traceProjectId = agent.getWriterProjectId();
+  if (!traceProjectId) {
+    return null;
+  }
+
+  return `projects/${traceProjectId}/traces/${traceId}`;
+}
+
+/**
  * Intercept log entries as they are written so we can attempt to add the trace
  * ID in the same continuation as the function that wrote the log, because the
  * trace agent currently uses continuation local storage for the trace context.
@@ -197,7 +221,7 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
 LoggingBunyan.prototype.write = function(record, encoding, callback) {
   record = extend({}, record);
   if (!record[LOGGING_TRACE_KEY]) {
-    var trace = logging.getCurrentTraceFromAgent();
+    var trace = getCurrentTraceFromAgent();
     if (trace) {
       record[LOGGING_TRACE_KEY] = trace;
     }

@@ -131,6 +131,30 @@ winston.transports.StackdriverLogging = LoggingWinston;
 util.inherits(LoggingWinston, winston.Transport);
 
 /**
+ * Gets the current fully qualified trace ID when available from the
+ * @google-cloud/trace-agent library in the LogEntry.trace field format of:
+ * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
+ */
+function getCurrentTraceFromAgent() {
+  var agent = global._google_trace_agent;
+  if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
+    return null;
+  }
+
+  var traceId = agent.getCurrentContextId();
+  if (!traceId) {
+    return null;
+  }
+
+  var traceProjectId = agent.getWriterProjectId();
+  if (!traceProjectId) {
+    return null;
+  }
+
+  return `projects/${traceProjectId}/traces/${traceId}`;
+}
+
+/**
  * Relay a log entry to the logging agent. This is normally called by winston.
  *
  * @param {string} levelName - The severity level at which this entry is being
@@ -207,7 +231,7 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     entryMetadata.trace = metadata[LOGGING_TRACE_KEY];
     delete data.metadata[LOGGING_TRACE_KEY];
   } else {
-    var trace = logging.getCurrentTraceFromAgent();
+    var trace = getCurrentTraceFromAgent();
     if (trace) {
       entryMetadata.trace = trace;
     }

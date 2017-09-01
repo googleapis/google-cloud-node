@@ -773,41 +773,6 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
   });
 };
 
-/**
- * Attempts to get the current fully qualified trace ID from the
- * @google-cloud/trace-agent (if installed) in the format
- * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
- *
- * That is the specified format to set the LogEntry.trace field so that the
- * Cloud Console logs and trace viewer can correlate log entries and associate
- * them with traces.
- *
- * This returns null if the trace agent is not installed, there is no available
- * trace context or no trace writer project ID.
- */
-function getCurrentTraceFromAgent() {
-  var traceAgent = global._google_trace_agent;
-  if (!traceAgent || !traceAgent.getCurrentContextId ||
-      !traceAgent.getWriterProjectId) {
-    // Trace agent is not installed or is an older version
-    return null;
-  }
-
-  var traceId = traceAgent.getCurrentContextId();
-  if (!traceId) {
-    // No trace context because request not sampled or context lost
-    return null;
-  }
-
-  var traceProjectId = traceAgent.getWriterProjectId();
-  if (!traceProjectId) {
-    // No project, possibly because async project auto-discovery not yet done
-    return null;
-  }
-
-  return `projects/${traceProjectId}/traces/${traceId}`;
-}
-
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
@@ -832,7 +797,6 @@ Logging.Entry = Entry;
 Logging.Log = Log;
 Logging.Logging = Logging;
 Logging.Sink = Sink;
-Logging.getCurrentTraceFromAgent = getCurrentTraceFromAgent;
 
 module.exports = Logging;
 module.exports.v2 = v2;

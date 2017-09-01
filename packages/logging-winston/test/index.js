@@ -350,6 +350,43 @@ describe('logging-winston', function() {
       global._google_trace_agent = oldTraceAgent;
     });
 
+    it('should leave out trace metadata if trace unavailable', function() {
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+      };
+
+      var oldTraceAgent = global._google_trace_agent;
+
+      global._google_trace_agent = {};
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return null; },
+        getWriterProjectId: function() { return null; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return null; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return null; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = oldTraceAgent;
+    });
+
     it('should write to the log', function(done) {
       var entry = {};
 

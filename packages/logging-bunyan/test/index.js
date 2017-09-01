@@ -298,6 +298,7 @@ describe('logging-bunyan', function() {
     });
 
     it('should leave prefixed trace property as is if set', function(done) {
+      var oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
         getCurrentContextId: function() { return 'trace-from-agent'; },
         getWriterProjectId: function() { return 'project1'; }
@@ -315,7 +316,42 @@ describe('logging-bunyan', function() {
       };
 
       loggingBunyan.write(recordWithTraceAlreadySet, '', assert.ifError);
+
+      global._google_trace_agent = oldTraceAgent;
     });
+  });
+
+  it('should not set prefixed trace property if trace unavailable', function() {
+    FakeWritable.prototype.write = function(record, encoding, callback) {
+      assert.deepStrictEqual(record, RECORD);
+      assert.strictEqual(encoding, '');
+      assert.strictEqual(callback, assert.ifError);
+      assert.strictEqual(this, loggingBunyan);
+    };
+    var oldTraceAgent = global._google_trace_agent;
+
+    global._google_trace_agent = {};
+    loggingBunyan.write(RECORD, '', assert.ifError);
+
+    global._google_trace_agent = {
+      getCurrentContextId: function() { return null; },
+      getWriterProjectId: function() { return null; }
+    };
+    loggingBunyan.write(RECORD, '', assert.ifError);
+
+    global._google_trace_agent = {
+      getCurrentContextId: function() { return null; },
+      getWriterProjectId: function() { return 'project1'; }
+    };
+    loggingBunyan.write(RECORD, '', assert.ifError);
+
+    global._google_trace_agent = {
+      getCurrentContextId: function() { return 'trace1'; },
+      getWriterProjectId: function() { return null; }
+    };
+    loggingBunyan.write(RECORD, '', assert.ifError);
+
+    global._google_trace_agent = oldTraceAgent;
   });
 
   describe('_write', function() {
