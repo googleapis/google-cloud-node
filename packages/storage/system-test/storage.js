@@ -765,7 +765,7 @@ describe('storage', function() {
     });
   });
 
-  describe.skip('requester pays', function() {
+  describe('requester pays', function() {
     var HAS_2ND_PROJECT = is.defined(env.nonWhitelistProjectId);
     var bucket;
 

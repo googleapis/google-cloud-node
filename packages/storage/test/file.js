@@ -433,7 +433,7 @@ describe('File', function() {
     });
   });
 
-  describe.only('createReadStream', function() {
+  describe('createReadStream', function() {
     function getFakeRequest(data) {
       var aborted = false;
       var destroyed = false;
