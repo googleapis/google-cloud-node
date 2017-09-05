@@ -37,7 +37,7 @@ describe('BigQuery', function() {
   var table = dataset.table(generateName('table'));
   var bucket = storage.bucket(generateName('bucket'));
 
-  var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
+  var query = 'SELECT url FROM `publicdata.samples.github_nested` LIMIT 100';
 
   var SCHEMA = [
     {
@@ -302,7 +302,7 @@ describe('BigQuery', function() {
       });
   });
 
-  it('should query', function(done) {
+  it.only('should query', function(done) {
     bigquery.query(query, function(err, rows) {
       assert.ifError(err);
       assert.equal(rows.length, 100);

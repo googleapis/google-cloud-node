@@ -116,19 +116,22 @@ BigQuery.prototype.mergeSchemaWithRows_ = function(schema, rows) {
     }
 
     switch (schemaField.type) {
-      case 'BOOLEAN': {
-        value = value === 'true';
+      case 'BOOLEAN':
+      case 'BOOL': {
+        value = value.toLowerCase() === 'true';
         break;
       }
       case 'BYTES': {
         value = new Buffer(value, 'base64');
         break;
       }
-      case 'FLOAT': {
+      case 'FLOAT':
+      case 'FLOAT64': {
         value = parseFloat(value);
         break;
       }
-      case 'INTEGER': {
+      case 'INTEGER':
+      case 'INT64': {
         value = parseInt(value, 10);
         break;
       }
@@ -881,6 +884,8 @@ BigQuery.prototype.job = function(id) {
  *     complete, in milliseconds, before returning. Default is to return
  *     immediately. If the timeout passes before the job completes, the request
  *     will fail with a `TIMEOUT` error.
+ * @param {boolean} options.useLegacySql - Option to use legacy sql syntax.
+ *     Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
@@ -964,10 +969,11 @@ BigQuery.prototype.query = function(query, options, callback) {
     options = null;
   }
 
-  var reqOpts = extend({}, query);
+  var reqOpts = extend({
+    useLegacySql: false
+  }, query);
 
   if (query.params) {
-    reqOpts.useLegacySql = false;
     reqOpts.parameterMode = is.array(query.params) ? 'positional' : 'named';
 
     if (reqOpts.parameterMode === 'named') {
@@ -1016,6 +1022,8 @@ BigQuery.prototype.query = function(query, options, callback) {
  *     accessed via `job.metadata`.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
+ * @param {boolean} options.useLegacySql - Option to use legacy sql syntax.
+ *     Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigquery/job} callback.job - The newly created job for your
@@ -1075,7 +1083,9 @@ BigQuery.prototype.startQuery = function(options, callback) {
     throw new Error('A SQL query string is required.');
   }
 
-  var query = extend(true, {}, options);
+  var query = extend(true, {
+    useLegacySql: false
+  }, options);
 
   if (options.destination) {
     if (!(options.destination instanceof Table)) {
