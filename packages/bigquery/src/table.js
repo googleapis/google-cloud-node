@@ -372,6 +372,11 @@ Table.formatMetadata_ = function(options) {
  * });
  */
 Table.prototype.copy = function(destination, metadata, callback) {
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = null;
+  }
+
   this.startCopy(destination, metadata, function(err, job, resp) {
     if (err) {
       callback(err, resp);
@@ -427,7 +432,12 @@ Table.prototype.copy = function(destination, metadata, callback) {
  * });
  */
 Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
-  this.startExport(sourceTables, metadata, function(err, job, resp) {
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = null;
+  }
+
+  this.startCopyFrom(sourceTables, metadata, function(err, job, resp) {
     if (err) {
       callback(err, resp);
       return;
@@ -638,6 +648,11 @@ Table.prototype.createWriteStream = function(metadata) {
  * });
  */
 Table.prototype.export = function(destination, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = null;
+  }
+
   this.startExport(destination, options, function(err, job, resp) {
     if (err) {
       callback(err, resp);
@@ -815,6 +830,11 @@ Table.prototype.getRows = function(options, callback) {
  * });
  */
 Table.prototype.import = function(source, metadata, callback) {
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = null;
+  }
+
   this.startImport(source, metadata, function(err, job, resp) {
     if (err) {
       callback(err, resp);
@@ -1127,6 +1147,8 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
     metadata = {};
   }
 
+  metadata = metadata || {};
+
   var jobPrefix = metadata.jobPrefix;
   delete metadata.jobPrefix;
 
@@ -1174,10 +1196,12 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
  *   dataset.table('your-second-table')
  * ];
  *
- * table.startCopyFrom(sourceTables, function(err, job, apiResponse) {
+ * var callback = function(err, job, apiResponse) {
  *   // `job` is a Job object that can be used to check the status of the
  *   // request.
- * });
+ * };
+ *
+ * table.startCopyFrom(sourceTables, callback);
  *
  * //-
  * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for
@@ -1188,7 +1212,7 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
  *   writeDisposition: 'WRITE_TRUNCATE'
  * };
  *
- * table.startCopyFrom(sourceTables, metadata, function(err, job, apiResponse) {});
+ * table.startCopyFrom(sourceTables, metadata, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -1213,6 +1237,8 @@ Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
     callback = metadata;
     metadata = {};
   }
+
+  metadata = metadata || {};
 
   var jobPrefix = metadata.jobPrefix;
   delete metadata.jobPrefix;
@@ -1313,6 +1339,8 @@ Table.prototype.startExport = function(destination, options, callback) {
     options = {};
   }
 
+  options = options || {};
+
   extend(true, options, {
     destinationUris: arrify(destination).map(function(dest) {
       if (!common.util.isCustomType(dest, 'storage/file')) {
@@ -1394,10 +1422,12 @@ Table.prototype.startExport = function(destination, options, callback) {
  * //-
  * // Load data from a local file.
  * //-
- * table.startImport('./institutions.csv', function(err, job, apiResponse) {
+ * var callback = function(err, job, apiResponse) {
  *   // `job` is a Job object that can be used to check the status of the
  *   // request.
- * });
+ * };
+ *
+ * table.startImport('./institutions.csv', callback);
  *
  * //-
  * // You may also pass in metadata in the format of a Jobs resource. See
@@ -1408,7 +1438,7 @@ Table.prototype.startExport = function(destination, options, callback) {
  *   sourceFormat: 'NEWLINE_DELIMITED_JSON'
  * };
  *
- * table.startImport('./my-data.csv', metadata, function(err, job, apiResponse) {});
+ * table.startImport('./my-data.csv', metadata, callback);
  *
  * //-
  * // Load data from a file in your Cloud Storage bucket.
@@ -1417,7 +1447,7 @@ Table.prototype.startExport = function(destination, options, callback) {
  *   projectId: 'grape-spaceship-123'
  * });
  * var data = gcs.bucket('institutions').file('data.csv');
- * table.startImport(data, function(err, job, apiResponse) {});
+ * table.startImport(data, callback);
  *
  * //-
  * // Load data from multiple files in your Cloud Storage bucket(s).
@@ -1425,7 +1455,7 @@ Table.prototype.startExport = function(destination, options, callback) {
  * table.startImport([
  *   gcs.bucket('institutions').file('2011.csv'),
  *   gcs.bucket('institutions').file('2012.csv')
- * ], function(err, job, apiResponse) {});
+ * ], callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -1463,9 +1493,8 @@ Table.prototype.startImport = function(source, metadata, callback) {
     return fs.createReadStream(source)
       .pipe(this.createWriteStream(metadata))
       .on('error', callback)
-      .on('complete', function(resp) {
-        // TODO(ryanseys): Does this have to create a job object?
-        callback(null, resp, resp);
+      .on('complete', function(job) {
+        callback(null, job, job.metadata);
       });
   }
 

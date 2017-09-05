@@ -302,7 +302,7 @@ describe('BigQuery', function() {
       });
   });
 
-  it.only('should query', function(done) {
+  it('should query', function(done) {
     bigquery.query(query, function(err, rows) {
       assert.ifError(err);
       assert.equal(rows.length, 100);
@@ -557,6 +557,27 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should start copying data from current table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table1Instance.startCopy(table2Instance, function(err, job) {
+          assert.ifError(err);
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              // Data may take up to 90 minutes to be copied*, so we cannot test
+              // to see that anything but the request was successful.
+              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
+              done();
+            });
+        });
+      });
+
       it('should copy data from current table', function(done) {
         var table1 = TABLES[1];
         var table1Instance = table1.table;
@@ -564,7 +585,21 @@ describe('BigQuery', function() {
         var table2 = TABLES[2];
         var table2Instance = table2.table;
 
-        table1Instance.copy(table2Instance, function(err, job) {
+        table1Instance.copy(table2Instance, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
+        });
+      });
+
+      it('should start copying data from another table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table2Instance.startCopyFrom(table1Instance, function(err, job) {
           assert.ifError(err);
 
           job
@@ -585,17 +620,10 @@ describe('BigQuery', function() {
         var table2 = TABLES[2];
         var table2Instance = table2.table;
 
-        table2Instance.copyFrom(table1Instance, function(err, job) {
+        table2Instance.copyFrom(table1Instance, function(err, resp) {
           assert.ifError(err);
-
-          job
-            .on('error', done)
-            .on('complete', function() {
-              // Data may take up to 90 minutes to be copied*, so we cannot test
-              // to see that anything but the request was successful.
-              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
-              done();
-            });
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
         });
       });
     });
@@ -614,8 +642,8 @@ describe('BigQuery', function() {
         file.delete(done);
       });
 
-      it('should import data from a file in your bucket', function(done) {
-        table.import(file, function(err, job) {
+      it('should start to import data from a storage file', function(done) {
+        table.startImport(file, function(err, job) {
           assert.ifError(err);
 
           job
@@ -626,11 +654,16 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should import data from a storage file', function(done) {
+        table.import(file, function(err, resp) {
+          assert.ifError(err)
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
+        });
+      })
+
       it('should import data from a file via promises', function() {
         return table.import(file)
-          .then(function(results) {
-            return results[0].promise();
-          })
           .then(function(results) {
             var metadata = results[0];
             assert.strictEqual(metadata.status.state, 'DONE');
@@ -1049,10 +1082,10 @@ describe('BigQuery', function() {
         });
       });
 
-      it('should export data to a file in your bucket', function(done) {
+      it('should start export data to a storage file', function(done) {
         var file = bucket.file('kitten-test-data-backup.json');
 
-        table.export(file, function(err, job) {
+        table.startExport(file, function(err, job) {
           assert.ifError(err);
 
           job
@@ -1060,6 +1093,16 @@ describe('BigQuery', function() {
             .on('complete', function() {
               done();
             });
+        });
+      });
+
+      it('should export data to a storage file', function(done) {
+        var file = bucket.file('kitten-test-data-backup.json');
+
+        table.export(file, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
         });
       });
     });
