@@ -522,6 +522,16 @@ File.prototype.createReadStream = function(options) {
       })
       .resume();
 
+    throughStream.on('error', function() {
+      // An error can occur before the request stream has been created
+      // (during authentication).
+      if (requestStream.abort) {
+        requestStream.abort();
+      }
+
+      requestStream.destroy();
+    });
+
     // We listen to the response event from the request stream so that we can...
     //
     //   1) Intercept any data from going to the user if an error occurred.
@@ -546,16 +556,7 @@ File.prototype.createReadStream = function(options) {
       rawResponseStream
         .pipe(shouldRunValidation ? validateStream : through())
         .pipe(isCompressed ? zlib.createGunzip() : through())
-        .pipe(throughStream, { end: false })
-        .on('error', function() {
-          // An error can occur before the request stream has been created
-          // (during authentication).
-          if (requestStream.abort) {
-            requestStream.abort();
-          }
-
-          requestStream.destroy();
-        });
+        .pipe(throughStream, { end: false });
     }
 
     // This is hooked to the `complete` event from the request stream. This is
