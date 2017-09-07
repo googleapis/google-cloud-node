@@ -773,6 +773,30 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
   });
 };
 
+/**
+ * Gets the current fully qualified trace ID when available from the
+ * @google-cloud/trace-agent library in the LogEntry.trace field format of:
+ * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
+ */
+function getCurrentTraceFromAgent() {
+  var agent = global._google_trace_agent;
+  if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
+    return null;
+  }
+
+  var traceId = agent.getCurrentContextId();
+  if (!traceId) {
+    return null;
+  }
+
+  var traceProjectId = agent.getWriterProjectId();
+  if (!traceProjectId) {
+    return null;
+  }
+
+  return `projects/${traceProjectId}/traces/${traceId}`;
+}
+
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
@@ -797,6 +821,7 @@ Logging.Entry = Entry;
 Logging.Log = Log;
 Logging.Logging = Logging;
 Logging.Sink = Sink;
+Logging.getCurrentTraceFromAgent = getCurrentTraceFromAgent;
 
 module.exports = Logging;
 module.exports.v2 = v2;
