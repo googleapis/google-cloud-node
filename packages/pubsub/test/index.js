@@ -19,11 +19,14 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
+var grpc = require('grpc');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var PKG = require('../package.json');
 var v1 = require('../src/v1/index.js');
+
+var fakeGrpc = extend({}, grpc);
 
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
@@ -122,6 +125,7 @@ describe('PubSub', function() {
         util: fakeUtil
       },
       'google-auto-auth': fakeGoogleAutoAuth,
+      grpc: fakeGrpc,
       './snapshot.js': FakeSnapshot,
       './subscription.js': Subscription,
       './topic.js': FakeTopic,
@@ -604,12 +608,18 @@ describe('PubSub', function() {
       var defaultBaseUrl_ = 'defaulturl';
       var testingUrl = 'localhost:8085';
 
+      var fakeCreds = {};
+      fakeGrpc.credentials.createInsecure = function() {
+        return fakeCreds;
+      };
+
       setHost(defaultBaseUrl_);
       pubsub.options.apiEndpoint = testingUrl;
       pubsub.determineBaseUrl_();
 
       assert.strictEqual(pubsub.options.servicePath, 'localhost');
       assert.strictEqual(pubsub.options.port, '8085');
+      assert.strictEqual(pubsub.options.sslCreds, fakeCreds);
     });
 
     it('should remove slashes from the baseUrl', function() {
