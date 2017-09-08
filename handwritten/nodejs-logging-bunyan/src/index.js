@@ -41,6 +41,13 @@ var BUNYAN_TO_STACKDRIVER = {
 };
 
 /**
+ * Key to use in the Bunyan payload to allow users to indicate a trace for the
+ * request, and to store as an intermediate value on the log entry before it
+ * gets written to the Stackdriver logging API.
+ */
+var LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
+
+/**
  * This module provides support for streaming your Bunyan logs to
  * [Stackdriver Logging](https://cloud.google.com/logging).
  *
@@ -143,8 +150,6 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
     );
   }
 
-  record = extend({}, record);
-
   // Stackdriver Log Viewer picks up the summary line from the 'message' field
   // of the payload. Unless the user has provided a 'message' property also,
   // move the 'msg' to 'message'.
@@ -181,7 +186,56 @@ LoggingBunyan.prototype.formatEntry_ = function(record) {
     delete record.httpRequest;
   }
 
+  if (record[LOGGING_TRACE_KEY]) {
+    entryMetadata.trace = record[LOGGING_TRACE_KEY];
+    delete record[LOGGING_TRACE_KEY];
+  }
+
   return this.log_.entry(entryMetadata, record);
+};
+
+/**
+ * Gets the current fully qualified trace ID when available from the
+ * @google-cloud/trace-agent library in the LogEntry.trace field format of:
+ * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
+ */
+function getCurrentTraceFromAgent() {
+  var agent = global._google_trace_agent;
+  if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
+    return null;
+  }
+
+  var traceId = agent.getCurrentContextId();
+  if (!traceId) {
+    return null;
+  }
+
+  var traceProjectId = agent.getWriterProjectId();
+  if (!traceProjectId) {
+    return null;
+  }
+
+  return `projects/${traceProjectId}/traces/${traceId}`;
+}
+
+/**
+ * Intercept log entries as they are written so we can attempt to add the trace
+ * ID in the same continuation as the function that wrote the log, because the
+ * trace agent currently uses continuation local storage for the trace context.
+ *
+ * By the time the Writable stream buffer gets flushed and _write gets called
+ * we may well be in a different continuation.
+ */
+LoggingBunyan.prototype.write = function(record, encoding, callback) {
+  record = extend({}, record);
+  if (!record[LOGGING_TRACE_KEY]) {
+    var trace = getCurrentTraceFromAgent();
+    if (trace) {
+      record[LOGGING_TRACE_KEY] = trace;
+    }
+  }
+
+  Writable.prototype.write.call(this, record, encoding, callback);
 };
 
 /**
