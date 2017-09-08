@@ -60,6 +60,11 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
 };
 
 /**
+ * Log entry data key to allow users to indicate a trace for the request.
+ */
+var LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
+
+/**
  * This module provides support for streaming your winston logs to
  * [Stackdriver Logging](https://cloud.google.com/logging).
  *
@@ -136,6 +141,30 @@ winston.transports.StackdriverLogging = LoggingWinston;
 util.inherits(LoggingWinston, winston.Transport);
 
 /**
+ * Gets the current fully qualified trace ID when available from the
+ * @google-cloud/trace-agent library in the LogEntry.trace field format of:
+ * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
+ */
+function getCurrentTraceFromAgent() {
+  var agent = global._google_trace_agent;
+  if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
+    return null;
+  }
+
+  var traceId = agent.getCurrentContextId();
+  if (!traceId) {
+    return null;
+  }
+
+  var traceProjectId = agent.getWriterProjectId();
+  if (!traceProjectId) {
+    return null;
+  }
+
+  return `projects/${traceProjectId}/traces/${traceId}`;
+}
+
+/**
  * Relay a log entry to the logging agent. This is normally called by winston.
  *
  * @param {string} levelName - The severity level at which this entry is being
@@ -203,6 +232,16 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
     if (metadata.httpRequest) {
       entryMetadata.httpRequest = metadata.httpRequest;
       delete data.metadata.httpRequest;
+    }
+  }
+
+  if (metadata && metadata[LOGGING_TRACE_KEY]) {
+    entryMetadata.trace = metadata[LOGGING_TRACE_KEY];
+    delete data.metadata[LOGGING_TRACE_KEY];
+  } else {
+    var trace = getCurrentTraceFromAgent();
+    if (trace) {
+      entryMetadata.trace = trace;
     }
   }
 
