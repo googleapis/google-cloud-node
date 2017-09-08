@@ -318,6 +318,85 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
+    it('should promote prefixed trace property to metadata', function(done) {
+      const metadataWithTrace = extend({
+        'logging.googleapis.com/trace': 'trace1'
+      }, METADATA);
+
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          trace: 'trace1'
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+        done();
+      };
+      loggingWinston.log(LEVEL, MESSAGE, metadataWithTrace, assert.ifError);
+    });
+
+    it('should set trace metadata from agent if available', function(done) {
+      var oldTraceAgent = global._google_trace_agent;
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+          trace: 'projects/project1/traces/trace1'
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+        done();
+      };
+
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = oldTraceAgent;
+    });
+
+    it('should leave out trace metadata if trace unavailable', function() {
+      loggingWinston.log_.entry = function(entryMetadata, data) {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingWinston.resource_,
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA
+        });
+      };
+
+      var oldTraceAgent = global._google_trace_agent;
+
+      global._google_trace_agent = {};
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return null; },
+        getWriterProjectId: function() { return null; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return null; },
+        getWriterProjectId: function() { return 'project1'; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = {
+        getCurrentContextId: function() { return 'trace1'; },
+        getWriterProjectId: function() { return null; }
+      };
+      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+
+      global._google_trace_agent = oldTraceAgent;
+    });
+
     it('should write to the log', function(done) {
       var entry = {};
 
