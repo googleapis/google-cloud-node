@@ -233,9 +233,8 @@ describe('logging-bunyan', function() {
     });
 
     it('should promote prefixed trace property to metadata', function(done) {
-      var recordWithRequest = extend({
-        'logging.googleapis.com/trace': 'trace1'
-      }, RECORD);
+      var recordWithTrace = extend({}, RECORD);
+      recordWithTrace[LoggingBunyan.LOGGING_TRACE_KEY] = 'trace1';
 
       loggingBunyan.log_.entry = function(entryMetadata, record) {
         assert.deepStrictEqual(entryMetadata, {
@@ -248,7 +247,7 @@ describe('logging-bunyan', function() {
         done();
       };
 
-      loggingBunyan.formatEntry_(recordWithRequest);
+      loggingBunyan.formatEntry_(recordWithTrace);
     });
   });
 
@@ -285,9 +284,9 @@ describe('logging-bunyan', function() {
         getWriterProjectId: function() { return 'project1'; }
       };
       const recordWithoutTrace = extend({}, RECORD);
-      const recordWithTrace = extend({
-        'logging.googleapis.com/trace': 'projects/project1/traces/trace1'
-      }, RECORD);
+      var recordWithTrace = extend({}, RECORD);
+      recordWithTrace[LoggingBunyan.LOGGING_TRACE_KEY] =
+          'projects/project1/traces/trace1';
 
       FakeWritable.prototype.write = function(record, encoding, callback) {
         // Check that trace field added to record before calling Writable.write
@@ -311,9 +310,8 @@ describe('logging-bunyan', function() {
         getCurrentContextId: function() { return 'trace-from-agent'; },
         getWriterProjectId: function() { return 'project1'; }
       };
-      const recordWithTraceAlreadySet = extend({
-        'logging.googleapis.com/trace': 'trace-already-set'
-      }, RECORD);
+      var recordWithTraceAlreadySet = extend({}, RECORD);
+      recordWithTraceAlreadySet[LoggingBunyan.LOGGING_TRACE_KEY] = 'trace1';
 
       FakeWritable.prototype.write = function(record, encoding, callback) {
         assert.deepStrictEqual(record, recordWithTraceAlreadySet);
