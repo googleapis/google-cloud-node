@@ -233,7 +233,7 @@ describe('logging-bunyan', function() {
     });
 
     it('should promote prefixed trace property to metadata', function(done) {
-      var recordWithTrace = extend({}, RECORD);
+      const recordWithTrace = extend({}, RECORD);
       recordWithTrace[LoggingBunyan.LOGGING_TRACE_KEY] = 'trace1';
 
       loggingBunyan.log_.entry = function(entryMetadata, record) {
@@ -284,7 +284,7 @@ describe('logging-bunyan', function() {
         getWriterProjectId: function() { return 'project1'; }
       };
       const recordWithoutTrace = extend({}, RECORD);
-      var recordWithTrace = extend({}, RECORD);
+      const recordWithTrace = extend({}, RECORD);
       recordWithTrace[LoggingBunyan.LOGGING_TRACE_KEY] =
           'projects/project1/traces/trace1';
 
@@ -305,12 +305,12 @@ describe('logging-bunyan', function() {
     });
 
     it('should leave prefixed trace property as is if set', function(done) {
-      var oldTraceAgent = global._google_trace_agent;
+      const oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
         getCurrentContextId: function() { return 'trace-from-agent'; },
         getWriterProjectId: function() { return 'project1'; }
       };
-      var recordWithTraceAlreadySet = extend({}, RECORD);
+      const recordWithTraceAlreadySet = extend({}, RECORD);
       recordWithTraceAlreadySet[LoggingBunyan.LOGGING_TRACE_KEY] = 'trace1';
 
       FakeWritable.prototype.write = function(record, encoding, callback) {
