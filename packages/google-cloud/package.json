@@ -39,7 +39,7 @@
     "src",
     "AUTHORS",
     "CONTRIBUTORS",
-    "COPYING"
+    "LICENSE"
   ],
   "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [

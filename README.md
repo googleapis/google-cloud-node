@@ -1162,7 +1162,7 @@ See [CONTRIBUTING][contributing] for more information on how to get started.
 
 ## License
 
-Apache 2.0 - See [COPYING][copying] for more information.
+Apache 2.0 - See [LICENSE][license] for more information.
 
 
 [gcloud-homepage]: https://googlecloudplatform.github.io/google-cloud-node/
@@ -1250,4 +1250,4 @@ Apache 2.0 - See [COPYING][copying] for more information.
 
 [contributing]: .github/CONTRIBUTING.md
 
-[copying]: COPYING
+[license]: LICENSE
