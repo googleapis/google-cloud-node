@@ -861,12 +861,21 @@ Table.prototype.import = function(source, metadata, callback) {
  *
  * @param {object|object[]} rows - The rows to insert into the table.
  * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoCreate - Automatically create the table if it
+ *     doesn't already exist. In order for this to succeed the `schema` option
+ *     must also be set.
  * @param {boolean} options.ignoreUnknownValues - Accept rows that contain
  *     values that do not match the schema. The unknown values are ignored.
  *     Default: `false`.
  * @param {boolean} options.raw - If `true`, the `rows` argument is expected to
  *     be formatted as according to the
  *     [specification](https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll).
+ * @param {string|object} options.schema - A comma-separated list of name:type
+ *     pairs. Valid types are "string", "integer", "float", "boolean", and
+ *     "timestamp". If the type is omitted, it is assumed to be "string".
+ *     Example: "name:string, age:integer". Schemas can also be specified as a
+ *     JSON array of fields, which allows for nested and repeated fields. See
+ *     a [Table resource](http://goo.gl/sl8Dmg) for more detailed information.
  * @param {boolean} options.skipInvalidRows - Insert all valid rows of a
  *     request, even if invalid rows exist. Default: `false`.
  * @param {string} options.templateSuffix - Treat the destination table as a
@@ -978,7 +987,7 @@ Table.prototype.insert = function(rows, options, callback) {
     throw new Error('You must provide at least 1 row to be inserted.');
   }
 
-  var json = extend(true, options, {
+  var json = extend(true, {}, options, {
     rows: rows
   });
 
@@ -990,7 +999,21 @@ Table.prototype.insert = function(rows, options, callback) {
     });
   }
 
-  delete options.raw;
+  delete json.raw;
+
+  var autoCreate = !!options.autoCreate;
+  var schema;
+
+  delete json.autoCreate;
+
+  if (autoCreate) {
+    if (!options.schema) {
+      throw new Error('Schema must be provided in order to auto-create Table.');
+    }
+
+    schema = options.schema;
+    delete json.schema
+  }
 
   this.request({
     method: 'POST',
@@ -998,8 +1021,8 @@ Table.prototype.insert = function(rows, options, callback) {
     json: json
   }, function(err, resp) {
     if (err) {
-      if (err.code === 404) {
-        createTableAndRetry();
+      if (err.code === 404 && autoCreate) {
+        setTimeout(createTableAndRetry, Math.random() * 60000);
       } else {
         callback(err, resp);
       }
@@ -1029,13 +1052,17 @@ Table.prototype.insert = function(rows, options, callback) {
   });
 
   function createTableAndRetry() {
-    self.create(function(err, table, resp) {
-      if (err) {
+    self.create({
+      schema: schema
+    }, function(err, table, resp) {
+      if (err && err.code !== 409) {
         callback(err, resp);
         return;
       }
 
-      self.insert(rows, options, callback);
+      setTimeout(function() {
+        self.insert(rows, options, callback);
+      }, 60000);
     });
   }
 };

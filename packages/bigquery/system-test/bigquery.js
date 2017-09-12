@@ -706,6 +706,37 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should create tables upon insert', function() {
+        var table = dataset.table(generateName('does-not-exist'));
+
+        var row = {
+          name: 'stephen'
+        };
+
+        var options = {
+          autoCreate: true,
+          schema: SCHEMA
+        };
+
+        return table.insert(row, options)
+          .then(function() {
+            // getting rows immediately after insert
+            // results in an empty array
+            return new Promise(function(resolve) {
+              setTimeout(resolve, 2500);
+            });
+          })
+          .then(function() {
+            return table.getRows();
+          })
+          .then(function(data) {
+            var rows = data[0];
+
+            assert.strictEqual(rows.length, 1);
+            assert.strictEqual(rows[0].name, row.name);
+          })
+      });
+
       describe('SQL parameters', function() {
         describe('positional', function() {
           it('should work with strings', function(done) {
