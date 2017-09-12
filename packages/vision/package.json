@@ -34,7 +34,7 @@
   "files": [
     "src",
     "AUTHORS",
-    "COPYING"
+    "LICENSE"
   ],
   "keywords": [
     "google apis client",

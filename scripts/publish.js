@@ -32,7 +32,7 @@ var newVersion = args[2].replace(/^v*/, '');
 // release
 cp(path.join(__dirname, '../AUTHORS'), cwd);
 cp(path.join(__dirname, '../CONTRIBUTORS'), cwd);
-cp(path.join(__dirname, '../COPYING'), cwd);
+cp(path.join(__dirname, '../LICENSE'), cwd);
 
 var npmModuleName = moduleName === 'google-cloud' ? '' : '@google-cloud/';
 npmModuleName += moduleName;
@@ -115,7 +115,7 @@ setTimeout(function() {
   rm([
     path.join(cwd, 'AUTHORS'),
     path.join(cwd, 'CONTRIBUTORS'),
-    path.join(cwd, 'COPYING')
+    path.join(cwd, 'LICENSE')
   ]);
 
   exec('git commit -am "' + moduleName + ' @ ' + newVersion + ' tagged."');
