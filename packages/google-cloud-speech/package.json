@@ -39,7 +39,7 @@
     "protos",
     "src",
     "AUTHORS",
-    "COPYING"
+    "LICENSE"
   ],
   "keywords": [
     "google apis client",
