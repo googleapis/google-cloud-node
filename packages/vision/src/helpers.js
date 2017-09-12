@@ -86,7 +86,7 @@ var coerceImage = (image, callback) => {
          throw new Error(
            'Setting explicit features is not supported on this method. ' +
            'Use the #annotateImage method instead.'
-         )
+         );
        }
      }
 
