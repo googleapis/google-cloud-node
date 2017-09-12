@@ -21,10 +21,10 @@
     "yargs": "9.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.0.4",
+    "@google-cloud/nodejs-repo-tools": "2.0.9",
     "ava": "0.22.0",
     "proxyquire": "1.8.0",
-    "sinon": "4.0.0"
+    "sinon": "4.0.1"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
@@ -37,6 +37,13 @@
         "file": "metrics.js",
         "docs_link": "https://cloud.google.com/monitoring/docs",
         "usage": "node metrics.js --help"
+      },
+      {
+        "id": "uptime",
+        "name": "Uptime Config",
+        "file": "uptime.js",
+        "docs_link": "https://cloud.google.com/monitoring/docs",
+        "usage": "node uptime.js --help"
       }
     ]
   }

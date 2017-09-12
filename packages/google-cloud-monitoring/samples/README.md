@@ -1,8 +1,8 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Stackdriver Monitoring Node.js Samples
+# Stackdriver Monitoring: Node.js Samples
 
-[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-monitoring.svg)]()
+[![Build](https://storage.googleapis.com/.svg)]()
 
 [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
@@ -11,8 +11,7 @@
 * [Setup](#setup)
 * [Samples](#samples)
   * [Metrics](#metrics)
-  * [Listing resources](#listing-resources)
-  * [Custom metrics](#custom-metrics)
+  * [Uptime Config](#uptime-config)
 * [Running the tests](#running-the-tests)
 
 ## Setup
@@ -59,6 +58,7 @@ Commands:
   get-resource <resourceType> [projectId]  Get a monitored resource descriptor.
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --help           Show help                                                                                   [boolean]
   --projectId, -p                                                                                               [string]
 
@@ -81,37 +81,38 @@ For more information, see https://cloud.google.com/monitoring/docs
 [metrics_0_docs]: https://cloud.google.com/monitoring/docs
 [metrics_0_code]: metrics.js
 
-### Listing resources
+### Uptime Config
 
-View the [documentation][list_1_docs] or the [source code][list_1_code].
+View the [documentation][uptime_1_docs] or the [source code][uptime_1_code].
 
-`list_resources.js` is a command-line program to demonstrate connecting to the
-Google Monitoring API to retrieve API data.
-
-__Usage:__ `node list_resources <YOUR_PROJECT_ID>`
+__Usage:__ `node uptime.js --help`
 
 ```
-node list_resources my-cool-project
+Commands:
+  create <gceInstanceId> [projectId]        Creates an uptime check config.
+  list [projectId]                          Lists uptime check configs.
+  list-ips                                  Lists uptime check config IPs.
+  get <uptimeCheckConfigId> [projectId]     Gets an uptime check config.
+  delete <uptimeCheckConfigId> [projectId]  Deletes an uptime check config.
+
+Options:
+  --version        Show version number                                                                         [boolean]
+  --help           Show help                                                                                   [boolean]
+  --projectId, -p                                                                                               [string]
+
+Examples:
+  node uptime.js create my-instance                             Create an uptime check for a "my-instance" GCE instance.
+  node uptime.js list                                           List all uptime check configs.
+  node uptime.js list-ips
+  node uptime.js get My-Uptime-Check
+  node uptime.js delete My-Uptime-Check
+
+For more information, see https://cloud.google.com/monitoring/uptime-checks/
 ```
 
-[list_1_docs]: https://cloud.google.com/monitoring/demos/#hello-world
-[list_1_code]: list_resources.js
+[uptime_1_docs]: https://cloud.google.com/monitoring/docs
+[uptime_1_code]: uptime.js
 
-### Custom metrics
-
-View the [documentation][metrics_2_docs] or the [source code][metrics_2_code].
-
-`create_custom_metric.js` demonstrates how to create a custom metric, write a
-timeseries value to it, and read it back.
-
-__Usage:__ `node create_custom_metric <YOUR_PROJECT_ID>`
-
-```
-node create_custom_metric my-cool-project
-```
-
-[metrics_2_docs]: https://cloud.google.com/monitoring/demos/#custom_metrics
-[metrics_2_code]: create_custom_metric.js
 
 ## Running the tests
 
