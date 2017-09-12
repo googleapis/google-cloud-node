@@ -51,8 +51,10 @@ const request = {
 
 // Detects speech in the audio file
 speechClient.recognize(request)
-  .then((results) => {
-    const transcription = results[0].results[0].alternatives[0].transcript;
+  .then((data) => {
+    const response = data[0];
+    const transcription = response.results.map(result =>
+        result.alternatives[0].transcript).join('\n');
     console.log(`Transcription: ${transcription}`);
   })
   .catch((err) => {
