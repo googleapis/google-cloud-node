@@ -249,4 +249,6 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   this.log_[stackdriverLevel](entry, callback);
 };
 
+LoggingWinston.LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
+
 module.exports = LoggingWinston;
