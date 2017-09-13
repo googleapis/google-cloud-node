@@ -271,3 +271,4 @@ LoggingBunyan.prototype._writev = function(chunks, callback) {
 
 module.exports = LoggingBunyan;
 module.exports.BUNYAN_TO_STACKDRIVER = BUNYAN_TO_STACKDRIVER;
+module.exports.LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;

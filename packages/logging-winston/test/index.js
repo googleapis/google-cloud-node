@@ -319,9 +319,8 @@ describe('logging-winston', function() {
     });
 
     it('should promote prefixed trace property to metadata', function(done) {
-      const metadataWithTrace = extend({
-        'logging.googleapis.com/trace': 'trace1'
-      }, METADATA);
+      const metadataWithTrace = extend({}, METADATA);
+      metadataWithTrace[LoggingWinston.LOGGING_TRACE_KEY] = 'trace1';
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(entryMetadata, {
