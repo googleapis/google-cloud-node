@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ var SERVICE_ADDRESS = 'spanner.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.0.5';
 
 var STREAM_DESCRIPTORS = {
   executeStreamingSql: new gax.StreamDescriptor(gax.StreamType.SERVER_STREAMING),
@@ -57,15 +57,6 @@ var ALL_SCOPES = [
  * The Cloud Spanner API can be used to manage sessions and execute
  * transactions on data stored in Cloud Spanner databases.
  *
- * This will be created through a builder function which can be obtained by the module.
- * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link spannerClient}
- *
- * @example
- * var spannerV1 = require('@google-cloud/spanner').v1({
- *   // optional auth parameters.
- * });
- * var client = spannerV1.spannerClient();
  *
  * @class
  */
@@ -149,6 +140,23 @@ SpannerClient.prototype.databasePath = function(project, instance, database) {
 };
 
 /**
+ * Returns a fully-qualified session resource name string.
+ * @param {String} project
+ * @param {String} instance
+ * @param {String} database
+ * @param {String} session
+ * @returns {String}
+ */
+SpannerClient.prototype.sessionPath = function(project, instance, database, session) {
+  return SESSION_PATH_TEMPLATE.render({
+    project: project,
+    instance: instance,
+    database: database,
+    session: session
+  });
+};
+
+/**
  * Parses the databaseName from a database resource.
  * @param {String} databaseName
  *   A fully-qualified path representing a database resources.
@@ -176,23 +184,6 @@ SpannerClient.prototype.matchInstanceFromDatabaseName = function(databaseName) {
  */
 SpannerClient.prototype.matchDatabaseFromDatabaseName = function(databaseName) {
   return DATABASE_PATH_TEMPLATE.match(databaseName).database;
-};
-
-/**
- * Returns a fully-qualified session resource name string.
- * @param {String} project
- * @param {String} instance
- * @param {String} database
- * @param {String} session
- * @returns {String}
- */
-SpannerClient.prototype.sessionPath = function(project, instance, database, session) {
-  return SESSION_PATH_TEMPLATE.render({
-    project: project,
-    instance: instance,
-    database: database,
-    session: session
-  });
 };
 
 /**
@@ -237,7 +228,7 @@ SpannerClient.prototype.matchSessionFromSessionName = function(sessionName) {
 
 /**
  * Get the project ID used by this class.
- * @aram {function(Error, string)} callback - the callback to be called with
+ * @param {function(Error, string)} callback - the callback to be called with
  *   the current project Id.
  */
 SpannerClient.prototype.getProjectId = function(callback) {
@@ -284,12 +275,18 @@ SpannerClient.prototype.getProjectId = function(callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedDatabase = client.databasePath("[PROJECT]", "[INSTANCE]", "[DATABASE]");
  * client.createSession({database: formattedDatabase}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -327,12 +324,18 @@ SpannerClient.prototype.createSession = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * client.getSession({name: formattedName}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -365,7 +368,12 @@ SpannerClient.prototype.getSession = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedName = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * client.deleteSession({name: formattedName}).catch(function(err) {
  *     console.error(err);
@@ -458,7 +466,12 @@ SpannerClient.prototype.deleteSession = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var sql = '';
  * var request = {
@@ -468,7 +481,8 @@ SpannerClient.prototype.deleteSession = function(request, options, callback) {
  * client.executeSql(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -548,7 +562,12 @@ SpannerClient.prototype.executeSql = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var sql = '';
  * var request = {
@@ -556,7 +575,7 @@ SpannerClient.prototype.executeSql = function(request, options, callback) {
  *     sql: sql
  * };
  * client.executeStreamingSql(request).on('data', function(response) {
- *     // doThingsWith(response)
+ *   // doThingsWith(response)
  * });
  */
 SpannerClient.prototype.executeStreamingSql = function(request, options) {
@@ -636,7 +655,12 @@ SpannerClient.prototype.executeStreamingSql = function(request, options) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var table = '';
  * var columns = [];
@@ -650,7 +674,8 @@ SpannerClient.prototype.executeStreamingSql = function(request, options) {
  * client.read(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -722,7 +747,12 @@ SpannerClient.prototype.read = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var table = '';
  * var columns = [];
@@ -734,7 +764,7 @@ SpannerClient.prototype.read = function(request, options, callback) {
  *     keySet: keySet
  * };
  * client.streamingRead(request).on('data', function(response) {
- *     // doThingsWith(response)
+ *   // doThingsWith(response)
  * });
  */
 SpannerClient.prototype.streamingRead = function(request, options) {
@@ -772,7 +802,12 @@ SpannerClient.prototype.streamingRead = function(request, options) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var options = {};
  * var request = {
@@ -782,7 +817,8 @@ SpannerClient.prototype.streamingRead = function(request, options) {
  * client.beginTransaction(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -845,7 +881,12 @@ SpannerClient.prototype.beginTransaction = function(request, options, callback) 
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var mutations = [];
  * var request = {
@@ -855,7 +896,8 @@ SpannerClient.prototype.beginTransaction = function(request, options, callback) 
  * client.commit(request).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
- * }).catch(function(err) {
+ * })
+ * .catch(function(err) {
  *     console.error(err);
  * });
  */
@@ -897,7 +939,12 @@ SpannerClient.prototype.commit = function(request, options, callback) {
  *
  * @example
  *
- * var client = spannerV1.spannerClient();
+ * var spanner = require('@google-cloud/spanner');
+ *
+ * var client = spanner.v1({
+ *   // optional auth parameters.
+ * });
+ *
  * var formattedSession = client.sessionPath("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]");
  * var transactionId = '';
  * var request = {

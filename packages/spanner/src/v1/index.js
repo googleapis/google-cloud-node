@@ -1,11 +1,11 @@
-/*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+/*
+ * Copyright 2017, Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,10 +26,9 @@ function v1(options) {
   var gaxGrpc = gax.grpc(options);
   return spannerClient(gaxGrpc);
 }
+
+v1.GAPIC_VERSION = '0.0.5';
 v1.SERVICE_ADDRESS = spannerClient.SERVICE_ADDRESS;
 v1.ALL_SCOPES = spannerClient.ALL_SCOPES;
-v1.admin = {
-  instance: require('../admin/instance/v1'),
-  database: require('../admin/database/v1')
-};
+
 module.exports = v1;
