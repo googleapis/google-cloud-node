@@ -1,0 +1,30 @@
+# Code owners file.
+# This file controls who is tagged for review for any given pull request.
+
+# Luke Sneeringer is the default owner for anything not explicitly taken by
+# someone else.
+*                             @lukesneeringer
+
+# Dave Gramlich is the primary author of the scripts that generate the
+# documentation and run test scripts.
+docs/*                        @callmehiphop
+scripts/*                     @callmehiphop
+
+# Dave Gramlich and Stephen Sawchuk are the primary authors and share
+# responsibility for most libraries and tests.
+packages/*                    @callmehiphop @stephenplusplus
+system-test/*                 @callmehiphop @stephenplusplus
+test/*                        @callmehiphop @stephenplusplus
+
+# Ali Sheikh is the primary maintainer of the Logging extension libraries.
+packages/error-reporting/*    @ofrobots
+packages/logging-bunyan/*     @ofrobots
+packages/logging-winston/*    @ofrobots
+
+# Luke Sneeringer is the primary author of the ML API clients.
+packages/dlp/*                @lukesneeringer
+packages/language/*           @lukesneeringer
+packages/monitoring/*         @lukesneeringer
+packages/speech/*             @lukesneeringer
+packages/video-intelligence/* @lukesneeringer
+packages/vision/*             @lukesneeringer
