@@ -120,7 +120,8 @@ class RequestHandler extends common.Service {
         method: 'POST',
         json: {}
       }, (err, body, response) => {
-        if (err && err.message !== 'Message cannot be empty.') {
+        if (err && err.message !== 'Message cannot be empty.' && 
+            response.statusCode === 400) {
           this._logger.error([
             'Encountered an error while attempting to validate the provided',
             'API key'

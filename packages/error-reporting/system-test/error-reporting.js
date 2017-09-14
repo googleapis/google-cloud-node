@@ -31,6 +31,7 @@ var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
 var pick = require('lodash.pick');
 var omitBy = require('lodash.omitby');
+var request = require('request');
 var util = require('util');
 var path = require('path');
 
@@ -358,6 +359,41 @@ describe('Expected Behavior', function() {
       assert(isEmpty(body));
       assert.strictEqual(response.statusCode, 200);
       done();
+    });
+  });
+});
+
+describe('Error Reporting API', function() {
+  [
+    {
+      name: 'when a valid API key is given',
+      getKey: () => env.apiKey,
+      message: 'Message cannot be empty.'
+    },
+    {
+      name: 'when an empty API key is given',
+      getKey: () => '',
+      message: 'The request is missing a valid API key.'
+    },
+    {
+      name: 'when an invalid API key is given',
+      getKey: () => env.apiKey.slice(1) + env.apiKey[0],
+      message: 'API key not valid. Please pass a valid API key.'
+    }
+  ].forEach(function(testCase) {
+    it(`should return an expected message ${testCase.name}`, function(done) {
+      this.timeout(30000);
+      const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
+      const key = testCase.getKey();
+      request.post({
+        url: `${API}/projects/${env.projectId}/events:report?key=${key}`,
+        json: {},
+      }, (err, response, body) => {
+        assert.ok(!err && body.error);
+        assert.strictEqual(response.statusCode, 400);
+        assert.strictEqual(body.error.message, testCase.message);
+        done();
+      });
     });
   });
 });
