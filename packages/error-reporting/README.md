@@ -162,9 +162,9 @@ var errors = require('@google-cloud/error-reporting')({
 
 If a key is provided, the module will not attempt to authenticate using the methods associated with locally-stored credentials as mentioned in the previous section.
 
-We recommend storing the API key in a file rather than hard-coding it into your application's source code.
+We recommend using a file, environment variable, or another mechanism to store the API key rather than hard-coding it into your application's source.
 
-**Note:** The Error Reporting instance will check if the provided API key is invalid shortly after it is instantiated. If the key is invalid, an error-level message will be logged.
+**Note:** The Error Reporting instance will check if the provided API key is invalid shortly after it is instantiated. If the key is invalid, an error-level message will be logged to stdout.
 
 ## Configuration
 
