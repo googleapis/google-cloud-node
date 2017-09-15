@@ -30,6 +30,8 @@
 var configData = require('./video_intelligence_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
+var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 
 var SERVICE_ADDRESS = 'videointelligence.googleapis.com';
 
@@ -51,7 +53,7 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function VideoIntelligenceServiceClient(gaxGrpc, grpcClients, opts) {
+function VideoIntelligenceServiceClient(gaxGrpc, loadedProtos, opts) {
   opts = extend({
     servicePath: SERVICE_ADDRESS,
     port: DEFAULT_SERVICE_PORT,
@@ -78,8 +80,8 @@ function VideoIntelligenceServiceClient(gaxGrpc, grpcClients, opts) {
   this.longrunningDescriptors = {
     annotateVideo: new gax.LongrunningDescriptor(
       this.operationsClient,
-      grpcClients.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.decode,
-      grpcClients.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.decode)
+      loadedProtos.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.decode,
+      loadedProtos.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.decode)
   };
 
   var defaults = gaxGrpc.constructSettings(
@@ -92,7 +94,7 @@ function VideoIntelligenceServiceClient(gaxGrpc, grpcClients, opts) {
 
   this.auth = gaxGrpc.auth;
   var videoIntelligenceServiceStub = gaxGrpc.createStub(
-      grpcClients.google.cloud.videointelligence.v1beta1.VideoIntelligenceService,
+      loadedProtos.google.cloud.videointelligence.v1beta1.VideoIntelligenceService,
       opts);
   var videoIntelligenceServiceStubMethods = [
     'annotateVideo'
@@ -260,11 +262,9 @@ function VideoIntelligenceServiceClientBuilder(gaxGrpc) {
     return new VideoIntelligenceServiceClientBuilder(gaxGrpc);
   }
 
-  var videoIntelligenceServiceClient = gaxGrpc.load([{
-    root: require('google-proto-files')('..'),
-    file: 'google/cloud/videointelligence/v1beta1/video_intelligence.proto'
-  }]);
-  extend(this, videoIntelligenceServiceClient.google.cloud.videointelligence.v1beta1);
+  var videoIntelligenceServiceStubProtos = gaxGrpc.loadProto(
+    path.join(__dirname, '..', '..', 'proto', 'google/cloud/videointelligence/v1beta1/video_intelligence.proto'));
+  extend(this, videoIntelligenceServiceStubProtos.google.cloud.videointelligence.v1beta1);
 
 
   /**
@@ -282,7 +282,7 @@ function VideoIntelligenceServiceClientBuilder(gaxGrpc) {
    *   {@link gax.constructSettings} for the format.
    */
   this.videoIntelligenceServiceClient = function(opts) {
-    return new VideoIntelligenceServiceClient(gaxGrpc, videoIntelligenceServiceClient, opts);
+    return new VideoIntelligenceServiceClient(gaxGrpc, videoIntelligenceServiceStubProtos, opts);
   };
   extend(this.videoIntelligenceServiceClient, VideoIntelligenceServiceClient);
 }
