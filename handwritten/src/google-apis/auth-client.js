@@ -27,7 +27,7 @@ var isString = is.string;
 var SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
 
 /* @const {String} Base Error Reporting API */
-var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
+var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
 
 /**
  * The RequestHandler constructor initializes several properties on the
@@ -70,6 +70,7 @@ class RequestHandler extends common.Service {
     }
     return null;
   }
+
   /**
    * No-operation stub function for user callback substitution
    * @param {Error|Null} err - the error
@@ -88,26 +89,47 @@ class RequestHandler extends common.Service {
    */
   constructor(config, logger) {
     var pid = config.getProjectId();
+    // If an API key is provided, do not try to authenticate.
+    var tryAuthenticate = !config.getKey();
     super({
       packageJson: pkg,
-      baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1/',
+      baseUrl: API,
       scopes: SCOPES,
       projectId: pid !== null ? pid : undefined,
-      projectIdRequired: true
+      projectIdRequired: true,
+      customEndpoint: !tryAuthenticate
     }, config);
     this._config = config;
     this._logger = logger;
 
     var that = this;
-    this.authClient.getToken(function(err, token) {
-      if (err) {
-        that._logger.error([
-          'Unable to find credential information on instance. This library',
-          'will be unable to communicate with the Stackdriver API to save',
-          'errors.  Message: ' + err.message
-        ].join(' '));
-      }
-    });
+    if (tryAuthenticate) {
+      this.authClient.getToken(function(err, token) {
+        if (err) {
+          that._logger.error([
+            'Unable to find credential information on instance. This library',
+            'will be unable to communicate with the Stackdriver API to save',
+            'errors.  Message: ' + err.message
+          ].join(' '));
+        }
+      });
+    } else {
+      this.request({
+        uri: 'events:report',
+        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+        method: 'POST',
+        json: {}
+      }, (err, body, response) => {
+        if (err && err.message !== 'Message cannot be empty.' && 
+            response.statusCode === 400) {
+          this._logger.error([
+            'Encountered an error while attempting to validate the provided',
+            'API key'
+          ].join(' '), err);
+        }
+      });
+      that._logger.info('API key provided; skipping OAuth2 token request.');
+    }
   }
   /**
    * Creates a request options object given the value of the error message and
