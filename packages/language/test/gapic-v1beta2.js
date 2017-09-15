@@ -34,9 +34,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -80,9 +80,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -126,9 +126,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -172,9 +172,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -263,9 +263,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
