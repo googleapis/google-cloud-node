@@ -30,6 +30,8 @@
 var configData = require('./language_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
+var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 
 var SERVICE_ADDRESS = 'language.googleapis.com';
 
@@ -52,7 +54,7 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
+function LanguageServiceClient(gaxGrpc, loadedProtos, opts) {
   opts = extend({
     servicePath: SERVICE_ADDRESS,
     port: DEFAULT_SERVICE_PORT,
@@ -81,7 +83,7 @@ function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
 
   this.auth = gaxGrpc.auth;
   var languageServiceStub = gaxGrpc.createStub(
-      grpcClients.google.cloud.language.v1beta2.LanguageService,
+      loadedProtos.google.cloud.language.v1beta2.LanguageService,
       opts);
   var languageServiceStubMethods = [
     'analyzeSentiment',
@@ -451,11 +453,9 @@ function LanguageServiceClientBuilder(gaxGrpc) {
     return new LanguageServiceClientBuilder(gaxGrpc);
   }
 
-  var languageServiceClient = gaxGrpc.load([{
-    root: require('google-proto-files')('..'),
-    file: 'google/cloud/language/v1beta2/language_service.proto'
-  }]);
-  extend(this, languageServiceClient.google.cloud.language.v1beta2);
+  var languageServiceStubProtos = gaxGrpc.loadProto(
+    path.join(__dirname, '..', '..', 'proto', 'google/cloud/language/v1beta2/language_service.proto'));
+  extend(this, languageServiceStubProtos.google.cloud.language.v1beta2);
 
 
   /**
@@ -473,7 +473,7 @@ function LanguageServiceClientBuilder(gaxGrpc) {
    *   {@link gax.constructSettings} for the format.
    */
   this.languageServiceClient = function(opts) {
-    return new LanguageServiceClient(gaxGrpc, languageServiceClient, opts);
+    return new LanguageServiceClient(gaxGrpc, languageServiceStubProtos, opts);
   };
   extend(this.languageServiceClient, LanguageServiceClient);
 }

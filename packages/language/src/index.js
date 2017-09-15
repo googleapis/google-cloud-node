@@ -21,6 +21,8 @@ var gapic = {
   v1beta2: require('./v1beta2'),
 };
 var gaxGrpc = require('google-gax').grpc();
+var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 
 const VERSION = require('../package.json').version;
 
@@ -68,10 +70,9 @@ function languageV1(options) {
 
 var v1Protos = {};
 
-extend(v1Protos, gaxGrpc.load([{
-  root: require('google-proto-files')('..'),
-  file: 'google/cloud/language/v1/language_service.proto'
-}]).google.cloud.language.v1);
+extend(v1Protos, gaxGrpc.loadProto(
+  path.join(__dirname, '..', 'proto', 'google/cloud/language/v1/language_service.proto')
+).google.cloud.language.v1);
 
 
 /**
@@ -118,10 +119,9 @@ function languageV1beta2(options) {
 
 var v1beta2Protos = {};
 
-extend(v1beta2Protos, gaxGrpc.load([{
-  root: require('google-proto-files')('..'),
-  file: 'google/cloud/language/v1beta2/language_service.proto'
-}]).google.cloud.language.v1beta2);
+extend(v1beta2Protos, gaxGrpc.loadProto(
+  path.join(__dirname, '..', 'proto', 'google/cloud/language/v1beta2/language_service.proto')
+).google.cloud.language.v1beta2);
 
 
 module.exports = languageV1;
