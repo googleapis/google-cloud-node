@@ -963,6 +963,8 @@ describe('PubSub', function() {
     };
 
     beforeEach(function() {
+      delete pubsub.projectId;
+
       pubsub.auth = {
         getProjectId: function(callback) {
           callback(null, PROJECT_ID);
@@ -1042,6 +1044,25 @@ describe('PubSub', function() {
       pubsub.request(CONFIG, done); // should not fire done
       global.GCLOUD_SANDBOX_ENV = false;
       done();
+    });
+
+    describe('on emulator', function() {
+      beforeEach(function() {
+        pubsub.isEmulator = true;
+        pubsub.auth.getProjectId = function() {
+          throw new Error('getProjectId should not be called.');
+        };
+      });
+
+      it('should not get the projectId if null', function(done) {
+        pubsub.projectId = null;
+        pubsub.request(CONFIG, done);
+      });
+
+      it('should not get the projectId if placeholder', function(done) {
+        pubsub.projectId = '{{projectId}}';
+        pubsub.request(CONFIG, done);
+      });
     });
   });
 

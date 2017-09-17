@@ -48,6 +48,12 @@ var Subscription = require('./subscription.js');
 var Topic = require('./topic.js');
 
 /**
+ * @type {string} - Project ID placeholder.
+ * @private
+ */
+var PROJECT_ID_PLACEHOLDER = '{{projectId}}';
+
+/**
  * [Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
  * reliable, many-to-many, asynchronous messaging service from Cloud
  * Platform.
@@ -76,11 +82,12 @@ function PubSub(options) {
     libVersion: PKG.version
   }, options);
 
+  this.isEmulator = false;
   this.determineBaseUrl_();
 
   this.api = {};
   this.auth = googleAuth(this.options);
-  this.projectId = this.options.projectId || '{{projectId}}';
+  this.projectId = this.options.projectId || PROJECT_ID_PLACEHOLDER;
 }
 
 /**
@@ -293,6 +300,7 @@ PubSub.prototype.determineBaseUrl_ = function() {
   this.options.servicePath = baseUrlParts[0];
   this.options.port = baseUrlParts[1];
   this.options.sslCreds = grpc.credentials.createInsecure();
+  this.isEmulator = true;
 };
 
 /**
@@ -640,25 +648,34 @@ PubSub.prototype.request = function(config, callback) {
     return;
   }
 
-  self.auth.getProjectId(function(err, projectId) {
-    if (err) {
-      callback(err);
-      return;
-    }
+  var hasProjectId = this.projectId &&
+    this.projectId !== PROJECT_ID_PLACEHOLDER;
 
-    var gaxClient = self.api[config.client];
+  if (!hasProjectId && !this.isEmulator) {
+    this.auth.getProjectId(function(err, projectId) {
+      if (err) {
+        callback(err);
+        return;
+      }
 
-    if (!gaxClient) {
-      // Lazily instantiate client.
-      gaxClient = v1(self.options)[config.client](self.options);
-      self.api[config.client] = gaxClient;
-    }
+      self.projectId = projectId;
+      self.request(config, callback);
+    });
+    return;
+  }
 
-    var reqOpts = extend(true, {}, config.reqOpts);
-    reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+  var gaxClient = this.api[config.client];
 
-    gaxClient[config.method](reqOpts, config.gaxOpts, callback);
-  });
+  if (!gaxClient) {
+    // Lazily instantiate client.
+    gaxClient = v1(this.options)[config.client](this.options);
+    this.api[config.client] = gaxClient;
+  }
+
+  var reqOpts = extend(true, {}, config.reqOpts);
+  reqOpts = common.util.replaceProjectIdToken(reqOpts, this.projectId);
+
+  gaxClient[config.method](reqOpts, config.gaxOpts, callback);
 };
 
 /**
