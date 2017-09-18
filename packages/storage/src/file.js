@@ -630,8 +630,8 @@ File.prototype.createReadStream = function(options) {
  * <h4>Note</h4>
  *
  * If you are just looking to perform a resumable upload without worrying about
- * any of the details, see {module:file/createWriteStream}. Resumable uploads
- * are performed by default.
+ * any of the details, see {module:storage/file#createWriteStream}. Resumable
+ * uploads are performed by default.
  *
  * @resource [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
  *
