@@ -454,7 +454,7 @@ function LanguageServiceClientBuilder(gaxGrpc) {
   }
 
   var languageServiceStubProtos = gaxGrpc.loadProto(
-    path.join(__dirname, '..', '..', 'proto', 'google/cloud/language/v1beta2/language_service.proto'));
+    path.join(__dirname, '..', '..', 'protos', 'google/cloud/language/v1beta2/language_service.proto'));
   extend(this, languageServiceStubProtos.google.cloud.language.v1beta2);
 
 
