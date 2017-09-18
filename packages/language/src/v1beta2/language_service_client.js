@@ -30,12 +30,14 @@
 var configData = require('./language_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
+var googleProtoFiles = require('google-proto-files');
+var path = require('path');
 
 var SERVICE_ADDRESS = 'language.googleapis.com';
 
 var DEFAULT_SERVICE_PORT = 443;
 
-var CODE_GEN_NAME_VERSION = 'gapic/0.7.1';
+var CODE_GEN_NAME_VERSION = 'gapic/0.0.5';
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -52,7 +54,7 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
+function LanguageServiceClient(gaxGrpc, loadedProtos, opts) {
   opts = extend({
     servicePath: SERVICE_ADDRESS,
     port: DEFAULT_SERVICE_PORT,
@@ -81,13 +83,14 @@ function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
 
   this.auth = gaxGrpc.auth;
   var languageServiceStub = gaxGrpc.createStub(
-      grpcClients.google.cloud.language.v1beta2.LanguageService,
+      loadedProtos.google.cloud.language.v1beta2.LanguageService,
       opts);
   var languageServiceStubMethods = [
     'analyzeSentiment',
     'analyzeEntities',
     'analyzeEntitySentiment',
     'analyzeSyntax',
+    'classifyText',
     'annotateText'
   ];
   languageServiceStubMethods.forEach(function(methodName) {
@@ -180,7 +183,7 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
- * @param {number} request.encodingType
+ * @param {number=} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -204,12 +207,7 @@ LanguageServiceClient.prototype.analyzeSentiment = function(request, options, ca
  * });
  *
  * var document = {};
- * var encodingType = language.v1beta2.types.EncodingType.NONE;
- * var request = {
- *     document: document,
- *     encodingType: encodingType
- * };
- * client.analyzeEntities(request).then(function(responses) {
+ * client.analyzeEntities({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
  * })
@@ -239,7 +237,7 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
- * @param {number} request.encodingType
+ * @param {number=} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -263,12 +261,7 @@ LanguageServiceClient.prototype.analyzeEntities = function(request, options, cal
  * });
  *
  * var document = {};
- * var encodingType = language.v1beta2.types.EncodingType.NONE;
- * var request = {
- *     document: document,
- *     encodingType: encodingType
- * };
- * client.analyzeEntitySentiment(request).then(function(responses) {
+ * client.analyzeEntitySentiment({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
  * })
@@ -299,7 +292,7 @@ LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, optio
  *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
- * @param {number} request.encodingType
+ * @param {number=} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -323,12 +316,7 @@ LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, optio
  * });
  *
  * var document = {};
- * var encodingType = language.v1beta2.types.EncodingType.NONE;
- * var request = {
- *     document: document,
- *     encodingType: encodingType
- * };
- * client.analyzeSyntax(request).then(function(responses) {
+ * client.analyzeSyntax({document: document}).then(function(responses) {
  *     var response = responses[0];
  *     // doThingsWith(response)
  * })
@@ -349,8 +337,57 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
 };
 
 /**
- * A convenience method that provides all syntax, sentiment, and entity
- * features in one call.
+ * Classifies a document into categories.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.document
+ *   Input document.
+ *
+ *   This object should have the same structure as [Document]{@link Document}
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [ClassifyTextResponse]{@link ClassifyTextResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [ClassifyTextResponse]{@link ClassifyTextResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ * @example
+ *
+ * var language = require('@google-cloud/language');
+ *
+ * var client = language.v1beta2({
+ *   // optional auth parameters.
+ * });
+ *
+ * var document = {};
+ * client.classifyText({document: document}).then(function(responses) {
+ *     var response = responses[0];
+ *     // doThingsWith(response)
+ * })
+ * .catch(function(err) {
+ *     console.error(err);
+ * });
+ */
+LanguageServiceClient.prototype.classifyText = function(request, options, callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+
+  return this._classifyText(request, options, callback);
+};
+
+/**
+ * A convenience method that provides all syntax, sentiment, entity, and
+ * classification features in one call.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -362,7 +399,7 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  *   The enabled features.
  *
  *   This object should have the same structure as [Features]{@link Features}
- * @param {number} request.encodingType
+ * @param {number=} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -387,11 +424,9 @@ LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callb
  *
  * var document = {};
  * var features = {};
- * var encodingType = language.v1beta2.types.EncodingType.NONE;
  * var request = {
  *     document: document,
- *     features: features,
- *     encodingType: encodingType
+ *     features: features
  * };
  * client.annotateText(request).then(function(responses) {
  *     var response = responses[0];
@@ -418,11 +453,9 @@ function LanguageServiceClientBuilder(gaxGrpc) {
     return new LanguageServiceClientBuilder(gaxGrpc);
   }
 
-  var languageServiceClient = gaxGrpc.load([{
-    root: require('google-proto-files')('..'),
-    file: 'google/cloud/language/v1beta2/language_service.proto'
-  }]);
-  extend(this, languageServiceClient.google.cloud.language.v1beta2);
+  var languageServiceStubProtos = gaxGrpc.loadProto(
+    path.join(__dirname, '..', '..', 'proto', 'google/cloud/language/v1beta2/language_service.proto'));
+  extend(this, languageServiceStubProtos.google.cloud.language.v1beta2);
 
 
   /**
@@ -440,7 +473,7 @@ function LanguageServiceClientBuilder(gaxGrpc) {
    *   {@link gax.constructSettings} for the format.
    */
   this.languageServiceClient = function(opts) {
-    return new LanguageServiceClient(gaxGrpc, languageServiceClient, opts);
+    return new LanguageServiceClient(gaxGrpc, languageServiceStubProtos, opts);
   };
   extend(this.languageServiceClient, LanguageServiceClient);
 }
