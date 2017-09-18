@@ -16,7 +16,7 @@
 'use strict';
 
 var assert = require('assert');
-var languageV1beta2 = require('../src/v1beta2')();
+var language = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
@@ -25,7 +25,8 @@ error.code = FAKE_STATUS_CODE;
 describe('LanguageServiceClient', function() {
   describe('analyzeSentiment', function() {
     it('invokes analyzeSentiment without error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
       var request = {
@@ -33,9 +34,9 @@ describe('LanguageServiceClient', function() {
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -49,7 +50,8 @@ describe('LanguageServiceClient', function() {
     });
 
     it('invokes analyzeSentiment with error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
       var request = {
@@ -69,19 +71,18 @@ describe('LanguageServiceClient', function() {
 
   describe('analyzeEntities', function() {
     it('invokes analyzeEntities without error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -95,13 +96,12 @@ describe('LanguageServiceClient', function() {
     });
 
     it('invokes analyzeEntities with error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock Grpc layer
@@ -117,19 +117,18 @@ describe('LanguageServiceClient', function() {
 
   describe('analyzeEntitySentiment', function() {
     it('invokes analyzeEntitySentiment without error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -143,13 +142,12 @@ describe('LanguageServiceClient', function() {
     });
 
     it('invokes analyzeEntitySentiment with error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock Grpc layer
@@ -165,19 +163,18 @@ describe('LanguageServiceClient', function() {
 
   describe('analyzeSyntax', function() {
     it('invokes analyzeSyntax without error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -191,13 +188,12 @@ describe('LanguageServiceClient', function() {
     });
 
     it('invokes analyzeSyntax with error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock Grpc layer
@@ -211,23 +207,65 @@ describe('LanguageServiceClient', function() {
     });
   });
 
-  describe('annotateText', function() {
-    it('invokes annotateText without error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+  describe('classifyText', function() {
+    it('invokes classifyText without error', function(done) {
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
-      var features = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
-          document : document,
-          features : features,
-          encodingType : encodingType
+          document : document
       };
 
       // Mock response
-      var language = 'language-1613589672';
+      var expectedResponse = {};
+
+      // Mock Grpc layer
+      client._classifyText = mockSimpleGrpcMethod(request, expectedResponse);
+
+      client.classifyText(request, function(err, response) {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes classifyText with error', function(done) {
+      var client = language.v1beta2();
+
+      // Mock request
+      var document = {};
+      var request = {
+          document : document
+      };
+
+      // Mock Grpc layer
+      client._classifyText = mockSimpleGrpcMethod(request, null, error);
+
+      client.classifyText(request, function(err, response) {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('annotateText', function() {
+    it('invokes annotateText without error', function(done) {
+      var client = language.v1beta2();
+
+      // Mock request
+      var document = {};
+      var features = {};
+      var request = {
+          document : document,
+          features : features
+      };
+
+      // Mock response
+      var language_ = 'language-1613589672';
       var expectedResponse = {
-          language : language
+          language : language_
       };
 
       // Mock Grpc layer
@@ -241,15 +279,14 @@ describe('LanguageServiceClient', function() {
     });
 
     it('invokes annotateText with error', function(done) {
-      var client = languageV1beta2.languageServiceClient();
+      var client = language.v1beta2();
+
       // Mock request
       var document = {};
       var features = {};
-      var encodingType = languageV1beta2.EncodingType.NONE;
       var request = {
           document : document,
-          features : features,
-          encodingType : encodingType
+          features : features
       };
 
       // Mock Grpc layer
