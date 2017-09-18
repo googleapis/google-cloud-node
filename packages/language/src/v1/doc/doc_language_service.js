@@ -134,6 +134,14 @@ var Sentence = {
  *
  *   This object should have the same structure as [EntityMention]{@link EntityMention}
  *
+ * @property {Object} sentiment
+ *   For calls to {@link AnalyzeEntitySentiment} or if
+ *   {@link AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+ *   true, this field will contain the aggregate sentiment expressed for this
+ *   entity in the provided document.
+ *
+ *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *
  * @class
  * @see [google.cloud.language.v1.Entity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
  */
@@ -1235,7 +1243,37 @@ var DependencyEdge = {
     /**
      * Dislocated relation (for fronted/topicalized elements)
      */
-    DISLOCATED: 76
+    DISLOCATED: 76,
+
+    /**
+     * Aspect marker
+     */
+    ASP: 77,
+
+    /**
+     * Genitive modifier
+     */
+    GMOD: 78,
+
+    /**
+     * Genitive object
+     */
+    GOBJ: 79,
+
+    /**
+     * Infinitival modifier
+     */
+    INFMOD: 80,
+
+    /**
+     * Measure
+     */
+    MES: 81,
+
+    /**
+     * Nominal complement of a noun
+     */
+    NCOMP: 82
   }
 };
 
@@ -1252,6 +1290,14 @@ var DependencyEdge = {
  *   The type of the entity mention.
  *
  *   The number should be among the values of [Type]{@link Type}
+ *
+ * @property {Object} sentiment
+ *   For calls to {@link AnalyzeEntitySentiment} or if
+ *   {@link AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+ *   true, this field will contain the sentiment expressed for this mention of
+ *   the entity in the provided document.
+ *
+ *   This object should have the same structure as [Sentiment]{@link Sentiment}
  *
  * @class
  * @see [google.cloud.language.v1.EntityMention definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
@@ -1342,6 +1388,46 @@ var AnalyzeSentimentRequest = {
  * @see [google.cloud.language.v1.AnalyzeSentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
  */
 var AnalyzeSentimentResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The entity-level sentiment analysis request message.
+ *
+ * @property {Object} document
+ *   Input document.
+ *
+ *   This object should have the same structure as [Document]{@link Document}
+ *
+ * @property {number} encodingType
+ *   The encoding type used by the API to calculate offsets.
+ *
+ *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *
+ * @class
+ * @see [google.cloud.language.v1.AnalyzeEntitySentimentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
+ */
+var AnalyzeEntitySentimentRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The entity-level sentiment analysis response message.
+ *
+ * @property {Object[]} entities
+ *   The recognized entities in the input document with associated sentiments.
+ *
+ *   This object should have the same structure as [Entity]{@link Entity}
+ *
+ * @property {string} language
+ *   The language of the text, which will be the same as the language specified
+ *   in the request or, if not specified, the automatically-detected language.
+ *   See {@link Document.language} field for more details.
+ *
+ * @class
+ * @see [google.cloud.language.v1.AnalyzeEntitySentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
+ */
+var AnalyzeEntitySentimentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1467,6 +1553,9 @@ var AnnotateTextRequest = {
    *
    * @property {boolean} extractDocumentSentiment
    *   Extract document-level sentiment.
+   *
+   * @property {boolean} extractEntitySentiment
+   *   Extract entities and their associated sentiment.
    *
    * @class
    * @see [google.cloud.language.v1.AnnotateTextRequest.Features definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto}
