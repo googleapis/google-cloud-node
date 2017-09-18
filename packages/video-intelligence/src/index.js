@@ -124,7 +124,8 @@ function videoIntelligenceV1beta1(options) {
 var v1beta1Protos = {};
 
 extend(v1beta1Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'proto', 'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
+  path.join(__dirname, '..', 'proto',
+    'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
 ).google.cloud.videointelligence.v1beta1);
 
 
