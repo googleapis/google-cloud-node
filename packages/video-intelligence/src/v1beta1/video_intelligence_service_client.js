@@ -30,7 +30,6 @@
 var configData = require('./video_intelligence_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
-var googleProtoFiles = require('google-proto-files');
 var path = require('path');
 
 var SERVICE_ADDRESS = 'videointelligence.googleapis.com';
@@ -263,7 +262,7 @@ function VideoIntelligenceServiceClientBuilder(gaxGrpc) {
   }
 
   var videoIntelligenceServiceStubProtos = gaxGrpc.loadProto(
-    path.join(__dirname, '..', '..', 'proto', 'google/cloud/videointelligence/v1beta1/video_intelligence.proto'));
+    path.join(__dirname, '..', '..', 'protos', 'google/cloud/videointelligence/v1beta1/video_intelligence.proto'));
   extend(this, videoIntelligenceServiceStubProtos.google.cloud.videointelligence.v1beta1);
 
 
