@@ -562,7 +562,7 @@ BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.createJob().then(function(data) {
+ * bigquery.createJob(options).then(function(data) {
  *   var job = data[0];
  *
  *   return job.getQueryResults();
@@ -865,27 +865,28 @@ BigQuery.prototype.job = function(id) {
  *
  * @resource [Jobs: query API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/query}
  *
- * @param {string|object} options - A string SQL query or configuration object.
+ * @param {string|object} query - A string SQL query or configuration object.
  *     For all available options, see
  *     [Jobs: query request body](https://cloud.google.com/bigquery/docs/reference/v2/jobs/query#request-body).
- * @param {boolean} options.autoPaginate - Have pagination handled
- *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to read.
- * @param {object|*[]} options.params - For positional SQL parameters, provide
+ * @param {object|*[]} query.params - For positional SQL parameters, provide
  *     an array of values. For named SQL parameters, provide an object which
  *     maps each named parameter to its value. The supported types are integers,
  *     floats, {module:bigquery#date} objects, {module:bigquery#datetime}
  *     objects, {module:bigquery#time} objects, {module:bigquery#timestamp}
  *     objects, Strings, Booleans, and Objects.
- * @param {string} options.query - A query string, following the BigQuery query
+ * @param {string} query.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
+ * @param {boolean} query.useLegacySql - Option to use legacy sql syntax.
+ *     Default: `false`.
+ * @param {object=} options - Configuration object for query results.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of results to read.
  * @param {number} options.timeoutMs - How long to wait for the query to
  *     complete, in milliseconds, before returning. Default is to return
  *     immediately. If the timeout passes before the job completes, the request
  *     will fail with a `TIMEOUT` error.
- * @param {boolean} options.useLegacySql - Option to use legacy sql syntax.
- *     Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
@@ -958,44 +959,14 @@ BigQuery.prototype.job = function(id) {
  * });
  */
 BigQuery.prototype.query = function(query, options, callback) {
-  if (is.string(query)) {
-    query = {
-      query: query
-    };
-  }
-
   if (is.fn(options)) {
     callback = options;
-    options = null;
+    options = {};
   }
 
-  var reqOpts = extend({
-    useLegacySql: false
-  }, query);
-
-  if (query.params) {
-    reqOpts.parameterMode = is.array(query.params) ? 'positional' : 'named';
-
-    if (reqOpts.parameterMode === 'named') {
-      reqOpts.queryParameters = [];
-
-      for (var namedParamater in query.params) {
-        var value = query.params[namedParamater];
-        var queryParameter = BigQuery.valueToQueryParameter_(value);
-        queryParameter.name = namedParamater;
-        reqOpts.queryParameters.push(queryParameter);
-      }
-    } else {
-      reqOpts.queryParameters = query.params
-        .map(BigQuery.valueToQueryParameter_);
-    }
-
-    delete reqOpts.params;
-  }
-
-  this.startQuery(reqOpts, function(err, job) {
+  this.startQuery(query, function(err, job, resp) {
     if (err) {
-      callback(err, null);
+      callback(err, null, resp);
       return;
     }
 
@@ -1079,7 +1050,7 @@ BigQuery.prototype.startQuery = function(options, callback) {
     };
   }
 
-  if (!options.query) {
+  if (!options || !options.query) {
     throw new Error('A SQL query string is required.');
   }
 
@@ -1099,6 +1070,26 @@ BigQuery.prototype.startQuery = function(options, callback) {
     };
 
     delete query.destination;
+  }
+
+  if (query.params) {
+    query.parameterMode = is.array(query.params) ? 'positional' : 'named';
+
+    if (query.parameterMode === 'named') {
+      query.queryParameters = [];
+
+      for (var namedParamater in query.params) {
+        var value = query.params[namedParamater];
+        var queryParameter = BigQuery.valueToQueryParameter_(value);
+        queryParameter.name = namedParamater;
+        query.queryParameters.push(queryParameter);
+      }
+    } else {
+      query.queryParameters = query.params
+        .map(BigQuery.valueToQueryParameter_);
+    }
+
+    delete query.params;
   }
 
   var reqOpts = {

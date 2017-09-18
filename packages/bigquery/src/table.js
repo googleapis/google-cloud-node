@@ -30,6 +30,7 @@ var is = require('is');
 var path = require('path');
 var streamEvents = require('stream-events');
 var util = require('util');
+var uuid = require('uuid');
 
 /**
  * The file formats accepted by BigQuery.
@@ -320,7 +321,7 @@ Table.formatMetadata_ = function(options) {
     });
   }
 
-  if (is.string(body.timePartitioning)) {
+  if (is.string(body.partitioning)) {
     body.timePartitioning = {
       type: body.partitioning.toUpperCase()
     };
@@ -374,7 +375,7 @@ Table.formatMetadata_ = function(options) {
 Table.prototype.copy = function(destination, metadata, callback) {
   if (is.fn(metadata)) {
     callback = metadata;
-    metadata = null;
+    metadata = {};
   }
 
   this.startCopy(destination, metadata, function(err, job, resp) {
@@ -434,7 +435,7 @@ Table.prototype.copy = function(destination, metadata, callback) {
 Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
   if (is.fn(metadata)) {
     callback = metadata;
-    metadata = null;
+    metadata = {};
   }
 
   this.startCopyFrom(sourceTables, metadata, function(err, job, resp) {
@@ -558,6 +559,13 @@ Table.prototype.createWriteStream = function(metadata) {
     }
   });
 
+  var jobId = uuid.v4();
+
+  if (metadata.jobPrefix) {
+    jobId = metadata.jobPrefix + jobId;
+    delete metadata.jobPrefix;
+  }
+
   if (metadata.hasOwnProperty('sourceFormat') &&
       fileTypes.indexOf(metadata.sourceFormat) < 0) {
     throw new Error('Source format not recognized: ' + metadata.sourceFormat);
@@ -571,6 +579,10 @@ Table.prototype.createWriteStream = function(metadata) {
       metadata: {
         configuration: {
           load: metadata
+        },
+        jobReference: {
+          jobId: jobId,
+          projectId: self.bigQuery.projectId
         }
       },
       request: {
@@ -650,7 +662,7 @@ Table.prototype.createWriteStream = function(metadata) {
 Table.prototype.export = function(destination, options, callback) {
   if (is.fn(options)) {
     callback = options;
-    options = null;
+    options = {};
   }
 
   this.startExport(destination, options, function(err, job, resp) {
@@ -718,8 +730,6 @@ Table.prototype.getRows = function(options, callback) {
     callback = options;
     options = {};
   }
-
-  callback = callback || common.util.noop;
 
   this.request({
     uri: '/data',
@@ -832,7 +842,7 @@ Table.prototype.getRows = function(options, callback) {
 Table.prototype.import = function(source, metadata, callback) {
   if (is.fn(metadata)) {
     callback = metadata;
-    metadata = null;
+    metadata = {};
   }
 
   this.startImport(source, metadata, function(err, job, resp) {
@@ -1117,7 +1127,7 @@ Table.prototype.setMetadata = function(metadata, callback) {
   var self = this;
   var body = Table.formatMetadata_(metadata);
 
-  common.ServiceObject.prototype.setMetadata.call(this, metadata, callback);
+  common.ServiceObject.prototype.setMetadata.call(this, body, callback);
 };
 
 /**
@@ -1174,14 +1184,9 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
     metadata = {};
   }
 
-  metadata = metadata || {};
-
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
   var body = {
     configuration: {
-      copy: extend(true, metadata || {}, {
+      copy: extend(true, metadata, {
         destinationTable: {
           datasetId: destination.dataset.id,
           projectId: destination.bigQuery.projectId,
@@ -1193,9 +1198,13 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
           tableId: this.id
         }
       })
-    },
-    jobPrefix: jobPrefix
+    }
   };
+
+  if (metadata.jobPrefix) {
+    body.jobPrefix = metadata.jobPrefix;
+    delete metadata.jobPrefix;
+  }
 
   this.bigQuery.createJob(body, callback);
 };
@@ -1265,14 +1274,9 @@ Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
     metadata = {};
   }
 
-  metadata = metadata || {};
-
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
   var body = {
     configuration: {
-      copy: extend(true, metadata || {}, {
+      copy: extend(true, metadata, {
         destinationTable: {
           datasetId: this.dataset.id,
           projectId: this.bigQuery.projectId,
@@ -1287,9 +1291,13 @@ Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
           };
         })
       })
-    },
-    jobPrefix: jobPrefix
+    }
   };
+
+  if (metadata.jobPrefix) {
+    body.jobPrefix = metadata.jobPrefix;
+    delete metadata.jobPrefix;
+  }
 
   this.bigQuery.createJob(body, callback);
 };
@@ -1366,9 +1374,7 @@ Table.prototype.startExport = function(destination, options, callback) {
     options = {};
   }
 
-  options = options || {};
-
-  extend(true, options, {
+  options = extend(true, options, {
     destinationUris: arrify(destination).map(function(dest) {
       if (!common.util.isCustomType(dest, 'storage/file')) {
         throw new Error('Destination must be a File object.');
@@ -1401,9 +1407,6 @@ Table.prototype.startExport = function(destination, options, callback) {
     delete options.gzip;
   }
 
-  var jobPrefix = options.jobPrefix;
-  delete options.jobPrefix;
-
   var body = {
     configuration: {
       extract: extend(true, options, {
@@ -1413,9 +1416,13 @@ Table.prototype.startExport = function(destination, options, callback) {
           tableId: this.id
         }
       })
-    },
-    jobPrefix: jobPrefix
+    }
   };
+
+  if (options.jobPrefix) {
+    body.jobPrefix = options.jobPrefix;
+    delete options.jobPrefix;
+  }
 
   this.bigQuery.createJob(body, callback);
 };
@@ -1525,9 +1532,6 @@ Table.prototype.startImport = function(source, metadata, callback) {
       });
   }
 
-  var jobPrefix = metadata.jobPrefix;
-  delete metadata.jobPrefix;
-
   var body = {
     configuration: {
       load: {
@@ -1537,9 +1541,13 @@ Table.prototype.startImport = function(source, metadata, callback) {
           tableId: this.id
         }
       }
-    },
-    jobPrefix: jobPrefix
+    }
   };
+
+  if (metadata.jobPrefix) {
+    body.jobPrefix = metadata.jobPrefix;
+    delete metadata.jobPrefix;
+  }
 
   extend(true, body.configuration.load, metadata, {
     sourceUris: arrify(source).map(function(src) {

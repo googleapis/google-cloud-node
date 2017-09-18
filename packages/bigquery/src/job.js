@@ -303,7 +303,7 @@ Job.prototype.getQueryResults = function(options, callback) {
 
   if (is.fn(options)) {
     callback = options;
-    options = null;
+    options = {};
   }
 
   this.bigQuery.request({

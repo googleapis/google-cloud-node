@@ -125,6 +125,59 @@ describe('BigQuery/Dataset', function() {
         setMetadata: true
       });
     });
+
+    describe('etag interceptor', function() {
+      var FAKE_ETAG = 'abc';
+
+      it('should apply the If-Match header', function() {
+        var interceptor = ds.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'PATCH',
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(reqOpts.headers, { 'If-Match': FAKE_ETAG });
+      });
+
+      it('should respect already existing headers', function() {
+        var interceptor = ds.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var expectedHeaders = extend({}, fakeReqOpts.headers, {
+          'If-Match': FAKE_ETAG
+        });
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(fakeReqOpts.headers, expectedHeaders);
+      });
+
+      it('should not apply the header if method is not patch', function() {
+        var interceptor = ds.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'POST',
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(fakeReqOpts.headers, undefined);
+      });
+    });
   });
 
   describe('createQueryStream', function() {
@@ -437,6 +490,15 @@ describe('BigQuery/Dataset', function() {
       ds.getTables(query, assert.ifError);
     });
 
+    it('should default the query value to an empty object', function(done) {
+      ds.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      ds.getTables(null, assert.ifError);
+    });
+
     it('should return error to callback', function(done) {
       var error = new Error('Error.');
 
@@ -574,6 +636,48 @@ describe('BigQuery/Dataset', function() {
       };
 
       ds.query(options, callback);
+    });
+  });
+
+  describe('startQuery', function() {
+    var FAKE_QUERY = 'SELECT * FROM `table`';
+
+    it('should call through to bigQuery#startQuery', function(done) {
+      ds.bigQuery.startQuery = function() {
+        done();
+      };
+
+      ds.startQuery();
+    });
+
+    it('should extend the options', function(done) {
+      var fakeOptions = {
+        query: FAKE_QUERY,
+        a: { b: 'c' }
+      };
+
+      var expectedOptions = extend(true, {}, fakeOptions, {
+        defaultDataset: {
+          datasetId: ds.id
+        }
+      });
+
+      ds.bigQuery.startQuery = function(options, callback) {
+        assert.deepEqual(options, expectedOptions);
+        assert.notStrictEqual(fakeOptions, options);
+        callback(); // the done fn
+      };
+
+      ds.startQuery(fakeOptions, done);
+    });
+
+    it('should accept a query string', function(done) {
+      ds.bigQuery.startQuery = function(options, callback) {
+        assert.strictEqual(options.query, FAKE_QUERY);
+        callback(); // the done fn
+      };
+
+      ds.startQuery(FAKE_QUERY, done);
     });
   });
 

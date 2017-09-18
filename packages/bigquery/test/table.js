@@ -18,11 +18,13 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
+var events = require('events');
 var extend = require('extend');
 var nodeutil = require('util');
 var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var stream = require('stream');
+var uuid = require('uuid');
 
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
@@ -62,6 +64,8 @@ var fakePaginator = {
   }
 };
 
+var fakeUuid = extend({}, uuid);
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -69,43 +73,11 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-function fakeDate(input) {
-  return {
-    type: 'fakeDate',
-    input: input
-  };
-}
-
-function fakeDatetime(input) {
-  return {
-    type: 'fakeDatetime',
-    input: input
-  };
-}
-
-function fakeTime(input) {
-  return {
-    type: 'fakeTime',
-    input: input
-  };
-}
-
-function fakeTimestamp(input) {
-  return {
-    type: 'fakeTimestamp',
-    input: input
-  };
-}
-
 describe('BigQuery/Table', function() {
   var DATASET = {
     id: 'dataset-id',
     createTable: util.noop,
     bigQuery: {
-      date: fakeDate,
-      datetime: fakeDatetime,
-      time: fakeTime,
-      timestamp: fakeTimestamp,
       projectId: 'project-id',
       job: function(id) {
         return { id: id };
@@ -123,6 +95,7 @@ describe('BigQuery/Table', function() {
       { name: 'hair_count', type: 'FLOAT' }
     ]
   };
+
   var SCHEMA_STRING = [
     'id:integer',
     'name',
@@ -138,6 +111,7 @@ describe('BigQuery/Table', function() {
 
   before(function() {
     Table = proxyquire('../src/table.js', {
+      uuid: fakeUuid,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
@@ -167,6 +141,10 @@ describe('BigQuery/Table', function() {
     tableOverrides = {};
     table = new Table(DATASET, TABLE_ID);
     table.bigQuery.request = util.noop;
+    table.bigQuery.createJob = util.noop;
+    table.bigQuery.mergeSchemaWithRows_ = function(schema, rows) {
+      return rows;
+    };
   });
 
   describe('instantiation', function() {
@@ -205,7 +183,61 @@ describe('BigQuery/Table', function() {
         delete: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
+        setMetadata: true
+      });
+    });
+
+    describe('etag interceptor', function() {
+      var FAKE_ETAG = 'abc';
+
+      it('should apply the If-Match header', function() {
+        var interceptor = table.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'PATCH',
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(reqOpts.headers, { 'If-Match': FAKE_ETAG });
+      });
+
+      it('should respect already existing headers', function() {
+        var interceptor = table.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var expectedHeaders = extend({}, fakeReqOpts.headers, {
+          'If-Match': FAKE_ETAG
+        });
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(fakeReqOpts.headers, expectedHeaders);
+      });
+
+      it('should not apply the header if method is not patch', function() {
+        var interceptor = table.interceptors.pop();
+
+        var fakeReqOpts = {
+          method: 'POST',
+          json: {
+            etag: FAKE_ETAG
+          }
+        };
+
+        var reqOpts = interceptor.request(fakeReqOpts);
+        assert.deepEqual(fakeReqOpts.headers, undefined);
       });
     });
   });
@@ -265,408 +297,218 @@ describe('BigQuery/Table', function() {
     });
   });
 
-  describe('mergeSchemaWithRows_', function() {
-    it('should merge the schema and flatten the rows', function() {
-      var now = new Date();
-      var buffer = new Buffer('test');
-
-      var rows = [
-        {
-          raw: {
-            f: [
-              { v: '3' },
-              { v: 'Milo' },
-              { v: String(now.valueOf() / 1000) },
-              { v: 'false' },
-              { v: '5.222330009847' },
-              {
-                v: [
-                  {
-                    v: '10'
-                  }
-                ]
-              },
-              { v: null },
-              { v: buffer.toString('base64') },
-              {
-                v: [
-                  {
-                    v: {
-                      f: [
-                        {
-                          v: {
-                            f: [
-                              {
-                                v: 'nested_value'
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              { v: 'date-input' },
-              { v: 'datetime-input' },
-              { v: 'time-input' }
-            ]
-          },
-          expected: {
-            id: 3,
-            name: 'Milo',
-            dob: {
-              input: now,
-              type: 'fakeTimestamp'
-            },
-            has_claws: false,
-            hair_count: 5.222330009847,
-            arr: [10],
-            nullable: null,
-            buffer: buffer,
-            objects: [
-              {
-                nested_object: {
-                  nested_property: 'nested_value'
-                }
-              }
-            ],
-            date: {
-              input: 'date-input',
-              type: 'fakeDate'
-            },
-            datetime: {
-              input: 'datetime-input',
-              type: 'fakeDatetime'
-            },
-            time: {
-              input: 'time-input',
-              type: 'fakeTime'
-            }
-          }
+  describe('formatMetadata_', function() {
+    it('should return a deep copy', function() {
+      var metadata = {
+        a: {
+          b: 'c'
         }
-      ];
+      };
 
-      var schemaObject = extend(true, SCHEMA_OBJECT, {});
+      var formatted = Table.formatMetadata_(metadata);
 
-      schemaObject.fields.push({
-        name: 'arr',
-        type: 'INTEGER',
-        mode: 'REPEATED'
-      });
+      assert.deepEqual(metadata, formatted);
+      assert.notStrictEqual(metadata, formatted);
+    });
 
-      schemaObject.fields.push({
-        name: 'nullable',
-        type: 'STRING',
-        mode: 'NULLABLE'
-      });
+    it('should format the name option', function() {
+      var NAME = 'name';
 
-      schemaObject.fields.push({
-        name: 'buffer',
-        type: 'BYTES'
-      });
+      var formatted = Table.formatMetadata_({ name: NAME });
 
-      schemaObject.fields.push({
-        name: 'objects',
-        type: 'RECORD',
-        mode: 'REPEATED',
-        fields: [
-          {
-            name: 'nested_object',
-            type: 'RECORD',
-            fields: [
-              {
-                name: 'nested_property',
-                type: 'STRING'
-              }
-            ]
-          }
-        ]
-      });
+      assert.strictEqual(formatted.name, undefined);
+      assert.strictEqual(formatted.friendlyName, NAME)
+    });
 
-      schemaObject.fields.push({
-        name: 'date',
-        type: 'DATE'
-      });
+    it('should format the schema string option', function() {
+      var fakeSchema = {};
 
-      schemaObject.fields.push({
-        name: 'datetime',
-        type: 'DATETIME'
-      });
+      Table.createSchemaFromString_ = function(schema) {
+        assert.strictEqual(schema, SCHEMA_STRING);
+        return fakeSchema;
+      };
 
-      schemaObject.fields.push({
-        name: 'time',
-        type: 'TIME'
-      });
+      var formatted = Table.formatMetadata_({ schema: SCHEMA_STRING });
 
-      var rawRows = rows.map(prop('raw'));
-      var mergedRows = Table.mergeSchemaWithRows_(
-        DATASET.bigQuery,
-        schemaObject,
-        rawRows
-      );
+      assert.strictEqual(formatted.schema, fakeSchema);
+    });
 
-      mergedRows.forEach(function(mergedRow, index) {
-        assert.deepEqual(mergedRow, rows[index].expected);
-      });
+    it('should accept an array of schema fields', function() {
+      var fields = ['a', 'b', 'c']
+
+      var formatted = Table.formatMetadata_({ schema: fields });
+
+      assert.deepEqual(formatted.schema.fields, fields);
+    });
+
+    it('should format the schema fields option', function() {
+      var metadata = {
+        schema: {
+          fields: ['a', { fields: [] }, 'b']
+        }
+      };
+
+      var expectedFields = ['a', { fields: [], type: 'RECORD' }, 'b'];
+      var formatted = Table.formatMetadata_(metadata);
+
+      assert.deepEqual(formatted.schema.fields, expectedFields);
+    });
+
+    it('should format the time partitioning option', function() {
+      var formatted = Table.formatMetadata_({ partitioning: 'abc' });
+
+      assert.strictEqual(formatted.timePartitioning.type, 'ABC');
+    });
+
+    it('should format the table view option', function() {
+      var VIEW = 'abc';
+
+      var formatted = Table.formatMetadata_({ view: VIEW });
+
+      assert.strictEqual(formatted.view.query, VIEW);
+      assert.strictEqual(formatted.view.useLegacySql, false);
     });
   });
 
   describe('copy', function() {
-    var DEST_TABLE;
+    var fakeJob;
 
-    before(function() {
-      DEST_TABLE = new Table(DATASET, 'destination-table');
+    beforeEach(function() {
+      fakeJob = new events.EventEmitter();
+      table.startCopy = function(destination, metadata, callback) {
+        callback(null, fakeJob);
+      };
     });
 
-    it('should throw if a destination is not a Table', function() {
-      assert.throws(function() {
-        table.copy();
-      }, /Destination must be a Table/);
+    it('should pass the arguments to startCopy', function(done) {
+      var fakeDestination = {};
+      var fakeMetadata = {};
 
-      assert.throws(function() {
-        table.copy({});
-      }, /Destination must be a Table/);
-
-      assert.throws(function() {
-        table.copy(function() {});
-      }, /Destination must be a Table/);
-    });
-
-    it('should send correct request to the API', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.equal(reqOpts.method, 'POST');
-        assert.equal(reqOpts.uri, '/jobs');
-        assert.deepEqual(reqOpts.json, {
-          configuration: {
-            copy: {
-              a: 'b',
-              c: 'd',
-              destinationTable: {
-                datasetId: DEST_TABLE.dataset.id,
-                projectId: DEST_TABLE.bigQuery.projectId,
-                tableId: DEST_TABLE.id
-              },
-              sourceTable: {
-                datasetId: table.dataset.id,
-                projectId: table.bigQuery.projectId,
-                tableId: table.id
-              }
-            }
-          }
-        });
-
+      table.startCopy = function(destination, metadata) {
+        assert.strictEqual(destination, fakeDestination);
+        assert.strictEqual(metadata, fakeMetadata);
         done();
       };
 
-      table.copy(DEST_TABLE, { a: 'b', c: 'd' }, assert.ifError);
+      table.copy(fakeDestination, fakeMetadata, assert.ifError);
     });
 
-    it('should create and return a Job', function(done) {
-      var jobId = 'job-id';
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, { jobReference: { jobId: jobId } });
+    it('should optionally accept metadata', function(done) {
+      table.startCopy = function(destination, metadata) {
+        assert.deepEqual(metadata, {});
+        done();
       };
 
-      table.copy(DEST_TABLE, function(err, job) {
+      table.copy({}, assert.ifError);
+    });
+
+    it('should return any startCopy errors', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      table.startCopy = function(destination, metadata, callback) {
+        callback(error, null, response);
+      };
+
+      table.copy({}, function(err, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+
+    it('should return any job errors', function(done) {
+      var error = new Error('err');
+
+      table.copy({}, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+
+      fakeJob.emit('error', error);
+    });
+
+    it('should return the metadata on complete', function(done) {
+      var metadata = {};
+
+      table.copy({}, function(err, resp) {
         assert.ifError(err);
-        assert.equal(job.id, jobId);
+        assert.strictEqual(resp, metadata);
         done();
       });
-    });
 
-    it('should assign metadata on the job', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.copy(DEST_TABLE, function(err, job) {
-        assert.ifError(err);
-        assert.deepEqual(job.metadata, jobMetadata);
-        done();
-      });
-    });
-
-    it('should accept just a destination and callback', function(done) {
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, { jobReference: { jobId: 'job-id' } });
-      };
-
-      table.copy(DEST_TABLE, done);
-    });
-
-    it('should pass an error to the callback', function(done) {
-      var error = new Error('Error.');
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      table.copy(DEST_TABLE, function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    it('should pass an apiResponse to the callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.copy(DEST_TABLE, function(err, job, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, jobMetadata);
-        done();
-      });
+      fakeJob.emit('complete', metadata);
     });
   });
 
   describe('copyFrom', function() {
-    var SOURCE_TABLE;
+    var fakeJob;
 
-    before(function() {
-      SOURCE_TABLE = new Table(DATASET, 'source-table');
+    beforeEach(function() {
+      fakeJob = new events.EventEmitter();
+      table.startCopyFrom = function(sourceTables, metadata, callback) {
+        callback(null, fakeJob);
+      };
     });
 
-    it('should throw if a source is not a Table', function() {
-      assert.throws(function() {
-        table.copyFrom(['table']);
-      }, /Source must be a Table/);
+    it('should pass the arguments to startCopyFrom', function(done) {
+      var fakeSourceTables = {};
+      var fakeMetadata = {};
 
-      assert.throws(function() {
-        table.copyFrom([SOURCE_TABLE, 'table']);
-      }, /Source must be a Table/);
-
-      assert.throws(function() {
-        table.copyFrom({});
-      }, /Source must be a Table/);
-
-      assert.throws(function() {
-        table.copyFrom(function() {});
-      }, /Source must be a Table/);
-    });
-
-    it('should send correct request to the API', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.equal(reqOpts.method, 'POST');
-        assert.equal(reqOpts.uri, '/jobs');
-        assert.deepEqual(reqOpts.json, {
-          configuration: {
-            copy: {
-              a: 'b',
-              c: 'd',
-              destinationTable: {
-                datasetId: table.dataset.id,
-                projectId: table.bigQuery.projectId,
-                tableId: table.id
-              },
-              sourceTables: [
-                {
-                  datasetId: SOURCE_TABLE.dataset.id,
-                  projectId: SOURCE_TABLE.bigQuery.projectId,
-                  tableId: SOURCE_TABLE.id
-                }
-              ]
-            }
-          }
-        });
-
+      table.startCopyFrom = function(sourceTables, metadata) {
+        assert.strictEqual(sourceTables, fakeSourceTables);
+        assert.strictEqual(metadata, fakeMetadata);
         done();
       };
 
-      table.copyFrom(SOURCE_TABLE, { a: 'b', c: 'd' }, assert.ifError);
+      table.copyFrom(fakeSourceTables, fakeMetadata, assert.ifError);
     });
 
-    it('should accept multiple source tables', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.configuration.copy.sourceTables, [
-          {
-            datasetId: SOURCE_TABLE.dataset.id,
-            projectId: SOURCE_TABLE.bigQuery.projectId,
-            tableId: SOURCE_TABLE.id
-          },
-          {
-            datasetId: SOURCE_TABLE.dataset.id,
-            projectId: SOURCE_TABLE.bigQuery.projectId,
-            tableId: SOURCE_TABLE.id
-          }
-        ]);
-
+    it('should optionally accept metadata', function(done) {
+      table.startCopyFrom = function(sourceTables, metadata) {
+        assert.deepEqual(metadata, {});
         done();
       };
 
-      table.copyFrom([
-        SOURCE_TABLE,
-        SOURCE_TABLE
-      ], assert.ifError);
+      table.copyFrom({}, assert.ifError);
     });
 
-    it('should create and return a Job', function(done) {
-      var jobId = 'job-id';
+    it('should return any startCopyFrom errors', function(done) {
+      var error = new Error('err');
+      var response = {};
 
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, { jobReference: { jobId: jobId } });
+      table.startCopyFrom = function(sourceTables, metadata, callback) {
+        callback(error, null, response);
       };
 
-      table.copyFrom(SOURCE_TABLE, function(err, job) {
+      table.copyFrom({}, function(err, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+
+    it('should return any job errors', function(done) {
+      var error = new Error('err');
+
+      table.copyFrom({}, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+
+      fakeJob.emit('error', error);
+    });
+
+    it('should return the metadata on complete', function(done) {
+      var metadata = {};
+
+      table.copyFrom({}, function(err, resp) {
         assert.ifError(err);
-        assert.equal(job.id, jobId);
+        assert.strictEqual(resp, metadata);
         done();
       });
-    });
 
-    it('should assign metadata on the job', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.copyFrom(SOURCE_TABLE, function(err, job) {
-        assert.ifError(err);
-        assert.deepEqual(job.metadata, jobMetadata);
-        done();
-      });
-    });
-
-    it('should accept just a source and callback', function(done) {
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, { jobReference: { jobId: 'job-id' } });
-      };
-
-      table.copyFrom(SOURCE_TABLE, done);
-    });
-
-    it('should pass an error to the callback', function(done) {
-      var error = new Error('Error.');
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      table.copyFrom(SOURCE_TABLE, function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    it('should pass an apiResponse to the callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.copyFrom(SOURCE_TABLE, function(err, job, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, jobMetadata);
-        done();
-      });
+      fakeJob.emit('complete', metadata);
     });
   });
 
@@ -765,6 +607,16 @@ describe('BigQuery/Table', function() {
     });
 
     describe('writable stream', function() {
+      var fakeJobId;
+
+      beforeEach(function() {
+        fakeJobId = uuid.v4();
+
+        fakeUuid.v4 = function() {
+          return fakeJobId;
+        };
+      });
+
       it('should make a writable stream when written to', function(done) {
         var stream;
 
@@ -799,6 +651,10 @@ describe('BigQuery/Table', function() {
                   tableId: table.id
                 }
               }
+            },
+            jobReference: {
+              projectId: table.bigQuery.projectId,
+              jobId: fakeJobId
             }
           });
           done();
@@ -816,6 +672,19 @@ describe('BigQuery/Table', function() {
         };
 
         table.createWriteStream().emit('writing');
+      });
+
+      it('should respect the jobPrefix option', function(done) {
+        var jobPrefix = 'abc-';
+        var expectedJobId = jobPrefix + fakeJobId;
+
+        makeWritableStreamOverride = function(stream, options) {
+          var jobId = options.metadata.jobReference.jobId;
+          assert.strictEqual(jobId, expectedJobId);
+          done();
+        };
+
+        table.createWriteStream({ jobPrefix: jobPrefix }).emit('writing');
       });
 
       it('should create a job and emit it with complete', function(done) {
@@ -842,191 +711,73 @@ describe('BigQuery/Table', function() {
   });
 
   describe('export', function() {
-    var FILE = {
-      name: 'file-name.json',
-      bucket: {
-        name: 'bucket-name'
-      }
-    };
+    var fakeJob;
 
     beforeEach(function() {
-      isCustomTypeOverride = function() {
-        return true;
-      };
-
-      table.bigQuery.job = function(id) {
-        return { id: id };
+      fakeJob = new events.EventEmitter();
+      table.startExport = function(destination, metadata, callback) {
+        callback(null, fakeJob);
       };
     });
 
-    it('should send the correct API request', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.equal(reqOpts.method, 'POST');
-        assert.equal(reqOpts.uri, '/jobs');
-        assert.deepEqual(reqOpts.json.configuration.extract.sourceTable, {
-          datasetId: table.dataset.id,
-          projectId: table.bigQuery.projectId,
-          tableId: table.id
-        });
+    it('should pass the arguments to startExport', function(done) {
+      var fakeDestination = {};
+      var fakeMetadata = {};
 
+      table.startExport = function(destination, metadata) {
+        assert.strictEqual(destination, fakeDestination);
+        assert.strictEqual(metadata, fakeMetadata);
         done();
       };
 
-      table.export(FILE, assert.ifError);
+      table.export(fakeDestination, fakeMetadata, assert.ifError);
     });
 
-    it('should accept just a destination and a callback', function(done) {
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, { jobReference: { jobId: 'job-id' }});
+    it('should optionally accept metadata', function(done) {
+      table.startExport = function(destination, metadata) {
+        assert.deepEqual(metadata, {});
+        done();
       };
 
-      table.export(FILE, done);
+      table.export({}, assert.ifError);
     });
 
-    describe('formats', function() {
-      it('should accept csv', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var extract = reqOpts.json.configuration.extract;
-          assert.equal(extract.destinationFormat, 'CSV');
-          done();
-        };
+    it('should return any startExport errors', function(done) {
+      var error = new Error('err');
+      var response = {};
 
-        table.export(FILE, { format: 'csv' }, assert.ifError);
-      });
+      table.startExport = function(destination, metadata, callback) {
+        callback(error, null, response);
+      };
 
-      it('should accept json', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var extract = reqOpts.json.configuration.extract;
-          assert.equal(extract.destinationFormat, 'NEWLINE_DELIMITED_JSON');
-          done();
-        };
-
-        table.export(FILE, { format: 'json' }, assert.ifError);
-      });
-
-      it('should accept avro', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var extract = reqOpts.json.configuration.extract;
-          assert.equal(extract.destinationFormat, 'AVRO');
-          done();
-        };
-
-        table.export(FILE, { format: 'avro' }, assert.ifError);
+      table.export({}, function(err, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(resp, response);
+        done();
       });
     });
 
-    it('should parse out full gs:// urls from files', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.configuration.extract.destinationUris, [
-          'gs://' + FILE.bucket.name + '/' + FILE.name
-        ]);
-        done();
-      };
+    it('should return any job errors', function(done) {
+      var error = new Error('err');
 
-      table.export(FILE, assert.ifError);
-    });
-
-    it('should check if a destination is a File', function(done) {
-      isCustomTypeOverride = function(dest, type) {
-        assert.strictEqual(dest, FILE);
-        assert.strictEqual(type, 'storage/file');
-        setImmediate(done);
-        return true;
-      };
-
-      table.export(FILE, assert.ifError);
-    });
-
-    it('should throw if a destination is not a File', function() {
-      isCustomTypeOverride = function() {
-        return false;
-      };
-
-      assert.throws(function() {
-        table.export({}, util.noop);
-      }, /Destination must be a File object/);
-
-      assert.throws(function() {
-        table.export([FILE, {}], util.noop);
-      }, /Destination must be a File object/);
-    });
-
-    it('should detect file format if a format is not provided', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        var destFormat = reqOpts.json.configuration.extract.destinationFormat;
-        assert.equal(destFormat, 'NEWLINE_DELIMITED_JSON');
-        done();
-      };
-
-      table.export(FILE, assert.ifError);
-    });
-
-    it('should assign the provided format if matched', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        var extract = reqOpts.json.configuration.extract;
-        assert.equal(extract.destinationFormat, 'CSV');
-        assert.strictEqual(extract.format, undefined);
-        done();
-      };
-
-      table.export(FILE, { format: 'csv' }, assert.ifError);
-    });
-
-    it('should throw if a provided format is not recognized', function() {
-      assert.throws(function() {
-        table.export(FILE, { format: 'zip' }, util.noop);
-      }, /Destination format not recognized/);
-    });
-
-    it('should assign GZIP compression with gzip: true', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        assert.equal(reqOpts.json.configuration.extract.compression, 'GZIP');
-        assert.strictEqual(reqOpts.json.configuration.extract.gzip, undefined);
-        done();
-      };
-
-      table.export(FILE, { gzip: true }, util.noop);
-    });
-
-    it('should execute the callback with error', function(done) {
-      var error = new Error('Error.');
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      table.export(FILE, function(err) {
+      table.export({}, function(err) {
         assert.strictEqual(err, error);
         done();
       });
+
+      fakeJob.emit('error', error);
     });
 
-    it('should create a Job and returns it to the callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+    it('should return the metadata on complete', function(done) {
+      var metadata = {};
 
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.export(FILE, function(err, job) {
+      table.export({}, function(err, resp) {
         assert.ifError(err);
-        assert.deepEqual(job.metadata, jobMetadata);
+        assert.strictEqual(resp, metadata);
         done();
       });
-    });
 
-    it('should return apiResponse to callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.export(FILE, function(err, job, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, jobMetadata);
-        done();
-      });
+      fakeJob.emit('complete', metadata);
     });
   });
 
@@ -1072,12 +823,19 @@ describe('BigQuery/Table', function() {
       // Using "Stephen" so you know who to blame for these tests.
       var rows = [{ f: [{ v: 'stephen' }] }];
       var schema = { fields: [{ name: 'name', type: 'string' }] };
+      var mergedRows = [{ name: 'stephen' }];
 
       beforeEach(function() {
         table.request = function(reqOpts, callback) {
           // Respond with a row, so it grabs the schema.
           // Use setImmediate to let our getMetadata overwrite process.
           setImmediate(callback, null, { rows: rows });
+        };
+
+        table.bigQuery.mergeSchemaWithRows_ = function(schema_, rows_) {
+          assert.strictEqual(schema_, schema);
+          assert.strictEqual(rows_, rows);
+          return mergedRows;
         };
       });
 
@@ -1094,7 +852,7 @@ describe('BigQuery/Table', function() {
         // Step 3: execute original complete handler with schema-merged rows.
         function responseHandler(err, rows) {
           assert.ifError(err);
-          assert.deepEqual(rows, [{ name: 'stephen' }]);
+          assert.strictEqual(rows, mergedRows);
           done();
         }
       });
@@ -1125,15 +883,23 @@ describe('BigQuery/Table', function() {
     it('should return schema-merged rows', function(done) {
       var rows = [{ f: [{ v: 'stephen' }] }];
       var schema = { fields: [{ name: 'name', type: 'string' }] };
+      var merged = [{ name: 'stephen' }];
+
       table.metadata = { schema: schema };
 
       table.request = function(reqOpts, callback) {
         callback(null, { rows: rows });
       };
 
+      table.bigQuery.mergeSchemaWithRows_ = function(schema_, rows_) {
+        assert.strictEqual(schema_, schema);
+        assert.strictEqual(rows_, rows);
+        return merged;
+      };
+
       table.getRows(function(err, rows) {
         assert.ifError(err);
-        assert.deepEqual(rows, [{ name: 'stephen' }]);
+        assert.strictEqual(rows, merged);
         done();
       });
     });
@@ -1176,218 +942,73 @@ describe('BigQuery/Table', function() {
   });
 
   describe('import', function() {
-    var FILEPATH = require.resolve('./testdata/testfile.json');
-    var FILE = {
-      name: 'file-name.json',
-      bucket: {
-        name: 'bucket-name'
-      }
-    };
+    var fakeJob;
 
     beforeEach(function() {
-      isCustomTypeOverride = function() {
-        return true;
+      fakeJob = new events.EventEmitter();
+      table.startImport = function(source, metadata, callback) {
+        callback(null, fakeJob);
       };
     });
 
-    it('should accept just a File and a callback', function(done) {
-      var mockJob = { id: 'foo' };
+    it('should pass the arguments to startImport', function(done) {
+      var fakeSource = {};
+      var fakeMetadata = {};
 
-      table.createWriteStream = function() {
-        var ws = new stream.Writable();
-        setImmediate(function() {
-          ws.emit('complete', mockJob);
-          ws.end();
-        });
-        return ws;
+      table.startImport = function(source, metadata) {
+        assert.strictEqual(source, fakeSource);
+        assert.strictEqual(metadata, fakeMetadata);
+        done();
       };
 
-      table.import(FILEPATH, function(err, job) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(job, mockJob);
+      table.import(fakeSource, fakeMetadata, assert.ifError);
+    });
+
+    it('should optionally accept metadata', function(done) {
+      table.startImport = function(source, metadata) {
+        assert.deepEqual(metadata, {});
+        done();
+      };
+
+      table.import({}, assert.ifError);
+    });
+
+    it('should return any startImport errors', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      table.startImport = function(source, metadata, callback) {
+        callback(error, null, response);
+      };
+
+      table.import({}, function(err, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(resp, response);
         done();
       });
     });
 
-    it('should return a stream when a string is given', function() {
-      table.createWriteStream = function() {
-        return new stream.Writable();
-      };
+    it('should return any job errors', function(done) {
+      var error = new Error('err');
 
-      assert(table.import(FILEPATH) instanceof stream.Stream);
-    });
-
-    it('should infer the file format from the given filepath', function(done) {
-      table.createWriteStream = function(metadata) {
-        assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
-        var ws = new stream.Writable();
-        setImmediate(function() {
-          ws.emit('complete');
-          ws.end();
-        });
-        return ws;
-      };
-
-      table.import(FILEPATH, done);
-    });
-
-    it('should execute callback with error from writestream', function(done) {
-      var error = new Error('Error.');
-
-      table.createWriteStream = function(metadata) {
-        assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
-        var ws = new stream.Writable();
-        setImmediate(function() {
-          ws.emit('error', error);
-          ws.end();
-        });
-        return ws;
-      };
-
-      table.import(FILEPATH, function(err) {
+      table.import({}, function(err) {
         assert.strictEqual(err, error);
         done();
       });
+
+      fakeJob.emit('error', error);
     });
 
-    it('should not infer the file format if one is given', function(done) {
-      table.createWriteStream = function(metadata) {
-        assert.equal(metadata.sourceFormat, 'CSV');
-        var ws = new stream.Writable();
-        setImmediate(function() {
-          ws.emit('complete');
-          ws.end();
-        });
-        return ws;
-      };
+    it('should return the metadata on complete', function(done) {
+      var metadata = {};
 
-      table.import(FILEPATH, { sourceFormat: 'CSV' }, done);
-    });
-
-    it('should check if a destination is a File', function(done) {
-      isCustomTypeOverride = function(dest, type) {
-        assert.strictEqual(dest, FILE);
-        assert.strictEqual(type, 'storage/file');
-        setImmediate(done);
-        return true;
-      };
-
-      table.export(FILE, assert.ifError);
-    });
-
-    it('should throw if a File object is not provided', function() {
-      isCustomTypeOverride = function() {
-        return false;
-      };
-
-      assert.throws(function() {
-        table.import({});
-      }, /Source must be a File object/);
-    });
-
-    it('should convert File objects to gs:// urls', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        var sourceUri = reqOpts.json.configuration.load.sourceUris[0];
-        assert.equal(sourceUri, 'gs://' + FILE.bucket.name + '/' + FILE.name);
-        done();
-      };
-
-      table.import(FILE, assert.ifError);
-    });
-
-    it('should infer the file format from a File object', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        var sourceFormat = reqOpts.json.configuration.load.sourceFormat;
-        assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
-        done();
-      };
-
-      table.import(FILE, assert.ifError);
-    });
-
-    it('should not override a provided format with a File', function(done) {
-      table.bigQuery.request = function(reqOpts) {
-        var sourceFormat = reqOpts.json.configuration.load.sourceFormat;
-        assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
-        done();
-      };
-
-      table.import(FILE, {
-        sourceFormat: 'NEWLINE_DELIMITED_JSON'
-      }, assert.ifError);
-    });
-
-    it('should execute the callback with error', function(done) {
-      var error = new Error('Error.');
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      table.import(FILE, function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    it('should create a Job and return it to the callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.import(FILE, function(err, job) {
+      table.import({}, function(err, resp) {
         assert.ifError(err);
-        assert.deepEqual(job.metadata, jobMetadata);
+        assert.strictEqual(resp, metadata);
         done();
       });
-    });
 
-    it('should return apiResponse to callback', function(done) {
-      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
-
-      table.bigQuery.request = function(reqOpts, callback) {
-        callback(null, jobMetadata);
-      };
-
-      table.import(FILE, function(err, job, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, jobMetadata);
-        done();
-      });
-    });
-
-    describe('formats', function() {
-      it('should accept csv', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var load = reqOpts.json.configuration.load;
-          assert.equal(load.sourceFormat, 'CSV');
-          done();
-        };
-
-        table.import(FILE, { format: 'csv' }, assert.ifError);
-      });
-
-      it('should accept json', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var load = reqOpts.json.configuration.load;
-          assert.equal(load.sourceFormat, 'NEWLINE_DELIMITED_JSON');
-          done();
-        };
-
-        table.import(FILE, { format: 'json' }, assert.ifError);
-      });
-
-      it('should accept avro', function(done) {
-        table.bigQuery.request = function(reqOpts) {
-          var load = reqOpts.json.configuration.load;
-          assert.equal(load.sourceFormat, 'AVRO');
-          done();
-        };
-
-        table.import(FILE, { format: 'avro' }, assert.ifError);
-      });
+      fakeJob.emit('complete', metadata);
     });
   });
 
@@ -1415,6 +1036,12 @@ describe('BigQuery/Table', function() {
         };
       })
     };
+
+    it('should throw an error if rows is empty', function() {
+      assert.throws(function() {
+        table.insert([]);
+      }, /You must provide at least 1 row to be inserted\./);
+    });
 
     it('should save data', function(done) {
       table.request = function(reqOpts) {
@@ -1530,6 +1157,140 @@ describe('BigQuery/Table', function() {
 
       table.insert(data, opts, done);
     });
+
+    describe('create table and retry', function() {
+      var OPTIONS  = {
+        autoCreate: true,
+        schema: SCHEMA_STRING
+      };
+
+      var _setTimeout;
+      var _random;
+
+      before(function() {
+        _setTimeout = global.setTimeout;
+        _random = Math.random;
+      });
+
+      beforeEach(function() {
+        global.setTimeout = function(callback) {
+          callback();
+        };
+
+        Math.random = _random;
+
+        table.request = function(reqOpts, callback) {
+          callback({ code: 404 });
+        };
+
+        table.create = function(reqOpts, callback) {
+          callback(null);
+        };
+      });
+
+      after(function() {
+        global.setTimeout = _setTimeout;
+        Math.random = _random;
+      });
+
+      it('should throw if autoCreate is set with no schema', function() {
+        var options = {
+          autoCreate: true
+        };
+
+        assert.throws(function() {
+          table.insert(data, options)
+        }, /Schema must be provided in order to auto\-create Table\./);
+      });
+
+      it('should not include the schema in the insert request', function(done) {
+       table.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.schema, undefined);
+          assert.strictEqual(reqOpts.json.autoCreate, undefined);
+          done();
+        };
+
+        table.insert(data, OPTIONS, assert.ifError);
+      });
+
+      it('should set a timeout to create the table', function(done) {
+        var fakeRandomValue = Math.random();
+
+        Math.random = function() {
+          return fakeRandomValue;
+        };
+
+        global.setTimeout = function(callback, delay) {
+          assert.strictEqual(delay, fakeRandomValue * 60000);
+          callback();
+        };
+
+        table.create = function(reqOpts) {
+          assert.strictEqual(reqOpts.schema, SCHEMA_STRING);
+          done();
+        };
+
+        table.insert(data, OPTIONS, assert.ifError);
+      });
+
+      it('should return table creation errors', function(done) {
+        var error = new Error('err.');
+        var response = {};
+
+        table.create = function(reqOpts, callback) {
+          callback(error, null, response);
+        };
+
+        table.insert(data, OPTIONS, function(err, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(resp, response);
+          done();
+        });
+      });
+
+      it('should ignore 409 errors', function(done) {
+        table.create = function(reqOpts, callback) {
+          callback({ code: 409 });
+        };
+
+        var timeouts = 0;
+        global.setTimeout = function(callback, delay) {
+          if (++timeouts === 2) {
+            assert.strictEqual(delay, 60000);
+            done();
+            return;
+          }
+
+          callback(null);
+        };
+
+        table.insert(data, OPTIONS, assert.ifError);
+      });
+
+      it('should retry the insert', function(done) {
+        var response = {};
+        var attempts = 0;
+
+        table.request = function(reqOpts, callback) {
+          assert.equal(reqOpts.method, 'POST');
+          assert.equal(reqOpts.uri, '/insertAll');
+          assert.deepEqual(reqOpts.json, dataApiFormat);
+
+          if (++attempts === 2) {
+            callback(null, response);
+            return;
+          }
+
+          callback({ code: 404 });
+        };
+
+        table.insert(data, OPTIONS, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp, response);
+          done();
+        });
+      });
+    });
   });
 
   describe('query', function() {
@@ -1545,85 +1306,602 @@ describe('BigQuery/Table', function() {
   });
 
   describe('setMetadata', function() {
-    var METADATA = { a: 'b', c: 'd' };
+    it('should call ServiceObject#setMetadata', function(done) {
+      var fakeMetadata = {};
+      var formattedMetadata = {};
 
-    it('should send request to the api', function(done) {
-      table.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PUT');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.json, METADATA);
-        done();
+      Table.formatMetadata_ = function(data) {
+        assert.strictEqual(data, fakeMetadata);
+        return formattedMetadata;
       };
 
-      table.setMetadata(METADATA, assert.ifError);
-    });
-
-    it('should convert a name to a friendly name', function(done) {
-      var name = 'a new name';
-
-      table.request = function(reqOpts) {
-        assert.equal(reqOpts.json.friendlyName, name);
-        done();
+      FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
+        assert.strictEqual(this, table);
+        assert.strictEqual(metadata, formattedMetadata);
+        assert.strictEqual(callback, done);
+        callback(); // the done fn
       };
 
-      table.setMetadata({ name: name }, assert.ifError);
+      table.setMetadata(fakeMetadata, done);
+    });
+  });
+
+  describe('startCopy', function() {
+    var DEST_TABLE;
+
+    before(function() {
+      DEST_TABLE = new Table(DATASET, 'destination-table');
     });
 
-    it('should accept a schema', function(done) {
-      table.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.schema, {
-          fields: [{ name: 'schema', type: 'STRING' }]
+    it('should throw if a destination is not a Table', function() {
+      assert.throws(function() {
+        table.startCopy();
+      }, /Destination must be a Table/);
+
+      assert.throws(function() {
+        table.startCopy({});
+      }, /Destination must be a Table/);
+
+      assert.throws(function() {
+        table.startCopy(function() {});
+      }, /Destination must be a Table/);
+    });
+
+    it('should send correct request to the API', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.deepEqual(reqOpts, {
+          configuration: {
+            copy: {
+              a: 'b',
+              c: 'd',
+              destinationTable: {
+                datasetId: DEST_TABLE.dataset.id,
+                projectId: DEST_TABLE.bigQuery.projectId,
+                tableId: DEST_TABLE.id
+              },
+              sourceTable: {
+                datasetId: table.dataset.id,
+                projectId: table.bigQuery.projectId,
+                tableId: table.id
+              }
+            }
+          }
         });
+
         done();
       };
-      table.setMetadata({ schema: 'schema' });
+
+      table.startCopy(DEST_TABLE, { a: 'b', c: 'd' }, assert.ifError);
     });
 
-    it('should execute callback with error & API response', function(done) {
+    it('should accept a job prefix', function(done) {
+      var fakeJobPrefix = 'abc-';
+      var options = {
+        jobPrefix: fakeJobPrefix
+      };
+
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.jobPrefix, fakeJobPrefix);
+        assert.strictEqual(reqOpts.configuration.copy.jobPrefix, undefined);
+        callback(); // the done fn
+      };
+
+      table.startCopy(DEST_TABLE, options, done);
+    });
+
+    it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startCopy(DEST_TABLE, done);
+    });
+  });
+
+  describe('startCopyFrom', function() {
+    var SOURCE_TABLE;
+
+    before(function() {
+      SOURCE_TABLE = new Table(DATASET, 'source-table');
+    });
+
+    it('should throw if a source is not a Table', function() {
+      assert.throws(function() {
+        table.startCopyFrom(['table']);
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.startCopyFrom([SOURCE_TABLE, 'table']);
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.startCopyFrom({});
+      }, /Source must be a Table/);
+
+      assert.throws(function() {
+        table.startCopyFrom(function() {});
+      }, /Source must be a Table/);
+    });
+
+    it('should send correct request to the API', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.deepEqual(reqOpts, {
+          configuration: {
+            copy: {
+              a: 'b',
+              c: 'd',
+              destinationTable: {
+                datasetId: table.dataset.id,
+                projectId: table.bigQuery.projectId,
+                tableId: table.id
+              },
+              sourceTables: [
+                {
+                  datasetId: SOURCE_TABLE.dataset.id,
+                  projectId: SOURCE_TABLE.bigQuery.projectId,
+                  tableId: SOURCE_TABLE.id
+                }
+              ]
+            }
+          }
+        });
+
+        done();
+      };
+
+      table.startCopyFrom(SOURCE_TABLE, { a: 'b', c: 'd' }, assert.ifError);
+    });
+
+    it('should accept multiple source tables', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.deepEqual(reqOpts.configuration.copy.sourceTables, [
+          {
+            datasetId: SOURCE_TABLE.dataset.id,
+            projectId: SOURCE_TABLE.bigQuery.projectId,
+            tableId: SOURCE_TABLE.id
+          },
+          {
+            datasetId: SOURCE_TABLE.dataset.id,
+            projectId: SOURCE_TABLE.bigQuery.projectId,
+            tableId: SOURCE_TABLE.id
+          }
+        ]);
+
+        done();
+      };
+
+      table.startCopyFrom([
+        SOURCE_TABLE,
+        SOURCE_TABLE
+      ], assert.ifError);
+    });
+
+    it('should accept a job prefix', function(done) {
+      var fakeJobPrefix = 'abc-';
+      var options = {
+        jobPrefix: fakeJobPrefix
+      };
+
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.jobPrefix, fakeJobPrefix);
+        assert.strictEqual(reqOpts.configuration.copy.jobPrefix, undefined);
+        callback(); // the done fn
+      };
+
+      table.startCopyFrom(SOURCE_TABLE, options, done);
+    });
+
+    it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startCopyFrom(SOURCE_TABLE, done);
+    });
+
+    it('should pass an error to the callback', function(done) {
       var error = new Error('Error.');
-      var apiResponse = {};
 
-      table.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        callback(error);
       };
 
-      table.setMetadata(METADATA, function(err, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
+      table.startCopyFrom(SOURCE_TABLE, function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+  });
+
+  describe('startExport', function() {
+    var FILE = {
+      name: 'file-name.json',
+      bucket: {
+        name: 'bucket-name'
+      }
+    };
+
+    beforeEach(function() {
+      isCustomTypeOverride = function() {
+        return true;
+      };
+
+      table.bigQuery.job = function(id) {
+        return { id: id };
+      };
+
+      table.bigQuery.createJob = function() {};
+    });
+
+    it('should send the correct API request', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.deepEqual(reqOpts.configuration.extract.sourceTable, {
+          datasetId: table.dataset.id,
+          projectId: table.bigQuery.projectId,
+          tableId: table.id
+        });
+
+        done();
+      };
+
+      table.startExport(FILE, assert.ifError);
+    });
+
+    it('should accept just a destination and a callback', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        callback(null, { jobReference: { jobId: 'job-id' }});
+      };
+
+      table.startExport(FILE, done);
+    });
+
+    describe('formats', function() {
+      it('should accept csv', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var extract = reqOpts.configuration.extract;
+          assert.equal(extract.destinationFormat, 'CSV');
+          done();
+        };
+
+        table.startExport(FILE, { format: 'csv' }, assert.ifError);
+      });
+
+      it('should accept json', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var extract = reqOpts.configuration.extract;
+          assert.equal(extract.destinationFormat, 'NEWLINE_DELIMITED_JSON');
+          done();
+        };
+
+        table.startExport(FILE, { format: 'json' }, assert.ifError);
+      });
+
+      it('should accept avro', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var extract = reqOpts.configuration.extract;
+          assert.equal(extract.destinationFormat, 'AVRO');
+          done();
+        };
+
+        table.startExport(FILE, { format: 'avro' }, assert.ifError);
+      });
+    });
+
+    it('should parse out full gs:// urls from files', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.deepEqual(reqOpts.configuration.extract.destinationUris, [
+          'gs://' + FILE.bucket.name + '/' + FILE.name
+        ]);
+        done();
+      };
+
+      table.startExport(FILE, assert.ifError);
+    });
+
+    it('should check if a destination is a File', function(done) {
+      isCustomTypeOverride = function(dest, type) {
+        assert.strictEqual(dest, FILE);
+        assert.strictEqual(type, 'storage/file');
+        setImmediate(done);
+        return true;
+      };
+
+      table.startExport(FILE, assert.ifError);
+    });
+
+    it('should throw if a destination is not a File', function() {
+      isCustomTypeOverride = function() {
+        return false;
+      };
+
+      assert.throws(function() {
+        table.startExport({}, util.noop);
+      }, /Destination must be a File object/);
+
+      assert.throws(function() {
+        table.startExport([FILE, {}], util.noop);
+      }, /Destination must be a File object/);
+    });
+
+    it('should detect file format if a format is not provided', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        var destFormat = reqOpts.configuration.extract.destinationFormat;
+        assert.equal(destFormat, 'NEWLINE_DELIMITED_JSON');
+        done();
+      };
+
+      table.startExport(FILE, assert.ifError);
+    });
+
+    it('should assign the provided format if matched', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        var extract = reqOpts.configuration.extract;
+        assert.equal(extract.destinationFormat, 'CSV');
+        assert.strictEqual(extract.format, undefined);
+        done();
+      };
+
+      table.startExport(FILE, { format: 'csv' }, assert.ifError);
+    });
+
+    it('should throw if a provided format is not recognized', function() {
+      assert.throws(function() {
+        table.startExport(FILE, { format: 'zip' }, util.noop);
+      }, /Destination format not recognized/);
+    });
+
+    it('should assign GZIP compression with gzip: true', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.equal(reqOpts.configuration.extract.compression, 'GZIP');
+        assert.strictEqual(reqOpts.configuration.extract.gzip, undefined);
+        done();
+      };
+
+      table.startExport(FILE, { gzip: true }, util.noop);
+    });
+
+    it('should accept a job prefix', function(done) {
+      var fakeJobPrefix = 'abc-';
+      var options = {
+        jobPrefix: fakeJobPrefix
+      };
+
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.jobPrefix, fakeJobPrefix);
+        assert.strictEqual(reqOpts.configuration.extract.jobPrefix, undefined);
+        callback(); // the done fn
+      };
+
+      table.startExport(FILE, options, done);
+    });
+
+    it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startExport(FILE, done);
+    });
+  });
+
+  describe('startImport', function() {
+    var FILEPATH = require.resolve('./testdata/testfile.json');
+    var FILE = {
+      name: 'file-name.json',
+      bucket: {
+        name: 'bucket-name'
+      }
+    };
+
+    var JOB = {
+      id: 'foo',
+      metadata: {}
+    };
+
+    beforeEach(function() {
+      isCustomTypeOverride = function() {
+        return true;
+      };
+    });
+
+    it('should accept just a File and a callback', function(done) {
+      table.createWriteStream = function() {
+        var ws = new stream.Writable();
+        setImmediate(function() {
+          ws.emit('complete', JOB);
+          ws.end();
+        });
+        return ws;
+      };
+
+      table.startImport(FILEPATH, function(err, job, resp) {
+        assert.strictEqual(err, null);
+        assert.strictEqual(job, JOB);
+        assert.strictEqual(resp, JOB.metadata);
         done();
       });
     });
 
-    describe('metadata', function() {
-      beforeEach(function() {
-        table.request = function(reqOpts, callback) {
-          callback(null, METADATA);
+    it('should return a stream when a string is given', function() {
+      table.createWriteStream = function() {
+        return new stream.Writable();
+      };
+
+      assert(table.startImport(FILEPATH) instanceof stream.Stream);
+    });
+
+    it('should infer the file format from the given filepath', function(done) {
+      table.createWriteStream = function(metadata) {
+        assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
+        var ws = new stream.Writable();
+        setImmediate(function() {
+          ws.emit('complete', JOB);
+          ws.end();
+        });
+        return ws;
+      };
+
+      table.startImport(FILEPATH, done);
+    });
+
+    it('should execute callback with error from writestream', function(done) {
+      var error = new Error('Error.');
+
+      table.createWriteStream = function(metadata) {
+        assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
+        var ws = new stream.Writable();
+        setImmediate(function() {
+          ws.emit('error', error);
+          ws.end();
+        });
+        return ws;
+      };
+
+      table.startImport(FILEPATH, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should not infer the file format if one is given', function(done) {
+      table.createWriteStream = function(metadata) {
+        assert.equal(metadata.sourceFormat, 'CSV');
+        var ws = new stream.Writable();
+        setImmediate(function() {
+          ws.emit('complete', JOB);
+          ws.end();
+        });
+        return ws;
+      };
+
+      table.startImport(FILEPATH, { sourceFormat: 'CSV' }, done);
+    });
+
+    it('should check if a destination is a File', function(done) {
+      isCustomTypeOverride = function(dest, type) {
+        assert.strictEqual(dest, FILE);
+        assert.strictEqual(type, 'storage/file');
+        setImmediate(done);
+        return true;
+      };
+
+      table.startImport(FILE, assert.ifError);
+    });
+
+    it('should throw if a File object is not provided', function() {
+      isCustomTypeOverride = function() {
+        return false;
+      };
+
+      assert.throws(function() {
+        table.startImport({});
+      }, /Source must be a File object/);
+    });
+
+    it('should convert File objects to gs:// urls', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        var sourceUri = reqOpts.configuration.load.sourceUris[0];
+        assert.equal(sourceUri, 'gs://' + FILE.bucket.name + '/' + FILE.name);
+        done();
+      };
+
+      table.startImport(FILE, assert.ifError);
+    });
+
+    it('should infer the file format from a File object', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        var sourceFormat = reqOpts.configuration.load.sourceFormat;
+        assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
+        done();
+      };
+
+      table.startImport(FILE, assert.ifError);
+    });
+
+    it('should not override a provided format with a File', function(done) {
+      table.bigQuery.createJob = function(reqOpts) {
+        var sourceFormat = reqOpts.configuration.load.sourceFormat;
+        assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
+        done();
+      };
+
+      table.startImport(FILE, {
+        sourceFormat: 'NEWLINE_DELIMITED_JSON'
+      }, assert.ifError);
+    });
+
+    it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startImport(FILE, done);
+    });
+
+    it('should set the job prefix', function(done) {
+      var fakeJobPrefix = 'abc';
+
+      table.bigQuery.createJob = function(reqOpts) {
+        assert.strictEqual(reqOpts.jobPrefix, fakeJobPrefix);
+        assert.strictEqual(reqOpts.configuration.load.jobPrefix, undefined);
+        done();
+      };
+
+      table.startImport(FILE, {
+        jobPrefix: fakeJobPrefix
+      }, assert.ifError);
+    });
+
+    describe('formats', function() {
+      it('should accept csv', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var load = reqOpts.configuration.load;
+          assert.strictEqual(load.sourceFormat, 'CSV');
+          done();
         };
+
+        table.startImport(FILE, { format: 'csv' }, assert.ifError);
       });
 
-      it('should update metadata on Table object', function(done) {
-        table.setMetadata(METADATA, function(err) {
-          assert.ifError(err);
-          assert.deepEqual(table.metadata, METADATA);
+      it('should accept json', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var load = reqOpts.configuration.load;
+          assert.strictEqual(load.sourceFormat, 'NEWLINE_DELIMITED_JSON');
           done();
-        });
+        };
+
+        table.startImport(FILE, { format: 'json' }, assert.ifError);
       });
 
-      it('should execute callback with metadata', function(done) {
-        table.setMetadata(METADATA, function(err, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
+      it('should accept avro', function(done) {
+        table.bigQuery.createJob = function(reqOpts) {
+          var load = reqOpts.configuration.load;
+          assert.strictEqual(load.sourceFormat, 'AVRO');
           done();
-        });
-      });
+        };
 
-      it('should execute callback with apiResponse', function(done) {
-        table.setMetadata(METADATA, function(err, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
-          done();
-        });
+        table.startImport(FILE, { format: 'avro' }, assert.ifError);
       });
+    });
+  });
+
+  describe('startQuery', function() {
+    it('should call through to dataset#startQuery', function(done) {
+      var fakeOptions = {};
+      var fakeReturnValue = {};
+
+      table.dataset.startQuery = function(options, callback) {
+        assert.strictEqual(options, fakeOptions);
+        setImmediate(callback);
+        return fakeReturnValue;
+      };
+
+      var returnVal = table.startQuery(fakeOptions, done);
+      assert.strictEqual(returnVal, fakeReturnValue);
     });
   });
 });

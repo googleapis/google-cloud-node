@@ -16,6 +16,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var is = require('is');
 var proxyquire = require('proxyquire');
@@ -25,6 +26,7 @@ var util = require('@google-cloud/common').util;
 function FakeOperation() {
   this.calledWith_ = arguments;
   this.interceptors = [];
+  this.id = this.calledWith_[0].id;
 }
 
 var promisified = false;
@@ -33,6 +35,22 @@ var utilOverrides = {
     if (Class.name === 'Job') {
       promisified = true;
     }
+  }
+};
+
+var extended = false;
+var fakePaginator = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'Job') {
+      return;
+    }
+
+    methods = arrify(methods);
+    assert.deepEqual(methods, ['getQueryResults']);
+    extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -57,6 +75,7 @@ describe('BigQuery/Job', function() {
     Job = proxyquire('../src/job.js', {
       '@google-cloud/common': {
         Operation: FakeOperation,
+        paginator: fakePaginator,
         util: fakeUtil
       }
     });
@@ -68,6 +87,10 @@ describe('BigQuery/Job', function() {
   });
 
   describe('initialization', function() {
+    it('should paginate all the things', function() {
+      assert(extended);
+    });
+
     it('should promisify all the things', function() {
       assert(promisified);
     });
@@ -87,7 +110,8 @@ describe('BigQuery/Job', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
+        setMetadata: true
       });
     });
 
@@ -164,105 +188,125 @@ describe('BigQuery/Job', function() {
   });
 
   describe('getQueryResults', function() {
+    var pageToken = 'token';
     var options = {
-      a: 'b',
-      c: 'd'
+      a: 'a',
+      b: 'b'
     };
-    var callback = util.noop;
 
-    it('should accept an options object & callback', function(done) {
-      job.bigQuery.query = function(opts, cb) {
-        assert.deepEqual(opts, options);
-        assert.equal(cb, callback);
+    var RESPONSE = {
+      pageToken: pageToken,
+      jobReference: { jobId: JOB_ID }
+    };
+
+    beforeEach(function() {
+      BIGQUERY.request = function(reqOpts, callback) {
+        callback(null, RESPONSE);
+      };
+
+      BIGQUERY.mergeSchemaWithRows_ = function(schema, rows) {
+        return rows;
+      };
+    });
+
+    it('should make the correct request', function(done) {
+      var options = {};
+
+      BIGQUERY.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/queries/' + JOB_ID);
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
-      job.getQueryResults(options, callback);
+      job.getQueryResults(options, assert.ifError);
     });
 
-    it('should accept an options object without a callback', function(done) {
-      job.bigQuery.query = function(opts, cb) {
-        assert.deepEqual(opts, options);
-        assert.equal(cb, undefined);
+    it('should optionally accept options', function(done) {
+      BIGQUERY.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
-      job.getQueryResults(options);
+      job.getQueryResults(assert.ifError);
     });
 
-    it('should accept no arguments', function(done) {
-      job.bigQuery.query = function(opts, cb) {
-        assert.deepEqual(opts, { job: job });
-        assert.equal(cb, undefined);
+    it('should return any errors to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      BIGQUERY.request = function(reqOpts, callback) {
+        callback(error, response);
+      };
+
+      job.getQueryResults(function(err, rows, nextQuery, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(rows, null);
+        assert.strictEqual(nextQuery, null);
+        assert.strictEqual(resp, response);
         done();
-      };
-
-      job.getQueryResults();
+      });
     });
 
-    it('should accept only a callback', function(done) {
-      job.bigQuery.query = function(opts, cb) {
-        assert.deepEqual(opts, { job: job });
-        assert.equal(cb, done);
-        cb(); // done()
-      };
-
-      job.getQueryResults(done);
-    });
-
-    it('should assign job to the options object', function(done) {
-      job.bigQuery.query = function(opts) {
-        assert.deepEqual(opts.job, job);
+    it('should return the rows and response to the callback', function(done) {
+      job.getQueryResults(function(err, rows, nextQuery, resp) {
+        assert.ifError(err);
+        assert.deepEqual(rows, []);
+        assert.strictEqual(resp, RESPONSE);
         done();
+      });
+    });
+
+    it('should merge the rows with the schema', function(done) {
+      var response = {
+        schema: {},
+        rows: []
       };
 
-      job.getQueryResults();
+      var mergedRows = [];
+
+      BIGQUERY.request = function(reqOpts, callback) {
+        callback(null, response);
+      };
+
+      BIGQUERY.mergeSchemaWithRows_ = function(schema, rows) {
+        assert.strictEqual(schema, response.schema);
+        assert.strictEqual(rows, response.rows);
+        return mergedRows;
+      };
+
+      job.getQueryResults(function(err, rows) {
+        assert.strictEqual(rows, mergedRows);
+        done();
+      });
+    });
+
+    it('should return the query when the job is not complete', function(done) {
+      BIGQUERY.request = function(reqOpts, callback) {
+        callback(null, {
+          jobComplete: false
+        });
+      };
+
+      job.getQueryResults(options, function(err, rows, nextQuery) {
+        assert.ifError(err);
+        assert.deepEqual(nextQuery, options);
+        assert.notStrictEqual(nextQuery, options);
+        done();
+      });
+    });
+
+    it('should populate nextQuery when more results exist', function(done) {
+      job.getQueryResults(options, function(err, rows, nextQuery) {
+        assert.ifError(err);
+        assert.equal(nextQuery.pageToken, pageToken);
+        done();
+      });
     });
   });
 
   describe('getQueryResultsStream', function() {
-    var options = {
-      a: 'b',
-      c: 'd'
-    };
-    var callback = util.noop;
-
-    it('should accept an options object', function(done) {
-      job.bigQuery.createQueryStream = function(opts) {
-        assert.deepEqual(opts, options);
-        done();
-      };
-
-      job.getQueryResultsStream(options, callback);
-    });
-
-    it('should accept no arguments', function(done) {
-      job.bigQuery.createQueryStream = function(opts, cb) {
-        assert.deepEqual(opts, { job: job });
-        assert.equal(cb, undefined);
-        done();
-      };
-
-      job.getQueryResultsStream();
-    });
-
-    it('should assign job to the options object', function(done) {
-      job.bigQuery.createQueryStream = function(opts) {
-        assert.deepEqual(opts.job, job);
-        done();
-      };
-
-      job.getQueryResultsStream();
-    });
-
-    it('should return the result of the call to bq.query', function(done) {
-      job.bigQuery.createQueryStream = function() {
-        return {
-          done: done
-        };
-      };
-
-      job.getQueryResultsStream().done();
+    it('should have streamified getQueryResults', function() {
+      assert.strictEqual(job.getQueryResultsStream, 'getQueryResults');
     });
   });
 
