@@ -75,7 +75,8 @@ function languageV1(options) {
 var v1Protos = {};
 
 extend(v1Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'proto', 'google/cloud/language/v1/language_service.proto')
+  path.join(__dirname, '..', 'proto',
+    'google/cloud/language/v1/language_service.proto')
 ).google.cloud.language.v1);
 
 
