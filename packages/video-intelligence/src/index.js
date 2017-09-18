@@ -75,7 +75,7 @@ function videoIntelligenceV1beta2(options) {
 var v1beta2Protos = {};
 
 extend(v1beta2Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'proto',
+  path.join(__dirname, '..', 'protos',
     'google/cloud/videointelligence/v1beta2/video_intelligence.proto')
 ).google.cloud.videointelligence.v1beta2);
 
@@ -124,7 +124,7 @@ function videoIntelligenceV1beta1(options) {
 var v1beta1Protos = {};
 
 extend(v1beta1Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'proto',
+  path.join(__dirname, '..', 'protos',
     'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
 ).google.cloud.videointelligence.v1beta1);
 
