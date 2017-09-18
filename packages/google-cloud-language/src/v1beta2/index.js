@@ -27,7 +27,7 @@ function v1beta2(options) {
   return languageServiceClient(gaxGrpc);
 }
 
-v1beta2.GAPIC_VERSION = '0.7.1';
+v1beta2.GAPIC_VERSION = '0.0.5';
 v1beta2.SERVICE_ADDRESS = languageServiceClient.SERVICE_ADDRESS;
 v1beta2.ALL_SCOPES = languageServiceClient.ALL_SCOPES;
 
