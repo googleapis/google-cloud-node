@@ -675,8 +675,7 @@ describe('ConnectionPool', function() {
   });
 
   describe('getClient', function() {
-    var AUTH_PROJECT_ID = 'auth-project-id-123';
-    var fakeAuthClient = {};
+    var fakeCreds = {};
 
     function FakeSubscriber(address, creds, options) {
       this.address = address;
@@ -685,9 +684,8 @@ describe('ConnectionPool', function() {
     }
 
     beforeEach(function() {
-      PUBSUB.auth.projectId = AUTH_PROJECT_ID;
-      PUBSUB.auth.getAuthClient = function(callback) {
-        callback(null, fakeAuthClient);
+      pool.getCredentials = function(callback) {
+        callback(null, fakeCreds);
       };
 
       v1Override = function() {
@@ -710,7 +708,7 @@ describe('ConnectionPool', function() {
     it('should return any auth errors', function(done) {
       var error = new Error('err');
 
-      PUBSUB.auth.getAuthClient = function(callback) {
+      pool.getCredentials = function(callback) {
         callback(error);
       };
 
@@ -722,49 +720,10 @@ describe('ConnectionPool', function() {
     });
 
     it('should create/use grpc credentials', function(done) {
-      var fakeSslCreds = {};
-      var fakeGoogCreds = {};
-      var fakeCombinedCreds = {};
-
-      fakeGrpc.credentials = {
-        createSsl: function() {
-          return fakeSslCreds;
-        },
-        createFromGoogleCredential: function(authClient) {
-          assert.strictEqual(authClient, fakeAuthClient);
-          return fakeGoogCreds;
-        },
-        combineChannelCredentials: function(sslCreds, googCreds) {
-          assert.strictEqual(sslCreds, fakeSslCreds);
-          assert.strictEqual(googCreds, fakeGoogCreds);
-          return fakeCombinedCreds;
-        }
-      };
-
       pool.getClient(function(err, client) {
         assert.ifError(err);
         assert(client instanceof FakeSubscriber);
-        assert.strictEqual(client.creds, fakeCombinedCreds);
-        done();
-      });
-    });
-
-    it('should capture the projectId when falsey', function(done) {
-      delete pool.projectId;
-
-      pool.getClient(function(err) {
-        assert.ifError(err);
-        assert.strictEqual(pool.projectId, AUTH_PROJECT_ID);
-        done();
-      });
-    });
-
-    it('should capture the projectId if it needs tokenization', function(done) {
-      pool.projectId = '{{projectId}}';
-
-      pool.getClient(function(err) {
-        assert.ifError(err);
-        assert.strictEqual(pool.projectId, AUTH_PROJECT_ID);
+        assert.strictEqual(client.creds, fakeCreds);
         done();
       });
     });
@@ -783,11 +742,6 @@ describe('ConnectionPool', function() {
     });
 
     it('should pass in the correct the args to the Subscriber', function(done) {
-      var fakeCreds = {};
-      fakeGrpc.credentials.combineChannelCredentials = function() {
-        return fakeCreds;
-      };
-
       var fakeAddress = 'a.b.c';
       fakeV1.SERVICE_ADDRESS = fakeAddress;
 
@@ -808,6 +762,121 @@ describe('ConnectionPool', function() {
           'grpc.primary_user_agent': fakeUserAgent
         });
 
+        done();
+      });
+    });
+
+    it('should respect the emulator service address', function(done) {
+      fakeV1.SERVICE_ADDRESS = 'should.not.use';
+
+      PUBSUB.isEmulator = true;
+      PUBSUB.options.servicePath = 'should.use';
+
+      pool.getClient(function(err, client) {
+        assert.ifError(err);
+        assert.strictEqual(client.address, 'should.use');
+        done();
+      });
+    });
+
+    it('should respect the emulator service port', function(done) {
+      fakeV1.SERVICE_ADDRESS = 'should.not.use';
+
+      PUBSUB.isEmulator = true;
+      PUBSUB.options.servicePath = 'should.use';
+      PUBSUB.options.port = 9999;
+
+      pool.getClient(function(err, client) {
+        assert.ifError(err);
+        assert.strictEqual(client.address, 'should.use:9999');
+        done();
+      });
+    });
+  });
+
+  describe('getCredentials', function() {
+    beforeEach(function() {
+      fakeGrpc.credentials = {
+        createInsecure: fakeUtil.noop,
+        createSsl: fakeUtil.noop,
+        createFromGoogleCredential: fakeUtil.noop,
+        combineChannelCredentials: fakeUtil.noop
+      };
+    });
+
+    it('should return insecure creds for emulator usage', function(done) {
+      var fakeCreds = {};
+      fakeGrpc.credentials.createInsecure = function() {
+        return fakeCreds;
+      };
+
+      PUBSUB.isEmulator = true;
+
+      pool.getCredentials(function(err, creds) {
+        assert.ifError(err);
+        assert.strictEqual(creds, fakeCreds);
+        done();
+      });
+    });
+
+    it('should get grpc creds', function(done) {
+      var fakeAuthClient = {};
+      var fakeSslCreds = {};
+      var fakeGoogCreds = {};
+      var fakeCombinedCreds = {};
+
+      PUBSUB.isEmulator = false;
+      PUBSUB.auth.getAuthClient = function(callback) {
+        callback(null, fakeAuthClient);
+      };
+
+      fakeGrpc.credentials = {
+        createSsl: function() {
+          return fakeSslCreds;
+        },
+        createFromGoogleCredential: function(authClient) {
+          assert.strictEqual(authClient, fakeAuthClient);
+          return fakeGoogCreds;
+        },
+        combineChannelCredentials: function(sslCreds, googCreds) {
+          assert.strictEqual(sslCreds, fakeSslCreds);
+          assert.strictEqual(googCreds, fakeGoogCreds);
+          return fakeCombinedCreds;
+        }
+      };
+
+
+      pool.getCredentials(function(err, creds) {
+        assert.ifError(err);
+        assert.strictEqual(creds, fakeCombinedCreds);
+        done();
+      });
+    });
+
+    it('should return getAuthClient errors', function(done) {
+      var error = new Error('err');
+
+      PUBSUB.auth.getAuthClient = function(callback) {
+        callback(error);
+      };
+
+      pool.getCredentials(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should cache the project ID', function(done) {
+      PUBSUB.auth.getAuthClient = function(callback) {
+        PUBSUB.auth.projectId = PROJECT_ID;
+        callback(null, {});
+      };
+
+      delete pool.projectId;
+
+      pool.getCredentials(function(err) {
+        assert.ifError(err);
+        assert.strictEqual(pool.projectId, PROJECT_ID);
         done();
       });
     });

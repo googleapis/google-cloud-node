@@ -238,6 +238,10 @@ describe('PubSub', function() {
       var pubsub = new PubSub({});
       assert.strictEqual(pubsub.projectId, '{{projectId}}');
     });
+
+    it('should set isEmulator to false by default', function() {
+      assert.strictEqual(pubsub.isEmulator, false);
+    });
   });
 
 
@@ -620,6 +624,7 @@ describe('PubSub', function() {
       assert.strictEqual(pubsub.options.servicePath, 'localhost');
       assert.strictEqual(pubsub.options.port, '8085');
       assert.strictEqual(pubsub.options.sslCreds, fakeCreds);
+      assert.strictEqual(pubsub.isEmulator, true);
     });
 
     it('should remove slashes from the baseUrl', function() {
@@ -656,6 +661,7 @@ describe('PubSub', function() {
         pubsub.determineBaseUrl_();
         assert.strictEqual(pubsub.options.servicePath, 'localhost');
         assert.strictEqual(pubsub.options.port, '9090');
+        assert.strictEqual(pubsub.isEmulator, true);
       });
     });
   });
@@ -963,6 +969,8 @@ describe('PubSub', function() {
     };
 
     beforeEach(function() {
+      delete pubsub.projectId;
+
       pubsub.auth = {
         getProjectId: function(callback) {
           callback(null, PROJECT_ID);
@@ -1042,6 +1050,25 @@ describe('PubSub', function() {
       pubsub.request(CONFIG, done); // should not fire done
       global.GCLOUD_SANDBOX_ENV = false;
       done();
+    });
+
+    describe('on emulator', function() {
+      beforeEach(function() {
+        pubsub.isEmulator = true;
+        pubsub.auth.getProjectId = function() {
+          throw new Error('getProjectId should not be called.');
+        };
+      });
+
+      it('should not get the projectId if null', function(done) {
+        pubsub.projectId = null;
+        pubsub.request(CONFIG, done);
+      });
+
+      it('should not get the projectId if placeholder', function(done) {
+        pubsub.projectId = '{{projectId}}';
+        pubsub.request(CONFIG, done);
+      });
     });
   });
 

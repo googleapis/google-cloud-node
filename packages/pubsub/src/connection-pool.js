@@ -294,6 +294,48 @@ ConnectionPool.prototype.getClient = function(callback) {
   var self = this;
   var pubsub = this.subscription.pubsub;
 
+  this.getCredentials(function(err, credentials) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    var Subscriber = v1(pubsub.options).Subscriber;
+    var address = v1.SERVICE_ADDRESS;
+
+    if (pubsub.isEmulator) {
+      address = pubsub.options.servicePath;
+
+      if (pubsub.options.port) {
+        address += ':' + pubsub.options.port;
+      }
+    }
+
+    self.client = new Subscriber(address, credentials, {
+      'grpc.max_receive_message_length': 20000001,
+      'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
+    });
+
+    callback(null, self.client);
+  });
+};
+
+/**
+ * Get/create client credentials.
+ *
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error occurred while getting the client.
+ * @param {object} callback.credentials - The client credentials.
+ */
+ConnectionPool.prototype.getCredentials = function(callback) {
+  var self = this;
+  var pubsub = this.subscription.pubsub;
+
+  if (pubsub.isEmulator) {
+    setImmediate(callback, null, grpc.credentials.createInsecure());
+    return;
+  }
+
   pubsub.auth.getAuthClient(function(err, authClient) {
     if (err) {
       callback(err);
@@ -305,18 +347,8 @@ ConnectionPool.prototype.getClient = function(callback) {
       grpc.credentials.createFromGoogleCredential(authClient)
     );
 
-    if (!self.projectId || self.projectId === '{{projectId}}') {
-      self.projectId = pubsub.auth.projectId;
-    }
-
-    var Subscriber = v1(pubsub.options).Subscriber;
-
-    self.client = new Subscriber(v1.SERVICE_ADDRESS, credentials, {
-      'grpc.max_receive_message_length': 20000001,
-      'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
-    });
-
-    callback(null, self.client);
+    self.projectId = pubsub.auth.projectId;
+    callback(null, credentials);
   });
 };
 
