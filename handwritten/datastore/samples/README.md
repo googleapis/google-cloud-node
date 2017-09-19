@@ -47,7 +47,8 @@ Commands:
   delete <taskId>    Deletes a task.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node tasks.js new "Buy milk"  Adds a task with description "Buy milk".
