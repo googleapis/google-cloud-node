@@ -765,6 +765,33 @@ describe('ConnectionPool', function() {
         done();
       });
     });
+
+    it('should respect the emulator service address', function(done) {
+      fakeV1.SERVICE_ADDRESS = 'should.not.use';
+
+      PUBSUB.isEmulator = true;
+      PUBSUB.options.servicePath = 'should.use';
+
+      pool.getClient(function(err, client) {
+        assert.ifError(err);
+        assert.strictEqual(client.address, 'should.use');
+        done();
+      });
+    });
+
+    it('should respect the emulator service port', function(done) {
+      fakeV1.SERVICE_ADDRESS = 'should.not.use';
+
+      PUBSUB.isEmulator = true;
+      PUBSUB.options.servicePath = 'should.use';
+      PUBSUB.options.port = 9999;
+
+      pool.getClient(function(err, client) {
+        assert.ifError(err);
+        assert.strictEqual(client.address, 'should.use:9999');
+        done();
+      });
+    });
   });
 
   describe('getCredentials', function() {

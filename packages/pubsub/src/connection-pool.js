@@ -301,8 +301,17 @@ ConnectionPool.prototype.getClient = function(callback) {
     }
 
     var Subscriber = v1(pubsub.options).Subscriber;
+    var address = v1.SERVICE_ADDRESS;
 
-    self.client = new Subscriber(v1.SERVICE_ADDRESS, credentials, {
+    if (pubsub.isEmulator) {
+      address = pubsub.options.servicePath;
+
+      if (pubsub.options.port) {
+        address += ':' + pubsub.options.port;
+      }
+    }
+
+    self.client = new Subscriber(address, credentials, {
       'grpc.max_receive_message_length': 20000001,
       'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
     });
