@@ -1033,9 +1033,25 @@ class Query extends TestHelper {
 
   testEventualConsistentQuery (t) {
     t.plan(0);
+    const datastoreMock = datastore;
+    datastore = this.datastore;
     // [START eventual_consistent_query]
-    // Read consistency cannot be specified in google-cloud-node.
+    const ancestorKey = datastore.key(['TaskList', 'default']);
+    const query = datastore.createQuery('Task')
+      .hasAncestor(ancestorKey);
+
+    query.run({ consistency: 'eventual' });
     // [END eventual_consistent_query]
+    return query.run({ consistency: 'eventual' })
+      .then((results) => {
+        datastore = datastoreMock;
+        const entities = results[0];
+        return entities;
+      })
+      .catch((err) => {
+        datastore = datastoreMock;
+        return Promise.reject(err);
+      });
   }
 }
 
