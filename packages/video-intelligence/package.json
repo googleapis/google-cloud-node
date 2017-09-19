@@ -6,6 +6,7 @@
   "description": "Google Cloud Video Intelligence API client for Node.js",
   "main": "src/index.js",
   "files": [
+    "protos",
     "src",
     "AUTHORS",
     "LICENSE"
