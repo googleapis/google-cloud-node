@@ -22,7 +22,7 @@
     "test": "samples test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/language": "0.11.0",
+    "@google-cloud/language": "0.12.1",
     "@google-cloud/storage": "1.2.1",
     "yargs": "8.0.2"
   },

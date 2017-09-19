@@ -41,12 +41,14 @@ __Usage:__ `node analyze.v1.js --help`
 
 ```
 Commands:
-  sentiment-text <text>                   Detects sentiment of a string.
-  sentiment-file <bucketName> <fileName>  Detects sentiment in a file in Google Cloud Storage.
-  entities-text <text>                    Detects entities in a string.
-  entities-file <bucketName> <fileName>   Detects entities in a file in Google Cloud Storage.
-  syntax-text <text>                      Detects syntax of a string.
-  syntax-file <bucketName> <fileName>     Detects syntax in a file in Google Cloud Storage.
+  sentiment-text <text>                          Detects sentiment of a string.
+  sentiment-file <bucketName> <fileName>         Detects sentiment in a file in Google Cloud Storage.
+  entities-text <text>                           Detects entities in a string.
+  entities-file <bucketName> <fileName>          Detects entities in a file in Google Cloud Storage.
+  syntax-text <text>                             Detects syntax of a string.
+  syntax-file <bucketName> <fileName>            Detects syntax in a file in Google Cloud Storage.
+  entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
+  entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google Cloud Storage.
 
 Options:
   --help  Show help                                                                                            [boolean]
@@ -58,6 +60,8 @@ Examples:
   node analyze.v1.js entities-file my-bucket file.txt           Detects entities in gs://my-bucket/file.txt
   node analyze.v1.js syntax-text "President Obama is speaking at the White House."
   node analyze.v1.js syntax-file my-bucket file.txt             Detects syntax in gs://my-bucket/file.txt
+  node analyze.v1.js entity-sentiment-text "President Obama is speaking at the White House."
+  node analyze.v1.js entity-sentiment-file my-bucket file.txt   Detects sentiment of entities in gs://my-bucket/file.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
@@ -73,14 +77,14 @@ __Usage:__ `node analyze.v1beta2.js --help`
 
 ```
 Commands:
-  sentiment-text <text>                          Detects sentiment of a string.
-  sentiment-file <bucketName> <fileName>         Detects sentiment in a file in Google Cloud Storage.
-  entities-text <text>                           Detects entities in a string.
-  entities-file <bucketName> <fileName>          Detects entities in a file in Google Cloud Storage.
-  syntax-text <text>                             Detects syntax of a string.
-  syntax-file <bucketName> <fileName>            Detects syntax in a file in Google Cloud Storage.
-  entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
-  entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google Cloud Storage.
+  sentiment-text <text>                   Detects sentiment of a string.
+  sentiment-file <bucketName> <fileName>  Detects sentiment in a file in Google Cloud Storage.
+  entities-text <text>                    Detects entities in a string.
+  entities-file <bucketName> <fileName>   Detects entities in a file in Google Cloud Storage.
+  syntax-text <text>                      Detects syntax of a string.
+  syntax-file <bucketName> <fileName>     Detects syntax in a file in Google Cloud Storage.
+  classify-text <text>                    Classifies text of a string.
+  classify-file <bucketName> <fileName>   Classifies text in a file in Google Cloud Storage.
 
 Options:
   --help  Show help                                                                                            [boolean]
@@ -92,9 +96,10 @@ Examples:
   node analyze.v1beta2.js entities-file my-bucket file.txt      Detects entities in gs://my-bucket/file.txt
   node analyze.v1beta2.js syntax-text "President Obama is speaking at the White House."
   node analyze.v1beta2.js syntax-file my-bucket file.txt        Detects syntax in gs://my-bucket/file.txt
-  node analyze.v1beta2.js entity-sentiment-text "President Obama is speaking at the White House."
-  node analyze.v1beta2.js entity-sentiment-file my-bucket       Detects sentiment of entities in gs://my-bucket/file.txt
-  file.txt
+  node analyze.v1beta2.js classify-text "Currently the API requires 20 tokens in order \
+      to return non-empty results. Let's use a longer piece of text for the sample in order to win."
+  node analyze.v1beta2.js classify-file my-bucket               Detects syntax in gs://my-bucket/android_text.txt
+  android_text.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
