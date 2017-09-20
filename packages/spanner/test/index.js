@@ -22,6 +22,8 @@ var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var v1 = require('../src/v1');
+
 var fakePaginator = {
   streamify: function(methodName) {
     return methodName;
@@ -159,6 +161,8 @@ describe('Spanner', function() {
 
       var expectedOptions = {
         libName: 'gccl',
+        servicePath: v1.SERVICE_ADDRESS,
+        port: v1.DEFAULT_SERVICE_PORT,
         libVersion: require('../package.json').version,
         projectId: OPTIONS.projectId
       };

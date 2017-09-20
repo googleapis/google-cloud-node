@@ -29,6 +29,7 @@ function v2beta1(options) {
 
 v2beta1.GAPIC_VERSION = '0.0.0';
 v2beta1.SERVICE_ADDRESS = dlpServiceClient.SERVICE_ADDRESS;
+v2beta1.DEFAULT_SERVICE_PORT = dlpServiceClient.DEFAULT_SERVICE_PORT;
 v2beta1.ALL_SCOPES = dlpServiceClient.ALL_SCOPES;
 
 module.exports = v2beta1;

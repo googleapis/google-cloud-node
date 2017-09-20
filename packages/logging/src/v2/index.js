@@ -34,6 +34,7 @@ function v2(options) {
 }
 
 v2.SERVICE_ADDRESS = loggingServiceV2Client.SERVICE_ADDRESS;
+v2.DEFAULT_SERVICE_PORT = loggingServiceV2Client.DEFAULT_SERVICE_PORT;
 v2.ALL_SCOPES = loggingServiceV2Client.ALL_SCOPES;
 
 module.exports = v2;

@@ -265,6 +265,11 @@ describe('File', function() {
 
     it('should accept an options object', function(done) {
       var newFile = new File(BUCKET, 'name');
+
+      console.log('proto===============');
+      console.log(Object.getPrototypeOf({}));
+      console.log('proto===============');
+
       var options = {
         option: true
       };
@@ -273,6 +278,11 @@ describe('File', function() {
         assert.deepStrictEqual(reqOpts.json, options);
         done();
       };
+
+      var name;
+      for (name in options) {
+        console.log('[dafuq] name: ' + name);
+      }
 
       file.copy(newFile, options, assert.ifError);
     });

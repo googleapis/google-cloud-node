@@ -21,10 +21,12 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var gapic = {
   v2beta1: require('./v2beta1')
 };
+var grpc = require('grpc');
 
 const VERSION = require('../package.json').version;
 
@@ -37,6 +39,10 @@ const VERSION = require('../package.json').version;
  * The service also includes methods for sensitive data redaction and scheduling
  * of data scans on Google Cloud Platform based data sets.
  *
+ * The servicePath from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_DLP_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
@@ -44,6 +50,14 @@ const VERSION = require('../package.json').version;
  *     API remote host.
  */
 function dlpV2beta1(options) {
+  options = common.util.resolveGapicOptions(
+    options,
+    [ 'GOOGLE_CLOUD_DLP_ENDPOINT' ],
+    gapic.v2beta1.SERVICE_ADDRESS,
+    gapic.v2beta1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
+
   // Define the header options.
   options = extend({}, options, {
     libName: 'gccl',

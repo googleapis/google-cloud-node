@@ -25,12 +25,14 @@
     "DLP API"
   ],
   "dependencies": {
+    "@google-cloud/common": "^0.13.0",
     "google-proto-files": "^0.12.0",
     "google-gax": "^0.13.2",
     "extend": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.10"
   },
   "scripts": {
     "test": "mocha",

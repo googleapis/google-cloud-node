@@ -25,6 +25,7 @@ var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
 var extend = require('extend');
 var format = require('string-format-obj');
+var grpc = require('grpc');
 var is = require('is');
 var path = require('path');
 var util = require('util');
@@ -61,14 +62,24 @@ var v1 = require('./v1');
  * otherwise the actual API endpoint will be used.
  *
  * @param {object} options - [Configuration object](#/docs).
- * @param {string=} options.apiEndpoint - Override the default API endpoint used
- *     to reach the Resource API.
+ * @param {number=} options.port - The port on which to connect to
+ *     the remote host.
+ * @param {string=} options.servicePath - The domain name of the
+ *     API remote host.
  */
 function Spanner(options) {
   if (!(this instanceof Spanner)) {
     options = common.util.normalizeArguments(this, options);
     return new Spanner(options);
   }
+
+  options = common.util.resolveGapicOptions(
+    options,
+    [ 'GOOGLE_CLOUD_SPANNER_ENDPOINT' ],
+    v1.SERVICE_ADDRESS,
+    v1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
 
   options = extend({}, options, {
     libName: 'gccl',

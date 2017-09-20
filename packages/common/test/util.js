@@ -1863,4 +1863,93 @@ describe('common/util', function() {
     });
   });
 
+  describe('resolveGapicOptions', function() {
+    var envVarName = 'SOME_ENV';
+    var environmentVariables = [envVarName];
+    var defaultApiEndpoint = 'some.endpoint';
+    var defaultPort = 9090;
+    var credentials = function() { return 'fake'; };
+
+    it('should fallback to defaults', function() {
+      var resolved = util.resolveGapicOptions(
+        {},
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      assert.strictEqual(resolved.servicePath, defaultApiEndpoint);
+      assert.strictEqual(resolved.port, defaultPort);
+      assert.strictEqual(resolved.sslCreds, undefined);
+    });
+
+    it('should use endpoint/port from options when available', function() {
+      var resolved = util.resolveGapicOptions(
+        { servicePath: 'custom.endpoint:8080' },
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      assert.strictEqual(resolved.servicePath, 'custom.endpoint');
+      assert.strictEqual(resolved.port, '8080');
+      assert.strictEqual(resolved.sslCreds(), 'fake');
+    });
+
+    it('should use port from options when available', function() {
+      var resolved = util.resolveGapicOptions(
+        { port: 7070 },
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      assert.strictEqual(resolved.servicePath, defaultApiEndpoint);
+      assert.strictEqual(resolved.port, 7070);
+      assert.strictEqual(resolved.sslCreds(), 'fake');
+    });
+
+    it('should use port from options vs. port from servicePath', function() {
+      var resolved = util.resolveGapicOptions(
+        { servicePath: 'some.path:6060', port: 7070 },
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      assert.strictEqual(resolved.servicePath, 'some.path');
+      assert.strictEqual(resolved.port, 7070);
+      assert.strictEqual(resolved.sslCreds(), 'fake');
+    });
+
+    it('should use env var endpoint when available (no port)', function() {
+      process.env[envVarName] = 'test.endpoint';
+      var resolved = util.resolveGapicOptions(
+        {},
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      delete process.env[envVarName];
+      assert.strictEqual(resolved.servicePath, 'test.endpoint');
+      assert.strictEqual(resolved.port, defaultPort);
+      assert.strictEqual(resolved.sslCreds(), 'fake');
+    });
+
+    it('should use env var endpoint when available (port)', function() {
+      process.env[envVarName] = 'test.endpoint:8888';
+      var resolved = util.resolveGapicOptions(
+        {},
+        environmentVariables,
+        defaultApiEndpoint,
+        defaultPort,
+        credentials
+      );
+      assert.strictEqual(resolved.servicePath, 'test.endpoint');
+      assert.strictEqual(resolved.port, '8888');
+      assert.strictEqual(resolved.sslCreds(), 'fake');
+    });
+  });
+
 });

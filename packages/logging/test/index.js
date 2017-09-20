@@ -181,7 +181,9 @@ describe('Logging', function() {
 
       googleAutoAuthOverride = function(options_) {
         assert.deepEqual(options_, extend({
-          scopes: v2.ALL_SCOPES
+          scopes: v2.ALL_SCOPES,
+          servicePath: v2.SERVICE_ADDRESS,
+          port: v2.DEFAULT_SERVICE_PORT
         }, options));
         return fakeGoogleAutoAuthInstance;
       };
@@ -200,9 +202,25 @@ describe('Logging', function() {
 
       assert.notStrictEqual(logging.options, options);
 
-      assert.deepEqual(logging.options, extend({
-        scopes: v2.ALL_SCOPES
+      assert.deepStrictEqual(logging.options, extend({
+        scopes: v2.ALL_SCOPES,
+        servicePath: v2.SERVICE_ADDRESS,
+        port: v2.DEFAULT_SERVICE_PORT
       }, options));
+    });
+
+    it('should localize the sslCreds in options', function() {
+      var options = {
+        servicePath: 'some.path',
+        port: 9090
+      };
+
+      var logging = new Logging(options);
+
+      assert.strictEqual(logging.options.servicePath, options.servicePath);
+      assert.strictEqual(logging.options.port, options.port);
+      assert(logging.options.sslCreds.constructor
+        .toString().includes('ChannelCredentials'));
     });
 
     it('should set the projectId', function() {

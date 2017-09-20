@@ -20,7 +20,11 @@
 
 'use strict';
 
-var v1beta1 = require('./v1beta1/index.js');
+var common = require('@google-cloud/common');
+var grpc = require('grpc');
+var gapic = {
+  v1beta1: require('./v1beta1')
+};
 
 const VERSION = require('../package.json').version;
 
@@ -49,6 +53,10 @@ const VERSION = require('../package.json').version;
  *
  * @resource [Cloud Video Intelligence](https://cloud.google.com/video-intelligence)
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_VIDEO_INTELLIGENCE_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to the remote
  *     host.
@@ -56,17 +64,24 @@ const VERSION = require('../package.json').version;
  *     host.
  */
 function VideoIntelligence(options) {
+  options = common.util.resolveGapicOptions(
+    options,
+    [ 'GOOGLE_CLOUD_VIDEO_INTELLIGENCE_ENDPOINT' ],
+    gapic.v1beta1.SERVICE_ADDRESS,
+    gapic.v1beta1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
+
   // Define the header options.
-  options = options || {};
   options.libName = 'gccl';
   options.libVersion = VERSION;
 
   // Create the image annotator client with the provided options.
-  var client = v1beta1(options).videoIntelligenceServiceClient(options);
+  var client = gapic.v1beta1(options).videoIntelligenceServiceClient(options);
   return client;
 }
 
 // The default export should be the latest version.
 // Assign all versions as version properties on the default.
 module.exports = VideoIntelligence;
-module.exports.v1beta1 = v1beta1;
+module.exports.v1beta1 = gapic.v1beta1;

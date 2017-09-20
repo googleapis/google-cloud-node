@@ -29,6 +29,7 @@ function v1beta1(options) {
 
 v1beta1.GAPIC_VERSION = '0.7.1';
 v1beta1.SERVICE_ADDRESS = videoIntelligenceServiceClient.SERVICE_ADDRESS;
+v1beta1.DEFAULT_SERVICE_PORT = videoIntelligenceServiceClient.DEFAULT_SERVICE_PORT;
 v1beta1.ALL_SCOPES = videoIntelligenceServiceClient.ALL_SCOPES;
 
 module.exports = v1beta1;

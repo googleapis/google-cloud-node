@@ -27,6 +27,7 @@ function v1(options) {
   return spannerClient(gaxGrpc);
 }
 v1.SERVICE_ADDRESS = spannerClient.SERVICE_ADDRESS;
+v1.DEFAULT_SERVICE_PORT = spannerClient.DEFAULT_SERVICE_PORT;
 v1.ALL_SCOPES = spannerClient.ALL_SCOPES;
 v1.admin = {
   instance: require('../admin/instance/v1'),

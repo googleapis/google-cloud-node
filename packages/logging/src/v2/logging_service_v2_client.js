@@ -835,4 +835,5 @@ function LoggingServiceV2ClientBuilder(gaxGrpc) {
 }
 module.exports = LoggingServiceV2ClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
+module.exports.DEFAULT_SERVICE_PORT = DEFAULT_SERVICE_PORT;
 module.exports.ALL_SCOPES = ALL_SCOPES;

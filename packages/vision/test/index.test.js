@@ -17,12 +17,60 @@
 'use strict';
 
 var assert = require('assert');
+var proxyquire = require('proxyquire');
 
 var Vision = require('../');
+var v1 = require('../src/v1');
+const VERSION = require('../package.json').version;
 
+function FakeImageAnnotatorClient() {
+  this.calledWith_ = arguments;
+  return this;
+}
+
+function FakeV1() {
+  this.calledWith_ = arguments;
+  return {
+    imageAnnotatorClient: FakeImageAnnotatorClient
+  };
+}
 
 describe('Vision', () => {
+
+  var MockedVision;
+  var PROJECT_ID = 'some-project-id';
+
+  before(function() {
+    MockedVision = proxyquire('../', {
+      './v1': FakeV1
+    });
+  });
+
   describe('v1', () => {
+    it('should set up the default api connection details', function() {
+      var options = { projectId: PROJECT_ID };
+      var vision = new MockedVision.v1(options);
+      var calledWith = vision.calledWith_[0];
+      assert.strictEqual(calledWith.servicePath, v1.SERVICE_ADDRESS);
+      assert.strictEqual(calledWith.port, v1.DEFAULT_SERVICE_PORT);
+      assert.strictEqual(calledWith.projectId, options.projectId);
+      assert.strictEqual(calledWith.libName, 'gccl');
+      assert.strictEqual(calledWith.libVersion, VERSION);
+      assert.strictEqual(calledWith.sslCreds, undefined);
+    });
+    it('should set up custom api connection details', function() {
+      var options = {
+        projectId: PROJECT_ID,
+        servicePath: 'some.custom',
+        port: 6666
+      };
+      var vision = new MockedVision.v1(options);
+      var calledWith = vision.calledWith_[0];
+      assert.strictEqual(calledWith.servicePath, 'some.custom');
+      assert.strictEqual(calledWith.port, 6666);
+      assert(calledWith.sslCreds.constructor
+        .toString().includes('ChannelCredentials'));
+    });
     it('returns a v1 GAPIC augmented with helpers', () => {
       var vision = Vision.v1();
 

@@ -22,21 +22,25 @@
 'use strict';
 
 var is = require('is');
+var common = require('@google-cloud/common');
 var extend = require('extend');
-
+var grpc = require('grpc');
 var gapic = {
   v1: require('./v1'),
 };
 var gaxGrpc = require('google-gax').grpc();
 
 var helpers = require('./helpers');
-
 const VERSION = require('../package.json').version;
 
 
 /**
  * Create an imageAnnotatorClient with additional helpers for common
  * tasks.
+ *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_VISION_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
  *
  * @constructor
  * @alias module:vision
@@ -54,8 +58,15 @@ const VERSION = require('../package.json').version;
  *   {@link gax.constructSettings} for the format.
  */
 function visionV1(opts) {
+  opts = common.util.resolveGapicOptions(
+    opts,
+    [ 'GOOGLE_CLOUD_VISION_ENDPOINT' ],
+    gapic.v1.SERVICE_ADDRESS,
+    gapic.v1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
+
   // Define the header options.
-  opts = opts || {};
   opts.libName = 'gccl';
   opts.libVersion = VERSION;
 

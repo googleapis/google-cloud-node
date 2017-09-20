@@ -28,6 +28,7 @@ var gapic = {
   v1beta2: require('./v1beta2')
 };
 var gaxGrpc = require('google-gax').grpc();
+var grpc = require('grpc');
 
 const VERSION = require('../package.json').version;
 
@@ -52,26 +53,13 @@ const VERSION = require('../package.json').version;
  *     API remote host.
  */
 function languageV1(options) {
-  options.apiEndpoint = options.servicePath;
-  var baseInfo = common.util.determineBaseUrl(
+  options = common.util.resolveGapicOptions(
     options,
-    'GOOGLE_CLOUD_LANGUAGE_ENDPOINT',
+    [ 'GOOGLE_CLOUD_LANGUAGE_ENDPOINT' ],
     gapic.v1.SERVICE_ADDRESS,
-    true
+    gapic.v1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
   );
-
-  // The environment variable can take a port
-  // pull it from the apiEnpoint if it's there,
-  // otherwise fallback to SERVICE_PORT
-  var portFromEndpoint;
-  var parts = baseInfo.apiEndpoint.split(':', 2);
-  if (parts.length === 2) {
-    portFromEndpoint = parts[1];
-  }
-  options.servicePath = parts[0];
-  options.customEndpoint = baseInfo.customEndpoint;
-  options.port = options.port || portFromEndpoint ||
-    gapic.v1.DEFAULT_SERVICE_PORT;
 
   // Define the header options.
   options = extend({}, options, {
@@ -102,26 +90,13 @@ function languageV1(options) {
  *     API remote host.
  */
 function languageV1beta2(options) {
-  options.apiEndpoint = options.servicePath;
-  var baseInfo = common.util.determineBaseUrl(
+  options = common.util.resolveGapicOptions(
     options,
-    'GOOGLE_CLOUD_LANGUAGE_ENDPOINT',
+    [ 'GOOGLE_CLOUD_LANGUAGE_ENDPOINT' ],
     gapic.v1beta2.SERVICE_ADDRESS,
-    true
+    gapic.v1beta2.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
   );
-
-  // The environment variable can take a port
-  // pull it from the apiEnpoint if it's there,
-  // otherwise fallback to SERVICE_PORT
-  var portFromEndpoint;
-  var parts = baseInfo.apiEndpoint.split(':', 2);
-  if (parts.length === 2) {
-    portFromEndpoint = parts[1];
-  }
-  options.servicePath = parts[0];
-  options.customEndpoint = baseInfo.customEndpoint;
-  options.port = options.port || portFromEndpoint ||
-    gapic.v1beta2.DEFAULT_SERVICE_PORT;
 
   // Define the header options.
   options = extend({}, options, {

@@ -21,11 +21,13 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var gapic = {
   v1: require('./v1')
 };
 var gaxGrpc = require('google-gax').grpc();
+var grpc = require('grpc');
 var helpers = require('./helpers');
 
 const VERSION = require('../package.json').version;
@@ -40,6 +42,10 @@ const VERSION = require('../package.json').version;
  * @alias module:speech
  * @mixes module:speech/helpers
  *
+ * The apiEndpoint from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_SPEECH_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {number=} options.port - The port on which to connect to
  *     the remote host.
@@ -47,6 +53,14 @@ const VERSION = require('../package.json').version;
  *     API remote host.
  */
 function speechV1(options) {
+  options = common.util.resolveGapicOptions(
+    options,
+    [ 'GOOGLE_CLOUD_SPEECH_ENDPOINT' ],
+    gapic.v1.SERVICE_ADDRESS,
+    gapic.v1.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
+
   // Define the header options.
   options = extend({}, options, {
     libName: 'gccl',
@@ -55,7 +69,7 @@ function speechV1(options) {
 
   // Create the speech client with the provided options.
   var client = gapic.v1(options).speechClient(options);
-  Object.assign(client.constructor.prototype, helpers());
+  Object.assign(client, helpers());
   return client;
 }
 

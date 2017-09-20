@@ -25,6 +25,7 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var googleAuth = require('google-auto-auth');
+var grpc = require('grpc');
 var is = require('is');
 var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
@@ -63,13 +64,28 @@ var Sink = require('./sink.js');
  * @resource [Logging to Stackdriver from Bunyan]{@link https://www.npmjs.com/package/@google-cloud/logging-bunyan}
  * @resource [Logging to Stackdriver from Winston]{@link https://www.npmjs.com/package/@google-cloud/logging-winston}
  *
+ * The servicePath from options will set the host. If not set, the
+ * `GOOGLE_CLOUD_LOGGING_ENDPOINT` environment variable is honored,
+ * otherwise the actual API endpoint will be used.
+ *
  * @param {object} options - [Configuration object](#/docs).
+ * @param {number=} options.port - The port on which to connect to
+ *     the remote host.
+ * @param {string=} options.servicePath - The domain name of the
+ *     API remote host.
  */
 function Logging(options) {
   if (!(this instanceof Logging)) {
     options = common.util.normalizeArguments(this, options);
     return new Logging(options);
   }
+  options = common.util.resolveGapicOptions(
+    options,
+    [ 'GOOGLE_CLOUD_LOGGING_ENDPOINT' ],
+    v2.SERVICE_ADDRESS,
+    v2.DEFAULT_SERVICE_PORT,
+    grpc.credentials.createInsecure()
+  );
 
   var options_ = extend({
     scopes: v2.ALL_SCOPES

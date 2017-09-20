@@ -953,4 +953,5 @@ function SpannerClientBuilder(gaxGrpc) {
 }
 module.exports = SpannerClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
+module.exports.DEFAULT_SERVICE_PORT = DEFAULT_SERVICE_PORT;
 module.exports.ALL_SCOPES = ALL_SCOPES;

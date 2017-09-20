@@ -29,6 +29,7 @@ function v1(options) {
 
 v1.GAPIC_VERSION = '0.10.0';
 v1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
+v1.DEFAULT_SERVICE_PORT = speechClient.DEFAULT_SERVICE_PORT;
 v1.ALL_SCOPES = speechClient.ALL_SCOPES;
 
 module.exports = v1;

@@ -802,8 +802,6 @@ util.promisifyAll = promisifyAll;
  * @param {string=} defaultApiEndpoint - Fallback api endpoint to use.
  * @param {boolean} trimProtocol - If true, trim the leading trimProtocol.
  *     Useful for grcp based service endpoints.
- * @return {object=} base - Object containg the baseUrl and a boolean
- *     property indicating whether the baseUrl is a customEndpoint or not.
  * */
 function determineBaseUrl(options, environmentVariables,
   defaultApiEndpoint, trimProtocol) {
@@ -811,6 +809,7 @@ function determineBaseUrl(options, environmentVariables,
   var trailingSlashes = new RegExp('/*$');
   var base = {};
   var candidates = [];
+  options = options || {};
   candidates.push(options.apiEndpoint);
   candidates.push(options.servicePath);
   environmentVariables = arrify(environmentVariables);
@@ -821,10 +820,7 @@ function determineBaseUrl(options, environmentVariables,
   for (var j = 0; j < candidates.length; j++) {
     if (candidates[j]) {
       base.apiEndpoint = candidates[j];
-      // The last element in the array is the
-      // default endpoint, everything else is considired
-      // a custom endpoint
-      base.customEndpoint = j !== candidates.length - 1;
+      base.customEndpoint = base.apiEndpoint !== defaultApiEndpoint;
       break;
     }
   }
@@ -837,3 +833,42 @@ function determineBaseUrl(options, environmentVariables,
 }
 
 util.determineBaseUrl = determineBaseUrl;
+
+/**
+ * Resolves the api endpoint to use, the port and whether API
+ * calls need to be made with the credentials passed in the args.
+ *
+ * @param {object=} options - Service configuration object.
+ * @param {array} environmentVariables - Array of accepted environment
+ *     variables through which a custom api endpoint can be specified.
+ * @param {string=} defaultApiEndpoint - Fallback api endpoint to use.
+ * @param {number} defaultPort - Fallback port to use.
+ * @param {object=} credentials - An instance of grpc.ServerCredentials
+ *     these credentials will be used if the api endpoint is considered
+ *     to be a custom endpoint
+ * */
+function resolveGapicOptions(options, environmentVariables,
+  defaultApiEndpoint, defaultPort, credentials) {
+  var extendedOptions = extend(true, {}, options) || {};
+  const baseInfo = determineBaseUrl(
+    extendedOptions,
+    environmentVariables,
+    defaultApiEndpoint,
+    true
+  );
+  var portFromEndpoint;
+  var parts = baseInfo.apiEndpoint.split(':', 2);
+  if (parts.length === 2) {
+    portFromEndpoint = parts[1];
+  }
+  // Let's set the resolved connection options
+  extendedOptions.servicePath = parts[0];
+  extendedOptions.port = extendedOptions.port ||
+    portFromEndpoint || defaultPort;
+  if (baseInfo.customEndpoint || extendedOptions.port !== defaultPort) {
+    extendedOptions.sslCreds = credentials;
+  }
+  return extendedOptions;
+}
+
+util.resolveGapicOptions = resolveGapicOptions;
