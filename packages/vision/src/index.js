@@ -73,7 +73,7 @@ function visionV1(opts) {
   // Create the image annotator client with the provided options.
   var client = gapic.v1(opts).imageAnnotatorClient(opts);
   if (is.undefined(client.annotateImage)) {
-    Object.assign(client.constructor.prototype, helpers('v1'));
+    Object.assign(client, helpers('v1'));
   }
   return client;
 }
