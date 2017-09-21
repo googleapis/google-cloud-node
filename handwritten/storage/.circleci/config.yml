@@ -20,22 +20,40 @@ workflows:
   version: 2
   tests:
     jobs:
-      - node4
-      - node6
-      - node7
-      - node8
+      - node4:
+          filters:
+            tags:
+              only: /.*/
+      - node6:
+          filters:
+            tags:
+              only: /.*/
+      - node7:
+          filters:
+            tags:
+              only: /.*/
+      - node8:
+          filters:
+            tags:
+              only: /.*/
       - lint:
           requires:
             - node4
             - node6
             - node7
             - node8
+          filters:
+            tags:
+              only: /.*/
       - docs:
           requires:
             - node4
             - node6
             - node7
             - node8
+          filters:
+            tags:
+              only: /.*/
       - system_tests:
           requires:
             - lint
@@ -61,17 +79,6 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: /^v[\d.]+$/
-      - publish_docs:
-          requires:
-            - system_tests
-            - sample_tests
-          filters:
-            branches:
-              only:
-                - master
-                - refresh-docs
             tags:
               only: /^v[\d.]+$/
 
@@ -107,7 +114,7 @@ jobs:
             cd samples/
             npm install
             npm link @google-cloud/storage
-            cd ..    
+            cd ..
       - run:
           name: Run linting.
           command: npm run lint
@@ -196,6 +203,9 @@ jobs:
       - image: node:8
     steps:
       - checkout
+      - run:
+          name: Set NPM authentication.
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run:
          name: Publish the module to npm.
          command: npm publish
