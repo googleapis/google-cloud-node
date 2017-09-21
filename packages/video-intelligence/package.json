@@ -26,10 +26,13 @@
   ],
   "dependencies": {
     "extend": "^3.0",
-    "google-gax": "^0.13.5"
+    "google-gax": "^0.14.0",
+    "google-proto-files": "^0.12.0",
+    "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "through2": "^2.0.3"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js video-intelligence",
