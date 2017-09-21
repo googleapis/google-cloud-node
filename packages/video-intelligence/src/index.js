@@ -31,54 +31,6 @@ var path = require('path');
 
 const VERSION = require('../package.json').version;
 
-/**
- * Create an videoIntelligenceServiceClient with additional helpers for common
- * tasks.
- *
- * Service that implements Google Cloud Video Intelligence API.
- *
- * @param {object=} options - [Configuration object](#/docs).
- * @param {object=} options.credentials - Credentials object.
- * @param {string=} options.credentials.client_email
- * @param {string=} options.credentials.private_key
- * @param {string=} options.email - Account email address. Required when using a
- *     .pem or .p12 keyFilename.
- * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
- *     .p12 key downloaded from the Google Developers Console. If you provide
- *     a path to a JSON file, the projectId option above is not necessary.
- *     NOTE: .pem and .p12 require you to specify options.email as well.
- * @param {number=} options.port - The port on which to connect to
- *     the remote host.
- * @param {string=} options.projectId - The project ID from the Google
- *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
- *     the environment variable GCLOUD_PROJECT for your project ID. If your
- *     app is running in an environment which supports
- *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
- *     your project ID will be detected automatically.
- * @param {function=} options.promise - Custom promise module to use instead
- *     of native Promises.
- * @param {string=} options.servicePath - The domain name of the
- *     API remote host.
- */
-function videoIntelligenceV1beta2(options) {
-  // Define the header options.
-  options = extend({}, options, {
-    libName: 'gccl',
-    libVersion: VERSION
-  });
-
-  // Create the client with the provided options.
-  var client = gapic.v1beta2(options).videoIntelligenceServiceClient(options);
-  return client;
-}
-
-var v1beta2Protos = {};
-
-extend(v1beta2Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'protos',
-    'google/cloud/videointelligence/v1beta2/video_intelligence.proto')
-).google.cloud.videointelligence.v1beta2);
-
 
 /**
  * Create an videoIntelligenceServiceClient with additional helpers for common
@@ -124,10 +76,58 @@ function videoIntelligenceV1beta1(options) {
 var v1beta1Protos = {};
 
 extend(v1beta1Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'protos',
-    'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
-).google.cloud.videointelligence.v1beta1);
+  path.join(__dirname, '..', 'protos'),
+  'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
+    .google.cloud.videointelligence.v1beta1);
 
+
+/**
+ * Create an videoIntelligenceServiceClient with additional helpers for common
+ * tasks.
+ *
+ * Service that implements Google Cloud Video Intelligence API.
+ *
+ * @param {object=} options - [Configuration object](#/docs).
+ * @param {object=} options.credentials - Credentials object.
+ * @param {string=} options.credentials.client_email
+ * @param {string=} options.credentials.private_key
+ * @param {string=} options.email - Account email address. Required when using a
+ *     .pem or .p12 keyFilename.
+ * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+ *     .p12 key downloaded from the Google Developers Console. If you provide
+ *     a path to a JSON file, the projectId option above is not necessary.
+ *     NOTE: .pem and .p12 require you to specify options.email as well.
+ * @param {number=} options.port - The port on which to connect to
+ *     the remote host.
+ * @param {string=} options.projectId - The project ID from the Google
+ *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
+ *     the environment variable GCLOUD_PROJECT for your project ID. If your
+ *     app is running in an environment which supports
+ *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @param {function=} options.promise - Custom promise module to use instead
+ *     of native Promises.
+ * @param {string=} options.servicePath - The domain name of the
+ *     API remote host.
+ */
+function videoIntelligenceV1beta2(options) {
+  // Define the header options.
+  options = extend({}, options, {
+    libName: 'gccl',
+    libVersion: VERSION
+  });
+
+  // Create the client with the provided options.
+  var client = gapic.v1beta2(options).videoIntelligenceServiceClient(options);
+  return client;
+}
+
+var v1beta2Protos = {};
+
+extend(v1beta2Protos, gaxGrpc.loadProto(
+  path.join(__dirname, '..', 'protos'),
+  'google/cloud/videointelligence/v1beta2/video_intelligence.proto')
+    .google.cloud.videointelligence.v1beta2);
 
 module.exports = videoIntelligenceV1beta2;
 module.exports.types = v1beta2Protos;
