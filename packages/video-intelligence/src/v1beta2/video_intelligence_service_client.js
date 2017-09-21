@@ -30,7 +30,9 @@
 var configData = require('./video_intelligence_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
+var googleProtoFiles = require('google-proto-files');
 var path = require('path');
+var protobuf = require('protobufjs');
 
 var SERVICE_ADDRESS = 'videointelligence.googleapis.com';
 
@@ -76,11 +78,19 @@ function VideoIntelligenceServiceClient(gaxGrpc, loadedProtos, opts) {
     grpc: gaxGrpc.grpc
   }).operationsClient(opts);
 
+  var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+  protoFilesRoot = protobuf.loadSync(
+    path.join(__dirname, '..', '..', 'protos', 'google/cloud/videointelligence/v1beta2/video_intelligence.proto'),
+    protoFilesRoot);
+
+  var annotateVideoResponse = protoFilesRoot.lookup('google.cloud.videointelligence.v1beta2.AnnotateVideoResponse');
+  var annotateVideoMetadata = protoFilesRoot.lookup('google.cloud.videointelligence.v1beta2.AnnotateVideoProgress');
+
   this.longrunningDescriptors = {
     annotateVideo: new gax.LongrunningDescriptor(
       this.operationsClient,
-      loadedProtos.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse.decode,
-      loadedProtos.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress.decode)
+      annotateVideoResponse.decode.bind(annotateVideoResponse),
+      annotateVideoMetadata.decode.bind(annotateVideoMetadata))
   };
 
   var defaults = gaxGrpc.constructSettings(
@@ -131,7 +141,7 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.inputUri
+ * @param {string=} request.inputUri
  *   Input video location. Currently, only
  *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
  *   supported, which must be specified in the following format:
@@ -142,13 +152,13 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
  *   '?' to match 1 character. If unset, the input video should be embedded
  *   in the request as `input_content`. If set, `input_content` should be unset.
- * @param {number[]} request.features
- *   Requested video annotation features.
- *
- *   The number should be among the values of [Feature]{@link Feature}
  * @param {string=} request.inputContent
  *   The video data bytes. Encoding: base64. If unset, the input video(s)
  *   should be specified via `input_uri`. If set, `input_uri` should be unset.
+ * @param {number[]=} request.features
+ *   Requested video annotation features.
+ *
+ *   The number should be among the values of [Feature]{@link Feature}
  * @param {Object=} request.videoContext
  *   Additional video context and/or feature-specific parameters.
  *
@@ -183,15 +193,10 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *   // optional auth parameters.
  * });
  *
- * var inputUri = '';
- * var features = [];
- * var request = {
- *     inputUri: inputUri,
- *     features: features
- * };
+ *
  *
  * // Handle the operation using the promise pattern.
- * client.annotateVideo(request).then(function(responses) {
+ * client.annotateVideo({}).then(function(responses) {
  *     var operation = responses[0];
  *     var initialApiResponse = responses[1];
  *
@@ -211,15 +216,10 @@ VideoIntelligenceServiceClient.prototype.getProjectId = function(callback) {
  *     console.error(err);
  * });
  *
- * var inputUri = '';
- * var features = [];
- * var request = {
- *     inputUri: inputUri,
- *     features: features
- * };
+ *
  *
  * // Handle the operation using the event emitter pattern.
- * client.annotateVideo(request).then(function(responses) {
+ * client.annotateVideo({}).then(function(responses) {
  *     var operation = responses[0];
  *     var initialApiResponse = responses[1];
  *
@@ -262,7 +262,7 @@ function VideoIntelligenceServiceClientBuilder(gaxGrpc) {
   }
 
   var videoIntelligenceServiceStubProtos = gaxGrpc.loadProto(
-    path.join(__dirname, '..', '..', 'protos', 'google/cloud/videointelligence/v1beta2/video_intelligence.proto'));
+    path.join(__dirname, '..', '..', 'protos'), 'google/cloud/videointelligence/v1beta2/video_intelligence.proto');
   extend(this, videoIntelligenceServiceStubProtos.google.cloud.videointelligence.v1beta2);
 
 
