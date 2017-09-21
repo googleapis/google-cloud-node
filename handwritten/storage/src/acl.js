@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module storage/acl
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -62,8 +58,9 @@ var util = require('util');
  * For more detailed information, see
  * [About Access Control Lists](http://goo.gl/6qBBPO).
  *
- * @constructor
- * @alias module:storage/acl
+ * @constructor Acl
+ * @mixin
+ * @param {object} options Configuration options.
  */
 function Acl(options) {
   AclRoleAccessorMethods.call(this);
@@ -94,6 +91,10 @@ function Acl(options) {
  * @return {object}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * //-
  * // Add a user as an owner of a file.
  * //-
@@ -141,6 +142,10 @@ Acl.prototype.owners = {};
  * @return {object}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * //-
  * // Add a user as a reader of a file.
  * //-
@@ -186,6 +191,10 @@ Acl.prototype.readers = {};
  * @return {object}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * //-
  * // Add a user as a writer of a file.
  * //-
@@ -212,23 +221,36 @@ Acl.prototype.writers = {};
 util.inherits(Acl, AclRoleAccessorMethods);
 
 /**
- * Add access controls on a {module:storage/bucket} or {module:storage/file}.
+ * @typedef {array} AddAclResponse
+ * @property {object} 0 The Acl Objects.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback AddAclCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} acl The Acl Objects.
+ * @param {object} apiResponse The full API response.
+ */
+/**
+ * Add access controls on a {@link Bucket} or {@link File}.
  *
- * @resource [BucketAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}
- * @resource [ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}
+ * @see [BucketAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}
+ * @see [ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}
  *
- * @param {object} options - Configuration object.
- * @param {string} options.entity - Whose permissions will be added.
- * @param {string} options.role - Permissions allowed for the defined entity.
- *     See {module:storage#acl}.
- * @param {int=} options.generation - **File Objects Only** Select a specific
+ * @param {object} options Configuration options.
+ * @param {string} options.entity Whose permissions will be added.
+ * @param {string} options.role Permissions allowed for the defined entity.
+ *     See {@link https://cloud.google.com/storage/docs/access-control Access Control}.
+ * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.aclObject - The Acl Object.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {AddAclCallback} [callback] Callback function.
+ * @returns {Promise<AddAclResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * var options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.OWNER_ROLE
@@ -254,6 +276,18 @@ util.inherits(Acl, AclRoleAccessorMethods);
  *   var aclObject = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_add_file_owner
+ * Example of adding an owner to a file:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_add_bucket_owner
+ * Example of adding an owner to a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_add_bucket_default_owner
+ * Example of adding a default owner to a bucket:
  */
 Acl.prototype.add = function(options, callback) {
   var self = this;
@@ -264,29 +298,43 @@ Acl.prototype.add = function(options, callback) {
     query.generation = options.generation;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '',
-    qs: query,
-    json: {
-      entity: options.entity,
-      role: options.role.toUpperCase()
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '',
+      qs: query,
+      json: {
+        entity: options.entity,
+        role: options.role.toUpperCase(),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    callback(null, self.makeAclObject_(resp), resp);
-  });
+      callback(null, self.makeAclObject_(resp), resp);
+    }
+  );
 };
 
 /**
+ * @typedef {array} RemoveAclResponse
+ * @property {object} 0 The Acl Objects.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback RemoveAclCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} acl The Acl Objects.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Delete access controls on a {module:storage/bucket} or {module:storage/file}.
  *
- * @resource [BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}
- * @resource [ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}
+ * @see [BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}
+ * @see [ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}
  *
  * @param {object=} options - Configuration object.
  * @param {string} options.entity - Whose permissions will be revoked.
@@ -297,6 +345,10 @@ Acl.prototype.add = function(options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * myBucket.acl.delete({
  *   entity: 'user-useremail@example.com'
  * }, function(err, apiResponse) {});
@@ -315,6 +367,18 @@ Acl.prototype.add = function(options, callback) {
  * myFile.acl.delete().then(function(data) {
  *   var apiResponse = data[0];
  * });
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_remove_bucket_owner
+ * Example of removing an owner from a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_remove_bucket_default_owner
+ * Example of removing a default owner from a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_remove_file_owner
+ * Example of removing an owner from a bucket:
  */
 Acl.prototype.delete = function(options, callback) {
   var query = {};
@@ -323,35 +387,51 @@ Acl.prototype.delete = function(options, callback) {
     query.generation = options.generation;
   }
 
-  this.request({
-    method: 'DELETE',
-    uri: '/' + encodeURIComponent(options.entity),
-    qs: query
-  }, function(err, resp) {
-    callback(err, resp);
-  });
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '/' + encodeURIComponent(options.entity),
+      qs: query,
+    },
+    function(err, resp) {
+      callback(err, resp);
+    }
+  );
 };
 
 /**
- * Get access controls on a {module:storage/bucket} or {module:storage/file}. If
+ * @typedef {array} GetAclResponse
+ * @property {object|object[]} 0 Single or array of Acl Objects.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetAclCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object|object[]} acl Single or array of Acl Objects.
+ * @param {object} apiResponse The full API response.
+ */
+/**
+ * Get access controls on a {@link Bucket} or {@link File}. If
  * an entity is omitted, you will receive an array of all applicable access
  * controls.
  *
- * @resource [BucketAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}
- * @resource [ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}
+ * @see [BucketAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}
+ * @see [ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}
  *
- * @param {object|function} options - Configuration object. If you want to
+ * @param {object|function} [options] Configuration options. If you want to
  *     receive a list of all access controls, pass the callback function as the
  *     only argument.
- * @param {string=} options.entity - Whose permissions will be fetched.
- * @param {int=} options.generation - **File Objects Only** Select a specific
+ * @param {string} [options.entity] Whose permissions will be fetched.
+ * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object|array} callback.aclObject - Single or Array of Acl Objects.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {GetAclCallback} [callback] Callback function.
+ * @returns {Promise<GetAclResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * myBucket.acl.get({
  *   entity: 'user-useremail@example.com'
  * }, function(err, aclObject, apiResponse) {});
@@ -383,6 +463,22 @@ Acl.prototype.delete = function(options, callback) {
  *   var aclObject = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_file_acl
+ * Example of printing a file's ACL:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_file_acl_for_user
+ * Example of printing a file's ACL for a specific user:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_bucket_acl
+ * Example of printing a bucket's ACL:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_bucket_acl_for_user
+ * Example of printing a bucket's ACL for a specific user:
  */
 Acl.prototype.get = function(options, callback) {
   var self = this;
@@ -400,45 +496,61 @@ Acl.prototype.get = function(options, callback) {
     }
   }
 
-  this.request({
-    uri: path,
-    qs: query,
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      uri: path,
+      qs: query,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var results;
+
+      if (resp.items) {
+        results = arrify(resp.items).map(self.makeAclObject_);
+      } else {
+        results = self.makeAclObject_(resp);
+      }
+
+      callback(null, results, resp);
     }
-
-    var results;
-
-    if (resp.items) {
-      results = arrify(resp.items).map(self.makeAclObject_);
-    } else {
-      results = self.makeAclObject_(resp);
-    }
-
-    callback(null, results, resp);
-  });
+  );
 };
 
 /**
+ * @typedef {array} UpdateAclResponse
+ * @property {object} 0 The updated Acl Objects.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback UpdateAclCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} acl The updated Acl Objects.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Update access controls on a {module:storage/bucket} or {module:storage/file}.
  *
- * @resource [BucketAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}
- * @resource [ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}
+ * @see [BucketAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}
+ * @see [ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}
  *
- * @param {object=} options - Configuration object.
- * @param {string} options.entity - Whose permissions will be updated.
- * @param {string} options.role - Permissions allowed for the defined entity.
+ * @param {object} options Configuration options.
+ * @param {string} options.entity Whose permissions will be updated.
+ * @param {string} options.role Permissions allowed for the defined entity.
  *     See {module:storage#acl}.
- * @param {int=} options.generation - **File Objects Only** Select a specific
+ * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.aclObject - The updated Acl Object.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {UpdateAclCallback} [callback] Callback function.
+ * @returns {Promise<UpdateAclResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ * var myFile = myBucket.file('my-file');
+ *
  * var options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.WRITER_ROLE
@@ -472,21 +584,24 @@ Acl.prototype.update = function(options, callback) {
     query.generation = options.generation;
   }
 
-  this.request({
-    method: 'PUT',
-    uri: '/' + encodeURIComponent(options.entity),
-    qs: query,
-    json: {
-      role: options.role.toUpperCase()
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'PUT',
+      uri: '/' + encodeURIComponent(options.entity),
+      qs: query,
+      json: {
+        role: options.role.toUpperCase(),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    callback(null, self.makeAclObject_(resp), resp);
-  });
+      callback(null, self.makeAclObject_(resp), resp);
+    }
+  );
 };
 
 /**
@@ -497,7 +612,7 @@ Acl.prototype.update = function(options, callback) {
 Acl.prototype.makeAclObject_ = function(accessControlObject) {
   var obj = {
     entity: accessControlObject.entity,
-    role: accessControlObject.role
+    role: accessControlObject.role,
   };
 
   if (accessControlObject.projectTeam) {
@@ -512,11 +627,11 @@ Acl.prototype.makeAclObject_ = function(accessControlObject) {
  *
  * @private
  *
- * @param {string} method - Action.
- * @param {string} path - Request path.
- * @param {*} query - Request query object.
- * @param {*} body - Request body contents.
- * @param {function} callback - The callback function.
+ * @param {string} method Action.
+ * @param {string} path Request path.
+ * @param {*} query Request query object.
+ * @param {*} body Request body contents.
+ * @param {function} callback Callback function.
  */
 Acl.prototype.request = function(reqOpts, callback) {
   reqOpts.uri = this.pathPrefix + reqOpts.uri;
@@ -551,10 +666,7 @@ function AclRoleAccessorMethods() {
   AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));
 }
 
-AclRoleAccessorMethods.accessMethods = [
-  'add',
-  'delete'
-];
+AclRoleAccessorMethods.accessMethods = ['add', 'delete'];
 
 AclRoleAccessorMethods.entities = [
   // Special entity groups that do not require further specification.
@@ -565,14 +677,10 @@ AclRoleAccessorMethods.entities = [
   'domain-',
   'group-',
   'project-',
-  'user-'
+  'user-',
 ];
 
-AclRoleAccessorMethods.roles = [
-  'OWNER',
-  'READER',
-  'WRITER'
-];
+AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
 
 AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
   var self = this;
@@ -606,10 +714,12 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           callback = entityId;
         }
 
-        var args = [{
-          entity: apiEntity,
-          role: role
-        }];
+        var args = [
+          {
+            entity: apiEntity,
+            role: role,
+          },
+        ];
 
         if (is.fn(callback)) {
           args.push(callback);

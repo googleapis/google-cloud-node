@@ -27,7 +27,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Iam') {
       promisified = true;
     }
-  }
+  },
 });
 
 describe('storage/iam', function() {
@@ -39,15 +39,15 @@ describe('storage/iam', function() {
   before(function() {
     Iam = proxyquire('../src/iam.js', {
       '@google-cloud/common': {
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
   beforeEach(function() {
     BUCKET_INSTANCE = {
       id: 'bucket-id',
-      request: util.noop
+      request: util.noop,
     };
 
     iam = new Iam(BUCKET_INSTANCE);
@@ -77,7 +77,7 @@ describe('storage/iam', function() {
     it('should make the correct api request', function(done) {
       iam.request_ = function(reqOpts, callback) {
         assert.deepEqual(reqOpts, {
-          uri: '/iam'
+          uri: '/iam',
         });
 
         callback(); // done()
@@ -96,16 +96,19 @@ describe('storage/iam', function() {
 
     it('should make the correct API request', function(done) {
       var policy = {
-        a: 'b'
+        a: 'b',
       };
 
       iam.request_ = function(reqOpts, callback) {
         assert.deepEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
-          json: extend({
-            resourceId: iam.resourceId_
-          }, policy)
+          json: extend(
+            {
+              resourceId: iam.resourceId_,
+            },
+            policy
+          ),
         });
 
         callback(); // done()
@@ -129,11 +132,9 @@ describe('storage/iam', function() {
         assert.deepEqual(reqOpts, {
           uri: '/iam/testPermissions',
           qs: {
-            permissions: [
-              permissions
-            ]
+            permissions: [permissions],
           },
-          useQuerystring: true
+          useQuerystring: true,
         });
 
         done();
@@ -160,12 +161,9 @@ describe('storage/iam', function() {
     });
 
     it('should pass back a hash of permissions the user has', function(done) {
-      var permissions = [
-        'storage.bucket.list',
-        'storage.bucket.consume'
-      ];
+      var permissions = ['storage.bucket.list', 'storage.bucket.consume'];
       var apiResponse = {
-        permissions: ['storage.bucket.consume']
+        permissions: ['storage.bucket.consume'],
       };
 
       iam.request_ = function(reqOpts, callback) {
@@ -176,7 +174,7 @@ describe('storage/iam', function() {
         assert.ifError(err);
         assert.deepEqual(permissions, {
           'storage.bucket.list': false,
-          'storage.bucket.consume': true
+          'storage.bucket.consume': true,
         });
         assert.strictEqual(apiResp, apiResponse);
 

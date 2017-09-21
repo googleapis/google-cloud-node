@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-/*!
- * @module storage/file
- */
-
 'use strict';
 
+var Buffer = require('safe-buffer').Buffer;
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
 var createErrorClass = require('create-error-class');
@@ -38,10 +35,6 @@ var through = require('through2');
 var util = require('util');
 var zlib = require('zlib');
 
-/**
- * @type {module:storage/acl}
- * @private
- */
 var Acl = require('./acl.js');
 
 /**
@@ -50,7 +43,7 @@ var Acl = require('./acl.js');
  * @private
  *
  * @param {string} message - Custom error message.
- * @return {Error}
+ * @returns {Error}
  */
 var SigningError = createErrorClass('SigningError', function(message) {
   this.message = message;
@@ -72,26 +65,22 @@ var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';
  * @const {RegExp}
  * @private
  */
-var GS_URL_REGEXP = /^gs\:\/\/([a-z0-9_\.\-]+)\/(.+)$/;
+var GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
 
-/*! Developer Documentation
- *
- * @param {module:storage/bucket} bucket - The Bucket instance this file is
- *     attached to.
- * @param {string} name - The name of the remote file.
- * @param {object=} options - Configuration object.
- * @param {string} options.encryptionKey - A custom encryption key.
- * @param {number} options.generation - Generation to scope the file to.
- */
 /**
- * A File object is created from your Bucket object using
- * {module:storage/bucket#file}.
+ * A File object is created from your {@link Bucket} object using
+ * {@link Bucket#file}.
  *
- * @alias module:storage/file
- * @constructor
- *
+ * @class
+ * @param {Bucket} bucket The Bucket instance this file is
+ *     attached to.
+ * @param {string} name The name of the remote file.
+ * @param {object} [options] Configuration options.
+ * @param {string} [options.encryptionKey] A custom encryption key.
+ * @param {number} [options.generation] Generation to scope the file to.
  * @example
- * var myBucket = gcs.bucket('my-bucket');
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
  *
  * var file = myBucket.file('my-file');
  */
@@ -103,7 +92,7 @@ function File(bucket, name, options) {
 
   Object.defineProperty(this, 'name', {
     enumerable: true,
-    value: name.replace(/^\/+/, '') // Remove leading slashes.
+    value: name.replace(/^\/+/, ''), // Remove leading slashes.
   });
 
   var generation = parseInt(options.generation, 10);
@@ -111,14 +100,14 @@ function File(bucket, name, options) {
   if (!isNaN(generation)) {
     this.generation = generation;
     this.requestQueryObject = {
-      generation: this.generation
+      generation: this.generation,
     };
   }
 
   common.ServiceObject.call(this, {
     parent: bucket,
     baseUrl: '/o',
-    id: encodeURIComponent(this.name)
+    id: encodeURIComponent(this.name),
   });
 
   if (options.encryptionKey) {
@@ -139,17 +128,22 @@ function File(bucket, name, options) {
    * The `acl` object on a File instance provides methods to get you a list of
    * the ACLs defined on your bucket, as well as set, update, and delete them.
    *
-   * @resource [About Access Control lists]{@link http://goo.gl/6qBBPO}
+   * @see [About Access Control lists]{@link http://goo.gl/6qBBPO}
    *
-   * @mixes module:storage/acl
+   * @name File#acl
+   * @mixes Acl
    *
    * @example
+   * var storage = require('@google-cloud/storage')();
+   * var myBucket = storage.bucket('my-bucket');
+   *
+   * var file = myBucket.file('my-file');
    * //-
    * // Make a file publicly readable.
    * //-
    * var options = {
    *   entity: 'allUsers',
-   *   role: gcs.acl.READER_ROLE
+   *   role: storage.acl.READER_ROLE
    * };
    *
    * file.acl.add(options, function(err, aclObject) {});
@@ -164,47 +158,53 @@ function File(bucket, name, options) {
    */
   this.acl = new Acl({
     request: this.request.bind(this),
-    pathPrefix: '/acl'
+    pathPrefix: '/acl',
   });
 }
 
 util.inherits(File, common.ServiceObject);
 
-/*! Developer Documentation
- *
- * @param {object=} options - Configuration object.
- * @param {string} options.token - A previously-returned `rewriteToken` from an
- *     unfinished rewrite request.
+/**
+ * @typedef {array} CopyResponse
+ * @property {File} 0 The copied {@link File}.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback CopyCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File} copiedFile The copied {@link File}.
+ * @param {object} apiResponse The full API response.
  */
 /**
  * Copy this file to another file. By default, this will copy the file to the
  * same bucket, but you can choose to copy it to another Bucket by providing
  * a Bucket or File object or a URL starting with "gs://".
  *
- * @resource [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
+ * @see [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
  *
  * @throws {Error} If the destination file is not provided.
  *
- * @param {string|module:storage/bucket|module:storage/file} destination -
- *     Destination file.
- * @param {object=} options - Configuration object. See an
+ * @param {string|Bucket|File} destination Destination file.
+ * @param {object} [options] Configuration options. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {string} [options.token] A previously-returned `rewriteToken` from an
+ *     unfinished rewrite request.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {module:storage/file} callback.copiedFile - The copied File.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {CopyCallback} [callback] Callback function.
+ * @returns {Promise<CopyResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ *
  * //-
  * // You can pass in a variety of types for the destination.
  * //
  * // For all of the below examples, assume we are working with the following
  * // Bucket and File objects.
  * //-
- * var bucket = gcs.bucket('my-bucket');
+ * var bucket = storage.bucket('my-bucket');
  * var file = bucket.file('my-image.png');
  *
  * //-
@@ -240,7 +240,7 @@ util.inherits(File, common.ServiceObject);
  * // If you pass in a Bucket object, the file will be copied to that bucket
  * // using the same name.
  * //-
- * var anotherBucket = gcs.bucket('another-bucket');
+ * var anotherBucket = storage.bucket('another-bucket');
  * file.copy(anotherBucket, function(err, copiedFile, apiResponse) {
  *   // `my-bucket` still contains:
  *   // - "my-image.png"
@@ -275,6 +275,10 @@ util.inherits(File, common.ServiceObject);
  *   var newFile = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_copy_file
+ * Another example:
  */
 File.prototype.copy = function(destination, options, callback) {
   var self = this;
@@ -306,8 +310,10 @@ File.prototype.copy = function(destination, options, callback) {
       destBucket = this.bucket;
       destName = destination;
     }
-  } else if (destination.constructor &&
-        destination.constructor.name === 'Bucket') {
+  } else if (
+    destination.constructor &&
+    destination.constructor.name === 'Bucket'
+  ) {
     destBucket = destination;
     destName = this.name;
   } else if (destination instanceof File) {
@@ -332,27 +338,30 @@ File.prototype.copy = function(destination, options, callback) {
 
   newFile = newFile || destBucket.file(destName);
 
-  this.request({
-    method: 'POST',
-    uri: format('/rewriteTo/b/{bucketName}/o/{fileName}', {
-      bucketName: destBucket.name,
-      fileName: encodeURIComponent(destName)
-    }),
-    qs: query,
-    json: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: format('/rewriteTo/b/{bucketName}/o/{fileName}', {
+        bucketName: destBucket.name,
+        fileName: encodeURIComponent(destName),
+      }),
+      qs: query,
+      json: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    if (resp.rewriteToken) {
-      self.copy(newFile, { token: resp.rewriteToken }, callback);
-      return;
-    }
+      if (resp.rewriteToken) {
+        self.copy(newFile, {token: resp.rewriteToken}, callback);
+        return;
+      }
 
-    callback(null, newFile, resp);
-  });
+      callback(null, newFile, resp);
+    }
+  );
 };
 
 /**
@@ -373,26 +382,26 @@ File.prototype.copy = function(destination, options, callback) {
  * NOTE: Readable streams will emit the `end` event when the file is fully
  * downloaded.
  *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {string|boolean} options.validation - Possible values: `"md5"`,
+ * @param {string|boolean} [options.validation] Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
  *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
  *     supported for composite objects. An error will be raised if MD5 is
  *     specified but is not available. You may also choose to skip validation
  *     completely, however this is **not recommended**.
- * @param {number} options.start - A byte offset to begin the file's download
+ * @param {number} [options.start] A byte offset to begin the file's download
  *     from. Default is 0. NOTE: Byte ranges are inclusive; that is,
  *     `options.start = 0` and `options.end = 999` represent the first 1000
  *     bytes in a file or object. NOTE: when specifying a byte range, data
  *     integrity is not available.
- * @param {number} options.end - A byte offset to stop reading the file at.
+ * @param {number} [options.end] A byte offset to stop reading the file at.
  *     NOTE: Byte ranges are inclusive; that is, `options.start = 0` and
  *     `options.end = 999` represent the first 1000 bytes in a file or object.
  *     NOTE: when specifying a byte range, data integrity is not available.
- * @return {ReadableStream}
+ * @returns {ReadableStream}
  *
  * @example
  * //-
@@ -402,6 +411,9 @@ File.prototype.copy = function(destination, options, callback) {
  * // pipe its contents to a local file. This is effectively creating a local
  * // backup of your remote data.
  * //-
+ * var storage = require('@google-cloud/storage')();
+ * var bucket = storage.bucket('my-bucket');
+ *
  * var fs = require('fs');
  * var remoteFile = bucket.file('image.png');
  * var localFilename = '/Users/stephen/Photos/image.png';
@@ -475,8 +487,8 @@ File.prototype.createReadStream = function(options) {
       uri: '',
       gzip: true,
       qs: {
-        alt: 'media'
-      }
+        alt: 'media',
+      },
     };
 
     if (self.generation) {
@@ -492,7 +504,7 @@ File.prototype.createReadStream = function(options) {
       var end = is.number(options.end) ? options.end : '';
 
       reqOpts.headers = {
-        Range: 'bytes=' + (tailRequest ? end : start + '-' + end)
+        Range: 'bytes=' + (tailRequest ? end : start + '-' + end),
       };
     }
 
@@ -511,10 +523,12 @@ File.prototype.createReadStream = function(options) {
         requestStream.unpipe(throughStream);
 
         // Get error message from the body.
-        res.pipe(concat(function(body) {
-          err.message = body.toString();
-          throughStream.destroy(err);
-        }));
+        res.pipe(
+          concat(function(body) {
+            err.message = body.toString();
+            throughStream.destroy(err);
+          })
+        );
 
         return;
       }
@@ -522,7 +536,7 @@ File.prototype.createReadStream = function(options) {
       if (!rangeRequest) {
         validateStream = hashStreamValidation({
           crc32c: crc32c,
-          md5: md5
+          md5: md5,
         });
 
         res.pipe(validateStream).on('data', common.util.noop);
@@ -553,7 +567,7 @@ File.prototype.createReadStream = function(options) {
 
       var hashes = {
         crc32c: self.metadata.crc32c,
-        md5: self.metadata.md5Hash
+        md5: self.metadata.md5Hash,
       };
 
       // If we're doing validation, assume the worst-- a data integrity
@@ -573,19 +587,23 @@ File.prototype.createReadStream = function(options) {
       }
 
       if (md5 && !hashes.md5) {
-        var hashError = new Error([
-          'MD5 verification was specified, but is not available for the',
-          'requested object. MD5 is not available for composite objects.'
-        ].join(' '));
+        var hashError = new Error(
+          [
+            'MD5 verification was specified, but is not available for the',
+            'requested object. MD5 is not available for composite objects.',
+          ].join(' ')
+        );
         hashError.code = 'MD5_NOT_AVAILABLE';
 
         throughStream.destroy(hashError);
       } else if (failed) {
-        var mismatchError = new Error([
-          'The downloaded data did not match the data from the server.',
-          'To be sure the content is the same, you should download the',
-          'file again.'
-        ].join(' '));
+        var mismatchError = new Error(
+          [
+            'The downloaded data did not match the data from the server.',
+            'To be sure the content is the same, you should download the',
+            'file again.',
+          ].join(' ')
+        );
         mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
 
         throughStream.destroy(mismatchError);
@@ -621,6 +639,15 @@ File.prototype.createReadStream = function(options) {
 };
 
 /**
+ * @typedef {array} CreateResumableUploadResponse
+ * @property {string} 0 The resumable upload's unique session URI.
+ */
+/**
+ * @callback CreateResumableUploadCallback
+ * @param {?Error} err Request error, if any.
+ * @param {string} uri The resumable upload's unique session URI.
+ */
+/**
  * Create a unique resumable upload session URI. This is the first step when
  * performing a resumable upload.
  *
@@ -633,12 +660,12 @@ File.prototype.createReadStream = function(options) {
  * any of the details, see {module:storage/createWriteStream}. Resumable uploads
  * are performed by default.
  *
- * @resource [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
+ * @see [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
  *
- * @param {object=} options - Configuration object.
- * @param {object} options.metadata - Metadata to set on the file.
- * @param {string} options.origin - Origin header to set for the upload.
- * @param {string} options.predefinedAcl - Apply a predefined set of access
+ * @param {object} [options] Configuration options.
+ * @param {object} [options.metadata] Metadata to set on the file.
+ * @param {string} [options.origin] Origin header to set for the upload.
+ * @param {string} [options.predefinedAcl] Apply a predefined set of access
  *     controls to this object.
  *
  *     Acceptable values are:
@@ -658,18 +685,21 @@ File.prototype.createReadStream = function(options) {
  *
  *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers` get
  *       `READER` access.
- * @param {boolean} options.private - Make the uploaded file private. (Alias for
+ * @param {boolean} [options.private] Make the uploaded file private. (Alias for
  *     `options.predefinedAcl = 'private'`)
- * @param {boolean} options.public - Make the uploaded file public. (Alias for
+ * @param {boolean} [options.public] Make the uploaded file public. (Alias for
  *     `options.predefinedAcl = 'publicRead'`)
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {string} callback.uri - The resumable upload's unique session URI.
+ * @param {CreateResumableUploadCallback} [callback] Callback function.
+ * @returns {Promise<CreateResumableUploadResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
  * file.createResumableUpload(function(err, uri) {
  *   if (!err) {
  *     // `uri` can be used to PUT data to.
@@ -689,18 +719,21 @@ File.prototype.createResumableUpload = function(options, callback) {
     options = {};
   }
 
-  resumableUpload.createURI({
-    authClient: this.bucket.storage.authClient,
-    bucket: this.bucket.name,
-    file: this.name,
-    generation: this.generation,
-    metadata: options.metadata,
-    origin: options.origin,
-    predefinedAcl: options.predefinedAcl,
-    private: options.private,
-    public: options.public,
-    userProject: options.userProject
-  }, callback);
+  resumableUpload.createURI(
+    {
+      authClient: this.bucket.storage.authClient,
+      bucket: this.bucket.name,
+      file: this.name,
+      generation: this.generation,
+      metadata: options.metadata,
+      origin: options.origin,
+      predefinedAcl: options.predefinedAcl,
+      private: options.private,
+      public: options.public,
+      userProject: options.userProject,
+    },
+    callback
+  );
 };
 
 /**
@@ -727,18 +760,18 @@ File.prototype.createResumableUpload = function(options, callback) {
  * NOTE: Writable streams will emit the `finish` event when the file is fully
  * uploaded.
  *
- * @resource [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload}
- * @resource [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
+ * @see [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload}
+ * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
  *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.gzip - Automatically gzip the file. This will set
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.gzip] Automatically gzip the file. This will set
  *     `options.metadata.contentEncoding` to `gzip`.
- * @param {object=} options.metadata - See the examples below or
+ * @param {object} [options.metadata] See the examples below or
  *     [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
  *     for more details.
- * @param {string} options.offset - The starting byte of the upload stream, for
+ * @param {string} [options.offset] The starting byte of the upload stream, for
  *     resuming an interrupted upload. Defaults to 0.
- * @param {string} options.predefinedAcl - Apply a predefined set of access
+ * @param {string} [options.predefinedAcl] Apply a predefined set of access
  *     controls to this object.
  *
  *     Acceptable values are:
@@ -758,29 +791,33 @@ File.prototype.createResumableUpload = function(options, callback) {
  *
  *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers` get
  *       `READER` access.
- * @param {boolean} options.private - Make the uploaded file private. (Alias for
+ * @param {boolean} [options.private] Make the uploaded file private. (Alias for
  *     `options.predefinedAcl = 'private'`)
- * @param {boolean} options.public - Make the uploaded file public. (Alias for
+ * @param {boolean} [options.public] Make the uploaded file public. (Alias for
  *     `options.predefinedAcl = 'publicRead'`)
- * @param {boolean} options.resumable - Force a resumable upload. NOTE: When
+ * @param {boolean} [options.resumable] Force a resumable upload. NOTE: When
  *     working with streams, the file format and size is unknown until it's
  *     completely consumed. Because of this, it's best for you to be explicit
  *     for what makes sense given your input.
- * @param {string} options.uri - The URI for an already-created resumable
- *     upload. See {module:storage/file#createResumableUpload}.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {string} [options.uri] The URI for an already-created resumable
+ *     upload. See {@link File#createResumableUpload}.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {string|boolean} options.validation - Possible values: `"md5"`,
+ * @param {string|boolean} [options.validation] Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
  *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
  *     supported for composite objects. An error will be raised if MD5 is
  *     specified but is not available. You may also choose to skip validation
  *     completely, however this is **not recommended**.
- * @return {WritableStream}
+ * @returns {WritableStream}
  *
  * @example
  * var fs = require('fs');
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
  *
  * //-
  * // <h4>Uploading a File</h4>
@@ -838,7 +875,7 @@ File.prototype.createWriteStream = function(options) {
 
   var self = this;
 
-  options = extend({ metadata: {} }, options);
+  options = extend({metadata: {}}, options);
 
   var gzip = options.gzip;
 
@@ -861,16 +898,18 @@ File.prototype.createWriteStream = function(options) {
   // checksum value on the returned metadata from the API.
   var validateStream = hashStreamValidation({
     crc32c: crc32c,
-    md5: md5
+    md5: md5,
   });
 
   var fileWriteStream = duplexify();
 
-  var stream = streamEvents(pumpify([
-    gzip ? zlib.createGzip() : through(),
-    validateStream,
-    fileWriteStream
-  ]));
+  var stream = streamEvents(
+    pumpify([
+      gzip ? zlib.createGzip() : through(),
+      validateStream,
+      fileWriteStream,
+    ])
+  );
 
   // Wait until we've received data to determine what upload technique to use.
   stream.on('writing', function() {
@@ -925,20 +964,20 @@ File.prototype.createWriteStream = function(options) {
             'successful. To be sure the content is the same, you should try',
             'removing the file manually, then uploading the file again.',
             '\n\nThe delete attempt failed with this message:',
-            '\n\n  ' + err.message
+            '\n\n  ' + err.message,
           ].join(' ');
         } else if (md5 && !metadata.md5Hash) {
           code = 'MD5_NOT_AVAILABLE';
           message = [
             'MD5 verification was specified, but is not available for the',
-            'requested object. MD5 is not available for composite objects.'
+            'requested object. MD5 is not available for composite objects.',
           ].join(' ');
         } else {
           code = 'FILE_NO_UPLOAD';
           message = [
             'The uploaded data did not match the data from the server. As a',
             'precaution, the file has been deleted. To be sure the content',
-            'is the same, you should try uploading the file again.'
+            'is the same, you should try uploading the file again.',
           ].join(' ');
         }
 
@@ -959,20 +998,31 @@ File.prototype.createWriteStream = function(options) {
 };
 
 /**
+ * @typedef {array} DeleteFileResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback DeleteFileCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Delete the file.
  *
- * @resource [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
+ * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
  *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {DeleteFileCallback} [callback] Callback function.
+ * @returns {Promise<DeleteFileResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
  * file.delete(function(err, apiResponse) {});
  *
  * //-
@@ -981,6 +1031,10 @@ File.prototype.createWriteStream = function(options) {
  * file.delete().then(function(data) {
  *   var apiResponse = data[0];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_delete_file
+ * Another example:
  */
 File.prototype.delete = function(options, callback) {
   if (is.fn(options)) {
@@ -994,20 +1048,33 @@ File.prototype.delete = function(options, callback) {
 };
 
 /**
+ * @typedef {array} DownloadResponse
+ * @property {object} [0] The contents of a File.
+ */
+/**
+ * @callback DownloadCallback
+ * @param {?Error} err Request error, if any.
+ * @param {buffer} [contents] The contents of a File.
+ */
+/**
  * Convenience method to download a file into memory or to a local destination.
  *
- * @param {object=} options - Optional configuration. The arguments match those
- *     passed to {module:storage/file#createReadStream}.
- * @param {string} options.destination - Local file path to write the file's
+ * @param {object} [options] Configuration options. The arguments match those
+ *     passed to {@link File#createReadStream}.
+ * @param {string} [options.destination] Local file path to write the file's
  *     contents to.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {buffer} callback.contents - The contents of a File.
+ * @param {DownloadCallback} [callback] Callback function.
+ * @returns {Promise<DownloadResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * //-
  * // Download a file into memory. The contents will be available as the second
  * // argument in the demonstration below, `contents`.
@@ -1027,6 +1094,14 @@ File.prototype.delete = function(options, callback) {
  * file.download().then(function(data) {
  *   var contents = data[0];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_download_file
+ * Another example:
+ *
+ * @example <caption>include:samples/encryption.js</caption>
+ * region_tag:storage_download_encrypted_file
+ * Example of downloading an encrypted file:
  */
 File.prototype.download = function(options, callback) {
   if (is.fn(options)) {
@@ -1048,25 +1123,35 @@ File.prototype.download = function(options, callback) {
       .on('error', callback)
       .on('finish', callback);
   } else {
-    fileStream
-      .on('error', callback)
-      .pipe(concat(callback.bind(null, null)));
+    fileStream.on('error', callback).pipe(concat(callback.bind(null, null)));
   }
 };
 
 /**
+ * @typedef {array} FileExistsResponse
+ * @property {boolean} 0 Whether the {@link File} exists.
+ */
+/**
+ * @callback FileExistsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {boolean} exists Whether the {@link File} exists.
+ */
+/**
  * Check if the file exists.
  *
- * @param {options=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {options} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {boolean} callback.exists - Whether the file exists or not.
+ * @param {FileExistsCallback} [callback] Callback function.
+ * @returns {Promise<FileExistsResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * file.exists(function(err, exists) {});
  *
  * //-
@@ -1083,13 +1168,16 @@ File.prototype.exists = function(options, callback) {
 /**
  * The Storage API allows you to use a custom key for server-side encryption.
  *
- * @resource [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
+ * @see [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
  *
- * @param {string|buffer} encryptionKey - An AES-256 encryption key.
- * @return {module:storage/file}
+ * @param {string|buffer} encryptionKey An AES-256 encryption key.
+ * @returns {File}
  *
  * @example
  * var crypto = require('crypto');
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
  * var encryptionKey = crypto.randomBytes(32);
  *
  * var fileWithCustomEncryption = myBucket.file('my-file');
@@ -1110,12 +1198,21 @@ File.prototype.exists = function(options, callback) {
  *     });
  *   });
  * });
+ *
+ * @example <caption>include:samples/encryption.js</caption>
+ * region_tag:storage_upload_encrypted_file
+ * Example of uploading an encrypted file:
+ *
+ * @example <caption>include:samples/encryption.js</caption>
+ * region_tag:storage_download_encrypted_file
+ * Example of downloading an encrypted file:
  */
 File.prototype.setEncryptionKey = function(encryptionKey) {
   this.encryptionKey = encryptionKey;
 
-  encryptionKey = new Buffer(encryptionKey).toString('base64');
-  var hash = crypto.createHash('sha256')
+  encryptionKey = Buffer.from(encryptionKey).toString('base64');
+  var hash = crypto
+    .createHash('sha256')
     .update(encryptionKey, 'base64')
     .digest('base64');
 
@@ -1126,22 +1223,39 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
       reqOpts.headers['x-goog-encryption-key'] = encryptionKey;
       reqOpts.headers['x-goog-encryption-key-sha256'] = hash;
       return reqOpts;
-    }
+    },
   });
 
   return this;
 };
 
-
+/**
+ * @typedef {array} GetFileResponse
+ * @property {File} 0 The {@link File}.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetFileCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File} file The {@link File}.
+ * @param {object} apiResponse The full API response.
+ */
 /**
  * Get a file object and its metadata if it exists.
  *
- * @param {options=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {options} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
+ * @param {GetFileCallback} [callback] Callback function.
+ * @returns {Promise<GetFileResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * file.get(function(err, file, apiResponse) {
  *   // file.metadata` has been populated.
  * });
@@ -1159,21 +1273,34 @@ File.prototype.get = function(options, callback) {
 };
 
 /**
+ * @typedef {array} GetFileMetadataResponse
+ * @property {object} 0 The {@link File} metadata.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetFileMetadataCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} metadata The {@link File} metadata.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Get the file's metadata.
  *
- * @resource [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
+ * @see [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
  *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.metadata - The File's metadata.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {GetFileMetadataCallback} [callback] Callback function.
+ * @returns {Promise<GetFileMetadataResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * file.getMetadata(function(err, metadata, apiResponse) {});
  *
  * //-
@@ -1183,6 +1310,10 @@ File.prototype.get = function(options, callback) {
  *   var metadata = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_get_metadata
+ * Another example:
  */
 File.prototype.getMetadata = function(options, callback) {
   if (is.fn(options)) {
@@ -1196,10 +1327,19 @@ File.prototype.getMetadata = function(options, callback) {
 };
 
 /**
+ * @typedef {array} GetSignedPolicyResponse
+ * @property {object} 0 The document policy.
+ */
+/**
+ * @callback GetSignedPolicyCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} policy The document policy.
+ */
+/**
  * Get a signed policy document to allow a user to upload data with a POST
  * request.
  *
- * @resource [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
+ * @see [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
  *
  * @throws {Error} If an expiration timestamp from the past is given.
  * @throws {Error} If options.equals has an array with less or more than two
@@ -1207,8 +1347,8 @@ File.prototype.getMetadata = function(options, callback) {
  * @throws {Error} If options.startsWith has an array with less or more than two
  *     members.
  *
- * @param {object} options - Configuration object.
- * @param {array|array[]=} options.equals - Array of request parameters and
+ * @param {object} options Configuration options.
+ * @param {array|array[]} [options.equals] Array of request parameters and
  *     their expected value (e.g. [['$<field>', '<value>']]). Values are
  *     translated into equality constraints in the conditions field of the
  *     policy document (e.g. ['eq', '$<field>', '<value>']). If only one
@@ -1216,28 +1356,31 @@ File.prototype.getMetadata = function(options, callback) {
  *     dimensional array (e.g. ['$<field>', '<value>']).
  * @param {*} options.expires - A timestamp when this policy will expire. Any
  *     value given is passed to `new Date()`.
- * @param {array|array[]=} options.startsWith - Array of request parameters and
+ * @param {array|array[]} [options.startsWith] Array of request parameters and
  *     their expected prefixes (e.g. [['$<field>', '<value>']). Values are
  *     translated into starts-with constraints in the conditions field of the
  *     policy document (e.g. ['starts-with', '$<field>', '<value>']). If only
  *     one prefix condition is to be specified, options.startsWith can be a one-
  *     dimensional array (e.g. ['$<field>', '<value>']).
- * @param {string=} options.acl - ACL for the object from possibly predefined
+ * @param {string} [options.acl] ACL for the object from possibly predefined
  *     ACLs.
- * @param {string=} options.successRedirect - The URL to which the user client
+ * @param {string} [options.successRedirect] The URL to which the user client
  *     is redirected if the upload is successful.
- * @param {string=} options.successStatus - The status of the Google Storage
+ * @param {string} [options.successStatus] - The status of the Google Storage
  *     response if the upload is successful (must be string).
- * @param {object=} options.contentLengthRange
- * @param {number} options.contentLengthRange.min - Minimum value for the
+ * @param {object} [options.contentLengthRange]
+ * @param {number} [options.contentLengthRange.min] Minimum value for the
  *     request's content length.
- * @param {number} options.contentLengthRange.max - Maximum value for the
+ * @param {number} [options.contentLengthRange.max] Maximum value for the
  *     request's content length.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.policy - The document policy.
+ * @param {GetSignedPolicyCallback} [callback] Callback function.
+ * @returns {Promise<GetSignedPolicyResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
  * var options = {
  *   equals: ['$Content-Type', 'image/jpeg'],
  *   expires: '10-25-2022',
@@ -1272,8 +1415,8 @@ File.prototype.getSignedPolicy = function(options, callback) {
   var conditions = [
     ['eq', '$key', this.name],
     {
-      bucket: this.bucket.name
-    }
+      bucket: this.bucket.name,
+    },
   ];
 
   if (is.array(options.equals)) {
@@ -1302,19 +1445,19 @@ File.prototype.getSignedPolicy = function(options, callback) {
 
   if (options.acl) {
     conditions.push({
-      acl: options.acl
+      acl: options.acl,
     });
   }
 
   if (options.successRedirect) {
     conditions.push({
-      success_action_redirect: options.successRedirect
+      success_action_redirect: options.successRedirect,
     });
   }
 
   if (options.successStatus) {
     conditions.push({
-      success_action_status: options.successStatus
+      success_action_status: options.successStatus,
     });
   }
 
@@ -1329,7 +1472,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
 
   var policy = {
     expiration: expires.toISOString(),
-    conditions: conditions
+    conditions: conditions,
   };
 
   this.storage.getCredentials(function(err, credentials) {
@@ -1341,7 +1484,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
     if (!credentials.private_key) {
       var errorMessage = [
         'Could not find a `private_key`.',
-        'Please verify you are authorized with this property available.'
+        'Please verify you are authorized with this property available.',
       ].join(' ');
 
       callback(new SigningError(errorMessage));
@@ -1350,7 +1493,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
 
     var sign = crypto.createSign('RSA-SHA256');
     var policyString = JSON.stringify(policy);
-    var policyBase64 = new Buffer(policyString).toString('base64');
+    var policyBase64 = Buffer.from(policyString).toString('base64');
 
     sign.update(policyBase64);
 
@@ -1359,45 +1502,58 @@ File.prototype.getSignedPolicy = function(options, callback) {
     callback(null, {
       string: policyString,
       base64: policyBase64,
-      signature: signature
+      signature: signature,
     });
   });
 };
 
 /**
+ * @typedef {array} GetSignedUrlResponse
+ * @property {object} 0 The signed URL.
+ */
+/**
+ * @callback GetSignedUrlCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} url The signed URL.
+ */
+/**
  * Get a signed URL to allow limited time access to the file.
  *
- * @resource [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
+ * @see [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
  *
  * @throws {Error} if an expiration timestamp from the past is given.
  *
- * @param {object} config - Configuration object.
- * @param {string} config.action - "read" (HTTP: GET), "write" (HTTP: PUT), or
+ * @param {object} config Configuration object.
+ * @param {string} config.action "read" (HTTP: GET), "write" (HTTP: PUT), or
  *     "delete" (HTTP: DELETE).
- * @param {string=} config.cname - The cname for this bucket, i.e.,
+ * @param {string} [config.cname] The cname for this bucket, i.e.,
  *     "https://cdn.example.com".
- * @param {string=} config.contentMd5 - The MD5 digest value in base64. If you
+ * @param {string} [config.contentMd5] The MD5 digest value in base64. If you
  *     provide this, the client must provide this HTTP header with this same
  *     value in its request.
- * @param {string=} config.contentType - If you provide this value, the client
+ * @param {string} [config.contentType] If you provide this value, the client
  *     must provide this HTTP header set to the same value.
- * @param {*} config.expires - A timestamp when this link will expire. Any value
+ * @param {*} config.expires A timestamp when this link will expire. Any value
  *     given is passed to `new Date()`.
- * @param {object=} config.extensionHeaders - If these headers are used, the
+ * @param {object} [config.extensionHeaders] If these headers are used, the
  *     server will check to make sure that the client provides matching values.
- * @param {string=} config.promptSaveAs - The filename to prompt the user to
+ * @param {string} [config.promptSaveAs] The filename to prompt the user to
  *     save the file as when the signed url is accessed. This is ignored if
  *     `config.responseDisposition` is set.
- * @param {string=} config.responseDisposition - The
+ * @param {string} [config.responseDisposition] The
  *     [response-content-disposition parameter](http://goo.gl/yMWxQV) of the
  *     signed url.
- * @param {string=} config.responseType - The response-content-type parameter
+ * @param {string} [config.responseType] The response-content-type parameter
  *     of the signed url.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {string} callback.url - The signed URL.
+ * @param {GetSignedUrlCallback} [callback] Callback function.
+ * @returns {Promise<GetSignedUrlResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * //-
  * // Generate a URL that allows temporary access to download your file.
  * //-
@@ -1452,6 +1608,10 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * file.getSignedUrl(config).then(function(data) {
  *   var url = data[0];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_generate_signed_url
+ * Another example:
  */
 File.prototype.getSignedUrl = function(config, callback) {
   var self = this;
@@ -1467,7 +1627,7 @@ File.prototype.getSignedUrl = function(config, callback) {
   config.action = {
     read: 'GET',
     write: 'PUT',
-    delete: 'DELETE'
+    delete: 'DELETE',
   }[config.action];
 
   var name = encodeURIComponent(this.name);
@@ -1483,7 +1643,7 @@ File.prototype.getSignedUrl = function(config, callback) {
     if (!credentials.private_key || !credentials.client_email) {
       var errorMessage = [
         'Could not find a `private_key` or `client_email`.',
-        'Please verify you are authorized with these credentials available.'
+        'Please verify you are authorized with these credentials available.',
       ].join(' ');
 
       callback(new SigningError(errorMessage));
@@ -1502,27 +1662,29 @@ File.prototype.getSignedUrl = function(config, callback) {
     }
 
     var sign = crypto.createSign('RSA-SHA256');
-    sign.update([
-      config.action,
-      (config.contentMd5 || ''),
-      (config.contentType || ''),
-      expiresInSeconds,
-      extensionHeadersString + config.resource
-    ].join('\n'));
+    sign.update(
+      [
+        config.action,
+        config.contentMd5 || '',
+        config.contentType || '',
+        expiresInSeconds,
+        extensionHeadersString + config.resource,
+      ].join('\n')
+    );
     var signature = sign.sign(credentials.private_key, 'base64');
 
     var responseContentType;
     if (is.string(config.responseType)) {
       responseContentType =
-        '&response-content-type=' +
-        encodeURIComponent(config.responseType);
+        '&response-content-type=' + encodeURIComponent(config.responseType);
     }
 
     var responseContentDisposition;
     if (is.string(config.promptSaveAs)) {
       responseContentDisposition =
         '&response-content-disposition=attachment; filename="' +
-        encodeURIComponent(config.promptSaveAs) + '"';
+        encodeURIComponent(config.promptSaveAs) +
+        '"';
     }
     if (is.string(config.responseDisposition)) {
       responseContentDisposition =
@@ -1538,7 +1700,7 @@ File.prototype.getSignedUrl = function(config, callback) {
       sig: '&Signature=' + encodeURIComponent(signature),
       type: responseContentType || '',
       disp: responseContentDisposition || '',
-      gen: self.generation ? '&generation=' + self.generation : ''
+      gen: self.generation ? '&generation=' + self.generation : '',
     });
 
     callback(null, signedUrl);
@@ -1546,21 +1708,35 @@ File.prototype.getSignedUrl = function(config, callback) {
 };
 
 /**
+ * @typedef {array} MakeFilePrivateResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback MakeFilePrivateCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Make a file private to the project and remove all other permissions.
  * Set `options.strict` to true to make the file private to only the owner.
  *
- * @resource [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
+ * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
  *
- * @param {object=} options - The configuration object.
- * @param {boolean=} options.strict - If true, set the file to be private to
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.strict] If true, set the file to be private to
  *     only the owner user. Otherwise, it will be private to the project.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
+ * @param {MakeFilePrivateCallback} [callback] Callback function.
+ * @returns {Promise<MakeFilePrivateResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * //-
  * // Set the file private so only project maintainers can see and modify it.
  * //-
@@ -1585,31 +1761,48 @@ File.prototype.makePrivate = function(options, callback) {
   }
 
   var query = {
-    predefinedAcl: options.strict ? 'private' : 'projectPrivate'
+    predefinedAcl: options.strict ? 'private' : 'projectPrivate',
   };
 
   if (options.userProject) {
     query.userProject = options.userProject;
   }
 
-  this.setMetadata({
-    // You aren't allowed to set both predefinedAcl & acl properties on a file,
-    // so acl must explicitly be nullified, destroying all previous acls on the
-    // file.
-    acl: null
-  }, query, callback);
+  this.setMetadata(
+    {
+      // You aren't allowed to set both predefinedAcl & acl properties on a file,
+      // so acl must explicitly be nullified, destroying all previous acls on the
+      // file.
+      acl: null,
+    },
+    query,
+    callback
+  );
 };
 
 /**
+ * @typedef {array} MakeFilePublicResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback MakeFilePublicCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Set a file to be publicly readable and maintain all previous permissions.
  *
- * @resource [ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}
+ * @see [ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}
  *
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {MakeFilePublicCallback} [callback] Callback function.
+ * @returns {Promise<MakeFilePublicResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * file.makePublic(function(err, apiResponse) {});
  *
  * //-
@@ -1618,18 +1811,36 @@ File.prototype.makePrivate = function(options, callback) {
  * file.makePublic().then(function(data) {
  *   var apiResponse = data[0];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_make_public
+ * Another example:
  */
 File.prototype.makePublic = function(callback) {
   callback = callback || common.util.noop;
 
-  this.acl.add({
-    entity: 'allUsers',
-    role: 'READER'
-  }, function(err, resp) {
-    callback(err, resp);
-  });
+  this.acl.add(
+    {
+      entity: 'allUsers',
+      role: 'READER',
+    },
+    function(err, resp) {
+      callback(err, resp);
+    }
+  );
 };
 
+/**
+ * @typedef {array} MoveResponse
+ * @property {File} 0 The destination File.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback MoveCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File} destinationFile The destination File.
+ * @param {object} apiResponse The full API response.
+ */
 /**
  * Move this file to another location. By default, this will rename the file
  * and keep it in the same bucket, but you can choose to move it to another
@@ -1643,30 +1854,28 @@ File.prototype.makePublic = function(callback) {
  * triggered from either one of these API calls failing, which could leave a
  * duplicate file lingering.
  *
- * @resource [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
+ * @see [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
  *
  * @throws {Error} If the destination file is not provided.
  *
- * @param {string|module:storage/bucket|module:storage/file} destination -
- *     Destination file.
- * @param {object=} options - Configuration object. See an
+ * @param {string|Bucket|File} destination Destination file.
+ * @param {object} [options] Configuration options. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {module:storage/file} callback.destinationFile - The destination File.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {MoveCallback} [callback] Callback function.
+ * @returns {Promise<MoveResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
  * //-
  * // You can pass in a variety of types for the destination.
  * //
  * // For all of the below examples, assume we are working with the following
  * // Bucket and File objects.
  * //-
- * var bucket = gcs.bucket('my-bucket');
+ * var bucket = storage.bucket('my-bucket');
  * var file = bucket.file('my-image.png');
  *
  * //-
@@ -1740,6 +1949,10 @@ File.prototype.makePublic = function(callback) {
  *   var destinationFile = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/files.js</caption>
+ * region_tag:storage_move_file
+ * Another example:
  */
 File.prototype.move = function(destination, options, callback) {
   var self = this;
@@ -1764,18 +1977,25 @@ File.prototype.move = function(destination, options, callback) {
 };
 
 /**
+ * @callback SaveCallback
+ * @param {?Error} err Request error, if any.
+ */
+/**
  * Write arbitrary data to a file.
  *
- * *This is a convenience method which wraps
- * {module:storage/file#createWriteStream}.*
+ * *This is a convenience method which wraps {@link Fileile#createWriteStream}.*
  *
- * @param {*} data - The data to write to a file.
- * @param {object=} options - See {module:storage/file#createWriteStream}'s
- *     `options` parameter.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
+ * @param {*} data The data to write to a file.
+ * @param {object} [options] See {@link File#createWriteStream}'s `options`
+ *     parameter.
+ * @param {SaveCallback} [callback] Callback function.
+ * @returns {Promise}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
  * var contents = 'This is the contents of the file.';
  *
  * file.save(contents, function(err) {
@@ -1802,6 +2022,15 @@ File.prototype.save = function(data, options, callback) {
 };
 
 /**
+ * @typedef {array} SetFileMetadataResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback SetFileMetadataCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Merge the given metadata with the current remote file's metadata. This
  * will set metadata if it was previously unset or update previously set
  * metadata. To unset previously set metadata, set its value to null.
@@ -1812,19 +2041,22 @@ File.prototype.save = function(data, options, callback) {
  *
  * See the examples below for more information.
  *
- * @resource [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
+ * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
  *
- * @param {object} metadata - The metadata you wish to update.
- * @param {object=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {object} [metadata] The metadata you wish to update.
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {SetFileMetadataCallback} [callback] Callback function.
+ * @returns {Promise<SetFileMetadataResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var file = myBucket.file('my-file');
+ *
  * var metadata = {
  *   contentType: 'application/x-font-ttf',
  *   metadata: {
@@ -1865,19 +2097,28 @@ File.prototype.setMetadata = function(metadata, options, callback) {
 };
 
 /**
+ * @typedef {array} SetStorageClassResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback SetStorageClassCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Set the storage class for this file.
  *
- * @resource [Per-Object Storage Class]{@link https://cloud.google.com/storage/docs/per-object-storage-class}
- * @resource [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
+ * @see [Per-Object Storage Class]{@link https://cloud.google.com/storage/docs/per-object-storage-class}
+ * @see [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
  *
- * @param {string} storageClass - The new storage class. (`multi_regional`,
+ * @param {string} storageClass The new storage class. (`multi_regional`,
  *     `regional`, `nearline`, `coldline`)
- * @param {object=} options - Configuration object.
- * @param {boolean} options.userProject - If this bucket has `requesterPays`
- *     functionality enabled (see {module:storage/bucket#enableRequesterPays}),
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
  *     set this value to the project which should be billed for this operation.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
+ * @param {SetStorageClassCallback} [callback] Callback function.
+ * @returns {Promise<SetStorageClassResponse>}
  *
  * @example
  * file.setStorageClass('regional', function(err, apiResponse) {
@@ -1926,7 +2167,7 @@ File.prototype.setStorageClass = function(storageClass, options, callback) {
 /**
  * This creates a gcs-resumable-upload upload stream.
  *
- * @resource [gcs-resumable-upload]{@link https://github.com/stephenplusplus/gcs-resumable-upload}
+ * @see [gcs-resumable-upload]{@link https://github.com/stephenplusplus/gcs-resumable-upload}
  *
  * @param {Duplexify} stream - Duplexify stream of data to pipe to the file.
  * @param {object=} options - Configuration object.
@@ -1936,9 +2177,12 @@ File.prototype.setStorageClass = function(storageClass, options, callback) {
 File.prototype.startResumableUpload_ = function(dup, options) {
   var self = this;
 
-  options = extend({
-    metadata: {}
-  }, options);
+  options = extend(
+    {
+      metadata: {},
+    },
+    options
+  );
 
   var uploadStream = resumableUpload({
     authClient: this.storage.authClient,
@@ -1952,7 +2196,7 @@ File.prototype.startResumableUpload_ = function(dup, options) {
     private: options.private,
     public: options.public,
     uri: options.uri,
-    userProject: options.userProject
+    userProject: options.userProject,
   });
 
   uploadStream
@@ -1982,18 +2226,21 @@ File.prototype.startResumableUpload_ = function(dup, options) {
 File.prototype.startSimpleUpload_ = function(dup, options) {
   var self = this;
 
-  options = extend({
-    metadata: {}
-  }, options);
+  options = extend(
+    {
+      metadata: {},
+    },
+    options
+  );
 
   var reqOpts = {
     qs: {
-      name: self.name
+      name: self.name,
     },
     uri: format('{uploadBaseUrl}/{bucket}/o', {
       uploadBaseUrl: STORAGE_UPLOAD_BASE_URL,
-      bucket: self.bucket.name
-    })
+      bucket: self.bucket.name,
+    }),
   };
 
   if (is.defined(this.generation)) {
@@ -2026,7 +2273,7 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
       });
     },
     metadata: options.metadata,
-    request: reqOpts
+    request: reqOpts,
   });
 };
 
@@ -2036,7 +2283,12 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(File, {
-  exclude: ['setEncryptionKey']
+  exclude: ['setEncryptionKey'],
 });
 
+/**
+ * Reference to the {@link File} class.
+ * @name module:@google-cloud/storage.File
+ * @see File
+ */
 module.exports = File;

@@ -28,7 +28,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Acl') {
       promisified = true;
     }
-  }
+  },
 });
 
 var Storage = require('../');
@@ -46,13 +46,13 @@ describe('storage/acl', function() {
   before(function() {
     Acl = proxyquire('../src/acl.js', {
       '@google-cloud/common': {
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
   beforeEach(function() {
-    acl = new Acl({ request: MAKE_REQ, pathPrefix: PATH_PREFIX });
+    acl = new Acl({request: MAKE_REQ, pathPrefix: PATH_PREFIX});
   });
 
   describe('initialization', function() {
@@ -71,18 +71,18 @@ describe('storage/acl', function() {
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.json, { entity: ENTITY, role: ROLE });
+        assert.deepEqual(reqOpts.json, {entity: ENTITY, role: ROLE});
         done();
       };
 
-      acl.add({ entity: ENTITY, role: ROLE }, assert.ifError);
+      acl.add({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
     it('should set the generation', function(done) {
       var options = {
         entity: ENTITY,
         role: ROLE,
-        generation: 8
+        generation: 8,
       };
 
       acl.request = function(reqOpts) {
@@ -94,8 +94,8 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with an ACL object', function(done) {
-      var apiResponse = { entity: ENTITY, role: ROLE };
-      var expectedAclObject = { entity: ENTITY, role: ROLE };
+      var apiResponse = {entity: ENTITY, role: ROLE};
+      var expectedAclObject = {entity: ENTITY, role: ROLE};
 
       acl.makeAclObject_ = function(obj) {
         assert.deepEqual(obj, apiResponse);
@@ -106,7 +106,7 @@ describe('storage/acl', function() {
         callback(null, apiResponse);
       };
 
-      acl.add({ entity: ENTITY, role: ROLE }, function(err, aclObject) {
+      acl.add({entity: ENTITY, role: ROLE}, function(err, aclObject) {
         assert.ifError(err);
         assert.deepEqual(aclObject, expectedAclObject);
         done();
@@ -118,20 +118,20 @@ describe('storage/acl', function() {
         callback(ERROR);
       };
 
-      acl.add({ entity: ENTITY, role: ROLE }, function(err) {
+      acl.add({entity: ENTITY, role: ROLE}, function(err) {
         assert.deepEqual(err, ERROR);
         done();
       });
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = { success: true };
+      var resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
-      acl.add({ entity: ENTITY, role: ROLE }, function(err, acls, apiResponse) {
+      acl.add({entity: ENTITY, role: ROLE}, function(err, acls, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
       });
@@ -147,13 +147,13 @@ describe('storage/acl', function() {
         done();
       };
 
-      acl.delete({ entity: ENTITY }, assert.ifError);
+      acl.delete({entity: ENTITY}, assert.ifError);
     });
 
     it('should set the generation', function(done) {
       var options = {
         entity: ENTITY,
-        generation: 8
+        generation: 8,
       };
 
       acl.request = function(reqOpts) {
@@ -169,20 +169,20 @@ describe('storage/acl', function() {
         callback(ERROR);
       };
 
-      acl.delete({ entity: ENTITY }, function(err) {
+      acl.delete({entity: ENTITY}, function(err) {
         assert.deepEqual(err, ERROR);
         done();
       });
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = { success: true };
+      var resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
-      acl.delete({ entity: ENTITY }, function(err, apiResponse) {
+      acl.delete({entity: ENTITY}, function(err, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
       });
@@ -210,22 +210,22 @@ describe('storage/acl', function() {
           done();
         };
 
-        acl.get({ generation: generation }, assert.ifError);
+        acl.get({generation: generation}, assert.ifError);
       });
 
       it('should pass an array of acl objects to the callback', function(done) {
         var apiResponse = {
           items: [
-            { entity: ENTITY, role: ROLE },
-            { entity: ENTITY, role: ROLE },
-            { entity: ENTITY, role: ROLE }
-          ]
+            {entity: ENTITY, role: ROLE},
+            {entity: ENTITY, role: ROLE},
+            {entity: ENTITY, role: ROLE},
+          ],
         };
 
         var expectedAclObjects = [
-          { entity: ENTITY, role: ROLE },
-          { entity: ENTITY, role: ROLE },
-          { entity: ENTITY, role: ROLE }
+          {entity: ENTITY, role: ROLE},
+          {entity: ENTITY, role: ROLE},
+          {entity: ENTITY, role: ROLE},
         ];
 
         acl.makeAclObject_ = function(obj, index) {
@@ -252,7 +252,7 @@ describe('storage/acl', function() {
           done();
         };
 
-        acl.get({ entity: ENTITY }, assert.ifError);
+        acl.get({entity: ENTITY}, assert.ifError);
       });
 
       it('should accept a configuration object', function(done) {
@@ -264,12 +264,12 @@ describe('storage/acl', function() {
           done();
         };
 
-        acl.get({ entity: ENTITY, generation: generation }, assert.ifError);
+        acl.get({entity: ENTITY, generation: generation}, assert.ifError);
       });
 
       it('should pass an acl object to the callback', function(done) {
-        var apiResponse = { entity: ENTITY, role: ROLE };
-        var expectedAclObject = { entity: ENTITY, role: ROLE };
+        var apiResponse = {entity: ENTITY, role: ROLE};
+        var expectedAclObject = {entity: ENTITY, role: ROLE};
 
         acl.makeAclObject_ = function() {
           return expectedAclObject;
@@ -279,7 +279,7 @@ describe('storage/acl', function() {
           callback(null, apiResponse);
         };
 
-        acl.get({ entity: ENTITY }, function(err, aclObject) {
+        acl.get({entity: ENTITY}, function(err, aclObject) {
           assert.ifError(err);
           assert.deepEqual(aclObject, expectedAclObject);
           done();
@@ -299,7 +299,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = { success: true };
+      var resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
@@ -317,19 +317,19 @@ describe('storage/acl', function() {
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
-        assert.deepEqual(reqOpts.json, { role: ROLE });
+        assert.deepEqual(reqOpts.json, {role: ROLE});
 
         done();
       };
 
-      acl.update({ entity: ENTITY, role: ROLE }, assert.ifError);
+      acl.update({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
     it('should set the generation', function(done) {
       var options = {
         entity: ENTITY,
         role: ROLE,
-        generation: 8
+        generation: 8,
       };
 
       acl.request = function(reqOpts) {
@@ -341,8 +341,8 @@ describe('storage/acl', function() {
     });
 
     it('should pass an acl object to the callback', function(done) {
-      var apiResponse = { entity: ENTITY, role: ROLE };
-      var expectedAclObject = { entity: ENTITY, role: ROLE };
+      var apiResponse = {entity: ENTITY, role: ROLE};
+      var expectedAclObject = {entity: ENTITY, role: ROLE};
 
       acl.makeAclObject_ = function() {
         return expectedAclObject;
@@ -352,7 +352,7 @@ describe('storage/acl', function() {
         callback(null, apiResponse);
       };
 
-      acl.update({ entity: ENTITY, role: ROLE }, function(err, aclObject) {
+      acl.update({entity: ENTITY, role: ROLE}, function(err, aclObject) {
         assert.ifError(err);
         assert.deepEqual(aclObject, expectedAclObject);
         done();
@@ -364,20 +364,20 @@ describe('storage/acl', function() {
         callback(ERROR);
       };
 
-      acl.update({ entity: ENTITY, role: ROLE }, function(err) {
+      acl.update({entity: ENTITY, role: ROLE}, function(err) {
         assert.deepEqual(err, ERROR);
         done();
       });
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = { success: true };
+      var resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
-      var config = { entity: ENTITY, role: ROLE };
+      var config = {entity: ENTITY, role: ROLE};
       acl.update(config, function(err, acls, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
@@ -389,7 +389,7 @@ describe('storage/acl', function() {
     it('should return an ACL object from an API response', function() {
       var projectTeam = {
         projectNumber: '283748374',
-        team: 'awesome'
+        team: 'awesome',
       };
 
       var apiResponse = {
@@ -397,13 +397,13 @@ describe('storage/acl', function() {
         role: ROLE,
         projectTeam: projectTeam,
         extra: 'ignored',
-        things: true
+        things: true,
       };
 
       assert.deepEqual(acl.makeAclObject_(apiResponse), {
         entity: ENTITY,
         role: ROLE,
-        projectTeam: projectTeam
+        projectTeam: projectTeam,
       });
     });
   });
@@ -413,7 +413,7 @@ describe('storage/acl', function() {
       var uri = '/uri';
 
       var reqOpts = {
-        uri: uri
+        uri: uri,
       };
 
       acl.request_ = function(reqOpts_, callback) {
@@ -453,7 +453,7 @@ describe('storage/AclRoleAccessorMethods', function() {
         'deleteProject',
 
         'addUser',
-        'deleteUser'
+        'deleteUser',
       ];
 
       var actualOwnersApi = Object.keys(aclEntity.owners);
@@ -475,7 +475,7 @@ describe('storage/AclRoleAccessorMethods', function() {
       aclEntity.add = function(options, callback) {
         assert.deepEqual(options, {
           entity: 'user-' + userName,
-          role: role
+          role: role,
         });
 
         callback();
@@ -484,7 +484,7 @@ describe('storage/AclRoleAccessorMethods', function() {
       aclEntity.delete = function(options, callback) {
         assert.deepEqual(options, {
           entity: 'allUsers',
-          role: role
+          role: role,
         });
 
         callback();
@@ -492,15 +492,18 @@ describe('storage/AclRoleAccessorMethods', function() {
 
       aclEntity._assignAccessMethods(role);
 
-      async.parallel([
-        function(next) {
-          // The method name should be in plural form. (fakeroles vs fakerole)
-          aclEntity.fakeroles.addUser(userName, next);
-        },
-        function(next) {
-          aclEntity.fakeroles.deleteAllUsers(next);
-        }
-      ], done);
+      async.parallel(
+        [
+          function(next) {
+            // The method name should be in plural form. (fakeroles vs fakerole)
+            aclEntity.fakeroles.addUser(userName, next);
+          },
+          function(next) {
+            aclEntity.fakeroles.deleteAllUsers(next);
+          },
+        ],
+        done
+      );
     });
 
     it('should return the parent methods return value', function() {

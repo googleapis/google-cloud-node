@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-/*!
- * @module storage/channel
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documenation
- *
- * @param {module:storage} storage - The Storage instance.
- */
 /**
  * Create a channel object to interact with a Cloud Storage channel.
  *
- * @resource [Object Change Notification]{@link https://cloud.google.com/storage/docs/object-change-notification}
+ * @see [Object Change Notification]{@link https://cloud.google.com/storage/docs/object-change-notification}
  *
- * @constructor
- * @alias module:storage/bucket
+ * @class
  *
- * @param {string} id - The ID of the channel.
- * @param {string} resourceId - The resource ID of the channel.
+ * @param {string} id The ID of the channel.
+ * @param {string} resourceId The resource ID of the channel.
  *
  * @example
- * var channel = gcs.channel('id', 'resource-id');
+ * var storage = require('@google-cloud/storage')();
+ * var channel = storage.channel('id', 'resource-id');
  */
 function Channel(storage, id, resourceId) {
   var config = {
@@ -52,7 +44,7 @@ function Channel(storage, id, resourceId) {
 
     methods: {
       // Only need `request`.
-    }
+    },
   };
 
   common.ServiceObject.call(this, config);
@@ -64,13 +56,23 @@ function Channel(storage, id, resourceId) {
 util.inherits(Channel, common.ServiceObject);
 
 /**
+ * @typedef {array} StopResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback StopCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Stop this channel.
  *
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {StopCallback} [callback] Callback function.
+ * @returns {Promise<StopResponse>}
  *
  * @example
+ * var storage = require('@google-cloud/storage')();
+ * var channel = storage.channel('id', 'resource-id');
  * channel.stop(function(err, apiResponse) {
  *   if (!err) {
  *     // Channel stopped successfully.
@@ -87,13 +89,16 @@ util.inherits(Channel, common.ServiceObject);
 Channel.prototype.stop = function(callback) {
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'POST',
-    uri: '/stop',
-    json: this.metadata
-  }, function(err, apiResponse) {
-    callback(err, apiResponse);
-  });
+  this.request(
+    {
+      method: 'POST',
+      uri: '/stop',
+      json: this.metadata,
+    },
+    function(err, apiResponse) {
+      callback(err, apiResponse);
+    }
+  );
 };
 
 /*! Developer Documentation
@@ -103,4 +108,9 @@ Channel.prototype.stop = function(callback) {
  */
 common.util.promisifyAll(Channel);
 
+/**
+ * Reference to the {@link Channel} class.
+ * @name module:@google-cloud/storage.Channel
+ * @see Channel
+ */
 module.exports = Channel;

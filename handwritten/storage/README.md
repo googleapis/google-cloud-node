@@ -1,112 +1,130 @@
-# @google-cloud/storage ([GA][versioning])
-> Cloud Storage Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just Storage? You might want to check out [`google-cloud`][google-cloud].*
+# Google Cloud Storage: Node.js Client
 
-- [API Documentation][gcloud-storage-docs]
-- [Official Documentation][cloud-storage-docs]
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-storage.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-storage)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-storage?svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-storage)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-storage/repo-migration.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-storage)
 
+> Node.js idiomatic client for [Cloud Storage][product-docs].
 
-```sh
-$ npm install --save @google-cloud/storage
-```
-```js
-var fs = require('fs');
+[Cloud Storage](https://cloud.google.com/storage/docs) allows world-wide storage and retrieval of any amount of data at any time. You can use Google Cloud Storage for a range of scenarios including serving website content, storing data for archival and disaster recovery, or distributing large data objects to users via direct download.
 
-var gcs = require('@google-cloud/storage')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+* [Cloud Storage Node.js Client API Reference][client-docs]
+* [Cloud Storage Documentation][product-docs]
 
-// Create a new bucket.
-gcs.createBucket('my-new-bucket', function(err, bucket) {
-  if (!err) {
-    // "my-new-bucket" was successfully created.
-  }
-});
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-// Reference an existing bucket.
-var bucket = gcs.bucket('my-existing-bucket');
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-// Upload a local file to a new file to be created in your bucket.
-bucket.upload('/photos/zoo/zebra.jpg', function(err, file) {
-  if (!err) {
-    // "zebra.jpg" is now in your bucket.
-  }
-});
+**Table of contents:**
 
-// Download a file from your bucket.
-bucket.file('giraffe.jpg').download({
-  destination: '/photos/zoo/giraffe.jpg'
-}, function(err) {});
+* [QuickStart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
-// Streams are also supported for reading and writing files.
-var remoteReadStream = bucket.file('giraffe.jpg').createReadStream();
-var localWriteStream = fs.createWriteStream('/photos/zoo/giraffe.jpg');
-remoteReadStream.pipe(localWriteStream);
+## Quickstart
 
-var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
-var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
-localReadStream.pipe(remoteWriteStream);
+### Before you begin
 
-// Promises are also supported by omitting callbacks.
-bucket.upload('/photos/zoo/zebra.jpg').then(function(data) {
-  var file = data[0];
-});
+1.  Select or create a Cloud Platform project.
 
-// It's also possible to integrate with third-party Promise libraries.
-var gcs = require('@google-cloud/storage')({
-  promise: require('bluebird')
-});
-```
+    [Go to the projects page][projects]
 
+1.  Enable billing for your project.
 
-## Authentication
+    [Enable billing][billing]
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+1.  Enable the Google Cloud Storage API.
 
-### On Google Cloud Platform
+    [Enable the API][enable_api]
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
-``` js
-var gcs = require('@google-cloud/storage')();
-// ...you're good to go!
-```
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=storage-api.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
 
-### Elsewhere
+### Installing the client library
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+    npm install --save @google-cloud/storage
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Storage
-  * Google Cloud Storage JSON API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+### Using the client library
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+```javascript
+// Imports the Google Cloud client library
+const Storage = require('@google-cloud/storage');
 
-var gcs = require('@google-cloud/storage')({
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const storage = Storage({
   projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
 });
 
-// ...you're good to go!
+// The name for the new bucket
+const bucketName = 'my-new-bucket';
+
+// Creates the new bucket
+storage
+  .createBucket(bucketName)
+  .then(() => {
+    console.log(`Bucket ${bucketName} created.`);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
 ```
 
+## Samples
 
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
-[cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
+Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Documentation                      | Source Code                       |
+| --------------------------- | ---------------------------------- | --------------------------------- |
+| ACL (Access Control Lists) | [documentation](https://cloud.google.com/storage/docs/access-control/create-manage-lists) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/acl.js) |
+| Buckets | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/buckets.js) |
+| Encryption | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/encryption.js) |
+| Files | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/files.js) |
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
+
+Please note that the auto-generated portions of the **GA** libraries (the ones
+in modules such as `v1` or `v2`) are considered to be of **Beta** quality, even
+if the libraries that wrap them are **GA**.
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/storage/latest/
+[product-docs]: https://cloud.google.com/storage/docs

@@ -1,0 +1,37 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "storage",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/storage/latest/",
+  "release_quality": "ga",
+  "samples": [
+    {
+      "id": "acl",
+      "name": "ACL (Access Control Lists)",
+      "file": "acl.js",
+      "docs_link": "https://cloud.google.com/storage/docs/access-control/create-manage-lists",
+      "usage": "node acl.js --help"
+    },
+    {
+      "id": "buckets",
+      "name": "Buckets",
+      "file": "buckets.js",
+      "docs_link": "https://cloud.google.com/storage/docs",
+      "usage": "node buckets.js --help"
+    },
+    {
+      "id": "encryption",
+      "name": "Encryption",
+      "file": "encryption.js",
+      "docs_link": "https://cloud.google.com/storage/docs",
+      "usage": "node encryption.js --help"
+    },
+    {
+      "id": "files",
+      "name": "Files",
+      "file": "files.js",
+      "docs_link": "https://cloud.google.com/storage/docs",
+      "usage": "node files.js --help"
+    }
+  ]
+}

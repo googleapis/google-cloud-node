@@ -33,7 +33,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Channel') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -55,8 +55,8 @@ describe('Channel', function() {
     Channel = proxyquire('../src/channel.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -83,7 +83,7 @@ describe('Channel', function() {
     it('should set the default metadata', function() {
       assert.deepEqual(channel.metadata, {
         id: ID,
-        resourceId: RESOURCE_ID
+        resourceId: RESOURCE_ID,
       });
     });
   });

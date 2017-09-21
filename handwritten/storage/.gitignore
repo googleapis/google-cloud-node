@@ -1,0 +1,13 @@
+**/*.log
+**/node_modules
+.coverage
+.nyc_output
+docs/
+packages/google-cloud/README.md
+packages/*/AUTHORS
+packages/*/CONTRIBUTORS
+packages/*/COPYING
+system-test/secrets.js
+system-test/*key.json
+*.lock
+*-lock.json
