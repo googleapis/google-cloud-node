@@ -18,7 +18,7 @@
  * @module video-intelligence
  * @name VideoIntelligence
  */
- 
+
 'use strict';
 
 var extend = require('extend');
