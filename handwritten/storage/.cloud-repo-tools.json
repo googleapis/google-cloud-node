@@ -32,6 +32,13 @@
       "file": "files.js",
       "docs_link": "https://cloud.google.com/storage/docs",
       "usage": "node files.js --help"
+    },
+    {
+      "id": "requesterPays",
+      "name": "Requester Pays",
+      "file": "requesterPays.js",
+      "docs_link": "https://cloud.google.com/storage/docs",
+      "usage": "node requesterPays.js --help"
     }
   ]
 }

@@ -96,7 +96,7 @@
     "uuid": "^3.1.0"
   },
   "scripts": {
-    "docs": "node_modules/.bin/jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c .jsdoc.js",
     "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
     "prettier": "prettier --write src/**/*.js samples/*.js samples/**/*.js system-test/**/*.js test/**/*.js",
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js --no-timeouts && nyc report",

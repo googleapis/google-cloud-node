@@ -14,6 +14,7 @@
   * [Buckets](#buckets)
   * [Encryption](#encryption)
   * [Files](#files)
+  * [Requester Pays](#requester-pays)
 
 ## Before you begin
 
@@ -43,7 +44,8 @@ Commands:
   remove-file-owner <bucketName> <fileName> <userEmail>        Removes a user from the ACL of a file.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node acl.js print-bucket-acl my-bucket
@@ -76,7 +78,8 @@ Commands:
   delete <bucket>  Deletes a bucket.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node buckets.js create my-bucket  Creates a new bucket named "my-bucket".
@@ -103,7 +106,8 @@ Commands:
   rotate <bucketName> <fileName> <oldkey> <newKey>          Rotates encryption keys for a file.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node encryption.js generate-encryption-key                    Generate a sample encryption key.
@@ -142,7 +146,8 @@ Commands:
   <destFileName>
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node files.js list my-bucket                                  Lists files in "my-bucket".
@@ -162,3 +167,37 @@ For more information, see https://cloud.google.com/storage/docs
 
 [files_3_docs]: https://cloud.google.com/storage/docs
 [files_3_code]: files.js
+
+### Requester Pays
+
+View the [documentation][requesterPays_4_docs] or the [source code][requesterPays_4_code].
+
+__Usage:__ `node requesterPays.js --help`
+
+```
+Commands:
+  enable <bucket>                                     Enables requester-pays requests on a bucket.
+  disable <bucket>                                    Disables requester-pays requests on a bucket.
+  get-status <bucket>                                 Determines whether requester-pays requests are enabled on a
+                                                      bucket.
+  download <bucketName> <srcFileName> <destFileName>  Downloads a file from a bucket using requester-pays requests.
+
+Options:
+  --help     Show help                                                                                         [boolean]
+  --version  Show version number                                                                               [boolean]
+
+Examples:
+  node requesterPays.js enable my-bucket                        Enables requester-pays requests on a bucket named
+                                                                "my-bucket".
+  node requesterPays.js disable my-bucket                       Disables requester-pays requests on a bucket named
+                                                                "my-bucket".
+  node requesterPays.js get-status my-bucket                    Determines whether requester-pays requests are enabled
+                                                                for a bucket named "my-bucket".
+  node requesterPays.js download my-bucket file.txt ./file.txt  Downloads "gs://my-bucket/file.txt" to "./file.txt"
+                                                                using requester-pays requests.
+
+For more information, see https://cloud.google.com/storage/docs
+```
+
+[requesterPays_4_docs]: https://cloud.google.com/storage/docs
+[requesterPays_4_code]: requesterPays.js

@@ -22,7 +22,7 @@ const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
-const bucketName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
 test.before(tools.stubConsole);

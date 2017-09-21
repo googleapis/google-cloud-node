@@ -22,7 +22,7 @@ const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
 const cwd = path.join(__dirname, `..`);
-const bucketName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const userEmail = `jdobry@google.com`;
 const fileName = `test.txt`;

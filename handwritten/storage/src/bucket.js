@@ -754,6 +754,10 @@ Bucket.prototype.deleteLabels = function(labels, callback) {
  * bucket.disableRequesterPays().then(function(data) {
  *   var apiResponse = data[0];
  * });
+ *
+ * @example <caption>include:samples/requesterPays.js</caption>
+ * region_tag:storage_disable_requester_pays
+ * Example of disabling requester pays:
  */
 Bucket.prototype.disableRequesterPays = function(callback) {
   this.setMetadata(
@@ -806,6 +810,10 @@ Bucket.prototype.disableRequesterPays = function(callback) {
  * bucket.enableRequesterPays().then(function(data) {
  *   var apiResponse = data[0];
  * });
+ *
+ * @example <caption>include:samples/requesterPays.js</caption>
+ * region_tag:storage_enable_requester_pays
+ * Example of enabling requester pays:
  */
 Bucket.prototype.enableRequesterPays = function(callback) {
   this.setMetadata(
@@ -1265,6 +1273,10 @@ Bucket.prototype.getLabels = function(options, callback) {
  *   var metadata = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/requesterPays.js</caption>
+ * region_tag:storage_get_requester_pays_status
+ * Example of retrieving the requester pays status of a bucket:
  */
 Bucket.prototype.getMetadata = function(options, callback) {
   var self = this;

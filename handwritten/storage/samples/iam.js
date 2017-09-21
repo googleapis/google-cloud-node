@@ -16,14 +16,14 @@
 'use strict';
 
 function viewBucketIamMembers(bucketName) {
-  // [START view_bucket_iam_members]
+  // [START storage_view_bucket_iam_members]
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
   // The name of the bucket to access, e.g. "my-bucket"
   // const bucketName = "my-bucket";
 
-  // Instantiates a client
+  // Creates a client
   const storage = Storage();
 
   // Gets and displays the bucket's IAM policy
@@ -48,11 +48,11 @@ function viewBucketIamMembers(bucketName) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END view_bucket_iam_members]
+  // [END storage_view_bucket_iam_members]
 }
 
 function addBucketIamMember(bucketName, roleName, members) {
-  // [START add_bucket_iam_member]
+  // [START storage_add_bucket_iam_member]
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
@@ -65,7 +65,7 @@ function addBucketIamMember(bucketName, roleName, members) {
   // The list of IAM members to grant the role to, e.g. ['user:jdoe@example.com', 'group:admins@example.com']
   // const members = ['user:jdoe@example.com', 'group:admins@example.com'];
 
-  // Instantiates a client
+  // Creates a client
   const storage = Storage();
 
   // Get a reference to a Google Cloud Storage bucket
@@ -97,11 +97,11 @@ function addBucketIamMember(bucketName, roleName, members) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END add_bucket_iam_member]
+  // [END storage_add_bucket_iam_member]
 }
 
 function removeBucketIamMember(bucketName, roleName, members) {
-  // [START remove_bucket_iam_member]
+  // [START storage_remove_bucket_iam_member]
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
@@ -114,7 +114,7 @@ function removeBucketIamMember(bucketName, roleName, members) {
   // The list of IAM members to grant the role to, e.g. ['user:jdoe@example.com', 'group:admins@example.com']
   // const members = ['user:jdoe@example.com', 'group:admins@example.com'];
 
-  // Instantiates a client
+  // Creates a client
   const storage = Storage();
 
   // Get a reference to a Google Cloud Storage bucket
@@ -159,10 +159,10 @@ function removeBucketIamMember(bucketName, roleName, members) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END remove_bucket_iam_member]
+  // [END storage_remove_bucket_iam_member]
 }
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .array('members')
   .command(
@@ -195,9 +195,4 @@ const cli = require(`yargs`)
   .epilogue(
     `For more information, see https://cloud.google.com/iam/docs/overview and https://cloud.google.com/storage/docs`
   )
-  .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict().argv;

@@ -97,6 +97,7 @@ has instructions for running the samples.
 | Buckets | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/buckets.js) |
 | Encryption | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/encryption.js) |
 | Files | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/files.js) |
+| Requester Pays | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/requesterPays.js) |
 
 ## Versioning
 
