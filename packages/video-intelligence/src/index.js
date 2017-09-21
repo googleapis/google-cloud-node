@@ -21,7 +21,6 @@ var gapic = {
   v1beta2: require('./v1beta2'),
 };
 var gaxGrpc = require('google-gax').grpc();
-var googleProtoFiles = require('google-proto-files');
 var path = require('path');
 
 const VERSION = require('../package.json').version;
