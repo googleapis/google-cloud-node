@@ -787,6 +787,8 @@ Database.prototype.runStream = function(query, options) {
  * atomically at a single logical point in time across columns, rows, and tables
  * in a database.
  *
+ * Note that Cloud Spanner does not support nested transactions.
+ *
  * The callback you provide to this function will become the "run function". It
  * will be executed with either an error or a {module:spanner/transaction}
  * object. The Transaction object will let you run queries and queue mutations
@@ -888,11 +890,6 @@ Database.prototype.runTransaction = function(options, runFn) {
   }
 
   options = extend({}, options);
-
-  this.debug([
-    'Stating a transaction. Note that nested transactions are not currently',
-    'supported in Cloud Spanner.'
-  ].join(' '));
 
   this.getTransaction(options, function(err, transaction) {
     if (err) {
