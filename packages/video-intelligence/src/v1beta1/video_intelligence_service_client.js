@@ -30,7 +30,6 @@
 var configData = require('./video_intelligence_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
-var googleProtoFiles = require('google-proto-files');
 var path = require('path');
 var protobuf = require('protobufjs');
 
