@@ -77,6 +77,12 @@ describe('VideoIntelligenceServiceClient', function() {
         done();
       });
     });
+
+    it('ensures longrunning descriptors are set', function() {
+      var client = videointelligence.v1beta1();
+      assert(client.longrunningDescriptors.annotateVideo.responseDecoder instanceof Function);
+      assert(client.longrunningDescriptors.annotateVideo.metadataDecoder instanceof Function);
+    });
   });
 
 });

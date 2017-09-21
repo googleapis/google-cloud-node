@@ -31,6 +31,7 @@ var configData = require('./video_intelligence_service_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
 var path = require('path');
+var protobuf = require('protobufjs');
 
 var SERVICE_ADDRESS = 'videointelligence.googleapis.com';
 
@@ -76,11 +77,23 @@ function VideoIntelligenceServiceClient(gaxGrpc, loadedProtos, opts) {
     grpc: gaxGrpc.grpc
   }).operationsClient(opts);
 
+  var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+  protoFilesRoot = protobuf.loadSync(
+    path.join(__dirname, '..', '..', 'protos',
+      'google/cloud/videointelligence/v1beta1/video_intelligence.proto'),
+    protoFilesRoot
+  );
+
+  var annotateVideoResponse = protoFilesRoot.lookup(
+    'google.cloud.videointelligence.v1beta1.AnnotateVideoResponse');
+  var annotateVideoMetadata = protoFilesRoot.lookup(
+    'google.cloud.videointelligence.v1beta1.AnnotateVideoResponse');
+
   this.longrunningDescriptors = {
     annotateVideo: new gax.LongrunningDescriptor(
       this.operationsClient,
-      loadedProtos.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.decode,
-      loadedProtos.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.decode)
+      annotateVideoResponse.decode.bind(annotateVideoResponse),
+      annotateVideoMetadata.decode.bind(annotateVideoMetadata))
   };
 
   var defaults = gaxGrpc.constructSettings(
