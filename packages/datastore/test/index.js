@@ -27,13 +27,25 @@ var fakeEntity = {
   Int: function(value) {
     this.value = value;
   },
+  isDsInt: function() {
+    this.calledWith_ = arguments;
+  },
   Double: function(value) {
     this.value = value;
+  },
+  isDsDouble: function() {
+    this.calledWith_ = arguments;
   },
   GeoPoint: function(value) {
     this.value = value;
   },
+  isDsGeoPoint: function() {
+    this.calledWith_ = arguments;
+  },
   Key: function() {
+    this.calledWith_ = arguments;
+  },
+  isDsKey: function() {
     this.calledWith_ = arguments;
   }
 };
@@ -194,6 +206,18 @@ describe('Datastore', function() {
     });
   });
 
+  describe('isDouble', function() {
+    it('should expose Double identifier', function() {
+      var something = {};
+      Datastore.isDouble(something);
+      assert.strictEqual(fakeEntity.calledWith_[0], something);
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.isDouble, Datastore.isDouble);
+    });
+  });
+
   describe('geoPoint', function() {
     it('should expose GeoPoint builder', function() {
       var aGeoPoint = { latitude: 24, longitude: 88 };
@@ -206,6 +230,18 @@ describe('Datastore', function() {
     });
   });
 
+  describe('isGeoPoint', function() {
+    it('should expose GeoPoint identifier', function() {
+      var something = {};
+      Datastore.isGeoPoint(something);
+      assert.strictEqual(fakeEntity.calledWith_[0], something);
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.isGeoPoint, Datastore.isGeoPoint);
+    });
+  });
+
   describe('int', function() {
     it('should expose Int builder', function() {
       var anInt = 7;
@@ -215,6 +251,18 @@ describe('Datastore', function() {
 
     it('should also be on the prototype', function() {
       assert.strictEqual(datastore.int, Datastore.int);
+    });
+  });
+
+  describe('isInt', function() {
+    it('should expose Int identifier', function() {
+      var something = {};
+      Datastore.isInt(something);
+      assert.strictEqual(fakeEntity.calledWith_[0], something);
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.isInt, Datastore.isInt);
     });
   });
 
@@ -315,6 +363,18 @@ describe('Datastore', function() {
 
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
       assert.deepEqual(key.calledWith_[0].path, [options]);
+    });
+  });
+
+  describe('isKey', function() {
+    it('should expose Key identifier', function() {
+      var something = {};
+      datastore.isKey(something);
+      assert.strictEqual(fakeEntity.calledWith_[0], something);
+    });
+
+    it('should also be on the namespace', function() {
+      assert.strictEqual(datastore.isKey, Datastore.isKey);
     });
   });
 
