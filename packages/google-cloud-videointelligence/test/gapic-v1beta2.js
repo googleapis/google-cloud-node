@@ -28,12 +28,7 @@ describe('VideoIntelligenceServiceClient', function() {
       var client = videoIntelligence.v1beta2();
 
       // Mock request
-      var inputUri = 'inputUri1707300727';
-      var features = [];
-      var request = {
-          inputUri : inputUri,
-          features : features
-      };
+      var request = {};
 
       // Mock response
       var expectedResponse = {};
@@ -56,12 +51,7 @@ describe('VideoIntelligenceServiceClient', function() {
       var client = videoIntelligence.v1beta2();
 
       // Mock request
-      var inputUri = 'inputUri1707300727';
-      var features = [];
-      var request = {
-          inputUri : inputUri,
-          features : features
-      };
+      var request = {};
 
       // Mock Grpc layer
       client._annotateVideo = mockLongRunningGrpcMethod(request, null, error);
@@ -76,6 +66,12 @@ describe('VideoIntelligenceServiceClient', function() {
         assert.equal(err.code, FAKE_STATUS_CODE);
         done();
       });
+    });
+
+    it('has longrunning decoder functions', function() {
+      var client = videoIntelligence.v1beta2();
+      assert(client.longrunningDescriptors.annotateVideo.responseDecoder instanceof Function);
+      assert(client.longrunningDescriptors.annotateVideo.metadataDecoder instanceof Function);
     });
   });
 
