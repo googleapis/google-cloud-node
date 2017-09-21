@@ -1156,7 +1156,8 @@ describe('storage', function() {
     it('should upload a gzipped file and download it', function(done) {
       var options = {
         metadata: {
-          contentEncoding: 'gzip'
+          contentEncoding: 'gzip',
+          contentType: 'text/html'
         }
       };
 
@@ -1417,9 +1418,14 @@ describe('storage', function() {
     });
 
     it('should allow changing the storage class', function(done) {
+      var bucket = storage.bucket(generateName());
       var file = bucket.file(generateName());
 
       async.series([
+        function(next) {
+          bucket.create(next);
+        },
+
         function(next) {
           bucket.upload(FILES.logo.path, { destination: file }, next);
         },
