@@ -57,7 +57,7 @@
     "create-error-class": "^3.0.2",
     "duplexify": "^3.5.0",
     "extend": "^3.0.0",
-    "gcs-resumable-upload": "^0.8.0",
+    "gcs-resumable-upload": "^0.8.2",
     "hash-stream-validation": "^0.2.1",
     "is": "^3.0.1",
     "mime-types": "^2.0.8",
