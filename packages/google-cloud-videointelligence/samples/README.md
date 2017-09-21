@@ -26,7 +26,7 @@ The [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence) 
 
         yarn install
 
-[prereq]: ../README.md#prerequisities
+[prereq]: ../README.md#prerequisites
 [run]: ../README.md#how-to-run-a-sample
 
 ## Samples
@@ -44,17 +44,17 @@ Commands:
                         Intelligence API.
   labels-gcs <gcsUri>   Labels objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
   labels-file <gcsUri>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
-  safe-search <gcsUri>  Detects adult content in a video stored in Google Cloud Storage.
+  safe-search <gcsUri>  Detects explicit content in a video stored in Google Cloud Storage.
 
 Options:
   --help  Show help                                                                                            [boolean]
 
 Examples:
-  node analyze.js faces gs://demomaker/volleyball_court.mp4
-  node analyze.js shots gs://demomaker/volleyball_court.mp4
-  node analyze.js labels-gcs gs://demomaker/volleyball_court.mp4
-  node analyze.js labels-file cat.mp4
-  node analyze.js safe-search gs://demomaker/volleyball_court.mp4
+  node analyze.js faces gs://demomaker/larry_sergey_ice_bucket_short.mp4
+  node analyze.js shots gs://demomaker/sushi.mp4
+  node analyze.js labels-gcs gs://demomaker/tomatoes.mp4
+  node analyze.js labels-file resources/cat.mp4
+  node analyze.js safe-search gs://demomaker/tomatoes.mp4
 
 For more information, see https://cloud.google.com/video-intelligence/docs
 ```

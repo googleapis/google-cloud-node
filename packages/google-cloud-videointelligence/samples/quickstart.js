@@ -20,17 +20,15 @@
 const Video = require('@google-cloud/video-intelligence');
 
 // Instantiates a client
-const video = Video({
-  projectId: process.env.GCLOUD_PROJECT // Replace with your Google Cloud project ID
-});
+const video = Video();
 
 // The GCS filepath of the video to analyze
-const gcsUri = 'gs://demomaker/tomatoes.mp4';
+const gcsUri = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
 
 // Construct request
 const request = {
   inputUri: gcsUri,
-  features: ['FACE_DETECTION', 'LABEL_DETECTION', 'SHOT_CHANGE_DETECTION']
+  features: ['LABEL_DETECTION']
 };
 
 // Execute request
@@ -44,47 +42,30 @@ video.annotateVideo(request)
     // Gets annotations for video
     const annotations = results[0].annotationResults[0];
 
-    // Gets faces for video from its annotations
-    const faces = annotations.faceAnnotations;
-    faces.forEach((face, faceIdx) => {
-      console.log('Thumbnail size:', face.thumbnail.length);
-      face.segments.forEach((segment, segmentIdx) => {
-        console.log(`Face #${faceIdx}, appearance #${segmentIdx}:`);
-        console.log(`\tStart: ${segment.startTimeOffset / 1e6}s`);
-        console.log(`\tEnd: ${segment.endTimeOffset / 1e6}s`);
-      });
-    });
-
     // Gets labels for video from its annotations
-    const labels = annotations.labelAnnotations;
+    const labels = annotations.segmentLabelAnnotations;
     labels.forEach((label) => {
-      console.log(`Label ${label.description} occurs at:`);
-      const isEntireVideo = label.locations.some((location) =>
-        location.segment.startTimeOffset.toNumber() === -1 &&
-        location.segment.endTimeOffset.toNumber() === -1
-      );
-
-      if (isEntireVideo) {
-        console.log(`\tEntire video`);
-      } else {
-        label.locations.forEach((location) => {
-          console.log(`\tStart: ${location.segment.startTimeOffset / 1e6}s`);
-          console.log(`\tEnd: ${location.segment.endTimeOffset / 1e6}s`);
-        });
-      }
-    });
-
-    // Gets shot changes for video from its annotations
-    const shotChanges = annotations.shotAnnotations;
-    if (shotChanges.length === 1) {
-      console.log(`The entire video is one scene.`);
-    } else {
-      shotChanges.forEach((shot, shotIdx) => {
-        console.log(`Scene ${shotIdx} occurs from:`);
-        console.log(`\tStart: ${shot.startTimeOffset / 1e6}s`);
-        console.log(`\tEnd: ${shot.endTimeOffset / 1e6}s`);
+      console.log(`Label ${label.entity.description} occurs at:`);
+      label.segments.forEach((segment) => {
+        segment = segment.segment;
+        if (segment.startTimeOffset.seconds === undefined) {
+          segment.startTimeOffset.seconds = 0;
+        }
+        if (segment.startTimeOffset.nanos === undefined) {
+          segment.startTimeOffset.nanos = 0;
+        }
+        if (segment.endTimeOffset.seconds === undefined) {
+          segment.endTimeOffset.seconds = 0;
+        }
+        if (segment.endTimeOffset.nanos === undefined) {
+          segment.endTimeOffset.nanos = 0;
+        }
+        console.log(`\tStart: ${segment.startTimeOffset.seconds}` +
+            `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`);
+        console.log(`\tEnd: ${segment.endTimeOffset.seconds}.` +
+            `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`);
       });
-    }
+    });
   })
   .catch((err) => {
     console.error('ERROR:', err);

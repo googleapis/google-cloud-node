@@ -17,15 +17,14 @@
     "test": "samples test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/video-intelligence": "0.1.0",
-    "googleapis": "19.0.0",
+    "@google-cloud/video-intelligence": "^0.3.2",
     "long": "^3.2.0",
-    "safe-buffer": "5.1.0",
+    "safe-buffer": "5.1.1",
     "yargs": "8.0.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.15",
-    "ava": "0.19.1",
+    "@google-cloud/nodejs-repo-tools": "1.4.17",
+    "ava": "0.22.0",
     "proxyquire": "1.8.0"
   },
   "cloud-repo-tools": {
