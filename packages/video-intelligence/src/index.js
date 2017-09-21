@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module video-intelligence
+ * @name VideoIntelligence
+ */
+ 
 'use strict';
 
 var extend = require('extend');
@@ -70,7 +76,8 @@ function videoIntelligenceV1beta1(options) {
 var v1beta1Protos = {};
 
 extend(v1beta1Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'protos'), 'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
+  path.join(__dirname, '..', 'protos'),
+  'google/cloud/videointelligence/v1beta1/video_intelligence.proto')
     .google.cloud.videointelligence.v1beta1);
 
 
@@ -118,7 +125,8 @@ function videoIntelligenceV1beta2(options) {
 var v1beta2Protos = {};
 
 extend(v1beta2Protos, gaxGrpc.loadProto(
-  path.join(__dirname, '..', 'protos'), 'google/cloud/videointelligence/v1beta2/video_intelligence.proto')
+  path.join(__dirname, '..', 'protos'),
+  'google/cloud/videointelligence/v1beta2/video_intelligence.proto')
     .google.cloud.videointelligence.v1beta2);
 
 module.exports = videoIntelligenceV1beta2;
