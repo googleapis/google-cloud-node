@@ -1,7 +1,0 @@
-{
-  "private_key_id": "7",
-  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOgIBAAJBAK8Q+ToR4tWGshaKYRHKJ3ZmMUF6jjwCS/u1A8v1tFbQiVpBlxYB\npaNcT2ENEXBGdmWqr8VwSl0NBIKyq4p0rhsCAQMCQHS1+3wL7I5ZzA8G62Exb6RE\nINZRtCgBh/0jV91OeDnfQUc07SE6vs31J8m7qw/rxeB3E9h6oGi9IVRebVO+9zsC\nIQDWb//KAzrSOo0P0yktnY57UF9Q3Y26rulWI6LqpsxZDwIhAND/cmlg7rUz34Pf\nSmM61lJEmMEjKp8RB/xgghzmCeI1AiEAjvVVMVd8jCcItTdwyRO0UjWU4JOz0cnw\n5BfB8cSIO18CIQCLVPbw60nOIpUClNxCJzmMLbsrbMcUtgVS6wFomVvsIwIhAK+A\nYqT6WwsMW2On5l9di+RPzhDT1QdGyTI5eFNS+GxY\n-----END RSA PRIVATE KEY-----",
-  "client_email": "firstpart@secondpart.com",
-  "client_id": "8",
-  "type": "service_account"
-}
