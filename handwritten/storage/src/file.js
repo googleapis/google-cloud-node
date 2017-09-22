@@ -657,7 +657,7 @@ File.prototype.createReadStream = function(options) {
  * <h4>Note</h4>
  *
  * If you are just looking to perform a resumable upload without worrying about
- * any of the details, see {module:storage/createWriteStream}. Resumable uploads
+ * any of the details, see {@link File#createWriteStream}. Resumable uploads
  * are performed by default.
  *
  * @see [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
@@ -823,7 +823,7 @@ File.prototype.createResumableUpload = function(options, callback) {
  * // <h4>Uploading a File</h4>
  * //
  * // Now, consider a case where we want to upload a file to your bucket. You
- * // have the option of using {module:storage/bucket#upload}, but that is just
+ * // have the option of using {@link Bucket#upload}, but that is just
  * // a convenience method which will do the following.
  * //-
  * fs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')
@@ -853,7 +853,7 @@ File.prototype.createResumableUpload = function(options, callback) {
  * //
  * // One last case you may run into is when you want to upload a file to your
  * // bucket and set its metadata at the same time. Like above, you can use
- * // {module:storage/bucket#upload} to do this, which is just a wrapper around
+ * // {@link Bucket#upload} to do this, which is just a wrapper around
  * // the following.
  * //-
  * fs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')
@@ -1852,8 +1852,8 @@ File.prototype.makePublic = function(callback) {
  *
  * **Warning**:
  * There is currently no atomic `move` method in the Cloud Storage API,
- * so this method is a composition of {module:storage/file#copy} (to the new
- * location) and {module:storage/file#delete} (from the old location). While
+ * so this method is a composition of {@link File#copy} (to the new
+ * location) and {@link File#delete} (from the old location). While
  * unlikely, it is possible that an error returned to your callback could be
  * triggered from either one of these API calls failing, which could leave a
  * duplicate file lingering.

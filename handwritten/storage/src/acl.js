@@ -331,7 +331,7 @@ Acl.prototype.add = function(options, callback) {
  * @param {object} apiResponse The full API response.
  */
 /**
- * Delete access controls on a {module:storage/bucket} or {module:storage/file}.
+ * Delete access controls on a {@link Bucket} or {@link File}.
  *
  * @see [BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}
  * @see [ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}
@@ -532,7 +532,7 @@ Acl.prototype.get = function(options, callback) {
  * @param {object} apiResponse The full API response.
  */
 /**
- * Update access controls on a {module:storage/bucket} or {module:storage/file}.
+ * Update access controls on a {@link Bucket} or {@link File}.
  *
  * @see [BucketAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}
  * @see [ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}
@@ -540,7 +540,7 @@ Acl.prototype.get = function(options, callback) {
  * @param {object} options Configuration options.
  * @param {string} options.entity Whose permissions will be updated.
  * @param {string} options.role Permissions allowed for the defined entity.
- *     See {module:storage#acl}.
+ *     See {@link Storage.acl}.
  * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
  * @param {UpdateAclCallback} [callback] Callback function.
@@ -648,7 +648,7 @@ common.util.promisifyAll(Acl);
 module.exports = Acl;
 
 /**
- * Attach functionality to a {module:storage/acl} instance. This will add an
+ * Attach functionality to a {@link Storage.acl} instance. This will add an
  * object for each role group (owners, readers, and writers), with each object
  * containing methods to add or delete a type of entity.
  *
