@@ -223,15 +223,15 @@ function Bucket(storage, name) {
    * });
    *
    * @example <caption>include:samples/iam.js</caption>
-   * region_tag:view_bucket_iam_members
+   * region_tag:storage_view_bucket_iam_members
    * Example of retrieving a bucket's IAM policy:
    *
    * @example <caption>include:samples/iam.js</caption>
-   * region_tag:add_bucket_iam_member
+   * region_tag:storage_add_bucket_iam_member
    * Example of adding to a bucket's IAM policy:
    *
    * @example <caption>include:samples/iam.js</caption>
-   * region_tag:remove_bucket_iam_member
+   * region_tag:storage_remove_bucket_iam_member
    * Example of removing from a bucket's IAM policy:
    */
   this.iam = new Iam(this);
