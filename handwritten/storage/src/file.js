@@ -1103,7 +1103,7 @@ File.prototype.delete = function(options, callback) {
  * region_tag:storage_download_encrypted_file
  * Example of downloading an encrypted file:
  *
- * @example <caption>include:samples/requsterPays.js</caption>
+ * @example <caption>include:samples/requesterPays.js</caption>
  * region_tag:storage_download_file_requester_pays
  * Example of downloading a file where the requester pays:
  */
