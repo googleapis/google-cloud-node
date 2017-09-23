@@ -3,10 +3,7 @@
 .coverage
 .nyc_output
 docs/
-packages/google-cloud/README.md
-packages/*/AUTHORS
-packages/*/CONTRIBUTORS
-packages/*/COPYING
+out/
 system-test/secrets.js
 system-test/*key.json
 *.lock

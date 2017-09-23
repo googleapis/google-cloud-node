@@ -73,7 +73,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.0-beta.12",
+    "@google-cloud/nodejs-repo-tools": "^2.0.3",
     "codecov": "^2.3.0",
     "eslint": "^4.7.1",
     "eslint-config-prettier": "^2.5.0",
@@ -96,9 +96,9 @@
     "uuid": "^3.1.0"
   },
   "scripts": {
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
     "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
-    "prettier": "prettier --write src/**/*.js samples/*.js samples/**/*.js system-test/**/*.js test/**/*.js",
+    "prettier": "repo-tools exec -- prettier --write src/**/*.js samples/*.js samples/**/*.js system-test/**/*.js test/**/*.js",
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js --no-timeouts && nyc report",
     "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
     "test": "repo-tools test run --cmd npm -- run cover",

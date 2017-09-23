@@ -18,7 +18,7 @@
     "yargs": "9.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.0.0-beta.12",
+    "@google-cloud/nodejs-repo-tools": "2.0.3",
     "ava": "0.22.0",
     "nyc": "11.2.1",
     "proxyquire": "1.8.0",
@@ -30,7 +30,7 @@
     ]
   },
   "scripts": {
-    "cleanup": "node scripts/cleanup",
+    "cleanup": "repo-tools exec -- node scripts/cleanup",
     "ava": "ava -T 20s --verbose system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose system-test/*.test.js && nyc report",
     "test": "repo-tools test run --cmd npm -- run cover"
