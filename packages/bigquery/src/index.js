@@ -523,10 +523,10 @@ BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
  * in mind. For this we recommend one of the following methods:
  *
  * - {module:bigquery#startQuery}
- * - {module:bigquery/table#copy}
- * - {module:bigquery/table#copyFrom}
- * - {module:bigquery/table#export}
- * - {module:bigquery/table#import}
+ * - {module:bigquery/table#startCopy}
+ * - {module:bigquery/table#startCopyFrom}
+ * - {module:bigquery/table#startExport}
+ * - {module:bigquery/table#startImport}
  *
  * However in the event you need a finer level of control over the job creation,
  * you can use this method to pass in a raw [Job resource](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs)

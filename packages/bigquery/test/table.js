@@ -21,7 +21,6 @@ var assert = require('assert');
 var events = require('events');
 var extend = require('extend');
 var nodeutil = require('util');
-var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var stream = require('stream');
 var uuid = require('uuid');
@@ -223,7 +222,7 @@ describe('BigQuery/Table', function() {
         });
 
         var reqOpts = interceptor.request(fakeReqOpts);
-        assert.deepEqual(fakeReqOpts.headers, expectedHeaders);
+        assert.deepEqual(reqOpts.headers, expectedHeaders);
       });
 
       it('should not apply the header if method is not patch', function() {
@@ -237,7 +236,7 @@ describe('BigQuery/Table', function() {
         };
 
         var reqOpts = interceptor.request(fakeReqOpts);
-        assert.deepEqual(fakeReqOpts.headers, undefined);
+        assert.deepEqual(reqOpts.headers, undefined);
       });
     });
   });
@@ -317,7 +316,7 @@ describe('BigQuery/Table', function() {
       var formatted = Table.formatMetadata_({ name: NAME });
 
       assert.strictEqual(formatted.name, undefined);
-      assert.strictEqual(formatted.friendlyName, NAME)
+      assert.strictEqual(formatted.friendlyName, NAME);
     });
 
     it('should format the schema string option', function() {
@@ -334,7 +333,7 @@ describe('BigQuery/Table', function() {
     });
 
     it('should accept an array of schema fields', function() {
-      var fields = ['a', 'b', 'c']
+      var fields = ['a', 'b', 'c'];
 
       var formatted = Table.formatMetadata_({ schema: fields });
 
@@ -1199,7 +1198,7 @@ describe('BigQuery/Table', function() {
         };
 
         assert.throws(function() {
-          table.insert(data, options)
+          table.insert(data, options);
         }, /Schema must be provided in order to auto\-create Table\./);
       });
 

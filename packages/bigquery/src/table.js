@@ -1022,7 +1022,7 @@ Table.prototype.insert = function(rows, options, callback) {
     }
 
     schema = options.schema;
-    delete json.schema
+    delete json.schema;
   }
 
   this.request({
@@ -1124,7 +1124,6 @@ Table.prototype.query = function(query, callback) {
  * });
  */
 Table.prototype.setMetadata = function(metadata, callback) {
-  var self = this;
   var body = Table.formatMetadata_(metadata);
 
   common.ServiceObject.prototype.setMetadata.call(this, body, callback);
@@ -1173,8 +1172,6 @@ Table.prototype.setMetadata = function(metadata, callback) {
  * });
  */
 Table.prototype.startCopy = function(destination, metadata, callback) {
-  var self = this;
-
   if (!(destination instanceof Table)) {
     throw new Error('Destination must be a Table object.');
   }
@@ -1259,8 +1256,6 @@ Table.prototype.startCopy = function(destination, metadata, callback) {
  * });
  */
 Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
-  var self = this;
-
   sourceTables = arrify(sourceTables);
 
   sourceTables.forEach(function(sourceTable) {
@@ -1367,8 +1362,6 @@ Table.prototype.startCopyFrom = function(sourceTables, metadata, callback) {
  * });
  */
 Table.prototype.startExport = function(destination, options, callback) {
-  var self = this;
-
   if (is.fn(options)) {
     callback = options;
     options = {};
@@ -1500,8 +1493,6 @@ Table.prototype.startExport = function(destination, options, callback) {
  * });
  */
 Table.prototype.startImport = function(source, metadata, callback) {
-  var self = this;
-
   if (is.fn(metadata)) {
     callback = metadata;
     metadata = {};

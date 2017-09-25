@@ -656,11 +656,11 @@ describe('BigQuery', function() {
 
       it('should import data from a storage file', function(done) {
         table.import(file, function(err, resp) {
-          assert.ifError(err)
+          assert.ifError(err);
           assert.strictEqual(resp.status.state, 'DONE');
           done();
         });
-      })
+      });
 
       it('should import data from a file via promises', function() {
         return table.import(file)
@@ -734,7 +734,7 @@ describe('BigQuery', function() {
 
             assert.strictEqual(rows.length, 1);
             assert.strictEqual(rows[0].name, row.name);
-          })
+          });
       });
 
       describe('SQL parameters', function() {

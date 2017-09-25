@@ -161,7 +161,7 @@ describe('BigQuery/Dataset', function() {
         });
 
         var reqOpts = interceptor.request(fakeReqOpts);
-        assert.deepEqual(fakeReqOpts.headers, expectedHeaders);
+        assert.deepEqual(reqOpts.headers, expectedHeaders);
       });
 
       it('should not apply the header if method is not patch', function() {
@@ -175,7 +175,7 @@ describe('BigQuery/Dataset', function() {
         };
 
         var reqOpts = interceptor.request(fakeReqOpts);
-        assert.deepEqual(fakeReqOpts.headers, undefined);
+        assert.deepEqual(reqOpts.headers, undefined);
       });
     });
   });
