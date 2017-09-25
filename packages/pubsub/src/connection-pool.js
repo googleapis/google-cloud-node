@@ -32,6 +32,9 @@ var uuid = require('uuid');
 var PKG = require('../package.json');
 var v1 = require('./v1');
 
+var CHANNEL_READY = 'channel.ready';
+var CHANNEL_ERROR = 'channel.error';
+
 // codes to retry streams
 var RETRY_CODES = [
   0, // ok
@@ -65,6 +68,7 @@ function ConnectionPool(subscription) {
 
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = 0;
+  this.waitHandle = null;
 
   this.settings = {
     maxConnections: subscription.maxConnections || 5,
@@ -142,16 +146,25 @@ ConnectionPool.prototype.acquire = function(id, callback) {
  * @param {?error} callback.error - An error returned while closing the pool.
  */
 ConnectionPool.prototype.close = function(callback) {
-  var self = this;
   var connections = Array.from(this.connections.values());
 
   callback = callback || common.util.noop;
 
-  this.isOpen = false;
-  self.connections.clear();
-  this.queue.forEach(clearTimeout);
+  if (this.client) {
+    this.client.close();
+  }
 
+  this.connections.clear();
+  this.queue.forEach(clearTimeout);
   this.queue.length = 0;
+
+  this.isOpen = false;
+  this.waiting = false;
+
+  this.removeAllListeners('newListener')
+    .removeAllListeners(CHANNEL_READY)
+    .removeAllListeners(CHANNEL_ERROR);
+
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = 0;
 
@@ -175,19 +188,24 @@ ConnectionPool.prototype.createConnection = function() {
 
     var id = uuid.v4();
     var connection = client.streamingPull(self.metadata_);
-    var elapsedTimeWithoutConnection = 0;
-    var deadline;
     var errorImmediateHandle;
-
-    if (self.noConnectionsTime) {
-      elapsedTimeWithoutConnection = Date.now() - self.noConnectionsTime;
-    }
-
-    deadline = 300000 - elapsedTimeWithoutConnection;
 
     if (self.isPaused) {
       connection.pause();
     }
+
+    self.once(CHANNEL_ERROR, function(err) {
+      connection.cancel();
+    });
+
+    self.once(CHANNEL_READY, function() {
+      connection.isConnected = true;
+
+      self.noConnectionsTime = 0;
+      self.failedConnectionAttempts = 0;
+
+      self.emit('connected', connection);
+    });
 
     connection.on('error', function(err) {
       // since this is a bidi stream it's possible that we recieve errors from
@@ -228,23 +246,10 @@ ConnectionPool.prototype.createConnection = function() {
       });
     });
 
-    client.waitForReady(deadline, function(err) {
-      if (err) {
-        connection.cancel();
-        return;
-      }
-
-      connection.isConnected = true;
-      self.noConnectionsTime = 0;
-      self.failedConnectionAttempts = 0;
-
-      connection.write({
-        subscription: common.util.replaceProjectIdToken(
-          self.subscription.name, self.projectId),
-        streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
-      });
-
-      self.emit('connected', connection);
+    connection.write({
+      subscription: common.util.replaceProjectIdToken(
+        self.subscription.name, self.projectId),
+      streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
     });
 
     self.connections.set(id, connection);
@@ -396,6 +401,8 @@ ConnectionPool.prototype.open = function() {
   this.isOpen = true;
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = Date.now();
+
+  this.watchForReady();
 };
 
 /**
@@ -468,6 +475,67 @@ ConnectionPool.prototype.shouldReconnect = function(status) {
   }
 
   return true;
+};
+
+/**
+ *
+ */
+ConnectionPool.prototype.watchForReady = function() {
+  var self = this;
+
+  this.on('newListener', function(eventName) {
+    if (eventName == CHANNEL_READY && !self.waiting) {
+      clearImmediate(self.waitHandle);
+      self.waitHandle = setImmediate(self.waitForReady.bind(self));
+    }
+  });
+};
+
+/**
+ *
+ */
+ConnectionPool.prototype.waitForReady = function() {
+  var self = this;
+  var READY = 2;
+
+  this.getClient(function(err, client) {
+    if (err) {
+      self.emit('error', err);
+      return;
+    }
+
+    var channel = client.getChannel();
+    var state = channel.getConnectivityState(false);
+
+    if (state === READY) {
+      self.removeAllListeners(CHANNEL_ERROR);
+      self.emit(CHANNEL_READY);
+      return;
+    }
+
+    var elapsedTimeWithoutConnection = 0;
+    var deadline, timeout;
+
+    if (self.noConnectionsTime) {
+      elapsedTimeWithoutConnection = Date.now() - self.noConnectionsTime;
+    }
+
+    deadline = Date.now() + (300000 - elapsedTimeWithoutConnection);
+    self.waiting = true;
+
+    client.waitForReady(deadline, function(err) {
+      self.waiting = false;
+
+      if (err) {
+        self.removeAllListeners(CHANNEL_READY);
+        self.emit(CHANNEL_ERROR, err);
+        return;
+      }
+
+      self.removeAllListeners(CHANNEL_ERROR);
+      self.emit(CHANNEL_READY);
+    });
+  });
 };
 
 module.exports = ConnectionPool;
