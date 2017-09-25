@@ -175,7 +175,19 @@ ConnectionPool.prototype.createConnection = function() {
 
     var id = uuid.v4();
     var connection = client.streamingPull(self.metadata_);
+    var elapsedTimeWithoutConnection = 0;
+    var deadline;
     var errorImmediateHandle;
+
+    if (self.noConnectionsTime) {
+      elapsedTimeWithoutConnection = Date.now() - self.noConnectionsTime;
+    }
+
+    deadline = 300000 - elapsedTimeWithoutConnection;
+
+    if (self.isPaused) {
+      connection.pause();
+    }
 
     connection.on('error', function(err) {
       // since this is a bidi stream it's possible that we recieve errors from
@@ -185,17 +197,6 @@ ConnectionPool.prototype.createConnection = function() {
       // to the `status` event where we can check if the connection should be
       // re-opened or if we should send the error to the user
       errorImmediateHandle = setImmediate(self.emit.bind(self), 'error', err);
-    });
-
-    connection.on('metadata', function(metadata) {
-      if (!metadata.get('date').length) {
-        return;
-      }
-
-      connection.isConnected = true;
-      self.noConnectionsTime = 0;
-      self.failedConnectionAttempts = 0;
-      self.emit('connected', connection);
     });
 
     connection.on('status', function(status) {
@@ -227,14 +228,23 @@ ConnectionPool.prototype.createConnection = function() {
       });
     });
 
-    if (self.isPaused) {
-      connection.pause();
-    }
+    client.waitForReady(deadline, function(err) {
+      if (err) {
+        connection.cancel();
+        return;
+      }
 
-    connection.write({
-      subscription: common.util.replaceProjectIdToken(
-        self.subscription.name, self.projectId),
-      streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
+      connection.isConnected = true;
+      self.noConnectionsTime = 0;
+      self.failedConnectionAttempts = 0;
+
+      connection.write({
+        subscription: common.util.replaceProjectIdToken(
+          self.subscription.name, self.projectId),
+        streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
+      });
+
+      self.emit('connected', connection);
     });
 
     self.connections.set(id, connection);
@@ -312,6 +322,7 @@ ConnectionPool.prototype.getClient = function(callback) {
     }
 
     self.client = new Subscriber(address, credentials, {
+      'grpc.keepalive_time_ms': 300000,
       'grpc.max_receive_message_length': 20000001,
       'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
     });
