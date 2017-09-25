@@ -12,7 +12,7 @@
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
-* [Cloud Storage](#cloud-storage-ga) (GA)
+* [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
 * [Google Stackdriver Logging](#google-stackdriver-logging-ga) (GA)
 
