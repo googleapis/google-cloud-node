@@ -164,7 +164,7 @@ function Job(bigQuery, id) {
      *   }
      * };
      *
-     * job.setMetadata(metadata, function(err, apiResponse) {})
+     * job.setMetadata(metadata, function(err, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
