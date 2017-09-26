@@ -127,15 +127,20 @@ Module.getUpdated = function() {
 
   var files = output.stdout.toString();
 
+  console.log(files);
+
   var modules = files
     .trim()
     .split('\n')
     .filter(function(file) {
       return /^packages\/.+\.js/.test(file);
     })
-    .filter(file => test('-e', file)) // File exists
+    .filter(function(file) {
+      // Repo-extraction can make packages disappear, so it's safe to exclude
+      // these from being considered "updated"-- they're just gone. Gone!
+      return test('-e', file);
+    })
     .map(function(file) {
-      console.log(file);
       return file.split('/')[1];
     });
 
