@@ -60,6 +60,11 @@ function Module(name) {
   this.name = name;
   this.directory = path.join(ROOT_DIR, 'packages', name);
 
+  if (!test('-e', this.directory)) {
+    console.log(`${this.name} is no longer present in the repository.`);
+    return;
+  }
+
   var pkgJson = require(path.join(this.directory, 'package.json'));
 
   this.packageName = pkgJson.name;
