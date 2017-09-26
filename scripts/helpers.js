@@ -60,11 +60,6 @@ function Module(name) {
   this.name = name;
   this.directory = path.join(ROOT_DIR, 'packages', name);
 
-  if (!test('-e', this.directory)) {
-    console.log(`${this.name} is no longer present in the repository.`);
-    return;
-  }
-
   var pkgJson = require(path.join(this.directory, 'package.json'));
 
   this.packageName = pkgJson.name;
@@ -132,15 +127,15 @@ Module.getUpdated = function() {
 
   var files = output.stdout.toString();
 
-  console.log(files);
-
   var modules = files
     .trim()
     .split('\n')
     .filter(function(file) {
       return /^packages\/.+\.js/.test(file);
     })
+    .filter(file => test('-e', file)) // File exists
     .map(function(file) {
+      console.log(file);
       return file.split('/')[1];
     });
 

@@ -52,8 +52,6 @@ var Table = require('./table.js');
  * We will create a table with the correct schema, import the public CSV file
  * into that table, and query it for data.
  *
- * This is an edit.
- *
  * @alias module:bigquery
  * @constructor
  *
