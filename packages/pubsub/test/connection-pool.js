@@ -41,6 +41,7 @@ function FakeConnection() {
   this.isConnected = false;
   this.isPaused = false;
   this.ended = false;
+  this.canceled = false;
 
   events.EventEmitter.call(this);
 }
@@ -59,6 +60,10 @@ FakeConnection.prototype.pause = function() {
 
 FakeConnection.prototype.resume = function() {
   this.isPaused = false;
+};
+
+FakeConnection.prototype.cancel = function() {
+  this.canceled = true;
 };
 
 describe('ConnectionPool', function() {
@@ -122,6 +127,7 @@ describe('ConnectionPool', function() {
       assert(pool.connections instanceof Map);
       assert.strictEqual(pool.isPaused, false);
       assert.strictEqual(pool.isOpen, false);
+      assert.strictEqual(pool.isGettingChannelState, false);
       assert.strictEqual(pool.failedConnectionAttempts, 0);
       assert.strictEqual(pool.noConnectionsTime, 0);
       assert.strictEqual(pool.settings.maxConnections, 5);
@@ -238,9 +244,21 @@ describe('ConnectionPool', function() {
   });
 
   describe('close',function() {
+    it('should close the client', function(done) {
+      pool.client = { close: done };
+      pool.close();
+    });
+
     it('should set isOpen to false', function() {
       pool.close();
       assert.strictEqual(pool.isOpen, false);
+    });
+
+    it('should set isGettingChannelState to false', function() {
+      pool.isGettingChannelState = true;
+      pool.close();
+
+      assert.strictEqual(pool.isGettingChannelState, false);
     });
 
     it('should call end on all active connections', function() {
@@ -290,6 +308,23 @@ describe('ConnectionPool', function() {
       assert.strictEqual(pool.noConnectionsTime, 0);
     });
 
+    it('should remove event listeners', function() {
+      pool
+        .on('channel.ready', nope)
+        .on('channel.error', nope)
+        .on('newListener', nope);
+
+      pool.close();
+
+      assert.strictEqual(pool.listenerCount('channel.ready'), 0);
+      assert.strictEqual(pool.listenerCount('channel.error'), 0);
+      assert.strictEqual(pool.listenerCount('newListener'), 0);
+
+      function nope() {
+        throw new Error('Should not be called!');
+      }
+    });
+
     it('should exec a callback when finished closing', function(done) {
       pool.close(done);
     });
@@ -307,13 +342,23 @@ describe('ConnectionPool', function() {
   describe('createConnection', function() {
     var fakeClient;
     var fakeConnection;
+    var fakeChannel;
 
     beforeEach(function() {
       fakeConnection = new FakeConnection();
 
+      fakeChannel = {
+        getConnectivityState: function() {
+          return 2;
+        }
+      };
+
       fakeClient = {
         streamingPull: function() {
           return fakeConnection;
+        },
+        getChannel: function() {
+          return fakeChannel;
         }
       };
 
@@ -345,6 +390,66 @@ describe('ConnectionPool', function() {
       });
 
       pool.createConnection();
+    });
+
+    describe('channel', function() {
+      var channelReadyEvent = 'channel.ready';
+      var channelErrorEvent = 'channel.error';
+
+      describe('error', function() {
+        it('should remove the channel ready event listener', function() {
+          pool.createConnection();
+          assert.strictEqual(pool.listenerCount(channelReadyEvent), 1);
+
+          pool.emit(channelErrorEvent);
+          assert.strictEqual(pool.listenerCount(channelReadyEvent), 0);
+        });
+
+        it('should cancel the connection', function() {
+          pool.createConnection();
+          pool.emit(channelErrorEvent);
+
+          assert.strictEqual(fakeConnection.canceled, true);
+        });
+      });
+
+      describe('success', function() {
+        it('should remove the channel error event', function() {
+          pool.createConnection();
+          assert.strictEqual(pool.listenerCount(channelErrorEvent), 1);
+
+          pool.emit(channelReadyEvent);
+          assert.strictEqual(pool.listenerCount(channelErrorEvent), 0);
+        });
+
+        it('should set the isConnected flag to true', function() {
+          pool.createConnection();
+          pool.emit(channelReadyEvent);
+
+          assert.strictEqual(fakeConnection.isConnected, true);
+        });
+
+        it('should reset internally used properties', function() {
+          pool.noConnectionsTime = Date.now();
+          pool.failedConnectionAttempts = 10;
+
+          pool.createConnection();
+          pool.emit(channelReadyEvent);
+
+          assert.strictEqual(pool.noConnectionsTime, 0);
+          assert.strictEqual(pool.failedConnectionAttempts, 0);
+        });
+
+        it('should emit a connected event', function(done) {
+          pool.on('connected', function(connection) {
+            assert.strictEqual(connection, fakeConnection);
+            done();
+          });
+
+          pool.createConnection();
+          pool.emit(channelReadyEvent);
+        });
+      });
     });
 
     describe('connection', function() {
@@ -401,35 +506,6 @@ describe('ConnectionPool', function() {
 
           pool.createConnection();
           fakeConnection.emit('error', error);
-        });
-      });
-
-      describe('metadata events', function() {
-        it('should do nothing if the metadata is empty', function(done) {
-          var metadata = new grpc.Metadata();
-
-          pool.on('connected', done); // should not fire
-          pool.createConnection();
-
-          fakeConnection.emit('metadata', metadata);
-          done();
-        });
-
-        it('should reset counters and fire connected', function(done) {
-          var metadata = new grpc.Metadata();
-
-          metadata.set('date', 'abc');
-
-          pool.on('connected', function(connection) {
-            assert.strictEqual(connection, fakeConnection);
-            assert(fakeConnection.isConnected);
-            assert.strictEqual(pool.noConnectionsTime, 0);
-            assert.strictEqual(pool.failedConnectionAttempts, 0);
-            done();
-          });
-
-          pool.createConnection();
-          fakeConnection.emit('metadata', metadata);
         });
       });
 
@@ -674,6 +750,148 @@ describe('ConnectionPool', function() {
     });
   });
 
+  describe('getAndEmitChannelState', function() {
+    var channelErrorEvent = 'channel.error';
+    var channelReadyEvent = 'channel.ready';
+    var channelReadyState = 2;
+    var fakeChannelState;
+    var dateNow;
+    var fakeTimestamp;
+
+    var fakeClient = {
+      getChannel: function() {
+        return {
+          getConnectivityState: function(shouldConnect) {
+            assert.strictEqual(shouldConnect, false);
+            return fakeChannelState;
+          }
+        };
+      }
+    };
+
+    before(function() {
+      dateNow = global.Date.now;
+    });
+
+    beforeEach(function() {
+      fakeChannelState = 0;
+      fakeClient.waitForReady = fakeUtil.noop;
+
+      pool.getClient = function(callback) {
+        callback(null, fakeClient);
+      };
+
+      fakeTimestamp = dateNow.call(global.Date);
+      pool.noConnectionsTime = 0;
+
+      global.Date.now = function() {
+        return fakeTimestamp;
+      };
+    });
+
+    after(function() {
+      global.Date.now = dateNow;
+    });
+
+    it('should set the isGettingChannelState flag to true', function() {
+      pool.getAndEmitChannelState();
+      assert.strictEqual(pool.isGettingChannelState, true);
+    });
+
+    it('should emit any client errors', function(done) {
+      var channelErrorEmitted = false;
+
+      pool.on(channelErrorEvent, function() {
+        channelErrorEmitted = true;
+      });
+
+      var fakeError = new Error('nope');
+      var errorEmitted = false;
+
+      pool.on('error', function(err) {
+        assert.strictEqual(err, fakeError);
+        errorEmitted = true;
+      });
+
+      pool.getClient = function(callback) {
+        callback(fakeError);
+
+        assert.strictEqual(pool.isGettingChannelState, false);
+        assert.strictEqual(channelErrorEmitted, true);
+        assert.strictEqual(errorEmitted, true);
+
+        done();
+      };
+
+      pool.getAndEmitChannelState();
+    });
+
+    it('should emit the ready event if the channel is ready', function(done) {
+      fakeChannelState = channelReadyState;
+
+      pool.on(channelReadyEvent, function() {
+        assert.strictEqual(pool.isGettingChannelState, false);
+        done();
+      });
+
+      pool.getAndEmitChannelState();
+    });
+
+    it('should wait for the channel to be ready', function(done) {
+      var expectedDeadline = fakeTimestamp + 300000;
+
+      fakeClient.waitForReady = function(deadline) {
+        assert.strictEqual(deadline, expectedDeadline);
+        done();
+      };
+
+      pool.getAndEmitChannelState();
+    });
+
+    it('should factor in the noConnectionsTime property', function(done) {
+      pool.noConnectionsTime = 10;
+
+      var fakeElapsedTime = fakeTimestamp - pool.noConnectionsTime;
+      var expectedDeadline = fakeTimestamp + (300000 - fakeElapsedTime);
+
+      fakeClient.waitForReady = function(deadline) {
+        assert.strictEqual(deadline, expectedDeadline);
+        done();
+      };
+
+      pool.getAndEmitChannelState();
+    });
+
+    it('should emit any waitForReady errors', function(done) {
+      var fakeError = new Error('err');
+
+      pool.on(channelErrorEvent, function(err) {
+        assert.strictEqual(err, fakeError);
+        assert.strictEqual(pool.isGettingChannelState, false);
+        done();
+      });
+
+      fakeClient.waitForReady = function(deadline, callback) {
+        callback(fakeError);
+      };
+
+      pool.getAndEmitChannelState();
+    });
+
+    it('should emit the ready event when ready', function(done) {
+      pool.on(channelReadyEvent, function() {
+        assert.strictEqual(pool.isGettingChannelState, false);
+        done();
+      });
+
+      fakeClient.waitForReady = function(deadline, callback) {
+        callback(null);
+      };
+
+      pool.getAndEmitChannelState();
+    });
+  });
+
   describe('getClient', function() {
     var fakeCreds = {};
 
@@ -681,7 +899,12 @@ describe('ConnectionPool', function() {
       this.address = address;
       this.creds = creds;
       this.options = options;
+      this.closed = false;
     }
+
+    FakeSubscriber.prototype.close = function() {
+      this.closed = true;
+    };
 
     beforeEach(function() {
       pool.getCredentials = function(callback) {
@@ -696,7 +919,7 @@ describe('ConnectionPool', function() {
     });
 
     it('should return the cached client when available', function(done) {
-      var fakeClient = pool.client = {};
+      var fakeClient = pool.client = new FakeSubscriber();
 
       pool.getClient(function(err, client) {
         assert.ifError(err);
@@ -758,6 +981,7 @@ describe('ConnectionPool', function() {
         assert.strictEqual(client.creds, fakeCreds);
 
         assert.deepEqual(client.options, {
+          'grpc.keepalive_time_ms': 300000,
           'grpc.max_receive_message_length': 20000001,
           'grpc.primary_user_agent': fakeUserAgent
         });
@@ -948,6 +1172,35 @@ describe('ConnectionPool', function() {
 
       assert.strictEqual(pool.failedConnectionAttempts, 0);
       assert.strictEqual(pool.noConnectionsTime, Date.now());
+    });
+
+    it('should listen for newListener events', function() {
+      pool.removeAllListeners('newListener');
+      pool.open();
+
+      assert.strictEqual(pool.listenerCount('newListener'), 1);
+    });
+
+    describe('newListener callback', function() {
+      beforeEach(function() {
+        pool.getAndEmitChannelState = function() {
+          throw new Error('Should not be called!');
+        };
+      });
+
+      it('should call getAndEmitChannelState', function(done) {
+        pool.getAndEmitChannelState = done;
+        pool.emit('newListener', 'channel.ready');
+      });
+
+      it('should do nothing for unknown events', function() {
+        pool.emit('newListener', 'channel.error');
+      });
+
+      it('should do nothing when already getting state', function() {
+        pool.isGettingChannelState = true;
+        pool.emit('newListener', 'channel.ready');
+      });
     });
   });
 
