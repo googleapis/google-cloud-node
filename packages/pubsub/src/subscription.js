@@ -329,6 +329,9 @@ Subscription.prototype.breakLease_ = function(message) {
 Subscription.prototype.close = function(callback) {
   this.userClosed_ = true;
 
+  var inventory = this.inventory_;
+  inventory.lease.length = inventory.bytes = 0;
+
   clearTimeout(this.leaseTimeoutHandle_);
   this.leaseTimeoutHandle_ = null;
 
@@ -877,14 +880,16 @@ Subscription.prototype.openConnection_ = function() {
 Subscription.prototype.renewLeases_ = function() {
   var self = this;
 
+  clearTimeout(this.leaseTimeoutHandle_);
   this.leaseTimeoutHandle_ = null;
 
   if (!this.inventory_.lease.length) {
     return;
   }
 
-  var ackIds = this.inventory_.lease;
   this.ackDeadline = this.histogram.percentile(99);
+
+  var ackIds = this.inventory_.lease.slice();
   var ackDeadlineSeconds = this.ackDeadline / 1000;
 
   if (this.connectionPool) {
