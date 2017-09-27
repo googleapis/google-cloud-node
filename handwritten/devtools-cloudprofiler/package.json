@@ -1,30 +1,43 @@
 {
-  "name": "google-cloud-profile",
+  "name": "@google-cloud/profiler",
   "version": "0.0.1",
   "description": "Adds support for Google Cloud Profiler to node.js applications",
-  "main": "lib/index.js",
+  "main": "build/src/index.js",
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "mocha --timeout 4000"
+    "test": "mocha --timeout 4000",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "npm run proto && tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "proto": "mkdir -p build/src && pbjs -t static-module -w commonjs -o src/profile.js third_party/proto/profile.proto && pbts -o src/profile.d.ts src/profile.js && cp src/profile.js build/src"
   },
-  "author": "Google Inc.",
-  "contributors": [
-    {
-      "name": "Ali Ijaz Sheikh",
-      "email": "ofrobots@google.com"
-    },
-    {
-      "name": "Matt Loring",
-      "email": "mattloring@google.com"
-    }
-  ],
+  "author": {
+    "name": "Google Inc."
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "bindings": "^1.2.1",
-    "nan": "^2.1.0",
-    "protobufjs": "~5.0.1"
+    "nan": "^2.1.0"
   },
   "devDependencies": {
-    "clang-format": "^1.0.33"
-  }
+    "@types/node": "^8.0.30",
+    "clang-format": "^1.0.33",
+    "gts": "latest",
+    "protobufjs": "~6.8.0",
+    "typescript": "^2.4.1"
+  },
+  "files": [
+    "build/src",
+    "build/types",
+    "bindings",
+    "third_party",
+    "binding.gyp",
+    "package-lock.json",
+    "package.json",
+    "README.md"
+  ]
 }

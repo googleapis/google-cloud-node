@@ -13,43 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import * as assert from 'assert';
+import * as fs from 'fs';
+import * as stream from 'stream';
+import * as util from 'util';
+import * as zlib from 'zlib';
 
-'use strict';
+import {serialize} from './builder';
+import {perftools} from './profile';
 
-var assert = require('assert');
-var util = require('util');
-var profiler = require('bindings')('cpu_profiler');
-var zlib = require('zlib');
-var fs = require('fs');
-var stream = require('stream');
+type HrTimeTuple = [number, number];
 
-var builder = require('./builder.js');
+const profiler = require('bindings')('cpu_profiler');
 
-function timeToNanos(tuple) { return tuple[0] * 1e9 + tuple[1]; }
+function timeToNanos(tuple: HrTimeTuple) {
+  return tuple[0] * 1e9 + tuple[1];
+}
 
-var durationMillis = 10 * 1000;
-var intervalMillis = 60 * 1000;
-var isActive = false;
+const durationMillis = 10 * 1000;
+const intervalMillis = 60 * 1000;
+let isActive = false;
 
 function profileInterval() {
   assert(durationMillis <= intervalMillis);
-  var startDelay = Math.random(0, intervalMillis - durationMillis);
+  const startDelay = (intervalMillis - durationMillis) * Math.random();
   setTimeout(function() {
-    var startTime = Date.now();
-    var runName = 'cloud-profile-' + startTime;
+    const startTime = Date.now();
+    const runName = 'cloud-profile-' + startTime;
     profiler.startProfiling(runName, true);
     isActive = true;
     setTimeout(function() {
       isActive = false;
-      var result = profiler.stopProfiling(runName);
-      var processed =
-          builder.serialize(result, startTime * 1e6).encode().toBuffer();
-      var outp = fs.createWriteStream(runName + '.pb.gz');
-      var inp = new stream.PassThrough();
-      inp.end(processed);
+      const result = profiler.stopProfiling(runName);
+      const serialized = serialize(result, startTime * 1e6);
+      const writer = perftools.profiles.Profile.encode(serialized);
+      const buffer = writer.finish();
+
+      const outp = fs.createWriteStream(runName + '.pb.gz');
+      const inp = new stream.PassThrough();
+      inp.end(buffer);
       inp.pipe(zlib.createGzip()).pipe(outp).on('close', function() {
-        setTimeout(profileInterval,
-                   intervalMillis - startDelay - durationMillis)
+        setTimeout(
+            profileInterval, intervalMillis - startDelay - durationMillis)
             .unref();
       });
     }, durationMillis).unref();

@@ -14,46 +14,53 @@
  * limitations under the License.
  */
 
-'use strict';
+import * as fs from 'fs';
+import * as stream from 'stream';
+import * as zlib from 'zlib';
 
-var profiler = require('bindings')('sampling_heap_profiler');
-var stats = require('bindings')('statistics');
-var zlib = require('zlib');
-var fs = require('fs');
-var stream = require('stream');
+import {serialize} from './heap-builder';
+import {perftools} from './profile';
+import {AllocationProfileNode} from './v8-types';
 
-var builder = require('./heap_builder.js');
+const profiler = require('bindings')('sampling_heap_profiler');
+const stats = require('bindings')('statistics');
 
-var startTime = Date.now();
+const startTime = Date.now();
 // console.log('V8 statistics', require('v8').getHeapStatistics());
 // console.log('V8 heap statistics', stats.getHeapSpaceStatistics());
 
 profiler.startSamplingHeapProfiler();
 
-var intervalMillis = 5 * 1000;
+const intervalMillis = 5 * 1000;
 
 function profileInterval() {
   setTimeout(function() {
-    var endTime = Date.now();
-    var runName = 'cloud-profile-' + endTime;
+    const endTime = Date.now();
+    const runName = 'cloud-profile-' + endTime;
     // console.log('V8 statistics', require('v8').getHeapStatistics());
     // console.log('V8 heap statistics', stats.getHeapSpaceStatistics());
-    var result = profiler.getAllocationProfile();
+    const result = profiler.getAllocationProfile();
     // console.log('sample count * sample rate', result.length * 1024);
-    var devtoolsFormat = translateToDevtools(result);
-    fs.writeFile(runName + '.heapprofile', JSON.stringify({ head: devtoolsFormat }));
-    var processed = builder.serialize(result, startTime * 1e6, endTime * 1e6)
-                        .encode()
-                        .toBuffer();
-    var outp = fs.createWriteStream(runName + '.pb.gz');
-    var inp = new stream.PassThrough();
-    inp.end(processed);
+    const devtoolsFormat = translateToDevtools(result);
+
+    // // TODO: deal with the result of writing.
+    fs.writeFile(
+        runName + '.heapprofile', JSON.stringify({head: devtoolsFormat}),
+        () => {/*empty*/});
+
+    const serialized = serialize(result, startTime * 1e6, endTime * 1e6);
+    const writer = perftools.profiles.Profile.encode(serialized);
+    const buffer = writer.finish();
+
+    const outp = fs.createWriteStream(runName + '.pb.gz');
+    const inp = new stream.PassThrough();
+    inp.end(buffer);
     inp.pipe(zlib.createGzip()).pipe(outp).on('close', profileInterval);
   }, intervalMillis).unref();
 }
 
-function translateToDevtools(node) {
-  var result = {};
+function translateToDevtools(node: AllocationProfileNode) {
+  const result: any = {};
   result.functionName = node.name;
   result.scriptId = node.scriptId;
   result.lineNumber = node.lineNumber;
@@ -66,9 +73,13 @@ function translateToDevtools(node) {
   return result;
 }
 
-process.on('exit', function() { profiler.stopSamplingHeapProfiler(); });
+process.on('exit', function() {
+  profiler.stopSamplingHeapProfiler();
+});
 
-process.on('uncaughtException',
-           function(e) { profiler.stopSamplingHeapProfiler(); throw e; });
+process.on('uncaughtException', function(e) {
+  profiler.stopSamplingHeapProfiler();
+  throw e;
+});
 
 profileInterval();
