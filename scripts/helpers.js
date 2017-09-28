@@ -135,6 +135,11 @@ Module.getUpdated = function() {
     .filter(function(file) {
       return /^packages\/.+\.js/.test(file);
     })
+    .filter(function(file) {
+      // Repo-extraction can make packages disappear, so it's safe to exclude
+      // these from being considered "updated"-- they're just gone. Gone!
+      return test('-e', file);
+    })
     .map(function(file) {
       return file.split('/')[1];
     });
