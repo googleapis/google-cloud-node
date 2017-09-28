@@ -221,6 +221,8 @@ function Table(dataset, id) {
   this.bigQuery = dataset.bigQuery;
   this.dataset = dataset;
 
+  // Catch all for read-modify-write cycle
+  // https://cloud.google.com/bigquery/docs/api-performance#read-patch-write
   this.interceptors.push({
     request: function(reqOpts) {
       if (reqOpts.method === 'PATCH' && reqOpts.json.etag) {
@@ -384,11 +386,11 @@ Table.prototype.copy = function(destination, metadata, callback) {
       return;
     }
 
-    job.on('error', callback);
-
-    job.on('complete', function(metadata) {
-      callback(null, metadata);
-    });
+    job
+      .on('error', callback)
+      .on('complete', function(metadata) {
+        callback(null, metadata);
+      });
   });
 };
 
@@ -444,11 +446,11 @@ Table.prototype.copyFrom = function(sourceTables, metadata, callback) {
       return;
     }
 
-    job.on('error', callback);
-
-    job.on('complete', function(metadata) {
-      callback(null, metadata);
-    });
+    job
+      .on('error', callback)
+      .on('complete', function(metadata) {
+        callback(null, metadata);
+      });
   });
 };
 
@@ -671,11 +673,11 @@ Table.prototype.export = function(destination, options, callback) {
       return;
     }
 
-    job.on('error', callback);
-
-    job.on('complete', function(metadata) {
-      callback(null, metadata);
-    });
+    job
+      .on('error', callback)
+      .on('complete', function(metadata) {
+        callback(null, metadata);
+      });
   });
 };
 
@@ -851,11 +853,11 @@ Table.prototype.import = function(source, metadata, callback) {
       return;
     }
 
-    job.on('error', callback);
-
-    job.on('complete', function(metadata) {
-      callback(null, metadata);
-    });
+    job
+      .on('error', callback)
+      .on('complete', function(metadata) {
+        callback(null, metadata);
+      });
   });
 };
 
@@ -873,7 +875,8 @@ Table.prototype.import = function(source, metadata, callback) {
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoCreate - Automatically create the table if it
  *     doesn't already exist. In order for this to succeed the `schema` option
- *     must also be set.
+ *     must also be set. Note that this can take longer than 2 minutes to
+ *     complete.
  * @param {boolean} options.ignoreUnknownValues - Accept rows that contain
  *     values that do not match the schema. The unknown values are ignored.
  *     Default: `false`.

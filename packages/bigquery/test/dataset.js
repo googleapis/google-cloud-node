@@ -292,22 +292,26 @@ describe('BigQuery/Dataset', function() {
       ds.createTable(TABLE_ID, done);
     });
 
-    it('should not modify the original options object', function(done) {
-      var options = {
-        a: 'b',
-        c: 'd'
+    it('should format the metadata', function(done) {
+      var formatMetadata_ = Table.formatMetadata_;
+      var formatted = {};
+      var fakeOptions = {};
+
+      Table.formatMetadata_ = function(options) {
+        assert.strictEqual(options, fakeOptions);
+        return formatted;
       };
 
-      var originalOptions = extend({}, options);
-
       ds.request = function(reqOpts) {
-        assert.notStrictEqual(reqOpts.json, options);
-        assert.deepEqual(options, originalOptions);
+        assert.strictEqual(reqOpts.json, formatted);
+
+        Table.formatMetadata_ = formatMetadata_;
         done();
       };
 
-      ds.createTable(TABLE_ID, options, assert.ifError);
+      ds.createTable(TABLE_ID, fakeOptions, assert.ifError);
     });
+
 
     it('should create a schema object from a string', function(done) {
       ds.request = function(reqOpts) {
@@ -641,14 +645,6 @@ describe('BigQuery/Dataset', function() {
 
   describe('startQuery', function() {
     var FAKE_QUERY = 'SELECT * FROM `table`';
-
-    it('should call through to bigQuery#startQuery', function(done) {
-      ds.bigQuery.startQuery = function() {
-        done();
-      };
-
-      ds.startQuery();
-    });
 
     it('should extend the options', function(done) {
       var fakeOptions = {

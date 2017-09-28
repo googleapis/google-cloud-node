@@ -275,6 +275,7 @@ describe('BigQuery/Job', function() {
       };
 
       job.getQueryResults(function(err, rows) {
+        assert.ifError(err);
         assert.strictEqual(rows, mergedRows);
         done();
       });

@@ -179,6 +179,8 @@ function Dataset(bigQuery, id) {
 
   this.bigQuery = bigQuery;
 
+  // Catch all for read-modify-write cycle
+  // https://cloud.google.com/bigquery/docs/api-performance#read-patch-write
   this.interceptors.push({
     request: function(reqOpts) {
       if (reqOpts.method === 'PATCH' && reqOpts.json.etag) {

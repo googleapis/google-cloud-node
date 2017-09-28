@@ -165,7 +165,9 @@ describe('BigQuery', function() {
         { name: 'name', type: 'STRING' },
         { name: 'dob', type: 'TIMESTAMP' },
         { name: 'has_claws', type: 'BOOLEAN' },
-        { name: 'hair_count', type: 'FLOAT' }
+        { name: 'has_fangs', type: 'BOOL' },
+        { name: 'hair_count', type: 'FLOAT' },
+        { name: 'teeth_count', type: 'FLOAT64' }
       ]
     };
 
@@ -211,11 +213,20 @@ describe('BigQuery', function() {
               { v: 'Milo' },
               { v: String(now.valueOf() / 1000) },
               { v: 'false' },
+              { v: 'true' },
               { v: '5.222330009847' },
+              { v: '30.2232138' },
               {
                 v: [
                   {
                     v: '10'
+                  }
+                ]
+              },
+              {
+                v: [
+                  {
+                    v: '2'
                   }
                 ]
               },
@@ -253,8 +264,11 @@ describe('BigQuery', function() {
               type: 'fakeTimestamp'
             },
             has_claws: false,
+            has_fangs: true,
             hair_count: 5.222330009847,
+            teeth_count: 30.2232138,
             arr: [10],
+            arr2: [2],
             nullable: null,
             buffer: buffer,
             objects: [
@@ -285,6 +299,12 @@ describe('BigQuery', function() {
       schemaObject.fields.push({
         name: 'arr',
         type: 'INTEGER',
+        mode: 'REPEATED'
+      });
+
+      schemaObject.fields.push({
+        name: 'arr2',
+        type: 'INT64',
         mode: 'REPEATED'
       });
 
@@ -1150,27 +1170,6 @@ describe('BigQuery', function() {
       };
 
       bq.query(QUERY_STRING, fakeOptions, assert.ifError);
-    });
-
-    it('should return errors from getQueryResults', function(done) {
-      var error = new Error('err');
-
-      var fakeJob = {
-        getQueryResults: function(options, callback) {
-          callback(error, null, FAKE_RESPONSE);
-        }
-      };
-
-      bq.startQuery = function(query, callback) {
-        callback(null, fakeJob, FAKE_RESPONSE);
-      };
-
-      bq.query(QUERY_STRING, function(err, rows, resp) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(rows, null);
-        assert.strictEqual(resp, FAKE_RESPONSE);
-        done();
-      });
     });
   });
 

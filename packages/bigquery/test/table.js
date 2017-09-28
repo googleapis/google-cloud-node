@@ -680,6 +680,10 @@ describe('BigQuery/Table', function() {
         makeWritableStreamOverride = function(stream, options) {
           var jobId = options.metadata.jobReference.jobId;
           assert.strictEqual(jobId, expectedJobId);
+
+          var config = options.metadata.configuration.load;
+          assert.strictEqual(config.jobPrefix, undefined);
+
           done();
         };
 
@@ -1203,7 +1207,7 @@ describe('BigQuery/Table', function() {
       });
 
       it('should not include the schema in the insert request', function(done) {
-       table.request = function(reqOpts) {
+        table.request = function(reqOpts) {
           assert.strictEqual(reqOpts.json.schema, undefined);
           assert.strictEqual(reqOpts.json.autoCreate, undefined);
           done();
@@ -1394,7 +1398,16 @@ describe('BigQuery/Table', function() {
         callback(); // the done fn
       };
 
-      table.startCopy(DEST_TABLE, done);
+      table.startCopy(DEST_TABLE, {}, done);
+    });
+
+    it('should optionally accept metadata', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startCopy(DEST_TABLE,done);
     });
   });
 
@@ -1497,20 +1510,16 @@ describe('BigQuery/Table', function() {
         callback(); // the done fn
       };
 
-      table.startCopyFrom(SOURCE_TABLE, done);
+      table.startCopyFrom(SOURCE_TABLE, {}, done);
     });
 
-    it('should pass an error to the callback', function(done) {
-      var error = new Error('Error.');
-
+    it('should optionally accept options', function(done) {
       table.bigQuery.createJob = function(reqOpts, callback) {
-        callback(error);
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
       };
 
-      table.startCopyFrom(SOURCE_TABLE, function(err) {
-        assert.equal(err, error);
-        done();
-      });
+      table.startCopyFrom(SOURCE_TABLE, done);
     });
   });
 
@@ -1534,7 +1543,7 @@ describe('BigQuery/Table', function() {
       table.bigQuery.createJob = function() {};
     });
 
-    it('should send the correct API request', function(done) {
+    it('should call createJob correctly', function(done) {
       table.bigQuery.createJob = function(reqOpts) {
         assert.deepEqual(reqOpts.configuration.extract.sourceTable, {
           datasetId: table.dataset.id,
@@ -1677,6 +1686,15 @@ describe('BigQuery/Table', function() {
     });
 
     it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startExport(FILE, {}, done);
+    });
+
+    it('should optionally accept options', function(done) {
       table.bigQuery.createJob = function(reqOpts, callback) {
         assert.strictEqual(done, callback);
         callback(); // the done fn
@@ -1833,6 +1851,15 @@ describe('BigQuery/Table', function() {
     });
 
     it('should pass the callback to createJob', function(done) {
+      table.bigQuery.createJob = function(reqOpts, callback) {
+        assert.strictEqual(done, callback);
+        callback(); // the done fn
+      };
+
+      table.startImport(FILE, {}, done);
+    });
+
+    it('should optionally accept options', function(done) {
       table.bigQuery.createJob = function(reqOpts, callback) {
         assert.strictEqual(done, callback);
         callback(); // the done fn
