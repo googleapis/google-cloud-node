@@ -35,6 +35,10 @@ var v1 = require('./v1');
 var CHANNEL_READY_EVENT = 'channel.ready';
 var CHANNEL_ERROR_EVENT = 'channel.error';
 
+// if we can't establish a connection within 5 minutes, we need to back off
+// and emit an error to the user.
+var MAX_TIMEOUT = 300000;
+
 // codes to retry streams
 var RETRY_CODES = [
   0, // ok
@@ -342,7 +346,7 @@ ConnectionPool.prototype.getAndEmitChannelState = function() {
       elapsedTimeWithoutConnection = now - self.noConnectionsTime;
     }
 
-    deadline = now + (300000 - elapsedTimeWithoutConnection);
+    deadline = now + (MAX_TIMEOUT - elapsedTimeWithoutConnection);
 
     client.waitForReady(deadline, function(err) {
       self.isGettingChannelState = false;
@@ -392,7 +396,7 @@ ConnectionPool.prototype.getClient = function(callback) {
     }
 
     self.client = new Subscriber(address, credentials, {
-      'grpc.keepalive_time_ms': 300000,
+      'grpc.keepalive_time_ms': MAX_TIMEOUT,
       'grpc.max_receive_message_length': 20000001,
       'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
     });
@@ -539,7 +543,7 @@ ConnectionPool.prototype.shouldReconnect = function(status) {
   }
 
   var exceededRetryLimit = this.noConnectionsTime &&
-    Date.now() - this.noConnectionsTime > 300000;
+    Date.now() - this.noConnectionsTime > MAX_TIMEOUT;
 
   if (exceededRetryLimit) {
     return false;

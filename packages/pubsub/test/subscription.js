@@ -778,6 +778,26 @@ describe('Subscription', function() {
       subscription.flushQueues_();
     });
 
+    it('should cancel any pending flushes', function() {
+      var fakeHandle = 'abc';
+      var cleared = false;
+
+      var _clearTimeout = global.clearTimeout;
+
+      global.clearTimeout = function(handle) {
+        assert.strictEqual(handle, fakeHandle);
+        cleared = true;
+      };
+
+      subscription.flushTimeoutHandle_ = fakeHandle;
+      subscription.flushQueues_();
+
+      assert.strictEqual(subscription.flushTimeoutHandle_, null);
+      assert.strictEqual(cleared, true);
+
+      global.clearTimeout = _clearTimeout;
+    });
+
     describe('with connection pool', function() {
       var fakeConnection;
 

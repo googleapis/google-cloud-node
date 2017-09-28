@@ -757,15 +757,11 @@ describe('ConnectionPool', function() {
     var fakeChannelState;
     var dateNow;
     var fakeTimestamp;
+    var fakeChannel = {};
 
     var fakeClient = {
       getChannel: function() {
-        return {
-          getConnectivityState: function(shouldConnect) {
-            assert.strictEqual(shouldConnect, false);
-            return fakeChannelState;
-          }
-        };
+        return fakeChannel;
       }
     };
 
@@ -774,6 +770,10 @@ describe('ConnectionPool', function() {
     });
 
     beforeEach(function() {
+      fakeChannel.getConnectivityState = function() {
+        return fakeChannelState;
+      };
+
       fakeChannelState = 0;
       fakeClient.waitForReady = fakeUtil.noop;
 
@@ -828,6 +828,11 @@ describe('ConnectionPool', function() {
 
     it('should emit the ready event if the channel is ready', function(done) {
       fakeChannelState = channelReadyState;
+
+      fakeChannel.getConnectivityState = function(shouldConnect) {
+        assert.strictEqual(shouldConnect, false);
+        return fakeChannelState;
+      };
 
       pool.on(channelReadyEvent, function() {
         assert.strictEqual(pool.isGettingChannelState, false);
