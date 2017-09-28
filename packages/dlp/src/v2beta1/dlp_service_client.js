@@ -312,13 +312,11 @@ DlpServiceClient.prototype.redactContent = function(request, options, callback) 
  *   identifier for the Operation, and the `count` is a counter used for
  *   tracking the number of files written. <p>The CSV file(s) contain the
  *   following columns regardless of storage type scanned: <li>id <li>info_type
- *   <li>likelihood <li>byte size of finding <li>quote <li>timestamp<br/>
+ *   <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
  *   <p>For Cloud Storage the next columns are: <li>file_path
  *   <li>start_offset<br/>
  *   <p>For Cloud Datastore the next columns are: <li>project_id
- *   <li>namespace_id <li>path <li>column_name <li>offset<br/>
- *   <p>For BigQuery the next columns are: <li>row_number <li>project_id
- *   <li>dataset_id <li>table_id
+ *   <li>namespace_id <li>path <li>column_name <li>offset
  *
  *   This object should have the same structure as [OutputStorageConfig]{@link OutputStorageConfig}
  * @param {Object=} options
@@ -425,7 +423,7 @@ DlpServiceClient.prototype.createInspectOperation = function(request, options, c
  * @param {string} request.name
  *   Identifier of the results set returned as metadata of
  *   the longrunning operation created by a call to CreateInspectOperation.
- *   Should be in the format of `inspect/results/{id}`.
+ *   Should be in the format of `inspect/results/{id}.
  * @param {number=} request.pageSize
  *   Maximum number of results to return.
  *   If 0, the implementation selects a reasonable value.
