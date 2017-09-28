@@ -106,8 +106,25 @@ function SpeechClient(gaxGrpc, grpcClients, opts) {
   speechStubMethods.forEach(function(methodName) {
     self['_' + methodName] = gax.createApiCall(
       speechStub.then(function(speechStub) {
+
+        // here, speechStub is an instance of this gRPC client
+        // https://github.com/grpc/grpc/blob/master/src/node/src/client.js#L722-L760
+
         return function() {
           var args = Array.prototype.slice.call(arguments, 0);
+
+          var options = args[0];
+          if (options && options.connectTimeout && options.onConnectTimeout) {
+            speechStub.waitForReady(Date.now() + options.connectTimeout, (err) => {
+              // if not ready within provided timeout
+              // pass error to options.onConnectTimeout callback
+              if (err) options.onConnectTimeout(err);
+            });
+          }
+
+          // when streamingRecognize method is called
+          // here it calls method makeBidiStreamRequest of gRPC client
+          // https://github.com/grpc/grpc/blob/master/src/node/src/client.js#L722-L760
           return speechStub[methodName].apply(speechStub, args);
         };
       }),
