@@ -120,6 +120,7 @@ describe('Topic', function() {
     });
 
     it('should localize the parent object', function() {
+      assert.strictEqual(topic.parent, PUBSUB);
       assert.strictEqual(topic.pubsub, PUBSUB);
     });
 
