@@ -12,21 +12,19 @@
     "node": ">=4.3.2"
   },
   "scripts": {
-    "lint": "samples lint",
+    "lint": "repo-tools lint",
     "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 3m --verbose system-test/*.test.js"
+    "test": "repo-tools test run --cmd ava -- -T 3m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/monitoring": "0.2.3",
-    "async": "2.5.0",
-    "googleapis": "20.1.0",
-    "yargs": "8.0.2"
+    "@google-cloud/monitoring": "0.3.0",
+    "yargs": "9.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.0.4",
+    "ava": "0.22.0",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
+    "sinon": "4.0.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
@@ -39,28 +37,6 @@
         "file": "metrics.js",
         "docs_link": "https://cloud.google.com/monitoring/docs",
         "usage": "node metrics.js --help"
-      },
-      {
-        "id": "list",
-        "name": "Listing resources",
-        "file": "list_resources.js",
-        "docs_link": "https://cloud.google.com/monitoring/demos/#hello-world",
-        "description": "`list_resources.js` is a command-line program to demonstrate connecting to the\nGoogle Monitoring API to retrieve API data.",
-        "usage": {
-          "text": "node list_resources <YOUR_PROJECT_ID>"
-        },
-        "help": "node list_resources my-cool-project"
-      },
-      {
-        "id": "metrics",
-        "name": "Custom metrics",
-        "file": "create_custom_metric.js",
-        "docs_link": "https://cloud.google.com/monitoring/demos/#custom_metrics",
-        "description": "`create_custom_metric.js` demonstrates how to create a custom metric, write a\ntimeseries value to it, and read it back.",
-        "usage": {
-          "text": "node create_custom_metric <YOUR_PROJECT_ID>"
-        },
-        "help": "node create_custom_metric my-cool-project"
       }
     ]
   }

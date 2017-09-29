@@ -22,8 +22,8 @@ const Monitoring = require('@google-cloud/monitoring');
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
 
-// Instantiates a client
-const client = Monitoring.v3().metricServiceClient();
+// Creates a client
+const client = Monitoring.v3.metric();
 
 // Prepares an individual data point
 const dataPoint = {
