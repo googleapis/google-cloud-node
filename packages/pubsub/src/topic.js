@@ -52,7 +52,7 @@ var Publisher = require('./publisher.js');
  */
 function Topic(pubsub, name) {
   this.name = Topic.formatName_(pubsub.projectId, name);
-  this.pubsub = pubsub;
+  this.parent = this.pubsub = pubsub;
   this.request = pubsub.request.bind(pubsub);
 
   /**
