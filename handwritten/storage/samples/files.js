@@ -232,6 +232,7 @@ function getMetadata(bucketName, filename) {
       console.log(`File: ${metadata.name}`);
       console.log(`Bucket: ${metadata.bucket}`);
       console.log(`Storage class: ${metadata.storageClass}`);
+      console.log(`Self link: ${metadata.selfLink}`);
       console.log(`ID: ${metadata.id}`);
       console.log(`Size: ${metadata.size}`);
       console.log(`Updated: ${metadata.updated}`);
@@ -248,6 +249,7 @@ function getMetadata(bucketName, filename) {
       console.log(`Content-encoding: ${metadata.contentEncoding}`);
       console.log(`Content-language: ${metadata.contentLanguage}`);
       console.log(`Metadata: ${metadata.metadata}`);
+      console.log(`Media link: ${metadata.mediaLink}`);
     })
     .catch(err => {
       console.error('ERROR:', err);
