@@ -98,7 +98,20 @@ If you use [@google-cloud/trace-agent][trace-agent] module, then this module wil
 
 ![Logs in Trace Example](/packages/logging-bunyan/doc/images/bunyan-logs-in-trace.png)
 
-If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`.
+If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
+
+```js
+const bunyan = require('bunyan');
+const LoggingBunyan = require('@google-cloud/logging-bunyan');
+const loggingBunyan = LoggingBunyan();
+
+...
+
+logger.info({
+  msg: 'Bunyan log entry with custom trace field',
+  [LoggingBunyan.LOGGING_TRACE_KEY]: 'custom-trace-value'
+});
+```
 
 [bunyan]: https://github.com/trentm/node-bunyan
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging

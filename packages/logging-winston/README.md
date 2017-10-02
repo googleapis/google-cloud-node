@@ -102,7 +102,18 @@ If you use [@google-cloud/trace-agent][trace-agent] module, then this module wil
 
 ![Logs in Trace Example](/packages/logging-winston/doc/images/winston-logs-in-trace.png)
 
-If you wish to set the LogEntry `trace` property with a custom value, then set a winston metadata property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`.
+If you wish to set the LogEntry `trace` property with a custom value, then set a winston metadata property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
+
+```js
+const winston = require('winston');
+const transport = require('@google-cloud/logging-winston');
+
+...
+
+winston.info('Log entry with custom trace value', {
+  [transport.LOGGING_TRACE_KEY]: 'custom-trace-value'
+});
+```
 
 [winston]: https://github.com/winstonjs/winston
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
