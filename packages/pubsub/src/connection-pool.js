@@ -32,6 +32,13 @@ var uuid = require('uuid');
 var PKG = require('../package.json');
 var v1 = require('./v1');
 
+var CHANNEL_READY_EVENT = 'channel.ready';
+var CHANNEL_ERROR_EVENT = 'channel.error';
+
+// if we can't establish a connection within 5 minutes, we need to back off
+// and emit an error to the user.
+var MAX_TIMEOUT = 300000;
+
 // codes to retry streams
 var RETRY_CODES = [
   0, // ok
@@ -62,6 +69,7 @@ function ConnectionPool(subscription) {
 
   this.isPaused = false;
   this.isOpen = false;
+  this.isGettingChannelState = false;
 
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = 0;
@@ -72,7 +80,6 @@ function ConnectionPool(subscription) {
   };
 
   this.queue = [];
-  events.EventEmitter.call(this);
 
   // grpc related fields we need since we're bypassing gax
   this.metadata_ = new grpc.Metadata();
@@ -83,6 +90,7 @@ function ConnectionPool(subscription) {
     'grpc/' + require('grpc/package.json').version
   ].join(' '));
 
+  events.EventEmitter.call(this);
   this.open();
 }
 
@@ -142,16 +150,25 @@ ConnectionPool.prototype.acquire = function(id, callback) {
  * @param {?error} callback.error - An error returned while closing the pool.
  */
 ConnectionPool.prototype.close = function(callback) {
-  var self = this;
   var connections = Array.from(this.connections.values());
 
   callback = callback || common.util.noop;
 
-  this.isOpen = false;
-  self.connections.clear();
-  this.queue.forEach(clearTimeout);
+  if (this.client) {
+    this.client.close();
+  }
 
+  this.connections.clear();
+  this.queue.forEach(clearTimeout);
   this.queue.length = 0;
+
+  this.isOpen = false;
+  this.isGettingChannelState = false;
+
+  this.removeAllListeners('newListener')
+    .removeAllListeners(CHANNEL_READY_EVENT)
+    .removeAllListeners(CHANNEL_ERROR_EVENT);
+
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = 0;
 
@@ -177,28 +194,60 @@ ConnectionPool.prototype.createConnection = function() {
     var connection = client.streamingPull(self.metadata_);
     var errorImmediateHandle;
 
-    connection.on('error', function(err) {
-      // since this is a bidi stream it's possible that we recieve errors from
-      // reads or writes. We also want to try and cut down on the number of
-      // errors that we emit if other connections are still open. So by using
-      // setImmediate we're able to cancel the error message if it gets passed
-      // to the `status` event where we can check if the connection should be
-      // re-opened or if we should send the error to the user
-      errorImmediateHandle = setImmediate(self.emit.bind(self), 'error', err);
-    });
+    if (self.isPaused) {
+      connection.pause();
+    }
 
-    connection.on('metadata', function(metadata) {
-      if (!metadata.get('date').length) {
-        return;
-      }
+    self
+      .once(CHANNEL_ERROR_EVENT, onChannelError)
+      .once(CHANNEL_READY_EVENT, onChannelReady);
+
+    connection
+      .on('error', onConnectionError)
+      .on('data', onConnectionData)
+      .on('status', onConnectionStatus)
+      .write({
+        subscription: common.util.replaceProjectIdToken(
+          self.subscription.name, self.projectId),
+        streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
+      });
+
+    self.connections.set(id, connection);
+
+    function onChannelError() {
+      self.removeListener(CHANNEL_READY_EVENT, onChannelReady);
+
+      connection.cancel();
+    }
+
+    function onChannelReady() {
+      self.removeListener(CHANNEL_ERROR_EVENT, onChannelError);
 
       connection.isConnected = true;
+
       self.noConnectionsTime = 0;
       self.failedConnectionAttempts = 0;
-      self.emit('connected', connection);
-    });
 
-    connection.on('status', function(status) {
+      self.emit('connected', connection);
+    }
+
+    // since this is a bidi stream it's possible that we recieve errors from
+    // reads or writes. We also want to try and cut down on the number of
+    // errors that we emit if other connections are still open. So by using
+    // setImmediate we're able to cancel the error message if it gets passed
+    // to the `status` event where we can check if the connection should be
+    // re-opened or if we should send the error to the user
+    function onConnectionError(err) {
+      errorImmediateHandle = setImmediate(self.emit.bind(self), 'error', err);
+    }
+
+    function onConnectionData(data) {
+      arrify(data.receivedMessages).forEach(function(message) {
+        self.emit('message', self.createMessage(id, message));
+      });
+    }
+
+    function onConnectionStatus(status) {
       clearImmediate(errorImmediateHandle);
 
       connection.end();
@@ -219,25 +268,7 @@ ConnectionPool.prototype.createConnection = function() {
         error.code = status.code;
         self.emit('error', error);
       }
-    });
-
-    connection.on('data', function(data) {
-      arrify(data.receivedMessages).forEach(function(message) {
-        self.emit('message', self.createMessage(id, message));
-      });
-    });
-
-    if (self.isPaused) {
-      connection.pause();
     }
-
-    connection.write({
-      subscription: common.util.replaceProjectIdToken(
-        self.subscription.name, self.projectId),
-      streamAckDeadlineSeconds: self.settings.ackDeadline / 1000
-    });
-
-    self.connections.set(id, connection);
   });
 };
 
@@ -278,6 +309,59 @@ ConnectionPool.prototype.createMessage = function(connectionId, resp) {
 };
 
 /**
+ * Gets the channels connectivity state and emits channel events accordingly.
+ *
+ * @fires CHANNEL_ERROR_EVENT
+ * @fires CHANNEL_READY_EVENT
+ */
+ConnectionPool.prototype.getAndEmitChannelState = function() {
+  var self = this;
+
+  this.isGettingChannelState = true;
+
+  this.getClient(function(err, client) {
+    if (err) {
+      self.isGettingChannelState = false;
+      self.emit(CHANNEL_ERROR_EVENT);
+      self.emit('error', err);
+      return;
+    }
+
+    var READY_STATE = 2;
+
+    var channel = client.getChannel();
+    var connectivityState = channel.getConnectivityState(false);
+
+    if (connectivityState === READY_STATE) {
+      self.isGettingChannelState = false;
+      self.emit(CHANNEL_READY_EVENT);
+      return;
+    }
+
+    var elapsedTimeWithoutConnection = 0;
+    var now = Date.now();
+    var deadline;
+
+    if (self.noConnectionsTime) {
+      elapsedTimeWithoutConnection = now - self.noConnectionsTime;
+    }
+
+    deadline = now + (MAX_TIMEOUT - elapsedTimeWithoutConnection);
+
+    client.waitForReady(deadline, function(err) {
+      self.isGettingChannelState = false;
+
+      if (err) {
+        self.emit(CHANNEL_ERROR_EVENT, err);
+        return;
+      }
+
+      self.emit(CHANNEL_READY_EVENT);
+    });
+  });
+};
+
+/**
  * Gets the Subscriber client. We need to bypass GAX until they allow deadlines
  * to be optional.
  *
@@ -312,6 +396,7 @@ ConnectionPool.prototype.getClient = function(callback) {
     }
 
     self.client = new Subscriber(address, credentials, {
+      'grpc.keepalive_time_ms': MAX_TIMEOUT,
       'grpc.max_receive_message_length': 20000001,
       'grpc.primary_user_agent': common.util.getUserAgentFromPackageJson(PKG)
     });
@@ -375,6 +460,8 @@ ConnectionPool.prototype.isConnected = function() {
  * Creates specified number of connections and puts pool in open state.
  */
 ConnectionPool.prototype.open = function() {
+  var self = this;
+
   var existing = this.connections.size;
   var max = this.settings.maxConnections;
 
@@ -385,6 +472,12 @@ ConnectionPool.prototype.open = function() {
   this.isOpen = true;
   this.failedConnectionAttempts = 0;
   this.noConnectionsTime = Date.now();
+
+  this.on('newListener', function(eventName) {
+    if (eventName === CHANNEL_READY_EVENT && !self.isGettingChannelState) {
+      self.getAndEmitChannelState();
+    }
+  });
 };
 
 /**
@@ -450,7 +543,7 @@ ConnectionPool.prototype.shouldReconnect = function(status) {
   }
 
   var exceededRetryLimit = this.noConnectionsTime &&
-    Date.now() - this.noConnectionsTime > 300000;
+    Date.now() - this.noConnectionsTime > MAX_TIMEOUT;
 
   if (exceededRetryLimit) {
     return false;

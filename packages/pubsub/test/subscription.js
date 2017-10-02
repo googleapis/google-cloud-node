@@ -160,6 +160,7 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.maxConnections, 5);
       assert.strictEqual(subscription.userClosed_, false);
       assert.strictEqual(subscription.messageListeners, 0);
+      assert.strictEqual(subscription.isOpen, false);
 
       assert.deepEqual(subscription.flowControl, {
         maxBytes: FAKE_FREE_MEM * 0.2,
@@ -428,10 +429,29 @@ describe('Subscription', function() {
   });
 
   describe('close', function() {
+    beforeEach(function() {
+      subscription.flushQueues_ = fakeUtil.noop;
+      subscription.closeConnection_ = fakeUtil.noop;
+    });
+
     it('should set the userClosed_ flag', function() {
       subscription.close();
 
       assert.strictEqual(subscription.userClosed_, true);
+    });
+
+    it('should dump the inventory', function() {
+      subscription.inventory_ = {
+        lease: [0, 1, 2],
+        bytes: 123
+      };
+
+      subscription.close();
+
+      assert.deepEqual(subscription.inventory_, {
+        lease: [],
+        bytes: 0
+      });
     });
 
     it('should stop auto-leasing', function(done) {
@@ -439,14 +459,6 @@ describe('Subscription', function() {
       subscription.close();
 
       assert.strictEqual(subscription.leaseTimeoutHandle_, null);
-      setImmediate(done);
-    });
-
-    it('should stop any queued flushes', function(done) {
-      subscription.flushTimeoutHandle_ = setTimeout(done, 1);
-      subscription.close();
-
-      assert.strictEqual(subscription.flushTimeoutHandle_, null);
       setImmediate(done);
     });
 
@@ -467,6 +479,11 @@ describe('Subscription', function() {
   describe('closeConnection_', function() {
     afterEach(function() {
       fakeUtil.noop = function() {};
+    });
+
+    it('should set isOpen to false', function() {
+      subscription.closeConnection_();
+      assert.strictEqual(subscription.isOpen, false);
     });
 
     describe('with connection pool', function() {
@@ -759,6 +776,26 @@ describe('Subscription', function() {
       };
 
       subscription.flushQueues_();
+    });
+
+    it('should cancel any pending flushes', function() {
+      var fakeHandle = 'abc';
+      var cleared = false;
+
+      var _clearTimeout = global.clearTimeout;
+
+      global.clearTimeout = function(handle) {
+        assert.strictEqual(handle, fakeHandle);
+        cleared = true;
+      };
+
+      subscription.flushTimeoutHandle_ = fakeHandle;
+      subscription.flushQueues_();
+
+      assert.strictEqual(subscription.flushTimeoutHandle_, null);
+      assert.strictEqual(cleared, true);
+
+      global.clearTimeout = _clearTimeout;
     });
 
     describe('with connection pool', function() {
@@ -1371,6 +1408,11 @@ describe('Subscription', function() {
       subscription.connectionPool.emit('error', error);
     });
 
+    it('should set isOpen to true', function() {
+      subscription.openConnection_();
+      assert.strictEqual(subscription.isOpen, true);
+    });
+
     it('should lease & emit messages from pool', function(done) {
       var message = {};
       var leasedMessage = {};
@@ -1431,12 +1473,8 @@ describe('Subscription', function() {
     });
 
     it('should flush the queue when connected', function(done) {
-      subscription.flushQueues_ = function() {
-        assert.strictEqual(subscription.flushTimeoutHandle_, null);
-        done();
-      };
+      subscription.flushQueues_ = done;
 
-      subscription.flushTimeoutHandle_ = setTimeout(done, 1);
       subscription.openConnection_();
       subscription.connectionPool.emit('connected');
     });
@@ -1444,14 +1482,34 @@ describe('Subscription', function() {
 
   describe('renewLeases_', function() {
     var fakeDeadline = 9999;
+    var fakeAckIds = ['abc', 'def'];
 
     beforeEach(function() {
-      subscription.inventory_.lease = ['abc', 'def'];
+      subscription.inventory_.lease = fakeAckIds;
       subscription.setLeaseTimeout_ = fakeUtil.noop;
 
       subscription.histogram.percentile = function() {
         return fakeDeadline;
       };
+    });
+
+    it('should clean up the old timeout handle', function() {
+      var fakeHandle = 123;
+      var clearTimeoutCalled = false;
+      var _clearTimeout = global.clearTimeout;
+
+      global.clearTimeout = function(handle) {
+        assert.strictEqual(handle, fakeHandle);
+        clearTimeoutCalled = true;
+      };
+
+      subscription.leaseTimeoutHandle_ = fakeHandle;
+      subscription.renewLeases_();
+
+      assert.strictEqual(subscription.leaseTimeoutHandle_, null);
+      assert.strictEqual(clearTimeoutCalled, true);
+
+      global.clearTimeout = _clearTimeout;
     });
 
     it('should update the ackDeadline', function() {
@@ -1515,8 +1573,9 @@ describe('Subscription', function() {
 
       it('should write to the connection', function(done) {
         fakeConnection.write = function(reqOpts) {
+          assert.notStrictEqual(reqOpts.modifyDeadlineAckIds, fakeAckIds);
           assert.deepEqual(reqOpts, {
-            modifyDeadlineAckIds: ['abc', 'def'],
+            modifyDeadlineAckIds: fakeAckIds,
             modifyDeadlineSeconds: Array(2).fill(fakeDeadline / 1000)
           });
           done();
@@ -1531,9 +1590,10 @@ describe('Subscription', function() {
         subscription.request = function(config, callback) {
           assert.strictEqual(config.client, 'subscriberClient');
           assert.strictEqual(config.method, 'modifyAckDeadline');
+          assert.notStrictEqual(config.reqOpts.ackIds, fakeAckIds);
           assert.deepEqual(config.reqOpts, {
             subscription: subscription.name,
-            ackIds: ['abc', 'def'],
+            ackIds: fakeAckIds,
             ackDeadlineSeconds: fakeDeadline / 1000
           });
           callback();
@@ -1674,6 +1734,10 @@ describe('Subscription', function() {
       globalMathRandom = global.Math.random;
     });
 
+    beforeEach(function() {
+      subscription.isOpen = true;
+    });
+
     after(function() {
       global.setTimeout = globalSetTimeout;
       global.Math.random = globalMathRandom;
@@ -1711,6 +1775,23 @@ describe('Subscription', function() {
       };
 
       subscription.leaseTimeoutHandle_ = fakeTimeoutHandle;
+      subscription.setLeaseTimeout_();
+    });
+
+    it('should not set a timeout if the sub is closed', function() {
+      subscription.renewLeases_ = function() {
+        throw new Error('Should not be called.');
+      };
+
+      global.Math.random = function() {
+        throw new Error('Should not be called.');
+      };
+
+      global.setTimeout = function() {
+        throw new Error('Should not be called.');
+      };
+
+      subscription.isOpen = false;
       subscription.setLeaseTimeout_();
     });
   });

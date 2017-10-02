@@ -181,6 +181,7 @@ function Subscription(pubsub, name, options) {
   this.flushTimeoutHandle_ = null;
   this.leaseTimeoutHandle_ = null;
   this.userClosed_ = false;
+  this.isOpen = false;
 
   events.EventEmitter.call(this);
   this.messageListeners = 0;
@@ -328,11 +329,11 @@ Subscription.prototype.breakLease_ = function(message) {
 Subscription.prototype.close = function(callback) {
   this.userClosed_ = true;
 
+  var inventory = this.inventory_;
+  inventory.lease.length = inventory.bytes = 0;
+
   clearTimeout(this.leaseTimeoutHandle_);
   this.leaseTimeoutHandle_ = null;
-
-  clearTimeout(this.flushTimeoutHandle_);
-  this.flushTimeoutHandle_ = null;
 
   this.flushQueues_();
   this.closeConnection_(callback);
@@ -347,6 +348,8 @@ Subscription.prototype.close = function(callback) {
  * @param {?error} err - An error returned from this request.
  */
 Subscription.prototype.closeConnection_ = function(callback) {
+  this.isOpen = false;
+
   if (this.connectionPool) {
     this.connectionPool.close(callback || common.util.noop);
     this.connectionPool = null;
@@ -519,6 +522,9 @@ Subscription.prototype.exists = function(callback) {
  */
 Subscription.prototype.flushQueues_ = function() {
   var self = this;
+
+  clearTimeout(this.flushTimeoutHandle_);
+  this.flushTimeoutHandle_ = null;
 
   var acks = this.inventory_.ack;
   var nacks = this.inventory_.nack;
@@ -846,6 +852,8 @@ Subscription.prototype.openConnection_ = function() {
   var self = this;
   var pool = this.connectionPool = new ConnectionPool(this);
 
+  this.isOpen = true;
+
   pool.on('error', function(err) {
     self.emit('error', err);
   });
@@ -859,8 +867,6 @@ Subscription.prototype.openConnection_ = function() {
   });
 
   pool.once('connected', function() {
-    clearTimeout(self.flushTimeoutHandle_);
-    self.flushTimeoutHandle_ = null;
     self.flushQueues_();
   });
 };
@@ -874,14 +880,16 @@ Subscription.prototype.openConnection_ = function() {
 Subscription.prototype.renewLeases_ = function() {
   var self = this;
 
+  clearTimeout(this.leaseTimeoutHandle_);
   this.leaseTimeoutHandle_ = null;
 
   if (!this.inventory_.lease.length) {
     return;
   }
 
-  var ackIds = this.inventory_.lease;
   this.ackDeadline = this.histogram.percentile(99);
+
+  var ackIds = this.inventory_.lease.slice();
   var ackDeadlineSeconds = this.ackDeadline / 1000;
 
   if (this.connectionPool) {
@@ -991,7 +999,7 @@ Subscription.prototype.setFlushTimeout_ = function() {
  * @private
  */
 Subscription.prototype.setLeaseTimeout_ = function() {
-  if (this.leaseTimeoutHandle_) {
+  if (this.leaseTimeoutHandle_  || !this.isOpen) {
     return;
   }
 
