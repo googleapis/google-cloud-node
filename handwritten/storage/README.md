@@ -91,13 +91,16 @@ storage
 Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Documentation                      | Source Code                       |
-| --------------------------- | ---------------------------------- | --------------------------------- |
-| ACL (Access Control Lists) | [documentation](https://cloud.google.com/storage/docs/access-control/create-manage-lists) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/acl.js) |
-| Buckets | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/buckets.js) |
-| Encryption | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/encryption.js) |
-| Files | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/files.js) |
-| Requester Pays | [documentation](https://cloud.google.com/storage/docs) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/requesterPays.js) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| ACL (Access Control Lists) | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/acl.js) |
+| Buckets | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/buckets.js) |
+| Encryption | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/encryption.js) |
+| Files | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/files.js) |
+| Requester Pays | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/requesterPays.js) |
+
+The [Cloud Storage Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
 ## Versioning
 
