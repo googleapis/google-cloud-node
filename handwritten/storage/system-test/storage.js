@@ -713,8 +713,14 @@ describe('storage', function() {
     });
 
     it('should allow changing the storage class', function(done) {
+      var bucket = storage.bucket(generateName());
+
       async.series(
         [
+          function(next) {
+            bucket.create(next);
+          },
+
           function(next) {
             bucket.getMetadata(function(err, metadata) {
               assert.ifError(err);
@@ -919,7 +925,7 @@ describe('storage', function() {
       // These tests are skipped because after multiple days of trying, we
       // flatly can not figure out the magic incantation of appropriate
       // IAM permissions to make them work. - lukesneeringer@, 2017-09-07
-      describe.skip('methods that accept userProject', function() {
+      describe('methods that accept userProject', function() {
         var file;
         var USER_PROJECT_OPTIONS = {
           userProject: process.env.GCN_STORAGE_2ND_PROJECT_ID,
@@ -1290,10 +1296,11 @@ describe('storage', function() {
       });
     });
 
-    it.skip('should upload a gzipped file and download it', function(done) {
+    it('should upload a gzipped file and download it', function(done) {
       var options = {
         metadata: {
           contentEncoding: 'gzip',
+          contentType: 'text/html',
         },
       };
 
