@@ -260,6 +260,12 @@ describe('PubSub', function() {
       name: 'subscription-name'
     };
 
+    beforeEach(function() {
+      Subscription.formatMetadata_ = function(metadata) {
+        return extend({}, metadata);
+      };
+    });
+
     it('should throw if no Topic is provided', function() {
       assert.throws(function() {
         pubsub.createSubscription();
@@ -353,13 +359,7 @@ describe('PubSub', function() {
       var expectedBody = extend({
         topic: TOPIC.name,
         name: SUB_NAME
-      }, options, {
-        pushConfig: {
-          pushEndpoint: options.pushEndpoint
-        }
-      });
-
-      delete expectedBody.pushEndpoint;
+      }, options);
 
       pubsub.topic = function() {
         return {
@@ -413,27 +413,23 @@ describe('PubSub', function() {
       pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
-    describe('message retention', function() {
-      it('should accept a number', function(done) {
-        var threeDaysInSeconds = 3 * 24 * 60 * 60;
+    it('should format the metadata', function(done) {
+      var fakeMetadata = {};
+      var formatted = {
+        a: 'a'
+      };
 
-        pubsub.request = function(config) {
-          assert.strictEqual(config.reqOpts.retainAckedMessages, true);
+      Subscription.formatMetadata_ = function(metadata) {
+        assert.strictEqual(metadata, fakeMetadata);
+        return formatted;
+      };
 
-          assert.strictEqual(
-            config.reqOpts.messageRetentionDuration.seconds,
-            threeDaysInSeconds
-          );
+      pubsub.request = function(config) {
+        assert.strictEqual(config.reqOpts, formatted);
+        done();
+      };
 
-          assert.strictEqual(config.reqOpts.messageRetentionDuration.nanos, 0);
-
-          done();
-        };
-
-        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, {
-          messageRetentionDuration: threeDaysInSeconds
-        }, assert.ifError);
-      });
+      pubsub.createSubscription(TOPIC, SUB_NAME, fakeMetadata, assert.ifError);
     });
 
     describe('error', function() {

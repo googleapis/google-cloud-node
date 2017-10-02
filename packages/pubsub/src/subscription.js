@@ -25,6 +25,7 @@ var events = require('events');
 var extend = require('extend');
 var is = require('is');
 var os = require('os');
+var snakeCase = require('lodash.snakecase');
 var util = require('util');
 
 /**
@@ -230,6 +231,34 @@ function Subscription(pubsub, name, options) {
 }
 
 util.inherits(Subscription, events.EventEmitter);
+
+/**
+ * Formats Subscription metadata.
+ *
+ * @private
+ */
+Subscription.formatMetadata_ = function(metadata) {
+  var formatted = extend({}, metadata);
+
+  if (metadata.messageRetentionDuration) {
+    formatted.retainAckedMessages = true;
+
+    formatted.messageRetentionDuration = {
+      seconds: metadata.messageRetentionDuration,
+      nanos: 0
+    };
+  }
+
+  if (metadata.pushEndpoint) {
+    delete formatted.pushEndpoint;
+
+    formatted.pushConfig = {
+      pushEndpoint: metadata.pushEndpoint
+    };
+  }
+
+  return formatted;
+};
 
 /**
  * Format the name of a subscription. A subscription's full name is in the
@@ -1042,9 +1071,16 @@ Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
     gaxOpts = {};
   }
 
+  var body = Subscription.formatMetadata_(metadata);
+  var fields = Object.keys(body).map(snakeCase);
+
+  body.name = this.name;
+
   var reqOpts = {
-    subscription: this.name,
-    updateMask: metadata
+    subscription: body,
+    updateMask: {
+      paths: fields
+    }
   };
 
   this.request({

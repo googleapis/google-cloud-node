@@ -388,6 +388,34 @@ describe('pubsub', function() {
       });
     });
 
+    it('should set metadata for a subscription', function() {
+      var subscription = topic.subscription(generateSubName());
+      var threeDaysInSeconds = 3 * 24 * 60 * 60;
+
+      return subscription.create()
+        .then(function() {
+          return subscription.setMetadata({
+            messageRetentionDuration: threeDaysInSeconds
+          });
+        })
+        .then(function() {
+          return subscription.getMetadata();
+        })
+        .then(function(data) {
+          var metadata = data[0];
+
+          assert.strictEqual(metadata.retainAckedMessages, true);
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.seconds, 10),
+            threeDaysInSeconds
+          );
+          assert.strictEqual(
+            parseInt(metadata.messageRetentionDuration.nanos, 10),
+            0
+          );
+        });
+    });
+
     it('should re-use an existing subscription', function(done) {
       pubsub.createSubscription(topic, SUB_NAMES[0], done);
     });

@@ -219,6 +219,47 @@ describe('Subscription', function() {
     });
   });
 
+  describe('formatMetadata_', function() {
+    it('should make a copy of the metadata', function() {
+      var metadata = { a: 'a' };
+      var formatted = Subscription.formatMetadata_(metadata);
+
+      assert.deepEqual(metadata, formatted);
+      assert.notStrictEqual(metadata, formatted);
+    });
+
+    it('should format messageRetentionDuration', function() {
+      var threeDaysInSeconds = 3 * 24 * 60 * 60;
+
+      var metadata = {
+        messageRetentionDuration: threeDaysInSeconds
+      };
+
+      var formatted = Subscription.formatMetadata_(metadata);
+
+      assert.strictEqual(formatted.retainAckedMessages, true);
+      assert.strictEqual(formatted.messageRetentionDuration.nanos, 0);
+
+      assert.strictEqual(
+        formatted.messageRetentionDuration.seconds,
+        threeDaysInSeconds
+      );
+    });
+
+    it('should format pushEndpoint', function() {
+      var pushEndpoint = 'http://noop.com/push';
+
+      var metadata = {
+        pushEndpoint: pushEndpoint
+      };
+
+      var formatted = Subscription.formatMetadata_(metadata);
+
+      assert.strictEqual(formatted.pushConfig.pushEndpoint, pushEndpoint);
+      assert.strictEqual(formatted.pushEndpoint, undefined);
+    });
+  });
+
   describe('formatName_', function() {
     it('should format name', function() {
       var formattedName = Subscription.formatName_(PROJECT_ID, SUB_NAME);
@@ -1797,16 +1838,37 @@ describe('Subscription', function() {
   });
 
   describe('setMetadata', function() {
-    var METADATA = {};
+    var METADATA = {
+      pushEndpoint: 'http://noop.com/push'
+    };
+
+    beforeEach(function() {
+      Subscription.formatMetadata_ = function(metadata) {
+        return extend({}, metadata);
+      };
+    });
 
     it('should make the correct request', function(done) {
+      var formattedMetadata = {
+        pushConfig: {
+          pushEndpoint: METADATA.pushEndpoint
+        }
+      };
+
+      var expectedBody = extend({
+        name: SUB_FULL_NAME
+      }, formattedMetadata);
+
+      Subscription.formatMetadata_ = function(metadata) {
+        assert.strictEqual(metadata, METADATA);
+        return formattedMetadata;
+      };
+
       subscription.request = function(config, callback) {
         assert.strictEqual(config.client, 'subscriberClient');
         assert.strictEqual(config.method, 'updateSubscription');
-        assert.deepEqual(config.reqOpts, {
-          subscription: subscription.name,
-          updateMask: METADATA
-        });
+        assert.deepEqual(config.reqOpts.subscription, expectedBody);
+        assert.deepEqual(config.reqOpts.updateMask, { paths: ['push_config'] });
         callback(); // the done fn
       };
 
