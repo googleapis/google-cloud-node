@@ -98,7 +98,7 @@ function Transaction(session, options) {
   this.retries_ = 0;
   this.runFn_ = null;
 
-  this.timeout_ = 60000;
+  this.timeout_ = 3600000;
   this.beginTime_ = null;
 
   TransactionRequest.call(this, options);
