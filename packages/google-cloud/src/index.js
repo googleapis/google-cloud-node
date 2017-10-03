@@ -150,6 +150,25 @@ var apis = {
   dns: require('@google-cloud/dns'),
 
   /**
+   * [Google Cloud Firestore](https://firebase.google.com/docs/firestore) is a
+   * flexible, scalable database for mobile, web, and server development from
+   * Firebase and Google Cloud Platform. Like Firebase Realtime Database, it
+   * keeps your data in sync across client apps through realtime listeners and
+   * offers offline support for mobile and web so you can build responsive apps
+   * that work regardless of network latency or Internet connectivity. Cloud
+   * Firestore also offers seamless integration with other Firebase and Google
+   * Cloud Platform products, including Cloud Functions.
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var firestore = gcloud.firestore({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  firestore: require('@google-cloud/firestore'),
+
+  /**
    * The [Cloud Natural Language](https://cloud.google.com/natural-language/docs)
    * API provides natural language understanding technologies to developers,
    * including sentiment analysis, entity recognition, and syntax analysis.

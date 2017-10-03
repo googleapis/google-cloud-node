@@ -38,6 +38,7 @@ var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
 var FakeDLP = createFakeApi();
 var FakeDNS = createFakeApi();
+var FakeFirestore = createFakeApi();
 var FakeLanguage = createFakeApi();
 var FakeLogging = createFakeApi();
 var FakeMonitoring = createFakeApi();
@@ -62,6 +63,7 @@ describe('gcloud', function() {
       '@google-cloud/datastore': FakeDatastore,
       '@google-cloud/dlp': FakeDLP,
       '@google-cloud/dns': FakeDNS,
+      '@google-cloud/firestore': FakeFirestore,
       '@google-cloud/language': FakeLanguage,
       '@google-cloud/logging': FakeLogging,
       '@google-cloud/monitoring': FakeMonitoring,
@@ -103,6 +105,10 @@ describe('gcloud', function() {
 
   it('should export static dns', function() {
     assert.strictEqual(gcloud.dns, FakeDNS);
+  });
+
+  it('should export static firestore', function() {
+    assert.strictEqual(gcloud.firestore, FakeFirestore);
   });
 
   it('should export static language', function() {
@@ -235,6 +241,15 @@ describe('gcloud', function() {
 
         assert(dns instanceof FakeDNS);
         assert.strictEqual(dns.calledWith_[0], options);
+      });
+    });
+
+    describe('firestore', function() {
+      it('should create a new Firestore', function() {
+        var firestore = localGcloud.firestore(options);
+
+        assert(firestore instanceof FakeFirestore);
+        assert.strictEqual(firestore.calledWith_[0], options);
       });
     });
 

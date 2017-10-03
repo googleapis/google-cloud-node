@@ -18,6 +18,7 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
+* [Cloud Firestore](#cloud-firestore-beta) (Beta)
 * [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
@@ -122,6 +123,7 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Cloud Spanner API
   * Google Cloud Datastore API
   * Google Cloud DNS API
+  * Google Cloud Firestore API
   * Google Cloud Natural Language API
   * Google Cloud Pub/Sub API
   * Google Cloud Resource Manager API
@@ -403,6 +405,62 @@ loggingClient.getEntries(function(err, entries) {
   if (!err) {
     // `entries` contains all of the entries from the logs in your project.
   }
+});
+```
+
+
+## Cloud Firestore (Beta)
+
+- [API Documentation][gcloud-firestore-docs]
+- [Official Documentation][cloud-firestore-docs]
+
+#### Using the Cloud Firestore API module
+
+```
+$ npm install --save @google-cloud/firestore
+```
+
+```js
+const Firestore = require('@google-cloud/firestore');
+```
+
+#### Authentication
+
+See [Authentication](#authentication).
+
+#### Preview
+
+```js
+const firestore = new Firestore({
+  projectId: 'YOUR_PROJECT_ID',
+  keyFilename: '/path/to/keyfile.json',
+});
+
+const document = firestore.doc('posts/intro-to-firestore');
+
+// Enter new data into the document.
+document.set({
+  title: 'Welcome to Firestore',
+  body: 'Hello World',
+}).then(() => {
+  // Document created successfully.
+});
+
+// Update an existing document.
+document.update({
+  body: 'My first Firestore app',
+}).then(() => {
+  // Document updated successfully.
+});
+
+// Read the document.
+document.get().then(doc => {
+  // Document read successfully.
+});
+
+// Delete the document.
+document.delete().then(() => {
+  // Document deleted successfully.
 });
 ```
 
@@ -1171,6 +1229,7 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [gcloud-bigtable-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/bigtable
 [gcloud-compute-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore
+[gcloud-firestore-docs]: https://cloud.google.com/nodejs/docs/reference/firestore/latest
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/dns
 [gcloud-language-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/language
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
@@ -1211,6 +1270,8 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
 
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
+
+[cloud-firestore-docs]: https://firebase.google.com/docs/firestore
 
 [cloud-language-docs]: https://cloud.google.com/natural-language/docs
 
