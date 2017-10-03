@@ -230,10 +230,7 @@ BigQuery.prototype.timestamp = function(value) {
     return new BigQuery.timestamp(value);
   }
 
-  value = new Date(value);
-  value = value.toJSON().replace(/^(.*)T(.*)Z$/, '$1 $2');
-
-  this.value = value;
+  this.value = new Date(value).toJSON();
 };
 
 /**
