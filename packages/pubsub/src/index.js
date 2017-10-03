@@ -173,32 +173,16 @@ PubSub.prototype.createSubscription = function(topic, name, options, callback) {
 
   options = options || {};
 
-  var subscription = this.subscription(name, options);
+  var metadata = Subscription.formatMetadata_(options);
+  var subscription = this.subscription(name, metadata);
 
-  var reqOpts = extend({
+  var reqOpts = extend(metadata, {
     topic: topic.name,
     name: subscription.name
-  }, options);
+  });
 
   delete reqOpts.gaxOpts;
   delete reqOpts.flowControl;
-
-  if (options.messageRetentionDuration) {
-    reqOpts.retainAckedMessages = true;
-
-    reqOpts.messageRetentionDuration = {
-      seconds: options.messageRetentionDuration,
-      nanos: 0
-    };
-  }
-
-  if (options.pushEndpoint) {
-    delete reqOpts.pushEndpoint;
-
-    reqOpts.pushConfig = {
-      pushEndpoint: options.pushEndpoint
-    };
-  }
 
   this.request({
     client: 'subscriberClient',
