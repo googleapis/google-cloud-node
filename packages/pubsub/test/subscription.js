@@ -366,6 +366,19 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.inventory_.bytes, 0);
     });
 
+    it('should noop for unknown messages', function() {
+      var message = {
+        ackId: 'def',
+        data: new Buffer('world'),
+        length: 5
+      };
+
+      subscription.breakLease_(message);
+
+      assert.strictEqual(subscription.inventory_.lease.length, 1);
+      assert.strictEqual(subscription.inventory_.bytes, 5);
+    });
+
     describe('with connection pool', function() {
       it('should resume receiving messages if paused', function(done) {
         subscription.connectionPool = {
@@ -1133,9 +1146,9 @@ describe('Subscription', function() {
   });
 
   describe('hasMaxMessages_', function() {
-    it('should return true if the number of leases == maxMessages', function() {
+    it('should return true if the number of leases > maxMessages', function() {
       subscription.inventory_.lease = ['a', 'b', 'c'];
-      subscription.flowControl.maxMessages = 3;
+      subscription.flowControl.maxMessages = 2;
 
       assert(subscription.hasMaxMessages_());
     });
@@ -1432,7 +1445,7 @@ describe('Subscription', function() {
     });
 
     it('should pause the pool if sub is at max messages', function(done) {
-      var message = {};
+      var message = { nack: fakeUtil.noop };
       var leasedMessage = {};
 
       subscription.leaseMessage_ = function() {
@@ -1450,7 +1463,7 @@ describe('Subscription', function() {
     });
 
     it('should not re-pause the pool', function(done) {
-      var message = {};
+      var message = { nack: fakeUtil.noop };
       var leasedMessage = {};
 
       subscription.leaseMessage_ = function() {
@@ -1470,6 +1483,23 @@ describe('Subscription', function() {
 
       subscription.connectionPool.emit('message', message);
       done();
+    });
+
+    it('should nack messages if over limit', function(done) {
+      var message = { nack: done };
+      var leasedMessage = {};
+
+      subscription.leaseMessage_ = function() {
+        return leasedMessage;
+      };
+
+      subscription.hasMaxMessages_ = function() {
+        return true;
+      };
+
+      subscription.openConnection_();
+      subscription.connectionPool.isPaused = true;
+      subscription.connectionPool.emit('message', message);
     });
 
     it('should flush the queue when connected', function(done) {

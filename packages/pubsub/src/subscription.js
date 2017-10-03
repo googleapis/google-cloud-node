@@ -291,13 +291,17 @@ Subscription.prototype.ack_ = function(message) {
 Subscription.prototype.breakLease_ = function(message) {
   var messageIndex = this.inventory_.lease.indexOf(message.ackId);
 
+  if (messageIndex === -1) {
+    return;
+  }
+
   this.inventory_.lease.splice(messageIndex, 1);
   this.inventory_.bytes -= message.length;
 
-  if (this.connectionPool) {
-    if (this.connectionPool.isPaused && !this.hasMaxMessages_()) {
-      this.connectionPool.resume();
-    }
+  var pool = this.connectionPool;
+
+  if (pool && pool.isPaused && !this.hasMaxMessages_()) {
+    pool.resume();
   }
 
   if (!this.inventory_.lease.length) {
@@ -701,7 +705,7 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
  * @return {boolean}
  */
 Subscription.prototype.hasMaxMessages_ = function() {
-  return this.inventory_.lease.length >= this.flowControl.maxMessages ||
+  return this.inventory_.lease.length > this.flowControl.maxMessages ||
     this.inventory_.bytes >= this.flowControl.maxBytes;
 };
 
@@ -859,11 +863,16 @@ Subscription.prototype.openConnection_ = function() {
   });
 
   pool.on('message', function(message) {
-    self.emit('message', self.leaseMessage_(message));
+    if (!self.hasMaxMessages_()) {
+      self.emit('message', self.leaseMessage_(message));
+      return;
+    }
 
-    if (self.hasMaxMessages_() && !pool.isPaused) {
+    if (!pool.isPaused) {
       pool.pause();
     }
+
+    message.nack();
   });
 
   pool.once('connected', function() {
