@@ -73,7 +73,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.5",
+    "@google-cloud/nodejs-repo-tools": "^2.0.7",
     "codecov": "^2.3.0",
     "eslint": "^4.7.1",
     "eslint-config-prettier": "^2.5.0",

@@ -5,7 +5,7 @@
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-storage.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-storage)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-storage?svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-storage)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-storage/repo-migration.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-storage)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-storage/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-storage)
 
 > Node.js idiomatic client for [Cloud Storage][product-docs].
 
@@ -21,7 +21,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-* [QuickStart](#quickstart)
+* [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
   * [Using the client library](#using-the-client-library)
