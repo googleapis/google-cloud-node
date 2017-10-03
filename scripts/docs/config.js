@@ -72,6 +72,9 @@ module.exports = {
     dns: {
       title: 'Cloud DNS'
     },
+    firestore: {
+      title: 'Cloud Firestore'
+    },
     language: {
       title: 'Cloud Natural Language'
     },
