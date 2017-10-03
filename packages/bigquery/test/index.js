@@ -276,7 +276,7 @@ describe('BigQuery', function() {
   describe('timestamp', function() {
     var INPUT_STRING = '2016-12-06T12:00:00.000Z';
     var INPUT_DATE = new Date(INPUT_STRING);
-    var EXPECTED_VALUE = '2016-12-06T12:00:00.000Z';
+    var EXPECTED_VALUE = INPUT_DATE.toJSON();
 
     it('should expose static and instance constructors', function() {
       var staticT = BigQuery.timestamp(INPUT_DATE);
