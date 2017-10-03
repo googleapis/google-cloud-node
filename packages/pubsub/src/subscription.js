@@ -1071,13 +1071,13 @@ Subscription.prototype.setMetadata = function(metadata, gaxOpts, callback) {
     gaxOpts = {};
   }
 
-  var body = Subscription.formatMetadata_(metadata);
-  var fields = Object.keys(body).map(snakeCase);
+  var subscription = Subscription.formatMetadata_(metadata);
+  var fields = Object.keys(subscription).map(snakeCase);
 
-  body.name = this.name;
+  subscription.name = this.name;
 
   var reqOpts = {
-    subscription: body,
+    subscription: subscription,
     updateMask: {
       paths: fields
     }
