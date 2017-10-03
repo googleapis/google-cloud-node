@@ -79,7 +79,7 @@ To format your request logs you can provide a `httpRequest` property on the buny
 ![Request Log Example](doc/images/request-log.png)
 
 ```js
-logger.info({ 
+logger.info({
   httpRequest: {
     status: res.statusCode,
     requestUrl: req.url,
@@ -92,6 +92,26 @@ logger.info({
 
 The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message.
 
+## Correlating Logs with Traces
+
+If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
+
+![Logs in Trace Example](/packages/logging-bunyan/doc/images/bunyan-logs-in-trace.png)
+
+If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
+
+```js
+const bunyan = require('bunyan');
+const LoggingBunyan = require('@google-cloud/logging-bunyan');
+const loggingBunyan = LoggingBunyan();
+
+...
+
+logger.info({
+  msg: 'Bunyan log entry with custom trace field',
+  [LoggingBunyan.LOGGING_TRACE_KEY]: 'custom-trace-value'
+});
+```
 
 [bunyan]: https://github.com/trentm/node-bunyan
 [@google-cloud/logging]: https://www.npmjs.com/package/@google-cloud/logging
@@ -102,3 +122,6 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 [@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
 [uncaught]: https://nodejs.org/api/process.html#process_event_uncaughtexception
 [unhandled]: https://nodejs.org/api/process.html#process_event_unhandledrejection
+[trace-agent]: https://www.npmjs.com/package/@google-cloud/trace-agent
+[LogEntry]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+[trace-viewing-log-entries]: https://cloud.google.com/trace/docs/viewing-details#log_entries
