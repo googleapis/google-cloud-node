@@ -479,15 +479,22 @@ Bundler.prototype.bundle = function() {
   var self = this;
 
   var baseTypes = this.builder.getTypes();
-  var deps = this.getDeps().map(function(dep) {
-    var config = findWhere(manifest.modules, { id: dep.name });
-    var versions = config.versions.filter(semver.valid);
+  var deps = this.getDeps()
+    .map(function(dep) {
+      var config = findWhere(manifest.modules, { id: dep.name });
 
-    return {
-      name: dep.name,
-      version: semver.maxSatisfying(versions, dep.version)
-    };
-  });
+      if (!config) {
+        return;
+      }
+
+      var versions = config.versions.filter(semver.valid);
+
+      return {
+        name: dep.name,
+        version: semver.maxSatisfying(versions, dep.version)
+      };
+    })
+    .filter(dep => dep);
 
   var submodule = git.submodule('master', 'bundler');
 
