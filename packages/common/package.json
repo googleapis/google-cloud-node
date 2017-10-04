@@ -51,14 +51,14 @@
     "methmeth": "^1.1.0",
     "modelo": "^4.2.0",
     "request": "^2.79.0",
-    "retry-request": "^2.0.0",
+    "retry-request": "^3.0.0",
     "split-array-stream": "^1.0.0",
     "stream-events": "^1.0.1",
     "string-format-obj": "^1.1.0",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "mocha": "^4.0.0",
     "proxyquire": "^1.7.10",
     "uuid": "^3.0.1"
   },
