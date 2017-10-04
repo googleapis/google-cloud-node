@@ -38,18 +38,18 @@
   ],
   "repository": "googlecloudplatform/google-cloud-node",
   "dependencies": {
-    "@google-cloud/common": "^0.13.0",
+    "@google-cloud/common": "^0.13.6",
     "dot-prop": "^2.4.0",
-    "duplexify": "^3.5.0",
+    "duplexify": "^3.5.1",
     "extend": "^3.0.0",
     "grpc": "^1.6.0",
     "is": "^3.2.0",
     "modelo": "^4.2.0",
-    "retry-request": "^2.0.0",
+    "retry-request": "^3.0.0",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "mocha": "^4.0.0",
     "proxyquire": "^1.7.10",
     "sinon": "^1.17.7"
   },
