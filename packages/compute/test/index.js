@@ -1454,7 +1454,7 @@ describe('Compute', function() {
       var ZONE_NAME = 'zone-1';
       var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var instanceGroup = { name: 'isntance-group-1' };
+      var instanceGroup = { name: 'instance-group-1' };
       var apiResponse = {
         items: {}
       };
