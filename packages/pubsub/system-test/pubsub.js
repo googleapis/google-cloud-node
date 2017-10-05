@@ -479,6 +479,30 @@ describe('pubsub', function() {
         setTimeout(() => subscription.close(done), 2500);
       }
     });
+
+    it('should respect flow control limits', function(done) {
+      var maxMessages = 3;
+      var messageCount = 0;
+
+      var subscription = topic.subscription(SUB_NAMES[0], {
+        flowControl: {
+          maxMessages: maxMessages
+        }
+      });
+
+      subscription.on('error', done);
+      subscription.on('message', onMessage);
+
+      function onMessage() {
+        if (++messageCount < (maxMessages + 1)) {
+          return;
+        }
+
+        setImmediate(function() {
+          subscription.close(done);
+        });
+      }
+    });
   });
 
   describe('IAM', function() {

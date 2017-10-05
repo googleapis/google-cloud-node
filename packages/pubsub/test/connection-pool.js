@@ -1170,13 +1170,22 @@ describe('ConnectionPool', function() {
     });
 
     it('should reset internal used props', function() {
+      var fakeDate = Date.now();
+      var dateNow = Date.now;
+
+      global.Date.now = function() {
+        return fakeDate;
+      };
+
       pool.failedConnectionAttempts = 100;
       pool.noConnectionsTime = 0;
 
       pool.open();
 
       assert.strictEqual(pool.failedConnectionAttempts, 0);
-      assert.strictEqual(pool.noConnectionsTime, Date.now());
+      assert.strictEqual(pool.noConnectionsTime, fakeDate);
+
+      global.Date.now = dateNow;
     });
 
     it('should listen for newListener events', function() {
