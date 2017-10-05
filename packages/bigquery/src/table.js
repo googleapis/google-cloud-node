@@ -198,7 +198,7 @@ function Table(dataset, id) {
      *   }
      * };
      *
-     * table.setMetadata(metadata, function(err, apiResponse) {})
+     * table.setMetadata(metadata, function(err, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
