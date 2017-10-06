@@ -922,9 +922,6 @@ describe('storage', function() {
         });
       });
 
-      // These tests are skipped because after multiple days of trying, we
-      // flatly can not figure out the magic incantation of appropriate
-      // IAM permissions to make them work. - lukesneeringer@, 2017-09-07
       describe('methods that accept userProject', function() {
         var file;
         var USER_PROJECT_OPTIONS = {
