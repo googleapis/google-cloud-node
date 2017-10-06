@@ -304,7 +304,7 @@ InstanceGroup.prototype.delete = function(callback) {
  * @param {boolean} options.running - Only return instances which are running.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm[]} callback.vms - VM objects from this isntance
+ * @param {module:compute/vm[]} callback.vms - VM objects from this instance
  *     group.
  * @param {object} callback.apiResponse - The full API response.
  *
