@@ -14,6 +14,7 @@
   * [Buckets](#buckets)
   * [Encryption](#encryption)
   * [Files](#files)
+  * [Notifications](#notifications)
   * [Requester Pays](#requester-pays)
 
 ## Before you begin
@@ -168,9 +169,38 @@ For more information, see https://cloud.google.com/storage/docs
 [files_3_docs]: https://cloud.google.com/storage/docs
 [files_3_code]: files.js
 
+### Notifications
+
+View the [source code][notifications_4_code].
+
+__Usage:__ `node notifications.js --help`
+
+```
+Commands:
+  create <bucketName> <topic>                 Creates a new notification
+  list <bucketName>                           Lists notifications for a given bucket.
+  get-metadata <bucketName> <notificationId>  Gets metadata for a notification.
+  delete <bucketName> <notificationId>        Deletes a notification from a bucket.
+
+Options:
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
+
+Examples:
+  node notifications.js create my-bucket my-topic  Creates a notification subscription.
+  node notifications.js list my-bucket             Lists notifications associated with "my-bucket".
+  node notifications.js get-metadata my-bucket 1   Gets the metadata for notification "1" attached to "my-bucket".
+  node notifications.js delete my-bucket 1         Deletes the notification "1" from "my-bucket".
+
+For more information, see https://cloud.google.com/storage/docs
+```
+
+[notifications_4_docs]: https://cloud.google.com/storage/docs
+[notifications_4_code]: notifications.js
+
 ### Requester Pays
 
-View the [source code][requesterPays_4_code].
+View the [source code][requesterPays_5_code].
 
 __Usage:__ `node requesterPays.js --help`
 
@@ -199,5 +229,5 @@ Examples:
 For more information, see https://cloud.google.com/storage/docs
 ```
 
-[requesterPays_4_docs]: https://cloud.google.com/storage/docs
-[requesterPays_4_code]: requesterPays.js
+[requesterPays_5_docs]: https://cloud.google.com/storage/docs
+[requesterPays_5_code]: requesterPays.js

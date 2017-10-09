@@ -36,6 +36,7 @@ var util = require('@google-cloud/common').util;
 var Storage = require('../');
 var Bucket = Storage.Bucket;
 var File = Storage.File;
+var PubSub = require('@google-cloud/pubsub');
 
 describe('storage', function() {
   var TESTS_PREFIX = 'gcloud-tests-';
@@ -1946,6 +1947,141 @@ describe('storage', function() {
         assert.strictEqual(policyJson.expiration, expectedExpiration);
         done();
       });
+    });
+  });
+
+  describe('notifications', function() {
+    var topic;
+    var subscription;
+    var notification;
+
+    before(function() {
+      var pubsub = new PubSub({});
+
+      topic = pubsub.topic(generateName());
+      subscription = topic.subscription(generateName());
+
+      return topic
+        .create()
+        .then(function() {
+          return topic.iam.setPolicy({
+            bindings: [
+              {
+                role: 'roles/pubsub.editor',
+                members: ['allUsers'],
+              },
+            ],
+          });
+        })
+        .then(function() {
+          return subscription.create();
+        })
+        .then(function() {
+          return bucket.createNotification(topic, {
+            eventTypes: ['OBJECT_FINALIZE'],
+          });
+        })
+        .then(function(data) {
+          notification = data[0];
+        });
+    });
+
+    after(function() {
+      return subscription
+        .delete()
+        .then(function() {
+          return topic.delete();
+        })
+        .then(function() {
+          return bucket.getNotifications();
+        })
+        .then(function(data) {
+          return Promise.all(
+            data[0].map(function(notification) {
+              return notification.delete();
+            })
+          );
+        });
+    });
+
+    it('should get an existing notification', function(done) {
+      notification.get(function(err) {
+        assert.ifError(err);
+        assert(!is.empty(notification.metadata));
+        done();
+      });
+    });
+
+    it('should get a notifications metadata', function(done) {
+      notification.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert(is.object(metadata));
+        done();
+      });
+    });
+
+    it('should tell us if a notification exists', function(done) {
+      notification.exists(function(err, exists) {
+        assert.ifError(err);
+        assert(exists);
+        done();
+      });
+    });
+
+    it('should tell us if a notification does not exist', function(done) {
+      var notification = bucket.notification('123');
+
+      notification.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should get a list of notifications', function(done) {
+      bucket.getNotifications(function(err, notifications) {
+        assert.ifError(err);
+        assert.strictEqual(notifications.length, 1);
+        done();
+      });
+    });
+
+    it('should emit events to a subscription', function(done) {
+      subscription.on('error', done).on('message', function(message) {
+        var attrs = message.attributes;
+        assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
+        done();
+      });
+
+      bucket.upload(FILES.logo.path, function(err) {
+        if (err) {
+          done(err);
+        }
+      });
+    });
+
+    it('should delete a notification', function() {
+      var notificationCount = 0;
+      var notification;
+
+      return bucket
+        .createNotification(topic, {
+          eventTypes: ['OBJECT_DELETE'],
+        })
+        .then(function(data) {
+          notification = data[0];
+          return bucket.getNotifications();
+        })
+        .then(function(data) {
+          notificationCount = data[0].length;
+          return notification.delete();
+        })
+        .then(function() {
+          return bucket.getNotifications();
+        })
+        .then(function(data) {
+          assert.strictEqual(data[0].length, notificationCount - 1);
+        });
     });
   });
 

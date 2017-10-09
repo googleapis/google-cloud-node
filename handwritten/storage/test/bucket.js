@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var async = require('async');
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var mime = require('mime-types');
 var nodeutil = require('util');
@@ -26,9 +27,11 @@ var path = require('path');
 var propAssign = require('prop-assign');
 var proxyquire = require('proxyquire');
 var request = require('request');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+var snakeize = require('snakeize');
 var stream = require('stream');
 var util = require('@google-cloud/common').util;
+
+var ServiceObject = common.ServiceObject;
 
 function FakeFile(bucket, name, options) {
   var self = this;
@@ -49,6 +52,11 @@ function FakeFile(bucket, name, options) {
     };
     return ws;
   };
+}
+
+function FakeNotification(bucket, id) {
+  this.bucket = bucket;
+  this.id = id;
 }
 
 var requestCached = request;
@@ -77,7 +85,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['file']);
+    assert.deepEqual(options.exclude, ['file', 'notification']);
   },
 });
 
@@ -134,6 +142,7 @@ describe('Bucket', function() {
       './acl.js': FakeAcl,
       './file.js': FakeFile,
       './iam.js': FakeIam,
+      './notification.js': FakeNotification,
     });
   });
 
@@ -534,6 +543,133 @@ describe('Bucket', function() {
 
           done();
         });
+      });
+    });
+  });
+
+  describe('createNotification', function() {
+    var PUBSUB_SERVICE_PATH = '//pubsub.googleapis.com/';
+    var TOPIC = 'my-topic';
+    var FULL_TOPIC_NAME =
+      PUBSUB_SERVICE_PATH + 'projects/{{projectId}}/topics/' + TOPIC;
+
+    function FakeTopic(name) {
+      this.name = 'projects/grape-spaceship-123/topics/' + name;
+    }
+
+    beforeEach(function() {
+      fakeUtil.isCustomType = common.util.isCustomType;
+    });
+
+    it('should throw an error if a valid topic is not provided', function() {
+      assert.throws(function() {
+        bucket.createNotification();
+      }, /A valid topic name is required\./);
+    });
+
+    it('should make the correct request', function(done) {
+      var topic = 'projects/my-project/topics/my-topic';
+      var options = {payloadFormat: 'NONE'};
+      var expectedTopic = PUBSUB_SERVICE_PATH + topic;
+      var expectedJson = extend({topic: expectedTopic}, snakeize(options));
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/notificationConfigs');
+        assert.deepEqual(reqOpts.json, expectedJson);
+        assert.notStrictEqual(reqOpts.json, options);
+        done();
+      };
+
+      bucket.createNotification(topic, options, assert.ifError);
+    });
+
+    it('should accept incomplete topic names', function(done) {
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.topic, FULL_TOPIC_NAME);
+        done();
+      };
+
+      bucket.createNotification(TOPIC, {}, assert.ifError);
+    });
+
+    it('should accept a topic object', function(done) {
+      var fakeTopic = new FakeTopic('my-topic');
+      var expectedTopicName = PUBSUB_SERVICE_PATH + fakeTopic.name;
+
+      fakeUtil.isCustomType = function(topic, type) {
+        assert.strictEqual(topic, fakeTopic);
+        assert.strictEqual(type, 'pubsub/topic');
+        return true;
+      };
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.topic, expectedTopicName);
+        done();
+      };
+
+      bucket.createNotification(fakeTopic, {}, assert.ifError);
+    });
+
+    it('should set a default payload format', function(done) {
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.payload_format, 'JSON_API_V1');
+        done();
+      };
+
+      bucket.createNotification(TOPIC, {}, assert.ifError);
+    });
+
+    it('should optionally accept options', function(done) {
+      var expectedJson = {
+        topic: FULL_TOPIC_NAME,
+        payload_format: 'JSON_API_V1',
+      };
+
+      bucket.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json, expectedJson);
+        done();
+      };
+
+      bucket.createNotification(TOPIC, assert.ifError);
+    });
+
+    it('should return errors to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(error, response);
+      };
+
+      bucket.createNotification(TOPIC, function(err, notification, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(notification, null);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+
+    it('should return a notification object', function(done) {
+      var fakeId = '123';
+      var response = {id: fakeId};
+      var fakeNotification = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, response);
+      };
+
+      bucket.notification = function(id) {
+        assert.strictEqual(id, fakeId);
+        return fakeNotification;
+      };
+
+      bucket.createNotification(TOPIC, function(err, notification, resp) {
+        assert.ifError(err);
+        assert.strictEqual(notification, fakeNotification);
+        assert.strictEqual(notification.metadata, response);
+        assert.strictEqual(resp, response);
+        done();
       });
     });
   });
@@ -1282,6 +1418,75 @@ describe('Bucket', function() {
     });
   });
 
+  describe('getNotifications', function() {
+    it('should make the correct request', function(done) {
+      var options = {};
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/notificationConfigs');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      bucket.getNotifications(options, assert.ifError);
+    });
+
+    it('should optionally accept options', function(done) {
+      bucket.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      bucket.getNotifications(assert.ifError);
+    });
+
+    it('should return any errors to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(error, response);
+      };
+
+      bucket.getNotifications(function(err, notifications, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(notifications, null);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+
+    it('should return a list of notification objects', function(done) {
+      var fakeItems = [{id: '1'}, {id: '2'}, {id: '3'}];
+      var response = {items: fakeItems};
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, response);
+      };
+
+      var callCount = 0;
+      var fakeNotifications = [{}, {}, {}];
+
+      bucket.notification = function(id) {
+        var expectedId = fakeItems[callCount].id;
+        assert.strictEqual(id, expectedId);
+        return fakeNotifications[callCount++];
+      };
+
+      bucket.getNotifications(function(err, notifications, resp) {
+        assert.ifError(err);
+
+        notifications.forEach(function(notification, i) {
+          assert.strictEqual(notification, fakeNotifications[i]);
+          assert.strictEqual(notification.metadata, fakeItems[i]);
+        });
+
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+  });
+
   describe('makePrivate', function() {
     it('should set predefinedAcl & privatize files', function(done) {
       var didSetPredefinedAcl = false;
@@ -1424,6 +1629,23 @@ describe('Bucket', function() {
         assert.equal(err, error);
         done();
       });
+    });
+  });
+
+  describe('notification', function() {
+    it('should throw an error if an id is not provided', function() {
+      assert.throws(function() {
+        bucket.notification();
+      }, /You must supply a notification ID\./);
+    });
+
+    it('should return a Notification object', function() {
+      var fakeId = '123';
+      var notification = bucket.notification(fakeId);
+
+      assert(notification instanceof FakeNotification);
+      assert.strictEqual(notification.bucket, bucket);
+      assert.strictEqual(notification.id, fakeId);
     });
   });
 

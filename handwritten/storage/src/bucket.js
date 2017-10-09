@@ -24,11 +24,13 @@ var fs = require('fs');
 var is = require('is');
 var mime = require('mime-types');
 var path = require('path');
+var snakeize = require('snakeize');
 var util = require('util');
 
 var Acl = require('./acl.js');
 var File = require('./file.js');
 var Iam = require('./iam.js');
+var Notification = require('./notification.js');
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -58,9 +60,9 @@ function Bucket(storage, name) {
      * Create a bucket.
      *
      * @method Bucket#create
-     * @param {Storage~CreateBucketRequest} [metadata] Metadata to set for the bucket.
-     * @param {Storage~CreateBucketCallback} [callback] Callback function.
-     * @returns {Promise<Storage~CreateBucketResponse>}
+     * @param {CreateBucketRequest} [metadata] Metadata to set for the bucket.
+     * @param {CreateBucketCallback} [callback] Callback function.
+     * @returns {Promise<CreateBucketResponse>}
      *
      * @example
      * var storage = require('@google-cloud/storage')();
@@ -463,6 +465,141 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
       channel.metadata = apiResponse;
 
       callback(null, channel, apiResponse);
+    }
+  );
+};
+
+/**
+ * Metadata to set for the Notification.
+ *
+ * @typedef {object} CreateNotificationRequest
+ * @property {object} [customAttributes] An optional list of additional
+ *     attributes to attach to each Cloud PubSub message published for this
+ *     notification subscription.
+ * @property {string[]} [eventTypes] If present, only send notifications about
+ *     listed event types. If empty, sent notifications for all event types.
+ * @property {string} [objectNamePrefix] If present, only apply this
+ *     notification configuration to object names that begin with this prefix.
+ * @property {string} [payloadFormat] The desired content of the Payload.
+ *     Defaults to `JSON_API_V1`.
+ *
+ *     Acceptable values are:
+ *     - `JSON_API_V1`
+ *
+ *     - `NONE`
+ * @property {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ */
+/**
+ * @typedef {array} CreateNotificationResponse
+ * @property {Notification} 0 The new {@link Notification}.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback CreateNotificationCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Notification} notification The new {@link Notification}.
+ * @param {object} apiResponse The full API response.
+ */
+/**
+ * Creates a notification subscription for the bucket.
+ *
+ * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
+ *
+ * @param {Topic|string} topic The Cloud PubSub topic to which this
+ *     subscription publishes. If the project ID is omitted, the current project
+ *     ID will be used.
+ *
+ *     Acceptable formats are:
+ *     - `projects/grape-spaceship-123/topics/my-topic`
+ *
+ *     - `my-topic`
+ * @param {CreateNotificationRequest} [options] Metadata to set for the
+ *     notification.
+ * @param {CreateNotificationCallback} [callback] Callback function.
+ * @returns {Promise<CreateNotificationResponse>}
+ * @throws {Error} If a valid topic is not provided.
+ * @see Notification#create
+ *
+ * @example
+ * var storage = require('@google-cloud/storage')();
+ * var myBucket = storage.bucket('my-bucket');
+ *
+ * var callback = function(err, notification, apiResponse) {
+ *   if (!err) {
+ *     // The notification was created successfully.
+ *   }
+ * };
+ *
+ * myBucket.createNotification('my-topic', callback);
+ *
+ * //-
+ * // Configure the nofiication by providing Notification metadata.
+ * //-
+ * var metadata = {
+ *   objectNamePrefix: 'prefix-'
+ * };
+ *
+ * myBucket.createNotification('my-topic', metadata, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myBucket.createNotification('my-topic').then(function(data) {
+ *   var notification = data[0];
+ *   var apiResponse = data[1];
+ * });
+ *
+ * @example <caption>include:samples/notifications.js</caption>
+ * region_tag:storage_create_notification
+ * Another example:
+ */
+Bucket.prototype.createNotification = function(topic, options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  if (is.object(topic) && common.util.isCustomType(topic, 'pubsub/topic')) {
+    topic = topic.name;
+  }
+
+  if (!is.string(topic)) {
+    throw new Error('A valid topic name is required.');
+  }
+
+  var body = extend({topic: topic}, options);
+
+  if (body.topic.indexOf('projects') !== 0) {
+    body.topic = 'projects/{{projectId}}/topics/' + body.topic;
+  }
+
+  body.topic = '//pubsub.googleapis.com/' + body.topic;
+
+  if (!body.payloadFormat) {
+    body.payloadFormat = 'JSON_API_V1';
+  }
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/notificationConfigs',
+      json: snakeize(body),
+    },
+    function(err, apiResponse) {
+      if (err) {
+        callback(err, null, apiResponse);
+        return;
+      }
+
+      var notification = self.notification(apiResponse.id);
+
+      notification.metadata = apiResponse;
+
+      callback(null, notification, apiResponse);
     }
   );
 };
@@ -1305,6 +1442,82 @@ Bucket.prototype.getMetadata = function(options, callback) {
 };
 
 /**
+ * @typedef {array} GetNotificationsResponse
+ * @property {Notification[]} 0 Array of {@link Notification} instances.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetNotificationsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Notification[]} notifications Array of {@link Notification}
+ *     instances.
+ * @param {object} apiResponse The full API response.
+ */
+/**
+ * Retrieves a list of notification subscriptions for a given bucket.
+ *
+ * @see [Notifications: list]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/list}
+ *
+ * @param {object} [options] Configuration options.
+ * @param {boolean} [options.userProject] If this bucket has `requesterPays`
+ *     functionality enabled (see {@link Bucket#enableRequesterPays}),
+ *     set this value to the project which should be billed for this operation.
+ * @param {GetNotificationsCallback} [callback] Callback function.
+ * @returns {Promise<GetNotificationsResponse>}
+ *
+ * @example
+ * var storage = require('@google-cloud/storage')();
+ * var bucket = storage.bucket('my-bucket');
+ *
+ * bucket.getNotifications(function(err, notifications, apiResponse) {
+ *   if (!err) {
+ *     // notifications is an array of Notification objects.
+ *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.getNotifications().then(function(data) {
+ *   var notifications = data[0];
+ *   var apiResponse = data[1];
+ * });
+ *
+ * @example <caption>include:samples/bucket.js</caption>
+ * region_tag:storage_list_notifications
+ * Another example:
+ */
+Bucket.prototype.getNotifications = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.request(
+    {
+      uri: '/notificationConfigs',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var notifications = arrify(resp.items).map(function(notification) {
+        var notificationInstance = self.notification(notification.id);
+        notificationInstance.metadata = notification;
+        return notificationInstance;
+      });
+
+      callback(null, notifications, resp);
+    }
+  );
+};
+
+/**
  * @typedef {array} MakeBucketPrivateResponse
  * @property {File[]} 0 List of files made private.
  */
@@ -1561,6 +1774,26 @@ Bucket.prototype.makePublic = function(options, callback) {
 
     self.makeAllFilesPublicPrivate_(options, done);
   }
+};
+
+/**
+ * Get a reference to a Cloud Pub/Sub Notification.
+ *
+ * @param {string} id ID of notification.
+ * @returns {Notification}
+ * @see Notification
+ *
+ * @example
+ * var storage = require('@google-cloud/storage')();
+ * var bucket = storage.bucket('my-bucket');
+ * var notification = bucket.notification('1');
+ */
+Bucket.prototype.notification = function(id) {
+  if (!id) {
+    throw new Error('You must supply a notification ID.');
+  }
+
+  return new Notification(this, id);
 };
 
 /**
@@ -2089,7 +2322,7 @@ common.paginator.extend(Bucket, 'getFiles');
  * that a callback is omitted.
  */
 common.util.promisifyAll(Bucket, {
-  exclude: ['file'],
+  exclude: ['file', 'notification'],
 });
 
 /**
