@@ -261,6 +261,20 @@ describe('Transaction', function() {
       assert.equal(saveCalled, 1);
     });
 
+    it('should not squash key-incomplete mutations', function(done) {
+      transaction.save({ key: key(['Product']), data: '' });
+      transaction.save({ key: key(['Product']), data: '' });
+
+      DatastoreRequestOverride.save = function(entities) {
+        assert.strictEqual(entities.length, 2);
+        done();
+      };
+
+      transaction.request_ = util.noop;
+
+      transaction.commit();
+    });
+
     it('should send the built request object', function(done) {
       transaction.requests_ = [
         {
