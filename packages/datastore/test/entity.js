@@ -48,12 +48,46 @@ describe('entity', function() {
     });
   });
 
+  describe('isDsDouble', function() {
+    it('should correctly identify a Double', function() {
+      var double = new entity.Double(0.42);
+      assert.strictEqual(entity.isDsDouble(double), true);
+    });
+
+    it('should correctly identify a homomorphic non-Double', function() {
+      var nonDouble = Object.assign({}, new entity.Double(42));
+      assert.strictEqual(entity.isDsDouble(nonDouble), false);
+    });
+
+    it('should correctly identify a primitive', function() {
+      var primitiveDouble = 0.42;
+      assert.strictEqual(entity.isDsDouble(primitiveDouble), false);
+    });
+  });
+
   describe('Int', function() {
     it('should store the stringified value', function() {
       var value = 8;
 
       var int = new entity.Int(value);
       assert.strictEqual(int.value, value.toString());
+    });
+  });
+
+  describe('isDsInt', function() {
+    it('should correctly identify an Int', function() {
+      var int = new entity.Int(42);
+      assert.strictEqual(entity.isDsInt(int), true);
+    });
+
+    it('should correctly identify homomorphic non-Int', function() {
+      var nonInt = Object.assign({}, new entity.Int(42));
+      assert.strictEqual(entity.isDsInt(nonInt), false);
+    });
+
+    it('should correctly identify a primitive', function() {
+      var primitiveInt = 42;
+      assert.strictEqual(entity.isDsInt(primitiveInt), false);
     });
   });
 
@@ -66,6 +100,19 @@ describe('entity', function() {
 
       var geoPoint = new entity.GeoPoint(value);
       assert.strictEqual(geoPoint.value, value);
+    });
+  });
+
+  describe('isDsGeoPoint', function() {
+    it('should correctly identify a GeoPoint', function() {
+      var geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
+      assert.strictEqual(entity.isDsGeoPoint(geoPoint), true);
+    });
+
+    it('should correctly identify a homomorphic non-GeoPoint', function() {
+      var geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
+      var nonGeoPoint = Object.assign({}, geoPoint);
+      assert.strictEqual(entity.isDsGeoPoint(nonGeoPoint), false);
     });
   });
 
@@ -113,6 +160,18 @@ describe('entity', function() {
       key.kind = 'ParentKind';
 
       assert.deepEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
+    });
+  });
+
+  describe('isDsKey', function() {
+    it('should correctly identify a Key', function() {
+      var key = new entity.Key({path: ['Kind', 1]});
+      assert.strictEqual(entity.isDsKey(key), true);
+    });
+
+    it('should correctly identify a homomorphic non-Key', function() {
+      var notKey = Object.assign({}, new entity.Key({path: ['Kind', 1]}));
+      assert.strictEqual(entity.isDsKey(notKey), false);
     });
   });
 
