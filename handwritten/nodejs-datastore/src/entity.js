@@ -60,6 +60,18 @@ function Double(value) {
 entity.Double = Double;
 
 /**
+ * Check if something is a Datastore Double object.
+ *
+ * @param {*} value
+ * @return {boolean}
+ */
+function isDsDouble(value) {
+  return value instanceof entity.Double;
+}
+
+entity.isDsDouble = isDsDouble;
+
+/**
  * Build a Datastore Int object. For long integers, a string can be provided.
  *
  * @constructor
@@ -73,6 +85,18 @@ function Int(value) {
 }
 
 entity.Int = Int;
+
+/**
+ * Check if something is a Datastore Int object.
+ *
+ * @param {*} value
+ * @return {boolean}
+ */
+function isDsInt(value) {
+  return value instanceof entity.Int;
+}
+
+entity.isDsInt = isDsInt;
 
 /**
  * Build a Datastore Geo Point object.
@@ -90,11 +114,23 @@ entity.Int = Int;
  *
  * var geoPoint = new GeoPoint(coordinates);
  */
-function GeoPoint(coordindates) {
-  this.value = coordindates;
+function GeoPoint(coordinates) {
+  this.value = coordinates;
 }
 
 entity.GeoPoint = GeoPoint;
+
+/**
+ * Check if something is a Datastore Geo Point object.
+ *
+ * @param {*} value
+ * @return {boolean}
+ */
+function isDsGeoPoint(value) {
+  return value instanceof entity.GeoPoint;
+}
+
+entity.isDsGeoPoint = isDsGeoPoint;
 
 /**
  * Build a Datastore Key object.
@@ -116,7 +152,7 @@ function Key(options) {
   if (options.path.length % 2 === 0) {
     var identifier = options.path.pop();
 
-    if (is.number(identifier) || identifier instanceof entity.Int) {
+    if (is.number(identifier) || isDsInt(identifier)) {
       this.id = identifier.value || identifier;
     } else if (is.string(identifier)) {
       this.name = identifier;
@@ -141,6 +177,18 @@ function Key(options) {
 }
 
 entity.Key = Key;
+
+/**
+ * Check if something is a Datastore Key object.
+ *
+ * @param {*} value
+ * @return {boolean}
+ */
+function isDsKey(value) {
+  return value instanceof entity.Key;
+}
+
+entity.isDsKey = isDsKey;
 
 /**
  * Convert a protobuf Value message to its native value.
@@ -243,17 +291,17 @@ function encodeValue(value) {
     }
   }
 
-  if (value instanceof entity.Int) {
+  if (isDsInt(value)) {
     valueProto.integerValue = value.value;
     return valueProto;
   }
 
-  if (value instanceof entity.Double) {
+  if (isDsDouble(value)) {
     valueProto.doubleValue = value.value;
     return valueProto;
   }
 
-  if (value instanceof entity.GeoPoint) {
+  if (isDsGeoPoint(value)) {
     valueProto.geoPointValue = value.value;
     return valueProto;
   }
@@ -286,7 +334,7 @@ function encodeValue(value) {
     return valueProto;
   }
 
-  if (value instanceof entity.Key) {
+  if (isDsKey(value)) {
     valueProto.keyValue = entity.keyToKeyProto(value);
     return valueProto;
   }
