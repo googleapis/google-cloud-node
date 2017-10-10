@@ -346,15 +346,15 @@ Datastore.prototype.double = Datastore.double = function(value) {
 /**
  * Helper function to check if something is a Datastore Double object.
  *
- * @param {*} something
+ * @param {*} value
  * @return {boolean}
  *
  * @example
  * datastore.isDouble(0.42); // false
  * datastore.isDouble(datastore.double(0.42)); // true
  */
-Datastore.prototype.isDouble = Datastore.isDouble = function(something) {
-  return entity.isDsDouble(something);
+Datastore.prototype.isDouble = Datastore.isDouble = function(value) {
+  return entity.isDsDouble(value);
 };
 
 /**
@@ -380,7 +380,7 @@ Datastore.prototype.geoPoint = Datastore.geoPoint = function(coordinates) {
 /**
  * Helper function to check if something is a Datastore Geo Point object.
  *
- * @param {*} something
+ * @param {*} value
  * @return {boolean}
  *
  * @example
@@ -392,8 +392,8 @@ Datastore.prototype.geoPoint = Datastore.geoPoint = function(coordinates) {
  * datastore.isGeoPoint(coordinates); // false
  * datastore.isGeoPoint(datastore.geoPoint(coordinates)); // true
  */
-Datastore.prototype.isGeoPoint = Datastore.isGeoPoint = function(something) {
-  return entity.isDsGeoPoint(something);
+Datastore.prototype.isGeoPoint = Datastore.isGeoPoint = function(value) {
+  return entity.isDsGeoPoint(value);
 };
 
 /**
@@ -423,15 +423,15 @@ Datastore.prototype.int = Datastore.int = function(value) {
 /**
  * Helper function to check if something is a Datastore Integer object.
  *
- * @param {*} something
+ * @param {*} value
  * @return {boolean}
  *
  * @example
  * datastore.isInt(42); // false
  * datastore.isInt(datastore.int(42)); // true
  */
-Datastore.prototype.isInt = Datastore.isInt = function(something) {
-  return entity.isDsInt(something);
+Datastore.prototype.isInt = Datastore.isInt = function(value) {
+  return entity.isDsInt(value);
 };
 
 /**
@@ -559,15 +559,15 @@ Datastore.prototype.key = function(options) {
 /**
  * Helper function to check if something is a Datastore Key object.
  *
- * @param {*} something
+ * @param {*} value
  * @return {boolean}
  *
  * @example
  * datastore.isKey({path: ['Company', 123]}); // false
  * datastore.isKey(datastore.key(['Company', 123])); // true
  */
-Datastore.prototype.isKey = Datastore.isKey = function(something) {
-  return entity.isDsKey(something);
+Datastore.prototype.isKey = Datastore.isKey = function(value) {
+  return entity.isDsKey(value);
 };
 
 /**
