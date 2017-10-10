@@ -494,7 +494,7 @@ describe('pubsub', function() {
       subscription.on('message', onMessage);
 
       function onMessage() {
-        if (++messageCount < (maxMessages + 1)) {
+        if (++messageCount < maxMessages) {
           return;
         }
 

@@ -1341,23 +1341,23 @@ describe('ConnectionPool', function() {
     it('should return true for retryable errors', function() {
       assert(pool.shouldReconnect({ code: 0 })); // OK
       assert(pool.shouldReconnect({ code: 1 })); // Canceled
+      assert(pool.shouldReconnect({ code: 2 })); // Unknown
       assert(pool.shouldReconnect({ code: 4 })); // DeadlineExceeded
       assert(pool.shouldReconnect({ code: 8 })); // ResourceExhausted
+      assert(pool.shouldReconnect({ code: 10 })); // Aborted
       assert(pool.shouldReconnect({ code: 13 })); // Internal
       assert(pool.shouldReconnect({ code: 14 })); // Unavailable
+      assert(pool.shouldReconnect({ code: 15 })); // Dataloss
     });
 
     it('should return false for non-retryable errors', function() {
-      assert(!pool.shouldReconnect({ code: 2 })); // Unknown
       assert(!pool.shouldReconnect({ code: 3 })); // InvalidArgument
       assert(!pool.shouldReconnect({ code: 5 })); // NotFound
       assert(!pool.shouldReconnect({ code: 6 })); // AlreadyExists
       assert(!pool.shouldReconnect({ code: 7 })); // PermissionDenied
       assert(!pool.shouldReconnect({ code: 9 })); // FailedPrecondition
-      assert(!pool.shouldReconnect({ code: 10 })); // Aborted
       assert(!pool.shouldReconnect({ code: 11 })); // OutOfRange
       assert(!pool.shouldReconnect({ code: 12 })); // Unimplemented
-      assert(!pool.shouldReconnect({ code: 15 })); // DataLoss
       assert(!pool.shouldReconnect({ code: 16 })); // Unauthenticated
     });
 
