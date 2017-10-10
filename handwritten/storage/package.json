@@ -84,7 +84,7 @@
     "ink-docstrap": "https://github.com/docstrap/docstrap/tarball/master",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.4",
-    "mocha": "^3.5.3",
+    "mocha": "^4.0.0",
     "normalize-newline": "^3.0.0",
     "nyc": "^11.1.0",
     "power-assert": "^1.4.4",
