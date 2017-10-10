@@ -787,7 +787,9 @@ Database.prototype.runStream = function(query, options) {
  * atomically at a single logical point in time across columns, rows, and tables
  * in a database.
  *
- * Note that Cloud Spanner does not support nested transactions.
+ * Note that Cloud Spanner does not support nested transactions. If a new
+ * transaction is started inside of the run function, it will be an independent
+ * transaction.
  *
  * The callback you provide to this function will become the "run function". It
  * will be executed with either an error or a {module:spanner/transaction}
