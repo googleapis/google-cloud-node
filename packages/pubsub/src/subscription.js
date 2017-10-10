@@ -734,7 +734,7 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
  * @return {boolean}
  */
 Subscription.prototype.hasMaxMessages_ = function() {
-  return this.inventory_.lease.length > this.flowControl.maxMessages ||
+  return this.inventory_.lease.length >= this.flowControl.maxMessages ||
     this.inventory_.bytes >= this.flowControl.maxBytes;
 };
 

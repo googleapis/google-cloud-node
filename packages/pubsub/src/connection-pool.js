@@ -43,10 +43,13 @@ var MAX_TIMEOUT = 300000;
 var RETRY_CODES = [
   0, // ok
   1, // canceled
+  2, // unknown
   4, // deadline exceeded
   8, // resource exhausted
+  10, // aborted
   13, // internal error
-  14 // unavailable
+  14, // unavailable
+  15 // dataloss
 ];
 
 /**

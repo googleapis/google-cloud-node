@@ -1187,9 +1187,9 @@ describe('Subscription', function() {
   });
 
   describe('hasMaxMessages_', function() {
-    it('should return true if the number of leases > maxMessages', function() {
+    it('should return true if the number of leases >= maxMessages', function() {
       subscription.inventory_.lease = ['a', 'b', 'c'];
-      subscription.flowControl.maxMessages = 2;
+      subscription.flowControl.maxMessages = 3;
 
       assert(subscription.hasMaxMessages_());
     });
