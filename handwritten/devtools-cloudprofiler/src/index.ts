@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,80 +13,76 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import * as assert from 'assert';
-import * as fs from 'fs';
-import * as stream from 'stream';
-import * as util from 'util';
-import * as zlib from 'zlib';
+import * as extend from 'extend';
+import * as path from 'path';
+import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
+import {Config, defaultConfig} from './config';
+import {Profiler, ProfilerConfig} from './profiler';
 
-import {serialize} from './builder';
-import {perftools} from './profile';
+const common: Common = require('@google-cloud/common');
 
-type HrTimeTuple = [number, number];
+// initConfig sets unset values in the configuration to the value retrieved from
+// environment variables, metadata, or the default value specified in
+// defaultConfig.
+// Returns rejected promise if value that must be set cannot be initialized.
+async function initConfig(config: Config): Promise<ProfilerConfig> {
+  config = common.util.normalizeArguments(null, config);
 
-const profiler = require('bindings')('cpu_profiler');
+  const envConfig = {
+    logLevel: process.env.GCLOUD_PROFILER_LOGLEVEL,
+    projectId: process.env.GCLOUD_PROJECT,
+    serviceContext: {
+      service: process.env.GAE_SERVICE,
+      version: process.env.GAE_VERSION,
+    }
+  };
 
-function timeToNanos(tuple: HrTimeTuple) {
-  return tuple[0] * 1e9 + tuple[1];
+  let envSetConfig: Config = {};
+  if (process.env.hasOwnProperty('GCLOUD_PROFILER_CONFIG')) {
+    envSetConfig =
+        require(path.resolve(process.env.GCLOUD_PROFILER_CONFIG)) as Config;
+  }
+
+  let normalizedConfig = extend(true, {}, defaultConfig, envConfig, config);
+
+  if (normalizedConfig.serviceContext.service === undefined) {
+    throw new Error('service name must be specified in the configuration');
+  }
+
+  // TODO: fetch instance and zone from metadata. This will require function to
+  // be asynchrous.
+  if (normalizedConfig.instance === undefined) {
+    normalizedConfig.instance = '';
+  }
+  if (normalizedConfig.zone === undefined) {
+    normalizedConfig.zone = '';
+  }
+
+  return normalizedConfig;
 }
 
-const durationMillis = 10 * 1000;
-const intervalMillis = 60 * 1000;
-let isActive = false;
+let profiler: Profiler|undefined = undefined;
 
-function profileInterval() {
-  assert(durationMillis <= intervalMillis);
-  const startDelay = (intervalMillis - durationMillis) * Math.random();
-  setTimeout(function() {
-    const startTime = Date.now();
-    const runName = 'cloud-profile-' + startTime;
-    profiler.startProfiling(runName, true);
-    isActive = true;
-    setTimeout(function() {
-      isActive = false;
-      const result = profiler.stopProfiling(runName);
-      const serialized = serialize(result, startTime * 1e6);
-      const writer = perftools.profiles.Profile.encode(serialized);
-      const buffer = writer.finish();
-
-      const outp = fs.createWriteStream(runName + '.pb.gz');
-      const inp = new stream.PassThrough();
-      inp.end(buffer);
-      inp.pipe(zlib.createGzip()).pipe(outp).on('close', function() {
-        setTimeout(
-            profileInterval, intervalMillis - startDelay - durationMillis)
-            .unref();
-      });
-    }, durationMillis).unref();
-  }, startDelay).unref();
+/**
+ * Starts the profiling agent and returns a promise.
+ * If any error is encountered when profiling, the promise will be rejected.
+ *
+ * config - Config describing configuration for profiling.
+ *
+ * @example
+ * profiler.start();
+ *
+ * @example
+ * profiler.start(config);
+ *
+ */
+export async function start(config: Config = {}): Promise<void> {
+  const normalizedConfig = await initConfig(config);
+  profiler = new Profiler(normalizedConfig);
+  return profiler.start();
 }
 
-process.on('exit', function() {
-  if (isActive) {
-    profiler.stopProfiling();
-  }
-});
-process.on('uncaughtException', function() {
-  if (isActive) {
-    profiler.stopProfiling();
-  }
-});
-
-profileInterval();
-
-/*function printNode(node, indent) {
-  indent = indent || 0;
-  var s = sprintf('%5u %s %d #%d %d %s %d', node.hitCount,
-                  Array(indent).join(' '), indent / 2, node.id, node.callUID,
-                  node.functionName, node.scriptId);
-  if (node.url !== '') {
-    s += ' ' + node.url + ':' + node.lineNumber;
-  }
-  if (node.lineTicks)
-    s += ' lineTicks ' + util.inspect(node.lineTicks);
-
-  // TODO: deopt infos
-  // TODO: bailout reason
-  console.log(s);
-  node.children.forEach(function(child) { printNode(child, indent + 2); });
-}*/
+// If the module was --require'd from the command line, start the agent.
+if (module.parent && module.parent.id === 'internal/preload') {
+  start();
+}

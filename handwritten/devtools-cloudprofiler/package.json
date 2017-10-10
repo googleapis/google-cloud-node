@@ -21,9 +21,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bindings": "^1.2.1",
+    "extend": "^3.0.1",
     "nan": "^2.1.0"
   },
   "devDependencies": {
+    "@types/extend": "^2.0.30",
     "@types/node": "^8.0.30",
     "clang-format": "^1.0.33",
     "gts": "latest",

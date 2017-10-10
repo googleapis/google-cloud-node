@@ -1,0 +1,10 @@
+https://github.com/GoogleCloudPlatform/cloud-debug-nodejs/commit/fa41721e965bcb98ac3d446384ff55e5cc0036ac
+Version: fa41721e965bcb98ac3d446384ff55e5cc0036ac
+License: Apache 2.0
+License File: # LICENSE
+Description:
+       cloud-debug-nodejs provides Stackdriver Debugger support for Node.js
+       applications.
+Local Modifications:
+       All code except common-types.ts and gcp-metadata-types.ts has been 
+       removed.
