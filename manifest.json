@@ -213,6 +213,7 @@
       "name": "@google-cloud/logging-bunyan",
       "defaultService": "logging-bunyan",
       "versions": [
+        "0.6.0",
         "0.4.2",
         "0.4.1",
         "0.4.0",
@@ -225,6 +226,7 @@
       "name": "@google-cloud/logging-winston",
       "defaultService": "logging-winston",
       "versions": [
+        "0.6.0",
         "0.4.1",
         "0.4.0",
         "0.3.1",
