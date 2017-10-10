@@ -27,6 +27,12 @@ var prop = require('propprop');
 var util = require('util');
 
 /**
+ * @type {module:datastore/entity}
+ * @private
+ */
+var entity = require('./entity.js');
+
+/**
  * @type {module:datastore/request}
  * @private
  */
@@ -129,10 +135,16 @@ Transaction.prototype.commit = function(callback) {
     // key they just asked to be deleted, the delete request will be ignored,
     // giving preference to the save operation.
     .filter(function(modifiedEntity) {
-      var key = JSON.stringify(modifiedEntity.entity.key);
+      var key = modifiedEntity.entity.key;
 
-      if (!keys[key]) {
-        keys[key] = true;
+      if (!entity.isKeyComplete(key)) {
+        return true;
+      }
+
+      var stringifiedKey = JSON.stringify(modifiedEntity.entity.key);
+
+      if (!keys[stringifiedKey]) {
+        keys[stringifiedKey] = true;
         return true;
       }
     })
