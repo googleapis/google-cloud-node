@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging-bunyan",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Google Inc.",
   "description": "Stackdriver Logging stream for Bunyan",
   "main": "./src/index.js",
