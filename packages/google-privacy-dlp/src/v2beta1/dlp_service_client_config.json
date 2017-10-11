@@ -20,6 +20,16 @@
         }
       },
       "methods": {
+        "DeidentifyContent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "AnalyzeDataSourceRisk": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "InspectContent": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
