@@ -306,7 +306,7 @@ Notification.prototype.get = function(options, callback) {
  * });
  *
  * @example <caption>include:samples/notifications.js</caption>
- * region_tag:storage_get_metadata
+ * region_tag:storage_notifications_get_metadata
  * Another example:
  */
 Notification.prototype.getMetadata = function(options, callback) {
