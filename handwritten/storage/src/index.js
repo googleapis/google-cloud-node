@@ -218,7 +218,8 @@ Storage.prototype.channel = function(id, resourceId) {
  * @property {boolean} [nearline=false] Specify the storage class as Nearline.
  * @property {boolean} [regional=false] Specify the storage class as Regional.
  * @property {boolean} [requesterPays=false] **Early Access Testers Only**
- *     Enable billing the requesting user's project.
+ *     Force the use of the User Project metadata field to assign operational
+ *     costs when an operation is made on a Bucket and its objects.
  */
 /**
  * @typedef {array} CreateBucketResponse

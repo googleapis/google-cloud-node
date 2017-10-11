@@ -139,9 +139,8 @@ util.inherits(Notification, common.ServiceObject);
  * @see [Notifications: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/delete}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] If this bucket has `requesterPays`
- *     functionality enabled (see {@link Bucket#enableRequesterPays}),
- *     set this value to the project which should be billed for this operation.
+ * @param {boolean} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {DeleteNotificationCallback} [callback] Callback function.
  * @returns {Promise<DeleteNotificationResponse>}
  *
@@ -199,9 +198,8 @@ Notification.prototype.delete = function(options, callback) {
  *     See {@link Bucket#createNotification} for create options.
  * @param {boolean} [options.autoCreate] Automatically create the object if
  *     it does not exist. Default: `false`.
- * @param {boolean} [options.userProject] If this bucket has `requesterPays`
- *     functionality enabled (see {@link Bucket#enableRequesterPays}),
- *     set this value to the project which should be billed for this operation.
+ * @param {boolean} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {GetNotificationCallback} [callback] Callback function.
  * @return {Promise<GetNotificationCallback>}
  *
@@ -287,9 +285,8 @@ Notification.prototype.get = function(options, callback) {
  * @see [Notifications: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] If this bucket has `requesterPays`
- *     functionality enabled (see {@link Bucket#enableRequesterPays}),
- *     set this value to the project which should be billed for this operation.
+ * @param {boolean} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {GetNotificationMetadataCallback} [callback] Callback function.
  * @returns {Promise<GetNotificationMetadataResponse>}
  *
