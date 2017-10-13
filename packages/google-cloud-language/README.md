@@ -126,5 +126,5 @@ Apache Version 2.0
 
 See [LICENSE](LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/natural-language/latest/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest/
 [product-docs]: https://cloud.google.com/natural-language/docs
