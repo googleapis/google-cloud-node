@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * ################################################################ #
@@ -28,7 +24,7 @@
  *   Required. If the type is not set or is `TYPE_UNSPECIFIED`,
  *   returns an `INVALID_ARGUMENT` error.
  *
- *   The number should be among the values of [Type]{@link Type}
+ *   The number should be among the values of [Type]{@link google.cloud.language.v1beta2.Type}
  *
  * @property {string} content
  *   The content of the input in string format.
@@ -49,7 +45,8 @@
  *   is not supported by the called API method, an `INVALID_ARGUMENT` error
  *   is returned.
  *
- * @class
+ * @typedef Document
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Document definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var Document = {
@@ -59,6 +56,7 @@ var Document = {
    * The document types enum.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Type: {
 
@@ -85,16 +83,17 @@ var Document = {
  * @property {Object} text
  *   The sentence text.
  *
- *   This object should have the same structure as [TextSpan]{@link TextSpan}
+ *   This object should have the same structure as [TextSpan]{@link google.cloud.language.v1beta2.TextSpan}
  *
  * @property {Object} sentiment
- *   For calls to {@link AnalyzeSentiment} or if
- *   {@link AnnotateTextRequest.Features.extract_document_sentiment} is set to
+ *   For calls to AnalyzeSentiment or if
+ *   AnnotateTextRequest.Features.extract_document_sentiment is set to
  *   true, this field will contain the sentiment for the sentence.
  *
- *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1beta2.Sentiment}
  *
- * @class
+ * @typedef Sentence
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Sentence definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var Sentence = {
@@ -112,7 +111,7 @@ var Sentence = {
  * @property {number} type
  *   The entity type.
  *
- *   The number should be among the values of [Type]{@link Type}
+ *   The number should be among the values of [Type]{@link google.cloud.language.v1beta2.Type}
  *
  * @property {Object.<string, string>} metadata
  *   Metadata associated with the entity.
@@ -132,17 +131,18 @@ var Sentence = {
  *   The mentions of this entity in the input document. The API currently
  *   supports proper noun mentions.
  *
- *   This object should have the same structure as [EntityMention]{@link EntityMention}
+ *   This object should have the same structure as [EntityMention]{@link google.cloud.language.v1beta2.EntityMention}
  *
  * @property {Object} sentiment
- *   For calls to {@link AnalyzeEntitySentiment} or if
- *   {@link AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+ *   For calls to AnalyzeEntitySentiment or if
+ *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
  *   true, this field will contain the aggregate sentiment expressed for this
  *   entity in the provided document.
  *
- *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1beta2.Sentiment}
  *
- * @class
+ * @typedef Entity
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Entity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var Entity = {
@@ -152,6 +152,7 @@ var Entity = {
    * The type of the entity.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Type: {
 
@@ -203,22 +204,23 @@ var Entity = {
  * @property {Object} text
  *   The token text.
  *
- *   This object should have the same structure as [TextSpan]{@link TextSpan}
+ *   This object should have the same structure as [TextSpan]{@link google.cloud.language.v1beta2.TextSpan}
  *
  * @property {Object} partOfSpeech
  *   Parts of speech tag for this token.
  *
- *   This object should have the same structure as [PartOfSpeech]{@link PartOfSpeech}
+ *   This object should have the same structure as [PartOfSpeech]{@link google.cloud.language.v1beta2.PartOfSpeech}
  *
  * @property {Object} dependencyEdge
  *   Dependency tree parse for this token.
  *
- *   This object should have the same structure as [DependencyEdge]{@link DependencyEdge}
+ *   This object should have the same structure as [DependencyEdge]{@link google.cloud.language.v1beta2.DependencyEdge}
  *
  * @property {string} lemma
  *   [Lemma](https://en.wikipedia.org/wiki/Lemma_%28morphology%29) of the token.
  *
- * @class
+ * @typedef Token
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Token definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var Token = {
@@ -238,7 +240,8 @@ var Token = {
  *   Sentiment score between -1.0 (negative sentiment) and 1.0
  *   (positive sentiment).
  *
- * @class
+ * @typedef Sentiment
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Sentiment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var Sentiment = {
@@ -251,64 +254,65 @@ var Sentiment = {
  * @property {number} tag
  *   The part of speech tag.
  *
- *   The number should be among the values of [Tag]{@link Tag}
+ *   The number should be among the values of [Tag]{@link google.cloud.language.v1beta2.Tag}
  *
  * @property {number} aspect
  *   The grammatical aspect.
  *
- *   The number should be among the values of [Aspect]{@link Aspect}
+ *   The number should be among the values of [Aspect]{@link google.cloud.language.v1beta2.Aspect}
  *
  * @property {number} case
  *   The grammatical case.
  *
- *   The number should be among the values of [Case]{@link Case}
+ *   The number should be among the values of [Case]{@link google.cloud.language.v1beta2.Case}
  *
  * @property {number} form
  *   The grammatical form.
  *
- *   The number should be among the values of [Form]{@link Form}
+ *   The number should be among the values of [Form]{@link google.cloud.language.v1beta2.Form}
  *
  * @property {number} gender
  *   The grammatical gender.
  *
- *   The number should be among the values of [Gender]{@link Gender}
+ *   The number should be among the values of [Gender]{@link google.cloud.language.v1beta2.Gender}
  *
  * @property {number} mood
  *   The grammatical mood.
  *
- *   The number should be among the values of [Mood]{@link Mood}
+ *   The number should be among the values of [Mood]{@link google.cloud.language.v1beta2.Mood}
  *
  * @property {number} number
  *   The grammatical number.
  *
- *   The number should be among the values of [Number]{@link Number}
+ *   The number should be among the values of [Number]{@link google.cloud.language.v1beta2.Number}
  *
  * @property {number} person
  *   The grammatical person.
  *
- *   The number should be among the values of [Person]{@link Person}
+ *   The number should be among the values of [Person]{@link google.cloud.language.v1beta2.Person}
  *
  * @property {number} proper
  *   The grammatical properness.
  *
- *   The number should be among the values of [Proper]{@link Proper}
+ *   The number should be among the values of [Proper]{@link google.cloud.language.v1beta2.Proper}
  *
  * @property {number} reciprocity
  *   The grammatical reciprocity.
  *
- *   The number should be among the values of [Reciprocity]{@link Reciprocity}
+ *   The number should be among the values of [Reciprocity]{@link google.cloud.language.v1beta2.Reciprocity}
  *
  * @property {number} tense
  *   The grammatical tense.
  *
- *   The number should be among the values of [Tense]{@link Tense}
+ *   The number should be among the values of [Tense]{@link google.cloud.language.v1beta2.Tense}
  *
  * @property {number} voice
  *   The grammatical voice.
  *
- *   The number should be among the values of [Voice]{@link Voice}
+ *   The number should be among the values of [Voice]{@link google.cloud.language.v1beta2.Voice}
  *
- * @class
+ * @typedef PartOfSpeech
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.PartOfSpeech definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var PartOfSpeech = {
@@ -318,6 +322,7 @@ var PartOfSpeech = {
    * The part of speech tags enum.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Tag: {
 
@@ -396,6 +401,7 @@ var PartOfSpeech = {
    * The characteristic of a verb that expresses time flow during an event.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Aspect: {
 
@@ -426,6 +432,7 @@ var PartOfSpeech = {
    * adjective and determiner, take case inflection in agreement with the noun.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Case: {
 
@@ -512,6 +519,7 @@ var PartOfSpeech = {
    * forms of adjectives and participles
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Form: {
 
@@ -580,6 +588,7 @@ var PartOfSpeech = {
    * Gender classes of nouns reflected in the behaviour of associated words.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Gender: {
 
@@ -608,6 +617,7 @@ var PartOfSpeech = {
    * The grammatical feature of verbs, used for showing modality and attitude.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Mood: {
 
@@ -651,6 +661,7 @@ var PartOfSpeech = {
    * Count distinctions.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Number: {
 
@@ -679,6 +690,7 @@ var PartOfSpeech = {
    * The distinction between the speaker, second person, third person, etc.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Person: {
 
@@ -712,6 +724,7 @@ var PartOfSpeech = {
    * This category shows if the token is part of a proper name.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Proper: {
 
@@ -735,6 +748,7 @@ var PartOfSpeech = {
    * Reciprocal features of a pronoun.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Reciprocity: {
 
@@ -759,6 +773,7 @@ var PartOfSpeech = {
    * Time reference.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Tense: {
 
@@ -803,6 +818,7 @@ var PartOfSpeech = {
    * participants identified by its arguments.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Voice: {
 
@@ -841,9 +857,10 @@ var PartOfSpeech = {
  * @property {number} label
  *   The parse label for the token.
  *
- *   The number should be among the values of [Label]{@link Label}
+ *   The number should be among the values of [Label]{@link google.cloud.language.v1beta2.Label}
  *
- * @class
+ * @typedef DependencyEdge
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.DependencyEdge definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var DependencyEdge = {
@@ -853,6 +870,7 @@ var DependencyEdge = {
    * The parse label enum for the token.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Label: {
 
@@ -1280,22 +1298,23 @@ var DependencyEdge = {
  * @property {Object} text
  *   The mention text.
  *
- *   This object should have the same structure as [TextSpan]{@link TextSpan}
+ *   This object should have the same structure as [TextSpan]{@link google.cloud.language.v1beta2.TextSpan}
  *
  * @property {number} type
  *   The type of the entity mention.
  *
- *   The number should be among the values of [Type]{@link Type}
+ *   The number should be among the values of [Type]{@link google.cloud.language.v1beta2.Type}
  *
  * @property {Object} sentiment
- *   For calls to {@link AnalyzeEntitySentiment} or if
- *   {@link AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+ *   For calls to AnalyzeEntitySentiment or if
+ *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
  *   true, this field will contain the sentiment expressed for this mention of
  *   the entity in the provided document.
  *
- *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1beta2.Sentiment}
  *
- * @class
+ * @typedef EntityMention
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.EntityMention definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var EntityMention = {
@@ -1305,6 +1324,7 @@ var EntityMention = {
    * The supported types of mentions.
    *
    * @enum {number}
+   * @memberof google.cloud.language.v1beta2
    */
   Type: {
 
@@ -1333,9 +1353,10 @@ var EntityMention = {
  *
  * @property {number} beginOffset
  *   The API calculates the beginning offset of the content in the original
- *   document according to the {@link EncodingType} specified in the API request.
+ *   document according to the EncodingType specified in the API request.
  *
- * @class
+ * @typedef TextSpan
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.TextSpan definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var TextSpan = {
@@ -1352,7 +1373,8 @@ var TextSpan = {
  *   The classifier's confidence of the category. Number represents how certain
  *   the classifier is that this category represents the given text.
  *
- * @class
+ * @typedef ClassificationCategory
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassificationCategory definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var ClassificationCategory = {
@@ -1365,15 +1387,16 @@ var ClassificationCategory = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
  * @property {number} encodingType
  *   The encoding type used by the API to calculate sentence offsets for the
  *   sentence sentiment.
  *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
  *
- * @class
+ * @typedef AnalyzeSentimentRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSentimentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeSentimentRequest = {
@@ -1386,19 +1409,20 @@ var AnalyzeSentimentRequest = {
  * @property {Object} documentSentiment
  *   The overall sentiment of the input document.
  *
- *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1beta2.Sentiment}
  *
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See {@link Document.language} field for more details.
+ *   See Document.language field for more details.
  *
  * @property {Object[]} sentences
  *   The sentiment for all the sentences in the document.
  *
- *   This object should have the same structure as [Sentence]{@link Sentence}
+ *   This object should have the same structure as [Sentence]{@link google.cloud.language.v1beta2.Sentence}
  *
- * @class
+ * @typedef AnalyzeSentimentResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeSentimentResponse = {
@@ -1411,14 +1435,15 @@ var AnalyzeSentimentResponse = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
  * @property {number} encodingType
  *   The encoding type used by the API to calculate offsets.
  *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
  *
- * @class
+ * @typedef AnalyzeEntitySentimentRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeEntitySentimentRequest = {
@@ -1431,14 +1456,15 @@ var AnalyzeEntitySentimentRequest = {
  * @property {Object[]} entities
  *   The recognized entities in the input document with associated sentiments.
  *
- *   This object should have the same structure as [Entity]{@link Entity}
+ *   This object should have the same structure as [Entity]{@link google.cloud.language.v1beta2.Entity}
  *
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See {@link Document.language} field for more details.
+ *   See Document.language field for more details.
  *
- * @class
+ * @typedef AnalyzeEntitySentimentResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeEntitySentimentResponse = {
@@ -1451,14 +1477,15 @@ var AnalyzeEntitySentimentResponse = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
  * @property {number} encodingType
  *   The encoding type used by the API to calculate offsets.
  *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
  *
- * @class
+ * @typedef AnalyzeEntitiesRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitiesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeEntitiesRequest = {
@@ -1471,14 +1498,15 @@ var AnalyzeEntitiesRequest = {
  * @property {Object[]} entities
  *   The recognized entities in the input document.
  *
- *   This object should have the same structure as [Entity]{@link Entity}
+ *   This object should have the same structure as [Entity]{@link google.cloud.language.v1beta2.Entity}
  *
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See {@link Document.language} field for more details.
+ *   See Document.language field for more details.
  *
- * @class
+ * @typedef AnalyzeEntitiesResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitiesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeEntitiesResponse = {
@@ -1491,14 +1519,15 @@ var AnalyzeEntitiesResponse = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
  * @property {number} encodingType
  *   The encoding type used by the API to calculate offsets.
  *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
  *
- * @class
+ * @typedef AnalyzeSyntaxRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSyntaxRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeSyntaxRequest = {
@@ -1511,19 +1540,20 @@ var AnalyzeSyntaxRequest = {
  * @property {Object[]} sentences
  *   Sentences in the input document.
  *
- *   This object should have the same structure as [Sentence]{@link Sentence}
+ *   This object should have the same structure as [Sentence]{@link google.cloud.language.v1beta2.Sentence}
  *
  * @property {Object[]} tokens
  *   Tokens, along with their syntactic information, in the input document.
  *
- *   This object should have the same structure as [Token]{@link Token}
+ *   This object should have the same structure as [Token]{@link google.cloud.language.v1beta2.Token}
  *
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See {@link Document.language} field for more details.
+ *   See Document.language field for more details.
  *
- * @class
+ * @typedef AnalyzeSyntaxResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSyntaxResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnalyzeSyntaxResponse = {
@@ -1536,9 +1566,10 @@ var AnalyzeSyntaxResponse = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
- * @class
+ * @typedef ClassifyTextRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassifyTextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var ClassifyTextRequest = {
@@ -1551,9 +1582,10 @@ var ClassifyTextRequest = {
  * @property {Object[]} categories
  *   Categories representing the input document.
  *
- *   This object should have the same structure as [ClassificationCategory]{@link ClassificationCategory}
+ *   This object should have the same structure as [ClassificationCategory]{@link google.cloud.language.v1beta2.ClassificationCategory}
  *
- * @class
+ * @typedef ClassifyTextResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassifyTextResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var ClassifyTextResponse = {
@@ -1567,19 +1599,20 @@ var ClassifyTextResponse = {
  * @property {Object} document
  *   Input document.
  *
- *   This object should have the same structure as [Document]{@link Document}
+ *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
  *
  * @property {Object} features
  *   The enabled features.
  *
- *   This object should have the same structure as [Features]{@link Features}
+ *   This object should have the same structure as [Features]{@link google.cloud.language.v1beta2.Features}
  *
  * @property {number} encodingType
  *   The encoding type used by the API to calculate offsets.
  *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
+ *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
  *
- * @class
+ * @typedef AnnotateTextRequest
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnnotateTextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnnotateTextRequest = {
@@ -1604,7 +1637,8 @@ var AnnotateTextRequest = {
    * @property {boolean} classifyText
    *   Classify the full document into categories.
    *
-   * @class
+   * @typedef Features
+   * @memberof google.cloud.language.v1beta2
    * @see [google.cloud.language.v1beta2.AnnotateTextRequest.Features definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
    */
   Features: {
@@ -1617,41 +1651,42 @@ var AnnotateTextRequest = {
  *
  * @property {Object[]} sentences
  *   Sentences in the input document. Populated if the user enables
- *   {@link AnnotateTextRequest.Features.extract_syntax}.
+ *   AnnotateTextRequest.Features.extract_syntax.
  *
- *   This object should have the same structure as [Sentence]{@link Sentence}
+ *   This object should have the same structure as [Sentence]{@link google.cloud.language.v1beta2.Sentence}
  *
  * @property {Object[]} tokens
  *   Tokens, along with their syntactic information, in the input document.
  *   Populated if the user enables
- *   {@link AnnotateTextRequest.Features.extract_syntax}.
+ *   AnnotateTextRequest.Features.extract_syntax.
  *
- *   This object should have the same structure as [Token]{@link Token}
+ *   This object should have the same structure as [Token]{@link google.cloud.language.v1beta2.Token}
  *
  * @property {Object[]} entities
  *   Entities, along with their semantic information, in the input document.
  *   Populated if the user enables
- *   {@link AnnotateTextRequest.Features.extract_entities}.
+ *   AnnotateTextRequest.Features.extract_entities.
  *
- *   This object should have the same structure as [Entity]{@link Entity}
+ *   This object should have the same structure as [Entity]{@link google.cloud.language.v1beta2.Entity}
  *
  * @property {Object} documentSentiment
  *   The overall sentiment for the document. Populated if the user enables
- *   {@link AnnotateTextRequest.Features.extract_document_sentiment}.
+ *   AnnotateTextRequest.Features.extract_document_sentiment.
  *
- *   This object should have the same structure as [Sentiment]{@link Sentiment}
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1beta2.Sentiment}
  *
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See {@link Document.language} field for more details.
+ *   See Document.language field for more details.
  *
  * @property {Object[]} categories
  *   Categories identified in the input document.
  *
- *   This object should have the same structure as [ClassificationCategory]{@link ClassificationCategory}
+ *   This object should have the same structure as [ClassificationCategory]{@link google.cloud.language.v1beta2.ClassificationCategory}
  *
- * @class
+ * @typedef AnnotateTextResponse
+ * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnnotateTextResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
 var AnnotateTextResponse = {
@@ -1666,6 +1701,7 @@ var AnnotateTextResponse = {
  * differently.
  *
  * @enum {number}
+ * @memberof google.cloud.language.v1beta2
  */
 var EncodingType = {
 

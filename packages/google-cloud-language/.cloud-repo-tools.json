@@ -1,0 +1,23 @@
+{
+  "product": "nl",
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/natural-language/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "analyze-v1",
+      "name": "Analyze v1",
+      "file": "analyze.v1.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/",
+      "usage": "node analyze.v1.js --help"
+    },
+    {
+      "id": "analyze-v1beta2",
+      "name": "Analyze v1beta2",
+      "file": "analyze.v1beta2.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/",
+      "usage": "node analyze.v1beta2.js --help"
+    }
+  ]
+}
