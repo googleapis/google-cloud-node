@@ -82,7 +82,7 @@ describe('DlpServiceClient', () => {
     });
   });
 
-  describe('analyzeDataSourceRisk', () => {
+  describe('analyzeDataSourceRisk', function() {
     it('invokes analyzeDataSourceRisk without error', done => {
       var client = new dlpModule.v2beta1.DlpServiceClient();
 
@@ -95,23 +95,19 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var done_ = true;
-      var expectedResponse = {
-        name: name,
-        done: done_,
-      };
+      var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
+      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(request, expectedResponse);
 
-      client.analyzeDataSourceRisk(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
+      client.analyzeDataSourceRisk(request).then(responses => {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(responses => {
+        assert.deepStrictEqual(responses[0], expectedResponse);
         done();
+      }).catch(err => {
+        done(err);
       });
     });
 
@@ -127,18 +123,24 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(request, null, error);
 
-      client.analyzeDataSourceRisk(request, (err, response) => {
+      client.analyzeDataSourceRisk(request).then(responses => {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(responses => {
+        assert.fail();
+      }).catch(err => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
         done();
       });
+    });
+
+    it('has longrunning decoder functions', () => {
+      var client = new dlpModule.v2beta1.DlpServiceClient();
+      assert(client._descriptors.longrunning.analyzeDataSourceRisk.responseDecoder instanceof Function);
+      assert(client._descriptors.longrunning.analyzeDataSourceRisk.metadataDecoder instanceof Function);
     });
   });
 

@@ -15,7 +15,6 @@
 'use strict';
 
 describe('DlpServiceSmokeTest', () => {
-
   it('successfully makes a call to the service', done => {
     const dlp = require('../src');
 
