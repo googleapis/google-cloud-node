@@ -188,20 +188,12 @@ jobs:
                 -out .circleci/key.json \
                 -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
       - run:
-          name: Decrypt second account credentials (storage-specific).
-          command: |
-            openssl aes-256-cbc -d -in .circleci/no-whitelist-key.json.enc \
-                -out .circleci/no-whitelist-key.json \
-                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
-      - run:
           name: Install modules and dependencies.
           command: npm install
       - run:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GCN_STORAGE_2ND_PROJECT_ID: gcloud-node-whitelist-ci-tests
-            GCN_STORAGE_2ND_PROJECT_KEY: .circleci/no-whitelist-key.json
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.
