@@ -14,6 +14,27 @@
 
 'use strict';
 
-const LanguageServiceClient = require('./language_service_client');
+describe('LanguageServiceSmokeTest', () => {
+  it('successfully makes a call to the service', done => {
+    const language = require('../src');
 
-module.exports.LanguageServiceClient = LanguageServiceClient;
+    var client = new language.v1.LanguageServiceClient({
+      // optional auth parameters.
+    });
+
+    var content = 'Hello, world!';
+    var type = 'PLAIN_TEXT';
+    var document = {
+      content: content,
+      type: type,
+    };
+    client
+      .analyzeSentiment({document: document})
+      .then(responses => {
+        var response = responses[0];
+        console.log(response);
+      })
+      .then(done)
+      .catch(done);
+  });
+});

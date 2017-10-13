@@ -1,41 +1,29 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Natural Language API Node.js Samples
+# Google Cloud Natural Language API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-language.svg)]()
+[![Build](https://storage.googleapis.com/.svg)]()
 
 [Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Analyze v1](#analyze-v1)
   * [Analyze v1beta2](#analyze-v1beta2)
-  * [Slack Bot](#slack-bot)
-* [Running the tests](#running-the-tests)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With **npm**:
-
-        npm install
-
-    With **yarn**:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisites
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
 ### Analyze v1
 
-View the [documentation][analyze-v1_0_docs] or the [source code][analyze-v1_0_code].
+View the [source code][analyze-v1_0_code].
 
 __Usage:__ `node analyze.v1.js --help`
 
@@ -51,7 +39,8 @@ Commands:
   entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google Cloud Storage.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node analyze.v1.js sentiment-text "President Obama is speaking at the White House."
@@ -71,7 +60,7 @@ For more information, see https://cloud.google.com/natural-language/docs
 
 ### Analyze v1beta2
 
-View the [documentation][analyze-v1beta2_1_docs] or the [source code][analyze-v1beta2_1_code].
+View the [source code][analyze-v1beta2_1_code].
 
 __Usage:__ `node analyze.v1beta2.js --help`
 
@@ -87,7 +76,8 @@ Commands:
   classify-file <bucketName> <fileName>   Classifies text in a file in Google Cloud Storage.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node analyze.v1beta2.js sentiment-text "President Obama is speaking at the White House."
@@ -96,8 +86,7 @@ Examples:
   node analyze.v1beta2.js entities-file my-bucket file.txt      Detects entities in gs://my-bucket/file.txt
   node analyze.v1beta2.js syntax-text "President Obama is speaking at the White House."
   node analyze.v1beta2.js syntax-file my-bucket file.txt        Detects syntax in gs://my-bucket/file.txt
-  node analyze.v1beta2.js classify-text "Currently the API requires 20 tokens in order \
-      to return non-empty results. Let's use a longer piece of text for the sample in order to win."
+  node analyze.v1beta2.js classify-text "Android is a mobile operating system developed by Google."
   node analyze.v1beta2.js classify-file my-bucket               Detects syntax in gs://my-bucket/android_text.txt
   android_text.txt
 
@@ -106,24 +95,3 @@ For more information, see https://cloud.google.com/natural-language/docs
 
 [analyze-v1beta2_1_docs]: https://cloud.google.com/natural-language/docs/
 [analyze-v1beta2_1_code]: analyze.v1beta2.js
-
-### Slack Bot
-
-
-View the [README](slackbot/README.md).
-
-
-
-## Running the tests
-
-1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
-
-1.  Run the tests:
-
-    With **npm**:
-
-        npm test
-
-    With **yarn**:
-
-        yarn test

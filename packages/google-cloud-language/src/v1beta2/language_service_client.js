@@ -1,482 +1,509 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * EDITING INSTRUCTIONS
- * This file was generated from the file
- * https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto,
- * and updates to that file get reflected here through a refresh process.
- * For the short term, the refresh process will only be runnable by Google
- * engineers.
- *
- * The only allowed edits are to method and file documentation. A 3-way
- * merge preserves those additions if the generated source changes.
- */
-/* TODO: introduce line-wrapping so that it never exceeds the limit. */
-/* jscs: disable maximumLineLength */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 'use strict';
 
-var configData = require('./language_service_client_config');
-var extend = require('extend');
-var gax = require('google-gax');
-var googleProtoFiles = require('google-proto-files');
-var path = require('path');
+const gapicConfig = require('./language_service_client_config');
+const gax = require('google-gax');
+const merge = require('lodash.merge');
+const path = require('path');
 
-var SERVICE_ADDRESS = 'language.googleapis.com';
-
-var DEFAULT_SERVICE_PORT = 443;
-
-var CODE_GEN_NAME_VERSION = 'gapic/0.0.5';
-
-/**
- * The scopes needed to make gRPC calls to all of the methods defined in
- * this service.
- */
-var ALL_SCOPES = [
-  'https://www.googleapis.com/auth/cloud-platform'
-];
+const VERSION = require('../../package.json').version;
 
 /**
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
  *
- *
  * @class
+ * @memberof v1beta2
  */
-function LanguageServiceClient(gaxGrpc, loadedProtos, opts) {
-  opts = extend({
-    servicePath: SERVICE_ADDRESS,
-    port: DEFAULT_SERVICE_PORT,
-    clientConfig: {}
-  }, opts);
+class LanguageServiceClient {
+  /**
+   * Construct an instance of LanguageServiceClient.
+   *
+   * @param {object=} options - The configuration object. See the subsequent
+   *   parameters for more details.
+   * @param {object=} options.credentials - Credentials object.
+   * @param {string=} options.credentials.client_email
+   * @param {string=} options.credentials.private_key
+   * @param {string=} options.email - Account email address. Required when
+   *   usaing a .pem or .p12 keyFilename.
+   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   *     .p12 key downloaded from the Google Developers Console. If you provide
+   *     a path to a JSON file, the projectId option above is not necessary.
+   *     NOTE: .pem and .p12 require you to specify options.email as well.
+   * @param {number=} options.port - The port on which to connect to
+   *     the remote host.
+   * @param {string=} options.projectId - The project ID from the Google
+   *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
+   *     the environment variable GCLOUD_PROJECT for your project ID. If your
+   *     app is running in an environment which supports
+   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     your project ID will be detected automatically.
+   * @param {function=} options.promise - Custom promise module to use instead
+   *     of native Promises.
+   * @param {string=} options.servicePath - The domain name of the
+   *     API remote host.
+   */
+  constructor(opts) {
+    this._descriptors = {};
 
-  var googleApiClient = [
-    'gl-node/' + process.versions.node
-  ];
-  if (opts.libName && opts.libVersion) {
-    googleApiClient.push(opts.libName + '/' + opts.libVersion);
-  }
-  googleApiClient.push(
-    CODE_GEN_NAME_VERSION,
-    'gax/' + gax.version,
-    'grpc/' + gaxGrpc.grpcVersion
-  );
+    // Ensure that options include the service address and port.
+    opts = Object.assign(
+      {
+        clientConfig: {},
+        port: this.constructor.port,
+        servicePath: this.constructor.servicePath,
+      },
+      opts
+    );
 
-  var defaults = gaxGrpc.constructSettings(
+    // Create a `gaxGrpc` object, with any grpc-specific options
+    // sent to the client.
+    opts.scopes = this.constructor.scopes;
+    var gaxGrpc = gax.grpc(opts);
+
+    // Save the auth object to the client, for use by other methods.
+    this.auth = gaxGrpc.auth;
+
+    // Determine the client header string.
+    var clientHeader = [
+      `gl-node/${process.version.node}`,
+      `grpc/${gaxGrpc.grpcVersion}`,
+      `gax/${gax.version}`,
+      `gapic/${VERSION}`,
+    ];
+    if (opts.libName && opts.libVersion) {
+      clientHeader.push(`${opts.libName}/${opts.libVersion}`);
+    }
+
+    // Load the applicable protos.
+    var protos = merge(
+      {},
+      gaxGrpc.loadProto(
+        path.join(__dirname, '..', '..', 'protos'),
+        'google/cloud/language/v1beta2/language_service.proto'
+      )
+    );
+
+    // Put together the default options sent with requests.
+    var defaults = gaxGrpc.constructSettings(
       'google.cloud.language.v1beta2.LanguageService',
-      configData,
+      gapicConfig,
       opts.clientConfig,
-      {'x-goog-api-client': googleApiClient.join(' ')});
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
-  var self = this;
+    // Set up a dictionary of "inner API calls"; the core implementation
+    // of calling the API is handled in `google-gax`, with this code
+    // merely providing the destination and request information.
+    this._innerApiCalls = {};
 
-  this.auth = gaxGrpc.auth;
-  var languageServiceStub = gaxGrpc.createStub(
-      loadedProtos.google.cloud.language.v1beta2.LanguageService,
-      opts);
-  var languageServiceStubMethods = [
-    'analyzeSentiment',
-    'analyzeEntities',
-    'analyzeEntitySentiment',
-    'analyzeSyntax',
-    'classifyText',
-    'annotateText'
-  ];
-  languageServiceStubMethods.forEach(function(methodName) {
-    self['_' + methodName] = gax.createApiCall(
-      languageServiceStub.then(function(languageServiceStub) {
-        return function() {
-          var args = Array.prototype.slice.call(arguments, 0);
-          return languageServiceStub[methodName].apply(languageServiceStub, args);
-        };
-      }),
-      defaults[methodName],
-      null);
-  });
-}
+    // Put together the "service stub" for
+    // google.cloud.language.v1beta2.LanguageService.
+    var languageServiceStub = gaxGrpc.createStub(
+      protos.google.cloud.language.v1beta2.LanguageService,
+      opts
+    );
 
-
-/**
- * Get the project ID used by this class.
- * @param {function(Error, string)} callback - the callback to be called with
- *   the current project Id.
- */
-LanguageServiceClient.prototype.getProjectId = function(callback) {
-  return this.auth.getProjectId(callback);
-};
-
-// Service calls
-
-/**
- * Analyzes the sentiment of the provided text.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {number=} request.encodingType
- *   The encoding type used by the API to calculate sentence offsets for the
- *   sentence sentiment.
- *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * client.analyzeSentiment({document: document}).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.analyzeSentiment = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
+    // Iterate over each of the methods that the service provides
+    // and create an API call method for each.
+    var languageServiceStubMethods = [
+      'analyzeSentiment',
+      'analyzeEntities',
+      'analyzeEntitySentiment',
+      'analyzeSyntax',
+      'classifyText',
+      'annotateText',
+    ];
+    for (let methodName of languageServiceStubMethods) {
+      this._innerApiCalls[methodName] = gax.createApiCall(
+        languageServiceStub.then(
+          stub =>
+            function() {
+              var args = Array.prototype.slice.call(arguments, 0);
+              return stub[methodName].apply(stub, args);
+            }
+        ),
+        defaults[methodName],
+        null
+      );
+    }
   }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._analyzeSentiment(request, options, callback);
-};
-
-/**
- * Finds named entities (currently proper names and common nouns) in the text
- * along with entity types, salience, mentions for each entity, and
- * other properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {number=} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * client.analyzeEntities({document: document}).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.analyzeEntities = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
-  }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._analyzeEntities(request, options, callback);
-};
-
-/**
- * Finds entities, similar to {@link AnalyzeEntities} in the text and analyzes
- * sentiment associated with each entity and its mentions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {number=} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [AnalyzeEntitySentimentResponse]{@link AnalyzeEntitySentimentResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeEntitySentimentResponse]{@link AnalyzeEntitySentimentResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * client.analyzeEntitySentiment({document: document}).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.analyzeEntitySentiment = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
-  }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._analyzeEntitySentiment(request, options, callback);
-};
-
-/**
- * Analyzes the syntax of the text and provides sentence boundaries and
- * tokenization along with part of speech tags, dependency trees, and other
- * properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {number=} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [AnalyzeSyntaxResponse]{@link AnalyzeSyntaxResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link AnalyzeSyntaxResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * client.analyzeSyntax({document: document}).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
-  }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._analyzeSyntax(request, options, callback);
-};
-
-/**
- * Classifies a document into categories.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [ClassifyTextResponse]{@link ClassifyTextResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [ClassifyTextResponse]{@link ClassifyTextResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * client.classifyText({document: document}).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.classifyText = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
-  }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._classifyText(request, options, callback);
-};
-
-/**
- * A convenience method that provides all syntax, sentiment, entity, and
- * classification features in one call.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {Object} request.document
- *   Input document.
- *
- *   This object should have the same structure as [Document]{@link Document}
- * @param {Object} request.features
- *   The enabled features.
- *
- *   This object should have the same structure as [Features]{@link Features}
- * @param {number=} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- *
- *   The number should be among the values of [EncodingType]{@link EncodingType}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object)=} callback
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}.
- * @return {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- * @example
- *
- * var language = require('@google-cloud/language');
- *
- * var client = language.v1beta2({
- *   // optional auth parameters.
- * });
- *
- * var document = {};
- * var features = {};
- * var request = {
- *     document: document,
- *     features: features
- * };
- * client.annotateText(request).then(function(responses) {
- *     var response = responses[0];
- *     // doThingsWith(response)
- * })
- * .catch(function(err) {
- *     console.error(err);
- * });
- */
-LanguageServiceClient.prototype.annotateText = function(request, options, callback) {
-  if (options instanceof Function && callback === undefined) {
-    callback = options;
-    options = {};
-  }
-  if (options === undefined) {
-    options = {};
-  }
-
-  return this._annotateText(request, options, callback);
-};
-
-function LanguageServiceClientBuilder(gaxGrpc) {
-  if (!(this instanceof LanguageServiceClientBuilder)) {
-    return new LanguageServiceClientBuilder(gaxGrpc);
-  }
-
-  var languageServiceStubProtos = gaxGrpc.loadProto(
-    path.join(__dirname, '..', '..', 'protos', 'google/cloud/language/v1beta2/language_service.proto'));
-  extend(this, languageServiceStubProtos.google.cloud.language.v1beta2);
-
 
   /**
-   * Build a new instance of {@link LanguageServiceClient}.
-   *
-   * @param {Object=} opts - The optional parameters.
-   * @param {String=} opts.servicePath
-   *   The domain name of the API remote host.
-   * @param {number=} opts.port
-   *   The port on which to connect to the remote host.
-   * @param {grpc.ClientCredentials=} opts.sslCreds
-   *   A ClientCredentials for use with an SSL-enabled channel.
-   * @param {Object=} opts.clientConfig
-   *   The customized config to build the call settings. See
-   *   {@link gax.constructSettings} for the format.
+   * The DNS address for this API service.
    */
-  this.languageServiceClient = function(opts) {
-    return new LanguageServiceClient(gaxGrpc, languageServiceStubProtos, opts);
-  };
-  extend(this.languageServiceClient, LanguageServiceClient);
+  static get servicePath() {
+    return 'language.googleapis.com';
+  }
+
+  /**
+   * The port for this API service.
+   */
+  static get port() {
+    return 443;
+  }
+
+  /**
+   * The scopes needed to make gRPC calls for every method defined
+   * in this service.
+   */
+  static get scopes() {
+    return ['https://www.googleapis.com/auth/cloud-platform'];
+  }
+
+  /**
+   * Return the project ID used by this class.
+   * @param {function(Error, string)} callback - the callback to
+   *   be called with the current project Id.
+   */
+  getProjectId(callback) {
+    return this.auth.getProjectId(callback);
+  }
+
+  // -------------------
+  // -- Service calls --
+  // -------------------
+
+  /**
+   * Analyzes the sentiment of the provided text.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {number=} request.encodingType
+   *   The encoding type used by the API to calculate sentence offsets for the
+   *   sentence sentiment.
+   *
+   *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeSentimentResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeSentimentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * client.analyzeSentiment({document: document})
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  analyzeSentiment(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.analyzeSentiment(request, options, callback);
+  }
+
+  /**
+   * Finds named entities (currently proper names and common nouns) in the text
+   * along with entity types, salience, mentions for each entity, and
+   * other properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {number=} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   *
+   *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitiesResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitiesResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * client.analyzeEntities({document: document})
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  analyzeEntities(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.analyzeEntities(request, options, callback);
+  }
+
+  /**
+   * Finds entities, similar to AnalyzeEntities in the text and analyzes
+   * sentiment associated with each entity and its mentions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {number=} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   *
+   *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * client.analyzeEntitySentiment({document: document})
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  analyzeEntitySentiment(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.analyzeEntitySentiment(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Analyzes the syntax of the text and provides sentence boundaries and
+   * tokenization along with part of speech tags, dependency trees, and other
+   * properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {number=} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   *
+   *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1beta2.AnalyzeSyntaxResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1beta2.AnalyzeSyntaxResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * client.analyzeSyntax({document: document})
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  analyzeSyntax(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.analyzeSyntax(request, options, callback);
+  }
+
+  /**
+   * Classifies a document into categories.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1beta2.ClassifyTextResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1beta2.ClassifyTextResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * client.classifyText({document: document})
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  classifyText(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.classifyText(request, options, callback);
+  }
+
+  /**
+   * A convenience method that provides all syntax, sentiment, entity, and
+   * classification features in one call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Input document.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
+   * @param {Object} request.features
+   *   The enabled features.
+   *
+   *   This object should have the same structure as [Features]{@link google.cloud.language.v1beta2.Features}
+   * @param {number=} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   *
+   *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1beta2.AnnotateTextResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1beta2.AnnotateTextResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const language = require('@google-cloud/language');
+   *
+   * var client = new language.v1beta2.LanguageServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var document = {};
+   * var features = {};
+   * var request = {
+   *   document: document,
+   *   features: features,
+   * };
+   * client.annotateText(request)
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  annotateText(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.annotateText(request, options, callback);
+  }
 }
-module.exports = LanguageServiceClientBuilder;
-module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
-module.exports.ALL_SCOPES = ALL_SCOPES;
+
+module.exports = LanguageServiceClient;

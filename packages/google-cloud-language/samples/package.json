@@ -1,61 +1,33 @@
 {
   "name": "nodejs-docs-samples-language",
   "version": "0.0.1",
-  "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
-  },
   "engines": {
     "node": ">=4.3.2"
   },
+  "repository": "googleapis/nodejs-language",
+  "private": true,
   "semistandard": {
     "ignore": [
       "node_modules"
     ]
   },
   "scripts": {
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
+    "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
+    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
+    "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
     "@google-cloud/language": "0.12.1",
-    "@google-cloud/storage": "1.2.1",
-    "yargs": "8.0.2"
+    "@google-cloud/storage": "1.4.0",
+    "yargs": "9.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.0.8",
+    "ava": "0.22.0",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "product": "nl",
-    "samples": [
-      {
-        "id": "analyze-v1",
-        "name": "Analyze v1",
-        "file": "analyze.v1.js",
-        "docs_link": "https://cloud.google.com/natural-language/docs/",
-        "usage": "node analyze.v1.js --help"
-      },
-      {
-        "id": "analyze-v1beta2",
-        "name": "Analyze v1beta2",
-        "file": "analyze.v1beta2.js",
-        "docs_link": "https://cloud.google.com/natural-language/docs/",
-        "usage": "node analyze.v1beta2.js --help"
-      },
-      {
-        "id": "slackbot",
-        "name": "Slack Bot",
-        "ref": "slackbot/README.md"
-      }
-    ]
+    "sinon": "4.0.1",
+    "uuid": "3.1.0"
   }
 }
