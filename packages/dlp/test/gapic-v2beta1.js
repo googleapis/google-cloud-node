@@ -41,7 +41,10 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.deidentifyContent = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.deidentifyContent = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.deidentifyContent(request, (err, response) => {
         assert.ifError(err);
@@ -64,11 +67,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deidentifyContent = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.deidentifyContent = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.deidentifyContent(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -88,14 +96,17 @@ describe('DlpServiceClient', () => {
 
       // Mock response
       var name = 'name3373707';
-      var done = true;
+      var done_ = true;
       var expectedResponse = {
         name: name,
-        done: done,
+        done: done_,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.analyzeDataSourceRisk(request, (err, response) => {
         assert.ifError(err);
@@ -116,11 +127,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.analyzeDataSourceRisk = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.analyzeDataSourceRisk(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -155,7 +171,10 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.inspectContent(request, (err, response) => {
         assert.ifError(err);
@@ -189,11 +208,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.inspectContent(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -239,7 +263,10 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.redactContent(request, (err, response) => {
         assert.ifError(err);
@@ -284,11 +311,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.redactContent(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -412,7 +444,10 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listInspectFindings = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.listInspectFindings = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.listInspectFindings(request, (err, response) => {
         assert.ifError(err);
@@ -431,11 +466,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listInspectFindings = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listInspectFindings = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.listInspectFindings(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -457,7 +497,10 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.listInfoTypes(request, (err, response) => {
         assert.ifError(err);
@@ -478,11 +521,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.listInfoTypes(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -502,7 +550,10 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.listRootCategories = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.listRootCategories = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
       client.listRootCategories(request, (err, response) => {
         assert.ifError(err);
@@ -521,11 +572,16 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listRootCategories = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listRootCategories = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
       client.listRootCategories(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -538,11 +594,9 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
     assert.deepStrictEqual(actualRequest, expectedRequest);
     if (error) {
       callback(error);
-    }
-    else if (response) {
+    } else if (response) {
       callback(null, response);
-    }
-    else {
+    } else {
       callback(null);
     }
   };
