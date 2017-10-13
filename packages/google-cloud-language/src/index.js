@@ -53,21 +53,17 @@ const gapic = Object.freeze({
  * @module {object} @google-cloud/language
  * @alias nodejs-language
  *
- * @example <caption>Install the client library with
- *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save @google-cloud/language
  *
  * @example <caption>Import the client library:</caption>
  * const language = require('@google-cloud/language');
  *
- * @example <caption>Create a client that uses
- *   <a href="https://goo.gl/64dyYX">Application Default Credentials
- *   (ADC)</a>:</caption>
- * let client = new language.LanguageServiceClient();
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new language.LanguageServiceClient();
  *
- * @example <caption>Create a client with
- *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * let client = new language.LanguageServiceClient({
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new language.LanguageServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
