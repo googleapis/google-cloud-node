@@ -62,7 +62,7 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.8",
+    "@google-cloud/nodejs-repo-tools": "^2.0.9",
     "async": "^2.5.0",
     "codecov": "^2.3.0",
     "eslint": "^4.8.0",
