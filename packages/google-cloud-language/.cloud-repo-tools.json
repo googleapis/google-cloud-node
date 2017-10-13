@@ -2,7 +2,7 @@
   "product": "nl",
   "requiresKeyFile": true,
   "requiresProjectId": true,
-  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/natural-language/latest/",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/language/latest/",
   "release_quality": "beta",
   "samples": [
     {
