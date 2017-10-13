@@ -20,6 +20,8 @@ const merge = require('lodash.merge');
 const path = require('path');
 const protobuf = require('protobufjs');
 
+const VERSION = require('../../package.json').version;
+
 /**
  * The DLP API is a service that allows clients
  * to detect the presence of Personally Identifiable Information (PII) and other
@@ -63,11 +65,14 @@ class DlpServiceClient {
     this._descriptors = {};
 
     // Ensure that options include the service address and port.
-    opts = Object.assign({
-      clientConfig: {},
-      port: this.constructor.port,
-      servicePath: this.constructor.servicePath,
-    }, opts);
+    opts = Object.assign(
+      {
+        clientConfig: {},
+        port: this.constructor.port,
+        servicePath: this.constructor.servicePath,
+      },
+      opts
+    );
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
@@ -82,18 +87,19 @@ class DlpServiceClient {
       `gl-node/${process.version.node}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
-      `gapic/${this.version}`,
+      `gapic/${VERSION}`,
     ];
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
-    var protos = merge({},
+    var protos = merge(
+      {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
         'google/privacy/dlp/v2beta1/dlp.proto'
-      ),
+      )
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -104,6 +110,12 @@ class DlpServiceClient {
         'inspect/results/{result}'
       ),
     };
+    var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+    protoFilesRoot = protobuf.loadSync(
+      path.join(__dirname, '..', '..', 'protos', 'google/privacy/dlp/v2beta1/dlp.proto'),
+      protoFilesRoot
+    );
+
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -112,12 +124,6 @@ class DlpServiceClient {
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
-
-    var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/privacy/dlp/v2beta1/dlp.proto'),
-      protoFilesRoot
-    );
 
     var createInspectOperationResponse = protoFilesRoot.lookup(
       'google.privacy.dlp.v2beta1.InspectOperationResult'
@@ -139,7 +145,7 @@ class DlpServiceClient {
       'google.privacy.dlp.v2beta1.DlpService',
       gapicConfig,
       opts.clientConfig,
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {'x-goog-api-client': clientHeader.join(' ')}
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -168,10 +174,13 @@ class DlpServiceClient {
     ];
     for (let methodName of dlpServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
-        dlpServiceStub.then(stub => function() {
-          var args = Array.prototype.slice.call(arguments, 0);
-          return stub[methodName].apply(stub, args);
-        }),
+        dlpServiceStub.then(
+          stub =>
+            function() {
+              var args = Array.prototype.slice.call(arguments, 0);
+              return stub[methodName].apply(stub, args);
+            }
+        ),
         defaults[methodName],
         this._descriptors.longrunning[methodName]
       );
@@ -278,7 +287,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.deidentifyContent(request, options, callback);
-  };
+  }
 
   /**
    * Schedules a job to compute risk analysis metrics over content in a Google
@@ -336,7 +345,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.analyzeDataSourceRisk(request, options, callback);
-  };
+  }
 
   /**
    * Finds potentially sensitive info in a list of strings.
@@ -409,7 +418,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.inspectContent(request, options, callback);
-  };
+  }
 
   /**
    * Redacts potentially sensitive info from a list of strings.
@@ -500,7 +509,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.redactContent(request, options, callback);
-  };
+  }
 
   /**
    * Schedules a job scanning content in a Google Cloud Platform data
@@ -651,7 +660,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.createInspectOperation(request, options, callback);
-  };
+  }
 
   /**
    * Returns list of results for given inspect operation result set id.
@@ -716,7 +725,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.listInspectFindings(request, options, callback);
-  };
+  }
 
   /**
    * Returns sensitive information types for given category.
@@ -771,7 +780,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.listInfoTypes(request, options, callback);
-  };
+  }
 
   /**
    * Returns the list of root categories of sensitive information.
@@ -819,7 +828,7 @@ class DlpServiceClient {
     options = options || {};
 
     return this._innerApiCalls.listRootCategories(request, options, callback);
-  };
+  }
 
   // --------------------
   // -- Path templates --

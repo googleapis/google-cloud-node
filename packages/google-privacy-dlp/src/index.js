@@ -13,18 +13,71 @@
 // limitations under the License.
 
 /**
- * @module @google-cloud/dlp
+ * @namespace google
+ */
+/**
+ * @namespace google.cloud
+ */
+/**
+ * @namespace google.cloud.dlp
+ */
+/**
+ * @namespace google.cloud.dlp.v2beta1
  */
 
 'use strict';
 
-const VERSION = require('../package.json').version;
-
 // Import the clients for each version supported by this package.
-var gapic = {
+const gapic = Object.freeze({
   v2beta1: require('./v2beta1'),
-};
+});
 
+/**
+ * The `@google-cloud/dlp` package has the following named exports:
+ *
+ * - `DlpServiceClient` - Reference to
+ *   {@link v2beta1.DlpServiceClient}
+ * - `v2beta1` - This is used for selecting or pinning a
+ *   particular backend service version. It exports:
+ *     - `DlpServiceClient` - Reference to
+ *       {@link v2beta1.DlpServiceClient}
+ *
+ * @module {object} @google-cloud/dlp
+ * @alias nodejs-dlp
+ *
+ * @example <caption>Install the client library with
+ *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/dlp
+ *
+ * @example <caption>Import the client library:</caption>
+ * const dlp = require('@google-cloud/dlp');
+ *
+ * @example <caption>Create a client that uses
+ *   <a href="https://goo.gl/64dyYX">Application Default Credentials
+ *   (ADC)</a>:</caption>
+ * let client = new dlp.DlpServiceClient();
+ *
+ * @example <caption>Create a client with
+ *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * let client = new dlp.DlpServiceClient({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json',
+ * });
+ */
+
+/**
+ * @type {object}
+ * @property {constructor} DlpServiceClient
+ *   Reference to {@link v2beta1.DlpServiceClient}
+ */
 module.exports = gapic.v2beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} DlpServiceClient
+ *   Reference to {@link v2beta1.DlpServiceClient}
+ */
 module.exports.v2beta1 = gapic.v2beta1;
+
+// Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);
