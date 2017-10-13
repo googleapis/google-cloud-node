@@ -107,13 +107,15 @@ jobs:
       - checkout
       - run:
           name: Install modules and dependencies.
-          command: npm install
+          command: |
+            npm install
+            npm link
       - run:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link @google-cloud/storage
+            npm install
             cd ..
       - run:
           name: Run linting.
@@ -151,8 +153,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link @google-cloud/storage
+            npm install
             cd ..
       - run:
           name: Run sample tests.
