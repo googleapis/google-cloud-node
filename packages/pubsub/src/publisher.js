@@ -222,6 +222,8 @@ Publisher.prototype.queue_ = function(data, attrs, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Publisher);
+common.util.promisifyAll(Publisher, {
+  singular: true
+});
 
 module.exports = Publisher;

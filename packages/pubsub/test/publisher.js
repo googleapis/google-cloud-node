@@ -23,8 +23,9 @@ var proxyquire = require('proxyquire');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisifyAll: function(Class) {
+  promisifyAll: function(Class, options) {
     if (Class.name === 'Publisher') {
+      assert.deepEqual(options, { singular: true });
       promisified = true;
     }
   }
