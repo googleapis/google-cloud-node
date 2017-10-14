@@ -23,10 +23,8 @@ var maxBy = require('lodash.maxby');
 var random = require('lodash.random');
 var is = require('is');
 var isNumber = is.number;
-var isObject = is.object;
 var isString = is.string;
 var isArray = is.array;
-var isNull = is.null;
 var isFunction = is.function;
 
 function Fuzzer() { }
@@ -202,7 +200,6 @@ Fuzzer.prototype.generate.object = function(numProperties, currentDepth, allowed
 
 Fuzzer.prototype._backFillUnevenTypesArrays = function(argsTypesArray) {
 
-  var largestIndex = 0;
   var largestLength = (maxBy(
     argsTypesArray
     , function(o) { return o.length }
@@ -292,7 +289,6 @@ Fuzzer.prototype._generateValuesForFuzzTyping = function(typesToFuzzOnEach, inde
 Fuzzer.prototype.fuzzFunctionForTypes = function(fnToFuzz, expectsArgTypes, cb, withContext) {
   var expectsArgTypesChecked = isArray(expectsArgTypes) ? expectsArgTypes : [];
   var typesToFuzzOnEach = this._generateTypesToFuzzWith(expectsArgTypesChecked);
-  var withContextChecked = (withContext !== undefined) ? withContext : null;
 
   var returnValue = undefined;
 
