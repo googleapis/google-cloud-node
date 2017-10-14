@@ -18,7 +18,6 @@
 'use strict';
 const common = require('@google-cloud/common');
 const pkg = require('../../package.json');
-var logger = require('../logger.js');
 var is = require('is');
 var isFunction = is.fn;
 var isString = is.string;
@@ -120,7 +119,7 @@ class RequestHandler extends common.Service {
         method: 'POST',
         json: {}
       }, (err, body, response) => {
-        if (err && err.message !== 'Message cannot be empty.' && 
+        if (err && err.message !== 'Message cannot be empty.' &&
             response.statusCode === 400) {
           this._logger.error([
             'Encountered an error while attempting to validate the provided',
