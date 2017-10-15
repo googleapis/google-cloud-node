@@ -1,0 +1,68 @@
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
+
+# Google Cloud DNS Node.js Samples
+
+[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-dns.svg)]()
+
+[Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
+
+## Table of Contents
+
+* [Setup](#setup)
+* [Samples](#samples)
+  * [Zones](#zones)
+* [Running the tests](#running-the-tests)
+
+## Setup
+
+1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1.  Install dependencies:
+
+    With **npm**:
+
+        npm install
+
+    With **yarn**:
+
+        yarn install
+
+[prereq]: ../README.md#prerequisites
+[run]: ../README.md#how-to-run-a-sample
+
+## Samples
+
+### Zones
+
+View the [documentation][zones_0_docs] or the [source code][zones_0_code].
+
+__Usage:__ `node zones.js --help`
+
+```
+Commands:
+  list  Lists all zones in the current project.
+
+Options:
+  --help  Show help                                                                                            [boolean]
+
+Examples:
+  node zones.js list  Lists all zones in the current project.
+
+For more information, see https://cloud.google.com/dns/docs
+```
+
+[zones_0_docs]: https://cloud.google.com/dns/docs
+[zones_0_code]: zones.js
+
+## Running the tests
+
+1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
+
+1.  Run the tests:
+
+    With **npm**:
+
+        npm test
+
+    With **yarn**:
+
+        yarn test
