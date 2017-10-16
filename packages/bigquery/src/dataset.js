@@ -178,6 +178,19 @@ function Dataset(bigQuery, id) {
   });
 
   this.bigQuery = bigQuery;
+
+  // Catch all for read-modify-write cycle
+  // https://cloud.google.com/bigquery/docs/api-performance#read-patch-write
+  this.interceptors.push({
+    request: function(reqOpts) {
+      if (reqOpts.method === 'PATCH' && reqOpts.json.etag) {
+        reqOpts.headers = reqOpts.headers || {};
+        reqOpts.headers['If-Match'] = reqOpts.json.etag;
+      }
+
+      return reqOpts;
+    }
+  });
 }
 
 util.inherits(Dataset, common.ServiceObject);
@@ -249,33 +262,13 @@ Dataset.prototype.createTable = function(id, options, callback) {
     options = {};
   }
 
-  var body = extend(true, {}, options, {
-    tableReference: {
-      datasetId: this.id,
-      projectId: this.bigQuery.projectId,
-      tableId: id
-    }
-  });
+  var body = Table.formatMetadata_(options);
 
-  if (is.string(options.schema)) {
-    body.schema = Table.createSchemaFromString_(options.schema);
-  }
-
-  if (is.array(options.schema)) {
-    body.schema = {
-      fields: options.schema
-    };
-  }
-
-  if (body.schema && body.schema.fields) {
-    body.schema.fields = body.schema.fields.map(function(field) {
-      if (field.fields) {
-        field.type = 'RECORD';
-      }
-
-      return field;
-    });
-  }
+  body.tableReference = {
+    datasetId: this.id,
+    projectId: this.bigQuery.projectId,
+    tableId: id
+  };
 
   this.request({
     method: 'POST',
@@ -467,6 +460,27 @@ Dataset.prototype.query = function(options, callback) {
   });
 
   return this.bigQuery.query(options, callback);
+};
+
+/**
+ * Start running a query scoped to your dataset.
+ *
+ * See {module:bigquery#startQuery} for full documentation of this method.
+ */
+Dataset.prototype.startQuery = function(options, callback) {
+  if (is.string(options)) {
+    options = {
+      query: options
+    };
+  }
+
+  options = extend(true, {}, options, {
+    defaultDataset: {
+      datasetId: this.id
+    }
+  });
+
+  return this.bigQuery.startQuery(options, callback);
 };
 
 /**

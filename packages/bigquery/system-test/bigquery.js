@@ -37,7 +37,7 @@ describe('BigQuery', function() {
   var table = dataset.table(generateName('table'));
   var bucket = storage.bucket(generateName('bucket'));
 
-  var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
+  var query = 'SELECT url FROM `publicdata.samples.github_nested` LIMIT 100';
 
   var SCHEMA = [
     {
@@ -255,6 +255,38 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should honor the job prefix option', function(done) {
+    var options = {
+      query: query,
+      jobPrefix: 'hi-im-a-prefix'
+    };
+
+    bigquery.startQuery(options, function(err, job) {
+      assert.ifError(err);
+      assert.strictEqual(job.id.indexOf(options.jobPrefix), 0);
+
+      job.getQueryResults(function(err, rows) {
+        assert.ifError(err);
+        assert.strictEqual(rows.length, 100);
+        assert.strictEqual(typeof rows[0].url, 'string');
+        done();
+      });
+    });
+  });
+
+  it('should honor the dryRun option', function(done) {
+    var options = {
+      query: query,
+      dryRun: true
+    };
+
+    bigquery.startQuery(options, function(err, job) {
+      assert.ifError(err);
+      assert(job.metadata.statistics);
+      done();
+    });
+  });
+
   it('should query as a stream', function(done) {
     var rowsEmitted = 0;
 
@@ -279,8 +311,7 @@ describe('BigQuery', function() {
   });
 
   it('should allow querying in series', function(done) {
-    bigquery.query({
-      query: query,
+    bigquery.query(query, {
       maxResults: 10
     }, function(err, rows, nextQuery) {
       assert.ifError(err);
@@ -342,6 +373,34 @@ describe('BigQuery', function() {
           assert.equal(metadata.description, 'yay description');
           done();
         });
+      });
+    });
+
+    it('should use etags for locking', function(done) {
+      dataset.getMetadata(function(err) {
+        assert.ifError(err);
+
+        var etag = dataset.metadata.etag;
+
+        dataset.setMetadata({
+          etag: etag,
+          description: 'another description'
+        }, function(err) {
+          assert.ifError(err);
+          // the etag should be updated
+          assert.notStrictEqual(etag, dataset.metadata.etag);
+          done();
+        });
+      });
+    });
+
+    it('should error out for bad etags', function(done) {
+      dataset.setMetadata({
+        etag: 'a-fake-etag',
+        description: 'oh no!'
+      }, function(err) {
+        assert.strictEqual(err.code, 412); // precondition failed
+        done();
       });
     });
 
@@ -498,6 +557,27 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should start copying data from current table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table1Instance.startCopy(table2Instance, function(err, job) {
+          assert.ifError(err);
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              // Data may take up to 90 minutes to be copied*, so we cannot test
+              // to see that anything but the request was successful.
+              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
+              done();
+            });
+        });
+      });
+
       it('should copy data from current table', function(done) {
         var table1 = TABLES[1];
         var table1Instance = table1.table;
@@ -505,7 +585,21 @@ describe('BigQuery', function() {
         var table2 = TABLES[2];
         var table2Instance = table2.table;
 
-        table1Instance.copy(table2Instance, function(err, job) {
+        table1Instance.copy(table2Instance, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
+        });
+      });
+
+      it('should start copying data from another table', function(done) {
+        var table1 = TABLES[1];
+        var table1Instance = table1.table;
+
+        var table2 = TABLES[2];
+        var table2Instance = table2.table;
+
+        table2Instance.startCopyFrom(table1Instance, function(err, job) {
           assert.ifError(err);
 
           job
@@ -526,17 +620,10 @@ describe('BigQuery', function() {
         var table2 = TABLES[2];
         var table2Instance = table2.table;
 
-        table2Instance.copyFrom(table1Instance, function(err, job) {
+        table2Instance.copyFrom(table1Instance, function(err, resp) {
           assert.ifError(err);
-
-          job
-            .on('error', done)
-            .on('complete', function() {
-              // Data may take up to 90 minutes to be copied*, so we cannot test
-              // to see that anything but the request was successful.
-              // *https://cloud.google.com/bigquery/streaming-data-into-bigquery
-              done();
-            });
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
         });
       });
     });
@@ -555,8 +642,8 @@ describe('BigQuery', function() {
         file.delete(done);
       });
 
-      it('should import data from a file in your bucket', function(done) {
-        table.import(file, function(err, job) {
+      it('should start to import data from a storage file', function(done) {
+        table.startImport(file, function(err, job) {
           assert.ifError(err);
 
           job
@@ -567,11 +654,16 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should import data from a storage file', function(done) {
+        table.import(file, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
+        });
+      });
+
       it('should import data from a file via promises', function() {
         return table.import(file)
-          .then(function(results) {
-            return results[0].promise();
-          })
           .then(function(results) {
             var metadata = results[0];
             assert.strictEqual(metadata.status.state, 'DONE');
@@ -612,6 +704,37 @@ describe('BigQuery', function() {
 
           done();
         });
+      });
+
+      it('should create tables upon insert', function() {
+        var table = dataset.table(generateName('does-not-exist'));
+
+        var row = {
+          name: 'stephen'
+        };
+
+        var options = {
+          autoCreate: true,
+          schema: SCHEMA
+        };
+
+        return table.insert(row, options)
+          .then(function() {
+            // getting rows immediately after insert
+            // results in an empty array
+            return new Promise(function(resolve) {
+              setTimeout(resolve, 2500);
+            });
+          })
+          .then(function() {
+            return table.getRows();
+          })
+          .then(function(data) {
+            var rows = data[0];
+
+            assert.strictEqual(rows.length, 1);
+            assert.strictEqual(rows[0].name, row.name);
+          });
       });
 
       describe('SQL parameters', function() {
@@ -990,10 +1113,10 @@ describe('BigQuery', function() {
         });
       });
 
-      it('should export data to a file in your bucket', function(done) {
+      it('should start export data to a storage file', function(done) {
         var file = bucket.file('kitten-test-data-backup.json');
 
-        table.export(file, function(err, job) {
+        table.startExport(file, function(err, job) {
           assert.ifError(err);
 
           job
@@ -1001,6 +1124,16 @@ describe('BigQuery', function() {
             .on('complete', function() {
               done();
             });
+        });
+      });
+
+      it('should export data to a storage file', function(done) {
+        var file = bucket.file('kitten-test-data-backup.json');
+
+        table.export(file, function(err, resp) {
+          assert.ifError(err);
+          assert.strictEqual(resp.status.state, 'DONE');
+          done();
         });
       });
     });

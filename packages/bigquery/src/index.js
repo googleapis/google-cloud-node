@@ -20,11 +20,13 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
+var uuid = require('uuid');
 
 /**
  * @type {module:bigquery/dataset}
@@ -75,6 +77,97 @@ function BigQuery(options) {
 }
 
 util.inherits(BigQuery, common.Service);
+
+/**
+ * Merge a rowset returned from the API with a table schema.
+ *
+ * @private
+ *
+ * @param {object} schema
+ * @param {array} rows
+ * @return {array} Fields using their matching names from the table's schema.
+ */
+BigQuery.mergeSchemaWithRows_ =
+BigQuery.prototype.mergeSchemaWithRows_ = function(schema, rows) {
+  return arrify(rows).map(mergeSchema).map(flattenRows);
+
+  function mergeSchema(row) {
+    return row.f.map(function(field, index) {
+      var schemaField = schema.fields[index];
+      var value = field.v;
+
+      if (schemaField.mode === 'REPEATED') {
+        value = value.map(function(val) {
+          return convert(schemaField, val.v);
+        });
+      } else {
+        value = convert(schemaField, value);
+      }
+
+      var fieldObject = {};
+      fieldObject[schemaField.name] = value;
+      return fieldObject;
+    });
+  }
+
+  function convert(schemaField, value) {
+    if (is.nil(value)) {
+      return value;
+    }
+
+    switch (schemaField.type) {
+      case 'BOOLEAN':
+      case 'BOOL': {
+        value = value.toLowerCase() === 'true';
+        break;
+      }
+      case 'BYTES': {
+        value = new Buffer(value, 'base64');
+        break;
+      }
+      case 'FLOAT':
+      case 'FLOAT64': {
+        value = parseFloat(value);
+        break;
+      }
+      case 'INTEGER':
+      case 'INT64': {
+        value = parseInt(value, 10);
+        break;
+      }
+      case 'RECORD': {
+        value = BigQuery.mergeSchemaWithRows_(schemaField, value).pop();
+        break;
+      }
+      case 'DATE': {
+        value = BigQuery.date(value);
+        break;
+      }
+      case 'DATETIME': {
+        value = BigQuery.datetime(value);
+        break;
+      }
+      case 'TIME': {
+        value = BigQuery.time(value);
+        break;
+      }
+      case 'TIMESTAMP': {
+        value = BigQuery.timestamp(new Date(value * 1000));
+        break;
+      }
+    }
+
+    return value;
+  }
+
+  function flattenRows(rows) {
+    return rows.reduce(function(acc, row) {
+      var key = Object.keys(row)[0];
+      acc[key] = row[key];
+      return acc;
+    }, {});
+  }
+};
 
 /**
  * The `DATE` type represents a logical calendar date, independent of time zone.
@@ -423,6 +516,89 @@ BigQuery.prototype.createDataset = function(id, options, callback) {
 BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
 
 /**
+ * Creates a job. Typically when creating a job you'll have a very specific task
+ * in mind. For this we recommend one of the following methods:
+ *
+ * - {module:bigquery#startQuery}
+ * - {module:bigquery/table#startCopy}
+ * - {module:bigquery/table#startCopyFrom}
+ * - {module:bigquery/table#startExport}
+ * - {module:bigquery/table#startImport}
+ *
+ * However in the event you need a finer level of control over the job creation,
+ * you can use this method to pass in a raw [Job resource](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs)
+ * object.
+ *
+ * @resource [Jobs Overview]{@link https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs}
+ * @resource [Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}
+ *
+ * @param {object} options - Object in the form of a [Job resource](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs);
+ * @param {string=} options.jobPrefix - Prefix to apply to the job id.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:bigquery/job} callback.job - The newly created job.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var options = {
+ *   configuration: {
+ *     query: {
+ *       query: 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100'
+ *     }
+ *   }
+ * };
+ *
+ * bigquery.createJob(options, function(err, job) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   job.getQueryResults(function(err, rows) {});
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.createJob(options).then(function(data) {
+ *   var job = data[0];
+ *
+ *   return job.getQueryResults();
+ * });
+ */
+BigQuery.prototype.createJob = function(options, callback) {
+  var self = this;
+
+  var reqOpts = extend({}, options);
+  var jobId = uuid.v4();
+
+  if (reqOpts.jobPrefix) {
+    jobId = reqOpts.jobPrefix + jobId;
+    delete reqOpts.jobPrefix;
+  }
+
+  reqOpts.jobReference = {
+    projectId: this.projectId,
+    jobId: jobId
+  };
+
+  this.request({
+    method: 'POST',
+    uri: '/jobs',
+    json: reqOpts
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var job = self.job(jobId);
+    job.metadata = resp;
+
+    callback(null, job, resp);
+  });
+};
+
+/**
  * Create a reference to a dataset.
  *
  * @param {string} id - ID of the dataset.
@@ -686,21 +862,24 @@ BigQuery.prototype.job = function(id) {
  *
  * @resource [Jobs: query API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/query}
  *
- * @param {string|object} options - A string SQL query or configuration object.
+ * @param {string|object} query - A string SQL query or configuration object.
  *     For all available options, see
  *     [Jobs: query request body](https://cloud.google.com/bigquery/docs/reference/v2/jobs/query#request-body).
- * @param {boolean} options.autoPaginate - Have pagination handled
- *     automatically. Default: true.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to read.
- * @param {object|*[]} options.params - For positional SQL parameters, provide
+ * @param {object|*[]} query.params - For positional SQL parameters, provide
  *     an array of values. For named SQL parameters, provide an object which
  *     maps each named parameter to its value. The supported types are integers,
  *     floats, {module:bigquery#date} objects, {module:bigquery#datetime}
  *     objects, {module:bigquery#time} objects, {module:bigquery#timestamp}
  *     objects, Strings, Booleans, and Objects.
- * @param {string} options.query - A query string, following the BigQuery query
+ * @param {string} query.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
+ * @param {boolean} query.useLegacySql - Option to use legacy sql syntax.
+ *     Default: `false`.
+ * @param {object=} options - Configuration object for query results.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of results to read.
  * @param {number} options.timeoutMs - How long to wait for the query to
  *     complete, in milliseconds, before returning. Default is to return
  *     immediately. If the timeout passes before the job completes, the request
@@ -776,91 +955,20 @@ BigQuery.prototype.job = function(id) {
  *   var rows = data[0];
  * });
  */
-BigQuery.prototype.query = function(options, callback) {
-  var self = this;
-
-  if (is.string(options)) {
-    options = {
-      query: options
-    };
+BigQuery.prototype.query = function(query, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
   }
 
-  options = options || {};
-
-  var job = options.job;
-
-  var requestQuery = extend({}, options);
-  delete requestQuery.job;
-
-  if (job) {
-    // Get results of the query.
-    delete requestQuery.params;
-    delete requestQuery.query;
-
-    self.request({
-      uri: '/queries/' + job.id,
-      qs: requestQuery
-    }, responseHandler);
-
-    return;
-  }
-
-  if (options.params) {
-    options.useLegacySql = false;
-    options.parameterMode = is.array(options.params) ? 'positional' : 'named';
-
-    if (options.parameterMode === 'named') {
-      options.queryParameters = [];
-
-      for (var namedParamater in options.params) {
-        var value = options.params[namedParamater];
-        var queryParameter = BigQuery.valueToQueryParameter_(value);
-        queryParameter.name = namedParamater;
-        options.queryParameters.push(queryParameter);
-      }
-    } else {
-      options.queryParameters = options.params
-        .map(BigQuery.valueToQueryParameter_);
-    }
-
-    delete options.params;
-  }
-
-  // Create a job.
-  self.request({
-    method: 'POST',
-    uri: '/queries',
-    json: options
-  }, responseHandler);
-
-  function responseHandler(err, resp) {
+  this.startQuery(query, function(err, job, resp) {
     if (err) {
-      callback(err, null, null, resp);
+      callback(err, null, resp);
       return;
     }
 
-    var rows = [];
-    if (resp.schema && resp.rows) {
-      rows = Table.mergeSchemaWithRows_(BigQuery, resp.schema, resp.rows);
-    }
-
-    var nextQuery = null;
-    if (resp.jobComplete === false) {
-      // Query is still running.
-      nextQuery = extend({}, options);
-    } else if (resp.pageToken) {
-      // More results exist.
-      nextQuery = extend({}, options, {
-        pageToken: resp.pageToken
-      });
-    }
-    if (nextQuery && !nextQuery.job && resp.jobReference.jobId) {
-      // Create a prepared Job to continue the query.
-      nextQuery.job = self.job(resp.jobReference.jobId);
-    }
-
-    callback(null, rows, nextQuery, resp);
-  }
+    job.getQueryResults(options, callback);
+  });
 };
 
 /**
@@ -877,8 +985,13 @@ BigQuery.prototype.query = function(options, callback) {
  *     string, and all other options are defaulted.
  * @param {module:bigquery/table=} options.destination - The table to save the
  *     query's results to. If omitted, a new table will be created.
+ * @param {boolean} options.dryRun - If set, don't actually run this job. A
+ *     valid query will update the job with processing statistics. These can be
+ *     accessed via `job.metadata`.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
+ * @param {boolean} options.useLegacySql - Option to use legacy sql syntax.
+ *     Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigquery/job} callback.job - The newly created job for your
@@ -928,62 +1041,78 @@ BigQuery.prototype.query = function(options, callback) {
  * });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
-  var that = this;
-
   if (is.string(options)) {
     options = {
       query: options
     };
   }
 
-  options = options || {};
-
-  if (!options.query) {
+  if (!options || !options.query) {
     throw new Error('A SQL query string is required.');
   }
 
-  var defaults = {};
+  var query = extend(true, {
+    useLegacySql: false
+  }, options);
 
   if (options.destination) {
     if (!(options.destination instanceof Table)) {
       throw new Error('Destination must be a Table object.');
     }
-    defaults.destinationTable = {
+
+    query.destinationTable = {
       datasetId: options.destination.dataset.id,
       projectId: options.destination.dataset.bigQuery.projectId,
       tableId: options.destination.id
     };
-    delete options.destination;
+
+    delete query.destination;
   }
 
-  var body = {
+  if (query.params) {
+    query.parameterMode = is.array(query.params) ? 'positional' : 'named';
+
+    if (query.parameterMode === 'named') {
+      query.queryParameters = [];
+
+      for (var namedParamater in query.params) {
+        var value = query.params[namedParamater];
+        var queryParameter = BigQuery.valueToQueryParameter_(value);
+        queryParameter.name = namedParamater;
+        query.queryParameters.push(queryParameter);
+      }
+    } else {
+      query.queryParameters = query.params
+        .map(BigQuery.valueToQueryParameter_);
+    }
+
+    delete query.params;
+  }
+
+  var reqOpts = {
     configuration: {
-      query: extend(true, defaults, options)
+      query: query
     }
   };
 
-  this.request({
-    method: 'POST',
-    uri: '/jobs',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  if (query.dryRun) {
+    reqOpts.configuration.dryRun = query.dryRun;
+    delete query.dryRun;
+  }
 
-    var job = that.job(resp.jobReference.jobId);
-    job.metadata = resp;
+  if (query.jobPrefix) {
+    reqOpts.jobPrefix = query.jobPrefix;
+    delete query.jobPrefix;
+  }
 
-    callback(null, job, resp);
-  });
+  this.createJob(reqOpts, callback);
 };
 
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
+common.paginator.extend(BigQuery, ['getDatasets', 'getJobs']);
 
 /*! Developer Documentation
  *

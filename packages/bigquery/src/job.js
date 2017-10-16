@@ -21,6 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
@@ -140,7 +141,39 @@ function Job(bigQuery, id) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
+
+    /**
+     * Set the metadata for this job. This can be useful for updating job
+     * labels.
+     *
+     * @resource [Jobs: patch API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/patch}
+     *
+     * @param {object} metadata - Metadata to save on the Job.
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * var metadata = {
+     *   configuration: {
+     *     labels: {
+     *       foo: 'bar'
+     *     }
+     *   }
+     * };
+     *
+     * job.setMetadata(metadata, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
+     */
+    setMetadata: true
   };
 
   common.Operation.call(this, {
@@ -266,14 +299,41 @@ Job.prototype.cancel = function(callback) {
  * });
  */
 Job.prototype.getQueryResults = function(options, callback) {
+  var self = this;
+
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  options = options || {};
-  options.job = this;
-  this.bigQuery.query(options, callback);
+  this.bigQuery.request({
+    uri: '/queries/' + this.id,
+    qs: options
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var rows = [];
+
+    if (resp.schema && resp.rows) {
+      rows = self.bigQuery.mergeSchemaWithRows_(resp.schema, resp.rows);
+    }
+
+    var nextQuery = null;
+    if (resp.jobComplete === false) {
+      // Query is still running.
+      nextQuery = extend({}, options);
+    } else if (resp.pageToken) {
+      // More results exist.
+      nextQuery = extend({}, options, {
+        pageToken: resp.pageToken
+      });
+    }
+
+    callback(null, rows, nextQuery, resp);
+  });
 };
 
 /**
@@ -294,12 +354,8 @@ Job.prototype.getQueryResults = function(options, callback) {
  *   }))
  *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
  */
-Job.prototype.getQueryResultsStream = function(options) {
-  options = options || {};
-  options.job = this;
-
-  return this.bigQuery.createQueryStream(options);
-};
+Job.prototype.getQueryResultsStream =
+  common.paginator.streamify('getQueryResults');
 
 /**
  * Poll for a status update. Execute the callback:
@@ -331,6 +387,12 @@ Job.prototype.poll_ = function(callback) {
     callback(null, metadata);
   });
 };
+
+/*! Developer Documentation
+ *
+ * These methods can be auto-paginated.
+ */
+common.paginator.extend(Job, ['getQueryResults']);
 
 /*! Developer Documentation
  *

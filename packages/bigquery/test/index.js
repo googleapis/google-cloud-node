@@ -20,11 +20,15 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var nodeutil = require('util');
+var prop = require('propprop');
 var proxyquire = require('proxyquire');
+var uuid = require('uuid');
 
 var Service = require('@google-cloud/common').Service;
 var Table = require('../src/table.js');
 var util = require('@google-cloud/common').util;
+
+var fakeUuid = extend(true, {}, fakeUuid);
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
@@ -65,7 +69,7 @@ var fakePaginator = {
 
     methods = arrify(methods);
     assert.equal(Class.name, 'BigQuery');
-    assert.deepEqual(methods, ['getDatasets', 'getJobs', 'query']);
+    assert.deepEqual(methods, ['getDatasets', 'getJobs']);
     extended = true;
   },
   streamify: function(methodName) {
@@ -90,6 +94,7 @@ describe('BigQuery', function() {
 
   before(function() {
     BigQuery = proxyquire('../', {
+      uuid: fakeUuid,
       './table.js': FakeTable,
       '@google-cloud/common': {
         Service: FakeService,
@@ -150,6 +155,209 @@ describe('BigQuery', function() {
         'https://www.googleapis.com/auth/bigquery'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+    });
+  });
+
+  describe('mergeSchemaWithRows_', function() {
+    var SCHEMA_OBJECT = {
+      fields: [
+        { name: 'id', type: 'INTEGER' },
+        { name: 'name', type: 'STRING' },
+        { name: 'dob', type: 'TIMESTAMP' },
+        { name: 'has_claws', type: 'BOOLEAN' },
+        { name: 'has_fangs', type: 'BOOL' },
+        { name: 'hair_count', type: 'FLOAT' },
+        { name: 'teeth_count', type: 'FLOAT64' }
+      ]
+    };
+
+    beforeEach(function() {
+      BigQuery.date = function(input) {
+        return {
+          type: 'fakeDate',
+          input: input
+        };
+      };
+
+      BigQuery.datetime = function(input) {
+        return {
+          type: 'fakeDatetime',
+          input: input
+        };
+      };
+
+      BigQuery.time = function(input) {
+        return {
+          type: 'fakeTime',
+          input: input
+        };
+      };
+
+      BigQuery.timestamp = function(input) {
+        return {
+          type: 'fakeTimestamp',
+          input: input
+        };
+      };
+    });
+
+    it('should merge the schema and flatten the rows', function() {
+      var now = new Date();
+      var buffer = new Buffer('test');
+
+      var rows = [
+        {
+          raw: {
+            f: [
+              { v: '3' },
+              { v: 'Milo' },
+              { v: String(now.valueOf() / 1000) },
+              { v: 'false' },
+              { v: 'true' },
+              { v: '5.222330009847' },
+              { v: '30.2232138' },
+              {
+                v: [
+                  {
+                    v: '10'
+                  }
+                ]
+              },
+              {
+                v: [
+                  {
+                    v: '2'
+                  }
+                ]
+              },
+              { v: null },
+              { v: buffer.toString('base64') },
+              {
+                v: [
+                  {
+                    v: {
+                      f: [
+                        {
+                          v: {
+                            f: [
+                              {
+                                v: 'nested_value'
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              { v: 'date-input' },
+              { v: 'datetime-input' },
+              { v: 'time-input' }
+            ]
+          },
+          expected: {
+            id: 3,
+            name: 'Milo',
+            dob: {
+              input: now,
+              type: 'fakeTimestamp'
+            },
+            has_claws: false,
+            has_fangs: true,
+            hair_count: 5.222330009847,
+            teeth_count: 30.2232138,
+            arr: [10],
+            arr2: [2],
+            nullable: null,
+            buffer: buffer,
+            objects: [
+              {
+                nested_object: {
+                  nested_property: 'nested_value'
+                }
+              }
+            ],
+            date: {
+              input: 'date-input',
+              type: 'fakeDate'
+            },
+            datetime: {
+              input: 'datetime-input',
+              type: 'fakeDatetime'
+            },
+            time: {
+              input: 'time-input',
+              type: 'fakeTime'
+            }
+          }
+        }
+      ];
+
+      var schemaObject = extend(true, SCHEMA_OBJECT, {});
+
+      schemaObject.fields.push({
+        name: 'arr',
+        type: 'INTEGER',
+        mode: 'REPEATED'
+      });
+
+      schemaObject.fields.push({
+        name: 'arr2',
+        type: 'INT64',
+        mode: 'REPEATED'
+      });
+
+      schemaObject.fields.push({
+        name: 'nullable',
+        type: 'STRING',
+        mode: 'NULLABLE'
+      });
+
+      schemaObject.fields.push({
+        name: 'buffer',
+        type: 'BYTES'
+      });
+
+      schemaObject.fields.push({
+        name: 'objects',
+        type: 'RECORD',
+        mode: 'REPEATED',
+        fields: [
+          {
+            name: 'nested_object',
+            type: 'RECORD',
+            fields: [
+              {
+                name: 'nested_property',
+                type: 'STRING'
+              }
+            ]
+          }
+        ]
+      });
+
+      schemaObject.fields.push({
+        name: 'date',
+        type: 'DATE'
+      });
+
+      schemaObject.fields.push({
+        name: 'datetime',
+        type: 'DATETIME'
+      });
+
+      schemaObject.fields.push({
+        name: 'time',
+        type: 'TIME'
+      });
+
+      var rawRows = rows.map(prop('raw'));
+      var mergedRows = BigQuery.mergeSchemaWithRows_(schemaObject, rawRows);
+
+      mergedRows.forEach(function(mergedRow, index) {
+        assert.deepEqual(mergedRow, rows[index].expected);
+      });
     });
   });
 
@@ -572,6 +780,95 @@ describe('BigQuery', function() {
     });
   });
 
+  describe('createJob', function() {
+    var fakeJobId;
+
+    beforeEach(function() {
+      fakeJobId = uuid.v4();
+
+      fakeUuid.v4 = function() {
+        return fakeJobId;
+      };
+    });
+
+    it('should make the correct request', function(done) {
+      var fakeOptions = {
+        a: 'b'
+      };
+
+      var expectedOptions = extend({}, fakeOptions, {
+        jobReference: {
+          projectId: bq.projectId,
+          jobId: fakeJobId
+        }
+      });
+
+      bq.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/jobs');
+        assert.deepEqual(reqOpts.json, expectedOptions);
+        assert.notStrictEqual(reqOpts.json, fakeOptions);
+        done();
+      };
+
+      bq.createJob(fakeOptions, assert.ifError);
+    });
+
+    it('should accept a job prefix', function(done) {
+      var jobPrefix = 'abc-';
+      var expectedJobId = jobPrefix + fakeJobId;
+      var options = {
+        jobPrefix: jobPrefix
+      };
+
+      bq.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.jobReference.jobId, expectedJobId);
+        assert.strictEqual(reqOpts.json.jobPrefix, undefined);
+        done();
+      };
+
+      bq.createJob(options, assert.ifError);
+    });
+
+    it('should return any request errors', function(done) {
+      var response = {};
+      var error = new Error('err.');
+
+      bq.request = function(reqOpts, callback) {
+        callback(error, response);
+      };
+
+      bq.createJob({}, function(err, job, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(job, null);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+
+    it('should return a job object', function(done) {
+      var response = {};
+      var fakeJob = {};
+
+      bq.job = function(jobId) {
+        assert.strictEqual(jobId, fakeJobId);
+        return fakeJob;
+      };
+
+      bq.request = function(reqOpts, callback) {
+        callback(null, response);
+      };
+
+      bq.createJob({}, function(err, job, resp) {
+        assert.ifError(err);
+        assert.strictEqual(job, fakeJob);
+        assert.strictEqual(job.metadata, response);
+        assert.strictEqual(resp, response);
+        done();
+      });
+    });
+  });
+
   describe('dataset', function() {
     var DATASET_ID = 'dataset-id';
 
@@ -608,6 +905,15 @@ describe('BigQuery', function() {
       };
 
       bq.getDatasets(queryObject, assert.ifError);
+    });
+
+    it('should default the query to an empty object', function(done) {
+      bq.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      bq.getDatasets(null, assert.ifError);
     });
 
     it('should return error to callback', function(done) {
@@ -718,6 +1024,15 @@ describe('BigQuery', function() {
       bq.getJobs(queryObject, assert.ifError);
     });
 
+    it('should default the query to an object', function(done) {
+      bq.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      bq.getJobs(null, assert.ifError);
+    });
+
     it('should return error to callback', function(done) {
       var error = new Error('Error.');
 
@@ -802,309 +1117,65 @@ describe('BigQuery', function() {
   });
 
   describe('query', function() {
+    var FAKE_ROWS = [{}, {}, {}];
+    var FAKE_RESPONSE = {};
     var QUERY_STRING = 'SELECT * FROM [dataset.table]';
 
-    it('should accept a string for a query', function(done) {
-      bq.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json.query, QUERY_STRING);
+    it('should return any errors from startQuery', function(done) {
+      var error = new Error('err');
+
+      bq.startQuery = function(query, callback) {
+        callback(error, null, FAKE_RESPONSE);
+      };
+
+      bq.query(QUERY_STRING, function(err, job, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(job, null);
+        assert.strictEqual(resp, FAKE_RESPONSE);
         done();
-      };
-
-      bq.query(QUERY_STRING, assert.ifError);
-    });
-
-    it('should pass along query options', function(done) {
-      var options = {
-        query: QUERY_STRING,
-        a: 'b',
-        c: 'd'
-      };
-
-      bq.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json, options);
-        done();
-      };
-
-      bq.query(options, assert.ifError);
-    });
-
-    it('should get the results of a job if one is provided', function(done) {
-      var options = {
-        job: bq.job(JOB_ID),
-        maxResults: 10,
-        timeoutMs: 8
-      };
-
-      var expectedRequestQuery = {
-        maxResults: 10,
-        timeoutMs: 8
-      };
-
-      bq.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '/queries/' + JOB_ID);
-        assert.deepEqual(reqOpts.qs, expectedRequestQuery);
-        done();
-      };
-
-      bq.query(options, assert.ifError);
-    });
-
-    it('should not include query info in result query', function(done) {
-      var options = {
-        job: bq.job(JOB_ID),
-        maxResults: 10,
-        timeoutMs: 8,
-
-        // should be removed:
-        params: {},
-        query: '...'
-      };
-
-      var expectedRequestQuery = {
-        maxResults: 10,
-        timeoutMs: 8
-      };
-
-      bq.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, expectedRequestQuery);
-        done();
-      };
-
-      bq.query(options, assert.ifError);
-    });
-
-    describe('SQL parameters', function() {
-      var NAMED_PARAMS = {
-        key: 'value'
-      };
-
-      var POSITIONAL_PARAMS = ['value'];
-
-      it('should disable legacySql', function(done) {
-        bq.request = function(reqOpts) {
-          assert.strictEqual(reqOpts.json.useLegacySql, false);
-          done();
-        };
-
-        bq.query({
-          query: QUERY_STRING,
-          params: NAMED_PARAMS
-        }, assert.ifError);
-      });
-
-      it('should delete the params option', function(done) {
-        bq.request = function(reqOpts) {
-          assert.strictEqual(reqOpts.json.params, undefined);
-          done();
-        };
-
-        bq.query({
-          query: QUERY_STRING,
-          params: NAMED_PARAMS
-        }, assert.ifError);
-      });
-
-      describe('named', function() {
-        it('should set the correct parameter mode', function(done) {
-          bq.request = function(reqOpts) {
-            assert.strictEqual(reqOpts.json.parameterMode, 'named');
-            done();
-          };
-
-          bq.query({
-            query: QUERY_STRING,
-            params: NAMED_PARAMS
-          }, assert.ifError);
-        });
-
-        it('should get set the correct query parameters', function(done) {
-          var queryParameter = {};
-
-          BigQuery.valueToQueryParameter_ = function(value) {
-            assert.strictEqual(value, NAMED_PARAMS.key);
-            return queryParameter;
-          };
-
-          bq.request = function(reqOpts) {
-            assert.strictEqual(reqOpts.json.queryParameters[0], queryParameter);
-            assert.strictEqual(reqOpts.json.queryParameters[0].name, 'key');
-            done();
-          };
-
-          bq.query({
-            query: QUERY_STRING,
-            params: NAMED_PARAMS
-          }, assert.ifError);
-        });
-      });
-
-      describe('positional', function() {
-        it('should set the correct parameter mode', function(done) {
-          bq.request = function(reqOpts) {
-            assert.strictEqual(reqOpts.json.parameterMode, 'positional');
-            done();
-          };
-
-          bq.query({
-            query: QUERY_STRING,
-            params: POSITIONAL_PARAMS
-          }, assert.ifError);
-        });
-
-        it('should get set the correct query parameters', function(done) {
-          var queryParameter = {};
-
-          BigQuery.valueToQueryParameter_ = function(value) {
-            assert.strictEqual(value, POSITIONAL_PARAMS[0]);
-            return queryParameter;
-          };
-
-          bq.request = function(reqOpts) {
-            assert.strictEqual(reqOpts.json.queryParameters[0], queryParameter);
-            done();
-          };
-
-          bq.query({
-            query: QUERY_STRING,
-            params: POSITIONAL_PARAMS
-          }, assert.ifError);
-        });
       });
     });
 
-    describe('job is incomplete', function() {
-      var options = {};
-
-      beforeEach(function() {
-        bq.request = function(reqOpts, callback) {
-          callback(null, {
-            jobComplete: false,
-            jobReference: { jobId: JOB_ID }
-          });
-        };
-      });
-
-      it('should populate nextQuery when job is incomplete', function(done) {
-        bq.query({}, function(err, rows, nextQuery) {
-          assert.ifError(err);
-          assert.equal(nextQuery.job.constructor.name, 'Job');
-          assert.equal(nextQuery.job.id, JOB_ID);
-          done();
-        });
-      });
-
-      it('should return apiResponse', function(done) {
-        bq.query({}, function(err, rows, nextQuery, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, {
-            jobComplete: false,
-            jobReference: { jobId: JOB_ID }
-          });
-          done();
-        });
-      });
-
-      it('should not modify original options object', function(done) {
-        bq.query(options, function(err) {
-          assert.ifError(err);
+    it('should call job#getQueryResults', function(done) {
+      var fakeJob = {
+        getQueryResults: function(options, callback) {
           assert.deepEqual(options, {});
-          done();
-        });
-      });
-    });
-
-    describe('more results exist', function() {
-      var options = {};
-      var pageToken = 'token';
-
-      beforeEach(function() {
-        bq.request = function(reqOpts, callback) {
-          callback(null, {
-            pageToken: pageToken,
-            jobReference: { jobId: JOB_ID }
-          });
-        };
-      });
-
-      it('should populate nextQuery when more results exist', function(done) {
-        bq.query(options, function(err, rows, nextQuery) {
-          assert.ifError(err);
-          assert.equal(nextQuery.job.constructor.name, 'Job');
-          assert.equal(nextQuery.job.id, JOB_ID);
-          assert.equal(nextQuery.pageToken, pageToken);
-          done();
-        });
-      });
-
-      it('should not modify original options object', function(done) {
-        bq.query(options, function(err) {
-          assert.ifError(err);
-          assert.deepEqual(options, {});
-          done();
-        });
-      });
-    });
-
-    it('should merge the schema with rows', function(done) {
-      var rows = [{ row: 'a' }, { row: 'b' }, { row: 'c' }];
-      var schema = [{ fields: [] }];
-
-      mergeSchemaWithRowsOverride = function(bq, s, r) {
-        mergeSchemaWithRowsOverride = null;
-        assert.strictEqual(bq, BigQuery);
-        assert.deepEqual(s, schema);
-        assert.deepEqual(r, rows);
-        done();
+          callback(null, FAKE_ROWS, FAKE_RESPONSE);
+        }
       };
 
-      bq.request = function(reqOpts, callback) {
-        callback(null, {
-          jobReference: { jobId: JOB_ID },
-          rows: rows,
-          schema: schema
-        });
+      bq.startQuery = function(query, callback) {
+        callback(null, fakeJob, FAKE_RESPONSE);
       };
 
-      bq.query({}, assert.ifError);
-    });
-
-    it('should pass errors to the callback', function(done) {
-      var error = new Error('Error.');
-
-      bq.request = function(reqOpts, callback) {
-        callback(error);
-      };
-
-      bq.query({}, function(err) {
-        assert.equal(err, error);
+      bq.query(QUERY_STRING, function(err, rows, resp) {
+        assert.ifError(err);
+        assert.strictEqual(rows, FAKE_ROWS);
+        assert.strictEqual(resp, FAKE_RESPONSE);
         done();
       });
     });
 
-    it('should return rows to the callback', function(done) {
-      var ROWS = [{ a: 'b' }, { c: 'd' }];
-
-      bq.request = function(reqOpts, callback) {
-        callback(null, {
-          jobReference: { jobId: JOB_ID },
-          rows: [],
-          schema: {}
-        });
+    it('should optionally accept options', function(done) {
+      var fakeOptions = {};
+      var fakeJob = {
+        getQueryResults: function(options) {
+          assert.strictEqual(options, fakeOptions);
+          done();
+        }
       };
 
-      mergeSchemaWithRowsOverride = function() {
-        mergeSchemaWithRowsOverride = null;
-        return ROWS;
+      bq.startQuery = function(query, callback) {
+        callback(null, fakeJob, FAKE_RESPONSE);
       };
 
-      bq.query({}, function(err, rows) {
-        assert.deepEqual(rows, ROWS);
-        done();
-      });
+      bq.query(QUERY_STRING, fakeOptions, assert.ifError);
     });
   });
 
   describe('startQuery', function() {
+    var QUERY_STRING = 'SELECT * FROM [dataset.table]';
+
     it('should throw if a query is not provided', function() {
       assert.throws(function() {
         bq.startQuery();
@@ -1127,7 +1198,7 @@ describe('BigQuery', function() {
         };
       });
 
-      it('should throw if a destination table is not provided', function() {
+      it('should throw if a destination is not a table', function() {
         assert.throws(function() {
           bq.startQuery({
             query: 'query',
@@ -1167,69 +1238,133 @@ describe('BigQuery', function() {
       });
     });
 
-    it('should pass options to the request body', function(done) {
-      var options = { a: 'b', c: 'd', query: 'query' };
-
-      bq.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.configuration.query, options);
-        done();
+    describe('SQL parameters', function() {
+      var NAMED_PARAMS = {
+        key: 'value'
       };
 
-      bq.startQuery(options);
-    });
+      var POSITIONAL_PARAMS = ['value'];
 
-    it('should make the correct api request', function(done) {
-      bq.request = function(reqOpts) {
-        assert.equal(reqOpts.method, 'POST');
-        assert.equal(reqOpts.uri, '/jobs');
-        assert.deepEqual(reqOpts.json.configuration.query, { query: 'query' });
-        done();
-      };
+      it('should delete the params option', function(done) {
+        bq.createJob = function(reqOpts) {
+          assert.strictEqual(reqOpts.params, undefined);
+          done();
+        };
 
-      bq.startQuery('query');
-    });
+        bq.startQuery({
+          query: QUERY_STRING,
+          params: NAMED_PARAMS
+        }, assert.ifError);
+      });
 
-    it('should execute the callback with error', function(done) {
-      var error = new Error('Error.');
+      describe('named', function() {
+        it('should set the correct parameter mode', function(done) {
+          bq.createJob = function(reqOpts) {
+            var query = reqOpts.configuration.query;
+            assert.strictEqual(query.parameterMode, 'named');
+            done();
+          };
 
-      bq.request = function(reqOpts, callback) {
-        callback(error);
-      };
+          bq.startQuery({
+            query: QUERY_STRING,
+            params: NAMED_PARAMS
+          }, assert.ifError);
+        });
 
-      bq.startQuery('query', function(err) {
-        assert.equal(err, error);
-        done();
+        it('should get set the correct query parameters', function(done) {
+          var queryParameter = {};
+
+          BigQuery.valueToQueryParameter_ = function(value) {
+            assert.strictEqual(value, NAMED_PARAMS.key);
+            return queryParameter;
+          };
+
+          bq.createJob = function(reqOpts) {
+            var query = reqOpts.configuration.query;
+            assert.strictEqual(query.queryParameters[0], queryParameter);
+            assert.strictEqual(query.queryParameters[0].name, 'key');
+            done();
+          };
+
+          bq.startQuery({
+            query: QUERY_STRING,
+            params: NAMED_PARAMS
+          }, assert.ifError);
+        });
+      });
+
+      describe('positional', function() {
+        it('should set the correct parameter mode', function(done) {
+          bq.createJob = function(reqOpts) {
+            var query = reqOpts.configuration.query;
+            assert.strictEqual(query.parameterMode, 'positional');
+            done();
+          };
+
+          bq.startQuery({
+            query: QUERY_STRING,
+            params: POSITIONAL_PARAMS
+          }, assert.ifError);
+        });
+
+        it('should get set the correct query parameters', function(done) {
+          var queryParameter = {};
+
+          BigQuery.valueToQueryParameter_ = function(value) {
+            assert.strictEqual(value, POSITIONAL_PARAMS[0]);
+            return queryParameter;
+          };
+
+          bq.createJob = function(reqOpts) {
+            var query = reqOpts.configuration.query;
+            assert.strictEqual(query.queryParameters[0], queryParameter);
+            done();
+          };
+
+          bq.startQuery({
+            query: QUERY_STRING,
+            params: POSITIONAL_PARAMS
+          }, assert.ifError);
+        });
       });
     });
 
-    it('should execute the callback with Job', function(done) {
-      var jobsResource = { jobReference: { jobId: JOB_ID }, a: 'b', c: 'd' };
-
-      bq.request = function(reqOpts, callback) {
-        callback(null, jobsResource);
+    it('should accept the dryRun options', function(done) {
+      var options = {
+        query: QUERY_STRING,
+        dryRun: true
       };
 
-      bq.startQuery('query', function(err, job) {
-        assert.ifError(err);
-        assert.equal(job.constructor.name, 'Job');
-        assert.equal(job.id, JOB_ID);
-        assert.deepEqual(job.metadata, jobsResource);
+      bq.createJob = function(reqOpts) {
+        assert.strictEqual(reqOpts.configuration.query.dryRun, undefined);
+        assert.strictEqual(reqOpts.configuration.dryRun, options.dryRun);
         done();
-      });
+      };
+
+      bq.startQuery(options, assert.ifError);
     });
 
-    it('should execute the callback with apiResponse', function(done) {
-      var jobsResource = { jobReference: { jobId: JOB_ID }, a: 'b', c: 'd' };
-
-      bq.request = function(reqOpts, callback) {
-        callback(null, jobsResource);
+    it('should accept a job prefix', function(done) {
+      var options = {
+        query: QUERY_STRING,
+        jobPrefix: 'hi'
       };
 
-      bq.startQuery('query', function(err, job, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, jobsResource);
+      bq.createJob = function(reqOpts) {
+        assert.strictEqual(reqOpts.configuration.query.jobPrefix, undefined);
+        assert.strictEqual(reqOpts.jobPrefix, options.jobPrefix);
         done();
-      });
+      };
+
+      bq.startQuery(options, assert.ifError);
+    });
+
+    it('should pass the callback to createJob', function(done) {
+      bq.createJob = function(reqOpts, callback) {
+        callback(); // the done fn
+      };
+
+      bq.startQuery(QUERY_STRING, done);
     });
   });
 });
