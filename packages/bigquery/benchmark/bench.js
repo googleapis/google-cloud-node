@@ -1,5 +1,5 @@
 /*!
- * Copyright 2014 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
+'use strict';
+
 const async = require('async');
 const fs = require('fs');
-const util = require('util');
 const BigQuery = require('../src/index.js');
 
 if (process.argv.length < 3) {
-  throw util.format("need query file; usage: '%s %s <queries.json>'", process.argv[0], process.argv[1]);
+  throw `need query file; usage: \
+'${process.argv[0]} ${process.argv[1]} <queries.json>'`;
 }
 var queryJson = fs.readFileSync(process.argv[2]);
 var queries = JSON.parse(queryJson);
-var client = BigQuery();
+var client = new BigQuery();
 
 var doQuery = function(queryTxt, callback) {
   var startMilli = new Date().getTime();
@@ -39,31 +41,30 @@ var doQuery = function(queryTxt, callback) {
 
   client.createQueryStream(query)
   .on('error', function(err) {
-    callback(err)
+    callback(err);
   })
   .on('data', function(row) {
-    if (numRows == 0) {
+    if (numRows === 0) {
       numCols = Object.keys(row).length;
       timeFirstByteMilli = new Date().getTime() - startMilli;
-    } else if (numCols != Object.keys(row).length) {
+    } else if (numCols !== Object.keys(row).length) {
       this.end();
-      callback(util.format("query %j: wrong number of columns, want %d got %d",
-          queryTxt,
-          numCols,
-          Object.keys(row).length));
+      callback(`query "${queryTxt}": wrong number of columns, \
+want ${numCols} got ${Object.keys(row).length}`);
     }
     numRows++;
   })
   .on('end', function() {
-    timeTotalMilli = new Date().getTime() - startMilli;
-    console.log(util.format("query %j: got %d rows, %d cols, first byte %d sec, total %d sec",
-        queryTxt,
-        numRows,
-        numCols,
-        timeFirstByteMilli/1000,
-        timeTotalMilli/1000));
+    var timeTotalMilli = new Date().getTime() - startMilli;
+    console.log(`query ${queryTxt}: got ${numRows} rows, ${numCols} cols, \
+first byte ${timeFirstByteMilli / 1000} sec, \
+total ${timeTotalMilli / 1000} sec`);
     callback(null);
   });
-}
+};
 
-async.eachSeries(queries, doQuery, err =>{});
+async.eachSeries(queries, doQuery, err => {
+  if (err) {
+    console.error(err);
+  }
+});
