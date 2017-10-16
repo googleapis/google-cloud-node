@@ -1984,7 +1984,7 @@ File.prototype.move = function(destination, options, callback) {
 /**
  * Write arbitrary data to a file.
  *
- * *This is a convenience method which wraps {@link Fileile#createWriteStream}.*
+ * *This is a convenience method which wraps {@link File#createWriteStream}.*
  *
  * @param {*} data The data to write to a file.
  * @param {object} [options] See {@link File#createWriteStream}'s `options`
