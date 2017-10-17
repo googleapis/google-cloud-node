@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -26,6 +22,8 @@
  * or "month". It is related to Timestamp in that the difference between
  * two Timestamp values is a Duration and it can be added or subtracted
  * from a Timestamp. Range is approximately +-10,000 years.
+ *
+ * # Examples
  *
  * Example 1: Compute Duration from two Timestamps in pseudo code.
  *
@@ -67,10 +65,20 @@
  *     duration = Duration()
  *     duration.FromTimedelta(td)
  *
- * @external "google.protobuf.Duration"
+ * # JSON Mapping
+ *
+ * In JSON format, the Duration type is encoded as a string rather than an
+ * object, where the string ends in the suffix "s" (indicating seconds) and
+ * is preceded by the number of seconds, with nanoseconds expressed as
+ * fractional seconds. For example, 3 seconds with 0 nanoseconds should be
+ * encoded in JSON format as "3s", while 3 seconds and 1 nanosecond should
+ * be expressed in JSON format as "3.000000001s", and 3 seconds and 1
+ * microsecond should be expressed in JSON format as "3.000001s".
+ *
  * @property {number} seconds
  *   Signed seconds of the span of time. Must be from -315,576,000,000
- *   to +315,576,000,000 inclusive.
+ *   to +315,576,000,000 inclusive. Note: these bounds are computed from:
+ *   60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
  *
  * @property {number} nanos
  *   Signed fractions of a second at nanosecond resolution of the span
@@ -80,5 +88,10 @@
  *   of the same sign as the `seconds` field. Must be from -999,999,999
  *   to +999,999,999 inclusive.
  *
+ * @typedef Duration
+ * @memberof google.protobuf
  * @see [google.protobuf.Duration definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/duration.proto}
  */
+var Duration = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};

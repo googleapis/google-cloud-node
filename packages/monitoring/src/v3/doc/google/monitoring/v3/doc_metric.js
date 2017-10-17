@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * A single data point in a time series.
@@ -32,14 +28,15 @@
  *   event resets the cumulative value to zero and sets a new start time for the
  *   following points.
  *
- *   This object should have the same structure as [TimeInterval]{@link TimeInterval}
+ *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
  *
  * @property {Object} value
  *   The value of the data point.
  *
- *   This object should have the same structure as [TypedValue]{@link TypedValue}
+ *   This object should have the same structure as [TypedValue]{@link google.monitoring.v3.TypedValue}
  *
- * @class
+ * @typedef Point
+ * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.Point definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric.proto}
  */
 var Point = {
@@ -56,13 +53,13 @@ var Point = {
  *   The associated metric. A fully-specified metric used to identify the time
  *   series.
  *
- *   This object should have the same structure as [google.api.Metric]{@link external:"google.api.Metric"}
+ *   This object should have the same structure as [Metric]{@link google.api.Metric}
  *
  * @property {Object} resource
  *   The associated resource. A fully-specified monitored resource used to
  *   identify the time series.
  *
- *   This object should have the same structure as [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"}
+ *   This object should have the same structure as [MonitoredResource]{@link google.api.MonitoredResource}
  *
  * @property {number} metricKind
  *   The metric kind of the time series. When listing time series, this metric
@@ -75,7 +72,7 @@ var Point = {
  *   metric kind of the new descriptor and must be either `GAUGE` (the default)
  *   or `CUMULATIVE`.
  *
- *   The number should be among the values of [google.api.MetricDescriptor.MetricKind]{@link external:"google.api.MetricDescriptor.MetricKind"}
+ *   The number should be among the values of [MetricKind]{@link google.api.MetricKind}
  *
  * @property {number} valueType
  *   The value type of the time series. When listing time series, this value
@@ -85,7 +82,7 @@ var Point = {
  *   When creating a time series, this field is optional. If present, it must be
  *   the same as the type of the data in the `points` field.
  *
- *   The number should be among the values of [google.api.MetricDescriptor.ValueType]{@link external:"google.api.MetricDescriptor.ValueType"}
+ *   The number should be among the values of [ValueType]{@link google.api.ValueType}
  *
  * @property {Object[]} points
  *   The data points of this time series. When listing time series, the order of
@@ -97,9 +94,10 @@ var Point = {
  *   the value type of the descriptor is determined by the point's type, which
  *   must be `BOOL`, `INT64`, `DOUBLE`, or `DISTRIBUTION`.
  *
- *   This object should have the same structure as [Point]{@link Point}
+ *   This object should have the same structure as [Point]{@link google.monitoring.v3.Point}
  *
- * @class
+ * @typedef TimeSeries
+ * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TimeSeries definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric.proto}
  */
 var TimeSeries = {

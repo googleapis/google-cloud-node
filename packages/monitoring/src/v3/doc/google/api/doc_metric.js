@@ -1,30 +1,25 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
  * existing data unusable.
  *
- * @external "google.api.MetricDescriptor"
  * @property {string} name
  *   The resource name of the metric descriptor. Depending on the
  *   implementation, the name typically includes: (1) the parent resource name
@@ -52,19 +47,19 @@
  *   you can look at latencies for successful responses or just
  *   for responses that failed.
  *
- *   This object should have the same structure as [google.api.LabelDescriptor]{@link external:"google.api.LabelDescriptor"}
+ *   This object should have the same structure as [LabelDescriptor]{@link google.api.LabelDescriptor}
  *
  * @property {number} metricKind
  *   Whether the metric records instantaneous values, changes to a value, etc.
  *   Some combinations of `metric_kind` and `value_type` might not be supported.
  *
- *   The number should be among the values of [google.api.MetricDescriptor.MetricKind]{@link external:"google.api.MetricDescriptor.MetricKind"}
+ *   The number should be among the values of [MetricKind]{@link google.api.MetricKind}
  *
  * @property {number} valueType
  *   Whether the measurement is an integer, a floating-point number, etc.
  *   Some combinations of `metric_kind` and `value_type` might not be supported.
  *
- *   The number should be among the values of [google.api.MetricDescriptor.ValueType]{@link external:"google.api.MetricDescriptor.ValueType"}
+ *   The number should be among the values of [ValueType]{@link google.api.ValueType}
  *
  * @property {string} unit
  *   The unit in which the metric value is reported. It is only applicable
@@ -139,21 +134,109 @@
  *   A concise name for the metric, which can be displayed in user interfaces.
  *   Use sentence case without an ending period, for example "Request count".
  *
+ * @typedef MetricDescriptor
+ * @memberof google.api
  * @see [google.api.MetricDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/metric.proto}
  */
+var MetricDescriptor = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * The kind of measurement. It describes how the data is reported.
+   *
+   * @enum {number}
+   * @memberof google.api
+   */
+  MetricKind: {
+
+    /**
+     * Do not use this default value.
+     */
+    METRIC_KIND_UNSPECIFIED: 0,
+
+    /**
+     * An instantaneous measurement of a value.
+     */
+    GAUGE: 1,
+
+    /**
+     * The change in a value during a time interval.
+     */
+    DELTA: 2,
+
+    /**
+     * A value accumulated over a time interval.  Cumulative
+     * measurements in a time series should have the same start time
+     * and increasing end times, until an event resets the cumulative
+     * value to zero and sets a new start time for the following
+     * points.
+     */
+    CUMULATIVE: 3
+  },
+
+  /**
+   * The value type of a metric.
+   *
+   * @enum {number}
+   * @memberof google.api
+   */
+  ValueType: {
+
+    /**
+     * Do not use this default value.
+     */
+    VALUE_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * The value is a boolean.
+     * This value type can be used only if the metric kind is `GAUGE`.
+     */
+    BOOL: 1,
+
+    /**
+     * The value is a signed 64-bit integer.
+     */
+    INT64: 2,
+
+    /**
+     * The value is a double precision floating point number.
+     */
+    DOUBLE: 3,
+
+    /**
+     * The value is a text string.
+     * This value type can be used only if the metric kind is `GAUGE`.
+     */
+    STRING: 4,
+
+    /**
+     * The value is a `Distribution`.
+     */
+    DISTRIBUTION: 5,
+
+    /**
+     * The value is money.
+     */
+    MONEY: 6
+  }
+};
 
 /**
  * A specific metric, identified by specifying values for all of the
- * labels of a {@link `MetricDescriptor`}.
+ * labels of a `MetricDescriptor`.
  *
- * @external "google.api.Metric"
  * @property {string} type
- *   An existing metric type, see {@link google.api.MetricDescriptor}.
+ *   An existing metric type, see google.api.MetricDescriptor.
  *   For example, `custom.googleapis.com/invoice/paid/amount`.
  *
  * @property {Object.<string, string>} labels
  *   The set of label values that uniquely identify this metric. All
  *   labels listed in the `MetricDescriptor` must be assigned values.
  *
+ * @typedef Metric
+ * @memberof google.api
  * @see [google.api.Metric definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/metric.proto}
  */
+var Metric = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
