@@ -2,7 +2,7 @@
 
 # Google Cloud Natural Language API: Node.js Client
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-language.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-language)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-language?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-language)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-language/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-language)
@@ -107,10 +107,11 @@ also contains samples.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-This library is considered to be in **beta**. This means it is expected to be
-mostly stable while we work toward a general availability release; however,
-complete stability is not guaranteed. We will address issues and requests
-against beta libraries with a high priority.
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 

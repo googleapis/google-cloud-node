@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/language",
   "description": "Google Cloud Natural Language API client for Node.js",
-  "version": "0.13.0",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -44,7 +44,8 @@
     "Sawyer Hollenshead <sawyerh@users.noreply.github.com>",
     "Song Wang <songwang@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tim Swast <swast@google.com>"
+    "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
