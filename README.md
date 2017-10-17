@@ -18,8 +18,8 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Cloud Firestore](#cloud-firestore-beta) (Beta)
-* [Cloud Natural Language](#cloud-natural-language-beta) (Beta)
+* [Cloud Firestore](http://github.com/googleapis/nodejs-firestore/) (Beta)
+* [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
