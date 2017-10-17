@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * A single strongly-typed value.
@@ -39,9 +35,10 @@
  * @property {Object} distributionValue
  *   A distribution value.
  *
- *   This object should have the same structure as [google.api.Distribution]{@link external:"google.api.Distribution"}
+ *   This object should have the same structure as [Distribution]{@link google.api.Distribution}
  *
- * @class
+ * @typedef TypedValue
+ * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TypedValue definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
 var TypedValue = {
@@ -56,16 +53,17 @@ var TypedValue = {
  * @property {Object} endTime
  *   Required. The end of the time interval.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} startTime
  *   Optional. The beginning of the time interval.  The default value
  *   for the start time is the end time. The start time must not be
  *   later than the end time.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @class
+ * @typedef TimeInterval
+ * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TimeInterval definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
 var TimeInterval = {
@@ -80,7 +78,7 @@ var TimeInterval = {
  * [Aggregation](https://cloud.google.com/monitoring/api/learn_more#aggregation).
  *
  * @property {Object} alignmentPeriod
- *   The alignment period for per-{@link time series}
+ *   The alignment period for per-time series
  *   alignment. If present, `alignmentPeriod` must be at least 60
  *   seconds.  After per-time series alignment, each time series will
  *   contain data points only on the period boundaries. If
@@ -89,7 +87,7 @@ var TimeInterval = {
  *   does not equal `ALIGN_NONE`, then this field must be defined;
  *   otherwise an error is returned.
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} perSeriesAligner
  *   The approach to be used to align individual time series. Not all
@@ -104,7 +102,7 @@ var TimeInterval = {
  *   and `alignmentPeriod` must be specified; otherwise, an error is
  *   returned.
  *
- *   The number should be among the values of [Aligner]{@link Aligner}
+ *   The number should be among the values of [Aligner]{@link google.monitoring.v3.Aligner}
  *
  * @property {number} crossSeriesReducer
  *   The approach to be used to combine time series. Not all reducer
@@ -119,7 +117,7 @@ var TimeInterval = {
  *   and `alignmentPeriod` must be specified; otherwise, an error is
  *   returned.
  *
- *   The number should be among the values of [Reducer]{@link Reducer}
+ *   The number should be among the values of [Reducer]{@link google.monitoring.v3.Reducer}
  *
  * @property {string[]} groupByFields
  *   The set of fields to preserve when `crossSeriesReducer` is
@@ -137,7 +135,8 @@ var TimeInterval = {
  *   a single output time series. If `crossSeriesReducer` is not
  *   defined, this field is ignored.
  *
- * @class
+ * @typedef Aggregation
+ * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.Aggregation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
 var Aggregation = {
@@ -148,6 +147,7 @@ var Aggregation = {
    * time series into temporal alignment.
    *
    * @enum {number}
+   * @memberof google.monitoring.v3
    */
   Aligner: {
 
@@ -171,7 +171,7 @@ var Aggregation = {
      * Align and convert to a rate. This alignment is valid for
      * cumulative metrics and delta metrics with numeric values. The output is a
      * gauge metric with value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_RATE: 2,
 
@@ -214,7 +214,7 @@ var Aggregation = {
      * the alignment period is the average or arithmetic mean of all
      * data points in the period. This alignment is valid for gauge and delta
      * metrics with numeric values. The value type of the output is
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_MEAN: 12,
 
@@ -223,7 +223,7 @@ var Aggregation = {
      * the alignment period is the count of all data points in the
      * period. This alignment is valid for gauge and delta metrics with numeric
      * or Boolean values. The value type of the output is
-     * {@link INT64}.
+     * INT64.
      */
     ALIGN_COUNT: 13,
 
@@ -241,7 +241,7 @@ var Aggregation = {
      * the alignment period is the standard deviation of all data
      * points in the period. This alignment is valid for gauge and delta metrics
      * with numeric values. The value type of the output is
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_STDDEV: 15,
 
@@ -250,7 +250,7 @@ var Aggregation = {
      * the alignment period is the count of True-valued data points in the
      * period. This alignment is valid for gauge metrics with
      * Boolean values. The value type of the output is
-     * {@link INT64}.
+     * INT64.
      */
     ALIGN_COUNT_TRUE: 16,
 
@@ -259,7 +259,7 @@ var Aggregation = {
      * the alignment period is the fraction of True-valued data points in the
      * period. This alignment is valid for gauge metrics with Boolean values.
      * The output value is in the range [0, 1] and has value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_FRACTION_TRUE: 17,
 
@@ -268,7 +268,7 @@ var Aggregation = {
      * the alignment period is the 99th percentile of all data
      * points in the period. This alignment is valid for gauge and delta metrics
      * with distribution values. The output is a gauge metric with value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_PERCENTILE_99: 18,
 
@@ -277,7 +277,7 @@ var Aggregation = {
      * the alignment period is the 95th percentile of all data
      * points in the period. This alignment is valid for gauge and delta metrics
      * with distribution values. The output is a gauge metric with value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_PERCENTILE_95: 19,
 
@@ -286,7 +286,7 @@ var Aggregation = {
      * the alignment period is the 50th percentile of all data
      * points in the period. This alignment is valid for gauge and delta metrics
      * with distribution values. The output is a gauge metric with value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_PERCENTILE_50: 20,
 
@@ -295,7 +295,7 @@ var Aggregation = {
      * the alignment period is the 5th percentile of all data
      * points in the period. This alignment is valid for gauge and delta metrics
      * with distribution values. The output is a gauge metric with value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     ALIGN_PERCENTILE_05: 21
   },
@@ -305,6 +305,7 @@ var Aggregation = {
    * time series into a single time series.
    *
    * @enum {number}
+   * @memberof google.monitoring.v3
    */
   Reducer: {
 
@@ -318,7 +319,7 @@ var Aggregation = {
      * Reduce by computing the mean across time series for each
      * alignment period. This reducer is valid for delta and
      * gauge metrics with numeric or distribution values. The value type of the
-     * output is {@link DOUBLE}.
+     * output is DOUBLE.
      */
     REDUCE_MEAN: 1,
 
@@ -350,7 +351,7 @@ var Aggregation = {
      * Reduce by computing the standard deviation across time series
      * for each alignment period. This reducer is valid for delta
      * and gauge metrics with numeric or distribution values. The value type of
-     * the output is {@link DOUBLE}.
+     * the output is DOUBLE.
      */
     REDUCE_STDDEV: 5,
 
@@ -359,7 +360,7 @@ var Aggregation = {
      * for each alignment period. This reducer is valid for delta
      * and gauge metrics of numeric, Boolean, distribution, and string value
      * type. The value type of the output is
-     * {@link INT64}.
+     * INT64.
      */
     REDUCE_COUNT: 6,
 
@@ -367,7 +368,7 @@ var Aggregation = {
      * Reduce by computing the count of True-valued data points across time
      * series for each alignment period. This reducer is valid for delta
      * and gauge metrics of Boolean value type. The value type of
-     * the output is {@link INT64}.
+     * the output is INT64.
      */
     REDUCE_COUNT_TRUE: 7,
 
@@ -376,7 +377,7 @@ var Aggregation = {
      * series for each alignment period. This reducer is valid for delta
      * and gauge metrics of Boolean value type. The output value is in the
      * range [0, 1] and has value type
-     * {@link DOUBLE}.
+     * DOUBLE.
      */
     REDUCE_FRACTION_TRUE: 8,
 
@@ -384,7 +385,7 @@ var Aggregation = {
      * Reduce by computing 99th percentile of data points across time series
      * for each alignment period. This reducer is valid for gauge and delta
      * metrics of numeric and distribution type. The value of the output is
-     * {@link DOUBLE}
+     * DOUBLE
      */
     REDUCE_PERCENTILE_99: 9,
 
@@ -392,7 +393,7 @@ var Aggregation = {
      * Reduce by computing 95th percentile of data points across time series
      * for each alignment period. This reducer is valid for gauge and delta
      * metrics of numeric and distribution type. The value of the output is
-     * {@link DOUBLE}
+     * DOUBLE
      */
     REDUCE_PERCENTILE_95: 10,
 
@@ -400,7 +401,7 @@ var Aggregation = {
      * Reduce by computing 50th percentile of data points across time series
      * for each alignment period. This reducer is valid for gauge and delta
      * metrics of numeric and distribution type. The value of the output is
-     * {@link DOUBLE}
+     * DOUBLE
      */
     REDUCE_PERCENTILE_50: 11,
 
@@ -408,7 +409,7 @@ var Aggregation = {
      * Reduce by computing 5th percentile of data points across time series
      * for each alignment period. This reducer is valid for gauge and delta
      * metrics of numeric and distribution type. The value of the output is
-     * {@link DOUBLE}
+     * DOUBLE
      */
     REDUCE_PERCENTILE_05: 12
   }

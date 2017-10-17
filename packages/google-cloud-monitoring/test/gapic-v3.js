@@ -1,36 +1,39 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 'use strict';
 
-var assert = require('assert');
-var monitoring = require('../src');
+const assert = require('assert');
+
+const monitoringModule = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
 error.code = FAKE_STATUS_CODE;
 
-describe('GroupServiceClient', function() {
-  describe('listGroups', function() {
-    it('invokes listGroups without error', function(done) {
-      var client = monitoring.v3.group();
+describe('GroupServiceClient', () => {
+  describe('listGroups', () => {
+    it('invokes listGroups without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -38,51 +41,62 @@ describe('GroupServiceClient', function() {
       var groupElement = {};
       var group = [groupElement];
       var expectedResponse = {
-          nextPageToken : nextPageToken,
-          group : group
+        nextPageToken: nextPageToken,
+        group: group,
       };
 
       // Mock Grpc layer
-      client._listGroups = function(actualRequest, options, callback) {
+      client._innerApiCalls.listGroups = (actualRequest, options, callback) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.group);
       };
 
-      client.listGroups(request, function(err, response) {
+      client.listGroups(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse.group);
         done();
       });
     });
 
-    it('invokes listGroups with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes listGroups with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._listGroups = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listGroups = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.listGroups(request, function(err, response) {
+      client.listGroups(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('getGroup', function() {
-    it('invokes getGroup without error', function(done) {
-      var client = monitoring.v3.group();
+  describe('getGroup', () => {
+    it('invokes getGroup without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -92,53 +106,67 @@ describe('GroupServiceClient', function() {
       var filter = 'filter-1274492040';
       var isCluster = false;
       var expectedResponse = {
-          name : name2,
-          displayName : displayName,
-          parentName : parentName,
-          filter : filter,
-          isCluster : isCluster
+        name: name2,
+        displayName: displayName,
+        parentName: parentName,
+        filter: filter,
+        isCluster: isCluster,
       };
 
       // Mock Grpc layer
-      client._getGroup = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.getGroup = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.getGroup(request, function(err, response) {
+      client.getGroup(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes getGroup with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes getGroup with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._getGroup = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.getGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.getGroup(request, function(err, response) {
+      client.getGroup(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('createGroup', function() {
-    it('invokes createGroup without error', function(done) {
-      var client = monitoring.v3.group();
+  describe('createGroup', () => {
+    it('invokes createGroup without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var group = {};
       var request = {
-          name : formattedName,
-          group : group
+        name: formattedName,
+        group: group,
       };
 
       // Mock response
@@ -148,53 +176,67 @@ describe('GroupServiceClient', function() {
       var filter = 'filter-1274492040';
       var isCluster = false;
       var expectedResponse = {
-          name : name2,
-          displayName : displayName,
-          parentName : parentName,
-          filter : filter,
-          isCluster : isCluster
+        name: name2,
+        displayName: displayName,
+        parentName: parentName,
+        filter: filter,
+        isCluster: isCluster,
       };
 
       // Mock Grpc layer
-      client._createGroup = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.createGroup = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.createGroup(request, function(err, response) {
+      client.createGroup(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes createGroup with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes createGroup with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var group = {};
       var request = {
-          name : formattedName,
-          group : group
+        name: formattedName,
+        group: group,
       };
 
       // Mock Grpc layer
-      client._createGroup = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.createGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createGroup(request, function(err, response) {
+      client.createGroup(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('updateGroup', function() {
-    it('invokes updateGroup without error', function(done) {
-      var client = monitoring.v3.group();
+  describe('updateGroup', () => {
+    it('invokes updateGroup without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var group = {};
       var request = {
-          group : group
+        group: group,
       };
 
       // Mock response
@@ -204,75 +246,96 @@ describe('GroupServiceClient', function() {
       var filter = 'filter-1274492040';
       var isCluster = false;
       var expectedResponse = {
-          name : name,
-          displayName : displayName,
-          parentName : parentName,
-          filter : filter,
-          isCluster : isCluster
+        name: name,
+        displayName: displayName,
+        parentName: parentName,
+        filter: filter,
+        isCluster: isCluster,
       };
 
       // Mock Grpc layer
-      client._updateGroup = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.updateGroup = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.updateGroup(request, function(err, response) {
+      client.updateGroup(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes updateGroup with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes updateGroup with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var group = {};
       var request = {
-          group : group
+        group: group,
       };
 
       // Mock Grpc layer
-      client._updateGroup = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.updateGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.updateGroup(request, function(err, response) {
+      client.updateGroup(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('deleteGroup', function() {
-    it('invokes deleteGroup without error', function(done) {
-      var client = monitoring.v3.group();
+  describe('deleteGroup', () => {
+    it('invokes deleteGroup without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._deleteGroup = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteGroup = mockSimpleGrpcMethod(request);
 
-      client.deleteGroup(request, function(err) {
+      client.deleteGroup(request, err => {
         assert.ifError(err);
         done();
       });
     });
 
-    it('invokes deleteGroup with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes deleteGroup with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._deleteGroup = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.deleteGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.deleteGroup(request, function(err) {
+      client.deleteGroup(request, err => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
         done();
@@ -280,14 +343,17 @@ describe('GroupServiceClient', function() {
     });
   });
 
-  describe('listGroupMembers', function() {
-    it('invokes listGroupMembers without error', function(done) {
-      var client = monitoring.v3.group();
+  describe('listGroupMembers', () => {
+    it('invokes listGroupMembers without error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -296,54 +362,65 @@ describe('GroupServiceClient', function() {
       var membersElement = {};
       var members = [membersElement];
       var expectedResponse = {
-          nextPageToken : nextPageToken,
-          totalSize : totalSize,
-          members : members
+        nextPageToken: nextPageToken,
+        totalSize: totalSize,
+        members: members,
       };
 
       // Mock Grpc layer
-      client._listGroupMembers = function(actualRequest, options, callback) {
+      client._innerApiCalls.listGroupMembers = (actualRequest, options, callback) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.members);
       };
 
-      client.listGroupMembers(request, function(err, response) {
+      client.listGroupMembers(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse.members);
         done();
       });
     });
 
-    it('invokes listGroupMembers with error', function(done) {
-      var client = monitoring.v3.group();
+    it('invokes listGroupMembers with error', done => {
+      var client = new monitoringModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+      var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._listGroupMembers = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listGroupMembers = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.listGroupMembers(request, function(err, response) {
+      client.listGroupMembers(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
 });
-describe('MetricServiceClient', function() {
-  describe('listMonitoredResourceDescriptors', function() {
-    it('invokes listMonitoredResourceDescriptors without error', function(done) {
-      var client = monitoring.v3.metric();
+describe('MetricServiceClient', () => {
+  describe('listMonitoredResourceDescriptors', () => {
+    it('invokes listMonitoredResourceDescriptors without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -351,51 +428,62 @@ describe('MetricServiceClient', function() {
       var resourceDescriptorsElement = {};
       var resourceDescriptors = [resourceDescriptorsElement];
       var expectedResponse = {
-          nextPageToken : nextPageToken,
-          resourceDescriptors : resourceDescriptors
+        nextPageToken: nextPageToken,
+        resourceDescriptors: resourceDescriptors,
       };
 
       // Mock Grpc layer
-      client._listMonitoredResourceDescriptors = function(actualRequest, options, callback) {
+      client._innerApiCalls.listMonitoredResourceDescriptors = (actualRequest, options, callback) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.resourceDescriptors);
       };
 
-      client.listMonitoredResourceDescriptors(request, function(err, response) {
+      client.listMonitoredResourceDescriptors(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse.resourceDescriptors);
         done();
       });
     });
 
-    it('invokes listMonitoredResourceDescriptors with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes listMonitoredResourceDescriptors with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._listMonitoredResourceDescriptors = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listMonitoredResourceDescriptors = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.listMonitoredResourceDescriptors(request, function(err, response) {
+      client.listMonitoredResourceDescriptors(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('getMonitoredResourceDescriptor', function() {
-    it('invokes getMonitoredResourceDescriptor without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('getMonitoredResourceDescriptor', () => {
+    it('invokes getMonitoredResourceDescriptor without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.monitoredResourceDescriptorPath("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]");
+      var formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -404,50 +492,64 @@ describe('MetricServiceClient', function() {
       var displayName = 'displayName1615086568';
       var description = 'description-1724546052';
       var expectedResponse = {
-          name : name2,
-          type : type,
-          displayName : displayName,
-          description : description
+        name: name2,
+        type: type,
+        displayName: displayName,
+        description: description,
       };
 
       // Mock Grpc layer
-      client._getMonitoredResourceDescriptor = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.getMonitoredResourceDescriptor = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.getMonitoredResourceDescriptor(request, function(err, response) {
+      client.getMonitoredResourceDescriptor(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes getMonitoredResourceDescriptor with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes getMonitoredResourceDescriptor with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.monitoredResourceDescriptorPath("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]");
+      var formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._getMonitoredResourceDescriptor = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.getMonitoredResourceDescriptor = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.getMonitoredResourceDescriptor(request, function(err, response) {
+      client.getMonitoredResourceDescriptor(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('listMetricDescriptors', function() {
-    it('invokes listMetricDescriptors without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('listMetricDescriptors', () => {
+    it('invokes listMetricDescriptors without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -455,51 +557,62 @@ describe('MetricServiceClient', function() {
       var metricDescriptorsElement = {};
       var metricDescriptors = [metricDescriptorsElement];
       var expectedResponse = {
-          nextPageToken : nextPageToken,
-          metricDescriptors : metricDescriptors
+        nextPageToken: nextPageToken,
+        metricDescriptors: metricDescriptors,
       };
 
       // Mock Grpc layer
-      client._listMetricDescriptors = function(actualRequest, options, callback) {
+      client._innerApiCalls.listMetricDescriptors = (actualRequest, options, callback) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.metricDescriptors);
       };
 
-      client.listMetricDescriptors(request, function(err, response) {
+      client.listMetricDescriptors(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse.metricDescriptors);
         done();
       });
     });
 
-    it('invokes listMetricDescriptors with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes listMetricDescriptors with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._listMetricDescriptors = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listMetricDescriptors = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.listMetricDescriptors(request, function(err, response) {
+      client.listMetricDescriptors(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('getMetricDescriptor', function() {
-    it('invokes getMetricDescriptor without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('getMetricDescriptor', () => {
+    it('invokes getMetricDescriptor without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
+      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock response
@@ -509,53 +622,67 @@ describe('MetricServiceClient', function() {
       var description = 'description-1724546052';
       var displayName = 'displayName1615086568';
       var expectedResponse = {
-          name : name2,
-          type : type,
-          unit : unit,
-          description : description,
-          displayName : displayName
+        name: name2,
+        type: type,
+        unit: unit,
+        description: description,
+        displayName: displayName,
       };
 
       // Mock Grpc layer
-      client._getMetricDescriptor = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.getMetricDescriptor = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.getMetricDescriptor(request, function(err, response) {
+      client.getMetricDescriptor(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes getMetricDescriptor with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes getMetricDescriptor with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
+      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._getMetricDescriptor = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.getMetricDescriptor = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.getMetricDescriptor(request, function(err, response) {
+      client.getMetricDescriptor(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('createMetricDescriptor', function() {
-    it('invokes createMetricDescriptor without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('createMetricDescriptor', () => {
+    it('invokes createMetricDescriptor without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var metricDescriptor = {};
       var request = {
-          name : formattedName,
-          metricDescriptor : metricDescriptor
+        name: formattedName,
+        metricDescriptor: metricDescriptor,
       };
 
       // Mock response
@@ -565,77 +692,98 @@ describe('MetricServiceClient', function() {
       var description = 'description-1724546052';
       var displayName = 'displayName1615086568';
       var expectedResponse = {
-          name : name2,
-          type : type,
-          unit : unit,
-          description : description,
-          displayName : displayName
+        name: name2,
+        type: type,
+        unit: unit,
+        description: description,
+        displayName: displayName,
       };
 
       // Mock Grpc layer
-      client._createMetricDescriptor = mockSimpleGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.createMetricDescriptor = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.createMetricDescriptor(request, function(err, response) {
+      client.createMetricDescriptor(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
     });
 
-    it('invokes createMetricDescriptor with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes createMetricDescriptor with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var metricDescriptor = {};
       var request = {
-          name : formattedName,
-          metricDescriptor : metricDescriptor
+        name: formattedName,
+        metricDescriptor: metricDescriptor,
       };
 
       // Mock Grpc layer
-      client._createMetricDescriptor = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.createMetricDescriptor = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createMetricDescriptor(request, function(err, response) {
+      client.createMetricDescriptor(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('deleteMetricDescriptor', function() {
-    it('invokes deleteMetricDescriptor without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('deleteMetricDescriptor', () => {
+    it('invokes deleteMetricDescriptor without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
+      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._deleteMetricDescriptor = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteMetricDescriptor = mockSimpleGrpcMethod(request);
 
-      client.deleteMetricDescriptor(request, function(err) {
+      client.deleteMetricDescriptor(request, err => {
         assert.ifError(err);
         done();
       });
     });
 
-    it('invokes deleteMetricDescriptor with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes deleteMetricDescriptor with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
+      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
       var request = {
-          name : formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
-      client._deleteMetricDescriptor = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.deleteMetricDescriptor = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.deleteMetricDescriptor(request, function(err) {
+      client.deleteMetricDescriptor(request, err => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
         done();
@@ -643,20 +791,23 @@ describe('MetricServiceClient', function() {
     });
   });
 
-  describe('listTimeSeries', function() {
-    it('invokes listTimeSeries without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('listTimeSeries', () => {
+    it('invokes listTimeSeries without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var filter = 'filter-1274492040';
       var interval = {};
-      var view = monitoring.v3.types.ListTimeSeriesRequest.TimeSeriesView.FULL;
+      var view = 'FULL';
       var request = {
-          name : formattedName,
-          filter : filter,
-          interval : interval,
-          view : view
+        name: formattedName,
+        filter: filter,
+        interval: interval,
+        view: view,
       };
 
       // Mock response
@@ -664,85 +815,103 @@ describe('MetricServiceClient', function() {
       var timeSeriesElement = {};
       var timeSeries = [timeSeriesElement];
       var expectedResponse = {
-          nextPageToken : nextPageToken,
-          timeSeries : timeSeries
+        nextPageToken: nextPageToken,
+        timeSeries: timeSeries,
       };
 
       // Mock Grpc layer
-      client._listTimeSeries = function(actualRequest, options, callback) {
+      client._innerApiCalls.listTimeSeries = (actualRequest, options, callback) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.timeSeries);
       };
 
-      client.listTimeSeries(request, function(err, response) {
+      client.listTimeSeries(request, (err, response) => {
         assert.ifError(err);
         assert.deepStrictEqual(response, expectedResponse.timeSeries);
         done();
       });
     });
 
-    it('invokes listTimeSeries with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes listTimeSeries with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var filter = 'filter-1274492040';
       var interval = {};
-      var view = monitoring.v3.types.ListTimeSeriesRequest.TimeSeriesView.FULL;
+      var view = 'FULL';
       var request = {
-          name : formattedName,
-          filter : filter,
-          interval : interval,
-          view : view
+        name: formattedName,
+        filter: filter,
+        interval: interval,
+        view: view,
       };
 
       // Mock Grpc layer
-      client._listTimeSeries = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.listTimeSeries = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.listTimeSeries(request, function(err, response) {
+      client.listTimeSeries(request, (err, response) => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe('createTimeSeries', function() {
-    it('invokes createTimeSeries without error', function(done) {
-      var client = monitoring.v3.metric();
+  describe('createTimeSeries', () => {
+    it('invokes createTimeSeries without error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var timeSeries = [];
       var request = {
-          name : formattedName,
-          timeSeries : timeSeries
+        name: formattedName,
+        timeSeries: timeSeries,
       };
 
       // Mock Grpc layer
-      client._createTimeSeries = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.createTimeSeries = mockSimpleGrpcMethod(request);
 
-      client.createTimeSeries(request, function(err) {
+      client.createTimeSeries(request, err => {
         assert.ifError(err);
         done();
       });
     });
 
-    it('invokes createTimeSeries with error', function(done) {
-      var client = monitoring.v3.metric();
+    it('invokes createTimeSeries with error', done => {
+      var client = new monitoringModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.projectPath("[PROJECT]");
+      var formattedName = client.projectPath('[PROJECT]');
       var timeSeries = [];
       var request = {
-          name : formattedName,
-          timeSeries : timeSeries
+        name: formattedName,
+        timeSeries: timeSeries,
       };
 
       // Mock Grpc layer
-      client._createTimeSeries = mockSimpleGrpcMethod(request, null, error);
+      client._innerApiCalls.createTimeSeries = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createTimeSeries(request, function(err) {
+      client.createTimeSeries(request, err => {
         assert(err instanceof Error);
         assert.equal(err.code, FAKE_STATUS_CODE);
         done();
