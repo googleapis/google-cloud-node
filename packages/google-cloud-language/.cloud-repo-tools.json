@@ -3,7 +3,7 @@
   "requiresKeyFile": true,
   "requiresProjectId": true,
   "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/language/latest/",
-  "release_quality": "beta",
+  "release_quality": "ga",
   "samples": [
     {
       "id": "analyze-v1",
