@@ -12,14 +12,14 @@
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
-* [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (GA)
+* [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
 * [Google Stackdriver Logging](#google-stackdriver-logging-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Cloud Firestore](#cloud-firestore-beta) (Beta)
+* [Cloud Firestore](http://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
@@ -222,6 +222,49 @@ datastoreClient.save({
       // The blog post is now published!
     }
   });
+});
+```
+
+
+## Cloud Natural Language (GA)
+
+- [API Documentation][gcloud-language-docs]
+- [Official Documentation][cloud-language-docs]
+
+#### Using the Natural Language API module
+
+```
+$ npm install --save @google-cloud/language
+```
+
+```js
+var language = require('@google-cloud/language');
+```
+
+#### Authentication
+
+See [Authentication](#authentication).
+
+#### Preview
+
+```js
+var languageClient = language({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var content = 'Hello, world!';
+var type = language.v1.types.Document.Type.PLAIN_TEXT;
+var document = {
+    content : content,
+    type : type
+};
+languageClient.analyzeSentiment({document: document}).then(function(responses) {
+    var response = responses[0];
+    // doThingsWith(response)
+})
+.catch(function(err) {
+    console.error(err);
 });
 ```
 
@@ -461,49 +504,6 @@ document.get().then(doc => {
 // Delete the document.
 document.delete().then(() => {
   // Document deleted successfully.
-});
-```
-
-
-## Cloud Natural Language (Beta)
-
-- [API Documentation][gcloud-language-docs]
-- [Official Documentation][cloud-language-docs]
-
-#### Using the Natural Language API module
-
-```
-$ npm install --save @google-cloud/language
-```
-
-```js
-var language = require('@google-cloud/language');
-```
-
-#### Authentication
-
-See [Authentication](#authentication).
-
-#### Preview
-
-```js
-var languageClient = language({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var content = 'Hello, world!';
-var type = language.v1.types.Document.Type.PLAIN_TEXT;
-var document = {
-    content : content,
-    type : type
-};
-languageClient.analyzeSentiment({document: document}).then(function(responses) {
-    var response = responses[0];
-    // doThingsWith(response)
-})
-.catch(function(err) {
-    console.error(err);
 });
 ```
 
