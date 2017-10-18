@@ -1,0 +1,45 @@
+{
+  "name": "nodejs-docs-samples-logging",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "scripts": {
+    "lint": "samples lint",
+    "pretest": "npm run lint",
+    "unit-test": "ava -T 20s --verbose test/*.test.js",
+    "system-test": "ava -T 1m --verbose system-test/*.test.js",
+    "all-test": "npm run unit-test && npm run system-test",
+    "test": "samples test run --cmd npm -- run all-test"
+  },
+  "dependencies": {
+    "@google-cloud/logging": "1.0.5",
+    "@google-cloud/logging-bunyan": "0.5.0",
+    "@google-cloud/logging-winston": "0.5.0",
+    "@google-cloud/storage": "1.2.1",
+    "bunyan": "1.8.12",
+    "express": "4.15.4",
+    "fluent-logger": "2.4.1",
+    "winston": "2.3.1",
+    "yargs": "8.0.2"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.4.17",
+    "ava": "0.21.0",
+    "proxyquire": "1.8.0",
+    "sinon": "3.2.0",
+    "supertest": "3.0.0",
+    "uuid": "3.1.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  }
+}
