@@ -20,7 +20,7 @@
 const DLP = require('@google-cloud/dlp');
 
 // Instantiates a client
-const dlp = DLP();
+const dlp = new DLP.DlpServiceClient();
 
 // The string to inspect
 const string = 'Robert Frost';
