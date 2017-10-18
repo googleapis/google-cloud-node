@@ -92,7 +92,7 @@ client
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-language/blob/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
 | Sample                      | Source Code                       |
