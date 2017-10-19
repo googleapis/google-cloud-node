@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./group_service_client_config');
+const gapicConfig = require('./uptime_check_service_client_config');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -22,25 +22,21 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * The Group API lets you inspect and manage your
- * [groups](https://cloud.google.comgoogle.monitoring.v3.Group).
- *
- * A group is a named filter that is used to identify
- * a collection of monitored resources. Groups are typically used to
- * mirror the physical and/or logical topology of the environment.
- * Because group membership is computed dynamically, monitored
- * resources that are started in the future are automatically placed
- * in matching groups. By using a group to name monitored resources in,
- * for example, an alert policy, the target of that alert policy is
- * updated automatically as monitored resources are added and removed
- * from the infrastructure.
+ * The UptimeCheckService API is used to manage (list, create, delete, edit)
+ * uptime check configurations in the Stackdriver Monitoring product. An uptime
+ * check is a piece of configuration that determines which resources and
+ * services to monitor for availability. These configurations can also be
+ * configured interactively by navigating to the [Cloud Console]
+ * (http://console.cloud.google.com), selecting the appropriate project,
+ * clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
+ * and then clicking on "Uptime".
  *
  * @class
  * @memberof v3
  */
-class GroupServiceClient {
+class UptimeCheckServiceClient {
   /**
-   * Construct an instance of GroupServiceClient.
+   * Construct an instance of UptimeCheckServiceClient.
    *
    * @param {object=} options - The configuration object. See the subsequent
    *   parameters for more details.
@@ -103,7 +99,7 @@ class GroupServiceClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/monitoring/v3/group_service.proto'
+        'google/monitoring/v3/uptime_service.proto'
       )
     );
 
@@ -112,8 +108,8 @@ class GroupServiceClient {
     // Create useful helper objects for these.
     this._pathTemplates = {
       projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      groupPathTemplate: new gax.PathTemplate(
-        'projects/{project}/groups/{group}'
+      uptimeCheckConfigPathTemplate: new gax.PathTemplate(
+        'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
     };
 
@@ -121,17 +117,21 @@ class GroupServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listGroups: new gax.PageDescriptor('pageToken', 'nextPageToken', 'group'),
-      listGroupMembers: new gax.PageDescriptor(
+      listUptimeCheckConfigs: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'members'
+        'uptimeCheckConfigs'
+      ),
+      listUptimeCheckIps: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'uptimeCheckIps'
       ),
     };
 
     // Put together the default options sent with requests.
     var defaults = gaxGrpc.constructSettings(
-      'google.monitoring.v3.GroupService',
+      'google.monitoring.v3.UptimeCheckService',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -143,25 +143,25 @@ class GroupServiceClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.monitoring.v3.GroupService.
-    var groupServiceStub = gaxGrpc.createStub(
-      protos.google.monitoring.v3.GroupService,
+    // google.monitoring.v3.UptimeCheckService.
+    var uptimeCheckServiceStub = gaxGrpc.createStub(
+      protos.google.monitoring.v3.UptimeCheckService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var groupServiceStubMethods = [
-      'listGroups',
-      'getGroup',
-      'createGroup',
-      'updateGroup',
-      'deleteGroup',
-      'listGroupMembers',
+    var uptimeCheckServiceStubMethods = [
+      'listUptimeCheckConfigs',
+      'getUptimeCheckConfig',
+      'createUptimeCheckConfig',
+      'updateUptimeCheckConfig',
+      'deleteUptimeCheckConfig',
+      'listUptimeCheckIps',
     ];
-    for (let methodName of groupServiceStubMethods) {
+    for (let methodName of uptimeCheckServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
-        groupServiceStub.then(
+        uptimeCheckServiceStub.then(
           stub =>
             function() {
               var args = Array.prototype.slice.call(arguments, 0);
@@ -215,28 +215,15 @@ class GroupServiceClient {
   // -------------------
 
   /**
-   * Lists the existing groups.
+   * Lists the existing valid uptime check configurations for the project,
+   * leaving out any invalid configurations.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The project whose groups are to be listed. The format is
-   *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.childrenOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns groups whose `parentName` field contains the group
-   *   name.  If no groups have this parent, the results are empty.
-   * @param {string=} request.ancestorsOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns groups that are ancestors of the specified group.
-   *   The groups are returned in order, starting with the immediate parent and
-   *   ending with the most distant ancestor.  If the specified group has no
-   *   immediate parent, the results are empty.
-   * @param {string=} request.descendantsOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns the descendants of the specified group.  This is a superset of
-   *   the results returned by the `childrenOfGroup` filter, and includes
-   *   children-of-children, and so forth.
+   * @param {string} request.parent
+   *   The project whose uptime check configurations are listed. The format is
+   *
+   *     `projects/[PROJECT_ID]`.
    * @param {number=} request.pageSize
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -249,20 +236,20 @@ class GroupServiceClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [Group]{@link google.monitoring.v3.Group}.
+   *   The second parameter to the callback is Array of [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListGroupsResponse]{@link google.monitoring.v3.ListGroupsResponse}.
+   *   the raw response object of an object representing [ListUptimeCheckConfigsResponse]{@link google.monitoring.v3.ListUptimeCheckConfigsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Group]{@link google.monitoring.v3.Group}.
+   *   The first element of the array is Array of [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Group]{@link google.monitoring.v3.Group} in a single response.
+   *   The first element is Array of [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListGroupsResponse]{@link google.monitoring.v3.ListGroupsResponse}.
+   *   an object representing [ListUptimeCheckConfigsResponse]{@link google.monitoring.v3.ListUptimeCheckConfigsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -270,14 +257,14 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
-   * client.listGroups({name: formattedName})
+   * client.listUptimeCheckConfigs({parent: formattedParent})
    *   .then(responses => {
    *     var resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
@@ -289,7 +276,7 @@ class GroupServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    *
    * var options = {autoPaginate: false};
@@ -305,29 +292,33 @@ class GroupServiceClient {
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
-   *     return client.listGroups(nextRequest, options).then(callback);
+   *     return client.listUptimeCheckConfigs(nextRequest, options).then(callback);
    *   }
    * }
-   * client.listGroups({name: formattedName}, options)
+   * client.listUptimeCheckConfigs({parent: formattedParent}, options)
    *   .then(callback)
    *   .catch(err => {
    *     console.error(err);
    *   });
    */
-  listGroups(request, options, callback) {
+  listUptimeCheckConfigs(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.listGroups(request, options, callback);
+    return this._innerApiCalls.listUptimeCheckConfigs(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
-   * Equivalent to {@link listGroups}, but returns a NodeJS Stream object.
+   * Equivalent to {@link listUptimeCheckConfigs}, but returns a NodeJS Stream object.
    *
-   * This fetches the paged responses for {@link listGroups} continuously
+   * This fetches the paged responses for {@link listUptimeCheckConfigs} continuously
    * and invokes the callback registered for 'data' event for each element in the
    * responses.
    *
@@ -339,24 +330,10 @@ class GroupServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The project whose groups are to be listed. The format is
-   *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.childrenOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns groups whose `parentName` field contains the group
-   *   name.  If no groups have this parent, the results are empty.
-   * @param {string=} request.ancestorsOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns groups that are ancestors of the specified group.
-   *   The groups are returned in order, starting with the immediate parent and
-   *   ending with the most distant ancestor.  If the specified group has no
-   *   immediate parent, the results are empty.
-   * @param {string=} request.descendantsOfGroup
-   *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-   *   Returns the descendants of the specified group.  This is a superset of
-   *   the results returned by the `childrenOfGroup` filter, and includes
-   *   children-of-children, and so forth.
+   * @param {string} request.parent
+   *   The project whose uptime check configurations are listed. The format is
+   *
+   *     `projects/[PROJECT_ID]`.
    * @param {number=} request.pageSize
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -367,63 +344,64 @@ class GroupServiceClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Group]{@link google.monitoring.v3.Group} on 'data' event.
+   *   An object stream which emits an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig} on 'data' event.
    *
    * @example
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * client.listGroupsStream({name: formattedName})
+   * var formattedParent = client.projectPath('[PROJECT]');
+   * client.listUptimeCheckConfigsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
    *   }).on('error', err => {
    *     console.log(err);
    *   });
    */
-  listGroupsStream(request, options) {
+  listUptimeCheckConfigsStream(request, options) {
     options = options || {};
 
-    return this._descriptors.page.listGroups.createStream(
-      this._innerApiCalls.listGroups,
+    return this._descriptors.page.listUptimeCheckConfigs.createStream(
+      this._innerApiCalls.listUptimeCheckConfigs,
       request,
       options
     );
   }
 
   /**
-   * Gets a single group.
+   * Gets a single uptime check configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group to retrieve. The format is
-   *   `"projects/{project_id_or_number}/groups/{group_id}"`.
+   *   The uptime check configuration to retrieve. The format is
+   *
+   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-   * client.getGroup({name: formattedName})
+   * var formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
+   * client.getUptimeCheckConfig({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -432,57 +410,55 @@ class GroupServiceClient {
    *     console.error(err);
    *   });
    */
-  getGroup(request, options, callback) {
+  getUptimeCheckConfig(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.getGroup(request, options, callback);
+    return this._innerApiCalls.getUptimeCheckConfig(request, options, callback);
   }
 
   /**
-   * Creates a new group.
+   * Creates a new uptime check configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The project in which to create the group. The format is
-   *   `"projects/{project_id_or_number}"`.
-   * @param {Object} request.group
-   *   A group definition. It is an error to define the `name` field because
-   *   the system assigns the name.
+   * @param {string} request.parent
+   *   The project in which to create the uptime check. The format is:
    *
-   *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
-   * @param {boolean=} request.validateOnly
-   *   If true, validate this request but do not create the group.
+   *     `projects/[PROJECT_ID]`.
+   * @param {Object} request.uptimeCheckConfig
+   *   The new uptime check configuration.
+   *
+   *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var group = {};
+   * var formattedParent = client.projectPath('[PROJECT]');
+   * var uptimeCheckConfig = {};
    * var request = {
-   *   name: formattedName,
-   *   group: group,
+   *   parent: formattedParent,
+   *   uptimeCheckConfig: uptimeCheckConfig,
    * };
-   * client.createGroup(request)
+   * client.createUptimeCheckConfig(request)
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -491,50 +467,75 @@ class GroupServiceClient {
    *     console.error(err);
    *   });
    */
-  createGroup(request, options, callback) {
+  createUptimeCheckConfig(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.createGroup(request, options, callback);
+    return this._innerApiCalls.createUptimeCheckConfig(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
-   * Updates an existing group.
-   * You can change any group attributes except `name`.
+   * Updates an uptime check configuration. You can either replace the entire
+   * configuration with a new one or replace only certain fields in the current
+   * configuration by specifying the fields to be updated via `"updateMask"`.
+   * Returns the updated configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {Object} request.group
-   *   The new definition of the group.  All fields of the existing group,
-   *   excepting `name`, are replaced with the corresponding fields of this group.
+   * @param {string} request.name
+   *   The uptime check configuration to update. The format is
    *
-   *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
-   * @param {boolean=} request.validateOnly
-   *   If true, validate this request but do not update the existing group.
+   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+   * @param {Object} request.uptimeCheckConfig
+   *   Required. If an `"updateMask"` has been specified, this field gives
+   *   the values for the set of fields mentioned in the `"updateMask"`. If an
+   *   `"updateMask"` has not been given, this uptime check configuration replaces
+   *   the current configuration. If a field is mentioned in `"updateMask`" but
+   *   the corresonding field is omitted in this partial uptime check
+   *   configuration, it has the effect of deleting/clearing the field from the
+   *   configuration on the server.
+   *
+   *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
+   * @param {Object=} request.updateMask
+   *   Optional. If present, only the listed fields in the current uptime check
+   *   configuration are updated with values from the new configuration. If this
+   *   field is empty, then the current configuration is completely replaced with
+   *   the new configuration.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
+   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var group = {};
-   * client.updateGroup({group: group})
+   * var name = '';
+   * var uptimeCheckConfig = {};
+   * var request = {
+   *   name: name,
+   *   uptimeCheckConfig: uptimeCheckConfig,
+   * };
+   * client.updateUptimeCheckConfig(request)
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -543,24 +544,31 @@ class GroupServiceClient {
    *     console.error(err);
    *   });
    */
-  updateGroup(request, options, callback) {
+  updateUptimeCheckConfig(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.updateGroup(request, options, callback);
+    return this._innerApiCalls.updateUptimeCheckConfig(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
-   * Deletes an existing group.
+   * Deletes an uptime check configuration. Note that this method will fail
+   * if the uptime check configuration is referenced by an alert policy or
+   * other dependent configs that would be rendered invalid by the deletion.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group to delete. The format is
-   *   `"projects/{project_id_or_number}/groups/{group_id}"`.
+   *   The uptime check configuration to delete. The format is
+   *
+   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -573,74 +581,60 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-   * client.deleteGroup({name: formattedName}).catch(err => {
+   * var formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
+   * client.deleteUptimeCheckConfig({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
    */
-  deleteGroup(request, options, callback) {
+  deleteUptimeCheckConfig(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.deleteGroup(request, options, callback);
+    return this._innerApiCalls.deleteUptimeCheckConfig(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
-   * Lists the monitored resources that are members of a group.
+   * Returns the list of IPs that checkers run from
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The group whose members are listed. The format is
-   *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {number=} request.pageSize
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string=} request.filter
-   *   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
-   *   the members to be returned.  The filter may reference the type, labels, and
-   *   metadata of monitored resources that comprise the group.
-   *   For example, to return only resources representing Compute Engine VM
-   *   instances, use this filter:
-   *
-   *       resource.type = "gce_instance"
-   * @param {Object=} request.interval
-   *   An optional time interval for which results should be returned. Only
-   *   members that were part of the group during the specified interval are
-   *   included in the response.  If no interval is provided then the group
-   *   membership over the last minute is returned.
-   *
-   *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [MonitoredResource]{@link google.api.MonitoredResource}.
+   *   The second parameter to the callback is Array of [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListGroupMembersResponse]{@link google.monitoring.v3.ListGroupMembersResponse}.
+   *   the raw response object of an object representing [ListUptimeCheckIpsResponse]{@link google.monitoring.v3.ListUptimeCheckIpsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [MonitoredResource]{@link google.api.MonitoredResource}.
+   *   The first element of the array is Array of [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [MonitoredResource]{@link google.api.MonitoredResource} in a single response.
+   *   The first element is Array of [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListGroupMembersResponse]{@link google.monitoring.v3.ListGroupMembersResponse}.
+   *   an object representing [ListUptimeCheckIpsResponse]{@link google.monitoring.v3.ListUptimeCheckIpsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -648,14 +642,12 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-   *
-   * client.listGroupMembers({name: formattedName})
+   * client.listUptimeCheckIps({})
    *   .then(responses => {
    *     var resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
@@ -667,8 +659,6 @@ class GroupServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-   *
    *
    * var options = {autoPaginate: false};
    * var callback = responses => {
@@ -683,29 +673,29 @@ class GroupServiceClient {
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
-   *     return client.listGroupMembers(nextRequest, options).then(callback);
+   *     return client.listUptimeCheckIps(nextRequest, options).then(callback);
    *   }
    * }
-   * client.listGroupMembers({name: formattedName}, options)
+   * client.listUptimeCheckIps({}, options)
    *   .then(callback)
    *   .catch(err => {
    *     console.error(err);
    *   });
    */
-  listGroupMembers(request, options, callback) {
+  listUptimeCheckIps(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.listGroupMembers(request, options, callback);
+    return this._innerApiCalls.listUptimeCheckIps(request, options, callback);
   }
 
   /**
-   * Equivalent to {@link listGroupMembers}, but returns a NodeJS Stream object.
+   * Equivalent to {@link listUptimeCheckIps}, but returns a NodeJS Stream object.
    *
-   * This fetches the paged responses for {@link listGroupMembers} continuously
+   * This fetches the paged responses for {@link listUptimeCheckIps} continuously
    * and invokes the callback registered for 'data' event for each element in the
    * responses.
    *
@@ -717,57 +707,39 @@ class GroupServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The group whose members are listed. The format is
-   *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {number=} request.pageSize
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string=} request.filter
-   *   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
-   *   the members to be returned.  The filter may reference the type, labels, and
-   *   metadata of monitored resources that comprise the group.
-   *   For example, to return only resources representing Compute Engine VM
-   *   instances, use this filter:
-   *
-   *       resource.type = "gce_instance"
-   * @param {Object=} request.interval
-   *   An optional time interval for which results should be returned. Only
-   *   members that were part of the group during the specified interval are
-   *   included in the response.  If no interval is provided then the group
-   *   membership over the last minute is returned.
-   *
-   *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [MonitoredResource]{@link google.api.MonitoredResource} on 'data' event.
+   *   An object stream which emits an object representing [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp} on 'data' event.
    *
    * @example
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * var client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-   * client.listGroupMembersStream({name: formattedName})
+   *
+   * client.listUptimeCheckIpsStream({})
    *   .on('data', element => {
    *     // doThingsWith(element)
    *   }).on('error', err => {
    *     console.log(err);
    *   });
    */
-  listGroupMembersStream(request, options) {
+  listUptimeCheckIpsStream(request, options) {
     options = options || {};
 
-    return this._descriptors.page.listGroupMembers.createStream(
-      this._innerApiCalls.listGroupMembers,
+    return this._descriptors.page.listUptimeCheckIps.createStream(
+      this._innerApiCalls.listUptimeCheckIps,
       request,
       options
     );
@@ -790,16 +762,16 @@ class GroupServiceClient {
   }
 
   /**
-   * Return a fully-qualified group resource name string.
+   * Return a fully-qualified uptime_check_config resource name string.
    *
    * @param {String} project
-   * @param {String} group
+   * @param {String} uptimeCheckConfig
    * @returns {String}
    */
-  groupPath(project, group) {
-    return this._pathTemplates.groupPathTemplate.render({
+  uptimeCheckConfigPath(project, uptimeCheckConfig) {
+    return this._pathTemplates.uptimeCheckConfigPathTemplate.render({
       project: project,
-      group: group,
+      uptime_check_config: uptimeCheckConfig,
     });
   }
 
@@ -815,26 +787,30 @@ class GroupServiceClient {
   }
 
   /**
-   * Parse the groupName from a group resource.
+   * Parse the uptimeCheckConfigName from a uptime_check_config resource.
    *
-   * @param {String} groupName
-   *   A fully-qualified path representing a group resources.
+   * @param {String} uptimeCheckConfigName
+   *   A fully-qualified path representing a uptime_check_config resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromGroupName(groupName) {
-    return this._pathTemplates.groupPathTemplate.match(groupName).project;
+  matchProjectFromUptimeCheckConfigName(uptimeCheckConfigName) {
+    return this._pathTemplates.uptimeCheckConfigPathTemplate.match(
+      uptimeCheckConfigName
+    ).project;
   }
 
   /**
-   * Parse the groupName from a group resource.
+   * Parse the uptimeCheckConfigName from a uptime_check_config resource.
    *
-   * @param {String} groupName
-   *   A fully-qualified path representing a group resources.
-   * @returns {String} - A string representing the group.
+   * @param {String} uptimeCheckConfigName
+   *   A fully-qualified path representing a uptime_check_config resources.
+   * @returns {String} - A string representing the uptime_check_config.
    */
-  matchGroupFromGroupName(groupName) {
-    return this._pathTemplates.groupPathTemplate.match(groupName).group;
+  matchUptimeCheckConfigFromUptimeCheckConfigName(uptimeCheckConfigName) {
+    return this._pathTemplates.uptimeCheckConfigPathTemplate.match(
+      uptimeCheckConfigName
+    ).uptime_check_config;
   }
 }
 
-module.exports = GroupServiceClient;
+module.exports = UptimeCheckServiceClient;

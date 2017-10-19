@@ -16,6 +16,8 @@
 
 const GroupServiceClient = require('./group_service_client');
 const MetricServiceClient = require('./metric_service_client');
+const UptimeCheckServiceClient = require('./uptime_check_service_client');
 
 module.exports.GroupServiceClient = GroupServiceClient;
 module.exports.MetricServiceClient = MetricServiceClient;
+module.exports.UptimeCheckServiceClient = UptimeCheckServiceClient;

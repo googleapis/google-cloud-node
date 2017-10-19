@@ -368,7 +368,11 @@ describe('GroupServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listGroupMembers = (actualRequest, options, callback) => {
+      client._innerApiCalls.listGroupMembers = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.members);
       };
@@ -407,7 +411,6 @@ describe('GroupServiceClient', () => {
       });
     });
   });
-
 });
 describe('MetricServiceClient', () => {
   describe('listMonitoredResourceDescriptors', () => {
@@ -433,7 +436,11 @@ describe('MetricServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listMonitoredResourceDescriptors = (actualRequest, options, callback) => {
+      client._innerApiCalls.listMonitoredResourceDescriptors = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.resourceDescriptors);
       };
@@ -481,7 +488,10 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
+      var formattedName = client.monitoredResourceDescriptorPath(
+        '[PROJECT]',
+        '[MONITORED_RESOURCE_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
@@ -518,7 +528,10 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
+      var formattedName = client.monitoredResourceDescriptorPath(
+        '[PROJECT]',
+        '[MONITORED_RESOURCE_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
@@ -562,7 +575,11 @@ describe('MetricServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listMetricDescriptors = (actualRequest, options, callback) => {
+      client._innerApiCalls.listMetricDescriptors = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.metricDescriptors);
       };
@@ -610,7 +627,10 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+      var formattedName = client.metricDescriptorPath(
+        '[PROJECT]',
+        '[METRIC_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
@@ -649,7 +669,10 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+      var formattedName = client.metricDescriptorPath(
+        '[PROJECT]',
+        '[METRIC_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
@@ -750,13 +773,18 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+      var formattedName = client.metricDescriptorPath(
+        '[PROJECT]',
+        '[METRIC_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteMetricDescriptor = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteMetricDescriptor = mockSimpleGrpcMethod(
+        request
+      );
 
       client.deleteMetricDescriptor(request, err => {
         assert.ifError(err);
@@ -771,7 +799,10 @@ describe('MetricServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+      var formattedName = client.metricDescriptorPath(
+        '[PROJECT]',
+        '[METRIC_DESCRIPTOR]'
+      );
       var request = {
         name: formattedName,
       };
@@ -820,7 +851,11 @@ describe('MetricServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listTimeSeries = (actualRequest, options, callback) => {
+      client._innerApiCalls.listTimeSeries = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.timeSeries);
       };
@@ -918,7 +953,392 @@ describe('MetricServiceClient', () => {
       });
     });
   });
+});
+describe('UptimeCheckServiceClient', () => {
+  describe('listUptimeCheckConfigs', () => {
+    it('invokes listUptimeCheckConfigs without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var uptimeCheckConfigsElement = {};
+      var uptimeCheckConfigs = [uptimeCheckConfigsElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        uptimeCheckConfigs: uptimeCheckConfigs,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUptimeCheckConfigs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.uptimeCheckConfigs);
+      };
+
+      client.listUptimeCheckConfigs(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.uptimeCheckConfigs);
+        done();
+      });
+    });
+
+    it('invokes listUptimeCheckConfigs with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUptimeCheckConfigs = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listUptimeCheckConfigs(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getUptimeCheckConfig', () => {
+    it('invokes getUptimeCheckConfig without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.uptimeCheckConfigPath(
+        '[PROJECT]',
+        '[UPTIME_CHECK_CONFIG]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getUptimeCheckConfig(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getUptimeCheckConfig with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.uptimeCheckConfigPath(
+        '[PROJECT]',
+        '[UPTIME_CHECK_CONFIG]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getUptimeCheckConfig(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createUptimeCheckConfig', () => {
+    it('invokes createUptimeCheckConfig without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var uptimeCheckConfig = {};
+      var request = {
+        parent: formattedParent,
+        uptimeCheckConfig: uptimeCheckConfig,
+      };
+
+      // Mock response
+      var name = 'name3373707';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createUptimeCheckConfig(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createUptimeCheckConfig with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var uptimeCheckConfig = {};
+      var request = {
+        parent: formattedParent,
+        uptimeCheckConfig: uptimeCheckConfig,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createUptimeCheckConfig(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateUptimeCheckConfig', () => {
+    it('invokes updateUptimeCheckConfig without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'name3373707';
+      var uptimeCheckConfig = {};
+      var request = {
+        name: name,
+        uptimeCheckConfig: uptimeCheckConfig,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateUptimeCheckConfig(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateUptimeCheckConfig with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'name3373707';
+      var uptimeCheckConfig = {};
+      var request = {
+        name: name,
+        uptimeCheckConfig: uptimeCheckConfig,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateUptimeCheckConfig(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteUptimeCheckConfig', () => {
+    it('invokes deleteUptimeCheckConfig without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.uptimeCheckConfigPath(
+        '[PROJECT]',
+        '[UPTIME_CHECK_CONFIG]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteUptimeCheckConfig = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteUptimeCheckConfig(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteUptimeCheckConfig with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.uptimeCheckConfigPath(
+        '[PROJECT]',
+        '[UPTIME_CHECK_CONFIG]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteUptimeCheckConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteUptimeCheckConfig(request, err => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('listUptimeCheckIps', () => {
+    it('invokes listUptimeCheckIps without error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var request = {};
+
+      // Mock response
+      var nextPageToken = '';
+      var uptimeCheckIpsElement = {};
+      var uptimeCheckIps = [uptimeCheckIpsElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        uptimeCheckIps: uptimeCheckIps,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUptimeCheckIps = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.uptimeCheckIps);
+      };
+
+      client.listUptimeCheckIps(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.uptimeCheckIps);
+        done();
+      });
+    });
+
+    it('invokes listUptimeCheckIps with error', done => {
+      var client = new monitoringModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUptimeCheckIps = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listUptimeCheckIps(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

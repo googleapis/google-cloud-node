@@ -16,7 +16,7 @@
 
 describe('MetricServiceSmokeTest', () => {
   if (!process.env.SMOKE_TEST_PROJECT) {
-    throw new Error("Usage: SMOKE_TEST_PROJECT=<project_id> node #{$0}");
+    throw new Error('Usage: SMOKE_TEST_PROJECT=<project_id> node #{$0}');
   }
   var projectId = process.env.SMOKE_TEST_PROJECT;
 
@@ -30,7 +30,8 @@ describe('MetricServiceSmokeTest', () => {
     // Iterate over all elements.
     var formattedName = client.projectPath(projectId);
 
-    client.listMonitoredResourceDescriptors({name: formattedName})
+    client
+      .listMonitoredResourceDescriptors({name: formattedName})
       .then(responses => {
         var resources = responses[0];
         for (let i = 0; i < resources.length; i += 1) {
@@ -51,7 +52,6 @@ describe('MetricServiceSmokeTest', () => {
     // Or obtain the paged response.
     var formattedName = client.projectPath(projectId);
 
-
     var options = {autoPaginate: false};
     var callback = responses => {
       // The actual resources in a response.
@@ -65,10 +65,13 @@ describe('MetricServiceSmokeTest', () => {
       }
       if (nextRequest) {
         // Fetch the next page.
-        return client.listMonitoredResourceDescriptors(nextRequest, options).then(callback);
+        return client
+          .listMonitoredResourceDescriptors(nextRequest, options)
+          .then(callback);
       }
-    }
-    client.listMonitoredResourceDescriptors({name: formattedName}, options)
+    };
+    client
+      .listMonitoredResourceDescriptors({name: formattedName}, options)
       .then(callback)
       .then(done)
       .catch(done);
@@ -82,7 +85,8 @@ describe('MetricServiceSmokeTest', () => {
     });
 
     var formattedName = client.projectPath(projectId);
-    client.listMonitoredResourceDescriptorsStream({name: formattedName})
+    client
+      .listMonitoredResourceDescriptorsStream({name: formattedName})
       .on('data', element => {
         console.log(element);
       })

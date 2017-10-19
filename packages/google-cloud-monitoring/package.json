@@ -1,9 +1,13 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/monitoring",
-  "version": "0.3.0",
-  "author": "Google Inc",
   "description": "Stackdriver Monitoring API client for Node.js",
+  "version": "0.3.0",
+  "license": "Apache-2.0",
+  "author": "Google Inc",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-monitoring",
   "main": "src/index.js",
   "files": [
     "src",
@@ -23,6 +27,32 @@
     "monitoring",
     "Stackdriver Monitoring API"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Bill Prin <waprin@google.com>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Ernest Landrito <landrito@google.com>",
+    "Evawere Ogbe <eoogbe@gmail.com>",
+    "Jason Dobry <jdobry@google.com>",
+    "Jun Mukai <jun.mukai@gmail.com>",
+    "Luke Sneeringer <lukesneeringer@google.com>",
+    "Song Wang <songwang@google.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Takashi Matsuo <tmatsuo@google.com>",
+    "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha system-test/*.js --timeout 5000",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "test": "repo-tools test run --cmd npm -- run cover"
+  },
   "dependencies": {
     "extend": "^3.0",
     "google-gax": "^0.14.2",
@@ -30,15 +60,19 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
-  },
-  "scripts": {
-    "publish-module": "node ../../scripts/publish.js monitoring",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "test": "mocha test/*.js"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=4.0.0"
+    "@google-cloud/nodejs-repo-tools": "^2.0.10",
+    "async": "^2.5.0",
+    "codecov": "^2.3.1",
+    "eslint": "^4.9.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "ink-docstrap": "^1.3.0",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "power-assert": "^1.4.4",
+    "prettier": "^1.7.4"
   }
 }

@@ -8,33 +8,22 @@
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Metrics](#metrics)
   * [Uptime Config](#uptime-config)
-* [Running the tests](#running-the-tests)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With **npm**:
-
-        npm install
-
-    With **yarn**:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisites
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
 ### Metrics
 
-View the [documentation][metrics_0_docs] or the [source code][metrics_0_code].
+View the [source code][metrics_0_code].
 
 __Usage:__ `node metrics.js --help`
 
@@ -60,7 +49,7 @@ Commands:
 Options:
   --version        Show version number                                                                         [boolean]
   --help           Show help                                                                                   [boolean]
-  --projectId, -p                                                                                               [string]
+  --projectId, -p                                                              [string] [default: "nodejs-docs-samples"]
 
 Examples:
   node metrics.js create
@@ -83,7 +72,7 @@ For more information, see https://cloud.google.com/monitoring/docs
 
 ### Uptime Config
 
-View the [documentation][uptime_1_docs] or the [source code][uptime_1_code].
+View the [source code][uptime_1_code].
 
 __Usage:__ `node uptime.js --help`
 
@@ -98,11 +87,13 @@ Commands:
 Options:
   --version        Show version number                                                                         [boolean]
   --help           Show help                                                                                   [boolean]
-  --projectId, -p                                                                                               [string]
+  --projectId, -p                                                              [string] [default: "nodejs-docs-samples"]
 
 Examples:
   node uptime.js create my-instance                             Create an uptime check for a "my-instance" GCE instance.
   node uptime.js list                                           List all uptime check configs.
+  node uptime.js list "resource.type = gce_instance AND         List all uptime check configs for a specific GCE
+  resource.label.instance_id = mongodb"                         instance.
   node uptime.js list-ips
   node uptime.js get My-Uptime-Check
   node uptime.js delete My-Uptime-Check
@@ -112,18 +103,3 @@ For more information, see https://cloud.google.com/monitoring/uptime-checks/
 
 [uptime_1_docs]: https://cloud.google.com/monitoring/docs
 [uptime_1_code]: uptime.js
-
-
-## Running the tests
-
-1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
-
-1.  Run the tests:
-
-    With **npm**:
-
-        npm test
-
-    With **yarn**:
-
-        yarn test

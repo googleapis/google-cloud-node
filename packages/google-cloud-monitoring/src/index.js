@@ -16,13 +16,16 @@
  * @namespace google
  */
 /**
- * @namespace google.cloud
+ * @namespace google.api
  */
 /**
- * @namespace google.cloud.monitoring
+ * @namespace google.protobuf
  */
 /**
- * @namespace google.cloud.monitoring.v3
+ * @namespace google.monitoring
+ */
+/**
+ * @namespace google.monitoring.v3
  */
 
 'use strict';
@@ -39,12 +42,16 @@ const gapic = Object.freeze({
  *   {@link v3.GroupServiceClient}
  * - `MetricServiceClient` - Reference to
  *   {@link v3.MetricServiceClient}
+ * - `UptimeCheckServiceClient` - Reference to
+ *   {@link v3.UptimeCheckServiceClient}
  * - `v3` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `GroupServiceClient` - Reference to
  *       {@link v3.GroupServiceClient}
  *     - `MetricServiceClient` - Reference to
  *       {@link v3.MetricServiceClient}
+ *     - `UptimeCheckServiceClient` - Reference to
+ *       {@link v3.UptimeCheckServiceClient}
  *
  * @module {object} @google-cloud/monitoring
  * @alias nodejs-monitoring
@@ -59,11 +66,11 @@ const gapic = Object.freeze({
  * @example <caption>Create a client that uses
  *   <a href="https://goo.gl/64dyYX">Application Default Credentials
  *   (ADC)</a>:</caption>
- * let client = new monitoring.GroupServiceClient();
+ * const client = new monitoring.GroupServiceClient();
  *
  * @example <caption>Create a client with
  *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * let client = new monitoring.GroupServiceClient({
+ * const client = new monitoring.GroupServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
@@ -75,6 +82,8 @@ const gapic = Object.freeze({
  *   Reference to {@link v3.GroupServiceClient}
  * @property {constructor} MetricServiceClient
  *   Reference to {@link v3.MetricServiceClient}
+ * @property {constructor} UptimeCheckServiceClient
+ *   Reference to {@link v3.UptimeCheckServiceClient}
  */
 module.exports = gapic.v3;
 
@@ -84,6 +93,8 @@ module.exports = gapic.v3;
  *   Reference to {@link v3.GroupServiceClient}
  * @property {constructor} MetricServiceClient
  *   Reference to {@link v3.MetricServiceClient}
+ * @property {constructor} UptimeCheckServiceClient
+ *   Reference to {@link v3.UptimeCheckServiceClient}
  */
 module.exports.v3 = gapic.v3;
 

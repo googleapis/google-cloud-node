@@ -1,0 +1,23 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "monitoring",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/monitoring/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "file": "metrics.js",
+      "docs_link": "https://cloud.google.com/monitoring/docs",
+      "usage": "node metrics.js --help"
+    },
+    {
+      "id": "uptime",
+      "name": "Uptime Config",
+      "file": "uptime.js",
+      "docs_link": "https://cloud.google.com/monitoring/docs",
+      "usage": "node uptime.js --help"
+    }
+  ]
+}
