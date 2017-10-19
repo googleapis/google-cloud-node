@@ -1,34 +1,28 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * Type of information detected by the API.
  *
  * @property {string} name
- *   Name of the information type. For built-in info types, this is provided by
- *   the API call ListInfoTypes. For user-defined info types, this is
- *   provided by the user. All user-defined info types must have unique names,
- *   and cannot conflict with built-in info type names.
+ *   Name of the information type.
  *
- * @class
+ * @typedef InfoType
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.InfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var InfoType = {
@@ -39,9 +33,10 @@ var InfoType = {
  * General identifier of a data field in a storage service.
  *
  * @property {string} columnName
- *   Column name describing the field.
+ *   Name describing the field.
  *
- * @class
+ * @typedef FieldId
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.FieldId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var FieldId = {
@@ -62,7 +57,8 @@ var FieldId = {
  * @property {string} namespaceId
  *   If not empty, the ID of the namespace to which the entities belong.
  *
- * @class
+ * @typedef PartitionId
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.PartitionId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var PartitionId = {
@@ -75,7 +71,8 @@ var PartitionId = {
  * @property {string} name
  *   The name of the kind.
  *
- * @class
+ * @typedef KindExpression
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.KindExpression definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var KindExpression = {
@@ -89,7 +86,8 @@ var KindExpression = {
  *   The name of the property.
  *   If name includes "."s, it may be interpreted as a property name path.
  *
- * @class
+ * @typedef PropertyReference
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.PropertyReference definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var PropertyReference = {
@@ -102,9 +100,10 @@ var PropertyReference = {
  * @property {Object} property
  *   The property to project.
  *
- *   This object should have the same structure as [PropertyReference]{@link PropertyReference}
+ *   This object should have the same structure as [PropertyReference]{@link google.privacy.dlp.v2beta1.PropertyReference}
  *
- * @class
+ * @typedef Projection
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.Projection definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var Projection = {
@@ -118,20 +117,21 @@ var Projection = {
  *   A partition ID identifies a grouping of entities. The grouping is always
  *   by project and namespace, however the namespace ID may be empty.
  *
- *   This object should have the same structure as [PartitionId]{@link PartitionId}
+ *   This object should have the same structure as [PartitionId]{@link google.privacy.dlp.v2beta1.PartitionId}
  *
  * @property {Object} kind
  *   The kind to process.
  *
- *   This object should have the same structure as [KindExpression]{@link KindExpression}
+ *   This object should have the same structure as [KindExpression]{@link google.privacy.dlp.v2beta1.KindExpression}
  *
  * @property {Object[]} projection
  *   Properties to scan. If none are specified, all properties will be scanned
  *   by default.
  *
- *   This object should have the same structure as [Projection]{@link Projection}
+ *   This object should have the same structure as [Projection]{@link google.privacy.dlp.v2beta1.Projection}
  *
- * @class
+ * @typedef DatastoreOptions
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.DatastoreOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var DatastoreOptions = {
@@ -143,9 +143,10 @@ var DatastoreOptions = {
  * a Google Cloud Storage bucket.
  *
  * @property {Object} fileSet
- *   This object should have the same structure as [FileSet]{@link FileSet}
+ *   This object should have the same structure as [FileSet]{@link google.privacy.dlp.v2beta1.FileSet}
  *
- * @class
+ * @typedef CloudStorageOptions
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.CloudStorageOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var CloudStorageOptions = {
@@ -158,7 +159,8 @@ var CloudStorageOptions = {
    *   The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
    *   path is allowed.
    *
-   * @class
+   * @typedef FileSet
+   * @memberof google.privacy.dlp.v2beta1
    * @see [google.privacy.dlp.v2beta1.CloudStorageOptions.FileSet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
    */
   FileSet: {
@@ -172,10 +174,33 @@ var CloudStorageOptions = {
  * @property {string} path
  *   The url, in the format of `gs://bucket/<path>`.
  *
- * @class
+ * @typedef CloudStoragePath
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.CloudStoragePath definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var CloudStoragePath = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Options defining BigQuery table and row identifiers.
+ *
+ * @property {Object} tableReference
+ *   Complete BigQuery table reference.
+ *
+ *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2beta1.BigQueryTable}
+ *
+ * @property {Object[]} identifyingFields
+ *   References to fields uniquely identifying rows within the table.
+ *   Nested fields in the format, like `person.birthdate.year`, are allowed.
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2beta1.FieldId}
+ *
+ * @typedef BigQueryOptions
+ * @memberof google.privacy.dlp.v2beta1
+ * @see [google.privacy.dlp.v2beta1.BigQueryOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+ */
+var BigQueryOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -185,14 +210,20 @@ var CloudStoragePath = {
  * @property {Object} datastoreOptions
  *   Google Cloud Datastore options specification.
  *
- *   This object should have the same structure as [DatastoreOptions]{@link DatastoreOptions}
+ *   This object should have the same structure as [DatastoreOptions]{@link google.privacy.dlp.v2beta1.DatastoreOptions}
  *
  * @property {Object} cloudStorageOptions
  *   Google Cloud Storage options specification.
  *
- *   This object should have the same structure as [CloudStorageOptions]{@link CloudStorageOptions}
+ *   This object should have the same structure as [CloudStorageOptions]{@link google.privacy.dlp.v2beta1.CloudStorageOptions}
  *
- * @class
+ * @property {Object} bigQueryOptions
+ *   BigQuery options specification.
+ *
+ *   This object should have the same structure as [BigQueryOptions]{@link google.privacy.dlp.v2beta1.BigQueryOptions}
+ *
+ * @typedef StorageConfig
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.StorageConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var StorageConfig = {
@@ -208,7 +239,8 @@ var StorageConfig = {
  * @property {number} startOffset
  *   Byte offset of the referenced data in the file.
  *
- * @class
+ * @typedef CloudStorageKey
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.CloudStorageKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var CloudStorageKey = {
@@ -221,9 +253,10 @@ var CloudStorageKey = {
  * @property {Object} entityKey
  *   Datastore entity key.
  *
- *   This object should have the same structure as [Key]{@link Key}
+ *   This object should have the same structure as [Key]{@link google.privacy.dlp.v2beta1.Key}
  *
- * @class
+ * @typedef DatastoreKey
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.DatastoreKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var DatastoreKey = {
@@ -241,7 +274,7 @@ var DatastoreKey = {
  *   ID and namespace ID.
  *   Queries are scoped to a single partition.
  *
- *   This object should have the same structure as [PartitionId]{@link PartitionId}
+ *   This object should have the same structure as [PartitionId]{@link google.privacy.dlp.v2beta1.PartitionId}
  *
  * @property {Object[]} path
  *   The entity path.
@@ -254,9 +287,10 @@ var DatastoreKey = {
  *
  *   A path can never be empty, and a path can have at most 100 elements.
  *
- *   This object should have the same structure as [PathElement]{@link PathElement}
+ *   This object should have the same structure as [PathElement]{@link google.privacy.dlp.v2beta1.PathElement}
  *
- * @class
+ * @typedef Key
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.Key definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var Key = {
@@ -285,7 +319,8 @@ var Key = {
    *   A name must not be more than 1500 bytes when UTF-8 encoded.
    *   Cannot be `""`.
    *
-   * @class
+   * @typedef PathElement
+   * @memberof google.privacy.dlp.v2beta1
    * @see [google.privacy.dlp.v2beta1.Key.PathElement definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
    */
   PathElement: {
@@ -297,14 +332,60 @@ var Key = {
  * Message for a unique key indicating a record that contains a finding.
  *
  * @property {Object} cloudStorageKey
- *   This object should have the same structure as [CloudStorageKey]{@link CloudStorageKey}
+ *   This object should have the same structure as [CloudStorageKey]{@link google.privacy.dlp.v2beta1.CloudStorageKey}
  *
  * @property {Object} datastoreKey
- *   This object should have the same structure as [DatastoreKey]{@link DatastoreKey}
+ *   This object should have the same structure as [DatastoreKey]{@link google.privacy.dlp.v2beta1.DatastoreKey}
  *
- * @class
+ * @typedef RecordKey
+ * @memberof google.privacy.dlp.v2beta1
  * @see [google.privacy.dlp.v2beta1.RecordKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
  */
 var RecordKey = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Message defining the location of a BigQuery table. A table is uniquely
+ * identified  by its project_id, dataset_id, and table_name. Within a query
+ * a table is often referenced with a string in the format of:
+ * `<project_id>:<dataset_id>.<table_id>` or
+ * `<project_id>.<dataset_id>.<table_id>`.
+ *
+ * @property {string} projectId
+ *   The Google Cloud Platform project ID of the project containing the table.
+ *   If omitted, project ID is inferred from the API call.
+ *
+ * @property {string} datasetId
+ *   Dataset ID of the table.
+ *
+ * @property {string} tableId
+ *   Name of the table.
+ *
+ * @typedef BigQueryTable
+ * @memberof google.privacy.dlp.v2beta1
+ * @see [google.privacy.dlp.v2beta1.BigQueryTable definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+ */
+var BigQueryTable = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * An entity in a dataset is a field or set of fields that correspond to a
+ * single person. For example, in medical records the `EntityId` might be
+ * a patient identifier, or for financial records it might be an account
+ * identifier. This message is used when generalizations or analysis must be
+ * consistent across multiple rows pertaining to the same entity.
+ *
+ * @property {Object} field
+ *   Composite key indicating which field contains the entity identifier.
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2beta1.FieldId}
+ *
+ * @typedef EntityId
+ * @memberof google.privacy.dlp.v2beta1
+ * @see [google.privacy.dlp.v2beta1.EntityId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+ */
+var EntityId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

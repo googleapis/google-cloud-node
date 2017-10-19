@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * A Timestamp represents a point in time independent of any time zone
@@ -31,6 +27,8 @@
  * By restricting to that range, we ensure that we can convert to
  * and from  RFC 3339 date strings.
  * See [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).
+ *
+ * # Examples
  *
  * Example 1: Compute Timestamp from POSIX `time()`.
  *
@@ -72,7 +70,29 @@
  *     timestamp = Timestamp()
  *     timestamp.GetCurrentTime()
  *
- * @external "google.protobuf.Timestamp"
+ * # JSON Mapping
+ *
+ * In JSON format, the Timestamp type is encoded as a string in the
+ * [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+ * format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+ * where {year} is always expressed using four digits while {month}, {day},
+ * {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+ * seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+ * are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+ * is required, though only UTC (as indicated by "Z") is presently supported.
+ *
+ * For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+ * 01:30 UTC on January 15, 2017.
+ *
+ * In JavaScript, one can convert a Date object to this format using the
+ * standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]
+ * method. In Python, a standard `datetime.datetime` object can be converted
+ * to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)
+ * with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one
+ * can use the Joda Time's [`ISODateTimeFormat.dateTime()`](https://cloud.google.com
+ * http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime())
+ * to obtain a formatter capable of generating timestamps in this format.
+ *
  * @property {number} seconds
  *   Represents seconds of UTC time since Unix epoch
  *   1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -84,5 +104,10 @@
  *   that count forward in time. Must be from 0 to 999,999,999
  *   inclusive.
  *
+ * @typedef Timestamp
+ * @memberof google.protobuf
  * @see [google.protobuf.Timestamp definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/timestamp.proto}
  */
+var Timestamp = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
