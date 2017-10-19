@@ -1,8 +1,8 @@
 {
   "targets": [
     {
-      "target_name": "cpu_profiler",
-      "sources": [ "bindings/cpu-profiler.cc" ],
+      "target_name": "time_profiler",
+      "sources": [ "bindings/time-profiler.cc" ],
       "include_dirs": [ "<!(node -e \"require('nan')\")" ]
     },
     {
