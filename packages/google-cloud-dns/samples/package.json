@@ -14,7 +14,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/dns": "0.6.2",
+    "@google-cloud/dns": "0.7.0",
     "yargs": "9.0.1"
   },
   "devDependencies": {
