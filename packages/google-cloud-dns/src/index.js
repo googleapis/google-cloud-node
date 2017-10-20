@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module dns
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -26,11 +22,32 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:dns/zone}
- * @private
- */
 var Zone = require('./zone.js');
+
+/**
+ * @typedef {object} ClientConfig
+ * @property {string} [projectId] The project ID from the Google Developer's
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+ *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
+ *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
+ *     downloaded from the Google Developers Console. If you provide a path to a
+ *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
+ *     .p12 require you to specify the `email` option as well.
+ * @property {string} [email] Account email address. Required when using a .pem
+ *     or .p12 keyFilename.
+ * @property {object} [credentials] Credentials object.
+ * @property {string} [credentials.client_email]
+ * @property {string} [credentials.private_key]
+ * @property {boolean} [autoRetry=true] Automatically retry requests if the
+ *     response is related to rate limits or certain intermittent server errors.
+ *     We will exponentially backoff subsequent requests by default.
+ * @property {number} [maxRetries=3] Maximum number of automatic retries
+ *     attempted before returning the error.
+ * @property {Constructor} [promise] Custom promise module to use instead of
+ *     native Promises.
+ */
 
 /**
  * [Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
@@ -39,12 +56,27 @@ var Zone = require('./zone.js');
  * programmable, authoritative DNS service can be used to easily publish and
  * manage DNS records using the same infrastructure relied upon by Google.
  *
- * @constructor
- * @alias module:dns
+ * @class
  *
- * @resource [What is Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
+ * @see [What is Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
  *
- * @param {object} options - [Configuration object](#/docs).
+ * @param {ClientConfig} [options] Configuration options.
+ *
+ * @example <caption>Import the client library</caption>
+ * const DNS = require('@google-cloud/dns');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const dns = new DNS();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const dns = new DNS({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:dns_quickstart
+ * Full quickstart example:
  */
 function DNS(options) {
   if (!(this instanceof DNS)) {
@@ -56,9 +88,9 @@ function DNS(options) {
     baseUrl: 'https://www.googleapis.com/dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ],
-    packageJson: require('../package.json')
+    packageJson: require('../package.json'),
   };
 
   common.Service.call(this, config, options);
@@ -67,21 +99,37 @@ function DNS(options) {
 util.inherits(DNS, common.Service);
 
 /**
+ * Config to set for the zone.
+ *
+ * @typedef {object} CreateZoneRequest
+ * @property {string} dnsName DNS name for the zone. E.g. "example.com."
+ * @property {string} [description] Description text for the zone.
+ */
+/**
+ * @typedef {array} CreateZoneResponse
+ * @property {Zone} 0 The new {@link Zone}.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback CreateZoneCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Zone} zone The new {@link Zone}.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Create a managed zone.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
  * @throws {error} If a zone name is not provided.
  * @throws {error} If a zone dnsName is not provided.
  *
- * @param {string} name - Unique name for the zone. E.g. "my-zone"
- * @param {object} config - Configuration object.
- * @param {string} config.dnsName - DNS name for the zone. E.g. "example.com."
- * @param {string=} config.description - Description text for the zone.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/zone} callback.zone - A new {module:dns/zone} object.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {string} name Name of the zone to create, e.g. "my-zone".
+ * @param {CreateZoneRequest} [config] Config to set for the zone.
+ * @param {CreateZoneCallback} [callback] Callback function.
+ * @returns {Promise<CreateZoneResponse>}
+ * @throws {Error} If a name is not provided.
+ * @see Zone#create
  *
  * @example
  * var config = {
@@ -119,39 +167,57 @@ DNS.prototype.createZone = function(name, config, callback) {
   // Required by the API.
   config.description = config.description || '';
 
-  this.request({
-    method: 'POST',
-    uri: '/managedZones',
-    json: config
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/managedZones',
+      json: config,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var zone = self.zone(resp.name);
+      zone.metadata = resp;
+
+      callback(null, zone, resp);
     }
-
-    var zone = self.zone(resp.name);
-    zone.metadata = resp;
-
-    callback(null, zone, resp);
-  });
+  );
 };
 
 /**
+ * Query object for listing zones.
+ *
+ * @typedef {object} GetZonesRequest
+ * @property {boolean} [autoPaginate=true] Have pagination handled
+ *     automatically.
+ * @property {number} [maxApiCalls] Maximum number of API calls to make.
+ * @property {number} [maxResults] Maximum number of items plus prefixes to
+ *     return.
+ * @property {string} [pageToken] A previously-returned page token
+ *     representing part of the larger set of results to view.
+ */
+/**
+ * @typedef {array} GetZonesResponse
+ * @property {Zone[]} 0 Array of {@link Zone} instances.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetZonesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Zone[]} zones Array of {@link Zone} instances.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Gets a list of managed zones for the project.
  *
- * @resource [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
+ * @see [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
  *
- * @param {object=} query - Query object.
- * @param {boolean} query.autoPaginate - Have pagination handled automatically.
- *     Default: true.
- * @param {number} query.maxApiCalls - Maximum number of API calls to make.
- * @param {number} query.maxResults - Maximum number of results to return.
- * @param {string} query.pageToken - Page token.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/zone[]} callback.zones - An array of {module:dns/zone}
- *     objects.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {GetZonesRequest} [query] Query object for listing zones.
+ * @param {GetZonesCallback} [callback] Callback function.
+ * @returns {Promise<GetZonesResponse>}
  *
  * @example
  * dns.getZones(function(err, zones, apiResponse) {});
@@ -171,40 +237,43 @@ DNS.prototype.getZones = function(query, callback) {
     query = {};
   }
 
-  this.request({
-    uri: '/managedZones',
-    qs: query
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/managedZones',
+      qs: query,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var zones = arrify(resp.managedZones).map(function(zone) {
-      var zoneInstance = self.zone(zone.name);
-      zoneInstance.metadata = zone;
-      return zoneInstance;
-    });
-
-    var nextQuery = null;
-
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, query, {
-        pageToken: resp.nextPageToken
+      var zones = arrify(resp.managedZones).map(function(zone) {
+        var zoneInstance = self.zone(zone.name);
+        zoneInstance.metadata = zone;
+        return zoneInstance;
       });
-    }
 
-    callback(null, zones, nextQuery, resp);
-  });
+      var nextQuery = null;
+
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, query, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      callback(null, zones, nextQuery, resp);
+    }
+  );
 };
 
 /**
- * Gets a list of {module:dns/zone} objects for the project as a readable object
- * stream.
+ * Get {@link Zone} objects for all of the zones in your project as
+ * a readable object stream.
  *
- * @param {object=} query - Configuration object. See
- *     {module:dns#getZones} for a complete list of options.
- * @return {stream}
+ * @method DNS#getZonesStream
+ * @param {GetZonesRequest} [query] Query object for listing zones.
+ * @returns {ReadableStream} A readable stream that emits {@link Zone} instances.
  *
  * @example
  * dns.getZonesStream()
@@ -228,12 +297,13 @@ DNS.prototype.getZones = function(query, callback) {
 DNS.prototype.getZonesStream = common.paginator.streamify('getZones');
 
 /**
- * Create a zone object representing a managed zone.
+ * Get a reference to a Zone.
+ *
+ * @param {string} name The unique name of the zone.
+ * @returns {Zone}
+ * @see Zone
  *
  * @throws {error} If a zone name is not provided.
- *
- * @param  {string} name - The unique name of the zone.
- * @return {module:dns/zone}
  *
  * @example
  * var zone = dns.zone('my-zone');
@@ -258,9 +328,45 @@ common.paginator.extend(DNS, 'getZones');
  * that a callback is omitted.
  */
 common.util.promisifyAll(DNS, {
-  exclude: ['zone']
+  exclude: ['zone'],
 });
 
+/**
+ * {@link Zone} class.
+ *
+ * @name DNS.Zone
+ * @see Zone
+ * @type {Constructor}
+ */
 DNS.Zone = Zone;
 
+/**
+ * The default export of the `@google-cloud/dns` package is the {@link DNS}
+ * class.
+ *
+ * See {@link DNS} and {@link ClientConfig} for client methods and
+ * configuration options.
+ *
+ * @module {DNS} @google-cloud/dns
+ * @alias nodejs-dns
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/dns
+ *
+ * @example <caption>Import the client library</caption>
+ * const DNS = require('@google-cloud/dns');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const dns = new DNS();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const dns = new DNS({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:dns_quickstart
+ * Full quickstart example:
+ */
 module.exports = DNS;

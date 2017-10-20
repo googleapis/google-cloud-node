@@ -33,14 +33,14 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['change', 'record']);
-  }
+  },
 });
 
 var parseOverride;
 var fakeDnsZonefile = {
   parse: function() {
     return (parseOverride || util.noop).apply(null, arguments);
-  }
+  },
 };
 
 var writeFileOverride;
@@ -51,7 +51,7 @@ var fakeFs = {
   },
   writeFile: function() {
     return (writeFileOverride || util.noop).apply(null, arguments);
-  }
+  },
 };
 
 function FakeChange() {
@@ -88,7 +88,7 @@ var fakePaginator = {
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 describe('Zone', function() {
@@ -96,7 +96,7 @@ describe('Zone', function() {
   var zone;
 
   var DNS = {
-    createZone: util.noop
+    createZone: util.noop,
   };
   var ZONE_NAME = 'zone-name';
 
@@ -107,10 +107,10 @@ describe('Zone', function() {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
-        util: fakeUtil
+        util: fakeUtil,
       },
       './change.js': FakeChange,
-      './record.js': FakeRecord
+      './record.js': FakeRecord,
     });
   });
 
@@ -145,8 +145,8 @@ describe('Zone', function() {
           bind: function(context) {
             assert.strictEqual(context, dnsInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var zone = new Zone(dnsInstance, ZONE_NAME);
@@ -161,7 +161,7 @@ describe('Zone', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -200,8 +200,16 @@ describe('Zone', function() {
 
     it('should parse and rename add to additions', function(done) {
       var recordsToAdd = [
-        { toJSON: function() { return 'a'; } },
-        { toJSON: function() { return 'a'; } }
+        {
+          toJSON: function() {
+            return 'a';
+          },
+        },
+        {
+          toJSON: function() {
+            return 'a';
+          },
+        },
       ];
       var expectedAdditions = ['a', 'a'];
 
@@ -211,13 +219,21 @@ describe('Zone', function() {
         done();
       };
 
-      zone.createChange({ add: recordsToAdd }, assert.ifError);
+      zone.createChange({add: recordsToAdd}, assert.ifError);
     });
 
     it('should parse and rename delete to deletions', function(done) {
       var recordsToDelete = [
-        { toJSON: function() { return 'a'; } },
-        { toJSON: function() { return 'a'; } }
+        {
+          toJSON: function() {
+            return 'a';
+          },
+        },
+        {
+          toJSON: function() {
+            return 'a';
+          },
+        },
       ];
       var expectedDeletions = ['a', 'a'];
 
@@ -227,7 +243,7 @@ describe('Zone', function() {
         done();
       };
 
-      zone.createChange({ delete: recordsToDelete }, assert.ifError);
+      zone.createChange({delete: recordsToDelete}, assert.ifError);
     });
 
     it('should make correct API request', function(done) {
@@ -238,12 +254,12 @@ describe('Zone', function() {
         done();
       };
 
-      zone.createChange({ add: [] }, assert.ifError);
+      zone.createChange({add: []}, assert.ifError);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -252,7 +268,7 @@ describe('Zone', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        zone.createChange({ add: [] }, function(err, change, apiResponse_) {
+        zone.createChange({add: []}, function(err, change, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
@@ -261,7 +277,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { id: 1, a: 'b', c: 'd' };
+      var apiResponse = {id: 1, a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -277,7 +293,7 @@ describe('Zone', function() {
           return change;
         };
 
-        zone.createChange({ add: [] }, function(err, change_, apiResponse_) {
+        zone.createChange({add: []}, function(err, change_, apiResponse_) {
           assert.ifError(err);
 
           assert.strictEqual(change_, change);
@@ -298,7 +314,7 @@ describe('Zone', function() {
           done();
         };
 
-        zone.delete({ force: true }, assert.ifError);
+        zone.delete({force: true}, assert.ifError);
       });
 
       it('should try to delete again after emptying', function(done) {
@@ -310,7 +326,7 @@ describe('Zone', function() {
           callback();
         };
 
-        zone.delete({ force: true }, assert.ifError);
+        zone.delete({force: true}, assert.ifError);
       });
     });
 
@@ -337,7 +353,7 @@ describe('Zone', function() {
     });
 
     it('should create a change if record objects given', function(done) {
-      var recordsToDelete = { a: 'b', c: 'd' };
+      var recordsToDelete = {a: 'b', c: 'd'};
 
       zone.createChange = function(options, callback) {
         assert.deepEqual(options.delete, [recordsToDelete]);
@@ -376,17 +392,17 @@ describe('Zone', function() {
 
     describe('success', function() {
       var records = [
-        { type: 'A' },
-        { type: 'AAAA' },
-        { type: 'CNAME' },
-        { type: 'MX' },
-        { type: 'NAPTR' },
-        { type: 'NS' },
-        { type: 'PTR' },
-        { type: 'SOA' },
-        { type: 'SPF' },
-        { type: 'SRV' },
-        { type: 'TXT' }
+        {type: 'A'},
+        {type: 'AAAA'},
+        {type: 'CNAME'},
+        {type: 'MX'},
+        {type: 'NAPTR'},
+        {type: 'NS'},
+        {type: 'PTR'},
+        {type: 'SOA'},
+        {type: 'SPF'},
+        {type: 'SRV'},
+        {type: 'TXT'},
       ];
 
       var expectedRecordsToDelete = records.filter(function(record) {
@@ -422,10 +438,26 @@ describe('Zone', function() {
     var path = './zonefile';
 
     var records = [
-      { toString: function() { return 'a'; } },
-      { toString: function() { return 'a'; } },
-      { toString: function() { return 'a'; } },
-      { toString: function() { return 'a'; } },
+      {
+        toString: function() {
+          return 'a';
+        },
+      },
+      {
+        toString: function() {
+          return 'a';
+        },
+      },
+      {
+        toString: function() {
+          return 'a';
+        },
+      },
+      {
+        toString: function() {
+          return 'a';
+        },
+      },
     ];
 
     var expectedZonefileContents = 'a\na\na\na';
@@ -521,7 +553,7 @@ describe('Zone', function() {
     });
 
     it('should accept a sort', function(done) {
-      var query = { sort: 'desc' };
+      var query = {sort: 'desc'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.sortOrder, 'descending');
@@ -534,7 +566,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/changes');
@@ -548,7 +580,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -567,7 +599,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        changes: [{ id: 1 }]
+        changes: [{id: 1}],
       };
 
       beforeEach(function() {
@@ -579,10 +611,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -623,7 +655,7 @@ describe('Zone', function() {
   describe('getRecords', function() {
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -649,7 +681,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        rrsets: [{ type: 'NS' }]
+        rrsets: [{type: 'NS'}],
       };
 
       beforeEach(function() {
@@ -661,9 +693,9 @@ describe('Zone', function() {
       it('should execute callback with nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
-        var expectedNextQuery = { pageToken: nextPageToken };
+        var expectedNextQuery = {pageToken: nextPageToken};
 
         zone.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -772,7 +804,7 @@ describe('Zone', function() {
     describe('success', function() {
       var recordType = 'ns';
       var parsedZonefile = {};
-      parsedZonefile[recordType] = { a: 'b', c: 'd' };
+      parsedZonefile[recordType] = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         parseOverride = function() {
@@ -808,7 +840,7 @@ describe('Zone', function() {
   describe('record', function() {
     it('should return a Record object', function() {
       var type = 'a';
-      var metadata = { a: 'b', c: 'd' };
+      var metadata = {a: 'b', c: 'd'};
 
       var record = zone.record(type, metadata);
 
@@ -852,15 +884,15 @@ describe('Zone', function() {
 
     describe('success', function() {
       var recordsToCreate = [
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' }
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
       ];
 
       var recordsToDelete = [
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' }
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
       ];
 
       beforeEach(function() {
@@ -913,9 +945,9 @@ describe('Zone', function() {
 
     describe('success', function() {
       var recordsToDelete = [
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' },
-        { a: 'b', c: 'd' }
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
+        {a: 'b', c: 'd'},
       ];
 
       beforeEach(function() {

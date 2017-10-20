@@ -4,40 +4,25 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
-  },
+  "repository": "googleapis/nodejs-dns",
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=4.0.0"
   },
   "scripts": {
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 1m --verbose system-test/*.test.js"
+    "ava": "ava -T 20s --verbose test/*.test.js system-test/*.test.js",
+    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js system-test/*.test.js && nyc report",
+    "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
     "@google-cloud/dns": "0.6.2",
-    "yargs": "8.0.2"
+    "yargs": "9.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.0.10",
+    "ava": "0.22.0",
+    "nyc": "11.2.1",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "product": "dns",
-    "samples": [
-      {
-        "id": "zones",
-        "name": "Zones",
-        "file": "zones.js",
-        "docs_link": "https://cloud.google.com/dns/docs",
-        "usage": "node zones.js --help"
-      }
-    ]
+    "sinon": "4.0.1",
+    "uuid": "3.1.0"
   }
 }

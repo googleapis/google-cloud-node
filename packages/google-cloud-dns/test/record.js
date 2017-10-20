@@ -30,7 +30,7 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['toJSON', 'toString']);
-  }
+  },
 });
 
 describe('Record', function() {
@@ -38,20 +38,20 @@ describe('Record', function() {
   var record;
 
   var ZONE = {
-    deleteRecords: util.noop
+    deleteRecords: util.noop,
   };
   var TYPE = 'A';
   var METADATA = {
     name: 'name',
     data: [],
-    ttl: 86400
+    ttl: 86400,
   };
 
   before(function() {
     Record = proxyquire('../src/record.js', {
       '@google-cloud/common': {
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -89,7 +89,7 @@ describe('Record', function() {
       var originalRrdatas = [];
 
       var recordThatHadRrdatas = new Record(ZONE, TYPE, {
-        rrdatas: originalRrdatas
+        rrdatas: originalRrdatas,
       });
 
       assert.strictEqual(recordThatHadRrdatas.rrdatas, undefined);
@@ -102,7 +102,7 @@ describe('Record', function() {
       var aRecord = {
         ip: '0.0.0.0',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = aRecord.ip;
@@ -121,7 +121,7 @@ describe('Record', function() {
       var aaaaRecord = {
         ip: '2607:f8b0:400a:801::1005',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = aaaaRecord.ip;
@@ -140,7 +140,7 @@ describe('Record', function() {
       var cnameRecord = {
         alias: 'example.com.',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = cnameRecord.alias;
@@ -160,7 +160,7 @@ describe('Record', function() {
         preference: 0,
         host: 'mail',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = mxRecord.preference + ' ' + mxRecord.host;
@@ -179,7 +179,7 @@ describe('Record', function() {
       var nsRecord = {
         host: 'example.com',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = nsRecord.host;
@@ -204,7 +204,7 @@ describe('Record', function() {
         expire: 604800,
         minimum: 86400,
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = [
@@ -214,7 +214,7 @@ describe('Record', function() {
         soaRecord.retry,
         soaRecord.refresh,
         soaRecord.expire,
-        soaRecord.minimum
+        soaRecord.minimum,
       ].join(' ');
 
       it('should parse an SOA record', function() {
@@ -231,7 +231,7 @@ describe('Record', function() {
       var spfRecord = {
         data: '"v=spf1" "mx:example.com"',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = spfRecord.data;
@@ -253,14 +253,14 @@ describe('Record', function() {
         port: 5222,
         target: 'jabber',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = [
         srvRecord.priority,
         srvRecord.weight,
         srvRecord.port,
-        srvRecord.target
+        srvRecord.target,
       ].join(' ');
 
       it('should parse an SRV record', function() {
@@ -277,7 +277,7 @@ describe('Record', function() {
       var txtRecord = {
         txt: 'txt-record-txt',
         name: 'name',
-        ttl: 86400
+        ttl: 86400,
       };
 
       var expectedData = txtRecord.txt;
@@ -308,7 +308,7 @@ describe('Record', function() {
     it('should format the data for the API', function() {
       var expectedRecord = extend({}, METADATA, {
         type: 'A',
-        rrdatas: METADATA.data
+        rrdatas: METADATA.data,
       });
       delete expectedRecord.data;
 
@@ -320,7 +320,7 @@ describe('Record', function() {
     it('should format the data for a zonefile', function() {
       var jsonRecord = extend({}, METADATA, {
         type: TYPE,
-        rrdatas: ['example.com.', 'example2.com.']
+        rrdatas: ['example.com.', 'example2.com.'],
       });
 
       record.toJSON = function() {
@@ -333,7 +333,7 @@ describe('Record', function() {
           jsonRecord.ttl,
           'IN',
           TYPE,
-          jsonRecord.rrdatas[0]
+          jsonRecord.rrdatas[0],
         ].join(' '),
 
         [
@@ -341,8 +341,8 @@ describe('Record', function() {
           jsonRecord.ttl,
           'IN',
           TYPE,
-          jsonRecord.rrdatas[1]
-        ].join(' ')
+          jsonRecord.rrdatas[1],
+        ].join(' '),
       ].join('\n');
 
       // That's a bunch of silliness, but it generates simply:

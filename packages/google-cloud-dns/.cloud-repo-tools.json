@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "dns",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/dns/latest/",
+  "release_quality": "alpha",
+  "samples": [
+    {
+      "id": "zones",
+      "name": "Zones",
+      "file": "zones.js",
+      "docs_link": "https://cloud.google.com/dns/docs",
+      "usage": "node zones.js --help"
+    }
+  ]
+}

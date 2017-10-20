@@ -1,34 +1,13 @@
 {
   "name": "@google-cloud/dns",
-  "version": "0.6.2",
-  "author": "Google Inc.",
   "description": "Cloud DNS Client Library for Node.js",
-  "contributors": [
-    {
-      "name": "Burcu Dogan",
-      "email": "jbd@google.com"
-    },
-    {
-      "name": "Johan Euphrosine",
-      "email": "proppy@google.com"
-    },
-    {
-      "name": "Patrick Costello",
-      "email": "pcostell@google.com"
-    },
-    {
-      "name": "Ryan Seys",
-      "email": "ryan@ryanseys.com"
-    },
-    {
-      "name": "Silvano Luciani",
-      "email": "silvano@google.com"
-    },
-    {
-      "name": "Stephen Sawchuk",
-      "email": "sawchuk@gmail.com"
-    }
-  ],
+  "version": "0.6.2",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-dns",
   "main": "./src/index.js",
   "files": [
     "src",
@@ -36,7 +15,6 @@
     "CONTRIBUTORS",
     "LICENSE"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -49,29 +27,56 @@
     "google dns",
     "dns"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Eric Uldall <ericuldall@gmail.com>",
+    "Jason Dobry <jason.dobry@gmail.com>",
+    "Karim <kinotto88@yahoo.it>",
+    "Luke Sneeringer <lukesneeringer@google.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "publish-module": "node ../../scripts/publish.js dns",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "test": "repo-tools test run --cmd npm -- run cover",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts"
+  },
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "arrify": "^1.0.0",
-    "dns-zonefile": "0.1.18",
+    "dns-zonefile": "0.2.2",
     "extend": "^3.0.0",
     "is": "^3.0.1",
     "methmeth": "^1.0.0",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.0.9",
     "async": "^2.1.4",
-    "mocha": "^3.0.1",
+    "codecov": "^2.3.1",
+    "eslint": "^4.9.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "extend": "^3.0.1",
+    "ink-docstrap": "^1.3.0",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "power-assert": "^1.4.4",
+    "prettier": "^1.7.4",
     "proxyquire": "^1.7.10",
-    "tmp": "^0.0.31",
+    "tmp": "^0.0.33",
     "uuid": "^3.0.1"
-  },
-  "scripts": {
-    "publish-module": "node ../../scripts/publish.js dns",
-    "test": "mocha test/*.js",
-    "system-test": "mocha system-test/*.js --no-timeouts --bail"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=4.0.0"
   }
 }

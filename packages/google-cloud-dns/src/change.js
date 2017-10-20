@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-/*!
- * @module dns/change
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
 /**
- * @constructor
- * @alias module:dns/change
+ * @class
  *
- * @param {module:dns/zone} zone - The parent zone object.
- * @param {string} id - ID of the change.
+ * @param {Zone} zone The parent zone object.
+ * @param {string} id ID of the change.
  *
  * @example
  * var zone = dns.zone('zone-id');
@@ -37,12 +32,20 @@ var util = require('util');
 function Change(zone, id) {
   var methods = {
     /**
+     * @typedef {array} ChangeExistsResponse
+     * @property {boolean} 0 Whether the {@link Change} exists.
+     */
+    /**
+     * @callback ChangeExistsCallback
+     * @param {?Error} err Request error, if any.
+     * @param {boolean} exists Whether the {@link Change} exists.
+     */
+    /**
      * Check if the change exists.
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the change exists or not.
+     * @method Change#exists
+     * @param {ChangeExistsCallback} [callback] Callback function.
+     * @returns {Promise<ChangeExistsResponse>}
      *
      * @example
      * change.exists(function(err, exists) {});
@@ -57,6 +60,17 @@ function Change(zone, id) {
     exists: true,
 
     /**
+     * @typedef {array} GetChangeResponse
+     * @property {Change} 0 The {@link Change}.
+     * @property {object} 1 The full API response.
+     */
+    /**
+     * @callback GetChangeCallback
+     * @param {?Error} err Request error, if any.
+     * @param {Change} change The {@link Change}.
+     * @param {object} apiResponse The full API response.
+     */
+    /**
      * Get a change if it exists.
      *
      * You may optionally use this to "get or create" an object by providing an
@@ -64,9 +78,12 @@ function Change(zone, id) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
-     * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
+     * @method Change#get
+     * @param {options} [options] Configuration object.
+     * @param {boolean} [options.autoCreate=false] Automatically create the
+     *     object if it does not exist.
+     * @param {GetChangeCallback} [callback] Callback function.
+     * @returns {Promise<GetChangeResponse>}
      *
      * @example
      * change.get(function(err, change, apiResponse) {
@@ -84,14 +101,24 @@ function Change(zone, id) {
     get: true,
 
     /**
+     * @typedef {array} GetChangeMetadataResponse
+     * @property {object} 0 The {@link Change} metadata.
+     * @property {object} 1 The full API response.
+     */
+    /**
+     * @callback GetChangeMetadataCallback
+     * @param {?Error} err Request error, if any.
+     * @param {object} metadata The {@link Change} metadata.
+     * @param {object} apiResponse The full API response.
+     */
+    /**
      * Get the metadata for the change in the zone.
      *
      * @resource [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An API error.
-     * @param {?object} callback.metadata - Metadata of the change from the API.
-     * @param {object} callback.apiResponse - Raw API response.
+     * @method Change#getMetadata
+     * @param {GetChangeMetadataCallback} [callback] Callback function.
+     * @returns {Promise<GetChangeMetadataResponse>}
      *
      * @example
      * change.getMetadata(function(err, metadata, apiResponse) {
@@ -116,14 +143,29 @@ function Change(zone, id) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
+  /**
+   * @name Change#metadata
+   * @type {object}
+   */
   common.ServiceObject.call(this, {
     parent: zone,
+
+    /**
+     * @name Zone#baseUrl
+     * @type {string}
+     * @default "/changes"
+     */
     baseUrl: '/changes',
+
+    /**
+     * @name Change#id
+     * @type {string}
+     */
     id: id,
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -132,7 +174,10 @@ util.inherits(Change, common.ServiceObject);
 /**
  * Create a change.
  *
- * @param {object} config - See {module:dns/zone#createChange}.
+ * @method Change#create
+ * @param {CreateChangeRequest} config The configuration object.
+ * @param {CreateChangeCallback} [callback] Callback function.
+ * @returns {Promise<CreateChangeResponse>}
  *
  * @example
  * var config = {
@@ -178,6 +223,5 @@ Change.prototype.create = function(config, callback) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Change);
-
 
 module.exports = Change;

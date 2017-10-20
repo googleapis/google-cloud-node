@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Change') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -45,7 +45,7 @@ describe('Change', function() {
 
   var ZONE = {
     name: 'zone-name',
-    createChange: util.noop
+    createChange: util.noop,
   };
 
   var CHANGE_ID = 'change-id';
@@ -54,8 +54,8 @@ describe('Change', function() {
     Change = proxyquire('../src/change.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -75,7 +75,7 @@ describe('Change', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -120,7 +120,7 @@ describe('Change', function() {
     describe('success', function() {
       var changeInstance = {
         id: 'id',
-        metadata: {}
+        metadata: {},
       };
       var apiResponse = {};
 

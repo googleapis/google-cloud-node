@@ -38,7 +38,7 @@ var fakePaginator = {
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 function FakeService() {
@@ -58,7 +58,7 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['zone']);
-  }
+  },
 });
 
 function FakeZone() {
@@ -76,15 +76,15 @@ describe('DNS', function() {
       '@google-cloud/common': {
         Service: FakeService,
         paginator: fakePaginator,
-        util: fakeUtil
+        util: fakeUtil,
       },
-      './zone.js': FakeZone
+      './zone.js': FakeZone,
     });
   });
 
   beforeEach(function() {
     dns = new DNS({
-      projectId: PROJECT_ID
+      projectId: PROJECT_ID,
     });
   });
 
@@ -104,7 +104,7 @@ describe('DNS', function() {
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
-      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeOptions = {projectId: PROJECT_ID};
       var fakeContext = {};
 
       fakeUtil.normalizeArguments = function(context, options) {
@@ -129,7 +129,7 @@ describe('DNS', function() {
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
-        'https://www.googleapis.com/auth/cloud-platform'
+        'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
@@ -137,7 +137,7 @@ describe('DNS', function() {
 
   describe('createZone', function() {
     var zoneName = 'zone-name';
-    var config = { dnsName: 'dns-name' };
+    var config = {dnsName: 'dns-name'};
 
     it('should throw if a zone name is not provided', function() {
       assert.throws(function() {
@@ -156,7 +156,7 @@ describe('DNS', function() {
     });
 
     it('should use a provided description', function(done) {
-      var cfg = extend({}, config, { description: 'description' });
+      var cfg = extend({}, config, {description: 'description'});
 
       dns.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.description, cfg.description);
@@ -182,7 +182,7 @@ describe('DNS', function() {
 
         var expectedBody = extend({}, config, {
           name: zoneName,
-          description: ''
+          description: '',
         });
         assert.deepEqual(reqOpts.json, expectedBody);
 
@@ -194,7 +194,7 @@ describe('DNS', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -213,7 +213,7 @@ describe('DNS', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: zoneName };
+      var apiResponse = {name: zoneName};
       var zone = {};
 
       beforeEach(function() {
@@ -257,7 +257,7 @@ describe('DNS', function() {
 
   describe('getZones', function() {
     it('should make the correct request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       dns.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/managedZones');
@@ -280,7 +280,7 @@ describe('DNS', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -301,8 +301,8 @@ describe('DNS', function() {
     });
 
     describe('success', function() {
-      var zone = { name: 'zone-1', a: 'b', c: 'd' };
-      var apiResponse = { managedZones: [zone] };
+      var zone = {name: 'zone-1', a: 'b', c: 'd'};
+      var apiResponse = {managedZones: [zone]};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -326,10 +326,10 @@ describe('DNS', function() {
 
       it('should set a nextQuery if necessary', function(done) {
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: 'next-page-token'
+          nextPageToken: 'next-page-token',
         });
 
-        var query = { a: 'b', c: 'd' };
+        var query = {a: 'b', c: 'd'};
         var originalQuery = extend({}, query);
 
         dns.request = function(reqOpts, callback) {
@@ -342,9 +342,12 @@ describe('DNS', function() {
           // Check the original query wasn't modified.
           assert.deepEqual(query, originalQuery);
 
-          assert.deepEqual(nextQuery, extend({}, query, {
-            pageToken: apiResponseWithNextPageToken.nextPageToken
-          }));
+          assert.deepEqual(
+            nextQuery,
+            extend({}, query, {
+              pageToken: apiResponseWithNextPageToken.nextPageToken,
+            })
+          );
 
           done();
         });

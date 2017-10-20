@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module dns/zone
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -29,16 +25,7 @@ var is = require('is');
 var util = require('util');
 var zonefile = require('dns-zonefile');
 
-/**
- * @type {module:dns/change}
- * @private
- */
 var Change = require('./change.js');
-
-/**
- * @type {module:dns/record}
- * @private
- */
 var Record = require('./record.js');
 
 /**
@@ -46,8 +33,7 @@ var Record = require('./record.js');
  * help you add or delete records, delete your zone, and many other convenience
  * methods.
  *
- * @constructor
- * @alias module:dns/zone
+ * @class
  *
  * @example
  * var zone = dns.zone('zone-id');
@@ -57,7 +43,10 @@ function Zone(dns, name) {
     /**
      * Create a zone.
      *
-     * @param {object} config - See {module:dns#createZone}.
+     * @method Zone#create
+     * @param {CreateZoneRequest} [metadata] Metadata to set for the zone.
+     * @param {CreateZoneCallback} [callback] Callback function.
+     * @returns {Promise<CreateZoneResponse>}
      *
      * @example
      * var config = {
@@ -82,12 +71,20 @@ function Zone(dns, name) {
     create: true,
 
     /**
+     * @typedef {array} ZoneExistsResponse
+     * @property {boolean} 0 Whether the {@link Zone} exists.
+     */
+    /**
+     * @callback ZoneExistsCallback
+     * @param {?Error} err Request error, if any.
+     * @param {boolean} exists Whether the {@link Zone} exists.
+     */
+    /**
      * Check if the zone exists.
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the zone exists or not.
+     * @method Zone#exists
+     * @param {ZoneExistsCallback} [callback] Callback function.
+     * @returns {Promise<ZoneExistsResponse>}
      *
      * @example
      * zone.exists(function(err, exists) {});
@@ -102,6 +99,17 @@ function Zone(dns, name) {
     exists: true,
 
     /**
+     * @typedef {array} GetZoneResponse
+     * @property {Zone} 0 The {@link Zone}.
+     * @property {object} 1 The full API response.
+     */
+    /**
+     * @callback GetZoneCallback
+     * @param {?Error} err Request error, if any.
+     * @param {Zone} zone The {@link Zone}.
+     * @param {object} apiResponse The full API response.
+     */
+    /**
      * Get a zone if it exists.
      *
      * You may optionally use this to "get or create" an object by providing an
@@ -109,9 +117,12 @@ function Zone(dns, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
-     * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
+     * @method Zone#get
+     * @param {options} [options] Configuration object.
+     * @param {boolean} [options.autoCreate=false] Automatically create the
+     *     object if it does not exist.
+     * @param {GetZoneCallback} [callback] Callback function.
+     * @returns {Promise<GetZoneResponse>}
      *
      * @example
      * zone.get(function(err, zone, apiResponse) {
@@ -129,14 +140,24 @@ function Zone(dns, name) {
     get: true,
 
     /**
+     * @typedef {array} GetZoneMetadataResponse
+     * @property {object} 0 The {@link Zone} metadata.
+     * @property {object} 1 The full API response.
+     */
+    /**
+     * @callback GetZoneMetadataCallback
+     * @param {?Error} err Request error, if any.
+     * @param {object} metadata The {@link Zone} metadata.
+     * @param {object} apiResponse The full API response.
+     */
+    /**
      * Get the metadata for the zone.
      *
-     * @resource [ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}
+     * @see [ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An API error.
-     * @param {?object} callback.metadata - Metadata of the zone from the API.
-     * @param {object} callback.apiResponse - Raw API response.
+     * @method Zone#getMetadata
+     * @param {GetZoneMetadataCallback} [callback] Callback function.
+     * @returns {Promise<GetZoneMetadataResponse>}
      *
      * @example
      * zone.getMetadata(function(err, metadata, apiResponse) {});
@@ -149,45 +170,76 @@ function Zone(dns, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
+  /**
+   * @name Zone#metadata
+   * @type {object}
+   */
   common.ServiceObject.call(this, {
     parent: dns,
+
+    /**
+     * @name Zone#baseUrl
+     * @type {string}
+     * @default "/managedZones"
+     */
     baseUrl: '/managedZones',
+
+    /**
+     * @name Zone#id
+     * @type {string}
+     */
     id: name,
     createMethod: dns.createZone.bind(dns),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Zone#name
+   * @type {string}
+   */
   this.name = name;
 }
 
 util.inherits(Zone, common.ServiceObject);
 
 /**
+ * @typedef {array} ZoneAddRecordsResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback ZoneAddRecordsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Add records to this zone. This is a convenience wrapper around
- * {module:dns/zone#createChange}.
+ * {@link Zone#createChange}.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {module:dns/record|module:dns/record[]} record - The record objects to
- *     add.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {Record|Record[]} record The {@link Record} object(s) to add.
+ * @param {ZoneAddRecordsCallback} [callback] Callback function.
+ * @returns {Promise<ZoneAddRecordsResponse>}
  */
 Zone.prototype.addRecords = function(records, callback) {
-  this.createChange({
-    add: records
-  }, callback);
+  this.createChange(
+    {
+      add: records,
+    },
+    callback
+  );
 };
 
 /**
- * Create a reference to a change object in this zone.
+ * Create a reference to a {@link Change} object in this zone.
  *
- * @param {string} id - The change id.
- * @return {module:dns/change}
+ * @param {string} id The change id.
+ * @returns {Change}
  *
  * @example
  * var change = zone.change('change-id');
@@ -197,20 +249,34 @@ Zone.prototype.change = function(id) {
 };
 
 /**
+ * Config to set for the change.
+ *
+ * @typedef {object} CreateChangeRequest
+ * @property {Record|Record[]} add {@link Record} objects to add to this
+ *     zone.
+ * @property {Record|Record[]} delete {@link Record} objects to delete
+ *     from this zone. Be aware that the resource records here must match
+ *     exactly to be deleted.
+ */
+/**
+ * @typedef {array} CreateChangeResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback CreateChangeCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Create a change of resource record sets for the zone.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {object} config - The configuration object.
- * @param {module:dns/record|module:dns/record[]} config.add - Record objects
- *     to add to this zone.
- * @param {module:dns/record|module:dns/record[]} config.delete - Record
- *     objects to delete from this zone. Be aware that the resource records here
- *     must match exactly to be deleted.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {CreateChangeRequest} config The configuration object.
+ * @param {CreateChangeCallback} [callback] Callback function.
+ * @returns {Promise<CreateChangeResponse>}
  *
  * @example
  * var oldARecord = zone.record('a', {
@@ -247,50 +313,61 @@ Zone.prototype.change = function(id) {
 Zone.prototype.createChange = function(config, callback) {
   var self = this;
 
-  if (!config || !config.add && !config.delete) {
+  if (!config || (!config.add && !config.delete)) {
     throw new Error('Cannot create a change with no additions or deletions.');
   }
 
   var body = extend({}, config, {
     additions: arrify(config.add).map(exec('toJSON')),
-    deletions: arrify(config.delete).map(exec('toJSON'))
+    deletions: arrify(config.delete).map(exec('toJSON')),
   });
 
   delete body.add;
   delete body.delete;
 
-  this.request({
-    method: 'POST',
-    uri: '/changes',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/changes',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var change = self.change(resp.id);
+      change.metadata = resp;
+
+      callback(null, change, resp);
     }
-
-    var change = self.change(resp.id);
-    change.metadata = resp;
-
-    callback(null, change, resp);
-  });
+  );
 };
 
 /**
+ * @typedef {array} DeleteZoneResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback DeleteZoneCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Delete the zone.
  *
- * Only empty zones can be deleted. Set options.force to `true` to call
- * {module:dns/zone#empty} before deleting the zone. Two API calls will then be
+ * Only empty zones can be deleted. Set `options.force` to `true` to call
+ * {@link Zone#empty} before deleting the zone. Two API calls will then be
  * made (one to empty, another to delete), which means <strong> this is not an
  * atomic request</strong>.
  *
- * @resource [ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete}
+ * @see [ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete}
  *
- * @param {object=} options - Configuration object.
- * @param {boolean} options.force - Empty the zone before deleting.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {object} [options] Configuration object.
+ * @param {boolean} [options.force=false] Empty the zone before deleting.
+ * @param {DeleteZoneCallback} [callback] Callback function.
+ * @returns {Promise<DeleteZoneResponse>}
  *
  * @example
  * zone.delete(function(err, apiResponse) {
@@ -332,24 +409,34 @@ Zone.prototype.delete = function(options, callback) {
 };
 
 /**
+ * @typedef {array} ZoneDeleteRecordsResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback ZoneDeleteRecordsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Delete records from this zone. This is a convenience wrapper around
- * {module:dns/zone#createChange}.
+ * {@link Zone#createChange}.
  *
- * This method accepts {module:dns/record} objects or string record types in
+ * This method accepts {@link Record} objects or string record types in
  * its place. This means that you can delete all A records or NS records, etc.
  * If used this way, two API requests are made (one to get, then another to
- * delete), which means <strong>the operation is not atomic</strong> and could
- * result in unexpected changes.
+ * delete), which means **the operation is not atomic** and could result in
+ * unexpected changes.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {module:dns/record|module:dns/record[]|string} record - If given a
- *     string, it is interpreted as a record type. All records that match that
- *     type will be retrieved and then deleted. You can also provide a
- *     {module:dns/record} object or array of objects.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {Record|Record[]|string} record If given a string, it is interpreted
+ *     as a record type. All records that match that type will be retrieved and
+ *     then deleted. You can also provide a {@link Record} object or array of
+ *     {@link Record} objects.
+ * @param {ZoneDeleteRecordsCallback} [callback] Callback function.
+ * @returns {Promise<ZoneDeleteRecordsResponse>}
  *
  * @example
  * var oldARecord = zone.record('a', {
@@ -413,23 +500,35 @@ Zone.prototype.deleteRecords = function(records, callback) {
     return;
   }
 
-  this.createChange({
-    delete: records
-  }, callback);
+  this.createChange(
+    {
+      delete: records,
+    },
+    callback
+  );
 };
 
 /**
+ * @typedef {array} ZoneEmptyResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback ZoneEmptyCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Emptying your zone means leaving only 'NS' and 'SOA' records. This method
  * will first fetch the non-NS and non-SOA records from your zone using
- * {module:dns/zone#getRecords}, then use {module:dns/zone#createChange} to
+ * {@link Zone#getRecords}, then use {@link Zone#createChange} to
  * create a deletion change.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {ZoneEmptyCallback} [callback] Callback function.
+ * @returns {Promise<ZoneEmptyResponse>}
  */
 Zone.prototype.empty = function(callback) {
   var self = this;
@@ -453,13 +552,22 @@ Zone.prototype.empty = function(callback) {
 };
 
 /**
+ * @typedef {array} ZoneExportResponse
+ * @property {object} 0 The full API response.
+ */
+/**
+ * @callback ZoneExportCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Provide a path to a zone file to copy records into the zone.
  *
- * @resource [ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}
+ * @see [ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}
  *
- * @param {string} localPath - The fully qualified path to the zone file.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API or file system error.
+ * @param {string} localPath The fully qualified path to the zone file.
+ * @param {ZoneExportCallback} [callback] Callback function.
+ * @returns {Promise<ZoneExportResponse>}
  *
  * @example
  * var zoneFilename = '/Users/stephen/zonefile.zone';
@@ -491,24 +599,38 @@ Zone.prototype.export = function(localPath, callback) {
 };
 
 /**
+ * Query object for listing changes.
+ *
+ * @typedef {object} GetChangesRequest
+ * @property {boolean} [autoPaginate=true] Have pagination handled automatically.
+ * @property {number} [maxApiCalls] Maximum number of API calls to make.
+ * @property {number} [maxResults] Maximum number of items plus prefixes to
+ *     return.
+ * @property {string} [pageToken] A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @property {string} [sort] Set to 'asc' for ascending, and 'desc' for
+ *     descending or omit for no sorting.
+ */
+/**
+ * @typedef {array} GetChangesResponse
+ * @property {Change[]} 0 Array of {@link Change} instances.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetChangesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Change[]} changes Array of {@link Change} instances.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Get the list of changes associated with this zone. A change is an atomic
  * update to a collection of records.
  *
- * @resource [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
+ * @see [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
  *
- * @param {object=} query - The query object.
- * @param {boolean} query.autoPaginate - Have pagination handled automatically.
- *     Default: true.
- * @param {number} query.maxApiCalls - Maximum number of API calls to make.
- * @param {number} query.maxResults - Maximum number of results to return.
- * @param {string} query.pageToken - The page token.
- * @param {string} query.sort - Set to 'asc' for ascending, and 'desc' for
- *     descending or omit for no sorting.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change[]} callback.changes - An array of
- *     {module:dns/change} objects.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {GetChangesRequest} [query] Query object for listing changes.
+ * @param {GetChangesCallback} [callback] Callback function.
+ * @returns {Promise<GetChangesResponse>}
  *
  * @example
  * var callback = function(err, changes, nextQuery, apiResponse) {
@@ -548,39 +670,43 @@ Zone.prototype.getChanges = function(query, callback) {
     delete query.sort;
   }
 
-  this.request({
-    uri: '/changes',
-    qs: query
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/changes',
+      qs: query,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var changes = (resp.changes || []).map(function(change) {
-      var changeInstance = self.change(change.id);
-      changeInstance.metadata = change;
-      return changeInstance;
-    });
-
-    var nextQuery = null;
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, query, {
-        pageToken: resp.nextPageToken
+      var changes = (resp.changes || []).map(function(change) {
+        var changeInstance = self.change(change.id);
+        changeInstance.metadata = change;
+        return changeInstance;
       });
-    }
 
-    callback(null, changes, nextQuery, resp);
-  });
+      var nextQuery = null;
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, query, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      callback(null, changes, nextQuery, resp);
+    }
+  );
 };
 
 /**
- * Get the list of {module:dns/change} objects associated with this zone as a
+ * Get the list of {@link Change} objects associated with this zone as a
  * readable object stream.
  *
- * @param {object=} query - Configuration object. See
- *     {module:dns/zone#getChanges} for a complete list of options.
- * @return {stream}
+ * @method Zone#getChangesStream
+ * @param {GetChangesRequest} [query] Query object for listing changes.
+ * @returns {ReadableStream} A readable stream that emits {@link Change}
+ *     instances.
  *
  * @example
  * zone.getChangesStream()
@@ -604,25 +730,39 @@ Zone.prototype.getChanges = function(query, callback) {
 Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
 
 /**
+ * Query object for listing records.
+ *
+ * @typedef {object} GetRecordsRequest
+ * @property {boolean} [autoPaginate=true] Have pagination handled automatically.
+ * @property {number} [maxApiCalls] Maximum number of API calls to make.
+ * @property {number} [maxResults] Maximum number of items plus prefixes to
+ *     return.
+ * @property {string} [name] Restricts the list to return only records with this
+ *     fully qualified domain name.
+ * @property {string} [pageToken] A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @property {string} [type] Restricts the list to return only records of this
+ *     type. If present, the "name" parameter must also be present.
+ */
+/**
+ * @typedef {array} GetRecordsResponse
+ * @property {Record[]} 0 Array of {@link Record} instances.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetRecordsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Record[]} records Array of {@link Record} instances.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Get the list of records for this zone.
  *
- * @resource [ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}
+ * @see [ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}
  *
- * @param {object=} query - The query object.
- * @param {boolean} query.autoPaginate - Have pagination handled automatically.
- *     Default: true.
- * @param {number} query.maxApiCalls - Maximum number of API calls to make.
- * @param {number} query.maxResults - Maximum number of results to be returned.
- * @param {string} query.name - Restricts the list to return only records with
- *     this fully qualified domain name.
- * @param {string} query.pageToken - The page token.
- * @param {string} query.type - Restricts the list to return only records of
- *     this type. If present, the "name" parameter must also be present.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/record[]} callback.records - An array of
- *     {module:dns/record} objects.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {GetRecordsRequest} [query] Query object for listing records.
+ * @param {GetRecordsCallback} [callback] Callback function.
+ * @returns {Promise<GetRecordsResponse>}
  *
  * @example
  * var callback = function(err, records, nextQuery, apiResponse) {
@@ -692,50 +832,54 @@ Zone.prototype.getRecords = function(query, callback) {
     });
 
     query = {
-      filterByTypes_: filterByTypes_
+      filterByTypes_: filterByTypes_,
     };
   }
 
   var requestQuery = extend({}, query);
   delete requestQuery.filterByTypes_;
 
-  this.request({
-    uri: '/rrsets',
-    qs: requestQuery
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/rrsets',
+      qs: requestQuery,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var records = (resp.rrsets || []).map(function(record) {
-      return self.record(record.type, record);
-    });
-
-    if (query.filterByTypes_) {
-      records = records.filter(function(record) {
-        return query.filterByTypes_[record.type];
+      var records = (resp.rrsets || []).map(function(record) {
+        return self.record(record.type, record);
       });
-    }
 
-    var nextQuery = null;
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, query, {
-        pageToken: resp.nextPageToken
-      });
-    }
+      if (query.filterByTypes_) {
+        records = records.filter(function(record) {
+          return query.filterByTypes_[record.type];
+        });
+      }
 
-    callback(null, records, nextQuery, resp);
-  });
+      var nextQuery = null;
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, query, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      callback(null, records, nextQuery, resp);
+    }
+  );
 };
 
 /**
  * Get the list of {module:dns/record} objects for this zone as a readable
  * object stream.
  *
- * @param {object=} query - Configuration object. See
- *     {module:dns/zone#getRecords} for a complete list of options.
- * @return {stream}
+ * @method Zone#getRecordsStream
+ * @param {GetRecordsRequest} [query] Query object for listing records.
+ * @returns {ReadableStream} A readable stream that emits {@link Record}
+ *     instances.
  *
  * @example
  * zone.getRecordsStream()
@@ -759,16 +903,24 @@ Zone.prototype.getRecords = function(query, callback) {
 Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
 
 /**
+ * @typedef {array} ZoneImportResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback ZoneImportCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Copy the records from a zone file into this zone.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {string} localPath - The fully qualified path to the zone file.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API or file system error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {?object} callback.apiResponse - Raw API response.
- *
+ * @param {string} localPath The fully qualified path to the zone file.
+ * @param {ZoneImportCallback} [callback] Callback function.
+ * @returns {Promise<ZoneImportResponse>}
  * @example
  * var zoneFilename = '/Users/dave/zonefile.zone';
  *
@@ -812,24 +964,24 @@ Zone.prototype.import = function(localPath, callback) {
 };
 
 /**
- * A {module:dns/record} object can be used to construct a record you want to
+ * A {@link Record} object can be used to construct a record you want to
  * add to your zone, or to refer to an existing one.
  *
  * Note that using this method will not itself make any API requests. You will
  * use the object returned in other API calls, for example to add a record to
  * your zone or to delete an existing one.
  *
- * @param {string} type - The type of record to construct or the type of record
+ * @param {string} type The type of record to construct or the type of record
  *     you are referencing.
- * @param {object} metadata - The metadata of this record.
- * @param {string} metadata.name - The name of the record, e.g.
+ * @param {object} metadata The metadata of this record.
+ * @param {string} metadata.name The name of the record, e.g.
  *     `www.example.com.`.
- * @param {string[]} metadata.data - Defined in
+ * @param {string[]} metadata.data Defined in
  *     [RFC 1035, section 5](https://goo.gl/9EiM0e) and
  *     [RFC 1034, section 3.6.1](https://goo.gl/Hwhsu9).
- * @param {number} metadata.ttl - Seconds that the resource is cached by
+ * @param {number} metadata.ttl Seconds that the resource is cached by
  *     resolvers.
- * @return {module:dns/record}
+ * @returns {Record}
  *
  * @example
  * //-
@@ -863,22 +1015,30 @@ Zone.prototype.record = function(type, metadata) {
 };
 
 /**
+ * @typedef {array} ZoneReplaceRecordsResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback ZoneReplaceRecordsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Provide a record type that should be deleted and replaced with other records.
  *
- * <strong>This is not an atomic request.</strong> Two API requests are made
+ * **This is not an atomic request.** Two API requests are made
  * (one to get records of the type that you've requested, then another to
  * replace them), which means the operation is not atomic and could result in
  * unexpected changes.
  *
- * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+ * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
- * @param {string|string[]} recordTypes - Type(s) of records to replace.
- * @param {module:dns/record|module:dns/record[]} newRecords - The record
- *     objects to add.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {?object} callback.apiResponse - Raw API response.
+ * @param {string|string[]} recordTypes The type(s) of records to replace.
+ * @param {Record|Record[]} newRecords The {@link Record} object(s) to add.
+ * @param {ZoneReplaceRecordsCallback} [callback] Callback function.
+ * @returns {Promise<ZoneReplaceRecordsResponse>}
  *
  * @example
  * var newNs1Record = zone.record('ns', {
@@ -921,10 +1081,13 @@ Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
       return;
     }
 
-    self.createChange({
-      add: newRecords,
-      delete: recordsToDelete
-    }, callback);
+    self.createChange(
+      {
+        add: newRecords,
+        delete: recordsToDelete,
+      },
+      callback
+    );
   });
 };
 
@@ -933,11 +1096,8 @@ Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
  *
  * @private
  *
- * @param {string[]} recordTypes - Types of records to delete. Ex: 'NS', 'A'.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An API error.
- * @param {?module:dns/change} callback.change - A {module:dns/change} object.
- * @param {?object} callback.apiResponse - Raw API response.
+ * @param {string[]} recordTypes Types of records to delete. Ex: 'NS', 'A'.
+ * @param {function} callback Callback function.
  *
  * @example
  * zone.deleteRecordsByType_(['NS', 'A'], function(err, change, apiResponse) {
@@ -976,7 +1136,12 @@ common.paginator.extend(Zone, ['getChanges', 'getRecords']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Zone, {
-  exclude: ['change', 'record']
+  exclude: ['change', 'record'],
 });
 
+/**
+ * Reference to the {@link Zone} class.
+ * @name module:@google-cloud/dns.Zone
+ * @see Zone
+ */
 module.exports = Zone;

@@ -22,17 +22,21 @@ const DNS = require('@google-cloud/dns');
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
 
-// Instantiates a client
-const dnsClient = DNS({
-  projectId: projectId
+// Creates a client
+const dns = new DNS({
+  projectId: projectId,
 });
 
 // Lists all zones in the current project
-dnsClient.getZones()
-  .then((results) => {
+dns
+  .getZones()
+  .then(results => {
     const zones = results[0];
 
     console.log('Zones:');
-    zones.forEach((zone) => console.log(zone.name));
+    zones.forEach(zone => console.log(zone.name));
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
   });
 // [END dns_quickstart]

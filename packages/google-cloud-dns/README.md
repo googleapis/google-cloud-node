@@ -1,98 +1,124 @@
-# @google-cloud/dns ([Alpha][versioning])
-> Cloud DNS Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just DNS? You might want to check out [`google-cloud`][google-cloud].*
+# Google Cloud DNS: Node.js Client
 
-- [API Documentation][gcloud-dns-docs]
-- [Official Documentation][cloud-dns-docs]
+[![release level](https://img.shields.io/badge/release%20level-alpha-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-dns.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-dns)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-dns?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-dns)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dns/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dns)
 
+> Node.js idiomatic client for [Cloud DNS][product-docs].
 
-```sh
-$ npm install --save @google-cloud/dns
-```
-```js
-var dns = require('@google-cloud/dns')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+[Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
 
-// Create a managed zone.
-dns.createZone('my-new-zone', {
-  dnsName: 'my-domain.com.'
-}, function(err, zone) {});
+* [Cloud DNS Node.js Client API Reference][client-docs]
+* [Cloud DNS Documentation][product-docs]
 
-// Reference an existing zone.
-var zone = dns.zone('my-existing-zone');
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-// Create an NS record.
-var nsRecord = zone.record('ns', {
-  ttl: 86400,
-  name: 'my-domain.com.',
-  data: 'ns-cloud1.googledomains.com.'
-});
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-zone.addRecords([nsRecord], function(err, change) {});
+**Table of contents:**
 
-// Create a zonefile from the records in your zone.
-zone.export('/zonefile.zone', function(err) {});
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
-// Promises are also supported by omitting callbacks.
-zone.addRecords([nsRecord]).then(function(data) {
-  var change = data[0];
-});
+## Quickstart
 
-// It's also possible to integrate with third-party Promise libraries.
-var dns = require('@google-cloud/dns')({
-  promise: require('bluebird')
-});
-```
+### Before you begin
 
+1.  Select or create a Cloud Platform project.
 
-## Authentication
+    [Go to the projects page][projects]
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+1.  Enable billing for your project.
 
-### On Google Cloud Platform
+    [Enable billing][billing]
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+1.  Enable the Google Cloud DNS API.
 
-``` js
-var dns = require('@google-cloud/dns')();
-// ...you're good to go!
-```
+    [Enable the API][enable_api]
 
-### Elsewhere
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dns.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud DNS API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+### Installing the client library
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+    npm install --save @google-cloud/dns
 
-var dns = require('@google-cloud/dns')({
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const DNS = require('@google-cloud/dns');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Creates a client
+const dns = new DNS({
   projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
 });
 
-// ...you're good to go!
+// Lists all zones in the current project
+dns
+  .getZones()
+  .then(results => {
+    const zones = results[0];
+
+    console.log('Zones:');
+    zones.forEach(zone => console.log(zone.name));
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
 ```
 
+## Samples
 
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[gcloud-dns-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/dns
-[cloud-dns-docs]: https://cloud.google.com/dns/docs
+Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| Zones | [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/zones.js) |
+
+The [Cloud DNS Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+This library is considered to be in **alpha**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/dns/latest/
+[product-docs]: https://cloud.google.com/dns/docs/
