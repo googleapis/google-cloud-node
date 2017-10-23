@@ -39,8 +39,7 @@
     "Song Wang <songwang@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Takashi Matsuo <tmatsuo@google.com>",
-    "Tim Swast <swast@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+    "Tim Swast <swast@google.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
@@ -60,7 +59,7 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.10",
+    "@google-cloud/nodejs-repo-tools": "^2.0.11",
     "async": "^2.5.0",
     "codecov": "^2.3.1",
     "eslint": "^4.9.0",

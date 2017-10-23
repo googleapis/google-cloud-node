@@ -62,13 +62,13 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ```javascript
 // Imports the Google Cloud client library
-const Monitoring = require('@google-cloud/monitoring');
+const monitoring = require('@google-cloud/monitoring');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
 
 // Creates a client
-const client = new Monitoring.MetricServiceClient();
+const client = new monitoring.MetricServiceClient();
 
 // Prepares an individual data point
 const dataPoint = {

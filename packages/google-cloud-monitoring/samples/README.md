@@ -49,7 +49,7 @@ Commands:
 Options:
   --version        Show version number                                                                         [boolean]
   --help           Show help                                                                                   [boolean]
-  --projectId, -p                                                              [string] [default: "nodejs-docs-samples"]
+  --projectId, -p                                                                                               [string]
 
 Examples:
   node metrics.js create
@@ -87,7 +87,7 @@ Commands:
 Options:
   --version        Show version number                                                                         [boolean]
   --help           Show help                                                                                   [boolean]
-  --projectId, -p                                                              [string] [default: "nodejs-docs-samples"]
+  --projectId, -p                                                                                               [string]
 
 Examples:
   node uptime.js create my-instance                             Create an uptime check for a "my-instance" GCE instance.

@@ -56,24 +56,24 @@ const gapic = Object.freeze({
  * @module {object} @google-cloud/monitoring
  * @alias nodejs-monitoring
  *
- * @example <caption>Install the client library with
- *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save @google-cloud/monitoring
  *
  * @example <caption>Import the client library:</caption>
  * const monitoring = require('@google-cloud/monitoring');
  *
- * @example <caption>Create a client that uses
- *   <a href="https://goo.gl/64dyYX">Application Default Credentials
- *   (ADC)</a>:</caption>
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new monitoring.GroupServiceClient();
  *
- * @example <caption>Create a client with
- *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
  * const client = new monitoring.GroupServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:monitoring_quickstart
+ * Full quickstart example:
  */
 
 /**
