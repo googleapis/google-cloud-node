@@ -1,2 +1,0 @@
-{DNS_DOMAIN} 21600 IN SPF "v=spf1" "mx:{DNS_DOMAIN}" "-all"
-{DNS_DOMAIN} 21600 IN TXT "google-site-verification=xxxxxxxxxxxxYYYYYYXXX"
