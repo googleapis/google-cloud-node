@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "extend": "^3.0",
-    "google-gax": "^0.14.0",
+    "google-gax": "^0.14.2",
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
