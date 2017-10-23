@@ -50,7 +50,7 @@ message Profile {
   repeated Function function = 5;
   // A common table for strings referenced by various messages.
   // string_table[0] must always be "".
-  repeated string string_table = 6 [enforce_utf8 = false];
+  repeated string string_table = 6;
   // frames with Function.function_name fully matching the following
   // regexp will be dropped from the samples, along with their successors.
   int64 drop_frames = 7;   // Index into string table.
@@ -72,6 +72,9 @@ message Profile {
   int64 period = 12;
   // Freeform text associated to the profile.
   repeated int64 comment = 13; // Indices into string table.
+  // Index into the string table of the type of the preferred sample
+  // value. If unset, clients should default to the last sample value.
+  int64 default_sample_type = 14;
 }
 
 // ValueType describes the semantics and measurement units of a value.
@@ -106,6 +109,15 @@ message Label {
   // At most one of the following must be present
   int64 str = 2;   // Index into string table
   int64 num = 3;
+
+  // Should only be present when num is present.
+  // Specifies the units of num.
+  // Use arbitrary string (for example, "requests") as a custom count unit.
+  // If no unit is specified, consumer may apply heuristic to deduce the unit.
+  // Consumers may also  interpret units like "bytes" and "kilobytes" as memory
+  // units and units like "seconds" and "nanoseconds" as time units,
+  // and apply appropriate unit conversions to these.
+  int64 num_unit = 4;  // Index into string table
 }
 
 message Mapping {
