@@ -73,6 +73,10 @@ const gapic = Object.freeze({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:videointelligence_quickstart
+ * Full quickstart example:
  */
 
 /**
