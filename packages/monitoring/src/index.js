@@ -1,111 +1,91 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*!
- * @module monitoring
- * @name Monitoring
+/**
+ * @namespace google
+ */
+/**
+ * @namespace google.cloud
+ */
+/**
+ * @namespace google.cloud.monitoring
+ */
+/**
+ * @namespace google.cloud.monitoring.v3
  */
 
 'use strict';
 
-var extend = require('extend');
-var gapic = {
-  v3: require('./v3')
-};
-var gaxGrpc = require('google-gax').grpc();
-
-const VERSION = require('../package.json').version;
+// Import the clients for each version supported by this package.
+const gapic = Object.freeze({
+  v3: require('./v3'),
+});
 
 /**
- * Create a groupServiceClient with additional helpers for common
- * tasks.
+ * The `@google-cloud/monitoring` package has the following named exports:
  *
- * The Group API lets you inspect and manage your
- * [groups](https://cloud.google.comgoogle.monitoring.v3.Group).
+ * - `GroupServiceClient` - Reference to
+ *   {@link v3.GroupServiceClient}
+ * - `MetricServiceClient` - Reference to
+ *   {@link v3.MetricServiceClient}
+ * - `v3` - This is used for selecting or pinning a
+ *   particular backend service version. It exports:
+ *     - `GroupServiceClient` - Reference to
+ *       {@link v3.GroupServiceClient}
+ *     - `MetricServiceClient` - Reference to
+ *       {@link v3.MetricServiceClient}
  *
- * A group is a named filter that is used to identify
- * a collection of monitored resources. Groups are typically used to
- * mirror the physical and/or logical topology of the environment.
- * Because group membership is computed dynamically, monitored
- * resources that are started in the future are automatically placed
- * in matching groups. By using a group to name monitored resources in,
- * for example, an alert policy, the target of that alert policy is
- * updated automatically as monitored resources are added and removed
- * from the infrastructure.
+ * @module {object} @google-cloud/monitoring
+ * @alias nodejs-monitoring
  *
- * @param {object=} options - [Configuration object](#/docs).
- * @param {number=} options.port - The port on which to connect to
- *     the remote host.
- * @param {string=} options.servicePath - The domain name of the
- *     API remote host.
+ * @example <caption>Install the client library with
+ *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/monitoring
+ *
+ * @example <caption>Import the client library:</caption>
+ * const monitoring = require('@google-cloud/monitoring');
+ *
+ * @example <caption>Create a client that uses
+ *   <a href="https://goo.gl/64dyYX">Application Default Credentials
+ *   (ADC)</a>:</caption>
+ * let client = new monitoring.GroupServiceClient();
+ *
+ * @example <caption>Create a client with
+ *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * let client = new monitoring.GroupServiceClient({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json',
+ * });
  */
-function groupV3(options) {
-  // Define the header options.
-  options = extend({}, options, {
-    libName: 'gccl',
-    libVersion: VERSION
-  });
-
-  // Create the client with the provided options.
-  var client = gapic.v3(options).groupServiceClient(options);
-  return client;
-}
 
 /**
- * Create a metricServiceClient with additional helpers for common
- * tasks.
- *
- * Manages metric descriptors, monitored resource descriptors, and
- * time series data.
- *
- * @param {object=} options - [Configuration object](#/docs).
- * @param {number=} options.port - The port on which to connect to
- *     the remote host.
- * @param {string=} options.servicePath - The domain name of the
- *     API remote host.
+ * @type {object}
+ * @property {constructor} GroupServiceClient
+ *   Reference to {@link v3.GroupServiceClient}
+ * @property {constructor} MetricServiceClient
+ *   Reference to {@link v3.MetricServiceClient}
  */
-function metricV3(options) {
-  // Define the header options.
-  options = extend({}, options, {
-    libName: 'gccl',
-    libVersion: VERSION
-  });
+module.exports = gapic.v3;
 
-  // Create the client with the provided options.
-  var client = gapic.v3(options).metricServiceClient(options);
-  return client;
-}
+/**
+ * @type {object}
+ * @property {constructor} GroupServiceClient
+ *   Reference to {@link v3.GroupServiceClient}
+ * @property {constructor} MetricServiceClient
+ *   Reference to {@link v3.MetricServiceClient}
+ */
+module.exports.v3 = gapic.v3;
 
-var v3Protos = {};
-
-extend(v3Protos, gaxGrpc.load([{
-  root: require('google-proto-files')('..'),
-  file: 'google/monitoring/v3/group_service.proto'
-}]).google.monitoring.v3);
-
-extend(v3Protos, gaxGrpc.load([{
-  root: require('google-proto-files')('..'),
-  file: 'google/monitoring/v3/metric_service.proto'
-}]).google.monitoring.v3);
-
-module.exports.group = groupV3;
-module.exports.metric = metricV3;
-module.exports.types = v3Protos;
-
-module.exports.v3 = {};
-module.exports.v3.group = groupV3;
-module.exports.v3.metric = metricV3;
-module.exports.v3.types = v3Protos;
+// Alias `module.exports` as `module.exports.default`, for future-proofing.
+module.exports.default = Object.assign({}, module.exports);
