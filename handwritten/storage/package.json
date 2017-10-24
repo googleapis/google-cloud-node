@@ -76,7 +76,7 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.0.7",
     "@google-cloud/pubsub": "*",
-    "codecov": "^2.3.0",
+    "codecov": "^3.0.0",
     "eslint": "^4.7.1",
     "eslint-config-prettier": "^2.5.0",
     "eslint-plugin-node": "^5.1.1",
