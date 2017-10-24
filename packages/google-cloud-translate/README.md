@@ -1,130 +1,131 @@
-# @google-cloud/translate ([GA][versioning])
-> Cloud Translation API Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just Translation? You might want to check out [`google-cloud`][google-cloud].*
+# Google Cloud Translation API: Node.js Client
 
-- [API Documentation][gcloud-translate-docs]
-- [Official Documentation][cloud-translate-docs]
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-translate.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-translate)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-translate?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-translate)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-translate/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-translate)
 
+> Node.js idiomatic client for [Cloud Translation API][product-docs].
 
-```sh
-$ npm install --save @google-cloud/translate
-```
-```js
-var translate = require('@google-cloud/translate')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynamically translate text between thousands of language pairs. The Cloud Translation API lets websites and programs integrate with the translation service programmatically. The Cloud Translation API is part of the larger Cloud Machine Learning API family.
 
-// Translate a string of text.
-translate.translate('Hello', 'es', function(err, translation) {
-  if (!err) {
-    // translation = 'Hola'
-  }
-});
+* [Cloud Translation API Node.js Client API Reference][client-docs]
+* [Cloud Translation API Documentation][product-docs]
 
-// Detect a language from a string of text.
-translate.detect('Hello', function(err, results) {
-  if (!err) {
-    // results = {
-    //   language: 'en',
-    //   confidence: 1,
-    //   input: 'Hello'
-    // }
-  }
-});
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-// Get a list of supported languages.
-translate.getLanguages(function(err, languages) {
-  if (!err) {
-    // languages = [
-    //   'af',
-    //   'ar',
-    //   'az',
-    //   ...
-    // ]
-  }
-});
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-// Promises are also supported by omitting callbacks.
-translate.getLanguages().then(function(data) {
-  var languages = data[0];
-});
+**Table of contents:**
 
-// It's also possible to integrate with third-party Promise libraries.
-var translate = require('@google-cloud/translate')({
-  promise: require('bluebird')
-});
-```
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
+## Quickstart
 
-## Authentication
+### Before you begin
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+1.  Select or create a Cloud Platform project.
 
-### On Google Cloud Platform
+    [Go to the projects page][projects]
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+1.  Enable billing for your project.
 
-``` js
-var translate = require('@google-cloud/translate')();
-// ...you're good to go!
-```
+    [Enable billing][billing]
 
-### With a Google Developers Service Account
+1.  Enable the Google Cloud Translation API API.
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+    [Enable the API][enable_api]
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Translation API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
-  *  If you want to use an API key, click on **Create credentials** and select **API key**. After the API key is created, you will see a newly opened modal with the API key in a field named **Your API key** that the library uses to authenticate your requests.
-  * If you want to generate a new API key for an existing API key, click on an existing API key and click **Regenerate key**.
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=translate.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
 
-var translate = require('@google-cloud/translate')({
+### Installing the client library
+
+    npm install --save @google-cloud/translate
+
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const Translate = require('@google-cloud/translate');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const translate = new Translate({
   projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
-
-  // Your API key (if not using a service account JSON file):
-  key: '...'
 });
 
-// ...you're good to go!
+// The text to translate
+const text = 'Hello, world!';
+// The target language
+const target = 'ru';
+
+// Translates some text into Russian
+translate
+  .translate(text, target)
+  .then(results => {
+    const translation = results[0];
+
+    console.log(`Text: ${text}`);
+    console.log(`Translation: ${translation}`);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
 ```
 
-### With an API key
+## Samples
 
-It's also possible to authenticate with an API key. To create an API key:
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-translate/blob/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Translate API
-4. Navigate to **APIs & auth** >  **Credentials** and then click on **Create new Client ID** and select **API key**. You should then be presented with a pop-up containing your newly created key.
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| Translate | [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/translate.js) |
 
-```js
-var translate = require('@google-cloud/translate')({
-  key: 'API Key'
-});
+The [Cloud Translation API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
-// ...you're good to go!
-```
+## Versioning
 
+This library follows [Semantic Versioning](http://semver.org/).
 
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
-[api-key-howto]: https://cloud.google.com/translate/v2/using_rest#auth
-[gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
-[cloud-translate-docs]: https://cloud.google.com/translate/docs
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/translate/latest/
+[product-docs]: https://cloud.google.com/translate/docs

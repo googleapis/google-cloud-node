@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module translate
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -31,20 +27,45 @@ var util = require('util');
 var PKG = require('../package.json');
 
 /**
+ * @typedef {object} ClientConfig
+ * @property {string} [projectId] The project ID from the Google Developer's
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+ *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
+ *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @property {string} [key] An API key. You should prefer using a Service
+ *     Account key file instead of an API key.
+ * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
+ *     downloaded from the Google Developers Console. If you provide a path to a
+ *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
+ *     .p12 require you to specify the `email` option as well.
+ * @property {string} [email] Account email address. Required when using a .pem
+ *     or .p12 keyFilename.
+ * @property {object} [credentials] Credentials object.
+ * @property {string} [credentials.client_email]
+ * @property {string} [credentials.private_key]
+ * @property {boolean} [autoRetry=true] Automatically retry requests if the
+ *     response is related to rate limits or certain intermittent server errors.
+ *     We will exponentially backoff subsequent requests by default.
+ * @property {number} [maxRetries=3] Maximum number of automatic retries
+ *     attempted before returning the error.
+ * @property {Constructor} [promise] Custom promise module to use instead of
+ *     native Promises.
+ */
+
+/**
  * With [Google Translate](https://cloud.google.com/translate), you can
  * dynamically translate text between thousands of language pairs.
  *
  * The Google Translate API lets websites and programs integrate with Google
  * Translate programmatically.
  *
- * @constructor
- * @alias module:translate
+ * @class
  *
- * @resource [Getting Started]{@link https://cloud.google.com/translate/v2/getting_started}
- * @resource [Identifying your application to Google]{@link https://cloud.google.com/translate/v2/using_rest#auth}
+ * @see [Getting Started]{@link https://cloud.google.com/translate/v2/getting_started}
+ * @see [Identifying your application to Google]{@link https://cloud.google.com/translate/v2/using_rest#auth}
  *
- * @param {object} options - [Configuration object](#/docs).
- * @param {string=} options.key - An API key.
+ * @param {ClientConfig} [options] Configuration options.
  *
  * @example
  * //-
@@ -53,11 +74,15 @@ var PKG = require('../package.json');
  * // The environment variable, `GOOGLE_CLOUD_TRANSLATE_ENDPOINT`, is honored as
  * // a custom backend which our library will send requests to.
  * //-
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:translate_quickstart
+ * Full quickstart example:
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {
     options = common.util.normalizeArguments(this, options, {
-      projectIdRequired: false
+      projectIdRequired: false,
     });
     return new Translate(options);
   }
@@ -65,8 +90,7 @@ function Translate(options) {
   var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
   if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
-    baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
-      .replace(/\/+$/, '');
+    baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT.replace(/\/+$/, '');
   }
 
   if (options.key) {
@@ -78,7 +102,7 @@ function Translate(options) {
     baseUrl: baseUrl,
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     packageJson: require('../package.json'),
-    projectIdRequired: false
+    projectIdRequired: false,
   };
 
   common.Service.call(this, config, options);
@@ -87,24 +111,38 @@ function Translate(options) {
 util.inherits(Translate, common.Service);
 
 /**
+ * @typedef {array} DetectResponse
+ * @property {object|object[]} 0 The detection results.
+ * @property {string} 0.language The language code matched from the input.
+ * @property {number} [0.confidence] A float 0 - 1. The higher the number, the
+ *     higher the confidence in language detection. Note, this is not always
+ *     returned from the API.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback DetectCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object|object[]} results The detection results.
+ * @param {string} results.language The language code matched from the input.
+ * @param {number} [results.confidence] A float 0 - 1. The higher the number, the
+ *     higher the confidence in language detection. Note, this is not always
+ *     returned from the API.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Detect the language used in a string or multiple strings.
  *
- * @resource [Detect Language]{@link https://cloud.google.com/translate/v2/using_rest#detect-language}
+ * @see [Detect Language]{@link https://cloud.google.com/translate/v2/using_rest#detect-language}
  *
  * @param {string|string[]} input - The source string input.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object|object[]} callback.results - If a single string input was
- *     given, a single result object is given. Otherwise, it is an array of
- *     result objects.
- * @param {string} callback.results[].language - The language code matched from
- *     the input.
- * @param {number=} callback.results[].confidence - A float 0 - 1. The higher
- *     the number, the higher the confidence in language detection. Note, this
- *     is not always returned from the API.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {DetectCallback} [callback] Callback function.
+ * @returns {Promise<DetectResponse>}
  *
  * @example
+ * const Translate = require('@google-cloud/translate');
+ *
+ * const translate = new Translate();
+ *
  * //-
  * // Detect the language from a single string input.
  * //-
@@ -149,110 +187,85 @@ util.inherits(Translate, common.Service);
  *   var results = data[0];
  *   var apiResponse = data[2];
  * });
+ *
+ * @example <caption>include:samples/translate.js</caption>
+ * region_tag:translate_detect_language
+ * Here's a full example:
  */
 Translate.prototype.detect = function(input, callback) {
   var inputIsArray = Array.isArray(input);
   input = arrify(input);
 
-  this.request({
-    method: 'POST',
-    uri: '/detect',
-    json: {
-      q: input
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/detect',
+      json: {
+        q: input,
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var results = resp.data.detections.map(function(detection, index) {
-      var result = extend({}, detection[0], {
-        input: input[index]
+      var results = resp.data.detections.map(function(detection, index) {
+        var result = extend({}, detection[0], {
+          input: input[index],
+        });
+
+        // Deprecated.
+        delete result.isReliable;
+
+        return result;
       });
 
-      // Deprecated.
-      delete result.isReliable;
+      if (input.length === 1 && !inputIsArray) {
+        results = results[0];
+      }
 
-      return result;
-    });
-
-    if (input.length === 1 && !inputIsArray) {
-      results = results[0];
+      callback(null, results, resp);
     }
-
-    callback(null, results, resp);
-  });
+  );
 };
 
 /**
+ * @typedef {array} GetLanguagesResponse
+ * @property {object[]} 0 The languages supported by the API.
+ * @property {string} 0.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+ *     language code.
+ * @property {string} 0.name The language name. This can be translated into your
+ *     preferred language with the `target` option.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback GetLanguagesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object[]} results The languages supported by the API.
+ * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+ *     language code.
+ * @param {string} results.name The language name. This can be translated into your
+ *     preferred language with the `target` option.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Get an array of all supported languages.
  *
- * @resource [Discovering Supported Languages]{@link https://cloud.google.com/translate/v2/discovering-supported-languages-with-rest}
+ * @see [Discovering Supported Languages]{@link https://cloud.google.com/translate/v2/discovering-supported-languages-with-rest}
  *
- * @param {string=} target - Get the language names in a language other than
+ * @param {string} [target] Get the language names in a language other than
  *     English.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.languages - The languages supported by the API.
- * @param {string} callback.languages[].code - The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
- *     language code.
- * @param {string} callback.languages[].name - The language name. This can be
- *     translated into your preferred language with the `target` option
- *     described above.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {GetLanguagesCallback} [callback] Callback function.
+ * @returns {Promise<GetLanguagesResponse>}
  *
- * @example
- * translate.getLanguages(function(err, languages) {
- *   if (!err) {
- *     // languages = [
- *     //   {
- *     //     code: 'af',
- *     //     name: 'Afrikaans'
- *     //   },
- *     //   {
- *     //     code: 'ar',
- *     //     name: 'Arabic'
- *     //   },
- *     //   {
- *     //     code: 'az',
- *     //     name: 'Azerbaijani'
- *     //   },
- *     //   ...
- *     // ]
- *   }
- * });
+ * @example <caption>include:samples/translate.js</caption>
+ * region_tag:translate_list_codes
+ * Gets the language names in English:
  *
- * //-
- * // Get the language names in a language other than English.
- * //-
- * translate.getLanguages('es', function(err, languages) {
- *   if (!err) {
- *     // languages = [
- *     //   {
- *     //     code: 'af',
- *     //     name: 'afrikáans'
- *     //   },
- *     //   {
- *     //     code: 'ar',
- *     //     name: 'árabe'
- *     //   },
- *     //   {
- *     //     code: 'az',
- *     //     name: 'azerí'
- *     //   },
- *     //   ...
- *     // ]
- *   }
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * translate.getLanguages().then(function(data) {
- *   var languages = data[0];
- *   var apiResponse = data[1];
- * });
+ * @example <caption>include:samples/translate.js</caption>
+ * region_tag:translate_list_language_names
+ * Gets the language names in a langauge other than English:
  */
 Translate.prototype.getLanguages = function(target, callback) {
   if (is.fn(target)) {
@@ -263,7 +276,7 @@ Translate.prototype.getLanguages = function(target, callback) {
   var reqOpts = {
     uri: '/languages',
     useQuerystring: true,
-    qs: {}
+    qs: {},
   };
 
   if (target && is.string(target)) {
@@ -279,7 +292,7 @@ Translate.prototype.getLanguages = function(target, callback) {
     var languages = resp.data.languages.map(function(language) {
       return {
         code: language.language,
-        name: language.name
+        name: language.name,
       };
     });
 
@@ -288,34 +301,48 @@ Translate.prototype.getLanguages = function(target, callback) {
 };
 
 /**
+ * Translate request options.
+ *
+ * @typedef {object} TranslateRequest
+ * @property {string} [format] Set the text's format as `html` or `text`.
+ *     If not provided, we will try to auto-detect if the text given is HTML. If
+ *     not, we set the format as `text`.
+ * @property {string} [from] The ISO 639-1 language code the source input
+ *     is written in.
+ * @property {string} [model] Set the model type requested for this
+ *     translation. Please refer to the upstream documentation for possible
+ *     values.
+ * @property {string} to The ISO 639-1 language code to translate the
+ *     input to.
+ */
+/**
+ * @typedef {array} TranslateResponse
+ * @property {object|object[]} 0 If a single string input was given, a single
+ *     translation is given. Otherwise, it is an array of translations.
+ * @property {object} 1 The full API response.
+ */
+/**
+ * @callback TranslateCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object|object[]} translations If a single string input was given, a
+ *     single translation is given. Otherwise, it is an array of translations.
+ * @param {object} apiResponse The full API response.
+ */
+/**
  * Translate a string or multiple strings into another language.
  *
- * @resource [Translate Text](https://cloud.google.com/translate/v2/using_rest#Translate)
+ * @see [Translate Text](https://cloud.google.com/translate/v2/using_rest#Translate)
  *
  * @throws {Error} If `options` is provided as an object without a `to`
  *     property.
  *
- * @param {string|string[]} input - The source string input.
- * @param {string|object=} options - If a string, it is interpreted as the
+ * @param {string|string[]} input The source string input.
+ * @param {string|TranslateRequest} [options] If a string, it is interpreted as the
  *     target ISO 639-1 language code to translate the source input to. (e.g.
  *     `en` for English). If an object, you may also specify the source
  *     language.
- * @param {string} options.format - Set the text's format as `html` or `text`.
- *     If not provided, we will try to auto-detect if the text given is HTML. If
- *     not, we set the format as `text`.
- * @param {string} options.from - The ISO 639-1 language code the source input
- *     is written in.
- * @param {string} options.model - Set the model type requested for this
- *     translation. Please refer to the upstream documentation for possible
- *     values.
- * @param {string} options.to - The ISO 639-1 language code to translate the
- *     input to.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object|object[]} callback.translations - If a single string input was
- *     given, a single translation is given. Otherwise, it is an array of
- *     translations.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {TranslateCallback} [callback] Callback function.
+ * @returns {Promise<TranslateResponse>}
  *
  * @example
  * //-
@@ -367,6 +394,14 @@ Translate.prototype.getLanguages = function(target, callback) {
  *   var translation = data[0];
  *   var apiResponse = data[1];
  * });
+ *
+ * @example <caption>include:samples/translate.js</caption>
+ * region_tag:translate_translate_text
+ * Full translation example:
+ *
+ * @example <caption>include:samples/translate.js</caption>
+ * region_tag:translate_text_with_model
+ * Translation using the premium model:
  */
 Translate.prototype.translate = function(input, options, callback) {
   var inputIsArray = Array.isArray(input);
@@ -374,7 +409,7 @@ Translate.prototype.translate = function(input, options, callback) {
 
   var body = {
     q: input,
-    format: options.format || (isHtml(input[0]) ? 'html' : 'text')
+    format: options.format || (isHtml(input[0]) ? 'html' : 'text'),
   };
 
   if (is.string(options)) {
@@ -397,24 +432,27 @@ Translate.prototype.translate = function(input, options, callback) {
     throw new Error('A target language is required to perform a translation.');
   }
 
-  this.request({
-    method: 'POST',
-    uri: '',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var translations = resp.data.translations.map(prop('translatedText'));
+
+      if (body.q.length === 1 && !inputIsArray) {
+        translations = translations[0];
+      }
+
+      callback(err, translations, resp);
     }
-
-    var translations = resp.data.translations.map(prop('translatedText'));
-
-    if (body.q.length === 1 && !inputIsArray) {
-      translations = translations[0];
-    }
-
-    callback(err, translations, resp);
-  });
+  );
 };
 
 /**
@@ -438,11 +476,11 @@ Translate.prototype.request = function(reqOpts, callback) {
 
   reqOpts = extend(true, {}, reqOpts, {
     qs: {
-      key: this.key
+      key: this.key,
     },
     headers: {
-      'User-Agent': common.util.getUserAgentFromPackageJson(PKG)
-    }
+      'User-Agent': common.util.getUserAgentFromPackageJson(PKG),
+    },
   });
 
   common.util.makeRequest(reqOpts, this.options, callback);
@@ -455,4 +493,33 @@ Translate.prototype.request = function(reqOpts, callback) {
  */
 common.util.promisifyAll(Translate);
 
+/**
+ * The `@google-cloud/translate` package has a single default export, the
+ * {@link Translate} class.
+ *
+ * See {@link Storage} and {@link ClientConfig} for client methods and
+ * configuration options.
+ *
+ * @module {constructor} @google-cloud/translate
+ * @alias nodejs-translate
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/translate
+ *
+ * @example <caption>Import the client library:</caption>
+ * const Translate = require('@google-cloud/translate');
+ *
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new Translate();
+ *
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new Translate({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json',
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:translate_quickstart
+ * Full quickstart example:
+ */
 module.exports = Translate;

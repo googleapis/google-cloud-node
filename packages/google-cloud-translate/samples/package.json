@@ -4,40 +4,23 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
-  },
+  "repository": "googleapis/nodejs-translate",
   "engines": {
     "node": ">=4.3.2"
   },
   "scripts": {
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
+    "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
+    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
+    "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
     "@google-cloud/translate": "1.0.0",
-    "yargs": "8.0.2"
+    "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.0.11",
+    "ava": "0.22.0",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "product": "translate",
-    "samples": [
-      {
-        "id": "translate",
-        "name": "Translate",
-        "file": "translate.js",
-        "docs_link": "https://cloud.google.com/translate/docs",
-        "usage": "node translate.js --help"
-      }
-    ]
+    "sinon": "4.0.1"
   }
 }

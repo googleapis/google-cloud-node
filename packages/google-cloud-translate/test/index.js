@@ -35,7 +35,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Translate') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeService() {
@@ -44,7 +44,7 @@ function FakeService() {
 
 describe('Translate', function() {
   var OPTIONS = {
-    projectId: 'test-project'
+    projectId: 'test-project',
   };
 
   var Translate;
@@ -54,8 +54,8 @@ describe('Translate', function() {
     Translate = proxyquire('../', {
       '@google-cloud/common': {
         util: fakeUtil,
-        Service: FakeService
-      }
+        Service: FakeService,
+      },
     });
   });
 
@@ -98,7 +98,7 @@ describe('Translate', function() {
 
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/cloud-platform'
+        'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
       assert.strictEqual(calledWith.projectIdRequired, false);
@@ -106,7 +106,7 @@ describe('Translate', function() {
 
     describe('Using an API Key', function() {
       var KEY_OPTIONS = {
-        key: 'api-key'
+        key: 'api-key',
       };
 
       beforeEach(function() {
@@ -114,7 +114,7 @@ describe('Translate', function() {
       });
 
       it('should localize the options', function() {
-        var options = { key: '...' };
+        var options = {key: '...'};
         var translate = new Translate(options);
         assert.strictEqual(translate.options, options);
       });
@@ -163,7 +163,7 @@ describe('Translate', function() {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/detect');
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.deepEqual(reqOpts.json, { q: [INPUT] });
+        assert.deepEqual(reqOpts.json, {q: [INPUT]});
         done();
       };
 
@@ -198,11 +198,11 @@ describe('Translate', function() {
               {
                 isReliable: true,
                 a: 'b',
-                c: 'd'
-              }
-            ]
-          ]
-        }
+                c: 'd',
+              },
+            ],
+          ],
+        },
       };
 
       var originalApiResponse = extend({}, apiResponse);
@@ -210,7 +210,7 @@ describe('Translate', function() {
       var expectedResults = {
         a: 'b',
         c: 'd',
-        input: INPUT
+        input: INPUT,
       };
 
       beforeEach(function() {
@@ -254,7 +254,7 @@ describe('Translate', function() {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/languages');
         assert.deepEqual(reqOpts.qs, {
-          target: 'en'
+          target: 'en',
         });
         done();
       };
@@ -266,7 +266,7 @@ describe('Translate', function() {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/languages');
         assert.deepEqual(reqOpts.qs, {
-          target: 'es'
+          target: 'es',
         });
         done();
       };
@@ -300,25 +300,25 @@ describe('Translate', function() {
           languages: [
             {
               language: 'en',
-              name: 'English'
+              name: 'English',
             },
             {
               language: 'es',
-              name: 'Spanish'
-            }
-          ]
-        }
+              name: 'Spanish',
+            },
+          ],
+        },
       };
 
       var expectedResults = [
         {
           code: 'en',
-          name: 'English'
+          name: 'English',
         },
         {
           code: 'es',
-          name: 'Spanish'
-        }
+          name: 'Spanish',
+        },
       ];
 
       beforeEach(function() {
@@ -346,7 +346,7 @@ describe('Translate', function() {
 
     var OPTIONS = {
       from: SOURCE_LANG_CODE,
-      to: TARGET_LANG_CODE
+      to: TARGET_LANG_CODE,
     };
 
     describe('options = target langauge', function() {
@@ -363,7 +363,7 @@ describe('Translate', function() {
     describe('options = { source & target }', function() {
       it('should throw if `to` is not provided', function() {
         assert.throws(function() {
-          translate.translate(INPUT, { from: SOURCE_LANG_CODE }, util.noop);
+          translate.translate(INPUT, {from: SOURCE_LANG_CODE}, util.noop);
         }, /A target language is required to perform a translation\./);
       });
 
@@ -374,10 +374,14 @@ describe('Translate', function() {
           done();
         };
 
-        translate.translate(INPUT, {
-          from: SOURCE_LANG_CODE,
-          to: TARGET_LANG_CODE
-        }, assert.ifError);
+        translate.translate(
+          INPUT,
+          {
+            from: SOURCE_LANG_CODE,
+            to: TARGET_LANG_CODE,
+          },
+          assert.ifError
+        );
       });
     });
 
@@ -402,7 +406,7 @@ describe('Translate', function() {
 
       it('should allow overriding the format', function(done) {
         var options = extend({}, OPTIONS, {
-          format: 'custom format'
+          format: 'custom format',
         });
 
         translate.request = function(reqOpts) {
@@ -418,7 +422,7 @@ describe('Translate', function() {
       it('should set the model option when available', function(done) {
         var fakeOptions = {
           model: 'nmt',
-          to: 'es'
+          to: 'es',
         };
 
         translate.request = function(reqOpts) {
@@ -438,7 +442,7 @@ describe('Translate', function() {
           q: [INPUT],
           format: 'text',
           source: SOURCE_LANG_CODE,
-          target: TARGET_LANG_CODE
+          target: TARGET_LANG_CODE,
         });
         done();
       };
@@ -473,10 +477,10 @@ describe('Translate', function() {
             {
               translatedText: 'text',
               a: 'b',
-              c: 'd'
-            }
-          ]
-        }
+              c: 'd',
+            },
+          ],
+        },
       };
 
       var expectedResults = apiResponse.data.translations[0].translatedText;
@@ -532,8 +536,8 @@ describe('Translate', function() {
           uri: '/test',
           a: 'b',
           json: {
-            a: 'b'
-          }
+            a: 'b',
+          },
         };
 
         FakeService.prototype.request = function(reqOpts, callback) {
@@ -547,7 +551,7 @@ describe('Translate', function() {
 
     describe('API key mode', function() {
       var KEY_OPTIONS = {
-        key: 'api-key'
+        key: 'api-key',
       };
 
       beforeEach(function() {
@@ -570,17 +574,17 @@ describe('Translate', function() {
           c: 'd',
           qs: {
             a: 'b',
-            c: 'd'
-          }
+            c: 'd',
+          },
         };
 
         var expectedReqOpts = extend(true, {}, reqOpts, {
           qs: {
-            key: translate.key
+            key: translate.key,
           },
           headers: {
-            'User-Agent': userAgent
-          }
+            'User-Agent': userAgent,
+          },
         });
 
         expectedReqOpts.uri = translate.baseUrl + reqOpts.uri;

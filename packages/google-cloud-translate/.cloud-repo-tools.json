@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "translate",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/translate/latest/",
+  "release_quality": "ga",
+  "samples": [
+    {
+      "id": "translate",
+      "name": "Translate",
+      "file": "translate.js",
+      "docs_link": "https://cloud.google.com/translate/docs",
+      "usage": "node translate.js --help"
+    }
+  ]
+}

@@ -1,34 +1,13 @@
 {
   "name": "@google-cloud/translate",
-  "version": "1.0.0",
-  "author": "Google Inc.",
   "description": "Cloud Translation API Client Library for Node.js",
-  "contributors": [
-    {
-      "name": "Burcu Dogan",
-      "email": "jbd@google.com"
-    },
-    {
-      "name": "Johan Euphrosine",
-      "email": "proppy@google.com"
-    },
-    {
-      "name": "Patrick Costello",
-      "email": "pcostell@google.com"
-    },
-    {
-      "name": "Ryan Seys",
-      "email": "ryan@ryanseys.com"
-    },
-    {
-      "name": "Silvano Luciani",
-      "email": "silvano@google.com"
-    },
-    {
-      "name": "Stephen Sawchuk",
-      "email": "sawchuk@gmail.com"
-    }
-  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-translate",
   "main": "./src/index.js",
   "files": [
     "src",
@@ -36,7 +15,6 @@
     "CONTRIBUTORS",
     "LICENSE"
   ],
-  "repository": "googlecloudplatform/google-cloud-node",
   "keywords": [
     "google apis client",
     "google api client",
@@ -49,25 +27,56 @@
     "google translate",
     "translate"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Eric Uldall <ericuldall@gmail.com>",
+    "Ernest Landrito <landrito@google.com>",
+    "Jason Dobry <jason.dobry@gmail.com>",
+    "Jason Dobry <jmdobry@users.noreply.github.com>",
+    "Luke Sneeringer <luke@sneeringer.com>",
+    "Luke Sneeringer <lukesneeringer@google.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
+    "Tim Swast <swast@google.com>",
+    "florencep <florenceperot@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme  -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "publish-module": "node ../../scripts/publish.js translate",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "test": "repo-tools test run --cmd npm -- run cover"
+  },
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "arrify": "^1.0.0",
-    "extend": "^3.0.0",
+    "extend": "^3.0.1",
     "is": "^3.0.1",
     "is-html": "^1.0.0",
     "propprop": "^0.3.0"
   },
   "devDependencies": {
-    "mocha": "^3.0.1",
+    "@google-cloud/nodejs-repo-tools": "^2.0.11",
+    "async": "^2.5.0",
+    "codecov": "^3.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "ink-docstrap": "^1.3.0",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "power-assert": "^1.4.4",
+    "prettier": "^1.7.4",
     "proxyquire": "^1.7.10"
-  },
-  "scripts": {
-    "publish-module": "node ../../scripts/publish.js translate",
-    "test": "mocha test/*.js",
-    "system-test": "mocha system-test/*.js --no-timeouts --bail"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=4.0.0"
   }
 }

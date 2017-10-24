@@ -17,27 +17,25 @@
 'use strict';
 
 var assert = require('assert');
-var extend = require('extend');
 var prop = require('propprop');
 
-var env = require('../../../system-test/env.js');
 var Translate = require('../');
 
-var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
+var API_KEY = process.env.TRANSLATE_API_KEY;
 
 describe('translate', function() {
-  var translate = new Translate(extend({}, env));
+  var translate = new Translate();
 
   describe('detecting language from input', function() {
     var INPUT = [
       {
         input: 'Hello!',
-        expectedLanguage: 'en'
+        expectedLanguage: 'en',
       },
       {
         input: '¡Hola!',
-        expectedLanguage: 'es'
-      }
+        expectedLanguage: 'es',
+      },
     ];
 
     it('should detect a langauge', function(done) {
@@ -56,12 +54,12 @@ describe('translate', function() {
     var INPUT = [
       {
         input: 'Hello!',
-        expectedTranslation: 'Hola'
+        expectedTranslation: 'Hola',
       },
       {
         input: 'How are you today?',
-        expectedTranslation: 'Cómo estás hoy'
-      }
+        expectedTranslation: 'Cómo estás hoy',
+      },
     ];
 
     function removeSymbols(input) {
@@ -88,7 +86,7 @@ describe('translate', function() {
 
       var opts = {
         from: 'en',
-        to: 'es'
+        to: 'es',
       };
 
       translate.translate(input, opts, function(err, results) {
@@ -105,7 +103,7 @@ describe('translate', function() {
 
       var opts = {
         from: 'en',
-        to: 'es'
+        to: 'es',
       };
 
       translate.translate(input, opts, function(err, results) {
@@ -134,7 +132,7 @@ describe('translate', function() {
 
         assert.deepEqual(englishResult, {
           code: 'en',
-          name: 'English'
+          name: 'English',
         });
 
         done();
@@ -151,7 +149,7 @@ describe('translate', function() {
 
         assert.deepEqual(englishResult, {
           code: 'en',
-          name: 'inglés'
+          name: 'inglés',
         });
 
         done();
@@ -161,7 +159,7 @@ describe('translate', function() {
 
   (API_KEY ? describe : describe.skip)('authentication', function() {
     beforeEach(function() {
-      translate = new Translate({ key: API_KEY });
+      translate = new Translate({key: API_KEY});
     });
 
     it('should use an API key to authenticate', function(done) {
