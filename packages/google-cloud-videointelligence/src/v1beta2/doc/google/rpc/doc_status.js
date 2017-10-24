@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * The `Status` type defines a logical error model that is suitable for different
@@ -31,7 +27,7 @@
  *
  * The `Status` message contains three pieces of data: error code, error message,
  * and error details. The error code should be an enum value of
- * {@link google.rpc.Code}, but it may accept additional error codes if needed.  The
+ * google.rpc.Code, but it may accept additional error codes if needed.  The
  * error message should be a developer-facing English message that helps
  * developers *understand* and *resolve* the error. If a localized user-facing
  * error message is needed, put the localized message in the error details or
@@ -73,20 +69,24 @@
  * - Logging. If some API errors are stored in logs, the message `Status` could
  *     be used directly after any stripping needed for security/privacy reasons.
  *
- * @external "google.rpc.Status"
  * @property {number} code
- *   The status code, which should be an enum value of {@link google.rpc.Code}.
+ *   The status code, which should be an enum value of google.rpc.Code.
  *
  * @property {string} message
  *   A developer-facing error message, which should be in English. Any
  *   user-facing error message should be localized and sent in the
- *   {@link google.rpc.Status.details} field, or localized by the client.
+ *   google.rpc.Status.details field, or localized by the client.
  *
  * @property {Object[]} details
  *   A list of messages that carry the error details.  There is a common set of
  *   message types for APIs to use.
  *
- *   This object should have the same structure as [google.protobuf.Any]{@link external:"google.protobuf.Any"}
+ *   This object should have the same structure as [Any]{@link google.protobuf.Any}
  *
+ * @typedef Status
+ * @memberof google.rpc
  * @see [google.rpc.Status definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto}
  */
+var Status = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};

@@ -1,39 +1,28 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Video Intelligence API Node.js Samples
+# Google Cloud Video Intelligence API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-videointelligence.svg)]()
+[![Build](https://storage.googleapis.com/.svg)]()
 
 The [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence) allows developers to use Google video analysis technology as part of their applications.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Video Intelligence](#video-intelligence)
-* [Running the tests](#running-the-tests)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With **npm**:
-
-        npm install
-
-    With **yarn**:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisites
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
 ### Video Intelligence
 
-View the [documentation][video_0_docs] or the [source code][video_0_code].
+View the [source code][video_0_code].
 
 __Usage:__ `node analyze.js --help`
 
@@ -53,7 +42,7 @@ Examples:
   node analyze.js faces gs://demomaker/larry_sergey_ice_bucket_short.mp4
   node analyze.js shots gs://demomaker/sushi.mp4
   node analyze.js labels-gcs gs://demomaker/tomatoes.mp4
-  node analyze.js labels-file resources/cat.mp4
+  node analyze.js labels-file cat.mp4
   node analyze.js safe-search gs://demomaker/tomatoes.mp4
 
 For more information, see https://cloud.google.com/video-intelligence/docs
@@ -61,17 +50,3 @@ For more information, see https://cloud.google.com/video-intelligence/docs
 
 [video_0_docs]: https://cloud.google.com/video-intelligence/docs
 [video_0_code]: analyze.js
-
-## Running the tests
-
-1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
-
-1.  Run the tests:
-
-    With **npm**:
-
-        npm test
-
-    With **yarn**:
-
-        yarn test

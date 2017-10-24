@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * Video annotation request.
@@ -27,7 +23,7 @@
  *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   {@link google.rpc.Code.INVALID_ARGUMENT}). For more information, see
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
  *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *   A video URI may include wildcards in `object-id`, and thus identify
  *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
@@ -41,19 +37,19 @@
  * @property {number[]} features
  *   Requested video annotation features.
  *
- *   The number should be among the values of [Feature]{@link Feature}
+ *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1beta2.Feature}
  *
  * @property {Object} videoContext
  *   Additional video context and/or feature-specific parameters.
  *
- *   This object should have the same structure as [VideoContext]{@link VideoContext}
+ *   This object should have the same structure as [VideoContext]{@link google.cloud.videointelligence.v1beta2.VideoContext}
  *
  * @property {string} outputUri
  *   Optional location where the output (in JSON format) should be stored.
  *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
  *   URIs are supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   {@link google.rpc.Code.INVALID_ARGUMENT}). For more information, see
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
  *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @property {string} locationId
@@ -61,7 +57,8 @@
  *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
  *   is specified, a region will be determined based on video file location.
  *
- * @class
+ * @typedef AnnotateVideoRequest
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.AnnotateVideoRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var AnnotateVideoRequest = {
@@ -76,29 +73,30 @@ var AnnotateVideoRequest = {
  *   to be contiguous or span the whole video. If unspecified, each video
  *   is treated as a single segment.
  *
- *   This object should have the same structure as [VideoSegment]{@link VideoSegment}
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1beta2.VideoSegment}
  *
  * @property {Object} labelDetectionConfig
  *   Config for LABEL_DETECTION.
  *
- *   This object should have the same structure as [LabelDetectionConfig]{@link LabelDetectionConfig}
+ *   This object should have the same structure as [LabelDetectionConfig]{@link google.cloud.videointelligence.v1beta2.LabelDetectionConfig}
  *
  * @property {Object} shotChangeDetectionConfig
  *   Config for SHOT_CHANGE_DETECTION.
  *
- *   This object should have the same structure as [ShotChangeDetectionConfig]{@link ShotChangeDetectionConfig}
+ *   This object should have the same structure as [ShotChangeDetectionConfig]{@link google.cloud.videointelligence.v1beta2.ShotChangeDetectionConfig}
  *
  * @property {Object} explicitContentDetectionConfig
  *   Config for EXPLICIT_CONTENT_DETECTION.
  *
- *   This object should have the same structure as [ExplicitContentDetectionConfig]{@link ExplicitContentDetectionConfig}
+ *   This object should have the same structure as [ExplicitContentDetectionConfig]{@link google.cloud.videointelligence.v1beta2.ExplicitContentDetectionConfig}
  *
  * @property {Object} faceDetectionConfig
  *   Config for FACE_DETECTION.
  *
- *   This object should have the same structure as [FaceDetectionConfig]{@link FaceDetectionConfig}
+ *   This object should have the same structure as [FaceDetectionConfig]{@link google.cloud.videointelligence.v1beta2.FaceDetectionConfig}
  *
- * @class
+ * @typedef VideoContext
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.VideoContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var VideoContext = {
@@ -113,7 +111,7 @@ var VideoContext = {
  *   video-level labels or segment-level labels.
  *   If unspecified, defaults to `SHOT_MODE`.
  *
- *   The number should be among the values of [LabelDetectionMode]{@link LabelDetectionMode}
+ *   The number should be among the values of [LabelDetectionMode]{@link google.cloud.videointelligence.v1beta2.LabelDetectionMode}
  *
  * @property {boolean} stationaryCamera
  *   Whether the video has been shot from a stationary (i.e. non-moving) camera.
@@ -125,7 +123,8 @@ var VideoContext = {
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
- * @class
+ * @typedef LabelDetectionConfig
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.LabelDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var LabelDetectionConfig = {
@@ -140,7 +139,8 @@ var LabelDetectionConfig = {
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
- * @class
+ * @typedef ShotChangeDetectionConfig
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.ShotChangeDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var ShotChangeDetectionConfig = {
@@ -155,7 +155,8 @@ var ShotChangeDetectionConfig = {
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
- * @class
+ * @typedef ExplicitContentDetectionConfig
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var ExplicitContentDetectionConfig = {
@@ -173,7 +174,8 @@ var ExplicitContentDetectionConfig = {
  * @property {boolean} includeBoundingBoxes
  *   Whether bounding boxes be included in the face annotation output.
  *
- * @class
+ * @typedef FaceDetectionConfig
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.FaceDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var FaceDetectionConfig = {
@@ -187,15 +189,16 @@ var FaceDetectionConfig = {
  *   Time-offset, relative to the beginning of the video,
  *   corresponding to the start of the segment (inclusive).
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} endTimeOffset
  *   Time-offset, relative to the beginning of the video,
  *   corresponding to the end of the segment (inclusive).
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
- * @class
+ * @typedef VideoSegment
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.VideoSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var VideoSegment = {
@@ -208,12 +211,13 @@ var VideoSegment = {
  * @property {Object} segment
  *   Video segment where a label was detected.
  *
- *   This object should have the same structure as [VideoSegment]{@link VideoSegment}
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1beta2.VideoSegment}
  *
  * @property {number} confidence
  *   Confidence that the label is accurate. Range: [0, 1].
  *
- * @class
+ * @typedef LabelSegment
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.LabelSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var LabelSegment = {
@@ -227,12 +231,13 @@ var LabelSegment = {
  *   Time-offset, relative to the beginning of the video, corresponding to the
  *   video frame for this location.
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} confidence
  *   Confidence that the label is accurate. Range: [0, 1].
  *
- * @class
+ * @typedef LabelFrame
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.LabelFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var LabelFrame = {
@@ -253,7 +258,8 @@ var LabelFrame = {
  * @property {string} languageCode
  *   Language code for `description` in BCP-47 format.
  *
- * @class
+ * @typedef Entity
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.Entity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var Entity = {
@@ -266,7 +272,7 @@ var Entity = {
  * @property {Object} entity
  *   Detected entity.
  *
- *   This object should have the same structure as [Entity]{@link Entity}
+ *   This object should have the same structure as [Entity]{@link google.cloud.videointelligence.v1beta2.Entity}
  *
  * @property {Object[]} categoryEntities
  *   Common categories for the detected entity.
@@ -274,19 +280,20 @@ var Entity = {
  *   cases there might be more than one categories e.g. `Terrier` could also be
  *   a `pet`.
  *
- *   This object should have the same structure as [Entity]{@link Entity}
+ *   This object should have the same structure as [Entity]{@link google.cloud.videointelligence.v1beta2.Entity}
  *
  * @property {Object[]} segments
  *   All video segments where a label was detected.
  *
- *   This object should have the same structure as [LabelSegment]{@link LabelSegment}
+ *   This object should have the same structure as [LabelSegment]{@link google.cloud.videointelligence.v1beta2.LabelSegment}
  *
  * @property {Object[]} frames
  *   All video frames where a label was detected.
  *
- *   This object should have the same structure as [LabelFrame]{@link LabelFrame}
+ *   This object should have the same structure as [LabelFrame]{@link google.cloud.videointelligence.v1beta2.LabelFrame}
  *
- * @class
+ * @typedef LabelAnnotation
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.LabelAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var LabelAnnotation = {
@@ -300,14 +307,15 @@ var LabelAnnotation = {
  *   Time-offset, relative to the beginning of the video, corresponding to the
  *   video frame for this location.
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} pornographyLikelihood
  *   Likelihood of the pornography content..
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.videointelligence.v1beta2.Likelihood}
  *
- * @class
+ * @typedef ExplicitContentFrame
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.ExplicitContentFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var ExplicitContentFrame = {
@@ -322,9 +330,10 @@ var ExplicitContentFrame = {
  * @property {Object[]} frames
  *   All video frames where explicit content was detected.
  *
- *   This object should have the same structure as [ExplicitContentFrame]{@link ExplicitContentFrame}
+ *   This object should have the same structure as [ExplicitContentFrame]{@link google.cloud.videointelligence.v1beta2.ExplicitContentFrame}
  *
- * @class
+ * @typedef ExplicitContentAnnotation
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.ExplicitContentAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var ExplicitContentAnnotation = {
@@ -348,7 +357,8 @@ var ExplicitContentAnnotation = {
  * @property {number} bottom
  *   Bottom Y coordinate.
  *
- * @class
+ * @typedef NormalizedBoundingBox
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.NormalizedBoundingBox definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var NormalizedBoundingBox = {
@@ -361,9 +371,10 @@ var NormalizedBoundingBox = {
  * @property {Object} segment
  *   Video segment where a face was detected.
  *
- *   This object should have the same structure as [VideoSegment]{@link VideoSegment}
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1beta2.VideoSegment}
  *
- * @class
+ * @typedef FaceSegment
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.FaceSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var FaceSegment = {
@@ -378,15 +389,16 @@ var FaceSegment = {
  *   There can be more than one boxes if the same face is detected in multiple
  *   locations within the current frame.
  *
- *   This object should have the same structure as [NormalizedBoundingBox]{@link NormalizedBoundingBox}
+ *   This object should have the same structure as [NormalizedBoundingBox]{@link google.cloud.videointelligence.v1beta2.NormalizedBoundingBox}
  *
  * @property {Object} timeOffset
  *   Time-offset, relative to the beginning of the video,
  *   corresponding to the video frame for this location.
  *
- *   This object should have the same structure as [google.protobuf.Duration]{@link external:"google.protobuf.Duration"}
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
- * @class
+ * @typedef FaceFrame
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.FaceFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var FaceFrame = {
@@ -402,14 +414,15 @@ var FaceFrame = {
  * @property {Object[]} segments
  *   All video segments where a face was detected.
  *
- *   This object should have the same structure as [FaceSegment]{@link FaceSegment}
+ *   This object should have the same structure as [FaceSegment]{@link google.cloud.videointelligence.v1beta2.FaceSegment}
  *
  * @property {Object[]} frames
  *   All video frames where a face was detected.
  *
- *   This object should have the same structure as [FaceFrame]{@link FaceFrame}
+ *   This object should have the same structure as [FaceFrame]{@link google.cloud.videointelligence.v1beta2.FaceFrame}
  *
- * @class
+ * @typedef FaceAnnotation
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var FaceAnnotation = {
@@ -427,42 +440,43 @@ var FaceAnnotation = {
  *   Label annotations on video level or user specified segment level.
  *   There is exactly one element for each unique label.
  *
- *   This object should have the same structure as [LabelAnnotation]{@link LabelAnnotation}
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1beta2.LabelAnnotation}
  *
  * @property {Object[]} shotLabelAnnotations
  *   Label annotations on shot level.
  *   There is exactly one element for each unique label.
  *
- *   This object should have the same structure as [LabelAnnotation]{@link LabelAnnotation}
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1beta2.LabelAnnotation}
  *
  * @property {Object[]} frameLabelAnnotations
  *   Label annotations on frame level.
  *   There is exactly one element for each unique label.
  *
- *   This object should have the same structure as [LabelAnnotation]{@link LabelAnnotation}
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1beta2.LabelAnnotation}
  *
  * @property {Object[]} faceAnnotations
  *   Face annotations. There is exactly one element for each unique face.
  *
- *   This object should have the same structure as [FaceAnnotation]{@link FaceAnnotation}
+ *   This object should have the same structure as [FaceAnnotation]{@link google.cloud.videointelligence.v1beta2.FaceAnnotation}
  *
  * @property {Object[]} shotAnnotations
  *   Shot annotations. Each shot is represented as a video segment.
  *
- *   This object should have the same structure as [VideoSegment]{@link VideoSegment}
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1beta2.VideoSegment}
  *
  * @property {Object} explicitAnnotation
  *   Explicit content annotation.
  *
- *   This object should have the same structure as [ExplicitContentAnnotation]{@link ExplicitContentAnnotation}
+ *   This object should have the same structure as [ExplicitContentAnnotation]{@link google.cloud.videointelligence.v1beta2.ExplicitContentAnnotation}
  *
  * @property {Object} error
  *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
  *   some videos may succeed and some may fail.
  *
- *   This object should have the same structure as [google.rpc.Status]{@link external:"google.rpc.Status"}
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
- * @class
+ * @typedef VideoAnnotationResults
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.VideoAnnotationResults definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var VideoAnnotationResults = {
@@ -477,9 +491,10 @@ var VideoAnnotationResults = {
  * @property {Object[]} annotationResults
  *   Annotation results for all videos specified in `AnnotateVideoRequest`.
  *
- *   This object should have the same structure as [VideoAnnotationResults]{@link VideoAnnotationResults}
+ *   This object should have the same structure as [VideoAnnotationResults]{@link google.cloud.videointelligence.v1beta2.VideoAnnotationResults}
  *
- * @class
+ * @typedef AnnotateVideoResponse
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.AnnotateVideoResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var AnnotateVideoResponse = {
@@ -500,14 +515,15 @@ var AnnotateVideoResponse = {
  * @property {Object} startTime
  *   Time when the request was received.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
  *   Time of the most recent update.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @class
+ * @typedef VideoAnnotationProgress
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.VideoAnnotationProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var VideoAnnotationProgress = {
@@ -522,9 +538,10 @@ var VideoAnnotationProgress = {
  * @property {Object[]} annotationProgress
  *   Progress metadata for all videos specified in `AnnotateVideoRequest`.
  *
- *   This object should have the same structure as [VideoAnnotationProgress]{@link VideoAnnotationProgress}
+ *   This object should have the same structure as [VideoAnnotationProgress]{@link google.cloud.videointelligence.v1beta2.VideoAnnotationProgress}
  *
- * @class
+ * @typedef AnnotateVideoProgress
+ * @memberof google.cloud.videointelligence.v1beta2
  * @see [google.cloud.videointelligence.v1beta2.AnnotateVideoProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta2/video_intelligence.proto}
  */
 var AnnotateVideoProgress = {
@@ -535,6 +552,7 @@ var AnnotateVideoProgress = {
  * Video annotation feature.
  *
  * @enum {number}
+ * @memberof google.cloud.videointelligence.v1beta2
  */
 var Feature = {
 
@@ -568,6 +586,7 @@ var Feature = {
  * Label detection mode.
  *
  * @enum {number}
+ * @memberof google.cloud.videointelligence.v1beta2
  */
 var LabelDetectionMode = {
 
@@ -596,6 +615,7 @@ var LabelDetectionMode = {
  * Bucketized representation of likelihood.
  *
  * @enum {number}
+ * @memberof google.cloud.videointelligence.v1beta2
  */
 var Likelihood = {
 
