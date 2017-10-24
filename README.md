@@ -15,21 +15,21 @@ This client supports the following Google Cloud Platform services at a [General 
 * [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (GA)
 * [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
-* [Google Stackdriver Logging](#google-stackdriver-logging-ga) (GA)
+* [Google Stackdriver Logging](https://github.com/googleapis/nodejs-logging/) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [Cloud Firestore](http://github.com/googleapis/nodejs-firestore/) (Beta)
+* [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](#cloud-spanner-beta) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
-* [Google Stackdriver Monitoring](#google-stackdriver-monitoring-beta) (Beta)
+* [Google Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
-* [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
 * [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
