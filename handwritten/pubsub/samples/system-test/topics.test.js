@@ -26,6 +26,7 @@ const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
 const topicNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
 const subscriptionNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
 const subscriptionNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
+const subscriptionNameThree = `nodejs-docs-samples-test-${uuid.v4()}`;
 const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
 const expectedMessage = { data: `Hello, world!` };
@@ -47,6 +48,9 @@ test.after.always(async () => {
   } catch (err) {} // ignore error
   try {
     await pubsub.subscription(subscriptionNameTwo).delete();
+  } catch (err) {} // ignore error
+  try {
+    await pubsub.subscription(subscriptionNameThree).delete();
   } catch (err) {} // ignore error
   try {
     await pubsub.topic(topicNameTwo).delete();
@@ -129,6 +133,18 @@ test.serial(`should publish ordered messages`, async (t) => {
   t.is(message.data.toString(), expectedMessage.data);
   t.is(message.attributes.counterId, '2');
   await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
+});
+
+test.serial(`should publish with specific batch settings`, async (t) => {
+  t.plan(2);
+  const expectedWait = 1000;
+  const [subscription] = await pubsub.topic(topicNameOne).createSubscription(subscriptionNameThree);
+  const startTime = Date.now();
+  await tools.runAsync(`${cmd} publish-batch ${topicNameOne} "${expectedMessage.data}" -w ${expectedWait}`, cwd);
+  const receivedMessage = await _pullOneMessage(subscription);
+  const publishTime = Date.parse(receivedMessage.publishTime);
+  t.is(receivedMessage.data.toString(), expectedMessage.data);
+  t.true(publishTime - startTime > expectedWait);
 });
 
 test.serial(`should set the IAM policy for a topic`, async (t) => {

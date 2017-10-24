@@ -26,7 +26,7 @@
 const PubSub = require(`@google-cloud/pubsub`);
 
 // [START pubsub_list_topics]
-function listTopics () {
+function listAllTopics () {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -99,6 +99,35 @@ function publishMessage (topicName, data) {
     });
 }
 // [END pubsub_publish_message]
+
+// [START pubsub_publisher_batched_settings]
+function publishBatchedMessages (topicName, data, maxMessages, maxWaitTime) {
+  // Instantiates a client
+  const pubsub = PubSub();
+
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsub.topic(topicName);
+
+  // Create a publisher for the topic (with additional batching configuration)
+  const publisher = topic.publisher({
+    batching: {
+      maxMessages: maxMessages,
+      maxMilliseconds: maxWaitTime
+    }
+  });
+
+  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
+  const dataBuffer = Buffer.from(data);
+  return publisher.publish(dataBuffer)
+    .then((results) => {
+      const messageId = results[0];
+
+      console.log(`Message ${messageId} published.`);
+
+      return messageId;
+    });
+}
+// [END pubsub_publisher_batched_settings]
 
 let publishCounterValue = 1;
 
@@ -233,7 +262,7 @@ const cli = require(`yargs`)
     `list`,
     `Lists all topics in the current project.`,
     {},
-    listTopics
+    listAllTopics
   )
   .command(
     `create <topicName>`,
@@ -253,6 +282,25 @@ const cli = require(`yargs`)
     {},
     (opts) => {
       publishMessage(opts.topicName, opts.message);
+    }
+  )
+    .command(
+    `publish-batch <topicName> <message>`,
+    `Publishes messages to a topic using custom batching settings.`,
+  {
+    maxWaitTime: {
+      alias: 'w',
+      type: 'number',
+      default: 10
+    },
+    maxMessages: {
+      alias: 'm',
+      type: 'number',
+      default: 10
+    }
+  },
+    (opts) => {
+      publishBatchedMessages(opts.topicName, opts.message, opts.maxMessages, opts.maxWaitTime);
     }
   )
   .command(
@@ -291,6 +339,8 @@ const cli = require(`yargs`)
   .example(`node $0 delete my-topic`)
   .example(`node $0 publish my-topic "Hello, world!"`)
   .example(`node $0 publish my-topic '{"data":"Hello, world!"}'`)
+  .example(`node $0 publish-ordered my-topic "Hello, world!"`)
+  .example(`node $0 publish-batch my-topic "Hello, world!" -w 1000`)
   .example(`node $0 get-policy greetings`)
   .example(`node $0 set-policy greetings`)
   .example(`node $0 test-permissions greetings`)

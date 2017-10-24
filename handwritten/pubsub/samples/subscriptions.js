@@ -84,6 +84,32 @@ function createSubscription (topicName, subscriptionName) {
 }
 // [END pubsub_create_subscription]
 
+// [START pubsub_subscriber_flow_settings]
+function createFlowControlledSubscription (topicName, subscriptionName, maxInProgress, maxBytes) {
+  // Instantiates a client
+  const pubsub = PubSub();
+
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsub.topic(topicName);
+
+  // Creates a new subscription, e.g. "my-new-subscription"
+  // Note that flow control configurations are not persistent
+  return topic.createSubscription(subscriptionName, {
+    flowControl: {
+      maxBytes: maxBytes,
+      maxMessages: maxInProgress
+    }
+  })
+    .then((results) => {
+      const subscription = results[0];
+
+      console.log(`Subscription ${subscription.name} created with a maximum of ${maxInProgress} unprocessed messages.`);
+
+      return subscription;
+    });
+}
+// [END pubsub_subscriber_flow_settings]
+
 // [START pubsub_create_push_subscription]
 function createPushSubscription (topicName, subscriptionName) {
   // Instantiates a client
@@ -111,6 +137,28 @@ function createPushSubscription (topicName, subscriptionName) {
     });
 }
 // [END pubsub_create_push_subscription]
+
+// [START pubsub_modify_push_config]
+function modifyPushConfig (topicName, subscriptionName, pushEndpoint) {
+  // Instantiates a client
+  const pubsub = PubSub();
+
+  // References an existing topic and subscription, e.g. "my-topic" > "my-subscription"
+  const topic = pubsub.topic(topicName);
+  const subscription = topic.subscription(subscriptionName);
+
+  const options = {
+    // Set to an HTTPS endpoint of your choice. If necessary, register
+    // (authorize) the domain on which the server is hosted.
+    pushEndpoint: `https://${pubsub.projectId}.appspot.com/push`
+  };
+
+  return subscription.modifyPushConfig(options)
+    .then((results) => {
+      console.log(`Modified push config for subscription ${subscription.name}.`);
+    });
+}
+// [END pubsub_modify_push_config]
 
 // [START pubsub_delete_subscription]
 function deleteSubscription (subscriptionName) {
@@ -246,6 +294,42 @@ function listenForOrderedMessages (subscriptionName, timeout) {
 }
 // [END pubsub_listen_ordered_messages]
 
+// [START pubsub_listen_errors]
+function listenForErrors (subscriptionName, timeout) {
+  // Instantiates a client
+  const pubsub = PubSub();
+
+  // References an existing subscription, e.g. "my-subscription"
+  const subscription = pubsub.subscription(subscriptionName);
+
+  // Create an event handler to handle messages
+  const messageHandler = function (message) {
+    // Do something with the message
+    console.log(`Message: ${message}`);
+
+    // "Ack" (acknowledge receipt of) the message
+    message.ack();
+  };
+
+  // Create an event handler to handle errors
+  const errorHandler = function (error) {
+    // Do something with the error
+    console.error(`ERROR: ${error}`);
+  };
+
+  // Listen for new messages/errors until timeout is hit
+  return new Promise((resolve) => {
+    subscription.on(`message`, messageHandler);
+    subscription.on(`error`, errorHandler);
+    setTimeout(() => {
+      subscription.removeListener(`message`, messageHandler);
+      subscription.removeListener(`error`, errorHandler);
+      resolve();
+    }, timeout * 1000);
+  });
+}
+// [END pubsub_listen_errors]
+
 // [START pubsub_get_subscription_policy]
 function getSubscriptionPolicy (subscriptionName) {
   // Instantiates a client
@@ -350,10 +434,33 @@ const cli = require(`yargs`)
     (opts) => createSubscription(opts.topicName, opts.subscriptionName)
   )
   .command(
+    `create-flow <topicName> <subscriptionName>`,
+    `Creates a new subscription with flow-control limits, which don't persist between subscriptions.`,
+  {
+    maxInProgress: {
+      alias: 'm',
+      type: 'number',
+      default: 0
+    },
+    maxBytes: {
+      alias: 'b',
+      type: 'number',
+      default: 0
+    }
+  },
+    (opts) => createFlowControlledSubscription(opts.topicName, opts.subscriptionName, opts.maxInProgress, opts.maxBytes)
+  )
+  .command(
     `create-push <topicName> <subscriptionName>`,
     `Creates a new push subscription.`,
     {},
     (opts) => createPushSubscription(opts.topicName, opts.subscriptionName)
+  )
+  .command(
+    `modify-config <topicName> <subscriptionName>`,
+    `Modifies the configuration of an existing push subscription.`,
+    {},
+    (opts) => modifyPushConfig(opts.topicName, opts.subscriptionName)
   )
   .command(
     `delete <subscriptionName>`,
@@ -368,7 +475,7 @@ const cli = require(`yargs`)
     (opts) => getSubscription(opts.subscriptionName)
   )
   .command(
-    `listen <subscriptionName>`,
+    `listen-messages <subscriptionName>`,
     `Listens to messages for a subscription.`,
   {
     timeout: {
@@ -378,6 +485,18 @@ const cli = require(`yargs`)
     }
   },
     (opts) => listenForMessages(opts.subscriptionName, opts.timeout)
+  )
+  .command(
+    `listen-errors <subscriptionName>`,
+    `Listens to messages and errors for a subscription.`,
+  {
+    timeout: {
+      alias: 't',
+      type: 'number',
+      default: 10
+    }
+  },
+    (opts) => listenForErrors(opts.subscriptionName, opts.timeout)
   )
   .command(
     `get-policy <subscriptionName>`,
@@ -400,8 +519,12 @@ const cli = require(`yargs`)
   .example(`node $0 list`)
   .example(`node $0 list my-topic`)
   .example(`node $0 create my-topic worker-1`)
+  .example(`node $0 create-flow my-topic worker-1 -m 5`)
   .example(`node $0 create-push my-topic worker-1`)
+  .example(`node $0 modify-config my-topic worker-1`)
   .example(`node $0 get worker-1`)
+  .example(`node $0 listen-messages my-subscription`)
+  .example(`node $0 listen-errors my-subscription`)
   .example(`node $0 delete worker-1`)
   .example(`node $0 pull worker-1`)
   .example(`node $0 get-policy worker-1`)

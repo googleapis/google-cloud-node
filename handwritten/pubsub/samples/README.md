@@ -39,18 +39,22 @@ View the [documentation][topics_0_docs] or the [source code][topics_0_code].
 __Usage:__ `node topics.js --help`
 
 ```
+topics.js <command>
+
 Commands:
-  list                                   Lists all topics in the current project.
-  create <topicName>                     Creates a new topic.
-  delete <topicName>                     Deletes a topic.
-  publish <topicName> <message>          Publishes a message to a topic.
-  publish-ordered <topicName> <message>  Publishes an ordered message to a topic.
-  get-policy <topicName>                 Gets the IAM policy for a topic.
-  set-policy <topicName>                 Sets the IAM policy for a topic.
-  test-permissions <topicName>           Tests the permissions for a topic.
+  topics.js list                                   Lists all topics in the current project.
+  topics.js create <topicName>                     Creates a new topic.
+  topics.js delete <topicName>                     Deletes a topic.
+  topics.js publish <topicName> <message>          Publishes a message to a topic.
+  topics.js publish-batch <topicName> <message>    Publishes messages to a topic using custom batching settings.
+  topics.js publish-ordered <topicName> <message>  Publishes an ordered message to a topic.
+  topics.js get-policy <topicName>                 Gets the IAM policy for a topic.
+  topics.js set-policy <topicName>                 Sets the IAM policy for a topic.
+  topics.js test-permissions <topicName>           Tests the permissions for a topic.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node topics.js list
@@ -58,6 +62,8 @@ Examples:
   node topics.js delete my-topic
   node topics.js publish my-topic "Hello, world!"
   node topics.js publish my-topic '{"data":"Hello, world!"}'
+  node topics.js publish-ordered my-topic "Hello, world!"
+  node topics.js publish-batch my-topic "Hello, world!" -w 1000
   node topics.js get-policy greetings
   node topics.js set-policy greetings
   node topics.js test-permissions greetings
@@ -75,27 +81,39 @@ View the [documentation][subscriptions_1_docs] or the [source code][subscription
 __Usage:__ `node subscriptions.js --help`
 
 ```
+subscriptions.js <command>
+
 Commands:
-  list [topicName]                            Lists all subscriptions in the current project, optionally filtering by a
-                                              topic.
-  create <topicName> <subscriptionName>       Creates a new subscription.
-  create-push <topicName> <subscriptionName>  Creates a new push subscription.
-  delete <subscriptionName>                   Deletes a subscription.
-  get <subscriptionName>                      Gets the metadata for a subscription.
-  listen <subscriptionName>                   Listens to messages for a subscription.
-  get-policy <subscriptionName>               Gets the IAM policy for a subscription.
-  set-policy <subscriptionName>               Sets the IAM policy for a subscription.
-  test-permissions <subscriptionName>         Tests the permissions for a subscription.
+  subscriptions.js list [topicName]                             Lists all subscriptions in the current project,
+                                                                optionally filtering by a topic.
+  subscriptions.js create <topicName> <subscriptionName>        Creates a new subscription.
+  subscriptions.js create-flow <topicName> <subscriptionName>   Creates a new subscription with flow-control limits,
+                                                                which don't persist between subscriptions.
+  subscriptions.js create-push <topicName> <subscriptionName>   Creates a new push subscription.
+  subscriptions.js modify-config <topicName>                    Modifies the configuration of an existing push
+  <subscriptionName>                                            subscription.
+  subscriptions.js delete <subscriptionName>                    Deletes a subscription.
+  subscriptions.js get <subscriptionName>                       Gets the metadata for a subscription.
+  subscriptions.js listen-messages <subscriptionName>           Listens to messages for a subscription.
+  subscriptions.js listen-errors <subscriptionName>             Listens to messages and errors for a subscription.
+  subscriptions.js get-policy <subscriptionName>                Gets the IAM policy for a subscription.
+  subscriptions.js set-policy <subscriptionName>                Sets the IAM policy for a subscription.
+  subscriptions.js test-permissions <subscriptionName>          Tests the permissions for a subscription.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node subscriptions.js list
   node subscriptions.js list my-topic
   node subscriptions.js create my-topic worker-1
+  node subscriptions.js create-flow my-topic worker-1 -m 5
   node subscriptions.js create-push my-topic worker-1
+  node subscriptions.js modify-config my-topic worker-1
   node subscriptions.js get worker-1
+  node subscriptions.js listen-messages my-subscription
+  node subscriptions.js listen-errors my-subscription
   node subscriptions.js delete worker-1
   node subscriptions.js pull worker-1
   node subscriptions.js get-policy worker-1
