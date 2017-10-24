@@ -80,6 +80,8 @@ var PKG = require('../package.json');
  * Full quickstart example:
  */
 function Translate(options) {
+  options = options || {};
+
   if (!(this instanceof Translate)) {
     options = common.util.normalizeArguments(this, options, {
       projectIdRequired: false,
