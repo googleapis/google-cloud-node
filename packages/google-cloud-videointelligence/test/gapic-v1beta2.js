@@ -1,31 +1,35 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 'use strict';
 
-var assert = require('assert');
-var videoIntelligence = require('../src');
+const assert = require('assert');
+
+const videoIntelligenceModule = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
 error.code = FAKE_STATUS_CODE;
 
-describe('VideoIntelligenceServiceClient', function() {
+describe('VideoIntelligenceServiceClient', () => {
   describe('annotateVideo', function() {
-    it('invokes annotateVideo without error', function(done) {
-      var client = videoIntelligence.v1beta2();
+    it('invokes annotateVideo without error', done => {
+      var client = new videoIntelligenceModule.v1beta2
+        .VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var request = {};
@@ -34,75 +38,90 @@ describe('VideoIntelligenceServiceClient', function() {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._annotateVideo = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.annotateVideo(request).then(function(responses) {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(function(responses) {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(function(err) {
-        done(err);
-      });
+      client
+        .annotateVideo(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
-    it('invokes annotateVideo with error', function(done) {
-      var client = videoIntelligence.v1beta2();
+    it('invokes annotateVideo with error', done => {
+      var client = new videoIntelligenceModule.v1beta2
+        .VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var request = {};
 
       // Mock Grpc layer
-      client._annotateVideo = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.annotateVideo(request).then(function(responses) {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(function(responses) {
-        assert.fail();
-      }).catch(function(err) {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .annotateVideo(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
-    it('has longrunning decoder functions', function() {
-      var client = videoIntelligence.v1beta2();
-      assert(client.longrunningDescriptors.annotateVideo.responseDecoder instanceof Function);
-      assert(client.longrunningDescriptors.annotateVideo.metadataDecoder instanceof Function);
+    it('has longrunning decoder functions', () => {
+      var client = new videoIntelligenceModule.v1beta2
+        .VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.annotateVideo.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.annotateVideo.metadataDecoder instanceof
+          Function
+      );
     });
   });
-
 });
 
-function mockSimpleGrpcMethod(expectedRequest, response, error) {
-  return function(actualRequest, options, callback) {
-    assert.deepStrictEqual(actualRequest, expectedRequest);
-    if (error) {
-      callback(error);
-    } else if (response) {
-      callback(null, response);
-    } else {
-      callback(null);
-    }
-  };
-}
-
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
-  return function(request) {
+  return request => {
     assert.deepStrictEqual(request, expectedRequest);
     var mockOperation = {
       promise: function() {
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
           } else {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };

@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "video",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "video",
+      "name": "Video Intelligence",
+      "file": "analyze.js",
+      "docs_link": "https://cloud.google.com/video-intelligence/docs",
+      "usage": "node analyze.js --help"
+    }
+  ]
+}
