@@ -22,7 +22,9 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var grpc = require('grpc');
 var is = require('is');
+var path = require('path');
 var through = require('through2');
 var util = require('util');
 
@@ -44,12 +46,19 @@ var PartialResultStream = require('./partial-result-stream.js');
  */
 var TransactionRequest = require('./transaction-request.js');
 
-/**
- * The gRPC `ABORTED` error code.
- *
- * @private
- */
 var ABORTED = 10;
+var DEFAULT_TIMEOUT = 60000;
+var RETRY_INFO_KEY = 'google.rpc.retryinfo-bin';
+
+var services = grpc.load({
+  root: path.resolve(__dirname, '../protos'),
+  file: 'google/rpc/error_details.proto'
+}, 'proto', {
+  binaryAsBase64: true,
+  convertFieldsToCamelCase: true
+});
+
+var RetryInfo = services.google.rpc.RetryInfo;
 
 /*! Developer Documentation
  *
@@ -95,16 +104,31 @@ function Transaction(session, options) {
   this.transaction = true;
 
   this.queuedMutations_ = [];
-  this.retries_ = 0;
   this.runFn_ = null;
 
-  this.timeout_ = 60000;
+  this.timeout_ = DEFAULT_TIMEOUT;
   this.beginTime_ = null;
 
   TransactionRequest.call(this, options);
 }
 
 util.inherits(Transaction, TransactionRequest);
+
+/**
+ * Extracts retry delay and formats into milliseconds.
+ *
+ * @param {Buffer} retryInfo - The retry info.
+ * @return {number}
+ */
+Transaction.getRetryDelay_ = function(err) {
+  var retryInfo = err.metadata.get(RETRY_INFO_KEY)[0];
+  var retryDelay = RetryInfo.decode(retryInfo).retryDelay;
+
+  var seconds = parseInt(retryDelay.seconds.toNumber(), 10) * 1000;
+  var milliseconds = parseInt(retryDelay.nanos, 10) / 1e6;
+
+  return seconds + milliseconds;
+};
 
 /**
  * In the event that a Transaction is aborted and the deadline has been
@@ -120,17 +144,6 @@ Transaction.createDeadlineError_ = function(err) {
     code: 4,
     message: 'Deadline for Transaction exceeded.'
   });
-};
-
-/**
- * Create a retry backoff time based on the number of attempts already made.
- *
- * @private
- *
- * @return {?number}
- */
-Transaction.createRetryDelay_ = function(retries) {
-  return (Math.pow(2, retries) * 1000) + Math.floor(Math.random() * 1000);
 };
 
 /**
@@ -287,8 +300,8 @@ Transaction.prototype.commit = function(callback) {
  */
 Transaction.prototype.end = function(callback) {
   this.queuedMutations_ = [];
-  this.retries_ = 0;
   this.runFn_ = null;
+
   delete this.id;
 
   if (is.fn(callback)) {
@@ -330,7 +343,7 @@ Transaction.prototype.request = function(config, callback) {
     }
 
     if (self.shouldRetry_(err)) {
-      self.retry_();
+      self.retry_(Transaction.getRetryDelay_(err));
       return;
     }
 
@@ -373,7 +386,7 @@ Transaction.prototype.requestStream = function(config) {
     userStream.destroy();
 
     if (self.shouldRetry_(err)) {
-      self.retry_();
+      self.retry_(Transaction.getRetryDelay_(err));
       return;
     }
 
@@ -388,8 +401,10 @@ Transaction.prototype.requestStream = function(config) {
  * determined delay.
  *
  * @private
+ *
+ * @param {number} delay - The duration to wait before trying again.
  */
-Transaction.prototype.retry_ = function() {
+Transaction.prototype.retry_ = function(delay) {
   var self = this;
 
   this.begin(function(err) {
@@ -398,14 +413,11 @@ Transaction.prototype.retry_ = function() {
       return;
     }
 
-    var timeout = Transaction.createRetryDelay_(self.retries_);
-
-    self.retries_ += 1;
     self.queuedMutations_ = [];
 
     setTimeout(function() {
       self.runFn_(null, self);
-    }, timeout);
+    }, delay);
   });
 };
 
@@ -697,7 +709,8 @@ Transaction.prototype.runStream = function(query) {
  */
 Transaction.prototype.shouldRetry_ = function(err) {
   return err.code === ABORTED && is.fn(this.runFn_) &&
-    (Date.now() - this.beginTime_ < this.timeout_);
+    (Date.now() - this.beginTime_ < this.timeout_) &&
+    err.metadata.get(RETRY_INFO_KEY).length;
 };
 
 /*! Developer Documentation
