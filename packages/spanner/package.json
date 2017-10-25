@@ -39,6 +39,7 @@
     "array-uniq": "^1.0.3",
     "arrify": "^1.0.1",
     "checkpoint-stream": "^0.1.0",
+    "create-error-class": "^3.0.2",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
     "generic-pool": "^3.1.4",
@@ -51,6 +52,7 @@
     "merge-stream": "^1.0.1",
     "methmeth": "^1.1.0",
     "split-array-stream": "^1.0.0",
+    "stack-trace": "0.0.10",
     "stream-events": "^1.0.1",
     "string-format-obj": "^1.1.0",
     "through2": "^2.0.3"

@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var commonGrpc = require('@google-cloud/common-grpc');
+var createErrorClass = require('create-error-class');
 var extend = require('extend');
 var is = require('is');
 var util = require('util');
@@ -62,6 +63,14 @@ var Table = require('./table.js');
  * @private
  */
 var TransactionRequest = require('./transaction-request.js');
+
+/**
+ *
+ */
+var SessionLeakError = createErrorClass('SessionLeakError', function(leaks) {
+  this.message = leaks.length + ' session leaks found.';
+  this.messages = leaks;
+});
 
 /**
  * Create a Database object to interact with a Cloud Spanner database.
@@ -223,6 +232,8 @@ Database.formatName_ = function(instanceName, name) {
  *
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
+ * @param {?string[]} callback.err.messages - If a SessionLeakError is returned,
+ *     this will be an array populated by stack traces for each leak detected.
  *
  * @example
  * database.close(function(err) {
@@ -233,6 +244,12 @@ Database.formatName_ = function(instanceName, name) {
  */
 Database.prototype.close = function(callback) {
   var self = this;
+  var leaks = this.pool_.getSessionLeaks();
+
+  if (leaks.length) {
+    callback(new SessionLeakError(leaks));
+    return;
+  }
 
   this.pool_.clear().then(function() {
     self.parent.databases_.delete(self.id);
@@ -1122,3 +1139,4 @@ common.util.promisifyAll(Database, {
 });
 
 module.exports = Database;
+module.exports.SessionLeakError = SessionLeakError;
