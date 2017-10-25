@@ -132,6 +132,14 @@ describe('Transaction', function() {
       assert.strictEqual(transaction.runFn_, null);
     });
 
+    it('should initialize timeout correctly', function() {
+      assert.strictEqual(transaction.timeout_, 3600000);
+    });
+
+    it('should initialize a null beginTime_', function() {
+      assert.strictEqual(transaction.beginTime_, null);
+    });
+
     it('should inherit from TransactionRequest', function() {
       var OPTIONS = {};
 
