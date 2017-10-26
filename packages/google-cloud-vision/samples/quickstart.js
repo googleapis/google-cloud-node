@@ -19,8 +19,8 @@
 // Imports the Google Cloud client library
 const Vision = require('@google-cloud/vision');
 
-// Instantiates a client
-const vision = Vision();
+// Creates a client
+const vision = new Vision();
 
 // The name of the image file to annotate
 const fileName = './resources/wakeupcat.jpg';
