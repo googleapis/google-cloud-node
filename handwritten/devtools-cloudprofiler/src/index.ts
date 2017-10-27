@@ -13,23 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import * as extend from 'extend';
+import * as gcpMetadata from 'gcp-metadata';
 import * as path from 'path';
-import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
+import * as pify from 'pify';
+
+import {AuthenticationConfig, Common, ServiceConfig, ServiceObject} from '../third_party/types/common-types';
+
 import {Config, defaultConfig} from './config';
 import {Profiler, ProfilerConfig} from './profiler';
 
 const common: Common = require('@google-cloud/common');
 
+// Returns value of metadata field.
+// Throws error if there is a problem accessing metadata API.
+async function getMetadataInstanceField(field: string): Promise<string> {
+  const [response, metadata] =
+      await pify(gcpMetadata.instance, {multiArgs: true})(field);
+  return metadata;
+}
+
 // initConfig sets unset values in the configuration to the value retrieved from
-// environment variables, metadata, or the default value specified in
+// environment variables, metadata, or the default values specified in
 // defaultConfig.
-// Returns rejected promise if value that must be set cannot be initialized.
-async function initConfig(config: Config): Promise<ProfilerConfig> {
+// Throws error if value that must be set cannot be initialized.
+// Exported for testing purposes.
+export async function initConfig(config: Config): Promise<ProfilerConfig> {
   config = common.util.normalizeArguments(null, config);
 
-  const envConfig = {
-    logLevel: process.env.GCLOUD_PROFILER_LOGLEVEL,
+  const envConfig: Config = {
     projectId: process.env.GCLOUD_PROJECT,
     serviceContext: {
       service: process.env.GAE_SERVICE,
@@ -37,28 +50,46 @@ async function initConfig(config: Config): Promise<ProfilerConfig> {
     }
   };
 
+  if (process.env.GCLOUD_PROFILER_LOGLEVEL !== undefined) {
+    let envLogLevel = parseInt(process.env.GCLOUD_PROFILER_LOGLEVEL || '', 10);
+    if (envLogLevel !== NaN) {
+      envConfig.logLevel = envLogLevel;
+    }
+  }
+
   let envSetConfig: Config = {};
   if (process.env.hasOwnProperty('GCLOUD_PROFILER_CONFIG')) {
     envSetConfig =
         require(path.resolve(process.env.GCLOUD_PROFILER_CONFIG)) as Config;
   }
 
-  let normalizedConfig = extend(true, {}, defaultConfig, envConfig, config);
+  let mergedConfig =
+      extend(true, {}, defaultConfig, envSetConfig, envConfig, config);
 
-  if (normalizedConfig.serviceContext.service === undefined) {
-    throw new Error('service name must be specified in the configuration');
+  if (!mergedConfig.zone || !mergedConfig.instance) {
+    const [instance, zone] =
+        await Promise
+            .all([
+              getMetadataInstanceField('name'), getMetadataInstanceField('zone')
+            ])
+            .catch(
+                (err: Error) => {
+                    // ignore errors, which will occur when not on GCE.
+                }) ||
+        ['', ''];
+    if (!mergedConfig.zone) {
+      mergedConfig.zone = zone.substring(zone.lastIndexOf('/') + 1);
+    }
+    if (!mergedConfig.instance) {
+      mergedConfig.instance = instance;
+    }
   }
 
-  // TODO: fetch instance and zone from metadata. This will require function to
-  // be asynchrous.
-  if (normalizedConfig.instance === undefined) {
-    normalizedConfig.instance = '';
-  }
-  if (normalizedConfig.zone === undefined) {
-    normalizedConfig.zone = '';
+  if (mergedConfig.serviceContext.service === undefined) {
+    throw new Error('Service must be specified in the configuration.');
   }
 
-  return normalizedConfig;
+  return mergedConfig;
 }
 
 let profiler: Profiler|undefined = undefined;

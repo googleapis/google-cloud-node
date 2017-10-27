@@ -25,7 +25,6 @@ const pjson = require('../../package.json');
 const common: Common = require('@google-cloud/common');
 
 export interface ProfilerConfig extends AuthenticationConfig {
-  projectId: string;
   logLevel: number;
   serviceContext: {service: string; version?: string;};
   instance: string;
@@ -64,6 +63,6 @@ export class Profiler {
   // TODO: explain failure situations.
   async start(): Promise<void> {
     return Promise.reject(
-        new Error('start() is unimplemented for ProfileAgent'));
+        new Error('start() is unimplemented for ProfileAgent.'));
   }
 }
