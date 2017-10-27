@@ -34,3 +34,8 @@ exports.ServiceObject = require('./service-object.js');
  * @type {module:commonGrpc/service}
  */
 exports.Service = require('./service.js');
+
+/**
+ * @type {module:commonGrpc/grpc}
+ */
+exports.grpc = require('grpc');
