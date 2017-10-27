@@ -28,11 +28,13 @@ function printBucketAcl(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets the ACL for the bucket
   storage
@@ -56,14 +58,14 @@ function printBucketAclForUser(bucketName, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The email of the user to check, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const userEmail = 'Email of user to check, e.g. developer@company.com';
 
   const options = {
     // Specify the user
@@ -90,14 +92,14 @@ function addBucketOwner(bucketName, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The email of the user to add, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const userEmail = 'Email of user to add, e.g. developer@company.com';
 
   // Makes the user an owner of the bucket. You can use addAllUsers(),
   // addDomain(), addProject(), addGroup(), and addAllAuthenticatedUsers()
@@ -122,14 +124,14 @@ function removeBucketOwner(bucketName, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The email of the user to remove, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const userEmail = 'Email of user to remove, e.g. developer@company.com';
 
   // Removes the user from the access control list of the bucket. You can use
   // deleteAllUsers(), deleteDomain(), deleteProject(), deleteGroup(), and
@@ -151,14 +153,14 @@ function addBucketDefaultOwner(bucketName, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The email of the user to add, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const userEmail = 'Email of user to add, e.g. developer@company.com';
 
   // Makes the user an owner in the default ACL of the bucket. You can use
   // addAllUsers(), addDomain(), addProject(), addGroup(), and
@@ -183,14 +185,14 @@ function removeBucketDefaultOwner(bucketName, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The email of the user to remove, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const userEmail = 'Email of user to remove, e.g. developer@company.com';
 
   // Removes the user from the access control list of the bucket. You can use
   // deleteAllUsers(), deleteDomain(), deleteProject(), deleteGroup(), and
@@ -212,14 +214,14 @@ function printFileAcl(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
 
   // Gets the ACL for the file
   storage
@@ -244,17 +246,15 @@ function printFileAclForUser(bucketName, filename, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // The email of the user to check, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
+  // const userEmail = 'Email of user to check, e.g. developer@company.com';
 
   const options = {
     // Specify the user
@@ -282,17 +282,15 @@ function addFileOwner(bucketName, filename, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // The email of the user to add, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'Name of file to access, e.g. file.txt';
+  // const userEmail = 'Email of user to add, e.g. developer@company.com';
 
   // Makes the user an owner of the file. You can use addAllUsers(),
   // addDomain(), addProject(), addGroup(), and addAllAuthenticatedUsers()
@@ -316,17 +314,15 @@ function removeFileOwner(bucketName, filename, userEmail) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // The email of the user to remove, e.g. "developer@company.com"
-  // const userEmail = "developer@company.com";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'Name of file to access, e.g. file.txt';
+  // const userEmail = 'Email of user to remove, e.g. developer@company.com';
 
   // Removes the user from the access control list of the file. You can use
   // deleteAllUsers(), deleteDomain(), deleteProject(), deleteGroup(), and
@@ -344,7 +340,7 @@ function removeFileOwner(bucketName, filename, userEmail) {
   // [END storage_remove_file_owner]
 }
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .command(
     `print-bucket-acl <bucketName>`,
@@ -422,8 +418,4 @@ const cli = require(`yargs`)
     `For more information, see https://cloud.google.com/storage/docs/access-control/create-manage-lists`
   )
   .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict().argv;

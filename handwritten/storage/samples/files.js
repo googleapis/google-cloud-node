@@ -28,11 +28,13 @@ function listFiles(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Lists files in the bucket
   storage
@@ -57,17 +59,15 @@ function listFilesByPrefix(bucketName, prefix, delimiter) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The prefix by which to filter files, e.g. "public/"
-  // const prefix = "public/";
-
-  // The delimiter to use, e.g. "/"
-  // const delimiter = "/";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const prefix = 'Prefix by which to filter, e.g. public/';
+  // const delimiter = 'Delimiter to use, e.g. /';
 
   /**
    * This can be used to list all blobs in a "folder", e.g. "public/".
@@ -119,14 +119,14 @@ function uploadFile(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the local file to upload, e.g. "./local/path/to/file.txt"
-  // const filename = "./local/path/to/file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
 
   // Uploads a local file to the bucket
   storage
@@ -146,17 +146,15 @@ function downloadFile(bucketName, srcFilename, destFilename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the remote file to download, e.g. "file.txt"
-  // const srcFilename = "file.txt";
-
-  // The path to which the file should be downloaded, e.g. "./local/path/to/file.txt"
-  // const destFilename = "./local/path/to/file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const srcFilename = 'Remote file to download, e.g. file.txt';
+  // const destFilename = 'Local destination for file, e.g. ./local/path/to/file.txt';
 
   const options = {
     // The path to which the file should be downloaded, e.g. "./file.txt"
@@ -184,14 +182,14 @@ function deleteFile(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to delete, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to delete, e.g. file.txt';
 
   // Deletes the file from the bucket
   storage
@@ -212,14 +210,14 @@ function getMetadata(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
 
   // Gets the metadata for the file
   storage
@@ -262,14 +260,14 @@ function makePublic(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to make public, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to make public, e.g. file.txt';
 
   // Makes the file public
   storage
@@ -290,14 +288,14 @@ function generateSignedUrl(bucketName, filename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to access, e.g. "file.txt"
-  // const filename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
 
   // These options will allow temporary read access to the file
   const options = {
@@ -326,17 +324,15 @@ function moveFile(bucketName, srcFilename, destFilename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the file to move, e.g. "file.txt"
-  // const srcFilename = "file.txt";
-
-  // The destination path for the file, e.g. "moved.txt"
-  // const destFilename = "moved.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const srcFilename = 'File to move, e.g. file.txt';
+  // const destFilename = 'Destination for file, e.g. moved.txt';
 
   // Moves the file within the bucket
   storage
@@ -359,20 +355,16 @@ function copyFile(srcBucketName, srcFilename, destBucketName, destFilename) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the source bucket, e.g. "my-bucket"
-  // const srcBucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the source file, e.g. "file.txt"
-  // const srcFilename = "file.txt";
-
-  // The destination bucket, e.g. "my-other-bucket"
-  // const destBucketName = "my-other-bucket";
-
-  // The destination filename, e.g. "file.txt"
-  // const destFilename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const srcBucketName = 'Name of the source bucket, e.g. my-bucket';
+  // const srcFilename = 'Name of the source file, e.g. file.txt';
+  // const destBucketName = 'Name of the destination bucket, e.g. my-other-bucket';
+  // const destFilename = 'Destination name of file, e.g. file.txt';
 
   // Copies the file to the other bucket
   storage
@@ -390,7 +382,7 @@ function copyFile(srcBucketName, srcFilename, destBucketName, destFilename) {
   // [END storage_copy_file]
 }
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .command(
     `list <bucketName> [prefix] [delimiter]`,
@@ -495,8 +487,4 @@ const cli = require(`yargs`)
   .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
   .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict().argv;

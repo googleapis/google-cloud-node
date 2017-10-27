@@ -28,11 +28,13 @@ function createBucket(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to create, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Creates a new bucket
   storage
@@ -51,8 +53,8 @@ function listBuckets() {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // Instantiates a client
-  const storage = Storage();
+  // Creates a client
+  const storage = new Storage();
 
   // Lists all buckets in the current project
   storage
@@ -76,11 +78,13 @@ function deleteBucket(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to delete, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Deletes the bucket
   storage
@@ -95,7 +99,7 @@ function deleteBucket(bucketName) {
   // [END storage_delete_bucket]
 }
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .command(`create <bucket>`, `Creates a new bucket.`, {}, opts =>
     createBucket(opts.bucket)
@@ -114,8 +118,4 @@ const cli = require(`yargs`)
   .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
   .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict().argv;

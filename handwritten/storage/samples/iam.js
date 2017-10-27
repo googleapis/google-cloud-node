@@ -20,11 +20,13 @@ function viewBucketIamMembers(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets and displays the bucket's IAM policy
   storage
@@ -56,17 +58,18 @@ function addBucketIamMember(bucketName, roleName, members) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
-  // The bucket-level IAM role to grant, e.g. "roles/storage.objectViewer"
-  // const roleName = "roles/storage.objectViewer";
-
-  // The list of IAM members to grant the role to, e.g. ['user:jdoe@example.com', 'group:admins@example.com']
-  // const members = ['user:jdoe@example.com', 'group:admins@example.com'];
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const roleName = 'Role to grant, e.g. roles/storage.objectViewer';
+  // const members = [
+  //   'user:jdoe@example.com',    // Example members to grant
+  //   'group:admins@example.com', // the new role to
+  // ];
 
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
 
   // Get a reference to a Google Cloud Storage bucket
   const bucket = storage.bucket(bucketName);
@@ -105,17 +108,18 @@ function removeBucketIamMember(bucketName, roleName, members) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
-  // The bucket-level IAM role to grant, e.g. "roles/storage.objectViewer"
-  // const roleName = "roles/storage.objectViewer";
-
-  // The list of IAM members to grant the role to, e.g. ['user:jdoe@example.com', 'group:admins@example.com']
-  // const members = ['user:jdoe@example.com', 'group:admins@example.com'];
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const roleName = 'Role to grant, e.g. roles/storage.objectViewer';
+  // const members = [
+  //   'user:jdoe@example.com',    // Example members to grant
+  //   'group:admins@example.com', // the new role to
+  // ];
 
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
 
   // Get a reference to a Google Cloud Storage bucket
   const bucket = storage.bucket(bucketName);
@@ -195,4 +199,5 @@ require(`yargs`)
   .epilogue(
     `For more information, see https://cloud.google.com/iam/docs/overview and https://cloud.google.com/storage/docs`
   )
-  .strict().argv;
+  .strict()
+  .help().argv;

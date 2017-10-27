@@ -28,16 +28,16 @@ function createNotification(bucketName, topic) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the topic to which this subscription publishes.
-  // const topic = "my-topic";
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const topic = 'Name of a topic, e.g. my-topic';
 
-  // Instantiates a client
-  const storage = Storage();
-
-  // Lists files in the bucket
+  // Creates a notification
   storage
     .bucket(bucketName)
     .createNotification(topic)
@@ -55,13 +55,15 @@ function listNotifications(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
-  // Lists files in the bucket
+  // Lists notifications in the bucket
   storage
     .bucket(bucketName)
     .getNotifications()
@@ -84,16 +86,16 @@ function getMetadata(bucketName, notificationId) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The id of the notification to delete, e.g. "1"
-  // const notificationId = "1";
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const notificationId = 'ID of notification to get, e.g. 1';
 
-  // Instantiates a client
-  const storage = Storage();
-
-  // Deletes the file from the bucket
+  // Get the notification metadata
   storage
     .bucket(bucketName)
     .notification(notificationId)
@@ -122,16 +124,16 @@ function deleteNotification(bucketName, notificationId) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The id of the notification to delete, e.g. "1"
-  // const notificationId = "1";
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const notificationId = 'ID of notification to delete, e.g. 1';
 
-  // Instantiates a client
-  const storage = Storage();
-
-  // Deletes the file from the bucket
+  // Deletes the notification from the bucket
   storage
     .bucket(bucketName)
     .notification(notificationId)
@@ -145,7 +147,7 @@ function deleteNotification(bucketName, notificationId) {
   // [END storage_delete_notification]
 }
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .command(
     `create <bucketName> <topic>`,
@@ -190,9 +192,5 @@ const cli = require(`yargs`)
   .wrap(120)
   .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
-  .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict()
+  .help().argv;

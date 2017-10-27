@@ -53,17 +53,15 @@ function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the local file to upload, e.g. "./local/path/to/file.txt"
-  // const srcFilename = "./local/path/to/file.txt";
-
-  // The path to which the file should be uploaded, e.g. "file_encrypted.txt"
-  // const destFilename = "file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const srcFilename = 'Local file to upload, e.g. ./local/path/to/file.txt';
+  // const destFilename = 'Remote destination for file, e.g. file_encrypted.txt';
 
   const options = {
     // The path to which the file should be uploaded, e.g. "file_encrypted.txt"
@@ -93,17 +91,15 @@ function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');
 
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
+  // Creates a client
+  const storage = new Storage();
 
-  // The name of the remote file to download, e.g. "file_encrypted.txt"
-  // const srcFilename = "file_encrypted.txt";
-
-  // The path to which the file should be downloaded, e.g. "./file.txt"
-  // const destFilename = "./file.txt";
-
-  // Instantiates a client
-  const storage = Storage();
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const srcFilename = 'File to download, e.g. file_encrypted.txt';
+  // const destFilename = 'Local destination for file, e.g. ./file.txt';
 
   const options = {
     // The path to which the file should be downloaded, e.g. "./file.txt"
@@ -134,7 +130,7 @@ function rotateEncryptionKey() {
 }
 // [END storage_rotate_encryption_key]
 
-const cli = require(`yargs`)
+require(`yargs`)
   .demand(1)
   .command(
     `generate-encryption-key`,
@@ -192,8 +188,4 @@ const cli = require(`yargs`)
   .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
   .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+  .strict().argv;

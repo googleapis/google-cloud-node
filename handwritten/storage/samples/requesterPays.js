@@ -28,11 +28,13 @@ function enableRequesterPays(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require(`@google-cloud/storage`);
 
-  // The name of the bucket to enable requester-paying for, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Enables requester-pays requests
   storage
@@ -54,11 +56,13 @@ function disableRequesterPays(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require(`@google-cloud/storage`);
 
-  // The name of the bucket to disable requester-paying for, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Disables requester-pays requests
   storage
@@ -80,11 +84,13 @@ function getRequesterPaysStatus(bucketName) {
   // Imports the Google Cloud client library
   const Storage = require(`@google-cloud/storage`);
 
-  // The name of the bucket to get the requester-payable status for, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets the requester-pays status of a bucket
   storage
@@ -118,20 +124,16 @@ function downloadFileUsingRequesterPays(
   // Imports the Google Cloud client library
   const Storage = require(`@google-cloud/storage`);
 
-  // The project ID to bill from
-  // const projectId = process.env.GCLOUD_PROJECT;
-
-  // The name of the bucket to access, e.g. "my-bucket"
-  // const bucketName = "my-bucket";
-
-  // The name of the remote file to download, e.g. "file.txt"
-  // const srcFilename = "file.txt";
-
-  // The path to which the file should be downloaded, e.g. "./local/path/to/file.txt"
-  // const destFilename = "./local/path/to/file.txt";
-
   // Creates a client
-  const storage = Storage();
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const projectId = 'The project ID to bill from, e.g. some-project-id';
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const srcFilename = 'Name of file to download, e.g. file.txt';
+  // const destFilename = 'Local destination of file, e.g. ./local/path/to/file.txt';
 
   const options = {
     // The path to which the file should be downloaded, e.g. "./file.txt"
@@ -214,4 +216,5 @@ require(`yargs`)
   .wrap(120)
   .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
-  .strict().argv;
+  .strict()
+  .help().argv;
