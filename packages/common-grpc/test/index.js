@@ -22,6 +22,7 @@ var proxyquire = require('proxyquire');
 var fakeOperation = {};
 var fakeService = {};
 var fakeServiceObject = {};
+var fakeGrpc = {};
 
 describe('grpc-common', function() {
   var grpcCommon;
@@ -30,7 +31,8 @@ describe('grpc-common', function() {
     grpcCommon = proxyquire('../src/index.js', {
       './operation.js': fakeOperation,
       './service.js': fakeService,
-      './service-object.js': fakeServiceObject
+      './service-object.js': fakeServiceObject,
+      grpc: fakeGrpc
     });
   });
 
@@ -38,7 +40,8 @@ describe('grpc-common', function() {
     assert.deepEqual(grpcCommon, {
       Operation: fakeOperation,
       Service: fakeService,
-      ServiceObject: fakeServiceObject
+      ServiceObject: fakeServiceObject,
+      grpc: fakeGrpc
     });
   });
 });
