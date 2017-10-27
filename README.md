@@ -21,7 +21,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 * [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
-* [Cloud Spanner](#cloud-spanner-beta) (Beta)
+* [Cloud Spanner](https://github.com/googleapis/nodejs-spanner/) (Beta)
 * [Cloud Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence/) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
