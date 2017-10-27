@@ -15,16 +15,23 @@
  */
 
 import {perftools} from '../src/profile';
-import {serializeTimeProfile} from '../src/profilers/profile-serializer';
+import {serializeHeapProfile, serializeTimeProfile} from '../src/profilers/profile-serializer';
 import {TimeProfile, TimeProfileNode} from '../src/v8-types';
-
-import {timeProfile, timeProfileTree} from './profile-for-test';
+import {heapProfile, timeProfile, v8HeapProfile, v8TimeProfile} from './profiles-for-tests';
 
 let assert = require('assert');
 
 describe('serializeTimeProfile', () => {
   it('should produce expected profile', () => {
-    const timeProfileOut = serializeTimeProfile(timeProfileTree, 1000);
-    assert.deepEqual(timeProfile, timeProfileOut);
+    const timeProfileOut = serializeTimeProfile(v8TimeProfile, 1000);
+    assert.deepEqual(timeProfileOut, timeProfile);
+  });
+});
+
+describe('serializeHeapProfile', () => {
+  it('should produce expected profile', () => {
+    const heapProfileOut = serializeHeapProfile(
+        v8HeapProfile, 0, 10 * 1000 * 1000 * 1000, 512 * 1024);
+    assert.deepEqual(heapProfileOut, heapProfile);
   });
 });

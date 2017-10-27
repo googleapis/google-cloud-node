@@ -20,7 +20,7 @@ import * as sinon from 'sinon';
 import {perftools} from '../src/profile';
 import {TimeProfiler} from '../src/profilers/time-profiler';
 
-import {timeProfile, timeProfileTree} from './profile-for-test';
+import {timeProfile, v8TimeProfile} from './profiles-for-tests';
 
 let assert = require('assert');
 const v8TimeProfiler = require('bindings')('time_profiler');
@@ -29,7 +29,7 @@ describe('TimeProfiler', () => {
   describe('profile', () => {
     before(() => {
       sinon.stub(v8TimeProfiler, 'startProfiling');
-      sinon.stub(v8TimeProfiler, 'stopProfiling').returns(timeProfileTree);
+      sinon.stub(v8TimeProfiler, 'stopProfiling').returns(v8TimeProfile);
       sinon.stub(v8TimeProfiler, 'setSamplingInterval');
     });
 

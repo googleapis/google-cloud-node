@@ -21,16 +21,18 @@ using namespace v8;
 
 Local<Value> TranslateTimeProfileNode(const CpuProfileNode* node) {
   Local<Object> js_node = Nan::New<Object>();
-  js_node->Set(Nan::New<String>("functionName").ToLocalChecked(),
+  js_node->Set(Nan::New<String>("name").ToLocalChecked(),
     node->GetFunctionName());
-  js_node->Set(Nan::New<String>("scriptResourceName").ToLocalChecked(),
+  js_node->Set(Nan::New<String>("scriptName").ToLocalChecked(),
     node->GetScriptResourceName());
+  js_node->Set(Nan::New<String>("scriptId").ToLocalChecked(),
+    Nan::New<Integer>(node->GetScriptId()));
   js_node->Set(Nan::New<String>("lineNumber").ToLocalChecked(),
     Nan::New<Integer>(node->GetLineNumber()));
+  js_node->Set(Nan::New<String>("columnNumber").ToLocalChecked(),
+    Nan::New<Integer>(node->GetColumnNumber()));
   js_node->Set(Nan::New<String>("hitCount").ToLocalChecked(),
     Nan::New<Integer>(node->GetHitCount()));
-  js_node->Set(Nan::New<String>("callUid").ToLocalChecked(),
-    Nan::New<Integer>(node->GetCallUid()));
   int32_t count = node->GetChildrenCount();
   Local<Array> children = Nan::New<Array>(count);
   for (int32_t i = 0; i < count; i++) {

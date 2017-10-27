@@ -41,7 +41,7 @@ Local<Value> TranslateAllocationProfile(AllocationProfile::Node* node) {
   for (size_t i = 0; i < node->allocations.size(); i++) {
     AllocationProfile::Allocation alloc = node->allocations[i];
     Local<Object> js_alloc = Nan::New<Object>();
-    js_alloc->Set(Nan::New<String>("size").ToLocalChecked(),
+    js_alloc->Set(Nan::New<String>("sizeBytes").ToLocalChecked(),
       Nan::New<Number>(alloc.size));
     js_alloc->Set(Nan::New<String>("count").ToLocalChecked(),
       Nan::New<Number>(alloc.count));
