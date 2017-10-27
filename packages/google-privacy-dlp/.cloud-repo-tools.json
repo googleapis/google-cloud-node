@@ -1,0 +1,48 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "requiredEnvVars": [
+    "DLP_DEID_WRAPPED_KEY",
+    "DLP_DEID_KEY_NAME"
+  ],
+  "product": "dlp",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/dlp/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "inspect",
+      "name": "Inspect",
+      "file": "inspect.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node inspect.js --help"
+    },
+    {
+      "id": "redact",
+      "name": "Redact",
+      "file": "redact.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node redact.js --help"
+    },
+    {
+      "id": "metadata",
+      "name": "Metadata",
+      "file": "metadata.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node metadata.js --help"
+    },
+    {
+      "id": "deid",
+      "name": "DeID",
+      "file": "deid.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node deid.js --help"
+    },
+    {
+      "id": "risk",
+      "name": "Risk Analysis",
+      "file": "risk.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node risk.js --help"
+    }
+  ]
+}

@@ -37,7 +37,8 @@ describe('DlpServiceSmokeTest', () => {
       inspectConfig: inspectConfig,
       items: items,
     };
-    client.inspectContent(request)
+    client
+      .inspectContent(request)
       .then(responses => {
         var response = responses[0];
         console.log(response);

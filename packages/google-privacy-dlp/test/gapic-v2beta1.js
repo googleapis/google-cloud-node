@@ -25,7 +25,10 @@ error.code = FAKE_STATUS_CODE;
 describe('DlpServiceClient', () => {
   describe('deidentifyContent', () => {
     it('invokes deidentifyContent without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var deidentifyConfig = {};
@@ -54,7 +57,10 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deidentifyContent with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var deidentifyConfig = {};
@@ -84,7 +90,10 @@ describe('DlpServiceClient', () => {
 
   describe('analyzeDataSourceRisk', function() {
     it('invokes analyzeDataSourceRisk without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var privacyMetric = {};
@@ -98,21 +107,31 @@ describe('DlpServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.analyzeDataSourceRisk(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .analyzeDataSourceRisk(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes analyzeDataSourceRisk with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var privacyMetric = {};
@@ -123,30 +142,50 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.analyzeDataSourceRisk = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.analyzeDataSourceRisk(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .analyzeDataSourceRisk(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
-      assert(client._descriptors.longrunning.analyzeDataSourceRisk.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.analyzeDataSourceRisk.metadataDecoder instanceof Function);
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.analyzeDataSourceRisk
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.analyzeDataSourceRisk
+          .metadataDecoder instanceof Function
+      );
     });
   });
 
   describe('inspectContent', () => {
     it('invokes inspectContent without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -186,7 +225,10 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes inspectContent with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -227,7 +269,10 @@ describe('DlpServiceClient', () => {
 
   describe('redactContent', () => {
     it('invokes redactContent without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -278,7 +323,10 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes redactContent with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -330,7 +378,10 @@ describe('DlpServiceClient', () => {
 
   describe('createInspectOperation', function() {
     it('invokes createInspectOperation without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -365,21 +416,31 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createInspectOperation = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.createInspectOperation = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.createInspectOperation(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .createInspectOperation(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes createInspectOperation with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var name = 'EMAIL_ADDRESS';
@@ -408,33 +469,53 @@ describe('DlpServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createInspectOperation = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.createInspectOperation = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createInspectOperation(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .createInspectOperation(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
-      assert(client._descriptors.longrunning.createInspectOperation.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.createInspectOperation.metadataDecoder instanceof Function);
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.createInspectOperation
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.createInspectOperation
+          .metadataDecoder instanceof Function
+      );
     });
   });
 
   describe('listInspectFindings', () => {
     it('invokes listInspectFindings without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.resultPath("[RESULT]");
+      var formattedName = client.resultPath('[RESULT]');
       var request = {
         name: formattedName,
       };
@@ -459,10 +540,13 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listInspectFindings with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
-      var formattedName = client.resultPath("[RESULT]");
+      var formattedName = client.resultPath('[RESULT]');
       var request = {
         name: formattedName,
       };
@@ -485,7 +569,10 @@ describe('DlpServiceClient', () => {
 
   describe('listInfoTypes', () => {
     it('invokes listInfoTypes without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var category = 'PII';
@@ -512,7 +599,10 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listInfoTypes with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var category = 'PII';
@@ -540,7 +630,10 @@ describe('DlpServiceClient', () => {
 
   describe('listRootCategories', () => {
     it('invokes listRootCategories without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var languageCode = 'en';
@@ -565,7 +658,10 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listRootCategories with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient();
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var languageCode = 'en';
@@ -588,7 +684,6 @@ describe('DlpServiceClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
@@ -612,12 +707,11 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          }
-          else {
+          } else {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };

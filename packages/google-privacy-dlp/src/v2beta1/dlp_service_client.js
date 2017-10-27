@@ -37,28 +37,28 @@ class DlpServiceClient {
   /**
    * Construct an instance of DlpServiceClient.
    *
-   * @param {object=} options - The configuration object. See the subsequent
+   * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
-   * @param {object=} options.credentials - Credentials object.
-   * @param {string=} options.credentials.client_email
-   * @param {string=} options.credentials.private_key
-   * @param {string=} options.email - Account email address. Required when
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
    *   usaing a .pem or .p12 keyFilename.
-   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
    *     a path to a JSON file, the projectId option above is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
-   * @param {number=} options.port - The port on which to connect to
+   * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
-   * @param {string=} options.projectId - The project ID from the Google
+   * @param {string} [options.projectId] - The project ID from the Google
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function=} options.promise - Custom promise module to use instead
+   * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string=} options.servicePath - The domain name of the
+   * @param {string} [options.servicePath] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
@@ -106,16 +106,19 @@ class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      resultPathTemplate: new gax.PathTemplate(
-        'inspect/results/{result}'
-      ),
+      resultPathTemplate: new gax.PathTemplate('inspect/results/{result}'),
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/privacy/dlp/v2beta1/dlp.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/privacy/dlp/v2beta1/dlp.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -141,13 +144,19 @@ class DlpServiceClient {
     this._descriptors.longrunning = {
       analyzeDataSourceRisk: new gax.LongrunningDescriptor(
         this.operationsClient,
-        analyzeDataSourceRiskResponse.decode.bind(analyzeDataSourceRiskResponse),
+        analyzeDataSourceRiskResponse.decode.bind(
+          analyzeDataSourceRiskResponse
+        ),
         analyzeDataSourceRiskMetadata.decode.bind(analyzeDataSourceRiskMetadata)
       ),
       createInspectOperation: new gax.LongrunningDescriptor(
         this.operationsClient,
-        createInspectOperationResponse.decode.bind(createInspectOperationResponse),
-        createInspectOperationMetadata.decode.bind(createInspectOperationMetadata)
+        createInspectOperationResponse.decode.bind(
+          createInspectOperationResponse
+        ),
+        createInspectOperationMetadata.decode.bind(
+          createInspectOperationMetadata
+        )
       ),
     };
 
@@ -217,9 +226,7 @@ class DlpServiceClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -254,10 +261,10 @@ class DlpServiceClient {
    *   All items will be treated as text/*.
    *
    *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [DeidentifyContentResponse]{@link google.privacy.dlp.v2beta1.DeidentifyContentResponse}.
@@ -314,10 +321,10 @@ class DlpServiceClient {
    *   Input dataset to compute metrics over.
    *
    *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2beta1.BigQueryTable}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
@@ -404,7 +411,11 @@ class DlpServiceClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.analyzeDataSourceRisk(request, options, callback);
+    return this._innerApiCalls.analyzeDataSourceRisk(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -423,10 +434,10 @@ class DlpServiceClient {
    *   Up to 100 are allowed per request.
    *
    *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [InspectContentResponse]{@link google.privacy.dlp.v2beta1.InspectContentResponse}.
@@ -499,14 +510,14 @@ class DlpServiceClient {
    *   one of these or one ImageRedactionConfig if redacting images.
    *
    *   This object should have the same structure as [ReplaceConfig]{@link google.privacy.dlp.v2beta1.ReplaceConfig}
-   * @param {Object[]=} request.imageRedactionConfigs
+   * @param {Object[]} [request.imageRedactionConfigs]
    *   The configuration for specifying what content to redact from images.
    *
    *   This object should have the same structure as [ImageRedactionConfig]{@link google.privacy.dlp.v2beta1.ImageRedactionConfig}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [RedactContentResponse]{@link google.privacy.dlp.v2beta1.RedactContentResponse}.
@@ -589,14 +600,14 @@ class DlpServiceClient {
    *   Optional location to store findings.
    *
    *   This object should have the same structure as [OutputStorageConfig]{@link google.privacy.dlp.v2beta1.OutputStorageConfig}
-   * @param {Object=} request.operationConfig
+   * @param {Object} [request.operationConfig]
    *   Additional configuration settings for long running operations.
    *
    *   This object should have the same structure as [OperationConfig]{@link google.privacy.dlp.v2beta1.OperationConfig}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
@@ -719,7 +730,11 @@ class DlpServiceClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.createInspectOperation(request, options, callback);
+    return this._innerApiCalls.createInspectOperation(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -731,14 +746,14 @@ class DlpServiceClient {
    *   Identifier of the results set returned as metadata of
    *   the longrunning operation created by a call to InspectDataSource.
    *   Should be in the format of `inspect/results/{id}`.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   Maximum number of results to return.
    *   If 0, the implementation selects a reasonable value.
-   * @param {string=} request.pageToken
+   * @param {string} [request.pageToken]
    *   The value returned by the last `ListInspectFindingsResponse`; indicates
    *   that this is a continuation of a prior `ListInspectFindings` call, and that
    *   the system should return the next page of data.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   Restricts findings to items that match. Supports info_type and likelihood.
    *
    *   Examples:
@@ -748,10 +763,10 @@ class DlpServiceClient {
    *   - likelihood=VERY_LIKELY
    *   - likelihood=VERY_LIKELY,LIKELY
    *   - info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [ListInspectFindingsResponse]{@link google.privacy.dlp.v2beta1.ListInspectFindingsResponse}.
@@ -767,7 +782,7 @@ class DlpServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.resultPath("[RESULT]");
+   * var formattedName = client.resultPath('[RESULT]');
    * client.listInspectFindings({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
@@ -798,10 +813,10 @@ class DlpServiceClient {
    *   Optional BCP-47 language code for localized info type friendly
    *   names. If omitted, or if localized strings are not available,
    *   en-US strings will be returned.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [ListInfoTypesResponse]{@link google.privacy.dlp.v2beta1.ListInfoTypesResponse}.
@@ -851,10 +866,10 @@ class DlpServiceClient {
    *   Optional language code for localized friendly category names.
    *   If omitted or if localized strings are not available,
    *   en-US strings will be returned.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [ListRootCategoriesResponse]{@link google.privacy.dlp.v2beta1.ListRootCategoriesResponse}.
@@ -914,9 +929,8 @@ class DlpServiceClient {
    * @returns {String} - A string representing the result.
    */
   matchResultFromResultName(resultName) {
-    return resultPathTemplate.match(resultName).result;
+    return this._pathTemplates.resultPathTemplate.match(resultName).result;
   }
 }
-
 
 module.exports = DlpServiceClient;
