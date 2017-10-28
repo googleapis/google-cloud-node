@@ -13,19 +13,19 @@
     "test": "samples test run --cmd ava -- -T 1m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "^0.9.6",
-    "@google-cloud/dlp": "^0.1.0",
-    "google-auth-library": "0.10.0",
+    "@google-cloud/bigquery": "^0.10.0",
+    "@google-cloud/dlp": "^0.2.0",
+    "google-auth-library": "0.11.0",
     "google-auto-auth": "0.7.2",
-    "google-proto-files": "0.13.0",
-    "mime": "1.4.0",
-    "request": "2.81.0",
-    "request-promise": "4.2.1",
+    "google-proto-files": "0.13.1",
+    "mime": "2.0.3",
+    "request": "2.83.0",
+    "request-promise": "4.2.2",
     "safe-buffer": "5.1.1",
-    "yargs": "8.0.2"
+    "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.22.0"
+    "@google-cloud/nodejs-repo-tools": "2.1.0",
+    "ava": "0.23.0"
   }
 }
