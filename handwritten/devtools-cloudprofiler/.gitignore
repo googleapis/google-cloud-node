@@ -1,3 +1,4 @@
+.nyc_output
 .vscode
 build
 node_modules
