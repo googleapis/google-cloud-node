@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {perftools} from '../profile';
+import {perftools} from '../../../proto/profile';
 import {AllocationProfileNode, ProfileNode, TimeProfile, TimeProfileNode} from '../v8-types';
 
 /**

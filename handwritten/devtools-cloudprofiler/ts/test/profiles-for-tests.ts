@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {perftools} from '../src/profile';
+import {perftools} from '../../proto/profile';
 import {TimeProfile, TimeProfileNode} from '../src/v8-types';
 
 const timeLeaf1 = {

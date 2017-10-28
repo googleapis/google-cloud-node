@@ -9,12 +9,12 @@
     "check": "gts check",
     "clean": "gts clean",
     "codecov": "nyc report --reporter=json && codecov -f coverage/*.json",
-    "compile": "npm run proto && tsc -p .",
+    "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "proto": "mkdir -p build/src && pbjs -t static-module -w commonjs -o src/profile.js third_party/proto/profile.proto && pbts -o src/profile.d.ts src/profile.js && cp src/profile.js build/src"
+    "proto:profile": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profile.js third_party/proto/profile.proto && pbts -o proto/profile.d.ts proto/profile.js"
   },
   "author": {
     "name": "Google Inc."
@@ -52,10 +52,16 @@
     "build/src",
     "build/types",
     "bindings",
-    "third_party",
+    "proto",
     "binding.gyp",
     "package-lock.json",
     "package.json",
     "README.md"
-  ]
+  ],
+  "nyc": {
+    "exclude": [
+      "build",
+      "proto"
+    ]
+  }
 }

@@ -1,5 +1,3 @@
 .vscode
 build
 node_modules
-src/profile.d.ts
-src/profile.js

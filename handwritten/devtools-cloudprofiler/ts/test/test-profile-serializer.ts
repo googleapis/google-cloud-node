@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {perftools} from '../src/profile';
+import {perftools} from '../../proto/profile';
 import {serializeHeapProfile, serializeTimeProfile} from '../src/profilers/profile-serializer';
 import {TimeProfile, TimeProfileNode} from '../src/v8-types';
 import {heapProfile, timeProfile, v8HeapProfile, v8TimeProfile} from './profiles-for-tests';

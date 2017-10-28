@@ -168,7 +168,8 @@ describe('initConfig', () => {
        process.env.GCLOUD_PROFILER_LOGLEVEL = '4';
        process.env.GAE_SERVICE = 'process-service';
        process.env.GAE_VERSION = 'process-version';
-       process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
+       process.env.GCLOUD_PROFILER_CONFIG =
+           './ts/test/fixtures/test-config.json';
        sinon.stub(gcpMetadata, 'instance')
            .withArgs('name')
            .callsArgWith(1, null, undefined, 'gce-instance')
@@ -196,7 +197,8 @@ describe('initConfig', () => {
        process.env.GCLOUD_PROFILER_LOGLEVEL = '4';
        process.env.GAE_SERVICE = 'process-service';
        process.env.GAE_VERSION = 'process-version';
-       process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
+       process.env.GCLOUD_PROFILER_CONFIG =
+           './ts/test/fixtures/test-config.json';
        sinon.stub(gcpMetadata, 'instance')
            .withArgs('name')
            .callsArgWith(1, null, undefined, 'gce-instance')
@@ -221,7 +223,8 @@ describe('initConfig', () => {
      async () => {
        sinon.stub(gcpMetadata, 'instance')
            .throwsException('cannot access metadata');
-       process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
+       process.env.GCLOUD_PROFILER_CONFIG =
+           './ts/test/fixtures/test-config.json';
 
        const expConfig = {
          logLevel: 3,

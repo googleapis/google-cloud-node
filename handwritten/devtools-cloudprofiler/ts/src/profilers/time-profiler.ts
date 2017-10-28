@@ -16,7 +16,7 @@
 
 import * as delay from 'delay';
 
-import {perftools} from '../profile';
+import {perftools} from '../../../proto/profile';
 import {serializeTimeProfile} from './profile-serializer';
 
 const profiler = require('bindings')('time_profiler');

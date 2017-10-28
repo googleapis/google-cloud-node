@@ -17,7 +17,7 @@
 import * as delay from 'delay';
 import * as sinon from 'sinon';
 
-import {perftools} from '../src/profile';
+import {perftools} from '../../proto/profile';
 import {TimeProfiler} from '../src/profilers/time-profiler';
 
 import {timeProfile, v8TimeProfile} from './profiles-for-tests';
