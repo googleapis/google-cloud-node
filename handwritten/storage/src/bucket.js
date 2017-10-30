@@ -49,12 +49,16 @@ var RESUMABLE_THRESHOLD = 5000000;
  *
  * @param {Storage} storage A {@link Storage} instance.
  * @param {string} name The name of the bucket.
+ * @param {object} [options] Configuration object.
+ * @param {string} [options.userProject] User project.
  *
  * @example
  * var storage = require('@google-cloud/storage')();
  * var bucket = storage.bucket('albums');
  */
-function Bucket(storage, name) {
+function Bucket(storage, name, options) {
+  options = options || {};
+
   var methods = {
     /**
      * Create a bucket.
@@ -105,6 +109,13 @@ function Bucket(storage, name) {
    * @type {string}
    */
   this.storage = storage;
+
+  /**
+   * A user project to apply to each request from this bucket.
+   * @name Bucket#userProject
+   * @type {string}
+   */
+  this.userProject = options.userProject;
 
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -580,11 +591,19 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
     body.payloadFormat = 'JSON_API_V1';
   }
 
+  var query = {};
+
+  if (body.userProject) {
+    query.userProject = body.userProject;
+    delete body.userProject;
+  }
+
   this.request(
     {
       method: 'POST',
       uri: '/notificationConfigs',
       json: snakeize(body),
+      qs: query,
     },
     function(err, apiResponse) {
       if (err) {
@@ -1785,6 +1804,22 @@ Bucket.prototype.notification = function(id) {
 };
 
 /**
+ * Makes request and applies userProject query parameter if necessary.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - The request options.
+ * @param {function} callback - The callback function.
+ */
+Bucket.prototype.request = function(reqOpts, callback) {
+  if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
+    reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
+  }
+
+  return common.ServiceObject.prototype.request.call(this, reqOpts, callback);
+};
+
+/**
  * @typedef {array} SetLabelsResponse
  * @property {object} 0 The bucket metadata.
  */
@@ -1968,6 +2003,22 @@ Bucket.prototype.setStorageClass = function(storageClass, options, callback) {
     .toUpperCase();
 
   this.setMetadata({storageClass}, options, callback);
+};
+
+/**
+ * Set a user project to be billed for all requests made from this Bucket
+ * object and any files referenced from this Bucket object.
+ *
+ * @param {string} userProject The user project.
+ *
+ * @example
+ * var storage = require('@google-cloud/storage')();
+ * var bucket = storage.bucket('albums');
+ *
+ * bucket.setUserProject('grape-spaceship-123');
+ */
+Bucket.prototype.setUserProject = function(userProject) {
+  this.userProject = userProject;
 };
 
 /**

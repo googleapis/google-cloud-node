@@ -127,6 +127,8 @@ describe('File', function() {
   });
 
   beforeEach(function() {
+    FakeServiceObject.prototype.request = util.noop;
+
     STORAGE = {
       createBucket: util.noop,
       request: util.noop,
@@ -143,9 +145,7 @@ describe('File', function() {
     };
 
     BUCKET = new Bucket(STORAGE, 'bucket-name');
-
     file = new File(BUCKET, FILE_NAME);
-    file.request = util.noop;
 
     directoryFile = new File(BUCKET, 'directory/file.jpg');
     directoryFile.request = util.noop;
@@ -219,6 +219,27 @@ describe('File', function() {
       };
 
       new File(BUCKET, FILE_NAME, {encryptionKey: key});
+    });
+
+    describe('userProject', function() {
+      var USER_PROJECT = 'grapce-spaceship-123';
+
+      it('should localize the Bucket#userProject', function() {
+        var bucket = new Bucket(STORAGE, 'bucket-name', {
+          userProject: USER_PROJECT,
+        });
+
+        var file = new File(bucket, '/name');
+        assert.strictEqual(file.userProject, USER_PROJECT);
+      });
+
+      it('should accept a userProject option', function() {
+        var file = new File(BUCKET, '/name', {
+          userProject: USER_PROJECT,
+        });
+
+        assert.strictEqual(file.userProject, USER_PROJECT);
+      });
     });
   });
 
@@ -386,6 +407,25 @@ describe('File', function() {
         };
 
         file.copy(newFile, done);
+      });
+
+      it('should pass the userProject in subsequent requests', function(done) {
+        var newFile = new File(BUCKET, 'new-file');
+        var fakeOptions = {
+          userProject: 'grapce-spaceship-123',
+        };
+
+        file.request = function(reqOpts, callback) {
+          file.copy = function(newFile_, options) {
+            assert.notStrictEqual(options, fakeOptions);
+            assert.strictEqual(options.userProject, fakeOptions.userProject);
+            done();
+          };
+
+          callback(null, apiResponse);
+        };
+
+        file.copy(newFile, fakeOptions, assert.ifError);
       });
 
       it('should make the subsequent correct API request', function(done) {
@@ -785,7 +825,7 @@ describe('File', function() {
       beforeEach(function() {
         file.metadata.mediaLink = 'http://uri';
 
-        file.getMetadata = function(callback) {
+        file.getMetadata = function(options, callback) {
           file.metadata = {
             crc32c: '####wA==',
             md5Hash: 'CY9rzUYh03PK3k6DJie09g==',
@@ -802,9 +842,27 @@ describe('File', function() {
         };
       });
 
+      it('should pass the userProject to getMetadata', function(done) {
+        var fakeOptions = {
+          userProject: 'grapce-spaceship-123',
+        };
+
+        file.getMetadata = function(options) {
+          assert.strictEqual(options.userProject, fakeOptions.userProject);
+          done();
+        };
+
+        file.requestStream = getFakeSuccessfulRequest(data);
+
+        file
+          .createReadStream(fakeOptions)
+          .on('error', done)
+          .resume();
+      });
+
       it('should destroy stream from failed metadata fetch', function(done) {
         var error = new Error('Error.');
-        file.getMetadata = function(callback) {
+        file.getMetadata = function(options, callback) {
           callback(error);
         };
 
@@ -876,7 +934,7 @@ describe('File', function() {
       });
 
       it('should default to crc32c validation', function(done) {
-        file.getMetadata = function(callback) {
+        file.getMetadata = function(options, callback) {
           file.metadata = {
             crc32c: file.metadata.crc32c,
           };
@@ -927,7 +985,7 @@ describe('File', function() {
         });
 
         it('should destroy if MD5 is requested but absent', function(done) {
-          file.getMetadata = function(callback) {
+          file.getMetadata = function(options, callback) {
             file.metadata = {
               crc32c: file.metadata.crc32c,
             };
@@ -2556,6 +2614,67 @@ describe('File', function() {
     });
   });
 
+  describe('request', function() {
+    var USER_PROJECT = 'grape-spaceship-123';
+
+    beforeEach(function() {
+      file.userProject = USER_PROJECT;
+    });
+
+    it('should set the userProject if qs is undefined', function(done) {
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+        done();
+      };
+
+      file.request({}, assert.ifError);
+    });
+
+    it('should set the userProject if field is undefined', function(done) {
+      var options = {
+        qs: {
+          foo: 'bar',
+        },
+      };
+
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options.qs);
+        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+        done();
+      };
+
+      file.request(options, assert.ifError);
+    });
+
+    it('should not overwrite the userProject', function(done) {
+      var fakeUserProject = 'not-grape-spaceship-123';
+      var options = {
+        qs: {
+          userProject: fakeUserProject,
+        },
+      };
+
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
+        done();
+      };
+
+      file.request(options, assert.ifError);
+    });
+
+    it('should call ServiceObject#request correctly', function(done) {
+      var options = {};
+
+      FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        assert.strictEqual(this, file);
+        assert.strictEqual(reqOpts, options);
+        callback(); // done fn
+      };
+
+      file.request(options, done);
+    });
+  });
+
   describe('save', function() {
     var DATA = 'Data!';
 
@@ -3058,6 +3177,15 @@ describe('File', function() {
           file.startSimpleUpload_(stream);
         });
       });
+    });
+  });
+
+  describe('setUserProject', function() {
+    it('should set the userProject property', function() {
+      var userProject = 'grape-spaceship-123';
+
+      file.setUserProject(userProject);
+      assert.strictEqual(file.userProject, userProject);
     });
   });
 });

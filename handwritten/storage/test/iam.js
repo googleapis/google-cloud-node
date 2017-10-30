@@ -78,12 +78,26 @@ describe('storage/iam', function() {
       iam.request_ = function(reqOpts, callback) {
         assert.deepEqual(reqOpts, {
           uri: '/iam',
+          qs: {},
         });
 
         callback(); // done()
       };
 
       iam.getPolicy(done);
+    });
+
+    it('should accept an options object', function(done) {
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      iam.request_ = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      iam.getPolicy(options, assert.ifError);
     });
   });
 
@@ -109,12 +123,30 @@ describe('storage/iam', function() {
             },
             policy
           ),
+          qs: {},
         });
 
         callback(); // done()
       };
 
       iam.setPolicy(policy, done);
+    });
+
+    it('should accept an options object', function(done) {
+      var policy = {
+        a: 'b',
+      };
+
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      iam.request_ = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      iam.setPolicy(policy, options, assert.ifError);
     });
   });
 
@@ -180,6 +212,27 @@ describe('storage/iam', function() {
 
         done();
       });
+    });
+
+    it('should accept an options object', function(done) {
+      var permissions = ['storage.bucket.list'];
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      var expectedQuery = extend(
+        {
+          permissions: permissions,
+        },
+        options
+      );
+
+      iam.request_ = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, expectedQuery);
+        done();
+      };
+
+      iam.testPermissions(permissions, options, assert.ifError);
     });
   });
 });

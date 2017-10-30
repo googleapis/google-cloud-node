@@ -173,31 +173,39 @@ describe('Bucket', function() {
       assert.strictEqual(bucket.storage, STORAGE);
     });
 
-    it('should create an ACL object', function() {
-      FakeServiceObject.prototype.request = {
-        bind: function(context) {
-          return context;
-        },
-      };
+    describe('ACL objects', function() {
+      var _request;
 
-      var bucket = new Bucket(STORAGE, BUCKET_NAME);
-      assert.deepEqual(bucket.acl.calledWith_[0], {
-        request: bucket,
-        pathPrefix: '/acl',
+      before(function() {
+        _request = Bucket.prototype.request;
       });
-    });
 
-    it('should create a default ACL object', function() {
-      FakeServiceObject.prototype.request = {
-        bind: function(context) {
-          return context;
-        },
-      };
+      beforeEach(function() {
+        Bucket.prototype.request = {
+          bind: function(ctx) {
+            return ctx;
+          },
+        };
 
-      var bucket = new Bucket(STORAGE, BUCKET_NAME);
-      assert.deepEqual(bucket.acl.default.calledWith_[0], {
-        request: bucket,
-        pathPrefix: '/defaultObjectAcl',
+        bucket = new Bucket(STORAGE, BUCKET_NAME);
+      });
+
+      after(function() {
+        Bucket.prototype.request = _request;
+      });
+
+      it('should create an ACL object', function() {
+        assert.deepEqual(bucket.acl.calledWith_[0], {
+          request: bucket,
+          pathPrefix: '/acl',
+        });
+      });
+
+      it('should create a default ACL object', function() {
+        assert.deepEqual(bucket.acl.default.calledWith_[0], {
+          request: bucket,
+          pathPrefix: '/defaultObjectAcl',
+        });
       });
     });
 
@@ -227,6 +235,15 @@ describe('Bucket', function() {
     it('should localize an Iam instance', function() {
       assert(bucket.iam instanceof FakeIam);
       assert.deepStrictEqual(bucket.iam.calledWith_[0], bucket);
+    });
+
+    it('should localize userProject if provided', function() {
+      var fakeUserProject = 'grape-spaceship-123';
+      var bucket = new Bucket(STORAGE, BUCKET_NAME, {
+        userProject: fakeUserProject,
+      });
+
+      assert.strictEqual(bucket.userProject, fakeUserProject);
     });
   });
 
@@ -632,6 +649,19 @@ describe('Bucket', function() {
       };
 
       bucket.createNotification(TOPIC, assert.ifError);
+    });
+
+    it('should accept a userProject', function(done) {
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+        done();
+      };
+
+      bucket.createNotification(TOPIC, options, assert.ifError);
     });
 
     it('should return errors to the callback', function(done) {
@@ -1649,6 +1679,67 @@ describe('Bucket', function() {
     });
   });
 
+  describe('request', function() {
+    var USER_PROJECT = 'grape-spaceship-123';
+
+    beforeEach(function() {
+      bucket.userProject = USER_PROJECT;
+    });
+
+    it('should set the userProject if qs is undefined', function(done) {
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+        done();
+      };
+
+      bucket.request({}, assert.ifError);
+    });
+
+    it('should set the userProject if field is undefined', function(done) {
+      var options = {
+        qs: {
+          foo: 'bar',
+        },
+      };
+
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options.qs);
+        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+        done();
+      };
+
+      bucket.request(options, assert.ifError);
+    });
+
+    it('should not overwrite the userProject', function(done) {
+      var fakeUserProject = 'not-grape-spaceship-123';
+      var options = {
+        qs: {
+          userProject: fakeUserProject,
+        },
+      };
+
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
+        done();
+      };
+
+      bucket.request(options, assert.ifError);
+    });
+
+    it('should call ServiceObject#request correctly', function(done) {
+      var options = {};
+
+      FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        assert.strictEqual(this, bucket);
+        assert.strictEqual(reqOpts, options);
+        callback(); // done fn
+      };
+
+      bucket.request(options, done);
+    });
+  });
+
   describe('setLabels', function() {
     it('should correctly call setMetadata', function(done) {
       var labels = {};
@@ -1785,6 +1876,15 @@ describe('Bucket', function() {
       };
 
       bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
+    });
+  });
+
+  describe('setUserProject', function() {
+    it('should set the userProject property', function() {
+      var userProject = 'grape-spaceship-123';
+
+      bucket.setUserProject(userProject);
+      assert.strictEqual(bucket.userProject, userProject);
     });
   });
 

@@ -146,6 +146,15 @@ describe('Storage', function() {
       assert(bucket instanceof Bucket);
       assert.equal(bucket.name, newBucketName);
     });
+
+    it('should optionally accept options', function() {
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      var bucket = storage.bucket('bucket-name', options);
+      assert.strictEqual(bucket.userProject, options.userProject);
+    });
   });
 
   describe('channel', function() {
@@ -207,6 +216,19 @@ describe('Storage', function() {
       assert.throws(function() {
         storage.createBucket();
       }, /A name is required to create a bucket\./);
+    });
+
+    it('should honor the userProject option', function(done) {
+      var options = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      storage.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+        done();
+      };
+
+      storage.createBucket(BUCKET_NAME, options, assert.ifError);
     });
 
     it('should execute callback with bucket', function(done) {

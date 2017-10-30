@@ -174,6 +174,9 @@ Storage.prototype.acl = Storage.acl;
  * Get a reference to a Cloud Storage bucket.
  *
  * @param {string} name Name of the bucket.
+ * @param {object} [options] Configuration object.
+ * @param {string} [options.userProject] User project to be billed for all
+ *     requests made from this Bucket object.
  * @returns {Bucket}
  * @see Bucket
  *
@@ -182,12 +185,12 @@ Storage.prototype.acl = Storage.acl;
  * var albums = storage.bucket('albums');
  * var photos = storage.bucket('photos');
  */
-Storage.prototype.bucket = function(name) {
+Storage.prototype.bucket = function(name, options) {
   if (!name) {
     throw new Error('A bucket name is needed to use Cloud Storage.');
   }
 
-  return new Bucket(this, name);
+  return new Bucket(this, name, options);
 };
 
 /**
@@ -220,6 +223,8 @@ Storage.prototype.channel = function(id, resourceId) {
  * @property {boolean} [requesterPays=false] **Early Access Testers Only**
  *     Force the use of the User Project metadata field to assign operational
  *     costs when an operation is made on a Bucket and its objects.
+ * @property {string} [userProject] The ID of the project which will be billed
+ *     for the request.
  */
 /**
  * @typedef {array} CreateBucketResponse
@@ -331,13 +336,20 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
     delete body.requesterPays;
   }
 
+  var query = {
+    project: this.projectId,
+  };
+
+  if (body.userProject) {
+    query.userProject = body.userProject;
+    delete body.userProject;
+  }
+
   this.request(
     {
       method: 'POST',
       uri: '/b',
-      qs: {
-        project: this.projectId,
-      },
+      qs: query,
       json: body,
     },
     function(err, resp) {
@@ -365,6 +377,8 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  *     return.
  * @property {string} [pageToken] A previously-returned page token
  *     representing part of the larger set of results to view.
+ * @property {string} [userProject] The ID of the project which will be billed
+ *     for the request.
  */
 /**
  * @typedef {array} GetBucketsResponse

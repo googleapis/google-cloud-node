@@ -18,6 +18,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
@@ -243,6 +244,8 @@ util.inherits(Acl, AclRoleAccessorMethods);
  *     See {@link https://cloud.google.com/storage/docs/access-control Access Control}.
  * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
+ * @param {string} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {AddAclCallback} [callback] Callback function.
  * @returns {Promise<AddAclResponse>}
  *
@@ -298,6 +301,10 @@ Acl.prototype.add = function(options, callback) {
     query.generation = options.generation;
   }
 
+  if (options.userProject) {
+    query.userProject = options.userProject;
+  }
+
   this.request(
     {
       method: 'POST',
@@ -321,13 +328,11 @@ Acl.prototype.add = function(options, callback) {
 
 /**
  * @typedef {array} RemoveAclResponse
- * @property {object} 0 The Acl Objects.
- * @property {object} 1 The full API response.
+ * @property {object} 0 The full API response.
  */
 /**
  * @callback RemoveAclCallback
  * @param {?Error} err Request error, if any.
- * @param {object} acl The Acl Objects.
  * @param {object} apiResponse The full API response.
  */
 /**
@@ -336,13 +341,14 @@ Acl.prototype.add = function(options, callback) {
  * @see [BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}
  * @see [ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}
  *
- * @param {object=} options - Configuration object.
- * @param {string} options.entity - Whose permissions will be revoked.
- * @param {int=} options.generation - **File Objects Only** Select a specific
+ * @param {object} options Configuration object.
+ * @param {string} options.entity Whose permissions will be revoked.
+ * @param {int} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.apiResponse - The full API response.
+ * @param {string} [options.userProject] The ID of the project which will be
+ *     billed for the request.
+ * @param {RemoveAclCallback} callback The callback function.
+ * @returns {Promise<RemoveAclResponse>}
  *
  * @example
  * var storage = require('@google-cloud/storage')();
@@ -387,6 +393,10 @@ Acl.prototype.delete = function(options, callback) {
     query.generation = options.generation;
   }
 
+  if (options.userProject) {
+    query.userProject = options.userProject;
+  }
+
   this.request(
     {
       method: 'DELETE',
@@ -424,6 +434,8 @@ Acl.prototype.delete = function(options, callback) {
  * @param {string} [options.entity] Whose permissions will be fetched.
  * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
+ * @param {string} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {GetAclCallback} [callback] Callback function.
  * @returns {Promise<GetAclResponse>}
  *
@@ -494,6 +506,10 @@ Acl.prototype.get = function(options, callback) {
     if (options.generation) {
       query.generation = options.generation;
     }
+
+    if (options.userProject) {
+      query.userProject = options.userProject;
+    }
   }
 
   this.request(
@@ -543,6 +559,8 @@ Acl.prototype.get = function(options, callback) {
  *     See {@link Storage.acl}.
  * @param {number} [options.generation] **File Objects Only** Select a specific
  *     revision of this file (as opposed to the latest version, the default).
+ * @param {string} [options.userProject] The ID of the project which will be
+ *     billed for the request.
  * @param {UpdateAclCallback} [callback] Callback function.
  * @returns {Promise<UpdateAclResponse>}
  *
@@ -582,6 +600,10 @@ Acl.prototype.update = function(options, callback) {
 
   if (options.generation) {
     query.generation = options.generation;
+  }
+
+  if (options.userProject) {
+    query.userProject = options.userProject;
   }
 
   this.request(
@@ -701,8 +723,13 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
 
       // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
       // more complex API of specifying an `entity` and `role`.
-      acc[method] = function(entityId, callback) {
+      acc[method] = function(entityId, options, callback) {
         var apiEntity;
+
+        if (is.fn(options)) {
+          callback = options;
+          options = {};
+        }
 
         if (isPrefix) {
           apiEntity = entity + entityId;
@@ -714,12 +741,15 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           callback = entityId;
         }
 
-        var args = [
+        options = extend(
           {
             entity: apiEntity,
             role: role,
           },
-        ];
+          options
+        );
+
+        var args = [options];
 
         if (is.fn(callback)) {
           args.push(callback);

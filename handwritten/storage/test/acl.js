@@ -93,6 +93,21 @@ describe('storage/acl', function() {
       acl.add(options, assert.ifError);
     });
 
+    it('should set the userProject', function(done) {
+      var options = {
+        entity: ENTITY,
+        role: ROLE,
+        userProject: 'grape-spaceship-123',
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+        done();
+      };
+
+      acl.add(options, assert.ifError);
+    });
+
     it('should execute the callback with an ACL object', function(done) {
       var apiResponse = {entity: ENTITY, role: ROLE};
       var expectedAclObject = {entity: ENTITY, role: ROLE};
@@ -158,6 +173,21 @@ describe('storage/acl', function() {
 
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
+        done();
+      };
+
+      acl.delete(options, assert.ifError);
+    });
+
+    it('should set the userProject', function(done) {
+      var options = {
+        entity: ENTITY,
+        role: ROLE,
+        userProject: 'grape-spaceship-123',
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
 
@@ -267,6 +297,20 @@ describe('storage/acl', function() {
         acl.get({entity: ENTITY, generation: generation}, assert.ifError);
       });
 
+      it('should set the userProject', function(done) {
+        var options = {
+          entity: ENTITY,
+          userProject: 'grape-spaceship-123',
+        };
+
+        acl.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.userProject, options.userProject);
+          done();
+        };
+
+        acl.get(options, assert.ifError);
+      });
+
       it('should pass an acl object to the callback', function(done) {
         var apiResponse = {entity: ENTITY, role: ROLE};
         var expectedAclObject = {entity: ENTITY, role: ROLE};
@@ -334,6 +378,21 @@ describe('storage/acl', function() {
 
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
+        done();
+      };
+
+      acl.update(options, assert.ifError);
+    });
+
+    it('should set the userProject', function(done) {
+      var options = {
+        entity: ENTITY,
+        role: ROLE,
+        userProject: 'grape-spaceship-123',
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
 
@@ -527,6 +586,30 @@ describe('storage/AclRoleAccessorMethods', function() {
 
       aclEntity._assignAccessMethods('fakerole');
       aclEntity.fakeroles.addUser('email@example.com', undefined);
+    });
+
+    it('should optionally accept options', function(done) {
+      var fakeRole = 'fakerole';
+      var fakeUser = 'email@example.com';
+      var fakeOptions = {
+        userProject: 'grape-spaceship-123',
+      };
+
+      var expectedOptions = extend(
+        {
+          entity: 'user-' + fakeUser,
+          role: fakeRole,
+        },
+        fakeOptions
+      );
+
+      aclEntity.add = function(options) {
+        assert.deepEqual(options, expectedOptions);
+        done();
+      };
+
+      aclEntity._assignAccessMethods(fakeRole);
+      aclEntity.fakeroles.addUser(fakeUser, fakeOptions, assert.ifError);
     });
   });
 });

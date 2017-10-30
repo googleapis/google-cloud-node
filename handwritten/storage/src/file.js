@@ -78,6 +78,8 @@ var GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
  * @param {object} [options] Configuration options.
  * @param {string} [options.encryptionKey] A custom encryption key.
  * @param {number} [options.generation] Generation to scope the file to.
+ * @param {string} [options.userProject] The ID of the project which will be
+ *     billed for all requests made from File object.
  * @example
  * var storage = require('@google-cloud/storage')();
  * var myBucket = storage.bucket('my-bucket');
@@ -89,6 +91,7 @@ function File(bucket, name, options) {
 
   this.bucket = bucket;
   this.storage = bucket.parent;
+  this.userProject = options.userProject || bucket.userProject;
 
   Object.defineProperty(this, 'name', {
     enumerable: true,
@@ -354,7 +357,15 @@ File.prototype.copy = function(destination, options, callback) {
       }
 
       if (resp.rewriteToken) {
-        self.copy(newFile, {token: resp.rewriteToken}, callback);
+        var options = {
+          token: resp.rewriteToken,
+        };
+
+        if (query.userProject) {
+          options.userProject = query.userProject;
+        }
+
+        self.copy(newFile, options, callback);
         return;
       }
 
@@ -587,7 +598,7 @@ File.prototype.createReadStream = function(options) {
 
       if (!refreshedMetadata) {
         refreshedMetadata = true;
-        self.getMetadata(onComplete);
+        self.getMetadata({userProject: options.userProject}, onComplete);
         return;
       }
 
@@ -1978,6 +1989,22 @@ File.prototype.move = function(destination, options, callback) {
 };
 
 /**
+ * Makes request and applies userProject query parameter if necessary.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - The request options.
+ * @param {function} callback - The callback function.
+ */
+File.prototype.request = function(reqOpts, callback) {
+  if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
+    reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
+  }
+
+  return common.ServiceObject.prototype.request.call(this, reqOpts, callback);
+};
+
+/**
  * @callback SaveCallback
  * @param {?Error} err Request error, if any.
  */
@@ -2161,6 +2188,22 @@ File.prototype.setStorageClass = function(storageClass, options, callback) {
 
     callback(null, apiResponse);
   });
+};
+
+/**
+ * Set a user project to be billed for all requests made from this File object.
+ *
+ * @param {string} userProject The user project.
+ *
+ * @example
+ * var storage = require('@google-cloud/storage')();
+ * var bucket = storage.bucket('albums');
+ * var file = bucket.file('my-file');
+ *
+ * file.setUserProject('grape-spaceship-123');
+ */
+File.prototype.setUserProject = function(userProject) {
+  this.userProject = userProject;
 };
 
 /**
