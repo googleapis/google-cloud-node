@@ -573,11 +573,15 @@ Datastore.prototype.isKey = Datastore.isKey = function(value) {
 /**
  * Create a new Transaction object.
  *
+ * @param {object=} options - Configuration object.
+ * @param {string} options.id - The ID of a previously run transaction.
+ * @param {boolean} options.readOnly - A read-only transaction cannot modify
+ *     entities. (Default: `false`)
  * @return {module:datastore/transaction}
  * @private
  */
-Datastore.prototype.transaction = function() {
-  return new Transaction(this);
+Datastore.prototype.transaction = function(options) {
+  return new Transaction(this, options);
 };
 
 /**

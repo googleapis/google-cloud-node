@@ -105,6 +105,24 @@ describe('Transaction', function() {
       assert.strictEqual(transaction.namespace, NAMESPACE);
     });
 
+    it('should localize the transaction ID', function() {
+      var options = {
+        id: 'transaction-id'
+      };
+
+      var transaction = new Transaction(DATASTORE, options);
+      assert.strictEqual(transaction.id, options.id);
+    });
+
+    it('should localize readOnly', function() {
+      var options = {
+        readOnly: true
+      };
+
+      var transaction = new Transaction(DATASTORE, options);
+      assert.strictEqual(transaction.readOnly, true);
+    });
+
     it('should localize request function', function(done) {
       var transaction;
 
@@ -429,10 +447,14 @@ describe('Transaction', function() {
 
   describe('run', function() {
     it('should make the correct API request', function(done) {
-      transaction.request_ = function(protoOpts) {
+      transaction.request_ = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
           service: 'Datastore',
           method: 'beginTransaction'
+        });
+
+        assert.deepEqual(reqOpts, {
+          transactionOptions: {}
         });
 
         done();
@@ -441,12 +463,89 @@ describe('Transaction', function() {
       transaction.run(assert.ifError);
     });
 
+    describe('options.readOnly', function() {
+      it('should respect the readOnly option', function(done) {
+        var options = {
+          readOnly: true
+        };
+
+        transaction.request_ = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.transactionOptions.readOnly, {});
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
+
+      it('should respect the global readOnly option', function(done) {
+        transaction.readOnly = true;
+
+        transaction.request_ = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.transactionOptions.readOnly, {});
+          done();
+        };
+
+        transaction.run(assert.ifError);
+      });
+    });
+
+    describe('options.transactionId', function() {
+      it('should respect the transactionId option', function(done) {
+        var options = {
+          transactionId: 'transaction-id'
+        };
+
+        transaction.request_ = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.transactionOptions.readWrite, {
+            previousTransaction: options.transactionId
+          });
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
+
+      it('should respect the global transactionId option', function(done) {
+        transaction.id = 'transaction-id';
+
+        transaction.request_ = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.transactionOptions.readWrite, {
+            previousTransaction: transaction.id
+          });
+          done();
+        };
+
+        transaction.run(assert.ifError);
+      });
+    });
+
+    describe('options.transactionOptions', function() {
+      it('should allow full override of transactionOptions', function(done) {
+        transaction.readOnly = true;
+
+        var options = {
+          transactionOptions: {
+            readWrite: {
+              previousTransaction: 'transaction-id'
+            }
+          }
+        };
+
+        transaction.request_ = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts, options);
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
+    });
+
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -467,7 +566,7 @@ describe('Transaction', function() {
       };
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
