@@ -2,7 +2,7 @@
 
 # Google Cloud Storage: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 [Cloud Storage](https://cloud.google.com/storage/docs) allows world-wide storage and retrieval of any amount of data at any time. You can use Google Cloud Storage for a range of scenarios including serving website content, storing data for archival and disaster recovery, or distributing large data objects to users via direct download.
 
@@ -29,20 +29,25 @@ library's README.
 
 View the [source code][acl_0_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/acl.js,samples/README.md)
+
 __Usage:__ `node acl.js --help`
 
 ```
+acl.js <command>
+
 Commands:
-  print-bucket-acl <bucketName>                                Prints the ACL for a bucket.
-  print-bucket-acl-for-user <bucketName> <userEmail>           Prints a user's ACL for a bucket.
-  add-bucket-owner <bucketName> <userEmail>                    Adds a user as an owner of a bucket.
-  remove-bucket-owner <bucketName> <userEmail>                 Removes a user from the ACL of a bucket.
-  add-bucket-default-owner <bucketName> <userEmail>            Adds a user as an owner in the default ACL of a bucket.
-  remove-bucket-default-owner <bucketName> <userEmail>         Removes a user from the default ACL of a bucket.
-  print-file-acl <bucketName> <fileName>                       Prints the ACL for a file.
-  print-file-acl-for-user <bucketName> <fileName> <userEmail>  Prints a user's ACL for a file.
-  add-file-owner <bucketName> <fileName> <userEmail>           Adds a user as an owner of a file.
-  remove-file-owner <bucketName> <fileName> <userEmail>        Removes a user from the ACL of a file.
+  acl.js print-bucket-acl <bucketName>                          Prints the ACL for a bucket.
+  acl.js print-bucket-acl-for-user <bucketName> <userEmail>     Prints a user's ACL for a bucket.
+  acl.js add-bucket-owner <bucketName> <userEmail>              Adds a user as an owner of a bucket.
+  acl.js remove-bucket-owner <bucketName> <userEmail>           Removes a user from the ACL of a bucket.
+  acl.js add-bucket-default-owner <bucketName> <userEmail>      Adds a user as an owner in the default ACL of a bucket.
+  acl.js remove-bucket-default-owner <bucketName> <userEmail>   Removes a user from the default ACL of a bucket.
+  acl.js print-file-acl <bucketName> <fileName>                 Prints the ACL for a file.
+  acl.js print-file-acl-for-user <bucketName> <fileName>        Prints a user's ACL for a file.
+  <userEmail>
+  acl.js add-file-owner <bucketName> <fileName> <userEmail>     Adds a user as an owner of a file.
+  acl.js remove-file-owner <bucketName> <fileName> <userEmail>  Removes a user from the ACL of a file.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -70,13 +75,17 @@ For more information, see https://cloud.google.com/storage/docs/access-control/c
 
 View the [source code][buckets_1_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/buckets.js,samples/README.md)
+
 __Usage:__ `node buckets.js --help`
 
 ```
+buckets.js <command>
+
 Commands:
-  create <bucket>  Creates a new bucket.
-  list             Lists all buckets in the current project.
-  delete <bucket>  Deletes a bucket.
+  buckets.js create <bucket>  Creates a new bucket.
+  buckets.js list             Lists all buckets in the current project.
+  buckets.js delete <bucket>  Deletes a bucket.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -97,14 +106,21 @@ For more information, see https://cloud.google.com/storage/docs
 
 View the [source code][encryption_2_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/encryption.js,samples/README.md)
+
 __Usage:__ `node encryption.js --help`
 
 ```
+encryption.js <command>
+
 Commands:
-  generate-encryption-key                                   Generate a sample encryption key.
-  upload <bucketName> <srcFilename> <destFilename> <key>    Encrypts and uploads a file.
-  download <bucketName> <srcFilename> <destFilename> <key>  Decrypts and downloads a file.
-  rotate <bucketName> <fileName> <oldkey> <newKey>          Rotates encryption keys for a file.
+  encryption.js generate-encryption-key                         Generate a sample encryption key.
+  encryption.js upload <bucketName> <srcFilename>               Encrypts and uploads a file.
+  <destFilename> <key>
+  encryption.js download <bucketName> <srcFilename>             Decrypts and downloads a file.
+  <destFilename> <key>
+  encryption.js rotate <bucketName> <fileName> <oldkey>         Rotates encryption keys for a file.
+  <newKey>
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -129,21 +145,25 @@ For more information, see https://cloud.google.com/storage/docs
 
 View the [source code][files_3_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/files.js,samples/README.md)
+
 __Usage:__ `node files.js --help`
 
 ```
+files.js <command>
+
 Commands:
-  list <bucketName> [prefix] [delimiter]                        Lists files in a bucket, optionally filtering by a
+  files.js list <bucketName> [prefix] [delimiter]               Lists files in a bucket, optionally filtering by a
                                                                 prefix.
-  upload <bucketName> <srcFileName>                             Uploads a local file to a bucket.
-  download <bucketName> <srcFileName> <destFileName>            Downloads a file from a bucket.
-  delete <bucketName> <fileName>                                Deletes a file from a bucket.
-  get-metadata <bucketName> <fileName>                          Gets the metadata for a file.
-  make-public <bucketName> <fileName>                           Makes a file public.
-  generate-signed-url <bucketName> <fileName>                   Generates a signed URL for a file.
-  move <bucketName> <srcFileName> <destFileName>                Moves a file to a new location within the same bucket,
+  files.js upload <bucketName> <srcFileName>                    Uploads a local file to a bucket.
+  files.js download <bucketName> <srcFileName> <destFileName>   Downloads a file from a bucket.
+  files.js delete <bucketName> <fileName>                       Deletes a file from a bucket.
+  files.js get-metadata <bucketName> <fileName>                 Gets the metadata for a file.
+  files.js make-public <bucketName> <fileName>                  Makes a file public.
+  files.js generate-signed-url <bucketName> <fileName>          Generates a signed URL for a file.
+  files.js move <bucketName> <srcFileName> <destFileName>       Moves a file to a new location within the same bucket,
                                                                 i.e. rename the file.
-  copy <srcBucketName> <srcFileName> <destBucketName>           Copies a file in a bucket to another bucket.
+  files.js copy <srcBucketName> <srcFileName> <destBucketName>  Copies a file in a bucket to another bucket.
   <destFileName>
 
 Options:
@@ -173,14 +193,18 @@ For more information, see https://cloud.google.com/storage/docs
 
 View the [source code][notifications_4_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/notifications.js,samples/README.md)
+
 __Usage:__ `node notifications.js --help`
 
 ```
+notifications.js <command>
+
 Commands:
-  create <bucketName> <topic>                 Creates a new notification
-  list <bucketName>                           Lists notifications for a given bucket.
-  get-metadata <bucketName> <notificationId>  Gets metadata for a notification.
-  delete <bucketName> <notificationId>        Deletes a notification from a bucket.
+  notifications.js create <bucketName> <topic>                 Creates a new notification
+  notifications.js list <bucketName>                           Lists notifications for a given bucket.
+  notifications.js get-metadata <bucketName> <notificationId>  Gets metadata for a notification.
+  notifications.js delete <bucketName> <notificationId>        Deletes a notification from a bucket.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -202,19 +226,24 @@ For more information, see https://cloud.google.com/storage/docs
 
 View the [source code][requesterPays_5_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/requesterPays.js,samples/README.md)
+
 __Usage:__ `node requesterPays.js --help`
 
 ```
+requesterPays.js <command>
+
 Commands:
-  enable <bucket>                                     Enables requester-pays requests on a bucket.
-  disable <bucket>                                    Disables requester-pays requests on a bucket.
-  get-status <bucket>                                 Determines whether requester-pays requests are enabled on a
-                                                      bucket.
-  download <bucketName> <srcFileName> <destFileName>  Downloads a file from a bucket using requester-pays requests.
+  requesterPays.js enable <bucket>                              Enables requester-pays requests on a bucket.
+  requesterPays.js disable <bucket>                             Disables requester-pays requests on a bucket.
+  requesterPays.js get-status <bucket>                          Determines whether requester-pays requests are enabled
+                                                                on a bucket.
+  requesterPays.js download <bucketName> <srcFileName>          Downloads a file from a bucket using requester-pays
+  <destFileName>                                                requests.
 
 Options:
-  --help     Show help                                                                                         [boolean]
   --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node requesterPays.js enable my-bucket                        Enables requester-pays requests on a bucket named
@@ -231,3 +260,6 @@ For more information, see https://cloud.google.com/storage/docs
 
 [requesterPays_5_docs]: https://cloud.google.com/storage/docs
 [requesterPays_5_code]: requesterPays.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/README.md

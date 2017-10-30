@@ -1,30 +1,14 @@
 {
   "name": "@google-cloud/storage-samples",
+  "description": "Samples for the Cloud Storage Client Library for Node.js.",
   "version": "0.0.1",
-  "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/google-cloud-node-storage.git"
-  },
   "engines": {
     "node": ">=4"
   },
-  "dependencies": {
-    "@google-cloud/pubsub": "*",
-    "@google-cloud/storage": "1.2.1",
-    "safe-buffer": "5.1.1",
-    "uuid": "3.1.0",
-    "yargs": "9.0.1"
-  },
-  "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.0.3",
-    "ava": "0.22.0",
-    "nyc": "11.2.1",
-    "proxyquire": "1.8.0",
-    "sinon": "3.3.0"
-  },
+  "repository": "googleapis/nodejs-storage",
+  "private": true,
   "nyc": {
     "exclude": [
       "**/*.test.js"
@@ -35,5 +19,19 @@
     "ava": "ava -T 20s --verbose system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose system-test/*.test.js && nyc report",
     "test": "repo-tools test run --cmd npm -- run cover"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "*",
+    "@google-cloud/storage": "1.4.0",
+    "safe-buffer": "5.1.1",
+    "uuid": "3.1.0",
+    "yargs": "10.0.3"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "2.1.0",
+    "ava": "0.23.0",
+    "nyc": "11.2.1",
+    "proxyquire": "1.8.0",
+    "sinon": "4.0.2"
   }
 }

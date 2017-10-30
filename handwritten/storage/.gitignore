@@ -7,4 +7,4 @@ out/
 system-test/secrets.js
 system-test/*key.json
 *.lock
-*-lock.json
+*-lock.js*

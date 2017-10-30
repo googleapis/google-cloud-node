@@ -1,38 +1,13 @@
 {
   "name": "@google-cloud/storage",
+  "description": "Cloud Storage Client Library for Node.js",
   "version": "1.4.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "description": "Cloud Storage Client Library for Node.js",
   "engines": {
     "node": ">=4"
   },
-  "contributors": [
-    {
-      "name": "Burcu Dogan",
-      "email": "jbd@google.com"
-    },
-    {
-      "name": "Johan Euphrosine",
-      "email": "proppy@google.com"
-    },
-    {
-      "name": "Patrick Costello",
-      "email": "pcostell@google.com"
-    },
-    {
-      "name": "Ryan Seys",
-      "email": "ryan@ryanseys.com"
-    },
-    {
-      "name": "Silvano Luciani",
-      "email": "silvano@google.com"
-    },
-    {
-      "name": "Stephen Sawchuk",
-      "email": "sawchuk@gmail.com"
-    }
-  ],
+  "repository": "googleapis/nodejs-storage",
   "main": "./src/index.js",
   "files": [
     "src",
@@ -40,7 +15,6 @@
     "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googleapis/nodejs-storage",
   "keywords": [
     "google apis client",
     "google api client",
@@ -53,6 +27,36 @@
     "google storage",
     "storage"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Colin Ihrig <cjihrig@gmail.com>",
+    "Cristian Almstrand <almstrand@users.noreply.github.com>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Eric Uldall <ericuldall@gmail.com>",
+    "Ernest Landrito <landrito@google.com>",
+    "Frank Natividad <frankyn@users.noreply.github.com>",
+    "Jason Dobry <jason.dobry@gmail.com>",
+    "Jason Dobry <jmdobry@users.noreply.github.com>",
+    "Justin Sprigg <justin.sprigg@gmail.com>",
+    "Luke Sneeringer <luke@sneeringer.com>",
+    "Stephen <stephenplusplus@users.noreply.github.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
+    "Zach Bjornson <bjornson@stanford.edu>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+  ],
+  "scripts": {
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
+    "prettier": "repo-tools exec -- prettier --write src/**/*.js samples/*.js samples/**/*.js system-test/**/*.js test/**/*.js",
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js --no-timeouts && nyc report",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "test": "repo-tools test run --cmd npm -- run cover",
+    "samples-test": "npm link && cd samples/ && npm link @google-cloud/storage && npm test && cd ../",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
+    "all-test": "npm test && npm run system-test && npm run samples-test",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json"
+  },
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "arrify": "^1.0.0",
@@ -74,7 +78,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.7",
+    "@google-cloud/nodejs-repo-tools": "^2.1.0",
     "@google-cloud/pubsub": "*",
     "codecov": "^3.0.0",
     "eslint": "^4.7.1",
@@ -96,17 +100,5 @@
     "semistandard": "^11.0.0",
     "tmp": "^0.0.33",
     "uuid": "^3.1.0"
-  },
-  "scripts": {
-    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
-    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
-    "prettier": "repo-tools exec -- prettier --write src/**/*.js samples/*.js samples/**/*.js system-test/**/*.js test/**/*.js",
-    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js --no-timeouts && nyc report",
-    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
-    "test": "repo-tools test run --cmd npm -- run cover",
-    "samples-test": "npm link && cd samples/ && npm link @google-cloud/storage && npm test && cd ../",
-    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
-    "all-test": "npm test && npm run system-test && npm run samples-test",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json"
   }
 }
