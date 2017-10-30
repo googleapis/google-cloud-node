@@ -2,7 +2,7 @@
 
 # Google Cloud Natural Language API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 [Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
@@ -25,18 +25,23 @@ library's README.
 
 View the [source code][analyze-v1_0_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1.js,samples/README.md)
+
 __Usage:__ `node analyze.v1.js --help`
 
 ```
+analyze.v1.js <command>
+
 Commands:
-  sentiment-text <text>                          Detects sentiment of a string.
-  sentiment-file <bucketName> <fileName>         Detects sentiment in a file in Google Cloud Storage.
-  entities-text <text>                           Detects entities in a string.
-  entities-file <bucketName> <fileName>          Detects entities in a file in Google Cloud Storage.
-  syntax-text <text>                             Detects syntax of a string.
-  syntax-file <bucketName> <fileName>            Detects syntax in a file in Google Cloud Storage.
-  entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
-  entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google Cloud Storage.
+  analyze.v1.js sentiment-text <text>                          Detects sentiment of a string.
+  analyze.v1.js sentiment-file <bucketName> <fileName>         Detects sentiment in a file in Google Cloud Storage.
+  analyze.v1.js entities-text <text>                           Detects entities in a string.
+  analyze.v1.js entities-file <bucketName> <fileName>          Detects entities in a file in Google Cloud Storage.
+  analyze.v1.js syntax-text <text>                             Detects syntax of a string.
+  analyze.v1.js syntax-file <bucketName> <fileName>            Detects syntax in a file in Google Cloud Storage.
+  analyze.v1.js entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
+  analyze.v1.js entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google
+                                                               Cloud Storage.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -62,18 +67,22 @@ For more information, see https://cloud.google.com/natural-language/docs
 
 View the [source code][analyze-v1beta2_1_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1beta2.js,samples/README.md)
+
 __Usage:__ `node analyze.v1beta2.js --help`
 
 ```
+analyze.v1beta2.js <command>
+
 Commands:
-  sentiment-text <text>                   Detects sentiment of a string.
-  sentiment-file <bucketName> <fileName>  Detects sentiment in a file in Google Cloud Storage.
-  entities-text <text>                    Detects entities in a string.
-  entities-file <bucketName> <fileName>   Detects entities in a file in Google Cloud Storage.
-  syntax-text <text>                      Detects syntax of a string.
-  syntax-file <bucketName> <fileName>     Detects syntax in a file in Google Cloud Storage.
-  classify-text <text>                    Classifies text of a string.
-  classify-file <bucketName> <fileName>   Classifies text in a file in Google Cloud Storage.
+  analyze.v1beta2.js sentiment-text <text>                   Detects sentiment of a string.
+  analyze.v1beta2.js sentiment-file <bucketName> <fileName>  Detects sentiment in a file in Google Cloud Storage.
+  analyze.v1beta2.js entities-text <text>                    Detects entities in a string.
+  analyze.v1beta2.js entities-file <bucketName> <fileName>   Detects entities in a file in Google Cloud Storage.
+  analyze.v1beta2.js syntax-text <text>                      Detects syntax of a string.
+  analyze.v1beta2.js syntax-file <bucketName> <fileName>     Detects syntax in a file in Google Cloud Storage.
+  analyze.v1beta2.js classify-text <text>                    Classifies text of a string.
+  analyze.v1beta2.js classify-file <bucketName> <fileName>   Classifies text in a file in Google Cloud Storage.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -95,3 +104,6 @@ For more information, see https://cloud.google.com/natural-language/docs
 
 [analyze-v1beta2_1_docs]: https://cloud.google.com/natural-language/docs/
 [analyze-v1beta2_1_code]: analyze.v1beta2.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/README.md
