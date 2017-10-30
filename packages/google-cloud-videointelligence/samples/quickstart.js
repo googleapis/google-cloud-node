@@ -22,7 +22,7 @@ const videoIntelligence = require('@google-cloud/video-intelligence');
 // Creates a client
 const client = new videoIntelligence.VideoIntelligenceServiceClient();
 
-// The GCS filepath of the video to analyze
+// The GCS uri of the video to analyze
 const gcsUri = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
 
 // Construct request

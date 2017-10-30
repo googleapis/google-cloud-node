@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Video Intelligence API: Node.js Client
+# [Google Cloud Video Intelligence API: Node.js Client](https://github.com/googleapis/nodejs-video-intelligence)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-video-intelligence.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-video-intelligence)
@@ -11,7 +11,9 @@
 
 The [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence) allows developers to use Google video analysis technology as part of their applications.
 
+
 * [Video Intelligence API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-video-intelligence](https://github.com/googleapis/nodejs-video-intelligence)
 * [Video Intelligence API Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -62,12 +64,12 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ```javascript
 // Imports the Google Cloud Video Intelligence library
-const Video = require('@google-cloud/video-intelligence');
+const videoIntelligence = require('@google-cloud/video-intelligence');
 
-// Instantiates a client
-const video = Video();
+// Creates a client
+const client = new videoIntelligence.VideoIntelligenceServiceClient();
 
-// The GCS filepath of the video to analyze
+// The GCS uri of the video to analyze
 const gcsUri = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
 
 // Construct request
@@ -77,7 +79,7 @@ const request = {
 };
 
 // Execute request
-video
+client
   .annotateVideo(request)
   .then(results => {
     const operation = results[0];
@@ -126,12 +128,12 @@ video
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-intelligence/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| Video Intelligence | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.js) |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Video Intelligence | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.js,samples/README.md) |
 
 The [Video Intelligence API Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -151,13 +153,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-intelligence/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-video-intelligence/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest/
 [product-docs]: https://cloud.google.com/video-intelligence
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
