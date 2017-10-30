@@ -35,12 +35,10 @@
     "Jason Dobry <jason.dobry@gmail.com>",
     "Jason Dobry <jmdobry@users.noreply.github.com>",
     "Luke Sneeringer <luke@sneeringer.com>",
-    "Luke Sneeringer <lukesneeringer@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
     "Tim Swast <swast@google.com>",
-    "florencep <florenceperot@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+    "florencep <florenceperot@google.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
@@ -63,7 +61,7 @@
     "propprop": "^0.3.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.11",
+    "@google-cloud/nodejs-repo-tools": "^2.1.0",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",

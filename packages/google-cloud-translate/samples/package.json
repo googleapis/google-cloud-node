@@ -6,7 +6,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-translate",
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=4.0.0"
   },
   "scripts": {
     "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
@@ -18,9 +18,9 @@
     "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.0.11",
-    "ava": "0.22.0",
+    "@google-cloud/nodejs-repo-tools": "2.1.0",
+    "ava": "0.23.0",
     "proxyquire": "1.8.0",
-    "sinon": "4.0.1"
+    "sinon": "4.0.2"
   }
 }

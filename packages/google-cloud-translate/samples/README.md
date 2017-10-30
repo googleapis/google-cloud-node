@@ -2,7 +2,7 @@
 
 # Google Cloud Translation API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynamically translate text between thousands of language pairs. The Cloud Translation API lets websites and programs integrate with the translation service programmatically. The Cloud Translation API is part of the larger Cloud Machine Learning API family.
 
@@ -23,6 +23,8 @@ library's README.
 ### Translate
 
 View the [source code][translate_0_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/translate.js,samples/README.md)
 
 __Usage:__ `node translate.js --help`
 
@@ -59,3 +61,6 @@ For more information, see https://cloud.google.com/translate/docs
 
 [translate_0_docs]: https://cloud.google.com/translate/docs
 [translate_0_code]: translate.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/README.md

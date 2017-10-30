@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Translation API: Node.js Client
+# [Google Cloud Translation API: Node.js Client](https://github.com/googleapis/nodejs-translate)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-translate.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-translate)
@@ -11,7 +11,9 @@
 
 The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynamically translate text between thousands of language pairs. The Cloud Translation API lets websites and programs integrate with the translation service programmatically. The Cloud Translation API is part of the larger Cloud Machine Learning API family.
 
+
 * [Cloud Translation API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-translate](https://github.com/googleapis/nodejs-translate)
 * [Cloud Translation API Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -93,12 +95,12 @@ translate
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-translate/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-translate/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| Translate | [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/translate.js) |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Translate | [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/translate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/translate.js,samples/README.md) |
 
 The [Cloud Translation API Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -119,13 +121,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-translate/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-translate/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/translate/latest/
 [product-docs]: https://cloud.google.com/translate/docs
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
