@@ -2,7 +2,7 @@
 
 # Google Cloud Data Loss Prevention (DLP) API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a powerful detection engine for personally identifiable information and other privacy-sensitive data in unstructured data streams.
 
@@ -28,28 +28,33 @@ library's README.
 
 View the [source code][inspect_0_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspect.js,samples/README.md)
+
 __Usage:__ `node inspect.js --help`
 
 ```
+inspect.js <command>
+
 Commands:
-  string <string>                         Inspect a string using the Data Loss Prevention API.
-  file <filepath>                         Inspects a local text, PNG, or JPEG file using the Data Loss Prevention API.
-  gcsFilePromise <bucketName> <fileName>  Inspects a text file stored on Google Cloud Storage using the Data Loss
-                                          Prevention API and the promise pattern.
-  gcsFileEvent <bucketName> <fileName>    Inspects a text file stored on Google Cloud Storage using the Data Loss
-                                          Prevention API and the event-handler pattern.
-  bigquery <datasetName> <tableName>      Inspects a BigQuery table using the Data Loss Prevention API.
-  datastore <kind>                        Inspect a Datastore instance using the Data Loss Prevention API.
+  inspect.js string <string>                         Inspect a string using the Data Loss Prevention API.
+  inspect.js file <filepath>                         Inspects a local text, PNG, or JPEG file using the Data Loss
+                                                     Prevention API.
+  inspect.js gcsFilePromise <bucketName> <fileName>  Inspects a text file stored on Google Cloud Storage using the Data
+                                                     Loss Prevention API and the promise pattern.
+  inspect.js gcsFileEvent <bucketName> <fileName>    Inspects a text file stored on Google Cloud Storage using the Data
+                                                     Loss Prevention API and the event-handler pattern.
+  inspect.js bigquery <datasetName> <tableName>      Inspects a BigQuery table using the Data Loss Prevention API.
+  inspect.js datastore <kind>                        Inspect a Datastore instance using the Data Loss Prevention API.
 
 Options:
   --version            Show version number                                                                     [boolean]
-  --help               Show help                                                                               [boolean]
   -m, --minLikelihood
           [string] [choices: "LIKELIHOOD_UNSPECIFIED", "VERY_UNLIKELY", "UNLIKELY", "POSSIBLE", "LIKELY", "VERY_LIKELY"]
                                                                                      [default: "LIKELIHOOD_UNSPECIFIED"]
   -f, --maxFindings                                                                                [number] [default: 0]
   -q, --includeQuote                                                                           [boolean] [default: true]
   -t, --infoTypes                               [array] [default: ["PHONE_NUMBER","EMAIL_ADDRESS","CREDIT_CARD_NUMBER"]]
+  --help               Show help                                                                               [boolean]
 
 Examples:
   node inspect.js string "My phone number is (123) 456-7890 and my email address is me@somedomain.com"
@@ -70,20 +75,24 @@ https://cloud.google.com/dlp/docs/reference/rest/v2beta1/content/inspect#Inspect
 
 View the [source code][redact_1_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redact.js,samples/README.md)
+
 __Usage:__ `node redact.js --help`
 
 ```
+redact.js <command>
+
 Commands:
-  string <string> <replaceString>  Redact sensitive data from a string using the Data Loss Prevention API.
-  image <filepath> <outputPath>    Redact sensitive data from an image using the Data Loss Prevention API.
+  redact.js string <string> <replaceString>  Redact sensitive data from a string using the Data Loss Prevention API.
+  redact.js image <filepath> <outputPath>    Redact sensitive data from an image using the Data Loss Prevention API.
 
 Options:
   --version            Show version number                                                                     [boolean]
-  --help               Show help                                                                               [boolean]
-  -t, --infoTypes                                                                                     [array] [required]
   -m, --minLikelihood
           [string] [choices: "LIKELIHOOD_UNSPECIFIED", "VERY_UNLIKELY", "UNLIKELY", "POSSIBLE", "LIKELY", "VERY_LIKELY"]
                                                                                      [default: "LIKELIHOOD_UNSPECIFIED"]
+  -t, --infoTypes                                                                                     [array] [required]
+  --help               Show help                                                                               [boolean]
 
 Examples:
   node redact.js string "My name is Gary" "REDACTED" -t US_MALE_NAME
@@ -100,17 +109,21 @@ https://cloud.google.com/dlp/docs/reference/rest/v2beta1/content/inspect#Inspect
 
 View the [source code][metadata_2_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md)
+
 __Usage:__ `node metadata.js --help`
 
 ```
+metadata.js <command>
+
 Commands:
-  infoTypes <category>  List types of sensitive information within a category.
-  categories            List root categories of sensitive information.
+  metadata.js infoTypes <category>  List types of sensitive information within a category.
+  metadata.js categories            List root categories of sensitive information.
 
 Options:
   --version           Show version number                                                                      [boolean]
-  --help              Show help                                                                                [boolean]
   -l, --languageCode                                                                         [string] [default: "en-US"]
+  --help              Show help                                                                                [boolean]
 
 Examples:
   node metadata.js infoTypes GOVERNMENT
@@ -126,12 +139,16 @@ For more information, see https://cloud.google.com/dlp/docs
 
 View the [source code][deid_3_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deid.js,samples/README.md)
+
 __Usage:__ `node deid.js --help`
 
 ```
+deid.js <command>
+
 Commands:
-  mask <string>                        Deidentify sensitive data by masking it with a character.
-  fpe <string> <wrappedKey> <keyName>  Deidentify sensitive data using Format Preserving Encryption (FPE).
+  deid.js mask <string>                        Deidentify sensitive data by masking it with a character.
+  deid.js fpe <string> <wrappedKey> <keyName>  Deidentify sensitive data using Format Preserving Encryption (FPE).
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -151,23 +168,27 @@ For more information, see https://cloud.google.com/dlp/docs.
 
 View the [source code][risk_4_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/risk.js,samples/README.md)
+
 __Usage:__ `node risk.js --help`
 
 ```
+risk.js <command>
+
 Commands:
-  numerical <datasetId> <tableId> <columnName>                  Computes risk metrics of a column of numbers in a Google
+  risk.js numerical <datasetId> <tableId> <columnName>          Computes risk metrics of a column of numbers in a Google
                                                                 BigQuery table.
-  categorical <datasetId> <tableId> <columnName>                Computes risk metrics of a column of data in a Google
+  risk.js categorical <datasetId> <tableId> <columnName>        Computes risk metrics of a column of data in a Google
                                                                 BigQuery table.
-  kAnonymity <datasetId> <tableId> [quasiIdColumnNames..]       Computes the k-anonymity of a column set in a Google
-                                                                BigQuery table.
-  lDiversity <datasetId> <tableId> <sensitiveAttribute>         Computes the l-diversity of a column set in a Google
+  risk.js kAnonymity <datasetId> <tableId>                      Computes the k-anonymity of a column set in a Google
   [quasiIdColumnNames..]                                        BigQuery table.
+  risk.js lDiversity <datasetId> <tableId>                      Computes the l-diversity of a column set in a Google
+  <sensitiveAttribute> [quasiIdColumnNames..]                   BigQuery table.
 
 Options:
   --version        Show version number                                                                         [boolean]
-  --help           Show help                                                                                   [boolean]
   -p, --projectId                                                                                               [string]
+  --help           Show help                                                                                   [boolean]
 
 Examples:
   node risk.js numerical nhtsa_traffic_fatalities accident_2015 state_number -p bigquery-public-data
@@ -180,3 +201,6 @@ For more information, see https://cloud.google.com/dlp/docs.
 
 [risk_4_docs]: https://cloud.google.com/dlp/docs
 [risk_4_code]: risk.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/README.md

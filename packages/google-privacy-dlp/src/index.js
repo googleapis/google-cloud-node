@@ -12,17 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*!
+ * DO NOT DELETE THE FOLLOWING NAMESPACE DEFINITIONS
+ */
 /**
  * @namespace google
  */
 /**
- * @namespace google.cloud
+ * @namespace google.privacy
  */
 /**
- * @namespace google.cloud.dlp
+ * @namespace google.privacy.dlp
  */
 /**
- * @namespace google.cloud.dlp.v2beta1
+ * @namespace google.privacy.dlp.v2beta1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
  */
 
 'use strict';
@@ -45,24 +57,24 @@ const gapic = Object.freeze({
  * @module {object} @google-cloud/dlp
  * @alias nodejs-dlp
  *
- * @example <caption>Install the client library with
- *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save @google-cloud/dlp
  *
  * @example <caption>Import the client library:</caption>
- * const dlp = require('@google-cloud/dlp');
+ * const DLP = require('@google-cloud/dlp');
  *
- * @example <caption>Create a client that uses
- *   <a href="https://goo.gl/64dyYX">Application Default Credentials
- *   (ADC)</a>:</caption>
- * let client = new dlp.DlpServiceClient();
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new DLP.DlpServiceClient();
  *
- * @example <caption>Create a client with
- *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * let client = new dlp.DlpServiceClient({
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new DLP.DlpServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:quickstart
+ * Full quickstart example:
  */
 
 /**
