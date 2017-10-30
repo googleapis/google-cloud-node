@@ -1,8 +1,8 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud DNS: Node.js Client
+# [Google Cloud DNS: Node.js Client](https://github.com/googleapis/nodejs-dns)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-dns.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-dns)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-dns?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-dns)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dns/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dns)
@@ -11,7 +11,9 @@
 
 [Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
 
+
 * [Cloud DNS Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-dns](https://github.com/googleapis/nodejs-dns)
 * [Cloud DNS Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -88,12 +90,12 @@ dns
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dns/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| Zones | [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/zones.js) |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Zones | [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/zones.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/zones.js,samples/README.md) |
 
 The [Cloud DNS Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -112,13 +114,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-dns/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-dns/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dns/latest/
 [product-docs]: https://cloud.google.com/dns/docs/
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png

@@ -60,7 +60,7 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.9",
+    "@google-cloud/nodejs-repo-tools": "^2.1.0",
     "async": "^2.1.4",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",

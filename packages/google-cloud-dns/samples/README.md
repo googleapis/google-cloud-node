@@ -2,7 +2,7 @@
 
 # Google Cloud DNS: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 [Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
 
@@ -24,11 +24,15 @@ library's README.
 
 View the [source code][zones_0_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/zones.js,samples/README.md)
+
 __Usage:__ `node zones.js --help`
 
 ```
+zones.js <command>
+
 Commands:
-  list  Lists all zones in the current project.
+  zones.js list  Lists all zones in the current project.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -42,3 +46,6 @@ For more information, see https://cloud.google.com/dns/docs
 
 [zones_0_docs]: https://cloud.google.com/dns/docs
 [zones_0_code]: zones.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/README.md
