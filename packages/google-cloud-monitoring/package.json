@@ -38,9 +38,12 @@
     "Jun Mukai <jun.mukai@gmail.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
     "Song Wang <songwang@google.com>",
+    "Stephen <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Takashi Matsuo <tmatsuo@google.com>",
-    "Tim Swast <swast@google.com>"
+    "Tim Swast <swast@google.com>",
+    "djbelcher <dbelcher@godaddy.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
@@ -60,7 +63,7 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.0.11",
+    "@google-cloud/nodejs-repo-tools": "^2.1.0",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",

@@ -2,7 +2,7 @@
 
 # Stackdriver Monitoring: Node.js Samples
 
-[![Build](https://storage.googleapis.com/.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
@@ -24,6 +24,8 @@ library's README.
 ### Metrics
 
 View the [source code][metrics_0_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.js,samples/README.md)
 
 __Usage:__ `node metrics.js --help`
 
@@ -74,6 +76,8 @@ For more information, see https://cloud.google.com/monitoring/docs
 
 View the [source code][uptime_1_code].
 
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md)
+
 __Usage:__ `node uptime.js --help`
 
 ```
@@ -103,3 +107,6 @@ For more information, see https://cloud.google.com/monitoring/uptime-checks/
 
 [uptime_1_docs]: https://cloud.google.com/monitoring/docs
 [uptime_1_code]: uptime.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/README.md
