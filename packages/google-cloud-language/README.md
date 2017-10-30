@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Natural Language API: Node.js Client
+# [Google Cloud Natural Language API: Node.js Client](https://github.com/googleapis/nodejs-language)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-language.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-language)
@@ -11,7 +11,9 @@
 
 [Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural language understanding technologies to developers, including sentiment analysis, entity analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
+
 * [Natural Language API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-language](https://github.com/googleapis/nodejs-language)
 * [Natural Language API Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -92,13 +94,13 @@ client
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-language/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-language/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| Analyze v1 | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1.js) |
-| Analyze v1beta2 | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1beta2.js) |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Analyze v1 | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1.js,samples/README.md) |
+| Analyze v1beta2 | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1beta2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1beta2.js,samples/README.md) |
 
 The [Natural Language API Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -119,13 +121,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-language/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-language/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest/
 [product-docs]: https://cloud.google.com/natural-language/docs
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png

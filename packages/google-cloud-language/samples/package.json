@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=4.0.0"
   },
   "repository": "googleapis/nodejs-language",
   "private": true,
@@ -19,15 +19,15 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/language": "0.13.0",
+    "@google-cloud/language": "1.0.0",
     "@google-cloud/storage": "1.4.0",
-    "yargs": "9.0.1"
+    "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.0.8",
-    "ava": "0.22.0",
+    "@google-cloud/nodejs-repo-tools": "2.1.0",
+    "ava": "0.23.0",
     "proxyquire": "1.8.0",
-    "sinon": "4.0.1",
+    "sinon": "4.0.2",
     "uuid": "3.1.0"
   }
 }
