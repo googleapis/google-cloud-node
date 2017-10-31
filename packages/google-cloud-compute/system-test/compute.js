@@ -1933,7 +1933,7 @@ describe('Compute', function() {
                 mode: 'READ_ONLY',
                 initializeParams: {
                   diskName: generateName('disk'),
-                  diskSizeGb: 2,
+                  diskSizeGb: 10,
                   diskType: 'pd-standard',
                   sourceImage: [
                     'projects/centos-cloud/global/images/centos-6-v20150710',
