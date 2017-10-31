@@ -27,7 +27,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Project') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -41,15 +41,15 @@ describe('Project', function() {
   var PROJECT_ID = 'project-1';
   var COMPUTE = {
     projectId: PROJECT_ID,
-    authConfig: { a: 'b', c: 'd' }
+    authConfig: {a: 'b', c: 'd'},
   };
 
   before(function() {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -76,7 +76,7 @@ describe('Project', function() {
       assert.strictEqual(calledWith.id, '');
       assert.deepStrictEqual(calledWith.methods, {
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });

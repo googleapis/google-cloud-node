@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Firewall') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -45,7 +45,7 @@ describe('Firewall', function() {
 
   var COMPUTE = {
     projectId: 'project-id',
-    createFirewall: util.noop
+    createFirewall: util.noop,
   };
   var FIREWALL_NAME = 'tcp-3000';
   var FIREWALL_NETWORK = 'global/networks/default';
@@ -54,8 +54,8 @@ describe('Firewall', function() {
     Firewall = proxyquire('../src/firewall.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -77,7 +77,7 @@ describe('Firewall', function() {
     });
 
     it('should default to the global network', function() {
-      assert.deepEqual(firewall.metadata, { network: FIREWALL_NETWORK });
+      assert.deepEqual(firewall.metadata, {network: FIREWALL_NETWORK});
     });
 
     it('should inherit from ServiceObject', function(done) {
@@ -86,8 +86,8 @@ describe('Firewall', function() {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var firewall = new Firewall(computeInstance, FIREWALL_NAME);
@@ -102,7 +102,7 @@ describe('Firewall', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -119,7 +119,7 @@ describe('Firewall', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -145,7 +145,7 @@ describe('Firewall', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -189,7 +189,7 @@ describe('Firewall', function() {
         assert.strictEqual(reqOpts.json, metadata);
         assert.deepEqual(metadata, {
           name: firewall.name,
-          network: FIREWALL_NETWORK
+          network: FIREWALL_NETWORK,
         });
 
         done();
@@ -200,7 +200,7 @@ describe('Firewall', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         firewall.request = function(reqOpts, callback) {
@@ -209,7 +209,7 @@ describe('Firewall', function() {
       });
 
       it('should return an error if the request fails', function(done) {
-        firewall.setMetadata({ e: 'f' }, function(err, op, apiResponse_) {
+        firewall.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -220,7 +220,7 @@ describe('Firewall', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -231,7 +231,7 @@ describe('Firewall', function() {
 
       it('should execute callback with operation & response', function(done) {
         var operation = {};
-        var metadata = { a: 'b' };
+        var metadata = {a: 'b'};
 
         firewall.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -249,7 +249,7 @@ describe('Firewall', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          firewall.setMetadata({ a: 'b' });
+          firewall.setMetadata({a: 'b'});
         });
       });
     });

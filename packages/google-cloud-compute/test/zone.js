@@ -39,9 +39,9 @@ var fakeUtil = extend({}, util, {
       'instanceGroup',
       'machineType',
       'operation',
-      'vm'
+      'vm',
     ]);
-  }
+  },
 });
 
 var gceImagesOverride;
@@ -101,12 +101,12 @@ var fakePaginator = {
       'getInstanceGroups',
       'getMachineTypes',
       'getOperations',
-      'getVMs'
+      'getVMs',
     ]);
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 describe('Zone', function() {
@@ -115,7 +115,7 @@ describe('Zone', function() {
 
   var COMPUTE = {
     authClient: {},
-    projectId: 'project-id'
+    projectId: 'project-id',
   };
   var ZONE_NAME = 'us-central1-a';
 
@@ -125,14 +125,14 @@ describe('Zone', function() {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
-        util: fakeUtil
+        util: fakeUtil,
       },
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,
       './instance-group.js': FakeInstanceGroup,
       './machine-type.js': FakeMachineType,
       './operation.js': FakeOperation,
-      './vm.js': FakeVM
+      './vm.js': FakeVM,
     });
   });
 
@@ -191,7 +191,7 @@ describe('Zone', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -223,7 +223,7 @@ describe('Zone', function() {
 
     it('should make the correct request', function(done) {
       var config = {
-        target: TARGET
+        target: TARGET,
       };
 
       zone.request = function(reqOpts) {
@@ -238,9 +238,9 @@ describe('Zone', function() {
       var config = {
         autoscalingPolicy: {
           a: 'b',
-          c: 'd'
+          c: 'd',
         },
-        target: TARGET
+        target: TARGET,
       };
 
       zone.request = function(reqOpts) {
@@ -255,7 +255,7 @@ describe('Zone', function() {
     describe('config.target', function() {
       it('should use a provided http target', function(done) {
         var config = {
-          target: 'http://my-target'
+          target: 'http://my-target',
         };
 
         zone.request = function(reqOpts) {
@@ -268,7 +268,7 @@ describe('Zone', function() {
 
       it('should use a provided https target', function(done) {
         var config = {
-          target: 'https://my-target'
+          target: 'https://my-target',
         };
 
         zone.request = function(reqOpts) {
@@ -281,7 +281,7 @@ describe('Zone', function() {
 
       it('should create a full target URL', function(done) {
         var config = {
-          target: 'my-target'
+          target: 'my-target',
         };
 
         zone.request = function(reqOpts) {
@@ -291,7 +291,7 @@ describe('Zone', function() {
             '/zones/',
             zone.name,
             '/instanceGroupManagers/',
-            config.target
+            config.target,
           ].join('');
 
           assert.strictEqual(reqOpts.json.target, expectedTarget);
@@ -307,7 +307,7 @@ describe('Zone', function() {
       it('should set coolDownPeriodSec', function(done) {
         var config = {
           coolDown: 80,
-          target: TARGET
+          target: TARGET,
         };
 
         zone.request = function(reqOpts) {
@@ -325,7 +325,7 @@ describe('Zone', function() {
       it('should set cpuUtilization', function(done) {
         var config = {
           cpu: 80,
-          target: TARGET
+          target: TARGET,
         };
 
         zone.request = function(reqOpts) {
@@ -344,7 +344,7 @@ describe('Zone', function() {
       it('should set loadBalancingUtilization', function(done) {
         var config = {
           loadBalance: 80,
-          target: TARGET
+          target: TARGET,
         };
 
         zone.request = function(reqOpts) {
@@ -363,7 +363,7 @@ describe('Zone', function() {
       it('should set maxNumReplicas', function(done) {
         var config = {
           maxReplicas: 10,
-          target: TARGET
+          target: TARGET,
         };
 
         zone.request = function(reqOpts) {
@@ -381,7 +381,7 @@ describe('Zone', function() {
       it('should set minNumReplicas', function(done) {
         var config = {
           minReplicas: 10,
-          target: TARGET
+          target: TARGET,
         };
 
         zone.request = function(reqOpts) {
@@ -399,7 +399,7 @@ describe('Zone', function() {
       var CONFIG = {
         a: 'b',
         c: 'd',
-        target: 'http://target'
+        target: 'http://target',
       };
 
       var expectedBody = {
@@ -407,7 +407,7 @@ describe('Zone', function() {
         target: 'http://target',
         autoscalingPolicy: {},
         a: 'b',
-        c: 'd'
+        c: 'd',
       };
 
       it('should make the correct API request', function(done) {
@@ -424,7 +424,7 @@ describe('Zone', function() {
 
       describe('error', function() {
         var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
+        var apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -444,7 +444,7 @@ describe('Zone', function() {
       });
 
       describe('success', function() {
-        var apiResponse = { name: 'operation-name' };
+        var apiResponse = {name: 'operation-name'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -491,7 +491,7 @@ describe('Zone', function() {
 
     it('should use the image property as qs.sourceImages', function(done) {
       var config = {
-        image: 'abc'
+        image: 'abc',
       };
 
       zone.request = function(reqOpts) {
@@ -504,7 +504,7 @@ describe('Zone', function() {
 
     describe('config.os', function() {
       var CONFIG = {
-        os: 'os-name'
+        os: 'os-name',
       };
 
       it('should get the latest image', function(done) {
@@ -535,12 +535,12 @@ describe('Zone', function() {
 
       describe('success', function() {
         var gceImagesResp = {
-          selfLink: 'http://selflink'
+          selfLink: 'http://selflink',
         };
 
         var expectedConfig = {
           name: NAME,
-          sourceImage: gceImagesResp.selfLink
+          sourceImage: gceImagesResp.selfLink,
         };
 
         it('should call createDisk with the correct config', function(done) {
@@ -562,13 +562,13 @@ describe('Zone', function() {
     describe('API request', function() {
       var CONFIG = {
         a: 'b',
-        c: 'd'
+        c: 'd',
       };
 
       var expectedBody = {
         name: NAME,
         a: 'b',
-        c: 'd'
+        c: 'd',
       };
 
       it('should make the correct API request', function(done) {
@@ -586,7 +586,7 @@ describe('Zone', function() {
 
       describe('error', function() {
         var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
+        var apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -606,7 +606,7 @@ describe('Zone', function() {
       });
 
       describe('success', function() {
-        var apiResponse = { name: 'operation-name' };
+        var apiResponse = {name: 'operation-name'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -654,7 +654,7 @@ describe('Zone', function() {
     describe('options.ports', function() {
       var PORTS = {
         http: 80,
-        https: 443
+        https: 443,
       };
 
       it('should format named ports', function(done) {
@@ -671,20 +671,20 @@ describe('Zone', function() {
           done();
         };
 
-        zone.createInstanceGroup(NAME, { ports: PORTS }, assert.ifError);
+        zone.createInstanceGroup(NAME, {ports: PORTS}, assert.ifError);
       });
     });
 
     describe('API request', function() {
       var OPTIONS = {
         a: 'b',
-        c: 'd'
+        c: 'd',
       };
 
       var expectedBody = {
         name: NAME,
         a: 'b',
-        c: 'd'
+        c: 'd',
       };
 
       it('should make the correct API request', function(done) {
@@ -701,7 +701,7 @@ describe('Zone', function() {
 
       it('should not require options', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, { name: NAME });
+          assert.deepEqual(reqOpts.json, {name: NAME});
           done();
         };
 
@@ -710,7 +710,7 @@ describe('Zone', function() {
 
       describe('error', function() {
         var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
+        var apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -730,7 +730,7 @@ describe('Zone', function() {
       });
 
       describe('success', function() {
-        var apiResponse = { name: 'operation-name' };
+        var apiResponse = {name: 'operation-name'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -778,14 +778,14 @@ describe('Zone', function() {
       machineType: 'zones/' + ZONE_NAME + '/machineTypes/n1-standard-1',
       networkInterfaces: [
         {
-          network: 'global/networks/default'
-        }
-      ]
+          network: 'global/networks/default',
+        },
+      ],
     };
 
     describe('config.machineType', function() {
       var CONFIG = {
-        machineType: 'f1-micro'
+        machineType: 'f1-micro',
       };
 
       it('should format a given machine type', function(done) {
@@ -803,7 +803,7 @@ describe('Zone', function() {
 
     describe('config.tags', function() {
       var CONFIG = {
-        tags: ['a', 'b']
+        tags: ['a', 'b'],
       };
 
       it('should accept an array of tags', function(done) {
@@ -818,7 +818,7 @@ describe('Zone', function() {
 
     describe('config.http', function() {
       var CONFIG = {
-        http: true
+        http: true,
       };
 
       beforeEach(function() {
@@ -851,7 +851,7 @@ describe('Zone', function() {
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
-            type: 'ONE_TO_ONE_NAT'
+            type: 'ONE_TO_ONE_NAT',
           });
           done();
         };
@@ -872,8 +872,8 @@ describe('Zone', function() {
         var config = {
           http: true,
           tags: {
-            items: ['a', 'b']
-          }
+            items: ['a', 'b'],
+          },
         };
 
         var expectedTags = ['a', 'b', 'http-server'];
@@ -898,7 +898,7 @@ describe('Zone', function() {
 
     describe('config.https', function() {
       var CONFIG = {
-        https: true
+        https: true,
       };
 
       beforeEach(function() {
@@ -931,7 +931,7 @@ describe('Zone', function() {
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
-            type: 'ONE_TO_ONE_NAT'
+            type: 'ONE_TO_ONE_NAT',
           });
           done();
         };
@@ -952,8 +952,8 @@ describe('Zone', function() {
         var config = {
           https: true,
           tags: {
-            items: ['a', 'b']
-          }
+            items: ['a', 'b'],
+          },
         };
 
         var expectedTags = ['a', 'b', 'https-server'];
@@ -978,7 +978,7 @@ describe('Zone', function() {
 
     describe('config.os', function() {
       var CONFIG = {
-        os: 'os-name'
+        os: 'os-name',
       };
 
       it('should get the latest image', function(done) {
@@ -1009,7 +1009,7 @@ describe('Zone', function() {
 
       describe('success', function() {
         var gceImagesResp = {
-          selfLink: 'http://selflink'
+          selfLink: 'http://selflink',
         };
 
         var expectedConfig = extend({}, EXPECTED_CONFIG, {
@@ -1018,10 +1018,10 @@ describe('Zone', function() {
               autoDelete: true,
               boot: true,
               initializeParams: {
-                sourceImage: gceImagesResp.selfLink
-              }
-            }
-          ]
+                sourceImage: gceImagesResp.selfLink,
+              },
+            },
+          ],
         });
 
         it('should call createVM with the correct config', function(done) {
@@ -1055,7 +1055,7 @@ describe('Zone', function() {
 
       describe('error', function() {
         var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
+        var apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -1075,7 +1075,7 @@ describe('Zone', function() {
       });
 
       describe('success', function() {
-        var apiResponse = { name: 'operation-name' };
+        var apiResponse = {name: 'operation-name'};
 
         beforeEach(function() {
           zone.request = function(reqOpts, callback) {
@@ -1135,7 +1135,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/autoscalers');
@@ -1149,7 +1149,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -1170,9 +1170,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'autoscaler-name' }
-        ]
+        items: [{name: 'autoscaler-name'}],
       };
 
       beforeEach(function() {
@@ -1184,10 +1182,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -1236,7 +1234,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/disks');
@@ -1250,7 +1248,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -1271,9 +1269,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'disk-name' }
-        ]
+        items: [{name: 'disk-name'}],
       };
 
       beforeEach(function() {
@@ -1285,10 +1281,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -1337,7 +1333,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/instanceGroups');
@@ -1351,7 +1347,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -1372,9 +1368,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
+        items: [{name: 'operation-name'}],
       };
 
       beforeEach(function() {
@@ -1386,10 +1380,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -1429,9 +1423,9 @@ describe('Zone', function() {
 
   describe('getMachineTypes', function() {
     it('should make the correct call to Compute', function(done) {
-      var options = { a: 'b', c: 'd' };
+      var options = {a: 'b', c: 'd'};
       var expectedOptions = extend({}, options, {
-        filter: 'zone eq .*' + zone.name
+        filter: 'zone eq .*' + zone.name,
       });
 
       zone.compute.getMachineTypes = function(options, callback) {
@@ -1453,7 +1447,7 @@ describe('Zone', function() {
     it('should not require any arguments', function(done) {
       zone.compute.getMachineTypes = function(options, callback) {
         assert.deepEqual(options, {
-          filter: 'zone eq .*' + zone.name
+          filter: 'zone eq .*' + zone.name,
         });
         assert.strictEqual(typeof callback, 'undefined');
         done();
@@ -1484,7 +1478,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/operations');
@@ -1498,7 +1492,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -1518,9 +1512,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
+        items: [{name: 'operation-name'}],
       };
 
       beforeEach(function() {
@@ -1532,10 +1524,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -1584,7 +1576,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/instances');
@@ -1598,7 +1590,7 @@ describe('Zone', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -1618,9 +1610,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'vm-name' }
-        ]
+        items: [{name: 'vm-name'}],
       };
 
       beforeEach(function() {
@@ -1632,10 +1622,10 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         zone.request = function(reqOpts, callback) {
@@ -1724,10 +1714,10 @@ describe('Zone', function() {
         assert.strictEqual(name, 'default-allow-http');
         assert.deepEqual(config, {
           protocols: {
-            tcp: [80]
+            tcp: [80],
           },
           ranges: ['0.0.0.0/0'],
-          tags: ['http-server']
+          tags: ['http-server'],
         });
 
         done();
@@ -1772,10 +1762,10 @@ describe('Zone', function() {
         assert.strictEqual(name, 'default-allow-https');
         assert.deepEqual(config, {
           protocols: {
-            tcp: [443]
+            tcp: [443],
           },
           ranges: ['0.0.0.0/0'],
-          tags: ['https-server']
+          tags: ['https-server'],
         });
 
         done();

@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Service') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -47,15 +47,15 @@ describe('Service', function() {
 
   var COMPUTE = {
     projectId: 'project-id',
-    createService: util.noop
+    createService: util.noop,
   };
 
   before(function() {
     Service = proxyquire('../src/service.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -84,8 +84,8 @@ describe('Service', function() {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
             return createMethod;
-          }
-        }
+          },
+        },
       });
 
       var service = new Service(computeInstance, SERVICE_NAME);
@@ -101,7 +101,7 @@ describe('Service', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -118,7 +118,7 @@ describe('Service', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -144,7 +144,7 @@ describe('Service', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -186,7 +186,7 @@ describe('Service', function() {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/getHealth');
         assert.deepEqual(reqOpts.json, {
-          group: GROUP
+          group: GROUP,
         });
 
         done();
@@ -199,7 +199,7 @@ describe('Service', function() {
       it('should compose the right URL', function(done) {
         var group = {
           name: 'instance-group-name',
-          zone: 'zone-name'
+          zone: 'zone-name',
         };
 
         service.request = function(reqOpts) {
@@ -210,8 +210,8 @@ describe('Service', function() {
               '/zones/',
               group.zone,
               '/instanceGroups/',
-              group.name
-            ].join('')
+              group.name,
+            ].join(''),
           });
 
           done();
@@ -225,8 +225,8 @@ describe('Service', function() {
           name: 'instance-group-name',
           // Simulating a {module:compute/zone}:
           zone: {
-            name: 'zone-name'
-          }
+            name: 'zone-name',
+          },
         };
 
         service.request = function(reqOpts) {
@@ -237,8 +237,8 @@ describe('Service', function() {
               '/zones/',
               group.zone.name,
               '/instanceGroups/',
-              group.name
-            ].join('')
+              group.name,
+            ].join(''),
           });
 
           done();
@@ -250,7 +250,7 @@ describe('Service', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         service.request = function(reqOpts, callback) {
@@ -270,7 +270,7 @@ describe('Service', function() {
 
     describe('success', function() {
       var apiResponse = {
-        healthStatus: {}
+        healthStatus: {},
       };
 
       beforeEach(function() {
@@ -307,7 +307,7 @@ describe('Service', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         service.request = function(reqOpts, callback) {
@@ -316,7 +316,7 @@ describe('Service', function() {
       });
 
       it('should return an error if the request fails', function(done) {
-        service.setMetadata({ e: 'f' }, function(err, op, apiResponse_) {
+        service.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -327,7 +327,7 @@ describe('Service', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -338,7 +338,7 @@ describe('Service', function() {
 
       it('should execute callback with operation & response', function(done) {
         var operation = {};
-        var metadata = { a: 'b' };
+        var metadata = {a: 'b'};
 
         service.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -356,7 +356,7 @@ describe('Service', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          service.setMetadata({ a: 'b' });
+          service.setMetadata({a: 'b'});
         });
       });
     });

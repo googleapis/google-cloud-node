@@ -31,7 +31,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'VM') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -50,20 +50,20 @@ describe('VM', function() {
 
   var COMPUTE = {
     authClient: {
-      projectId: 'project-id'
+      projectId: 'project-id',
     },
-    projectId: 'project-id'
+    projectId: 'project-id',
   };
   var ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
     createDisk: util.noop,
-    createVM: util.noop
+    createVM: util.noop,
   };
   var VM_NAME = 'vm-name';
   var FULLY_QUALIFIED_NAME = [
     'project/project-id/zones/zone-name/instances/',
-    VM_NAME
+    VM_NAME,
   ].join('');
 
   before(function() {
@@ -71,8 +71,8 @@ describe('VM', function() {
     VM = proxyquire('../src/vm.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -109,14 +109,17 @@ describe('VM', function() {
     });
 
     it('should localize the URL of the VM', function() {
-      assert.strictEqual(vm.url, [
-        'https://www.googleapis.com/compute/v1/projects',
-        COMPUTE.projectId,
-        'zones',
-        ZONE.name,
-        'instances',
-        VM_NAME
-      ].join('/'));
+      assert.strictEqual(
+        vm.url,
+        [
+          'https://www.googleapis.com/compute/v1/projects',
+          COMPUTE.projectId,
+          'zones',
+          ZONE.name,
+          'instances',
+          VM_NAME,
+        ].join('/')
+      );
     });
 
     it('should inherit from ServiceObject', function(done) {
@@ -125,8 +128,8 @@ describe('VM', function() {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var vm = new VM(zoneInstance, VM_NAME);
@@ -141,7 +144,7 @@ describe('VM', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -153,7 +156,7 @@ describe('VM', function() {
     beforeEach(function() {
       EXPECTED_BODY = {
         deviceName: DISK.name,
-        source: DISK.formattedName
+        source: DISK.formattedName,
       };
     });
 
@@ -178,10 +181,10 @@ describe('VM', function() {
     });
 
     describe('options.readOnly', function() {
-      var CONFIG = extend({}, CONFIG, { readOnly: true });
+      var CONFIG = extend({}, CONFIG, {readOnly: true});
 
       it('should set the correct mode', function(done) {
-        var expectedBody = extend({}, EXPECTED_BODY, { mode: 'READ_ONLY' });
+        var expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
 
         vm.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json, expectedBody);
@@ -249,9 +252,9 @@ describe('VM', function() {
         disks: [
           {
             source: DEVICE_NAME,
-            deviceName: DEVICE_NAME
-          }
-        ]
+            deviceName: DEVICE_NAME,
+          },
+        ],
       };
 
       vm.getMetadata = function(callback) {
@@ -284,9 +287,9 @@ describe('VM', function() {
           disks: [
             {
               source: REPLACED_DEVICE_NAME,
-              deviceName: REPLACED_DEVICE_NAME
-            }
-          ]
+              deviceName: REPLACED_DEVICE_NAME,
+            },
+          ],
         };
 
         callback(null, metadata, metadata);
@@ -305,9 +308,9 @@ describe('VM', function() {
         disks: [
           {
             source: 'a',
-            deviceName: 'b'
-          }
-        ]
+            deviceName: 'b',
+          },
+        ],
       };
 
       vm.getMetadata = function(callback) {
@@ -328,7 +331,7 @@ describe('VM', function() {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/detachDisk');
-        assert.deepEqual(reqOpts.qs, { deviceName: DEVICE_NAME });
+        assert.deepEqual(reqOpts.qs, {deviceName: DEVICE_NAME});
 
         callback();
       };
@@ -369,7 +372,7 @@ describe('VM', function() {
   });
 
   describe('getSerialPortOutput', function() {
-    var EXPECTED_QUERY = { port: 1 };
+    var EXPECTED_QUERY = {port: 1};
 
     it('should default to port 1', function(done) {
       FakeServiceObject.prototype.request = function(reqOpts) {
@@ -404,7 +407,7 @@ describe('VM', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -424,7 +427,7 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { contents: 'contents' };
+      var apiResponse = {contents: 'contents'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -455,7 +458,7 @@ describe('VM', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         vm.getMetadata = function(callback) {
@@ -479,11 +482,11 @@ describe('VM', function() {
       var metadata = {
         tags: {
           items: [],
-          fingerprint: 'fingerprint'
-        }
+          fingerprint: 'fingerprint',
+        },
       };
 
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         vm.getMetadata = function(callback) {
@@ -536,7 +539,7 @@ describe('VM', function() {
       vm.request = util.noop;
 
       vm.zone.parent = {
-        execAfterOperation_: util.noop
+        execAfterOperation_: util.noop,
       };
     });
 
@@ -545,7 +548,7 @@ describe('VM', function() {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
         assert.deepEqual(reqOpts.json, {
-          machineType: MACHINE_TYPE
+          machineType: MACHINE_TYPE,
         });
         done();
       };
@@ -560,7 +563,7 @@ describe('VM', function() {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
         assert.deepEqual(reqOpts.json, {
-          machineType: MACHINE_TYPE
+          machineType: MACHINE_TYPE,
         });
         done();
       };
@@ -704,7 +707,7 @@ describe('VM', function() {
         done(); // Test will fail if called.
       };
 
-      vm.resize(MACHINE_TYPE, { start: false }, function(err, apiResponse_) {
+      vm.resize(MACHINE_TYPE, {start: false}, function(err, apiResponse_) {
         assert.ifError(err);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
@@ -714,7 +717,7 @@ describe('VM', function() {
 
   describe('setMetadata', function() {
     var METADATA = {
-      newKey: 'newValue'
+      newKey: 'newValue',
     };
 
     describe('getting the current fingerprint', function() {
@@ -741,8 +744,8 @@ describe('VM', function() {
         describe('success', function() {
           var metadata = {
             metadata: {
-              fingerprint: '==='
-            }
+              fingerprint: '===',
+            },
           };
 
           var apiResponse = {};
@@ -758,9 +761,9 @@ describe('VM', function() {
               items: [
                 {
                   key: 'newKey',
-                  value: 'newValue'
-                }
-              ]
+                  value: 'newValue',
+                },
+              ],
             });
 
             vm.request = function(reqOpts, callback) {
@@ -861,7 +864,7 @@ describe('VM', function() {
       'STOPPING',
       'SUSPENDING',
       'SUSPENDED',
-      'TERMINATED'
+      'TERMINATED',
     ];
 
     beforeEach(function() {
@@ -890,10 +893,10 @@ describe('VM', function() {
     });
 
     it('should not allow an out of bounds timeout', function() {
-      vm.waitFor(VALID_STATUSES[0], { timeout: -1 }, assert.ifError);
+      vm.waitFor(VALID_STATUSES[0], {timeout: -1}, assert.ifError);
       assert.strictEqual(vm.waiters.pop().timeout, 0);
 
-      vm.waitFor(VALID_STATUSES[0], { timeout: 601 }, assert.ifError);
+      vm.waitFor(VALID_STATUSES[0], {timeout: 601}, assert.ifError);
       assert.strictEqual(vm.waiters.pop().timeout, 600);
     });
 
@@ -975,7 +978,7 @@ describe('VM', function() {
         };
 
         vm.waiters.push({
-          callback: util.noop
+          callback: util.noop,
         });
       });
 
@@ -1004,7 +1007,7 @@ describe('VM', function() {
     describe('desired status reached', function() {
       var STATUS = 'status';
       var METADATA = {
-        status: STATUS
+        status: STATUS,
       };
 
       beforeEach(function() {
@@ -1014,7 +1017,7 @@ describe('VM', function() {
 
         vm.waiters.push({
           status: STATUS,
-          callback: util.noop
+          callback: util.noop,
         });
       });
 
@@ -1049,17 +1052,20 @@ describe('VM', function() {
           status: STATUS,
           startTime: Date.now() / 1000 - 20,
           timeout: 10,
-          callback: util.noop
+          callback: util.noop,
         });
       });
 
       it('should execute callback with WaitForTimeoutError', function(done) {
         vm.waiters[0].callback = function(err) {
           assert.strictEqual(err.name, 'WaitForTimeoutError');
-          assert.strictEqual(err.message, [
-            'waitFor timed out waiting for VM ' + vm.name,
-            'to be in status: ' + STATUS
-          ].join(' '));
+          assert.strictEqual(
+            err.message,
+            [
+              'waitFor timed out waiting for VM ' + vm.name,
+              'to be in status: ' + STATUS,
+            ].join(' ')
+          );
 
           done();
         };
@@ -1088,7 +1094,7 @@ describe('VM', function() {
         vm.waiters.push({
           status: STATUS,
           startTime: Date.now() / 1000,
-          timeout: 500
+          timeout: 500,
         });
       });
 
@@ -1131,7 +1137,7 @@ describe('VM', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -1150,7 +1156,7 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'operation-name' };
+      var apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {

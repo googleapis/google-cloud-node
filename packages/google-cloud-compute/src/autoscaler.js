@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/autoscaler
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -25,32 +21,40 @@ var util = require('util');
 
 /*! Developer Documentation
  *
- * @param {module:compute/zone} zone - Zone object this autoscaler belongs to.
+ * @param {Zone} zone - Zone object this autoscaler belongs to.
  * @param {string} name - Name of the autoscaler.
  */
 /**
  * Autoscalers allow you to automatically scale virtual machine instances in
  * managed instance groups according to an autoscaling policy that you define.
  *
- * @resource [Autoscaling Groups of Instances]{@link https://cloud.google.com/compute/docs/autoscaler}
+ * @see [Autoscaling Groups of Instances]{@link https://cloud.google.com/compute/docs/autoscaler}
  *
- * @constructor
- * @alias module:compute/autoscaler
+ * @class
+ * @param {Zone} zone
+ * @param {string} name
  *
  * @example
- * var zone = gce.zone('us-central1-a');
- *
- * var autoscaler = zone.autoscaler('autoscaler-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const autoscaler = zone.autoscaler('autoscaler-name');
  */
 function Autoscaler(zone, name) {
   var methods = {
     /**
      * Create an autoscaler.
      *
-     * @param {object} config - See {module:compute/zone#createAutoscaler}.
+     * @method Autoscaler#create
+     * @param {object} config - See {Zone#createAutoscaler}.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const autoscaler = zone.autoscaler('autoscaler-name');
+     *
+     * const config = {
      *   coolDown: 30,
      *   cpu: 80,
      *   loadBalance: 40,
@@ -59,7 +63,7 @@ function Autoscaler(zone, name) {
      *   target: 'instance-group-manager-1'
      * };
      *
-     * var callback = function(err, autoscaler, operation, apiResponse) {
+     * const callback = function(err, autoscaler, operation, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      *
      *   // `operation` is an Operation object that can be used to check the
@@ -72,9 +76,9 @@ function Autoscaler(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * autoscaler.create(config).then(function(data) {
-     *   var autoscaler = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const autoscaler = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -82,19 +86,25 @@ function Autoscaler(zone, name) {
     /**
      * Check if the autoscaler exists.
      *
+     * @method Autoscaler#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the autoscaler exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const autoscaler = zone.autoscaler('autoscaler-name');
+     *
      * autoscaler.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * autoscaler.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -107,11 +117,17 @@ function Autoscaler(zone, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Autoscaler#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const autoscaler = zone.autoscaler('autoscaler-name');
+     *
      * autoscaler.get(function(err, autoscaler, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      * });
@@ -120,8 +136,8 @@ function Autoscaler(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * autoscaler.get().then(function(data) {
-     *   var autoscaler = data[0];
-     *   var apiResponse = data[1];
+     *   const autoscaler = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -129,8 +145,9 @@ function Autoscaler(zone, name) {
     /**
      * Get the metadata of this autoscaler.
      *
-     * @resource [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
-     * @resource [Autoscalers: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/get}
+     * @method Autoscaler#getMetadata
+     * @see [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
+     * @see [Autoscalers: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/get}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -139,17 +156,22 @@ function Autoscaler(zone, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const autoscaler = zone.autoscaler('autoscaler-name');
+     *
      * autoscaler.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * autoscaler.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -157,10 +179,20 @@ function Autoscaler(zone, name) {
     baseUrl: '/autoscalers',
     id: name,
     createMethod: zone.createAutoscaler.bind(zone),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Autoscaler#name
+   * @type {string}
+   */
   this.name = name;
+
+  /**
+   * Parent {@link Zone} instance of this {@link Autoscaler} instance.
+   * @name Autoscaler#zone
+   * @type {Zone}
+   */
   this.zone = zone;
 }
 
@@ -169,15 +201,20 @@ util.inherits(Autoscaler, common.ServiceObject);
 /**
  * Delete the autoscaler.
  *
- * @resource [Autoscalers: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/delete}
+ * @see [Autoscalers: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const autoscaler = zone.autoscaler('autoscaler-name');
+ *
  * autoscaler.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -187,8 +224,8 @@ util.inherits(Autoscaler, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * autoscaler.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Autoscaler.prototype.delete = function(callback) {
@@ -212,18 +249,23 @@ Autoscaler.prototype.delete = function(callback) {
 /**
  * Set the autoscaler's metadata.
  *
- * @resource [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
+ * @see [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
  *
  * @param {object} metadata - See a
  *     [Firewall resource](https://cloud.google.com/compute/docs/reference/v1/autoscalers).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var metadata = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const autoscaler = zone.autoscaler('autoscaler-name');
+ *
+ * const metadata = {
  *   description: 'New description'
  * };
  *
@@ -236,8 +278,8 @@ Autoscaler.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * autoscaler.setMetadata(metadata).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Autoscaler.prototype.setMetadata = function(metadata, callback) {
@@ -249,24 +291,27 @@ Autoscaler.prototype.setMetadata = function(metadata, callback) {
   metadata.name = this.name;
   metadata.zone = this.zone.name;
 
-  zone.request({
-    method: 'PATCH',
-    uri: '/autoscalers',
-    qs: {
-      autoscaler: this.name
+  zone.request(
+    {
+      method: 'PATCH',
+      uri: '/autoscalers',
+      qs: {
+        autoscaler: this.name,
+      },
+      json: metadata,
     },
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = zone.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

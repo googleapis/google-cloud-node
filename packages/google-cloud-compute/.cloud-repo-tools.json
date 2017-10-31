@@ -1,0 +1,15 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "compute_engine",
+  "client_reference_url":  "https://cloud.google.com/nodejs/docs/reference/compute/latest/",
+  "release_quality": "alpha",
+  "samples": [
+    {
+      "id": "vms",
+      "name": "Virtual Machines",
+      "file": "vms.js",
+      "docs_link": "https://cloud.google.com/compute/docs"
+    }
+  ]
+}

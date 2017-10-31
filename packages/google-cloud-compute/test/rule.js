@@ -19,7 +19,6 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
 var promisified = false;
@@ -28,13 +27,8 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Rule') {
       promisified = true;
     }
-  }
+  },
 });
-
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
-}
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -56,8 +50,8 @@ describe('Rule', function() {
     Rule = proxyquire('../src/rule.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -75,8 +69,8 @@ describe('Rule', function() {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
             return bindMethod;
-          }
-        }
+          },
+        },
       });
 
       var rule = new Rule(computeInstance, RULE_NAME);
@@ -92,7 +86,7 @@ describe('Rule', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -101,7 +95,7 @@ describe('Rule', function() {
     });
 
     it('should not use global forwarding rules', function() {
-      var rule = new Rule({ createRule: util.noop }, RULE_NAME);
+      var rule = new Rule({createRule: util.noop}, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
       var calledWith = rule.calledWith_[0];
@@ -126,7 +120,7 @@ describe('Rule', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -152,7 +146,7 @@ describe('Rule', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -193,7 +187,7 @@ describe('Rule', function() {
       rule.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTarget');
-        assert.deepEqual(reqOpts.json, { target: TARGET });
+        assert.deepEqual(reqOpts.json, {target: TARGET});
 
         done();
       };
@@ -223,7 +217,7 @@ describe('Rule', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {

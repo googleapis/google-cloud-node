@@ -1,115 +1,31 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Compute Engine Node.js Samples
+# Google Compute Engine: Node.js Samples
 
-[Compute Engine][compute_docs] lets you create and run virtual machines on
-Google infrastructure.
+[![Open in Cloud Shell][shell_img]][shell_link]
 
-[compute_docs]: https://cloud.google.com/compute/docs/
+[Compute Engine](https://cloud.google.com/compute/docs/) lets you create and run virtual machines on Google infrastructure. Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google&#x27;s infrastructure. There are no upfront investments and you can run thousands of virtual CPUs on a system that has been designed to be fast, and to offer strong consistency of performance.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Sending mail with Sendgrid](#sending-mail-with-sendgrid)
-  * [Sending mail with Mailjet](#sending-mail-with-mailjet)
-  * [Listing instances (recommended)](#listing-instances-recommended)
-  * [Listing instances](#listing-instances)
-* [Running the tests](#running-the-tests)
+  * [Virtual Machines](#virtual-machines)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With `npm`:
-
-        npm install
-
-    With `yarn`:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisities
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
-### Sending mail with Sendgrid
+### Virtual Machines
 
-View the [documentation][sendgrid_docs] or the [source code][sendgrid_code].
+View the [source code][vms_0_code].
 
-__Run the sample:__
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)[vms_0_docs]: https://cloud.google.com/compute/docs
+[vms_0_code]: vms.js
 
-1. Set the `SENDGRID_API_KEY` environment variable:
-
-        export SENDGRID_API_KEY=<your-sendgrid-api-key>
-
-1. Start the server:
-
-        node sendgrid
-
-1. Open http://localhost:8080 in your browser
-
-[sendgrid_docs]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-sendgrid
-[sendgrid_code]: sendgrid.js
-
-### Sending mail with Mailjet
-
-View the [documentation][mailjet_docs] or the [source code][mailjet_code].
-
-__Run the sample:__
-
-1. Set the `MAILJET_API_KEY` environment variable:
-
-        export MAILJET_API_KEY=<your-mailjet-api-key>
-
-1. Set the `MAILJET_API_SECRET` environment variable:
-
-        export MAILJET_API_SECRET=<your-mailjet-api-secret>
-
-1. Start the server:
-
-        node mailjet
-
-1. Open http://localhost:8080 in your browser
-
-[mailjet_docs]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-mailjet
-[mailjet_code]: mailjet.js
-
-### Listing instances (recommended)
-
-View the [documentation][vms_docs] or the [source code][vms_code].
-
-__Run the sample:__
-
-    node vms
-
-[vms_docs]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
-[vms_code]: vms.js
-
-### Listing instances
-
-View the [documentation][vms_api_docs] or the [source code][vms_api_code].
-
-__Run the sample:__
-
-    node vms_api
-
-[vms_api_docs]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
-[vms_api_code]: vms_api.js
-
-## Running the tests
-
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
-
-1.  Run the tests:
-
-    With `npm`:
-
-        npm test
-
-    With `yarn`:
-
-        yarn test
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md

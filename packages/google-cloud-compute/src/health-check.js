@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/health-check
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -25,15 +21,6 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - Compute object this health check belongs
- *     to.
- * @param {string} name - Name of the health check.
- * @param {object=} options - Optional configuration.
- * @param {boolean} options.https - Specify if this is an HTTPS health check
- *     resource. Default: `false`
- */
 /**
  * Health checks ensure that Compute Engine forwards new connections only to
  * instances that are up and ready to receive them. Compute Engine sends health
@@ -41,22 +28,34 @@ var util = require('util');
  * exceeds its allowed number of health check failures, it is no longer
  * considered an eligible instance for receiving new traffic.
  *
- * @resource [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
+ * @see [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
  *
- * @constructor
- * @alias module:compute/health-check
+ * @class
+ * @param {Compute} compute - Compute object this health check belongs
+ *     to.
+ * @param {string} name - Name of the health check.
+ * @param {object=} options - Optional configuration.
+ * @param {boolean} options.https - Specify if this is an HTTPS health check
+ *     resource. Default: `false`
  *
  * @example
- * var healthCheck = gce.healthCheck('health-check-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const healthCheck = gce.healthCheck('health-check-name');
  */
 function HealthCheck(compute, name, options) {
   var methods = {
     /**
      * Create an HTTP or HTTPS health check.
      *
-     * @param {object} options - See {module:compute#createHealthCheck}.
+     * @method HealthCheck#create
+     * @param {object} options - See {@link Compute#createHealthCheck}.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const healthCheck = gce.healthCheck('health-check-name');
+     *
      * healthCheck.create(function(err, healthCheck, operation, apiResponse) {
      *   // `healthCheck` is a HealthCheck object.
      *
@@ -68,9 +67,9 @@ function HealthCheck(compute, name, options) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * healthCheck.create().then(function(data) {
-     *   var healthCheck = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const healthCheck = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -78,6 +77,7 @@ function HealthCheck(compute, name, options) {
     /**
      * Check if the health check exists.
      *
+     * @method HealthCheck#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -85,13 +85,17 @@ function HealthCheck(compute, name, options) {
      *     not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const healthCheck = gce.healthCheck('health-check-name');
+     *
      * healthCheck.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * healthCheck.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -104,11 +108,16 @@ function HealthCheck(compute, name, options) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method HealthCheck#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const healthCheck = gce.healthCheck('health-check-name');
+     *
      * healthCheck.get(function(err, healthCheck, apiResponse) {
      *   // `healthCheck` is a HealthCheck object.
      * });
@@ -117,8 +126,8 @@ function HealthCheck(compute, name, options) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * healthCheck.get().then(function(data) {
-     *   var healthCheck = data[0];
-     *   var apiResponse = data[1];
+     *   const healthCheck = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -126,11 +135,12 @@ function HealthCheck(compute, name, options) {
     /**
      * Get the health check's metadata.
      *
-     * @resource [HttpHealthChecks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/get}
-     * @resource [HttpHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks#resource)
-     * @resource [HttpsHealthChecks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/get}
-     * @resource [HttpsHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks#resource)
+     * @see [HttpHealthChecks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/get}
+     * @see [HttpHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks#resource)
+     * @see [HttpsHealthChecks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/get}
+     * @see [HttpsHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks#resource)
      *
+     * @method HealthCheck#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -138,27 +148,41 @@ function HealthCheck(compute, name, options) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const healthCheck = gce.healthCheck('health-check-name');
+     *
      * healthCheck.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * healthCheck.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   options = options || {};
 
   var https = options.https;
+
+  /**
+   * The parent {@link Compute} instance of this {@link HealthCheck} instance.
+   * @name HealthCheck#compute
+   * @type {Compute}
+   */
   this.compute = compute;
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/' + (https ? 'httpsHealthChecks' : 'httpHealthChecks'),
+    /**
+     * @name HealthCheck#id
+     * @type {string}
+     */
     id: name,
     createMethod: function(name, options, callback) {
       if (is.fn(options)) {
@@ -166,11 +190,11 @@ function HealthCheck(compute, name, options) {
         options = {};
       }
 
-      options = extend({}, options, { https: https });
+      options = extend({}, options, {https: https});
 
       compute.createHealthCheck(name, options, callback);
     },
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -179,16 +203,20 @@ util.inherits(HealthCheck, common.ServiceObject);
 /**
  * Delete the health check.
  *
- * @resource [HttpHealthCheck: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/delete}
- * @resource [HttpsHealthCheck: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/delete}
+ * @see [HttpHealthCheck: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/delete}
+ * @see [HttpsHealthCheck: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const healthCheck = gce.healthCheck('health-check-name');
+ *
  * healthCheck.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -198,8 +226,8 @@ util.inherits(HealthCheck, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * healthCheck.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 HealthCheck.prototype.delete = function(callback) {
@@ -223,20 +251,24 @@ HealthCheck.prototype.delete = function(callback) {
 /**
  * Set the health check's metadata.
  *
- * @resource [HttpHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/insert}
- * @resource [HttpsHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/insert}
+ * @see [HttpHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/insert}
+ * @see [HttpsHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/insert}
  *
  * @param {object} metadata - See a
  *     [HttpHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks#resource)
  *     and [HttpsHealthCheck resource](https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks#resource).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var metadata = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const healthCheck = gce.healthCheck('health-check-name');
+ *
+ * const metadata = {
  *   description: 'New description'
  * };
  *
@@ -249,8 +281,8 @@ HealthCheck.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * healthCheck.setMetadata(metadata).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 HealthCheck.prototype.setMetadata = function(metadata, callback) {
@@ -280,4 +312,9 @@ HealthCheck.prototype.setMetadata = function(metadata, callback) {
  */
 common.util.promisifyAll(HealthCheck);
 
+/**
+ * Reference to the {@link HealthCheck} class.
+ * @name module:@google-cloud/compute.HealthCheck
+ * @see HealthCheck
+ */
 module.exports = HealthCheck;

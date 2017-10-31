@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'HealthCheck') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -43,7 +43,7 @@ describe('HealthCheck', function() {
   var healthCheck;
 
   var COMPUTE = {
-    createHealthCheck: util.noop
+    createHealthCheck: util.noop,
   };
   var HEALTH_CHECK_NAME = 'health-check-name';
   var OPTIONS = {};
@@ -52,8 +52,8 @@ describe('HealthCheck', function() {
     HealthCheck = proxyquire('../src/health-check.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -77,7 +77,7 @@ describe('HealthCheck', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -96,7 +96,7 @@ describe('HealthCheck', function() {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
         var NAME = 'name';
-        var OPTIONS = { a: 'b' };
+        var OPTIONS = {a: 'b'};
         var originalOptions = extend({}, OPTIONS);
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
@@ -126,7 +126,7 @@ describe('HealthCheck', function() {
 
       beforeEach(function() {
         healthCheck = new HealthCheck(COMPUTE, HEALTH_CHECK_NAME, {
-          https: true
+          https: true,
         });
       });
 
@@ -140,12 +140,12 @@ describe('HealthCheck', function() {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
         var NAME = 'name';
-        var OPTIONS = { a: 'b' };
+        var OPTIONS = {a: 'b'};
         var originalOptions = extend({}, OPTIONS);
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
-          assert.deepEqual(opts, extend({ https: true }, OPTIONS));
+          assert.deepEqual(opts, extend({https: true}, OPTIONS));
           assert.deepEqual(OPTIONS, originalOptions);
           callback(); // done()
         };
@@ -157,7 +157,7 @@ describe('HealthCheck', function() {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
-          assert.deepEqual(opts, { https: true });
+          assert.deepEqual(opts, {https: true});
           callback(); // done()
         };
 
@@ -178,7 +178,7 @@ describe('HealthCheck', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -204,7 +204,7 @@ describe('HealthCheck', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -273,7 +273,7 @@ describe('HealthCheck', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -284,7 +284,7 @@ describe('HealthCheck', function() {
 
       it('should execute callback with operation & response', function(done) {
         var operation = {};
-        var metadata = { a: 'b' };
+        var metadata = {a: 'b'};
 
         healthCheck.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -302,7 +302,7 @@ describe('HealthCheck', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          healthCheck.setMetadata({ a: 'b' });
+          healthCheck.setMetadata({a: 'b'});
         });
       });
     });

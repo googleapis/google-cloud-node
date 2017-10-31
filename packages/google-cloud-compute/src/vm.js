@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/vm
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -27,10 +23,6 @@ var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:compute/disk}
- * @private
- */
 var Disk = require('./disk.js');
 
 /**
@@ -39,7 +31,7 @@ var Disk = require('./disk.js');
  * @private
  *
  * @param {string} message - Custom error message.
- * @return {Error}
+ * @returns {Error}
  */
 var DetachDiskError = createErrorClass('DetachDiskError');
 
@@ -50,7 +42,7 @@ var DetachDiskError = createErrorClass('DetachDiskError');
  * @private
  *
  * @param {string} message - Custom error message.
- * @return {Error}
+ * @returns {Error}
  */
 var WaitForTimeoutError = createErrorClass('WaitForTimeoutError');
 
@@ -66,7 +58,7 @@ var VALID_STATUSES = [
   'STOPPING',
   'SUSPENDING',
   'SUSPENDED',
-  'TERMINATED'
+  'TERMINATED',
 ];
 
 /**
@@ -76,28 +68,34 @@ var VALID_STATUSES = [
  */
 var WAIT_FOR_POLLING_INTERVAL_MS = 2000;
 
-/*! Developer Documentation
- *
- * @param {module:zone} zone - Zone object this instance belongs to.
- * @param {string} name - Name of the instance.
- */
 /**
  * An Instance object allows you to interact with a Google Compute Engine
  * instance.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
  *
- * @constructor
- * @alias module:compute/vm
+ * @class
+ * @param {Zone} zone - Zone object this instance belongs to.
+ * @param {string} name - Name of the instance.
  *
  * @example
- * var zone = gce.zone('zone-name');
- *
- * var vm = zone.vm('vm-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
  */
 function VM(zone, name) {
+  /**
+   * @name VM#name
+   * @type {string}
+   */
   this.name = name.replace(/.*\/([^/]+)$/, '$1'); // Just the instance name.
+  /**
+   * The parent {@link Zone} instance of this {@link VM} instance.
+   * @name VM#zone
+   * @type {Zone}
+   */
   this.zone = zone;
 
   this.hasActiveWaiters = false;
@@ -107,17 +105,23 @@ function VM(zone, name) {
     base: 'https://www.googleapis.com/compute/v1/projects',
     project: zone.compute.projectId,
     zone: zone.name,
-    name: this.name
+    name: this.name,
   });
 
   var methods = {
     /**
      * Create a virtual machine.
      *
-     * @param {object} config - See {module:compute/zone#createVM}.
+     * @method VM#create
+     * @param {object} config - See {Zone#createVM}.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('zone-name');
+     * const vm = zone.vm('vm-name');
+     *
+     * const config = {
      *   // ...
      * };
      *
@@ -132,9 +136,9 @@ function VM(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * vm.create(config).then(function(data) {
-     *   var vm = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const vm = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -142,19 +146,25 @@ function VM(zone, name) {
     /**
      * Check if the vm exists.
      *
+     * @method VM#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the vm exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('zone-name');
+     * const vm = zone.vm('vm-name');
+     *
      * vm.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * vm.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -167,11 +177,17 @@ function VM(zone, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method VM#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('zone-name');
+     * const vm = zone.vm('vm-name');
+     *
      * vm.get(function(err, vm, apiResponse) {
      *   // `vm` is a VM object.
      * });
@@ -180,8 +196,8 @@ function VM(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * vm.get().then(function(data) {
-     *   var vm = data[0];
-     *   var apiResponse = data[1];
+     *   const vm = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -189,9 +205,10 @@ function VM(zone, name) {
     /**
      * Get the instance's metadata.
      *
-     * @resource [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
-     * @resource [Instance: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/get}
+     * @see [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
+     * @see [Instance: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/get}
      *
+     * @method VM#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -199,25 +216,34 @@ function VM(zone, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('zone-name');
+     * const vm = zone.vm('vm-name');
+     *
      * vm.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * vm.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/instances',
+    /**
+     * @name VM#id
+     * @type {string}
+     */
     id: this.name,
     createMethod: zone.createVM.bind(zone),
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -226,9 +252,9 @@ util.inherits(VM, common.ServiceObject);
 /**
  * Attach a disk to the instance.
  *
- * @resource [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
- * @resource [Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}
- * @resource [Instance: attachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}
+ * @see [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
+ * @see [Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}
+ * @see [Instance: attachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}
  *
  * @throws {Error} if a {module:compute/disk} is not provided.
  *
@@ -240,12 +266,17 @@ util.inherits(VM, common.ServiceObject);
  *     for `options.mode = READ_ONLY`)
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var disk = zone.disk('my-disk');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
+ * const disk = zone.disk('my-disk');
  *
  * function callback(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
@@ -257,7 +288,7 @@ util.inherits(VM, common.ServiceObject);
  * //-
  * // Provide an options object to customize the request.
  * //-
- * var options = {
+ * const options = {
  *   autoDelete: true,
  *   readOnly: true
  * };
@@ -268,8 +299,8 @@ util.inherits(VM, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.attachDisk(disk, options).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.attachDisk = function(disk, options, callback) {
@@ -282,37 +313,49 @@ VM.prototype.attachDisk = function(disk, options, callback) {
     options = {};
   }
 
-  var body = extend({
-    // Default the deviceName to the name of the disk, like the Console does.
-    deviceName: disk.name
-  }, options, {
-    source: disk.formattedName
-  });
+  var body = extend(
+    {
+      // Default the deviceName to the name of the disk, like the Console does.
+      deviceName: disk.name,
+    },
+    options,
+    {
+      source: disk.formattedName,
+    }
+  );
 
   if (body.readOnly) {
     body.mode = 'READ_ONLY';
     delete body.readOnly;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/attachDisk',
-    json: body
-  }, callback);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/attachDisk',
+      json: body,
+    },
+    callback
+  );
 };
 
 /**
  * Delete the instance.
  *
- * @resource [Instance: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/delete}
+ * @see [Instance: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -322,33 +365,41 @@ VM.prototype.attachDisk = function(disk, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.delete = function(callback) {
-  this.request({
-    method: 'DELETE',
-    uri: ''
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
  * Detach a disk from the instance.
  *
- * @resource [Instance: detachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}
+ * @see [Instance: detachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}
  *
  * @param {module:compute/disk|string} deviceName - The device name of the disk
  *     to detach. If a Disk object is provided, we try to find the device name
  *     automatically by searching through the attached disks on the instance.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var disk = zone.disk('my-disk');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
+ * const disk = zone.disk('my-disk');
  *
  * vm.detachDisk(disk, function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
@@ -359,8 +410,8 @@ VM.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.detachDisk(disk).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.detachDisk = function(disk, callback) {
@@ -401,20 +452,23 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
-    self.request({
-      method: 'POST',
-      uri: '/detachDisk',
-      qs: {
-        deviceName: deviceName
-      }
-    }, callback || common.util.noop);
+    self.request(
+      {
+        method: 'POST',
+        uri: '/detachDisk',
+        qs: {
+          deviceName: deviceName,
+        },
+      },
+      callback || common.util.noop
+    );
   });
 };
 
 /**
  * Returns the serial port output for the instance.
  *
- * @resource [Instances: getSerialPortOutput API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}
+ * @see [Instances: getSerialPortOutput API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}
  *
  * @param {number=} port - The port from which the output is retrieved (1-4).
  *    Default: `1`.
@@ -424,14 +478,19 @@ VM.prototype.detachDisk = function(disk, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.getSerialPortOutput(function(err, output, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.getSerialPortOutput().then(function(data) {
- *   var output = data[0];
- *   var apiResponse = data[1];
+ *   const output = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.getSerialPortOutput = function(port, callback) {
@@ -443,8 +502,8 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
   var reqOpts = {
     uri: '/serialPort',
     qs: {
-      port: port
-    }
+      port: port,
+    },
   };
 
   var request = common.ServiceObject.prototype.request;
@@ -472,15 +531,20 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.getTags(function(err, tags, fingerprint, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.getTags().then(function(data) {
- *   var tags = data[0];
- *   var fingerprint = data[1];
- *   var apiResponse = data[2];
+ *   const tags = data[0];
+ *   const fingerprint = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 VM.prototype.getTags = function(callback) {
@@ -497,15 +561,20 @@ VM.prototype.getTags = function(callback) {
 /**
  * Reset the instance.
  *
- * @resource [Instances: reset API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/reset}
+ * @see [Instances: reset API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/reset}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.reset(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -515,15 +584,18 @@ VM.prototype.getTags = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.reset().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.reset = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/reset'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/reset',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -538,8 +610,8 @@ VM.prototype.reset = function(callback) {
  * will automatically stop the VM if it is running before changing the machine
  * type. After it is sucessfully changed, the VM will be started.
  *
- * @resource [Instances: setMachineType API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMachineType}
- * @resource [Predefined machine types]{@link https://cloud.google.com/compute/docs/machine-types#predefined_machine_types}
+ * @see [Instances: setMachineType API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMachineType}
+ * @see [Predefined machine types]{@link https://cloud.google.com/compute/docs/machine-types#predefined_machine_types}
  *
  * @param {string} machineType - Full or partial machine type. See a list of
  *     predefined machine types
@@ -552,6 +624,11 @@ VM.prototype.reset = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.resize('n1-standard-1', function(err, apiResponse) {
  *   if (!err) {
  *     // The VM is running and its machine type was changed successfully.
@@ -563,7 +640,7 @@ VM.prototype.reset = function(callback) {
  * // machine type. If you want to leave it stopped, set `options.start` to
  * // `false`.
  * //-
- * var options = {
+ * const options = {
  *   start: false
  * };
  *
@@ -577,7 +654,7 @@ VM.prototype.reset = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.resize('ns-standard-1', options).then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 VM.prototype.resize = function(machineType, options, callback) {
@@ -596,58 +673,68 @@ VM.prototype.resize = function(machineType, options, callback) {
   if (isPartialMachineType) {
     machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
       zoneName: this.zone.name,
-      machineType: machineType
+      machineType: machineType,
     });
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/setMachineType',
-    json: {
-      machineType: machineType
-    }
-  }, compute.execAfterOperation_(function(err, apiResponse) {
-    if (err) {
-      if (err.message === 'Instance is starting or running.') {
-        // The instance must be stopped before its machine type can be set.
-        self.stop(compute.execAfterOperation_(function(err, apiResponse) {
-          if (err) {
-            callback(err, apiResponse);
-            return;
-          }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setMachineType',
+      json: {
+        machineType: machineType,
+      },
+    },
+    compute.execAfterOperation_(function(err, apiResponse) {
+      if (err) {
+        if (err.message === 'Instance is starting or running.') {
+          // The instance must be stopped before its machine type can be set.
+          self.stop(
+            compute.execAfterOperation_(function(err, apiResponse) {
+              if (err) {
+                callback(err, apiResponse);
+                return;
+              }
 
-          // Try again now that the instance is stopped.
-          self.resize(machineType, callback);
-        }));
-      } else {
-        callback(err, apiResponse);
+              // Try again now that the instance is stopped.
+              self.resize(machineType, callback);
+            })
+          );
+        } else {
+          callback(err, apiResponse);
+        }
+        return;
       }
-      return;
-    }
 
-    // The machine type was changed successfully.
-    if (options.start === false) {
-      callback(null, apiResponse);
-    } else {
-      self.start(compute.execAfterOperation_(callback));
-    }
-  }));
+      // The machine type was changed successfully.
+      if (options.start === false) {
+        callback(null, apiResponse);
+      } else {
+        self.start(compute.execAfterOperation_(callback));
+      }
+    })
+  );
 };
 
 /**
  * Set the metadata for this instance.
  *
- * @resource [Instances: setMetadata API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMetadata}
+ * @see [Instances: setMetadata API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMetadata}
  *
  * @param {object} metadata - New metadata.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var metadata = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
+ * const metadata = {
  *   'startup-script': '...'
  * };
  *
@@ -660,8 +747,8 @@ VM.prototype.resize = function(machineType, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.setMetadata(metadata).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.setMetadata = function(metadata, callback) {
@@ -677,41 +764,49 @@ VM.prototype.setMetadata = function(metadata, callback) {
 
     var newMetadata = {
       fingerprint: currentMetadata.metadata.fingerprint,
-      items: []
+      items: [],
     };
 
     for (var prop in metadata) {
       if (metadata.hasOwnProperty(prop)) {
         newMetadata.items.push({
           key: prop,
-          value: metadata[prop]
+          value: metadata[prop],
         });
       }
     }
 
-    self.request({
-      method: 'POST',
-      uri: '/setMetadata',
-      json: newMetadata
-    }, callback);
+    self.request(
+      {
+        method: 'POST',
+        uri: '/setMetadata',
+        json: newMetadata,
+      },
+      callback
+    );
   });
 };
 
 /**
  * Set the instance's tags.
  *
- * @resource [Instances: setTags API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setTags}
+ * @see [Instances: setTags API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setTags}
  *
  * @param {string[]} tags - The new tags for the instance.
  * @param {string} fingerprint - The current tags fingerprint. An up-to-date
  *     fingerprint must be provided.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.getTags(function(err, tags, fingerprint) {
  *   tags.push('new-tag');
  *
@@ -725,42 +820,50 @@ VM.prototype.setMetadata = function(metadata, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.getTags().then(function(data) {
- *   var tags = data[0];
- *   var fingerprint = data[1];
+ *   const tags = data[0];
+ *   const fingerprint = data[1];
  *
  *   tags.push('new-tag');
  *
  *   return vm.setTags(tags, fingerprint);
  * }).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.setTags = function(tags, fingerprint, callback) {
   var body = {
     items: tags,
-    fingerprint: fingerprint
+    fingerprint: fingerprint,
   };
 
-  this.request({
-    method: 'POST',
-    uri: '/setTags',
-    json: body
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setTags',
+      json: body,
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
  * Start the instance.
  *
- * @resource [Instances: start API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/start}
+ * @see [Instances: start API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/start}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.start(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -770,29 +873,37 @@ VM.prototype.setTags = function(tags, fingerprint, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.start().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.start = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/start'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/start',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
  * Stop the instance.
  *
- * @resource [Instances: stop API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/stop}
+ * @see [Instances: stop API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/stop}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.stop(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -802,15 +913,18 @@ VM.prototype.start = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.stop().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 VM.prototype.stop = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/stop'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/stop',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -835,6 +949,11 @@ VM.prototype.stop = function(callback) {
  * @param {object} callback.metadata - The instance's metadata.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('zone-name');
+ * const vm = zone.vm('vm-name');
+ *
  * vm.waitFor('RUNNING', function(err, metadata) {
  *   if (!err) {
  *     // The VM is running.
@@ -847,7 +966,7 @@ VM.prototype.stop = function(callback) {
  * // 600. If the timeout is set to 0, it will poll once for status and then
  * // timeout if the desired state is not reached.
  * //-
- * var options = {
+ * const options = {
  *   timeout: 600
  * };
  *
@@ -861,7 +980,7 @@ VM.prototype.stop = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * vm.waitFor('RUNNING', options).then(function(data) {
- *   var metadata = data[0];
+ *   const metadata = data[0];
  * });
  */
 VM.prototype.waitFor = function(status, options, callback) {
@@ -890,7 +1009,7 @@ VM.prototype.waitFor = function(status, options, callback) {
     status: status,
     timeout: timeout,
     startTime: new Date() / 1000,
-    callback: callback
+    callback: callback,
   });
 
   if (!this.hasActiveWaiters) {
@@ -930,10 +1049,12 @@ VM.prototype.startPolling_ = function() {
       }
 
       if (now - waiter.startTime >= waiter.timeout) {
-        var waitForTimeoutError = new WaitForTimeoutError([
-          'waitFor timed out waiting for VM ' + self.name,
-          'to be in status: ' + waiter.status
-        ].join(' '));
+        var waitForTimeoutError = new WaitForTimeoutError(
+          [
+            'waitFor timed out waiting for VM ' + self.name,
+            'to be in status: ' + waiter.status,
+          ].join(' ')
+        );
         waiter.callback(waitForTimeoutError);
         return true;
       }
@@ -950,7 +1071,6 @@ VM.prototype.startPolling_ = function() {
     }
   });
 };
-
 
 /**
  * Make a new request object from the provided arguments and wrap the callback

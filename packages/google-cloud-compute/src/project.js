@@ -14,40 +14,44 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/project
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - Compute object this project belongs to.
- */
 /**
  * A Project object allows you to interact with your Google Compute Engine
  * project.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/projects}
- * @resource [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+ * @see [Projects Overview]{@link https://cloud.google.com/compute/docs/projects}
+ * @see [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
  *
- * @constructor
- * @alias module:compute/project
+ * @class
+ * @param {Compute} compute - Compute object this project belongs to.
  *
  * @example
- * var project = gce.project();
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const project = compute.project();
  */
 function Project(compute) {
+  /**
+   * @name Project#id
+   * @type {string}
+   */
   this.id = compute.projectId;
 
   var methods = {
     /**
      * Get a Project object.
      *
+     * @method Operation#get
+     *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const project = compute.project();
+     *
      * project.get(function(err, project, apiResponse) {
      *   // `project` is a Project object.
      * });
@@ -56,8 +60,8 @@ function Project(compute) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.get().then(function(data) {
-     *   var project = data[0];
-     *   var apiResponse = data[1];
+     *   const project = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -65,9 +69,10 @@ function Project(compute) {
     /**
      * Get the project's metadata.
      *
-     * @resource [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
-     * @resource [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+     * @see [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
+     * @see [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
      *
+     * @method Operation#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -75,6 +80,10 @@ function Project(compute) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const project = compute.project();
+     *
      * project.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
@@ -85,14 +94,14 @@ function Project(compute) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '',
     id: '',
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -105,4 +114,9 @@ util.inherits(Project, common.ServiceObject);
  */
 common.util.promisifyAll(Project);
 
+/**
+ * Reference to the {@link Project} class.
+ * @name module:@google-cloud/compute.Project
+ * @see Project
+ */
 module.exports = Project;

@@ -14,39 +14,33 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/snapshot
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute|module:compute/disk} scope - The parent scope this
- *     snapshot belongs to. If it's a Disk, we expose the `create` methods.
- * @param {string} name - Snapshot name.
- */
 /**
  * A Snapshot object allows you to interact with a Google Compute Engine
  * snapshot.
  *
- * @resource [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
- * @resource [Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}
+ * @see [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
+ * @see [Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}
  *
- * @constructor
- * @alias module:compute/snapshot
+ * @class
+ * @param {Compute|Disk} scope - The parent scope this
+ *     snapshot belongs to. If it's a Disk, we expose the `create` methods.
+ * @param {string} name - Snapshot name.
  *
  * @example
- * var snapshot = gce.snapshot('snapshot-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const snapshot = compute.snapshot('snapshot-name');
  *
  * //-
  * // Or, access through a disk.
  * //-
- * var disk = gce.zone('us-central1-a').disk('disk-name');
- * var snapshot = disk.snapshot('disk-snapshot-name');
+ * const disk = compute.zone('us-central1-a').disk('disk-name');
+ * const snapshot = disk.snapshot('disk-snapshot-name');
  */
 function Snapshot(scope, name) {
   var isDisk = scope.constructor.name === 'Disk';
@@ -55,12 +49,17 @@ function Snapshot(scope, name) {
     /**
      * Check if the snapshot exists.
      *
+     * @method Snapshot#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the snapshot exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const snapshot = compute.snapshot('snapshot-name');
+     *
      * snapshot.exists(function(err, exists) {});
      */
     exists: true,
@@ -73,11 +72,16 @@ function Snapshot(scope, name) {
      * Any extra configuration that is normally required for the `create` method
      * must be contained within this object as well.
      *
+     * @method Snapshot#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const snapshot = compute.snapshot('snapshot-name');
+     *
      * snapshot.get(function(err, snapshot, apiResponse) {
      *   // `snapshot` is a Snapshot object.
      * });
@@ -86,8 +90,8 @@ function Snapshot(scope, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * snapshot.get().then(function(data) {
-     *   var snapshot = data[0];
-     *   var apiResponse = data[1];
+     *   const snapshot = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -95,9 +99,10 @@ function Snapshot(scope, name) {
     /**
      * Get the snapshot's metadata.
      *
-     * @resource [Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}
-     * @resource [Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get}
+     * @see [Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}
+     * @see [Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get}
      *
+     * @method Snapshot#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -105,24 +110,32 @@ function Snapshot(scope, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const snapshot = compute.snapshot('snapshot-name');
+     *
      * snapshot.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * snapshot.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   var config = {
     parent: scope,
     baseUrl: '/global/snapshots',
+    /**
+     * @name Snapshot#id
+     * @type {string}
+     */
     id: name,
-    methods: methods
+    methods: methods,
   };
 
   if (isDisk) {
@@ -132,11 +145,16 @@ function Snapshot(scope, name) {
      * Create a snapshot.
      *
      * **This is only available if you accessed this object through
-     * {module:compute/disk#snapshot}.**
+     * {@link Disk#snapshot}.**
      *
-     * @param {object} config - See {module:compute/disk#createSnapshot}.
+     * @method Snapshot#create
+     * @param {object} config - See {@link Disk#createSnapshot}.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const snapshot = compute.snapshot('snapshot-name');
+     *
      * snapshot.create(function(err, snapshot, operation, apiResponse) {
      *   // `snapshot` is a Snapshot object.
      *
@@ -144,14 +162,13 @@ function Snapshot(scope, name) {
      *   // status of the request.
      * });
      *
-     *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * snapshot.create().then(function(data) {
-     *   var snapshot = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const snapshot = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     config.methods.create = true;
@@ -159,7 +176,15 @@ function Snapshot(scope, name) {
 
   common.ServiceObject.call(this, config);
 
+  /**
+   * @name Snapshot#compute
+   * @type {Compute}
+   */
   this.compute = isDisk ? scope.compute : scope;
+  /**
+   * @name Snapshot#name
+   * @type {string}
+   */
   this.name = name;
 }
 
@@ -168,15 +193,19 @@ util.inherits(Snapshot, common.ServiceObject);
 /**
  * Delete the snapshot.
  *
- * @resource [Snapshots: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}
+ * @see [Snapshots: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const snapshot = compute.snapshot('snapshot-name');
+ *
  * snapshot.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -186,8 +215,8 @@ util.inherits(Snapshot, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * snapshot.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Snapshot.prototype.delete = function(callback) {
@@ -215,4 +244,9 @@ Snapshot.prototype.delete = function(callback) {
  */
 common.util.promisifyAll(Snapshot);
 
+/**
+ * Reference to the {@link Snapshot} class.
+ * @name module:@google-cloud/compute.Snapshot
+ * @see Snapshot
+ */
 module.exports = Snapshot;

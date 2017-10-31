@@ -14,21 +14,11 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/operation
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute} scope - The scope of the operation: a `Compute`,
- *     `Zone`, or `Region` object.
- * @param {string} name - Operation name.
- */
 /**
  * An Operation object allows you to interact with a Google Compute Engine
  * operation.
@@ -39,26 +29,31 @@ var util = require('util');
  * or
  * [ZoneOperation](https://cloud.google.com/compute/docs/reference/v1/zoneOperations).
  *
- * @constructor
- * @alias module:compute/operation
+ * @class
+ * @param {Compute|Zone|Region} scope The scope of the operation: a `Compute`,
+ *     `Zone`, or `Region` object.
+ * @param {string} name Operation name.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ *
  * //-
  * // Reference a global operation.
  * //-
- * var operation = gce.operation('operation-id');
+ * const operation = compute.operation('operation-id');
  *
  * //-
  * // Reference a region operation.
  * //-
- * var region = gce.region('us-central1');
- * var operation = region.operation('operation-id');
+ * const region = compute.region('us-central1');
+ * const operation = region.operation('operation-id');
  *
  * //-
  * // Reference a zone operation.
  * //-
- * var zone = gce.zone('us-central1-a');
- * var operation = zone.operation('operation-id');
+ * const zone = compute.zone('us-central1-a');
+ * const operation = zone.operation('operation-id');
  *
  * //-
  * // All operations are event emitters. The status of each operation is polled
@@ -98,16 +93,21 @@ function Operation(scope, name) {
     /**
      * Delete the operation.
      *
-     * @resource [GlobalOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}
-     * @resource [RegionOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}
-     * @resource [ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}
+     * @see [GlobalOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}
+     * @see [RegionOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}
+     * @see [ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}
      *
+     * @method Operation#delete
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const operation = compute.operation('operation-id');
+     *
      * operation.delete(function(err, apiResponse) {});
      *
      * //-
@@ -122,12 +122,17 @@ function Operation(scope, name) {
     /**
      * Check if the operation exists.
      *
+     * @method Operation#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the operation exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const operation = compute.operation('operation-id');
+     *
      * operation.exists(function(err, exists) {});
      *
      * //-
@@ -142,7 +147,12 @@ function Operation(scope, name) {
     /**
      * Get an operation if it exists.
      *
+     * @method Operation#get
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const operation = compute.operation('operation-id');
+     *
      * operation.get(function(err, operation, apiResponse) {
      *   // `operation` is an Operation object.
      * });
@@ -155,16 +165,24 @@ function Operation(scope, name) {
      *   var apiResponse = data[1];
      * });
      */
-    get: true
+    get: true,
   };
 
   common.Operation.call(this, {
     parent: scope,
     baseUrl: isCompute ? '/global/operations' : '/operations',
+    /**
+     * @name Operation#id
+     * @type {string}
+     */
     id: name,
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Operation#name
+   * @type {string}
+   */
   this.name = name;
 }
 
@@ -174,9 +192,9 @@ util.inherits(Operation, common.Operation);
  * Get the operation's metadata. For a detailed description of metadata see
  * [Operation resource](https://goo.gl/sWm1rt).
  *
- * @resource [GlobalOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}
- * @resource [RegionOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}
- * @resource [ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}
+ * @see [GlobalOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}
+ * @see [RegionOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}
+ * @see [ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
@@ -184,6 +202,9 @@ util.inherits(Operation, common.Operation);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ *
  * operation.getMetadata(function(err, metadata, apiResponse) {
  *   // `metadata.error`: Contains errors if the operation failed.
  *   // `metadata.warnings`: Contains warnings.
@@ -193,8 +214,8 @@ util.inherits(Operation, common.Operation);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * operation.getMetadata().then(function(data) {
- *   var metadata = data[0];
- *   var apiResponse = data[1];
+ *   const metadata = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Operation.prototype.getMetadata = function(callback) {
@@ -268,4 +289,9 @@ Operation.prototype.poll_ = function(callback) {
  */
 common.util.promisifyAll(Operation);
 
+/**
+ * Reference to the {@link Operation} class.
+ * @name module:@google-cloud/compute.Operation
+ * @see Operation
+ */
 module.exports = Operation;

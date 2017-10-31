@@ -14,47 +14,55 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/subnetwork
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:region} region - Region this subnetwork belongs to.
- * @param {string} name - Name of the subnetwork.
- */
 /**
  * An Subnetwork object allows you to interact with a Google Compute Engine
  * subnetwork.
  *
- * @resource [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
- * @resource [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
+ * @see [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
+ * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
  *
- * @constructor
- * @alias module:compute/subnetwork
+ * @class
+ * @param {Region} region - Region this subnetwork belongs to.
+ * @param {string} name - Name of the subnetwork.
  *
  * @example
- * var region = gce.region('region-name');
- *
- * var subnetwork = region.subnetwork('subnetwork1');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('region-name');
+ * const subnetwork = region.subnetwork('subnetwork1');
  */
 function Subnetwork(region, name) {
+  /**
+   * @name Subnetwork#name
+   * @type {string}
+   */
   this.name = name;
+  /**
+   * The parent {@link Region} instance of this {@link Subnetwork} instance.
+   * @name Subnetwork#region
+   * @type {Region}
+   */
   this.region = region;
 
   var methods = {
     /**
      * Create a subnetwork.
      *
-     * @param {object} config - See {module:compute/region#createSubnetwork}.
+     * @method Subnetwork#create
+     * @param {object} config - See {@link Region#createSubnetwork}.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const subnetwork = region.subnetwork('subnetwork1');
+     *
+     * const config = {
      *   // ...
      * };
      *
@@ -71,9 +79,9 @@ function Subnetwork(region, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * subnetwork.create(config).then(function(data) {
-     *   var subnetwork = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const subnetwork = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -81,19 +89,25 @@ function Subnetwork(region, name) {
     /**
      * Check if the subnetwork exists.
      *
+     * @method Subnetwork#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the subnetwork exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const subnetwork = region.subnetwork('subnetwork1');
+     *
      * subnetwork.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * subnetwork.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -106,11 +120,17 @@ function Subnetwork(region, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Subnetwork#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const subnetwork = region.subnetwork('subnetwork1');
+     *
      * subnetwork.get(function(err, subnetwork, apiResponse) {
      *   // `subnetwork` is a Subnetwork object.
      * });
@@ -119,8 +139,8 @@ function Subnetwork(region, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * subnetwork.get().then(function(data) {
-     *   var subnetwork = data[0];
-     *   var apiResponse = data[1];
+     *   const subnetwork = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -128,9 +148,10 @@ function Subnetwork(region, name) {
     /**
      * Get the metadata of this subnetwork.
      *
-     * @resource [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork}
-     * @resource [Subnetwork: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork/get}
+     * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork}
+     * @see [Subnetwork: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork/get}
      *
+     * @method Subnetwork#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -138,17 +159,22 @@ function Subnetwork(region, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const subnetwork = region.subnetwork('subnetwork1');
+     *
      * subnetwork.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * subnetwork.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -156,7 +182,7 @@ function Subnetwork(region, name) {
     baseUrl: '/subnetworks',
     id: this.name,
     createMethod: region.createSubnetwork.bind(region),
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -165,15 +191,20 @@ util.inherits(Subnetwork, common.ServiceObject);
 /**
  * Delete the subnetwork.
  *
- * @resource [Subnetworks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/delete}
+ * @see [Subnetworks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('region-name');
+ * const subnetwork = region.subnetwork('subnetwork1');
+ *
  * subnetwork.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -183,8 +214,8 @@ util.inherits(Subnetwork, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * subnetwork.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Subnetwork.prototype.delete = function(callback) {
@@ -192,20 +223,23 @@ Subnetwork.prototype.delete = function(callback) {
 
   var region = this.region;
 
-  this.request({
-    method: 'DELETE',
-    uri: ''
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '',
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = region.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = region.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

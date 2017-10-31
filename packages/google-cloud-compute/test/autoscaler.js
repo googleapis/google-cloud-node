@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Autoscaler') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -45,19 +45,19 @@ describe('Autoscaler', function() {
 
   var AUTOSCALER_NAME = 'autoscaler-name';
 
-  var COMPUTE = { projectId: 'project-id' };
+  var COMPUTE = {projectId: 'project-id'};
   var ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
-    createAutoscaler: util.noop
+    createAutoscaler: util.noop,
   };
 
   before(function() {
     Autoscaler = proxyquire('../src/autoscaler.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -86,8 +86,8 @@ describe('Autoscaler', function() {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
             return createMethod;
-          }
-        }
+          },
+        },
       });
 
       var autoscaler = new Autoscaler(zoneInstance, AUTOSCALER_NAME);
@@ -103,7 +103,7 @@ describe('Autoscaler', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -120,7 +120,7 @@ describe('Autoscaler', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -146,7 +146,7 @@ describe('Autoscaler', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -190,7 +190,7 @@ describe('Autoscaler', function() {
         assert.strictEqual(reqOpts.json, metadata);
         assert.deepEqual(metadata, {
           name: autoscaler.name,
-          zone: ZONE.name
+          zone: ZONE.name,
         });
 
         done();
@@ -201,7 +201,7 @@ describe('Autoscaler', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         autoscaler.zone.request = function(reqOpts, callback) {
@@ -210,7 +210,7 @@ describe('Autoscaler', function() {
       });
 
       it('should return an error if the request fails', function(done) {
-        autoscaler.setMetadata({ e: 'f' }, function(err, op, apiResponse_) {
+        autoscaler.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -221,7 +221,7 @@ describe('Autoscaler', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -232,7 +232,7 @@ describe('Autoscaler', function() {
 
       it('should execute callback with operation & response', function(done) {
         var operation = {};
-        var metadata = { a: 'b' };
+        var metadata = {a: 'b'};
 
         autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -250,7 +250,7 @@ describe('Autoscaler', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          autoscaler.setMetadata({ a: 'b' });
+          autoscaler.setMetadata({a: 'b'});
         });
       });
     });

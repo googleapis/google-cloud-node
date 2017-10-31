@@ -33,7 +33,7 @@ describe('MachineType', function() {
   var machineType;
   var ZONE_NAME = 'zone-1';
   var ZONE = {
-    name: ZONE_NAME
+    name: ZONE_NAME,
   };
 
   var MACHINE_TYPE_NAME = 'g1-small';
@@ -41,8 +41,8 @@ describe('MachineType', function() {
   before(function() {
     MachineType = proxyquire('../src/machine-type.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
-      }
+        ServiceObject: FakeServiceObject,
+      },
     });
   });
 
@@ -70,7 +70,7 @@ describe('MachineType', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });

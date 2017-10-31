@@ -14,21 +14,11 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/rule
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute|module:compute/region} scope - The parent scope this
- *     firewall rule belongs to.
- * @param {string} name - Rule name.
- */
 /**
  * Forwarding rules work in conjunction with target pools and target instances
  * to support load balancing and protocol forwarding features. To use load
@@ -36,22 +26,27 @@ var util = require('util');
  * directs traffic to specific target pools (for load balancing) or target
  * instances (for protocol forwarding).
  *
- * @resource [Forwarding rules]{@link https://cloud.google.com/compute/docs/load-balancing/network/forwarding-rules}
+ * @see [Forwarding rules]{@link https://cloud.google.com/compute/docs/load-balancing/network/forwarding-rules}
  *
- * @constructor
- * @alias module:compute/rule
+ * @class
+ * @param {Compute|Region} scope - The parent scope this
+ *     firewall rule belongs to.
+ * @param {string} name - Rule name.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ *
  * //-
  * // Reference a global rule.
  * //-
- * var rule = gce.rule('rule-name');
+ * const rule = compute.rule('rule-name');
  *
  * //-
  * // Reference a region rule.
  * //-
- * var region = gce.region('us-central1');
- * var rule = region.rule('rule-name');
+ * const region = compute.region('us-central1');
+ * const rule = region.rule('rule-name');
  */
 function Rule(scope, name) {
   var isGlobalRule = scope.constructor.name === 'Compute';
@@ -60,12 +55,17 @@ function Rule(scope, name) {
     /**
      * Create a forwarding rule.
      *
-     * @param {object} config - See {module:compute#createRule} or
-     *     {module:compute/region#createRule} if accessing this object through
+     * @method Rule#create
+     * @param {object} config - See {@link Compute#createRule} or
+     *     {@link Region#createRule} if accessing this object through
      *     a Region.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const rule = region.rule('rule-name');
+     *
+     * const config = {
      *   // `target` will be different depending of this is a Regional or Global
      *   // forwarding rule
      *   target: 'global/targetHttpProxies/my-proxy',
@@ -83,9 +83,9 @@ function Rule(scope, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * rule.create(config).then(function(data) {
-     *   var rule = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const rule = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -93,19 +93,24 @@ function Rule(scope, name) {
     /**
      * Check if the forwarding rule exists.
      *
+     * @method Rule#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the rule exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const rule = region.rule('rule-name');
+     *
      * rule.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * rule.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -118,11 +123,16 @@ function Rule(scope, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Rule#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const rule = region.rule('rule-name');
+     *
      * rule.get(function(err, rule, apiResponse) {
      *   // `rule` is a Rule object.
      * });
@@ -131,8 +141,8 @@ function Rule(scope, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * rule.get().then(function(data) {
-     *   var rule = data[0];
-     *   var apiResponse = data[1];
+     *   const rule = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -140,11 +150,12 @@ function Rule(scope, name) {
     /**
      * Get the metadata of this rule.
      *
-     * @resource [GlobalForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
-     * @resource [ForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
-     * @resource [GlobalForwardingRules: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/get}
-     * @resource [ForwardingRules: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/get}
+     * @see [GlobalForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
+     * @see [ForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
+     * @see [GlobalForwardingRules: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/get}
+     * @see [ForwardingRules: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/get}
      *
+     * @method Rule#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -152,27 +163,39 @@ function Rule(scope, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const rule = region.rule('rule-name');
+     *
      * rule.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * rule.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: scope,
     baseUrl: (isGlobalRule ? '/global' : '') + '/forwardingRules',
+    /**
+     * @name Rule#id
+     * @type {string}
+     */
     id: name,
     createMethod: scope.createRule.bind(scope),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Rule#scope
+   * @type {Compute|Region}
+   */
   this.scope = scope;
 }
 
@@ -181,16 +204,20 @@ util.inherits(Rule, common.ServiceObject);
 /**
  * Delete the rule.
  *
- * @resource [GlobalForwardingRules: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/delete}
- * @resource [ForwardingRules: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/delete}
+ * @see [GlobalForwardingRules: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/delete}
+ * @see [ForwardingRules: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const rule = compute.rule('rule-name');
+ *
  * rule.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -200,8 +227,8 @@ util.inherits(Rule, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * rule.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Rule.prototype.delete = function(callback) {
@@ -225,8 +252,8 @@ Rule.prototype.delete = function(callback) {
 /**
  * Set the target for this forwarding rule.
  *
- * @resource [GlobalForwardingRules: setTarget API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/setTarget}
- * @resource [ForwardingRules: setTarget API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/setTarget}
+ * @see [GlobalForwardingRules: setTarget API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/setTarget}
+ * @see [ForwardingRules: setTarget API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/setTarget}
  *
  * @param {string} target - The full or valid partial URL of the target resource
  *     to receive the matched traffic. For regional forwarding rules, this
@@ -238,6 +265,10 @@ Rule.prototype.delete = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const rule = compute.rule('rule-name');
+ *
  * rule.setTarget('new-target', function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -247,8 +278,8 @@ Rule.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * rule.setTarget('new-target').then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Rule.prototype.setTarget = function(target, callback) {
@@ -256,23 +287,26 @@ Rule.prototype.setTarget = function(target, callback) {
 
   var scope = this.scope;
 
-  this.request({
-    method: 'POST',
-    uri: '/setTarget',
-    json: {
-      target: target
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setTarget',
+      json: {
+        target: target,
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = scope.operation(resp.name);
-    operation.metadata = resp;
+      var operation = scope.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /*! Developer Documentation
@@ -282,4 +316,9 @@ Rule.prototype.setTarget = function(target, callback) {
  */
 common.util.promisifyAll(Rule);
 
+/**
+ * Reference to the {@link Rule} class.
+ * @name module:@google-cloud/compute.Rule
+ * @see Rule
+ */
 module.exports = Rule;

@@ -14,43 +14,42 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/address
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:region} region - Region this address belongs to.
- * @param {string} name - The name of the address.
- */
 /**
  * An Address object allows you to interact with a Google Compute Engine
  * address.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses} *
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses} *
  *
- * @constructor
- * @alias module:compute/address
+ * @class
+ * @param {Region} region
+ * @param {string} name
  *
  * @example
- * var region = gce.region('region-name');
- *
- * var address = region.address('address1');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('region-name');
+ * const address = region.address('address1');
  */
 function Address(region, name) {
   var methods = {
     /**
      * Create an address.
      *
-     * @param {object=} options - See {module:compute#createAddress}.
+     * @method Address#create
+     * @param {object=} options - See {Region#createAddress}.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const address = region.address('address1');
+     *
      * address.create(function(err, address, operation, apiResponse) {
      *   // `address` is an Address object.
      *
@@ -62,9 +61,9 @@ function Address(region, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * address.create().then(function(data) {
-     *   var address = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const address = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -72,19 +71,25 @@ function Address(region, name) {
     /**
      * Check if the address exists.
      *
+     * @method Address#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the address exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const address = region.address('address1');
+     *
      * address.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * address.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -97,11 +102,17 @@ function Address(region, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Address#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const address = region.address('address1');
+     *
      * address.get(function(err, address, apiResponse) {
      *   // `address` is an Address object.
      * });
@@ -110,8 +121,8 @@ function Address(region, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * address.get().then(function(data) {
-     *   var address = data[0];
-     *   var apiResponse = data[1];
+     *   const address = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -119,9 +130,10 @@ function Address(region, name) {
     /**
      * Get the metadata of this address.
      *
-     * @resource [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses}
-     * @resource [Addresses: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/get}
+     * @see [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses}
+     * @see [Addresses: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/get}
      *
+     * @method Address#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -129,17 +141,22 @@ function Address(region, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('region-name');
+     * const address = region.address('address1');
+     *
      * address.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * address.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -147,10 +164,20 @@ function Address(region, name) {
     baseUrl: '/addresses',
     id: name,
     createMethod: region.createAddress.bind(region),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Address#name
+   * @type {string}
+   */
   this.name = name;
+
+  /**
+   * The parent {@link Region} instance of this {@link Address} instance.
+   * @name Address#region
+   * @type {Region}
+   */
   this.region = region;
 }
 
@@ -159,15 +186,20 @@ util.inherits(Address, common.ServiceObject);
 /**
  * Delete the address.
  *
- * @resource [Addresses: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/delete}
+ * @see [Addresses: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('region-name');
+ * const address = region.address('address1');
+ *
  * address.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -177,8 +209,8 @@ util.inherits(Address, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * address.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Address.prototype.delete = function(callback) {
@@ -186,20 +218,23 @@ Address.prototype.delete = function(callback) {
 
   var region = this.region;
 
-  this.request({
-    method: 'DELETE',
-    uri: ''
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '',
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = region.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = region.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

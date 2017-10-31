@@ -31,7 +31,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'InstanceGroup') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -55,7 +55,7 @@ var fakePaginator = {
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 describe('InstanceGroup', function() {
@@ -66,7 +66,7 @@ describe('InstanceGroup', function() {
 
   var ZONE = {
     createInstanceGroup: util.noop,
-    vm: util.noop
+    vm: util.noop,
   };
   var NAME = 'instance-group-name';
 
@@ -75,8 +75,8 @@ describe('InstanceGroup', function() {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
     staticMethods.formatPorts_ = InstanceGroup.formatPorts_;
   });
@@ -127,13 +127,13 @@ describe('InstanceGroup', function() {
                 create: true,
                 exists: true,
                 get: true,
-                getMetadata: true
+                getMetadata: true,
               });
 
               done();
             });
-          }
-        }
+          },
+        },
       });
 
       instanceGroup = new InstanceGroup(zoneInstance, NAME);
@@ -143,22 +143,19 @@ describe('InstanceGroup', function() {
   describe('formatPorts_', function() {
     var PORTS = {
       http: 80,
-      https: 443
+      https: 443,
     };
 
     it('should format an object of named ports', function() {
       assert.deepEqual(InstanceGroup.formatPorts_(PORTS), [
-        { name: 'http', port: 80 },
-        { name: 'https', port: 443 }
+        {name: 'http', port: 80},
+        {name: 'https', port: 443},
       ]);
     });
   });
 
   describe('add', function() {
-    var VMS = [
-      { url: 'vm-url' },
-      { url: 'vm-url-2' }
-    ];
+    var VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', function(done) {
       instanceGroup.request = function(reqOpts) {
@@ -167,9 +164,9 @@ describe('InstanceGroup', function() {
         assert.deepEqual(reqOpts.json, {
           instances: VMS.map(function(vm) {
             return {
-              instance: vm.url
+              instance: vm.url,
             };
-          })
+          }),
         });
 
         done();
@@ -199,7 +196,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'op-name' };
+      var apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -238,7 +235,7 @@ describe('InstanceGroup', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -264,7 +261,7 @@ describe('InstanceGroup', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -315,7 +312,7 @@ describe('InstanceGroup', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -331,13 +328,13 @@ describe('InstanceGroup', function() {
 
     describe('options.running', function() {
       var OPTIONS = {
-        running: true
+        running: true,
       };
 
       it('should set the instanceState filter', function(done) {
         instanceGroup.request = function(reqOpts) {
           assert.deepEqual(reqOpts.json, {
-            instanceState: 'RUNNING'
+            instanceState: 'RUNNING',
           });
           done();
         };
@@ -348,7 +345,7 @@ describe('InstanceGroup', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -369,9 +366,7 @@ describe('InstanceGroup', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { instance: 'vm-name' }
-        ]
+        items: [{instance: 'vm-name'}],
       };
 
       beforeEach(function() {
@@ -383,10 +378,10 @@ describe('InstanceGroup', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         instanceGroup.request = function(reqOpts, callback) {
@@ -425,10 +420,7 @@ describe('InstanceGroup', function() {
   });
 
   describe('remove', function() {
-    var VMS = [
-      { url: 'vm-url' },
-      { url: 'vm-url-2' }
-    ];
+    var VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', function(done) {
       instanceGroup.request = function(reqOpts) {
@@ -437,9 +429,9 @@ describe('InstanceGroup', function() {
         assert.deepEqual(reqOpts.json, {
           instances: VMS.map(function(vm) {
             return {
-              instance: vm.url
+              instance: vm.url,
             };
-          })
+          }),
         });
 
         done();
@@ -469,7 +461,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'op-name' };
+      var apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -499,7 +491,7 @@ describe('InstanceGroup', function() {
   describe('setPorts', function() {
     var PORTS = {
       http: 80,
-      https: 443
+      https: 443,
     };
 
     it('should format the named ports', function(done) {
@@ -522,7 +514,7 @@ describe('InstanceGroup', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -548,7 +540,7 @@ describe('InstanceGroup', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {

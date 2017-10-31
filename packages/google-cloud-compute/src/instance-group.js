@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/instance-group
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -26,35 +22,37 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute/zone} zone - Zone object this instance group belongs
- *     to.
- * @param {string} name - Name of the instance group.
- */
 /**
  * You can create and manage groups of virtual machine instances so that you
  * don't have to individually control each instance in your project.
  *
- * @resource [Creating Groups of Instances]{@link https://cloud.google.com/compute/docs/instance-groups}
- * @resource [Unmanaged Instance Groups]{@link https://cloud.google.com/compute/docs/instance-groups/unmanaged-groups}
+ * @see [Creating Groups of Instances]{@link https://cloud.google.com/compute/docs/instance-groups}
+ * @see [Unmanaged Instance Groups]{@link https://cloud.google.com/compute/docs/instance-groups/unmanaged-groups}
  *
- * @constructor
- * @alias module:compute/instance-group
+ * @class
+ * @param {Zone} zone
+ * @param {string} name
  *
  * @example
- * var zone = gce.zone('us-central1-a');
- *
- * var instanceGroup = zone.instanceGroup('web-servers');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
  */
 function InstanceGroup(zone, name) {
   var methods = {
     /**
      * Create an instance group.
      *
-     * @param {object=} options - See {module:zone#createInstanceGroup}.
+     * @method InstanceGroup#create
+     * @param {object=} options - See {@link Zone#createInstanceGroup}.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const instanceGroup = zone.instanceGroup('web-servers');
+     *
      * function onCreated(err, instanceGroup, operation, apiResponse) {
      *   // `instanceGroup` is an InstanceGroup object.
      *
@@ -68,9 +66,9 @@ function InstanceGroup(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * instanceGroup.create().then(function(data) {
-     *   var instanceGroup = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const instanceGroup = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -78,6 +76,7 @@ function InstanceGroup(zone, name) {
     /**
      * Check if the instance group exists.
      *
+     * @method InstanceGroup#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -85,13 +84,18 @@ function InstanceGroup(zone, name) {
      *     not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const instanceGroup = zone.instanceGroup('web-servers');
+     *
      * instanceGroup.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * instanceGroup.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -104,11 +108,17 @@ function InstanceGroup(zone, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method InstanceGroup#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const instanceGroup = zone.instanceGroup('web-servers');
+     *
      * instanceGroup.get(function(err, instanceGroup, apiResponse) {
      *   // `instanceGroup` is an InstanceGroup object.
      * });
@@ -117,8 +127,8 @@ function InstanceGroup(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * instanceGroup.get().then(function(data) {
-     *   var instanceGroup = data[0];
-     *   var apiResponse = data[1];
+     *   const instanceGroup = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -126,9 +136,10 @@ function InstanceGroup(zone, name) {
     /**
      * Get the instance group's metadata.
      *
-     * @resource [InstanceGroups: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/get}
-     * @resource [InstanceGroups Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
+     * @see [InstanceGroups: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/get}
+     * @see [InstanceGroups Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
      *
+     * @method InstanceGroup#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -136,28 +147,47 @@ function InstanceGroup(zone, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const instanceGroup = zone.instanceGroup('web-servers');
+     *
      * instanceGroup.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * instanceGroup.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/instanceGroups',
+    /**
+     * @name InstanceGroup#id
+     * @type {string}
+     */
     id: name,
     createMethod: zone.createInstanceGroup.bind(zone),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * The parent {@link Zone} instance of this {@link InstanceGroup} instance.
+   * @name InstanceGroup#zone
+   * @type {Zone}
+   */
   this.zone = zone;
+
+  /**
+   * @name InstanceGroup#name
+   * @type {string}
+   */
   this.name = name;
 }
 
@@ -170,13 +200,13 @@ util.inherits(InstanceGroup, common.ServiceObject);
  *
  * @param {object} ports - A map of names to ports. The key should be the name,
  *     and the value the port number.
- * @return {object[]} - The formatted array of named ports.
+ * @returns {object[]} - The formatted array of named ports.
  */
 InstanceGroup.formatPorts_ = function(ports) {
   return Object.keys(ports).map(function(port) {
     return {
       name: port,
-      port: ports[port]
+      port: ports[port],
     };
   });
 };
@@ -184,18 +214,23 @@ InstanceGroup.formatPorts_ = function(ports) {
 /**
  * Add one or more VMs to this instance group.
  *
- * @resource [InstanceGroups: addInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/addInstances}
+ * @see [InstanceGroups: addInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/addInstances}
  *
- * @param {module:compute/vm|module:compute/vm[]} vms - VM instances to add to
+ * @param {VM|VM[]} vms - VM instances to add to
  *     this instance group.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var vms = [
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
+ * const vms = [
  *   gce.zone('us-central1-a').vm('http-server'),
  *   gce.zone('us-central1-a').vm('https-server')
  * ];
@@ -209,48 +244,56 @@ InstanceGroup.formatPorts_ = function(ports) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * instanceGroup.add(vms).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.add = function(vms, callback) {
   var self = this;
 
-  this.request({
-    method: 'POST',
-    uri: '/addInstances',
-    json: {
-      instances: arrify(vms).map(function(vm) {
-        return {
-          instance: vm.url
-        };
-      })
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/addInstances',
+      json: {
+        instances: arrify(vms).map(function(vm) {
+          return {
+            instance: vm.url,
+          };
+        }),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /**
  * Delete the instance group.
  *
- * @resource [InstanceGroups: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/delete}
+ * @see [InstanceGroups: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
  * instanceGroup.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -260,8 +303,8 @@ InstanceGroup.prototype.add = function(vms, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * instanceGroup.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.delete = function(callback) {
@@ -285,7 +328,7 @@ InstanceGroup.prototype.delete = function(callback) {
 /**
  * Get a list of VM instances in this instance group.
  *
- * @resource [InstaceGroups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/listInstances}
+ * @see [InstaceGroups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/listInstances}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -304,11 +347,16 @@ InstanceGroup.prototype.delete = function(callback) {
  * @param {boolean} options.running - Only return instances which are running.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm[]} callback.vms - VM objects from this instance
+ * @param {VM[]} callback.vms - VM objects from this instance
  *     group.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
  * instanceGroup.getVMs(function(err, vms) {
  *   // `vms` is an array of `VM` objects.
  * });
@@ -317,7 +365,7 @@ InstanceGroup.prototype.delete = function(callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * function callback(err, vms, nextQuery, apiResponse) {
+ * function callback(err, vms, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
  *     instanceGroup.getVMs(nextQuery, callback);
@@ -332,7 +380,7 @@ InstanceGroup.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * instanceGroup.getVMs().then(function(data) {
- *   var vms = data[0];
+ *   const vms = data[0];
  * });
  */
 InstanceGroup.prototype.getVMs = function(options, callback) {
@@ -349,48 +397,56 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
 
   if (options.running) {
     body = {
-      instanceState: 'RUNNING'
+      instanceState: 'RUNNING',
     };
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/listInstances',
-    qs: options,
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/listInstances',
+      qs: options,
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var vms = arrify(resp.items).map(function(vm) {
+        var vmInstance = self.zone.vm(vm.instance);
+        vmInstance.metadata = vm;
+        return vmInstance;
       });
+
+      callback(null, vms, nextQuery, resp);
     }
-
-    var vms = arrify(resp.items).map(function(vm) {
-      var vmInstance = self.zone.vm(vm.instance);
-      vmInstance.metadata = vm;
-      return vmInstance;
-    });
-
-    callback(null, vms, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:compute/vm} instances in this instance group as a
+ * Get a list of {@link VM} instances in this instance group as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/instanceGroup#getVMs} for a complete list of options.
- * @return {stream}
+ *     {@link InstanceGroup#getVMs} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
  * instanceGroup.getVMsStream()
  *   .on('error', console.error)
  *   .on('data', function(vm) {
@@ -414,18 +470,23 @@ InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
 /**
  * Remove one or more VMs from this instance group.
  *
- * @resource [InstanceGroups: removeInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/removeInstances}
+ * @see [InstanceGroups: removeInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/removeInstances}
  *
- * @param {module:compute/vm|module:compute/vm[]} vms - VM instances to remove
+ * @param {VM|VM[]} vms - VM instances to remove
  *     from this instance group.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var vms = [
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
+ * const vms = [
  *   gce.zone('us-central1-a').vm('http-server'),
  *   gce.zone('us-central1-a').vm('https-server')
  * ];
@@ -439,51 +500,59 @@ InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * instanceGroup.remove(vms).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.remove = function(vms, callback) {
   var self = this;
 
-  this.request({
-    method: 'POST',
-    uri: '/removeInstances',
-    json: {
-      instances: arrify(vms).map(function(vm) {
-        return {
-          instance: vm.url
-        };
-      })
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/removeInstances',
+      json: {
+        instances: arrify(vms).map(function(vm) {
+          return {
+            instance: vm.url,
+          };
+        }),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(err, operation, resp);
-  });
+      callback(err, operation, resp);
+    }
+  );
 };
 
 /**
  * Set the named ports for this instance group.
  *
- * @resource [InstanceGroups: setNamedPorts API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/setNamedPorts}
+ * @see [InstanceGroups: setNamedPorts API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/setNamedPorts}
  *
  * @param {object} ports - A map of names to ports. The key should be the name,
  *     and the value the port number.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var ports = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
+ * const ports = {
  *   http: 80,
  *   https: 443
  * };
@@ -497,8 +566,8 @@ InstanceGroup.prototype.remove = function(vms, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * instanceGroup.setPorts(ports).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.setPorts = function(ports, callback) {
@@ -506,23 +575,26 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
 
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'POST',
-    uri: '/setNamedPorts',
-    json: {
-      namedPorts: InstanceGroup.formatPorts_(ports)
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setNamedPorts',
+      json: {
+        namedPorts: InstanceGroup.formatPorts_(ports),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /*! Developer Documentation

@@ -33,7 +33,7 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['snapshot']);
-  }
+  },
 });
 
 function FakeSnapshot() {
@@ -52,29 +52,29 @@ describe('Disk', function() {
   var disk;
 
   var COMPUTE = {
-    projectId: 'project-id'
+    projectId: 'project-id',
   };
 
   var ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
-    createDisk: util.noop
+    createDisk: util.noop,
   };
 
   var DISK_NAME = 'disk-name';
   var DISK_FULL_NAME = format('projects/{pId}/zones/{zName}/disks/{dName}', {
     pId: COMPUTE.projectId,
     zName: ZONE.name,
-    dName: DISK_NAME
+    dName: DISK_NAME,
   });
 
   before(function() {
     Disk = proxyquire('../src/disk.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
+        util: fakeUtil,
       },
-      './snapshot.js': FakeSnapshot
+      './snapshot.js': FakeSnapshot,
     });
   });
 
@@ -118,8 +118,8 @@ describe('Disk', function() {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var disk = new Disk(zoneInstance, DISK_NAME);
@@ -134,7 +134,7 @@ describe('Disk', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -151,16 +151,16 @@ describe('Disk', function() {
       disk.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/createSnapshot');
-        assert.deepEqual(reqOpts.json, { name: 'test', a: 'b' });
+        assert.deepEqual(reqOpts.json, {name: 'test', a: 'b'});
         done();
       };
 
-      disk.createSnapshot('test', { a: 'b' }, util.noop);
+      disk.createSnapshot('test', {a: 'b'}, util.noop);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         disk.request = function(reqOpts, callback) {
@@ -187,7 +187,7 @@ describe('Disk', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {
@@ -242,7 +242,7 @@ describe('Disk', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -268,7 +268,7 @@ describe('Disk', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {

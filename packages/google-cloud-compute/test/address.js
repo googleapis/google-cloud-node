@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Address') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -45,15 +45,15 @@ describe('Address', function() {
 
   var ADDRESS_NAME = 'us-central1';
   var REGION = {
-    createAddress: util.noop
+    createAddress: util.noop,
   };
 
   before(function() {
     Address = proxyquire('../src/address.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -80,8 +80,8 @@ describe('Address', function() {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var address = new Address(regionInstance, ADDRESS_NAME);
@@ -96,7 +96,7 @@ describe('Address', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
   });
@@ -114,7 +114,7 @@ describe('Address', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         address.request = function(reqOpts, callback) {
@@ -140,7 +140,7 @@ describe('Address', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {

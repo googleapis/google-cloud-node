@@ -43,7 +43,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Operation') {
       promisified = true;
     }
-  }
+  },
 });
 
 describe('Operation', function() {
@@ -51,7 +51,7 @@ describe('Operation', function() {
   var operation;
 
   var SCOPE = {
-    Promise: Promise
+    Promise: Promise,
   };
   var OPERATION_NAME = 'operation-name';
 
@@ -60,8 +60,8 @@ describe('Operation', function() {
       '@google-cloud/common': {
         Operation: FakeOperation,
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -86,7 +86,7 @@ describe('Operation', function() {
       assert.deepEqual(calledWith.methods, {
         delete: true,
         exists: true,
-        get: true
+        get: true,
       });
     });
 
@@ -95,11 +95,14 @@ describe('Operation', function() {
     });
 
     it('should give the right baseUrl for a global Operation', function() {
-      var operation = new Operation({
-        constructor: {
-          name: 'Compute'
-        }
-      }, OPERATION_NAME);
+      var operation = new Operation(
+        {
+          constructor: {
+            name: 'Compute',
+          },
+        },
+        OPERATION_NAME
+      );
 
       var calledWith = operation.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, '/global/operations');
@@ -118,7 +121,7 @@ describe('Operation', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.getMetadata = function(callback) {
@@ -130,8 +133,8 @@ describe('Operation', function() {
         var apiResponse = {
           name: operation.name,
           error: {
-            errors: []
-          }
+            errors: [],
+          },
         };
 
         FakeServiceObject.prototype.getMetadata = function(callback) {
@@ -163,7 +166,7 @@ describe('Operation', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.getMetadata = function(callback) {
@@ -228,7 +231,7 @@ describe('Operation', function() {
 
     describe('operation failure', function() {
       var error = new Error('Error.');
-      var apiResponse = { error: error };
+      var apiResponse = {error: error};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -237,7 +240,7 @@ describe('Operation', function() {
       });
 
       it('should parse and return the response body', function(done) {
-        var parsedHttpRespBody = { err: {} };
+        var parsedHttpRespBody = {err: {}};
 
         parseHttpRespBodyOverride = function(body) {
           assert.strictEqual(body, apiResponse);
@@ -252,7 +255,7 @@ describe('Operation', function() {
     });
 
     describe('operation running', function() {
-      var apiResponse = { status: 'RUNNING' };
+      var apiResponse = {status: 'RUNNING'};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -293,7 +296,7 @@ describe('Operation', function() {
     });
 
     describe('operation complete', function() {
-      var apiResponse = { status: 'DONE' };
+      var apiResponse = {status: 'DONE'};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {

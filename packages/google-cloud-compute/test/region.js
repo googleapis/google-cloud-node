@@ -37,9 +37,9 @@ var fakeUtil = extend({}, common.util, {
       'address',
       'operation',
       'rule',
-      'subnetwork'
+      'subnetwork',
     ]);
-  }
+  },
 });
 
 function FakeAddress() {
@@ -83,12 +83,12 @@ var fakePaginator = {
       'getAddresses',
       'getOperations',
       'getRules',
-      'getSubnetworks'
+      'getSubnetworks',
     ]);
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 describe('Region', function() {
@@ -96,7 +96,7 @@ describe('Region', function() {
   var region;
 
   var COMPUTE = {
-    authConfig: { a: 'b', c: 'd' }
+    authConfig: {a: 'b', c: 'd'},
   };
   var REGION_NAME = 'us-central1';
 
@@ -105,13 +105,13 @@ describe('Region', function() {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
-        util: fakeUtil
+        util: fakeUtil,
       },
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,
       './rule.js': FakeRule,
-      './subnetwork.js': FakeSubnetwork
+      './subnetwork.js': FakeSubnetwork,
     });
   });
 
@@ -150,7 +150,7 @@ describe('Region', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -162,10 +162,10 @@ describe('Region', function() {
 
       it('should strip `/global` from forwardingRules requests', function() {
         var reqOpts = {
-          uri: '/compute/v1/projects/projectId/global/forwardingRules'
+          uri: '/compute/v1/projects/projectId/global/forwardingRules',
         };
         var expectedReqOpts = {
-          uri: '/compute/v1/projects/projectId/forwardingRules'
+          uri: '/compute/v1/projects/projectId/forwardingRules',
         };
 
         var requestInterceptor = region.interceptors.pop().request;
@@ -174,10 +174,10 @@ describe('Region', function() {
 
       it('should not affect non-cancel requests', function() {
         var reqOpts = {
-          uri: '/compute/v1/projects/projectId/other/request'
+          uri: '/compute/v1/projects/projectId/other/request',
         };
         var expectedReqOpts = {
-          uri: '/compute/v1/projects/projectId/other/request'
+          uri: '/compute/v1/projects/projectId/other/request',
         };
 
         var requestInterceptor = region.interceptors.pop().request;
@@ -199,11 +199,11 @@ describe('Region', function() {
 
   describe('createAddress', function() {
     var NAME = 'address-name';
-    var OPTIONS = { a: 'b', c: 'd' };
-    var EXPECTED_BODY = extend({}, OPTIONS, { name: NAME });
+    var OPTIONS = {a: 'b', c: 'd'};
+    var EXPECTED_BODY = extend({}, OPTIONS, {name: NAME});
 
     it('should not require any options', function(done) {
-      var expectedBody = { name: NAME };
+      var expectedBody = {name: NAME};
 
       region.request = function(reqOpts) {
         assert.deepEqual(reqOpts.json, expectedBody);
@@ -227,7 +227,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -247,7 +247,7 @@ describe('Region', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'operation-name' };
+      var apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -305,9 +305,9 @@ describe('Region', function() {
     var CONFIG = {
       a: 'b',
       c: 'd',
-      network: 'network-name'
+      network: 'network-name',
     };
-    var EXPECTED_BODY = extend({}, CONFIG, { name: NAME });
+    var EXPECTED_BODY = extend({}, CONFIG, {name: NAME});
 
     it('should make the correct API request', function(done) {
       region.request = function(reqOpts) {
@@ -327,7 +327,7 @@ describe('Region', function() {
         network.formattedName = 'formatted-name';
 
         var config = extend({}, CONFIG, {
-          network: network
+          network: network,
         });
 
         region.request = function(reqOpts) {
@@ -342,7 +342,7 @@ describe('Region', function() {
     describe('config.range', function() {
       it('should accept and delete a range property', function(done) {
         var config = extend({}, CONFIG, {
-          range: '...'
+          range: '...',
         });
 
         region.request = function(reqOpts) {
@@ -357,7 +357,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -367,17 +367,17 @@ describe('Region', function() {
 
       it('should execute callback with error & API response', function(done) {
         region.createSubnetwork(NAME, CONFIG, function(err, sub, op, resp) {
-            assert.strictEqual(err, error);
-            assert.strictEqual(sub, null);
-            assert.strictEqual(op, null);
-            assert.strictEqual(resp, apiResponse);
-            done();
-          });
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
       });
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'operation-name' };
+      var apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -425,7 +425,7 @@ describe('Region', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/addresses');
@@ -439,7 +439,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -460,9 +460,7 @@ describe('Region', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
+        items: [{name: 'operation-name'}],
       };
 
       beforeEach(function() {
@@ -474,10 +472,10 @@ describe('Region', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         region.request = function(reqOpts, callback) {
@@ -526,7 +524,7 @@ describe('Region', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/operations');
@@ -540,7 +538,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -561,9 +559,7 @@ describe('Region', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
+        items: [{name: 'operation-name'}],
       };
 
       beforeEach(function() {
@@ -575,10 +571,10 @@ describe('Region', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         region.request = function(reqOpts, callback) {
@@ -627,7 +623,7 @@ describe('Region', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/forwardingRules');
@@ -641,7 +637,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -662,9 +658,7 @@ describe('Region', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
+        items: [{name: 'operation-name'}],
       };
 
       beforeEach(function() {
@@ -676,10 +670,10 @@ describe('Region', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         region.request = function(reqOpts, callback) {
@@ -728,7 +722,7 @@ describe('Region', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/subnetworks');
@@ -742,7 +736,7 @@ describe('Region', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         region.request = function(reqOpts, callback) {
@@ -763,9 +757,7 @@ describe('Region', function() {
 
     describe('success', function() {
       var apiResponse = {
-        items: [
-          { name: 'subnetwork-name' }
-        ]
+        items: [{name: 'subnetwork-name'}],
       };
 
       beforeEach(function() {
@@ -777,10 +769,10 @@ describe('Region', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         region.request = function(reqOpts, callback) {
@@ -851,4 +843,3 @@ describe('Region', function() {
     });
   });
 });
-

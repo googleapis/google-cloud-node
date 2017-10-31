@@ -14,40 +14,34 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/machine-type
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:zone} zone - Zone object this machine type belongs to.
- * @param {string} name - Name of the machine type.
- */
 /**
  * A MachineType object allows you to interact with a Google Compute Engine
  * machine type.
  *
- * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
- * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ * @see [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @see [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
  *
- * @constructor
- * @alias module:compute/machine-type
+ * @class
+ * @param {Zone} zone
+ * @param {string} name
  *
  * @example
- * var zone = gce.zone('us-central1-b');
- *
- * var machineType = zone.machineType('g1-small');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-b');
+ * const machineType = zone.machineType('g1-small');
  */
 function MachineType(zone, name) {
   var methods = {
     /**
      * Check if the machine type exists.
      *
+     * @method MachineType#create
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -55,13 +49,18 @@ function MachineType(zone, name) {
      *     not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-b');
+     * const machineType = zone.machineType('g1-small');
+     *
      * machineType.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * machineType.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -69,7 +68,14 @@ function MachineType(zone, name) {
     /**
      * Get a machine type if it exists.
      *
+     * @method MachineType#get
+     *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-b');
+     * const machineType = zone.machineType('g1-small');
+     *
      * machineType.get(function(err, machineType, apiResponse) {
      *   // `machineType` is a MachineType object.
      * });
@@ -78,8 +84,8 @@ function MachineType(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * machineType.get().then(function(data) {
-     *   var machineType = data[0];
-     *   var apiResponse = data[1];
+     *   const machineType = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -87,9 +93,10 @@ function MachineType(zone, name) {
     /**
      * Get the machine type's metadata.
      *
-     * @resource [MachineTypes: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/get}
-     * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+     * @see [MachineTypes: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/get}
+     * @see [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
      *
+     * @method MachineType#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -97,27 +104,46 @@ function MachineType(zone, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-b');
+     * const machineType = zone.machineType('g1-small');
+     *
      * machineType.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * machineType.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/machineTypes',
+    /**
+     * @name MachineType#id
+     * @type {string}
+     */
     id: name,
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * The parent {@link Zone} instance of this {@link MachineType} instance.
+   * @name MachineType#zone
+   * @type {Zone}
+   */
   this.zone = zone;
+
+  /**
+   * @name MachineType#name
+   * @type {string}
+   */
   this.name = name;
 }
 

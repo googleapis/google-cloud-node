@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Subnetwork') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -47,15 +47,15 @@ describe('Subnetwork', function() {
   var REGION_NAME = 'region-1';
   var REGION = {
     createSubnetwork: util.noop,
-    name: REGION_NAME
+    name: REGION_NAME,
   };
 
   before(function() {
     Subnetwork = proxyquire('../src/subnetwork.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -80,8 +80,8 @@ describe('Subnetwork', function() {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);
             return createSubnetworkBound;
-          }
-        }
+          },
+        },
       });
 
       var subnetwork = new Subnetwork(regionInstance, SUBNETWORK_NAME);
@@ -97,7 +97,7 @@ describe('Subnetwork', function() {
         create: true,
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -119,7 +119,7 @@ describe('Subnetwork', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         subnetwork.request = function(reqOpts, callback) {
@@ -145,7 +145,7 @@ describe('Subnetwork', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'op-name'
+        name: 'op-name',
       };
 
       beforeEach(function() {

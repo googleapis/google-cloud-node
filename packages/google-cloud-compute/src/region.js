@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/region
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -25,71 +21,50 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:compute/address}
- * @private
- */
 var Address = require('./address.js');
-
-/**
- * @type {module:compute/network}
- * @private
- */
 var Network = require('./network.js');
-
-/**
- * @type {module:compute/operation}
- * @private
- */
 var Operation = require('./operation.js');
-
-/**
- * @type {module:compute/rule}
- * @private
- */
 var Rule = require('./rule.js');
-
-/**
- * @type {module:compute/subnetwork}
- * @private
- */
 var Subnetwork = require('./subnetwork.js');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - Compute object this region belongs to.
- * @param {string} name - Name of the region.
- */
 /**
  * A Region object allows you to interact with a Google Compute Engine region.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
- * @resource [Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}
  *
- * @constructor
- * @alias module:compute/region
+ * @class
+ * @param {Compute} compute
+ * @param {string} name
  *
  * @example
- * var region = gce.region('us-central1');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
  */
 function Region(compute, name) {
   var methods = {
     /**
      * Check if the region exists.
      *
+     * @method Region#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the region exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('us-central1');
+     *
      * region.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * region.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -97,7 +72,13 @@ function Region(compute, name) {
     /**
      * Get a region.
      *
+     * @method Region#get
+     *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('us-central1');
+     *
      * region.get(function(err, region, apiResponse) {
      *   // `region` is a Region object.
      * });
@@ -106,8 +87,8 @@ function Region(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * region.get().then(function(data) {
-     *   var region = data[0];
-     *   var apiResponse = data[1];
+     *   const region = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -115,9 +96,10 @@ function Region(compute, name) {
     /**
      * Get the region's metadata.
      *
-     * @resource [Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}
-     * @resource [Regions: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/get}
+     * @see [Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}
+     * @see [Regions: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/get}
      *
+     * @method Region#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -125,26 +107,38 @@ function Region(compute, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const region = compute.region('us-central1');
+     *
      * region.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * region.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/regions',
+    /**
+     * @name Region#id
+     * @type {string}
+     */
     id: name,
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * @name Region#name
+   * @type {string}
+   */
   this.name = name;
 
   this.interceptors.push({
@@ -153,7 +147,7 @@ function Region(compute, name) {
         reqOpts.uri = reqOpts.uri.replace('/global', '');
       }
       return reqOpts;
-    }
+    },
   });
 }
 
@@ -162,13 +156,17 @@ util.inherits(Region, common.ServiceObject);
 /**
  * Get a reference to a Google Compute Engine address in this region.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
  *
  * @param {string} name - Name of the address.
- * @return {module:compute/address}
+ * @returns {Address}
  *
  * @example
- * var address = region.address('address-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
+ * const address = region.address('address-name');
  */
 Region.prototype.address = function(name) {
   return new Address(this, name);
@@ -177,22 +175,26 @@ Region.prototype.address = function(name) {
 /**
  * Create an address in this region.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses}
- * @resource [Addresses: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/insert}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses}
+ * @see [Addresses: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/insert}
  *
  * @param {string} name - Name of the address.
  * @param {object=} options - See an
  *     [Address resource](https://cloud.google.com/compute/docs/reference/v1/addresses).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/address} callback.address - The created Address
+ * @param {Address} callback.address - The created Address
  *     object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * function callback(err, address, operation, apiResponse) {
  *   // `address` is an Address object.
  *
@@ -206,9 +208,9 @@ Region.prototype.address = function(name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.createAddress('new-address').then(function(data) {
- *   var address = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const address = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Region.prototype.createAddress = function(name, options, callback) {
@@ -219,37 +221,40 @@ Region.prototype.createAddress = function(name, options, callback) {
     options = {};
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/addresses',
-    json: extend({}, options, {
-      name: name
-    })
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/addresses',
+      json: extend({}, options, {
+        name: name,
+      }),
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var address = self.address(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, address, operation, resp);
     }
-
-    var address = self.address(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, address, operation, resp);
-  });
+  );
 };
 
 /**
  * Create a subnetwork in this region.
  *
- * @resource [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource}
- * @resource [Subnetwork: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/insert}
+ * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource}
+ * @see [Subnetwork: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/insert}
  *
  * @param {string} name - Name of the subnetwork.
  * @param {object} config - See a
  *     [Subnetwork resource](https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource).
- * @param {module:compute/network|string} config.network - The network to which
+ * @param {Network|string} config.network - The network to which
  *    this subnetwork belongs. **Only networks that are in the distributed mode
  *    can have subnetworks.**
  * @param {string} config.range - The range of internal addresses that
@@ -258,14 +263,18 @@ Region.prototype.createAddress = function(name, options, callback) {
  *    `config.ipCidrRange`)
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork} callback.subnetwork - The created
+ * @param {Subnetwork} callback.subnetwork - The created
  *    Subnetwork object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
+ * const config = {
  *   network: 'network1',
  *   range: '10.0.1.0/24'
  * };
@@ -283,16 +292,16 @@ Region.prototype.createAddress = function(name, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.createSubnetwork('new-subnetwork-name', config).then(function(data) {
- *   var subnetwork = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const subnetwork = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Region.prototype.createSubnetwork = function(name, config, callback) {
   var self = this;
 
   var body = extend({}, config, {
-    name: name
+    name: name,
   });
 
   if (body.network instanceof Network) {
@@ -304,30 +313,33 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
     delete body.range;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/subnetworks',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/subnetworks',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var subnetwork = self.subnetwork(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, subnetwork, operation, resp);
     }
-
-    var subnetwork = self.subnetwork(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, subnetwork, operation, resp);
-  });
+  );
 };
 
 /**
  * Create a forwarding rule in this region.
  *
- * @resource [ForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules#resource}
- * @resource [ForwardingRules: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/insert}
+ * @see [ForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules#resource}
+ * @see [ForwardingRules: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/insert}
  *
  * @param {string} name - Name of the rule.
  * @param {object} config - See a
@@ -351,15 +363,19 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
  *     resource to receive the matched traffic.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule} callback.rule - The created Rule object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Rule} callback.rule - The created Rule object.
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var name = 'new-rule-name';
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
  *
- * var cfg = {
+ * const name = 'new-rule-name';
+ *
+ * const cfg = {
  *   target: 'zones/us-central1-a/targetInstances/my-target-instance',
  *   range: '8080-8089'
  * };
@@ -375,9 +391,9 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.createRule(name, cfg).then(function(data) {
- *   var rule = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const rule = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Region.prototype.createRule = function(name, config, callback) {
@@ -387,8 +403,8 @@ Region.prototype.createRule = function(name, config, callback) {
 /**
  * Get a list of addresses in this region.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Addresses: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/list}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Addresses: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/list}
  *
  * @param {object=} options - Address search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -406,11 +422,15 @@ Region.prototype.createRule = function(name, config, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/address[]} callback.addresses - Address objects from
+ * @param {Address[]} callback.addresses - Address objects from
  *     this region.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getAddresses(function(err, addresses) {
  *   // `addresses` is an array of `Address` objects.
  * });
@@ -434,7 +454,7 @@ Region.prototype.createRule = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.getAddresses().then(function(data) {
- *   var addresses = data[0];
+ *   const addresses = data[0];
  * });
  */
 Region.prototype.getAddresses = function(options, callback) {
@@ -447,42 +467,49 @@ Region.prototype.getAddresses = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/addresses',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/addresses',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var addresses = (resp.items || []).map(function(address) {
+        var addressInstance = self.address(address.name);
+        addressInstance.metadata = address;
+        return addressInstance;
       });
+
+      callback(null, addresses, nextQuery, resp);
     }
-
-    var addresses = (resp.items || []).map(function(address) {
-      var addressInstance = self.address(address.name);
-      addressInstance.metadata = address;
-      return addressInstance;
-    });
-
-    callback(null, addresses, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:compute/address} objects in this region as a readable
+ * Get a list of {@link Address} objects in this region as a readable
  * object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/region#getAddresses} for a complete list of options.
- * @return {stream}
+ *     {@link Region#getAddresses} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getAddressesStream()
  *   .on('error', console.error)
  *   .on('data', function(address) {
@@ -501,14 +528,15 @@ Region.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getAddressesStream =
-  common.paginator.streamify('getAddresses');
+Region.prototype.getAddressesStream = common.paginator.streamify(
+  'getAddresses'
+);
 
 /**
  * Get a list of operations for this region.
  *
- * @resource [Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}
- * @resource [RegionOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}
+ * @see [Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}
+ * @see [RegionOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}
  *
  * @param {object=} options - Operation search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -526,11 +554,15 @@ Region.prototype.getAddressesStream =
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation[]} callback.operations - Operation objects
+ * @param {Operation[]} callback.operations - Operation objects
  *     from this region.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getOperations(function(err, operations) {
  *   // `operations` is an array of `Operation` objects.
  * });
@@ -554,7 +586,7 @@ Region.prototype.getAddressesStream =
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.getOperations().then(function(data) {
- *   var operations = data[0];
+ *   const operations = data[0];
  * });
  */
 Region.prototype.getOperations = function(options, callback) {
@@ -567,42 +599,49 @@ Region.prototype.getOperations = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/operations',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/operations',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var operations = (resp.items || []).map(function(operation) {
+        var operationInstance = self.operation(operation.name);
+        operationInstance.metadata = operation;
+        return operationInstance;
       });
+
+      callback(null, operations, nextQuery, resp);
     }
-
-    var operations = (resp.items || []).map(function(operation) {
-      var operationInstance = self.operation(operation.name);
-      operationInstance.metadata = operation;
-      return operationInstance;
-    });
-
-    callback(null, operations, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:compute/operation} objects for this region as a
+ * Get a list of {@link Operation} objects for this region as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/region#getOperations} for a complete list of options.
- * @return {stream}
+ *     {@link Region#getOperations} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getOperationsStream()
  *   .on('error', console.error)
  *   .on('data', function(operation) {
@@ -621,13 +660,14 @@ Region.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getOperationsStream =
-  common.paginator.streamify('getOperations');
+Region.prototype.getOperationsStream = common.paginator.streamify(
+  'getOperations'
+);
 
 /**
  * Get a list of forwading rules in this region.
  *
- * @resource [ForwardingRules: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/list}
+ * @see [ForwardingRules: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/forwardingRules/list}
  *
  * @param {object=} options - Rules search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -645,11 +685,15 @@ Region.prototype.getOperationsStream =
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule[]} callback.rules - Rule objects from this
+ * @param {Rule[]} callback.rules - Rule objects from this
  *     region.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getRules(function(err, rules) {
  *   // `rules` is an array of `Rule` objects.
  * });
@@ -673,7 +717,7 @@ Region.prototype.getOperationsStream =
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.getRules().then(function(data) {
- *   var rules = data[0];
+ *   const rules = data[0];
  * });
  */
 Region.prototype.getRules = function(options, callback) {
@@ -686,42 +730,49 @@ Region.prototype.getRules = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/forwardingRules',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/forwardingRules',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var rules = (resp.items || []).map(function(rule) {
+        var ruleInstance = self.rule(rule.name);
+        ruleInstance.metadata = rule;
+        return ruleInstance;
       });
+
+      callback(null, rules, nextQuery, resp);
     }
-
-    var rules = (resp.items || []).map(function(rule) {
-      var ruleInstance = self.rule(rule.name);
-      ruleInstance.metadata = rule;
-      return ruleInstance;
-    });
-
-    callback(null, rules, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:compute/rule} objects in this region as a readable
+ * Get a list of {@link Rule} objects in this region as a readable
  * object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/region#getRulesStream} for a complete list of options.
- * @return {stream}
+ *     {@link Region#getRulesStream} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getRulesStream()
  *   .on('error', console.error)
  *   .on('data', function(rule) {
@@ -745,8 +796,8 @@ Region.prototype.getRulesStream = common.paginator.streamify('getRules');
 /**
  * Get a list of subnetworks in this region.
  *
- * @resource [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
- * @resource [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
+ * @see [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
+ * @see [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
  *
  * @param {object=} options - Subnetwork search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -764,11 +815,15 @@ Region.prototype.getRulesStream = common.paginator.streamify('getRules');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
+ * @param {Subnetwork[]} callback.subnetworks - Subnetwork
  *     objects from this region.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getSubnetworks(function(err, subnetworks) {
  *   // `subnetworks` is an array of `Subnetwork` objects.
  * });
@@ -792,7 +847,7 @@ Region.prototype.getRulesStream = common.paginator.streamify('getRules');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.getSubnetworks().then(function(data) {
- *   var subnetworks = data[0];
+ *   const subnetworks = data[0];
  * });
  */
 Region.prototype.getSubnetworks = function(options, callback) {
@@ -805,42 +860,49 @@ Region.prototype.getSubnetworks = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/subnetworks',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/subnetworks',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var subnetworks = (resp.items || []).map(function(subnetwork) {
+        var subnetworkInstance = self.subnetwork(subnetwork.name);
+        subnetworkInstance.metadata = subnetwork;
+        return subnetworkInstance;
       });
+
+      callback(null, subnetworks, nextQuery, resp);
     }
-
-    var subnetworks = (resp.items || []).map(function(subnetwork) {
-      var subnetworkInstance = self.subnetwork(subnetwork.name);
-      subnetworkInstance.metadata = subnetwork;
-      return subnetworkInstance;
-    });
-
-    callback(null, subnetworks, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:compute/subnetwork} objects in this region as a
+ * Get a list of {@link Subnetwork} objects in this region as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/region#getSubnetworks} for a complete list of options.
- * @return {stream}
+ *     {@link Region#getSubnetworks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
  * region.getSubnetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(subnetwork) {
@@ -859,19 +921,24 @@ Region.prototype.getSubnetworks = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getSubnetworksStream =
-  common.paginator.streamify('getSubnetworks');
+Region.prototype.getSubnetworksStream = common.paginator.streamify(
+  'getSubnetworks'
+);
 
 /**
  * Get a reference to a Google Compute Engine region operation.
  *
- * @resource [Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}
+ * @see [Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}
  *
  * @param {string} name - Name of the existing operation.
- * @return {module:compute/operation}
+ * @returns {Operation}
  *
  * @example
- * var operation = region.operation('operation-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
+ * const operation = region.operation('operation-name');
  */
 Region.prototype.operation = function(name) {
   return new Operation(this, name);
@@ -881,10 +948,14 @@ Region.prototype.operation = function(name) {
  * Get a reference to a Google Compute Engine forwarding rule in this region.
  *
  * @param {string} name - Name of the rule.
- * @return {module:compute/rule}
+ * @returns {Rule}
  *
  * @example
- * var rule = region.rule('rule-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
+ * const rule = region.rule('rule-name');
  */
 Region.prototype.rule = function(name) {
   return new Rule(this, name);
@@ -893,13 +964,17 @@ Region.prototype.rule = function(name) {
 /**
  * Get a reference to a Google Compute Engine subnetwork in this region.
  *
- * @resource [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
+ * @see [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
  *
  * @param {string} name - Name of the subnetwork.
- * @return {module:compute/subnetwork}
+ * @returns {Subnetwork}
  *
  * @example
- * var subnetwork = region.subnetwork('subnetwork-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const region = compute.region('us-central1');
+ *
+ * const subnetwork = region.subnetwork('subnetwork-name');
  */
 Region.prototype.subnetwork = function(name) {
   return new Subnetwork(this, name);
@@ -913,7 +988,7 @@ common.paginator.extend(Region, [
   'getAddresses',
   'getOperations',
   'getRules',
-  'getSubnetworks'
+  'getSubnetworks',
 ]);
 
 /*! Developer Documentation
@@ -922,12 +997,12 @@ common.paginator.extend(Region, [
  * that a callback is omitted.
  */
 common.util.promisifyAll(Region, {
-  exclude: [
-    'address',
-    'operation',
-    'rule',
-    'subnetwork'
-  ]
+  exclude: ['address', 'operation', 'rule', 'subnetwork'],
 });
 
+/**
+ * Reference to the {@link Region} class.
+ * @name module:@google-cloud/compute.Region
+ * @see Region
+ */
 module.exports = Region;

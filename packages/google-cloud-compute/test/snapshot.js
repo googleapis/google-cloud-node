@@ -29,7 +29,7 @@ var fakeUtil = extend({}, common.util, {
     if (Class.name === 'Snapshot') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -50,8 +50,8 @@ describe('Snapshot', function() {
     Snapshot = proxyquire('../src/snapshot.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -77,7 +77,7 @@ describe('Snapshot', function() {
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: true,
       });
     });
 
@@ -88,12 +88,12 @@ describe('Snapshot', function() {
     it('should allow creating for a Disk object snapshot', function(done) {
       var scope = {
         constructor: {
-          name: 'Disk'
+          name: 'Disk',
         },
         createSnapshot: function() {
           assert.strictEqual(this, scope);
           done();
-        }
+        },
       };
 
       var snapshot = new Snapshot(scope, SNAPSHOT_NAME);
@@ -118,7 +118,7 @@ describe('Snapshot', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -143,7 +143,7 @@ describe('Snapshot', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { name: 'operation-name' };
+      var apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {

@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/service
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -26,12 +22,6 @@ var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - The Compute instance this service inherits
- *     from.
- * @param {string} name - Name of the service.
- */
 /**
  * An HTTP(S) load balancing backend service is a centralized service for
  * managing backends, which in turn manage instances that handle user requests.
@@ -41,23 +31,32 @@ var util = require('util');
  * handling. In addition, the backend service monitors health checking and does
  * not send traffic to unhealthy instances.
  *
- * @resource [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
+ * @see [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
  *
- * @constructor
- * @alias module:compute/service
+ * @class
+ * @param {Compute} compute - The Compute instance this service inherits
+ *     from.
+ * @param {string} name - Name of the service.
  *
  * @example
- * var service = gce.service('service-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const service = const.service('service-name');
  */
 function Service(compute, name) {
   var methods = {
     /**
      * Create a backend service.
      *
-     * @param {object} config - See {module:compute#createService}.
+     * @method Service#create
+     * @param {object} config - See {@link Compute#createService}.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const service = const.service('service-name');
+     *
+     * const config = {
      *   backends: [
      *     {
      *       group: 'URL of an Instance Group resource'
@@ -79,9 +78,9 @@ function Service(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * service.create(config).then(function(data) {
-     *   var service = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const service = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -89,6 +88,7 @@ function Service(compute, name) {
     /**
      * Check if the backend service exists.
      *
+     * @method Service#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -96,13 +96,17 @@ function Service(compute, name) {
      *     not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const service = const.service('service-name');
+     *
      * service.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * service.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -115,11 +119,16 @@ function Service(compute, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Service#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const service = const.service('service-name');
+     *
      * service.get(function(err, service, apiResponse) {
      *   // `service` is a Service object.
      * });
@@ -128,8 +137,8 @@ function Service(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * service.get().then(function(data) {
-     *   var service = data[0];
-     *   var apiResponse = data[1];
+     *   const service = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -137,9 +146,10 @@ function Service(compute, name) {
     /**
      * Get the metadata of this backend service.
      *
-     * @resource [BackendService Resource]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices#resource}
-     * @resource [BackendService: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/get}
+     * @see [BackendService Resource]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices#resource}
+     * @see [BackendService: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/get}
      *
+     * @method Service#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -147,28 +157,45 @@ function Service(compute, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const service = const.service('service-name');
+     *
      * service.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * service.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/backendServices',
+    /**
+     * @name Service#id
+     * @type {string}
+     */
     id: name,
     createMethod: compute.createService.bind(compute),
-    methods: methods
+    methods: methods,
   });
 
+  /**
+   * The parent {@link Compute} instance of this {@link Service} instance.
+   * @name Service#compute
+   * @type {Compute}
+   */
   this.compute = compute;
+  /**
+   * @name Service#name
+   * @type {string}
+   */
   this.name = name;
 }
 
@@ -177,15 +204,19 @@ util.inherits(Service, common.ServiceObject);
 /**
  * Delete the backend service.
  *
- * @resource [BackendServices: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/delete}
+ * @see [BackendServices: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const service = const.service('service-name');
+ *
  * service.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -195,8 +226,8 @@ util.inherits(Service, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * service.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Service.prototype.delete = function(callback) {
@@ -220,12 +251,12 @@ Service.prototype.delete = function(callback) {
 /**
  * Get the most recent health check results.
  *
- * @resource [BackendServices: getHealth API Documentation]{@link https://cloud.google.com/compute/docs/reference/latest/backendServices/getHealth}
+ * @see [BackendServices: getHealth API Documentation]{@link https://cloud.google.com/compute/docs/reference/latest/backendServices/getHealth}
  *
  * @param {string|object} group - The fully-qualified URL of an Instance Group
  *     resource.
  * @param {string} group.name - The name of the Instance Group resource.
- * @param {module:compute/zone|string} group.zone - The name of the zone or a
+ * @param {Zone|string} group.zone - The name of the zone or a
  *     Zone object.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
@@ -234,7 +265,11 @@ Service.prototype.delete = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var group = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const service = const.service('service-name');
+ *
+ * const group = {
  *   name: 'instance-group-name',
  *   zone: 'us-central1-a'
  * };
@@ -256,8 +291,8 @@ Service.prototype.delete = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * service.getHealth(group).then(function(data) {
- *   var status = data[0];
- *   var apiResponse = data[1];
+ *   const status = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Service.prototype.getHealth = function(group, callback) {
@@ -266,41 +301,48 @@ Service.prototype.getHealth = function(group, callback) {
       baseUrl: 'https://www.googleapis.com/compute/v1',
       p: this.parent.projectId,
       z: group.zone.name || group.zone,
-      n: group.name
+      n: group.name,
     });
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/getHealth',
-    json: {
-      group: group
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/getHealth',
+      json: {
+        group: group,
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    callback(null, arrify(resp.healthStatus), resp);
-  });
+      callback(null, arrify(resp.healthStatus), resp);
+    }
+  );
 };
 
 /**
  * Set the backend service's metadata.
  *
- * @resource [BackendService Resource]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices#resource}
+ * @see [BackendService Resource]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices#resource}
  *
  * @param {object} metadata - See a
  *     [BackendService resource](https://cloud.google.com/compute/docs/reference/v1/backendServices#resource).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var metadata = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const service = const.service('service-name');
+ *
+ * const metadata = {
  *   description: 'New description'
  * };
  *
@@ -313,8 +355,8 @@ Service.prototype.getHealth = function(group, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * service.setMetadata(metadata).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Service.prototype.setMetadata = function(metadata, callback) {
@@ -322,21 +364,24 @@ Service.prototype.setMetadata = function(metadata, callback) {
 
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'PATCH',
-    uri: '',
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'PATCH',
+      uri: '',
+      json: metadata,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = compute.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation
@@ -346,4 +391,9 @@ Service.prototype.setMetadata = function(metadata, callback) {
  */
 common.util.promisifyAll(Service);
 
+/**
+ * Reference to the {@link Service} class.
+ * @name module:@google-cloud/compute.Service
+ * @see Service
+ */
 module.exports = Service;

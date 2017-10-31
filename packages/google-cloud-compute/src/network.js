@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/network
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -26,32 +22,35 @@ var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - The Compute module this network belongs to.
- * @param {string} name - Network name.
- */
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
  *
- * @resource [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [Network Resource]{@link https://cloud.google.com/compute/docs/reference/v1/networks}
+ * @see [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
+ * @see [Network Resource]{@link https://cloud.google.com/compute/docs/reference/v1/networks}
  *
- * @constructor
- * @alias module:compute/network
+ * @class
+ * @param {Compute} compute
+ * @param {strign} name
  *
  * @example
- * var network = gce.network('network-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
  */
 function Network(compute, name) {
   var methods = {
     /**
      * Create a network.
      *
-     * @param {object} config - See {module:compute#createNetwork}.
+     * @method Network#create
+     * @param {object} config - See {@link Compute#createNetwork}.
      *
      * @example
-     * var config = {
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const network = compute.network('network-name');
+     *
+     * const config = {
      *   // ...
      * };
      *
@@ -67,9 +66,9 @@ function Network(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * network.create(config).then(function(data) {
-     *   var network = data[0];
-     *   var operation = data[1];
-     *   var apiResponse = data[2];
+     *   const network = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
      * });
      */
     create: true,
@@ -77,19 +76,24 @@ function Network(compute, name) {
     /**
      * Check if the network exists.
      *
+     * @method Network#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the network exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const network = compute.network('network-name');
+     *
      * network.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * network.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -102,11 +106,16 @@ function Network(compute, name) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
+     * @method Network#get
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const network = compute.network('network-name');
+     *
      * network.get(function(err, network, apiResponse) {
      *   // `network` is a Network object.
      * });
@@ -115,8 +124,8 @@ function Network(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * network.get().then(function(data) {
-     *   var network = data[0];
-     *   var apiResponse = data[1];
+     *   const network = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -124,9 +133,10 @@ function Network(compute, name) {
     /**
      * Get the network's metadata.
      *
-     * @resource [Network Resource]{@link https://cloud.google.com/compute/docs/reference/v1/networks}
-     * @resource [Networks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/delete}
+     * @see [Network Resource]{@link https://cloud.google.com/compute/docs/reference/v1/networks}
+     * @see [Networks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/delete}
      *
+     * @method Network#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -134,29 +144,50 @@ function Network(compute, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const network = compute.network('network-name');
+     *
      * network.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * network.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/networks',
+    /**
+     * @name Network#id
+     * @type {string}
+     */
     id: name,
     createMethod: compute.createNetwork.bind(compute),
     methods: methods,
   });
 
+  /**
+   * The parent {@link Compute} instance of this {@link Network} instance.
+   * @name Network#compute
+   * @type {Compute}
+   */
   this.compute = compute;
+  /**
+   * @name Network#formattedName
+   * @type {string}
+   */
   this.formattedName = Network.formatName_(compute, name);
+  /**
+   * @name Network#name
+   * @type {string}
+   */
   this.name = name;
 }
 
@@ -167,22 +198,22 @@ util.inherits(Network, common.ServiceObject);
  *
  * @private
  *
- * @param {module:compute} compute - The Compute object this network belongs to.
+ * @param {Compute} compute - The Compute object this network belongs to.
  * @param {string} name - The name of the network.
- * @return {string} - The formatted name.
+ * @returns {string} - The formatted name.
  */
 Network.formatName_ = function(compute, name) {
   return format('projects/{projectId}/global/networks/{name}', {
     projectId: compute.projectId,
-    name: name
+    name: name,
   });
 };
 
 /**
  * Create a firewall for this network.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
- * @resource [Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}
  *
  * @param {string} name - Name of the firewall.
  * @param {object} config - See a
@@ -196,14 +227,18 @@ Network.formatName_ = function(compute, name) {
  *     format.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall} callback.firewall - The created Firewall
+ * @param {Firewall} callback.firewall - The created Firewall
  *     object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
+ * const config = {
  *   protocols: {
  *     tcp: [3000],
  *     udp: [] // An empty array means all ports are allowed.
@@ -225,14 +260,14 @@ Network.formatName_ = function(compute, name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * network.createFirewall('new-firewall-name', config).then(function(data) {
- *   var firewall = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const firewall = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Network.prototype.createFirewall = function(name, config, callback) {
   config = extend({}, config, {
-    network: this.formattedName
+    network: this.formattedName,
   });
 
   this.compute.createFirewall(name, config, callback);
@@ -241,13 +276,13 @@ Network.prototype.createFirewall = function(name, config, callback) {
 /**
  * Create a subnetwork in this network.
  *
- * @resource [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource}
- * @resource [Subnetwork: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/insert}
+ * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource}
+ * @see [Subnetwork: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/insert}
  *
  * @param {string} name - Name of the subnetwork.
  * @param {object} config - See a
  *     [Subnetwork resource](https://cloud.google.com/compute/docs/reference/v1/subnetworks#resource).
- * @param {module:compute/region|string} config.region - The region where the
+ * @param {Region|string} config.region - The region where the
  *    Subnetwork resides.
  * @param {string} config.range - The range of internal addresses that
  *    are owned by this subnetwork.
@@ -256,16 +291,19 @@ Network.prototype.createFirewall = function(name, config, callback) {
  *    `config.ipCidrRange`)
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork} callback.subnetwork - The created
+ * @param {Subnetwork} callback.subnetwork - The created
  *     Subnetwork object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var region = gce.region('us-east1');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ * const region = compute.region('us-east1');
  *
- * var config = {
+ * const config = {
  *   region: region,
  *   range: '10.0.1.0/24'
  * };
@@ -283,14 +321,14 @@ Network.prototype.createFirewall = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * network.createSubnetwork('new-subnetwork-name', config).then(function(data) {
- *   var subnetwork = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const subnetwork = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Network.prototype.createSubnetwork = function(name, config, callback) {
   config = extend({}, config, {
-    network: this.formattedName
+    network: this.formattedName,
   });
 
   var region = config.region;
@@ -307,8 +345,8 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
 /**
  * Get a list of subnetworks in this network.
  *
- * @resource [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
- * @resource [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
+ * @see [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
+ * @see [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
  *
  * @param {object=} options - Subnetwork search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -326,11 +364,15 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
+ * @param {Subnetwork[]} callback.subnetworks - Subnetwork
  *     objects from this network.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
  * network.getSubnetworks(function(err, subnetworks) {
  *   // `subnetworks` is an array of `Subnetworks` objects.
  * });
@@ -354,7 +396,7 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * network.getSubnetworks().then(function(data) {
- *   var subnetworks = data[0];
+ *   const subnetworks = data[0];
  * });
  */
 Network.prototype.getSubnetworks = function(options, callback) {
@@ -364,21 +406,25 @@ Network.prototype.getSubnetworks = function(options, callback) {
   }
 
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   this.compute.getSubnetworks(options, callback);
 };
 
 /**
- * Get a {module:compute/subnetwork} list within this network as a readable
+ * Get a {@link Subnetwork} list within this network as a readable
  * object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/network#getSubnetworks} for a complete list of options.
- * @return {stream}
+ *     {@link Network#getSubnetworks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
  * network.getSubnetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(subnetwork) {
@@ -399,7 +445,7 @@ Network.prototype.getSubnetworks = function(options, callback) {
  */
 Network.prototype.getSubnetworksStream = function(options) {
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   return this.compute.getSubnetworksStream(options);
@@ -408,15 +454,19 @@ Network.prototype.getSubnetworksStream = function(options) {
 /**
  * Delete the network.
  *
- * @resource [Networks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/delete}
+ * @see [Networks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
  * network.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
@@ -426,8 +476,8 @@ Network.prototype.getSubnetworksStream = function(options) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * network.delete().then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Network.prototype.delete = function(callback) {
@@ -451,18 +501,21 @@ Network.prototype.delete = function(callback) {
 /**
  * Get a reference to a Google Compute Engine firewall in this network.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
  *
  * @param {string} name - Name of the firewall.
  *
  * @example
- * var firewall = network.firewall('firewall-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ * const firewall = network.firewall('firewall-name');
  */
 Network.prototype.firewall = function(name) {
   var firewall = this.compute.firewall(name);
 
   firewall.metadata = {
-    network: this.formattedName
+    network: this.formattedName,
   };
 
   return firewall;
@@ -471,8 +524,8 @@ Network.prototype.firewall = function(name) {
 /**
  * Get a list of firewalls for this network.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
- * @resource [Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list}
  *
  * @param {object=} options - Firewall search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -483,11 +536,15 @@ Network.prototype.firewall = function(name) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall[]} callback.firewalls - Firewall objects from
+ * @param {Firewall[]} callback.firewalls - Firewall objects from
  *     this network.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
  * network.getFirewalls(function(err, firewalls) {
  *   // `firewalls` is an array of `Firewall` objects.
  * });
@@ -511,7 +568,7 @@ Network.prototype.firewall = function(name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * network.getFirewalls().then(function(data) {
- *   var firewalls = data[0];
+ *   const firewalls = data[0];
  * });
  */
 Network.prototype.getFirewalls = function(options, callback) {
@@ -521,21 +578,25 @@ Network.prototype.getFirewalls = function(options, callback) {
   }
 
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   this.compute.getFirewalls(options, callback);
 };
 
 /**
- * Get a list of {module:compute/firewall} objects for this network as a
+ * Get a list of {@link Firewall} objects for this network as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/network#getFirewalls} for a complete list of options.
- * @return {stream}
+ *     {@link Network#getFirewalls} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const network = compute.network('network-name');
+ *
  * network.getFirewallsStream()
  *   .on('error', console.error)
  *   .on('data', function(firewall) {
@@ -556,7 +617,7 @@ Network.prototype.getFirewalls = function(options, callback) {
  */
 Network.prototype.getFirewallsStream = function(options) {
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   return this.compute.getFirewallsStream(options);
@@ -568,7 +629,12 @@ Network.prototype.getFirewallsStream = function(options) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Network, {
-  exclude: ['firewall']
+  exclude: ['firewall'],
 });
 
+/**
+ * Reference to the {@link Network} class.
+ * @name module:@google-cloud/compute.Network
+ * @see Network
+ */
 module.exports = Network;
