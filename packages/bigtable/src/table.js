@@ -26,6 +26,7 @@ var commonGrpc = require('@google-cloud/common-grpc');
 var concat = require('concat-stream');
 var flatten = require('lodash.flatten');
 var is = require('is');
+var isStreamEnded = require('is-stream-ended');
 var propAssign = require('prop-assign');
 var pumpify = require('pumpify');
 var through = require('through2');
@@ -494,24 +495,27 @@ Table.prototype.createReadStream = function(options) {
     reqOpts.rowsLimit = options.limit;
   }
 
-  return pumpify.obj([
+  var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
+
     through.obj(function(data, enc, next) {
-      var throughStream = this;
-      var rows = Row.formatChunks_(data.chunks, {
-        decode: options.decode
-      });
+      var transformStream = this;
 
-      rows.forEach(function(rowData) {
-        var row = self.row(rowData.key);
+      Row.formatChunks_(data.chunks, { decode: options.decode })
+        .forEach(function(rowData) {
+          var row = self.row(rowData.key);
+          row.data = rowData.data;
 
-        row.data = rowData.data;
-        throughStream.push(row);
-      });
+          if (!isStreamEnded(stream)) {
+            transformStream.push(row);
+          }
+        });
 
       next();
     })
   ]);
+
+  return stream;
 };
 
 /**
