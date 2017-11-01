@@ -806,7 +806,9 @@ describe('common/util', function() {
             customEndpoint: true
           });
 
-          makeAuthenticatedRequest({});
+          makeAuthenticatedRequest({
+            onAuthenticated: assert.ifError
+          });
         });
 
         it('should use user-provided projectId', function(done) {
@@ -826,7 +828,9 @@ describe('common/util', function() {
             config
           );
 
-          makeAuthenticatedRequest({});
+          makeAuthenticatedRequest({
+            onAuthenticated: assert.ifError
+          });
         });
       });
 
