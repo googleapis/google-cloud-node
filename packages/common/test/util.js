@@ -799,14 +799,14 @@ describe('common/util', function() {
 
           utilOverrides.decorateRequest = function(reqOpts, projectId) {
             assert.strictEqual(projectId, authClient.projectId);
-            done();
+            setImmediate(done);
           };
 
           var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
             customEndpoint: true
           });
 
-          makeAuthenticatedRequest({
+          makeAuthenticatedRequest({}, {
             onAuthenticated: assert.ifError
           });
         });
@@ -821,14 +821,14 @@ describe('common/util', function() {
 
           utilOverrides.decorateRequest = function(reqOpts, projectId) {
             assert.strictEqual(projectId, config.projectId);
-            done();
+            setImmediate(done);
           };
 
           var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
             config
           );
 
-          makeAuthenticatedRequest({
+          makeAuthenticatedRequest({}, {
             onAuthenticated: assert.ifError
           });
         });
