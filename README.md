@@ -30,7 +30,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
+* [Cloud Bigtable](https://github.com/googleapis/nodejs-bigtable) (Alpha)
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
