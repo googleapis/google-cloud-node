@@ -143,7 +143,6 @@ class RequestHandler extends common.Service {
    * @instance
    */
   sendError(errorMessage, userCb) {
-    var self = this;
     var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
     if (this._config.getShouldReportErrorsToAPI()) {
       this.request({
