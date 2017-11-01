@@ -26,30 +26,14 @@ type Stack = Array<number>;
  * A function which converts entry into one or more samples, then
  * appends those sample(s) to samples.
  */
-type AppendEntryToSamples =
-    (entry: Entry, samples: perftools.profiles.Sample[]) => void;
+type AppendEntryToSamples<T extends ProfileNode> =
+    (entry: Entry<T>, samples: perftools.profiles.Sample[]) => void;
 
 /**
  * Profile node and stack trace to that node.
  */
-interface Entry {
-  node: ProfileNode;
-  stack: Stack;
-}
-
-/**
- * Heap profile node and stack trace to that node.
- */
-interface AllocationEntry {
-  node: AllocationProfileNode;
-  stack: Stack;
-}
-
-/**
- * Time profile node and stack trace to that node.
- */
-interface TimeEntry {
-  node: TimeProfileNode;
+interface Entry<T extends ProfileNode> {
+  node: T;
   stack: Stack;
 }
 
@@ -94,9 +78,9 @@ class StringTable {
  * appends these to end of an array of samples.
  * @param stringTable - string table for the existing profile.
  */
-function serialize(
-    profile: perftools.profiles.IProfile, root: ProfileNode,
-    appendToSamples: AppendEntryToSamples, stringTable: StringTable) {
+function serialize<T extends ProfileNode>(
+    profile: perftools.profiles.IProfile, root: T,
+    appendToSamples: AppendEntryToSamples<T>, stringTable: StringTable) {
   const samples: Array<perftools.profiles.Sample> = [];
   const locations: Array<perftools.profiles.Location> = [];
   const functions: Array<perftools.profiles.Function> = [];
@@ -105,7 +89,8 @@ function serialize(
   const functionIdMap = new Map<string, number>();
   const locationIdMap = new Map<string, number>();
 
-  const entries: Entry[] = root.children.map((n) => ({node: n, stack: []}));
+  const entries: Entry<T>[] =
+      (root.children as Array<T>).map((n: T) => ({node: n, stack: []}));
   while (entries.length > 0) {
     const entry = entries.pop()!;
     const node = entry.node;
@@ -113,7 +98,7 @@ function serialize(
     const location = getLocation(node);
     stack.unshift(location.id as number);
     appendToSamples(entry, samples);
-    for (let child of node.children) {
+    for (let child of node.children as Array<T>) {
       entries.push({node: child, stack: stack.slice()});
     }
   }
@@ -209,8 +194,8 @@ function createAllocationValueType(table: StringTable):
  */
 export function serializeTimeProfile(
     prof: TimeProfile, intervalMicros: number): perftools.profiles.IProfile {
-  const appendTimeEntryToSamples: AppendEntryToSamples =
-      (entry: TimeEntry, samples: perftools.profiles.Sample[]) => {
+  const appendTimeEntryToSamples: AppendEntryToSamples<TimeProfileNode> =
+      (entry: Entry<TimeProfileNode>, samples: perftools.profiles.Sample[]) => {
         if (entry.node.hitCount > 0) {
           const sample = new perftools.profiles.Sample({
             locationId: entry.stack,
@@ -251,8 +236,9 @@ export function serializeTimeProfile(
 export function serializeHeapProfile(
     prof: AllocationProfileNode, startTimeNanos: number, durationNanos: number,
     intervalBytes: number): perftools.profiles.IProfile {
-  const appendHeapEntryToSamples: AppendEntryToSamples =
-      (entry: AllocationEntry, samples: perftools.profiles.Sample[]) => {
+  const appendHeapEntryToSamples: AppendEntryToSamples<AllocationProfileNode> =
+      (entry: Entry<AllocationProfileNode>,
+       samples: perftools.profiles.Sample[]) => {
         if (entry.node.allocations.length > 0) {
           for (const alloc of entry.node.allocations) {
             const sample = new perftools.profiles.Sample({
