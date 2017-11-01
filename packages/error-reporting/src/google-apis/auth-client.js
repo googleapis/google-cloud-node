@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*jshint unused:false*/
+/* jshint unused:false */
 
 'use strict';
 const common = require('@google-cloud/common');
