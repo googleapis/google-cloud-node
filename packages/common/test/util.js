@@ -709,7 +709,7 @@ describe('common/util', function() {
       var config = {
         customEndpoint: true
       };
-      var expectedConfig = extend({ projectId: authClient.projectId }, config);
+      var expectedProjectId = authClient.projectId;
 
       beforeEach(function() {
         makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
@@ -719,9 +719,9 @@ describe('common/util', function() {
         var reqOpts = { a: 'b', c: 'd' };
         var decoratedRequest = {};
 
-        utilOverrides.decorateRequest = function(reqOpts_, config_) {
+        utilOverrides.decorateRequest = function(reqOpts_, projectId) {
           assert.strictEqual(reqOpts_, reqOpts);
-          assert.deepEqual(config_, expectedConfig);
+          assert.deepEqual(projectId, expectedProjectId);
           return decoratedRequest;
         };
 
@@ -793,6 +793,43 @@ describe('common/util', function() {
         assert(makeAuthenticatedRequest({}) instanceof stream.Stream);
       });
 
+      describe('projectId', function() {
+        it('should default to authClient projectId', function(done) {
+          authClient.projectId = 'authclient-project-id';
+
+          utilOverrides.decorateRequest = function(reqOpts, projectId) {
+            assert.strictEqual(projectId, authClient.projectId);
+            done();
+          };
+
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
+            customEndpoint: true
+          });
+
+          makeAuthenticatedRequest({});
+        });
+
+        it('should use user-provided projectId', function(done) {
+          authClient.projectId = 'authclient-project-id';
+
+          var config = {
+            customEndpoint: true,
+            projectId: 'project-id'
+          };
+
+          utilOverrides.decorateRequest = function(reqOpts, projectId) {
+            assert.strictEqual(projectId, config.projectId);
+            done();
+          };
+
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
+            config
+          );
+
+          makeAuthenticatedRequest({});
+        });
+      });
+
       describe('authentication errors', function() {
         var error = new Error('Error.');
 
@@ -802,6 +839,45 @@ describe('common/util', function() {
               callback(error);
             });
           };
+        });
+
+        it('should attempt request anyway', function(done) {
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+
+          var correctReqOpts = {};
+          var incorrectReqOpts = {};
+
+          authClient.authorizeRequest = function(rOpts, callback) {
+            var error = new Error('Could not load the default credentials');
+            callback(error, incorrectReqOpts);
+          };
+
+          makeAuthenticatedRequest(correctReqOpts, {
+            onAuthenticated: function(err, reqOpts) {
+              assert.ifError(err);
+
+              assert.strictEqual(reqOpts, correctReqOpts);
+              assert.notStrictEqual(reqOpts, incorrectReqOpts);
+
+              done();
+            }
+          });
+        });
+
+        it('should block decorateRequest error', function(done) {
+          var decorateRequestError = new Error('Error.');
+          utilOverrides.decorateRequest = function(reqOpts_) {
+            throw decorateRequestError;
+          };
+
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest({}, {
+            onAuthenticated: function(err) {
+              assert.notStrictEqual(err, decorateRequestError);
+              assert.strictEqual(err, error);
+              done();
+            }
+          });
         });
 
         it('should invoke the callback with error', function(done) {
@@ -1281,64 +1357,58 @@ describe('common/util', function() {
     });
 
     it('should replace project ID tokens for qs object', function() {
-      var config = {
-        projectId: 'project-id'
-      };
+      var projectId = 'project-id';
       var reqOpts = {
         uri: 'http://',
         qs: {}
       };
       var decoratedQs = {};
 
-      utilOverrides.replaceProjectIdToken = function(qs, projectId) {
+      utilOverrides.replaceProjectIdToken = function(qs, projectId_) {
         utilOverrides = {};
         assert.strictEqual(qs, reqOpts.qs);
-        assert.strictEqual(projectId, config.projectId);
+        assert.strictEqual(projectId_, projectId);
         return decoratedQs;
       };
 
-      var decoratedRequest = util.decorateRequest(reqOpts, config);
+      var decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.strictEqual(decoratedRequest.qs, decoratedQs);
     });
 
     it('should replace project ID tokens for json object', function() {
-      var config = {
-        projectId: 'project-id'
-      };
+      var projectId = 'project-id';
       var reqOpts = {
         uri: 'http://',
         json: {}
       };
       var decoratedJson = {};
 
-      utilOverrides.replaceProjectIdToken = function(json, projectId) {
+      utilOverrides.replaceProjectIdToken = function(json, projectId_) {
         utilOverrides = {};
         assert.strictEqual(reqOpts.json, json);
-        assert.strictEqual(projectId, config.projectId);
+        assert.strictEqual(projectId_, projectId);
         return decoratedJson;
       };
 
-      var decoratedRequest = util.decorateRequest(reqOpts, config);
+      var decoratedRequest = util.decorateRequest(reqOpts, projectId);
       assert.strictEqual(decoratedRequest.json, decoratedJson);
     });
 
     it('should decorate the request', function() {
-      var config = {
-        projectId: 'project-id'
-      };
+      var projectId = 'project-id';
       var reqOpts = {
         uri: 'http://'
       };
       var decoratedUri = 'http://decorated';
 
-      utilOverrides.replaceProjectIdToken = function(uri, projectId) {
+      utilOverrides.replaceProjectIdToken = function(uri, projectId_) {
         assert.strictEqual(uri, reqOpts.uri);
-        assert.strictEqual(projectId, config.projectId);
+        assert.strictEqual(projectId_, projectId);
         return decoratedUri;
       };
 
       assert.deepEqual(
-        util.decorateRequest(reqOpts, config),
+        util.decorateRequest(reqOpts, projectId),
         { uri: decoratedUri }
       );
     });

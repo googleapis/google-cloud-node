@@ -346,14 +346,33 @@ function makeAuthenticatedRequestFactory(config) {
     }
 
     function onAuthenticated(err, authenticatedReqOpts) {
-      if (!err) {
+      var autoAuthFailed =
+        err &&
+        err.message.indexOf('Could not load the default credentials') > -1;
+
+      if (autoAuthFailed) {
+        // Even though authentication failed, the API might not actually care.
+        authenticatedReqOpts = reqOpts;
+      }
+
+      if (!err || autoAuthFailed) {
+        var projectId = authClient.projectId;
+
+        if (config.projectId && config.projectId !== '{{projectId}}') {
+          projectId = config.projectId;
+        }
+
         try {
           authenticatedReqOpts = util.decorateRequest(
             authenticatedReqOpts,
-            extend({ projectId: authClient.projectId }, config)
+            projectId
           );
+          err = null;
         } catch(e) {
-          err = e;
+          // A projectId was required, but we don't have one.
+          // Re-use the "Could not load the default credentials error" if auto
+          // auth failed.
+          err = err || e;
         }
       }
 
@@ -473,12 +492,10 @@ util.makeRequest = makeRequest;
  * Decorate the options about to be made in a request.
  *
  * @param {object} reqOpts - The options to be passed to `request`.
- * @param {object} config - Service config.
+ * @param {string} projectId - The project ID.
  * @return {object} reqOpts - The decorated reqOpts.
  */
-function decorateRequest(reqOpts, config) {
-  config = config || {};
-
+function decorateRequest(reqOpts, projectId) {
   delete reqOpts.autoPaginate;
   delete reqOpts.autoPaginateVal;
   delete reqOpts.objectMode;
@@ -486,16 +503,16 @@ function decorateRequest(reqOpts, config) {
   if (is.object(reqOpts.qs)) {
     delete reqOpts.qs.autoPaginate;
     delete reqOpts.qs.autoPaginateVal;
-    reqOpts.qs = util.replaceProjectIdToken(reqOpts.qs, config.projectId);
+    reqOpts.qs = util.replaceProjectIdToken(reqOpts.qs, projectId);
   }
 
   if (is.object(reqOpts.json)) {
     delete reqOpts.json.autoPaginate;
     delete reqOpts.json.autoPaginateVal;
-    reqOpts.json = util.replaceProjectIdToken(reqOpts.json, config.projectId);
+    reqOpts.json = util.replaceProjectIdToken(reqOpts.json, projectId);
   }
 
-  reqOpts.uri = util.replaceProjectIdToken(reqOpts.uri, config.projectId);
+  reqOpts.uri = util.replaceProjectIdToken(reqOpts.uri, projectId);
 
   return reqOpts;
 }
@@ -528,7 +545,7 @@ function replaceProjectIdToken(value, projectId) {
   }
 
   if (is.string(value) && value.indexOf('{{projectId}}') > -1) {
-    if (!projectId) {
+    if (!projectId || projectId === '{{projectId}}') {
       throw util.missingProjectIdError;
     }
     value = value.replace(/{{projectId}}/g, projectId);
