@@ -866,7 +866,7 @@ describe('common/util', function() {
 
         it('should block decorateRequest error', function(done) {
           var decorateRequestError = new Error('Error.');
-          utilOverrides.decorateRequest = function(reqOpts_) {
+          utilOverrides.decorateRequest = function() {
             throw decorateRequestError;
           };
 
