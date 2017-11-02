@@ -15,30 +15,15 @@
 
 'use strict';
 
-// [START logging_winston_quickstart]
-const winston = require('winston');
-const Logger = winston.Logger;
-const Console = winston.transports.Console;
-
+/* eslint-disable no-unused-vars */
+// [START logging_winston_setup_explicit]
 // Imports the Google Cloud client library for Winston
 const LoggingWinston = require('@google-cloud/logging-winston');
 
-// Creates a Winston Stackdriver Logging client
-const loggingWinston = new LoggingWinston();
-
-// Create a Winston logger that streams to Stackdriver Logging
-// Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
-const logger = new Logger({
-  level: 'info', // log at 'info' and above
-  transports: [
-    // Log to the console
-    new Console(),
-    // And log to Stackdriver Logging
-    loggingWinston,
-  ],
+// Creates a client
+const loggingWinston = new LoggingWinston({
+  projectId: 'your-project-id',
+  keyFilename: '/path/to/key.json',
 });
-
-// Writes some log entries
-logger.error('warp nacelles offline');
-logger.info('shields at 99%');
-// [END logging_winston_quickstart]
+// [END logging_winston_setup_explicit]
+/* eslint-enable no-unused-vars */

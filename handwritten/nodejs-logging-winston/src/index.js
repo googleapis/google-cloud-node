@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-/*!
- * @module logging-winston
- */
-
 'use strict';
 
 var extend = require('extend');
 var is = require('is');
-var logging = require('@google-cloud/logging');
+var Logging = require('@google-cloud/logging');
 var mapValues = require('lodash.mapvalues');
 var util = require('util');
 var winston = require('winston');
@@ -39,7 +35,7 @@ var NPM_LEVEL_NAME_TO_CODE = {
   info: 6,
   verbose: 7,
   debug: 7,
-  silly: 7
+  silly: 7,
 };
 
 /**
@@ -56,10 +52,10 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
   4: 'warning',
   5: 'notice',
   6: 'info',
-  7: 'debug'
+  7: 'debug',
 };
 
-/**
+/*!
  * Log entry data key to allow users to indicate a trace for the request.
  */
 var LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
@@ -68,71 +64,94 @@ var LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
  * This module provides support for streaming your winston logs to
  * [Stackdriver Logging](https://cloud.google.com/logging).
  *
- * @constructor
- * @alias module:logging-winston
+ * @class
  *
- * @param {object} options - [Configuration object](#/docs). Refer to this link
- *     for authentication information.
- * @param {object=} options.level - The default log level. Winston will filter
+ * @param {object} [options]
+ * @param {object} [options.level] The default log level. Winston will filter
  *     messages with a severity lower than this.
- * @param {object=} options.levels - Custom logging levels as supported by
+ * @param {object} [options.levels] Custom logging levels as supported by
  *     winston. This list is used to translate your log level to the Stackdriver
  *     Logging level. Each property should have an integer value between 0 (most
  *     severe) and 7 (least severe). If you are passing a list of levels to your
  *     winston logger, you should provide the same list here.
- * @param {boolean=} options.inspectMetadata - Serialize winston-provided log
- *     metadata using `util.inspect`. Default: false
- * @param {string=} options.logName - The name of the log that will receive
- *     messages written to this transport. Default: `winston_log`
- * @param {object=} options.resource - The monitored resource that the transport
+ * @param {boolean} [options.inspectMetadata=false] Serialize winston-provided log
+ *     metadata using `util.inspect`.
+ * @param {string} [options.logName=winston_log] The name of the log that will receive
+ *     messages written to this transport.
+ * @param {object} [options.resource] The monitored resource that the transport
  *     corresponds to. On Google Cloud Platform, this is detected automatically,
  *     but you may optionally specify a specific monitored resource. For more
  *     information see the
  *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
- * @param {object=} options.serviceContext - For logged errors, we provide this
+ * @param {object} [options.serviceContext] For logged errors, we provide this
  *     as the service context. For more information see
  *     [this guide]{@link https://cloud.google.com/error-reporting/docs/formatting-error-messages}
  *     and the [official documentation]{@link https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
- * @param {string} options.serviceContext.service - An identifier of the
+ * @param {string} [options.serviceContext.service] An identifier of the
  *     service, such as the name of the executable, job, or Google App Engine
  *     service name.
- * @param {string=} options.serviceContext.version - Represents the version of
+ * @param {string} [options.serviceContext.version] Represents the version of
  *     the service.
+ * @param {string} [options.projectId] The project ID from the Google Cloud
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+ *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
+ *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @param {string} [options.keyFilename] Full path to the a .json, .pem, or .p12
+ *     key downloaded from the Google Cloud Console. If you provide a path
+ *     to a JSON file, the `projectId` option above is not necessary. NOTE: .pem
+ *     and .p12 require you to specify the `email` option as well.
+ * @param {string} [options.email] Account email address. Required when using a
+ *     .pem or .p12 keyFilename.
+ * @param {object} [options.credentials] Credentials object.
+ * @param {string} [options.credentials.client_email]
+ * @param {string} [options.credentials.private_key]
+ * @param {boolean} [options.autoRetry=true] Automatically retry requests if the
+ *     response is related to rate limits or certain intermittent server errors.
+ *     We will exponentially backoff subsequent requests by default.
+ * @param {number} [options.maxRetries=3] Maximum number of automatic retries
+ *     attempted before returning the error.
+ * @param {constructor} [options.promise] Custom promise module to use instead
+ *     of native Promises.
  *
- * @example
- * var transport = require('@google-cloud/logging-winston');
- * var winston = require('winston');
+ * @example <caption>Import the client library</caption>
+ * const LoggingWinston = require('@google-cloud/logging-winston');
  *
- * winston.add(transport, {
- *   projectId: 'grape-spaceship-123',
- *   keyFilename: '/path/to/keyfile.json',
- *   level: 'warning', // log at 'warning' and above
- *   resource: {
- *     type: 'global'
- *   }
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const loggingWinston = new LoggingWinston();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const loggingWinston = new LoggingWinston({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
  * });
  *
- * winston.emerg('antimatter containment field collapse imminent');
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:logging_winston_quickstart
+ * Full quickstart example:
  */
 function LoggingWinston(options) {
   if (!(this instanceof LoggingWinston)) {
     return new LoggingWinston(options);
   }
 
-  options = extend({
-    scopes: ['https://www.googleapis.com/auth/logging.write']
-  }, options);
+  options = extend(
+    {
+      scopes: ['https://www.googleapis.com/auth/logging.write'],
+    },
+    options
+  );
 
   var logName = options.logName || 'winston_log';
 
   winston.Transport.call(this, {
     level: options.level,
-    name: logName
+    name: logName,
   });
 
   this.inspectMetadata_ = options.inspectMetadata === true;
   this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
-  this.log_ = logging(options).log(logName);
+  this.log_ = new Logging(options).log(logName);
   this.resource_ = options.resource;
   this.serviceContext_ = options.serviceContext;
 }
@@ -140,7 +159,7 @@ function LoggingWinston(options) {
 winston.transports.StackdriverLogging = LoggingWinston;
 util.inherits(LoggingWinston, winston.Transport);
 
-/**
+/*!
  * Gets the current fully qualified trace ID when available from the
  * @google-cloud/trace-agent library in the LogEntry.trace field format of:
  * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
@@ -171,13 +190,13 @@ function getCurrentTraceFromAgent() {
  *     logged. This should match one of the levels provided to the constructor
  *     which defaults to npm levels. This level will be translated to the
  *     appropriate Stackdriver logging severity level.
- * @param {string} msg - The message to be logged.
- * @param {object=} metadata - Winston-provided metadata that should be attached
+ * @param {string} msg The message to be logged.
+ * @param {object} [metadata] Winston-provided metadata that should be attached
  *     to the log entry. If a `httpRequest` property is set, it will be treated
  *     as a [HttpRequest]{@link https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest}
  *     request log message. If `options.inspectMetadata` is set, we will convert
  *     the remaining properties to `string`s before reporting.
- * @param {function=} callback - A callback that is invoked when the logging
+ * @param {function} callback A callback that is invoked when the logging
  *     agent either succeeds or gives up writing the log entry to the remote
  *     server.
  */
@@ -195,7 +214,7 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
   var entryMetadata = {
-    resource: this.resource_
+    resource: this.resource_,
   };
 
   var data = {};
@@ -220,8 +239,9 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   data.message = msg;
 
   if (is.object(metadata)) {
-    data.metadata =
-      this.inspectMetadata_ ? mapValues(metadata, util.inspect) : metadata;
+    data.metadata = this.inspectMetadata_
+      ? mapValues(metadata, util.inspect)
+      : metadata;
 
     // If the metadata contains a httpRequest property, promote it to the entry
     // metadata. This allows Stackdriver to use request log formatting.
@@ -249,6 +269,40 @@ LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
   this.log_[stackdriverLevel](entry, callback);
 };
 
+/**
+ * Value: `logging.googleapis.com/trace`
+ *
+ * @name LoggingWinston.LOGGING_TRACE_KEY
+ * @type {string}
+ */
 LoggingWinston.LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
 
+/**
+ * The default export of the `@google-cloud/logging-winston` package is the
+ * {@link LoggingWinston} class.
+ *
+ * See {@link LoggingWinston} for client methods and configuration options.
+ *
+ * @module {constructor} @google-cloud/logging-winston
+ * @alias nodejs-logging-winston
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/logging-winston
+ *
+ * @example <caption>Import the client library</caption>
+ * const LoggingWinston = require('@google-cloud/logging-winston');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const loggingWinston = new LoggingWinston();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const loggingWinston = new LoggingWinston({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:logging_winston_quickstart
+ * Full quickstart example:
+ */
 module.exports = LoggingWinston;

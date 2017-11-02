@@ -15,61 +15,16 @@
 
 'use strict';
 
-const proxyquire = require(`proxyquire`).noPreserveCache();
-const sinon = require(`sinon`);
+const path = require(`path`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
 
-const logging = proxyquire(`@google-cloud/logging`, {})();
+test.before(tools.checkCredentials);
 
-const logName = `nodejs-docs-samples-test-${uuid.v4()}`;
-
-test.after.always(async () => {
-  try {
-    await logging.log(logName).delete();
-  } catch (err) {} // ignore error
-});
-
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
-
-test.cb(`should log an entry`, (t) => {
-  const expectedlogName = `my-log`;
-
-  const logMock = {
-    entry: sinon.stub().returns({}),
-    write: (_entry) => {
-      t.deepEqual(_entry, {});
-
-      const log = logging.log(logName);
-      const text = `Hello, world!`;
-      const entry = log.entry({ resource: { type: `global` } }, text);
-
-      return log.write(entry)
-        .then((results) => {
-          setTimeout(() => {
-            try {
-              t.true(console.log.calledOnce);
-              t.deepEqual(console.log.firstCall.args, [`Logged: ${text}`]);
-              t.end();
-            } catch (err) {
-              t.end(err);
-            }
-          }, 200);
-
-          return results;
-        });
-    }
-  };
-  const loggingMock = {
-    log: (_logName) => {
-      t.is(_logName, expectedlogName);
-      return logMock;
-    }
-  };
-
-  proxyquire(`../quickstart`, {
-    '@google-cloud/logging': sinon.stub().returns(loggingMock)
-  });
+test.serial(`should write using winston`, async t => {
+  const output = await tools.runAsync(
+    `node quickstart.js`,
+    path.join(__dirname, `..`)
+  );
+  t.is(output.includes('99%'), true);
 });

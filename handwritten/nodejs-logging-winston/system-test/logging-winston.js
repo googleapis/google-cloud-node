@@ -19,18 +19,14 @@
 var assert = require('assert');
 var winston = require('winston');
 
-var env = require('../../../system-test/env.js');
-
-var logging = require('@google-cloud/logging')(env);
+var logging = require('@google-cloud/logging')();
 var LoggingWinston = require('../');
 
 describe('LoggingWinston', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 90000;
 
   var logger = new winston.Logger({
-    transports: [
-      new LoggingWinston(env)
-    ]
+    transports: [new LoggingWinston()],
   });
 
   describe('log', function() {
@@ -43,9 +39,9 @@ describe('LoggingWinston', function() {
         verify: function(entry) {
           assert.deepStrictEqual(entry.data, {
             message: 'first',
-            metadata: {}
+            metadata: {},
           });
-        }
+        },
       },
 
       {
@@ -54,9 +50,9 @@ describe('LoggingWinston', function() {
         verify: function(entry) {
           assert.deepStrictEqual(entry.data, {
             message: 'second',
-            metadata: {}
+            metadata: {},
           });
-        }
+        },
       },
 
       {
@@ -66,10 +62,10 @@ describe('LoggingWinston', function() {
           assert.deepStrictEqual(entry.data, {
             message: 'third',
             metadata: {
-              testTimestamp: String(testTimestamp)
-            }
+              testTimestamp: String(testTimestamp),
+            },
           });
-        }
+        },
       },
 
       {
@@ -77,7 +73,7 @@ describe('LoggingWinston', function() {
         level: 'error',
         verify: function(entry) {
           assert(entry.data.message.startsWith('Error: forth'));
-        }
+        },
       },
 
       {
@@ -85,7 +81,7 @@ describe('LoggingWinston', function() {
         level: 'error',
         verify: function(entry) {
           assert(entry.data.message.startsWith('fifth message Error: fifth'));
-        }
+        },
       },
     ];
 
@@ -96,18 +92,17 @@ describe('LoggingWinston', function() {
 
       setTimeout(function() {
         logging.log('winston_log').getEntries({
-          pageSize: testData.length
-        }, function(err, entries) {
+          pageSize: testData.length,
+        },
+        function(err, entries) {
           assert.ifError(err);
 
           assert.strictEqual(entries.length, testData.length);
 
-          entries
-            .reverse()
-            .forEach(function(entry, index) {
-              var test = testData[index];
-              test.verify(entry);
-            });
+          entries.reverse().forEach(function(entry, index) {
+            var test = testData[index];
+            test.verify(entry);
+          });
 
           done();
         });
