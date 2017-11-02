@@ -246,7 +246,7 @@ export function serializeTimeProfile(
  * @param intervalBytes - bytes allocated between samples.
  */
 export function serializeHeapProfile(
-    prof: AllocationProfileNode, startTimeNanos: number, durationNanos: number,
+    prof: AllocationProfileNode, startTimeNanos: number,
     intervalBytes: number): perftools.profiles.IProfile {
   const appendHeapEntryToSamples: AppendEntryToSamples<AllocationProfileNode> =
       (entry: Entry<AllocationProfileNode>,
@@ -270,7 +270,6 @@ export function serializeHeapProfile(
   const profile = {
     sampleType: [sampleValueType, allocationValueType],
     timeNanos: startTimeNanos,
-    durationNanos: durationNanos,
     periodType: allocationValueType,
     period: intervalBytes,
   };

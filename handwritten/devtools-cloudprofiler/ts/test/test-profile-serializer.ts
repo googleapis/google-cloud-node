@@ -30,8 +30,7 @@ describe('serializeTimeProfile', () => {
 
 describe('serializeHeapProfile', () => {
   it('should produce expected profile', () => {
-    const heapProfileOut = serializeHeapProfile(
-        v8HeapProfile, 0, 10 * 1000 * 1000 * 1000, 512 * 1024);
+    const heapProfileOut = serializeHeapProfile(v8HeapProfile, 0, 512 * 1024);
     assert.deepEqual(heapProfileOut, heapProfile);
   });
 });
