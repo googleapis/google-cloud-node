@@ -62,7 +62,8 @@
   ],
   "nyc": {
     "exclude": [
-      "proto"
+      "proto",
+      "build/test"
     ]
   }
 }
