@@ -192,7 +192,7 @@ util.inherits(File, common.ServiceObject);
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
  * @param {string} [options.token] A previously-returned `rewriteToken` from an
  *     unfinished rewrite request.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {CopyCallback} [callback] Callback function.
  * @returns {Promise<CopyResponse>}
@@ -393,7 +393,7 @@ File.prototype.copy = function(destination, options, callback) {
  * downloaded.
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {string|boolean} [options.validation] Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
@@ -706,7 +706,7 @@ File.prototype.createReadStream = function(options) {
  *     `options.predefinedAcl = 'private'`)
  * @param {boolean} [options.public] Make the uploaded file public. (Alias for
  *     `options.predefinedAcl = 'publicRead'`)
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {CreateResumableUploadCallback} [callback] Callback function.
  * @returns {Promise<CreateResumableUploadResponse>}
@@ -817,7 +817,7 @@ File.prototype.createResumableUpload = function(options, callback) {
  *     for what makes sense given your input.
  * @param {string} [options.uri] The URI for an already-created resumable
  *     upload. See {@link File#createResumableUpload}.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {string|boolean} [options.validation] Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with a
@@ -1027,7 +1027,7 @@ File.prototype.createWriteStream = function(options) {
  * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {DeleteFileCallback} [callback] Callback function.
  * @returns {Promise<DeleteFileResponse>}
@@ -1077,7 +1077,7 @@ File.prototype.delete = function(options, callback) {
  *     passed to {@link File#createReadStream}.
  * @param {string} [options.destination] Local file path to write the file's
  *     contents to.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {DownloadCallback} [callback] Callback function.
  * @returns {Promise<DownloadResponse>}
@@ -1157,7 +1157,7 @@ File.prototype.download = function(options, callback) {
  * Check if the file exists.
  *
  * @param {options} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {FileExistsCallback} [callback] Callback function.
  * @returns {Promise<FileExistsResponse>}
@@ -1260,7 +1260,7 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  * Get a file object and its metadata if it exists.
  *
  * @param {options} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetFileCallback} [callback] Callback function.
  * @returns {Promise<GetFileResponse>}
@@ -1304,7 +1304,7 @@ File.prototype.get = function(options, callback) {
  * @see [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetFileMetadataCallback} [callback] Callback function.
  * @returns {Promise<GetFileMetadataResponse>}
@@ -1739,7 +1739,7 @@ File.prototype.getSignedUrl = function(config, callback) {
  * @param {object} [options] Configuration options.
  * @param {boolean} [options.strict] If true, set the file to be private to
  *     only the owner user. Otherwise, it will be private to the project.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {MakeFilePrivateCallback} [callback] Callback function.
  * @returns {Promise<MakeFilePrivateResponse>}
@@ -1874,7 +1874,7 @@ File.prototype.makePublic = function(callback) {
  * @param {string|Bucket|File} destination Destination file.
  * @param {object} [options] Configuration options. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {MoveCallback} [callback] Callback function.
  * @returns {Promise<MoveResponse>}
@@ -2073,7 +2073,7 @@ File.prototype.save = function(data, options, callback) {
  *
  * @param {object} [metadata] The metadata you wish to update.
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {SetFileMetadataCallback} [callback] Callback function.
  * @returns {Promise<SetFileMetadataResponse>}
@@ -2141,7 +2141,7 @@ File.prototype.setMetadata = function(metadata, options, callback) {
  * @param {string} storageClass The new storage class. (`multi_regional`,
  *     `regional`, `nearline`, `coldline`)
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {SetStorageClassCallback} [callback] Callback function.
  * @returns {Promise<SetStorageClassResponse>}

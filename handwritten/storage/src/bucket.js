@@ -278,7 +278,7 @@ util.inherits(Bucket, common.ServiceObject);
  * @param {string|File} destination The file you would like the
  *     source files combined into.
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {CombineCallback} [callback] Callback function.
  * @returns {Promise<CombineResponse>}
@@ -405,7 +405,7 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
  * @param {string} config.address The address where notifications are
  *     delivered for this channel.
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {CreateChannelCallback} [callback] Callback function.
  * @returns {Promise<CreateChannelResponse>}
@@ -496,7 +496,7 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
  *     - `JSON_API_V1`
  *
  *     - `NONE`
- * @property {boolean} [options.userProject] The ID of the project which will be
+ * @property {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  */
 /**
@@ -635,7 +635,7 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
  * @see [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {DeleteBucketCallback} [callback] Callback function.
  * @returns {Promise<DeleteBucketResponse>}
@@ -699,7 +699,7 @@ Bucket.prototype.delete = function(options, callback) {
  *     for all of the supported properties.
  * @param {boolean} [query.force] Suppress errors until all files have been
  *     processed.
- * @param {boolean} [query.userProject] The ID of the project which will be
+ * @param {string} [query.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {DeleteFilesCallback} [callback] Callback function.
  * @returns {Promise}
@@ -990,7 +990,7 @@ Bucket.prototype.enableRequesterPays = function(callback) {
  * Check if the bucket exists.
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {BucketExistsCallback} [callback] Callback function.
  * @returns {Promise<BucketExistsResponse>}
@@ -1078,7 +1078,7 @@ Bucket.prototype.file = function(name, options) {
  * @param {object} [options] Configuration options.
  * @param {boolean} [options.autoCreate] Automatically create the object if
  *     it does not exist. Default: `false`
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetBucketCallback} [callback] Callback function.
  * @returns {Promise<GetBucketResponse>}
@@ -1167,7 +1167,7 @@ Bucket.prototype.get = function(options, callback) {
  *     return.
  * @property {string} [pageToken] A previously-returned page token
  *     representing part of the larger set of results to view.
- * @property {boolean} [userProject] The ID of the project which will be
+ * @property {string} [userProject] The ID of the project which will be
  *     billed for the request.
  * @property {boolean} [versions] If true, returns File objects scoped to
  *     their versions.
@@ -1339,7 +1339,7 @@ Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
  * Get the labels currently set on this bucket.
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetLabelsCallback} [callback] Callback function.
  * @returns {Promise<GetLabelsCallback>}
@@ -1401,7 +1401,7 @@ Bucket.prototype.getLabels = function(options, callback) {
  * @see [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetBucketMetadataCallback} [callback] Callback function.
  * @returns {Promise<GetBucketMetadataResponse>}
@@ -1468,7 +1468,7 @@ Bucket.prototype.getMetadata = function(options, callback) {
  * @see [Notifications: list]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/list}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {GetNotificationsCallback} [callback] Callback function.
  * @returns {Promise<GetNotificationsResponse>}
@@ -1557,7 +1557,7 @@ Bucket.prototype.getNotifications = function(options, callback) {
  *     private.
  * @param {boolean} [options.force] Queue errors occurred while making files
  *     private until all files have been processed.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {MakeBucketPrivateCallback} [callback] Callback function.
  * @returns {Promise<MakeBucketPrivateResponse>}
@@ -1837,7 +1837,7 @@ Bucket.prototype.request = function(reqOpts, callback) {
  *
  * @param {object<string, string>} labels Labels to set on the bucket.
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {SetLabelsCallback} [callback] Callback function.
  * @returns {Promise<SetLabelsResponse>}
@@ -1891,7 +1891,7 @@ Bucket.prototype.setLabels = function(labels, options, callback) {
  *
  * @param {object<string, *>} metadata The metadata you wish to set.
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {SetBucketMetadataCallback} [callback] Callback function.
  * @returns {Promise<SetBucketMetadataResponse>}
@@ -1971,7 +1971,7 @@ Bucket.prototype.setMetadata = function(metadata, options, callback) {
  *     `regional`, `standard`, `nearline`, `coldline`, or
  *     `durable_reduced_availability`)
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.userProject] - The ID of the project which will be
+ * @param {string} [options.userProject] - The ID of the project which will be
  *     billed for the request.
  * @param {SetStorageClassCallback} [callback] Callback function.
  * @returns {Promise}
@@ -2093,7 +2093,7 @@ Bucket.prototype.setUserProject = function(userProject) {
  *     true for files larger than 5 MB).
  * @param {string} [options.uri] The URI for an already-created resumable
  *     upload. See {@link File#createResumableUpload}.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {string|boolean} [options.validation] Possible values: `"md5"`,
  *     `"crc32c"`, or `false`. By default, data integrity is validated with an
@@ -2293,7 +2293,7 @@ Bucket.prototype.upload = function(localPath, options, callback) {
  *     processed.
  * @param {boolean} [options.private] Make files private.
  * @param {boolean} [options.public] Make files public.
- * @param {boolean} [options.userProject] The ID of the project which will be
+ * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {function} callback Callback function.
  */
