@@ -1,125 +1,43 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Stackdriver Logging Node.js samples
+# Stackdriver Logging for Winston: Node.js Samples
 
-[Stackdriver Logging][logging_docs] allows you to store, search, analyze,
-monitor, and alert on log data and events from Google Cloud Platform and Amazon
-Web Services.
+[![Open in Cloud Shell][shell_img]][shell_link]
 
-[logging_docs]: https://cloud.google.com/logging/docs/
+[Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Logs](#logs)
-  * [Sinks](#sinks)
-  * [Error Reporting on Compute Engine](#error-reporting-on-compute-engine)
-  * [Logging to Google Cloud with Winston](https://github.com/GoogleCloudPlatform/winston-gae)
-* [Running the tests](#running-the-tests)
+  * [Quickstart](#quickstart)
+  * [Explict Auth Setup](#explict-auth-setup)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With `npm`:
-
-        npm install
-
-    With `yarn`:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisities
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
-### Logs
+### Quickstart
 
-View the [documentation][logs_docs] or the [source code][logs_code].
+View the [source code][quickstart_0_code].
 
-__Usage:__ `node logs --help`
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
-```
-Commands:
-  list                             List log entries in the authenticated project.
-  write <name> <resource> <entry>  Write a log entry.
-  delete <name>                    Delete a Log.
+[quickstart_0_docs]: https://cloud.google.com/logging/docs/
+[quickstart_0_code]: quickstart.js
 
-Options:
-  --help  Show help                                                                        [boolean]
+### Explict Auth Setup
 
-Examples:
-  node logs list                                      List all log entires.
-  node logs list -f "severity = ERROR" -s             List up to 2 error entries, sorted by
-  "timestamp" -l 2                                    timestamp ascending.
-  node logs write my-log                              Write a log entry.
-  '{"type":"gae_app","labels":{"module_id":"default"
-  }}' '{"message":"Hello World!"}'
-  node logs delete my-log                             Delete "my-log".
+View the [source code][setup_explicit_1_code].
 
-For more information, see https://cloud.google.com/logging/docs
-```
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md)
 
-[logs_docs]: https://cloud.google.com/logging/docs
-[logs_code]: logs.js
+[setup_explicit_1_docs]: https://cloud.google.com/logging/docs/
+[setup_explicit_1_code]: setup_explicit.js
 
-### Sinks
-
-View the [documentation][sinks_docs] or the [source code][sinks_code].
-
-__Usage:__ `node sinks --help`
-
-```
-Commands:
-  create <name> <destination>  Create a new sink with the given name and destination.
-  get <name>                   Get the metadata for the specified sink.
-  list                         List all sinks in the authenticated project.
-  update <name> <metadata>     Update the metadata for the specified sink.
-  delete <name>                Delete the specified sink.
-
-Options:
-  --help  Show help                                                                        [boolean]
-
-Examples:
-  node sinks create my-sink my-bucket --type bucket   Create a new sink named "my-sink" that exports
-                                                      logs to a Cloud Storage bucket.
-  node sinks create my-sink my-dataset --type         Create a new sink named "my-sink" that exports
-  dataset                                             logs to a BigQuery dataset.
-  node sinks create my-sink my-topic --type topic     Create a new sink named "my-sink" that exports
-                                                      logs to a Cloud Pub/Sub topic.
-  node sinks get my-sink                              Get the metadata for "my-sink".
-  node sinks list                                     List all sinks in the authenticated project.
-  node sinks update my-sink '{"filter":"severity >    Update the specified sink.
-  ALERT"}'
-  node sinks delete my-sink                           Delete "my-sink".
-
-For more information, see https://cloud.google.com/logging/docs
-```
-
-[sinks_docs]: https://cloud.google.com/logging/docs
-[sinks_code]: sinks.js
-
-### Error Reporting on Compute Engine
-
-View the [documentation][error_docs] or the [source code][error_code].
-
-[error_docs]: https://cloud.google.com/error-reporting/docs/setup/compute-engine
-[error_code]: fluent.js
-
-## Running the tests
-
-1.  Set the `GCLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment
-    variables.
-
-1.  Run the tests:
-
-    With `npm`:
-
-        npm test
-
-    With `yarn`:
-
-        yarn test
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/README.md

@@ -15,36 +15,30 @@
 
 'use strict';
 
-// [START logging_quickstart]
-// Imports the Google Cloud client library
-const Logging = require('@google-cloud/logging');
+// [START logging_winston_quickstart]
+const winston = require('winston');
+const Logger = winston.Logger;
+const Console = winston.transports.Console;
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
+// Imports the Google Cloud client library for Winston
+const LoggingWinston = require('@google-cloud/logging-winston');
 
-// Instantiates a client
-const logging = Logging({
-  projectId: projectId
+// Creates a Winston Stackdriver Logging client
+const loggingWinston = new LoggingWinston();
+
+// Create a Winston logger that streams to Stackdriver Logging
+// Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
+const logger = new Logger({
+  level: 'info', // log at 'info' and above
+  transports: [
+    // Log to the console
+    new Console(),
+    // And log to Stackdriver Logging
+    loggingWinston,
+  ],
 });
 
-// The name of the log to write to
-const logName = 'my-log';
-// Selects the log to write to
-const log = logging.log(logName);
-
-// The data to write to the log
-const text = 'Hello, world!';
-// The metadata associated with the entry
-const metadata = { resource: { type: 'global' } };
-// Prepares a log entry
-const entry = log.entry(metadata, text);
-
-// Writes the log entry
-log.write(entry)
-  .then(() => {
-    console.log(`Logged: ${text}`);
-  })
-  .catch((err) => {
-    console.error('ERROR:', err);
-  });
-// [END logging_quickstart]
+// Writes some log entries
+logger.error('warp nacelles offline');
+logger.info('shields at 99%');
+// [END logging_winston_quickstart]
