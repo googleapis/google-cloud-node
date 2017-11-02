@@ -116,7 +116,7 @@ describe('initConfig', () => {
        };
        const expConfig = {
          logLevel: 1,
-         serviceContext: {version: '', service: 'fake-service'},
+         serviceContext: {service: 'fake-service'},
          disableHeap: false,
          disableTime: false,
          instance: '',

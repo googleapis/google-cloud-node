@@ -1,5 +1,7 @@
 # Google Cloud Profiler
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/GoogleCloudPlatform/cloud-profiler-nodejs.svg)](https://greenkeeper.io/)
+
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-dev-image]][david-dev-url]
 

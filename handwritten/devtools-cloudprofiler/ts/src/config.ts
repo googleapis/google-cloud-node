@@ -15,7 +15,6 @@
  */
 
 import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
-import {ProfilerConfig} from './profiler';
 
 const common: Common = require('@google-cloud/common');
 const extend = require('extend');
@@ -62,12 +61,23 @@ export interface Config extends AuthenticationConfig {
   disableHeap?: boolean;
 }
 
+/**
+ * Subtype of Config that declares some properties to be non-optional. This
+ * helps avoid null checks in the profiler code.
+ */
+export interface ProfilerConfig extends Config {
+  logLevel: number;
+  serviceContext: {service?: string; version?: string;};
+  instance: string;
+  zone: string;
+  disableTime: boolean;
+  disableHeap: boolean;
+}
+
 // Default values for configuration for a profiler.
-export const defaultConfig: Config = {
+export const defaultConfig: ProfilerConfig = {
   logLevel: 1,
-  serviceContext: {
-    version: '',
-  },
+  serviceContext: {},
   disableHeap: false,
   disableTime: false,
   instance: '',

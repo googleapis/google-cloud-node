@@ -21,8 +21,8 @@ import * as pify from 'pify';
 
 import {AuthenticationConfig, Common, ServiceConfig, ServiceObject} from '../third_party/types/common-types';
 
-import {Config, defaultConfig} from './config';
-import {Profiler, ProfilerConfig} from './profiler';
+import {Config, defaultConfig, ProfilerConfig} from './config';
+import {Profiler} from './profiler';
 
 const common: Common = require('@google-cloud/common');
 

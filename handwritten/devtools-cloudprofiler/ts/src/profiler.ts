@@ -17,21 +17,12 @@ import * as path from 'path';
 
 import {AuthenticationConfig, Common, Logger, Service, ServiceConfig} from '../third_party/types/common-types';
 
-import {Config} from './config';
+import {Config, ProfilerConfig} from './config';
 import {HeapProfiler} from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
 
 const pjson = require('../../package.json');
 const common: Common = require('@google-cloud/common');
-
-export interface ProfilerConfig extends AuthenticationConfig {
-  logLevel: number;
-  serviceContext: {service: string; version?: string;};
-  instance: string;
-  zone: string;
-  disableTime: boolean;
-  disableHeap: boolean;
-}
 
 // TODO: finish implementing Profiler.
 // TODO: add stop() method to stop profiling.
