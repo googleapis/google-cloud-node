@@ -34,7 +34,7 @@ describe('logging-bunyan', function() {
         fakeLogName_ = logName;
         fakeLogOptions_ = options;
         return fakeLogInstance;
-      }
+      },
     };
   }
 
@@ -47,7 +47,7 @@ describe('logging-bunyan', function() {
   };
 
   var fakeStream = {
-    Writable: FakeWritable
+    Writable: FakeWritable,
   };
 
   var LoggingBunyanCached;
@@ -58,19 +58,19 @@ describe('logging-bunyan', function() {
     logName: 'log-name',
     resource: {},
     serviceContext: {
-      service: 'fake-service'
-    }
+      service: 'fake-service',
+    },
   };
 
   var RECORD = {
     level: 30,
-    time: '2012-06-19T21:34:19.906Z'
+    time: '2012-06-19T21:34:19.906Z',
   };
 
   before(function() {
     LoggingBunyan = proxyquire('../src/index.js', {
       '@google-cloud/logging': fakeLogging,
-      stream: fakeStream
+      stream: fakeStream,
     });
 
     LoggingBunyanCached = extend(true, {}, LoggingBunyan);
@@ -94,7 +94,7 @@ describe('logging-bunyan', function() {
 
     it('should be an object mode Writable', function() {
       assert(loggingBunyan instanceof FakeWritable);
-      assert.deepStrictEqual(fakeWritableOptions_, { objectMode: true });
+      assert.deepStrictEqual(fakeWritableOptions_, {objectMode: true});
     });
 
     it('should localize the provided resource', function() {
@@ -118,7 +118,7 @@ describe('logging-bunyan', function() {
 
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
       assert.strictEqual(fakeLogName_, 'bunyan_log');
-      assert.deepStrictEqual(fakeLogOptions_, { removeCircular: true });
+      assert.deepStrictEqual(fakeLogOptions_, {removeCircular: true});
     });
   });
 
@@ -134,7 +134,6 @@ describe('logging-bunyan', function() {
   });
 
   describe('formatEntry_', function() {
-
     it('should throw an error if record is a string', function() {
       assert.throws(function() {
         loggingBunyan.formatEntry_('string record');
@@ -148,7 +147,7 @@ describe('logging-bunyan', function() {
         assert.deepEqual(entryMetadata, {
           resource: loggingBunyan.resource_,
           timestamp: RECORD.time,
-          severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level]
+          severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level],
         });
         assert.deepStrictEqual(record, RECORD);
         done();
@@ -158,8 +157,8 @@ describe('logging-bunyan', function() {
     });
 
     it('should rename the msg property to message', function(done) {
-      var recordWithMsg = extend({ msg: 'msg' }, RECORD);
-      var recordWithMessage = extend({ message: 'msg' }, RECORD);
+      var recordWithMsg = extend({msg: 'msg'}, RECORD);
+      var recordWithMessage = extend({message: 'msg'}, RECORD);
 
       loggingBunyan.log_.entry = function(entryMetadata, record) {
         assert.deepStrictEqual(record, recordWithMessage);
@@ -170,20 +169,26 @@ describe('logging-bunyan', function() {
     });
 
     it('should inject the error stack as the message', function(done) {
-      var record = extend({
-        msg: 'msg',
-        err: {
-          stack: 'the stack'
-        }
-      }, RECORD);
-      var expectedRecord = extend({
-        msg: 'msg',
-        err: {
-          stack: 'the stack'
+      var record = extend(
+        {
+          msg: 'msg',
+          err: {
+            stack: 'the stack',
+          },
         },
-        message: 'the stack',
-        serviceContext: OPTIONS.serviceContext
-      }, RECORD);
+        RECORD
+      );
+      var expectedRecord = extend(
+        {
+          msg: 'msg',
+          err: {
+            stack: 'the stack',
+          },
+          message: 'the stack',
+          serviceContext: OPTIONS.serviceContext,
+        },
+        RECORD
+      );
 
       loggingBunyan.log_.entry = function(entryMetadata, record_) {
         assert.deepStrictEqual(record_, expectedRecord);
@@ -194,13 +199,16 @@ describe('logging-bunyan', function() {
     });
 
     it('should leave message property intact when present', function(done) {
-      var record = extend({
-        msg: 'msg',
-        message: 'message',
-        err: {
-          stack: 'the stack'
-        }
-      }, RECORD);
+      var record = extend(
+        {
+          msg: 'msg',
+          message: 'message',
+          err: {
+            stack: 'the stack',
+          },
+        },
+        RECORD
+      );
 
       loggingBunyan.log_.entry = function(entryMetadata, record_) {
         assert.deepStrictEqual(record_, record);
@@ -212,18 +220,21 @@ describe('logging-bunyan', function() {
 
     it('should promote the httpRequest property to metadata', function(done) {
       var HTTP_REQUEST = {
-        statusCode: 418
+        statusCode: 418,
       };
-      var recordWithRequest = extend({
-        httpRequest: HTTP_REQUEST,
-      }, RECORD);
+      var recordWithRequest = extend(
+        {
+          httpRequest: HTTP_REQUEST,
+        },
+        RECORD
+      );
 
       loggingBunyan.log_.entry = function(entryMetadata, record) {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingBunyan.resource_,
           timestamp: RECORD.time,
           severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level],
-          httpRequest: HTTP_REQUEST
+          httpRequest: HTTP_REQUEST,
         });
         assert.deepStrictEqual(record, RECORD);
         done();
@@ -241,7 +252,7 @@ describe('logging-bunyan', function() {
           resource: loggingBunyan.resource_,
           timestamp: RECORD.time,
           severity: LoggingBunyan.BUNYAN_TO_STACKDRIVER[RECORD.level],
-          trace: 'trace1'
+          trace: 'trace1',
         });
         assert.deepStrictEqual(record, RECORD);
         done();
@@ -280,13 +291,17 @@ describe('logging-bunyan', function() {
 
     it('should set prefixed trace property if trace available', function(done) {
       global._google_trace_agent = {
-        getCurrentContextId: function() { return 'trace1'; },
-        getWriterProjectId: function() { return 'project1'; }
+        getCurrentContextId: function() {
+          return 'trace1';
+        },
+        getWriterProjectId: function() {
+          return 'project1';
+        },
       };
       const recordWithoutTrace = extend({}, RECORD);
       const recordWithTrace = extend({}, RECORD);
       recordWithTrace[LoggingBunyan.LOGGING_TRACE_KEY] =
-          'projects/project1/traces/trace1';
+        'projects/project1/traces/trace1';
 
       FakeWritable.prototype.write = function(record, encoding, callback) {
         // Check that trace field added to record before calling Writable.write
@@ -307,8 +322,12 @@ describe('logging-bunyan', function() {
     it('should leave prefixed trace property as is if set', function(done) {
       const oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
-        getCurrentContextId: function() { return 'trace-from-agent'; },
-        getWriterProjectId: function() { return 'project1'; }
+        getCurrentContextId: function() {
+          return 'trace-from-agent';
+        },
+        getWriterProjectId: function() {
+          return 'project1';
+        },
       };
       const recordWithTraceAlreadySet = extend({}, RECORD);
       recordWithTraceAlreadySet[LoggingBunyan.LOGGING_TRACE_KEY] = 'trace1';
@@ -340,20 +359,32 @@ describe('logging-bunyan', function() {
     loggingBunyan.write(RECORD, '', assert.ifError);
 
     global._google_trace_agent = {
-      getCurrentContextId: function() { return null; },
-      getWriterProjectId: function() { return null; }
+      getCurrentContextId: function() {
+        return null;
+      },
+      getWriterProjectId: function() {
+        return null;
+      },
     };
     loggingBunyan.write(RECORD, '', assert.ifError);
 
     global._google_trace_agent = {
-      getCurrentContextId: function() { return null; },
-      getWriterProjectId: function() { return 'project1'; }
+      getCurrentContextId: function() {
+        return null;
+      },
+      getWriterProjectId: function() {
+        return 'project1';
+      },
     };
     loggingBunyan.write(RECORD, '', assert.ifError);
 
     global._google_trace_agent = {
-      getCurrentContextId: function() { return 'trace1'; },
-      getWriterProjectId: function() { return null; }
+      getCurrentContextId: function() {
+        return 'trace1';
+      },
+      getWriterProjectId: function() {
+        return null;
+      },
     };
     loggingBunyan.write(RECORD, '', assert.ifError);
 
@@ -392,7 +423,7 @@ describe('logging-bunyan', function() {
   });
 
   describe('_writev', function() {
-    var RECORDS = [ { chunk: RECORD }, { chunk: RECORD } ];
+    var RECORDS = [{chunk: RECORD}, {chunk: RECORD}];
     beforeEach(function() {
       fakeLogInstance.entry = function() {};
       fakeLogInstance.write = function() {};
@@ -434,7 +465,7 @@ describe('logging-bunyan', function() {
         40: 'WARNING',
         30: 'INFO',
         20: 'DEBUG',
-        10: 'DEBUG'
+        10: 'DEBUG',
       });
     });
   });
