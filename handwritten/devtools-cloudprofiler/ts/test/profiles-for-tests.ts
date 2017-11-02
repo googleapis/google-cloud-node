@@ -254,3 +254,125 @@ export const heapProfile: perftools.profiles.IProfile = {
   periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
   period: 524288
 };
+
+
+const anonymousHeapNode = {
+  scriptName: 'main',
+  scriptId: 0,
+  lineNumber: 1,
+  columnNumber: 5,
+  allocations: [{count: 1, sizeBytes: 5}],
+  children: []
+};
+
+export const v8AnonymousFunctionHeapProfile = {
+  name: '(root)',
+  scriptName: '(root)',
+  scriptId: 10000,
+  lineNumber: 0,
+  columnNumber: 5,
+  allocations: [],
+  children: [anonymousHeapNode]
+};
+
+const anonymousFunctionHeapLines = [
+  {functionId: 1, line: 1},
+];
+
+const anonymousFunctionHeapFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+];
+
+const anonymousFunctionHeapLocations = [
+  new perftools.profiles.Location({line: [heapLines[0]], id: 1}),
+];
+
+export const anonymousFunctionHeapProfile: perftools.profiles.IProfile = {
+  sampleType: [
+    new perftools.profiles.ValueType({type: 1, unit: 2}),
+    new perftools.profiles.ValueType({type: 3, unit: 4}),
+  ],
+  sample: [
+    new perftools.profiles.Sample({locationId: [1], value: [1, 5], label: []}),
+  ],
+  location: anonymousFunctionHeapLocations,
+  function: anonymousFunctionHeapFunctions,
+  stringTable: [
+    '',
+    'objects',
+    'count',
+    'space',
+    'bytes',
+    '(anonymous)',
+    'main',
+  ],
+  timeNanos: 0,
+  periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+  period: 524288
+};
+
+const anonymousFunctionTimeNode = {
+  scriptName: 'main',
+  scriptId: 2,
+  lineNumber: 1,
+  columnNumber: 5,
+  hitCount: 1,
+  children: []
+};
+
+const anonymousFunctionTimeRoot = {
+  name: '(root)',
+  scriptName: 'root',
+  scriptId: 0,
+  lineNumber: 0,
+  columnNumber: 0,
+  hitCount: 0,
+  children: [anonymousFunctionTimeNode]
+};
+
+export const v8AnonymousFunctionTimeProfile: TimeProfile = {
+  startTime: 0,
+  endTime: 10 * 1000,
+  topDownRoot: anonymousFunctionTimeRoot,
+};
+
+const anonymousFunctionTimeLines = [
+  {functionId: 1, line: 1},
+];
+
+const anonymousFunctionTimeFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+];
+
+const anonymousFunctionTimeLocations = [
+  new perftools.profiles.Location({
+    line: [timeLines[0]],
+    id: 1,
+  }),
+];
+
+export const anonymousFunctionTimeProfile: perftools.profiles.IProfile = {
+  sampleType: [
+    new perftools.profiles.ValueType({type: 1, unit: 2}),
+    new perftools.profiles.ValueType({type: 3, unit: 4}),
+  ],
+  sample: [
+    new perftools.profiles.Sample(
+        {locationId: [1], value: [1, 1000], label: []}),
+  ],
+  location: anonymousFunctionTimeLocations,
+  function: anonymousFunctionTimeFunctions,
+  stringTable: [
+    '',
+    'samples',
+    'count',
+    'time',
+    'microseconds',
+    '(anonymous)',
+    'main',
+  ],
+  timeNanos: 0,
+  durationNanos: 10 * 1000 * 1000 * 1000,
+  periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+  period: 1000,
+};

@@ -26,7 +26,7 @@ export interface TimeProfile {
 
 export interface ProfileNode {
   // name is the function name.
-  name: string;
+  name?: string;
   scriptName: string;
   scriptId: number;
   lineNumber: number;

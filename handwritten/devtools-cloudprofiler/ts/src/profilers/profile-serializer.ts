@@ -140,7 +140,7 @@ function serialize<T extends ProfileNode>(
     }
     id = functions.length + 1;
     functionIdMap.set(keyStr, id);
-    let nameId = stringTable.getIndexOrAdd(node.name);
+    let nameId = stringTable.getIndexOrAdd(node.name || '(anonymous)');
     let f = new perftools.profiles.Function({
       id: id,
       name: nameId,
