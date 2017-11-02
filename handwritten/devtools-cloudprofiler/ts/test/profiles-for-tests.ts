@@ -240,7 +240,7 @@ export const heapProfile: perftools.profiles.IProfile = {
   function: heapFunctions,
   stringTable: [
     '',
-    'samples',
+    'objects',
     'count',
     'space',
     'bytes',
