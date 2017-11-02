@@ -1,48 +1,42 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Resource Manager API Node.js Samples
+# Google Cloud Resource Manager API: Node.js Samples
 
-[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-resource-manager.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 Google Cloud Platform provides container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/) enables you to programmatically manage these container resources.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Projects](#projects)
-* [Running the tests](#running-the-tests)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With **npm**:
-
-        npm install
-
-    With **yarn**:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisites
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
 ### Projects
 
-View the [documentation][projects_0_docs] or the [source code][projects_0_code].
+View the [source code][projects_0_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/projects.js,samples/README.md)
 
 __Usage:__ `node projects.js --help`
 
 ```
+projects.js <command>
+
 Commands:
-  list  List all current projects.
+  projects.js list  List all current projects.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node projects.js list  Lists all current projects.
@@ -53,16 +47,5 @@ For more information, see https://cloud.google.com/resource-manager/docs
 [projects_0_docs]: https://cloud.google.com/resource-manager/docs
 [projects_0_code]: projects.js
 
-## Running the tests
-
-1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
-
-1.  Run the tests:
-
-    With **npm**:
-
-        npm test
-
-    With **yarn**:
-
-        yarn test
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/README.md

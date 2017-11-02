@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module resource
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
@@ -25,13 +21,34 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:resource/project}
- * @private
- */
 var Project = require('./project.js');
 
-/** *
+/**
+ * @typedef {object} ClientConfig
+ * @property {string} [projectId] The project ID from the Google Developer's
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+ *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
+ *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
+ *     downloaded from the Google Developers Console. If you provide a path to a
+ *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
+ *     .p12 require you to specify the `email` option as well.
+ * @property {string} [email] Account email address. Required when using a .pem
+ *     or .p12 keyFilename.
+ * @property {object} [credentials] Credentials object.
+ * @property {string} [credentials.client_email]
+ * @property {string} [credentials.private_key]
+ * @property {boolean} [autoRetry=true] Automatically retry requests if the
+ *     response is related to rate limits or certain intermittent server errors.
+ *     We will exponentially backoff subsequent requests by default.
+ * @property {number} [maxRetries=3] Maximum number of automatic retries
+ *     attempted before returning the error.
+ * @property {Constructor} [promise] Custom promise module to use instead of
+ *     native Promises.
+ */
+
+/**
  * The [Cloud Resource Manager](https://cloud.google.com/resource-manager/)
  * provides methods that you can use to programmatically manage your projects
  * in the Google Cloud Platform. With this API, you can do the following:
@@ -42,17 +59,32 @@ var Project = require('./project.js');
  *   - Delete projects.
  *   - Recover projects.
  *
- * @alias module:resource
- * @constructor
+ * @class
  *
- * @resource [What is the Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
+ * @see [What is the Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
  *
- * @param {object} options - [Configuration object](#/docs).
+ * @param {ClientConfig} [options] Configuration options.
+ *
+ * @example <caption>Import the client library</caption>
+ * const Resource = require('@google-cloud/resource');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const resource = new Resource();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const resource = new Resource({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:resource_quickstart
+ * Full quickstart example:
  */
 function Resource(options) {
   if (!(this instanceof Resource)) {
     options = common.util.normalizeArguments(this, options, {
-      projectIdRequired: false
+      projectIdRequired: false,
     });
     return new Resource(options);
   }
@@ -61,7 +93,7 @@ function Resource(options) {
     baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
-    packageJson: require('../package.json')
+    packageJson: require('../package.json'),
   };
 
   common.Service.call(this, config, options);
@@ -75,20 +107,23 @@ util.inherits(Resource, common.Service);
  * **This method only works if you are authenticated as yourself, e.g. using the
  * gcloud SDK.**
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
+ * @see [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
+ * @see [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
  *
- * @param {string} id - ID of the project.
- * @param {object=} options - See a
+ * @param {string} id ID of the project.
+ * @param {object} [options] See a
  *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:resource/project} callback.project - The created Project
+ * @param {function} [callback] The callback function.
+ * @param {?error} callback.err An error returned while making this request.
+ * @param {Project} callback.project The created Project
  *     object.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object} callback.apiResponse The full API response.
  *
  * @example
- * var id = 'new-project-id';
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ *
+ * const id = 'new-project-id';
  *
  * resource.createProject(id, function(err, project, operation, apiResponse) {
  *   if (err) {
@@ -110,14 +145,14 @@ util.inherits(Resource, common.Service);
  * //-
  * resource.createProject(id)
  *   .then(function(data) {
- *     var project = data[0];
- *     var operation = data[1];
- *     var apiResponse = data[2];
+ *     const project = data[0];
+ *     const operation = data[1];
+ *     const apiResponse = data[2];
  *
  *     return operation.promise();
  *   })
  *   .then(function(data) {
- *     var operationMetadata = data[0];
+ *     const operationMetadata = data[0];
  *
  *     // Project created successfully!
  *   });
@@ -130,49 +165,55 @@ Resource.prototype.createProject = function(id, options, callback) {
     options = {};
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/projects',
-    json: extend({}, options, {
-      projectId: id
-    })
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/projects',
+      json: extend({}, options, {
+        projectId: id,
+      }),
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var project = self.project(resp.projectId);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, project, operation, resp);
     }
-
-    var project = self.project(resp.projectId);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, project, operation, resp);
-  });
+  );
 };
 
 /**
  * Get a list of projects.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
- * @resource [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/list}
+ * @see [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
+ * @see [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/list}
  *
- * @param {object=} options - Operation search options.
- * @param {boolean} options.autoPaginate - Have pagination handled
+ * @param {object} [options] Operation search options.
+ * @param {boolean} [options.autoPaginate] Have pagination handled
  *     automatically. Default: true.
- * @param {string} options.filter - An expression for filtering the results.
- * @param {number} options.maxApiCalls - Maximum number of API calls to make.
- * @param {number} options.maxResults - Maximum number of results to return.
- * @param {number} options.pageSize - Maximum number of projects to return.
- * @param {string} options.pageToken - A previously-returned page token
+ * @param {string} [options.filter] An expression for filtering the results.
+ * @param {number} [options.maxApiCalls] Maximum number of API calls to make.
+ * @param {number} [options.maxResults] Maximum number of results to return.
+ * @param {number} [options.pageSize] Maximum number of projects to return.
+ * @param {string} [options.pageToken] A previously-returned page token
  *     representing part of the larger set of results to view.
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:resource/project[]} callback.operations - Project objects from
+ * @param {function} callback The callback function.
+ * @param {?error} callback.err An error returned while making this request.
+ * @param {Project[]} callback.operations Project objects from
  *     your account.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object} callback.apiResponse The full API response.
  *
  * @example
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ *
  * resource.getProjects(function(err, projects) {
  *   // `projects` is an array of `Project` objects.
  * });
@@ -196,7 +237,7 @@ Resource.prototype.createProject = function(id, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * resource.getProjects().then(function(data) {
- *   var projects = data[0];
+ *   const projects = data[0];
  * });
  */
 Resource.prototype.getProjects = function(options, callback) {
@@ -209,41 +250,47 @@ Resource.prototype.getProjects = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/projects',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/projects',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var projects = (resp.projects || []).map(function(project) {
+        var projectInstance = self.project(project.projectId);
+        projectInstance.metadata = project;
+        return projectInstance;
       });
+
+      callback(null, projects, nextQuery, resp);
     }
-
-    var projects = (resp.projects || []).map(function(project) {
-      var projectInstance = self.project(project.projectId);
-      projectInstance.metadata = project;
-      return projectInstance;
-    });
-
-    callback(null, projects, nextQuery, resp);
-  });
+  );
 };
 
 /**
- * Get a list of {module:resource/project} objects as a readable object stream.
+ * Get a list of {@link Resource/project} objects as a readable object stream.
  *
- * @param {object=} query - Configuration object. See
- *     {module:resource#getProjects} for a complete list of options.
+ * @param {object} query Configuration object. See
+ *     {@link Resource#getProjects} for a complete list of options.
  * @return {stream}
  *
  * @example
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ *
  * resource.getProjectsStream()
  *   .on('error', console.error)
  *   .on('data', function(project) {
@@ -262,8 +309,9 @@ Resource.prototype.getProjects = function(options, callback) {
  *     this.end();
  *   });
  */
-Resource.prototype.getProjectsStream =
-  common.paginator.streamify('getProjects');
+Resource.prototype.getProjectsStream = common.paginator.streamify(
+  'getProjects'
+);
 
 /*! Developer Documentation
  *
@@ -274,10 +322,13 @@ Resource.prototype.getProjectsStream =
  *
  * @throws {Error} If a name is not provided.
  *
- * @param {string} name - The name of the operation.
+ * @param {string} name The name of the operation.
  *
  * @example
- * var operation = resource.operation('68850831366825');
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ *
+ * const operation = resource.operation('68850831366825');
  */
 Resource.prototype.operation = function(name) {
   if (!name) {
@@ -286,21 +337,24 @@ Resource.prototype.operation = function(name) {
 
   return new common.Operation({
     parent: this,
-    id: name
+    id: name,
   });
 };
 
 /**
- * Create a Project object. See {module:resoucemanager/createProject} to create
+ * Create a Project object. See {@link Resource#createProject} to create
  * a project.
  *
  * @throws {Error} If an ID is not provided.
  *
- * @param {string} id - The ID of the project (eg: `grape-spaceship-123`).
- * @return {module:resource/project}
+ * @param {string} id The ID of the project (eg: `grape-spaceship-123`).
+ * @return {Project}
  *
  * @example
- * var project = resource.project('grape-spaceship-123');
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ *
+ * const project = resource.project('grape-spaceship-123');
  */
 Resource.prototype.project = function(id) {
   id = id || this.projectId;
@@ -324,12 +378,45 @@ common.paginator.extend(Resource, ['getProjects']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Resource, {
-  exclude: [
-    'operation',
-    'project'
-  ]
+  exclude: ['operation', 'project'],
 });
 
+/**
+ * {@link Project} class.
+ *
+ * @name Resource.Project
+ * @see Project
+ * @type {constructor}
+ */
 Resource.Project = Project;
 
+/**
+ * The default export of the `@google-cloud/resource` package is the
+ * {@link Resource} class.
+ *
+ * See {@link Resource} and {@link ClientConfig} for client methods and
+ * configuration options.
+ *
+ * @module {constructor} @google-cloud/resource
+ * @alias nodejs-resource
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/resource
+ *
+ * @example <caption>Import the client library</caption>
+ * const Resource = require('@google-cloud/resource');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const resource = new Resource();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const resource = new Resource({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:resource_quickstart
+ * Full quickstart example:
+ */
 module.exports = Resource;

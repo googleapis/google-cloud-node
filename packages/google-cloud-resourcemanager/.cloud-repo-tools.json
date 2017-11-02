@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "resource",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/resource/latest/",
+  "release_quality": "alpha",
+  "samples": [
+    {
+      "id": "projects",
+      "name": "Projects",
+      "file": "projects.js",
+      "docs_link": "https://cloud.google.com/resource-manager/docs",
+      "usage": "node projects.js --help"
+    }
+  ]
+}

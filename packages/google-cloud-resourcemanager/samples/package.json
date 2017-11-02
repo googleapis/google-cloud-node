@@ -3,41 +3,22 @@
   "version": "0.0.1",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
-  },
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-resource",
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=4.0.0"
   },
   "scripts": {
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
+    "test": "repo-tools test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/resource": "0.7.3",
-    "yargs": "8.0.2"
+    "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.1.1",
+    "ava": "0.23.0",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "product": "resource",
-    "samples": [
-      {
-        "id": "projects",
-        "name": "Projects",
-        "file": "projects.js",
-        "docs_link": "https://cloud.google.com/resource-manager/docs",
-        "usage": "node projects.js --help"
-      }
-    ]
+    "sinon": "4.1.0"
   }
 }

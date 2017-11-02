@@ -48,7 +48,7 @@ var fakePaginator = {
   },
   streamify: function(methodName) {
     return methodName;
-  }
+  },
 };
 
 var promisified = true;
@@ -68,7 +68,7 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['operation', 'project']);
-  }
+  },
 });
 
 describe('Resource', function() {
@@ -83,9 +83,9 @@ describe('Resource', function() {
         Operation: FakeOperation,
         Service: FakeService,
         paginator: fakePaginator,
-        util: fakeUtil
+        util: fakeUtil,
       },
-      './project.js': FakeProject
+      './project.js': FakeProject,
     });
   });
 
@@ -93,7 +93,7 @@ describe('Resource', function() {
     makeAuthenticatedRequestFactoryOverride = null;
 
     resource = new Resource({
-      projectId: PROJECT_ID
+      projectId: PROJECT_ID,
     });
   });
 
@@ -113,7 +113,7 @@ describe('Resource', function() {
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
-      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeOptions = {projectId: PROJECT_ID};
       var fakeContext = {};
 
       fakeUtil.normalizeArguments = function(context, options) {
@@ -137,7 +137,7 @@ describe('Resource', function() {
       var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/cloud-platform'
+        'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
@@ -146,11 +146,11 @@ describe('Resource', function() {
 
   describe('createProject', function() {
     var NEW_PROJECT_ID = 'new-project-id';
-    var OPTIONS = { a: 'b', c: 'd' };
-    var EXPECTED_BODY = extend({}, OPTIONS, { projectId: NEW_PROJECT_ID });
+    var OPTIONS = {a: 'b', c: 'd'};
+    var EXPECTED_BODY = extend({}, OPTIONS, {projectId: NEW_PROJECT_ID});
 
     it('should not require any options', function(done) {
-      var expectedBody = { projectId: NEW_PROJECT_ID };
+      var expectedBody = {projectId: NEW_PROJECT_ID};
 
       resource.request = function(reqOpts) {
         assert.deepEqual(reqOpts.json, expectedBody);
@@ -174,7 +174,7 @@ describe('Resource', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         resource.request = function(reqOpts, callback) {
@@ -194,7 +194,7 @@ describe('Resource', function() {
 
     describe('success', function() {
       var apiResponse = {
-        name: 'operation-name'
+        name: 'operation-name',
       };
 
       beforeEach(function() {
@@ -244,7 +244,7 @@ describe('Resource', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
+      var query = {a: 'b', c: 'd'};
 
       resource.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/projects');
@@ -258,7 +258,7 @@ describe('Resource', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         resource.request = function(reqOpts, callback) {
@@ -279,9 +279,7 @@ describe('Resource', function() {
 
     describe('success', function() {
       var apiResponse = {
-        projects: [
-          { projectId: PROJECT_ID }
-        ]
+        projects: [{projectId: PROJECT_ID}],
       };
 
       beforeEach(function() {
@@ -293,10 +291,10 @@ describe('Resource', function() {
       it('should build a nextQuery if necessary', function(done) {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
+          nextPageToken: nextPageToken,
         });
         var expectedNextQuery = {
-          pageToken: nextPageToken
+          pageToken: nextPageToken,
         };
 
         resource.request = function(reqOpts, callback) {
@@ -350,7 +348,7 @@ describe('Resource', function() {
 
       assert.deepEqual(operation.calledWith_[0], {
         parent: resource,
-        id: NAME
+        id: NAME,
       });
     });
   });

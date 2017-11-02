@@ -29,7 +29,7 @@ var fakeUtil = extend({}, util, {
     if (Class.name === 'Project') {
       promisified = true;
     }
-  }
+  },
 });
 
 function FakeServiceObject() {
@@ -44,7 +44,7 @@ describe('Project', function() {
   var project;
 
   var RESOURCE = {
-    createProject: util.noop
+    createProject: util.noop,
   };
   var ID = 'project-id';
 
@@ -52,8 +52,8 @@ describe('Project', function() {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil
-      }
+        util: fakeUtil,
+      },
     });
   });
 
@@ -68,8 +68,8 @@ describe('Project', function() {
           bind: function(context) {
             assert.strictEqual(context, resourceInstance);
             done();
-          }
-        }
+          },
+        },
       });
 
       var project = new Project(resourceInstance, ID);
@@ -88,9 +88,9 @@ describe('Project', function() {
         getMetadata: true,
         setMetadata: {
           reqOpts: {
-            method: 'PUT'
-          }
-        }
+            method: 'PUT',
+          },
+        },
       });
     });
 
@@ -101,7 +101,7 @@ describe('Project', function() {
 
   describe('restore', function() {
     var error = new Error('Error.');
-    var apiResponse = { a: 'b', c: 'd' };
+    var apiResponse = {a: 'b', c: 'd'};
 
     beforeEach(function() {
       project.request = function(reqOpts, callback) {

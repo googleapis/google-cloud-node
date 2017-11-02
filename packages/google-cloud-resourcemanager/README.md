@@ -1,92 +1,127 @@
-# @google-cloud/resource ([Alpha][versioning])
-> Cloud Resource Manager Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just Resource Manager? You might want to check out [`google-cloud`][google-cloud].*
+# [Google Cloud Resource Manager API: Node.js Client](https://github.com/googleapis/nodejs-resource)
 
-- [API Documentation][gcloud-resource-docs]
-- [Official Documentation][cloud-resource-docs]
+[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-resource.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-resource)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-resource?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-resource)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-resource/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-resource)
 
+> Node.js idiomatic client for [Cloud Resource Manager API][product-docs].
 
-```sh
-$ npm install --save @google-cloud/resource
-```
-```js
-var resource = require('@google-cloud/resource')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Get all of the projects you maintain.
-resource.getProjects(function(err, projects) {
-  if (!err) {
-    // `projects` contains all of your projects.
-  }
-});
-
-// Get the metadata from your project. (defaults to `grape-spaceship-123`)
-var project = resource.project();
-
-project.getMetadata(function(err, metadata) {
-  // `metadata` describes your project.
-});
-
-// Promises are also supported by omitting callbacks.
-project.getMetadata().then(function(data) {
-  var metadata = data[0];
-});
-
-// It's also possible to integrate with third-party Promise libraries.
-var resource = require('@google-cloud/resource')({
-  promise: require('bluebird')
-});
-```
+Google Cloud Platform provides container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/) enables you to programmatically manage these container resources.
 
 
-## Authentication
+* [Cloud Resource Manager API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-resource](https://github.com/googleapis/nodejs-resource)
+* [Cloud Resource Manager API Documentation][product-docs]
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-### On Google Cloud Platform
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+**Table of contents:**
 
-``` js
-var resource = require('@google-cloud/resource')();
-// ...you're good to go!
-```
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
-### Elsewhere
+## Quickstart
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+### Before you begin
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Resource Manager API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+1.  Select or create a Cloud Platform project.
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+    [Go to the projects page][projects]
 
-var resource = require('@google-cloud/resource')({
+1.  Enable billing for your project.
+
+    [Enable billing][billing]
+
+1.  Enable the Google Cloud Resource Manager API API.
+
+    [Enable the API][enable_api]
+
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
+
+### Installing the client library
+
+    npm install --save @google-cloud/resource
+
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const Resource = require('@google-cloud/resource');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Creates a client
+const resourceClient = new Resource({
   projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
 });
 
-// ...you're good to go!
+// Lists current projects
+resourceClient
+  .getProjects()
+  .then(results => {
+    const projects = results[0];
+
+    console.log('Projects:');
+    projects.forEach(project => console.log(project.id));
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
 ```
 
+## Samples
 
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
-[cloud-resource-docs]: https://cloud.google.com/resource-manager
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-resource/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Projects | [source code](https://github.com/googleapis/nodejs-resource/blob/master/samples/projects.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/projects.js,samples/README.md) |
+
+The [Cloud Resource Manager API Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+This library is considered to be in **alpha**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-resource/blob/master/.github/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](https://github.com/googleapis/nodejs-resource/blob/master/LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/resource/latest/
+[product-docs]: https://cloud.google.com/resource-manager/docs/
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png

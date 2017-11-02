@@ -14,40 +14,39 @@
  * limitations under the License.
  */
 
-/*!
- * @module resource/project
- */
-
 'use strict';
 
 var common = require('@google-cloud/common');
 var util = require('util');
 
-/*! Developer Documentation
- *
- * @param {module:resource} resource - Resource object this project belongs to.
- * @param {string} id - The project's ID.
- */
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
- * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
+ * @see [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
+ * @see [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
  *
- * @constructor
- * @alias module:resource/project
+ * @class
+ * @param {Resource} resource {@link Resource} object this project belongs to.
+ * @param {string} id The project's ID.
  *
  * @example
- * var project = resource.project('grape-spaceship-123');
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ * const project = resource.project('grape-spaceship-123');
  */
 function Project(resource, id) {
   var methods = {
     /**
      * Create a project.
      *
-     * @param {object=} config - See {module:resource#createProject}.
+     * @method Project#create
+     * @param {object} [config] See {@link Resource#createProject}.
      *
      * @example
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
      * project.create(function(err, project, operation, apiResponse) {
      *   if (err) {
      *     // Error handling omitted.
@@ -67,14 +66,14 @@ function Project(resource, id) {
      * //-
      * project.create()
      *   .then(function(data) {
-     *     var project = data[0];
-     *     var operation = data[1];
-     *     var apiResponse = data[2];
+     *     const project = data[0];
+     *     const operation = data[1];
+     *     const apiResponse = data[2];
      *
      *     return operation.promise();
      *   })
      *   .then(function(data) {
-     *     var operationMetadata = data[0];
+     *     const operationMetadata = data[0];
      *
      *     // Project created successfully!
      *   });
@@ -87,14 +86,19 @@ function Project(resource, id) {
      * **This method only works if you are authenticated as yourself, e.g. using
      * the gcloud SDK.**
      *
-     * @resource [projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/delete}
+     * @see [projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/delete}
      *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
+     * @method Project#delete
+     * @param {function} [callback] The callback function.
+     * @param {?error} callback.err An error returned while making this
      *     request.
-     * @param {object} callback.apiResponse - The full API response.
+     * @param {object} callback.apiResponse The full API response.
      *
      * @example
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
      * project.delete(function(err, apiResponse) {
      *   if (!err) {
      *     // The project was deleted!
@@ -105,7 +109,7 @@ function Project(resource, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.delete().then(function(data) {
-     *   var apiResponse = data[0];
+     *   const apiResponse = data[0];
      * });
      */
     delete: true,
@@ -113,19 +117,23 @@ function Project(resource, id) {
     /**
      * Check if the project exists.
      *
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
+     * @param {function} callback The callback function.
+     * @param {?error} callback.err An error returned while making this
      *     request.
-     * @param {boolean} callback.exists - Whether the project exists or not.
+     * @param {boolean} callback.exists Whether the project exists or not.
      *
      * @example
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
      * project.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -138,11 +146,16 @@ function Project(resource, id) {
      * normally required for the `create` method must be contained within this
      * object as well.
      *
-     * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
+     * @method Project#get
+     * @param {options} [options] Configuration object.
+     * @param {boolean} [options.autoCreate=false] Automatically create the
+     *     object if it does not exist.
      *
      * @example
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
      * project.get(function(err, project, apiResponse) {
      *   // `project.metadata` has been populated.
      * });
@@ -151,8 +164,8 @@ function Project(resource, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.get().then(function(data) {
-     *   var project = data[0];
-     *   var apiResponse = data[1];
+     *   const project = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -160,24 +173,29 @@ function Project(resource, id) {
     /**
      * Get the metadata for the project.
      *
-     * @resource [projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/get}
+     * @see [projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/get}
      *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
+     * @method Project#getMetadata
+     * @param {function} [callback] The callback function.
+     * @param {?error} callback.err An error returned while making this
      *     request.
      * @param {?object} callback.metadata - Metadata of the project from the
      *     API.
      * @param {object} callback.apiResponse - Raw API response.
      *
      * @example
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
      * project.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     getMetadata: true,
@@ -188,18 +206,23 @@ function Project(resource, id) {
      * **This method only works if you are authenticated as yourself, e.g. using
      * the gcloud SDK.**
      *
-     * @resource [projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/update}
-     * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
+     * @see [projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/update}
+     * @see [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
      *
-     * @param {object} metadata - See a
+     * @method Project#setMetadata
+     * @param {object} metadata See a
      *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
+     * @param {function} [callback] The callback function.
+     * @param {?error} callback.err An error returned while making this
      *     request.
-     * @param {object} callback.apiResponse - The full API response.
+     * @param {object} callback.apiResponse The full API response.
      *
      * @example
-     * var metadata = {
+     * const Resource = require('@google-cloud/resource');
+     * const resource = new Resource();
+     * const project = resource.project('grape-spaceship-123');
+     *
+     * const metadata = {
      *   name: 'New name'
      * };
      *
@@ -213,22 +236,26 @@ function Project(resource, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.setMetadata(metadata).then(function(data) {
-     *   var apiResponse = data[0];
+     *   const apiResponse = data[0];
      * });
      */
     setMetadata: {
       reqOpts: {
-        method: 'PUT'
-      }
-    }
+        method: 'PUT',
+      },
+    },
   };
 
   common.ServiceObject.call(this, {
     parent: resource,
     baseUrl: '/projects',
+    /**
+     * @name Project#id
+     * @type {string}
+     */
     id: id,
     createMethod: resource.createProject.bind(resource),
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -240,13 +267,17 @@ util.inherits(Project, common.ServiceObject);
  * **This method only works if you are authenticated as yourself, e.g. using the
  * gcloud SDK.**
  *
- * @resource [projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/undelete}
+ * @see [projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/undelete}
  *
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - Raw API response.
+ * @param {function} [callback] The callback function.
+ * @param {?error} callback.err An error returned while making this request.
+ * @param {object} callback.apiResponse Raw API response.
  *
  * @example
+ * const Resource = require('@google-cloud/resource');
+ * const resource = new Resource();
+ * const project = resource.project('grape-spaceship-123');
+ *
  * project.restore(function(err, apiResponse) {
  *   if (!err) {
  *     // Project restored.
@@ -257,18 +288,21 @@ util.inherits(Project, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * project.restore().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Project.prototype.restore = function(callback) {
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'POST',
-    uri: ':undelete'
-  }, function(err, resp) {
-    callback(err, resp);
-  });
+  this.request(
+    {
+      method: 'POST',
+      uri: ':undelete',
+    },
+    function(err, resp) {
+      callback(err, resp);
+    }
+  );
 };
 
 /*! Developer Documentation
@@ -278,4 +312,9 @@ Project.prototype.restore = function(callback) {
  */
 common.util.promisifyAll(Project);
 
+/**
+ * Reference to the {@link Project} class.
+ * @name module:@google-cloud/resource.Project
+ * @see Project
+ */
 module.exports = Project;
