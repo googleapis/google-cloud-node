@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-docs-samples-logging-bunyan",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-logging-bunyan",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "system-test": "ava -T 1m --verbose system-test/*.test.js",
+    "test": "repo-tools test run --cmd npm -- run system-test"
+  },
+  "dependencies": {
+    "@google-cloud/logging-bunyan": "0.6.0",
+    "bunyan": "1.8.12",
+    "yargs": "10.0.3"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "2.1.0",
+    "ava": "0.23.0"
+  }
+}

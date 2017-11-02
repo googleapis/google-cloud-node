@@ -19,19 +19,15 @@
 var assert = require('assert');
 var bunyan = require('bunyan');
 
-var env = require('../../../system-test/env.js');
-
-var logging = require('@google-cloud/logging')(env);
-var loggingBunyan = require('../')(env);
+var logging = require('@google-cloud/logging')();
+var loggingBunyan = require('../')();
 
 describe('LoggingBunyan', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 90000;
 
   var logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
-    streams: [
-      loggingBunyan.stream('info')
-    ]
+    streams: [loggingBunyan.stream('info')],
   });
 
   it('should properly write log entries', function(done) {
@@ -41,51 +37,47 @@ describe('LoggingBunyan', function() {
 
     var testData = [
       {
-        args: [
-          'first'
-        ],
+        args: ['first'],
         level: 'info',
         verify: function(entry) {
           assert.strictEqual(entry.data.message, 'first');
           assert.strictEqual(entry.data.pid, process.pid);
-        }
+        },
       },
 
       {
-        args: [
-          new Error('second')
-        ],
+        args: [new Error('second')],
         level: 'error',
         verify: function(entry) {
           assert(entry.data.message.startsWith('Error: second'));
           assert.strictEqual(entry.data.pid, process.pid);
-        }
+        },
       },
 
       {
         args: [
           {
-            test: circular
+            test: circular,
           },
-          'third'
+          'third',
         ],
         level: 'info',
         verify: function(entry) {
           assert.strictEqual(entry.data.message, 'third');
           assert.strictEqual(entry.data.pid, process.pid);
           assert.deepStrictEqual(entry.data.test, {
-            circular: '[Circular]'
+            circular: '[Circular]',
           });
-        }
-      }
+        },
+      },
     ];
 
     var earliest = {
       args: [
         {
-          time: timestamp
+          time: timestamp,
         },
-        'earliest'
+        'earliest',
       ],
       level: 'info',
       verify: function(entry) {
@@ -95,7 +87,7 @@ describe('LoggingBunyan', function() {
           entry.metadata.timestamp.toString(),
           timestamp.toString()
         );
-      }
+      },
     };
 
     // Forcibly insert a delay to cause 'third' to have a deterministically
@@ -115,20 +107,23 @@ describe('LoggingBunyan', function() {
     setTimeout(function() {
       var log = logging.log('bunyan_log');
 
-      log.getEntries({
-        pageSize: testData.length
-      }, function(err, entries) {
-        assert.ifError(err);
-        assert.strictEqual(entries.length, testData.length);
+      log.getEntries(
+        {
+          pageSize: testData.length,
+        },
+        function(err, entries) {
+          assert.ifError(err);
+          assert.strictEqual(entries.length, testData.length);
 
-        // Make sure entries are valid and are in the correct order.
-        entries.reverse().forEach(function(entry, index) {
-          var test = testData[index];
-          test.verify(entry);
-        });
+          // Make sure entries are valid and are in the correct order.
+          entries.reverse().forEach(function(entry, index) {
+            var test = testData[index];
+            test.verify(entry);
+          });
 
-        done();
-      });
+          done();
+        }
+      );
     }, WRITE_CONSISTENCY_DELAY_MS);
   });
 });
