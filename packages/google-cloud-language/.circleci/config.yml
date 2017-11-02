@@ -35,12 +35,17 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - node9:
+          filters:
+            tags:
+              only: /.*/
       - lint:
           requires:
             - node4
             - node6
             - node7
             - node8
+            - node9
           filters:
             tags:
               only: /.*/
@@ -50,6 +55,7 @@ workflows:
             - node6
             - node7
             - node8
+            - node9
           filters:
             tags:
               only: /.*/
@@ -108,6 +114,10 @@ jobs:
   node8:
     docker:
       - image: node:8
+    <<: *unit_tests
+  node9:
+    docker:
+      - image: node:9
     <<: *unit_tests
 
   lint:
