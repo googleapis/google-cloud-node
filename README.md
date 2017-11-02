@@ -34,7 +34,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech](#cloud-speech-alpha) (Alpha)
-* [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
+* [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
