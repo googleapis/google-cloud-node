@@ -73,27 +73,25 @@ var coerceImage = (image, callback) => {
  * @return {Function} - The function that, when called, will call annotateImage
  *   asking for the single feature annotation.
  */
- var _createSingleFeatureMethod = featureValue => {
-   return function(annotateImageRequest, callOptions) {
-     annotateImageRequest.features = annotateImageRequest.features || [{
-       type: featureValue,
-     }];
-
-     // If the user submitted explicit features that do not line up with
-     // the precise method called, throw an exception.
-     for (let feature of annotateImageRequest.features) {
-       if (feature.type !== featureValue) {
-         throw new Error(
-           'Setting explicit features is not supported on this method. ' +
-           'Use the #annotateImage method instead.'
-         );
-       }
-     }
-
-     // Call the underlying #annotateImage method.
-     return this.annotateImage(annotateImageRequest, callOptions);
-   };
- };
+var _createSingleFeatureMethod = featureValue => {
+  return function(annotateImageRequest, callOptions) {
+    annotateImageRequest.features = annotateImageRequest.features || [{
+      type: featureValue,
+    }];
+    // If the user submitted explicit features that do not line up with
+    // the precise method called, throw an exception.
+    for (let feature of annotateImageRequest.features) {
+      if (feature.type !== featureValue) {
+        throw new Error(
+          'Setting explicit features is not supported on this method. ' +
+          'Use the #annotateImage method instead.'
+        );
+      }
+    }
+    // Call the underlying #annotateImage method.
+    return this.annotateImage(annotateImageRequest, callOptions);
+  };
+};
 
 
 /*!
