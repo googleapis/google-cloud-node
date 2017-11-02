@@ -13,7 +13,7 @@
     "test": "repo-tools test run --cmd npm -- run system-test"
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "0.6.0",
+    "@google-cloud/logging-winston": "0.7.0",
     "winston": "2.4.0",
     "yargs": "10.0.3"
   },
