@@ -33,7 +33,7 @@ describe('logging-winston', function() {
       log: function(logName) {
         fakeLogName_ = logName;
         return fakeLogInstance;
-      }
+      },
     };
   }
 
@@ -43,7 +43,7 @@ describe('logging-winston', function() {
 
   var fakeWinston = {
     transports: {},
-    Transport: FakeTransport
+    Transport: FakeTransport,
   };
 
   var LoggingWinston;
@@ -52,18 +52,18 @@ describe('logging-winston', function() {
   var OPTIONS = {
     logName: 'log-name',
     levels: {
-      one: 1
+      one: 1,
     },
     resource: {},
     serviceContext: {
-      service: 'fake-service'
-    }
+      service: 'fake-service',
+    },
   };
 
   before(function() {
     LoggingWinston = proxyquire('../src/index.js', {
       '@google-cloud/logging': fakeLogging,
-      winston: fakeWinston
+      winston: fakeWinston,
     });
   });
 
@@ -84,13 +84,13 @@ describe('logging-winston', function() {
     it('should inherit from winston.Transport', function() {
       assert.deepEqual(loggingWinston.transportCalledWith_[0], {
         level: OPTIONS.level,
-        name: OPTIONS.logName
+        name: OPTIONS.logName,
       });
     });
 
     it('should default to logging.write scope', function() {
       assert.deepEqual(fakeLoggingOptions_.scopes, [
-        'https://www.googleapis.com/auth/logging.write'
+        'https://www.googleapis.com/auth/logging.write',
       ]);
     });
 
@@ -118,7 +118,7 @@ describe('logging-winston', function() {
 
     it('should localize the provided options.inspectMetadata', function() {
       var optionsWithInspectMetadata = extend({}, OPTIONS, {
-        inspectMetadata: true
+        inspectMetadata: true,
       });
 
       var loggingWinston = new LoggingWinston(optionsWithInspectMetadata);
@@ -140,7 +140,7 @@ describe('logging-winston', function() {
         info: 6,
         verbose: 7,
         debug: 7,
-        silly: 7
+        silly: 7,
       });
     });
 
@@ -172,8 +172,10 @@ describe('logging-winston', function() {
     });
 
     it('should localize the provided service context', function() {
-      assert.strictEqual(loggingWinston.serviceContext_,
-        OPTIONS.serviceContext);
+      assert.strictEqual(
+        loggingWinston.serviceContext_,
+        OPTIONS.serviceContext
+      );
     });
   });
 
@@ -182,7 +184,7 @@ describe('logging-winston', function() {
     var STACKDRIVER_LEVEL = 'alert'; // (code 1)
     var MESSAGE = 'message';
     var METADATA = {
-      value: function() {}
+      value: function() {},
     };
 
     beforeEach(function() {
@@ -205,8 +207,8 @@ describe('logging-winston', function() {
     it('should not throw on `0` log level', function() {
       var options = extend({}, OPTIONS, {
         levels: {
-          zero: 0
-        }
+          zero: 0,
+        },
       });
 
       loggingWinston = new LoggingWinston(options);
@@ -217,11 +219,11 @@ describe('logging-winston', function() {
     it('should properly create an entry', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_
+          resource: loggingWinston.resource_,
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: METADATA
+          metadata: METADATA,
         });
         done();
       };
@@ -231,14 +233,14 @@ describe('logging-winston', function() {
 
     it('should append stack when metadata is an error', function(done) {
       var error = {
-        stack: 'the stack'
+        stack: 'the stack',
       };
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
           message: MESSAGE + ' ' + error.stack,
           metadata: error,
-          serviceContext: OPTIONS.serviceContext
+          serviceContext: OPTIONS.serviceContext,
         });
         done();
       };
@@ -248,14 +250,14 @@ describe('logging-winston', function() {
 
     it('should use stack when metadata is err without message', function(done) {
       var error = {
-        stack: 'the stack'
+        stack: 'the stack',
       };
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(data, {
           message: error.stack,
           metadata: error,
-          serviceContext: OPTIONS.serviceContext
+          serviceContext: OPTIONS.serviceContext,
         });
         done();
       };
@@ -266,11 +268,11 @@ describe('logging-winston', function() {
     it('should not require metadata', function(done) {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepEqual(entryMetadata, {
-          resource: loggingWinston.resource_
+          resource: loggingWinston.resource_,
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: {}
+          metadata: {},
         });
         done();
       };
@@ -298,20 +300,23 @@ describe('logging-winston', function() {
 
     it('should promote httpRequest property to metadata', function(done) {
       var HTTP_REQUEST = {
-        statusCode: 418
+        statusCode: 418,
       };
-      const metadataWithRequest = extend({
-        httpRequest: HTTP_REQUEST
-      }, METADATA);
+      const metadataWithRequest = extend(
+        {
+          httpRequest: HTTP_REQUEST,
+        },
+        METADATA
+      );
 
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingWinston.resource_,
-          httpRequest: HTTP_REQUEST
+          httpRequest: HTTP_REQUEST,
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: METADATA
+          metadata: METADATA,
         });
         done();
       };
@@ -325,11 +330,11 @@ describe('logging-winston', function() {
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingWinston.resource_,
-          trace: 'trace1'
+          trace: 'trace1',
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: METADATA
+          metadata: METADATA,
         });
         done();
       };
@@ -339,17 +344,21 @@ describe('logging-winston', function() {
     it('should set trace metadata from agent if available', function(done) {
       var oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
-        getCurrentContextId: function() { return 'trace1'; },
-        getWriterProjectId: function() { return 'project1'; }
+        getCurrentContextId: function() {
+          return 'trace1';
+        },
+        getWriterProjectId: function() {
+          return 'project1';
+        },
       };
       loggingWinston.log_.entry = function(entryMetadata, data) {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingWinston.resource_,
-          trace: 'projects/project1/traces/trace1'
+          trace: 'projects/project1/traces/trace1',
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: METADATA
+          metadata: METADATA,
         });
         done();
       };
@@ -366,7 +375,7 @@ describe('logging-winston', function() {
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,
-          metadata: METADATA
+          metadata: METADATA,
         });
       };
 
@@ -376,20 +385,32 @@ describe('logging-winston', function() {
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
 
       global._google_trace_agent = {
-        getCurrentContextId: function() { return null; },
-        getWriterProjectId: function() { return null; }
+        getCurrentContextId: function() {
+          return null;
+        },
+        getWriterProjectId: function() {
+          return null;
+        },
       };
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
 
       global._google_trace_agent = {
-        getCurrentContextId: function() { return null; },
-        getWriterProjectId: function() { return 'project1'; }
+        getCurrentContextId: function() {
+          return null;
+        },
+        getWriterProjectId: function() {
+          return 'project1';
+        },
       };
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
 
       global._google_trace_agent = {
-        getCurrentContextId: function() { return 'trace1'; },
-        getWriterProjectId: function() { return null; }
+        getCurrentContextId: function() {
+          return 'trace1';
+        },
+        getWriterProjectId: function() {
+          return null;
+        },
       };
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
 
