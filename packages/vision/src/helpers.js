@@ -74,11 +74,22 @@ var coerceImage = (image, callback) => {
  *   asking for the single feature annotation.
  */
 var _createSingleFeatureMethod = featureValue => {
-  return function(image, options) {
-    return this.annotateImage({
-      image: image,
-      features: [{type: featureValue}],
-    }, options);
+  return function(annotateImageRequest, callOptions) {
+    annotateImageRequest.features = annotateImageRequest.features || [{
+      type: featureValue,
+    }];
+    // If the user submitted explicit features that do not line up with
+    // the precise method called, throw an exception.
+    for (let feature of annotateImageRequest.features) {
+      if (feature.type !== featureValue) {
+        throw new Error(
+          'Setting explicit features is not supported on this method. ' +
+          'Use the #annotateImage method instead.'
+        );
+      }
+    }
+    // Call the underlying #annotateImage method.
+    return this.annotateImage(annotateImageRequest, callOptions);
   };
 };
 
@@ -98,9 +109,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with the requested features.
    *
-   * @param {Object=} request
+   * @param {Object} request
    *   A representation of the request being sent to the Vision API.
-   * @param {Object=} request.image
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -110,7 +122,10 @@ module.exports = apiVersion => {
    *   If the key is `content`, the value should be a Buffer.
    * @param {Array} request.features
    *   An array of the specific annotation features being requested.
-   * @param {Object=} options
+   *   This should take a form such as:
+   *     [{type: vision.types.Feature.Type.FACE_DETECTION},
+   *      {type: vision.types.Feature.Type.WEB_DETECTION}]
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -137,12 +152,12 @@ module.exports = apiVersion => {
    *   console.error(err);
    * });
    */
-  methods.annotateImage = promisify(function(request, options, callback) {
+  methods.annotateImage = promisify(function(request, callOptions, callback) {
     // If a callback was provided and options were skipped, normalize
     // the argument names.
-    if (is.undefined(callback) && is.function(options)) {
-      callback = options;
-      options = undefined;
+    if (is.undefined(callback) && is.function(callOptions)) {
+      callback = callOptions;
+      callOptions = undefined;
     }
 
     // If there is no image, throw an exception.
@@ -159,7 +174,7 @@ module.exports = apiVersion => {
       request.image = image;
 
       // Call the GAPIC batch annotation function.
-      return this.batchAnnotateImages([request], options, (err, r) => {
+      return this.batchAnnotateImages([request], callOptions, (err, r) => {
         // If there is an error, handle it.
         if (err) {
           return callback(err);
@@ -187,7 +202,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with face detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -195,7 +213,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -227,7 +245,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with landmark detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -235,7 +256,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -267,7 +288,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with logo detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -275,7 +299,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -307,7 +331,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with label detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -315,7 +342,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -347,7 +374,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with text detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -355,7 +385,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -387,7 +417,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with document text detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -395,7 +428,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -427,7 +460,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with safe search detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -435,7 +471,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -467,7 +503,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with image properties.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -475,7 +514,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -507,7 +546,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with crop hints.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -515,7 +557,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
@@ -547,7 +589,10 @@ module.exports = apiVersion => {
   /**
    * Annotate a single image with web detection.
    *
-   * @param {Object=} image
+   * @param {Object} request
+   *   A representation of the request being sent to the Vision API.
+   *   This is an [AnnotateImageRequest]{@link AnnotateImageRequest}.
+   * @param {Object} request.image
    *   A dictionary-like object representing the image. This should have a
    *   single key (`source`, `content`).
    *
@@ -555,7 +600,7 @@ module.exports = apiVersion => {
    *   `imageUri` or `filename` as a key and a string as a value.
    *
    *   If the key is `content`, the value should be a Buffer.
-   * @param {Object=} options
+   * @param {Object=} callOptions
    *   Optional parameters. You can override the default settings for this
    *   call, e.g, timeout, retries, paginations, etc. See
    *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
