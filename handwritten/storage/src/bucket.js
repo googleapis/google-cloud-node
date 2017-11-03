@@ -1153,8 +1153,8 @@ Bucket.prototype.get = function(options, callback) {
  * Query object for listing files.
  *
  * @typedef {object} GetFilesRequest
- * @property {boolean} [autoPaginate] Have pagination handled automatically.
- *     Default: true.
+ * @property {boolean} [autoPaginate=true] Have pagination handled
+ *     automatically.
  * @property {string} [delimiter] Results will contain only objects whose
  *     names, aside from the prefix, do not contain delimiter. Objects whose
  *     names, aside from the prefix, contain delimiter will have their name
@@ -1175,13 +1175,11 @@ Bucket.prototype.get = function(options, callback) {
 /**
  * @typedef {array} GetFilesResponse
  * @property {File[]} 0 Array of {@link File} instances.
- * @property {object} 1 The full API response.
- */
+  */
 /**
  * @callback GetFilesCallback
  * @param {?Error} err Request error, if any.
  * @param {File[]} files Array of {@link File} instances.
- * @param {object} apiResponse The full API response.
  */
 /**
  * Get {@link File} objects for the files currently in the bucket.

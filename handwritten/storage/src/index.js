@@ -383,13 +383,11 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
 /**
  * @typedef {array} GetBucketsResponse
  * @property {Bucket[]} 0 Array of {@link Bucket} instances.
- * @property {object} 1 The full API response.
  */
 /**
  * @callback GetBucketsCallback
  * @param {?Error} err Request error, if any.
  * @param {Bucket[]} buckets Array of {@link Bucket} instances.
- * @param {object} apiResponse The full API response.
  */
 /**
  * Get Bucket objects for all of the buckets in your project.
