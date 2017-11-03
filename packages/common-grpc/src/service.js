@@ -778,6 +778,7 @@ GrpcService.prototype.getService_ = function(protoOpts) {
       proto.baseUrl || this.baseUrl,
       this.grpcCredentials,
       extend({
+        'grpc.lb_policy_name': 'round_robin',
         'grpc.primary_user_agent': this.userAgent
       }, GRPC_SERVICE_OPTIONS)
     );
