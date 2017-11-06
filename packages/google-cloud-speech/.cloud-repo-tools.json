@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "speech",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/speech/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "recognize",
+      "name": "Speech Recognition",
+      "file": "recognize.js",
+      "docs_link": "https://cloud.google.com/speech/docs",
+      "usage": "node recognize.js --help"
+    }
+  ]
+}

@@ -17,17 +17,18 @@
 'use strict';
 
 var assert = require('assert');
+var Buffer = require('safe-buffer').Buffer;
 var sinon = require('sinon');
 var stream = require('stream');
 
-var Speech = require('../');
+var speech = require('../');
 
 describe('Speech helper methods', () => {
   var sandbox = sinon.sandbox.create();
-  var speech;
+  var client;
 
   beforeEach(() => {
-    speech = Speech.v1();
+    client = new speech.v1.SpeechClient();
   });
 
   afterEach(() => {
@@ -35,19 +36,22 @@ describe('Speech helper methods', () => {
   });
 
   describe('streamingRecognize', () => {
-    var CONFIG = {config: {languageCode: 'en-us'}};
+    var CONFIG = {
+      config: {encoding: 'LINEAR16', languageCode: 'en-us', sampleRate: 16000},
+    };
     var OPTIONS = {timeout: Infinity};
 
-    it('writes the config to the resulting stream', (done) => {
+    it('writes the config to the resulting stream', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({ objectMode: true });
-      var sr = sandbox.stub(speech, '_streamingRecognize')
+      var requestStream = new stream.PassThrough({objectMode: true});
+      var sr = sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       // Call the new helper method and establish that the config was
       // forwarded as expected.
-      var userStream = speech.streamingRecognize(CONFIG, OPTIONS);
+      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
       // Establish that the underlying streamingRecognize was called with
       // the options.
@@ -56,7 +60,7 @@ describe('Speech helper methods', () => {
 
       requestStream._write = (data, enc, next) => {
         assert.deepStrictEqual(data, {
-          streamingConfig: CONFIG
+          streamingConfig: CONFIG,
         });
         setImmediate(done);
         next(null, data);
@@ -68,11 +72,12 @@ describe('Speech helper methods', () => {
     it('does not require options', () => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({ objectMode: true });
-      var sr = sandbox.stub(speech, '_streamingRecognize')
+      var requestStream = new stream.PassThrough({objectMode: true});
+      var sr = sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = speech.streamingRecognize(CONFIG);
+      var userStream = client.streamingRecognize(CONFIG);
 
       userStream.emit('writing');
 
@@ -80,17 +85,19 @@ describe('Speech helper methods', () => {
       assert(sr.calledWithExactly({}));
     });
 
-    it('destroys the user stream when the request stream errors', (done) => {
+    it('destroys the user stream when the request stream errors', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({ objectMode: true });
-      sandbox.stub(speech, '_streamingRecognize').returns(requestStream);
+      var requestStream = new stream.PassThrough({objectMode: true});
+      sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
+        .returns(requestStream);
 
-      var userStream = speech.streamingRecognize(CONFIG, OPTIONS);
+      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
       var error = new Error('Request stream error');
 
-      userStream.once('error', (err) => {
+      userStream.once('error', err => {
         assert.strictEqual(err, error);
         done();
       });
@@ -100,17 +107,19 @@ describe('Speech helper methods', () => {
       requestStream.emit('error', error);
     });
 
-    it('re-emits response from the request stream', (done) => {
+    it('re-emits response from the request stream', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({ objectMode: true });
-      sandbox.stub(speech, '_streamingRecognize').returns(requestStream);
+      var requestStream = new stream.PassThrough({objectMode: true});
+      sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
+        .returns(requestStream);
 
-      var userStream = speech.streamingRecognize(CONFIG, OPTIONS);
+      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
       var response = {};
 
-      userStream.on('response', (_response) => {
+      userStream.on('response', _response => {
         assert.strictEqual(_response, response);
         done();
       });
@@ -119,18 +128,20 @@ describe('Speech helper methods', () => {
       requestStream.emit('response', response);
     });
 
-    it('wraps incoming audio data', (done) => {
+    it('wraps incoming audio data', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({ objectMode: true });
-      sandbox.stub(speech, '_streamingRecognize').returns(requestStream);
+      var requestStream = new stream.PassThrough({objectMode: true});
+      sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
+        .returns(requestStream);
 
-      var userStream = speech.streamingRecognize(CONFIG, OPTIONS);
-      var audioContent = new Buffer('audio content');
+      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      var audioContent = Buffer.from('audio content');
 
       requestStream._write = (data, enc, next) => {
         if (data && data.streamingConfig !== CONFIG) {
-          assert.deepStrictEqual(data, { audioContent });
+          assert.deepStrictEqual(data, {audioContent});
           setImmediate(done);
         }
 

@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google LLC All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * The top-level message sent by the client for the `Recognize` method.
@@ -26,14 +22,15 @@
  *   *Required* Provides information to the recognizer that specifies how to
  *   process the request.
  *
- *   This object should have the same structure as [RecognitionConfig]{@link RecognitionConfig}
+ *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {Object} audio
  *   *Required* The audio data to be recognized.
  *
- *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
+ *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1.RecognitionAudio}
  *
- * @class
+ * @typedef RecognizeRequest
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var RecognizeRequest = {
@@ -48,14 +45,15 @@ var RecognizeRequest = {
  *   *Required* Provides information to the recognizer that specifies how to
  *   process the request.
  *
- *   This object should have the same structure as [RecognitionConfig]{@link RecognitionConfig}
+ *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {Object} audio
  *   *Required* The audio data to be recognized.
  *
- *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
+ *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1.RecognitionAudio}
  *
- * @class
+ * @typedef LongRunningRecognizeRequest
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var LongRunningRecognizeRequest = {
@@ -74,7 +72,7 @@ var LongRunningRecognizeRequest = {
  *   request. The first `StreamingRecognizeRequest` message must contain a
  *   `streaming_config`  message.
  *
- *   This object should have the same structure as [StreamingRecognitionConfig]{@link StreamingRecognitionConfig}
+ *   This object should have the same structure as [StreamingRecognitionConfig]{@link google.cloud.speech.v1.StreamingRecognitionConfig}
  *
  * @property {string} audioContent
  *   The audio data to be recognized. Sequential chunks of audio data are sent
@@ -86,7 +84,8 @@ var LongRunningRecognizeRequest = {
  *   pure binary representation (not base64). See
  *   [audio limits](https://cloud.google.com/speech/limits#content).
  *
- * @class
+ * @typedef StreamingRecognizeRequest
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var StreamingRecognizeRequest = {
@@ -101,7 +100,7 @@ var StreamingRecognizeRequest = {
  *   *Required* Provides information to the recognizer that specifies how to
  *   process the request.
  *
- *   This object should have the same structure as [RecognitionConfig]{@link RecognitionConfig}
+ *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {boolean} singleUtterance
  *   *Optional* If `false` or omitted, the recognizer will perform continuous
@@ -122,7 +121,8 @@ var StreamingRecognizeRequest = {
  *   the `is_final=false` flag).
  *   If `false` or omitted, only `is_final=true` result(s) are returned.
  *
- * @class
+ * @typedef StreamingRecognitionConfig
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var StreamingRecognitionConfig = {
@@ -136,7 +136,7 @@ var StreamingRecognitionConfig = {
  * @property {number} encoding
  *   *Required* Encoding of audio data sent in all `RecognitionAudio` messages.
  *
- *   The number should be among the values of [AudioEncoding]{@link AudioEncoding}
+ *   The number should be among the values of [AudioEncoding]{@link google.cloud.speech.v1.AudioEncoding}
  *
  * @property {number} sampleRateHertz
  *   *Required* Sample rate in Hertz of the audio data sent in all
@@ -169,9 +169,16 @@ var StreamingRecognitionConfig = {
  * @property {Object[]} speechContexts
  *   *Optional* A means to provide context to assist the speech recognition.
  *
- *   This object should have the same structure as [SpeechContext]{@link SpeechContext}
+ *   This object should have the same structure as [SpeechContext]{@link google.cloud.speech.v1.SpeechContext}
  *
- * @class
+ * @property {boolean} enableWordTimeOffsets
+ *   *Optional* If `true`, the top result includes a list of words and
+ *   the start and end time offsets (timestamps) for those words. If
+ *   `false`, no word-level time offset information is returned. The default is
+ *   `false`.
+ *
+ * @typedef RecognitionConfig
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var RecognitionConfig = {
@@ -179,9 +186,9 @@ var RecognitionConfig = {
 
   /**
    * Audio encoding of the data sent in the audio message. All encodings support
-   * only 1 channel (mono) audio. Only `FLAC` includes a header that describes
-   * the bytes of audio that follow the header. The other encodings are raw
-   * audio bytes with no header.
+   * only 1 channel (mono) audio. Only `FLAC` and `WAV` include a header that
+   * describes the bytes of audio that follow the header. The other encodings
+   * are raw audio bytes with no header.
    *
    * For best results, the audio source should be captured and transmitted using
    * a lossless encoding (`FLAC` or `LINEAR16`). Recognition accuracy may be
@@ -190,11 +197,12 @@ var RecognitionConfig = {
    * background noise is present.
    *
    * @enum {number}
+   * @memberof google.cloud.speech.v1
    */
   AudioEncoding: {
 
     /**
-     * Not specified. Will return result {@link google.rpc.Code.INVALID_ARGUMENT}.
+     * Not specified. Will return result google.rpc.Code.INVALID_ARGUMENT.
      */
     ENCODING_UNSPECIFIED: 0,
 
@@ -266,7 +274,8 @@ var RecognitionConfig = {
  *   to add additional words to the vocabulary of the recognizer. See
  *   [usage limits](https://cloud.google.com/speech/limits#content).
  *
- * @class
+ * @typedef SpeechContext
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var SpeechContext = {
@@ -276,7 +285,7 @@ var SpeechContext = {
 /**
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
- * returns {@link google.rpc.Code.INVALID_ARGUMENT}. See
+ * returns google.rpc.Code.INVALID_ARGUMENT. See
  * [audio limits](https://cloud.google.com/speech/limits#content).
  *
  * @property {string} content
@@ -289,10 +298,11 @@ var SpeechContext = {
  *   `RecognitionConfig`. Currently, only Google Cloud Storage URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket_name/object_name` (other URI formats return
- *   {@link google.rpc.Code.INVALID_ARGUMENT}). For more information, see
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
  *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
- * @class
+ * @typedef RecognitionAudio
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognitionAudio definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var RecognitionAudio = {
@@ -308,9 +318,10 @@ var RecognitionAudio = {
  *   *Output-only* Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
- *   This object should have the same structure as [SpeechRecognitionResult]{@link SpeechRecognitionResult}
+ *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
  *
- * @class
+ * @typedef RecognizeResponse
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var RecognizeResponse = {
@@ -328,9 +339,10 @@ var RecognizeResponse = {
  *   *Output-only* Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
- *   This object should have the same structure as [SpeechRecognitionResult]{@link SpeechRecognitionResult}
+ *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
  *
- * @class
+ * @typedef LongRunningRecognizeResponse
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var LongRunningRecognizeResponse = {
@@ -349,14 +361,15 @@ var LongRunningRecognizeResponse = {
  * @property {Object} startTime
  *   Time when the request was received.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} lastUpdateTime
  *   Time of the most recent processing update.
  *
- *   This object should have the same structure as [google.protobuf.Timestamp]{@link external:"google.protobuf.Timestamp"}
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @class
+ * @typedef LongRunningRecognizeMetadata
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var LongRunningRecognizeMetadata = {
@@ -365,8 +378,10 @@ var LongRunningRecognizeMetadata = {
 
 /**
  * `StreamingRecognizeResponse` is the only message returned to the client by
- * `StreamingRecognize`. A series of one or more `StreamingRecognizeResponse`
- * messages are streamed back to the client.
+ * `StreamingRecognize`. A series of zero or more `StreamingRecognizeResponse`
+ * messages are streamed back to the client. If there is no recognizable
+ * audio, and `single_utterance` is set to false, then no messages are streamed
+ * back to the client.
  *
  * Here's an example of a series of ten `StreamingRecognizeResponse`s that might
  * be returned while processing audio:
@@ -388,16 +403,14 @@ var LongRunningRecognizeMetadata = {
  * 6. results { alternatives { transcript: " that is" } stability: 0.9 }
  *    results { alternatives { transcript: " the question" } stability: 0.01 }
  *
- * 7. speech_event_type: END_OF_SINGLE_UTTERANCE
- *
- * 8. results { alternatives { transcript: " that is the question"
+ * 7. results { alternatives { transcript: " that is the question"
  *                             confidence: 0.98 }
  *              alternatives { transcript: " that was the question" }
  *              is_final: true }
  *
  * Notes:
  *
- * - Only two of the above responses #4 and #8 contain final results; they are
+ * - Only two of the above responses #4 and #7 contain final results; they are
  *   indicated by `is_final: true`. Concatenating these together generates the
  *   full transcript: "to be or not to be that is the question".
  *
@@ -415,25 +428,26 @@ var LongRunningRecognizeMetadata = {
  *     one or more (repeated) `results`.
  *
  * @property {Object} error
- *   *Output-only* If set, returns a {@link google.rpc.Status} message that
+ *   *Output-only* If set, returns a google.rpc.Status message that
  *   specifies the error for the operation.
  *
- *   This object should have the same structure as [google.rpc.Status]{@link external:"google.rpc.Status"}
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {Object[]} results
  *   *Output-only* This repeated list contains zero or more results that
  *   correspond to consecutive portions of the audio currently being processed.
- *   It contains zero or one `is_final=true` result (the newly settled portion),
- *   followed by zero or more `is_final=false` results.
+ *   It contains zero or more `is_final=false` results followed by zero or one
+ *   `is_final=true` result (the newly settled portion).
  *
- *   This object should have the same structure as [StreamingRecognitionResult]{@link StreamingRecognitionResult}
+ *   This object should have the same structure as [StreamingRecognitionResult]{@link google.cloud.speech.v1.StreamingRecognitionResult}
  *
  * @property {number} speechEventType
  *   *Output-only* Indicates the type of speech event.
  *
- *   The number should be among the values of [SpeechEventType]{@link SpeechEventType}
+ *   The number should be among the values of [SpeechEventType]{@link google.cloud.speech.v1.SpeechEventType}
  *
- * @class
+ * @typedef StreamingRecognizeResponse
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var StreamingRecognizeResponse = {
@@ -443,6 +457,7 @@ var StreamingRecognizeResponse = {
    * Indicates the type of speech event.
    *
    * @enum {number}
+   * @memberof google.cloud.speech.v1
    */
   SpeechEventType: {
 
@@ -472,7 +487,7 @@ var StreamingRecognizeResponse = {
  *   *Output-only* May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
  *
- *   This object should have the same structure as [SpeechRecognitionAlternative]{@link SpeechRecognitionAlternative}
+ *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1.SpeechRecognitionAlternative}
  *
  * @property {boolean} isFinal
  *   *Output-only* If `false`, this `StreamingRecognitionResult` represents an
@@ -488,7 +503,8 @@ var StreamingRecognizeResponse = {
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
- * @class
+ * @typedef StreamingRecognitionResult
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var StreamingRecognitionResult = {
@@ -501,10 +517,13 @@ var StreamingRecognitionResult = {
  * @property {Object[]} alternatives
  *   *Output-only* May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
+ *   These alternatives are ordered in terms of accuracy, with the top (first)
+ *   alternative being the most probable, as ranked by the recognizer.
  *
- *   This object should have the same structure as [SpeechRecognitionAlternative]{@link SpeechRecognitionAlternative}
+ *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1.SpeechRecognitionAlternative}
  *
- * @class
+ * @typedef SpeechRecognitionResult
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var SpeechRecognitionResult = {
@@ -522,13 +541,54 @@ var SpeechRecognitionResult = {
  *   indicates an estimated greater likelihood that the recognized words are
  *   correct. This field is typically provided only for the top hypothesis, and
  *   only for `is_final=true` results. Clients should not rely on the
- *   `confidence` field as it is not guaranteed to be accurate, or even set, in
- *   any of the results.
+ *   `confidence` field as it is not guaranteed to be accurate or consistent.
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
- * @class
+ * @property {Object[]} words
+ *   *Output-only* A list of word-specific information for each recognized word.
+ *
+ *   This object should have the same structure as [WordInfo]{@link google.cloud.speech.v1.WordInfo}
+ *
+ * @typedef SpeechRecognitionAlternative
+ * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechRecognitionAlternative definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
 var SpeechRecognitionAlternative = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Word-specific information for recognized words. Word information is only
+ * included in the response when certain request parameters are set, such
+ * as `enable_word_time_offsets`.
+ *
+ * @property {Object} startTime
+ *   *Output-only* Time offset relative to the beginning of the audio,
+ *   and corresponding to the start of the spoken word.
+ *   This field is only set if `enable_word_time_offsets=true` and only
+ *   in the top hypothesis.
+ *   This is an experimental feature and the accuracy of the time offset can
+ *   vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} endTime
+ *   *Output-only* Time offset relative to the beginning of the audio,
+ *   and corresponding to the end of the spoken word.
+ *   This field is only set if `enable_word_time_offsets=true` and only
+ *   in the top hypothesis.
+ *   This is an experimental feature and the accuracy of the time offset can
+ *   vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {string} word
+ *   *Output-only* The word corresponding to this set of information.
+ *
+ * @typedef WordInfo
+ * @memberof google.cloud.speech.v1
+ * @see [google.cloud.speech.v1.WordInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
+ */
+var WordInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

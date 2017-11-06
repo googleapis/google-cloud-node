@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module speech/helpers
- */
-
 'use strict';
 
 var pumpify = require('pumpify');
@@ -27,9 +23,6 @@ var through = require('through2');
 /*!
  * Return a dictionary-like object with helpers to augment the Speech
  * GAPIC.
- *
- * @return {Object} - An object with keys and functions which are placed
- *   onto the pure GAPIC.
  */
 module.exports = () => {
   var methods = {};
@@ -38,25 +31,25 @@ module.exports = () => {
    * Performs bidirectional streaming speech recognition: receive results while
    * sending audio. This method is only available via the gRPC API (not REST).
    *
-   * @param {Object} config
-   *   The configuration for the stream. This is appropriately wrapped and
-   *   sent as the first argument. It should be an object conforming to the
-   *   [StreamingRecognitionConfig]{@link StreamingRecognitionConfig}
-   *   structure.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this
-   *   call, e.g, timeout, retries, paginations, etc. See
-   *   [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
-   *   for the details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts
-   *   raw audio for the write() method, and will emit objects representing
-   *   [StreamingRecognizeResponse]{@link StreamingRecognizeResponse} on the
-   *   'data' event asynchronously.
+   * @method v1.SpeechClient#streamingRecognize
+   * @param {object} config The configuration for the stream. This is
+   *     appropriately wrapped and sent as the first argument. It should be an
+   *     object conforming to the [StreamingRecognitionConfig]{@link StreamingRecognitionConfig}
+   *     structure.
+   * @param {object} [options] Optional parameters. You can override the default
+   *     settings for this call, e.g, timeout, retries, paginations, etc. See
+   *     [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *     for the details.
+   * @returns {stream} An object stream which is both readable and writable. It
+   *     accepts raw audio for the `write()` method, and will emit objects
+   *     representing [StreamingRecognizeResponse]{@link StreamingRecognizeResponse}
+   *     on the 'data' event asynchronously.
    *
    * @example
+   * const speech = require('@google-cloud/speech');
+   * const client = new speech.SpeechClient();
    *
-   * var stream = speech.streamingRecognize({
+   * const stream = client.streamingRecognize({
    *   config: {
    *     encoding: 'LINEAR16',
    *     languageCode: 'en-us',
@@ -65,7 +58,7 @@ module.exports = () => {
    * }).on('data', function(response) {
    *   // doThingsWith(response);
    * });
-   * var request = {};
+   * const request = {};
    * // Write request objects.
    * stream.write(request);
    */
@@ -74,7 +67,7 @@ module.exports = () => {
       options = {};
     }
 
-    var requestStream = this._streamingRecognize(options);
+    var requestStream = this._innerApiCalls.streamingRecognize(options);
 
     // Format the audio content as input request for pipeline
     var recognizeStream = streamEvents(pumpify.obj());
@@ -96,7 +89,7 @@ module.exports = () => {
 
       // Write the initial configuration to the stream.
       requestStream.write({
-        streamingConfig: config
+        streamingConfig: config,
       });
 
       // Set up appropriate piping between the stream returned by
@@ -107,11 +100,11 @@ module.exports = () => {
         // the appropriate request structure.
         through.obj((obj, _, next) => {
           next(null, {
-            audioContent: obj
+            audioContent: obj,
           });
         }),
         requestStream,
-        through.obj()
+        through.obj(),
       ]);
     });
 

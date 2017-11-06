@@ -4,42 +4,24 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
-  },
+  "repository": "googleapis/nodejs-speech",
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=4.0.0"
   },
   "scripts": {
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "samples test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
+    "test": "repo-tools test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/speech": "0.10.2",
-    "@google-cloud/storage": "1.2.1",
+    "@google-cloud/speech": "0.10.3",
+    "@google-cloud/storage": "1.4.0",
     "node-record-lpcm16": "0.3.0",
-    "yargs": "8.0.2"
+    "yargs": "10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "0.21.0",
+    "@google-cloud/nodejs-repo-tools": "2.1.1",
+    "ava": "0.23.0",
     "proxyquire": "1.8.0",
-    "sinon": "3.2.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "product": "speech",
-    "samples": [
-      {
-        "id": "recognize",
-        "name": "Speech Recognition",
-        "file": "recognize.js",
-        "docs_link": "https://cloud.google.com/speech/docs",
-        "usage": "node recognize.js --help"
-      }
-    ]
+    "sinon": "4.1.1",
+    "uuid": "3.1.0"
   }
 }
