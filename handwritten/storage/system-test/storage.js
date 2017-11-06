@@ -88,6 +88,86 @@ describe('storage', function() {
     async.parallel([deleteAllBuckets, deleteAllTopics], done);
   });
 
+  describe('without authentication', function() {
+    var privateBucket;
+    var privateFile;
+    var storageWithoutAuth;
+
+    var GOOGLE_APPLICATION_CREDENTIALS;
+
+    before(function(done) {
+      privateBucket = bucket; // `bucket` was created in the global `before`
+      privateFile = privateBucket.file('file-name');
+
+      privateFile.save('data', function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        // CI authentication is done with ADC. Cache it here, restore it `after`
+        GOOGLE_APPLICATION_CREDENTIALS =
+          process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+        storageWithoutAuth = require('../')();
+
+        done();
+      });
+    });
+
+    after(function() {
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
+    });
+
+    describe('public data', function() {
+      var bucket;
+
+      before(function() {
+        bucket = storageWithoutAuth.bucket('gcp-public-data-landsat');
+      });
+
+      it('should list and download a file', function(done) {
+        bucket.getFiles(
+          {
+            autoPaginate: false,
+          },
+          function(err, files) {
+            assert.ifError(err);
+
+            var file = files[0];
+
+            file.download(done);
+          }
+        );
+      });
+    });
+
+    describe('private data', function() {
+      var bucket;
+      var file;
+
+      before(function() {
+        bucket = storageWithoutAuth.bucket(privateBucket.id);
+        file = bucket.file(privateFile.id);
+      });
+
+      it('should not download a file', function(done) {
+        file.download(function(err) {
+          assert(err.message.indexOf('does not have storage.objects.get') > -1);
+          done();
+        });
+      });
+
+      it('should not upload a file', function(done) {
+        file.save('new data', function(err) {
+          assert(err.message.indexOf('Could not authenticate') > -1);
+          done();
+        });
+      });
+    });
+  });
+
   describe('acls', function() {
     describe('buckets', function() {
       it('should get access controls', function(done) {
