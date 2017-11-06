@@ -33,7 +33,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 
 * [Cloud Bigtable](https://github.com/googleapis/nodejs-bigtable) (Alpha)
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
-* [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
+* [Cloud Resource Manager](https://github.com/googleapis/nodejs-resource) (Alpha)
 * [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
 * [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
