@@ -1551,6 +1551,10 @@ File.prototype.getSignedPolicy = function(options, callback) {
  *     given is passed to `new Date()`.
  * @param {object} [config.extensionHeaders] If these headers are used, the
  *     server will check to make sure that the client provides matching values.
+ *     See [Canonical extension headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
+ *     for the requirements of this feature, most notably:
+ *       - The header name must be prefixed with `x-goog-`
+ *       - The header name must be all lowercase
  * @param {string} [config.promptSaveAs] The filename to prompt the user to
  *     save the file as when the signed url is accessed. This is ignored if
  *     `config.responseDisposition` is set.
