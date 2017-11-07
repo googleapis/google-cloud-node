@@ -25,11 +25,12 @@ error.code = FAKE_STATUS_CODE;
 describe('VideoIntelligenceServiceClient', () => {
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
-      var client = new videoIntelligenceModule.v1beta2
-        .VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       var request = {};
@@ -59,11 +60,12 @@ describe('VideoIntelligenceServiceClient', () => {
     });
 
     it('invokes annotateVideo with error', done => {
-      var client = new videoIntelligenceModule.v1beta2
-        .VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       var request = {};
@@ -92,11 +94,12 @@ describe('VideoIntelligenceServiceClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new videoIntelligenceModule.v1beta2
-        .VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       assert(
         client._descriptors.longrunning.annotateVideo.responseDecoder instanceof
           Function
