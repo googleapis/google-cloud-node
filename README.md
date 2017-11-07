@@ -35,10 +35,13 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
 * [Cloud Resource Manager](https://github.com/googleapis/nodejs-resource) (Alpha)
 * [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
-* [Google Prediction API](#google-prediction-api-alpha) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
+
+The following client libraries are **deprecated** due to the underlying API also being deprecated:
+
+* [Google Prediction API](https://github.com/googleapis/nodejs-prediction) (Deprecated)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
