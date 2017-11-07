@@ -608,7 +608,7 @@ Subscription.prototype.flushQueues_ = function() {
   if (acks.length) {
     requests.push(
       this.acknowledge_(acks).then(function() {
-        self.inventory_.ack.length = 0;
+        self.inventory_.ack = [];
       })
     );
   }
@@ -616,7 +616,7 @@ Subscription.prototype.flushQueues_ = function() {
   if (nacks.length) {
     requests.push(
       this.modifyAckDeadline_(nacks, 0).then(function() {
-        self.inventory_.nack.length = 0;
+        self.inventory_.nack = [];
       })
     );
   }
