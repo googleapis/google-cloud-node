@@ -598,6 +598,25 @@ describe('storage', function() {
           }
         );
       });
+
+      it('should upload a file from a URL', function(done) {
+        var url =
+          'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg';
+
+        bucket.upload(url, function(err, file) {
+          assert.ifError(err);
+
+          file.download(function(err, contents) {
+            assert.ifError(err);
+
+            request(url, function(err, resp, body) {
+              assert.ifError(err);
+              assert.strictEqual(body.toString(), contents.toString());
+              done();
+            });
+          });
+        });
+      });
     });
   });
 

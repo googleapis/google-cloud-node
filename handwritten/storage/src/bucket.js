@@ -26,6 +26,7 @@ var mime = require('mime-types');
 var path = require('path');
 var snakeize = require('snakeize');
 var util = require('util');
+var request = require('request');
 
 var Acl = require('./acl.js');
 var File = require('./file.js');
@@ -2046,15 +2047,15 @@ Bucket.prototype.setUserProject = function(userProject) {
  * @see [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}
  * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
  *
- * @param {string} localPath The fully qualified path to the file you wish to
- *     upload to your bucket.
+ * @param {string} pathString The fully qualified path or url to the file you
+ *     wish to upload to your bucket.
  * @param {object} [options] Configuration options.
  * @param {string|File} [options.destination] The place to save
  *     your file. If given a string, the file will be uploaded to the bucket
  *     using the string as a filename. When given a File object, your local file
  *     will be uploaded to the File object's bucket and under the File object's
  *     name. Lastly, when this argument is omitted, the file is uploaded to your
- *     bucket using the name of the local file.
+ *     bucket using the name of the local file or the path of the url relative to it's domain.
  * @param {string} [options.encryptionKey] A custom encryption key. See
  *     [Customer-supplied Encryption Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
  * @param {boolean} [options.gzip] Automatically gzip the file. This will set
@@ -2106,11 +2107,22 @@ Bucket.prototype.setUserProject = function(userProject) {
  * var bucket = storage.bucket('albums');
  *
  * //-
- * // The easiest way to upload a file.
+ * // Upload a file from a local path.
  * //-
  * bucket.upload('/local/path/image.png', function(err, file, apiResponse) {
  *   // Your bucket now contains:
  *   // - "image.png" (with the contents of `/local/path/image.png')
+ *
+ *   // `file` is an instance of a File object that refers to your new file.
+ * });
+ *
+ * //-
+ * // You can also upload a file from a URL.
+ * //-
+ *
+ * bucket.upload('https://example.com/images/image.png', function(err, file, apiResponse) {
+ *   // Your bucket now contains:
+ *   // - "image.png"
  *
  *   // `file` is an instance of a File object that refers to your new file.
  * });
@@ -2209,10 +2221,12 @@ Bucket.prototype.setUserProject = function(userProject) {
  * region_tag:storage_upload_encrypted_file
  * Example of uploading an encrypted file:
  */
-Bucket.prototype.upload = function(localPath, options, callback) {
+Bucket.prototype.upload = function(pathString, options, callback) {
   if (global.GCLOUD_SANDBOX_ENV) {
     return;
   }
+
+  var isURL = /^(http|https):/.test(pathString);
 
   if (is.fn(options)) {
     callback = options;
@@ -2236,12 +2250,13 @@ Bucket.prototype.upload = function(localPath, options, callback) {
     });
   } else {
     // Resort to using the name of the incoming file.
-    newFile = this.file(path.basename(localPath), {
+    var destination = path.basename(pathString);
+    newFile = this.file(destination, {
       encryptionKey: options.encryptionKey,
     });
   }
 
-  var contentType = mime.contentType(path.basename(localPath));
+  var contentType = mime.contentType(path.basename(pathString));
 
   if (contentType && !options.metadata.contentType) {
     options.metadata.contentType = contentType;
@@ -2249,9 +2264,24 @@ Bucket.prototype.upload = function(localPath, options, callback) {
 
   if (is.boolean(options.resumable)) {
     upload();
+  } else if (isURL) {
+    request.head(pathString, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var contentLength = resp.headers['content-length'];
+
+      if (is.number(contentLength)) {
+        options.resumable = contentLength > RESUMABLE_THRESHOLD;
+      }
+
+      upload();
+    });
   } else {
     // Determine if the upload should be resumable if it's over the threshold.
-    fs.stat(localPath, function(err, fd) {
+    fs.stat(pathString, function(err, fd) {
       if (err) {
         callback(err);
         return;
@@ -2264,12 +2294,18 @@ Bucket.prototype.upload = function(localPath, options, callback) {
   }
 
   function upload() {
-    fs
-      .createReadStream(localPath)
+    var sourceStream;
+
+    if (isURL) {
+      sourceStream = request.get(pathString);
+    } else {
+      sourceStream = fs.createReadStream(pathString);
+    }
+
+    sourceStream
+      .on('error', callback)
       .pipe(newFile.createWriteStream(options))
-      .on('error', function(err) {
-        callback(err);
-      })
+      .on('error', callback)
       .on('finish', function() {
         callback(null, newFile);
       });
