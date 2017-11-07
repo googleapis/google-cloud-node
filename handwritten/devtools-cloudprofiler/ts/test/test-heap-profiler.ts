@@ -22,7 +22,7 @@ import {HeapProfiler} from '../src/profilers/heap-profiler';
 
 import {heapProfile, v8HeapProfile} from './profiles-for-tests';
 
-let assert = require('assert');
+const assert = require('assert');
 const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
 
 describe('HeapProfiler', () => {
@@ -38,14 +38,15 @@ describe('HeapProfiler', () => {
       v8HeapProfiler.startSamplingHeapProfiler.restore();
       v8HeapProfiler.stopSamplingHeapProfiler.restore();
       v8HeapProfiler.getAllocationProfile.restore();
+      // tslint:disable-next-line: no-any
       (Date.now as any).restore();
     });
 
     it('should return a profile equal to the expected profile', async () => {
       const intervalBytes = 1024 * 512;
       const stackDepth = 32;
-      let profiler = new HeapProfiler(intervalBytes, stackDepth);
-      let profile = profiler.profile();
+      const profiler = new HeapProfiler(intervalBytes, stackDepth);
+      const profile = profiler.profile();
       assert.deepEqual(heapProfile, profile);
     });
 

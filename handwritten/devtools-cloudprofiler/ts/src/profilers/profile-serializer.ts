@@ -20,7 +20,7 @@ import {AllocationProfileNode, ProfileNode, TimeProfile, TimeProfileNode} from '
 /**
  * A stack of function IDs.
  */
-type Stack = Array<number>;
+type Stack = number[];
 
 /**
  * A function which converts entry into one or more samples, then
@@ -81,16 +81,16 @@ class StringTable {
 function serialize<T extends ProfileNode>(
     profile: perftools.profiles.IProfile, root: T,
     appendToSamples: AppendEntryToSamples<T>, stringTable: StringTable) {
-  const samples: Array<perftools.profiles.Sample> = [];
-  const locations: Array<perftools.profiles.Location> = [];
-  const functions: Array<perftools.profiles.Function> = [];
+  const samples: perftools.profiles.Sample[] = [];
+  const locations: perftools.profiles.Location[] = [];
+  const functions: perftools.profiles.Function[] = [];
   const locationMap: Map<number, perftools.profiles.Location> = new Map();
   const functionMap: Map<number, perftools.profiles.Function> = new Map();
   const functionIdMap = new Map<string, number>();
   const locationIdMap = new Map<string, number>();
 
-  const entries: Entry<T>[] =
-      (root.children as Array<T>).map((n: T) => ({node: n, stack: []}));
+  const entries: Array<Entry<T>> =
+      (root.children as T[]).map((n: T) => ({node: n, stack: []}));
   while (entries.length > 0) {
     const entry = entries.pop()!;
     const node = entry.node;
@@ -98,7 +98,7 @@ function serialize<T extends ProfileNode>(
     const location = getLocation(node);
     stack.unshift(location.id as number);
     appendToSamples(entry, samples);
-    for (let child of node.children as Array<T>) {
+    for (const child of node.children as T[]) {
       entries.push({node: child, stack: stack.slice()});
     }
   }
@@ -119,7 +119,7 @@ function serialize<T extends ProfileNode>(
     id = locations.length + 1;
     locationIdMap.set(keyStr, id);
     const location =
-        new perftools.profiles.Location({id: id, line: [getLine(node)]});
+        new perftools.profiles.Location({id, line: [getLine(node)]});
     locations.push(location);
     return location;
   }
@@ -140,9 +140,9 @@ function serialize<T extends ProfileNode>(
     }
     id = functions.length + 1;
     functionIdMap.set(keyStr, id);
-    let nameId = stringTable.getIndexOrAdd(node.name || '(anonymous)');
-    let f = new perftools.profiles.Function({
-      id: id,
+    const nameId = stringTable.getIndexOrAdd(node.name || '(anonymous)');
+    const f = new perftools.profiles.Function({
+      id,
       name: nameId,
       systemName: nameId,
       filename: stringTable.getIndexOrAdd(node.scriptName)

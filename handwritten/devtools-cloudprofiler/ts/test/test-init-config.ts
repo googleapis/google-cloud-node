@@ -33,6 +33,7 @@ describe('initConfig', () => {
   });
 
   afterEach(() => {
+    // tslint:disable-next-line: no-any
     (gcpMetadata.instance as any).restore();
   });
 
@@ -53,7 +54,7 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId',
     };
-    let initializedConfig = await initConfig(config);
+    const initializedConfig = await initConfig(config);
     assert.deepEqual(initializedConfig, config);
   });
 
@@ -74,7 +75,7 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
-    let initializedConfig = await initConfig(config);
+    const initializedConfig = await initConfig(config);
     assert.deepEqual(initializedConfig, config);
   });
 
@@ -102,7 +103,7 @@ describe('initConfig', () => {
       zone: 'gce-zone',
       projectId: 'projectId',
     };
-    let initializedConfig = await initConfig(config);
+    const initializedConfig = await initConfig(config);
     assert.deepEqual(initializedConfig, expConfig);
   });
 
@@ -123,7 +124,7 @@ describe('initConfig', () => {
          zone: '',
          projectId: 'fake-projectId',
        };
-       let initializedConfig = await initConfig(config);
+       const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, expConfig);
      });
 
@@ -158,7 +159,7 @@ describe('initConfig', () => {
       instance: 'instance',
       zone: 'zone'
     };
-    let initializedConfig = await initConfig(config);
+    const initializedConfig = await initConfig(config);
     assert.deepEqual(initializedConfig, config);
   });
 
@@ -187,7 +188,7 @@ describe('initConfig', () => {
          instance: 'envConfig-instance',
          zone: 'envConfig-zone',
        };
-       let initializedConfig = await initConfig(config);
+       const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, expConfig);
      });
 
@@ -215,7 +216,7 @@ describe('initConfig', () => {
          instance: 'instance',
          zone: 'zone'
        };
-       let initializedConfig = await initConfig(config);
+       const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, config);
      });
 
@@ -238,7 +239,7 @@ describe('initConfig', () => {
        };
 
        const config = {};
-       let initializedConfig = await initConfig(config);
+       const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, expConfig);
      });
 });

@@ -20,7 +20,7 @@ import {TimeProfile, TimeProfileNode} from '../src/v8-types';
 
 import {anonymousFunctionHeapProfile, anonymousFunctionTimeProfile, heapProfile, timeProfile, v8AnonymousFunctionHeapProfile, v8AnonymousFunctionTimeProfile, v8HeapProfile, v8TimeProfile} from './profiles-for-tests';
 
-let assert = require('assert');
+const assert = require('assert');
 
 describe('serializeTimeProfile', () => {
   it('should produce expected profile', () => {

@@ -22,7 +22,7 @@ import {TimeProfiler} from '../src/profilers/time-profiler';
 
 import {timeProfile, v8TimeProfile} from './profiles-for-tests';
 
-let assert = require('assert');
+const assert = require('assert');
 const v8TimeProfiler = require('bindings')('time_profiler');
 
 describe('TimeProfiler', () => {
@@ -43,9 +43,9 @@ describe('TimeProfiler', () => {
        async () => {
          const durationMillis = 500;
          const intervalMicros = 1000;
-         let profiler = new TimeProfiler(intervalMicros);
+         const profiler = new TimeProfiler(intervalMicros);
          let isProfiling = true;
-         let profilePromise = profiler.profile(durationMillis).then(() => {
+         const profilePromise = profiler.profile(durationMillis).then(() => {
            isProfiling = false;
          });
          await delay(2 * durationMillis);
@@ -55,8 +55,8 @@ describe('TimeProfiler', () => {
     it('should return a profile equal to the expected profile', async () => {
       const durationMillis = 500;
       const intervalMicros = 1000;
-      let profiler = new TimeProfiler(intervalMicros);
-      let profile = await profiler.profile(durationMillis);
+      const profiler = new TimeProfiler(intervalMicros);
+      const profile = await profiler.profile(durationMillis);
       assert.deepEqual(timeProfile, profile);
     });
   });

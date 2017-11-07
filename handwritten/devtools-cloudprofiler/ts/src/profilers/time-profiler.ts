@@ -38,7 +38,7 @@ export class TimeProfiler {
     const runName = 'stackdriver-profiler-' + Date.now() + '-' + Math.random();
     profiler.startProfiling(runName, true);
     await delay(durationMillis);
-    let result = profiler.stopProfiling(runName);
+    const result = profiler.stopProfiling(runName);
     return serializeTimeProfile(result, this.intervalMicros);
   }
 }

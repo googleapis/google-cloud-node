@@ -31,13 +31,13 @@ export interface ProfileNode {
   scriptId: number;
   lineNumber: number;
   columnNumber: number;
-  children: Array<ProfileNode>;
+  children: ProfileNode[];
 }
 
 export interface TimeProfileNode extends ProfileNode { hitCount: number; }
 
 export interface AllocationProfileNode extends ProfileNode {
-  allocations: Array<Allocation>;
+  allocations: Allocation[];
 }
 
 export interface Allocation {
