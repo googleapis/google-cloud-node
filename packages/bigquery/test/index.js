@@ -1048,7 +1048,16 @@ describe('BigQuery', function() {
 
     it('should return Job objects', function(done) {
       bq.request = function(reqOpts, callback) {
-        callback(null, { jobs: [{ id: JOB_ID }] });
+        callback(null, {
+          jobs: [
+            {
+              id: JOB_ID,
+              jobReference: {
+                jobId: JOB_ID
+              }
+            }
+          ]
+        });
       };
 
       bq.getJobs(function(err, jobs) {
@@ -1059,7 +1068,16 @@ describe('BigQuery', function() {
     });
 
     it('should return apiResponse', function(done) {
-      var resp = { jobs: [{ id: JOB_ID }] };
+      var resp = {
+        jobs: [
+          {
+            id: JOB_ID,
+            jobReference: {
+              jobId: JOB_ID
+            }
+          }
+        ]
+      };
 
       bq.request = function(reqOpts, callback) {
         callback(null, resp);
@@ -1073,7 +1091,16 @@ describe('BigQuery', function() {
     });
 
     it('should assign metadata to the Job objects', function(done) {
-      var jobObjects = [{ a: 'b', c: 'd', id: JOB_ID }];
+      var jobObjects = [
+        {
+          a: 'b',
+          c: 'd',
+          id: JOB_ID,
+          jobReference: {
+            jobId: JOB_ID
+          }
+        }
+      ];
 
       bq.request = function(reqOpts, callback) {
         callback(null, { jobs: jobObjects });

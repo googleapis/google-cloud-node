@@ -806,7 +806,7 @@ BigQuery.prototype.getJobs = function(options, callback) {
     }
 
     var jobs = (resp.jobs || []).map(function(jobObject) {
-      var job = that.job(jobObject.id);
+      var job = that.job(jobObject.jobReference.jobId);
       job.metadata = jobObject;
       return job;
     });
