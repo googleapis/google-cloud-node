@@ -150,7 +150,9 @@ function downloadFileUsingRequesterPays(
     .download(options)
     .then(() => {
       console.log(
-        `gs://${bucketName}/${srcFilename} downloaded to ${destFilename} using requester-pays requests.`
+        `gs://${bucketName}/${srcFilename} downloaded to ${
+          destFilename
+        } using requester-pays requests.`
       );
     })
     .catch(err => {

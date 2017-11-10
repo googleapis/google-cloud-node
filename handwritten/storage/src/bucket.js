@@ -1176,7 +1176,7 @@ Bucket.prototype.get = function(options, callback) {
 /**
  * @typedef {array} GetFilesResponse
  * @property {File[]} 0 Array of {@link File} instances.
-  */
+ */
 /**
  * @callback GetFilesCallback
  * @param {?Error} err Request error, if any.

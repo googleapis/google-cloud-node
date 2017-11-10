@@ -93,7 +93,9 @@ test.serial(`should move a file`, async t => {
   t.regex(
     results.stdout + results.stderr,
     new RegExp(
-      `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${movedFileName}.`
+      `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${
+        movedFileName
+      }.`
     )
   );
   const [exists] = await bucket.file(movedFileName).exists();
@@ -102,13 +104,17 @@ test.serial(`should move a file`, async t => {
 
 test.serial(`should copy a file`, async t => {
   const results = await tools.runAsyncWithIO(
-    `${cmd} copy ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName}`,
+    `${cmd} copy ${bucketName} ${movedFileName} ${bucketName} ${
+      copiedFileName
+    }`,
     cwd
   );
   t.regex(
     results.stdout + results.stderr,
     new RegExp(
-      `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${copiedFileName}.`
+      `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${
+        copiedFileName
+      }.`
     )
   );
   const [exists] = await bucket.file(copiedFileName).exists();
