@@ -1139,7 +1139,7 @@ describe('BigQuery', function() {
     });
   });
 
-  describe('Custom Types', function(done) {
+  describe('Custom Types', function() {
     var table;
 
     var DATE = bigquery.date('2017-01-01');
