@@ -379,6 +379,11 @@ describe('BigQuery', function() {
       assert(instanceD instanceof bq.date);
     });
 
+    it('should have the correct constructor name', function() {
+      var date = bq.date(INPUT_STRING);
+      assert.strictEqual(date.constructor.name, 'BigQueryDate');
+    });
+
     it('should accept a string', function() {
       var date = bq.date(INPUT_STRING);
       assert.strictEqual(date.value, INPUT_STRING);
@@ -413,6 +418,11 @@ describe('BigQuery', function() {
       var instanceDt = bq.datetime(INPUT_OBJ);
       assert(instanceDt instanceof BigQuery.datetime);
       assert(instanceDt instanceof bq.datetime);
+    });
+
+    it('should have the correct constructor name', function() {
+      var datetime = bq.datetime(INPUT_STRING);
+      assert.strictEqual(datetime.constructor.name, 'BigQueryDatetime');
     });
 
     it('should accept an object', function() {
@@ -455,6 +465,11 @@ describe('BigQuery', function() {
       assert(instanceT instanceof bq.time);
     });
 
+    it('should have the correct constructor name', function() {
+      var time = bq.time(INPUT_STRING);
+      assert.strictEqual(time.constructor.name, 'BigQueryTime');
+    });
+
     it('should accept a string', function() {
       var time = bq.time(INPUT_STRING);
       assert.strictEqual(time.value, INPUT_STRING);
@@ -494,6 +509,11 @@ describe('BigQuery', function() {
       var instanceT = bq.timestamp(INPUT_DATE);
       assert(instanceT instanceof BigQuery.timestamp);
       assert(instanceT instanceof bq.timestamp);
+    });
+
+    it('should have the correct constructor name', function() {
+      var timestamp = bq.timestamp(INPUT_STRING);
+      assert.strictEqual(timestamp.constructor.name, 'BigQueryTimestamp');
     });
 
     it('should accept a string', function() {
