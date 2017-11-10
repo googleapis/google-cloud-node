@@ -1139,6 +1139,31 @@ describe('BigQuery', function() {
     });
   });
 
+  describe('Custom Types', function(done) {
+    var table;
+
+    var DATE = bigquery.date('2017-01-01');
+    var DATETIME = bigquery.datetime('2017-01-01 13:00:00');
+    var TIME = bigquery.time('14:00:00');
+    var TIMESTAMP = bigquery.timestamp(new Date());
+
+    before(function() {
+      table = dataset.table(generateName('table'));
+      return table.create({
+        schema: 'date:DATE, datetime:DATETIME, time:TIME, timestamp:TIMESTAMP'
+      });
+    });
+
+    it('inserts with custom types', function() {
+      return table.insert({
+        date: DATE,
+        datetime: DATETIME,
+        time: TIME,
+        timestamp: TIMESTAMP
+      });
+    });
+  });
+
   describe('Provided Tests', function() {
     var table = dataset.table(generateName('table'));
     var schema = require('./data/schema.json');

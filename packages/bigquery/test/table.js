@@ -257,6 +257,23 @@ describe('BigQuery/Table', function() {
       assert.strictEqual(Table.encodeValue_(date), date.toJSON());
     });
 
+    it('should properly encode custom types', function() {
+      function BigQueryDate(value) { this.value = value; }
+      function BigQueryDatetime(value) { this.value = value; }
+      function BigQueryTime(value) { this.value = value; }
+      function BigQueryTimestamp(value) { this.value = value; }
+
+      var date = new BigQueryDate('date');
+      var datetime = new BigQueryDatetime('datetime');
+      var time = new BigQueryTime('time');
+      var timestamp = new BigQueryTimestamp('timestamp');
+
+      assert.strictEqual(Table.encodeValue_(date), 'date');
+      assert.strictEqual(Table.encodeValue_(datetime), 'datetime');
+      assert.strictEqual(Table.encodeValue_(time), 'time');
+      assert.strictEqual(Table.encodeValue_(timestamp), 'timestamp');
+    });
+
     it('should properly encode arrays', function() {
       var buffer = new Buffer('test');
       var date = new Date();
