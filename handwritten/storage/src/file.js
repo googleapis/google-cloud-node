@@ -340,6 +340,17 @@ File.prototype.copy = function(destination, options, callback) {
 
   newFile = newFile || destBucket.file(destName);
 
+  var headers = {};
+  if (is.defined(newFile.encryptionKey)) {
+    headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
+    headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
+    headers[
+      'x-goog-copy-source-encryption-key-sha256'
+    ] = this.encryptionKeyHash;
+
+    this.setEncryptionKey(newFile.encryptionKey);
+  }
+
   this.request(
     {
       method: 'POST',
@@ -349,6 +360,7 @@ File.prototype.copy = function(destination, options, callback) {
       }),
       qs: query,
       json: options,
+      headers: headers,
     },
     function(err, resp) {
       if (err) {
@@ -1224,20 +1236,22 @@ File.prototype.exists = function(options, callback) {
  * Example of downloading an encrypted file:
  */
 File.prototype.setEncryptionKey = function(encryptionKey) {
-  this.encryptionKey = encryptionKey;
+  var self = this;
 
-  encryptionKey = Buffer.from(encryptionKey).toString('base64');
-  var hash = crypto
+  this.encryptionKey = encryptionKey;
+  this.encryptionKeyBase64 = Buffer.from(encryptionKey).toString('base64');
+
+  this.encryptionKeyHash = crypto
     .createHash('sha256')
-    .update(encryptionKey, 'base64')
+    .update(this.encryptionKeyBase64, 'base64')
     .digest('base64');
 
   this.interceptors.push({
     request: function(reqOpts) {
       reqOpts.headers = reqOpts.headers || {};
       reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
-      reqOpts.headers['x-goog-encryption-key'] = encryptionKey;
-      reqOpts.headers['x-goog-encryption-key-sha256'] = hash;
+      reqOpts.headers['x-goog-encryption-key'] = self.encryptionKeyBase64;
+      reqOpts.headers['x-goog-encryption-key-sha256'] = self.encryptionKeyHash;
       return reqOpts;
     },
   });
@@ -2006,6 +2020,26 @@ File.prototype.request = function(reqOpts, callback) {
   }
 
   return common.ServiceObject.prototype.request.call(this, reqOpts, callback);
+};
+
+/**
+ * The Storage API allows you to use a custom key for server-side encryption.
+ * This method allows you to update the encryption key associated with this
+ * file.
+ *
+ * @see [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
+ *
+ * @param {string|buffer} encryptionKey An AES-256 encryption key.
+ * @returns {File}
+ *
+ * @example <caption>include:samples/encryption.js</caption>
+ * region_tag:storage_rotate_encryption_key
+ * Example of rotating the encryption key for this file:
+ */
+File.prototype.rotateEncryptionKey = function(encryptionKey, callback) {
+  var newFile = this.bucket.file(this.id, {encryptionKey});
+
+  this.copy(newFile, callback);
 };
 
 /**

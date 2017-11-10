@@ -487,8 +487,10 @@ describe('storage', function() {
         });
       });
 
-      it('should set custom encryption during the upload', function(done) {
+      it.only('should set custom encryption during the upload', function(done) {
         var key = crypto.randomBytes(32);
+
+        key = '12345678901234567890123456789012';
 
         bucket.upload(
           FILES.big.path,
@@ -1745,6 +1747,19 @@ describe('storage', function() {
           assert.ifError(err);
           assert.strictEqual(contents.toString(), 'secret data');
           done();
+        });
+      });
+
+      it('should rotate encryption keys', function(done) {
+        var newEncryptionKey = crypto.randomBytes(32);
+
+        file.rotateEncryptionKey(newEncryptionKey, function(err) {
+          assert.ifError(err);
+          file.download(function(err, contents) {
+            assert.ifError(err);
+            assert.strictEqual(contents.toString(), 'secret data');
+            done();
+          });
         });
       });
     });

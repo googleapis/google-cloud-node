@@ -328,6 +328,34 @@ describe('File', function() {
       file.copy(newFile, options, assert.ifError);
     });
 
+    it('should rotate encryption keys', function(done) {
+      var newEncryptionKeySet = false;
+
+      file.encryptionKey = {};
+      file.encryptionKeyBase64 = 'base64';
+      file.encryptionKeyHash = 'hash';
+
+      var newFile = new File(BUCKET, 'new-file');
+      newFile.encryptionKey = 'encryptionKey';
+
+      file.setEncryptionKey = function(encryptionKey) {
+        assert.strictEqual(encryptionKey, newFile.encryptionKey);
+        newEncryptionKeySet = true;
+      };
+
+      file.request = function(reqOpts) {
+        assert.deepStrictEqual(reqOpts.headers, {
+          'x-goog-copy-source-encryption-algorithm': 'AES256',
+          'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
+          'x-goog-copy-source-encryption-key-sha256': file.encryptionKeyHash,
+        });
+        assert.strictEqual(newEncryptionKeySet, true);
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
     describe('destination types', function() {
       function assertPathEquals(file, expectedPath, callback) {
         file.request = function(reqOpts) {
@@ -2675,6 +2703,28 @@ describe('File', function() {
     });
   });
 
+  describe('rotateEncryptionKey', function() {
+    it('should call copy correctly', function(done) {
+      var newEnryptionKey = '...';
+      var newFile = {};
+
+      file.bucket.file = function(id, options) {
+        assert.strictEqual(id, file.id);
+        assert.deepStrictEqual(options, {
+          encryptionKey: newEnryptionKey,
+        });
+        return newFile;
+      };
+
+      file.copy = function(destination, callback) {
+        assert.strictEqual(destination, newFile);
+        callback(); // done()
+      };
+
+      file.rotateEncryptionKey(newEnryptionKey, done);
+    });
+  });
+
   describe('save', function() {
     var DATA = 'Data!';
 
@@ -2896,6 +2946,11 @@ describe('File', function() {
 
   describe('setEncryptionKey', function() {
     var KEY = crypto.randomBytes(32);
+    var KEY_BASE64 = Buffer.from(KEY).toString('base64');
+    var KEY_HASH = crypto
+      .createHash('sha256')
+      .update(KEY_BASE64, 'base64')
+      .digest('base64');
     var _file;
 
     beforeEach(function() {
@@ -2906,20 +2961,24 @@ describe('File', function() {
       assert.strictEqual(file.encryptionKey, KEY);
     });
 
+    it('should localize the base64 key', function() {
+      assert.strictEqual(file.encryptionKeyBase64, KEY_BASE64);
+    });
+
+    it('should localize the hash', function() {
+      assert.strictEqual(file.encryptionKeyHash, KEY_HASH);
+    });
+
     it('should return the file instance', function() {
       assert.strictEqual(_file, file);
     });
 
     it('should push the correct request interceptor', function(done) {
-      var base64Key = Buffer.from(KEY).toString('base64');
-      var base64KeyHash = crypto.createHash('sha256');
-      base64KeyHash.update(base64Key, 'base64');
-
       assert.deepEqual(file.interceptors[0].request({}), {
         headers: {
           'x-goog-encryption-algorithm': 'AES256',
-          'x-goog-encryption-key': base64Key,
-          'x-goog-encryption-key-sha256': base64KeyHash.digest('base64'),
+          'x-goog-encryption-key': KEY_BASE64,
+          'x-goog-encryption-key-sha256': KEY_HASH,
         },
       });
 

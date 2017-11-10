@@ -98,12 +98,20 @@ test.serial(`should download a file`, async t => {
   });
 });
 
-test.serial(`should rotate keys`, t => {
-  t.throws(
-    () => {
-      tools.run(`${cmd} rotate ${bucketName} ${fileName} ${key} ${key}`, cwd);
-    },
-    Error,
-    `This is currently not available using the Cloud Client Library.`
+test.serial(`should rotate keys`, async t => {
+  // Generate a new key
+  const generateKeyResults = await tools.runAsyncWithIO(
+    `${cmd} generate-encryption-key`,
+    cwd
   );
+  const output = generateKeyResults.stdout + generateKeyResults.stderr;
+  t.regex(output, new RegExp(`Base 64 encoded encryption key:`));
+  const test = /^Base 64 encoded encryption key: (.+)$/;
+  let newKey = output.match(test)[1];
+
+  const results = await tools.runAsyncWithIO(
+    `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`,
+    cwd
+  );
+  t.is(results.stdout + results.stderr, 'Encryption key rotated successfully.');
 });

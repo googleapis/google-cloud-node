@@ -63,10 +63,14 @@ function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // const srcFilename = 'Local file to upload, e.g. ./local/path/to/file.txt';
   // const destFilename = 'Remote destination for file, e.g. file_encrypted.txt';
 
+  // See the "Generating your own encryption key" section above.
+  // const key = 'A base64 encoded customer-supplied key';
+
   const options = {
     // The path to which the file should be uploaded, e.g. "file_encrypted.txt"
     destination: destFilename,
-    // Encrypt the file with a customer-supplied key, e.g. "my-secret-key"
+    // Encrypt the file with a customer-supplied key.
+    // See the "Generating your own encryption key" section above.
     encryptionKey: Buffer.from(key, 'base64'),
   };
 
@@ -101,6 +105,9 @@ function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // const srcFilename = 'File to download, e.g. file_encrypted.txt';
   // const destFilename = 'Local destination for file, e.g. ./file.txt';
 
+  // See the "Generating your own encryption key" section above.
+  // const key = 'A base64 encoded customer-supplied key';
+
   const options = {
     // The path to which the file should be downloaded, e.g. "./file.txt"
     destination: destFilename,
@@ -122,13 +129,38 @@ function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // [END storage_download_encrypted_file]
 }
 
-// [START storage_rotate_encryption_key]
-function rotateEncryptionKey() {
-  throw new Error(
-    'This is currently not available using the Cloud Client Library.'
-  );
+function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
+  // [START storage_rotate_encryption_key]
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const fileName = 'Nome of a file in the bucket, e.g. my-file';
+
+  // See the "Generating your own encryption key" section above.
+  // const oldKey = 'The current base64 encoded customer-supplied encryption key';
+  // const newKey = 'A new base64 encoded customer-supplied encryption key';
+
+  storage
+    .bucket(bucketName)
+    .file(fileName, {
+      encryptionKey: Buffer.from(oldKey, 'base64'),
+    })
+    .rotateEncryptionKey(Buffer.from(newKey, 'base64'))
+    .then(() => {
+      console.log(`Encryption key rotated successfully.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_rotate_encryption_key]
 }
-// [END storage_rotate_encryption_key]
 
 require(`yargs`)
   .demand(1)
@@ -163,10 +195,16 @@ require(`yargs`)
       )
   )
   .command(
-    `rotate <bucketName> <fileName> <oldkey> <newKey>`,
+    `rotate <bucketName> <fileName> <oldKey> <newKey>`,
     `Rotates encryption keys for a file.`,
     {},
-    rotateEncryptionKey
+    opts =>
+      rotateEncryptionKey(
+        opts.bucketName,
+        opts.fileName,
+        opts.oldKey,
+        opts.newKey
+      )
   )
   .example(
     `node $0 generate-encryption-key`,
