@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Adds support for Google Cloud Profiler to node.js applications",
   "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
   "scripts": {
     "install": "node-gyp rebuild",
     "test": "nyc mocha build/test/test-*.js",
@@ -52,7 +53,6 @@
   },
   "files": [
     "build/src",
-    "build/types",
     "bindings",
     "proto",
     "binding.gyp",
