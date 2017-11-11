@@ -2,6 +2,7 @@
   "name": "@google-cloud/profiler",
   "version": "0.1.0",
   "description": "Adds support for Google Cloud Profiler to node.js applications",
+  "repository": "GoogleCloudPlatform/cloud-profiler-nodejs",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "scripts": {
