@@ -16,11 +16,14 @@ A `config` object is not required if you are in an environment which supports [A
 If this doesn't describe your environment, the `config` object expects the following properties:
 
 1. One of the following:
-  1. `credentials` object containing `client_email` and `private_key` properties.
-  2. `keyFilename` path to a .json, .pem, or .p12 key file.
-  3. `GOOGLE_APPLICATION_CREDENTIALS` environment variable with a full path to your key file.
+
+  - `credentials` object containing `client_email` and `private_key` properties.
+  - `keyFilename` path to a .json, .pem, or .p12 key file.
+  - `GOOGLE_APPLICATION_CREDENTIALS` environment variable with a full path to your key file.
 
 2. `projectId`
+
+3. Optional `namespace` defines a deafault namespace
 
   If you wish, you can set an environment variable (`GCLOUD_PROJECT`) in place of specifying this inline. Or, if you have provided a service account JSON key file as the `config.keyFilename` property explained above, your project ID will be detected automatically.
 
