@@ -53,7 +53,7 @@
     "typescript": "~2.6.x"
   },
   "files": [
-    "build/src",
+    "out/src",
     "bindings",
     "proto",
     "binding.gyp",
@@ -64,7 +64,7 @@
   "nyc": {
     "exclude": [
       "proto",
-      "build/test"
+      "out/test"
     ]
   }
 }
