@@ -25,7 +25,10 @@ error.code = FAKE_STATUS_CODE;
 describe('LanguageServiceClient', () => {
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -53,7 +56,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSentiment with error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -79,7 +85,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntities', () => {
     it('invokes analyzeEntities without error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -107,7 +116,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntities with error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -133,7 +145,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntitySentiment', () => {
     it('invokes analyzeEntitySentiment without error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -161,7 +176,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntitySentiment with error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -187,7 +205,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeSyntax', () => {
     it('invokes analyzeSyntax without error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -215,7 +236,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSyntax with error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -239,9 +263,69 @@ describe('LanguageServiceClient', () => {
     });
   });
 
+  describe('classifyText', () => {
+    it('invokes classifyText without error', done => {
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var document = {};
+      var request = {
+        document: document,
+      };
+
+      // Mock response
+      var expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.classifyText = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.classifyText(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes classifyText with error', done => {
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var document = {};
+      var request = {
+        document: document,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.classifyText = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.classifyText(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('annotateText', () => {
     it('invokes annotateText without error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -271,7 +355,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes annotateText with error', done => {
-      var client = new languageModule.v1.LanguageServiceClient();
+      var client = new languageModule.v1.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
