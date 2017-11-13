@@ -152,7 +152,8 @@ describe('BigQuery', function() {
       var baseUrl = 'https://www.googleapis.com/bigquery/v2';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
-        'https://www.googleapis.com/auth/bigquery'
+        'https://www.googleapis.com/auth/bigquery',
+        'https://www.googleapis.com/auth/drive.readonly'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
