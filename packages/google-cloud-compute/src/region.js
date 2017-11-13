@@ -582,7 +582,7 @@ Region.prototype.getAddressesStream = common.paginator.streamify(
  *   autoPaginate: false
  * }, callback);
  *
-  * //-
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * region.getOperations().then(function(data) {

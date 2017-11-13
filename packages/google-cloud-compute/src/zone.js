@@ -902,12 +902,12 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
  * @param {string} options.filter - Search filter in the format of
-  *     `{name} {comparison} {filterString}`.
-  *     - **`name`**: the name of the field to compare
-  *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
-  *       (not equal)
-  *     - **`filterString`**: the string to filter to. For string fields, this
-  *       can be a regular expression.
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
  * @param {number} options.maxApiCalls - Maximum number of API calls to make.
  * @param {number} options.maxResults - Maximum number of disks to return.
  * @param {string} options.pageToken - A previously-returned page token
