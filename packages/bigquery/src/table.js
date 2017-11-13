@@ -1020,6 +1020,7 @@ Table.prototype.insert = function(rows, options, callback) {
   if (!options.raw) {
     json.rows = arrify(rows).map(function(row) {
       return {
+        insertId: uuid.v4(),
         json: Table.encodeValue_(row)
       };
     });

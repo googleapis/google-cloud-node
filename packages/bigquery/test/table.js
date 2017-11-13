@@ -63,7 +63,7 @@ var fakePaginator = {
   }
 };
 
-var fakeUuid = extend({}, uuid);
+var fakeUuid = extend(true, {}, uuid);
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -135,6 +135,7 @@ describe('BigQuery/Table', function() {
   });
 
   beforeEach(function() {
+    fakeUuid = extend(fakeUuid, uuid);
     isCustomTypeOverride = null;
     makeWritableStreamOverride = null;
     tableOverrides = {};
@@ -1033,6 +1034,8 @@ describe('BigQuery/Table', function() {
   });
 
   describe('insert', function() {
+    var fakeInsertId = 'fake-insert-id';
+
     var data = [
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' },
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' },
@@ -1052,10 +1055,17 @@ describe('BigQuery/Table', function() {
     var dataApiFormat = {
       rows: data.map(function(row) {
         return {
+          insertId: fakeInsertId,
           json: row
         };
       })
     };
+
+    beforeEach(function() {
+      fakeUuid.v4 = function() {
+        return fakeInsertId;
+      };
+    });
 
     it('should throw an error if rows is empty', function() {
       assert.throws(function() {
@@ -1072,6 +1082,15 @@ describe('BigQuery/Table', function() {
       };
 
       table.insert(data, done);
+    });
+
+    it('should generate insertId', function(done) {
+      table.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.rows[0].insertId, fakeInsertId);
+        done();
+      };
+
+      table.insert([data[0]], done);
     });
 
     it('should execute callback with API response', function(done) {
