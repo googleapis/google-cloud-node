@@ -20,6 +20,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var events = require('events');
 var extend = require('extend');
@@ -288,21 +289,54 @@ Subscription.prototype.ack_ = function(message) {
   this.breakLease_(message);
   this.histogram.add(Date.now() - message.received);
 
-  if (!this.connectionPool || !this.connectionPool.isConnected()) {
-    this.inventory_.ack.push(message.ackId);
-    this.setFlushTimeout_();
+  if (this.isConnected_()) {
+    this.acknowledge_(message.ackId, message.connectionId);
     return;
   }
 
+  this.inventory_.ack.push(message.ackId);
+  this.setFlushTimeout_();
+};
+
+/**
+ * Sends an acknowledge request for the provided ack ids.
+ *
+ * @private
+ *
+ * @param {string|string[]} ackIds - The ack IDs to acknowledge.
+ * @param {string=} connId - Connection ID to send request on.
+ * @return {Promise}
+ */
+Subscription.prototype.acknowledge_ = function(ackIds, connId) {
   var self = this;
+  var promise;
 
-  this.connectionPool.acquire(message.connectionId, function(err, connection) {
-    if (err) {
-      self.emit('error', err);
-      return;
-    }
+  ackIds = arrify(ackIds);
 
-    connection.write({ ackIds: [message.ackId] });
+  if (!this.isConnected_()) {
+    promise = common.util.promisify(this.request).call(this, {
+      client: 'subscriberClient',
+      method: 'acknowledge',
+      reqOpts: {
+        subscription: this.name,
+        ackIds
+      }
+    });
+  } else {
+    promise = new Promise(function(resolve, reject) {
+      self.connectionPool.acquire(connId, function(err, connection) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        connection.write({ ackIds }, resolve);
+      });
+    });
+  }
+
+  return promise.catch(function(err) {
+    self.emit('error', err);
   });
 };
 
@@ -360,6 +394,8 @@ Subscription.prototype.breakLease_ = function(message) {
  * subscription.close().then(function() {});
  */
 Subscription.prototype.close = function(callback) {
+  var self = this;
+
   this.userClosed_ = true;
 
   var inventory = this.inventory_;
@@ -368,8 +404,9 @@ Subscription.prototype.close = function(callback) {
   clearTimeout(this.leaseTimeoutHandle_);
   this.leaseTimeoutHandle_ = null;
 
-  this.flushQueues_();
-  this.closeConnection_(callback);
+  this.flushQueues_().then(function() {
+    self.closeConnection_(callback);
+  });
 };
 
 /**
@@ -563,69 +600,28 @@ Subscription.prototype.flushQueues_ = function() {
   var nacks = this.inventory_.nack;
 
   if (!acks.length && !nacks.length) {
-    return;
+    return Promise.resolve();
   }
 
-  if (this.connectionPool) {
-    this.connectionPool.acquire(function(err, connection) {
-      if (err) {
-        self.emit('error', err);
-        return;
-      }
-
-      var reqOpts = {};
-
-      if (acks.length) {
-        reqOpts.ackIds = acks;
-      }
-
-      if (nacks.length) {
-        reqOpts.modifyDeadlineAckIds = nacks;
-        reqOpts.modifyDeadlineSeconds = Array(nacks.length).fill(0);
-      }
-
-      connection.write(reqOpts);
-
-      self.inventory_.ack = [];
-      self.inventory_.nack = [];
-    });
-    return;
-  }
+  var requests = [];
 
   if (acks.length) {
-    this.request({
-      client: 'subscriberClient',
-      method: 'acknowledge',
-      reqOpts: {
-        subscription: this.name,
-        ackIds: acks
-      }
-    }, function(err) {
-      if (err) {
-        self.emit('error', err);
-      } else {
+    requests.push(
+      this.acknowledge_(acks).then(function() {
         self.inventory_.ack = [];
-      }
-    });
+      })
+    );
   }
 
   if (nacks.length) {
-    this.request({
-      client: 'subscriberClient',
-      method: 'modifyAckDeadline',
-      reqOpts: {
-        subscription: this.name,
-        ackIds: nacks,
-        ackDeadlineSeconds: 0
-      }
-    }, function(err) {
-      if (err) {
-        self.emit('error', err);
-      } else {
+    requests.push(
+      this.modifyAckDeadline_(nacks, 0).then(function() {
         self.inventory_.nack = [];
-      }
-    });
+      })
+    );
   }
+
+  return Promise.all(requests);
 };
 
 /**
@@ -726,6 +722,17 @@ Subscription.prototype.getMetadata = function(gaxOpts, callback) {
 };
 
 /**
+ * Checks to see if we currently have a streaming connection.
+ *
+ * @private
+ *
+ * @return {boolean}
+ */
+Subscription.prototype.isConnected_ = function() {
+  return !!(this.connectionPool && this.connectionPool.isConnected());
+};
+
+/**
  * Checks to see if this Subscription has hit any of the flow control
  * thresholds.
  *
@@ -748,6 +755,9 @@ Subscription.prototype.hasMaxMessages_ = function() {
  * @param {object} message - The message object.
  */
 Subscription.prototype.leaseMessage_ = function(message) {
+  this.modifyAckDeadline_(
+    message.ackId, this.ackDeadline / 1000, message.connectionId);
+
   this.inventory_.lease.push(message.ackId);
   this.inventory_.bytes += message.length;
   this.setLeaseTimeout_();
@@ -786,6 +796,53 @@ Subscription.prototype.listenForEvents_ = function() {
     if (event === 'message' && --self.messageListeners === 0) {
       self.closeConnection_();
     }
+  });
+};
+
+/**
+ * Sends a modifyAckDeadline request for the provided ack ids.
+ *
+ * @private
+ *
+ * @param {string|string[]} ackIds - The ack IDs to acknowledge.
+ * @param {number} deadline - The dealine in seconds.
+ * @param {string=} connId - Connection ID to send request on.
+ * @return {Promise}
+ */
+Subscription.prototype.modifyAckDeadline_ = function(ackIds, deadline, connId) {
+  var self = this;
+  var promise;
+
+  ackIds = arrify(ackIds);
+
+  if (!this.isConnected_()) {
+    promise = common.util.promisify(this.request).call(this, {
+      client: 'subscriberClient',
+      method: 'modifyAckDeadline',
+      reqOpts: {
+        subscription: self.name,
+        ackDeadlineSeconds: deadline,
+        ackIds
+      }
+    });
+  } else {
+    promise = new Promise(function(resolve, reject) {
+      self.connectionPool.acquire(connId, function(err, connection) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        connection.write({
+          modifyDeadlineAckIds: ackIds,
+          modifyDeadlineSeconds: Array(ackIds.length).fill(deadline)
+        }, resolve);
+      });
+    });
+  }
+
+  return promise.catch(function(err) {
+    self.emit('error', err);
   });
 };
 
@@ -855,25 +912,13 @@ Subscription.prototype.modifyPushConfig = function(config, gaxOpts, callback) {
 Subscription.prototype.nack_ = function(message) {
   this.breakLease_(message);
 
-  if (!this.connectionPool || !this.connectionPool.isConnected()) {
-    this.inventory_.nack.push(message.ackId);
-    this.setFlushTimeout_();
+  if (this.isConnected_()) {
+    this.modifyAckDeadline_(message.ackId, 0, message.connectionId);
     return;
   }
 
-  var self = this;
-
-  this.connectionPool.acquire(message.connectionId, function(err, connection) {
-    if (err) {
-      self.emit('error', err);
-      return;
-    }
-
-    connection.write({
-      modifyDeadlineAckIds: [message.ackId],
-      modifyDeadlineSeconds: [0]
-    });
-  });
+  this.inventory_.nack.push(message.ackId);
+  this.setFlushTimeout_();
 };
 
 /**
@@ -930,35 +975,9 @@ Subscription.prototype.renewLeases_ = function() {
   var ackIds = this.inventory_.lease.slice();
   var ackDeadlineSeconds = this.ackDeadline / 1000;
 
-  if (this.connectionPool) {
-    this.connectionPool.acquire(function(err, connection) {
-      if (err) {
-        self.emit('error', err);
-        return;
-      }
-
-      connection.write({
-        modifyDeadlineAckIds: ackIds,
-        modifyDeadlineSeconds: Array(ackIds.length).fill(ackDeadlineSeconds)
-      });
-    });
-  } else {
-    this.request({
-      client: 'subscriberClient',
-      method: 'modifyAckDeadline',
-      reqOpts: {
-        subscription: self.name,
-        ackIds: ackIds,
-        ackDeadlineSeconds: ackDeadlineSeconds
-      }
-    }, function(err) {
-      if (err) {
-        self.emit('error', err);
-      }
-    });
-  }
-
-  this.setLeaseTimeout_();
+  this.modifyAckDeadline_(ackIds, ackDeadlineSeconds).then(function() {
+    self.setLeaseTimeout_();
+  });
 };
 
 /**

@@ -196,7 +196,7 @@ BigQuery.prototype.mergeSchemaWithRows_ = function(schema, rows) {
  * });
  */
 BigQuery.date =
-BigQuery.prototype.date = function(value) {
+BigQuery.prototype.date = function BigQueryDate(value) {
   if (!(this instanceof BigQuery.date)) {
     return new BigQuery.date(value);
   }
@@ -241,7 +241,7 @@ BigQuery.prototype.date = function(value) {
  * });
  */
 BigQuery.datetime =
-BigQuery.prototype.datetime = function(value) {
+BigQuery.prototype.datetime = function BigQueryDatetime(value) {
   if (!(this instanceof BigQuery.datetime)) {
     return new BigQuery.datetime(value);
   }
@@ -291,7 +291,7 @@ BigQuery.prototype.datetime = function(value) {
  * });
  */
 BigQuery.time =
-BigQuery.prototype.time = function(value) {
+BigQuery.prototype.time = function BigQueryTime(value) {
   if (!(this instanceof BigQuery.time)) {
     return new BigQuery.time(value);
   }
@@ -318,7 +318,7 @@ BigQuery.prototype.time = function(value) {
  * var timestamp = bigquery.timestamp(new Date());
  */
 BigQuery.timestamp =
-BigQuery.prototype.timestamp = function(value) {
+BigQuery.prototype.timestamp = function BigQueryTimestamp(value) {
   if (!(this instanceof BigQuery.timestamp)) {
     return new BigQuery.timestamp(value);
   }
@@ -806,7 +806,7 @@ BigQuery.prototype.getJobs = function(options, callback) {
     }
 
     var jobs = (resp.jobs || []).map(function(jobObject) {
-      var job = that.job(jobObject.id);
+      var job = that.job(jobObject.jobReference.jobId);
       job.metadata = jobObject;
       return job;
     });

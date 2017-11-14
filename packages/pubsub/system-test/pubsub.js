@@ -629,8 +629,8 @@ describe('pubsub', function() {
 
         return subscription.create().then(function() {
           return publisher.publish(new Buffer('Hello, world!'));
-        }).then(function(messageIds) {
-          messageId = messageIds[0];
+        }).then(function(_messageId) {
+          messageId = _messageId;
         });
       });
 

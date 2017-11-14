@@ -48,7 +48,17 @@ var PROJECT_ID_TOKEN = '{{projectId}}';
 function Service(config, options) {
   options = options || {};
 
+  this.baseUrl = config.baseUrl;
+  this.globalInterceptors = arrify(options.interceptors_);
+  this.interceptors = [];
+  this.packageJson = config.packageJson;
+  this.projectId = options.projectId || PROJECT_ID_TOKEN;
+  this.projectIdRequired = config.projectIdRequired !== false;
+  this.Promise = options.promise || Promise;
+
   var reqCfg = extend({}, config, {
+    projectIdRequired: this.projectIdRequired,
+    projectId: this.projectId,
     credentials: options.credentials,
     keyFile: options.keyFilename,
     email: options.email
@@ -56,14 +66,7 @@ function Service(config, options) {
 
   this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(reqCfg);
   this.authClient = this.makeAuthenticatedRequest.authClient;
-  this.baseUrl = config.baseUrl;
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
-  this.globalInterceptors = arrify(options.interceptors_);
-  this.interceptors = [];
-  this.packageJson = config.packageJson;
-  this.projectId = options.projectId || PROJECT_ID_TOKEN;
-  this.projectIdRequired = config.projectIdRequired !== false;
-  this.Promise = options.promise || Promise;
 
   var isCloudFunctionEnv = !!process.env.FUNCTION_NAME;
 

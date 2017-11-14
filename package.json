@@ -28,6 +28,7 @@
     "package-json": "^2.4.0",
     "power-assert": "^1.4.2",
     "propprop": "^0.3.1",
+    "safe-buffer": "^5.1.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.3",
     "string-format-obj": "^1.0.0",

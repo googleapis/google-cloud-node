@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/pubsub",
-  "version": "0.14.5",
+  "version": "0.14.8",
   "author": "Google Inc.",
   "description": "Cloud Pub/Sub Client Library for Node.js",
   "contributors": [
@@ -52,14 +52,13 @@
   ],
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
-    "@google-cloud/common-grpc": "^0.4.0",
+    "@google-cloud/common-grpc": "^0.4.2",
     "arrify": "^1.0.0",
     "async-each": "^1.0.1",
     "extend": "^3.0.0",
     "google-auto-auth": "^0.7.1",
-    "google-gax": "^0.14.2",
+    "google-gax": "^0.13.0",
     "google-proto-files": "^0.13.1",
-    "grpc": "^1.6.0",
     "is": "^3.0.1",
     "lodash.snakecase": "^4.1.1",
     "uuid": "^3.0.1"

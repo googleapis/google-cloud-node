@@ -95,7 +95,9 @@ describe('ConnectionPool', function() {
       '@google-cloud/common': {
         util: fakeUtil
       },
-      grpc: fakeGrpc,
+      '@google-cloud/common-grpc': {
+        grpc: fakeGrpc
+      },
       uuid: fakeUuid,
       './v1': fakeV1
     });

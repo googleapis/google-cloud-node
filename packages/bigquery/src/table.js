@@ -274,6 +274,19 @@ Table.encodeValue_ = function(value) {
     return value.toString('base64');
   }
 
+  var customTypeConstructorNames = [
+    'BigQueryDate',
+    'BigQueryDatetime',
+    'BigQueryTime',
+    'BigQueryTimestamp',
+  ];
+  var constructorName = value.constructor.name;
+  var isCustomType = customTypeConstructorNames.indexOf(constructorName) > -1;
+
+  if (isCustomType) {
+    return value.value;
+  }
+
   if (is.date(value)) {
     return value.toJSON();
   }
@@ -1007,6 +1020,7 @@ Table.prototype.insert = function(rows, options, callback) {
   if (!options.raw) {
     json.rows = arrify(rows).map(function(row) {
       return {
+        insertId: uuid.v4(),
         json: Table.encodeValue_(row)
       };
     });

@@ -80,7 +80,9 @@ describe('Vision', function() {
   it('should detect from a URL', () => {
     var url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
     return vision.logoDetection({
-      source: {imageUri: url},
+      image: {
+        source: {imageUri: url}
+      }
     }).then(responses => {
       var response = responses[0];
       assert.deepEqual(response.logoAnnotations[0].description, 'Google');
@@ -89,7 +91,9 @@ describe('Vision', function() {
 
   it('should detect from a filename', () => {
     return vision.logoDetection({
-      source: {filename: IMAGES.logo},
+      image: {
+        source: {filename: IMAGES.logo}
+      },
     }).then(responses => {
       var response = responses[0];
       assert.deepEqual(response.logoAnnotations[0].description, 'Google');
@@ -98,7 +102,11 @@ describe('Vision', function() {
 
   it('should detect from a Buffer', () => {
     var buffer = fs.readFileSync(IMAGES.logo);
-    return vision.logoDetection(buffer).then(responses => {
+    return vision.logoDetection({
+      image: {
+        content: buffer
+      }
+    }).then(responses => {
       var response = responses[0];
       assert.deepEqual(response.logoAnnotations[0].description, 'Google');
     });

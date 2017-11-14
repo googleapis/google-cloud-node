@@ -23,6 +23,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner](https://github.com/googleapis/nodejs-spanner/) (Beta)
+* [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (Beta)
 * [Cloud Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence/) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
 * [Google BigQuery](#google-bigquery-beta) (Beta)
@@ -30,15 +31,17 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
+* [Cloud Bigtable](https://github.com/googleapis/nodejs-bigtable) (Alpha)
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
-* [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Cloud Speech](#cloud-speech-alpha) (Alpha)
-* [Google Compute Engine](#google-compute-engine-alpha) (Alpha)
-* [Google Prediction API](#google-prediction-api-alpha) (Alpha)
+* [Cloud Resource Manager](https://github.com/googleapis/nodejs-resource) (Alpha)
+* [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
+
+The following client libraries are **deprecated** due to the underlying API also being deprecated:
+
+* [Google Prediction API](https://github.com/googleapis/nodejs-prediction) (Deprecated)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -643,6 +646,59 @@ database.runStream('SELECT * FROM Singers')
 ```
 
 
+## Cloud Speech (Beta)
+
+- [API Documentation][gcloud-speech-docs]
+- [Official Documentation][cloud-speech-docs]
+
+#### Using the Cloud Speech API module
+
+```
+$ npm install --save @google-cloud/speech
+```
+
+```js
+var speech = require('@google-cloud/speech');
+```
+
+#### Authentication
+
+See [Authentication](#authentication).
+
+#### Preview
+
+```js
+var speechClient = speech({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var languageCode = 'en-US';
+var sampleRateHertz = 44100;
+var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
+var config = {
+    languageCode : languageCode,
+    sampleRateHertz : sampleRateHertz,
+    encoding : encoding
+};
+var uri = 'gs://gapic-toolkit/hello.flac';
+var audio = {
+    uri : uri
+};
+var request = {
+    config: config,
+    audio: audio
+};
+speechClient.recognize(request).then(function(responses) {
+    var response = responses[0];
+    // doThingsWith(response)
+})
+.catch(function(err) {
+    console.error(err);
+});
+```
+
+
 ## Cloud Vision (Beta)
 
 - [API Documentation][gcloud-vision-docs]
@@ -966,59 +1022,6 @@ var project = resourceClient.project();
 
 project.getMetadata(function(err, metadata) {
   // `metadata` describes your project.
-});
-```
-
-
-## Cloud Speech (Alpha)
-
-- [API Documentation][gcloud-speech-docs]
-- [Official Documentation][cloud-speech-docs]
-
-#### Using the Cloud Speech API module
-
-```
-$ npm install --save @google-cloud/speech
-```
-
-```js
-var speech = require('@google-cloud/speech');
-```
-
-#### Authentication
-
-See [Authentication](#authentication).
-
-#### Preview
-
-```js
-var speechClient = speech({
-  projectId: 'my-project',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var languageCode = 'en-US';
-var sampleRateHertz = 44100;
-var encoding = speech.v1.types.RecognitionConfig.AudioEncoding.FLAC;
-var config = {
-    languageCode : languageCode,
-    sampleRateHertz : sampleRateHertz,
-    encoding : encoding
-};
-var uri = 'gs://gapic-toolkit/hello.flac';
-var audio = {
-    uri : uri
-};
-var request = {
-    config: config,
-    audio: audio
-};
-speechClient.recognize(request).then(function(responses) {
-    var response = responses[0];
-    // doThingsWith(response)
-})
-.catch(function(err) {
-    console.error(err);
 });
 ```
 
