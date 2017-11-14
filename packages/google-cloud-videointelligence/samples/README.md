@@ -29,21 +29,16 @@ View the [source code][video_0_code].
 __Usage:__ `node analyze.js --help`
 
 ```
-analyze.js <command>
-
 Commands:
-  analyze.js faces <gcsUri>        Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video
-                                   Intelligence API.
-  analyze.js shots <gcsUri>        Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video
-                                   Intelligence API.
-  analyze.js labels-gcs <gcsUri>   Labels objects in a video stored in Google Cloud Storage using the Cloud Video
-                                   Intelligence API.
-  analyze.js labels-file <gcsUri>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
-  analyze.js safe-search <gcsUri>  Detects explicit content in a video stored in Google Cloud Storage.
+  faces <gcsUri>        Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
+  shots <gcsUri>        Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video
+                        Intelligence API.
+  labels-gcs <gcsUri>   Labels objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
+  labels-file <gcsUri>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
+  safe-search <gcsUri>  Detects explicit content in a video stored in Google Cloud Storage.
 
 Options:
-  --version  Show version number                                                                               [boolean]
-  --help     Show help                                                                                         [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
   node analyze.js faces gs://demomaker/larry_sergey_ice_bucket_short.mp4
