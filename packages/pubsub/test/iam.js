@@ -45,7 +45,8 @@ describe('IAM', function() {
   var iam;
 
   var PUBSUB = {
-    options: {}
+    options: {},
+    request: util.noop
   };
   var ID = 'id';
 
@@ -65,58 +66,62 @@ describe('IAM', function() {
   });
 
   describe('initialization', function() {
-    it('should inherit from GrpcService', function() {
-      assert(iam instanceof GrpcService);
-
-      var config = iam.calledWith_[0];
-      var options = iam.calledWith_[1];
-
-      assert.strictEqual(config.baseUrl, 'pubsub.googleapis.com');
-
-      var protosDir = path.resolve(__dirname, '../protos');
-      assert.strictEqual(config.protosDir, protosDir);
-
-      assert.deepStrictEqual(config.protoServices, {
-        IAMPolicy: {
-          path: 'google/iam/v1/iam_policy.proto',
-          service: 'iam.v1'
-        }
-      });
-
-      assert.deepEqual(config.scopes, [
-        'https://www.googleapis.com/auth/pubsub',
-        'https://www.googleapis.com/auth/cloud-platform'
-      ]);
-      assert.deepEqual(config.packageJson, require('../package.json'));
-
-      assert.strictEqual(options, PUBSUB.options);
+    it('should localize pubsub', function() {
+      assert.strictEqual(iam.pubsub, PUBSUB);
     });
 
-    it('should promisify all the things', function() {
-      assert(promisified);
+    it('should localize pubsub#request', function() {
+      var fakeRequest = function() {};
+      var fakePubsub = {
+        request: {
+          bind: function(context) {
+            assert.strictEqual(context, fakePubsub);
+            return fakeRequest;
+          }
+        }
+      };
+      var iam = new IAM(fakePubsub, ID);
+
+      assert.strictEqual(iam.request, fakeRequest);
     });
 
     it('should localize the ID', function() {
       assert.strictEqual(iam.id, ID);
     });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
   });
 
   describe('getPolicy', function() {
     it('should make the correct API request', function(done) {
-      iam.request = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'IAMPolicy');
-        assert.strictEqual(protoOpts.method, 'getIamPolicy');
-
-        assert.strictEqual(reqOpts.resource, iam.id);
+      iam.request = function(config, callback) {
+        assert.strictEqual(config.client, 'subscriberClient');
+        assert.strictEqual(config.method, 'getIamPolicy');
+        assert.strictEqual(config.reqOpts.resource, iam.id);
 
         callback(); // done()
       };
 
       iam.getPolicy(done);
     });
+
+    it('should accept gax options', function(done) {
+      var gaxOpts = {};
+
+      iam.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOpts);
+        done();
+      };
+
+      iam.getPolicy(gaxOpts, assert.ifError);
+    });
   });
 
   describe('setPolicy', function() {
+    var policy = { etag: 'ACAB' };
+
     it('should throw an error if a policy is not supplied', function() {
       assert.throws(function() {
         iam.setPolicy(util.noop);
@@ -124,19 +129,27 @@ describe('IAM', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var policy = { etag: 'ACAB' };
-
-      iam.request = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'IAMPolicy');
-        assert.strictEqual(protoOpts.method, 'setIamPolicy');
-
-        assert.strictEqual(reqOpts.resource, iam.id);
-        assert.strictEqual(reqOpts.policy, policy);
+      iam.request = function(config, callback) {
+        assert.strictEqual(config.client, 'subscriberClient');
+        assert.strictEqual(config.method, 'setIamPolicy');
+        assert.strictEqual(config.reqOpts.resource, iam.id);
+        assert.strictEqual(config.reqOpts.policy, policy);
 
         callback(); // done()
       };
 
       iam.setPolicy(policy, done);
+    });
+
+    it('should accept gax options', function(done) {
+      var gaxOpts = {};
+
+      iam.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOpts);
+        done();
+      };
+
+      iam.setPolicy(policy, gaxOpts, assert.ifError);
     });
   });
 
@@ -150,12 +163,11 @@ describe('IAM', function() {
     it('should make the correct API request', function(done) {
       var permissions = 'storage.bucket.list';
 
-      iam.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'IAMPolicy');
-        assert.strictEqual(protoOpts.method, 'testIamPermissions');
-
-        assert.strictEqual(reqOpts.resource, iam.id);
-        assert.deepEqual(reqOpts.permissions, [permissions]);
+      iam.request = function(config) {
+        assert.strictEqual(config.client, 'subscriberClient');
+        assert.strictEqual(config.method, 'testIamPermissions');
+        assert.strictEqual(config.reqOpts.resource, iam.id);
+        assert.deepEqual(config.reqOpts.permissions, [permissions]);
 
         done();
       };
@@ -163,12 +175,24 @@ describe('IAM', function() {
       iam.testPermissions(permissions, assert.ifError);
     });
 
+    it('should accept gax options', function(done) {
+      var permissions = 'storage.bucket.list';
+      var gaxOpts = {};
+
+      iam.request = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOpts);
+        done();
+      };
+
+      iam.testPermissions(permissions, gaxOpts, assert.ifError);
+    });
+
     it('should send an error back if the request fails', function(done) {
       var permissions = ['storage.bucket.list'];
       var error = new Error('Error.');
       var apiResponse = {};
 
-      iam.request = function(protoOpts, reqOpts, callback) {
+      iam.request = function(config, callback) {
         callback(error, apiResponse);
       };
 
@@ -189,7 +213,7 @@ describe('IAM', function() {
         permissions: ['storage.bucket.consume']
       };
 
-      iam.request = function(protoOpts, reqOpts, callback) {
+      iam.request = function(config, callback) {
         callback(null, apiResponse);
       };
 

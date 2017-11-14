@@ -513,7 +513,6 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         assert.deepEqual(policy.bindings, []);
-        assert.strictEqual(policy.etag, 'ACAB');
         assert.strictEqual(policy.version, 0);
 
         done();
