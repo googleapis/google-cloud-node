@@ -18,9 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var GrpcService = require('@google-cloud/common-grpc').Service;
-var nodeutil = require('util');
-var path = require('path');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -32,13 +29,6 @@ var fakeUtil = extend({}, util, {
     }
   }
 });
-
-function FakeGrpcService() {
-  this.calledWith_ = arguments;
-  GrpcService.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeGrpcService, GrpcService);
 
 describe('IAM', function() {
   var IAM;
@@ -54,9 +44,6 @@ describe('IAM', function() {
     IAM = proxyquire('../src/iam.js', {
       '@google-cloud/common': {
         util: fakeUtil
-      },
-      '@google-cloud/common-grpc': {
-        Service: FakeGrpcService
       }
     });
   });
