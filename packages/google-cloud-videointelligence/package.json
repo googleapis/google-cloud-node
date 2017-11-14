@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/video-intelligence",
   "description": "Google Cloud Video Intelligence API client for Node.js",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -56,7 +56,7 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.0",
+    "@google-cloud/nodejs-repo-tools": "^2.1.1",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",
@@ -69,6 +69,6 @@
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
     "power-assert": "^1.4.4",
-    "prettier": "^1.7.4"
+    "prettier": "^1.8.1"
   }
 }
