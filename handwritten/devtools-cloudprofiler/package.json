@@ -42,7 +42,7 @@
     "@types/mocha": "^2.2.43",
     "@types/node": "^8.0.30",
     "@types/request": "^2.0.4",
-    "@types/sinon": "^2.3.6",
+    "@types/sinon": "^4.0.0",
     "clang-format": "^1.0.33",
     "codecov": "^3.0.0",
     "gts": "^0.5.0",
