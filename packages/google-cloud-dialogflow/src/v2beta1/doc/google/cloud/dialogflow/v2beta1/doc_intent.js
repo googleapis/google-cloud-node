@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,9 +63,9 @@
  * @property {Object[]} outputContexts
  *   Optional. The collection of contexts that are activated when the intent
  *   is matched. Context messages in this collection should not set the
- *   parameters field.
- *   Format: `projects/<Project ID>/agents/<Agent
- *   ID>/sessions/*/contexts/<Context ID>`.
+ *   parameters field. Setting the `lifespan_count` to 0 will reset the context
+ *   when the intent is matched.
+ *   Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
  *
  *   This object should have the same structure as [Context]{@link google.cloud.dialogflow.v2beta1.Context}
  *
@@ -777,8 +777,8 @@ var Intent = {
  * @property {string} languageCode
  *   Optional. The language to list training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent before they can be used.
  *
  * @property {number} intentView
@@ -832,8 +832,8 @@ var ListIntentsResponse = {
  * @property {string} languageCode
  *   Optional. The language to retrieve training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {number} intentView
@@ -864,8 +864,8 @@ var GetIntentRequest = {
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
- *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   used. [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {number} intentView
@@ -893,8 +893,8 @@ var CreateIntentRequest = {
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
- *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   used. [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {Object} updateMask
@@ -935,7 +935,7 @@ var DeleteIntentRequest = {
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create intents in.
- *   Format: `projects/<Project ID>/agents/<Agent ID>`.
+ *   Format: `projects/<Project ID>/agent`.
  *
  * @property {string} intentBatchUri
  *   The URI to a file containing intents to update or create. The file
@@ -950,8 +950,8 @@ var DeleteIntentRequest = {
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intents`. If not specified, the agent's default language is
- *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   used. [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {Object} updateMask
@@ -996,8 +996,8 @@ var BatchUpdateIntentsResponse = {
  *   `projects/<Project ID>/agent`.
  *
  * @property {Object[]} intents
- *   Required. The collection of entities to delete. Only the canonical `value`
- *   must be filled in.
+ *   Required. The collection of intents to delete. Only intent `name` must be
+ *   filled in.
  *
  *   This object should have the same structure as [Intent]{@link google.cloud.dialogflow.v2beta1.Intent}
  *

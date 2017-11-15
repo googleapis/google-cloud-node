@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
  *
  * @property {string} defaultLanguageCode
  *   Required. The default language of the agent as a language tag. See
- *   [Language Support](https://api.ai/docs/reference/language) for a
+ *   [Language Support](https://dialogflow.com/docs/reference/language) for a
  *   list of the currently supported language codes.
  *   This field cannot be set by the `Update` method.
  *
@@ -47,7 +47,7 @@
  * @property {string} avatarUri
  *   Optional. The URI of the agent's avatar.
  *   Avatars are used throughout API.AI console and in the self-hosted
- *   [Web Demo](https://api.ai/docs/integrations/web-demo) integration.
+ *   [Web Demo](https://dialogflow.com/docs/integrations/web-demo) integration.
  *
  * @property {boolean} enableLogging
  *   Optional. Determines whether this agent should log conversation queries.
@@ -104,7 +104,7 @@ var Agent = {
  * The request message for [Agents.GetAgent].
  *
  * @property {string} parent
- *   Required. The name of the agent.
+ *   Required. The project that the agent to fetch is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @typedef GetAgentRequest
@@ -162,7 +162,7 @@ var SearchAgentsResponse = {
  * The request message for [Agents.TrainAgent].
  *
  * @property {string} parent
- *   Required. The name of the agent to train.
+ *   Required. The project that the agent to train is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @typedef TrainAgentRequest
@@ -177,7 +177,7 @@ var TrainAgentRequest = {
  * The request message for [Agents.ExportAgent].
  *
  * @property {string} parent
- *   Required. The name of the agent to export.
+ *   Required. The project that the agent to export is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
@@ -214,7 +214,7 @@ var ExportAgentResponse = {
  * The request message for [Agents.ImportAgent].
  *
  * @property {string} parent
- *   Required. The name of the agent to import.
+ *   Required. The project that the agent to import is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
@@ -236,7 +236,7 @@ var ImportAgentRequest = {
  * The request message for [Agents.RestoreAgent].
  *
  * @property {string} parent
- *   Required. The name of the agent to restore.
+ *   Required. The project that the agent to restore is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri

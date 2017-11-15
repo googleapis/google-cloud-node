@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -111,7 +111,9 @@ class SessionsClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this._descriptors.stream = {
-      streamingDetectIntent: new gax.StreamDescriptor(gax.StreamType.BIDI_STREAMING),
+      streamingDetectIntent: new gax.StreamDescriptor(
+        gax.StreamType.BIDI_STREAMING
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -136,10 +138,7 @@ class SessionsClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var sessionsStubMethods = [
-      'detectIntent',
-      'streamingDetectIntent',
-    ];
+    var sessionsStubMethods = ['detectIntent', 'streamingDetectIntent'];
     for (let methodName of sessionsStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         sessionsStub.then(
@@ -174,9 +173,7 @@ class SessionsClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -238,7 +235,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionsClient({
    *   // optional auth parameters.
@@ -284,7 +281,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionsClient({
    *   // optional auth parameters.
@@ -337,9 +334,7 @@ class SessionsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .project;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
   }
 
   /**
@@ -350,11 +345,8 @@ class SessionsClient {
    * @returns {String} - A string representing the session.
    */
   matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .session;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 }
-
 
 module.exports = SessionsClient;

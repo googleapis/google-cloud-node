@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ const VERSION = require('../../package.json').version;
  * Manages contexts.
  *
  *
- * Refer to [documentation](https://api.ai/docs/contexts) for more details about
- * # contexts.
+ * Refer to [documentation](https://dialogflow.com/docs/contexts) for more
+ * # details about contexts.
  *
  * Standard methods.
  *
@@ -189,9 +189,7 @@ class ContextsClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -246,7 +244,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -334,7 +332,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -356,7 +354,7 @@ class ContextsClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Retrieves the specified context.
@@ -379,7 +377,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -430,7 +428,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -488,7 +486,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -532,7 +530,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -571,7 +569,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -634,9 +632,7 @@ class ContextsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .project;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
   }
 
   /**
@@ -647,9 +643,7 @@ class ContextsClient {
    * @returns {String} - A string representing the session.
    */
   matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .session;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 
   /**
@@ -660,9 +654,7 @@ class ContextsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate
-      .match(contextName)
-      .project;
+    return this._pathTemplates.contextPathTemplate.match(contextName).project;
   }
 
   /**
@@ -673,9 +665,7 @@ class ContextsClient {
    * @returns {String} - A string representing the session.
    */
   matchSessionFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate
-      .match(contextName)
-      .session;
+    return this._pathTemplates.contextPathTemplate.match(contextName).session;
   }
 
   /**
@@ -686,11 +676,8 @@ class ContextsClient {
    * @returns {String} - A string representing the context.
    */
   matchContextFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate
-      .match(contextName)
-      .context;
+    return this._pathTemplates.contextPathTemplate.match(contextName).context;
   }
 }
-
 
 module.exports = ContextsClient;

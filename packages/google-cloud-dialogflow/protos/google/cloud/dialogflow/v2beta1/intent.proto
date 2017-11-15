@@ -35,8 +35,8 @@ option objc_class_prefix = "DF";
 // Manages agent intents.
 //
 //
-// Refer to [documentation](https://api.ai/docs/intents) for more details about
-// # agent intents.
+// Refer to [documentation](https://dialogflow.com/docs/intents) for more
+// # details about agent intents.
 //
 // Standard methods.
 service Intents {
@@ -69,7 +69,7 @@ service Intents {
   //
   // Operation<response: BatchUpdateIntentsResponse>
   rpc BatchUpdateIntents(BatchUpdateIntentsRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agents/*}/intents:batchUpdate" body: "*" };
+    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/intents:batchUpdate" body: "*" };
   }
 
   // Deletes intents in the specified agent.
@@ -493,9 +493,9 @@ message Intent {
 
   // Optional. The collection of contexts that are activated when the intent
   // is matched. Context messages in this collection should not set the
-  // parameters field.
-  // Format: `projects/<Project ID>/agents/<Agent
-  // ID>/sessions/*/contexts/<Context ID>`.
+  // parameters field. Setting the `lifespan_count` to 0 will reset the context
+  // when the intent is matched.
+  // Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
   repeated Context output_contexts = 11;
 
   // Optional. Indicates whether to delete all contexts in the current
@@ -537,8 +537,8 @@ message ListIntentsRequest {
 
   // Optional. The language to list training phrases, parameters and rich
   // messages for. If not specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent before they can be used.
   string language_code = 2;
 
@@ -572,8 +572,8 @@ message GetIntentRequest {
 
   // Optional. The language to retrieve training phrases, parameters and rich
   // messages for. If not specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 2;
 
@@ -592,8 +592,8 @@ message CreateIntentRequest {
 
   // Optional. The language of training phrases, parameters and rich messages
   // defined in `intent`. If not specified, the agent's default language is
-  // used. [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // used. [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 3;
 
@@ -609,8 +609,8 @@ message UpdateIntentRequest {
 
   // Optional. The language of training phrases, parameters and rich messages
   // defined in `intent`. If not specified, the agent's default language is
-  // used. [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // used. [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 2;
 
@@ -631,7 +631,7 @@ message DeleteIntentRequest {
 // The request message for [Intents.BatchUpdateIntents].
 message BatchUpdateIntentsRequest {
   // Required. The name of the agent to update or create intents in.
-  // Format: `projects/<Project ID>/agents/<Agent ID>`.
+  // Format: `projects/<Project ID>/agent`.
   string parent = 1;
 
   // Required. The source of the intent batch.
@@ -647,8 +647,8 @@ message BatchUpdateIntentsRequest {
 
   // Optional. The language of training phrases, parameters and rich messages
   // defined in `intents`. If not specified, the agent's default language is
-  // used. [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // used. [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 4;
 
@@ -671,8 +671,8 @@ message BatchDeleteIntentsRequest {
   // `projects/<Project ID>/agent`.
   string parent = 1;
 
-  // Required. The collection of entities to delete. Only the canonical `value`
-  // must be filled in.
+  // Required. The collection of intents to delete. Only intent `name` must be
+  // filled in.
   repeated Intent intents = 2;
 }
 

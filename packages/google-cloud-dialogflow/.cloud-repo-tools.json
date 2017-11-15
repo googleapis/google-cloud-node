@@ -1,0 +1,93 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://dialogflow.com/docs/reference/api-v2/rpc/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "dialogflow_detect_intent_text",
+      "name": "Detect Intent (Text)",
+      "file": "detect.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest",
+      "usage": "node detect.js --help"
+    },
+    {
+      "id": "dialogflow_detect_intent_audio",
+      "name": "Detect Intent (Audio)",
+      "file": "detect.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest",
+      "usage": "node detect.js --help"
+    },
+    {
+      "id": "dialogflow_detect_intent_streaming",
+      "name": "Detect Intent (Streaming)",
+      "file": "detect.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest",
+      "usage": "node detect.js --help"
+    },
+    {
+      "id": "dialogflow_create_entity",
+      "name": "Create Entity",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.EntityTypes.CreateEntityType",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_delete_entity",
+      "name": "Delete Entity",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.EntityTypes.DeleteEntityType",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_create_intent",
+      "name": "Create Intent",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Intents.CreateIntent",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_delete_intent",
+      "name": "Delete Intent",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Intents.DeleteIntent",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_create_context",
+      "name": "Create Context",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Contexts.CreateContext",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_delete_context",
+      "name": "Delete Context",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Contexts.DeleteContext",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_create_session_entity_type",
+      "name": "Create Session Entity Type",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.CreateSessionEntityType",
+      "usage": "node resource.js --help"
+    },
+    {
+      "id": "dialogflow_delete_session_entity_type",
+      "name": "Delete Session Entity Type",
+      "file": "resource.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType",
+      "usage": "node resource.js --help"
+    }
+  ],
+
+  "_product": "dialogflow",
+  "id": "dialogflow",
+  "name": "Dialogflow",
+  "short_name": "Dialogflow",
+  "docs_url": "https://dialogflow.com/docs/reference/api-v2/rpc/",
+  "description": "[Dialogflow](https://dialogflow.com/docs/reference/v2-agent-setup) is an enterprise-grade NLU platform that makes it easy for developers to design and integrate conversational user interfaces into mobile apps, web applications, devices, and bots.",
+  "api_id": "dialogflow.googleapis.com"
+}

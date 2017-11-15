@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
  * @property {string} name
  *   Required. The unique identifier of this session entity type. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   ID>`.
+ *   Display Name>`.
  *
  * @property {number} entityOverrideMode
  *   Required. Indicates whether the additional data should override or
@@ -127,8 +127,8 @@ var ListSessionEntityTypesResponse = {
  *
  * @property {string} name
  *   Required. The name of the session entity type. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
- *   Entity Type ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+ *   Display Name>`.
  *
  * @typedef GetSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -163,8 +163,8 @@ var CreateSessionEntityTypeRequest = {
  *
  * @property {Object} sessionEntityType
  *   Required. The entity type to update. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
- *   Entity Type ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+ *   Display Name>`.
  *
  *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
  *
@@ -186,8 +186,8 @@ var UpdateSessionEntityTypeRequest = {
  *
  * @property {string} name
  *   Required. The name of the entity type to delete. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
- *   Entity Type ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+ *   Display Name>`.
  *
  * @typedef DeleteSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1

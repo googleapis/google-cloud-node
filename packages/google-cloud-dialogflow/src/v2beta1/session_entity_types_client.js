@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -188,9 +188,7 @@ class SessionEntityTypesClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -245,7 +243,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -298,7 +296,11 @@ class SessionEntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.listSessionEntityTypes(request, options, callback);
+    return this._innerApiCalls.listSessionEntityTypes(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -333,7 +335,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -355,7 +357,7 @@ class SessionEntityTypesClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Retrieves the specified session entity type.
@@ -364,8 +366,8 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the session entity type. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
-   *   Entity Type ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+   *   Display Name>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -379,7 +381,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -430,7 +432,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -458,7 +460,11 @@ class SessionEntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.createSessionEntityType(request, options, callback);
+    return this._innerApiCalls.createSessionEntityType(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -468,8 +474,8 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {Object} request.sessionEntityType
    *   Required. The entity type to update. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
-   *   Entity Type ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+   *   Display Name>`.
    *
    *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
    * @param {Object} [request.updateMask]
@@ -489,7 +495,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -512,7 +518,11 @@ class SessionEntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.updateSessionEntityType(request, options, callback);
+    return this._innerApiCalls.updateSessionEntityType(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -522,8 +532,8 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Session
-   *   Entity Type ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+   *   Display Name>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -534,7 +544,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -552,7 +562,11 @@ class SessionEntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.deleteSessionEntityType(request, options, callback);
+    return this._innerApiCalls.deleteSessionEntityType(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------
@@ -597,9 +611,7 @@ class SessionEntityTypesClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .project;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
   }
 
   /**
@@ -610,9 +622,7 @@ class SessionEntityTypesClient {
    * @returns {String} - A string representing the session.
    */
   matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate
-      .match(sessionName)
-      .session;
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 
   /**
@@ -623,9 +633,9 @@ class SessionEntityTypesClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromSessionEntityTypeName(sessionEntityTypeName) {
-    return this._pathTemplates.sessionEntityTypePathTemplate
-      .match(sessionEntityTypeName)
-      .project;
+    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+      sessionEntityTypeName
+    ).project;
   }
 
   /**
@@ -636,9 +646,9 @@ class SessionEntityTypesClient {
    * @returns {String} - A string representing the session.
    */
   matchSessionFromSessionEntityTypeName(sessionEntityTypeName) {
-    return this._pathTemplates.sessionEntityTypePathTemplate
-      .match(sessionEntityTypeName)
-      .session;
+    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+      sessionEntityTypeName
+    ).session;
   }
 
   /**
@@ -649,11 +659,10 @@ class SessionEntityTypesClient {
    * @returns {String} - A string representing the entity_type.
    */
   matchEntityTypeFromSessionEntityTypeName(sessionEntityTypeName) {
-    return this._pathTemplates.sessionEntityTypePathTemplate
-      .match(sessionEntityTypeName)
-      .entity_type;
+    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+      sessionEntityTypeName
+    ).entity_type;
   }
 }
-
 
 module.exports = SessionEntityTypesClient;

@@ -156,6 +156,11 @@ message QueryResult {
   // - If an event was provided as input, `query_text` is not set.
   string query_text = 1;
 
+  // The language that was triggered during intent detection.
+  // See [Language Support](https://dialogflow.com/docs/reference/language)
+  // for a list of the currently supported language codes.
+  string language_code = 15;
+
   // The confidence estimate between 0.0 and 1.0. A higher number
   // indicates an estimated greater likelihood that the recognized words are
   // correct. The default of 0.0 is a sentinel value indicating that confidence
@@ -216,8 +221,7 @@ message QueryResult {
 // Multiple request messages should be sent in order:
 //
 // 1.  The first message must contain `session`, `query_input` plus optionally
-//     `query_params` and/or `single_utterance`. The message must not contain
-//     `input_audio`.
+//     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
 //
 // 2.  If `query_input` was set to a streaming input audio config,
 //     all subsequent messages must contain only `input_audio`.
@@ -360,10 +364,10 @@ message InputAudioConfig {
   int32 sample_rate_hertz = 2;
 
   // Required. The language of the supplied audio. Dialogflow does not do
-  // translations. See [Language Support](https://docs.api.ai/docs/languages)
-  // for a list of the currently supported language codes.
-  // Note that queries in the same session do not necessarily need to specify
-  // the same language.
+  // translations. See [Language
+  // Support](https://dialogflow.com/docs/languages) for a list of the
+  // currently supported language codes. Note that queries in the same session
+  // do not necessarily need to specify the same language.
   string language_code = 3;
 
   // Optional. The collection of phrase hints which are used to boost accuracy
@@ -379,9 +383,10 @@ message TextInput {
   // Text length must not exceed 256 bytes.
   string text = 1;
 
-  // Required. The language of this conversational query.
-  // Note that queries in the same session do not necessarily need to specify
-  // the same language.
+  // Required. The language of this conversational query. See [Language
+  // Support](https://dialogflow.com/docs/languages) for a list of the
+  // currently supported language codes. Note that queries in the same session
+  // do not necessarily need to specify the same language.
   string language_code = 2;
 }
 
@@ -396,6 +401,12 @@ message EventInput {
 
   // Optional. The collection of parameters associated with the event.
   google.protobuf.Struct parameters = 2;
+
+  // Required. The language of this query. See [Language
+  // Support](https://dialogflow.com/docs/languages) for a list of the
+  // currently supported language codes. Note that queries in the same session
+  // do not necessarily need to specify the same language.
+  string language_code = 3;
 }
 
 // Audio encoding of the audio content sent in the conversational query request.

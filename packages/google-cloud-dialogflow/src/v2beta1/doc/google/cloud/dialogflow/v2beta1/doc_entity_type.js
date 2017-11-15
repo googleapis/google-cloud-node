@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -133,8 +133,8 @@ var EntityType = {
  * @property {string} languageCode
  *   Optional. The language to list entity synonyms for. If not specified,
  *   the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {number} pageSize
@@ -183,8 +183,8 @@ var ListEntityTypesResponse = {
  * @property {string} languageCode
  *   Optional. The language to retrieve entity synonyms for. If not specified,
  *   the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @typedef GetEntityTypeRequest
@@ -210,8 +210,8 @@ var GetEntityTypeRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @typedef CreateEntityTypeRequest
@@ -234,8 +234,8 @@ var CreateEntityTypeRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {Object} updateMask
@@ -271,7 +271,7 @@ var DeleteEntityTypeRequest = {
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create entity types in.
- *   Format: `projects/<Project ID>/agents/<Agent ID>`.
+ *   Format: `projects/<Project ID>/agent`.
  *
  * @property {string} entityTypeBatchUri
  *   The URI to a file containing entity types to update or create. The file
@@ -286,8 +286,8 @@ var DeleteEntityTypeRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_types`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {Object} updateMask
@@ -353,8 +353,8 @@ var BatchDeleteEntityTypesRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @typedef BatchCreateEntitiesRequest
@@ -380,8 +380,8 @@ var BatchCreateEntitiesRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @property {Object} updateMask
@@ -412,8 +412,8 @@ var BatchUpdateEntitiesRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen languages](https://api.ai/docs/reference/language)
- *   are supported.
+ *   [More than a dozen
+ *   languages](https://dialogflow.com/docs/reference/language) are supported.
  *   Note: languages must be enabled in the agent, before they can be used.
  *
  * @typedef BatchDeleteEntitiesRequest

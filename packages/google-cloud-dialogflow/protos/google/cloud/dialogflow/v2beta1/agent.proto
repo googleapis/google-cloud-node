@@ -17,10 +17,10 @@ syntax = "proto3";
 package google.cloud.dialogflow.v2beta1;
 
 import "google/api/annotations.proto";
-import "google/cloud/dialogflow/v2beta1/tier.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2beta1";
@@ -34,8 +34,8 @@ option objc_class_prefix = "DF";
 // Manages conversational agents.
 //
 //
-// Refer to [documentation](https://api.ai/docs/agents) for more details about
-// # agents.
+// Refer to [documentation](https://dialogflow.com/docs/agents) for more details
+// # about agents.
 //
 // Standard methods.
 service Agents {
@@ -58,7 +58,8 @@ service Agents {
   // Trains the specified agent.
   //
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc TrainAgent(TrainAgentRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*}/agent:train" body: "*" };
   }
@@ -66,7 +67,8 @@ service Agents {
   // Exports the specified agent to a ZIP file.
   //
   //
-  // Operation<response: ExportAgentResponse>
+  // Operation<response: ExportAgentResponse,
+  //           metadata: google.protobuf.Struct>
   rpc ExportAgent(ExportAgentRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*}/agent:export" body: "*" };
   }
@@ -78,7 +80,8 @@ service Agents {
   // versions from ImportAgentRequest.
   //
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc ImportAgent(ImportAgentRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*}/agent:import" body: "*" };
   }
@@ -89,7 +92,8 @@ service Agents {
   // entity types in the older version are deleted.
   //
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc RestoreAgent(RestoreAgentRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*}/agent:restore" body: "*" };
   }
@@ -119,7 +123,7 @@ message Agent {
   string display_name = 2;
 
   // Required. The default language of the agent as a language tag. See
-  // [Language Support](https://api.ai/docs/reference/language) for a
+  // [Language Support](https://dialogflow.com/docs/reference/language) for a
   // list of the currently supported language codes.
   // This field cannot be set by the `Update` method.
   string default_language_code = 3;
@@ -139,7 +143,7 @@ message Agent {
 
   // Optional. The URI of the agent's avatar.
   // Avatars are used throughout API.AI console and in the self-hosted
-  // [Web Demo](https://api.ai/docs/integrations/web-demo) integration.
+  // [Web Demo](https://dialogflow.com/docs/integrations/web-demo) integration.
   string avatar_uri = 7;
 
   // Optional. Determines whether this agent should log conversation queries.
@@ -160,7 +164,7 @@ message Agent {
 
 // The request message for [Agents.GetAgent].
 message GetAgentRequest {
-  // Required. The name of the agent.
+  // Required. The project that the agent to fetch is associated with.
   // Format: `projects/<Project ID>`.
   string parent = 1;
 }
@@ -192,14 +196,14 @@ message SearchAgentsResponse {
 
 // The request message for [Agents.TrainAgent].
 message TrainAgentRequest {
-  // Required. The name of the agent to train.
+  // Required. The project that the agent to train is associated with.
   // Format: `projects/<Project ID>`.
   string parent = 1;
 }
 
 // The request message for [Agents.ExportAgent].
 message ExportAgentRequest {
-  // Required. The name of the agent to export.
+  // Required. The project that the agent to export is associated with.
   // Format: `projects/<Project ID>`.
   string parent = 1;
 
@@ -223,7 +227,7 @@ message ExportAgentResponse {
 
 // The request message for [Agents.ImportAgent].
 message ImportAgentRequest {
-  // Required. The name of the agent to import.
+  // Required. The project that the agent to import is associated with.
   // Format: `projects/<Project ID>`.
   string parent = 1;
 
@@ -240,7 +244,7 @@ message ImportAgentRequest {
 
 // The request message for [Agents.RestoreAgent].
 message RestoreAgentRequest {
-  // Required. The name of the agent to restore.
+  // Required. The project that the agent to restore is associated with.
   // Format: `projects/<Project ID>`.
   string parent = 1;
 

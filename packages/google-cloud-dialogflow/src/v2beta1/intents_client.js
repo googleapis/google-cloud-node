@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ const VERSION = require('../../package.json').version;
  * Manages agent intents.
  *
  *
- * Refer to [documentation](https://api.ai/docs/intents) for more details about
- * # agent intents.
+ * Refer to [documentation](https://dialogflow.com/docs/intents) for more
+ * # details about agent intents.
  *
  * Standard methods.
  *
@@ -130,10 +130,15 @@ class IntentsClient {
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/dialogflow/v2beta1/intent.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/dialogflow/v2beta1/intent.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -210,7 +215,8 @@ class IntentsClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName] || this._descriptors.longrunning[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -234,9 +240,7 @@ class IntentsClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -263,8 +267,8 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent before they can be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
@@ -301,7 +305,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -378,8 +382,8 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent before they can be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
@@ -399,7 +403,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -421,7 +425,7 @@ class IntentsClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Retrieves the specified intent.
@@ -434,8 +438,8 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to retrieve training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
@@ -454,7 +458,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -495,8 +499,8 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
-   *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   used. [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
@@ -515,7 +519,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -559,8 +563,8 @@ class IntentsClient {
    * @param {string} request.languageCode
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
-   *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   used. [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
@@ -583,7 +587,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -632,7 +636,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -662,12 +666,12 @@ class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the agent to update or create intents in.
-   *   Format: `projects/<Project ID>/agents/<Agent ID>`.
+   *   Format: `projects/<Project ID>/agent`.
    * @param {string} request.languageCode
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intents`. If not specified, the agent's default language is
-   *   used. [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   used. [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {string} [request.intentBatchUri]
    *   The URI to a file containing intents to update or create. The file
@@ -698,7 +702,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -789,8 +793,8 @@ class IntentsClient {
    *   Required. The name of the agent to delete all entities types for. Format:
    *   `projects/<Project ID>/agent`.
    * @param {Object[]} request.intents
-   *   Required. The collection of entities to delete. Only the canonical `value`
-   *   must be filled in.
+   *   Required. The collection of intents to delete. Only intent `name` must be
+   *   filled in.
    *
    *   This object should have the same structure as [Intent]{@link google.cloud.dialogflow.v2beta1.Intent}
    * @param {Object} [options]
@@ -806,7 +810,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -938,8 +942,7 @@ class IntentsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName) {
-    return this._pathTemplates.projectAgentPathTemplate
-      .match(projectAgentName)
+    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -951,9 +954,7 @@ class IntentsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromIntentName(intentName) {
-    return this._pathTemplates.intentPathTemplate
-      .match(intentName)
-      .project;
+    return this._pathTemplates.intentPathTemplate.match(intentName).project;
   }
 
   /**
@@ -964,9 +965,7 @@ class IntentsClient {
    * @returns {String} - A string representing the intent.
    */
   matchIntentFromIntentName(intentName) {
-    return this._pathTemplates.intentPathTemplate
-      .match(intentName)
-      .intent;
+    return this._pathTemplates.intentPathTemplate.match(intentName).intent;
   }
 
   /**
@@ -977,9 +976,7 @@ class IntentsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate
-      .match(agentName)
-      .project;
+    return this._pathTemplates.agentPathTemplate.match(agentName).project;
   }
 
   /**
@@ -990,11 +987,8 @@ class IntentsClient {
    * @returns {String} - A string representing the agent.
    */
   matchAgentFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate
-      .match(agentName)
-      .agent;
+    return this._pathTemplates.agentPathTemplate.match(agentName).agent;
   }
 }
-
 
 module.exports = IntentsClient;

@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2beta1";
@@ -33,8 +34,8 @@ option objc_class_prefix = "DF";
 // Manages agent entity types.
 //
 //
-// Refer to [documentation](https://api.ai/docs/entities) for more details about
-// # entity types.
+// Refer to [documentation](https://dialogflow.com/docs/entities) for more
+// # details about entity types.
 //
 // Standard methods.
 service EntityTypes {
@@ -65,14 +66,16 @@ service EntityTypes {
 
   // Updates/Creates multiple entity types in the specified agent.
   //
-  // Operation<response: BatchUpdateEntityTypesResponse>
+  // Operation<response: BatchUpdateEntityTypesResponse,
+  //           metadata: google.protobuf.Struct>
   rpc BatchUpdateEntityTypes(BatchUpdateEntityTypesRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchUpdate" body: "*" };
   }
 
   // Deletes entity types in the specified agent.
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc BatchDeleteEntityTypes(BatchDeleteEntityTypesRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchDelete" body: "*" };
   }
@@ -88,14 +91,16 @@ service EntityTypes {
   // Updates entities in the specified entity type (replaces the existing
   // collection of entries).
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc BatchUpdateEntities(BatchUpdateEntitiesRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate" body: "*" };
   }
 
   // Deletes entities in the specified entity type.
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation<response: google.protobuf.Empty,
+  //           metadata: google.protobuf.Struct>
   rpc BatchDeleteEntities(BatchDeleteEntitiesRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete" body: "*" };
   }
@@ -173,8 +178,8 @@ message ListEntityTypesRequest {
 
   // Optional. The language to list entity synonyms for. If not specified,
   // the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 2;
 
@@ -205,8 +210,8 @@ message GetEntityTypeRequest {
 
   // Optional. The language to retrieve entity synonyms for. If not specified,
   // the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 2;
 }
@@ -222,8 +227,8 @@ message CreateEntityTypeRequest {
 
   // Optional. The language of entity synonyms defined in `entity_type`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 3;
 }
@@ -236,8 +241,8 @@ message UpdateEntityTypeRequest {
 
   // Optional. The language of entity synonyms defined in `entity_type`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 2;
 
@@ -255,7 +260,7 @@ message DeleteEntityTypeRequest {
 // The request message for [EntityTypes.BatchUpdateEntityTypes].
 message BatchUpdateEntityTypesRequest {
   // Required. The name of the agent to update or create entity types in.
-  // Format: `projects/<Project ID>/agents/<Agent ID>`.
+  // Format: `projects/<Project ID>/agent`.
   string parent = 1;
 
   // Required. The source of the entity type batch.
@@ -275,8 +280,8 @@ message BatchUpdateEntityTypesRequest {
 
   // Optional. The language of entity synonyms defined in `entity_types`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 4;
 
@@ -312,8 +317,8 @@ message BatchCreateEntitiesRequest {
 
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 3;
 }
@@ -329,8 +334,8 @@ message BatchUpdateEntitiesRequest {
 
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 3;
 
@@ -351,8 +356,8 @@ message BatchDeleteEntitiesRequest {
 
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
-  // [More than a dozen languages](https://api.ai/docs/reference/language)
-  // are supported.
+  // [More than a dozen
+  // languages](https://dialogflow.com/docs/reference/language) are supported.
   // Note: languages must be enabled in the agent, before they can be used.
   string language_code = 3;
 }

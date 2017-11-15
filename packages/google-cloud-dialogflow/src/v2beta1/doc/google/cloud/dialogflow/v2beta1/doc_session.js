@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -171,6 +171,11 @@ var QueryInput = {
  *     multiple alternatives, a particular one is picked.
  *   - If an event was provided as input, `query_text` is not set.
  *
+ * @property {string} languageCode
+ *   The language that was triggered during intent detection.
+ *   See [Language Support](https://dialogflow.com/docs/reference/language)
+ *   for a list of the currently supported language codes.
+ *
  * @property {number} speechRecognitionConfidence
  *   The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
@@ -251,8 +256,7 @@ var QueryResult = {
  * Multiple request messages should be sent in order:
  *
  * 1.  The first message must contain `session`, `query_input` plus optionally
- *     `query_params` and/or `single_utterance`. The message must not contain
- *     `input_audio`.
+ *     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
  *
  * 2.  If `query_input` was set to a streaming input audio config,
  *     all subsequent messages must contain only `input_audio`.
@@ -446,10 +450,10 @@ var StreamingRecognitionResult = {
  *
  * @property {string} languageCode
  *   Required. The language of the supplied audio. Dialogflow does not do
- *   translations. See [Language Support](https://docs.api.ai/docs/languages)
- *   for a list of the currently supported language codes.
- *   Note that queries in the same session do not necessarily need to specify
- *   the same language.
+ *   translations. See [Language
+ *   Support](https://dialogflow.com/docs/languages) for a list of the
+ *   currently supported language codes. Note that queries in the same session
+ *   do not necessarily need to specify the same language.
  *
  * @property {string[]} phraseHints
  *   Optional. The collection of phrase hints which are used to boost accuracy
@@ -473,9 +477,10 @@ var InputAudioConfig = {
  *   Text length must not exceed 256 bytes.
  *
  * @property {string} languageCode
- *   Required. The language of this conversational query.
- *   Note that queries in the same session do not necessarily need to specify
- *   the same language.
+ *   Required. The language of this conversational query. See [Language
+ *   Support](https://dialogflow.com/docs/languages) for a list of the
+ *   currently supported language codes. Note that queries in the same session
+ *   do not necessarily need to specify the same language.
  *
  * @typedef TextInput
  * @memberof google.cloud.dialogflow.v2beta1
@@ -499,6 +504,12 @@ var TextInput = {
  *   Optional. The collection of parameters associated with the event.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {string} languageCode
+ *   Required. The language of this query. See [Language
+ *   Support](https://dialogflow.com/docs/languages) for a list of the
+ *   currently supported language codes. Note that queries in the same session
+ *   do not necessarily need to specify the same language.
  *
  * @typedef EventInput
  * @memberof google.cloud.dialogflow.v2beta1

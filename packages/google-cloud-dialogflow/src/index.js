@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `@google-cloud/dialogflow` package has the following named exports:
+ * The `dialogflow` package has the following named exports:
  *
  * - `AgentsClient` - Reference to
  *   {@link v2beta1.AgentsClient}
@@ -62,24 +62,20 @@ const gapic = Object.freeze({
  *     - `SessionsClient` - Reference to
  *       {@link v2beta1.SessionsClient}
  *
- * @module {object} @google-cloud/dialogflow
+ * @module {object} dialogflow
  * @alias nodejs-dialogflow
  *
- * @example <caption>Install the client library with
- *   <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/dialogflow
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save dialogflow
  *
  * @example <caption>Import the client library:</caption>
- * const dialogflow = require('@google-cloud/dialogflow');
+ * const dialogflow = require('dialogflow');
  *
- * @example <caption>Create a client that uses
- *   <a href="https://goo.gl/64dyYX">Application Default Credentials
- *   (ADC)</a>:</caption>
- * let client = new dialogflow.AgentsClient();
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new dialogflow.AgentsClient();
  *
- * @example <caption>Create a client with
- *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * let client = new dialogflow.AgentsClient({
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new dialogflow.AgentsClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });

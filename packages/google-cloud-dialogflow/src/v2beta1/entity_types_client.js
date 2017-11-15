@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ const VERSION = require('../../package.json').version;
  * Manages agent entity types.
  *
  *
- * Refer to [documentation](https://api.ai/docs/entities) for more details about
- * # entity types.
+ * Refer to [documentation](https://dialogflow.com/docs/entities) for more
+ * # details about entity types.
  *
  * Standard methods.
  *
@@ -127,10 +127,15 @@ class EntityTypesClient {
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/dialogflow/v2beta1/entity_type.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/dialogflow/v2beta1/entity_type.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -174,13 +179,21 @@ class EntityTypesClient {
     this._descriptors.longrunning = {
       batchUpdateEntityTypes: new gax.LongrunningDescriptor(
         this.operationsClient,
-        batchUpdateEntityTypesResponse.decode.bind(batchUpdateEntityTypesResponse),
-        batchUpdateEntityTypesMetadata.decode.bind(batchUpdateEntityTypesMetadata)
+        batchUpdateEntityTypesResponse.decode.bind(
+          batchUpdateEntityTypesResponse
+        ),
+        batchUpdateEntityTypesMetadata.decode.bind(
+          batchUpdateEntityTypesMetadata
+        )
       ),
       batchDeleteEntityTypes: new gax.LongrunningDescriptor(
         this.operationsClient,
-        batchDeleteEntityTypesResponse.decode.bind(batchDeleteEntityTypesResponse),
-        batchDeleteEntityTypesMetadata.decode.bind(batchDeleteEntityTypesMetadata)
+        batchDeleteEntityTypesResponse.decode.bind(
+          batchDeleteEntityTypesResponse
+        ),
+        batchDeleteEntityTypesMetadata.decode.bind(
+          batchDeleteEntityTypesMetadata
+        )
       ),
       batchCreateEntities: new gax.LongrunningDescriptor(
         this.operationsClient,
@@ -243,7 +256,8 @@ class EntityTypesClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName] || this._descriptors.longrunning[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -267,9 +281,7 @@ class EntityTypesClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -296,8 +308,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -330,7 +342,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -407,8 +419,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -424,7 +436,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -446,7 +458,7 @@ class EntityTypesClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Retrieves the specified entity type.
@@ -459,8 +471,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to retrieve entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -475,7 +487,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -516,8 +528,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_type`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -532,7 +544,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -576,8 +588,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_type`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
@@ -596,7 +608,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -640,7 +652,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -664,13 +676,14 @@ class EntityTypesClient {
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
-   * Operation<response: BatchUpdateEntityTypesResponse>
+   * Operation<response: BatchUpdateEntityTypesResponse,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the agent to update or create entity types in.
-   *   Format: `projects/<Project ID>/agents/<Agent ID>`.
+   *   Format: `projects/<Project ID>/agent`.
    * @param {string} [request.entityTypeBatchUri]
    *   The URI to a file containing entity types to update or create. The file
    *   format can be either a serialized proto (of EntityBatch type) or a JSON
@@ -682,8 +695,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_types`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
@@ -702,7 +715,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -769,13 +782,18 @@ class EntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.batchUpdateEntityTypes(request, options, callback);
+    return this._innerApiCalls.batchUpdateEntityTypes(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
    * Deletes entity types in the specified agent.
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -798,7 +816,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -875,7 +893,11 @@ class EntityTypesClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.batchDeleteEntityTypes(request, options, callback);
+    return this._innerApiCalls.batchDeleteEntityTypes(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -896,8 +918,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -912,7 +934,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -996,7 +1018,8 @@ class EntityTypesClient {
    * Updates entities in the specified entity type (replaces the existing
    * collection of entries).
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1010,8 +1033,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
@@ -1030,7 +1053,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -1113,7 +1136,8 @@ class EntityTypesClient {
   /**
    * Deletes entities in the specified entity type.
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1127,8 +1151,8 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen languages](https://api.ai/docs/reference/language)
-   *   are supported.
+   *   [More than a dozen
+   *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1143,7 +1167,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -1261,8 +1285,7 @@ class EntityTypesClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName) {
-    return this._pathTemplates.projectAgentPathTemplate
-      .match(projectAgentName)
+    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -1274,8 +1297,7 @@ class EntityTypesClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName) {
-    return this._pathTemplates.entityTypePathTemplate
-      .match(entityTypeName)
+    return this._pathTemplates.entityTypePathTemplate.match(entityTypeName)
       .project;
   }
 
@@ -1287,11 +1309,9 @@ class EntityTypesClient {
    * @returns {String} - A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName) {
-    return this._pathTemplates.entityTypePathTemplate
-      .match(entityTypeName)
+    return this._pathTemplates.entityTypePathTemplate.match(entityTypeName)
       .entity_type;
   }
 }
-
 
 module.exports = EntityTypesClient;

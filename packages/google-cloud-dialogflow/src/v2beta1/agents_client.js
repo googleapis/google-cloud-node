@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ const VERSION = require('../../package.json').version;
  * Manages conversational agents.
  *
  *
- * Refer to [documentation](https://api.ai/docs/agents) for more details about
- * # agents.
+ * Refer to [documentation](https://dialogflow.com/docs/agents) for more details
+ * # about agents.
  *
  * Standard methods.
  *
@@ -107,9 +107,7 @@ class AgentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -124,10 +122,15 @@ class AgentsClient {
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/dialogflow/v2beta1/agent.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/dialogflow/v2beta1/agent.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -137,30 +140,16 @@ class AgentsClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var trainAgentResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
-    );
-    var trainAgentMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Struct'
-    );
+    var trainAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    var trainAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
     var exportAgentResponse = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.ExportAgentResponse'
     );
-    var exportAgentMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Struct'
-    );
-    var importAgentResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
-    );
-    var importAgentMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Struct'
-    );
-    var restoreAgentResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
-    );
-    var restoreAgentMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Struct'
-    );
+    var exportAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    var importAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    var importAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    var restoreAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    var restoreAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
 
     this._descriptors.longrunning = {
       trainAgent: new gax.LongrunningDescriptor(
@@ -225,7 +214,8 @@ class AgentsClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName] || this._descriptors.longrunning[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -249,9 +239,7 @@ class AgentsClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -273,7 +261,7 @@ class AgentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent.
+   *   Required. The project that the agent to fetch is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -288,7 +276,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -359,7 +347,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -447,7 +435,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -469,18 +457,19 @@ class AgentsClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Trains the specified agent.
    *
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to train.
+   *   Required. The project that the agent to train is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -495,7 +484,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -569,12 +558,13 @@ class AgentsClient {
    * Exports the specified agent to a ZIP file.
    *
    *
-   * Operation<response: ExportAgentResponse>
+   * Operation<response: ExportAgentResponse,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to export.
+   *   Required. The project that the agent to export is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
    *   Optional. The URI to export the agent to. Note: The URI must start with
@@ -592,7 +582,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -670,12 +660,13 @@ class AgentsClient {
    * versions from ImportAgentRequest.
    *
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to import.
+   *   Required. The project that the agent to import is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
    *   The URI to a file containing the agent to import. Note: The URI must
@@ -695,7 +686,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -772,12 +763,13 @@ class AgentsClient {
    * entity types in the older version are deleted.
    *
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation<response: google.protobuf.Empty,
+   *           metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to restore.
+   *   Required. The project that the agent to restore is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
    *   The URI to a file containing the agent to restore. Note: The URI must
@@ -797,7 +789,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -891,11 +883,8 @@ class AgentsClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
-
 
 module.exports = AgentsClient;
