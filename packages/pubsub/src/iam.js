@@ -71,7 +71,7 @@ function IAM(pubsub, id) {
 /**
  * Get the IAM policy
  *
- * @param {object=} gaxOpts - Request configuration options, outlined
+ * @param {object=} gaxOptions - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
@@ -121,7 +121,7 @@ IAM.prototype.getPolicy = function(gaxOpts, callback) {
  * @param {array=} policy.bindings - Bindings associate members with roles.
  * @param {object[]=} policy.rules - Rules to be applied to the policy.
  * @param {string=} policy.etag - Etags are used to perform a read-modify-write.
- * @param {object=} gaxOpts - Request configuration options, outlined
+ * @param {object=} gaxOptions - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
@@ -185,7 +185,7 @@ IAM.prototype.setPolicy = function(policy, gaxOpts, callback) {
  * @throws {Error} If permissions are not provided.
  *
  * @param {string|string[]} permissions - The permission(s) to test for.
- * @param {object=} gaxOpts - Request configuration options, outlined
+ * @param {object=} gaxOptions - Request configuration options, outlined
  *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
