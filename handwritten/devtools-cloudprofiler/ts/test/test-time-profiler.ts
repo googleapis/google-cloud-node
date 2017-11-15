@@ -27,16 +27,19 @@ const v8TimeProfiler = require('bindings')('time_profiler');
 
 describe('TimeProfiler', () => {
   describe('profile', () => {
+    const sinonStubs: sinon.SinonStub[] = new Array();
     before(() => {
-      sinon.stub(v8TimeProfiler, 'startProfiling');
-      sinon.stub(v8TimeProfiler, 'stopProfiling').returns(v8TimeProfile);
-      sinon.stub(v8TimeProfiler, 'setSamplingInterval');
+      sinonStubs.push(sinon.stub(v8TimeProfiler, 'startProfiling'));
+      sinonStubs.push(
+          sinon.stub(v8TimeProfiler, 'stopProfiling').returns(v8TimeProfile));
+      sinonStubs.push(sinon.stub(v8TimeProfiler, 'setSamplingInterval'));
+      sinonStubs.push(sinon.stub(Date, 'now').returns(0));
     });
 
     after(() => {
-      v8TimeProfiler.startProfiling.restore();
-      v8TimeProfiler.stopProfiling.restore();
-      v8TimeProfiler.setSamplingInterval.restore();
+      sinonStubs.forEach((stub) => {
+        stub.restore();
+      });
     });
 
     it('should profile during duration and finish profiling after duration',

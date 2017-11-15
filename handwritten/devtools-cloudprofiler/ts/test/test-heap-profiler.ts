@@ -27,19 +27,19 @@ const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
 
 describe('HeapProfiler', () => {
   describe('profile', () => {
+    const sinonStubs: sinon.SinonStub[] = new Array();
     before(() => {
-      sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
-      sinon.stub(v8HeapProfiler, 'stopSamplingHeapProfiler');
-      sinon.stub(v8HeapProfiler, 'getAllocationProfile').returns(v8HeapProfile);
-      sinon.stub(Date, 'now').returns(0);
+      sinonStubs.push(sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler'));
+      sinonStubs.push(sinon.stub(v8HeapProfiler, 'stopSamplingHeapProfiler'));
+      sinonStubs.push(sinon.stub(v8HeapProfiler, 'getAllocationProfile')
+                          .returns(v8HeapProfile));
+      sinonStubs.push(sinon.stub(Date, 'now').returns(0));
     });
 
     after(() => {
-      v8HeapProfiler.startSamplingHeapProfiler.restore();
-      v8HeapProfiler.stopSamplingHeapProfiler.restore();
-      v8HeapProfiler.getAllocationProfile.restore();
-      // tslint:disable-next-line: no-any
-      (Date.now as any).restore();
+      sinonStubs.forEach((stub) => {
+        stub.restore();
+      });
     });
 
     it('should return a profile equal to the expected profile', async () => {

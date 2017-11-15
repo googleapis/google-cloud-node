@@ -84,13 +84,17 @@ export interface Service {
   new(config: ServiceConfig, options: AuthenticationConfig): Service;
 }
 
+export interface RequestOptions {
+  uri: string;
+  json: boolean;
+  method?: string;
+  body?: {};
+}
+
 export interface ServiceObject {
   new(config: ServiceObjectConfig): ServiceObject;
   // TODO: Determine if this signature is correct.
-  request:
-      (reqOpts: {uri: string, json: boolean},
-       callback: (err: Error, body: object, response: http.ServerResponse) =>
-           void) => void;
+  request: (reqOpts: RequestOptions) => Promise<object[]>;
 }
 
 export interface Common {
@@ -99,8 +103,7 @@ export interface Common {
   logger: Logger;
   util: {
     // TODO: Make this more precise.
-    normalizeArguments:
-        (globalContext: object|null, localConfig: object, options?: object) =>
-            object;
+    normalizeArguments: <T>(
+        globalContext: object|null, localConfig: T, options?: object) => T;
   };
 }

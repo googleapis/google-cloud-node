@@ -18,27 +18,35 @@ import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as path from 'path';
 import * as pify from 'pify';
-
-import {AuthenticationConfig, Common, ServiceConfig, ServiceObject} from '../third_party/types/common-types';
-
+import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {Profiler} from './profiler';
 
 const common: Common = require('@google-cloud/common');
 
-// Returns value of metadata field.
-// Throws error if there is a problem accessing metadata API.
+/**
+ * Returns value of metadata field.
+ * Throws error if there is a problem accessing metadata API.
+ */
 async function getMetadataInstanceField(field: string): Promise<string> {
   const [response, metadata] =
       await pify(gcpMetadata.instance, {multiArgs: true})(field);
   return metadata;
 }
 
-// initConfig sets unset values in the configuration to the value retrieved from
-// environment variables, metadata, or the default values specified in
-// defaultConfig.
-// Throws error if value that must be set cannot be initialized.
-// Exported for testing purposes.
+function hasService(config: Config):
+    config is {serviceContext: {service: string}} {
+  return config.serviceContext !== undefined &&
+      typeof config.serviceContext.service === 'string';
+}
+
+/**
+ * Sets unset values in the configuration to the value retrieved from
+ * environment variables, metadata, or specified in defaultConfig.
+ * Throws error if value that must be set cannot be initialized.
+ *
+ * Exported for testing purposes.
+ */
 export async function initConfig(config: Config): Promise<ProfilerConfig> {
   config = common.util.normalizeArguments(null, config);
 
@@ -85,7 +93,7 @@ export async function initConfig(config: Config): Promise<ProfilerConfig> {
     }
   }
 
-  if (mergedConfig.serviceContext.service === undefined) {
+  if (!hasService(mergedConfig)) {
     throw new Error('Service must be specified in the configuration.');
   }
 
@@ -96,7 +104,8 @@ let profiler: Profiler|undefined = undefined;
 
 /**
  * Starts the profiling agent and returns a promise.
- * If any error is encountered when profiling, the promise will be rejected.
+ * If any error is encountered when configuring the profiler the promise will
+ * be rejected. Resolves when profiling is started.
  *
  * config - Config describing configuration for profiling.
  *
@@ -110,7 +119,7 @@ let profiler: Profiler|undefined = undefined;
 export async function start(config: Config = {}): Promise<void> {
   const normalizedConfig = await initConfig(config);
   profiler = new Profiler(normalizedConfig);
-  return profiler.start();
+  profiler.start();
 }
 
 // If the module was --require'd from the command line, start the agent.

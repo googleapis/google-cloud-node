@@ -16,13 +16,13 @@
 
 import * as assert from 'assert';
 import * as gcpMetadata from 'gcp-metadata';
-import * as request from 'request';
 import * as sinon from 'sinon';
 
 import {initConfig} from '../src/index';
 
 describe('initConfig', () => {
   let savedEnv: NodeJS.ProcessEnv;
+  let metadataStub: sinon.SinonStub|undefined;
 
   before(() => {
     savedEnv = process.env;
@@ -33,8 +33,9 @@ describe('initConfig', () => {
   });
 
   afterEach(() => {
-    // tslint:disable-next-line: no-any
-    (gcpMetadata.instance as any).restore();
+    if (metadataStub) {
+      metadataStub.restore();
+    }
   });
 
   after(() => {
@@ -42,8 +43,8 @@ describe('initConfig', () => {
   });
 
   it('should not modify specified fields when not on GCE', async () => {
-    sinon.stub(gcpMetadata, 'instance')
-        .throwsException('cannot access metadata');
+    metadataStub = sinon.stub(gcpMetadata, 'instance')
+                       .throwsException('cannot access metadata');
 
     const config = {
       logLevel: 2,
@@ -52,15 +53,28 @@ describe('initConfig', () => {
       disableTime: true,
       instance: 'instance',
       zone: 'zone',
+      projectId: 'fake-projectId'
+    };
+    const expConfig = {
+      logLevel: 2,
+      serviceContext: {version: 'fake-version', service: 'fake-service'},
+      disableHeap: true,
+      disableTime: true,
+      instance: 'instance',
+      zone: 'zone',
       projectId: 'fake-projectId',
+      timeIntervalMicros: 1000,
+      heapIntervalBytes: 512 * 1024,
+      heapMaxStackDepth: 64,
+      backoffMillis: 300000
     };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, config);
+    assert.deepEqual(initializedConfig, expConfig);
   });
 
   it('should not modify specified fields when on GCE', async () => {
-    sinon.stub(gcpMetadata, 'instance')
-        .withArgs('name')
+    metadataStub = sinon.stub(gcpMetadata, 'instance');
+    metadataStub.withArgs('name')
         .callsArgWith(1, null, undefined, 'gce-instance')
         .withArgs('zone')
         .callsArgWith(
@@ -75,13 +89,26 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
+    const expConfig = {
+      logLevel: 2,
+      serviceContext: {version: 'fake-version', service: 'fake-service'},
+      disableHeap: true,
+      disableTime: true,
+      instance: 'instance',
+      zone: 'zone',
+      projectId: 'fake-projectId',
+      timeIntervalMicros: 1000,
+      heapIntervalBytes: 512 * 1024,
+      heapMaxStackDepth: 64,
+      backoffMillis: 300000
+    };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, config);
+    assert.deepEqual(initializedConfig, expConfig);
   });
 
   it('should get zone and instance from GCE', async () => {
-    sinon.stub(gcpMetadata, 'instance')
-        .withArgs('name')
+    metadataStub = sinon.stub(gcpMetadata, 'instance');
+    metadataStub.withArgs('name')
         .callsArgWith(1, null, undefined, 'gce-instance')
         .withArgs('zone')
         .callsArgWith(
@@ -102,6 +129,10 @@ describe('initConfig', () => {
       instance: 'gce-instance',
       zone: 'gce-zone',
       projectId: 'projectId',
+      timeIntervalMicros: 1000,
+      heapIntervalBytes: 512 * 1024,
+      heapMaxStackDepth: 64,
+      backoffMillis: 300000
     };
     const initializedConfig = await initConfig(config);
     assert.deepEqual(initializedConfig, expConfig);
@@ -109,8 +140,8 @@ describe('initConfig', () => {
 
   it('should not reject when not on GCE and no zone and instance found',
      async () => {
-       sinon.stub(gcpMetadata, 'instance')
-           .throwsException('cannot access metadata');
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       metadataStub.throwsException('cannot access metadata');
        const config = {
          projectId: 'fake-projectId',
          serviceContext: {service: 'fake-service'}
@@ -123,14 +154,18 @@ describe('initConfig', () => {
          instance: '',
          zone: '',
          projectId: 'fake-projectId',
+         timeIntervalMicros: 1000,
+         heapIntervalBytes: 512 * 1024,
+         heapMaxStackDepth: 64,
+         backoffMillis: 300000
        };
        const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, expConfig);
      });
 
   it('should reject when no service specified', () => {
-    sinon.stub(gcpMetadata, 'instance')
-        .throwsException('cannot access metadata');
+    metadataStub = sinon.stub(gcpMetadata, 'instance');
+    metadataStub.throwsException('cannot access metadata');
     const config = {
       logLevel: 2,
       serviceContext: {version: ''},
@@ -148,8 +183,8 @@ describe('initConfig', () => {
   });
 
   it('should get have no projectId when no projectId given', async () => {
-    sinon.stub(gcpMetadata, 'instance')
-        .throwsException('cannot access metadata');
+    metadataStub = sinon.stub(gcpMetadata, 'instance');
+    metadataStub.throwsException('cannot access metadata');
 
     const config = {
       logLevel: 2,
@@ -159,8 +194,20 @@ describe('initConfig', () => {
       instance: 'instance',
       zone: 'zone'
     };
+    const expConfig = {
+      logLevel: 2,
+      serviceContext: {version: '', service: 'fake-service'},
+      disableHeap: true,
+      disableTime: true,
+      instance: 'instance',
+      zone: 'zone',
+      timeIntervalMicros: 1000,
+      heapIntervalBytes: 512 * 1024,
+      heapMaxStackDepth: 64,
+      backoffMillis: 300000
+    };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, config);
+    assert.deepEqual(initializedConfig, expConfig);
   });
 
   it('should get values from from environment variable when not specified in config or environment variables',
@@ -171,8 +218,8 @@ describe('initConfig', () => {
        process.env.GAE_VERSION = 'process-version';
        process.env.GCLOUD_PROFILER_CONFIG =
            './ts/test/fixtures/test-config.json';
-       sinon.stub(gcpMetadata, 'instance')
-           .withArgs('name')
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       metadataStub.withArgs('name')
            .callsArgWith(1, null, undefined, 'gce-instance')
            .withArgs('zone')
            .callsArgWith(
@@ -187,6 +234,10 @@ describe('initConfig', () => {
          disableTime: true,
          instance: 'envConfig-instance',
          zone: 'envConfig-zone',
+         timeIntervalMicros: 1000,
+         heapIntervalBytes: 512 * 1024,
+         heapMaxStackDepth: 64,
+         backoffMillis: 300000
        };
        const initializedConfig = await initConfig(config);
        assert.deepEqual(initializedConfig, expConfig);
@@ -200,8 +251,8 @@ describe('initConfig', () => {
        process.env.GAE_VERSION = 'process-version';
        process.env.GCLOUD_PROFILER_CONFIG =
            './ts/test/fixtures/test-config.json';
-       sinon.stub(gcpMetadata, 'instance')
-           .withArgs('name')
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       metadataStub.withArgs('name')
            .callsArgWith(1, null, undefined, 'gce-instance')
            .withArgs('zone')
            .callsArgWith(
@@ -216,14 +267,27 @@ describe('initConfig', () => {
          instance: 'instance',
          zone: 'zone'
        };
+       const expConfig = {
+         projectId: 'config-projectId',
+         logLevel: 1,
+         serviceContext: {version: 'config-version', service: 'config-service'},
+         disableHeap: false,
+         disableTime: false,
+         instance: 'instance',
+         zone: 'zone',
+         timeIntervalMicros: 1000,
+         heapIntervalBytes: 512 * 1024,
+         heapMaxStackDepth: 64,
+         backoffMillis: 300000
+       };
        const initializedConfig = await initConfig(config);
-       assert.deepEqual(initializedConfig, config);
+       assert.deepEqual(initializedConfig, expConfig);
      });
 
   it('should get values from from environment config when not specified in config or other environment variables',
      async () => {
-       sinon.stub(gcpMetadata, 'instance')
-           .throwsException('cannot access metadata');
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       metadataStub.throwsException('cannot access metadata');
        process.env.GCLOUD_PROFILER_CONFIG =
            './ts/test/fixtures/test-config.json';
 
@@ -236,6 +300,10 @@ describe('initConfig', () => {
          instance: 'envConfig-instance',
          zone: 'envConfig-zone',
          projectId: 'envConfig-fake-projectId',
+         timeIntervalMicros: 1000,
+         heapIntervalBytes: 512 * 1024,
+         heapMaxStackDepth: 64,
+         backoffMillis: 300000
        };
 
        const config = {};

@@ -59,27 +59,54 @@ export interface Config extends AuthenticationConfig {
 
   // When true, heap profiling will be disabled.
   disableHeap?: boolean;
+
+  // Average time between samples collected by time profiler.
+  // Increasing the time between samples will reduce quality of profiles by
+  // reducing number of samples.
+  // Decreasing time between samples may increase overhead of profiling.
+  timeIntervalMicros?: number;
+
+  // Average bytes between samples collected by heap profiler.
+  // Increasing the bytes between samples will reduce quality of profiles by
+  // reducing number of samples.
+  // Decreasing bytes between samples may increase overhead of profiling.
+  heapIntervalBytes?: number;
+
+  // Maximum depth of stacks recorded for heap samples. Decreasing stack depth
+  // will make it more likely that stack traces are truncated. Increasing
+  // stack depth may increase overhead of profiling.
+  heapMaxStackDepth?: number;
+
+  // Time to wait before trying to create a profile again if profile creation
+  // fails.
+  backoffMillis?: number;
 }
 
-/**
- * Subtype of Config that declares some properties to be non-optional. This
- * helps avoid null checks in the profiler code.
- */
-export interface ProfilerConfig extends Config {
+// Interface for an initialized config.
+export interface ProfilerConfig extends AuthenticationConfig {
+  projectId?: string;
   logLevel: number;
-  serviceContext: {service?: string; version?: string;};
+  serviceContext: {service: string; version?: string;};
   instance: string;
   zone: string;
   disableTime: boolean;
   disableHeap: boolean;
+  timeIntervalMicros: number;
+  heapIntervalBytes: number;
+  heapMaxStackDepth: number;
+  backoffMillis: number;
 }
 
 // Default values for configuration for a profiler.
-export const defaultConfig: ProfilerConfig = {
+export const defaultConfig = {
   logLevel: 1,
   serviceContext: {},
   disableHeap: false,
   disableTime: false,
   instance: '',
-  zone: ''
+  zone: '',
+  timeIntervalMicros: 1000,
+  heapIntervalBytes: 512 * 1024,
+  heapMaxStackDepth: 64,
+  backoffMillis: 5 * 60 * 1000
 };

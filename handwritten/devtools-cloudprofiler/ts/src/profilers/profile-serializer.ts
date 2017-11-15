@@ -224,7 +224,7 @@ export function serializeTimeProfile(
 
   const profile = {
     sampleType: [sampleValueType, timeValueType],
-    timeNanos: prof.startTime * 1000 * 1000,
+    timeNanos: Date.now() * 1000 * 1000,
     durationNanos: (prof.endTime - prof.startTime) * 1000 * 1000,
     periodType: timeValueType,
     period: intervalMicros,

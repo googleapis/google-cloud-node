@@ -6,5 +6,7 @@ Description:
        cloud-debug-nodejs provides Stackdriver Debugger support for Node.js
        applications.
 Local Modifications:
-       All code except common-types.ts and gcp-metadata-types.ts has been 
-       removed.
+       All code except common-types.ts has been removed.
+       RequestOptions interface added.
+       ServiceObject interface modified so promisified request can be used.
+       Definitions modified to comply with gts 0.5
