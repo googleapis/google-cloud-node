@@ -1,3 +1,0 @@
-{ "name": "silvano", "breed": "the cat kind", "id": 1, "dob": 1414634759011, "around": false, "buffer": "dGVzdA==", "arrayOfInts": [1, 3, 5], "recordOfRecords": { "records": [{ "record": true }] } }
-{ "name": "ryan", "breed": "golden retriever?", "id": 2, "dob": 1414634759012, "around": false, "buffer": "dGVzdA==", "arrayOfInts": [1, 3, 5], "recordOfRecords": { "records": [{ "record": true }] } }
-{ "name": "stephen", "breed": "idkanycatbreeds", "id": 3, "dob": 1414634759013, "around": true, "buffer": "dGVzdA==", "arrayOfInts": [1, 3, 5], "recordOfRecords": { "records": [{ "record": true }] } }
