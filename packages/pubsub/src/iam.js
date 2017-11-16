@@ -22,17 +22,12 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var commonGrpc = require('@google-cloud/common-grpc');
 var is = require('is');
-var path = require('path');
-var util = require('util');
 
 /*! Developer Documentation
  *
  * @param {module:pubsub} pubsub - PubSub Object.
- * @param {object} config - Configuration object.
- * @param {string} config.baseUrl - The base URL to apply to API requests.
- * @param {string} config.id - The name of the topic or subscription.
+ * @param {string} id - The name of the topic or subscription.
  */
 /**
  * [IAM (Identity and Access Management)](https://cloud.google.com/pubsub/access_control)
@@ -68,32 +63,16 @@ var util = require('util');
  * // subscription.iam
  */
 function IAM(pubsub, id) {
-  var config = {
-    baseUrl: 'pubsub.googleapis.com',
-    protosDir: path.resolve(__dirname, '../protos'),
-    protoServices: {
-      IAMPolicy: {
-        path: 'google/iam/v1/iam_policy.proto',
-        service: 'iam.v1'
-      }
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/pubsub',
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
-  };
-
+  this.pubsub = pubsub;
+  this.request = pubsub.request.bind(pubsub);
   this.id = id;
-
-  commonGrpc.Service.call(this, config, pubsub.options);
 }
-
-util.inherits(IAM, commonGrpc.Service);
 
 /**
  * Get the IAM policy
  *
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.policy - The [policy](https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy).
@@ -115,17 +94,22 @@ util.inherits(IAM, commonGrpc.Service);
  *   var apiResponse = data[1];
  * });
  */
-IAM.prototype.getPolicy = function(callback) {
-  var protoOpts = {
-    service: 'IAMPolicy',
-    method: 'getIamPolicy'
-  };
+IAM.prototype.getPolicy = function(gaxOpts, callback) {
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = null;
+  }
 
   var reqOpts = {
     resource: this.id
   };
 
-  this.request(protoOpts, reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'getIamPolicy',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -137,6 +121,8 @@ IAM.prototype.getPolicy = function(callback) {
  * @param {array=} policy.bindings - Bindings associate members with roles.
  * @param {object[]=} policy.rules - Rules to be applied to the policy.
  * @param {string=} policy.etag - Etags are used to perform a read-modify-write.
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.policy - The updated policy.
@@ -168,22 +154,27 @@ IAM.prototype.getPolicy = function(callback) {
  *   var apiResponse = data[1];
  * });
  */
-IAM.prototype.setPolicy = function(policy, callback) {
+IAM.prototype.setPolicy = function(policy, gaxOpts, callback) {
   if (!is.object(policy)) {
     throw new Error('A policy object is required.');
   }
 
-  var protoOpts = {
-    service: 'IAMPolicy',
-    method: 'setIamPolicy'
-  };
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = null;
+  }
 
   var reqOpts = {
     resource: this.id,
-    policy: policy
+    policy
   };
 
-  this.request(protoOpts, reqOpts, callback);
+  this.request({
+    client: 'subscriberClient',
+    method: 'setIamPolicy',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, callback);
 };
 
 /**
@@ -194,6 +185,8 @@ IAM.prototype.setPolicy = function(policy, callback) {
  * @throws {Error} If permissions are not provided.
  *
  * @param {string|string[]} permissions - The permission(s) to test for.
+ * @param {object=} gaxOptions - Request configuration options, outlined
+ *     here: https://googleapis.github.io/gax-nodejs/CallSettings.html.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {array} callback.permissions - A subset of permissions that the caller
@@ -241,37 +234,39 @@ IAM.prototype.setPolicy = function(policy, callback) {
  *   var apiResponse = data[1];
  * });
  */
-IAM.prototype.testPermissions = function(permissions, callback) {
+IAM.prototype.testPermissions = function(permissions, gaxOpts, callback) {
   if (!is.array(permissions) && !is.string(permissions)) {
     throw new Error('Permissions are required.');
   }
 
-  permissions = arrify(permissions);
-
-  var protoOpts = {
-    service: 'IAMPolicy',
-    method: 'testIamPermissions'
-  };
+  if (is.fn(gaxOpts)) {
+    callback = gaxOpts;
+    gaxOpts = null;
+  }
 
   var reqOpts = {
     resource: this.id,
-    permissions: permissions
+    permissions: arrify(permissions)
   };
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
+  this.request({
+    client: 'subscriberClient',
+    method: 'testIamPermissions',
+    reqOpts: reqOpts,
+    gaxOpts: gaxOpts
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
     }
 
     var availablePermissions = arrify(resp.permissions);
-
-    var permissionsHash = permissions.reduce(function(acc, permission) {
+    var permissionHash = permissions.reduce(function(acc, permission) {
       acc[permission] = availablePermissions.indexOf(permission) > -1;
       return acc;
     }, {});
 
-    callback(null, permissionsHash, resp);
+    callback(null, permissionHash, resp);
   });
 };
 

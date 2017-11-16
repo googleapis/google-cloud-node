@@ -32,6 +32,12 @@ var fakeUtil = extend({}, common.util);
 var fakeUuid = extend({}, uuid);
 var fakeGrpc = extend({}, grpc);
 
+function fakeGaxGrpc() {
+  return {
+    grpc: fakeGrpc
+  };
+}
+
 var v1Override;
 function fakeV1(options) {
   return (v1Override || v1)(options);
@@ -95,8 +101,8 @@ describe('ConnectionPool', function() {
       '@google-cloud/common': {
         util: fakeUtil
       },
-      '@google-cloud/common-grpc': {
-        grpc: fakeGrpc
+      'google-gax': {
+        grpc: fakeGaxGrpc
       },
       uuid: fakeUuid,
       './v1': fakeV1
