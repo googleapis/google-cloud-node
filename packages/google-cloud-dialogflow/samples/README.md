@@ -22,11 +22,13 @@
   * [Create Session Entity Type](#create-session-entity-type)
   * [Delete Session Entity Type](#delete-session-entity-type)
 
-## Before you begin
+Before you begin
+----------------
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+1. **Create a Dialogflow agent** by [creating a new Dialogflow Agent that uses the v2 API](https://dialogflow-dot-devsite.googleplex.com/docs/reference/v2-agent-setup#creating_a_new_agent_that_uses_v2) -OR- [enabling the v2 API on an existing Dialogflow agent](https://dialogflow-dot-devsite.googleplex.com/docs/reference/v2-agent-setup#enabling_v2_in_an_existing_non_production_agent).  If you're look to develop with the v1 API on Node.js see the [v1 Node.js SDK](https://github.com/dialogflow/dialogflow-nodejs-client)
+1. **Setup your Dialogflow agent** by [restoring the agent ZIP file](https://dialogflow-dot-devsite.googleplex.com/docs/reference/v2-agent-setup#import_the_zip_file) found in the `samples/resources/RoomRservation.zip`.<br>**WARNING: This will remove all of your agents intents and entities and replace them**
+1. **Set up authentication** by [downloading your service account key](https://dialogflow-dot-devsite.googleplex.com/docs/reference/v2-auth-setup) and [setting up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable](https://cloud.google.com/docs/authentication/getting-started) so you can access the API from your local workstation. <br>Optional: add the `GOOGLE_CLOUD_PROJECT` environment variable with your project ID (which can be found in your [Dialogflow agent's settings](https://dialogflow.com/docs/agents#settings)) to avoid having to set the `-p` flag in the samples.
+1. Run `npm install` in the `samples` directory
 
 ## Samples
 
@@ -52,9 +54,9 @@ Options:
                                                               [string] [default: "1cae5170-c9b1-11e7-9e4c-49e4d13488bd"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -93,9 +95,9 @@ Options:
                                                               [string] [default: "1d06aaa0-c9b1-11e7-b23a-410947d8c553"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -134,9 +136,9 @@ Options:
                                                               [string] [default: "1d5fee30-c9b1-11e7-bcaa-25ee574cba8f"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
