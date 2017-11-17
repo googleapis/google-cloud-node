@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "vision",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/vision/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "detect",
+      "name": "Detection samples",
+      "file": "detect.js",
+      "docs_link": "https://cloud.google.com/vision/docs",
+      "usage": "node detect.js --help"
+    }
+  ]
+}

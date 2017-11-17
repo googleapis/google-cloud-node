@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google LLC All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * Represents a color in the RGBA color space. This representation is designed
@@ -135,7 +131,6 @@
  *
  *     // ...
  *
- * @external "google.type.Color"
  * @property {number} red
  *   The amount of red in the color as a value in the interval [0, 1].
  *
@@ -158,7 +153,12 @@
  *   If omitted, this color object is to be rendered as a solid color
  *   (as if the alpha value had been explicitly given with a value of 1.0).
  *
- *   This object should have the same structure as [google.protobuf.FloatValue]{@link external:"google.protobuf.FloatValue"}
+ *   This object should have the same structure as [FloatValue]{@link google.protobuf.FloatValue}
  *
+ * @typedef Color
+ * @memberof google.type
  * @see [google.type.Color definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/type/color.proto}
  */
+var Color = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};

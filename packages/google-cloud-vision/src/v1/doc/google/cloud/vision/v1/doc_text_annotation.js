@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google LLC All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * TextAnnotation contains a structured representation of OCR extracted text.
@@ -25,18 +21,19 @@
  *     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
  * Each structural component, starting from Page, may further have their own
  * properties. Properties describe detected languages, breaks etc.. Please
- * refer to the {@link google.cloud.vision.v1.TextAnnotation.TextProperty} message
+ * refer to the google.cloud.vision.v1.TextAnnotation.TextProperty message
  * definition below for more detail.
  *
  * @property {Object[]} pages
  *   List of pages detected by OCR.
  *
- *   This object should have the same structure as [Page]{@link Page}
+ *   This object should have the same structure as [Page]{@link google.cloud.vision.v1.Page}
  *
  * @property {string} text
  *   UTF-8 text detected on the pages.
  *
- * @class
+ * @typedef TextAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.TextAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var TextAnnotation = {
@@ -53,7 +50,8 @@ var TextAnnotation = {
    * @property {number} confidence
    *   Confidence of detected language. Range [0, 1].
    *
-   * @class
+   * @typedef DetectedLanguage
+   * @memberof google.cloud.vision.v1
    * @see [google.cloud.vision.v1.TextAnnotation.DetectedLanguage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
    */
   DetectedLanguage: {
@@ -64,12 +62,13 @@ var TextAnnotation = {
    * Detected start or end of a structural component.
    *
    * @property {number} type
-   *   The number should be among the values of [BreakType]{@link BreakType}
+   *   The number should be among the values of [BreakType]{@link google.cloud.vision.v1.BreakType}
    *
    * @property {boolean} isPrefix
    *   True if break prepends the element.
    *
-   * @class
+   * @typedef DetectedBreak
+   * @memberof google.cloud.vision.v1
    * @see [google.cloud.vision.v1.TextAnnotation.DetectedBreak definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
    */
   DetectedBreak: {
@@ -79,6 +78,7 @@ var TextAnnotation = {
      * Enum to denote the type of break found. New line, space etc.
      *
      * @enum {number}
+     * @memberof google.cloud.vision.v1
      */
     BreakType: {
 
@@ -122,14 +122,15 @@ var TextAnnotation = {
    * @property {Object[]} detectedLanguages
    *   A list of detected languages together with confidence.
    *
-   *   This object should have the same structure as [DetectedLanguage]{@link DetectedLanguage}
+   *   This object should have the same structure as [DetectedLanguage]{@link google.cloud.vision.v1.DetectedLanguage}
    *
    * @property {Object} detectedBreak
    *   Detected start or end of a text segment.
    *
-   *   This object should have the same structure as [DetectedBreak]{@link DetectedBreak}
+   *   This object should have the same structure as [DetectedBreak]{@link google.cloud.vision.v1.DetectedBreak}
    *
-   * @class
+   * @typedef TextProperty
+   * @memberof google.cloud.vision.v1
    * @see [google.cloud.vision.v1.TextAnnotation.TextProperty definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
    */
   TextProperty: {
@@ -143,7 +144,7 @@ var TextAnnotation = {
  * @property {Object} property
  *   Additional information detected on the page.
  *
- *   This object should have the same structure as [TextProperty]{@link TextProperty}
+ *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {number} width
  *   Page width in pixels.
@@ -154,9 +155,10 @@ var TextAnnotation = {
  * @property {Object[]} blocks
  *   List of blocks of text, images etc on this page.
  *
- *   This object should have the same structure as [Block]{@link Block}
+ *   This object should have the same structure as [Block]{@link google.cloud.vision.v1.Block}
  *
- * @class
+ * @typedef Page
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Page definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var Page = {
@@ -169,7 +171,7 @@ var Page = {
  * @property {Object} property
  *   Additional information detected for the block.
  *
- *   This object should have the same structure as [TextProperty]{@link TextProperty}
+ *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {Object} boundingBox
  *   The bounding box for the block.
@@ -188,19 +190,20 @@ var Page = {
  *        1----0
  *     and the vertice order will still be (0, 1, 2, 3).
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object[]} paragraphs
  *   List of paragraphs in this block (if this blocks is of type text).
  *
- *   This object should have the same structure as [Paragraph]{@link Paragraph}
+ *   This object should have the same structure as [Paragraph]{@link google.cloud.vision.v1.Paragraph}
  *
  * @property {number} blockType
  *   Detected block type (text, image etc) for this block.
  *
- *   The number should be among the values of [BlockType]{@link BlockType}
+ *   The number should be among the values of [BlockType]{@link google.cloud.vision.v1.BlockType}
  *
- * @class
+ * @typedef Block
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Block definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var Block = {
@@ -210,6 +213,7 @@ var Block = {
    * Type of a block (text, image etc) as identified by OCR.
    *
    * @enum {number}
+   * @memberof google.cloud.vision.v1
    */
   BlockType: {
 
@@ -251,7 +255,7 @@ var Block = {
  * @property {Object} property
  *   Additional information detected for the paragraph.
  *
- *   This object should have the same structure as [TextProperty]{@link TextProperty}
+ *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {Object} boundingBox
  *   The bounding box for the paragraph.
@@ -270,14 +274,15 @@ var Block = {
  *        1----0
  *     and the vertice order will still be (0, 1, 2, 3).
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object[]} words
  *   List of words in this paragraph.
  *
- *   This object should have the same structure as [Word]{@link Word}
+ *   This object should have the same structure as [Word]{@link google.cloud.vision.v1.Word}
  *
- * @class
+ * @typedef Paragraph
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Paragraph definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var Paragraph = {
@@ -290,7 +295,7 @@ var Paragraph = {
  * @property {Object} property
  *   Additional information detected for the word.
  *
- *   This object should have the same structure as [TextProperty]{@link TextProperty}
+ *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {Object} boundingBox
  *   The bounding box for the word.
@@ -309,15 +314,16 @@ var Paragraph = {
  *        1----0
  *     and the vertice order will still be (0, 1, 2, 3).
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object[]} symbols
  *   List of symbols in the word.
  *   The order of the symbols follows the natural reading order.
  *
- *   This object should have the same structure as [Symbol]{@link Symbol}
+ *   This object should have the same structure as [Symbol]{@link google.cloud.vision.v1.Symbol}
  *
- * @class
+ * @typedef Word
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Word definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var Word = {
@@ -330,7 +336,7 @@ var Word = {
  * @property {Object} property
  *   Additional information detected for the symbol.
  *
- *   This object should have the same structure as [TextProperty]{@link TextProperty}
+ *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {Object} boundingBox
  *   The bounding box for the symbol.
@@ -349,12 +355,13 @@ var Word = {
  *        1----0
  *     and the vertice order will still be (0, 1, 2, 3).
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {string} text
  *   The actual UTF-8 representation of the symbol.
  *
- * @class
+ * @typedef Symbol
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Symbol definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
  */
 var Symbol = {

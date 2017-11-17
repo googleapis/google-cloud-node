@@ -1,23 +1,19 @@
-/*
- * Copyright 2017, Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2017, Google LLC All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-/*
- * Note: this file is purely for documentation. Any contents are not expected
- * to be loaded as the JS file.
- */
+// Note: this file is purely for documentation. Any contents are not expected
+// to be loaded as the JS file.
 
 /**
  * Users describe the type of Google Cloud Vision API tasks to perform over
@@ -28,12 +24,13 @@
  * @property {number} type
  *   The feature type.
  *
- *   The number should be among the values of [Type]{@link Type}
+ *   The number should be among the values of [Type]{@link google.cloud.vision.v1.Type}
  *
  * @property {number} maxResults
  *   Maximum number of results of this type.
  *
- * @class
+ * @typedef Feature
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Feature definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var Feature = {
@@ -43,6 +40,7 @@ var Feature = {
    * Type of image feature.
    *
    * @enum {number}
+   * @memberof google.cloud.vision.v1
    */
   Type: {
 
@@ -127,7 +125,8 @@ var Feature = {
  *   `gcs_image_uri` and `image_uri` are specified, `image_uri` takes
  *   precedence.
  *
- * @class
+ * @typedef ImageSource
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.ImageSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var ImageSource = {
@@ -147,9 +146,10 @@ var ImageSource = {
  *   are provided for an image, `content` takes precedence and is
  *   used to perform the image annotation request.
  *
- *   This object should have the same structure as [ImageSource]{@link ImageSource}
+ *   This object should have the same structure as [ImageSource]{@link google.cloud.vision.v1.ImageSource}
  *
- * @class
+ * @typedef Image
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Image definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var Image = {
@@ -168,7 +168,7 @@ var Image = {
  *   `BoundingPoly` (the polygon will be unbounded) if only a partial face
  *   appears in the image to be annotated.
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object} fdBoundingPoly
  *   The `fd_bounding_poly` bounding polygon is tighter than the
@@ -178,12 +178,12 @@ var Image = {
  *   landmarker results, only on the initial face detection, hence
  *   the <code>fd</code> (face detection) prefix.
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object[]} landmarks
  *   Detected face landmarks.
  *
- *   This object should have the same structure as [Landmark]{@link Landmark}
+ *   This object should have the same structure as [Landmark]{@link google.cloud.vision.v1.Landmark}
  *
  * @property {number} rollAngle
  *   Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
@@ -208,39 +208,40 @@ var Image = {
  * @property {number} joyLikelihood
  *   Joy likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} sorrowLikelihood
  *   Sorrow likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} angerLikelihood
  *   Anger likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} surpriseLikelihood
  *   Surprise likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} underExposedLikelihood
  *   Under-exposed likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} blurredLikelihood
  *   Blurred likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} headwearLikelihood
  *   Headwear likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
- * @class
+ * @typedef FaceAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var FaceAnnotation = {
@@ -256,14 +257,15 @@ var FaceAnnotation = {
    * @property {number} type
    *   Face landmark type.
    *
-   *   The number should be among the values of [Type]{@link Type}
+   *   The number should be among the values of [Type]{@link google.cloud.vision.v1.Type}
    *
    * @property {Object} position
    *   Face landmark position.
    *
-   *   This object should have the same structure as [Position]{@link Position}
+   *   This object should have the same structure as [Position]{@link google.cloud.vision.v1.Position}
    *
-   * @class
+   * @typedef Landmark
+   * @memberof google.cloud.vision.v1
    * @see [google.cloud.vision.v1.FaceAnnotation.Landmark definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
    */
   Landmark: {
@@ -276,6 +278,7 @@ var FaceAnnotation = {
      * typically, is the person's right eye.
      *
      * @enum {number}
+     * @memberof google.cloud.vision.v1
      */
     Type: {
 
@@ -463,9 +466,10 @@ var FaceAnnotation = {
  * @property {Object} latLng
  *   lat/long location coordinates.
  *
- *   This object should have the same structure as [google.type.LatLng]{@link external:"google.type.LatLng"}
+ *   This object should have the same structure as [LatLng]{@link google.type.LatLng}
  *
- * @class
+ * @typedef LocationInfo
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.LocationInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var LocationInfo = {
@@ -481,7 +485,8 @@ var LocationInfo = {
  * @property {string} value
  *   Value of the property.
  *
- * @class
+ * @typedef Property
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Property definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var Property = {
@@ -524,7 +529,7 @@ var Property = {
  *   are produced for the entire text detected in an image region, followed by
  *   `boundingPoly`s for each word within the detected text.
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {Object[]} locations
  *   The location information for the detected entity. Multiple
@@ -533,15 +538,16 @@ var Property = {
  *   may indicate the location of the place where the image was taken.
  *   Location information is usually present for landmarks.
  *
- *   This object should have the same structure as [LocationInfo]{@link LocationInfo}
+ *   This object should have the same structure as [LocationInfo]{@link google.cloud.vision.v1.LocationInfo}
  *
  * @property {Object[]} properties
  *   Some entities may have optional user-supplied `Property` (name/value)
  *   fields, such a score or string that qualifies the entity.
  *
- *   This object should have the same structure as [Property]{@link Property}
+ *   This object should have the same structure as [Property]{@link google.cloud.vision.v1.Property}
  *
- * @class
+ * @typedef EntityAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.EntityAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var EntityAnnotation = {
@@ -556,26 +562,27 @@ var EntityAnnotation = {
  * @property {number} adult
  *   Represents the adult content likelihood for the image.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} spoof
  *   Spoof likelihood. The likelihood that an modification
  *   was made to the image's canonical version to make it appear
  *   funny or offensive.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} medical
  *   Likelihood that this is a medical image.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
  * @property {number} violence
  *   Violence likelihood.
  *
- *   The number should be among the values of [Likelihood]{@link Likelihood}
+ *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
- * @class
+ * @typedef SafeSearchAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.SafeSearchAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var SafeSearchAnnotation = {
@@ -588,14 +595,15 @@ var SafeSearchAnnotation = {
  * @property {Object} minLatLng
  *   Min lat/long pair.
  *
- *   This object should have the same structure as [google.type.LatLng]{@link external:"google.type.LatLng"}
+ *   This object should have the same structure as [LatLng]{@link google.type.LatLng}
  *
  * @property {Object} maxLatLng
  *   Max lat/long pair.
  *
- *   This object should have the same structure as [google.type.LatLng]{@link external:"google.type.LatLng"}
+ *   This object should have the same structure as [LatLng]{@link google.type.LatLng}
  *
- * @class
+ * @typedef LatLongRect
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.LatLongRect definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var LatLongRect = {
@@ -609,7 +617,7 @@ var LatLongRect = {
  * @property {Object} color
  *   RGB components of the color.
  *
- *   This object should have the same structure as [google.type.Color]{@link external:"google.type.Color"}
+ *   This object should have the same structure as [Color]{@link google.type.Color}
  *
  * @property {number} score
  *   Image-specific score for this color. Value in range [0, 1].
@@ -618,7 +626,8 @@ var LatLongRect = {
  *   The fraction of pixels the color occupies in the image.
  *   Value in range [0, 1].
  *
- * @class
+ * @typedef ColorInfo
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.ColorInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var ColorInfo = {
@@ -631,9 +640,10 @@ var ColorInfo = {
  * @property {Object[]} colors
  *   RGB color values with their score and pixel fraction.
  *
- *   This object should have the same structure as [ColorInfo]{@link ColorInfo}
+ *   This object should have the same structure as [ColorInfo]{@link google.cloud.vision.v1.ColorInfo}
  *
- * @class
+ * @typedef DominantColorsAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.DominantColorsAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var DominantColorsAnnotation = {
@@ -646,9 +656,10 @@ var DominantColorsAnnotation = {
  * @property {Object} dominantColors
  *   If present, dominant colors completed successfully.
  *
- *   This object should have the same structure as [DominantColorsAnnotation]{@link DominantColorsAnnotation}
+ *   This object should have the same structure as [DominantColorsAnnotation]{@link google.cloud.vision.v1.DominantColorsAnnotation}
  *
- * @class
+ * @typedef ImageProperties
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.ImageProperties definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var ImageProperties = {
@@ -662,7 +673,7 @@ var ImageProperties = {
  *   The bounding polygon for the crop region. The coordinates of the bounding
  *   box are in the original image's scale, as returned in `ImageParams`.
  *
- *   This object should have the same structure as [BoundingPoly]{@link BoundingPoly}
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
  * @property {number} confidence
  *   Confidence of this being a salient region.  Range [0, 1].
@@ -671,7 +682,8 @@ var ImageProperties = {
  *   Fraction of importance of this salient region with respect to the original
  *   image.
  *
- * @class
+ * @typedef CropHint
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.CropHint definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var CropHint = {
@@ -682,9 +694,10 @@ var CropHint = {
  * Set of crop hints that are used to generate new crops when serving images.
  *
  * @property {Object[]} cropHints
- *   This object should have the same structure as [CropHint]{@link CropHint}
+ *   This object should have the same structure as [CropHint]{@link google.cloud.vision.v1.CropHint}
  *
- * @class
+ * @typedef CropHintsAnnotation
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.CropHintsAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var CropHintsAnnotation = {
@@ -702,7 +715,8 @@ var CropHintsAnnotation = {
  *   limited to a maximum of 16; any aspect ratios provided after the 16th are
  *   ignored.
  *
- * @class
+ * @typedef CropHintsParams
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.CropHintsParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var CropHintsParams = {
@@ -715,7 +729,7 @@ var CropHintsParams = {
  * @property {Object} latLongRect
  *   lat/long rectangle that specifies the location of the image.
  *
- *   This object should have the same structure as [LatLongRect]{@link LatLongRect}
+ *   This object should have the same structure as [LatLongRect]{@link google.cloud.vision.v1.LatLongRect}
  *
  * @property {string[]} languageHints
  *   List of languages to use for TEXT_DETECTION. In most cases, an empty value
@@ -730,9 +744,10 @@ var CropHintsParams = {
  * @property {Object} cropHintsParams
  *   Parameters for crop hints annotation request.
  *
- *   This object should have the same structure as [CropHintsParams]{@link CropHintsParams}
+ *   This object should have the same structure as [CropHintsParams]{@link google.cloud.vision.v1.CropHintsParams}
  *
- * @class
+ * @typedef ImageContext
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.ImageContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var ImageContext = {
@@ -746,19 +761,20 @@ var ImageContext = {
  * @property {Object} image
  *   The image to be processed.
  *
- *   This object should have the same structure as [Image]{@link Image}
+ *   This object should have the same structure as [Image]{@link google.cloud.vision.v1.Image}
  *
  * @property {Object[]} features
  *   Requested features.
  *
- *   This object should have the same structure as [Feature]{@link Feature}
+ *   This object should have the same structure as [Feature]{@link google.cloud.vision.v1.Feature}
  *
  * @property {Object} imageContext
  *   Additional context that may accompany the image.
  *
- *   This object should have the same structure as [ImageContext]{@link ImageContext}
+ *   This object should have the same structure as [ImageContext]{@link google.cloud.vision.v1.ImageContext}
  *
- * @class
+ * @typedef AnnotateImageRequest
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.AnnotateImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var AnnotateImageRequest = {
@@ -771,28 +787,28 @@ var AnnotateImageRequest = {
  * @property {Object[]} faceAnnotations
  *   If present, face detection has completed successfully.
  *
- *   This object should have the same structure as [FaceAnnotation]{@link FaceAnnotation}
+ *   This object should have the same structure as [FaceAnnotation]{@link google.cloud.vision.v1.FaceAnnotation}
  *
  * @property {Object[]} landmarkAnnotations
  *   If present, landmark detection has completed successfully.
  *
- *   This object should have the same structure as [EntityAnnotation]{@link EntityAnnotation}
+ *   This object should have the same structure as [EntityAnnotation]{@link google.cloud.vision.v1.EntityAnnotation}
  *
  * @property {Object[]} logoAnnotations
  *   If present, logo detection has completed successfully.
  *
- *   This object should have the same structure as [EntityAnnotation]{@link EntityAnnotation}
+ *   This object should have the same structure as [EntityAnnotation]{@link google.cloud.vision.v1.EntityAnnotation}
  *
  * @property {Object[]} labelAnnotations
  *   If present, label detection has completed successfully.
  *
- *   This object should have the same structure as [EntityAnnotation]{@link EntityAnnotation}
+ *   This object should have the same structure as [EntityAnnotation]{@link google.cloud.vision.v1.EntityAnnotation}
  *
  * @property {Object[]} textAnnotations
  *   If present, text (OCR) detection or document (OCR) text detection has
  *   completed successfully.
  *
- *   This object should have the same structure as [EntityAnnotation]{@link EntityAnnotation}
+ *   This object should have the same structure as [EntityAnnotation]{@link google.cloud.vision.v1.EntityAnnotation}
  *
  * @property {Object} fullTextAnnotation
  *   If present, text (OCR) detection or document (OCR) text detection has
@@ -800,36 +816,37 @@ var AnnotateImageRequest = {
  *   This annotation provides the structural hierarchy for the OCR detected
  *   text.
  *
- *   This object should have the same structure as [TextAnnotation]{@link TextAnnotation}
+ *   This object should have the same structure as [TextAnnotation]{@link google.cloud.vision.v1.TextAnnotation}
  *
  * @property {Object} safeSearchAnnotation
  *   If present, safe-search annotation has completed successfully.
  *
- *   This object should have the same structure as [SafeSearchAnnotation]{@link SafeSearchAnnotation}
+ *   This object should have the same structure as [SafeSearchAnnotation]{@link google.cloud.vision.v1.SafeSearchAnnotation}
  *
  * @property {Object} imagePropertiesAnnotation
  *   If present, image properties were extracted successfully.
  *
- *   This object should have the same structure as [ImageProperties]{@link ImageProperties}
+ *   This object should have the same structure as [ImageProperties]{@link google.cloud.vision.v1.ImageProperties}
  *
  * @property {Object} cropHintsAnnotation
  *   If present, crop hints have completed successfully.
  *
- *   This object should have the same structure as [CropHintsAnnotation]{@link CropHintsAnnotation}
+ *   This object should have the same structure as [CropHintsAnnotation]{@link google.cloud.vision.v1.CropHintsAnnotation}
  *
  * @property {Object} webDetection
  *   If present, web detection has completed successfully.
  *
- *   This object should have the same structure as [WebDetection]{@link WebDetection}
+ *   This object should have the same structure as [WebDetection]{@link google.cloud.vision.v1.WebDetection}
  *
  * @property {Object} error
  *   If set, represents the error message for the operation.
  *   Note that filled-in image annotations are guaranteed to be
  *   correct, even when `error` is set.
  *
- *   This object should have the same structure as [google.rpc.Status]{@link external:"google.rpc.Status"}
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
- * @class
+ * @typedef AnnotateImageResponse
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.AnnotateImageResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var AnnotateImageResponse = {
@@ -842,9 +859,10 @@ var AnnotateImageResponse = {
  * @property {Object[]} requests
  *   Individual image annotation requests for this batch.
  *
- *   This object should have the same structure as [AnnotateImageRequest]{@link AnnotateImageRequest}
+ *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
  *
- * @class
+ * @typedef BatchAnnotateImagesRequest
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.BatchAnnotateImagesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var BatchAnnotateImagesRequest = {
@@ -857,9 +875,10 @@ var BatchAnnotateImagesRequest = {
  * @property {Object[]} responses
  *   Individual responses to image annotation requests within the batch.
  *
- *   This object should have the same structure as [AnnotateImageResponse]{@link AnnotateImageResponse}
+ *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1.AnnotateImageResponse}
  *
- * @class
+ * @typedef BatchAnnotateImagesResponse
+ * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.BatchAnnotateImagesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 var BatchAnnotateImagesResponse = {
@@ -871,6 +890,7 @@ var BatchAnnotateImagesResponse = {
  * highly stable results across model upgrades.
  *
  * @enum {number}
+ * @memberof google.cloud.vision.v1
  */
 var Likelihood = {
 

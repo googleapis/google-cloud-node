@@ -1,37 +1,16 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
   "name": "@google-cloud/vision",
-  "version": "0.12.0",
-  "author": "Google Inc",
   "description": "Google Cloud Vision API client for Node.js",
-  "contributors": [
-    {
-      "name": "Burcu Dogan",
-      "email": "jbd@google.com"
-    },
-    {
-      "name": "Johan Euphrosine",
-      "email": "proppy@google.com"
-    },
-    {
-      "name": "Patrick Costello",
-      "email": "pcostell@google.com"
-    },
-    {
-      "name": "Ryan Seys",
-      "email": "ryan@ryanseys.com"
-    },
-    {
-      "name": "Silvano Luciani",
-      "email": "silvano@google.com"
-    },
-    {
-      "name": "Stephen Sawchuk",
-      "email": "sawchuk@gmail.com"
-    }
-  ],
+  "version": "0.12.0",
+  "license": "Apache-2.0",
+  "author": "Google Inc",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-vision",
   "main": "src/index.js",
   "files": [
+    "protos",
     "src",
     "AUTHORS",
     "LICENSE"
@@ -49,32 +28,58 @@
     "vision",
     "Google Cloud Vision API"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Ali Ijaz Sheikh <ofrobots@google.com>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Ernest Landrito <landrito@google.com>",
+    "Gus Class <gguuss@gmail.com>",
+    "Jason Dobry <jdobry@google.com>",
+    "Jun Mukai <mukai@google.com>",
+    "Luke Sneeringer <lukesneeringer@google.com>",
+    "Song Wang <songwang@google.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Tim Swast <swast@google.com>",
+    "calibr <awcalibr@gmail.com>",
+    "rtw <rtw1981@gmail.com>"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "test": "repo-tools test run --cmd npm -- run cover"
+  },
   "dependencies": {
     "@google-cloud/common": "^0.13.0",
     "async": "^2.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.14.2",
     "google-proto-files": "^0.13.1",
-    "is": "^3.0.1"
+    "is": "^3.0.1",
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.1.1",
     "@google-cloud/storage": "*",
+    "codecov": "^3.0.0",
+    "eslint": "^4.10.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "ink-docstrap": "^1.3.0",
     "intelli-espower-loader": "^1.0.1",
-    "mocha": "^3.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^3.5.3",
     "node-uuid": "^1.4.7",
-    "nyc": "^10.3.0",
-    "power-assert": "^1.4.2",
+    "nyc": "^10.3.2",
+    "power-assert": "^1.4.4",
+    "prettier": "^1.7.4",
+    "safe-buffer": "^5.1.1",
     "sinon": "^2.2.0"
-  },
-  "scripts": {
-    "cover": "nyc --reporter=lcov --reporter=html mocha --no-timeouts --require intelli-espower-loader test/*.js && nyc report",
-    "publish-module": "node ../../scripts/publish.js vision",
-    "test": "mocha --require intelli-espower-loader test/*.js",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "system-test": "mocha system-test/*.js --require intelli-espower-loader --no-timeouts --bail"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=4.0.0"
   }
 }

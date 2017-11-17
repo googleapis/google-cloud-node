@@ -16,31 +16,30 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var fs = require('fs');
-var path = require('path');
-var Storage = require('@google-cloud/storage');
-var uuid = require('node-uuid');
+const assert = require('assert');
+const async = require('async');
+const fs = require('fs');
+const path = require('path');
+const Storage = require('@google-cloud/storage');
+const uuid = require('node-uuid');
 
-var env = require('../../../system-test/env.js');
-var Vision = require('../');
+const vision = require('../');
 
 describe('Vision', function() {
-  var IMAGES = {
+  const IMAGES = Object.freeze({
     document: path.join(__dirname, 'data/document.jpg'),
     logo: path.join(__dirname, 'data/logo.jpg'),
     rushmore: path.join(__dirname, 'data/rushmore.jpg'),
     text: path.join(__dirname, 'data/text.png'),
-    malformed: __filename
-  };
+    malformed: __filename,
+  });
 
-  var TESTS_PREFIX = 'gcloud-vision-test';
+  const TESTS_PREFIX = 'gcloud-vision-test';
 
-  var storage = new Storage(env);
-  var vision = new Vision(env);
+  let storage = new Storage();
+  let client = new vision.v1.ImageAnnotatorClient();
 
-  var bucket = storage.bucket(generateName());
+  let bucket = storage.bucket(generateName());
 
   before(function(done) {
     bucket.create(function(err) {
@@ -54,62 +53,71 @@ describe('Vision', function() {
   });
 
   after(function(done) {
-    storage.getBuckets({
-      prefix: TESTS_PREFIX
-    }, function(err, buckets) {
-      if (err) {
-        done(err);
-        return;
+    storage.getBuckets(
+      {
+        prefix: TESTS_PREFIX,
+      },
+      function(err, buckets) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        function deleteBucket(bucket, callback) {
+          bucket.deleteFiles(function(err) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            bucket.delete(callback);
+          });
+        }
+
+        async.each(buckets, deleteBucket, done);
       }
-
-      function deleteBucket(bucket, callback) {
-        bucket.deleteFiles(function(err) {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          bucket.delete(callback);
-        });
-      }
-
-      async.each(buckets, deleteBucket, done);
-    });
+    );
   });
 
   it('should detect from a URL', () => {
     var url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
-    return vision.logoDetection({
-      image: {
-        source: {imageUri: url}
-      }
-    }).then(responses => {
-      var response = responses[0];
-      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-    });
+    return client
+      .logoDetection({
+        image: {
+          source: {imageUri: url},
+        },
+      })
+      .then(responses => {
+        var response = responses[0];
+        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+      });
   });
 
   it('should detect from a filename', () => {
-    return vision.logoDetection({
-      image: {
-        source: {filename: IMAGES.logo}
-      },
-    }).then(responses => {
-      var response = responses[0];
-      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-    });
+    return client
+      .logoDetection({
+        image: {
+          source: {filename: IMAGES.logo},
+        },
+      })
+      .then(responses => {
+        var response = responses[0];
+        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+      });
   });
 
   it('should detect from a Buffer', () => {
     var buffer = fs.readFileSync(IMAGES.logo);
-    return vision.logoDetection({
-      image: {
-        content: buffer
-      }
-    }).then(responses => {
-      var response = responses[0];
-      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-    });
+    return client
+      .logoDetection({
+        image: {
+          content: buffer,
+        },
+      })
+      .then(responses => {
+        var response = responses[0];
+        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+      });
   });
 
   describe('single image', () => {
@@ -119,15 +127,17 @@ describe('Vision', function() {
       {type: 'SAFE_SEARCH_DETECTION'},
     ];
     it('should perform multiple detections', () => {
-      return vision.annotateImage({
-        features: TYPES,
-        image: {source: {filename: IMAGES.rushmore}},
-      }).then(responses => {
-        var response = responses[0];
-        assert(response.faceAnnotations.length >= 1);
-        assert(response.labelAnnotations.length >= 1);
-        assert(response.safeSearchAnnotation !== null);
-      });
+      return client
+        .annotateImage({
+          features: TYPES,
+          image: {source: {filename: IMAGES.rushmore}},
+        })
+        .then(responses => {
+          var response = responses[0];
+          assert(response.faceAnnotations.length >= 1);
+          assert(response.labelAnnotations.length >= 1);
+          assert(response.safeSearchAnnotation !== null);
+        });
     });
   });
 

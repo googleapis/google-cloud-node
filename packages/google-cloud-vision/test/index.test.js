@@ -16,35 +16,39 @@
 
 'use strict';
 
-var assert = require('assert');
+const assert = require('assert');
 
-var Vision = require('../');
-
+const vision = require('../');
 
 describe('Vision', () => {
+  const CREDENTIALS = Object.freeze({
+    credentials: {client_email: 'bogus', private_key: 'bogus'},
+    projectId: 'bogus',
+  });
+
   describe('v1', () => {
     it('returns a v1 GAPIC augmented with helpers', () => {
-      var vision = Vision.v1();
+      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Assert that the GAPIC v1 methods are present on the object.
-      assert(vision.batchAnnotateImages instanceof Function);
+      assert(client.batchAnnotateImages instanceof Function);
 
       // Assert that the manual single-image helper method is present
       // on the object.
-      assert(vision.annotateImage instanceof Function);
+      assert(client.annotateImage instanceof Function);
 
       // Assert that some of the expected single-feature helper methods
       // are present on the object.
-      assert(vision.faceDetection instanceof Function);
-      assert(vision.landmarkDetection instanceof Function);
-      assert(vision.logoDetection instanceof Function);
-      assert(vision.labelDetection instanceof Function);
-      assert(vision.textDetection instanceof Function);
-      assert(vision.documentTextDetection instanceof Function);
-      assert(vision.safeSearchDetection instanceof Function);
-      assert(vision.imageProperties instanceof Function);
-      assert(vision.cropHints instanceof Function);
-      assert(vision.webDetection instanceof Function);
+      assert(client.faceDetection instanceof Function);
+      assert(client.landmarkDetection instanceof Function);
+      assert(client.logoDetection instanceof Function);
+      assert(client.labelDetection instanceof Function);
+      assert(client.textDetection instanceof Function);
+      assert(client.documentTextDetection instanceof Function);
+      assert(client.safeSearchDetection instanceof Function);
+      assert(client.imageProperties instanceof Function);
+      assert(client.cropHints instanceof Function);
+      assert(client.webDetection instanceof Function);
     });
   });
 });

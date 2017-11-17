@@ -1,65 +1,62 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Vision API Node.js Samples
+# Google Cloud Vision API: Node.js Samples
 
-The [Cloud Vision API][vision_docs] allows developers to easily integrate vision
-detection features within applications, including image labeling, face and
-landmark detection, optical character recognition (OCR), and tagging of explicit
-content.
+[![Open in Cloud Shell][shell_img]][shell_link]
 
-[vision_docs]: https://cloud.google.com/vision/docs/
+The [Cloud Vision API](https://cloud.google.com/vision/docs) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Detection snippets](#detection-snippets)
-  * [Face detection](#face-detection)
-  * [Text detection](#text-detection)
+  * [Detection samples](#detection-samples)
 
-## Setup
+## Before you begin
 
-1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1. Install dependencies:
-
-        npm install
-
-[prereq]: ../README.md#prerequisities
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
-### Detection snippets
+### Detection samples
 
-View the [documentation][detect_docs] or the [source code][detect_code].
+View the [source code][detect_0_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.js,samples/README.md)
 
 __Usage:__ `node detect.js --help`
 
 ```
+detect.js <command>
+
 Commands:
-  faces <fileName>                         Detects faces in a local image file.
-  faces-gcs <bucketName> <fileName>        Detects faces in an image in Google Cloud Storage.
-  labels <fileName>                        Detects labels in a local image file.
-  labels-gcs <bucketName> <fileName>       Detects labels in an image in Google Cloud Storage.
-  landmarks <fileName>                     Detects landmarks in a local image file.
-  landmarks-gcs <bucketName> <fileName>    Detects landmarks in an image in Google Cloud Storage.
-  text <fileName>                          Detects text in a local image file.
-  text-gcs <bucketName> <fileName>         Detects text in an image in Google Cloud Storage.
-  logos <fileName>                         Detects logos in a local image file.
-  logos-gcs <bucketName> <fileName>        Detects logos in an image in Google Cloud Storage.
-  properties <fileName>                    Detects image properties in a local image file.
-  properties-gcs <bucketName> <fileName>   Detects image properties in an image in Google Cloud Storage.
-  safe-search <fileName>                   Detects safe search properties in a local image file.
-  safe-search-gcs <bucketName> <fileName>  Detects safe search properties in an image in Google Cloud Storage.
-  crops <fileName>                         Detects crop hints in a local image file.
-  crops-gcs <bucketName> <fileName>        Detects crop hints in an image in Google Cloud Storage.
-  web <fileName>                           Finds similar photos on the web for a local image file.
-  web-gcs <bucketName> <fileName>          Finds similar photos on the web for an image in Google Cloud Storage.
-  fulltext <fileName>                      Extracts full text from a local image file.
-  fulltext-gcs <bucketName> <fileName>     Extracts full text from an image in Google Cloud Storage.
+  detect.js faces <fileName>                         Detects faces in a local image file.
+  detect.js faces-gcs <bucketName> <fileName>        Detects faces in an image in Google Cloud Storage.
+  detect.js labels <fileName>                        Detects labels in a local image file.
+  detect.js labels-gcs <bucketName> <fileName>       Detects labels in an image in Google Cloud Storage.
+  detect.js landmarks <fileName>                     Detects landmarks in a local image file.
+  detect.js landmarks-gcs <bucketName> <fileName>    Detects landmarks in an image in Google Cloud Storage.
+  detect.js text <fileName>                          Detects text in a local image file.
+  detect.js text-gcs <bucketName> <fileName>         Detects text in an image in Google Cloud Storage.
+  detect.js logos <fileName>                         Detects logos in a local image file.
+  detect.js logos-gcs <bucketName> <fileName>        Detects logos in an image in Google Cloud Storage.
+  detect.js properties <fileName>                    Detects image properties in a local image file.
+  detect.js properties-gcs <bucketName> <fileName>   Detects image properties in an image in Google Cloud Storage.
+  detect.js safe-search <fileName>                   Detects safe search properties in a local image file.
+  detect.js safe-search-gcs <bucketName> <fileName>  Detects safe search properties in an image in Google Cloud Storage.
+  detect.js crops <fileName>                         Detects crop hints in a local image file.
+  detect.js crops-gcs <bucketName> <fileName>        Detects crop hints in an image in Google Cloud Storage.
+  detect.js web <fileName>                           Finds similar photos on the web for a local image file.
+  detect.js web-gcs <bucketName> <fileName>          Finds similar photos on the web for an image in Google Cloud
+                                                     Storage.
+  detect.js fulltext <fileName>                      Extracts full text from a local image file.
+  detect.js fulltext-gcs <bucketName> <fileName>     Extracts full text from an image in Google Cloud Storage.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node detect.js faces ./resources/face_no_surprise.jpg
@@ -86,45 +83,8 @@ Examples:
 For more information, see https://cloud.google.com/vision/docs
 ```
 
-[detect_docs]: https://cloud.google.com/vision/docs
-[detect_code]: detect.js
+[detect_0_docs]: https://cloud.google.com/vision/docs
+[detect_0_code]: detect.js
 
-### Face detection tutorial
-
-View the [documentation][face_docs] or the [source code][face_code].
-
-This sample uses [node-canvas](https://github.com/Automattic/node-canvas) to
-draw an output image. node-canvas depends on Cairo, which may require separate
-installation. See the node-canvas [installation section][canvas-install] for
-details.
-
-[canvas-install]: https://github.com/Automattic/node-canvas#installation
-
-__Run the sample:__
-
-Usage: `node faceDetection <path-to-image-file>`
-
-Example:
-
-    node faceDetection "./resources/face.png"
-
-[face_docs]: https://cloud.google.com/vision/docs/face-tutorial
-[face_code]: faceDetection.js
-
-### Text detection tutorial
-
-View the [source code][text_code].
-
-__Run the sample:__
-
-Usage: `node textDetection <command> [args]...`
-
-Analyze images:
-
-    node textDetection analyze "./resources/"
-
-Look up words:
-
-    node textDetection lookup the sunbeams in
-
-[text_code]: textDetection.js
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/README.md
