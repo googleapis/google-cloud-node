@@ -119,8 +119,7 @@ function hasHttpStatusCode(response: any):
  * @param p - profile to be converted to string.
  */
 async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
-  const pwriter = perftools.profiles.Profile.encode(p);
-  const buffer = new Buffer(pwriter.finish());
+  const buffer = perftools.profiles.Profile.encode(p).finish();
   const gzBuf = await gzip(buffer);
   return gzBuf.toString('base64');
 }
