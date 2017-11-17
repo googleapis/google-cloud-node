@@ -26,7 +26,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (Beta)
 * [Cloud Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence/) (Beta)
 * [Cloud Vision](#cloud-vision-beta) (Beta)
-* [Google BigQuery](#google-bigquery-beta) (Beta)
+* [Google BigQuery](https://github.com/googleapis/nodejs-bigquery) (Beta)
 * [Google Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
