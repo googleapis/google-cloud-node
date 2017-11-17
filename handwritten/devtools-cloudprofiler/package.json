@@ -7,7 +7,7 @@
   "types": "out/src/index.d.ts",
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "nyc mocha out/test/test-*.js",
+    "test": "nyc mocha --require source-map-support/register out/test/test-*.js",
     "check": "gts check",
     "clean": "gts clean",
     "codecov": "nyc report --reporter=json && codecov -f coverage/*.json",
@@ -54,6 +54,7 @@
     "nock": "^9.0.22",
     "nyc": "^11.2.1",
     "sinon": "^4.0.1",
+    "source-map-support": "^0.5.0",
     "ts-mockito": "^2.2.5",
     "typescript": "~2.6.x"
   },
