@@ -58,7 +58,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.14.0",
+    "@google-cloud/common": "^0.15.0",
     "arrify": "^1.0.0",
     "async": "^2.5.0",
     "create-error-class": "^3.0.2",
