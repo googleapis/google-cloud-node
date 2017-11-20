@@ -84,11 +84,11 @@ export async function initConfig(config: Config): Promise<ProfilerConfig> {
                 (err: Error) => {
                     // ignore errors, which will occur when not on GCE.
                 }) ||
-        ['', ''];
-    if (!mergedConfig.zone) {
+        [undefined, undefined];
+    if (!mergedConfig.zone && zone) {
       mergedConfig.zone = zone.substring(zone.lastIndexOf('/') + 1);
     }
-    if (!mergedConfig.instance) {
+    if (!mergedConfig.instance && instance) {
       mergedConfig.instance = instance;
     }
   }

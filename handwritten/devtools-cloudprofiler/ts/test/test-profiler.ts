@@ -383,6 +383,64 @@ describe('Profiler', () => {
          assert.ok(
              requestProfileMock.isDone(), 'expected call to create profile');
        });
+    it('should not have instance and zone in request body when instance and' +
+           ' zone undefined',
+       async () => {
+         const config = extend(true, {}, testConfig);
+         config.instance = undefined;
+         config.zone = undefined;
+         const response = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+         };
+         requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
+                           .onCall(0)
+                           .returns(new Promise(resolve => {
+                             resolve([response, {statusCode: 200}]);
+                           }));
+         const expRequestBody = {
+           deployment: {
+             labels: {version: 'test-version'},
+             projectId: 'test-projectId',
+             target: 'test-service'
+           },
+           profileType: ['WALL', 'HEAP']
+         };
+         const profiler = new Profiler(config);
+         const actualResponse = await profiler.createProfile();
+         assert.deepEqual(response, actualResponse);
+         assert.deepEqual(expRequestBody, requestStub.firstCall.args[0].body);
+       });
+    it('should not have instance and zone in request body when instance and' +
+           ' zone empty strings',
+       async () => {
+         const config = extend(true, {}, testConfig);
+         config.instance = '';
+         config.zone = '';
+         const response = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+         };
+         requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
+                           .onCall(0)
+                           .returns(new Promise(resolve => {
+                             resolve([response, {statusCode: 200}]);
+                           }));
+         const expRequestBody = {
+           deployment: {
+             labels: {version: 'test-version'},
+             projectId: 'test-projectId',
+             target: 'test-service'
+           },
+           profileType: ['WALL', 'HEAP']
+         };
+         const profiler = new Profiler(config);
+         const actualResponse = await profiler.createProfile();
+         assert.deepEqual(response, actualResponse);
+         assert.deepEqual(expRequestBody, requestStub.firstCall.args[0].body);
+       });
     it('should keep additional fields in request profile.', async () => {
       const config = extend(true, {}, testConfig);
       config.disableHeap = true;

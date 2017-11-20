@@ -151,8 +151,6 @@ describe('initConfig', () => {
          serviceContext: {service: 'fake-service'},
          disableHeap: false,
          disableTime: false,
-         instance: '',
-         zone: '',
          projectId: 'fake-projectId',
          timeIntervalMicros: 1000,
          heapIntervalBytes: 512 * 1024,

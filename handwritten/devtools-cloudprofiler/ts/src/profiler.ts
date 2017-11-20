@@ -69,7 +69,7 @@ export interface RequestProfile {
   duration: string;
   profileBytes?: string;
   deployment?: Deployment;
-  labels?: {instance: string};
+  labels?: {instance?: string};
 }
 
 /**
@@ -96,7 +96,8 @@ function isRequestProfile(prof: any): prof is RequestProfile {
   return prof && typeof prof.name === 'string' &&
       typeof prof.profileType === 'string' &&
       typeof prof.duration === 'string' &&
-      (prof.labels === undefined || typeof prof.labels.instance === 'string') &&
+      (prof.labels === undefined || prof.labels.instance === undefined ||
+       typeof prof.labels.instance === 'string') &&
       (prof.deployment === undefined || isDeployment(prof.deployment));
 }
 
@@ -131,7 +132,7 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
 export class Profiler extends common.ServiceObject {
   private config: ProfilerConfig;
   private logger: Logger;
-  private profileLabels: {instance: string};
+  private profileLabels: {instance?: string};
   private deployment: Deployment;
   private profileTypes: string[];
 
@@ -155,16 +156,23 @@ export class Profiler extends common.ServiceObject {
       tag: pjson.name
     });
 
+    const labels: {zone?: string, version?: string} = {};
+    if (this.config.zone) {
+      labels.zone = this.config.zone;
+    }
+    if (this.config.serviceContext.version) {
+      labels.version = this.config.serviceContext.version;
+    }
     this.deployment = {
       projectId: this.config.projectId,
       target: this.config.serviceContext.service,
-      labels: {
-        zone: this.config.zone,
-        version: this.config.serviceContext.version
-      }
+      labels
     };
 
-    this.profileLabels = {instance: this.config.instance};
+    this.profileLabels = {};
+    if (this.config.instance) {
+      this.profileLabels.instance = this.config.instance;
+    }
 
     this.profileTypes = [];
     if (!this.config.disableTime) {

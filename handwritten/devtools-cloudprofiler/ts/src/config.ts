@@ -87,8 +87,8 @@ export interface ProfilerConfig extends AuthenticationConfig {
   projectId?: string;
   logLevel: number;
   serviceContext: {service: string; version?: string;};
-  instance: string;
-  zone: string;
+  instance?: string;
+  zone?: string;
   disableTime: boolean;
   disableHeap: boolean;
   timeIntervalMicros: number;
@@ -103,8 +103,6 @@ export const defaultConfig = {
   serviceContext: {},
   disableHeap: false,
   disableTime: false,
-  instance: '',
-  zone: '',
   timeIntervalMicros: 1000,
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
