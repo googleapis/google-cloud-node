@@ -34,7 +34,6 @@ module.exports = {
     'logging/src/metadata.js',
     'pubsub/src/connection-pool.js',
     'pubsub/src/histogram.js',
-    'pubsub/src/iam.js',
     'spanner/src/codec.js',
     'spanner/src/partial-result-stream.js',
     'spanner/src/row-builder.js',
