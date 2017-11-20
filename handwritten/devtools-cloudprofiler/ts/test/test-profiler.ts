@@ -29,7 +29,7 @@ import {HeapProfiler} from '../src/profilers/heap-profiler';
 import {TimeProfiler} from '../src/profilers/time-profiler';
 import {Common} from '../third_party/types/common-types';
 
-import {base64HeapProfile, base64TimeProfile, decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
+import {decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
 
 const common: Common = require('@google-cloud/common');
 const v8TimeProfiler = require('bindings')('time_profiler');
@@ -94,7 +94,11 @@ describe('Profiler', () => {
            labels: {instance: 'test-instance'}
          };
          const prof = await profiler.profile(requestProf);
-         assert.deepEqual(prof.profileBytes, base64TimeProfile);
+         const decodedBytes =
+             Buffer.from(prof.profileBytes as 'string', 'base64');
+         const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
+         assert.deepEqual(decodedTimeProfile, outProfile);
        });
     it('should return expected profile when profile type is HEAP.',
        async () => {
@@ -107,7 +111,11 @@ describe('Profiler', () => {
            labels: {instance: 'test-instance'}
          };
          const prof = await profiler.profile(requestProf);
-         assert.deepEqual(prof.profileBytes, base64HeapProfile);
+         const decodedBytes =
+             Buffer.from(prof.profileBytes as 'string', 'base64');
+         const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
+         assert.deepEqual(decodedHeapProfile, outProfile);
        });
     it('should throw error when unexpected profile type is requested.',
        async () => {
@@ -239,20 +247,27 @@ describe('Profiler', () => {
         profileType: 'WALL',
         labels: {instance: 'test-instance'}
       };
-      const expBody =
-          extend(true, {profileBytes: base64TimeProfile}, requestProf);
-      nockOauth2();
-      const uploadProfileMock =
-          nock(API)
-              .patch('/' + requestProf.name)
-              .reply(200, (uri: string, requestBody: {}) => {
-                assert.deepEqual(expBody, requestBody);
-              });
+
+      requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
+                        .onCall(0)
+                        .returns(new Promise(resolve => {
+                          resolve([{}, {statusCode: 200}]);
+                        }));
 
       const profiler = new Profiler(testConfig);
       profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);
-      assert.ok(uploadProfileMock.isDone(), 'expected call to upload profile');
+
+      const uploaded = requestStub.firstCall.args[0].body;
+      const decodedBytes =
+          Buffer.from(uploaded.profileBytes as string, 'base64');
+      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
+      assert.deepEqual(decodedTimeProfile, outProfile);
+
+      uploaded.profileBytes = undefined;
+      assert.deepEqual(uploaded, requestProf);
+
     });
     it('should send request to upload heap profile.', async () => {
       const requestProf = {
@@ -261,20 +276,26 @@ describe('Profiler', () => {
         profileType: 'HEAP',
         labels: {instance: 'test-instance'}
       };
-      const expBody =
-          extend(true, {profileBytes: base64HeapProfile}, requestProf);
-      nockOauth2();
-      const uploadProfileMock =
-          nock(API)
-              .patch('/' + requestProf.name)
-              .reply(200, (uri: string, requestBody: {}) => {
-                assert.deepEqual(expBody, requestBody);
-              });
+
+      requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
+                        .onCall(0)
+                        .returns(new Promise(resolve => {
+                          resolve([{}, {statusCode: 200}]);
+                        }));
 
       const profiler = new Profiler(testConfig);
       profiler.heapProfiler = instance(mockHeapProfiler);
       await profiler.profileAndUpload(requestProf);
-      assert.ok(uploadProfileMock.isDone(), 'expected call to upload profile');
+
+      const uploaded = requestStub.firstCall.args[0].body;
+      const decodedBytes =
+          Buffer.from(uploaded.profileBytes as string, 'base64');
+      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
+      assert.deepEqual(decodedHeapProfile, outProfile);
+
+      uploaded.profileBytes = undefined;
+      assert.deepEqual(uploaded, requestProf);
     });
     it('should throw error when profile type unknown.', async () => {
       const requestProf = {
@@ -468,9 +489,6 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {instance: config.instance}
          };
-         const expUploadedProfile = extend(
-             true, {}, requestProfileResponseBody,
-             {profileBytes: base64TimeProfile});
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
@@ -486,8 +504,6 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.deepEqual(
-             expUploadedProfile, requestStub.secondCall.args[0].body);
          assert.equal(
              0, delayMillis, 'No delay before asking to collect next profile');
        });
@@ -501,9 +517,6 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {instance: config.instance}
          };
-         const expUploadedProfile = extend(
-             true, {}, requestProfileResponseBody,
-             {profileBytes: base64TimeProfile});
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .returns(new Promise(resolve => {
@@ -528,9 +541,6 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {instance: config.instance}
          };
-         const expUploadedProfile = extend(
-             true, {}, requestProfileResponseBody,
-             {profileBytes: base64TimeProfile});
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
@@ -539,8 +549,6 @@ describe('Profiler', () => {
                  }))
                  .onCall(1)
                  .returns(Promise.reject('Error uploading profile'));
-
-
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();

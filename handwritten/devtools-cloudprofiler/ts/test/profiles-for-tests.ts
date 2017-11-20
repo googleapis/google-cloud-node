@@ -157,13 +157,6 @@ const encodedTimeProfile =
 export const decodedTimeProfile =
     perftools.profiles.Profile.decode(encodedTimeProfile);
 
-export const base64TimeProfile = 'H4sIAAAAAAAAA0XPMQrCMBQGYPOSNGkQGrrYsRRc3J' +
-    'pTODo7KbFCwKalTXeP4g1cPYKjx+gxfCmI28f//vfgKSaJBsUk1SxPFQDJKZlFLhWBnNLXJ' +
-    'oYUCZ8sksEyr6QkVVwlKECB5ihaxUMZii2Z2mFP84KXCQq0KEQpUXRRYlZGjOe2vzWj4bab' +
-    'fDAsuLYx69bZoRsb2/nLaNLr5G1wnTdYt4Prg/ln9S+r96vD/f18bI/LM6dZfAGLaAVw3AA' +
-    'AAA==';
-
-
 const heapLeaf1 = {
   name: 'function2',
   scriptName: 'script1',
@@ -274,11 +267,6 @@ const encodedHeapProfile =
     perftools.profiles.Profile.encode(heapProfile).finish();
 export const decodedHeapProfile =
     perftools.profiles.Profile.decode(encodedHeapProfile);
-
-export const base64HeapProfile = 'H4sIAAAAAAAAA0XPvQqDQBAEYO9nvfWaHELAUqxCOjc' +
-    'vkTJ1quhhwEBU4lmk87HyeFlNwO5jGAbGahROWo3K6dRYIVIp4A+1TxOrlGTiJbU/qt0HF+v' +
-    'FMB8KRFEsI4IlWdIBSxXLpGVplnZ45J6DDHJgSRdncW5YymGGq7RLsiQ3FJHp60fjw0jg+6k' +
-    'LBONQ+YagfodmJP2s2o6S+9T50PZdSWb0r3YI5ZadNtI5uq7nbvOcfwHxB6/r7QAAAA==';
 
 const anonymousHeapNode = {
   scriptName: 'main',
