@@ -588,10 +588,13 @@ describe('entity', function() {
         excludeFromIndexes: [
           'name',
           'entity.name',
+          'array[]',
           'array[].name',
           'array[].entity.name',
           'array[].entity.array[].name',
-          'array[].array[].entity.name'
+          'array[].array[].entity.name',
+          'entityExcluded[].name',
+          'primitiveExcluded[]'
         ],
 
         data: {
@@ -601,7 +604,22 @@ describe('entity', function() {
             name: value
           },
 
+          entityExcluded: [
+            value,
+            {
+              name: value
+            }
+          ],
+
+          primitiveExcluded: [
+            value,
+            {
+              name: value
+            }
+          ],
+
           array: [
+            value,
             {
               name: value
             },
@@ -645,9 +663,51 @@ describe('entity', function() {
               }
             }
           },
+          entityExcluded: {
+            arrayValue: {
+              values: [
+                {
+                  stringValue: value
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      name: {
+                        stringValue: value,
+                        excludeFromIndexes: true
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          primitiveExcluded: {
+            arrayValue: {
+              values: [
+                {
+                  stringValue: value,
+                  excludeFromIndexes: true
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      name: {
+                        stringValue: value
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
           array: {
             arrayValue: {
               values: [
+                {
+                  stringValue: value,
+                  excludeFromIndexes: true
+                },
                 {
                   entityValue: {
                     properties: {
