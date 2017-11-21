@@ -228,14 +228,13 @@ export class Profiler extends common.ServiceObject {
     try {
       prof = await this.createProfile();
     } catch (err) {
-      this.logger.error(
-          `Error requesting profile type to be collected: ${err}.`);
+      this.logger.error(`Failed to create profile: ${err}`);
       return this.config.backoffMillis;
     }
     try {
       await this.profileAndUpload(prof);
     } catch (err) {
-      this.logger.error(`Error collecting and uploading profile: ${err}.`);
+      this.logger.error(`Failed to collect and upload profile: ${err}`);
     }
     return 0;
   }
@@ -270,7 +269,8 @@ export class Profiler extends common.ServiceObject {
       json: true,
     };
 
-    const [body, response] = await this.request(options);
+    this.logger.debug(`Attempting to create profile.`);
+    const [prof, response] = await this.request(options);
     if (!hasHttpStatusCode(response)) {
       throw new Error('Server response missing status information.');
     }
@@ -282,10 +282,11 @@ export class Profiler extends common.ServiceObject {
       }
       throw new Error(message.toString());
     }
-    if (!isRequestProfile(body)) {
-      throw new Error(`Profile not valid: ${body}.`);
+    if (!isRequestProfile(prof)) {
+      throw new Error(`Profile not valid: ${JSON.stringify(prof)}.`);
     }
-    return body;
+    this.logger.debug(`Successfully created profile ${prof.profileType}.`);
+    return prof;
   }
 
   /**
@@ -297,6 +298,7 @@ export class Profiler extends common.ServiceObject {
    */
   async profileAndUpload(prof: RequestProfile): Promise<void> {
     prof = await this.profile(prof);
+    this.logger.debug(`Successfully collected profile ${prof.profileType}.`);
     prof.labels = this.profileLabels;
 
     const options = {
@@ -318,6 +320,7 @@ export class Profiler extends common.ServiceObject {
       }
       throw new Error(`Could not upload profile: ${message}.`);
     }
+    this.logger.debug(`Successfully uploaded profile ${prof.profileType}.`);
   }
 
   /**
