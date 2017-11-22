@@ -1780,6 +1780,29 @@ describe('GrpcService', function() {
       assert.strictEqual(service, fakeServices.google.FakeService);
     });
 
+    it('should cache the expensive proto object creation', function() {
+      var protoConfig = {
+        path: '/root/dir/path',
+        service: 'FakeService'
+      };
+
+      var mainConfig = {
+        service: 'OtherFakeService',
+        apiVersion: 'v2'
+      };
+
+      var gprcLoadCalled = 0;
+      grpcLoadOverride = function() {
+        gprcLoadCalled++;
+        return fakeServices;
+      };
+
+      var service1 = grpcService.loadProtoFile_(protoConfig, mainConfig);
+      var service2 = grpcService.loadProtoFile_(protoConfig, mainConfig);
+      assert.strictEqual(service1, service2);
+      assert.strictEqual(gprcLoadCalled, 1);
+    });
+
     it('should return the services object if invalid version', function() {
       var fakeProtoConfig = {
         path: '/root/dir/path',

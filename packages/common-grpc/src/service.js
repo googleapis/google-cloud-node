@@ -32,6 +32,12 @@ var through = require('through2');
 var util = require('@google-cloud/common').util;
 
 /**
+ * @const {object} - A cache of proto objects.
+ * @private
+ */
+var protoObjectCache = {};
+
+/**
  * @const {object} - A map of protobuf codes to HTTP status codes.
  * @private
  */
@@ -752,13 +758,22 @@ GrpcService.prototype.loadProtoFile_ = function(protoConfig, config) {
     };
   }
 
-  var services = grpc.load({
-    root: config.protosDir,
-    file: protoConfig.path
-  }, 'proto', grpcOpts);
+  var protoObjectCacheKey = [
+    config.protosDir,
+    protoConfig.path,
+    protoConfig.service
+  ].join('$');
 
-  var service = dotProp.get(services.google, protoConfig.service);
-  return service;
+  if (!protoObjectCache[protoObjectCacheKey]) {
+    var services = grpc.load({
+      root: config.protosDir,
+      file: protoConfig.path
+    }, 'proto', grpcOpts);
+    var service = dotProp.get(services.google, protoConfig.service);
+    protoObjectCache[protoObjectCacheKey] = service;
+  }
+
+  return protoObjectCache[protoObjectCacheKey];
 };
 
 /**
