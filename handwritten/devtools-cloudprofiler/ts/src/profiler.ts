@@ -267,6 +267,11 @@ export class Profiler extends common.ServiceObject {
       uri: '/profiles',
       body: reqBody,
       json: true,
+
+      // Default timeout for for a request is 1 minute, but request to create
+      // profile is designed to hang until it is time to collect a profile
+      // (up to one hour).
+      timeout: parseDuration('1h'),
     };
 
     this.logger.debug(`Attempting to create profile.`);

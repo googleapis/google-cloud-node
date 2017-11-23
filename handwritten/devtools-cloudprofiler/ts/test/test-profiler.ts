@@ -267,7 +267,6 @@ describe('Profiler', () => {
 
       uploaded.profileBytes = undefined;
       assert.deepEqual(uploaded, requestProf);
-
     });
     it('should send request to upload heap profile.', async () => {
       const requestProf = {
