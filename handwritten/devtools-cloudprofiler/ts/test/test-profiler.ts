@@ -107,7 +107,6 @@ describe('Profiler', () => {
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
            profileType: 'HEAP',
-           duration: '10s',
            labels: {instance: 'test-instance'}
          };
          const prof = await profiler.profile(requestProf);
@@ -194,7 +193,6 @@ describe('Profiler', () => {
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
            profileType: 'HEAP',
-           duration: '10s',
            labels: {instance: 'test-instance'}
          };
 
@@ -220,7 +218,6 @@ describe('Profiler', () => {
       const requestProf = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'HEAP',
-        duration: '10s',
         labels: {instance: 'test-instance'}
       };
       try {
@@ -285,7 +282,6 @@ describe('Profiler', () => {
       const profiler = new Profiler(testConfig);
       profiler.heapProfiler = instance(mockHeapProfiler);
       await profiler.profileAndUpload(requestProf);
-
       const uploaded = requestStub.firstCall.args[0].body;
       const decodedBytes =
           Buffer.from(uploaded.profileBytes as string, 'base64');
@@ -360,28 +356,76 @@ describe('Profiler', () => {
         requestStub.restore();
       }
     });
-    it('should send request for only wall profile when heap disabled.',
-       async () => {
-         const config = extend(true, {}, testConfig);
-         config.disableHeap = true;
-         const response = {
-           name: 'projects/12345678901/test-projectId',
-           profileType: 'WALL',
-           duration: '10s',
-           labels: {instance: config.instance}
-         };
-         nockOauth2();
-         const requestProfileMock =
-             nock(API)
-                 .post('/projects/' + testConfig.projectId + '/profiles')
-                 .once()
-                 .reply(200, response);
-         const profiler = new Profiler(testConfig);
-         const actualResponse = await profiler.createProfile();
-         assert.deepEqual(response, actualResponse);
-         assert.ok(
-             requestProfileMock.isDone(), 'expected call to create profile');
-       });
+    it('should successfully create wall profile', async () => {
+      const config = extend(true, {}, testConfig);
+      config.disableHeap = true;
+      const response = {
+        name: 'projects/12345678901/test-projectId',
+        profileType: 'WALL',
+        duration: '10s',
+        deployment: {
+          labels: {version: 'test-version'},
+          projectId: 'test-projectId',
+          target: 'test-service'
+        },
+        labels: {version: config.serviceContext.version}
+      };
+      nockOauth2();
+      const requestProfileMock =
+          nock(API)
+              .post('/projects/' + testConfig.projectId + '/profiles')
+              .once()
+              .reply(200, response);
+      const profiler = new Profiler(testConfig);
+      const actualResponse = await profiler.createProfile();
+      assert.deepEqual(response, actualResponse);
+      assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
+    });
+    it('should successfully create heap profile', async () => {
+      const config = extend(true, {}, testConfig);
+      config.disableHeap = true;
+      const response = {
+        name: 'projects/12345678901/test-projectId',
+        profileType: 'HEAP',
+        deployment: {
+          labels: {version: 'test-version'},
+          projectId: 'test-projectId',
+          target: 'test-service'
+        },
+        labels: {version: config.serviceContext.version}
+      };
+      nockOauth2();
+      const requestProfileMock =
+          nock(API)
+              .post('/projects/' + testConfig.projectId + '/profiles')
+              .once()
+              .reply(200, response);
+      const profiler = new Profiler(testConfig);
+      const actualResponse = await profiler.createProfile();
+      assert.deepEqual(response, actualResponse);
+      assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
+    });
+    it('should throw error when invalid profile created', async () => {
+      const config = extend(true, {}, testConfig);
+      config.disableHeap = true;
+      const response = {name: 'projects/12345678901/test-projectId'};
+      nockOauth2();
+      const requestProfileMock =
+          nock(API)
+              .post('/projects/' + testConfig.projectId + '/profiles')
+              .once()
+              .reply(200, response);
+      const profiler = new Profiler(testConfig);
+      try {
+        await profiler.createProfile();
+        assert.fail('expected error, no error thrown');
+      } catch (err) {
+        assert.equal(
+            err.message,
+            'Profile not valid: ' +
+                '{"name":"projects/12345678901/test-projectId"}.');
+      }
+    });
     it('should not have instance and zone in request body when instance and' +
            ' zone undefined',
        async () => {
@@ -447,7 +491,7 @@ describe('Profiler', () => {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
         duration: '10s',
-        labels: {instance: config.instance},
+        labels: {version: config.serviceContext.version},
         additionalField: 'additionalField'
       };
       nockOauth2();
@@ -467,7 +511,7 @@ describe('Profiler', () => {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
         duration: '10s',
-        labels: {instance: config.instance}
+        labels: {version: config.serviceContext.version}
       };
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .onCall(0)
@@ -487,7 +531,7 @@ describe('Profiler', () => {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
            duration: '10s',
-           labels: {instance: config.instance}
+           labels: {version: config.serviceContext.version}
          };
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
@@ -497,7 +541,6 @@ describe('Profiler', () => {
                      {}, {statusCode: 500, statusMessage: '500 status code'}
                    ]);
                  }));
-
          const profiler = new Profiler(testConfig);
          try {
            await profiler.createProfile();
@@ -513,14 +556,13 @@ describe('Profiler', () => {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
            duration: '10s',
-           labels: {instance: config.instance}
+           labels: {version: config.serviceContext.version}
          };
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .returns(new Promise(resolve => {
                              resolve([{}, {statusCode: 500}]);
                            }));
-
          const profiler = new Profiler(testConfig);
          try {
            await profiler.createProfile();
@@ -544,7 +586,7 @@ describe('Profiler', () => {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
            duration: '10s',
-           labels: {instance: config.instance}
+           labels: {version: config.serviceContext.version}
          };
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
@@ -556,8 +598,6 @@ describe('Profiler', () => {
                  .returns(new Promise(resolve => {
                    resolve([{}, {statusCode: 200}]);
                  }));
-
-
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -572,15 +612,13 @@ describe('Profiler', () => {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
            duration: '10s',
-           labels: {instance: config.instance}
+           labels: {version: config.serviceContext.version}
          };
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .returns(new Promise(resolve => {
                              resolve([{}, {statusCode: 404}]);
                            }));
-
-
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -596,7 +634,7 @@ describe('Profiler', () => {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
            duration: '10s',
-           labels: {instance: config.instance}
+           labels: {version: config.serviceContext.version}
          };
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
