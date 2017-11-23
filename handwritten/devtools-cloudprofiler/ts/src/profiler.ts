@@ -37,7 +37,7 @@ enum ProfileTypes {
 }
 
 /**
- * @return - true if http status code indicates an error and false otherwise.
+ * @return true if http status code indicates an error and false otherwise.
  */
 function isErrorResponseStatusCode(code: number) {
   return code < 200 || code >= 300;
@@ -102,7 +102,7 @@ function isRequestProfile(prof: any): prof is RequestProfile {
 }
 
 /**
- * Returns true if response has statusCode.
+ * @return true if response has statusCode.
  */
 // tslint:disable-next-line: no-any
 function hasHttpStatusCode(response: any):
@@ -215,7 +215,7 @@ export class Profiler extends common.ServiceObject {
    * Waits for profiler server to tell it to collect a profile, then collects
    * a profile and uploads it.
    *
-   * @return - time, in ms, to wait before asking profiler server again about
+   * @return time, in ms, to wait before asking profiler server again about
    * collecting another profile.
    *
    * TODO: implement backoff and retry. When error encountered in
@@ -246,7 +246,7 @@ export class Profiler extends common.ServiceObject {
    *
    * If any problem is encountered, an error will be thrown.
    *
-   * @return - a RequestProfile specifying which type of profile should be
+   * @return a RequestProfile specifying which type of profile should be
    * collected and other information needed to collect and upload a profile of
    * the specified type.
    *

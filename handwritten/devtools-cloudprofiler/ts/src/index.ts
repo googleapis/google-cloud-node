@@ -25,7 +25,7 @@ import {Profiler} from './profiler';
 const common: Common = require('@google-cloud/common');
 
 /**
- * Returns value of metadata field.
+ * @return value of metadata field.
  * Throws error if there is a problem accessing metadata API.
  */
 async function getMetadataInstanceField(field: string): Promise<string> {

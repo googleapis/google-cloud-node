@@ -52,7 +52,7 @@ class StringTable {
   }
 
   /**
-   * Returns index of str within the table. Also adds str to string table if
+   * @return index of str within the table. Also adds str to string table if
    * str is not in the table already.
    */
   getIndexOrAdd(str: string): number {
@@ -153,7 +153,7 @@ function serialize<T extends ProfileNode>(
 }
 
 /**
- * Returns value type for samples counts (type:samples, units:count), and
+ * @return value type for samples counts (type:samples, units:count), and
  * adds strings used in this value type to the table.
  */
 function createSampleCountValueType(table: StringTable):
@@ -165,7 +165,7 @@ function createSampleCountValueType(table: StringTable):
 }
 
 /**
- * Returns value type for time samples (type:time, units:microseconds), and
+ * @return value type for time samples (type:time, units:microseconds), and
  * adds strings used in this value type to the table.
  */
 function createTimeValueType(table: StringTable): perftools.profiles.ValueType {
@@ -176,7 +176,7 @@ function createTimeValueType(table: StringTable): perftools.profiles.ValueType {
 }
 
 /**
- * Returns value type for object counts (type:objects, units:count), and
+ * @return value type for object counts (type:objects, units:count), and
  * adds strings used in this value type to the table.
  */
 function createObjectCountValueType(table: StringTable):
@@ -188,7 +188,7 @@ function createObjectCountValueType(table: StringTable):
 }
 
 /**
- * Returns value type for memory allocations (type:space, units:bytes), and
+ * @return value type for memory allocations (type:space, units:bytes), and
  * adds strings used in this value type to the table.
  */
 function createAllocationValueType(table: StringTable):
