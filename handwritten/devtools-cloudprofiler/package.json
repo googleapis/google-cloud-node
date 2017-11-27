@@ -30,7 +30,7 @@
     "delay": "^2.0.0",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.4.0",
-    "nan": "^2.1.0",
+    "nan": "^2.8.0",
     "parse-duration": "^0.1.1",
     "pify": "^3.0.0",
     "protobufjs": "~6.8.0",
