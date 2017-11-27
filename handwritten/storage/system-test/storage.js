@@ -1034,6 +1034,7 @@ describe('storage', function() {
       describe('methods that accept userProject', function() {
         var file;
         var notification;
+        var topicName;
 
         var USER_PROJECT_OPTIONS = {
           userProject: process.env.GCN_STORAGE_2ND_PROJECT_ID,
@@ -1070,7 +1071,11 @@ describe('storage', function() {
 
               return bucket.iam.setPolicy(policy);
             })
-            .then(() => file.save('abc', USER_PROJECT_OPTIONS));
+            .then(() => file.save('abc', USER_PROJECT_OPTIONS))
+            .then(() => topic.getMetadata())
+            .then(data => {
+              topicName = data[0].name;
+            });
         });
 
         // This acts as a test for the following methods:
@@ -1138,7 +1143,7 @@ describe('storage', function() {
         it(
           'bucket#createNotification',
           doubleTest(function(options, done) {
-            bucketNonWhitelist.createNotification(topic.name, options, function(
+            bucketNonWhitelist.createNotification(topicName, options, function(
               err,
               _notification
             ) {
@@ -1390,6 +1395,10 @@ describe('storage', function() {
         it(
           'notification#get',
           doubleTest(function(options, done) {
+            if (!notification) {
+              throw new Error('Notification was not successfully created.');
+            }
+
             notification.get(options, done);
           })
         );
@@ -1397,6 +1406,10 @@ describe('storage', function() {
         it(
           'notification#getMetadata',
           doubleTest(function(options, done) {
+            if (!notification) {
+              throw new Error('Notification was not successfully created.');
+            }
+
             notification.getMetadata(options, done);
           })
         );
@@ -1404,6 +1417,10 @@ describe('storage', function() {
         it(
           'notification#delete',
           doubleTest(function(options, done) {
+            if (!notification) {
+              throw new Error('Notification was not successfully created.');
+            }
+
             notification.delete(options, done);
           })
         );
