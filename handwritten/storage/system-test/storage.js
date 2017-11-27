@@ -487,7 +487,7 @@ describe('storage', function() {
         });
       });
 
-      it.only('should set custom encryption during the upload', function(done) {
+      it('should set custom encryption during the upload', function(done) {
         var key = crypto.randomBytes(32);
 
         key = '12345678901234567890123456789012';

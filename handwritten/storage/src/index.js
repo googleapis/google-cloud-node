@@ -92,7 +92,11 @@ function Storage(options) {
   var config = {
     baseUrl: 'https://www.googleapis.com/storage/v1',
     projectIdRequired: false,
-    scopes: ['https://www.googleapis.com/auth/devstorage.full_control'],
+    scopes: [
+      'https://www.googleapis.com/auth/iam',
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/devstorage.full_control',
+    ],
     packageJson: require('../package.json'),
   };
 

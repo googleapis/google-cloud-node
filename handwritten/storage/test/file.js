@@ -1748,99 +1748,59 @@ describe('File', function() {
   });
 
   describe('getSignedPolicy', function() {
-    var credentials = require('./testdata/privateKeyFile.json');
+    var CONFIG = {
+      expires: Date.now() + 2000,
+    };
 
     beforeEach(function() {
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
-        callback(null, credentials);
+      BUCKET.storage.authClient = {
+        sign: function(blobToSign, callback) {
+          callback(null, 'signature');
+        },
       };
     });
 
     it('should create a signed policy', function(done) {
-      file.getSignedPolicy(
-        {
-          expires: Date.now() + 2000,
-        },
-        function(err, signedPolicy) {
-          assert.ifError(err);
-          assert.equal(typeof signedPolicy.string, 'string');
-          assert.equal(typeof signedPolicy.base64, 'string');
-          assert.equal(typeof signedPolicy.signature, 'string');
-          done();
-        }
-      );
-    });
-
-    it('should not modify the configuration object', function(done) {
-      var config = {
-        expires: Date.now() + 2000,
-      };
-
-      var originalConfig = extend({}, config);
-
-      file.getSignedPolicy(config, function(err) {
+      file.getSignedPolicy(CONFIG, function(err, signedPolicy) {
         assert.ifError(err);
-        assert.deepEqual(config, originalConfig);
+        assert.equal(typeof signedPolicy.string, 'string');
+        assert.equal(typeof signedPolicy.base64, 'string');
+        assert.equal(typeof signedPolicy.signature, 'string');
         done();
       });
     });
 
-    it('should return an error if getCredentials errors', function(done) {
+    it('should not modify the configuration object', function(done) {
+      var originalConfig = extend({}, CONFIG);
+
+      file.getSignedPolicy(CONFIG, function(err) {
+        assert.ifError(err);
+        assert.deepEqual(CONFIG, originalConfig);
+        done();
+      });
+    });
+
+    it('should return an error if signBlob errors', function(done) {
       var error = new Error('Error.');
 
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
+      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
         callback(error);
       };
 
-      file.getSignedPolicy(
-        {
-          expires: Date.now() + 2000,
-        },
-        function(err) {
-          assert.strictEqual(err.name, 'SigningError');
-          assert.strictEqual(err.message, error.message);
-          done();
-        }
-      );
-    });
-
-    it('should return an error if credentials are not present', function(done) {
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
-        callback(null, {});
-      };
-
-      file.getSignedPolicy(
-        {
-          expires: Date.now() + 2000,
-        },
-        function(err) {
-          var errorMessage = [
-            'Could not find a `private_key`.',
-            'Please verify you are authorized with this property available.',
-          ].join(' ');
-
-          assert.strictEqual(err.name, 'SigningError');
-          assert.strictEqual(err.message, errorMessage);
-          done();
-        }
-      );
+      file.getSignedPolicy(CONFIG, function(err) {
+        assert.strictEqual(err.name, 'SigningError');
+        assert.strictEqual(err.message, error.message);
+        done();
+      });
     });
 
     it('should add key equality condition', function(done) {
-      file.getSignedPolicy(
-        {
-          expires: Date.now() + 2000,
-        },
-        function(err, signedPolicy) {
-          var conditionString = '["eq","$key","' + file.name + '"]';
-          assert.ifError(err);
-          assert(signedPolicy.string.indexOf(conditionString) > -1);
-          done();
-        }
-      );
+      file.getSignedPolicy(CONFIG, function(err, signedPolicy) {
+        var conditionString = '["eq","$key","' + file.name + '"]';
+        assert.ifError(err);
+        assert(signedPolicy.string.indexOf(conditionString) > -1);
+        done();
+      });
     });
 
     it('should add ACL condtion', function(done) {
@@ -2122,106 +2082,79 @@ describe('File', function() {
   });
 
   describe('getSignedUrl', function() {
-    var credentials = require('./testdata/privateKeyFile.json');
+    var CONFIG = {
+      action: 'read',
+      expires: Date.now() + 2000,
+    };
 
     beforeEach(function() {
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
-        callback(null, credentials);
+      BUCKET.storage.authClient = {
+        credentials: {
+          client_email: 'client-email',
+        },
+        sign: function(blobToSign, callback) {
+          callback(null, 'signature');
+        },
       };
     });
 
     it('should create a signed url', function(done) {
-      file.getSignedUrl(
-        {
-          action: 'read',
-          expires: Date.now() + 2000,
-        },
-        function(err, signedUrl) {
-          assert.ifError(err);
-          assert.equal(typeof signedUrl, 'string');
-          done();
-        }
-      );
-    });
+      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
+        assert.deepStrictEqual(
+          blobToSign,
+          [
+            'GET',
+            '',
+            '',
+            Math.round(CONFIG.expires / 1000),
+            `/${BUCKET.name}/${encodeURIComponent(file.name)}`,
+          ].join('\n')
+        );
 
-    it('should not modify the configuration object', function(done) {
-      var config = {
-        action: 'read',
-        expires: Date.now() + 2000,
+        callback(null, 'signature');
       };
 
-      var originalConfig = extend({}, config);
-
-      file.getSignedUrl(config, function(err) {
+      file.getSignedUrl(CONFIG, function(err, signedUrl) {
         assert.ifError(err);
-        assert.deepEqual(config, originalConfig);
+        assert.equal(typeof signedUrl, 'string');
         done();
       });
     });
 
-    it('should return an error if getCredentials errors', function(done) {
+    it('should not modify the configuration object', function(done) {
+      var originalConfig = extend({}, CONFIG);
+
+      file.getSignedUrl(CONFIG, function(err) {
+        assert.ifError(err);
+        assert.deepEqual(CONFIG, originalConfig);
+        done();
+      });
+    });
+
+    it('should return an error if signBlob errors', function(done) {
       var error = new Error('Error.');
 
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
+      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
         callback(error);
       };
 
-      file.getSignedUrl(
-        {
-          action: 'read',
-          expires: Date.now() + 2000,
-        },
-        function(err) {
-          assert.strictEqual(err.name, 'SigningError');
-          assert.strictEqual(err.message, error.message);
-          done();
-        }
-      );
-    });
-
-    it('should return an error if credentials are not present', function(done) {
-      var storage = BUCKET.storage;
-      storage.getCredentials = function(callback) {
-        callback(null, {});
-      };
-
-      file.getSignedUrl(
-        {
-          action: 'read',
-          expires: Date.now() + 2000,
-        },
-        function(err) {
-          var errorMessage = [
-            'Could not find a `private_key` or `client_email`.',
-            'Please verify you are authorized with these credentials available.',
-          ].join(' ');
-
-          assert.strictEqual(err.name, 'SigningError');
-          assert.strictEqual(err.message, errorMessage);
-          done();
-        }
-      );
+      file.getSignedUrl(CONFIG, function(err) {
+        assert.strictEqual(err.name, 'SigningError');
+        assert.strictEqual(err.message, error.message);
+        done();
+      });
     });
 
     it('should URI encode file names', function(done) {
-      directoryFile.getSignedUrl(
-        {
-          action: 'read',
-          expires: Date.now() + 2000,
-        },
-        function(err, signedUrl) {
-          assert(
-            signedUrl.indexOf(encodeURIComponent(directoryFile.name)) > -1
-          );
-          done();
-        }
-      );
+      directoryFile.getSignedUrl(CONFIG, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(directoryFile.name)) > -1);
+        done();
+      });
     });
 
     it('should add response-content-type parameter', function(done) {
       var type = 'application/json';
+
       directoryFile.getSignedUrl(
         {
           action: 'read',
@@ -2238,16 +2171,11 @@ describe('File', function() {
     it('should add generation parameter', function(done) {
       var generation = 10003320000;
       var file = new File(BUCKET, 'name', {generation: generation});
-      file.getSignedUrl(
-        {
-          action: 'read',
-          expires: Date.now() + 2000,
-        },
-        function(err, signedUrl) {
-          assert(signedUrl.indexOf(encodeURIComponent(generation)) > -1);
-          done();
-        }
-      );
+
+      file.getSignedUrl(CONFIG, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(generation)) > -1);
+        done();
+      });
     });
 
     describe('cname', function() {
@@ -2416,36 +2344,19 @@ describe('File', function() {
           'x-foo': 'bar',
         };
 
-        var expires = Date.now() + 2000;
-        var expiresInSeconds = Math.round(expires / 1000);
-        var name = encodeURIComponent(directoryFile.name);
-        var resource = '/' + directoryFile.bucket.name + '/' + name;
-
-        var sign = crypto.createSign('RSA-SHA256');
-
-        sign.update(
-          [
-            'GET',
-            '',
-            '',
-            expiresInSeconds,
-            'x-goog-acl:public-read\nx-foo:bar\n' + resource,
-          ].join('\n')
-        );
-
-        var expSignature = sign.sign(credentials.private_key, 'base64');
+        BUCKET.storage.authClient.sign = function(blobToSign) {
+          var headers = 'x-goog-acl:public-read\nx-foo:bar\n';
+          assert(blobToSign.indexOf(headers) > -1);
+          done();
+        };
 
         directoryFile.getSignedUrl(
           {
             action: 'read',
-            expires: expires,
+            expires: Date.now() + 2000,
             extensionHeaders: extensionHeaders,
           },
-          function(err, signedUrl) {
-            assert.ifError(err);
-            assert(signedUrl.indexOf(encodeURIComponent(expSignature)) > -1);
-            done();
-          }
+          assert.ifError
         );
       });
     });

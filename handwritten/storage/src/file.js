@@ -1503,33 +1503,17 @@ File.prototype.getSignedPolicy = function(options, callback) {
     conditions: conditions,
   };
 
-  this.storage.getCredentials(function(err, credentials) {
+  var policyString = JSON.stringify(policy);
+
+  this.storage.authClient.sign(policyString, function(err, signature) {
     if (err) {
       callback(new SigningError(err.message));
       return;
     }
 
-    if (!credentials.private_key) {
-      var errorMessage = [
-        'Could not find a `private_key`.',
-        'Please verify you are authorized with this property available.',
-      ].join(' ');
-
-      callback(new SigningError(errorMessage));
-      return;
-    }
-
-    var sign = crypto.createSign('RSA-SHA256');
-    var policyString = JSON.stringify(policy);
-    var policyBase64 = Buffer.from(policyString).toString('base64');
-
-    sign.update(policyBase64);
-
-    var signature = sign.sign(credentials.private_key, 'base64');
-
     callback(null, {
       string: policyString,
-      base64: policyBase64,
+      base64: Buffer.from(policyString).toString('base64'),
       signature: signature,
     });
   });
@@ -1666,44 +1650,32 @@ File.prototype.getSignedUrl = function(config, callback) {
   var host = config.cname || STORAGE_DOWNLOAD_BASE_URL + '/' + self.bucket.name;
   config.resource = '/' + this.bucket.name + '/' + name;
 
-  this.storage.getCredentials(function(err, credentials) {
+  var extensionHeadersString = '';
+
+  if (config.extensionHeaders) {
+    for (var headerName in config.extensionHeaders) {
+      extensionHeadersString += format('{name}:{value}\n', {
+        name: headerName,
+        value: config.extensionHeaders[headerName],
+      });
+    }
+  }
+
+  var blobToSign = [
+    config.action,
+    config.contentMd5 || '',
+    config.contentType || '',
+    expiresInSeconds,
+    extensionHeadersString + config.resource,
+  ].join('\n');
+
+  var authClient = this.storage.authClient;
+
+  authClient.sign(blobToSign, function(err, signature) {
     if (err) {
       callback(new SigningError(err.message));
       return;
     }
-
-    if (!credentials.private_key || !credentials.client_email) {
-      var errorMessage = [
-        'Could not find a `private_key` or `client_email`.',
-        'Please verify you are authorized with these credentials available.',
-      ].join(' ');
-
-      callback(new SigningError(errorMessage));
-      return;
-    }
-
-    var extensionHeadersString = '';
-
-    if (config.extensionHeaders) {
-      for (var headerName in config.extensionHeaders) {
-        extensionHeadersString += format('{name}:{value}\n', {
-          name: headerName,
-          value: config.extensionHeaders[headerName],
-        });
-      }
-    }
-
-    var sign = crypto.createSign('RSA-SHA256');
-    sign.update(
-      [
-        config.action,
-        config.contentMd5 || '',
-        config.contentType || '',
-        expiresInSeconds,
-        extensionHeadersString + config.resource,
-      ].join('\n')
-    );
-    var signature = sign.sign(credentials.private_key, 'base64');
 
     var responseContentType;
     if (is.string(config.responseType)) {
@@ -1727,7 +1699,7 @@ File.prototype.getSignedUrl = function(config, callback) {
     var signedUrl = format('{host}/{name}{id}{exp}{sig}{type}{disp}{gen}', {
       host: host.replace(/[/]*$/, ''), // Remove trailing slashes.
       name: name,
-      id: '?GoogleAccessId=' + credentials.client_email,
+      id: '?GoogleAccessId=' + authClient.credentials.client_email,
       exp: '&Expires=' + expiresInSeconds,
       sig: '&Signature=' + encodeURIComponent(signature),
       type: responseContentType || '',

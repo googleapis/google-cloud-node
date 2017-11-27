@@ -127,6 +127,8 @@ describe('Storage', function() {
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/iam',
+        'https://www.googleapis.com/auth/cloud-platform',
         'https://www.googleapis.com/auth/devstorage.full_control',
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
