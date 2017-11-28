@@ -113,5 +113,5 @@ test.serial(`should rotate keys`, async t => {
     `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`,
     cwd
   );
-  t.is(results.stdout + results.stderr, 'Encryption key rotated successfully.');
+  t.is(results.stdout, 'Encryption key rotated successfully.');
 });
