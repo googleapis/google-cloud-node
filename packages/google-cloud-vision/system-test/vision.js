@@ -81,43 +81,25 @@ describe('Vision', function() {
 
   it('should detect from a URL', () => {
     var url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
-    return client
-      .logoDetection({
-        image: {
-          source: {imageUri: url},
-        },
-      })
-      .then(responses => {
-        var response = responses[0];
-        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-      });
+    return client.logoDetection(url).then(responses => {
+      var response = responses[0];
+      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+    });
   });
 
   it('should detect from a filename', () => {
-    return client
-      .logoDetection({
-        image: {
-          source: {filename: IMAGES.logo},
-        },
-      })
-      .then(responses => {
-        var response = responses[0];
-        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-      });
+    return client.logoDetection(IMAGES.logo).then(responses => {
+      var response = responses[0];
+      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+    });
   });
 
   it('should detect from a Buffer', () => {
     var buffer = fs.readFileSync(IMAGES.logo);
-    return client
-      .logoDetection({
-        image: {
-          content: buffer,
-        },
-      })
-      .then(responses => {
-        var response = responses[0];
-        assert.deepEqual(response.logoAnnotations[0].description, 'Google');
-      });
+    return client.logoDetection(buffer).then(responses => {
+      var response = responses[0];
+      assert.deepEqual(response.logoAnnotations[0].description, 'Google');
+    });
   });
 
   describe('single image', () => {
