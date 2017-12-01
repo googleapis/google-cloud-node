@@ -1113,31 +1113,14 @@ describe('GrpcService', function() {
         fakeStream.emit('metadata');
       });
 
-      it('should emit a `request` event on each request', function(done) {
-        var fakeStream = through.obj();
-
-        ProtoService.prototype.method = function() {
-          return fakeStream;
-        };
-
-        retryRequestOverride = function(reqOpts, options) {
-          // Simulate three retries.
-          setImmediate(function() {
-            options.request();
-            options.request();
-          });
-          return options.request();
-        };
-
+      it('should forward `request` events', function(done) {
         var requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
 
-        var requestEmitted = 0;
         requestStream.on('request', function() {
-          requestEmitted++;
-          if (requestEmitted === 3) {
-            done();
-          }
+          done()
         });
+
+        retryStream.emit('request');
       });
 
       it('should emit the response error', function(done) {

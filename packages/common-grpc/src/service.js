@@ -380,7 +380,6 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      setImmediate(() => stream.emit('request'));
       return service[protoOpts.method](reqOpts, grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
@@ -402,6 +401,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
 
       stream.destroy(grpcError || err);
     })
+    .on('request', stream.emit.bind(stream, 'request'))
     .pipe(stream);
 };
 
