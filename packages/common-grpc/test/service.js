@@ -1138,7 +1138,6 @@ describe('GrpcService', function() {
             done();
           }
         });
-
       });
 
       it('should emit the response error', function(done) {
