@@ -1117,7 +1117,7 @@ describe('GrpcService', function() {
         var requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
 
         requestStream.on('request', function() {
-          done()
+          done();
         });
 
         retryStream.emit('request');
