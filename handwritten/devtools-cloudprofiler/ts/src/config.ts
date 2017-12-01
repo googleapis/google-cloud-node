@@ -26,6 +26,7 @@ export interface Config extends AuthenticationConfig {
   projectId?: string;
 
   // Log levels: 0-disabled,1-error,2-warn,3-info,4-debug.
+  // Log statements are printed to the console.
   logLevel?: number;
 
   // Specifies the service with which profiles from this application will be
