@@ -272,8 +272,9 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   // executed with this as the "response", we return it to the user as an error.
   var respError;
 
-  var retryOpts = {
+  var retryOpts = extend({
     retries: this.maxRetries,
+    currentRetryAttempt: 0,
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     // retry-request determines if it should retry from the incoming HTTP
@@ -303,7 +304,7 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
           onResponse(null, resp);
         });
     }
-  };
+  }, protoOpts.retryOpts);
 
   return retryRequest(null, retryOpts, function(err, resp) {
     if (!err && resp === respError) {
@@ -372,8 +373,9 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     return stream;
   }
 
-  var retryOpts = {
+  var retryOpts = extend({
     retries: this.maxRetries,
+    currentRetryAttempt: 0,
     objectMode: objectMode,
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
@@ -391,7 +393,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
           this.emit('response', grcpStatus);
         });
     }
-  };
+  }, protoOpts.retryOpts);
 
   return retryRequest(null, retryOpts)
     .on('error', function(err) {
@@ -399,6 +401,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
 
       stream.destroy(grpcError || err);
     })
+    .on('request', stream.emit.bind(stream, 'request'))
     .pipe(stream);
 };
 

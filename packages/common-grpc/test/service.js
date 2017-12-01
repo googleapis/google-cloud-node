@@ -617,6 +617,7 @@ describe('GrpcService', function() {
           retryRequestOptions.retries,
           grpcService.maxRetries
         );
+        assert.strictEqual(retryRequestOptions.currentRetryAttempt, 0);
 
         retryRequestCallback(error, response);
       });
@@ -1082,6 +1083,7 @@ describe('GrpcService', function() {
           retryRequestOptions.retries,
           grpcService.maxRetries
         );
+        assert.strictEqual(retryRequestOptions.currentRetryAttempt, 0);
         assert.strictEqual(retryRequestOptions.objectMode, true);
         assert.strictEqual(
           retryRequestOptions.shouldRetryFn,
@@ -1109,6 +1111,16 @@ describe('GrpcService', function() {
 
         grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
         fakeStream.emit('metadata');
+      });
+
+      it('should forward `request` events', function(done) {
+        var requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
+
+        requestStream.on('request', function() {
+          done()
+        });
+
+        retryStream.emit('request');
       });
 
       it('should emit the response error', function(done) {
