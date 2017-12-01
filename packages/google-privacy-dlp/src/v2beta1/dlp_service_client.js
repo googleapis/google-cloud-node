@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -183,10 +183,10 @@ class DlpServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     var dlpServiceStubMethods = [
-      'deidentifyContent',
-      'analyzeDataSourceRisk',
       'inspectContent',
       'redactContent',
+      'deidentifyContent',
+      'analyzeDataSourceRisk',
       'createInspectOperation',
       'listInspectFindings',
       'listInfoTypes',
@@ -241,6 +241,159 @@ class DlpServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+
+  /**
+   * Finds potentially sensitive info in a list of strings.
+   * This method has limits on input size, processing time, and output size.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.inspectConfig
+   *   Configuration for the inspector.
+   *
+   *   This object should have the same structure as [InspectConfig]{@link google.privacy.dlp.v2beta1.InspectConfig}
+   * @param {Object[]} request.items
+   *   The list of items to inspect. Items in a single request are
+   *   considered "related" unless inspect_config.independent_inputs is true.
+   *   Up to 100 are allowed per request.
+   *
+   *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [InspectContentResponse]{@link google.privacy.dlp.v2beta1.InspectContentResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [InspectContentResponse]{@link google.privacy.dlp.v2beta1.InspectContentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * var client = new dlp.v2beta1.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var name = 'EMAIL_ADDRESS';
+   * var infoTypesElement = {
+   *   name: name,
+   * };
+   * var infoTypes = [infoTypesElement];
+   * var inspectConfig = {
+   *   infoTypes: infoTypes,
+   * };
+   * var type = 'text/plain';
+   * var value = 'My email is example@example.com.';
+   * var itemsElement = {
+   *   type: type,
+   *   value: value,
+   * };
+   * var items = [itemsElement];
+   * var request = {
+   *   inspectConfig: inspectConfig,
+   *   items: items,
+   * };
+   * client.inspectContent(request)
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  inspectContent(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.inspectContent(request, options, callback);
+  }
+
+  /**
+   * Redacts potentially sensitive info from a list of strings.
+   * This method has limits on input size, processing time, and output size.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.inspectConfig
+   *   Configuration for the inspector.
+   *
+   *   This object should have the same structure as [InspectConfig]{@link google.privacy.dlp.v2beta1.InspectConfig}
+   * @param {Object[]} request.items
+   *   The list of items to inspect. Up to 100 are allowed per request.
+   *
+   *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
+   * @param {Object[]} [request.replaceConfigs]
+   *   The strings to replace findings text findings with. Must specify at least
+   *   one of these or one ImageRedactionConfig if redacting images.
+   *
+   *   This object should have the same structure as [ReplaceConfig]{@link google.privacy.dlp.v2beta1.ReplaceConfig}
+   * @param {Object[]} [request.imageRedactionConfigs]
+   *   The configuration for specifying what content to redact from images.
+   *
+   *   This object should have the same structure as [ImageRedactionConfig]{@link google.privacy.dlp.v2beta1.ImageRedactionConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [RedactContentResponse]{@link google.privacy.dlp.v2beta1.RedactContentResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RedactContentResponse]{@link google.privacy.dlp.v2beta1.RedactContentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * var client = new dlp.v2beta1.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * var name = 'EMAIL_ADDRESS';
+   * var infoTypesElement = {
+   *   name: name,
+   * };
+   * var infoTypes = [infoTypesElement];
+   * var inspectConfig = {
+   *   infoTypes: infoTypes,
+   * };
+   * var type = 'text/plain';
+   * var value = 'My email is example@example.com.';
+   * var itemsElement = {
+   *   type: type,
+   *   value: value,
+   * };
+   * var items = [itemsElement];
+   * var request = {
+   *   inspectConfig: inspectConfig,
+   *   items: items,
+   * };
+   * client.redactContent(request)
+   *   .then(responses => {
+   *     var response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  redactContent(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.redactContent(request, options, callback);
+  }
 
   /**
    * De-identifies potentially sensitive info from a list of strings.
@@ -416,170 +569,6 @@ class DlpServiceClient {
       options,
       callback
     );
-  }
-
-  /**
-   * Finds potentially sensitive info in a list of strings.
-   * This method has limits on input size, processing time, and output size.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {Object} request.inspectConfig
-   *   Configuration for the inspector.
-   *
-   *   This object should have the same structure as [InspectConfig]{@link google.privacy.dlp.v2beta1.InspectConfig}
-   * @param {Object[]} request.items
-   *   The list of items to inspect. Items in a single request are
-   *   considered "related" unless inspect_config.independent_inputs is true.
-   *   Up to 100 are allowed per request.
-   *
-   *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [InspectContentResponse]{@link google.privacy.dlp.v2beta1.InspectContentResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InspectContentResponse]{@link google.privacy.dlp.v2beta1.InspectContentResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const dlp = require('@google-cloud/dlp');
-   *
-   * var client = new dlp.v2beta1.DlpServiceClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * var name = 'EMAIL_ADDRESS';
-   * var infoTypesElement = {
-   *   name: name,
-   * };
-   * var infoTypes = [infoTypesElement];
-   * var inspectConfig = {
-   *   infoTypes: infoTypes,
-   * };
-   * var type = 'text/plain';
-   * var value = 'My email is example@example.com.';
-   * var itemsElement = {
-   *   type: type,
-   *   value: value,
-   * };
-   * var items = [itemsElement];
-   * var request = {
-   *   inspectConfig: inspectConfig,
-   *   items: items,
-   * };
-   * client.inspectContent(request)
-   *   .then(responses => {
-   *     var response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  inspectContent(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-
-    return this._innerApiCalls.inspectContent(request, options, callback);
-  }
-
-  /**
-   * Redacts potentially sensitive info from a list of strings.
-   * This method has limits on input size, processing time, and output size.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {Object} request.inspectConfig
-   *   Configuration for the inspector.
-   *
-   *   This object should have the same structure as [InspectConfig]{@link google.privacy.dlp.v2beta1.InspectConfig}
-   * @param {Object[]} request.items
-   *   The list of items to inspect. Up to 100 are allowed per request.
-   *
-   *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2beta1.ContentItem}
-   * @param {Object[]} request.replaceConfigs
-   *   The strings to replace findings text findings with. Must specify at least
-   *   one of these or one ImageRedactionConfig if redacting images.
-   *
-   *   This object should have the same structure as [ReplaceConfig]{@link google.privacy.dlp.v2beta1.ReplaceConfig}
-   * @param {Object[]} [request.imageRedactionConfigs]
-   *   The configuration for specifying what content to redact from images.
-   *
-   *   This object should have the same structure as [ImageRedactionConfig]{@link google.privacy.dlp.v2beta1.ImageRedactionConfig}
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [RedactContentResponse]{@link google.privacy.dlp.v2beta1.RedactContentResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RedactContentResponse]{@link google.privacy.dlp.v2beta1.RedactContentResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const dlp = require('@google-cloud/dlp');
-   *
-   * var client = new dlp.v2beta1.DlpServiceClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * var name = 'EMAIL_ADDRESS';
-   * var infoTypesElement = {
-   *   name: name,
-   * };
-   * var infoTypes = [infoTypesElement];
-   * var inspectConfig = {
-   *   infoTypes: infoTypes,
-   * };
-   * var type = 'text/plain';
-   * var value = 'My email is example@example.com.';
-   * var itemsElement = {
-   *   type: type,
-   *   value: value,
-   * };
-   * var items = [itemsElement];
-   * var name2 = 'EMAIL_ADDRESS';
-   * var infoType = {
-   *   name: name2,
-   * };
-   * var replaceWith = 'REDACTED';
-   * var replaceConfigsElement = {
-   *   infoType: infoType,
-   *   replaceWith: replaceWith,
-   * };
-   * var replaceConfigs = [replaceConfigsElement];
-   * var request = {
-   *   inspectConfig: inspectConfig,
-   *   items: items,
-   *   replaceConfigs: replaceConfigs,
-   * };
-   * client.redactContent(request)
-   *   .then(responses => {
-   *     var response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  redactContent(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-
-    return this._innerApiCalls.redactContent(request, options, callback);
   }
 
   /**

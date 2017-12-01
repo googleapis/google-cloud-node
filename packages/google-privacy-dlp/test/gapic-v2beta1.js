@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,180 @@ var error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DlpServiceClient', () => {
+  describe('inspectContent', () => {
+    it('invokes inspectContent without error', done => {
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'EMAIL_ADDRESS';
+      var infoTypesElement = {
+        name: name,
+      };
+      var infoTypes = [infoTypesElement];
+      var inspectConfig = {
+        infoTypes: infoTypes,
+      };
+      var type = 'text/plain';
+      var value = 'My email is example@example.com.';
+      var itemsElement = {
+        type: type,
+        value: value,
+      };
+      var items = [itemsElement];
+      var request = {
+        inspectConfig: inspectConfig,
+        items: items,
+      };
+
+      // Mock response
+      var expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.inspectContent(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes inspectContent with error', done => {
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'EMAIL_ADDRESS';
+      var infoTypesElement = {
+        name: name,
+      };
+      var infoTypes = [infoTypesElement];
+      var inspectConfig = {
+        infoTypes: infoTypes,
+      };
+      var type = 'text/plain';
+      var value = 'My email is example@example.com.';
+      var itemsElement = {
+        type: type,
+        value: value,
+      };
+      var items = [itemsElement];
+      var request = {
+        inspectConfig: inspectConfig,
+        items: items,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.inspectContent(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('redactContent', () => {
+    it('invokes redactContent without error', done => {
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'EMAIL_ADDRESS';
+      var infoTypesElement = {
+        name: name,
+      };
+      var infoTypes = [infoTypesElement];
+      var inspectConfig = {
+        infoTypes: infoTypes,
+      };
+      var type = 'text/plain';
+      var value = 'My email is example@example.com.';
+      var itemsElement = {
+        type: type,
+        value: value,
+      };
+      var items = [itemsElement];
+      var request = {
+        inspectConfig: inspectConfig,
+        items: items,
+      };
+
+      // Mock response
+      var expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.redactContent(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes redactContent with error', done => {
+      var client = new dlpModule.v2beta1.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var name = 'EMAIL_ADDRESS';
+      var infoTypesElement = {
+        name: name,
+      };
+      var infoTypes = [infoTypesElement];
+      var inspectConfig = {
+        infoTypes: infoTypes,
+      };
+      var type = 'text/plain';
+      var value = 'My email is example@example.com.';
+      var itemsElement = {
+        type: type,
+        value: value,
+      };
+      var items = [itemsElement];
+      var request = {
+        inspectConfig: inspectConfig,
+        items: items,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.redactContent(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('deidentifyContent', () => {
     it('invokes deidentifyContent without error', done => {
       var client = new dlpModule.v2beta1.DlpServiceClient({
@@ -177,202 +351,6 @@ describe('DlpServiceClient', () => {
         client._descriptors.longrunning.analyzeDataSourceRisk
           .metadataDecoder instanceof Function
       );
-    });
-  });
-
-  describe('inspectContent', () => {
-    it('invokes inspectContent without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      var name = 'EMAIL_ADDRESS';
-      var infoTypesElement = {
-        name: name,
-      };
-      var infoTypes = [infoTypesElement];
-      var inspectConfig = {
-        infoTypes: infoTypes,
-      };
-      var type = 'text/plain';
-      var value = 'My email is example@example.com.';
-      var itemsElement = {
-        type: type,
-        value: value,
-      };
-      var items = [itemsElement];
-      var request = {
-        inspectConfig: inspectConfig,
-        items: items,
-      };
-
-      // Mock response
-      var expectedResponse = {};
-
-      // Mock Grpc layer
-      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.inspectContent(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes inspectContent with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      var name = 'EMAIL_ADDRESS';
-      var infoTypesElement = {
-        name: name,
-      };
-      var infoTypes = [infoTypesElement];
-      var inspectConfig = {
-        infoTypes: infoTypes,
-      };
-      var type = 'text/plain';
-      var value = 'My email is example@example.com.';
-      var itemsElement = {
-        type: type,
-        value: value,
-      };
-      var items = [itemsElement];
-      var request = {
-        inspectConfig: inspectConfig,
-        items: items,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.inspectContent(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('redactContent', () => {
-    it('invokes redactContent without error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      var name = 'EMAIL_ADDRESS';
-      var infoTypesElement = {
-        name: name,
-      };
-      var infoTypes = [infoTypesElement];
-      var inspectConfig = {
-        infoTypes: infoTypes,
-      };
-      var type = 'text/plain';
-      var value = 'My email is example@example.com.';
-      var itemsElement = {
-        type: type,
-        value: value,
-      };
-      var items = [itemsElement];
-      var name2 = 'EMAIL_ADDRESS';
-      var infoType = {
-        name: name2,
-      };
-      var replaceWith = 'REDACTED';
-      var replaceConfigsElement = {
-        infoType: infoType,
-        replaceWith: replaceWith,
-      };
-      var replaceConfigs = [replaceConfigsElement];
-      var request = {
-        inspectConfig: inspectConfig,
-        items: items,
-        replaceConfigs: replaceConfigs,
-      };
-
-      // Mock response
-      var expectedResponse = {};
-
-      // Mock Grpc layer
-      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.redactContent(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes redactContent with error', done => {
-      var client = new dlpModule.v2beta1.DlpServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      var name = 'EMAIL_ADDRESS';
-      var infoTypesElement = {
-        name: name,
-      };
-      var infoTypes = [infoTypesElement];
-      var inspectConfig = {
-        infoTypes: infoTypes,
-      };
-      var type = 'text/plain';
-      var value = 'My email is example@example.com.';
-      var itemsElement = {
-        type: type,
-        value: value,
-      };
-      var items = [itemsElement];
-      var name2 = 'EMAIL_ADDRESS';
-      var infoType = {
-        name: name2,
-      };
-      var replaceWith = 'REDACTED';
-      var replaceConfigsElement = {
-        infoType: infoType,
-        replaceWith: replaceWith,
-      };
-      var replaceConfigs = [replaceConfigsElement];
-      var request = {
-        inspectConfig: inspectConfig,
-        items: items,
-        replaceConfigs: replaceConfigs,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.redactContent = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.redactContent(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
     });
   });
 

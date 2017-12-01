@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,11 @@
  *   Configuration of findings limit given for specified info types.
  *
  *   This object should have the same structure as [InfoTypeLimit]{@link google.privacy.dlp.v2beta1.InfoTypeLimit}
+ *
+ * @property {Object[]} customInfoTypes
+ *   Custom info types provided by the user.
+ *
+ *   This object should have the same structure as [CustomInfoType]{@link google.privacy.dlp.v2beta1.CustomInfoType}
  *
  * @typedef InspectConfig
  * @memberof google.privacy.dlp.v2beta1
@@ -355,7 +360,7 @@ var RedactContentRequest = {
   },
 
   /**
-   * Configuration for determing how redaction of images should occur.
+   * Configuration for determining how redaction of images should occur.
    *
    * @property {Object} infoType
    *   Only one per info_type should be provided per request. If not
@@ -1626,13 +1631,13 @@ var BucketingConfig = {
 };
 
 /**
- * Replaces an identifier with an surrogate using FPE with the FFX
+ * Replaces an identifier with a surrogate using FPE with the FFX
  * mode of operation.
  * The identifier must be representable by the US-ASCII character set.
  * For a given crypto key and context, the same identifier will be
  * replaced with the same surrogate.
- * Note that a given identifier must be either the empty string or be at
- * least two characters long.
+ * Identifiers must be at least two characters long.
+ * In the case that the identifier is the empty string, it will be skipped.
  *
  * @property {Object} cryptoKey
  *   The key used by the encryption algorithm. [required]
@@ -1925,7 +1930,7 @@ var RecordSuppression = {
 };
 
 /**
- * A condition for determing whether a transformation should be applied to
+ * A condition for determining whether a transformation should be applied to
  * a field.
  *
  * @property {Object} expressions

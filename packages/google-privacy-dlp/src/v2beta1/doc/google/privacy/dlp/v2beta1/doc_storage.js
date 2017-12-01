@@ -1,4 +1,4 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,79 @@
  */
 var InfoType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Custom information type provided by the user. Used to find domain-specific
+ * sensitive information configurable to the data in question.
+ *
+ * @property {Object} infoType
+ *   Info type configuration. All custom info types must have configurations
+ *   that do not conflict with built-in info types or other custom info types.
+ *
+ *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2beta1.InfoType}
+ *
+ * @property {Object} dictionary
+ *   Dictionary-based custom info type.
+ *
+ *   This object should have the same structure as [Dictionary]{@link google.privacy.dlp.v2beta1.Dictionary}
+ *
+ * @typedef CustomInfoType
+ * @memberof google.privacy.dlp.v2beta1
+ * @see [google.privacy.dlp.v2beta1.CustomInfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+ */
+var CustomInfoType = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Custom information type based on a dictionary of words or phrases. This can
+   * be used to match sensitive information specific to the data, such as a list
+   * of employee IDs or job titles.
+   *
+   * Dictionary words are case-insensitive and all characters other than letters
+   * and digits in the unicode [Basic Multilingual
+   * Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+   * will be replaced with whitespace when scanning for matches, so the
+   * dictionary phrase "Sam Johnson" will match all three phrases "sam johnson",
+   * "Sam, Johnson", and "Sam (Johnson)". Additionally, the characters
+   * surrounding any match must be of a different type than the adjacent
+   * characters within the word, so letters must be next to non-letters and
+   * digits next to non-digits. For example, the dictionary word "jen" will
+   * match the first three letters of the text "jen123" but will return no
+   * matches for "jennifer".
+   *
+   * Dictionary words containing a large number of characters that are not
+   * letters or digits may result in unexpected findings because such characters
+   * are treated as whitespace.
+   *
+   * @property {Object} wordList
+   *   List of words or phrases to search for.
+   *
+   *   This object should have the same structure as [WordList]{@link google.privacy.dlp.v2beta1.WordList}
+   *
+   * @typedef Dictionary
+   * @memberof google.privacy.dlp.v2beta1
+   * @see [google.privacy.dlp.v2beta1.CustomInfoType.Dictionary definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+   */
+  Dictionary: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+
+    /**
+     * Message defining a list of words or phrases to search for in the data.
+     *
+     * @property {string[]} words
+     *   Words or phrases defining the dictionary. The dictionary must contain
+     *   at least one phrase and every phrase must contain at least 2 characters
+     *   that are letters or digits. [required]
+     *
+     * @typedef WordList
+     * @memberof google.privacy.dlp.v2beta1
+     * @see [google.privacy.dlp.v2beta1.CustomInfoType.Dictionary.WordList definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2beta1/storage.proto}
+     */
+    WordList: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    }
+  }
 };
 
 /**
