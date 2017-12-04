@@ -22,7 +22,9 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var flatten = require('lodash.flatten');
+var is = require('is');
 var prop = require('propprop');
 var util = require('util');
 
@@ -57,11 +59,16 @@ var Request = require('./request.js');
  * @example
  * var transaction = datastore.transaction();
  */
-function Transaction(datastore) {
+function Transaction(datastore, options) {
   this.datastore = datastore;
 
   this.projectId = datastore.projectId;
   this.namespace = datastore.namespace;
+
+  options = options || {};
+
+  this.id = options.id;
+  this.readOnly = options.readOnly === true;
 
   this.request = datastore.request.bind(datastore);
 
@@ -349,7 +356,11 @@ Transaction.prototype.rollback = function(callback) {
  * Begin a remote transaction. In the callback provided, run your transactional
  * commands.
  *
- * @param {function} callback - The function to execute within the context of
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.readOnly - A read-only transaction cannot modify
+ *     entities. (Default: `false`)
+ * @param {string} options.transactionId - The ID of a previous transaction.
+ * @param {function=} callback - The function to execute within the context of
  *     a transaction.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:datastore/transaction} callback.transaction - This transaction
@@ -385,17 +396,40 @@ Transaction.prototype.rollback = function(callback) {
  *   var apiResponse = data[1];
  * });
  */
-Transaction.prototype.run = function(callback) {
+Transaction.prototype.run = function(options, callback) {
   var self = this;
 
-  callback = callback || common.util.noop;
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
 
   var protoOpts = {
     service: 'Datastore',
     method: 'beginTransaction'
   };
 
-  this.request_(protoOpts, function(err, resp) {
+  var reqOpts = {
+    transactionOptions: {}
+  };
+
+  if (options.readOnly || this.readOnly) {
+    reqOpts.transactionOptions.readOnly = {};
+  }
+
+  if (options.transactionId || this.id) {
+    reqOpts.transactionOptions.readWrite = {
+      previousTransaction: options.transactionId || this.id
+    };
+  }
+
+  extend(reqOpts, options);
+
+  callback = callback || common.util.noop;
+
+  this.request_(protoOpts, reqOpts, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

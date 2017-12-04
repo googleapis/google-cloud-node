@@ -383,6 +383,12 @@ describe('Datastore', function() {
       var transaction = datastore.transaction();
       assert.strictEqual(transaction.calledWith_[0], datastore);
     });
+
+    it('should pass options to the Transaction constructor', function() {
+      var options = {};
+      var transaction = datastore.transaction(options);
+      assert.strictEqual(transaction.calledWith_[1], options);
+    });
   });
 
   describe('determineBaseUrl_', function() {
