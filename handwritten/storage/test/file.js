@@ -1761,6 +1761,12 @@ describe('File', function() {
     });
 
     it('should create a signed policy', function(done) {
+      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
+        var policy = Buffer.from(blobToSign, 'base64').toString();
+        assert.strictEqual(typeof JSON.parse(policy), 'object');
+        callback(null, 'signature');
+      };
+
       file.getSignedPolicy(CONFIG, function(err, signedPolicy) {
         assert.ifError(err);
         assert.equal(typeof signedPolicy.string, 'string');

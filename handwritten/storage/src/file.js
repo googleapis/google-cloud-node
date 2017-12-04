@@ -1504,8 +1504,9 @@ File.prototype.getSignedPolicy = function(options, callback) {
   };
 
   var policyString = JSON.stringify(policy);
+  var policyBase64 = Buffer.from(policyString).toString('base64');
 
-  this.storage.authClient.sign(policyString, function(err, signature) {
+  this.storage.authClient.sign(policyBase64, function(err, signature) {
     if (err) {
       callback(new SigningError(err.message));
       return;
@@ -1513,7 +1514,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
 
     callback(null, {
       string: policyString,
-      base64: Buffer.from(policyString).toString('base64'),
+      base64: policyBase64,
       signature: signature,
     });
   });
