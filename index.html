@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="src/app-c66b5a94d3.css">
   <script type="text/javascript">
     var regex = /docs\/([\w-]+)/;
-    var matches = window.location.pathname.match(regex);
+    var matches = window.location.href.match(regex);
     if (matches) {
       if (matches[1] !== 'pubsub') {
         window.location = 'https://cloud.google.com/nodejs/docs/reference/' + matches[1] + '/latest/';
@@ -19,7 +19,8 @@
       window.location = 'https://cloud.google.com/nodejs/docs/reference/libraries';
     }
   </script>
- </head><body><!--[if lt IE 10]>
+ </head>
+ <body><!--[if lt IE 10]>
  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
  <![endif]--><main ui-view="" autoscroll="true"></main><script src="src/vendor-7562b190aa.js"></script><script src="src/app-283a9413c6.js"></script><script>
       (function() {
