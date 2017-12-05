@@ -84,9 +84,7 @@ test.serial(
       output,
       new RegExp(
         escape(
-          `Removed the following member(s) with role ${roleName} from ${
-            bucketName
-          }:`
+          `Removed the following member(s) with role ${roleName} from ${bucketName}:`
         )
       )
     );

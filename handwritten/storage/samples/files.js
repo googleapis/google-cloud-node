@@ -341,9 +341,7 @@ function moveFile(bucketName, srcFilename, destFilename) {
     .move(destFilename)
     .then(() => {
       console.log(
-        `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${
-          destFilename
-        }.`
+        `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${destFilename}.`
       );
     })
     .catch(err => {
@@ -375,9 +373,7 @@ function copyFile(srcBucketName, srcFilename, destBucketName, destFilename) {
     .copy(storage.bucket(destBucketName).file(destFilename))
     .then(() => {
       console.log(
-        `gs://${srcBucketName}/${srcFilename} copied to gs://${
-          destBucketName
-        }/${destFilename}.`
+        `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFilename}.`
       );
     })
     .catch(err => {

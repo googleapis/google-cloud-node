@@ -154,9 +154,7 @@ function removeBucketIamMember(bucketName, roleName, members) {
     })
     .then(() => {
       console.log(
-        `Removed the following member(s) with role ${roleName} from ${
-          bucketName
-        }:`
+        `Removed the following member(s) with role ${roleName} from ${bucketName}:`
       );
       members.forEach(member => {
         console.log(`  ${member}`);

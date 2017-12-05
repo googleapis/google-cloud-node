@@ -109,9 +109,7 @@ test.serial(`should download a file using requester-pays requests`, async t => {
   );
   t.is(
     output,
-    `gs://${bucketName}/${fileName} downloaded to ${
-      downloadFilePath
-    } using requester-pays requests.`
+    `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} using requester-pays requests.`
   );
   await t.notThrows(() => fs.statSync(downloadFilePath));
 });
