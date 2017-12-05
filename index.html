@@ -37,8 +37,9 @@
         var $http = $injector.get('$http');
         var $rootScope = $injector.get('$rootScope');
        
-        $rootScope.$on('$routeChangeSuccess', function(event, current) {
-          console.log(event, current);
+        $rootScope.$on('$stateChangeSuccess', function() {
+          var args = Array.prototype.slice.call(arguments);
+          console.log.apply(console, args);
           checkForRedirect();
         });
 
