@@ -383,8 +383,8 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
 
 /**
  * @typedef {array} CreateChannelResponse
- * @property {object} 0 The full API response.
- * @property {Channel} 1 The new {@link Channel}.
+ * @property {Channel} 0 The new {@link Channel}.
+ * @property {object} 1 The full API response.
  */
 /**
  * @callback CreateChannelCallback
