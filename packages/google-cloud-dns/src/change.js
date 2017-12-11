@@ -26,8 +26,10 @@ var util = require('util');
  * @param {string} id ID of the change.
  *
  * @example
- * var zone = dns.zone('zone-id');
- * var change = zone.change('change-id');
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ * const change = zone.change('change-id');
  */
 function Change(zone, id) {
   var methods = {
@@ -48,6 +50,11 @@ function Change(zone, id) {
      * @returns {Promise<ChangeExistsResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     * const change = zone.change('change-id');
+     *
      * change.exists(function(err, exists) {});
      *
      * //-
@@ -86,6 +93,11 @@ function Change(zone, id) {
      * @returns {Promise<GetChangeResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     * const change = zone.change('change-id');
+     *
      * change.get(function(err, change, apiResponse) {
      *   // `change.metadata` has been populated.
      * });
@@ -114,13 +126,18 @@ function Change(zone, id) {
     /**
      * Get the metadata for the change in the zone.
      *
-     * @resource [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
+     * @see [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
      *
      * @method Change#getMetadata
      * @param {GetChangeMetadataCallback} [callback] Callback function.
      * @returns {Promise<GetChangeMetadataResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     * const change = zone.change('change-id');
+     *
      * change.getMetadata(function(err, metadata, apiResponse) {
      *   if (!err) {
      *     // metadata = {
@@ -180,7 +197,12 @@ util.inherits(Change, common.ServiceObject);
  * @returns {Promise<CreateChangeResponse>}
  *
  * @example
- * var config = {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ * const change = zone.change('change-id');
+ *
+ * const config = {
  *   add: {
  *     // ...
  *   }
@@ -192,13 +214,12 @@ util.inherits(Change, common.ServiceObject);
  *   }
  * });
  *
- *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * change.create(config).then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Change.prototype.create = function(config, callback) {

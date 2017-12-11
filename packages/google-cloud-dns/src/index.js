@@ -132,7 +132,10 @@ util.inherits(DNS, common.Service);
  * @see Zone#create
  *
  * @example
- * var config = {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const config = {
  *   dnsName: 'example.com.', // note the period at the end of the domain.
  *   description: 'This zone is awesome!'
  * };
@@ -147,8 +150,8 @@ util.inherits(DNS, common.Service);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * dns.createZone('my-awesome-zone', config).then(function(data) {
- *   var zone = data[0];
- *   var apiResponse = data[1];
+ *   const zone = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 DNS.prototype.createZone = function(name, config, callback) {
@@ -220,13 +223,16 @@ DNS.prototype.createZone = function(name, config, callback) {
  * @returns {Promise<GetZonesResponse>}
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
  * dns.getZones(function(err, zones, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * dns.getZones().then(function(data) {
- *   var zones = data[0];
+ *   const zones = data[0];
  * });
  */
 DNS.prototype.getZones = function(query, callback) {
@@ -276,6 +282,9 @@ DNS.prototype.getZones = function(query, callback) {
  * @returns {ReadableStream} A readable stream that emits {@link Zone} instances.
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
  * dns.getZonesStream()
  *   .on('error', console.error)
  *   .on('data', function(zone) {
@@ -306,7 +315,10 @@ DNS.prototype.getZonesStream = common.paginator.streamify('getZones');
  * @throws {error} If a zone name is not provided.
  *
  * @example
- * var zone = dns.zone('my-zone');
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const zone = dns.zone('my-zone');
  */
 DNS.prototype.zone = function(name) {
   if (!name) {

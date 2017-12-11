@@ -37,9 +37,11 @@ var format = require('string-format-obj');
  *     resolvers.
  *
  * @example
- * var zone = dns.zone('my-awesome-zone');
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('my-awesome-zone');
  *
- * var record = zone.record('a', {
+ * const record = zone.record('a', {
  *   name: 'example.com.',
  *   ttl: 86400,
  *   data: '1.2.3.4'
@@ -133,6 +135,15 @@ Record.fromZoneRecord_ = function(zone, type, bindData) {
  * @returns {Promise<DeleteRecordResponse>}
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ * const record = zone.record('a', {
+ *   name: 'example.com.',
+ *   ttl: 86400,
+ *   data: '1.2.3.4'
+ * });
+ *
  * record.delete(function(err, change, apiResponse) {
  *   if (!err) {
  *     // Delete change modification was created.

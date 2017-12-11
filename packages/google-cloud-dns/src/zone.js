@@ -36,7 +36,10 @@ var Record = require('./record.js');
  * @class
  *
  * @example
- * var zone = dns.zone('zone-id');
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const zone = dns.zone('zone-id');
  */
 function Zone(dns, name) {
   var methods = {
@@ -49,7 +52,10 @@ function Zone(dns, name) {
      * @returns {Promise<CreateZoneResponse>}
      *
      * @example
-     * var config = {
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     *
+     * const config = {
      *   dnsName: 'example.com.',
      *   // ...
      * };
@@ -64,8 +70,8 @@ function Zone(dns, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.create(config).then(function(data) {
-     *   var zone = data[0];
-     *   var apiResponse = data[1];
+     *   const zone = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     create: true,
@@ -87,13 +93,17 @@ function Zone(dns, name) {
      * @returns {Promise<ZoneExistsResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     *
      * zone.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -125,6 +135,10 @@ function Zone(dns, name) {
      * @returns {Promise<GetZoneResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     *
      * zone.get(function(err, zone, apiResponse) {
      *   // `zone.metadata` has been populated.
      * });
@@ -133,8 +147,8 @@ function Zone(dns, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.get().then(function(data) {
-     *   var zone = data[0];
-     *   var apiResponse = data[1];
+     *   const zone = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -160,14 +174,18 @@ function Zone(dns, name) {
      * @returns {Promise<GetZoneMetadataResponse>}
      *
      * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     * const zone = dns.zone('zone-id');
+     *
      * zone.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     getMetadata: true,
@@ -242,7 +260,10 @@ Zone.prototype.addRecords = function(records, callback) {
  * @returns {Change}
  *
  * @example
- * var change = zone.change('change-id');
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ * const change = zone.change('change-id');
  */
 Zone.prototype.change = function(id) {
   return new Change(this, id);
@@ -279,19 +300,23 @@ Zone.prototype.change = function(id) {
  * @returns {Promise<CreateChangeResponse>}
  *
  * @example
- * var oldARecord = zone.record('a', {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
+ * const oldARecord = zone.record('a', {
  *   name: 'example.com.',
  *   data: '1.2.3.4',
  *   ttl: 86400
  * });
  *
- * var newARecord = zone.record('a', {
+ * const newARecord = zone.record('a', {
  *   name: 'example.com.',
  *   data: '5.6.7.8',
  *   ttl: 86400
  * });
  *
- * var config = {
+ * const config = {
  *   add: newARecord,
  *   delete: oldARecord
  * };
@@ -306,8 +331,8 @@ Zone.prototype.change = function(id) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.createChange(config).then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Zone.prototype.createChange = function(config, callback) {
@@ -370,6 +395,10 @@ Zone.prototype.createChange = function(config, callback) {
  * @returns {Promise<DeleteZoneResponse>}
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
  * zone.delete(function(err, apiResponse) {
  *   if (!err) {
  *     // The zone is now deleted.
@@ -391,7 +420,7 @@ Zone.prototype.createChange = function(config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.delete().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Zone.prototype.delete = function(options, callback) {
@@ -439,13 +468,17 @@ Zone.prototype.delete = function(options, callback) {
  * @returns {Promise<ZoneDeleteRecordsResponse>}
  *
  * @example
- * var oldARecord = zone.record('a', {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
+ * const oldARecord = zone.record('a', {
  *   name: 'example.com.',
  *   data: '1.2.3.4',
  *   ttl: 86400
  * });
  *
- * var callback = function(err, change, apiResponse) {
+ * const callback = function(err, change, apiResponse) {
  *   if (!err) {
  *     // Delete change modification was created.
  *   }
@@ -456,13 +489,13 @@ Zone.prototype.delete = function(options, callback) {
  * //-
  * // Delete multiple records at once.
  * //-
- * var oldNs1Record = zone.record('ns', {
+ * const oldNs1Record = zone.record('ns', {
  *   name: 'example.com.',
  *   data: 'ns-cloud1.googledomains.com.',
  *   ttl: 86400
  * });
  *
- * var oldNs2Record = zone.record('ns', {
+ * const oldNs2Record = zone.record('ns', {
  *   name: 'example.com.',
  *   data: 'ns-cloud2.googledomains.com.',
  *   ttl: 86400
@@ -488,8 +521,8 @@ Zone.prototype.delete = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.deleteRecords(oldARecord).then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Zone.prototype.deleteRecords = function(records, callback) {
@@ -570,7 +603,11 @@ Zone.prototype.empty = function(callback) {
  * @returns {Promise<ZoneExportResponse>}
  *
  * @example
- * var zoneFilename = '/Users/stephen/zonefile.zone';
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
+ * const zoneFilename = '/Users/stephen/zonefile.zone';
  *
  * zone.export(zoneFilename, function(err) {
  *   if (!err) {
@@ -633,7 +670,10 @@ Zone.prototype.export = function(localPath, callback) {
  * @returns {Promise<GetChangesResponse>}
  *
  * @example
- * var callback = function(err, changes, nextQuery, apiResponse) {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const callback = function(err, changes, nextQuery, apiResponse) {
  *   // The `metadata` property is populated for you with the metadata at the
  *   // time of fetching.
  *   changes[0].metadata;
@@ -648,13 +688,15 @@ Zone.prototype.export = function(localPath, callback) {
  *   }
  * };
  *
+ * const zone = dns.zone('zone-id');
+ *
  * zone.getChanges(callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getChanges().then(function(data) {
- *   var changes = data[0];
+ *   const changes = data[0];
  * });
  */
 Zone.prototype.getChanges = function(query, callback) {
@@ -765,7 +807,10 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  * @returns {Promise<GetRecordsResponse>}
  *
  * @example
- * var callback = function(err, records, nextQuery, apiResponse) {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const callback = function(err, records, nextQuery, apiResponse) {
  *   if (!err) {
  *     // records is an array of Record objects.
  *   }
@@ -775,6 +820,8 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  *   }
  * };
  *
+ * const zone = dns.zone('zone-id');
+ *
  * zone.getRecords(callback);
  *
  * //-
@@ -782,7 +829,7 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  * //-
  *
  * // Get the namespace records for example.com.
- * var query = {
+ * const query = {
  *   name: 'example.com.',
  *   type: 'NS'
  * };
@@ -812,7 +859,7 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getRecords(query).then(function(data) {
- *   var records = data[0];
+ *   const records = data[0];
  * });
  */
 Zone.prototype.getRecords = function(query, callback) {
@@ -882,6 +929,10 @@ Zone.prototype.getRecords = function(query, callback) {
  *     instances.
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
  * zone.getRecordsStream()
  *   .on('error', console.error)
  *   .on('data', function(record) {
@@ -922,7 +973,11 @@ Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
  * @param {ZoneImportCallback} [callback] Callback function.
  * @returns {Promise<ZoneImportResponse>}
  * @example
- * var zoneFilename = '/Users/dave/zonefile.zone';
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
+ *
+ * const zoneFilename = '/Users/dave/zonefile.zone';
  *
  * zone.import(zoneFilename, function(err, change, apiResponse) {
  *   if (!err) {
@@ -934,8 +989,8 @@ Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.import(zoneFilename).then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Zone.prototype.import = function(localPath, callback) {
@@ -984,10 +1039,15 @@ Zone.prototype.import = function(localPath, callback) {
  * @returns {Record}
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const zone = dns.zone('zone-id');
+ *
  * //-
  * // Reference an existing record to delete from your zone.
  * //-
- * var oldARecord = zone.record('a', {
+ * const oldARecord = zone.record('a', {
  *   name: 'example.com.',
  *   data: '1.2.3.4',
  *   ttl: 86400
@@ -996,7 +1056,7 @@ Zone.prototype.import = function(localPath, callback) {
  * //-
  * // Construct a record to add to your zone.
  * //-
- * var newARecord = zone.record('a', {
+ * const newARecord = zone.record('a', {
  *   name: 'example.com.',
  *   data: '5.6.7.8',
  *   ttl: 86400
@@ -1041,19 +1101,24 @@ Zone.prototype.record = function(type, metadata) {
  * @returns {Promise<ZoneReplaceRecordsResponse>}
  *
  * @example
- * var newNs1Record = zone.record('ns', {
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ *
+ * const zone = dns.zone('zone-id');
+ *
+ * const newNs1Record = zone.record('ns', {
  *   name: 'example.com.',
  *   data: 'ns-cloud1.googledomains.com.',
  *   ttl: 86400
  * });
  *
- * var newNs2Record = zone.record('ns', {
+ * const newNs2Record = zone.record('ns', {
  *   name: 'example.com.',
  *   data: 'ns-cloud2.googledomains.com.',
  *   ttl: 86400
  * });
  *
- * var newNsRecords = [
+ * const newNsRecords = [
  *   newNs1Record,
  *   newNs2Record
  * ];
@@ -1068,8 +1133,8 @@ Zone.prototype.record = function(type, metadata) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.replaceRecords('ns', newNsRecords).then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
@@ -1100,6 +1165,9 @@ Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
  * @param {function} callback Callback function.
  *
  * @example
+ * const DNS = require('@google-cloud/dns');
+ * const dns = new DNS();
+ * const zone = dns.zone('zone-id');
  * zone.deleteRecordsByType_(['NS', 'A'], function(err, change, apiResponse) {
  *   if (!err) {
  *     // The change was created successfully.
