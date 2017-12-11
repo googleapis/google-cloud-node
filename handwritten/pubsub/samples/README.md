@@ -1,82 +1,31 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Pub/Sub Node.js Samples
+# Google Cloud Pub/Sub: Node.js Samples
 
-[![Build](https://storage.googleapis.com/cloud-docs-samples-badges/GoogleCloudPlatform/nodejs-docs-samples/nodejs-docs-samples-pubsub.svg)]()
+[![Open in Cloud Shell][shell_img]][shell_link]
 
 [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs) is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Topics](#topics)
   * [Subscriptions](#subscriptions)
-* [Running the tests](#running-the-tests)
+  * [Topics](#topics)
 
-## Setup
+## Before you begin
 
-1.  Read [Prerequisites][prereq] and [How to run a sample][run] first.
-1.  Install dependencies:
-
-    With **npm**:
-
-        npm install
-
-    With **yarn**:
-
-        yarn install
-
-[prereq]: ../README.md#prerequisites
-[run]: ../README.md#how-to-run-a-sample
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
-### Topics
-
-View the [documentation][topics_0_docs] or the [source code][topics_0_code].
-
-__Usage:__ `node topics.js --help`
-
-```
-topics.js <command>
-
-Commands:
-  topics.js list                                   Lists all topics in the current project.
-  topics.js create <topicName>                     Creates a new topic.
-  topics.js delete <topicName>                     Deletes a topic.
-  topics.js publish <topicName> <message>          Publishes a message to a topic.
-  topics.js publish-batch <topicName> <message>    Publishes messages to a topic using custom batching settings.
-  topics.js publish-ordered <topicName> <message>  Publishes an ordered message to a topic.
-  topics.js get-policy <topicName>                 Gets the IAM policy for a topic.
-  topics.js set-policy <topicName>                 Sets the IAM policy for a topic.
-  topics.js test-permissions <topicName>           Tests the permissions for a topic.
-
-Options:
-  --version  Show version number                                                                               [boolean]
-  --help     Show help                                                                                         [boolean]
-
-Examples:
-  node topics.js list
-  node topics.js create my-topic
-  node topics.js delete my-topic
-  node topics.js publish my-topic "Hello, world!"
-  node topics.js publish my-topic '{"data":"Hello, world!"}'
-  node topics.js publish-ordered my-topic "Hello, world!"
-  node topics.js publish-batch my-topic "Hello, world!" -w 1000
-  node topics.js get-policy greetings
-  node topics.js set-policy greetings
-  node topics.js test-permissions greetings
-
-For more information, see https://cloud.google.com/pubsub/docs
-```
-
-[topics_0_docs]: https://cloud.google.com/pubsub/publisher
-[topics_0_code]: topics.js
-
 ### Subscriptions
 
-View the [documentation][subscriptions_1_docs] or the [source code][subscriptions_1_code].
+View the [source code][subscriptions_0_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/subscriptions.js,samples/README.md)
 
 __Usage:__ `node subscriptions.js --help`
 
@@ -123,19 +72,52 @@ Examples:
 For more information, see https://cloud.google.com/pubsub/docs
 ```
 
-[subscriptions_1_docs]: https://cloud.google.com/pubsub/subscriber
-[subscriptions_1_code]: subscriptions.js
+[subscriptions_0_docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/subscription
+[subscriptions_0_code]: subscriptions.js
 
-## Running the tests
+### Topics
 
-1.  Set the **GCLOUD_PROJECT** and **GOOGLE_APPLICATION_CREDENTIALS** environment variables.
+View the [source code][topics_1_code].
 
-1.  Run the tests:
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/topics.js,samples/README.md)
 
-    With **npm**:
+__Usage:__ `node topics.js --help`
 
-        npm test
+```
+topics.js <command>
 
-    With **yarn**:
+Commands:
+  topics.js list                                   Lists all topics in the current project.
+  topics.js create <topicName>                     Creates a new topic.
+  topics.js delete <topicName>                     Deletes a topic.
+  topics.js publish <topicName> <message>          Publishes a message to a topic.
+  topics.js publish-batch <topicName> <message>    Publishes messages to a topic using custom batching settings.
+  topics.js publish-ordered <topicName> <message>  Publishes an ordered message to a topic.
+  topics.js get-policy <topicName>                 Gets the IAM policy for a topic.
+  topics.js set-policy <topicName>                 Sets the IAM policy for a topic.
+  topics.js test-permissions <topicName>           Tests the permissions for a topic.
 
-        yarn test
+Options:
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
+
+Examples:
+  node topics.js list
+  node topics.js create my-topic
+  node topics.js delete my-topic
+  node topics.js publish my-topic "Hello, world!"
+  node topics.js publish my-topic '{"data":"Hello, world!"}'
+  node topics.js publish-ordered my-topic "Hello, world!"
+  node topics.js publish-batch my-topic "Hello, world!" -w 1000
+  node topics.js get-policy greetings
+  node topics.js set-policy greetings
+  node topics.js test-permissions greetings
+
+For more information, see https://cloud.google.com/pubsub/docs
+```
+
+[topics_1_docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic
+[topics_1_code]: topics.js
+
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/README.md

@@ -29,35 +29,39 @@ const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 test.before(tools.stubConsole);
 test.after.always(() => {
   tools.restoreConsole();
-  return pubsub.topic(topicName).delete().catch(() => {});
+  return pubsub
+    .topic(topicName)
+    .delete()
+    .catch(() => {});
 });
 
-test.cb(`should create a topic`, (t) => {
+test.cb(`should create a topic`, t => {
   const expectedTopicName = `my-new-topic`;
   const pubsubMock = {
-    createTopic: (_topicName) => {
+    createTopic: _topicName => {
       t.is(_topicName, expectedTopicName);
 
-      return pubsub.createTopic(topicName)
-        .then(([topic]) => {
-          t.is(topic.name, fullTopicName);
+      return pubsub.createTopic(topicName).then(([topic]) => {
+        t.is(topic.name, fullTopicName);
 
-          setTimeout(() => {
-            try {
-              t.is(console.log.callCount, 1);
-              t.deepEqual(console.log.getCall(0).args, [`Topic ${topic.name} created.`]);
-              t.end();
-            } catch (err) {
-              t.end(err);
-            }
-          }, 200);
+        setTimeout(() => {
+          try {
+            t.is(console.log.callCount, 1);
+            t.deepEqual(console.log.getCall(0).args, [
+              `Topic ${topic.name} created.`,
+            ]);
+            t.end();
+          } catch (err) {
+            t.end(err);
+          }
+        }, 200);
 
-          return [topic];
-        });
-    }
+        return [topic];
+      });
+    },
   };
 
   proxyquire(`../quickstart`, {
-    '@google-cloud/pubsub': sinon.stub().returns(pubsubMock)
+    '@google-cloud/pubsub': sinon.stub().returns(pubsubMock),
   });
 });

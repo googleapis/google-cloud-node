@@ -24,19 +24,20 @@ const projectId = 'YOUR_PROJECT_ID';
 
 // Instantiates a client
 const pubsubClient = PubSub({
-  projectId: projectId
+  projectId: projectId,
 });
 
 // The name for the new topic
 const topicName = 'my-new-topic';
 
 // Creates the new topic
-pubsubClient.createTopic(topicName)
-  .then((results) => {
+pubsubClient
+  .createTopic(topicName)
+  .then(results => {
     const topic = results[0];
     console.log(`Topic ${topic.name} created.`);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error('ERROR:', err);
   });
 // [END pubsub_quickstart]

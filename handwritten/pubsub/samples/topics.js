@@ -26,42 +26,40 @@
 const PubSub = require(`@google-cloud/pubsub`);
 
 // [START pubsub_list_topics]
-function listAllTopics () {
+function listAllTopics() {
   // Instantiates a client
   const pubsub = PubSub();
 
   // Lists all topics in the current project
-  return pubsub.getTopics()
-    .then((results) => {
-      const topics = results[0];
+  return pubsub.getTopics().then(results => {
+    const topics = results[0];
 
-      console.log('Topics:');
-      topics.forEach((topic) => console.log(topic.name));
+    console.log('Topics:');
+    topics.forEach(topic => console.log(topic.name));
 
-      return topics;
-    });
+    return topics;
+  });
 }
 // [END pubsub_list_topics]
 
 // [START pubsub_create_topic]
-function createTopic (topicName) {
+function createTopic(topicName) {
   // Instantiates a client
   const pubsub = PubSub();
 
   // Creates a new topic, e.g. "my-new-topic"
-  return pubsub.createTopic(topicName)
-    .then((results) => {
-      const topic = results[0];
+  return pubsub.createTopic(topicName).then(results => {
+    const topic = results[0];
 
-      console.log(`Topic ${topic.name} created.`);
+    console.log(`Topic ${topic.name} created.`);
 
-      return topic;
-    });
+    return topic;
+  });
 }
 // [END pubsub_create_topic]
 
 // [START pubsub_delete_topic]
-function deleteTopic (topicName) {
+function deleteTopic(topicName) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -69,15 +67,14 @@ function deleteTopic (topicName) {
   const topic = pubsub.topic(topicName);
 
   // Deletes the topic
-  return topic.delete()
-    .then(() => {
-      console.log(`Topic ${topic.name} deleted.`);
-    });
+  return topic.delete().then(() => {
+    console.log(`Topic ${topic.name} deleted.`);
+  });
 }
 // [END pubsub_delete_topic]
 
 // [START pubsub_publish_message]
-function publishMessage (topicName, data) {
+function publishMessage(topicName, data) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -89,19 +86,18 @@ function publishMessage (topicName, data) {
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
-  return publisher.publish(dataBuffer)
-    .then((results) => {
-      const messageId = results[0];
+  return publisher.publish(dataBuffer).then(results => {
+    const messageId = results[0];
 
-      console.log(`Message ${messageId} published.`);
+    console.log(`Message ${messageId} published.`);
 
-      return messageId;
-    });
+    return messageId;
+  });
 }
 // [END pubsub_publish_message]
 
 // [START pubsub_publisher_batched_settings]
-function publishBatchedMessages (topicName, data, maxMessages, maxWaitTime) {
+function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -112,35 +108,34 @@ function publishBatchedMessages (topicName, data, maxMessages, maxWaitTime) {
   const publisher = topic.publisher({
     batching: {
       maxMessages: maxMessages,
-      maxMilliseconds: maxWaitTime
-    }
+      maxMilliseconds: maxWaitTime,
+    },
   });
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
-  return publisher.publish(dataBuffer)
-    .then((results) => {
-      const messageId = results[0];
+  return publisher.publish(dataBuffer).then(results => {
+    const messageId = results[0];
 
-      console.log(`Message ${messageId} published.`);
+    console.log(`Message ${messageId} published.`);
 
-      return messageId;
-    });
+    return messageId;
+  });
 }
 // [END pubsub_publisher_batched_settings]
 
 let publishCounterValue = 1;
 
-function getPublishCounterValue () {
+function getPublishCounterValue() {
   return publishCounterValue;
 }
 
-function setPublishCounterValue (value) {
+function setPublishCounterValue(value) {
   publishCounterValue = value;
 }
 
 // [START pubsub_publish_ordered_message]
-function publishOrderedMessage (topicName, data) {
+function publishOrderedMessage(topicName, data) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -154,26 +149,25 @@ function publishOrderedMessage (topicName, data) {
   const dataBuffer = Buffer.from(data);
   const attributes = {
     // Pub/Sub messages are unordered, so assign an order ID and manually order messages
-    counterId: `${getPublishCounterValue()}`
+    counterId: `${getPublishCounterValue()}`,
   };
 
   // Publishes the message
-  return publisher.publish(dataBuffer, attributes)
-    .then((results) => {
-      const messageId = results[0];
+  return publisher.publish(dataBuffer, attributes).then(results => {
+    const messageId = results;
 
-      // Update the counter value
-      setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
+    // Update the counter value
+    setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
 
-      console.log(`Message ${messageId} published.`);
+    console.log(`Message ${messageId} published.`);
 
-      return messageId;
-    });
+    return messageId;
+  });
 }
 // [END pubsub_publish_ordered_message]
 
 // [START pubsub_get_topic_policy]
-function getTopicPolicy (topicName) {
+function getTopicPolicy(topicName) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -181,19 +175,18 @@ function getTopicPolicy (topicName) {
   const topic = pubsub.topic(topicName);
 
   // Retrieves the IAM policy for the topic
-  return topic.iam.getPolicy()
-    .then((results) => {
-      const policy = results[0];
+  return topic.iam.getPolicy().then(results => {
+    const policy = results[0];
 
-      console.log(`Policy for topic: %j.`, policy.bindings);
+    console.log(`Policy for topic: %j.`, policy.bindings);
 
-      return policy;
-    });
+    return policy;
+  });
 }
 // [END pubsub_get_topic_policy]
 
 // [START pubsub_set_topic_policy]
-function setTopicPolicy (topicName) {
+function setTopicPolicy(topicName) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -206,30 +199,29 @@ function setTopicPolicy (topicName) {
       {
         // Add a group as editors
         role: `roles/pubsub.editor`,
-        members: [`group:cloud-logs@google.com`]
+        members: [`group:cloud-logs@google.com`],
       },
       {
         // Add all users as viewers
         role: `roles/pubsub.viewer`,
-        members: [`allUsers`]
-      }
-    ]
+        members: [`allUsers`],
+      },
+    ],
   };
 
   // Updates the IAM policy for the topic
-  return topic.iam.setPolicy(newPolicy)
-    .then((results) => {
-      const updatedPolicy = results[0];
+  return topic.iam.setPolicy(newPolicy).then(results => {
+    const updatedPolicy = results[0];
 
-      console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
+    console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
 
-      return updatedPolicy;
-    });
+    return updatedPolicy;
+  });
 }
 // [END pubsub_set_topic_policy]
 
 // [START pubsub_test_topic_permissions]
-function testTopicPermissions (topicName) {
+function testTopicPermissions(topicName) {
   // Instantiates a client
   const pubsub = PubSub();
 
@@ -239,22 +231,21 @@ function testTopicPermissions (topicName) {
   const permissionsToTest = [
     `pubsub.topics.attachSubscription`,
     `pubsub.topics.publish`,
-    `pubsub.topics.update`
+    `pubsub.topics.update`,
   ];
 
   // Tests the IAM policy for the specified topic
-  return topic.iam.testPermissions(permissionsToTest)
-    .then((results) => {
-      const permissions = results[0];
+  return topic.iam.testPermissions(permissionsToTest).then(results => {
+    const permissions = results[0];
 
-      console.log(`Tested permissions for topic: %j`, permissions);
+    console.log(`Tested permissions for topic: %j`, permissions);
 
-      return permissions;
-    });
+    return permissions;
+  });
 }
 // [END pubsub_test_topic_permissions]
 
-module.exports = { publishOrderedMessage };
+module.exports = {publishOrderedMessage};
 
 const cli = require(`yargs`)
   .demand(1)
@@ -264,50 +255,49 @@ const cli = require(`yargs`)
     {},
     listAllTopics
   )
-  .command(
-    `create <topicName>`,
-    `Creates a new topic.`,
-    {},
-    (opts) => createTopic(opts.topicName)
+  .command(`create <topicName>`, `Creates a new topic.`, {}, opts =>
+    createTopic(opts.topicName)
   )
-  .command(
-    `delete <topicName>`,
-    `Deletes a topic.`,
-    {},
-    (opts) => deleteTopic(opts.topicName)
+  .command(`delete <topicName>`, `Deletes a topic.`, {}, opts =>
+    deleteTopic(opts.topicName)
   )
   .command(
     `publish <topicName> <message>`,
     `Publishes a message to a topic.`,
     {},
-    (opts) => {
+    opts => {
       publishMessage(opts.topicName, opts.message);
     }
   )
-    .command(
+  .command(
     `publish-batch <topicName> <message>`,
     `Publishes messages to a topic using custom batching settings.`,
-  {
-    maxWaitTime: {
-      alias: 'w',
-      type: 'number',
-      default: 10
+    {
+      maxWaitTime: {
+        alias: 'w',
+        type: 'number',
+        default: 10,
+      },
+      maxMessages: {
+        alias: 'm',
+        type: 'number',
+        default: 10,
+      },
     },
-    maxMessages: {
-      alias: 'm',
-      type: 'number',
-      default: 10
-    }
-  },
-    (opts) => {
-      publishBatchedMessages(opts.topicName, opts.message, opts.maxMessages, opts.maxWaitTime);
+    opts => {
+      publishBatchedMessages(
+        opts.topicName,
+        opts.message,
+        opts.maxMessages,
+        opts.maxWaitTime
+      );
     }
   )
   .command(
     `publish-ordered <topicName> <message>`,
     `Publishes an ordered message to a topic.`,
     {},
-    (opts) => {
+    opts => {
       try {
         opts.message = JSON.parse(opts.message);
       } catch (err) {
@@ -320,19 +310,19 @@ const cli = require(`yargs`)
     `get-policy <topicName>`,
     `Gets the IAM policy for a topic.`,
     {},
-    (opts) => getTopicPolicy(opts.topicName)
+    opts => getTopicPolicy(opts.topicName)
   )
   .command(
     `set-policy <topicName>`,
     `Sets the IAM policy for a topic.`,
     {},
-    (opts) => setTopicPolicy(opts.topicName)
+    opts => setTopicPolicy(opts.topicName)
   )
   .command(
     `test-permissions <topicName>`,
     `Tests the permissions for a topic.`,
     {},
-    (opts) => testTopicPermissions(opts.topicName)
+    opts => testTopicPermissions(opts.topicName)
   )
   .example(`node $0 list`)
   .example(`node $0 create my-topic`)
