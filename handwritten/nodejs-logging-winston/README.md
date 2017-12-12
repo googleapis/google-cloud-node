@@ -2,6 +2,8 @@
 
 # [Stackdriver Logging for Winston](https://github.com/googleapis/nodejs-logging-winston)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-logging-winston.svg)](https://greenkeeper.io/)
+
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-logging-winston.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-logging-winston)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-logging-winston?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-logging-winston)
