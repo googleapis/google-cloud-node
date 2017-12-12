@@ -92,6 +92,9 @@ var Snapshot = require('./snapshot.js');
  *     messages. Default: Infinity.
  * @param {number} options.maxConnections - Use this to limit the number of
  *     connections to be used when sending and receiving messages. Default: 5.
+ * @param {number} options.ackDeadline - The maximum time after receiving a
+ *     message that you must ack a message before it is redelivered, in
+ *     milliseconds. Default: 10000.
  *
  * @example
  * //-
@@ -165,7 +168,7 @@ function Subscription(pubsub, name, options) {
   this.name = Subscription.formatName_(pubsub.projectId, name);
 
   this.connectionPool = null;
-  this.ackDeadline = 10000;
+  this.ackDeadline = options.ackDeadline || 10000;
   this.maxConnections = options.maxConnections || 5;
 
   this.inventory_ = {
