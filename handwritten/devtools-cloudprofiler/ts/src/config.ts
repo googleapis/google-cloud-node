@@ -16,6 +16,7 @@
 
 import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
 
+const parseDuration: (str: string) => number = require('parse-duration');
 const common: Common = require('@google-cloud/common');
 const extend = require('extend');
 
@@ -78,9 +79,29 @@ export interface Config extends AuthenticationConfig {
   // stack depth may increase overhead of profiling.
   heapMaxStackDepth?: number;
 
-  // Time to wait before trying to create a profile again if profile creation
-  // fails.
-  backoffMillis?: number;
+  // On each consecutive error in profile creation, the backoff envelope will
+  // increase by this factor. The backoff will be a random value selected
+  // from a uniform distribution between 0 and the backoff envelope.
+  backoffMultiplier?: number;
+
+  // On first error during profile creation, if the backoff is not specified
+  // by the server response, then profiler will wait between 0 and
+  // initialBackoffMillis before asking the server to create a profile again.
+  // After a successful profile creation, the backoff envelope will be reset to
+  // initialBackoffMillis.
+  initialBackoffMillis?: number;
+
+  // If the backoff is not specified by the server response, then profiler will
+  // wait at most backoffCapMillis before asking server to create a profile
+  // again.
+  backoffCapMillis?: number;
+
+  // Server-specified backoffs will be capped at serverBackoffCapMillis.
+  // The backoff is capped here because setTimeout (which is used to control
+  // when next profile is collected) will run immediately if the backoff is
+  // too large.
+  // https://nodejs.org/dist/latest-v9.x/docs/api/timers.html#timers_settimeout_callback_delay_args.
+  serverBackoffCapMillis?: number;
 }
 
 // Interface for an initialized config.
@@ -95,7 +116,10 @@ export interface ProfilerConfig extends AuthenticationConfig {
   timeIntervalMicros: number;
   heapIntervalBytes: number;
   heapMaxStackDepth: number;
-  backoffMillis: number;
+  initialBackoffMillis: number;
+  backoffCapMillis: number;
+  backoffMultiplier: number;
+  serverBackoffCapMillis: number;
 }
 
 // Default values for configuration for a profiler.
@@ -107,5 +131,12 @@ export const defaultConfig = {
   timeIntervalMicros: 1000,
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
-  backoffMillis: 5 * 60 * 1000
+  initialBackoffMillis: 1000,
+  backoffCapMillis: parseDuration('1h'),
+  backoffMultiplier: 1.3,
+
+  // This is the largest duration for setTimeout which does not cause it to
+  // run immediately.
+  // https://nodejs.org/dist/latest-v9.x/docs/api/timers.html#timers_settimeout_callback_delay_args.
+  serverBackoffCapMillis: 2147483647
 };

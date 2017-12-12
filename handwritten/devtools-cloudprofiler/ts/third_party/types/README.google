@@ -8,5 +8,6 @@ Description:
 Local Modifications:
        All code except common-types.ts has been removed.
        RequestOptions interface added.
-       ServiceObject interface modified so promisified request can be used.
+       ServiceObject interface modified so both non-promisified and promisified
+       request can be used.
        Definitions modified to comply with gts 0.5

@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as sinon from 'sinon';
 
@@ -42,6 +43,16 @@ describe('initConfig', () => {
     process.env = savedEnv;
   });
 
+  const internalConfigParams = {
+    timeIntervalMicros: 1000,
+    heapIntervalBytes: 512 * 1024,
+    heapMaxStackDepth: 64,
+    initialBackoffMillis: 1000,
+    backoffCapMillis: 60 * 60 * 1000,
+    backoffMultiplier: 1.3,
+    serverBackoffCapMillis: 2147483647
+  };
+
   it('should not modify specified fields when not on GCE', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance')
                        .throwsException('cannot access metadata');
@@ -55,21 +66,8 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
-    const expConfig = {
-      logLevel: 2,
-      serviceContext: {version: 'fake-version', service: 'fake-service'},
-      disableHeap: true,
-      disableTime: true,
-      instance: 'instance',
-      zone: 'zone',
-      projectId: 'fake-projectId',
-      timeIntervalMicros: 1000,
-      heapIntervalBytes: 512 * 1024,
-      heapMaxStackDepth: 64,
-      backoffMillis: 300000
-    };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, expConfig);
+    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
   });
 
   it('should not modify specified fields when on GCE', async () => {
@@ -89,21 +87,8 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
-    const expConfig = {
-      logLevel: 2,
-      serviceContext: {version: 'fake-version', service: 'fake-service'},
-      disableHeap: true,
-      disableTime: true,
-      instance: 'instance',
-      zone: 'zone',
-      projectId: 'fake-projectId',
-      timeIntervalMicros: 1000,
-      heapIntervalBytes: 512 * 1024,
-      heapMaxStackDepth: 64,
-      backoffMillis: 300000
-    };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, expConfig);
+    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
   });
 
   it('should get zone and instance from GCE', async () => {
@@ -128,14 +113,11 @@ describe('initConfig', () => {
       disableTime: true,
       instance: 'gce-instance',
       zone: 'gce-zone',
-      projectId: 'projectId',
-      timeIntervalMicros: 1000,
-      heapIntervalBytes: 512 * 1024,
-      heapMaxStackDepth: 64,
-      backoffMillis: 300000
+      projectId: 'projectId'
     };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, expConfig);
+    assert.deepEqual(
+        initializedConfig, extend(expConfig, internalConfigParams));
   });
 
   it('should not reject when not on GCE and no zone and instance found',
@@ -152,13 +134,10 @@ describe('initConfig', () => {
          disableHeap: false,
          disableTime: false,
          projectId: 'fake-projectId',
-         timeIntervalMicros: 1000,
-         heapIntervalBytes: 512 * 1024,
-         heapMaxStackDepth: 64,
-         backoffMillis: 300000
        };
        const initializedConfig = await initConfig(config);
-       assert.deepEqual(initializedConfig, expConfig);
+       assert.deepEqual(
+           initializedConfig, extend(expConfig, internalConfigParams));
      });
 
   it('should reject when no service specified', () => {
@@ -192,20 +171,8 @@ describe('initConfig', () => {
       instance: 'instance',
       zone: 'zone'
     };
-    const expConfig = {
-      logLevel: 2,
-      serviceContext: {version: '', service: 'fake-service'},
-      disableHeap: true,
-      disableTime: true,
-      instance: 'instance',
-      zone: 'zone',
-      timeIntervalMicros: 1000,
-      heapIntervalBytes: 512 * 1024,
-      heapMaxStackDepth: 64,
-      backoffMillis: 300000
-    };
     const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, expConfig);
+    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
   });
 
   it('should get values from from environment variable when not specified in config or environment variables',
@@ -231,14 +198,11 @@ describe('initConfig', () => {
          disableHeap: true,
          disableTime: true,
          instance: 'envConfig-instance',
-         zone: 'envConfig-zone',
-         timeIntervalMicros: 1000,
-         heapIntervalBytes: 512 * 1024,
-         heapMaxStackDepth: 64,
-         backoffMillis: 300000
+         zone: 'envConfig-zone'
        };
        const initializedConfig = await initConfig(config);
-       assert.deepEqual(initializedConfig, expConfig);
+       assert.deepEqual(
+           initializedConfig, extend(expConfig, internalConfigParams));
      });
 
   it('should not get values from from environment variable when values specified in config',
@@ -265,21 +229,9 @@ describe('initConfig', () => {
          instance: 'instance',
          zone: 'zone'
        };
-       const expConfig = {
-         projectId: 'config-projectId',
-         logLevel: 1,
-         serviceContext: {version: 'config-version', service: 'config-service'},
-         disableHeap: false,
-         disableTime: false,
-         instance: 'instance',
-         zone: 'zone',
-         timeIntervalMicros: 1000,
-         heapIntervalBytes: 512 * 1024,
-         heapMaxStackDepth: 64,
-         backoffMillis: 300000
-       };
        const initializedConfig = await initConfig(config);
-       assert.deepEqual(initializedConfig, expConfig);
+       assert.deepEqual(
+           initializedConfig, extend(config, internalConfigParams));
      });
 
   it('should get values from from environment config when not specified in config or other environment variables',
@@ -297,15 +249,12 @@ describe('initConfig', () => {
          disableTime: true,
          instance: 'envConfig-instance',
          zone: 'envConfig-zone',
-         projectId: 'envConfig-fake-projectId',
-         timeIntervalMicros: 1000,
-         heapIntervalBytes: 512 * 1024,
-         heapMaxStackDepth: 64,
-         backoffMillis: 300000
+         projectId: 'envConfig-fake-projectId'
        };
 
        const config = {};
        const initializedConfig = await initConfig(config);
-       assert.deepEqual(initializedConfig, expConfig);
+       assert.deepEqual(
+           initializedConfig, extend(expConfig, internalConfigParams));
      });
 });

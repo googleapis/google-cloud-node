@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
+import * as http from 'http';
 import * as path from 'path';
 import * as pify from 'pify';
+import * as msToStr from 'pretty-ms';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
 import {Common, Logger, Service, ServiceObject} from '../third_party/types/common-types';
+
 import {ProfilerConfig} from './config';
 import {HeapProfiler} from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
@@ -37,7 +40,7 @@ enum ProfileTypes {
 }
 
 /**
- * @return true if http status code indicates an error and false otherwise.
+ * @return true iff http status code indicates an error.
  */
 function isErrorResponseStatusCode(code: number) {
   return code < 200 || code >= 300;
@@ -73,6 +76,29 @@ export interface RequestProfile {
 }
 
 /**
+ * @return number indicated by backoff if the response indicates a backoff and
+ * that backoff is greater than 0. Otherwise returns undefined.
+ */
+function getServerResponseBackoff(response: http.ServerResponse): number|
+    undefined {
+  // tslint:disable-next-line: no-any
+  const body = (response as any).body;
+  if (body && body.error && body.error.details &&
+      Array.isArray(body.error.details)) {
+    for (const item of body.error.details) {
+      if (typeof item === 'object' && item.retryDelay &&
+          typeof item.retryDelay === 'string') {
+        const backoffMillis = parseDuration(item.retryDelay);
+        if (backoffMillis > 0) {
+          return backoffMillis;
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
+/**
  * @return true if an deployment is a Deployment and false otherwise.
  */
 // tslint:disable-next-line: no-any
@@ -97,15 +123,6 @@ function isRequestProfile(prof: any): prof is RequestProfile {
 }
 
 /**
- * @return true if response has statusCode.
- */
-// tslint:disable-next-line: no-any
-function hasHttpStatusCode(response: any):
-    response is {statusCode: number, statusMessage: string} {
-  return response && typeof response.statusCode === 'number';
-}
-
-/**
  * Converts a profile to a compressed, base64 encoded string.
  *
  * Work for converting profile is done on the event loop. In particular,
@@ -121,6 +138,68 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
 }
 
 /**
+ * Error constructed from HTTP server response which indicates backoff.
+ */
+class BackoffResponseError extends Error {
+  constructor(response: http.ServerResponse, readonly backoffMillis: number) {
+    super(response.statusMessage);
+  }
+}
+
+/**
+ * @return true if error is a BackoffResponseError and false otherwise
+ */
+function isBackoffResponseError(err: Error): err is BackoffResponseError {
+  return typeof (err as BackoffResponseError).backoffMillis === 'number';
+}
+
+/**
+ * Class which tracks how long to wait before the next retry and can be
+ * used to get this backoff.
+ */
+export class Retryer {
+  private nextBackoffMillis: number;
+  constructor(
+      readonly initialBackoffMillis: number, readonly backoffCapMillis: number,
+      readonly backoffMultiplier: number) {
+    this.nextBackoffMillis = this.initialBackoffMillis;
+  }
+  getBackoff(): number {
+    const curBackoff = Math.random() * this.nextBackoffMillis;
+    this.nextBackoffMillis = Math.min(
+        this.backoffMultiplier * this.nextBackoffMillis, this.backoffCapMillis);
+    return curBackoff;
+  }
+  reset() {
+    this.nextBackoffMillis = this.initialBackoffMillis;
+  }
+}
+
+/**
+ * @return profile iff response indicates success and the returned profile was
+ * valid.
+ * @throws error when the response indicated failure or the returned profile
+ * was not valid.
+ */
+function responseToProfileOrError(
+    err: Error, body: object, response: http.ServerResponse): RequestProfile {
+  if (response && isErrorResponseStatusCode(response.statusCode)) {
+    const delayMillis = getServerResponseBackoff(response);
+    if (delayMillis) {
+      throw new BackoffResponseError(response, delayMillis);
+    }
+    throw new Error(response.statusMessage);
+  }
+  if (err) {
+    throw err;
+  }
+  if (isRequestProfile(body)) {
+    return body;
+  }
+  throw new Error(`Profile not valid: ${JSON.stringify(body)}.`);
+}
+
+/**
  * Polls profiler server for instructions on behalf of a task and
  * collects and uploads profiles as requested
  */
@@ -130,6 +209,7 @@ export class Profiler extends common.ServiceObject {
   private profileLabels: {instance?: string};
   private deployment: Deployment;
   private profileTypes: string[];
+  private retryer: Retryer;
 
   // Public for testing.
   timeProfiler: TimeProfiler|undefined;
@@ -179,6 +259,10 @@ export class Profiler extends common.ServiceObject {
       this.heapProfiler = new HeapProfiler(
           this.config.heapIntervalBytes, this.config.heapMaxStackDepth);
     }
+
+    this.retryer = new Retryer(
+        this.config.initialBackoffMillis, this.config.backoffCapMillis,
+        this.config.backoffMultiplier);
   }
 
   /**
@@ -201,8 +285,6 @@ export class Profiler extends common.ServiceObject {
    */
   async runLoop() {
     const delayMillis = await this.collectProfile();
-
-    // Schedule the next profile.
     setTimeout(this.runLoop.bind(this), delayMillis).unref();
   }
 
@@ -212,25 +294,24 @@ export class Profiler extends common.ServiceObject {
    *
    * @return time, in ms, to wait before asking profiler server again about
    * collecting another profile.
-   *
-   * TODO: implement backoff and retry. When error encountered in
-   * createProfile() should be retried when response indicates this request
-   * should be retried or with exponential backoff (up to one hour) if the
-   * response does not indicate when to retry this request.
    */
   async collectProfile(): Promise<number> {
     let prof: RequestProfile;
     try {
       prof = await this.createProfile();
     } catch (err) {
-      this.logger.error(`Failed to create profile: ${err}`);
-      return this.config.backoffMillis;
+      if (isBackoffResponseError(err)) {
+        this.logger.debug(`Must wait ${
+            msToStr(err.backoffMillis)} to create profile: ${err}`);
+        return Math.min(err.backoffMillis, this.config.serverBackoffCapMillis);
+      }
+      const backoff = this.retryer.getBackoff();
+      this.logger.warn(`Failed to create profile, waiting ${
+          msToStr(backoff)} to try again: ${err}`);
+      return backoff;
     }
-    try {
-      await this.profileAndUpload(prof);
-    } catch (err) {
-      this.logger.error(`Failed to collect and upload profile: ${err}`);
-    }
+    this.retryer.reset();
+    await this.profileAndUpload(prof);
     return 0;
   }
 
@@ -270,57 +351,60 @@ export class Profiler extends common.ServiceObject {
     };
 
     this.logger.debug(`Attempting to create profile.`);
-    const [prof, response] = await this.request(options);
-    if (!hasHttpStatusCode(response)) {
-      throw new Error('Server response missing status information.');
-    }
-    if (isErrorResponseStatusCode(response.statusCode)) {
-      let message: number|string = response.statusCode;
-      // tslint:disable-next-line: no-any
-      if ((response as any).statusMessage) {
-        message = response.statusMessage;
-      }
-      throw new Error(message.toString());
-    }
-    if (!isRequestProfile(prof)) {
-      throw new Error(`Profile not valid: ${JSON.stringify(prof)}.`);
-    }
-    this.logger.debug(`Successfully created profile ${prof.profileType}.`);
-    return prof;
+    return new Promise<RequestProfile>((resolve, reject) => {
+      this.request(
+          options,
+          (err: Error, body: object, response: http.ServerResponse) => {
+            try {
+              const prof = responseToProfileOrError(err, body, response);
+              this.logger.debug(
+                  `Successfully created profile ${prof.profileType}.`);
+              resolve(prof);
+            } catch (err) {
+              reject(err);
+            }
+          });
+    });
   }
 
   /**
    * Collects a profile of the type specified by the profileType field of prof.
    * If any problem is encountered, like a problem collecting or uploading the
-   * profile, an error will be thrown.
+   * profile, a message will be logged, and the error will otherwise be ignored.
    *
    * Public to allow for testing.
    */
   async profileAndUpload(prof: RequestProfile): Promise<void> {
-    prof = await this.profile(prof);
-    this.logger.debug(`Successfully collected profile ${prof.profileType}.`);
-    prof.labels = this.profileLabels;
-
+    try {
+      prof = await this.profile(prof);
+      this.logger.debug(`Successfully collected profile ${prof.profileType}.`);
+      prof.labels = this.profileLabels;
+    } catch (err) {
+      this.logger.debug(`Failed to collect profile: ${err}`);
+      return;
+    }
     const options = {
       method: 'PATCH',
       uri: API + '/' + prof.name,
       body: prof,
       json: true,
     };
-    const [body, response] = await this.request(options);
-    if (!hasHttpStatusCode(response)) {
-      throw new Error(
-          'Server response missing status information when attempting to upload profile.');
-    }
-    if (isErrorResponseStatusCode(response.statusCode)) {
-      let message: number|string = response.statusCode;
-      // tslint:disable-next-line: no-any
-      if ((response as any).statusMessage) {
-        message = response.statusMessage;
+
+    try {
+      const [body, serverResponse] = await this.request(options);
+      const response = serverResponse as http.ServerResponse;
+      if (isErrorResponseStatusCode(response.statusCode)) {
+        let message: number|string = response.statusCode;
+        if (response.statusMessage) {
+          message = response.statusMessage;
+        }
+        this.logger.debug(`Could not upload profile: ${message}.`);
+        return;
       }
-      throw new Error(`Could not upload profile: ${message}.`);
+      this.logger.debug(`Successfully uploaded profile ${prof.profileType}.`);
+    } catch (err) {
+      this.logger.debug(`Failed to upload profile: ${err}`);
     }
-    this.logger.debug(`Successfully uploaded profile ${prof.profileType}.`);
   }
 
   /**
