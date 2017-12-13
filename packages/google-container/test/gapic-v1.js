@@ -2508,7 +2508,6 @@ describe('ClusterManagerClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
