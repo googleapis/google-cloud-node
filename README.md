@@ -22,6 +22,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 * [Cloud Data Loss Prevention](https://github.com/googleapis/nodejs-dlp) (Beta)
 * [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
+* [Cloud Pub/Sub](https://github.com/googleapis/nodejs-pubsub/) (Beta)
 * [Cloud Spanner](https://github.com/googleapis/nodejs-spanner/) (Beta)
 * [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (Beta)
 * [Cloud Vision](https://github.com/googleapis/nodejs-vision) (Beta)
