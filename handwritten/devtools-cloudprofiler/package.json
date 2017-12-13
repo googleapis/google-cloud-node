@@ -43,7 +43,7 @@
     "@types/extend": "^3.0.0",
     "@types/long": "^3.0.32",
     "@types/mocha": "^2.2.43",
-    "@types/nock": "^8.2.1",
+    "@types/nock": "^9.1.0",
     "@types/node": "^8.0.30",
     "@types/pify": "^3.0.0",
     "@types/pretty-ms": "^3.0.0",
