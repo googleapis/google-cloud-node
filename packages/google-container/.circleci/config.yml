@@ -59,7 +59,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - smoke_tests:
+      - system_tests:
           requires:
             - lint
             - docs
@@ -70,7 +70,7 @@ workflows:
               only: /^v[\d.]+$/
       - publish_npm:
           requires:
-            - smoke_tests
+            - system_tests
           filters:
             branches:
               ignore: /.*/
@@ -136,7 +136,7 @@ jobs:
           name: Build documentation.
           command: npm run docs
 
-  smoke_tests:
+  system_tests:
     docker:
       - image: node:8
     steps:
@@ -151,10 +151,10 @@ jobs:
           name: Install modules and dependencies.
           command: npm install
       - run:
-          name: Run smoke tests.
-          command: npm run smoke-test
+          name: Run system tests.
+          command: npm run system-test
           environment:
-            SMOKE_TEST_PROJECT: long-door-651
+            GCLOUD_PROJECT: long-door-651
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.

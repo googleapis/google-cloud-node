@@ -15,10 +15,10 @@
 'use strict';
 
 describe('ClusterManagerSmokeTest', () => {
-  if (!process.env.SMOKE_TEST_PROJECT) {
-    throw new Error('Usage: SMOKE_TEST_PROJECT=<project_id> node #{$0}');
+  if (!process.env.GCLOUD_PROJECT) {
+    throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
   }
-  var projectId = process.env.SMOKE_TEST_PROJECT;
+  var projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service', done => {
     const container = require('../src');
