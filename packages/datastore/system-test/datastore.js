@@ -89,6 +89,9 @@ describe('Datastore', function() {
       var data = {
         longString: longString,
         notMetadata: true,
+        longStringArray: [
+          longString,
+        ],
         metadata: {
           longString: longString,
           otherProperty: 'value',
@@ -130,6 +133,7 @@ describe('Datastore', function() {
         data: data,
         excludeFromIndexes: [
           'longString',
+          'longStringArray[]',
           'metadata.obj.longString',
           'metadata.obj.longStringArray[].longString',
           'metadata.obj.longStringArray[].nestedLongStringArray[].longString',
