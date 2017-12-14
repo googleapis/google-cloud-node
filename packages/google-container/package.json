@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/container",
   "description": "Google Container Engine API client for Node.js",
-  "version": "0.8.0",
+  "version": "0.7.1",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -29,6 +29,7 @@
     "Google Container Engine API"
   ],
   "contributors": [
+    "Alexander Fenster <fenster@google.com>",
     "Alexander Fenster <github@fenster.name>",
     "Ethan Bao <cbao@google.com>",
     "Google API Publisher <googleapis-publisher@google.com>"
@@ -42,10 +43,10 @@
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/ smoke-test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js smoke-test/*.js",
     "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
-    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
-    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
-    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js"
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts"
   },
   "dependencies": {
     "google-gax": "^0.14.2",
