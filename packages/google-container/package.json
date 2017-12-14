@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-cloud-container",
   "main": "src/index.js",
   "files": [
     "protos",
@@ -30,7 +30,6 @@
   ],
   "contributors": [
     "Alexander Fenster <fenster@google.com>",
-    "Alexander Fenster <github@fenster.name>",
     "Ethan Bao <cbao@google.com>",
     "Google API Publisher <googleapis-publisher@google.com>"
   ],
