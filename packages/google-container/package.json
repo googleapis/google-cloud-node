@@ -34,7 +34,6 @@
     "Google API Publisher <googleapis-publisher@google.com>"
   ],
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js container",
     "smoke-test": "mocha smoke-test/*.js --timeout 5000",
     "test": "repo-tools test run --cmd npm -- run cover",
     "generate-scaffolding": "repo-tools generate all",
