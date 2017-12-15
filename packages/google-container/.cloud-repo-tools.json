@@ -1,0 +1,7 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "container",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/container/latest/",
+  "release_quality": "alpha"
+}
