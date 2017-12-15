@@ -1,5 +1,7 @@
 # Node.js Client for Google Container Engine API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-cloud-container.svg)](https://greenkeeper.io/)
+
 [Google Container Engine API][Product Documentation]:
 The Google Kubernetes Engine API is used for building and managing container
 based applications, powered by the open source Kubernetes technology.
