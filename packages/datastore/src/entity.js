@@ -139,11 +139,24 @@ entity.isDsGeoPoint = isDsGeoPoint;
  * @param {object} - Configuration object.
  * @param {...*} options.path - Key path.
  * @param {string=} options.namespace - Optional namespace.
+ * @param {object} options.parent - Optional parent Key
  *
  * @example
  * var key = new Key({
  *   namespace: 'ns',
+ *   path: ['Company', 123, 'Department', 'Engineering']
+ * });
+ *
+ * @example
+ * var parent = new Key({
+ *   namespace: 'ns',
  *   path: ['Company', 123]
+ * });
+ *
+ * var key = new Key({
+ *   namespace: 'ns',
+ *   parent: parent,
+ *   path: ['Department', 'Engineering']
  * });
  */
 function Key(options) {
@@ -163,6 +176,8 @@ function Key(options) {
 
   if (options.path.length > 0) {
     this.parent = new Key(options);
+  } else {
+    this.parent = options.parent;
   }
 
   // `path` is computed on demand to consider any changes that may have been
