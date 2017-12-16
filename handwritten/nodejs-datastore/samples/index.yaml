@@ -1,0 +1,34 @@
+indexes:
+
+- kind: Task
+  ancestor: no
+  properties:
+  - name: done
+  - name: priority
+    direction: desc
+
+- kind: Task
+  properties:
+  - name: priority
+    direction: desc
+  - name: created
+
+- kind: Task
+  properties:
+  - name: priority
+  - name: created
+
+- kind: Task
+  properties:
+  - name: done
+  - name: created
+
+- kind: Task
+  properties:
+  - name: category
+  - name: priority
+
+- kind: Task
+  properties:
+  - name: percent_complete
+  - name: priority

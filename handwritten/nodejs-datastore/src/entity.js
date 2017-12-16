@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-/**
- * @private
- * @module datastore/entity
- */
-
 'use strict';
 
 var arrify = require('arrify');
+var Buffer = require('safe-buffer').Buffer;
 var createErrorClass = require('create-error-class');
 var extend = require('extend');
 var is = require('is');
@@ -31,7 +27,7 @@ var entity = module.exports;
 var InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
   var errorMessages = {
     MISSING_KIND: 'A key should contain at least a kind.',
-    MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.'
+    MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.',
   };
 
   this.message = errorMessages[opts.code];
@@ -41,19 +37,26 @@ var InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
  * A symbol to access the Key object from an entity object.
  *
  * @type {symbol}
+ * @private
  */
 entity.KEY_SYMBOL = Symbol('KEY');
 
 /**
  * Build a Datastore Double object. For long doubles, a string can be provided.
  *
- * @constructor
- * @param {number} value - The double value.
+ * @class
+ * @param {number} value The double value.
  *
  * @example
- * var aDouble = new Double(7.3);
+ * const Datastore = require('@google-cloud/datastore');
+ * const datastore = new Datastore();
+ * const aDouble = datastore.double(7.3);
  */
 function Double(value) {
+  /**
+   * @name Double#value
+   * @type {number}
+   */
   this.value = value;
 }
 
@@ -62,8 +65,9 @@ entity.Double = Double;
 /**
  * Check if something is a Datastore Double object.
  *
+ * @private
  * @param {*} value
- * @return {boolean}
+ * @returns {boolean}
  */
 function isDsDouble(value) {
   return value instanceof entity.Double;
@@ -74,13 +78,19 @@ entity.isDsDouble = isDsDouble;
 /**
  * Build a Datastore Int object. For long integers, a string can be provided.
  *
- * @constructor
- * @param {number|string} value - The integer value.
+ * @class
+ * @param {number|string} value The integer value.
  *
  * @example
- * var anInt = new Int(7);
+ * const Datastore = require('@google-cloud/datastore');
+ * const datastore = new Datastore();
+ * const anInt = datastore.int(7);
  */
 function Int(value) {
+  /**
+   * @name Int#value
+   * @type {string}
+   */
   this.value = value.toString();
 }
 
@@ -89,8 +99,9 @@ entity.Int = Int;
 /**
  * Check if something is a Datastore Int object.
  *
+ * @private
  * @param {*} value
- * @return {boolean}
+ * @returns {boolean}
  */
 function isDsInt(value) {
   return value instanceof entity.Int;
@@ -101,20 +112,30 @@ entity.isDsInt = isDsInt;
 /**
  * Build a Datastore Geo Point object.
  *
- * @constructor
- * @param {object} coordinates - Coordinate value.
- * @param {number} coordinates.latitude - Latitudinal value.
- * @param {number} coordinates.longitude - Longitudinal value.
+ * @class
+ * @param {object} coordinates Coordinate value.
+ * @param {number} coordinates.latitude Latitudinal value.
+ * @param {number} coordinates.longitude Longitudinal value.
  *
  * @example
- * var coordinates = {
+ * const Datastore = require('@google-cloud/datastore');
+ * const datastore = new Datastore();
+ * const coordinates = {
  *   latitude: 40.6894,
  *   longitude: -74.0447
  * };
  *
- * var geoPoint = new GeoPoint(coordinates);
+ * const geoPoint = datastore.geoPoint(coordinates);
  */
 function GeoPoint(coordinates) {
+  /**
+   * Coordinate value.
+   *
+   * @name GeoPoint#coordinates
+   * @type {object}
+   * @property {number} latitude Latitudinal value.
+   * @property {number} longitude Longitudinal value.
+   */
   this.value = coordinates;
 }
 
@@ -123,8 +144,9 @@ entity.GeoPoint = GeoPoint;
 /**
  * Check if something is a Datastore Geo Point object.
  *
+ * @private
  * @param {*} value
- * @return {boolean}
+ * @returns {boolean}
  */
 function isDsGeoPoint(value) {
   return value instanceof entity.GeoPoint;
@@ -135,18 +157,24 @@ entity.isDsGeoPoint = isDsGeoPoint;
 /**
  * Build a Datastore Key object.
  *
- * @constructor
- * @param {object} - Configuration object.
- * @param {...*} options.path - Key path.
- * @param {string=} options.namespace - Optional namespace.
+ * @class
+ * @param {object|string|array} Configuration object.
+ * @param {string|array} options.path  Key path.
+ * @param {string} [options.namespace] Optional namespace.
  *
  * @example
- * var key = new Key({
+ * const Datastore = require('@google-cloud/datastore');
+ * const datastore = new Datastore();
+ * const key = datastore.key({
  *   namespace: 'ns',
  *   path: ['Company', 123]
  * });
  */
 function Key(options) {
+  /**
+   * @name Key#namespace
+   * @type {string}
+   */
   this.namespace = options.namespace;
 
   if (options.path.length % 2 === 0) {
@@ -167,12 +195,18 @@ function Key(options) {
 
   // `path` is computed on demand to consider any changes that may have been
   // made to the key.
+  /**
+   * @name Key#path
+   * @type {array}
+   */
   Object.defineProperty(this, 'path', {
     enumerable: true,
     get: function() {
-      return arrify(this.parent && this.parent.path)
-        .concat([this.kind, this.name || this.id]);
-    }
+      return arrify(this.parent && this.parent.path).concat([
+        this.kind,
+        this.name || this.id,
+      ]);
+    },
   });
 }
 
@@ -181,8 +215,9 @@ entity.Key = Key;
 /**
  * Check if something is a Datastore Key object.
  *
+ * @private
  * @param {*} value
- * @return {boolean}
+ * @returns {boolean}
  */
 function isDsKey(value) {
   return value instanceof entity.Key;
@@ -193,8 +228,9 @@ entity.isDsKey = isDsKey;
 /**
  * Convert a protobuf Value message to its native value.
  *
- * @param {object} valueProto - The protobuf Value message to convert.
- * @return {*}
+ * @private
+ * @param {object} valueProto The protobuf Value message to convert.
+ * @returns {*}
  *
  * @example
  * decodeValueProto({
@@ -213,7 +249,7 @@ entity.isDsKey = isDsKey;
  * // <Buffer 68 65 6c 6c 6f>
  */
 function decodeValueProto(valueProto) {
-  var valueType = valueProto.value_type;
+  var valueType = valueProto.valueType;
   var value = valueProto[valueType];
 
   switch (valueType) {
@@ -261,8 +297,9 @@ entity.decodeValueProto = decodeValueProto;
 /**
  * Convert any native value to a protobuf Value message object.
  *
- * @param {*} value - Native value.
- * @return {object}
+ * @private
+ * @param {*} value Native value.
+ * @returns {object}
  *
  * @example
  * encodeValue('Hi');
@@ -311,7 +348,7 @@ function encodeValue(value) {
 
     valueProto.timestampValue = {
       seconds: Math.floor(seconds),
-      nanos: value.getMilliseconds() * 1e6
+      nanos: value.getMilliseconds() * 1e6,
     };
 
     return valueProto;
@@ -329,7 +366,7 @@ function encodeValue(value) {
 
   if (is.array(value)) {
     valueProto.arrayValue = {
-      values: value.map(entity.encodeValue)
+      values: value.map(entity.encodeValue),
     };
     return valueProto;
   }
@@ -351,7 +388,7 @@ function encodeValue(value) {
     }
 
     valueProto.entityValue = {
-      properties: value
+      properties: value,
     };
 
     return valueProto;
@@ -367,8 +404,9 @@ entity.encodeValue = encodeValue;
  *
  * @todo Use registered metadata if provided.
  *
- * @param {object} entityProto - The protocol entity object to convert.
- * @return {object}
+ * @private
+ * @param {object} entityProto The protocol entity object to convert.
+ * @returns {object}
  *
  * @example
  * entityFromEntityProto({
@@ -376,7 +414,7 @@ entity.encodeValue = encodeValue;
  *     map: {
  *       name: {
  *         value: {
- *           value_type: 'stringValue',
+ *           valueType: 'stringValue',
  *           stringValue: 'Stephen'
  *         }
  *       }
@@ -405,8 +443,9 @@ entity.entityFromEntityProto = entityFromEntityProto;
 /**
  * Convert an entity object to an entity protocol object.
  *
- * @param {object} entityObject - The entity object to convert.
- * @return {object}
+ * @private
+ * @param {object} entityObject The entity object to convert.
+ * @returns {object}
  *
  * @example
  * entityToEntityProto({
@@ -441,7 +480,7 @@ function entityToEntityProto(entityObject) {
     properties: Object.keys(properties).reduce(function(encoded, key) {
       encoded[key] = entity.encodeValue(properties[key]);
       return encoded;
-    }, {})
+    }, {}),
   };
 
   if (excludeFromIndexes && excludeFromIndexes.length > 0) {
@@ -480,7 +519,7 @@ function entityToEntityProto(entityObject) {
     var delimiter = firstPathPartIsArray ? '[]' : '.';
     var splitPath = path.split(delimiter);
     var firstPathPart = splitPath.shift();
-    var remainderPath = splitPath.join(delimiter).replace(/^(\.|[])/, '');
+    var remainderPath = splitPath.join(delimiter).replace(/^(\.|\[\])/, '');
 
     if (!entity.properties[firstPathPart]) {
       return;
@@ -503,10 +542,11 @@ entity.entityToEntityProto = entityToEntityProto;
 /**
  * Convert an API response array to a qualified Key and data object.
  *
- * @param {object[]} results - The response array.
- * @param {object} results.entity - An entity object.
- * @param {object} results.entity.key - The entity's key.
- * @return {object[]}
+ * @private
+ * @param {object[]} results The response array.
+ * @param {object} results.entity An entity object.
+ * @param {object} results.entity.key The entity's key.
+ * @returns {object[]}
  *
  * @example
  * request_('runQuery', {}, function(err, response) {
@@ -533,8 +573,9 @@ entity.formatArray = formatArray;
 /**
  * Check if a key is complete.
  *
- * @param {Key} key - The Key object.
- * @return {boolean}
+ * @private
+ * @param {Key} key The Key object.
+ * @returns {boolean}
  *
  * @example
  * isKeyComplete(new Key(['Company', 'Google'])); // true
@@ -550,8 +591,9 @@ entity.isKeyComplete = isKeyComplete;
 /**
  * Convert a key protocol object to a Key object.
  *
- * @param {object} keyProto - The key protocol object to convert.
- * @return {Key}
+ * @private
+ * @param {object} keyProto The key protocol object to convert.
+ * @returns {Key}
  *
  * @example
  * var key = keyFromKeyProto({
@@ -569,7 +611,7 @@ entity.isKeyComplete = isKeyComplete;
  */
 function keyFromKeyProto(keyProto) {
   var keyOptions = {
-    path: []
+    path: [],
   };
 
   if (keyProto.partitionId && keyProto.partitionId.namespaceId) {
@@ -579,9 +621,9 @@ function keyFromKeyProto(keyProto) {
   keyProto.path.forEach(function(path, index) {
     keyOptions.path.push(path.kind);
 
-    var id = path[path.id_type];
+    var id = path[path.idType];
 
-    if (path.id_type === 'id') {
+    if (path.idType === 'id') {
       id = new entity.Int(id);
     }
 
@@ -589,7 +631,7 @@ function keyFromKeyProto(keyProto) {
       keyOptions.path.push(id);
     } else if (index < keyProto.path.length - 1) {
       throw new InvalidKeyError({
-        code: 'MISSING_ANCESTOR_ID'
+        code: 'MISSING_ANCESTOR_ID',
       });
     }
   });
@@ -602,8 +644,9 @@ entity.keyFromKeyProto = keyFromKeyProto;
 /**
  * Convert a Key object to a key protocol object.
  *
- * @param {Key} key - The Key object to convert.
- * @return {object}
+ * @private
+ * @param {Key} key The Key object to convert.
+ * @returns {object}
  *
  * @example
  * var keyProto = keyToKeyProto(new Key(['Company', 1]));
@@ -619,17 +662,17 @@ entity.keyFromKeyProto = keyFromKeyProto;
 function keyToKeyProto(key) {
   if (is.undefined(key.kind)) {
     throw new InvalidKeyError({
-      code: 'MISSING_KIND'
+      code: 'MISSING_KIND',
     });
   }
 
   var keyProto = {
-    path: []
+    path: [],
   };
 
   if (key.namespace) {
     keyProto.partitionId = {
-      namespaceId: key.namespace
+      namespaceId: key.namespace,
     };
   }
 
@@ -640,12 +683,12 @@ function keyToKeyProto(key) {
     if (numKeysWalked > 0 && is.undefined(key.id) && is.undefined(key.name)) {
       // This isn't just an incomplete key. An ancestor key is incomplete.
       throw new InvalidKeyError({
-        code: 'MISSING_ANCESTOR_ID'
+        code: 'MISSING_ANCESTOR_ID',
       });
     }
 
     var pathElement = {
-      kind: key.kind
+      kind: key.kind,
     };
 
     if (is.defined(key.id)) {
@@ -668,9 +711,8 @@ entity.keyToKeyProto = keyToKeyProto;
  * Convert a query object to a query protocol object.
  *
  * @private
- *
- * @param {object} q - The query object to convert.
- * @return {object}
+ * @param {object} q The query object to convert.
+ * @returns {object}
  *
  * @example
  * queryToQueryProto({
@@ -700,48 +742,48 @@ entity.keyToKeyProto = keyToKeyProto;
  */
 function queryToQueryProto(query) {
   var OP_TO_OPERATOR = {
-    '=':  'EQUAL',
-    '>':  'GREATER_THAN',
+    '=': 'EQUAL',
+    '>': 'GREATER_THAN',
     '>=': 'GREATER_THAN_OR_EQUAL',
-    '<':  'LESS_THAN',
+    '<': 'LESS_THAN',
     '<=': 'LESS_THAN_OR_EQUAL',
-    HAS_ANCESTOR: 'HAS_ANCESTOR'
+    HAS_ANCESTOR: 'HAS_ANCESTOR',
   };
 
   var SIGN_TO_ORDER = {
     '-': 'DESCENDING',
-    '+': 'ASCENDING'
+    '+': 'ASCENDING',
   };
 
   var queryProto = {
     distinctOn: query.groupByVal.map(function(groupBy) {
       return {
-        name: groupBy
+        name: groupBy,
       };
     }),
 
     kind: query.kinds.map(function(kind) {
       return {
-        name: kind
+        name: kind,
       };
     }),
 
     order: query.orders.map(function(order) {
       return {
         property: {
-          name: order.name
+          name: order.name,
         },
-        direction: SIGN_TO_ORDER[order.sign]
+        direction: SIGN_TO_ORDER[order.sign],
       };
     }),
 
     projection: query.selectVal.map(function(select) {
       return {
         property: {
-          name: select
-        }
+          name: select,
+        },
       };
-    })
+    }),
   };
 
   if (query.endVal) {
@@ -750,7 +792,7 @@ function queryToQueryProto(query) {
 
   if (query.limitVal > 0) {
     queryProto.limit = {
-      value: query.limitVal
+      value: query.limitVal,
     };
   }
 
@@ -775,19 +817,19 @@ function queryToQueryProto(query) {
       return {
         propertyFilter: {
           property: {
-            name: filter.name
+            name: filter.name,
           },
           op: OP_TO_OPERATOR[filter.op],
-          value: value
-        }
+          value: value,
+        },
       };
     });
 
     queryProto.filter = {
       compositeFilter: {
         filters: filters,
-        op: 'AND'
-      }
+        op: 'AND',
+      },
     };
   }
 

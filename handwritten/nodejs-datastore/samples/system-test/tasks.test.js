@@ -15,7 +15,8 @@
 
 'use strict';
 
-const datastore = require(`@google-cloud/datastore`)();
+const Datastore = require(`@google-cloud/datastore`);
+const datastore = new Datastore({});
 const path = require(`path`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
@@ -36,17 +37,19 @@ test.before(tools.checkCredentials);
 test.beforeEach(tools.stubConsole);
 test.afterEach.always(tools.restoreConsole);
 
-test.serial(`should add a task`, async (t) => {
+test.serial(`should add a task`, async t => {
   t.plan(2);
   const expected = /^Task (\d+) created successfully.$/;
   const parts = tools.run(`${cmd} new "${description}"`, cwd).match(expected);
   t.true(expected.test(parts[0]));
-  const [task] = await datastore.get(datastore.key([`Task`, parseInt(parts[1], 10)]));
+  const [task] = await datastore.get(
+    datastore.key([`Task`, parseInt(parts[1], 10)])
+  );
   key = task[datastore.KEY];
   t.is(task.description, description);
 });
 
-test.serial(`should mark a task as done`, async (t) => {
+test.serial(`should mark a task as done`, async t => {
   t.plan(2);
   const expected = `Task ${key.id} updated successfully.`;
   const output = await tools.runAsync(`${cmd} done ${key.id}`, cwd);
@@ -55,15 +58,17 @@ test.serial(`should mark a task as done`, async (t) => {
   t.true(task.done);
 });
 
-test.serial(`should list tasks`, async (t) => {
+test.serial(`should list tasks`, async t => {
   t.plan(0);
-  await tools.tryTest(async (assert) => {
-    const output = await tools.runAsync(`${cmd} list`, cwd);
-    assert(output.includes(key.id));
-  }).start();
+  await tools
+    .tryTest(async assert => {
+      const output = await tools.runAsync(`${cmd} list`, cwd);
+      assert(output.includes(key.id));
+    })
+    .start();
 });
 
-test.serial(`should delete a task`, async (t) => {
+test.serial(`should delete a task`, async t => {
   t.plan(2);
   const expected = `Task ${key.id} deleted successfully.`;
   const output = await tools.runAsync(`${cmd} delete ${key.id}`, cwd);
