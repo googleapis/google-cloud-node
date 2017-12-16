@@ -11,7 +11,7 @@
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
-* [Cloud Datastore](#cloud-datastore-ga) (GA)
+* [Cloud Datastore](http://github.com/googleapis/nodejs-datastore/) (GA)
 * [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (GA)
 * [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](https://github.com/googleapis/nodejs-translate/) (GA)
