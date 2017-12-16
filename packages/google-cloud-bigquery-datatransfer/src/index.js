@@ -19,10 +19,10 @@
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.datatransfer
+ * @namespace google.cloud.bigquery-data-transfer
  */
 /**
- * @namespace google.cloud.datatransfer.v1
+ * @namespace google.cloud.bigquery-data-transfer.v1
  */
 
 'use strict';
@@ -33,7 +33,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `datatransfer` package has the following named exports:
+ * The `@google-cloud/bigquery-data-transfer` package has the following named exports:
  *
  * - `DataTransferServiceClient` - Reference to
  *   {@link v1.DataTransferServiceClient}
@@ -42,20 +42,20 @@ const gapic = Object.freeze({
  *     - `DataTransferServiceClient` - Reference to
  *       {@link v1.DataTransferServiceClient}
  *
- * @module {object} datatransfer
- * @alias nodejs-datatransfer
+ * @module {object} @google-cloud/bigquery-data-transfer
+ * @alias nodejs-bigquery-data-transfer
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save datatransfer
+ * npm install --save @google-cloud/bigquery-data-transfer
  *
  * @example <caption>Import the client library:</caption>
- * const datatransfer = require('datatransfer');
+ * const bigquery-data-transfer = require('@google-cloud/bigquery-data-transfer');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new datatransfer.DataTransferServiceClient();
+ * const client = new bigquery-data-transfer.DataTransferServiceClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new datatransfer.DataTransferServiceClient({
+ * const client = new bigquery-data-transfer.DataTransferServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
