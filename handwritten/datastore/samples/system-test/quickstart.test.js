@@ -22,7 +22,7 @@ const tools = require(`@google-cloud/nodejs-repo-tools`);
 
 const datastore = proxyquire(`@google-cloud/datastore`, {})();
 
-const entity = { description: `Buy milk` };
+const entity = {description: `Buy milk`};
 const kind = `Task`;
 const name = `sampletask1`;
 const key = datastore.key([kind, name]);
@@ -43,31 +43,33 @@ test.after.always(async () => {
 test.beforeEach(tools.stubConsole);
 test.afterEach.always(tools.restoreConsole);
 
-test.cb(`should get a task from Datastore`, (t) => {
+test.cb(`should get a task from Datastore`, t => {
   const datastoreMock = {
     key: (...args) => datastore.key(...args),
 
-    save: (_task) => {
+    save: _task => {
       t.is(_task.key.kind, kind);
       t.is(_task.key.name, name);
       t.deepEqual(_task.data, entity);
 
-      return datastore.save(_task)
-        .then(() => {
-          setTimeout(() => {
-            datastore.get(key)
-              .then(([task]) => {
-                t.deepEqual(task, datastoreEntity);
-                t.true(console.log.calledWith(`Saved ${name}: ${entity.description}`));
-                t.end();
-              })
-              .catch(t.end);
-          }, 200);
-        }, t.end);
-    }
+      return datastore.save(_task).then(() => {
+        setTimeout(() => {
+          datastore
+            .get(key)
+            .then(([task]) => {
+              t.deepEqual(task, datastoreEntity);
+              t.true(
+                console.log.calledWith(`Saved ${name}: ${entity.description}`)
+              );
+              t.end();
+            })
+            .catch(t.end);
+        }, 200);
+      }, t.end);
+    },
   };
 
   proxyquire(`../quickstart`, {
-    '@google-cloud/datastore': sinon.stub().returns(datastoreMock)
+    '@google-cloud/datastore': sinon.stub().returns(datastoreMock),
   });
 });

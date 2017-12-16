@@ -49,7 +49,7 @@ describe('Query', function() {
         new Query(SCOPE, null, KINDS),
         new Query(SCOPE, undefined, KINDS),
         new Query(SCOPE, 0, KINDS),
-        new Query(SCOPE, KINDS)
+        new Query(SCOPE, KINDS),
       ].forEach(function(query) {
         assert.strictEqual(query.namespace, null);
       });
@@ -159,7 +159,7 @@ describe('Query', function() {
     });
 
     it('should support descending order', function() {
-      var query = new Query(['kind1']).order('count', { descending: true });
+      var query = new Query(['kind1']).order('count', {descending: true});
 
       assert.equal(query.orders[0].name, 'count');
       assert.equal(query.orders[0].sign, '-');
@@ -168,7 +168,7 @@ describe('Query', function() {
     it('should support both ascending and descending', function() {
       var query = new Query(['kind1'])
         .order('name')
-        .order('count', { descending: true });
+        .order('count', {descending: true});
 
       assert.equal(query.orders[0].name, 'name');
       assert.equal(query.orders[0].sign, '+');

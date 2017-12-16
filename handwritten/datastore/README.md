@@ -1,116 +1,143 @@
-# @google-cloud/datastore ([GA][versioning])
-> Cloud Datastore Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just Datastore? You might want to check out [`google-cloud`][google-cloud].*
+# [Google Cloud Datastore: Node.js Client](https://github.com/googleapis/nodejs-datastore)
 
-- [API Documentation][gcloud-datastore-docs]
-- [Official Documentation][cloud-datastore-docs]
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-datastore.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-datastore)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-datastore?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-datastore)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-datastore/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-datastore)
 
-*Follow the [activation instructions][cloud-datastore-activation] to use the Cloud Datastore API with your project.*
+> Node.js idiomatic client for [Cloud Datastore][product-docs].
 
-```sh
-$ npm install --save @google-cloud/datastore
-```
-```js
-var datastore = require('@google-cloud/datastore')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
+[Cloud Datastore](https://cloud.google.com/datastore/docs) is a NoSQL document database built for automatic scaling, high performance, and ease of application development. While the Cloud Datastore interface has many of the same features as traditional databases, as a NoSQL database it differs from them in the way it describes relationships between data objects.
+
+
+* [Cloud Datastore Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-datastore](https://github.com/googleapis/nodejs-datastore)
+* [Cloud Datastore Documentation][product-docs]
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
+**Table of contents:**
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
+
+## Quickstart
+
+### Before you begin
+
+1.  Select or create a Cloud Platform project.
+
+    [Go to the projects page][projects]
+
+1.  Enable billing for your project.
+
+    [Enable billing][billing]
+
+1.  Enable the Google Cloud Datastore API.
+
+    [Enable the API][enable_api]
+
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=datastore.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
+
+### Installing the client library
+
+    npm install --save @google-cloud/datastore
+
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const Datastore = require('@google-cloud/datastore');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Creates a client
+const datastore = new Datastore({
+  projectId: projectId,
 });
 
-var key = datastore.key(['Product', 'Computer']);
+// The kind for the new entity
+const kind = 'Task';
+// The name/ID for the new entity
+const name = 'sampletask1';
+// The Cloud Datastore key for the new entity
+const taskKey = datastore.key([kind, name]);
 
-datastore.get(key, function(err, entity) {
-  console.log(err || entity);
-});
-
-// Save data to Datastore.
-var blogPostData = {
-  title: 'How to make the perfect homemade pasta',
-  author: 'Andrew Chilton',
-  isDraft: true
+// Prepares the new entity
+const task = {
+  key: taskKey,
+  data: {
+    description: 'Buy milk',
+  },
 };
 
-var blogPostKey = datastore.key('BlogPost');
-
-datastore.save({
-  key: blogPostKey,
-  data: blogPostData
-}, function(err) {
-  // `blogPostKey` has been updated with an ID so you can do more operations
-  // with it, such as an update.
-  blogPostData.isDraft = false;
-
-  datastore.save({
-    key: blogPostKey,
-    data: blogPostData
-  }, function(err) {
-    if (!err) {
-      // The blog post is now published!
-    }
+// Saves the entity
+datastore
+  .save(task)
+  .then(() => {
+    console.log(`Saved ${task.key.name}: ${task.data.description}`);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
   });
-});
-
-// Promises are also supported by omitting callbacks.
-datastore.save({
-  key: blogPostKey,
-  data: blogPostData
-}).then(function() {
-  // The blog post is now published!
-});
-
-// It's also possible to integrate with third-party Promise libraries.
-var datastore = require('@google-cloud/datastore')({
-  promise: require('bluebird')
-});
 ```
 
+## Samples
 
-## Authentication
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-datastore/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Tasks | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md) |
+| Concepts | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/concepts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/concepts.js,samples/README.md) |
+| Errors and Error Handling | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/error.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/error.js,samples/README.md) |
 
-### On Google Cloud Platform
+The [Cloud Datastore Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+## Versioning
 
-``` js
-var datastore = require('@google-cloud/datastore')();
-// ...you're good to go!
-```
+This library follows [Semantic Versioning](http://semver.org/).
 
-### Elsewhere
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Cloud Datastore API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+[launch_stages]: https://cloud.google.com/terms/launch-stages
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+## Contributing
 
-var datastore = require('@google-cloud/datastore')({
-  projectId: projectId,
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-datastore/blob/master/.github/CONTRIBUTING.md).
 
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
+## License
 
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
-});
+Apache Version 2.0
 
-// ...you're good to go!
-```
+See [LICENSE](https://github.com/googleapis/nodejs-datastore/blob/master/LICENSE)
 
-
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[gcloud-datastore-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore
-[cloud-datastore-docs]: https://cloud.google.com/datastore/docs
-[cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/datastore/latest/
+[product-docs]: https://cloud.google.com/datastore/docs
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png

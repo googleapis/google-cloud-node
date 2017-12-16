@@ -22,9 +22,9 @@ const Datastore = require('@google-cloud/datastore');
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
 
-// Instantiates a client
-const datastore = Datastore({
-  projectId: projectId
+// Creates a client
+const datastore = new Datastore({
+  projectId: projectId,
 });
 
 // The kind for the new entity
@@ -38,16 +38,17 @@ const taskKey = datastore.key([kind, name]);
 const task = {
   key: taskKey,
   data: {
-    description: 'Buy milk'
-  }
+    description: 'Buy milk',
+  },
 };
 
 // Saves the entity
-datastore.save(task)
+datastore
+  .save(task)
   .then(() => {
     console.log(`Saved ${task.key.name}: ${task.data.description}`);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error('ERROR:', err);
   });
 // [END datastore_quickstart]

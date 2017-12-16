@@ -17,10 +17,13 @@
 'use strict';
 
 var assert = require('assert');
+var Buffer = require('safe-buffer').Buffer;
 var deepStrictEqual = require('deep-strict-equal');
-assert.deepStrictEqual = assert.deepStrictEqual || function() {
-  return assert(deepStrictEqual.apply(this, arguments));
-};
+assert.deepStrictEqual =
+  assert.deepStrictEqual ||
+  function() {
+    return assert(deepStrictEqual.apply(this, arguments));
+  };
 var extend = require('extend');
 
 var Datastore = require('../');
@@ -95,7 +98,7 @@ describe('entity', function() {
     it('should store the value', function() {
       var value = {
         latitude: 24,
-        longitude: 88
+        longitude: 88,
       };
 
       var geoPoint = new entity.GeoPoint(value);
@@ -119,41 +122,41 @@ describe('entity', function() {
   describe('Key', function() {
     it('should assign the namespace', function() {
       var namespace = 'NS';
-      var key = new entity.Key({ namespace: namespace, path: [] });
+      var key = new entity.Key({namespace: namespace, path: []});
       assert.strictEqual(key.namespace, namespace);
     });
 
     it('should assign the kind', function() {
       var kind = 'kind';
-      var key = new entity.Key({ path: [kind] });
+      var key = new entity.Key({path: [kind]});
       assert.strictEqual(key.kind, kind);
     });
 
     it('should assign the ID', function() {
       var id = 11;
-      var key = new entity.Key({ path: ['Kind', id] });
+      var key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id);
     });
 
     it('should assign the ID from an Int', function() {
       var id = new entity.Int(11);
-      var key = new entity.Key({ path: ['Kind', id] });
+      var key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id.value);
     });
 
     it('should assign the name', function() {
       var name = 'name';
-      var key = new entity.Key({ path: ['Kind', name] });
+      var key = new entity.Key({path: ['Kind', name]});
       assert.strictEqual(key.name, name);
     });
 
     it('should assign a parent', function() {
-      var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+      var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert(key.parent instanceof entity.Key);
     });
 
     it('should always compute the correct path', function() {
-      var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+      var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
 
       key.parent.kind = 'GrandParentKind';
@@ -180,10 +183,10 @@ describe('entity', function() {
       var expectedValue = [{}];
 
       var valueProto = {
-        value_type: 'arrayValue',
+        valueType: 'arrayValue',
         arrayValue: {
-          values: expectedValue
-        }
+          values: expectedValue,
+        },
       };
 
       var run = false;
@@ -206,8 +209,8 @@ describe('entity', function() {
       var expectedValue = new Buffer('Hi');
 
       var valueProto = {
-        value_type: 'blobValue',
-        blobValue: expectedValue.toString('base64')
+        valueType: 'blobValue',
+        blobValue: expectedValue.toString('base64'),
       };
 
       assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
@@ -217,8 +220,8 @@ describe('entity', function() {
       var expectedValue = null;
 
       var valueProto = {
-        value_type: 'nullValue',
-        nullValue: 0
+        valueType: 'nullValue',
+        nullValue: 0,
       };
 
       var decodedValue = entity.decodeValueProto(valueProto);
@@ -229,8 +232,8 @@ describe('entity', function() {
       var expectedValue = 8.3;
 
       var valueProto = {
-        value_type: 'doubleValue',
-        doubleValue: expectedValue
+        valueType: 'doubleValue',
+        doubleValue: expectedValue,
       };
 
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
@@ -240,8 +243,8 @@ describe('entity', function() {
       var expectedValue = 8;
 
       var valueProto = {
-        value_type: 'integerValue',
-        integerValue: expectedValue
+        valueType: 'integerValue',
+        integerValue: expectedValue,
       };
 
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
@@ -251,8 +254,8 @@ describe('entity', function() {
       var expectedValue = {};
 
       var valueProto = {
-        value_type: 'entityValue',
-        entityValue: expectedValue
+        valueType: 'entityValue',
+        entityValue: expectedValue,
       };
 
       entity.entityFromEntityProto = function(entityProto) {
@@ -267,8 +270,8 @@ describe('entity', function() {
       var expectedValue = {};
 
       var valueProto = {
-        value_type: 'keyValue',
-        keyValue: expectedValue
+        valueType: 'keyValue',
+        keyValue: expectedValue,
       };
 
       entity.keyFromKeyProto = function(keyProto) {
@@ -288,11 +291,11 @@ describe('entity', function() {
       var expectedValue = new Date(seconds * 1000 + ms);
 
       var valueProto = {
-        value_type: 'timestampValue',
+        valueType: 'timestampValue',
         timestampValue: {
           seconds: seconds,
-          nanos: ms * 1e6
-        }
+          nanos: ms * 1e6,
+        },
       };
 
       assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
@@ -302,8 +305,8 @@ describe('entity', function() {
       var expectedValue = false;
 
       var valueProto = {
-        value_type: 'booleanValue',
-        booleanValue: expectedValue
+        valueType: 'booleanValue',
+        booleanValue: expectedValue,
       };
 
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
@@ -315,7 +318,7 @@ describe('entity', function() {
       var value = true;
 
       var expectedValueProto = {
-        booleanValue: value
+        booleanValue: value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -325,7 +328,7 @@ describe('entity', function() {
       var value = null;
 
       var expectedValueProto = {
-        nullValue: 0
+        nullValue: 0,
       };
 
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
@@ -335,7 +338,7 @@ describe('entity', function() {
       var value = 8;
 
       var expectedValueProto = {
-        integerValue: value
+        integerValue: value,
       };
 
       entity.Int = function(value_) {
@@ -350,7 +353,7 @@ describe('entity', function() {
       var value = new entity.Int(3);
 
       var expectedValueProto = {
-        integerValue: value.value
+        integerValue: value.value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -360,7 +363,7 @@ describe('entity', function() {
       var value = 8.3;
 
       var expectedValueProto = {
-        doubleValue: value
+        doubleValue: value,
       };
 
       entity.Double = function(value_) {
@@ -375,7 +378,7 @@ describe('entity', function() {
       var value = new entity.Double(3);
 
       var expectedValueProto = {
-        doubleValue: value.value
+        doubleValue: value.value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -385,7 +388,7 @@ describe('entity', function() {
       var value = new entity.GeoPoint();
 
       var expectedValueProto = {
-        geoPointValue: value.value
+        geoPointValue: value.value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -398,8 +401,8 @@ describe('entity', function() {
       var expectedValueProto = {
         timestampValue: {
           seconds: Math.floor(seconds),
-          nanos: value.getMilliseconds() * 1e6
-        }
+          nanos: value.getMilliseconds() * 1e6,
+        },
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -409,7 +412,7 @@ describe('entity', function() {
       var value = 'Hi';
 
       var expectedValueProto = {
-        stringValue: value
+        stringValue: value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -419,7 +422,7 @@ describe('entity', function() {
       var value = new Buffer('Hi');
 
       var expectedValueProto = {
-        blobValue: value
+        blobValue: value,
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -430,8 +433,8 @@ describe('entity', function() {
 
       var expectedValueProto = {
         arrayValue: {
-          values: value
-        }
+          values: value,
+        },
       };
 
       var run = false;
@@ -453,11 +456,11 @@ describe('entity', function() {
     it('should encode a Key', function() {
       var value = new entity.Key({
         namespace: 'ns',
-        path: ['Kind', 1]
+        path: ['Kind', 1],
       });
 
       var expectedValueProto = {
-        keyValue: value
+        keyValue: value,
       };
 
       entity.keyToKeyProto = function(key) {
@@ -470,15 +473,15 @@ describe('entity', function() {
 
     it('should encode an object', function() {
       var value = {
-        key: 'value'
+        key: 'value',
       };
 
       var expectedValueProto = {
         entityValue: {
           properties: {
-            key: value.key
-          }
-        }
+            key: value.key,
+          },
+        },
       };
 
       var run = false;
@@ -501,9 +504,9 @@ describe('entity', function() {
       var value = {
         a: {
           b: {
-            obj: true
-          }
-        }
+            obj: true,
+          },
+        },
       };
 
       var originalValue = extend(true, {}, value);
@@ -519,8 +522,8 @@ describe('entity', function() {
 
       var expectedValueProto = {
         entityValue: {
-          properties: {}
-        }
+          properties: {},
+        },
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -536,16 +539,16 @@ describe('entity', function() {
   describe('entityFromEntityProto', function() {
     it('should convert entity proto to entity', function() {
       var expectedEntity = {
-        name: 'Stephen'
+        name: 'Stephen',
       };
 
       var entityProto = {
         properties: {
           name: {
-            value_type: 'stringValue',
-            stringValue: expectedEntity.name
-          }
-        }
+            valueType: 'stringValue',
+            stringValue: expectedEntity.name,
+          },
+        },
       };
 
       assert.deepEqual(
@@ -561,13 +564,13 @@ describe('entity', function() {
 
       var entityObject = {
         data: {
-          name: value
-        }
+          name: value,
+        },
       };
 
       var expectedEntityProto = {
         key: null,
-        properties: entityObject.data
+        properties: entityObject.data,
       };
 
       entity.encodeValue = function(value_) {
@@ -591,41 +594,41 @@ describe('entity', function() {
           'array[].name',
           'array[].entity.name',
           'array[].entity.array[].name',
-          'array[].array[].entity.name'
+          'array[].array[].entity.name',
         ],
 
         data: {
           name: value,
 
           entity: {
-            name: value
+            name: value,
           },
 
           array: [
             {
-              name: value
+              name: value,
             },
             {
               entity: {
                 name: value,
                 array: [
                   {
-                    name: value
-                  }
-                ]
-              }
+                    name: value,
+                  },
+                ],
+              },
             },
             {
               array: [
                 {
                   entity: {
-                    name: value
-                  }
-                }
-              ]
-            }
-          ]
-        }
+                    name: value,
+                  },
+                },
+              ],
+            },
+          ],
+        },
       };
 
       var expectedEntityProto = {
@@ -633,17 +636,17 @@ describe('entity', function() {
         properties: {
           name: {
             stringValue: value,
-            excludeFromIndexes: true
+            excludeFromIndexes: true,
           },
           entity: {
             entityValue: {
               properties: {
                 name: {
                   stringValue: value,
-                  excludeFromIndexes: true
-                }
-              }
-            }
+                  excludeFromIndexes: true,
+                },
+              },
+            },
           },
           array: {
             arrayValue: {
@@ -653,10 +656,10 @@ describe('entity', function() {
                     properties: {
                       name: {
                         stringValue: value,
-                        excludeFromIndexes: true
-                      }
-                    }
-                  }
+                        excludeFromIndexes: true,
+                      },
+                    },
+                  },
                 },
                 {
                   entityValue: {
@@ -666,7 +669,7 @@ describe('entity', function() {
                           properties: {
                             name: {
                               stringValue: value,
-                              excludeFromIndexes: true
+                              excludeFromIndexes: true,
                             },
                             array: {
                               arrayValue: {
@@ -676,19 +679,19 @@ describe('entity', function() {
                                       properties: {
                                         name: {
                                           stringValue: value,
-                                          excludeFromIndexes: true
-                                        }
-                                      }
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                                          excludeFromIndexes: true,
+                                        },
+                                      },
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
                 {
                   entityValue: {
@@ -704,24 +707,24 @@ describe('entity', function() {
                                       properties: {
                                         name: {
                                           stringValue: value,
-                                          excludeFromIndexes: true
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
+                                          excludeFromIndexes: true,
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
       };
 
       assert.deepEqual(
@@ -736,13 +739,13 @@ describe('entity', function() {
       var key = {};
 
       var entityProto = {
-        key: key
+        key: key,
       };
 
       var results = [
         {
-          entity: entityProto
-        }
+          entity: entityProto,
+        },
       ];
 
       var expectedResults = entityProto;
@@ -767,7 +770,7 @@ describe('entity', function() {
   describe('isKeyComplete', function() {
     it('should convert key to key proto', function(done) {
       var key = new entity.Key({
-        path: ['Kind', 123]
+        path: ['Kind', 123],
       });
 
       entity.keyToKeyProto = function(key_) {
@@ -781,7 +784,7 @@ describe('entity', function() {
 
     it('should return true if key has id', function() {
       var key = new entity.Key({
-        path: ['Kind', 123]
+        path: ['Kind', 123],
       });
 
       assert.strictEqual(entity.isKeyComplete(key), true);
@@ -789,7 +792,7 @@ describe('entity', function() {
 
     it('should return true if key has name', function() {
       var key = new entity.Key({
-        path: ['Kind', 'name']
+        path: ['Kind', 'name'],
       });
 
       assert.strictEqual(entity.isKeyComplete(key), true);
@@ -797,7 +800,7 @@ describe('entity', function() {
 
     it('should return false if key does not have name or ID', function() {
       var key = new entity.Key({
-        path: ['Kind']
+        path: ['Kind'],
       });
 
       assert.strictEqual(entity.isKeyComplete(key), false);
@@ -810,20 +813,20 @@ describe('entity', function() {
     var keyProto = {
       partitionId: {
         namespaceId: NAMESPACE,
-        projectId: 'project-id'
+        projectId: 'project-id',
       },
       path: [
         {
-          id_type: 'id',
+          idType: 'id',
           kind: 'Kind',
-          id: '111'
+          id: '111',
         },
         {
-          id_type: 'name',
+          idType: 'name',
           kind: 'Kind2',
-          name: 'name'
-        }
-      ]
+          name: 'name',
+        },
+      ],
     };
 
     it('should set the namespace', function(done) {
@@ -839,12 +842,7 @@ describe('entity', function() {
       entity.Key = function(keyOptions) {
         assert.deepEqual(keyOptions, {
           namespace: NAMESPACE,
-          path: [
-            'Kind',
-            new entity.Int(111),
-            'Kind2',
-            'name'
-          ]
+          path: ['Kind', new entity.Int(111), 'Kind2', 'name'],
         });
 
         done();
@@ -867,21 +865,21 @@ describe('entity', function() {
       var keyProtoInvalid = {
         partitionId: {
           namespaceId: 'Namespace',
-          projectId: 'project-id'
+          projectId: 'project-id',
         },
         path: [
           {
-            kind: 'Kind'
+            kind: 'Kind',
           },
           {
-            kind: 'Kind2'
-          }
-        ]
+            kind: 'Kind2',
+          },
+        ],
       };
 
       try {
         entity.keyFromKeyProto(keyProtoInvalid);
-      } catch(e) {
+      } catch (e) {
         assert.strictEqual(e.name, 'InvalidKey');
         assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
         done();
@@ -892,7 +890,7 @@ describe('entity', function() {
   describe('keyToKeyProto', function() {
     it('should handle hierarchical key definitions', function() {
       var key = new entity.Key({
-        path: ['Kind1', 1, 'Kind2', 'name', 'Kind3', new entity.Int(3)]
+        path: ['Kind1', 1, 'Kind2', 'name', 'Kind3', new entity.Int(3)],
       });
 
       var keyProto = entity.keyToKeyProto(key);
@@ -915,7 +913,7 @@ describe('entity', function() {
     it('should detect the namespace of the hierarchical keys', function() {
       var key = new entity.Key({
         namespace: 'Namespace',
-        path: ['Kind1', 1, 'Kind2', 'name']
+        path: ['Kind1', 1, 'Kind2', 'name'],
       });
 
       var keyProto = entity.keyToKeyProto(key);
@@ -933,12 +931,12 @@ describe('entity', function() {
 
     it('should handle incomplete keys with & without namespaces', function() {
       var incompleteKey = new entity.Key({
-        path: ['Kind']
+        path: ['Kind'],
       });
 
       var incompleteKeyWithNs = new entity.Key({
         namespace: 'Namespace',
-        path: ['Kind']
+        path: ['Kind'],
       });
 
       var keyProto = entity.keyToKeyProto(incompleteKey);
@@ -957,12 +955,12 @@ describe('entity', function() {
 
     it('should throw if key contains 0 items', function(done) {
       var key = new entity.Key({
-        path: []
+        path: [],
       });
 
       try {
         entity.keyToKeyProto(key);
-      } catch(e) {
+      } catch (e) {
         assert.strictEqual(e.name, 'InvalidKey');
         assert.strictEqual(e.message, 'A key should contain at least a kind.');
         done();
@@ -972,12 +970,12 @@ describe('entity', function() {
     it('should throw if key path contains null ids', function(done) {
       var key = new entity.Key({
         namespace: 'Namespace',
-        path: ['Kind1', null, 'Company']
+        path: ['Kind1', null, 'Company'],
       });
 
       try {
         entity.keyToKeyProto(key);
-      } catch(e) {
+      } catch (e) {
         assert.strictEqual(e.name, 'InvalidKey');
         assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
         done();
@@ -987,7 +985,7 @@ describe('entity', function() {
     it('should not throw if key is incomplete', function() {
       var key = new entity.Key({
         namespace: 'Namespace',
-        path: ['Kind1', 123, 'Company', null]
+        path: ['Kind1', 123, 'Company', null],
       });
 
       assert.doesNotThrow(function() {
@@ -1000,32 +998,32 @@ describe('entity', function() {
     var queryProto = {
       distinctOn: [
         {
-          name: 'name'
-        }
+          name: 'name',
+        },
       ],
       kind: [
         {
-          name: 'Kind1'
-        }
+          name: 'Kind1',
+        },
       ],
       order: [
         {
           property: {
-            name: 'name'
+            name: 'name',
           },
-          direction: 'ASCENDING'
-        }
+          direction: 'ASCENDING',
+        },
       ],
       projection: [
         {
           property: {
-            name: 'name'
-          }
-        }
+            name: 'name',
+          },
+        },
       ],
       endCursor: 'end',
       limit: {
-        value: 1
+        value: 1,
       },
       offset: 1,
       startCursor: 'start',
@@ -1035,18 +1033,18 @@ describe('entity', function() {
             {
               propertyFilter: {
                 property: {
-                  name: 'name'
+                  name: 'name',
                 },
                 op: 'EQUAL',
                 value: {
-                  stringValue: 'John'
-                }
-              }
+                  stringValue: 'John',
+                },
+              },
             },
             {
               propertyFilter: {
                 property: {
-                  name: '__key__'
+                  name: '__key__',
                 },
                 op: 'HAS_ANCESTOR',
                 value: {
@@ -1054,27 +1052,28 @@ describe('entity', function() {
                     path: [
                       {
                         kind: 'Kind2',
-                        name: 'somename'
-                      }
-                    ]
-                  }
-                }
-              }
-            }
+                        name: 'somename',
+                      },
+                    ],
+                  },
+                },
+              },
+            },
           ],
-          op: 'AND'
-        }
-      }
+          op: 'AND',
+        },
+      },
     };
 
     it('should support all configurations of a query', function() {
       var ancestorKey = new entity.Key({
-        path: ['Kind2', 'somename']
+        path: ['Kind2', 'somename'],
       });
 
-      var ds = new Datastore({ projectId: 'project-id' });
+      var ds = new Datastore({projectId: 'project-id'});
 
-      var query = ds.createQuery('Kind1')
+      var query = ds
+        .createQuery('Kind1')
         .filter('name', 'John')
         .start('start')
         .end('end')
@@ -1089,11 +1088,12 @@ describe('entity', function() {
     });
 
     it('should handle buffer start and end values', function() {
-      var ds = new Datastore({ projectId: 'project-id' });
+      var ds = new Datastore({projectId: 'project-id'});
       var startVal = new Buffer('start');
       var endVal = new Buffer('end');
 
-      var query = ds.createQuery('Kind1')
+      var query = ds
+        .createQuery('Kind1')
         .start(startVal)
         .end(endVal);
 

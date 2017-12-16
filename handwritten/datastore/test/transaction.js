@@ -32,12 +32,12 @@ var fakeUtil = extend({}, util, {
 
     promisified = true;
     assert.deepEqual(options.exclude, ['createQuery', 'delete', 'save']);
-  }
+  },
 });
 
 var DatastoreRequestOverride = {
   delete: util.noop,
-  save: util.noop
+  save: util.noop,
 };
 
 var FakeDatastoreRequest = {
@@ -54,8 +54,8 @@ var FakeDatastoreRequest = {
       var results = DatastoreRequestOverride.save.apply(null, args);
       DatastoreRequestOverride.save = util.noop;
       return results;
-    }
-  }
+    },
+  },
 };
 
 describe('Transaction', function() {
@@ -66,21 +66,21 @@ describe('Transaction', function() {
   var NAMESPACE = 'a-namespace';
 
   var DATASTORE = {
-    request: function() {},
+    request_: function() {},
     projectId: PROJECT_ID,
-    namespace: NAMESPACE
+    namespace: NAMESPACE,
   };
 
   function key(path) {
-    return new entity.Key({ path: arrify(path) });
+    return new entity.Key({path: arrify(path)});
   }
 
   before(function() {
     Transaction = proxyquire('../src/transaction.js', {
       '@google-cloud/common': {
-        util: fakeUtil
+        util: fakeUtil,
       },
-      './request.js': FakeDatastoreRequest
+      './request.js': FakeDatastoreRequest,
     });
   });
 
@@ -105,11 +105,29 @@ describe('Transaction', function() {
       assert.strictEqual(transaction.namespace, NAMESPACE);
     });
 
+    it('should localize the transaction ID', function() {
+      var options = {
+        id: 'transaction-id',
+      };
+
+      var transaction = new Transaction(DATASTORE, options);
+      assert.strictEqual(transaction.id, options.id);
+    });
+
+    it('should localize readOnly', function() {
+      var options = {
+        readOnly: true,
+      };
+
+      var transaction = new Transaction(DATASTORE, options);
+      assert.strictEqual(transaction.readOnly, true);
+    });
+
     it('should localize request function', function(done) {
       var transaction;
 
       var fakeDataset = {
-        request: {
+        request_: {
           bind: function(context) {
             assert.strictEqual(context, fakeDataset);
 
@@ -119,8 +137,8 @@ describe('Transaction', function() {
             });
 
             return fakeDataset.request;
-          }
-        }
+          },
+        },
       };
 
       transaction = new Transaction(fakeDataset);
@@ -139,12 +157,24 @@ describe('Transaction', function() {
     });
 
     it('should commit', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.equal(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'commit');
+      transaction.request_ = function(config) {
+        assert.equal(config.client, 'DatastoreClient');
+        assert.equal(config.method, 'commit');
+        assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
       transaction.commit();
+    });
+
+    it('should accept gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.commit(gaxOptions);
     });
 
     it('should skip the commit', function(done) {
@@ -168,8 +198,7 @@ describe('Transaction', function() {
           callback(rollbackError, rollbackApiResponse);
         };
 
-        transaction.request_ = function(protoOpts, reqOpts, callback) {
-          callback = callback || reqOpts;
+        transaction.request_ = function(config, callback) {
           callback(error, apiResponse);
         };
       });
@@ -184,9 +213,8 @@ describe('Transaction', function() {
     });
 
     it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      var resp = {success: true};
+      transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
       transaction.commit(function(err, apiResponse) {
@@ -200,8 +228,8 @@ describe('Transaction', function() {
       var deleteArg1 = key(['Product', 123]);
       var deleteArg2 = key(['Product', 234]);
 
-      var saveArg1 = { key: key(['Product', 345]), data: '' };
-      var saveArg2 = { key: key(['Product', 456]), data: '' };
+      var saveArg1 = {key: key(['Product', 345]), data: ''};
+      var saveArg2 = {key: key(['Product', 456]), data: ''};
 
       // Queue saves & deletes in varying order.
       transaction.delete(deleteArg1);
@@ -233,16 +261,13 @@ describe('Transaction', function() {
       assert.equal(args.length, 2);
 
       // Save arguments must come first.
-      assert.deepEqual(args, [
-        [saveArg1, saveArg2],
-        [deleteArg1, deleteArg2]
-      ]);
+      assert.deepEqual(args, [[saveArg1, saveArg2], [deleteArg1, deleteArg2]]);
     });
 
     it('should honor ordering of mutations (last wins)', function() {
       // The delete should be ignored.
       transaction.delete(key(['Product', 123]));
-      transaction.save({ key: key(['Product', 123]), data: '' });
+      transaction.save({key: key(['Product', 123]), data: ''});
 
       var deleteCalled = 0;
       DatastoreRequestOverride.delete = function() {
@@ -262,8 +287,8 @@ describe('Transaction', function() {
     });
 
     it('should not squash key-incomplete mutations', function(done) {
-      transaction.save({ key: key(['Product']), data: '' });
-      transaction.save({ key: key(['Product']), data: '' });
+      transaction.save({key: key(['Product']), data: ''});
+      transaction.save({key: key(['Product']), data: ''});
 
       DatastoreRequestOverride.save = function(entities) {
         assert.strictEqual(entities.length, 2);
@@ -278,27 +303,16 @@ describe('Transaction', function() {
     it('should send the built request object', function(done) {
       transaction.requests_ = [
         {
-          mutations: [
-            { a: 'b' },
-            { c: 'd' }
-          ]
+          mutations: [{a: 'b'}, {c: 'd'}],
         },
         {
-          mutations: [
-            { e: 'f' },
-            { g: 'h' }
-          ]
-        }
+          mutations: [{e: 'f'}, {g: 'h'}],
+        },
       ];
 
-      transaction.request_ = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts, {
-          mutations: [
-            { a: 'b' },
-            { c: 'd' },
-            { e: 'f' },
-            { g: 'h' }
-          ]
+      transaction.request_ = function(config) {
+        assert.deepEqual(config.reqOpts, {
+          mutations: [{a: 'b'}, {c: 'd'}, {e: 'f'}, {g: 'h'}],
         });
         done();
       };
@@ -311,11 +325,15 @@ describe('Transaction', function() {
       var cb2Called = false;
 
       transaction.requestCallbacks_ = [
-        function() { cb1Called = true; },
-        function() { cb2Called = true; }
+        function() {
+          cb1Called = true;
+        },
+        function() {
+          cb2Called = true;
+        },
       ];
 
-      transaction.request_ = function(protoOpts, reqOpts, cb) {
+      transaction.request_ = function(config, cb) {
         cb();
       };
 
@@ -350,7 +368,7 @@ describe('Transaction', function() {
       var keys = [
         key('Product', 123),
         key('Product', 234),
-        key('Product', 345)
+        key('Product', 345),
       ];
 
       transaction.delete(keys);
@@ -371,18 +389,29 @@ describe('Transaction', function() {
     });
 
     it('should rollback', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'rollback');
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.client, 'DatastoreClient');
+        assert.equal(config.method, 'rollback');
+        assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
       transaction.rollback();
     });
 
+    it('should allow setting gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.rollback(gaxOptions);
+    });
+
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(error);
       };
       transaction.rollback(function(err) {
@@ -392,9 +421,8 @@ describe('Transaction', function() {
     });
 
     it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      var resp = {success: true};
+      transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
       transaction.rollback(function(err, apiResponse) {
@@ -405,8 +433,7 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback();
       };
       transaction.rollback(function() {
@@ -416,8 +443,7 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit when rollback errors', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
+      transaction.request_ = function(config, callback) {
         callback(new Error('Error.'));
       };
       transaction.rollback(function() {
@@ -429,16 +455,103 @@ describe('Transaction', function() {
 
   describe('run', function() {
     it('should make the correct API request', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Datastore',
-          method: 'beginTransaction'
-        });
-
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.client, 'DatastoreClient');
+        assert.strictEqual(config.method, 'beginTransaction');
+        assert.deepEqual(config.reqOpts, {transactionOptions: {}});
+        assert.strictEqual(config.gaxOpts, undefined);
         done();
       };
 
       transaction.run(assert.ifError);
+    });
+
+    it('should allow setting gaxOptions', function(done) {
+      var gaxOptions = {};
+
+      transaction.request_ = function(config) {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      transaction.run({gaxOptions: gaxOptions});
+    });
+
+    describe('options.readOnly', function() {
+      it('should respect the readOnly option', function(done) {
+        var options = {
+          readOnly: true,
+        };
+
+        transaction.request_ = function(config) {
+          assert.deepEqual(config.reqOpts.transactionOptions.readOnly, {});
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
+
+      it('should respect the global readOnly option', function(done) {
+        transaction.readOnly = true;
+
+        transaction.request_ = function(config) {
+          assert.deepEqual(config.reqOpts.transactionOptions.readOnly, {});
+          done();
+        };
+
+        transaction.run(assert.ifError);
+      });
+    });
+
+    describe('options.transactionId', function() {
+      it('should respect the transactionId option', function(done) {
+        var options = {
+          transactionId: 'transaction-id',
+        };
+
+        transaction.request_ = function(config) {
+          assert.deepEqual(config.reqOpts.transactionOptions.readWrite, {
+            previousTransaction: options.transactionId,
+          });
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
+
+      it('should respect the global transactionId option', function(done) {
+        transaction.id = 'transaction-id';
+
+        transaction.request_ = function(config) {
+          assert.deepEqual(config.reqOpts.transactionOptions.readWrite, {
+            previousTransaction: transaction.id,
+          });
+          done();
+        };
+
+        transaction.run(assert.ifError);
+      });
+    });
+
+    describe('options.transactionOptions', function() {
+      it('should allow full override of transactionOptions', function(done) {
+        transaction.readOnly = true;
+
+        var options = {
+          transactionOptions: {
+            readWrite: {
+              previousTransaction: 'transaction-id',
+            },
+          },
+        };
+
+        transaction.request_ = function(config) {
+          assert.deepEqual(config.reqOpts, options);
+          done();
+        };
+
+        transaction.run(options, assert.ifError);
+      });
     });
 
     describe('error', function() {
@@ -446,7 +559,7 @@ describe('Transaction', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(config, callback) {
           callback(error, apiResponse);
         };
       });
@@ -463,11 +576,11 @@ describe('Transaction', function() {
 
     describe('success', function() {
       var apiResponse = {
-        transaction: TRANSACTION_ID
+        transaction: TRANSACTION_ID,
       };
 
       beforeEach(function() {
-        transaction.request_ = function(protoOpts, callback) {
+        transaction.request_ = function(config, callback) {
           callback(null, apiResponse);
         };
       });
@@ -496,9 +609,9 @@ describe('Transaction', function() {
   describe('save', function() {
     it('should push entities into a queue', function() {
       var entities = [
-        { key: key('Product', 123), data: 123 },
-        { key: key('Product', 234), data: 234 },
-        { key: key('Product', 345), data: 345 }
+        {key: key('Product', 123), data: 123},
+        {key: key('Product', 234), data: 234},
+        {key: key('Product', 345), data: 345},
       ];
 
       transaction.save(entities);

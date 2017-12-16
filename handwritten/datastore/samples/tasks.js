@@ -22,8 +22,8 @@
 // https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/latest/guides/authentication
 const Datastore = require('@google-cloud/datastore');
 
-// Instantiates a client
-const datastore = Datastore();
+// Creates a client
+const datastore = new Datastore({});
 // [END build_service]
 
 /*
@@ -64,53 +64,52 @@ node tasks <command>
 */
 
 // [START add_entity]
-function addTask (description) {
+function addTask(description) {
   const taskKey = datastore.key('Task');
   const entity = {
     key: taskKey,
     data: [
       {
         name: 'created',
-        value: new Date().toJSON()
+        value: new Date().toJSON(),
       },
       {
         name: 'description',
         value: description,
-        excludeFromIndexes: true
+        excludeFromIndexes: true,
       },
       {
         name: 'done',
-        value: false
-      }
-    ]
+        value: false,
+      },
+    ],
   };
 
-  datastore.save(entity)
+  datastore
+    .save(entity)
     .then(() => {
       console.log(`Task ${taskKey.id} created successfully.`);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error('ERROR:', err);
     });
 }
 // [END add_entity]
 
 // [START update_entity]
-function markDone (taskId) {
+function markDone(taskId) {
   const transaction = datastore.transaction();
-  const taskKey = datastore.key([
-    'Task',
-    taskId
-  ]);
+  const taskKey = datastore.key(['Task', taskId]);
 
-  transaction.run()
+  transaction
+    .run()
     .then(() => transaction.get(taskKey))
-    .then((results) => {
+    .then(results => {
       const task = results[0];
       task.done = true;
       transaction.save({
         key: taskKey,
-        data: task
+        data: task,
       });
       return transaction.commit();
     })
@@ -123,38 +122,36 @@ function markDone (taskId) {
 // [END update_entity]
 
 // [START retrieve_entities]
-function listTasks () {
-  const query = datastore.createQuery('Task')
-    .order('created');
+function listTasks() {
+  const query = datastore.createQuery('Task').order('created');
 
-  datastore.runQuery(query)
-    .then((results) => {
+  datastore
+    .runQuery(query)
+    .then(results => {
       const tasks = results[0];
 
       console.log('Tasks:');
-      tasks.forEach((task) => {
+      tasks.forEach(task => {
         const taskKey = task[datastore.KEY];
         console.log(taskKey.id, task);
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.error('ERROR:', err);
     });
 }
 // [END retrieve_entities]
 
 // [START delete_entity]
-function deleteTask (taskId) {
-  const taskKey = datastore.key([
-    'Task',
-    taskId
-  ]);
+function deleteTask(taskId) {
+  const taskKey = datastore.key(['Task', taskId]);
 
-  datastore.delete(taskKey)
+  datastore
+    .delete(taskKey)
     .then(() => {
       console.log(`Task ${taskId} deleted successfully.`);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error('ERROR:', err);
     });
 }
@@ -166,33 +163,20 @@ require(`yargs`) // eslint-disable-line
     `new <description>`,
     `Adds a task with a description <description>.`,
     {},
-    (opts) => addTask(opts.description)
+    opts => addTask(opts.description)
   )
-  .command(
-    `done <taskId>`,
-    `Marks the specified task as done.`,
-    {},
-    (opts) => markDone(opts.taskId)
+  .command(`done <taskId>`, `Marks the specified task as done.`, {}, opts =>
+    markDone(opts.taskId)
   )
-  .command(
-    `list`,
-    `Lists all tasks ordered by creation time.`,
-    {},
-    listTasks
-  )
-  .command(
-    `delete <taskId>`,
-    `Deletes a task.`,
-    {},
-    (opts) => deleteTask(opts.taskId)
+  .command(`list`, `Lists all tasks ordered by creation time.`, {}, listTasks)
+  .command(`delete <taskId>`, `Deletes a task.`, {}, opts =>
+    deleteTask(opts.taskId)
   )
   .example(`node $0 new "Buy milk"`, `Adds a task with description "Buy milk".`)
   .example(`node $0 done 12345`, `Marks task 12345 as Done.`)
   .example(`node $0 list`, `Lists all tasks ordered by creation time`)
   .example(`node $0 delete 12345`, `Deletes task 12345.`)
   .wrap(120)
-  .recommendCommands()
   .epilogue(`For more information, see https://cloud.google.com/datastore/docs`)
   .help()
-  .strict()
-  .argv;
+  .strict().argv;
