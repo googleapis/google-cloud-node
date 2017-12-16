@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*jshint unused:false*/
+/* jshint unused:false */
 
 'use strict';
 const common = require('@google-cloud/common');
@@ -143,7 +143,6 @@ class RequestHandler extends common.Service {
    * @instance
    */
   sendError(errorMessage, userCb) {
-    var self = this;
     var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
     if (this._config.getShouldReportErrorsToAPI()) {
       this.request({
