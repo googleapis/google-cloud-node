@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 
-const datatransferModule = require('../src');
+const bigqueryDataTransferModule = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
@@ -25,13 +25,17 @@ error.code = FAKE_STATUS_CODE;
 describe('DataTransferServiceClient', () => {
   describe('getDataSource', () => {
     it('invokes getDataSource without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+      var formattedName = client.locationDataSourcePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATA_SOURCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -78,13 +82,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getDataSource with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+      var formattedName = client.locationDataSourcePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATA_SOURCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -107,7 +115,7 @@ describe('DataTransferServiceClient', () => {
 
   describe('listDataSources', () => {
     it('invokes listDataSources without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -128,7 +136,11 @@ describe('DataTransferServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listDataSources = (actualRequest, options, callback) => {
+      client._innerApiCalls.listDataSources = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.dataSources);
       };
@@ -141,7 +153,7 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listDataSources with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -170,7 +182,7 @@ describe('DataTransferServiceClient', () => {
 
   describe('createTransferConfig', () => {
     it('invokes createTransferConfig without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -219,7 +231,7 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes createTransferConfig with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -250,7 +262,7 @@ describe('DataTransferServiceClient', () => {
 
   describe('updateTransferConfig', () => {
     it('invokes updateTransferConfig without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -299,7 +311,7 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes updateTransferConfig with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -330,19 +342,25 @@ describe('DataTransferServiceClient', () => {
 
   describe('deleteTransferConfig', () => {
     it('invokes deleteTransferConfig without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedName = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         name: formattedName,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteTransferConfig = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteTransferConfig = mockSimpleGrpcMethod(
+        request
+      );
 
       client.deleteTransferConfig(request, err => {
         assert.ifError(err);
@@ -351,13 +369,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes deleteTransferConfig with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedName = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         name: formattedName,
       };
@@ -379,13 +401,17 @@ describe('DataTransferServiceClient', () => {
 
   describe('getTransferConfig', () => {
     it('invokes getTransferConfig without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedName = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         name: formattedName,
       };
@@ -426,13 +452,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getTransferConfig with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedName = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         name: formattedName,
       };
@@ -455,7 +485,7 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferConfigs', () => {
     it('invokes listTransferConfigs without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -476,7 +506,11 @@ describe('DataTransferServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listTransferConfigs = (actualRequest, options, callback) => {
+      client._innerApiCalls.listTransferConfigs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.transferConfigs);
       };
@@ -489,7 +523,7 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferConfigs with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -518,13 +552,17 @@ describe('DataTransferServiceClient', () => {
 
   describe('scheduleTransferRuns', () => {
     it('invokes scheduleTransferRuns without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedParent = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var startTime = {};
       var endTime = {};
       var request = {
@@ -550,13 +588,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes scheduleTransferRuns with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedParent = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var startTime = {};
       var endTime = {};
       var request = {
@@ -583,13 +625,18 @@ describe('DataTransferServiceClient', () => {
 
   describe('getTransferRun', () => {
     it('invokes getTransferRun without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedName = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         name: formattedName,
       };
@@ -622,13 +669,18 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getTransferRun with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedName = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         name: formattedName,
       };
@@ -651,13 +703,18 @@ describe('DataTransferServiceClient', () => {
 
   describe('deleteTransferRun', () => {
     it('invokes deleteTransferRun without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedName = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         name: formattedName,
       };
@@ -672,13 +729,18 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes deleteTransferRun with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedName = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         name: formattedName,
       };
@@ -700,13 +762,17 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferRuns', () => {
     it('invokes listTransferRuns without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedParent = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -721,7 +787,11 @@ describe('DataTransferServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listTransferRuns = (actualRequest, options, callback) => {
+      client._innerApiCalls.listTransferRuns = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.transferRuns);
       };
@@ -734,13 +804,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferRuns with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+      var formattedParent = client.locationTransferConfigPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -763,13 +837,18 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferLogs', () => {
     it('invokes listTransferLogs without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedParent = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -784,7 +863,11 @@ describe('DataTransferServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listTransferLogs = (actualRequest, options, callback) => {
+      client._innerApiCalls.listTransferLogs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.transferMessages);
       };
@@ -797,13 +880,18 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferLogs with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+      var formattedParent = client.locationRunPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TRANSFER_CONFIG]',
+        '[RUN]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -826,13 +914,17 @@ describe('DataTransferServiceClient', () => {
 
   describe('checkValidCreds', () => {
     it('invokes checkValidCreds without error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+      var formattedName = client.locationDataSourcePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATA_SOURCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -857,13 +949,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes checkValidCreds with error', done => {
-      var client = new datatransferModule.v1.DataTransferServiceClient({
+      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+      var formattedName = client.locationDataSourcePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATA_SOURCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -883,7 +979,6 @@ describe('DataTransferServiceClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

@@ -103,9 +103,7 @@ class DataTransferServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       locationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -268,9 +266,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -334,9 +332,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -422,9 +420,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -444,7 +442,7 @@ class DataTransferServiceClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Creates a new data transfer configuration.
@@ -492,9 +490,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -567,9 +565,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -617,9 +615,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -659,9 +657,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -726,9 +724,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -816,9 +814,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -838,7 +836,7 @@ class DataTransferServiceClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Creates transfer runs for a time range [range_start_time, range_end_time].
@@ -874,9 +872,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -928,9 +926,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -972,9 +970,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1041,9 +1039,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1138,9 +1136,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1160,7 +1158,7 @@ class DataTransferServiceClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Returns user facing log messages for the data transfer run.
@@ -1206,9 +1204,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1299,9 +1297,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1321,7 +1319,7 @@ class DataTransferServiceClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Returns true if valid credentials exist for the given data source and
@@ -1349,9 +1347,9 @@ class DataTransferServiceClient {
    *
    * @example
    *
-   * const datatransfer = require('datatransfer.v1');
+   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
    *
-   * var client = new datatransfer.v1.DataTransferServiceClient({
+   * var client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -1507,9 +1505,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -1520,9 +1516,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
-      .project;
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -1533,8 +1527,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
+    return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
   }
 
@@ -1546,9 +1539,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate
-      .match(locationDataSourceName)
-      .project;
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).project;
   }
 
   /**
@@ -1559,9 +1552,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate
-      .match(locationDataSourceName)
-      .location;
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).location;
   }
 
   /**
@@ -1572,9 +1565,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the data_source.
    */
   matchDataSourceFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate
-      .match(locationDataSourceName)
-      .data_source;
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).data_source;
   }
 
   /**
@@ -1585,9 +1578,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationTransferConfigName(locationTransferConfigName) {
-    return this._pathTemplates.locationTransferConfigPathTemplate
-      .match(locationTransferConfigName)
-      .project;
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).project;
   }
 
   /**
@@ -1598,9 +1591,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationTransferConfigName(locationTransferConfigName) {
-    return this._pathTemplates.locationTransferConfigPathTemplate
-      .match(locationTransferConfigName)
-      .location;
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).location;
   }
 
   /**
@@ -1610,10 +1603,12 @@ class DataTransferServiceClient {
    *   A fully-qualified path representing a location_transfer_config resources.
    * @returns {String} - A string representing the transfer_config.
    */
-  matchTransferConfigFromLocationTransferConfigName(locationTransferConfigName) {
-    return this._pathTemplates.locationTransferConfigPathTemplate
-      .match(locationTransferConfigName)
-      .transfer_config;
+  matchTransferConfigFromLocationTransferConfigName(
+    locationTransferConfigName
+  ) {
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).transfer_config;
   }
 
   /**
@@ -1624,8 +1619,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate
-      .match(locationRunName)
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
       .project;
   }
 
@@ -1637,8 +1631,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate
-      .match(locationRunName)
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
       .location;
   }
 
@@ -1650,8 +1643,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the transfer_config.
    */
   matchTransferConfigFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate
-      .match(locationRunName)
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
       .transfer_config;
   }
 
@@ -1663,8 +1655,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the run.
    */
   matchRunFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate
-      .match(locationRunName)
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
       .run;
   }
 
@@ -1676,8 +1667,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromDataSourceName(dataSourceName) {
-    return this._pathTemplates.dataSourcePathTemplate
-      .match(dataSourceName)
+    return this._pathTemplates.dataSourcePathTemplate.match(dataSourceName)
       .project;
   }
 
@@ -1689,8 +1679,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the data_source.
    */
   matchDataSourceFromDataSourceName(dataSourceName) {
-    return this._pathTemplates.dataSourcePathTemplate
-      .match(dataSourceName)
+    return this._pathTemplates.dataSourcePathTemplate.match(dataSourceName)
       .data_source;
   }
 
@@ -1702,9 +1691,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromTransferConfigName(transferConfigName) {
-    return this._pathTemplates.transferConfigPathTemplate
-      .match(transferConfigName)
-      .project;
+    return this._pathTemplates.transferConfigPathTemplate.match(
+      transferConfigName
+    ).project;
   }
 
   /**
@@ -1715,9 +1704,9 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the transfer_config.
    */
   matchTransferConfigFromTransferConfigName(transferConfigName) {
-    return this._pathTemplates.transferConfigPathTemplate
-      .match(transferConfigName)
-      .transfer_config;
+    return this._pathTemplates.transferConfigPathTemplate.match(
+      transferConfigName
+    ).transfer_config;
   }
 
   /**
@@ -1728,9 +1717,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate
-      .match(runName)
-      .project;
+    return this._pathTemplates.runPathTemplate.match(runName).project;
   }
 
   /**
@@ -1741,9 +1728,7 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the transfer_config.
    */
   matchTransferConfigFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate
-      .match(runName)
-      .transfer_config;
+    return this._pathTemplates.runPathTemplate.match(runName).transfer_config;
   }
 
   /**
@@ -1754,11 +1739,8 @@ class DataTransferServiceClient {
    * @returns {String} - A string representing the run.
    */
   matchRunFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate
-      .match(runName)
-      .run;
+    return this._pathTemplates.runPathTemplate.match(runName).run;
   }
 }
-
 
 module.exports = DataTransferServiceClient;

@@ -1,0 +1,7 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "datatransfer",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/datatransfer/latest/",
+  "release_quality": "alpha"
+}
