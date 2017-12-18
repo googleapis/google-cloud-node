@@ -867,6 +867,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *   excludeFromIndexes: [
  *     'description',
  *     'embeddedEntity.description',
+ *     'arrayValue[]',
  *     'arrayValue[].description'
  *   ],
  *   data: {
@@ -875,6 +876,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *       description: 'Long string (...)'
  *     },
  *     arrayValue: [
+ *       'Long string (...)',
  *       {
  *         description: 'Long string (...)'
  *       }
