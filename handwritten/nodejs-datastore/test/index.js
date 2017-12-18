@@ -60,12 +60,16 @@ function fakeGoogleAutoAuth() {
 
 var createInsecureOverride;
 var fakeGoogleGax = {
-  grpc: {
-    credentials: {
-      createInsecure: function() {
-        return (createInsecureOverride || util.noop).apply(null, arguments);
+  grpc: function() {
+    return {
+      grpc: {
+        credentials: {
+          createInsecure: function() {
+            return (createInsecureOverride || util.noop).apply(null, arguments);
+          },
+        },
       },
-    },
+    };
   },
 };
 
