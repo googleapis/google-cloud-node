@@ -15,10 +15,10 @@
 'use strict';
 
 describe('ClusterControllerSmokeTest', () => {
-  if (!process.env.SMOKE_TEST_PROJECT) {
-    throw new Error("Usage: SMOKE_TEST_PROJECT=<project_id> node #{$0}");
+  if (!process.env.GCLOUD_PROJECT) {
+    throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
   }
-  var projectId = process.env.SMOKE_TEST_PROJECT;
+  var projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
     const dataproc = require('../src');
@@ -35,7 +35,8 @@ describe('ClusterControllerSmokeTest', () => {
       region: region,
     };
 
-    client.listClusters(request)
+    client
+      .listClusters(request)
       .then(responses => {
         var resources = responses[0];
         for (let i = 0; i < resources.length; i += 1) {
@@ -61,7 +62,6 @@ describe('ClusterControllerSmokeTest', () => {
       region: region,
     };
 
-
     var options = {autoPaginate: false};
     var callback = responses => {
       // The actual resources in a response.
@@ -77,8 +77,9 @@ describe('ClusterControllerSmokeTest', () => {
         // Fetch the next page.
         return client.listClusters(nextRequest, options).then(callback);
       }
-    }
-    client.listClusters(request, options)
+    };
+    client
+      .listClusters(request, options)
       .then(callback)
       .then(done)
       .catch(done);
@@ -97,7 +98,8 @@ describe('ClusterControllerSmokeTest', () => {
       projectId: projectId2,
       region: region,
     };
-    client.listClustersStream(request)
+    client
+      .listClustersStream(request)
       .on('data', element => {
         console.log(element);
       })

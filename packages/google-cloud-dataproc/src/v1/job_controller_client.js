@@ -100,11 +100,7 @@ class JobControllerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listJobs: new gax.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'jobs'
-      ),
+      listJobs: new gax.PageDescriptor('pageToken', 'nextPageToken', 'jobs'),
     };
 
     // Put together the default options sent with requests.
@@ -171,9 +167,7 @@ class JobControllerClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -525,7 +519,7 @@ class JobControllerClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Updates a job in a project.
@@ -714,6 +708,5 @@ class JobControllerClient {
     return this._innerApiCalls.deleteJob(request, options, callback);
   }
 }
-
 
 module.exports = JobControllerClient;

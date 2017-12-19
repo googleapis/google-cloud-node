@@ -110,10 +110,15 @@ class ClusterControllerClient {
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/dataproc/v1/clusters.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/dataproc/v1/clusters.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -135,9 +140,7 @@ class ClusterControllerClient {
     var updateClusterMetadata = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.ClusterOperationMetadata'
     );
-    var deleteClusterResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
-    );
+    var deleteClusterResponse = protoFilesRoot.lookup('google.protobuf.Empty');
     var deleteClusterMetadata = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.ClusterOperationMetadata'
     );
@@ -211,7 +214,8 @@ class ClusterControllerClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName] || this._descriptors.longrunning[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -235,9 +239,7 @@ class ClusterControllerClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -910,7 +912,7 @@ class ClusterControllerClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Gets cluster diagnostic information.
@@ -1023,6 +1025,5 @@ class ClusterControllerClient {
     return this._innerApiCalls.diagnoseCluster(request, options, callback);
   }
 }
-
 
 module.exports = ClusterControllerClient;

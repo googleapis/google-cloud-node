@@ -1,0 +1,7 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "dataproc",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/dataproc/latest/",
+  "release_quality": "alpha"
+}
