@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/speech",
   "description": "Cloud Speech Client Library for Node.js",
-  "version": "0.11.0",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -46,6 +46,7 @@
     "Song Wang <songwang@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>",
     "wanacode <wanacode@users.noreply.github.com>"
   ],
   "scripts": {
