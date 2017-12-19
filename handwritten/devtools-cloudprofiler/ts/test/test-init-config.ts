@@ -129,7 +129,7 @@ describe('initConfig', () => {
          serviceContext: {service: 'fake-service'}
        };
        const expConfig = {
-         logLevel: 1,
+         logLevel: 2,
          serviceContext: {service: 'fake-service'},
          disableHeap: false,
          disableTime: false,

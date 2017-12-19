@@ -124,7 +124,7 @@ export interface ProfilerConfig extends AuthenticationConfig {
 
 // Default values for configuration for a profiler.
 export const defaultConfig = {
-  logLevel: 1,
+  logLevel: 2,
   serviceContext: {},
   disableHeap: false,
   disableTime: false,

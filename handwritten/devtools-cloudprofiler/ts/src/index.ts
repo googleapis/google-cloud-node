@@ -18,12 +18,16 @@ import * as delay from 'delay';
 import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as path from 'path';
+import {normalize} from 'path';
 import * as pify from 'pify';
+
 import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
+
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {Profiler} from './profiler';
 
 const common: Common = require('@google-cloud/common');
+const pjson = require('../../package.json');
 
 /**
  * @return value of metadata field.
@@ -118,7 +122,15 @@ let profiler: Profiler|undefined = undefined;
  *
  */
 export async function start(config: Config = {}): Promise<void> {
-  const normalizedConfig = await initConfig(config);
+  let normalizedConfig: ProfilerConfig;
+  try {
+    normalizedConfig = await initConfig(config);
+  } catch (e) {
+    const logger = new common.logger(
+        {level: common.logger.LEVELS[config.logLevel || 2], tag: pjson.name});
+    logger.error(`Could not start profiler: ${e}`);
+    return;
+  }
   profiler = new Profiler(normalizedConfig);
   profiler.start();
 }
