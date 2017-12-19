@@ -51,17 +51,24 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createCluster = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.createCluster = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.createCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .createCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes createCluster with error', done => {
@@ -81,18 +88,26 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createCluster = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.createCluster = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .createCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -100,8 +115,14 @@ describe('ClusterControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.createCluster.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.createCluster.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.createCluster.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.createCluster.metadataDecoder instanceof
+          Function
+      );
     });
   });
 
@@ -137,17 +158,24 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.updateCluster = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.updateCluster = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.updateCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .updateCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes updateCluster with error', done => {
@@ -171,18 +199,26 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.updateCluster = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.updateCluster = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.updateCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .updateCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -190,8 +226,14 @@ describe('ClusterControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.updateCluster.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.updateCluster.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.updateCluster.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.updateCluster.metadataDecoder instanceof
+          Function
+      );
     });
   });
 
@@ -216,17 +258,24 @@ describe('ClusterControllerClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.deleteCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .deleteCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes deleteCluster with error', done => {
@@ -246,18 +295,26 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.deleteCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .deleteCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -265,8 +322,14 @@ describe('ClusterControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.deleteCluster.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.deleteCluster.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.deleteCluster.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.deleteCluster.metadataDecoder instanceof
+          Function
+      );
     });
   });
 
@@ -367,7 +430,11 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listClusters = (actualRequest, options, callback) => {
+      client._innerApiCalls.listClusters = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.clusters);
       };
@@ -430,17 +497,24 @@ describe('ClusterControllerClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.diagnoseCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .diagnoseCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes diagnoseCluster with error', done => {
@@ -460,18 +534,26 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.diagnoseCluster(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .diagnoseCluster(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -479,11 +561,16 @@ describe('ClusterControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.diagnoseCluster.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.diagnoseCluster.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.diagnoseCluster
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.diagnoseCluster
+          .metadataDecoder instanceof Function
+      );
     });
   });
-
 });
 describe('JobControllerClient', () => {
   describe('submitJob', () => {
@@ -611,11 +698,7 @@ describe('JobControllerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.getJob = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.getJob = mockSimpleGrpcMethod(request, null, error);
 
       client.getJob(request, (err, response) => {
         assert(err instanceof Error);
@@ -897,7 +980,6 @@ describe('JobControllerClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
@@ -921,12 +1003,11 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          }
-          else {
+          } else {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };
