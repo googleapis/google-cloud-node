@@ -63,7 +63,7 @@
     "concat-stream": "^1.5.0",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.1",
-    "google-auto-auth": "^0.7.2",
+    "google-auto-auth": "^0.8.2",
     "google-gax": "^0.14.2",
     "google-proto-files": "^0.13.1",
     "is": "^3.0.1",
