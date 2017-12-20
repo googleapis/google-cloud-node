@@ -713,7 +713,7 @@ Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
   }
 
   if (port.test(baseUrl)) {
-    this.port_ = baseUrl.match(port)[1];
+    this.port_ = Number(baseUrl.match(port)[1]);
   }
 
   this.baseUrl_ = baseUrl

@@ -548,10 +548,10 @@ describe('Datastore', function() {
       assert.strictEqual(datastore.baseUrl_, 'localhost');
     });
 
-    it('should set port if one was found', function() {
+    it('should set Numberified port if one was found', function() {
       setHost('http://localhost:9090');
       datastore.determineBaseUrl_();
-      assert.strictEqual(datastore.port_, '9090');
+      assert.strictEqual(datastore.port_, 9090);
     });
 
     it('should not set customEndpoint_ when using default baseurl', function() {
@@ -573,7 +573,7 @@ describe('Datastore', function() {
     describe('with DATASTORE_EMULATOR_HOST environment variable', function() {
       var DATASTORE_EMULATOR_HOST = 'localhost:9090';
       var EXPECTED_BASE_URL = 'localhost';
-      var EXPECTED_PORT = '9090';
+      var EXPECTED_PORT = 9090;
 
       beforeEach(function() {
         setHost(DATASTORE_EMULATOR_HOST);
