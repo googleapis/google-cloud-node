@@ -1,11 +1,11 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud OS Login API: Node.js Client](https://github.com/GoogleCloudPlatform/google-cloud-node)
+# [Google Cloud OS Login API: Node.js Client](https://github.com/googleapis/nodejs-oslogin)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/GoogleCloudPlatform/google-cloud-node.svg?style=flat)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?branch=master&svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
-[![codecov](https://img.shields.io/codecov/c/github/GoogleCloudPlatform/google-cloud-node/master.svg?style=flat)](https://codecov.io/gh/GoogleCloudPlatform/google-cloud-node)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-oslogin.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-oslogin)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-oslogin?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-oslogin)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-oslogin/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-oslogin)
 
 > Node.js idiomatic client for [OS Login][product-docs].
 
@@ -13,7 +13,7 @@ Manages OS login configuration for Directory API users.
 
 
 * [OS Login Node.js Client API Reference][client-docs]
-* [github.com/GoogleCloudPlatform/google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-node)
+* [github.com/googleapis/nodejs-oslogin](https://github.com/googleapis/nodejs-oslogin)
 * [OS Login Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -78,13 +78,13 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-oslogin/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-oslogin/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/oslogin/latest/
 [product-docs]: https://cloud.google.com/compute/docs/oslogin/rest/

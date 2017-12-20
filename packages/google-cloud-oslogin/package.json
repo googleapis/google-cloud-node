@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-oslogin",
   "main": "src/index.js",
   "files": [
     "protos",
