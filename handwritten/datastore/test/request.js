@@ -939,7 +939,10 @@ describe('Request', function() {
         };
 
         FakeQuery.prototype.start = function(endCursor) {
-          assert.strictEqual(endCursor, apiResponse.batch.endCursor);
+          assert.strictEqual(
+            endCursor,
+            apiResponse.batch.endCursor.toString('base64')
+          );
           startCalled = true;
           return this;
         };
@@ -991,7 +994,7 @@ describe('Request', function() {
             assert.deepEqual(entities, allResults);
 
             assert.deepEqual(info, {
-              endCursor: apiResponse.batch.endCursor,
+              endCursor: apiResponse.batch.endCursor.toString('base64'),
               moreResults: apiResponse.batch.moreResults,
             });
 
