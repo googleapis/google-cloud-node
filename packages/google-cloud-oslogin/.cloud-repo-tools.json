@@ -1,0 +1,13 @@
+{
+  "_product": "oslogin",
+  "id": "oslogin",
+  "name": "Google Cloud OS Login API",
+  "short_name": "OS Login",
+  "docs_url": "https://cloud.google.com/compute/docs/oslogin/rest/",
+  "description": "Manages OS login configuration for Directory API users.",
+  "api_id": "oslogin.googleapis.com",
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/oslogin/latest/",
+  "release_quality": "alpha"
+}
