@@ -686,7 +686,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
     };
 
     if (resp.batch.endCursor) {
-      info.endCursor = resp.batch.endCursor;
+      info.endCursor = resp.batch.endCursor.toString('base64');
     }
 
     var entities = [];
