@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2017 Google, Inc.',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/oslogin',
+    systemName: '@google-cloud/os-login',
     theme: 'lumen'
   }
 };
