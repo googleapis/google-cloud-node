@@ -90,6 +90,8 @@ describe('Datastore', function() {
   var PROJECT_ID = 'project-id';
   var NAMESPACE = 'namespace';
 
+  var DATASTORE_PROJECT_ID_CACHED = process.env.DATASTORE_PROJECT_ID;
+
   var OPTIONS = {
     projectId: PROJECT_ID,
     apiEndpoint: 'http://endpoint',
@@ -121,6 +123,14 @@ describe('Datastore', function() {
       projectId: PROJECT_ID,
       namespace: NAMESPACE,
     });
+  });
+
+  afterEach(function() {
+    if (typeof DATASTORE_PROJECT_ID_CACHED === 'string') {
+      process.env.DATASTORE_PROJECT_ID = DATASTORE_PROJECT_ID_CACHED;
+    } else {
+      delete process.env.DATASTORE_PROJECT_ID;
+    }
   });
 
   after(function() {
@@ -167,6 +177,7 @@ describe('Datastore', function() {
 
     it('should localize the projectId', function() {
       assert.strictEqual(datastore.projectId, PROJECT_ID);
+      assert.strictEqual(datastore.options.projectId, PROJECT_ID);
     });
 
     it('should default project ID to placeholder', function() {
@@ -174,16 +185,20 @@ describe('Datastore', function() {
       assert.strictEqual(datastore.projectId, '{{projectId}}');
     });
 
+    it('should not default options.projectId to placeholder', function() {
+      var datastore = new Datastore({});
+      assert.strictEqual(datastore.options.projectId, undefined);
+    });
+
     it('should use DATASTORE_PROJECT_ID', function() {
-      var datastoreProjectIdCached = process.env.DATASTORE_PROJECT_ID;
       var projectId = 'overridden-project-id';
 
       process.env.DATASTORE_PROJECT_ID = projectId;
 
-      var datastore = new Datastore(OPTIONS);
-      process.env.DATASTORE_PROJECT_ID = datastoreProjectIdCached;
+      var datastore = new Datastore({});
 
       assert.strictEqual(datastore.projectId, projectId);
+      assert.strictEqual(datastore.options.projectId, projectId);
     });
 
     it('should set the default base URL', function() {
@@ -204,6 +219,8 @@ describe('Datastore', function() {
     });
 
     it('should localize the options', function() {
+      delete process.env.DATASTORE_PROJECT_ID;
+
       var options = {
         a: 'b',
         c: 'd',
@@ -222,6 +239,7 @@ describe('Datastore', function() {
             scopes: v1.DatastoreClient.scopes,
             servicePath: datastore.baseUrl_,
             port: 443,
+            projectId: undefined,
           },
           options
         )
