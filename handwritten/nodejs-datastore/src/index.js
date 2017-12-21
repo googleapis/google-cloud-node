@@ -370,17 +370,22 @@ function Datastore(options) {
 
   this.clients_ = new Map();
   this.datastore = this;
+
   /**
    * @name Datastore#namespace
    * @type {string}
    */
   this.namespace = options.namespace;
+
+  const userProvidedProjectId =
+    options.projectId || process.env.DATASTORE_PROJECT_ID;
+  const defaultProjectId = '{{projectId}}';
+
   /**
    * @name Datastore#projectId
    * @type {string}
    */
-  this.projectId =
-    process.env.DATASTORE_PROJECT_ID || options.projectId || '{{projectId}}';
+  this.projectId = userProvidedProjectId || defaultProjectId;
 
   this.defaultBaseUrl_ = 'datastore.googleapis.com';
   this.determineBaseUrl_(options.apiEndpoint);
@@ -392,10 +397,10 @@ function Datastore(options) {
       scopes: gapic.v1.DatastoreClient.scopes,
       servicePath: this.baseUrl_,
       port: is.number(this.port_) ? this.port_ : 443,
+      projectId: userProvidedProjectId,
     },
     options
   );
-
   if (this.customEndpoint_) {
     this.options.sslCreds = grpc.credentials.createInsecure();
   }
