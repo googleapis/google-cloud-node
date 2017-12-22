@@ -64,8 +64,10 @@ function populateFromError(err, errorMessage) {
   }
 
   if (has(err, 'serviceContext') && isObject(err.serviceContext)) {
-    errorMessage.setServiceContext(err.serviceContext.service,
-                                   err.serviceContext.version);
+    errorMessage.setServiceContext(
+      err.serviceContext.service,
+      err.serviceContext.version
+    );
   }
 }
 
@@ -117,8 +119,10 @@ function populateFromObject(ob, errorMessage) {
   }
 
   if (has(ob, 'serviceContext') && isObject(ob.serviceContext)) {
-    errorMessage.setServiceContext(ob.serviceContext.service,
-                                   ob.serviceContext.version);
+    errorMessage.setServiceContext(
+      ob.serviceContext.service,
+      ob.serviceContext.version
+    );
   }
 }
 

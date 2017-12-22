@@ -17,49 +17,48 @@
 'use strict';
 
 var assert = require('assert');
-var RequestInformationContainer =
-  require('../../../src/classes/request-information-container.js');
+var RequestInformationContainer = require('../../../src/classes/request-information-container.js');
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('RequestInformationContainer', function() {
   var f = new Fuzzer();
   var cbFn, ric;
-  beforeEach(function() {ric = new RequestInformationContainer();});
+  beforeEach(function() {
+    ric = new RequestInformationContainer();
+  });
   describe('Fuzzing against RequestInformationContainer', function() {
-    it('Should return the property as an empty string',
-      function() {
-        cbFn = function() {
-          assert.deepEqual(ric.url, '');
-        };
-        f.fuzzFunctionForTypes(ric.setUrl, ['string'], cbFn, ric);
-      }
-   );
+    it('Should return the property as an empty string', function() {
+      cbFn = function() {
+        assert.deepEqual(ric.url, '');
+      };
+      f.fuzzFunctionForTypes(ric.setUrl, ['string'], cbFn, ric);
+    });
     it('Should return the method property as an empty string', function() {
-      cbFn = function(returnValue) {
+      cbFn = function() {
         assert.deepEqual(ric.method, '');
       };
       f.fuzzFunctionForTypes(ric.setMethod, ['string'], cbFn, ric);
     });
     it('Should return the referrer property as an empty string', function() {
-      cbFn = function(returnValue) {
+      cbFn = function() {
         assert.deepEqual(ric.referrer, '');
       };
       f.fuzzFunctionForTypes(ric.setReferrer, ['string'], cbFn, ric);
     });
     it('Should return the userAgent property as an empty string', function() {
-      cbFn = function(returnValue) {
+      cbFn = function() {
         assert.deepEqual(ric.userAgent, '');
       };
       f.fuzzFunctionForTypes(ric.setUserAgent, ['string'], cbFn, ric);
     });
     it('Should return the property as an empty string', function() {
-      cbFn = function(returnValue) {
+      cbFn = function() {
         assert.deepEqual(ric.remoteAddress, '');
       };
       f.fuzzFunctionForTypes(ric.setRemoteAddress, ['string'], cbFn, ric);
     });
     it('Should return the default value for statusCode', function() {
-      cbFn = function(returnValue) {
+      cbFn = function() {
         assert.strictEqual(ric.statusCode, 0);
       };
       f.fuzzFunctionForTypes(ric.setStatusCode, ['number'], cbFn, ric);
