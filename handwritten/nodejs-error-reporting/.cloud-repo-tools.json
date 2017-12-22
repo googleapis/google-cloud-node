@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "error_reporting",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/error-reporting/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "snippets",
+      "name": "Examples",
+      "file": "snippets.js",
+      "docs_link": "https://cloud.google.com/error-reporting/docs",
+      "usage": "node snippets.js --help"
+    }
+  ]
+}

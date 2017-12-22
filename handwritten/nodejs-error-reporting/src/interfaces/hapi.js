@@ -43,14 +43,13 @@ function hapiErrorHandler(req, err, config) {
   }
 
   var em = new ErrorMessage()
-               .consumeRequestInformation(hapiRequestInformationExtractor(req))
-               .setServiceContext(service, version);
+    .consumeRequestInformation(hapiRequestInformationExtractor(req))
+    .setServiceContext(service, version);
 
   populateErrorMessage(err, em);
 
   return em;
 }
-
 
 /**
  * Creates a Hapi plugin object which can be used to handle errors in Hapi.
@@ -60,7 +59,6 @@ function hapiErrorHandler(req, err, config) {
  * @returns {Object} - the actual Hapi plugin
  */
 function makeHapiPlugin(client, config) {
-
   /**
    * The register function serves to attach the hapiErrorHandler to specific
    * points in the hapi request-response lifecycle. Namely: it attaches to the
@@ -85,11 +83,16 @@ function makeHapiPlugin(client, config) {
 
       if (isFunction(server.ext)) {
         server.ext('onPreResponse', function(request, reply) {
-          if (isObject(request) && isObject(request.response) &&
-              request.response.isBoom) {
-            var em = hapiErrorHandler(request,
-                                      new Error(request.response.message),
-                                      config);
+          if (
+            isObject(request) &&
+            isObject(request.response) &&
+            request.response.isBoom
+          ) {
+            var em = hapiErrorHandler(
+              request,
+              new Error(request.response.message),
+              config
+            );
             client.sendError(em);
           }
 
@@ -109,7 +112,7 @@ function makeHapiPlugin(client, config) {
 
   hapiPlugin.register.attributes = {
     name: packageJson.name,
-    version: packageJson.version
+    version: packageJson.version,
   };
 
   return hapiPlugin;

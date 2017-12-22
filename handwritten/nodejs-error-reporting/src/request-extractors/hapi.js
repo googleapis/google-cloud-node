@@ -20,8 +20,7 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;
 var isArray = is.array;
-var RequestInformationContainer =
-    require('../classes/request-information-container.js');
+var RequestInformationContainer = require('../classes/request-information-container.js');
 
 /**
  * This function is used to check for a pending status code on the response
@@ -33,14 +32,17 @@ var RequestInformationContainer =
  *  extractable status code.
  */
 function attemptToExtractStatusCode(req) {
-
-  if (has(req, 'response') && isObject(req.response) &&
-      has(req.response, 'statusCode')) {
-
+  if (
+    has(req, 'response') &&
+    isObject(req.response) &&
+    has(req.response, 'statusCode')
+  ) {
     return req.response.statusCode;
-  } else if (has(req, 'response') && isObject(req.response) &&
-             isObject(req.response.output)) {
-
+  } else if (
+    has(req, 'response') &&
+    isObject(req.response) &&
+    isObject(req.response.output)
+  ) {
     return req.response.output.statusCode;
   }
 
@@ -59,12 +61,9 @@ function attemptToExtractStatusCode(req) {
  *  a string that represents the remote IP address
  */
 function extractRemoteAddressFromRequest(req) {
-
   if (has(req.headers, 'x-forwarded-for')) {
-
     return req.headers['x-forwarded-for'];
   } else if (isObject(req.info)) {
-
     return req.info.remoteAddress;
   }
 
@@ -81,21 +80,24 @@ function extractRemoteAddressFromRequest(req) {
  *  information in a standardized format
  */
 function hapiRequestInformationExtractor(req) {
-
   var returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isObject(req.headers) || isFunction(req) ||
-      isArray(req)) {
-
+  if (
+    !isObject(req) ||
+    !isObject(req.headers) ||
+    isFunction(req) ||
+    isArray(req)
+  ) {
     return returnObject;
   }
 
-  returnObject.setMethod(req.method)
-      .setUrl(req.url)
-      .setUserAgent(req.headers['user-agent'])
-      .setReferrer(req.headers.referrer)
-      .setStatusCode(attemptToExtractStatusCode(req))
-      .setRemoteAddress(extractRemoteAddressFromRequest(req));
+  returnObject
+    .setMethod(req.method)
+    .setUrl(req.url)
+    .setUserAgent(req.headers['user-agent'])
+    .setReferrer(req.headers.referrer)
+    .setStatusCode(attemptToExtractStatusCode(req))
+    .setRemoteAddress(extractRemoteAddressFromRequest(req));
 
   return returnObject;
 }

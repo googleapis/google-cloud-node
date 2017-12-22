@@ -35,7 +35,7 @@ describe('Manual handler', function() {
       if (cb) {
         setImmediate(cb);
       }
-    }
+    },
   };
   var report = manual(client, config, {
     warn: function(message) {
@@ -46,11 +46,14 @@ describe('Manual handler', function() {
       // Thus, the ErrorMessage objects given to the `report` method in the
       // tests do not have construction site information to verify that if
       // that information is not available, the user is issued a warning.
-      assert.strictEqual(message, 'Encountered a manually constructed error ' +
-        'with message "builder test" but without a construction site stack ' +
-        'trace.  This error might not be visible in the error reporting ' +
-        'console.');
-    }
+      assert.strictEqual(
+        message,
+        'Encountered a manually constructed error ' +
+          'with message "builder test" but without a construction site stack ' +
+          'trace.  This error might not be visible in the error reporting ' +
+          'console.'
+      );
+    },
   });
   describe('Report invocation behaviour', function() {
     it('Should allow argument-less invocation', function() {
@@ -68,7 +71,7 @@ describe('Manual handler', function() {
     });
     it('Should allow a function as a malformed error input', function(done) {
       this.timeout(2000);
-      var r = report(function(err, res) {
+      var r = report(function() {
         assert(false, 'callback should not be called');
         done();
       });
@@ -78,76 +81,92 @@ describe('Manual handler', function() {
       }, 1000);
     });
     it('Should callback to the supplied function', function(done) {
-      var r = report('malarkey', function(err, res) {
+      var r = report('malarkey', function() {
         done();
       });
       assert(r.message.match(/malarkey/), 'string error should propagate');
     });
     it('replace the error string with the additional message', function(done) {
-      var r = report('monkey', 'wrench', function(err, res) {
+      var r = report('monkey', 'wrench', function() {
         done();
       });
-      assert.strictEqual(r.message, 'wrench',
-        'additional message should replace');
+      assert.strictEqual(
+        r.message,
+        'wrench',
+        'additional message should replace'
+      );
     });
     it('Should allow a full array of optional arguments', function(done) {
-      var r = report('donkey', { method: 'FETCH' }, 'cart', function(err, res) {
+      var r = report('donkey', {method: 'FETCH'}, 'cart', function() {
         done();
       });
       assert.strictEqual(r.message, 'cart', 'additional message replace');
       assert.strictEqual(r.context.httpRequest.method, 'FETCH');
     });
     it('Should allow all optional arguments except the callback', function() {
-      var r = report('whiskey', { method: 'SIP' }, 'sour');
+      var r = report('whiskey', {method: 'SIP'}, 'sour');
       assert.strictEqual(r.message, 'sour', 'additional message replace');
       assert.strictEqual(r.context.httpRequest.method, 'SIP');
     });
     it('Should allow a lack of additional message', function(done) {
-      var r = report('ticky', { method: 'TACKEY' }, function(err, res) {
+      var r = report('ticky', {method: 'TACKEY'}, function() {
         done();
       });
-      assert(r.message.match(/ticky/) && !r.message.match(/TACKEY/),
-        'original message should be preserved');
+      assert(
+        r.message.match(/ticky/) && !r.message.match(/TACKEY/),
+        'original message should be preserved'
+      );
       assert.strictEqual(r.context.httpRequest.method, 'TACKEY');
     });
     it('Should ignore arguments', function(done) {
-      var r = report('hockey', function(err, res) {
-        done();
-      }, 'field');
-      assert(r.message.match('hockey') && !r.message.match('field'),
-        'string after callback should be ignored');
+      var r = report(
+        'hockey',
+        function() {
+          done();
+        },
+        'field'
+      );
+      assert(
+        r.message.match('hockey') && !r.message.match('field'),
+        'string after callback should be ignored'
+      );
     });
     it('Should ignore arguments', function(done) {
-      var r = report('passkey', function(err, res) {
-        done();
-      }, { method: 'HONK'});
+      var r = report(
+        'passkey',
+        function() {
+          done();
+        },
+        {method: 'HONK'}
+      );
       assert.notEqual(r.context.httpRequest.method, 'HONK');
     });
     it('Should allow null arguments as placeholders', function(done) {
-      var r = report('pokey', null, null, function(err, res) {
+      var r = report('pokey', null, null, function() {
         done();
       });
       assert(r.message.match(/pokey/), 'string error should propagate');
     });
     it('Should allow explicit undefined', function(done) {
-      var r = report('Turkey', undefined, undefined, function(err, res) {
+      var r = report('Turkey', undefined, undefined, function() {
         done();
       });
       assert(r.message.match(/Turkey/), 'string error should propagate');
     });
     it('Should allow request to be supplied as undefined', function(done) {
-      var r = report('turnkey', undefined, 'solution', function(err, res) {
+      var r = report('turnkey', undefined, 'solution', function() {
         done();
       });
       assert.strictEqual(r.message, 'solution', 'error should propagate');
     });
     it('Should allow additional message', function(done) {
-      var r =
-        report('Mickey', { method: 'SNIFF'}, undefined, function(err, res) {
-          done();
-        });
-      assert(r.message.match(/Mickey/) && !r.message.match(/SNIFF/),
-        'string error should propagate');
+      var r = report('Mickey', {method: 'SNIFF'}, undefined, function() {
+        done();
+      });
+      assert(
+        r.message.match(/Mickey/) && !r.message.match(/SNIFF/),
+        'string error should propagate'
+      );
       assert.strictEqual(r.context.httpRequest.method, 'SNIFF');
     });
   });
@@ -156,8 +175,10 @@ describe('Manual handler', function() {
     it('Should accept builder inst as only argument', function() {
       var msg = 'builder test';
       var r = report(new ErrorMessage().setMessage(msg));
-      assert(r.message.startsWith(msg),
-        'string message should propagate from error message inst');
+      assert(
+        r.message.startsWith(msg),
+        'string message should propagate from error message inst'
+      );
     });
     it('Should accept builder and request as arguments', function() {
       var msg = 'builder test';
@@ -166,35 +187,38 @@ describe('Manual handler', function() {
       var r = report(
         new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
         newReq
-     );
-      assert(r.message.startsWith(msg),
-        'string message should propagate from error message inst');
-      assert.strictEqual(r.context.httpRequest.method, newReq.method,
+      );
+      assert(
+        r.message.startsWith(msg),
+        'string message should propagate from error message inst'
+      );
+      assert.strictEqual(
+        r.context.httpRequest.method,
+        newReq.method,
         [
           'request argument supplied at report invocation should propagte and',
-          'if supplied, should overwrite any prexisting data in the field.'
+          'if supplied, should overwrite any prexisting data in the field.',
         ].join('\n')
-     );
+      );
     });
     it('Should accept message and additional message params as', function() {
       var oldMsg = 'builder test';
       var newMsg = 'analysis';
-      var r = report(
-        new ErrorMessage().setMessage(oldMsg),
-        newMsg
-     );
-      assert.strictEqual(r.message, newMsg,
+      var r = report(new ErrorMessage().setMessage(oldMsg), newMsg);
+      assert.strictEqual(
+        r.message,
+        newMsg,
         [
           'message supplied at report invocation should propagte and, if',
-          'supplied, should overwrite any prexisting data in the message field.'
-        ].join('\n'));
+          'supplied, should overwrite any prexisting data in the message field.',
+        ].join('\n')
+      );
     });
     it('Should accept message and callback function', function(done) {
       var oldMsg = 'builder test';
-      report(
-        new ErrorMessage().setMessage(oldMsg),
-        function() { done(); }
-     );
+      report(new ErrorMessage().setMessage(oldMsg), function() {
+        done();
+      });
     });
   });
 });

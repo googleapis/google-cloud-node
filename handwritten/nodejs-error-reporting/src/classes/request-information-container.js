@@ -40,7 +40,6 @@ var isNumber = is.number;
  * @property {Number} statusCode - The response status code
  */
 function RequestInformationContainer() {
-
   this.url = '';
   this.method = '';
   this.referrer = '';
@@ -56,7 +55,6 @@ function RequestInformationContainer() {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setUrl = function(url) {
-
   this.url = isString(url) ? url : '';
 
   return this;
@@ -69,7 +67,6 @@ RequestInformationContainer.prototype.setUrl = function(url) {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setMethod = function(method) {
-
   this.method = isString(method) ? method : '';
 
   return this;
@@ -82,7 +79,6 @@ RequestInformationContainer.prototype.setMethod = function(method) {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setReferrer = function(referrer) {
-
   this.referrer = isString(referrer) ? referrer : '';
 
   return this;
@@ -95,7 +91,6 @@ RequestInformationContainer.prototype.setReferrer = function(referrer) {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setUserAgent = function(userAgent) {
-
   this.userAgent = isString(userAgent) ? userAgent : '';
 
   return this;
@@ -108,7 +103,6 @@ RequestInformationContainer.prototype.setUserAgent = function(userAgent) {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setRemoteAddress = function(remoteIp) {
-
   this.remoteAddress = isString(remoteIp) ? remoteIp : '';
 
   return this;
@@ -121,7 +115,6 @@ RequestInformationContainer.prototype.setRemoteAddress = function(remoteIp) {
  * @returns {this} - returns the instance for chaining
  */
 RequestInformationContainer.prototype.setStatusCode = function(statusCode) {
-
   this.statusCode = isNumber(statusCode) ? statusCode : 0;
 
   return this;

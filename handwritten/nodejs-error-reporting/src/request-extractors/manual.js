@@ -19,8 +19,7 @@ var is = require('is');
 var isObject = is.object;
 var isArray = is.array;
 var isFunction = is.fn;
-var RequestInformationContainer =
-    require('../classes/request-information-container.js');
+var RequestInformationContainer = require('../classes/request-information-container.js');
 
 /**
  * The manualRequestInformationExtractor is meant to take a standard object
@@ -41,41 +40,33 @@ var RequestInformationContainer =
  *  information in a standardized format
  */
 function manualRequestInformationExtractor(req) {
-
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || isArray(req) || isFunction(req)) {
-
     return returnObject;
   }
 
   if (has(req, 'method')) {
-
     returnObject.setMethod(req.method);
   }
 
   if (has(req, 'url')) {
-
     returnObject.setUrl(req.url);
   }
 
   if (has(req, 'userAgent')) {
-
     returnObject.setUserAgent(req.userAgent);
   }
 
   if (has(req, 'referrer')) {
-
     returnObject.setReferrer(req.referrer);
   }
 
   if (has(req, 'statusCode')) {
-
     returnObject.setStatusCode(req.statusCode);
   }
 
   if (has(req, 'remoteAddress')) {
-
     returnObject.setRemoteAddress(req.remoteAddress);
   }
 
