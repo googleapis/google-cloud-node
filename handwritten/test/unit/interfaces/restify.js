@@ -23,6 +23,7 @@ var restifyInterface = require('../../../src/interfaces/restify.js');
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {
   EventEmitter.prototype.listenerCount = function(eventName) {
+    // eslint-disable-next-line node/no-deprecated-api
     return EventEmitter.listenerCount(this, eventName);
   };
 }
@@ -30,18 +31,26 @@ if (!EventEmitter.prototype.listenerCount) {
 describe('restifyInterface', function() {
   var UNCAUGHT_EVENT = 'uncaughtException';
   var FINISH = 'finish';
-  var noOp = function() {return;};
+  var noOp = function() {
+    return;
+  };
   describe('Attachment to the uncaughtException event', function() {
     it('Should attach one listener after instantiation', function() {
       var ee = new EventEmitter();
-      assert.strictEqual(ee.listenerCount(UNCAUGHT_EVENT), 0,
-        'Listeners on event should be zero');
+      assert.strictEqual(
+        ee.listenerCount(UNCAUGHT_EVENT),
+        0,
+        'Listeners on event should be zero'
+      );
       // return the bound function which the user will actually interface with
       var errorHandlerInstance = restifyInterface(null, null);
       // execute the handler the user will use with the stubbed server instance
       errorHandlerInstance(ee);
-      assert.strictEqual(ee.listenerCount(UNCAUGHT_EVENT), 1,
-        'Listeners on event should now be one');
+      assert.strictEqual(
+        ee.listenerCount(UNCAUGHT_EVENT),
+        1,
+        'Listeners on event should now be one'
+      );
     });
   });
   describe('Request handler lifecycle events', function() {
@@ -77,19 +86,19 @@ describe('restifyInterface', function() {
         });
       });
     });
-    describe('default path with req/res error', function(done) {
+    describe('default path with req/res error', function() {
       ee.removeAllListeners();
       var client = {
         sendError: function() {
           assert(true, 'sendError should be called');
-        }
+        },
       };
       var config = {
         getServiceContext: function() {
           assert(true, 'getServiceContext should be called');
           return {
             service: 'stub-service',
-            version: 'stub-version'
+            version: 'stub-version',
           };
         },
         lacksCredentials: function() {
@@ -97,7 +106,7 @@ describe('restifyInterface', function() {
         },
         getVersion: function() {
           return '1';
-        }
+        },
       };
       var errorHandlerInstance = restifyInterface(client, config);
       var requestHandlerInstance = errorHandlerInstance(ee);

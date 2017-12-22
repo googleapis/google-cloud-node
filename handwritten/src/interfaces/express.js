@@ -19,8 +19,7 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
-var expressRequestInformationExtractor =
-    require('../request-extractors/express.js');
+var expressRequestInformationExtractor = require('../request-extractors/express.js');
 var populateErrorMessage = require('../populate-error-message.js');
 
 /**
@@ -54,9 +53,8 @@ function makeExpressHandler(client, config) {
     }
 
     var em = new ErrorMessage()
-                 .consumeRequestInformation(
-                     expressRequestInformationExtractor(req, res))
-                 .setServiceContext(ctxService, ctxVersion);
+      .consumeRequestInformation(expressRequestInformationExtractor(req, res))
+      .setServiceContext(ctxService, ctxVersion);
 
     populateErrorMessage(err, em);
 

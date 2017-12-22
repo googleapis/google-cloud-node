@@ -47,21 +47,25 @@ function createLogger(initConfiguration) {
   var level = DEFAULT_LEVEL;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
-    level = logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL] ||
-      DEFAULT_LEVEL;
-  } else if (isObject(initConfiguration) &&
-    has(initConfiguration, 'logLevel')) {
+    level =
+      logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL] || DEFAULT_LEVEL;
+  } else if (
+    isObject(initConfiguration) &&
+    has(initConfiguration, 'logLevel')
+  ) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer
       level = logger.LEVELS[~~initConfiguration.logLevel] || DEFAULT_LEVEL;
     } else if (isNumber(initConfiguration.logLevel)) {
       level = logger.LEVELS[initConfiguration.logLevel] || DEFAULT_LEVEL;
     } else {
-      throw new Error('config.logLevel must be a number or decimal ' +
-        'representation of a number in string form');
+      throw new Error(
+        'config.logLevel must be a number or decimal ' +
+          'representation of a number in string form'
+      );
     }
   }
-  return logger({level: level, tag: packageJson.name });
+  return logger({level: level, tag: packageJson.name});
 }
 
 module.exports = createLogger;

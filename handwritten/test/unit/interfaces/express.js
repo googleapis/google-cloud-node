@@ -29,30 +29,30 @@ describe('expressInterface', function() {
     describe('Given invalid input', function() {
       it('Should not throw errors', function() {
         var f = new Fuzzer();
-        assert.doesNotThrow(
-          function() {
-            f.fuzzFunctionForTypes(
-              expressInterface, ['object', 'object']
-           );
-            return;
-          }
-       );
+        assert.doesNotThrow(function() {
+          f.fuzzFunctionForTypes(expressInterface, ['object', 'object']);
+          return;
+        });
       });
     });
   });
   describe('Intended behaviour', function() {
-    var stubbedConfig = new Configuration({
-      serviceContext: {
-        service: 'a_test_service', version: 'a_version'
-      }
-    }, createLogger({logLevel: 4}));
+    var stubbedConfig = new Configuration(
+      {
+        serviceContext: {
+          service: 'a_test_service',
+          version: 'a_version',
+        },
+      },
+      createLogger({logLevel: 4})
+    );
     stubbedConfig.lacksCredentials = function() {
       return false;
     };
     var client = {
       sendError: function() {
         return;
-      }
+      },
     };
     var testError = new Error('This is a test');
     var validBoundHandler = expressInterface(client, stubbedConfig);
@@ -60,13 +60,16 @@ describe('expressInterface', function() {
       var res = validBoundHandler(testError, null, null, null);
       assert.deepEqual(
         res,
-        merge(new ErrorMessage().setMessage(testError.stack)
-          .setServiceContext(
-            stubbedConfig._serviceContext.service,
-            stubbedConfig._serviceContext.version),
+        merge(
+          new ErrorMessage()
+            .setMessage(testError.stack)
+            .setServiceContext(
+              stubbedConfig._serviceContext.service,
+              stubbedConfig._serviceContext.version
+            ),
           {eventTime: res.eventTime}
-       )
-     );
+        )
+      );
     });
     describe('Calling back to express builtins', function() {
       it('Should callback to next', function(done) {
@@ -80,10 +83,12 @@ describe('expressInterface', function() {
           done();
         };
         var client = {
-          sendError: sendError
+          sendError: sendError,
         };
         var handler = expressInterface(client, stubbedConfig);
-        handler(testError, null, null, function() {return;});
+        handler(testError, null, null, function() {
+          return;
+        });
       });
     });
   });

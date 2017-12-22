@@ -65,8 +65,7 @@ var isObject = is.object;
  *  the report site
  */
 function ErrorMessage() {
-
-  this.eventTime = (new Date()).toISOString();
+  this.eventTime = new Date().toISOString();
   this.serviceContext = {service: 'node', version: undefined};
   this.message = '';
   this.context = {
@@ -76,10 +75,10 @@ function ErrorMessage() {
       userAgent: '',
       referrer: '',
       responseStatusCode: 0,
-      remoteIp: ''
+      remoteIp: '',
     },
     user: '',
-    reportLocation: {filePath: '', lineNumber: 0, functionName: ''}
+    reportLocation: {filePath: '', lineNumber: 0, functionName: ''},
   };
 }
 
@@ -91,8 +90,7 @@ function ErrorMessage() {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setEventTimeToNow = function() {
-
-  this.eventTime = (new Date()).toISOString();
+  this.eventTime = new Date().toISOString();
 
   return this;
 };
@@ -108,7 +106,6 @@ ErrorMessage.prototype.setEventTimeToNow = function() {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setServiceContext = function(service, version) {
-
   this.serviceContext.service = isString(service) ? service : 'node';
   this.serviceContext.version = isString(version) ? version : undefined;
 
@@ -122,7 +119,6 @@ ErrorMessage.prototype.setServiceContext = function(service, version) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setMessage = function(message) {
-
   this.message = isString(message) ? message : '';
 
   return this;
@@ -136,7 +132,6 @@ ErrorMessage.prototype.setMessage = function(message) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setHttpMethod = function(method) {
-
   this.context.httpRequest.method = isString(method) ? method : '';
 
   return this;
@@ -149,7 +144,6 @@ ErrorMessage.prototype.setHttpMethod = function(method) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setUrl = function(url) {
-
   this.context.httpRequest.url = isString(url) ? url : '';
 
   return this;
@@ -162,7 +156,6 @@ ErrorMessage.prototype.setUrl = function(url) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setUserAgent = function(userAgent) {
-
   this.context.httpRequest.userAgent = isString(userAgent) ? userAgent : '';
 
   return this;
@@ -175,7 +168,6 @@ ErrorMessage.prototype.setUserAgent = function(userAgent) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setReferrer = function(referrer) {
-
   this.context.httpRequest.referrer = isString(referrer) ? referrer : '';
 
   return this;
@@ -188,9 +180,9 @@ ErrorMessage.prototype.setReferrer = function(referrer) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setResponseStatusCode = function(responseStatusCode) {
-
-  this.context.httpRequest.responseStatusCode =
-      isNumber(responseStatusCode) ? responseStatusCode : 0;
+  this.context.httpRequest.responseStatusCode = isNumber(responseStatusCode)
+    ? responseStatusCode
+    : 0;
 
   return this;
 };
@@ -202,7 +194,6 @@ ErrorMessage.prototype.setResponseStatusCode = function(responseStatusCode) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setRemoteIp = function(remoteIp) {
-
   this.context.httpRequest.remoteIp = isString(remoteIp) ? remoteIp : '';
 
   return this;
@@ -215,7 +206,6 @@ ErrorMessage.prototype.setRemoteIp = function(remoteIp) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setUser = function(user) {
-
   this.context.user = isString(user) ? user : '';
 
   return this;
@@ -228,7 +218,6 @@ ErrorMessage.prototype.setUser = function(user) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setFilePath = function(filePath) {
-
   this.context.reportLocation.filePath = isString(filePath) ? filePath : '';
 
   return this;
@@ -241,9 +230,9 @@ ErrorMessage.prototype.setFilePath = function(filePath) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setLineNumber = function(lineNumber) {
-
-  this.context.reportLocation.lineNumber =
-      isNumber(lineNumber) ? lineNumber : 0;
+  this.context.reportLocation.lineNumber = isNumber(lineNumber)
+    ? lineNumber
+    : 0;
 
   return this;
 };
@@ -255,9 +244,9 @@ ErrorMessage.prototype.setLineNumber = function(lineNumber) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.setFunctionName = function(functionName) {
-
-  this.context.reportLocation.functionName =
-      isString(functionName) ? functionName : '';
+  this.context.reportLocation.functionName = isString(functionName)
+    ? functionName
+    : '';
 
   return this;
 };
@@ -271,19 +260,18 @@ ErrorMessage.prototype.setFunctionName = function(functionName) {
  * @returns {this} - returns the instance for chaining
  */
 ErrorMessage.prototype.consumeRequestInformation = function(
-    requestInformation) {
-
+  requestInformation
+) {
   if (!isObject(requestInformation)) {
-
     return this;
   }
 
   this.setHttpMethod(requestInformation.method)
-      .setUrl(requestInformation.url)
-      .setUserAgent(requestInformation.userAgent)
-      .setReferrer(requestInformation.referrer)
-      .setResponseStatusCode(requestInformation.statusCode)
-      .setRemoteIp(requestInformation.remoteAddress);
+    .setUrl(requestInformation.url)
+    .setUserAgent(requestInformation.userAgent)
+    .setReferrer(requestInformation.referrer)
+    .setResponseStatusCode(requestInformation.statusCode)
+    .setRemoteIp(requestInformation.remoteAddress);
 
   return this;
 };

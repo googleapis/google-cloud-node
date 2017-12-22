@@ -32,7 +32,6 @@ var populateErrorMessage = require('../populate-error-message.js');
  *  request handlers.
  */
 function koaErrorHandler(client, config) {
-
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by
@@ -40,18 +39,17 @@ function koaErrorHandler(client, config) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function *(next) {
+  return function*(next) {
     var svc = config.getServiceContext();
 
     try {
-
       yield next;
     } catch (err) {
       var em = new ErrorMessage()
-               .consumeRequestInformation(
-                   koaRequestInformationExtractor(this.request, this.response))
-               .setServiceContext(svc.service,
-                                  svc.version);
+        .consumeRequestInformation(
+          koaRequestInformationExtractor(this.request, this.response)
+        )
+        .setServiceContext(svc.service, svc.version);
 
       populateErrorMessage(err, em);
 

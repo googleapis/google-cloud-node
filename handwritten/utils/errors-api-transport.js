@@ -37,10 +37,13 @@ class ErrorsApiTransport extends AuthClient {
 
       var options = {
         uri: [API, id, 'events'].join('/'),
-        method: 'DELETE'
+        method: 'DELETE',
       };
-      self.request_(options, function(err, /* jshint unused:false */ response,
-        /* jshint unused:false */ body) {
+      self.request_(options, function(
+        err,
+        /* jshint unused:false */ response,
+        /* jshint unused:false */ body
+      ) {
         if (err) {
           return cb(err);
         }
@@ -59,7 +62,7 @@ class ErrorsApiTransport extends AuthClient {
 
       var options = {
         uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
-        method: 'GET'
+        method: 'GET',
       };
       self.request_(options, function(err, response, body) {
         if (err) {

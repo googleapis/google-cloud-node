@@ -38,43 +38,51 @@ describe('Hapi interface', function() {
     });
   });
   describe('Providing valid input to the setup handler', function() {
-    var givenConfig = {getVersion: function() {return '1';}};
+    var givenConfig = {
+      getVersion: function() {
+        return '1';
+      },
+    };
     var plugin;
-    beforeEach(function() {plugin = hapiInterface(null, givenConfig);});
+    beforeEach(function() {
+      plugin = hapiInterface(null, givenConfig);
+    });
     it('should have plain object as plugin', function() {
       assert(isObject(plugin));
     });
     it('plugin should have a register function property', function() {
       assert(has(plugin, 'register') && isFunction(plugin.register));
     });
-    it('the plugin\'s register property should have an attributes property',
-      function() {
-        assert(has(plugin.register, 'attributes') &&
-          isObject(plugin.register.attributes));
-      }
-   );
-    it('the plugin\'s attribute property should have a name property',
-      function() {
-        assert(has(plugin.register.attributes, 'name'));
-        assert.strictEqual(plugin.register.attributes.name,
-          '@google-cloud/error-reporting');
-      }
-   );
-    it('the plugin\'s attribute property should have a version property',
-      function() {
-        assert(has(plugin.register.attributes, 'version'));
-      }
-   );
+    it("the plugin's register property should have an attributes property", function() {
+      assert(
+        has(plugin.register, 'attributes') &&
+          isObject(plugin.register.attributes)
+      );
+    });
+    it("the plugin's attribute property should have a name property", function() {
+      assert(has(plugin.register.attributes, 'name'));
+      assert.strictEqual(
+        plugin.register.attributes.name,
+        '@google-cloud/error-reporting'
+      );
+    });
+    it("the plugin's attribute property should have a version property", function() {
+      assert(has(plugin.register.attributes, 'version'));
+    });
   });
   describe('hapiRegisterFunction behaviour', function() {
     var fakeServer;
-    beforeEach(function() {fakeServer = new EventEmitter();});
+    beforeEach(function() {
+      fakeServer = new EventEmitter();
+    });
     it('Should call fn when the request-error event is emitted', function() {
       var fakeClient = {
         sendError: function(errMsg) {
-          assert(errMsg instanceof ErrorMessage,
-            'should be an instance of Error message');
-        }
+          assert(
+            errMsg instanceof ErrorMessage,
+            'should be an instance of Error message'
+          );
+        },
       };
       var plugin = hapiInterface(fakeClient, {
         lacksCredentials: function() {
@@ -85,7 +93,7 @@ describe('Hapi interface', function() {
         },
         getServiceContext: function() {
           return {service: 'node'};
-        }
+        },
       });
       plugin.register(fakeServer, null, null, null);
       fakeServer.emit('request-error');
@@ -100,10 +108,12 @@ describe('Hapi interface', function() {
         projectId: 'xyz',
         serviceContext: {
           service: 'x',
-          version: '1.x'
-        }
+          version: '1.x',
+        },
       });
-      config.lacksCredentials = function() {return false;};
+      config.lacksCredentials = function() {
+        return false;
+      };
       plugin = hapiInterface(fakeClient, config);
     });
     beforeEach(function() {
@@ -113,51 +123,58 @@ describe('Hapi interface', function() {
     afterEach(function() {
       fakeServer.removeAllListeners();
     });
-    it('Should call continue when a boom is emitted if reply is an object',
-      function(done) {
-        plugin.register(fakeServer, null, function() {});
-        fakeServer.emit(EVENT, {response: {isBoom: true}},
-          {
-            continue: function() {
-              // The continue function should be called
-              done();
-            }
-          }
-       );
+    it('Should call continue when a boom is emitted if reply is an object', function(
+      done
+    ) {
+      plugin.register(fakeServer, null, function() {});
+      fakeServer.emit(
+        EVENT,
+        {response: {isBoom: true}},
+        {
+          continue: function() {
+            // The continue function should be called
+            done();
+          },
+        }
+      );
     });
-    it('Should call continue when a boom is emitted if reply is a function',
-      function(done) {
-        // Manually testing has shown that in actual usage the `reply` object
-        // provided to listeners of the `onPreResponse` event can be a function
-        // that has a `continue` property that is a function.
-        // If `reply.continue()` is not invoked in this situation, the Hapi
-        // app will become unresponsive.
-        plugin.register(fakeServer, null, function() {});
-        var reply = function() {};
-        reply.continue = function() {
-          // The continue function should be called
-          done();
-        };
-        fakeServer.emit(EVENT, {response: {isBoom: true}}, reply);
+    it('Should call continue when a boom is emitted if reply is a function', function(
+      done
+    ) {
+      // Manually testing has shown that in actual usage the `reply` object
+      // provided to listeners of the `onPreResponse` event can be a function
+      // that has a `continue` property that is a function.
+      // If `reply.continue()` is not invoked in this situation, the Hapi
+      // app will become unresponsive.
+      plugin.register(fakeServer, null, function() {});
+      var reply = function() {};
+      reply.continue = function() {
+        // The continue function should be called
+        done();
+      };
+      fakeServer.emit(EVENT, {response: {isBoom: true}}, reply);
     });
     it('Should call sendError when a boom is received', function(done) {
       var fakeClient = {
         sendError: function(err) {
           assert(err instanceof ErrorMessage);
           done();
-        }
+        },
       };
       var plugin = hapiInterface(fakeClient, config);
       plugin.register(fakeServer, null, function() {});
       fakeServer.emit('onPreResponse', {response: {isBoom: true}});
     });
     it('Should call next when completing a request', function(done) {
-      plugin.register(fakeServer, null, function(err) {
+      plugin.register(fakeServer, null, function() {
         // The next function should be called
         done();
       });
-      fakeServer.emit(EVENT, {response: {isBoom: true}},
-        {continue: function() {}});
+      fakeServer.emit(
+        EVENT,
+        {response: {isBoom: true}},
+        {continue: function() {}}
+      );
     });
   });
 });

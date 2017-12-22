@@ -17,8 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var koaRequestInformationExtractor =
-  require('../../../src/request-extractors/koa.js');
+var koaRequestInformationExtractor = require('../../../src/request-extractors/koa.js');
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('koaRequestInformationExtractor', function() {
@@ -30,14 +29,17 @@ describe('koaRequestInformationExtractor', function() {
         userAgent: '',
         referrer: '',
         statusCode: 0,
-        remoteAddress: ''
+        remoteAddress: '',
       };
       var f = new Fuzzer();
       var cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
-      f.fuzzFunctionForTypes(koaRequestInformationExtractor,
-        ['object', 'object'], cbFn);
+      f.fuzzFunctionForTypes(
+        koaRequestInformationExtractor,
+        ['object', 'object'],
+        cbFn
+      );
     });
   });
   describe('Behaviour under valid input', function() {
@@ -47,12 +49,12 @@ describe('koaRequestInformationExtractor', function() {
         url: 'www.TEST-URL.com',
         headers: {
           'user-agent': 'Something like Mozilla',
-          referrer: 'www.ANOTHER-TEST.com'
+          referrer: 'www.ANOTHER-TEST.com',
         },
-        ip: '0.0.0.0'
+        ip: '0.0.0.0',
       };
       var FULL_RES_DERIVATION_VALUE = {
-        status: 200
+        status: 200,
       };
       var FULL_REQ_EXPECTED_VALUE = {
         method: 'STUB_METHOD',
@@ -60,12 +62,15 @@ describe('koaRequestInformationExtractor', function() {
         userAgent: 'Something like Mozilla',
         referrer: 'www.ANOTHER-TEST.com',
         remoteAddress: '0.0.0.0',
-        statusCode: 200
+        statusCode: 200,
       };
       assert.deepEqual(
-        koaRequestInformationExtractor(FULL_REQ_DERIVATION_VALUE,
-          FULL_RES_DERIVATION_VALUE),
-        FULL_REQ_EXPECTED_VALUE);
+        koaRequestInformationExtractor(
+          FULL_REQ_DERIVATION_VALUE,
+          FULL_RES_DERIVATION_VALUE
+        ),
+        FULL_REQ_EXPECTED_VALUE
+      );
     });
   });
 });
