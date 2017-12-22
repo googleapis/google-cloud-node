@@ -18,8 +18,7 @@
 var is = require('is');
 var isFunction = is.fn;
 var isObject = is.object;
-var RequestInformationContainer =
-    require('../classes/request-information-container.js');
+var RequestInformationContainer = require('../classes/request-information-container.js');
 
 /**
  * This function checks for the presence of an `x-forwarded-for` header on the
@@ -32,12 +31,9 @@ var RequestInformationContainer =
  *  string
  */
 function extractRemoteAddressFromRequest(req) {
-
   if (typeof req.header('x-forwarded-for') !== 'undefined') {
-
     return req.header('x-forwarded-for');
   } else if (isObject(req.connection)) {
-
     return req.connection.remoteAddress;
   }
 
@@ -56,20 +52,19 @@ function extractRemoteAddressFromRequest(req) {
  *  information in a standardized format
  */
 function expressRequestInformationExtractor(req, res) {
-
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
-
     return returnObject;
   }
 
-  returnObject.setMethod(req.method)
-      .setUrl(req.url)
-      .setUserAgent(req.header('user-agent'))
-      .setReferrer(req.header('referrer'))
-      .setStatusCode(res.statusCode)
-      .setRemoteAddress(extractRemoteAddressFromRequest(req));
+  returnObject
+    .setMethod(req.method)
+    .setUrl(req.url)
+    .setUserAgent(req.header('user-agent'))
+    .setReferrer(req.header('referrer'))
+    .setStatusCode(res.statusCode)
+    .setRemoteAddress(extractRemoteAddressFromRequest(req));
 
   return returnObject;
 }

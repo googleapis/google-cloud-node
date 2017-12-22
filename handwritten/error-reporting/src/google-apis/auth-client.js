@@ -78,7 +78,7 @@ class RequestHandler extends common.Service {
    * @returns {Null}
    * @static
    */
-  static noOp(err, response, body) {
+  static noOp() {
     return null;
   }
   /**
@@ -90,43 +90,57 @@ class RequestHandler extends common.Service {
     var pid = config.getProjectId();
     // If an API key is provided, do not try to authenticate.
     var tryAuthenticate = !config.getKey();
-    super({
-      packageJson: pkg,
-      baseUrl: API,
-      scopes: SCOPES,
-      projectId: pid !== null ? pid : undefined,
-      projectIdRequired: true,
-      customEndpoint: !tryAuthenticate
-    }, config);
+    super(
+      {
+        packageJson: pkg,
+        baseUrl: API,
+        scopes: SCOPES,
+        projectId: pid !== null ? pid : undefined,
+        projectIdRequired: true,
+        customEndpoint: !tryAuthenticate,
+      },
+      config
+    );
     this._config = config;
     this._logger = logger;
 
     var that = this;
     if (tryAuthenticate) {
-      this.authClient.getToken(function(err, token) {
+      this.authClient.getToken(function(err) {
         if (err) {
-          that._logger.error([
-            'Unable to find credential information on instance. This library',
-            'will be unable to communicate with the Stackdriver API to save',
-            'errors.  Message: ' + err.message
-          ].join(' '));
+          that._logger.error(
+            [
+              'Unable to find credential information on instance. This library',
+              'will be unable to communicate with the Stackdriver API to save',
+              'errors.  Message: ' + err.message,
+            ].join(' ')
+          );
         }
       });
     } else {
-      this.request({
-        uri: 'events:report',
-        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
-        method: 'POST',
-        json: {}
-      }, (err, body, response) => {
-        if (err && err.message !== 'Message cannot be empty.' &&
-            response.statusCode === 400) {
-          this._logger.error([
-            'Encountered an error while attempting to validate the provided',
-            'API key'
-          ].join(' '), err);
+      this.request(
+        {
+          uri: 'events:report',
+          qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+          method: 'POST',
+          json: {},
+        },
+        (err, body, response) => {
+          if (
+            err &&
+            err.message !== 'Message cannot be empty.' &&
+            response && response.statusCode === 400
+          ) {
+            this._logger.error(
+              [
+                'Encountered an error while attempting to validate the provided',
+                'API key',
+              ].join(' '),
+              err
+            );
+          }
         }
-      });
+      );
       that._logger.info('API key provided; skipping OAuth2 token request.');
     }
   }
@@ -143,30 +157,41 @@ class RequestHandler extends common.Service {
    * @instance
    */
   sendError(errorMessage, userCb) {
-    var self = this;
     var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
     if (this._config.getShouldReportErrorsToAPI()) {
-      this.request({
-        uri: 'events:report',
-        qs: RequestHandler.manufactureQueryString(this._config.getKey()),
-        method: 'POST',
-        json: errorMessage
-      }, (err, body, response) => {
-        if (err) {
-          this._logger.error([
-            'Encountered an error while attempting to transmit an error to',
-            'the Stackdriver Error Reporting API.'
-          ].join(' '), err);
+      this.request(
+        {
+          uri: 'events:report',
+          qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+          method: 'POST',
+          json: errorMessage,
+        },
+        (err, body, response) => {
+          if (err) {
+            this._logger.error(
+              [
+                'Encountered an error while attempting to transmit an error to',
+                'the Stackdriver Error Reporting API.',
+              ].join(' '),
+              err
+            );
+          }
+          cb(err, response, body);
         }
-        cb(err, response, body);
-      });
+      );
     } else {
-      cb(new Error([
-        'Stackdriver error reporting client has not been configured to send',
-        'errors, please check the NODE_ENV environment variable and make sure',
-        'it is set to "production" or set the ignoreEnvironmentCheck property',
-        'to true in the runtime configuration object'
-      ].join(' ')), null, null);
+      cb(
+        new Error(
+          [
+            'Stackdriver error reporting client has not been configured to send',
+            'errors, please check the NODE_ENV environment variable and make sure',
+            'it is set to "production" or set the ignoreEnvironmentCheck property',
+            'to true in the runtime configuration object',
+          ].join(' ')
+        ),
+        null,
+        null
+      );
     }
   }
 }

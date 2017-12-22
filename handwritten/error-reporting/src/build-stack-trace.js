@@ -33,10 +33,17 @@ function buildStackTrace(message) {
   // The stack is located at `target.stack`.
   Error.captureStackTrace(target, buildStackTrace);
   var prefix = message ? message + '\n' : '';
-  return prefix + target.stack.split('\n').slice(1).filter(function(line) {
-    // Filter out all frames that are specific to the error-reporting library
-    return !line || line.indexOf(SRC_ROOT) === -1;
-  }).join('\n');
+  return (
+    prefix +
+    target.stack
+      .split('\n')
+      .slice(1)
+      .filter(function(line) {
+        // Filter out all frames that are specific to the error-reporting library
+        return !line || line.indexOf(SRC_ROOT) === -1;
+      })
+      .join('\n')
+  );
 }
 
 module.exports = buildStackTrace;

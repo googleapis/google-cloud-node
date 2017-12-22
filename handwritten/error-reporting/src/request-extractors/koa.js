@@ -19,8 +19,7 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;
 var isArray = is.array;
-var RequestInformationContainer =
-    require('../classes/request-information-container.js');
+var RequestInformationContainer = require('../classes/request-information-container.js');
 
 /**
  * The koaRequestInformationExtractor attempts to extract information from a Koa
@@ -33,21 +32,27 @@ var RequestInformationContainer =
  *  container instance that may be in its initial state
  */
 function koaRequestInformationExtractor(req, res) {
-
   var returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isObject(res) || isFunction(req) || isFunction(res) ||
-      isArray(req) || isArray(res) || !isObject(req.headers)) {
-
+  if (
+    !isObject(req) ||
+    !isObject(res) ||
+    isFunction(req) ||
+    isFunction(res) ||
+    isArray(req) ||
+    isArray(res) ||
+    !isObject(req.headers)
+  ) {
     return returnObject;
   }
 
-  returnObject.setMethod(req.method)
-      .setUrl(req.url)
-      .setUserAgent(req.headers['user-agent'])
-      .setReferrer(req.headers.referrer)
-      .setStatusCode(res.status)
-      .setRemoteAddress(req.ip);
+  returnObject
+    .setMethod(req.method)
+    .setUrl(req.url)
+    .setUserAgent(req.headers['user-agent'])
+    .setReferrer(req.headers.referrer)
+    .setStatusCode(res.status)
+    .setRemoteAddress(req.ip);
 
   return returnObject;
 }

@@ -24,13 +24,13 @@ const cmd = `node snippets.js`;
 
 test.before(tools.checkCredentials);
 
-test.serial(`should setup using implicit credentials`, async (t) => {
+test.serial(`should setup using implicit credentials`, async t => {
   t.plan(0);
   // There's no output, the command should just succeed
   await tools.runAsync(`${cmd} setup-implicit`, cwd);
 });
 
-test.serial(`should report errors manually`, async (t) => {
+test.serial(`should report errors manually`, async t => {
   const output = await tools.runAsync(`${cmd} manual`, cwd);
   t.is(output.includes('Done reporting error event!'), true);
   t.is(output.includes('Done reporting Error object!'), true);

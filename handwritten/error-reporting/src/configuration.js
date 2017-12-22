@@ -207,15 +207,13 @@ Configuration.prototype._checkLocalServiceContext = function() {
 
   if (isObject(this._givenConfiguration.serviceContext)) {
     if (isString(this._givenConfiguration.serviceContext.service)) {
-      this._serviceContext.service =
-        this._givenConfiguration.serviceContext.service;
+      this._serviceContext.service = this._givenConfiguration.serviceContext.service;
     } else if (has(this._givenConfiguration.serviceContext, 'service')) {
       throw new Error('config.serviceContext.service must be a string');
     }
 
     if (isString(this._givenConfiguration.serviceContext.version)) {
-      this._serviceContext.version =
-        this._givenConfiguration.serviceContext.version;
+      this._serviceContext.version = this._givenConfiguration.serviceContext.version;
     } else if (has(this._givenConfiguration.serviceContext, 'version')) {
       throw new Error('config.serviceContext.version must be a string');
     }
@@ -236,19 +234,23 @@ Configuration.prototype._checkLocalServiceContext = function() {
 Configuration.prototype._gatherLocalConfiguration = function() {
   if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
     this._shouldReportErrorsToAPI = true;
-  } else if (has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
-    !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
+  } else if (
+    has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+    !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)
+  ) {
     throw new Error('config.ignoreEnvironmentCheck must be a boolean');
   } else {
     this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';
   }
   if (!this._shouldReportErrorsToAPI) {
-    this._logger.warn([
-      'Stackdriver error reporting client has not been configured to send',
-      'errors, please check the NODE_ENV environment variable and make sure it',
-      'is set to "production" or the ignoreEnvironmentCheck property is set to',
-      'true in the runtime configuration object'
-    ].join(' '));
+    this._logger.warn(
+      [
+        'Stackdriver error reporting client has not been configured to send',
+        'errors, please check the NODE_ENV environment variable and make sure it',
+        'is set to "production" or the ignoreEnvironmentCheck property is set to',
+        'true in the runtime configuration object',
+      ].join(' ')
+    );
   }
   if (isString(this._givenConfiguration.key)) {
     this._key = this._givenConfiguration.key;
@@ -266,8 +268,7 @@ Configuration.prototype._gatherLocalConfiguration = function() {
     throw new Error('config.credentials must be a valid credentials object');
   }
   if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
-    this._reportUnhandledRejections =
-      this._givenConfiguration.reportUnhandledRejections;
+    this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections;
   } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
     throw new Error('config.reportUnhandledRejections must be a boolean');
   }

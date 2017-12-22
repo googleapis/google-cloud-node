@@ -19,8 +19,7 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;
 var ErrorMessage = require('../classes/error-message.js');
-var expressRequestInformationExtractor =
-    require('../request-extractors/express.js');
+var expressRequestInformationExtractor = require('../request-extractors/express.js');
 var populateErrorMessage = require('../populate-error-message.js');
 
 /**
@@ -64,10 +63,13 @@ function restifyErrorHandler(client, config, err, em) {
 function restifyRequestFinishHandler(client, config, req, res) {
   var em;
 
-  if (res._body instanceof Error ||
-      res.statusCode > 309 && res.statusCode < 512) {
+  if (
+    res._body instanceof Error ||
+    (res.statusCode > 309 && res.statusCode < 512)
+  ) {
     em = new ErrorMessage().consumeRequestInformation(
-        expressRequestInformationExtractor(req, res));
+      expressRequestInformationExtractor(req, res)
+    );
 
     restifyErrorHandler(client, config, res._body, em);
   }
@@ -95,9 +97,7 @@ function restifyRequestHandler(client, config, req, res, next) {
   var listener = {};
 
   if (isObject(res) && isFunction(res.on) && isFunction(res.removeListener)) {
-
     listener = function() {
-
       restifyRequestFinishHandler(client, config, req, res);
       res.removeListener('finish', listener);
     };
@@ -126,10 +126,10 @@ function restifyRequestHandler(client, config, req, res, next) {
  * @returns {Function} - the actual request error handler
  */
 function serverErrorHandler(client, config, server) {
-
   server.on('uncaughtException', function(req, res, reqConfig, err) {
     var em = new ErrorMessage().consumeRequestInformation(
-        expressRequestInformationExtractor(req, res));
+      expressRequestInformationExtractor(req, res)
+    );
 
     restifyErrorHandler(client, config, err, em);
   });
@@ -149,7 +149,6 @@ function serverErrorHandler(client, config, server) {
  *  restify middleware stack
  */
 function handlerSetup(client, config) {
-
   return serverErrorHandler.bind(null, client, config);
 }
 

@@ -15,7 +15,7 @@
 
 'use strict';
 
-function setupImplicit () {
+function setupImplicit() {
   // [START error_reporting_setup_implicit]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting');
@@ -28,7 +28,7 @@ function setupImplicit () {
   // [END error_reporting_setup_implicit]
 }
 
-function setupExplicit () {
+function setupExplicit() {
   // [START error_reporting_setup_explicit]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting');
@@ -36,7 +36,7 @@ function setupExplicit () {
   // Instantiates a client
   const errors = ErrorReporting({
     projectId: 'your-project-id',
-    keyFilename: '/path/to/key.json'
+    keyFilename: '/path/to/key.json',
   });
 
   // Reports a simple error
@@ -44,7 +44,7 @@ function setupExplicit () {
   // [END error_reporting_setup_explicit]
 }
 
-function manual () {
+function manual() {
   // [START error_reporting_manual]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting');
@@ -76,7 +76,7 @@ function manual () {
   // [END error_reporting_manual]
 }
 
-function express () {
+function express() {
   // [START error_reporting_express]
   const express = require('express');
 
@@ -112,17 +112,43 @@ function express () {
 // The command-line program
 const cli = require(`yargs`)
   .demand(1)
-  .command('setup-implicit', 'Reports a simple error using implicit credentials.', {}, setupImplicit)
-  .command('setup-explicit', 'Reports a simple error using explicit credentials.', {}, setupExplicit)
+  .command(
+    'setup-implicit',
+    'Reports a simple error using implicit credentials.',
+    {},
+    setupImplicit
+  )
+  .command(
+    'setup-explicit',
+    'Reports a simple error using explicit credentials.',
+    {},
+    setupExplicit
+  )
   .command('manual', 'Manually reports errors.', {}, manual)
-  .command('express', 'Starts and Express service with integrated error reporting.', {}, express)
-  .example('node $0 setup-implicit', 'Reports a simple error using implicit credentials.')
-  .example('node $0 setup-explicit', 'Reports a simple error using explicit credentials.')
+  .command(
+    'express',
+    'Starts and Express service with integrated error reporting.',
+    {},
+    express
+  )
+  .example(
+    'node $0 setup-implicit',
+    'Reports a simple error using implicit credentials.'
+  )
+  .example(
+    'node $0 setup-explicit',
+    'Reports a simple error using explicit credentials.'
+  )
   .example('node $0 manual', 'Manually report some errors.')
-  .example('node $0 express', 'Starts and Express service with integrated error reporting.')
+  .example(
+    'node $0 express',
+    'Starts and Express service with integrated error reporting.'
+  )
   .wrap(120)
   .recommendCommands()
-  .epilogue(`For more information, see https://cloud.google.com/error-reporting/docs`)
+  .epilogue(
+    `For more information, see https://cloud.google.com/error-reporting/docs`
+  )
   .help()
   .strict();
 
