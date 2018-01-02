@@ -181,12 +181,12 @@ jobs:
           command: npm run samples-test
           environment:
             GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: /var/language/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /var/error-reporting/.circleci/key.json
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /var/language/
+    working_directory: /var/error-reporting/
 
   system_tests:
     docker:
@@ -206,8 +206,8 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
-            GCLOUD_TESTS_KEY: .circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /var/error-reporting/.circleci/key.json
+            GCLOUD_TESTS_KEY: /var/error-reporting/.circleci/key.json
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
