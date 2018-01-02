@@ -579,19 +579,13 @@ File.prototype.createReadStream = function(options) {
         throughStreams.push(zlib.createGunzip());
       }
 
-      if (throughStreams.length === 0) {
-        rawResponseStream.pipe(throughStream, {end: false});
-      } else if (throughStreams.length === 1) {
-        rawResponseStream
-          .pipe(throughStreams[0])
-          .pipe(throughStream, {end: false});
-      } else {
-        rawResponseStream
-          .pipe(pumpify.obj(throughStreams))
-          .pipe(throughStream, {end: false});
+      if (throughStreams.length === 1) {
+        rawResponseStream = rawResponseStream.pipe(throughStreams[0]);
+      } else if (throughStreams.length > 1) {
+        rawResponseStream = rawResponseStream.pipe(pumpify.obj(throughStreams));
       }
 
-      rawResponseStream.on('end', onComplete);
+      rawResponseStream.on('end', onComplete).pipe(throughStream, {end: false});
     }
 
     // This is hooked to the `complete` event from the request stream. This is
