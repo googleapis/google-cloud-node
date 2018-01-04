@@ -17,7 +17,7 @@
 
 'use strict';
 const common = require('@google-cloud/common');
-const pkg = require('../../package.json');
+const pkg = require('../../../package.json');
 var is = require('is');
 var isFunction = is.fn;
 var isString = is.string;
