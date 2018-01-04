@@ -21,7 +21,7 @@ var isFunction = is.fn;
 var ErrorMessage = require('../classes/error-message.js');
 var hapiRequestInformationExtractor = require('../request-extractors/hapi.js');
 var populateErrorMessage = require('../populate-error-message.js');
-var packageJson = require('../../package.json');
+var packageJson = require('../../../package.json');
 
 /**
  * The Hapi error handler function serves simply to create an error message

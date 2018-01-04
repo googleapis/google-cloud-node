@@ -22,7 +22,7 @@ var isObject = is.object;
 var isString = is.string;
 var isNumber = is.number;
 var logger = require('@google-cloud/common').logger;
-var packageJson = require('../package.json');
+var packageJson = require('../../package.json');
 
 /**
  * Creates an instance of the Google Cloud Diagnostics logger class. This
