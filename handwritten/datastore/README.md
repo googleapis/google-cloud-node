@@ -138,6 +138,6 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-datastore/blob/master/LICENSE)
 
-[client-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/latest/datastore
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/datastore/latest/
 [product-docs]: https://cloud.google.com/datastore/docs
 [shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
