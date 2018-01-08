@@ -37,7 +37,7 @@ var populateErrorMessage = require('../populate-error-message.js');
  * @returns {reportManualError} - a bound version of the reportManualError
  *  function
  */
-function handlerSetup(client, config, logger) {
+export function handlerSetup(client, config, logger) {
   /**
    * The interface for manually reporting errors to the Google Error API in
    * application code.
@@ -117,5 +117,3 @@ function handlerSetup(client, config, logger) {
 
   return reportManualError;
 }
-
-module.exports = handlerSetup;

@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var expressRequestInformationExtractor = require('../../../src/request-extractors/express.js');
+var expressRequestInformationExtractor = require('../../../src/request-extractors/express.js').expressRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 var extend = require('extend');
 

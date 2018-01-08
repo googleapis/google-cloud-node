@@ -18,7 +18,7 @@
 var is = require('is');
 var isFunction = is.fn;
 var isObject = is.object;
-var RequestInformationContainer = require('../classes/request-information-container.js');
+import {RequestInformationContainer} from '../classes/request-information-container';
 
 /**
  * This function checks for the presence of an `x-forwarded-for` header on the
@@ -51,7 +51,7 @@ function extractRemoteAddressFromRequest(req) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-function expressRequestInformationExtractor(req, res) {
+export function expressRequestInformationExtractor(req, res) {
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
@@ -68,5 +68,3 @@ function expressRequestInformationExtractor(req, res) {
 
   return returnObject;
 }
-
-module.exports = expressRequestInformationExtractor;

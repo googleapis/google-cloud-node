@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var path = require('path');
-var buildStackTrace = require('../../src/build-stack-trace.js');
+var buildStackTrace = require('../../src/build-stack-trace.js').buildStackTrace;
 
 const SRC_ROOT = path.join(__dirname, '..', '..', 'src');
 

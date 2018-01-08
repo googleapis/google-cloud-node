@@ -19,7 +19,7 @@ var is = require('is');
 var isObject = is.object;
 var isArray = is.array;
 var isFunction = is.fn;
-var RequestInformationContainer = require('../classes/request-information-container.js');
+import {RequestInformationContainer} from '../classes/request-information-container';
 
 /**
  * The manualRequestInformationExtractor is meant to take a standard object
