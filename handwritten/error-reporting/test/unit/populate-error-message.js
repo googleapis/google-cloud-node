@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 
-var ErrorMessage = require('../../src/classes/error-message.js');
+var ErrorMessage = require('../../src/classes/error-message.js').ErrorMessage;
 var populateErrorMessage = require('../../src/populate-error-message.js');
 
 var TEST_USER_INVALID = 12;

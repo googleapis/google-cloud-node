@@ -18,7 +18,7 @@
 var is = require('is');
 var isObject = is.object;
 var isFunction = is.fn;
-var ErrorMessage1 = require('../classes/error-message.js');
+import {ErrorMessage} from '../classes/error-message';
 import {expressRequestInformationExtractor} from '../request-extractors/express';
 var populateErrorMessage = require('../populate-error-message.js');
 
@@ -41,7 +41,7 @@ function makeExpressHandler(client, config) {
    * @param {Object} req - an Express request object
    * @param {Object} res - an Express response object
    * @param {Function} next - an Express continuation callback
-   * @returns {ErrorMessage1} - Returns the ErrorMessage1 instance
+   * @returns {ErrorMessage} - Returns the ErrorMessage instance
    */
   function expressErrorHandler(err, req, res, next) {
     var ctxService = '';
@@ -52,7 +52,7 @@ function makeExpressHandler(client, config) {
       ctxVersion = config.getServiceContext().version;
     }
 
-    var em = new ErrorMessage1()
+    var em = new ErrorMessage()
       .consumeRequestInformation(expressRequestInformationExtractor(req, res))
       .setServiceContext(ctxService, ctxVersion);
 

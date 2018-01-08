@@ -18,7 +18,7 @@
 var assert = require('assert');
 var proxyquire = require('proxyquire');
 
-var Configuration = require('../../../src/configuration.js');
+var Configuration = require('../../../src/configuration.js').Configuration;
 
 function verifyReportedMessage(config1, errToReturn, expectedLogs) {
   class ServiceStub {
@@ -36,7 +36,7 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
     '@google-cloud/common': {
       Service: ServiceStub,
     },
-  });
+  }).RequestHandler;
 
   var logs = {};
   var logger = {
