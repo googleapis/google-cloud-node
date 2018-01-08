@@ -15,7 +15,7 @@
  */
 
 'use strict';
-var ErrorMessage1 = require('../classes/error-message.js');
+import {ErrorMessage} from '../classes/error-message';
 var koaRequestInformationExtractor = require('../request-extractors/koa.js');
 var populateErrorMessage = require('../populate-error-message.js');
 
@@ -45,7 +45,7 @@ function koaErrorHandler(client, config) {
     try {
       yield next;
     } catch (err) {
-      var em = new ErrorMessage1()
+      var em = new ErrorMessage()
         .consumeRequestInformation(
           koaRequestInformationExtractor(this.request, this.response)
         )

@@ -63,7 +63,7 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  *  address the correct project in the Error Reporting API
  * @property {Object} _logger - the instance-cached logger instance
  */
-class RequestHandler extends common.Service {
+export class RequestHandler extends common.Service {
   private _config: any;
   private _logger: any;
   private authClient: any;
@@ -231,5 +231,3 @@ class RequestHandler extends common.Service {
  *  received during the transaction
  * @param {Any} body - The response body if applicable
  */
-
-module.exports = RequestHandler;
