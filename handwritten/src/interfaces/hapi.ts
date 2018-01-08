@@ -18,7 +18,7 @@
 var is = require('is');
 var isObject = is.object;
 var isFunction = is.fn;
-var ErrorMessage = require('../classes/error-message.js');
+var ErrorMessage1 = require('../classes/error-message.js');
 var hapiRequestInformationExtractor = require('../request-extractors/hapi.js');
 var populateErrorMessage = require('../populate-error-message.js');
 var packageJson = require('../../../package.json');
@@ -30,8 +30,8 @@ var packageJson = require('../../../package.json');
  * @param {Object} req - The Hapi request object
  * @param {Any} err - The error input
  * @param {Object} config - the env configuration
- * @returns {ErrorMessage} - a partially or fully populated instance of
- *  ErrorMessage
+ * @returns {ErrorMessage1} - a partially or fully populated instance of
+ *  ErrorMessage1
  */
 function hapiErrorHandler(req, err, config) {
   var service = '';
@@ -42,7 +42,7 @@ function hapiErrorHandler(req, err, config) {
     version = config.getServiceContext().version;
   }
 
-  var em = new ErrorMessage()
+  var em = new ErrorMessage1()
     .consumeRequestInformation(hapiRequestInformationExtractor(req))
     .setServiceContext(service, version);
 
@@ -110,7 +110,7 @@ function makeHapiPlugin(client, config) {
 
   var hapiPlugin = {register: hapiRegisterFunction};
 
-  hapiPlugin.register.attributes = {
+  (hapiPlugin.register as any).attributes = {
     name: packageJson.name,
     version: packageJson.version,
   };

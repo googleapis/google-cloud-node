@@ -24,7 +24,7 @@ describe('RequestInformationContainer', function() {
   var f = new Fuzzer();
   var cbFn, ric;
   beforeEach(function() {
-    ric = new RequestInformationContainer();
+    ric = new RequestInformationContainer.RequestInformationContainer();
   });
   describe('Fuzzing against RequestInformationContainer', function() {
     it('Should return the property as an empty string', function() {

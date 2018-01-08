@@ -18,7 +18,7 @@
 var has = require('lodash.has');
 var is = require('is');
 var isObject = is.object;
-var buildStackTrace = require('./build-stack-trace.js');
+import {buildStackTrace} from './build-stack-trace';
 
 /**
  * The Error handler router is responsible for taking an object of some type and

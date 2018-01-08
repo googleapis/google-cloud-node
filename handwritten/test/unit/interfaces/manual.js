@@ -37,7 +37,7 @@ describe('Manual handler', function() {
       }
     },
   };
-  var report = manual(client, config, {
+  var report = manual.handlerSetup(client, config, {
     warn: function(message) {
       // The use of `report` in this class should issue the following warning
       // becasue the `report` class is used directly and, as such, cannot

@@ -39,7 +39,7 @@ var isNumber = is.number;
  * @property {String} remoteAddress - The IP address of the requester
  * @property {Number} statusCode - The response status code
  */
-function RequestInformationContainer() {
+export function RequestInformationContainer() {
   this.url = '';
   this.method = '';
   this.referrer = '';
@@ -119,5 +119,3 @@ RequestInformationContainer.prototype.setStatusCode = function(statusCode) {
 
   return this;
 };
-
-module.exports = RequestInformationContainer;
