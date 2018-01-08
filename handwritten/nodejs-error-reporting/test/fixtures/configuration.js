@@ -16,7 +16,7 @@
 
 'use strict';
 
-var Configuration = require('../../src/configuration.js');
+var Configuration = require('../../src/configuration.js').Configuration;
 
 var FakeConfiguration = function(config) {
   return Configuration.call(this, config, {warn: function() {}});

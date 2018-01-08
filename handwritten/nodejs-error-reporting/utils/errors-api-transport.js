@@ -16,7 +16,7 @@
 
 'use strict';
 
-var AuthClient = require('../src/google-apis/auth-client.js');
+var AuthClient = require('../src/google-apis/auth-client.js').RequestHandler;
 
 /* @const {String} Base Error Reporting API */
 var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';

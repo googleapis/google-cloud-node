@@ -18,9 +18,9 @@
 
 var assert = require('assert');
 var nock = require('nock');
-var RequestHandler = require('../src/google-apis/auth-client.js');
+var RequestHandler = require('../src/google-apis/auth-client.js').RequestHandler;
 var ErrorsApiTransport = require('../utils/errors-api-transport.js');
-var ErrorMessage = require('../src/classes/error-message.js');
+var ErrorMessage = require('../src/classes/error-message.js').ErrorMessage;
 var Configuration = require('../test/fixtures/configuration.js');
 var createLogger = require('../src/logger.js');
 var is = require('is');
