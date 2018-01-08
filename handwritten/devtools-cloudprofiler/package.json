@@ -15,10 +15,11 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check",
+    "posttest": "npm run check && npm run license-check",
     "proto": "npm run proto:profile && npm run proto:profiler",
     "proto:profile": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profile.js third_party/proto/profile.proto && pbts -o proto/profile.d.ts proto/profile.js",
-    "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js"
+    "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js",
+    "license-check": "jsgl --local ."
   },
   "author": {
     "name": "Google Inc."
@@ -51,6 +52,7 @@
     "@types/sinon": "^4.0.0",
     "codecov": "^3.0.0",
     "gts": "^0.5.3",
+    "js-green-licenses": "^0.2.0",
     "mocha": "^4.0.1",
     "nock": "^9.0.22",
     "nyc": "^11.2.1",

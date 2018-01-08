@@ -1,0 +1,5 @@
+{
+  "packageWhitelist": [
+    "log-driver"
+  ]
+}
