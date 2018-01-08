@@ -1,6 +1,7 @@
 {
   "name": "google-cloud-node",
-  "private": "true",
+  "version": "0.1.0",
+  "private": true,
   "devDependencies": {
     "array-includes": "^3.0.3",
     "array-uniq": "^1.0.3",
@@ -15,6 +16,7 @@
     "globby": "^3.0.1",
     "intelli-espower-loader": "^1.0.1",
     "is": "^3.1.0",
+    "js-green-licenses": "^0.2.0",
     "jscs": "^2.1.1",
     "jshint": "^2.9.1",
     "lodash.camelcase": "^4.3.0",
@@ -44,11 +46,13 @@
     "remove-ghpages": "node ./scripts/docs/remove.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",
     "test": "npm run unit-test && npm run docs && npm run snippet-test",
+    "posttest": "npm run license-check",
     "unit-test": "mocha --timeout 5000 --bail --require intelli-espower-loader packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --require intelli-espower-loader --no-timeouts --bail",
     "cover": "nyc --reporter=lcov --reporter=html mocha --require intelli-espower-loader --no-timeouts packages/*/test/*.js && nyc report",
-    "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls",
+    "license-check": "jsgl --local ."
   },
   "license": "Apache-2.0",
   "engines": {
