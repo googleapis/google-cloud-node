@@ -18,22 +18,22 @@
 var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;
-var ErrorMessage = require('../classes/error-message.js');
+var ErrorMessage1 = require('../classes/error-message.js');
 var expressRequestInformationExtractor = require('../request-extractors/express.js');
 var populateErrorMessage = require('../populate-error-message.js');
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting
- * the serviceContext property on the corresponding ErrorMessage instance,
+ * the serviceContext property on the corresponding ErrorMessage1 instance,
  * routing the captured error to the right handler so that it can be correctly
- * marshaled into the ErrorMessage instance and then attempting to send it to
+ * marshaled into the ErrorMessage1 instance and then attempting to send it to
  * the Stackdriver API via the given API client instance.
  * @function restifyErrorHandler
  * @param {AuthClient} client - the API client
  * @param {NormalizedConfigurationVariables} config - the application
  * configuration
  * @param {Any} err - the error being handled
- * @param {ErrorMessage} - the error message instance container
+ * @param {ErrorMessage1} - the error message instance container
  * @returns {Undefined} - does not return anything
  */
 function restifyErrorHandler(client, config, err, em) {
@@ -67,8 +67,8 @@ function restifyRequestFinishHandler(client, config, req, res) {
     res._body instanceof Error ||
     (res.statusCode > 309 && res.statusCode < 512)
   ) {
-    em = new ErrorMessage().consumeRequestInformation(
-      expressRequestInformationExtractor(req, res)
+    em = new ErrorMessage1().consumeRequestInformation(
+      expressRequestInformationExtractor.expressRequestInformationExtractor(req, res)
     );
 
     restifyErrorHandler(client, config, res._body, em);
@@ -127,8 +127,8 @@ function restifyRequestHandler(client, config, req, res, next) {
  */
 function serverErrorHandler(client, config, server) {
   server.on('uncaughtException', function(req, res, reqConfig, err) {
-    var em = new ErrorMessage().consumeRequestInformation(
-      expressRequestInformationExtractor(req, res)
+    var em = new ErrorMessage1().consumeRequestInformation(
+      expressRequestInformationExtractor.expressRequestInformationExtractor(req, res)
     );
 
     restifyErrorHandler(client, config, err, em);
