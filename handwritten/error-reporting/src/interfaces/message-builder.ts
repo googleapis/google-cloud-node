@@ -15,27 +15,27 @@
  */
 
 'use strict';
-var ErrorMessage = require('../classes/error-message.js');
-var buildStackTrace = require('../build-stack-trace.js');
+var ErrorMessage1 = require('../classes/error-message.js');
+import {buildStackTrace} from '../build-stack-trace';
 
 /**
  * The handler setup function serves to produce a bound instance of the
- * of a factory for ErrorMessage class instances with configuration-supplied
+ * of a factory for ErrorMessage1 class instances with configuration-supplied
  * service contexts automatically set.
  * @function handlerSetup
  * @param {NormalizedConfigurationVariables} config - the environmental
  *  configuration
- * @returns {ErrorMessage} - a new ErrorMessage instance
+ * @returns {ErrorMessage1} - a new ErrorMessage1 instance
  */
-function handlerSetup(config) {
+export function handlerSetup(config) {
   /**
-   * The interface for creating new instances of the ErrorMessage class which
+   * The interface for creating new instances of the ErrorMessage1 class which
    * can be used to send custom payloads to the Error reporting service.
-   * @returns {ErrorMessage} - returns a new instance of the ErrorMessage class
+   * @returns {ErrorMessage1} - returns a new instance of the ErrorMessage1 class
    */
   function newMessage() {
     // The API expects a reported error to contain a stack trace.
-    // However, users do not need to provide a stack trace for ErrorMessage
+    // However, users do not need to provide a stack trace for ErrorMessage1
     // objects built using the message builder.  Instead, here we store
     // the stack trace with the parts that reference the error-reporting's
     // internals removed.  Then when the error is reported, the stored
@@ -47,7 +47,7 @@ function handlerSetup(config) {
     //       an error when reporting an actual Node.js Error object.
     var cleanedStack = buildStackTrace('');
 
-    var em = new ErrorMessage().setServiceContext(
+    var em = new ErrorMessage1().setServiceContext(
       config.getServiceContext().service,
       config.getServiceContext().version
     );
@@ -57,5 +57,3 @@ function handlerSetup(config) {
 
   return newMessage;
 }
-
-module.exports = handlerSetup;

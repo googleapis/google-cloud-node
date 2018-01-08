@@ -4,7 +4,9 @@
     "rootDir": ".",
     "outDir": "build",
     "declaration": false,
-    "allowJs": true
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false
   },
   "include": [
     "src/*.ts",

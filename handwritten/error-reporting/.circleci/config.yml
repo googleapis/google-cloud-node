@@ -9,10 +9,11 @@ unit_tests: &unit_tests
     - run:
         name: Run unit tests.
         command: npm test
-    - run:
-        name: Submit coverage data to codecov.
-        command: node_modules/.bin/codecov
-        when: always
+# TODO: Re-enable after the translation to Typescript is complete
+#    - run:
+#        name: Submit coverage data to codecov.
+#        command: node_modules/.bin/codecov
+#        when: always
 
 version: 2.0
 workflows:
@@ -99,10 +100,11 @@ jobs:
       - run:
           name: Run unit tests.
           command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
+# TODO: Re-enable after the translation to Typescript is complete
+#      - run:
+#          name: Submit coverage data to codecov.
+#          command: node_modules/.bin/codecov
+#          when: always
   node6:
     docker:
       - image: node:6

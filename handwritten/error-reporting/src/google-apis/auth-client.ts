@@ -16,7 +16,17 @@
 /*jshint unused:false*/
 
 'use strict';
-const common = require('@google-cloud/common');
+
+export interface Service {
+  new(config: any, options: any): Service;
+  request: Function;
+}
+
+export interface Common {
+  Service: Service;
+}
+
+const common: Common = require('@google-cloud/common');
 const pkg = require('../../../package.json');
 var is = require('is');
 var isFunction = is.fn;
@@ -54,6 +64,10 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  * @property {Object} _logger - the instance-cached logger instance
  */
 class RequestHandler extends common.Service {
+  private _config: any;
+  private _logger: any;
+  private authClient: any;
+
   /**
    * Returns a query-string request object if a string key is given, otherwise
    * will return null.
