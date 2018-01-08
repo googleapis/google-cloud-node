@@ -23,7 +23,7 @@ var config = new Configuration({});
 config.lacksCredentials = function() {
   return false;
 };
-var ErrorMessage = require('../../../src/classes/error-message.js');
+var ErrorMessage = require('../../../src/classes/error-message.js').ErrorMessage;
 // var nock = require('nock');
 
 describe('Manual handler', function() {
