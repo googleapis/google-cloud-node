@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 import {ErrorMessage} from '../classes/error-message';
 var koaRequestInformationExtractor = require('../request-extractors/koa.js');
 var populateErrorMessage = require('../populate-error-message.js');

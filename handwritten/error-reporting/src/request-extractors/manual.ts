@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
+
 var has = require('lodash.has');
 var is = require('is');
 var isObject = is.object;

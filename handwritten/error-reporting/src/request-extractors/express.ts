@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 // jscs:disable requireEarlyReturn
-'use strict';
+
 var is = require('is');
 var isFunction = is.fn;
 var isObject = is.object;

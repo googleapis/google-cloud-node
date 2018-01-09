@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var is = require('is');
 var isString = is.string;
 var isObject = is.object;

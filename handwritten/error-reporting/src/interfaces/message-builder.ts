@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 import {ErrorMessage} from '../classes/error-message';
 import {buildStackTrace} from '../build-stack-trace';
 

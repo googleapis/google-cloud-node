@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var env = process.env;
 var has = require('lodash.has');
 var is = require('is');

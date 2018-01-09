@@ -15,7 +15,6 @@
  */
 /*jshint bitwise: false*/
 
-'use strict';
 var has = require('lodash.has');
 var is = require('is');
 var isObject = is.object;
