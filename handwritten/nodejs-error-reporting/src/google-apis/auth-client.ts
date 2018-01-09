@@ -15,8 +15,6 @@
  */
 /*jshint unused:false*/
 
-'use strict';
-
 export interface Service {
   new(config: any, options: any): Service;
   request: Function;

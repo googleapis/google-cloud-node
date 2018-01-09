@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const SRC_ROOT = __dirname;
 
 /**
