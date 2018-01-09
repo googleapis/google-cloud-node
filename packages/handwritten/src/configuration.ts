@@ -15,8 +15,8 @@
  */
 
 var env = process.env;
-var has = require('lodash.has');
-var is = require('is');
+import * as has from 'lodash.has';
+import * as is from 'is';
 var isObject = is.object;
 var isBoolean = is.boolean;
 var isString = is.string;

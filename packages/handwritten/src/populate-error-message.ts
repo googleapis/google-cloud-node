@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-var has = require('lodash.has');
-var is = require('is');
+import * as has from 'lodash.has';
+import * as is from 'is';
 var isObject = is.object;
 import {buildStackTrace} from './build-stack-trace';
 
