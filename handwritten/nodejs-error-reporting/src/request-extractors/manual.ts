@@ -39,7 +39,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-function manualRequestInformationExtractor(req) {
+export function manualRequestInformationExtractor(req) {
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || isArray(req) || isFunction(req)) {
@@ -72,5 +72,3 @@ function manualRequestInformationExtractor(req) {
 
   return returnObject;
 }
-
-module.exports = manualRequestInformationExtractor;

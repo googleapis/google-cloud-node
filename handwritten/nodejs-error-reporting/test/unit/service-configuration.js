@@ -24,7 +24,7 @@ var assign = require('lodash.assign');
 var omitBy = require('lodash.omitby');
 var Configuration = require('../fixtures/configuration.js');
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
-var logger = require('../../src/logger.js')({
+var logger = require('../../src/logger.js').createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
 var env = {

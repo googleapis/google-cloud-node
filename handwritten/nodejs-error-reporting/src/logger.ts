@@ -40,7 +40,7 @@ var packageJson = require('../../package.json');
  * @returns {Object} - returns an instance of the logger created with the given/
  *  default options
  */
-function createLogger(initConfiguration) {
+export function createLogger(initConfiguration) {
   // Default to log level: warn (2)
   var DEFAULT_LEVEL = logger.LEVELS[2];
   var level = DEFAULT_LEVEL;
@@ -66,5 +66,3 @@ function createLogger(initConfiguration) {
   }
   return logger({level: level, tag: packageJson.name});
 }
-
-module.exports = createLogger;

@@ -19,7 +19,7 @@
 var assert = require('assert');
 var omit = require('lodash.omit');
 var extend = require('extend');
-var manualRequestInformationExtractor = require('../../../src/request-extractors/manual.js');
+var manualRequestInformationExtractor = require('../../../src/request-extractors/manual.js').manualRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('manualRequestInformationExtractor', function() {

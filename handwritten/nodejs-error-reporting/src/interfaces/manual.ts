@@ -19,8 +19,8 @@ var isString = is.string;
 var isObject = is.object;
 var isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
-var manualRequestInformationExtractor = require('../request-extractors/manual.js');
-var populateErrorMessage = require('../populate-error-message.js');
+import {manualRequestInformationExtractor} from '../request-extractors/manual';
+import {populateErrorMessage} from '../populate-error-message';
 
 /**
  * The handler setup function serves to produce a bound instance of the
