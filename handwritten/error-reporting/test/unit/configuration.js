@@ -21,7 +21,7 @@ var merge = require('lodash.merge');
 var Configuration = require('../fixtures/configuration.js');
 var Fuzzer = require('../../utils/fuzzer.js');
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
-var logger = require('../../src/logger.js')({
+var logger = require('../../src/logger.js').createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
 var nock = require('nock');

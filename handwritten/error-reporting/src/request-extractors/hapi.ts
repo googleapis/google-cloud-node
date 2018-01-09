@@ -79,7 +79,7 @@ function extractRemoteAddressFromRequest(req) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-function hapiRequestInformationExtractor(req) {
+export function hapiRequestInformationExtractor(req) {
   var returnObject = new RequestInformationContainer();
 
   if (
@@ -101,5 +101,3 @@ function hapiRequestInformationExtractor(req) {
 
   return returnObject;
 }
-
-module.exports = hapiRequestInformationExtractor;

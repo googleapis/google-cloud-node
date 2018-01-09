@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var hapiRequestInformationExtractor = require('../../../src/request-extractors/hapi.js');
+var hapiRequestInformationExtractor = require('../../../src/request-extractors/hapi.js').hapiRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('hapiRequestInformationExtractor behaviour', function() {

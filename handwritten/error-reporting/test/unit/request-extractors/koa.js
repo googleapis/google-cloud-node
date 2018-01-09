@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var koaRequestInformationExtractor = require('../../../src/request-extractors/koa.js');
+var koaRequestInformationExtractor = require('../../../src/request-extractors/koa.js').koaRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('koaRequestInformationExtractor', function() {
