@@ -79,7 +79,7 @@ const timeRoot = {
 
 export const v8TimeProfile: TimeProfile = {
   startTime: 0,
-  endTime: 10 * 1000,
+  endTime: 10 * 1000 * 1000,
   topDownRoot: timeRoot,
 };
 
@@ -344,7 +344,7 @@ const anonymousFunctionTimeRoot = {
 
 export const v8AnonymousFunctionTimeProfile: TimeProfile = {
   startTime: 0,
-  endTime: 10 * 1000,
+  endTime: 10 * 1000 * 1000,
   topDownRoot: anonymousFunctionTimeRoot,
 };
 
