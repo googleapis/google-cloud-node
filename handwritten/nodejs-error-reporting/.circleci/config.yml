@@ -214,6 +214,7 @@ jobs:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
+    working_directory: /var/error-reporting/
 
   publish_npm:
     docker:
