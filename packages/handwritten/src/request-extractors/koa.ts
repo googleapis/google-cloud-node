@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;

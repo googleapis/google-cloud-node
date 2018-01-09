@@ -18,8 +18,6 @@
  * @module error-reporting
  */
 
-'use strict';
-
 import {Configuration} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
 // Begin error reporting interfaces
