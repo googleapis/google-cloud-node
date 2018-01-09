@@ -15,8 +15,8 @@
  */
 
 import {ErrorMessage} from '../classes/error-message';
-var koaRequestInformationExtractor = require('../request-extractors/koa.js');
-var populateErrorMessage = require('../populate-error-message.js');
+import {koaRequestInformationExtractor} from '../request-extractors/koa';
+import {populateErrorMessage} from '../populate-error-message';
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware
@@ -30,7 +30,7 @@ var populateErrorMessage = require('../populate-error-message.js');
  * @returns {Function} - The function used to catch errors yielded by downstream
  *  request handlers.
  */
-function koaErrorHandler(client, config) {
+export function koaErrorHandler(client, config) {
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by
@@ -56,5 +56,3 @@ function koaErrorHandler(client, config) {
     }
   };
 }
-
-module.exports = koaErrorHandler;

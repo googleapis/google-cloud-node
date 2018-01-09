@@ -19,7 +19,7 @@ var isObject = is.object;
 var isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
 import {expressRequestInformationExtractor} from '../request-extractors/express';
-var populateErrorMessage = require('../populate-error-message.js');
+import {populateErrorMessage} from '../populate-error-message';
 
 /**
  * Returns a function that can be used as an express error handling middleware.
@@ -30,7 +30,7 @@ var populateErrorMessage = require('../populate-error-message.js');
  * @returns {expressErrorHandler} - a function that can be used as an express
  *  error handling middleware.
  */
-function makeExpressHandler(client, config) {
+export function makeExpressHandler(client, config) {
   /**
    * The Express Error Handler function is an interface for the error handler
    * stack into the Express architecture.
@@ -70,5 +70,3 @@ function makeExpressHandler(client, config) {
 
   return expressErrorHandler;
 }
-
-module.exports = makeExpressHandler;

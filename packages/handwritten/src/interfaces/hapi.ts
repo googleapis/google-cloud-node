@@ -18,8 +18,8 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
-var hapiRequestInformationExtractor = require('../request-extractors/hapi.js');
-var populateErrorMessage = require('../populate-error-message.js');
+import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
+import {populateErrorMessage} from '../populate-error-message';
 var packageJson = require('../../../package.json');
 
 /**
@@ -57,7 +57,7 @@ function hapiErrorHandler(req, err, config) {
  *  configuration
  * @returns {Object} - the actual Hapi plugin
  */
-function makeHapiPlugin(client, config) {
+export function makeHapiPlugin(client, config) {
   /**
    * The register function serves to attach the hapiErrorHandler to specific
    * points in the hapi request-response lifecycle. Namely: it attaches to the
@@ -116,5 +116,3 @@ function makeHapiPlugin(client, config) {
 
   return hapiPlugin;
 }
-
-module.exports = makeHapiPlugin;

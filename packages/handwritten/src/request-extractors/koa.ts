@@ -30,7 +30,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {RequestInformationContainer} - returns a request information
  *  container instance that may be in its initial state
  */
-function koaRequestInformationExtractor(req, res) {
+export function koaRequestInformationExtractor(req, res) {
   var returnObject = new RequestInformationContainer();
 
   if (
@@ -55,5 +55,3 @@ function koaRequestInformationExtractor(req, res) {
 
   return returnObject;
 }
-
-module.exports = koaRequestInformationExtractor;

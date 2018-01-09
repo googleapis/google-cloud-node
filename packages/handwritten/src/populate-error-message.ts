@@ -29,7 +29,7 @@ import {buildStackTrace} from './build-stack-trace';
  *  information into
  * @returns {Undefined} - does not return a value
  */
-function populateErrorMessage(ob, em) {
+export function populateErrorMessage(ob, em) {
   if (ob === null || ob === undefined) {
     em.setMessage(buildStackTrace('' + ob));
   } else if (ob.stack) {
@@ -124,5 +124,3 @@ function populateFromObject(ob, errorMessage) {
     );
   }
 }
-
-module.exports = populateErrorMessage;

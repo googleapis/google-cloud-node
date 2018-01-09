@@ -22,13 +22,13 @@ import {Configuration} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
 // Begin error reporting interfaces
 
-var koa = require('./interfaces/koa.js');
-var hapi = require('./interfaces/hapi.js');
-var manual = require('./interfaces/manual.js');
-var express = require('./interfaces/express.js');
-var restify = require('./interfaces/restify');
-var messageBuilder = require('./interfaces/message-builder.js');
-var createLogger1 = require('./logger.js');
+import {koaErrorHandler as koa} from './interfaces/koa';
+import {makeHapiPlugin as hapi} from './interfaces/hapi';
+import * as manual from './interfaces/manual';
+import {makeExpressHandler as express} from './interfaces/express';
+import {handlerSetup as restify} from './interfaces/restify';
+import * as messageBuilder from './interfaces/message-builder';
+import {createLogger} from './logger';
 
 /**
  * @typedef ConfigurationOptions
@@ -92,7 +92,7 @@ function Errors(initConfiguration): void {
     return new Errors(initConfiguration);
   }
 
-  this._logger = createLogger1(initConfiguration);
+  this._logger = createLogger(initConfiguration);
   this._config = new Configuration(initConfiguration, this._logger);
   this._client = new AuthClient(this._config, this._logger);
 

@@ -18,8 +18,8 @@ var is = require('is');
 var isObject = is.object;
 var isFunction = is.function;
 import {ErrorMessage} from '../classes/error-message';
-var expressRequestInformationExtractor = require('../request-extractors/express.js');
-var populateErrorMessage = require('../populate-error-message.js');
+import * as expressRequestInformationExtractor from '../request-extractors/express';
+import {populateErrorMessage} from '../populate-error-message';
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting
@@ -147,8 +147,6 @@ function serverErrorHandler(client, config, server) {
  * @returns {Function} - returns the serverErrorHandler function for use in the
  *  restify middleware stack
  */
-function handlerSetup(client, config) {
+export function handlerSetup(client, config) {
   return serverErrorHandler.bind(null, client, config);
 }
-
-module.exports = handlerSetup;
