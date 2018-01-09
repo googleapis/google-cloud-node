@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var is = require('is');
+import * as is from 'is';
 var isObject = is.object;
 var isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';

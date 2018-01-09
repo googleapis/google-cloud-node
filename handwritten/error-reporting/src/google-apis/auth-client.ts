@@ -26,7 +26,7 @@ export interface Common {
 
 const common: Common = require('@google-cloud/common');
 const pkg = require('../../../package.json');
-var is = require('is');
+import * as is from 'is';
 var isFunction = is.fn;
 var isString = is.string;
 

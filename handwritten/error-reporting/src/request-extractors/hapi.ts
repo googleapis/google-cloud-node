@@ -15,8 +15,8 @@
  */
 // jscs:disable requireEarlyReturn
 
-var has = require('lodash.has');
-var is = require('is');
+import * as has from 'lodash.has';
+import * as is from 'is';
 var isObject = is.object;
 var isFunction = is.function;
 var isArray = is.array;

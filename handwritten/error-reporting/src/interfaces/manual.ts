@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var is = require('is');
+import * as is from 'is';
 var isString = is.string;
 var isObject = is.object;
 var isFunction = is.fn;

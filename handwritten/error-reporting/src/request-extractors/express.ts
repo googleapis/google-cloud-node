@@ -15,7 +15,7 @@
  */
 // jscs:disable requireEarlyReturn
 
-var is = require('is');
+import * as is from 'is';
 var isFunction = is.fn;
 var isObject = is.object;
 import {RequestInformationContainer} from '../classes/request-information-container';
