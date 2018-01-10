@@ -71,9 +71,9 @@ export async function initConfig(config: Config): Promise<ProfilerConfig> {
   }
 
   let envSetConfig: Config = {};
-  if (process.env.GCLOUD_PROFILER_CONFIG) {
-    envSetConfig =
-        require(path.resolve(process.env.GCLOUD_PROFILER_CONFIG)) as Config;
+  const val = process.env.GCLOUD_PROFILER_CONFIG;
+  if (val) {
+    envSetConfig = require(path.resolve(val)) as Config;
   }
 
   const mergedConfig =
