@@ -96,7 +96,7 @@ jobs:
       - checkout
       - run:
           name: Install modules and dependencies.
-          command: npm install --unsafe-perm
+          command: npm install
       - run:
           name: Run unit tests.
           command: npm test
@@ -143,8 +143,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/logging-winston
             npm install
+            npm link @google-cloud/logging-winston
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -191,8 +191,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/logging-winston
             npm install
+            npm link @google-cloud/logging-winston
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
