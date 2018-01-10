@@ -15,20 +15,15 @@
  */
 /*jshint unused:false*/
 
-export interface Service {
-  new(config: any, options: any): Service;
-  request: Function;
-}
-
-export interface Common {
-  Service: Service;
-}
-
-const common: Common = require('@google-cloud/common');
+import * as common from '@google-cloud/common';
 const pkg = require('../../../package.json');
 import * as is from 'is';
 var isFunction = is.fn;
 var isString = is.string;
+
+import {Configuration} from '../configuration';
+import {ErrorMessage} from '../classes/error-message';
+import * as http from 'http';
 
 /* @const {Array<String>} list of scopes needed to work with the errors api. */
 var SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
@@ -62,9 +57,10 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  * @property {Object} _logger - the instance-cached logger instance
  */
 export class RequestHandler extends common.Service {
-  private _config: any;
-  private _logger: any;
-  private authClient: any;
+  private _config: Configuration;
+  private _logger: common.Logger;
+  // TODO: Make this more precise
+  private authClient: {getToken: (err: {}) => void;};
 
   /**
    * Returns a query-string request object if a string key is given, otherwise
@@ -75,7 +71,7 @@ export class RequestHandler extends common.Service {
    *  null in case no api key is given
    * @static
    */
-  static manufactureQueryString(key) {
+  static manufactureQueryString(key: string|null) {
     if (isString(key)) {
       return {key: key};
     }
@@ -98,7 +94,7 @@ export class RequestHandler extends common.Service {
    * @param {Configuration} config - an instance of the Configuration class
    * @param {Logger} logger - an instance of logger
    */
-  constructor(config, logger) {
+  constructor(config: Configuration, logger: common.Logger) {
     var pid = config.getProjectId();
     // If an API key is provided, do not try to authenticate.
     var tryAuthenticate = !config.getKey();
@@ -111,7 +107,8 @@ export class RequestHandler extends common.Service {
         projectIdRequired: true,
         customEndpoint: !tryAuthenticate,
       },
-      config
+      // TODO: Fix the type incompatibilities that require this cast
+      config as common.ServiceAuthenticationConfig
     );
     this._config = config;
     this._logger = logger;
@@ -168,8 +165,8 @@ export class RequestHandler extends common.Service {
    * @returns {Undefined} - does not return anything
    * @instance
    */
-  sendError(errorMessage, userCb) {
-    var cb = isFunction(userCb) ? userCb : RequestHandler.noOp;
+  sendError(errorMessage: ErrorMessage, userCb?: (err: Error|null, response: http.ServerResponse|null, body: any) => void) {
+    var cb: Function = (isFunction(userCb) ? userCb : RequestHandler.noOp)!;
     if (this._config.getShouldReportErrorsToAPI()) {
       this.request(
         {

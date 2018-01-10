@@ -21,6 +21,7 @@ var isObject = is.object;
 var isFunction = is.function;
 var isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
+import * as hapi from 'hapi';
 
 /**
  * This function is used to check for a pending status code on the response
@@ -31,19 +32,21 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {Number} - Either an HTTP status code or -1 in absence of an
  *  extractable status code.
  */
-function attemptToExtractStatusCode(req) {
+function attemptToExtractStatusCode(req: hapi.Request) {
+  // TODO: Handle the cases where `req.response` and `req.response.output`
+  //       are `null` in this function
   if (
     has(req, 'response') &&
     isObject(req.response) &&
     has(req.response, 'statusCode')
   ) {
-    return req.response.statusCode;
+    return req.response!.statusCode;
   } else if (
     has(req, 'response') &&
     isObject(req.response) &&
-    isObject(req.response.output)
+    isObject(req.response!.output)
   ) {
-    return req.response.output.statusCode;
+    return req.response!.output!.statusCode;
   }
 
   return 0;
@@ -60,7 +63,7 @@ function attemptToExtractStatusCode(req) {
  * @returns {String} - Either an empty string if the IP cannot be extracted or
  *  a string that represents the remote IP address
  */
-function extractRemoteAddressFromRequest(req) {
+function extractRemoteAddressFromRequest(req: hapi.Request) {
   if (has(req.headers, 'x-forwarded-for')) {
     return req.headers['x-forwarded-for'];
   } else if (isObject(req.info)) {
@@ -79,7 +82,7 @@ function extractRemoteAddressFromRequest(req) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function hapiRequestInformationExtractor(req) {
+export function hapiRequestInformationExtractor(req: hapi.Request) {
   var returnObject = new RequestInformationContainer();
 
   if (
@@ -93,7 +96,8 @@ export function hapiRequestInformationExtractor(req) {
 
   returnObject
     .setMethod(req.method)
-    .setUrl(req.url)
+    // TODO: Address the type conflict that requires a cast to string
+    .setUrl(req.url as {} as string)
     .setUserAgent(req.headers['user-agent'])
     .setReferrer(req.headers.referrer)
     .setStatusCode(attemptToExtractStatusCode(req))

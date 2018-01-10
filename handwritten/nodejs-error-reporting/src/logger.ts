@@ -23,6 +23,8 @@ var isNumber = is.number;
 var logger = require('@google-cloud/common').logger;
 var packageJson = require('../../package.json');
 
+import {ConfigurationOptions} from './configuration';
+
 /**
  * Creates an instance of the Google Cloud Diagnostics logger class. This
  * instance will be configured to log at the level given by the environment or
@@ -40,7 +42,7 @@ var packageJson = require('../../package.json');
  * @returns {Object} - returns an instance of the logger created with the given/
  *  default options
  */
-export function createLogger(initConfiguration) {
+export function createLogger(initConfiguration: ConfigurationOptions) {
   // Default to log level: warn (2)
   var DEFAULT_LEVEL = logger.LEVELS[2];
   var level = DEFAULT_LEVEL;
@@ -54,9 +56,9 @@ export function createLogger(initConfiguration) {
   ) {
     if (isString(initConfiguration.logLevel)) {
       // Cast string as integer
-      level = logger.LEVELS[~~initConfiguration.logLevel] || DEFAULT_LEVEL;
+      level = logger.LEVELS[~~initConfiguration.logLevel!] || DEFAULT_LEVEL;
     } else if (isNumber(initConfiguration.logLevel)) {
-      level = logger.LEVELS[initConfiguration.logLevel] || DEFAULT_LEVEL;
+      level = logger.LEVELS[initConfiguration.logLevel!] || DEFAULT_LEVEL;
     } else {
       throw new Error(
         'config.logLevel must be a number or decimal ' +

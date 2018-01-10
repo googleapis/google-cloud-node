@@ -61,7 +61,7 @@ export class RequestInformationContainer {
    * @param {String} url - the url of the request
    * @returns {this} - returns the instance for chaining
    */
-  setUrl(url) {
+  setUrl(url: string) {
     this.url = isString(url) ? url : '';
 
     return this;
@@ -73,7 +73,7 @@ export class RequestInformationContainer {
    * @param {String} method - the method of the request
    * @returns {this} - returns the instance for chaining
    */
-  setMethod(method) {
+  setMethod(method: string) {
     this.method = isString(method) ? method : '';
 
     return this;
@@ -85,8 +85,8 @@ export class RequestInformationContainer {
    * @param {String} referrer - the referrer of the request
    * @returns {this} - returns the instance for chaining
    */
-  setReferrer(referrer) {
-    this.referrer = isString(referrer) ? referrer : '';
+  setReferrer(referrer?: string) {
+    this.referrer = (isString(referrer) ? referrer : '')!;
 
     return this;
   };
@@ -97,8 +97,8 @@ export class RequestInformationContainer {
    * @param {String} userAgent - the user agent committing the request
    * @returns {this} - returns the instance for chaining
    */
-  setUserAgent(userAgent) {
-    this.userAgent = isString(userAgent) ? userAgent : '';
+  setUserAgent(userAgent?: string) {
+    this.userAgent = (isString(userAgent) ? userAgent : '')!;
 
     return this;
   };
@@ -109,8 +109,8 @@ export class RequestInformationContainer {
    * @param {String} remoteIp - the remote IP of the requester
    * @returns {this} - returns the instance for chaining
    */
-  setRemoteAddress(remoteIp) {
-    this.remoteAddress = isString(remoteIp) ? remoteIp : '';
+  setRemoteAddress(remoteIp?: string) {
+    this.remoteAddress = (isString(remoteIp) ? remoteIp : '')!;
 
     return this;
   };
@@ -121,7 +121,7 @@ export class RequestInformationContainer {
    * @param {Number} statusCode - the status code of the response to the request
    * @returns {this} - returns the instance for chaining
    */
-  setStatusCode(statusCode) {
+  setStatusCode(statusCode: number) {
     this.statusCode = isNumber(statusCode) ? statusCode : 0;
 
     return this;
