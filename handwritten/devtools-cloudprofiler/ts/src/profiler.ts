@@ -159,13 +159,18 @@ function isBackoffResponseError(err: Error): err is BackoffResponseError {
  */
 export class Retryer {
   private nextBackoffMillis: number;
+
+  // For testing. Allows Math.random() to be replaced with non-random function.
+  private random: () => number;
+
   constructor(
       readonly initialBackoffMillis: number, readonly backoffCapMillis: number,
-      readonly backoffMultiplier: number) {
+      readonly backoffMultiplier: number, random = Math.random) {
     this.nextBackoffMillis = this.initialBackoffMillis;
+    this.random = random;
   }
   getBackoff(): number {
-    const curBackoff = Math.random() * this.nextBackoffMillis;
+    const curBackoff = this.random() * this.nextBackoffMillis;
     this.nextBackoffMillis = Math.min(
         this.backoffMultiplier * this.nextBackoffMillis, this.backoffCapMillis);
     return curBackoff;

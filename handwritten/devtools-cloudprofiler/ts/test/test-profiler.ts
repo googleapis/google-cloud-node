@@ -82,18 +82,10 @@ function nockOauth2(): nock.Scope {
       });
 }
 
+
 describe('Retryer', () => {
-  let randomStub: sinon.SinonStub|undefined;
-  before(() => {
-    randomStub = sinon.stub(Math, 'random').returns(0.5);
-  });
-  after(() => {
-    if (randomStub) {
-      randomStub.restore();
-    }
-  });
   it('should backoff until max-backoff reached', () => {
-    const retryer = new Retryer(1000, 1000000, 5);
+    const retryer = new Retryer(1000, 1000000, 5, () => 0.5);
     assert.equal(retryer.getBackoff(), 0.5 * 1000);
     assert.equal(retryer.getBackoff(), 0.5 * 5000);
     assert.equal(retryer.getBackoff(), 0.5 * 25000);
