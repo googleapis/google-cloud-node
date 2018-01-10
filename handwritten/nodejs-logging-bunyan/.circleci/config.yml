@@ -143,8 +143,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/logging-bunyan
             npm install
+            npm link @google-cloud/logging-bunyan
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -189,8 +189,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/logging-bunyan
             npm install
+            npm link @google-cloud/logging-bunyan
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
