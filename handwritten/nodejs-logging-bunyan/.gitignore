@@ -1,10 +1,12 @@
 **/*.log
 **/node_modules
+*-lock.js*
+*.lock
+.DS_Store
 .coverage
 .nyc_output
+build
 docs/
 out/
-system-test/secrets.js
 system-test/*key.json
-*.lock
-*-lock.js*
+system-test/secrets.js
