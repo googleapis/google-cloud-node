@@ -96,7 +96,7 @@ jobs:
       - checkout
       - run:
           name: Install modules and dependencies.
-          command: npm install --unsafe-perm
+          command: npm install
       - run:
           name: Run unit tests.
           command: npm test
