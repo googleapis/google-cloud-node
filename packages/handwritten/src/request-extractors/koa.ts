@@ -19,6 +19,7 @@ var isObject = is.object;
 var isFunction = is.function;
 var isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
+import * as koa from 'koa';
 
 /**
  * The koaRequestInformationExtractor attempts to extract information from a Koa
@@ -30,7 +31,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {RequestInformationContainer} - returns a request information
  *  container instance that may be in its initial state
  */
-export function koaRequestInformationExtractor(req, res) {
+export function koaRequestInformationExtractor(req: koa.Request, res: koa.Response) {
   var returnObject = new RequestInformationContainer();
 
   if (

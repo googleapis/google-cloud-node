@@ -19,6 +19,7 @@ import * as is from 'is';
 var isFunction = is.fn;
 var isObject = is.object;
 import {RequestInformationContainer} from '../classes/request-information-container';
+import * as express from 'express';
 
 /**
  * This function checks for the presence of an `x-forwarded-for` header on the
@@ -30,7 +31,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {String} - the remote address or, if one cannot be found, an empty
  *  string
  */
-function extractRemoteAddressFromRequest(req) {
+function extractRemoteAddressFromRequest(req: express.Request) {
   if (typeof req.header('x-forwarded-for') !== 'undefined') {
     return req.header('x-forwarded-for');
   } else if (isObject(req.connection)) {
@@ -51,7 +52,7 @@ function extractRemoteAddressFromRequest(req) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function expressRequestInformationExtractor(req, res) {
+export function expressRequestInformationExtractor(req: express.Request, res: express.Response) {
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
