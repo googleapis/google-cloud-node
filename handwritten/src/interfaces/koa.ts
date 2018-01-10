@@ -17,6 +17,8 @@
 import {ErrorMessage} from '../classes/error-message';
 import {koaRequestInformationExtractor} from '../request-extractors/koa';
 import {populateErrorMessage} from '../populate-error-message';
+import { RequestHandler } from '../google-apis/auth-client';
+import { Configuration } from '../configuration';
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware
@@ -30,7 +32,7 @@ import {populateErrorMessage} from '../populate-error-message';
  * @returns {Function} - The function used to catch errors yielded by downstream
  *  request handlers.
  */
-export function koaErrorHandler(client, config) {
+export function koaErrorHandler(client: RequestHandler, config: Configuration) {
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by
@@ -38,7 +40,7 @@ export function koaErrorHandler(client, config) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(next) {
+  return function*(next: Function) {
     var svc = config.getServiceContext();
 
     try {

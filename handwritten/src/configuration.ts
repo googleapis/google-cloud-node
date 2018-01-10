@@ -22,6 +22,27 @@ var isBoolean = is.boolean;
 var isString = is.string;
 var isNumber = is.number;
 
+import {Logger} from '@google-cloud/common';
+
+export interface ConfigurationOptions {
+  projectId?: string;
+  keyFilename?: string;
+  logLevel?: string|number;
+  key?: string;
+  serviceContext?: {
+    service?: string;
+    version?: string;
+  };
+  ignoreEnvironmentCheck?: boolean;
+  credentials?: {};
+  reportUnhandledRejections?: boolean;
+}
+
+export interface ServiceContext {
+  service: string;
+  version?: string;
+}
+
 /**
  * The Configuration constructor function initializes several internal
  * properties on the Configuration instance and accepts a runtime-given
@@ -44,17 +65,17 @@ var isNumber = is.number;
  *  been initialized.
  */
 export class Configuration {
-  _logger: any;
+  _logger: Logger;
   _shouldReportErrorsToAPI: boolean;
-  _projectId: any;
-  _key: any;
-  keyFilename: any;
-  credentials: any;
-  _serviceContext: any;
-  _reportUnhandledRejections: false;
-  _givenConfiguration: any;
+  _projectId: string|null;
+  _key: string|null;
+  keyFilename: string|null;
+  credentials: {}|null;
+  _serviceContext: ServiceContext;
+  _reportUnhandledRejections: boolean;
+  _givenConfiguration: ConfigurationOptions;
 
-  constructor(givenConfig, logger) {
+  constructor(givenConfig: ConfigurationOptions, logger: Logger) {
     /**
      * The _logger property caches the logger instance created at the top-level
      * for configuration logging purposes.
@@ -216,14 +237,14 @@ export class Configuration {
     this._serviceContext.version = isString(version) ? version : undefined;
 
     if (isObject(this._givenConfiguration.serviceContext)) {
-      if (isString(this._givenConfiguration.serviceContext.service)) {
-        this._serviceContext.service = this._givenConfiguration.serviceContext.service;
+      if (isString(this._givenConfiguration.serviceContext!.service)) {
+        this._serviceContext.service = this._givenConfiguration.serviceContext!.service!;
       } else if (has(this._givenConfiguration.serviceContext, 'service')) {
         throw new Error('config.serviceContext.service must be a string');
       }
 
-      if (isString(this._givenConfiguration.serviceContext.version)) {
-        this._serviceContext.version = this._givenConfiguration.serviceContext.version;
+      if (isString(this._givenConfiguration.serviceContext!.version)) {
+        this._serviceContext.version = this._givenConfiguration.serviceContext!.version;
       } else if (has(this._givenConfiguration.serviceContext, 'version')) {
         throw new Error('config.serviceContext.version must be a string');
       }
@@ -263,22 +284,22 @@ export class Configuration {
       );
     }
     if (isString(this._givenConfiguration.key)) {
-      this._key = this._givenConfiguration.key;
+      this._key = this._givenConfiguration.key!;
     } else if (has(this._givenConfiguration, 'key')) {
       throw new Error('config.key must be a string');
     }
     if (isString(this._givenConfiguration.keyFilename)) {
-      this.keyFilename = this._givenConfiguration.keyFilename;
+      this.keyFilename = this._givenConfiguration.keyFilename!;
     } else if (has(this._givenConfiguration, 'keyFilename')) {
       throw new Error('config.keyFilename must be a string');
     }
     if (isObject(this._givenConfiguration.credentials)) {
-      this.credentials = this._givenConfiguration.credentials;
+      this.credentials = this._givenConfiguration.credentials!;
     } else if (has(this._givenConfiguration, 'credentials')) {
       throw new Error('config.credentials must be a valid credentials object');
     }
     if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
-      this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections;
+      this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections!;
     } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
       throw new Error('config.reportUnhandledRejections must be a boolean');
     }
@@ -312,9 +333,9 @@ export class Configuration {
     }
     if (has(this._givenConfiguration, 'projectId')) {
       if (isString(this._givenConfiguration.projectId)) {
-        this._projectId = this._givenConfiguration.projectId;
+        this._projectId = this._givenConfiguration.projectId!;
       } else if (isNumber(this._givenConfiguration.projectId)) {
-        this._projectId = this._givenConfiguration.projectId.toString();
+        this._projectId = this._givenConfiguration.projectId!.toString();
       }
     }
     return this._projectId;
