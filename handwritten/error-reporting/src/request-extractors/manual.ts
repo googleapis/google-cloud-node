@@ -21,6 +21,15 @@ var isArray = is.array;
 var isFunction = is.fn;
 import {RequestInformationContainer} from '../classes/request-information-container';
 
+export interface Request {
+  method?: string;
+  url?: string;
+  userAgent?: string;
+  referrer?: string;
+  statusCode?: number;
+  remoteAddress?: string;
+}
+
 /**
  * The manualRequestInformationExtractor is meant to take a standard object
  * and extract request information based on the inclusion of several properties.
@@ -39,7 +48,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function manualRequestInformationExtractor(req) {
+export function manualRequestInformationExtractor(req: Request) {
   var returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || isArray(req) || isFunction(req)) {
@@ -47,11 +56,11 @@ export function manualRequestInformationExtractor(req) {
   }
 
   if (has(req, 'method')) {
-    returnObject.setMethod(req.method);
+    returnObject.setMethod(req.method!);
   }
 
   if (has(req, 'url')) {
-    returnObject.setUrl(req.url);
+    returnObject.setUrl(req.url!);
   }
 
   if (has(req, 'userAgent')) {
@@ -63,7 +72,7 @@ export function manualRequestInformationExtractor(req) {
   }
 
   if (has(req, 'statusCode')) {
-    returnObject.setStatusCode(req.statusCode);
+    returnObject.setStatusCode(req.statusCode!);
   }
 
   if (has(req, 'remoteAddress')) {

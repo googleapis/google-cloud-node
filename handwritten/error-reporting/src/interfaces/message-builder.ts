@@ -16,6 +16,7 @@
 
 import {ErrorMessage} from '../classes/error-message';
 import {buildStackTrace} from '../build-stack-trace';
+import { Configuration } from '../configuration';
 
 /**
  * The handler setup function serves to produce a bound instance of the
@@ -26,7 +27,7 @@ import {buildStackTrace} from '../build-stack-trace';
  *  configuration
  * @returns {ErrorMessage} - a new ErrorMessage instance
  */
-export function handlerSetup(config) {
+export function handlerSetup(config: Configuration) {
   /**
    * The interface for creating new instances of the ErrorMessage class which
    * can be used to send custom payloads to the Error reporting service.

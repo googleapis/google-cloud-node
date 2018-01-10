@@ -21,6 +21,11 @@ var isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
 import {manualRequestInformationExtractor} from '../request-extractors/manual';
 import {populateErrorMessage} from '../populate-error-message';
+import { RequestHandler } from '../google-apis/auth-client';
+import { Configuration } from '../configuration';
+import { Logger } from '@google-cloud/common';
+import * as http from 'http';
+import {Request} from '../request-extractors/manual';
 
 /**
  * The handler setup function serves to produce a bound instance of the
@@ -36,7 +41,8 @@ import {populateErrorMessage} from '../populate-error-message';
  * @returns {reportManualError} - a bound version of the reportManualError
  *  function
  */
-export function handlerSetup(client, config, logger) {
+export function handlerSetup(client: RequestHandler, config: Configuration, logger: Logger) {
+  type Callback = (err: Error|null, response: http.ServerResponse|null, body: any) => void;
   /**
    * The interface for manually reporting errors to the Google Error API in
    * application code.
@@ -54,7 +60,7 @@ export function handlerSetup(client, config, logger) {
    * @returns {ErrorMessage} - returns the error message created through with
    * the parameters given.
    */
-  function reportManualError(err, request, additionalMessage, callback) {
+  function reportManualError(err: {}, request: Request|undefined, additionalMessage: string|{}|undefined, callback: Callback|{}|string|undefined) {
     var em;
     if (isString(request)) {
       // no request given
@@ -103,14 +109,16 @@ export function handlerSetup(client, config, logger) {
     }
 
     if (isObject(request)) {
-      em.consumeRequestInformation(manualRequestInformationExtractor(request));
+      // TODO: Address this explicit cast
+      em.consumeRequestInformation(manualRequestInformationExtractor(request as Request));
     }
 
     if (isString(additionalMessage)) {
       em.setMessage(additionalMessage);
     }
 
-    client.sendError(em, callback);
+    // TODO: Address this type cast
+    client.sendError(em, callback as Callback);
     return em;
   }
 

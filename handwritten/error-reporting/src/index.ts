@@ -18,7 +18,7 @@
  * @module error-reporting
  */
 
-import {Configuration} from './configuration';
+import {Configuration, ConfigurationOptions} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
 // Begin error reporting interfaces
 
@@ -87,7 +87,7 @@ import {createLogger} from './logger';
  * @param {ConfigurationOptions} initConfiguration - The desired project/error
  *     reporting configuration.
  */
-function Errors(initConfiguration): void {
+function Errors(initConfiguration: ConfigurationOptions): void {
   if (!(this instanceof Errors)) {
     return new Errors(initConfiguration);
   }

@@ -19,6 +19,20 @@ import * as is from 'is';
 var isObject = is.object;
 import {buildStackTrace} from './build-stack-trace';
 
+import {ErrorMessage} from './classes/error-message';
+
+export interface PopulatedObject {
+  message?: string;
+  user?: string;
+  filePath?: string;
+  lineNumber?: number;
+  functionName?: string;
+  serviceContext?: {
+    service?: string;
+    version?: string;
+  };
+}
+
 /**
  * The Error handler router is responsible for taking an object of some type and
  * and Error message container, analyzing the type of the object and marshalling
@@ -29,11 +43,11 @@ import {buildStackTrace} from './build-stack-trace';
  *  information into
  * @returns {Undefined} - does not return a value
  */
-export function populateErrorMessage(ob, em) {
+export function populateErrorMessage(ob: {}, em: ErrorMessage) {
   if (ob === null || ob === undefined) {
     em.setMessage(buildStackTrace('' + ob));
-  } else if (ob.stack) {
-    populateFromError(ob, em);
+  } else if ((ob as {stack: {}}).stack) {
+    populateFromError(ob as Error, em);
   } else if (typeof ob === 'object' && isObject(ob)) {
     populateFromObject(ob, em);
   } else {
@@ -55,17 +69,17 @@ export function populateErrorMessage(ob, em) {
  *  error information marshaled into
  * @returns {Undefined} - does not return anything
  */
-function populateFromError(err, errorMessage) {
-  errorMessage.setMessage(err.stack);
+function populateFromError(err: Error & PopulatedObject, errorMessage: ErrorMessage) {
+  errorMessage.setMessage(err.stack!);
 
   if (has(err, 'user')) {
-    errorMessage.setUser(err.user);
+    errorMessage.setUser(err.user!);
   }
 
   if (has(err, 'serviceContext') && isObject(err.serviceContext)) {
     errorMessage.setServiceContext(
-      err.serviceContext.service,
-      err.serviceContext.version
+      err.serviceContext!.service!,
+      err.serviceContext!.version
     );
   }
 }
@@ -94,33 +108,33 @@ function populateFromError(err, errorMessage) {
  *  error information into
  * @returns {Undefined} - does not return anything
  */
-function populateFromObject(ob, errorMessage) {
+function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
   if (has(ob, 'message')) {
-    errorMessage.setMessage(ob.message);
+    errorMessage.setMessage(ob.message!);
   } else {
     errorMessage.setMessage(buildStackTrace('' + ob));
   }
 
   if (has(ob, 'user')) {
-    errorMessage.setUser(ob.user);
+    errorMessage.setUser(ob.user!);
   }
 
   if (has(ob, 'filePath')) {
-    errorMessage.setFilePath(ob.filePath);
+    errorMessage.setFilePath(ob.filePath!);
   }
 
   if (has(ob, 'lineNumber')) {
-    errorMessage.setLineNumber(ob.lineNumber);
+    errorMessage.setLineNumber(ob.lineNumber!);
   }
 
   if (has(ob, 'functionName')) {
-    errorMessage.setFunctionName(ob.functionName);
+    errorMessage.setFunctionName(ob.functionName!);
   }
 
   if (has(ob, 'serviceContext') && isObject(ob.serviceContext)) {
     errorMessage.setServiceContext(
-      ob.serviceContext.service,
-      ob.serviceContext.version
+      ob.serviceContext!.service!,
+      ob.serviceContext!.version
     );
   }
 }
