@@ -19,6 +19,7 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
 import {populateErrorMessage} from '../populate-error-message';
 import { RequestHandler } from '../google-apis/auth-client';
 import { Configuration } from '../configuration';
+import { Request, Response } from 'koa';
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware
@@ -40,7 +41,7 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(next: Function) {
+  return function*(this: {request: Request; response: Response;}, next: Function) {
     var svc = config.getServiceContext();
 
     try {
