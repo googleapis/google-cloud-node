@@ -117,6 +117,7 @@ interface StackdriverEntryMetadata {
   timestamp?: Date,
   severity?: string, // figure out the correct type later
   httpRequest?: HttpRequest,
+  labels?: {},
   trace?: {}
 }
 
@@ -187,7 +188,8 @@ interface BunyanLogRecord {
   serviceContext?: ServiceContext,
   level?: string,
   time?: Date,
-  httpRequest?: HttpRequest
+  httpRequest?: HttpRequest,
+  labels?: {}
 }
 
 interface StreamResponse {
