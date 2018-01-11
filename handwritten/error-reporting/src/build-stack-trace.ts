@@ -32,14 +32,14 @@ export function buildStackTrace(message: string) {
   Error.captureStackTrace(target, buildStackTrace);
   const prefix = message ? message + '\n' : '';
   return (
-    prefix +
-    (target as any).stack
-      .split('\n')
-      .slice(1)
-      .filter(function(line: string) {
-        // Filter out all frames that are specific to the error-reporting library
-        return !line || line.indexOf(SRC_ROOT) === -1;
-      })
-      .join('\n')
-  );
+      prefix +
+      (target as {stack: string})
+          .stack.split('\n')
+          .slice(1)
+          .filter((line: string) => {
+            // Filter out all frames that are specific to the error-reporting
+            // library
+            return !line || line.indexOf(SRC_ROOT) === -1;
+          })
+          .join('\n'));
 }

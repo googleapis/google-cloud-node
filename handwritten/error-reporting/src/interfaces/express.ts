@@ -35,7 +35,8 @@ import * as express from 'express';
  * @returns {expressErrorHandler} - a function that can be used as an express
  *  error handling middleware.
  */
-export function makeExpressHandler(client: RequestHandler, config: Configuration) {
+export function makeExpressHandler(
+    client: RequestHandler, config: Configuration) {
   /**
    * The Express Error Handler function is an interface for the error handler
    * stack into the Express architecture.
@@ -47,7 +48,8 @@ export function makeExpressHandler(client: RequestHandler, config: Configuration
    * @param {Function} next - an Express continuation callback
    * @returns {ErrorMessage} - Returns the ErrorMessage instance
    */
-  function expressErrorHandler(err: {}, req: express.Request, res: express.Response, next: Function) {
+  function expressErrorHandler(
+      err: {}, req: express.Request, res: express.Response, next: Function) {
     let ctxService = '';
     let ctxVersion: string|undefined = '';
 
@@ -57,8 +59,9 @@ export function makeExpressHandler(client: RequestHandler, config: Configuration
     }
 
     const em = new ErrorMessage()
-      .consumeRequestInformation(expressRequestInformationExtractor(req, res))
-      .setServiceContext(ctxService, ctxVersion);
+                   .consumeRequestInformation(
+                       expressRequestInformationExtractor(req, res))
+                   .setServiceContext(ctxService, ctxVersion);
 
     populateErrorMessage(err, em);
 

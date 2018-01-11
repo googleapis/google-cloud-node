@@ -47,10 +47,7 @@ function restoreEnv() {
   process.env.GAE_MODULE_VERSION = env.GAE_MODULE_VERSION;
 }
 function createDeadMetadataService() {
-  return nock(METADATA_URL)
-    .get('/project-id')
-    .times(1)
-    .reply(500);
+  return nock(METADATA_URL).get('/project-id').times(1).reply(500);
 }
 
 describe('Configuration class', function() {
@@ -66,13 +63,10 @@ describe('Configuration class', function() {
     describe('fuzzing the constructor', function() {
       it('Should return default values', function() {
         var c;
-        f.fuzzFunctionForTypes(
-          function(givenConfigFuzz) {
-            c = new Configuration(givenConfigFuzz, logger);
-            assert.deepEqual(c._givenConfiguration, {});
-          },
-          ['object']
-        );
+        f.fuzzFunctionForTypes(function(givenConfigFuzz) {
+          c = new Configuration(givenConfigFuzz, logger);
+          assert.deepEqual(c._givenConfiguration, {});
+        }, ['object']);
       });
     });
     describe('valid config and default values', function() {
@@ -155,11 +149,12 @@ describe('Configuration class', function() {
             new Configuration({reportUnhandledRejections: 'INVALID'}, logger);
           });
         });
-        it('Should not throw given an empty object for serviceContext', function() {
-          assert.doesNotThrow(function() {
-            new Configuration({serviceContext: {}}, logger);
-          });
-        });
+        it('Should not throw given an empty object for serviceContext',
+           function() {
+             assert.doesNotThrow(function() {
+               new Configuration({serviceContext: {}}, logger);
+             });
+           });
       });
     });
   });
@@ -301,12 +296,11 @@ describe('Configuration class', function() {
         var key = '1337-api-key';
         before(function() {
           c = new Configuration(
-            {
-              key: key,
-              projectId: projectId,
-            },
-            logger
-          );
+              {
+                key: key,
+                projectId: projectId,
+              },
+              logger);
         });
         it('Should assign', function() {
           assert.strictEqual(c.getKey(), key);
@@ -322,9 +316,7 @@ describe('Configuration class', function() {
         });
         it('Should assign', function() {
           assert.strictEqual(
-            c.getReportUnhandledRejections(),
-            reportRejections
-          );
+              c.getReportUnhandledRejections(), reportRejections);
         });
       });
     });

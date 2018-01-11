@@ -24,19 +24,12 @@ import {ServiceContext} from '../configuration';
 
 export interface Context {
   httpRequest: {
-    method: string;
-    url: string;
-    userAgent: string;
-    referrer: string;
+    method: string; url: string; userAgent: string; referrer: string;
     responseStatusCode: number;
     remoteIp: string;
   };
   user: string;
-  reportLocation: {
-    filePath: string;
-    lineNumber: number;
-    functionName: string;
-  };
+  reportLocation: {filePath: string; lineNumber: number; functionName: string;};
 }
 
 export class ErrorMessage {
@@ -47,21 +40,21 @@ export class ErrorMessage {
 
   /**
    * The constructor for ErrorMessage takes no arguments and is solely meant to
-   * to instantiate properties on the instance. Each property should be externally
-   * set using the corresponding set function with the exception of eventTime
-   * which can be set externally but does not need to be since it is inited to
-   * an ISO-8601 compliant time string.
+   * to instantiate properties on the instance. Each property should be
+   * externally set using the corresponding set function with the exception of
+   * eventTime which can be set externally but does not need to be since it is
+   * inited to an ISO-8601 compliant time string.
    * @type {Object}
    * @class ErrorMessage
    * @classdesc ErrorMessage is a class which is meant to store and control-for
    *  Stackdriver Error API submittable values. Meant to be JSON string-ifiable
-   *  representation of the final values which will be submitted to the Error API
-   *  this class enforces type-checking on every setter function and will write
-   *  default type-friendly values to instance properties if given values which
-   *  are type-incompatible to expectations. These type-friendly default
-   *  substitutions will occur silently and no errors will be thrown on attempted
-   *  invalid input under the premise that during misassignment some error
-   *  information sent to the Error API is better than no error information
+   *  representation of the final values which will be submitted to the Error
+   * API this class enforces type-checking on every setter function and will
+   * write default type-friendly values to instance properties if given values
+   * which are type-incompatible to expectations. These type-friendly default
+   *  substitutions will occur silently and no errors will be thrown on
+   * attempted invalid input under the premise that during misassignment some
+   * error information sent to the Error API is better than no error information
    *  due to the Error library failing under invalid input.
    * @property {String} eventTime - an ISO-8601 compliant string representing when
    *  the error was created
@@ -118,7 +111,7 @@ export class ErrorMessage {
     this.eventTime = new Date().toISOString();
 
     return this;
-  };
+  }
 
   /**
    * Sets the serviceContext property on the instance and its two constituent
@@ -135,7 +128,7 @@ export class ErrorMessage {
     this.serviceContext.version = isString(version) ? version : undefined;
 
     return this;
-  };
+  }
 
   /**
    * Sets the message property on the instance.
@@ -147,7 +140,7 @@ export class ErrorMessage {
     this.message = isString(message) ? message : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.method property on the instance.
@@ -160,7 +153,7 @@ export class ErrorMessage {
     this.context.httpRequest.method = isString(method) ? method : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.url property on the instance.
@@ -172,7 +165,7 @@ export class ErrorMessage {
     this.context.httpRequest.url = isString(url) ? url : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.userAgent property on the instance.
@@ -184,7 +177,7 @@ export class ErrorMessage {
     this.context.httpRequest.userAgent = isString(userAgent) ? userAgent : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.referrer property on the instance.
@@ -196,7 +189,7 @@ export class ErrorMessage {
     this.context.httpRequest.referrer = isString(referrer) ? referrer : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.responseStatusCode property on the instance.
@@ -205,12 +198,11 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setResponseStatusCode(responseStatusCode: number) {
-    this.context.httpRequest.responseStatusCode = isNumber(responseStatusCode)
-      ? responseStatusCode
-      : 0;
+    this.context.httpRequest.responseStatusCode =
+        isNumber(responseStatusCode) ? responseStatusCode : 0;
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.httpRequest.remoteIp property on the instance
@@ -222,7 +214,7 @@ export class ErrorMessage {
     this.context.httpRequest.remoteIp = isString(remoteIp) ? remoteIp : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.user property on the instance
@@ -234,7 +226,7 @@ export class ErrorMessage {
     this.context.user = isString(user) ? user : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.reportLocation.filePath property on the instance
@@ -246,7 +238,7 @@ export class ErrorMessage {
     this.context.reportLocation.filePath = isString(filePath) ? filePath : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.reportLocation.lineNumber property on the instance
@@ -255,12 +247,11 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setLineNumber(lineNumber: number) {
-    this.context.reportLocation.lineNumber = isNumber(lineNumber)
-      ? lineNumber
-      : 0;
+    this.context.reportLocation.lineNumber =
+        isNumber(lineNumber) ? lineNumber : 0;
 
     return this;
-  };
+  }
 
   /**
    * Sets the context.reportLocation.functionName property on the instance
@@ -269,12 +260,11 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setFunctionName(functionName: string) {
-    this.context.reportLocation.functionName = isString(functionName)
-      ? functionName
-      : '';
+    this.context.reportLocation.functionName =
+        isString(functionName) ? functionName : '';
 
     return this;
-  };
+  }
 
   /**
    * Consumes the standard object created by the requestInformationExtractors
@@ -290,12 +280,12 @@ export class ErrorMessage {
     }
 
     this.setHttpMethod(requestInformation.method)
-      .setUrl(requestInformation.url)
-      .setUserAgent(requestInformation.userAgent)
-      .setReferrer(requestInformation.referrer)
-      .setResponseStatusCode(requestInformation.statusCode)
-      .setRemoteIp(requestInformation.remoteAddress);
+        .setUrl(requestInformation.url)
+        .setUserAgent(requestInformation.userAgent)
+        .setReferrer(requestInformation.referrer)
+        .setResponseStatusCode(requestInformation.statusCode)
+        .setRemoteIp(requestInformation.remoteAddress);
 
     return this;
-  };
+  }
 }

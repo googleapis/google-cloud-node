@@ -53,20 +53,20 @@ function extractRemoteAddressFromRequest(req: express.Request) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function expressRequestInformationExtractor(req: express.Request, res: express.Response) {
+export function expressRequestInformationExtractor(
+    req: express.Request, res: express.Response) {
   const returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
     return returnObject;
   }
 
-  returnObject
-    .setMethod(req.method)
-    .setUrl(req.url)
-    .setUserAgent(req.header('user-agent'))
-    .setReferrer(req.header('referrer'))
-    .setStatusCode(res.statusCode)
-    .setRemoteAddress(extractRemoteAddressFromRequest(req));
+  returnObject.setMethod(req.method)
+      .setUrl(req.url)
+      .setUserAgent(req.header('user-agent'))
+      .setReferrer(req.header('referrer'))
+      .setStatusCode(res.statusCode)
+      .setRemoteAddress(extractRemoteAddressFromRequest(req));
 
   return returnObject;
 }
