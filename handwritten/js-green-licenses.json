@@ -1,0 +1,5 @@
+{
+  "packageWhitelist": [
+    "log-driver"  // https://github.com/googleapis/nodejs-common/issues/16
+  ]
+}
