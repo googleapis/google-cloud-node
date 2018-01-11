@@ -18,8 +18,10 @@
 
 var assert = require('assert');
 var merge = require('lodash.merge');
-var expressInterface = require('../../../src/interfaces/express.js').makeExpressHandler;
-var ErrorMessage = require('../../../src/classes/error-message.js').ErrorMessage;
+var expressInterface =
+    require('../../../src/interfaces/express.js').makeExpressHandler;
+var ErrorMessage =
+    require('../../../src/classes/error-message.js').ErrorMessage;
 var Fuzzer = require('../../../utils/fuzzer.js');
 var Configuration = require('../../fixtures/configuration.js');
 var createLogger = require('../../../src/logger.js').createLogger;
@@ -38,14 +40,13 @@ describe('expressInterface', function() {
   });
   describe('Intended behaviour', function() {
     var stubbedConfig = new Configuration(
-      {
-        serviceContext: {
-          service: 'a_test_service',
-          version: 'a_version',
+        {
+          serviceContext: {
+            service: 'a_test_service',
+            version: 'a_version',
+          },
         },
-      },
-      createLogger({logLevel: 4})
-    );
+        createLogger({logLevel: 4}));
     stubbedConfig.lacksCredentials = function() {
       return false;
     };
@@ -59,17 +60,14 @@ describe('expressInterface', function() {
     it('Should return the error message', function() {
       var res = validBoundHandler(testError, null, null, null);
       assert.deepEqual(
-        res,
-        merge(
-          new ErrorMessage()
-            .setMessage(testError.stack)
-            .setServiceContext(
-              stubbedConfig._serviceContext.service,
-              stubbedConfig._serviceContext.version
-            ),
-          {eventTime: res.eventTime}
-        )
-      );
+          res,
+          merge(
+              new ErrorMessage()
+                  .setMessage(testError.stack)
+                  .setServiceContext(
+                      stubbedConfig._serviceContext.service,
+                      stubbedConfig._serviceContext.version),
+              {eventTime: res.eventTime}));
     });
     describe('Calling back to express builtins', function() {
       it('Should callback to next', function(done) {

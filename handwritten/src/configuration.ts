@@ -29,10 +29,7 @@ export interface ConfigurationOptions {
   keyFilename?: string;
   logLevel?: string|number;
   key?: string;
-  serviceContext?: {
-    service?: string;
-    version?: string;
-  };
+  serviceContext?: {service?: string; version?: string;};
   ignoreEnvironmentCheck?: boolean;
   credentials?: {};
   reportUnhandledRejections?: boolean;
@@ -87,14 +84,15 @@ export class Configuration {
     this._logger = logger;
     /**
      * The _shouldReportErrorsToAPI property is meant to denote whether or not
-     * the Stackdriver error reporting library will actually try to report Errors
-     * to the Stackdriver Error API. The value of this property is derived from
-     * the `NODE_ENV` environmental variable or the value of ignoreEnvironmentChec
-     * property if present in the runtime configuration. If either the `NODE_ENV`
-     * variable is set to 'production' or the ignoreEnvironmentCheck propery on
-     * the runtime configuration is set to true then the error reporting library
-     * attempt to send errors to the Error API. Otherwise the value will remain
-     * false and errors will not be reported to the API.
+     * the Stackdriver error reporting library will actually try to report
+     * Errors to the Stackdriver Error API. The value of this property is
+     * derived from the `NODE_ENV` environmental variable or the value of
+     * ignoreEnvironmentChec property if present in the runtime configuration.
+     * If either the `NODE_ENV` variable is set to 'production' or the
+     * ignoreEnvironmentCheck propery on the runtime configuration is set to
+     * true then the error reporting library attempt to send errors to the Error
+     * API. Otherwise the value will remain false and errors will not be
+     * reported to the API.
      * @memberof Configuration
      * @private
      * @type {Boolean}
@@ -102,17 +100,17 @@ export class Configuration {
      */
     this._shouldReportErrorsToAPI = false;
     /**
-     * The _projectId property is meant to contain the string project id that the
-     * hosting application is running under. The project id is a unique string
-     * identifier for the project. If the Configuration instance is not able to
-     * retrieve a project id from the metadata service or the runtime-given
-     * configuration then the property will remain null. If given both a project
-     * id through the metadata service and the runtime configuration then the
-     * instance will assign the value given by the metadata service over the
-     * runtime configuration. If the instance is unable to retrieve a valid
-     * project id or number from runtime configuration and the metadata service
-     * then this will trigger the `error` event in which listening components must
-     * operate in 'offline' mode.
+     * The _projectId property is meant to contain the string project id that
+     * the hosting application is running under. The project id is a unique
+     * string identifier for the project. If the Configuration instance is not
+     * able to retrieve a project id from the metadata service or the
+     * runtime-given configuration then the property will remain null. If given
+     * both a project id through the metadata service and the runtime
+     * configuration then the instance will assign the value given by the
+     * metadata service over the runtime configuration. If the instance is
+     * unable to retrieve a valid project id or number from runtime
+     * configuration and the metadata service then this will trigger the `error`
+     * event in which listening components must operate in 'offline' mode.
      * {@link https://cloud.google.com/compute/docs/storing-retrieving-metadata}
      * @memberof Configuration
      * @private
@@ -121,11 +119,11 @@ export class Configuration {
      */
     this._projectId = null;
     /**
-     * The _key property is meant to contain the optional Stackdriver API key that
-     * may be used in place of default application credentials to authenticate
-     * with the Stackdriver Error API. This property will remain null if a key
-     * is not given in the runtime configuration or an invalid type is given as
-     * the runtime configuration.
+     * The _key property is meant to contain the optional Stackdriver API key
+     * that may be used in place of default application credentials to
+     * authenticate with the Stackdriver Error API. This property will remain
+     * null if a key is not given in the runtime configuration or an invalid
+     * type is given as the runtime configuration.
      * {@link https://support.google.com/cloud/answer/6158862?hl=en}
      * @memberof Configuration
      * @private
@@ -158,8 +156,8 @@ export class Configuration {
     /**
      * The _serviceContext property is meant to contain the optional service
      * context information which may be given in the runtime configuration. If
-     * not given in the runtime configuration then the property value will remain
-     * null.
+     * not given in the runtime configuration then the property value will
+     * remain null.
      * @memberof Configuration
      * @private
      * @type {Object}
@@ -167,7 +165,8 @@ export class Configuration {
     this._serviceContext = {service: 'nodejs', version: ''};
     /**
      * The _reportUnhandledRejections property is meant to specify whether or
-     * not unhandled rejections should be reported to the error-reporting console.
+     * not unhandled rejections should be reported to the error-reporting
+     * console.
      * @memberof Configuration
      * @private
      * @type {Boolean}
@@ -175,9 +174,9 @@ export class Configuration {
     this._reportUnhandledRejections = false;
     /**
      * The _givenConfiguration property holds a ConfigurationOptions object
-     * which, if valid, will be merged against by the values taken from the meta-
-     * data service. If the _givenConfiguration property is not valid then only
-     * metadata values will be used in the Configuration instance.
+     * which, if valid, will be merged against by the values taken from the
+     * meta-data service. If the _givenConfiguration property is not valid then
+     * only metadata values will be used in the Configuration instance.
      * @memberof Configuration
      * @private
      * @type {Object|Null}
@@ -186,17 +185,18 @@ export class Configuration {
     this._givenConfiguration = isObject(givenConfig) ? givenConfig : {};
     this._checkLocalServiceContext();
     this._gatherLocalConfiguration();
-  };
+  }
   /**
    * The _checkLocalServiceContext function is responsible for attempting to
-   * source the _serviceContext objects values from runtime configuration and the
-   * environment. First the function will check the env for known service context
-   * names, if these are not set then it will defer to the _givenConfiguration
-   * property if it is set on the instance. The function will check env variables
-   * `GAE_MODULE_NAME` and `GAE_MODULE_VERSION` for `_serviceContext.service` and
+   * source the _serviceContext objects values from runtime configuration and
+   * the environment. First the function will check the env for known service
+   * context names, if these are not set then it will defer to the
+   * _givenConfiguration property if it is set on the instance. The function
+   * will check env variables `GAE_MODULE_NAME` and `GAE_MODULE_VERSION` for
+   * `_serviceContext.service` and
    * `_serviceContext.version` respectively. If these are not set the
-   * `_serviceContext` properties will be left at default unless the given runtime
-   * configuration supplies any values as substitutes.
+   * `_serviceContext` properties will be left at default unless the given
+   * runtime configuration supplies any values as substitutes.
    * @memberof Configuration
    * @private
    * @function _checkLocalServiceContext
@@ -238,25 +238,28 @@ export class Configuration {
 
     if (isObject(this._givenConfiguration.serviceContext)) {
       if (isString(this._givenConfiguration.serviceContext!.service)) {
-        this._serviceContext.service = this._givenConfiguration.serviceContext!.service!;
+        this._serviceContext.service =
+            this._givenConfiguration.serviceContext!.service!;
       } else if (has(this._givenConfiguration.serviceContext, 'service')) {
         throw new Error('config.serviceContext.service must be a string');
       }
 
       if (isString(this._givenConfiguration.serviceContext!.version)) {
-        this._serviceContext.version = this._givenConfiguration.serviceContext!.version;
+        this._serviceContext.version =
+            this._givenConfiguration.serviceContext!.version;
       } else if (has(this._givenConfiguration.serviceContext, 'version')) {
         throw new Error('config.serviceContext.version must be a string');
       }
     }
-  };
+  }
   /**
    * The _gatherLocalConfiguration function is responsible for determining
    * directly determing whether the properties `reportUncaughtExceptions` and
-   * `key`, which can be optionally supplied in the runtime configuration, should
-   * be merged into the instance. This function also calls several specialized
-   * environmental variable checkers which not only check for the optional runtime
-   * configuration supplied values but also the processes environmental values.
+   * `key`, which can be optionally supplied in the runtime configuration,
+   * should be merged into the instance. This function also calls several
+   * specialized environmental variable checkers which not only check for the
+   * optional runtime configuration supplied values but also the processes
+   * environmental values.
    * @memberof Configuration
    * @private
    * @function _gatherLocalConfiguration
@@ -266,22 +269,19 @@ export class Configuration {
     if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
       this._shouldReportErrorsToAPI = true;
     } else if (
-      has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
-      !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)
-    ) {
+        has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+        !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
       throw new Error('config.ignoreEnvironmentCheck must be a boolean');
     } else {
       this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';
     }
     if (!this._shouldReportErrorsToAPI) {
-      this._logger.warn(
-        [
-          'Stackdriver error reporting client has not been configured to send',
-          'errors, please check the NODE_ENV environment variable and make sure it',
-          'is set to "production" or the ignoreEnvironmentCheck property is set to',
-          'true in the runtime configuration object',
-        ].join(' ')
-      );
+      this._logger.warn([
+        'Stackdriver error reporting client has not been configured to send',
+        'errors, please check the NODE_ENV environment variable and make sure it',
+        'is set to "production" or the ignoreEnvironmentCheck property is set to',
+        'true in the runtime configuration object',
+      ].join(' '));
     }
     if (isString(this._givenConfiguration.key)) {
       this._key = this._givenConfiguration.key!;
@@ -299,26 +299,27 @@ export class Configuration {
       throw new Error('config.credentials must be a valid credentials object');
     }
     if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
-      this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections!;
+      this._reportUnhandledRejections =
+          this._givenConfiguration.reportUnhandledRejections!;
     } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
       throw new Error('config.reportUnhandledRejections must be a boolean');
     }
-  };
+  }
   /**
    * The _checkLocalProjectId function is responsible for determing whether the
    * _projectId property was set by the metadata service and whether or not the
    * _projectId property should/can be set with a environmental or runtime
    * configuration variable. If, upon execution of the _checkLocalProjectId
-   * function, the _projectId property has already been set to a string then it is
-   * assumed that this property has been set with the metadata services response.
-   * The metadata value for the project id always take precedence over any other
-   * locally configured project id value. Given that the metadata service did not
-   * set the project id this function will defer next to the value set in the
-   * environment named `GCLOUD_PROJECT` if it is set and of type string. If this
-   * environmental variable is not set the function will defer to the
-   * _givenConfiguration property if it is of type object and has a string
-   * property named projectId. If none of these conditions are met then the
-   * _projectId property will be left at its default value.
+   * function, the _projectId property has already been set to a string then it
+   * is assumed that this property has been set with the metadata services
+   * response. The metadata value for the project id always take precedence over
+   * any other locally configured project id value. Given that the metadata
+   * service did not set the project id this function will defer next to the
+   * value set in the environment named `GCLOUD_PROJECT` if it is set and of
+   * type string. If this environmental variable is not set the function will
+   * defer to the _givenConfiguration property if it is of type object and has a
+   * string property named projectId. If none of these conditions are met then
+   * the _projectId property will be left at its default value.
    * @memberof Configuration
    * @private
    * @function _checkLocalProjectId
@@ -339,7 +340,7 @@ export class Configuration {
       }
     }
     return this._projectId;
-  };
+  }
   /**
    * Returns the _shouldReportErrorsToAPI property on the instance.
    * @memberof Configuration
@@ -349,7 +350,7 @@ export class Configuration {
    */
   getShouldReportErrorsToAPI() {
     return this._shouldReportErrorsToAPI;
-  };
+  }
   /**
    * Returns the _projectId property on the instance.
    * @memberof Configuration
@@ -359,7 +360,7 @@ export class Configuration {
    */
   getProjectId() {
     return this._checkLocalProjectId();
-  };
+  }
   /**
    * Returns the _key property on the instance.
    * @memberof Configuration
@@ -369,7 +370,7 @@ export class Configuration {
    */
   getKey() {
     return this._key;
-  };
+  }
   /**
    * Returns the keyFilename property on the instance.
    * @memberof Configuration
@@ -379,7 +380,7 @@ export class Configuration {
    */
   getKeyFilename() {
     return this.keyFilename;
-  };
+  }
   /**
    * Returns the credentials property on the instance.
    * @memberof Configuration
@@ -389,7 +390,7 @@ export class Configuration {
    */
   getCredentials() {
     return this.credentials;
-  };
+  }
   /**
    * Returns the _serviceContext property on the instance.
    * @memberof Configuration
@@ -399,7 +400,7 @@ export class Configuration {
    */
   getServiceContext() {
     return this._serviceContext;
-  };
+  }
   /**
    * Returns the _reportUnhandledRejections property on the instance.
    * @memberof Configuration
@@ -409,5 +410,5 @@ export class Configuration {
    */
   getReportUnhandledRejections() {
     return this._reportUnhandledRejections;
-  };
+  }
 }

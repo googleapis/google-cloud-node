@@ -18,7 +18,8 @@
 
 var assert = require('assert');
 var nock = require('nock');
-var RequestHandler = require('../src/google-apis/auth-client.js').RequestHandler;
+var RequestHandler =
+    require('../src/google-apis/auth-client.js').RequestHandler;
 var ErrorsApiTransport = require('../utils/errors-api-transport.js');
 var ErrorMessage = require('../src/classes/error-message.js').ErrorMessage;
 var Configuration = require('../test/fixtures/configuration.js');
@@ -147,21 +148,16 @@ describe('Request/Response lifecycle mocking', function() {
   });
 
   beforeEach(function() {
-    env
-      .setProjectId()
-      .setKeyFilename()
-      .setProduction();
-    fakeService = nock(
-      'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
-        process.env.GCLOUD_PROJECT
-    )
-      .persist()
-      .post('/events:report');
+    env.setProjectId().setKeyFilename().setProduction();
+    fakeService =
+        nock(
+            'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
+            process.env.GCLOUD_PROJECT)
+            .persist()
+            .post('/events:report');
     logger = createLogger({logLevel: 5});
     client = new RequestHandler(
-      new Configuration({ignoreEnvironmentCheck: true}, logger),
-      logger
-    );
+        new Configuration({ignoreEnvironmentCheck: true}, logger), logger);
   });
 
   afterEach(function() {
@@ -199,41 +195,31 @@ describe('Request/Response lifecycle mocking', function() {
     });
   });
 
-  it(
-    'Should provide the key as a query string on outgoing requests when ' +
-      'using an API key',
-    function(done) {
-      env
-        .sterilizeProcess()
-        .setProjectId()
-        .setProduction();
-      var key = env.apiKey;
-      var logger = createLogger({logLevel: 5});
-      var client = new RequestHandler(
-        new Configuration(
-          {key: key, ignoreEnvironmentCheck: true},
-          logger
-        ),
-        logger
-      );
-      fakeService.query({key: key}).reply(200, function(uri) {
-        assert(uri.indexOf('key=' + key) > -1);
-        return {};
-      });
-      client.sendError(errorMessage, function() {
-        done();
-      });
-    }
-  );
+  it('Should provide the key as a query string on outgoing requests when ' +
+         'using an API key',
+     function(done) {
+       env.sterilizeProcess().setProjectId().setProduction();
+       var key = env.apiKey;
+       var logger = createLogger({logLevel: 5});
+       var client = new RequestHandler(
+           new Configuration({key: key, ignoreEnvironmentCheck: true}, logger),
+           logger);
+       fakeService.query({key: key}).reply(200, function(uri) {
+         assert(uri.indexOf('key=' + key) > -1);
+         return {};
+       });
+       client.sendError(errorMessage, function() {
+         done();
+       });
+     });
 
-  it('Should still execute the request with a callback-less invocation', function(
-    done
-  ) {
-    fakeService.reply(200, function() {
-      done();
-    });
-    client.sendError(errorMessage);
-  });
+  it('Should still execute the request with a callback-less invocation',
+     function(done) {
+       fakeService.reply(200, function() {
+         done();
+       });
+       client.sendError(errorMessage);
+     });
 });
 
 describe('Client creation', function() {
@@ -243,115 +229,87 @@ describe('Client creation', function() {
     env.sterilizeProcess();
   });
 
-  it(
-    'Should not throw on initialization when using only project id as a ' +
-      'runtime argument',
-    function(done) {
-      env.sterilizeProcess().setKeyFilename();
-      var logger = createLogger({logLevel: 5});
-      var cfg = new Configuration(
-        {
-          projectId: env.injected().projectId,
-          ignoreEnvironmentCheck: true,
-        },
-        logger
-      );
-      this.timeout(10000);
-      assert.doesNotThrow(function() {
-        new RequestHandler(cfg, logger).sendError(errorMessage, function(
-          err,
-          response,
-          body
-        ) {
-          assert.strictEqual(err, null);
-          assert.strictEqual(response.statusCode, 200);
-          assert(isObject(body) && isEmpty(body));
-          done();
-        });
-      });
-    }
-  );
+  it('Should not throw on initialization when using only project id as a ' +
+         'runtime argument',
+     function(done) {
+       env.sterilizeProcess().setKeyFilename();
+       var logger = createLogger({logLevel: 5});
+       var cfg = new Configuration(
+           {
+             projectId: env.injected().projectId,
+             ignoreEnvironmentCheck: true,
+           },
+           logger);
+       this.timeout(10000);
+       assert.doesNotThrow(function() {
+         new RequestHandler(cfg, logger)
+             .sendError(errorMessage, function(err, response, body) {
+               assert.strictEqual(err, null);
+               assert.strictEqual(response.statusCode, 200);
+               assert(isObject(body) && isEmpty(body));
+               done();
+             });
+       });
+     });
 
-  it(
-    'Should not throw on initialization when using only project id as an ' +
-      'env variable',
-    function(done) {
-      env
-        .sterilizeProcess()
-        .setProjectId()
-        .setKeyFilename();
-      var logger = createLogger({logLevel: 5});
-      var cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
-      this.timeout(10000);
-      assert.doesNotThrow(function() {
-        new RequestHandler(cfg, logger).sendError(errorMessage, function(
-          err,
-          response,
-          body
-        ) {
-          assert.strictEqual(err, null);
-          assert.strictEqual(response.statusCode, 200);
-          assert(isObject(body) && isEmpty(body));
-          done();
-        });
-      });
-    }
-  );
+  it('Should not throw on initialization when using only project id as an ' +
+         'env variable',
+     function(done) {
+       env.sterilizeProcess().setProjectId().setKeyFilename();
+       var logger = createLogger({logLevel: 5});
+       var cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
+       this.timeout(10000);
+       assert.doesNotThrow(function() {
+         new RequestHandler(cfg, logger)
+             .sendError(errorMessage, function(err, response, body) {
+               assert.strictEqual(err, null);
+               assert.strictEqual(response.statusCode, 200);
+               assert(isObject(body) && isEmpty(body));
+               done();
+             });
+       });
+     });
 
-  it(
-    'Should not throw on initialization when using only project number as ' +
-      'a runtime argument',
-    function(done) {
-      env.sterilizeProcess().setKeyFilename();
-      var logger = createLogger({logLevel: 5});
-      var cfg = new Configuration(
-        {
-          projectId: parseInt(env.injected().projectNumber),
-          ignoreEnvironmentCheck: true,
-        },
-        logger
-      );
-      this.timeout(10000);
-      assert.doesNotThrow(function() {
-        new RequestHandler(cfg, logger).sendError(errorMessage, function(
-          err,
-          response,
-          body
-        ) {
-          assert.strictEqual(err, null);
-          assert.strictEqual(response.statusCode, 200);
-          assert(isObject(body) && isEmpty(body));
-          done();
-        });
-      });
-    }
-  );
+  it('Should not throw on initialization when using only project number as ' +
+         'a runtime argument',
+     function(done) {
+       env.sterilizeProcess().setKeyFilename();
+       var logger = createLogger({logLevel: 5});
+       var cfg = new Configuration(
+           {
+             projectId: parseInt(env.injected().projectNumber),
+             ignoreEnvironmentCheck: true,
+           },
+           logger);
+       this.timeout(10000);
+       assert.doesNotThrow(function() {
+         new RequestHandler(cfg, logger)
+             .sendError(errorMessage, function(err, response, body) {
+               assert.strictEqual(err, null);
+               assert.strictEqual(response.statusCode, 200);
+               assert(isObject(body) && isEmpty(body));
+               done();
+             });
+       });
+     });
 
-  it(
-    'Should not throw on initialization when using only project number as ' +
-      'an env variable',
-    function(done) {
-      env
-        .sterilizeProcess()
-        .setKeyFilename()
-        .setProjectNumber();
-      var logger = createLogger({logLevel: 5});
-      var cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
-      this.timeout(10000);
-      assert.doesNotThrow(function() {
-        new RequestHandler(cfg, logger).sendError(errorMessage, function(
-          err,
-          response,
-          body
-        ) {
-          assert.strictEqual(err, null);
-          assert.strictEqual(response.statusCode, 200);
-          assert(isObject(body) && isEmpty(body));
-          done();
-        });
-      });
-    }
-  );
+  it('Should not throw on initialization when using only project number as ' +
+         'an env variable',
+     function(done) {
+       env.sterilizeProcess().setKeyFilename().setProjectNumber();
+       var logger = createLogger({logLevel: 5});
+       var cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
+       this.timeout(10000);
+       assert.doesNotThrow(function() {
+         new RequestHandler(cfg, logger)
+             .sendError(errorMessage, function(err, response, body) {
+               assert.strictEqual(err, null);
+               assert.strictEqual(response.statusCode, 200);
+               assert(isObject(body) && isEmpty(body));
+               done();
+             });
+       });
+     });
 });
 
 describe('Expected Behavior', function() {
@@ -369,37 +327,30 @@ describe('Expected Behavior', function() {
     env.sterilizeProcess();
   });
 
-  it('Should callback with an error with a configuration to not report errors', function(
-    done
-  ) {
-    env
-      .sterilizeProcess()
-      .setKeyFilename()
-      .setProjectId();
-    process.env.NODE_ENV = 'null';
-    var logger = createLogger({logLevel: 5});
-    var client = new RequestHandler(
-      new Configuration(undefined, logger),
-      logger
-    );
-    client.sendError({}, function(err, response) {
-      assert(err instanceof Error);
-      assert.strictEqual(err.message, ERROR_STRING);
-      assert.strictEqual(response, null);
-      done();
-    });
-  });
+  it('Should callback with an error with a configuration to not report errors',
+     function(done) {
+       env.sterilizeProcess().setKeyFilename().setProjectId();
+       process.env.NODE_ENV = 'null';
+       var logger = createLogger({logLevel: 5});
+       var client =
+           new RequestHandler(new Configuration(undefined, logger), logger);
+       client.sendError({}, function(err, response) {
+         assert(err instanceof Error);
+         assert.strictEqual(err.message, ERROR_STRING);
+         assert.strictEqual(response, null);
+         done();
+       });
+     });
 
   it('Should succeed in its request given a valid project id', function(done) {
     env.sterilizeProcess();
     var logger = createLogger({logLevel: 5});
     var cfg = new Configuration(
-      {
-        projectId: env.injected().projectId,
-        ignoreEnvironmentCheck: true,
-      },
-      logger
-    );
+        {
+          projectId: env.injected().projectId,
+          ignoreEnvironmentCheck: true,
+        },
+        logger);
     var client = new RequestHandler(cfg, logger);
 
     client.sendError(em, function(err, response, body) {
@@ -411,69 +362,65 @@ describe('Expected Behavior', function() {
     });
   });
 
-  it('Should succeed in its request given a valid project number', function(
-    done
-  ) {
-    env.sterilizeProcess();
-    var logger = createLogger({logLevel: 5});
-    var cfg = new Configuration(
-      {
-        projectId: parseInt(env.injected().projectNumber),
-        ignoreEnvironmentCheck: true,
-      },
-      logger
-    );
-    var client = new RequestHandler(cfg, logger);
-    client.sendError(em, function(err, response, body) {
-      assert.strictEqual(err, null);
-      assert(isObject(body));
-      assert(isEmpty(body));
-      assert.strictEqual(response.statusCode, 200);
-      done();
-    });
-  });
+  it('Should succeed in its request given a valid project number',
+     function(done) {
+       env.sterilizeProcess();
+       var logger = createLogger({logLevel: 5});
+       var cfg = new Configuration(
+           {
+             projectId: parseInt(env.injected().projectNumber),
+             ignoreEnvironmentCheck: true,
+           },
+           logger);
+       var client = new RequestHandler(cfg, logger);
+       client.sendError(em, function(err, response, body) {
+         assert.strictEqual(err, null);
+         assert(isObject(body));
+         assert(isEmpty(body));
+         assert.strictEqual(response.statusCode, 200);
+         done();
+       });
+     });
 });
 
 describe('Error Reporting API', function() {
-  [
-    {
-      name: 'when a valid API key is given',
-      getKey: () => env.apiKey,
-      message: 'Message cannot be empty.',
-      statusCode: 400
-    },
-    {
-      name: 'when an empty API key is given',
-      getKey: () => '',
-      message: 'The request is missing a valid API key.',
-      // TODO: Determine if 403 is the correct expected status code.
-      //       Prior to the code migration, the expected status code
-      //       was 400.  However, the service is now reporting 403.
-      statusCode: 403
-    },
-    {
-      name: 'when an invalid API key is given',
-      getKey: () => env.apiKey.slice(1) + env.apiKey[0],
-      message: 'API key not valid. Please pass a valid API key.',
-      statusCode: 400
-    },
+  [{
+    name: 'when a valid API key is given',
+    getKey: () => env.apiKey,
+    message: 'Message cannot be empty.',
+    statusCode: 400
+  },
+   {
+     name: 'when an empty API key is given',
+     getKey: () => '',
+     message: 'The request is missing a valid API key.',
+     // TODO: Determine if 403 is the correct expected status code.
+     //       Prior to the code migration, the expected status code
+     //       was 400.  However, the service is now reporting 403.
+     statusCode: 403
+   },
+   {
+     name: 'when an invalid API key is given',
+     getKey: () => env.apiKey.slice(1) + env.apiKey[0],
+     message: 'API key not valid. Please pass a valid API key.',
+     statusCode: 400
+   },
   ].forEach(function(testCase) {
     it(`should return an expected message ${testCase.name}`, function(done) {
       this.timeout(30000);
       const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
       const key = testCase.getKey();
       request.post(
-        {
-          url: `${API}/projects/${env.projectId}/events:report?key=${key}`,
-          json: {},
-        },
-        (err, response, body) => {
-          assert.ok(!err && body.error);
-          assert.strictEqual(response.statusCode, testCase.statusCode);
-          assert.strictEqual(body.error.message, testCase.message);
-          done();
-        }
-      );
+          {
+            url: `${API}/projects/${env.projectId}/events:report?key=${key}`,
+            json: {},
+          },
+          (err, response, body) => {
+            assert.ok(!err && body.error);
+            assert.strictEqual(response.statusCode, testCase.statusCode);
+            assert.strictEqual(body.error.message, testCase.message);
+            done();
+          });
     });
   });
 });
@@ -513,15 +460,14 @@ describe('error-reporting', function() {
   function reinitialize(extraConfig) {
     process.removeAllListeners('unhandledRejection');
     var config = Object.assign(
-      {
-        ignoreEnvironmentCheck: true,
-        serviceContext: {
-          service: SERVICE,
-          version: VERSION,
+        {
+          ignoreEnvironmentCheck: true,
+          serviceContext: {
+            service: SERVICE,
+            version: VERSION,
+          },
         },
-      },
-      extraConfig || {}
-    );
+        extraConfig || {});
     const Errors = require('../src/index.js').Errors;
     errors = new Errors(config);
     transport = new ErrorsApiTransport(errors._config, errors._logger);
@@ -549,13 +495,11 @@ describe('error-reporting', function() {
 
         var matchedErrors = groups.filter(function(errItem) {
           return (
-            errItem &&
-            errItem.representative &&
-            errItem.representative.serviceContext &&
-            errItem.representative.serviceContext.service === SERVICE &&
-            errItem.representative.serviceContext.version === VERSION &&
-            messageTest(errItem.representative.message)
-          );
+              errItem && errItem.representative &&
+              errItem.representative.serviceContext &&
+              errItem.representative.serviceContext.service === SERVICE &&
+              errItem.representative.serviceContext.version === VERSION &&
+              messageTest(errItem.representative.message));
         });
 
         cb(matchedErrors);
@@ -607,102 +551,64 @@ describe('error-reporting', function() {
   // As such, each test is set to fail due to a timeout only if sufficiently
   // more than TIMEOUT ms has elapsed to avoid test fragility.
 
-  it('Should correctly publish an error that is an Error object', function verifyErrors(
-    done
-  ) {
-    this.timeout(TIMEOUT * 2);
-    var errorId = buildName('with-error-constructor');
-    var errOb = (function expectedTopOfStack() {
-      return new Error(errorId);
-    })();
-    verifyReporting(
-      errOb,
-      function(message) {
-        return message.startsWith('Error: ' + errorId + '\n');
-      },
-      TIMEOUT,
-      done
-    );
-  });
+  it('Should correctly publish an error that is an Error object',
+     function verifyErrors(done) {
+       this.timeout(TIMEOUT * 2);
+       var errorId = buildName('with-error-constructor');
+       var errOb = (function expectedTopOfStack() {
+         return new Error(errorId);
+       })();
+       verifyReporting(errOb, function(message) {
+         return message.startsWith('Error: ' + errorId + '\n');
+       }, TIMEOUT, done);
+     });
 
   it('Should correctly publish an error that is a string', function(done) {
     this.timeout(TIMEOUT * 2);
     var errorId = buildName('with-string');
-    verifyReporting(
-      errorId,
-      function(message) {
-        return message.startsWith(errorId + '\n');
-      },
-      TIMEOUT,
-      done
-    );
+    verifyReporting(errorId, function(message) {
+      return message.startsWith(errorId + '\n');
+    }, TIMEOUT, done);
   });
 
   it('Should correctly publish an error that is undefined', function(done) {
     this.timeout(TIMEOUT * 2);
-    verifyReporting(
-      undefined,
-      function(message) {
-        return message.startsWith('undefined\n');
-      },
-      TIMEOUT,
-      done
-    );
+    verifyReporting(undefined, function(message) {
+      return message.startsWith('undefined\n');
+    }, TIMEOUT, done);
   });
 
   it('Should correctly publish an error that is null', function(done) {
     this.timeout(TIMEOUT * 2);
-    verifyReporting(
-      null,
-      function(message) {
-        return message.startsWith('null\n');
-      },
-      TIMEOUT,
-      done
-    );
+    verifyReporting(null, function(message) {
+      return message.startsWith('null\n');
+    }, TIMEOUT, done);
   });
 
-  it('Should correctly publish an error that is a plain object', function(
-    done
-  ) {
-    this.timeout(TIMEOUT * 2);
-    verifyReporting(
-      {someKey: 'someValue'},
-      function(message) {
-        return message.startsWith('[object Object]\n');
-      },
-      TIMEOUT,
-      done
-    );
-  });
+  it('Should correctly publish an error that is a plain object',
+     function(done) {
+       this.timeout(TIMEOUT * 2);
+       verifyReporting({someKey: 'someValue'}, function(message) {
+         return message.startsWith('[object Object]\n');
+       }, TIMEOUT, done);
+     });
 
   it('Should correctly publish an error that is a number', function(done) {
     this.timeout(TIMEOUT * 2);
     var num = new Date().getTime();
-    verifyReporting(
-      num,
-      function(message) {
-        return message.startsWith('' + num + '\n');
-      },
-      TIMEOUT,
-      done
-    );
+    verifyReporting(num, function(message) {
+      return message.startsWith('' + num + '\n');
+    }, TIMEOUT, done);
   });
 
-  it('Should correctly publish an error that is of an unknown type', function(
-    done
-  ) {
-    this.timeout(TIMEOUT * 2);
-    var bool = true;
-    verifyReporting(
-      bool,
-      function(message) {
-        return message.startsWith('true\n');
-      },
-      TIMEOUT,
-      done
-    );
-  });
+  it('Should correctly publish an error that is of an unknown type',
+     function(done) {
+       this.timeout(TIMEOUT * 2);
+       var bool = true;
+       verifyReporting(bool, function(message) {
+         return message.startsWith('true\n');
+       }, TIMEOUT, done);
+     });
 
   it('Should correctly publish errors using an error builder', function(done) {
     this.timeout(TIMEOUT * 2);
@@ -719,22 +625,16 @@ describe('error-reporting', function() {
       })();
     })();
     (function callingSiteFunction() {
-      verifyReporting(
-        errOb,
-        function(message) {
-          // Verify that the stack trace of the constructed error
-          // uses the stack trace at the point where the error was constructed
-          // and not the stack trace at the point where the `report` method
-          // was called.
-          return (
+      verifyReporting(errOb, function(message) {
+        // Verify that the stack trace of the constructed error
+        // uses the stack trace at the point where the error was constructed
+        // and not the stack trace at the point where the `report` method
+        // was called.
+        return (
             message.startsWith(errorId) &&
             message.indexOf('callingSiteFunction') === -1 &&
-            message.indexOf('definitionSiteFunction') !== -1
-          );
-        },
-        TIMEOUT,
-        done
-      );
+            message.indexOf('definitionSiteFunction') !== -1);
+      }, TIMEOUT, done);
     })();
   });
 
@@ -751,20 +651,14 @@ describe('error-reporting', function() {
     })();
     var rejectText = 'Error: ' + rejectValue;
     setImmediate(function() {
-      var expected =
-        'UnhandledPromiseRejectionWarning: Unhandled ' +
-        'promise rejection: ' +
-        rejectText +
-        '.  This rejection has been reported to the ' +
-        'Google Cloud Platform error-reporting console.';
+      var expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+          'promise rejection: ' + rejectText +
+          '.  This rejection has been reported to the ' +
+          'Google Cloud Platform error-reporting console.';
       assert.notStrictEqual(logOutput.indexOf(expected), -1);
-      verifyServerResponse(
-        function(message) {
-          return message.startsWith(rejectText);
-        },
-        TIMEOUT,
-        done
-      );
+      verifyServerResponse(function(message) {
+        return message.startsWith(rejectText);
+      }, TIMEOUT, done);
     });
   });
 
@@ -776,26 +670,23 @@ describe('error-reporting', function() {
       Promise.reject(rejectValue);
     })();
     setImmediate(function() {
-      var notExpected =
-        'UnhandledPromiseRejectionWarning: Unhandled ' +
-        'promise rejection: ' +
-        rejectValue +
-        '.  This rejection has been reported to the error-reporting console.';
+      var notExpected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+          'promise rejection: ' + rejectValue +
+          '.  This rejection has been reported to the error-reporting console.';
       assert.strictEqual(logOutput.indexOf(notExpected), -1);
       // Get all groups that that start with the rejection value and hence all
       // of the groups corresponding to the above rejection (Since the
       // buildName() creates a string unique enough to single out only the
       // above rejection.) and verify that there are no such groups reported.
       verifyAllGroups(
-        function(message) {
-          return message.startsWith(rejectValue);
-        },
-        TIMEOUT,
-        function(matchedErrors) {
-          assert.strictEqual(matchedErrors.length, 0);
-          done();
-        }
-      );
+          function(message) {
+            return message.startsWith(rejectValue);
+          },
+          TIMEOUT,
+          function(matchedErrors) {
+            assert.strictEqual(matchedErrors.length, 0);
+            done();
+          });
     });
   });
 });

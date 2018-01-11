@@ -26,7 +26,7 @@ var app = koa();
 app.use(errorHandler.koa);
 
 app.use(function*(next) {
-  //This will set status and message
+  // This will set status and message
   this.throw('Error Message', 500);
   yield next;
 });

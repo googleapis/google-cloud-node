@@ -30,15 +30,15 @@ export class RequestInformationContainer {
    * The constructor for RequestInformationContainer does not take any arugments
    * and is solely meant to allocate several properties on the instance. The
    * constructor will init properties which closely relate to the ErrorMessage
-   * context.httpRequest object properties. The properties on the instance should
-   * be set through there corresponding setters as these will enforce type
-   * validation around input.
+   * context.httpRequest object properties. The properties on the instance
+   * should be set through there corresponding setters as these will enforce
+   * type validation around input.
    * @class RequestInformationContainer
    * @classdesc RequestInformationContainer is a class which is meant to
    * standardize and contain values corresponding to request information around
    * an error-inducing request. This class is meant to be a temporary container
-   * for request information and essentially a standardized interface consumed by
-   * the ErrorMessage class itself.
+   * for request information and essentially a standardized interface consumed
+   * by the ErrorMessage class itself.
    * @property {String} url - The route/url that the request addressed
    * @property {String} method - The method that the request used
    * @property {String} referrer - The referrer of the request
@@ -65,7 +65,7 @@ export class RequestInformationContainer {
     this.url = isString(url) ? url : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the method property on the instance.
@@ -77,7 +77,7 @@ export class RequestInformationContainer {
     this.method = isString(method) ? method : '';
 
     return this;
-  };
+  }
 
   /**
    * Sets the referrer property on the instance.
@@ -89,7 +89,7 @@ export class RequestInformationContainer {
     this.referrer = (isString(referrer) ? referrer : '')!;
 
     return this;
-  };
+  }
 
   /**
    * Sets the userAgent property on the instance.
@@ -101,7 +101,7 @@ export class RequestInformationContainer {
     this.userAgent = (isString(userAgent) ? userAgent : '')!;
 
     return this;
-  };
+  }
 
   /**
    * Sets the remoteAddress property on the instance.
@@ -113,7 +113,7 @@ export class RequestInformationContainer {
     this.remoteAddress = (isString(remoteIp) ? remoteIp : '')!;
 
     return this;
-  };
+  }
 
   /**
    * Sets the statusCode property on the instance.
@@ -125,5 +125,5 @@ export class RequestInformationContainer {
     this.statusCode = isNumber(statusCode) ? statusCode : 0;
 
     return this;
-  };
+  }
 }

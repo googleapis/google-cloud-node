@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+import {Request, Response} from 'koa';
+
 import {ErrorMessage} from '../classes/error-message';
-import {koaRequestInformationExtractor} from '../request-extractors/koa';
+import {Configuration} from '../configuration';
+import {RequestHandler} from '../google-apis/auth-client';
 import {populateErrorMessage} from '../populate-error-message';
-import { RequestHandler } from '../google-apis/auth-client';
-import { Configuration } from '../configuration';
-import { Request, Response } from 'koa';
+import {koaRequestInformationExtractor} from '../request-extractors/koa';
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware
@@ -41,17 +42,17 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(this: {request: Request; response: Response;}, next: Function) {
+  return function*(
+      this: {request: Request; response: Response;}, next: Function) {
     const svc = config.getServiceContext();
 
     try {
       yield next;
     } catch (err) {
       const em = new ErrorMessage()
-        .consumeRequestInformation(
-          koaRequestInformationExtractor(this.request, this.response)
-        )
-        .setServiceContext(svc.service, svc.version);
+                     .consumeRequestInformation(koaRequestInformationExtractor(
+                         this.request, this.response))
+                     .setServiceContext(svc.service, svc.version);
 
       populateErrorMessage(err, em);
 

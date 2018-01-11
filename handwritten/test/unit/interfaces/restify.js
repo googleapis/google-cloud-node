@@ -18,7 +18,8 @@
 
 var EventEmitter = require('events').EventEmitter;
 var assert = require('assert');
-var restifyInterface = require('../../../src/interfaces/restify.js').handlerSetup;
+var restifyInterface =
+    require('../../../src/interfaces/restify.js').handlerSetup;
 
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {
@@ -38,19 +39,15 @@ describe('restifyInterface', function() {
     it('Should attach one listener after instantiation', function() {
       var ee = new EventEmitter();
       assert.strictEqual(
-        ee.listenerCount(UNCAUGHT_EVENT),
-        0,
-        'Listeners on event should be zero'
-      );
+          ee.listenerCount(UNCAUGHT_EVENT), 0,
+          'Listeners on event should be zero');
       // return the bound function which the user will actually interface with
       var errorHandlerInstance = restifyInterface(null, null);
       // execute the handler the user will use with the stubbed server instance
       errorHandlerInstance(ee);
       assert.strictEqual(
-        ee.listenerCount(UNCAUGHT_EVENT),
-        1,
-        'Listeners on event should now be one'
-      );
+          ee.listenerCount(UNCAUGHT_EVENT), 1,
+          'Listeners on event should now be one');
     });
   });
   describe('Request handler lifecycle events', function() {

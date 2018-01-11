@@ -17,7 +17,9 @@
 'use strict';
 
 var assert = require('assert');
-var hapiRequestInformationExtractor = require('../../../src/request-extractors/hapi.js').hapiRequestInformationExtractor;
+var hapiRequestInformationExtractor =
+    require('../../../src/request-extractors/hapi.js')
+        .hapiRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('hapiRequestInformationExtractor behaviour', function() {
@@ -104,21 +106,18 @@ describe('hapiRequestInformationExtractor behaviour', function() {
     };
     it('Should produce the full request input', function() {
       assert.deepEqual(
-        hapiRequestInformationExtractor(FULL_REQ_DERIVATION_VALUE),
-        FULL_REQ_EXPECTED_VALUE
-      );
+          hapiRequestInformationExtractor(FULL_REQ_DERIVATION_VALUE),
+          FULL_REQ_EXPECTED_VALUE);
     });
     it('Should produce the partial request input', function() {
       assert.deepEqual(
-        hapiRequestInformationExtractor(PARTIAL_REQ_DERIVATION_VALUE),
-        PARTIAL_REQ_EXPECTED_VALUE
-      );
+          hapiRequestInformationExtractor(PARTIAL_REQ_DERIVATION_VALUE),
+          PARTIAL_REQ_EXPECTED_VALUE);
     });
     it('Should produce the second partial request input', function() {
       assert.deepEqual(
-        hapiRequestInformationExtractor(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
-        ANOTHER_PARTIAL_REQ_EXPECTED_VALUE
-      );
+          hapiRequestInformationExtractor(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
+          ANOTHER_PARTIAL_REQ_EXPECTED_VALUE);
     });
   });
 });
