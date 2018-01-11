@@ -81,6 +81,7 @@ jobs:
   node4:
     docker:
       - image: node:4
+        user: node
     steps:
       - checkout
       - run:
@@ -96,37 +97,48 @@ jobs:
   node6:
     docker:
       - image: node:6
+        user: node
     <<: *unit_tests
   node7:
     docker:
       - image: node:7
+        user: node
     <<: *unit_tests
   node8:
     docker:
       - image: node:8
+        user: node
     <<: *unit_tests
   node9:
     docker:
       - image: node:9
+        user: node
     <<: *unit_tests
 
   lint:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
           name: Install modules and dependencies.
           command: |
+            mkdir -p /home/node/.npm-global
             npm install
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run linting.
           command: npm run lint
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
 
   docs:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
@@ -139,6 +151,7 @@ jobs:
   system_tests:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
@@ -164,6 +177,7 @@ jobs:
   publish_npm:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
