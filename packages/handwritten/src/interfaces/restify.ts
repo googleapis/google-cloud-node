@@ -15,8 +15,8 @@
  */
 
 import * as is from 'is';
-var isObject = is.object;
-var isFunction = is.function;
+const isObject = is.object;
+const isFunction = is.function;
 import {ErrorMessage} from '../classes/error-message';
 import * as expressRequestInformationExtractor from '../request-extractors/express';
 import {populateErrorMessage} from '../populate-error-message';
@@ -40,7 +40,7 @@ import * as express from 'express';
  * @returns {Undefined} - does not return anything
  */
 function restifyErrorHandler(client: RequestHandler, config: Configuration, err: {}, em: ErrorMessage) {
-  var svc = config.getServiceContext();
+  const svc = config.getServiceContext();
   em.setServiceContext(svc.service, svc.version);
 
   populateErrorMessage(err, em);
@@ -64,7 +64,7 @@ function restifyErrorHandler(client: RequestHandler, config: Configuration, err:
  * @returns {Undefined} - does not return anything
  */
 function restifyRequestFinishHandler(client: RequestHandler, config: Configuration, req: restify.Request, res: restify.Response) {
-  var em;
+  let em;
 
   // TODO: Address the fact that `_body` does not exist in `res`
   if (
@@ -101,7 +101,7 @@ function restifyRequestFinishHandler(client: RequestHandler, config: Configurati
  */
 function restifyRequestHandler(client: RequestHandler, config: Configuration, req: restify.Request, res: restify.Response, next: Function) {
   // TODO: Address the fact that a cast is needed to use `listener`
-  var listener = {};
+  let listener = {};
 
   if (isObject(res) && isFunction(res.on) && isFunction(res.removeListener)) {
     listener = function() {
@@ -134,7 +134,7 @@ function restifyRequestHandler(client: RequestHandler, config: Configuration, re
  */
 function serverErrorHandler(client: RequestHandler, config: Configuration, server: restify.Server) {
   server.on('uncaughtException', function(req, res, reqConfig, err) {
-    var em = new ErrorMessage().consumeRequestInformation(
+    const em = new ErrorMessage().consumeRequestInformation(
       expressRequestInformationExtractor.expressRequestInformationExtractor(req, res)
     );
 

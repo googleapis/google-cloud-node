@@ -117,7 +117,7 @@ export class Errors {
     this._client = new AuthClient(this._config, this._logger);
 
     if (this._config.getReportUnhandledRejections()) {
-      var that = this;
+      const that = this;
       process.on('unhandledRejection', function(reason) {
         that._logger.warn(
           'UnhandledPromiseRejectionWarning: ' +
@@ -144,7 +144,7 @@ export class Errors {
      * @example
      * // Use to create and report errors manually with a high-degree
      * // of manual control
-     * var err = errors.event()
+     * const err = errors.event()
      *  .setMessage('My error message')
      *  .setUser('root@nexus');
      * errors.report(err, function () {
@@ -155,8 +155,8 @@ export class Errors {
 
     /**
      * @example
-     * var hapi = require('hapi');
-     * var server = new hapi.Server();
+     * const hapi = require('hapi');
+     * const server = new hapi.Server();
      * server.connection({ port: 3000 });
      * server.start();
      * // AFTER ALL OTHER ROUTE HANDLERS
@@ -166,8 +166,8 @@ export class Errors {
 
     /**
      * @example
-     * var express = require('express');
-     * var app = express();
+     * const express = require('express');
+     * const app = express();
      * // AFTER ALL OTHER ROUTE HANDLERS
      * app.use(errors.express);
      * app.listen(3000);
@@ -176,8 +176,8 @@ export class Errors {
 
     /**
      * @example
-     * var restify = require('restify');
-     * var server = restify.createServer();
+     * const restify = require('restify');
+     * const server = restify.createServer();
      * // BEFORE ALL OTHER ROUTE HANDLERS
      * server.use(errors.restify(server));
      */
@@ -185,8 +185,8 @@ export class Errors {
 
     /**
      * @example
-     * var koa = require('koa');
-     * var app = koa();
+     * const koa = require('koa');
+     * const app = koa();
      * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
      * app.use(errors.koa);
      */

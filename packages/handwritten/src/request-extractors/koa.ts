@@ -15,9 +15,9 @@
  */
 
 import * as is from 'is';
-var isObject = is.object;
-var isFunction = is.function;
-var isArray = is.array;
+const isObject = is.object;
+const isFunction = is.function;
+const isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as koa from 'koa';
 
@@ -32,7 +32,7 @@ import * as koa from 'koa';
  *  container instance that may be in its initial state
  */
 export function koaRequestInformationExtractor(req: koa.Request, res: koa.Response) {
-  var returnObject = new RequestInformationContainer();
+  const returnObject = new RequestInformationContainer();
 
   if (
     !isObject(req) ||

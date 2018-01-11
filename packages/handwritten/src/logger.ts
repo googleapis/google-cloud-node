@@ -17,11 +17,11 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
-var isObject = is.object;
-var isString = is.string;
-var isNumber = is.number;
-var logger = require('@google-cloud/common').logger;
-var packageJson = require('../../package.json');
+const isObject = is.object;
+const isString = is.string;
+const isNumber = is.number;
+const logger = require('@google-cloud/common').logger;
+const packageJson = require('../../package.json');
 
 import {ConfigurationOptions} from './configuration';
 
@@ -44,8 +44,8 @@ import {ConfigurationOptions} from './configuration';
  */
 export function createLogger(initConfiguration: ConfigurationOptions) {
   // Default to log level: warn (2)
-  var DEFAULT_LEVEL = logger.LEVELS[2];
-  var level = DEFAULT_LEVEL;
+  const DEFAULT_LEVEL = logger.LEVELS[2];
+  let level = DEFAULT_LEVEL;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
     level =

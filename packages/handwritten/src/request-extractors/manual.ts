@@ -16,10 +16,10 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
-var isObject = is.object;
-var isArray = is.array;
+const isObject = is.object;
+const isArray = is.array;
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = (is as {} as {fn: Function}).fn;
 import {RequestInformationContainer} from '../classes/request-information-container';
 
 export interface Request {
@@ -50,7 +50,7 @@ export interface Request {
  *  information in a standardized format
  */
 export function manualRequestInformationExtractor(req: Request) {
-  var returnObject = new RequestInformationContainer();
+  const returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || isArray(req) || isFunction(req)) {
     return returnObject;

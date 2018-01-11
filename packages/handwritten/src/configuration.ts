@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-var env = process.env;
+const env = process.env;
 import has = require('lodash.has');
 import * as is from 'is';
-var isObject = is.object;
-var isBoolean = is.boolean;
-var isString = is.string;
-var isNumber = is.number;
+const isObject = is.object;
+const isBoolean = is.boolean;
+const isString = is.string;
+const isNumber = is.number;
 
 import {Logger} from '@google-cloud/common';
 
@@ -220,8 +220,8 @@ export class Configuration {
     //   Otherwise, the value of the environment variable GAE_MODULE_VERSION
     //   will be used if and only if the FUNCTION_NAME environment variable is
     //   not set.
-    var service;
-    var version;
+    let service;
+    let version;
 
     if (env.FUNCTION_NAME) {
       service = env.FUNCTION_NAME;

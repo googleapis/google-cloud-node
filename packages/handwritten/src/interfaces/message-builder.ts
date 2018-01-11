@@ -45,9 +45,9 @@ export function handlerSetup(config: Configuration) {
     //       error is used instead of the stack trace where the error is
     //       reported to be consistent with the behavior of reporting a
     //       an error when reporting an actual Node.js Error object.
-    var cleanedStack = buildStackTrace('');
+    const cleanedStack = buildStackTrace('');
 
-    var em = new ErrorMessage().setServiceContext(
+    const em = new ErrorMessage().setServiceContext(
       config.getServiceContext().service,
       config.getServiceContext().version
     );
