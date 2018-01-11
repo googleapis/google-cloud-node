@@ -96,7 +96,7 @@ import {Request} from './request-extractors/manual';
  * @param {ConfigurationOptions} initConfiguration - The desired project/error
  *     reporting configuration.
  */
-export class Errors {
+export class ErrorReporting {
   private _logger: Logger;
   private _config: Configuration;
   private _client: AuthClient;
@@ -111,8 +111,8 @@ export class Errors {
   koa: (next: Function) => Iterable<Function>;
 
   constructor(initConfiguration: ConfigurationOptions) {
-    if (!(this instanceof Errors)) {
-      return new Errors(initConfiguration);
+    if (!(this instanceof ErrorReporting)) {
+      return new ErrorReporting(initConfiguration);
     }
 
     this._logger = createLogger(initConfiguration);
