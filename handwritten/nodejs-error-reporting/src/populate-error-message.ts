@@ -16,7 +16,7 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
-var isObject = is.object;
+const isObject = is.object;
 import {buildStackTrace} from './build-stack-trace';
 
 import {ErrorMessage} from './classes/error-message';

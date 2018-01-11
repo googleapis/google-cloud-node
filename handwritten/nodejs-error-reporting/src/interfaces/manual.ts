@@ -15,10 +15,10 @@
  */
 
 import * as is from 'is';
-var isString = is.string;
-var isObject = is.object;
+const isString = is.string;
+const isObject = is.object;
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = (is as {} as {fn: Function}).fn;
 import {ErrorMessage} from '../classes/error-message';
 import {manualRequestInformationExtractor} from '../request-extractors/manual';
 import {populateErrorMessage} from '../populate-error-message';
@@ -63,7 +63,7 @@ export function handlerSetup(client: RequestHandler, config: Configuration, logg
    * the parameters given.
    */
   function reportManualError(err: {}, request?: Request, additionalMessage?: string|{}, callback?: Callback|{}|string) {
-    var em;
+    let em;
     if (isString(request)) {
       // no request given
       callback = additionalMessage;

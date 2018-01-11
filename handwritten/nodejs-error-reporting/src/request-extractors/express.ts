@@ -17,8 +17,8 @@
 
 import * as is from 'is';
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
-var isObject = is.object;
+const isFunction = (is as {} as {fn: Function}).fn;
+const isObject = is.object;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as express from 'express';
 
@@ -54,7 +54,7 @@ function extractRemoteAddressFromRequest(req: express.Request) {
  *  information in a standardized format
  */
 export function expressRequestInformationExtractor(req: express.Request, res: express.Response) {
-  var returnObject = new RequestInformationContainer();
+  const returnObject = new RequestInformationContainer();
 
   if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
     return returnObject;

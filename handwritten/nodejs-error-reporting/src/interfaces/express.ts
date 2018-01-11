@@ -15,9 +15,9 @@
  */
 
 import * as is from 'is';
-var isObject = is.object;
+const isObject = is.object;
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = (is as {} as {fn: Function}).fn;
 import {ErrorMessage} from '../classes/error-message';
 import {expressRequestInformationExtractor} from '../request-extractors/express';
 import {populateErrorMessage} from '../populate-error-message';
@@ -48,15 +48,15 @@ export function makeExpressHandler(client: RequestHandler, config: Configuration
    * @returns {ErrorMessage} - Returns the ErrorMessage instance
    */
   function expressErrorHandler(err: {}, req: express.Request, res: express.Response, next: Function) {
-    var ctxService = '';
-    var ctxVersion: string|undefined = '';
+    let ctxService = '';
+    let ctxVersion: string|undefined = '';
 
     if (isObject(config)) {
       ctxService = config.getServiceContext().service;
       ctxVersion = config.getServiceContext().version;
     }
 
-    var em = new ErrorMessage()
+    const em = new ErrorMessage()
       .consumeRequestInformation(expressRequestInformationExtractor(req, res))
       .setServiceContext(ctxService, ctxVersion);
 
