@@ -31,28 +31,21 @@ import * as koa from 'koa';
  * @returns {RequestInformationContainer} - returns a request information
  *  container instance that may be in its initial state
  */
-export function koaRequestInformationExtractor(req: koa.Request, res: koa.Response) {
+export function koaRequestInformationExtractor(
+    req: koa.Request, res: koa.Response) {
   const returnObject = new RequestInformationContainer();
 
-  if (
-    !isObject(req) ||
-    !isObject(res) ||
-    isFunction(req) ||
-    isFunction(res) ||
-    isArray(req) ||
-    isArray(res) ||
-    !isObject(req.headers)
-  ) {
+  if (!isObject(req) || !isObject(res) || isFunction(req) || isFunction(res) ||
+      isArray(req) || isArray(res) || !isObject(req.headers)) {
     return returnObject;
   }
 
-  returnObject
-    .setMethod(req.method)
-    .setUrl(req.url)
-    .setUserAgent(req.headers['user-agent'])
-    .setReferrer(req.headers.referrer)
-    .setStatusCode(res.status)
-    .setRemoteAddress(req.ip);
+  returnObject.setMethod(req.method)
+      .setUrl(req.url)
+      .setUserAgent(req.headers['user-agent'])
+      .setReferrer(req.headers.referrer)
+      .setStatusCode(res.status)
+      .setRemoteAddress(req.ip);
 
   return returnObject;
 }

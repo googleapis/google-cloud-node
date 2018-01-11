@@ -46,9 +46,10 @@ function hapiErrorHandler(req: hapi.Request, err: {}, config: Configuration) {
     version = config.getServiceContext().version;
   }
 
-  const em = new ErrorMessage()
-    .consumeRequestInformation(hapiRequestInformationExtractor(req))
-    .setServiceContext(service, version);
+  const em =
+      new ErrorMessage()
+          .consumeRequestInformation(hapiRequestInformationExtractor(req))
+          .setServiceContext(service, version);
 
   populateErrorMessage(err, em);
 
@@ -77,29 +78,25 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
    *  plugin
    * @returns {Undefined} - returns the execution of the next callback
    */
-  function hapiRegisterFunction(server: hapi.Server, options: {}, next: Function) {
+  function hapiRegisterFunction(
+      server: hapi.Server, options: {}, next: Function) {
     if (isObject(server)) {
       if (isFunction(server.on)) {
-        server.on('request-error', function(req, err) {
+        server.on('request-error', (req, err) => {
           client.sendError(hapiErrorHandler(req, err, config));
         });
       }
 
       if (isFunction(server.ext)) {
-        server.ext('onPreResponse', function(request, reply) {
-          if (
-            isObject(request) &&
-            isObject(request.response) &&
-            // TODO: Handle the case when `request.response` is null
-            request.response!.isBoom
-          ) {
-            const em = hapiErrorHandler(
-              request,
+        server.ext('onPreResponse', (request, reply) => {
+          if (isObject(request) && isObject(request.response) &&
               // TODO: Handle the case when `request.response` is null
-              // TODO: Handle the type conflict that requires a cast to string
-              new Error(request.response!.message as {} as string),
-              config
-            );
+              request.response!.isBoom) {
+            const em = hapiErrorHandler(
+                request,
+                // TODO: Handle the case when `request.response` is null
+                // TODO: Handle the type conflict that requires a cast to string
+                new Error(request.response!.message as {} as string), config);
             client.sendError(em);
           }
 
@@ -117,7 +114,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
 
   const hapiPlugin = {register: hapiRegisterFunction};
 
-  (hapiPlugin.register as any).attributes = {
+  (hapiPlugin.register as {} as {attributes: {}}).attributes = {
     name: packageJson.name,
     version: packageJson.version,
   };

@@ -77,26 +77,23 @@ function throwUncaughtError() {
 function reportManualError() {
   log('Reporting a manual error..');
   errorHandler.report(
-    new Error('This is a manually reported error'),
-    null,
-    null,
-    function(err) {
-      if (err) {
-        log(WARNING_HEADER);
-        log('Got an error in sending error information to the API');
-        log(err);
-        log(EXCLAMATION_LN);
-      } else {
-        log(EXCLAMATION_LN);
-        log('Successfully sent error information to the API');
-        log(EXCLAMATION_LN);
-      }
+      new Error('This is a manually reported error'), null, null,
+      function(err) {
+        if (err) {
+          log(WARNING_HEADER);
+          log('Got an error in sending error information to the API');
+          log(err);
+          log(EXCLAMATION_LN);
+        } else {
+          log(EXCLAMATION_LN);
+          log('Successfully sent error information to the API');
+          log(EXCLAMATION_LN);
+        }
 
-      if (process.env.THROW_ON_STARTUP) {
-        throwUncaughtError();
-      }
-    }
-  );
+        if (process.env.THROW_ON_STARTUP) {
+          throwUncaughtError();
+        }
+      });
 }
 log('reporting a manual error first');
 errorHandler.report(new Error('This is a test'), err => {

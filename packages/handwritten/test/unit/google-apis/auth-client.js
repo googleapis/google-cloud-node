@@ -33,10 +33,10 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
   }
 
   var RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
-    '@google-cloud/common': {
-      Service: ServiceStub,
-    },
-  }).RequestHandler;
+                         '@google-cloud/common': {
+                           Service: ServiceStub,
+                         },
+                       }).RequestHandler;
 
   var logs = {};
   var logger = {
@@ -73,17 +73,16 @@ describe('RequestHandler', function() {
     var config = {ignoreEnvironmentCheck: true};
     var message = 'Test Error';
     verifyReportedMessage(config, new Error(message), {
-      error:
-        'Unable to find credential information on instance. This ' +
-        'library will be unable to communicate with the Stackdriver API to ' +
-        'save errors.  Message: ' +
-        message,
+      error: 'Unable to find credential information on instance. This ' +
+          'library will be unable to communicate with the Stackdriver API to ' +
+          'save errors.  Message: ' + message,
     });
   });
 
-  it('should not issue a warning if it can communicate with the API', function() {
-    var config = {ignoreEnvironmentCheck: true};
-    verifyReportedMessage(config, null, {});
-    verifyReportedMessage(config, undefined, {});
-  });
+  it('should not issue a warning if it can communicate with the API',
+     function() {
+       var config = {ignoreEnvironmentCheck: true};
+       verifyReportedMessage(config, null, {});
+       verifyReportedMessage(config, undefined, {});
+     });
 });

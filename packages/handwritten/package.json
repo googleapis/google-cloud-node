@@ -41,7 +41,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "repo-tools test run --cmd mocha -- ./build/test/unit/*.js ./build/test/unit/**/*.js --no-timeouts",
     "test": "repo-tools test run --cmd npm -- run cover",
-    "check": "echo '`gts check` has been disabled.  Re-enable when Typescript migration is complete.'",
+    "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
