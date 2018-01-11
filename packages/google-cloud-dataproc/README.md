@@ -2,8 +2,6 @@
 
 # [Google Cloud Dataproc: Node.js Client](https://github.com/googleapis/nodejs-dataproc)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-dataproc.svg)](https://greenkeeper.io/)
-
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-dataproc.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-dataproc)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-dataproc?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-dataproc)
