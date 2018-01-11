@@ -135,6 +135,7 @@ interface StackdriverData {
 interface StackdriverEntryMetadata {
   resource?: MonitoredResource;
   httpRequest?: HttpRequest;
+  labels?: {};
   trace?: {};
 }
 
@@ -162,6 +163,7 @@ interface StackdriverLogging {
 interface Metadata {
   stack?: string;
   httpRequest?: HttpRequest;
+  labels?: {}
 }
 
 interface StackdriverEntry {

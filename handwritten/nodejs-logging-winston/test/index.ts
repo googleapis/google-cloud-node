@@ -324,6 +324,25 @@ describe('logging-winston', () => {
       loggingWinston.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
+    it('should promote labels from metadata to log entry', (done) => {
+      const LABELS = {labelKey: 'labelValue'};
+      const metadataWithLabels = Object.assign({labels: LABELS}, METADATA);
+
+      loggingWinston.stackdriverLog.entry =
+          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+            assert.deepStrictEqual(entryMetadata, {
+              resource: loggingWinston.resource,
+              labels: LABELS,
+            });
+            assert.deepStrictEqual(data, {
+              message: MESSAGE,
+              metadata: METADATA,
+            });
+            done();
+          };
+      loggingWinston.log(LEVEL, MESSAGE, metadataWithLabels, assert.ifError);
+    });
+
     it('should promote prefixed trace property to metadata', (done) => {
       const metadataWithTrace = Object.assign({}, METADATA);
       const loggingTraceKey =
