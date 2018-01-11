@@ -17,9 +17,9 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
-var isObject = is.object;
-var isFunction = is.function;
-var isArray = is.array;
+const isObject = is.object;
+const isFunction = is.function;
+const isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as hapi from 'hapi';
 
@@ -83,7 +83,7 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
  *  information in a standardized format
  */
 export function hapiRequestInformationExtractor(req: hapi.Request) {
-  var returnObject = new RequestInformationContainer();
+  const returnObject = new RequestInformationContainer();
 
   if (
     !isObject(req) ||

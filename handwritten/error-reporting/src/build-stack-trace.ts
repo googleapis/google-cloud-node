@@ -26,11 +26,11 @@ const SRC_ROOT = __dirname;
  *   where this method was invoked.
  */
 export function buildStackTrace(message: string) {
-  var target = {};
+  const target = {};
   // Build a stack trace without the frames associated with `buildStackTrace`.
   // The stack is located at `target.stack`.
   Error.captureStackTrace(target, buildStackTrace);
-  var prefix = message ? message + '\n' : '';
+  const prefix = message ? message + '\n' : '';
   return (
     prefix +
     (target as any).stack

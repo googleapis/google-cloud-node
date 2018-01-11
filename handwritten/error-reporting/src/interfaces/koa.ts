@@ -42,12 +42,12 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @returns {Undefined} does not return anything
    */
   return function*(this: {request: Request; response: Response;}, next: Function) {
-    var svc = config.getServiceContext();
+    const svc = config.getServiceContext();
 
     try {
       yield next;
     } catch (err) {
-      var em = new ErrorMessage()
+      const em = new ErrorMessage()
         .consumeRequestInformation(
           koaRequestInformationExtractor(this.request, this.response)
         )

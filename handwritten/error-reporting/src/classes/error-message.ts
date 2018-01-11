@@ -15,9 +15,9 @@
  */
 
 import * as is from 'is';
-var isString = is.string;
-var isNumber = is.number;
-var isObject = is.object;
+const isString = is.string;
+const isNumber = is.number;
+const isObject = is.object;
 
 import {RequestInformationContainer} from './request-information-container';
 import {ServiceContext} from '../configuration';
