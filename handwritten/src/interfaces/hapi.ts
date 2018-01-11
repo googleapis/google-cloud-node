@@ -15,13 +15,13 @@
  */
 
 import * as is from 'is';
-var isObject = is.object;
+const isObject = is.object;
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = (is as {} as {fn: Function}).fn;
 import {ErrorMessage} from '../classes/error-message';
 import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
 import {populateErrorMessage} from '../populate-error-message';
-var packageJson = require('../../../package.json');
+const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
 import {Configuration} from '../configuration';
@@ -38,15 +38,15 @@ import * as hapi from 'hapi';
  *  ErrorMessage
  */
 function hapiErrorHandler(req: hapi.Request, err: {}, config: Configuration) {
-  var service = '';
-  var version: string|undefined = '';
+  let service = '';
+  let version: string|undefined = '';
 
   if (isObject(config)) {
     service = config.getServiceContext().service;
     version = config.getServiceContext().version;
   }
 
-  var em = new ErrorMessage()
+  const em = new ErrorMessage()
     .consumeRequestInformation(hapiRequestInformationExtractor(req))
     .setServiceContext(service, version);
 
@@ -93,7 +93,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
             // TODO: Handle the case when `request.response` is null
             request.response!.isBoom
           ) {
-            var em = hapiErrorHandler(
+            const em = hapiErrorHandler(
               request,
               // TODO: Handle the case when `request.response` is null
               // TODO: Handle the type conflict that requires a cast to string
@@ -115,7 +115,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
     }
   }
 
-  var hapiPlugin = {register: hapiRegisterFunction};
+  const hapiPlugin = {register: hapiRegisterFunction};
 
   (hapiPlugin.register as any).attributes = {
     name: packageJson.name,

@@ -15,8 +15,8 @@
  */
 
 import * as is from 'is';
-var isString = is.string;
-var isNumber = is.number;
+const isString = is.string;
+const isNumber = is.number;
 
 export class RequestInformationContainer {
   url: string;

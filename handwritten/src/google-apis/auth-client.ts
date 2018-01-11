@@ -19,18 +19,18 @@ import * as common from '@google-cloud/common';
 const pkg = require('../../../package.json');
 import * as is from 'is';
 // TODO: Address the error where `is` does not have a `fn` property
-var isFunction = (is as {} as {fn: Function}).fn;
-var isString = is.string;
+const isFunction = (is as {} as {fn: Function}).fn;
+const isString = is.string;
 
 import {Configuration} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';
 
 /* @const {Array<String>} list of scopes needed to work with the errors api. */
-var SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
+const SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
 
 /* @const {String} Base Error Reporting API */
-var API = 'https://clouderrorreporting.googleapis.com/v1beta1';
+const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
 
 /**
  * The RequestHandler constructor initializes several properties on the
@@ -96,9 +96,9 @@ export class RequestHandler extends common.Service {
    * @param {Logger} logger - an instance of logger
    */
   constructor(config: Configuration, logger: common.Logger) {
-    var pid = config.getProjectId();
+    const pid = config.getProjectId();
     // If an API key is provided, do not try to authenticate.
-    var tryAuthenticate = !config.getKey();
+    const tryAuthenticate = !config.getKey();
     super(
       {
         packageJson: pkg,
@@ -114,7 +114,7 @@ export class RequestHandler extends common.Service {
     this._config = config;
     this._logger = logger;
 
-    var that = this;
+    const that = this;
     if (tryAuthenticate) {
       this.authClient.getToken(function(err: Error) {
         if (err) {
@@ -167,7 +167,7 @@ export class RequestHandler extends common.Service {
    * @instance
    */
   sendError(errorMessage: ErrorMessage, userCb?: (err: Error|null, response: http.ServerResponse|null, body: any) => void) {
-    var cb: Function = (isFunction(userCb) ? userCb : RequestHandler.noOp)!;
+    const cb: Function = (isFunction(userCb) ? userCb : RequestHandler.noOp)!;
     if (this._config.getShouldReportErrorsToAPI()) {
       this.request(
         {
