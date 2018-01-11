@@ -135,6 +135,14 @@ export class LoggingBunyan extends Writable {
       delete record.httpRequest;
     }
 
+    // If the record contains a labels property, promote it to the entry
+    // metadata.
+    // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+    if (record.labels) {
+      entryMetadata.labels = record.labels;
+      delete record.labels;
+    }
+
     // record does not have index signature.
     // tslint:disable-next-line:no-any
     if ((record as any)[LOGGING_TRACE_KEY]) {
