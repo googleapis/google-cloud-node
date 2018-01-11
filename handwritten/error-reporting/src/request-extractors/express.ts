@@ -16,7 +16,8 @@
 // jscs:disable requireEarlyReturn
 
 import * as is from 'is';
-var isFunction = is.fn;
+// TODO: Address the error where `is` does not have a `fn` property
+var isFunction = (is as {} as {fn: Function}).fn;
 var isObject = is.object;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as express from 'express';

@@ -16,7 +16,8 @@
 
 import * as is from 'is';
 var isObject = is.object;
-var isFunction = is.fn;
+// TODO: Address the error where `is` does not have a `fn` property
+var isFunction = (is as {} as {fn: Function}).fn;
 import {ErrorMessage} from '../classes/error-message';
 import {expressRequestInformationExtractor} from '../request-extractors/express';
 import {populateErrorMessage} from '../populate-error-message';

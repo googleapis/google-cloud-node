@@ -15,7 +15,7 @@
  */
 
 var env = process.env;
-import * as has from 'lodash.has';
+import has = require('lodash.has');
 import * as is from 'is';
 var isObject = is.object;
 var isBoolean = is.boolean;
@@ -233,7 +233,7 @@ export class Configuration {
       version = env.GAE_MODULE_VERSION;
     }
 
-    this._serviceContext.service = isString(service) ? service : 'node';
+    this._serviceContext.service = (isString(service) ? service : 'node')!;
     this._serviceContext.version = isString(version) ? version : undefined;
 
     if (isObject(this._givenConfiguration.serviceContext)) {

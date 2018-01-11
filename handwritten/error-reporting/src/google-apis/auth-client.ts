@@ -18,7 +18,8 @@
 import * as common from '@google-cloud/common';
 const pkg = require('../../../package.json');
 import * as is from 'is';
-var isFunction = is.fn;
+// TODO: Address the error where `is` does not have a `fn` property
+var isFunction = (is as {} as {fn: Function}).fn;
 var isString = is.string;
 
 import {Configuration} from '../configuration';
@@ -115,7 +116,7 @@ export class RequestHandler extends common.Service {
 
     var that = this;
     if (tryAuthenticate) {
-      this.authClient.getToken(function(err) {
+      this.authClient.getToken(function(err: Error) {
         if (err) {
           that._logger.error(
             [
