@@ -22,7 +22,7 @@ var isObject = is.object;
 import {RequestInformationContainer} from './request-information-container';
 import {ServiceContext} from '../configuration';
 
-interface Context {
+export interface Context {
   httpRequest: {
     method: string;
     url: string;

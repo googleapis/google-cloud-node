@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import * as has from 'lodash.has';
+import has = require('lodash.has');
 import * as is from 'is';
 var isObject = is.object;
 var isArray = is.array;
-var isFunction = is.fn;
+// TODO: Address the error where `is` does not have a `fn` property
+var isFunction = (is as {} as {fn: Function}).fn;
 import {RequestInformationContainer} from '../classes/request-information-container';
 
 export interface Request {
