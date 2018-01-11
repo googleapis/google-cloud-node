@@ -20,5 +20,10 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "2.1.0",
     "ava": "0.23.0"
+  },
+  "ava": {
+    "require": [
+      "source-map-support/register"
+    ]
   }
 }
