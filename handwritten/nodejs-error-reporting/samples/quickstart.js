@@ -19,7 +19,11 @@
 function quickstart() {
   // [START error_reporting_quickstart]
   // Imports the Google Cloud client library
-  const ErrorReporting = require('@google-cloud/error-reporting');
+  const ErrorReporting = require('@google-cloud/error-reporting')
+    .ErrorReporting;
+
+  // On Node 6+ the following syntax can be used instead:
+  // const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Instantiates a client
   const errors = ErrorReporting();
