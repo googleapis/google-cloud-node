@@ -2,6 +2,8 @@
 
 # [Google BigQuery Data Transfer Service: Node.js Client](https://github.com/GoogleCloudPlatform/google-cloud-node)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-bigquery-data-transfer.svg)](https://greenkeeper.io/)
+
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/GoogleCloudPlatform/google-cloud-node.svg?style=flat)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?branch=master&svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
