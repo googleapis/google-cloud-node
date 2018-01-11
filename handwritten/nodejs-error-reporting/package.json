@@ -47,7 +47,8 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "posttest": "npm run check && npm run license-check",
+    "license-check": "jsgl --local ."
   },
   "dependencies": {
     "@google-cloud/common": "^0.15.1",
@@ -78,6 +79,7 @@
     "hapi": "^17.1.1",
     "ink-docstrap": "^1.3.0",
     "intelli-espower-loader": "^1.0.1",
+    "js-green-licenses": "^0.2.1",
     "jscs": "^3.0.7",
     "jsdoc": "^3.5.5",
     "jshint": "^2.9.2",
