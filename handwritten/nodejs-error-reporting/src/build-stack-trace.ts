@@ -36,7 +36,7 @@ export function buildStackTrace(message: string) {
     (target as any).stack
       .split('\n')
       .slice(1)
-      .filter(function(line) {
+      .filter(function(line: string) {
         // Filter out all frames that are specific to the error-reporting library
         return !line || line.indexOf(SRC_ROOT) === -1;
       })
