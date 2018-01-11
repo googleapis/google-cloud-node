@@ -35,17 +35,12 @@ import * as hapi from 'hapi';
 function attemptToExtractStatusCode(req: hapi.Request) {
   // TODO: Handle the cases where `req.response` and `req.response.output`
   //       are `null` in this function
-  if (
-    has(req, 'response') &&
-    isObject(req.response) &&
-    has(req.response, 'statusCode')
-  ) {
+  if (has(req, 'response') && isObject(req.response) &&
+      has(req.response, 'statusCode')) {
     return req.response!.statusCode;
   } else if (
-    has(req, 'response') &&
-    isObject(req.response) &&
-    isObject(req.response!.output)
-  ) {
+      has(req, 'response') && isObject(req.response) &&
+      isObject(req.response!.output)) {
     return req.response!.output!.statusCode;
   }
 
@@ -85,23 +80,19 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
 export function hapiRequestInformationExtractor(req: hapi.Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (
-    !isObject(req) ||
-    !isObject(req.headers) ||
-    isFunction(req) ||
-    isArray(req)
-  ) {
+  if (!isObject(req) || !isObject(req.headers) || isFunction(req) ||
+      isArray(req)) {
     return returnObject;
   }
 
   returnObject
-    .setMethod(req.method)
-    // TODO: Address the type conflict that requires a cast to string
-    .setUrl(req.url as {} as string)
-    .setUserAgent(req.headers['user-agent'])
-    .setReferrer(req.headers.referrer)
-    .setStatusCode(attemptToExtractStatusCode(req))
-    .setRemoteAddress(extractRemoteAddressFromRequest(req));
+      .setMethod(req.method)
+      // TODO: Address the type conflict that requires a cast to string
+      .setUrl(req.url as {} as string)
+      .setUserAgent(req.headers['user-agent'])
+      .setReferrer(req.headers.referrer)
+      .setStatusCode(attemptToExtractStatusCode(req))
+      .setRemoteAddress(extractRemoteAddressFromRequest(req));
 
   return returnObject;
 }

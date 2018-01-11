@@ -18,26 +18,26 @@
  * @module error-reporting
  */
 
+import {Logger} from '@google-cloud/common';
+import * as e from 'express';
+import * as h from 'hapi';
+import {ServerResponse} from 'http';
+import * as r from 'restify';
+
+import {ErrorMessage} from './classes/error-message';
 import {Configuration, ConfigurationOptions} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
-import {Logger} from '@google-cloud/common';
+import {makeExpressHandler as express} from './interfaces/express';
+import {makeHapiPlugin as hapi} from './interfaces/hapi';
 // Begin error reporting interfaces
 
 import {koaErrorHandler as koa} from './interfaces/koa';
-import {makeHapiPlugin as hapi} from './interfaces/hapi';
 import * as manual from './interfaces/manual';
-import {makeExpressHandler as express} from './interfaces/express';
-import {handlerSetup as restify} from './interfaces/restify';
-import * as messageBuilder from './interfaces/message-builder';
-import {createLogger} from './logger';
-
-import {ErrorMessage} from './classes/error-message';
-import {Request} from './request-extractors/manual';
 import {Callback} from './interfaces/manual';
-import {ServerResponse} from 'http';
-import * as h from 'hapi';
-import * as e from 'express';
-import * as r from 'restify';
+import * as messageBuilder from './interfaces/message-builder';
+import {handlerSetup as restify} from './interfaces/restify';
+import {createLogger} from './logger';
+import {Request} from './request-extractors/manual';
 
 /**
  * @typedef ConfigurationOptions
@@ -100,11 +100,14 @@ export class Errors {
   private _logger: Logger;
   private _config: Configuration;
   private _client: AuthClient;
-  report: (err: {}, request?: Request, additionalMessage?: string|{}, callback?: Callback|{}|string) => ErrorMessage;
+  report:
+      (err: {}, request?: Request, additionalMessage?: string|{},
+       callback?: Callback|{}|string) => ErrorMessage;
   event: () => ErrorMessage;
-  hapi: {register: (server: h.Server, options: {}, next: Function) => void };
+  hapi: {register: (server: h.Server, options: {}, next: Function) => void};
   express: (err: {}, req: e.Request, res: e.Response, next: Function) => void;
-  restify: (client: AuthClient, config: Configuration, server: r.Server) => void;
+  restify:
+      (client: AuthClient, config: Configuration, server: r.Server) => void;
   koa: (next: Function) => Iterable<Function>;
 
   constructor(initConfiguration: ConfigurationOptions) {
@@ -118,14 +121,12 @@ export class Errors {
 
     if (this._config.getReportUnhandledRejections()) {
       const that = this;
-      process.on('unhandledRejection', function(reason) {
+      process.on('unhandledRejection', (reason) => {
         that._logger.warn(
-          'UnhandledPromiseRejectionWarning: ' +
-            'Unhandled promise rejection: ' +
-            reason +
+            'UnhandledPromiseRejectionWarning: ' +
+            'Unhandled promise rejection: ' + reason +
             '.  This rejection has been reported to the ' +
-            'Google Cloud Platform error-reporting console.'
-        );
+            'Google Cloud Platform error-reporting console.');
         that.report(reason);
       });
     }

@@ -17,7 +17,9 @@
 'use strict';
 
 var assert = require('assert');
-var koaRequestInformationExtractor = require('../../../src/request-extractors/koa.js').koaRequestInformationExtractor;
+var koaRequestInformationExtractor =
+    require('../../../src/request-extractors/koa.js')
+        .koaRequestInformationExtractor;
 var Fuzzer = require('../../../utils/fuzzer.js');
 
 describe('koaRequestInformationExtractor', function() {
@@ -36,10 +38,7 @@ describe('koaRequestInformationExtractor', function() {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
-        koaRequestInformationExtractor,
-        ['object', 'object'],
-        cbFn
-      );
+          koaRequestInformationExtractor, ['object', 'object'], cbFn);
     });
   });
   describe('Behaviour under valid input', function() {
@@ -65,12 +64,9 @@ describe('koaRequestInformationExtractor', function() {
         statusCode: 200,
       };
       assert.deepEqual(
-        koaRequestInformationExtractor(
-          FULL_REQ_DERIVATION_VALUE,
-          FULL_RES_DERIVATION_VALUE
-        ),
-        FULL_REQ_EXPECTED_VALUE
-      );
+          koaRequestInformationExtractor(
+              FULL_REQ_DERIVATION_VALUE, FULL_RES_DERIVATION_VALUE),
+          FULL_REQ_EXPECTED_VALUE);
     });
   });
 });
