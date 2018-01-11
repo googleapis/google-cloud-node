@@ -154,6 +154,14 @@ export class LoggingWinston extends winston.Transport {
         entryMetadata.httpRequest = (metadata as Metadata).httpRequest;
         delete (data.metadata as Metadata).httpRequest;
       }
+
+      // If the metadata contains a labels property, promote it to the entry
+      // metadata.
+      // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+      if ((metadata as Metadata).labels) {
+        entryMetadata.labels = (metadata as Metadata).labels;
+        delete (data.metadata as Metadata).labels;
+      }
     }
 
     // metadata does not have index signature.
