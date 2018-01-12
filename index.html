@@ -13,13 +13,8 @@
       var regex = /docs\/([\w-]+)/;
       var matches = window.location.href.match(regex);
       console.log(window.location.href, matches);
-      if (matches) {
-        if (matches[1] === 'pubsub') {
-          console.log('PubSub docs are still here');
-        } else {
-          console.log('Redirecting...');
-          window.location = 'https://cloud.google.com/nodejs/docs/reference/' + matches[1] + '/latest/';
-        }
+      if (matches && matches[1]) {
+        window.location = 'https://cloud.google.com/nodejs/docs/reference/' + matches[1] + '/latest/';
       } else {
         window.location = 'https://cloud.google.com/nodejs/docs/reference/libraries';
       }
