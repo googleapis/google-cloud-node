@@ -11,11 +11,12 @@
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
+* [Google BigQuery](https://github.com/googleapis/nodejs-bigquery) (GA)
 * [Cloud Datastore](http://github.com/googleapis/nodejs-datastore/) (GA)
 * [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (GA)
+* [Google Stackdriver Logging](https://github.com/googleapis/nodejs-logging/) (GA)
 * [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](https://github.com/googleapis/nodejs-translate/) (GA)
-* [Google Stackdriver Logging](https://github.com/googleapis/nodejs-logging/) (GA)
 * [Cloud Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence/) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
@@ -26,7 +27,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Spanner](https://github.com/googleapis/nodejs-spanner/) (Beta)
 * [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (Beta)
 * [Cloud Vision](https://github.com/googleapis/nodejs-vision) (Beta)
-* [Google BigQuery](https://github.com/googleapis/nodejs-bigquery) (Beta)
 * [Google Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
