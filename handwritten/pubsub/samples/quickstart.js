@@ -23,7 +23,7 @@ const PubSub = require('@google-cloud/pubsub');
 const projectId = 'YOUR_PROJECT_ID';
 
 // Instantiates a client
-const pubsubClient = PubSub({
+const pubsubClient = new PubSub({
   projectId: projectId,
 });
 

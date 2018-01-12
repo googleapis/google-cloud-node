@@ -23,80 +23,111 @@
 
 'use strict';
 
-const PubSub = require(`@google-cloud/pubsub`);
-
-// [START pubsub_list_subscriptions]
 function listSubscriptions() {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_list_subscriptions]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
+
+  // Creates a client
+  const pubsub = new PubSub();
 
   // Lists all subscriptions in the current project
-  return pubsub.getSubscriptions().then(results => {
-    const subscriptions = results[0];
+  pubsub
+    .getSubscriptions()
+    .then(results => {
+      const subscriptions = results[0];
 
-    console.log('Subscriptions:');
-    subscriptions.forEach(subscription => console.log(subscription.name));
-
-    return subscriptions;
-  });
+      console.log('Subscriptions:');
+      subscriptions.forEach(subscription => console.log(subscription.name));
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_list_subscriptions]
 }
-// [END pubsub_list_subscriptions]
 
-// [START pubsub_list_topic_subscriptions]
 function listTopicSubscriptions(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_list_topic_subscriptions]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
   // Lists all subscriptions for the topic
-  return topic.getSubscriptions().then(results => {
-    const subscriptions = results[0];
+  pubsub
+    .topic(topicName)
+    .getSubscriptions()
+    .then(results => {
+      const subscriptions = results[0];
 
-    console.log(`Subscriptions for ${topicName}:`);
-    subscriptions.forEach(subscription => console.log(subscription.name));
-
-    return subscriptions;
-  });
+      console.log(`Subscriptions for ${topicName}:`);
+      subscriptions.forEach(subscription => console.log(subscription.name));
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_list_topic_subscriptions]
 }
-// [END pubsub_list_topic_subscriptions]
 
-// [START pubsub_create_subscription]
 function createSubscription(topicName, subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_create_subscription]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
 
-  // Creates a new subscription, e.g. "my-new-subscription"
-  return topic.createSubscription(subscriptionName).then(results => {
-    const subscription = results[0];
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const subscriptionName = 'your-subscription';
 
-    console.log(`Subscription ${subscription.name} created.`);
-
-    return subscription;
-  });
+  // Creates a new subscription
+  pubsub
+    .topic(topicName)
+    .createSubscription(subscriptionName)
+    .then(results => {
+      const subscription = results[0];
+      console.log(`Subscription ${subscription.name} created.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_create_subscription]
 }
-// [END pubsub_create_subscription]
 
-// [START pubsub_subscriber_flow_settings]
 function createFlowControlledSubscription(
   topicName,
   subscriptionName,
   maxInProgress,
   maxBytes
 ) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_subscriber_flow_settings]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
 
-  // Creates a new subscription, e.g. "my-new-subscription"
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const subscriptionName = 'your-subscription';
+  // const maxInProgress = 5;
+  // const maxBytes = 10000;
+
+  // Creates a new subscription
   // Note that flow control configurations are not persistent
-  return topic
+  pubsub
+    .topic(topicName)
     .createSubscription(subscriptionName, {
       flowControl: {
         maxBytes: maxBytes,
@@ -111,19 +142,26 @@ function createFlowControlledSubscription(
           subscription.name
         } created with a maximum of ${maxInProgress} unprocessed messages.`
       );
-
-      return subscription;
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
     });
+  // [END pubsub_subscriber_flow_settings]
 }
-// [END pubsub_subscriber_flow_settings]
 
-// [START pubsub_create_push_subscription]
 function createPushSubscription(topicName, subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_create_push_subscription]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const subscriptionName = 'your-subscription';
 
   const options = {
     pushConfig: {
@@ -133,25 +171,33 @@ function createPushSubscription(topicName, subscriptionName) {
     },
   };
 
-  // Creates a new push subscription, e.g. "my-new-subscription"
-  return topic.createSubscription(subscriptionName, options).then(results => {
-    const subscription = results[0];
+  pubsub
+    .topic(topicName)
+    .createSubscription(subscriptionName, options)
+    .then(results => {
+      const subscription = results[0];
 
-    console.log(`Subscription ${subscription.name} created.`);
-
-    return subscription;
-  });
+      console.log(`Subscription ${subscription.name} created.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_create_push_subscription]
 }
-// [END pubsub_create_push_subscription]
 
-// [START pubsub_modify_push_config]
-function modifyPushConfig(topicName, subscriptionName /* , pushEndpoint */) {
-  // Instantiates a client
-  const pubsub = PubSub();
+function modifyPushConfig(topicName, subscriptionName) {
+  // [START pubsub_modify_push_config]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic and subscription, e.g. "my-topic" > "my-subscription"
-  const topic = pubsub.topic(topicName);
-  const subscription = topic.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const subscriptionName = 'your-subscription';
 
   const options = {
     // Set to an HTTPS endpoint of your choice. If necessary, register
@@ -159,55 +205,91 @@ function modifyPushConfig(topicName, subscriptionName /* , pushEndpoint */) {
     pushEndpoint: `https://${pubsub.projectId}.appspot.com/push`,
   };
 
-  return subscription.modifyPushConfig(options).then((/*results*/) => {
-    console.log(`Modified push config for subscription ${subscription.name}.`);
-  });
+  pubsub
+    .topic(topicName)
+    .subscription(subscriptionName)
+    .modifyPushConfig(options)
+    .then(() => {
+      console.log(`Modified push config for subscription ${subscriptionName}.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_modify_push_config]
 }
-// [END pubsub_modify_push_config]
 
-// [START pubsub_delete_subscription]
 function deleteSubscription(subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_delete_subscription]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
-  const subscription = pubsub.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
 
   // Deletes the subscription
-  return subscription.delete().then(() => {
-    console.log(`Subscription ${subscription.name} deleted.`);
-  });
+  pubsub
+    .subscription(subscriptionName)
+    .delete()
+    .then(() => {
+      console.log(`Subscription ${subscriptionName} deleted.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_delete_subscription]
 }
-// [END pubsub_delete_subscription]
 
-// [START pubsub_get_subscription]
 function getSubscription(subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_get_subscription]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
-  const subscription = pubsub.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
 
   // Gets the metadata for the subscription
-  return subscription.getMetadata().then(results => {
-    const metadata = results[0];
+  pubsub
+    .subscription(subscriptionName)
+    .getMetadata()
+    .then(results => {
+      const metadata = results[0];
 
-    console.log(`Subscription: ${metadata.name}`);
-    console.log(`Topic: ${metadata.topic}`);
-    console.log(`Push config: ${metadata.pushConfig.pushEndpoint}`);
-    console.log(`Ack deadline: ${metadata.ackDeadlineSeconds}s`);
-
-    return metadata;
-  });
+      console.log(`Subscription: ${metadata.name}`);
+      console.log(`Topic: ${metadata.topic}`);
+      console.log(`Push config: ${metadata.pushConfig.pushEndpoint}`);
+      console.log(`Ack deadline: ${metadata.ackDeadlineSeconds}s`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_get_subscription]
 }
-// [END pubsub_get_subscription]
 
-// [START pubsub_listen_messages]
 function listenForMessages(subscriptionName, timeout) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_listen_messages]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
+  // const timeout = 60;
+
+  // References an existing subscription
   const subscription = pubsub.subscription(subscriptionName);
 
   // Create an event handler to handle messages
@@ -228,8 +310,8 @@ function listenForMessages(subscriptionName, timeout) {
     subscription.removeListener('message', messageHandler);
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
+  // [END pubsub_listen_messages]
 }
-// [END pubsub_listen_messages]
 
 let subscribeCounterValue = 1;
 
@@ -245,8 +327,11 @@ function setSubscribeCounterValue(value) {
 const outstandingMessages = {};
 
 function listenForOrderedMessages(subscriptionName, timeout) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
+
+  // Creates a client
+  const pubsub = new PubSub();
 
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsub.subscription(subscriptionName);
@@ -303,12 +388,21 @@ function listenForOrderedMessages(subscriptionName, timeout) {
 }
 // [END pubsub_listen_ordered_messages]
 
-// [START pubsub_listen_errors]
 function listenForErrors(subscriptionName, timeout) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_listen_errors]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
+  // const timeout = 60;
+
+  // References an existing subscription
   const subscription = pubsub.subscription(subscriptionName);
 
   // Create an event handler to handle messages
@@ -327,44 +421,54 @@ function listenForErrors(subscriptionName, timeout) {
   };
 
   // Listen for new messages/errors until timeout is hit
-  return new Promise(resolve => {
-    subscription.on(`message`, messageHandler);
-    subscription.on(`error`, errorHandler);
-    setTimeout(() => {
-      subscription.removeListener(`message`, messageHandler);
-      subscription.removeListener(`error`, errorHandler);
-      resolve();
-    }, timeout * 1000);
-  });
+  subscription.on(`message`, messageHandler);
+  subscription.on(`error`, errorHandler);
+  setTimeout(() => {
+    subscription.removeListener(`message`, messageHandler);
+    subscription.removeListener(`error`, errorHandler);
+  }, timeout * 1000);
+  // [END pubsub_listen_errors]
 }
-// [END pubsub_listen_errors]
 
-// [START pubsub_get_subscription_policy]
 function getSubscriptionPolicy(subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_get_subscription_policy]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
-  const subscription = pubsub.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
 
   // Retrieves the IAM policy for the subscription
-  return subscription.iam.getPolicy().then(results => {
-    const policy = results[0];
-
-    console.log(`Policy for subscription: %j.`, policy.bindings);
-
-    return policy;
-  });
+  pubsub
+    .subscription(subscriptionName)
+    .iam.getPolicy()
+    .then(results => {
+      const policy = results[0];
+      console.log(`Policy for subscription: %j.`, policy.bindings);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_get_subscription_policy]
 }
-// [END pubsub_get_subscription_policy]
 
-// [START pubsub_set_subscription_policy]
 function setSubscriptionPolicy(subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_set_subscription_policy]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
-  const subscription = pubsub.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
 
   // The new IAM policy
   const newPolicy = {
@@ -383,23 +487,34 @@ function setSubscriptionPolicy(subscriptionName) {
   };
 
   // Updates the IAM policy for the subscription
-  return subscription.iam.setPolicy(newPolicy).then(results => {
-    const updatedPolicy = results[0];
-
-    console.log(`Updated policy for subscription: %j`, updatedPolicy.bindings);
-
-    return updatedPolicy;
-  });
+  pubsub
+    .subscription(subscriptionName)
+    .iam.setPolicy(newPolicy)
+    .then(results => {
+      const updatedPolicy = results[0];
+      console.log(
+        `Updated policy for subscription: %j`,
+        updatedPolicy.bindings
+      );
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_set_subscription_policy]
 }
-// [END pubsub_set_subscription_policy]
 
-// [START pubsub_test_subscription_permissions]
 function testSubscriptionPermissions(subscriptionName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_test_subscription_permissions]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing subscription, e.g. "my-subscription"
-  const subscription = pubsub.subscription(subscriptionName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const subscriptionName = 'your-subscription';
 
   const permissionsToTest = [
     `pubsub.subscriptions.consume`,
@@ -407,15 +522,18 @@ function testSubscriptionPermissions(subscriptionName) {
   ];
 
   // Tests the IAM policy for the specified subscription
-  subscription.iam.testPermissions(permissionsToTest).then(results => {
-    const permissions = results[0];
-
-    console.log(`Tested permissions for subscription: %j`, permissions);
-
-    return permissions;
-  });
+  pubsub
+    .subscription(subscriptionName)
+    .iam.testPermissions(permissionsToTest)
+    .then(results => {
+      const permissions = results[0];
+      console.log(`Tested permissions for subscription: %j`, permissions);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_test_subscription_permissions]
 }
-// [END pubsub_test_subscription_permissions]
 
 module.exports = {listenForOrderedMessages};
 

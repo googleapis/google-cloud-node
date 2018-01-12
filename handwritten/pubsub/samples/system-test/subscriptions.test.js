@@ -107,7 +107,7 @@ test.serial(
     );
     t.is(
       output,
-      `Modified push config for subscription ${fullSubscriptionNameTwo}.`
+      `Modified push config for subscription ${subscriptionNameTwo}.`
     );
   }
 );
@@ -261,7 +261,7 @@ test.serial(`should delete a subscription`, async t => {
     `${cmd} delete ${subscriptionNameOne}`,
     cwd
   );
-  t.is(output, `Subscription ${fullSubscriptionNameOne} deleted.`);
+  t.is(output, `Subscription ${subscriptionNameOne} deleted.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub.getSubscriptions();

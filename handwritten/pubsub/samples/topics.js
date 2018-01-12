@@ -23,106 +23,149 @@
 
 'use strict';
 
-const PubSub = require(`@google-cloud/pubsub`);
-
-// [START pubsub_list_topics]
 function listAllTopics() {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_list_topics]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
+
+  // Creates a client
+  const pubsub = new PubSub();
 
   // Lists all topics in the current project
-  return pubsub.getTopics().then(results => {
-    const topics = results[0];
+  pubsub
+    .getTopics()
+    .then(results => {
+      const topics = results[0];
 
-    console.log('Topics:');
-    topics.forEach(topic => console.log(topic.name));
-
-    return topics;
-  });
+      console.log('Topics:');
+      topics.forEach(topic => console.log(topic.name));
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_list_topics]
 }
-// [END pubsub_list_topics]
 
-// [START pubsub_create_topic]
 function createTopic(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_create_topic]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // Creates a new topic, e.g. "my-new-topic"
-  return pubsub.createTopic(topicName).then(results => {
-    const topic = results[0];
+  // Creates a client
+  const pubsub = new PubSub();
 
-    console.log(`Topic ${topic.name} created.`);
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
-    return topic;
-  });
+  // Creates a new topic
+  pubsub
+    .createTopic(topicName)
+    .then(results => {
+      const topic = results[0];
+      console.log(`Topic ${topic.name} created.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_create_topic]
 }
-// [END pubsub_create_topic]
 
-// [START pubsub_delete_topic]
 function deleteTopic(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_delete_topic]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
   // Deletes the topic
-  return topic.delete().then(() => {
-    console.log(`Topic ${topic.name} deleted.`);
-  });
+  pubsub
+    .topic(topicName)
+    .delete()
+    .then(() => {
+      console.log(`Topic ${topicName} deleted.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_delete_topic]
 }
-// [END pubsub_delete_topic]
 
-// [START pubsub_publish_message]
 function publishMessage(topicName, data) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_publish_message]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
 
-  // Create a publisher for the topic (which can include additional batching configuration)
-  const publisher = topic.publisher();
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const data = JSON.stringify({ foo: 'bar' });
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
-  return publisher.publish(dataBuffer).then(results => {
-    const messageId = results[0];
 
-    console.log(`Message ${messageId} published.`);
-
-    return messageId;
-  });
+  pubsub
+    .topic(topicName)
+    .publisher()
+    .publish(dataBuffer)
+    .then(results => {
+      const messageId = results[0];
+      console.log(`Message ${messageId} published.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_publish_message]
 }
-// [END pubsub_publish_message]
 
-// [START pubsub_publisher_batched_settings]
 function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_publisher_batched_settings]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
 
-  // Create a publisher for the topic (with additional batching configuration)
-  const publisher = topic.publisher({
-    batching: {
-      maxMessages: maxMessages,
-      maxMilliseconds: maxWaitTime,
-    },
-  });
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const data = JSON.stringify({ foo: 'bar' });
+  // const maxMessages = 10;
+  // const maxWaitTime = 10000;
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
-  return publisher.publish(dataBuffer).then(results => {
-    const messageId = results[0];
 
-    console.log(`Message ${messageId} published.`);
-
-    return messageId;
-  });
+  pubsub
+    .topic(topicName)
+    .publisher({
+      batching: {
+        maxMessages: maxMessages,
+        maxMilliseconds: maxWaitTime,
+      },
+    })
+    .publish(dataBuffer)
+    .then(results => {
+      const messageId = results[0];
+      console.log(`Message ${messageId} published.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_publisher_batched_settings]
 }
-// [END pubsub_publisher_batched_settings]
 
 let publishCounterValue = 1;
 
@@ -134,64 +177,88 @@ function setPublishCounterValue(value) {
   publishCounterValue = value;
 }
 
-// [START pubsub_publish_ordered_message]
 function publishOrderedMessage(topicName, data) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_publish_ordered_message]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
 
-  // Create a publisher for the topic (which can include additional batching configuration)
-  const publisher = topic.publisher();
+  /**
+   * TODO(developer): Uncomment the following lines to run the sample.
+   */
+  // const topicName = 'your-topic';
+  // const data = JSON.stringify({ foo: 'bar' });
 
-  // Creates message parameters
+  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
+
   const attributes = {
     // Pub/Sub messages are unordered, so assign an order ID and manually order messages
     counterId: `${getPublishCounterValue()}`,
   };
 
   // Publishes the message
-  return publisher.publish(dataBuffer, attributes).then(results => {
-    const messageId = results;
+  return pubsub
+    .topic(topicName)
+    .publisher()
+    .publish(dataBuffer, attributes)
+    .then(results => {
+      const messageId = results;
 
-    // Update the counter value
-    setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
+      // Update the counter value
+      setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
 
-    console.log(`Message ${messageId} published.`);
+      console.log(`Message ${messageId} published.`);
 
-    return messageId;
-  });
+      return messageId;
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_publish_ordered_message]
 }
-// [END pubsub_publish_ordered_message]
 
-// [START pubsub_get_topic_policy]
 function getTopicPolicy(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_get_topic_policy]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
   // Retrieves the IAM policy for the topic
-  return topic.iam.getPolicy().then(results => {
-    const policy = results[0];
-
-    console.log(`Policy for topic: %j.`, policy.bindings);
-
-    return policy;
-  });
+  pubsub
+    .topic(topicName)
+    .iam.getPolicy()
+    .then(results => {
+      const policy = results[0];
+      console.log(`Policy for topic: %j.`, policy.bindings);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_get_topic_policy]
 }
-// [END pubsub_get_topic_policy]
 
-// [START pubsub_set_topic_policy]
 function setTopicPolicy(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_set_topic_policy]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
   // The new IAM policy
   const newPolicy = {
@@ -210,23 +277,31 @@ function setTopicPolicy(topicName) {
   };
 
   // Updates the IAM policy for the topic
-  return topic.iam.setPolicy(newPolicy).then(results => {
-    const updatedPolicy = results[0];
-
-    console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
-
-    return updatedPolicy;
-  });
+  pubsub
+    .topic(topicName)
+    .iam.setPolicy(newPolicy)
+    .then(results => {
+      const updatedPolicy = results[0];
+      console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_set_topic_policy]
 }
-// [END pubsub_set_topic_policy]
 
-// [START pubsub_test_topic_permissions]
 function testTopicPermissions(topicName) {
-  // Instantiates a client
-  const pubsub = PubSub();
+  // [START pubsub_test_topic_permissions]
+  // Imports the Google Cloud client library
+  const PubSub = require(`@google-cloud/pubsub`);
 
-  // References an existing topic, e.g. "my-topic"
-  const topic = pubsub.topic(topicName);
+  // Creates a client
+  const pubsub = new PubSub();
+
+  /**
+   * TODO(developer): Uncomment the following line to run the sample.
+   */
+  // const topicName = 'your-topic';
 
   const permissionsToTest = [
     `pubsub.topics.attachSubscription`,
@@ -235,15 +310,18 @@ function testTopicPermissions(topicName) {
   ];
 
   // Tests the IAM policy for the specified topic
-  return topic.iam.testPermissions(permissionsToTest).then(results => {
-    const permissions = results[0];
-
-    console.log(`Tested permissions for topic: %j`, permissions);
-
-    return permissions;
-  });
+  pubsub
+    .topic(topicName)
+    .iam.testPermissions(permissionsToTest)
+    .then(results => {
+      const permissions = results[0];
+      console.log(`Tested permissions for topic: %j`, permissions);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END pubsub_test_topic_permissions]
 }
-// [END pubsub_test_topic_permissions]
 
 module.exports = {publishOrderedMessage};
 

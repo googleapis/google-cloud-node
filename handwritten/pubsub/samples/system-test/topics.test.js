@@ -209,7 +209,7 @@ test.serial(`should test permissions for a topic`, async t => {
 test.serial(`should delete a topic`, async t => {
   t.plan(1);
   const output = await tools.runAsync(`${cmd} delete ${topicNameOne}`, cwd);
-  t.is(output, `Topic ${fullTopicNameOne} deleted.`);
+  t.is(output, `Topic ${topicNameOne} deleted.`);
   await tools
     .tryTest(async assert => {
       const [topics] = await pubsub.getTopics();
