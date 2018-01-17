@@ -1,21 +1,19 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google BigQuery Data Transfer Service: Node.js Client](https://github.com/GoogleCloudPlatform/google-cloud-node)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-bigquery-data-transfer.svg)](https://greenkeeper.io/)
+# [Google BigQuery Data Transfer Service: Node.js Client](https://github.com/googleapis/nodejs-bigquery-data-transfer)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/GoogleCloudPlatform/google-cloud-node.svg?style=flat)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?branch=master&svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
-[![codecov](https://img.shields.io/codecov/c/github/GoogleCloudPlatform/google-cloud-node/master.svg?style=flat)](https://codecov.io/gh/GoogleCloudPlatform/google-cloud-node)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-bigquery-data-transfer.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-bigquery-data-transfer)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-bigquery-data-transfer?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-bigquery-data-transfer)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-bigquery-data-transfer/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-bigquery-data-transfer)
 
 > Node.js idiomatic client for [BigQuery Data Transfer Service][product-docs].
 
-The [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/) transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.
+The [BigQuery Data Transfer Service]({{docs_url}}) transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.
 
 
 * [BigQuery Data Transfer Service Node.js Client API Reference][client-docs]
-* [github.com/GoogleCloudPlatform/google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-node)
+* [github.com/googleapis/nodejs-bigquery-data-transfer](https://github.com/googleapis/nodejs-bigquery-data-transfer)
 * [BigQuery Data Transfer Service Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -80,14 +78,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-bigquery-data-transfer/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-bigquery-data-transfer/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/datatransfer/latest/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest/
 [product-docs]: https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/
 [shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
