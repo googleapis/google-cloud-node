@@ -3,11 +3,5 @@
   "requiresProjectId": true,
   "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest/",
   "release_quality": "alpha",
-  "_product": "bigquery_data_transfer",
-  "id": "bigquery_data_transfer",
-  "name": "Google BigQuery Data Transfer Service",
-  "short_name": "BigQuery Data Transfer Service",
-  "docs_url": "https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/",
-  "description": "The [BigQuery Data Transfer Service]({{docs_url}}) transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.",
-  "api_id": "bigquerydatatransfer.googleapis.com"
+  "product": "bigquerydatatransfer"
 }
