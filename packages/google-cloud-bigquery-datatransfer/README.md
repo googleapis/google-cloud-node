@@ -9,7 +9,7 @@
 
 > Node.js idiomatic client for [BigQuery Data Transfer Service][product-docs].
 
-The [BigQuery Data Transfer Service]({{docs_url}}) transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.
+The [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/) transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.
 
 
 * [BigQuery Data Transfer Service Node.js Client API Reference][client-docs]
