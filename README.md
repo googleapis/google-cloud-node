@@ -564,7 +564,7 @@ topic.createSubscription('subscription-name', function(err, subscription) {
 ```
 
 
-## Cloud Spanner (Beta)
+## Cloud Spanner (GA)
 
 - [API Documentation][gcloud-spanner-docs]
 - [Official Documentation][cloud-spanner-docs]
