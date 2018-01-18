@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-declare namespace NodeJS {
-  export interface Global {
-    _google_trace_agent: any;
-  }
-}
-
-interface Options {
+export interface Options {
   /**
    * The default log level. Winston will filter messages with a severity lower
    * than this.
@@ -104,12 +98,12 @@ interface Options {
 
 }
 
-interface MonitoredResource {
+export interface MonitoredResource {
   type?: string;
   labels?: {[key: string]: string};
 }
 
-interface ServiceContext {
+export interface ServiceContext {
   /**
    * An identifier of the service, such as the name of the executable, job, or
    * Google App Engine service name.
@@ -121,25 +115,25 @@ interface ServiceContext {
   version?: string;
 }
 
-interface Credentials {
+export interface Credentials {
   client_email: string;
   private_key: string;
 }
 
-interface StackdriverData {
+export interface StackdriverData {
   serviceContext?: ServiceContext;
   message?: string;
   metadata?: Metadata;
 }
 
-interface StackdriverEntryMetadata {
+export interface StackdriverEntryMetadata {
   resource?: MonitoredResource;
   httpRequest?: HttpRequest;
   labels?: {};
   trace?: {};
 }
 
-interface StackdriverLog {
+export interface StackdriverLog {
   critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
   debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
   emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
@@ -152,7 +146,7 @@ interface StackdriverLog {
   entry: (metadata: {}, data: {}|string) => StackdriverEntry;
 }
 
-interface StackdriverLogging {
+export interface StackdriverLogging {
   Entry?: StackdriverEntry;
   Log?: StackdriverLog;
   Logging?: StackdriverLogging;
@@ -160,20 +154,20 @@ interface StackdriverLogging {
   // define additional properties and methods.
 }
 
-interface Metadata {
+export interface Metadata {
   stack?: string;
   httpRequest?: HttpRequest;
   labels?: {}
 }
 
-interface StackdriverEntry {
+export interface StackdriverEntry {
   constructor: (metadata?: StackdriverEntryMetadata, data?: {message: string}| string) => StackdriverEntry;
   data?: {message: string}|string;
   metadata?: StackdriverEntryMetadata;
 }
 type LogWriteResponse = {}[];
 
-interface HttpRequest {
+export interface HttpRequest {
   requestMethod: string;
   requestUrl: string;
   requestSize: string;

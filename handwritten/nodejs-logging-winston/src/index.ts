@@ -18,6 +18,8 @@ import * as is from '@sindresorhus/is';
 import * as util from 'util';
 import * as winston from 'winston';
 
+import * as types from './types/core';
+
 const logging = require('@google-cloud/logging');
 const mapValues = require('lodash.mapvalues');
 
@@ -77,11 +79,11 @@ export class LoggingWinston extends winston.Transport {
   private inspectMetadata: boolean;
   private levels: {[name: string]: number};
   private stackdriverLog:
-      StackdriverLog;  // TODO: add type for @google-cloud/logging
-  private resource: MonitoredResource|undefined;
-  private serviceContext: ServiceContext|undefined;
+      types.StackdriverLog;  // TODO: add type for @google-cloud/logging
+  private resource: types.MonitoredResource|undefined;
+  private serviceContext: types.ServiceContext|undefined;
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
-  constructor(options: Options) {
+  constructor(options?: types.Options) {
     options = Object.assign(
         {
           scopes: ['https://www.googleapis.com/auth/logging.write'],
@@ -102,7 +104,7 @@ export class LoggingWinston extends winston.Transport {
     this.serviceContext = options.serviceContext;
   }
 
-  log(levelName: string, msg: string, metadata: Metadata|{},
+  log(levelName: string, msg: string, metadata: types.Metadata|{},
       callback: (err: Error, apiResponse: {}) => void) {
     if (is.default.function_(metadata)) {
       callback = metadata as (err: Error, apiResponse: {}) => void;
@@ -116,11 +118,11 @@ export class LoggingWinston extends winston.Transport {
     const levelCode = this.levels[levelName];
     const stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
-    const entryMetadata: StackdriverEntryMetadata = {
+    const entryMetadata: types.StackdriverEntryMetadata = {
       resource: this.resource,
     };
 
-    const data: StackdriverData = {};
+    const data: types.StackdriverData = {};
 
     // Stackdriver Logs Viewer picks up the summary line from the `message`
     // property of the jsonPayload.
@@ -134,8 +136,8 @@ export class LoggingWinston extends winston.Transport {
     // property on an object) as that works is accepted by Error Reporting in
     // for more resource types.
     //
-    if (metadata && (metadata as Metadata).stack) {
-      msg += (msg ? ' ' : '') + (metadata as Metadata).stack;
+    if (metadata && (metadata as types.Metadata).stack) {
+      msg += (msg ? ' ' : '') + (metadata as types.Metadata).stack;
       data.serviceContext = this.serviceContext;
     }
     data.message = msg;
@@ -150,17 +152,17 @@ export class LoggingWinston extends winston.Transport {
       // Note that the httpRequest field must properly validate as HttpRequest
       // proto message, or the log entry would be rejected by the API. We no do
       // validation here.
-      if ((metadata as Metadata).httpRequest) {
-        entryMetadata.httpRequest = (metadata as Metadata).httpRequest;
-        delete (data.metadata as Metadata).httpRequest;
+      if ((metadata as types.Metadata).httpRequest) {
+        entryMetadata.httpRequest = (metadata as types.Metadata).httpRequest;
+        delete (data.metadata as types.Metadata).httpRequest;
       }
 
       // If the metadata contains a labels property, promote it to the entry
       // metadata.
       // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
-      if ((metadata as Metadata).labels) {
-        entryMetadata.labels = (metadata as Metadata).labels;
-        delete (data.metadata as Metadata).labels;
+      if ((metadata as types.Metadata).labels) {
+        entryMetadata.labels = (metadata as types.Metadata).labels;
+        delete (data.metadata as types.Metadata).labels;
       }
     }
 
