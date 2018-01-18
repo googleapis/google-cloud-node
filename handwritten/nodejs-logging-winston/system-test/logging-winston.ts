@@ -17,6 +17,8 @@
 import * as assert from 'assert';
 import * as winston from 'winston';
 
+import * as types from '../src/types/core';
+
 const logging = require('@google-cloud/logging')();
 const LoggingWinston = require('../src/index').LoggingWinston;
 
@@ -34,7 +36,7 @@ describe('LoggingWinston', () => {
       {
         args: ['first'],
         level: 'info',
-        verify: (entry: StackdriverEntry) => {
+        verify: (entry: types.StackdriverEntry) => {
           assert.deepStrictEqual(entry.data, {
             message: 'first',
             metadata: {},
@@ -45,7 +47,7 @@ describe('LoggingWinston', () => {
       {
         args: ['second'],
         level: 'info',
-        verify: (entry: StackdriverEntry) => {
+        verify: (entry: types.StackdriverEntry) => {
           assert.deepStrictEqual(entry.data, {
             message: 'second',
             metadata: {},
@@ -56,7 +58,7 @@ describe('LoggingWinston', () => {
       {
         args: ['third', {testTimestamp}],
         level: 'info',
-        verify: (entry: StackdriverEntry) => {
+        verify: (entry: types.StackdriverEntry) => {
           assert.deepStrictEqual(entry.data, {
             message: 'third',
             metadata: {
@@ -69,7 +71,7 @@ describe('LoggingWinston', () => {
       {
         args: [new Error('forth')],
         level: 'error',
-        verify: (entry: StackdriverEntry) => {
+        verify: (entry: types.StackdriverEntry) => {
           assert((entry.data as {
                    message: string
                  }).message.startsWith('Error: forth'));
@@ -79,7 +81,7 @@ describe('LoggingWinston', () => {
       {
         args: ['fifth message', new Error('fifth')],
         level: 'error',
-        verify: (entry: StackdriverEntry) => {
+        verify: (entry: types.StackdriverEntry) => {
           assert((entry.data as {
                    message: string
                  }).message.startsWith('fifth message Error: fifth'));
@@ -99,7 +101,7 @@ describe('LoggingWinston', () => {
                 {
                   pageSize: testData.length,
                 },
-                (err: Error, entries: StackdriverEntry[]) => {
+                (err: Error, entries: types.StackdriverEntry[]) => {
                   assert.ifError(err);
                   assert.strictEqual(entries.length, testData.length);
                   entries.reverse().forEach((entry, index) => {
