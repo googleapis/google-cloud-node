@@ -22,7 +22,7 @@ If this doesn't describe your environment, the `config` object expects the follo
 
 2. `projectId`
 
-  If you wish, you can set an environment variable (`GCLOUD_PROJECT`) in place of specifying this inline. Or, if you have provided a service account JSON key file as the `config.keyFilename` property explained above, your project ID will be detected automatically.
+  If you wish, you can set an environment variable (`GOOGLE_CLOUD_PROJECT`) in place of specifying this inline. Or, if you have provided a service account JSON key file as the `config.keyFilename` property explained above, your project ID will be detected automatically.
 
 **Note**: When using a .pem or .p12 key file, `config.email` is also required.
 
