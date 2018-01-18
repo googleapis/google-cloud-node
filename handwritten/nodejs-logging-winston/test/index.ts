@@ -18,14 +18,16 @@ import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import * as nodeutil from 'util';
 
+import * as types from '../src/types/core';
+
 const util = require('@google-cloud/common').util;
 
 describe('logging-winston', () => {
-  let fakeLogInstance: StackdriverLogging;
-  let fakeLoggingOptions_: Options|null;
+  let fakeLogInstance: types.StackdriverLogging;
+  let fakeLoggingOptions_: types.Options|null;
   let fakeLogName_: string|null;
 
-  function fakeLogging(options: Options) {
+  function fakeLogging(options: types.Options) {
     fakeLoggingOptions_ = options;
     return {
       log: (logName: string) => {
@@ -57,7 +59,7 @@ describe('logging-winston', () => {
   // tslint:disable-next-line:no-any
   let loggingWinston: any;
 
-  const OPTIONS: Options = {
+  const OPTIONS: types.Options = {
     logName: 'log-name',
     levels: {
       one: 1,
@@ -84,7 +86,7 @@ describe('logging-winston', () => {
     });
 
     it('should default to logging.write scope', () => {
-      assert.deepEqual((fakeLoggingOptions_ as Options).scopes, [
+      assert.deepEqual((fakeLoggingOptions_ as types.Options).scopes, [
         'https://www.googleapis.com/auth/logging.write',
       ]);
     });
@@ -92,7 +94,7 @@ describe('logging-winston', () => {
     it('should initialize Log instance using provided scopes', () => {
       const fakeScope = 'fake scope';
 
-      const optionsWithScopes: Options = Object.assign({}, OPTIONS);
+      const optionsWithScopes: types.Options = Object.assign({}, OPTIONS);
       optionsWithScopes.scopes = fakeScope;
 
       const loggingWinston =
@@ -145,7 +147,7 @@ describe('logging-winston', () => {
 
     it('should localize Log instance using default name', () => {
       const loggingOptions = Object.assign({}, fakeLoggingOptions_);
-      delete (loggingOptions as Options).scopes;
+      delete (loggingOptions as types.Options).scopes;
 
       assert.deepEqual(loggingOptions, OPTIONS);
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
@@ -161,7 +163,7 @@ describe('logging-winston', () => {
           new loggingWinstonLib.LoggingWinston(optionsWithLogName);
 
       const loggingOptions = Object.assign({}, fakeLoggingOptions_);
-      delete (loggingOptions as Options).scopes;
+      delete (loggingOptions as types.Options).scopes;
 
       assert.deepEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
@@ -211,7 +213,8 @@ describe('logging-winston', () => {
 
     it('should properly create an entry', (done) => {
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepEqual(entryMetadata, {
               resource: loggingWinston.resource,
             });
@@ -231,7 +234,8 @@ describe('logging-winston', () => {
       };
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(data, {
               message: MESSAGE + ' ' + error.stack,
               metadata: error,
@@ -249,7 +253,8 @@ describe('logging-winston', () => {
       };
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(data, {
               message: error.stack,
               metadata: error,
@@ -263,7 +268,8 @@ describe('logging-winston', () => {
 
     it('should not require metadata', (done) => {
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepEqual(entryMetadata, {
               resource: loggingWinston.resource,
             });
@@ -281,7 +287,8 @@ describe('logging-winston', () => {
       loggingWinston.inspectMetadata = true;
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             const expectedWinstonMetadata = {};
 
             for (const prop of Object.keys(METADATA)) {
@@ -310,7 +317,8 @@ describe('logging-winston', () => {
           METADATA);
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
               httpRequest: HTTP_REQUEST,
@@ -329,7 +337,8 @@ describe('logging-winston', () => {
       const metadataWithLabels = Object.assign({labels: LABELS}, METADATA);
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
               labels: LABELS,
@@ -352,7 +361,8 @@ describe('logging-winston', () => {
       (metadataWithTrace as any)[loggingTraceKey] = 'trace1';
 
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
               trace: 'trace1',
@@ -377,7 +387,8 @@ describe('logging-winston', () => {
         },
       };
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
               trace: 'projects/project1/traces/trace1',
@@ -396,7 +407,8 @@ describe('logging-winston', () => {
 
     it('should leave out trace metadata if trace unavailable', () => {
       loggingWinston.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata, data: StackdriverData) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
             });
@@ -452,7 +464,7 @@ describe('logging-winston', () => {
       };
 
       loggingWinston.stackdriverLog[STACKDRIVER_LEVEL] =
-          (entry_: StackdriverEntry, callback: () => void) => {
+          (entry_: types.StackdriverEntry, callback: () => void) => {
             assert.strictEqual(entry_, entry);
             callback();  // done()
           };
