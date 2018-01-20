@@ -17,6 +17,8 @@
 import * as assert from 'assert';
 import * as bunyan from 'bunyan';
 
+import * as types from '../src/types/core';
+
 const logging = require('@google-cloud/logging')();
 const loggingBunyan = require('../src/index').LoggingBunyan();
 
@@ -39,19 +41,22 @@ describe('LoggingBunyan', () => {
       {
         args: ['first'],
         level: 'info',
-        verify: (entry: StackdriverEntry) => {
-          assert.strictEqual((entry.data as StackdriverData).message, 'first');
-          assert.strictEqual((entry.data as StackdriverData).pid, process.pid);
+        verify: (entry: types.StackdriverEntry) => {
+          assert.strictEqual(
+              (entry.data as types.StackdriverData).message, 'first');
+          assert.strictEqual(
+              (entry.data as types.StackdriverData).pid, process.pid);
         },
       },
 
       {
         args: [new Error('second')],
         level: 'error',
-        verify: (entry: StackdriverEntry) => {
-          assert(((entry.data as StackdriverData).message as string)
+        verify: (entry: types.StackdriverEntry) => {
+          assert(((entry.data as types.StackdriverData).message as string)
                      .startsWith('Error: second'));
-          assert.strictEqual((entry.data as StackdriverData).pid, process.pid);
+          assert.strictEqual(
+              (entry.data as types.StackdriverData).pid, process.pid);
         },
       },
 
@@ -63,10 +68,12 @@ describe('LoggingBunyan', () => {
           'third',
         ],
         level: 'info',
-        verify: (entry: StackdriverEntry) => {
-          assert.strictEqual((entry.data as StackdriverData).message, 'third');
-          assert.strictEqual((entry.data as StackdriverData).pid, process.pid);
-          assert.deepStrictEqual((entry.data as StackdriverData).test, {
+        verify: (entry: types.StackdriverEntry) => {
+          assert.strictEqual(
+              (entry.data as types.StackdriverData).message, 'third');
+          assert.strictEqual(
+              (entry.data as types.StackdriverData).pid, process.pid);
+          assert.deepStrictEqual((entry.data as types.StackdriverData).test, {
             circular: '[Circular]',
           });
         },
@@ -81,11 +88,14 @@ describe('LoggingBunyan', () => {
         'earliest',
       ],
       level: 'info',
-      verify: (entry: StackdriverEntry) => {
-        assert.strictEqual((entry.data as StackdriverData).message, 'earliest');
-        assert.strictEqual((entry.data as StackdriverData).pid, process.pid);
+      verify: (entry: types.StackdriverEntry) => {
         assert.strictEqual(
-            ((entry.metadata as StackdriverEntryMetadata).timestamp as Date)
+            (entry.data as types.StackdriverData).message, 'earliest');
+        assert.strictEqual(
+            (entry.data as types.StackdriverData).pid, process.pid);
+        assert.strictEqual(
+            ((entry.metadata as types.StackdriverEntryMetadata).timestamp as
+             Date)
                 .toString(),
             timestamp.toString());
       },
@@ -118,7 +128,7 @@ describe('LoggingBunyan', () => {
           {
             pageSize: testData.length,
           },
-          (err: Error, entries: StackdriverEntry[]) => {
+          (err: Error, entries: types.StackdriverEntry[]) => {
             assert.ifError(err);
             assert.strictEqual(entries.length, testData.length);
 

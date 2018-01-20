@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-declare namespace NodeJS {
-  export interface Global {
-    _google_trace_agent: any;
-  }
-}
-
-interface Options {
+export interface Options {
   /**
    * The name of the log that will receive messages written to this bunyan
    * stream. Default: `bunyan_Log`.
@@ -79,12 +73,12 @@ interface Options {
   promise?: {}
 }
 
-interface MonitoredResource {
+export interface MonitoredResource {
   type?: string;
   labels?: {[key: string]: string};
 }
 
-interface ServiceContext {
+export interface ServiceContext {
   /**
    * An identifier of the service, such as the name of the executable, job, or
    * Google App Engine service name.
@@ -96,7 +90,7 @@ interface ServiceContext {
   version?: string;
 }
 
-interface StackdriverLog {
+export interface StackdriverLog {
   critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
@@ -107,12 +101,12 @@ interface StackdriverLog {
   write: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   alert: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   entry: (metadata: {}, data: {}|string) => StackdriverEntry
-}interface Credentials {
+}export interface Credentials {
   client_email?: string;
   private_key?: string;
 }
 
-interface StackdriverEntryMetadata {
+export interface StackdriverEntryMetadata {
   resource?: MonitoredResource,
   timestamp?: Date,
   severity?: string, // figure out the correct type later
@@ -121,7 +115,7 @@ interface StackdriverEntryMetadata {
   trace?: {}
 }
 
-interface StackdriverLog {
+export interface StackdriverLog {
   critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
   emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
@@ -134,7 +128,7 @@ interface StackdriverLog {
   entry: (metadata: {}, data: {}|string) => StackdriverEntry
 }
 
-interface StackdriverLogging {
+export interface StackdriverLogging {
   Entry?: StackdriverEntry,
   Log?: StackdriverLog,
   Logging?: StackdriverLogging,
@@ -142,13 +136,13 @@ interface StackdriverLogging {
   // define additional properties and methods.
 }
 
-interface StackdriverEntry {
+export interface StackdriverEntry {
   constructor: (metadata?: StackdriverEntryMetadata, data?: {message: string}| string) => StackdriverEntry,
   data?: StackdriverData|string,
   metadata?: StackdriverEntryMetadata
 }
 
-interface StackdriverData {
+export interface StackdriverData {
   serviceContext?: ServiceContext;
   message?: string;
   metadata?: Metadata;
@@ -156,14 +150,14 @@ interface StackdriverData {
   test?: {circular?: string};
 }
 
-interface Metadata {
+export interface Metadata {
   stack?: string;
   httpRequest?: HttpRequest;
 }
 
 type LogWriteResponse = {}[];
 
-interface HttpRequest {
+export interface HttpRequest {
   requestMethod: string,
   requestUrl: string,
   requestSize: string,
@@ -181,7 +175,7 @@ interface HttpRequest {
   protocol: string,
 }
 
-interface BunyanLogRecord {
+export interface BunyanLogRecord {
   message?: string,
   msg?: string,
   err?: Error,
@@ -192,7 +186,7 @@ interface BunyanLogRecord {
   labels?: {}
 }
 
-interface StreamResponse {
+export interface StreamResponse {
   level: string|number,
   type: string,
   stream: {}

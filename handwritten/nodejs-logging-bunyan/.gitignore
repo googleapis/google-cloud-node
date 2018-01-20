@@ -7,6 +7,7 @@
 .nyc_output
 build
 docs/
+google-cloud-logging-bunyan-*.tgz
 out/
 system-test/*key.json
 system-test/secrets.js

@@ -18,6 +18,8 @@ import {Writable} from 'stream';
 import * as util from 'util';
 const logging = require('@google-cloud/logging');
 
+import * as types from './types/core';
+
 // Map of Stackdriver logging levels.
 const BUNYAN_TO_STACKDRIVER: Map<number, string> = new Map([
   [60, 'CRITICAL'],
@@ -61,11 +63,11 @@ function getCurrentTraceFromAgent() {
 
 export class LoggingBunyan extends Writable {
   private logName: string;
-  private resource: MonitoredResource|undefined;
-  private serviceContext: ServiceContext|undefined;
+  private resource: types.MonitoredResource|undefined;
+  private serviceContext: types.ServiceContext|undefined;
   private stackdriverLog:
-      StackdriverLog;  // TODO: add type for @google-cloud/logging
-  constructor(options: Options) {
+      types.StackdriverLog;  // TODO: add type for @google-cloud/logging
+  constructor(options?: types.Options) {
     options = options || {};
     super({objectMode: true});
     this.logName = options.logName || 'bunyan_log';
@@ -80,7 +82,7 @@ export class LoggingBunyan extends Writable {
    * Convenience method that Builds a bunyan stream object that you can put in
    * the bunyan streams list.
    */
-  stream(level: string|number): StreamResponse {
+  stream(level: string|number): types.StreamResponse {
     return {
       level,
       type: 'raw',
@@ -91,7 +93,7 @@ export class LoggingBunyan extends Writable {
   /**
    * Format a bunyan record into a Stackdriver log entry.
    */
-  private formatEntry_(record: string|BunyanLogRecord) {
+  private formatEntry_(record: string|types.BunyanLogRecord) {
     if (typeof record === 'string') {
       throw new Error(
           '@google-cloud/logging-bunyan only works as a raw bunyan stream type.');
@@ -116,7 +118,7 @@ export class LoggingBunyan extends Writable {
       }
     }
 
-    const entryMetadata: StackdriverEntryMetadata = {
+    const entryMetadata: types.StackdriverEntryMetadata = {
       resource: this.resource,
       timestamp: record.time,
       // BUNYAN_TO_STACKDRIVER does not have index signature.
@@ -164,8 +166,8 @@ export class LoggingBunyan extends Writable {
    * By the time the Writable stream buffer gets flushed and _write gets called
    * we may well be in a different continuation.
    */
-  write(record: BunyanLogRecord, callback?: Function): boolean;
-  write(record: BunyanLogRecord, encoding?: string, callback?: Function):
+  write(record: types.BunyanLogRecord, callback?: Function): boolean;
+  write(record: types.BunyanLogRecord, encoding?: string, callback?: Function):
       boolean;
   // Writable.write used 'any' in function signature.
   // tslint:disable-next-line:no-any
@@ -200,7 +202,8 @@ export class LoggingBunyan extends Writable {
    * Relay a log entry to the logging agent. This is called by bunyan through
    * Writable#write.
    */
-  _write(record: BunyanLogRecord, encoding?: string, callback?: Function) {
+  _write(
+      record: types.BunyanLogRecord, encoding?: string, callback?: Function) {
     const entry = this.formatEntry_(record);
     this.stackdriverLog.write(entry, callback);
   }

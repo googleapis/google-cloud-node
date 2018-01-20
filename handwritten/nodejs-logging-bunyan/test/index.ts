@@ -17,17 +17,19 @@ import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import {LoggingBunyan} from '../src/index';
 
+import * as types from '../src/types/core';
+
 describe('logging-bunyan', () => {
   let fakeLogInstance: {entry?: () => void, write?: () => void} = {};
-  let fakeLoggingOptions_: Options|null;
+  let fakeLoggingOptions_: types.Options|null;
   let fakeLogName_: string|null;
-  let fakeLogOptions_: Options;
-  let fakeWritableOptions_: Options;
+  let fakeLogOptions_: types.Options;
+  let fakeWritableOptions_: types.Options;
 
-  function fakeLogging(options: Options) {
+  function fakeLogging(options: types.Options) {
     fakeLoggingOptions_ = options;
     return {
-      log(logName: string, options: Options) {
+      log(logName: string, options: types.Options) {
         fakeLogName_ = logName;
         fakeLogOptions_ = options;
         return fakeLogInstance;
@@ -35,7 +37,7 @@ describe('logging-bunyan', () => {
     };
   }
 
-  function FakeWritable(options: Options) {
+  function FakeWritable(options: types.Options) {
     fakeWritableOptions_ = options;
   }
 
@@ -142,8 +144,8 @@ describe('logging-bunyan', () => {
 
     it('should properly create an entry', (done) => {
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record: StackdriverEntryMetadata) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: types.StackdriverEntryMetadata) => {
             assert.deepEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
@@ -161,8 +163,8 @@ describe('logging-bunyan', () => {
       const recordWithMessage = Object.assign({message: 'msg'}, RECORD);
 
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record: StackdriverEntryMetadata) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: types.StackdriverEntryMetadata) => {
             assert.deepStrictEqual(record, recordWithMessage);
             done();
           };
@@ -191,8 +193,8 @@ describe('logging-bunyan', () => {
           RECORD);
 
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record_: StackdriverEntryMetadata) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record_: types.StackdriverEntryMetadata) => {
             assert.deepStrictEqual(record_, expectedRecord);
             done();
           };
@@ -212,8 +214,8 @@ describe('logging-bunyan', () => {
           RECORD);
 
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record_: StackdriverEntryMetadata) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record_: types.StackdriverEntryMetadata) => {
             assert.deepStrictEqual(record_, record);
             done();
           };
@@ -232,8 +234,8 @@ describe('logging-bunyan', () => {
           RECORD);
 
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record: string|BunyanLogRecord) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: string|types.BunyanLogRecord) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
@@ -254,8 +256,8 @@ describe('logging-bunyan', () => {
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_TRACE_KEY] = 'trace1';
 
       loggingBunyan.stackdriverLog.entry =
-          (entryMetadata: StackdriverEntryMetadata,
-           record: string|BunyanLogRecord) => {
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: string|types.BunyanLogRecord) => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
@@ -420,7 +422,7 @@ describe('logging-bunyan', () => {
     });
 
     it('should format the record', (done) => {
-      loggingBunyan.formatEntry_ = (record: string|BunyanLogRecord) => {
+      loggingBunyan.formatEntry_ = (record: string|types.BunyanLogRecord) => {
         assert.strictEqual(record, RECORD);
         done();
       };
@@ -456,7 +458,7 @@ describe('logging-bunyan', () => {
 
     it('should format the records', (done) => {
       let numFormatted = 0;
-      loggingBunyan.formatEntry_ = (record: string|BunyanLogRecord) => {
+      loggingBunyan.formatEntry_ = (record: string|types.BunyanLogRecord) => {
         assert.strictEqual(record, RECORD);
         if (++numFormatted === RECORDS.length) {
           done();
