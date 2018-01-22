@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <memory>
 #include "v8-profiler.h"
 #include "nan.h"
 
@@ -74,10 +75,10 @@ NAN_METHOD(StopSamplingHeapProfiler) {
 }
 
 NAN_METHOD(GetAllocationProfile) {
-  AllocationProfile* profile = info.GetIsolate()->GetHeapProfiler()->GetAllocationProfile();
+  std::unique_ptr<v8::AllocationProfile> profile(
+    info.GetIsolate()->GetHeapProfiler()->GetAllocationProfile());
   AllocationProfile::Node* root = profile->GetRootNode();
   info.GetReturnValue().Set(TranslateAllocationProfile(root));
-  free(profile);
 }
 
 NAN_MODULE_INIT(InitAll) {
