@@ -63,6 +63,7 @@ var fakeUtil = extend({}, util, {
     assert.deepEqual(options.exclude, ['bucket', 'channel']);
   },
 });
+var originalFakeUtil = extend(true, {}, fakeUtil);
 
 describe('Storage', function() {
   var PROJECT_ID = 'project-id';
@@ -83,6 +84,7 @@ describe('Storage', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, originalFakeUtil);
     storage = new Storage({projectId: PROJECT_ID});
   });
 
@@ -99,23 +101,24 @@ describe('Storage', function() {
       assert(promisified);
     });
 
-    it('should normalize the arguments', function() {
-      var normalizeArguments = fakeUtil.normalizeArguments;
-      var normalizeArgumentsCalled = false;
-      var fakeOptions = {projectId: PROJECT_ID};
-      var fakeContext = {};
+    it('should work without new', function() {
+      assert.doesNotThrow(function() {
+        Storage({projectId: PROJECT_ID});
+      });
+    });
 
-      fakeUtil.normalizeArguments = function(context, options) {
+    it('should normalize the arguments', function() {
+      var normalizeArgumentsCalled = false;
+      var options = {};
+
+      fakeUtil.normalizeArguments = function(context, options_) {
         normalizeArgumentsCalled = true;
-        assert.strictEqual(context, fakeContext);
-        assert.strictEqual(options, fakeOptions);
-        return options;
+        assert.strictEqual(options_, options);
+        return options_;
       };
 
-      Storage.call(fakeContext, fakeOptions);
-      assert(normalizeArgumentsCalled);
-
-      fakeUtil.normalizeArguments = normalizeArguments;
+      new Storage(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should inherit from Service', function() {

@@ -85,9 +85,10 @@ var File = require('./file.js');
  */
 function Storage(options) {
   if (!(this instanceof Storage)) {
-    options = common.util.normalizeArguments(this, options);
     return new Storage(options);
   }
+
+  options = common.util.normalizeArguments(this, options);
 
   var config = {
     baseUrl: 'https://www.googleapis.com/storage/v1',
