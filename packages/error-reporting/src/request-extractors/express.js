@@ -65,7 +65,7 @@ function expressRequestInformationExtractor(req, res) {
   }
 
   returnObject.setMethod(req.method)
-      .setUrl(req.url)
+      .setUrl(req.originalUrl)
       .setUserAgent(req.header('user-agent'))
       .setReferrer(req.header('referrer'))
       .setStatusCode(res.statusCode)
