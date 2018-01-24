@@ -94,7 +94,7 @@
     "lodash.pick": "^4.4.0",
     "lodash.random": "^3.2.0",
     "lodash.without": "^4.4.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.0.0",
     "nock": "^9.0.0",
     "nyc": "^11.3.0",
     "power-assert": "^1.4.4",
