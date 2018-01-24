@@ -244,5 +244,12 @@ jobs:
           name: Set NPM authentication.
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run:
-         name: Publish the module to npm.
-         command: npm publish
+          # This is needed because `npm publish` invokes `npm prepare`
+          # that invokes `npm run compile` to build the Javascript code.
+          # However, compilation cannot succeed if the build tools have
+          # not been installed.
+          name: Install modules and dependencies.
+          command: npm install
+      - run:
+          name: Publish the module to npm.
+          command: npm publish
