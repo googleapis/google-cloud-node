@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@google-cloud/error-reporting": "0.2.1",
-    "express": "4.15.4",
+    "express": "4.16.0",
     "yargs": "8.0.2"
   },
   "devDependencies": {
