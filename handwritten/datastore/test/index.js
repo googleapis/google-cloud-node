@@ -52,6 +52,7 @@ var fakeEntity = {
 };
 
 var fakeUtil = extend({}, util);
+var originalFakeUtil = extend(true, {}, fakeUtil);
 
 var googleAutoAuthOverride;
 function fakeGoogleAutoAuth() {
@@ -116,6 +117,8 @@ describe('Datastore', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, originalFakeUtil);
+
     createInsecureOverride = null;
     googleAutoAuthOverride = null;
 
@@ -143,23 +146,25 @@ describe('Datastore', function() {
   });
 
   describe('instantiation', function() {
+    it('should work without new', function() {
+      assert.doesNotThrow(function() {
+        Datastore({projectId: PROJECT_ID});
+      });
+    });
+
     it('should normalize the arguments', function() {
-      var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
-      var fakeContext = {};
+      var options = {};
 
       fakeUtil.normalizeArguments = function(context, options_, config) {
         normalizeArgumentsCalled = true;
-        assert.strictEqual(context, fakeContext);
-        assert.strictEqual(OPTIONS, options_);
+        assert.strictEqual(options_, options);
         assert.strictEqual(config.projectIdRequired, false);
         return options_;
       };
 
-      Datastore.call(fakeContext, OPTIONS);
-      assert(normalizeArgumentsCalled);
-
-      fakeUtil.normalizeArguments = normalizeArguments;
+      new Datastore(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should initialize an empty Client map', function() {

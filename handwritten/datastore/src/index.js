@@ -360,13 +360,12 @@ const gapic = Object.freeze({
  */
 function Datastore(options) {
   if (!(this instanceof Datastore)) {
-    options = common.util.normalizeArguments(this, options, {
-      projectIdRequired: false,
-    });
     return new Datastore(options);
   }
 
-  options = options || {};
+  options = common.util.normalizeArguments(this, options, {
+    projectIdRequired: false,
+  });
 
   this.clients_ = new Map();
   this.datastore = this;
