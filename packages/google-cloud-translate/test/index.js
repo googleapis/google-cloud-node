@@ -37,6 +37,7 @@ var fakeUtil = extend({}, util, {
     }
   },
 });
+var originalFakeUtil = extend(true, {}, fakeUtil);
 
 function FakeService() {
   this.calledWith_ = arguments;
@@ -60,6 +61,7 @@ describe('Translate', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, originalFakeUtil);
     makeRequestOverride = null;
 
     translate = new Translate(OPTIONS);
@@ -70,24 +72,25 @@ describe('Translate', function() {
       assert(promisified);
     });
 
-    it('should normalize the arguments', function() {
-      var normalizeArguments = fakeUtil.normalizeArguments;
-      var normalizeArgumentsCalled = false;
-      var fakeOptions = extend({}, OPTIONS);
-      var fakeContext = {};
+    it('should work without new', function() {
+      assert.doesNotThrow(function() {
+        Translate(OPTIONS);
+      });
+    });
 
-      fakeUtil.normalizeArguments = function(context, options, cfg) {
+    it('should normalize the arguments', function() {
+      var normalizeArgumentsCalled = false;
+      var options = {};
+
+      fakeUtil.normalizeArguments = function(context, options_, config) {
         normalizeArgumentsCalled = true;
-        assert.strictEqual(context, fakeContext);
-        assert.strictEqual(options, fakeOptions);
-        assert.strictEqual(cfg.projectIdRequired, false);
-        return options;
+        assert.strictEqual(options_, options);
+        assert.strictEqual(config.projectIdRequired, false);
+        return options_;
       };
 
-      Translate.call(fakeContext, fakeOptions);
-      assert(normalizeArgumentsCalled);
-
-      fakeUtil.normalizeArguments = normalizeArguments;
+      new Translate(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should inherit from Service', function() {
@@ -116,7 +119,7 @@ describe('Translate', function() {
       it('should localize the options', function() {
         var options = {key: '...'};
         var translate = new Translate(options);
-        assert.strictEqual(translate.options, options);
+        assert.strictEqual(translate.options.key, options.key);
       });
 
       it('should localize the api key', function() {

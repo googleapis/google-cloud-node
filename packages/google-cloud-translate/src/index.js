@@ -80,14 +80,13 @@ var PKG = require('../package.json');
  * Full quickstart example:
  */
 function Translate(options) {
-  options = options || {};
-
   if (!(this instanceof Translate)) {
-    options = common.util.normalizeArguments(this, options, {
-      projectIdRequired: false,
-    });
     return new Translate(options);
   }
+
+  options = common.util.normalizeArguments(this, options, {
+    projectIdRequired: false,
+  });
 
   var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
