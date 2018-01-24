@@ -80,9 +80,10 @@ var Zone = require('./zone.js');
  */
 function DNS(options) {
   if (!(this instanceof DNS)) {
-    options = common.util.normalizeArguments(this, options);
     return new DNS(options);
   }
+
+  options = common.util.normalizeArguments(this, options);
 
   var config = {
     baseUrl: 'https://www.googleapis.com/dns/v1',

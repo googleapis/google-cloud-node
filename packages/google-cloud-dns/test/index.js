@@ -60,6 +60,7 @@ var fakeUtil = extend({}, util, {
     assert.deepEqual(options.exclude, ['zone']);
   },
 });
+var originalFakeUtil = extend(true, {}, fakeUtil);
 
 function FakeZone() {
   this.calledWith_ = arguments;
@@ -83,6 +84,7 @@ describe('DNS', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, originalFakeUtil);
     dns = new DNS({
       projectId: PROJECT_ID,
     });
@@ -101,23 +103,24 @@ describe('DNS', function() {
       assert(promisified);
     });
 
-    it('should normalize the arguments', function() {
-      var normalizeArguments = fakeUtil.normalizeArguments;
-      var normalizeArgumentsCalled = false;
-      var fakeOptions = {projectId: PROJECT_ID};
-      var fakeContext = {};
+    it('should work without new', function() {
+      assert.doesNotThrow(function() {
+        DNS({projectId: PROJECT_ID});
+      });
+    });
 
-      fakeUtil.normalizeArguments = function(context, options) {
+    it('should normalize the arguments', function() {
+      var normalizeArgumentsCalled = false;
+      var options = {};
+
+      fakeUtil.normalizeArguments = function(context, options_) {
         normalizeArgumentsCalled = true;
-        assert.strictEqual(context, fakeContext);
-        assert.strictEqual(options, fakeOptions);
-        return options;
+        assert.strictEqual(options_, options);
+        return options_;
       };
 
-      DNS.call(fakeContext, fakeOptions);
-      assert(normalizeArgumentsCalled);
-
-      fakeUtil.normalizeArguments = normalizeArguments;
+      new DNS(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should inherit from Service', function() {
