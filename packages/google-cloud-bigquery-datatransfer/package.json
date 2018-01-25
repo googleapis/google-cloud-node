@@ -61,7 +61,7 @@
     "ink-docstrap": "^1.3.2",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
-    "mocha": "^4.1.0",
+    "mocha": "^5.0.0",
     "nyc": "^11.3.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.9.2",
