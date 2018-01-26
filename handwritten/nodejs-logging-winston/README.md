@@ -72,7 +72,15 @@ const Logger = winston.Logger;
 const Console = winston.transports.Console;
 
 // Imports the Google Cloud client library for Winston
-const LoggingWinston = require('@google-cloud/logging-winston');
+
+// Node 6+
+const {LoggingWinston} = require('@google-cloud/logging-winston');
+
+// Node 4+
+// const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+
+// Using ES6 style imports via TypeScript or Babel
+// import {LogginWinston} from '@google-cloud/logging-winston';
 
 // Creates a Winston Stackdriver Logging client
 const loggingWinston = new LoggingWinston();
@@ -130,12 +138,12 @@ If you wish to set the LogEntry `trace` property with a custom value, then set a
 
 ```js
 const winston = require('winston');
-const transport = require('@google-cloud/logging-winston');
+const {LoggingWinston} = require('@google-cloud/logging-winston');
 
 // ...
 
 winston.info('Log entry with custom trace value', {
-  [transport.LOGGING_TRACE_KEY]: 'custom-trace-value'
+  [LoggingWinston.LOGGING_TRACE_KEY]: 'custom-trace-value'
 });
 ```
 
