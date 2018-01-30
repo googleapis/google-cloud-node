@@ -68,7 +68,7 @@
     "@google-cloud/nodejs-repo-tools": "^2.1.1",
     "@google-cloud/storage": "*",
     "codecov": "^3.0.0",
-    "eslint": "^4.10.0",
+    "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.7.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-prettier": "^2.3.1",
