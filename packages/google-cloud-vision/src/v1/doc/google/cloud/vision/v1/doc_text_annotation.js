@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,9 +20,9 @@
  * The hierarchy of an OCR extracted text structure is like this:
  *     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
  * Each structural component, starting from Page, may further have their own
- * properties. Properties describe detected languages, breaks etc.. Please
- * refer to the google.cloud.vision.v1.TextAnnotation.TextProperty message
- * definition below for more detail.
+ * properties. Properties describe detected languages, breaks etc.. Please refer
+ * to the TextAnnotation.TextProperty message definition below for more
+ * detail.
  *
  * @property {Object[]} pages
  *   List of pages detected by OCR.
@@ -62,6 +62,8 @@ var TextAnnotation = {
    * Detected start or end of a structural component.
    *
    * @property {number} type
+   *   Detected break type.
+   *
    *   The number should be among the values of [BreakType]{@link google.cloud.vision.v1.BreakType}
    *
    * @property {boolean} isPrefix
@@ -103,13 +105,12 @@ var TextAnnotation = {
       EOL_SURE_SPACE: 3,
 
       /**
-       * End-line hyphen that is not present in text; does
+       * End-line hyphen that is not present in text; does not co-occur with
+       * `SPACE`, `LEADER_SPACE`, or `LINE_BREAK`.
        */
       HYPHEN: 4,
 
       /**
-       * not co-occur with SPACE, LEADER_SPACE, or
-       * LINE_BREAK.
        * Line break that ends a paragraph.
        */
       LINE_BREAK: 5
@@ -157,6 +158,9 @@ var TextAnnotation = {
  *
  *   This object should have the same structure as [Block]{@link google.cloud.vision.v1.Block}
  *
+ * @property {number} confidence
+ *   Confidence of the OCR results on the page. Range [0, 1].
+ *
  * @typedef Page
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Page definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
@@ -180,14 +184,19 @@ var Page = {
  *   is represented as around the top-left corner as defined when the text is
  *   read in the 'natural' orientation.
  *   For example:
- *     * when the text is horizontal it might look like:
- *        0----1
- *        |    |
- *        3----2
- *     * when it's rotated 180 degrees around the top-left corner it becomes:
- *        2----3
- *        |    |
- *        1----0
+ *
+ *   * when the text is horizontal it might look like:
+ *
+ *           0----1
+ *           |    |
+ *           3----2
+ *
+ *   * when it's rotated 180 degrees around the top-left corner it becomes:
+ *
+ *           2----3
+ *           |    |
+ *           1----0
+ *
  *     and the vertice order will still be (0, 1, 2, 3).
  *
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
@@ -201,6 +210,9 @@ var Page = {
  *   Detected block type (text, image etc) for this block.
  *
  *   The number should be among the values of [BlockType]{@link google.cloud.vision.v1.BlockType}
+ *
+ * @property {number} confidence
+ *   Confidence of the OCR results on the block. Range [0, 1].
  *
  * @typedef Block
  * @memberof google.cloud.vision.v1
@@ -281,6 +293,9 @@ var Block = {
  *
  *   This object should have the same structure as [Word]{@link google.cloud.vision.v1.Word}
  *
+ * @property {number} confidence
+ *   Confidence of the OCR results for the paragraph. Range [0, 1].
+ *
  * @typedef Paragraph
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Paragraph definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
@@ -322,6 +337,9 @@ var Paragraph = {
  *
  *   This object should have the same structure as [Symbol]{@link google.cloud.vision.v1.Symbol}
  *
+ * @property {number} confidence
+ *   Confidence of the OCR results for the word. Range [0, 1].
+ *
  * @typedef Word
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.Word definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/text_annotation.proto}
@@ -359,6 +377,9 @@ var Word = {
  *
  * @property {string} text
  *   The actual UTF-8 representation of the symbol.
+ *
+ * @property {number} confidence
+ *   Confidence of the OCR results for the symbol. Range [0, 1].
  *
  * @typedef Symbol
  * @memberof google.cloud.vision.v1

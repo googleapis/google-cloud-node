@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,7 @@
  *
  * @property {Object[]} fullMatchingImages
  *   Fully matching images from the Internet.
- *   They're definite neardups and most often a copy of the query image with
- *   merely a size change.
+ *   Can include resized copies of the query image.
  *
  *   This object should have the same structure as [WebImage]{@link google.cloud.vision.v1.WebImage}
  *
@@ -41,6 +40,16 @@
  *   Web pages containing the matching images from the Internet.
  *
  *   This object should have the same structure as [WebPage]{@link google.cloud.vision.v1.WebPage}
+ *
+ * @property {Object[]} visuallySimilarImages
+ *   The visually similar image results.
+ *
+ *   This object should have the same structure as [WebImage]{@link google.cloud.vision.v1.WebImage}
+ *
+ * @property {Object[]} bestGuessLabels
+ *   Best guess text labels for the request image.
+ *
+ *   This object should have the same structure as [WebLabel]{@link google.cloud.vision.v1.WebLabel}
  *
  * @typedef WebDetection
  * @memberof google.cloud.vision.v1
@@ -77,8 +86,7 @@ var WebDetection = {
    *   The result image URL.
    *
    * @property {number} score
-   *   Overall relevancy score for the image.
-   *   Not normalized and not comparable across different image queries.
+   *   (Deprecated) Overall relevancy score for the image.
    *
    * @typedef WebImage
    * @memberof google.cloud.vision.v1
@@ -95,14 +103,49 @@ var WebDetection = {
    *   The result web page URL.
    *
    * @property {number} score
-   *   Overall relevancy score for the web page.
-   *   Not normalized and not comparable across different image queries.
+   *   (Deprecated) Overall relevancy score for the web page.
+   *
+   * @property {string} pageTitle
+   *   Title for the web page, may contain HTML markups.
+   *
+   * @property {Object[]} fullMatchingImages
+   *   Fully matching images on the page.
+   *   Can include resized copies of the query image.
+   *
+   *   This object should have the same structure as [WebImage]{@link google.cloud.vision.v1.WebImage}
+   *
+   * @property {Object[]} partialMatchingImages
+   *   Partial matching images on the page.
+   *   Those images are similar enough to share some key-point features. For
+   *   example an original image will likely have partial matching for its
+   *   crops.
+   *
+   *   This object should have the same structure as [WebImage]{@link google.cloud.vision.v1.WebImage}
    *
    * @typedef WebPage
    * @memberof google.cloud.vision.v1
    * @see [google.cloud.vision.v1.WebDetection.WebPage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/web_detection.proto}
    */
   WebPage: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Label to provide extra metadata for the web detection.
+   *
+   * @property {string} label
+   *   Label for extra metadata.
+   *
+   * @property {string} languageCode
+   *   The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+   *   For more information, see
+   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+   *
+   * @typedef WebLabel
+   * @memberof google.cloud.vision.v1
+   * @see [google.cloud.vision.v1.WebDetection.WebLabel definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/web_detection.proto}
+   */
+  WebLabel: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
