@@ -2099,6 +2099,9 @@ Bucket.prototype.setUserProject = function(userProject) {
  *     MD5 checksum for maximum reliability. CRC32c will provide better
  *     performance with less reliability. You may also choose to skip validation
  *     completely, however this is **not recommended**.
+ * @param {object} [options.requestOptions] When `pathString` is a URL,
+ *     additional [options for the HTTP request](https://github.com/request/request#requestoptions-callback)
+ *     could be provided here.
  * @param {UploadCallback} [callback] Callback function.
  * @returns {Promise<UploadResponse>}
  *
@@ -2213,6 +2216,20 @@ Bucket.prototype.setUserProject = function(userProject) {
  *   var file = data[0];
  * });
  *
+ * //-
+ * // Additional options for download request could be provided.
+ * //-
+ * bucket.upload('https://example.com/images/image.png', {
+ *   requestOptions: {
+ *     headers: {
+ *       'User-Agent': 'curl/7.54.0'
+ *     }
+ *   }
+ * }, function(err, newFile) {
+ *   // Custom `User-Agent` header will be used for the download request of
+ *   // "https://example.com/images/image.png".
+ * });
+ *
  * @example <caption>include:samples/files.js</caption>
  * region_tag:storage_upload_file
  * Another example:
@@ -2240,6 +2257,13 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     options
   );
 
+  var requestOptions = Object.assign(
+    {
+      url: pathString,
+    },
+    options.requestOptions
+  );
+
   var newFile;
   if (options.destination instanceof File) {
     newFile = options.destination;
@@ -2265,7 +2289,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
   if (is.boolean(options.resumable)) {
     upload();
   } else if (isURL) {
-    request.head(pathString, function(err, resp) {
+    request.head(requestOptions, function(err, resp) {
       if (err) {
         callback(err);
         return;
@@ -2297,7 +2321,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     var sourceStream;
 
     if (isURL) {
-      sourceStream = request.get(pathString);
+      sourceStream = request.get(requestOptions);
     } else {
       sourceStream = fs.createReadStream(pathString);
     }
