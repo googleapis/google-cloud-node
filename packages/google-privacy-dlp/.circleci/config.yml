@@ -91,6 +91,7 @@ jobs:
   node4:
     docker:
       - image: node:4
+        user: node
     steps:
       - checkout
       - run:
@@ -106,30 +107,38 @@ jobs:
   node6:
     docker:
       - image: node:6
+        user: node
     <<: *unit_tests
   node7:
     docker:
       - image: node:7
+        user: node
     <<: *unit_tests
   node8:
     docker:
       - image: node:8
+        user: node
     <<: *unit_tests
   node9:
     docker:
       - image: node:9
+        user: node
     <<: *unit_tests
 
   lint:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
           name: Install modules and dependencies.
           command: |
+            mkdir -p /home/node/.npm-global
             npm install
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Link the module being tested to the samples.
           command: |
@@ -137,13 +146,18 @@ jobs:
             npm link @google-cloud/dlp
             npm install
             cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run linting.
           command: npm run lint
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
 
   docs:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
@@ -156,6 +170,7 @@ jobs:
   sample_tests:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
@@ -167,8 +182,11 @@ jobs:
       - run:
           name: Install and link the module.
           command: |
+            mkdir -p /home/node/.npm-global
             npm install
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Link the module being tested to the samples.
           command: |
@@ -176,21 +194,25 @@ jobs:
             npm link @google-cloud/dlp
             npm install
             cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run sample tests.
           command: npm run samples-test
           environment:
             GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: /var/dlp/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/dlp-samples/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /var/dlp/
+    working_directory: /home/node/dlp-samples
 
   system_tests:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
@@ -215,6 +237,7 @@ jobs:
   publish_npm:
     docker:
       - image: node:8
+        user: node
     steps:
       - checkout
       - run:
