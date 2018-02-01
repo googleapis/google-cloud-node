@@ -158,8 +158,8 @@ entity.isDsGeoPoint = isDsGeoPoint;
  * Build a Datastore Key object.
  *
  * @class
- * @param {object|string|array} Configuration object.
- * @param {string|array} options.path  Key path.
+ * @param {object} options Configuration object.
+ * @param {array} options.path Key path.
  * @param {string} [options.namespace] Optional namespace.
  *
  * @example
@@ -176,6 +176,8 @@ function Key(options) {
    * @type {string}
    */
   this.namespace = options.namespace;
+
+  options.path = [].slice.call(options.path);
 
   if (options.path.length % 2 === 0) {
     var identifier = options.path.pop();

@@ -155,6 +155,12 @@ describe('entity', function() {
       assert(key.parent instanceof entity.Key);
     });
 
+    it('should not modify input path', function() {
+      var inputPath = ['ParentKind', 1, 'Kind', 1];
+      new entity.Key({path: inputPath});
+      assert.deepEqual(inputPath, ['ParentKind', 1, 'Kind', 1]);
+    });
+
     it('should always compute the correct path', function() {
       var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
