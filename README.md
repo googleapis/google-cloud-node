@@ -36,7 +36,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Resource Manager](https://github.com/googleapis/nodejs-resource) (Alpha)
 * [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
-* [Google Stackdriver Error Reporting](#google-stackdriver-error-reporting-alpha) (Alpha)
+* [Google Stackdriver Error Reporting](https://github.com/googleapis/nodejs-error-reporting) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
 
 The following client libraries are **deprecated** due to the underlying API also being deprecated:
