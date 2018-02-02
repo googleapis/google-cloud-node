@@ -83,11 +83,12 @@ var Project = require('./project.js');
  */
 function Resource(options) {
   if (!(this instanceof Resource)) {
-    options = common.util.normalizeArguments(this, options, {
-      projectIdRequired: false,
-    });
     return new Resource(options);
   }
+
+  options = common.util.normalizeArguments(this, options, {
+    projectIdRequired: false,
+  });
 
   var config = {
     baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
