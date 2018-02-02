@@ -65,7 +65,7 @@
     "extend": "^3.0.1",
     "google-auto-auth": "^0.9.0",
     "google-gax": "^0.14.2",
-    "google-proto-files": "^0.14.2",
+    "google-proto-files": "^0.15.0",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
     "lodash.merge": "^4.6.0",
