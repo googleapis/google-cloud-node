@@ -124,15 +124,22 @@ function createFlowControlledSubscription(
   // const maxInProgress = 5;
   // const maxBytes = 10000;
 
+  const topic = pubsub.topic(topicName);
+
+  const options = {
+    flowControl: {
+      maxBytes: maxBytes,
+      maxMessages: maxInProgress,
+    },
+  };
+
+  const subscription = topic.subscription(subscriptionName, options);
+
   // Creates a new subscription
   // Note that flow control configurations are not persistent
-  pubsub
-    .topic(topicName)
-    .createSubscription(subscriptionName, {
-      flowControl: {
-        maxBytes: maxBytes,
-        maxMessages: maxInProgress,
-      },
+  subscription
+    .get({
+      autoCreate: true,
     })
     .then(results => {
       const subscription = results[0];
