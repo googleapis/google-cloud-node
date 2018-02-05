@@ -2137,6 +2137,20 @@ describe('File', function() {
       });
     });
 
+    it('should set correct settings if resumable', function(done) {
+      var config = extend({}, CONFIG, {
+        action: 'resumable',
+      });
+
+      BUCKET.storage.authClient.sign = function(blobToSign) {
+        assert.strictEqual(blobToSign.indexOf('POST'), 0);
+        assert(blobToSign.indexOf('x-goog-resumable:start') > -1);
+        done();
+      };
+
+      file.getSignedUrl(config, assert.ifError);
+    });
+
     it('should return an error if signBlob errors', function(done) {
       var error = new Error('Error.');
 
