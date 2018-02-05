@@ -60,7 +60,7 @@
     "codecov": "^3.0.0",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.7.0",
-    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-prettier": "^2.3.1",
     "google-auto-auth": "^0.9.0",
     "ink-docstrap": "^1.3.0",
