@@ -172,6 +172,11 @@ describe('Bucket', function() {
       assert(promisified);
     });
 
+    it('should remove a leading gs://', function() {
+      var bucket = new Bucket(STORAGE, 'gs://bucket-name');
+      assert.strictEqual(bucket.name, 'bucket-name');
+    });
+
     it('should localize the name', function() {
       assert.strictEqual(bucket.name, BUCKET_NAME);
     });

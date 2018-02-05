@@ -60,6 +60,8 @@ var RESUMABLE_THRESHOLD = 5000000;
 function Bucket(storage, name, options) {
   options = options || {};
 
+  name = name.replace(/^gs:\/\//, '');
+
   var methods = {
     /**
      * Create a bucket.
