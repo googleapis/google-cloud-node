@@ -14,7 +14,9 @@
     "build/src",
     "AUTHORS",
     "CONTRIBUTORS",
-    "LICENSE"
+    "LICENSE",
+    "CODE_OF_CONDUCT.md",
+    "README.md"
   ],
   "keywords": [
     "google apis client",
