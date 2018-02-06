@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -51,7 +51,7 @@ describe('DataTransferServiceClient', () => {
       var defaultSchedule = 'defaultSchedule-800168235';
       var supportsCustomSchedule = true;
       var helpUrl = 'helpUrl-789431439';
-      var defaultDataRefreshWindowDays = -1804935157;
+      var defaultDataRefreshWindowDays = 1804935157;
       var manualRunsDisabled = true;
       var expectedResponse = {
         name: name2,
@@ -203,7 +203,7 @@ describe('DataTransferServiceClient', () => {
       var schedule = 'schedule-697920873';
       var dataRefreshWindowDays = 327632845;
       var disabled = true;
-      var userId = -147132913;
+      var userId = 147132913;
       var datasetRegion = 'datasetRegion959248539';
       var expectedResponse = {
         name: name,
@@ -283,7 +283,7 @@ describe('DataTransferServiceClient', () => {
       var schedule = 'schedule-697920873';
       var dataRefreshWindowDays = 327632845;
       var disabled = true;
-      var userId = -147132913;
+      var userId = 147132913;
       var datasetRegion = 'datasetRegion959248539';
       var expectedResponse = {
         name: name,
@@ -424,7 +424,7 @@ describe('DataTransferServiceClient', () => {
       var schedule = 'schedule-697920873';
       var dataRefreshWindowDays = 327632845;
       var disabled = true;
-      var userId = -147132913;
+      var userId = 147132913;
       var datasetRegion = 'datasetRegion959248539';
       var expectedResponse = {
         name: name2,
@@ -645,7 +645,7 @@ describe('DataTransferServiceClient', () => {
       var name2 = 'name2-1052831874';
       var destinationDatasetId = 'destinationDatasetId1541564179';
       var dataSourceId = 'dataSourceId-1015796374';
-      var userId = -147132913;
+      var userId = 147132913;
       var schedule = 'schedule-697920873';
       var expectedResponse = {
         name: name2,

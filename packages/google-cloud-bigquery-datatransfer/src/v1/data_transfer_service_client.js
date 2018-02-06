@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -224,11 +224,7 @@ class DataTransferServiceClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -452,10 +448,8 @@ class DataTransferServiceClient {
    * @param {string} request.parent
    *   The BigQuery project id where the transfer configuration should be created.
    *   Must be in the format /projects/{project_id}/locations/{location_id}
-   *   or
-   *   /projects/{project_id}/locations/-
-   *   In case when '-' is specified as location_id, location is infered from
-   *   the destination dataset region.
+   *   If specified location and location of the destination bigquery dataset
+   *   do not match - the request will fail.
    * @param {Object} request.transferConfig
    *   Data transfer configuration to create.
    *
@@ -839,7 +833,7 @@ class DataTransferServiceClient {
   }
 
   /**
-   * Creates transfer runs for a time range [range_start_time, range_end_time].
+   * Creates transfer runs for a time range [start_time, end_time].
    * For each date - or whatever granularity the data source supports - in the
    * range, one transfer run is created.
    * Note that runs are created per UTC time in the time range.
