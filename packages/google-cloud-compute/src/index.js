@@ -78,9 +78,10 @@ var Zone = require('./zone.js');
  */
 function Compute(options) {
   if (!(this instanceof Compute)) {
-    options = common.util.normalizeArguments(this, options);
     return new Compute(options);
   }
+
+  options = common.util.normalizeArguments(this, options);
 
   var config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
