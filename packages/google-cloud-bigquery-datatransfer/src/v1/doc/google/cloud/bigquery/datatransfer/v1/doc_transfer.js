@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@
  * When a new transfer configuration is created, the specified
  * `destination_dataset_id` is created when needed and shared with the
  * appropriate data source service account.
+ * Next id: 20
  *
  * @property {string} name
  *   The resource name of the transfer config.
@@ -90,6 +91,8 @@
  *   Output only. Unique ID of the user on whose behalf transfer is done.
  *   Applicable only to data sources that do not support service accounts.
  *   When set to 0, the data source service account credentials are used.
+ *   May be negative. Note, that this identifier is not stable.
+ *   It may change over time even for the same user.
  *
  * @property {string} datasetRegion
  *   Output only. Region in which BigQuery dataset is located.
@@ -104,7 +107,7 @@ var TransferConfig = {
 
 /**
  * Represents a data transfer run.
- * Next id: 23
+ * Next id: 27
  *
  * @property {string} name
  *   The resource name of the transfer run.
@@ -112,24 +115,21 @@ var TransferConfig = {
  *   `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
  *   The name is ignored when creating a transfer run.
  *
- * @property {string} destinationDatasetId
- *   The BigQuery target dataset id.
- *
  * @property {Object} scheduleTime
  *   Minimum time after which a transfer run can be started.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
- *
- * @property {Object} params
- *   Data transfer specific parameters.
- *
- *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
  *
  * @property {Object} runTime
  *   For batch transfer runs, specifies the date and time that
  *   data should be ingested.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} errorStatus
+ *   Status of the transfer run.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {Object} startTime
  *   Output only. Time when transfer run was started.
@@ -148,6 +148,14 @@ var TransferConfig = {
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
+ * @property {Object} params
+ *   Output only. Data transfer specific parameters.
+ *
+ *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {string} destinationDatasetId
+ *   Output only. The BigQuery target dataset id.
+ *
  * @property {string} dataSourceId
  *   Output only. Data source id.
  *
@@ -160,7 +168,8 @@ var TransferConfig = {
  *   Output only. Unique ID of the user on whose behalf transfer is done.
  *   Applicable only to data sources that do not support service accounts.
  *   When set to 0, the data source service account credentials are used.
- *   May be negative.
+ *   May be negative. Note, that this identifier is not stable.
+ *   It may change over time even for the same user.
  *
  * @property {string} schedule
  *   Output only. Describes the schedule of this transfer run if it was
@@ -267,11 +276,6 @@ var TransferState = {
    * State placeholder.
    */
   TRANSFER_STATE_UNSPECIFIED: 0,
-
-  /**
-   * Data transfer is inactive.
-   */
-  INACTIVE: 1,
 
   /**
    * Data transfer is scheduled and is waiting to be picked up by
