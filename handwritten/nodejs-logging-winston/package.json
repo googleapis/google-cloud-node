@@ -68,7 +68,7 @@
     "posttest": "npm run check"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.15.1",
+    "@google-cloud/common": "^0.16.0",
     "@google-cloud/logging": "^1.1.1",
     "@sindresorhus/is": "^0.5.0",
     "@types/proxyquire": "^1.3.28",
