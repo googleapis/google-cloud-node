@@ -64,7 +64,7 @@
     "@types/koa": "^2.0.43",
     "@types/lodash.has": "^4.5.3",
     "@types/mocha": "^2.2.45",
-    "@types/node": "^8.5.2",
+    "@types/node": "^9.4.0",
     "@types/request": "^2.0.9",
     "@types/restify": "^5.0.6",
     "async": "^2.6.0",
