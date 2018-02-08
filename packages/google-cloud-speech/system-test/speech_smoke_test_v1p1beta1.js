@@ -14,7 +14,7 @@
 
 'use strict';
 
-describe('SpeechSmokeTest', () => {
+describe('SpeechSmokeTest v1p1beta1', () => {
   it('successfully makes a call to the service', done => {
     const speech = require('../src');
 

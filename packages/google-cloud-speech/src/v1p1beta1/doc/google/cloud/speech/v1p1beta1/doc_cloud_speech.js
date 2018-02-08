@@ -177,6 +177,12 @@ var StreamingRecognitionConfig = {
  *   `false`, no word-level time offset information is returned. The default is
  *   `false`.
  *
+ * @property {string} model
+ *   *Optional* Which model to select for the given request. Select the model
+ *   best suited to your domain to get best results. If a model is not
+ *   explicitly specified, then we auto-select a model based on the parameters
+ *   in the RecognitionConfig.
+ *
  * @typedef RecognitionConfig
  * @memberof google.cloud.speech.v1p1beta1
  * @see [google.cloud.speech.v1p1beta1.RecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1p1beta1/cloud_speech.proto}
