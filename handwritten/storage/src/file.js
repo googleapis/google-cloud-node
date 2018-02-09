@@ -18,6 +18,7 @@
 
 var Buffer = require('safe-buffer').Buffer;
 var common = require('@google-cloud/common');
+var compressible = require('compressible');
 var concat = require('concat-stream');
 var createErrorClass = require('create-error-class');
 var crypto = require('crypto');
@@ -27,6 +28,7 @@ var format = require('string-format-obj');
 var fs = require('fs');
 var hashStreamValidation = require('hash-stream-validation');
 var is = require('is');
+var mime = require('mime');
 var once = require('once');
 var pumpify = require('pumpify');
 var resumableUpload = require('gcs-resumable-upload');
@@ -786,8 +788,13 @@ File.prototype.createResumableUpload = function(options, callback) {
  * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
  *
  * @param {object} [options] Configuration options.
- * @param {boolean} [options.gzip] Automatically gzip the file. This will set
- *     `options.metadata.contentEncoding` to `gzip`.
+ * @param {string} [options.contentType] Alias for
+ *     `options.metadata.contentType`. If set to `auto`, the file name is used
+ *     to determine the contentType.
+ * @param {string|boolean} [options.gzip] If true, automatically gzip the file.
+ *     If set to `auto`, the contentType is used to determine if the file should
+ *     be gzipped. This will set `options.metadata.contentEncoding` to `gzip` if
+ *     necessary.
  * @param {object} [options.metadata] See the examples below or
  *     [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
  *     for more details.
@@ -898,7 +905,19 @@ File.prototype.createWriteStream = function(options) {
 
   options = extend({metadata: {}}, options);
 
+  if (options.contentType) {
+    options.metadata.contentType = options.contentType;
+
+    if (options.metadata.contentType === 'auto') {
+      options.metadata.contentType = mime.getType(this.name);
+    }
+  }
+
   var gzip = options.gzip;
+
+  if (gzip === 'auto') {
+    gzip = compressible(options.metadata.contentType);
+  }
 
   if (gzip) {
     options.metadata.contentEncoding = 'gzip';
