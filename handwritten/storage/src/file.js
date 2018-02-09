@@ -1380,6 +1380,15 @@ File.prototype.getMetadata = function(options, callback) {
  * Get a signed policy document to allow a user to upload data with a POST
  * request.
  *
+ * In Google Cloud Platform environments, such as Cloud Functions and App
+ * Engine, you usually don't provide a `keyFilename` or `credentials` during
+ * instantiation. In those environments, we call the
+ * [signBlob API](https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/signBlob#authorization-scopes)
+ * to create a signed policy. That API requires either the
+ * `https://www.googleapis.com/auth/iam` or
+ * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
+ * enabled.
+ *
  * @see [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
  *
  * @throws {Error} If an expiration timestamp from the past is given.
@@ -1544,6 +1553,15 @@ File.prototype.getSignedPolicy = function(options, callback) {
  */
 /**
  * Get a signed URL to allow limited time access to the file.
+ *
+ * In Google Cloud Platform environments, such as Cloud Functions and App
+ * Engine, you usually don't provide a `keyFilename` or `credentials` during
+ * instantiation. In those environments, we call the
+ * [signBlob API](https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/signBlob#authorization-scopes)
+ * to create a signed URL. That API requires either the
+ * `https://www.googleapis.com/auth/iam` or
+ * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
+ * enabled.
  *
  * @see [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
  *
