@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/vision",
   "description": "Google Cloud Vision API client for Node.js",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -58,7 +58,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.16.0",
+    "@google-cloud/common": "^0.16.1",
     "async": "^2.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.14.2",
@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.1.1",
-    "@google-cloud/storage": "*",
+    "@google-cloud/storage": "^1.5.2",
     "codecov": "^3.0.0",
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.7.0",

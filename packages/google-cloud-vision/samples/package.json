@@ -12,8 +12,8 @@
     "test": "repo-tools test run --cmd ava -- -T 1m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/storage": "1.4.0",
-    "@google-cloud/vision": "0.15.1",
+    "@google-cloud/storage": "^1.5.2",
+    "@google-cloud/vision": "0.15.2",
     "async": "2.5.0",
     "natural": "0.5.4",
     "redis": "2.8.0",
