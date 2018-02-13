@@ -74,10 +74,9 @@ describe('initConfig', () => {
   it('should not modify specified fields when on GCE', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub.withArgs('name')
-        .callsArgWith(1, null, undefined, 'gce-instance')
+        .resolves({data: 'gce-instance'})
         .withArgs('zone')
-        .callsArgWith(
-            1, null, undefined, 'projects/123456789012/zones/gce-zone');
+        .resolves({data: 'projects/123456789012/zones/gce-zone'});
 
     const config = {
       logLevel: 2,
@@ -95,10 +94,9 @@ describe('initConfig', () => {
   it('should get zone and instance from GCE', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub.withArgs('name')
-        .callsArgWith(1, null, undefined, 'gce-instance')
+        .resolves({data: 'gce-instance'})
         .withArgs('zone')
-        .callsArgWith(
-            1, null, undefined, 'projects/123456789012/zones/gce-zone');
+        .resolves({data: 'projects/123456789012/zones/gce-zone'});
 
     const config = {
       projectId: 'projectId',
@@ -208,10 +206,9 @@ describe('initConfig', () => {
            './ts/test/fixtures/test-config.json';
        metadataStub = sinon.stub(gcpMetadata, 'instance');
        metadataStub.withArgs('name')
-           .callsArgWith(1, null, undefined, 'gce-instance')
+           .resolves({data: 'gce-instance'})
            .withArgs('zone')
-           .callsArgWith(
-               1, null, undefined, 'projects/123456789012/zones/gce-zone');
+           .resolves({data: 'projects/123456789012/zones/gce-zone'});
        const config = {};
        const expConfig = {
          projectId: 'process-projectId',
@@ -238,10 +235,9 @@ describe('initConfig', () => {
            './ts/test/fixtures/test-config.json';
        metadataStub = sinon.stub(gcpMetadata, 'instance');
        metadataStub.withArgs('name')
-           .callsArgWith(1, null, undefined, 'gce-instance')
+           .resolves({data: 'gce-instance'})
            .withArgs('zone')
-           .callsArgWith(
-               1, null, undefined, 'projects/123456789012/zones/gce-zone');
+           .resolves({data: 'projects/123456789012/zones/gce-zone'});
 
        const config = {
          projectId: 'config-projectId',

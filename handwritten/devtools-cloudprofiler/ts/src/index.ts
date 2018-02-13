@@ -34,9 +34,8 @@ const pjson = require('../../package.json');
  * Throws error if there is a problem accessing metadata API.
  */
 async function getMetadataInstanceField(field: string): Promise<string> {
-  const [response, metadata] =
-      await pify(gcpMetadata.instance, {multiArgs: true})(field);
-  return metadata;
+  const res = await gcpMetadata.instance(field);
+  return res.data;
 }
 
 function hasService(config: Config):
