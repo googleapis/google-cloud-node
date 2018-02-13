@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/storage",
   "description": "Cloud Storage Client Library for Node.js",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -58,7 +58,7 @@
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.16.0",
+    "@google-cloud/common": "^0.16.1",
     "arrify": "^1.0.0",
     "async": "^2.0.1",
     "compressible": "^2.0.12",
