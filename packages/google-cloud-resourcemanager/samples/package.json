@@ -12,7 +12,7 @@
     "test": "repo-tools test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/resource": "0.8.0",
+    "@google-cloud/resource": "0.8.1",
     "yargs": "10.0.3"
   },
   "devDependencies": {
