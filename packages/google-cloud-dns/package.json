@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dns",
   "description": "Cloud DNS Client Library for Node.js",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -51,7 +51,7 @@
     "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.16.0",
+    "@google-cloud/common": "^0.16.1",
     "arrify": "^1.0.0",
     "dns-zonefile": "0.2.2",
     "extend": "^3.0.0",
