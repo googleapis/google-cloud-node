@@ -2062,6 +2062,16 @@ File.prototype.rotateEncryptionKey = function(encryptionKey, callback) {
  *
  * *This is a convenience method which wraps {@link File#createWriteStream}.*
  *
+ * Resumable uploads are automatically enabled and must be shut off explicitly
+ * by setting `options.resumable` to `false`.
+ *
+ * <p class="notice">
+ *   There is some overhead when using a resumable upload that can cause
+ *   noticeable performance degradation while uploading a series of small files.
+ *   When uploading files less than 10MB, it is recommended that the resumable
+ *   feature is disabled.
+ * </p>
+ *
  * @param {*} data The data to write to a file.
  * @param {object} [options] See {@link File#createWriteStream}'s `options`
  *     parameter.
