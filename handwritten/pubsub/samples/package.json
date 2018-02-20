@@ -17,7 +17,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "0.16.4",
+    "@google-cloud/pubsub": "0.16.5",
     "yargs": "10.0.3"
   },
   "devDependencies": {
