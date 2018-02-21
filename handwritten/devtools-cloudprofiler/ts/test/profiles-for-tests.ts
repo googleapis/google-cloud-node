@@ -135,9 +135,9 @@ export const timeProfile: perftools.profiles.IProfile = {
   function: timeFunctions,
   stringTable: [
     '',
-    'samples',
+    'sample',
     'count',
-    'time',
+    'wall',
     'microseconds',
     'function2',
     'script2',
@@ -376,9 +376,9 @@ export const anonymousFunctionTimeProfile: perftools.profiles.IProfile = {
   function: anonymousFunctionTimeFunctions,
   stringTable: [
     '',
-    'samples',
+    'sample',
     'count',
-    'time',
+    'wall',
     'microseconds',
     '(anonymous)',
     'main',

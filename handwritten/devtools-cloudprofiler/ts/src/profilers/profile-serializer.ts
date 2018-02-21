@@ -153,24 +153,24 @@ function serialize<T extends ProfileNode>(
 }
 
 /**
- * @return value type for samples counts (type:samples, units:count), and
+ * @return value type for sample counts (type:sample, units:count), and
  * adds strings used in this value type to the table.
  */
 function createSampleCountValueType(table: StringTable):
     perftools.profiles.ValueType {
   return new perftools.profiles.ValueType({
-    type: table.getIndexOrAdd('samples'),
+    type: table.getIndexOrAdd('sample'),
     unit: table.getIndexOrAdd('count')
   });
 }
 
 /**
- * @return value type for time samples (type:time, units:microseconds), and
+ * @return value type for time samples (type:wall, units:microseconds), and
  * adds strings used in this value type to the table.
  */
 function createTimeValueType(table: StringTable): perftools.profiles.ValueType {
   return new perftools.profiles.ValueType({
-    type: table.getIndexOrAdd('time'),
+    type: table.getIndexOrAdd('wall'),
     unit: table.getIndexOrAdd('microseconds')
   });
 }
