@@ -82,6 +82,8 @@ export class LoggingWinston extends winston.Transport {
       types.StackdriverLog;  // TODO: add type for @google-cloud/logging
   private resource: types.MonitoredResource|undefined;
   private serviceContext: types.ServiceContext|undefined;
+  private label: string|undefined;
+  private labels: object|undefined;
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
   constructor(options?: types.Options) {
     options = Object.assign(
@@ -102,6 +104,8 @@ export class LoggingWinston extends winston.Transport {
     this.stackdriverLog = new logging(options).log(logName);
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
+    this.label = options.label;
+    this.labels = options.labels;
   }
 
   log(levelName: string, msg: string, metadata: types.Metadata|{},
@@ -121,6 +125,9 @@ export class LoggingWinston extends winston.Transport {
     const entryMetadata: types.StackdriverEntryMetadata = {
       resource: this.resource,
     };
+    if (this.labels) {
+      entryMetadata.labels = this.labels;
+    }
 
     const data: types.StackdriverData = {};
 
@@ -140,7 +147,8 @@ export class LoggingWinston extends winston.Transport {
       msg += (msg ? ' ' : '') + (metadata as types.Metadata).stack;
       data.serviceContext = this.serviceContext;
     }
-    data.message = msg;
+    data.message = this.label ? `[${this.label}] ` : '';
+    data.message += msg;
 
     if (is.default.object(metadata)) {
       data.metadata =
@@ -161,7 +169,10 @@ export class LoggingWinston extends winston.Transport {
       // metadata.
       // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
       if ((metadata as types.Metadata).labels) {
-        entryMetadata.labels = (metadata as types.Metadata).labels;
+        entryMetadata.labels = (entryMetadata.labels) ?
+            Object.assign(
+                entryMetadata.labels, (metadata as types.Metadata).labels) :
+            (metadata as types.Metadata).labels;
         delete (data.metadata as types.Metadata).labels;
       }
     }
