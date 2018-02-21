@@ -472,4 +472,46 @@ describe('logging-winston', () => {
       loggingWinston.log(LEVEL, MESSAGE, METADATA, done);
     });
   });
+
+  describe('label and labels', () => {
+    const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
+    const STACKDRIVER_LEVEL = 'alert';  // (code 1)
+    const MESSAGE = 'message';
+    const LABEL = 'label';
+    const LABELS = {
+      name: 'fake-name',
+      version: '0.0.0',
+    };
+    const METADATA = {
+      value: () => {},
+    };
+
+    beforeEach(() => {
+      const opts = Object.assign({}, OPTIONS, {
+        label: LABEL,
+        labels: LABELS,
+      });
+
+      loggingWinston = new loggingWinstonLib.LoggingWinston(opts);
+    });
+
+    it('should properly create an entry with labels and [label] msg',
+       (done) => {
+         loggingWinston.stackdriverLog.entry =
+             (entryMetadata: types.StackdriverEntryMetadata,
+              data: types.StackdriverData) => {
+               assert.deepEqual(entryMetadata, {
+                 resource: loggingWinston.resource,
+                 labels: loggingWinston.labels,
+               });
+               assert.deepStrictEqual(data, {
+                 message: `[${LABEL}] ${MESSAGE}`,
+                 metadata: METADATA,
+               });
+               done();
+             };
+
+         loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
+       });
+  });
 });
