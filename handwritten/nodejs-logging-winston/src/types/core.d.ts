@@ -95,10 +95,10 @@ export interface Options {
   scopes?: string[]|string;
 
   logname?: string;
-  
+
   label?: string;
 
-  labels?: {};
+  labels?: {[key: string]: string};
 }
 
 export interface MonitoredResource {
