@@ -53,6 +53,18 @@ new LoggingWinston({
 });`,
     description:
         'imports the module and starts with a complete `serviceContext`'
+  },
+  {
+    code: `import {LoggingWinston} from '@google-cloud/logging-winston';
+new LoggingWinston({
+  label: 'some-label',
+  labels: {
+    env: 'local',
+    name: 'some-name',
+    version: 'some-version'
+  }
+});`,
+    description: 'imports the module with a label and labels specified'
   }
 ];
 
@@ -86,6 +98,19 @@ new LoggingWinston({
 });`,
     description:
         'requires the module and starts with a complete `serviceContext`'
+  },
+  {
+    code:
+        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+new LoggingWinston({
+  label: 'some-label',
+  labels: {
+    env: 'local',
+    name: 'some-name',
+    version: 'some-version'
+  }
+});`,
+    description: 'imports the module with a label and labels specified'
   }
 ];
 

@@ -495,7 +495,7 @@ describe('logging-winston', () => {
       loggingWinston = new loggingWinstonLib.LoggingWinston(opts);
     });
 
-    it('should properly create an entry with labels and [label] msg',
+    it('should properly create an entry with labels and [label] message',
        (done) => {
          loggingWinston.stackdriverLog.entry =
              (entryMetadata: types.StackdriverEntryMetadata,
