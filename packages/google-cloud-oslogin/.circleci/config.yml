@@ -1,7 +1,5 @@
----
-# "Include" for unit tests definition.
-unit_tests: &unit_tests
-  steps:
+unit_tests:
+  steps: &unit_tests
     - checkout
     - run:
         name: Install modules and dependencies.
@@ -13,8 +11,7 @@ unit_tests: &unit_tests
         name: Submit coverage data to codecov.
         command: node_modules/.bin/codecov
         when: always
-
-version: 2.0
+version: 2
 workflows:
   version: 2
   tests:
@@ -24,10 +21,6 @@ workflows:
             tags:
               only: /.*/
       - node6:
-          filters:
-            tags:
-              only: /.*/
-      - node7:
           filters:
             tags:
               only: /.*/
@@ -43,7 +36,6 @@ workflows:
           requires:
             - node4
             - node6
-            - node7
             - node8
             - node9
           filters:
@@ -53,7 +45,6 @@ workflows:
           requires:
             - node4
             - node6
-            - node7
             - node8
             - node9
           filters:
@@ -67,12 +58,11 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v[\d.]+$/
-
+              only: '/^v[\d.]+$/'
 jobs:
   node4:
     docker:
-      - image: node:4
+      - image: 'node:4'
         user: node
     steps:
       - checkout
@@ -88,28 +78,22 @@ jobs:
           when: always
   node6:
     docker:
-      - image: node:6
+      - image: 'node:6'
         user: node
-    <<: *unit_tests
-  node7:
-    docker:
-      - image: node:7
-        user: node
-    <<: *unit_tests
+    steps: *unit_tests
   node8:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
-    <<: *unit_tests
+    steps: *unit_tests
   node9:
     docker:
-      - image: node:9
+      - image: 'node:9'
         user: node
-    <<: *unit_tests
-
+    steps: *unit_tests
   lint:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -126,10 +110,9 @@ jobs:
           command: npm run lint
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-
   docs:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -139,16 +122,15 @@ jobs:
       - run:
           name: Build documentation.
           command: npm run docs
-
   publish_npm:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
       - run:
           name: Set NPM authentication.
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
       - run:
-         name: Publish the module to npm.
-         command: npm publish --access=public
+          name: Publish the module to npm.
+          command: npm publish --access=public
