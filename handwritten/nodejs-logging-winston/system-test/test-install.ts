@@ -57,14 +57,14 @@ new LoggingWinston({
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
 new LoggingWinston({
-  label: 'some-label',
+  prefix: 'some-prefix',
   labels: {
     env: 'local',
     name: 'some-name',
     version: 'some-version'
   }
 });`,
-    description: 'imports the module with a label and labels specified'
+    description: 'imports the module with a prefix and labels specified'
   }
 ];
 
@@ -103,14 +103,14 @@ new LoggingWinston({
     code:
         `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston({
-  label: 'some-label',
+  prefix: 'some-prefix',
   labels: {
     env: 'local',
     name: 'some-name',
     version: 'some-version'
   }
 });`,
-    description: 'imports the module with a label and labels specified'
+    description: 'imports the module with a prefix and labels specified'
   }
 ];
 

@@ -96,7 +96,7 @@ export interface Options {
 
   logname?: string;
 
-  label?: string;
+  prefix?: string;
 
   labels?: {[key: string]: string};
 }
