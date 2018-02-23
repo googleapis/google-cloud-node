@@ -82,7 +82,7 @@ export class LoggingWinston extends winston.Transport {
       types.StackdriverLog;  // TODO: add type for @google-cloud/logging
   private resource: types.MonitoredResource|undefined;
   private serviceContext: types.ServiceContext|undefined;
-  private label: string|undefined;
+  private prefix: string|undefined;
   private labels: object|undefined;
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
   constructor(options?: types.Options) {
@@ -104,7 +104,7 @@ export class LoggingWinston extends winston.Transport {
     this.stackdriverLog = new logging(options).log(logName);
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
-    this.label = options.label;
+    this.prefix = options.prefix;
     this.labels = options.labels;
   }
 
@@ -147,7 +147,7 @@ export class LoggingWinston extends winston.Transport {
       msg += (msg ? ' ' : '') + (metadata as types.Metadata).stack;
       data.serviceContext = this.serviceContext;
     }
-    data.message = this.label ? `[${this.label}] ` : '';
+    data.message = this.prefix ? `[${this.prefix}] ` : '';
     data.message += msg;
 
     if (is.default.object(metadata)) {

@@ -477,7 +477,7 @@ describe('logging-winston', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
     const STACKDRIVER_LEVEL = 'alert';  // (code 1)
     const MESSAGE = 'message';
-    const LABEL = 'label';
+    const PREFIX = 'prefix';
     const LABELS = {
       name: 'fake-name',
       version: '0.0.0',
@@ -488,14 +488,14 @@ describe('logging-winston', () => {
 
     beforeEach(() => {
       const opts = Object.assign({}, OPTIONS, {
-        label: LABEL,
+        prefix: PREFIX,
         labels: LABELS,
       });
 
       loggingWinston = new loggingWinstonLib.LoggingWinston(opts);
     });
 
-    it('should properly create an entry with labels and [label] message',
+    it('should properly create an entry with labels and [prefix] message',
        (done) => {
          loggingWinston.stackdriverLog.entry =
              (entryMetadata: types.StackdriverEntryMetadata,
@@ -505,7 +505,7 @@ describe('logging-winston', () => {
                  labels: loggingWinston.labels,
                });
                assert.deepStrictEqual(data, {
-                 message: `[${LABEL}] ${MESSAGE}`,
+                 message: `[${PREFIX}] ${MESSAGE}`,
                  metadata: METADATA,
                });
                done();
