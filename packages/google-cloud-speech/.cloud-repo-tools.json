@@ -11,6 +11,13 @@
       "file": "recognize.js",
       "docs_link": "https://cloud.google.com/speech/docs",
       "usage": "node recognize.js --help"
+    },
+    {
+      "id": "recognize.v1p1beta1",
+      "name": "Speech Recognition v1p1beta1",
+      "file": "recognize.v1p1beta1.js",
+      "docs_link": "https://cloud.google.com/speech/docs",
+      "usage": "node recognize.v1p1beta1.js --help"
     }
   ]
 }

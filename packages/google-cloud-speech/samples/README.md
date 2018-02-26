@@ -11,6 +11,7 @@ The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integr
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Speech Recognition](#speech-recognition)
+  * [Speech Recognition v1p1beta1](#speech-recognition-v1p1beta1)
 
 ## Before you begin
 
@@ -64,6 +65,39 @@ For more information, see https://cloud.google.com/speech/docs
 
 [recognize_0_docs]: https://cloud.google.com/speech/docs
 [recognize_0_code]: recognize.js
+
+### Speech Recognition v1p1beta1
+
+View the [source code][recognize.v1p1beta1_1_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md)
+
+__Usage:__ `node recognize.v1p1beta1.js --help`
+
+```
+recognize.v1p1beta1.js <command>
+
+Commands:
+  recognize.v1p1beta1.js sync-model <filename> <model>    Detects speech in a local audio file using provided model.
+  recognize.v1p1beta1.js sync-model-gcs <gcsUri> <model>  Detects speech in an audio file located in a Google Cloud
+                                                          Storage bucket using provided model.
+
+Options:
+  --version              Show version number                                                                   [boolean]
+  --encoding, -e                                                                          [string] [default: "LINEAR16"]
+  --sampleRateHertz, -r                                                                        [number] [default: 16000]
+  --languageCode, -l                                                                         [string] [default: "en-US"]
+  --help                 Show help                                                                             [boolean]
+
+Examples:
+  node recognize.v1p1beta1.js sync-model ./resources/Google_Gnome.wav video -e LINEAR16 -r 16000
+  node recognize.v1p1beta1.js sync-model-gcs gs://gcs-test-data/Google_Gnome.wav phone_call -e FLAC -r 16000
+
+For more information, see https://cloud.google.com/speech/docs
+```
+
+[recognize.v1p1beta1_1_docs]: https://cloud.google.com/speech/docs
+[recognize.v1p1beta1_1_code]: recognize.v1p1beta1.js
 
 [shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/README.md

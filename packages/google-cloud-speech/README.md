@@ -119,6 +119,7 @@ has instructions for running the samples.
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Speech Recognition | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
+| Speech Recognition v1p1beta1 | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md) |
 
 The [Speech API Node.js Client API Reference][client-docs] documentation
 also contains samples.
