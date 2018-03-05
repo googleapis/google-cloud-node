@@ -75,6 +75,6 @@
     "nyc": "^11.2.1",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4",
-    "proxyquire": "^1.7.10"
+    "proxyquire": "^2.0.0"
   }
 }
