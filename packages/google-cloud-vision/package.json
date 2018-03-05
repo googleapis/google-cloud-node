@@ -61,7 +61,7 @@
     "@google-cloud/common": "^0.16.1",
     "async": "^2.0.1",
     "extend": "^3.0.0",
-    "google-gax": "^0.14.2",
+    "google-gax": "^0.15.0",
     "google-proto-files": "^0.15.0",
     "is": "^3.0.1",
     "lodash.merge": "^4.6.0",
