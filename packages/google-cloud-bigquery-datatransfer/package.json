@@ -46,7 +46,7 @@
     "system-test": "repo-tools test run --cmd mocha -- system-test/*.js smoke-test/*.js --no-timeouts"
   },
   "dependencies": {
-    "google-gax": "^0.14.2",
+    "google-gax": "^0.15.0",
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
