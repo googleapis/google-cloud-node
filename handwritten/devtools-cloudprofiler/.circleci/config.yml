@@ -20,6 +20,19 @@ unit_tests: &unit_tests
         name: Submit coverage data to codecov.
         command: npm run codecov
         when: always
+  
+gochecks: &gochecks
+  steps:
+   - checkout
+   - run:
+      name: Check that code is formatted.
+      command: gofmtdiff=$(gofmt -s -d .) && if [ -n "$gofmtdiff" ]; then printf 'gofmt -s found:\n%s\n' "$gofmtdiff" && exit 1; fi
+   - run:
+      name: Install golint.
+      command: go get -u github.com/golang/lint/golint
+   - run:
+      name: Run lint check.
+      command: golintlint=$(golint ./...) && if [ -n "$golintlint" ]; then printf 'golint found:\n%s\n' "$golintlint" && exit 1; fi
 
 version: 2.0
 workflows:
@@ -32,11 +45,14 @@ workflows:
            filters: *release_tags
       - node9:
           filters: *release_tags
+      - gocheck:
+          filters: *release_tags
       - publish_npm:
           requires:
             - node6
             - node8
             - node9
+            - gocheck
           filters:
             branches:
               ignore: /.*/
@@ -58,7 +74,10 @@ jobs:
       - image: node:9
         user: node
     <<: *unit_tests
-
+  gocheck:
+    docker:
+      - image: circleci/golang:1.9
+    <<: *gochecks
   publish_npm:
     docker:
       - image: node:8
