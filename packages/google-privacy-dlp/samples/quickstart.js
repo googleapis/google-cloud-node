@@ -15,7 +15,7 @@
 
 'use strict';
 
-// [START quickstart]
+// [START dlp_quickstart]
 // Imports the Google Cloud Data Loss Prevention library
 const DLP = require('@google-cloud/dlp');
 
@@ -72,4 +72,4 @@ dlp
   .catch(err => {
     console.error(`Error in inspectString: ${err.message || err}`);
   });
-// [END quickstart]
+// [END dlp_quickstart]
