@@ -11,7 +11,7 @@ cd github/cloud-profiler-nodejs
 SERVICE_KEY="${KOKORO_KEYSTORE_DIR}/72935_cloud-profiler-e2e-service-account-key"
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-REPO = $(git config --get remote.origin.url)
+REPO=$(git config --get remote.origin.url)
 
 
 export GCLOUD_TESTS_NODEJS_PROJECT_ID="cloud-profiler-e2e"
