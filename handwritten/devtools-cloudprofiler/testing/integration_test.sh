@@ -21,9 +21,9 @@ export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 # Move test to go path.
 export GOPATH="$HOME/go"
 mkdir -p "$GOPATH/src"
-cp -R "testing" "$GOPATH/src"
+cp -R "testing" "$GOPATH/src/proftest"
 
 # Run test.
-cd "$GOPATH/src/testing"
-go get -d -t ./
-go test -timeout=30m -parallel=3 -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
+cd "$GOPATH/src/proftest"
+go get -t -tags=integration .
+go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"

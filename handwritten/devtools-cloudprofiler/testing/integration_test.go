@@ -14,14 +14,13 @@
 
 // +build integration,go1.7
 
-package profiler
+package testing
 
 import (
 	"bytes"
 	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"testing"
 	"text/template"
 	"time"
@@ -91,13 +90,13 @@ echo "busybench finished profiling"
 `
 
 type nodeGCETestCase struct {
-	proftest.GCETestConfig
+	proftest.InstanceConfig
 	name             string
 	nodeVersion      string
 	wantProfileTypes []string
 }
 
-func (inst *nodeGCETestCase) initializeStartUpScript(template *template.Template) error {
+func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) error {
 	var buf bytes.Buffer
 	err := template.Execute(&buf,
 		struct {
@@ -107,16 +106,16 @@ func (inst *nodeGCETestCase) initializeStartUpScript(template *template.Template
 			Branch      string
 			Commit      string
 		}{
-			Service:     inst.service,
-			NodeVersion: inst.nodeVersion,
+			Service:     tc.name,
+			NodeVersion: tc.nodeVersion,
 			Repo:        *repo,
 			Branch:      *branch,
 			Commit:      *commit,
 		})
 	if err != nil {
-		return fmt.Errorf("failed to render startup script for %s: %v", inst.Name, err)
+		return fmt.Errorf("failed to render startup script for %s: %v", tc.name, err)
 	}
-	inst.StartupScript = buf.String()
+	tc.StartupScript = buf.String()
 	return nil
 }
 
@@ -162,38 +161,41 @@ func TestAgentIntegration(t *testing.T) {
 	testcases := []nodeGCETestCase{
 		{
 			InstanceConfig: proftest.InstanceConfig{
-				ProjectID: projectID,
-				Zone:      zone,
-				Name:      fmt.Sprintf("profiler-test-node6-%d", runID),
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-node6-%d", runID),
+				MachineType: "n1-standard-1",
 			},
 			name:             fmt.Sprintf("profiler-test-node6-%d-gce", runID),
-			wantProfileTypes: []string{"CPU", "HEAP"},
+			wantProfileTypes: []string{"WALL", "HEAP"},
 			nodeVersion:      "6",
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
-				ProjectID: projectID,
-				Zone:      zone,
-				Name:      fmt.Sprintf("profiler-test-node8-%d", runID),
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-node8-%d", runID),
+				MachineType: "n1-standard-1",
 			},
 			name:             fmt.Sprintf("profiler-test-node8-%d-gce", runID),
-			wantProfileTypes: []string{"CPU", "HEAP"},
+			wantProfileTypes: []string{"WALL", "HEAP"},
 			nodeVersion:      "8",
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
-				ProjectID: projectID,
-				Zone:      zone,
-				Name:      fmt.Sprintf("profiler-test-node9-%d", runID),
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-node9-%d", runID),
+				MachineType: "n1-standard-1",
 			},
 			name:             fmt.Sprintf("profiler-test-node9-%d-gce", runID),
-			wantProfileTypes: []string{"CPU", "HEAP"},
+			wantProfileTypes: []string{"WALL", "HEAP"},
 			nodeVersion:      "9",
 		},
 	}
 	for _, tc := range testcases {
 		tc := tc // capture range variable
-		t.Run(tc.Service, func(t *testing.T) {
+		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 			if err := tc.initializeStartUpScript(template); err != nil {
 				t.Fatalf("failed to initialize startup script")
@@ -201,7 +203,7 @@ func TestAgentIntegration(t *testing.T) {
 
 			gceTr.StartInstance(ctx, &tc.InstanceConfig)
 			defer func() {
-				if gceTr.DeleteInstance(ctx, &tcInstanceConfig); err != nil {
+				if gceTr.DeleteInstance(ctx, &tc.InstanceConfig); err != nil {
 					t.Fatal(err)
 				}
 			}()
@@ -215,32 +217,14 @@ func TestAgentIntegration(t *testing.T) {
 			timeNow := time.Now()
 			endTime := timeNow.Format(time.RFC3339)
 			startTime := timeNow.Add(-1 * time.Hour).Format(time.RFC3339)
-
-			for _, pType := range tc.expProfileTypes {
-				pr, err := tr.QueryProfiles(tc.ProjectID, tc.Service, startTime, endTime, pType)
+			for _, pType := range tc.wantProfileTypes {
+				pr, err := gceTr.TestRunner.QueryProfiles(tc.ProjectID, tc.name, startTime, endTime, pType)
 				if err != nil {
-					t.Fatalf("QueryProfiles(%s, %s, %s, %s, %s) got error: %v", tc.ProjectID, tc.Service, startTime, endTime, pType, err)
+					t.Errorf("QueryProfiles(%s, %s, %s, %s, %s) got error: %v", tc.ProjectID, tc.name, startTime, endTime, pType, err)
+					continue
 				}
-
-				if pr.NumProfiles == 0 {
-					t.Fatalf("profile response contains zero profiles: %v", pr)
-				}
-				if len(pr.Deployments) == 0 {
-					t.Fatalf("profile response contains zero deployments: %v", pr)
-				}
-				if len(pr.Profile.Functions.Name) == 0 {
-					t.Fatalf("profile does not have function data")
-				}
-
-				functionFound := false
-				for _, name := range pr.Profile.Functions.Name {
-					if strings.Contains(name, "benchmark") {
-						functionFound = true
-						break
-					}
-				}
-				if !functionFound {
-					t.Errorf("wanted function name %s not found in profile", "benchmark")
+				if err := pr.HasFunction("benchmark"); err != nil {
+					t.Error(err)
 				}
 			}
 		})
