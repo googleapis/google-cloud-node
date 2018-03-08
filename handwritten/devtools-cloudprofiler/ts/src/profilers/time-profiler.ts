@@ -36,7 +36,7 @@ export class TimeProfiler {
    */
   async profile(durationMillis: number): Promise<perftools.profiles.IProfile> {
     const runName = 'stackdriver-profiler-' + Date.now() + '-' + Math.random();
-    profiler.startProfiling(runName, true);
+    profiler.startProfiling(runName);
     await delay(durationMillis);
     const result = profiler.stopProfiling(runName);
     return serializeTimeProfile(result, this.intervalMicros);

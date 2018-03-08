@@ -49,8 +49,6 @@ Local<Value> TranslateTimeProfile(const CpuProfile* profile) {
     profile->GetTitle());
   js_profile->Set(Nan::New<String>("topDownRoot").ToLocalChecked(),
     TranslateTimeProfileNode(profile->GetTopDownRoot()));
-  js_profile->Set(Nan::New<String>("samplesCount").ToLocalChecked(),
-    Nan::New<Integer>(profile->GetSamplesCount()));
   js_profile->Set(Nan::New<String>("startTime").ToLocalChecked(),
     Nan::New<Number>(profile->GetStartTime()));
   js_profile->Set(Nan::New<String>("endTime").ToLocalChecked(),
@@ -60,8 +58,10 @@ Local<Value> TranslateTimeProfile(const CpuProfile* profile) {
 
 NAN_METHOD(StartProfiling) {
   Local<String> name = info[0].As<String>();
-  bool record_samples = info[1].As<Boolean>()->BooleanValue();
-  info.GetIsolate()->GetCpuProfiler()->StartProfiling(name, record_samples);
+
+  // Sample counts and timestamps are not used, so we do not need to record
+  // samples.
+  info.GetIsolate()->GetCpuProfiler()->StartProfiling(name, false);
 }
 
 NAN_METHOD(StopProfiling) {
