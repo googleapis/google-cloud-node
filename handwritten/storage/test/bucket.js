@@ -2218,15 +2218,14 @@ describe('Bucket', function() {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = {destination: fakeFile};
       fakeFile.createWriteStream = function() {
-        var ws = new stream.Writable();
+        var ws = through();
         setImmediate(function() {
-          ws.emit('error', error);
-          ws.end();
+          ws.destroy(error);
         });
         return ws;
       };
       bucket.upload(filepath, options, function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
