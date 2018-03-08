@@ -92,7 +92,7 @@
     "nyc": "^11.3.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.9.2",
-    "proxyquire": "^1.7.10",
+    "proxyquire": "^2.0.0",
     "sinon": "^4.1.1"
   }
 }
