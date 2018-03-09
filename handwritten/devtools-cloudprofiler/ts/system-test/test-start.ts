@@ -73,9 +73,9 @@ before(async () => {
       .reply(200, (request: RequestProfile, body: RequestProfile) => {
         tempUploadedProfiles.push(body);
       });
-  nock('https://accounts.google.com')
+  nock('https://www.googleapis.com')
       .post(
-          '/o/oauth2/token',
+          /\/oauth2.*token/,
           (body: {}) => {
             return true;
           })

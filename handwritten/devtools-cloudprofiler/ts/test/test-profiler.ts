@@ -71,12 +71,8 @@ when(mockHeapProfiler.profile()).thenReturn(heapProfile);
 
 nock.disableNetConnect();
 function nockOauth2(): nock.Scope {
-  return nock('https://accounts.google.com')
-      .post(
-          '/o/oauth2/token',
-          (body: {}) => {
-            return true;
-          })
+  return nock('https://www.googleapis.com')
+      .post(/\/oauth2.*token/, () => true)
       .once()
       .reply(200, {
         refresh_token: 'hello',
@@ -84,7 +80,6 @@ function nockOauth2(): nock.Scope {
         expiry_date: new Date(9999, 1, 1)
       });
 }
-
 
 describe('Retryer', () => {
   it('should backoff until max-backoff reached', () => {
