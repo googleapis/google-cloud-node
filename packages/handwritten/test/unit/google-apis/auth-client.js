@@ -21,15 +21,13 @@ var proxyquire = require('proxyquire');
 var Configuration = require('../../../src/configuration.js').Configuration;
 
 function verifyReportedMessage(config1, errToReturn, expectedLogs) {
-  class ServiceStub {
-    constructor() {
-      this.authClient = {
-        getToken: function(cb) {
-          cb(errToReturn);
-        },
-      };
-      this.request = function() {};
-    }
+  function ServiceStub() {
+    this.authClient = {
+      getToken: function(cb) {
+        cb(errToReturn);
+      },
+    };
+    this.request = function() {};
   }
 
   var RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
