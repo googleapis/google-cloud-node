@@ -18,7 +18,8 @@
  * @module error-reporting
  */
 
-import {Logger} from '@google-cloud/common';
+import * as types from './types';
+const Logger: types.Logger = require('@google-cloud/common').Logger;
 import * as e from 'express';
 import * as h from 'hapi';
 import {ServerResponse} from 'http';
@@ -97,7 +98,7 @@ import {Request} from './request-extractors/manual';
  *     reporting configuration.
  */
 export class ErrorReporting {
-  private _logger: Logger;
+  private _logger: types.Logger;
   private _config: Configuration;
   private _client: AuthClient;
   report:
@@ -110,7 +111,7 @@ export class ErrorReporting {
       (client: AuthClient, config: Configuration, server: r.Server) => void;
   koa: (next: Function) => Iterable<Function>;
 
-  constructor(initConfiguration: ConfigurationOptions) {
+  constructor(initConfiguration?: ConfigurationOptions) {
     if (!(this instanceof ErrorReporting)) {
       return new ErrorReporting(initConfiguration);
     }

@@ -22,7 +22,8 @@ const isBoolean = is.boolean;
 const isString = is.string;
 const isNumber = is.number;
 
-import {Logger} from '@google-cloud/common';
+import * as types from './types';
+const Logger: types.Logger = require('@google-cloud/common').Logger;
 
 export interface ConfigurationOptions {
   projectId?: string;
@@ -62,7 +63,7 @@ export interface ServiceContext {
  *  been initialized.
  */
 export class Configuration {
-  _logger: Logger;
+  _logger: types.Logger;
   _shouldReportErrorsToAPI: boolean;
   _projectId: string|null;
   _key: string|null;
@@ -72,7 +73,8 @@ export class Configuration {
   _reportUnhandledRejections: boolean;
   _givenConfiguration: ConfigurationOptions;
 
-  constructor(givenConfig: ConfigurationOptions, logger: Logger) {
+  constructor(
+      givenConfig: ConfigurationOptions|undefined, logger: types.Logger) {
     /**
      * The _logger property caches the logger instance created at the top-level
      * for configuration logging purposes.
@@ -182,7 +184,7 @@ export class Configuration {
      * @type {Object|Null}
      * @defaultvalue null
      */
-    this._givenConfiguration = isObject(givenConfig) ? givenConfig : {};
+    this._givenConfiguration = isObject(givenConfig) ? givenConfig! : {};
     this._checkLocalServiceContext();
     this._gatherLocalConfiguration();
   }

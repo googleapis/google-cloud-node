@@ -9,6 +9,7 @@
   },
   "repository": "googleapis/nodejs-error-reporting",
   "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
   "nyc": {
     "exclude": [
       "./build/utils/fuzzer.js"
@@ -44,6 +45,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
+    "postcompile": "cpy src/types.d.ts build/src/ && cpy 'utils/**/*.*' build --parents && cpy 'test/**/*.*' build --parents",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
@@ -51,32 +53,41 @@
     "license-check": "jsgl --local ."
   },
   "dependencies": {
-    "@google-cloud/common": "^0.16.0",
+    "express": "^4.13.4",
     "extend": "^3.0.0",
+    "hapi": "^17.1.1",
     "is": "^3.2.0",
-    "lodash.has": "^4.5.2"
+    "lodash.has": "^4.5.2",
+    "restify": "^6.3.4"
   },
   "devDependencies": {
+    "@google-cloud/common": "^0.16.0",
     "@google-cloud/nodejs-repo-tools": "^2.0.11",
     "@types/express": "^4.11.0",
+    "@types/glob": "^5.0.35",
     "@types/hapi": "^16.1.11",
     "@types/is": "0.0.18",
     "@types/koa": "^2.0.43",
     "@types/lodash.has": "^4.5.3",
     "@types/mocha": "^2.2.45",
+    "@types/ncp": "^2.0.1",
     "@types/node": "^9.4.0",
+    "@types/once": "^1.4.0",
+    "@types/pify": "^3.0.0",
     "@types/request": "^2.0.9",
     "@types/restify": "^5.0.6",
+    "@types/rimraf": "^2.0.2",
+    "@types/tmp": "0.0.33",
     "async": "^2.6.0",
     "body-parser": "^1.15.1",
     "codecov": "^3.0.0",
+    "cpy-cli": "^1.0.1",
     "eslint": "^4.9.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-prettier": "^2.3.1",
-    "express": "^4.13.4",
+    "glob": "^7.1.2",
     "gts": "^0.5.3",
-    "hapi": "^17.1.1",
     "ink-docstrap": "^1.3.0",
     "intelli-espower-loader": "^1.0.1",
     "js-green-licenses": "^0.5.0",
@@ -100,7 +111,6 @@
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4",
     "proxyquire": "^1.7.11",
-    "restify": "^6.3.4",
     "typescript": "~2.6.2"
   }
 }
