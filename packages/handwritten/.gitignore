@@ -8,6 +8,4 @@ google-cloud-error-reporting-*.tgz
 out/
 system-test/secrets.js
 system-test/*key.json
-*.lock
-*-lock.js*
 build
