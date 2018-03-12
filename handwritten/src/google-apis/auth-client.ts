@@ -15,7 +15,8 @@
  */
 /*jshint unused:false*/
 
-import * as common from '@google-cloud/common';
+import * as types from '../types';
+export const common: types.Common = require('@google-cloud/common');
 const pkg = require('../../../package.json');
 import * as is from 'is';
 // TODO: Address the error where `is` does not have a `fn` property
@@ -59,9 +60,8 @@ const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  */
 export class RequestHandler extends common.Service {
   private _config: Configuration;
-  private _logger: common.Logger;
+  private _logger: types.Logger;
   // TODO: Make this more precise
-  private authClient: {getToken: (err: {}) => void;};
 
   /**
    * Returns a query-string request object if a string key is given, otherwise
@@ -95,7 +95,7 @@ export class RequestHandler extends common.Service {
    * @param {Configuration} config - an instance of the Configuration class
    * @param {Logger} logger - an instance of logger
    */
-  constructor(config: Configuration, logger: common.Logger) {
+  constructor(config: Configuration, logger: types.Logger) {
     const pid = config.getProjectId();
     // If an API key is provided, do not try to authenticate.
     const tryAuthenticate = !config.getKey();
@@ -109,7 +109,7 @@ export class RequestHandler extends common.Service {
           customEndpoint: !tryAuthenticate,
         },
         // TODO: Fix the type incompatibilities that require this cast
-        config as common.ServiceAuthenticationConfig);
+        config as types.ServiceAuthenticationConfig);
     this._config = config;
     this._logger = logger;
 
