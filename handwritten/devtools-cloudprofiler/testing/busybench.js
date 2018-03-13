@@ -15,20 +15,26 @@
  */
 
 const startTime = Date.now();
+const testArr = [];
 
 /**
- * Repeatedly fills a buffer, then calls itself with setImmediate.
+ * Fills several arrays, then calls itself with setImmediate.
  * It continues to do this until durationSeconds after the startTime.
  */
 function benchmark(durationSeconds) {
-  var buffer = new Buffer(1e4);
-  for (var k = 0; k < 1e4; k++) {
-    for (var j = 0; j < buffer.length; j++) {
-      buffer[j] = 0;
+  for (let i = 0; i < 200; i++) {
+    testArr[i] = new Array(512 * 1024);
+    for (let j=0; j < testArr[i].length; j++) {
+      testArr[i][j] = i * j;
+    }
+  }
+  for (let i = 0; i < testArr.length; i++) {
+    for (let j = 0; j < testArr[i].length; j++) {
+      testArr[i][j] = Math.sqrt(j * testArr[i][j]);
     }
   }
   if (Date.now() - startTime < 1000 * durationSeconds) {
-    setImmediate(() => benchmark(durationSeconds));
+    setTimeout(() => benchmark(durationSeconds), 5);
   }
 }
 

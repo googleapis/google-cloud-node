@@ -89,11 +89,16 @@ GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --require @google-cloud
 echo "busybench finished profiling"
 `
 
+type profileSummary struct {
+	profileType  string
+	functionName string
+}
+
 type nodeGCETestCase struct {
 	proftest.InstanceConfig
-	name             string
-	nodeVersion      string
-	wantProfileTypes []string
+	name         string
+	nodeVersion  string
+	wantProfiles []profileSummary
 }
 
 func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) error {
@@ -166,9 +171,9 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node6-%d", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:             fmt.Sprintf("profiler-test-node6-%d-gce", runID),
-			wantProfileTypes: []string{"WALL", "HEAP"},
-			nodeVersion:      "6",
+			name:         fmt.Sprintf("profiler-test-node6-%d-gce", runID),
+			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			nodeVersion:  "6",
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
@@ -177,9 +182,9 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node8-%d", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:             fmt.Sprintf("profiler-test-node8-%d-gce", runID),
-			wantProfileTypes: []string{"WALL", "HEAP"},
-			nodeVersion:      "8",
+			name:         fmt.Sprintf("profiler-test-node8-%d-gce", runID),
+			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			nodeVersion:  "8",
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
@@ -188,9 +193,9 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node9-%d", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:             fmt.Sprintf("profiler-test-node9-%d-gce", runID),
-			wantProfileTypes: []string{"WALL", "HEAP"},
-			nodeVersion:      "9",
+			name:         fmt.Sprintf("profiler-test-node9-%d-gce", runID),
+			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			nodeVersion:  "9",
 		},
 	}
 	for _, tc := range testcases {
@@ -217,14 +222,14 @@ func TestAgentIntegration(t *testing.T) {
 			timeNow := time.Now()
 			endTime := timeNow.Format(time.RFC3339)
 			startTime := timeNow.Add(-1 * time.Hour).Format(time.RFC3339)
-			for _, pType := range tc.wantProfileTypes {
-				pr, err := gceTr.TestRunner.QueryProfiles(tc.ProjectID, tc.name, startTime, endTime, pType)
+			for _, wantProfile := range tc.wantProfiles {
+				pr, err := gceTr.TestRunner.QueryProfiles(tc.ProjectID, tc.name, startTime, endTime, wantProfile.profileType)
 				if err != nil {
-					t.Errorf("QueryProfiles(%s, %s, %s, %s, %s) got error: %v", tc.ProjectID, tc.name, startTime, endTime, pType, err)
+					t.Errorf("QueryProfiles(%s, %s, %s, %s, %s) got error: %v", tc.ProjectID, tc.name, startTime, endTime, wantProfile.profileType, err)
 					continue
 				}
-				if err := pr.HasFunction("benchmark"); err != nil {
-					t.Error(err)
+				if err := pr.HasFunction(wantProfile.functionName); err != nil {
+					t.Errorf("Function %s not found in profiles of type %s: %v", wantProfile.profileType, wantProfile.functionName, err)
 				}
 			}
 		})
