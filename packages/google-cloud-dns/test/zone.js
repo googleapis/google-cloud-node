@@ -804,9 +804,12 @@ describe('Zone', function() {
     describe('success', function() {
       var recordType = 'ns';
       var parsedZonefile = {};
-      parsedZonefile[recordType] = {a: 'b', c: 'd'};
 
       beforeEach(function() {
+        parsedZonefile = {
+          [recordType]: {a: 'b', c: 'd'},
+        };
+
         parseOverride = function() {
           return parsedZonefile;
         };
@@ -830,6 +833,26 @@ describe('Zone', function() {
           assert.strictEqual(args[2], parsedZonefile[recordType]);
 
           callback();
+        };
+
+        zone.import(path, done);
+      });
+
+      it('should use the default ttl', function(done) {
+        var defaultTTL = '90';
+
+        parsedZonefile.$ttl = defaultTTL;
+        parsedZonefile[recordType] = {};
+        parsedZonefile.mx = {ttl: '180'};
+
+        zone.addRecords = function(recordsToCreate) {
+          var record1 = recordsToCreate[0].calledWith_[2];
+          assert.strictEqual(record1.ttl, defaultTTL);
+
+          var record2 = recordsToCreate[1].calledWith_[2];
+          assert.strictEqual(record2.ttl, '180');
+
+          done();
         };
 
         zone.import(path, done);
