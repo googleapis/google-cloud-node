@@ -59,7 +59,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "google-gax": "^0.15.0",
+    "google-gax": "^0.16.0",
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
