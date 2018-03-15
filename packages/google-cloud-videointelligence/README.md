@@ -164,4 +164,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-video-intelligence/blob/maste
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest/
 [product-docs]: https://cloud.google.com/video-intelligence
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
