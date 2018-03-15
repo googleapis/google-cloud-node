@@ -1,0 +1,13 @@
+{
+  "_product": "text-to-speech",
+  "id": "text-to-speech",
+  "name": "Google Cloud Text-To-Speech",
+  "short_name": "Text-To-Speech",
+  "docs_url": "https://cloud.google.com/texttospeech",
+  "description": "Cloud Text-to-Speech API",
+  "api_id": "texttospeech",
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/text-to-speech/latest/",
+  "release_quality": "alpha"
+}
