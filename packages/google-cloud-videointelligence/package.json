@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/video-intelligence",
   "description": "Google Cloud Video Intelligence API client for Node.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -30,6 +30,7 @@
   ],
   "contributors": [
     "Ace Nassri <anassri@google.com>",
+    "Alexander Fenster <fenster@google.com>",
     "Ali Ijaz Sheikh <ofrobots@google.com>",
     "Evawere Ogbe <eoogbe@google.com>",
     "Gus Class <class@google.com>",
@@ -37,7 +38,9 @@
     "Luke Sneeringer <lukesneeringer@google.com>",
     "Song Wang <songwang@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tim Swast <swast@google.com>"
+    "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>",
+    "remi Taylor <remi@remitaylor.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",

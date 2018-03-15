@@ -29,16 +29,21 @@ View the [source code][video_0_code].
 __Usage:__ `node analyze.js --help`
 
 ```
+analyze.js <command>
+
 Commands:
-  faces <gcsUri>        Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
-  shots <gcsUri>        Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video
-                        Intelligence API.
-  labels-gcs <gcsUri>   Labels objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.
-  labels-file <gcsUri>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
-  safe-search <gcsUri>  Detects explicit content in a video stored in Google Cloud Storage.
+  analyze.js faces <gcsUri>          Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video
+                                     Intelligence API.
+  analyze.js shots <gcsUri>          Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud
+                                     Video Intelligence API.
+  analyze.js labels-gcs <gcsUri>     Labels objects in a video stored in Google Cloud Storage using the Cloud Video
+                                     Intelligence API.
+  analyze.js labels-file <filePath>  Labels objects in a video stored locally using the Cloud Video Intelligence API.
+  analyze.js safe-search <gcsUri>    Detects explicit content in a video stored in Google Cloud Storage.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
 
 Examples:
   node analyze.js faces gs://demomaker/larry_sergey_ice_bucket_short.mp4
@@ -53,5 +58,5 @@ For more information, see https://cloud.google.com/video-intelligence/docs
 [video_0_docs]: https://cloud.google.com/video-intelligence/docs
 [video_0_code]: analyze.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/README.md
