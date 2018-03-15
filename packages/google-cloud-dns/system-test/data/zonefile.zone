@@ -1,3 +1,9 @@
 $TTL 3600
 {DNS_DOMAIN} 21600 IN SPF "v=spf1" "mx:{DNS_DOMAIN}" "-all"
 {DNS_DOMAIN} IN TXT "google-site-verification=xxxxxxxxxxxxYYYYYYXXX"
+{DNS_DOMAIN} 21600 MX 10 mail.example.com.
+{DNS_DOMAIN} 21600 MX 30 mail.example.com.
+{DNS_DOMAIN} A 128.9.0.32
+             A 10.1.0.52
+{DNS_DOMAIN} A 10.2.0.27
+             A 128.9.0.33

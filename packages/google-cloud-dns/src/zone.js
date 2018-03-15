@@ -20,8 +20,11 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var exec = require('methmeth');
 var extend = require('extend');
+var flatten = require('lodash.flatten');
 var fs = require('fs');
+var groupBy = require('lodash.groupby');
 var is = require('is');
+var prop = require('propprop');
 var util = require('util');
 var zonefile = require('dns-zonefile');
 
@@ -342,13 +345,39 @@ Zone.prototype.createChange = function(config, callback) {
     throw new Error('Cannot create a change with no additions or deletions.');
   }
 
-  var body = extend({}, config, {
-    additions: arrify(config.add).map(exec('toJSON')),
-    deletions: arrify(config.delete).map(exec('toJSON')),
-  });
-
+  var body = extend(
+    {
+      additions: groupByType(arrify(config.add).map(exec('toJSON'))),
+      deletions: groupByType(arrify(config.delete).map(exec('toJSON'))),
+    },
+    config
+  );
   delete body.add;
   delete body.delete;
+
+  function groupByType(changes) {
+    changes = groupBy(changes, 'type');
+
+    var changesArray = [];
+
+    for (var recordType in changes) {
+      var recordsByName = groupBy(changes[recordType], 'name');
+
+      for (var recordName in recordsByName) {
+        var records = recordsByName[recordName];
+        var templateRecord = extend({}, records[0]);
+
+        if (records.length > 1) {
+          // Combine the `rrdatas` values from all records of the same type.
+          templateRecord.rrdatas = flatten(records.map(prop('rrdatas')));
+        }
+
+        changesArray.push(templateRecord);
+      }
+    }
+
+    return changesArray;
+  }
 
   this.request(
     {

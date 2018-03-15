@@ -56,7 +56,10 @@
     "dns-zonefile": "0.2.2",
     "extend": "^3.0.0",
     "is": "^3.0.1",
+    "lodash.flatten": "^4.4.0",
+    "lodash.groupby": "^4.6.0",
     "methmeth": "^1.0.0",
+    "propprop": "^0.3.1",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {

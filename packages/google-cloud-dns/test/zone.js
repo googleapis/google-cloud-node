@@ -18,11 +18,15 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
+var exec = require('methmeth');
 var extend = require('extend');
+var flatten = require('lodash.flatten');
 var nodeutil = require('util');
+var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
+var uuid = require('uuid');
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
@@ -192,6 +196,23 @@ describe('Zone', function() {
   });
 
   describe('createChange', function() {
+    function generateRecord(recordJson) {
+      recordJson = extend(
+        {
+          name: uuid.v1(),
+          type: uuid.v1(),
+          rrdatas: [uuid.v1(), uuid.v1()],
+        },
+        recordJson
+      );
+
+      return {
+        toJSON: function() {
+          return recordJson;
+        },
+      };
+    }
+
     it('should throw error if add or delete is not provided', function() {
       assert.throws(function() {
         zone.createChange({}, util.noop);
@@ -199,19 +220,9 @@ describe('Zone', function() {
     });
 
     it('should parse and rename add to additions', function(done) {
-      var recordsToAdd = [
-        {
-          toJSON: function() {
-            return 'a';
-          },
-        },
-        {
-          toJSON: function() {
-            return 'a';
-          },
-        },
-      ];
-      var expectedAdditions = ['a', 'a'];
+      var recordsToAdd = [generateRecord(), generateRecord()];
+
+      var expectedAdditions = recordsToAdd.map(exec('toJSON'));
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.add, undefined);
@@ -223,19 +234,9 @@ describe('Zone', function() {
     });
 
     it('should parse and rename delete to deletions', function(done) {
-      var recordsToDelete = [
-        {
-          toJSON: function() {
-            return 'a';
-          },
-        },
-        {
-          toJSON: function() {
-            return 'a';
-          },
-        },
-      ];
-      var expectedDeletions = ['a', 'a'];
+      var recordsToDelete = [generateRecord(), generateRecord()];
+
+      var expectedDeletions = recordsToDelete.map(exec('toJSON'));
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.delete, undefined);
@@ -244,6 +245,31 @@ describe('Zone', function() {
       };
 
       zone.createChange({delete: recordsToDelete}, assert.ifError);
+    });
+
+    it('should group changes by name and type', function(done) {
+      var recordsToAdd = [
+        generateRecord({name: 'name.com.', type: 'mx'}),
+        generateRecord({name: 'name.com.', type: 'mx'}),
+      ];
+
+      zone.request = function(reqOpts) {
+        var expectedRRDatas = flatten(
+          recordsToAdd.map(exec('toJSON')).map(prop('rrdatas'))
+        );
+
+        assert.deepStrictEqual(reqOpts.json.additions, [
+          {
+            name: 'name.com.',
+            type: 'mx',
+            rrdatas: expectedRRDatas,
+          },
+        ]);
+
+        done();
+      };
+
+      zone.createChange({add: recordsToAdd}, assert.ifError);
     });
 
     it('should make correct API request', function(done) {
