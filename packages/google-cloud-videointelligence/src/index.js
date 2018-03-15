@@ -44,6 +44,7 @@ const gapic = Object.freeze({
   v1: require('./v1'),
   v1beta2: require('./v1beta2'),
   v1beta1: require('./v1beta1'),
+  v1p1beta1: require('./v1p1beta1'),
 });
 
 /**
@@ -120,6 +121,13 @@ module.exports.v1beta2 = gapic.v1beta2;
  *   Reference to {@link v1beta1.VideoIntelligenceServiceClient}
  */
 module.exports.v1beta1 = gapic.v1beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} VideoIntelligenceServiceClient
+ *   Reference to {@link v1p1beta1.VideoIntelligenceServiceClient}
+ */
+module.exports.v1p1beta1 = gapic.v1p1beta1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);
