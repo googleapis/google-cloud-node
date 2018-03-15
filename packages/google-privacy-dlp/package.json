@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dlp",
   "description": "DLP API client for Node.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -33,13 +33,13 @@
     "Alexander Fenster <fenster@google.com>",
     "Ernest Landrito <landrito@google.com>",
     "Evawere Ogbe <eoogbe@gmail.com>",
-    "Google API Publisher <googleapis-publisher@google.com>",
     "Jason Dobry <jdobry@google.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
     "Song Wang <songwang@google.com>",
     "Stephen <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tim Swast <swast@google.com>"
+    "Tim Swast <swast@google.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",

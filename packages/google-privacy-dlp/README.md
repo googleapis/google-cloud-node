@@ -72,6 +72,9 @@ const dlp = new DLP.DlpServiceClient();
 // The string to inspect
 const string = 'Robert Frost';
 
+// The project ID to run the API call under
+const projectId = process.env.GCLOUD_PROJECT;
+
 // The minimum likelihood required before returning a match
 const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
 
@@ -79,30 +82,33 @@ const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
 const maxFindings = 0;
 
 // The infoTypes of information to match
-const infoTypes = [{name: 'US_MALE_NAME'}, {name: 'US_FEMALE_NAME'}];
+const infoTypes = [{name: 'PERSON_NAME'}, {name: 'US_STATE'}];
 
 // Whether to include the matching string
 const includeQuote = true;
 
-// Construct items to inspect
-const items = [{type: 'text/plain', value: string}];
+// Construct item to inspect
+const item = {value: string};
 
 // Construct request
 const request = {
+  parent: dlp.projectPath(projectId),
   inspectConfig: {
     infoTypes: infoTypes,
     minLikelihood: minLikelihood,
-    maxFindings: maxFindings,
+    limits: {
+      maxFindingsPerRequest: maxFindings,
+    },
     includeQuote: includeQuote,
   },
-  items: items,
+  item: item,
 };
 
 // Run request
 dlp
   .inspectContent(request)
   .then(response => {
-    const findings = response[0].results[0].findings;
+    const findings = response[0].result.findings;
     if (findings.length > 0) {
       console.log(`Findings:`);
       findings.forEach(finding => {
@@ -133,6 +139,9 @@ has instructions for running the samples.
 | Metadata | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md) |
 | DeID | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deid.js,samples/README.md) |
 | Risk Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/risk.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/risk.js,samples/README.md) |
+| Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/templates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/templates.js,samples/README.md) |
+| Job Management | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/jobs.js,samples/README.md) |
+| Job Triggers | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/triggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/triggers.js,samples/README.md) |
 
 The [Data Loss Prevention (DLP) API Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -162,4 +171,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-dlp/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dlp/latest/
 [product-docs]: https://cloud.google.com/dlp/docs/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png

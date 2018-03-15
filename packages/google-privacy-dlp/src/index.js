@@ -30,6 +30,7 @@
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
   v2beta1: require('./v2beta1'),
+  v2: require('./v2'),
 });
 
 /**
@@ -66,7 +67,7 @@ const gapic = Object.freeze({
  * @property {constructor} DlpServiceClient
  *   Reference to {@link v2beta1.DlpServiceClient}
  */
-module.exports = gapic.v2beta1;
+module.exports = gapic.v2;
 
 /**
  * @type {object}
@@ -74,6 +75,7 @@ module.exports = gapic.v2beta1;
  *   Reference to {@link v2beta1.DlpServiceClient}
  */
 module.exports.v2beta1 = gapic.v2beta1;
+module.exports.v2 = gapic.v2;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);

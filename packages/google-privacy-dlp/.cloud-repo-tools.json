@@ -1,10 +1,6 @@
 {
   "requiresKeyFile": true,
   "requiresProjectId": true,
-  "requiredEnvVars": [
-    "DLP_DEID_WRAPPED_KEY",
-    "DLP_DEID_KEY_NAME"
-  ],
   "product": "dlp",
   "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/dlp/latest/",
   "release_quality": "beta",
@@ -43,6 +39,27 @@
       "file": "risk.js",
       "docs_link": "https://cloud.google.com/dlp/docs",
       "usage": "node risk.js --help"
+    },
+    {
+      "id": "templates",
+      "name": "Inspect Templates",
+      "file": "templates.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node templates.js --help"
+    },
+    {
+      "id": "jobs",
+      "name": "Job Management",
+      "file": "jobs.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node jobs.js --help"
+    },
+    {
+      "id": "triggers",
+      "name": "Job Triggers",
+      "file": "triggers.js",
+      "docs_link": "https://cloud.google.com/dlp/docs",
+      "usage": "node triggers.js --help"
     }
   ]
 }

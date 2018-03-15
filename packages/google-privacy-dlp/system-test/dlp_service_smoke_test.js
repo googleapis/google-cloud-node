@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2017 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,24 +18,23 @@ describe('DlpServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const dlp = require('../src');
 
-    var client = new dlp.v2beta1.DlpServiceClient({
-      // optional auth parameters.
-    });
+    var projectId = process.env['GCLOUD_PROJECT'];
+    var client = new dlp.v2.DlpServiceClient({});
 
-    var minLikelihood = 'POSSIBLE';
     var inspectConfig = {
-      minLikelihood: minLikelihood,
+      infoTypes: [{name: 'PHONE_NUMBER'}],
+      minLikelihood: 'POSSIBLE',
     };
     var type = 'text/plain';
     var value = 'my phone number is 215-512-1212';
-    var itemsElement = {
+    var item = {
       type: type,
       value: value,
     };
-    var items = [itemsElement];
     var request = {
       inspectConfig: inspectConfig,
-      items: items,
+      item: item,
+      parent: client.projectPath(projectId),
     };
     client
       .inspectContent(request)
