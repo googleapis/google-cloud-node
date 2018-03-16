@@ -72,5 +72,5 @@ __Usage:__ `node error.js`
 [error_2_docs]: https://cloud.google.com/datastore/docs/concepts/errors
 [error_2_code]: error.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/README.md
