@@ -29,7 +29,12 @@
     "Google Cloud Dataproc API"
   ],
   "contributors": [
-    "Alexander Fenster <fenster@google.com>"
+    "Alexander Fenster <fenster@google.com>",
+    "Alexander Fenster <github@fenster.name>",
+    "Dave Gramlich <callmehiphop@gmail.com>",
+    "Justin Beckwith <justin.beckwith@gmail.com>",
+    "Stephen <stephenplusplus@users.noreply.github.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "test": "repo-tools test run --cmd npm -- run cover",
@@ -50,7 +55,7 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.3",
+    "@google-cloud/nodejs-repo-tools": "^2.2.4",
     "async": "^2.6.0",
     "codecov": "^3.0.0",
     "eslint": "^4.13.1",
