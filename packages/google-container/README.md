@@ -1,20 +1,20 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Container Engine: Node.js Client](https://github.com/googleapis/nodejs-cloud-container)
+# [Google Kubernetes Engine: Node.js Client](https://github.com/googleapis/nodejs-cloud-container)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-cloud-container.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-cloud-container)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-cloud-container?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-cloud-container)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-container/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-container)
 
-> Node.js idiomatic client for [Container Engine][product-docs].
+> Node.js idiomatic client for [Kubernetes Engine][product-docs].
 
-[Container Engine](https://cloud.google.com/container-engine/docs/) let&#x27;s you run Docker containers on Google Cloud Platform, powered by Kubernetes.
+[Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/) is used for building and managing container based applications, powered by the open source Kubernetes technology.
 
 
-* [Container Engine Node.js Client API Reference][client-docs]
+* [Kubernetes Engine Node.js Client API Reference][client-docs]
 * [github.com/googleapis/nodejs-cloud-container](https://github.com/googleapis/nodejs-cloud-container)
-* [Container Engine Documentation][product-docs]
+* [Kubernetes Engine Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     [Enable billing][billing]
 
-1.  Enable the Google Container Engine API.
+1.  Enable the Google Kubernetes Engine API.
 
     [Enable the API][enable_api]
 
@@ -59,9 +59,43 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     npm install --save @google-cloud/container
 
+### Using the client library
+
+```javascript
+const container = require('@google-cloud/cloud-container');
+
+if (
+  !process.env.GCLOUD_PROJECT ||
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS
+) {
+  throw new Error(
+    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+  );
+}
+
+const client = new container.v1.ClusterManagerClient({
+  // optional auth parameters.
+});
+
+const projectId = process.env.GCLOUD_PROJECT;
+const zone = 'us-central1-a';
+const request = {
+  projectId: projectId,
+  zone: zone,
+};
+
+client.listClusters(request)
+  .then(responses => {
+    const response = responses[0];
+    console.log(response);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+```
 
 
-The [Container Engine Node.js Client API Reference][client-docs] documentation
+The [Kubernetes Engine Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
@@ -87,5 +121,5 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-cloud-container/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/container/latest/
-[product-docs]: https://cloud.google.com/container-engine/docs/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[product-docs]: https://cloud.google.com/kubernetes-engine/docs/
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
