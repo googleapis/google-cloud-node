@@ -30,6 +30,7 @@
   ],
   "contributors": [
     "Ace Nassri <anassri@google.com>",
+    "Alexander Fenster <github@fenster.name>",
     "Bill Prin <waprin@google.com>",
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Ernest Landrito <landrito@google.com>",
@@ -63,7 +64,7 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.0",
+    "@google-cloud/nodejs-repo-tools": "^2.2.3",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",

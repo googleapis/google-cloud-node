@@ -30,28 +30,30 @@ View the [source code][metrics_0_code].
 __Usage:__ `node metrics.js --help`
 
 ```
+metrics.js <command>
+
 Commands:
-  create [projectId]                       Creates an example 'custom.googleapis.com/stores/daily_sales' custom metric
-                                           descriptor.
-  list [projectId]                         Lists metric descriptors.
-  get <metricId> [projectId]               Get a metric descriptor.
-  delete <metricId> [projectId]            Deletes a custom metric descriptor.
-  write [projectId]                        Writes example time series data to
-                                           'custom.googleapis.com/stores/daily_sales'.
-  read <filter> [projectId]                Reads time series data that matches the given filter.
-  read-fields [projectId]                  Reads headers of time series data that matches
-                                           'compute.googleapis.com/instance/cpu/utilization'.
-  read-aggregate [projectId]               Aggregates time series data that matches
-                                           'compute.googleapis.com/instance/cpu/utilization'.
-  read-reduce [projectId]                  Reduces time series data that matches
-                                           'compute.googleapis.com/instance/cpu/utilization'.
-  list-resources [projectId]               Lists monitored resource descriptors.
-  get-resource <resourceType> [projectId]  Get a monitored resource descriptor.
+  metrics.js create [projectId]                       Creates an example 'custom.googleapis.com/stores/daily_sales'
+                                                      custom metric descriptor.
+  metrics.js list [projectId]                         Lists metric descriptors.
+  metrics.js get <metricId> [projectId]               Get a metric descriptor.
+  metrics.js delete <metricId> [projectId]            Deletes a custom metric descriptor.
+  metrics.js write [projectId]                        Writes example time series data to
+                                                      'custom.googleapis.com/stores/daily_sales'.
+  metrics.js read <filter> [projectId]                Reads time series data that matches the given filter.
+  metrics.js read-fields [projectId]                  Reads headers of time series data that matches
+                                                      'compute.googleapis.com/instance/cpu/utilization'.
+  metrics.js read-aggregate [projectId]               Aggregates time series data that matches
+                                                      'compute.googleapis.com/instance/cpu/utilization'.
+  metrics.js read-reduce [projectId]                  Reduces time series data that matches
+                                                      'compute.googleapis.com/instance/cpu/utilization'.
+  metrics.js list-resources [projectId]               Lists monitored resource descriptors.
+  metrics.js get-resource <resourceType> [projectId]  Get a monitored resource descriptor.
 
 Options:
   --version        Show version number                                                                         [boolean]
-  --help           Show help                                                                                   [boolean]
   --projectId, -p                                                                                               [string]
+  --help           Show help                                                                                   [boolean]
 
 Examples:
   node metrics.js create
@@ -81,17 +83,19 @@ View the [source code][uptime_1_code].
 __Usage:__ `node uptime.js --help`
 
 ```
+uptime.js <command>
+
 Commands:
-  create <gceInstanceId> [projectId]        Creates an uptime check config.
-  list [projectId]                          Lists uptime check configs.
-  list-ips                                  Lists uptime check config IPs.
-  get <uptimeCheckConfigId> [projectId]     Gets an uptime check config.
-  delete <uptimeCheckConfigId> [projectId]  Deletes an uptime check config.
+  uptime.js create <gceInstanceId> [projectId]        Creates an uptime check config.
+  uptime.js list [projectId]                          Lists uptime check configs.
+  uptime.js list-ips                                  Lists uptime check config IPs.
+  uptime.js get <uptimeCheckConfigId> [projectId]     Gets an uptime check config.
+  uptime.js delete <uptimeCheckConfigId> [projectId]  Deletes an uptime check config.
 
 Options:
   --version        Show version number                                                                         [boolean]
-  --help           Show help                                                                                   [boolean]
   --projectId, -p                                                                                               [string]
+  --help           Show help                                                                                   [boolean]
 
 Examples:
   node uptime.js create my-instance                             Create an uptime check for a "my-instance" GCE instance.
@@ -108,5 +112,5 @@ For more information, see https://cloud.google.com/monitoring/uptime-checks/
 [uptime_1_docs]: https://cloud.google.com/monitoring/docs
 [uptime_1_code]: uptime.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/README.md

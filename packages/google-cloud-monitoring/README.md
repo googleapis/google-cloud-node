@@ -157,4 +157,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-monitoring/blob/master/LICENS
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/monitoring/latest/
 [product-docs]: https://cloud.google.com/monitoring/docs
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
