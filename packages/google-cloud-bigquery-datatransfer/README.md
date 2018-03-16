@@ -59,6 +59,58 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     npm install --save @google-cloud/bigquery-data-transfer
 
+### Using the client library
+
+```javascript
+
+if (
+  !process.env.GCLOUD_PROJECT ||
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS
+) {
+  throw new Error(
+    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+  );
+}
+
+const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
+
+const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
+  // optional auth parameters.
+});
+const projectId = process.env.GCLOUD_PROJECT;
+
+// Iterate over all elements.
+const formattedParent = client.locationPath(projectId, 'us-central1');
+
+client.listDataSources({parent: formattedParent}).then(responses => {
+  const resources = responses[0];
+  for (let i = 0; i < resources.length; i += 1) {
+    console.log(resources[i]);
+  }
+});
+
+const options = {autoPaginate: false};
+const callback = responses => {
+  // The actual resources in a response.
+  const resources = responses[0];
+  // The next request if the response shows that there are more responses.
+  const nextRequest = responses[1];
+  // The actual response object, if necessary.
+  // const rawResponse = responses[2];
+  for (let i = 0; i < resources.length; i += 1) {
+    console.log(resources[i]);
+  }
+  if (nextRequest) {
+    // Fetch the next page.
+    return client.listDataSources(nextRequest, options).then(callback);
+  }
+};
+client.listDataSources({parent: formattedParent}, options).then(callback);
+
+client.listDataSourcesStream({parent: formattedParent}).on('data', element => {
+  console.log(element);
+});
+```
 
 
 The [BigQuery Data Transfer Service Node.js Client API Reference][client-docs] documentation
@@ -88,4 +140,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-bigquery-data-transfer/blob/m
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest/
 [product-docs]: https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png

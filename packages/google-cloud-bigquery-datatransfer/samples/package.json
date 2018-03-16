@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-docs-samples-bigquery-data-transfer",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-bigquery-data-transfer",
+  "private": true,
+  "semistandard": {
+    "ignore": [
+      "node_modules"
+    ]
+  },
+  "scripts": {
+    "test": "node -e 'console.log(`no tests`)'"
+  },
+  "dependencies": {
+    "@google-cloud/bigquery-data-transfer": "0.2.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "2.2.4"
+  }
+}
