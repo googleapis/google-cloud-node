@@ -59,6 +59,64 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     npm install --save @google-cloud/dataproc
 
+### Using the client library
+
+```javascript
+if (
+  !process.env.GCLOUD_PROJECT ||
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS
+) {
+  throw new Error(
+    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to json key> node #{$0}'
+  );
+}
+
+const dataproc = require('@google-cloud/dataproc');
+
+const client = new dataproc.v1.ClusterControllerClient({
+  // optional auth parameters.
+});
+
+const projectId = process.env.GCLOUD_PROJECT;
+
+// Iterate over all elements.
+const region = 'global';
+const request = {
+  projectId: projectId,
+  region: region,
+};
+
+client.listClusters(request).then(responses => {
+  const resources = responses[0];
+  console.log('Total resources:', resources.length);
+  for (let i = 0; i < resources.length; i += 1) {
+    console.log(resources[i]);
+  }
+});
+
+// Or obtain the paged response.
+const options = {autoPaginate: false};
+const callback = responses => {
+  // The actual resources in a response.
+  const resources = responses[0];
+  // The next request if the response shows that there are more responses.
+  const nextRequest = responses[1];
+  // The actual response object, if necessary.
+  // const rawResponse = responses[2];
+  for (let i = 0; i < resources.length; i += 1) {
+    console.log(resources[i]);
+  }
+  if (nextRequest) {
+    // Fetch the next page.
+    return client.listClusters(nextRequest, options).then(callback);
+  }
+};
+client.listClusters(request, options).then(callback);
+
+client.listClustersStream(request).on('data', element => {
+  console.log(element);
+});
+```
 
 
 The [Cloud Dataproc Node.js Client API Reference][client-docs] documentation
@@ -88,4 +146,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-dataproc/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dataproc/latest/
 [product-docs]: https://cloud.google.com/dataproc/docs
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
