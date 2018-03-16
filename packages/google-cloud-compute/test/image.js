@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ var util = require('@google-cloud/common').util;
 var promisified = false;
 var fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
-    if (Class.name === 'Firewall') {
+    if (Class.name === 'Image') {
       promisified = true;
     }
   },
@@ -39,19 +39,19 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-describe('Firewall', function() {
-  var Firewall;
-  var firewall;
+describe('Image', function() {
+  var Image;
+  var image;
 
   var COMPUTE = {
     projectId: 'project-id',
-    createFirewall: util.noop,
+    createImage: util.noop,
+    operation: util.noop,
   };
-  var FIREWALL_NAME = 'tcp-3000';
-  var FIREWALL_NETWORK = 'global/networks/default';
+  var IMAGE_NAME = 'image-name';
 
   before(function() {
-    Firewall = proxyquire('../src/firewall.js', {
+    Image = proxyquire('../src/image.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
@@ -60,7 +60,8 @@ describe('Firewall', function() {
   });
 
   beforeEach(function() {
-    firewall = new Firewall(COMPUTE, FIREWALL_NAME);
+    image = new Image(COMPUTE, IMAGE_NAME);
+    image.parent = COMPUTE;
   });
 
   describe('instantiation', function() {
@@ -68,37 +69,24 @@ describe('Firewall', function() {
       assert(promisified);
     });
 
-    it('should localize compute instance', function() {
-      assert.strictEqual(firewall.compute, COMPUTE);
-    });
-
-    it('should localize the firewall name', function() {
-      assert.strictEqual(firewall.name, FIREWALL_NAME);
-    });
-
-    it('should default to the global network', function() {
-      assert.deepEqual(firewall.metadata, {network: FIREWALL_NETWORK});
-    });
-
     it('should inherit from ServiceObject', function() {
       var computeInstance = extend({}, COMPUTE, {
-        createFirewall: {
+        createImage: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
           },
         },
       });
 
-      var firewall = new Firewall(computeInstance, FIREWALL_NAME);
+      var image = new Image(computeInstance, IMAGE_NAME);
+      assert(image instanceof ServiceObject);
 
-      assert(firewall instanceof ServiceObject);
-
-      var calledWith = firewall.calledWith_[0];
+      var calledWith = image.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
-      assert.strictEqual(calledWith.baseUrl, '/global/firewalls');
-      assert.strictEqual(calledWith.id, FIREWALL_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.strictEqual(calledWith.baseUrl, '/global/images');
+      assert.strictEqual(calledWith.id, IMAGE_NAME);
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -110,11 +98,11 @@ describe('Firewall', function() {
   describe('delete', function() {
     it('should call ServiceObject.delete', function(done) {
       FakeServiceObject.prototype.delete = function() {
-        assert.strictEqual(this, firewall);
+        assert.strictEqual(this, image);
         done();
       };
 
-      firewall.delete();
+      image.delete();
     });
 
     describe('error', function() {
@@ -128,7 +116,7 @@ describe('Firewall', function() {
       });
 
       it('should return an error if the request fails', function(done) {
-        firewall.delete(function(err, operation, apiResponse_) {
+        image.delete(function(err, operation, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -138,7 +126,7 @@ describe('Firewall', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          firewall.delete();
+          image.delete();
         });
       });
     });
@@ -157,12 +145,12 @@ describe('Firewall', function() {
       it('should execute callback with Operation & Response', function(done) {
         var operation = {};
 
-        firewall.compute.operation = function(name) {
+        image.parent.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
 
-        firewall.delete(function(err, operation_, apiResponse_) {
+        image.delete(function(err, operation_, apiResponse_) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -173,83 +161,7 @@ describe('Firewall', function() {
 
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
-          firewall.delete();
-        });
-      });
-    });
-  });
-
-  describe('setMetadata', function() {
-    it('should make the correct API request', function(done) {
-      var metadata = {};
-
-      firewall.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.json, metadata);
-        assert.deepEqual(metadata, {
-          name: firewall.name,
-          network: FIREWALL_NETWORK,
-        });
-
-        done();
-      };
-
-      firewall.setMetadata(metadata, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
-
-      beforeEach(function() {
-        firewall.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return an error if the request fails', function(done) {
-        firewall.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(op, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        name: 'op-name',
-      };
-
-      beforeEach(function() {
-        firewall.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with operation & response', function(done) {
-        var operation = {};
-        var metadata = {a: 'b'};
-
-        firewall.compute.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return operation;
-        };
-
-        firewall.setMetadata(metadata, function(err, op, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(op, operation);
-          assert.strictEqual(op.metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          firewall.setMetadata({a: 'b'});
+          image.delete();
         });
       });
     });

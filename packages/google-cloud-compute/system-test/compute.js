@@ -487,6 +487,45 @@ describe('Compute', function() {
     });
   });
 
+  describe('images', function() {
+    var DISK = zone.disk(generateName('disk'));
+    var IMAGE = compute.image(generateName('image'));
+
+    before(create(DISK, {os: 'ubuntu'}));
+    before(create(IMAGE, DISK));
+
+    it('should create an image', function(done) {
+      IMAGE.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should list images', function(done) {
+      compute.getImages(function(err, images) {
+        assert.ifError(err);
+        assert(images.length > 0);
+        done();
+      });
+    });
+
+    it('should list images in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute
+        .getImagesStream()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+  });
+
   describe('instance groups', function() {
     var INSTANCE_GROUP_NAME = generateName('instance-group');
     var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
@@ -1498,6 +1537,7 @@ describe('Compute', function() {
         'getAddresses',
         'getAutoscalers',
         'getDisks',
+        'getImages',
         'getInstanceGroups',
         'getFirewalls',
         'getSubnetworks',
