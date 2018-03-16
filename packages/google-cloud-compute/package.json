@@ -30,6 +30,7 @@
   "contributors": [
     "Ace Nassri <anassri@google.com>",
     "Akash Krishnan <akashfoss@users.noreply.github.com>",
+    "Alexander Fenster <github@fenster.name>",
     "Ashley <ashley.schuett@containership.io>",
     "Ashley Schuett <ashley@containership.io>",
     "CRoed <chris.roed@anserinnovation.com>",
@@ -41,9 +42,11 @@
     "Luke Sneeringer <luke@sneeringer.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
     "NickZ <NZatkovich@gmail.com>",
+    "Stephen <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
     "Tim Swast <swast@google.com>",
+    "cbastuck <mail@cbastuck.de>",
     "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
@@ -68,7 +71,7 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.0",
+    "@google-cloud/nodejs-repo-tools": "^2.2.3",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "concat-stream": "^1.5.0",
