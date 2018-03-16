@@ -7,14 +7,14 @@
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-os-login?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-os-login)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-os-login/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-os-login)
 
-> Node.js idiomatic client for [OS Login][product-docs].
+> Node.js idiomatic client for [Cloud OS Login API][product-docs].
 
-Manages OS login configuration for Directory API users.
+The [Google Cloud OS Login API](https://cloud.google.com/compute/docs/oslogin/rest) manages OS login configuration for Google account users.
 
 
-* [OS Login Node.js Client API Reference][client-docs]
+* [Cloud OS Login API Node.js Client API Reference][client-docs]
 * [github.com/googleapis/nodejs-os-login](https://github.com/googleapis/nodejs-os-login)
-* [OS Login Documentation][product-docs]
+* [Cloud OS Login API Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -59,9 +59,42 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     npm install --save @google-cloud/os-login
 
+### Using the client library
+
+```javascript
+if (
+  !process.env.GCLOUD_PROJECT ||
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS
+) {
+  throw new Error(
+    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+  );
+}
+
+const oslogin = require('@google-cloud/oslogin');
+
+const projectId = process.env.GCLOUD_PROJECT;
+
+const client = new oslogin.OsLoginServiceClient({
+  projectId: projectId
+});
+
+const request = {
+  name: 'users/1234abcd'
+};
+
+client.getLoginProfile(request)
+  .then(responses => {
+    const loginProfile = responses[0];
+    console.log(loginProfile);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+```
 
 
-The [OS Login Node.js Client API Reference][client-docs] documentation
+The [Cloud OS Login API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
@@ -87,5 +120,5 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-os-login/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/oslogin/latest/
-[product-docs]: https://cloud.google.com/compute/docs/oslogin/rest/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[product-docs]: https://cloud.google.com/compute/docs/oslogin/rest
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
