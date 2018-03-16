@@ -42,6 +42,8 @@ Commands:
   analyze.v1.js entity-sentiment-text <text>                   Detects sentiment of the entities in a string.
   analyze.v1.js entity-sentiment-file <bucketName> <fileName>  Detects sentiment of the entities in a file in Google
                                                                Cloud Storage.
+  analyze.v1.js classify-text <text>                           Classifies text of a string.
+  analyze.v1.js classify-file <bucketName> <fileName>          Classifies text in a file in Google Cloud Storage.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -56,6 +58,8 @@ Examples:
   node analyze.v1.js syntax-file my-bucket file.txt             Detects syntax in gs://my-bucket/file.txt
   node analyze.v1.js entity-sentiment-text "President Obama is speaking at the White House."
   node analyze.v1.js entity-sentiment-file my-bucket file.txt   Detects sentiment of entities in gs://my-bucket/file.txt
+  node analyze.v1.js classify-text "Android is a mobile operating system developed by Google."
+  node analyze.v1.js classify-file my-bucket android_text.txt   Detects syntax in gs://my-bucket/android_text.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
@@ -105,5 +109,5 @@ For more information, see https://cloud.google.com/natural-language/docs
 [analyze-v1beta2_1_docs]: https://cloud.google.com/natural-language/docs/
 [analyze-v1beta2_1_code]: analyze.v1beta2.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/README.md
