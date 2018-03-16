@@ -124,4 +124,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-resource/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/resource/latest/
 [product-docs]: https://cloud.google.com/resource-manager/docs/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
