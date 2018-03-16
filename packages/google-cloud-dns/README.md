@@ -124,4 +124,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-dns/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dns/latest/
 [product-docs]: https://cloud.google.com/dns/docs/
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png

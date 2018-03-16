@@ -29,11 +29,13 @@
   ],
   "contributors": [
     "Ace Nassri <anassri@google.com>",
+    "Alexander Fenster <github@fenster.name>",
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Eric Uldall <ericuldall@gmail.com>",
     "Jason Dobry <jason.dobry@gmail.com>",
     "Karim <kinotto88@yahoo.it>",
     "Luke Sneeringer <lukesneeringer@google.com>",
+    "Stephen <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Tim Swast <swast@google.com>",
     "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
@@ -63,7 +65,7 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.0",
+    "@google-cloud/nodejs-repo-tools": "^2.2.3",
     "async": "^2.1.4",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",
