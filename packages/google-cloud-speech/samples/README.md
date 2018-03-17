@@ -99,5 +99,5 @@ For more information, see https://cloud.google.com/speech/docs
 [recognize.v1p1beta1_1_docs]: https://cloud.google.com/speech/docs
 [recognize.v1p1beta1_1_code]: recognize.v1p1beta1.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/README.md

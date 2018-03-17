@@ -44,6 +44,7 @@
     "Luke Sneeringer <lukesneeringer@google.com>",
     "Pierre Fritsch <PierreFritsch@users.noreply.github.com>",
     "Puneith Kaul <puneith@google.com>",
+    "Rebecca Taylor <remilytaylor@gmail.com>",
     "Song Wang <songwang@google.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Tim Swast <swast@google.com>",
@@ -72,7 +73,7 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.1",
+    "@google-cloud/nodejs-repo-tools": "^2.2.3",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.10.0",
