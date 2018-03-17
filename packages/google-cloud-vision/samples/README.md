@@ -121,5 +121,5 @@ For more information, see https://cloud.google.com/vision/docs
 [detect.v1p1beta1.js_1_docs]: https://cloud.google.com/vision/docs
 [detect.v1p1beta1.js_1_code]: detect.v1p1beta1.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/README.md

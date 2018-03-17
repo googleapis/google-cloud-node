@@ -68,7 +68,7 @@
     "protobufjs": "^6.8.6"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.1",
+    "@google-cloud/nodejs-repo-tools": "^2.2.3",
     "@google-cloud/storage": "^1.5.2",
     "codecov": "^3.0.0",
     "eslint": "^4.15.0",

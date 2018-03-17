@@ -121,4 +121,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-vision/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/vision/latest/
 [product-docs]: https://cloud.google.com/vision/docs
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
