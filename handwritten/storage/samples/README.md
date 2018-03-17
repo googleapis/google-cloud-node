@@ -119,7 +119,7 @@ Commands:
   <destFilename> <key>
   encryption.js download <bucketName> <srcFilename>             Decrypts and downloads a file.
   <destFilename> <key>
-  encryption.js rotate <bucketName> <fileName> <oldkey>         Rotates encryption keys for a file.
+  encryption.js rotate <bucketName> <fileName> <oldKey>         Rotates encryption keys for a file.
   <newKey>
 
 Options:
@@ -261,5 +261,5 @@ For more information, see https://cloud.google.com/storage/docs
 [requesterPays_5_docs]: https://cloud.google.com/storage/docs
 [requesterPays_5_code]: requesterPays.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/README.md

@@ -73,10 +73,12 @@ var File = require('./file.js');
  * @hideconstructor
  *
  * @example <caption>Create a client that uses Application Default Credentials (ADC)</caption>
- * var storage = require('@google-cloud/storage')();
+ * const Storage = require('@google-cloud/storage');
+ * const storage = new Storage();
  *
  * @example <caption>Create a client with explicit credentials</caption>
- * var storage = require('@google-cloud/storage')({
+ * const Storage = require('@google-cloud/storage');
+ * const storage = new Storage({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json'
  * });
@@ -568,13 +570,13 @@ Storage.File = File;
  * npm install --save @google-cloud/storage
  *
  * @example <caption>Import the client library</caption>
- * var Storage = require('@google-cloud/storage');
+ * const Storage = require('@google-cloud/storage');
  *
  * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * var storage = Storage();
+ * const storage = new Storage();
  *
  * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * var storage = Storage({
+ * const storage = new Storage({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json'
  * });
