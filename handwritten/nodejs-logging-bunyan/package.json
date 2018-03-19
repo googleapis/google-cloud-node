@@ -35,16 +35,20 @@
     "winston"
   ],
   "contributors": [
+    "Alexander Fenster <github@fenster.name>",
     "Ali Ijaz Sheikh <ofrobots@google.com>",
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Dave Raffensperger <daveraff@google.com>",
-    "Luke Sneeringer <lukesneeringer@google.com>",
-    "Michael Gao <fgao@google.com>",
+    "Dominic Kramer <DominicDKramer@google.com>",
+    "Jason Dobry <jason.dobry@gmail.com>",
+    "Jason Dobry <jmdobry@users.noreply.github.com>",
+    "Luke Sneeringer <luke@sneeringer.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <stephenplusplusplus@gmail.com>",
     "Tim Swast <swast@google.com>",
-    "circle-ci <circle-ci@circleci.com>"
+    "circle-ci <circle-ci@circleci.com>",
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
@@ -71,7 +75,7 @@
     "typescript": "~2.6.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.1.0",
+    "@google-cloud/nodejs-repo-tools": "^2.2.4",
     "@types/glob": "^5.0.34",
     "@types/mocha": "^2.2.41",
     "@types/ncp": "^2.0.1",
