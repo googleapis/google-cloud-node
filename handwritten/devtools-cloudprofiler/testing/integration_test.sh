@@ -13,7 +13,6 @@ COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REPO=$(git config --get remote.origin.url)
 
-
 export GCLOUD_TESTS_NODEJS_PROJECT_ID="cloud-profiler-e2e"
 export GCLOUD_TESTS_NODEJS_ZONE="us-east1-b"
 export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
@@ -26,4 +25,8 @@ cp -R "testing" "$GOPATH/src/proftest"
 # Run test.
 cd "$GOPATH/src/proftest"
 go get -t -tags=integration .
-go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
+if [-z "$KOKORO_GITHUB_PULL_REQUEST_NUMBER"]; then
+  go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -pr="$KOKORO_GITHUB_PULL_REQUEST_NUMBER"
+else 
+  go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
+fi

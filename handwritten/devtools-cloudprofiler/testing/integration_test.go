@@ -32,9 +32,10 @@ import (
 )
 
 var (
-	repo   = flag.String("repo", "", "git repo to test")
+	repo   = flag.String("repo", "https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs.git", "git repo to test")
 	branch = flag.String("branch", "", "git branch to test")
 	commit = flag.String("commit", "", "git commit to test")
+	pr     = flag.Int("pr", 0, "git pull request to test")
 	runID  = time.Now().Unix()
 )
 
@@ -54,7 +55,7 @@ set -eo pipefail
 set -x
 # Install git
 apt-get update
-apt-get -y -q install git-all build-essential
+apt-get -y -q install git build-essential
 
 # Install desired version of Node.js
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
@@ -65,9 +66,10 @@ npm -v
 node -v
 
 # Install agent
-git clone https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs.git
+git clone {{.Repo}}
 cd cloud-profiler-nodejs
-git pull {{.Repo}} {{.Branch}}
+git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
+git checkout pull_branch
 git reset --hard {{.Commit}}
 npm install
 npm run compile
@@ -108,12 +110,14 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 			Service     string
 			NodeVersion string
 			Repo        string
+			PR          int
 			Branch      string
 			Commit      string
 		}{
 			Service:     tc.name,
 			NodeVersion: tc.nodeVersion,
 			Repo:        *repo,
+			PR:          *pr,
 			Branch:      *branch,
 			Commit:      *commit,
 		})
@@ -203,7 +207,7 @@ func TestAgentIntegration(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 			if err := tc.initializeStartUpScript(template); err != nil {
-				t.Fatalf("failed to initialize startup script")
+				t.Fatalf("failed to initialize startup script: %v", err)
 			}
 
 			gceTr.StartInstance(ctx, &tc.InstanceConfig)
