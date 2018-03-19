@@ -64,10 +64,18 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ```javascript
   // Imports the Google Cloud client library
-  const ErrorReporting = require('@google-cloud/error-reporting');
+
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Node 4+
+  // const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
 
   // Instantiates a client
-  const errors = ErrorReporting();
+  const errors = new ErrorReporting();
 
   // Reports a simple error
   errors.report('Something broke!');

@@ -25,8 +25,12 @@ function quickstart() {
   // On Node 6+ the following syntax can be used instead:
   // const {ErrorReporting} = require('@google-cloud/error-reporting');
 
+  // With ES6 style imports via TypeScript or Babel, the following
+  // syntax can be used instead:
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
   // Instantiates a client
-  const errors = ErrorReporting();
+  const errors = new ErrorReporting();
 
   // Reports a simple error
   errors.report('Something broke!');
