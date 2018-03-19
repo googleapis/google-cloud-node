@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import {SpawnOptions} from 'child_process';
 import * as path from 'path';
 
 import {globP, mkdirP, ncpP, rimrafP, spawnP, tmpDirP, writeFileP} from './utils';
@@ -91,22 +92,24 @@ new ErrorReporting({
 
 const TIMEOUT_MS = 2 * 60 * 1000;
 
-const DEBUG = false;
-function log(txt: string): void {
-  if (DEBUG) {
-    console.log(txt);
-  }
-}
-
-const stdio = DEBUG ? 'inherit' : 'ignore';
-
 interface CodeSample {
   code: string;
   description: string;
 }
 
 describe('Installation', () => {
+  let text = '';
   let installDir: string|undefined;
+
+  function log(txt: string): void {
+    text += txt;
+  }
+
+  async function run(
+      cmd: string, args: string[], options?: SpawnOptions): Promise<void> {
+    await spawnP(cmd, args, options, log);
+  }
+
   before(async () => {
     const tgz = await globP(`${process.cwd()}/*.tgz`);
     assert.deepStrictEqual(
@@ -120,28 +123,32 @@ describe('Installation', () => {
 
   beforeEach(async function() {
     this.timeout(TIMEOUT_MS);
+    text = '';
     // This script assumes that you don't already have a TGZ file
     // in your current working directory.
     installDir = await tmpDirP();
     log(`Using installation directory: ${installDir}`);
-    await spawnP('npm', ['install'], {stdio}, log);
-    await spawnP('npm', ['run', 'compile'], {stdio}, log);
-    await spawnP('npm', ['pack'], {stdio}, log);
+    await run('npm', ['install']);
+    await run('npm', ['run', 'compile']);
+    await run('npm', ['pack']);
     const tgz = await globP(`${process.cwd()}/*.tgz`);
     if (tgz.length !== 1) {
       throw new Error(
           `Expected 1 tgz file in current directory, but found ${tgz.length}`);
     }
-    await spawnP('npm', ['init', '-y'], {cwd: installDir, stdio}, log);
-    await spawnP(
+    await run('npm', ['init', '-y'], {cwd: installDir});
+    await run(
         'npm', ['install', 'typescript', '@types/node', tgz[0]],
-        {cwd: installDir, stdio}, log);
+        {cwd: installDir});
   });
 
   afterEach(async function() {
     this.timeout(TIMEOUT_MS);
     if (installDir) {
       await rimrafP(installDir);
+    }
+    if (this.currentTest.state === 'failed') {
+      console.log(text);
     }
   });
 
@@ -153,24 +160,21 @@ describe('Installation', () => {
            assert(installDir);
            const srcDir = path.join(installDir!, 'src');
            await mkdirP(srcDir);
-           await spawnP(
-               'npm', ['install', '--save', 'winston'],
-               {cwd: installDir, stdio}, log);
-           await spawnP(
+           await run(
+               'npm', ['install', '--save', 'winston'], {cwd: installDir});
+           await run(
                'npm', ['install', '--save-dev', '@types/winston'],
-               {cwd: installDir, stdio}, log);
+               {cwd: installDir});
            await writeFileP(path.join(srcDir, INDEX_TS), sample.code, 'utf-8');
-           await spawnP(
+           await run(
                'npm', ['install', '--save-dev', 'gts', 'typescript@2.x'],
-               {cwd: installDir, stdio}, log);
-           await spawnP(
-               'gts', ['init', '--yes'], {cwd: installDir, stdio}, log);
-           await spawnP(
-               'npm', ['run', 'compile'], {cwd: installDir, stdio}, log);
+               {cwd: installDir});
+           await run('gts', ['init', '--yes'], {cwd: installDir});
+           await run('npm', ['run', 'compile'], {cwd: installDir});
            const buildDir = path.join(installDir!, 'build');
-           await spawnP(
+           await run(
                'node', [path.join(buildDir, 'src', INDEX_JS)],
-               {cwd: installDir, stdio}, log);
+               {cwd: installDir});
          });
     });
   });
@@ -181,15 +185,14 @@ describe('Installation', () => {
          async function() {
            this.timeout(TIMEOUT_MS);
            assert(installDir);
-           await spawnP(
-               'npm', ['install', '--save', 'winston'],
-               {cwd: installDir, stdio}, log);
-           await spawnP(
+           await run(
+               'npm', ['install', '--save', 'winston'], {cwd: installDir});
+           await run(
                'npm', ['install', '--save-dev', '@types/winston'],
-               {cwd: installDir, stdio}, log);
+               {cwd: installDir});
            await writeFileP(
                path.join(installDir!, INDEX_JS), sample.code, 'utf-8');
-           await spawnP('node', [INDEX_JS], {cwd: installDir, stdio}, log);
+           await run('node', [INDEX_JS], {cwd: installDir});
          });
     });
   });
