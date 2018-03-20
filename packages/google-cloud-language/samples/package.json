@@ -19,7 +19,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/language": "1.1.0",
+    "@google-cloud/language": "1.2.0",
     "@google-cloud/storage": "1.4.0",
     "yargs": "10.0.3"
   },
