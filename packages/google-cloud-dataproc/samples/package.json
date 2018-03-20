@@ -17,7 +17,7 @@
     "test": "node -e 'console.log(`no tests`);'"
   },
   "dependencies": {
-    "@google-cloud/dataproc": "0.1.0"
+    "@google-cloud/dataproc": "0.2.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "2.2.4"
