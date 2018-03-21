@@ -40,6 +40,8 @@ import {handlerSetup as restify} from './interfaces/restify';
 import {createLogger} from './logger';
 import {Request} from './request-extractors/manual';
 
+export type RequestHandler = (req: {}, res: {}, next: {}) => {};
+
 /**
  * @typedef ConfigurationOptions
  * @type {Object}
@@ -105,11 +107,11 @@ export class ErrorReporting {
       (err: {}, request?: Request, additionalMessage?: string|{},
        callback?: Callback|{}|string) => ErrorMessage;
   event: () => ErrorMessage;
-  hapi: {register: (server: h.Server, options: {}, next: Function) => void};
-  express: (err: {}, req: e.Request, res: e.Response, next: Function) => void;
-  restify:
-      (client: AuthClient, config: Configuration, server: r.Server) => void;
-  koa: (next: Function) => Iterable<Function>;
+  hapi: {register: (server: {}, options: {}, next: Function) => void};
+  express: (err: {}, req: {}, res: {}, next: Function) => void;
+  restify: (server: {}) => RequestHandler | RequestHandler[];
+  // tslint:disable-next-line:no-any
+  koa: (context: any, next: () => Promise<{}>) => {};
 
   constructor(initConfiguration?: ConfigurationOptions) {
     if (!(this instanceof ErrorReporting)) {

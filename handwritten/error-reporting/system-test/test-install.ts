@@ -27,12 +27,16 @@ const TS_CODE_ARRAY: CodeSample[] = [
   {
     code: `import * as errorReporting from '@google-cloud/error-reporting';
 new errorReporting.ErrorReporting();`,
-    description: 'imports the module using * syntax'
+    description: 'imports the module using * syntax',
+    dependencies: [],
+    devDependencies: []
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
 new ErrorReporting();`,
-    description: 'imports the module with {} syntax'
+    description: 'imports the module with {} syntax',
+    dependencies: [],
+    devDependencies: []
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
@@ -41,7 +45,10 @@ new ErrorReporting({
     service: 'some service'
   }
 });`,
-    description: 'imports the module and starts with a partial `serviceContext`'
+    description:
+        'imports the module and starts with a partial `serviceContext`',
+    dependencies: [],
+    devDependencies: []
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
@@ -53,7 +60,100 @@ new ErrorReporting({
   }
 });`,
     description:
-        'imports the module and starts with a complete `serviceContext`'
+        'imports the module and starts with a complete `serviceContext`',
+    dependencies: [],
+    devDependencies: []
+  },
+  {
+    code: `import * as express from 'express';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+const app = express();
+
+app.get('/error', (req, res, next) => {
+  res.send('Something broke!');
+  next(new Error('Custom error message'));
+});
+
+app.get('/exception', () => {
+  JSON.parse('{\"malformedJson\": true');
+});
+
+app.use(errors.express);
+`,
+    description: 'uses express',
+    dependencies: ['express'],
+    devDependencies: ['@types/express']
+  },
+  {
+    code: `import * as hapi from 'hapi';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+const server = new hapi.Server();
+server.connection({ port: 3000 });
+
+server.route({
+  method: 'GET',
+  path: '/error',
+  handler: (request, reply) => {
+    reply('Something broke!');
+    throw new Error('Custom error message');
+  }
+});
+
+server.register(errors.hapi);
+`,
+    description: 'uses hapi16',
+    dependencies: ['hapi@16.6.3'],
+    devDependencies: ['@types/hapi@16.1.14']
+  },
+  {
+    code: `import * as Koa from 'koa';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+const app = new Koa();
+
+app.use(errors.koa);
+
+app.use(function *(this: any): IterableIterator<any> {
+  //This will set status and message
+  this.throw('Error Message', 500);
+});
+
+// response
+app.use(function *(this: any): IterableIterator<any> {
+  this.body = 'Hello World';
+});
+`,
+    description: 'uses koa',
+    dependencies: ['koa'],
+    devDependencies: ['@types/koa']
+  },
+  {
+    code: `import * as restify from 'restify';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+function respond(req: {}, res: {}, next: Function) {
+  next(new Error('this is a restify error'));
+}
+
+const server = restify.createServer();
+
+server.use(errors.restify(server));
+server.get('/hello/:name', respond);
+server.head('/hello/:name', respond);
+`,
+    description: 'uses restify',
+    dependencies: ['restify'],
+    devDependencies: ['@types/restify']
   }
 ];
 
@@ -62,7 +162,9 @@ const JS_CODE_ARRAY: CodeSample[] = [
     code:
         `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
 new ErrorReporting();`,
-    description: 'requires the module using Node 4+ syntax'
+    description: 'requires the module using Node 4+ syntax',
+    dependencies: [],
+    devDependencies: []
   },
   {
     code:
@@ -73,7 +175,9 @@ new ErrorReporting({
   }
 });`,
     description:
-        'requires the module and starts with a partial `serviceContext`'
+        'requires the module and starts with a partial `serviceContext`',
+    dependencies: [],
+    devDependencies: []
   },
   {
     code:
@@ -86,7 +190,102 @@ new ErrorReporting({
   }
 });`,
     description:
-        'requires the module and starts with a complete `serviceContext`'
+        'requires the module and starts with a complete `serviceContext`',
+    dependencies: [],
+    devDependencies: []
+  },
+  {
+    code: `const express = require('express');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = ErrorReporting();
+
+const app = express();
+
+app.get('/error', (req, res, next) => {
+  res.send('Something broke!');
+  next(new Error('Custom error message'));
+});
+
+app.get('/exception', () => {
+  JSON.parse('{\"malformedJson\": true');
+});
+
+// Note that express error handling middleware should be attached after all
+// the other routes and use() calls. See [express docs][express-error-docs].
+app.use(errors.express);
+`,
+    description: 'uses express',
+    dependencies: ['express'],
+    devDependencies: []
+  },
+  {
+    code: `const hapi = require('hapi');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = new ErrorReporting();
+
+const server = new hapi.Server();
+server.connection({ port: 3000 });
+
+server.route({
+  method: 'GET',
+  path: '/error',
+  handler: (request, reply) => {
+    reply('Something broke!');
+    throw new Error('Custom error message');
+  }
+});
+
+server.register(errors.hapi);
+`,
+    description: 'uses hapi16',
+    dependencies: ['hapi@16.6.3'],
+    devDependencies: []
+  },
+  {
+    code: `const Koa = require('koa');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = new ErrorReporting();
+
+const app = new Koa();
+
+app.use(errors.koa);
+
+app.use(function *(next) {
+  //This will set status and message
+  this.throw('Error Message', 500);
+});
+
+// response
+app.use(function *(){
+  this.body = 'Hello World';
+});
+`,
+    description: 'uses koa',
+    dependencies: ['koa'],
+    devDependencies: []
+  },
+  {
+    code: `const restify = require('restify');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = new ErrorReporting();
+
+function respond(req, res, next) {
+  next(new Error('this is a restify error'));
+}
+
+const server = restify.createServer();
+
+server.use(errors.restify(server));
+server.get('/hello/:name', respond);
+server.head('/hello/:name', respond);
+`,
+    description: 'uses restify',
+    dependencies: ['restify'],
+    devDependencies: []
   }
 ];
 
@@ -95,6 +294,9 @@ const TIMEOUT_MS = 2 * 60 * 1000;
 interface CodeSample {
   code: string;
   description: string;
+  dependencies: string[];
+  devDependencies: string[];
+  skip?: boolean;
 }
 
 describe('Installation', () => {
@@ -154,21 +356,28 @@ describe('Installation', () => {
 
   describe('When used with Typescript code', () => {
     TS_CODE_ARRAY.forEach((sample) => {
-      it(`should install and work with code that ${sample.description}`,
+      const fn = sample.skip ? it.skip : it;
+      fn(`should install and work with code that ${sample.description}`,
          async function() {
            this.timeout(TIMEOUT_MS);
            assert(installDir);
            const srcDir = path.join(installDir!, 'src');
            await mkdirP(srcDir);
-           await run(
-               'npm', ['install', '--save', 'winston'], {cwd: installDir});
-           await run(
-               'npm', ['install', '--save-dev', '@types/winston'],
-               {cwd: installDir});
+
            await writeFileP(path.join(srcDir, INDEX_TS), sample.code, 'utf-8');
+
+           if (sample.dependencies.length > 0) {
+             await run(
+                 'npm', ['install', '--save'].concat(sample.dependencies),
+                 {cwd: installDir});
+           }
+
+           const devDeps =
+               sample.devDependencies.concat(['gts', 'typescript@2.x']);
            await run(
-               'npm', ['install', '--save-dev', 'gts', 'typescript@2.x'],
+               'npm', ['install', '--save-dev'].concat(devDeps),
                {cwd: installDir});
+
            await run('gts', ['init', '--yes'], {cwd: installDir});
            await run('npm', ['run', 'compile'], {cwd: installDir});
            const buildDir = path.join(installDir!, 'build');
@@ -181,17 +390,28 @@ describe('Installation', () => {
 
   describe('When used with Javascript code', () => {
     JS_CODE_ARRAY.forEach((sample) => {
-      it(`should install and work with code that ${sample.description}`,
+      const fn = sample.skip ? it.skip : it;
+      fn(`should install and work with code that ${sample.description}`,
          async function() {
            this.timeout(TIMEOUT_MS);
            assert(installDir);
-           await run(
-               'npm', ['install', '--save', 'winston'], {cwd: installDir});
-           await run(
-               'npm', ['install', '--save-dev', '@types/winston'],
-               {cwd: installDir});
+
            await writeFileP(
                path.join(installDir!, INDEX_JS), sample.code, 'utf-8');
+
+           if (sample.dependencies) {
+             await run(
+                 'npm', ['install', '--save'].concat(sample.dependencies),
+                 {cwd: installDir});
+           }
+
+           if (sample.devDependencies) {
+             await run(
+                 'npm',
+                 ['install', '--save-dev'].concat(sample.devDependencies),
+                 {cwd: installDir});
+           }
+
            await run('node', [INDEX_JS], {cwd: installDir});
          });
     });
