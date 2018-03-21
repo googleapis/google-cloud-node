@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Request, Response} from 'koa';
+import {Middleware, Request, Response} from 'koa';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration} from '../configuration';
@@ -34,7 +34,8 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
  * @returns {Function} - The function used to catch errors yielded by downstream
  *  request handlers.
  */
-export function koaErrorHandler(client: RequestHandler, config: Configuration) {
+export function koaErrorHandler(
+    client: RequestHandler, config: Configuration): Middleware {
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by
@@ -42,8 +43,7 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(
-      this: {request: Request; response: Response;}, next: Function) {
+  return function*(this: {request: Request; response: Response;}, next: {}) {
     const svc = config.getServiceContext();
 
     try {
