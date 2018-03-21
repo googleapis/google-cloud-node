@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as request from 'request';
+ import * as http from 'http';
 
 export interface Common {
   Service: Service;
@@ -42,14 +42,21 @@ export interface logger {
   LEVELS: string[];
 }
 
+export interface Options {
+  uri: 'events:report';
+  qs: { key: string|null} | null;
+  method: string;
+  json: {};
+}
+
 export interface Service {
   new(config: ServiceConfig, options: ServiceAuthenticationConfig): Service;
   authClient: {getToken: (err: {}) => void;};
-  request(options: request.Options,
+  request(options: Options,
     cb: (
       err: Error | null,
       body: any,
-      response: request.RequestResponse
+      response: http.IncomingMessage
     ) => void): void;
 }
 
