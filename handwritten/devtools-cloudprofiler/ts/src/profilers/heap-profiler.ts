@@ -20,7 +20,7 @@ import {serializeHeapProfile} from './profile-serializer';
 const profiler = require('bindings')('sampling_heap_profiler');
 
 export class HeapProfiler {
-  private enabled: boolean;
+  private enabled = false;
 
   /**
    * @param intervalBytes - average bytes between samples.
