@@ -2,6 +2,6 @@
   "product": "oslogin",
   "requiresKeyFile": true,
   "requiresProjectId": true,
-  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/oslogin/latest/",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/os-login/latest/",
   "release_quality": "alpha"
 }
