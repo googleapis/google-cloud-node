@@ -46,7 +46,7 @@ describe('logger', function() {
             createLogger({logLevel: 3}));
       });
       it('Should not throw given an env variable to use', function() {
-        process.env.GCLOUD_ERRORS_LOGLEVEL = 4;
+        process.env.GCLOUD_ERRORS_LOGLEVEL = '4';
         assert.doesNotThrow(createLogger, createLogger({logLevel: 4}));
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });

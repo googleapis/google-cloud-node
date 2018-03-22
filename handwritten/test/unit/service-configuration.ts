@@ -16,9 +16,9 @@
 
 'use strict';
 var assert = require('assert');
-var is = require('is');
-var isString = is.string;
-var isNumber = is.number;
+var is1 = require('is');
+var isString = is1.string;
+var isNumber = is1.number;
 var forEach = require('lodash.foreach');
 var assign = require('lodash.assign');
 var omitBy = require('lodash.omitby');
@@ -27,15 +27,15 @@ var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 var logger = require('../../src/logger.js').createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
-var env = {
+var serviceConfigEnv = {
   GAE_SERVICE: process.env.GAE_SERVICE,
   GAE_VERSION: process.env.GAE_VERSION,
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION,
   FUNCTION_NAME: process.env.FUNCTION_NAME,
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
 };
-function sterilizeEnv() {
-  forEach(env, function(val, key) {
+function sterilizeServiceConfigEnv() {
+  forEach(serviceConfigEnv, function(val, key) {
     delete process.env[key];
   });
 }
@@ -54,16 +54,16 @@ function setEnv(serviceName, serviceVersion, moduleName, mv, fn) {
             return !isString(val);
           }));
 }
-function restoreEnv() {
-  assign(process.env, env);
+function restoreServiceConfigEnv() {
+  assign(process.env, serviceConfigEnv);
 }
 
 describe('Testing service configuration', function() {
   beforeEach(function() {
-    sterilizeEnv();
+    sterilizeServiceConfigEnv();
   });
   after(function() {
-    restoreEnv();
+    restoreServiceConfigEnv();
   });
   it('A Configuration uses the function name as the service name on GCF ' +
          'if the service name is not given in the given config',

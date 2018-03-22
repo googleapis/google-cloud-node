@@ -31,6 +31,19 @@ var TEST_STACK_DEFAULT = {
   functionName: '',
 };
 
+/*
+ * The type of each property is {} to allow the tests to set values
+ * of various types to test the outcome.
+ */
+interface AnnotatedError {
+  user?: {};
+  serviceContext?: {};
+  stack?: {};
+  filePath?: {};
+  lineNumber?: {};
+  functionName?: {};
+};
+
 describe('populate-error-message', function() {
   var em;
   var adversarialObjectInput = {
@@ -107,7 +120,7 @@ describe('populate-error-message', function() {
 
   it('User Field: Should set the field given valid input given an Error',
      function() {
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        var TEST_USER_VALID = 'TEST_USER';
        err.user = TEST_USER_VALID;
        populateErrorMessage(err, em);
@@ -116,7 +129,7 @@ describe('populate-error-message', function() {
 
   it('User Field: Should default the field given invalid input given an Error',
      function() {
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        err.user = TEST_USER_INVALID;
        populateErrorMessage(err, em);
        assert.strictEqual(em.context.user, '');
@@ -124,7 +137,7 @@ describe('populate-error-message', function() {
 
   it('User Field: Should set the field given valid input given an object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var USER = 'test';
        err.user = USER;
        populateErrorMessage(err, em);
@@ -142,7 +155,7 @@ describe('populate-error-message', function() {
   it('ServiceContext Field: Should set the field given valid input given ' +
          'an Error',
      function() {
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
        err.serviceContext = TEST_SERVICE_VALID;
        populateErrorMessage(err, em);
@@ -152,7 +165,7 @@ describe('populate-error-message', function() {
   it('ServiceContext Field: Should default the field given invalid input ' +
          'given an Error',
      function() {
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        var TEST_SERVICE_INVALID = 12;
        err.serviceContext = TEST_SERVICE_INVALID;
        populateErrorMessage(err, em);
@@ -170,7 +183,7 @@ describe('populate-error-message', function() {
   it('ServiceContext Field: Should set the field given valid input given an ' +
          'object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var TEST_SERVICE_VALID = {service: 'test', version: 'test'};
        err.serviceContext = TEST_SERVICE_VALID;
        populateErrorMessage(err, em);
@@ -180,7 +193,7 @@ describe('populate-error-message', function() {
   it('ServiceContext Field: Should default the field given invalid input ' +
          'given an object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var TEST_SERVICE_INVALID = 12;
        err.serviceContext = TEST_SERVICE_INVALID;
        populateErrorMessage(err, em);
@@ -203,7 +216,7 @@ describe('populate-error-message', function() {
          lineNumber: '2',
          functionName: {},
        };
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        err.stack = TEST_STACK_INVALID_CONTENTS;
        populateErrorMessage(err, em);
        assert.deepEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
@@ -212,7 +225,7 @@ describe('populate-error-message', function() {
   it('Report location Field: Should default field if not given a valid type ' +
          'given an Error',
      function() {
-       var err = new Error();
+       var err: AnnotatedError = new Error();
        var TEST_STACK_INVALID_TYPE = [];
        err.stack = TEST_STACK_INVALID_TYPE;
        populateErrorMessage(err, em);
@@ -221,7 +234,7 @@ describe('populate-error-message', function() {
 
   it('FilePath Field: Should set the field given valid input given an object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var PATH = 'test';
        err.filePath = PATH;
        populateErrorMessage(err, em);
@@ -238,7 +251,7 @@ describe('populate-error-message', function() {
 
   it('LineNumber Field: Should set the field given valid input given an object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var LINE_NUMBER = 10;
        err.lineNumber = LINE_NUMBER;
        populateErrorMessage(err, em);
@@ -256,7 +269,7 @@ describe('populate-error-message', function() {
   it('FunctionName Field: Should set the field given valid input given ' +
          'an object',
      function() {
-       var err = {};
+       var err: AnnotatedError = {};
        var FUNCTION_NAME = 'test';
        err.functionName = FUNCTION_NAME;
        populateErrorMessage(err, em);

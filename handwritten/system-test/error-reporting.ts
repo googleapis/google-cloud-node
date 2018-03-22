@@ -24,7 +24,7 @@ var ErrorsApiTransport = require('../utils/errors-api-transport.js');
 var ErrorMessage = require('../src/classes/error-message.js').ErrorMessage;
 var Configuration = require('../test/fixtures/configuration.js');
 var createLogger = require('../src/logger.js').createLogger;
-var is = require('is');
+import * as is from 'is';
 var isObject = is.object;
 var isString = is.string;
 var isEmpty = is.empty;
@@ -47,6 +47,11 @@ const envKeys = [
 ];
 
 class InstancedEnv {
+  injectedEnv: {[key: string]: {}};
+  _originalEnv: {[key: string]: {}};
+  apiKey: string;
+  projectId: string;
+
   constructor(injectedEnv) {
     assign(this, injectedEnv);
     this.injectedEnv = injectedEnv;
@@ -457,7 +462,7 @@ describe('error-reporting', function() {
     reinitialize();
   });
 
-  function reinitialize(extraConfig) {
+  function reinitialize(extraConfig?: {}) {
     process.removeAllListeners('unhandledRejection');
     var config = Object.assign(
         {
