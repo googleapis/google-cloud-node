@@ -28,23 +28,23 @@ var nock = require('nock');
 
 var METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/project';
 
-var env = {
+var configEnv = {
   NODE_ENV: process.env.NODE_ENV,
   GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION,
 };
-function sterilizeEnv() {
+function sterilizeConfigEnv() {
   delete process.env.NODE_ENV;
   delete process.env.GCLOUD_PROJECT;
   delete process.env.GAE_MODULE_NAME;
   delete process.env.GAE_MODULE_VERSION;
 }
-function restoreEnv() {
-  process.env.NODE_ENV = env.NODE_ENV;
-  process.env.GCLOUD_PROJECT = env.GCLOUD_PROJECT;
-  process.env.GAE_MODULE_NAME = env.GAE_MODULE_NAME;
-  process.env.GAE_MODULE_VERSION = env.GAE_MODULE_VERSION;
+function restoreConfigEnv() {
+  process.env.NODE_ENV = configEnv.NODE_ENV;
+  process.env.GCLOUD_PROJECT = configEnv.GCLOUD_PROJECT;
+  process.env.GAE_MODULE_NAME = configEnv.GAE_MODULE_NAME;
+  process.env.GAE_MODULE_VERSION = configEnv.GAE_MODULE_VERSION;
 }
 function createDeadMetadataService() {
   return nock(METADATA_URL).get('/project-id').times(1).reply(500);
@@ -52,10 +52,10 @@ function createDeadMetadataService() {
 
 describe('Configuration class', function() {
   before(function() {
-    sterilizeEnv();
+    sterilizeConfigEnv();
   });
   after(function() {
-    restoreEnv();
+    restoreConfigEnv();
   });
   describe('Initialization', function() {
     var f = new Fuzzer();
@@ -75,7 +75,7 @@ describe('Configuration class', function() {
         process.env.NODE_ENV = 'development';
       });
       after(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       it('Should not throw with a valid configuration', function() {
         assert.doesNotThrow(function() {
@@ -112,12 +112,12 @@ describe('Configuration class', function() {
       describe('report behaviour with production env', function() {
         var c;
         before(function() {
-          sterilizeEnv();
+          sterilizeConfigEnv();
           process.env.NODE_ENV = 'production';
           c = new Configuration(undefined, logger);
         });
         after(function() {
-          sterilizeEnv();
+          sterilizeConfigEnv();
         });
         it('Should reportErrorsToAPI', function() {
           assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
@@ -160,7 +160,7 @@ describe('Configuration class', function() {
   });
   describe('Configuration resource aquisition', function() {
     before(function() {
-      sterilizeEnv();
+      sterilizeConfigEnv();
     });
     describe('project id from configuration instance', function() {
       var pi = 'test';
@@ -179,12 +179,12 @@ describe('Configuration class', function() {
       var pn = 1234;
       var c;
       before(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
         c = new Configuration({projectId: pn}, logger);
       });
       after(function() {
         nock.cleanAll();
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       it('Should return the project number', function() {
         assert.strictEqual(c.getProjectId(), pn.toString());
@@ -195,13 +195,13 @@ describe('Configuration class', function() {
     describe('While lacking a project id', function() {
       var c;
       before(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
         createDeadMetadataService();
         c = new Configuration(undefined, logger);
       });
       after(function() {
         nock.cleanAll();
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       it('Should return null', function() {
         assert.strictEqual(c.getProjectId(), null);
@@ -210,13 +210,13 @@ describe('Configuration class', function() {
     describe('Invalid type for projectId in runtime config', function() {
       var c;
       before(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
         createDeadMetadataService();
         c = new Configuration({projectId: null}, logger);
       });
       after(function() {
         nock.cleanAll();
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       it('Should return null', function() {
         assert.strictEqual(c.getProjectId(), null);
@@ -227,18 +227,18 @@ describe('Configuration class', function() {
     after(function() {
       /*
        * !! IMPORTANT !!
-       * THE restoreEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE EXITS
+       * THE restoreConfigEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE EXITS
        * AND SHOULD THEREFORE BE THE LAST THING TO EXECUTE FROM THIS FILE.
        * !! IMPORTANT !!
        */
-      restoreEnv();
+      restoreConfigEnv();
     });
     describe('via env', function() {
       before(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       afterEach(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       describe('no longer tests env itself', function() {
         var c;
@@ -271,7 +271,7 @@ describe('Configuration class', function() {
     });
     describe('via runtime configuration', function() {
       before(function() {
-        sterilizeEnv();
+        sterilizeConfigEnv();
       });
       describe('serviceContext', function() {
         var c;

@@ -17,9 +17,9 @@
 'use strict';
 
 var has = require('lodash.has');
-var is = require('is');
-var isFunction = is.fn;
-var isObject = is.object;
+var is1 = require('is');
+var isFunction = is1.fn;
+var isObject = is1.object;
 var assert = require('assert');
 var hapiInterface = require('../../../src/interfaces/hapi.js').makeHapiPlugin;
 var ErrorMessage =
@@ -141,7 +141,7 @@ describe('Hapi interface', function() {
          // If `reply.continue()` is not invoked in this situation, the Hapi
          // app will become unresponsive.
          plugin.register(fakeServer, null, function() {});
-         var reply = function() {};
+         var reply: Function & {continue?: Function} = function() {};
          reply.continue = function() {
            // The continue function should be called
            done();

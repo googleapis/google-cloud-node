@@ -18,7 +18,7 @@
 
 var Configuration = require('../../src/configuration.js').Configuration;
 
-var FakeConfiguration = function(config) {
+var FakeConfiguration = function(this: {}, config) {
   return Configuration.call(this, config, {warn: function() {}});
 };
 
