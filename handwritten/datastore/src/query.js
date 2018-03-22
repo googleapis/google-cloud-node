@@ -27,7 +27,7 @@ var arrify = require('arrify');
  * @see [Datastore Queries]{@link http://goo.gl/Cag0r6}
  *
  * @class
- * @param {Datastore|Rransaction} scope The parent scope the query was created
+ * @param {Datastore|Transaction} scope The parent scope the query was created
  *     from.
  * @param {string} [namespace] Namespace to query entities from.
  * @param {string} kind Kind to query.
