@@ -38,7 +38,10 @@ function createBucket(bucketName) {
 
   // Creates a new bucket
   storage
-    .createBucket(bucketName)
+    .createBucket(bucketName, {
+      location: 'ASIA',
+      storageClass: 'COLDLINE',
+    })
     .then(() => {
       console.log(`Bucket ${bucketName} created.`);
     })
