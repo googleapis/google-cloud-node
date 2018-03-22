@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Google Cloud OS Login API: Node.js Client](https://github.com/googleapis/nodejs-os-login)
@@ -71,19 +73,20 @@ if (
   );
 }
 
-const oslogin = require('@google-cloud/oslogin');
+const oslogin = require('@google-cloud/os-login');
 
 const projectId = process.env.GCLOUD_PROJECT;
 
 const client = new oslogin.OsLoginServiceClient({
-  projectId: projectId
+  projectId: projectId,
 });
 
 const request = {
-  name: 'users/1234abcd'
+  name: 'users/1234abcd',
 };
 
-client.getLoginProfile(request)
+client
+  .getLoginProfile(request)
   .then(responses => {
     const loginProfile = responses[0];
     console.log(loginProfile);
@@ -119,6 +122,6 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-os-login/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/oslogin/latest/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/os-login/latest/
 [product-docs]: https://cloud.google.com/compute/docs/oslogin/rest
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
