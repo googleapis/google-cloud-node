@@ -53,7 +53,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.16.1",
+    "@google-cloud/common": "^0.17.0",
     "extend": "^3.0.0",
     "is": "^3.0.1"
   },
