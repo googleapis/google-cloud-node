@@ -9,5 +9,21 @@
   "requiresKeyFile": true,
   "requiresProjectId": true,
   "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/text-to-speech/latest/",
-  "release_quality": "alpha"
+  "release_quality": "alpha",
+  "samples": [
+    {
+      "id": "synthesize_speech",
+      "name": "Synthesize Speech",
+      "file": "synthesize.js",
+      "docs_link": "https://cloud.google.com/text-to-speech/docs",
+      "usage": "node synthesize.js --help"
+    },
+    {
+      "id": "list_voices",
+      "name": "List supported voices",
+      "file": "listVoices.js",
+      "docs_link": "https://cloud.google.com/text-to-speech/docs",
+      "usage": "node listVoices.js --help"
+    }
+  ]
 }
