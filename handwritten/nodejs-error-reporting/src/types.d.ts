@@ -43,20 +43,27 @@ export interface logger {
 }
 
 export interface Options {
-  uri: 'events:report';
-  qs: { key: string|null} | null;
+  uri: string;
+  qs?: { key: string|null} | null;
   method: string;
-  json: {};
+  json?: {};
 }
 
 export interface Service {
   new(config: ServiceConfig, options: ServiceAuthenticationConfig): Service;
+  getProjectId(cb: (err: Error|null, projectId?: string) => void): void;
   authClient: {getToken: (err: {}) => void;};
   request(options: Options,
     cb: (
       err: Error | null,
       body: any,
       response: http.IncomingMessage
+    ) => void): void;
+  request_(options: Options,
+    cb: (
+      err: Error | null,
+      body: any,
+      response: {body: string}
     ) => void): void;
 }
 

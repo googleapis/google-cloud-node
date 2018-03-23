@@ -24,7 +24,7 @@ var assert = require('assert');
 var hapiInterface = require('../../../src/interfaces/hapi.js').makeHapiPlugin;
 var ErrorMessage =
     require('../../../src/classes/error-message.js').ErrorMessage;
-var Fuzzer = require('../../../utils/fuzzer.js');
+import {Fuzzer} from '../../../utils/fuzzer';
 var EventEmitter = require('events').EventEmitter;
 var Configuration = require('../../fixtures/configuration.js');
 

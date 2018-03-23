@@ -20,7 +20,7 @@ var assert = require('assert');
 var expressRequestInformationExtractor =
     require('../../../src/request-extractors/express.js')
         .expressRequestInformationExtractor;
-var Fuzzer = require('../../../utils/fuzzer.js');
+import {Fuzzer} from '../../../utils/fuzzer';
 var extend = require('extend');
 
 describe('Behaviour under varying input', function() {
