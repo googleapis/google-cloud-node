@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
 
 /* @const {String} Base Error Reporting API */
