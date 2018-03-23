@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var assert = require('assert');
 var is1 = require('is');
 var isString = is1.string;

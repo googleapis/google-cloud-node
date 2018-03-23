@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var assert = require('assert');
 var manual = require('../../../src/interfaces/manual.js');
 var Configuration = require('../../fixtures/configuration.js');

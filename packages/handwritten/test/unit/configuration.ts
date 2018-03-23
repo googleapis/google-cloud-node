@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var assert = require('assert');
 var isNumber = require('is').number;
 var merge = require('lodash.merge');
