@@ -15,7 +15,6 @@
  */
 // jscs doesn't understand koa..
 // jscs:disable
-'use strict';
 
 var errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report',
@@ -25,31 +24,31 @@ var app = koa();
 
 app.use(errorHandler.koa);
 
-app.use(function*(next) {
+app.use(function*(this, next) {
   // This will set status and message
   this.throw('Error Message', 500);
   yield next;
 });
 
-app.use(function*(next) {
-  var start = new Date();
+app.use(function*(this, next) {
+  var start = new Date() as any;
   yield next;
-  var ms = new Date() - start;
+  var ms = new Date() as any - start;
   this.set('X-Response-Time', ms + 'ms');
 });
 
 // logger
 
-app.use(function*(next) {
-  var start = new Date();
+app.use(function*(this, next) {
+  var start = new Date() as any;
   yield next;
-  var ms = new Date() - start;
+  var ms = new Date() as any - start;
   // eslint-disable-next-line no-console
   console.log('%s %s - %s', this.method, this.url, ms);
 });
 
 // response
-app.use(function*(next) {
+app.use(function*(this, next) {
   this.body = 'Hello World';
   yield next;
 });
