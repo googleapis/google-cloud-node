@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var path = require('path');
-var buildStackTrace = require('../../src/build-stack-trace.js').buildStackTrace;
+import * as assert from 'assert';
+import * as path from 'path';
+import {buildStackTrace} from '../../src/build-stack-trace';
 
 const SRC_ROOT = path.join(__dirname, '..', '..', 'src');
 

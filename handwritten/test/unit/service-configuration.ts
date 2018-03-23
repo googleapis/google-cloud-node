@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var is1 = require('is');
-var isString = is1.string;
-var isNumber = is1.number;
-var forEach = require('lodash.foreach');
-var assign = require('lodash.assign');
-var omitBy = require('lodash.omitby');
-var Configuration = require('../fixtures/configuration.js');
+import * as assert from 'assert';
+import * as is from 'is';
+var isString = is.string;
+var isNumber = is.number;
+import forEach = require('lodash.foreach');
+import assign = require('lodash.assign');
+import omitBy = require('lodash.omitby');
+import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
-var logger = require('../../src/logger.js').createLogger({
+import {createLogger} from '../../src/logger';
+var logger = createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
 var serviceConfigEnv = {

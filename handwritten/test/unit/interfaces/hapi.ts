@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-var has = require('lodash.has');
-var is1 = require('is');
-var isFunction = is1.fn;
-var isObject = is1.object;
-var assert = require('assert');
-var hapiInterface = require('../../../src/interfaces/hapi.js').makeHapiPlugin;
-var ErrorMessage =
-    require('../../../src/classes/error-message.js').ErrorMessage;
+import has = require('lodash.has');
+import * as is from 'is';
+var isFunction = (is as {} as {fn: Function}).fn;
+var isObject = is.object;
+import * as assert from 'assert';
+import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
+import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';
-var EventEmitter = require('events').EventEmitter;
-var Configuration = require('../../fixtures/configuration.js');
+import {EventEmitter} from 'events';
+import * as config from '../../../src/configuration';
+import { RequestHandler } from '../../../src/google-apis/auth-client';
+import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 
 describe('Hapi interface', function() {
   describe('Fuzzing the setup handler', function() {
@@ -44,7 +45,7 @@ describe('Hapi interface', function() {
     };
     var plugin;
     beforeEach(function() {
-      plugin = hapiInterface(null, givenConfig);
+      plugin = hapiInterface(null!, givenConfig as {} as config.Configuration);
     });
     it('should have plain object as plugin', function() {
       assert(isObject(plugin));
@@ -81,7 +82,7 @@ describe('Hapi interface', function() {
               errMsg instanceof ErrorMessage,
               'should be an instance of Error message');
         },
-      };
+      } as {} as RequestHandler;
       var plugin = hapiInterface(fakeClient, {
         lacksCredentials: function() {
           return false;
@@ -92,14 +93,14 @@ describe('Hapi interface', function() {
         getServiceContext: function() {
           return {service: 'node'};
         },
-      });
-      plugin.register(fakeServer, null, null, null);
+      } as {} as config.Configuration);
+      plugin.register(fakeServer, null!, null!);
       fakeServer.emit('request-error');
     });
   });
   describe('Behaviour around the request/response lifecycle', function() {
     var EVENT = 'onPreResponse';
-    var fakeClient = {sendError: function() {}};
+    var fakeClient = {sendError: function() {}} as {} as RequestHandler;
     var fakeServer, config, plugin;
     before(function() {
       config = new Configuration({
@@ -152,9 +153,9 @@ describe('Hapi interface', function() {
           assert(err instanceof ErrorMessage);
           done();
         },
-      };
+      } as {} as RequestHandler;
       var plugin = hapiInterface(fakeClient, config);
-      plugin.register(fakeServer, null, function() {});
+      plugin.register(fakeServer, null!, function() {});
       fakeServer.emit('onPreResponse', {response: {isBoom: true}});
     });
     it('Should call next when completing a request', function(done) {

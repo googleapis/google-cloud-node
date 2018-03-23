@@ -65,7 +65,7 @@ export function handlerSetup(
    * the parameters given.
    */
   function reportManualError(
-      err: {}, request?: Request, additionalMessage?: string|{},
+      err: {}, request?: Request|Callback|string, additionalMessage?: Callback|string|{},
       callback?: Callback|{}|string) {
     let em;
     if (isString(request)) {
