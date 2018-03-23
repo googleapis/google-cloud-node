@@ -67,13 +67,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 const speech = require('@google-cloud/speech');
 const fs = require('fs');
 
-// Your Google Cloud Platform project ID
-const projectId = 'your-project-id';
-
 // Creates a client
-const client = new speech.SpeechClient({
-  projectId: projectId,
-});
+const client = new speech.SpeechClient();
 
 // The name of the audio file to transcribe
 const fileName = './resources/audio.raw';
