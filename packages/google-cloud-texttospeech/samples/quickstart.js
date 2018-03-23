@@ -29,15 +29,16 @@ const text = 'Hello, world!';
 
 // Construct the request
 const request = {
-  input: { text: text },
+  input: {text: text},
   // Select the language and SSML Voice Gender (optional)
-  voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+  voice: {languageCode: 'en-US', ssmlGender: 'NEUTRAL'},
   // Select the type of audio encoding
-  audioConfig: { audioEncoding: 'MP3' }
+  audioConfig: {audioEncoding: 'MP3'},
 };
 
 // Performs the Text-to-Speech request
-client.synthesizeSpeech(request)
+client
+  .synthesizeSpeech(request)
   .then(results => {
     // The binary audio content returned from the API
     const audioContent = results[0].audioContent;
