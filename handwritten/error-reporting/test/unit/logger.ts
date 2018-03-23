@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var createLogger = require('../../src/logger.js').createLogger;
+import * as assert from 'assert';
+import {createLogger} from '../../src/logger';
 
 describe('logger', function() {
   describe('Initialization', function() {
@@ -29,24 +29,27 @@ describe('logger', function() {
     });
     describe('Exception handling', function() {
       it('Should not throw given undefined', function() {
-        assert.doesNotThrow(createLogger, createLogger());
+        assert.doesNotThrow(createLogger,
+          createLogger() as {} as (err: Error) => boolean);
       });
       it('Should not throw given an empty object', function() {
-        assert.doesNotThrow(createLogger.bind(null, {}), createLogger());
+        assert.doesNotThrow(createLogger.bind(null, {}),
+          createLogger() as {} as (err: Error) => boolean);
       });
       it('Should not throw given logLevel as a number', function() {
         assert.doesNotThrow(
             createLogger.bind(null, {logLevel: 3}),
-            createLogger({logLevel: 3}));
+            createLogger({logLevel: 3}) as {} as (err: Error) => boolean);
       });
       it('Should not throw given logLevel as a string', function() {
         assert.doesNotThrow(
             createLogger.bind(null, {logLevel: '3'}),
-            createLogger({logLevel: 3}));
+            createLogger({logLevel: 3}) as {} as (err: Error) => boolean);
       });
       it('Should not throw given an env variable to use', function() {
         process.env.GCLOUD_ERRORS_LOGLEVEL = '4';
-        assert.doesNotThrow(createLogger, createLogger({logLevel: 4}));
+        assert.doesNotThrow(createLogger,
+          createLogger({logLevel: 4}) as {} as (err: Error) => boolean);
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });
       it('Should thow given logLevel as null', function() {

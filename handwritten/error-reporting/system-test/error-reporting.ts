@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var nock = require('nock');
-var RequestHandler =
-    require('../src/google-apis/auth-client.js').RequestHandler;
-var ErrorsApiTransport = require('../utils/errors-api-transport.js');
-var ErrorMessage = require('../src/classes/error-message.js').ErrorMessage;
-var Configuration = require('../test/fixtures/configuration.js');
-var createLogger = require('../src/logger.js').createLogger;
+import * as assert from 'assert';
+import * as nock from 'nock';
+import {RequestHandler} from '../src/google-apis/auth-client';
+import {ErrorsApiTransport} from '../utils/errors-api-transport';
+import {ErrorMessage} from '../src/classes/error-message';
+import {ErrorReporting} from '../src/index';
+import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
+import {createLogger} from '../src/logger';
 import * as is from 'is';
 var isObject = is.object;
 var isString = is.string;
 var isEmpty = is.empty;
-var forEach = require('lodash.foreach');
-var assign = require('lodash.assign');
-var pick = require('lodash.pick');
-var omitBy = require('lodash.omitby');
+import * as forEach from 'lodash.foreach';
+import * as assign from 'lodash.assign';
+import * as pick from 'lodash.pick';
+import * as omitBy from 'lodash.omitby';
 // eslint-disable-next-line node/no-extraneous-require
-var request = require('request');
-var util = require('util');
-var path = require('path');
+import * as request from 'request';
+import * as util from 'util';
+import * as path from 'path';
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
 const TIMEOUT = 30000;
@@ -144,7 +144,7 @@ if (!shouldRun()) {
 
 describe('Request/Response lifecycle mocking', function() {
   var sampleError = new Error(ERR_TOKEN);
-  var errorMessage = new ErrorMessage().setMessage(sampleError);
+  var errorMessage = new ErrorMessage().setMessage(sampleError.message);
   var fakeService, client, logger;
   before(function() {
     env.sterilizeProcess();
@@ -227,7 +227,7 @@ describe('Request/Response lifecycle mocking', function() {
 
 describe('Client creation', function() {
   var sampleError = new Error(ERR_TOKEN);
-  var errorMessage = new ErrorMessage().setMessage(sampleError.stack);
+  var errorMessage = new ErrorMessage().setMessage(sampleError.stack!);
   after(function() {
     env.sterilizeProcess();
   });
@@ -248,7 +248,7 @@ describe('Client creation', function() {
          new RequestHandler(cfg, logger)
              .sendError(errorMessage, function(err, response, body) {
                assert.strictEqual(err, null);
-               assert.strictEqual(response.statusCode, 200);
+               assert.strictEqual(response!.statusCode, 200);
                assert(isObject(body) && isEmpty(body));
                done();
              });
@@ -266,7 +266,7 @@ describe('Client creation', function() {
          new RequestHandler(cfg, logger)
              .sendError(errorMessage, function(err, response, body) {
                assert.strictEqual(err, null);
-               assert.strictEqual(response.statusCode, 200);
+               assert.strictEqual(response!.statusCode, 200);
                assert(isObject(body) && isEmpty(body));
                done();
              });
@@ -289,7 +289,7 @@ describe('Client creation', function() {
          new RequestHandler(cfg, logger)
              .sendError(errorMessage, function(err, response, body) {
                assert.strictEqual(err, null);
-               assert.strictEqual(response.statusCode, 200);
+               assert.strictEqual(response!.statusCode, 200);
                assert(isObject(body) && isEmpty(body));
                done();
              });
@@ -307,7 +307,7 @@ describe('Client creation', function() {
          new RequestHandler(cfg, logger)
              .sendError(errorMessage, function(err, response, body) {
                assert.strictEqual(err, null);
-               assert.strictEqual(response.statusCode, 200);
+               assert.strictEqual(response!.statusCode, 200);
                assert(isObject(body) && isEmpty(body));
                done();
              });
@@ -324,7 +324,7 @@ describe('Expected Behavior', function() {
   ].join(' ');
 
   var er = new Error(ERR_TOKEN);
-  var em = new ErrorMessage().setMessage(er.stack);
+  var em = new ErrorMessage().setMessage(er.stack!);
 
   after(function() {
     env.sterilizeProcess();
@@ -337,9 +337,9 @@ describe('Expected Behavior', function() {
        var logger = createLogger({logLevel: 5});
        var client =
            new RequestHandler(new Configuration(undefined, logger), logger);
-       client.sendError({}, function(err, response) {
+       client.sendError({} as ErrorMessage, function(err, response) {
          assert(err instanceof Error);
-         assert.strictEqual(err.message, ERROR_STRING);
+         assert.strictEqual(err!.message, ERROR_STRING);
          assert.strictEqual(response, null);
          done();
        });
@@ -360,7 +360,7 @@ describe('Expected Behavior', function() {
       assert.strictEqual(err, null);
       assert(isObject(body));
       assert(isEmpty(body));
-      assert.strictEqual(response.statusCode, 200);
+      assert.strictEqual(response!.statusCode, 200);
       done();
     });
   });
@@ -380,7 +380,7 @@ describe('Expected Behavior', function() {
          assert.strictEqual(err, null);
          assert(isObject(body));
          assert(isEmpty(body));
-         assert.strictEqual(response.statusCode, 200);
+         assert.strictEqual(response!.statusCode, 200);
          done();
        });
      });
@@ -471,7 +471,6 @@ describe('error-reporting', function() {
           },
         },
         extraConfig || {});
-    const ErrorReporting = require('../src/index.js').ErrorReporting;
     errors = new ErrorReporting(config);
     transport = new ErrorsApiTransport(errors._config, errors._logger);
   }

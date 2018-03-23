@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var manual = require('../../../src/interfaces/manual.js');
-var Configuration = require('../../fixtures/configuration.js');
+import * as assert from 'assert';
+import * as manual from '../../../src/interfaces/manual';
+import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 var config = new Configuration({});
-config.lacksCredentials = function() {
+(config as {} as {lacksCredentials: Function}).lacksCredentials = function() {
   return false;
 };
-var ErrorMessage =
-    require('../../../src/classes/error-message.js').ErrorMessage;
+import {ErrorMessage} from '../../../src/classes/error-message';
+import { RequestHandler } from '../../../src/google-apis/auth-client';
+import { Logger } from '@google-cloud/common';
+import { RequestInformationContainer } from '../../../src/classes/request-information-container';
 // var nock = require('nock');
 
 describe('Manual handler', function() {
   // nock.disableNetConnect();
   // Mocked client
-  var client = {
+  var client: RequestHandler = {
     sendError: function(e, cb) {
       // immediately callback
       if (cb) {
         setImmediate(cb);
       }
     },
-  };
+  } as {} as RequestHandler;
   var report = manual.handlerSetup(client, config, {
     warn: function(message) {
       // The use of `report` in this class should issue the following warning
@@ -52,10 +54,10 @@ describe('Manual handler', function() {
               'trace.  This error might not be visible in the error reporting ' +
               'console.');
     },
-  });
+  } as Logger);
   describe('Report invocation behaviour', function() {
     it('Should allow argument-less invocation', function() {
-      var r = report();
+      var r = report(null!);
       assert(r instanceof ErrorMessage, 'should be an inst of ErrorMessage');
     });
     it('Should allow single string', function() {
@@ -127,7 +129,7 @@ describe('Manual handler', function() {
       assert.notEqual(r.context.httpRequest.method, 'HONK');
     });
     it('Should allow null arguments as placeholders', function(done) {
-      var r = report('pokey', null, null, function() {
+      var r = report('pokey', null!, null!, function() {
         done();
       });
       assert(r.message.match(/pokey/), 'string error should propagate');
@@ -168,7 +170,7 @@ describe('Manual handler', function() {
       var oldReq = {method: 'GET'};
       var newReq = {method: 'POST'};
       var r = report(
-          new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq),
+          new ErrorMessage().setMessage(msg).consumeRequestInformation(oldReq as RequestInformationContainer),
           newReq);
       assert(
           r.message.startsWith(msg),

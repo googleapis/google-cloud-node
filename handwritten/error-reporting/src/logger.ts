@@ -20,7 +20,7 @@ import * as is from 'is';
 const isObject = is.object;
 const isString = is.string;
 const isNumber = is.number;
-const logger = require('@google-cloud/common').logger;
+import {logger} from '@google-cloud/common';
 const packageJson = require('../../package.json');
 
 import {ConfigurationOptions} from './configuration';

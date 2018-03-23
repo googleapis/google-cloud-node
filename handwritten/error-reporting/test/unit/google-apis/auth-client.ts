@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var proxyquire = require('proxyquire');
+import * as assert from 'assert';
+import * as proxyquire from 'proxyquire';
 
-var Configuration = require('../../../src/configuration.js').Configuration;
+import {Configuration} from '../../../src/configuration';
+import { Logger } from '@google-cloud/common';
 
 function verifyReportedMessage(config1, errToReturn, expectedLogs) {
   class ServiceStub {
@@ -54,7 +55,7 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
       logs.info += text;
     },
   };
-  var config2 = new Configuration(config1, logger);
+  var config2 = new Configuration(config1, logger as Logger);
   new RequestHandler(config2, logger);
   assert.deepStrictEqual(logs, expectedLogs);
 }

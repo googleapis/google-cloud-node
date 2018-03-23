@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
+import * as assert from 'assert';
 
-var ErrorMessage = require('../../src/classes/error-message.js').ErrorMessage;
-var populateErrorMessage =
-    require('../../src/populate-error-message.js').populateErrorMessage;
+import {ErrorMessage} from '../../src/classes/error-message';
+import {populateErrorMessage} from '../../src/populate-error-message';
 
 var TEST_USER_INVALID = 12;
 var TEST_MESSAGE = 'This is a test';
