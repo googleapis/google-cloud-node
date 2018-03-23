@@ -15,8 +15,6 @@
  */
 // jscs:disable requireEarlyReturn
 
-'use strict';
-
 var WARNING_HEADER = '\n!! -WARNING-';
 var EXCLAMATION_LN = '\n!!';
 var has = require('lodash.has');
