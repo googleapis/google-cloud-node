@@ -19,7 +19,7 @@ var assert = require('assert');
 var isNumber = require('is').number;
 var merge = require('lodash.merge');
 var Configuration = require('../fixtures/configuration.js');
-var Fuzzer = require('../../utils/fuzzer.js');
+import {Fuzzer} from '../../utils/fuzzer';
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 var logger = require('../../src/logger.js').createLogger({
   logLevel: isNumber(level) ? level : 4,
