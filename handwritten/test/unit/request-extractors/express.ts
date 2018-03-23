@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var assert = require('assert');
 var expressRequestInformationExtractor =
     require('../../../src/request-extractors/express.js')

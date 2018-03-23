@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var assert = require('assert');
 var omit = require('lodash.omit');
 var extend = require('extend');

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
 var assert = require('assert');
 var createLogger = require('../../src/logger.js').createLogger;
 

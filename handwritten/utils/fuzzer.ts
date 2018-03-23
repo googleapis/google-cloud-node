@@ -16,7 +16,6 @@
 // jscs:disable
 // jshint ignore: start
 
-'use strict';
 var indexOf = require('lodash.indexof');
 var without = require('lodash.without');
 var maxBy = require('lodash.maxby');
