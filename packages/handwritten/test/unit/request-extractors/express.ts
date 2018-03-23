@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var expressRequestInformationExtractor =
-    require('../../../src/request-extractors/express.js')
-        .expressRequestInformationExtractor;
+import * as assert from 'assert';
+import {expressRequestInformationExtractor} from '../../../src/request-extractors/express';
 import {Fuzzer} from '../../../utils/fuzzer';
-var extend = require('extend');
+import * as extend from 'extend';
+import { Response } from 'express-serve-static-core';
 
 describe('Behaviour under varying input', function() {
   var f;
@@ -113,7 +112,7 @@ describe('Behaviour under varying input', function() {
       return lrn;
     };
     var tmpOutput = expressRequestInformationExtractor(
-        headerFactory(FULL_REQ_DERIVATION_VALUE), FULL_RES_DERIVATION_VALUE);
+        headerFactory(FULL_REQ_DERIVATION_VALUE), FULL_RES_DERIVATION_VALUE as Response);
     assert.deepEqual(tmpOutput, FULL_REQ_EXPECTED_VALUE, [
       'Given a valid object input for the request parameter and an',
       '\'x-forwarded-for\' parameter the request extractor should return',
@@ -122,7 +121,7 @@ describe('Behaviour under varying input', function() {
     ].join(' '));
     tmpOutput = expressRequestInformationExtractor(
         headerFactory(PARTIAL_REQ_DERIVATION_VALUE),
-        PARTIAL_RES_DERIVATION_VALUE);
+        PARTIAL_RES_DERIVATION_VALUE as Response);
     assert.deepEqual(tmpOutput, PARTIAL_REQ_EXPECTED_VALUE, [
       'Given a valid object input for the request parameter but sans an',
       '\'x-forwarded-for\' parameter the request extractor should return',
@@ -131,7 +130,7 @@ describe('Behaviour under varying input', function() {
     ].join(' '));
     tmpOutput = expressRequestInformationExtractor(
         headerFactory(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
-        ANOTHER_PARTIAL_RES_DERIVATION_VALUE);
+        ANOTHER_PARTIAL_RES_DERIVATION_VALUE as Response);
     assert.deepEqual(tmpOutput, ANOTHER_PARTIAL_REQ_EXPECTED_VALUE, [
       'Given a valid object input for the request parameter but sans an',
       '\'x-forwarded-for\' parameter or a remoteAddress parameter',

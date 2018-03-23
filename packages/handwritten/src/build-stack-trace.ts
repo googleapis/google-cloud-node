@@ -25,7 +25,7 @@ const SRC_ROOT = __dirname;
  * @returns {String} - A string representation of the stack trace at the point
  *   where this method was invoked.
  */
-export function buildStackTrace(message: string) {
+export function buildStackTrace(message?: string|null) {
   const target = {};
   // Build a stack trace without the frames associated with `buildStackTrace`.
   // The stack is located at `target.stack`.

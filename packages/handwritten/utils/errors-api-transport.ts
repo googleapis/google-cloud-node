@@ -21,7 +21,7 @@ var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 
 var ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
 
-class ErrorsApiTransport extends AuthClient {
+export class ErrorsApiTransport extends AuthClient {
   constructor(config, logger) {
     super(config, logger);
   }
@@ -72,5 +72,3 @@ class ErrorsApiTransport extends AuthClient {
     });
   }
 }
-
-module.exports = ErrorsApiTransport;

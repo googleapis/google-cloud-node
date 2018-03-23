@@ -16,9 +16,9 @@
 // jscs:disable
 // jshint ignore: start
 
-var assert = require('assert');
-var ErrorMessage =
-    require('../../../src/classes/error-message.js').ErrorMessage;
+import * as assert from 'assert';
+import {ErrorMessage} from '../../../src/classes/error-message';
+import { RequestInformationContainer } from '../../../src/classes/request-information-container';
 
 describe('Instantiating a new ErrorMessage', function() {
   var em;
@@ -447,7 +447,7 @@ describe('Fuzzing against consumeRequestInformation', function() {
     remoteAddress: undefined,
   };
   it('Should consume the stubbed request object', function() {
-    em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE);
+    em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE as RequestInformationContainer);
     assert(em.context.httpRequest.method === A_VALID_STRING, [
       'The error messages method, given a valid string, should be',
       'set to that value',
@@ -474,7 +474,7 @@ describe('Fuzzing against consumeRequestInformation', function() {
     ].join(' '));
   });
   it('Should default when consuming a malformed request object', function() {
-    em.consumeRequestInformation(null);
+    em.consumeRequestInformation(null!);
     assert(em.context.httpRequest.method === A_VALID_STRING, [
       'The error messages method, given an invalid type a the top-level',
       'should remain untouched',
@@ -501,7 +501,7 @@ describe('Fuzzing against consumeRequestInformation', function() {
     ].join(' '));
   });
   it('Should default when consuming mistyped response object properties', function() {
-    em.consumeRequestInformation(NEGATIVE_TEST_VALUE);
+    em.consumeRequestInformation(NEGATIVE_TEST_VALUE as {} as RequestInformationContainer);
     assert(em.context.httpRequest.method === NEGATIVE_STRING_CASE, [
       'The error messages method, given an invalid input should default to',
       'the negative value',
@@ -530,13 +530,13 @@ describe('Fuzzing against consumeRequestInformation', function() {
   it('Should return the instance on calling consumeRequestInformation',
      function() {
        assert(
-           em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE) instanceof
+           em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE as RequestInformationContainer) instanceof
                ErrorMessage,
            [
              'Calling consumeRequestInformation with valid input should return',
              'the ErrorMessage instance',
            ].join(' '));
-       assert(em.consumeRequestInformation() instanceof ErrorMessage, [
+       assert(em.consumeRequestInformation(undefined!) instanceof ErrorMessage, [
          'Calling consumeRequestInformation with invalid input should return',
          'the ErrorMessage instance',
        ].join(' '));
