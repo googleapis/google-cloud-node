@@ -924,6 +924,28 @@ var AnnotateImageResponse = {
 };
 
 /**
+ * Response to a single file annotation request. A file may contain one or more
+ * images, which individually have their own responses.
+ *
+ * @property {Object} inputConfig
+ *   Information about the file for which this response is generated.
+ *
+ *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1p2beta1.InputConfig}
+ *
+ * @property {Object[]} responses
+ *   Individual responses to images found within the file.
+ *
+ *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1p2beta1.AnnotateImageResponse}
+ *
+ * @typedef AnnotateFileResponse
+ * @memberof google.cloud.vision.v1p2beta1
+ * @see [google.cloud.vision.v1p2beta1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/image_annotator.proto}
+ */
+var AnnotateFileResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Multiple image annotation requests are batched into a single service call.
  *
  * @property {Object[]} requests
