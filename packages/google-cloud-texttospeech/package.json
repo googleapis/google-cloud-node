@@ -29,11 +29,12 @@
     "Cloud Text-to-Speech API"
   ],
   "contributors": [
-    "Alexander Fenster <fenster@google.com>"
+    "Alexander Fenster <fenster@google.com>",
+    "Rebecca Taylor <rebeccataylor@google.com>"
   ],
   "scripts": {
     "test": "repo-tools test run --cmd npm -- run cover",
-    "generate-scaffolding": "repo-tools generate lib_readme",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
     "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
     "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/ smoke-test/",
