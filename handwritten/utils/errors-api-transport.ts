@@ -16,7 +16,7 @@
 
 'use strict';
 
-var AuthClient = require('../src/google-apis/auth-client.js').RequestHandler;
+import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
 
 /* @const {String} Base Error Reporting API */
 var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
@@ -37,7 +37,7 @@ class ErrorsApiTransport extends AuthClient {
 
       var options = {
         uri: [API, id, 'events'].join('/'),
-        method: 'DELETE',
+        method: 'DELETE'
       };
       self.request_(options, function(
         err,
@@ -62,7 +62,7 @@ class ErrorsApiTransport extends AuthClient {
 
       var options = {
         uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
-        method: 'GET',
+        method: 'GET'
       };
       self.request_(options, function(err, response, body) {
         if (err) {

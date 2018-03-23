@@ -22,7 +22,7 @@ var extend = require('extend');
 var manualRequestInformationExtractor =
     require('../../../src/request-extractors/manual.js')
         .manualRequestInformationExtractor;
-var Fuzzer = require('../../../utils/fuzzer.js');
+import {Fuzzer} from '../../../utils/fuzzer';
 
 describe('manualRequestInformationExtractor', function() {
   describe('Behaviour given invalid input', function() {
