@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var assert = require('assert');
 var path = require('path');
 var buildStackTrace = require('../../src/build-stack-trace.js').buildStackTrace;

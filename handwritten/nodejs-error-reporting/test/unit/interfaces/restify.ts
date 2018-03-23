@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var EventEmitter = require('events').EventEmitter;
 var assert = require('assert');
 var restifyInterface =

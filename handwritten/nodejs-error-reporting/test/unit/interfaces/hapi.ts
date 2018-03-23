@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 var has = require('lodash.has');
 var is1 = require('is');
 var isFunction = is1.fn;
