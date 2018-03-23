@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var isNumber = require('is').number;
-var merge = require('lodash.merge');
-var Configuration = require('../fixtures/configuration.js');
+import * as assert from 'assert';
+import * as is from 'is';
+var isNumber = is.number;
+import merge = require('lodash.merge');
+import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {Fuzzer} from '../../utils/fuzzer';
 var level = process.env.GCLOUD_ERRORS_LOGLEVEL;
-var logger = require('../../src/logger.js').createLogger({
+import {createLogger} from '../../src/logger';
+var logger = createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
-var nock = require('nock');
+import * as nock from 'nock';
 
 var METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/project';
 

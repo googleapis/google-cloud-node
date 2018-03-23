@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var merge = require('lodash.merge');
-var expressInterface =
-    require('../../../src/interfaces/express.js').makeExpressHandler;
-var ErrorMessage =
-    require('../../../src/classes/error-message.js').ErrorMessage;
+import * as assert from 'assert';
+import * as merge from 'lodash.merge';
+import {makeExpressHandler as expressInterface} from '../../../src/interfaces/express';
+import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';
-var Configuration = require('../../fixtures/configuration.js');
-var createLogger = require('../../../src/logger.js').createLogger;
+import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
+import {createLogger} from '../../../src/logger';
+import { RequestHandler } from '../../../src/google-apis/auth-client';
 
 describe('expressInterface', function() {
   describe('Exception handling', function() {
@@ -45,7 +44,7 @@ describe('expressInterface', function() {
           },
         },
         createLogger({logLevel: 4}));
-    stubbedConfig.lacksCredentials = function() {
+    (stubbedConfig as {} as {lacksCredentials: Function}).lacksCredentials = function() {
       return false;
     };
     var client = {
@@ -54,14 +53,14 @@ describe('expressInterface', function() {
       },
     };
     var testError = new Error('This is a test');
-    var validBoundHandler = expressInterface(client, stubbedConfig);
+    var validBoundHandler = expressInterface(client as {} as RequestHandler, stubbedConfig);
     it('Should return the error message', function() {
-      var res = validBoundHandler(testError, null, null, null);
+      var res = validBoundHandler(testError, null!, null!, null!);
       assert.deepEqual(
           res,
           merge(
               new ErrorMessage()
-                  .setMessage(testError.stack)
+                  .setMessage(testError.stack!)
                   .setServiceContext(
                       stubbedConfig._serviceContext.service,
                       stubbedConfig._serviceContext.version),
@@ -72,7 +71,7 @@ describe('expressInterface', function() {
         var nextCb = function() {
           done();
         };
-        validBoundHandler(testError, null, null, nextCb);
+        validBoundHandler(testError, null!, null!, nextCb);
       });
       it('Should callback to sendError', function(done) {
         var sendError = function() {
@@ -81,8 +80,8 @@ describe('expressInterface', function() {
         var client = {
           sendError: sendError,
         };
-        var handler = expressInterface(client, stubbedConfig);
-        handler(testError, null, null, function() {
+        var handler = expressInterface(client as {} as RequestHandler, stubbedConfig);
+        handler(testError, null!, null!, function() {
           return;
         });
       });

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-var EventEmitter = require('events').EventEmitter;
-var assert = require('assert');
-var restifyInterface =
-    require('../../../src/interfaces/restify.js').handlerSetup;
+import {EventEmitter} from 'events';
+import * as assert from 'assert';
+import {handlerSetup as restifyInterface} from '../../../src/interfaces/restify';
+import { RequestHandler } from '../../../src/google-apis/auth-client';
+import { Configuration } from '../../../src/configuration';
 
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {
@@ -40,7 +41,7 @@ describe('restifyInterface', function() {
           ee.listenerCount(UNCAUGHT_EVENT), 0,
           'Listeners on event should be zero');
       // return the bound function which the user will actually interface with
-      var errorHandlerInstance = restifyInterface(null, null);
+      var errorHandlerInstance = restifyInterface(null!, null!);
       // execute the handler the user will use with the stubbed server instance
       errorHandlerInstance(ee);
       assert.strictEqual(
@@ -50,7 +51,7 @@ describe('restifyInterface', function() {
   });
   describe('Request handler lifecycle events', function() {
     var ee = new EventEmitter();
-    var errorHandlerInstance = restifyInterface(null, null);
+    var errorHandlerInstance = restifyInterface(null!, null!);
     var requestHandlerInstance = errorHandlerInstance(ee);
     describe('default path on invalid input', function() {
       it('Should not throw', function() {
@@ -63,7 +64,7 @@ describe('restifyInterface', function() {
       ee.removeAllListeners();
       var req = new EventEmitter();
       var res = new EventEmitter();
-      res.statusCode = 200;
+      (res as {} as {statusCode: number}).statusCode = 200;
       it('Should have 0 listeners on the finish event', function() {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });
@@ -102,12 +103,12 @@ describe('restifyInterface', function() {
         getVersion: function() {
           return '1';
         },
-      };
-      var errorHandlerInstance = restifyInterface(client, config);
+      } as {} as Configuration;
+      var errorHandlerInstance = restifyInterface(client as {} as RequestHandler, config);
       var requestHandlerInstance = errorHandlerInstance(ee);
       var req = new EventEmitter();
       var res = new EventEmitter();
-      res.statusCode = 500;
+      (res as {} as {statusCode: number}).statusCode = 500;
       it('Should have 0 Listeners on the finish event', function() {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });

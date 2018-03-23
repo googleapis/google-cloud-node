@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-var assert = require('assert');
-var RequestInformationContainer =
-    require('../../../src/classes/request-information-container.js');
+import * as assert from 'assert';
+import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 import {Fuzzer} from '../../../utils/fuzzer';
 
 describe('RequestInformationContainer', function() {
   var f = new Fuzzer();
   var cbFn, ric;
   beforeEach(function() {
-    ric = new RequestInformationContainer.RequestInformationContainer();
+    ric = new RequestInformationContainer();
   });
   describe('Fuzzing against RequestInformationContainer', function() {
     it('Should return the property as an empty string', function() {

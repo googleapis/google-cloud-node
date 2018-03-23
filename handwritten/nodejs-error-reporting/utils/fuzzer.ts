@@ -16,11 +16,12 @@
 // jscs:disable
 // jshint ignore: start
 
-var indexOf = require('lodash.indexof');
-var without = require('lodash.without');
-var maxBy = require('lodash.maxby');
-var random = require('lodash.random');
-var is = require('is');
+import indexOf = require('lodash.indexof');
+import without = require('lodash.without');
+import maxBy = require('lodash.maxby');
+import random = require('lodash.random');
+import * as is from 'is';
+
 var isNumber = is.number;
 var isString = is.string;
 var isArray = is.array;
