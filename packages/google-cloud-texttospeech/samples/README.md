@@ -48,8 +48,8 @@ Options:
 Examples:
   node synthesize.js text "hello" -o hello.mp3
   node synthesize.js ssml "<speak>Hello there.</speak>" -o hello.mp3
-  node synthesize.js text-file filename.txt -o output.mp3
-  node synthesize.js ssml-file filename.ssml -o output.mp3
+  node synthesize.js text-file resources/hello.txt -o output.mp3
+  node synthesize.js ssml-file resources/hello.ssml -o output.mp3
 
 For more information, see https://cloud.google.com/text-to-speech/docs
 ```
