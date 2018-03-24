@@ -86,19 +86,21 @@ const request = {
 };
 
 // Performs the Text-to-Speech request
-client
-  .synthesizeSpeech(request)
-  .then(async results => {
-    // The binary audio content returned from the API
-    const audioContent = results[0].audioContent;
-
-    // Write the audio content to a local file
-    await fs.writeFile('output.mp3', audioContent, 'binary');
-    console.log('Audio content written to file: output.mp3');
-  })
-  .catch(err => {
+client.synthesizeSpeech(request, (err, response) => {
+  if (err) {
     console.error('ERROR:', err);
+    return;
+  }
+
+  // Write the binary audio content to a local file
+  fs.writeFile('output.mp3', response.audioContent, 'binary', err => {
+    if (err) {
+      console.error('ERROR:', err);
+      return;
+    }
+    console.log('Audio content written to file: output.mp3');
   });
+});
 ```
 
 ## Samples
