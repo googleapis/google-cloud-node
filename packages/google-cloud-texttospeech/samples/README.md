@@ -47,7 +47,7 @@ Options:
 
 Examples:
   node synthesize.js text "hello" -o hello.mp3
-  node synthesize.js ssml "<?xml..." -o hello.mp3
+  node synthesize.js ssml "<speak>Hello there.</speak>" -o hello.mp3
   node synthesize.js text-file filename.txt -o output.mp3
   node synthesize.js ssml-file filename.ssml -o output.mp3
 
