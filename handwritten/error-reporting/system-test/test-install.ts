@@ -74,7 +74,7 @@ const app = express();
 
 app.get('/error', (req, res, next) => {
   res.send('Something broke!');
-  next(new Error('Custom error message'));
+  next!(new Error('Custom error message'));
 });
 
 app.get('/exception', () => {
