@@ -35,7 +35,7 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
  *  request handlers.
  */
 export function koaErrorHandler(
-    client: RequestHandler, config: Configuration): Middleware {
+    client: RequestHandler, config: Configuration) {
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by
