@@ -2229,6 +2229,28 @@ describe('Bucket', function() {
         done();
       });
     });
+
+    it('should return file and metadata', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      var options = {destination: fakeFile};
+      var metadata = {};
+
+      fakeFile.createWriteStream = function() {
+        var ws = through();
+        setImmediate(function() {
+          fakeFile.metadata = metadata;
+          ws.end();
+        });
+        return ws;
+      };
+
+      bucket.upload(filepath, options, function(err, file, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(file, fakeFile);
+        assert.strictEqual(apiResponse, metadata);
+        done();
+      });
+    });
   });
 
   describe('makeAllFilesPublicPrivate_', function() {

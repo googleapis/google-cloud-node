@@ -2333,7 +2333,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
       .pipe(newFile.createWriteStream(options))
       .on('error', callback)
       .on('finish', function() {
-        callback(null, newFile);
+        callback(null, newFile, newFile.metadata);
       });
   }
 };
