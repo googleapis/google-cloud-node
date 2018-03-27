@@ -74,7 +74,7 @@
     "@types/express-serve-static-core": "^4.11.1",
     "@types/glob": "^5.0.35",
     "@types/hapi": "^16.1.11",
-    "@types/is": "0.0.18",
+    "@types/is": "0.0.19",
     "@types/koa": "^2.0.43",
     "@types/lodash.has": "^4.5.3",
     "@types/mocha": "^5.0.0",
