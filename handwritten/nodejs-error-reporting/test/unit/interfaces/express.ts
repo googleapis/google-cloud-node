@@ -27,7 +27,7 @@ describe('expressInterface', function() {
   describe('Exception handling', function() {
     describe('Given invalid input', function() {
       it('Should not throw errors', function() {
-        var f = new Fuzzer();
+        const f = new Fuzzer();
         assert.doesNotThrow(function() {
           f.fuzzFunctionForTypes(expressInterface, ['object', 'object']);
           return;
@@ -36,7 +36,7 @@ describe('expressInterface', function() {
     });
   });
   describe('Intended behaviour', function() {
-    var stubbedConfig = new Configuration(
+    const stubbedConfig = new Configuration(
         {
           serviceContext: {
             service: 'a_test_service',
@@ -47,15 +47,15 @@ describe('expressInterface', function() {
     (stubbedConfig as {} as {lacksCredentials: Function}).lacksCredentials = function() {
       return false;
     };
-    var client = {
+    const client = {
       sendError: function() {
         return;
       },
     };
-    var testError = new Error('This is a test');
-    var validBoundHandler = expressInterface(client as {} as RequestHandler, stubbedConfig);
+    const testError = new Error('This is a test');
+    const validBoundHandler = expressInterface(client as {} as RequestHandler, stubbedConfig);
     it('Should return the error message', function() {
-      var res = validBoundHandler(testError, null!, null!, null!);
+      const res = validBoundHandler(testError, null!, null!, null!);
       assert.deepEqual(
           res,
           merge(
@@ -68,19 +68,19 @@ describe('expressInterface', function() {
     });
     describe('Calling back to express builtins', function() {
       it('Should callback to next', function(done) {
-        var nextCb = function() {
+        const nextCb = function() {
           done();
         };
         validBoundHandler(testError, null!, null!, nextCb);
       });
       it('Should callback to sendError', function(done) {
-        var sendError = function() {
+        const sendError = function() {
           done();
         };
-        var client = {
+        const client = {
           sendError: sendError,
         };
-        var handler = expressInterface(client as {} as RequestHandler, stubbedConfig);
+        const handler = expressInterface(client as {} as RequestHandler, stubbedConfig);
         handler(testError, null!, null!, function() {
           return;
         });
