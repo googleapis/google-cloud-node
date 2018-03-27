@@ -16,8 +16,8 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
-var isFunction = (is as {} as {fn: Function}).fn;
-var isObject = is.object;
+const isFunction = (is as {} as {fn: Function}).fn;
+const isObject = is.object;
 import * as assert from 'assert';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
 import {ErrorMessage} from '../../../src/classes/error-message';
@@ -30,7 +30,7 @@ import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 describe('Hapi interface', function() {
   describe('Fuzzing the setup handler', function() {
     it('Should not throw when fuzzed with invalid types', function() {
-      var f = new Fuzzer();
+      const f = new Fuzzer();
       assert.doesNotThrow(function() {
         f.fuzzFunctionForTypes(hapiInterface, ['object', 'object']);
         return;
@@ -38,12 +38,12 @@ describe('Hapi interface', function() {
     });
   });
   describe('Providing valid input to the setup handler', function() {
-    var givenConfig = {
+    const givenConfig = {
       getVersion: function() {
         return '1';
       },
     };
-    var plugin;
+    let plugin;
     beforeEach(function() {
       plugin = hapiInterface(null!, givenConfig as {} as config.Configuration);
     });
@@ -71,19 +71,19 @@ describe('Hapi interface', function() {
        });
   });
   describe('hapiRegisterFunction behaviour', function() {
-    var fakeServer;
+    let fakeServer;
     beforeEach(function() {
       fakeServer = new EventEmitter();
     });
     it('Should call fn when the request-error event is emitted', function() {
-      var fakeClient = {
+      const fakeClient = {
         sendError: function(errMsg) {
           assert(
               errMsg instanceof ErrorMessage,
               'should be an instance of Error message');
         },
       } as {} as RequestHandler;
-      var plugin = hapiInterface(fakeClient, {
+      const plugin = hapiInterface(fakeClient, {
         lacksCredentials: function() {
           return false;
         },
@@ -99,9 +99,9 @@ describe('Hapi interface', function() {
     });
   });
   describe('Behaviour around the request/response lifecycle', function() {
-    var EVENT = 'onPreResponse';
-    var fakeClient = {sendError: function() {}} as {} as RequestHandler;
-    var fakeServer, config, plugin;
+    const EVENT = 'onPreResponse';
+    const fakeClient = {sendError: function() {}} as {} as RequestHandler;
+    let fakeServer, config, plugin;
     before(function() {
       config = new Configuration({
         projectId: 'xyz',
@@ -140,7 +140,7 @@ describe('Hapi interface', function() {
          // If `reply.continue()` is not invoked in this situation, the Hapi
          // app will become unresponsive.
          plugin.register(fakeServer, null, function() {});
-         var reply: Function & {continue?: Function} = function() {};
+         const reply: Function & {continue?: Function} = function() {};
          reply.continue = function() {
            // The continue function should be called
            done();
@@ -148,13 +148,13 @@ describe('Hapi interface', function() {
          fakeServer.emit(EVENT, {response: {isBoom: true}}, reply);
        });
     it('Should call sendError when a boom is received', function(done) {
-      var fakeClient = {
+      const fakeClient = {
         sendError: function(err) {
           assert(err instanceof ErrorMessage);
           done();
         },
       } as {} as RequestHandler;
-      var plugin = hapiInterface(fakeClient, config);
+      const plugin = hapiInterface(fakeClient, config);
       plugin.register(fakeServer, null!, function() {});
       fakeServer.emit('onPreResponse', {response: {isBoom: true}});
     });

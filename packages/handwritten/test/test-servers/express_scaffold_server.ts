@@ -15,26 +15,26 @@
  */
 // jscs:disable requireEarlyReturn
 
-var WARNING_HEADER = '\n!! -WARNING-';
-var EXCLAMATION_LN = '\n!!';
-var has = require('lodash.has');
-var express = require('express');
-var app = express();
-var errorHandler = require('../../src/index.js')({
+const WARNING_HEADER = '\n!! -WARNING-';
+const EXCLAMATION_LN = '\n!!';
+import has = require('lodash.has');
+import * as express from 'express';
+const app = express();
+const errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report',
   key: process.env.STUBBED_API_KEY,
   projectId: process.env.STUBBED_PROJECT_NUM,
 });
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // eslint-disable-next-line no-console
-var log = console.log;
+const log = console.log;
 
 app.use(bodyParser.json());
 
 app.post('/testErrorHandling', function(req, res, next) {
   if (has(req.body, 'test') && req.body.test !== true) {
-    return next(new Error('Error on Express Regular Error POST Route'));
+    return next!(new Error('Error on Express Regular Error POST Route'));
   } else {
     res.send('Success');
     res.end();
@@ -58,11 +58,11 @@ app.get('/customError', function(req, res, next) {
   res.send('Success');
   res.end();
 
-  next();
+  next!();
 });
 
 app.get('/getError', function(req, res, next) {
-  return next(new Error('Error on Express Regular Error GET Route'));
+  return next!(new Error('Error on Express Regular Error GET Route'));
 });
 
 app.use(errorHandler.express);

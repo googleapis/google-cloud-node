@@ -19,7 +19,7 @@ import {createLogger} from '../../src/logger';
 
 describe('logger', function() {
   describe('Initialization', function() {
-    var oldEnv;
+    let oldEnv;
     before(function() {
       oldEnv = process.env.GCLOUD_ERRORS_LOGLEVEL;
       delete process.env.GCLOUD_ERRORS_LOGLEVEL;
@@ -57,8 +57,8 @@ describe('logger', function() {
       });
     });
     describe('Default log level', function() {
-      var oldLog;
-      var text;
+      let oldLog;
+      let text;
       beforeEach(function() {
         // eslint-disable-next-line no-console
         oldLog = console.log;
@@ -66,7 +66,7 @@ describe('logger', function() {
         // eslint-disable-next-line no-console
         console.log = function() {
           oldLog.apply(this, arguments);
-          for (var i = 0; i < arguments.length; i++) {
+          for (let i = 0; i < arguments.length; i++) {
             text += arguments[i];
           }
         };
@@ -77,13 +77,13 @@ describe('logger', function() {
         console.log = oldLog;
       });
       it('Should print WARN logs by default', function() {
-        var logger = createLogger();
+        const logger = createLogger();
         logger.warn('test warning message');
         assert.strictEqual(
             text, 'WARN:@google-cloud/error-reporting: test warning message');
       });
       it('Should print ERROR logs by default', function() {
-        var logger = createLogger();
+        const logger = createLogger();
         logger.error('test error message');
         assert.strictEqual(
             text, 'ERROR:@google-cloud/error-reporting: test error message');

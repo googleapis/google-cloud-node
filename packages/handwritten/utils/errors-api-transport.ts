@@ -17,9 +17,9 @@
 import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
 
 /* @const {String} Base Error Reporting API */
-var API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
+const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 
-var ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
+const ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
 
 export class ErrorsApiTransport extends AuthClient {
   constructor(config, logger) {
@@ -27,13 +27,13 @@ export class ErrorsApiTransport extends AuthClient {
   }
 
   deleteAllEvents(cb) {
-    var self = this;
+    const self = this;
     self.getProjectId(function(err, id) {
       if (err) {
         return cb(err);
       }
 
-      var options = {
+      const options = {
         uri: [API, id, 'events'].join('/'),
         method: 'DELETE'
       };
@@ -52,13 +52,13 @@ export class ErrorsApiTransport extends AuthClient {
   }
 
   getAllGroups(cb) {
-    var self = this;
+    const self = this;
     self.getProjectId(function(err, id) {
       if (err) {
         return cb(err);
       }
 
-      var options = {
+      const options = {
         uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
         method: 'GET'
       };

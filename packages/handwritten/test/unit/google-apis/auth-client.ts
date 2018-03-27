@@ -34,14 +34,14 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
     }
   }
 
-  var RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
+  const RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
                          '@google-cloud/common': {
                            Service: ServiceStub,
                          },
                        }).RequestHandler;
 
-  var logs: {error?: string; info?: string;} = {};
-  var logger = {
+  const logs: {error?: string; info?: string;} = {};
+  const logger = {
     error: function(text) {
       if (!logs.error) {
         logs.error = '';
@@ -55,25 +55,25 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
       logs.info += text;
     },
   };
-  var config2 = new Configuration(config1, logger as Logger);
+  const config2 = new Configuration(config1, logger as Logger);
   new RequestHandler(config2, logger);
   assert.deepStrictEqual(logs, expectedLogs);
 }
 describe('RequestHandler', function() {
   it('should not request OAuth2 token if key is provided', function() {
-    var config = {
+    const config = {
       ignoreEnvironmentCheck: true,
       key: 'key',
     };
-    var message = 'Made OAuth2 Token Request';
+    const message = 'Made OAuth2 Token Request';
     verifyReportedMessage(config, new Error(message), {
       info: 'API key provided; skipping OAuth2 token request.',
     });
   });
 
   it('should issue a warning if it cannot communicate with the API', function() {
-    var config = {ignoreEnvironmentCheck: true};
-    var message = 'Test Error';
+    const config = {ignoreEnvironmentCheck: true};
+    const message = 'Test Error';
     verifyReportedMessage(config, new Error(message), {
       error: 'Unable to find credential information on instance. This ' +
           'library will be unable to communicate with the Stackdriver API to ' +
@@ -83,7 +83,7 @@ describe('RequestHandler', function() {
 
   it('should not issue a warning if it can communicate with the API',
      function() {
-       var config = {ignoreEnvironmentCheck: true};
+       const config = {ignoreEnvironmentCheck: true};
        verifyReportedMessage(config, null, {});
        verifyReportedMessage(config, undefined, {});
      });

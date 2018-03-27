@@ -21,7 +21,7 @@ import {ErrorMessage} from '../../../src/classes/error-message';
 import { RequestInformationContainer } from '../../../src/classes/request-information-container';
 
 describe('Instantiating a new ErrorMessage', function() {
-  var em;
+  let em;
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -52,7 +52,7 @@ describe('Instantiating a new ErrorMessage', function() {
 });
 
 describe('Calling against setEventTimeToNow', function() {
-  var em;
+  let em;
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -63,11 +63,11 @@ describe('Calling against setEventTimeToNow', function() {
 });
 
 describe('Fuzzing against setServiceContext', function() {
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var DEFAULT_TEST_VALUE = 'DEFAULT';
-  var DEFAULT_VERSION_VALUE = undefined;
-  var DEFAULT_SERVICE_VALUE = 'node';
-  var em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const DEFAULT_TEST_VALUE = 'DEFAULT';
+  const DEFAULT_VERSION_VALUE = undefined;
+  const DEFAULT_SERVICE_VALUE = 'node';
+  let em;
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -170,12 +170,12 @@ describe('Fuzzing against setServiceContext', function() {
 });
 
 describe('Fuzzing against setMessage', function() {
-  var em;
+  let em;
   beforeEach(function() {
     em = new ErrorMessage();
   });
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
 
   it('Should set the message', function() {
     em.setMessage(AFFIRMATIVE_TEST_VALUE);
@@ -194,9 +194,9 @@ describe('Fuzzing against setMessage', function() {
 });
 
 describe('Fuzzing against setHttpMethod', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -217,9 +217,9 @@ describe('Fuzzing against setHttpMethod', function() {
 });
 
 describe('Fuzzing against setUrl', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -240,9 +240,9 @@ describe('Fuzzing against setUrl', function() {
 });
 
 describe('Fuzzing against setUserAgent', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -263,9 +263,9 @@ describe('Fuzzing against setUserAgent', function() {
 });
 
 describe('Fuzzing against setReferrer', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -286,9 +286,9 @@ describe('Fuzzing against setReferrer', function() {
 });
 
 describe('Fuzzing against setResponseStatusCode', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 200;
-  var NEGATIVE_TEST_VALUE = 0;
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 200;
+  const NEGATIVE_TEST_VALUE = 0;
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -309,9 +309,9 @@ describe('Fuzzing against setResponseStatusCode', function() {
 });
 
 describe('Fuzzing against setRemoteIp', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -332,9 +332,9 @@ describe('Fuzzing against setRemoteIp', function() {
 });
 
 describe('Fuzzing against setUser', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -355,9 +355,9 @@ describe('Fuzzing against setUser', function() {
 });
 
 describe('Fuzzing against setFilePath', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -378,9 +378,9 @@ describe('Fuzzing against setFilePath', function() {
 });
 
 describe('Fuzzing against setLineNumber', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 27;
-  var NEGATIVE_TEST_VALUE = 0;
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 27;
+  const NEGATIVE_TEST_VALUE = 0;
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -401,9 +401,9 @@ describe('Fuzzing against setLineNumber', function() {
 });
 
 describe('Fuzzing against setFunctionName', function() {
-  var em;
-  var AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
-  var NEGATIVE_TEST_VALUE = '';
+  let em;
+  const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
+  const NEGATIVE_TEST_VALUE = '';
   beforeEach(function() {
     em = new ErrorMessage();
   });
@@ -424,13 +424,13 @@ describe('Fuzzing against setFunctionName', function() {
 });
 
 describe('Fuzzing against consumeRequestInformation', function() {
-  var em = new ErrorMessage();
-  var A_VALID_STRING = 'A_VALID_STRING';
-  var A_VALID_NUMBER = 201;
-  var NEGATIVE_STRING_CASE = '';
-  var NEGATIVE_NUMBER_CASE = 0;
+  const em = new ErrorMessage();
+  const A_VALID_STRING = 'A_VALID_STRING';
+  const A_VALID_NUMBER = 201;
+  const NEGATIVE_STRING_CASE = '';
+  const NEGATIVE_NUMBER_CASE = 0;
 
-  var AFFIRMATIVE_TEST_VALUE = {
+  const AFFIRMATIVE_TEST_VALUE = {
     method: A_VALID_STRING,
     url: A_VALID_STRING,
     userAgent: A_VALID_STRING,
@@ -438,7 +438,7 @@ describe('Fuzzing against consumeRequestInformation', function() {
     statusCode: A_VALID_NUMBER,
     remoteAddress: A_VALID_STRING,
   };
-  var NEGATIVE_TEST_VALUE = {
+  const NEGATIVE_TEST_VALUE = {
     method: null,
     url: A_VALID_NUMBER,
     userAgent: {},
