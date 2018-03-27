@@ -21,8 +21,8 @@ import * as extend from 'extend';
 import { Response } from 'express-serve-static-core';
 
 describe('Behaviour under varying input', function() {
-  var f;
-  var DEFAULT_RETURN_VALUE = {
+  let f;
+  const DEFAULT_RETURN_VALUE = {
     method: '',
     url: '',
     userAgent: '',
@@ -34,14 +34,14 @@ describe('Behaviour under varying input', function() {
     f = new Fuzzer();
   });
   it('Should return a default value given invalid input', function() {
-    var cbFn = function(value) {
+    const cbFn = function(value) {
       assert.deepEqual(value, DEFAULT_RETURN_VALUE);
     };
     f.fuzzFunctionForTypes(
         expressRequestInformationExtractor, ['object', 'object'], cbFn);
   });
   it('Should return valid request object given valid input', function() {
-    var FULL_REQ_DERIVATION_VALUE = {
+    const FULL_REQ_DERIVATION_VALUE = {
       method: 'STUB_METHOD',
       url: 'www.TEST-URL.com',
       'user-agent': 'Something like Mozilla',
@@ -51,10 +51,10 @@ describe('Behaviour under varying input', function() {
         remoteAddress: '0.0.0.0',
       },
     };
-    var FULL_RES_DERIVATION_VALUE = {
+    const FULL_RES_DERIVATION_VALUE = {
       statusCode: 200,
     };
-    var FULL_REQ_EXPECTED_VALUE = {
+    const FULL_REQ_EXPECTED_VALUE = {
       method: 'STUB_METHOD',
       url: 'www.TEST-URL.com',
       userAgent: 'Something like Mozilla',
@@ -63,7 +63,7 @@ describe('Behaviour under varying input', function() {
       statusCode: 200,
     };
 
-    var PARTIAL_REQ_DERIVATION_VALUE = {
+    const PARTIAL_REQ_DERIVATION_VALUE = {
       method: 'STUB_METHOD_#2',
       url: 'www.SUPER-TEST.com',
       'user-agent': 'Something like Gecko',
@@ -72,10 +72,10 @@ describe('Behaviour under varying input', function() {
         remoteAddress: '0.0.2.1',
       },
     };
-    var PARTIAL_RES_DERIVATION_VALUE = {
+    const PARTIAL_RES_DERIVATION_VALUE = {
       statusCode: 201,
     };
-    var PARTIAL_REQ_EXPECTED_VALUE = {
+    const PARTIAL_REQ_EXPECTED_VALUE = {
       method: 'STUB_METHOD_#2',
       url: 'www.SUPER-TEST.com',
       userAgent: 'Something like Gecko',
@@ -84,16 +84,16 @@ describe('Behaviour under varying input', function() {
       statusCode: 201,
     };
 
-    var ANOTHER_PARTIAL_REQ_DERIVATION_VALUE = {
+    const ANOTHER_PARTIAL_REQ_DERIVATION_VALUE = {
       method: 'STUB_METHOD_#2',
       url: 'www.SUPER-TEST.com',
       'user-agent': 'Something like Gecko',
       referrer: 'www.SUPER-ANOTHER-TEST.com',
     };
-    var ANOTHER_PARTIAL_RES_DERIVATION_VALUE = {
+    const ANOTHER_PARTIAL_RES_DERIVATION_VALUE = {
       statusCode: 201,
     };
-    var ANOTHER_PARTIAL_REQ_EXPECTED_VALUE = {
+    const ANOTHER_PARTIAL_REQ_EXPECTED_VALUE = {
       method: 'STUB_METHOD_#2',
       url: 'www.SUPER-TEST.com',
       userAgent: 'Something like Gecko',
@@ -101,8 +101,8 @@ describe('Behaviour under varying input', function() {
       remoteAddress: '',
       statusCode: 201,
     };
-    var headerFactory = function(toDeriveFrom) {
-      var lrn = extend({}, toDeriveFrom);
+    const headerFactory = function(toDeriveFrom) {
+      const lrn = extend({}, toDeriveFrom);
       lrn.header = function(toRet) {
         if (lrn.hasOwnProperty(toRet)) {
           return lrn[toRet];
@@ -111,7 +111,7 @@ describe('Behaviour under varying input', function() {
       };
       return lrn;
     };
-    var tmpOutput = expressRequestInformationExtractor(
+    let tmpOutput = expressRequestInformationExtractor(
         headerFactory(FULL_REQ_DERIVATION_VALUE), FULL_RES_DERIVATION_VALUE as Response);
     assert.deepEqual(tmpOutput, FULL_REQ_EXPECTED_VALUE, [
       'Given a valid object input for the request parameter and an',

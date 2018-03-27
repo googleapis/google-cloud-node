@@ -22,7 +22,7 @@ import { Request, Response } from 'koa';
 describe('koaRequestInformationExtractor', function() {
   describe('Behaviour under invalid input', function() {
     it('Should produce a default value', function() {
-      var DEFAULT_RETURN_VALUE = {
+      const DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
         userAgent: '',
@@ -30,8 +30,8 @@ describe('koaRequestInformationExtractor', function() {
         statusCode: 0,
         remoteAddress: '',
       };
-      var f = new Fuzzer();
-      var cbFn = function(value) {
+      const f = new Fuzzer();
+      const cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
@@ -40,7 +40,7 @@ describe('koaRequestInformationExtractor', function() {
   });
   describe('Behaviour under valid input', function() {
     it('Should produce the expected value', function() {
-      var FULL_REQ_DERIVATION_VALUE = {
+      const FULL_REQ_DERIVATION_VALUE = {
         method: 'STUB_METHOD',
         url: 'www.TEST-URL.com',
         headers: {
@@ -49,10 +49,10 @@ describe('koaRequestInformationExtractor', function() {
         },
         ip: '0.0.0.0',
       };
-      var FULL_RES_DERIVATION_VALUE = {
+      const FULL_RES_DERIVATION_VALUE = {
         status: 200,
       };
-      var FULL_REQ_EXPECTED_VALUE = {
+      const FULL_REQ_EXPECTED_VALUE = {
         method: 'STUB_METHOD',
         url: 'www.TEST-URL.com',
         userAgent: 'Something like Mozilla',
