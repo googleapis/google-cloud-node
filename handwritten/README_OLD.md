@@ -48,7 +48,7 @@ runtime configuration object is set to `true`.  See the [Configuration](#configu
 
 ```js
 // Require the library and initialize the error handler
-var errors = require('@google-cloud/error-reporting')({
+const errors = require('@google-cloud/error-reporting')({
   serviceContext: {service: 'my-service'} // not needed on Google Cloud
 });
 
@@ -76,7 +76,7 @@ Uncaught exceptions are not reported by default.  *It is recommended to process 
 Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  Adding such a listener without knowledge of other `uncaughtException` listeners can cause interference between the event handlers or prevent the process from terminating cleanly.  As such, it is necessary for `uncaughtException`s to be reported manually.
 
 ```js
-var errors = require('@google-cloud/error-reporting')();
+const errors = require('@google-cloud/error-reporting')();
 process.on('uncaughtException', (e) => {
   // Write the error to stderr.
   console.error(e);
@@ -136,7 +136,7 @@ If your application is running outside of Google Cloud Platform, such as locally
 
     ```js
     // Require and start the agent with configuration options
-    var errors = require('@google-cloud/error-reporting')({
+    const errors = require('@google-cloud/error-reporting')({
       // The path to your key file:
       keyFilename: '/path/to/keyfile.json',
 
@@ -154,7 +154,7 @@ You may use an API key in lieu of locally-stored credentials. Please see [this d
 Once you have obtained an API key, you may provide it as part of the Error Reporting instance configuration:
 
 ```js
-var errors = require('@google-cloud/error-reporting')({
+const errors = require('@google-cloud/error-reporting')({
   projectId: '{your project ID}',
   key: '{your api key}'
 });
@@ -171,7 +171,7 @@ We recommend using a file, environment variable, or another mechanism to store t
 The following code snippet lists all available configuration options.  All configuration options are optional.
 
 ```js
-var errors = require('@google-cloud/error-reporting')({
+const errors = require('@google-cloud/error-reporting')({
   projectId: 'my-project-id',
   keyFilename: '/path/to/keyfile.json',
   credentials: require('./path/to/keyfile.json'),
@@ -199,10 +199,10 @@ var errors = require('@google-cloud/error-reporting')({
 ### Reporting Manually
 
 ```js
-var errors = require('@google-cloud/error-reporting')();
+const errors = require('@google-cloud/error-reporting')();
 
 // Use the error message builder to customize all fields ...
-var errorEvt = errors.event()
+const errorEvt = errors.event()
                      .setMessage('My error message')
                      .setUser('root@nexus');
 errors.report(errorEvt, () => console.log('done!'));
@@ -222,10 +222,10 @@ The stack trace associated with an error can be viewed in the error reporting co
 ### Using Express
 
 ```js
-var express = require('express');
-var errors = require('@google-cloud/error-reporting')();
+const express = require('express');
+const errors = require('@google-cloud/error-reporting')();
 
-var app = express();
+const app = express();
 
 app.get('/error', (req, res, next) => {
   res.send('Something broke!');
@@ -246,10 +246,10 @@ app.listen(3000);
 ### Using Hapi
 
 ```js
-var hapi = require('hapi');
-var errors = require('@google-cloud/error-reporting')();
+const hapi = require('hapi');
+const errors = require('@google-cloud/error-reporting')();
 
-var server = new hapi.Server();
+const server = new hapi.Server();
 server.connection({ port: 3000 });
 server.start();
 
@@ -268,10 +268,10 @@ server.register(errors.hapi);
 ### Using Koa
 
 ```js
-var Koa = require('koa');
-var errors = require('@google-cloud/error-reporting')();
+const Koa = require('koa');
+const errors = require('@google-cloud/error-reporting')();
 
-var app = new Koa();
+const app = new Koa();
 
 app.use(errors.koa);
 
@@ -291,14 +291,14 @@ app.listen(3000);
 ### Using Restify
 
 ```js
-var restify = require('restify');
-var errors = require('@google-cloud/error-reporting')();
+const restify = require('restify');
+const errors = require('@google-cloud/error-reporting')();
 
 function respond(req, res, next) {
   next(new Error('this is a restify error'));
 }
 
-var server = restify.createServer();
+const server = restify.createServer();
 
 server.use(errors.restify(server));
 server.get('/hello/:name', respond);

@@ -19,8 +19,8 @@ import {RequestInformationContainer} from '../../../src/classes/request-informat
 import {Fuzzer} from '../../../utils/fuzzer';
 
 describe('RequestInformationContainer', function() {
-  var f = new Fuzzer();
-  var cbFn, ric;
+  const f = new Fuzzer();
+  let cbFn, ric;
   beforeEach(function() {
     ric = new RequestInformationContainer();
   });
@@ -63,8 +63,8 @@ describe('RequestInformationContainer', function() {
     });
   });
   describe('Fuzzing against for positive cases', function() {
-    var VALID_STRING_INPUT = 'valid';
-    var VALID_NUMBER_INPUT = 500;
+    const VALID_STRING_INPUT = 'valid';
+    const VALID_NUMBER_INPUT = 500;
     it('Should assign the value to the url property', function() {
       ric.setUrl(VALID_STRING_INPUT);
       assert.deepEqual(ric.url, VALID_STRING_INPUT);

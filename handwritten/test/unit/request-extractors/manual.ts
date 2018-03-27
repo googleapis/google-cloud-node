@@ -23,7 +23,7 @@ import {Fuzzer} from '../../../utils/fuzzer';
 describe('manualRequestInformationExtractor', function() {
   describe('Behaviour given invalid input', function() {
     it('Should return default values', function() {
-      var DEFAULT_RETURN_VALUE = {
+      const DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
         userAgent: '',
@@ -31,8 +31,8 @@ describe('manualRequestInformationExtractor', function() {
         statusCode: 0,
         remoteAddress: '',
       };
-      var f = new Fuzzer();
-      var cbFn = function(value) {
+      const f = new Fuzzer();
+      const cbFn = function(value) {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
@@ -40,7 +40,7 @@ describe('manualRequestInformationExtractor', function() {
     });
   });
   describe('Behaviour given valid input', function() {
-    var FULL_VALID_INPUT = {
+    const FULL_VALID_INPUT = {
       method: 'GET',
       url: 'http://0.0.0.0/myTestRoute',
       userAgent: 'Something like Gecko',

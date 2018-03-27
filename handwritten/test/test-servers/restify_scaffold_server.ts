@@ -18,10 +18,11 @@ function respond(req, res, next) {
   next(new Error('this is a restify error'));
 }
 
-var restify = require('restify');
-var errorHandler = require('../../src/index.js')();
+import * as restify from 'restify';
+import {ErrorReporting} from '../../src/index';
+const errorHandler = new ErrorReporting();
 
-var server = restify.createServer();
+const server = restify.createServer();
 
 server.use(errorHandler.restify(server));
 server.get('/hello/:name', respond);

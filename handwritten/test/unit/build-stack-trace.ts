@@ -35,7 +35,7 @@ describe('build-stack-trace', function() {
     (function functionA() {
       (function functionB() {
         (function functionC() {
-          var stackTrace = buildStackTrace();
+          const stackTrace = buildStackTrace();
           assert(stackTrace);
           assert.strictEqual(stackTrace.indexOf(SRC_ROOT), -1);
         })();
@@ -47,7 +47,7 @@ describe('build-stack-trace', function() {
     (function functionA() {
       (function functionB() {
         (function functionC() {
-          var stackTrace = buildStackTrace();
+          const stackTrace = buildStackTrace();
           assert(stackTrace);
           assert.notStrictEqual(stackTrace.indexOf('functionA'), -1);
           assert.notStrictEqual(stackTrace.indexOf('functionB'), -1);
