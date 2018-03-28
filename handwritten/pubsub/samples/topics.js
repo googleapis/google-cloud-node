@@ -119,8 +119,7 @@ function publishMessage(topicName, data) {
     .topic(topicName)
     .publisher()
     .publish(dataBuffer)
-    .then(results => {
-      const messageId = results[0];
+    .then(messageId => {
       console.log(`Message ${messageId} published.`);
     })
     .catch(err => {
