@@ -76,6 +76,7 @@ jobs:
   node4:
     docker:
       - image: 'node:4'
+        user: node
     steps: &unit_tests_steps
       - checkout
       - run: &remove_package_lock
@@ -98,18 +99,22 @@ jobs:
   node6:
     docker:
       - image: 'node:6'
+        user: node
     steps: *unit_tests_steps
   node8:
     docker:
       - image: 'node:8'
+        user: node
     steps: *unit_tests_steps
   node9:
     docker:
       - image: 'node:9'
+        user: node
     steps: *unit_tests_steps
   lint:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -118,6 +123,8 @@ jobs:
           command: |
             npm install
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Link the module being tested to the samples.
           command: |
@@ -125,12 +132,17 @@ jobs:
             npm link @google-cloud/error-reporting
             npm install
             cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run linting.
           command: npm run lint
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
   docs:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -143,6 +155,7 @@ jobs:
   sample_tests:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -157,6 +170,8 @@ jobs:
           command: |
             npm install
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Link the module being tested to the samples.
           command: |
@@ -164,20 +179,24 @@ jobs:
             npm link @google-cloud/error-reporting
             npm install
             cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run sample tests.
           command: npm run samples-test
           environment:
             GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: /var/error-reporting/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/error-reporting/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /var/error-reporting/
+    working_directory: /home/node/error-reporting/
   system_tests:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -194,16 +213,17 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GOOGLE_APPLICATION_CREDENTIALS: /var/error-reporting/.circleci/key.json
-            GCLOUD_TESTS_KEY: /var/error-reporting/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/error-reporting/.circleci/key.json
+            GCLOUD_TESTS_KEY: /home/node/error-reporting/.circleci/key.json
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /var/error-reporting/
+    working_directory: /home/node/error-reporting/
   publish_npm:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run:
