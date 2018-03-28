@@ -181,6 +181,15 @@ var StreamingRecognitionConfig = {
  *   `false`, no word-level time offset information is returned. The default is
  *   `false`.
  *
+ * @property {boolean} enableAutomaticPunctuation
+ *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   This feature is only available in select languages. Setting this for
+ *   requests in other languages has no effect at all.
+ *   The default 'false' value does not add punctuation to result hypotheses.
+ *   NOTE: "This is currently offered as an experimental service, complimentary
+ *   to all users. In the future this may be exclusively available as a
+ *   premium feature."
+ *
  * @property {Object} metadata
  *   *Optional* Metadata regarding this request.
  *
