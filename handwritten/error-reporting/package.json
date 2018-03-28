@@ -33,7 +33,7 @@
   "scripts": {
     "docs": "node node_modules/.bin/repo-tools exec -- jsdoc -c .jsdoc.js",
     "generate-scaffolding": "node node_modules/.bin/repo-tools generate all && node node_modules/.bin/repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "node node_modules/.bin/repo-tools lint --cmd eslint -- build/src/ samples/ build/system-test/ build/test/",
+    "lint": "node node_modules/.bin/repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
     "prettier": "node node_modules/.bin/repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js test/*/*/*.js system-test/*.js system-test/*/*.js",
     "presystem-test": "npm run compile",
     "system-test": "nyc --exclude=\"error-message.js\" mocha ./build/system-test/*.js",
