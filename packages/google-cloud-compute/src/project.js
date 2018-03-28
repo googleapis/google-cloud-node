@@ -45,7 +45,7 @@ function Project(compute) {
     /**
      * Get a Project object.
      *
-     * @method Operation#get
+     * @method Project#get
      *
      * @example
      * const Compute = require('@google-cloud/compute');
@@ -72,7 +72,7 @@ function Project(compute) {
      * @see [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
      * @see [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
      *
-     * @method Operation#getMetadata
+     * @method Project#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
