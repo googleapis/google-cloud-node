@@ -2,11 +2,11 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Text-To-Speech: Node.js Samples
+# Google Cloud Text-to-Speech API: Node.js Samples
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-Cloud Text-to-Speech API
+The [Cloud Text-to-Speech API](https://cloud.google.com/text-to-speech/docs) converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.
 
 ## Table of Contents
 
@@ -84,5 +84,5 @@ For more information, see https://cloud.google.com/text-to-speech/docs
 [list_voices_1_docs]: https://cloud.google.com/text-to-speech/docs
 [list_voices_1_code]: listVoices.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/README.md
