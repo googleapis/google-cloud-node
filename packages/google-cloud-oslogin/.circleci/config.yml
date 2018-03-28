@@ -74,7 +74,12 @@ jobs:
             fi
       - run:
           name: Install modules and dependencies.
-          command: npm install
+          command: |-
+            npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
       - run:
           name: Run unit tests.
           command: npm test
@@ -109,6 +114,10 @@ jobs:
           command: |
             mkdir -p /home/node/.npm-global
             npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
             npm link
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -135,7 +144,12 @@ jobs:
       - run: *remove_package_lock
       - run:
           name: Install modules and dependencies.
-          command: npm install
+          command: |-
+            npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
       - run:
           name: Build documentation.
           command: npm run docs
