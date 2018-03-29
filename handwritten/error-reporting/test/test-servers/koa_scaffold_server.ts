@@ -34,20 +34,18 @@ app.use(function*(this, next) {
 });
 
 app.use(function*(this, next) {
-  // TODO: Address the fact that new Date()
-  //       is used instead of Date.now()
-  const start = new Date() as any;
+  const start = Date.now();
   yield next;
-  const ms = new Date() as any - start;
+  const ms = Date.now() - start;
   this.set('X-Response-Time', ms + 'ms');
 });
 
 // logger
 
 app.use(function*(this, next) {
-  const start = new Date() as any;
+  const start = Date.now();
   yield next;
-  const ms = new Date() as any - start;
+  const ms = Date.now() - start;
   // eslint-disable-next-line no-console
   console.log('%s %s - %s', this.method, this.url, ms);
 });
