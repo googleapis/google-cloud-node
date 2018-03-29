@@ -29,8 +29,9 @@
     "Dialogflow API"
   ],
   "contributors": [
+    "Alexander Fenster <fenster@google.com>",
+    "Jorge del Casar <948953+jorgecasar@users.noreply.github.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
-    "Matt Carroll <matthewayne@users.noreply.github.com>",
     "Matt Carroll <matthewcarroll@google.com>"
   ],
   "scripts": {

@@ -22,13 +22,11 @@
   * [Create Session Entity Type](#create-session-entity-type)
   * [Delete Session Entity Type](#delete-session-entity-type)
 
-Before you begin
-----------------
+## Before you begin
 
-1. **Create a Dialogflow agent** by [creating a new Dialogflow Agent that uses the v2 API](https://dialogflow.com/docs/reference/v2-agent-setup#creating_a_new_agent_that_uses_v2) -OR- [enabling the v2 API on an existing Dialogflow agent](https://dialogflow.com/docs/reference/v2-agent-setup#enabling_v2_in_an_existing_non_production_agent).  If you're look to develop with the v1 API on Node.js see the [v1 Node.js SDK](https://github.com/dialogflow/dialogflow-nodejs-client)
-1. **Setup your Dialogflow agent** by [restoring the agent ZIP file](https://dialogflow.com/docs/reference/v2-agent-setup#import_the_zip_file) found in the `samples/resources/RoomRservation.zip`.<br>**WARNING: This will remove all of your agents intents and entities and replace them**
-1. **Set up authentication** by [downloading your service account key](https://dialogflow.com/docs/reference/v2-auth-setup) and [setting up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable](https://cloud.google.com/docs/authentication/getting-started) so you can access the API from your local workstation. <br>Optional: add the `GOOGLE_CLOUD_PROJECT` environment variable with your project ID (which can be found in your [Dialogflow agent's settings](https://dialogflow.com/docs/agents#settings)) to avoid having to set the `-p` flag in the samples.
-1. Run `npm install` in the `samples` directory
+Before running the samples, make sure you've followed the steps in the
+[Before you begin section](../README.md#before-you-begin) of the client
+library's README.
 
 ## Samples
 
@@ -51,12 +49,12 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "1cae5170-c9b1-11e7-9e4c-49e4d13488bd"]
+                                                              [string] [default: "8e2889c0-2d38-11e8-80bf-27f35f3670f0"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
+                                                                                              "AUDIO_ENCODING_LINEAR16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -92,12 +90,12 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "1d06aaa0-c9b1-11e7-b23a-410947d8c553"]
+                                                              [string] [default: "8e5ba7b0-2d38-11e8-9873-b348df7f873a"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
+                                                                                              "AUDIO_ENCODING_LINEAR16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -133,12 +131,12 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "1d5fee30-c9b1-11e7-bcaa-25ee574cba8f"]
+                                                              [string] [default: "8e861310-2d38-11e8-b6bd-979c9400331b"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
+                                                                                              "AUDIO_ENCODING_LINEAR16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -531,5 +529,5 @@ For more information, see https://cloud.google.com/conversation/docs
 [dialogflow_delete_session_entity_type_10_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType
 [dialogflow_delete_session_entity_type_10_code]: resource.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/README.md
