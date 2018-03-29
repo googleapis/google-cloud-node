@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,78 +31,125 @@ option java_package = "com.google.cloud.dialogflow.v2beta1";
 option objc_class_prefix = "DF";
 
 
-// Manages agent entity types.
+// Entities are extracted from user input and represent parameters that are
+// meaningful to your application. For example, a date range, a proper name
+// such as a geographic location or landmark, and so on. Entities represent
+// actionable data for your application.
 //
+// When you define an entity, you can also include synonyms that all map to
+// that entity. For example, "soft drink", "soda", "pop", and so on.
 //
-// Refer to [documentation](https://dialogflow.com/docs/entities) for more
-// # details about entity types.
+// There are three types of entities:
 //
-// Standard methods.
+// *   **System** - entities that are defined by the Dialogflow API for common
+//     data types such as date, time, currency, and so on. A system entity is
+//     represented by the `EntityType` type.
+//
+// *   **Developer** - entities that are defined by you that represent
+//     actionable data that is meaningful to your application. For example,
+//     you could define a `pizza.sauce` entity for red or white pizza sauce,
+//     a `pizza.cheese` entity for the different types of cheese on a pizza,
+//     a `pizza.topping` entity for different toppings, and so on. A developer
+//     entity is represented by the `EntityType` type.
+//
+// *   **User** - entities that are built for an individual user such as
+//     favorites, preferences, playlists, and so on. A user entity is
+//     represented by the [SessionEntityType][google.cloud.dialogflow.v2beta1.SessionEntityType] type.
+//
+// For more information about entity types, see the
+// [Dialogflow documentation](https://dialogflow.com/docs/entities).
 service EntityTypes {
   // Returns the list of all entity types in the specified agent.
   rpc ListEntityTypes(ListEntityTypesRequest) returns (ListEntityTypesResponse) {
-    option (google.api.http) = { get: "/v2beta1/{parent=projects/*/agent}/entityTypes" };
+    option (google.api.http) = {
+      get: "/v2beta1/{parent=projects/*/agent}/entityTypes"
+    };
   }
 
   // Retrieves the specified entity type.
   rpc GetEntityType(GetEntityTypeRequest) returns (EntityType) {
-    option (google.api.http) = { get: "/v2beta1/{name=projects/*/agent/entityTypes/*}" };
+    option (google.api.http) = {
+      get: "/v2beta1/{name=projects/*/agent/entityTypes/*}"
+    };
   }
 
   // Creates an entity type in the specified agent.
   rpc CreateEntityType(CreateEntityTypeRequest) returns (EntityType) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/entityTypes" body: "entity_type" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent}/entityTypes"
+      body: "entity_type"
+    };
   }
 
   // Updates the specified entity type.
   rpc UpdateEntityType(UpdateEntityTypeRequest) returns (EntityType) {
-    option (google.api.http) = { patch: "/v2beta1/{entity_type.name=projects/*/agent/entityTypes/*}" body: "entity_type" };
+    option (google.api.http) = {
+      patch: "/v2beta1/{entity_type.name=projects/*/agent/entityTypes/*}"
+      body: "entity_type"
+    };
   }
 
   // Deletes the specified entity type.
   rpc DeleteEntityType(DeleteEntityTypeRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = { delete: "/v2beta1/{name=projects/*/agent/entityTypes/*}" };
+    option (google.api.http) = {
+      delete: "/v2beta1/{name=projects/*/agent/entityTypes/*}"
+    };
   }
 
   // Updates/Creates multiple entity types in the specified agent.
   //
-  // Operation<response: BatchUpdateEntityTypesResponse,
-  //           metadata: google.protobuf.Struct>
+  // Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse],
+  //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
   rpc BatchUpdateEntityTypes(BatchUpdateEntityTypesRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchUpdate" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchUpdate"
+      body: "*"
+    };
   }
 
   // Deletes entity types in the specified agent.
   //
-  // Operation<response: google.protobuf.Empty,
-  //           metadata: google.protobuf.Struct>
+  // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
+  //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
   rpc BatchDeleteEntityTypes(BatchDeleteEntityTypesRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchDelete" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchDelete"
+      body: "*"
+    };
   }
 
   // Creates multiple new entities in the specified entity type (extends the
   // existing collection of entries).
   //
-  // Operation<response: google.protobuf.Empty>
+  // Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
   rpc BatchCreateEntities(BatchCreateEntitiesRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate"
+      body: "*"
+    };
   }
 
   // Updates entities in the specified entity type (replaces the existing
   // collection of entries).
   //
-  // Operation<response: google.protobuf.Empty,
-  //           metadata: google.protobuf.Struct>
+  // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
+  //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
   rpc BatchUpdateEntities(BatchUpdateEntitiesRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate"
+      body: "*"
+    };
   }
 
   // Deletes entities in the specified entity type.
   //
-  // Operation<response: google.protobuf.Empty,
-  //           metadata: google.protobuf.Struct>
+  // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
+  //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
   rpc BatchDeleteEntities(BatchDeleteEntitiesRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete"
+      body: "*"
+    };
   }
 }
 
@@ -152,7 +199,9 @@ message EntityType {
     AUTO_EXPANSION_MODE_DEFAULT = 1;
   }
 
-  // Required. The unique identifier of the entity type. Format:
+  // Required for all methods except `create` (`create` populates the name
+  // automatically.
+  // The unique identifier of the entity type. Format:
   // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
   string name = 1;
 
@@ -170,7 +219,7 @@ message EntityType {
   repeated Entity entities = 6;
 }
 
-// The request message for [EntityTypes.ListEntityTypes].
+// The request message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.ListEntityTypes].
 message ListEntityTypesRequest {
   // Required. The agent to list all entity types from.
   // Format: `projects/<Project ID>/agent`.
@@ -191,7 +240,7 @@ message ListEntityTypesRequest {
   string page_token = 4;
 }
 
-// The response message for [EntityTypes.ListEntityTypes].
+// The response message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.ListEntityTypes].
 message ListEntityTypesResponse {
   // The list of agent entity types. There will be a maximum number of items
   // returned based on the page_size field in the request.
@@ -202,7 +251,7 @@ message ListEntityTypesResponse {
   string next_page_token = 2;
 }
 
-// The request message for [EntityTypes.GetEntityType].
+// The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2beta1.EntityTypes.GetEntityType].
 message GetEntityTypeRequest {
   // Required. The name of the entity type.
   // Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
@@ -216,7 +265,7 @@ message GetEntityTypeRequest {
   string language_code = 2;
 }
 
-// The request message for [EntityTypes.CreateEntityType].
+// The request message for [EntityTypes.CreateEntityType][google.cloud.dialogflow.v2beta1.EntityTypes.CreateEntityType].
 message CreateEntityTypeRequest {
   // Required. The agent to create a entity type for.
   // Format: `projects/<Project ID>/agent`.
@@ -233,7 +282,7 @@ message CreateEntityTypeRequest {
   string language_code = 3;
 }
 
-// The request message for [EntityTypes.UpdateEntityType].
+// The request message for [EntityTypes.UpdateEntityType][google.cloud.dialogflow.v2beta1.EntityTypes.UpdateEntityType].
 message UpdateEntityTypeRequest {
   // Required. The entity type to update.
   // Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
@@ -250,14 +299,14 @@ message UpdateEntityTypeRequest {
   google.protobuf.FieldMask update_mask = 3;
 }
 
-// The request message for [EntityTypes.DeleteEntityType].
+// The request message for [EntityTypes.DeleteEntityType][google.cloud.dialogflow.v2beta1.EntityTypes.DeleteEntityType].
 message DeleteEntityTypeRequest {
   // Required. The name of the entity type to delete.
   // Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
   string name = 1;
 }
 
-// The request message for [EntityTypes.BatchUpdateEntityTypes].
+// The request message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntityTypes].
 message BatchUpdateEntityTypesRequest {
   // Required. The name of the agent to update or create entity types in.
   // Format: `projects/<Project ID>/agent`.
@@ -269,9 +318,10 @@ message BatchUpdateEntityTypesRequest {
   // * If `name` is specified, we update an existing entity type.
   // * If `name` is not specified, we create a new entity type.
   oneof entity_type_batch {
-    // The URI to a file containing entity types to update or create. The file
-    // format can be either a serialized proto (of EntityBatch type) or a JSON
-    // object. Note: The URI must start with "gs://".
+    // The URI to a Google Cloud Storage file containing entity types to update
+    // or create. The file format can either be a serialized proto (of
+    // EntityBatch type) or a JSON object. Note: The URI must start with
+    // "gs://".
     string entity_type_batch_uri = 2;
 
     // The collection of entity type to update or create.
@@ -289,13 +339,13 @@ message BatchUpdateEntityTypesRequest {
   google.protobuf.FieldMask update_mask = 5;
 }
 
-// The response message for [EntityTypes.BatchUpdateEntityTypes].
+// The response message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntityTypes].
 message BatchUpdateEntityTypesResponse {
   // The collection of updated or created entity types.
   repeated EntityType entity_types = 1;
 }
 
-// The request message for [EntityTypes.BatchDeleteEntityTypes].
+// The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntityTypes].
 message BatchDeleteEntityTypesRequest {
   // Required. The name of the agent to delete all entities types for. Format:
   // `projects/<Project ID>/agent`.
@@ -306,7 +356,7 @@ message BatchDeleteEntityTypesRequest {
   repeated string entity_type_names = 2;
 }
 
-// The request message for [EntityTypes.BatchCreateEntities].
+// The request message for [EntityTypes.BatchCreateEntities][google.cloud.dialogflow.v2beta1.EntityTypes.BatchCreateEntities].
 message BatchCreateEntitiesRequest {
   // Required. The name of the entity type to create entities in. Format:
   // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
@@ -323,7 +373,7 @@ message BatchCreateEntitiesRequest {
   string language_code = 3;
 }
 
-// The response message for [EntityTypes.BatchCreateEntities].
+// The response message for [EntityTypes.BatchCreateEntities][google.cloud.dialogflow.v2beta1.EntityTypes.BatchCreateEntities].
 message BatchUpdateEntitiesRequest {
   // Required. The name of the entity type to update the entities in. Format:
   // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
@@ -343,7 +393,7 @@ message BatchUpdateEntitiesRequest {
   google.protobuf.FieldMask update_mask = 4;
 }
 
-// The request message for [EntityTypes.BatchDeleteEntities].
+// The request message for [EntityTypes.BatchDeleteEntities][google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntities].
 message BatchDeleteEntitiesRequest {
   // Required. The name of the entity type to delete entries for. Format:
   // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.

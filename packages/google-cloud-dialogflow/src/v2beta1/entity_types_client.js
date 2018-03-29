@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,13 +23,33 @@ const protobuf = require('protobufjs');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages agent entity types.
+ * Entities are extracted from user input and represent parameters that are
+ * meaningful to your application. For example, a date range, a proper name
+ * such as a geographic location or landmark, and so on. Entities represent
+ * actionable data for your application.
  *
+ * When you define an entity, you can also include synonyms that all map to
+ * that entity. For example, "soft drink", "soda", "pop", and so on.
  *
- * Refer to [documentation](https://dialogflow.com/docs/entities) for more
- * # details about entity types.
+ * There are three types of entities:
  *
- * Standard methods.
+ * *   **System** - entities that are defined by the Dialogflow API for common
+ *     data types such as date, time, currency, and so on. A system entity is
+ *     represented by the `EntityType` type.
+ *
+ * *   **Developer** - entities that are defined by you that represent
+ *     actionable data that is meaningful to your application. For example,
+ *     you could define a `pizza.sauce` entity for red or white pizza sauce,
+ *     a `pizza.cheese` entity for the different types of cheese on a pizza,
+ *     a `pizza.topping` entity for different toppings, and so on. A developer
+ *     entity is represented by the `EntityType` type.
+ *
+ * *   **User** - entities that are built for an individual user such as
+ *     favorites, preferences, playlists, and so on. A user entity is
+ *     represented by the SessionEntityType type.
+ *
+ * For more information about entity types, see the
+ * [Dialogflow documentation](https://dialogflow.com/docs/entities).
  *
  * @class
  * @memberof v2beta1
@@ -44,10 +64,10 @@ class EntityTypesClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -342,7 +362,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -436,7 +456,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -487,7 +507,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -544,7 +564,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -608,7 +628,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -652,7 +672,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -676,8 +696,8 @@ class EntityTypesClient {
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
-   * Operation<response: BatchUpdateEntityTypesResponse,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: BatchUpdateEntityTypesResponse,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -685,9 +705,10 @@ class EntityTypesClient {
    *   Required. The name of the agent to update or create entity types in.
    *   Format: `projects/<Project ID>/agent`.
    * @param {string} [request.entityTypeBatchUri]
-   *   The URI to a file containing entity types to update or create. The file
-   *   format can be either a serialized proto (of EntityBatch type) or a JSON
-   *   object. Note: The URI must start with "gs://".
+   *   The URI to a Google Cloud Storage file containing entity types to update
+   *   or create. The file format can either be a serialized proto (of
+   *   EntityBatch type) or a JSON object. Note: The URI must start with
+   *   "gs://".
    * @param {Object} [request.entityTypeBatchInline]
    *   The collection of entity type to update or create.
    *
@@ -715,7 +736,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -792,8 +813,8 @@ class EntityTypesClient {
   /**
    * Deletes entity types in the specified agent.
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -816,7 +837,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -904,7 +925,7 @@ class EntityTypesClient {
    * Creates multiple new entities in the specified entity type (extends the
    * existing collection of entries).
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -934,7 +955,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -1018,8 +1039,8 @@ class EntityTypesClient {
    * Updates entities in the specified entity type (replaces the existing
    * collection of entries).
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1053,7 +1074,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
@@ -1136,8 +1157,8 @@ class EntityTypesClient {
   /**
    * Deletes entities in the specified entity type.
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1167,7 +1188,7 @@ class EntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.

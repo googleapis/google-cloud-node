@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,13 +23,37 @@ const protobuf = require('protobufjs');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages agent intents.
+ * An intent represents a mapping between input from a user and an action to
+ * be taken by your application. When you pass user input to the
+ * DetectIntent (or
+ * StreamingDetectIntent) method, the
+ * Dialogflow API analyzes the input and searches
+ * for a matching intent. If no match is found, the Dialogflow API returns a
+ * fallback intent (`is_fallback` = true).
  *
+ * You can provide additional information for the Dialogflow API to use to
+ * match user input to an intent by adding the following to your intent.
  *
- * Refer to [documentation](https://dialogflow.com/docs/intents) for more
- * # details about agent intents.
+ * *   **Contexts** - provide additional context for intent analysis. For
+ *     example, if an intent is related to an object in your application that
+ *     plays music, you can provide a context to determine when to match the
+ *     intent if the user input is “turn it off”.  You can include a context
+ *     that matches the intent when there is previous user input of
+ *     "play music", and not when there is previous user input of
+ *     "turn on the light".
  *
- * Standard methods.
+ * *   **Events** - allow for matching an intent by using an event name
+ *     instead of user input. Your application can provide an event name and
+ *     related parameters to the Dialogflow API to match an intent. For
+ *     example, when your application starts, you can send a welcome event
+ *     with a user name parameter to the Dialogflow API to match an intent with
+ *     a personalized welcome message for the user.
+ *
+ * *   **Training phrases** - provide examples of user input to train the
+ *     Dialogflow API agent to better match intents.
+ *
+ * For more information about intents, see the
+ * [Dialogflow documentation](https://dialogflow.com/docs/intents).
  *
  * @class
  * @memberof v2beta1
@@ -44,10 +68,10 @@ class IntentsClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -305,7 +329,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -403,7 +427,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -458,7 +482,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -519,7 +543,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -587,7 +611,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -636,7 +660,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -660,7 +684,7 @@ class IntentsClient {
   /**
    * Updates/Creates multiple intents in the specified agent.
    *
-   * Operation<response: BatchUpdateIntentsResponse>
+   * Operation <response: BatchUpdateIntentsResponse>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -674,9 +698,9 @@ class IntentsClient {
    *   languages](https://dialogflow.com/docs/reference/language) are supported.
    *   Note: languages must be enabled in the agent, before they can be used.
    * @param {string} [request.intentBatchUri]
-   *   The URI to a file containing intents to update or create. The file
-   *   format can be either a serialized proto (of IntentBatch type) or JSON
-   *   object. Note: The URI must start with "gs://".
+   *   The URI to a Google Cloud Storage file containing intents to update or
+   *   create. The file format can either be a serialized proto (of IntentBatch
+   *   type) or JSON object. Note: The URI must start with "gs://".
    * @param {Object} [request.intentBatchInline]
    *   The collection of intents to update or create.
    *
@@ -702,7 +726,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -785,7 +809,7 @@ class IntentsClient {
   /**
    * Deletes intents in the specified agent.
    *
-   * Operation<response: google.protobuf.Empty>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -810,7 +834,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.

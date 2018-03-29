@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,17 +33,24 @@ option java_package = "com.google.cloud.dialogflow.v2beta1";
 option objc_class_prefix = "DF";
 
 
-// Manages user sessions.
-//
-//
-// Custom methods.
+// A session represents an interaction with a user. You retrieve user input
+// and pass it to the [DetectIntent][google.cloud.dialogflow.v2beta1.Sessions.DetectIntent] (or
+// [StreamingDetectIntent][google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent]) method to determine
+// user intent and respond.
 service Sessions {
   // Processes a natural language query and returns structured, actionable data
   // as a result. This method is not idempotent, because it may cause contexts
   // and session entity types to be updated, which in turn might affect
   // results of future queries.
   rpc DetectIntent(DetectIntentRequest) returns (DetectIntentResponse) {
-    option (google.api.http) = { post: "/v2beta1/{session=projects/*/agent/sessions/*}:detectIntent" body: "*" };
+    option (google.api.http) = {
+      post: "/v2beta1/{session=projects/*/agent/sessions/*}:detectIntent"
+      body: "*"
+      additional_bindings {
+        post: "/v2beta1/{session=projects/*/agent/runtimes/*/sessions/*}:detectIntent"
+        body: "*"
+      }
+    };
   }
 
   // Processes a natural language query in audio format in a streaming fashion
@@ -55,7 +62,10 @@ service Sessions {
 // The request to detect user's intent.
 message DetectIntentRequest {
   // Required. The name of the session this query is sent to. Format:
-  // `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // `projects/<Project ID>/agent/sessions/<Session ID>`, or
+  // `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+  // Note: Runtimes are under construction and will be available soon.
+  // If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
   // It's up to the API caller to choose an appropriate session ID. It can be
   // a random number or some type of user identifier (preferably hashed).
   // The length of the session ID must not exceed 36 bytes.
@@ -125,12 +135,12 @@ message QueryParameters {
 
 // Represents the query input. It can contain either:
 //
-// 1.  an audio config which
-//     instructs the speech recognizer how to process the speech audio,
+// 1.  An audio config which
+//     instructs the speech recognizer how to process the speech audio.
 //
-// 2.  a conversational query in the form of text, or
+// 2.  A conversational query in the form of text,.
 //
-// 3.  an event that specifies which intent to trigger.
+// 3.  An event that specifies which intent to trigger.
 message QueryInput {
   // Required. The input specification.
   oneof input {
@@ -161,11 +171,15 @@ message QueryResult {
   // for a list of the currently supported language codes.
   string language_code = 15;
 
-  // The confidence estimate between 0.0 and 1.0. A higher number
+  // The Speech recognition confidence between 0.0 and 1.0. A higher number
   // indicates an estimated greater likelihood that the recognized words are
   // correct. The default of 0.0 is a sentinel value indicating that confidence
-  // was not set. This field is populated if natural speech audio was provided
-  // as input.
+  // was not set.
+  //
+  // You should not rely on this field as it isn't guaranteed to be accurate, or
+  // even set. In particular this field isn't set in Webhook calls and for
+  // StreamingDetectIntent since the streaming endpoint has separate confidence
+  // estimates per portion of the audio in StreamingRecognitionResult.
   float speech_recognition_confidence = 2;
 
   // The action name from the matched intent.
@@ -229,7 +243,10 @@ message QueryResult {
 message StreamingDetectIntentRequest {
   // Required. The name of the session the query is sent to.
   // Format of the session name:
-  // `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // `projects/<Project ID>/agent/sessions/<Session ID>`, or
+  // `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+  // Note: Runtimes are under construction and will be available soon.
+  // If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
   // It’s up to the API caller to choose an appropriate <Session ID>. It can be
   // a random number or some type of user identifier (preferably hashed).
   // The length of the session ID must not exceed 36 characters.
@@ -248,10 +265,14 @@ message StreamingDetectIntentRequest {
   // 3.  an event that specifies which intent to trigger.
   QueryInput query_input = 3;
 
-  // Optional. If `true`, the recognizer will detect a single spoken utterance
-  // in input audio. When it detects that the user has paused or stopped
-  // speaking, it will cease recognition. This setting is ignored when
-  // `query_input` is a piece of text or an event.
+  // Optional. If `false` (default), recognition does not cease until the
+  // client closes the stream.
+  // If `true`, the recognizer will detect a single spoken utterance in input
+  // audio. Recognition ceases when it detects the audio's voice has
+  // stopped or paused. In this case, once a detected intent is received, the
+  // client should close the stream and start a new request with a new stream as
+  // needed.
+  // This setting is ignored when `query_input` is a piece of text or an event.
   bool single_utterance = 4;
 
   // Optional. The input audio content to be recognized. Must be sent if
@@ -346,11 +367,21 @@ message StreamingRecognitionResult {
   // Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
   string transcript = 2;
 
+  // The default of 0.0 is a sentinel value indicating `confidence` was not set.
   // If `false`, the `StreamingRecognitionResult` represents an
   // interim result that may change. If `true`, the recognizer will not return
   // any further hypotheses about this piece of the audio. May only be populated
   // for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
   bool is_final = 3;
+
+  // The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+  // A higher number indicates an estimated greater likelihood that the
+  // recognized words are correct. The default of 0.0 is a sentinel value
+  // indicating that confidence was not set.
+  //
+  // This field is typically only provided if `is_final` is true and you should
+  // not rely on it being accurate or even set.
+  float confidence = 4;
 }
 
 // Instructs the speech recognizer how to process the audio content.

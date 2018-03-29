@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -101,7 +101,7 @@ var Agent = {
 };
 
 /**
- * The request message for [Agents.GetAgent].
+ * The request message for Agents.GetAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to fetch is associated with.
@@ -116,7 +116,7 @@ var GetAgentRequest = {
 };
 
 /**
- * The request message for [Agents.SearchAgents].
+ * The request message for Agents.SearchAgents.
  *
  * @property {string} parent
  *   Required. The project to list agents from.
@@ -138,7 +138,7 @@ var SearchAgentsRequest = {
 };
 
 /**
- * The response message for [Agents.SearchAgents].
+ * The response message for Agents.SearchAgents.
  *
  * @property {Object[]} agents
  *   The list of agents. There will be a maximum number of items returned based
@@ -159,7 +159,7 @@ var SearchAgentsResponse = {
 };
 
 /**
- * The request message for [Agents.TrainAgent].
+ * The request message for Agents.TrainAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to train is associated with.
@@ -174,14 +174,15 @@ var TrainAgentRequest = {
 };
 
 /**
- * The request message for [Agents.ExportAgent].
+ * The request message for Agents.ExportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to export is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
- *   Optional. The URI to export the agent to. Note: The URI must start with
+ *   Optional. The Google Cloud Storage URI to export the agent to.
+ *   Note: The URI must start with
  *   "gs://". If left unspecified, the serialized agent is returned inline.
  *
  * @typedef ExportAgentRequest
@@ -193,14 +194,27 @@ var ExportAgentRequest = {
 };
 
 /**
- * The response message for [Agents.ExportAgent].
+ * The response message for Agents.ExportAgent.
  *
  * @property {string} agentUri
  *   The URI to a file containing the exported agent. This field is populated
- *   only if `agent_uri`
+ *   only if `agent_uri` is specified in `ExportAgentRequest`.
  *
  * @property {string} agentContent
  *   The exported agent.
+ *
+ *   Example for how to export an agent to a zip file via a command line:
+ *
+ *   curl \
+ *     'https://dialogflow.googleapis.com/v2beta1/projects/<project_name>/agent:export'\
+ *     -X POST \
+ *     -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+ *     -H 'Accept: application/json' \
+ *     -H 'Content-Type: application/json' \
+ *     --compressed \
+ *     --data-binary '{}' \
+ *   | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".* /\1/' \
+ *   | base64 --decode > <agent zip file>
  *
  * @typedef ExportAgentResponse
  * @memberof google.cloud.dialogflow.v2beta1
@@ -211,18 +225,31 @@ var ExportAgentResponse = {
 };
 
 /**
- * The request message for [Agents.ImportAgent].
+ * The request message for Agents.ImportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to import is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
- *   The URI to a file containing the agent to import. Note: The URI must
- *   start with "gs://".
+ *   The URI to a Google Cloud Storage file containing the agent to import.
+ *   Note: The URI must start with "gs://".
  *
  * @property {string} agentContent
  *   The agent to import.
+ *
+ *   Example for how to import an agent via the command line:
+ *
+ *   curl \
+ *     'https://dialogflow.googleapis.com/v2beta1/projects/<project_name>/agent:import\
+ *      -X POST \
+ *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+ *      -H 'Accept: application/json' \
+ *      -H 'Content-Type: application/json' \
+ *      --compressed \
+ *      --data-binary "{
+ *         'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+ *      }"
  *
  * @typedef ImportAgentRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -233,18 +260,31 @@ var ImportAgentRequest = {
 };
 
 /**
- * The request message for [Agents.RestoreAgent].
+ * The request message for Agents.RestoreAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to restore is associated with.
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
- *   The URI to a file containing the agent to restore. Note: The URI must
- *   start with "gs://".
+ *   The URI to a Google Cloud Storage file containing the agent to restore.
+ *   Note: The URI must start with "gs://".
  *
  * @property {string} agentContent
  *   The agent to restore.
+ *
+ *   Example for how to restore an agent via the command line:
+ *
+ *   curl \
+ *     'https://dialogflow.googleapis.com/v2beta1/projects/<project_name>/agent:restore\
+ *      -X POST \
+ *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+ *      -H 'Accept: application/json' \
+ *      -H 'Content-Type: application/json' \
+ *      --compressed \
+ *      --data-binary "{
+ *          'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+ *      }" \
  *
  * @typedef RestoreAgentRequest
  * @memberof google.cloud.dialogflow.v2beta1

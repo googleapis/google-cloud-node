@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,13 +22,18 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages session entity types.
+ * Entities are extracted from user input and represent parameters that are
+ * meaningful to your application. For example, a date range, a proper name
+ * such as a geographic location or landmark, and so on. Entities represent
+ * actionable data for your application.
  *
- * Session entity types can be redefined on a session level, allowing for
- * specific concepts, like a user's playlists.
+ * Session entity types are referred to as **User** entity types and are
+ * entities that are built for an individual user such as
+ * favorites, preferences, playlists, and so on. You can redefine a session
+ * entity type at the session level.
  *
- *
- * Standard methods.
+ * For more information about entity types, see the
+ * [Dialogflow documentation](https://dialogflow.com/docs/entities).
  *
  * @class
  * @memberof v2beta1
@@ -43,10 +48,10 @@ class SessionEntityTypesClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -211,7 +216,10 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -243,7 +251,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -320,7 +328,10 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -335,7 +346,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -367,7 +378,10 @@ class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the session entity type. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+   *   Runtimes are under construction and will be available soon. If <Runtime ID>
+   *   is not specified, we assume default 'sandbox' runtime.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -381,7 +395,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -414,7 +428,10 @@ class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to create a session entity type for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {Object} request.sessionEntityType
    *   Required. The session entity type to create.
    *
@@ -432,7 +449,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -475,7 +492,10 @@ class SessionEntityTypesClient {
    * @param {Object} request.sessionEntityType
    *   Required. The entity type to update. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+   *   Runtimes are under construction and will be available soon. If <Runtime ID>
+   *   is not specified, we assume default 'sandbox' runtime.
    *
    *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
    * @param {Object} [request.updateMask]
@@ -495,7 +515,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -533,7 +553,10 @@ class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the entity type to delete. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+   *   Runtimes are under construction and will be available soon. If <Runtime ID>
+   *   is not specified, we assume default 'sandbox' runtime.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -544,7 +567,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.

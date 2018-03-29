@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,9 @@
  * language queries.
  *
  * @property {string} name
- *   Required. The unique identifier of the entity type. Format:
+ *   Required for all methods except `create` (`create` populates the name
+ *   automatically.
+ *   The unique identifier of the entity type. Format:
  *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
  *
  * @property {string} displayName
@@ -124,7 +126,7 @@ var EntityType = {
 };
 
 /**
- * The request message for [EntityTypes.ListEntityTypes].
+ * The request message for EntityTypes.ListEntityTypes.
  *
  * @property {string} parent
  *   Required. The agent to list all entity types from.
@@ -153,7 +155,7 @@ var ListEntityTypesRequest = {
 };
 
 /**
- * The response message for [EntityTypes.ListEntityTypes].
+ * The response message for EntityTypes.ListEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The list of agent entity types. There will be a maximum number of items
@@ -174,7 +176,7 @@ var ListEntityTypesResponse = {
 };
 
 /**
- * The request message for [EntityTypes.GetEntityType].
+ * The request message for EntityTypes.GetEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type.
@@ -196,7 +198,7 @@ var GetEntityTypeRequest = {
 };
 
 /**
- * The request message for [EntityTypes.CreateEntityType].
+ * The request message for EntityTypes.CreateEntityType.
  *
  * @property {string} parent
  *   Required. The agent to create a entity type for.
@@ -223,7 +225,7 @@ var CreateEntityTypeRequest = {
 };
 
 /**
- * The request message for [EntityTypes.UpdateEntityType].
+ * The request message for EntityTypes.UpdateEntityType.
  *
  * @property {Object} entityType
  *   Required. The entity type to update.
@@ -252,7 +254,7 @@ var UpdateEntityTypeRequest = {
 };
 
 /**
- * The request message for [EntityTypes.DeleteEntityType].
+ * The request message for EntityTypes.DeleteEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete.
@@ -267,16 +269,17 @@ var DeleteEntityTypeRequest = {
 };
 
 /**
- * The request message for [EntityTypes.BatchUpdateEntityTypes].
+ * The request message for EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create entity types in.
  *   Format: `projects/<Project ID>/agent`.
  *
  * @property {string} entityTypeBatchUri
- *   The URI to a file containing entity types to update or create. The file
- *   format can be either a serialized proto (of EntityBatch type) or a JSON
- *   object. Note: The URI must start with "gs://".
+ *   The URI to a Google Cloud Storage file containing entity types to update
+ *   or create. The file format can either be a serialized proto (of
+ *   EntityBatch type) or a JSON object. Note: The URI must start with
+ *   "gs://".
  *
  * @property {Object} entityTypeBatchInline
  *   The collection of entity type to update or create.
@@ -304,7 +307,7 @@ var BatchUpdateEntityTypesRequest = {
 };
 
 /**
- * The response message for [EntityTypes.BatchUpdateEntityTypes].
+ * The response message for EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The collection of updated or created entity types.
@@ -320,7 +323,7 @@ var BatchUpdateEntityTypesResponse = {
 };
 
 /**
- * The request message for [EntityTypes.BatchDeleteEntityTypes].
+ * The request message for EntityTypes.BatchDeleteEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:
@@ -339,7 +342,7 @@ var BatchDeleteEntityTypesRequest = {
 };
 
 /**
- * The request message for [EntityTypes.BatchCreateEntities].
+ * The request message for EntityTypes.BatchCreateEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to create entities in. Format:
@@ -366,7 +369,7 @@ var BatchCreateEntitiesRequest = {
 };
 
 /**
- * The response message for [EntityTypes.BatchCreateEntities].
+ * The response message for EntityTypes.BatchCreateEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to update the entities in. Format:
@@ -398,7 +401,7 @@ var BatchUpdateEntitiesRequest = {
 };
 
 /**
- * The request message for [EntityTypes.BatchDeleteEntities].
+ * The request message for EntityTypes.BatchDeleteEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to delete entries for. Format:

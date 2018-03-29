@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -268,10 +268,8 @@ describe('AgentsClient', () => {
 
       // Mock response
       var agentUri = 'agentUri-1700713166';
-      var agentContent = '63';
       var expectedResponse = {
         agentUri: agentUri,
-        agentContent: agentContent,
       };
 
       // Mock Grpc layer
@@ -1741,9 +1739,10 @@ describe('IntentsClient', () => {
       // Mock response
       var name2 = 'name2-1052831874';
       var displayName = 'displayName1615086568';
-      var priority = -1165461084;
+      var priority = 1165461084;
       var isFallback = false;
       var mlEnabled = false;
+      var mlDisabled = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1754,6 +1753,7 @@ describe('IntentsClient', () => {
         priority: priority,
         isFallback: isFallback,
         mlEnabled: mlEnabled,
+        mlDisabled: mlDisabled,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,
@@ -1819,9 +1819,10 @@ describe('IntentsClient', () => {
       // Mock response
       var name = 'name3373707';
       var displayName = 'displayName1615086568';
-      var priority = -1165461084;
+      var priority = 1165461084;
       var isFallback = false;
       var mlEnabled = false;
+      var mlDisabled = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1832,6 +1833,7 @@ describe('IntentsClient', () => {
         priority: priority,
         isFallback: isFallback,
         mlEnabled: mlEnabled,
+        mlDisabled: mlDisabled,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,
@@ -1899,9 +1901,10 @@ describe('IntentsClient', () => {
       // Mock response
       var name = 'name3373707';
       var displayName = 'displayName1615086568';
-      var priority = -1165461084;
+      var priority = 1165461084;
       var isFallback = false;
       var mlEnabled = false;
+      var mlDisabled = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1912,6 +1915,7 @@ describe('IntentsClient', () => {
         priority: priority,
         isFallback: isFallback,
         mlEnabled: mlEnabled,
+        mlDisabled: mlDisabled,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,

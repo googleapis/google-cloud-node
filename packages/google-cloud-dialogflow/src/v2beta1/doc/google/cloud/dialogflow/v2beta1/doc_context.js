@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,8 +20,13 @@
  *
  * @property {string} name
  *   Required. The unique identifier of the context. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
- *   Note: The Context ID is always converted to lowercase.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`,
+ *   or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
+ *   ID>/contexts/<Context ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   The Context ID is always converted to lowercase.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {number} lifespanCount
  *   Optional. The number of conversational query requests after which the
@@ -45,11 +50,14 @@ var Context = {
 };
 
 /**
- * The request message for [Contexts.ListContexts].
+ * The request message for Contexts.ListContexts.
  *
  * @property {string} parent
  *   Required. The session to list all contexts from.
- *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -67,7 +75,7 @@ var ListContextsRequest = {
 };
 
 /**
- * The response message for [Contexts.ListContexts].
+ * The response message for Contexts.ListContexts.
  *
  * @property {Object[]} contexts
  *   The list of contexts. There will be a maximum number of items
@@ -88,11 +96,15 @@ var ListContextsResponse = {
 };
 
 /**
- * The request message for [Contexts.GetContext].
+ * The request message for Contexts.GetContext.
  *
  * @property {string} name
  *   Required. The name of the context. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+ *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
+ *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
+ *   be available soon. If <Runtime ID> is not specified, we assume default
+ *   'sandbox' runtime.
  *
  * @typedef GetContextRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -103,11 +115,14 @@ var GetContextRequest = {
 };
 
 /**
- * The request message for [Contexts.CreateContext].
+ * The request message for Contexts.CreateContext.
  *
  * @property {string} parent
  *   Required. The session to create a context for.
- *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {Object} context
  *   Required. The context to create.
@@ -123,11 +138,10 @@ var CreateContextRequest = {
 };
 
 /**
- * The request message for [Contexts.UpdateContext].
+ * The request message for Contexts.UpdateContext.
  *
  * @property {Object} context
- *   Required. The context to update. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+ *   Required. The context to update.
  *
  *   This object should have the same structure as [Context]{@link google.cloud.dialogflow.v2beta1.Context}
  *
@@ -145,11 +159,15 @@ var UpdateContextRequest = {
 };
 
 /**
- * The request message for [Contexts.DeleteContext].
+ * The request message for Contexts.DeleteContext.
  *
  * @property {string} name
  *   Required. The name of the context to delete. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+ *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
+ *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
+ *   be available soon. If <Runtime ID> is not specified, we assume default
+ *   'sandbox' runtime.
  *
  * @typedef DeleteContextRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -160,11 +178,14 @@ var DeleteContextRequest = {
 };
 
 /**
- * The request message for [Contexts.DeleteAllContexts].
+ * The request message for Contexts.DeleteAllContexts.
  *
  * @property {string} parent
  *   Required. The name of the session to delete all contexts from. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+ *   ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`. Note: Runtimes are
+ *   under construction and will be available soon. If <Runtime ID> is not
+ *   specified we assume default 'sandbox' runtime.
  *
  * @typedef DeleteAllContextsRequest
  * @memberof google.cloud.dialogflow.v2beta1

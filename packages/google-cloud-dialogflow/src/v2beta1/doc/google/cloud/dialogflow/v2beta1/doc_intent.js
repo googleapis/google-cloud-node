@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,9 @@
  * action is an extraction of a user command or sentence semantics.
  *
  * @property {string} name
- *   Required. The unique identifier of this intent.
+ *   Required for all methods except `create` (`create` populates the name
+ *   automatically.
+ *   The unique identifier of this intent.
  *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  * @property {string} displayName
@@ -41,10 +43,27 @@
  *
  * @property {boolean} mlEnabled
  *   Optional. Indicates whether Machine Learning is enabled for the intent.
+ *   Note: If `ml_enabled` setting is set to false, then this intent is not
+ *   taken into account during inference in `ML ONLY` match mode. Also,
+ *   auto-markup in the UI is turned off.
+ *   DEPRECATED! Please use `ml_disabled` field instead.
+ *   NOTE: If neither `ml_enabled` nor `ml_disabled` field is set, then the
+ *   default value is determined as follows:
+ *   - Before April 15th, 2018 the default is:
+ *     ml_enabled = false / ml_disabled = true.
+ *   - After April 15th, 2018 the default is:
+ *     ml_enabled = true / ml_disabled = false.
+ *
+ * @property {boolean} mlDisabled
+ *   Optional. Indicates whether Machine Learning is disabled for the intent.
+ *   Note: If `ml_disabled` setting is set to true, then this intent is not
+ *   taken into account during inference in `ML ONLY` match mode. Also,
+ *   auto-markup in the UI is turned off.
  *
  * @property {string[]} inputContextNames
  *   Optional. The list of context names required for this intent to be
  *   triggered.
+ *   Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
  *
  * @property {string[]} events
  *   Optional. The collection of event names that trigger the intent.
@@ -252,57 +271,57 @@ var Intent = {
    * Corresponds to the `Response` field in API.AI console.
    *
    * @property {Object} text
-   *   The text response.
+   *   Returns a text response.
    *
    *   This object should have the same structure as [Text]{@link google.cloud.dialogflow.v2beta1.Text}
    *
    * @property {Object} image
-   *   The image response.
+   *   Displays an image.
    *
    *   This object should have the same structure as [Image]{@link google.cloud.dialogflow.v2beta1.Image}
    *
    * @property {Object} quickReplies
-   *   The quick replies response.
+   *   Displays quick replies.
    *
    *   This object should have the same structure as [QuickReplies]{@link google.cloud.dialogflow.v2beta1.QuickReplies}
    *
    * @property {Object} card
-   *   The card response.
+   *   Displays a card.
    *
    *   This object should have the same structure as [Card]{@link google.cloud.dialogflow.v2beta1.Card}
    *
    * @property {Object} payload
-   *   The response containing a custom payload.
+   *   Returns a response containing a custom payload.
    *
    *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
    *
    * @property {Object} simpleResponses
-   *   The voice and text-only responses for Actions on Google.
+   *   Returns a voice or text-only response for Actions on Google.
    *
    *   This object should have the same structure as [SimpleResponses]{@link google.cloud.dialogflow.v2beta1.SimpleResponses}
    *
    * @property {Object} basicCard
-   *   The basic card response for Actions on Google.
+   *   Displays a basic card for Actions on Google.
    *
    *   This object should have the same structure as [BasicCard]{@link google.cloud.dialogflow.v2beta1.BasicCard}
    *
    * @property {Object} suggestions
-   *   The suggestion chips for Actions on Google.
+   *   Displays suggestion chips for Actions on Google.
    *
    *   This object should have the same structure as [Suggestions]{@link google.cloud.dialogflow.v2beta1.Suggestions}
    *
    * @property {Object} linkOutSuggestion
-   *   The link out suggestion chip for Actions on Google.
+   *   Displays a link out suggestion chip for Actions on Google.
    *
    *   This object should have the same structure as [LinkOutSuggestion]{@link google.cloud.dialogflow.v2beta1.LinkOutSuggestion}
    *
    * @property {Object} listSelect
-   *   The list card response for Actions on Google.
+   *   Displays a list card for Actions on Google.
    *
    *   This object should have the same structure as [ListSelect]{@link google.cloud.dialogflow.v2beta1.ListSelect}
    *
    * @property {Object} carouselSelect
-   *   The carousel card response for Actions on Google.
+   *   Displays a carousel card for Actions on Google.
    *
    *   This object should have the same structure as [CarouselSelect]{@link google.cloud.dialogflow.v2beta1.CarouselSelect}
    *
@@ -337,6 +356,10 @@ var Intent = {
      *
      * @property {string} imageUri
      *   Optional. The public URI to an image file.
+     *
+     * @property {string} accessibilityText
+     *   Optional. A text description of the image to be used for accessibility,
+     *   e.g., screen readers.
      *
      * @typedef Image
      * @memberof google.cloud.dialogflow.v2beta1
@@ -431,6 +454,9 @@ var Intent = {
 
     /**
      * The collection of simple response candidates.
+     * This message in `QueryResult.fulfillment_messages` and
+     * `WebhookResponse.fulfillment_messages` should contain only one
+     * `SimpleResponse`.
      *
      * @property {Object[]} simpleResponses
      *   Required. The list of simple responses.
@@ -768,7 +794,7 @@ var Intent = {
 };
 
 /**
- * The request message for [Intents.ListIntents].
+ * The request message for Intents.ListIntents.
  *
  * @property {string} parent
  *   Required. The agent to list all intents from.
@@ -802,7 +828,7 @@ var ListIntentsRequest = {
 };
 
 /**
- * The response message for [Intents.ListIntents].
+ * The response message for Intents.ListIntents.
  *
  * @property {Object[]} intents
  *   The list of agent intents. There will be a maximum number of items
@@ -823,7 +849,7 @@ var ListIntentsResponse = {
 };
 
 /**
- * The request message for [Intents.GetIntent].
+ * The request message for Intents.GetIntent.
  *
  * @property {string} name
  *   Required. The name of the intent.
@@ -850,7 +876,7 @@ var GetIntentRequest = {
 };
 
 /**
- * The request message for [Intents.CreateIntent].
+ * The request message for Intents.CreateIntent.
  *
  * @property {string} parent
  *   Required. The agent to create a intent for.
@@ -882,7 +908,7 @@ var CreateIntentRequest = {
 };
 
 /**
- * The request message for [Intents.UpdateIntent].
+ * The request message for Intents.UpdateIntent.
  *
  * @property {Object} intent
  *   Required. The intent to update.
@@ -916,7 +942,7 @@ var UpdateIntentRequest = {
 };
 
 /**
- * The request message for [Intents.DeleteIntent].
+ * The request message for Intents.DeleteIntent.
  *
  * @property {string} name
  *   Required. The name of the intent to delete.
@@ -931,16 +957,16 @@ var DeleteIntentRequest = {
 };
 
 /**
- * The request message for [Intents.BatchUpdateIntents].
+ * The request message for Intents.BatchUpdateIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create intents in.
  *   Format: `projects/<Project ID>/agent`.
  *
  * @property {string} intentBatchUri
- *   The URI to a file containing intents to update or create. The file
- *   format can be either a serialized proto (of IntentBatch type) or JSON
- *   object. Note: The URI must start with "gs://".
+ *   The URI to a Google Cloud Storage file containing intents to update or
+ *   create. The file format can either be a serialized proto (of IntentBatch
+ *   type) or JSON object. Note: The URI must start with "gs://".
  *
  * @property {Object} intentBatchInline
  *   The collection of intents to update or create.
@@ -973,7 +999,7 @@ var BatchUpdateIntentsRequest = {
 };
 
 /**
- * The response message for [Intents.BatchUpdateIntents].
+ * The response message for Intents.BatchUpdateIntents.
  *
  * @property {Object[]} intents
  *   The collection of updated or created intents.
@@ -989,7 +1015,7 @@ var BatchUpdateIntentsResponse = {
 };
 
 /**
- * The request message for [Intents.BatchDeleteIntents].
+ * The request message for Intents.BatchDeleteIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:

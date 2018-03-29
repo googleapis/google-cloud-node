@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,11 @@
  * @property {string} name
  *   Required. The unique identifier of this session entity type. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>`.
+ *   Display Name>`, or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>sessions/<Session
+ *   ID>/entityTypes/<Entity Type Display Name>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {number} entityOverrideMode
  *   Required. Indicates whether the additional data should override or
@@ -72,19 +76,22 @@ var SessionEntityType = {
      * the corresponding developer entity type.
      * Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
      * `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-     * collection of entities from the developer entity type and the session
-     * entity type.
+     * collection of entities from the developer entity type in the agent's
+     * default language and the session entity type.
      */
     ENTITY_OVERRIDE_MODE_SUPPLEMENT: 2
   }
 };
 
 /**
- * The request message for [SessionEntityTypes.ListSessionEntityTypes].
+ * The request message for SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {string} parent
  *   Required. The session to list all session entity types from.
- *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -102,7 +109,7 @@ var ListSessionEntityTypesRequest = {
 };
 
 /**
- * The response message for [SessionEntityTypes.ListSessionEntityTypes].
+ * The response message for SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {Object[]} sessionEntityTypes
  *   The list of session entity types. There will be a maximum number of items
@@ -123,12 +130,15 @@ var ListSessionEntityTypesResponse = {
 };
 
 /**
- * The request message for [SessionEntityTypes.GetSessionEntityType].
+ * The request message for SessionEntityTypes.GetSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the session entity type. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>`.
+ *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+ *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+ *   Runtimes are under construction and will be available soon. If <Runtime ID>
+ *   is not specified, we assume default 'sandbox' runtime.
  *
  * @typedef GetSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -139,11 +149,14 @@ var GetSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for [SessionEntityTypes.CreateSessionEntityType].
+ * The request message for SessionEntityTypes.CreateSessionEntityType.
  *
  * @property {string} parent
  *   Required. The session to create a session entity type for.
- *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *
  * @property {Object} sessionEntityType
  *   Required. The session entity type to create.
@@ -159,12 +172,15 @@ var CreateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for [SessionEntityTypes.UpdateSessionEntityType].
+ * The request message for SessionEntityTypes.UpdateSessionEntityType.
  *
  * @property {Object} sessionEntityType
  *   Required. The entity type to update. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>`.
+ *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+ *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+ *   Runtimes are under construction and will be available soon. If <Runtime ID>
+ *   is not specified, we assume default 'sandbox' runtime.
  *
  *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
  *
@@ -182,12 +198,15 @@ var UpdateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for [SessionEntityTypes.DeleteSessionEntityType].
+ * The request message for SessionEntityTypes.DeleteSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>`.
+ *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
+ *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
+ *   Runtimes are under construction and will be available soon. If <Runtime ID>
+ *   is not specified, we assume default 'sandbox' runtime.
  *
  * @typedef DeleteSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1

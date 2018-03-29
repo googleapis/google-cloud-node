@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,10 +22,10 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages user sessions.
- *
- *
- * Custom methods.
+ * A session represents an interaction with a user. You retrieve user input
+ * and pass it to the DetectIntent (or
+ * StreamingDetectIntent) method to determine
+ * user intent and respond.
  *
  * @class
  * @memberof v2beta1
@@ -40,10 +40,10 @@ class SessionsClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -199,7 +199,10 @@ class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    *   It's up to the API caller to choose an appropriate session ID. It can be
    *   a random number or some type of user identifier (preferably hashed).
    *   The length of the session ID must not exceed 36 bytes.
@@ -235,7 +238,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionsClient({
    *   // optional auth parameters.
@@ -281,7 +284,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.SessionsClient({
    *   // optional auth parameters.
@@ -295,9 +298,6 @@ class SessionsClient {
    * var request = {
    *   session: session,
    *   queryInput: queryInput,
-   * };
-   * var request = {
-   *   root: request,
    * };
    * // Write request objects.
    * stream.write(request);

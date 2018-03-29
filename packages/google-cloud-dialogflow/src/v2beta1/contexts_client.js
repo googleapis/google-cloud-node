@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,13 +22,23 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages contexts.
+ * A context represents additional information included with user input or with
+ * an intent returned by the Dialogflow API. Contexts are helpful for
+ * differentiating user input which may be vague or have a different meaning
+ * depending on additional details from your application such as user setting
+ * and preferences, previous user input, where the user is in your application,
+ * geographic location, and so on.
  *
+ * You can include contexts as input parameters of a
+ * DetectIntent (or
+ * StreamingDetectIntent) request,
+ * or as output contexts included in the returned intent.
+ * Contexts expire when an intent is matched, after the number of `DetectIntent`
+ * requests specified by the `lifespan_count` parameter, or after 10 minutes
+ * if no intents are matched for a `DetectIntent` request.
  *
- * Refer to [documentation](https://dialogflow.com/docs/contexts) for more
- * # details about contexts.
- *
- * Standard methods.
+ * For more information about contexts, see the
+ * [Dialogflow documentation](https://dialogflow.com/docs/contexts).
  *
  * @class
  * @memberof v2beta1
@@ -43,10 +53,10 @@ class ContextsClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -212,7 +222,10 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -244,7 +257,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -317,7 +330,10 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -332,7 +348,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -363,7 +379,11 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the context. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
+   *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
+   *   be available soon. If <Runtime ID> is not specified, we assume default
+   *   'sandbox' runtime.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -377,7 +397,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -410,7 +430,10 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to create a context for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+   *   Note: Runtimes are under construction and will be available soon.
+   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
    * @param {Object} request.context
    *   Required. The context to create.
    *
@@ -428,7 +451,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -465,8 +488,7 @@ class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.context
-   *   Required. The context to update. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   Required. The context to update.
    *
    *   This object should have the same structure as [Context]{@link google.cloud.dialogflow.v2beta1.Context}
    * @param {Object} [request.updateMask]
@@ -486,7 +508,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -519,7 +541,11 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the context to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
+   *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
+   *   be available soon. If <Runtime ID> is not specified, we assume default
+   *   'sandbox' runtime.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -530,7 +556,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.
@@ -558,7 +584,10 @@ class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the session to delete all contexts from. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+   *   ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`. Note: Runtimes are
+   *   under construction and will be available soon. If <Runtime ID> is not
+   *   specified we assume default 'sandbox' runtime.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -569,7 +598,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.ContextsClient({
    *   // optional auth parameters.

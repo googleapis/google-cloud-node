@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,10 @@
  *
  * @property {string} session
  *   Required. The name of the session this query is sent to. Format:
- *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *   It's up to the API caller to choose an appropriate session ID. It can be
  *   a random number or some type of user identifier (preferably hashed).
  *   The length of the session ID must not exceed 36 bytes.
@@ -129,12 +132,12 @@ var QueryParameters = {
 /**
  * Represents the query input. It can contain either:
  *
- * 1.  an audio config which
- *     instructs the speech recognizer how to process the speech audio,
+ * 1.  An audio config which
+ *     instructs the speech recognizer how to process the speech audio.
  *
- * 2.  a conversational query in the form of text, or
+ * 2.  A conversational query in the form of text,.
  *
- * 3.  an event that specifies which intent to trigger.
+ * 3.  An event that specifies which intent to trigger.
  *
  * @property {Object} audioConfig
  *   Instructs the speech recognizer how to process the speech audio.
@@ -177,11 +180,15 @@ var QueryInput = {
  *   for a list of the currently supported language codes.
  *
  * @property {number} speechRecognitionConfidence
- *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   The Speech recognition confidence between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
  *   correct. The default of 0.0 is a sentinel value indicating that confidence
- *   was not set. This field is populated if natural speech audio was provided
- *   as input.
+ *   was not set.
+ *
+ *   You should not rely on this field as it isn't guaranteed to be accurate, or
+ *   even set. In particular this field isn't set in Webhook calls and for
+ *   StreamingDetectIntent since the streaming endpoint has separate confidence
+ *   estimates per portion of the audio in StreamingRecognitionResult.
  *
  * @property {string} action
  *   The action name from the matched intent.
@@ -265,7 +272,10 @@ var QueryResult = {
  * @property {string} session
  *   Required. The name of the session the query is sent to.
  *   Format of the session name:
- *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+ *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
+ *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
+ *   Note: Runtimes are under construction and will be available soon.
+ *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
  *   It’s up to the API caller to choose an appropriate <Session ID>. It can be
  *   a random number or some type of user identifier (preferably hashed).
  *   The length of the session ID must not exceed 36 characters.
@@ -288,10 +298,14 @@ var QueryResult = {
  *   This object should have the same structure as [QueryInput]{@link google.cloud.dialogflow.v2beta1.QueryInput}
  *
  * @property {boolean} singleUtterance
- *   Optional. If `true`, the recognizer will detect a single spoken utterance
- *   in input audio. When it detects that the user has paused or stopped
- *   speaking, it will cease recognition. This setting is ignored when
- *   `query_input` is a piece of text or an event.
+ *   Optional. If `false` (default), recognition does not cease until the
+ *   client closes the stream.
+ *   If `true`, the recognizer will detect a single spoken utterance in input
+ *   audio. Recognition ceases when it detects the audio's voice has
+ *   stopped or paused. In this case, once a detected intent is received, the
+ *   client should close the stream and start a new request with a new stream as
+ *   needed.
+ *   This setting is ignored when `query_input` is a piece of text or an event.
  *
  * @property {string} inputAudio
  *   Optional. The input audio content to be recognized. Must be sent if
@@ -392,10 +406,20 @@ var StreamingDetectIntentResponse = {
  *   Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
  *
  * @property {boolean} isFinal
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *   If `false`, the `StreamingRecognitionResult` represents an
  *   interim result that may change. If `true`, the recognizer will not return
  *   any further hypotheses about this piece of the audio. May only be populated
  *   for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+ *
+ * @property {number} confidence
+ *   The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+ *   A higher number indicates an estimated greater likelihood that the
+ *   recognized words are correct. The default of 0.0 is a sentinel value
+ *   indicating that confidence was not set.
+ *
+ *   This field is typically only provided if `is_final` is true and you should
+ *   not rely on it being accurate or even set.
  *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.dialogflow.v2beta1

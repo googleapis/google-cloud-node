@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -77,10 +77,11 @@ message WebhookResponse {
 }
 
 // Represents the contents of the original request that was passed to
-// `[Streaming]DetectIntent call`.
+// the `[Streaming]DetectIntent` call.
 message OriginalDetectIntentRequest {
-  // The source of this request, e.g., Google, Facebook, Slack. It is set by
-  // Dialogflow-owned servers.
+  // The source of this request, e.g., `google`, `facebook`, `slack`. It is set
+  // by Dialogflow-owned servers. Possible values of this field correspond to
+  // [Intent.Message.Platform][google.cloud.dialogflow.v2beta1.Intent.Message.Platform].
   string source = 1;
 
   // Optional. This field is set to the value of `QueryParameters.payload` field

@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,13 +23,31 @@ const protobuf = require('protobufjs');
 const VERSION = require('../../package.json').version;
 
 /**
- * Manages conversational agents.
+ * Agents are best described as Natural Language Understanding (NLU) modules
+ * that transform user requests into actionable data. You can include agents
+ * in your app, product, or service to determine user intent and respond to the
+ * user in a natural way.
  *
+ * After you create an agent, you can add Intents, Contexts,
+ * Entity Types, Webhooks, and so on to
+ * manage the flow of a conversation and match user input to predefined intents
+ * and actions.
  *
- * Refer to [documentation](https://dialogflow.com/docs/agents) for more details
- * # about agents.
+ * You can create an agent using both Dialogflow Standard Edition and
+ * Dialogflow Enterprise Edition. For details, see
+ * [Dialogflow Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
  *
- * Standard methods.
+ * You can save your agent for backup or versioning by exporting the agent by
+ * using the ExportAgent method. You can import a saved
+ * agent by using the ImportAgent method.
+ *
+ * Dialogflow provides several
+ * [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
+ * conversation scenarios such as determining a date and time, converting
+ * currency, and so on.
+ *
+ * For more information about agents, see the
+ * [Dialogflow documentation](https://dialogflow.com/docs/agents).
  *
  * @class
  * @memberof v2beta1
@@ -44,10 +62,10 @@ class AgentsClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -276,7 +294,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -347,7 +365,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -435,7 +453,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -463,8 +481,8 @@ class AgentsClient {
    * Trains the specified agent.
    *
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -484,7 +502,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -558,8 +576,8 @@ class AgentsClient {
    * Exports the specified agent to a ZIP file.
    *
    *
-   * Operation<response: ExportAgentResponse,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: ExportAgentResponse,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -567,7 +585,8 @@ class AgentsClient {
    *   Required. The project that the agent to export is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
-   *   Optional. The URI to export the agent to. Note: The URI must start with
+   *   Optional. The Google Cloud Storage URI to export the agent to.
+   *   Note: The URI must start with
    *   "gs://". If left unspecified, the serialized agent is returned inline.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -582,7 +601,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -660,8 +679,8 @@ class AgentsClient {
    * versions from ImportAgentRequest.
    *
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -669,10 +688,23 @@ class AgentsClient {
    *   Required. The project that the agent to import is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
-   *   The URI to a file containing the agent to import. Note: The URI must
-   *   start with "gs://".
+   *   The URI to a Google Cloud Storage file containing the agent to import.
+   *   Note: The URI must start with "gs://".
    * @param {string} [request.agentContent]
    *   The agent to import.
+   *
+   *   Example for how to import an agent via the command line:
+   *
+   *   curl \
+   *     'https://dialogflow.googleapis.com/v2beta1/projects/<project_name>/agent:import\
+   *      -X POST \
+   *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+   *      -H 'Accept: application/json' \
+   *      -H 'Content-Type: application/json' \
+   *      --compressed \
+   *      --data-binary "{
+   *         'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+   *      }"
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -686,7 +718,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
@@ -763,8 +795,8 @@ class AgentsClient {
    * entity types in the older version are deleted.
    *
    *
-   * Operation<response: google.protobuf.Empty,
-   *           metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty,
+   *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -772,10 +804,23 @@ class AgentsClient {
    *   Required. The project that the agent to restore is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
-   *   The URI to a file containing the agent to restore. Note: The URI must
-   *   start with "gs://".
+   *   The URI to a Google Cloud Storage file containing the agent to restore.
+   *   Note: The URI must start with "gs://".
    * @param {string} [request.agentContent]
    *   The agent to restore.
+   *
+   *   Example for how to restore an agent via the command line:
+   *
+   *   curl \
+   *     'https://dialogflow.googleapis.com/v2beta1/projects/<project_name>/agent:restore\
+   *      -X POST \
+   *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+   *      -H 'Accept: application/json' \
+   *      -H 'Content-Type: application/json' \
+   *      --compressed \
+   *      --data-binary "{
+   *          'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+   *      }" \
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -789,7 +834,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
    * var client = new dialogflow.v2beta1.AgentsClient({
    *   // optional auth parameters.
