@@ -187,6 +187,10 @@ jobs:
           command: |
             mkdir -p /home/node/.npm-global
             npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
             npm link
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -229,6 +233,10 @@ jobs:
           command: |
             mkdir -p /home/node/.npm-global
             npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
