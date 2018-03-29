@@ -65,6 +65,7 @@
   },
   "files": [
     "out/src",
+    "out/third_party/types",
     "bindings",
     "proto",
     "binding.gyp",
