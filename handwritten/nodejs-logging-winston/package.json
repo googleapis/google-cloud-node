@@ -90,7 +90,7 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.2.4",
     "@types/glob": "^5.0.34",
-    "@types/is": "0.0.17",
+    "@types/is": "0.0.19",
     "@types/lodash.mapvalues": "^4.6.3",
     "@types/mocha": "^5.0.0",
     "@types/ncp": "^2.0.1",
