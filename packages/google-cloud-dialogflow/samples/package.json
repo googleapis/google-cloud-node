@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.13.3",
-    "dialogflow": "^0.1.0",
+    "dialogflow": "0.2.0",
     "grpc": "^1.4.1",
     "pump": "^1.0.2",
     "through2": "^2.0.3",

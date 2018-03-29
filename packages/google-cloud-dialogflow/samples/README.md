@@ -49,7 +49,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "8e2889c0-2d38-11e8-80bf-27f35f3670f0"]
+                                                              [string] [default: "9fd492f0-337c-11e8-b8a1-51ae25f2192e"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -90,7 +90,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "8e5ba7b0-2d38-11e8-9873-b348df7f873a"]
+                                                              [string] [default: "9ffd77b0-337c-11e8-8164-317ecf4365b4"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -131,7 +131,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "8e861310-2d38-11e8-b6bd-979c9400331b"]
+                                                              [string] [default: "a03131e0-337c-11e8-8ab5-1fc99ed1d3fc"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
