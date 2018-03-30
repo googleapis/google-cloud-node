@@ -32,7 +32,7 @@ const log = console.log;
 
 app.use(bodyParser.json());
 
-app.post('/testErrorHandling', function(req, res, next) {
+app.post('/testErrorHandling', (req, res, next) => {
   if (has(req.body, 'test') && req.body.test !== true) {
     return next!(new Error('Error on Express Regular Error POST Route'));
   } else {
@@ -41,8 +41,8 @@ app.post('/testErrorHandling', function(req, res, next) {
   }
 });
 
-app.get('/customError', function(req, res, next) {
-  errorHandler.report('Error on Express Custom Error GET Route', function(err) {
+app.get('/customError', (req, res, next) => {
+  errorHandler.report('Error on Express Custom Error GET Route', err => {
     if (err) {
       log(WARNING_HEADER);
       log('Error in sending custom get error to api');
@@ -61,7 +61,7 @@ app.get('/customError', function(req, res, next) {
   next!();
 });
 
-app.get('/getError', function(req, res, next) {
+app.get('/getError', (req, res, next) => {
   return next!(new Error('Error on Express Regular Error GET Route'));
 });
 
@@ -75,8 +75,7 @@ function throwUncaughtError() {
 function reportManualError() {
   log('Reporting a manual error..');
   errorHandler.report(
-      new Error('This is a manually reported error'), null, null,
-      function(err) {
+      new Error('This is a manually reported error'), null, null, err => {
         if (err) {
           log(WARNING_HEADER);
           log('Got an error in sending error information to the API');
@@ -103,7 +102,7 @@ errorHandler.report(new Error('This is a test'), err => {
   }
 });
 
-app.listen(3000, function() {
+app.listen(3000, () => {
   log('Scaffold Server has been started on port 3000');
   reportManualError();
 });

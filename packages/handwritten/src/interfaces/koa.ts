@@ -34,8 +34,7 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
  * @returns {Function} - The function used to catch errors yielded by downstream
  *  request handlers.
  */
-export function koaErrorHandler(
-    client: RequestHandler, config: Configuration) {
+export function koaErrorHandler(client: RequestHandler, config: Configuration) {
   /**
    * The actual error handler for the Koa plugin attempts to yield the results
    * of downstream request handlers and will attempt to catch errors emitted by

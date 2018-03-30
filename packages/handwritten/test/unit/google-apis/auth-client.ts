@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
+import {Logger} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
 import {Configuration} from '../../../src/configuration';
-import { Logger } from '@google-cloud/common';
 
 function verifyReportedMessage(config1, errToReturn, expectedLogs) {
   class ServiceStub {
@@ -26,29 +26,29 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
     request: {};
     constructor() {
       this.authClient = {
-        getToken: function(cb) {
+        getToken(cb) {
           cb(errToReturn);
         },
       };
-      this.request = function() {};
+      this.request = () => {};
     }
   }
 
   const RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
-                         '@google-cloud/common': {
-                           Service: ServiceStub,
-                         },
-                       }).RequestHandler;
+                           '@google-cloud/common': {
+                             Service: ServiceStub,
+                           },
+                         }).RequestHandler;
 
   const logs: {error?: string; info?: string;} = {};
   const logger = {
-    error: function(text) {
+    error(text) {
       if (!logs.error) {
         logs.error = '';
       }
       logs.error += text;
     },
-    info: function(text) {
+    info(text) {
       if (!logs.info) {
         logs.info = '';
       }
@@ -56,11 +56,12 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
     },
   };
   const config2 = new Configuration(config1, logger as Logger);
+  // tslint:disable-next-line:no-unused-expression
   new RequestHandler(config2, logger);
   assert.deepStrictEqual(logs, expectedLogs);
 }
-describe('RequestHandler', function() {
-  it('should not request OAuth2 token if key is provided', function() {
+describe('RequestHandler', () => {
+  it('should not request OAuth2 token if key is provided', () => {
     const config = {
       ignoreEnvironmentCheck: true,
       key: 'key',
@@ -71,7 +72,7 @@ describe('RequestHandler', function() {
     });
   });
 
-  it('should issue a warning if it cannot communicate with the API', function() {
+  it('should issue a warning if it cannot communicate with the API', () => {
     const config = {ignoreEnvironmentCheck: true};
     const message = 'Test Error';
     verifyReportedMessage(config, new Error(message), {
@@ -81,10 +82,9 @@ describe('RequestHandler', function() {
     });
   });
 
-  it('should not issue a warning if it can communicate with the API',
-     function() {
-       const config = {ignoreEnvironmentCheck: true};
-       verifyReportedMessage(config, null, {});
-       verifyReportedMessage(config, undefined, {});
-     });
+  it('should not issue a warning if it can communicate with the API', () => {
+    const config = {ignoreEnvironmentCheck: true};
+    verifyReportedMessage(config, null, {});
+    verifyReportedMessage(config, undefined, {});
+  });
 });
