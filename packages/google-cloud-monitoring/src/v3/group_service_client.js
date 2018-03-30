@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,28 +42,28 @@ class GroupServiceClient {
   /**
    * Construct an instance of GroupServiceClient.
    *
-   * @param {object=} options - The configuration object. See the subsequent
+   * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
-   * @param {object=} options.credentials - Credentials object.
-   * @param {string=} options.credentials.client_email
-   * @param {string=} options.credentials.private_key
-   * @param {string=} options.email - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
-   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
+   *     using a .pem or .p12 keyFilename.
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
-   * @param {number=} options.port - The port on which to connect to
+   * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
-   * @param {string=} options.projectId - The project ID from the Google
+   * @param {string} [options.projectId] - The project ID from the Google
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function=} options.promise - Custom promise module to use instead
+   * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string=} options.servicePath - The domain name of the
+   * @param {string} [options.servicePath] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
@@ -222,31 +222,31 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The project whose groups are to be listed. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.childrenOfGroup
+   * @param {string} [request.childrenOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns groups whose `parentName` field contains the group
    *   name.  If no groups have this parent, the results are empty.
-   * @param {string=} request.ancestorsOfGroup
+   * @param {string} [request.ancestorsOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns groups that are ancestors of the specified group.
    *   The groups are returned in order, starting with the immediate parent and
    *   ending with the most distant ancestor.  If the specified group has no
    *   immediate parent, the results are empty.
-   * @param {string=} request.descendantsOfGroup
+   * @param {string} [request.descendantsOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns the descendants of the specified group.  This is a superset of
    *   the results returned by the `childrenOfGroup` filter, and includes
    *   children-of-children, and so forth.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [Group]{@link google.monitoring.v3.Group}.
@@ -342,28 +342,28 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The project whose groups are to be listed. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.childrenOfGroup
+   * @param {string} [request.childrenOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns groups whose `parentName` field contains the group
    *   name.  If no groups have this parent, the results are empty.
-   * @param {string=} request.ancestorsOfGroup
+   * @param {string} [request.ancestorsOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns groups that are ancestors of the specified group.
    *   The groups are returned in order, starting with the immediate parent and
    *   ending with the most distant ancestor.  If the specified group has no
    *   immediate parent, the results are empty.
-   * @param {string=} request.descendantsOfGroup
+   * @param {string} [request.descendantsOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
    *   Returns the descendants of the specified group.  This is a superset of
    *   the results returned by the `childrenOfGroup` filter, and includes
    *   children-of-children, and so forth.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
@@ -403,10 +403,10 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The group to retrieve. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
@@ -455,12 +455,12 @@ class GroupServiceClient {
    *   the system assigns the name.
    *
    *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
-   * @param {boolean=} request.validateOnly
+   * @param {boolean} [request.validateOnly]
    *   If true, validate this request but do not create the group.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
@@ -512,12 +512,12 @@ class GroupServiceClient {
    *   excepting `name`, are replaced with the corresponding fields of this group.
    *
    *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
-   * @param {boolean=} request.validateOnly
+   * @param {boolean} [request.validateOnly]
    *   If true, validate this request but do not update the existing group.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [Group]{@link google.monitoring.v3.Group}.
@@ -561,10 +561,10 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The group to delete. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)=} callback
+   * @param {function(?Error)} [callback]
    *   The function which will be called with the result of the API call.
    * @returns {Promise} - The promise which resolves when API call finishes.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
@@ -600,13 +600,13 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The group whose members are listed. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
    *   the members to be returned.  The filter may reference the type, labels, and
    *   metadata of monitored resources that comprise the group.
@@ -614,17 +614,17 @@ class GroupServiceClient {
    *   instances, use this filter:
    *
    *       resource.type = "gce_instance"
-   * @param {Object=} request.interval
+   * @param {Object} [request.interval]
    *   An optional time interval for which results should be returned. Only
    *   members that were part of the group during the specified interval are
    *   included in the response.  If no interval is provided then the group
    *   membership over the last minute is returned.
    *
    *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [MonitoredResource]{@link google.api.MonitoredResource}.
@@ -720,13 +720,13 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The group whose members are listed. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
    *   the members to be returned.  The filter may reference the type, labels, and
    *   metadata of monitored resources that comprise the group.
@@ -734,14 +734,14 @@ class GroupServiceClient {
    *   instances, use this filter:
    *
    *       resource.type = "gce_instance"
-   * @param {Object=} request.interval
+   * @param {Object} [request.interval]
    *   An optional time interval for which results should be returned. Only
    *   members that were part of the group during the specified interval are
    *   included in the response.  If no interval is provided then the group
    *   membership over the last minute is returned.
    *
    *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}

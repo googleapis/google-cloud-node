@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,28 +38,28 @@ class UptimeCheckServiceClient {
   /**
    * Construct an instance of UptimeCheckServiceClient.
    *
-   * @param {object=} options - The configuration object. See the subsequent
+   * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
-   * @param {object=} options.credentials - Credentials object.
-   * @param {string=} options.credentials.client_email
-   * @param {string=} options.credentials.private_key
-   * @param {string=} options.email - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
-   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
+   *     using a .pem or .p12 keyFilename.
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
-   * @param {number=} options.port - The port on which to connect to
+   * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
-   * @param {string=} options.projectId - The project ID from the Google
+   * @param {string} [options.projectId] - The project ID from the Google
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function=} options.promise - Custom promise module to use instead
+   * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string=} options.servicePath - The domain name of the
+   * @param {string} [options.servicePath] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
@@ -224,16 +224,16 @@ class UptimeCheckServiceClient {
    *   The project whose uptime check configurations are listed. The format is
    *
    *     `projects/[PROJECT_ID]`.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
@@ -334,13 +334,13 @@ class UptimeCheckServiceClient {
    *   The project whose uptime check configurations are listed. The format is
    *
    *     `projects/[PROJECT_ID]`.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
@@ -381,10 +381,10 @@ class UptimeCheckServiceClient {
    *   The uptime check configuration to retrieve. The format is
    *
    *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
@@ -433,10 +433,10 @@ class UptimeCheckServiceClient {
    *   The new uptime check configuration.
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
@@ -489,10 +489,6 @@ class UptimeCheckServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   The uptime check configuration to update. The format is
-   *
-   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} request.uptimeCheckConfig
    *   Required. If an `"updateMask"` has been specified, this field gives
    *   the values for the set of fields mentioned in the `"updateMask"`. If an
@@ -503,17 +499,17 @@ class UptimeCheckServiceClient {
    *   configuration on the server.
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
-   * @param {Object=} request.updateMask
+   * @param {Object} [request.updateMask]
    *   Optional. If present, only the listed fields in the current uptime check
    *   configuration are updated with values from the new configuration. If this
    *   field is empty, then the current configuration is completely replaced with
    *   the new configuration.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
@@ -529,13 +525,8 @@ class UptimeCheckServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var name = '';
    * var uptimeCheckConfig = {};
-   * var request = {
-   *   name: name,
-   *   uptimeCheckConfig: uptimeCheckConfig,
-   * };
-   * client.updateUptimeCheckConfig(request)
+   * client.updateUptimeCheckConfig({uptimeCheckConfig: uptimeCheckConfig})
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -569,10 +560,10 @@ class UptimeCheckServiceClient {
    *   The uptime check configuration to delete. The format is
    *
    *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)=} callback
+   * @param {function(?Error)} [callback]
    *   The function which will be called with the result of the API call.
    * @returns {Promise} - The promise which resolves when API call finishes.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
@@ -609,16 +600,16 @@ class UptimeCheckServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp}.
@@ -707,13 +698,13 @@ class UptimeCheckServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}

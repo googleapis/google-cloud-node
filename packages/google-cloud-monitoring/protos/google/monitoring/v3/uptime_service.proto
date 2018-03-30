@@ -26,6 +26,7 @@ option go_package = "google.golang.org/genproto/googleapis/monitoring/v3;monitor
 option java_multiple_files = true;
 option java_outer_classname = "UptimeServiceProto";
 option java_package = "com.google.monitoring.v3";
+option php_namespace = "Google\\Cloud\\Monitoring\\V3";
 
 
 // The UptimeCheckService API is used to manage (list, create, delete, edit)
@@ -40,9 +41,7 @@ service UptimeCheckService {
   // Lists the existing valid uptime check configurations for the project,
   // leaving out any invalid configurations.
   rpc ListUptimeCheckConfigs(ListUptimeCheckConfigsRequest) returns (ListUptimeCheckConfigsResponse) {
-    option (google.api.http) = {
-      get: "/v3/{parent=projects/*}/uptimeCheckConfigs"
-    };
+    option (google.api.http) = { get: "/v3/{parent=projects/*}/uptimeCheckConfigs" };
   }
 
   // Gets a single uptime check configuration.
@@ -71,11 +70,8 @@ service UptimeCheckService {
   }
 
   // Returns the list of IPs that checkers run from
-  rpc ListUptimeCheckIps(ListUptimeCheckIpsRequest)
-      returns (ListUptimeCheckIpsResponse) {
-    option (google.api.http) = {
-      get: "/v3/uptimeCheckIps"
-    };
+  rpc ListUptimeCheckIps(ListUptimeCheckIpsRequest) returns (ListUptimeCheckIpsResponse) {
+    option (google.api.http) = { get: "/v3/uptimeCheckIps" };
   }
 }
 
@@ -132,11 +128,6 @@ message CreateUptimeCheckConfigRequest {
 
 // The protocol for the `UpdateUptimeCheckConfig` request.
 message UpdateUptimeCheckConfigRequest {
-  // The uptime check configuration to update. The format is
-  //
-  //   `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
-  string name = 1;
-
   // Optional. If present, only the listed fields in the current uptime check
   // configuration are updated with values from the new configuration. If this
   // field is empty, then the current configuration is completely replaced with

@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,313 @@ var FAKE_STATUS_CODE = 1;
 var error = new Error();
 error.code = FAKE_STATUS_CODE;
 
+describe('AlertPolicyServiceClient', () => {
+  describe('listAlertPolicies', () => {
+    it('invokes listAlertPolicies without error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var alertPoliciesElement = {};
+      var alertPolicies = [alertPoliciesElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        alertPolicies: alertPolicies,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listAlertPolicies = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.alertPolicies);
+      };
+
+      client.listAlertPolicies(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.alertPolicies);
+        done();
+      });
+    });
+
+    it('invokes listAlertPolicies with error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listAlertPolicies = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listAlertPolicies(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getAlertPolicy', () => {
+    it('invokes getAlertPolicy without error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getAlertPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getAlertPolicy with error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getAlertPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createAlertPolicy', () => {
+    it('invokes createAlertPolicy without error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var alertPolicy = {};
+      var request = {
+        name: formattedName,
+        alertPolicy: alertPolicy,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createAlertPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createAlertPolicy with error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var alertPolicy = {};
+      var request = {
+        name: formattedName,
+        alertPolicy: alertPolicy,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createAlertPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteAlertPolicy', () => {
+    it('invokes deleteAlertPolicy without error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAlertPolicy = mockSimpleGrpcMethod(request);
+
+      client.deleteAlertPolicy(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteAlertPolicy with error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteAlertPolicy(request, err => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('updateAlertPolicy', () => {
+    it('invokes updateAlertPolicy without error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var alertPolicy = {};
+      var request = {
+        alertPolicy: alertPolicy,
+      };
+
+      // Mock response
+      var name = 'name3373707';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateAlertPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateAlertPolicy with error', done => {
+      var client = new monitoringModule.v3.AlertPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var alertPolicy = {};
+      var request = {
+        alertPolicy: alertPolicy,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateAlertPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateAlertPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+});
 describe('GroupServiceClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', done => {
@@ -358,7 +665,7 @@ describe('GroupServiceClient', () => {
 
       // Mock response
       var nextPageToken = '';
-      var totalSize = -705419236;
+      var totalSize = 705419236;
       var membersElement = {};
       var members = [membersElement];
       var expectedResponse = {
@@ -954,6 +1261,478 @@ describe('MetricServiceClient', () => {
     });
   });
 });
+describe('NotificationChannelServiceClient', () => {
+  describe('listNotificationChannelDescriptors', () => {
+    it('invokes listNotificationChannelDescriptors without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var channelDescriptorsElement = {};
+      var channelDescriptors = [channelDescriptorsElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        channelDescriptors: channelDescriptors,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationChannelDescriptors = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.channelDescriptors);
+      };
+
+      client.listNotificationChannelDescriptors(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.channelDescriptors);
+        done();
+      });
+    });
+
+    it('invokes listNotificationChannelDescriptors with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationChannelDescriptors = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listNotificationChannelDescriptors(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getNotificationChannelDescriptor', () => {
+    it('invokes getNotificationChannelDescriptor without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelDescriptorPath(
+        '[PROJECT]',
+        '[CHANNEL_DESCRIPTOR]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var type = 'type3575610';
+      var displayName = 'displayName1615086568';
+      var description = 'description-1724546052';
+      var expectedResponse = {
+        name: name2,
+        type: type,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannelDescriptor = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getNotificationChannelDescriptor(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getNotificationChannelDescriptor with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelDescriptorPath(
+        '[PROJECT]',
+        '[CHANNEL_DESCRIPTOR]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannelDescriptor = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getNotificationChannelDescriptor(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listNotificationChannels', () => {
+    it('invokes listNotificationChannels without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var notificationChannelsElement = {};
+      var notificationChannels = [notificationChannelsElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        notificationChannels: notificationChannels,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationChannels = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.notificationChannels);
+      };
+
+      client.listNotificationChannels(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.notificationChannels);
+        done();
+      });
+    });
+
+    it('invokes listNotificationChannels with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationChannels = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listNotificationChannels(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getNotificationChannel', () => {
+    it('invokes getNotificationChannel without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var type = 'type3575610';
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var description = 'description-1724546052';
+      var expectedResponse = {
+        type: type,
+        name: name2,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getNotificationChannel(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getNotificationChannel with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getNotificationChannel(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createNotificationChannel', () => {
+    it('invokes createNotificationChannel without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var notificationChannel = {};
+      var request = {
+        name: formattedName,
+        notificationChannel: notificationChannel,
+      };
+
+      // Mock response
+      var type = 'type3575610';
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var description = 'description-1724546052';
+      var expectedResponse = {
+        type: type,
+        name: name2,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createNotificationChannel(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createNotificationChannel with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.projectPath('[PROJECT]');
+      var notificationChannel = {};
+      var request = {
+        name: formattedName,
+        notificationChannel: notificationChannel,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createNotificationChannel(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateNotificationChannel', () => {
+    it('invokes updateNotificationChannel without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var notificationChannel = {};
+      var request = {
+        notificationChannel: notificationChannel,
+      };
+
+      // Mock response
+      var type = 'type3575610';
+      var name = 'name3373707';
+      var displayName = 'displayName1615086568';
+      var description = 'description-1724546052';
+      var expectedResponse = {
+        type: type,
+        name: name,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateNotificationChannel(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateNotificationChannel with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var notificationChannel = {};
+      var request = {
+        notificationChannel: notificationChannel,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateNotificationChannel(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteNotificationChannel', () => {
+    it('invokes deleteNotificationChannel without error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteNotificationChannel = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteNotificationChannel(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteNotificationChannel with error', done => {
+      var client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteNotificationChannel(request, err => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+});
 describe('UptimeCheckServiceClient', () => {
   describe('listUptimeCheckConfigs', () => {
     it('invokes listUptimeCheckConfigs without error', done => {
@@ -1164,18 +1943,16 @@ describe('UptimeCheckServiceClient', () => {
       });
 
       // Mock request
-      var name = 'name3373707';
       var uptimeCheckConfig = {};
       var request = {
-        name: name,
         uptimeCheckConfig: uptimeCheckConfig,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
+      var name = 'name3373707';
       var displayName = 'displayName1615086568';
       var expectedResponse = {
-        name: name2,
+        name: name,
         displayName: displayName,
       };
 
@@ -1199,10 +1976,8 @@ describe('UptimeCheckServiceClient', () => {
       });
 
       // Mock request
-      var name = 'name3373707';
       var uptimeCheckConfig = {};
       var request = {
-        name: name,
         uptimeCheckConfig: uptimeCheckConfig,
       };
 

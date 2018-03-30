@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -73,8 +73,9 @@ var TimeInterval = {
 /**
  * Describes how to combine multiple time series to provide different views of
  * the data.  Aggregation consists of an alignment step on individual time
- * series (`per_series_aligner`) followed by an optional reduction of the data
- * across different time series (`cross_series_reducer`).  For more details, see
+ * series (`alignment_period` and `per_series_aligner`) followed by an optional
+ * reduction step of the data across the aligned time series
+ * (`cross_series_reducer` and `group_by_fields`).  For more details, see
  * [Aggregation](https://cloud.google.com/monitoring/api/learn_more#aggregation).
  *
  * @property {Object} alignmentPeriod
@@ -164,6 +165,9 @@ var Aggregation = {
      * delta metric to a delta metric requires that the alignment
      * period be increased. The value type of the result is the same
      * as the value type of the input.
+     *
+     * One can think of this aligner as a rate but without time units; that
+     * is, the output is conceptually (second_point - first_point).
      */
     ALIGN_DELTA: 1,
 
@@ -172,6 +176,14 @@ var Aggregation = {
      * cumulative metrics and delta metrics with numeric values. The output is a
      * gauge metric with value type
      * DOUBLE.
+     *
+     * One can think of this aligner as conceptually providing the slope of
+     * the line that passes through the value at the start and end of the
+     * window. In other words, this is conceptually ((y1 - y0)/(t1 - t0)),
+     * and the output unit is one that has a "/time" dimension.
+     *
+     * If, by rate, you are looking for percentage change, see the
+     * `ALIGN_PERCENT_CHANGE` aligner option.
      */
     ALIGN_RATE: 2,
 
@@ -256,6 +268,15 @@ var Aggregation = {
 
     /**
      * Align time series via aggregation. The resulting data point in
+     * the alignment period is the count of False-valued data points in the
+     * period. This alignment is valid for gauge metrics with
+     * Boolean values. The value type of the output is
+     * INT64.
+     */
+    ALIGN_COUNT_FALSE: 24,
+
+    /**
+     * Align time series via aggregation. The resulting data point in
      * the alignment period is the fraction of True-valued data points in the
      * period. This alignment is valid for gauge metrics with Boolean values.
      * The output value is in the range [0, 1] and has value type
@@ -297,7 +318,26 @@ var Aggregation = {
      * with distribution values. The output is a gauge metric with value type
      * DOUBLE.
      */
-    ALIGN_PERCENTILE_05: 21
+    ALIGN_PERCENTILE_05: 21,
+
+    /**
+     * Align and convert to a percentage change. This alignment is valid for
+     * gauge and delta metrics with numeric values. This alignment conceptually
+     * computes the equivalent of "((current - previous)/previous)*100"
+     * where previous value is determined based on the alignmentPeriod.
+     * In the event that previous is 0 the calculated value is infinity with the
+     * exception that if both (current - previous) and previous are 0 the
+     * calculated value is 0.
+     * A 10 minute moving mean is computed at each point of the time window
+     * prior to the above calculation to smooth the metric and prevent false
+     * positives from very short lived spikes.
+     * Only applicable for data that is >= 0. Any values < 0 are treated as
+     * no data. While delta metrics are accepted by this alignment special care
+     * should be taken that the values for the metric will always be positive.
+     * The output is a gauge metric with value type
+     * DOUBLE.
+     */
+    ALIGN_PERCENT_CHANGE: 23
   },
 
   /**
@@ -373,6 +413,14 @@ var Aggregation = {
     REDUCE_COUNT_TRUE: 7,
 
     /**
+     * Reduce by computing the count of False-valued data points across time
+     * series for each alignment period. This reducer is valid for delta
+     * and gauge metrics of Boolean value type. The value type of
+     * the output is INT64.
+     */
+    REDUCE_COUNT_FALSE: 15,
+
+    /**
      * Reduce by computing the fraction of True-valued data points across time
      * series for each alignment period. This reducer is valid for delta
      * and gauge metrics of Boolean value type. The output value is in the
@@ -413,4 +461,82 @@ var Aggregation = {
      */
     REDUCE_PERCENTILE_05: 12
   }
+};
+
+/**
+ * Specifies an ordering relationship on two arguments, here called left and
+ * right.
+ *
+ * @enum {number}
+ * @memberof google.monitoring.v3
+ */
+var ComparisonType = {
+
+  /**
+   * No ordering relationship is specified.
+   */
+  COMPARISON_UNSPECIFIED: 0,
+
+  /**
+   * The left argument is greater than the right argument.
+   */
+  COMPARISON_GT: 1,
+
+  /**
+   * The left argument is greater than or equal to the right argument.
+   */
+  COMPARISON_GE: 2,
+
+  /**
+   * The left argument is less than the right argument.
+   */
+  COMPARISON_LT: 3,
+
+  /**
+   * The left argument is less than or equal to the right argument.
+   */
+  COMPARISON_LE: 4,
+
+  /**
+   * The left argument is equal to the right argument.
+   */
+  COMPARISON_EQ: 5,
+
+  /**
+   * The left argument is not equal to the right argument.
+   */
+  COMPARISON_NE: 6
+};
+
+/**
+ * The tier of service for a Stackdriver account. Please see the
+ * [service tiers documentation](https://cloud.google.com/monitoring/accounts/tiers)
+ * for more details.
+ *
+ * @enum {number}
+ * @memberof google.monitoring.v3
+ */
+var ServiceTier = {
+
+  /**
+   * An invalid sentinel value, used to indicate that a tier has not
+   * been provided explicitly.
+   */
+  SERVICE_TIER_UNSPECIFIED: 0,
+
+  /**
+   * The Stackdriver Basic tier, a free tier of service that provides basic
+   * features, a moderate allotment of logs, and access to built-in metrics.
+   * A number of features are not available in this tier. For more details,
+   * see [the service tiers documentation](https://cloud.google.com/monitoring/accounts/tiers).
+   */
+  SERVICE_TIER_BASIC: 1,
+
+  /**
+   * The Stackdriver Premium tier, a higher, more expensive tier of service
+   * that provides access to all Stackdriver features, lets you use Stackdriver
+   * with AWS accounts, and has a larger allotments for logs and metrics. For
+   * more details, see [the service tiers documentation](https://cloud.google.com/monitoring/accounts/tiers).
+   */
+  SERVICE_TIER_PREMIUM: 2
 };

@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,28 +32,28 @@ class MetricServiceClient {
   /**
    * Construct an instance of MetricServiceClient.
    *
-   * @param {object=} options - The configuration object. See the subsequent
+   * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
-   * @param {object=} options.credentials - Credentials object.
-   * @param {string=} options.credentials.client_email
-   * @param {string=} options.credentials.private_key
-   * @param {string=} options.email - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
-   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
+   *     using a .pem or .p12 keyFilename.
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
-   * @param {number=} options.port - The port on which to connect to
+   * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
-   * @param {string=} options.projectId - The project ID from the Google
+   * @param {string} [options.projectId] - The project ID from the Google
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function=} options.promise - Custom promise module to use instead
+   * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string=} options.servicePath - The domain name of the
+   * @param {string} [options.servicePath] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
@@ -226,7 +226,7 @@ class MetricServiceClient {
    * @param {string} request.name
    *   The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
    *   the descriptors to be returned.  The filter can reference
    *   the descriptor's type and labels. For example, the
@@ -234,16 +234,16 @@ class MetricServiceClient {
    *   that have an `id` label:
    *
    *       resource.type = starts_with("gce_") AND resource.label:id
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor}.
@@ -343,7 +343,7 @@ class MetricServiceClient {
    * @param {string} request.name
    *   The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
    *   the descriptors to be returned.  The filter can reference
    *   the descriptor's type and labels. For example, the
@@ -351,13 +351,13 @@ class MetricServiceClient {
    *   that have an `id` label:
    *
    *       resource.type = starts_with("gce_") AND resource.label:id
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
@@ -399,10 +399,10 @@ class MetricServiceClient {
    *   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
    *   The `{resource_type}` is a predefined type, such as
    *   `cloudsql_database`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor}.
@@ -450,7 +450,7 @@ class MetricServiceClient {
    * @param {string} request.name
    *   The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   If this field is empty, all custom and
    *   system-defined metric descriptors are returned.
    *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -459,16 +459,16 @@ class MetricServiceClient {
    *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
    *
    *       metric.type = starts_with("custom.googleapis.com/")
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [MetricDescriptor]{@link google.api.MetricDescriptor}.
@@ -568,7 +568,7 @@ class MetricServiceClient {
    * @param {string} request.name
    *   The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
-   * @param {string=} request.filter
+   * @param {string} [request.filter]
    *   If this field is empty, all custom and
    *   system-defined metric descriptors are returned.
    *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -577,13 +577,13 @@ class MetricServiceClient {
    *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
    *
    *       metric.type = starts_with("custom.googleapis.com/")
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
@@ -625,10 +625,10 @@ class MetricServiceClient {
    *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
    *   An example value of `{metric_id}` is
    *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [MetricDescriptor]{@link google.api.MetricDescriptor}.
@@ -679,10 +679,10 @@ class MetricServiceClient {
    *   descriptor.
    *
    *   This object should have the same structure as [MetricDescriptor]{@link google.api.MetricDescriptor}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [MetricDescriptor]{@link google.api.MetricDescriptor}.
@@ -738,10 +738,10 @@ class MetricServiceClient {
    *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
    *   An example of `{metric_id}` is:
    *   `"custom.googleapis.com/my_test_metric"`.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)=} callback
+   * @param {function(?Error)} [callback]
    *   The function which will be called with the result of the API call.
    * @returns {Promise} - The promise which resolves when API call finishes.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
@@ -799,26 +799,26 @@ class MetricServiceClient {
    *   Specifies which information is returned about the time series.
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
-   * @param {Object=} request.aggregation
+   * @param {Object} [request.aggregation]
    *   By default, the raw time series data is returned.
    *   Use this field to combine multiple time series for different
    *   views of the data.
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
-   * @param {string=} request.orderBy
+   * @param {string} [request.orderBy]
    *   Specifies the order in which the points of the time series should
    *   be returned.  By default, results are not ordered.  Currently,
    *   this field must be left blank.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is Array of [TimeSeries]{@link google.monitoring.v3.TimeSeries}.
@@ -950,23 +950,23 @@ class MetricServiceClient {
    *   Specifies which information is returned about the time series.
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
-   * @param {Object=} request.aggregation
+   * @param {Object} [request.aggregation]
    *   By default, the raw time series data is returned.
    *   Use this field to combine multiple time series for different
    *   views of the data.
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
-   * @param {string=} request.orderBy
+   * @param {string} [request.orderBy]
    *   Specifies the order in which the points of the time series should
    *   be returned.  By default, results are not ordered.  Currently,
    *   this field must be left blank.
-   * @param {number=} request.pageSize
+   * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
@@ -1026,10 +1026,10 @@ class MetricServiceClient {
    *   all label values for the metric and the monitored resource.
    *
    *   This object should have the same structure as [TimeSeries]{@link google.monitoring.v3.TimeSeries}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)=} callback
+   * @param {function(?Error)} [callback]
    *   The function which will be called with the result of the API call.
    * @returns {Promise} - The promise which resolves when API call finishes.
    *   The promise has a method named "cancel" which cancels the ongoing API call.

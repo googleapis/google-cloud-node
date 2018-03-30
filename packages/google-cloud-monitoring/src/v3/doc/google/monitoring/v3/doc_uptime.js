@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -83,6 +83,11 @@
  *   regions.
  *
  *   The number should be among the values of [UptimeCheckRegion]{@link google.monitoring.v3.UptimeCheckRegion}
+ *
+ * @property {Object[]} internalCheckers
+ *   The internal checkers that this check will egress from.
+ *
+ *   This object should have the same structure as [InternalChecker]{@link google.monitoring.v3.InternalChecker}
  *
  * @typedef UptimeCheckConfig
  * @memberof google.monitoring.v3
@@ -207,6 +212,33 @@ var UptimeCheckConfig = {
    * @see [google.monitoring.v3.UptimeCheckConfig.ContentMatcher definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
    */
   ContentMatcher: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Nimbus InternalCheckers.
+   *
+   * @property {string} projectId
+   *   The GCP project ID. Not necessarily the same as the project_id for the config.
+   *
+   * @property {string} network
+   *   The internal network to perform this uptime check on.
+   *
+   * @property {string} gcpZone
+   *   The GCP zone the uptime check should egress from. Only respected for
+   *   internal uptime checks, where internal_network is specified.
+   *
+   * @property {string} checkerId
+   *   The checker ID.
+   *
+   * @property {string} displayName
+   *   The checker's human-readable name.
+   *
+   * @typedef InternalChecker
+   * @memberof google.monitoring.v3
+   * @see [google.monitoring.v3.UptimeCheckConfig.InternalChecker definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
+   */
+  InternalChecker: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };

@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,13 @@
  * @namespace google
  */
 /**
- * @namespace google.api
+ * @namespace google.cloud
  */
 /**
- * @namespace google.protobuf
+ * @namespace google.cloud.monitoring
  */
 /**
- * @namespace google.monitoring
- */
-/**
- * @namespace google.monitoring.v3
+ * @namespace google.cloud.monitoring.v3
  */
 
 'use strict';
@@ -38,18 +35,26 @@ const gapic = Object.freeze({
 /**
  * The `@google-cloud/monitoring` package has the following named exports:
  *
+ * - `AlertPolicyServiceClient` - Reference to
+ *   {@link v3.AlertPolicyServiceClient}
  * - `GroupServiceClient` - Reference to
  *   {@link v3.GroupServiceClient}
  * - `MetricServiceClient` - Reference to
  *   {@link v3.MetricServiceClient}
+ * - `NotificationChannelServiceClient` - Reference to
+ *   {@link v3.NotificationChannelServiceClient}
  * - `UptimeCheckServiceClient` - Reference to
  *   {@link v3.UptimeCheckServiceClient}
  * - `v3` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
+ *     - `AlertPolicyServiceClient` - Reference to
+ *       {@link v3.AlertPolicyServiceClient}
  *     - `GroupServiceClient` - Reference to
  *       {@link v3.GroupServiceClient}
  *     - `MetricServiceClient` - Reference to
  *       {@link v3.MetricServiceClient}
+ *     - `NotificationChannelServiceClient` - Reference to
+ *       {@link v3.NotificationChannelServiceClient}
  *     - `UptimeCheckServiceClient` - Reference to
  *       {@link v3.UptimeCheckServiceClient}
  *
@@ -63,25 +68,25 @@ const gapic = Object.freeze({
  * const monitoring = require('@google-cloud/monitoring');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new monitoring.GroupServiceClient();
+ * const client = new monitoring.AlertPolicyServiceClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new monitoring.GroupServiceClient({
+ * const client = new monitoring.AlertPolicyServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
- *
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:monitoring_quickstart
- * Full quickstart example:
  */
 
 /**
  * @type {object}
+ * @property {constructor} AlertPolicyServiceClient
+ *   Reference to {@link v3.AlertPolicyServiceClient}
  * @property {constructor} GroupServiceClient
  *   Reference to {@link v3.GroupServiceClient}
  * @property {constructor} MetricServiceClient
  *   Reference to {@link v3.MetricServiceClient}
+ * @property {constructor} NotificationChannelServiceClient
+ *   Reference to {@link v3.NotificationChannelServiceClient}
  * @property {constructor} UptimeCheckServiceClient
  *   Reference to {@link v3.UptimeCheckServiceClient}
  */
@@ -89,10 +94,14 @@ module.exports = gapic.v3;
 
 /**
  * @type {object}
+ * @property {constructor} AlertPolicyServiceClient
+ *   Reference to {@link v3.AlertPolicyServiceClient}
  * @property {constructor} GroupServiceClient
  *   Reference to {@link v3.GroupServiceClient}
  * @property {constructor} MetricServiceClient
  *   Reference to {@link v3.MetricServiceClient}
+ * @property {constructor} NotificationChannelServiceClient
+ *   Reference to {@link v3.NotificationChannelServiceClient}
  * @property {constructor} UptimeCheckServiceClient
  *   Reference to {@link v3.UptimeCheckServiceClient}
  */

@@ -24,6 +24,7 @@ option go_package = "google.golang.org/genproto/googleapis/monitoring/v3;monitor
 option java_multiple_files = true;
 option java_outer_classname = "UptimeProto";
 option java_package = "com.google.monitoring.v3";
+option php_namespace = "Google\\Cloud\\Monitoring\\V3";
 
 
 // This message configures which resources and services to monitor for
@@ -104,6 +105,25 @@ message UptimeCheckConfig {
     string content = 1;
   }
 
+  // Nimbus InternalCheckers.
+  message InternalChecker {
+    // The GCP project ID. Not necessarily the same as the project_id for the config.
+    string project_id = 1;
+
+    // The internal network to perform this uptime check on.
+    string network = 2;
+
+    // The GCP zone the uptime check should egress from. Only respected for
+    // internal uptime checks, where internal_network is specified.
+    string gcp_zone = 3;
+
+    // The checker ID.
+    string checker_id = 4;
+
+    // The checker's human-readable name.
+    string display_name = 5;
+  }
+
   // A unique resource name for this UptimeCheckConfig. The format is:
   //
   //
@@ -158,6 +178,9 @@ message UptimeCheckConfig {
   // Not specifying this field will result in uptime checks running from all
   // regions.
   repeated UptimeCheckRegion selected_regions = 10;
+
+  // The internal checkers that this check will egress from.
+  repeated InternalChecker internal_checkers = 14;
 }
 
 // Contains the region, location, and list of IP
