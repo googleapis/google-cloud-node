@@ -47,8 +47,7 @@
  *   This object should have the same structure as [WebImage]{@link google.cloud.vision.v1p2beta1.WebImage}
  *
  * @property {Object[]} bestGuessLabels
- *   The service's best guess as to the topic of the request image.
- *   Inferred from similar images on the open web.
+ *   Best guess text labels for the request image.
  *
  *   This object should have the same structure as [WebLabel]{@link google.cloud.vision.v1p2beta1.WebLabel}
  *

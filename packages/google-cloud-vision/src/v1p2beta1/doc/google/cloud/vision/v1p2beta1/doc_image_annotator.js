@@ -768,7 +768,7 @@ var WebDetectionParams = {
  * Image context and/or feature-specific parameters.
  *
  * @property {Object} latLongRect
- *   lat/long rectangle that specifies the location of the image.
+ *   Not used.
  *
  *   This object should have the same structure as [LatLongRect]{@link google.cloud.vision.v1p2beta1.LatLongRect}
  *
