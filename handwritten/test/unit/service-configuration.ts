@@ -35,7 +35,7 @@ const serviceConfigEnv = {
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
 };
 function sterilizeServiceConfigEnv() {
-  forEach(serviceConfigEnv, function(val, key) {
+  forEach(serviceConfigEnv, (val, key) => {
     delete process.env[key];
   });
 }
@@ -50,7 +50,7 @@ function setEnv(serviceName, serviceVersion, moduleName, mv, fn) {
             GAE_MODULE_VERSION: mv,
             FUNCTION_NAME: fn,
           },
-          function(val) {
+          val => {
             return !isString(val);
           }));
 }
@@ -58,16 +58,16 @@ function restoreServiceConfigEnv() {
   assign(process.env, serviceConfigEnv);
 }
 
-describe('Testing service configuration', function() {
-  beforeEach(function() {
+describe('Testing service configuration', () => {
+  beforeEach(() => {
     sterilizeServiceConfigEnv();
   });
-  after(function() {
+  after(() => {
     restoreServiceConfigEnv();
   });
   it('A Configuration uses the function name as the service name on GCF ' +
          'if the service name is not given in the given config',
-     function() {
+     () => {
        setEnv(
            'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
            'someFunction');
@@ -80,7 +80,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the function name as the service name on GCF ' +
          'if the service name is not given in the given config ' +
          'even if the GAE_SERVICE was not set',
-     function() {
+     () => {
        setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
        const c = new Configuration({}, logger);
        assert.deepEqual(c.getServiceContext().service, 'someFunction');
@@ -91,7 +91,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the GAE_SERVICE env value as the service name ' +
          'if the FUNCTION_NAME env variable is not set and the given config ' +
          'does not specify the service name',
-     function() {
+     () => {
        setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
        const c = new Configuration({}, logger);
        assert.deepEqual(c.getServiceContext().service, 'someModuleName');
@@ -102,7 +102,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the service name in the given config if it ' +
          'was specified and both the GAE_SERVICE and FUNCTION_NAME ' +
          'env vars are set',
-     function() {
+     () => {
        setEnv(
            'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
            'someFunction');
@@ -121,7 +121,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the service name and version in the given config' +
          'they were both specified and both the GAE_SERVICE and FUNCTION_NAME ' +
          'env vars are set',
-     function() {
+     () => {
        setEnv(
            'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
            'someFunction');
@@ -139,7 +139,7 @@ describe('Testing service configuration', function() {
      });
   it('A Configuration uses the service name in the given config if it ' +
          'was specified and only the GAE_SERVICE env const is set',
-     function() {
+     () => {
        setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
        const c = new Configuration(
            {
@@ -155,7 +155,7 @@ describe('Testing service configuration', function() {
      });
   it('A Configuration uses the service name and version in the given config ' +
          'they were both specified and only the GAE_SERVICE env const is set',
-     function() {
+     () => {
        setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
        const c = new Configuration(
            {
@@ -171,7 +171,7 @@ describe('Testing service configuration', function() {
      });
   it('A Configuration uses the service name in the given config if it ' +
          'was specified and only the FUNCTION_NAME env const is set',
-     function() {
+     () => {
        setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
        const c = new Configuration(
            {
@@ -187,7 +187,7 @@ describe('Testing service configuration', function() {
      });
   it('A Configuration uses the service name and version in the given config ' +
          'if they were both specified and only the FUNCTION_NAME env const is set',
-     function() {
+     () => {
        setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
        const c = new Configuration(
            {
@@ -204,7 +204,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the service name "node" and no version if ' +
          'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
          'not specified a service name or version',
-     function() {
+     () => {
        const c = new Configuration({}, logger);
        assert.strictEqual(c.getServiceContext().service, 'node');
        assert.strictEqual(c.getServiceContext().version, undefined);
@@ -213,7 +213,7 @@ describe('Testing service configuration', function() {
          'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
          'not specified a service name or version even if GAE_VERSION has ' +
          'been set',
-     function() {
+     () => {
        setEnv(null, 'InvalidVersion', null, 'InvalidVersion', null);
        const c = new Configuration({}, logger);
        assert.strictEqual(c.getServiceContext().service, 'node');
@@ -222,7 +222,7 @@ describe('Testing service configuration', function() {
   it('A Configuration uses the service name "node" and the user specified ' +
          'version if GAE_SERVICE is not set, FUNCTION_NAME is not set, and the ' +
          'user has not specified a service name but has specified a version',
-     function() {
+     () => {
        const c = new Configuration(
            {
              serviceContext: {
