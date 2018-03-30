@@ -27,7 +27,8 @@ const logger = createLogger({
 });
 import * as nock from 'nock';
 
-const METADATA_URL = 'http://metadata.google.internal/computeMetadata/v1/project';
+const METADATA_URL =
+    'http://metadata.google.internal/computeMetadata/v1/project';
 
 const configEnv = {
   NODE_ENV: process.env.NODE_ENV,
@@ -51,271 +52,276 @@ function createDeadMetadataService() {
   return nock(METADATA_URL).get('/project-id').times(1).reply(500);
 }
 
-describe('Configuration class', function() {
-  before(function() {
+describe('Configuration class', () => {
+  before(() => {
     sterilizeConfigEnv();
   });
-  after(function() {
+  after(() => {
     restoreConfigEnv();
   });
-  describe('Initialization', function() {
+  describe('Initialization', () => {
     const f = new Fuzzer();
     const stubConfig = {test: true};
-    describe('fuzzing the constructor', function() {
-      it('Should return default values', function() {
+    describe('fuzzing the constructor', () => {
+      it('Should return default values', () => {
         let c;
-        f.fuzzFunctionForTypes(function(givenConfigFuzz) {
+        f.fuzzFunctionForTypes(givenConfigFuzz => {
           c = new Configuration(givenConfigFuzz, logger);
           assert.deepEqual(c._givenConfiguration, {});
         }, ['object']);
       });
     });
-    describe('valid config and default values', function() {
+    describe('valid config and default values', () => {
       let c;
-      before(function() {
+      before(() => {
         process.env.NODE_ENV = 'development';
       });
-      after(function() {
+      after(() => {
         sterilizeConfigEnv();
       });
-      it('Should not throw with a valid configuration', function() {
-        assert.doesNotThrow(function() {
+      it('Should not throw with a valid configuration', () => {
+        assert.doesNotThrow(() => {
           c = new Configuration(stubConfig, logger);
         });
       });
-      it('Should have a property reflecting the config argument', function() {
+      it('Should have a property reflecting the config argument', () => {
         assert.deepEqual(c._givenConfiguration, stubConfig);
       });
-      it('Should not have a project id', function() {
+      it('Should not have a project id', () => {
         assert.strictEqual(c._projectId, null);
       });
-      it('Should not have a key', function() {
+      it('Should not have a key', () => {
         assert.strictEqual(c.getKey(), null);
       });
-      it('Should have a default service context', function() {
+      it('Should have a default service context', () => {
         assert.deepEqual(c.getServiceContext(), {
           service: 'node',
           version: undefined,
         });
       });
-      it('Should specify to not report unhandledRejections', function() {
+      it('Should specify to not report unhandledRejections', () => {
         assert.strictEqual(c.getReportUnhandledRejections(), false);
       });
     });
-    describe('with ignoreEnvironmentCheck', function() {
+    describe('with ignoreEnvironmentCheck', () => {
       const conf = merge({}, stubConfig, {ignoreEnvironmentCheck: true});
       const c = new Configuration(conf, logger);
-      it('Should reportErrorsToAPI', function() {
+      it('Should reportErrorsToAPI', () => {
         assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
       });
     });
-    describe('without ignoreEnvironmentCheck', function() {
-      describe('report behaviour with production env', function() {
+    describe('without ignoreEnvironmentCheck', () => {
+      describe('report behaviour with production env', () => {
         let c;
-        before(function() {
+        before(() => {
           sterilizeConfigEnv();
           process.env.NODE_ENV = 'production';
           c = new Configuration(undefined, logger);
         });
-        after(function() {
+        after(() => {
           sterilizeConfigEnv();
         });
-        it('Should reportErrorsToAPI', function() {
+        it('Should reportErrorsToAPI', () => {
           assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
         });
       });
-      describe('exception behaviour', function() {
-        it('Should throw if invalid type for key', function() {
-          assert.throws(function() {
+      describe('exception behaviour', () => {
+        it('Should throw if invalid type for key', () => {
+          assert.throws(() => {
+            // tslint:disable-next-line:no-unused-expression
             new Configuration({key: null}, logger);
           });
         });
-        it('Should throw if invalid for ignoreEnvironmentCheck', function() {
-          assert.throws(function() {
+        it('Should throw if invalid for ignoreEnvironmentCheck', () => {
+          assert.throws(() => {
+            // tslint:disable-next-line:no-unused-expression
             new Configuration({ignoreEnvironmentCheck: null}, logger);
           });
         });
-        it('Should throw if invalid for serviceContext.service', function() {
-          assert.throws(function() {
+        it('Should throw if invalid for serviceContext.service', () => {
+          assert.throws(() => {
+            // tslint:disable-next-line:no-unused-expression
             new Configuration({serviceContext: {service: false}}, logger);
           });
         });
-        it('Should throw if invalid for serviceContext.version', function() {
-          assert.throws(function() {
+        it('Should throw if invalid for serviceContext.version', () => {
+          assert.throws(() => {
+            // tslint:disable-next-line:no-unused-expression
             new Configuration({serviceContext: {version: true}}, logger);
           });
         });
-        it('Should throw if invalid for reportUnhandledRejections', function() {
-          assert.throws(function() {
+        it('Should throw if invalid for reportUnhandledRejections', () => {
+          assert.throws(() => {
+            // tslint:disable-next-line:no-unused-expression
             new Configuration({reportUnhandledRejections: 'INVALID'}, logger);
           });
         });
-        it('Should not throw given an empty object for serviceContext',
-           function() {
-             assert.doesNotThrow(function() {
-               new Configuration({serviceContext: {}}, logger);
-             });
-           });
+        it('Should not throw given an empty object for serviceContext', () => {
+          assert.doesNotThrow(() => {
+            // tslint:disable-next-line:no-unused-expression
+            new Configuration({serviceContext: {}}, logger);
+          });
+        });
       });
     });
   });
-  describe('Configuration resource aquisition', function() {
-    before(function() {
+  describe('Configuration resource aquisition', () => {
+    before(() => {
       sterilizeConfigEnv();
     });
-    describe('project id from configuration instance', function() {
+    describe('project id from configuration instance', () => {
       const pi = 'test';
       let c;
-      before(function() {
+      before(() => {
         c = new Configuration({projectId: pi}, logger);
       });
-      after(function() {
+      after(() => {
         nock.cleanAll();
       });
-      it('Should return the project id', function() {
+      it('Should return the project id', () => {
         assert.strictEqual(c.getProjectId(), pi);
       });
     });
-    describe('project number from configuration instance', function() {
+    describe('project number from configuration instance', () => {
       const pn = 1234;
       let c;
-      before(function() {
+      before(() => {
         sterilizeConfigEnv();
         c = new Configuration({projectId: pn}, logger);
       });
-      after(function() {
+      after(() => {
         nock.cleanAll();
         sterilizeConfigEnv();
       });
-      it('Should return the project number', function() {
+      it('Should return the project number', () => {
         assert.strictEqual(c.getProjectId(), pn.toString());
       });
     });
   });
-  describe('Exception behaviour', function() {
-    describe('While lacking a project id', function() {
+  describe('Exception behaviour', () => {
+    describe('While lacking a project id', () => {
       let c;
-      before(function() {
+      before(() => {
         sterilizeConfigEnv();
         createDeadMetadataService();
         c = new Configuration(undefined, logger);
       });
-      after(function() {
+      after(() => {
         nock.cleanAll();
         sterilizeConfigEnv();
       });
-      it('Should return null', function() {
+      it('Should return null', () => {
         assert.strictEqual(c.getProjectId(), null);
       });
     });
-    describe('Invalid type for projectId in runtime config', function() {
+    describe('Invalid type for projectId in runtime config', () => {
       let c;
-      before(function() {
+      before(() => {
         sterilizeConfigEnv();
         createDeadMetadataService();
         c = new Configuration({projectId: null}, logger);
       });
-      after(function() {
+      after(() => {
         nock.cleanAll();
         sterilizeConfigEnv();
       });
-      it('Should return null', function() {
+      it('Should return null', () => {
         assert.strictEqual(c.getProjectId(), null);
       });
     });
   });
-  describe('Resource aquisition', function() {
-    after(function() {
+  describe('Resource aquisition', () => {
+    after(() => {
       /*
        * !! IMPORTANT !!
-       * THE restoreConfigEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE EXITS
-       * AND SHOULD THEREFORE BE THE LAST THING TO EXECUTE FROM THIS FILE.
+       * THE restoreConfigEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE
+       * EXITS AND SHOULD THEREFORE BE THE LAST THING TO EXECUTE FROM THIS FILE.
        * !! IMPORTANT !!
        */
       restoreConfigEnv();
     });
-    describe('via env', function() {
-      before(function() {
+    describe('via env', () => {
+      before(() => {
         sterilizeConfigEnv();
       });
-      afterEach(function() {
+      afterEach(() => {
         sterilizeConfigEnv();
       });
-      describe('no longer tests env itself', function() {
+      describe('no longer tests env itself', () => {
         let c;
         const projectId = 'test-xyz';
-        before(function() {
+        before(() => {
           process.env.GCLOUD_PROJECT = projectId;
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', function() {
+        it('Should assign', () => {
           assert.strictEqual(c.getProjectId(), null);
         });
       });
-      describe('serviceContext', function() {
+      describe('serviceContext', () => {
         let c;
         const projectId = 'test-abc';
         const serviceContext = {
           service: 'test',
           version: '1.x',
         };
-        before(function() {
+        before(() => {
           process.env.GCLOUD_PROJECT = projectId;
           process.env.GAE_MODULE_NAME = serviceContext.service;
           process.env.GAE_MODULE_VERSION = serviceContext.version;
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', function() {
+        it('Should assign', () => {
           assert.deepEqual(c.getServiceContext(), serviceContext);
         });
       });
     });
-    describe('via runtime configuration', function() {
-      before(function() {
+    describe('via runtime configuration', () => {
+      before(() => {
         sterilizeConfigEnv();
       });
-      describe('serviceContext', function() {
+      describe('serviceContext', () => {
         let c;
         const projectId = 'xyz123';
         const serviceContext = {
           service: 'evaluation',
           version: '2.x',
         };
-        before(function() {
+        before(() => {
           c = new Configuration({
-            projectId: projectId,
-            serviceContext: serviceContext,
+            projectId,
+            serviceContext,
           });
         });
-        it('Should assign', function() {
+        it('Should assign', () => {
           assert.deepEqual(c.getServiceContext(), serviceContext);
         });
       });
-      describe('api key', function() {
+      describe('api key', () => {
         let c;
         const projectId = '987abc';
         const key = '1337-api-key';
-        before(function() {
+        before(() => {
           c = new Configuration(
               {
-                key: key,
-                projectId: projectId,
+                key,
+                projectId,
               },
               logger);
         });
-        it('Should assign', function() {
+        it('Should assign', () => {
           assert.strictEqual(c.getKey(), key);
         });
       });
-      describe('reportUnhandledRejections', function() {
+      describe('reportUnhandledRejections', () => {
         let c;
         const reportRejections = false;
-        before(function() {
+        before(() => {
           c = new Configuration({
             reportUnhandledRejections: reportRejections,
           });
         });
-        it('Should assign', function() {
+        it('Should assign', () => {
           assert.strictEqual(
               c.getReportUnhandledRejections(), reportRejections);
         });

@@ -15,13 +15,14 @@
  */
 
 import * as assert from 'assert';
-import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
-import {Fuzzer} from '../../../utils/fuzzer';
 import * as hapi from 'hapi';
 
-describe('hapiRequestInformationExtractor behaviour', function() {
-  describe('behaviour given invalid input', function() {
-    it('Should produce the default value', function() {
+import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
+import {Fuzzer} from '../../../utils/fuzzer';
+
+describe('hapiRequestInformationExtractor behaviour', () => {
+  describe('behaviour given invalid input', () => {
+    it('Should produce the default value', () => {
       const DEFAULT_RETURN_VALUE = {
         method: '',
         url: '',
@@ -31,13 +32,13 @@ describe('hapiRequestInformationExtractor behaviour', function() {
         remoteAddress: '',
       };
       const f = new Fuzzer();
-      const cbFn = function(value) {
+      const cbFn = value => {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(hapiRequestInformationExtractor, ['object'], cbFn);
     });
   });
-  describe('behaviour given valid input', function() {
+  describe('behaviour given valid input', () => {
     const FULL_REQ_DERIVATION_VALUE = {
       method: 'STUB_METHOD',
       url: 'www.TEST-URL.com',
@@ -101,19 +102,22 @@ describe('hapiRequestInformationExtractor behaviour', function() {
       remoteAddress: '',
       statusCode: 0,
     };
-    it('Should produce the full request input', function() {
+    it('Should produce the full request input', () => {
       assert.deepEqual(
-          hapiRequestInformationExtractor(FULL_REQ_DERIVATION_VALUE as {} as hapi.Request),
+          hapiRequestInformationExtractor(
+              FULL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           FULL_REQ_EXPECTED_VALUE);
     });
-    it('Should produce the partial request input', function() {
+    it('Should produce the partial request input', () => {
       assert.deepEqual(
-          hapiRequestInformationExtractor(PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
+          hapiRequestInformationExtractor(
+              PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           PARTIAL_REQ_EXPECTED_VALUE);
     });
-    it('Should produce the second partial request input', function() {
+    it('Should produce the second partial request input', () => {
       assert.deepEqual(
-          hapiRequestInformationExtractor(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
+          hapiRequestInformationExtractor(
+              ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           ANOTHER_PARTIAL_REQ_EXPECTED_VALUE);
     });
   });

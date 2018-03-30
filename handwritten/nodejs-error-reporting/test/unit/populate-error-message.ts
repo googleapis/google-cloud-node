@@ -21,7 +21,10 @@ import {populateErrorMessage} from '../../src/populate-error-message';
 
 const TEST_USER_INVALID = 12;
 const TEST_MESSAGE = 'This is a test';
-const TEST_SERVICE_DEFAULT = {service: 'node', version: undefined};
+const TEST_SERVICE_DEFAULT = {
+  service: 'node',
+  version: undefined
+};
 const TEST_STACK_DEFAULT = {
   filePath: '',
   lineNumber: 0,
@@ -39,9 +42,9 @@ interface AnnotatedError {
   filePath?: {};
   lineNumber?: {};
   functionName?: {};
-};
+}
 
-describe('populate-error-message', function() {
+describe('populate-error-message', () => {
   let em;
   const adversarialObjectInput = {
     stack: {},
@@ -49,39 +52,39 @@ describe('populate-error-message', function() {
   const adversarialObjectInputTwo = {
     stack: [],
   };
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
 
-  it('Should not throw given undefined', function() {
+  it('Should not throw given undefined', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, undefined, em));
   });
 
-  it('Should not throw given null', function() {
+  it('Should not throw given null', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, null, em));
   });
 
-  it('Should not throw given a string', function() {
+  it('Should not throw given a string', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, 'string_test', em));
   });
 
-  it('Should not throw given a number', function() {
+  it('Should not throw given a number', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, 1.2, em));
   });
 
-  it('Should not throw given an array', function() {
+  it('Should not throw given an array', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, [], em));
   });
 
-  it('Should not throw given an object', function() {
+  it('Should not throw given an object', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, {}, em));
   });
 
-  it('Should not throw given an instance of Error', function() {
+  it('Should not throw given an instance of Error', () => {
     assert.doesNotThrow(populateErrorMessage.bind(null, new Error(), em));
   });
 
-  it('Should not throw given an object of invalid form', function() {
+  it('Should not throw given an object of invalid form', () => {
     assert.doesNotThrow(
         populateErrorMessage.bind(null, adversarialObjectInput, em));
     assert.doesNotThrow(
@@ -89,7 +92,7 @@ describe('populate-error-message', function() {
   });
 
   it('Message Field: Should set the message as the stack given an Error',
-     function() {
+     () => {
        const err = new Error(TEST_MESSAGE);
        populateErrorMessage(err, em);
        assert.deepEqual(
@@ -99,8 +102,8 @@ describe('populate-error-message', function() {
      });
 
   it('Message Field: Should set the field given valid input given an object',
-     function() {
-      let err = {};
+     () => {
+       let err = {};
        const MESSAGE = 'test';
        err = {message: MESSAGE};
        populateErrorMessage(err, em);
@@ -109,14 +112,14 @@ describe('populate-error-message', function() {
 
   it('Message Field: Should default the field given lack-of input given ' +
          'an object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert(em.message.startsWith('[object Object]'));
      });
 
   it('User Field: Should set the field given valid input given an Error',
-     function() {
+     () => {
        const err: AnnotatedError = new Error();
        const TEST_USER_VALID = 'TEST_USER';
        err.user = TEST_USER_VALID;
@@ -125,7 +128,7 @@ describe('populate-error-message', function() {
      });
 
   it('User Field: Should default the field given invalid input given an Error',
-     function() {
+     () => {
        const err: AnnotatedError = new Error();
        err.user = TEST_USER_INVALID;
        populateErrorMessage(err, em);
@@ -133,7 +136,7 @@ describe('populate-error-message', function() {
      });
 
   it('User Field: Should set the field given valid input given an object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const USER = 'test';
        err.user = USER;
@@ -143,7 +146,7 @@ describe('populate-error-message', function() {
 
   it('User Field: Should default the field given lack-of input given an ' +
          'object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert.strictEqual(em.context.user, '');
@@ -151,7 +154,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should set the field given valid input given ' +
          'an Error',
-     function() {
+     () => {
        const err: AnnotatedError = new Error();
        const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
        err.serviceContext = TEST_SERVICE_VALID;
@@ -161,7 +164,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should default the field given invalid input ' +
          'given an Error',
-     function() {
+     () => {
        const err: AnnotatedError = new Error();
        const TEST_SERVICE_INVALID = 12;
        err.serviceContext = TEST_SERVICE_INVALID;
@@ -171,7 +174,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should default the field if not given input ' +
          'given an Error',
-     function() {
+     () => {
        const err = new Error();
        populateErrorMessage(err, em);
        assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
@@ -179,7 +182,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should set the field given valid input given an ' +
          'object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
        err.serviceContext = TEST_SERVICE_VALID;
@@ -189,7 +192,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should default the field given invalid input ' +
          'given an object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const TEST_SERVICE_INVALID = 12;
        err.serviceContext = TEST_SERVICE_INVALID;
@@ -199,7 +202,7 @@ describe('populate-error-message', function() {
 
   it('ServiceContext Field: Should default the field given lack-of input ' +
          'given an object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert.deepEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
@@ -207,7 +210,7 @@ describe('populate-error-message', function() {
 
   it('Report location Field: Should default the field if given invalid input ' +
          'given an Error',
-     function() {
+     () => {
        const TEST_STACK_INVALID_CONTENTS = {
          filePath: null,
          lineNumber: '2',
@@ -221,7 +224,7 @@ describe('populate-error-message', function() {
 
   it('Report location Field: Should default field if not given a valid type ' +
          'given an Error',
-     function() {
+     () => {
        const err: AnnotatedError = new Error();
        const TEST_STACK_INVALID_TYPE = [];
        err.stack = TEST_STACK_INVALID_TYPE;
@@ -230,7 +233,7 @@ describe('populate-error-message', function() {
      });
 
   it('FilePath Field: Should set the field given valid input given an object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const PATH = 'test';
        err.filePath = PATH;
@@ -240,14 +243,14 @@ describe('populate-error-message', function() {
 
   it('FilePath Field: Should default the field given lack-of input given ' +
          'an object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert.strictEqual(em.context.reportLocation.filePath, '');
      });
 
   it('LineNumber Field: Should set the field given valid input given an object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const LINE_NUMBER = 10;
        err.lineNumber = LINE_NUMBER;
@@ -257,7 +260,7 @@ describe('populate-error-message', function() {
 
   it('LineNumber Field: Should default the field given lack-of input given ' +
          'an object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert.strictEqual(em.context.reportLocation.lineNumber, 0);
@@ -265,7 +268,7 @@ describe('populate-error-message', function() {
 
   it('FunctionName Field: Should set the field given valid input given ' +
          'an object',
-     function() {
+     () => {
        const err: AnnotatedError = {};
        const FUNCTION_NAME = 'test';
        err.functionName = FUNCTION_NAME;
@@ -276,7 +279,7 @@ describe('populate-error-message', function() {
 
   it('FunctionName Field: Should default the field given lack-of input given ' +
          'an object',
-     function() {
+     () => {
        const err = {};
        populateErrorMessage(err, em);
        assert.strictEqual(em.context.reportLocation.functionName, '');

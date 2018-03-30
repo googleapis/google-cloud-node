@@ -37,7 +37,7 @@ server.start(err => {
 server.route({
   method: 'GET',
   path: '/get',
-  handler: function() {
+  handler() {
     log('Got a GET');
     throw new Error('an error');
   },
@@ -46,14 +46,15 @@ server.route({
 server.route({
   method: 'POST',
   path: '/post',
-  handler: function(request) {
+  handler(request) {
     log('Got a POST', request.payload);
     throw new Error('An error on the hapi post route');
   },
 });
 
-server.register({register: errorHandler.hapi} as {} as hapi.PluginFunction<{}>, err => {
-  if (err) {
-    error('There was an error in registering the plugin', err);
-  }
-});
+server.register(
+    {register: errorHandler.hapi} as {} as hapi.PluginFunction<{}>, err => {
+      if (err) {
+        error('There was an error in registering the plugin', err);
+      }
+    });

@@ -28,32 +28,29 @@ export class ErrorsApiTransport extends AuthClient {
 
   deleteAllEvents(cb) {
     const self = this;
-    self.getProjectId(function(err, id) {
+    self.getProjectId((err, id) => {
       if (err) {
         return cb(err);
       }
 
-      const options = {
-        uri: [API, id, 'events'].join('/'),
-        method: 'DELETE'
-      };
-      self.request_(options, function(
-        err,
-        /* jshint unused:false */ response,
-        /* jshint unused:false */ body
-      ) {
-        if (err) {
-          return cb(err);
-        }
+      const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
+      self.request_(
+          options,
+          (err,
+           /* jshint unused:false */ response,
+           /* jshint unused:false */ body) => {
+            if (err) {
+              return cb(err);
+            }
 
-        cb(null);
-      });
+            cb(null);
+          });
     });
   }
 
   getAllGroups(cb) {
     const self = this;
-    self.getProjectId(function(err, id) {
+    self.getProjectId((err, id) => {
       if (err) {
         return cb(err);
       }
@@ -62,7 +59,7 @@ export class ErrorsApiTransport extends AuthClient {
         uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
         method: 'GET'
       };
-      self.request_(options, function(err, response, body) {
+      self.request_(options, (err, response, body) => {
         if (err) {
           return cb(err);
         }
