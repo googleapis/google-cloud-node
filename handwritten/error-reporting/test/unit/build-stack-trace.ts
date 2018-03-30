@@ -20,18 +20,18 @@ import {buildStackTrace} from '../../src/build-stack-trace';
 
 const SRC_ROOT = path.join(__dirname, '..', '..', 'src');
 
-describe('build-stack-trace', function() {
-  it('Should not have a message attached if none is given', function() {
+describe('build-stack-trace', () => {
+  it('Should not have a message attached if none is given', () => {
     assert(buildStackTrace().startsWith('    at'));
     assert(!buildStackTrace(undefined).startsWith('undefined'));
     assert(!buildStackTrace(null).startsWith('null'));
   });
 
-  it('Should attach a message if given', function() {
+  it('Should attach a message if given', () => {
     assert(buildStackTrace('Some Message').startsWith('Some Message\n'));
   });
 
-  it('Should not contain error-reporting specific frames', function() {
+  it('Should not contain error-reporting specific frames', () => {
     (function functionA() {
       (function functionB() {
         (function functionC() {
@@ -43,7 +43,7 @@ describe('build-stack-trace', function() {
     })();
   });
 
-  it('Should return the stack trace', function() {
+  it('Should return the stack trace', () => {
     (function functionA() {
       (function functionB() {
         (function functionC() {

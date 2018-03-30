@@ -18,21 +18,21 @@
 
 import * as assert from 'assert';
 import {ErrorMessage} from '../../../src/classes/error-message';
-import { RequestInformationContainer } from '../../../src/classes/request-information-container';
+import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 
-describe('Instantiating a new ErrorMessage', function() {
+describe('Instantiating a new ErrorMessage', () => {
   let em;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
 
-  it('Should have a default service context', function() {
+  it('Should have a default service context', () => {
     assert.deepEqual(em.serviceContext, {service: 'node', version: undefined});
   });
-  it('Should have a default message', function() {
+  it('Should have a default message', () => {
     assert.strictEqual(em.message, '');
   });
-  it('Should have a default http context', function() {
+  it('Should have a default http context', () => {
     assert.deepEqual(em.context.httpRequest, {
       method: '',
       url: '',
@@ -42,7 +42,7 @@ describe('Instantiating a new ErrorMessage', function() {
       remoteIp: '',
     });
   });
-  it('Should have a default reportLocation', function() {
+  it('Should have a default reportLocation', () => {
     assert.deepEqual(em.context.reportLocation, {
       filePath: '',
       lineNumber: 0,
@@ -51,28 +51,28 @@ describe('Instantiating a new ErrorMessage', function() {
   });
 });
 
-describe('Calling against setEventTimeToNow', function() {
+describe('Calling against setEventTimeToNow', () => {
   let em;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set the eventTime property', function() {
+  it('Should set the eventTime property', () => {
     em.setEventTimeToNow();
     assert(typeof em.eventTime === 'string');
   });
 });
 
-describe('Fuzzing against setServiceContext', function() {
+describe('Fuzzing against setServiceContext', () => {
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const DEFAULT_TEST_VALUE = 'DEFAULT';
   const DEFAULT_VERSION_VALUE = undefined;
   const DEFAULT_SERVICE_VALUE = 'node';
   let em;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
 
-  it('Should set the value for service context', function() {
+  it('Should set the value for service context', () => {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, AFFIRMATIVE_TEST_VALUE);
     assert.deepEqual(
         em.serviceContext, {
@@ -84,7 +84,7 @@ describe('Fuzzing against setServiceContext', function() {
           'and by setting this value this should mutate the instance',
         ].join(' '));
   });
-  it('Should set the default values', function() {
+  it('Should set the default values', () => {
     em.setServiceContext(DEFAULT_TEST_VALUE, DEFAULT_TEST_VALUE);
     assert.deepEqual(
         em.serviceContext, {
@@ -96,7 +96,7 @@ describe('Fuzzing against setServiceContext', function() {
           'value update',
         ].join(' '));
   });
-  it('Should still set version with affirmative value', function() {
+  it('Should still set version with affirmative value', () => {
     em.setServiceContext(null, AFFIRMATIVE_TEST_VALUE);
     assert.deepEqual(
         em.serviceContext, {
@@ -109,7 +109,7 @@ describe('Fuzzing against setServiceContext', function() {
           'but set the version property to the affirmative value.',
         ].join(' '));
   });
-  it('Should still set service with affirmative value', function() {
+  it('Should still set service with affirmative value', () => {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, null);
     assert.deepEqual(
         em.serviceContext, {
@@ -122,7 +122,7 @@ describe('Fuzzing against setServiceContext', function() {
           'but set the service property to the affirmative value.',
         ].join(' '));
   });
-  it('Should set default values on both', function() {
+  it('Should set default values on both', () => {
     em.setServiceContext(null, null);
     assert.deepEqual(
         em.serviceContext, {
@@ -134,7 +134,7 @@ describe('Fuzzing against setServiceContext', function() {
           'properties as empty strings.',
         ].join(' '));
   });
-  it('Should set default values on both', function() {
+  it('Should set default values on both', () => {
     em.setServiceContext(2, 1.3);
     assert.deepEqual(
         em.serviceContext, {
@@ -146,7 +146,7 @@ describe('Fuzzing against setServiceContext', function() {
           'properties as empty strings.',
         ].join(' '));
   });
-  it('Should set as default', function() {
+  it('Should set as default', () => {
     em.setServiceContext({test: 'true'}, []);
     assert.deepEqual(
         em.serviceContext, {
@@ -158,7 +158,7 @@ describe('Fuzzing against setServiceContext', function() {
           'should set both properties as empty strings.',
         ].join(' '));
   });
-  it('Should set as default', function() {
+  it('Should set as default', () => {
     em.setServiceContext();
     assert.deepEqual(
         em.serviceContext, {
@@ -169,22 +169,22 @@ describe('Fuzzing against setServiceContext', function() {
   });
 });
 
-describe('Fuzzing against setMessage', function() {
+describe('Fuzzing against setMessage', () => {
   let em;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
 
-  it('Should set the message', function() {
+  it('Should set the message', () => {
     em.setMessage(AFFIRMATIVE_TEST_VALUE);
     assert(em.message === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setMessage();
     assert(em.message === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setMessage the property',
@@ -193,21 +193,21 @@ describe('Fuzzing against setMessage', function() {
   });
 });
 
-describe('Fuzzing against setHttpMethod', function() {
+describe('Fuzzing against setHttpMethod', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set the method', function() {
+  it('Should set the method', () => {
     em.setHttpMethod(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.method === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setHttpMethod();
     assert(em.context.httpRequest.method === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setHttpMethod the property',
@@ -216,21 +216,21 @@ describe('Fuzzing against setHttpMethod', function() {
   });
 });
 
-describe('Fuzzing against setUrl', function() {
+describe('Fuzzing against setUrl', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set url', function() {
+  it('Should set url', () => {
     em.setUrl(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.url === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setUrl();
     assert(em.context.httpRequest.url === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setUrl the property',
@@ -239,21 +239,21 @@ describe('Fuzzing against setUrl', function() {
   });
 });
 
-describe('Fuzzing against setUserAgent', function() {
+describe('Fuzzing against setUserAgent', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set userAgent', function() {
+  it('Should set userAgent', () => {
     em.setUserAgent(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.userAgent === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setUserAgent();
     assert(em.context.httpRequest.userAgent === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setUserAgent the property',
@@ -262,21 +262,21 @@ describe('Fuzzing against setUserAgent', function() {
   });
 });
 
-describe('Fuzzing against setReferrer', function() {
+describe('Fuzzing against setReferrer', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set referrer', function() {
+  it('Should set referrer', () => {
     em.setReferrer(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.referrer === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setReferrer();
     assert(em.context.httpRequest.referrer === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setReferrer the property',
@@ -285,21 +285,21 @@ describe('Fuzzing against setReferrer', function() {
   });
 });
 
-describe('Fuzzing against setResponseStatusCode', function() {
+describe('Fuzzing against setResponseStatusCode', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 200;
   const NEGATIVE_TEST_VALUE = 0;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set responseStatusCode', function() {
+  it('Should set responseStatusCode', () => {
     em.setResponseStatusCode(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.responseStatusCode === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setResponseStatusCode();
     assert(em.context.httpRequest.responseStatusCode === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setResponseStatusCode the property',
@@ -308,21 +308,21 @@ describe('Fuzzing against setResponseStatusCode', function() {
   });
 });
 
-describe('Fuzzing against setRemoteIp', function() {
+describe('Fuzzing against setRemoteIp', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set remoteIp', function() {
+  it('Should set remoteIp', () => {
     em.setRemoteIp(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.httpRequest.remoteIp === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setRemoteIp();
     assert(em.context.httpRequest.remoteIp === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setRemoteIp the property',
@@ -331,21 +331,21 @@ describe('Fuzzing against setRemoteIp', function() {
   });
 });
 
-describe('Fuzzing against setUser', function() {
+describe('Fuzzing against setUser', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set user', function() {
+  it('Should set user', () => {
     em.setUser(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.user === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setUser();
     assert(em.context.user === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setUser the property',
@@ -354,21 +354,21 @@ describe('Fuzzing against setUser', function() {
   });
 });
 
-describe('Fuzzing against setFilePath', function() {
+describe('Fuzzing against setFilePath', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set filePath', function() {
+  it('Should set filePath', () => {
     em.setFilePath(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.reportLocation.filePath === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setFilePath();
     assert(em.context.reportLocation.filePath === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setFilePath the property',
@@ -377,21 +377,21 @@ describe('Fuzzing against setFilePath', function() {
   });
 });
 
-describe('Fuzzing against setLineNumber', function() {
+describe('Fuzzing against setLineNumber', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 27;
   const NEGATIVE_TEST_VALUE = 0;
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set lineNumber', function() {
+  it('Should set lineNumber', () => {
     em.setLineNumber(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.reportLocation.lineNumber === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setLineNumber();
     assert(em.context.reportLocation.lineNumber === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setLineNumber the property',
@@ -400,21 +400,21 @@ describe('Fuzzing against setLineNumber', function() {
   });
 });
 
-describe('Fuzzing against setFunctionName', function() {
+describe('Fuzzing against setFunctionName', () => {
   let em;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
-  beforeEach(function() {
+  beforeEach(() => {
     em = new ErrorMessage();
   });
-  it('Should set functionName', function() {
+  it('Should set functionName', () => {
     em.setFunctionName(AFFIRMATIVE_TEST_VALUE);
     assert(em.context.reportLocation.functionName === AFFIRMATIVE_TEST_VALUE, [
       'In the affirmative case the value should be settable to a valid string',
       'and by setting this value this should mutate the instance',
     ].join(' '));
   });
-  it('Should default', function() {
+  it('Should default', () => {
     em.setFunctionName();
     assert(em.context.reportLocation.functionName === NEGATIVE_TEST_VALUE, [
       'By providing no argument (undefined) to setFunctionName the property',
@@ -423,7 +423,7 @@ describe('Fuzzing against setFunctionName', function() {
   });
 });
 
-describe('Fuzzing against consumeRequestInformation', function() {
+describe('Fuzzing against consumeRequestInformation', () => {
   const em = new ErrorMessage();
   const A_VALID_STRING = 'A_VALID_STRING';
   const A_VALID_NUMBER = 201;
@@ -446,8 +446,9 @@ describe('Fuzzing against consumeRequestInformation', function() {
     statusCode: A_VALID_STRING,
     remoteAddress: undefined,
   };
-  it('Should consume the stubbed request object', function() {
-    em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE as RequestInformationContainer);
+  it('Should consume the stubbed request object', () => {
+    em.consumeRequestInformation(
+        AFFIRMATIVE_TEST_VALUE as RequestInformationContainer);
     assert(em.context.httpRequest.method === A_VALID_STRING, [
       'The error messages method, given a valid string, should be',
       'set to that value',
@@ -473,7 +474,7 @@ describe('Fuzzing against consumeRequestInformation', function() {
       'set to that value',
     ].join(' '));
   });
-  it('Should default when consuming a malformed request object', function() {
+  it('Should default when consuming a malformed request object', () => {
     em.consumeRequestInformation(null!);
     assert(em.context.httpRequest.method === A_VALID_STRING, [
       'The error messages method, given an invalid type a the top-level',
@@ -500,8 +501,9 @@ describe('Fuzzing against consumeRequestInformation', function() {
       'should remain untouched',
     ].join(' '));
   });
-  it('Should default when consuming mistyped response object properties', function() {
-    em.consumeRequestInformation(NEGATIVE_TEST_VALUE as {} as RequestInformationContainer);
+  it('Should default when consuming mistyped response object properties', () => {
+    em.consumeRequestInformation(
+        NEGATIVE_TEST_VALUE as {} as RequestInformationContainer);
     assert(em.context.httpRequest.method === NEGATIVE_STRING_CASE, [
       'The error messages method, given an invalid input should default to',
       'the negative value',
@@ -527,18 +529,18 @@ describe('Fuzzing against consumeRequestInformation', function() {
       'the negative value',
     ].join(' '));
   });
-  it('Should return the instance on calling consumeRequestInformation',
-     function() {
-       assert(
-           em.consumeRequestInformation(AFFIRMATIVE_TEST_VALUE as RequestInformationContainer) instanceof
-               ErrorMessage,
-           [
-             'Calling consumeRequestInformation with valid input should return',
-             'the ErrorMessage instance',
-           ].join(' '));
-       assert(em.consumeRequestInformation(undefined!) instanceof ErrorMessage, [
-         'Calling consumeRequestInformation with invalid input should return',
-         'the ErrorMessage instance',
-       ].join(' '));
-     });
+  it('Should return the instance on calling consumeRequestInformation', () => {
+    assert(
+        em.consumeRequestInformation(
+            AFFIRMATIVE_TEST_VALUE as RequestInformationContainer)
+                instanceof ErrorMessage,
+        [
+          'Calling consumeRequestInformation with valid input should return',
+          'the ErrorMessage instance',
+        ].join(' '));
+    assert(em.consumeRequestInformation(undefined!) instanceof ErrorMessage, [
+      'Calling consumeRequestInformation with invalid input should return',
+      'the ErrorMessage instance',
+    ].join(' '));
+  });
 });
