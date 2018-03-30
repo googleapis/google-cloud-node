@@ -23,7 +23,6 @@
  * @property {Object[]} infoTypes
  *   Restricts what info_types to look for. The values must correspond to
  *   InfoType values returned by ListInfoTypes or found in documentation.
- *   Empty info_types runs all enabled detectors.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
@@ -134,6 +133,7 @@ var ByteContentItem = {
    */
   BytesType: {
     BYTES_TYPE_UNSPECIFIED: 0,
+    IMAGE: 6,
     IMAGE_JPEG: 1,
     IMAGE_BMP: 2,
     IMAGE_PNG: 3,

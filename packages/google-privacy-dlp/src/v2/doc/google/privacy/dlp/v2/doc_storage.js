@@ -142,7 +142,7 @@ var CustomInfoType = {
   /**
    * Message for detecting output from deidentification transformations
    * such as
-   * [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/content/deidentify#CryptoReplaceFfxFpeConfig).
+   * [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
    * These types of transformations are
    * those that perform pseudonymization, thereby producing a "surrogate" as
    * output. This should be used in conjunction with a field on the
@@ -336,6 +336,13 @@ var DatastoreOptions = {
  * @property {number} bytesLimitPerFile
  *   Max number of bytes to scan from a file. If a scanned file's size is bigger
  *   than this value then the rest of the bytes are omitted.
+ *
+ * @property {number[]} fileTypes
+ *   List of file type groups to include in the scan.
+ *   If empty, all files are scanned and available data format processors
+ *   are applied.
+ *
+ *   The number should be among the values of [FileType]{@link google.privacy.dlp.v2.FileType}
  *
  * @typedef CloudStorageOptions
  * @memberof google.privacy.dlp.v2
@@ -624,4 +631,33 @@ var Likelihood = {
    * Many matching elements.
    */
   VERY_LIKELY: 5
+};
+
+/**
+ * Definitions of file type groups to scan.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+var FileType = {
+
+  /**
+   * Includes all files.
+   */
+  FILE_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Includes all file extensions not covered by other types.
+   */
+  BINARY_FILE: 1,
+
+  /**
+   * Included file extensions:
+   *   c, cc, cpp, cxx, c++, cs, css, dart, eml, go, h, hh, hpp, hxx, h++, hs,
+   *   html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json, ocaml, md, mkd,
+   *   markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw, rb, rbw, rs, rc,
+   *   scala, sh, sql, tex, txt, asc, text, brf, vcard, vcs, wml, xml, xsl, xsd,
+   *   yml, yaml.
+   */
+  TEXT_FILE: 2
 };

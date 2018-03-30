@@ -22,7 +22,7 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * The DLP API is a service that allows clients
+ * The Cloud Data Loss Prevention (DLP) API is a service that allows clients
  * to detect the presence of Personally Identifiable Information (PII) and other
  * privacy-sensitive data in user-supplied, unstructured data streams, like text
  * blocks or images.
@@ -451,7 +451,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Re-identify content that has been de-identified.
+   * Re-identifies content that has been de-identified.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -530,7 +530,9 @@ class DlpServiceClient {
   }
 
   /**
-   * Returns sensitive information types DLP supports.
+   * Returns a list of the sensitive information types that the DLP API
+   * supports. For more information, see [Listing supported predefined
+   * infoTypes](https://cloud.google.com/dlp/docs/listing-infotypes).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -901,7 +903,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Deletes inspect templates.
+   * Deletes an inspect template.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -945,7 +947,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Creates an Deidentify template for re-using frequently used configuration
+   * Creates a de-identify template for re-using frequently used configuration
    * for Deidentifying content, images, and storage.
    *
    * @param {Object} request
@@ -1006,7 +1008,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Updates the inspect template.
+   * Updates the de-identify template.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1066,7 +1068,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Gets an inspect template.
+   * Gets a de-identify template.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1118,7 +1120,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Lists inspect templates.
+   * Lists de-identify templates.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1273,7 +1275,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Deletes inspect templates.
+   * Deletes a de-identify template.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1317,7 +1319,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Create a new job to inspect storage or calculate risk metrics [How-to
+   * Creates a new job to inspect storage or calculate risk metrics [How-to
    * guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
    *
    * @param {Object} request
@@ -1664,7 +1666,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Starts asynchronous cancellation on a long-running DlpJob.  The server
+   * Starts asynchronous cancellation on a long-running DlpJob. The server
    * makes a best effort to cancel the DlpJob, but success is not
    * guaranteed.
    *
@@ -2022,8 +2024,8 @@ class DlpServiceClient {
   }
 
   /**
-   * Creates a job to run DLP actions such as scanning storage for sensitive
-   * information on a set schedule.
+   * Creates a job trigger to run DLP actions such as scanning storage for
+   * sensitive information on a set schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.

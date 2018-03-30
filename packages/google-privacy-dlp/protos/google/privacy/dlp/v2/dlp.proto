@@ -35,7 +35,7 @@ option java_package = "com.google.privacy.dlp.v2";
 option php_namespace = "Google\\Cloud\\Dlp\\V2";
 
 
-// The DLP API is a service that allows clients
+// The Cloud Data Loss Prevention (DLP) API is a service that allows clients
 // to detect the presence of Personally Identifiable Information (PII) and other
 // privacy-sensitive data in user-supplied, unstructured data streams, like text
 // blocks or images.
@@ -73,7 +73,7 @@ service DlpService {
     };
   }
 
-  // Re-identify content that has been de-identified.
+  // Re-identifies content that has been de-identified.
   rpc ReidentifyContent(ReidentifyContentRequest) returns (ReidentifyContentResponse) {
     option (google.api.http) = {
       post: "/v2/{parent=projects/*}/content:reidentify"
@@ -81,7 +81,9 @@ service DlpService {
     };
   }
 
-  // Returns sensitive information types DLP supports.
+  // Returns a list of the sensitive information types that the DLP API
+  // supports. For more information, see [Listing supported predefined
+  // infoTypes](/dlp/docs/listing-infotypes).
   rpc ListInfoTypes(ListInfoTypesRequest) returns (ListInfoTypesResponse) {
     option (google.api.http) = {
       get: "/v2/infoTypes"
@@ -133,7 +135,7 @@ service DlpService {
     };
   }
 
-  // Deletes inspect templates.
+  // Deletes an inspect template.
   rpc DeleteInspectTemplate(DeleteInspectTemplateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2/{name=organizations/*/inspectTemplates/*}"
@@ -143,7 +145,7 @@ service DlpService {
     };
   }
 
-  // Creates an Deidentify template for re-using frequently used configuration
+  // Creates a de-identify template for re-using frequently used configuration
   // for Deidentifying content, images, and storage.
   rpc CreateDeidentifyTemplate(CreateDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
@@ -156,7 +158,7 @@ service DlpService {
     };
   }
 
-  // Updates the inspect template.
+  // Updates the de-identify template.
   rpc UpdateDeidentifyTemplate(UpdateDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
       patch: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -168,7 +170,7 @@ service DlpService {
     };
   }
 
-  // Gets an inspect template.
+  // Gets a de-identify template.
   rpc GetDeidentifyTemplate(GetDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
       get: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -178,7 +180,7 @@ service DlpService {
     };
   }
 
-  // Lists inspect templates.
+  // Lists de-identify templates.
   rpc ListDeidentifyTemplates(ListDeidentifyTemplatesRequest) returns (ListDeidentifyTemplatesResponse) {
     option (google.api.http) = {
       get: "/v2/{parent=organizations/*}/deidentifyTemplates"
@@ -188,7 +190,7 @@ service DlpService {
     };
   }
 
-  // Deletes inspect templates.
+  // Deletes a de-identify template.
   rpc DeleteDeidentifyTemplate(DeleteDeidentifyTemplateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -198,8 +200,8 @@ service DlpService {
     };
   }
 
-  // Creates a job to run DLP actions such as scanning storage for sensitive
-  // information on a set schedule.
+  // Creates a job trigger to run DLP actions such as scanning storage for
+  // sensitive information on a set schedule.
   rpc CreateJobTrigger(CreateJobTriggerRequest) returns (JobTrigger) {
     option (google.api.http) = {
       post: "/v2/{parent=projects/*}/jobTriggers"
@@ -236,7 +238,7 @@ service DlpService {
     };
   }
 
-  // Create a new job to inspect storage or calculate risk metrics [How-to
+  // Creates a new job to inspect storage or calculate risk metrics [How-to
   // guide](/dlp/docs/compute-risk-analysis).
   rpc CreateDlpJob(CreateDlpJobRequest) returns (DlpJob) {
     option (google.api.http) = {
@@ -268,7 +270,7 @@ service DlpService {
     };
   }
 
-  // Starts asynchronous cancellation on a long-running DlpJob.  The server
+  // Starts asynchronous cancellation on a long-running DlpJob. The server
   // makes a best effort to cancel the DlpJob, but success is not
   // guaranteed.
   rpc CancelDlpJob(CancelDlpJobRequest) returns (google.protobuf.Empty) {
@@ -314,7 +316,6 @@ message InspectConfig {
 
   // Restricts what info_types to look for. The values must correspond to
   // InfoType values returned by ListInfoTypes or found in documentation.
-  // Empty info_types runs all enabled detectors.
   repeated InfoType info_types = 1;
 
   // Only returns findings equal or above this threshold. The default is
@@ -342,6 +343,8 @@ message InspectConfig {
 message ByteContentItem {
   enum BytesType {
     BYTES_TYPE_UNSPECIFIED = 0;
+
+    IMAGE = 6;
 
     IMAGE_JPEG = 1;
 
