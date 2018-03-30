@@ -135,7 +135,7 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/monitoring
+            npm link ../
             npm install
             cd ..
       - run:
