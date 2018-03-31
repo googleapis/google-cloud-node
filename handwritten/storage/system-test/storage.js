@@ -1530,7 +1530,6 @@ describe('storage', function() {
       var file = bucket.file('hi.jpg');
       file.download(function(err) {
         assert.strictEqual(err.code, 404);
-        assert(err.message.indexOf('Not Found') > -1);
         done();
       });
     });
@@ -1541,7 +1540,6 @@ describe('storage', function() {
       };
 
       var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
-      ``;
 
       bucket.upload(FILES.html.path, options, function(err, file) {
         assert.ifError(err);
