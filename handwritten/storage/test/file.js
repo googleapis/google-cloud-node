@@ -59,6 +59,9 @@ var fakeUtil = extend({}, util, {
   },
 });
 
+var fsCached = extend(true, {}, fs);
+var fakeFs = extend(true, {}, fsCached);
+
 var REQUEST_DEFAULT_CONF; // eslint-disable-line no-unused-vars
 var requestCached = request;
 var requestOverride;
@@ -80,6 +83,9 @@ function fakeHashStreamValidation() {
     arguments
   );
 }
+
+var osCached = extend(true, {}, require('os'));
+var fakeOs = extend(true, {}, osCached);
 
 var resumableUploadOverride;
 var resumableUpload = require('gcs-resumable-upload');
@@ -103,6 +109,17 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
+var xdgConfigOverride;
+var xdgBasedirCached = require('xdg-basedir');
+var fakeXdgBasedir = extend(true, {}, xdgBasedirCached);
+Object.defineProperty(fakeXdgBasedir, 'config', {
+  get() {
+    return xdgConfigOverride === false
+      ? false
+      : xdgConfigOverride || xdgBasedirCached.config;
+  },
+});
+
 describe('File', function() {
   var File;
   var file;
@@ -115,18 +132,24 @@ describe('File', function() {
 
   before(function() {
     File = proxyquire('../src/file.js', {
-      'gcs-resumable-upload': fakeResumableUpload,
-      'hash-stream-validation': fakeHashStreamValidation,
-      request: fakeRequest,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },
+      fs: fakeFs,
+      'gcs-resumable-upload': fakeResumableUpload,
+      'hash-stream-validation': fakeHashStreamValidation,
+      os: fakeOs,
+      request: fakeRequest,
+      'xdg-basedir': fakeXdgBasedir,
     });
     duplexify = require('duplexify');
   });
 
   beforeEach(function() {
+    extend(true, fakeFs, fsCached);
+    extend(true, fakeOs, osCached);
+    xdgConfigOverride = null;
     FakeServiceObject.prototype.request = util.noop;
 
     STORAGE = {
@@ -1167,6 +1190,13 @@ describe('File', function() {
   describe('createWriteStream', function() {
     var METADATA = {a: 'b', c: 'd'};
 
+    beforeEach(function() {
+      fakeFs.access = function(dir, check, callback) {
+        // Assume that the required config directory is writable.
+        callback();
+      };
+    });
+
     it('should return a stream', function() {
       assert(file.createWriteStream() instanceof stream);
     });
@@ -1220,6 +1250,85 @@ describe('File', function() {
       };
 
       writable.write('data');
+    });
+
+    it('should check if xdg-basedir is writable', function(done) {
+      var fakeDir = 'fake-xdg-dir';
+
+      xdgConfigOverride = fakeDir;
+
+      fakeFs.access = function(dir) {
+        assert.strictEqual(dir, fakeDir);
+        done();
+      };
+
+      file.createWriteStream({resumable: true}).write('data');
+    });
+
+    it('should fall back to checking tmpdir', function(done) {
+      var fakeDir = 'fake-tmp-dir';
+
+      xdgConfigOverride = false;
+
+      fakeOs.tmpdir = function() {
+        return fakeDir;
+      };
+
+      fakeFs.access = function(dir) {
+        assert.strictEqual(dir, fakeDir);
+        done();
+      };
+
+      file.createWriteStream({resumable: true}).write('data');
+    });
+
+    it('should fail if resumable requested but not writable', function(done) {
+      var error = new Error('Error.');
+
+      fakeFs.access = function(dir, check, callback) {
+        callback(error);
+      };
+
+      var writable = file.createWriteStream({resumable: true});
+
+      writable.on('error', function(err) {
+        assert.notStrictEqual(err, error);
+
+        assert.strictEqual(err.name, 'ResumableUploadError');
+
+        var configDir = xdgBasedirCached.config;
+
+        assert.strictEqual(
+          err.message,
+          [
+            'A resumable upload could not be performed. The directory,',
+            `${configDir}, is not writable. You may try another upload,`,
+            'this time setting `options.resumable` to `false`.',
+          ].join(' ')
+        );
+
+        done();
+      });
+
+      writable.write('data');
+    });
+
+    it('should fall back to simple if not writable', function(done) {
+      var options = {
+        metadata: METADATA,
+        customValue: true,
+      };
+
+      file.startSimpleUpload_ = function(stream, options_) {
+        assert.deepEqual(options_, options);
+        done();
+      };
+
+      fakeFs.access = function(dir, check, callback) {
+        callback(new Error('Error.'));
+      };
+
+      file.createWriteStream(options).write('data');
     });
 
     it('should default to a resumable upload', function(done) {
@@ -1311,9 +1420,9 @@ describe('File', function() {
     });
 
     it('should cork data on prefinish', function(done) {
-      var writable = file.createWriteStream();
+      var writable = file.createWriteStream({resumable: false});
 
-      file.startResumableUpload_ = function(stream) {
+      file.startSimpleUpload_ = function(stream) {
         assert.strictEqual(writable._corked, 0);
         stream.emit('prefinish');
         assert.strictEqual(writable._corked, 1);

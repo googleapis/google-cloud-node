@@ -83,7 +83,8 @@
     "snakeize": "^0.1.0",
     "stream-events": "^1.0.1",
     "string-format-obj": "^1.0.0",
-    "through2": "^2.0.0"
+    "through2": "^2.0.0",
+    "xdg-basedir": "^3.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.2.3",
