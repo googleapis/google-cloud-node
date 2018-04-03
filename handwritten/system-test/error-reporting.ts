@@ -49,8 +49,8 @@ const envKeys = [
 class InstancedEnv {
   injectedEnv: {[key: string]: {}};
   _originalEnv: {[key: string]: {}};
-  apiKey: string;
-  projectId: string;
+  apiKey!: string;
+  projectId!: string;
 
   constructor(injectedEnv) {
     assign(this, injectedEnv);
