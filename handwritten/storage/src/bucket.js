@@ -274,7 +274,6 @@ util.inherits(Bucket, common.ServiceObject);
  * @throws {Error} if a non-array is provided as sources argument.
  * @throws {Error} if less than two sources are provided.
  * @throws {Error} if no destination is provided.
- * @throws {Error} if content type can't be determined for the destination file.
  *
  * @param {string[]|File[]} sources The source files that will be
  *     combined.
@@ -334,10 +333,6 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
 
     if (destinationContentType) {
       destination.metadata.contentType = destinationContentType;
-    } else {
-      throw new Error(
-        'A content type could not be detected for the destination file.'
-      );
     }
   }
 

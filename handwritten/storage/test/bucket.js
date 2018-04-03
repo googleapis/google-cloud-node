@@ -352,12 +352,6 @@ describe('Bucket', function() {
       bucket.combine(['1', '2'], destination);
     });
 
-    it('should throw if content type cannot be determined', function() {
-      assert.throws(function() {
-        bucket.combine(['1', '2'], 'destination');
-      }, /A content type could not be detected for the destination file\./);
-    });
-
     it('should make correct API request', function(done) {
       var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       var destination = bucket.file('destination.txt');
