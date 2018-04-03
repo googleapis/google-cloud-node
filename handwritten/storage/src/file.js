@@ -38,6 +38,7 @@ var through = require('through2');
 var util = require('util');
 var xdgBasedir = require('xdg-basedir');
 var zlib = require('zlib');
+var url = require('url');
 
 var Acl = require('./acl.js');
 
@@ -1717,7 +1718,6 @@ File.prototype.getSignedUrl = function(config, callback) {
   }[config.action];
 
   var name = encodeURIComponent(this.name);
-  var host = config.cname || STORAGE_DOWNLOAD_BASE_URL + '/' + self.bucket.name;
   config.resource = '/' + this.bucket.name + '/' + name;
 
   var extensionHeadersString = '';
@@ -1753,34 +1753,34 @@ File.prototype.getSignedUrl = function(config, callback) {
       return;
     }
 
-    var responseContentType;
+    var query = {
+      GoogleAccessId: authClient.credentials.client_email,
+      Expires: expiresInSeconds,
+      Signature: signature,
+    };
+
     if (is.string(config.responseType)) {
-      responseContentType =
-        '&response-content-type=' + encodeURIComponent(config.responseType);
+      query['response-content-type'] = config.responseType;
     }
 
-    var responseContentDisposition;
     if (is.string(config.promptSaveAs)) {
-      responseContentDisposition =
-        '&response-content-disposition=attachment; filename="' +
-        encodeURIComponent(config.promptSaveAs) +
-        '"';
+      query['response-content-disposition'] =
+        'attachment; filename="' + config.promptSaveAs + '"';
     }
     if (is.string(config.responseDisposition)) {
-      responseContentDisposition =
-        '&response-content-disposition=' +
-        encodeURIComponent(config.responseDisposition);
+      query['response-content-disposition'] = config.responseDisposition;
     }
 
-    var signedUrl = format('{host}/{name}{id}{exp}{sig}{type}{disp}{gen}', {
-      host: host.replace(/[/]*$/, ''), // Remove trailing slashes.
-      name: name,
-      id: '?GoogleAccessId=' + authClient.credentials.client_email,
-      exp: '&Expires=' + expiresInSeconds,
-      sig: '&Signature=' + encodeURIComponent(signature),
-      type: responseContentType || '',
-      disp: responseContentDisposition || '',
-      gen: self.generation ? '&generation=' + self.generation : '',
+    if (self.generation) {
+      query.generation = self.generation;
+    }
+
+    var parsedHost = url.parse(config.cname || STORAGE_DOWNLOAD_BASE_URL);
+    var signedUrl = url.format({
+      protocol: parsedHost.protocol,
+      hostname: parsedHost.hostname,
+      pathname: self.bucket.name + '/' + name,
+      query: query,
     });
 
     callback(null, signedUrl);

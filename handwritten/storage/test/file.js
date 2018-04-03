@@ -2280,6 +2280,13 @@ describe('File', function() {
       file.getSignedUrl(CONFIG, function(err, signedUrl) {
         assert.ifError(err);
         assert.equal(typeof signedUrl, 'string');
+        var expires = Math.round(CONFIG.expires / 1000);
+        var expected =
+          'https://storage.googleapis.com/bucket-name/file-name.png?' +
+          'GoogleAccessId=client-email&Expires=' +
+          expires +
+          '&Signature=signature';
+        assert.equal(signedUrl, expected);
         done();
       });
     });
@@ -2402,7 +2409,7 @@ describe('File', function() {
             promptSaveAs: 'fname.ext',
           },
           function(err, signedUrl) {
-            assert(signedUrl.indexOf(disposition) > -1);
+            assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
             done();
           }
         );
