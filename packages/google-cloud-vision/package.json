@@ -82,7 +82,7 @@
     "node-uuid": "^1.4.7",
     "nyc": "^11.3.0",
     "power-assert": "^1.4.4",
-    "prettier": "^1.7.4",
+    "prettier": "^1.11.1",
     "safe-buffer": "^5.1.1",
     "sinon": "^5.0.0"
   }
