@@ -44,6 +44,7 @@ const cloudScope = "https://www.googleapis.com/auth/cloud-platform"
 const startupTemplate = `
 #! /bin/bash
 
+(
 # Shut down the VM in 5 minutes after this script exits
 # to stop accounting the VM for billing and cores quota.
 trap "sleep 300 && poweroff" EXIT
@@ -54,14 +55,14 @@ set -eo pipefail
 # Display commands being run
 set -x
 # Install git
-apt-get update
-apt-get -y -q install git build-essential
+apt-get update >/dev/null
+apt-get -y -q install git build-essential  >/dev/null
 
 # Install desired version of Node.js
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-nvm install {{.NodeVersion}}
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
+export NVM_DIR="$HOME/.nvm" >/dev/null
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" >/dev/null
+nvm install {{.NodeVersion}} >/dev/null
 npm -v
 node -v
 
@@ -71,7 +72,7 @@ cd cloud-profiler-nodejs
 git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
 git checkout pull_branch
 git reset --hard {{.Commit}}
-npm install
+npm install >/dev/null
 npm run compile
 npm pack
 VERSION=$(node -e "console.log(require('./package.json').version);")
@@ -87,8 +88,8 @@ npm install "$PROFILER"
 # Run benchmark with agent
 GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --require @google-cloud/profiler busybench.js 600
 
-# Indicate to test that script has finished running
-echo "busybench finished profiling"
+# Write output to serial port 2 with timestamp.
+) 2>&1 | while read line; do echo "$(date): ${line}"; done >/dev/ttyS1
 `
 
 type profileSummary struct {
