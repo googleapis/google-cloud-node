@@ -74,7 +74,7 @@ git checkout pull_branch
 git reset --hard {{.Commit}}
 npm install >/dev/null
 npm run compile
-npm pack
+npm pack >/dev/null
 VERSION=$(node -e "console.log(require('./package.json').version);")
 PROFILER="$HOME/cloud-profiler-nodejs/google-cloud-profiler-$VERSION.tgz"
 
@@ -83,10 +83,13 @@ mkdir -p "$TESTDIR"
 cp "testing/busybench.js" "$TESTDIR"
 cd "$TESTDIR"
 
-npm install "$PROFILER"
+npm install "$PROFILER" >/dev/null
 
 # Run benchmark with agent
 GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --require @google-cloud/profiler busybench.js 600
+
+# Indicate to test that script has finished running
+echo "busybench finished profiling"
 
 # Write output to serial port 2 with timestamp.
 ) 2>&1 | while read line; do echo "$(date): ${line}"; done >/dev/ttyS1
