@@ -130,6 +130,23 @@ test.serial(`should publish a JSON message`, async t => {
   t.deepEqual(JSON.parse(receivedMessage.data.toString()), expectedMessage);
 });
 
+test.serial(`should publish a message with custom attributes`, async t => {
+  t.plan(2);
+  const [subscription] = await pubsub
+    .topic(topicNameOne)
+    .createSubscription(subscriptionNameOne);
+  await tools.runAsync(
+    `${cmd} publish-attributes ${topicNameOne} "${expectedMessage.data}"`,
+    cwd
+  );
+  const receivedMessage = await _pullOneMessage(subscription);
+  t.is(receivedMessage.data.toString(), expectedMessage.data);
+  t.deepEqual(receivedMessage.attributes, {
+    origin: 'nodejs-sample',
+    username: 'gcp',
+  });
+});
+
 test.serial(`should publish ordered messages`, async t => {
   const topics = require(`../topics`);
 
