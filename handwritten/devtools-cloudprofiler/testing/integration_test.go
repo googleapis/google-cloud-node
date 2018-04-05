@@ -62,7 +62,10 @@ apt-get -y -q install git build-essential  >/dev/null
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
 export NVM_DIR="$HOME/.nvm" >/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" >/dev/null
-nvm install {{.NodeVersion}} >/dev/null
+
+# nvm install writes to stderr and stdout on successful install, so both are
+# redirected.
+nvm install {{.NodeVersion}} &>/dev/null
 npm -v
 node -v
 
