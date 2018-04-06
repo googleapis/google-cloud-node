@@ -1,4 +1,4 @@
-version: 2.0
+version: 2
 workflows:
   version: 2
   tests:
@@ -47,7 +47,7 @@ workflows:
                 - master
                 - repo-preparation
             tags:
-              only: /^v[\d.]+$/
+              only: '/^v[\d.]+$/'
       - publish_npm:
           requires:
             - sample_tests
@@ -55,7 +55,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v[\d.]+$/
+              only: '/^v[\d.]+$/'
   nightly:
     triggers:
       - schedule:
@@ -67,7 +67,7 @@ workflows:
 jobs:
   node4:
     docker:
-      - image: node:4
+      - image: 'node:4'
         user: node
     steps: &unit_tests_steps
       - checkout
@@ -84,7 +84,12 @@ jobs:
             fi
       - run:
           name: Install modules and dependencies.
-          command: npm install
+          command: |-
+            npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
       - run:
           name: Run unit tests.
           command: npm test
@@ -109,7 +114,7 @@ jobs:
     steps: *unit_tests_steps
   lint:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -119,6 +124,10 @@ jobs:
           command: |
             mkdir -p /home/node/.npm-global
             npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
             npm link
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -136,24 +145,27 @@ jobs:
           command: npm run lint
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-
   docs:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
       - run: *remove_package_lock
       - run:
           name: Install modules and dependencies.
-          command: npm install
+          command: |-
+            npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
       - run:
           name: Build documentation.
           command: npm run docs
-
   sample_tests:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -169,6 +181,10 @@ jobs:
           command: |
             mkdir -p /home/node/.npm-global
             npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
             npm link
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -195,13 +211,13 @@ jobs:
     working_directory: /home/node/dialogflow-samples
   publish_npm:
     docker:
-      - image: node:8
+      - image: 'node:8'
         user: node
     steps:
       - checkout
       - run:
           name: Set NPM authentication.
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
       - run:
-         name: Publish the module to npm.
-         command: npm publish
+          name: Publish the module to npm.
+          command: npm publish
