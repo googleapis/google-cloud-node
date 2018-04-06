@@ -36,6 +36,9 @@
 /**
  * @namespace google.cloud.videointelligence.v1beta1
  */
+/**
+ * @namespace google.cloud.videointelligence.v1p1beta1
+ */
 
 'use strict';
 
