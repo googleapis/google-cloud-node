@@ -25,7 +25,7 @@ cp -R "testing" "$GOPATH/src/proftest"
 # Run test.
 cd "$GOPATH/src/proftest"
 go get -t -tags=integration .
-if ["$KOKORO_GITHUB_PULL_REQUEST_NUMBER" == ""]; then
+if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" == "" ]; then
   go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
 else 
   go test -timeout=30m -parallel=3 -tags=integration -run TestAgentIntegration -commit="$COMMIT" -pr="$KOKORO_GITHUB_PULL_REQUEST_NUMBER"
