@@ -80,7 +80,7 @@ const {LoggingWinston} = require('@google-cloud/logging-winston');
 // const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 
 // Using ES6 style imports via TypeScript or Babel
-// import {LogginWinston} from '@google-cloud/logging-winston';
+// import {LoggingWinston} from '@google-cloud/logging-winston';
 
 // Creates a Winston Stackdriver Logging client
 const loggingWinston = new LoggingWinston();
