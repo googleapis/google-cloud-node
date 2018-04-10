@@ -39,7 +39,7 @@ export interface LoggerOptions {
 
 export interface logger {
   (options?: LoggerOptions | string): Logger;
-  LEVELS: string[];
+  LEVELS: string[] & { [key: string]: string; };
 }
 
 export interface Options {

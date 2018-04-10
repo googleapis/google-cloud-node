@@ -27,6 +27,13 @@ import * as config from '../../../src/configuration';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 
+type HapiPlugin = {
+  register:
+      ((server: {}, options: {}, next: Function) => void)&{
+        attributes?: {name: string; version: string;}
+      }
+};
+
 describe('Hapi interface', () => {
   describe('Fuzzing the setup handler', () => {
     it('Should not throw when fuzzed with invalid types', () => {
@@ -43,7 +50,7 @@ describe('Hapi interface', () => {
         return '1';
       },
     };
-    let plugin;
+    let plugin: HapiPlugin;
     beforeEach(() => {
       plugin = hapiInterface(null!, givenConfig as {} as config.Configuration);
     });
@@ -62,7 +69,7 @@ describe('Hapi interface', () => {
     it('the plugin\'s attribute property should have a name property', () => {
       assert(has(plugin.register.attributes, 'name'));
       assert.strictEqual(
-          plugin.register.attributes.name, '@google-cloud/error-reporting');
+          plugin.register !.attributes!.name, '@google-cloud/error-reporting');
     });
     it('the plugin\'s attribute property should have a version property',
        () => {
@@ -70,13 +77,13 @@ describe('Hapi interface', () => {
        });
   });
   describe('hapiRegisterFunction behaviour', () => {
-    let fakeServer;
+    let fakeServer: EventEmitter;
     beforeEach(() => {
       fakeServer = new EventEmitter();
     });
     it('Should call fn when the request-error event is emitted', () => {
       const fakeClient = {
-        sendError(errMsg) {
+        sendError(errMsg: ErrorMessage) {
           assert(
               errMsg instanceof ErrorMessage,
               'should be an instance of Error message');
@@ -100,7 +107,9 @@ describe('Hapi interface', () => {
   describe('Behaviour around the request/response lifecycle', () => {
     const EVENT = 'onPreResponse';
     const fakeClient = {sendError() {}} as {} as RequestHandler;
-    let fakeServer, config, plugin;
+    let fakeServer: EventEmitter&{ext?: Function},
+        config: Configuration&{lacksCredentials?: () => boolean},
+        plugin: HapiPlugin;
     before(() => {
       config = new Configuration({
         projectId: 'xyz',
@@ -123,7 +132,7 @@ describe('Hapi interface', () => {
     });
     it('Should call continue when a boom is emitted if reply is an object',
        done => {
-         plugin.register(fakeServer, null, () => {});
+         plugin.register(fakeServer, null!, () => {});
          fakeServer.emit(EVENT, {response: {isBoom: true}}, {
            continue() {
              // The continue function should be called
@@ -138,7 +147,7 @@ describe('Hapi interface', () => {
          // that has a `continue` property that is a function.
          // If `reply.continue()` is not invoked in this situation, the Hapi
          // app will become unresponsive.
-         plugin.register(fakeServer, null, () => {});
+         plugin.register(fakeServer, null!, () => {});
          const reply: Function&{continue?: Function} = () => {};
          reply.continue = () => {
            // The continue function should be called
@@ -148,7 +157,7 @@ describe('Hapi interface', () => {
        });
     it('Should call sendError when a boom is received', done => {
       const fakeClient = {
-        sendError(err) {
+        sendError(err: ErrorMessage) {
           assert(err instanceof ErrorMessage);
           done();
         },
@@ -158,7 +167,7 @@ describe('Hapi interface', () => {
       fakeServer.emit('onPreResponse', {response: {isBoom: true}});
     });
     it('Should call next when completing a request', done => {
-      plugin.register(fakeServer, null, () => {
+      plugin.register(fakeServer, null!, () => {
         // The next function should be called
         done();
       });

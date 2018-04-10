@@ -23,15 +23,15 @@ import {RequestHandler} from '../src/google-apis/auth-client';
 import {ErrorReporting} from '../src/index';
 import {createLogger} from '../src/logger';
 import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
-import {ErrorsApiTransport} from '../utils/errors-api-transport';
+import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
 
 const isObject = is.object;
 const isString = is.string;
 const isEmpty = is.empty;
-import * as forEach from 'lodash.foreach';
-import * as assign from 'lodash.assign';
-import * as pick from 'lodash.pick';
-import * as omitBy from 'lodash.omitby';
+import forEach = require('lodash.foreach');
+import assign = require('lodash.assign');
+import pick = require('lodash.pick');
+import omitBy = require('lodash.omitby');
 // eslint-disable-next-line node/no-extraneous-require
 import * as request from 'request';
 import * as util from 'util';
@@ -47,12 +47,12 @@ const envKeys = [
 ];
 
 class InstancedEnv {
-  injectedEnv: {[key: string]: {}};
-  _originalEnv: {[key: string]: {}};
+  injectedEnv: {[key: string]: string|undefined};
+  _originalEnv: Partial<Pick<{[key: string]: string | undefined}, string>>;
   apiKey!: string;
   projectId!: string;
 
-  constructor(injectedEnv) {
+  constructor(injectedEnv: {[key: string]: string|undefined}) {
     assign(this, injectedEnv);
     this.injectedEnv = injectedEnv;
     this._originalEnv = this._captureProcessProperties();
@@ -147,7 +147,9 @@ if (!shouldRun()) {
 describe('Request/Response lifecycle mocking', () => {
   const sampleError = new Error(ERR_TOKEN);
   const errorMessage = new ErrorMessage().setMessage(sampleError.message);
-  let fakeService, client, logger;
+  let fakeService: {reply: Function; query: Function;};
+  let client: RequestHandler;
+  let logger;
   before(() => {
     env.sterilizeProcess();
   });
@@ -176,11 +178,12 @@ describe('Request/Response lifecycle mocking', () => {
 
   it('Should fail when receiving non-retryable errors', function(this, done) {
     this.timeout(5000);
-    client.sendError({}, (err, response) => {
+    client.sendError({} as ErrorMessage, (err, response) => {
       assert(err instanceof Error);
-      assert.strictEqual(err.message.toLowerCase(), 'message cannot be empty.');
+      assert.strictEqual(
+          err!.message.toLowerCase(), 'message cannot be empty.');
       assert(isObject(response));
-      assert.strictEqual(response.statusCode, 400);
+      assert.strictEqual(response!.statusCode, 400);
       done();
     });
   });
@@ -209,7 +212,7 @@ describe('Request/Response lifecycle mocking', () => {
        const client = new RequestHandler(
            new Configuration({key, ignoreEnvironmentCheck: true}, logger),
            logger);
-       fakeService.query({key}).reply(200, uri => {
+       fakeService.query({key}).reply(200, (uri: string) => {
          assert(uri.indexOf('key=' + key) > -1);
          return {};
        });
@@ -282,7 +285,7 @@ describe('Client creation', () => {
        const logger = createLogger({logLevel: 5});
        const cfg = new Configuration(
            {
-             projectId: Number(env.injected().projectNumber),
+             projectId: '' + Number(env.injected().projectNumber),
              ignoreEnvironmentCheck: true,
            },
            logger);
@@ -372,7 +375,7 @@ describe('Expected Behavior', () => {
     const logger = createLogger({logLevel: 5});
     const cfg = new Configuration(
         {
-          projectId: Number(env.injected().projectNumber),
+          projectId: '' + Number(env.injected().projectNumber),
           ignoreEnvironmentCheck: true,
         },
         logger);
@@ -434,16 +437,16 @@ describe('error-reporting', () => {
   const SRC_ROOT = path.join(__dirname, '..', 'src');
   const TIMESTAMP = Date.now();
   const BASE_NAME = 'error-reporting-system-test';
-  function buildName(suffix) {
+  function buildName(suffix: string) {
     return [TIMESTAMP, BASE_NAME, suffix].join('_');
   }
 
   const SERVICE = buildName('service-name');
   const VERSION = buildName('service-version');
 
-  let errors;
-  let transport;
-  let oldLogger;
+  let errors: ErrorReporting;
+  let transport: ErrorsApiTransport;
+  let oldLogger: (text: string) => void;
   let logOutput = '';
   before(() => {
     // This test assumes that only the error-reporting library will be
@@ -464,7 +467,7 @@ describe('error-reporting', () => {
 
   function reinitialize(extraConfig?: {}) {
     process.removeAllListeners('unhandledRejection');
-    const config = Object.assign(
+    const initConfiguration = Object.assign(
         {
           ignoreEnvironmentCheck: true,
           serviceContext: {
@@ -473,8 +476,10 @@ describe('error-reporting', () => {
           },
         },
         extraConfig || {});
-    errors = new ErrorReporting(config);
-    transport = new ErrorsApiTransport(errors._config, errors._logger);
+    errors = new ErrorReporting(initConfiguration);
+    const logger = createLogger(initConfiguration);
+    const configuration = new Configuration(initConfiguration, logger);
+    transport = new ErrorsApiTransport(configuration, logger);
   }
 
   after(done => {
@@ -491,13 +496,15 @@ describe('error-reporting', () => {
     logOutput = '';
   });
 
-  function verifyAllGroups(messageTest, timeout, cb) {
+  function verifyAllGroups(
+      messageTest: (message: string) => void, timeout: number,
+      cb: (matchedErrors: ErrorGroupStats[]) => void) {
     setTimeout(() => {
       transport.getAllGroups((err, groups) => {
         assert.ifError(err);
         assert.ok(groups);
 
-        const matchedErrors = groups.filter(errItem => {
+        const matchedErrors = groups!.filter(errItem => {
           return (
               errItem && errItem.representative &&
               errItem.representative.serviceContext &&
@@ -511,7 +518,8 @@ describe('error-reporting', () => {
     }, timeout);
   }
 
-  function verifyServerResponse(messageTest, timeout, cb) {
+  function verifyServerResponse(
+      messageTest: (message: string) => void, timeout: number, cb: () => void) {
     verifyAllGroups(messageTest, timeout, matchedErrors => {
       // The error should have been reported exactly once
       assert.strictEqual(matchedErrors.length, 1);
@@ -538,9 +546,12 @@ describe('error-reporting', () => {
     });
   }
 
-  function verifyReporting(errOb, messageTest, timeout, cb) {
+  // the `errOb` argument can be anything, including `null` and `undefined`
+  function verifyReporting(
+      errOb: any,  // tslint:disable-line:no-any
+      messageTest: (message: string) => void, timeout: number, cb: () => void) {
     (function expectedTopOfStack() {
-      errors.report(errOb, (err, response, body) => {
+      errors.report(errOb, undefined, undefined, (err, response, body) => {
         assert.ifError(err);
         assert(isObject(response));
         assert.deepEqual(body, {});

@@ -39,7 +39,9 @@ function sterilizeServiceConfigEnv() {
     delete process.env[key];
   });
 }
-function setEnv(serviceName, serviceVersion, moduleName, mv, fn) {
+function setEnv(
+    serviceName: string|null, serviceVersion: string, moduleName: string|null,
+    mv: string, fn: string|null) {
   assign(
       process.env,
       omitBy(

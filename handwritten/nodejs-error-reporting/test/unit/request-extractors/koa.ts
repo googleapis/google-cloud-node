@@ -32,7 +32,7 @@ describe('koaRequestInformationExtractor', () => {
         remoteAddress: '',
       };
       const f = new Fuzzer();
-      const cbFn = value => {
+      const cbFn = (value: {}) => {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(

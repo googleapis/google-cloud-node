@@ -23,14 +23,14 @@ const config = new Configuration({});
 };
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
-import {Logger} from '@google-cloud/common';
+import {Logger} from '../../../src/types';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 
 describe('Manual handler', () => {
   // nock.disableNetConnect();
   // Mocked client
   const client: RequestHandler = {
-    sendError(e, cb) {
+    sendError(e: ErrorMessage, cb: () => void) {
       // immediately callback
       if (cb) {
         setImmediate(cb);
