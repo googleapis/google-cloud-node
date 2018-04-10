@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import * as merge from 'lodash.merge';
+import merge = require('lodash.merge');
 
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestHandler} from '../../../src/google-apis/auth-client';

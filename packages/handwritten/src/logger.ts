@@ -17,10 +17,13 @@
 
 import has = require('lodash.has');
 import * as is from 'is';
+import * as types from './types';
+
 const isObject = is.object;
 const isString = is.string;
 const isNumber = is.number;
-import {logger} from '@google-cloud/common';
+const logger: types.logger = require('@google-cloud/common').logger;
+
 const packageJson = require('../../package.json');
 
 import {ConfigurationOptions} from './configuration';

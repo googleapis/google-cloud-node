@@ -14,7 +14,34 @@
  * limitations under the License.
  */
 
+import {Configuration} from '../src/configuration';
 import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
+import * as types from '../src/types';
+
+export interface ServiceContext {
+  service: string;
+  version: string;
+  resourceType: string;
+}
+
+export interface ErrorEvent {
+  eventTime: string;
+  serviceContext: ServiceContext;
+  message: string;
+  // other fields not used in the tests have been omitted
+}
+
+export interface ErrorGroupStats {
+  representative: ErrorEvent;
+  count: string;
+  // other fields not used in the tests have been omitted
+}
+
+export interface GroupStatesResponse {
+  errorGroupStats: ErrorGroupStats[];
+  nextPageToken: string;
+  timeRangeBegin: string;
+}
 
 /* @const {String} Base Error Reporting API */
 const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
@@ -22,11 +49,11 @@ const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 const ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
 
 export class ErrorsApiTransport extends AuthClient {
-  constructor(config, logger) {
+  constructor(config: Configuration, logger: types.Logger) {
     super(config, logger);
   }
 
-  deleteAllEvents(cb) {
+  deleteAllEvents(cb: (err: Error|null) => void) {
     const self = this;
     self.getProjectId((err, id) => {
       if (err) {
@@ -48,7 +75,7 @@ export class ErrorsApiTransport extends AuthClient {
     });
   }
 
-  getAllGroups(cb) {
+  getAllGroups(cb: (err: Error|null, data?: ErrorGroupStats[]) => void) {
     const self = this;
     self.getProjectId((err, id) => {
       if (err) {

@@ -45,7 +45,7 @@ interface AnnotatedError {
 }
 
 describe('populate-error-message', () => {
-  let em;
+  let em: ErrorMessage;
   const adversarialObjectInput = {
     stack: {},
   };
@@ -226,7 +226,7 @@ describe('populate-error-message', () => {
          'given an Error',
      () => {
        const err: AnnotatedError = new Error();
-       const TEST_STACK_INVALID_TYPE = [];
+       const TEST_STACK_INVALID_TYPE = [] as {};
        err.stack = TEST_STACK_INVALID_TYPE;
        populateErrorMessage(err, em);
        assert.deepEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
