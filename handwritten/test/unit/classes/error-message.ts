@@ -21,7 +21,7 @@ import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 
 describe('Instantiating a new ErrorMessage', () => {
-  let em;
+  let em: ErrorMessage;
   beforeEach(() => {
     em = new ErrorMessage();
   });
@@ -52,7 +52,7 @@ describe('Instantiating a new ErrorMessage', () => {
 });
 
 describe('Calling against setEventTimeToNow', () => {
-  let em;
+  let em: ErrorMessage;
   beforeEach(() => {
     em = new ErrorMessage();
   });
@@ -67,7 +67,7 @@ describe('Fuzzing against setServiceContext', () => {
   const DEFAULT_TEST_VALUE = 'DEFAULT';
   const DEFAULT_VERSION_VALUE = undefined;
   const DEFAULT_SERVICE_VALUE = 'node';
-  let em;
+  let em: ErrorMessage;
   beforeEach(() => {
     em = new ErrorMessage();
   });
@@ -97,7 +97,7 @@ describe('Fuzzing against setServiceContext', () => {
         ].join(' '));
   });
   it('Should still set version with affirmative value', () => {
-    em.setServiceContext(null, AFFIRMATIVE_TEST_VALUE);
+    em.setServiceContext(null!, AFFIRMATIVE_TEST_VALUE);
     assert.deepEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
@@ -110,7 +110,7 @@ describe('Fuzzing against setServiceContext', () => {
         ].join(' '));
   });
   it('Should still set service with affirmative value', () => {
-    em.setServiceContext(AFFIRMATIVE_TEST_VALUE, null);
+    em.setServiceContext(AFFIRMATIVE_TEST_VALUE, null!);
     assert.deepEqual(
         em.serviceContext, {
           service: AFFIRMATIVE_TEST_VALUE,
@@ -123,7 +123,7 @@ describe('Fuzzing against setServiceContext', () => {
         ].join(' '));
   });
   it('Should set default values on both', () => {
-    em.setServiceContext(null, null);
+    em.setServiceContext(null!, null!);
     assert.deepEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
@@ -135,7 +135,7 @@ describe('Fuzzing against setServiceContext', () => {
         ].join(' '));
   });
   it('Should set default values on both', () => {
-    em.setServiceContext(2, 1.3);
+    em.setServiceContext(2 as {} as string, 1.3 as {} as string);
     assert.deepEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
@@ -147,7 +147,7 @@ describe('Fuzzing against setServiceContext', () => {
         ].join(' '));
   });
   it('Should set as default', () => {
-    em.setServiceContext({test: 'true'}, []);
+    em.setServiceContext({test: 'true'} as {} as string, [] as {} as string);
     assert.deepEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
@@ -170,7 +170,7 @@ describe('Fuzzing against setServiceContext', () => {
 });
 
 describe('Fuzzing against setMessage', () => {
-  let em;
+  let em: ErrorMessage;
   beforeEach(() => {
     em = new ErrorMessage();
   });
@@ -194,7 +194,7 @@ describe('Fuzzing against setMessage', () => {
 });
 
 describe('Fuzzing against setHttpMethod', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -217,7 +217,7 @@ describe('Fuzzing against setHttpMethod', () => {
 });
 
 describe('Fuzzing against setUrl', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -240,7 +240,7 @@ describe('Fuzzing against setUrl', () => {
 });
 
 describe('Fuzzing against setUserAgent', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -263,7 +263,7 @@ describe('Fuzzing against setUserAgent', () => {
 });
 
 describe('Fuzzing against setReferrer', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -286,7 +286,7 @@ describe('Fuzzing against setReferrer', () => {
 });
 
 describe('Fuzzing against setResponseStatusCode', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 200;
   const NEGATIVE_TEST_VALUE = 0;
   beforeEach(() => {
@@ -309,7 +309,7 @@ describe('Fuzzing against setResponseStatusCode', () => {
 });
 
 describe('Fuzzing against setRemoteIp', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -332,7 +332,7 @@ describe('Fuzzing against setRemoteIp', () => {
 });
 
 describe('Fuzzing against setUser', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -355,7 +355,7 @@ describe('Fuzzing against setUser', () => {
 });
 
 describe('Fuzzing against setFilePath', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {
@@ -378,7 +378,7 @@ describe('Fuzzing against setFilePath', () => {
 });
 
 describe('Fuzzing against setLineNumber', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 27;
   const NEGATIVE_TEST_VALUE = 0;
   beforeEach(() => {
@@ -401,7 +401,7 @@ describe('Fuzzing against setLineNumber', () => {
 });
 
 describe('Fuzzing against setFunctionName', () => {
-  let em;
+  let em: ErrorMessage;
   const AFFIRMATIVE_TEST_VALUE = 'VALID_INPUT_AND_TYPE';
   const NEGATIVE_TEST_VALUE = '';
   beforeEach(() => {

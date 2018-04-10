@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-function respond(req, res, next) {
+function respond(req: {}, res: {}, next: Function) {
   next(new Error('this is a restify error'));
 }
 
