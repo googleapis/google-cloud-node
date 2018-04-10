@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-import {Logger} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
-import {Configuration} from '../../../src/configuration';
+import {Configuration, ConfigurationOptions} from '../../../src/configuration';
+import {Logger} from '../../../src/types';
 
-function verifyReportedMessage(config1, errToReturn, expectedLogs) {
+function verifyReportedMessage(
+    config1: ConfigurationOptions, errToReturn: Error|null|undefined,
+    expectedLogs: {error?: string; info?: string;}) {
   class ServiceStub {
     authClient: {};
     request: {};
     constructor() {
       this.authClient = {
-        getToken(cb) {
+        getToken(cb: (err?: Error|null) => void) {
           cb(errToReturn);
         },
       };
@@ -42,13 +44,13 @@ function verifyReportedMessage(config1, errToReturn, expectedLogs) {
 
   const logs: {error?: string; info?: string;} = {};
   const logger = {
-    error(text) {
+    error(text: string) {
       if (!logs.error) {
         logs.error = '';
       }
       logs.error += text;
     },
-    info(text) {
+    info(text: string) {
       if (!logs.info) {
         logs.info = '';
       }

@@ -27,13 +27,13 @@ const app = (koa as Function)();
 
 app.use(errorHandler.koa);
 
-app.use(function*(this, next) {
+app.use(function*(this: {throw: Function}, next: {}) {
   // This will set status and message
   this.throw('Error Message', 500);
   yield next;
 });
 
-app.use(function*(this, next) {
+app.use(function*(this: {set: Function}, next: {}) {
   const start = Date.now();
   yield next;
   const ms = Date.now() - start;
@@ -42,7 +42,7 @@ app.use(function*(this, next) {
 
 // logger
 
-app.use(function*(this, next) {
+app.use(function*(this: {method: {}; url: {}}, next: {}) {
   const start = Date.now();
   yield next;
   const ms = Date.now() - start;
@@ -51,7 +51,7 @@ app.use(function*(this, next) {
 });
 
 // response
-app.use(function*(this, next) {
+app.use(function*(this: {body: string}, next: {}) {
   this.body = 'Hello World';
   yield next;
 });

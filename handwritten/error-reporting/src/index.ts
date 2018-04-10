@@ -99,9 +99,10 @@ export class ErrorReporting {
   private _logger: types.Logger;
   private _config: Configuration;
   private _client: AuthClient;
+  // the `err` argument can be anything, including `null` and `undefined`
   report:
-      (err: {}, request?: manualRequestExtractor.Request,
-       additionalMessage?: string|{},
+      (err: any,  // tslint:disable-line:no-any
+       request?: manualRequestExtractor.Request, additionalMessage?: string|{},
        callback?: manualInterface.Callback|{}|string) => ErrorMessage;
   event: () => ErrorMessage;
   hapi: {register: (server: {}, options: {}, next: Function) => void};

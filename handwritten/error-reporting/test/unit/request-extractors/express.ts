@@ -22,7 +22,7 @@ import {expressRequestInformationExtractor} from '../../../src/request-extractor
 import {Fuzzer} from '../../../utils/fuzzer';
 
 describe('Behaviour under varying input', () => {
-  let f;
+  let f: Fuzzer;
   const DEFAULT_RETURN_VALUE = {
     method: '',
     url: '',
@@ -35,7 +35,7 @@ describe('Behaviour under varying input', () => {
     f = new Fuzzer();
   });
   it('Should return a default value given invalid input', () => {
-    const cbFn = value => {
+    const cbFn = (value: {}) => {
       assert.deepEqual(value, DEFAULT_RETURN_VALUE);
     };
     f.fuzzFunctionForTypes(
@@ -102,9 +102,10 @@ describe('Behaviour under varying input', () => {
       remoteAddress: '',
       statusCode: 201,
     };
-    const headerFactory = toDeriveFrom => {
+    // tslint:disable-next-line:no-any
+    const headerFactory = (toDeriveFrom: any) => {
       const lrn = extend({}, toDeriveFrom);
-      lrn.header = toRet => {
+      lrn.header = (toRet: string) => {
         if (lrn.hasOwnProperty(toRet)) {
           return lrn[toRet];
         }

@@ -20,7 +20,7 @@ import {Fuzzer} from '../../../utils/fuzzer';
 
 describe('RequestInformationContainer', () => {
   const f = new Fuzzer();
-  let cbFn, ric;
+  let cbFn, ric: RequestInformationContainer;
   beforeEach(() => {
     ric = new RequestInformationContainer();
   });

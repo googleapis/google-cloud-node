@@ -43,8 +43,8 @@ export class Fuzzer {
       ];
     },
 
-    string(len) {
-      const lenChecked = isNumber(len) ? len : 10;
+    string(len?: number) {
+      const lenChecked = (isNumber(len) ? len : 10)!;
       const chars: string[] = [];
 
       for (let i = 0; i < lenChecked; i++) {
@@ -58,8 +58,8 @@ export class Fuzzer {
       return !!random(0, 1);
     },
 
-    alphaNumericString(len) {
-      const lenChecked = isNumber(len) ? len : 10;
+    alphaNumericString(len?: number) {
+      const lenChecked = (isNumber(len) ? len : 10)!;
       const chars: string[] = [];
       let thisRange: number[] = [];
       const ranges = [[48, 57], [65, 90], [97, 122]];
@@ -72,7 +72,7 @@ export class Fuzzer {
       return chars.join('');
     },
 
-    function() {
+    function(this: {[key: string]: () => void; types: () => string[];}) {
       const availableTypes = without(this.types(), 'function');
       const typeToGen = this.types()[random(0, availableTypes.length - 1)];
       const fnToCall = this[typeToGen];
@@ -82,9 +82,9 @@ export class Fuzzer {
       };
     },
 
-    number(lower, upper) {
-      const lowerChecked = isNumber(lower) ? lower : 0;
-      const upperChecked = isNumber(upper) ? upper : 100;
+    number(lower?: number, upper?: number) {
+      const lowerChecked = (isNumber(lower) ? lower : 0)!;
+      const upperChecked = (isNumber(upper) ? upper : 100)!;
 
       return random(lowerChecked, upperChecked);
     },
@@ -97,16 +97,18 @@ export class Fuzzer {
       return undefined;
     },
 
-    array(len, ofOneType, currentDepth, allowedDepth) {
-      const lenChecked = isNumber(len) ? len : random(1, 10);
+    array(
+        len?: number, ofOneType?: string, currentDepth?: number,
+        allowedDepth?: number) {
+      const lenChecked = (isNumber(len) ? len : random(1, 10))!;
       let availableTypes =
-          isString(ofOneType) && indexOf(this.types(), ofOneType) > -1 ?
-          [ofOneType] :
-          this.types();
-      let currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
-      const allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth : 3;
+          (isString(ofOneType) && indexOf(this.types(), ofOneType) > -1 ?
+               [ofOneType] :
+               this.types())!;
+      let currentDepthChecked = (isNumber(currentDepth) ? currentDepth : 0)!;
+      const allowedDepthChecked = (isNumber(allowedDepth) ? allowedDepth : 3)!;
       const arr: Array<{}> = [];
-      let currentTypeBeingGenerated = '';
+      let currentTypeBeingGenerated: string|undefined = '';
       currentDepthChecked += 1;
 
       // Deny the ability to nest more objects
@@ -120,30 +122,32 @@ export class Fuzzer {
 
         if (currentTypeBeingGenerated === 'object') {
           arr.push(this[currentTypeBeingGenerated](
-              null, currentDepthChecked, allowedDepthChecked));
+              null!, currentDepthChecked, allowedDepthChecked));
         } else if (currentTypeBeingGenerated === 'array') {
           arr.push(this[currentTypeBeingGenerated](
-              null, ofOneType, currentDepthChecked, allowedDepthChecked));
+              null!, ofOneType, currentDepthChecked, allowedDepthChecked));
         } else {
-          arr.push(this[currentTypeBeingGenerated]());
+          arr.push((
+              this as {[key: string]: Function})[currentTypeBeingGenerated!]());
         }
       }
 
       return arr;
     },
 
-    object(numProperties, currentDepth, allowedDepth) {
+    object(
+        numProperties?: number, currentDepth?: number, allowedDepth?: number) {
       const numPropertiesChecked =
-          isNumber(numProperties) ? numProperties : random(1, 10);
-      let currentDepthChecked = isNumber(currentDepth) ? currentDepth : 0;
-      const allowedDepthChecked = isNumber(allowedDepth) ? allowedDepth : 3;
-      const obj = {};
+          (isNumber(numProperties) ? numProperties : random(1, 10))!;
+      let currentDepthChecked = (isNumber(currentDepth) ? currentDepth : 0)!;
+      const allowedDepthChecked = (isNumber(allowedDepth) ? allowedDepth : 3)!;
+      const obj: {[key: string]: {}} = {};
       currentDepthChecked += 1;
 
       let availableTypes = this.types();
 
       // Deny the ability to nest more objects
-      if (currentDepth >= allowedDepth) {
+      if (currentDepth! >= allowedDepth!) {
         availableTypes = without(availableTypes, 'object', 'array');
       }
 
@@ -157,12 +161,13 @@ export class Fuzzer {
 
         if (currentTypeBeingGenerated === 'object') {
           obj[currentKey] = this[currentTypeBeingGenerated](
-              null, currentDepthChecked, allowedDepthChecked);
+              null!, currentDepthChecked, allowedDepthChecked);
         } else if (currentTypeBeingGenerated === 'array') {
           obj[currentKey] = this[currentTypeBeingGenerated](
-              null, null, currentDepthChecked, allowedDepthChecked);
+              null!, null!, currentDepthChecked, allowedDepthChecked);
         } else {
-          obj[currentKey] = this[currentTypeBeingGenerated]();
+          obj[currentKey] =
+              (this as {[key: string]: Function})[currentTypeBeingGenerated]();
         }
       }
 
@@ -170,10 +175,10 @@ export class Fuzzer {
     }
   };
 
-  _backFillUnevenTypesArrays(argsTypesArray) {
+  _backFillUnevenTypesArrays(argsTypesArray: Array<Array<{}>>) {
     const largestLength = maxBy(argsTypesArray, o => {
                             return o.length;
-                          }).length;
+                          })!.length;
 
     for (let i = 0; i < argsTypesArray.length; i++) {
       if (argsTypesArray[i].length !== largestLength) {
@@ -187,7 +192,7 @@ export class Fuzzer {
     return argsTypesArray;
   }
 
-  _normalizeTypesArrayLengths(argsTypesArray) {
+  _normalizeTypesArrayLengths(argsTypesArray: Array<Array<{}>>) {
     let allAreTheSameLength = true;
     const lastLength = argsTypesArray[0].length;
 
@@ -205,7 +210,7 @@ export class Fuzzer {
     return this._backFillUnevenTypesArrays(argsTypesArray);
   }
 
-  _generateTypesToFuzzWith(expectsArgTypes) {
+  _generateTypesToFuzzWith(expectsArgTypes: Array<string|string[]>) {
     let argsTypesArray: Array<Array<{}>> = [];
     let tmpArray = this.generate.types();
 
@@ -226,25 +231,27 @@ export class Fuzzer {
     return argsTypesArray;
   }
 
-  _generateValuesForFuzzTyping(typesToFuzzOnEach, index) {
+  _generateValuesForFuzzTyping(typesToFuzzOnEach: string[][], index: number) {
     const args: Array<{}> = [];
     let typeToGen = '';
+    const gen = this.generate as {[key: string]: Function};
 
     for (let i = 0; i < typesToFuzzOnEach.length; i++) {
       typeToGen = typesToFuzzOnEach[i][index];
 
-      args.push(this.generate[typeToGen]());
+      args.push(gen[typeToGen]());
     }
 
     return args;
   }
 
   fuzzFunctionForTypes(
-      fnToFuzz, expectsArgTypes?: {}, cb?: Function, withContext?: {}) {
+      fnToFuzz: Function, expectsArgTypes?: string[], cb?: Function,
+      withContext?: {}) {
     const expectsArgTypesChecked =
-        isArray(expectsArgTypes) ? expectsArgTypes : [];
+        (isArray(expectsArgTypes) ? expectsArgTypes : [])!;
     const typesToFuzzOnEach =
-        this._generateTypesToFuzzWith(expectsArgTypesChecked);
+        this._generateTypesToFuzzWith(expectsArgTypesChecked) as string[][];
 
     let returnValue = undefined;
 

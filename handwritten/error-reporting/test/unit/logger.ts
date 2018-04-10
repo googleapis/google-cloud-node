@@ -19,7 +19,7 @@ import {createLogger} from '../../src/logger';
 
 describe('logger', () => {
   describe('Initialization', () => {
-    let oldEnv;
+    let oldEnv: string|undefined;
     before(() => {
       oldEnv = process.env.GCLOUD_ERRORS_LOGLEVEL;
       delete process.env.GCLOUD_ERRORS_LOGLEVEL;
@@ -59,8 +59,8 @@ describe('logger', () => {
       });
     });
     describe('Default log level', () => {
-      let oldLog;
-      let text;
+      let oldLog: (text: string) => void;
+      let text: string|undefined;
       beforeEach(() => {
         // eslint-disable-next-line no-console
         oldLog = console.log;

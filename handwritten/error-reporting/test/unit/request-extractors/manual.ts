@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 import * as extend from 'extend';
-import * as omit from 'lodash.omit';
+import omit = require('lodash.omit');
 
 import {manualRequestInformationExtractor} from '../../../src/request-extractors/manual';
 import {Fuzzer} from '../../../utils/fuzzer';
@@ -33,7 +33,7 @@ describe('manualRequestInformationExtractor', () => {
         remoteAddress: '',
       };
       const f = new Fuzzer();
-      const cbFn = value => {
+      const cbFn = (value: {}) => {
         assert.deepEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
