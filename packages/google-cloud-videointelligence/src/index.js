@@ -111,12 +111,6 @@ module.exports.v1 = gapic.v1;
  *   Reference to {@link v1beta2.VideoIntelligenceServiceClient}
  */
 module.exports.v1beta2 = gapic.v1beta2;
-/**
- * @type {object}
- * @property {constructor} VideoIntelligenceServiceClient
- *   Reference to {@link v1beta2.VideoIntelligenceServiceClient}
- */
-module.exports.v1beta2 = gapic.v1beta2;
 
 /**
  * @type {object}

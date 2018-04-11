@@ -96,11 +96,6 @@ var AnnotateVideoRequest = {
  *
  *   This object should have the same structure as [SpeechTranscriptionConfig]{@link google.cloud.videointelligence.v1p1beta1.SpeechTranscriptionConfig}
  *
- * @property {Object} faceDetectionConfig
- *   Config for FACE_DETECTION.
- *
- *   This object should have the same structure as [FaceConfig]{@link google.cloud.videointelligence.v1p1beta1.FaceConfig}
- *
  * @typedef VideoContext
  * @memberof google.cloud.videointelligence.v1p1beta1
  * @see [google.cloud.videointelligence.v1p1beta1.VideoContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
@@ -166,29 +161,6 @@ var ShotChangeDetectionConfig = {
  * @see [google.cloud.videointelligence.v1p1beta1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
  */
 var ExplicitContentDetectionConfig = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Config for FACE_DETECTION.
- *
- * @property {string} model
- *   Model to use for face detection.
- *   Supported values: "builtin/stable" (the default if unset) and
- *   "builtin/latest".
- *
- * @property {boolean} includeBoundingBoxes
- *   Whether bounding boxes be included in the face annotation output.
- *
- * @property {boolean} includeEmotions
- *   Whether to enable emotion detection. Ignored if 'include_bounding_boxes' is
- *   false.
- *
- * @typedef FaceConfig
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.FaceConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var FaceConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -376,107 +348,6 @@ var NormalizedBoundingBox = {
 };
 
 /**
- * Video segment level annotation results for face detection.
- *
- * @property {Object} segment
- *   Video segment where a face was detected.
- *
- *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p1beta1.VideoSegment}
- *
- * @typedef FaceSegment
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.FaceSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var FaceSegment = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Video frame level annotation results for face detection.
- *
- * @property {Object[]} attributes
- *   Face attributes in a frame.
- *   There can be more than one attributes if the same face is detected in
- *   multiple locations within the current frame.
- *
- *   This object should have the same structure as [FaceDetectionAttribute]{@link google.cloud.videointelligence.v1p1beta1.FaceDetectionAttribute}
- *
- * @property {Object} timeOffset
- *   Time-offset, relative to the beginning of the video,
- *   corresponding to the video frame for this location.
- *
- *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @typedef FaceDetectionFrame
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.FaceDetectionFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var FaceDetectionFrame = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Face detection attribute.
- *
- * @property {Object} normalizedBoundingBox
- *   Normalized Bounding box.
- *
- *   This object should have the same structure as [NormalizedBoundingBox]{@link google.cloud.videointelligence.v1p1beta1.NormalizedBoundingBox}
- *
- * @property {Object[]} emotions
- *   Emotion attributes.
- *
- *   This object should have the same structure as [EmotionAttribute]{@link google.cloud.videointelligence.v1p1beta1.EmotionAttribute}
- *
- * @typedef FaceDetectionAttribute
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.FaceDetectionAttribute definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var FaceDetectionAttribute = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Emotion attribute.
- *
- * @property {number} emotion
- *   Emotion entry.
- *
- *   The number should be among the values of [Emotion]{@link google.cloud.videointelligence.v1p1beta1.Emotion}
- *
- * @property {number} score
- *   Confidence score.
- *
- * @typedef EmotionAttribute
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.EmotionAttribute definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var EmotionAttribute = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Face detection annotation.
- *
- * @property {Object[]} segments
- *   All video segments where a face was detected.
- *
- *   This object should have the same structure as [FaceSegment]{@link google.cloud.videointelligence.v1p1beta1.FaceSegment}
- *
- * @property {Object[]} frames
- *   All video frames where a face was detected.
- *
- *   This object should have the same structure as [FaceDetectionFrame]{@link google.cloud.videointelligence.v1p1beta1.FaceDetectionFrame}
- *
- * @typedef FaceDetectionAnnotation
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.FaceDetectionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var FaceDetectionAnnotation = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
@@ -500,11 +371,6 @@ var FaceDetectionAnnotation = {
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p1beta1.LabelAnnotation}
- *
- * @property {Object[]} faceDetectionAnnotations
- *   Face detection annotations.
- *
- *   This object should have the same structure as [FaceDetectionAnnotation]{@link google.cloud.videointelligence.v1p1beta1.FaceDetectionAnnotation}
  *
  * @property {Object[]} shotAnnotations
  *   Shot annotations. Each shot is represented as a video segment.
@@ -767,11 +633,6 @@ var Feature = {
   EXPLICIT_CONTENT_DETECTION: 3,
 
   /**
-   * Face detection.
-   */
-  FACE_DETECTION: 8,
-
-  /**
    * Speech transcription.
    */
   SPEECH_TRANSCRIPTION: 6
@@ -843,83 +704,4 @@ var Likelihood = {
    * Very likely.
    */
   VERY_LIKELY: 5
-};
-
-/**
- * Emotions.
- *
- * @enum {number}
- * @memberof google.cloud.videointelligence.v1p1beta1
- */
-var Emotion = {
-
-  /**
-   * Unspecified emotion.
-   */
-  EMOTION_UNSPECIFIED: 0,
-
-  /**
-   * Amusement.
-   */
-  AMUSEMENT: 1,
-
-  /**
-   * Anger.
-   */
-  ANGER: 2,
-
-  /**
-   * Concentration.
-   */
-  CONCENTRATION: 3,
-
-  /**
-   * Contentment.
-   */
-  CONTENTMENT: 4,
-
-  /**
-   * Desire.
-   */
-  DESIRE: 5,
-
-  /**
-   * Disappointment.
-   */
-  DISAPPOINTMENT: 6,
-
-  /**
-   * Disgust.
-   */
-  DISGUST: 7,
-
-  /**
-   * Elation.
-   */
-  ELATION: 8,
-
-  /**
-   * Embarrassment.
-   */
-  EMBARRASSMENT: 9,
-
-  /**
-   * Interest.
-   */
-  INTEREST: 10,
-
-  /**
-   * Pride.
-   */
-  PRIDE: 11,
-
-  /**
-   * Sadness.
-   */
-  SADNESS: 12,
-
-  /**
-   * Surprise.
-   */
-  SURPRISE: 13
 };
