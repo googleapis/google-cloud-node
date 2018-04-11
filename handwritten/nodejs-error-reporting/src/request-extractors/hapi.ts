@@ -77,22 +77,22 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function hapiRequestInformationExtractor(req: hapi.Request) {
+export function hapiRequestInformationExtractor(req?: hapi.Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isObject(req.headers) || isFunction(req) ||
+  if (!isObject(req) || !isObject(req!.headers) || isFunction(req) ||
       isArray(req)) {
     return returnObject;
   }
 
   returnObject
-      .setMethod(req.method)
+      .setMethod(req!.method)
       // TODO: Address the type conflict that requires a cast to string
-      .setUrl(req.url as {} as string)
-      .setUserAgent(req.headers['user-agent'])
-      .setReferrer(req.headers.referrer)
-      .setStatusCode(attemptToExtractStatusCode(req))
-      .setRemoteAddress(extractRemoteAddressFromRequest(req));
+      .setUrl(req!.url as {} as string)
+      .setUserAgent(req!.headers['user-agent'])
+      .setReferrer(req!.headers.referrer)
+      .setStatusCode(attemptToExtractStatusCode(req!))
+      .setRemoteAddress(extractRemoteAddressFromRequest(req!));
 
   return returnObject;
 }

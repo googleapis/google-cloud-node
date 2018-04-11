@@ -26,6 +26,10 @@ import {EventEmitter} from 'events';
 import * as config from '../../../src/configuration';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
+import * as http from 'http';
+import * as hapi from 'hapi';
+
+const packageJson = require('../../../../package.json');
 
 type HapiPlugin = {
   register:
@@ -172,6 +176,103 @@ describe('Hapi interface', () => {
         done();
       });
       fakeServer.emit(EVENT, {response: {isBoom: true}}, {continue() {}});
+    });
+  });
+  describe('Hapi17', () => {
+    const errorsSent: ErrorMessage[] = [];
+    // the only method in the client that should be used is `sendError`
+    const fakeClient = {
+      sendError:
+          (errorMessage: ErrorMessage,
+           userCb?: (
+               err: Error|null, response: http.ServerResponse|null, body: {}) =>
+               void) => {
+            errorsSent.push(errorMessage);
+          }
+    } as {} as RequestHandler;
+
+    // the configuration should be not be needed to send errors correctly
+    const plugin = hapiInterface(fakeClient, {} as Configuration);
+
+    afterEach(() => {
+      errorsSent.length = 0;
+    });
+
+    it('Plugin should have name and version properties', () => {
+      assert.strictEqual(plugin.name, packageJson.name);
+      assert.strictEqual(plugin.version, packageJson.version);
+    });
+
+    it(`Should record 'log' events correctly`, () => {
+      const fakeServer = {events: new EventEmitter()};
+
+      // emulate how the hapi server would register itself
+      plugin.register(fakeServer, {});
+
+      // emulate the hapi server emitting a log event
+      const testError = new Error('Error emitted through a log event');
+
+      // this event should not be recorded
+      fakeServer.events.emit('log', {error: testError, channel: 'internal'});
+
+      // this event should be recorded
+      fakeServer.events.emit('log', {error: testError, channel: 'app'});
+
+      assert.strictEqual(errorsSent.length, 1);
+      const errorMessage = errorsSent[0];
+
+      // note: the error's stack contains the error message
+      assert.strictEqual(errorMessage.message, testError.stack);
+    });
+
+    it(`Should record 'request' events correctly`, () => {
+      const fakeServer = {events: new EventEmitter()};
+
+      // emulate how the hapi server would register itself
+      plugin.register(fakeServer, {});
+
+      // emulate the hapi server emitting a request event
+      // a cast to hapi.Request is being done since only the listed
+      // properties are the properties that are being tested.  In
+      // addition other properties of hapi.Request should be needed
+      // to properly send the error.
+      const fakeRequest = {
+        method: 'custom-method',
+        url: 'custom-url',
+        headers: {
+          'user-agent': 'custom-user-agent',
+          referrer: 'custom-referrer',
+          'x-forwarded-for': 'some-remote-address'
+        },
+        response: {statusCode: 42}
+      } as {} as hapi.Request;
+
+      const testError = new Error('Error emitted through a request event');
+
+      // this event should not be recorded
+      fakeServer.events.emit(
+          'request', fakeRequest, {error: testError, channel: 'internal'});
+
+      // this event should be recorded
+      fakeServer.events.emit(
+          'request', fakeRequest, {error: testError, channel: 'error'});
+
+      assert.strictEqual(errorsSent.length, 1);
+      const errorMessage = errorsSent[0];
+
+      // note: the error's stack contains the error message
+      assert.strictEqual(errorMessage.message, testError.stack);
+      assert.strictEqual(
+          errorMessage.context.httpRequest.method, 'custom-method');
+      assert.strictEqual(errorMessage.context.httpRequest.url, 'custom-url');
+      assert.strictEqual(
+          errorMessage.context.httpRequest.userAgent, 'custom-user-agent');
+      assert.strictEqual(
+          errorMessage.context.httpRequest.referrer, 'custom-referrer');
+      assert.strictEqual(
+          errorMessage.context.httpRequest.remoteIp, 'some-remote-address');
+      assert.strictEqual(
+          errorMessage.context.httpRequest.responseStatusCode, 42);
     });
   });
 });
