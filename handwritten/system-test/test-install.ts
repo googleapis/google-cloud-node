@@ -108,8 +108,37 @@ server.route({
 server.register(errors.hapi);
 `,
     description: 'uses hapi16',
-    dependencies: ['hapi@16.6.3'],
-    devDependencies: ['@types/hapi@16.1.14']
+    dependencies: ['hapi@16.x.x'],
+    devDependencies: ['@types/hapi@16.x.x']
+  },
+  {
+    code: `import * as hapi from 'hapi';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+async function start() {
+  const server = new hapi.Server({
+    host: '0.0.0.0',
+    port: 3000
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/error',
+    handler: async (request, h) => {
+      throw new Error(\`You requested an error at ${new Date()}\`);
+    }
+  });
+
+  await server.register(errors.hapi);
+}
+
+start().catch(console.error);
+`,
+    description: 'uses hapi17',
+    dependencies: ['hapi@17.x.x'],
+    devDependencies: ['@types/hapi@17.x.x']
   },
   {
     code: `import * as Koa from 'koa';
@@ -240,7 +269,36 @@ server.route({
 server.register(errors.hapi);
 `,
     description: 'uses hapi16',
-    dependencies: ['hapi@16.6.3'],
+    dependencies: ['hapi@16.x.x'],
+    devDependencies: []
+  },
+  {
+    code: `const hapi = require('hapi');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = new ErrorReporting();
+
+async function start() {
+  const server = new hapi.Server({
+    host: '0.0.0.0',
+    port: 3000
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/error',
+    handler: async (request, h) => {
+      throw new Error(\`You requested an error at ${new Date()}\`);
+    }
+  });
+
+  await server.register(errors.hapi);
+}
+
+start().catch(console.error);
+`,
+    description: 'uses hapi17',
+    dependencies: ['hapi@17.x.x'],
     devDependencies: []
   },
   {
