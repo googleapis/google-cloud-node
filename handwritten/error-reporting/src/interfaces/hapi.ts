@@ -37,13 +37,13 @@ import * as hapi from 'hapi';
  * @returns {ErrorMessage} - a partially or fully populated instance of
  *  ErrorMessage
  */
-function hapiErrorHandler(req: hapi.Request, err: {}, config: Configuration) {
+function hapiErrorHandler(err: {}, req?: hapi.Request, config?: Configuration) {
   let service = '';
   let version: string|undefined = '';
 
   if (isObject(config)) {
-    service = config.getServiceContext().service;
-    version = config.getServiceContext().version;
+    service = config!.getServiceContext().service;
+    version = config!.getServiceContext().version;
   }
 
   const em =
@@ -78,40 +78,68 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
    *  plugin
    * @returns {Undefined} - returns the execution of the next callback
    */
-  function hapiRegisterFunction(server: {}, options: {}, next: Function) {
-    if (isObject(server)) {
-      if (isFunction((server as hapi.Server).on)) {
-        (server as hapi.Server).on('request-error', (req, err) => {
-          client.sendError(hapiErrorHandler(req, err, config));
-        });
-      }
+  function hapiRegisterFunction(
+      server: any,  // tslint:disable-line:no-any
+      options: {}, next?: Function) {
+    if (server) {
+      if (server.events && server.events.on) {
+        // Hapi 17 is being used
+        server.events.on(
+            'log', (event: {error?: {}; channel: string;}, tags: {}) => {
+              if (event.error && event.channel === 'app') {
+                client.sendError(hapiErrorHandler(event.error));
+              }
+            });
 
-      if (isFunction((server as hapi.Server).ext)) {
-        (server as hapi.Server).ext('onPreResponse', (request, reply) => {
-          if (isObject(request) && isObject(request.response) &&
-              // TODO: Handle the case when `request.response` is null
-              request.response!.isBoom) {
-            const em = hapiErrorHandler(
-                request,
-                // TODO: Handle the case when `request.response` is null
-                // TODO: Handle the type conflict that requires a cast to string
-                new Error(request.response!.message as {} as string), config);
-            client.sendError(em);
-          }
+        server.events.on(
+            'request',
+            (request: hapi.Request, event: {error?: {}; channel: string;},
+             tags: {}) => {
+              if (event.error && event.channel === 'error') {
+                client.sendError(hapiErrorHandler(event.error, request));
+              }
+            });
+      } else {
+        if (isFunction(server.on)) {
+          server.on('request-error', (req: hapi.Request, err: {}) => {
+            client.sendError(hapiErrorHandler(err, req, config));
+          });
+        }
 
-          if (reply && isFunction(reply.continue)) {
-            reply.continue();
-          }
-        });
+        if (isFunction(server.ext)) {
+          server.ext(
+              'onPreResponse',
+              (request: hapi.Request, reply: hapi.ReplyWithContinue) => {
+                if (isObject(request) && isObject(request.response) &&
+                    // TODO: Handle the case when `request.response` is null
+                    request.response!.isBoom) {
+                  const em = hapiErrorHandler(
+                      // TODO: Handle the case when `request.response` is null
+                      // TODO: Handle the type conflict that requires a cast to
+                      // string
+                      new Error(request.response!.message as {} as string),
+                      request, config);
+                  client.sendError(em);
+                }
+
+                if (reply && isFunction(reply.continue)) {
+                  reply.continue();
+                }
+              });
+        }
       }
     }
 
     if (isFunction(next)) {
-      return next();
+      return next!();
     }
   }
 
-  const hapiPlugin = {register: hapiRegisterFunction};
+  const hapiPlugin = {
+    register: hapiRegisterFunction,
+    name: packageJson.name,
+    version: packageJson.version
+  };
 
   (hapiPlugin.register as {} as {attributes: {}}).attributes = {
     name: packageJson.name,
