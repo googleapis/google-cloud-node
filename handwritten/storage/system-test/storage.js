@@ -35,7 +35,6 @@ var util = require('@google-cloud/common').util;
 
 var Storage = require('../');
 var Bucket = Storage.Bucket;
-var File = Storage.File;
 var PubSub = require('@google-cloud/pubsub');
 
 describe('storage', function() {
@@ -1961,30 +1960,41 @@ describe('storage', function() {
   });
 
   describe('list files', function() {
+    var DIRECTORY_NAME = 'directory-name';
+
     var NEW_FILES = [
       bucket.file('CloudLogo1'),
       bucket.file('CloudLogo2'),
       bucket.file('CloudLogo3'),
+      bucket.file(`${DIRECTORY_NAME}/CloudLogo4`),
+      bucket.file(`${DIRECTORY_NAME}/CloudLogo5`),
+      bucket.file(`${DIRECTORY_NAME}/inner/CloudLogo6`),
     ];
 
     before(function(done) {
       bucket.deleteFiles(function(err) {
-        assert.ifError(err);
+        if (err) {
+          done(err);
+          return;
+        }
 
         var originalFile = NEW_FILES[0];
-        var copiedFile1 = NEW_FILES[1];
-        var copiedFile2 = NEW_FILES[2];
+        var cloneFiles = NEW_FILES.slice(1);
 
-        fs
-          .createReadStream(FILES.logo.path)
-          .pipe(originalFile.createWriteStream())
-          .on('error', done)
-          .on('finish', function() {
-            originalFile.copy(copiedFile1, function(err) {
-              assert.ifError(err);
-              copiedFile1.copy(copiedFile2, done);
-            });
-          });
+        bucket.upload(
+          FILES.logo.path,
+          {
+            destination: originalFile,
+          },
+          function(err) {
+            if (err) {
+              done(err);
+              return;
+            }
+
+            async.each(cloneFiles, originalFile.copy.bind(originalFile), done);
+          }
+        );
       });
     });
 
@@ -2001,16 +2011,39 @@ describe('storage', function() {
     });
 
     it('should get files as a stream', function(done) {
-      var fileEmitted = false;
+      var numFilesEmitted = 0;
 
       bucket
         .getFilesStream()
         .on('error', done)
-        .on('data', function(file) {
-          fileEmitted = file instanceof File;
+        .on('data', function() {
+          numFilesEmitted++;
         })
         .on('end', function() {
-          assert.strictEqual(fileEmitted, true);
+          assert.strictEqual(numFilesEmitted, NEW_FILES.length);
+          done();
+        });
+    });
+
+    it('should get files from a directory', function(done) {
+      bucket.getFiles({directory: DIRECTORY_NAME}, function(err, files) {
+        assert.ifError(err);
+        assert.strictEqual(files.length, 3);
+        done();
+      });
+    });
+
+    it('should get files from a directory as a stream', function(done) {
+      var numFilesEmitted = 0;
+
+      bucket
+        .getFilesStream({directory: DIRECTORY_NAME})
+        .on('error', done)
+        .on('data', function() {
+          numFilesEmitted++;
+        })
+        .on('end', function() {
+          assert.strictEqual(numFilesEmitted, 2);
           done();
         });
     });

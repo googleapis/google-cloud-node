@@ -1158,6 +1158,8 @@ Bucket.prototype.get = function(options, callback) {
  *     names, aside from the prefix, contain delimiter will have their name
  *     truncated after the delimiter, returned in `apiResponse.prefixes`.
  *     Duplicate prefixes are omitted.
+ * @property {string} [directory] Filter results based on a directory name, or
+ *     more technically, a "prefix".
  * @property {string} [prefix] Filter results to objects whose names begin
  *     with this prefix.
  * @property {number} [maxApiCalls] Maximum number of API calls to make.
@@ -1252,6 +1254,13 @@ Bucket.prototype.getFiles = function(query, callback) {
   if (!callback) {
     callback = query;
     query = {};
+  }
+
+  query = extend({}, query);
+
+  if (query.directory) {
+    query.prefix = `${query.directory}/`.replace(/\/*$/, '/');
+    delete query.directory;
   }
 
   this.request(
