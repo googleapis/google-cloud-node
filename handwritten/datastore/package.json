@@ -76,7 +76,7 @@
     "prop-assign": "^1.0.0",
     "propprop": "^0.3.0",
     "safe-buffer": "^5.1.1",
-    "split-array-stream": "^1.0.0",
+    "split-array-stream": "^2.0.0",
     "stream-events": "^1.0.2",
     "through2": "^2.0.3"
   },
