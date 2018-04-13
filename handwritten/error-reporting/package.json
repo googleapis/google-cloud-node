@@ -129,7 +129,7 @@
     "prettier": "^1.7.4",
     "proxyquire": "^2.0.0",
     "request": "^2.85.0",
-    "restify": "^6.3.4",
+    "restify": "^7.1.1",
     "rimraf": "^2.6.2",
     "tmp": "0.0.33",
     "typescript": "~2.8.1"
