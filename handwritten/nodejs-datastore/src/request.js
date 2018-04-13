@@ -22,7 +22,7 @@ var concat = require('concat-stream');
 var extend = require('extend');
 var is = require('is');
 var propAssign = require('prop-assign');
-var split = require('split-array-stream');
+var split = require('split-array-stream').split;
 var streamEvents = require('stream-events');
 var through = require('through2');
 
@@ -266,7 +266,7 @@ DatastoreRequest.prototype.createReadStream = function(keys, options) {
           .map(entity.keyFromKeyProto)
           .map(entity.keyToKeyProto);
 
-        split(entities, stream, function(streamEnded) {
+        split(entities, stream).then(function(streamEnded) {
           if (streamEnded) {
             return;
           }
@@ -696,7 +696,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
     }
 
     // Emit each result right away, then get the rest if necessary.
-    split(entities, stream, function(streamEnded) {
+    split(entities, stream).then(function(streamEnded) {
       if (streamEnded) {
         return;
       }
