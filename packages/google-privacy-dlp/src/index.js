@@ -22,14 +22,13 @@
  * @namespace google.cloud.dlp
  */
 /**
- * @namespace google.cloud.dlp.v2beta1
+ * @namespace google.cloud.dlp.v2
  */
 
 'use strict';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
-  v2beta1: require('./v2beta1'),
   v2: require('./v2'),
 });
 
@@ -37,11 +36,11 @@ const gapic = Object.freeze({
  * The `@google-cloud/dlp` package has the following named exports:
  *
  * - `DlpServiceClient` - Reference to
- *   {@link v2beta1.DlpServiceClient}
- * - `v2beta1` - This is used for selecting or pinning a
+ *   {@link v2.DlpServiceClient}
+ * - `v2` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `DlpServiceClient` - Reference to
- *       {@link v2beta1.DlpServiceClient}
+ *       {@link v2.DlpServiceClient}
  *
  * @module {object} @google-cloud/dlp
  * @alias nodejs-dlp
@@ -65,16 +64,15 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} DlpServiceClient
- *   Reference to {@link v2beta1.DlpServiceClient}
+ *   Reference to {@link v2.DlpServiceClient}
  */
 module.exports = gapic.v2;
 
 /**
  * @type {object}
  * @property {constructor} DlpServiceClient
- *   Reference to {@link v2beta1.DlpServiceClient}
+ *   Reference to {@link v2.DlpServiceClient}
  */
-module.exports.v2beta1 = gapic.v2beta1;
 module.exports.v2 = gapic.v2;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
