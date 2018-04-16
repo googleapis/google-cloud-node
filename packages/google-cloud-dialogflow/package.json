@@ -1,7 +1,7 @@
 {
   "name": "dialogflow",
   "description": "Dialogflow API client for Node.js",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
