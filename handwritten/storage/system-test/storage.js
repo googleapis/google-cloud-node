@@ -2043,7 +2043,7 @@ describe('storage', function() {
           numFilesEmitted++;
         })
         .on('end', function() {
-          assert.strictEqual(numFilesEmitted, 2);
+          assert.strictEqual(numFilesEmitted, 3);
           done();
         });
     });
