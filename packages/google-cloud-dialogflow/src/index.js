@@ -22,6 +22,9 @@
  * @namespace google.cloud.dialogflow
  */
 /**
+ * @namespace google.cloud.dialogflow.v2
+ */
+/**
  * @namespace google.cloud.dialogflow.v2beta1
  */
 
@@ -29,8 +32,92 @@
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
+  v2: require('./v2'),
   v2beta1: require('./v2beta1'),
 });
+
+/**
+ * The `dialogflow` package has the following named exports:
+ *
+ * - `AgentsClient` - Reference to
+ *   {@link v2.AgentsClient}
+ * - `ContextsClient` - Reference to
+ *   {@link v2.ContextsClient}
+ * - `EntityTypesClient` - Reference to
+ *   {@link v2.EntityTypesClient}
+ * - `IntentsClient` - Reference to
+ *   {@link v2.IntentsClient}
+ * - `SessionEntityTypesClient` - Reference to
+ *   {@link v2.SessionEntityTypesClient}
+ * - `SessionsClient` - Reference to
+ *   {@link v2.SessionsClient}
+ * - `v2` - This is used for selecting or pinning a
+ *   particular backend service version. It exports:
+ *     - `AgentsClient` - Reference to
+ *       {@link v2.AgentsClient}
+ *     - `ContextsClient` - Reference to
+ *       {@link v2.ContextsClient}
+ *     - `EntityTypesClient` - Reference to
+ *       {@link v2.EntityTypesClient}
+ *     - `IntentsClient` - Reference to
+ *       {@link v2.IntentsClient}
+ *     - `SessionEntityTypesClient` - Reference to
+ *       {@link v2.SessionEntityTypesClient}
+ *     - `SessionsClient` - Reference to
+ *       {@link v2.SessionsClient}
+ *
+ * @module {object} dialogflow
+ * @alias nodejs-dialogflow
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save dialogflow
+ *
+ * @example <caption>Import the client library:</caption>
+ * const dialogflow = require('dialogflow');
+ *
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new dialogflow.AgentsClient();
+ *
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new dialogflow.AgentsClient({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json',
+ * });
+ */
+
+/**
+ * @type {object}
+ * @property {constructor} AgentsClient
+ *   Reference to {@link v2.AgentsClient}
+ * @property {constructor} ContextsClient
+ *   Reference to {@link v2.ContextsClient}
+ * @property {constructor} EntityTypesClient
+ *   Reference to {@link v2.EntityTypesClient}
+ * @property {constructor} IntentsClient
+ *   Reference to {@link v2.IntentsClient}
+ * @property {constructor} SessionEntityTypesClient
+ *   Reference to {@link v2.SessionEntityTypesClient}
+ * @property {constructor} SessionsClient
+ *   Reference to {@link v2.SessionsClient}
+ */
+module.exports = gapic.v2;
+
+/**
+ * @type {object}
+ * @property {constructor} AgentsClient
+ *   Reference to {@link v2.AgentsClient}
+ * @property {constructor} ContextsClient
+ *   Reference to {@link v2.ContextsClient}
+ * @property {constructor} EntityTypesClient
+ *   Reference to {@link v2.EntityTypesClient}
+ * @property {constructor} IntentsClient
+ *   Reference to {@link v2.IntentsClient}
+ * @property {constructor} SessionEntityTypesClient
+ *   Reference to {@link v2.SessionEntityTypesClient}
+ * @property {constructor} SessionsClient
+ *   Reference to {@link v2.SessionsClient}
+ */
+module.exports.v2 = gapic.v2;
 
 /**
  * The `dialogflow` package has the following named exports:
@@ -80,23 +167,6 @@ const gapic = Object.freeze({
  *   keyFilename: '/path/to/keyfile.json',
  * });
  */
-
-/**
- * @type {object}
- * @property {constructor} AgentsClient
- *   Reference to {@link v2beta1.AgentsClient}
- * @property {constructor} ContextsClient
- *   Reference to {@link v2beta1.ContextsClient}
- * @property {constructor} EntityTypesClient
- *   Reference to {@link v2beta1.EntityTypesClient}
- * @property {constructor} IntentsClient
- *   Reference to {@link v2beta1.IntentsClient}
- * @property {constructor} SessionEntityTypesClient
- *   Reference to {@link v2beta1.SessionEntityTypesClient}
- * @property {constructor} SessionsClient
- *   Reference to {@link v2beta1.SessionsClient}
- */
-module.exports = gapic.v2beta1;
 
 /**
  * @type {object}
