@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/bigquery": "^0.10.0",
-    "@google-cloud/dlp": "0.4.0",
+    "@google-cloud/dlp": "0.5.0",
     "@google-cloud/pubsub": "^0.16.2",
     "google-auth-library": "0.11.0",
     "google-auto-auth": "0.7.2",
