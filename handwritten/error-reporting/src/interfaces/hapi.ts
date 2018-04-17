@@ -110,15 +110,14 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
           server.ext(
               'onPreResponse',
               (request: hapi.Request, reply: hapi.ReplyWithContinue) => {
-                if (isObject(request) && isObject(request.response) &&
-                    // TODO: Handle the case when `request.response` is null
-                    request.response!.isBoom) {
+                if (isObject(request) && request.response &&
+                    request.response.isBoom) {
+                  // Cast to {} is necessary, as@types/hapi@16 incorrectly types
+                  // response as 'Response | null' instead of 'Response | Boom |
+                  // null'.
+                  const boom = request.response as {} as Error;
                   const em = hapiErrorHandler(
-                      // TODO: Handle the case when `request.response` is null
-                      // TODO: Handle the type conflict that requires a cast to
-                      // string
-                      new Error(request.response!.message as {} as string),
-                      request, config);
+                      new Error(boom.message), request, config);
                   client.sendError(em);
                 }
 
