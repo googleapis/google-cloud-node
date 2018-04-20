@@ -153,22 +153,61 @@ function logError(msg: string, config: Config) {
  */
 export async function startLocal(config: Config = {}): Promise<void> {
   const normalizedConfig = await initConfig(config);
-  profiler = new Profiler(normalizedConfig);
+  const profiler = new Profiler(normalizedConfig);
 
-  while (true) {
+  // Set up periodic logging.
+  const logger = new common.logger({
+    level: common.logger.LEVELS[normalizedConfig.logLevel],
+    tag: pjson.name
+  });
+  let heapProfileCount = 0;
+  let timeProfileCount = 0;
+  let prevLogTime = Date.now();
+
+  setInterval(() => {
+    const curTime = Date.now();
+    const {rss, heapTotal, heapUsed} = process.memoryUsage();
+    logger.debug(
+        new Date().toISOString(),
+        'rss',
+        (rss / (1024 * 1024)).toFixed(3),
+        'MiB,',
+        'heap total',
+        (heapTotal / (1024 * 1024)).toFixed(3),
+        'MiB,',
+        'heap used',
+        (heapUsed / (1024 * 1024)).toFixed(3),
+        'MiB,',
+        'heap profile collection rate',
+        (heapProfileCount * 1000 / (curTime - prevLogTime)).toFixed(3),
+        'profiles/s,',
+        'time profile collection rate',
+        (timeProfileCount * 1000 / (curTime - prevLogTime)).toFixed(3),
+        'profiles/s',
+    );
+
+    heapProfileCount = 0;
+    timeProfileCount = 0;
+    prevLogTime = curTime;
+  }, normalizedConfig.localLogPeriodMillis);
+
+  // Periodic profiling
+  setInterval(async () => {
     if (!config.disableHeap) {
       const heap = await profiler.profile(
-          {name: 'HEAP-Profile' + new Date(), profileType: 'HEAP'});
+          {name: 'Heap-Profile' + new Date(), profileType: 'HEAP'});
+      heapProfileCount++;
     }
+    await delay(normalizedConfig.localProfilingPeriodMillis / 2);
     if (!config.disableTime) {
       const wall = await profiler.profile({
         name: 'Time-Profile' + new Date(),
         profileType: 'WALL',
-        duration: '10s'
+        duration: normalizedConfig.localTimeDurationMillis.toString() + 'ms'
       });
+      timeProfileCount++;
     }
-    await delay(1000);
-  }
+  }, normalizedConfig.localProfilingPeriodMillis);
 }
 
 // If the module was --require'd from the command line, start the agent.

@@ -106,6 +106,21 @@ export interface Config extends AuthenticationConfig {
   // Allows user to specify API URL other than
   // https://cloudprofiler.googleapis.com/v2.
   baseApiUrl?: string;
+
+  // Time between profile collection.
+  // For testing with startLocal() only.
+  localProfilingPeriodMillis?: number;
+
+
+  // Debugging information for startLocal will be recorded every
+  // localLogPeriodMillis milliseconds.
+  // For testing with startLocal() only.
+  localLogPeriodMillis?: number;
+
+
+  // Duration of time profiles collected when using startLocal().
+  // For testing with startLocal() only.
+  localTimeDurationMillis?: number;
 }
 
 // Interface for an initialized config.
@@ -125,6 +140,9 @@ export interface ProfilerConfig extends AuthenticationConfig {
   backoffMultiplier: number;
   serverBackoffCapMillis: number;
   baseApiUrl: string;
+  localProfilingPeriodMillis: number;
+  localLogPeriodMillis: number;
+  localTimeDurationMillis: number;
 }
 
 // Default values for configuration for a profiler.
@@ -144,5 +162,9 @@ export const defaultConfig = {
   // This is the largest duration for setTimeout which does not cause it to
   // run immediately.
   // https://nodejs.org/dist/latest-v9.x/docs/api/timers.html#timers_settimeout_callback_delay_args.
-  serverBackoffCapMillis: 2147483647
+  serverBackoffCapMillis: 2147483647,
+
+  localProfilingPeriodMillis: 1000,
+  localLogPeriodMillis: 10000,
+  localTimeDurationMillis: 1000
 };

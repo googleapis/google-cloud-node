@@ -57,7 +57,10 @@ const testConfig: ProfilerConfig = {
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
   serverBackoffCapMillis: parseDuration('7d'),
-  baseApiUrl: API
+  baseApiUrl: API,
+  localProfilingPeriodMillis: 1000,
+  localTimeDurationMillis: 1000,
+  localLogPeriodMillis: 1000
 };
 
 
