@@ -257,7 +257,7 @@ describe('Compute', function() {
           assert.ifError(err);
 
           operation.on('error', done).on('complete', function() {
-            done();
+            snapshot.getMetadata(done);
           });
         });
     });

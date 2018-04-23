@@ -72,7 +72,10 @@ describe('Snapshot', function() {
       var calledWith = snapshot.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
-      assert.strictEqual(calledWith.baseUrl, '/global/snapshots');
+      assert.strictEqual(
+        calledWith.baseUrl,
+        'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots'
+      );
       assert.strictEqual(calledWith.id, SNAPSHOT_NAME);
       assert.deepEqual(calledWith.methods, {
         exists: true,

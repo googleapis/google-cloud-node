@@ -129,7 +129,8 @@ function Snapshot(scope, name) {
 
   var config = {
     parent: scope,
-    baseUrl: '/global/snapshots',
+    baseUrl:
+      'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots',
     /**
      * @name Snapshot#id
      * @type {string}
