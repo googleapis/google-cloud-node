@@ -237,20 +237,10 @@ var StreamingRecognitionConfig = {
  *   version of the specified model does not exist, then the speech is
  *   recognized using the standard version of the specified model.
  *
- *   Enhanced speech models require that you enable audio logging for
- *   your request. To enable audio logging, set the `loggingConsentState` field
- *   to ENABLED in the GoogleDataCollectionConfig section of your request.
- *   You must also opt-in to the audio logging alpha using the instructions in
- *   the [alpha documentation](https://cloud.google.com/speech/data-sharing). If you set `use_enhanced`
- *   to true and you have not enabled audio logging, then you will receive
- *   an error.
- *
- * @property {Object} googleDataCollectionOptIn
- *   *Optional* Contains settings to opt-in to allow Google to
- *   collect and use data from this request to improve Google's products and
- *   services.
- *
- *   This object should have the same structure as [GoogleDataCollectionConfig]{@link google.cloud.speech.v1p1beta1.GoogleDataCollectionConfig}
+ *   Enhanced speech models require that you opt-in to the audio logging using
+ *   instructions in the [alpha documentation](https://cloud.google.com/speech/data-sharing). If you set
+ *   `use_enhanced` to true and you have not enabled audio logging, then you
+ *   will receive an error.
  *
  * @typedef RecognitionConfig
  * @memberof google.cloud.speech.v1p1beta1
@@ -565,33 +555,6 @@ var RecognitionMetadata = {
 };
 
 /**
- * Google data collection opt-in settings.
- *
- * @property {number} loggingConsentState
- *   The number should be among the values of [LoggingConsentState]{@link google.cloud.speech.v1p1beta1.LoggingConsentState}
- *
- * @typedef GoogleDataCollectionConfig
- * @memberof google.cloud.speech.v1p1beta1
- * @see [google.cloud.speech.v1p1beta1.GoogleDataCollectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1p1beta1/cloud_speech.proto}
- */
-var GoogleDataCollectionConfig = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-
-  /**
-   * Speech content will not be logged until authorized consent is opted in.
-   * Once it is opted in, this flag enables/disables logging to override that
-   * consent.  default = ENABLED (logging due to consent).
-   *
-   * @enum {number}
-   * @memberof google.cloud.speech.v1p1beta1
-   */
-  LoggingConsentState: {
-    ENABLED: 0,
-    DISABLED: 1
-  }
-};
-
-/**
  * Provides "hints" to the speech recognizer to favor specific words and phrases
  * in the results.
  *
@@ -878,6 +841,8 @@ var SpeechRecognitionResult = {
  *
  * @property {Object[]} words
  *   Output only. A list of word-specific information for each recognized word.
+ *   Note: When enable_speaker_diarization is true, you will see all the words
+ *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.speech.v1p1beta1.WordInfo}
  *
