@@ -20,6 +20,7 @@ const fs = require('fs');
 const is = require('is');
 const path = require('path');
 const promisify = require('@google-cloud/common').util.promisify;
+const protobuf = require('protobufjs');
 
 const gax = require('google-gax');
 
@@ -243,16 +244,19 @@ module.exports = apiVersion => {
     });
   });
 
-  // Get a list of features available on the API. Although we could iterate over
-  // them and create single-feature methods for each dynamically, for
-  // documentation purpose, we manually list all the single-feature methods
-  // below.
-  const features = gax
-    .grpc()
-    .loadProto(
-      path.join(__dirname, '..', 'protos'),
+  let protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+  protoFilesRoot = protobuf.loadSync(
+    path.join(
+      __dirname,
+      '..',
+      'protos',
       `google/cloud/vision/${apiVersion}/image_annotator.proto`
-    ).google.cloud.vision[apiVersion].Feature.Type.values;
+    ),
+    protoFilesRoot
+  );
+  const features = protoFilesRoot.lookup(
+    `google.cloud.vision.${apiVersion}.Feature.Type`
+  ).values;
 
   /**
    * Annotate a single image with face detection.
