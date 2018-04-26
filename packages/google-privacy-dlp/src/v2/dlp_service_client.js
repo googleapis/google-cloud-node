@@ -583,7 +583,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Creates an inspect template for re-using frequently used configuration
+   * Creates an InspectTemplate for re-using frequently used configuration
    * for inspecting content, images, and storage.
    *
    * @param {Object} request
@@ -644,7 +644,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Updates the inspect template.
+   * Updates the InspectTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -704,7 +704,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Gets an inspect template.
+   * Gets an InspectTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -752,7 +752,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Lists inspect templates.
+   * Lists InspectTemplates.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -903,7 +903,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Deletes an inspect template.
+   * Deletes an InspectTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -947,8 +947,8 @@ class DlpServiceClient {
   }
 
   /**
-   * Creates a de-identify template for re-using frequently used configuration
-   * for Deidentifying content, images, and storage.
+   * Creates a DeidentifyTemplate for re-using frequently used configuration
+   * for de-identifying content, images, and storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1008,7 +1008,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Updates the de-identify template.
+   * Updates the DeidentifyTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1068,7 +1068,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Gets a de-identify template.
+   * Gets a DeidentifyTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1120,7 +1120,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Lists de-identify templates.
+   * Lists DeidentifyTemplates.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1275,7 +1275,7 @@ class DlpServiceClient {
   }
 
   /**
-   * Deletes a de-identify template.
+   * Deletes a DeidentifyTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1319,8 +1319,8 @@ class DlpServiceClient {
   }
 
   /**
-   * Creates a new job to inspect storage or calculate risk metrics [How-to
-   * guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
+   * Creates a new job to inspect storage or calculate risk metrics.
+   * [How-to guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -90,7 +90,7 @@ service DlpService {
     };
   }
 
-  // Creates an inspect template for re-using frequently used configuration
+  // Creates an InspectTemplate for re-using frequently used configuration
   // for inspecting content, images, and storage.
   rpc CreateInspectTemplate(CreateInspectTemplateRequest) returns (InspectTemplate) {
     option (google.api.http) = {
@@ -103,7 +103,7 @@ service DlpService {
     };
   }
 
-  // Updates the inspect template.
+  // Updates the InspectTemplate.
   rpc UpdateInspectTemplate(UpdateInspectTemplateRequest) returns (InspectTemplate) {
     option (google.api.http) = {
       patch: "/v2/{name=organizations/*/inspectTemplates/*}"
@@ -115,7 +115,7 @@ service DlpService {
     };
   }
 
-  // Gets an inspect template.
+  // Gets an InspectTemplate.
   rpc GetInspectTemplate(GetInspectTemplateRequest) returns (InspectTemplate) {
     option (google.api.http) = {
       get: "/v2/{name=organizations/*/inspectTemplates/*}"
@@ -125,7 +125,7 @@ service DlpService {
     };
   }
 
-  // Lists inspect templates.
+  // Lists InspectTemplates.
   rpc ListInspectTemplates(ListInspectTemplatesRequest) returns (ListInspectTemplatesResponse) {
     option (google.api.http) = {
       get: "/v2/{parent=organizations/*}/inspectTemplates"
@@ -135,7 +135,7 @@ service DlpService {
     };
   }
 
-  // Deletes an inspect template.
+  // Deletes an InspectTemplate.
   rpc DeleteInspectTemplate(DeleteInspectTemplateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2/{name=organizations/*/inspectTemplates/*}"
@@ -145,8 +145,8 @@ service DlpService {
     };
   }
 
-  // Creates a de-identify template for re-using frequently used configuration
-  // for Deidentifying content, images, and storage.
+  // Creates a DeidentifyTemplate for re-using frequently used configuration
+  // for de-identifying content, images, and storage.
   rpc CreateDeidentifyTemplate(CreateDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
       post: "/v2/{parent=organizations/*}/deidentifyTemplates"
@@ -158,7 +158,7 @@ service DlpService {
     };
   }
 
-  // Updates the de-identify template.
+  // Updates the DeidentifyTemplate.
   rpc UpdateDeidentifyTemplate(UpdateDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
       patch: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -170,7 +170,7 @@ service DlpService {
     };
   }
 
-  // Gets a de-identify template.
+  // Gets a DeidentifyTemplate.
   rpc GetDeidentifyTemplate(GetDeidentifyTemplateRequest) returns (DeidentifyTemplate) {
     option (google.api.http) = {
       get: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -180,7 +180,7 @@ service DlpService {
     };
   }
 
-  // Lists de-identify templates.
+  // Lists DeidentifyTemplates.
   rpc ListDeidentifyTemplates(ListDeidentifyTemplatesRequest) returns (ListDeidentifyTemplatesResponse) {
     option (google.api.http) = {
       get: "/v2/{parent=organizations/*}/deidentifyTemplates"
@@ -190,7 +190,7 @@ service DlpService {
     };
   }
 
-  // Deletes a de-identify template.
+  // Deletes a DeidentifyTemplate.
   rpc DeleteDeidentifyTemplate(DeleteDeidentifyTemplateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2/{name=organizations/*/deidentifyTemplates/*}"
@@ -238,8 +238,8 @@ service DlpService {
     };
   }
 
-  // Creates a new job to inspect storage or calculate risk metrics [How-to
-  // guide](/dlp/docs/compute-risk-analysis).
+  // Creates a new job to inspect storage or calculate risk metrics.
+  // [How-to guide](/dlp/docs/compute-risk-analysis).
   rpc CreateDlpJob(CreateDlpJobRequest) returns (DlpJob) {
     option (google.api.http) = {
       post: "/v2/{parent=projects/*}/dlpJobs"
@@ -766,7 +766,7 @@ message InfoTypeStats {
 // The results of an inspect DataSource job.
 message InspectDataSourceDetails {
   message RequestedOptions {
-    // If run with an inspect template, a snapshot of it's state at the time of
+    // If run with an InspectTemplate, a snapshot of its state at the time of
     // this run.
     InspectTemplate snapshot_inspect_template = 1;
 
@@ -863,6 +863,18 @@ message PrivacyMetric {
     // supported so long as they are not structs themselves or nested within
     // a repeated field.
     repeated FieldId quasi_ids = 1;
+
+    // Optional message indicating that multiple rows might be associated to a
+    // single individual. If the same entity_id is associated to multiple
+    // quasi-identifier tuples over distict rows, we consider the entire
+    // collection of tuples as the composite quasi-identifier. This collection
+    // is a multiset: the order in which the different tuples appear in the
+    // dataset is ignored, but their frequency is taken into account.
+    //
+    // Important note: a maximum of 1000 rows can be associated to a single
+    // entity ID. If more rows are associated with the same entity ID, some
+    // might be ignored.
+    EntityId entity_id = 2;
   }
 
   // l-diversity metric, used for analysis of reidentification risk.
@@ -1933,13 +1945,15 @@ message JobTrigger {
 // A task to execute on the completion of a job.
 message Action {
   // If set, the detailed findings will be persisted to the specified
-  // OutputStorageConfig. Compatible with: Inspect
+  // OutputStorageConfig. Only a single instance of this action can be
+  // specified.
+  // Compatible with: Inspect
   message SaveFindings {
     OutputStorageConfig output_config = 1;
   }
 
   // Publish the results of a DlpJob to a pub sub channel.
-  // Compatible with: Inpect, Risk
+  // Compatible with: Inspect, Risk
   message PublishToPubSub {
     // Cloud Pub/Sub topic to send notifications to. The topic must have given
     // publishing access rights to the DLP API service account executing
@@ -1948,12 +1962,29 @@ message Action {
     string topic = 1;
   }
 
+  // Publish the result summary of a DlpJob to the Cloud Security
+  // Command Center (CSCC Alpha).
+  // This action is only available for projects which are parts of
+  // an organization and whitelisted for the alpha Cloud Security Command
+  // Center.
+  // The action will publish count of finding instances and their info types.
+  // The summary of findings will be persisted in CSCC and are governed by CSCC
+  // service-specific policy, see https://cloud.google.com/terms/service-terms
+  // Only a single instance of this action can be specified.
+  // Compatible with: Inspect
+  message PublishSummaryToCscc {
+
+  }
+
   oneof action {
     // Save resulting findings in a provided location.
     SaveFindings save_findings = 1;
 
     // Publish a notification to a pubsub topic.
     PublishToPubSub pub_sub = 2;
+
+    // Publish summary to Cloud Security Command Center (Alpha).
+    PublishSummaryToCscc publish_summary_to_cscc = 3;
   }
 }
 

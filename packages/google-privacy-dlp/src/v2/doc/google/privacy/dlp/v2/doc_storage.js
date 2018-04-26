@@ -101,6 +101,12 @@ var CustomInfoType = {
    *
    *   This object should have the same structure as [WordList]{@link google.privacy.dlp.v2.WordList}
    *
+   * @property {Object} cloudStoragePath
+   *   Newline-delimited file of words in Cloud Storage. Only a single file
+   *   is accepted.
+   *
+   *   This object should have the same structure as [CloudStoragePath]{@link google.privacy.dlp.v2.CloudStoragePath}
+   *
    * @typedef Dictionary
    * @memberof google.privacy.dlp.v2
    * @see [google.privacy.dlp.v2.CustomInfoType.Dictionary definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
@@ -368,6 +374,21 @@ var CloudStorageOptions = {
 };
 
 /**
+ * Message representing a path in Cloud Storage.
+ *
+ * @property {string} path
+ *   A url representing a file or path (no wildcards) in Cloud Storage.
+ *   Example: gs://[BUCKET_NAME]/dictionary.txt
+ *
+ * @typedef CloudStoragePath
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.CloudStoragePath definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
+ */
+var CloudStoragePath = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Options defining BigQuery table and row identifiers.
  *
  * @property {Object} tableReference
@@ -380,6 +401,11 @@ var CloudStorageOptions = {
  *   Nested fields in the format, like `person.birthdate.year`, are allowed.
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+ *
+ * @property {number} rowsLimit
+ *   Max number of rows to scan. If the table has more rows than this value, the
+ *   rest of the rows are omitted. If not set, or if set to 0, all rows will be
+ *   scanned. Cannot be used in conjunction with TimespanConfig.
  *
  * @typedef BigQueryOptions
  * @memberof google.privacy.dlp.v2
@@ -602,6 +628,26 @@ var BigQueryTable = {
 };
 
 /**
+ * An entity in a dataset is a field or set of fields that correspond to a
+ * single person. For example, in medical records the `EntityId` might be a
+ * patient identifier, or for financial records it might be an account
+ * identifier. This message is used when generalizations or analysis must take
+ * into account that multiple rows correspond to the same entity.
+ *
+ * @property {Object} field
+ *   Composite key indicating which field contains the entity identifier.
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+ *
+ * @typedef EntityId
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.EntityId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
+ */
+var EntityId = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Categorization of results based on how likely they are to represent a match,
  * based on the number of elements they contain which imply a match.
  *
@@ -647,17 +693,17 @@ var FileType = {
   FILE_TYPE_UNSPECIFIED: 0,
 
   /**
-   * Includes all file extensions not covered by other types.
+   * Includes all file extensions not covered by text file types.
    */
   BINARY_FILE: 1,
 
   /**
    * Included file extensions:
-   *   c, cc, cpp, cxx, c++, cs, css, dart, eml, go, h, hh, hpp, hxx, h++, hs,
-   *   html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json, ocaml, md, mkd,
-   *   markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw, rb, rbw, rs, rc,
-   *   scala, sh, sql, tex, txt, asc, text, brf, vcard, vcs, wml, xml, xsl, xsd,
-   *   yml, yaml.
+   *   asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,
+   *   hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,
+   *   ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,
+   *   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
+   *   xml, xsl, xsd, yml, yaml.
    */
   TEXT_FILE: 2
 };

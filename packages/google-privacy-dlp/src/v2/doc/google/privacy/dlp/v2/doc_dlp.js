@@ -849,7 +849,7 @@ var InspectDataSourceDetails = {
 
   /**
    * @property {Object} snapshotInspectTemplate
-   *   If run with an inspect template, a snapshot of it's state at the time of
+   *   If run with an InspectTemplate, a snapshot of its state at the time of
    *   this run.
    *
    *   This object should have the same structure as [InspectTemplate]{@link google.privacy.dlp.v2.InspectTemplate}
@@ -1046,6 +1046,20 @@ var PrivacyMetric = {
    *   a repeated field.
    *
    *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+   *
+   * @property {Object} entityId
+   *   Optional message indicating that multiple rows might be associated to a
+   *   single individual. If the same entity_id is associated to multiple
+   *   quasi-identifier tuples over distict rows, we consider the entire
+   *   collection of tuples as the composite quasi-identifier. This collection
+   *   is a multiset: the order in which the different tuples appear in the
+   *   dataset is ignored, but their frequency is taken into account.
+   *
+   *   Important note: a maximum of 1000 rows can be associated to a single
+   *   entity ID. If more rows are associated with the same entity ID, some
+   *   might be ignored.
+   *
+   *   This object should have the same structure as [EntityId]{@link google.privacy.dlp.v2.EntityId}
    *
    * @typedef KAnonymityConfig
    * @memberof google.privacy.dlp.v2
@@ -2802,6 +2816,11 @@ var JobTrigger = {
  *
  *   This object should have the same structure as [PublishToPubSub]{@link google.privacy.dlp.v2.PublishToPubSub}
  *
+ * @property {Object} publishSummaryToCscc
+ *   Publish summary to Cloud Security Command Center (Alpha).
+ *
+ *   This object should have the same structure as [PublishSummaryToCscc]{@link google.privacy.dlp.v2.PublishSummaryToCscc}
+ *
  * @typedef Action
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Action definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -2811,7 +2830,9 @@ var Action = {
 
   /**
    * If set, the detailed findings will be persisted to the specified
-   * OutputStorageConfig. Compatible with: Inspect
+   * OutputStorageConfig. Only a single instance of this action can be
+   * specified.
+   * Compatible with: Inspect
    *
    * @property {Object} outputConfig
    *   This object should have the same structure as [OutputStorageConfig]{@link google.privacy.dlp.v2.OutputStorageConfig}
@@ -2826,7 +2847,7 @@ var Action = {
 
   /**
    * Publish the results of a DlpJob to a pub sub channel.
-   * Compatible with: Inpect, Risk
+   * Compatible with: Inspect, Risk
    *
    * @property {string} topic
    *   Cloud Pub/Sub topic to send notifications to. The topic must have given
@@ -2839,6 +2860,25 @@ var Action = {
    * @see [google.privacy.dlp.v2.Action.PublishToPubSub definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
    */
   PublishToPubSub: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Publish the result summary of a DlpJob to the Cloud Security
+   * Command Center (CSCC Alpha).
+   * This action is only available for projects which are parts of
+   * an organization and whitelisted for the alpha Cloud Security Command
+   * Center.
+   * The action will publish count of finding instances and their info types.
+   * The summary of findings will be persisted in CSCC and are governed by CSCC
+   * service-specific policy, see https://cloud.google.com/terms/service-terms
+   * Only a single instance of this action can be specified.
+   * Compatible with: Inspect
+   * @typedef PublishSummaryToCscc
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.Action.PublishSummaryToCscc definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  PublishSummaryToCscc: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
