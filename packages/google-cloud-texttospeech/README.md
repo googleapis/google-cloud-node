@@ -46,7 +46,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     [Enable billing][billing]
 
-1.  Enable the Google Cloud Text-to-Speech API API.
+1.  Enable the Google Cloud Text-to-Speech API.
 
     [Enable the API][enable_api]
 
