@@ -27,7 +27,8 @@ const zone = compute.zone('us-central1-a');
 const name = 'ubuntu-http';
 
 zone
-  .createVM(name, {os: 'ubuntu'}, data => {
+  .createVM(name, {os: 'ubuntu'})
+  .then(data => {
     // `operation` lets you check the status of long-running tasks.
     const vm = data[0];
     const operation = data[1];
