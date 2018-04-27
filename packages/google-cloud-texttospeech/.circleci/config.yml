@@ -37,10 +37,18 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - publish_npm:
+      - sample_tests:
           requires:
             - lint
             - docs
+          filters:
+            branches:
+              only: master
+            tags:
+              only: '/^v[\d.]+$/'
+      - publish_npm:
+          requires:
+            - sample_tests
           filters:
             branches:
               ignore: /.*/
@@ -122,6 +130,15 @@ jobs:
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
+          name: Link the module being tested to the samples.
+          command: |
+            cd samples/
+            npm link @google-cloud/text-to-speech
+            npm install
+            cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
           name: Run linting.
           command: npm run lint
           environment:
@@ -144,6 +161,48 @@ jobs:
       - run:
           name: Build documentation.
           command: npm run docs
+  sample_tests:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run:
+          name: Decrypt credentials.
+          command: |
+            openssl aes-256-cbc -d -in .circleci/key.json.enc \
+                -out .circleci/key.json \
+                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
+      - run:
+          name: Install and link the module.
+          command: |
+            mkdir -p /home/node/.npm-global
+            npm install
+            npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Link the module being tested to the samples.
+          command: |
+            cd samples/
+            npm link @google-cloud/text-to-speech
+            npm install
+            cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Run sample tests.
+          command: npm run samples-test
+          environment:
+            GCLOUD_PROJECT: long-door-651
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/text-to-speech-samples/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Remove unencrypted key.
+          command: rm .circleci/key.json
+          when: always
+    working_directory: /home/node/text-to-speech-samples
   publish_npm:
     docker:
       - image: 'node:8'
@@ -155,4 +214,4 @@ jobs:
           command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
       - run:
           name: Publish the module to npm.
-          command: npm publish --access=public
+          command: npm publish

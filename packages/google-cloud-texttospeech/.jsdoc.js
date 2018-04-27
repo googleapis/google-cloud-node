@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2017 Google, Inc.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'text-to-speech',
+    systemName: '@google-cloud/text-to-speech',
     theme: 'lumen'
   }
 };
