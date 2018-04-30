@@ -186,8 +186,10 @@ export interface BunyanLogRecord {
   labels?: {}
 }
 
+export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | number;
+
 export interface StreamResponse {
-  level: string|number,
+  level: LogLevel,
   type: string,
-  stream: {}
+  stream: NodeJS.WritableStream
 }
