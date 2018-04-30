@@ -154,7 +154,7 @@ export const defaultConfig = {
   timeIntervalMicros: 1000,
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
-  initialBackoffMillis: 1000,
+  initialBackoffMillis: 60 * 1000,  // 1 minute
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
   baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',

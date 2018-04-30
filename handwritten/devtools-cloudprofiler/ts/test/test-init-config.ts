@@ -47,7 +47,7 @@ describe('initConfig', () => {
     timeIntervalMicros: 1000,
     heapIntervalBytes: 512 * 1024,
     heapMaxStackDepth: 64,
-    initialBackoffMillis: 1000,
+    initialBackoffMillis: 1000 * 60,
     backoffCapMillis: 60 * 60 * 1000,
     backoffMultiplier: 1.3,
     serverBackoffCapMillis: 2147483647,
