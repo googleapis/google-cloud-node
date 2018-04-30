@@ -17,10 +17,7 @@
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import * as nodeutil from 'util';
-
 import * as types from '../src/types/core';
-
-const util = require('@google-cloud/common').util;
 
 describe('logging-winston', () => {
   let fakeLogInstance: types.StackdriverLogging;
@@ -187,9 +184,10 @@ describe('logging-winston', () => {
     };
 
     beforeEach(() => {
-      fakeLogInstance.entry = util.noop;
-      loggingWinston.stackdriverLog.emergency = util.noop;
-      loggingWinston.stackdriverLog[STACKDRIVER_LEVEL] = util.noop;
+      // tslint:disable-next-line:no-any
+      fakeLogInstance.entry = (() => {}) as any;
+      loggingWinston.stackdriverLog.emergency = () => {};
+      loggingWinston.stackdriverLog[STACKDRIVER_LEVEL] = () => {};
     });
 
     it('should throw on a bad log level', () => {
