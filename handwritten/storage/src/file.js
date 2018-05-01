@@ -24,7 +24,6 @@ const createErrorClass = require('create-error-class');
 const crypto = require('crypto');
 const duplexify = require('duplexify');
 const extend = require('extend');
-const format = require('string-format-obj');
 const fs = require('fs');
 const hashStreamValidation = require('hash-stream-validation');
 const is = require('is');
@@ -364,10 +363,7 @@ File.prototype.copy = function(destination, options, callback) {
   this.request(
     {
       method: 'POST',
-      uri: format('/rewriteTo/b/{bucketName}/o/{fileName}', {
-        bucketName: destBucket.name,
-        fileName: encodeURIComponent(destName),
-      }),
+      uri: `/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(destName)}`,
       qs: query,
       json: options,
       headers: headers,
@@ -1731,10 +1727,9 @@ File.prototype.getSignedUrl = function(config, callback) {
 
   if (config.extensionHeaders) {
     for (const headerName in config.extensionHeaders) {
-      extensionHeadersString += format('{name}:{value}\n', {
-        name: headerName,
-        value: config.extensionHeaders[headerName],
-      });
+      extensionHeadersString += `${headerName}:${
+        config.extensionHeaders[headerName]
+      }\n`;
     }
   }
 
@@ -2376,10 +2371,7 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
     qs: {
       name: self.name,
     },
-    uri: format('{uploadBaseUrl}/{bucket}/o', {
-      uploadBaseUrl: STORAGE_UPLOAD_BASE_URL,
-      bucket: self.bucket.name,
-    }),
+    uri: `${STORAGE_UPLOAD_BASE_URL}/${self.bucket.name}/o`,
   };
 
   if (is.defined(this.generation)) {

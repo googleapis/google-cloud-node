@@ -21,7 +21,6 @@ const Buffer = require('safe-buffer').Buffer;
 const crypto = require('crypto');
 let duplexify;
 const extend = require('extend');
-const format = require('string-format-obj');
 const fs = require('fs');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
@@ -276,10 +275,9 @@ describe('File', function() {
     it('should URI encode file names', function(done) {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
-        destBucket: file.bucket.name,
-        destName: encodeURIComponent(newFile.name),
-      });
+      const expectedPath = `/rewriteTo/b/${
+        file.bucket.name
+      }/o/${encodeURIComponent(newFile.name)}`;
 
       directoryFile.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, expectedPath);
@@ -389,39 +387,29 @@ describe('File', function() {
 
       it('should allow a string', function(done) {
         const newFileName = 'new-file-name.png';
-        const expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
-          destBucket: file.bucket.name,
-          destName: newFileName,
-        });
+        const expectedPath = `/rewriteTo/b/${
+          file.bucket.name
+        }/o/${newFileName}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
 
       it('should allow a "gs://..." string', function(done) {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
-          destBucket: 'other-bucket',
-          destName: 'new-file-name.png',
-        });
+        const expectedPath = `/rewriteTo/b/other-bucket/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
 
       it('should allow a Bucket', function(done) {
-        const expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
-          destBucket: BUCKET.name,
-          destName: file.name,
-        });
+        const expectedPath = `/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(BUCKET);
       });
 
       it('should allow a File', function(done) {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
-          destBucket: BUCKET.name,
-          destName: newFile.name,
-        });
+        const expectedPath = `/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFile);
       });
