@@ -16,40 +16,40 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var Buffer = require('safe-buffer').Buffer;
-var crypto = require('crypto');
-var extend = require('extend');
-var fs = require('fs');
-var is = require('is');
-var normalizeNewline = require('normalize-newline');
-var path = require('path');
-var prop = require('propprop');
-var request = require('request');
-var through = require('through2');
-var tmp = require('tmp');
-var uuid = require('uuid');
+const assert = require('assert');
+const async = require('async');
+const Buffer = require('safe-buffer').Buffer;
+const crypto = require('crypto');
+const extend = require('extend');
+const fs = require('fs');
+const is = require('is');
+const normalizeNewline = require('normalize-newline');
+const path = require('path');
+const prop = require('propprop');
+const request = require('request');
+const through = require('through2');
+const tmp = require('tmp');
+const uuid = require('uuid');
 
-var util = require('@google-cloud/common').util;
+const util = require('@google-cloud/common').util;
 
-var Storage = require('../');
-var Bucket = Storage.Bucket;
-var PubSub = require('@google-cloud/pubsub');
+const Storage = require('../');
+const Bucket = Storage.Bucket;
+const PubSub = require('@google-cloud/pubsub');
 
 describe('storage', function() {
-  var USER_ACCOUNT = 'user-spsawchuk@gmail.com';
-  var TESTS_PREFIX = 'gcloud-storage-tests-';
+  const USER_ACCOUNT = 'user-spsawchuk@gmail.com';
+  const TESTS_PREFIX = 'gcloud-storage-tests-';
 
-  var storage = new Storage({});
-  var bucket = storage.bucket(generateName());
+  const storage = new Storage({});
+  const bucket = storage.bucket(generateName());
 
-  var pubsub = new PubSub({
+  const pubsub = new PubSub({
     projectId: process.env.PROJECT_ID,
   });
-  var topic;
+  let topic;
 
-  var FILES = {
+  const FILES = {
     logo: {
       path: path.join(__dirname, 'data/CloudPlatform_128px_Retina.png'),
     },
@@ -88,11 +88,11 @@ describe('storage', function() {
   });
 
   describe('without authentication', function() {
-    var privateBucket;
-    var privateFile;
-    var storageWithoutAuth;
+    let privateBucket;
+    let privateFile;
+    let storageWithoutAuth;
 
-    var GOOGLE_APPLICATION_CREDENTIALS;
+    let GOOGLE_APPLICATION_CREDENTIALS;
 
     before(function(done) {
       privateBucket = bucket; // `bucket` was created in the global `before`
@@ -120,7 +120,7 @@ describe('storage', function() {
     });
 
     describe('public data', function() {
-      var bucket;
+      let bucket;
 
       before(function() {
         bucket = storageWithoutAuth.bucket('gcp-public-data-landsat');
@@ -134,7 +134,7 @@ describe('storage', function() {
           function(err, files) {
             assert.ifError(err);
 
-            var file = files[0];
+            const file = files[0];
 
             file.download(done);
           }
@@ -143,8 +143,8 @@ describe('storage', function() {
     });
 
     describe('private data', function() {
-      var bucket;
-      var file;
+      let bucket;
+      let file;
 
       before(function() {
         bucket = storageWithoutAuth.bucket(privateBucket.id);
@@ -231,7 +231,7 @@ describe('storage', function() {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-            var opts = {entity: USER_ACCOUNT};
+            const opts = {entity: USER_ACCOUNT};
 
             bucket.acl.get(opts, function(err, accessControl) {
               assert.ifError(err);
@@ -383,10 +383,10 @@ describe('storage', function() {
     });
 
     describe('files', function() {
-      var file;
+      let file;
 
       beforeEach(function(done) {
-        var options = {
+        const options = {
           destination: generateName() + '.png',
         };
 
@@ -487,7 +487,7 @@ describe('storage', function() {
       });
 
       it('should set custom encryption during the upload', function(done) {
-        var key = crypto.randomBytes(32);
+        let key = crypto.randomBytes(32);
 
         key = '12345678901234567890123456789012';
 
@@ -513,7 +513,7 @@ describe('storage', function() {
       });
 
       it('should set custom encryption in a resumable upload', function(done) {
-        var key = crypto.randomBytes(32);
+        const key = crypto.randomBytes(32);
 
         bucket.upload(
           FILES.big.path,
@@ -601,7 +601,7 @@ describe('storage', function() {
       });
 
       it('should upload a file from a URL', function(done) {
-        var url =
+        const url =
           'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg';
 
         bucket.upload(url, function(err, file) {
@@ -622,7 +622,7 @@ describe('storage', function() {
   });
 
   describe('iam', function() {
-    var PROJECT_ID;
+    let PROJECT_ID;
 
     before(function(done) {
       storage.authClient.getProjectId(function(err, projectId) {
@@ -637,7 +637,7 @@ describe('storage', function() {
     });
 
     describe('buckets', function() {
-      var bucket;
+      let bucket;
 
       before(function() {
         bucket = storage.bucket(generateName('bucket'));
@@ -678,11 +678,11 @@ describe('storage', function() {
           bucket.iam.setPolicy(policy, function(err, newPolicy) {
             assert.ifError(err);
 
-            var legacyBucketReaderBinding = newPolicy.bindings.filter(function(
-              binding
-            ) {
-              return binding.role === 'roles/storage.legacyBucketReader';
-            })[0];
+            const legacyBucketReaderBinding = newPolicy.bindings.filter(
+              function(binding) {
+                return binding.role === 'roles/storage.legacyBucketReader';
+              }
+            )[0];
 
             assert(legacyBucketReaderBinding.members.includes('allUsers'));
 
@@ -692,7 +692,7 @@ describe('storage', function() {
       });
 
       it('should test the iam permissions', function(done) {
-        var testPermissions = [
+        const testPermissions = [
           'storage.buckets.get',
           'storage.buckets.getIamPolicy',
         ];
@@ -712,7 +712,7 @@ describe('storage', function() {
   });
 
   describe('unicode validation', function() {
-    var bucket;
+    let bucket;
 
     before(function() {
       bucket = storage.bucket('storage-library-test-bucket');
@@ -721,15 +721,15 @@ describe('storage', function() {
     // Normalization form C: a single character for e-acute;
     // URL should end with Cafe%CC%81
     it('should not perform normalization form C', function() {
-      var name = 'Caf\u00e9';
-      var file = bucket.file(name);
+      const name = 'Caf\u00e9';
+      const file = bucket.file(name);
 
-      var expectedContents = 'Normalization Form C';
+      const expectedContents = 'Normalization Form C';
 
       return file
         .get()
         .then(function(data) {
-          var receivedFile = data[0];
+          const receivedFile = data[0];
           assert.strictEqual(receivedFile.name, name);
           return receivedFile.download();
         })
@@ -741,15 +741,15 @@ describe('storage', function() {
     // Normalization form D: an ASCII character followed by U+0301 combining
     // character; URL should end with Caf%C3%A9
     it('should not perform normalization form D', function() {
-      var name = 'Cafe\u0301';
-      var file = bucket.file(name);
+      const name = 'Cafe\u0301';
+      const file = bucket.file(name);
 
-      var expectedContents = 'Normalization Form D';
+      const expectedContents = 'Normalization Form D';
 
       return file
         .get()
         .then(function(data) {
-          var receivedFile = data[0];
+          const receivedFile = data[0];
           assert.strictEqual(receivedFile.name, name);
           return receivedFile.download();
         })
@@ -760,7 +760,7 @@ describe('storage', function() {
   });
 
   describe('getting buckets', function() {
-    var bucketsToCreate = [generateName(), generateName()];
+    const bucketsToCreate = [generateName(), generateName()];
 
     before(function(done) {
       async.map(bucketsToCreate, storage.createBucket.bind(storage), done);
@@ -779,7 +779,7 @@ describe('storage', function() {
 
     it('should get buckets', function(done) {
       storage.getBuckets(function(err, buckets) {
-        var createdBuckets = buckets.filter(function(bucket) {
+        const createdBuckets = buckets.filter(function(bucket) {
           return bucketsToCreate.indexOf(bucket.name) > -1;
         });
 
@@ -789,7 +789,7 @@ describe('storage', function() {
     });
 
     it('should get buckets as a stream', function(done) {
-      var bucketEmitted = false;
+      let bucketEmitted = false;
 
       storage
         .getBucketsStream()
@@ -806,7 +806,7 @@ describe('storage', function() {
 
   describe('bucket metadata', function() {
     it('should allow setting metadata on a bucket', function(done) {
-      var metadata = {
+      const metadata = {
         website: {
           mainPageSuffix: 'http://fakeuri',
           notFoundPage: 'http://fakeuri/404.html',
@@ -821,7 +821,7 @@ describe('storage', function() {
     });
 
     it('should allow changing the storage class', function(done) {
-      var bucket = storage.bucket(generateName());
+      const bucket = storage.bucket(generateName());
 
       async.series(
         [
@@ -854,7 +854,7 @@ describe('storage', function() {
     });
 
     describe('labels', function() {
-      var LABELS = {
+      const LABELS = {
         label: 'labelvalue', // no caps or spaces allowed (?)
         labeltwo: 'labelvaluetwo',
       };
@@ -876,7 +876,7 @@ describe('storage', function() {
       });
 
       it('should update labels', function(done) {
-        var newLabels = {
+        const newLabels = {
           siblinglabel: 'labelvalue',
         };
 
@@ -901,7 +901,7 @@ describe('storage', function() {
           return;
         }
 
-        var labelKeyToDelete = Object.keys(LABELS)[0];
+        const labelKeyToDelete = Object.keys(LABELS)[0];
 
         bucket.setLabels(LABELS, function(err) {
           assert.ifError(err);
@@ -912,7 +912,7 @@ describe('storage', function() {
             bucket.getLabels(function(err, labels) {
               assert.ifError(err);
 
-              var expectedLabels = extend({}, LABELS);
+              const expectedLabels = extend({}, LABELS);
               delete expectedLabels[labelKeyToDelete];
 
               assert.deepStrictEqual(labels, expectedLabels);
@@ -938,8 +938,8 @@ describe('storage', function() {
   });
 
   describe('requester pays', function() {
-    var HAS_2ND_PROJECT = is.defined(process.env.GCN_STORAGE_2ND_PROJECT_ID);
-    var bucket;
+    const HAS_2ND_PROJECT = is.defined(process.env.GCN_STORAGE_2ND_PROJECT_ID);
+    let bucket;
 
     before(function(done) {
       bucket = storage.bucket(generateName());
@@ -967,12 +967,12 @@ describe('storage', function() {
     // These tests will verify that the requesterPays functionality works from
     // the perspective of another project.
     (HAS_2ND_PROJECT ? describe : describe.skip)('existing bucket', function() {
-      var storageNonWhitelist = new Storage({
+      const storageNonWhitelist = new Storage({
         projectId: process.env.GCN_STORAGE_2ND_PROJECT_ID,
         keyFilename: process.env.GCN_STORAGE_2ND_PROJECT_KEY,
       });
-      var bucket; // the source bucket, which will have requesterPays enabled.
-      var bucketNonWhitelist; // the bucket object from the requesting user.
+      let bucket; // the source bucket, which will have requesterPays enabled.
+      let bucketNonWhitelist; // the bucket object from the requesting user.
 
       function isRequesterPaysEnabled(callback) {
         bucket.getMetadata(function(err, metadata) {
@@ -981,7 +981,7 @@ describe('storage', function() {
             return;
           }
 
-          var billing = metadata.billing || {};
+          const billing = metadata.billing || {};
           callback(null, !!billing && billing.requesterPays === true);
         });
       }
@@ -1031,11 +1031,11 @@ describe('storage', function() {
       });
 
       describe('methods that accept userProject', function() {
-        var file;
-        var notification;
-        var topicName;
+        let file;
+        let notification;
+        let topicName;
 
-        var USER_PROJECT_OPTIONS = {
+        const USER_PROJECT_OPTIONS = {
           userProject: process.env.GCN_STORAGE_2ND_PROJECT_ID,
         };
 
@@ -1050,18 +1050,18 @@ describe('storage', function() {
             .enableRequesterPays()
             .then(() => bucket.iam.getPolicy())
             .then(data => {
-              var policy = data[0];
+              const policy = data[0];
 
               // Allow an absolute or relative path (from project root)
               // for the key file.
-              var key2 = process.env.GCN_STORAGE_2ND_PROJECT_KEY;
+              let key2 = process.env.GCN_STORAGE_2ND_PROJECT_KEY;
               if (key2 && key2.charAt(0) === '.') {
                 key2 = `${__dirname}/../${key2}`;
               }
 
               // Get the service account for the "second" account (the
               // one that will read the requester pays file).
-              var clientEmail = require(key2).client_email;
+              const clientEmail = require(key2).client_email;
 
               policy.bindings.push({
                 role: 'roles/storage.admin',
@@ -1088,7 +1088,7 @@ describe('storage', function() {
         });
 
         function doubleTest(testFunction) {
-          var failureMessage =
+          const failureMessage =
             'Bucket is requester pays bucket but no user project provided.';
 
           return function(done) {
@@ -1111,7 +1111,7 @@ describe('storage', function() {
         }
 
         it('bucket#combine', function(done) {
-          var files = [
+          const files = [
             {file: bucketNonWhitelist.file('file-one.txt'), contents: '123'},
             {file: bucketNonWhitelist.file('file-two.txt'), contents: '456'},
           ];
@@ -1119,8 +1119,10 @@ describe('storage', function() {
           async.each(files, createFile, function(err) {
             assert.ifError(err);
 
-            var sourceFiles = files.map(prop('file'));
-            var destinationFile = bucketNonWhitelist.file('file-one-n-two.txt');
+            const sourceFiles = files.map(prop('file'));
+            const destinationFile = bucketNonWhitelist.file(
+              'file-one-n-two.txt'
+            );
 
             bucketNonWhitelist.combine(
               sourceFiles,
@@ -1271,7 +1273,7 @@ describe('storage', function() {
         it(
           'file#move',
           doubleTest(function(options, done) {
-            var newFile = bucketNonWhitelist.file(generateName('file'));
+            const newFile = bucketNonWhitelist.file(generateName('file'));
 
             file.move(newFile, options, function(err) {
               if (err) {
@@ -1386,7 +1388,7 @@ describe('storage', function() {
         it(
           'iam#testPermissions',
           doubleTest(function(options, done) {
-            var tests = ['storage.buckets.delete'];
+            const tests = ['storage.buckets.delete'];
             bucketNonWhitelist.iam.testPermissions(tests, options, done);
           })
         );
@@ -1430,8 +1432,8 @@ describe('storage', function() {
   describe('write, read, and remove files', function() {
     before(function(done) {
       function setHash(filesKey, done) {
-        var file = FILES[filesKey];
-        var hash = crypto.createHash('md5');
+        const file = FILES[filesKey];
+        const hash = crypto.createHash('md5');
 
         fs
           .createReadStream(file.path)
@@ -1446,16 +1448,16 @@ describe('storage', function() {
     });
 
     it('should read/write from/to a file in a directory', function(done) {
-      var file = bucket.file('directory/file');
-      var contents = 'test';
+      const file = bucket.file('directory/file');
+      const contents = 'test';
 
-      var writeStream = file.createWriteStream({resumable: false});
+      const writeStream = file.createWriteStream({resumable: false});
       writeStream.write(contents);
       writeStream.end();
 
       writeStream.on('error', done);
       writeStream.on('finish', function() {
-        var data = Buffer.from('');
+        let data = Buffer.from('');
 
         file
           .createReadStream()
@@ -1471,8 +1473,8 @@ describe('storage', function() {
     });
 
     it('should not push data when a file cannot be read', function(done) {
-      var file = bucket.file('non-existing-file');
-      var dataEmitted = false;
+      const file = bucket.file('non-existing-file');
+      let dataEmitted = false;
 
       file
         .createReadStream()
@@ -1490,14 +1492,14 @@ describe('storage', function() {
       bucket.upload(FILES.big.path, function(err, file) {
         assert.ifError(err);
 
-        var fileSize = file.metadata.size;
-        var byteRange = {
+        const fileSize = file.metadata.size;
+        const byteRange = {
           start: Math.floor(fileSize * 1 / 3),
           end: Math.floor(fileSize * 2 / 3),
         };
-        var expectedContentSize = byteRange.start + 1;
+        const expectedContentSize = byteRange.start + 1;
 
-        var sizeStreamed = 0;
+        let sizeStreamed = 0;
         file
           .createReadStream(byteRange)
           .on('data', function(chunk) {
@@ -1512,7 +1514,7 @@ describe('storage', function() {
     });
 
     it('should download a file to memory', function(done) {
-      var fileContents = fs.readFileSync(FILES.big.path);
+      const fileContents = fs.readFileSync(FILES.big.path);
 
       bucket.upload(FILES.big.path, function(err, file) {
         assert.ifError(err);
@@ -1526,7 +1528,7 @@ describe('storage', function() {
     });
 
     it('should handle non-network errors', function(done) {
-      var file = bucket.file('hi.jpg');
+      const file = bucket.file('hi.jpg');
       file.download(function(err) {
         assert.strictEqual(err.code, 404);
         done();
@@ -1534,11 +1536,11 @@ describe('storage', function() {
     });
 
     it('should gzip a file on the fly and download it', function(done) {
-      var options = {
+      const options = {
         gzip: true,
       };
 
-      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
+      const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
 
       bucket.upload(FILES.html.path, options, function(err, file) {
         assert.ifError(err);
@@ -1552,14 +1554,14 @@ describe('storage', function() {
     });
 
     it('should upload a gzipped file and download it', function(done) {
-      var options = {
+      const options = {
         metadata: {
           contentEncoding: 'gzip',
           contentType: 'text/html',
         },
       };
 
-      var expectedContents = normalizeNewline(
+      const expectedContents = normalizeNewline(
         fs.readFileSync(FILES.html.path, 'utf-8')
       );
 
@@ -1568,8 +1570,8 @@ describe('storage', function() {
 
         // Sometimes this file is not found immediately; include some
         // retry to attempt to make the test less flaky.
-        var attempt = 0;
-        var downloadCallback = (err, contents) => {
+        let attempt = 0;
+        const downloadCallback = (err, contents) => {
           // If we got an error, gracefully retry a few times.
           if (err) {
             attempt += 1;
@@ -1589,8 +1591,8 @@ describe('storage', function() {
 
     describe('simple write', function() {
       it('should save arbitrary data', function(done) {
-        var file = bucket.file('TestFile');
-        var data = 'hello';
+        const file = bucket.file('TestFile');
+        const data = 'hello';
 
         file.save(data, function(err) {
           assert.ifError(err);
@@ -1605,7 +1607,7 @@ describe('storage', function() {
 
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
-        var file = bucket.file('LargeFile');
+        const file = bucket.file('LargeFile');
         fs
           .createReadStream(FILES.big.path)
           .pipe(file.createWriteStream({resumable: false}))
@@ -1617,7 +1619,7 @@ describe('storage', function() {
       });
 
       it('should write metadata', function(done) {
-        var options = {
+        const options = {
           metadata: {contentType: 'image/png'},
           resumable: false,
         };
@@ -1638,8 +1640,8 @@ describe('storage', function() {
           assert.ifError(err);
 
           // Use a random name to force an empty ConfigStore cache.
-          var file = bucket.file(generateName());
-          var fileSize = metadata.size;
+          const file = bucket.file(generateName());
+          const fileSize = metadata.size;
 
           upload({interrupt: true}, function(err) {
             assert.strictEqual(err.message, 'Interrupted.');
@@ -1653,8 +1655,8 @@ describe('storage', function() {
           });
 
           function upload(opts, callback) {
-            var ws = file.createWriteStream();
-            var sizeStreamed = 0;
+            const ws = file.createWriteStream();
+            let sizeStreamed = 0;
 
             fs
               .createReadStream(FILES.big.path)
@@ -1685,10 +1687,10 @@ describe('storage', function() {
         tmp.file(function _tempFileCreated(err, tmpFilePath) {
           assert.ifError(err);
 
-          var file = bucket.file('MyBuffer');
-          var fileContent = 'Hello World';
+          const file = bucket.file('MyBuffer');
+          const fileContent = 'Hello World';
 
-          var writable = file.createWriteStream();
+          const writable = file.createWriteStream();
 
           writable.write(fileContent);
           writable.end();
@@ -1715,12 +1717,12 @@ describe('storage', function() {
     });
 
     describe('customer-supplied encryption keys', function() {
-      var encryptionKey = crypto.randomBytes(32);
+      const encryptionKey = crypto.randomBytes(32);
 
-      var file = bucket.file('encrypted-file', {
+      const file = bucket.file('encrypted-file', {
         encryptionKey: encryptionKey,
       });
-      var unencryptedFile = bucket.file(file.name);
+      const unencryptedFile = bucket.file(file.name);
 
       before(function(done) {
         file.save('secret data', {resumable: false}, done);
@@ -1765,7 +1767,7 @@ describe('storage', function() {
       });
 
       it('should rotate encryption keys', function(done) {
-        var newEncryptionKey = crypto.randomBytes(32);
+        const newEncryptionKey = crypto.randomBytes(32);
 
         file.rotateEncryptionKey(newEncryptionKey, function(err) {
           assert.ifError(err);
@@ -1779,7 +1781,7 @@ describe('storage', function() {
     });
 
     it('should copy an existing file', function(done) {
-      var opts = {destination: 'CloudLogo'};
+      const opts = {destination: 'CloudLogo'};
       bucket.upload(FILES.logo.path, opts, function(err, file) {
         assert.ifError(err);
 
@@ -1794,14 +1796,14 @@ describe('storage', function() {
     });
 
     it('should copy a large file', function(done) {
-      var otherBucket = storage.bucket(generateName());
-      var file = bucket.file('Big');
-      var copiedFile = otherBucket.file(file.name);
+      const otherBucket = storage.bucket(generateName());
+      const file = bucket.file('Big');
+      const copiedFile = otherBucket.file(file.name);
 
       async.series(
         [
           function(callback) {
-            var opts = {destination: file};
+            const opts = {destination: file};
             bucket.upload(FILES.logo.path, opts, callback);
           },
           function(callback) {
@@ -1832,15 +1834,15 @@ describe('storage', function() {
     });
 
     it('should copy to another bucket given a gs:// URL', function(done) {
-      var opts = {destination: 'CloudLogo'};
+      const opts = {destination: 'CloudLogo'};
       bucket.upload(FILES.logo.path, opts, function(err, file) {
         assert.ifError(err);
 
-        var otherBucket = storage.bucket(generateName());
+        const otherBucket = storage.bucket(generateName());
         otherBucket.create(function(err) {
           assert.ifError(err);
 
-          var destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
+          const destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
           file.copy(destPath, function(err) {
             assert.ifError(err);
 
@@ -1848,7 +1850,7 @@ describe('storage', function() {
               assert.ifError(err);
 
               assert.strictEqual(files.length, 1);
-              var newFile = files[0];
+              const newFile = files[0];
 
               assert.strictEqual(newFile.name, 'CloudLogoCopy');
 
@@ -1860,7 +1862,7 @@ describe('storage', function() {
     });
 
     it('should allow changing the storage class', function(done) {
-      var file = bucket.file(generateName());
+      const file = bucket.file(generateName());
 
       async.series(
         [
@@ -1899,7 +1901,7 @@ describe('storage', function() {
 
   describe('channels', function() {
     it('should create a channel', function(done) {
-      var config = {
+      const config = {
         address: 'https://yahoo.com',
       };
 
@@ -1918,7 +1920,7 @@ describe('storage', function() {
     it('should stop a channel', function(done) {
       // We can't actually create a channel. But we can test to see that we're
       // reaching the right endpoint with the API request.
-      var channel = storage.channel('id', 'resource-id');
+      const channel = storage.channel('id', 'resource-id');
       channel.stop(function(err) {
         assert.strictEqual(err.code, 404);
         assert.strictEqual(err.message.indexOf("Channel 'id' not found"), 0);
@@ -1929,7 +1931,7 @@ describe('storage', function() {
 
   describe('combine files', function() {
     it('should combine multiple files into one', function(done) {
-      var files = [
+      const files = [
         {file: bucket.file('file-one.txt'), contents: '123'},
         {file: bucket.file('file-two.txt'), contents: '456'},
       ];
@@ -1937,8 +1939,8 @@ describe('storage', function() {
       async.each(files, createFile, function(err) {
         assert.ifError(err);
 
-        var sourceFiles = files.map(prop('file'));
-        var destinationFile = bucket.file('file-one-and-two.txt');
+        const sourceFiles = files.map(prop('file'));
+        const destinationFile = bucket.file('file-one-and-two.txt');
 
         bucket.combine(sourceFiles, destinationFile, function(err) {
           assert.ifError(err);
@@ -1960,9 +1962,9 @@ describe('storage', function() {
   });
 
   describe('list files', function() {
-    var DIRECTORY_NAME = 'directory-name';
+    const DIRECTORY_NAME = 'directory-name';
 
-    var NEW_FILES = [
+    const NEW_FILES = [
       bucket.file('CloudLogo1'),
       bucket.file('CloudLogo2'),
       bucket.file('CloudLogo3'),
@@ -1978,8 +1980,8 @@ describe('storage', function() {
           return;
         }
 
-        var originalFile = NEW_FILES[0];
-        var cloneFiles = NEW_FILES.slice(1);
+        const originalFile = NEW_FILES[0];
+        const cloneFiles = NEW_FILES.slice(1);
 
         bucket.upload(
           FILES.logo.path,
@@ -2011,7 +2013,7 @@ describe('storage', function() {
     });
 
     it('should get files as a stream', function(done) {
-      var numFilesEmitted = 0;
+      let numFilesEmitted = 0;
 
       bucket
         .getFilesStream()
@@ -2034,7 +2036,7 @@ describe('storage', function() {
     });
 
     it('should get files from a directory as a stream', function(done) {
-      var numFilesEmitted = 0;
+      let numFilesEmitted = 0;
 
       bucket
         .getFilesStream({directory: DIRECTORY_NAME})
@@ -2049,7 +2051,7 @@ describe('storage', function() {
     });
 
     it('should paginate the list', function(done) {
-      var query = {
+      const query = {
         maxResults: NEW_FILES.length - 1,
       };
 
@@ -2067,7 +2069,7 @@ describe('storage', function() {
   });
 
   describe('file generations', function() {
-    var bucketWithVersioning = storage.bucket(generateName());
+    const bucketWithVersioning = storage.bucket(generateName());
 
     before(function(done) {
       bucketWithVersioning.create(
@@ -2097,7 +2099,7 @@ describe('storage', function() {
     });
 
     it('should overwrite file, then get older version', function(done) {
-      var versionedFile = bucketWithVersioning.file(generateName());
+      const versionedFile = bucketWithVersioning.file(generateName());
 
       versionedFile.save('a', function(err) {
         assert.ifError(err);
@@ -2105,12 +2107,12 @@ describe('storage', function() {
         versionedFile.getMetadata(function(err, metadata) {
           assert.ifError(err);
 
-          var initialGeneration = metadata.generation;
+          const initialGeneration = metadata.generation;
 
           versionedFile.save('b', function(err) {
             assert.ifError(err);
 
-            var firstGenFile = bucketWithVersioning.file(versionedFile.name, {
+            const firstGenFile = bucketWithVersioning.file(versionedFile.name, {
               generation: initialGeneration,
             });
 
@@ -2125,7 +2127,7 @@ describe('storage', function() {
     });
 
     it('should get all files scoped to their version', function(done) {
-      var filesToCreate = [
+      const filesToCreate = [
         {file: bucketWithVersioning.file('file-one.txt'), contents: '123'},
         {file: bucketWithVersioning.file('file-one.txt'), contents: '456'},
       ];
@@ -2156,8 +2158,8 @@ describe('storage', function() {
   });
 
   describe('sign urls', function() {
-    var localFile = fs.readFileSync(FILES.logo.path);
-    var file;
+    const localFile = fs.readFileSync(FILES.logo.path);
+    let file;
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
@@ -2206,7 +2208,7 @@ describe('storage', function() {
   });
 
   describe('sign policy', function() {
-    var file;
+    let file;
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
@@ -2224,10 +2226,10 @@ describe('storage', function() {
     });
 
     it('should create a policy', function(done) {
-      var expires = new Date('10-25-2022');
-      var expectedExpiration = new Date(expires).toISOString();
+      const expires = new Date('10-25-2022');
+      const expectedExpiration = new Date(expires).toISOString();
 
-      var options = {
+      const options = {
         equals: ['$Content-Type', 'image/jpeg'],
         expires: expires,
         contentLengthRange: {
@@ -2239,7 +2241,7 @@ describe('storage', function() {
       file.getSignedPolicy(options, function(err, policy) {
         assert.ifError(err);
 
-        var policyJson;
+        let policyJson;
 
         try {
           policyJson = JSON.parse(policy.string);
@@ -2255,8 +2257,8 @@ describe('storage', function() {
   });
 
   describe('notifications', function() {
-    var notification;
-    var subscription;
+    let notification;
+    let subscription;
 
     before(function() {
       return bucket
@@ -2311,7 +2313,7 @@ describe('storage', function() {
     });
 
     it('should tell us if a notification does not exist', function(done) {
-      var notification = bucket.notification('123');
+      const notification = bucket.notification('123');
 
       notification.exists(function(err, exists) {
         assert.ifError(err);
@@ -2330,7 +2332,7 @@ describe('storage', function() {
 
     it('should emit events to a subscription', function(done) {
       subscription.on('error', done).on('message', function(message) {
-        var attrs = message.attributes;
+        const attrs = message.attributes;
         assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
         done();
       });
@@ -2343,8 +2345,8 @@ describe('storage', function() {
     });
 
     it('should delete a notification', function() {
-      var notificationCount = 0;
-      var notification;
+      let notificationCount = 0;
+      let notification;
 
       return bucket
         .createNotification(topic, {
@@ -2376,7 +2378,7 @@ describe('storage', function() {
     // After files are deleted, eventual consistency may require a bit of a
     // delay to ensure that the bucket recognizes that the files don't exist
     // anymore.
-    var CONSISTENCY_DELAY_MS = 250;
+    const CONSISTENCY_DELAY_MS = 250;
 
     options = extend({}, options, {
       versions: true,

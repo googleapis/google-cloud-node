@@ -16,22 +16,22 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var async = require('async');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var fs = require('fs');
-var is = require('is');
-var mime = require('mime-types');
-var path = require('path');
-var snakeize = require('snakeize');
-var util = require('util');
-var request = require('request');
+const arrify = require('arrify');
+const async = require('async');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const fs = require('fs');
+const is = require('is');
+const mime = require('mime-types');
+const path = require('path');
+const snakeize = require('snakeize');
+const util = require('util');
+const request = require('request');
 
-var Acl = require('./acl.js');
-var File = require('./file.js');
-var Iam = require('./iam.js');
-var Notification = require('./notification.js');
+const Acl = require('./acl.js');
+const File = require('./file.js');
+const Iam = require('./iam.js');
+const Notification = require('./notification.js');
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -40,7 +40,7 @@ var Notification = require('./notification.js');
  * @const {number}
  * @private
  */
-var RESUMABLE_THRESHOLD = 5000000;
+const RESUMABLE_THRESHOLD = 5000000;
 
 /**
  * Create a Bucket object to interact with a Cloud Storage bucket.
@@ -54,15 +54,15 @@ var RESUMABLE_THRESHOLD = 5000000;
  * @param {string} [options.userProject] User project.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  */
 function Bucket(storage, name, options) {
   options = options || {};
 
   name = name.replace(/^gs:\/\//, '');
 
-  var methods = {
+  const methods = {
     /**
      * Create a bucket.
      *
@@ -72,8 +72,8 @@ function Bucket(storage, name, options) {
      * @returns {Promise<CreateBucketResponse>}
      *
      * @example
-     * var storage = require('@google-cloud/storage')();
-     * var bucket = storage.bucket('albums');
+     * const storage = require('@google-cloud/storage')();
+     * const bucket = storage.bucket('albums');
      * bucket.create(function(err, bucket, apiResponse) {
      *   if (!err) {
      *     // The bucket was created successfully.
@@ -84,8 +84,8 @@ function Bucket(storage, name, options) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * bucket.create().then(function(data) {
-     *   var bucket = data[0];
-     *   var apiResponse = data[1];
+     *   const bucket = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     create: true,
@@ -153,14 +153,14 @@ function Bucket(storage, name, options) {
    * the same, after only prefixing the method call with `default`.
    *
    * @example
-   * var storage = require('@google-cloud/storage')();
+   * const storage = require('@google-cloud/storage')();
    *
    * //-
    * // Make a bucket's contents publicly readable.
    * //-
-   * var myBucket = storage.bucket('my-bucket');
+   * const myBucket = storage.bucket('my-bucket');
    *
-   * var options = {
+   * const options = {
    *   entity: 'allUsers',
    *   role: storage.acl.READER_ROLE
    * };
@@ -171,8 +171,8 @@ function Bucket(storage, name, options) {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * myBucket.acl.add(options).then(function(data) {
-   *   var aclObject = data[0];
-   *   var apiResponse = data[1];
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
    * });
    *
    * @example <caption>include:samples/acl.js</caption>
@@ -220,8 +220,8 @@ function Bucket(storage, name, options) {
    * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
    *
    * @example
-   * var storage = require('@google-cloud/storage')();
-   * var bucket = storage.bucket('albums');
+   * const storage = require('@google-cloud/storage')();
+   * const bucket = storage.bucket('albums');
    *
    * //-
    * // Get the IAM policy for your bucket.
@@ -234,8 +234,8 @@ function Bucket(storage, name, options) {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * bucket.iam.getPolicy().then(function(data) {
-   *   var policy = data[0];
-   *   var apiResponse = data[1];
+   *   const policy = data[0];
+   *   const apiResponse = data[1];
    * });
    *
    * @example <caption>include:samples/iam.js</caption>
@@ -286,15 +286,15 @@ util.inherits(Bucket, common.ServiceObject);
  * @returns {Promise<CombineResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var logBucket = storage.bucket('log-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const logBucket = storage.bucket('log-bucket');
  *
- * var sources = [
+ * const sources = [
  *   logBucket.file('2013-logs.txt'),
  *   logBucket.file('2014-logs.txt')
  * ];
  *
- * var allLogs = logBucket.file('all-logs.txt');
+ * const allLogs = logBucket.file('all-logs.txt');
  *
  * logBucket.combine(sources, allLogs, function(err, newFile, apiResponse) {
  *   // newFile === allLogs
@@ -304,8 +304,8 @@ util.inherits(Bucket, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * logBucket.combine(sources, allLogs).then(function(data) {
- *   var newFile = data[0];
- *   var apiResponse = data[1];
+ *   const newFile = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Bucket.prototype.combine = function(sources, destination, options, callback) {
@@ -317,7 +317,7 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
     throw new Error('A destination file must be specified.');
   }
 
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -329,7 +329,7 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
   callback = callback || common.util.noop;
 
   if (!destination.metadata.contentType) {
-    var destinationContentType = mime.contentType(destination.name);
+    const destinationContentType = mime.contentType(destination.name);
 
     if (destinationContentType) {
       destination.metadata.contentType = destinationContentType;
@@ -346,7 +346,7 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
           contentType: destination.metadata.contentType,
         },
         sourceObjects: sources.map(function(source) {
-          var sourceObject = {
+          const sourceObject = {
             name: source.name,
           };
 
@@ -409,11 +409,11 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
  * @returns {Promise<CreateChannelResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
- * var id = 'new-channel-id';
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
+ * const id = 'new-channel-id';
  *
- * var config = {
+ * const config = {
  *   address: 'https://...'
  * };
  *
@@ -427,12 +427,12 @@ Bucket.prototype.combine = function(sources, destination, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.createChannel(id, config).then(function(data) {
- *   var channel = data[0];
- *   var apiResponse = data[1];
+ *   const channel = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Bucket.prototype.createChannel = function(id, config, options, callback) {
-  var self = this;
+  const self = this;
 
   if (!is.string(id)) {
     throw new Error('An ID is required to create a channel.');
@@ -466,8 +466,8 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
         return;
       }
 
-      var resourceId = apiResponse.resourceId;
-      var channel = self.storage.channel(id, resourceId);
+      const resourceId = apiResponse.resourceId;
+      const channel = self.storage.channel(id, resourceId);
 
       channel.metadata = apiResponse;
 
@@ -529,10 +529,10 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
  * @see Notification#create
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var callback = function(err, notification, apiResponse) {
+ * const callback = function(err, notification, apiResponse) {
  *   if (!err) {
  *     // The notification was created successfully.
  *   }
@@ -543,7 +543,7 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
  * //-
  * // Configure the nofiication by providing Notification metadata.
  * //-
- * var metadata = {
+ * const metadata = {
  *   objectNamePrefix: 'prefix-'
  * };
  *
@@ -553,8 +553,8 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myBucket.createNotification('my-topic').then(function(data) {
- *   var notification = data[0];
- *   var apiResponse = data[1];
+ *   const notification = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/notifications.js</caption>
@@ -562,7 +562,7 @@ Bucket.prototype.createChannel = function(id, config, options, callback) {
  * Another example:
  */
 Bucket.prototype.createNotification = function(topic, options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -577,7 +577,7 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
     throw new Error('A valid topic name is required.');
   }
 
-  var body = extend({topic: topic}, options);
+  const body = extend({topic: topic}, options);
 
   if (body.topic.indexOf('projects') !== 0) {
     body.topic = 'projects/{{projectId}}/topics/' + body.topic;
@@ -589,7 +589,7 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
     body.payloadFormat = 'JSON_API_V1';
   }
 
-  var query = {};
+  const query = {};
 
   if (body.userProject) {
     query.userProject = body.userProject;
@@ -609,7 +609,7 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
         return;
       }
 
-      var notification = self.notification(apiResponse.id);
+      const notification = self.notification(apiResponse.id);
 
       notification.metadata = apiResponse;
 
@@ -639,15 +639,15 @@ Bucket.prototype.createNotification = function(topic, options, callback) {
  * @returns {Promise<DeleteBucketResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  * bucket.delete(function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.delete().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/buckets.js</caption>
@@ -703,8 +703,8 @@ Bucket.prototype.delete = function(options, callback) {
  * @returns {Promise}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Delete all of the files in the bucket.
@@ -748,8 +748,8 @@ Bucket.prototype.deleteFiles = function(query, callback) {
 
   query = query || {};
 
-  var MAX_PARALLEL_LIMIT = 10;
-  var errors = [];
+  const MAX_PARALLEL_LIMIT = 10;
+  const errors = [];
 
   this.getFiles(query, function(err, files) {
     if (err) {
@@ -804,8 +804,8 @@ Bucket.prototype.deleteFiles = function(query, callback) {
  * @returns {Promise<DeleteLabelsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Delete all of the labels from this bucket.
@@ -829,11 +829,11 @@ Bucket.prototype.deleteFiles = function(query, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.deleteLabels().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Bucket.prototype.deleteLabels = function(labels, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(labels)) {
     callback = labels;
@@ -856,7 +856,7 @@ Bucket.prototype.deleteLabels = function(labels, callback) {
   }
 
   function deleteLabels(labels) {
-    var nullLabelMap = labels.reduce(function(nullLabelMap, labelKey) {
+    const nullLabelMap = labels.reduce(function(nullLabelMap, labelKey) {
       nullLabelMap[labelKey] = null;
       return nullLabelMap;
     }, {});
@@ -888,8 +888,8 @@ Bucket.prototype.deleteLabels = function(labels, callback) {
  * @returns {Promise<DisableRequesterPaysCallback>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.disableRequesterPays(function(err, apiResponse) {
  *   if (!err) {
@@ -901,7 +901,7 @@ Bucket.prototype.deleteLabels = function(labels, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.disableRequesterPays().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/requesterPays.js</caption>
@@ -944,8 +944,8 @@ Bucket.prototype.disableRequesterPays = function(callback) {
  * @returns {Promise<EnableRequesterPaysResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.enableRequesterPays(function(err, apiResponse) {
  *   if (!err) {
@@ -957,7 +957,7 @@ Bucket.prototype.disableRequesterPays = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.enableRequesterPays().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/requesterPays.js</caption>
@@ -994,8 +994,8 @@ Bucket.prototype.enableRequesterPays = function(callback) {
  * @returns {Promise<BucketExistsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.exists(function(err, exists) {});
  *
@@ -1003,7 +1003,7 @@ Bucket.prototype.enableRequesterPays = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.exists().then(function(data) {
- *   var exists = data[0];
+ *   const exists = data[0];
  * });
  */
 Bucket.prototype.exists = function(options, callback) {
@@ -1042,9 +1042,9 @@ Bucket.prototype.exists = function(options, callback) {
  * @returns {File}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
- * var file = bucket.file('my-existing-file.png');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
+ * const file = bucket.file('my-existing-file.png');
  */
 Bucket.prototype.file = function(name, options) {
   if (!name) {
@@ -1082,8 +1082,8 @@ Bucket.prototype.file = function(name, options) {
  * @returns {Promise<GetBucketResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.get(function(err, bucket, apiResponse) {
  *   // `bucket.metadata` has been populated.
@@ -1093,12 +1093,12 @@ Bucket.prototype.file = function(name, options) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.get().then(function(data) {
- *   var bucket = data[0];
- *   var apiResponse = data[1];
+ *   const bucket = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Bucket.prototype.get = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1107,7 +1107,7 @@ Bucket.prototype.get = function(options, callback) {
 
   options = options || {};
 
-  var autoCreate = options.autoCreate;
+  const autoCreate = options.autoCreate;
   delete options.autoCreate;
 
   function onCreate(err, bucket, apiResponse) {
@@ -1127,7 +1127,7 @@ Bucket.prototype.get = function(options, callback) {
   this.getMetadata(options, function(err, metadata) {
     if (err) {
       if (err.code === 404 && autoCreate) {
-        var args = [];
+        const args = [];
 
         if (!is.empty(options)) {
           args.push(options);
@@ -1191,8 +1191,8 @@ Bucket.prototype.get = function(options, callback) {
  * @returns {Promise<GetFilesResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.getFiles(function(err, files) {
  *   if (!err) {
@@ -1214,7 +1214,7 @@ Bucket.prototype.get = function(options, callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, files, nextQuery, apiResponse) {
+ * const callback = function(err, files, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
  *     bucket.getFiles(nextQuery, callback);
@@ -1237,7 +1237,7 @@ Bucket.prototype.get = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.getFiles().then(function(data) {
- *   var files = data[0];
+ *   const files = data[0];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1249,7 +1249,7 @@ Bucket.prototype.get = function(options, callback) {
  * Example of listing files, filtered by a prefix:
  */
 Bucket.prototype.getFiles = function(query, callback) {
-  var self = this;
+  const self = this;
 
   if (!callback) {
     callback = query;
@@ -1274,20 +1274,20 @@ Bucket.prototype.getFiles = function(query, callback) {
         return;
       }
 
-      var files = arrify(resp.items).map(function(file) {
-        var options = {};
+      const files = arrify(resp.items).map(function(file) {
+        const options = {};
 
         if (query.versions) {
           options.generation = file.generation;
         }
 
-        var fileInstance = self.file(file.name, options);
+        const fileInstance = self.file(file.name, options);
         fileInstance.metadata = file;
 
         return fileInstance;
       });
 
-      var nextQuery = null;
+      let nextQuery = null;
       if (resp.nextPageToken) {
         nextQuery = extend({}, query, {
           pageToken: resp.nextPageToken,
@@ -1308,8 +1308,8 @@ Bucket.prototype.getFiles = function(query, callback) {
  * @returns {ReadableStream} A readable stream that emits {@link File} instances.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.getFilesStream()
  *   .on('error', console.error)
@@ -1350,8 +1350,8 @@ Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
  * @returns {Promise<GetLabelsCallback>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.getLabels(function(err, labels) {
  *   if (err) {
@@ -1368,7 +1368,7 @@ Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.getLabels().then(function(data) {
- *   var labels = data[0];
+ *   const labels = data[0];
  * });
  */
 Bucket.prototype.getLabels = function(options, callback) {
@@ -1412,8 +1412,8 @@ Bucket.prototype.getLabels = function(options, callback) {
  * @returns {Promise<GetBucketMetadataResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.getMetadata(function(err, metadata, apiResponse) {});
  *
@@ -1421,8 +1421,8 @@ Bucket.prototype.getLabels = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.getMetadata().then(function(data) {
- *   var metadata = data[0];
- *   var apiResponse = data[1];
+ *   const metadata = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/requesterPays.js</caption>
@@ -1430,7 +1430,7 @@ Bucket.prototype.getLabels = function(options, callback) {
  * Example of retrieving the requester pays status of a bucket:
  */
 Bucket.prototype.getMetadata = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1479,8 +1479,8 @@ Bucket.prototype.getMetadata = function(options, callback) {
  * @returns {Promise<GetNotificationsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  *
  * bucket.getNotifications(function(err, notifications, apiResponse) {
  *   if (!err) {
@@ -1492,8 +1492,8 @@ Bucket.prototype.getMetadata = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.getNotifications().then(function(data) {
- *   var notifications = data[0];
- *   var apiResponse = data[1];
+ *   const notifications = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/notifications.js</caption>
@@ -1501,7 +1501,7 @@ Bucket.prototype.getMetadata = function(options, callback) {
  * Another example:
  */
 Bucket.prototype.getNotifications = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1519,8 +1519,8 @@ Bucket.prototype.getNotifications = function(options, callback) {
         return;
       }
 
-      var notifications = arrify(resp.items).map(function(notification) {
-        var notificationInstance = self.notification(notification.id);
+      const notifications = arrify(resp.items).map(function(notification) {
+        const notificationInstance = self.notification(notification.id);
         notificationInstance.metadata = notification;
         return notificationInstance;
       });
@@ -1568,8 +1568,8 @@ Bucket.prototype.getNotifications = function(options, callback) {
  * @returns {Promise<MakeBucketPrivateResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Make the bucket private.
@@ -1579,7 +1579,7 @@ Bucket.prototype.getNotifications = function(options, callback) {
  * //-
  * // Make the bucket and its contents private.
  * //-
- * var opts = {
+ * const opts = {
  *   includeFiles: true
  * };
  *
@@ -1595,7 +1595,7 @@ Bucket.prototype.getNotifications = function(options, callback) {
  * // Make the bucket and its contents private, using force to suppress errors
  * // until all files have been processed.
  * //-
- * var opts = {
+ * const opts = {
  *   includeFiles: true,
  *   force: true
  * };
@@ -1612,11 +1612,11 @@ Bucket.prototype.getNotifications = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.makePrivate(opts).then(function(data) {
- *   var files = data[0];
+ *   const files = data[0];
  * });
  */
 Bucket.prototype.makePrivate = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1629,7 +1629,7 @@ Bucket.prototype.makePrivate = function(options, callback) {
   async.series([setPredefinedAcl, makeFilesPrivate], callback);
 
   function setPredefinedAcl(done) {
-    var query = {
+    const query = {
       predefinedAcl: 'projectPrivate',
     };
 
@@ -1694,8 +1694,8 @@ Bucket.prototype.makePrivate = function(options, callback) {
  * @returns {Promise<MakeBucketPublicResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Make the bucket publicly readable.
@@ -1705,7 +1705,7 @@ Bucket.prototype.makePrivate = function(options, callback) {
  * //-
  * // Make the bucket and its contents publicly readable.
  * //-
- * var opts = {
+ * const opts = {
  *   includeFiles: true
  * };
  *
@@ -1721,7 +1721,7 @@ Bucket.prototype.makePrivate = function(options, callback) {
  * // Make the bucket and its contents publicly readable, using force to
  * // suppress errors until all files have been processed.
  * //-
- * var opts = {
+ * const opts = {
  *   includeFiles: true,
  *   force: true
  * };
@@ -1738,11 +1738,11 @@ Bucket.prototype.makePrivate = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.makePublic(opts).then(function(data) {
- *   var files = data[0];
+ *   const files = data[0];
  * });
  */
 Bucket.prototype.makePublic = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1796,9 +1796,9 @@ Bucket.prototype.makePublic = function(options, callback) {
  * @see Notification
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
- * var notification = bucket.notification('1');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
+ * const notification = bucket.notification('1');
  */
 Bucket.prototype.notification = function(id) {
   if (!id) {
@@ -1848,10 +1848,10 @@ Bucket.prototype.request = function(reqOpts, callback) {
  * @returns {Promise<SetLabelsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
- * var labels = {
+ * const labels = {
  *   labelone: 'labelonevalue',
  *   labeltwo: 'labeltwovalue'
  * };
@@ -1866,7 +1866,7 @@ Bucket.prototype.request = function(reqOpts, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.setLabels(labels).then(function(data) {
- *   var metadata = data[0];
+ *   const metadata = data[0];
  * });
  */
 Bucket.prototype.setLabels = function(labels, options, callback) {
@@ -1902,13 +1902,13 @@ Bucket.prototype.setLabels = function(labels, options, callback) {
  * @returns {Promise<SetBucketMetadataResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Set website metadata field on the bucket.
  * //-
- * var metadata = {
+ * const metadata = {
  *   website: {
  *     mainPageSuffix: 'http://example.com',
  *     notFoundPage: 'http://example.com/404.html'
@@ -1930,11 +1930,11 @@ Bucket.prototype.setLabels = function(labels, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.setMetadata(metadata).then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Bucket.prototype.setMetadata = function(metadata, options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1982,8 +1982,8 @@ Bucket.prototype.setMetadata = function(metadata, options, callback) {
  * @returns {Promise}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.setStorageClass('regional', function(err, apiResponse) {
  *   if (err) {
@@ -2017,8 +2017,8 @@ Bucket.prototype.setStorageClass = function(storageClass, options, callback) {
  * @param {string} userProject The user project.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * bucket.setUserProject('grape-spaceship-123');
  */
@@ -2112,8 +2112,8 @@ Bucket.prototype.setUserProject = function(userProject) {
  * @returns {Promise<UploadResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
  *
  * //-
  * // Upload a file from a local path.
@@ -2142,7 +2142,7 @@ Bucket.prototype.setUserProject = function(userProject) {
  * //
  * // You may also want to set metadata or customize other options.
  * //-
- * var options = {
+ * const options = {
  *   destination: 'new-image.png',
  *   resumable: true,
  *   validation: 'crc32c',
@@ -2175,7 +2175,7 @@ Bucket.prototype.setUserProject = function(userProject) {
  * // You may also re-use a File object, {File}, that references
  * // the file you wish to create or overwrite.
  * //-
- * var options = {
+ * const options = {
  *   destination: bucket.file('existing-file.png'),
  *   resumable: false
  * };
@@ -2193,8 +2193,8 @@ Bucket.prototype.setUserProject = function(userProject) {
  * // <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">
  * // Customer-supplied Encryption Keys</a>, provide the `encryptionKey` option.
  * //-
- * var crypto = require('crypto');
- * var encryptionKey = crypto.randomBytes(32);
+ * const crypto = require('crypto');
+ * const encryptionKey = crypto.randomBytes(32);
  *
  * bucket.upload('img.png', {
  *   encryptionKey: encryptionKey
@@ -2206,12 +2206,12 @@ Bucket.prototype.setUserProject = function(userProject) {
  *
  *   // However, to use your encryption key later, you must create a `File`
  *   // instance with the `key` supplied:
- *   var file = bucket.file('img.png', {
+ *   const file = bucket.file('img.png', {
  *     encryptionKey: encryptionKey
  *   });
  *
  *   // Or with `file#setEncryptionKey`:
- *   var file = bucket.file('img.png');
+ *   const file = bucket.file('img.png');
  *   file.setEncryptionKey(encryptionKey);
  * });
  *
@@ -2219,7 +2219,7 @@ Bucket.prototype.setUserProject = function(userProject) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.upload('local-image.png').then(function(data) {
- *   var file = data[0];
+ *   const file = data[0];
  * });
  *
  * //-
@@ -2249,7 +2249,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     return;
   }
 
-  var isURL = /^(http|https):/.test(pathString);
+  const isURL = /^(http|https):/.test(pathString);
 
   if (is.fn(options)) {
     callback = options;
@@ -2263,14 +2263,14 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     options
   );
 
-  var requestOptions = Object.assign(
+  const requestOptions = Object.assign(
     {
       url: pathString,
     },
     options.requestOptions
   );
 
-  var newFile;
+  let newFile;
   if (options.destination instanceof File) {
     newFile = options.destination;
   } else if (is.string(options.destination)) {
@@ -2280,13 +2280,13 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     });
   } else {
     // Resort to using the name of the incoming file.
-    var destination = path.basename(pathString);
+    const destination = path.basename(pathString);
     newFile = this.file(destination, {
       encryptionKey: options.encryptionKey,
     });
   }
 
-  var contentType = mime.contentType(path.basename(pathString));
+  const contentType = mime.contentType(path.basename(pathString));
 
   if (contentType && !options.metadata.contentType) {
     options.metadata.contentType = contentType;
@@ -2301,7 +2301,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
         return;
       }
 
-      var contentLength = resp.headers['content-length'];
+      const contentLength = resp.headers['content-length'];
 
       if (is.number(contentLength)) {
         options.resumable = contentLength > RESUMABLE_THRESHOLD;
@@ -2324,7 +2324,7 @@ Bucket.prototype.upload = function(pathString, options, callback) {
   }
 
   function upload() {
-    var sourceStream;
+    let sourceStream;
 
     if (isURL) {
       sourceStream = request.get(requestOptions);
@@ -2362,9 +2362,9 @@ Bucket.prototype.upload = function(pathString, options, callback) {
  * @param {function} callback Callback function.
  */
 Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
-  var MAX_PARALLEL_LIMIT = 10;
-  var errors = [];
-  var updatedFiles = [];
+  const MAX_PARALLEL_LIMIT = 10;
+  const errors = [];
+  const updatedFiles = [];
 
   this.getFiles(options, function(err, files) {
     if (err) {

@@ -16,14 +16,14 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const util = require('util');
 
-var Bucket = require('./bucket.js');
-var Channel = require('./channel.js');
-var File = require('./file.js');
+const Bucket = require('./bucket.js');
+const Channel = require('./channel.js');
+const File = require('./file.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -92,7 +92,7 @@ function Storage(options) {
 
   options = common.util.normalizeArguments(this, options);
 
-  var config = {
+  const config = {
     baseUrl: 'https://www.googleapis.com/storage/v1',
     projectIdRequired: false,
     scopes: [
@@ -129,13 +129,13 @@ util.inherits(Storage, common.Service);
  * @property {string} WRITER_ROLE
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var albums = storage.bucket('albums');
+ * const storage = require('@google-cloud/storage')();
+ * const albums = storage.bucket('albums');
  *
  * //-
  * // Make all of the files currently in a bucket publicly readable.
  * //-
- * var options = {
+ * const options = {
  *   entity: 'allUsers',
  *   role: storage.acl.READER_ROLE
  * };
@@ -159,8 +159,8 @@ util.inherits(Storage, common.Service);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * albums.acl.add(options).then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Storage.acl = {
@@ -188,9 +188,9 @@ Storage.prototype.acl = Storage.acl;
  * @see Bucket
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var albums = storage.bucket('albums');
- * var photos = storage.bucket('photos');
+ * const storage = require('@google-cloud/storage')();
+ * const albums = storage.bucket('albums');
+ * const photos = storage.bucket('photos');
  */
 Storage.prototype.bucket = function(name, options) {
   if (!name) {
@@ -209,8 +209,8 @@ Storage.prototype.bucket = function(name, options) {
  * @see Channel
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var channel = storage.channel('id', 'resource-id');
+ * const storage = require('@google-cloud/storage')();
+ * const channel = storage.channel('id', 'resource-id');
  */
 Storage.prototype.channel = function(id, resourceId) {
   return new Channel(this, id, resourceId);
@@ -262,8 +262,8 @@ Storage.prototype.channel = function(id, resourceId) {
  * @see Bucket#create
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var callback = function(err, bucket, apiResponse) {
+ * const storage = require('@google-cloud/storage')();
+ * const callback = function(err, bucket, apiResponse) {
  *   // `bucket` is a Bucket object.
  * };
  *
@@ -275,7 +275,7 @@ Storage.prototype.channel = function(id, resourceId) {
  * // Official JSON API docs</a> for complete details on the `location` option.
  * // </em>
  * //-
- * var metadata = {
+ * const metadata = {
  *   location: 'US-CENTRAL1',
  *   regional: true
  * };
@@ -285,7 +285,7 @@ Storage.prototype.channel = function(id, resourceId) {
  * //-
  * // Enable versioning on a new bucket.
  * //-
- * var metadata = {
+ * const metadata = {
  *   versioning: {
  *     enabled: true
  *   }
@@ -297,8 +297,8 @@ Storage.prototype.channel = function(id, resourceId) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * storage.createBucket('new-bucket').then(function(data) {
- *   var bucket = data[0];
- *   var apiResponse = data[1];
+ *   const bucket = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/buckets.js</caption>
@@ -306,7 +306,7 @@ Storage.prototype.channel = function(id, resourceId) {
  * Another example:
  */
 Storage.prototype.createBucket = function(name, metadata, callback) {
-  var self = this;
+  const self = this;
 
   if (!name) {
     throw new Error('A name is required to create a bucket.');
@@ -317,11 +317,11 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
     metadata = {};
   }
 
-  var body = extend({}, metadata, {
+  const body = extend({}, metadata, {
     name: name,
   });
 
-  var storageClasses = {
+  const storageClasses = {
     coldline: 'COLDLINE',
     dra: 'DURABLE_REDUCED_AVAILABILITY',
     multiRegional: 'MULTI_REGIONAL',
@@ -343,7 +343,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
     delete body.requesterPays;
   }
 
-  var query = {
+  const query = {
     project: this.projectId,
   };
 
@@ -365,7 +365,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
         return;
       }
 
-      var bucket = self.bucket(name);
+      const bucket = self.bucket(name);
       bucket.metadata = resp;
 
       callback(null, bucket, resp);
@@ -406,7 +406,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * @returns {Promise<GetBucketsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
+ * const storage = require('@google-cloud/storage')();
  * storage.getBuckets(function(err, buckets) {
  *   if (!err) {
  *     // buckets is an array of Bucket objects.
@@ -417,7 +417,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * var callback = function(err, buckets, nextQuery, apiResponse) {
+ * const callback = function(err, buckets, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
  *     storage.getBuckets(nextQuery, callback);
@@ -440,7 +440,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * storage.getBuckets().then(function(data) {
- *   var buckets = data[0];
+ *   const buckets = data[0];
  * });
  *
  * @example <caption>include:samples/buckets.js</caption>
@@ -448,7 +448,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * Another example:
  */
 Storage.prototype.getBuckets = function(query, callback) {
-  var self = this;
+  const self = this;
 
   if (!callback) {
     callback = query;
@@ -468,13 +468,13 @@ Storage.prototype.getBuckets = function(query, callback) {
         return;
       }
 
-      var buckets = arrify(resp.items).map(function(bucket) {
-        var bucketInstance = self.bucket(bucket.id);
+      const buckets = arrify(resp.items).map(function(bucket) {
+        const bucketInstance = self.bucket(bucket.id);
         bucketInstance.metadata = bucket;
         return bucketInstance;
       });
 
-      var nextQuery = null;
+      let nextQuery = null;
       if (resp.nextPageToken) {
         nextQuery = extend({}, query, {pageToken: resp.nextPageToken});
       }

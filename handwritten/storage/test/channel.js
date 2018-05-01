@@ -20,15 +20,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Channel') {
       promisified = true;
@@ -44,12 +44,12 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Channel', function() {
-  var STORAGE = {};
-  var ID = 'channel-id';
-  var RESOURCE_ID = 'resource-id';
+  const STORAGE = {};
+  const ID = 'channel-id';
+  const RESOURCE_ID = 'resource-id';
 
-  var Channel;
-  var channel;
+  let Channel;
+  let channel;
 
   before(function() {
     Channel = proxyquire('../src/channel.js', {
@@ -68,7 +68,7 @@ describe('Channel', function() {
     it('should inherit from ServiceObject', function() {
       assert(channel instanceof ServiceObject);
 
-      var calledWith = channel.calledWith_[0];
+      const calledWith = channel.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, STORAGE);
       assert.strictEqual(calledWith.baseUrl, '/channels');
@@ -102,8 +102,8 @@ describe('Channel', function() {
     });
 
     it('should execute callback with error & API response', function(done) {
-      var error = {};
-      var apiResponse = {};
+      const error = {};
+      const apiResponse = {};
 
       channel.request = function(reqOpts, callback) {
         callback(error, apiResponse);

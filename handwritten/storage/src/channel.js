@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * Create a channel object to interact with a Cloud Storage channel.
@@ -30,11 +30,11 @@ var util = require('util');
  * @param {string} resourceId The resource ID of the channel.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var channel = storage.channel('id', 'resource-id');
+ * const storage = require('@google-cloud/storage')();
+ * const channel = storage.channel('id', 'resource-id');
  */
 function Channel(storage, id, resourceId) {
-  var config = {
+  const config = {
     parent: storage,
     baseUrl: '/channels',
 
@@ -71,8 +71,8 @@ util.inherits(Channel, common.ServiceObject);
  * @returns {Promise<StopResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var channel = storage.channel('id', 'resource-id');
+ * const storage = require('@google-cloud/storage')();
+ * const channel = storage.channel('id', 'resource-id');
  * channel.stop(function(err, apiResponse) {
  *   if (!err) {
  *     // Channel stopped successfully.
@@ -83,7 +83,7 @@ util.inherits(Channel, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * channel.stop().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Channel.prototype.stop = function(callback) {

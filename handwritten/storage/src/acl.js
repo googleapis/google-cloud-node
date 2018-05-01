@@ -16,11 +16,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const is = require('is');
+const util = require('util');
 
 /**
  * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -92,15 +92,15 @@ function Acl(options) {
  * @return {object}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
  * //-
  * // Add a user as an owner of a file.
  * //-
- * var myBucket = gcs.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const myBucket = gcs.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  * myFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});
  *
  * //-
@@ -115,8 +115,8 @@ function Acl(options) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myFile.acl.owners.addUser('email@example.com').then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Acl.prototype.owners = {};
@@ -143,9 +143,9 @@ Acl.prototype.owners = {};
  * @return {object}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
  * //-
  * // Add a user as a reader of a file.
@@ -164,8 +164,8 @@ Acl.prototype.owners = {};
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myFile.acl.readers.addUser('email@example.com').then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Acl.prototype.readers = {};
@@ -192,9 +192,9 @@ Acl.prototype.readers = {};
  * @return {object}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
  * //-
  * // Add a user as a writer of a file.
@@ -213,8 +213,8 @@ Acl.prototype.readers = {};
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myFile.acl.writers.addUser('email@example.com').then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Acl.prototype.writers = {};
@@ -250,11 +250,11 @@ util.inherits(Acl, AclRoleAccessorMethods);
  * @returns {Promise<AddAclResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
- * var options = {
+ * const options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.OWNER_ROLE
  * };
@@ -276,8 +276,8 @@ util.inherits(Acl, AclRoleAccessorMethods);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myBucket.acl.add(options).then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/acl.js</caption>
@@ -293,9 +293,9 @@ util.inherits(Acl, AclRoleAccessorMethods);
  * Example of adding a default owner to a bucket:
  */
 Acl.prototype.add = function(options, callback) {
-  var self = this;
+  const self = this;
 
-  var query = {};
+  const query = {};
 
   if (options.generation) {
     query.generation = options.generation;
@@ -351,9 +351,9 @@ Acl.prototype.add = function(options, callback) {
  * @returns {Promise<RemoveAclResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
  * myBucket.acl.delete({
  *   entity: 'user-useremail@example.com'
@@ -371,7 +371,7 @@ Acl.prototype.add = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myFile.acl.delete().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/acl.js</caption>
@@ -387,7 +387,7 @@ Acl.prototype.add = function(options, callback) {
  * Example of removing an owner from a bucket:
  */
 Acl.prototype.delete = function(options, callback) {
-  var query = {};
+  const query = {};
 
   if (options.generation) {
     query.generation = options.generation;
@@ -440,9 +440,9 @@ Acl.prototype.delete = function(options, callback) {
  * @returns {Promise<GetAclResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
  * myBucket.acl.get({
  *   entity: 'user-useremail@example.com'
@@ -472,8 +472,8 @@ Acl.prototype.delete = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myBucket.acl.get().then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/acl.js</caption>
@@ -493,9 +493,9 @@ Acl.prototype.delete = function(options, callback) {
  * Example of printing a bucket's ACL for a specific user:
  */
 Acl.prototype.get = function(options, callback) {
-  var self = this;
-  var path = '';
-  var query = {};
+  const self = this;
+  let path = '';
+  const query = {};
 
   if (is.fn(options)) {
     callback = options;
@@ -523,7 +523,7 @@ Acl.prototype.get = function(options, callback) {
         return;
       }
 
-      var results;
+      let results;
 
       if (resp.items) {
         results = arrify(resp.items).map(self.makeAclObject_);
@@ -565,11 +565,11 @@ Acl.prototype.get = function(options, callback) {
  * @returns {Promise<UpdateAclResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var myFile = myBucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const myFile = myBucket.file('my-file');
  *
- * var options = {
+ * const options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.WRITER_ROLE
  * };
@@ -589,14 +589,14 @@ Acl.prototype.get = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * myFile.acl.update(options).then(function(data) {
- *   var aclObject = data[0];
- *   var apiResponse = data[1];
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Acl.prototype.update = function(options, callback) {
-  var self = this;
+  const self = this;
 
-  var query = {};
+  const query = {};
 
   if (options.generation) {
     query.generation = options.generation;
@@ -632,7 +632,7 @@ Acl.prototype.update = function(options, callback) {
  * @private
  */
 Acl.prototype.makeAclObject_ = function(accessControlObject) {
-  var obj = {
+  const obj = {
     entity: accessControlObject.entity,
     role: accessControlObject.role,
   };
@@ -705,17 +705,17 @@ AclRoleAccessorMethods.entities = [
 AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
 
 AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
-  var self = this;
+  const self = this;
 
-  var accessMethods = AclRoleAccessorMethods.accessMethods;
-  var entities = AclRoleAccessorMethods.entities;
-  var roleGroup = role.toLowerCase() + 's';
+  const accessMethods = AclRoleAccessorMethods.accessMethods;
+  const entities = AclRoleAccessorMethods.entities;
+  const roleGroup = role.toLowerCase() + 's';
 
   this[roleGroup] = entities.reduce(function(acc, entity) {
-    var isPrefix = entity.charAt(entity.length - 1) === '-';
+    const isPrefix = entity.charAt(entity.length - 1) === '-';
 
     accessMethods.forEach(function(accessMethod) {
-      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);
+      let method = accessMethod + entity[0].toUpperCase() + entity.substr(1);
 
       if (isPrefix) {
         method = method.replace('-', '');
@@ -724,7 +724,7 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
       // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
       // more complex API of specifying an `entity` and `role`.
       acc[method] = function(entityId, options, callback) {
-        var apiEntity;
+        let apiEntity;
 
         if (is.fn(options)) {
           callback = options;
@@ -749,7 +749,7 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           options
         );
 
-        var args = [options];
+        const args = [options];
 
         if (is.fn(callback)) {
           args.push(callback);

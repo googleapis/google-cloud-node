@@ -16,9 +16,9 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var is = require('is');
-var util = require('util');
+const common = require('@google-cloud/common');
+const is = require('is');
+const util = require('util');
 
 /**
  * A Notification object is created from your {@link Bucket} object using
@@ -34,13 +34,13 @@ var util = require('util');
  * @param {string} id The ID of the notification.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var notification = myBucket.notification('1');
+ * const notification = myBucket.notification('1');
  */
 function Notification(bucket, id) {
-  var methods = {
+  const methods = {
     /**
      * Creates a notification subscription for the bucket.
      *
@@ -61,9 +61,9 @@ function Notification(bucket, id) {
      * @throws {Error} If a valid topic is not provided.
      *
      * @example
-     * var storage = require('@google-cloud/storage')();
-     * var myBucket = storage.bucket('my-bucket');
-     * var notification = myBucket.notification('1');
+     * const storage = require('@google-cloud/storage')();
+     * const myBucket = storage.bucket('my-bucket');
+     * const notification = myBucket.notification('1');
      *
      * notification.create(function(err, notification, apiResponse) {
      *   if (!err) {
@@ -75,8 +75,8 @@ function Notification(bucket, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * notification.create().then(function(data) {
-     *   var notification = data[0];
-     *   var apiResponse = data[1];
+     *   const notification = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     create: true,
@@ -97,9 +97,9 @@ function Notification(bucket, id) {
      * @returns {Promise<NotificationExistsResponse>}
      *
      * @example
-     * var storage = require('@google-cloud/storage')();
-     * var myBucket = storage.bucket('my-bucket');
-     * var notification = myBucket.notification('1');
+     * const storage = require('@google-cloud/storage')();
+     * const myBucket = storage.bucket('my-bucket');
+     * const notification = myBucket.notification('1');
      *
      * notification.exists(function(err, exists) {});
      *
@@ -107,7 +107,7 @@ function Notification(bucket, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * notification.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -145,9 +145,9 @@ util.inherits(Notification, common.ServiceObject);
  * @returns {Promise<DeleteNotificationResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var notification = myBucket.notification('1');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const notification = myBucket.notification('1');
  *
  * notification.delete(function(err, apiResponse) {});
  *
@@ -155,7 +155,7 @@ util.inherits(Notification, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * notification.delete().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/notifications.js</caption>
@@ -204,9 +204,9 @@ Notification.prototype.delete = function(options, callback) {
  * @return {Promise<GetNotificationCallback>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var notification = myBucket.notification('1');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const notification = myBucket.notification('1');
  *
  * notification.get(function(err, notification, apiResponse) {
  *   // `notification.metadata` has been populated.
@@ -216,19 +216,19 @@ Notification.prototype.delete = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * notification.get().then(function(data) {
- *   var notification = data[0];
- *   var apiResponse = data[1];
+ *   const notification = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Notification.prototype.get = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  var autoCreate = options.autoCreate;
+  const autoCreate = options.autoCreate;
   delete options.autoCreate;
 
   function onCreate(err, notification, apiResponse) {
@@ -248,7 +248,7 @@ Notification.prototype.get = function(options, callback) {
   this.getMetadata(options, function(err, metadata) {
     if (err) {
       if (err.code === 404 && autoCreate) {
-        var args = [];
+        const args = [];
 
         if (!is.empty(options)) {
           args.push(options);
@@ -291,9 +291,9 @@ Notification.prototype.get = function(options, callback) {
  * @returns {Promise<GetNotificationMetadataResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
- * var notification = myBucket.notification('1');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
+ * const notification = myBucket.notification('1');
  *
  * notification.getMetadata(function(err, metadata, apiResponse) {});
  *
@@ -301,8 +301,8 @@ Notification.prototype.get = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * notification.getMetadata().then(function(data) {
- *   var metadata = data[0];
- *   var apiResponse = data[1];
+ *   const metadata = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/notifications.js</caption>
@@ -310,7 +310,7 @@ Notification.prototype.get = function(options, callback) {
  * Another example:
  */
 Notification.prototype.getMetadata = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;

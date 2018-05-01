@@ -16,11 +16,11 @@
 
 'use strict';
 
-var assert = require('assert');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var util = require('util');
+const assert = require('assert');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const util = require('util');
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -29,8 +29,8 @@ function FakeServiceObject() {
 
 util.inherits(FakeServiceObject, common.ServiceObject);
 
-var promisified = false;
-var fakeUtil = extend({}, common.util, {
+let promisified = false;
+const fakeUtil = extend({}, common.util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Notification') {
       promisified = true;
@@ -39,14 +39,14 @@ var fakeUtil = extend({}, common.util, {
 });
 
 describe('Notification', function() {
-  var Notification;
-  var notification;
+  let Notification;
+  let notification;
 
-  var BUCKET = {
+  const BUCKET = {
     createNotification: fakeUtil.noop,
   };
 
-  var ID = '123';
+  const ID = '123';
 
   before(function() {
     Notification = proxyquire('../src/notification.js', {
@@ -70,7 +70,7 @@ describe('Notification', function() {
     it('should inherit from ServiceObject', function() {
       assert(notification instanceof FakeServiceObject);
 
-      var calledWith = notification.calledWith_[0];
+      const calledWith = notification.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, BUCKET);
       assert.strictEqual(calledWith.baseUrl, '/notificationConfigs');
@@ -83,7 +83,7 @@ describe('Notification', function() {
     });
 
     it('should use Bucket#createNotification for the createMethod', function() {
-      var bound = function() {};
+      const bound = function() {};
 
       BUCKET.createNotification = {
         bind: function(context) {
@@ -92,15 +92,15 @@ describe('Notification', function() {
         },
       };
 
-      var notification = new Notification(BUCKET, ID);
-      var calledWith = notification.calledWith_[0];
+      const notification = new Notification(BUCKET, ID);
+      const calledWith = notification.calledWith_[0];
 
       assert.strictEqual(calledWith.createMethod, bound);
     });
 
     it('should convert number IDs to strings', function() {
-      var notification = new Notification(BUCKET, 1);
-      var calledWith = notification.calledWith_[0];
+      const notification = new Notification(BUCKET, 1);
+      const calledWith = notification.calledWith_[0];
 
       assert.strictEqual(calledWith.id, '1');
     });
@@ -108,7 +108,7 @@ describe('Notification', function() {
 
   describe('delete', function() {
     it('should make the correct request', function(done) {
-      var options = {};
+      const options = {};
 
       notification.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'DELETE');
@@ -150,7 +150,7 @@ describe('Notification', function() {
     });
 
     it('should accept an options object', function(done) {
-      var options = {};
+      const options = {};
 
       notification.getMetadata = function(options_) {
         assert.strictEqual(options_, options);
@@ -161,8 +161,8 @@ describe('Notification', function() {
     });
 
     it('should execute callback with error & metadata', function(done) {
-      var error = new Error('Error.');
-      var metadata = {};
+      const error = new Error('Error.');
+      const metadata = {};
 
       notification.getMetadata = function(options, callback) {
         callback(error, metadata);
@@ -178,7 +178,7 @@ describe('Notification', function() {
     });
 
     it('should execute callback with instance & metadata', function(done) {
-      var metadata = {};
+      const metadata = {};
 
       notification.getMetadata = function(options, callback) {
         callback(null, metadata);
@@ -195,10 +195,10 @@ describe('Notification', function() {
     });
 
     describe('autoCreate', function() {
-      var AUTO_CREATE_CONFIG;
+      let AUTO_CREATE_CONFIG;
 
-      var ERROR = {code: 404};
-      var METADATA = {};
+      const ERROR = {code: 404};
+      const METADATA = {};
 
       beforeEach(function() {
         AUTO_CREATE_CONFIG = {
@@ -211,7 +211,7 @@ describe('Notification', function() {
       });
 
       it('should pass config to create if it was provided', function(done) {
-        var config = extend({}, AUTO_CREATE_CONFIG, {
+        const config = extend({}, AUTO_CREATE_CONFIG, {
           maxResults: 5,
         });
 
@@ -233,8 +233,8 @@ describe('Notification', function() {
 
       describe('error', function() {
         it('should execute callback with error & API response', function(done) {
-          var error = new Error('Error.');
-          var apiResponse = {};
+          const error = new Error('Error.');
+          const apiResponse = {};
 
           notification.create = function(callback) {
             notification.get = function(config, callback) {
@@ -254,7 +254,7 @@ describe('Notification', function() {
         });
 
         it('should refresh the metadata after a 409', function(done) {
-          var error = {
+          const error = {
             code: 409,
           };
 
@@ -275,7 +275,7 @@ describe('Notification', function() {
 
   describe('getMetadata', function() {
     it('should make the correct request', function(done) {
-      var options = {};
+      const options = {};
 
       notification.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '');
@@ -296,8 +296,8 @@ describe('Notification', function() {
     });
 
     it('should return any errors to the callback', function(done) {
-      var error = new Error('err');
-      var response = {};
+      const error = new Error('err');
+      const response = {};
 
       notification.request = function(reqOpts, callback) {
         callback(error, response);
@@ -312,7 +312,7 @@ describe('Notification', function() {
     });
 
     it('should set and return the metadata', function(done) {
-      var response = {};
+      const response = {};
 
       notification.request = function(reqOpts, callback) {
         callback(null, response);

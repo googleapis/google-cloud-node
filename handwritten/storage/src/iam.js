@@ -16,10 +16,10 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const is = require('is');
 
 /**
  * Get and set IAM policies for your Cloud Storage bucket.
@@ -33,8 +33,8 @@ var is = require('is');
  *
  * @param {Bucket} bucket The parent instance.
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  * // bucket.iam
  */
 function Iam(bucket) {
@@ -68,16 +68,16 @@ function Iam(bucket) {
  * @see [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  * bucket.iam.getPolicy(function(err, policy, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.iam.getPolicy().then(function(data) {
- *   var policy = data[0];
- *   var apiResponse = data[1];
+ *   const policy = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/iam.js</caption>
@@ -128,10 +128,10 @@ Iam.prototype.getPolicy = function(options, callback) {
  * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  *
- * var myPolicy = {
+ * const myPolicy = {
  *   bindings: [
  *     {
  *       role: 'roles/storage.admin',
@@ -146,8 +146,8 @@ Iam.prototype.getPolicy = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.iam.setPolicy(myPolicy).then(function(data) {
- *   var policy = data[0];
- *   var apiResponse = data[1];
+ *   const policy = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/iam.js</caption>
@@ -210,13 +210,13 @@ Iam.prototype.setPolicy = function(policy, options, callback) {
  * @see [Buckets: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  *
  * //-
  * // Test a single permission.
  * //-
- * var test = 'storage.buckets.delete';
+ * const test = 'storage.buckets.delete';
  *
  * bucket.iam.testPermissions(test, function(err, permissions, apiResponse) {
  *   console.log(permissions);
@@ -228,7 +228,7 @@ Iam.prototype.setPolicy = function(policy, options, callback) {
  * //-
  * // Test several permissions at once.
  * //-
- * var tests = [
+ * const tests = [
  *   'storage.buckets.delete',
  *   'storage.buckets.get'
  * ];
@@ -245,8 +245,8 @@ Iam.prototype.setPolicy = function(policy, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.iam.testPermissions(test).then(function(data) {
- *   var permissions = data[0];
- *   var apiResponse = data[1];
+ *   const permissions = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Iam.prototype.testPermissions = function(permissions, options, callback) {
@@ -278,9 +278,9 @@ Iam.prototype.testPermissions = function(permissions, options, callback) {
         return;
       }
 
-      var availablePermissions = arrify(resp.permissions);
+      const availablePermissions = arrify(resp.permissions);
 
-      var permissionsHash = permissions.reduce(function(acc, permission) {
+      const permissionsHash = permissions.reduce(function(acc, permission) {
         acc[permission] = availablePermissions.indexOf(permission) > -1;
         return acc;
       }, {});

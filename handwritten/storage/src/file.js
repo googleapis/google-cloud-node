@@ -16,63 +16,64 @@
 
 'use strict';
 
-var Buffer = require('safe-buffer').Buffer;
-var common = require('@google-cloud/common');
-var compressible = require('compressible');
-var concat = require('concat-stream');
-var createErrorClass = require('create-error-class');
-var crypto = require('crypto');
-var duplexify = require('duplexify');
-var extend = require('extend');
-var format = require('string-format-obj');
-var fs = require('fs');
-var hashStreamValidation = require('hash-stream-validation');
-var is = require('is');
-var mime = require('mime');
-var once = require('once');
-var os = require('os');
-var pumpify = require('pumpify');
-var resumableUpload = require('gcs-resumable-upload');
-var streamEvents = require('stream-events');
-var through = require('through2');
-var util = require('util');
-var xdgBasedir = require('xdg-basedir');
-var zlib = require('zlib');
-var url = require('url');
+const Buffer = require('safe-buffer').Buffer;
+const common = require('@google-cloud/common');
+const compressible = require('compressible');
+const concat = require('concat-stream');
+const createErrorClass = require('create-error-class');
+const crypto = require('crypto');
+const duplexify = require('duplexify');
+const extend = require('extend');
+const format = require('string-format-obj');
+const fs = require('fs');
+const hashStreamValidation = require('hash-stream-validation');
+const is = require('is');
+const mime = require('mime');
+const once = require('once');
+const os = require('os');
+const pumpify = require('pumpify');
+const resumableUpload = require('gcs-resumable-upload');
+const streamEvents = require('stream-events');
+const through = require('through2');
+const util = require('util');
+const xdgBasedir = require('xdg-basedir');
+const zlib = require('zlib');
+const url = require('url');
 
-var Acl = require('./acl.js');
+const Acl = require('./acl.js');
 
 /**
  * Custom error type for errors related to creating a resumable upload.
  *
  * @private
  */
-var ResumableUploadError = createErrorClass('ResumableUploadError');
+const ResumableUploadError = createErrorClass('ResumableUploadError');
 
 /**
  * Custom error type for errors related to getting signed errors and policies.
  *
  * @private
  */
-var SigningError = createErrorClass('SigningError');
+const SigningError = createErrorClass('SigningError');
 
 /**
  * @const {string}
  * @private
  */
-var STORAGE_DOWNLOAD_BASE_URL = 'https://storage.googleapis.com';
+const STORAGE_DOWNLOAD_BASE_URL = 'https://storage.googleapis.com';
 
 /**
  * @const {string}
  * @private
  */
-var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';
+const STORAGE_UPLOAD_BASE_URL =
+  'https://www.googleapis.com/upload/storage/v1/b';
 
 /**
  * @const {RegExp}
  * @private
  */
-var GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
+const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
 
 /**
  * A File object is created from your {@link Bucket} object using
@@ -88,10 +89,10 @@ var GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
  * @param {string} [options.userProject] The ID of the project which will be
  *     billed for all requests made from File object.
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  */
 function File(bucket, name, options) {
   options = options || {};
@@ -105,7 +106,7 @@ function File(bucket, name, options) {
     value: name.replace(/^\/+/, ''), // Remove leading slashes.
   });
 
-  var generation = parseInt(options.generation, 10);
+  const generation = parseInt(options.generation, 10);
 
   if (!isNaN(generation)) {
     this.generation = generation;
@@ -144,14 +145,14 @@ function File(bucket, name, options) {
    * @mixes Acl
    *
    * @example
-   * var storage = require('@google-cloud/storage')();
-   * var myBucket = storage.bucket('my-bucket');
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
    *
-   * var file = myBucket.file('my-file');
+   * const file = myBucket.file('my-file');
    * //-
    * // Make a file publicly readable.
    * //-
-   * var options = {
+   * const options = {
    *   entity: 'allUsers',
    *   role: storage.acl.READER_ROLE
    * };
@@ -162,8 +163,8 @@ function File(bucket, name, options) {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * file.acl.add(options).then(function(data) {
-   *   var aclObject = data[0];
-   *   var apiResponse = data[1];
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
    * });
    */
   this.acl = new Acl({
@@ -207,7 +208,7 @@ util.inherits(File, common.ServiceObject);
  * @returns {Promise<CopyResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
+ * const storage = require('@google-cloud/storage')();
  *
  * //-
  * // You can pass in a variety of types for the destination.
@@ -215,8 +216,8 @@ util.inherits(File, common.ServiceObject);
  * // For all of the below examples, assume we are working with the following
  * // Bucket and File objects.
  * //-
- * var bucket = storage.bucket('my-bucket');
- * var file = bucket.file('my-image.png');
+ * const bucket = storage.bucket('my-bucket');
+ * const file = bucket.file('my-image.png');
  *
  * //-
  * // If you pass in a string for the destination, the file is copied to its
@@ -235,7 +236,7 @@ util.inherits(File, common.ServiceObject);
  * // If you pass in a string starting with "gs://" for the destination, the
  * // file is copied to the other bucket and under the new name provided.
  * //-
- * var newLocation = 'gs://another-bucket/my-image-copy.png';
+ * const newLocation = 'gs://another-bucket/my-image-copy.png';
  * file.copy(newLocation, function(err, copiedFile, apiResponse) {
  *   // `my-bucket` still contains:
  *   // - "my-image.png"
@@ -251,7 +252,7 @@ util.inherits(File, common.ServiceObject);
  * // If you pass in a Bucket object, the file will be copied to that bucket
  * // using the same name.
  * //-
- * var anotherBucket = storage.bucket('another-bucket');
+ * const anotherBucket = storage.bucket('another-bucket');
  * file.copy(anotherBucket, function(err, copiedFile, apiResponse) {
  *   // `my-bucket` still contains:
  *   // - "my-image.png"
@@ -267,7 +268,7 @@ util.inherits(File, common.ServiceObject);
  * // If you pass in a File object, you have complete control over the new
  * // bucket and filename.
  * //-
- * var anotherFile = anotherBucket.file('my-awesome-image.png');
+ * const anotherFile = anotherBucket.file('my-awesome-image.png');
  * file.copy(anotherFile, function(err, copiedFile, apiResponse) {
  *   // `my-bucket` still contains:
  *   // - "my-image.png"
@@ -283,8 +284,8 @@ util.inherits(File, common.ServiceObject);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.copy(newLocation).then(function(data) {
- *   var newFile = data[0];
- *   var apiResponse = data[1];
+ *   const newFile = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -292,9 +293,9 @@ util.inherits(File, common.ServiceObject);
  * Another example:
  */
 File.prototype.copy = function(destination, options, callback) {
-  var self = this;
+  const self = this;
 
-  var noDestinationError = new Error('Destination file should have a name.');
+  const noDestinationError = new Error('Destination file should have a name.');
 
   if (!destination) {
     throw noDestinationError;
@@ -308,12 +309,12 @@ File.prototype.copy = function(destination, options, callback) {
   options = extend(true, {}, options);
   callback = callback || common.util.noop;
 
-  var destBucket;
-  var destName;
-  var newFile;
+  let destBucket;
+  let destName;
+  let newFile;
 
   if (is.string(destination)) {
-    var parsedDestination = GS_URL_REGEXP.exec(destination);
+    const parsedDestination = GS_URL_REGEXP.exec(destination);
     if (parsedDestination !== null && parsedDestination.length === 3) {
       destBucket = this.storage.bucket(parsedDestination[1]);
       destName = parsedDestination[2];
@@ -335,7 +336,7 @@ File.prototype.copy = function(destination, options, callback) {
     throw noDestinationError;
   }
 
-  var query = {};
+  const query = {};
   if (is.defined(this.generation)) {
     query.sourceGeneration = this.generation;
   }
@@ -349,7 +350,7 @@ File.prototype.copy = function(destination, options, callback) {
 
   newFile = newFile || destBucket.file(destName);
 
-  var headers = {};
+  const headers = {};
   if (is.defined(newFile.encryptionKey)) {
     headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
     headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
@@ -378,7 +379,7 @@ File.prototype.copy = function(destination, options, callback) {
       }
 
       if (resp.rewriteToken) {
-        var options = {
+        const options = {
           token: resp.rewriteToken,
         };
 
@@ -441,12 +442,12 @@ File.prototype.copy = function(destination, options, callback) {
  * // pipe its contents to a local file. This is effectively creating a local
  * // backup of your remote data.
  * //-
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('my-bucket');
  *
- * var fs = require('fs');
- * var remoteFile = bucket.file('image.png');
- * var localFilename = '/Users/stephen/Photos/image.png';
+ * const fs = require('fs');
+ * const remoteFile = bucket.file('image.png');
+ * const localFilename = '/Users/stephen/Photos/image.png';
  *
  * remoteFile.createReadStream()
  *   .on('error', function(err) {})
@@ -461,7 +462,7 @@ File.prototype.copy = function(destination, options, callback) {
  * //-
  * // To limit the downloaded data to only a byte range, pass an options object.
  * //-
- * var logFile = myBucket.file('access_log');
+ * const logFile = myBucket.file('access_log');
  * logFile.createReadStream({
  *     start: 10000,
  *     end: 20000
@@ -473,7 +474,7 @@ File.prototype.copy = function(destination, options, callback) {
  * // To read a tail byte range, specify only `options.end` as a negative
  * // number.
  * //-
- * var logFile = myBucket.file('access_log');
+ * const logFile = myBucket.file('access_log');
  * logFile.createReadStream({
  *     end: -100
  *   })
@@ -483,17 +484,17 @@ File.prototype.copy = function(destination, options, callback) {
 File.prototype.createReadStream = function(options) {
   options = options || {};
 
-  var self = this;
-  var rangeRequest = is.number(options.start) || is.number(options.end);
-  var tailRequest = options.end < 0;
+  const self = this;
+  const rangeRequest = is.number(options.start) || is.number(options.end);
+  const tailRequest = options.end < 0;
 
-  var validateStream; // Created later, if necessary.
-  var throughStream = streamEvents(through());
+  let validateStream; // Created later, if necessary.
+  const throughStream = streamEvents(through());
 
-  var crc32c = true;
-  var md5 = false;
+  let crc32c = true;
+  let md5 = false;
 
-  var refreshedMetadata = false;
+  let refreshedMetadata = false;
 
   if (is.string(options.validation)) {
     options.validation = options.validation.toLowerCase();
@@ -515,7 +516,7 @@ File.prototype.createReadStream = function(options) {
   // Authenticate the request, then pipe the remote API request to the stream
   // returned to the user.
   function makeRequest() {
-    var reqOpts = {
+    const reqOpts = {
       forever: false,
       uri: '',
       headers: {
@@ -535,8 +536,8 @@ File.prototype.createReadStream = function(options) {
     }
 
     if (rangeRequest) {
-      var start = is.number(options.start) ? options.start : '0';
-      var end = is.number(options.end) ? options.end : '';
+      const start = is.number(options.start) ? options.start : '0';
+      const end = is.number(options.end) ? options.end : '';
 
       reqOpts.headers.Range = `bytes=${tailRequest ? end : `${start}-${end}`}`;
     }
@@ -572,12 +573,12 @@ File.prototype.createReadStream = function(options) {
         return;
       }
 
-      var headers = rawResponseStream.toJSON().headers;
-      var isCompressed = headers['content-encoding'] === 'gzip';
+      const headers = rawResponseStream.toJSON().headers;
+      const isCompressed = headers['content-encoding'] === 'gzip';
 
-      var shouldRunValidation = !rangeRequest && (crc32c || md5);
+      const shouldRunValidation = !rangeRequest && (crc32c || md5);
 
-      var throughStreams = [];
+      const throughStreams = [];
 
       if (shouldRunValidation) {
         validateStream = hashStreamValidation({crc32c, md5});
@@ -617,7 +618,7 @@ File.prototype.createReadStream = function(options) {
         return;
       }
 
-      var hashes = {
+      const hashes = {
         crc32c: self.metadata.crc32c,
         md5: self.metadata.md5Hash,
       };
@@ -625,7 +626,7 @@ File.prototype.createReadStream = function(options) {
       // If we're doing validation, assume the worst-- a data integrity
       // mismatch. If not, these tests won't be performed, and we can assume the
       // best.
-      var failed = crc32c || md5;
+      let failed = crc32c || md5;
 
       if (crc32c && hashes.crc32c) {
         // We must remove the first four bytes from the returned checksum.
@@ -639,7 +640,7 @@ File.prototype.createReadStream = function(options) {
       }
 
       if (md5 && !hashes.md5) {
-        var hashError = new Error(
+        const hashError = new Error(
           [
             'MD5 verification was specified, but is not available for the',
             'requested object. MD5 is not available for composite objects.',
@@ -649,7 +650,7 @@ File.prototype.createReadStream = function(options) {
 
         throughStream.destroy(hashError);
       } else if (failed) {
-        var mismatchError = new Error(
+        const mismatchError = new Error(
           [
             'The downloaded data did not match the data from the server.',
             'To be sure the content is the same, you should download the',
@@ -727,10 +728,10 @@ File.prototype.createReadStream = function(options) {
  * @returns {Promise<CreateResumableUploadResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  * file.createResumableUpload(function(err, uri) {
  *   if (!err) {
  *     // `uri` can be used to PUT data to.
@@ -741,7 +742,7 @@ File.prototype.createReadStream = function(options) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.createResumableUpload().then(function(data) {
- *   var uri = data[0];
+ *   const uri = data[0];
  * });
  */
 File.prototype.createResumableUpload = function(options, callback) {
@@ -854,11 +855,11 @@ File.prototype.createResumableUpload = function(options, callback) {
  * @returns {WritableStream}
  *
  * @example
- * var fs = require('fs');
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const fs = require('fs');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * //-
  * // <h4>Uploading a File</h4>
@@ -914,7 +915,7 @@ File.prototype.createResumableUpload = function(options, callback) {
 File.prototype.createWriteStream = function(options) {
   options = options || {};
 
-  var self = this;
+  const self = this;
 
   options = extend({metadata: {}}, options);
 
@@ -926,7 +927,7 @@ File.prototype.createWriteStream = function(options) {
     }
   }
 
-  var gzip = options.gzip;
+  let gzip = options.gzip;
 
   if (gzip === 'auto') {
     gzip = compressible(options.metadata.contentType);
@@ -936,8 +937,8 @@ File.prototype.createWriteStream = function(options) {
     options.metadata.contentEncoding = 'gzip';
   }
 
-  var crc32c = true;
-  var md5 = false;
+  let crc32c = true;
+  let md5 = false;
 
   if (is.string(options.validation)) {
     options.validation = options.validation.toLowerCase();
@@ -949,14 +950,14 @@ File.prototype.createWriteStream = function(options) {
 
   // Collect data as it comes in to store in a hash. This is compared to the
   // checksum value on the returned metadata from the API.
-  var validateStream = hashStreamValidation({
+  const validateStream = hashStreamValidation({
     crc32c: crc32c,
     md5: md5,
   });
 
-  var fileWriteStream = duplexify();
+  const fileWriteStream = duplexify();
 
-  var stream = streamEvents(
+  const stream = streamEvents(
     pumpify([
       gzip ? zlib.createGzip() : through(),
       validateStream,
@@ -973,12 +974,12 @@ File.prototype.createWriteStream = function(options) {
 
     // Same as configstore:
     // https://github.com/yeoman/configstore/blob/f09f067e50e6a636cfc648a6fc36a522062bd49d/index.js#L11
-    var configDir = xdgBasedir.config || os.tmpdir();
+    const configDir = xdgBasedir.config || os.tmpdir();
 
     fs.access(configDir, fs.W_OK, function(err) {
       if (err) {
         if (options.resumable) {
-          var error = new ResumableUploadError(
+          const error = new ResumableUploadError(
             [
               'A resumable upload could not be performed. The directory,',
               `${configDir}, is not writable. You may try another upload,`,
@@ -1012,11 +1013,11 @@ File.prototype.createWriteStream = function(options) {
 
   // Compare our hashed version vs the completed upload's version.
   fileWriteStream.on('complete', function() {
-    var metadata = self.metadata;
+    const metadata = self.metadata;
 
     // If we're doing validation, assume the worst-- a data integrity mismatch.
     // If not, these tests won't be performed, and we can assume the best.
-    var failed = crc32c || md5;
+    let failed = crc32c || md5;
 
     if (crc32c && metadata.crc32c) {
       // We must remove the first four bytes from the returned checksum.
@@ -1031,8 +1032,8 @@ File.prototype.createWriteStream = function(options) {
 
     if (failed) {
       self.delete(function(err) {
-        var code;
-        var message;
+        let code;
+        let message;
 
         if (err) {
           code = 'FILE_NO_UPLOAD_DELETE';
@@ -1059,7 +1060,7 @@ File.prototype.createWriteStream = function(options) {
           ].join(' ');
         }
 
-        var error = new Error(message);
+        const error = new Error(message);
         error.code = code;
         error.errors = [err];
 
@@ -1096,17 +1097,17 @@ File.prototype.createWriteStream = function(options) {
  * @returns {Promise<DeleteFileResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  * file.delete(function(err, apiResponse) {});
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.delete().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1146,10 +1147,10 @@ File.prototype.delete = function(options, callback) {
  * @returns {Promise<DownloadResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * //-
  * // Download a file into memory. The contents will be available as the second
@@ -1168,7 +1169,7 @@ File.prototype.delete = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.download().then(function(data) {
- *   var contents = data[0];
+ *   const contents = data[0];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1191,10 +1192,10 @@ File.prototype.download = function(options, callback) {
 
   callback = once(callback);
 
-  var destination = options.destination;
+  const destination = options.destination;
   delete options.destination;
 
-  var fileStream = this.createReadStream(options);
+  const fileStream = this.createReadStream(options);
 
   if (destination) {
     fileStream
@@ -1226,10 +1227,10 @@ File.prototype.download = function(options, callback) {
  * @returns {Promise<FileExistsResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * file.exists(function(err, exists) {});
  *
@@ -1237,7 +1238,7 @@ File.prototype.download = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.exists().then(function(data) {
- *   var exists = data[0];
+ *   const exists = data[0];
  * });
  */
 File.prototype.exists = function(options, callback) {
@@ -1253,16 +1254,16 @@ File.prototype.exists = function(options, callback) {
  * @returns {File}
  *
  * @example
- * var crypto = require('crypto');
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const crypto = require('crypto');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var encryptionKey = crypto.randomBytes(32);
+ * const encryptionKey = crypto.randomBytes(32);
  *
- * var fileWithCustomEncryption = myBucket.file('my-file');
+ * const fileWithCustomEncryption = myBucket.file('my-file');
  * fileWithCustomEncryption.setEncryptionKey(encryptionKey);
  *
- * var fileWithoutCustomEncryption = myBucket.file('my-file');
+ * const fileWithoutCustomEncryption = myBucket.file('my-file');
  *
  * fileWithCustomEncryption.save('data', function(err) {
  *   // Try to download with the File object that hasn't had
@@ -1287,7 +1288,7 @@ File.prototype.exists = function(options, callback) {
  * Example of downloading an encrypted file:
  */
 File.prototype.setEncryptionKey = function(encryptionKey) {
-  var self = this;
+  const self = this;
 
   this.encryptionKey = encryptionKey;
   this.encryptionKeyBase64 = Buffer.from(encryptionKey).toString('base64');
@@ -1331,10 +1332,10 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  * @returns {Promise<GetFileResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * file.get(function(err, file, apiResponse) {
  *   // file.metadata` has been populated.
@@ -1344,8 +1345,8 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.get().then(function(data) {
- *   var file = data[0];
- *   var apiResponse = data[1];
+ *   const file = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 File.prototype.get = function(options, callback) {
@@ -1375,10 +1376,10 @@ File.prototype.get = function(options, callback) {
  * @returns {Promise<GetFileMetadataResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * file.getMetadata(function(err, metadata, apiResponse) {});
  *
@@ -1386,8 +1387,8 @@ File.prototype.get = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.getMetadata().then(function(data) {
- *   var metadata = data[0];
- *   var apiResponse = data[1];
+ *   const metadata = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1465,11 +1466,11 @@ File.prototype.getMetadata = function(options, callback) {
  * @returns {Promise<GetSignedPolicyResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
- * var options = {
+ * const file = myBucket.file('my-file');
+ * const options = {
  *   equals: ['$Content-Type', 'image/jpeg'],
  *   expires: '10-25-2022',
  *   contentLengthRange: {
@@ -1488,11 +1489,11 @@ File.prototype.getMetadata = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.getSignedPolicy(options).then(function(data) {
- *   var policy = data[0];
+ *   const policy = data[0];
  * });
  */
 File.prototype.getSignedPolicy = function(options, callback) {
-  var expires = new Date(options.expires);
+  const expires = new Date(options.expires);
 
   if (expires < Date.now()) {
     throw new Error('An expiration date cannot be in the past.');
@@ -1500,7 +1501,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
 
   options = extend({}, options);
 
-  var conditions = [
+  const conditions = [
     ['eq', '$key', this.name],
     {
       bucket: this.bucket.name,
@@ -1550,21 +1551,21 @@ File.prototype.getSignedPolicy = function(options, callback) {
   }
 
   if (options.contentLengthRange) {
-    var min = options.contentLengthRange.min;
-    var max = options.contentLengthRange.max;
+    const min = options.contentLengthRange.min;
+    const max = options.contentLengthRange.max;
     if (!is.number(min) || !is.number(max)) {
       throw new Error('ContentLengthRange must have numeric min & max fields.');
     }
     conditions.push(['content-length-range', min, max]);
   }
 
-  var policy = {
+  const policy = {
     expiration: expires.toISOString(),
     conditions: conditions,
   };
 
-  var policyString = JSON.stringify(policy);
-  var policyBase64 = Buffer.from(policyString).toString('base64');
+  const policyString = JSON.stringify(policy);
+  const policyBase64 = Buffer.from(policyString).toString('base64');
 
   this.storage.authClient.sign(policyBase64, function(err, signature) {
     if (err) {
@@ -1635,17 +1636,17 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * @returns {Promise<GetSignedUrlResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * //-
  * // Generate a URL that allows temporary access to download your file.
  * //-
- * var request = require('request');
+ * const request = require('request');
  *
- * var config = {
+ * const config = {
  *   action: 'read',
  *   expires: '03-17-2025'
  * };
@@ -1676,7 +1677,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
  *   }
  *
  *   // The file is now available to be written to.
- *   var writeStream = request.put(url);
+ *   const writeStream = request.put(url);
  *   writeStream.end('New data');
  *
  *   writeStream.on('complete', function(resp) {
@@ -1692,7 +1693,7 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.getSignedUrl(config).then(function(data) {
- *   var url = data[0];
+ *   const url = data[0];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1700,9 +1701,9 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * Another example:
  */
 File.prototype.getSignedUrl = function(config, callback) {
-  var self = this;
-  var expires = new Date(config.expires);
-  var expiresInSeconds = Math.round(expires / 1000); // The API expects seconds.
+  const self = this;
+  const expires = new Date(config.expires);
+  const expiresInSeconds = Math.round(expires / 1000); // The API expects seconds.
 
   if (expires < Date.now()) {
     throw new Error('An expiration date cannot be in the past.');
@@ -1717,10 +1718,10 @@ File.prototype.getSignedUrl = function(config, callback) {
     resumable: 'POST',
   }[config.action];
 
-  var name = encodeURIComponent(this.name);
+  const name = encodeURIComponent(this.name);
   config.resource = '/' + this.bucket.name + '/' + name;
 
-  var extensionHeadersString = '';
+  let extensionHeadersString = '';
 
   if (config.action === 'POST') {
     config.extensionHeaders = extend({}, config.extensionHeaders, {
@@ -1729,7 +1730,7 @@ File.prototype.getSignedUrl = function(config, callback) {
   }
 
   if (config.extensionHeaders) {
-    for (var headerName in config.extensionHeaders) {
+    for (const headerName in config.extensionHeaders) {
       extensionHeadersString += format('{name}:{value}\n', {
         name: headerName,
         value: config.extensionHeaders[headerName],
@@ -1737,7 +1738,7 @@ File.prototype.getSignedUrl = function(config, callback) {
     }
   }
 
-  var blobToSign = [
+  const blobToSign = [
     config.action,
     config.contentMd5 || '',
     config.contentType || '',
@@ -1745,7 +1746,7 @@ File.prototype.getSignedUrl = function(config, callback) {
     extensionHeadersString + config.resource,
   ].join('\n');
 
-  var authClient = this.storage.authClient;
+  const authClient = this.storage.authClient;
 
   authClient.sign(blobToSign, function(err, signature) {
     if (err) {
@@ -1753,7 +1754,7 @@ File.prototype.getSignedUrl = function(config, callback) {
       return;
     }
 
-    var query = {
+    const query = {
       GoogleAccessId: authClient.credentials.client_email,
       Expires: expiresInSeconds,
       Signature: signature,
@@ -1775,8 +1776,8 @@ File.prototype.getSignedUrl = function(config, callback) {
       query.generation = self.generation;
     }
 
-    var parsedHost = url.parse(config.cname || STORAGE_DOWNLOAD_BASE_URL);
-    var signedUrl = url.format({
+    const parsedHost = url.parse(config.cname || STORAGE_DOWNLOAD_BASE_URL);
+    const signedUrl = url.format({
       protocol: parsedHost.protocol,
       hostname: parsedHost.hostname,
       pathname: self.bucket.name + '/' + name,
@@ -1811,10 +1812,10 @@ File.prototype.getSignedUrl = function(config, callback) {
  * @returns {Promise<MakeFilePrivateResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * //-
  * // Set the file private so only project maintainers can see and modify it.
@@ -1830,7 +1831,7 @@ File.prototype.getSignedUrl = function(config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.makePrivate().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 File.prototype.makePrivate = function(options, callback) {
@@ -1839,7 +1840,7 @@ File.prototype.makePrivate = function(options, callback) {
     options = {};
   }
 
-  var query = {
+  const query = {
     predefinedAcl: options.strict ? 'private' : 'projectPrivate',
   };
 
@@ -1877,10 +1878,10 @@ File.prototype.makePrivate = function(options, callback) {
  * @returns {Promise<MakeFilePublicResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
  * file.makePublic(function(err, apiResponse) {});
  *
@@ -1888,7 +1889,7 @@ File.prototype.makePrivate = function(options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.makePublic().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -1946,15 +1947,15 @@ File.prototype.makePublic = function(callback) {
  * @returns {Promise<MoveResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
+ * const storage = require('@google-cloud/storage')();
  * //-
  * // You can pass in a variety of types for the destination.
  * //
  * // For all of the below examples, assume we are working with the following
  * // Bucket and File objects.
  * //-
- * var bucket = storage.bucket('my-bucket');
- * var file = bucket.file('my-image.png');
+ * const bucket = storage.bucket('my-bucket');
+ * const file = bucket.file('my-image.png');
  *
  * //-
  * // If you pass in a string for the destination, the file is moved to its
@@ -1974,7 +1975,7 @@ File.prototype.makePublic = function(callback) {
  * // If you pass in a string starting with "gs://" for the destination, the
  * // file is copied to the other bucket and under the new name provided.
  * //-
- * var newLocation = 'gs://another-bucket/my-image-new.png';
+ * const newLocation = 'gs://another-bucket/my-image-new.png';
  * file.move(newLocation, function(err, destinationFile, apiResponse) {
  *   // `my-bucket` no longer contains:
  *   // - "my-image.png"
@@ -1990,7 +1991,7 @@ File.prototype.makePublic = function(callback) {
  * // If you pass in a Bucket object, the file will be moved to that bucket
  * // using the same name.
  * //-
- * var anotherBucket = gcs.bucket('another-bucket');
+ * const anotherBucket = gcs.bucket('another-bucket');
  *
  * file.move(anotherBucket, function(err, destinationFile, apiResponse) {
  *   // `my-bucket` no longer contains:
@@ -2007,7 +2008,7 @@ File.prototype.makePublic = function(callback) {
  * // If you pass in a File object, you have complete control over the new
  * // bucket and filename.
  * //-
- * var anotherFile = anotherBucket.file('my-awesome-image.png');
+ * const anotherFile = anotherBucket.file('my-awesome-image.png');
  *
  * file.move(anotherFile, function(err, destinationFile, apiResponse) {
  *   // `my-bucket` no longer contains:
@@ -2024,8 +2025,8 @@ File.prototype.makePublic = function(callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.move('my-image-new.png').then(function(data) {
- *   var destinationFile = data[0];
- *   var apiResponse = data[1];
+ *   const destinationFile = data[0];
+ *   const apiResponse = data[1];
  * });
  *
  * @example <caption>include:samples/files.js</caption>
@@ -2033,7 +2034,7 @@ File.prototype.makePublic = function(callback) {
  * Another example:
  */
 File.prototype.move = function(destination, options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2085,7 +2086,7 @@ File.prototype.request = function(reqOpts, callback) {
  * Example of rotating the encryption key for this file:
  */
 File.prototype.rotateEncryptionKey = function(encryptionKey, callback) {
-  var newFile = this.bucket.file(this.id, {encryptionKey});
+  const newFile = this.bucket.file(this.id, {encryptionKey});
 
   this.copy(newFile, callback);
 };
@@ -2116,11 +2117,11 @@ File.prototype.rotateEncryptionKey = function(encryptionKey, callback) {
  * @returns {Promise}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
- * var contents = 'This is the contents of the file.';
+ * const file = myBucket.file('my-file');
+ * const contents = 'This is the contents of the file.';
  *
  * file.save(contents, function(err) {
  *   if (!err) {
@@ -2175,12 +2176,12 @@ File.prototype.save = function(data, options, callback) {
  * @returns {Promise<SetFileMetadataResponse>}
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var myBucket = storage.bucket('my-bucket');
+ * const storage = require('@google-cloud/storage')();
+ * const myBucket = storage.bucket('my-bucket');
  *
- * var file = myBucket.file('my-file');
+ * const file = myBucket.file('my-file');
  *
- * var metadata = {
+ * const metadata = {
  *   contentType: 'application/x-font-ttf',
  *   metadata: {
  *     my: 'custom',
@@ -2205,7 +2206,7 @@ File.prototype.save = function(data, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * file.setMetadata(metadata).then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 File.prototype.setMetadata = function(metadata, options, callback) {
@@ -2257,7 +2258,7 @@ File.prototype.setMetadata = function(metadata, options, callback) {
  * file.setStorageClass('regional').then(function() {});
  */
 File.prototype.setStorageClass = function(storageClass, options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2292,9 +2293,9 @@ File.prototype.setStorageClass = function(storageClass, options, callback) {
  * @param {string} userProject The user project.
  *
  * @example
- * var storage = require('@google-cloud/storage')();
- * var bucket = storage.bucket('albums');
- * var file = bucket.file('my-file');
+ * const storage = require('@google-cloud/storage')();
+ * const bucket = storage.bucket('albums');
+ * const file = bucket.file('my-file');
  *
  * file.setUserProject('grape-spaceship-123');
  */
@@ -2313,7 +2314,7 @@ File.prototype.setUserProject = function(userProject) {
  * @private
  */
 File.prototype.startResumableUpload_ = function(dup, options) {
-  var self = this;
+  const self = this;
 
   options = extend(
     {
@@ -2322,7 +2323,7 @@ File.prototype.startResumableUpload_ = function(dup, options) {
     options
   );
 
-  var uploadStream = resumableUpload({
+  const uploadStream = resumableUpload({
     authClient: this.storage.authClient,
     bucket: this.bucket.name,
     file: this.name,
@@ -2362,7 +2363,7 @@ File.prototype.startResumableUpload_ = function(dup, options) {
  * @private
  */
 File.prototype.startSimpleUpload_ = function(dup, options) {
-  var self = this;
+  const self = this;
 
   options = extend(
     {
@@ -2371,7 +2372,7 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
     options
   );
 
-  var reqOpts = {
+  const reqOpts = {
     qs: {
       name: self.name,
     },

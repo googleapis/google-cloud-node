@@ -16,14 +16,14 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const async = require('async');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Acl') {
       promisified = true;
@@ -31,17 +31,17 @@ var fakeUtil = extend({}, util, {
   },
 });
 
-var Storage = require('../');
-var Acl;
+const Storage = require('../');
+let Acl;
 
 describe('storage/acl', function() {
-  var acl;
+  let acl;
 
-  var ERROR = new Error('Error.');
-  var MAKE_REQ = util.noop;
-  var PATH_PREFIX = '/acl';
-  var ROLE = Storage.acl.OWNER_ROLE;
-  var ENTITY = 'user-user@example.com';
+  const ERROR = new Error('Error.');
+  const MAKE_REQ = util.noop;
+  const PATH_PREFIX = '/acl';
+  const ROLE = Storage.acl.OWNER_ROLE;
+  const ENTITY = 'user-user@example.com';
 
   before(function() {
     Acl = proxyquire('../src/acl.js', {
@@ -79,7 +79,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the generation', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
@@ -94,7 +94,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the userProject', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
@@ -109,8 +109,8 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with an ACL object', function(done) {
-      var apiResponse = {entity: ENTITY, role: ROLE};
-      var expectedAclObject = {entity: ENTITY, role: ROLE};
+      const apiResponse = {entity: ENTITY, role: ROLE};
+      const expectedAclObject = {entity: ENTITY, role: ROLE};
 
       acl.makeAclObject_ = function(obj) {
         assert.deepEqual(obj, apiResponse);
@@ -140,7 +140,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
@@ -166,7 +166,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the generation', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         generation: 8,
       };
@@ -180,7 +180,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the userProject', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
@@ -206,7 +206,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
@@ -232,7 +232,7 @@ describe('storage/acl', function() {
       });
 
       it('should accept a configuration object', function(done) {
-        var generation = 1;
+        const generation = 1;
 
         acl.request = function(reqOpts) {
           assert.strictEqual(reqOpts.qs.generation, generation);
@@ -244,7 +244,7 @@ describe('storage/acl', function() {
       });
 
       it('should pass an array of acl objects to the callback', function(done) {
-        var apiResponse = {
+        const apiResponse = {
           items: [
             {entity: ENTITY, role: ROLE},
             {entity: ENTITY, role: ROLE},
@@ -252,7 +252,7 @@ describe('storage/acl', function() {
           ],
         };
 
-        var expectedAclObjects = [
+        const expectedAclObjects = [
           {entity: ENTITY, role: ROLE},
           {entity: ENTITY, role: ROLE},
           {entity: ENTITY, role: ROLE},
@@ -286,7 +286,7 @@ describe('storage/acl', function() {
       });
 
       it('should accept a configuration object', function(done) {
-        var generation = 1;
+        const generation = 1;
 
         acl.request = function(reqOpts) {
           assert.strictEqual(reqOpts.qs.generation, generation);
@@ -298,7 +298,7 @@ describe('storage/acl', function() {
       });
 
       it('should set the userProject', function(done) {
-        var options = {
+        const options = {
           entity: ENTITY,
           userProject: 'grape-spaceship-123',
         };
@@ -312,8 +312,8 @@ describe('storage/acl', function() {
       });
 
       it('should pass an acl object to the callback', function(done) {
-        var apiResponse = {entity: ENTITY, role: ROLE};
-        var expectedAclObject = {entity: ENTITY, role: ROLE};
+        const apiResponse = {entity: ENTITY, role: ROLE};
+        const expectedAclObject = {entity: ENTITY, role: ROLE};
 
         acl.makeAclObject_ = function() {
           return expectedAclObject;
@@ -343,7 +343,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
@@ -370,7 +370,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the generation', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
@@ -385,7 +385,7 @@ describe('storage/acl', function() {
     });
 
     it('should set the userProject', function(done) {
-      var options = {
+      const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
@@ -400,8 +400,8 @@ describe('storage/acl', function() {
     });
 
     it('should pass an acl object to the callback', function(done) {
-      var apiResponse = {entity: ENTITY, role: ROLE};
-      var expectedAclObject = {entity: ENTITY, role: ROLE};
+      const apiResponse = {entity: ENTITY, role: ROLE};
+      const expectedAclObject = {entity: ENTITY, role: ROLE};
 
       acl.makeAclObject_ = function() {
         return expectedAclObject;
@@ -430,13 +430,13 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with apiResponse', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
 
       acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
-      var config = {entity: ENTITY, role: ROLE};
+      const config = {entity: ENTITY, role: ROLE};
       acl.update(config, function(err, acls, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
@@ -446,12 +446,12 @@ describe('storage/acl', function() {
 
   describe('makeAclObject_', function() {
     it('should return an ACL object from an API response', function() {
-      var projectTeam = {
+      const projectTeam = {
         projectNumber: '283748374',
         team: 'awesome',
       };
 
-      var apiResponse = {
+      const apiResponse = {
         entity: ENTITY,
         role: ROLE,
         projectTeam: projectTeam,
@@ -469,9 +469,9 @@ describe('storage/acl', function() {
 
   describe('request', function() {
     it('should make the correct request', function(done) {
-      var uri = '/uri';
+      const uri = '/uri';
 
-      var reqOpts = {
+      const reqOpts = {
         uri: uri,
       };
 
@@ -487,7 +487,7 @@ describe('storage/acl', function() {
 });
 
 describe('storage/AclRoleAccessorMethods', function() {
-  var aclEntity;
+  let aclEntity;
 
   beforeEach(function() {
     aclEntity = new Acl.AclRoleAccessorMethods();
@@ -495,7 +495,7 @@ describe('storage/AclRoleAccessorMethods', function() {
 
   describe('initialization', function() {
     it('should assign access methods for every role object', function() {
-      var expectedApi = [
+      const expectedApi = [
         'addAllAuthenticatedUsers',
         'deleteAllAuthenticatedUsers',
 
@@ -515,21 +515,21 @@ describe('storage/AclRoleAccessorMethods', function() {
         'deleteUser',
       ];
 
-      var actualOwnersApi = Object.keys(aclEntity.owners);
+      const actualOwnersApi = Object.keys(aclEntity.owners);
       assert.deepEqual(actualOwnersApi, expectedApi);
 
-      var actualReadersApi = Object.keys(aclEntity.readers);
+      const actualReadersApi = Object.keys(aclEntity.readers);
       assert.deepEqual(actualReadersApi, expectedApi);
 
-      var actualWritersApi = Object.keys(aclEntity.writers);
+      const actualWritersApi = Object.keys(aclEntity.writers);
       assert.deepEqual(actualWritersApi, expectedApi);
     });
   });
 
   describe('_assignAccessMethods', function() {
     it('should call parent method', function(done) {
-      var userName = 'email@example.com';
-      var role = 'fakerole';
+      const userName = 'email@example.com';
+      const role = 'fakerole';
 
       aclEntity.add = function(options, callback) {
         assert.deepEqual(options, {
@@ -566,7 +566,7 @@ describe('storage/AclRoleAccessorMethods', function() {
     });
 
     it('should return the parent methods return value', function() {
-      var fakeReturn = {};
+      const fakeReturn = {};
 
       aclEntity.add = function() {
         return fakeReturn;
@@ -574,7 +574,7 @@ describe('storage/AclRoleAccessorMethods', function() {
 
       aclEntity._assignAccessMethods('fakerole');
 
-      var value = aclEntity.fakeroles.addUser('email@example.com');
+      const value = aclEntity.fakeroles.addUser('email@example.com');
       assert.strictEqual(value, fakeReturn);
     });
 
@@ -589,13 +589,13 @@ describe('storage/AclRoleAccessorMethods', function() {
     });
 
     it('should optionally accept options', function(done) {
-      var fakeRole = 'fakerole';
-      var fakeUser = 'email@example.com';
-      var fakeOptions = {
+      const fakeRole = 'fakerole';
+      const fakeUser = 'email@example.com';
+      const fakeOptions = {
         userProject: 'grape-spaceship-123',
       };
 
-      var expectedOptions = extend(
+      const expectedOptions = extend(
         {
           entity: 'user-' + fakeUser,
           role: fakeRole,
