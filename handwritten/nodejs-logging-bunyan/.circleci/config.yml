@@ -143,8 +143,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link @google-cloud/logging-bunyan
+            npm install
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -257,6 +257,9 @@ jobs:
       - run:
           name: Set NPM authentication.
           command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run:
+          name: Install modules and dependencies.
+          command: npm install
       - run:
           name: Publish the module to npm.
           command: npm publish
