@@ -15,6 +15,7 @@ This client supports the following Google Cloud Platform services at a [General 
 * [Cloud Datastore](http://github.com/googleapis/nodejs-datastore/) (GA)
 * [Cloud Natural Language](http://github.com/googleapis/nodejs-language/) (GA)
 * [Cloud Spanner](https://github.com/googleapis/nodejs-spanner/) (GA)
+* [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (GA)
 * [Google Stackdriver Logging](https://github.com/googleapis/nodejs-logging/) (GA)
 * [Cloud Storage](http://github.com/googleapis/nodejs-storage/) (GA)
 * [Cloud Translation API](https://github.com/googleapis/nodejs-translate/) (GA)
@@ -25,7 +26,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Data Loss Prevention](https://github.com/googleapis/nodejs-dlp) (Beta)
 * [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](https://github.com/googleapis/nodejs-pubsub/) (Beta)
-* [Cloud Speech](https://github.com/googleapis/nodejs-speech/) (Beta)
 * [Cloud Vision](https://github.com/googleapis/nodejs-vision) (Beta)
 * [Google Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) (Beta)
 
