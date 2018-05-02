@@ -7,9 +7,17 @@
   "samples": [
     {
       "id": "vms",
-      "name": "Virtual Machines",
+      "name": "List Virtual Machines",
       "file": "vms.js",
-      "docs_link": "https://cloud.google.com/compute/docs"
+      "docs_link": "https://cloud.google.com/compute/docs",
+      "description": "Get a list of virtual machine instances and log the first result.\n\n"
+    },
+    {
+      "id": "vms_api",
+      "name": "Use Google Auth and list Virtual Machines",
+      "file": "vms_api.js",
+      "docs_link": "https://cloud.google.com/compute/docs",
+      "description": "After explicit authentication, get a list of virtual machine instances and log the first result.\n\n"
     }
   ]
 }
