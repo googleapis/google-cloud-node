@@ -21,22 +21,24 @@ const testArr = [];
  * Fills several arrays, then calls itself with setImmediate.
  * It continues to do this until durationSeconds after the startTime.
  */
-function benchmark(durationSeconds) {
-  for (let i = 0; i < 200; i++) {
-    testArr[i] = new Array(512 * 1024);
-    for (let j=0; j < testArr[i].length; j++) {
-      testArr[i][j] = i * j;
-    }
-  }
+function busyLoop(durationSeconds) {
   for (let i = 0; i < testArr.length; i++) {
     for (let j = 0; j < testArr[i].length; j++) {
       testArr[i][j] = Math.sqrt(j * testArr[i][j]);
     }
   }
   if (Date.now() - startTime < 1000 * durationSeconds) {
-    setTimeout(() => benchmark(durationSeconds), 5);
+    setTimeout(() => busyLoop(durationSeconds), 5);
   }
 }
 
+function benchmark(durationSeconds) {
+  // Allocate 16 MiB in 64 KiB chunks.
+  for (let i = 0; i < 16*16; i++) {
+    testArr[i] = new Array(64 * 1024);
+  }
+  busyLoop(durationSeconds)
+}
+
 const durationSeconds = process.argv.length > 2 ? process.argv[2] : 600; 
-benchmark(durationSeconds);
+setTimeout(()=>benchmark(durationSeconds), 1000);

@@ -183,7 +183,7 @@ func TestAgentIntegration(t *testing.T) {
 				MachineType: "n1-standard-1",
 			},
 			name:         fmt.Sprintf("profiler-test-node6-%d-gce", runID),
-			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "6",
 		},
 		{
@@ -194,7 +194,7 @@ func TestAgentIntegration(t *testing.T) {
 				MachineType: "n1-standard-1",
 			},
 			name:         fmt.Sprintf("profiler-test-node8-%d-gce", runID),
-			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "8",
 		},
 		{
@@ -205,7 +205,7 @@ func TestAgentIntegration(t *testing.T) {
 				MachineType: "n1-standard-1",
 			},
 			name:         fmt.Sprintf("profiler-test-node9-%d-gce", runID),
-			wantProfiles: []profileSummary{{"WALL", "benchmark"}, {"HEAP", "benchmark"}},
+			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "9",
 		},
 	}
