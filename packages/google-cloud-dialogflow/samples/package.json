@@ -19,7 +19,7 @@
     "through2": "^2.0.3",
     "prompt": "^1.0.0",
     "uuid": "3.2.1",
-    "yargs": "7.1.0"
+    "yargs": "11.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "2.3.0",
