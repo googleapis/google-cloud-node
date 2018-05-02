@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as common from '@google-cloud/common';
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nock from 'nock';
@@ -27,11 +28,9 @@ import {ProfilerConfig} from '../src/config';
 import {Profiler, Retryer} from '../src/profiler';
 import {HeapProfiler} from '../src/profilers/heap-profiler';
 import {TimeProfiler} from '../src/profilers/time-profiler';
-import {Common} from '../third_party/types/common-types';
 
 import {decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
 
-const common: Common = require('@google-cloud/common');
 const v8TimeProfiler = require('bindings')('time_profiler');
 const parseDuration: (str: string) => number = require('parse-duration');
 

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {Logger, Service, ServiceObject, util} from '@google-cloud/common';
 import * as http from 'http';
 import * as path from 'path';
 import * as pify from 'pify';
@@ -21,13 +22,11 @@ import * as msToStr from 'pretty-ms';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
-import {Common, Logger, Service, ServiceObject} from '../third_party/types/common-types';
 
 import {ProfilerConfig} from './config';
 import {HeapProfiler} from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
 
-export const common: Common = require('@google-cloud/common');
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
 const SCOPE = 'https://www.googleapis.com/auth/monitoring.write';
@@ -207,7 +206,7 @@ function responseToProfileOrError(
  * Polls profiler server for instructions on behalf of a task and
  * collects and uploads profiles as requested
  */
-export class Profiler extends common.ServiceObject {
+export class Profiler extends ServiceObject {
   private config: ProfilerConfig;
   private logger: Logger;
   private profileLabels: {instance?: string};
@@ -220,17 +219,17 @@ export class Profiler extends common.ServiceObject {
   heapProfiler: HeapProfiler|undefined;
 
   constructor(config: ProfilerConfig) {
-    config = common.util.normalizeArguments(null, config);
+    config = util.normalizeArguments(null, config) as ProfilerConfig;
     const serviceConfig = {
       baseUrl: config.baseApiUrl,
       scopes: [SCOPE],
       packageJson: pjson,
     };
-    super({parent: new common.Service(serviceConfig, config), baseUrl: '/'});
+    super({parent: new Service(serviceConfig, config), baseUrl: '/'});
     this.config = config;
 
-    this.logger = new common.logger({
-      level: common.logger.LEVELS[config.logLevel as number],
+    this.logger = new Logger({
+      level: Logger.DEFAULT_OPTIONS.levels[config.logLevel as number],
       tag: pjson.name
     });
 
@@ -394,12 +393,11 @@ export class Profiler extends common.ServiceObject {
     };
 
     try {
-      const [body, serverResponse] = await this.request(options);
-      const response = serverResponse as http.ServerResponse;
-      if (isErrorResponseStatusCode(response.statusCode)) {
-        let message: number|string = response.statusCode;
-        if (response.statusMessage) {
-          message = response.statusMessage;
+      const res = await this.request(options);
+      if (isErrorResponseStatusCode(res.statusCode)) {
+        let message: number|string = res.statusCode;
+        if (res.statusMessage) {
+          message = res.statusMessage;
         }
         this.logger.debug(`Could not upload profile: ${message}.`);
         return;

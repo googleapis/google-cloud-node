@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import {AuthenticationConfig, Common, ServiceConfig} from '../third_party/types/common-types';
+import {GoogleAuthOptions} from '@google-cloud/common';
 
 const parseDuration: (str: string) => number = require('parse-duration');
-const common: Common = require('@google-cloud/common');
 const extend = require('extend');
 
 // Configuration for Profiler.
-export interface Config extends AuthenticationConfig {
+export interface Config extends GoogleAuthOptions {
   // Cloud Console projectId to associate profiles with instead of one read
   // from VM metadata server.
   projectId?: string;
@@ -124,7 +123,7 @@ export interface Config extends AuthenticationConfig {
 }
 
 // Interface for an initialized config.
-export interface ProfilerConfig extends AuthenticationConfig {
+export interface ProfilerConfig extends GoogleAuthOptions {
   projectId?: string;
   logLevel: number;
   serviceContext: {service: string; version?: string;};
