@@ -18,7 +18,7 @@
     "pump": "^1.0.2",
     "through2": "^2.0.3",
     "prompt": "^1.0.0",
-    "uuid": "3.0.1",
+    "uuid": "3.2.1",
     "yargs": "7.1.0"
   },
   "devDependencies": {
