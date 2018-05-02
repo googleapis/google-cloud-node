@@ -67,7 +67,7 @@ workflows:
 jobs:
   node4:
     docker:
-      - image: 'node:4@sha256:db9cbb9420b52d591e36eb66a019995f5d2c3a05b5087918ea1ab0ba3949b74d'
+      - image: 'node:4@sha256:e5085d42935eaeff7cc71ddbae191c16838b1554a5d223e8e46cd0383f79796f'
         user: node
     steps: &unit_tests_steps
       - checkout
