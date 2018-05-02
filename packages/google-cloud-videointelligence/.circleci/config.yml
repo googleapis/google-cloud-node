@@ -19,12 +19,17 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - node10:
+          filters:
+            tags:
+              only: /.*/
       - lint:
           requires:
             - node4
             - node6
             - node8
             - node9
+            - node10
           filters:
             tags:
               only: /.*/
@@ -34,6 +39,7 @@ workflows:
             - node6
             - node8
             - node9
+            - node10
           filters:
             tags:
               only: /.*/
@@ -79,14 +85,15 @@ jobs:
             else
               echo "Not a nightly build, skipping this step."
             fi
-      - run:
-          name: Install modules and dependencies.
-          command: |-
+      - run: &npm_install_and_link
+          name: Install and link the module.
+          command: |
             npm install
             repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
             if ! test -x "$repo_tools"; then
               chmod +x "$repo_tools"
             fi
+            npm link
       - run:
           name: Run unit tests.
           command: npm test
@@ -106,22 +113,18 @@ jobs:
     docker:
       - image: 'node:9'
     steps: *unit_tests_steps
+  node10:
+    docker:
+      - image: 'node:10'
+    steps: *unit_tests_steps
   lint:
     docker:
       - image: 'node:8'
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-            npm link
-      - run:
+      - run: *npm_install_and_link
+      - run: &samples_npm_install_and_link
           name: Link the module being tested to the samples.
           command: |
             cd samples/
@@ -137,14 +140,7 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+      - run: *npm_install_and_link
       - run:
           name: Build documentation.
           command: npm run docs
@@ -160,22 +156,8 @@ jobs:
             openssl aes-256-cbc -d -in .circleci/key.json.enc \
                 -out .circleci/key.json \
                 -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
-      - run:
-          name: Install and link the module.
-          command: |
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-            npm link
-      - run:
-          name: Link the module being tested to the samples.
-          command: |
-            cd samples/
-            npm link @google-cloud/video-intelligence
-            npm install
-            cd ..
+      - run: *npm_install_and_link
+      - run: *samples_npm_install_and_link
       - run:
           name: Run sample tests.
           command: npm run samples-test
