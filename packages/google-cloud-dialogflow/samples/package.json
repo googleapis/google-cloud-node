@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "1.4.17",
-    "ava": "^0.19.1"
+    "ava": "^0.25.0"
   }
 }
