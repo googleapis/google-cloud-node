@@ -69,8 +69,8 @@ For a more detailed Stackdriver Logging setup guide, see https://cloud.google.co
 ```javascript
 const bunyan = require('bunyan');
 
-// Imports the Google Cloud client library for Bunyan
-const LoggingBunyan = require('@google-cloud/logging-bunyan');
+// Imports the Google Cloud client library for Bunyan (Node 6+)
+const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 
 // Creates a Bunyan Stackdriver Logging client
 const loggingBunyan = new LoggingBunyan();
@@ -132,7 +132,8 @@ If you wish to set the Stackdriver LogEntry `trace` property with a custom value
 
 ```js
 const bunyan = require('bunyan');
-const LoggingBunyan = require('@google-cloud/logging-bunyan');
+// Node 6+
+const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 const loggingBunyan = LoggingBunyan();
 
 ...
