@@ -39,10 +39,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Google Stackdriver Error Reporting](https://github.com/googleapis/nodejs-error-reporting) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
 
-The following client libraries are **deprecated** due to the underlying API also being deprecated:
-
-* [Google Prediction API](https://github.com/googleapis/nodejs-prediction) (Deprecated)
-
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
 
@@ -138,7 +134,6 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Google Cloud Translation API
   * Google Cloud Vision API
   * Google Compute Engine API
-  * Prediction API
   * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
@@ -1069,65 +1064,6 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 });
 ```
 
-
-## Google Prediction API (Alpha)
-
-- [API Documentation][gcloud-prediction-docs]
-- [Official Documentation][cloud-prediction-docs]
-
-#### Using the Prediction API module
-
-```
-$ npm install --save @google-cloud/prediction
-```
-
-```js
-var prediction = require('@google-cloud/prediction');
-```
-
-#### Authentication
-
-See [Authentication](#authentication).
-
-#### Preview
-
-```js
-var predictionClient = prediction({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Get all of the trained models in your project.
-predictionClient.getModels(function(err, models) {
-  if (!err) {
-    // `models` is an array of Model objects.
-  }
-});
-
-// Reference an existing trained model.
-var model = predictionClient.model('my-existing-model');
-
-// Train a model.
-model.train('english', 'Hello from your friends at Google!', function(err) {});
-
-// Query a model.
-model.query('Hello', function(err, results) {
-  if (!err) {
-    // results.winner == 'english'
-    // results.scores == [
-    //   {
-    //     label: 'english',
-    //     score: 1
-    //   },
-    //   {
-    //     label: 'spanish',
-    //     score: 0
-    //   }
-    // ]
-  }
-});
-```
-
 ## Google Stackdriver Debugger (Alpha)
 
 - [GitHub Repo][stackdriver-debug-nodejs-repo]
@@ -1238,7 +1174,6 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/dns
 [gcloud-language-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/language
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
-[gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
 [gcloud-monitoring-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/monitoring
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
@@ -1284,8 +1219,6 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [cloud-monitoring-protos]: https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3
 
 [cloud-logging-docs]: https://cloud.google.com/logging/docs
-
-[cloud-prediction-docs]: https://cloud.google.com/prediction/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 

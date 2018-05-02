@@ -42,7 +42,6 @@ var FakeFirestore = createFakeApi();
 var FakeLanguage = createFakeApi();
 var FakeLogging = createFakeApi();
 var FakeMonitoring = createFakeApi();
-var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
 var FakeSpanner = createFakeApi();
@@ -67,7 +66,6 @@ describe('gcloud', function() {
       '@google-cloud/language': FakeLanguage,
       '@google-cloud/logging': FakeLogging,
       '@google-cloud/monitoring': FakeMonitoring,
-      '@google-cloud/prediction': FakePrediction,
       '@google-cloud/pubsub': FakePubSub,
       '@google-cloud/resource': FakeResource,
       '@google-cloud/spanner': FakeSpanner,
@@ -121,10 +119,6 @@ describe('gcloud', function() {
 
   it('should export static monitoring', function() {
     assert.strictEqual(gcloud.monitoring, FakeMonitoring);
-  });
-
-  it('should export static prediction', function() {
-    assert.strictEqual(gcloud.prediction, FakePrediction);
   });
 
   it('should export static pubsub', function() {
@@ -280,15 +274,6 @@ describe('gcloud', function() {
       });
     });
 
-    describe('prediction', function() {
-      it('should create a new Prediction', function() {
-        var prediction = localGcloud.prediction(options);
-
-        assert(prediction instanceof FakePrediction);
-        assert.strictEqual(prediction.calledWith_[0], options);
-      });
-    });
-
     describe('pubsub', function() {
       it('should create a new PubSub', function() {
         var pubsub = localGcloud.pubsub(options);
@@ -299,7 +284,7 @@ describe('gcloud', function() {
     });
 
     describe('resource', function() {
-      it('should create a new Prediction', function() {
+      it('should create a new Resource', function() {
         var resource = localGcloud.resource(options);
 
         assert(resource instanceof FakeResource);
