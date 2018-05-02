@@ -15,7 +15,7 @@
     "@google-cloud/common": "^0.18.0",
     "dialogflow": "0.3.0",
     "grpc": "^1.4.1",
-    "pump": "^1.0.2",
+    "pump": "^3.0.0",
     "through2": "^2.0.3",
     "prompt": "^1.0.0",
     "uuid": "3.2.1",
