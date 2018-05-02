@@ -126,7 +126,7 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 
 If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
 
-![Logs in Trace Example](/packages/logging-bunyan/doc/images/bunyan-logs-in-trace.png)
+![Logs in Trace Example](doc/images/bunyan-logs-in-trace.png)
 
 If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
 
