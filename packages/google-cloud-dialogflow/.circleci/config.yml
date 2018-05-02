@@ -99,7 +99,7 @@ jobs:
           when: always
   node6:
     docker:
-      - image: 'node:6@sha256:4c90d660e51d7187c01f3001d95c8c922b084a83f5001660ef16986301e8a860'
+      - image: 'node:6@sha256:cba697023cd60a65f6f90a9ad2e8d5060620b9a80826c84005244114891f82c1'
         user: node
     steps: *unit_tests_steps
   node8:
