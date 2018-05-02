@@ -36,6 +36,7 @@
     "CRoed <chris.roed@anserinnovation.com>",
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Eric Uldall <ericuldall@gmail.com>",
+    "F. Hinkelmann <fhinkel@vt.edu>",
     "Jason Dobry <jason.dobry@gmail.com>",
     "Jason Dobry <jmdobry@users.noreply.github.com>",
     "Kevin Leung <kevinresol@users.noreply.github.com>",
@@ -71,7 +72,7 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.2.3",
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "concat-stream": "^1.5.0",

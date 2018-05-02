@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Google Compute Engine: Node.js Client](https://github.com/googleapis/nodejs-compute)
@@ -74,7 +76,8 @@ const zone = compute.zone('us-central1-a');
 const name = 'ubuntu-http';
 
 zone
-  .createVM(name, {os: 'ubuntu'}).then(data => {
+  .createVM(name, {os: 'ubuntu'})
+  .then(data => {
     // `operation` lets you check the status of long-running tasks.
     const vm = data[0];
     const operation = data[1];
@@ -124,4 +127,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-compute/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/compute/latest/
 [product-docs]: https://cloud.google.com/compute/docs/
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
