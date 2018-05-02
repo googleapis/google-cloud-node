@@ -13,7 +13,7 @@
     "test": "repo-tools test run --cmd npm -- run system-test"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "0.7.0",
+    "@google-cloud/logging-bunyan": "0.8.0",
     "bunyan": "1.8.12",
     "yargs": "10.0.3"
   },
