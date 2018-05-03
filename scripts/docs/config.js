@@ -88,9 +88,6 @@ module.exports = {
     monitoring: {
       title: 'Cloud Monitoring'
     },
-    prediction: {
-      title: 'Prediction API'
-    },
     pubsub: {
       title: 'Cloud Pub/Sub'
     },
