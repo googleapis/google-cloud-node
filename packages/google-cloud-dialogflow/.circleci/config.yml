@@ -19,12 +19,17 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - node10:
+          filters:
+            tags:
+              only: /.*/
       - lint:
           requires:
             - node4
             - node6
             - node8
             - node9
+            - node10
           filters:
             tags:
               only: /.*/
@@ -34,6 +39,7 @@ workflows:
             - node6
             - node8
             - node9
+            - node10
           filters:
             tags:
               only: /.*/
@@ -67,7 +73,8 @@ workflows:
 jobs:
   node4:
     docker:
-      - image: 'node:4@sha256:e5085d42935eaeff7cc71ddbae191c16838b1554a5d223e8e46cd0383f79796f'
+      - image: >-
+          node:4@sha256:e5085d42935eaeff7cc71ddbae191c16838b1554a5d223e8e46cd0383f79796f
         user: node
     steps: &unit_tests_steps
       - checkout
@@ -82,45 +89,8 @@ jobs:
             else
               echo "Not a nightly build, skipping this step."
             fi
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-      - run:
-          name: Run unit tests.
-          command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
-  node6:
-    docker:
-      - image: 'node:6@sha256:cba697023cd60a65f6f90a9ad2e8d5060620b9a80826c84005244114891f82c1'
-        user: node
-    steps: *unit_tests_steps
-  node8:
-    docker:
-      - image: 'node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f'
-        user: node
-    steps: *unit_tests_steps
-  node9:
-    docker:
-      - image: 'node:9@sha256:84defd39d4694815086f11e3f293b7dbc3bae0742ad9691824111420954920b1'
-        user: node
-    steps: *unit_tests_steps
-  lint:
-    docker:
-      - image: 'node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f'
-        user: node
-    steps:
-      - checkout
-      - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
+      - run: &npm_install_and_link
+          name: Install and link the module.
           command: |
             mkdir -p /home/node/.npm-global
             npm install
@@ -132,6 +102,45 @@ jobs:
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
+          name: Run unit tests.
+          command: npm test
+      - run:
+          name: Submit coverage data to codecov.
+          command: node_modules/.bin/codecov
+          when: always
+  node6:
+    docker:
+      - image: >-
+          node:6@sha256:cba697023cd60a65f6f90a9ad2e8d5060620b9a80826c84005244114891f82c1
+        user: node
+    steps: *unit_tests_steps
+  node8:
+    docker:
+      - image: >-
+          node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f
+        user: node
+    steps: *unit_tests_steps
+  node9:
+    docker:
+      - image: >-
+          node:9@sha256:84defd39d4694815086f11e3f293b7dbc3bae0742ad9691824111420954920b1
+        user: node
+    steps: *unit_tests_steps
+  node10:
+    docker:
+      - image: 'node:10'
+        user: node
+    steps: *unit_tests_steps
+  lint:
+    docker:
+      - image: >-
+          node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run: *npm_install_and_link
+      - run: &samples_npm_install_and_link
           name: Link the module being tested to the samples.
           command: |
             cd samples/
@@ -147,25 +156,20 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
   docs:
     docker:
-      - image: 'node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f'
+      - image: >-
+          node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f
         user: node
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+      - run: *npm_install_and_link
       - run:
           name: Build documentation.
           command: npm run docs
   sample_tests:
     docker:
-      - image: 'node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f'
+      - image: >-
+          node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f
         user: node
     steps:
       - checkout
@@ -176,27 +180,8 @@ jobs:
             openssl aes-256-cbc -d -in .circleci/key.json.enc \
                 -out .circleci/key.json \
                 -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
-      - run:
-          name: Install and link the module.
-          command: |
-            mkdir -p /home/node/.npm-global
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-            npm link
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
-          name: Link the module being tested to the samples.
-          command: |
-            cd samples/
-            npm link dialogflow
-            npm install
-            cd ..
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run: *npm_install_and_link
+      - run: *samples_npm_install_and_link
       - run:
           name: Run sample tests.
           command: npm run samples-test
@@ -211,7 +196,8 @@ jobs:
     working_directory: /home/node/dialogflow-samples
   publish_npm:
     docker:
-      - image: 'node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f'
+      - image: >-
+          node:8@sha256:b802a02ee6496c34e2dc0eb0379eb1c738331414956d650c0dffdfa0866acb2f
         user: node
     steps:
       - checkout
