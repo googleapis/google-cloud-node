@@ -28,10 +28,12 @@
  *   Required. The unique identifier of this session entity type. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
  *   Display Name>`, or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>sessions/<Session
- *   ID>/entityTypes/<Entity Type Display Name>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions
+ *   /<Session ID>/entityTypes/<Entity Type Display Name>`.
+ *   Note: Environments and users are under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  * @property {number} entityOverrideMode
  *   Required. Indicates whether the additional data should override or
@@ -89,9 +91,11 @@ var SessionEntityType = {
  * @property {string} parent
  *   Required. The session to list all session entity types from.
  *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+ *   sessions/<Session ID>`.
+ *   Note: Environments and users are under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -135,10 +139,12 @@ var ListSessionEntityTypesResponse = {
  * @property {string} name
  *   Required. The name of the session entity type. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
- *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
- *   Runtimes are under construction and will be available soon. If <Runtime ID>
- *   is not specified, we assume default 'sandbox' runtime.
+ *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+ *   ID>/users/<User ID>/sessions/<Session ID>/
+ *   entityTypes/<Entity Type Display Name>`.
+ *   Note: Environments and users re under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  * @typedef GetSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -154,9 +160,11 @@ var GetSessionEntityTypeRequest = {
  * @property {string} parent
  *   Required. The session to create a session entity type for.
  *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+ *   sessions/<Session ID>`.
+ *   Note: Environments and users are under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  * @property {Object} sessionEntityType
  *   Required. The session entity type to create.
@@ -177,10 +185,12 @@ var CreateSessionEntityTypeRequest = {
  * @property {Object} sessionEntityType
  *   Required. The entity type to update. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
- *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
- *   Runtimes are under construction and will be available soon. If <Runtime ID>
- *   is not specified, we assume default 'sandbox' runtime.
+ *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+ *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+ *   Name>`.
+ *   Note: Environments and users are under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
  *
@@ -203,10 +213,12 @@ var UpdateSessionEntityTypeRequest = {
  * @property {string} name
  *   Required. The name of the entity type to delete. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
- *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
- *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
- *   Runtimes are under construction and will be available soon. If <Runtime ID>
- *   is not specified, we assume default 'sandbox' runtime.
+ *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+ *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+ *   Name>`.
+ *   Note: Environments and users are under construction and will be available
+ *   soon. If <Environment ID> is not specified, we assume default 'draft'
+ *   environment. If <User ID> is not specified, we assume default '-' user.
  *
  * @typedef DeleteSessionEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1

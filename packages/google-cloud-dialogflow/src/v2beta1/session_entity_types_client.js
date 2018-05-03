@@ -114,8 +114,14 @@ class SessionEntityTypesClient {
       sessionPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/sessions/{session}'
       ),
+      environmentSessionPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}'
+      ),
       sessionEntityTypePathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      environmentSessionEntityTypePathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
 
@@ -217,9 +223,11 @@ class SessionEntityTypesClient {
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
-   *   Note: Runtimes are under construction and will be available soon.
-   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   Note: Environments and users are under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -329,9 +337,11 @@ class SessionEntityTypesClient {
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
-   *   Note: Runtimes are under construction and will be available soon.
-   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   Note: Environments and users are under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -378,10 +388,12 @@ class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the session entity type. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
-   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
-   *   Runtimes are under construction and will be available soon. If <Runtime ID>
-   *   is not specified, we assume default 'sandbox' runtime.
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/
+   *   entityTypes/<Entity Type Display Name>`.
+   *   Note: Environments and users re under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -429,9 +441,11 @@ class SessionEntityTypesClient {
    * @param {string} request.parent
    *   Required. The session to create a session entity type for.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
-   *   Note: Runtimes are under construction and will be available soon.
-   *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   Note: Environments and users are under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    * @param {Object} request.sessionEntityType
    *   Required. The session entity type to create.
    *
@@ -492,10 +506,12 @@ class SessionEntityTypesClient {
    * @param {Object} request.sessionEntityType
    *   Required. The entity type to update. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
-   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
-   *   Runtimes are under construction and will be available soon. If <Runtime ID>
-   *   is not specified, we assume default 'sandbox' runtime.
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   Note: Environments and users are under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    *
    *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
    * @param {Object} [request.updateMask]
@@ -553,10 +569,12 @@ class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the entity type to delete. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/runtimes/<Runtime
-   *   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. Note:
-   *   Runtimes are under construction and will be available soon. If <Runtime ID>
-   *   is not specified, we assume default 'sandbox' runtime.
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   Note: Environments and users are under construction and will be available
+   *   soon. If <Environment ID> is not specified, we assume default 'draft'
+   *   environment. If <User ID> is not specified, we assume default '-' user.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -611,6 +629,24 @@ class SessionEntityTypesClient {
   }
 
   /**
+   * Return a fully-qualified environment_session resource name string.
+   *
+   * @param {String} project
+   * @param {String} environment
+   * @param {String} user
+   * @param {String} session
+   * @returns {String}
+   */
+  environmentSessionPath(project, environment, user, session) {
+    return this._pathTemplates.environmentSessionPathTemplate.render({
+      project: project,
+      environment: environment,
+      user: user,
+      session: session,
+    });
+  }
+
+  /**
    * Return a fully-qualified session_entity_type resource name string.
    *
    * @param {String} project
@@ -621,6 +657,32 @@ class SessionEntityTypesClient {
   sessionEntityTypePath(project, session, entityType) {
     return this._pathTemplates.sessionEntityTypePathTemplate.render({
       project: project,
+      session: session,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Return a fully-qualified environment_session_entity_type resource name string.
+   *
+   * @param {String} project
+   * @param {String} environment
+   * @param {String} user
+   * @param {String} session
+   * @param {String} entityType
+   * @returns {String}
+   */
+  environmentSessionEntityTypePath(
+    project,
+    environment,
+    user,
+    session,
+    entityType
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.render({
+      project: project,
+      environment: environment,
+      user: user,
       session: session,
       entity_type: entityType,
     });
@@ -646,6 +708,58 @@ class SessionEntityTypesClient {
    */
   matchSessionFromSessionName(sessionName) {
     return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).project;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).environment;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the user.
+   */
+  matchUserFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).user;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the session.
+   */
+  matchSessionFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).session;
   }
 
   /**
@@ -684,6 +798,81 @@ class SessionEntityTypesClient {
   matchEntityTypeFromSessionEntityTypeName(sessionEntityTypeName) {
     return this._pathTemplates.sessionEntityTypePathTemplate.match(
       sessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Parse the environmentSessionEntityTypeName from a environment_session_entity_type resource.
+   *
+   * @param {String} environmentSessionEntityTypeName
+   *   A fully-qualified path representing a environment_session_entity_type resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEnvironmentSessionEntityTypeName(
+    environmentSessionEntityTypeName
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.match(
+      environmentSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the environmentSessionEntityTypeName from a environment_session_entity_type resource.
+   *
+   * @param {String} environmentSessionEntityTypeName
+   *   A fully-qualified path representing a environment_session_entity_type resources.
+   * @returns {String} - A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentSessionEntityTypeName(
+    environmentSessionEntityTypeName
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.match(
+      environmentSessionEntityTypeName
+    ).environment;
+  }
+
+  /**
+   * Parse the environmentSessionEntityTypeName from a environment_session_entity_type resource.
+   *
+   * @param {String} environmentSessionEntityTypeName
+   *   A fully-qualified path representing a environment_session_entity_type resources.
+   * @returns {String} - A string representing the user.
+   */
+  matchUserFromEnvironmentSessionEntityTypeName(
+    environmentSessionEntityTypeName
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.match(
+      environmentSessionEntityTypeName
+    ).user;
+  }
+
+  /**
+   * Parse the environmentSessionEntityTypeName from a environment_session_entity_type resource.
+   *
+   * @param {String} environmentSessionEntityTypeName
+   *   A fully-qualified path representing a environment_session_entity_type resources.
+   * @returns {String} - A string representing the session.
+   */
+  matchSessionFromEnvironmentSessionEntityTypeName(
+    environmentSessionEntityTypeName
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.match(
+      environmentSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the environmentSessionEntityTypeName from a environment_session_entity_type resource.
+   *
+   * @param {String} environmentSessionEntityTypeName
+   *   A fully-qualified path representing a environment_session_entity_type resources.
+   * @returns {String} - A string representing the entity_type.
+   */
+  matchEntityTypeFromEnvironmentSessionEntityTypeName(
+    environmentSessionEntityTypeName
+  ) {
+    return this._pathTemplates.environmentSessionEntityTypePathTemplate.match(
+      environmentSessionEntityTypeName
     ).entity_type;
   }
 }

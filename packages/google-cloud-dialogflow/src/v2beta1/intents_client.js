@@ -140,6 +140,7 @@ class IntentsClient {
       agentPathTemplate: new gax.PathTemplate(
         'projects/{project}/agents/{agent}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -959,6 +960,18 @@ class IntentsClient {
   }
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
    * Parse the projectAgentName from a project_agent resource.
    *
    * @param {String} projectAgentName
@@ -1012,6 +1025,17 @@ class IntentsClient {
    */
   matchAgentFromAgentName(agentName) {
     return this._pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

@@ -22,11 +22,12 @@
  *   Required. The unique identifier of the context. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`,
  *   or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
- *   ID>/contexts/<Context ID>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   The Context ID is always converted to lowercase.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions/<Session ID>/contexts/<Context ID>`. Note: Environments and
+ *   users are under construction and will be available soon. The Context ID is
+ *   always converted to lowercase. If <Environment ID> is not specified, we
+ *   assume default 'draft' environment. If <User ID> is not specified, we
+ *   assume default '-' user.
  *
  * @property {number} lifespanCount
  *   Optional. The number of conversational query requests after which the
@@ -55,9 +56,11 @@ var Context = {
  * @property {string} parent
  *   Required. The session to list all contexts from.
  *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions/<Session ID>`. Note: Environments and users are under
+ *   construction and will be available soon. If <Environment ID> is not
+ *   specified, we assume default 'draft' environment. If <User ID> is not
+ *   specified, we assume default '-' user.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -101,10 +104,11 @@ var ListContextsResponse = {
  * @property {string} name
  *   Required. The name of the context. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
- *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
- *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
- *   be available soon. If <Runtime ID> is not specified, we assume default
- *   'sandbox' runtime.
+ *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions/<Session ID>/contexts/<Context ID>`. Note: Environments and
+ *   users are under construction and will be available soon. If <Environment
+ *   ID> is not specified, we assume default 'draft' environment. If <User ID>
+ *   is not specified, we assume default '-' user.
  *
  * @typedef GetContextRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -120,9 +124,11 @@ var GetContextRequest = {
  * @property {string} parent
  *   Required. The session to create a context for.
  *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
- *   `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`.
- *   Note: Runtimes are under construction and will be available soon.
- *   If <Runtime ID> is not specified, we assume default 'sandbox' runtime.
+ *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions/<Session ID>`. Note: Environments and users are under
+ *   construction and will be available soon. If <Environment ID> is not
+ *   specified, we assume default 'draft' environment. If <User ID> is not
+ *   specified, we assume default '-' user.
  *
  * @property {Object} context
  *   Required. The context to create.
@@ -164,10 +170,12 @@ var UpdateContextRequest = {
  * @property {string} name
  *   Required. The name of the context to delete. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
- *   or `projects/<Project ID>/agent/runtimes/<Runtime ID>/sessions/<Session
- *   ID>/contexts/<Context ID>`. Note: Runtimes are under construction and will
- *   be available soon. If <Runtime ID> is not specified, we assume default
- *   'sandbox' runtime.
+ *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+ *   ID>/sessions/<Session ID>/contexts/<Context ID>`. Note: Environments and
+ *   users are under construction and will be available soon. If <Environment
+ *   ID> is not specified, we assume default 'draft' environment. If <User ID>
+ *   is not specified, we assume default
+ *   '-' user.
  *
  * @typedef DeleteContextRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -183,9 +191,11 @@ var DeleteContextRequest = {
  * @property {string} parent
  *   Required. The name of the session to delete all contexts from. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
- *   ID>/agent/runtimes/<Runtime ID>/sessions/<Session ID>`. Note: Runtimes are
- *   under construction and will be available soon. If <Runtime ID> is not
- *   specified we assume default 'sandbox' runtime.
+ *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+ *   ID>`. Note: Environments and users are under construction and will be
+ *   available soon. If <Environment ID> is not specified we assume default
+ *   'draft' environment. If <User ID> is not specified, we assume default
+ *   '-' user.
  *
  * @typedef DeleteAllContextsRequest
  * @memberof google.cloud.dialogflow.v2beta1

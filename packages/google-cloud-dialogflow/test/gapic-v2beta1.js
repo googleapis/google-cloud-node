@@ -2114,7 +2114,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var intents = [];
       var request = {
         parent: formattedParent,
@@ -2152,7 +2152,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var intents = [];
       var request = {
         parent: formattedParent,

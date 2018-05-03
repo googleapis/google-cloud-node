@@ -99,7 +99,7 @@
  *
  * @property {Object[]} messages
  *   Optional. The collection of rich messages corresponding to the
- *   `Response` field in API.AI console.
+ *   `Response` field in the Dialogflow console.
  *
  *   This object should have the same structure as [Message]{@link google.cloud.dialogflow.v2beta1.Message}
  *
@@ -268,7 +268,7 @@ var Intent = {
   },
 
   /**
-   * Corresponds to the `Response` field in API.AI console.
+   * Corresponds to the `Response` field in the Dialogflow console.
    *
    * @property {Object} text
    *   Returns a text response.
@@ -291,7 +291,9 @@ var Intent = {
    *   This object should have the same structure as [Card]{@link google.cloud.dialogflow.v2beta1.Card}
    *
    * @property {Object} payload
-   *   Returns a response containing a custom payload.
+   *   Returns a response containing a custom, platform-specific payload.
+   *   See the Intent.Message.Platform type for a description of the
+   *   structure that may be required for your platform.
    *
    *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
    *
@@ -743,6 +745,66 @@ var Intent = {
 
       /**
        * Actions on Google.
+       * When using Actions on Google, you can choose one of the specific
+       * Intent.Message types that mention support for Actions on Google,
+       * or you can use the advanced Intent.Message.payload field.
+       * The payload field provides access to AoG features not available in the
+       * specific message types.
+       * If using the Intent.Message.payload field, it should have a structure
+       * similar to the JSON message shown here. For more information, see
+       * [Actions on Google Webhook
+       * Format](https://developers.google.com/actions/dialogflow/webhook)
+       * <pre>{
+       *   "expectUserResponse": true,
+       *   "isSsml": false,
+       *   "noInputPrompts": [],
+       *   "richResponse": {
+       *     "items": [
+       *       {
+       *         "simpleResponse": {
+       *           "displayText": "hi",
+       *           "textToSpeech": "hello"
+       *         }
+       *       }
+       *     ],
+       *     "suggestions": [
+       *       {
+       *         "title": "Say this"
+       *       },
+       *       {
+       *         "title": "or this"
+       *       }
+       *     ]
+       *   },
+       *   "systemIntent": {
+       *     "data": {
+       *       "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
+       *       "listSelect": {
+       *         "items": [
+       *           {
+       *             "optionInfo": {
+       *               "key": "key1",
+       *               "synonyms": [
+       *                 "key one"
+       *               ]
+       *             },
+       *             "title": "must not be empty, but unique"
+       *           },
+       *           {
+       *             "optionInfo": {
+       *               "key": "key2",
+       *               "synonyms": [
+       *                 "key two"
+       *               ]
+       *             },
+       *             "title": "must not be empty, but unique"
+       *           }
+       *         ]
+       *       }
+       *     },
+       *     "intent": "actions.intent.OPTION"
+       *   }
+       * }</pre>
        */
       ACTIONS_ON_GOOGLE: 8
     }
