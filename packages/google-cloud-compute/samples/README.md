@@ -13,7 +13,6 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [List Virtual Machines](#list-virtual-machines)
-  * [Use Google Auth and list Virtual Machines](#use-google-auth-and-list-virtual-machines)
 
 ## Before you begin
 
@@ -33,17 +32,6 @@ Get a list of virtual machine instances and log the first result.
 
 [vms_0_docs]: https://cloud.google.com/compute/docs
 [vms_0_code]: vms.js
-
-### Use Google Auth and list Virtual Machines
-
-View the [source code][vms_api_1_code].
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms_api.js,samples/README.md)
-
-After explicit authentication, get a list of virtual machine instances and log the first result.
-
-[vms_api_1_docs]: https://cloud.google.com/compute/docs
-[vms_api_1_code]: vms_api.js
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md

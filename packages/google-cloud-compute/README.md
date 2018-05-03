@@ -99,7 +99,6 @@ has instructions for running the samples.
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | List Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md) |
-| Use Google Auth and list Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms_api.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms_api.js,samples/README.md) |
 
 The [Compute Engine Node.js Client API Reference][client-docs] documentation
 also contains samples.
