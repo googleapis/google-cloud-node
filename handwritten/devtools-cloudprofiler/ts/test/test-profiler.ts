@@ -20,13 +20,13 @@ import * as extend from 'extend';
 import * as nock from 'nock';
 import * as pify from 'pify';
 import * as sinon from 'sinon';
-import {instance, mock, when} from 'ts-mockito';
+import {instance, mock, reset, verify, when} from 'ts-mockito';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
 import {ProfilerConfig} from '../src/config';
 import {Profiler, Retryer} from '../src/profiler';
-import {HeapProfiler} from '../src/profilers/heap-profiler';
+import * as heapProfiler from '../src/profilers/heap-profiler';
 import {TimeProfiler} from '../src/profilers/time-profiler';
 
 import {decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
@@ -64,12 +64,6 @@ const testConfig: ProfilerConfig = {
 
 
 const mockTimeProfiler = mock(TimeProfiler);
-when(mockTimeProfiler.profile(10 * 1000)).thenReturn(new Promise((resolve) => {
-  resolve(timeProfile);
-}));
-
-const mockHeapProfiler = mock(HeapProfiler);
-when(mockHeapProfiler.profile()).thenReturn(heapProfile);
 
 nock.disableNetConnect();
 function nockOauth2(): nock.Scope {
@@ -100,8 +94,23 @@ describe('Retryer', () => {
 });
 
 describe('Profiler', () => {
+  const sinonStubs: sinon.SinonStub[] = new Array();
+  beforeEach(() => {
+    when(mockTimeProfiler.profile(10 * 1000))
+        .thenReturn(new Promise((resolve) => {
+          resolve(timeProfile);
+        }));
+
+    sinonStubs.push(sinon.stub(heapProfiler, 'stop'));
+    sinonStubs.push(sinon.stub(heapProfiler, 'start'));
+    sinonStubs.push(sinon.stub(heapProfiler, 'profile').returns(heapProfile));
+  });
   afterEach(() => {
+    reset(mockTimeProfiler);
     nock.cleanAll();
+    sinonStubs.forEach((stub) => {
+      stub.restore();
+    });
   });
   describe('profile', () => {
     it('should return expected profile when profile type is WALL.',
@@ -124,7 +133,6 @@ describe('Profiler', () => {
     it('should return expected profile when profile type is HEAP.',
        async () => {
          const profiler = new Profiler(testConfig);
-         profiler.heapProfiler = instance(mockHeapProfiler);
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
            profileType: 'HEAP',
@@ -209,7 +217,6 @@ describe('Profiler', () => {
            ' enabled',
        async () => {
          const profiler = new Profiler(testConfig);
-         profiler.heapProfiler = instance(mockHeapProfiler);
 
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
@@ -301,7 +308,6 @@ describe('Profiler', () => {
                         }));
 
       const profiler = new Profiler(testConfig);
-      profiler.heapProfiler = instance(mockHeapProfiler);
       await profiler.profileAndUpload(requestProf);
       const uploaded = requestStub.firstCall.args[0].body;
       const decodedBytes =
@@ -371,7 +377,6 @@ describe('Profiler', () => {
          const apiMock =
              nock(API).patch('/' + requestProf.name).once().reply(200);
          const profiler = new Profiler(testConfig);
-         profiler.heapProfiler = instance(mockHeapProfiler);
          await profiler.profileAndUpload(requestProf);
          assert.equal(apiMock.isDone(), true, 'completed call to real API');
        });
@@ -389,7 +394,6 @@ describe('Profiler', () => {
          const config = extend(true, {}, testConfig);
          config.baseApiUrl = TEST_API;
          const profiler = new Profiler(config);
-         profiler.heapProfiler = instance(mockHeapProfiler);
          await profiler.profileAndUpload(requestProf);
          assert.equal(apiMock.isDone(), true, 'completed call to test API');
        });

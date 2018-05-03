@@ -15,41 +15,52 @@
  */
 
 import {perftools} from '../../../proto/profile';
+import {defaultConfig} from '../config';
+
 import {serializeHeapProfile} from './profile-serializer';
 
 const profiler = require('bindings')('sampling_heap_profiler');
 
-export class HeapProfiler {
-  private enabled = false;
+let enabled = false;
+let heapIntervalBytes = 0;
+let heapStackDepth = 0;
 
-  /**
-   * @param intervalBytes - average bytes between samples.
-   * @param stackDepth - upper limit on number of frames in stack for sample.
-   */
-  constructor(private intervalBytes: number, private stackDepth: number) {
-    this.enable();
+/*
+ * Collects a heap profile when heapProfiler is enabled. Otherwise throws
+ * an error.
+ */
+export function profile(): perftools.profiles.IProfile {
+  if (!enabled) {
+    throw new Error('Heap profiler is not enabled.');
   }
+  const startTimeNanos = Date.now() * 1000 * 1000;
+  const result = profiler.getAllocationProfile();
+  return serializeHeapProfile(result, startTimeNanos, heapIntervalBytes);
+}
 
-  /**
-   * Collects a heap profile when heapProfiler is enabled. Otherwise throws
-   * an error.
-   */
-  profile(): perftools.profiles.IProfile {
-    if (!this.enabled) {
-      throw new Error('Heap profiler is not enabled.');
-    }
-    const result = profiler.getAllocationProfile();
-    const startTimeNanos = Date.now() * 1000 * 1000;
-    return serializeHeapProfile(result, startTimeNanos, this.intervalBytes);
+/**
+ * Starts heap profiling. If heap profiling has already been started with
+ * the same parameters, this is a noop. If heap profiler has already been
+ * started with different parameters, this throws an error.
+ *
+ * @param intervalBytes - average number of bytes between samples.
+ * @param stackDepth - maximum stack depth for samples collected.
+ */
+export function start(intervalBytes: number, stackDepth: number) {
+  if (enabled) {
+    throw new Error(`Heap profiler is already started  with intervalBytes ${
+        heapIntervalBytes} and stackDepth ${stackDepth}`);
   }
+  heapIntervalBytes = intervalBytes;
+  heapStackDepth = stackDepth;
+  profiler.startSamplingHeapProfiler(heapIntervalBytes, heapStackDepth);
+  enabled = true;
+}
 
-  enable() {
-    profiler.startSamplingHeapProfiler(this.intervalBytes, this.stackDepth);
-    this.enabled = true;
-  }
-
-  disable() {
-    this.enabled = false;
+// Stops heap profiling. If heap profiling has not been started, does nothing.
+export function stop() {
+  if (enabled) {
+    enabled = false;
     profiler.stopSamplingHeapProfiler();
   }
 }

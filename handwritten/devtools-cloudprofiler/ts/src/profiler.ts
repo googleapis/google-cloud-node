@@ -24,7 +24,7 @@ import * as zlib from 'zlib';
 import {perftools} from '../../proto/profile';
 
 import {ProfilerConfig} from './config';
-import {HeapProfiler} from './profilers/heap-profiler';
+import * as heapProfiler from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
 
 const parseDuration: (str: string) => number = require('parse-duration');
@@ -204,10 +204,12 @@ function responseToProfileOrError(
 
 /**
  * Polls profiler server for instructions on behalf of a task and
- * collects and uploads profiles as requested
+ * collects and uploads profiles as requested.
+ *
+ * If heap profiling is enabled, the heap profiler must be enabled before heap
+ * profiles can be collected.
  */
 export class Profiler extends ServiceObject {
-  private config: ProfilerConfig;
   private logger: Logger;
   private profileLabels: {instance?: string};
   private deployment: Deployment;
@@ -216,7 +218,7 @@ export class Profiler extends ServiceObject {
 
   // Public for testing.
   timeProfiler: TimeProfiler|undefined;
-  heapProfiler: HeapProfiler|undefined;
+  config: ProfilerConfig;
 
   constructor(config: ProfilerConfig) {
     config = util.normalizeArguments(null, config) as ProfilerConfig;
@@ -258,10 +260,7 @@ export class Profiler extends ServiceObject {
     }
     if (!this.config.disableHeap) {
       this.profileTypes.push(ProfileTypes.Heap);
-      this.heapProfiler = new HeapProfiler(
-          this.config.heapIntervalBytes, this.config.heapMaxStackDepth);
     }
-
     this.retryer = new Retryer(
         this.config.initialBackoffMillis, this.config.backoffCapMillis,
         this.config.backoffMultiplier);
@@ -458,10 +457,10 @@ export class Profiler extends ServiceObject {
    * Public to allow for testing.
    */
   async writeHeapProfile(prof: RequestProfile): Promise<RequestProfile> {
-    if (!this.heapProfiler) {
+    if (this.config.disableHeap) {
       throw Error('Cannot collect heap profile, heap profiler not enabled.');
     }
-    const p = this.heapProfiler.profile();
+    const p = heapProfiler.profile();
     prof.profileBytes = await profileBytes(p);
     return prof;
   }

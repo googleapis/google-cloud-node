@@ -14,34 +14,23 @@
  * limitations under the License.
  */
 
+import * as common from '@google-cloud/common';
+import {GlobalConfig} from '@google-cloud/common/build/src/util';
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as sinon from 'sinon';
 
-import {initConfig} from '../src/index';
+import {createProfiler} from '../src/index';
+import {Profiler} from '../src/profiler';
+import * as heapProfiler from '../src/profilers/heap-profiler';
 
-describe('initConfig', () => {
+const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
+
+describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;
   let metadataStub: sinon.SinonStub|undefined;
-
-  before(() => {
-    savedEnv = process.env;
-  });
-
-  beforeEach(() => {
-    process.env = {};
-  });
-
-  afterEach(() => {
-    if (metadataStub) {
-      metadataStub.restore();
-    }
-  });
-
-  after(() => {
-    process.env = savedEnv;
-  });
+  let startStub: sinon.SinonStub;
 
   const internalConfigParams = {
     timeIntervalMicros: 1000,
@@ -56,6 +45,31 @@ describe('initConfig', () => {
     localLogPeriodMillis: 10000,
     baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',
   };
+  let defaultConfig: GlobalConfig;
+
+  before(async () => {
+    defaultConfig = await common.util.normalizeArguments(
+        null, extend({}, internalConfigParams as GlobalConfig));
+    startStub = sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
+    savedEnv = process.env;
+  });
+
+  beforeEach(() => {
+    process.env = {};
+  });
+
+  afterEach(() => {
+    if (metadataStub) {
+      metadataStub.restore();
+    }
+    heapProfiler.stop();
+    startStub.reset();
+  });
+
+  after(() => {
+    process.env = savedEnv;
+    startStub.restore();
+  });
 
   it('should not modify specified fields when not on GCE', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance')
@@ -70,8 +84,9 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
-    const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
+    const profiler: Profiler = await createProfiler(config);
+    const expConfig = Object.assign({}, defaultConfig, config);
+    assert.deepEqual(profiler.config, expConfig);
   });
 
   it('should not modify specified fields when on GCE', async () => {
@@ -90,8 +105,9 @@ describe('initConfig', () => {
       zone: 'zone',
       projectId: 'fake-projectId'
     };
-    const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
+    const profiler: Profiler = await createProfiler(config);
+    const expConfig = Object.assign({}, defaultConfig, config);
+    assert.deepEqual(profiler.config, expConfig);
   });
 
   it('should get zone and instance from GCE', async () => {
@@ -108,7 +124,7 @@ describe('initConfig', () => {
       disableHeap: true,
       disableTime: true,
     };
-    const expConfig = {
+    const expConfigParams = {
       logLevel: 2,
       serviceContext: {version: '', service: 'fake-service'},
       disableHeap: true,
@@ -117,9 +133,9 @@ describe('initConfig', () => {
       zone: 'gce-zone',
       projectId: 'projectId'
     };
-    const initializedConfig = await initConfig(config);
-    assert.deepEqual(
-        initializedConfig, extend(expConfig, internalConfigParams));
+    const profiler: Profiler = await createProfiler(config);
+    const expConfig = Object.assign({}, defaultConfig, expConfigParams);
+    assert.deepEqual(profiler.config, expConfig);
   });
 
   it('should not reject when not on GCE and no zone and instance found',
@@ -130,19 +146,19 @@ describe('initConfig', () => {
          projectId: 'fake-projectId',
          serviceContext: {service: 'fake-service'}
        };
-       const expConfig = {
+       const expConfigParams = {
          logLevel: 2,
          serviceContext: {service: 'fake-service'},
          disableHeap: false,
          disableTime: false,
          projectId: 'fake-projectId',
        };
-       const initializedConfig = await initConfig(config);
-       assert.deepEqual(
-           initializedConfig, extend(expConfig, internalConfigParams));
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig = Object.assign({}, defaultConfig, expConfigParams);
+       assert.deepEqual(profiler.config, expConfig);
      });
 
-  it('should reject when no service specified', () => {
+  it('should reject when no service specified', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub.throwsException('cannot access metadata');
     const config = {
@@ -151,13 +167,14 @@ describe('initConfig', () => {
       disableHeap: true,
       disableTime: true,
     };
-    return initConfig(config)
-        .then(initializedConfig => {
+    createProfiler(config)
+        .then(() => {
           assert.fail('expected error because no service in config');
         })
         .catch((e: Error) => {
           assert.equal(
-              e.message, 'Service must be specified in the configuration.');
+              e.message,
+              'Could not start profiler: Error: Service must be specified in the configuration');
         });
   });
 
@@ -173,8 +190,9 @@ describe('initConfig', () => {
       instance: 'instance',
       zone: 'zone'
     };
-    const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, extend(config, internalConfigParams));
+    const profiler: Profiler = await createProfiler(config);
+    const expConfig = Object.assign({}, defaultConfig, config);
+    assert.deepEqual(profiler.config, expConfig);
   });
 
   it('should set baseApiUrl to non-default value', async () => {
@@ -185,18 +203,16 @@ describe('initConfig', () => {
       serviceContext: {version: '', service: 'fake-service'},
       baseApiUrl: 'https://test-cloudprofiler.sandbox.googleapis.com/v2'
     };
-    const expConfig = extend(
-        {
-          serviceContext: {version: '', service: 'fake-service'},
-          disableHeap: false,
-          disableTime: false,
-          logLevel: 2
-        },
-        internalConfigParams);
-    expConfig.baseApiUrl =
-        'https://test-cloudprofiler.sandbox.googleapis.com/v2';
-    const initializedConfig = await initConfig(config);
-    assert.deepEqual(initializedConfig, expConfig);
+    const expConfigParams = {
+      serviceContext: {version: '', service: 'fake-service'},
+      disableHeap: false,
+      disableTime: false,
+      logLevel: 2,
+      baseApiUrl: 'https://test-cloudprofiler.sandbox.googleapis.com/v2'
+    };
+    const expConfig = Object.assign({}, defaultConfig, expConfigParams);
+    const profiler: Profiler = await createProfiler(config);
+    assert.deepEqual(profiler.config, expConfig);
   });
 
   it('should get values from from environment variable when not specified in config or environment variables',
@@ -213,7 +229,7 @@ describe('initConfig', () => {
            .withArgs('zone')
            .resolves({data: 'projects/123456789012/zones/gce-zone'});
        const config = {};
-       const expConfig = {
+       const expConfigParams = {
          projectId: 'process-projectId',
          logLevel: 4,
          serviceContext:
@@ -223,9 +239,9 @@ describe('initConfig', () => {
          instance: 'envConfig-instance',
          zone: 'envConfig-zone'
        };
-       const initializedConfig = await initConfig(config);
-       assert.deepEqual(
-           initializedConfig, extend(expConfig, internalConfigParams));
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig = Object.assign({}, defaultConfig, expConfigParams);
+       assert.deepEqual(profiler.config, expConfig);
      });
 
   it('should not get values from from environment variable when values specified in config',
@@ -251,9 +267,9 @@ describe('initConfig', () => {
          instance: 'instance',
          zone: 'zone'
        };
-       const initializedConfig = await initConfig(config);
-       assert.deepEqual(
-           initializedConfig, extend(config, internalConfigParams));
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig = Object.assign({}, defaultConfig, config);
+       assert.deepEqual(profiler.config, expConfig);
      });
 
   it('should get values from from environment config when not specified in config or other environment variables',
@@ -263,7 +279,7 @@ describe('initConfig', () => {
        process.env.GCLOUD_PROFILER_CONFIG =
            './ts/test/fixtures/test-config.json';
 
-       const expConfig = {
+       const expConfigParams = {
          logLevel: 3,
          serviceContext:
              {version: 'envConfig-version', service: 'envConfig-service'},
@@ -275,8 +291,31 @@ describe('initConfig', () => {
        };
 
        const config = {};
-       const initializedConfig = await initConfig(config);
-       assert.deepEqual(
-           initializedConfig, extend(expConfig, internalConfigParams));
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig = Object.assign({}, defaultConfig, expConfigParams);
+       assert.deepEqual(profiler.config, expConfig);
      });
+  it('should start heap profiler when disableHeap is not set', async () => {
+    const config = {
+      projectId: 'config-projectId',
+      serviceContext: {service: 'config-service'},
+      instance: 'envConfig-instance',
+      zone: 'envConfig-zone',
+    };
+    const profiler: Profiler = await createProfiler(config);
+    assert.ok(
+        startStub.calledWith(1024 * 512, 64),
+        'expected heap profiler to be started');
+  });
+  it('should start not heap profiler when disableHeap is true', async () => {
+    const config = {
+      projectId: 'config-projectId',
+      serviceContext: {service: 'config-service'},
+      disableHeap: true,
+      instance: 'envConfig-instance',
+      zone: 'envConfig-zone',
+    };
+    const profiler: Profiler = await createProfiler(config);
+    assert.ok(!startStub.called, 'expected heap profiler to not be started');
+  });
 });

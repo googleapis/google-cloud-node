@@ -17,6 +17,7 @@
 import {Logger, util} from '@google-cloud/common';
 import * as delay from 'delay';
 import * as extend from 'extend';
+import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
 import * as path from 'path';
 import {normalize} from 'path';
@@ -25,6 +26,7 @@ import * as semver from 'semver';
 
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {Profiler} from './profiler';
+import * as heapProfiler from './profilers/heap-profiler';
 
 const pjson = require('../../package.json');
 
@@ -45,12 +47,10 @@ function hasService(config: Config):
 
 /**
  * Sets unset values in the configuration to the value retrieved from
- * environment variables, metadata, or specified in defaultConfig.
+ * environment variables or specified in defaultConfig.
  * Throws error if value that must be set cannot be initialized.
- *
- * Exported for testing purposes.
  */
-export async function initConfig(config: Config): Promise<ProfilerConfig> {
+function initConfigLocal(config: Config): ProfilerConfig {
   config = util.normalizeArguments(null, config);
 
   const envConfig: Config = {
@@ -69,15 +69,38 @@ export async function initConfig(config: Config): Promise<ProfilerConfig> {
   }
 
   let envSetConfig: Config = {};
-  const val = process.env.GCLOUD_PROFILER_CONFIG;
-  if (val) {
-    envSetConfig = require(path.resolve(val)) as Config;
+  const configPath = process.env.GCLOUD_PROFILER_CONFIG;
+  if (configPath) {
+    let envSetConfigBuf;
+    try {
+      envSetConfigBuf = fs.readFileSync(configPath);
+    } catch (e) {
+      throw Error(`Could not read GCLOUD_PROFILER_CONFIG ${configPath}: ${e}`);
+    }
+    try {
+      envSetConfig = JSON.parse(envSetConfigBuf.toString());
+    } catch (e) {
+      throw Error(`Could not parse GCLOUD_PROFILER_CONFIG ${configPath}: ${e}`);
+    }
   }
 
   const mergedConfig =
       extend(true, {}, defaultConfig, envSetConfig, envConfig, config);
 
-  if (!mergedConfig.zone || !mergedConfig.instance) {
+  if (!hasService(mergedConfig)) {
+    throw new Error('Service must be specified in the configuration.');
+  }
+
+  return mergedConfig;
+}
+
+/**
+ * Sets unset values in the configuration which can be retrieved from GCP
+ * metadata.
+ */
+async function initConfigMetadata(config: ProfilerConfig):
+    Promise<ProfilerConfig> {
+  if (!config.zone || !config.instance) {
     const [instance, zone] =
         await Promise
             .all([
@@ -88,22 +111,40 @@ export async function initConfig(config: Config): Promise<ProfilerConfig> {
                     // ignore errors, which will occur when not on GCE.
                 }) ||
         [undefined, undefined];
-    if (!mergedConfig.zone && zone) {
-      mergedConfig.zone = zone.substring(zone.lastIndexOf('/') + 1);
+    if (!config.zone && zone) {
+      config.zone = zone.substring(zone.lastIndexOf('/') + 1);
     }
-    if (!mergedConfig.instance && instance) {
-      mergedConfig.instance = instance;
+    if (!config.instance && instance) {
+      config.instance = instance;
     }
   }
-
-  if (!hasService(mergedConfig)) {
-    throw new Error('Service must be specified in the configuration.');
-  }
-
-  return mergedConfig;
+  return config;
 }
 
-let profiler: Profiler|undefined = undefined;
+/**
+ * Initializes the config, and starts heap profiler if the heap profiler is
+ * needed. Returns a profiler if creation is successful. Otherwise, returns
+ * rejected promise.
+ */
+export async function createProfiler(config: Config): Promise<Profiler> {
+  if (!semver.satisfies(process.version, pjson.engines.node)) {
+    throw new Error(
+        `Could not start profiler: node version ${process.version}` +
+        ` does not satisfies "${pjson.engines.node}"`);
+  }
+
+  let profilerConfig: ProfilerConfig = initConfigLocal(config);
+
+  // Start the heap profiler if profiler config does not indicate heap profiling
+  // is disabled. This must be done before any asynchronous calls are made so
+  // all memory allocations made after start() is called can be captured.
+  if (!profilerConfig.disableHeap) {
+    heapProfiler.start(
+        profilerConfig.heapIntervalBytes, profilerConfig.heapMaxStackDepth);
+  }
+  profilerConfig = await initConfigMetadata(profilerConfig);
+  return new Profiler(profilerConfig);
+}
 
 /**
  * Starts the profiling agent and returns a promise.
@@ -120,21 +161,13 @@ let profiler: Profiler|undefined = undefined;
  *
  */
 export async function start(config: Config = {}): Promise<void> {
-  if (!semver.satisfies(process.version, pjson.engines.node)) {
-    logError(
-        `Could not start profiler: node version ${process.version}` +
-            ` does not satisfies "${pjson.engines.node}"`,
-        config);
-    return;
-  }
-  let normalizedConfig: ProfilerConfig;
+  let profiler: Profiler;
   try {
-    normalizedConfig = await initConfig(config);
+    profiler = await createProfiler(config);
   } catch (e) {
-    logError(`Could not start profiler: ${e}`, config);
+    logError(`${e}`, config);
     return;
   }
-  profiler = new Profiler(normalizedConfig);
   profiler.start();
 }
 
@@ -152,12 +185,17 @@ function logError(msg: string, config: Config) {
  * profiles.
  */
 export async function startLocal(config: Config = {}): Promise<void> {
-  const normalizedConfig = await initConfig(config);
-  const profiler = new Profiler(normalizedConfig);
+  let profiler: Profiler;
+  try {
+    profiler = await createProfiler(config);
+  } catch (e) {
+    logError(`${e}`, config);
+    return;
+  }
 
   // Set up periodic logging.
   const logger = new Logger({
-    level: Logger.DEFAULT_OPTIONS.levels[normalizedConfig.logLevel],
+    level: Logger.DEFAULT_OPTIONS.levels[profiler.config.logLevel],
     tag: pjson.name
   });
   let heapProfileCount = 0;
@@ -189,7 +227,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
     heapProfileCount = 0;
     timeProfileCount = 0;
     prevLogTime = curTime;
-  }, normalizedConfig.localLogPeriodMillis);
+  }, profiler.config.localLogPeriodMillis);
 
   // Periodic profiling
   setInterval(async () => {
@@ -198,16 +236,16 @@ export async function startLocal(config: Config = {}): Promise<void> {
           {name: 'Heap-Profile' + new Date(), profileType: 'HEAP'});
       heapProfileCount++;
     }
-    await delay(normalizedConfig.localProfilingPeriodMillis / 2);
+    await delay(profiler.config.localProfilingPeriodMillis / 2);
     if (!config.disableTime) {
       const wall = await profiler.profile({
         name: 'Time-Profile' + new Date(),
         profileType: 'WALL',
-        duration: normalizedConfig.localTimeDurationMillis.toString() + 'ms'
+        duration: profiler.config.localTimeDurationMillis.toString() + 'ms'
       });
       timeProfileCount++;
     }
-  }, normalizedConfig.localProfilingPeriodMillis);
+  }, profiler.config.localProfilingPeriodMillis);
 }
 
 // If the module was --require'd from the command line, start the agent.
