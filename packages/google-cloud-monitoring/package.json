@@ -64,7 +64,7 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.2.3",
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",

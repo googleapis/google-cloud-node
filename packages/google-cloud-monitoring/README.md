@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Stackdriver Monitoring: Node.js Client](https://github.com/googleapis/nodejs-monitoring)
@@ -126,6 +128,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Alert Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.js,samples/README.md) |
 | Metrics | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.js,samples/README.md) |
 | Uptime Config | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/uptime.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md) |
 
@@ -157,4 +160,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-monitoring/blob/master/LICENS
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/monitoring/latest/
 [product-docs]: https://cloud.google.com/monitoring/docs
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png

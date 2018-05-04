@@ -6,6 +6,13 @@
   "release_quality": "beta",
   "samples": [
     {
+      "id": "alerts",
+      "name": "Alert Policies",
+      "file": "alerts.js",
+      "docs_link": "https://cloud.google.com/monitoring/docs",
+      "usage": "node alerts.js --help"
+    },
+    {
       "id": "metrics",
       "name": "Metrics",
       "file": "metrics.js",
