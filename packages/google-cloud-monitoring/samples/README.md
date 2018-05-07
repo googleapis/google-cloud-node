@@ -41,6 +41,7 @@ Commands:
   alerts.js replace <alertPolicyName> <channelNames..>  Replace the notification channels of the specified alert policy.
   alerts.js disable <projectId> [filter]                Disables policies that match the given filter.
   alerts.js enable <projectId> [filter]                 Enables policies that match the given filter.
+  alerts.js list <projectId>                            Lists alert policies in the specified project.
 
 Options:
   --version          Show version number                                                                       [boolean]
