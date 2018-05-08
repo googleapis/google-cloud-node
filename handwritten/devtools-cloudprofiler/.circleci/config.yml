@@ -45,6 +45,8 @@ workflows:
            filters: *release_tags
       - node9:
           filters: *release_tags
+      - node10:
+          filters: *release_tags
       - gocheck:
           filters: *release_tags
       - publish_npm:
@@ -72,6 +74,11 @@ jobs:
   node9:
     docker:
       - image: node:9
+        user: node
+    <<: *unit_tests
+  node10:
+    docker:
+      - image: node:10
         user: node
     <<: *unit_tests
   gocheck:
