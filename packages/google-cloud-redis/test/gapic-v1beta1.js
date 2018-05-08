@@ -46,7 +46,11 @@ describe('CloudRedisClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listInstances = (actualRequest, options, callback) => {
+      client._innerApiCalls.listInstances = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.instances);
       };
@@ -94,7 +98,11 @@ describe('CloudRedisClient', () => {
       });
 
       // Mock request
-      var formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+      var formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -147,7 +155,11 @@ describe('CloudRedisClient', () => {
       });
 
       // Mock request
-      var formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+      var formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -219,17 +231,24 @@ describe('CloudRedisClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createInstance = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.createInstance = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.createInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .createInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes createInstance with error', done => {
@@ -254,18 +273,26 @@ describe('CloudRedisClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createInstance = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.createInstance = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.createInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .createInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -273,8 +300,14 @@ describe('CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.createInstance.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.createInstance.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.createInstance
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.createInstance
+          .metadataDecoder instanceof Function
+      );
     });
   });
 
@@ -332,17 +365,24 @@ describe('CloudRedisClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.updateInstance = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.updateInstance = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.updateInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .updateInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes updateInstance with error', done => {
@@ -370,18 +410,26 @@ describe('CloudRedisClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.updateInstance = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.updateInstance = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.updateInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .updateInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -389,8 +437,14 @@ describe('CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.updateInstance.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.updateInstance.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.updateInstance
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.updateInstance
+          .metadataDecoder instanceof Function
+      );
     });
   });
 
@@ -402,7 +456,11 @@ describe('CloudRedisClient', () => {
       });
 
       // Mock request
-      var formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+      var formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -411,17 +469,24 @@ describe('CloudRedisClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteInstance = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.deleteInstance = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.deleteInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .deleteInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes deleteInstance with error', done => {
@@ -431,24 +496,36 @@ describe('CloudRedisClient', () => {
       });
 
       // Mock request
-      var formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+      var formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
       var request = {
         name: formattedName,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteInstance = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.deleteInstance = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.deleteInstance(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .deleteInstance(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -456,11 +533,16 @@ describe('CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.deleteInstance.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.deleteInstance.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.deleteInstance
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.deleteInstance
+          .metadataDecoder instanceof Function
+      );
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
@@ -484,12 +566,11 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          }
-          else {
+          } else {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };

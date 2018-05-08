@@ -135,10 +135,15 @@ class CloudRedisClient {
     };
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/redis/v1beta1/cloud_redis.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/redis/v1beta1/cloud_redis.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -151,21 +156,13 @@ class CloudRedisClient {
     var createInstanceResponse = protoFilesRoot.lookup(
       'google.cloud.redis.v1beta1.Instance'
     );
-    var createInstanceMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Any'
-    );
+    var createInstanceMetadata = protoFilesRoot.lookup('google.protobuf.Any');
     var updateInstanceResponse = protoFilesRoot.lookup(
       'google.cloud.redis.v1beta1.Instance'
     );
-    var updateInstanceMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Any'
-    );
-    var deleteInstanceResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
-    );
-    var deleteInstanceMetadata = protoFilesRoot.lookup(
-      'google.protobuf.Any'
-    );
+    var updateInstanceMetadata = protoFilesRoot.lookup('google.protobuf.Any');
+    var deleteInstanceResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    var deleteInstanceMetadata = protoFilesRoot.lookup('google.protobuf.Any');
 
     this._descriptors.longrunning = {
       createInstance: new gax.LongrunningDescriptor(
@@ -224,7 +221,8 @@ class CloudRedisClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName] || this._descriptors.longrunning[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -248,9 +246,7 @@ class CloudRedisClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -424,7 +420,7 @@ class CloudRedisClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Gets the details of a specific Redis instance.
@@ -886,9 +882,7 @@ class CloudRedisClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
-      .project;
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -899,8 +893,7 @@ class CloudRedisClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
+    return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
   }
 
@@ -912,9 +905,7 @@ class CloudRedisClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromInstanceName(instanceName) {
-    return this._pathTemplates.instancePathTemplate
-      .match(instanceName)
-      .project;
+    return this._pathTemplates.instancePathTemplate.match(instanceName).project;
   }
 
   /**
@@ -925,8 +916,7 @@ class CloudRedisClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromInstanceName(instanceName) {
-    return this._pathTemplates.instancePathTemplate
-      .match(instanceName)
+    return this._pathTemplates.instancePathTemplate.match(instanceName)
       .location;
   }
 
@@ -938,11 +928,9 @@ class CloudRedisClient {
    * @returns {String} - A string representing the instance.
    */
   matchInstanceFromInstanceName(instanceName) {
-    return this._pathTemplates.instancePathTemplate
-      .match(instanceName)
+    return this._pathTemplates.instancePathTemplate.match(instanceName)
       .instance;
   }
 }
-
 
 module.exports = CloudRedisClient;
