@@ -20,8 +20,9 @@ import * as sinon from 'sinon';
 import {perftools} from '../../proto/profile';
 import * as heapProfiler from '../src/profilers/heap-profiler';
 
-import {heapProfile, v8HeapProfile} from './profiles-for-tests';
+import {heapProfileWithExternal, v8HeapProfile} from './profiles-for-tests';
 
+const copy = require('deep-copy');
 const assert = require('assert');
 const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
 
@@ -30,12 +31,22 @@ describe('HeapProfiler', () => {
   let stopStub: sinon.SinonStub;
   let profileStub: sinon.SinonStub;
   let dateStub: sinon.SinonStub;
+  let memoryUsageStub: sinon.SinonStub;
   beforeEach(() => {
     startStub = sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
     stopStub = sinon.stub(v8HeapProfiler, 'stopSamplingHeapProfiler');
+
+    // returns copy of v8HeapProfile because heap profiler modifies the v8
+    // profile to add external memory usage.
     profileStub = sinon.stub(v8HeapProfiler, 'getAllocationProfile')
-                      .returns(v8HeapProfile);
+                      .returns(copy(v8HeapProfile));
     dateStub = sinon.stub(Date, 'now').returns(0);
+    memoryUsageStub = sinon.stub(process, 'memoryUsage').returns({
+      external: 1024,
+      rss: 2048,
+      heapTotal: 4096,
+      heapUse: 2048,
+    });
   });
 
   afterEach(() => {
@@ -44,6 +55,7 @@ describe('HeapProfiler', () => {
     stopStub.restore();
     profileStub.restore();
     dateStub.restore();
+    memoryUsageStub.restore();
   });
   describe('profile', () => {
     it('should return a profile equal to the expected profile', async () => {
@@ -51,7 +63,7 @@ describe('HeapProfiler', () => {
       const stackDepth = 32;
       heapProfiler.start(intervalBytes, stackDepth);
       const profile = heapProfiler.profile();
-      assert.deepEqual(heapProfile, profile);
+      assert.deepEqual(heapProfileWithExternal, profile);
     });
 
     it('should throw error when not started', () => {

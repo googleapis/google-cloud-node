@@ -28,9 +28,9 @@ export interface ProfileNode {
   // name is the function name.
   name?: string;
   scriptName: string;
-  scriptId: number;
-  lineNumber: number;
-  columnNumber: number;
+  scriptId?: number;
+  lineNumber?: number;
+  columnNumber?: number;
   children: ProfileNode[];
 }
 

@@ -16,6 +16,7 @@
 
 import {perftools} from '../../../proto/profile';
 import {defaultConfig} from '../config';
+import {AllocationProfileNode} from '../v8-types';
 
 import {serializeHeapProfile} from './profile-serializer';
 
@@ -35,6 +36,18 @@ export function profile(): perftools.profiles.IProfile {
   }
   const startTimeNanos = Date.now() * 1000 * 1000;
   const result = profiler.getAllocationProfile();
+  // Add node for external memory usage.
+  // Current type definitions do not have external.
+  // TODO: remove any once type definition is updated to include external.
+  // tslint:disable-next-line: no-any
+  const {external}: {external: number} = process.memoryUsage() as any;
+  const externalNode: AllocationProfileNode = {
+    name: '(external)',
+    scriptName: '',
+    children: [],
+    allocations: [{sizeBytes: external, count: 1}],
+  };
+  result.children.push(externalNode);
   return serializeHeapProfile(result, startTimeNanos, heapIntervalBytes);
 }
 

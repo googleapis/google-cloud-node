@@ -24,6 +24,7 @@ const assert = require('assert');
 
 describe('serializeTimeProfile', () => {
   let dateStub: sinon.SinonStub;
+
   before(() => {
     dateStub = sinon.stub(Date, 'now').returns(0);
   });
@@ -35,9 +36,9 @@ describe('serializeTimeProfile', () => {
     assert.deepEqual(timeProfileOut, timeProfile);
   });
   it('should produce expected profile when there is anyonmous function', () => {
-    const heapProfileOut =
+    const timeProfileOut =
         serializeTimeProfile(v8AnonymousFunctionTimeProfile, 1000);
-    assert.deepEqual(heapProfileOut, anonymousFunctionTimeProfile);
+    assert.deepEqual(timeProfileOut, anonymousFunctionTimeProfile);
   });
 });
 
