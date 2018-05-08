@@ -2,21 +2,21 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [TBD: Node.js Client](https://github.com/googleapis/nodejs-redis)
+# [nodejs-redis: Node.js Client](https://github.com/googleapis/nodejs-redis)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-redis.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-redis)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-redis?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-redis)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-redis/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-redis)
 
-> Node.js idiomatic client for [TBD][product-docs].
+> Node.js idiomatic client for [][product-docs].
 
-TBD
+Client for Google Cloud Redis
 
 
-* [TBD Node.js Client API Reference][client-docs]
+* [ Node.js Client API Reference][client-docs]
 * [github.com/googleapis/nodejs-redis](https://github.com/googleapis/nodejs-redis)
-* [TBD Documentation][product-docs]
+* [ Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -45,25 +45,21 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     [Enable billing][billing]
 
-1.  Enable the TBD API.
-
-    [Enable the API][enable_api]
-
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=TBD
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=
 [auth]: https://cloud.google.com/docs/authentication/getting-started
 
 ### Installing the client library
 
-    npm install --save redis
+    npm install --save @google-cloud/redis
 
 
 
-The [TBD Node.js Client API Reference][client-docs] documentation
+The [ Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
@@ -89,5 +85,5 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-redis/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/redis/latest/
-[product-docs]: TBD
+[product-docs]: 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png

@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2017 Google, Inc.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'redis',
+    systemName: '@google-cloud/redis',
     theme: 'lumen'
   }
 };

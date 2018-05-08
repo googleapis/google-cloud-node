@@ -1,5 +1,6 @@
 {
-  "product": "redis",
+  "_product": "redis",
+  "id": "redis",
   "description": "Client for Google Cloud Redis",
   "requiresKeyFile": true,
   "requiresProjectId": true,
