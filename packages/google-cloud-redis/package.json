@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "repository": "googleapis/nodejs-redis",
+  "repository": "@google0cloud/redis",
   "main": "src/index.js",
   "files": [
     "protos",
@@ -44,7 +44,7 @@
     "system-test": "repo-tools test run --cmd mocha -- system-test/*.js smoke-test/*.js --no-timeouts"
   },
   "dependencies": {
-    "google-gax": "^0.14.2",
+    "google-gax": "^0.16.1",
     "lodash.merge": "^4.6.0",
     "protobufjs": "^6.8.0"
   },

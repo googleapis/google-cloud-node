@@ -43,18 +43,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - system_tests:
-          requires:
-            - lint
-            - docs
-          filters:
-            branches:
-              only: master
-            tags:
-              only: '/^v[\d.]+$/'
       - publish_npm:
-          requires:
-            - system_tests
           filters:
             branches:
               ignore: /.*/
