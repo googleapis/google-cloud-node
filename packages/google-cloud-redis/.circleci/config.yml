@@ -44,6 +44,9 @@ workflows:
             tags:
               only: /.*/
       - publish_npm:
+          requires:
+            - lint
+            - docs
           filters:
             branches:
               ignore: /.*/
@@ -161,37 +164,6 @@ jobs:
       - run:
           name: Build documentation.
           command: npm run docs
-  system_tests:
-    docker:
-      - image: 'node:8'
-        user: node
-    steps:
-      - checkout
-      - run: *remove_package_lock
-      - run:
-          name: Decrypt credentials.
-          command: |
-            openssl aes-256-cbc -d -in .circleci/key.json.enc \
-                -out .circleci/key.json \
-                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-      - run:
-          name: Run system tests.
-          command: npm run system-test
-          environment:
-            GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
-      - run:
-          name: Remove unencrypted key.
-          command: rm .circleci/key.json
-          when: always
   publish_npm:
     docker:
       - image: 'node:8'
