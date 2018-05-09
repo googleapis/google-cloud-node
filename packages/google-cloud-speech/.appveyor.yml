@@ -19,5 +19,7 @@ build: off
 matrix:
   fast_finish: true
 
+clone_depth: 5
+
 cache:
   - node_modules
