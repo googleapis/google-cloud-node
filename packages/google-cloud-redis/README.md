@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [TBD: Node.js Client](https://github.com/googleapis/nodejs-redis)
+# [Cloud Redis: Node.js Client](https://github.com/googleapis/nodejs-redis)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-redis.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-redis)
