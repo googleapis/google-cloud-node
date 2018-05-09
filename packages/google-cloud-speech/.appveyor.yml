@@ -18,3 +18,6 @@ build: off
 
 matrix:
   fast_finish: true
+
+cache:
+  - node_modules
