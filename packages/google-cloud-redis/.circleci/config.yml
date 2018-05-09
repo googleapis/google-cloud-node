@@ -59,7 +59,34 @@ jobs:
     docker:
       - image: 'node:6'
         user: node
-    steps: *unit_tests_steps
+    steps: &unit_tests_steps
+      - checkout
+      - run: &remove_package_lock
+          name: Remove package-lock.json if needed.
+          command: |
+            WORKFLOW_NAME=`python .circleci/get_workflow_name.py`
+            echo "Workflow name: $WORKFLOW_NAME"
+            if [ "$WORKFLOW_NAME" = "nightly" ]; then
+              echo "Nightly build detected, removing package-lock.json"
+              rm -f package-lock.json samples/package-lock.json
+            else
+              echo "Not a nightly build, skipping this step."
+            fi
+      - run:
+          name: Install modules and dependencies.
+          command: |-
+            npm install
+            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
+            if ! test -x "$repo_tools"; then
+              chmod +x "$repo_tools"
+            fi
+      - run:
+          name: Run unit tests.
+          command: npm test
+      - run:
+          name: Submit coverage data to codecov.
+          command: node_modules/.bin/codecov
+          when: always
   node8:
     docker:
       - image: 'node:8'
@@ -92,6 +119,15 @@ jobs:
               chmod +x "$repo_tools"
             fi
             npm link
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Link the module being tested to the samples.
+          command: |
+            cd samples/
+            npm link ../
+            npm install
+            cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
