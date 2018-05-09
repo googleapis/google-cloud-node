@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create Virtual Machine with Apache and Custom Homepage](#create-virtual-machine-with-apache-and-custom-homepage)
   * [List Virtual Machines](#list-virtual-machines)
 
 ## Before you begin
@@ -22,16 +23,23 @@ library's README.
 
 ## Samples
 
+### Create Virtual Machine with Apache and Custom Homepage
+
+
+View the [README](startup-script/README.md).
+
+
+
 ### List Virtual Machines
 
-View the [source code][vms_0_code].
+View the [source code][vms_1_code].
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)
 
 Get a list of virtual machine instances and log the first result.
 
-[vms_0_docs]: https://cloud.google.com/compute/docs
-[vms_0_code]: vms.js
+[vms_1_docs]: https://cloud.google.com/compute/docs
+[vms_1_code]: vms.js
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md

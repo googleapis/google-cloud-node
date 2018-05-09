@@ -6,6 +6,13 @@
   "release_quality": "alpha",
   "samples": [
     {
+      "id": "startup",
+      "name": "Create Virtual Machine with Apache and Custom Homepage",
+      "ref": "startup-script/README.md",
+      "file": "startup-script/index.js",
+      "docs_link": "https://cloud.google.com/compute/docs"
+    },
+    {
       "id": "vms",
       "name": "List Virtual Machines",
       "file": "vms.js",

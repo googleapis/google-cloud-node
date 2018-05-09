@@ -1,4 +1,3 @@
 ---
 rules:
   no-console: off
-  node/no-unsupported-features: off
