@@ -2,21 +2,21 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [nodejs-redis: Node.js Client](https://github.com/googleapis/nodejs-redis)
+# [TBD: Node.js Client](https://github.com/googleapis/nodejs-redis)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-redis.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-redis)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-redis?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-redis)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-redis/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-redis)
 
-> Node.js idiomatic client for [][product-docs].
+> Node.js idiomatic client for [Cloud Redis][product-docs].
 
 Client for Google Cloud Redis
 
 
-* [ Node.js Client API Reference][client-docs]
+* [Cloud Redis Node.js Client API Reference][client-docs]
 * [github.com/googleapis/nodejs-redis](https://github.com/googleapis/nodejs-redis)
-* [ Documentation][product-docs]
+* [Cloud Redis Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -59,7 +59,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 
 
-The [ Node.js Client API Reference][client-docs] documentation
+The [Cloud Redis Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
@@ -85,5 +85,5 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-redis/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/redis/latest/
-[product-docs]: 
+[product-docs]: TBD
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png

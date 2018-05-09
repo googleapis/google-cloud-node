@@ -1,8 +1,8 @@
 {
   "_product": "redis",
   "id": "redis",
-  "name": "google-cloud-redis",
-  "short_name": "redis",
+  "name": "TBD",
+  "short_name": "Cloud Redis",
   "docs_url": "TBD",
   "description": "Client for Google Cloud Redis",
   "requiresKeyFile": true,
