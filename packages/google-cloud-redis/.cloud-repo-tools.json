@@ -1,0 +1,12 @@
+{
+  "_product": "redis",
+  "id": "redis",
+  "name": "Cloud Redis",
+  "short_name": "Cloud Redis",
+  "docs_url": "TBD",
+  "description": "Client for Google Cloud Redis",
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/redis/latest/",
+  "release_quality": "alpha"
+}
