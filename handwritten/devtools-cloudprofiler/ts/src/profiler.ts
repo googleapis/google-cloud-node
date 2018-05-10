@@ -77,7 +77,7 @@ export interface RequestProfile {
  * @return number indicated by backoff if the response indicates a backoff and
  * that backoff is greater than 0. Otherwise returns undefined.
  */
-function getServerResponseBackoff(response: http.ServerResponse): number|
+function getServerResponseBackoff(response: http.IncomingMessage): number|
     undefined {
   // tslint:disable-next-line: no-any
   const body = (response as any).body;
@@ -139,7 +139,7 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
  * Error constructed from HTTP server response which indicates backoff.
  */
 class BackoffResponseError extends Error {
-  constructor(response: http.ServerResponse, readonly backoffMillis: number) {
+  constructor(response: http.IncomingMessage, readonly backoffMillis: number) {
     super(response.statusMessage);
   }
 }
@@ -185,8 +185,10 @@ export class Retryer {
  * was not valid.
  */
 function responseToProfileOrError(
-    err: Error, body: object, response: http.ServerResponse): RequestProfile {
-  if (response && isErrorResponseStatusCode(response.statusCode)) {
+    err: Error|null, body?: object,
+    response?: http.IncomingMessage): RequestProfile {
+  // response.statusCode is guaranteed to exist on client requests.
+  if (response && isErrorResponseStatusCode(response.statusCode!)) {
     const delayMillis = getServerResponseBackoff(response);
     if (delayMillis) {
       throw new BackoffResponseError(response, delayMillis);
@@ -355,7 +357,7 @@ export class Profiler extends ServiceObject {
     return new Promise<RequestProfile>((resolve, reject) => {
       this.request(
           options,
-          (err: Error, body: object, response: http.ServerResponse) => {
+          (err: Error|null, body?: object, response?: http.IncomingMessage) => {
             try {
               const prof = responseToProfileOrError(err, body, response);
               this.logger.debug(
