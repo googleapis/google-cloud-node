@@ -4,6 +4,10 @@
 .nyc_output
 docs/
 out/
+build/
 system-test/secrets.js
 system-test/*key.json
 *.lock
+.DS_Store
+google-cloud-logging-winston-*.tgz
+google-cloud-logging-bunyan-*.tgz
