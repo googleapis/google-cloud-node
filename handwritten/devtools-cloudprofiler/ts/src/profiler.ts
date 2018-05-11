@@ -213,7 +213,7 @@ function responseToProfileOrError(
  */
 export class Profiler extends ServiceObject {
   private logger: Logger;
-  private profileLabels: {instance?: string};
+  private profileLabels: {instance?: string, language: string};
   private deployment: Deployment;
   private profileTypes: string[];
   private retryer: Retryer;
@@ -250,7 +250,7 @@ export class Profiler extends ServiceObject {
       labels
     };
 
-    this.profileLabels = {};
+    this.profileLabels = {language: 'nodejs'};
     if (this.config.instance) {
       this.profileLabels.instance = this.config.instance;
     }
