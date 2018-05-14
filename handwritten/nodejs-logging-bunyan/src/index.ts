@@ -118,9 +118,7 @@ export class LoggingBunyan extends Writable {
     const entryMetadata: types.StackdriverEntryMetadata = {
       resource: this.resource,
       timestamp: record.time,
-      // BUNYAN_TO_STACKDRIVER does not have index signature.
-      // tslint:disable-next-line:no-any
-      severity: (BUNYAN_TO_STACKDRIVER as any)[record.level as string],
+      severity: BUNYAN_TO_STACKDRIVER.get(Number(record.level))
     };
 
     // If the record contains a httpRequest property, provide it on the entry
