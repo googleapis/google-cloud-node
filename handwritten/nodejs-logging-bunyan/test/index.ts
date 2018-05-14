@@ -149,7 +149,7 @@ describe('logging-bunyan', () => {
             assert.deepEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
-              severity: loggingBunyanLib.BUNYAN_TO_STACKDRIVER[RECORD.level],
+              severity: 'INFO',
             });
             assert.deepStrictEqual(record, RECORD);
             done();
@@ -239,7 +239,7 @@ describe('logging-bunyan', () => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
-              severity: loggingBunyanLib.BUNYAN_TO_STACKDRIVER[RECORD.level],
+              severity: 'INFO',
               httpRequest: HTTP_REQUEST,
             });
             assert.deepStrictEqual(record, RECORD);
@@ -261,7 +261,7 @@ describe('logging-bunyan', () => {
             assert.deepStrictEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
-              severity: loggingBunyanLib.BUNYAN_TO_STACKDRIVER[RECORD.level],
+              severity: 'INFO',
               trace: 'trace1',
             });
             assert.deepStrictEqual(record, RECORD);
