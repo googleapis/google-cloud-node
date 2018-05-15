@@ -293,28 +293,6 @@ describe('Profiler', () => {
       uploaded.profileBytes = undefined;
       assert.deepEqual(uploaded, requestProf);
     });
-    it('should specify language is nodejs when uploading profile', async () => {
-      const config = extend(true, {}, testConfig);
-      const requestProf = {
-        name: 'projects/12345678901/test-projectId',
-        duration: '10s',
-        profileType: 'HEAP',
-        labels: {instance: 'test-instance'}
-      };
-      requestStub =
-          sinon.stub(common.ServiceObject.prototype, 'request')
-              .onCall(0)
-              .callsArgWith(1, undefined, undefined, {statusCode: 200});
-
-      const profiler = new Profiler(testConfig);
-      profiler.timeProfiler = instance(mockTimeProfiler);
-      await profiler.profileAndUpload(requestProf);
-      const gotUploadedProfile = requestStub.args[0][0];
-      assert.equal(
-          gotUploadedProfile.body.labels.language, 'nodejs',
-          `uploaded profile ${
-              gotUploadedProfile} does not specify language is nodejs`);
-    });
     it('should send request to upload heap profile.', async () => {
       const requestProf = {
         name: 'projects/12345678901/test-projectId',
@@ -649,6 +627,12 @@ describe('Profiler', () => {
            ' and backoff specified',
        async () => {
          const config = extend(true, {}, testConfig);
+         const requestProfileResponseBody = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+           labels: {version: config.serviceContext.version}
+         };
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .callsArgWith(1, undefined, undefined, {
@@ -666,6 +650,12 @@ describe('Profiler', () => {
        });
     it('should throw error when response undefined', async () => {
       const config = extend(true, {}, testConfig);
+      const requestProfileResponseBody = {
+        name: 'projects/12345678901/test-projectId',
+        profileType: 'WALL',
+        duration: '10s',
+        labels: {version: config.serviceContext.version}
+      };
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .onCall(0)
                         .callsArgWith(1, undefined, undefined, {status: 200});
@@ -713,6 +703,7 @@ describe('Profiler', () => {
                  .onCall(1)
                  .callsArgWith(1, undefined, undefined, {statusCode: 200});
 
+
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -723,6 +714,12 @@ describe('Profiler', () => {
            ' indicated',
        async () => {
          const config = extend(true, {}, testConfig);
+         const requestProfileResponseBody = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+           labels: {version: config.serviceContext.version}
+         };
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
@@ -735,6 +732,13 @@ describe('Profiler', () => {
        });
     it('should reset backoff after success', async () => {
       const config = extend(true, {}, testConfig);
+      const requestProfileResponseBody = {
+        name: 'projects/12345678901/test-projectId',
+        profileType: 'WALL',
+        duration: '10s',
+        labels: {instance: config.instance}
+      };
+
       const createProfileResponseBody = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
@@ -782,6 +786,12 @@ describe('Profiler', () => {
            ' specified',
        async () => {
          const config = extend(true, {}, testConfig);
+         const requestProfileResponseBody = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+           labels: {instance: config.instance}
+         };
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .callsArgWith(1, undefined, undefined, {
@@ -797,6 +807,12 @@ describe('Profiler', () => {
            ' specified',
        async () => {
          const config = extend(true, {}, testConfig);
+         const requestProfileResponseBody = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+           labels: {instance: config.instance}
+         };
          requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                            .onCall(0)
                            .callsArgWith(1, undefined, undefined, {
@@ -812,6 +828,12 @@ describe('Profiler', () => {
            'then backoff limit',
        async () => {
          const config = extend(true, {}, testConfig);
+         const requestProfileResponseBody = {
+           name: 'projects/12345678901/test-projectId',
+           profileType: 'WALL',
+           duration: '10s',
+           labels: {version: config.serviceContext.version}
+         };
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
