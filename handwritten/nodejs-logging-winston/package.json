@@ -84,7 +84,7 @@
     "@types/lodash.mapvalues": "^4.6.3",
     "@types/mocha": "^5.0.0",
     "@types/ncp": "^2.0.1",
-    "@types/node": "^9.4.0",
+    "@types/node": "^10.0.9",
     "@types/once": "^1.4.0",
     "@types/pify": "^3.0.0",
     "@types/proxyquire": "^1.3.28",
