@@ -413,7 +413,7 @@ describe('Profiler', () => {
         profileType: 'WALL',
         duration: '10s',
         deployment: {
-          labels: {version: 'test-version'},
+          labels: {version: 'test-version', language: 'nodejs'},
           projectId: 'test-projectId',
           target: 'test-service'
         },
@@ -439,7 +439,7 @@ describe('Profiler', () => {
         profileType: 'WALL',
         duration: '10s',
         deployment: {
-          labels: {version: 'test-version'},
+          labels: {version: 'test-version', language: 'nodejs'},
           projectId: 'test-projectId',
           target: 'test-service'
         },
@@ -463,7 +463,7 @@ describe('Profiler', () => {
         name: 'projects/12345678901/test-projectId',
         profileType: 'HEAP',
         deployment: {
-          labels: {version: 'test-version'},
+          labels: {version: 'test-version', language: 'nodejs'},
           projectId: 'test-projectId',
           target: 'test-service'
         },
@@ -518,7 +518,7 @@ describe('Profiler', () => {
                  .callsArgWith(1, undefined, response, {statusCode: 200});
          const expRequestBody = {
            deployment: {
-             labels: {version: 'test-version'},
+             labels: {version: 'test-version', language: 'nodejs'},
              projectId: 'test-projectId',
              target: 'test-service'
            },
@@ -546,7 +546,7 @@ describe('Profiler', () => {
                  .callsArgWith(1, undefined, response, {statusCode: 200});
          const expRequestBody = {
            deployment: {
-             labels: {version: 'test-version'},
+             labels: {version: 'test-version', language: 'nodejs'},
              projectId: 'test-projectId',
              target: 'test-service'
            },

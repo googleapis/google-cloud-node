@@ -54,7 +54,7 @@ function isErrorResponseStatusCode(code: number) {
 export interface Deployment {
   projectId?: string;
   target?: string;
-  labels?: {zone?: string, version?: string};
+  labels?: {zone?: string, version?: string, language: string};
 }
 
 /**
@@ -104,7 +104,10 @@ function isDeployment(deployment: any): deployment is Deployment {
   return (deployment.projectId === undefined ||
           typeof deployment.projectId === 'string') &&
       (deployment.target === undefined ||
-       typeof deployment.target === 'string');
+       typeof deployment.target === 'string') &&
+      (deployment.labels !== undefined &&
+       deployment.labels.language !== undefined &&
+       typeof deployment.labels.language === 'string');
 }
 
 /**
@@ -237,7 +240,8 @@ export class Profiler extends ServiceObject {
       tag: pjson.name
     });
 
-    const labels: {zone?: string, version?: string} = {};
+    const labels: {zone?: string,
+                   version?: string, language: string} = {language: 'nodejs'};
     if (this.config.zone) {
       labels.zone = this.config.zone;
     }
