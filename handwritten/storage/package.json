@@ -58,7 +58,7 @@
     "test-no-cover": "repo-tools test run --cmd mocha -- test/",
     "test": "repo-tools test run --cmd npm -- run cover",
     "samples-test": "npm link && cd samples/ && npm link @google-cloud/storage && npm test && cd ../",
-    "system-test": "repo-tools test run --cmd mocha -- system-test/ --timeout 20000",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/ --timeout 600000",
     "all-test": "npm test && npm run system-test && npm run samples-test",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json"
   },
