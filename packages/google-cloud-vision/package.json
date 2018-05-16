@@ -53,7 +53,7 @@
     "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/",
     "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --no-timeouts",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --timeout 600000",
     "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
     "test": "repo-tools test run --cmd npm -- run cover"
   },
