@@ -19,6 +19,15 @@
 
 using namespace v8;
 
+#if NODE_MODULE_VERSION > NODE_8_0_MODULE_VERSION
+// This profiler exists for the lifetime of the program. Not calling 
+// CpuProfiler::Dispose() is intentional.
+CpuProfiler* cpuProfiler = CpuProfiler::New(v8::Isolate::GetCurrent());
+#else
+CpuProfiler* cpuProfiler = v8::Isolate::GetCurrent()->GetCpuProfiler();
+#endif
+
+
 Local<Value> TranslateTimeProfileNode(const CpuProfileNode* node) {
   Local<Object> js_node = Nan::New<Object>();
   js_node->Set(Nan::New<String>("name").ToLocalChecked(),
@@ -61,13 +70,13 @@ NAN_METHOD(StartProfiling) {
 
   // Sample counts and timestamps are not used, so we do not need to record
   // samples.
-  info.GetIsolate()->GetCpuProfiler()->StartProfiling(name, false);
+  cpuProfiler->StartProfiling(name, false);
 }
 
 NAN_METHOD(StopProfiling) {
   Local<String> name = info[0].As<String>();
   CpuProfile* profile =
-    info.GetIsolate()->GetCpuProfiler()->StopProfiling(name);
+    cpuProfiler->StopProfiling(name);
   Local<Value> translated_profile = TranslateTimeProfile(profile);
   profile->Delete();
   info.GetReturnValue().Set(translated_profile);
@@ -75,12 +84,12 @@ NAN_METHOD(StopProfiling) {
 
 NAN_METHOD(SetSamplingInterval) {
   int us = info[0].As<Integer>()->IntegerValue();
-  info.GetIsolate()->GetCpuProfiler()->SetSamplingInterval(us);
+  cpuProfiler->SetSamplingInterval(us);
 }
 
 NAN_METHOD(SetIdle) {
   bool is_idle = info[0].As<Boolean>()->BooleanValue();
-  info.GetIsolate()->GetCpuProfiler()->SetIdle(is_idle);
+  cpuProfiler->SetIdle(is_idle);
 }
 
 NAN_MODULE_INIT(InitAll) {
