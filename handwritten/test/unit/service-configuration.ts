@@ -18,7 +18,6 @@ import assert from 'assert';
 import * as is from 'is';
 const isString = is.string;
 const isNumber = is.number;
-import forEach = require('lodash.foreach');
 import assign = require('lodash.assign');
 import omitBy = require('lodash.omitby');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
@@ -35,7 +34,7 @@ const serviceConfigEnv = {
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
 };
 function sterilizeServiceConfigEnv() {
-  forEach(serviceConfigEnv, (val, key) => {
+  Object.keys(serviceConfigEnv).forEach(key => {
     delete process.env[key];
   });
 }
