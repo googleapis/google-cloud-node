@@ -16,7 +16,7 @@
 // jscs:disable
 // jshint ignore: start
 
-import * as assert from 'assert';
+import assert from 'assert';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 

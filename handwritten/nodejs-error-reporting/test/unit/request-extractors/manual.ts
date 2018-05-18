@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
-import * as extend from 'extend';
+import assert from 'assert';
+import extend from 'extend';
 import omit = require('lodash.omit');
 
 import {manualRequestInformationExtractor} from '../../../src/request-extractors/manual';

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import * as is from 'is';
-import * as nock from 'nock';
+import nock from 'nock';
 
 import {ErrorMessage} from '../src/classes/error-message';
 import {RequestHandler} from '../src/google-apis/auth-client';

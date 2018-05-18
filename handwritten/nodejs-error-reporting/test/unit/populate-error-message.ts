@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 
 import {ErrorMessage} from '../../src/classes/error-message';
 import {populateErrorMessage} from '../../src/populate-error-message';
