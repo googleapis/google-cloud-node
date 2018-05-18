@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import * as path from 'path';
 import {buildStackTrace} from '../../src/build-stack-trace';
 

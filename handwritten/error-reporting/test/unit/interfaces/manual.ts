@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import * as manual from '../../../src/interfaces/manual';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 const config = new Configuration({});

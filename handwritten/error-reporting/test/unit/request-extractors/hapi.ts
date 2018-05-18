@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import * as hapi from 'hapi';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';

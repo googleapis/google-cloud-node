@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
-import * as proxyquire from 'proxyquire';
+import assert from 'assert';
+import proxyquire from 'proxyquire';
 
 import {Configuration, ConfigurationOptions} from '../../../src/configuration';
 import {Logger} from '../../../src/types';
