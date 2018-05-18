@@ -28,7 +28,6 @@ import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport
 const isObject = is.object;
 const isString = is.string;
 const isEmpty = is.empty;
-import forEach = require('lodash.foreach');
 import assign = require('lodash.assign');
 import pick = require('lodash.pick');
 import omitBy = require('lodash.omitby');
@@ -63,7 +62,7 @@ class InstancedEnv {
   }
 
   sterilizeProcess() {
-    forEach(envKeys, (v, k) => delete process.env[k]);
+    envKeys.forEach(key => delete process.env[key]);
     return this;
   }
 

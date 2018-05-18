@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// jscs:disable requireEarlyReturn
 
 import * as is from 'is';
-// TODO: Address the error where `is` does not have a `fn` property
-const isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = is.fn;
 const isObject = is.object;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as express from 'express';

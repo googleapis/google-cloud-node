@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// jscs:disable requireEarlyReturn
 
-import has = require('lodash.has');
-import * as is from 'is';
+import is from 'is';
+import has from 'lodash.has';
+
 const isObject = is.object;
 const isFunction = is.function;
 const isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
-import * as hapi from 'hapi';
+import hapi from 'hapi';
 
 /**
  * This function is used to check for a pending status code on the response
