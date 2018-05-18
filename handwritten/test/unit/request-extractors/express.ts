@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import {Response} from 'express-serve-static-core';
-import * as extend from 'extend';
+import extend from 'extend';
 
 import {expressRequestInformationExtractor} from '../../../src/request-extractors/express';
 import {Fuzzer} from '../../../utils/fuzzer';

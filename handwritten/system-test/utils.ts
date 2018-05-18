@@ -18,9 +18,9 @@ import {ChildProcess, fork, ForkOptions, spawn, SpawnOptions} from 'child_proces
 import {mkdir, readFile, stat, Stats, writeFile} from 'fs';
 import * as glob from 'glob';
 import {ncp} from 'ncp';
-import * as once from 'once';
+import once from 'once';
 import * as path from 'path';
-import * as pify from 'pify';
+import pify from 'pify';
 import * as rimraf from 'rimraf';
 import * as tmp from 'tmp';
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import {SpawnOptions} from 'child_process';
 import * as path from 'path';
 
