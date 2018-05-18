@@ -18,7 +18,7 @@ import has = require('lodash.has');
 import * as is from 'is';
 const isFunction = (is as {} as {fn: Function}).fn;
 const isObject = is.object;
-import * as assert from 'assert';
+import assert from 'assert';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';

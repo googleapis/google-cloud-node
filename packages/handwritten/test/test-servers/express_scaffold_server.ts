@@ -18,7 +18,7 @@
 const WARNING_HEADER = '\n!! -WARNING-';
 const EXCLAMATION_LN = '\n!!';
 import has = require('lodash.has');
-import * as express from 'express';
+import express from 'express';
 const app = express();
 const errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report',

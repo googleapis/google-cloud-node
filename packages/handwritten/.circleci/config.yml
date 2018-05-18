@@ -105,7 +105,7 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run unit tests.
-          command: npm test
+          command: npm run test-only
   node6:
     docker:
       - image: 'node:6'
@@ -133,21 +133,9 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run: *npm_install_and_link
-      - run: &samples_npm_install_and_link
-          name: Link the module being tested to the samples.
-          command: |
-            cd samples/
-            npm link @google-cloud/error-reporting
-            npm install
-            cd ..
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
-          name: Run linting.
-          command: npm run lint
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run: npm install
+      - run: cd samples && npm install && cd ../
+      - run: npm run lint
   docs:
     docker:
       - image: 'node:8'
@@ -173,7 +161,15 @@ jobs:
                 -out .circleci/key.json \
                 -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
       - run: *npm_install_and_link
-      - run: *samples_npm_install_and_link
+      - run: &samples_npm_install_and_link
+          name: Link the module being tested to the samples.
+          command: |
+            cd samples/
+            npm install
+            npm link @google-cloud/error-reporting
+            cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run sample tests.
           command: npm run samples-test
