@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*jshint unused:false*/
 
 import * as types from '../types';
 export const common: types.Common = require('@google-cloud/common');
