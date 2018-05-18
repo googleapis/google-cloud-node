@@ -61,17 +61,12 @@ export class ErrorsApiTransport extends AuthClient {
       }
 
       const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
-      self.request_(
-          options,
-          (err,
-           /* jshint unused:false */ response,
-           /* jshint unused:false */ body) => {
-            if (err) {
-              return cb(err);
-            }
-
-            cb(null);
-          });
+      self.request_(options, (err, response, body) => {
+        if (err) {
+          return cb(err);
+        }
+        cb(null);
+      });
     });
   }
 

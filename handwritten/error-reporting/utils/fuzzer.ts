@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// jscs:disable
-// jshint ignore: start
 
-import indexOf = require('lodash.indexof');
 import without = require('lodash.without');
 import maxBy = require('lodash.maxby');
 import random = require('lodash.random');
@@ -102,7 +99,7 @@ export class Fuzzer {
         allowedDepth?: number) {
       const lenChecked = (isNumber(len) ? len : random(1, 10))!;
       let availableTypes =
-          (isString(ofOneType) && indexOf(this.types(), ofOneType) > -1 ?
+          (isString(ofOneType) && this.types().indexOf(ofOneType!) > -1 ?
                [ofOneType] :
                this.types())!;
       let currentDepthChecked = (isNumber(currentDepth) ? currentDepth : 0)!;

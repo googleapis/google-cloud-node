@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// jscs:disable
-// jshint ignore: start
 
 import assert from 'assert';
 import {ErrorMessage} from '../../../src/classes/error-message';
