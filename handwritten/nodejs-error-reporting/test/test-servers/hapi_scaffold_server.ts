@@ -14,25 +14,17 @@
  * limitations under the License.
  */
 
-import * as hapi from 'hapi';
+import Hapi from 'hapi';
 import {ErrorReporting} from '../../src/index';
 const errorHandler = new ErrorReporting();
 
-const server = new hapi.Server();
-server.connection({port: 3000});
+const server = new Hapi.Server({port: 3000});
 
 // eslint-disable-next-line no-console
 const log = console.log;
 
 // eslint-disable-next-line no-console
 const error = console.error;
-
-server.start(err => {
-  if (err) {
-    throw err;
-  }
-  log('Server running at', server.info!.uri);
-});
 
 server.route({
   method: 'GET',
@@ -52,9 +44,10 @@ server.route({
   },
 });
 
-server.register(
-    {register: errorHandler.hapi} as {} as hapi.PluginFunction<{}>, err => {
-      if (err) {
-        error('There was an error in registering the plugin', err);
-      }
-    });
+server.register({plugin: errorHandler.hapi}).then(() => {
+  log('Plugin registered.');
+});
+
+server.start().then(() => {
+  log('Server running at', server.info!.uri);
+});

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import * as is from 'is';
+import boom from 'boom';
+import is from 'is';
+
 const isObject = is.object;
-// TODO: Address the error where `is` does not have a `fn` property
-const isFunction = (is as {} as {fn: Function}).fn;
+const isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
 import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
 import {populateErrorMessage} from '../populate-error-message';
@@ -25,7 +26,7 @@ const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
 import {Configuration} from '../configuration';
-import * as hapi from 'hapi';
+import hapi from 'hapi';
 
 /**
  * The Hapi error handler function serves simply to create an error message
@@ -109,9 +110,10 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
         if (isFunction(server.ext)) {
           server.ext(
               'onPreResponse',
-              (request: hapi.Request, reply: hapi.ReplyWithContinue) => {
+              (request: hapi.Request,
+               reply: any) => {  // tslint:disable-line:no-any
                 if (isObject(request) && request.response &&
-                    request.response.isBoom) {
+                    (request.response as boom).isBoom) {
                   // Cast to {} is necessary, as@types/hapi@16 incorrectly types
                   // response as 'Response | null' instead of 'Response | Boom |
                   // null'.
