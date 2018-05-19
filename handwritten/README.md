@@ -68,9 +68,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
   // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
-  // Node 4+
-  // const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
-
   // Using ES6 style imports via TypeScript or Babel
   // import {ErrorReporting} from '@google-cloud/error-reporting';
 

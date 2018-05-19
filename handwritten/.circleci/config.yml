@@ -3,10 +3,6 @@ workflows:
   version: 2
   tests:
     jobs: &workflow_jobs
-      - node4:
-          filters:
-            tags:
-              only: /.*/
       - node6:
           filters:
             tags:
@@ -25,7 +21,6 @@ workflows:
               only: /.*/
       - lint:
           requires:
-            - node4
             - node6
             - node8
             - node9
@@ -35,7 +30,6 @@ workflows:
               only: /.*/
       - docs:
           requires:
-            - node4
             - node6
             - node8
             - node9
@@ -79,9 +73,9 @@ workflows:
               only: master
     jobs: *workflow_jobs
 jobs:
-  node4:
+  node6:
     docker:
-      - image: 'node:4'
+      - image: 'node:6'
         user: node
     steps: &unit_tests_steps
       - checkout
@@ -106,11 +100,6 @@ jobs:
       - run:
           name: Run unit tests.
           command: npm run test-only
-  node6:
-    docker:
-      - image: 'node:6'
-        user: node
-    steps: *unit_tests_steps
   node8:
     docker:
       - image: 'node:8'
