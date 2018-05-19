@@ -15,7 +15,7 @@
  */
 
 import assert from 'assert';
-import * as hapi from 'hapi';
+import hapi from 'hapi';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';
