@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import boom from 'boom';
 import is from 'is';
 import has from 'lodash.has';
 
@@ -33,17 +34,15 @@ import hapi from 'hapi';
  *  extractable status code.
  */
 function attemptToExtractStatusCode(req: hapi.Request) {
-  // TODO: Handle the cases where `req.response` and `req.response.output`
-  //       are `null` in this function
-  if (has(req, 'response') && isObject(req.response) &&
-      has(req.response, 'statusCode')) {
-    return req.response!.statusCode;
-  } else if (
-      has(req, 'response') && isObject(req.response) &&
-      isObject(req.response!.output)) {
-    return req.response!.output!.statusCode;
+  // TODO: Handle the cases where `req.response` and `req.response.output` are
+  // `null` in this function
+  if (has(req, 'response') && is.object(req.response)) {
+    if (has(req.response, 'statusCode')) {
+      return (req.response as hapi.ResponseObject).statusCode;
+    } else if (is.object((req.response as boom).output)) {
+      return (req.response as boom).output.statusCode;
+    }
   }
-
   return 0;
 }
 
@@ -61,7 +60,7 @@ function attemptToExtractStatusCode(req: hapi.Request) {
 function extractRemoteAddressFromRequest(req: hapi.Request) {
   if (has(req.headers, 'x-forwarded-for')) {
     return req.headers['x-forwarded-for'];
-  } else if (isObject(req.info)) {
+  } else if (is.object(req.info)) {
     return req.info.remoteAddress;
   }
 
@@ -80,19 +79,19 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
 export function hapiRequestInformationExtractor(req?: hapi.Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isObject(req!.headers) || isFunction(req) ||
-      isArray(req)) {
-    return returnObject;
-  }
+  if (!is.object(req) || !is.object(req!.headers) || is.function(req) ||
+      is.array(req)) {
+        return returnObject;
+      }
 
-  returnObject
-      .setMethod(req!.method)
-      // TODO: Address the type conflict that requires a cast to string
-      .setUrl(req!.url as {} as string)
-      .setUserAgent(req!.headers['user-agent'])
-      .setReferrer(req!.headers.referrer)
-      .setStatusCode(attemptToExtractStatusCode(req!))
-      .setRemoteAddress(extractRemoteAddressFromRequest(req!));
+      returnObject
+          .setMethod(req!.method)
+          // TODO: Address the type conflict that requires a cast to string
+          .setUrl(req!.url as {} as string)
+          .setUserAgent(req!.headers['user-agent'])
+          .setReferrer(req!.headers.referrer)
+          .setStatusCode(attemptToExtractStatusCode(req!))
+          .setRemoteAddress(extractRemoteAddressFromRequest(req!));
 
-  return returnObject;
+      return returnObject;
 }

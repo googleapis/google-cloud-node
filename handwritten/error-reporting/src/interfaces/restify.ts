@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as is from 'is';
+import is from 'is';
 const isObject = is.object;
 const isFunction = is.function;
 import {ErrorMessage} from '../classes/error-message';
