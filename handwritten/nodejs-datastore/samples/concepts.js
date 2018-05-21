@@ -61,36 +61,36 @@ class Entity extends TestHelper {
   }
 
   getIncompleteKey() {
-    // [START incomplete_key]
+    // [START datastore_incomplete_key]
     const taskKey = datastore.key('Task');
-    // [END incomplete_key]
+    // [END datastore_incomplete_key]
 
     return taskKey;
   }
 
   getNamedKey() {
-    // [START named_key]
+    // [START datastore_named_key]
     const taskKey = datastore.key(['Task', 'sampleTask']);
-    // [END named_key]
+    // [END datastore_named_key]
 
     return taskKey;
   }
 
   getKeyWithParent() {
-    // [START key_with_parent]
+    // [START datastore_key_with_parent]
     const taskKey = datastore.key([
       'TaskList',
       'default',
       'Task',
       'sampleTask',
     ]);
-    // [END key_with_parent]
+    // [END datastore_key_with_parent]
 
     return taskKey;
   }
 
   getKeyWithMultiLevelParent() {
-    // [START key_with_multilevel_parent]
+    // [START datastore_key_with_multilevel_parent]
     const taskKey = datastore.key([
       'User',
       'alice',
@@ -99,20 +99,20 @@ class Entity extends TestHelper {
       'Task',
       'sampleTask',
     ]);
-    // [END key_with_multilevel_parent]
+    // [END datastore_key_with_multilevel_parent]
 
     return taskKey;
   }
 
   getTask() {
-    // [START basic_entity]
+    // [START datastore_basic_entity]
     const task = {
       category: 'Personal',
       done: false,
       priority: 4,
       description: 'Learn Cloud Datastore',
     };
-    // [END basic_entity]
+    // [END datastore_basic_entity]
 
     return task;
   }
@@ -153,7 +153,7 @@ class Entity extends TestHelper {
     t.plan(0);
     const taskKey = this.keyWithParent;
 
-    // [START entity_with_parent]
+    // [START datastore_entity_with_parent]
     const task = {
       key: taskKey,
       data: {
@@ -163,13 +163,13 @@ class Entity extends TestHelper {
         description: 'Learn Cloud Datastore',
       },
     };
-    // [END entity_with_parent]
+    // [END datastore_entity_with_parent]
 
     return this.datastore.save(task);
   }
 
   testProperties() {
-    // [START properties]
+    // [START datastore_properties]
     const task = [
       {
         name: 'category',
@@ -197,7 +197,7 @@ class Entity extends TestHelper {
         excludeFromIndexes: true,
       },
     ];
-    // [END properties]
+    // [END datastore_properties]
 
     return this.datastore.save({
       key: this.incompleteKey,
@@ -207,12 +207,12 @@ class Entity extends TestHelper {
 
   testArrayValue(t) {
     t.plan(0);
-    // [START array_value]
+    // [START datastore_array_value]
     const task = {
       tags: ['fun', 'programming'],
       collaborators: ['alice', 'bob'],
     };
-    // [END array_value]
+    // [END datastore_array_value]
 
     return this.datastore.save({
       key: this.incompleteKey,
@@ -233,7 +233,7 @@ class Entity extends TestHelper {
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
-    // [START upsert]
+    // [START datastore_upsert]
     const entity = {
       key: taskKey,
       data: task,
@@ -242,7 +242,7 @@ class Entity extends TestHelper {
     datastore.upsert(entity).then(() => {
       // Task inserted successfully.
     });
-    // [END upsert]
+    // [END datastore_upsert]
 
     return this.datastore.upsert({
       key: this.datastore.key(['Task', 1]),
@@ -255,7 +255,7 @@ class Entity extends TestHelper {
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
-    // [START insert]
+    // [START datastore_insert]
     const entity = {
       key: taskKey,
       data: task,
@@ -264,7 +264,7 @@ class Entity extends TestHelper {
     datastore.insert(entity).then(() => {
       // Task inserted successfully.
     });
-    // [END insert]
+    // [END datastore_insert]
 
     return this.datastore.save({
       method: 'insert',
@@ -277,7 +277,7 @@ class Entity extends TestHelper {
     t.plan(0);
     const taskKey = this.getIncompleteKey();
 
-    // [START lookup]
+    // [START datastore_lookup]
     datastore.get(taskKey).then(results => {
       // Task found.
       const entity = results[0];
@@ -290,7 +290,7 @@ class Entity extends TestHelper {
       // };
       console.log(entity);
     });
-    // [END lookup]
+    // [END datastore_lookup]
 
     return this.datastore
       .save({
@@ -306,7 +306,7 @@ class Entity extends TestHelper {
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
-    // [START update]
+    // [START datastore_update]
     const entity = {
       key: taskKey,
       data: task,
@@ -315,7 +315,7 @@ class Entity extends TestHelper {
     datastore.update(entity).then(() => {
       // Task updated successfully.
     });
-    // [END update]
+    // [END datastore_update]
 
     return this.datastore
       .save({
@@ -330,11 +330,11 @@ class Entity extends TestHelper {
     t.plan(0);
     const taskKey = this.getIncompleteKey();
 
-    // [START delete]
+    // [START datastore_delete]
     datastore.delete(taskKey).then(() => {
       // Task deleted successfully.
     });
-    // [END delete]
+    // [END datastore_delete]
 
     return this.datastore
       .save({
@@ -363,7 +363,7 @@ class Entity extends TestHelper {
       description: 'Integrate Cloud Datastore',
     };
 
-    // [START batch_upsert]
+    // [START datastore_batch_upsert]
     const entities = [
       {
         key: taskKey1,
@@ -378,7 +378,7 @@ class Entity extends TestHelper {
     datastore.upsert(entities).then(() => {
       // Tasks inserted successfully.
     });
-    // [END batch_upsert]
+    // [END datastore_batch_upsert]
 
     return this.datastore.upsert([
       {
@@ -397,7 +397,7 @@ class Entity extends TestHelper {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
-    // [START batch_lookup]
+    // [START datastore_batch_lookup]
     const keys = [taskKey1, taskKey2];
 
     datastore.get(keys).then(results => {
@@ -406,7 +406,7 @@ class Entity extends TestHelper {
 
       console.log(tasks);
     });
-    // [END batch_lookup]
+    // [END datastore_batch_lookup]
 
     return this.datastore.get([taskKey1, taskKey2]);
   }
@@ -416,13 +416,13 @@ class Entity extends TestHelper {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
-    // [START batch_delete]
+    // [START datastore_batch_delete]
     const keys = [taskKey1, taskKey2];
 
     datastore.delete(keys).then(() => {
       // Tasks deleted successfully.
     });
-    // [END batch_delete]
+    // [END datastore_batch_delete]
 
     return this.datastore.delete([taskKey1, taskKey2]);
   }
@@ -433,11 +433,11 @@ class Index extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START unindexed_property_query]
+    // [START datastore_unindexed_property_query]
     const query = datastore
       .createQuery('Task')
       .filter('description', '=', 'A task description.');
-    // [END unindexed_property_query]
+    // [END datastore_unindexed_property_query]
 
     return this.datastore.runQuery(query);
   }
@@ -446,7 +446,7 @@ class Index extends TestHelper {
     const original = datastore.key;
     datastore.key = this.datastore.key;
 
-    // [START exploding_properties]
+    // [START datastore_exploding_properties]
     const task = {
       method: 'insert',
       key: datastore.key('Task'),
@@ -456,7 +456,7 @@ class Index extends TestHelper {
         created: new Date(),
       },
     };
-    // [END exploding_properties]
+    // [END datastore_exploding_properties]
 
     datastore.key = original;
 
@@ -483,7 +483,7 @@ class Metadata extends TestHelper {
         data: {},
       })
       .then(() => {
-        // [START namespace_run_query]
+        // [START datastore_namespace_run_query]
         function runNamespaceQuery(startNamespace, endNamespace) {
           const startKey = datastore.key(['__namespace__', startNamespace]);
           const endKey = datastore.key(['__namespace__', endNamespace]);
@@ -506,7 +506,7 @@ class Metadata extends TestHelper {
             return namespaces;
           });
         }
-        // [END namespace_run_query]
+        // [END datastore_namespace_run_query]
 
         return runNamespaceQuery(startNamespace, endNamespace);
       })
@@ -518,7 +518,7 @@ class Metadata extends TestHelper {
   testKindRunQuery(t) {
     const datastore = this.datastore;
 
-    // [START kind_run_query]
+    // [START datastore_kind_run_query]
     function runKindQuery() {
       const query = datastore.createQuery('__kind__').select('__key__');
 
@@ -532,7 +532,7 @@ class Metadata extends TestHelper {
         return kinds;
       });
     }
-    // [END kind_run_query]
+    // [END datastore_kind_run_query]
 
     return runKindQuery().then(kinds => {
       t.true(kinds.includes('Account'));
@@ -542,7 +542,7 @@ class Metadata extends TestHelper {
   testPropertyRunQuery(t) {
     const datastore = this.datastore;
 
-    // [START property_run_query]
+    // [START datastore_property_run_query]
     function runPropertyQuery() {
       const query = datastore.createQuery('__property__').select('__key__');
 
@@ -567,7 +567,7 @@ class Metadata extends TestHelper {
         return propertiesByKind;
       });
     }
-    // [END property_run_query]
+    // [END datastore_property_run_query]
 
     return runPropertyQuery().then(propertiesByKind => {
       t.deepEqual(propertiesByKind.Account, ['balance']);
@@ -577,7 +577,7 @@ class Metadata extends TestHelper {
   testPropertyByKindRunQuery(t) {
     const datastore = this.datastore;
 
-    // [START property_by_kind_run_query]
+    // [START datastore_property_by_kind_run_query]
     function runPropertyByKindQuery() {
       const ancestorKey = datastore.key(['__kind__', 'Account']);
 
@@ -606,7 +606,7 @@ class Metadata extends TestHelper {
         return representationsByProperty;
       });
     }
-    // [END property_by_kind_run_query]
+    // [END datastore_property_by_kind_run_query]
 
     return runPropertyByKindQuery().then(propertiesByKind => {
       t.deepEqual(propertiesByKind, {
@@ -628,7 +628,7 @@ class Query extends TestHelper {
   getBasicQuery() {
     const datastore = this.datastore;
 
-    // [START basic_query]
+    // [START datastore_basic_query]
     const query = datastore
       .createQuery('Task')
       .filter('done', '=', false)
@@ -636,7 +636,7 @@ class Query extends TestHelper {
       .order('priority', {
         descending: true,
       });
-    // [END basic_query]
+    // [END datastore_basic_query]
 
     return query;
   }
@@ -644,11 +644,11 @@ class Query extends TestHelper {
   getProjectionQuery() {
     const datastore = this.datastore;
 
-    // [START projection_query]
+    // [START datastore_projection_query]
     const query = datastore
       .createQuery('Task')
       .select(['priority', 'percent_complete']);
-    // [END projection_query]
+    // [END datastore_projection_query]
 
     return query;
   }
@@ -656,11 +656,11 @@ class Query extends TestHelper {
   getAncestorQuery() {
     const datastore = this.datastore;
 
-    // [START ancestor_query]
+    // [START datastore_ancestor_query]
     const ancestorKey = datastore.key(['TaskList', 'default']);
 
     const query = datastore.createQuery('Task').hasAncestor(ancestorKey);
-    // [END ancestor_query]
+    // [END datastore_ancestor_query]
 
     return query;
   }
@@ -669,7 +669,7 @@ class Query extends TestHelper {
     t.plan(0);
     const query = this.basicQuery;
 
-    // [START run_query]
+    // [START datastore_run_query]
     datastore.runQuery(query).then(results => {
       // Task entities found.
       const tasks = results[0];
@@ -677,7 +677,7 @@ class Query extends TestHelper {
       console.log('Tasks:');
       tasks.forEach(task => console.log(task));
     });
-    // [END run_query]
+    // [END datastore_run_query]
 
     return this.datastore.runQuery(query);
   }
@@ -686,9 +686,9 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START property_filter]
+    // [START datastore_property_filter]
     const query = datastore.createQuery('Task').filter('done', '=', false);
-    // [END property_filter]
+    // [END datastore_property_filter]
 
     return this.datastore.runQuery(query);
   }
@@ -697,12 +697,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START composite_filter]
+    // [START datastore_composite_filter]
     const query = datastore
       .createQuery('Task')
       .filter('done', '=', false)
       .filter('priority', '=', 4);
-    // [END composite_filter]
+    // [END datastore_composite_filter]
 
     return this.datastore.runQuery(query);
   }
@@ -711,11 +711,11 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START key_filter]
+    // [START datastore_key_filter]
     const query = datastore
       .createQuery('Task')
       .filter('__key__', '>', datastore.key(['Task', 'someTask']));
-    // [END key_filter]
+    // [END datastore_key_filter]
 
     return this.datastore.runQuery(query);
   }
@@ -724,9 +724,9 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START ascending_sort]
+    // [START datastore_ascending_sort]
     const query = datastore.createQuery('Task').order('created');
-    // [END ascending_sort]
+    // [END datastore_ascending_sort]
 
     return this.datastore.runQuery(query);
   }
@@ -735,11 +735,11 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START descending_sort]
+    // [START datastore_descending_sort]
     const query = datastore.createQuery('Task').order('created', {
       descending: true,
     });
-    // [END descending_sort]
+    // [END datastore_descending_sort]
 
     return this.datastore.runQuery(query);
   }
@@ -748,14 +748,14 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START multi_sort]
+    // [START datastore_multi_sort]
     const query = datastore
       .createQuery('Task')
       .order('priority', {
         descending: true,
       })
       .order('created');
-    // [END multi_sort]
+    // [END datastore_multi_sort]
 
     return this.datastore.runQuery(query);
   }
@@ -765,12 +765,12 @@ class Query extends TestHelper {
     const datastore = this.datastore;
     const lastSeenKey = this.datastore.key(['Task', Date.now()]);
 
-    // [START kindless_query]
+    // [START datastore_kindless_query]
     const query = datastore
       .createQuery()
       .filter('__key__', '>', lastSeenKey)
       .limit(1);
-    // [END kindless_query]
+    // [END datastore_kindless_query]
 
     return this.datastore.runQuery(query);
   }
@@ -779,7 +779,7 @@ class Query extends TestHelper {
     const datastore = this.datastore;
     const query = this.projectionQuery;
 
-    // [START run_query_projection]
+    // [START datastore_run_query_projection]
     function runProjectionQuery() {
       const priorities = [];
       const percentCompletes = [];
@@ -798,7 +798,7 @@ class Query extends TestHelper {
         };
       });
     }
-    // [END run_query_projection]
+    // [END datastore_run_query_projection]
 
     return runProjectionQuery();
   }
@@ -807,12 +807,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START keys_only_query]
+    // [START datastore_keys_only_query]
     const query = datastore
       .createQuery()
       .select('__key__')
       .limit(1);
-    // [END keys_only_query]
+    // [END datastore_keys_only_query]
 
     return this.datastore.runQuery(query);
   }
@@ -821,13 +821,13 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START distinct_query]
+    // [START datastore_distinct_query]
     const query = datastore
       .createQuery('Task')
       .groupBy(['category', 'priority'])
       .order('category')
       .order('priority');
-    // [END distinct_query]
+    // [END datastore_distinct_query]
 
     return this.datastore.runQuery(query);
   }
@@ -836,13 +836,13 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START distinct_on_query]
+    // [START datastore_distinct_on_query]
     const query = datastore
       .createQuery('Task')
       .groupBy('category')
       .order('category')
       .order('priority');
-    // [END distinct_on_query]
+    // [END datastore_distinct_on_query]
 
     return this.datastore.runQuery(query);
   }
@@ -851,12 +851,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START array_value_inequality_range]
+    // [START datastore_array_value_inequality_range]
     const query = datastore
       .createQuery('Task')
       .filter('tag', '>', 'learn')
       .filter('tag', '<', 'math');
-    // [END array_value_inequality_range]
+    // [END datastore_array_value_inequality_range]
 
     return this.datastore.runQuery(query);
   }
@@ -865,12 +865,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START array_value_equality]
+    // [START datastore_array_value_equality]
     const query = datastore
       .createQuery('Task')
       .filter('tag', '=', 'fun')
       .filter('tag', '=', 'programming');
-    // [END array_value_equality]
+    // [END datastore_array_value_equality]
 
     return this.datastore.runQuery(query);
   }
@@ -879,12 +879,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START inequality_range]
+    // [START datastore_inequality_range]
     const query = datastore
       .createQuery('Task')
       .filter('created', '>', new Date('1990-01-01T00:00:00z'))
       .filter('created', '<', new Date('2000-12-31T23:59:59z'));
-    // [END inequality_range]
+    // [END datastore_inequality_range]
 
     return this.datastore.runQuery(query);
   }
@@ -892,12 +892,12 @@ class Query extends TestHelper {
   testInequalityInvalid() {
     const datastore = this.datastore;
 
-    // [START inequality_invalid]
+    // [START datastore_inequality_invalid]
     const query = datastore
       .createQuery('Task')
       .filter('priority', '>', 3)
       .filter('created', '>', new Date('1990-01-01T00:00:00z'));
-    // [END inequality_invalid]
+    // [END datastore_inequality_invalid]
 
     return this.datastore.runQuery(query);
   }
@@ -906,14 +906,14 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START equal_and_inequality_range]
+    // [START datastore_equal_and_inequality_range]
     const query = datastore
       .createQuery('Task')
       .filter('priority', '=', 4)
       .filter('done', '=', false)
       .filter('created', '>', new Date('1990-01-01T00:00:00z'))
       .filter('created', '<', new Date('2000-12-31T23:59:59z'));
-    // [END equal_and_inequality_range]
+    // [END datastore_equal_and_inequality_range]
 
     return this.datastore.runQuery(query);
   }
@@ -922,13 +922,13 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START inequality_sort]
+    // [START datastore_inequality_sort]
     const query = datastore
       .createQuery('Task')
       .filter('priority', '>', 3)
       .order('priority')
       .order('created');
-    // [END inequality_sort]
+    // [END datastore_inequality_sort]
 
     return this.datastore.runQuery(query);
   }
@@ -936,12 +936,12 @@ class Query extends TestHelper {
   testInequalitySortInvalidNotSame() {
     const datastore = this.datastore;
 
-    // [START inequality_sort_invalid_not_same]
+    // [START datastore_inequality_sort_invalid_not_same]
     const query = datastore
       .createQuery('Task')
       .filter('priority', '>', 3)
       .order('created');
-    // [END inequality_sort_invalid_not_same]
+    // [END datastore_inequality_sort_invalid_not_same]
 
     return this.datastore.runQuery(query);
   }
@@ -949,13 +949,13 @@ class Query extends TestHelper {
   testInequalitySortInvalidNotFirst() {
     const datastore = this.datastore;
 
-    // [START inequality_sort_invalid_not_first]
+    // [START datastore_inequality_sort_invalid_not_first]
     const query = datastore
       .createQuery('Task')
       .filter('priority', '>', 3)
       .order('created')
       .order('priority');
-    // [END inequality_sort_invalid_not_first]
+    // [END datastore_inequality_sort_invalid_not_first]
 
     return this.datastore.runQuery(query);
   }
@@ -964,9 +964,9 @@ class Query extends TestHelper {
     t.plan(0);
     const datastore = this.datastore;
 
-    // [START limit]
+    // [START datastore_limit]
     const query = datastore.createQuery('Task').limit(5);
-    // [END limit]
+    // [END datastore_limit]
 
     return this.datastore.runQuery(query);
   }
@@ -975,7 +975,7 @@ class Query extends TestHelper {
     const datastore = this.datastore;
     const pageSize = 1;
 
-    // [START cursor_paging]
+    // [START datastore_cursor_paging]
     // By default, google-cloud-node will automatically paginate through all of
     // the results that match a query. However, this sample implements manual
     // pagination using limits and cursor tokens.
@@ -1004,7 +1004,7 @@ class Query extends TestHelper {
         return [entities, info];
       });
     }
-    // [END cursor_paging]
+    // [END datastore_cursor_paging]
 
     return runPageQuery().then(results => {
       const entities = results[0];
@@ -1020,12 +1020,12 @@ class Query extends TestHelper {
     t.plan(0);
     const datastoreMock = datastore;
     datastore = this.datastore;
-    // [START eventual_consistent_query]
+    // [START datastore_eventual_consistent_query]
     const ancestorKey = datastore.key(['TaskList', 'default']);
     const query = datastore.createQuery('Task').hasAncestor(ancestorKey);
 
     query.run({consistency: 'eventual'});
-    // [END eventual_consistent_query]
+    // [END datastore_eventual_consistent_query]
     return query
       .run({consistency: 'eventual'})
       .then(results => {
@@ -1040,7 +1040,7 @@ class Query extends TestHelper {
   }
 }
 
-// [START transactional_update]
+// [START datastore_transactional_update]
 function transferFunds(fromKey, toKey, amount) {
   const transaction = datastore.transaction();
 
@@ -1068,7 +1068,7 @@ function transferFunds(fromKey, toKey, amount) {
     })
     .catch(() => transaction.rollback());
 }
-// [END transactional_update]
+// [END datastore_transactional_update]
 
 class Transaction extends TestHelper {
   constructor(projectId) {
@@ -1139,7 +1139,7 @@ class Transaction extends TestHelper {
       balance: this.originalBalance,
     })
       .then(() => {
-        // [START transactional_retry]
+        // [START datastore_transactional_retry]
         function transferFundsWithRetry() {
           const maxTries = 5;
           let currentAttempt = 1;
@@ -1163,7 +1163,7 @@ class Transaction extends TestHelper {
 
           return tryRequest(1, 5);
         }
-        // [END transactional_retry]
+        // [END datastore_transactional_retry]
         return transferFundsWithRetry();
       })
       .then(() => {
@@ -1183,7 +1183,7 @@ class Transaction extends TestHelper {
     const datastoreMock = datastore;
     datastore = this.datastore;
 
-    // [START transactional_get_or_create]
+    // [START datastore_transactional_get_or_create]
     function getOrCreate(taskKey, taskData) {
       const taskEntity = {
         key: taskKey,
@@ -1209,7 +1209,7 @@ class Transaction extends TestHelper {
         .then(() => taskEntity)
         .catch(() => transaction.rollback());
     }
-    // [END transactional_get_or_create]
+    // [END datastore_transactional_get_or_create]
 
     return getOrCreate(taskKey, {})
       .then(task => {
@@ -1233,7 +1233,7 @@ class Transaction extends TestHelper {
     const datastoreMock = datastore;
     datastore = this.datastore;
 
-    // [START transactional_single_entity_group_read_only]
+    // [START datastore_transactional_single_entity_group_read_only]
     function getTaskListEntities() {
       let taskList, taskListEntities;
 
@@ -1255,7 +1255,7 @@ class Transaction extends TestHelper {
         .then(() => [taskList, taskListEntities])
         .catch(() => transaction.rollback());
     }
-    // [END transactional_single_entity_group_read_only]
+    // [END datastore_transactional_single_entity_group_read_only]
 
     return getTaskListEntities().then(
       results => {
