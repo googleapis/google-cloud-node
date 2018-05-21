@@ -152,7 +152,9 @@ function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
     .file(fileName, {
       encryptionKey: Buffer.from(oldKey, 'base64'),
     })
-    .rotateEncryptionKey(Buffer.from(newKey, 'base64'))
+    .rotateEncryptionKey({
+      encryptionKey: Buffer.from(newKey, 'base64'),
+    })
     .then(() => {
       console.log(`Encryption key rotated successfully.`);
     })

@@ -201,6 +201,12 @@ describe('File', function() {
       assert.strictEqual(file.name, 'name');
     });
 
+    it('should assign KMS key name', function() {
+      const kmsKeyName = 'kms-key-name';
+      const file = new File(BUCKET, '/name', {kmsKeyName});
+      assert.strictEqual(file.kmsKeyName, kmsKeyName);
+    });
+
     it('should accept specifying a generation', function() {
       const file = new File(BUCKET, 'name', {generation: 2});
       assert.equal(file.generation, 2);
@@ -349,20 +355,12 @@ describe('File', function() {
       file.copy(newFile, options, assert.ifError);
     });
 
-    it('should rotate encryption keys', function(done) {
-      let newEncryptionKeySet = false;
-
+    it('should set correct headers when file is encrypted', function(done) {
       file.encryptionKey = {};
       file.encryptionKeyBase64 = 'base64';
       file.encryptionKeyHash = 'hash';
 
       const newFile = new File(BUCKET, 'new-file');
-      newFile.encryptionKey = 'encryptionKey';
-
-      file.setEncryptionKey = function(encryptionKey) {
-        assert.strictEqual(encryptionKey, newFile.encryptionKey);
-        newEncryptionKeySet = true;
-      };
 
       file.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.headers, {
@@ -370,11 +368,87 @@ describe('File', function() {
           'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
           'x-goog-copy-source-encryption-key-sha256': file.encryptionKeyHash,
         });
-        assert.strictEqual(newEncryptionKeySet, true);
         done();
       };
 
       file.copy(newFile, assert.ifError);
+    });
+
+    it('should set encryption key on the new File instance', function(done) {
+      const newFile = new File(BUCKET, 'new-file');
+      newFile.encryptionKey = 'encryptionKey';
+
+      file.setEncryptionKey = function(encryptionKey) {
+        assert.strictEqual(encryptionKey, newFile.encryptionKey);
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
+    it('should set destination KMS key name', function(done) {
+      const newFile = new File(BUCKET, 'new-file');
+      newFile.kmsKeyName = 'kms-key-name';
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          newFile.kmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
+    it('should set destination KMS key name from option', function(done) {
+      const newFile = new File(BUCKET, 'new-file');
+      const destinationKmsKeyName = 'destination-kms-key-name';
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          destinationKmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
+        done();
+      };
+
+      file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
+    });
+
+    it('should favor the option over the File KMS name', function(done) {
+      const newFile = new File(BUCKET, 'new-file');
+      newFile.kmsKeyName = 'incorrect-kms-key-name';
+      const destinationKmsKeyName = 'correct-kms-key-name';
+
+      file.request = function(reqOpts) {
+        assert.strictEqual(
+          reqOpts.qs.destinationKmsKeyName,
+          destinationKmsKeyName
+        );
+        assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
+        done();
+      };
+
+      file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
+    });
+
+    it('should remove custom encryption interceptor if rotating to KMS', function(done) {
+      const newFile = new File(BUCKET, 'new-file');
+      const destinationKmsKeyName = 'correct-kms-key-name';
+
+      file.encryptionKeyInterceptor = {};
+      file.interceptors = [{}, file.encryptionKeyInterceptor, {}];
+
+      file.request = function() {
+        assert.strictEqual(file.interceptors.length, 2);
+        assert(file.interceptors.indexOf(file.encryptionKeyInterceptor) === -1);
+        done();
+      };
+
+      file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
 
     describe('destination types', function() {
@@ -458,6 +532,27 @@ describe('File', function() {
           file.copy = function(newFile_, options) {
             assert.notStrictEqual(options, fakeOptions);
             assert.strictEqual(options.userProject, fakeOptions.userProject);
+            done();
+          };
+
+          callback(null, apiResponse);
+        };
+
+        file.copy(newFile, fakeOptions, assert.ifError);
+      });
+
+      it('should pass the KMS key name in subsequent requests', function(done) {
+        const newFile = new File(BUCKET, 'new-file');
+        const fakeOptions = {
+          destinationKmsKeyName: 'kms-key-name',
+        };
+
+        file.request = function(reqOpts, callback) {
+          file.copy = function(newFile_, options) {
+            assert.strictEqual(
+              options.destinationKmsKeyName,
+              fakeOptions.destinationKmsKeyName
+            );
             done();
           };
 
@@ -1148,23 +1243,32 @@ describe('File', function() {
           contentType: 'application/json',
         },
         origin: '*',
+        predefinedAcl: 'predefined-acl',
+        private: 'private',
+        public: 'public',
         userProject: 'user-project-id',
       };
 
       file.generation = 3;
+      file.encryptionKey = 'encryption-key';
+      file.kmsKeyName = 'kms-key-name';
 
       resumableUploadOverride = {
         createURI: function(opts, callback) {
           const bucket = file.bucket;
           const storage = bucket.storage;
-          const authClient = storage.makeAuthenticatedRequest.authClient;
 
-          assert.strictEqual(opts.authClient, authClient);
+          assert.strictEqual(opts.authClient, storage.authClient);
           assert.strictEqual(opts.bucket, bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
+          assert.strictEqual(opts.key, file.encryptionKey);
+          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
           assert.strictEqual(opts.metadata, options.metadata);
           assert.strictEqual(opts.origin, options.origin);
+          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
+          assert.strictEqual(opts.private, options.private);
+          assert.strictEqual(opts.public, options.public);
           assert.strictEqual(opts.userProject, options.userProject);
 
           callback();
@@ -2787,15 +2891,44 @@ describe('File', function() {
   });
 
   describe('rotateEncryptionKey', function() {
-    it('should call copy correctly', function(done) {
-      const newEnryptionKey = '...';
-      const newFile = {};
+    it('should create new File correctly', function(done) {
+      const options = {};
+
+      file.bucket.file = function(id, options_) {
+        assert.strictEqual(id, file.id);
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      file.rotateEncryptionKey(options, assert.ifError);
+    });
+
+    it('should default to customer-supplied encryption key', function(done) {
+      const encryptionKey = 'encryption-key';
 
       file.bucket.file = function(id, options) {
-        assert.strictEqual(id, file.id);
-        assert.deepStrictEqual(options, {
-          encryptionKey: newEnryptionKey,
-        });
+        assert.strictEqual(options.encryptionKey, encryptionKey);
+        done();
+      };
+
+      file.rotateEncryptionKey(encryptionKey, assert.ifError);
+    });
+
+    it('should accept a Buffer for customer-supplied encryption key', function(done) {
+      const encryptionKey = crypto.randomBytes(32);
+
+      file.bucket.file = function(id, options) {
+        assert.strictEqual(options.encryptionKey, encryptionKey);
+        done();
+      };
+
+      file.rotateEncryptionKey(encryptionKey, assert.ifError);
+    });
+
+    it('should call copy correctly', function(done) {
+      const newFile = {};
+
+      file.bucket.file = function() {
         return newFile;
       };
 
@@ -2804,7 +2937,7 @@ describe('File', function() {
         callback(); // done()
       };
 
-      file.rotateEncryptionKey(newEnryptionKey, done);
+      file.rotateEncryptionKey({}, done);
     });
   });
 
@@ -3057,13 +3190,22 @@ describe('File', function() {
     });
 
     it('should push the correct request interceptor', function(done) {
-      assert.deepEqual(file.interceptors[0].request({}), {
+      const expectedInterceptor = {
         headers: {
           'x-goog-encryption-algorithm': 'AES256',
           'x-goog-encryption-key': KEY_BASE64,
           'x-goog-encryption-key-sha256': KEY_HASH,
         },
-      });
+      };
+
+      assert.deepStrictEqual(
+        file.interceptors[0].request({}),
+        expectedInterceptor
+      );
+      assert.deepStrictEqual(
+        file.encryptionKeyInterceptor.request({}),
+        expectedInterceptor
+      );
 
       done();
     });
@@ -3084,17 +3226,18 @@ describe('File', function() {
 
         file.generation = 3;
         file.encryptionKey = 'key';
+        file.kmsKeyName = 'kms-key-name';
 
         resumableUploadOverride = function(opts) {
           const bucket = file.bucket;
           const storage = bucket.storage;
-          const authClient = storage.makeAuthenticatedRequest.authClient;
 
-          assert.strictEqual(opts.authClient, authClient);
+          assert.strictEqual(opts.authClient, storage.authClient);
           assert.strictEqual(opts.bucket, bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.key, file.encryptionKey);
+          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
           assert.strictEqual(opts.metadata, options.metadata);
           assert.strictEqual(opts.offset, options.offset);
           assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
@@ -3244,6 +3387,17 @@ describe('File', function() {
       };
 
       versionedFile.startSimpleUpload_(duplexify(), {});
+    });
+
+    it('should send query.kmsKeyName if File has one', function(done) {
+      file.kmsKeyName = 'kms-key-name';
+
+      makeWritableStreamOverride = function(stream, options) {
+        assert.strictEqual(options.request.qs.kmsKeyName, file.kmsKeyName);
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), {});
     });
 
     it('should send userProject if set', function(done) {

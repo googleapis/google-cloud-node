@@ -1790,6 +1790,342 @@ describe('storage', function() {
       });
     });
 
+    describe('kms keys', function() {
+      const FILE_CONTENTS = 'secret data';
+
+      const BUCKET_LOCATION = 'us';
+      let PROJECT_ID;
+      let SERVICE_ACCOUNT_EMAIL;
+
+      const keyRingId = generateName();
+      const cryptoKeyId = generateName();
+
+      let bucket;
+      let kmsKeyName;
+      let keyRingsBaseUrl;
+
+      function setProjectId(projectId) {
+        PROJECT_ID = projectId;
+        keyRingsBaseUrl = `https://cloudkms.googleapis.com/v1/projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings`;
+        kmsKeyName = generateKmsKeyName(cryptoKeyId);
+      }
+
+      function generateKmsKeyName(cryptoKeyId) {
+        return `projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings/${keyRingId}/cryptoKeys/${cryptoKeyId}`;
+      }
+
+      function createCryptoKey(cryptoKeyId, callback) {
+        async.series(
+          [
+            function createCryptoKeyId(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys`,
+                  qs: {cryptoKeyId},
+                  json: {purpose: 'ENCRYPT_DECRYPT'},
+                },
+                next
+              );
+            },
+
+            function getServiceAccountEmail(next) {
+              if (SERVICE_ACCOUNT_EMAIL) {
+                setImmediate(next);
+                return;
+              }
+
+              storage.request(
+                {
+                  uri:
+                    'https://www.googleapis.com/storage/v1/projects/{{projectId}}/serviceAccount',
+                },
+                function(err, resp) {
+                  if (err) {
+                    next(err);
+                    return;
+                  }
+
+                  SERVICE_ACCOUNT_EMAIL = resp.email_address;
+
+                  next();
+                }
+              );
+            },
+
+            function grantPermissionToServiceAccount(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys/${cryptoKeyId}:setIamPolicy`,
+                  json: {
+                    policy: {
+                      bindings: [
+                        {
+                          role: 'roles/cloudkms.cryptoKeyEncrypterDecrypter',
+                          members: `serviceAccount:${SERVICE_ACCOUNT_EMAIL}`,
+                        },
+                      ],
+                    },
+                  },
+                },
+                next
+              );
+            },
+          ],
+          callback
+        );
+      }
+
+      before(function(done) {
+        bucket = storage.bucket(generateName(), {location: BUCKET_LOCATION});
+
+        async.series(
+          [
+            function getProjectId(next) {
+              storage.authClient.getProjectId(function(err, projectId) {
+                if (err) {
+                  next(err);
+                  return;
+                }
+
+                setProjectId(projectId);
+
+                next();
+              });
+            },
+
+            function createBucket(next) {
+              bucket.create(next);
+            },
+
+            function createKeyRing(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: keyRingsBaseUrl,
+                  qs: {keyRingId},
+                },
+                next
+              );
+            },
+
+            function(next) {
+              createCryptoKey(cryptoKeyId, next);
+            },
+          ],
+          done
+        );
+      });
+
+      describe('files', function() {
+        let file;
+
+        before(function(done) {
+          file = bucket.file('kms-encrypted-file', {kmsKeyName});
+          file.save(FILE_CONTENTS, {resumable: false}, done);
+        });
+
+        it('should have set kmsKeyName on created file', function(done) {
+          file.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+
+            // Strip the project ID, as it could be the placeholder locally, but
+            // the real value upstream.
+            const projectIdRegExp = /^.+\/locations/;
+            const actualKmsKeyName = metadata.kmsKeyName.replace(
+              projectIdRegExp,
+              ''
+            );
+            let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
+
+            // Upstream attaches a version.
+            expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
+
+            assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
+
+            done();
+          });
+        });
+
+        it('should set kmsKeyName on resumable uploaded file', function(done) {
+          const file = bucket.file('resumable-file', {kmsKeyName});
+
+          file.save(FILE_CONTENTS, {resumable: true}, function(err) {
+            assert.ifError(err);
+
+            file.getMetadata(function(err, metadata) {
+              assert.ifError(err);
+
+              // Strip the project ID, as it could be the placeholder locally, but
+              // the real value upstream.
+              const projectIdRegExp = /^.+\/locations/;
+              const actualKmsKeyName = metadata.kmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
+              let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
+
+              // Upstream attaches a version.
+              expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
+
+              assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
+
+              done();
+            });
+          });
+        });
+
+        it('should rotate encryption keys', function(done) {
+          const cryptoKeyId = generateName();
+          const newKmsKeyName = generateKmsKeyName(cryptoKeyId);
+
+          createCryptoKey(cryptoKeyId, function(err) {
+            assert.ifError(err);
+
+            file.rotateEncryptionKey({kmsKeyName: newKmsKeyName}, function(
+              err
+            ) {
+              assert.ifError(err);
+
+              file.download(function(err, contents) {
+                assert.ifError(err);
+                assert.strictEqual(contents.toString(), FILE_CONTENTS);
+                done();
+              });
+            });
+          });
+        });
+
+        it('should convert CSEK to KMS key', function(done) {
+          const encryptionKey = crypto.randomBytes(32);
+
+          const file = bucket.file('encrypted-file', {encryptionKey});
+
+          file.save(FILE_CONTENTS, {resumable: false}, function(err) {
+            assert.ifError(err);
+
+            file.rotateEncryptionKey({kmsKeyName}, function(err) {
+              assert.ifError(err);
+
+              file.download(function(err, contents) {
+                assert.ifError(err);
+                assert.strictEqual(contents.toString(), 'secret data');
+                done();
+              });
+            });
+          });
+        });
+      });
+
+      describe('buckets', function() {
+        let bucket;
+
+        before(function(done) {
+          bucket = storage.bucket(generateName(), {kmsKeyName});
+
+          async.series(
+            [
+              function createBucket(next) {
+                bucket.create(next);
+              },
+
+              function setDefaultKmsKeyName(next) {
+                bucket.setMetadata(
+                  {
+                    encryption: {
+                      defaultKmsKeyName: kmsKeyName,
+                    },
+                  },
+                  next
+                );
+              },
+            ],
+            done
+          );
+        });
+
+        after(function(done) {
+          bucket.setMetadata(
+            {
+              encryption: null,
+            },
+            done
+          );
+        });
+
+        it('should have set defaultKmsKeyName on created bucket', function(done) {
+          bucket.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+
+            // Strip the project ID, as it could be the placeholder locally, but
+            // the real value upstream.
+            const projectIdRegExp = /^.+\/locations/;
+            const actualKmsKeyName = metadata.encryption.defaultKmsKeyName.replace(
+              projectIdRegExp,
+              ''
+            );
+            const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
+
+            assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
+
+            done();
+          });
+        });
+
+        it('should update the defaultKmsKeyName', function(done) {
+          const cryptoKeyId = generateName();
+          const newKmsKeyName = generateKmsKeyName(cryptoKeyId);
+
+          createCryptoKey(cryptoKeyId, function(err) {
+            assert.ifError(err);
+
+            bucket.setMetadata(
+              {
+                encryption: {
+                  defaultKmsKeyName: newKmsKeyName,
+                },
+              },
+              done
+            );
+          });
+        });
+
+        it('should insert an object that inherits the kms key name', function(done) {
+          const file = bucket.file('kms-encrypted-file');
+
+          bucket.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+
+            const defaultKmsKeyName = metadata.encryption.defaultKmsKeyName;
+
+            file.save(FILE_CONTENTS, {resumable: false}, function(err) {
+              assert.ifError(err);
+
+              // Strip the project ID, as it could be the placeholder locally, but
+              // the real value upstream.
+              const projectIdRegExp = /^.+\/locations/;
+              const actualKmsKeyName = file.metadata.kmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
+              let expectedKmsKeyName = defaultKmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
+
+              // Upstream attaches a version.
+              expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
+
+              assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
+
+              done();
+            });
+          });
+        });
+      });
+    });
+
     it('should copy an existing file', function(done) {
       const opts = {destination: 'CloudLogo'};
       bucket.upload(FILES.logo.path, opts, function(err, file) {

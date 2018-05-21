@@ -280,6 +280,11 @@ util.inherits(Bucket, common.ServiceObject);
  * @param {string|File} destination The file you would like the
  *     source files combined into.
  * @param {object} [options] Configuration options.
+ * @param {string} [options.kmsKeyName] Resource name of the Cloud KMS key, of
+ *     the form
+ *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
+ *     that will be used to encrypt the object. Overwrites the object metadata's
+ *     `kms_key_name` value, if any.
  * @param {string} [options.userProject] The ID of the project which will be
  *     billed for the request.
  * @param {CombineCallback} [callback] Callback function.
@@ -1037,8 +1042,12 @@ Bucket.prototype.exists = function(options, callback) {
  * @param {object} [options] Configuration options.
  * @param {string|number} [options.generation] Only use a specific revision of
  *     this file.
- * @param {string} [options.key] A custom encryption key. See
+ * @param {string} [options.encryptionKey] A custom encryption key. See
  *     [Customer-supplied Encryption Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+ * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
+ *     be used to encrypt the object. Must be in the format:
+ *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
+ *     KMS key ring must use the same location as the bucket.
  * @returns {File}
  *
  * @example
@@ -1279,6 +1288,10 @@ Bucket.prototype.getFiles = function(query, callback) {
 
         if (query.versions) {
           options.generation = file.generation;
+        }
+
+        if (file.kmsKeyName) {
+          options.kmsKeyName = file.kmsKeyName;
         }
 
         const fileInstance = self.file(file.name, options);
@@ -1927,6 +1940,15 @@ Bucket.prototype.setLabels = function(labels, options, callback) {
  * }, function(err, apiResponse) {});
  *
  * //-
+ * // Enable KMS encryption for objects within this bucket.
+ * //-
+ * bucket.setMetadata({
+ *   encryption: {
+ *     defaultKmsKeyName: 'projects/grape-spaceship-123/...'
+ *   }
+ * }, function(err, apiResponse) {});
+ *
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * bucket.setMetadata(metadata).then(function(data) {
@@ -2066,6 +2088,9 @@ Bucket.prototype.setUserProject = function(userProject) {
  *     [Customer-supplied Encryption Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
  * @param {boolean} [options.gzip] Automatically gzip the file. This will set
  *     `options.metadata.contentEncoding` to `gzip`.
+ * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
+ *     be used to encrypt the object. Must be in the format:
+ *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
  * @param {object} [options.metadata] See an
  *     [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).
  * @param {string} [options.offset] The starting byte of the upload stream, for
@@ -2277,12 +2302,14 @@ Bucket.prototype.upload = function(pathString, options, callback) {
     // Use the string as the name of the file.
     newFile = this.file(options.destination, {
       encryptionKey: options.encryptionKey,
+      kmsKeyName: options.kmsKeyName,
     });
   } else {
     // Resort to using the name of the incoming file.
     const destination = path.basename(pathString);
     newFile = this.file(destination, {
       encryptionKey: options.encryptionKey,
+      kmsKeyName: options.kmsKeyName,
     });
   }
 

@@ -1291,6 +1291,22 @@ describe('Bucket', function() {
       });
     });
 
+    it('should set kmsKeyName on file', function(done) {
+      var kmsKeyName = 'kms-key-name';
+
+      bucket.request = function(reqOpts, callback) {
+        callback(null, {
+          items: [{name: 'fake-file-name', kmsKeyName}],
+        });
+      };
+
+      bucket.getFiles({versions: true}, function(err, files) {
+        assert.ifError(err);
+        assert.strictEqual(files[0].calledWith_[2].kmsKeyName, kmsKeyName);
+        done();
+      });
+    });
+
     it('should return apiResponse in callback', function(done) {
       const resp = {items: [{name: 'fake-file-name'}]};
       bucket.request = function(reqOpts, callback) {
@@ -1993,12 +2009,14 @@ describe('Bucket', function() {
       const options = {
         metadata: metadata,
         encryptionKey: 'key',
+        kmsKeyName: 'kms-key-name',
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert.equal(file.bucket.name, bucket.name);
         assert.deepEqual(file.metadata, metadata);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
+        assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
       });
     });
@@ -2008,12 +2026,14 @@ describe('Bucket', function() {
       const options = {
         destination: newFileName,
         encryptionKey: 'key',
+        kmsKeyName: 'kms-key-name',
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert.equal(file.bucket.name, bucket.name);
         assert.equal(file.name, newFileName);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
+        assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
       });
     });
@@ -2024,6 +2044,7 @@ describe('Bucket', function() {
         destination: newFileName,
         metadata: metadata,
         encryptionKey: 'key',
+        kmsKeyName: 'kms-key-name',
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
@@ -2031,6 +2052,7 @@ describe('Bucket', function() {
         assert.equal(file.name, newFileName);
         assert.deepEqual(file.metadata, metadata);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
+        assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
       });
     });

@@ -85,6 +85,9 @@ const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
  * @param {object} [options] Configuration options.
  * @param {string} [options.encryptionKey] A custom encryption key.
  * @param {number} [options.generation] Generation to scope the file to.
+ * @param {string} [options.kmsKeyName] Cloud KMS Key used to encrypt this
+ *     object, if the object is encrypted by such a key. Limited availability;
+ *     usable only by enabled projects.
  * @param {string} [options.userProject] The ID of the project which will be
  *     billed for all requests made from File object.
  * @example
@@ -98,6 +101,8 @@ function File(bucket, name, options) {
 
   this.bucket = bucket;
   this.storage = bucket.parent;
+
+  this.kmsKeyName = options.kmsKeyName;
   this.userProject = options.userProject || bucket.userProject;
 
   Object.defineProperty(this, 'name', {
@@ -190,13 +195,18 @@ util.inherits(File, common.ServiceObject);
  * same bucket, but you can choose to copy it to another Bucket by providing
  * a Bucket or File object or a URL starting with "gs://".
  *
- * @see [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
+ * @see [Objects: rewrite API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/rewrite}
  *
  * @throws {Error} If the destination file is not provided.
  *
  * @param {string|Bucket|File} destination Destination file.
  * @param {object} [options] Configuration options. See an
  *     [Object resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+ * @param {string} [options.destinationKmsKeyName] Resource name of the Cloud
+ *     KMS key, of the form
+ *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
+ *     that will be used to encrypt the object. Overwrites the object metadata's
+ *     `kms_key_name` value, if any.
  * @param {string} [options.keepAcl] Retain the ACL for the new file.
  * @param {string} [options.predefinedAcl] Set the ACL for the new file.
  * @param {string} [options.token] A previously-returned `rewriteToken` from an
@@ -350,14 +360,31 @@ File.prototype.copy = function(destination, options, callback) {
   newFile = newFile || destBucket.file(destName);
 
   const headers = {};
-  if (is.defined(newFile.encryptionKey)) {
+
+  if (is.defined(this.encryptionKey)) {
     headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
     headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
     headers[
       'x-goog-copy-source-encryption-key-sha256'
     ] = this.encryptionKeyHash;
+  }
 
+  if (is.defined(newFile.encryptionKey)) {
     this.setEncryptionKey(newFile.encryptionKey);
+  } else if (is.defined(options.destinationKmsKeyName)) {
+    query.destinationKmsKeyName = options.destinationKmsKeyName;
+    delete options.destinationKmsKeyName;
+  } else if (is.defined(newFile.kmsKeyName)) {
+    query.destinationKmsKeyName = newFile.kmsKeyName;
+  }
+
+  if (query.destinationKmsKeyName) {
+    this.kmsKeyName = query.destinationKmsKeyName;
+
+    const keyIndex = this.interceptors.indexOf(this.encryptionKeyInterceptor);
+    if (keyIndex > -1) {
+      this.interceptors.splice(keyIndex, 1);
+    }
   }
 
   this.request(
@@ -381,6 +408,10 @@ File.prototype.copy = function(destination, options, callback) {
 
         if (query.userProject) {
           options.userProject = query.userProject;
+        }
+
+        if (query.destinationKmsKeyName) {
+          options.destinationKmsKeyName = query.destinationKmsKeyName;
         }
 
         self.copy(newFile, options, callback);
@@ -749,11 +780,14 @@ File.prototype.createResumableUpload = function(options, callback) {
 
   resumableUpload.createURI(
     {
-      authClient: this.bucket.storage.authClient,
+      authClient: this.storage.authClient,
       bucket: this.bucket.name,
       file: this.name,
       generation: this.generation,
+      key: this.encryptionKey,
+      kmsKeyName: this.kmsKeyName,
       metadata: options.metadata,
+      offset: options.offset,
       origin: options.origin,
       predefinedAcl: options.predefinedAcl,
       private: options.private,
@@ -1294,7 +1328,7 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
     .update(this.encryptionKeyBase64, 'base64')
     .digest('base64');
 
-  this.interceptors.push({
+  this.encryptionKeyInterceptor = {
     request: function(reqOpts) {
       reqOpts.headers = reqOpts.headers || {};
       reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
@@ -1302,7 +1336,9 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
       reqOpts.headers['x-goog-encryption-key-sha256'] = self.encryptionKeyHash;
       return reqOpts;
     },
-  });
+  };
+
+  this.interceptors.push(this.encryptionKeyInterceptor);
 
   return this;
 };
@@ -2067,22 +2103,31 @@ File.prototype.request = function(reqOpts, callback) {
 };
 
 /**
- * The Storage API allows you to use a custom key for server-side encryption.
  * This method allows you to update the encryption key associated with this
  * file.
  *
  * @see [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
  *
- * @param {string|buffer} encryptionKey An AES-256 encryption key.
+ * @param {string|buffer|object} options If a string or Buffer is provided, it
+ *     is interpreted as an AES-256, customer-supplied encryption key. If you'd
+ *     like to use a Cloud KMS key name, you must specify an options object with
+ *     the property name: `kmsKeyName`.
+ * @param {string|buffer} [options.encryptionKey] An AES-256 encryption key.
+ * @param {string} [options.kmsKeyName] A Cloud KMS key name.
  * @returns {File}
  *
  * @example <caption>include:samples/encryption.js</caption>
  * region_tag:storage_rotate_encryption_key
  * Example of rotating the encryption key for this file:
  */
-File.prototype.rotateEncryptionKey = function(encryptionKey, callback) {
-  const newFile = this.bucket.file(this.id, {encryptionKey});
+File.prototype.rotateEncryptionKey = function(options, callback) {
+  if (!is.object(options)) {
+    options = {
+      encryptionKey: options,
+    };
+  }
 
+  const newFile = this.bucket.file(this.id, options);
   this.copy(newFile, callback);
 };
 
@@ -2324,6 +2369,7 @@ File.prototype.startResumableUpload_ = function(dup, options) {
     file: this.name,
     generation: this.generation,
     key: this.encryptionKey,
+    kmsKeyName: this.kmsKeyName,
     metadata: options.metadata,
     offset: options.offset,
     predefinedAcl: options.predefinedAcl,
@@ -2376,6 +2422,10 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
 
   if (is.defined(this.generation)) {
     reqOpts.qs.ifGenerationMatch = this.generation;
+  }
+
+  if (is.defined(this.kmsKeyName)) {
+    reqOpts.qs.kmsKeyName = this.kmsKeyName;
   }
 
   if (options.userProject) {

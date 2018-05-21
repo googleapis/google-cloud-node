@@ -182,6 +182,9 @@ Storage.prototype.acl = Storage.acl;
  *
  * @param {string} name Name of the bucket.
  * @param {object} [options] Configuration object.
+ * @param {string} [options.kmsKeyName] A Cloud KMS key that will be used to
+ *     encrypt objects inserted into this bucket, if no encryption method is
+ *     specified.
  * @param {string} [options.userProject] User project to be billed for all
  *     requests made from this Bucket object.
  * @returns {Bucket}
