@@ -15,7 +15,7 @@
 
 'use strict';
 
-// [START videointelligence_quickstart]
+// [START video_quickstart]
 // Imports the Google Cloud Video Intelligence library
 const videoIntelligence = require('@google-cloud/video-intelligence');
 
@@ -77,4 +77,4 @@ client
   .catch(err => {
     console.error('ERROR:', err);
   });
-// [END videointelligence_quickstart]
+// [END video_quickstart]
