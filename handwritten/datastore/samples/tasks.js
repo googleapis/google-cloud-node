@@ -15,7 +15,7 @@
 
 'use strict';
 
-// [START build_service]
+// [START datastore_build_service]
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
@@ -24,7 +24,7 @@ const Datastore = require('@google-cloud/datastore');
 
 // Creates a client
 const datastore = new Datastore({});
-// [END build_service]
+// [END datastore_build_service]
 
 /*
 Installation and setup instructions.
@@ -63,7 +63,7 @@ node tasks <command>
 ```
 */
 
-// [START add_entity]
+// [START datastore_add_entity]
 function addTask(description) {
   const taskKey = datastore.key('Task');
   const entity = {
@@ -94,9 +94,9 @@ function addTask(description) {
       console.error('ERROR:', err);
     });
 }
-// [END add_entity]
+// [END datastore_add_entity]
 
-// [START update_entity]
+// [START datastore_update_entity]
 function markDone(taskId) {
   const transaction = datastore.transaction();
   const taskKey = datastore.key(['Task', taskId]);
@@ -119,9 +119,9 @@ function markDone(taskId) {
     })
     .catch(() => transaction.rollback());
 }
-// [END update_entity]
+// [END datastore_update_entity]
 
-// [START retrieve_entities]
+// [START datastore_retrieve_entities]
 function listTasks() {
   const query = datastore.createQuery('Task').order('created');
 
@@ -140,9 +140,9 @@ function listTasks() {
       console.error('ERROR:', err);
     });
 }
-// [END retrieve_entities]
+// [END datastore_retrieve_entities]
 
-// [START delete_entity]
+// [START datastore_delete_entity]
 function deleteTask(taskId) {
   const taskKey = datastore.key(['Task', taskId]);
 
@@ -155,7 +155,7 @@ function deleteTask(taskId) {
       console.error('ERROR:', err);
     });
 }
-// [END delete_entity]
+// [END datastore_delete_entity]
 
 require(`yargs`) // eslint-disable-line
   .demand(1)
