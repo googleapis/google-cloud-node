@@ -76,7 +76,7 @@ function listTopicSubscriptions(topicName) {
 }
 
 function createSubscription(topicName, subscriptionName) {
-  // [START pubsub_create_subscription]
+  // [START pubsub_create_pull_subscription]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -100,7 +100,7 @@ function createSubscription(topicName, subscriptionName) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_create_subscription]
+  // [END pubsub_create_pull_subscription]
 }
 
 function createFlowControlledSubscription(
@@ -193,7 +193,7 @@ function createPushSubscription(topicName, subscriptionName) {
 }
 
 function modifyPushConfig(topicName, subscriptionName) {
-  // [START pubsub_modify_push_config]
+  // [START pubsub_update_push_configuration]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -222,7 +222,7 @@ function modifyPushConfig(topicName, subscriptionName) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_modify_push_config]
+  // [END pubsub_update_push_configuration]
 }
 
 function deleteSubscription(subscriptionName) {
@@ -252,7 +252,6 @@ function deleteSubscription(subscriptionName) {
 }
 
 function getSubscription(subscriptionName) {
-  // [START pubsub_get_subscription]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -279,11 +278,11 @@ function getSubscription(subscriptionName) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_get_subscription]
 }
 
 function listenForMessages(subscriptionName, timeout) {
-  // [START pubsub_listen_messages]
+  // [START pubsub_subscriber_async_pull]
+  // [START pubsub_quickstart_subscriber]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -317,7 +316,8 @@ function listenForMessages(subscriptionName, timeout) {
     subscription.removeListener('message', messageHandler);
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
-  // [END pubsub_listen_messages]
+  // [END pubsub_subscriber_async_pull]
+  // [END pubsub_quickstart_subscriber]
 }
 
 let subscribeCounterValue = 1;
@@ -396,7 +396,7 @@ function listenForOrderedMessages(subscriptionName, timeout) {
 // [END pubsub_listen_ordered_messages]
 
 function listenForErrors(subscriptionName, timeout) {
-  // [START pubsub_listen_errors]
+  // [START pubsub_subscriber_error_listener]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -434,7 +434,7 @@ function listenForErrors(subscriptionName, timeout) {
     subscription.removeListener(`message`, messageHandler);
     subscription.removeListener(`error`, errorHandler);
   }, timeout * 1000);
-  // [END pubsub_listen_errors]
+  // [END pubsub_subscriber_error_listener]
 }
 
 function getSubscriptionPolicy(subscriptionName) {

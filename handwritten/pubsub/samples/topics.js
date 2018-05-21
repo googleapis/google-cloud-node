@@ -99,7 +99,8 @@ function deleteTopic(topicName) {
 }
 
 function publishMessage(topicName, data) {
-  // [START pubsub_publish_message]
+  // [START pubsub_publish]
+  // [START pubsub_quickstart_publisher]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -125,11 +126,12 @@ function publishMessage(topicName, data) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_publish_message]
+  // [END pubsub_publish]
+  // [END pubsub_quickstart_publisher]
 }
 
 function publishMessageWithCustomAttributes(topicName, data) {
-  // [START pubsub_publish_message_custom_attributes]
+  // [START pubsub_publish_custom_attributes]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -161,11 +163,11 @@ function publishMessageWithCustomAttributes(topicName, data) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_publish_message_custom_attributes]
+  // [END pubsub_publish_custom_attributes]
 }
 
 function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
-  // [START pubsub_publisher_batched_settings]
+  // [START pubsub_publisher_batch_settings]
   // Imports the Google Cloud client library
   const PubSub = require(`@google-cloud/pubsub`);
 
@@ -199,7 +201,7 @@ function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END pubsub_publisher_batched_settings]
+  // [END pubsub_publisher_batch_settings]
 }
 
 let publishCounterValue = 1;
