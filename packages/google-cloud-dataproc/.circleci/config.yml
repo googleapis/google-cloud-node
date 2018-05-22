@@ -4,25 +4,17 @@ workflows:
   tests:
     jobs: &workflow_jobs
       - node4:
-          filters:
+          filters: &all_commits
             tags:
               only: /.*/
       - node6:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node8:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node9:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node10:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - lint:
           requires:
             - node4
@@ -30,9 +22,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - docs:
           requires:
             - node4
@@ -40,9 +30,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - system_tests:
           requires:
             - lint
@@ -50,7 +38,7 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
+            tags: &releases
               only: '/^v[\d.]+$/'
       - publish_npm:
           requires:
@@ -58,8 +46,7 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: '/^v[\d.]+$/'
+            tags: *releases
   nightly:
     triggers:
       - schedule:
@@ -86,14 +73,15 @@ jobs:
             else
               echo "Not a nightly build, skipping this step."
             fi
-      - run:
-          name: Install modules and dependencies.
+      - run: &npm_install_and_link
+          name: Install and link the module
           command: |-
+            mkdir -p /home/node/.npm-global
             npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+            npm link
+            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run unit tests.
           command: npm test
@@ -128,19 +116,8 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |
-            mkdir -p /home/node/.npm-global
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-            npm link
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
+      - run: *npm_install_and_link
+      - run: &samples_npm_install_and_link
           name: Link the module being tested to the samples.
           command: |
             cd samples/
@@ -161,14 +138,7 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+      - run: *npm_install_and_link
       - run:
           name: Build documentation.
           command: npm run docs
@@ -185,14 +155,7 @@ jobs:
             openssl aes-256-cbc -d -in .circleci/key.json.enc \
                 -out .circleci/key.json \
                 -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+      - run: *npm_install_and_link
       - run:
           name: Run system tests.
           command: npm run system-test
