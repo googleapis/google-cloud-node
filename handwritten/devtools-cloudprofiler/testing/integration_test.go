@@ -50,33 +50,40 @@ const startupTemplate = `
 # to stop accounting the VM for billing and cores quota.
 trap "sleep 300 && poweroff" EXIT
 
+retry() {
+  for i in {1..3}; do
+    "${@}" && return 0
+  done
+  return 1
+}
+
 # Fail on any error
 set -eo pipefail
 
 # Display commands being run
 set -x
 # Install git
-apt-get update >/dev/null
-apt-get -y -q install git build-essential  >/dev/null
+retry apt-get update >/dev/null
+retry apt-get -y -q install git build-essential >/dev/null
 
 # Install desired version of Node.js
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
+retry curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
 export NVM_DIR="$HOME/.nvm" >/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" >/dev/null
 
 # nvm install writes to stderr and stdout on successful install, so both are
 # redirected.
-nvm install {{.NodeVersion}} &>/dev/null
+retry nvm install {{.NodeVersion}} &>/dev/null
 npm -v
 node -v
 
 # Install agent
-git clone {{.Repo}}
+retry git clone {{.Repo}}
 cd cloud-profiler-nodejs
-git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
+retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
 git checkout pull_branch
 git reset --hard {{.Commit}}
-npm install >/dev/null
+retry npm install >/dev/null
 npm run compile
 npm pack >/dev/null
 VERSION=$(node -e "console.log(require('./package.json').version);")
