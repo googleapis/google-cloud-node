@@ -18,7 +18,7 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/error-reporting": "0.4.0",
+    "@google-cloud/error-reporting": "0.5.0",
     "express": "4.16.3",
     "yargs": "11.0.0"
   },
