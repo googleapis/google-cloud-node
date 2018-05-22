@@ -2,8 +2,6 @@
 
 # Stackdriver Error Reporting: Node.js Client
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/googleapis/nodejs-error-reporting.svg)](https://greenkeeper.io/)
-
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-error-reporting.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-error-reporting)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-error-reporting?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-error-reporting)

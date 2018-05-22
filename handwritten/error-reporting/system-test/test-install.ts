@@ -16,7 +16,7 @@
 
 import assert from 'assert';
 import {SpawnOptions} from 'child_process';
-import * as path from 'path';
+import path from 'path';
 
 import {globP, mkdirP, ncpP, rimrafP, spawnP, tmpDirP, writeFileP} from './utils';
 
@@ -65,7 +65,7 @@ new ErrorReporting({
     devDependencies: []
   },
   {
-    code: `import * as express from 'express';
+    code: `import express from 'express';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -112,7 +112,7 @@ server.register(errors.hapi);
     devDependencies: ['@types/hapi@16.x.x']
   },
   {
-    code: `import * as hapi from 'hapi';
+    code: `import hapi from 'hapi';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -141,7 +141,7 @@ start().catch(console.error);
     devDependencies: ['@types/hapi@17.x.x']
   },
   {
-    code: `import * as Koa from 'koa';
+    code: `import Koa from 'koa';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -165,7 +165,7 @@ app.use(function *(this: any): IterableIterator<any> {
     devDependencies: ['@types/koa']
   },
   {
-    code: `import * as restify from 'restify';
+    code: `import restify from 'restify';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();

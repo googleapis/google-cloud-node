@@ -23,7 +23,7 @@ const config = new Configuration({});
 };
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
-import {Logger} from '../../../src/types';
+import {Logger} from '@google-cloud/common';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 
 describe('Manual handler', () => {
@@ -38,7 +38,7 @@ describe('Manual handler', () => {
     },
   } as {} as RequestHandler;
   const report = manual.handlerSetup(client, config, {
-    warn(message) {
+    warn(message: string) {
       // The use of `report` in this class should issue the following warning
       // becasue the `report` class is used directly and, as such, cannot
       // by itself have information where a ErrorMesasge was constructed.  It
@@ -53,7 +53,7 @@ describe('Manual handler', () => {
               'trace.  This error might not be visible in the error reporting ' +
               'console.');
     },
-  } as Logger);
+  } as {} as Logger);
   describe('Report invocation behaviour', () => {
     it('Should allow argument-less invocation', () => {
       const r = report(null!);

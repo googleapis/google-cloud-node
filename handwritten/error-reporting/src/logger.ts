@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-import has = require('lodash.has');
-import * as is from 'is';
-import * as types from './types';
-
-const isObject = is.object;
-const isString = is.string;
-const isNumber = is.number;
-const logger: types.logger = require('@google-cloud/common').logger;
+import is from 'is';
+import has from 'lodash.has';
 
 const packageJson = require('../../package.json');
 
 import {ConfigurationOptions} from './configuration';
+import {logger, Logger} from '@google-cloud/common';
 
 /**
  * Creates an instance of the Google Cloud Diagnostics logger class. This
@@ -53,12 +48,13 @@ export function createLogger(initConfiguration?: ConfigurationOptions) {
     level =
         logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL!] || DEFAULT_LEVEL;
   } else if (
-      isObject(initConfiguration) && has(initConfiguration, 'logLevel')) {
-    if (isString(initConfiguration!.logLevel)) {
+      is.object(initConfiguration) && has(initConfiguration, 'logLevel')) {
+    if (is.string(initConfiguration!.logLevel)) {
       // Cast string as integer
       level = logger.LEVELS[~~initConfiguration!.logLevel!] || DEFAULT_LEVEL;
-    } else if (isNumber(initConfiguration!.logLevel)) {
-      level = logger.LEVELS[initConfiguration!.logLevel!] || DEFAULT_LEVEL;
+    } else if (is.number(initConfiguration!.logLevel)) {
+      level =
+          logger.LEVELS[Number(initConfiguration!.logLevel!)] || DEFAULT_LEVEL;
     } else {
       throw new Error(
           'config.logLevel must be a number or decimal ' +
