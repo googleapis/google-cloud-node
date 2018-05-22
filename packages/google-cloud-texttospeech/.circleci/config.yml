@@ -4,25 +4,17 @@ workflows:
   tests:
     jobs: &workflow_jobs
       - node4:
-          filters:
+          filters: &all_commits
             tags:
               only: /.*/
       - node6:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node8:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node9:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node10:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - lint:
           requires:
             - node4
@@ -30,9 +22,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - docs:
           requires:
             - node4
@@ -40,9 +30,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - sample_tests:
           requires:
             - lint
@@ -50,7 +38,7 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
+            tags: &releases
               only: '/^v[\d.]+$/'
       - publish_npm:
           requires:
@@ -58,8 +46,7 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: '/^v[\d.]+$/'
+            tags: *releases
   nightly:
     triggers:
       - schedule:
@@ -87,11 +74,12 @@ jobs:
               echo "Not a nightly build, skipping this step."
             fi
       - run: &npm_install_and_link
-          name: Install and link the module.
-          command: |
+          name: Install and link the module
+          command: |-
             mkdir -p /home/node/.npm-global
             npm install
             npm link
+            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
