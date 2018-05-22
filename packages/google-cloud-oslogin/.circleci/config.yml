@@ -4,25 +4,17 @@ workflows:
   tests:
     jobs: &workflow_jobs
       - node4:
-          filters:
+          filters: &all_commits
             tags:
               only: /.*/
       - node6:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node8:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node9:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node10:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - lint:
           requires:
             - node4
@@ -30,9 +22,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - docs:
           requires:
             - node4
@@ -40,9 +30,7 @@ workflows:
             - node8
             - node9
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - publish_npm:
           requires:
             - lint
@@ -78,14 +66,15 @@ jobs:
             else
               echo "Not a nightly build, skipping this step."
             fi
-      - run:
-          name: Install modules and dependencies.
+      - run: &npm_install_and_link
+          name: Install and link the module
           command: |-
+            mkdir -p /home/node/.npm-global
             npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+            npm link
+            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run unit tests.
           command: npm test
@@ -120,18 +109,7 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |
-            mkdir -p /home/node/.npm-global
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
-            npm link
-          environment:
-            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run: *npm_install_and_link
       - run:
           name: Link the module being tested to the samples.
           command: |
@@ -153,14 +131,7 @@ jobs:
     steps:
       - checkout
       - run: *remove_package_lock
-      - run:
-          name: Install modules and dependencies.
-          command: |-
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+      - run: *npm_install_and_link
       - run:
           name: Build documentation.
           command: npm run docs
