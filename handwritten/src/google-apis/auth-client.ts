@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-import * as types from '../types';
-export const common: types.Common = require('@google-cloud/common');
 const pkg = require('../../../package.json');
-import * as is from 'is';
-// TODO: Address the error where `is` does not have a `fn` property
-const isFunction = (is as {} as {fn: Function}).fn;
-const isString = is.string;
-
+import is from 'is';
 import {Configuration} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';
+import {Service, Logger, ServiceOptions} from '@google-cloud/common';
 
 /* @const {Array<String>} list of scopes needed to work with the errors api. */
 const SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
@@ -57,9 +52,9 @@ const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
  *  address the correct project in the Error Reporting API
  * @property {Object} _logger - the instance-cached logger instance
  */
-export class RequestHandler extends common.Service {
+export class RequestHandler extends Service {
   private _config: Configuration;
-  private _logger: types.Logger;
+  private _logger: Logger;
   // TODO: Make this more precise
 
   /**
@@ -72,7 +67,7 @@ export class RequestHandler extends common.Service {
    * @static
    */
   static manufactureQueryString(key: string|null) {
-    if (isString(key)) {
+    if (is.string(key)) {
       return {key};
     }
     return null;
@@ -94,34 +89,33 @@ export class RequestHandler extends common.Service {
    * @param {Configuration} config - an instance of the Configuration class
    * @param {Logger} logger - an instance of logger
    */
-  constructor(config: Configuration, logger: types.Logger) {
+  constructor(config: Configuration, logger: Logger) {
     const pid = config.getProjectId();
     // If an API key is provided, do not try to authenticate.
     const tryAuthenticate = !config.getKey();
+    const serviceOptions: ServiceOptions = Object.assign(config, {
+      projectId: pid !== null ? pid : undefined,
+      customEndpoint: !tryAuthenticate,
+    });
     super(
         {
           packageJson: pkg,
           baseUrl: API,
           scopes: SCOPES,
-          projectId: pid !== null ? pid : undefined,
           projectIdRequired: true,
-          customEndpoint: !tryAuthenticate,
         },
-        // TODO: Fix the type incompatibilities that require this cast
-        config as types.ServiceAuthenticationConfig);
+        serviceOptions);
     this._config = config;
     this._logger = logger;
 
     const that = this;
     if (tryAuthenticate) {
-      this.authClient.getToken((err: Error) => {
-        if (err) {
-          that._logger.error([
-            'Unable to find credential information on instance. This library',
-            'will be unable to communicate with the Stackdriver API to save',
-            'errors.  Message: ' + err.message,
-          ].join(' '));
-        }
+      this.authClient.getAccessToken().then(() => {}, err => {
+        that._logger.error([
+          'Unable to find credential information on instance. This library',
+          'will be unable to communicate with the Stackdriver API to save',
+          'errors.  Message: ' + err.message,
+        ].join(' '));
       });
     } else {
       this.request(
@@ -162,56 +156,56 @@ export class RequestHandler extends common.Service {
       userCb?:
           (err: Error|null, response: http.ServerResponse|null,
            body: {}) => void) {
-    const cb: Function = (isFunction(userCb) ? userCb : RequestHandler.noOp)!;
-    if (this._config.getShouldReportErrorsToAPI()) {
-      this.request(
-          {
-            uri: 'events:report',
-            qs: RequestHandler.manufactureQueryString(this._config.getKey()),
-            method: 'POST',
-            json: errorMessage,
-          },
-          (err, body, response) => {
-            if (err) {
-              this._logger.error(
-                  [
-                    'Encountered an error while attempting to transmit an error to',
-                    'the Stackdriver Error Reporting API.',
-                  ].join(' '),
-                  err);
-            }
-            cb(err, response, body);
-          });
-    } else {
-      cb(new Error([
-           'Stackdriver error reporting client has not been configured to send',
-           'errors, please check the NODE_ENV environment variable and make sure',
-           'it is set to "production" or set the ignoreEnvironmentCheck property',
-           'to true in the runtime configuration object',
-         ].join(' ')),
-         null, null);
-    }
+    const cb: Function = (is.function(userCb) ? userCb : RequestHandler.noOp)!;
+      if (this._config.getShouldReportErrorsToAPI()) {
+        this.request(
+            {
+              uri: 'events:report',
+              qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+              method: 'POST',
+              json: errorMessage,
+            },
+            (err, body, response) => {
+              if (err) {
+                this._logger.error(
+                    [
+                      'Encountered an error while attempting to transmit an error to',
+                      'the Stackdriver Error Reporting API.',
+                    ].join(' '),
+                    err);
+              }
+              cb(err, response, body);
+            });
+      } else {
+        cb(new Error([
+             'Stackdriver error reporting client has not been configured to send',
+             'errors, please check the NODE_ENV environment variable and make sure',
+             'it is set to "production" or set the ignoreEnvironmentCheck property',
+             'to true in the runtime configuration object',
+           ].join(' ')),
+           null, null);
+      }
   }
-}
+  }
 
-/**
- * The requestCallback callback function is called on completion of an API
- * request whether that completion is success or failure. The request can either
- * fail by reaching the max number of retries or encountering an unrecoverable
- * response from the API. The first parameter to any invocation of the
- * requestCallback function type will be the applicable error if one was
- * generated during the request-response transaction. If an error was not
- * generated during the transaction then the first parameter will be of type
- * Null. The second parameter is the entire response from the transaction, this
- * is an object that as well as containing the body of the response from the
- * transaction will also include transaction information. The third parameter is
- * the body of the response, this can be an object, a string or any type given
- * by the response object.
- * @callback RequestHandler~requestCallback cb - The function that will be
- *  invoked once the transaction has completed
- * @param {Error|Null} err - The error, if applicable, generated during the
- *  transaction
- * @param {Object|Undefined|Null} response - The response, if applicable,
- *  received during the transaction
- * @param {Any} body - The response body if applicable
- */
+  /**
+   * The requestCallback callback function is called on completion of an API
+   * request whether that completion is success or failure. The request can
+   * either fail by reaching the max number of retries or encountering an
+   * unrecoverable response from the API. The first parameter to any invocation
+   * of the requestCallback function type will be the applicable error if one
+   * was generated during the request-response transaction. If an error was not
+   * generated during the transaction then the first parameter will be of type
+   * Null. The second parameter is the entire response from the transaction,
+   * this is an object that as well as containing the body of the response from
+   * the transaction will also include transaction information. The third
+   * parameter is the body of the response, this can be an object, a string or
+   * any type given by the response object.
+   * @callback RequestHandler~requestCallback cb - The function that will be
+   *  invoked once the transaction has completed
+   * @param {Error|Null} err - The error, if applicable, generated during the
+   *  transaction
+   * @param {Object|Undefined|Null} response - The response, if applicable,
+   *  received during the transaction
+   * @param {Any} body - The response body if applicable
+   */

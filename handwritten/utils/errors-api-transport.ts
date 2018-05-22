@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+import {Logger} from '@google-cloud/common';
+
 import {Configuration} from '../src/configuration';
 import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
-import * as types from '../src/types';
 
 export interface ServiceContext {
   service: string;
@@ -49,45 +50,34 @@ const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 const ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
 
 export class ErrorsApiTransport extends AuthClient {
-  constructor(config: Configuration, logger: types.Logger) {
+  constructor(config: Configuration, logger: Logger) {
     super(config, logger);
   }
 
   deleteAllEvents(cb: (err: Error|null) => void) {
-    const self = this;
-    self.getProjectId((err, id) => {
+    this.getProjectId((err, id) => {
       if (err) {
         return cb(err);
       }
-
       const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
-      self.request_(options, (err, response, body) => {
-        if (err) {
-          return cb(err);
-        }
+      this.request_(options).then(r => {
         cb(null);
-      });
+      }, e => cb);
     });
   }
 
   getAllGroups(cb: (err: Error|null, data?: ErrorGroupStats[]) => void) {
-    const self = this;
-    self.getProjectId((err, id) => {
+    this.getProjectId((err, id) => {
       if (err) {
         return cb(err);
       }
-
       const options = {
         uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
         method: 'GET'
       };
-      self.request_(options, (err, response, body) => {
-        if (err) {
-          return cb(err);
-        }
-
-        cb(null, JSON.parse(body.body).errorGroupStats || []);
-      });
+      this.request_(options).then(r => {
+        cb(null, r.body.errorGroupStats || []);
+      }, cb);
     });
   }
 }

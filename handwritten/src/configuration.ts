@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-const env = process.env;
-import has = require('lodash.has');
-import * as is from 'is';
+
+import {Logger} from '@google-cloud/common';
+import is from 'is';
+import has from 'lodash.has';
+
 const isObject = is.object;
 const isBoolean = is.boolean;
 const isString = is.string;
 const isNumber = is.number;
-
-import * as types from './types';
-const Logger: types.Logger = require('@google-cloud/common').Logger;
+const env = process.env;
 
 export interface ConfigurationOptions {
   projectId?: string;
@@ -63,7 +63,7 @@ export interface ServiceContext {
  *  been initialized.
  */
 export class Configuration {
-  _logger: types.Logger;
+  _logger: Logger;
   _shouldReportErrorsToAPI: boolean;
   _projectId: string|null;
   _key: string|null;
@@ -73,8 +73,7 @@ export class Configuration {
   _reportUnhandledRejections: boolean;
   _givenConfiguration: ConfigurationOptions;
 
-  constructor(
-      givenConfig: ConfigurationOptions|undefined, logger: types.Logger) {
+  constructor(givenConfig: ConfigurationOptions|undefined, logger: Logger) {
     /**
      * The _logger property caches the logger instance created at the top-level
      * for configuration logging purposes.

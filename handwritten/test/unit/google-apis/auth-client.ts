@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
+import {Logger} from '@google-cloud/common';
 import assert from 'assert';
 import proxyquire from 'proxyquire';
 
 import {Configuration, ConfigurationOptions} from '../../../src/configuration';
-import {Logger} from '../../../src/types';
 
 function verifyReportedMessage(
     config1: ConfigurationOptions, errToReturn: Error|null|undefined,
@@ -28,15 +28,15 @@ function verifyReportedMessage(
     request: {};
     constructor() {
       this.authClient = {
-        getToken(cb: (err?: Error|null) => void) {
-          cb(errToReturn);
+        async getAccessToken() {
+          throw errToReturn;
         },
       };
       this.request = () => {};
     }
   }
 
-  const RequestHandler = proxyquire('../../../src/google-apis/auth-client.js', {
+  const RequestHandler = proxyquire('../../../src/google-apis/auth-client', {
                            '@google-cloud/common': {
                              Service: ServiceStub,
                            },
@@ -56,11 +56,13 @@ function verifyReportedMessage(
       }
       logs.info += text;
     },
-  };
-  const config2 = new Configuration(config1, logger as Logger);
+  } as {} as Logger;
+  const config2 = new Configuration(config1, logger);
   // tslint:disable-next-line:no-unused-expression
   new RequestHandler(config2, logger);
-  assert.deepStrictEqual(logs, expectedLogs);
+  setImmediate(() => {
+    assert.deepStrictEqual(logs, expectedLogs);
+  });
 }
 describe('RequestHandler', () => {
   it('should not request OAuth2 token if key is provided', () => {

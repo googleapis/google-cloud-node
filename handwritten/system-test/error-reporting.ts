@@ -15,23 +15,19 @@
  */
 
 import assert from 'assert';
-import * as is from 'is';
+import is from 'is';
 import nock from 'nock';
 
+import {ErrorReporting} from '../src';
 import {ErrorMessage} from '../src/classes/error-message';
 import {RequestHandler} from '../src/google-apis/auth-client';
-import {ErrorReporting} from '../src/index';
 import {createLogger} from '../src/logger';
 import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
 import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
 
-const isObject = is.object;
-const isString = is.string;
-const isEmpty = is.empty;
 import assign = require('lodash.assign');
 import pick = require('lodash.pick');
 import omitBy = require('lodash.omitby');
-// eslint-disable-next-line node/no-extraneous-require
 import * as request from 'request';
 import * as util from 'util';
 import * as path from 'path';
@@ -58,7 +54,7 @@ class InstancedEnv {
   }
 
   _captureProcessProperties() {
-    return omitBy(pick(process.env, envKeys), value => !isString(value));
+    return omitBy(pick(process.env, envKeys), value => !is.string(value));
   }
 
   sterilizeProcess() {
@@ -114,22 +110,22 @@ const env = new InstancedEnv({
 
 function shouldRun() {
   let shouldRun = true;
-  if (!isString(env.injected().projectId)) {
+  if (!is.string(env.injected().projectId)) {
     console.log('The project id (projectId) was not set in the env');
     shouldRun = false;
   }
 
-  if (!isString(env.injected().apiKey)) {
+  if (!is.string(env.injected().apiKey)) {
     console.log('The api key (apiKey) was not set as an env variable');
     shouldRun = false;
   }
 
-  if (!isString(env.injected().projectNumber)) {
+  if (!is.string(env.injected().projectNumber)) {
     console.log('The project number (projectNumber) was not set in the env');
     shouldRun = false;
   }
 
-  if (!isString(env.injected().keyFilename)) {
+  if (!is.string(env.injected().keyFilename)) {
     console.log('The key filename (keyFilename) was not set in the env');
     shouldRun = false;
   }
@@ -181,7 +177,7 @@ describe('Request/Response lifecycle mocking', () => {
       assert(err instanceof Error);
       assert.strictEqual(
           err!.message.toLowerCase(), 'message cannot be empty.');
-      assert(isObject(response));
+      assert(is.object(response));
       assert.strictEqual(response!.statusCode, 400);
       done();
     });
@@ -253,7 +249,7 @@ describe('Client creation', () => {
              .sendError(errorMessage, (err, response, body) => {
                assert.strictEqual(err, null);
                assert.strictEqual(response!.statusCode, 200);
-               assert(isObject(body) && isEmpty(body));
+               assert(is.object(body) && is.empty(body));
                done();
              });
        });
@@ -271,7 +267,7 @@ describe('Client creation', () => {
              .sendError(errorMessage, (err, response, body) => {
                assert.strictEqual(err, null);
                assert.strictEqual(response!.statusCode, 200);
-               assert(isObject(body) && isEmpty(body));
+               assert(is.object(body) && is.empty(body));
                done();
              });
        });
@@ -294,7 +290,7 @@ describe('Client creation', () => {
              .sendError(errorMessage, (err, response, body) => {
                assert.strictEqual(err, null);
                assert.strictEqual(response!.statusCode, 200);
-               assert(isObject(body) && isEmpty(body));
+               assert(is.object(body) && is.empty(body));
                done();
              });
        });
@@ -312,7 +308,7 @@ describe('Client creation', () => {
              .sendError(errorMessage, (err, response, body) => {
                assert.strictEqual(err, null);
                assert.strictEqual(response!.statusCode, 200);
-               assert(isObject(body) && isEmpty(body));
+               assert(is.object(body) && is.empty(body));
                done();
              });
        });
@@ -362,8 +358,8 @@ describe('Expected Behavior', () => {
 
     client.sendError(em, (err, response, body) => {
       assert.strictEqual(err, null);
-      assert(isObject(body));
-      assert(isEmpty(body));
+      assert(is.object(body));
+      assert(is.empty(body));
       assert.strictEqual(response!.statusCode, 200);
       done();
     });
@@ -381,8 +377,8 @@ describe('Expected Behavior', () => {
     const client = new RequestHandler(cfg, logger);
     client.sendError(em, (err, response, body) => {
       assert.strictEqual(err, null);
-      assert(isObject(body));
-      assert(isEmpty(body));
+      assert(is.object(body));
+      assert(is.empty(body));
       assert.strictEqual(response!.statusCode, 200);
       done();
     });
@@ -552,7 +548,7 @@ describe('error-reporting', () => {
     (function expectedTopOfStack() {
       errors.report(errOb, undefined, undefined, (err, response, body) => {
         assert.ifError(err);
-        assert(isObject(response));
+        assert(is.object(response));
         assert.deepEqual(body, {});
         verifyServerResponse(messageTest, timeout, cb);
       });
