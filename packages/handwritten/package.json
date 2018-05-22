@@ -36,8 +36,8 @@
     "lint": "eslint samples/ && gts check && jsgl --local .",
     "prettier": "prettier --write samples/*.js samples/*/*.js",
     "presystem-test": "npm run compile",
-    "system-test": "nyc --exclude=\"error-message.js\" mocha build/system-test",
-    "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha --require intelli-espower-loader ./build/test/unit ./build/test/unit/**/ && nyc report",
+    "system-test": "nyc --exclude=\"error-message.js\" mocha --require source-map-support/register build/system-test",
+    "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha --require intelli-espower-loader source-map-support/register build/test/unit build/test/unit/**/ && nyc report",
     "presamples-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha build/test/unit build/test/unit/**/ --timeout 20000",
@@ -46,7 +46,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "postcompile": "cpy src/types.d.ts build/src/ && cpy 'utils/**/*.*' build --parents && cpy 'test/**/*.*' build --parents",
+    "postcompile": "cpy 'utils/**/*.*' build --parents && cpy 'test/**/*.*' build --parents",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest-only": "npm run compile",
@@ -54,7 +54,7 @@
     "license-check": "jsgl --local ."
   },
   "dependencies": {
-    "@google-cloud/common": "^0.17.0",
+    "@google-cloud/common": "^0.18.8",
     "is": "^3.2.1",
     "lodash.has": "^4.5.2"
   },
@@ -127,6 +127,7 @@
     "request": "^2.86.0",
     "restify": "^7.2.0",
     "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.6",
     "tmp": "0.0.33",
     "typescript": "~2.8.3"
   }

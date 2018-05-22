@@ -18,14 +18,11 @@
  * @module error-reporting
  */
 
-import * as types from './types';
-const Logger: types.Logger = require('@google-cloud/common').Logger;
+import {Logger} from '@google-cloud/common';
 
 import {ErrorMessage} from './classes/error-message';
 import {Configuration, ConfigurationOptions} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
-import {createLogger} from './logger';
-
 // Begin error reporting interfaces
 import * as expressInterface from './interfaces/express';
 import * as hapiInterface from './interfaces/hapi';
@@ -33,7 +30,7 @@ import * as koaInterface from './interfaces/koa';
 import * as manualInterface from './interfaces/manual';
 import * as messageBuilderInterface from './interfaces/message-builder';
 import * as restifyInterface from './interfaces/restify';
-
+import {createLogger} from './logger';
 import * as manualRequestExtractor from './request-extractors/manual';
 
 export type RestifyRequestHandler = (req: {}, res: {}, next: {}) => {};
@@ -96,7 +93,7 @@ export type RestifyRequestHandler = (req: {}, res: {}, next: {}) => {};
  *     reporting configuration.
  */
 export class ErrorReporting {
-  private _logger: types.Logger;
+  private _logger: Logger;
   private _config: Configuration;
   private _client: AuthClient;
   // the `err` argument can be anything, including `null` and `undefined`

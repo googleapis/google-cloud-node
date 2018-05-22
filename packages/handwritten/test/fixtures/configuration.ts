@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import {Logger} from '@google-cloud/common';
+
 import {Configuration, ConfigurationOptions} from '../../src/configuration';
-import {Logger} from '../../src/types';
 
 export class FakeConfiguration extends Configuration {
   constructor(config: ConfigurationOptions|undefined, logger?: Logger) {
