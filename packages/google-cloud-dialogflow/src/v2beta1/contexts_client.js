@@ -126,7 +126,7 @@ class ContextsClient {
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
       environmentContextPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/sessions/{environment}/users/{user}/{session}/contexts/{context}'
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
       ),
     };
 
