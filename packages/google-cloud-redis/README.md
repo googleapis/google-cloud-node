@@ -85,5 +85,5 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-redis/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/redis/latest/
-[product-docs]: TBD
+[product-docs]: https://cloud.google.com/memorystore/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
