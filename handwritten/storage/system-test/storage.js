@@ -1445,8 +1445,7 @@ describe('storage', function() {
         const file = FILES[filesKey];
         const hash = crypto.createHash('md5');
 
-        fs
-          .createReadStream(file.path)
+        fs.createReadStream(file.path)
           .on('data', hash.update.bind(hash))
           .on('end', function() {
             file.hash = hash.digest('base64');
@@ -1504,8 +1503,8 @@ describe('storage', function() {
 
         const fileSize = file.metadata.size;
         const byteRange = {
-          start: Math.floor(fileSize * 1 / 3),
-          end: Math.floor(fileSize * 2 / 3),
+          start: Math.floor((fileSize * 1) / 3),
+          end: Math.floor((fileSize * 2) / 3),
         };
         const expectedContentSize = byteRange.start + 1;
 
@@ -1618,8 +1617,7 @@ describe('storage', function() {
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
         const file = bucket.file('LargeFile');
-        fs
-          .createReadStream(FILES.big.path)
+        fs.createReadStream(FILES.big.path)
           .pipe(file.createWriteStream({resumable: false}))
           .on('error', done)
           .on('finish', function() {
@@ -1668,8 +1666,7 @@ describe('storage', function() {
             const ws = file.createWriteStream();
             let sizeStreamed = 0;
 
-            fs
-              .createReadStream(FILES.big.path)
+            fs.createReadStream(FILES.big.path)
               .pipe(
                 through(function(chunk, enc, next) {
                   sizeStreamed += chunk.length;
@@ -2509,8 +2506,7 @@ describe('storage', function() {
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
-      fs
-        .createReadStream(FILES.logo.path)
+      fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
         .on('error', done)
         .on('finish', done.bind(null, null));
@@ -2558,8 +2554,7 @@ describe('storage', function() {
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
-      fs
-        .createReadStream(FILES.logo.path)
+      fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
         .on('error', done)
         .on('finish', done.bind(null, null));
