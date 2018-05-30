@@ -28,7 +28,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.18.9",
     "bindings": "^1.2.1",
-    "delay": "^2.0.0",
+    "delay": "^3.0.0",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.6.1",
     "nan": "^2.8.0",
