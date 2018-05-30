@@ -94,7 +94,7 @@ mkdir -p "$TESTDIR"
 cp "testing/busybench.js" "$TESTDIR"
 cd "$TESTDIR"
 
-npm install "$PROFILER" >/dev/null
+retry npm install "$PROFILER" >/dev/null
 
 # Run benchmark with agent
 GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --require @google-cloud/profiler busybench.js 600
