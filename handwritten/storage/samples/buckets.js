@@ -102,12 +102,51 @@ function deleteBucket(bucketName) {
   // [END storage_delete_bucket]
 }
 
+function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
+  // [START storage_set_bucket_default_kms_key]
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const defaultKmsKeyName = 'KMS key resource id, e.g. my-key';
+
+  // Enables a default KMS key for the bucket
+  storage
+    .bucket(bucketName)
+    .setMetadata({
+      encryption: {
+        defaultKmsKeyName,
+      },
+    })
+    .then(() => {
+      console.log(
+        `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
+      );
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_set_bucket_default_kms_key]
+}
+
 require(`yargs`)
   .demand(1)
   .command(`create <bucket>`, `Creates a new bucket.`, {}, opts =>
     createBucket(opts.bucket)
   )
   .command(`list`, `Lists all buckets in the current project.`, {}, listBuckets)
+  .command(
+    `enable-default-kms-key <bucket> <defaultKmsKeyName>`,
+    `Sets the default KMS key for the specified bucket.`,
+    {},
+    opts => enableDefaultKMSKey(opts.bucket, opts.defaultKmsKeyName)
+  )
   .command(`delete <bucket>`, `Deletes a bucket.`, {}, opts =>
     deleteBucket(opts.bucket)
   )
@@ -116,6 +155,10 @@ require(`yargs`)
     `Creates a new bucket named "my-bucket".`
   )
   .example(`node $0 list`, `Lists all buckets in the current project.`)
+  .example(
+    `node $0 enable-default-kms-key my-bucket my-key`,
+    `Sets the default KMS key for my-bucket.`
+  )
   .example(`node $0 delete my-bucket`, `Deletes a bucket named "my-bucket".`)
   .wrap(120)
   .recommendCommands()

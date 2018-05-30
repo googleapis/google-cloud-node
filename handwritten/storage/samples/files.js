@@ -141,6 +141,36 @@ function uploadFile(bucketName, filename) {
   // [END storage_upload_file]
 }
 
+function uploadFileWithKmsKey(bucketName, filename, kmsKeyName) {
+  // [START storage_upload_with_kms_key]
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
+  // const kmsKeyName = 'KMS key resource id, e.g. my-key';
+
+  // Uploads a local file to the bucket with the kms key
+  storage
+    .bucket(bucketName)
+    .upload(filename, {
+      kmsKeyName,
+    })
+    .then(() => {
+      console.log(`${filename} uploaded to ${bucketName} using ${kmsKeyName}.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_upload_with_kms_key]
+}
+
 function downloadFile(bucketName, srcFilename, destFilename) {
   // [START storage_download_file]
   // Imports the Google Cloud client library
@@ -403,6 +433,13 @@ require(`yargs`)
     opts => uploadFile(opts.bucketName, opts.srcFileName)
   )
   .command(
+    `upload-with-kms-key <bucketName> <srcFileName> <kmsKeyName>`,
+    `Uploads a local file to a bucket using a KMS key.`,
+    {},
+    opts =>
+      uploadFileWithKmsKey(opts.bucketName, opts.srcFileName, opts.kmsKeyName)
+  )
+  .command(
     `download <bucketName> <srcFileName> <destFileName>`,
     `Downloads a file from a bucket.`,
     {},
@@ -458,6 +495,10 @@ require(`yargs`)
   .example(
     `node $0 upload my-bucket ./file.txt`,
     `Uploads "./file.txt" to "my-bucket".`
+  )
+  .example(
+    `node $0 upload-with-kms-key my-bucket ./file.txt my-key`,
+    `Uploads "./file.txt" to "my-bucket" using "my-key".`
   )
   .example(
     `node $0 download my-bucket file.txt ./file.txt`,

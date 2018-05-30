@@ -28,6 +28,7 @@ const bucket = storage.bucket(bucketName);
 const fileName = `test.txt`;
 const movedFileName = `test2.txt`;
 const copiedFileName = `test3.txt`;
+const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(__dirname, `../resources`, fileName);
 const downloadFilePath = path.join(__dirname, `../resources/downloaded.txt`);
 const cmd = `node files.js`;
@@ -66,6 +67,19 @@ test.serial(`should upload a file`, async t => {
   t.regex(
     results.stdout + results.stderr,
     new RegExp(`${filePath} uploaded to ${bucketName}.`)
+  );
+  const [exists] = await bucket.file(fileName).exists();
+  t.true(exists);
+});
+
+test.serial(`should upload a file with a kms key`, async t => {
+  const results = await tools.runAsyncWithIO(
+    `${cmd} upload-with-kms-key ${bucketName} ${filePath} ${kmsKeyName}`,
+    cwd
+  );
+  t.regex(
+    results.stdout + results.stderr,
+    new RegExp(`${filePath} uploaded to ${bucketName} using ${kmsKeyName}.`)
   );
   const [exists] = await bucket.file(fileName).exists();
   t.true(exists);

@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Google Cloud Storage: Node.js Samples
@@ -83,18 +85,21 @@ __Usage:__ `node buckets.js --help`
 buckets.js <command>
 
 Commands:
-  buckets.js create <bucket>  Creates a new bucket.
-  buckets.js list             Lists all buckets in the current project.
-  buckets.js delete <bucket>  Deletes a bucket.
+  buckets.js create <bucket>                                    Creates a new bucket.
+  buckets.js list                                               Lists all buckets in the current project.
+  buckets.js enable-default-kms-key <bucket>                    Sets the default KMS key for the specified bucket.
+  <defaultKmsKeyName>
+  buckets.js delete <bucket>                                    Deletes a bucket.
 
 Options:
   --version  Show version number                                                                               [boolean]
   --help     Show help                                                                                         [boolean]
 
 Examples:
-  node buckets.js create my-bucket  Creates a new bucket named "my-bucket".
-  node buckets.js list              Lists all buckets in the current project.
-  node buckets.js delete my-bucket  Deletes a bucket named "my-bucket".
+  node buckets.js create my-bucket                         Creates a new bucket named "my-bucket".
+  node buckets.js list                                     Lists all buckets in the current project.
+  node buckets.js enable-default-kms-key my-bucket my-key  Sets the default KMS key for my-bucket.
+  node buckets.js delete my-bucket                         Deletes a bucket named "my-bucket".
 
 For more information, see https://cloud.google.com/storage/docs
 ```
@@ -156,6 +161,8 @@ Commands:
   files.js list <bucketName> [prefix] [delimiter]               Lists files in a bucket, optionally filtering by a
                                                                 prefix.
   files.js upload <bucketName> <srcFileName>                    Uploads a local file to a bucket.
+  files.js upload-with-kms-key <bucketName> <srcFileName>       Uploads a local file to a bucket using a KMS key.
+  <kmsKeyName>
   files.js download <bucketName> <srcFileName> <destFileName>   Downloads a file from a bucket.
   files.js delete <bucketName> <fileName>                       Deletes a file from a bucket.
   files.js get-metadata <bucketName> <fileName>                 Gets the metadata for a file.
@@ -174,6 +181,8 @@ Examples:
   node files.js list my-bucket                                  Lists files in "my-bucket".
   node files.js list my-bucket public/                          Lists files in "my-bucket" filtered by prefix "public/".
   node files.js upload my-bucket ./file.txt                     Uploads "./file.txt" to "my-bucket".
+  node files.js upload-with-kms-key my-bucket ./file.txt        Uploads "./file.txt" to "my-bucket" using "my-key".
+  my-key
   node files.js download my-bucket file.txt ./file.txt          Downloads "gs://my-bucket/file.txt" to "./file.txt".
   node files.js delete my-bucket file.txt                       Deletes "gs://my-bucket/file.txt".
   node files.js get-metadata my-bucket file.txt                 Gets the metadata for "gs://my-bucket/file.txt".
@@ -261,5 +270,5 @@ For more information, see https://cloud.google.com/storage/docs
 [requesterPays_5_docs]: https://cloud.google.com/storage/docs
 [requesterPays_5_code]: requesterPays.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/README.md

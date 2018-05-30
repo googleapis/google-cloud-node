@@ -23,6 +23,7 @@ const uuid = require(`uuid`);
 
 const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
+const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const cmd = `node buckets.js`;
 
@@ -65,6 +66,21 @@ test.serial(`should list buckets`, async t => {
       );
     })
     .start();
+});
+
+test.serial(`should set a bucket's default KMS key`, async t => {
+  const results = await tools.runAsyncWithIO(
+    `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`,
+    cwd
+  );
+  t.regex(
+    results.stdout + results.stderr,
+    new RegExp(
+      `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
+    )
+  );
+  const metadata = await bucket.getMetadata();
+  t.is(metadata[0].encryption.defaultKmsKeyName, defaultKmsKeyName);
 });
 
 test.serial(`should delete a bucket`, async t => {
