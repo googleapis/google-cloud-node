@@ -91,7 +91,7 @@
     "body-parser": "^1.18.3",
     "boom": "^7.2.0",
     "codecov": "^3.0.2",
-    "cpy-cli": "^1.0.1",
+    "cpy-cli": "^2.0.0",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
