@@ -34,6 +34,13 @@ gochecks: &gochecks
       name: Run lint check.
       command: golintlint=$(golint ./...) && if [ -n "$golintlint" ]; then printf 'golint found:\n%s\n' "$golintlint" && exit 1; fi
 
+npmaudit: &npmaudit
+  steps:
+    - checkout
+    - run:
+        name: Run npm security audit.
+        command: npm audit
+
 version: 2.0
 workflows:
   version: 2
@@ -49,12 +56,15 @@ workflows:
           filters: *release_tags
       - gocheck:
           filters: *release_tags
+      - npmaudit:
+          filters: *release_tags
       - publish_npm:
           requires:
             - node6
             - node8
             - node9
             - gocheck
+            - npmaudit
           filters:
             branches:
               ignore: /.*/
@@ -81,10 +91,19 @@ jobs:
       - image: node:10
         user: node
     <<: *unit_tests
+  npmaudit:
+    docker:
+      - image: node:10
+        user: node
+    dependencies:
+      pre:
+        - npm install npm@latest -g
+    <<: *npmaudit
   gocheck:
     docker:
       - image: circleci/golang:1.9
     <<: *gochecks
+
   publish_npm:
     docker:
       - image: node:8
@@ -100,3 +119,4 @@ jobs:
       - run:
           name: Publish the module to npm.
           command: npm publish
+
