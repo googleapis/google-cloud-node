@@ -20,6 +20,6 @@
     "@google-cloud/bigquery-data-transfer": "0.3.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.4"
+    "@google-cloud/nodejs-repo-tools": "2.3.0"
   }
 }
