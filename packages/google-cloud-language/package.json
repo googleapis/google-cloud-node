@@ -76,7 +76,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
     "mocha": "^5.0.0",
-    "nyc": "^11.2.1",
+    "nyc": "^12.0.2",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4"
   }
