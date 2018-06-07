@@ -28,6 +28,9 @@
  * @namespace google.cloud.speech.v1
  */
 /**
+ * @namespace google.cloud.speech.v1p1beta1
+ */
+/**
  * @namespace google.protobuf
  */
 /**
@@ -57,6 +60,9 @@ for (let gapicVersion of Object.keys(gapic)) {
  * - `v1` - This is used for selecting or pinning a particular backend service
  *   version. It exports:
  *   - `SpeechClient` - Reference to {@link v1.SpeechClient}
+ * - `v1p1beta1` - This is used for selecting or pinning a beta backend service
+ *   version. It exports:
+ *   - `SpeechClient` - Reference to {@link v1p1beta1.SpeechClient}
  *
  * @module {object} @google-cloud/speech
  * @alias nodejs-speech
@@ -83,6 +89,11 @@ module.exports = gapic.v1;
  * @property {constructor} SpeechClient Reference to {@link v1.SpeechClient}.
  */
 module.exports.v1 = gapic.v1;
+
+/**
+ * @type {object}
+ * @property {constructor} SpeechClient Reference to {@link v1p1beta1.SpeechClient}.
+ */
 module.exports.v1p1beta1 = gapic.v1p1beta1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
