@@ -171,7 +171,7 @@ export class LoggingWinston extends winston.Transport {
       if ((metadata as types.Metadata).labels) {
         entryMetadata.labels = (entryMetadata.labels) ?
             Object.assign(
-                entryMetadata.labels, (metadata as types.Metadata).labels) :
+                {}, entryMetadata.labels, (metadata as types.Metadata).labels) :
             (metadata as types.Metadata).labels;
         delete (data.metadata as types.Metadata).labels;
       }
