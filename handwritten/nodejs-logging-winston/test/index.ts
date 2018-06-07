@@ -476,13 +476,8 @@ describe('logging-winston', () => {
     const STACKDRIVER_LEVEL = 'alert';  // (code 1)
     const MESSAGE = 'message';
     const PREFIX = 'prefix';
-    const LABELS = {
-      name: 'fake-name',
-      version: '0.0.0',
-    };
-    const METADATA = {
-      value: () => {},
-    };
+    const LABELS = {label1: 'value1'};
+    const METADATA = {value: () => {}, labels: {label2: 'value2'}};
 
     beforeEach(() => {
       const opts = Object.assign({}, OPTIONS, {
@@ -496,17 +491,41 @@ describe('logging-winston', () => {
     it('should properly create an entry with labels and [prefix] message',
        (done) => {
          loggingWinston.stackdriverLog.entry =
-             (entryMetadata: types.StackdriverEntryMetadata,
-              data: types.StackdriverData) => {
-               assert.deepEqual(entryMetadata, {
+             (entryMetadata1: types.StackdriverEntryMetadata,
+              data1: types.StackdriverData) => {
+               assert.deepEqual(entryMetadata1, {
                  resource: loggingWinston.resource,
-                 labels: loggingWinston.labels,
+                 // labels should have been merged.
+                 labels: {
+                   label1: 'value1',
+                   label2: 'value2',
+                 }
                });
-               assert.deepStrictEqual(data, {
+               assert.deepStrictEqual(data1, {
                  message: `[${PREFIX}] ${MESSAGE}`,
                  metadata: METADATA,
                });
-               done();
+
+               const metadataWithoutLabels = Object.assign({}, METADATA);
+               delete metadataWithoutLabels.labels;
+
+               loggingWinston.stackdriverLog.entry =
+                   (entryMetadata2: types.StackdriverEntryMetadata,
+                    data2: types.StackdriverData) => {
+                     console.log(entryMetadata2.labels);
+                     assert.deepEqual(entryMetadata2, {
+                       resource: loggingWinston.resource,
+                       labels: {label1: 'value1'}
+                     });
+                     assert.deepStrictEqual(data2, {
+                       message: `[${PREFIX}] ${MESSAGE}`,
+                       metadata: METADATA,
+                     });
+                     done();
+                   };
+
+               loggingWinston.log(
+                   LEVEL, MESSAGE, metadataWithoutLabels, assert.ifError);
              };
 
          loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
