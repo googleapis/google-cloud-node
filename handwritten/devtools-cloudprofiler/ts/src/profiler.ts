@@ -235,10 +235,8 @@ export class Profiler extends ServiceObject {
     super({parent: new Service(serviceConfig, config), baseUrl: '/'});
     this.config = config;
 
-    this.logger = new Logger({
-      level: Logger.DEFAULT_OPTIONS.levels[config.logLevel as number],
-      tag: pjson.name
-    });
+    this.logger = new Logger(
+        {level: Logger.LEVELS[config.logLevel as number], tag: pjson.name});
 
     const labels: {zone?: string,
                    version?: string, language: string} = {language: 'nodejs'};

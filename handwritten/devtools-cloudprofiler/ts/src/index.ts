@@ -172,10 +172,8 @@ export async function start(config: Config = {}): Promise<void> {
 }
 
 function logError(msg: string, config: Config) {
-  const logger = new Logger({
-    level: Logger.DEFAULT_OPTIONS.levels[config.logLevel || 2],
-    tag: pjson.name
-  });
+  const logger =
+      new Logger({level: Logger.LEVELS[config.logLevel || 2], tag: pjson.name});
   logger.error(msg);
 }
 
@@ -194,10 +192,8 @@ export async function startLocal(config: Config = {}): Promise<void> {
   }
 
   // Set up periodic logging.
-  const logger = new Logger({
-    level: Logger.DEFAULT_OPTIONS.levels[profiler.config.logLevel],
-    tag: pjson.name
-  });
+  const logger = new Logger(
+      {level: Logger.LEVELS[profiler.config.logLevel], tag: pjson.name});
   let heapProfileCount = 0;
   let timeProfileCount = 0;
   let prevLogTime = Date.now();
