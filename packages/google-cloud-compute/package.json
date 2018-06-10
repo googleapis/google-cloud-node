@@ -62,34 +62,34 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.17.0",
-    "arrify": "^1.0.0",
-    "async": "^2.5.0",
+    "@google-cloud/common": "^0.19.2",
+    "arrify": "^1.0.1",
+    "async": "^2.6.1",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.1",
-    "gce-images": "^0.3.0",
-    "is": "^3.0.1",
-    "string-format-obj": "^1.0.0"
+    "gce-images": "^0.3.3",
+    "is": "^3.2.1",
+    "string-format-obj": "^1.1.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "async": "^2.5.0",
-    "codecov": "^3.0.0",
-    "concat-stream": "^1.5.0",
-    "eslint": "^4.9.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-prettier": "^2.3.1",
+    "codecov": "^3.0.2",
+    "concat-stream": "^1.6.2",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
     "extend": "^3.0.1",
-    "ink-docstrap": "^1.3.0",
+    "ink-docstrap": "^1.3.2",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
-    "mocha": "^5.0.0",
+    "mocha": "^5.2.0",
     "nyc": "^12.0.2",
-    "power-assert": "^1.4.4",
-    "prettier": "^1.7.4",
-    "propprop": "^0.3.0",
-    "proxyquire": "^2.0.0",
-    "uuid": "^3.0.1"
+    "power-assert": "^1.5.0",
+    "prettier": "^1.13.5",
+    "propprop": "^0.3.1",
+    "proxyquire": "^2.0.1",
+    "uuid": "^3.2.1"
   }
 }

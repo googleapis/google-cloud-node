@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "@google-cloud/compute": "0.10.0",
-    "googleapis": "29.0.0"
+    "googleapis": "32.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.3",
-    "ava": "0.23.0",
-    "proxyquire": "1.8.0"
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "0.25.0",
+    "proxyquire": "2.0.1"
   }
 }
