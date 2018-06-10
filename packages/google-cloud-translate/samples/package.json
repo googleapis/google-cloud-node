@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@google-cloud/translate": "1.1.0",
-    "yargs": "10.0.3"
+    "yargs": "11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.3",
-    "ava": "0.23.0",
-    "proxyquire": "1.8.0",
-    "sinon": "4.0.2"
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "0.25.0",
+    "proxyquire": "2.0.1",
+    "sinon": "5.1.1"
   }
 }
