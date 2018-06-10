@@ -15,14 +15,14 @@
   },
   "dependencies": {
     "@google-cloud/dns": "0.7.2",
-    "yargs": "10.0.3"
+    "yargs": "11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.3",
-    "ava": "0.23.0",
-    "nyc": "11.2.1",
-    "proxyquire": "1.8.0",
-    "sinon": "4.0.2",
-    "uuid": "3.1.0"
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "0.25.0",
+    "nyc": "12.0.2",
+    "proxyquire": "2.0.1",
+    "sinon": "5.1.1",
+    "uuid": "3.2.1"
   }
 }
