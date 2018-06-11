@@ -6,7 +6,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-dns",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "ava": "ava -T 20s --verbose test/*.test.js system-test/*.test.js",
