@@ -1,5 +1,12 @@
 #!/bin/bash
 
+retry() {
+  for i in {1..3}; do
+    "${@}" && return 0
+  done
+  return 1
+}
+
 # Fail on any error.
 set -eo pipefail
 
@@ -24,7 +31,7 @@ cp -R "testing" "$GOPATH/src/proftest"
 
 # Run test.
 cd "$GOPATH/src/proftest"
-go get -t -tags=integration .
+retry go get -t -tags=integration .
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" == "" ]; then
   go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
 else 
