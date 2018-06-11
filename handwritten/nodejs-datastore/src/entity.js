@@ -501,13 +501,18 @@ function entityToEntityProto(entityObject) {
     var hasEntityPath = entityIndex > -1;
 
     if (!hasArrayPath && !hasEntityPath) {
+      // This is the path end node. Traversal ends here in either case.
       if (entity.properties) {
-        if (entity.properties[path]) {
+        if (
+          entity.properties[path] &&
+          // array properties should be excluded with [] syntax:
+          !entity.properties[path].arrayValue
+        ) {
           // This is the property to exclude!
           entity.properties[path].excludeFromIndexes = true;
         }
       } else if (!path) {
-        // This is a primitive that should be excluded.
+        // This is a primitive or entity root that should be excluded.
         entity.excludeFromIndexes = true;
       }
       return;
@@ -533,12 +538,29 @@ function entityToEntityProto(entityObject) {
       return;
     }
 
-    if (firstPathPartIsArray) {
+    if (
+      firstPathPartIsArray &&
+      // check also if the property in question is actually an array value.
+      entity.properties[firstPathPart].arrayValue
+    ) {
       var array = entity.properties[firstPathPart].arrayValue;
-
-      array.values.forEach(function(arrayValue) {
-        var memberEntity = arrayValue.entityValue || arrayValue;
-        excludePathFromEntity(memberEntity, remainderPath);
+      array.values.forEach(function(value) {
+        if (remainderPath === '') {
+          // We want to exclude *this* array property, which is
+          // equivalent with excluding all its values
+          // (including entity values at their roots):
+          excludePathFromEntity(
+            value,
+            remainderPath // === ''
+          );
+        } else {
+          // Path traversal continues at value.entityValue,
+          // if it is an entity, or must end at value.
+          excludePathFromEntity(
+            value.entityValue || value,
+            remainderPath // !== ''
+          );
+        }
       });
     } else if (firstPathPartIsEntity) {
       var parentEntity = entity.properties[firstPathPart].entityValue;

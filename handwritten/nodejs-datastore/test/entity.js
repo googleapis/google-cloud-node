@@ -591,7 +591,21 @@ describe('entity', function() {
     });
 
     it('should respect excludeFromIndexes', function() {
-      var value = 'Stephen';
+      var value1 = 'Stephen';
+      var value2 = 'Stephen2';
+      var value3 = 'Stephen3';
+      var value4 = 'Stephen4';
+      var value5 = 'Stephen5';
+      var value6 = 'Stephen6';
+      var value7 = 'Stephen7';
+      var value8 = 'Stephen8';
+      var value9 = 'Stephen9';
+      var value10 = 'Stephen10';
+      var value11 = 'Stephen11';
+      var value12 = 'Stephen12';
+      var value13 = 'something';
+      var value14 = 'else';
+      var value15 = 'whatever';
 
       var entityObject = {
         excludeFromIndexes: [
@@ -604,40 +618,44 @@ describe('entity', function() {
           'array[].array[].entity.name',
           'entityExcluded[].name',
           'primitiveExcluded[]',
+          'rules[].requirements[].audiences',
+          'nestedArrayVariants[].a[].b',
+          'alpha[]',
+          'omega',
         ],
 
         data: {
-          name: value,
+          name: value1,
 
           entity: {
-            name: value,
+            name: value2,
           },
 
           entityExcluded: [
-            value,
+            value3,
             {
-              name: value,
+              name: value4,
             },
           ],
 
           primitiveExcluded: [
-            value,
+            value5,
             {
-              name: value,
+              name: value6,
             },
           ],
 
           array: [
-            value,
+            value7,
             {
-              name: value,
+              name: value8,
             },
             {
               entity: {
-                name: value,
+                name: value9,
                 array: [
                   {
-                    name: value,
+                    name: value10,
                   },
                 ],
               },
@@ -646,12 +664,44 @@ describe('entity', function() {
               array: [
                 {
                   entity: {
-                    name: value,
+                    name: value11,
                   },
                 },
               ],
             },
           ],
+
+          rules: [
+            {
+              requirements: [
+                {
+                  audiences: value12,
+                },
+              ],
+            },
+            {
+              requirements: null,
+            },
+          ],
+
+          nestedArrayVariants: [
+            {
+              a: [{b: value13}, {c: value14}],
+            },
+            {
+              a: null,
+            },
+            {
+              a: [value15],
+            },
+            {
+              a: [{b: ['nasty', 'array']}],
+            },
+          ],
+
+          alpha: ['beta', 'gamma'],
+
+          omega: ['beta', 'gamma'],
         },
       };
 
@@ -659,14 +709,14 @@ describe('entity', function() {
         key: null,
         properties: {
           name: {
-            stringValue: value,
+            stringValue: value1,
             excludeFromIndexes: true,
           },
           entity: {
             entityValue: {
               properties: {
                 name: {
-                  stringValue: value,
+                  stringValue: value2,
                   excludeFromIndexes: true,
                 },
               },
@@ -676,13 +726,13 @@ describe('entity', function() {
             arrayValue: {
               values: [
                 {
-                  stringValue: value,
+                  stringValue: value3,
                 },
                 {
                   entityValue: {
                     properties: {
                       name: {
-                        stringValue: value,
+                        stringValue: value4,
                         excludeFromIndexes: true,
                       },
                     },
@@ -695,17 +745,18 @@ describe('entity', function() {
             arrayValue: {
               values: [
                 {
-                  stringValue: value,
+                  stringValue: value5,
                   excludeFromIndexes: true,
                 },
                 {
                   entityValue: {
                     properties: {
                       name: {
-                        stringValue: value,
+                        stringValue: value6,
                       },
                     },
                   },
+                  excludeFromIndexes: true,
                 },
               ],
             },
@@ -714,18 +765,19 @@ describe('entity', function() {
             arrayValue: {
               values: [
                 {
-                  stringValue: value,
+                  stringValue: value7,
                   excludeFromIndexes: true,
                 },
                 {
                   entityValue: {
                     properties: {
                       name: {
-                        stringValue: value,
+                        stringValue: value8,
                         excludeFromIndexes: true,
                       },
                     },
                   },
+                  excludeFromIndexes: true,
                 },
                 {
                   entityValue: {
@@ -734,7 +786,7 @@ describe('entity', function() {
                         entityValue: {
                           properties: {
                             name: {
-                              stringValue: value,
+                              stringValue: value9,
                               excludeFromIndexes: true,
                             },
                             array: {
@@ -744,7 +796,7 @@ describe('entity', function() {
                                     entityValue: {
                                       properties: {
                                         name: {
-                                          stringValue: value,
+                                          stringValue: value10,
                                           excludeFromIndexes: true,
                                         },
                                       },
@@ -758,6 +810,7 @@ describe('entity', function() {
                       },
                     },
                   },
+                  excludeFromIndexes: true,
                 },
                 {
                   entityValue: {
@@ -772,7 +825,7 @@ describe('entity', function() {
                                     entityValue: {
                                       properties: {
                                         name: {
-                                          stringValue: value,
+                                          stringValue: value11,
                                           excludeFromIndexes: true,
                                         },
                                       },
@@ -786,6 +839,165 @@ describe('entity', function() {
                       },
                     },
                   },
+                  excludeFromIndexes: true,
+                },
+              ],
+            },
+          },
+          rules: {
+            arrayValue: {
+              values: [
+                {
+                  entityValue: {
+                    properties: {
+                      requirements: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  audiences: {
+                                    stringValue: value12,
+                                    excludeFromIndexes: true,
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      requirements: {
+                        nullValue: 0,
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+          nestedArrayVariants: {
+            arrayValue: {
+              values: [
+                {
+                  entityValue: {
+                    properties: {
+                      a: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  b: {
+                                    stringValue: value13,
+                                    excludeFromIndexes: true,
+                                  },
+                                },
+                              },
+                            },
+                            {
+                              entityValue: {
+                                properties: {
+                                  c: {
+                                    stringValue: value14,
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      a: {
+                        nullValue: 0,
+                      },
+                    },
+                  },
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      a: {
+                        arrayValue: {
+                          values: [
+                            {
+                              stringValue: value15,
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  entityValue: {
+                    properties: {
+                      a: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  b: {
+                                    // excludeFromIndexes: ['nestedArrayVariants[].a[].b'] does not apply here,
+                                    // To exclude this array (= all its elements), we would use ['nestedArrayVariants[].a[].b[]']
+                                    arrayValue: {
+                                      values: [
+                                        {
+                                          stringValue: 'nasty',
+                                        },
+                                        {
+                                          stringValue: 'array',
+                                        },
+                                      ],
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+          alpha: {
+            // `excludeFromIndexes: ['alpha[]']` results in exclusion of all array elements
+            arrayValue: {
+              values: [
+                {
+                  excludeFromIndexes: true,
+                  stringValue: 'beta',
+                },
+                {
+                  excludeFromIndexes: true,
+                  stringValue: 'gamma',
+                },
+              ],
+            },
+          },
+          omega: {
+            // `excludeFromIndexes: ['omega']` is not applied, because 'omega' is an array.
+            arrayValue: {
+              values: [
+                {
+                  stringValue: 'beta',
+                },
+                {
+                  stringValue: 'gamma',
                 },
               ],
             },
