@@ -407,14 +407,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.logoDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .logoDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.logoDetection = promisify(
     _createSingleFeatureMethod(features.LOGO_DETECTION)
@@ -455,14 +464,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.labelDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .labelDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.labelDetection = promisify(
     _createSingleFeatureMethod(features.LABEL_DETECTION)
@@ -503,14 +521,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.textDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .textDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.textDetection = promisify(
     _createSingleFeatureMethod(features.TEXT_DETECTION)
@@ -551,14 +578,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.documentTextDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .documentTextDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.documentTextDetection = promisify(
     _createSingleFeatureMethod(features.DOCUMENT_TEXT_DETECTION)
@@ -599,14 +635,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.safeSearchDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .safeSearchDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.safeSearchDetection = promisify(
     _createSingleFeatureMethod(features.SAFE_SEARCH_DETECTION)
@@ -647,14 +692,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.imageProperties(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .imageProperties(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.imageProperties = promisify(
     _createSingleFeatureMethod(features.IMAGE_PROPERTIES)
@@ -695,14 +749,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.cropHints(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .cropHints(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.cropHints = promisify(
     _createSingleFeatureMethod(features.CROP_HINTS)
@@ -743,14 +806,23 @@ module.exports = apiVersion => {
    *     call.
    *
    * @example
-   * var image = {
-   *   source: {imageUri: 'gs://path/to/image.jpg'}
+   * const vision = require('@google-cloud/vision');
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
    * };
-   * vision.webDetection(image).then(response => {
-   *   // doThingsWith(response);
-   * }).catch(err => {
-   *   console.error(err);
-   * });
+   *
+   * client
+   *   .webDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
    */
   methods.webDetection = promisify(
     _createSingleFeatureMethod(features.WEB_DETECTION)
