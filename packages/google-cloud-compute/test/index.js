@@ -202,12 +202,6 @@ describe('Compute', function() {
       assert(compute instanceof Compute);
     });
 
-    it('should work without new', function() {
-      assert.doesNotThrow(function() {
-        Compute({projectId: PROJECT_ID});
-      });
-    });
-
     it('should normalize the arguments', function() {
       var normalizeArgumentsCalled = false;
       var options = {};

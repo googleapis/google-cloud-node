@@ -79,10 +79,6 @@ var Image = require('./image.js');
  * });
  */
 function Compute(options) {
-  if (!(this instanceof Compute)) {
-    return new Compute(options);
-  }
-
   options = common.util.normalizeArguments(this, options);
 
   var config = {
