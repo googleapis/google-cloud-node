@@ -101,7 +101,7 @@ jobs:
     <<: *npmaudit
   gocheck:
     docker:
-      - image: circleci/golang:1.9
+      - image: circleci/golang:1.10
     <<: *gochecks
 
   publish_npm:
