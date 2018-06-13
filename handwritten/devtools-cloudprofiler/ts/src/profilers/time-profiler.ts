@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as delay from 'delay';
+import delay from 'delay';
 
 import {perftools} from '../../../proto/profile';
 import {serializeTimeProfile} from './profile-serializer';

@@ -17,8 +17,8 @@
 import {Logger, Service, ServiceObject, util} from '@google-cloud/common';
 import * as http from 'http';
 import * as path from 'path';
-import * as pify from 'pify';
-import * as msToStr from 'pretty-ms';
+import pify from 'pify';
+import msToStr from 'pretty-ms';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';

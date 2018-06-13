@@ -16,9 +16,9 @@
 
 import * as common from '@google-cloud/common';
 import * as assert from 'assert';
-import * as extend from 'extend';
-import * as nock from 'nock';
-import * as pify from 'pify';
+import extend from 'extend';
+import nock from 'nock';
+import pify from 'pify';
 import * as sinon from 'sinon';
 import {instance, mock, reset, verify, when} from 'ts-mockito';
 import * as zlib from 'zlib';

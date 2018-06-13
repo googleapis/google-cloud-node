@@ -17,7 +17,7 @@
 import * as common from '@google-cloud/common';
 import {GlobalConfig} from '@google-cloud/common/build/src/util';
 import * as assert from 'assert';
-import * as extend from 'extend';
+import extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as sinon from 'sinon';
 

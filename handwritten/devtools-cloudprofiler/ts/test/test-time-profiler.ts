@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as delay from 'delay';
+import delay from 'delay';
 import * as sinon from 'sinon';
 
 import {perftools} from '../../proto/profile';

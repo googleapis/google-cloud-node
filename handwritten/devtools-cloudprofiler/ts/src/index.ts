@@ -15,8 +15,8 @@
  */
 
 import {Logger, util} from '@google-cloud/common';
-import * as delay from 'delay';
-import * as extend from 'extend';
+import delay from 'delay';
+import extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
 import * as path from 'path';

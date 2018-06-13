@@ -34,7 +34,9 @@ export interface ProfileNode {
   children: ProfileNode[];
 }
 
-export interface TimeProfileNode extends ProfileNode { hitCount: number; }
+export interface TimeProfileNode extends ProfileNode {
+  hitCount: number;
+}
 
 export interface AllocationProfileNode extends ProfileNode {
   allocations: Allocation[];
