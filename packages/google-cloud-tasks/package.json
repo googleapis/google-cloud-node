@@ -1,0 +1,68 @@
+{
+  "name": "@google-cloud/tasks",
+  "description": "Cloud Tasks API client for Node.js",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-tasks",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google cloud-tasks",
+    "cloud-tasks",
+    "Cloud Tasks API"
+  ],
+  "contributors": [
+    "Justin Beckwith <justin.beckwith@gmail.com>"
+  ],
+  "scripts": {
+    "test": "repo-tools test run --cmd npm -- run cover",
+    "generate-scaffolding": "repo-tools generate all",
+    "generate-scaffolding-samples": "repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
+    "lint": "repo-tools lint --cmd eslint -- src/ samples/ system-test/ test/ smoke-test/",
+    "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js smoke-test/*.js",
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
+    "system-test": "repo-tools test run --cmd mocha -- system-test/*.js smoke-test/*.js --timeout 600000"
+  },
+  "dependencies": {
+    "google-gax": "^0.16.1",
+    "lodash.merge": "^4.6.1"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "async": "^2.6.1",
+    "codecov": "^3.0.2",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "extend": "^3.0.1",
+    "ink-docstrap": "^1.3.2",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "power-assert": "^1.5.0",
+    "prettier": "^1.13.5",
+    "through2": "^2.0.3"
+  }
+}
