@@ -1833,7 +1833,6 @@ Bucket.prototype.request = function(reqOpts, callback) {
   if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
     reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
   }
-
   return common.ServiceObject.prototype.request.call(this, reqOpts, callback);
 };
 
@@ -2447,7 +2446,7 @@ common.paginator.extend(Bucket, 'getFiles');
  * that a callback is omitted.
  */
 common.util.promisifyAll(Bucket, {
-  exclude: ['file', 'notification'],
+  exclude: ['request', 'file', 'notification'],
 });
 
 /**

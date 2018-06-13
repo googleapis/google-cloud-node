@@ -54,7 +54,7 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['setEncryptionKey']);
+    assert.deepEqual(options.exclude, ['request', 'setEncryptionKey']);
   },
 });
 
@@ -89,7 +89,9 @@ const fakeOs = extend(true, {}, osCached);
 let resumableUploadOverride;
 const resumableUpload = require('gcs-resumable-upload');
 function fakeResumableUpload() {
-  return (resumableUploadOverride || resumableUpload).apply(null, arguments);
+  return () => {
+    return resumableUploadOverride || resumableUpload;
+  };
 }
 fakeResumableUpload.createURI = function() {
   let createURI = resumableUpload.createURI;
@@ -99,6 +101,13 @@ fakeResumableUpload.createURI = function() {
   }
 
   return createURI.apply(null, arguments);
+};
+fakeResumableUpload.upload = function() {
+  let upload = resumableUpload.upload;
+  if (resumableUploadOverride && resumableUploadOverride.upload) {
+    upload = resumableUploadOverride.upload;
+  }
+  return upload.apply(null, arguments);
 };
 
 function FakeServiceObject() {
@@ -2003,17 +2012,17 @@ describe('File', function() {
 
     beforeEach(function() {
       BUCKET.storage.authClient = {
-        sign: function(blobToSign, callback) {
-          callback(null, 'signature');
+        sign: () => {
+          return Promise.resolve('signature');
         },
       };
     });
 
     it('should create a signed policy', function(done) {
-      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
+      BUCKET.storage.authClient.sign = function(blobToSign) {
         const policy = Buffer.from(blobToSign, 'base64').toString();
         assert.strictEqual(typeof JSON.parse(policy), 'object');
-        callback(null, 'signature');
+        return Promise.resolve('signature');
       };
 
       file.getSignedPolicy(CONFIG, function(err, signedPolicy) {
@@ -2038,8 +2047,8 @@ describe('File', function() {
     it('should return an error if signBlob errors', function(done) {
       const error = new Error('Error.');
 
-      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
-        callback(error);
+      BUCKET.storage.authClient.sign = () => {
+        return Promise.reject(error);
       };
 
       file.getSignedPolicy(CONFIG, function(err) {
@@ -2344,17 +2353,19 @@ describe('File', function() {
 
     beforeEach(function() {
       BUCKET.storage.authClient = {
-        credentials: {
-          client_email: 'client-email',
+        getCredentials: function() {
+          return Promise.resolve({
+            client_email: 'client-email',
+          });
         },
-        sign: function(blobToSign, callback) {
-          callback(null, 'signature');
+        sign: function() {
+          return Promise.resolve('signature');
         },
       };
     });
 
     it('should create a signed url', function(done) {
-      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
+      BUCKET.storage.authClient.sign = function(blobToSign) {
         assert.deepStrictEqual(
           blobToSign,
           [
@@ -2365,8 +2376,7 @@ describe('File', function() {
             `/${BUCKET.name}/${encodeURIComponent(file.name)}`,
           ].join('\n')
         );
-
-        callback(null, 'signature');
+        return Promise.resolve('signature');
       };
 
       file.getSignedUrl(CONFIG, function(err, signedUrl) {
@@ -2410,8 +2420,8 @@ describe('File', function() {
     it('should return an error if signBlob errors', function(done) {
       const error = new Error('Error.');
 
-      BUCKET.storage.authClient.sign = function(blobToSign, callback) {
-        callback(error);
+      BUCKET.storage.authClient.sign = function() {
+        return Promise.reject(error);
       };
 
       file.getSignedUrl(CONFIG, function(err) {
@@ -3228,26 +3238,28 @@ describe('File', function() {
         file.encryptionKey = 'key';
         file.kmsKeyName = 'kms-key-name';
 
-        resumableUploadOverride = function(opts) {
-          const bucket = file.bucket;
-          const storage = bucket.storage;
+        resumableUploadOverride = {
+          upload: function(opts) {
+            const bucket = file.bucket;
+            const storage = bucket.storage;
+            const authClient = storage.makeAuthenticatedRequest.authClient;
 
-          assert.strictEqual(opts.authClient, storage.authClient);
-          assert.strictEqual(opts.bucket, bucket.name);
-          assert.strictEqual(opts.file, file.name);
-          assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.key, file.encryptionKey);
-          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
-          assert.strictEqual(opts.metadata, options.metadata);
-          assert.strictEqual(opts.offset, options.offset);
-          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
-          assert.strictEqual(opts.private, options.private);
-          assert.strictEqual(opts.public, options.public);
-          assert.strictEqual(opts.uri, options.uri);
-          assert.strictEqual(opts.userProject, options.userProject);
+            assert.strictEqual(opts.authClient, authClient);
+            assert.strictEqual(opts.bucket, bucket.name);
+            assert.strictEqual(opts.file, file.name);
+            assert.strictEqual(opts.generation, file.generation);
+            assert.strictEqual(opts.key, file.encryptionKey);
+            assert.strictEqual(opts.metadata, options.metadata);
+            assert.strictEqual(opts.offset, options.offset);
+            assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
+            assert.strictEqual(opts.private, options.private);
+            assert.strictEqual(opts.public, options.public);
+            assert.strictEqual(opts.uri, options.uri);
+            assert.strictEqual(opts.userProject, options.userProject);
 
-          setImmediate(done);
-          return through();
+            setImmediate(done);
+            return through();
+          },
         };
 
         file.startResumableUpload_(duplexify(), options);
@@ -3257,11 +3269,13 @@ describe('File', function() {
         const resp = {};
         const uploadStream = through();
 
-        resumableUploadOverride = function() {
-          setImmediate(function() {
-            uploadStream.emit('response', resp);
-          });
-          return uploadStream;
+        resumableUploadOverride = {
+          upload: function() {
+            setImmediate(function() {
+              uploadStream.emit('response', resp);
+            });
+            return uploadStream;
+          },
         };
 
         uploadStream.on('response', function(resp_) {
@@ -3276,16 +3290,18 @@ describe('File', function() {
         const metadata = {};
         const uploadStream = through();
 
-        resumableUploadOverride = function() {
-          setImmediate(function() {
-            uploadStream.emit('metadata', metadata);
-
+        resumableUploadOverride = {
+          upload: function() {
             setImmediate(function() {
-              assert.strictEqual(file.metadata, metadata);
-              done();
+              uploadStream.emit('metadata', metadata);
+
+              setImmediate(function() {
+                assert.strictEqual(file.metadata, metadata);
+                done();
+              });
             });
-          });
-          return uploadStream;
+            return uploadStream;
+          },
         };
 
         file.startResumableUpload_(duplexify());
@@ -3296,12 +3312,14 @@ describe('File', function() {
 
         dup.on('complete', done);
 
-        resumableUploadOverride = function() {
-          const uploadStream = new stream.Transform();
-          setImmediate(function() {
-            uploadStream.end();
-          });
-          return uploadStream;
+        resumableUploadOverride = {
+          upload: function() {
+            const uploadStream = new stream.Transform();
+            setImmediate(function() {
+              uploadStream.end();
+            });
+            return uploadStream;
+          },
         };
 
         file.startResumableUpload_(dup);
@@ -3316,8 +3334,10 @@ describe('File', function() {
           done();
         };
 
-        resumableUploadOverride = function() {
-          return uploadStream;
+        resumableUploadOverride = {
+          upload: function() {
+            return uploadStream;
+          },
         };
 
         file.startResumableUpload_(dup);

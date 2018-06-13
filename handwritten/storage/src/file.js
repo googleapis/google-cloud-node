@@ -1602,18 +1602,18 @@ File.prototype.getSignedPolicy = function(options, callback) {
   const policyString = JSON.stringify(policy);
   const policyBase64 = Buffer.from(policyString).toString('base64');
 
-  this.storage.authClient.sign(policyBase64, function(err, signature) {
-    if (err) {
+  this.storage.authClient.sign(policyBase64).then(
+    signature => {
+      callback(null, {
+        string: policyString,
+        base64: policyBase64,
+        signature: signature,
+      });
+    },
+    err => {
       callback(new SigningError(err.message));
-      return;
     }
-
-    callback(null, {
-      string: policyString,
-      base64: policyBase64,
-      signature: signature,
-    });
-  });
+  );
 };
 
 /**
@@ -1781,45 +1781,46 @@ File.prototype.getSignedUrl = function(config, callback) {
   ].join('\n');
 
   const authClient = this.storage.authClient;
+  authClient
+    .sign(blobToSign)
+    .then(signature => {
+      authClient.getCredentials().then(credentials => {
+        const query = {
+          GoogleAccessId: credentials.client_email,
+          Expires: expiresInSeconds,
+          Signature: signature,
+        };
 
-  authClient.sign(blobToSign, function(err, signature) {
-    if (err) {
+        if (is.string(config.responseType)) {
+          query['response-content-type'] = config.responseType;
+        }
+
+        if (is.string(config.promptSaveAs)) {
+          query['response-content-disposition'] =
+            'attachment; filename="' + config.promptSaveAs + '"';
+        }
+        if (is.string(config.responseDisposition)) {
+          query['response-content-disposition'] = config.responseDisposition;
+        }
+
+        if (self.generation) {
+          query.generation = self.generation;
+        }
+
+        const parsedHost = url.parse(config.cname || STORAGE_DOWNLOAD_BASE_URL);
+        const signedUrl = url.format({
+          protocol: parsedHost.protocol,
+          hostname: parsedHost.hostname,
+          pathname: self.bucket.name + '/' + name,
+          query: query,
+        });
+
+        callback(null, signedUrl);
+      });
+    })
+    .catch(err => {
       callback(new SigningError(err.message));
-      return;
-    }
-
-    const query = {
-      GoogleAccessId: authClient.credentials.client_email,
-      Expires: expiresInSeconds,
-      Signature: signature,
-    };
-
-    if (is.string(config.responseType)) {
-      query['response-content-type'] = config.responseType;
-    }
-
-    if (is.string(config.promptSaveAs)) {
-      query['response-content-disposition'] =
-        'attachment; filename="' + config.promptSaveAs + '"';
-    }
-    if (is.string(config.responseDisposition)) {
-      query['response-content-disposition'] = config.responseDisposition;
-    }
-
-    if (self.generation) {
-      query.generation = self.generation;
-    }
-
-    const parsedHost = url.parse(config.cname || STORAGE_DOWNLOAD_BASE_URL);
-    const signedUrl = url.format({
-      protocol: parsedHost.protocol,
-      hostname: parsedHost.hostname,
-      pathname: self.bucket.name + '/' + name,
-      query: query,
     });
-
-    callback(null, signedUrl);
-  });
 };
 
 /**
@@ -2366,7 +2367,7 @@ File.prototype.startResumableUpload_ = function(dup, options) {
     options
   );
 
-  const uploadStream = resumableUpload({
+  const uploadStream = resumableUpload.upload({
     authClient: this.storage.authClient,
     bucket: this.bucket.name,
     file: this.name,
@@ -2467,7 +2468,7 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(File, {
-  exclude: ['setEncryptionKey'],
+  exclude: ['request', 'setEncryptionKey'],
 });
 
 /**

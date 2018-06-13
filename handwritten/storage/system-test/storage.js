@@ -160,7 +160,9 @@ describe('storage', function() {
 
       it('should not upload a file', function(done) {
         file.save('new data', function(err) {
-          assert(err.message.indexOf('Could not authenticate') > -1);
+          assert(
+            err.message.indexOf('Could not load the default credentials') > -1
+          );
           done();
         });
       });
