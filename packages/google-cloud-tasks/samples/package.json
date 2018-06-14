@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-docs-samples-tasks",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "repository": "@google-cloud/tasks",
+  "engines": {
+    "node": ">=6.14.2"
+  },
+  "scripts": {
+    "test": "node -e 'console.log(`no tests`);'"
+  },
+  "dependencies": {
+    "@google-cloud/tasks": "0.1.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.3.0"
+  }
+}
