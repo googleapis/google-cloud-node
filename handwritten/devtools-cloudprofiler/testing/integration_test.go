@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"strings"
 	"testing"
 	"text/template"
 	"time"
@@ -37,7 +38,7 @@ var (
 	branch = flag.String("branch", "", "git branch to test")
 	commit = flag.String("commit", "", "git commit to test")
 	pr     = flag.Int("pr", 0, "git pull request to test")
-	runID  = time.Now().Unix()
+	runID  = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
 )
 
 const cloudScope = "https://www.googleapis.com/auth/cloud-platform"
@@ -187,10 +188,10 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node6-%d", runID),
+				Name:        fmt.Sprintf("profiler-test-node6-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node6-%d-gce", runID),
+			name:         fmt.Sprintf("profiler-test-node6-%s-gce", runID),
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "6",
 		},
@@ -198,10 +199,10 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node8-%d", runID),
+				Name:        fmt.Sprintf("profiler-test-node8-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node8-%d-gce", runID),
+			name:         fmt.Sprintf("profiler-test-node8-%s-gce", runID),
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "8",
 		},
@@ -209,10 +210,10 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node9-%d", runID),
+				Name:        fmt.Sprintf("profiler-test-node9-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node9-%d-gce", runID),
+			name:         fmt.Sprintf("profiler-test-node9-%s-gce", runID),
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "9",
 		},
@@ -220,10 +221,10 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node10-%d", runID),
+				Name:        fmt.Sprintf("profiler-test-node10-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node10-%d-gce", runID),
+			name:         fmt.Sprintf("profiler-test-node10-%s-gce", runID),
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "10",
 		},
