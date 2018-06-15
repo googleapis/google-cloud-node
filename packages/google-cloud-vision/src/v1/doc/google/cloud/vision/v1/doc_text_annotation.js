@@ -148,10 +148,12 @@ var TextAnnotation = {
  *   This object should have the same structure as [TextProperty]{@link google.cloud.vision.v1.TextProperty}
  *
  * @property {number} width
- *   Page width in pixels.
+ *   Page width. For PDFs the unit is points. For images (including
+ *   TIFFs) the unit is pixels.
  *
  * @property {number} height
- *   Page height in pixels.
+ *   Page height. For PDFs the unit is points. For images (including
+ *   TIFFs) the unit is pixels.
  *
  * @property {Object[]} blocks
  *   List of blocks of text, images etc on this page.

@@ -34,12 +34,36 @@ var Vertex = {
 };
 
 /**
+ * A vertex represents a 2D point in the image.
+ * NOTE: the normalized vertex coordinates are relative to the original image
+ * and range from 0 to 1.
+ *
+ * @property {number} x
+ *   X coordinate.
+ *
+ * @property {number} y
+ *   Y coordinate.
+ *
+ * @typedef NormalizedVertex
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.NormalizedVertex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/geometry.proto}
+ */
+var NormalizedVertex = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * A bounding polygon for the detected image annotation.
  *
  * @property {Object[]} vertices
  *   The bounding polygon vertices.
  *
  *   This object should have the same structure as [Vertex]{@link google.cloud.vision.v1.Vertex}
+ *
+ * @property {Object[]} normalizedVertices
+ *   The bounding polygon normalized vertices.
+ *
+ *   This object should have the same structure as [NormalizedVertex]{@link google.cloud.vision.v1.NormalizedVertex}
  *
  * @typedef BoundingPoly
  * @memberof google.cloud.vision.v1
