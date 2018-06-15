@@ -1,0 +1,13 @@
+{
+  "_product": "automl",
+  "id": "automl",
+  "name": "TBD",
+  "short_name": "TBD",
+  "docs_url": "TBD",
+  "description": "TBD",
+  "api_id": "TBD",
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/automl/latest/",
+  "release_quality": "alpha"
+}

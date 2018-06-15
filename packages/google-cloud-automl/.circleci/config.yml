@@ -1,0 +1,180 @@
+version: 2
+workflows:
+  version: 2
+  tests:
+    jobs: &workflow_jobs
+      - node4:
+          filters: &all_commits
+            tags:
+              only: /.*/
+      - node6:
+          filters: *all_commits
+      - node8:
+          filters: *all_commits
+      - node9:
+          filters: *all_commits
+      - node10:
+          filters: *all_commits
+      - lint:
+          requires:
+            - node4
+            - node6
+            - node8
+            - node9
+            - node10
+          filters: *all_commits
+      - docs:
+          requires:
+            - node4
+            - node6
+            - node8
+            - node9
+            - node10
+          filters: *all_commits
+      - system_tests:
+          requires:
+            - lint
+            - docs
+          filters:
+            branches:
+              only: master
+            tags: &releases
+              only: '/^v[\d.]+$/'
+      - publish_npm:
+          requires:
+            - system_tests
+          filters:
+            branches:
+              ignore: /.*/
+            tags: *releases
+  nightly:
+    triggers:
+      - schedule:
+          cron: 0 7 * * *
+          filters:
+            branches:
+              only: master
+    jobs: *workflow_jobs
+jobs:
+  node4:
+    docker:
+      - image: 'node:4'
+        user: node
+    steps: &unit_tests_steps
+      - checkout
+      - run: &remove_package_lock
+          name: Remove package-lock.json if needed.
+          command: |
+            WORKFLOW_NAME=`python .circleci/get_workflow_name.py`
+            echo "Workflow name: $WORKFLOW_NAME"
+            if [ "$WORKFLOW_NAME" = "nightly" ]; then
+              echo "Nightly build detected, removing package-lock.json"
+              rm -f package-lock.json samples/package-lock.json
+            else
+              echo "Not a nightly build, skipping this step."
+            fi
+      - run: &npm_install_and_link
+          name: Install and link the module
+          command: |-
+            mkdir -p /home/node/.npm-global
+            npm install
+            npm link
+            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Run unit tests.
+          command: npm test
+      - run:
+          name: Submit coverage data to codecov.
+          command: node_modules/.bin/codecov
+          when: always
+  node6:
+    docker:
+      - image: 'node:6'
+        user: node
+    steps: *unit_tests_steps
+  node8:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps: *unit_tests_steps
+  node9:
+    docker:
+      - image: 'node:9'
+        user: node
+    steps: *unit_tests_steps
+  node10:
+    docker:
+      - image: 'node:10'
+        user: node
+    steps: *unit_tests_steps
+  lint:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run: *npm_install_and_link
+      - run: &samples_npm_install_and_link
+          name: Link the module being tested to the samples.
+          command: |
+            cd samples/
+            npm link ../
+            npm install
+            cd ..
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Run linting.
+          command: npm run lint
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+  docs:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run: *npm_install_and_link
+      - run:
+          name: Build documentation.
+          command: npm run docs
+  system_tests:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run:
+          name: Decrypt credentials.
+          command: |
+            openssl aes-256-cbc -d -in .circleci/key.json.enc \
+                -out .circleci/key.json \
+                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
+      - run: *npm_install_and_link
+      - run:
+          name: Run system tests.
+          command: npm run system-test
+          environment:
+            GCLOUD_PROJECT: long-door-651
+            GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
+      - run:
+          name: Remove unencrypted key.
+          command: rm .circleci/key.json
+          when: always
+  publish_npm:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run:
+          name: Set NPM authentication.
+          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run:
+          name: Publish the module to npm.
+          command: npm publish --access=public
