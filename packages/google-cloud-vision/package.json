@@ -82,11 +82,11 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
     "mocha": "^5.0.0",
-    "node-uuid": "^1.4.7",
     "nyc": "^11.3.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.11.1",
     "safe-buffer": "^5.1.1",
-    "sinon": "^5.0.0"
+    "sinon": "^5.0.0",
+    "uuid": "^3.2.1"
   }
 }
