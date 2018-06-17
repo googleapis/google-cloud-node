@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "repository": "googleapis/nodejs-vision",
   "main": "src/index.js",
