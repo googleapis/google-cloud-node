@@ -62,7 +62,6 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.18.2",
-    "async": "^2.6.1",
     "extend": "^3.0.1",
     "google-gax": "^0.16.0",
     "google-proto-files": "^0.16.0",
@@ -73,6 +72,7 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@google-cloud/storage": "^1.7.0",
+    "async": "^2.0.1",
     "codecov": "^3.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
