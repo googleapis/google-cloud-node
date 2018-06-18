@@ -109,7 +109,7 @@ class IntentsClient {
 
     // Determine the client header string.
     var clientHeader = [
-      `gl-node/${process.version.node}`,
+      `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,

@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Dialogflow: Node.js Samples
@@ -39,17 +41,20 @@ View the [source code][dialogflow_detect_intent_text_0_code].
 __Usage:__ `node detect.js --help`
 
 ```
+detect.js <command>
+
 Commands:
-  text               Detects the intent for text queries.
-  event <eventName>  Detects the intent for a client-generated event name.
-  audio <filename>   Detects the intent for audio queries in a local file.
-  stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
+  detect.js text               Detects the intent for text queries.
+  detect.js event <eventName>  Detects the intent for a client-generated event name.
+  detect.js audio <filename>   Detects the intent for audio queries in a local file.
+  detect.js stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
 
 Options:
+  --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "9fd492f0-337c-11e8-b8a1-51ae25f2192e"]
+                                                              [string] [default: "a6ee09c0-70f0-11e8-8d23-63e745d585eb"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -80,17 +85,20 @@ View the [source code][dialogflow_detect_intent_audio_1_code].
 __Usage:__ `node detect.js --help`
 
 ```
+detect.js <command>
+
 Commands:
-  text               Detects the intent for text queries.
-  event <eventName>  Detects the intent for a client-generated event name.
-  audio <filename>   Detects the intent for audio queries in a local file.
-  stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
+  detect.js text               Detects the intent for text queries.
+  detect.js event <eventName>  Detects the intent for a client-generated event name.
+  detect.js audio <filename>   Detects the intent for audio queries in a local file.
+  detect.js stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
 
 Options:
+  --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "9ffd77b0-337c-11e8-8164-317ecf4365b4"]
+                                                              [string] [default: "a7572bd0-70f0-11e8-8567-cfcff039b200"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -121,17 +129,20 @@ View the [source code][dialogflow_detect_intent_streaming_2_code].
 __Usage:__ `node detect.js --help`
 
 ```
+detect.js <command>
+
 Commands:
-  text               Detects the intent for text queries.
-  event <eventName>  Detects the intent for a client-generated event name.
-  audio <filename>   Detects the intent for audio queries in a local file.
-  stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
+  detect.js text               Detects the intent for text queries.
+  detect.js event <eventName>  Detects the intent for a client-generated event name.
+  detect.js audio <filename>   Detects the intent for audio queries in a local file.
+  detect.js stream <filename>  Detects the intent in a local audio file by streaming it to the Conversation API.
 
 Options:
+  --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                                                      [string] [required]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "a03131e0-337c-11e8-8ab5-1fc99ed1d3fc"]
+                                                              [string] [default: "a79c4b20-70f0-11e8-8130-7d00c605276f"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
                [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -162,21 +173,25 @@ View the [source code][dialogflow_create_entity_3_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -209,21 +224,25 @@ View the [source code][dialogflow_delete_entity_4_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -256,21 +275,25 @@ View the [source code][dialogflow_create_intent_5_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -303,21 +326,25 @@ View the [source code][dialogflow_delete_intent_6_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -350,21 +377,25 @@ View the [source code][dialogflow_create_context_7_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -397,21 +428,25 @@ View the [source code][dialogflow_delete_context_8_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -444,21 +479,25 @@ View the [source code][dialogflow_create_session_entity_type_9_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -491,21 +530,25 @@ View the [source code][dialogflow_delete_session_entity_type_10_code].
 __Usage:__ `node resource.js --help`
 
 ```
+resource.js <command>
+
 Commands:
-  setup-agent                                              Create entity types and intent for ordering pizzas.
-  clear-agent                                              Delete all intents and entity types from an agent.
-  show-agent                                               Show all intents and entity types from an agent.
-  update-entity-type <entityTypeId>                        Update an entity type.
-  update-intent <intentId>                                 Update an intent.
-  setup-session <sessionId>                                Create contexts and session entity types for a session. It
-                                                           assumes the agents is set up by setup-agent command.
-  show-session <sessionId>                                 Show all contexts and session entity types in a session.
-  clear-session <sessionId>                                Delete all contexts and session entity types.
-  update-context <sessionId> <contextId>                   Update a context.
-  update-session-entity-type <sessionId> <entityTypeName>  Update a session entity type.
-  restore-room-agent                                       Restore the room booking Dialogflow agent
+  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
+  resource.js clear-agent                                       Delete all intents and entity types from an agent.
+  resource.js show-agent                                        Show all intents and entity types from an agent.
+  resource.js update-entity-type <entityTypeId>                 Update an entity type.
+  resource.js update-intent <intentId>                          Update an intent.
+  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
+                                                                It assumes the agents is set up by setup-agent command.
+  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
+  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
+  resource.js update-context <sessionId> <contextId>            Update a context.
+  resource.js update-session-entity-type <sessionId>            Update a session entity type.
+  <entityTypeName>
+  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
 
 Options:
+  --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                    environment variables.                                                            [string] [required]
   --force, -f      force operation without a prompt                                                            [boolean]
@@ -529,5 +572,5 @@ For more information, see https://cloud.google.com/conversation/docs
 [dialogflow_delete_session_entity_type_10_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType
 [dialogflow_delete_session_entity_type_10_code]: resource.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/README.md

@@ -30,9 +30,11 @@
   ],
   "contributors": [
     "Alexander Fenster <fenster@google.com>",
+    "Christopher Wilcox <git@crwilcox.com>",
     "Jorge del Casar <948953+jorgecasar@users.noreply.github.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
-    "Matt Carroll <matthewcarroll@google.com>"
+    "Matt Carroll <matthewcarroll@google.com>",
+    "renovate[bot] <renovate[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
