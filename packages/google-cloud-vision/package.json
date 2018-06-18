@@ -62,7 +62,6 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.18.2",
-    "extend": "^3.0.1",
     "google-gax": "^0.16.0",
     "google-proto-files": "^0.16.0",
     "is": "^3.2.1",
