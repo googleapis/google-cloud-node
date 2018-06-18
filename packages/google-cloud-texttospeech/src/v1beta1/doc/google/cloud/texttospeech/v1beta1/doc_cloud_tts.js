@@ -202,6 +202,11 @@ var VoiceSelectionParams = {
  *   supported for the encoding chosen, in which case it will fail the request
  *   and return google.rpc.Code.INVALID_ARGUMENT.
  *
+ * @property {string[]} effectsProfileId
+ *   An identifier which selects 'audio effects' profiles that are applied on
+ *   (post synthesized) text to speech.
+ *   Effects are applied on top of each other in the order they are given.
+ *
  * @typedef AudioConfig
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.AudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}

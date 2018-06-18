@@ -30,6 +30,9 @@
   ],
   "contributors": [
     "Alexander Fenster <fenster@google.com>",
+    "Chris Wilcox <crwilcox@google.com>",
+    "Christopher Wilcox <git@crwilcox.com>",
+    "Justin Beckwith <justin.beckwith@gmail.com>",
     "Rebecca Taylor <rebeccataylor@google.com>"
   ],
   "scripts": {
