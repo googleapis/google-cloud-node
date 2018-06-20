@@ -2467,19 +2467,21 @@ describe('File', function() {
     describe('cname', function() {
       it('should use a provided cname', function(done) {
         const host = 'http://www.example.com';
+        const configWithCname = extend({cname: host}, CONFIG);
 
-        file.getSignedUrl(
-          {
-            action: 'read',
-            cname: host,
-            expires: Date.now() + 2000,
-          },
-          function(err, signedUrl) {
-            assert.ifError(err);
-            assert.strictEqual(signedUrl.indexOf(host), 0);
-            done();
-          }
-        );
+        file.getSignedUrl(configWithCname, function(err, signedUrl) {
+          assert.ifError(err);
+
+          const expires = Math.round(CONFIG.expires / 1000);
+          const expected =
+            'http://www.example.com/file-name.png?' +
+            'GoogleAccessId=client-email&Expires=' +
+            expires +
+            '&Signature=signature';
+
+          assert.equal(signedUrl, expected);
+          done();
+        });
       });
 
       it('should remove trailing slashes from cname', function(done) {

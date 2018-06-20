@@ -1811,7 +1811,7 @@ File.prototype.getSignedUrl = function(config, callback) {
         const signedUrl = url.format({
           protocol: parsedHost.protocol,
           hostname: parsedHost.hostname,
-          pathname: self.bucket.name + '/' + name,
+          pathname: config.cname ? name : self.bucket.name + '/' + name,
           query: query,
         });
 
