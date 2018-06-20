@@ -158,7 +158,6 @@ function deleteTask(taskId) {
 // [END datastore_delete_entity]
 
 require(`yargs`) // eslint-disable-line
-  .demand(1)
   .command(
     `new <description>`,
     `Adds a task with a description <description>.`,
@@ -178,5 +177,4 @@ require(`yargs`) // eslint-disable-line
   .example(`node $0 delete 12345`, `Deletes task 12345.`)
   .wrap(120)
   .epilogue(`For more information, see https://cloud.google.com/datastore/docs`)
-  .help()
-  .strict().argv;
+  .help().argv;
