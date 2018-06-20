@@ -117,7 +117,6 @@ test.serial('performs a projection query', t => {
     });
 });
 test.serial(`performs a keys only query`, t => query.testKeysOnlyQuery(t));
-test.serial(`performs a distinct query`, t => query.testDistinctQuery(t));
 test.serial(`performs a distinct on query`, t => query.testDistinctOnQuery(t));
 test.serial(`performs an array value inequality query`, t =>
   query.testArrayValueInequalityRange(t)

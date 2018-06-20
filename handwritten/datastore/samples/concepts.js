@@ -817,21 +817,6 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testDistinctQuery(t) {
-    t.plan(0);
-    const datastore = this.datastore;
-
-    // [START datastore_distinct_query]
-    const query = datastore
-      .createQuery('Task')
-      .groupBy(['category', 'priority'])
-      .order('category')
-      .order('priority');
-    // [END datastore_distinct_query]
-
-    return this.datastore.runQuery(query);
-  }
-
   testDistinctOnQuery(t) {
     t.plan(0);
     const datastore = this.datastore;

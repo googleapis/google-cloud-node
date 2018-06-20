@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Google Cloud Datastore: Node.js Samples
@@ -29,29 +31,6 @@ View the [source code][tasks_0_code].
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md)
 
 __Usage:__ `node tasks.js --help`
-
-```
-tasks.js <command>
-
-Commands:
-  tasks.js new <description>  Adds a task with a description <description>.
-  tasks.js done <taskId>      Marks the specified task as done.
-  tasks.js list               Lists all tasks ordered by creation time.
-  tasks.js delete <taskId>    Deletes a task.
-
-Options:
-  --version  Show version number                                                                               [boolean]
-  --help     Show help                                                                                         [boolean]
-
-Examples:
-  node tasks.js new "Buy milk"  Adds a task with description "Buy milk".
-  node tasks.js done 12345      Marks task 12345 as Done.
-  node tasks.js list            Lists all tasks ordered by creation time
-  node tasks.js delete 12345    Deletes task 12345.
-
-For more information, see https://cloud.google.com/datastore/docs
-```
-
 [tasks_0_docs]: https://cloud.google.com/datastore/docs/datastore-api-tutorial
 [tasks_0_code]: tasks.js
 
@@ -72,5 +51,5 @@ __Usage:__ `node error.js`
 [error_2_docs]: https://cloud.google.com/datastore/docs/concepts/errors
 [error_2_code]: error.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/README.md
