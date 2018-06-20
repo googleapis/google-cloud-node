@@ -2253,11 +2253,7 @@ describe('storage', function() {
       bucket.createChannel('new-channel', config, function(err) {
         // Actually creating a channel is pretty complicated. This will at least
         // let us know we hit the right endpoint and it received "yahoo.com".
-        assert.strictEqual(
-          err.message,
-          'Unauthorized WebHook callback channel: ' + config.address
-        );
-
+        assert(err.message.includes(config.address));
         done();
       });
     });
