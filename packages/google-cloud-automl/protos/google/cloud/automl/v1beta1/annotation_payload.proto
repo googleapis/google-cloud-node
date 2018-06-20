@@ -42,10 +42,10 @@ message AnnotationPayload {
   // ancestor dataset, or the dataset that was used to train the model in use.
   string annotation_spec_id = 1;
 
-  // Output only. The snapshot value of [AnnotationSpec.display_name][google.cloud.automl.v1beta1.AnnotationSpec.display_name] when
-  // the model was trained. Because this field returns a snapshot value, for
-  // different models trained using the same dataset, the returned value could
-  // be different as model owner could update the display_name in the mid of
-  // two model training.
-  string display_name_snapshot = 5;
+  // Output only. The value of [AnnotationSpec.display_name][google.cloud.automl.v1beta1.AnnotationSpec.display_name] when the model
+  // was trained. Because this field returns a value at model training time,
+  // for different models trained using the same dataset, the returned value
+  // could be different as model owner could update the display_name between
+  // any two model training.
+  string display_name = 5;
 }

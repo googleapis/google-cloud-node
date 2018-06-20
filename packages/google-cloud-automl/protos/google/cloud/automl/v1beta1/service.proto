@@ -22,6 +22,7 @@ import "google/cloud/automl/v1beta1/dataset.proto";
 import "google/cloud/automl/v1beta1/io.proto";
 import "google/cloud/automl/v1beta1/model.proto";
 import "google/cloud/automl/v1beta1/model_evaluation.proto";
+import "google/cloud/automl/v1beta1/operations.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/field_mask.proto";
 

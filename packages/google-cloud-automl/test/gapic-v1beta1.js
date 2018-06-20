@@ -945,10 +945,10 @@ describe('AutoMlClient', () => {
 
       // Mock response
       var name2 = 'name2-1052831874';
-      var done = true;
+      var isDone = true;
       var expectedResponse = {
         name: name2,
-        done: done,
+        done: isDone,
       };
 
       // Mock Grpc layer
@@ -1015,10 +1015,10 @@ describe('AutoMlClient', () => {
 
       // Mock response
       var name2 = 'name2-1052831874';
-      var done = true;
+      var isDone = true;
       var expectedResponse = {
         name: name2,
-        done: done,
+        done: isDone,
       };
 
       // Mock Grpc layer
