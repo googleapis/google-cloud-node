@@ -75,7 +75,8 @@
   "dependencies": {
     "@google-cloud/logging": "^1.1.7",
     "@sindresorhus/is": "^0.5.0",
-    "lodash.mapvalues": "^4.6.0"
+    "lodash.mapvalues": "^4.6.0",
+    "post-install-check": "0.0.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.2.4",
