@@ -1,6 +1,6 @@
 {
   "name": "google-cloud",
-  "version": "0.57.0",
+  "version": "0.58.0",
   "author": "Google Inc.",
   "description": "Deprecated Cloud APIs Client Library for Node.js",
   "contributors": [
@@ -107,6 +107,7 @@
     "vision"
   ],
   "dependencies": {
+    "semver": "^5.5.0"
   },
   "devDependencies": {
     "mocha": "^3.1.0",
