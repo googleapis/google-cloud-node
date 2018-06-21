@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@google-cloud/compute": "0.10.0",
-    "googleapis": "32.0.0"
+    "googleapis": "32.0.0",
+    "nodemailer": "^4.3.1",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "2.3.0",
