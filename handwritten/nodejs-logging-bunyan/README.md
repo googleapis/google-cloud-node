@@ -120,7 +120,7 @@ logger.info({
 }, req.path);
 ```
 
-The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message.
+The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
 ### Correlating Logs with Traces
 
@@ -181,7 +181,7 @@ See [LICENSE](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/LI
 [product-docs]: https://cloud.google.com/logging/docs
 [shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
 
-[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
+[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest
 [error-reporting]: https://cloud.google.com/error-reporting/
 [@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
 [uncaught]: https://nodejs.org/api/process.html#process_event_uncaughtexception
