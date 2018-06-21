@@ -61,7 +61,7 @@
     "presamples-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
-    "system-test": "repo-tools test run --cmd mocha -- build/system-test/*.js --timeout 600000 --bail -r source-map-support/register",
+    "system-test": "repo-tools test run --cmd mocha -- build/system-test/*.js --timeout 600000 -r source-map-support/register",
     "test": "repo-tools test run --cmd mocha -- build/test/*.js -r source-map-support/register",
     "check": "gts check",
     "clean": "gts clean",
