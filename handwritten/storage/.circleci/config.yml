@@ -109,8 +109,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/storage
             npm install
+            npm link @google-cloud/storage
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -200,3 +200,4 @@ jobs:
       - run:
           name: Publish the module to npm.
           command: npm publish
+

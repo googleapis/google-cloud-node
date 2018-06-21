@@ -65,7 +65,7 @@
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.19.2",
+    "@google-cloud/common": "^0.20.0",
     "arrify": "^1.0.0",
     "async": "^2.0.1",
     "compressible": "^2.0.12",
