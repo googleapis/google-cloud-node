@@ -1,6 +1,0 @@
-deployment:
-  release:
-    tag: /.+/
-    owner: GoogleCloudPlatform
-    commands:
-      - ./scripts/circle/post-test.sh

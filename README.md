@@ -1,11 +1,6 @@
 # Cloud Node.js Client
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
-[![NPM Version](https://img.shields.io/npm/v/google-cloud.svg)](https://www.npmjs.org/package/google-cloud)
-[![CircleCI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master.svg?style=shield)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node/tree/master)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
-[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/google-cloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/google-cloud-node?branch=master)
-
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
 
@@ -62,23 +57,7 @@ var storage = require('@google-cloud/storage')(config);
 
 #### The google-cloud meta-package
 
-We also provide a meta-package, `google-cloud`, which provides all of the individual APIs. However, in order to keep file size and memory use low, the use of this package is not recommended.
-
-If you want the kitchen sink, however, get it with:
-
-```sh
-$ npm install --save google-cloud
-```
-```js
-var gcloud = require('google-cloud')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-var datastore = gcloud.datastore();
-var storage = gcloud.storage();
-```
-
+The meta-package, `google-cloud`, has been deprecated.
 
 ## Example Applications
 
@@ -101,10 +80,6 @@ If you are running this client on Google Cloud Platform, we handle authenticatio
 
 ``` js
 var storage = require('@google-cloud/storage')();
-
-// If you're using the google-cloud meta-package:
-var gcloud = require('google-cloud');
-var storage = gcloud.storage();
 
 // ...you're good to go! See the next section to get started using the APIs.
 ```
@@ -138,29 +113,6 @@ If you are not running this client on Google Cloud Platform, you need a Google D
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
-
-``` js
-// Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
-
-var gcloud = require('google-cloud')({
-  projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
-
-  // For any APIs that accept an API key:
-  key: '...'
-});
-
-// ...you're good to go! See the next section to get started using the APIs.
-```
-
-You can also set auth on a per-API-instance basis. The examples below show you how.
-
 
 ## Cloud Datastore (GA)
 
