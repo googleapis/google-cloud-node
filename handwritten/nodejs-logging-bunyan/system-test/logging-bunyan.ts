@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
+import assert from 'assert';
 import * as bunyan from 'bunyan';
 
 import * as types from '../src/types/core';

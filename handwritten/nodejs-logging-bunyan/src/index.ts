@@ -211,8 +211,7 @@ export class LoggingBunyan extends Writable {
   _writev(
       chunks: Array<{
         // tslint:disable-next-line:no-any
-        chunk: any;
-        encoding: string;
+        chunk: any; encoding: string;
       }>,
       callback?: Function) {
     const entries = chunks.map((request: {
