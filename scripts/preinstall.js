@@ -16,8 +16,10 @@
 
 'use strict';
 
-console.error('The google-cloud package has been deprecated. For a list of ' + 
-            'Google Cloud Platform API specific packages please visit ' + 
-            'https://cloud.google.com/nodejs/docs/reference/libraries');
+console.error('The google-cloud package has been deprecated. We strongly' +
+              'recommend installing individual API packages, such as ' +
+              '@google-cloud/storage. For a list of Google Cloud Platform ' +
+              'API specific packages please visit ' + 
+              'https://cloud.google.com/nodejs/docs/reference/libraries');
             
 process.exit(-1);

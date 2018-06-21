@@ -107,7 +107,6 @@
     "vision"
   ],
   "dependencies": {
-    "extend": "^3.0.0"
   },
   "devDependencies": {
     "mocha": "^3.1.0",
@@ -115,7 +114,6 @@
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js google-cloud",
-    "test": "mocha test/*.js",
     "preinstall": "node ../../scripts/preinstall.js"
   },
   "license": "Apache-2.0",
