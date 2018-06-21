@@ -58,7 +58,7 @@
     "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "repo-tools test run --cmd mocha -- build/system-test/*.js --timeout 600000 --bail",
+    "system-test": "repo-tools test run --cmd mocha -- build/system-test/*.js --timeout 600000",
     "test": "repo-tools test run --cmd mocha -- build/test/*.js",
     "check": "gts check",
     "clean": "gts clean",
