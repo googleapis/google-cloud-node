@@ -2,7 +2,7 @@
   "name": "google-cloud",
   "version": "0.58.0",
   "author": "Google Inc.",
-  "description": "Deprecated Cloud APIs Client Library for Node.js",
+  "description": "*DEPRECATED* Cloud APIs Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",

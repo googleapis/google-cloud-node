@@ -1,7 +1,0 @@
-**/src/*/**/*
-**/system-test/*/**/*
-**/test/*/**/*
-**/node_modules/
-**/coverage
-**/gapic*.js
-**/smoke-test/**/*
