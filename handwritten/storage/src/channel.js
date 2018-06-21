@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const util = require('util');
 
 /**
  * Create a channel object to interact with a Cloud Storage channel.
@@ -33,73 +32,73 @@ const util = require('util');
  * const storage = require('@google-cloud/storage')();
  * const channel = storage.channel('id', 'resource-id');
  */
-function Channel(storage, id, resourceId) {
-  const config = {
-    parent: storage,
-    baseUrl: '/channels',
+class Channel extends common.ServiceObject {
+  constructor(storage, id, resourceId) {
+    const config = {
+      parent: storage,
+      baseUrl: '/channels',
 
-    // An ID shouldn't be included in the API requests.
-    // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
-    id: '',
+      // An ID shouldn't be included in the API requests.
+      // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
+      id: '',
 
-    methods: {
-      // Only need `request`.
-    },
-  };
+      methods: {
+        // Only need `request`.
+      },
+    };
 
-  common.ServiceObject.call(this, config);
+    super(config);
 
-  this.metadata.id = id;
-  this.metadata.resourceId = resourceId;
+    this.metadata.id = id;
+    this.metadata.resourceId = resourceId;
+  }
+
+  /**
+   * @typedef {array} StopResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback StopCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Stop this channel.
+   *
+   * @param {StopCallback} [callback] Callback function.
+   * @returns {Promise<StopResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const channel = storage.channel('id', 'resource-id');
+   * channel.stop(function(err, apiResponse) {
+   *   if (!err) {
+   *     // Channel stopped successfully.
+   *   }
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * channel.stop().then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  stop(callback) {
+    callback = callback || common.util.noop;
+
+    this.request(
+      {
+        method: 'POST',
+        uri: '/stop',
+        json: this.metadata,
+      },
+      function(err, apiResponse) {
+        callback(err, apiResponse);
+      }
+    );
+  }
 }
-
-util.inherits(Channel, common.ServiceObject);
-
-/**
- * @typedef {array} StopResponse
- * @property {object} 0 The full API response.
- */
-/**
- * @callback StopCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Stop this channel.
- *
- * @param {StopCallback} [callback] Callback function.
- * @returns {Promise<StopResponse>}
- *
- * @example
- * const storage = require('@google-cloud/storage')();
- * const channel = storage.channel('id', 'resource-id');
- * channel.stop(function(err, apiResponse) {
- *   if (!err) {
- *     // Channel stopped successfully.
- *   }
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * channel.stop().then(function(data) {
- *   const apiResponse = data[0];
- * });
- */
-Channel.prototype.stop = function(callback) {
-  callback = callback || common.util.noop;
-
-  this.request(
-    {
-      method: 'POST',
-      uri: '/stop',
-      json: this.metadata,
-    },
-    function(err, apiResponse) {
-      callback(err, apiResponse);
-    }
-  );
-};
 
 /*! Developer Documentation
  *

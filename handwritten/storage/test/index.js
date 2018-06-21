@@ -107,20 +107,6 @@ describe('Storage', function() {
       });
     });
 
-    it('should normalize the arguments', function() {
-      let normalizeArgumentsCalled = false;
-      const options = {};
-
-      fakeUtil.normalizeArguments = function(context, options_) {
-        normalizeArgumentsCalled = true;
-        assert.strictEqual(options_, options);
-        return options_;
-      };
-
-      new Storage(options);
-      assert.strictEqual(normalizeArgumentsCalled, true);
-    });
-
     it('should inherit from Service', function() {
       assert(storage instanceof Service);
 

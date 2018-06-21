@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const is = require('is');
-const util = require('util');
 
 /**
  * A Notification object is created from your {@link Bucket} object using
@@ -39,301 +38,297 @@ const util = require('util');
  *
  * const notification = myBucket.notification('1');
  */
-function Notification(bucket, id) {
-  const methods = {
-    /**
-     * Creates a notification subscription for the bucket.
-     *
-     * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
-     *
-     * @param {Topic|string} topic The Cloud PubSub topic to which this
-     *     subscription publishes. If the project ID is omitted, the current
-     *     project ID will be used.
-     *
-     *     Acceptable formats are:
-     *     - `projects/grape-spaceship-123/topics/my-topic`
-     *
-     *     - `my-topic`
-     * @param {CreateNotificationRequest} [options] Metadata to set for
-     *     the notification.
-     * @param {CreateNotificationCallback} [callback] Callback function.
-     * @returns {Promise<CreateNotificationResponse>}
-     * @throws {Error} If a valid topic is not provided.
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const myBucket = storage.bucket('my-bucket');
-     * const notification = myBucket.notification('1');
-     *
-     * notification.create(function(err, notification, apiResponse) {
-     *   if (!err) {
-     *     // The notification was created successfully.
-     *   }
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * notification.create().then(function(data) {
-     *   const notification = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    create: true,
+class Notification extends common.ServiceObject {
+  constructor(bucket, id) {
+    const methods = {
+      /**
+       * Creates a notification subscription for the bucket.
+       *
+       * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
+       *
+       * @param {Topic|string} topic The Cloud PubSub topic to which this
+       *     subscription publishes. If the project ID is omitted, the current
+       *     project ID will be used.
+       *
+       *     Acceptable formats are:
+       *     - `projects/grape-spaceship-123/topics/my-topic`
+       *
+       *     - `my-topic`
+       * @param {CreateNotificationRequest} [options] Metadata to set for
+       *     the notification.
+       * @param {CreateNotificationCallback} [callback] Callback function.
+       * @returns {Promise<CreateNotificationResponse>}
+       * @throws {Error} If a valid topic is not provided.
+       *
+       * @example
+       * const storage = require('@google-cloud/storage')();
+       * const myBucket = storage.bucket('my-bucket');
+       * const notification = myBucket.notification('1');
+       *
+       * notification.create(function(err, notification, apiResponse) {
+       *   if (!err) {
+       *     // The notification was created successfully.
+       *   }
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * notification.create().then(function(data) {
+       *   const notification = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      create: true,
 
-    /**
-     * @typedef {array} NotificationExistsResponse
-     * @property {boolean} 0 Whether the notification exists or not.
-     */
-    /**
-     * @callback NotificationExistsCallback
-     * @param {?Error} err Request error, if any.
-     * @param {boolean} exists Whether the notification exists or not.
-     */
-    /**
-     * Check if the notification exists.
-     *
-     * @param {NotificationExistsCallback} [callback] Callback function.
-     * @returns {Promise<NotificationExistsResponse>}
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const myBucket = storage.bucket('my-bucket');
-     * const notification = myBucket.notification('1');
-     *
-     * notification.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * notification.exists().then(function(data) {
-     *   const exists = data[0];
-     * });
-     */
-    exists: true,
-  };
+      /**
+       * @typedef {array} NotificationExistsResponse
+       * @property {boolean} 0 Whether the notification exists or not.
+       */
+      /**
+       * @callback NotificationExistsCallback
+       * @param {?Error} err Request error, if any.
+       * @param {boolean} exists Whether the notification exists or not.
+       */
+      /**
+       * Check if the notification exists.
+       *
+       * @param {NotificationExistsCallback} [callback] Callback function.
+       * @returns {Promise<NotificationExistsResponse>}
+       *
+       * @example
+       * const storage = require('@google-cloud/storage')();
+       * const myBucket = storage.bucket('my-bucket');
+       * const notification = myBucket.notification('1');
+       *
+       * notification.exists(function(err, exists) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * notification.exists().then(function(data) {
+       *   const exists = data[0];
+       * });
+       */
+      exists: true,
+    };
 
-  common.ServiceObject.call(this, {
-    parent: bucket,
-    baseUrl: '/notificationConfigs',
-    id: id.toString(),
-    createMethod: bucket.createNotification.bind(bucket),
-    methods: methods,
-  });
-}
-
-util.inherits(Notification, common.ServiceObject);
-
-/**
- * @typedef {array} DeleteNotificationResponse
- * @property {object} 0 The full API response.
- */
-/**
- * @callback DeleteNotificationCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Permanently deletes a notification subscription.
- *
- * @see [Notifications: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/delete}
- *
- * @param {object} [options] Configuration options.
- * @param {string} [options.userProject] The ID of the project which will be
- *     billed for the request.
- * @param {DeleteNotificationCallback} [callback] Callback function.
- * @returns {Promise<DeleteNotificationResponse>}
- *
- * @example
- * const storage = require('@google-cloud/storage')();
- * const myBucket = storage.bucket('my-bucket');
- * const notification = myBucket.notification('1');
- *
- * notification.delete(function(err, apiResponse) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * notification.delete().then(function(data) {
- *   const apiResponse = data[0];
- * });
- *
- * @example <caption>include:samples/notifications.js</caption>
- * region_tag:storage_delete_notification
- * Another example:
- */
-Notification.prototype.delete = function(options, callback) {
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
+    super({
+      parent: bucket,
+      baseUrl: '/notificationConfigs',
+      id: id.toString(),
+      createMethod: bucket.createNotification.bind(bucket),
+      methods: methods,
+    });
   }
 
-  this.request(
-    {
-      method: 'DELETE',
-      uri: '',
-      qs: options,
-    },
-    callback || common.util.noop
-  );
-};
-
-/**
- * @typedef {array} GetNotificationResponse
- * @property {Notification} 0 The {@link Notification}
- * @property {object} 1 The full API response.
- */
-/**
- * @callback GetNotificationCallback
- * @param {?Error} err Request error, if any.
- * @param {Notification} notification The {@link Notification}.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Get a notification and its metadata if it exists.
- *
- * @see [Notifications: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get}
- *
- * @param {object} [options] Configuration options.
- *     See {@link Bucket#createNotification} for create options.
- * @param {boolean} [options.autoCreate] Automatically create the object if
- *     it does not exist. Default: `false`.
- * @param {string} [options.userProject] The ID of the project which will be
- *     billed for the request.
- * @param {GetNotificationCallback} [callback] Callback function.
- * @return {Promise<GetNotificationCallback>}
- *
- * @example
- * const storage = require('@google-cloud/storage')();
- * const myBucket = storage.bucket('my-bucket');
- * const notification = myBucket.notification('1');
- *
- * notification.get(function(err, notification, apiResponse) {
- *   // `notification.metadata` has been populated.
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * notification.get().then(function(data) {
- *   const notification = data[0];
- *   const apiResponse = data[1];
- * });
- */
-Notification.prototype.get = function(options, callback) {
-  const self = this;
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  const autoCreate = options.autoCreate;
-  delete options.autoCreate;
-
-  function onCreate(err, notification, apiResponse) {
-    if (err) {
-      if (err.code === 409) {
-        self.get(options, callback);
-        return;
-      }
-
-      callback(err, null, apiResponse);
-      return;
+  /**
+   * @typedef {array} DeleteNotificationResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback DeleteNotificationCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Permanently deletes a notification subscription.
+   *
+   * @see [Notifications: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/delete}
+   *
+   * @param {object} [options] Configuration options.
+   * @param {string} [options.userProject] The ID of the project which will be
+   *     billed for the request.
+   * @param {DeleteNotificationCallback} [callback] Callback function.
+   * @returns {Promise<DeleteNotificationResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const notification = myBucket.notification('1');
+   *
+   * notification.delete(function(err, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * notification.delete().then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   *
+   * @example <caption>include:samples/notifications.js</caption>
+   * region_tag:storage_delete_notification
+   * Another example:
+   */
+  delete(options, callback) {
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
     }
 
-    callback(null, notification, apiResponse);
+    this.request(
+      {
+        method: 'DELETE',
+        uri: '',
+        qs: options,
+      },
+      callback || common.util.noop
+    );
   }
 
-  this.getMetadata(options, function(err, metadata) {
-    if (err) {
-      if (err.code === 404 && autoCreate) {
-        const args = [];
+  /**
+   * @typedef {array} GetNotificationResponse
+   * @property {Notification} 0 The {@link Notification}
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetNotificationCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Notification} notification The {@link Notification}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Get a notification and its metadata if it exists.
+   *
+   * @see [Notifications: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get}
+   *
+   * @param {object} [options] Configuration options.
+   *     See {@link Bucket#createNotification} for create options.
+   * @param {boolean} [options.autoCreate] Automatically create the object if
+   *     it does not exist. Default: `false`.
+   * @param {string} [options.userProject] The ID of the project which will be
+   *     billed for the request.
+   * @param {GetNotificationCallback} [callback] Callback function.
+   * @return {Promise<GetNotificationCallback>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const notification = myBucket.notification('1');
+   *
+   * notification.get(function(err, notification, apiResponse) {
+   *   // `notification.metadata` has been populated.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * notification.get().then(function(data) {
+   *   const notification = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  get(options, callback) {
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
 
-        if (!is.empty(options)) {
-          args.push(options);
+    const autoCreate = options.autoCreate;
+    delete options.autoCreate;
+
+    const onCreate = (err, notification, apiResponse) => {
+      if (err) {
+        if (err.code === 409) {
+          this.get(options, callback);
+          return;
         }
 
-        args.push(onCreate);
-
-        self.create.apply(self, args);
+        callback(err, null, apiResponse);
         return;
       }
 
-      callback(err, null, metadata);
-      return;
-    }
+      callback(null, notification, apiResponse);
+    };
 
-    callback(null, self, metadata);
-  });
-};
+    this.getMetadata(options, (err, metadata) => {
+      if (err) {
+        if (err.code === 404 && autoCreate) {
+          const args = [];
 
-/**
- * @typedef {array} GetNotificationMetadataResponse
- * @property {object} 0 The notification metadata.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback GetNotificationMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {object} files The notification metadata.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Get the notification's metadata.
- *
- * @see [Notifications: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get}
- *
- * @param {object} [options] Configuration options.
- * @param {string} [options.userProject] The ID of the project which will be
- *     billed for the request.
- * @param {GetNotificationMetadataCallback} [callback] Callback function.
- * @returns {Promise<GetNotificationMetadataResponse>}
- *
- * @example
- * const storage = require('@google-cloud/storage')();
- * const myBucket = storage.bucket('my-bucket');
- * const notification = myBucket.notification('1');
- *
- * notification.getMetadata(function(err, metadata, apiResponse) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * notification.getMetadata().then(function(data) {
- *   const metadata = data[0];
- *   const apiResponse = data[1];
- * });
- *
- * @example <caption>include:samples/notifications.js</caption>
- * region_tag:storage_notifications_get_metadata
- * Another example:
- */
-Notification.prototype.getMetadata = function(options, callback) {
-  const self = this;
+          if (!is.empty(options)) {
+            args.push(options);
+          }
 
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
+          args.push(onCreate);
+
+          this.create.apply(this, args);
+          return;
+        }
+
+        callback(err, null, metadata);
+        return;
+      }
+
+      callback(null, this, metadata);
+    });
   }
 
-  this.request(
-    {
-      uri: '',
-      qs: options,
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, resp);
-        return;
-      }
-
-      self.metadata = resp;
-
-      callback(null, self.metadata, resp);
+  /**
+   * @typedef {array} GetNotificationMetadataResponse
+   * @property {object} 0 The notification metadata.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetNotificationMetadataCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} files The notification metadata.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Get the notification's metadata.
+   *
+   * @see [Notifications: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get}
+   *
+   * @param {object} [options] Configuration options.
+   * @param {string} [options.userProject] The ID of the project which will be
+   *     billed for the request.
+   * @param {GetNotificationMetadataCallback} [callback] Callback function.
+   * @returns {Promise<GetNotificationMetadataResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const notification = myBucket.notification('1');
+   *
+   * notification.getMetadata(function(err, metadata, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * notification.getMetadata().then(function(data) {
+   *   const metadata = data[0];
+   *   const apiResponse = data[1];
+   * });
+   *
+   * @example <caption>include:samples/notifications.js</caption>
+   * region_tag:storage_notifications_get_metadata
+   * Another example:
+   */
+  getMetadata(options, callback) {
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
     }
-  );
-};
+
+    this.request(
+      {
+        uri: '',
+        qs: options,
+      },
+      (err, resp) => {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+
+        this.metadata = resp;
+
+        callback(null, this.metadata, resp);
+      }
+    );
+  }
+}
 
 /*! Developer Documentation
  *
