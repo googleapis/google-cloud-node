@@ -14,7 +14,7 @@
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js system-test/*.test.js && nyc report"
   },
   "dependencies": {
-    "@google-cloud/datastore": "1.4.0",
+    "@google-cloud/datastore": "1.4.1",
     "sinon": "5.1.1",
     "yargs": "11.0.0"
   },
