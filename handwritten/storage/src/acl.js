@@ -38,131 +38,6 @@ const is = require('is');
  */
 class AclRoleAccessorMethods {
   constructor() {
-    AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));
-  }
-
-  _assignAccessMethods(role) {
-    const accessMethods = AclRoleAccessorMethods.accessMethods;
-    const entities = AclRoleAccessorMethods.entities;
-    const roleGroup = role.toLowerCase() + 's';
-
-    this[roleGroup] = entities.reduce((acc, entity) => {
-      const isPrefix = entity.charAt(entity.length - 1) === '-';
-
-      accessMethods.forEach(accessMethod => {
-        let method = accessMethod + entity[0].toUpperCase() + entity.substr(1);
-
-        if (isPrefix) {
-          method = method.replace('-', '');
-        }
-
-        // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
-        // more complex API of specifying an `entity` and `role`.
-        acc[method] = (entityId, options, callback) => {
-          let apiEntity;
-
-          if (is.fn(options)) {
-            callback = options;
-            options = {};
-          }
-
-          if (isPrefix) {
-            apiEntity = entity + entityId;
-          } else {
-            // If the entity is not a prefix, it is a special entity group that
-            // does not require further details. The accessor methods only accept
-            // a callback.
-            apiEntity = entity;
-            callback = entityId;
-          }
-
-          options = extend(
-            {
-              entity: apiEntity,
-              role: role,
-            },
-            options
-          );
-
-          const args = [options];
-
-          if (is.fn(callback)) {
-            args.push(callback);
-          }
-
-          return this[accessMethod].apply(this, args);
-        };
-      });
-
-      return acc;
-    }, {});
-  }
-}
-
-AclRoleAccessorMethods.accessMethods = ['add', 'delete'];
-
-AclRoleAccessorMethods.entities = [
-  // Special entity groups that do not require further specification.
-  'allAuthenticatedUsers',
-  'allUsers',
-
-  // Entity groups that require specification, e.g. `user-email@example.com`.
-  'domain-',
-  'group-',
-  'project-',
-  'user-',
-];
-
-AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
-
-/**
- * Cloud Storage uses access control lists (ACLs) to manage object and
- * bucket access. ACLs are the mechanism you use to share objects with other
- * users and allow other users to access your buckets and objects.
- *
- * An ACL consists of one or more entries, where each entry grants permissions
- * to an entity. Permissions define the actions that can be performed against an
- * object or bucket (for example, `READ` or `WRITE`); the entity defines who the
- * permission applies to (for example, a specific user or group of users).
- *
- * Where an `entity` value is accepted, we follow the format the Cloud Storage
- * API expects.
- *
- * Refer to
- * https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls
- * for the most up-to-date values.
- *
- *   - `user-userId`
- *   - `user-email`
- *   - `group-groupId`
- *   - `group-email`
- *   - `domain-domain`
- *   - `project-team-projectId`
- *   - `allUsers`
- *   - `allAuthenticatedUsers`
- *
- * Examples:
- *
- *   - The user "liz@example.com" would be `user-liz@example.com`.
- *   - The group "example@googlegroups.com" would be
- *     `group-example@googlegroups.com`.
- *   - To refer to all members of the Google Apps for Business domain
- *     "example.com", the entity would be `domain-example.com`.
- *
- * For more detailed information, see
- * [About Access Control Lists](http://goo.gl/6qBBPO).
- *
- * @constructor Acl
- * @mixin
- * @param {object} options Configuration options.
- */
-class Acl extends AclRoleAccessorMethods {
-  constructor(options) {
-    super();
-
-    this.pathPrefix = options.pathPrefix;
-    this.request_ = options.request;
-
     /**
      * An object of convenience methods to add or delete owner ACL permissions for a
      * given entity.
@@ -311,6 +186,131 @@ class Acl extends AclRoleAccessorMethods {
      * });
      */
     this.writers = {};
+
+    AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));
+  }
+
+  _assignAccessMethods(role) {
+    const accessMethods = AclRoleAccessorMethods.accessMethods;
+    const entities = AclRoleAccessorMethods.entities;
+    const roleGroup = role.toLowerCase() + 's';
+
+    this[roleGroup] = entities.reduce((acc, entity) => {
+      const isPrefix = entity.charAt(entity.length - 1) === '-';
+
+      accessMethods.forEach(accessMethod => {
+        let method = accessMethod + entity[0].toUpperCase() + entity.substr(1);
+
+        if (isPrefix) {
+          method = method.replace('-', '');
+        }
+
+        // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
+        // more complex API of specifying an `entity` and `role`.
+        acc[method] = (entityId, options, callback) => {
+          let apiEntity;
+
+          if (is.fn(options)) {
+            callback = options;
+            options = {};
+          }
+
+          if (isPrefix) {
+            apiEntity = entity + entityId;
+          } else {
+            // If the entity is not a prefix, it is a special entity group that
+            // does not require further details. The accessor methods only accept
+            // a callback.
+            apiEntity = entity;
+            callback = entityId;
+          }
+
+          options = extend(
+            {
+              entity: apiEntity,
+              role: role,
+            },
+            options
+          );
+
+          const args = [options];
+
+          if (is.fn(callback)) {
+            args.push(callback);
+          }
+
+          return this[accessMethod].apply(this, args);
+        };
+      });
+
+      return acc;
+    }, {});
+  }
+}
+
+AclRoleAccessorMethods.accessMethods = ['add', 'delete'];
+
+AclRoleAccessorMethods.entities = [
+  // Special entity groups that do not require further specification.
+  'allAuthenticatedUsers',
+  'allUsers',
+
+  // Entity groups that require specification, e.g. `user-email@example.com`.
+  'domain-',
+  'group-',
+  'project-',
+  'user-',
+];
+
+AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
+
+/**
+ * Cloud Storage uses access control lists (ACLs) to manage object and
+ * bucket access. ACLs are the mechanism you use to share objects with other
+ * users and allow other users to access your buckets and objects.
+ *
+ * An ACL consists of one or more entries, where each entry grants permissions
+ * to an entity. Permissions define the actions that can be performed against an
+ * object or bucket (for example, `READ` or `WRITE`); the entity defines who the
+ * permission applies to (for example, a specific user or group of users).
+ *
+ * Where an `entity` value is accepted, we follow the format the Cloud Storage
+ * API expects.
+ *
+ * Refer to
+ * https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls
+ * for the most up-to-date values.
+ *
+ *   - `user-userId`
+ *   - `user-email`
+ *   - `group-groupId`
+ *   - `group-email`
+ *   - `domain-domain`
+ *   - `project-team-projectId`
+ *   - `allUsers`
+ *   - `allAuthenticatedUsers`
+ *
+ * Examples:
+ *
+ *   - The user "liz@example.com" would be `user-liz@example.com`.
+ *   - The group "example@googlegroups.com" would be
+ *     `group-example@googlegroups.com`.
+ *   - To refer to all members of the Google Apps for Business domain
+ *     "example.com", the entity would be `domain-example.com`.
+ *
+ * For more detailed information, see
+ * [About Access Control Lists](http://goo.gl/6qBBPO).
+ *
+ * @constructor Acl
+ * @mixin
+ * @param {object} options Configuration options.
+ */
+class Acl extends AclRoleAccessorMethods {
+  constructor(options) {
+    super();
+
+    this.pathPrefix = options.pathPrefix;
+    this.request_ = options.request;
   }
 
   /**
