@@ -54,9 +54,9 @@ var fakeEntity = {
 var fakeUtil = extend({}, util);
 var originalFakeUtil = extend(true, {}, fakeUtil);
 
-var googleAutoAuthOverride;
-function fakeGoogleAutoAuth() {
-  return (googleAutoAuthOverride || util.noop).apply(null, arguments);
+var GoogleAuthOverride;
+function fakeGoogleAuth() {
+  return (GoogleAuthOverride || util.noop).apply(null, arguments);
 }
 
 var createInsecureOverride;
@@ -111,7 +111,9 @@ describe('Datastore', function() {
       './query.js': FakeQuery,
       './transaction.js': FakeTransaction,
       './v1': FakeV1,
-      'google-auto-auth': fakeGoogleAutoAuth,
+      'google-auth-library': {
+        GoogleAuth: fakeGoogleAuth,
+      },
       'google-gax': fakeGoogleGax,
     });
   });
@@ -120,7 +122,7 @@ describe('Datastore', function() {
     extend(fakeUtil, originalFakeUtil);
 
     createInsecureOverride = null;
-    googleAutoAuthOverride = null;
+    GoogleAuthOverride = null;
 
     datastore = new Datastore({
       projectId: PROJECT_ID,
@@ -138,7 +140,7 @@ describe('Datastore', function() {
 
   after(function() {
     createInsecureOverride = null;
-    googleAutoAuthOverride = null;
+    GoogleAuthOverride = null;
   });
 
   it('should export GAX client', function() {
@@ -283,15 +285,15 @@ describe('Datastore', function() {
       assert.strictEqual(datastore.options.sslCreds, fakeInsecureCreds);
     });
 
-    it('should cache a local google-auto-auth instance', function() {
-      var fakeGoogleAutoAuthInstance = {};
+    it('should cache a local GoogleAuth instance', function() {
+      var fakeGoogleAuthInstance = {};
 
-      googleAutoAuthOverride = function() {
-        return fakeGoogleAutoAuthInstance;
+      GoogleAuthOverride = function() {
+        return fakeGoogleAuthInstance;
       };
 
       var datastore = new Datastore({});
-      assert.strictEqual(datastore.auth, fakeGoogleAutoAuthInstance);
+      assert.strictEqual(datastore.auth, fakeGoogleAuthInstance);
     });
   });
 
