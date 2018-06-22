@@ -92,9 +92,7 @@ jobs:
             fi
       - run: &npm_install_and_link
           name: Install and link the module.
-          command: |
-            npm install
-            npm link
+          command: npm install
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
@@ -127,12 +125,12 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/error-reporting
+            npm link ../
             npm install
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run: 
+      - run:
           name: Run linting.
           command: npm run lint
           environment:
