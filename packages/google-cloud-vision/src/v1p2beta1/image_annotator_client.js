@@ -74,14 +74,14 @@ class ImageAnnotatorClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
     var clientHeader = [
-      `gl-node/${process.version.node}`,
+      `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -98,7 +98,7 @@ class ImageAnnotatorClient {
         'google/cloud/vision/v1p2beta1/image_annotator.proto'
       )
     );
-    var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,

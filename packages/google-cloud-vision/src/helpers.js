@@ -244,7 +244,7 @@ module.exports = apiVersion => {
     });
   });
 
-  let protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+  let protoFilesRoot = new gax.GoogleProtoFilesRoot();
   protoFilesRoot = protobuf.loadSync(
     path.join(
       __dirname,

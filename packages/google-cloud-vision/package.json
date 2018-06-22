@@ -32,12 +32,15 @@
     "Ace Nassri <anassri@google.com>",
     "Alexander Fenster <fenster@google.com>",
     "Ali Ijaz Sheikh <ofrobots@google.com>",
+    "Christopher Wilcox <git@crwilcox.com>",
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Ernest Landrito <landrito@google.com>",
     "Gus Class <gguuss@gmail.com>",
     "Jason Dobry <jdobry@google.com>",
-    "Jonathan Lui <jonathanlui@google.com>",
+    "Jonathan Lui <kinwa91@msn.com>",
     "Jun Mukai <mukai@google.com>",
+    "Justin Beckwith <beckwith@google.com>",
+    "Justin Beckwith <justin.beckwith@gmail.com>",
     "Kelvin Jin <kelvinjin@google.com>",
     "Luke Sneeringer <lukesneeringer@google.com>",
     "Rebecca Taylor <remily@google.com>",
@@ -46,6 +49,7 @@
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Tim Swast <swast@google.com>",
     "calibr <awcalibr@gmail.com>",
+    "dpebot <dpebot@google.com>",
     "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>",
     "rtw <rtw1981@gmail.com>"
   ],
@@ -61,9 +65,9 @@
     "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.18.2",
-    "google-gax": "^0.16.0",
-    "google-proto-files": "^0.16.0",
+    "@google-cloud/common": "^0.20.1",
+    "google-gax": "^0.17.1",
+    "google-proto-files": "^0.16.1",
     "is": "^3.2.1",
     "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6"
