@@ -128,7 +128,7 @@ jobs:
     steps: *unit_tests_steps
   node10:
     docker:
-      - image: 'node:10@sha256:055fe494189c1a9153d29bc1f666df25556ba8d08da92dee730cf840413d9055'
+      - image: 'node:10@sha256:1201e1478ae2146ef699835a5726b1586e954b568962f5f937378d48de2e3014'
         user: node
     steps: *unit_tests_steps
   lint:
