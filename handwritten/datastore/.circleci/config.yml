@@ -129,6 +129,7 @@ jobs:
             cd samples/
             npm link @google-cloud/datastore
             npm install
+            npm link @google-cloud/datastore
             cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
