@@ -407,7 +407,7 @@ describe('Installation', () => {
     if (installDir) {
       await rimrafP(installDir);
     }
-    if (this.currentTest.state === 'failed') {
+    if (this.currentTest!.state === 'failed') {
       console.log(text);
     }
   });
