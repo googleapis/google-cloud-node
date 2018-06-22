@@ -20,7 +20,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var grpc = require('google-gax').grpc().grpc;
-var googleAuth = require('google-auto-auth');
+var GoogleAuth = require('google-auth-library').GoogleAuth;
 var is = require('is');
 var util = require('util');
 
@@ -404,7 +404,7 @@ function Datastore(options) {
     this.options.sslCreds = grpc.credentials.createInsecure();
   }
 
-  this.auth = googleAuth(this.options);
+  this.auth = new GoogleAuth(this.options);
 }
 
 util.inherits(Datastore, DatastoreRequest);

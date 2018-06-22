@@ -62,12 +62,12 @@
     "system-test": "repo-tools test run --cmd mocha -- system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.19.2",
+    "@google-cloud/common": "^0.20.1",
     "arrify": "^1.0.1",
     "concat-stream": "^1.6.2",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.1",
-    "google-auto-auth": "^0.10.1",
+    "google-auth-library": "^1.6.1",
     "google-gax": "^0.16.1",
     "google-proto-files": "^0.16.0",
     "is": "^3.2.1",
