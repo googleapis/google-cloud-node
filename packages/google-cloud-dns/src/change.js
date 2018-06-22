@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * @class
@@ -32,7 +32,7 @@ var util = require('util');
  * const change = zone.change('change-id');
  */
 function Change(zone, id) {
-  var methods = {
+  const methods = {
     /**
      * @typedef {array} ChangeExistsResponse
      * @property {boolean} 0 Whether the {@link Change} exists.
@@ -61,7 +61,7 @@ function Change(zone, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * change.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -106,8 +106,8 @@ function Change(zone, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * change.get().then(function(data) {
-     *   var change = data[0];
-     *   var apiResponse = data[1];
+     *   const change = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -156,8 +156,8 @@ function Change(zone, id) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * change.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     getMetadata: true,
@@ -223,7 +223,7 @@ util.inherits(Change, common.ServiceObject);
  * });
  */
 Change.prototype.create = function(config, callback) {
-  var self = this;
+  const self = this;
 
   this.parent.createChange(config, function(err, change, apiResponse) {
     if (err) {

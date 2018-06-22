@@ -16,16 +16,16 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
-var util = require('@google-cloud/common').util;
+const arrify = require('arrify');
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const Service = require('@google-cloud/common').Service;
+const util = require('@google-cloud/common').util;
 
-var extended = false;
-var fakePaginator = {
+let extended = false;
+const fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'DNS') {
       return;
@@ -48,8 +48,8 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
   promisifyAll: function(Class, options) {
     if (Class.name !== 'DNS') {
@@ -60,17 +60,17 @@ var fakeUtil = extend({}, util, {
     assert.deepEqual(options.exclude, ['zone']);
   },
 });
-var originalFakeUtil = extend(true, {}, fakeUtil);
+const originalFakeUtil = extend(true, {}, fakeUtil);
 
 function FakeZone() {
   this.calledWith_ = arguments;
 }
 
 describe('DNS', function() {
-  var DNS;
-  var dns;
+  let DNS;
+  let dns;
 
-  var PROJECT_ID = 'project-id';
+  const PROJECT_ID = 'project-id';
 
   before(function() {
     DNS = proxyquire('../', {
@@ -110,8 +110,8 @@ describe('DNS', function() {
     });
 
     it('should normalize the arguments', function() {
-      var normalizeArgumentsCalled = false;
-      var options = {};
+      let normalizeArgumentsCalled = false;
+      const options = {};
 
       fakeUtil.normalizeArguments = function(context, options_) {
         normalizeArgumentsCalled = true;
@@ -126,9 +126,9 @@ describe('DNS', function() {
     it('should inherit from Service', function() {
       assert(dns instanceof Service);
 
-      var calledWith = dns.calledWith_[0];
+      const calledWith = dns.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com/dns/v1';
+      const baseUrl = 'https://www.googleapis.com/dns/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
@@ -139,8 +139,8 @@ describe('DNS', function() {
   });
 
   describe('createZone', function() {
-    var zoneName = 'zone-name';
-    var config = {dnsName: 'dns-name'};
+    const zoneName = 'zone-name';
+    const config = {dnsName: 'dns-name'};
 
     it('should throw if a zone name is not provided', function() {
       assert.throws(function() {
@@ -159,7 +159,7 @@ describe('DNS', function() {
     });
 
     it('should use a provided description', function(done) {
-      var cfg = extend({}, config, {description: 'description'});
+      const cfg = extend({}, config, {description: 'description'});
 
       dns.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.description, cfg.description);
@@ -183,7 +183,7 @@ describe('DNS', function() {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/managedZones');
 
-        var expectedBody = extend({}, config, {
+        const expectedBody = extend({}, config, {
           name: zoneName,
           description: '',
         });
@@ -196,8 +196,8 @@ describe('DNS', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -216,8 +216,8 @@ describe('DNS', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: zoneName};
-      var zone = {};
+      const apiResponse = {name: zoneName};
+      const zone = {};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -260,7 +260,7 @@ describe('DNS', function() {
 
   describe('getZones', function() {
     it('should make the correct request', function(done) {
-      var query = {a: 'b', c: 'd'};
+      const query = {a: 'b', c: 'd'};
 
       dns.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/managedZones');
@@ -282,8 +282,8 @@ describe('DNS', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -304,8 +304,8 @@ describe('DNS', function() {
     });
 
     describe('success', function() {
-      var zone = {name: 'zone-1', a: 'b', c: 'd'};
-      var apiResponse = {managedZones: [zone]};
+      const zone = {name: 'zone-1', a: 'b', c: 'd'};
+      const apiResponse = {managedZones: [zone]};
 
       beforeEach(function() {
         dns.request = function(reqOpts, callback) {
@@ -328,12 +328,12 @@ describe('DNS', function() {
       });
 
       it('should set a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         dns.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -386,8 +386,8 @@ describe('DNS', function() {
     });
 
     it('should return a Zone', function() {
-      var newZoneName = 'new-zone-name';
-      var newZone = dns.zone(newZoneName);
+      const newZoneName = 'new-zone-name';
+      const newZone = dns.zone(newZoneName);
 
       assert(newZone instanceof FakeZone);
       assert.strictEqual(newZone.calledWith_[0], dns);

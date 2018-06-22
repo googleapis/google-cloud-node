@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Change') {
       promisified = true;
@@ -40,15 +40,15 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Change', function() {
-  var Change;
-  var change;
+  let Change;
+  let change;
 
-  var ZONE = {
+  const ZONE = {
     name: 'zone-name',
     createChange: util.noop,
   };
 
-  var CHANGE_ID = 'change-id';
+  const CHANGE_ID = 'change-id';
 
   before(function() {
     Change = proxyquire('../src/change.js', {
@@ -67,7 +67,7 @@ describe('Change', function() {
     it('should inherit from ServiceObject', function() {
       assert(change instanceof ServiceObject);
 
-      var calledWith = change.calledWith_[0];
+      const calledWith = change.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/changes');
@@ -86,7 +86,7 @@ describe('Change', function() {
 
   describe('change', function() {
     it('should call the parent change method', function(done) {
-      var config = {};
+      const config = {};
 
       change.parent.createChange = function(config_) {
         assert.strictEqual(config, config_);
@@ -97,8 +97,8 @@ describe('Change', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         change.parent.createChange = function(config, callback) {
@@ -118,11 +118,11 @@ describe('Change', function() {
     });
 
     describe('success', function() {
-      var changeInstance = {
+      const changeInstance = {
         id: 'id',
         metadata: {},
       };
-      var apiResponse = {};
+      const apiResponse = {};
 
       beforeEach(function() {
         change.parent.createChange = function(config, callback) {

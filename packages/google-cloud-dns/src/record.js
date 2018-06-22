@@ -16,10 +16,10 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const format = require('string-format-obj');
 
 /**
  * Create a Resource Record object.
@@ -89,7 +89,7 @@ function Record(zone, type, metadata) {
  * @returns {Record}
  */
 Record.fromZoneRecord_ = function(zone, type, bindData) {
-  var typeToZoneFormat = {
+  const typeToZoneFormat = {
     a: '{ip}',
     aaaa: '{ip}',
     cname: '{alias}',
@@ -101,7 +101,7 @@ Record.fromZoneRecord_ = function(zone, type, bindData) {
     txt: '{txt}',
   };
 
-  var metadata = {
+  const metadata = {
     data: format(typeToZoneFormat[type.toLowerCase()], bindData),
     name: bindData.name,
     ttl: bindData.ttl,
@@ -154,8 +154,8 @@ Record.fromZoneRecord_ = function(zone, type, bindData) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * record.delete().then(function(data) {
- *   var change = data[0];
- *   var apiResponse = data[1];
+ *   const change = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Record.prototype.delete = function(callback) {
@@ -168,7 +168,7 @@ Record.prototype.delete = function(callback) {
  * @returns {object}
  */
 Record.prototype.toJSON = function() {
-  var recordObject = extend({}, this.metadata, {
+  const recordObject = extend({}, this.metadata, {
     type: this.type.toUpperCase(),
   });
 
@@ -186,7 +186,7 @@ Record.prototype.toJSON = function() {
  * @returns {string}
  */
 Record.prototype.toString = function() {
-  var json = this.toJSON();
+  const json = this.toJSON();
 
   return (json.rrdatas || [{}])
     .map(function(data) {

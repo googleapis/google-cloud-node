@@ -16,13 +16,13 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Record') {
       return;
@@ -34,14 +34,14 @@ var fakeUtil = extend({}, util, {
 });
 
 describe('Record', function() {
-  var Record;
-  var record;
+  let Record;
+  let record;
 
-  var ZONE = {
+  const ZONE = {
     deleteRecords: util.noop,
   };
-  var TYPE = 'A';
-  var METADATA = {
+  const TYPE = 'A';
+  const METADATA = {
     name: 'name',
     data: [],
     ttl: 86400,
@@ -77,18 +77,18 @@ describe('Record', function() {
     });
 
     it('should assign the parsed metadata', function() {
-      var parsedMetadata = record.toJSON();
+      const parsedMetadata = record.toJSON();
       delete parsedMetadata.rrdatas;
 
-      for (var prop in parsedMetadata) {
+      for (const prop in parsedMetadata) {
         assert.strictEqual(record[prop], parsedMetadata[prop]);
       }
     });
 
     it('should re-assign rrdatas to data', function() {
-      var originalRrdatas = [];
+      const originalRrdatas = [];
 
-      var recordThatHadRrdatas = new Record(ZONE, TYPE, {
+      const recordThatHadRrdatas = new Record(ZONE, TYPE, {
         rrdatas: originalRrdatas,
       });
 
@@ -99,16 +99,16 @@ describe('Record', function() {
 
   describe('fromZoneRecord_', function() {
     describe('a', function() {
-      var aRecord = {
+      const aRecord = {
         ip: '0.0.0.0',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = aRecord.ip;
+      const expectedData = aRecord.ip;
 
       it('should parse an A record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'a', aRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'a', aRecord);
 
         assert.strictEqual(record.type, 'A');
         assert.deepEqual(record.metadata.data, expectedData);
@@ -118,16 +118,16 @@ describe('Record', function() {
     });
 
     describe('aaaa', function() {
-      var aaaaRecord = {
+      const aaaaRecord = {
         ip: '2607:f8b0:400a:801::1005',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = aaaaRecord.ip;
+      const expectedData = aaaaRecord.ip;
 
       it('should parse an AAAA record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'aaaa', aaaaRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'aaaa', aaaaRecord);
 
         assert.strictEqual(record.type, 'AAAA');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -137,16 +137,16 @@ describe('Record', function() {
     });
 
     describe('cname', function() {
-      var cnameRecord = {
+      const cnameRecord = {
         alias: 'example.com.',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = cnameRecord.alias;
+      const expectedData = cnameRecord.alias;
 
       it('should parse a CNAME record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'cname', cnameRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'cname', cnameRecord);
 
         assert.strictEqual(record.type, 'CNAME');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -156,17 +156,17 @@ describe('Record', function() {
     });
 
     describe('mx', function() {
-      var mxRecord = {
+      const mxRecord = {
         preference: 0,
         host: 'mail',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = mxRecord.preference + ' ' + mxRecord.host;
+      const expectedData = mxRecord.preference + ' ' + mxRecord.host;
 
       it('should parse an MX record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'mx', mxRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'mx', mxRecord);
 
         assert.strictEqual(record.type, 'MX');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -176,16 +176,16 @@ describe('Record', function() {
     });
 
     describe('ns', function() {
-      var nsRecord = {
+      const nsRecord = {
         host: 'example.com',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = nsRecord.host;
+      const expectedData = nsRecord.host;
 
       it('should parse an NS record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'ns', nsRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'ns', nsRecord);
 
         assert.strictEqual(record.type, 'NS');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -195,7 +195,7 @@ describe('Record', function() {
     });
 
     describe('soa', function() {
-      var soaRecord = {
+      const soaRecord = {
         mname: 'ns1.nameserver.net.',
         rname: 'hostmaster.mydomain.com.',
         serial: 86400,
@@ -207,7 +207,7 @@ describe('Record', function() {
         ttl: 86400,
       };
 
-      var expectedData = [
+      const expectedData = [
         soaRecord.mname,
         soaRecord.rname,
         soaRecord.serial,
@@ -218,7 +218,7 @@ describe('Record', function() {
       ].join(' ');
 
       it('should parse an SOA record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'soa', soaRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'soa', soaRecord);
 
         assert.strictEqual(record.type, 'SOA');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -228,16 +228,16 @@ describe('Record', function() {
     });
 
     describe('spf', function() {
-      var spfRecord = {
+      const spfRecord = {
         data: '"v=spf1" "mx:example.com"',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = spfRecord.data;
+      const expectedData = spfRecord.data;
 
       it('should parse an SPF record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'spf', spfRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'spf', spfRecord);
 
         assert.strictEqual(record.type, 'SPF');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -247,7 +247,7 @@ describe('Record', function() {
     });
 
     describe('srv', function() {
-      var srvRecord = {
+      const srvRecord = {
         priority: 10,
         weight: 0,
         port: 5222,
@@ -256,7 +256,7 @@ describe('Record', function() {
         ttl: 86400,
       };
 
-      var expectedData = [
+      const expectedData = [
         srvRecord.priority,
         srvRecord.weight,
         srvRecord.port,
@@ -264,7 +264,7 @@ describe('Record', function() {
       ].join(' ');
 
       it('should parse an SRV record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'srv', srvRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'srv', srvRecord);
 
         assert.strictEqual(record.type, 'SRV');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -274,16 +274,16 @@ describe('Record', function() {
     });
 
     describe('txt', function() {
-      var txtRecord = {
+      const txtRecord = {
         txt: 'txt-record-txt',
         name: 'name',
         ttl: 86400,
       };
 
-      var expectedData = txtRecord.txt;
+      const expectedData = txtRecord.txt;
 
       it('should parse a TXT record', function() {
-        var record = Record.fromZoneRecord_(ZONE, 'txt', txtRecord);
+        const record = Record.fromZoneRecord_(ZONE, 'txt', txtRecord);
 
         assert.strictEqual(record.type, 'TXT');
         assert.strictEqual(record.metadata.data, expectedData);
@@ -306,7 +306,7 @@ describe('Record', function() {
 
   describe('toJSON', function() {
     it('should format the data for the API', function() {
-      var expectedRecord = extend({}, METADATA, {
+      const expectedRecord = extend({}, METADATA, {
         type: 'A',
         rrdatas: METADATA.data,
       });
@@ -318,7 +318,7 @@ describe('Record', function() {
 
   describe('toString', function() {
     it('should format the data for a zonefile', function() {
-      var jsonRecord = extend({}, METADATA, {
+      const jsonRecord = extend({}, METADATA, {
         type: TYPE,
         rrdatas: ['example.com.', 'example2.com.'],
       });
@@ -327,7 +327,7 @@ describe('Record', function() {
         return jsonRecord;
       };
 
-      var expectedRecordString = [
+      const expectedRecordString = [
         [
           jsonRecord.name,
           jsonRecord.ttl,

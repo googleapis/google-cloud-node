@@ -16,20 +16,20 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var exec = require('methmeth');
-var extend = require('extend');
-var flatten = require('lodash.flatten');
-var fs = require('fs');
-var groupBy = require('lodash.groupby');
-var is = require('is');
-var prop = require('propprop');
-var util = require('util');
-var zonefile = require('dns-zonefile');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const exec = require('methmeth');
+const extend = require('extend');
+const flatten = require('lodash.flatten');
+const fs = require('fs');
+const groupBy = require('lodash.groupby');
+const is = require('is');
+const prop = require('propprop');
+const util = require('util');
+const zonefile = require('dns-zonefile');
 
-var Change = require('./change.js');
-var Record = require('./record.js');
+const Change = require('./change.js');
+const Record = require('./record.js');
 
 /**
  * A Zone object is used to interact with your project's managed zone. It will
@@ -45,7 +45,7 @@ var Record = require('./record.js');
  * const zone = dns.zone('zone-id');
  */
 function Zone(dns, name) {
-  var methods = {
+  const methods = {
     /**
      * Create a zone.
      *
@@ -339,13 +339,13 @@ Zone.prototype.change = function(id) {
  * });
  */
 Zone.prototype.createChange = function(config, callback) {
-  var self = this;
+  const self = this;
 
   if (!config || (!config.add && !config.delete)) {
     throw new Error('Cannot create a change with no additions or deletions.');
   }
 
-  var body = extend(
+  const body = extend(
     {
       additions: groupByType(arrify(config.add).map(exec('toJSON'))),
       deletions: groupByType(arrify(config.delete).map(exec('toJSON'))),
@@ -358,14 +358,14 @@ Zone.prototype.createChange = function(config, callback) {
   function groupByType(changes) {
     changes = groupBy(changes, 'type');
 
-    var changesArray = [];
+    const changesArray = [];
 
-    for (var recordType in changes) {
-      var recordsByName = groupBy(changes[recordType], 'name');
+    for (const recordType in changes) {
+      const recordsByName = groupBy(changes[recordType], 'name');
 
-      for (var recordName in recordsByName) {
-        var records = recordsByName[recordName];
-        var templateRecord = extend({}, records[0]);
+      for (const recordName in recordsByName) {
+        const records = recordsByName[recordName];
+        const templateRecord = extend({}, records[0]);
 
         if (records.length > 1) {
           // Combine the `rrdatas` values from all records of the same type.
@@ -391,7 +391,7 @@ Zone.prototype.createChange = function(config, callback) {
         return;
       }
 
-      var change = self.change(resp.id);
+      const change = self.change(resp.id);
       change.metadata = resp;
 
       callback(null, change, resp);
@@ -593,7 +593,7 @@ Zone.prototype.deleteRecords = function(records, callback) {
  * @returns {Promise<ZoneEmptyResponse>}
  */
 Zone.prototype.empty = function(callback) {
-  var self = this;
+  const self = this;
 
   this.getRecords(function(err, records) {
     if (err) {
@@ -601,7 +601,7 @@ Zone.prototype.empty = function(callback) {
       return;
     }
 
-    var recordsToDelete = records.filter(function(record) {
+    const recordsToDelete = records.filter(function(record) {
       return record.type !== 'NS' && record.type !== 'SOA';
     });
 
@@ -656,7 +656,7 @@ Zone.prototype.export = function(localPath, callback) {
       return;
     }
 
-    var stringRecords = records.map(exec('toString')).join('\n');
+    const stringRecords = records.map(exec('toString')).join('\n');
 
     fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {
       callback(err || null);
@@ -729,7 +729,7 @@ Zone.prototype.export = function(localPath, callback) {
  * });
  */
 Zone.prototype.getChanges = function(query, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(query)) {
     callback = query;
@@ -752,13 +752,13 @@ Zone.prototype.getChanges = function(query, callback) {
         return;
       }
 
-      var changes = (resp.changes || []).map(function(change) {
-        var changeInstance = self.change(change.id);
+      const changes = (resp.changes || []).map(function(change) {
+        const changeInstance = self.change(change.id);
         changeInstance.metadata = change;
         return changeInstance;
       });
 
-      var nextQuery = null;
+      let nextQuery = null;
       if (resp.nextPageToken) {
         nextQuery = extend({}, query, {
           pageToken: resp.nextPageToken,
@@ -892,7 +892,7 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  * });
  */
 Zone.prototype.getRecords = function(query, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(query)) {
     callback = query;
@@ -900,7 +900,7 @@ Zone.prototype.getRecords = function(query, callback) {
   }
 
   if (is.string(query) || is.array(query)) {
-    var filterByTypes_ = {};
+    const filterByTypes_ = {};
 
     // For faster lookups, store the record types the user wants in an object.
     arrify(query).forEach(function(type) {
@@ -912,7 +912,7 @@ Zone.prototype.getRecords = function(query, callback) {
     };
   }
 
-  var requestQuery = extend({}, query);
+  const requestQuery = extend({}, query);
   delete requestQuery.filterByTypes_;
 
   this.request(
@@ -926,7 +926,7 @@ Zone.prototype.getRecords = function(query, callback) {
         return;
       }
 
-      var records = (resp.rrsets || []).map(function(record) {
+      let records = (resp.rrsets || []).map(function(record) {
         return self.record(record.type, record);
       });
 
@@ -936,7 +936,7 @@ Zone.prototype.getRecords = function(query, callback) {
         });
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
       if (resp.nextPageToken) {
         nextQuery = extend({}, query, {
           pageToken: resp.nextPageToken,
@@ -1023,7 +1023,7 @@ Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
  * });
  */
 Zone.prototype.import = function(localPath, callback) {
-  var self = this;
+  const self = this;
 
   fs.readFile(localPath, 'utf-8', function(err, file) {
     if (err) {
@@ -1031,15 +1031,15 @@ Zone.prototype.import = function(localPath, callback) {
       return;
     }
 
-    var parsedZonefile = zonefile.parse(file);
-    var defaultTTL = parsedZonefile.$ttl;
+    const parsedZonefile = zonefile.parse(file);
+    const defaultTTL = parsedZonefile.$ttl;
     delete parsedZonefile.$ttl;
 
-    var recordTypes = Object.keys(parsedZonefile);
-    var recordsToCreate = [];
+    const recordTypes = Object.keys(parsedZonefile);
+    const recordsToCreate = [];
 
     recordTypes.forEach(function(recordType) {
-      var recordTypeSet = arrify(parsedZonefile[recordType]);
+      const recordTypeSet = arrify(parsedZonefile[recordType]);
 
       recordTypeSet.forEach(function(record) {
         record.ttl = record.ttl || defaultTTL;
@@ -1171,7 +1171,7 @@ Zone.prototype.record = function(type, metadata) {
  * });
  */
 Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
-  var self = this;
+  const self = this;
 
   this.getRecords(recordType, function(err, recordsToDelete) {
     if (err) {
@@ -1208,7 +1208,7 @@ Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
  * });
  */
 Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {
-  var self = this;
+  const self = this;
 
   this.getRecords(recordTypes, function(err, records) {
     if (err) {

@@ -16,18 +16,18 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var exec = require('methmeth');
-var format = require('string-format-obj');
-var fs = require('fs');
-var tmp = require('tmp');
-var uuid = require('uuid');
+const assert = require('assert');
+const async = require('async');
+const exec = require('methmeth');
+const format = require('string-format-obj');
+const fs = require('fs');
+const tmp = require('tmp');
+const uuid = require('uuid');
 
-var DNS = require('../');
+const DNS = require('../');
 
-var dns = new DNS();
-var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
+const dns = new DNS();
+const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
 // Only run the tests if there is a domain to test with.
 (DNS_DOMAIN ? describe : describe.skip)('dns', function() {
@@ -36,10 +36,10 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     return;
   }
 
-  var ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
-  var ZONE = dns.zone(ZONE_NAME);
+  const ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
+  const ZONE = dns.zone(ZONE_NAME);
 
-  var records = {
+  const records = {
     a: ZONE.record('a', {
       ttl: 86400,
       name: DNS_DOMAIN,
@@ -154,7 +154,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     });
 
     it('should support all types of records', function(done) {
-      var recordsToCreate = [
+      const recordsToCreate = [
         records.a,
         records.aaaa,
         records.cname,
@@ -172,8 +172,8 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     });
 
     it('should import records from a zone file', function(done) {
-      var zoneFilename = require.resolve('./data/zonefile.zone');
-      var zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
+      const zoneFilename = require.resolve('./data/zonefile.zone');
+      let zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
       zoneFileTemplate = format(zoneFileTemplate, {
         DNS_DOMAIN: DNS_DOMAIN,
       });
@@ -193,7 +193,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
             ZONE.getRecords(['spf', 'txt'], function(err, records) {
               assert.ifError(err);
 
-              var spfRecord = records.filter(function(record) {
+              const spfRecord = records.filter(function(record) {
                 return record.type === 'SPF';
               })[0];
 
@@ -202,7 +202,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
                 '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"'
               );
 
-              var txtRecord = records.filter(function(record) {
+              const txtRecord = records.filter(function(record) {
                 return record.type === 'TXT';
               })[0];
 
@@ -230,7 +230,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
             },
 
             function(next) {
-              var recordsToCreate = [records.spf, records.srv];
+              const recordsToCreate = [records.spf, records.srv];
 
               ZONE.addRecords(recordsToCreate, next);
             },
@@ -246,18 +246,18 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
     describe('changes', function() {
       it('should create a change', function(done) {
-        var record = ZONE.record('srv', {
+        const record = ZONE.record('srv', {
           ttl: 3600,
           name: DNS_DOMAIN,
           data: '10 0 5222 127.0.0.1.',
         });
 
-        var change = ZONE.change();
+        const change = ZONE.change();
 
         change.create({add: record}, function(err) {
           assert.ifError(err);
 
-          var addition = change.metadata.additions[0];
+          const addition = change.metadata.additions[0];
           delete addition.kind;
           assert.deepEqual(addition, record.toJSON());
 
@@ -277,8 +277,8 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
         ZONE.getChanges(function(err, changes) {
           assert.ifError(err);
 
-          var change = changes[0];
-          var expectedMetadata = change.metadata;
+          const change = changes[0];
+          const expectedMetadata = change.metadata;
 
           change.getMetadata(function(err, metadata) {
             assert.ifError(err);
@@ -304,7 +304,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     });
 
     it('should cursor through records by type', function(done) {
-      var newRecords = [
+      const newRecords = [
         ZONE.record('cname', {
           ttl: 86400,
           name: '1.' + DNS_DOMAIN,
@@ -340,7 +340,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     });
 
     it('should replace records', function(done) {
-      var name = 'test-zone-' + uuid.v4().substr(0, 18);
+      const name = 'test-zone-' + uuid.v4().substr(0, 18);
 
       // Do this in a new zone so no existing records are affected.
       dns.createZone(name, {dnsName: DNS_DOMAIN}, function(err, zone) {
@@ -349,9 +349,9 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
         zone.getRecords('ns', function(err, originalRecords) {
           assert.ifError(err);
 
-          var originalData = originalRecords[0].data;
+          const originalData = originalRecords[0].data;
 
-          var newRecord = zone.record('ns', {
+          const newRecord = zone.record('ns', {
             ttl: 3600,
             name: DNS_DOMAIN,
             data: ['ns1.nameserver.net.', 'ns2.nameserver.net.'],
@@ -360,8 +360,8 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
           zone.replaceRecords('ns', newRecord, function(err, change) {
             assert.ifError(err);
 
-            var deleted = change.metadata.deletions[0].rrdatas;
-            var added = change.metadata.additions[0].rrdatas;
+            const deleted = change.metadata.deletions[0].rrdatas;
+            const added = change.metadata.additions[0].rrdatas;
 
             assert.deepEqual(deleted, originalData);
             assert.deepEqual(added, newRecord.data);

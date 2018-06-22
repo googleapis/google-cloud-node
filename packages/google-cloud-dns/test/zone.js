@@ -16,20 +16,19 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var exec = require('methmeth');
-var extend = require('extend');
-var flatten = require('lodash.flatten');
-var nodeutil = require('util');
-var prop = require('propprop');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
-var uuid = require('uuid');
+const arrify = require('arrify');
+const assert = require('assert');
+const exec = require('methmeth');
+const extend = require('extend');
+const flatten = require('lodash.flatten');
+const nodeutil = require('util');
+const prop = require('propprop');
+const proxyquire = require('proxyquire');
+const {ServiceObject, util} = require('@google-cloud/common');
+const uuid = require('uuid');
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Zone') {
       return;
@@ -40,16 +39,16 @@ var fakeUtil = extend({}, util, {
   },
 });
 
-var parseOverride;
-var fakeDnsZonefile = {
+let parseOverride;
+const fakeDnsZonefile = {
   parse: function() {
     return (parseOverride || util.noop).apply(null, arguments);
   },
 };
 
-var writeFileOverride;
-var readFileOverride;
-var fakeFs = {
+let writeFileOverride;
+let readFileOverride;
+const fakeFs = {
   readFile: function() {
     return (readFileOverride || util.noop).apply(null, arguments);
   },
@@ -66,7 +65,7 @@ function FakeRecord() {
   this.calledWith_ = arguments;
 }
 FakeRecord.fromZoneRecord_ = function() {
-  var record = new FakeRecord();
+  const record = new FakeRecord();
   record.calledWith_ = arguments;
   return record;
 };
@@ -78,8 +77,8 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-var extended = false;
-var fakePaginator = {
+let extended = false;
+const fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Zone') {
       return;
@@ -96,13 +95,13 @@ var fakePaginator = {
 };
 
 describe('Zone', function() {
-  var Zone;
-  var zone;
+  let Zone;
+  let zone;
 
-  var DNS = {
+  const DNS = {
     createZone: util.noop,
   };
-  var ZONE_NAME = 'zone-name';
+  const ZONE_NAME = 'zone-name';
 
   before(function() {
     Zone = proxyquire('../src/zone.js', {
@@ -144,7 +143,7 @@ describe('Zone', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var dnsInstance = extend({}, DNS, {
+      const dnsInstance = extend({}, DNS, {
         createZone: {
           bind: function(context) {
             assert.strictEqual(context, dnsInstance);
@@ -153,10 +152,10 @@ describe('Zone', function() {
         },
       });
 
-      var zone = new Zone(dnsInstance, ZONE_NAME);
+      const zone = new Zone(dnsInstance, ZONE_NAME);
       assert(zone instanceof ServiceObject);
 
-      var calledWith = zone.calledWith_[0];
+      const calledWith = zone.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, dnsInstance);
       assert.strictEqual(calledWith.baseUrl, '/managedZones');
@@ -172,7 +171,7 @@ describe('Zone', function() {
 
   describe('addRecords', function() {
     it('should create a change with additions', function(done) {
-      var records = ['a', 'b', 'c'];
+      const records = ['a', 'b', 'c'];
 
       zone.createChange = function(options, callback) {
         assert.strictEqual(options.add, records);
@@ -185,9 +184,9 @@ describe('Zone', function() {
 
   describe('change', function() {
     it('should return a Change object', function() {
-      var changeId = 'change-id';
+      const changeId = 'change-id';
 
-      var change = zone.change(changeId);
+      const change = zone.change(changeId);
 
       assert(change instanceof FakeChange);
       assert.strictEqual(change.calledWith_[0], zone);
@@ -220,9 +219,9 @@ describe('Zone', function() {
     });
 
     it('should parse and rename add to additions', function(done) {
-      var recordsToAdd = [generateRecord(), generateRecord()];
+      const recordsToAdd = [generateRecord(), generateRecord()];
 
-      var expectedAdditions = recordsToAdd.map(exec('toJSON'));
+      const expectedAdditions = recordsToAdd.map(exec('toJSON'));
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.add, undefined);
@@ -234,9 +233,9 @@ describe('Zone', function() {
     });
 
     it('should parse and rename delete to deletions', function(done) {
-      var recordsToDelete = [generateRecord(), generateRecord()];
+      const recordsToDelete = [generateRecord(), generateRecord()];
 
-      var expectedDeletions = recordsToDelete.map(exec('toJSON'));
+      const expectedDeletions = recordsToDelete.map(exec('toJSON'));
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.delete, undefined);
@@ -248,13 +247,13 @@ describe('Zone', function() {
     });
 
     it('should group changes by name and type', function(done) {
-      var recordsToAdd = [
+      const recordsToAdd = [
         generateRecord({name: 'name.com.', type: 'mx'}),
         generateRecord({name: 'name.com.', type: 'mx'}),
       ];
 
       zone.request = function(reqOpts) {
-        var expectedRRDatas = flatten(
+        const expectedRRDatas = flatten(
           recordsToAdd.map(exec('toJSON')).map(prop('rrdatas'))
         );
 
@@ -284,8 +283,8 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -303,7 +302,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {id: 1, a: 'b', c: 'd'};
+      const apiResponse = {id: 1, a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -312,7 +311,7 @@ describe('Zone', function() {
       });
 
       it('should execute callback with Change & API response', function(done) {
-        var change = {};
+        const change = {};
 
         zone.change = function(id) {
           assert.strictEqual(id, apiResponse.id);
@@ -368,7 +367,7 @@ describe('Zone', function() {
 
   describe('deleteRecords', function() {
     it('should delete records by type if a string is given', function(done) {
-      var recordsToDelete = 'ns';
+      const recordsToDelete = 'ns';
 
       zone.deleteRecordsByType_ = function(types, callback) {
         assert.deepEqual(types, [recordsToDelete]);
@@ -379,7 +378,7 @@ describe('Zone', function() {
     });
 
     it('should create a change if record objects given', function(done) {
-      var recordsToDelete = {a: 'b', c: 'd'};
+      const recordsToDelete = {a: 'b', c: 'd'};
 
       zone.createChange = function(options, callback) {
         assert.deepEqual(options.delete, [recordsToDelete]);
@@ -400,7 +399,7 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         zone.getRecords = function(callback) {
@@ -417,7 +416,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var records = [
+      const records = [
         {type: 'A'},
         {type: 'AAAA'},
         {type: 'CNAME'},
@@ -431,7 +430,7 @@ describe('Zone', function() {
         {type: 'TXT'},
       ];
 
-      var expectedRecordsToDelete = records.filter(function(record) {
+      const expectedRecordsToDelete = records.filter(function(record) {
         return record.type !== 'NS' && record.type !== 'SOA';
       });
 
@@ -461,9 +460,9 @@ describe('Zone', function() {
   });
 
   describe('export', function() {
-    var path = './zonefile';
+    const path = './zonefile';
 
-    var records = [
+    const records = [
       {
         toString: function() {
           return 'a';
@@ -486,7 +485,7 @@ describe('Zone', function() {
       },
     ];
 
-    var expectedZonefileContents = 'a\na\na\na';
+    const expectedZonefileContents = 'a\na\na\na';
 
     beforeEach(function() {
       zone.getRecords = function(callback) {
@@ -496,7 +495,7 @@ describe('Zone', function() {
 
     describe('get records', function() {
       describe('error', function() {
-        var error = new Error('Error.');
+        const error = new Error('Error.');
 
         it('should execute callback with error', function(done) {
           zone.getRecords = function(callback) {
@@ -535,7 +534,7 @@ describe('Zone', function() {
       });
 
       describe('error', function() {
-        var error = new Error('Error.');
+        const error = new Error('Error.');
 
         beforeEach(function() {
           writeFileOverride = function(path, content, encoding, callback) {
@@ -579,7 +578,7 @@ describe('Zone', function() {
     });
 
     it('should accept a sort', function(done) {
-      var query = {sort: 'desc'};
+      const query = {sort: 'desc'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.sortOrder, 'descending');
@@ -592,7 +591,7 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = {a: 'b', c: 'd'};
+      const query = {a: 'b', c: 'd'};
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/changes');
@@ -605,8 +604,8 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -624,7 +623,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         changes: [{id: 1}],
       };
 
@@ -635,11 +634,11 @@ describe('Zone', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
-        var expectedNextQuery = {
+        const expectedNextQuery = {
           pageToken: nextPageToken,
         };
 
@@ -657,7 +656,7 @@ describe('Zone', function() {
       });
 
       it('should execute callback with Changes & API response', function(done) {
-        var change = {};
+        const change = {};
 
         zone.change = function(id) {
           assert.strictEqual(id, apiResponse.changes[0].id);
@@ -680,8 +679,8 @@ describe('Zone', function() {
 
   describe('getRecords', function() {
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         zone.request = function(reqOpts, callback) {
@@ -706,7 +705,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         rrsets: [{type: 'NS'}],
       };
 
@@ -717,11 +716,11 @@ describe('Zone', function() {
       });
 
       it('should execute callback with nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
-        var expectedNextQuery = {pageToken: nextPageToken};
+        const expectedNextQuery = {pageToken: nextPageToken};
 
         zone.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -737,7 +736,7 @@ describe('Zone', function() {
       });
 
       it('should execute callback with Records & API response', function(done) {
-        var record = {};
+        const record = {};
 
         zone.record = function(type, recordObject) {
           assert.strictEqual(type, apiResponse.rrsets[0].type);
@@ -762,7 +761,7 @@ describe('Zone', function() {
 
       describe('filtering', function() {
         it('should accept a string type', function(done) {
-          var types = ['MX', 'CNAME'];
+          const types = ['MX', 'CNAME'];
 
           zone.getRecords(types, function(err, records) {
             assert.ifError(err);
@@ -774,7 +773,7 @@ describe('Zone', function() {
         });
 
         it('should accept an array of types', function(done) {
-          var type = 'MX';
+          const type = 'MX';
 
           zone.getRecords(type, function(err, records) {
             assert.ifError(err);
@@ -798,7 +797,7 @@ describe('Zone', function() {
   });
 
   describe('import', function() {
-    var path = './zonefile';
+    const path = './zonefile';
 
     it('should read from the file', function(done) {
       readFileOverride = function(path_, encoding) {
@@ -811,7 +810,7 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         readFileOverride = function(path, encoding, callback) {
@@ -828,8 +827,8 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var recordType = 'ns';
-      var parsedZonefile = {};
+      const recordType = 'ns';
+      let parsedZonefile = {};
 
       beforeEach(function() {
         parsedZonefile = {
@@ -849,11 +848,11 @@ describe('Zone', function() {
         zone.addRecords = function(recordsToCreate, callback) {
           assert.strictEqual(recordsToCreate.length, 1);
 
-          var recordToCreate = recordsToCreate[0];
+          const recordToCreate = recordsToCreate[0];
 
           assert(recordToCreate instanceof FakeRecord);
 
-          var args = recordToCreate.calledWith_;
+          const args = recordToCreate.calledWith_;
           assert.strictEqual(args[0], zone);
           assert.strictEqual(args[1], recordType);
           assert.strictEqual(args[2], parsedZonefile[recordType]);
@@ -865,17 +864,17 @@ describe('Zone', function() {
       });
 
       it('should use the default ttl', function(done) {
-        var defaultTTL = '90';
+        const defaultTTL = '90';
 
         parsedZonefile.$ttl = defaultTTL;
         parsedZonefile[recordType] = {};
         parsedZonefile.mx = {ttl: '180'};
 
         zone.addRecords = function(recordsToCreate) {
-          var record1 = recordsToCreate[0].calledWith_[2];
+          const record1 = recordsToCreate[0].calledWith_[2];
           assert.strictEqual(record1.ttl, defaultTTL);
 
-          var record2 = recordsToCreate[1].calledWith_[2];
+          const record2 = recordsToCreate[1].calledWith_[2];
           assert.strictEqual(record2.ttl, '180');
 
           done();
@@ -888,14 +887,14 @@ describe('Zone', function() {
 
   describe('record', function() {
     it('should return a Record object', function() {
-      var type = 'a';
-      var metadata = {a: 'b', c: 'd'};
+      const type = 'a';
+      const metadata = {a: 'b', c: 'd'};
 
-      var record = zone.record(type, metadata);
+      const record = zone.record(type, metadata);
 
       assert(record instanceof FakeRecord);
 
-      var args = record.calledWith_;
+      const args = record.calledWith_;
       assert.strictEqual(args[0], zone);
       assert.strictEqual(args[1], type);
       assert.strictEqual(args[2], metadata);
@@ -904,7 +903,7 @@ describe('Zone', function() {
 
   describe('replaceRecords', function() {
     it('should get records', function(done) {
-      var recordType = 'ns';
+      const recordType = 'ns';
 
       zone.getRecords = function(recordType_) {
         assert.strictEqual(recordType_, recordType);
@@ -915,7 +914,7 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         zone.getRecords = function(recordType, callback) {
@@ -932,13 +931,13 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var recordsToCreate = [
+      const recordsToCreate = [
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},
       ];
 
-      var recordsToDelete = [
+      const recordsToDelete = [
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},
@@ -965,7 +964,7 @@ describe('Zone', function() {
 
   describe('deleteRecordsByType_', function() {
     it('should get records', function(done) {
-      var recordType = 'ns';
+      const recordType = 'ns';
 
       zone.getRecords = function(recordType_) {
         assert.strictEqual(recordType_, recordType);
@@ -976,7 +975,7 @@ describe('Zone', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         zone.getRecords = function(recordType, callback) {
@@ -993,7 +992,7 @@ describe('Zone', function() {
     });
 
     describe('success', function() {
-      var recordsToDelete = [
+      const recordsToDelete = [
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},
         {a: 'b', c: 'd'},

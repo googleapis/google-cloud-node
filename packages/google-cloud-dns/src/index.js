@@ -16,13 +16,13 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const is = require('is');
+const util = require('util');
 
-var Zone = require('./zone.js');
+const Zone = require('./zone.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -85,7 +85,7 @@ function DNS(options) {
 
   options = common.util.normalizeArguments(this, options);
 
-  var config = {
+  const config = {
     baseUrl: 'https://www.googleapis.com/dns/v1',
     scopes: [
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
@@ -156,7 +156,7 @@ util.inherits(DNS, common.Service);
  * });
  */
 DNS.prototype.createZone = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
   if (!name) {
     throw new Error('A zone name is required.');
@@ -183,7 +183,7 @@ DNS.prototype.createZone = function(name, config, callback) {
         return;
       }
 
-      var zone = self.zone(resp.name);
+      const zone = self.zone(resp.name);
       zone.metadata = resp;
 
       callback(null, zone, resp);
@@ -237,7 +237,7 @@ DNS.prototype.createZone = function(name, config, callback) {
  * });
  */
 DNS.prototype.getZones = function(query, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(query)) {
     callback = query;
@@ -255,13 +255,13 @@ DNS.prototype.getZones = function(query, callback) {
         return;
       }
 
-      var zones = arrify(resp.managedZones).map(function(zone) {
-        var zoneInstance = self.zone(zone.name);
+      const zones = arrify(resp.managedZones).map(function(zone) {
+        const zoneInstance = self.zone(zone.name);
         zoneInstance.metadata = zone;
         return zoneInstance;
       });
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, query, {
