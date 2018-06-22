@@ -23,6 +23,8 @@ import * as types from './types/core';
 const logging = require('@google-cloud/logging');
 const mapValues = require('lodash.mapvalues');
 
+type Callback = (err: Error, apiResponse: {}) => void;
+
 // Map of npm output levels to Stackdriver Logging levels.
 const NPM_LEVEL_NAME_TO_CODE = {
   error: 3,
@@ -35,16 +37,17 @@ const NPM_LEVEL_NAME_TO_CODE = {
 
 
 // Map of Stackdriver Logging levels.
-const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME: {[key: number]: string} = {
-  0: 'emergency',
-  1: 'alert',
-  2: 'critical',
-  3: 'error',
-  4: 'warning',
-  5: 'notice',
-  6: 'info',
-  7: 'debug'
-};
+const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME:
+    {[key: number]: types.StackdriverLoggingLevelNames} = {
+      0: 'emergency',
+      1: 'alert',
+      2: 'critical',
+      3: 'error',
+      4: 'warning',
+      5: 'notice',
+      6: 'info',
+      7: 'debug'
+    };
 
 /*!
  * Log entry data key to allow users to indicate a trace for the request.
@@ -108,10 +111,10 @@ export class LoggingWinston extends winston.Transport {
     this.labels = options.labels;
   }
 
-  log(levelName: string, msg: string, metadata: types.Metadata|{},
-      callback: (err: Error, apiResponse: {}) => void) {
+  log(levelName: string, msg: string, metadata: types.Metadata,
+      callback: Callback) {
     if (is.default.function_(metadata)) {
-      callback = metadata as (err: Error, apiResponse: {}) => void;
+      callback = metadata as Callback;
       metadata = {};
     }
 
@@ -143,7 +146,7 @@ export class LoggingWinston extends winston.Transport {
     // property on an object) as that works is accepted by Error Reporting in
     // for more resource types.
     //
-    if (metadata && (metadata as types.Metadata).stack) {
+    if (metadata && metadata.stack) {
       msg += (msg ? ' ' : '') + (metadata as types.Metadata).stack;
       data.serviceContext = this.serviceContext;
     }
@@ -160,32 +163,25 @@ export class LoggingWinston extends winston.Transport {
       // Note that the httpRequest field must properly validate as HttpRequest
       // proto message, or the log entry would be rejected by the API. We no do
       // validation here.
-      if ((metadata as types.Metadata).httpRequest) {
-        entryMetadata.httpRequest = (metadata as types.Metadata).httpRequest;
-        delete (data.metadata as types.Metadata).httpRequest;
+      if (metadata.httpRequest) {
+        entryMetadata.httpRequest = metadata.httpRequest;
+        delete data.metadata!.httpRequest;
       }
 
       // If the metadata contains a labels property, promote it to the entry
       // metadata.
       // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
-      if ((metadata as types.Metadata).labels) {
+      if (metadata.labels) {
         entryMetadata.labels = (entryMetadata.labels) ?
-            Object.assign(
-                {}, entryMetadata.labels, (metadata as types.Metadata).labels) :
-            (metadata as types.Metadata).labels;
-        delete (data.metadata as types.Metadata).labels;
+            Object.assign({}, entryMetadata.labels, metadata.labels) :
+            metadata.labels;
+        delete data.metadata!.labels;
       }
     }
 
-    // metadata does not have index signature.
-    // tslint:disable-next-line:no-any
-    if (metadata && (metadata as any)[LOGGING_TRACE_KEY]) {
-      // metadata does not have index signature.
-      // tslint:disable-next-line:no-any
-      entryMetadata.trace = (metadata as any)[LOGGING_TRACE_KEY];
-      // metadata does not have index signature.
-      // tslint:disable-next-line:no-any
-      delete (data.metadata as any)[LOGGING_TRACE_KEY];
+    if (metadata && metadata[LOGGING_TRACE_KEY]) {
+      entryMetadata.trace = metadata[LOGGING_TRACE_KEY];
+      delete data.metadata![LOGGING_TRACE_KEY];
     } else {
       const trace = getCurrentTraceFromAgent();
       if (trace) {
@@ -194,10 +190,7 @@ export class LoggingWinston extends winston.Transport {
     }
 
     const entry = this.stackdriverLog.entry(entryMetadata, data);
-    // stackdriverLog does not have index signature. We need to call the
-    // corresponding log level function.
-    // tslint:disable-next-line:no-any
-    (this.stackdriverLog as any)[stackdriverLevel](entry, callback);
+    this.stackdriverLog[stackdriverLevel](entry, callback);
   }
 }
 // We need to add StackdriverLogging to winston.transport which does not
