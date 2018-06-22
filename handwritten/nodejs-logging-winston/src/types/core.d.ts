@@ -53,9 +53,9 @@ export interface Options {
    */
   serviceContext?: ServiceContext;
   /**
-   * The project ID from the Google Cloud Console, e.g. 'grape-spaceship-123'. We
-   * will also check the environment variable `GCLOUD_PROJECT` for your project
-   * ID. If your app is running in an environment which supports {@link
+   * The project ID from the Google Cloud Console, e.g. 'grape-spaceship-123'.
+   * We will also check the environment variable `GCLOUD_PROJECT` for your
+   * project ID. If your app is running in an environment which supports {@link
    * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
    * Application Default Credentials}, your project ID will be detected
    * automatically.
@@ -67,7 +67,7 @@ export interface Options {
    * above is not necessary. NOTE: .pem and .p12 require you to specify the
    * `email` option as well.
    */
-  keyFilename?: string,
+  keyFilename?: string;
   /**
    * Account email address. Required when using a .pem or .p12 keyFilename.
    */
@@ -75,7 +75,7 @@ export interface Options {
   /**
    * Credentials object.
    */
-  credentials?: Credentials,
+  credentials?: Credentials;
   /**
    * Automatically retry requests if the response is related to rate limits or
    * certain intermittent server errors. We will exponentially backoff
@@ -136,39 +136,65 @@ export interface StackdriverEntryMetadata {
   trace?: {};
 }
 
-export interface StackdriverLog {
-  critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  error: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  info: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  notice: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  warning: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  write: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  alert: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+export enum STACKDRIVER_LOGGING_LEVELS {
+  emergency,
+  alert,
+  critical,
+  error,
+  warning,
+  notice,
+  info,
+  debug
+}
+
+export type StackdriverLoggingLevelNames = keyof typeof STACKDRIVER_LOGGING_LEVELS;
+
+// Mapped types are only supported in type aliases and not in interfaces and
+// classes.
+type StackdriverLogFunctions = {
+  [P in StackdriverLoggingLevelNames]:
+      (entry: StackdriverEntry|StackdriverEntry[], options?: {},
+       callback?: (err: Error, apiResponse: {}) => void) =>
+          Promise<LogWriteResponse>;
+};
+
+interface StackdriverOtherFunctions {
+  write:
+      (entry: StackdriverEntry|StackdriverEntry[], options?: {},
+       callback?:
+           (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
   entry: (metadata: {}, data: {}|string) => StackdriverEntry;
 }
+
+export type StackdriverLog = StackdriverLogFunctions&StackdriverOtherFunctions;
 
 export interface StackdriverLogging {
   Entry?: StackdriverEntry;
   Log?: StackdriverLog;
   Logging?: StackdriverLogging;
-  entry?: (resource?: MonitoredResource, data?: {message: string}|string) => StackdriverEntry;
+  entry?:
+      (resource?: MonitoredResource,
+       data?: {message: string}|string) => StackdriverEntry;
   // define additional properties and methods.
 }
 
 export interface Metadata {
   stack?: string;
   httpRequest?: HttpRequest;
-  labels?: {}
+  labels?: {};
+  // And arbitrary other properties.
+  // tslint:disable-next-line:no-any
+  [key: string]: any;
 }
 
 export interface StackdriverEntry {
-  constructor: (metadata?: StackdriverEntryMetadata, data?: {message: string}| string) => StackdriverEntry;
+  constructor:
+      (metadata?: StackdriverEntryMetadata,
+       data?: {message: string}|string) => StackdriverEntry;
   data?: {message: string}|string;
   metadata?: StackdriverEntryMetadata;
 }
-type LogWriteResponse = {}[];
+type LogWriteResponse = Array<{}>;
 
 export interface HttpRequest {
   requestMethod: string;
