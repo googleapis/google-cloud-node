@@ -183,7 +183,10 @@ export interface BunyanLogRecord {
   level?: string,
   time?: Date,
   httpRequest?: HttpRequest,
-  labels?: {}
+  labels?: {};
+  // And arbitrary other properties.
+  // tslint:disable-next-line:no-any
+  [key: string]: any;
 }
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | number;

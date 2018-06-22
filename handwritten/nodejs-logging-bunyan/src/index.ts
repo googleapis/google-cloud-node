@@ -84,7 +84,7 @@ export class LoggingBunyan extends Writable {
    * the bunyan streams list.
    */
   stream(level: types.LogLevel): types.StreamResponse {
-    return {level, type: 'raw', stream: this as NodeJS.WritableStream};
+    return {level, type: 'raw', stream: this as Writable};
   }
 
   /**
@@ -140,13 +140,9 @@ export class LoggingBunyan extends Writable {
       delete record.labels;
     }
 
-    // record does not have index signature.
-    // tslint:disable-next-line:no-any
-    if ((record as any)[LOGGING_TRACE_KEY]) {
-      // tslint:disable-next-line:no-any
-      entryMetadata.trace = (record as any)[LOGGING_TRACE_KEY];
-      // tslint:disable-next-line:no-any
-      delete (record as any)[LOGGING_TRACE_KEY];
+    if (record[LOGGING_TRACE_KEY]) {
+      entryMetadata.trace = record[LOGGING_TRACE_KEY];
+      delete record[LOGGING_TRACE_KEY];
     }
 
     return this.stackdriverLog.entry(entryMetadata, record);
@@ -177,13 +173,10 @@ export class LoggingBunyan extends Writable {
       callback = args[1];
     }
     record = Object.assign({}, record);
-    // record does not have index signature.
-    // tslint:disable-next-line:no-any
-    if (!(record as any)[LOGGING_TRACE_KEY]) {
+    if (!record[LOGGING_TRACE_KEY]) {
       const trace = getCurrentTraceFromAgent();
       if (trace) {
-        // tslint:disable-next-line:no-any
-        (record as any)[LOGGING_TRACE_KEY] = trace;
+        record[LOGGING_TRACE_KEY] = trace;
       }
     }
     if (encoding !== null) {
