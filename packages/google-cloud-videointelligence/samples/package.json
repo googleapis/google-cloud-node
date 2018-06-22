@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@google-cloud/video-intelligence": "1.2.0",
-    "long": "^3.2.0",
-    "safe-buffer": "5.1.1",
-    "yargs": "10.0.3"
+    "long": "^4.0.0",
+    "safe-buffer": "5.1.2",
+    "yargs": "11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.3",
-    "ava": "0.23.0"
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "0.25.0"
   }
 }
