@@ -22,10 +22,12 @@ import * as types from '../src/types/core';
 const logging = require('@google-cloud/logging')();
 import {LoggingBunyan} from '../src/index';
 
+const LOG_NAME = 'bunyan_log_system_tests';
+
 describe('LoggingBunyan', () => {
   const WRITE_CONSISTENCY_DELAY_MS = 90000;
 
-  const loggingBunyan = new LoggingBunyan();
+  const loggingBunyan = new LoggingBunyan({logName: LOG_NAME});
   const logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
     streams: [loggingBunyan.stream('info')],
@@ -123,7 +125,7 @@ describe('LoggingBunyan', () => {
     }, 10);
 
     setTimeout(() => {
-      const log = logging.log('bunyan_log');
+      const log = logging.log(LOG_NAME);
 
       log.getEntries(
           {
