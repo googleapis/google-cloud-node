@@ -103,7 +103,6 @@ jobs:
             if ! test -x "$repo_tools"; then
               chmod +x "$repo_tools"
             fi
-            npm link
       - run:
           name: Run unit tests.
           command: npm test
@@ -138,7 +137,7 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/language
+            npm link ../
             npm install
             cd ..
       - run:
