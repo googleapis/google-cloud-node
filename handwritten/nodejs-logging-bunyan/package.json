@@ -58,8 +58,8 @@
     "prettier": "repo-tools exec -- prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "repo-tools test run --cmd mocha -- build/system-test/*.js --timeout 600000",
-    "test": "repo-tools test run --cmd mocha -- build/test/*.js",
+    "system-test": "repo-tools test run --cmd mocha -- build/system-test --timeout 600000 -r source-map-support/register",
+    "test": "repo-tools test run --cmd mocha -- build/test -r source-map-support/register",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -104,6 +104,7 @@
     "prettier": "^1.7.4",
     "proxyquire": "^2.0.0",
     "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.6",
     "tmp": "0.0.33",
     "typescript": "~2.9.2"
   }
