@@ -119,5 +119,5 @@ For more information, see https://cloud.google.com/pubsub/docs
 [topics_1_docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic
 [topics_1_code]: topics.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://www.gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/README.md
