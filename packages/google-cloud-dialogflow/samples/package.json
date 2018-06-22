@@ -12,7 +12,7 @@
     "test": "ava system-test"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.18.0",
+    "@google-cloud/common": "^0.20.0",
     "dialogflow": "0.5.0",
     "grpc": "^1.4.1",
     "pump": "^3.0.0",
