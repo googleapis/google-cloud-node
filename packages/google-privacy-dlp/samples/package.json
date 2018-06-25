@@ -7,27 +7,20 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-dlp",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "repo-tools test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "^0.10.0",
-    "@google-cloud/dlp": "0.6.0",
-    "@google-cloud/pubsub": "^0.16.2",
-    "google-auth-library": "0.11.0",
-    "google-auto-auth": "0.7.2",
-    "google-proto-files": "0.13.1",
-    "mime": "2.0.3",
-    "request": "2.83.0",
-    "request-promise": "4.2.2",
-    "safe-buffer": "5.1.1",
-    "yargs": "10.0.3"
+    "@google-cloud/dlp": "^0.6.0",
+    "@google-cloud/pubsub": "^0.19.0",
+    "mime": "2.3.1",
+    "yargs": "11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.3",
-    "ava": "0.23.0",
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "0.25.0",
     "uuid": "^3.2.1"
   }
 }
