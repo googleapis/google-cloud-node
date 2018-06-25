@@ -76,7 +76,6 @@ jobs:
           command: |-
             mkdir -p /home/node/.npm-global
             npm install
-            npm link
             chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
@@ -110,8 +109,7 @@ jobs:
           command: |
             cd samples/
             npm install
-            npm link @google-cloud/storage
-            cd ..
+            npm link ../
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
