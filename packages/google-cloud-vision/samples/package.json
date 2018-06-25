@@ -6,25 +6,25 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-vision",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "repo-tools test run --cmd ava -- -T 1m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/storage": "^1.7.0",
-    "@google-cloud/vision": "0.20.0",
-    "async": "2.6.1",
-    "natural": "0.6.1",
-    "redis": "2.8.0",
-    "yargs": "11.0.0"
+    "@google-cloud/vision": "^0.20.0",
+    "async": "^2.6.1",
+    "natural": "^0.6.1",
+    "redis": "^2.8.0",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0",
-    "uuid": "3.2.1"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "@google-cloud/storage": "^1.7.0",
+    "ava": "^0.25.0",
+    "uuid": "^3.2.1"
   },
   "optionalDependencies": {
-    "canvas": "1.6.11"
+    "canvas": "^1.6.11"
   }
 }
