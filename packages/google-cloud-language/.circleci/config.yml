@@ -137,9 +137,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link ../
             npm install
-            cd ..
+            npm link ../
       - run:
           name: Run linting.
           command: npm run lint
