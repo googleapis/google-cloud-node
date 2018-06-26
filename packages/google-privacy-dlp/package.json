@@ -53,13 +53,12 @@
     "test": "npm run cover"
   },
   "dependencies": {
-    "google-gax": "^0.16.0",
+    "google-gax": "^0.17.1",
     "lodash.merge": "^4.6.0",
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^2.6.0",
@@ -71,7 +70,6 @@
     "mocha": "^5.0.0",
     "nyc": "^12.0.2",
     "power-assert": "^1.4.4",
-    "prettier": "^1.7.4",
-    "through2": "^2.0.3"
+    "prettier": "^1.7.4"
   }
 }

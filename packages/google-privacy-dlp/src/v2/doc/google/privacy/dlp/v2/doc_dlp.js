@@ -22,13 +22,19 @@
  *
  * @property {Object[]} infoTypes
  *   Restricts what info_types to look for. The values must correspond to
- *   InfoType values returned by ListInfoTypes or found in documentation.
+ *   InfoType values returned by ListInfoTypes or listed at
+ *   https://cloud.google.com/dlp/docs/infotypes-reference.
+ *
+ *   When no InfoTypes or CustomInfoTypes are specified in a request, the
+ *   system may automatically choose what detectors to run. By default this may
+ *   be all types, but may change over time as detectors are updated.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
  * @property {number} minLikelihood
  *   Only returns findings equal or above this threshold. The default is
  *   POSSIBLE.
+ *   See https://cloud.google.com/dlp/docs/likelihood to learn more.
  *
  *   The number should be among the values of [Likelihood]{@link google.privacy.dlp.v2.Likelihood}
  *
@@ -43,7 +49,8 @@
  *   When true, excludes type information of the findings.
  *
  * @property {Object[]} customInfoTypes
- *   Custom infoTypes provided by the user.
+ *   CustomInfoTypes provided by the user. See
+ *   https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
  *
  *   This object should have the same structure as [CustomInfoType]{@link google.privacy.dlp.v2.CustomInfoType}
  *
@@ -149,7 +156,9 @@ var ByteContentItem = {
  *   String data to inspect or redact.
  *
  * @property {Object} table
- *   Structured content for inspection.
+ *   Structured content for inspection. See
+ *   https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
+ *   learn more.
  *
  *   This object should have the same structure as [Table]{@link google.privacy.dlp.v2.Table}
  *
@@ -168,6 +177,8 @@ var ContentItem = {
 
 /**
  * Structured content to inspect. Up to 50,000 `Value`s per request allowed.
+ * See https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
+ * learn more.
  *
  * @property {Object[]} headers
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
@@ -225,18 +236,18 @@ var InspectResult = {
  * @property {string} quote
  *   The content that was found. Even if the content is not textual, it
  *   may be converted to a textual representation here.
- *   Provided if requested by the `InspectConfig` and the finding is
+ *   Provided if `include_quote` is true and the finding is
  *   less than or equal to 4096 bytes long. If the finding exceeds 4096 bytes
  *   in length, the quote may be omitted.
  *
  * @property {Object} infoType
  *   The type of content that might have been found.
- *   Provided if requested by the `InspectConfig`.
+ *   Provided if `excluded_types` is false.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
  * @property {number} likelihood
- *   Estimate of how likely it is that the `info_type` is correct.
+ *   Confidence of how likely it is that the `info_type` is correct.
  *
  *   The number should be among the values of [Likelihood]{@link google.privacy.dlp.v2.Likelihood}
  *
@@ -454,8 +465,8 @@ var BoundingBox = {
 };
 
 /**
- * Request to search for potentially sensitive info in a list of items
- * and replace it with a default or provided content.
+ * Request to search for potentially sensitive info in an image and redact it
+ * by covering it with a colored rectangle.
  *
  * @property {string} parent
  *   The parent resource name, for example projects/my-project-id.
@@ -469,6 +480,10 @@ var BoundingBox = {
  *   The configuration for specifying what content to redact from images.
  *
  *   This object should have the same structure as [ImageRedactionConfig]{@link google.privacy.dlp.v2.ImageRedactionConfig}
+ *
+ * @property {boolean} includeFindings
+ *   Whether the response should include findings along with the redacted
+ *   image.
  *
  * @property {Object} byteItem
  *   The content must be PNG, JPEG, SVG or BMP.
@@ -495,7 +510,7 @@ var RedactImageRequest = {
    *
    * @property {boolean} redactAllText
    *   If true, all text found in the image, regardless whether it matches an
-   *   info_type, is redacted.
+   *   info_type, is redacted. Only one should be provided.
    *
    * @property {Object} redactionColor
    *   The color to use when redacting content from an image. If not specified,
@@ -542,6 +557,11 @@ var Color = {
  *   If an image was being inspected and the InspectConfig's include_quote was
  *   set to true, then this field will include all text, if any, that was found
  *   in the image.
+ *
+ * @property {Object} inspectResult
+ *   The findings. Populated when include_findings in the request is true.
+ *
+ *   This object should have the same structure as [InspectResult]{@link google.privacy.dlp.v2.InspectResult}
  *
  * @typedef RedactImageResponse
  * @memberof google.privacy.dlp.v2
@@ -745,19 +765,28 @@ var InspectContentResponse = {
  *
  * @property {Object} table
  *   Store findings in an existing table or a new table in an existing
- *   dataset. Each column in an existing table must have the same name, type,
- *   and mode of a field in the `Finding` object. If table_id is not set a new
- *   one will be generated for you with the following format:
+ *   dataset. If table_id is not set a new one will be generated
+ *   for you with the following format:
  *   dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific timezone will be used for
  *   generating the date details.
+ *
+ *   For Inspect, each column in an existing output table must have the same
+ *   name, type, and mode of a field in the `Finding` object.
+ *
+ *   For Risk, an existing output table should be the output of a previous
+ *   Risk analysis job run on the same source table, with the same privacy
+ *   metric and quasi-identifiers. Risk jobs that analyze the same table but
+ *   compute a different privacy metric, or use different sets of
+ *   quasi-identifiers, cannot store their results in the same table.
  *
  *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
  *
  * @property {number} outputSchema
- *   Schema used for writing the findings. Columns are derived from the
- *   `Finding` object. If appending to an existing table, any columns from the
- *   predefined schema that are missing will be added. No columns in the
- *   existing table will be deleted.
+ *   Schema used for writing the findings for Inspect jobs. This field is only
+ *   used for Inspect and must be unspecified for Risk jobs. Columns are derived
+ *   from the `Finding` object. If appending to an existing table, any columns
+ *   from the predefined schema that are missing will be added. No columns in
+ *   the existing table will be deleted.
  *
  *   If unspecified, then all available columns will be used for a new table,
  *   and no changes will be made to an existing table.
@@ -946,7 +975,8 @@ var ListInfoTypesResponse = {
 };
 
 /**
- * Configuration for a risk analysis job.
+ * Configuration for a risk analysis job. See
+ * https://cloud.google.com/dlp/docs/concepts-risk-analysis to learn more.
  *
  * @property {Object} privacyMetric
  *   Privacy metric to compute.
@@ -973,6 +1003,93 @@ var RiskAnalysisJobConfig = {
 };
 
 /**
+ * A column with a semantic tag attached.
+ *
+ * @property {Object} field
+ *   Identifies the column. [required]
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+ *
+ * @property {Object} infoType
+ *   A column can be tagged with a InfoType to use the relevant public
+ *   dataset as a statistical model of population, if available. We
+ *   currently support US ZIP codes, region codes, ages and genders.
+ *   To programmatically obtain the list of supported InfoTypes, use
+ *   ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
+ *
+ *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
+ *
+ * @property {string} customTag
+ *   A column can be tagged with a custom tag. In this case, the user must
+ *   indicate an auxiliary table that contains statistical information on
+ *   the possible values of this column (below).
+ *
+ * @property {Object} inferred
+ *   If no semantic tag is indicated, we infer the statistical model from
+ *   the distribution of values in the input data
+ *
+ *   This object should have the same structure as [Empty]{@link google.protobuf.Empty}
+ *
+ * @typedef QuasiId
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.QuasiId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var QuasiId = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * An auxiliary table containing statistical information on the relative
+ * frequency of different quasi-identifiers values. It has one or several
+ * quasi-identifiers columns, and one column that indicates the relative
+ * frequency of each quasi-identifier tuple.
+ * If a tuple is present in the data but not in the auxiliary table, the
+ * corresponding relative frequency is assumed to be zero (and thus, the
+ * tuple is highly reidentifiable).
+ *
+ * @property {Object} table
+ *   Auxiliary table location. [required]
+ *
+ *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
+ *
+ * @property {Object[]} quasiIds
+ *   Quasi-identifier columns. [required]
+ *
+ *   This object should have the same structure as [QuasiIdentifierField]{@link google.privacy.dlp.v2.QuasiIdentifierField}
+ *
+ * @property {Object} relativeFrequency
+ *   The relative frequency column must contain a floating-point number
+ *   between 0 and 1 (inclusive). Null values are assumed to be zero.
+ *   [required]
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+ *
+ * @typedef StatisticalTable
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StatisticalTable definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var StatisticalTable = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * A quasi-identifier column has a custom_tag, used to know which column
+   * in the data corresponds to which column in the statistical model.
+   *
+   * @property {Object} field
+   *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+   *
+   * @property {string} customTag
+   *
+   * @typedef QuasiIdentifierField
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  QuasiIdentifierField: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
+};
+
+/**
  * Privacy metric to compute for reidentification risk analysis.
  *
  * @property {Object} numericalStatsConfig
@@ -989,6 +1106,9 @@ var RiskAnalysisJobConfig = {
  *
  * @property {Object} kMapEstimationConfig
  *   This object should have the same structure as [KMapEstimationConfig]{@link google.privacy.dlp.v2.KMapEstimationConfig}
+ *
+ * @property {Object} deltaPresenceEstimationConfig
+ *   This object should have the same structure as [DeltaPresenceEstimationConfig]{@link google.privacy.dlp.v2.DeltaPresenceEstimationConfig}
  *
  * @typedef PrivacyMetric
  * @memberof google.privacy.dlp.v2
@@ -1099,6 +1219,7 @@ var PrivacyMetric = {
    * using publicly available data (like the US Census), or using a custom
    * statistical model (indicated as one or several BigQuery tables), or by
    * extrapolating from the distribution of values in the input dataset.
+   * A column with a semantic tag attached.
    *
    * @property {Object[]} quasiIds
    *   Fields considered to be quasi-identifiers. No two columns can have the
@@ -1126,8 +1247,6 @@ var PrivacyMetric = {
     // This is for documentation. Actual contents will be loaded by gRPC.
 
     /**
-     * A column with a semantic tag attached.
-     *
      * @property {Object} field
      *   Identifies the column. [required]
      *
@@ -1211,6 +1330,38 @@ var PrivacyMetric = {
         // This is for documentation. Actual contents will be loaded by gRPC.
       }
     }
+  },
+
+  /**
+   * δ-presence metric, used to estimate how likely it is for an attacker to
+   * figure out that one given individual appears in a de-identified dataset.
+   * Similarly to the k-map metric, we cannot compute δ-presence exactly without
+   * knowing the attack dataset, so we use a statistical model instead.
+   *
+   * @property {Object[]} quasiIds
+   *   Fields considered to be quasi-identifiers. No two fields can have the
+   *   same tag. [required]
+   *
+   *   This object should have the same structure as [QuasiId]{@link google.privacy.dlp.v2.QuasiId}
+   *
+   * @property {string} regionCode
+   *   ISO 3166-1 alpha-2 region code to use in the statistical modeling.
+   *   Required if no column is tagged with a region-specific InfoType (like
+   *   US_ZIP_5) or a region code.
+   *
+   * @property {Object[]} auxiliaryTables
+   *   Several auxiliary tables can be used in the analysis. Each custom_tag
+   *   used to tag a quasi-identifiers field must appear in exactly one
+   *   field of one auxiliary table.
+   *
+   *   This object should have the same structure as [StatisticalTable]{@link google.privacy.dlp.v2.StatisticalTable}
+   *
+   * @typedef DeltaPresenceEstimationConfig
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  DeltaPresenceEstimationConfig: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
 
@@ -1241,6 +1392,9 @@ var PrivacyMetric = {
  *
  * @property {Object} kMapEstimationResult
  *   This object should have the same structure as [KMapEstimationResult]{@link google.privacy.dlp.v2.KMapEstimationResult}
+ *
+ * @property {Object} deltaPresenceEstimationResult
+ *   This object should have the same structure as [DeltaPresenceEstimationResult]{@link google.privacy.dlp.v2.DeltaPresenceEstimationResult}
  *
  * @typedef AnalyzeDataSourceRiskDetails
  * @memberof google.privacy.dlp.v2
@@ -1532,6 +1686,93 @@ var AnalyzeDataSourceRiskDetails = {
      * @see [google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationHistogramBucket definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
      */
     KMapEstimationHistogramBucket: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    }
+  },
+
+  /**
+   * Result of the δ-presence computation. Note that these results are an
+   * estimation, not exact values.
+   *
+   * @property {Object[]} deltaPresenceEstimationHistogram
+   *   The intervals [min_probability, max_probability) do not overlap. If a
+   *   value doesn't correspond to any such interval, the associated frequency
+   *   is zero. For example, the following records:
+   *     {min_probability: 0, max_probability: 0.1, frequency: 17}
+   *     {min_probability: 0.2, max_probability: 0.3, frequency: 42}
+   *     {min_probability: 0.3, max_probability: 0.4, frequency: 99}
+   *   mean that there are no record with an estimated probability in [0.1, 0.2)
+   *   nor larger or equal to 0.4.
+   *
+   *   This object should have the same structure as [DeltaPresenceEstimationHistogramBucket]{@link google.privacy.dlp.v2.DeltaPresenceEstimationHistogramBucket}
+   *
+   * @typedef DeltaPresenceEstimationResult
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  DeltaPresenceEstimationResult: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+
+    /**
+     * A tuple of values for the quasi-identifier columns.
+     *
+     * @property {Object[]} quasiIdsValues
+     *   The quasi-identifier values.
+     *
+     *   This object should have the same structure as [Value]{@link google.privacy.dlp.v2.Value}
+     *
+     * @property {number} estimatedProbability
+     *   The estimated probability that a given individual sharing these
+     *   quasi-identifier values is in the dataset. This value, typically called
+     *   δ, is the ratio between the number of records in the dataset with these
+     *   quasi-identifier values, and the total number of individuals (inside
+     *   *and* outside the dataset) with these quasi-identifier values.
+     *   For example, if there are 15 individuals in the dataset who share the
+     *   same quasi-identifier values, and an estimated 100 people in the entire
+     *   population with these values, then δ is 0.15.
+     *
+     * @typedef DeltaPresenceEstimationQuasiIdValues
+     * @memberof google.privacy.dlp.v2
+     * @see [google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+     */
+    DeltaPresenceEstimationQuasiIdValues: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * A DeltaPresenceEstimationHistogramBucket message with the following
+     * values:
+     *   min_probability: 0.1
+     *   max_probability: 0.2
+     *   frequency: 42
+     * means that there are 42 records for which δ is in [0.1, 0.2). An
+     * important particular case is when min_probability = max_probability = 1:
+     * then, every individual who shares this quasi-identifier combination is in
+     * the dataset.
+     *
+     * @property {number} minProbability
+     *   Between 0 and 1.
+     *
+     * @property {number} maxProbability
+     *   Always greater than or equal to min_probability.
+     *
+     * @property {number} bucketSize
+     *   Number of records within these probability bounds.
+     *
+     * @property {Object[]} bucketValues
+     *   Sample of quasi-identifier tuple values in this bucket. The total
+     *   number of classes returned per bucket is capped at 20.
+     *
+     *   This object should have the same structure as [DeltaPresenceEstimationQuasiIdValues]{@link google.privacy.dlp.v2.DeltaPresenceEstimationQuasiIdValues}
+     *
+     * @property {number} bucketValueCount
+     *   Total number of distinct quasi-identifier tuple values in this bucket.
+     *
+     * @typedef DeltaPresenceEstimationHistogramBucket
+     * @memberof google.privacy.dlp.v2
+     * @see [google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+     */
+    DeltaPresenceEstimationHistogramBucket: {
       // This is for documentation. Actual contents will be loaded by gRPC.
     }
   }
@@ -1928,6 +2169,8 @@ var CharacterMaskConfig = {
  * being transformed, we will first attempt converting the type of the data to
  * be transformed to match the type of the bound before comparing.
  *
+ * See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
+ *
  * @property {Object} lowerBound
  *   Lower bound value of buckets. All values less than `lower_bound` are
  *   grouped together into a single bucket; for example if `lower_bound` = 10,
@@ -1966,6 +2209,7 @@ var FixedSizeBucketingConfig = {
  * If the bound `Value` type differs from the type of data being transformed, we
  * will first attempt converting the type of the data to be transformed to match
  * the type of the bound before comparing.
+ * See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
  *
  * @property {Object[]} buckets
  *   Set of buckets. Ranges must be non-overlapping.
@@ -2018,7 +2262,7 @@ var BucketingConfig = {
  * replaced with the same surrogate.
  * Identifiers must be at least two characters long.
  * In the case that the identifier is the empty string, it will be skipped.
- * See [Pseudonymization](https://cloud.google.com/dlp/docs/pseudonymization) for example usage.
+ * See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
  *
  * @property {Object} cryptoKey
  *   The key used by the encryption algorithm. [required]
@@ -2045,8 +2289,7 @@ var BucketingConfig = {
  *   such that:
  *
  *   - a 64 bit integer is encoded followed by a single byte of value 1
- *   - a string is encoded in UTF-8 format followed by a single byte of value
- *    å 2
+ *   - a string is encoded in UTF-8 format followed by a single byte of value 2
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
@@ -2215,7 +2458,8 @@ var KmsWrappedCryptoKey = {
 
 /**
  * Shifts dates by random number of days, with option to be consistent for the
- * same context.
+ * same context. See https://cloud.google.com/dlp/docs/concepts-date-shifting
+ * to learn more.
  *
  * @property {number} upperBoundDays
  *   Range of shift in days. Actual shift will be selected at random within this
@@ -2274,8 +2518,9 @@ var InfoTypeTransformations = {
    * info_type.
    *
    * @property {Object[]} infoTypes
-   *   InfoTypes to apply the transformation to. Empty list will match all
-   *   available infoTypes for this transformation.
+   *   InfoTypes to apply the transformation to. An empty list will cause
+   *   this transformation to apply to all findings that correspond to
+   *   infoTypes that were requested in `InspectConfig`.
    *
    *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
    *
@@ -2580,13 +2825,13 @@ var TransformationSummary = {
  *
  * @property {Object} recurrencePeriodDuration
  *   With this option a job is started a regular periodic basis. For
- *   example: every 10 minutes.
+ *   example: every day (86400 seconds).
  *
  *   A scheduled start time will be skipped if the previous
  *   execution has not ended when its scheduled time occurs.
  *
  *   This value must be set to a time duration greater than or equal
- *   to 60 minutes and can be no longer than 60 days.
+ *   to 1 day and can be no longer than 60 days.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
@@ -2601,7 +2846,8 @@ var Schedule = {
 /**
  * The inspectTemplate contains a configuration (set of types of sensitive data
  * to be detected) to be used anywhere you otherwise would normally specify
- * InspectConfig.
+ * InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
+ * to learn more.
  *
  * @property {string} name
  *   The template name. Output only.
@@ -2641,6 +2887,7 @@ var InspectTemplate = {
 
 /**
  * The DeidentifyTemplates contains instructions on how to deidentify content.
+ * See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
  *
  * @property {string} name
  *   The template name. Output only.
@@ -2701,6 +2948,7 @@ var Error = {
 
 /**
  * Contains a configuration to make dlp api calls on a repeating basis.
+ * See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
  *
  * @property {string} name
  *   Unique resource name for the triggeredJob, assigned by the service when the
@@ -2805,6 +3053,7 @@ var JobTrigger = {
 
 /**
  * A task to execute on the completion of a job.
+ * See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
  *
  * @property {Object} saveFindings
  *   Save resulting findings in a provided location.
@@ -2832,7 +3081,7 @@ var Action = {
    * If set, the detailed findings will be persisted to the specified
    * OutputStorageConfig. Only a single instance of this action can be
    * specified.
-   * Compatible with: Inspect
+   * Compatible with: Inspect, Risk
    *
    * @property {Object} outputConfig
    *   This object should have the same structure as [OutputStorageConfig]{@link google.privacy.dlp.v2.OutputStorageConfig}
@@ -3107,30 +3356,29 @@ var CreateDlpJobRequest = {
  * Request message for ListJobTriggers.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id.
+ *   The parent resource name, for example `projects/my-project-id`.
  *
  * @property {string} pageToken
  *   Optional page token to continue retrieval. Comes from previous call
- *   to ListJobTriggers. `order_by` and `filter` should not change for
- *   subsequent calls, but can be omitted if token is specified.
+ *   to ListJobTriggers. `order_by` field must not
+ *   change for subsequent calls.
  *
  * @property {number} pageSize
  *   Optional size of the page, can be limited by a server.
  *
  * @property {string} orderBy
  *   Optional comma separated list of triggeredJob fields to order by,
- *   followed by 'asc/desc' postfix, i.e.
- *   `"create_time asc,name desc,schedule_mode asc"`. This list is
- *   case-insensitive.
+ *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+ *   default sorting order is ascending, redundant space characters are
+ *   insignificant.
  *
- *   Example: `"name asc,schedule_mode desc, status desc"`
+ *   Example: `name asc,update_time, create_time desc`
  *
- *   Supported filters keys and values are:
+ *   Supported fields are:
  *
  *   - `create_time`: corresponds to time the triggeredJob was created.
  *   - `update_time`: corresponds to time the triggeredJob was last updated.
- *   - `name`: corresponds to JobTrigger's display name.
- *   - `status`: corresponds to the triggeredJob status.
+ *   - `name`: corresponds to JobTrigger's name.
  *
  * @typedef ListJobTriggersRequest
  * @memberof google.privacy.dlp.v2

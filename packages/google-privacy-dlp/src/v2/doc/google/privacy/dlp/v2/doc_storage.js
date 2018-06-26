@@ -19,7 +19,10 @@
  * Type of information detected by the API.
  *
  * @property {string} name
- *   Name of the information type.
+ *   Name of the information type. Either a name of your choosing when
+ *   creating a CustomInfoType, or one of the names listed
+ *   at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
+ *   a built-in type.
  *
  * @typedef InfoType
  * @memberof google.privacy.dlp.v2
@@ -34,37 +37,38 @@ var InfoType = {
  * sensitive information configurable to the data in question.
  *
  * @property {Object} infoType
- *   Info type configuration. All custom info types must have configurations
- *   that do not conflict with built-in info types or other custom info types.
+ *   All CustomInfoTypes must have a name
+ *   that does not conflict with built-in InfoTypes or other CustomInfoTypes.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
  * @property {number} likelihood
- *   Likelihood to return for this custom info type. This base value can be
+ *   Likelihood to return for this CustomInfoType. This base value can be
  *   altered by a detection rule if the finding meets the criteria specified by
  *   the rule. Defaults to `VERY_LIKELY` if not specified.
  *
  *   The number should be among the values of [Likelihood]{@link google.privacy.dlp.v2.Likelihood}
  *
  * @property {Object} dictionary
- *   Dictionary-based custom info type.
+ *   A list of phrases to detect as a CustomInfoType.
  *
  *   This object should have the same structure as [Dictionary]{@link google.privacy.dlp.v2.Dictionary}
  *
  * @property {Object} regex
- *   Regex-based custom info type.
+ *   Regular expression based CustomInfoType.
  *
  *   This object should have the same structure as [Regex]{@link google.privacy.dlp.v2.Regex}
  *
  * @property {Object} surrogateType
- *   Surrogate info type.
+ *   Message for detecting output from deidentification transformations that
+ *   support reversing.
  *
  *   This object should have the same structure as [SurrogateType]{@link google.privacy.dlp.v2.SurrogateType}
  *
  * @property {Object[]} detectionRules
- *   Set of detection rules to apply to all findings of this custom info type.
+ *   Set of detection rules to apply to all findings of this CustomInfoType.
  *   Rules are applied in order that they are specified. Not supported for the
- *   `surrogate_type` custom info type.
+ *   `surrogate_type` CustomInfoType.
  *
  *   This object should have the same structure as [DetectionRule]{@link google.privacy.dlp.v2.DetectionRule}
  *
@@ -152,7 +156,7 @@ var CustomInfoType = {
    * These types of transformations are
    * those that perform pseudonymization, thereby producing a "surrogate" as
    * output. This should be used in conjunction with a field on the
-   * transformation such as `surrogate_info_type`. This custom info type does
+   * transformation such as `surrogate_info_type`. This CustomInfoType does
    * not support the use of `detection_rules`.
    * @typedef SurrogateType
    * @memberof google.privacy.dlp.v2
@@ -163,7 +167,7 @@ var CustomInfoType = {
   },
 
   /**
-   * Rule for modifying a custom info type to alter behavior under certain
+   * Rule for modifying a CustomInfoType to alter behavior under certain
    * circumstances, depending on the specific details of the rule. Not supported
    * for the `surrogate_type` custom info type.
    *
@@ -225,11 +229,11 @@ var CustomInfoType = {
     },
 
     /**
-     * Detection rule that adjusts the likelihood of findings within a certain
+     * The rule that adjusts the likelihood of findings within a certain
      * proximity of hotwords.
      *
      * @property {Object} hotwordRegex
-     *   Regex pattern defining what qualifies as a hotword.
+     *   Regular expression pattern defining what qualifies as a hotword.
      *
      *   This object should have the same structure as [Regex]{@link google.privacy.dlp.v2.Regex}
      *
@@ -350,6 +354,14 @@ var DatastoreOptions = {
  *
  *   The number should be among the values of [FileType]{@link google.privacy.dlp.v2.FileType}
  *
+ * @property {number} sampleMethod
+ *   The number should be among the values of [SampleMethod]{@link google.privacy.dlp.v2.SampleMethod}
+ *
+ * @property {number} filesLimitPercent
+ *   Limits the number of files to scan to this percentage of the input FileSet.
+ *   Number of files scanned is rounded down. Must be between 0 and 100,
+ *   inclusively. Both 0 and 100 means no limit. Defaults to 0.
+ *
  * @typedef CloudStorageOptions
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CloudStorageOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
@@ -370,11 +382,34 @@ var CloudStorageOptions = {
    */
   FileSet: {
     // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * How to sample bytes if not all bytes are scanned. Meaningful only when used
+   * in conjunction with bytes_limit_per_file. If not specified, scanning would
+   * start from the top.
+   *
+   * @enum {number}
+   * @memberof google.privacy.dlp.v2
+   */
+  SampleMethod: {
+    SAMPLE_METHOD_UNSPECIFIED: 0,
+
+    /**
+     * Scan from the top (default).
+     */
+    TOP: 1,
+
+    /**
+     * For each file larger than bytes_limit_per_file, randomly pick the offset
+     * to start scanning. The scanned bytes are contiguous.
+     */
+    RANDOM_START: 2
   }
 };
 
 /**
- * Message representing a path in Cloud Storage.
+ * Message representing a single file or path in Cloud Storage.
  *
  * @property {string} path
  *   A url representing a file or path (no wildcards) in Cloud Storage.
@@ -407,12 +442,37 @@ var CloudStoragePath = {
  *   rest of the rows are omitted. If not set, or if set to 0, all rows will be
  *   scanned. Cannot be used in conjunction with TimespanConfig.
  *
+ * @property {number} sampleMethod
+ *   The number should be among the values of [SampleMethod]{@link google.privacy.dlp.v2.SampleMethod}
+ *
  * @typedef BigQueryOptions
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BigQueryOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
 var BigQueryOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * How to sample rows if not all rows are scanned. Meaningful only when used
+   * in conjunction with rows_limit. If not specified, scanning would start
+   * from the top.
+   *
+   * @enum {number}
+   * @memberof google.privacy.dlp.v2
+   */
+  SampleMethod: {
+    SAMPLE_METHOD_UNSPECIFIED: 0,
+
+    /**
+     * Scan from the top (default).
+     */
+    TOP: 1,
+
+    /**
+     * Randomly pick the row to start scanning. The scanned rows are contiguous.
+     */
+    RANDOM_START: 2
+  }
 };
 
 /**
@@ -657,7 +717,7 @@ var EntityId = {
 var Likelihood = {
 
   /**
-   * Default value; information with all likelihoods is included.
+   * Default value; same as POSSIBLE.
    */
   LIKELIHOOD_UNSPECIFIED: 0,
 

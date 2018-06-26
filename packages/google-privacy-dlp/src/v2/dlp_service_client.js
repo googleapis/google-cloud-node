@@ -29,6 +29,9 @@ const VERSION = require('../../package.json').version;
  * The service also includes methods for sensitive data redaction and
  * scheduling of data scans on Google Cloud Platform based data sets.
  *
+ * To learn more about concepts and find how-to guides see
+ * https://cloud.google.com/dlp/docs/.
+ *
  * @class
  * @memberof v2
  */
@@ -76,14 +79,14 @@ class DlpServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
     var clientHeader = [
-      `gl-node/${process.version.node}`,
+      `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -253,8 +256,13 @@ class DlpServiceClient {
   /**
    * Finds potentially sensitive info in content.
    * This method has limits on input size, processing time, and output size.
-   * [How-to guide for text](https://cloud.google.com/dlp/docs/inspecting-text), [How-to guide for
-   * images](https://cloud.google.com/dlp/docs/inspecting-images)
+   *
+   * When no InfoTypes or CustomInfoTypes are specified in this request, the
+   * system will automatically choose what detectors to run. By default this may
+   * be all types, but may change over time as detectors are updated.
+   *
+   * For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
+   * and https://cloud.google.com/dlp/docs/inspecting-text,
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -317,7 +325,12 @@ class DlpServiceClient {
   /**
    * Redacts potentially sensitive info from an image.
    * This method has limits on input size, processing time, and output size.
-   * [How-to guide](https://cloud.google.com/dlp/docs/redacting-sensitive-data-images)
+   * See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
+   * learn more.
+   *
+   * When no InfoTypes or CustomInfoTypes are specified in this request, the
+   * system will automatically choose what detectors to run. By default this may
+   * be all types, but may change over time as detectors are updated.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -331,6 +344,9 @@ class DlpServiceClient {
    *   The configuration for specifying what content to redact from images.
    *
    *   This object should have the same structure as [ImageRedactionConfig]{@link google.privacy.dlp.v2.ImageRedactionConfig}
+   * @param {boolean} [request.includeFindings]
+   *   Whether the response should include findings along with the redacted
+   *   image.
    * @param {Object} [request.byteItem]
    *   The content must be PNG, JPEG, SVG or BMP.
    *
@@ -377,7 +393,12 @@ class DlpServiceClient {
   /**
    * De-identifies potentially sensitive info from a ContentItem.
    * This method has limits on input size and output size.
-   * [How-to guide](https://cloud.google.com/dlp/docs/deidentify-sensitive-data)
+   * See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
+   * learn more.
+   *
+   * When no InfoTypes or CustomInfoTypes are specified in this request, the
+   * system will automatically choose what detectors to run. By default this may
+   * be all types, but may change over time as detectors are updated.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -452,6 +473,9 @@ class DlpServiceClient {
 
   /**
    * Re-identifies content that has been de-identified.
+   * See
+   * https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -531,8 +555,8 @@ class DlpServiceClient {
 
   /**
    * Returns a list of the sensitive information types that the DLP API
-   * supports. For more information, see [Listing supported predefined
-   * infoTypes](https://cloud.google.com/dlp/docs/listing-infotypes).
+   * supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
+   * learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -585,6 +609,7 @@ class DlpServiceClient {
   /**
    * Creates an InspectTemplate for re-using frequently used configuration
    * for inspecting content, images, and storage.
+   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -645,6 +670,7 @@ class DlpServiceClient {
 
   /**
    * Updates the InspectTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -705,6 +731,7 @@ class DlpServiceClient {
 
   /**
    * Gets an InspectTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -753,6 +780,7 @@ class DlpServiceClient {
 
   /**
    * Lists InspectTemplates.
+   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -904,6 +932,7 @@ class DlpServiceClient {
 
   /**
    * Deletes an InspectTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -949,6 +978,8 @@ class DlpServiceClient {
   /**
    * Creates a DeidentifyTemplate for re-using frequently used configuration
    * for de-identifying content, images, and storage.
+   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+   * more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1009,6 +1040,8 @@ class DlpServiceClient {
 
   /**
    * Updates the DeidentifyTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+   * more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1069,6 +1102,8 @@ class DlpServiceClient {
 
   /**
    * Gets a DeidentifyTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+   * more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1121,6 +1156,8 @@ class DlpServiceClient {
 
   /**
    * Lists DeidentifyTemplates.
+   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+   * more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1276,6 +1313,8 @@ class DlpServiceClient {
 
   /**
    * Deletes a DeidentifyTemplate.
+   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+   * more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1320,7 +1359,12 @@ class DlpServiceClient {
 
   /**
    * Creates a new job to inspect storage or calculate risk metrics.
-   * [How-to guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
+   * See https://cloud.google.com/dlp/docs/inspecting-storage and
+   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   *
+   * When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
+   * system will automatically choose what detectors to run. By default this may
+   * be all types, but may change over time as detectors are updated.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1376,6 +1420,8 @@ class DlpServiceClient {
 
   /**
    * Lists DlpJobs that match the specified filter in the request.
+   * See https://cloud.google.com/dlp/docs/inspecting-storage and
+   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1581,6 +1627,8 @@ class DlpServiceClient {
 
   /**
    * Gets the latest state of a long-running DlpJob.
+   * See https://cloud.google.com/dlp/docs/inspecting-storage and
+   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1629,6 +1677,8 @@ class DlpServiceClient {
    * Deletes a long-running DlpJob. This method indicates that the client is
    * no longer interested in the DlpJob result. The job will be cancelled if
    * possible.
+   * See https://cloud.google.com/dlp/docs/inspecting-storage and
+   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1669,6 +1719,8 @@ class DlpServiceClient {
    * Starts asynchronous cancellation on a long-running DlpJob. The server
    * makes a best effort to cancel the DlpJob, but success is not
    * guaranteed.
+   * See https://cloud.google.com/dlp/docs/inspecting-storage and
+   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1707,11 +1759,12 @@ class DlpServiceClient {
 
   /**
    * Lists job triggers.
+   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   The parent resource name, for example `projects/my-project-id`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1720,18 +1773,17 @@ class DlpServiceClient {
    *   resources in a page.
    * @param {string} [request.orderBy]
    *   Optional comma separated list of triggeredJob fields to order by,
-   *   followed by 'asc/desc' postfix, i.e.
-   *   `"create_time asc,name desc,schedule_mode asc"`. This list is
-   *   case-insensitive.
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
    *
-   *   Example: `"name asc,schedule_mode desc, status desc"`
+   *   Example: `name asc,update_time, create_time desc`
    *
-   *   Supported filters keys and values are:
+   *   Supported fields are:
    *
    *   - `create_time`: corresponds to time the triggeredJob was created.
    *   - `update_time`: corresponds to time the triggeredJob was last updated.
-   *   - `name`: corresponds to JobTrigger's display name.
-   *   - `status`: corresponds to the triggeredJob status.
+   *   - `name`: corresponds to JobTrigger's name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1829,7 +1881,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   The parent resource name, for example `projects/my-project-id`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1838,18 +1890,17 @@ class DlpServiceClient {
    *   resources in a page.
    * @param {string} [request.orderBy]
    *   Optional comma separated list of triggeredJob fields to order by,
-   *   followed by 'asc/desc' postfix, i.e.
-   *   `"create_time asc,name desc,schedule_mode asc"`. This list is
-   *   case-insensitive.
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
    *
-   *   Example: `"name asc,schedule_mode desc, status desc"`
+   *   Example: `name asc,update_time, create_time desc`
    *
-   *   Supported filters keys and values are:
+   *   Supported fields are:
    *
    *   - `create_time`: corresponds to time the triggeredJob was created.
    *   - `update_time`: corresponds to time the triggeredJob was last updated.
-   *   - `name`: corresponds to JobTrigger's display name.
-   *   - `status`: corresponds to the triggeredJob status.
+   *   - `name`: corresponds to JobTrigger's name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1884,6 +1935,7 @@ class DlpServiceClient {
 
   /**
    * Gets a job trigger.
+   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1931,6 +1983,7 @@ class DlpServiceClient {
 
   /**
    * Deletes a job trigger.
+   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1970,6 +2023,7 @@ class DlpServiceClient {
 
   /**
    * Updates a job trigger.
+   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2026,6 +2080,7 @@ class DlpServiceClient {
   /**
    * Creates a job trigger to run DLP actions such as scanning storage for
    * sensitive information on a set schedule.
+   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
