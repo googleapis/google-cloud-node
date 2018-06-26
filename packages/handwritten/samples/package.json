@@ -15,7 +15,7 @@
     "exception-test": "samples test app --code 500 --msg SyntaxError --url \"http://localhost:33333/exception\" --port 33333  -- snippets.js express",
     "system-test": "ava -T 1m --verbose system-test/*.test.js",
     "all-test": "npm run system-test && npm run error-test && npm run exception-test",
-    "test": "repo-tools test run --cmd npm -- run cover"
+    "test": "npm run cover"
   },
   "dependencies": {
     "@google-cloud/error-reporting": "0.5.0",
