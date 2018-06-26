@@ -22,7 +22,6 @@
  * When a new transfer configuration is created, the specified
  * `destination_dataset_id` is created when needed and shared with the
  * appropriate data source service account.
- * Next id: 20
  *
  * @property {string} name
  *   The resource name of the transfer config.
@@ -107,7 +106,6 @@ var TransferConfig = {
 
 /**
  * Represents a data transfer run.
- * Next id: 27
  *
  * @property {string} name
  *   The resource name of the transfer run.
@@ -240,7 +238,7 @@ var TransferMessage = {
 };
 
 /**
- * Represents data transfer type.
+ * DEPRECATED. Represents data transfer type.
  *
  * @enum {number}
  * @memberof google.cloud.bigquery.datatransfer.v1

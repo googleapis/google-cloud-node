@@ -40,10 +40,10 @@ class DataTransferServiceClient {
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
    * @param {string} [options.email] - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
+   *     using a .pem or .p12 keyFilename.
    * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
    * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
@@ -74,14 +74,14 @@ class DataTransferServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
     var clientHeader = [
-      `gl-node/${process.version.node}`,
+      `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -103,26 +103,14 @@ class DataTransferServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      locationPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
-      locationDataSourcePathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/dataSources/{data_source}'
-      ),
-      locationTransferConfigPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/transferConfigs/{transfer_config}'
-      ),
-      locationRunPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}'
-      ),
-      dataSourcePathTemplate: new gax.PathTemplate(
+      projectDataSourcePathTemplate: new gax.PathTemplate(
         'projects/{project}/dataSources/{data_source}'
       ),
-      transferConfigPathTemplate: new gax.PathTemplate(
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      projectTransferConfigPathTemplate: new gax.PathTemplate(
         'projects/{project}/transferConfigs/{transfer_config}'
       ),
-      runPathTemplate: new gax.PathTemplate(
+      projectRunPathTemplate: new gax.PathTemplate(
         'projects/{project}/transferConfigs/{transfer_config}/runs/{run}'
       ),
     };
@@ -268,7 +256,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+   * var formattedName = client.projectDataSourcePath('[PROJECT]', '[DATA_SOURCE]');
    * client.getDataSource({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
@@ -335,7 +323,7 @@ class DataTransferServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listDataSources({parent: formattedParent})
    *   .then(responses => {
@@ -349,7 +337,7 @@ class DataTransferServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    *
    * var options = {autoPaginate: false};
@@ -422,7 +410,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    * client.listDataSourcesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -490,7 +478,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    * var transferConfig = {};
    * var request = {
    *   parent: formattedParent,
@@ -615,7 +603,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedName = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    * client.deleteTransferConfig({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -657,7 +645,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedName = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    * client.getTransferConfig({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
@@ -725,7 +713,7 @@ class DataTransferServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listTransferConfigs({parent: formattedParent})
    *   .then(responses => {
@@ -739,7 +727,7 @@ class DataTransferServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    *
    * var options = {autoPaginate: false};
@@ -814,7 +802,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    * client.listTransferConfigsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -872,7 +860,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedParent = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    * var startTime = {};
    * var endTime = {};
    * var request = {
@@ -926,7 +914,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+   * var formattedName = client.projectRunPath('[PROJECT]', '[TRANSFER_CONFIG]', '[RUN]');
    * client.getTransferRun({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
@@ -970,7 +958,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+   * var formattedName = client.projectRunPath('[PROJECT]', '[TRANSFER_CONFIG]', '[RUN]');
    * client.deleteTransferRun({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1040,7 +1028,7 @@ class DataTransferServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedParent = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    *
    * client.listTransferRuns({parent: formattedParent})
    *   .then(responses => {
@@ -1054,7 +1042,7 @@ class DataTransferServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedParent = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    *
    *
    * var options = {autoPaginate: false};
@@ -1136,7 +1124,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationTransferConfigPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]');
+   * var formattedParent = client.projectTransferConfigPath('[PROJECT]', '[TRANSFER_CONFIG]');
    * client.listTransferRunsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1205,7 +1193,7 @@ class DataTransferServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+   * var formattedParent = client.projectRunPath('[PROJECT]', '[TRANSFER_CONFIG]', '[RUN]');
    *
    * client.listTransferLogs({parent: formattedParent})
    *   .then(responses => {
@@ -1219,7 +1207,7 @@ class DataTransferServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+   * var formattedParent = client.projectRunPath('[PROJECT]', '[TRANSFER_CONFIG]', '[RUN]');
    *
    *
    * var options = {autoPaginate: false};
@@ -1297,7 +1285,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationRunPath('[PROJECT]', '[LOCATION]', '[TRANSFER_CONFIG]', '[RUN]');
+   * var formattedParent = client.projectRunPath('[PROJECT]', '[TRANSFER_CONFIG]', '[RUN]');
    * client.listTransferLogsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1347,7 +1335,7 @@ class DataTransferServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.locationDataSourcePath('[PROJECT]', '[LOCATION]', '[DATA_SOURCE]');
+   * var formattedName = client.projectDataSourcePath('[PROJECT]', '[DATA_SOURCE]');
    * client.checkValidCreds({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
@@ -1372,6 +1360,20 @@ class DataTransferServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified project_data_source resource name string.
+   *
+   * @param {String} project
+   * @param {String} dataSource
+   * @returns {String}
+   */
+  projectDataSourcePath(project, dataSource) {
+    return this._pathTemplates.projectDataSourcePathTemplate.render({
+      project: project,
+      data_source: dataSource,
+    });
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {String} project
@@ -1384,111 +1386,59 @@ class DataTransferServiceClient {
   }
 
   /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @returns {String}
-   */
-  locationPath(project, location) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project: project,
-      location: location,
-    });
-  }
-
-  /**
-   * Return a fully-qualified location_data_source resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} dataSource
-   * @returns {String}
-   */
-  locationDataSourcePath(project, location, dataSource) {
-    return this._pathTemplates.locationDataSourcePathTemplate.render({
-      project: project,
-      location: location,
-      data_source: dataSource,
-    });
-  }
-
-  /**
-   * Return a fully-qualified location_transfer_config resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} transferConfig
-   * @returns {String}
-   */
-  locationTransferConfigPath(project, location, transferConfig) {
-    return this._pathTemplates.locationTransferConfigPathTemplate.render({
-      project: project,
-      location: location,
-      transfer_config: transferConfig,
-    });
-  }
-
-  /**
-   * Return a fully-qualified location_run resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} transferConfig
-   * @param {String} run
-   * @returns {String}
-   */
-  locationRunPath(project, location, transferConfig, run) {
-    return this._pathTemplates.locationRunPathTemplate.render({
-      project: project,
-      location: location,
-      transfer_config: transferConfig,
-      run: run,
-    });
-  }
-
-  /**
-   * Return a fully-qualified data_source resource name string.
-   *
-   * @param {String} project
-   * @param {String} dataSource
-   * @returns {String}
-   */
-  dataSourcePath(project, dataSource) {
-    return this._pathTemplates.dataSourcePathTemplate.render({
-      project: project,
-      data_source: dataSource,
-    });
-  }
-
-  /**
-   * Return a fully-qualified transfer_config resource name string.
+   * Return a fully-qualified project_transfer_config resource name string.
    *
    * @param {String} project
    * @param {String} transferConfig
    * @returns {String}
    */
-  transferConfigPath(project, transferConfig) {
-    return this._pathTemplates.transferConfigPathTemplate.render({
+  projectTransferConfigPath(project, transferConfig) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.render({
       project: project,
       transfer_config: transferConfig,
     });
   }
 
   /**
-   * Return a fully-qualified run resource name string.
+   * Return a fully-qualified project_run resource name string.
    *
    * @param {String} project
    * @param {String} transferConfig
    * @param {String} run
    * @returns {String}
    */
-  runPath(project, transferConfig, run) {
-    return this._pathTemplates.runPathTemplate.render({
+  projectRunPath(project, transferConfig, run) {
+    return this._pathTemplates.projectRunPathTemplate.render({
       project: project,
       transfer_config: transferConfig,
       run: run,
     });
+  }
+
+  /**
+   * Parse the projectDataSourceName from a project_data_source resource.
+   *
+   * @param {String} projectDataSourceName
+   *   A fully-qualified path representing a project_data_source resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectDataSourceName(projectDataSourceName) {
+    return this._pathTemplates.projectDataSourcePathTemplate.match(
+      projectDataSourceName
+    ).project;
+  }
+
+  /**
+   * Parse the projectDataSourceName from a project_data_source resource.
+   *
+   * @param {String} projectDataSourceName
+   *   A fully-qualified path representing a project_data_source resources.
+   * @returns {String} - A string representing the data_source.
+   */
+  matchDataSourceFromProjectDataSourceName(projectDataSourceName) {
+    return this._pathTemplates.projectDataSourcePathTemplate.match(
+      projectDataSourceName
+    ).data_source;
   }
 
   /**
@@ -1503,237 +1453,64 @@ class DataTransferServiceClient {
   }
 
   /**
-   * Parse the locationName from a location resource.
+   * Parse the projectTransferConfigName from a project_transfer_config resource.
    *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
+   * @param {String} projectTransferConfigName
+   *   A fully-qualified path representing a project_transfer_config resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
-  }
-
-  /**
-   * Parse the locationDataSourceName from a location_data_source resource.
-   *
-   * @param {String} locationDataSourceName
-   *   A fully-qualified path representing a location_data_source resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate.match(
-      locationDataSourceName
+  matchProjectFromProjectTransferConfigName(projectTransferConfigName) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.match(
+      projectTransferConfigName
     ).project;
   }
 
   /**
-   * Parse the locationDataSourceName from a location_data_source resource.
+   * Parse the projectTransferConfigName from a project_transfer_config resource.
    *
-   * @param {String} locationDataSourceName
-   *   A fully-qualified path representing a location_data_source resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate.match(
-      locationDataSourceName
-    ).location;
-  }
-
-  /**
-   * Parse the locationDataSourceName from a location_data_source resource.
-   *
-   * @param {String} locationDataSourceName
-   *   A fully-qualified path representing a location_data_source resources.
-   * @returns {String} - A string representing the data_source.
-   */
-  matchDataSourceFromLocationDataSourceName(locationDataSourceName) {
-    return this._pathTemplates.locationDataSourcePathTemplate.match(
-      locationDataSourceName
-    ).data_source;
-  }
-
-  /**
-   * Parse the locationTransferConfigName from a location_transfer_config resource.
-   *
-   * @param {String} locationTransferConfigName
-   *   A fully-qualified path representing a location_transfer_config resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromLocationTransferConfigName(locationTransferConfigName) {
-    return this._pathTemplates.locationTransferConfigPathTemplate.match(
-      locationTransferConfigName
-    ).project;
-  }
-
-  /**
-   * Parse the locationTransferConfigName from a location_transfer_config resource.
-   *
-   * @param {String} locationTransferConfigName
-   *   A fully-qualified path representing a location_transfer_config resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationTransferConfigName(locationTransferConfigName) {
-    return this._pathTemplates.locationTransferConfigPathTemplate.match(
-      locationTransferConfigName
-    ).location;
-  }
-
-  /**
-   * Parse the locationTransferConfigName from a location_transfer_config resource.
-   *
-   * @param {String} locationTransferConfigName
-   *   A fully-qualified path representing a location_transfer_config resources.
+   * @param {String} projectTransferConfigName
+   *   A fully-qualified path representing a project_transfer_config resources.
    * @returns {String} - A string representing the transfer_config.
    */
-  matchTransferConfigFromLocationTransferConfigName(
-    locationTransferConfigName
-  ) {
-    return this._pathTemplates.locationTransferConfigPathTemplate.match(
-      locationTransferConfigName
+  matchTransferConfigFromProjectTransferConfigName(projectTransferConfigName) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.match(
+      projectTransferConfigName
     ).transfer_config;
   }
 
   /**
-   * Parse the locationRunName from a location_run resource.
+   * Parse the projectRunName from a project_run resource.
    *
-   * @param {String} locationRunName
-   *   A fully-qualified path representing a location_run resources.
+   * @param {String} projectRunName
+   *   A fully-qualified path representing a project_run resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+  matchProjectFromProjectRunName(projectRunName) {
+    return this._pathTemplates.projectRunPathTemplate.match(projectRunName)
       .project;
   }
 
   /**
-   * Parse the locationRunName from a location_run resource.
+   * Parse the projectRunName from a project_run resource.
    *
-   * @param {String} locationRunName
-   *   A fully-qualified path representing a location_run resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
-      .location;
-  }
-
-  /**
-   * Parse the locationRunName from a location_run resource.
-   *
-   * @param {String} locationRunName
-   *   A fully-qualified path representing a location_run resources.
+   * @param {String} projectRunName
+   *   A fully-qualified path representing a project_run resources.
    * @returns {String} - A string representing the transfer_config.
    */
-  matchTransferConfigFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+  matchTransferConfigFromProjectRunName(projectRunName) {
+    return this._pathTemplates.projectRunPathTemplate.match(projectRunName)
       .transfer_config;
   }
 
   /**
-   * Parse the locationRunName from a location_run resource.
+   * Parse the projectRunName from a project_run resource.
    *
-   * @param {String} locationRunName
-   *   A fully-qualified path representing a location_run resources.
+   * @param {String} projectRunName
+   *   A fully-qualified path representing a project_run resources.
    * @returns {String} - A string representing the run.
    */
-  matchRunFromLocationRunName(locationRunName) {
-    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
-      .run;
-  }
-
-  /**
-   * Parse the dataSourceName from a data_source resource.
-   *
-   * @param {String} dataSourceName
-   *   A fully-qualified path representing a data_source resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromDataSourceName(dataSourceName) {
-    return this._pathTemplates.dataSourcePathTemplate.match(dataSourceName)
-      .project;
-  }
-
-  /**
-   * Parse the dataSourceName from a data_source resource.
-   *
-   * @param {String} dataSourceName
-   *   A fully-qualified path representing a data_source resources.
-   * @returns {String} - A string representing the data_source.
-   */
-  matchDataSourceFromDataSourceName(dataSourceName) {
-    return this._pathTemplates.dataSourcePathTemplate.match(dataSourceName)
-      .data_source;
-  }
-
-  /**
-   * Parse the transferConfigName from a transfer_config resource.
-   *
-   * @param {String} transferConfigName
-   *   A fully-qualified path representing a transfer_config resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromTransferConfigName(transferConfigName) {
-    return this._pathTemplates.transferConfigPathTemplate.match(
-      transferConfigName
-    ).project;
-  }
-
-  /**
-   * Parse the transferConfigName from a transfer_config resource.
-   *
-   * @param {String} transferConfigName
-   *   A fully-qualified path representing a transfer_config resources.
-   * @returns {String} - A string representing the transfer_config.
-   */
-  matchTransferConfigFromTransferConfigName(transferConfigName) {
-    return this._pathTemplates.transferConfigPathTemplate.match(
-      transferConfigName
-    ).transfer_config;
-  }
-
-  /**
-   * Parse the runName from a run resource.
-   *
-   * @param {String} runName
-   *   A fully-qualified path representing a run resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate.match(runName).project;
-  }
-
-  /**
-   * Parse the runName from a run resource.
-   *
-   * @param {String} runName
-   *   A fully-qualified path representing a run resources.
-   * @returns {String} - A string representing the transfer_config.
-   */
-  matchTransferConfigFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate.match(runName).transfer_config;
-  }
-
-  /**
-   * Parse the runName from a run resource.
-   *
-   * @param {String} runName
-   *   A fully-qualified path representing a run resources.
-   * @returns {String} - A string representing the run.
-   */
-  matchRunFromRunName(runName) {
-    return this._pathTemplates.runPathTemplate.match(runName).run;
+  matchRunFromProjectRunName(projectRunName) {
+    return this._pathTemplates.projectRunPathTemplate.match(projectRunName).run;
   }
 }
 
