@@ -83,7 +83,6 @@ jobs:
           command: |-
             mkdir -p /home/node/.npm-global
             npm install
-            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
