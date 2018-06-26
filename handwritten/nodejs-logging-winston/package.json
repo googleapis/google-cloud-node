@@ -93,7 +93,7 @@
     "@types/winston": "^2.3.7",
     "codecov": "^3.0.0",
     "cpy-cli": "^2.0.0",
-    "eslint": "^4.9.0",
+    "eslint": "^5.0.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-prettier": "^2.3.1",
