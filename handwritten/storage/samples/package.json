@@ -15,10 +15,10 @@
     ]
   },
   "scripts": {
-    "cleanup": "repo-tools exec -- node scripts/cleanup",
+    "cleanup": "node scripts/cleanup",
     "ava": "ava -T 20s --verbose system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose system-test/*.test.js && nyc report",
-    "test": "repo-tools test run --cmd npm -- run cover"
+    "test": "npm run cover"
   },
   "dependencies": {
     "@google-cloud/pubsub": "*",
