@@ -31,9 +31,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath(
+      var formattedName = client.projectDataSourcePath(
         '[PROJECT]',
-        '[LOCATION]',
         '[DATA_SOURCE]'
       );
       var request = {
@@ -88,9 +87,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath(
+      var formattedName = client.projectDataSourcePath(
         '[PROJECT]',
-        '[LOCATION]',
         '[DATA_SOURCE]'
       );
       var request = {
@@ -121,7 +119,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var request = {
         parent: formattedParent,
       };
@@ -159,7 +157,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var request = {
         parent: formattedParent,
       };
@@ -188,7 +186,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var transferConfig = {};
       var request = {
         parent: formattedParent,
@@ -237,7 +235,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var transferConfig = {};
       var request = {
         parent: formattedParent,
@@ -348,9 +346,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath(
+      var formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -375,9 +372,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath(
+      var formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -407,9 +403,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath(
+      var formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -458,9 +453,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationTransferConfigPath(
+      var formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -491,7 +485,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var request = {
         parent: formattedParent,
       };
@@ -529,7 +523,7 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      var formattedParent = client.projectPath('[PROJECT]');
       var request = {
         parent: formattedParent,
       };
@@ -558,9 +552,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath(
+      var formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var startTime = {};
@@ -594,9 +587,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath(
+      var formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var startTime = {};
@@ -631,9 +623,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationRunPath(
+      var formattedName = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -675,9 +666,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationRunPath(
+      var formattedName = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -709,9 +699,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationRunPath(
+      var formattedName = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -735,9 +724,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationRunPath(
+      var formattedName = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -768,9 +756,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath(
+      var formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -810,9 +797,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationTransferConfigPath(
+      var formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]'
       );
       var request = {
@@ -843,9 +829,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationRunPath(
+      var formattedParent = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -886,9 +871,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.locationRunPath(
+      var formattedParent = client.projectRunPath(
         '[PROJECT]',
-        '[LOCATION]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
@@ -920,9 +904,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath(
+      var formattedName = client.projectDataSourcePath(
         '[PROJECT]',
-        '[LOCATION]',
         '[DATA_SOURCE]'
       );
       var request = {
@@ -955,9 +938,8 @@ describe('DataTransferServiceClient', () => {
       });
 
       // Mock request
-      var formattedName = client.locationDataSourcePath(
+      var formattedName = client.projectDataSourcePath(
         '[PROJECT]',
-        '[LOCATION]',
         '[DATA_SOURCE]'
       );
       var request = {

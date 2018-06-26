@@ -136,7 +136,7 @@ var DataSourceParameter = {
  * render UI and request proper OAuth tokens.
  *
  * @property {string} name
- *   Data source resource name.
+ *   Output only. Data source resource name.
  *
  * @property {string} dataSourceId
  *   Data source id.
@@ -158,9 +158,7 @@ var DataSourceParameter = {
  *   e.g., https://www.googleapis.com/auth/bigquery
  *
  * @property {number} transferType
- *   Transfer type. Currently supports only batch transfers,
- *   which are transfers that use the BigQuery batch APIs (load or
- *   query) to ingest the data.
+ *   Deprecated. This field has no effect.
  *
  *   The number should be among the values of [TransferType]{@link google.cloud.bigquery.datatransfer.v1.TransferType}
  *
