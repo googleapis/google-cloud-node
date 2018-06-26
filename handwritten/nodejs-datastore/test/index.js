@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var gax = new require('google-gax');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -60,17 +61,20 @@ function fakeGoogleAuth() {
 }
 
 var createInsecureOverride;
+
 var fakeGoogleGax = {
-  grpc: function() {
-    return {
-      grpc: {
+  GrpcClient: class extends gax.GrpcClient {
+    constructor(opts) {
+      // super constructor must be called first!
+      super(opts);
+      this.grpc = {
         credentials: {
-          createInsecure: function() {
+          createInsecure() {
             return (createInsecureOverride || util.noop).apply(null, arguments);
           },
         },
-      },
-    };
+      };
+    }
   },
 };
 
