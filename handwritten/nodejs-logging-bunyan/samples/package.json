@@ -10,7 +10,7 @@
   },
   "scripts": {
     "system-test": "ava -T 1m --verbose system-test/*.test.js",
-    "test": "repo-tools test run --cmd npm -- run system-test"
+    "test": "npm run system-test"
   },
   "dependencies": {
     "@google-cloud/logging-bunyan": "0.8.2",
