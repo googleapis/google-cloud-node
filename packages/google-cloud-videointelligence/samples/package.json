@@ -11,7 +11,7 @@
   "scripts": {
     "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
-    "test": "repo-tools test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
+    "test": "ava -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/video-intelligence": "^1.2.0",
