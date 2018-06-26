@@ -9,8 +9,8 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "system-test": "repo-tools test run --cmd ava -- -T 20s --verbose system-test/*.test.js",
-    "startup-test": "repo-tools test run --cmd ava -- -T 200s --verbose startup-script/system-test/*.test.js",
+    "system-test": "ava -T 20s --verbose system-test/*.test.js",
+    "startup-test": "ava -T 200s --verbose startup-script/system-test/*.test.js",
     "test": "npm run system-test && npm run startup-test"
   },
   "dependencies": {
