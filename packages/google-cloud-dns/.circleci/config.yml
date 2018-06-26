@@ -85,12 +85,7 @@ jobs:
             fi
       - run: &npm_install_and_link
           name: Install and link the module.
-          command: |
-            npm install
-            repo_tools="node_modules/@google-cloud/nodejs-repo-tools/bin/tools"
-            if ! test -x "$repo_tools"; then
-              chmod +x "$repo_tools"
-            fi
+          command: npm install
       - run:
           name: Run unit tests.
           command: npm test
