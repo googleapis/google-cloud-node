@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@google-cloud/datastore": "1.4.1",
-    "sinon": "5.1.1",
+    "sinon": "6.0.1",
     "yargs": "11.0.0"
   },
   "devDependencies": {
