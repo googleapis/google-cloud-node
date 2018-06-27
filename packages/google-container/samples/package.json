@@ -17,9 +17,9 @@
     "test": "node -e 'console.log(`no tests`);'"
   },
   "dependencies": {
-    "@google-cloud/container": "0.2.0"
+    "@google-cloud/container": "^0.2.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.4"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0"
   }
 }
