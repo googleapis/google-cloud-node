@@ -6,19 +6,19 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-logging-bunyan",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "system-test": "ava -T 1m --verbose system-test/*.test.js",
     "test": "npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "0.8.2",
-    "bunyan": "1.8.12",
-    "yargs": "11.0.0"
+    "@google-cloud/logging-bunyan": "^0.8.2",
+    "bunyan": "^1.8.12",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "^0.25.0"
   }
 }
