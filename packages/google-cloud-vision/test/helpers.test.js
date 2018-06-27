@@ -17,7 +17,6 @@
 'use strict';
 
 const assert = require('assert');
-const Buffer = require('safe-buffer').Buffer;
 const fs = require('fs');
 const is = require('is');
 const sinon = require('sinon');
