@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "repository": "googleapis/nodejs-os-login",
   "private": true,
@@ -17,9 +17,9 @@
     "test": "node -e 'console.log(`no tests`)'"
   },
   "dependencies": {
-    "@google-cloud/os-login": "0.2.0"
+    "@google-cloud/os-login": "^0.2.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.4"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0"
   }
 }
