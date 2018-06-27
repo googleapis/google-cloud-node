@@ -6,19 +6,19 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-monitoring",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "ava -T 3m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/monitoring": "0.5.0",
-    "yargs": "12.0.0"
+    "@google-cloud/monitoring": "^0.5.0",
+    "yargs": "^12.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0",
-    "proxyquire": "2.0.1",
-    "sinon": "4.5.0"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "^0.25.0",
+    "proxyquire": "^2.0.1",
+    "sinon": "^6.0.1"
   }
 }
