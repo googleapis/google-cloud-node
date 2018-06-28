@@ -38,10 +38,10 @@
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha test/*.js --no-timeouts",
-    "lint": "eslint src/ samples/ system-test/ test/ smoke-test/",
-    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js smoke-test/*.js",
+    "lint": "eslint src/ samples/ system-test/ test/",
+    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000"
+    "system-test": "mocha system-test/ --timeout 600000"
   },
   "dependencies": {
     "google-gax": "^0.17.1",
@@ -52,7 +52,7 @@
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "async": "^2.6.0",
     "codecov": "^3.0.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.6.0",
