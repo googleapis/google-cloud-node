@@ -22,16 +22,16 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "*",
-    "@google-cloud/storage": "1.7.0",
-    "safe-buffer": "5.1.2",
-    "uuid": "3.3.0",
-    "yargs": "11.0.0"
+    "@google-cloud/storage": "^1.7.0",
+    "safe-buffer": "^5.1.2",
+    "uuid": "^3.3.2",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0",
-    "nyc": "12.0.2",
-    "proxyquire": "2.0.1",
-    "sinon": "6.0.1"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "^0.25.0",
+    "nyc": "^12.0.2",
+    "proxyquire": "^2.0.1",
+    "sinon": "^6.0.1"
   }
 }
