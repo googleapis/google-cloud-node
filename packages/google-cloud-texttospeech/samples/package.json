@@ -14,7 +14,7 @@
   "dependencies": {
     "@google-cloud/text-to-speech": "^0.2.0",
     "async": "^2.5.0",
-    "yargs": "^10.0.3"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
