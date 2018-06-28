@@ -6,21 +6,21 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-text-to-speech",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "ava -T 1m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/text-to-speech": "0.2.0",
-    "async": "2.5.0",
-    "yargs": "10.0.3"
+    "@google-cloud/text-to-speech": "^0.2.0",
+    "async": "^2.5.0",
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.1.1",
-    "ava": "0.23.0"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "^0.23.0"
   },
   "optionalDependencies": {
-    "canvas": "1.6.5"
+    "canvas": "^1.6.5"
   }
 }
