@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,28 +32,28 @@ class LanguageServiceClient {
   /**
    * Construct an instance of LanguageServiceClient.
    *
-   * @param {object=} options - The configuration object. See the subsequent
+   * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
-   * @param {object=} options.credentials - Credentials object.
-   * @param {string=} options.credentials.client_email
-   * @param {string=} options.credentials.private_key
-   * @param {string=} options.email - Account email address. Required when
-   *   usaing a .pem or .p12 keyFilename.
-   * @param {string=} options.keyFilename - Full path to the a .json, .pem, or
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
+   *     using a .pem or .p12 keyFilename.
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
    *     .p12 key downloaded from the Google Developers Console. If you provide
-   *     a path to a JSON file, the projectId option above is not necessary.
+   *     a path to a JSON file, the projectId option below is not necessary.
    *     NOTE: .pem and .p12 require you to specify options.email as well.
-   * @param {number=} options.port - The port on which to connect to
+   * @param {number} [options.port] - The port on which to connect to
    *     the remote host.
-   * @param {string=} options.projectId - The project ID from the Google
+   * @param {string} [options.projectId] - The project ID from the Google
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function=} options.promise - Custom promise module to use instead
+   * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string=} options.servicePath - The domain name of the
+   * @param {string} [options.servicePath] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
@@ -72,14 +72,14 @@ class LanguageServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
     var clientHeader = [
-      `gl-node/${process.version.node}`,
+      `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -186,15 +186,15 @@ class LanguageServiceClient {
    *   Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
-   * @param {number=} request.encodingType
+   * @param {number} [request.encodingType]
    *   The encoding type used by the API to calculate sentence offsets for the
    *   sentence sentiment.
    *
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeSentimentResponse}.
@@ -241,14 +241,14 @@ class LanguageServiceClient {
    *   Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
-   * @param {number=} request.encodingType
+   * @param {number} [request.encodingType]
    *   The encoding type used by the API to calculate offsets.
    *
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitiesResponse}.
@@ -294,14 +294,14 @@ class LanguageServiceClient {
    *   Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
-   * @param {number=} request.encodingType
+   * @param {number} [request.encodingType]
    *   The encoding type used by the API to calculate offsets.
    *
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse}.
@@ -352,14 +352,14 @@ class LanguageServiceClient {
    *   Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
-   * @param {number=} request.encodingType
+   * @param {number} [request.encodingType]
    *   The encoding type used by the API to calculate offsets.
    *
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1beta2.AnalyzeSyntaxResponse}.
@@ -404,10 +404,10 @@ class LanguageServiceClient {
    *   Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1beta2.ClassifyTextResponse}.
@@ -457,14 +457,14 @@ class LanguageServiceClient {
    *   The enabled features.
    *
    *   This object should have the same structure as [Features]{@link google.cloud.language.v1beta2.Features}
-   * @param {number=} request.encodingType
+   * @param {number} [request.encodingType]
    *   The encoding type used by the API to calculate offsets.
    *
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1beta2.EncodingType}
-   * @param {Object=} options
+   * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)=} callback
+   * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1beta2.AnnotateTextResponse}.
