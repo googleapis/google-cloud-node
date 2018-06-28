@@ -4,17 +4,20 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "@google-cloud/tasks",
+  "repository": "googleapis/tasks",
   "engines": {
     "node": ">=6.14.2"
   },
   "scripts": {
-    "test": "node -e 'console.log(`no tests`);'"
+    "lint": "repo-tools lint task.js",
+    "test": "repo-tools test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/tasks": "^0.1.0"
+    "@google-cloud/tasks": "^0.1.0",
+    "yargs": "11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "0.25.0"
   }
 }
