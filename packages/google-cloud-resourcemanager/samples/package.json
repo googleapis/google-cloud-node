@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@google-cloud/resource": "^0.8.1",
-    "yargs": "^10.0.3"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.2.4",
