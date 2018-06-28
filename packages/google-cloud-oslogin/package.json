@@ -42,13 +42,13 @@
     "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha test/*.js --no-timeouts",
-    "lint": "eslint src/ samples/ system-test/ test/ smoke-test/",
+    "lint": "eslint src/ samples/ system-test/ test/",
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js smoke-test/*.js",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "google-gax": "^0.16.0",
+    "google-gax": "^0.17.0",
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
