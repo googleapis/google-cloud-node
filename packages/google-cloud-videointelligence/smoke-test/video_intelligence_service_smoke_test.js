@@ -14,6 +14,6 @@
 
 'use strict';
 
-const VideoIntelligenceServiceClient = require('./video_intelligence_service_client');
-
-module.exports.VideoIntelligenceServiceClient = VideoIntelligenceServiceClient;
+describe('VideoIntelligenceServiceSmokeTest', () => {
+  $unhandledCase: LongRunningOptionalArrayMethod$
+});

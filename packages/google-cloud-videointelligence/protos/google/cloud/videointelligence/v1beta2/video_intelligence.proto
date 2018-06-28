@@ -22,11 +22,12 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option csharp_namespace = "Google.Cloud.VideoIntelligence.V1beta2";
+option csharp_namespace = "Google.Cloud.VideoIntelligence.V1Beta2";
 option go_package = "google.golang.org/genproto/googleapis/cloud/videointelligence/v1beta2;videointelligence";
 option java_multiple_files = true;
 option java_outer_classname = "VideoIntelligenceServiceProto";
 option java_package = "com.google.cloud.videointelligence.v1beta2";
+option php_namespace = "Google\\Cloud\\VideoIntelligence\\V1beta2";
 
 
 // Service that implements Google Cloud Video Intelligence API.
@@ -54,8 +55,9 @@ message AnnotateVideoRequest {
   // in the request as `input_content`. If set, `input_content` should be unset.
   string input_uri = 1;
 
-  // The video data bytes. Encoding: base64. If unset, the input video(s)
-  // should be specified via `input_uri`. If set, `input_uri` should be unset.
+  // The video data bytes.
+  // If unset, the input video(s) should be specified via `input_uri`.
+  // If set, `input_uri` should be unset.
   bytes input_content = 6;
 
   // Requested video annotation features.
@@ -260,7 +262,7 @@ message FaceFrame {
 
 // Face annotation.
 message FaceAnnotation {
-  // Thumbnail of a representative face view (in JPEG format). Encoding: base64.
+  // Thumbnail of a representative face view (in JPEG format).
   bytes thumbnail = 1;
 
   // All video segments where a face was detected.
