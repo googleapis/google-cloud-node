@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 
-const osloginModule = require('../src');
+const osLoginModule = require('../src');
 
 var FAKE_STATUS_CODE = 1;
 var error = new Error();
@@ -25,7 +25,7 @@ error.code = FAKE_STATUS_CODE;
 describe('OsLoginServiceClient', () => {
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -46,7 +46,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes deletePosixAccount with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -74,7 +74,7 @@ describe('OsLoginServiceClient', () => {
 
   describe('deleteSshPublicKey', () => {
     it('invokes deleteSshPublicKey without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -95,7 +95,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes deleteSshPublicKey with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -123,7 +123,7 @@ describe('OsLoginServiceClient', () => {
 
   describe('getLoginProfile', () => {
     it('invokes getLoginProfile without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -156,7 +156,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes getLoginProfile with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -185,7 +185,7 @@ describe('OsLoginServiceClient', () => {
 
   describe('getSshPublicKey', () => {
     it('invokes getSshPublicKey without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -198,7 +198,7 @@ describe('OsLoginServiceClient', () => {
 
       // Mock response
       var key = 'key106079';
-      var expirationTimeUsec = -2058878882;
+      var expirationTimeUsec = 2058878882;
       var fingerprint = 'fingerprint-1375934236';
       var expectedResponse = {
         key: key,
@@ -220,7 +220,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes getSshPublicKey with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -249,7 +249,7 @@ describe('OsLoginServiceClient', () => {
 
   describe('importSshPublicKey', () => {
     it('invokes importSshPublicKey without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -279,7 +279,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes importSshPublicKey with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -310,7 +310,7 @@ describe('OsLoginServiceClient', () => {
 
   describe('updateSshPublicKey', () => {
     it('invokes updateSshPublicKey without error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -325,7 +325,7 @@ describe('OsLoginServiceClient', () => {
 
       // Mock response
       var key = 'key106079';
-      var expirationTimeUsec = -2058878882;
+      var expirationTimeUsec = 2058878882;
       var fingerprint = 'fingerprint-1375934236';
       var expectedResponse = {
         key: key,
@@ -347,7 +347,7 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes updateSshPublicKey with error', done => {
-      var client = new osloginModule.v1beta.OsLoginServiceClient({
+      var client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
