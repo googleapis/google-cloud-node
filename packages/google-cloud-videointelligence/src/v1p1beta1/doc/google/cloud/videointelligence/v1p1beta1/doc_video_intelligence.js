@@ -71,8 +71,8 @@ var AnnotateVideoRequest = {
  *
  * @property {Object[]} segments
  *   Video segments to annotate. The segments may overlap and are not required
- *   to be contiguous or span the whole video. If unspecified, each video
- *   is treated as a single segment.
+ *   to be contiguous or span the whole video. If unspecified, each video is
+ *   treated as a single segment.
  *
  *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p1beta1.VideoSegment}
  *
@@ -323,35 +323,10 @@ var ExplicitContentAnnotation = {
 };
 
 /**
- * Normalized bounding box.
- * The normalized vertex coordinates are relative to the original image.
- * Range: [0, 1].
- *
- * @property {number} left
- *   Left X coordinate.
- *
- * @property {number} top
- *   Top Y coordinate.
- *
- * @property {number} right
- *   Right X coordinate.
- *
- * @property {number} bottom
- *   Bottom Y coordinate.
- *
- * @typedef NormalizedBoundingBox
- * @memberof google.cloud.videointelligence.v1p1beta1
- * @see [google.cloud.videointelligence.v1p1beta1.NormalizedBoundingBox definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto}
- */
-var NormalizedBoundingBox = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
- *   Video file location in
+ *   Output only. Video file location in
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
  * @property {Object[]} segmentLabelAnnotations
@@ -388,8 +363,8 @@ var NormalizedBoundingBox = {
  *   This object should have the same structure as [SpeechTranscription]{@link google.cloud.videointelligence.v1p1beta1.SpeechTranscription}
  *
  * @property {Object} error
- *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
- *   some videos may succeed and some may fail.
+ *   Output only. If set, indicates an error. Note that for a single
+ *   `AnnotateVideoRequest` some videos may succeed and some may fail.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
@@ -423,20 +398,20 @@ var AnnotateVideoResponse = {
  * Annotation progress for a single video.
  *
  * @property {string} inputUri
- *   Video file location in
+ *   Output only. Video file location in
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
  * @property {number} progressPercent
- *   Approximate percentage processed thus far.
- *   Guaranteed to be 100 when fully processed.
+ *   Output only. Approximate percentage processed thus far. Guaranteed to be
+ *   100 when fully processed.
  *
  * @property {Object} startTime
- *   Time when the request was received.
+ *   Output only. Time when the request was received.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   Time of the most recent update.
+ *   Output only. Time of the most recent update.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -493,6 +468,14 @@ var AnnotateVideoProgress = {
  *   *Optional* A means to provide context to assist the speech recognition.
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.videointelligence.v1p1beta1.SpeechContext}
+ *
+ * @property {boolean} enableAutomaticPunctuation
+ *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   This feature is only available in select languages. Setting this for
+ *   requests in other languages has no effect at all. The default 'false' value
+ *   does not add punctuation to result hypotheses. NOTE: "This is currently
+ *   offered as an experimental service, complimentary to all users. In the
+ *   future this may be exclusively available as a premium feature."
  *
  * @property {number[]} audioTracks
  *   *Optional* For file formats, such as MXF or MKV, supporting multiple audio

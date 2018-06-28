@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,8 +31,9 @@
  *   in the request as `input_content`. If set, `input_content` should be unset.
  *
  * @property {string} inputContent
- *   The video data bytes. Encoding: base64. If unset, the input video(s)
- *   should be specified via `input_uri`. If set, `input_uri` should be unset.
+ *   The video data bytes.
+ *   If unset, the input video(s) should be specified via `input_uri`.
+ *   If set, `input_uri` should be unset.
  *
  * @property {number[]} features
  *   Requested video annotation features.
@@ -409,7 +410,7 @@ var FaceFrame = {
  * Face annotation.
  *
  * @property {string} thumbnail
- *   Thumbnail of a representative face view (in JPEG format). Encoding: base64.
+ *   Thumbnail of a representative face view (in JPEG format).
  *
  * @property {Object[]} segments
  *   All video segments where a face was detected.
