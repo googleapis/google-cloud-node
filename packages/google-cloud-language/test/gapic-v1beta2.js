@@ -1,10 +1,10 @@
-// Copyright 2017, Google Inc. All rights reserved.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,10 @@ error.code = FAKE_STATUS_CODE;
 describe('LanguageServiceClient', () => {
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -53,7 +56,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSentiment with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -79,7 +85,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntities', () => {
     it('invokes analyzeEntities without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -107,7 +116,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntities with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -133,7 +145,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntitySentiment', () => {
     it('invokes analyzeEntitySentiment without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -161,7 +176,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntitySentiment with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -187,7 +205,10 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeSyntax', () => {
     it('invokes analyzeSyntax without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -215,7 +236,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSyntax with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -241,7 +265,10 @@ describe('LanguageServiceClient', () => {
 
   describe('classifyText', () => {
     it('invokes classifyText without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -266,7 +293,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes classifyText with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -292,7 +322,10 @@ describe('LanguageServiceClient', () => {
 
   describe('annotateText', () => {
     it('invokes annotateText without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
@@ -322,7 +355,10 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes annotateText with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient();
+      var client = new languageModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var document = {};
