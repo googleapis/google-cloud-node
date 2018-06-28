@@ -82,17 +82,51 @@ var MonitoredResourceDescriptor = {
  * @property {string} type
  *   Required. The monitored resource type. This field must match
  *   the `type` field of a MonitoredResourceDescriptor object. For
- *   example, the type of a Cloud SQL database is `"cloudsql_database"`.
+ *   example, the type of a Compute Engine VM instance is `gce_instance`.
  *
  * @property {Object.<string, string>} labels
  *   Required. Values for all of the labels listed in the associated monitored
- *   resource descriptor. For example, Cloud SQL databases use the labels
- *   `"database_id"` and `"zone"`.
+ *   resource descriptor. For example, Compute Engine VM instances use the
+ *   labels `"project_id"`, `"instance_id"`, and `"zone"`.
  *
  * @typedef MonitoredResource
  * @memberof google.api
  * @see [google.api.MonitoredResource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
  */
 var MonitoredResource = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Auxiliary metadata for a MonitoredResource object.
+ * MonitoredResource objects contain the minimum set of information to
+ * uniquely identify a monitored resource instance. There is some other useful
+ * auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
+ * pipeline to extract metadata for cloud resources of all types , and stores
+ * the metadata in this message.
+ *
+ * @property {Object} systemLabels
+ *   Output only. Values for predefined system metadata labels.
+ *   System labels are a kind of metadata extracted by Google Stackdriver.
+ *   Stackdriver determines what system labels are useful and how to obtain
+ *   their values. Some examples: "machine_image", "vpc", "subnet_id",
+ *   "security_group", "name", etc.
+ *   System label values can be only strings, Boolean values, or a list of
+ *   strings. For example:
+ *
+ *       { "name": "my-test-instance",
+ *         "security_group": ["a", "b", "c"],
+ *         "spot_instance": false }
+ *
+ *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {Object.<string, string>} userLabels
+ *   Output only. A map of user-defined metadata labels.
+ *
+ * @typedef MonitoredResourceMetadata
+ * @memberof google.api
+ * @see [google.api.MonitoredResourceMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
+ */
+var MonitoredResourceMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
