@@ -12,7 +12,7 @@
     "test": "node -e 'console.log(`no tests`);'"
   },
   "dependencies": {
-    "@google-cloud/tasks": "0.1.0"
+    "@google-cloud/tasks": "^0.1.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0"

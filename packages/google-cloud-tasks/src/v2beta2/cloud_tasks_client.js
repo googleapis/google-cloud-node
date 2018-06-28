@@ -72,7 +72,7 @@ class CloudTasksClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -101,6 +101,7 @@ class CloudTasksClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       locationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -1364,11 +1365,6 @@ class CloudTasksClient {
   /**
    * Creates a task and adds it to a queue.
    *
-   * To add multiple tasks at the same time, use
-   * [HTTP batching](https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch)
-   * or the batching documentation for your client library, for example
-   * https://developers.google.com/api-client-library/python/guide/batch.
-   *
    * Tasks cannot be updated after creation; there is no UpdateTask command.
    *
    * * For [App Engine queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.AppEngineHttpTarget),
@@ -1585,8 +1581,12 @@ class CloudTasksClient {
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {number} [request.maxTasks]
-   *   The maximum number of tasks to lease. The maximum that can be
-   *   requested is 1000.
+   *   The maximum number of tasks to lease.
+   *
+   *   The system will make a best effort to return as close to as
+   *   `max_tasks` as possible.
+   *
+   *   The largest that `max_tasks` can be is 1000.
    * @param {number} [request.responseView]
    *   The response_view specifies which subset of the Task will be
    *   returned.
@@ -1697,11 +1697,6 @@ class CloudTasksClient {
    * by a later LeaseTasks,
    * GetTask, or
    * ListTasks.
-   *
-   * To acknowledge multiple tasks at the same time, use
-   * [HTTP batching](https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch)
-   * or the batching documentation for your client library, for example
-   * https://developers.google.com/api-client-library/python/guide/batch.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2058,6 +2053,18 @@ class CloudTasksClient {
   // --------------------
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {String} project
@@ -2103,6 +2110,17 @@ class CloudTasksClient {
       queue: queue,
       task: task,
     });
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

@@ -19,6 +19,8 @@
  * A unit of scheduled work.
  *
  * @property {string} name
+ *   Optionally caller-specified in CreateTask.
+ *
  *   The task name.
  *
  *   The task name must have the following format:
@@ -36,8 +38,6 @@
  *     hyphens (-). The maximum length is 100 characters.
  *   * `TASK_ID` can contain only letters ([A-Za-z]), numbers ([0-9]),
  *     hyphens (-), or underscores (_). The maximum length is 500 characters.
- *
- *   Optionally caller-specified in CreateTask.
  *
  * @property {Object} appEngineHttpRequest
  *   App Engine HTTP request that is sent to the task's target. Can

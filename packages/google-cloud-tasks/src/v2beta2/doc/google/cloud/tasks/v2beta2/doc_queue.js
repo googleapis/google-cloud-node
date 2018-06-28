@@ -21,6 +21,9 @@
  * retry options, target types, and others.
  *
  * @property {string} name
+ *   Caller-specified and required in CreateQueue,
+ *   after which it becomes output only.
+ *
  *   The queue name.
  *
  *   The queue name must have the following format:
@@ -36,9 +39,6 @@
  *      For more information, see https://cloud.google.com/about/locations/.
  *   * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
  *     hyphens (-). The maximum length is 100 characters.
- *
- *   Caller-specified and required in CreateQueue,
- *   after which it becomes output only.
  *
  * @property {Object} appEngineHttpTarget
  *   App Engine HTTP target.

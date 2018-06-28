@@ -244,7 +244,7 @@ var AppEngineHttpRequest = {
  *   App service.
  *
  *   By default, the task is sent to the service which is the default
- *   service when the task is attempted ("default").
+ *   service when the task is attempted.
  *
  *   For some queues or tasks which were created using the App Engine
  *   Task Queue API, host is not parsable
@@ -262,7 +262,7 @@ var AppEngineHttpRequest = {
  *   App version.
  *
  *   By default, the task is sent to the version which is the default
- *   version when the task is attempted ("default").
+ *   version when the task is attempted.
  *
  *   For some queues or tasks which were created using the App Engine
  *   Task Queue API, host is not parsable
@@ -343,12 +343,6 @@ var AppEngineHttpRequest = {
  *   If instance is empty, then the task
  *   will be sent to an instance which is available when the task is
  *   attempted.
- *
- *   When service is "default",
- *   version is "default", and
- *   instance is empty,
- *   host is shortened to just the
- *   `application_domain_name`.
  *
  *   If service,
  *   version, or

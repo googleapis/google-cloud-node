@@ -14,4 +14,4 @@
 
 'use strict';
 
-console.log('no tests');
+console.warn('no tests');
