@@ -9,15 +9,15 @@
     "node": ">=6.14.2"
   },
   "scripts": {
-    "lint": "repo-tools lint task.js",
-    "test": "repo-tools test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
+    "lint": "npm run lint task.js",
+    "test": "ava -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/tasks": "^0.1.0",
-    "yargs": "11.0.0"
+    "yargs": "^12.0.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "ava": "0.25.0"
+    "ava": "^0.25.0"
   }
 }
