@@ -16,7 +16,10 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import logging
 import subprocess
+
+logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
@@ -25,47 +28,15 @@ versions = ['v1beta1']
 for version in versions:
     library = gapic.node_library('texttospeech', version)
 
-    s.copy(library / 'protos')
-    s.copy(library / 'src' / version)
-    s.copy(library / 'samples')
-    s.copy(library / 'system-test')
-    s.copy(library / 'test')
+    # skip index, protos, package.json, and README.md
+    s.copy(
+        library,
+        excludes=['package.json', 'README.md', 'src/index.js'],
+    )
 
-'''
-Build private versions
-'''
-gapic = gcp.GAPICGenerator(private=True)
-
-versions = []
-
-for version in versions:
-    library = gapic.node_library('texttospeech', version)
-
-    s.copy(library / 'protos')
-    s.copy(library / 'src' / version)
-    s.copy(library / 'samples')
-    s.copy(library / 'system-test')
-    s.copy(library / 'test')
-
-'''
-Node.js specific cleanup
-'''
-# Repo Cleanup/Setup
-subprocess.run(['rm', '-rf', 'package-lock.json'])
-subprocess.run(['npm', 'install'])
-
-subprocess.run(
-    ['rm', '-rf', 'package-lock.json'],
-    cwd='./samples',
-)
-subprocess.run(
-    ['npm', 'install'],
-    cwd='./samples',
-)
-
-# Generates scaffolding, enters contributors names
-subprocess.run(['npm', 'run', 'generate-scaffolding'])
-
-# prettify and lint
+#
+# Node.js specific cleanup
+#
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
