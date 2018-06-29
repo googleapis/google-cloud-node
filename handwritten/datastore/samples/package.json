@@ -6,7 +6,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-datastore",
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "npm run cover",
@@ -14,14 +14,14 @@
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js system-test/*.test.js && nyc report"
   },
   "dependencies": {
-    "@google-cloud/datastore": "1.4.1",
-    "sinon": "6.0.1",
-    "yargs": "11.0.0"
+    "@google-cloud/datastore": "^1.4.1",
+    "sinon": "^6.0.1",
+    "yargs": "^12.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "ava": "^0.25.0",
     "nyc": "^12.0.2",
-    "proxyquire": "2.0.1"
+    "proxyquire": "^2.0.1"
   }
 }
