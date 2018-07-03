@@ -133,15 +133,14 @@ If you wish to set the Stackdriver LogEntry `trace` property with a custom value
 ```js
 const bunyan = require('bunyan');
 // Node 6+
-const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
+const {LoggingBunyan, LOGGING_TRACE_KEY} = require('@google-cloud/logging-bunyan');
 const loggingBunyan = LoggingBunyan();
 
 ...
 
 logger.info({
-  msg: 'Bunyan log entry with custom trace field',
-  [LoggingBunyan.LOGGING_TRACE_KEY]: 'custom-trace-value'
-});
+  [LOGGING_TRACE_KEY]: 'custom-trace-value'
+}, 'Bunyan log entry with custom trace field');
 ```
 
 ## Samples
