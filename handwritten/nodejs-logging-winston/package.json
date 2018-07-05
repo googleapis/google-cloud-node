@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^1.2.0",
-    "@sindresorhus/is": "^0.9.0",
+    "@sindresorhus/is": "^0.10.0",
     "lodash.mapvalues": "^4.6.0"
   },
   "devDependencies": {
