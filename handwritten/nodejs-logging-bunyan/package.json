@@ -70,7 +70,7 @@
     "posttest": "npm run check"
   },
   "dependencies": {
-    "@google-cloud/logging": "^1.2.0"
+    "@google-cloud/logging": "^2.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
