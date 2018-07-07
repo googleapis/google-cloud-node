@@ -17,6 +17,9 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
@@ -25,21 +28,11 @@ versions = ['v1', 'v1p1beta1', 'v1p2beta1']
 for version in versions:
     library = gapic.node_library('vision', version)
 
-    s.copy(library / 'protos')
-    s.copy(library / 'src' / version)
-    s.copy(library / 'samples')
-    s.copy(library / 'system-test')
-    s.copy(library / 'test')
+s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
 '''
 Node.js specific cleanup
 '''
-# Repo Cleanup/Setup
-subprocess.run(['npm', 'install'])
-
-# Generates scaffolding, enters contributors names
-subprocess.run(['npm', 'run', 'generate-scaffolding'])
-
-# prettify and lint
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
