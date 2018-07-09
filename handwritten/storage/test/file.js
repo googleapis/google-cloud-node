@@ -1740,7 +1740,7 @@ describe('File', function() {
 
         writable.on('error', function(err) {
           assert.equal(err.code, 'FILE_NO_UPLOAD_DELETE');
-          assert(err.message.indexOf(deleteErrorMessage > -1));
+          assert(err.message.indexOf(deleteErrorMessage) > -1);
           done();
         });
       });
