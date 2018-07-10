@@ -3,32 +3,24 @@ workflows:
   version: 2
   tests:
     jobs: &workflow_jobs
-      - node4:
+      - node6:
           filters: &all_commits
             tags:
               only: /.*/
-      - node6:
-          filters: *all_commits
       - node8:
-          filters: *all_commits
-      - node9:
           filters: *all_commits
       - node10:
           filters: *all_commits
       - lint:
           requires:
-            - node4
             - node6
             - node8
-            - node9
             - node10
           filters: *all_commits
       - docs:
           requires:
-            - node4
             - node6
             - node8
-            - node9
             - node10
           filters: *all_commits
       - sample_tests:
@@ -56,9 +48,9 @@ workflows:
               only: master
     jobs: *workflow_jobs
 jobs:
-  node4:
+  node6:
     docker:
-      - image: 'node:4'
+      - image: 'node:6'
         user: node
     steps: &unit_tests_steps
       - checkout
@@ -80,26 +72,12 @@ jobs:
             npm install
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
-          name: Run unit tests.
-          command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
-  node6:
-    docker:
-      - image: 'node:6'
-        user: node
-    steps: *unit_tests_steps
+      - run: npm test
+      - run: node_modules/.bin/codecov
+  
   node8:
     docker:
       - image: 'node:8'
-        user: node
-    steps: *unit_tests_steps
-  node9:
-    docker:
-      - image: 'node:9'
         user: node
     steps: *unit_tests_steps
   node10:
@@ -172,9 +150,5 @@ jobs:
         user: node
     steps:
       - checkout
-      - run:
-          name: Set NPM authentication.
-          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run:
-          name: Publish the module to npm.
-          command: npm publish
+      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run: npm publish
