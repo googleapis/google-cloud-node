@@ -86,13 +86,8 @@ jobs:
       - run: &npm_install_and_link
           name: Install and link the module.
           command: npm install
-      - run:
-          name: Run unit tests.
-          command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
+      - run: npm test
+      - run: node_modules/.bin/codecov
   node8:
     docker:
       - image: 'node:8'
@@ -179,9 +174,5 @@ jobs:
       - image: 'node:10'
     steps:
       - checkout
-      - run:
-          name: Set NPM authentication.
-          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run:
-          name: Publish the module to npm.
-          command: npm publish
+      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run: npm publish
