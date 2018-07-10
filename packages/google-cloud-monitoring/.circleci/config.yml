@@ -3,15 +3,11 @@ workflows:
   version: 2
   tests:
     jobs: &workflow_jobs
-      - node4:
+      - node6:
           filters: &all_commits
             tags:
               only: /.*/
-      - node6:
-          filters: *all_commits
       - node8:
-          filters: *all_commits
-      - node9:
           filters: *all_commits
       - node10:
           filters: *all_commits
@@ -87,10 +83,6 @@ jobs:
   node8:
     docker:
       - image: 'node:8'
-    steps: *unit_tests_steps
-  node9:
-    docker:
-      - image: 'node:9'
     steps: *unit_tests_steps
   node10:
     docker:
