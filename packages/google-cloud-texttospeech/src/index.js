@@ -30,17 +30,18 @@
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
   v1beta1: require('./v1beta1'),
+  v1: require('./v1'),
 });
 
 /**
  * The `text-to-speech` package has the following named exports:
  *
  * - `TextToSpeechClient` - Reference to
- *   {@link v1beta1.TextToSpeechClient}
+ *   {@link v1.TextToSpeechClient}
  * - `v1beta1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `TextToSpeechClient` - Reference to
- *       {@link v1beta1.TextToSpeechClient}
+ *       {@link v1.TextToSpeechClient}
  *
  * @module {object} text-to-speech
  * @alias nodejs-text-to-speech
@@ -64,9 +65,9 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} TextToSpeechClient
- *   Reference to {@link v1beta1.TextToSpeechClient}
+ *   Reference to {@link v1.TextToSpeechClient}
  */
-module.exports = gapic.v1beta1;
+module.exports = gapic.v1;
 
 /**
  * @type {object}
@@ -74,6 +75,13 @@ module.exports = gapic.v1beta1;
  *   Reference to {@link v1beta1.TextToSpeechClient}
  */
 module.exports.v1beta1 = gapic.v1beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} TextToSpeechClient
+ *   Reference to {@link v1.TextToSpeechClient}
+ */
+module.exports.v1 = gapic.v1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);
