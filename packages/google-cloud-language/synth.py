@@ -17,9 +17,7 @@ for version in ['v1', 'v1beta2']:
         library,
         excludes=['package.json', 'README.md', 'src/index.js'])
 
-#
 # Node.js specific cleanup
-#
-subprocess.run(['npm', 'install'])
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
