@@ -79,7 +79,7 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
       - run: node_modules/.bin/codecov
-  
+
   node8:
     docker:
       - image: 'node:8'
@@ -99,11 +99,9 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link ../
-      - run:
-          name: Run linting.
-          command: npm run lint
+            npm install
+      - run: npm run lint
   docs:
     docker:
       - image: 'node:8'

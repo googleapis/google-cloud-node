@@ -16,10 +16,9 @@
 
 'use strict';
 
-var assert = require('assert');
-var prop = require('propprop');
-
-var Translate = require('../');
+import * as assert from 'assert';
+import * as prop from 'propprop';
+import {Translate} from '../src';
 
 var API_KEY = process.env.TRANSLATE_API_KEY;
 
