@@ -33,11 +33,7 @@ s.replace(
     '',
 )
 
-#
 # Node.js specific cleanup
-#
-subprocess.run(['npm', 'install'])
-
-# # prettify and lint
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
