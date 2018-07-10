@@ -9,22 +9,18 @@ workflows:
               only: /.*/
       - node8:
           filters: *all_commits
-      - node9:
-          filters: *all_commits
       - node10:
           filters: *all_commits
       - lint:
           requires:
             - node6
             - node8
-            - node9
             - node10
           filters: *all_commits
       - docs:
           requires:
             - node6
             - node8
-            - node9
             - node10
           filters: *all_commits
       - publish_npm:
@@ -69,21 +65,11 @@ jobs:
             npm install
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
-          name: Run unit tests.
-          command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
+      - run: npm test
+      - run: node_modules/.bin/codecov
   node8:
     docker:
       - image: 'node:8'
-        user: node
-    steps: *unit_tests_steps
-  node9:
-    docker:
-      - image: 'node:9'
         user: node
     steps: *unit_tests_steps
   node10:
@@ -121,9 +107,5 @@ jobs:
         user: node
     steps:
       - checkout
-      - run:
-          name: Set NPM authentication.
-          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run:
-          name: Publish the module to npm.
-          command: npm publish --access=public
+      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run: npm publish --access=public
