@@ -346,7 +346,7 @@ describe('Expected Behavior', () => {
      });
 
   it('Should succeed in its request given a valid project id', done => {
-    env.sterilizeProcess();
+    env.sterilizeProcess().setKeyFilename();
     const logger = createLogger({logLevel: 5});
     const cfg = new Configuration(
         {
@@ -366,7 +366,7 @@ describe('Expected Behavior', () => {
   });
 
   it('Should succeed in its request given a valid project number', done => {
-    env.sterilizeProcess();
+    env.sterilizeProcess().setKeyFilename();
     const logger = createLogger({logLevel: 5});
     const cfg = new Configuration(
         {
@@ -469,6 +469,8 @@ describe('error-reporting', () => {
             service: SERVICE,
             version: VERSION,
           },
+          projectId: env.projectId,
+          keyFilename: process.env.GCLOUD_TESTS_KEY,
         },
         extraConfig || {});
     errors = new ErrorReporting(initConfiguration);
