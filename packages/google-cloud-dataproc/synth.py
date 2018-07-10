@@ -24,12 +24,7 @@ version = 'v1'
 library = gapic.node_library('dataproc', version)
 s.copy(library, excludes=['README.md', 'package.json'])
 
-'''
-Node.js specific cleanup
-'''
-# Repo Cleanup/Setup
-subprocess.run(['npm', 'install'])
-
-# prettify and lint
+# Node.js specific cleanup
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
