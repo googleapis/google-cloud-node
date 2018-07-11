@@ -1,0 +1,16 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "kms",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/kms/latest/",
+  "release_quality": "beta",
+  "samples": [
+    {
+      "id": "kms",
+      "name": "KMS",
+      "file": "kms.js",
+      "docs_link": "https://cloud.google.com/kms/docs",
+      "usage": "node kms.js --help"
+    }
+  ]
+}

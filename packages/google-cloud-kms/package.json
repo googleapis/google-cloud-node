@@ -1,0 +1,66 @@
+{
+  "name": "@google-cloud/kms",
+  "description": "Google Cloud Key Management Service (KMS) API client for Node.js",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-kms",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google kms",
+    "kms",
+    "Google Cloud Key Management Service (KMS) API"
+  ],
+  "contributors": [
+    "Jonathan Lui <jonathanlui@google.com>"
+  ],
+  "scripts": {
+    "test": "npm run cover",
+    "generate-scaffolding": "repo-tools generate all",
+    "generate-scaffolding-samples": "repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "test-no-cover": "mocha test/ --timeout 600000",
+    "lint": "eslint src/ samples/ system-test/ test/",
+    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "docs": "jsdoc -c .jsdoc.js",
+    "system-test": "mocha system-test/ smoke-test/ --timeout 600000"
+  },
+  "dependencies": {
+    "google-gax": "^0.17.1",
+    "lodash.merge": "^4.6.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.3.1",
+    "codecov": "^3.0.4",
+    "eslint": "^5.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "ink-docstrap": "^1.3.2",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "power-assert": "^1.6.0",
+    "prettier": "^1.13.7",
+    "through2": "^2.0.3"
+  }
+}
