@@ -1,13 +1,16 @@
 {
-  "_product": "tasks",
-  "id": "tasks",
-  "name": "Google Cloud Tasks",
-  "short_name": "Cloud Tasks",
-  "docs_url": "https://cloud.google.com/tasks/docs/",
-  "description": "Manages the execution of large numbers of distributed requests.",
-  "api_id": "tasks.googleapis.com",
   "requiresKeyFile": true,
   "requiresProjectId": true,
+  "product": "tasks",
   "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/tasks/latest/",
-  "release_quality": "alpha"
+  "release_quality": "alpha",
+  "samples": [
+    {
+      "id": "tasks",
+      "name": "Tasks",
+      "file": "tasks.js",
+      "docs_link": "https://cloud.google.com/tasks/docs",
+      "usage": "node tasks.js --help"
+    }
+  ]
 }

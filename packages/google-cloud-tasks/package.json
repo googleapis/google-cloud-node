@@ -29,8 +29,12 @@
     "Cloud Tasks API"
   ],
   "contributors": [
+    "Averi Kitsch <akitsch@google.com>",
+    "Christopher Wilcox <git@crwilcox.com>",
+    "Jonathan Lui <jonathanlui@google.com>",
     "Jonathan Lui <kinwa91@msn.com>",
-    "Justin Beckwith <justin.beckwith@gmail.com>"
+    "Justin Beckwith <justin.beckwith@gmail.com>",
+    "renovate[bot] <renovate[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "test": "npm run cover",
@@ -49,7 +53,7 @@
     "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "@google-cloud/nodejs-repo-tools": "^2.3.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^2.9.0",
