@@ -154,7 +154,7 @@ export class Translate extends common.Service {
    *
    * //-
    * // Detect the languages used in multiple strings. Note that the results are
-   * // now provied as an array.
+   * // now provided as an array.
    * //-
    * translate.detect([
    *   'Hello',
@@ -261,7 +261,7 @@ export class Translate extends common.Service {
    *
    * @example <caption>include:samples/translate.js</caption>
    * region_tag:translate_list_language_names
-   * Gets the language names in a langauge other than English:
+   * Gets the language names in a language other than English:
    */
   getLanguages(target, callback?) {
     if (is.fn(target)) {
@@ -367,7 +367,7 @@ export class Translate extends common.Service {
    *
    * //-
    * // Translate multiple strings of input. Note that the results are
-   * // now provied as an array.
+   * // now provided as an array.
    * //-
    * var input = [
    *   'Hello',
