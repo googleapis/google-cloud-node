@@ -495,7 +495,7 @@ common.util.promisifyAll(Translate, { exclude: ['request']});
  * The `@google-cloud/translate` package has a single default export, the
  * {@link Translate} class.
  *
- * See {@link Storage} and {@link ClientConfig} for client methods and
+ * See {@link Translate} and {@link ClientConfig} for client methods and
  * configuration options.
  *
  * @module {constructor} @google-cloud/translate
