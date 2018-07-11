@@ -33,7 +33,7 @@ library = gapic.node_library(
 # skip index, protos, package.json, and README.md
 s.copy(
     library,
-    # excludes=['package.json', 'README.md', 'src/index.js'],
+    excludes=['package.json', 'README.md', 'src/index.js'],
 )
 
 #
