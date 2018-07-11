@@ -149,12 +149,45 @@ var StreamingRecognitionConfig = {
  *   This field is optional for `FLAC` and `WAV` audio files and required
  *   for all other audio formats. For details, see AudioEncoding.
  *
+ * @property {number} audioChannelCount
+ *   *Optional* The number of channels in the input audio data.
+ *   ONLY set this for MULTI-CHANNEL recognition.
+ *   Valid values for LINEAR16 and FLAC are `1`-`8`.
+ *   Valid values for OGG_OPUS are '1'-'254'.
+ *   Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only `1`.
+ *   If `0` or omitted, defaults to one channel (mono).
+ *   NOTE: We only recognize the first channel by default.
+ *   To perform independent recognition on each channel set
+ *   enable_separate_recognition_per_channel to 'true'.
+ *
+ * @property {boolean} enableSeparateRecognitionPerChannel
+ *   This needs to be set to ‘true’ explicitly and audio_channel_count > 1
+ *   to get each channel recognized separately. The recognition result will
+ *   contain a channel_tag field to state which channel that result belongs to.
+ *   If this is not ‘true’, we will only recognize the first channel.
+ *   NOTE: The request is also billed cumulatively for all channels recognized:
+ *       (audio_channel_count times the audio length)
+ *
  * @property {string} languageCode
  *   *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
  *   See [Language Support](https://cloud.google.com/speech/docs/languages)
  *   for a list of the currently supported language codes.
+ *
+ * @property {string[]} alternativeLanguageCodes
+ *   *Optional* A list of up to 3 additional
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags,
+ *   listing possible alternative languages of the supplied audio.
+ *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   for a list of the currently supported language codes.
+ *   If alternative languages are listed, recognition result will contain
+ *   recognition in the most likely language detected including the main
+ *   language_code. The recognition result will include the language tag
+ *   of the language detected in the audio.
+ *   NOTE: This feature is only supported for Voice Command and Voice Search
+ *   use cases and performance may vary for other use cases (e.g., phone call
+ *   transcription).
  *
  * @property {number} maxAlternatives
  *   *Optional* Maximum number of recognition hypotheses to be returned.
@@ -181,6 +214,11 @@ var StreamingRecognitionConfig = {
  *   `false`, no word-level time offset information is returned. The default is
  *   `false`.
  *
+ * @property {boolean} enableWordConfidence
+ *   *Optional* If `true`, the top result includes a list of words and the
+ *   confidence for those words. If `false`, no word-level confidence
+ *   information is returned. The default is `false`.
+ *
  * @property {boolean} enableAutomaticPunctuation
  *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
  *   This feature is only available in select languages. Setting this for
@@ -189,6 +227,21 @@ var StreamingRecognitionConfig = {
  *   NOTE: "This is currently offered as an experimental service, complimentary
  *   to all users. In the future this may be exclusively available as a
  *   premium feature."
+ *
+ * @property {boolean} enableSpeakerDiarization
+ *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   the top alternative of the recognition result using a speaker_tag provided
+ *   in the WordInfo.
+ *   Note: When this is true, we send all the words from the beginning of the
+ *   audio for the top alternative in every consecutive responses.
+ *   This is done in order to improve our speaker tags as our models learn to
+ *   identify the speakers in the conversation over time.
+ *
+ * @property {number} diarizationSpeakerCount
+ *   *Optional*
+ *   If set, specifies the estimated number of speakers in the conversation.
+ *   If not set, defaults to '2'.
+ *   Ignored unless enable_speaker_diarization is set to true."
  *
  * @property {Object} metadata
  *   *Optional* Metadata regarding this request.
@@ -797,6 +850,17 @@ var StreamingRecognizeResponse = {
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
+ * @property {number} channelTag
+ *   For multi-channel audio, this is the channel number corresponding to the
+ *   recognized result for the audio from that channel.
+ *   For audio_channel_count = N, its output values can range from '1' to 'N'.
+ *
+ * @property {string} languageCode
+ *   Output only. The
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+ *   language in this result. This language code was detected to have the most
+ *   likelihood of being spoken in the audio.
+ *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.speech.v1p1beta1
  * @see [google.cloud.speech.v1p1beta1.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1p1beta1/cloud_speech.proto}
@@ -815,6 +879,17 @@ var StreamingRecognitionResult = {
  *   alternative being the most probable, as ranked by the recognizer.
  *
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative}
+ *
+ * @property {number} channelTag
+ *   For multi-channel audio, this is the channel number corresponding to the
+ *   recognized result for the audio from that channel.
+ *   For audio_channel_count = N, its output values can range from '1' to 'N'.
+ *
+ * @property {string} languageCode
+ *   Output only. The
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+ *   language in this result. This language code was detected to have the most
+ *   likelihood of being spoken in the audio.
  *
  * @typedef SpeechRecognitionResult
  * @memberof google.cloud.speech.v1p1beta1
@@ -879,6 +954,22 @@ var SpeechRecognitionAlternative = {
  *
  * @property {string} word
  *   Output only. The word corresponding to this set of information.
+ *
+ * @property {number} confidence
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
+ *   indicates an estimated greater likelihood that the recognized words are
+ *   correct. This field is set only for the top alternative of a non-streaming
+ *   result or, of a streaming result where `is_final=true`.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ * @property {number} speakerTag
+ *   Output only. A distinct integer value is assigned for every speaker within
+ *   the audio. This field specifies which one of those speakers was detected to
+ *   have spoken this word. Value ranges from '1' to diarization_speaker_count.
+ *   speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+ *   top alternative.
  *
  * @typedef WordInfo
  * @memberof google.cloud.speech.v1p1beta1
