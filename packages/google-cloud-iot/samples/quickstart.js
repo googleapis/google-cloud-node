@@ -14,9 +14,11 @@
 
 'use strict';
 
+/* global describe, it */
+
 describe('DeviceManagerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
-    throw new Error("Usage: GCLOUD_PROJECT=<project_id> node #{$0}");
+    throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
   }
   var projectId = process.env.GCLOUD_PROJECT;
 
@@ -28,9 +30,10 @@ describe('DeviceManagerSmokeTest', () => {
     });
 
     // Iterate over all elements.
-    var formattedParent = client.locationPath(projectId, "us-central1");
+    var formattedParent = client.locationPath(projectId, 'us-central1');
 
-    client.listDeviceRegistries({parent: formattedParent})
+    client
+      .listDeviceRegistries({parent: formattedParent})
       .then(responses => {
         var resources = responses[0];
         for (let i = 0; i < resources.length; i += 1) {
@@ -49,8 +52,7 @@ describe('DeviceManagerSmokeTest', () => {
     });
 
     // Or obtain the paged response.
-    var formattedParent = client.locationPath(projectId, "us-central1");
-
+    var formattedParent = client.locationPath(projectId, 'us-central1');
 
     var options = {autoPaginate: false};
     var callback = responses => {
@@ -67,8 +69,9 @@ describe('DeviceManagerSmokeTest', () => {
         // Fetch the next page.
         return client.listDeviceRegistries(nextRequest, options).then(callback);
       }
-    }
-    client.listDeviceRegistries({parent: formattedParent}, options)
+    };
+    client
+      .listDeviceRegistries({parent: formattedParent}, options)
       .then(callback)
       .then(done)
       .catch(done);
@@ -81,8 +84,9 @@ describe('DeviceManagerSmokeTest', () => {
       // optional auth parameters.
     });
 
-    var formattedParent = client.locationPath(projectId, "us-central1");
-    client.listDeviceRegistriesStream({parent: formattedParent})
+    var formattedParent = client.locationPath(projectId, 'us-central1');
+    client
+      .listDeviceRegistriesStream({parent: formattedParent})
       .on('data', element => {
         console.log(element);
       })

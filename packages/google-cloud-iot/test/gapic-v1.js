@@ -97,7 +97,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedName = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         name: formattedName,
       };
@@ -130,7 +134,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedName = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         name: formattedName,
       };
@@ -225,13 +233,19 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedName = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         name: formattedName,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteDeviceRegistry = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteDeviceRegistry = mockSimpleGrpcMethod(
+        request
+      );
 
       client.deleteDeviceRegistry(request, err => {
         assert.ifError(err);
@@ -246,7 +260,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedName = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         name: formattedName,
       };
@@ -289,7 +307,11 @@ describe('DeviceManagerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listDeviceRegistries = (actualRequest, options, callback) => {
+      client._innerApiCalls.listDeviceRegistries = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.deviceRegistries);
       };
@@ -337,7 +359,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var device = {};
       var request = {
         parent: formattedParent,
@@ -376,7 +402,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var device = {};
       var request = {
         parent: formattedParent,
@@ -407,7 +437,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -444,7 +479,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -543,7 +583,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -564,7 +609,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -592,7 +642,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -607,7 +661,11 @@ describe('DeviceManagerClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listDevices = (actualRequest, options, callback) => {
+      client._innerApiCalls.listDevices = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.devices);
       };
@@ -626,7 +684,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         parent: formattedParent,
       };
@@ -655,7 +717,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var binaryData = '40';
       var request = {
         name: formattedName,
@@ -690,7 +757,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var binaryData = '40';
       var request = {
         name: formattedName,
@@ -721,7 +793,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -749,7 +826,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -778,7 +860,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -806,7 +893,12 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+      var formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
       var request = {
         name: formattedName,
       };
@@ -835,7 +927,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var policy = {};
       var request = {
         resource: formattedResource,
@@ -870,7 +966,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var policy = {};
       var request = {
         resource: formattedResource,
@@ -901,7 +1001,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         resource: formattedResource,
       };
@@ -934,7 +1038,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var request = {
         resource: formattedResource,
       };
@@ -963,7 +1071,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var permissions = [];
       var request = {
         resource: formattedResource,
@@ -993,7 +1105,11 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      var formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+      var formattedResource = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
       var permissions = [];
       var request = {
         resource: formattedResource,
@@ -1015,7 +1131,6 @@ describe('DeviceManagerClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
