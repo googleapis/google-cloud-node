@@ -15,32 +15,20 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-from pathlib import Path
 import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator(private=True)
 
-# automl has two product names, and a poorly named artman yaml
-v1beta1_library = gapic.nodejs_library(
-    'automl', 'v1beta1'
-)
+versions = ['v1beta1']
 
-# Copy all files except for 'README.md' and 'package.json'
-s.copy(v1beta1_library / 'protos')
-s.copy(v1beta1_library / 'src')
-s.copy(v1beta1_library / 'test')
+for version in versions:
+    library = gapic.node_library('automl', version)
+    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
-'''
-Node.js specific cleanup
-'''
-# Repo Cleanup/Setup
-subprocess.run(['npm', 'install'])
 
-# Generates scaffolding, enters contributors names
-subprocess.run(['npm', 'run', 'generate-scaffolding'])
-
-# prettify and lint
+# Node.js specific cleanup
+subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
