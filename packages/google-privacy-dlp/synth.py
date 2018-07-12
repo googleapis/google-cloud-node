@@ -28,7 +28,18 @@ s.copy(library,
   excludes=['README.md', 'package.json']
 )
 
-# Node.js specific cleanup
+'''
+Replace the namespace so RPC types documentation are linked properly.
+'''
+s.replace(
+  'src/index.js',
+  '\* @namespace google.cloud',
+  '* @namespace google.privacy',
+)
+
+'''
+Node.js specific cleanup
+'''
 subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])

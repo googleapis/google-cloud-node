@@ -16,13 +16,13 @@
  * @namespace google
  */
 /**
- * @namespace google.cloud
+ * @namespace google.privacy
  */
 /**
- * @namespace google.cloud.dlp
+ * @namespace google.privacy.dlp
  */
 /**
- * @namespace google.cloud.dlp.v2
+ * @namespace google.privacy.dlp.v2
  */
 
 'use strict';
