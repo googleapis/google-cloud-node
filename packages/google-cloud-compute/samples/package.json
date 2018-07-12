@@ -14,15 +14,15 @@
     "test": "npm run system-test && npm run startup-test"
   },
   "dependencies": {
-    "@google-cloud/compute": "0.10.0",
-    "googleapis": "32.0.0",
+    "@google-cloud/compute": "^0.10.0",
+    "googleapis": "^32.0.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
     "sendgrid": "^5.2.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0",
-    "proxyquire": "2.0.1"
+    "@google-cloud/nodejs-repo-tools": "^2.3.1",
+    "ava": "^0.25.0",
+    "proxyquire": "^2.0.1"
   }
 }
