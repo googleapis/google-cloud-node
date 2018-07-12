@@ -18,16 +18,16 @@ describe('SpeechSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const speech = require('../src');
 
-    var client = new speech.v1p1beta1.SpeechClient({
+    var client = new speech.v1beta1.SpeechClient({
       // optional auth parameters.
     });
 
     var languageCode = 'en-US';
-    var sampleRateHertz = 44100;
+    var sampleRate = 44100;
     var encoding = 'FLAC';
     var config = {
       languageCode: languageCode,
-      sampleRateHertz: sampleRateHertz,
+      sampleRate: sampleRate,
       encoding: encoding,
     };
     var uri = 'gs://gapic-toolkit/hello.flac';
@@ -38,7 +38,7 @@ describe('SpeechSmokeTest', () => {
       config: config,
       audio: audio,
     };
-    client.recognize(request)
+    client.syncRecognize(request)
       .then(responses => {
         var response = responses[0];
         console.log(response);
