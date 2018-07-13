@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import assert from 'assert';
-import proxyquire from 'proxyquire';
+import * as assert from 'assert';
+import * as proxyquire from 'proxyquire';
 
 import * as types from '../src/types/core';
 
