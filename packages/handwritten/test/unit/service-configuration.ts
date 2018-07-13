@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
+import * as assert from 'assert';
 import * as is from 'is';
 const isString = is.string;
 const isNumber = is.number;

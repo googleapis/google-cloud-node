@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import boom from 'boom';
-import is from 'is';
+import * as boom from 'boom';
+import * as is from 'is';
 
 const isObject = is.object;
 const isFunction = is.fn;
@@ -26,7 +26,7 @@ const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
 import {Configuration} from '../configuration';
-import hapi from 'hapi';
+import * as hapi from 'hapi';
 
 /**
  * The Hapi error handler function serves simply to create an error message

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import boom from 'boom';
-import is from 'is';
-import has from 'lodash.has';
+import * as boom from 'boom';
+import * as is from 'is';
+import {has} from 'lodash';
 
 const isObject = is.object;
 const isFunction = is.function;
 const isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
-import hapi from 'hapi';
+import * as hapi from 'hapi';
 
 /**
  * This function is used to check for a pending status code on the response
