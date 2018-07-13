@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
+import * as assert from 'assert';
 import * as is from 'is';
 const isNumber = is.number;
 import merge = require('lodash.merge');
@@ -26,7 +26,7 @@ import {createLogger} from '../../src/logger';
 const logger = createLogger({
   logLevel: isNumber(level) ? level : 4,
 });
-import nock from 'nock';
+import * as nock from 'nock';
 
 const METADATA_URL =
     'http://metadata.google.internal/computeMetadata/v1/project';

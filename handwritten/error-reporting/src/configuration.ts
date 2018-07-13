@@ -16,8 +16,8 @@
 
 
 import {Logger} from '@google-cloud/common';
-import is from 'is';
-import has from 'lodash.has';
+import * as is from 'is';
+import {has} from 'lodash';
 
 const isObject = is.object;
 const isBoolean = is.boolean;

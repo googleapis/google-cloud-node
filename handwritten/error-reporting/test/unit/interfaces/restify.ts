@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
+import * as assert from 'assert';
 import {EventEmitter} from 'events';
 
 import {Configuration} from '../../../src/configuration';
