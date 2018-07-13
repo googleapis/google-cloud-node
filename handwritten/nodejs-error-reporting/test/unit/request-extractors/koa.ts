@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
+import * as assert from 'assert';
 import {Request, Response} from 'koa';
 
 import {koaRequestInformationExtractor} from '../../../src/request-extractors/koa';

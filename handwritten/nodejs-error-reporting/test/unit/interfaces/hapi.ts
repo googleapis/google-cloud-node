@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import has = require('lodash.has');
+import {has} from 'lodash';
 import * as is from 'is';
 const isFunction = (is as {} as {fn: Function}).fn;
 const isObject = is.object;
-import assert from 'assert';
+import * as assert from 'assert';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';
@@ -28,7 +28,7 @@ import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 import * as http from 'http';
 import * as hapi from 'hapi';
-import boom from 'boom';
+import * as boom from 'boom';
 
 const packageJson = require('../../../../package.json');
 

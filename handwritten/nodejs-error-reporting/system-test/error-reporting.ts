@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
-import is from 'is';
-import nock from 'nock';
+import * as assert from 'assert';
+import * as is from 'is';
+import * as nock from 'nock';
 
 import {ErrorReporting} from '../src';
 import {ErrorMessage} from '../src/classes/error-message';

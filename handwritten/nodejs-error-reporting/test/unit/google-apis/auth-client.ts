@@ -15,8 +15,8 @@
  */
 
 import {Logger} from '@google-cloud/common';
-import assert from 'assert';
-import proxyquire from 'proxyquire';
+import * as assert from 'assert';
+import * as proxyquire from 'proxyquire';
 
 import {Configuration, ConfigurationOptions} from '../../../src/configuration';
 

@@ -15,7 +15,7 @@
  */
 
 const pkg = require('../../../package.json');
-import is from 'is';
+import * as is from 'is';
 import {Configuration} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';

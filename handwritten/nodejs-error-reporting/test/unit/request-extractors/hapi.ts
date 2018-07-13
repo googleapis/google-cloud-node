@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import assert from 'assert';
-import hapi from 'hapi';
+import * as assert from 'assert';
+import * as hapi from 'hapi';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';
