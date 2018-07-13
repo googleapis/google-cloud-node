@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Hapi from 'hapi';
+import * as Hapi from 'hapi';
 import {ErrorReporting} from '../../src/index';
 const errorHandler = new ErrorReporting();
 

@@ -16,7 +16,7 @@
 
 import {Logger} from '@google-cloud/common';
 import * as http from 'http';
-import is from 'is';
+import * as is from 'is';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration} from '../configuration';
