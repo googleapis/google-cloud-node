@@ -16,13 +16,13 @@
 
 import {ChildProcess, fork, ForkOptions, spawn, SpawnOptions} from 'child_process';
 import {mkdir, readFile, stat, Stats, writeFile} from 'fs';
-import glob from 'glob';
+import * as glob from 'glob';
 import {ncp} from 'ncp';
-import once from 'once';
+import * as once from 'once';
 import * as path from 'path';
-import pify from 'pify';
-import rimraf from 'rimraf';
-import tmp from 'tmp';
+import * as pify from 'pify';
+import * as rimraf from 'rimraf';
+import * as tmp from 'tmp';
 
 export const BUILD_DIRECTORY = 'build';
 
