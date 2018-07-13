@@ -87,10 +87,8 @@ module.exports = () => {
         recognizeStream.emit('response', response);
       });
 
-      // Write the initial configuration to the stream.
-      requestStream.write({
-        streamingConfig: config,
-      });
+      // The first message should contain the streaming config.
+      let first_message = true;
 
       // Set up appropriate piping between the stream returned by
       // the underlying API method and the one that we return.
@@ -99,9 +97,17 @@ module.exports = () => {
         // This entails that the user sends raw audio; it is wrapped in
         // the appropriate request structure.
         through.obj((obj, _, next) => {
-          next(null, {
-            audioContent: obj,
-          });
+          let payload = {};
+          if (first_message && config !== undefined) {
+            // Write the initial configuration to the stream.
+            payload.streamingConfig = config;
+          }
+
+          if (Object.keys(obj || {}).length) {
+            payload.audioContent = obj;
+          }
+
+          next(null, payload);
         }),
         requestStream,
         through.obj(),

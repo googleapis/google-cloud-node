@@ -66,7 +66,7 @@ describe('Speech helper methods', () => {
         next(null, data);
       };
 
-      userStream.emit('writing');
+      userStream.write(undefined);
     });
 
     it('does not require options', () => {
@@ -140,11 +140,11 @@ describe('Speech helper methods', () => {
       var audioContent = Buffer.from('audio content');
 
       requestStream._write = (data, enc, next) => {
-        if (data && data.streamingConfig !== CONFIG) {
-          assert.deepStrictEqual(data, {audioContent});
-          setImmediate(done);
-        }
-
+        assert.deepStrictEqual(data, {
+          audioContent: audioContent,
+          streamingConfig: CONFIG,
+        });
+        setImmediate(done);
         next(null, data);
       };
 
