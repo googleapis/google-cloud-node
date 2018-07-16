@@ -15,9 +15,9 @@
  */
 
 import * as assert from 'assert';
-import delay from 'delay';
-import nock from 'nock';
-import pify from 'pify';
+import * as delay from 'delay';
+import * as nock from 'nock';
+import * as pify from 'pify';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
