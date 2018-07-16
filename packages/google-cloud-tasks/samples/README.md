@@ -37,7 +37,7 @@ such as on Google App Engine or Google Compute Engine.
 
 To create a queue using the Cloud SDK, use the following gcloud command:
 
-    gcloud beta tasks queues create pull my-pull-queue
+    gcloud beta tasks queues create-pull-queue my-pull-queue
 
 ## Running the Samples
 
