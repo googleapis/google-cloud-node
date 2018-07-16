@@ -18,7 +18,7 @@
 /* eslint-disable no-unused-vars */
 // [START logging_bunyan_setup_explicit]
 // Imports the Google Cloud client library for Bunyan
-const LoggingBunyan = require('@google-cloud/logging-bunyan');
+const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 
 // Creates a client
 const loggingBunyan = new LoggingBunyan({
