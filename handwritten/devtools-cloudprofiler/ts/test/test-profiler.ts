@@ -25,7 +25,7 @@ import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
 import {ProfilerConfig} from '../src/config';
-import {Profiler, Retryer} from '../src/profiler';
+import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
 import * as heapProfiler from '../src/profilers/heap-profiler';
 import {TimeProfiler} from '../src/profilers/time-profiler';
 
@@ -637,7 +637,9 @@ describe('Profiler', () => {
                            .onCall(0)
                            .callsArgWith(1, undefined, undefined, {
                              statusCode: 409,
-                             body: {error: {details: [{retryDelay: '50s'}]}}
+                             body: {
+                               message: 'action throttled, backoff for 50s',
+                             }
                            });
 
          const profiler = new Profiler(testConfig);
@@ -792,12 +794,13 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {instance: config.instance}
          };
-         requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
-                           .onCall(0)
-                           .callsArgWith(1, undefined, undefined, {
-                             statusCode: 409,
-                             body: {error: {details: [{retryDelay: '50s'}]}}
-                           });
+         requestStub =
+             sinon.stub(common.ServiceObject.prototype, 'request')
+                 .onCall(0)
+                 .callsArgWith(1, undefined, undefined, {
+                   statusCode: 409,
+                   body: {message: 'action throttled, backoff for 50s'}
+                 });
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -817,7 +820,7 @@ describe('Profiler', () => {
                            .onCall(0)
                            .callsArgWith(1, undefined, undefined, {
                              statusCode: 409,
-                             body: {error: {details: [{retryDelay: ''}]}}
+                             body: {message: 'some message'},
                            });
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
@@ -825,7 +828,7 @@ describe('Profiler', () => {
          assert.equal(500, delayMillis);
        });
     it('should return backoff limit, when server specified backoff is greater' +
-           'then backoff limit',
+           ' then backoff limit',
        async () => {
          const config = extend(true, {}, testConfig);
          const requestProfileResponseBody = {
@@ -839,7 +842,7 @@ describe('Profiler', () => {
                  .onCall(0)
                  .callsArgWith(1, undefined, undefined, {
                    statusCode: 409,
-                   body: {error: {details: [{retryDelay: '1000h'}]}}
+                   body: {message: 'action throttled, backoff for 1000h0s'},
                  });
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
@@ -870,5 +873,43 @@ describe('Profiler', () => {
          const delayMillis = await profiler.collectProfile();
          assert.equal(0, delayMillis);
        });
+  });
+  describe('parseBackoffDuration', () => {
+    it('should return undefined when no duration specified', () => {
+      assert.equal(undefined, parseBackoffDuration(''));
+    });
+    it('should parse backoff with minutes and seconds specified', () => {
+      assert.equal(
+          62000, parseBackoffDuration('action throttled, backoff for 1m2s'));
+    });
+    it('should parse backoff with fraction of second', () => {
+      assert.equal(
+          2500, parseBackoffDuration('action throttled, backoff for 2.5s'));
+    });
+    it('should parse backoff with minutes and seconds, including fraction of second',
+       () => {
+         assert.equal(
+             62500,
+             parseBackoffDuration('action throttled, backoff for 1m2.5s'));
+       });
+    it('should parse backoff with hours and seconds', () => {
+      assert.equal(
+          3602500,
+          parseBackoffDuration('action throttled, backoff for 1h2.5s'));
+    });
+    it('should parse backoff with hours, minutes, and seconds', () => {
+      assert.equal(
+          3662500,
+          parseBackoffDuration('action throttled, backoff for 1h1m2.5s'));
+    });
+    it('should parse return undefined for unexpected backoff time string format',
+       () => {
+         assert.equal(
+             undefined,
+             parseBackoffDuration('action throttled, backoff for  1m2+s'));
+       });
+    it('should parse return undefined for unexpected string format', () => {
+      assert.equal(undefined, parseBackoffDuration('time 1m2s'));
+    });
   });
 });

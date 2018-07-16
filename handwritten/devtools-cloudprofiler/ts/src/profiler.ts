@@ -81,16 +81,33 @@ function getServerResponseBackoff(response: http.IncomingMessage): number|
     undefined {
   // tslint:disable-next-line: no-any
   const body = (response as any).body;
-  if (body && body.error && body.error.details &&
-      Array.isArray(body.error.details)) {
-    for (const item of body.error.details) {
-      if (typeof item === 'object' && item.retryDelay &&
-          typeof item.retryDelay === 'string') {
-        const backoffMillis = parseDuration(item.retryDelay);
-        if (backoffMillis > 0) {
-          return backoffMillis;
-        }
-      }
+
+  // The response currently does not have field containing the server-specified
+  // backoff. As a workaround, response body's message is parsed to get the
+  // backoff.
+  // TODO (issue #250): Remove this workaround and get the retry delay from
+  // body.error.details.
+  if (body && body.message && typeof body.message === 'string') {
+    return parseBackoffDuration(body.message);
+  }
+  return undefined;
+}
+
+/**
+ * @return if the backoff duration can be parsed, then the backoff duration in
+ * ms, otherwise undefined.
+ *
+ * Public for testing.
+ */
+export function parseBackoffDuration(backoffMessage: string): number|undefined {
+  const backoffMessageRegex =
+      /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
+  const [, duration] =
+      backoffMessageRegex.exec(backoffMessage) || [undefined, undefined];
+  if (duration) {
+    const backoffMillis = parseDuration(duration);
+    if (backoffMillis > 0) {
+      return backoffMillis;
     }
   }
   return undefined;
