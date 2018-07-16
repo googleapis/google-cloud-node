@@ -19,7 +19,7 @@
 const bunyan = require('bunyan');
 
 // Imports the Google Cloud client library for Bunyan
-const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 
 // Creates a Bunyan Stackdriver Logging client
 const loggingBunyan = new LoggingBunyan();
