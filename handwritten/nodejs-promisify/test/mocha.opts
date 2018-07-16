@@ -1,0 +1,3 @@
+--require hard-rejection/register
+--require source-map-support/register
+--timeout 10000
