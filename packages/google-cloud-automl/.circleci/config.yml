@@ -91,8 +91,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link ../
             npm install
+            npm link ../
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
