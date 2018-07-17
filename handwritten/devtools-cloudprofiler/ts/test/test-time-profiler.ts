@@ -27,6 +27,17 @@ const v8TimeProfiler = require('bindings')('time_profiler');
 
 describe('TimeProfiler', () => {
   describe('profile', () => {
+    it('should detect idle time', async () => {
+      const durationMillis = 500;
+      const intervalMicros = 1000;
+      const profiler = new TimeProfiler(intervalMicros);
+      const profile = await profiler.profile(durationMillis);
+      assert.ok(profile.stringTable);
+      assert.notStrictEqual(profile.stringTable!.indexOf('(idle)'), -1);
+    });
+  });
+
+  describe('profile (w/ stubs)', () => {
     const sinonStubs: sinon.SinonStub[] = new Array();
     before(() => {
       sinonStubs.push(sinon.stub(v8TimeProfiler, 'startProfiling'));

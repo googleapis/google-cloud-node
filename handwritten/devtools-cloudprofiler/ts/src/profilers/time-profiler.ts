@@ -35,10 +35,20 @@ export class TimeProfiler {
    * @param durationMillis - time in milliseconds for which to collect profile.
    */
   async profile(durationMillis: number): Promise<perftools.profiles.IProfile> {
+    // Node.js contains an undocumented API for reporting idle status to V8.
+    // This lets the profiler distinguish idle time from time spent in native
+    // code. Ideally this should be default behavior. Until then, use the
+    // undocumented API.
+    // See https://github.com/nodejs/node/issues/19009#issuecomment-403161559.
+    // tslint:disable-next-line no-any
+    (process as any)._startProfilerIdleNotifier();
     const runName = 'stackdriver-profiler-' + Date.now() + '-' + Math.random();
     profiler.startProfiling(runName);
     await delay(durationMillis);
     const result = profiler.stopProfiling(runName);
-    return serializeTimeProfile(result, this.intervalMicros);
+    // tslint:disable-next-line no-any
+    (process as any)._stopProfilerIdleNotifier();
+    const profile = serializeTimeProfile(result, this.intervalMicros);
+    return profile;
   }
 }
