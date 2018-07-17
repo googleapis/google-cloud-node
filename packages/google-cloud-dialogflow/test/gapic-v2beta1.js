@@ -892,6 +892,357 @@ describe('ContextsClient', () => {
     });
   });
 });
+describe('DocumentsClient', () => {
+  describe('listDocuments', () => {
+    it('invokes listDocuments without error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var documentsElement = {};
+      var documents = [documentsElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        documents: documents,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listDocuments = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.documents);
+      };
+
+      client.listDocuments(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.documents);
+        done();
+      });
+    });
+
+    it('invokes listDocuments with error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listDocuments = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listDocuments(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getDocument', () => {
+    it('invokes getDocument without error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.documentPath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]',
+        '[DOCUMENT]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var mimeType = 'mimeType-196041627';
+      var contentUri = 'contentUri-388807514';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+        mimeType: mimeType,
+        contentUri: contentUri,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getDocument = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getDocument(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getDocument with error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.documentPath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]',
+        '[DOCUMENT]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getDocument = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getDocument(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createDocument', function() {
+    it('invokes createDocument without error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var document = {};
+      var request = {
+        parent: formattedParent,
+        document: document,
+      };
+
+      // Mock response
+      var name = 'name3373707';
+      var displayName = 'displayName1615086568';
+      var mimeType = 'mimeType-196041627';
+      var contentUri = 'contentUri-388807514';
+      var expectedResponse = {
+        name: name,
+        displayName: displayName,
+        mimeType: mimeType,
+        contentUri: contentUri,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createDocument = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .createDocument(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes createDocument with error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var document = {};
+      var request = {
+        parent: formattedParent,
+        document: document,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createDocument = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .createDocument(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.createDocument
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.createDocument
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+
+  describe('deleteDocument', function() {
+    it('invokes deleteDocument without error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.documentPath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]',
+        '[DOCUMENT]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteDocument = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .deleteDocument(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes deleteDocument with error', done => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.documentPath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]',
+        '[DOCUMENT]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteDocument = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .deleteDocument(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.equal(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      var client = new dialogflowModule.v2beta1.DocumentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.deleteDocument
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.deleteDocument
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+});
 describe('EntityTypesClient', () => {
   describe('listEntityTypes', () => {
     it('invokes listEntityTypes without error', done => {
@@ -1743,6 +2094,7 @@ describe('IntentsClient', () => {
       var isFallback = false;
       var mlEnabled = false;
       var mlDisabled = true;
+      var endInteraction = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1754,6 +2106,7 @@ describe('IntentsClient', () => {
         isFallback: isFallback,
         mlEnabled: mlEnabled,
         mlDisabled: mlDisabled,
+        endInteraction: endInteraction,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,
@@ -1823,6 +2176,7 @@ describe('IntentsClient', () => {
       var isFallback = false;
       var mlEnabled = false;
       var mlDisabled = true;
+      var endInteraction = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1834,6 +2188,7 @@ describe('IntentsClient', () => {
         isFallback: isFallback,
         mlEnabled: mlEnabled,
         mlDisabled: mlDisabled,
+        endInteraction: endInteraction,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,
@@ -1905,6 +2260,7 @@ describe('IntentsClient', () => {
       var isFallback = false;
       var mlEnabled = false;
       var mlDisabled = true;
+      var endInteraction = true;
       var action = 'action-1422950858';
       var resetContexts = true;
       var rootFollowupIntentName = 'rootFollowupIntentName402253784';
@@ -1916,6 +2272,7 @@ describe('IntentsClient', () => {
         isFallback: isFallback,
         mlEnabled: mlEnabled,
         mlDisabled: mlDisabled,
+        endInteraction: endInteraction,
         action: action,
         resetContexts: resetContexts,
         rootFollowupIntentName: rootFollowupIntentName,
@@ -2022,7 +2379,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.agentPath('[PROJECT]', '[AGENT]');
+      var formattedParent = client.projectAgentPath('[PROJECT]');
       var languageCode = 'languageCode-412800396';
       var request = {
         parent: formattedParent,
@@ -2060,7 +2417,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.agentPath('[PROJECT]', '[AGENT]');
+      var formattedParent = client.projectAgentPath('[PROJECT]');
       var languageCode = 'languageCode-412800396';
       var request = {
         parent: formattedParent,
@@ -2114,7 +2471,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
+      var formattedParent = client.projectAgentPath('[PROJECT]');
       var intents = [];
       var request = {
         parent: formattedParent,
@@ -2152,7 +2509,7 @@ describe('IntentsClient', () => {
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
+      var formattedParent = client.projectAgentPath('[PROJECT]');
       var intents = [];
       var request = {
         parent: formattedParent,
@@ -2195,6 +2552,263 @@ describe('IntentsClient', () => {
         client._descriptors.longrunning.batchDeleteIntents
           .metadataDecoder instanceof Function
       );
+    });
+  });
+});
+describe('KnowledgeBasesClient', () => {
+  describe('listKnowledgeBases', () => {
+    it('invokes listKnowledgeBases without error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      var nextPageToken = '';
+      var knowledgeBasesElement = {};
+      var knowledgeBases = [knowledgeBasesElement];
+      var expectedResponse = {
+        nextPageToken: nextPageToken,
+        knowledgeBases: knowledgeBases,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listKnowledgeBases = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.knowledgeBases);
+      };
+
+      client.listKnowledgeBases(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.knowledgeBases);
+        done();
+      });
+    });
+
+    it('invokes listKnowledgeBases with error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listKnowledgeBases = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listKnowledgeBases(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getKnowledgeBase', () => {
+    it('invokes getKnowledgeBase without error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      var name2 = 'name2-1052831874';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getKnowledgeBase = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getKnowledgeBase(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getKnowledgeBase with error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getKnowledgeBase = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getKnowledgeBase(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createKnowledgeBase', () => {
+    it('invokes createKnowledgeBase without error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var knowledgeBase = {};
+      var request = {
+        parent: formattedParent,
+        knowledgeBase: knowledgeBase,
+      };
+
+      // Mock response
+      var name = 'name3373707';
+      var displayName = 'displayName1615086568';
+      var expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createKnowledgeBase = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createKnowledgeBase(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createKnowledgeBase with error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedParent = client.projectPath('[PROJECT]');
+      var knowledgeBase = {};
+      var request = {
+        parent: formattedParent,
+        knowledgeBase: knowledgeBase,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createKnowledgeBase = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createKnowledgeBase(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteKnowledgeBase', () => {
+    it('invokes deleteKnowledgeBase without error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteKnowledgeBase = mockSimpleGrpcMethod(request);
+
+      client.deleteKnowledgeBase(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteKnowledgeBase with error', done => {
+      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      var formattedName = client.knowledgeBasePath(
+        '[PROJECT]',
+        '[KNOWLEDGE_BASE]'
+      );
+      var request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteKnowledgeBase = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteKnowledgeBase(request, err => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
     });
   });
 });
@@ -2535,8 +3149,10 @@ describe('SessionsClient', () => {
 
       // Mock response
       var responseId = 'responseId1847552473';
+      var outputAudio = '24';
       var expectedResponse = {
         responseId: responseId,
+        outputAudio: outputAudio,
       };
 
       // Mock Grpc layer
@@ -2599,8 +3215,10 @@ describe('SessionsClient', () => {
 
       // Mock response
       var responseId = 'responseId1847552473';
+      var outputAudio = '24';
       var expectedResponse = {
         responseId: responseId,
+        outputAudio: outputAudio,
       };
 
       // Mock Grpc layer

@@ -74,7 +74,7 @@ class SessionsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -204,13 +204,12 @@ class SessionsClient {
    *   Required. The name of the session this query is sent to. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
    *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. Note: Environments and users are under
-   *   construction and will be available soon. If <Environment ID> is not
-   *   specified, we assume default 'draft' environment. If <User ID> is not
-   *   specified, we are using "-". It’s up to the API caller to choose an
-   *   appropriate <Session ID>. and <User Id>. They can be a random numbers or
-   *   some type of user and session identifiers (preferably hashed). The length
-   *   of the <Session ID> and <User ID> must not exceed 36 characters.
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we are using
+   *   "-". It’s up to the API caller to choose an appropriate `Session ID` and
+   *   `User Id`. They can be a random numbers or some type of user and session
+   *   identifiers (preferably hashed). The length of the `Session ID` and
+   *   `User ID` must not exceed 36 characters.
    * @param {Object} request.queryInput
    *   Required. The input specification. It can be set to:
    *
@@ -226,6 +225,12 @@ class SessionsClient {
    *   Optional. The parameters of this query.
    *
    *   This object should have the same structure as [QueryParameters]{@link google.cloud.dialogflow.v2beta1.QueryParameters}
+   * @param {Object} [request.outputAudioConfig]
+   *   Optional. Instructs the speech synthesizer how to generate the output
+   *   audio. If this field is not set and agent-level speech synthesizer is not
+   *   configured, no output audio is generated.
+   *
+   *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
    * @param {string} [request.inputAudio]
    *   Optional. The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.

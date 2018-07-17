@@ -87,7 +87,7 @@ class ContextsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -230,10 +230,9 @@ class ContextsClient {
    *   Required. The session to list all contexts from.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
    *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. Note: Environments and users are under
-   *   construction and will be available soon. If <Environment ID> is not
-   *   specified, we assume default 'draft' environment. If <User ID> is not
-   *   specified, we assume default '-' user.
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we assume
+   *   default '-' user.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -340,10 +339,9 @@ class ContextsClient {
    *   Required. The session to list all contexts from.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
    *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. Note: Environments and users are under
-   *   construction and will be available soon. If <Environment ID> is not
-   *   specified, we assume default 'draft' environment. If <User ID> is not
-   *   specified, we assume default '-' user.
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we assume
+   *   default '-' user.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -391,10 +389,9 @@ class ContextsClient {
    *   Required. The name of the context. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
    *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. Note: Environments and
-   *   users are under construction and will be available soon. If <Environment
-   *   ID> is not specified, we assume default 'draft' environment. If <User ID>
-   *   is not specified, we assume default '-' user.
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. If `Environment ID` is
+   *   not specified, we assume default 'draft' environment. If `User ID` is not
+   *   specified, we assume default '-' user.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -443,10 +440,9 @@ class ContextsClient {
    *   Required. The session to create a context for.
    *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
    *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. Note: Environments and users are under
-   *   construction and will be available soon. If <Environment ID> is not
-   *   specified, we assume default 'draft' environment. If <User ID> is not
-   *   specified, we assume default '-' user.
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we assume
+   *   default '-' user.
    * @param {Object} request.context
    *   Required. The context to create.
    *
@@ -556,11 +552,9 @@ class ContextsClient {
    *   Required. The name of the context to delete. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
    *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. Note: Environments and
-   *   users are under construction and will be available soon. If <Environment
-   *   ID> is not specified, we assume default 'draft' environment. If <User ID>
-   *   is not specified, we assume default
-   *   '-' user.
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. If `Environment ID` is
+   *   not specified, we assume default 'draft' environment. If `User ID` is not
+   *   specified, we assume default '-' user.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -601,10 +595,8 @@ class ContextsClient {
    *   Required. The name of the session to delete all contexts from. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
    *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-   *   ID>`. Note: Environments and users are under construction and will be
-   *   available soon. If <Environment ID> is not specified we assume default
-   *   'draft' environment. If <User ID> is not specified, we assume default
-   *   '-' user.
+   *   ID>`. If `Environment ID` is not specified we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

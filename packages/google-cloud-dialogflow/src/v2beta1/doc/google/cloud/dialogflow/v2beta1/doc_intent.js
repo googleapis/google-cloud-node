@@ -47,8 +47,8 @@
  *   taken into account during inference in `ML ONLY` match mode. Also,
  *   auto-markup in the UI is turned off.
  *   DEPRECATED! Please use `ml_disabled` field instead.
- *   NOTE: If neither `ml_enabled` nor `ml_disabled` field is set, then the
- *   default value is determined as follows:
+ *   NOTE: If both `ml_enabled` and `ml_disabled` are either not set or false,
+ *   then the default value is determined as follows:
  *   - Before April 15th, 2018 the default is:
  *     ml_enabled = false / ml_disabled = true.
  *   - After April 15th, 2018 the default is:
@@ -59,6 +59,11 @@
  *   Note: If `ml_disabled` setting is set to true, then this intent is not
  *   taken into account during inference in `ML ONLY` match mode. Also,
  *   auto-markup in the UI is turned off.
+ *
+ * @property {boolean} endInteraction
+ *   Optional. Indicates that this intent ends an interaction. Some integrations
+ *   (e.g., Actions on Google or Dialogflow phone gateway) use this information
+ *   to close interaction with an end user. Default is false.
  *
  * @property {string[]} inputContextNames
  *   Optional. The list of context names required for this intent to be
@@ -78,6 +83,7 @@
  *
  * @property {string} action
  *   Optional. The name of the action associated with the intent.
+ *   Note: The action name must not contain whitespaces.
  *
  * @property {Object[]} outputContexts
  *   Optional. The collection of contexts that are activated when the intent
@@ -327,6 +333,21 @@ var Intent = {
    *
    *   This object should have the same structure as [CarouselSelect]{@link google.cloud.dialogflow.v2beta1.CarouselSelect}
    *
+   * @property {Object} telephonyPlayAudio
+   *   Plays audio from a file in Telephony Gateway.
+   *
+   *   This object should have the same structure as [TelephonyPlayAudio]{@link google.cloud.dialogflow.v2beta1.TelephonyPlayAudio}
+   *
+   * @property {Object} telephonySynthesizeSpeech
+   *   Synthesizes speech in Telephony Gateway.
+   *
+   *   This object should have the same structure as [TelephonySynthesizeSpeech]{@link google.cloud.dialogflow.v2beta1.TelephonySynthesizeSpeech}
+   *
+   * @property {Object} telephonyTransferCall
+   *   Transfers the call in Telephony Gateway.
+   *
+   *   This object should have the same structure as [TelephonyTransferCall]{@link google.cloud.dialogflow.v2beta1.TelephonyTransferCall}
+   *
    * @property {number} platform
    *   Optional. The platform that this message is intended for.
    *
@@ -360,8 +381,8 @@ var Intent = {
      *   Optional. The public URI to an image file.
      *
      * @property {string} accessibilityText
-     *   Optional. A text description of the image to be used for accessibility,
-     *   e.g., screen readers.
+     *   A text description of the image to be used for accessibility,
+     *   e.g., screen readers. Required if image_uri is set for CarouselSelect.
      *
      * @typedef Image
      * @memberof google.cloud.dialogflow.v2beta1
@@ -696,6 +717,72 @@ var Intent = {
     },
 
     /**
+     * Plays audio from a file in Telephony Gateway.
+     *
+     * @property {string} audioUri
+     *   Required. URI to a Google Cloud Storage object containing the audio to
+     *   play, e.g., "gs://bucket/object". The object must contain a single
+     *   channel (mono) of linear PCM audio (2 bytes / sample) at 8kHz.
+     *
+     *   This object must be readable by the `service-<Project
+     *   Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` service account
+     *   where <Project Number> is the number of the Telephony Gateway project
+     *   (usually the same as the Dialogflow agent project). If the Google Cloud
+     *   Storage bucket is in the Telephony Gateway project, this permission is
+     *   added by default when enabling the Dialogflow V2 API.
+     *
+     *   For audio from other sources, consider using the
+     *   `TelephonySynthesizeSpeech` message with SSML.
+     *
+     * @typedef TelephonyPlayAudio
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TelephonyPlayAudio definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TelephonyPlayAudio: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Synthesizes speech and plays back the synthesized audio to the caller in
+     * Telephony Gateway.
+     *
+     * Telephony Gateway takes the synthesizer settings from
+     * `DetectIntentResponse.output_audio_config` which can either be set
+     * at request-level or can come from the agent-level synthesizer config.
+     *
+     * @property {string} text
+     *   The raw text to be synthesized.
+     *
+     * @property {string} ssml
+     *   The SSML to be synthesized. For more information, see
+     *   [SSML](https://developers.google.com/actions/reference/ssml).
+     *
+     * @typedef TelephonySynthesizeSpeech
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TelephonySynthesizeSpeech definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TelephonySynthesizeSpeech: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Transfers the call in Telephony Gateway.
+     *
+     * @property {string} phoneNumber
+     *   Required. The phone number to transfer the call to
+     *   in [E.164 format](https://en.wikipedia.org/wiki/E.164).
+     *
+     *   We currently only allow transferring to US numbers (+1xxxyyyzzzz).
+     *
+     * @typedef TelephonyTransferCall
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TelephonyTransferCall definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TelephonyTransferCall: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
      * Represents different platforms that a rich message can be intended for.
      *
      * @enum {number}
@@ -806,7 +893,12 @@ var Intent = {
        *   }
        * }</pre>
        */
-      ACTIONS_ON_GOOGLE: 8
+      ACTIONS_ON_GOOGLE: 8,
+
+      /**
+       * Telephony Gateway.
+       */
+      TELEPHONY: 10
     }
   },
 

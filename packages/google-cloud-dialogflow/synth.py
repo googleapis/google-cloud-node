@@ -29,8 +29,7 @@ common_templates = gcp.CommonTemplates()
 versions = ['v2', 'v2beta1']
 for version in versions:
     library = gapic.node_library('dialogflow', version)
-
-s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
+    s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
 
 templates = common_templates.node_library(package_name="dialogflow")
 s.copy(templates)

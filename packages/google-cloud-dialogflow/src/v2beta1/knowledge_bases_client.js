@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./contexts_client_config');
+const gapicConfig = require('./knowledge_bases_client_config');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -22,30 +22,16 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * A context represents additional information included with user input or with
- * an intent returned by the Dialogflow API. Contexts are helpful for
- * differentiating user input which may be vague or have a different meaning
- * depending on additional details from your application such as user setting
- * and preferences, previous user input, where the user is in your application,
- * geographic location, and so on.
+ * Manages knowledge bases.
  *
- * You can include contexts as input parameters of a
- * DetectIntent (or
- * StreamingDetectIntent) request,
- * or as output contexts included in the returned intent.
- * Contexts expire when an intent is matched, after the number of `DetectIntent`
- * requests specified by the `lifespan_count` parameter, or after 10 minutes
- * if no intents are matched for a `DetectIntent` request.
- *
- * For more information about contexts, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/contexts).
+ * Allows users to setup and maintain knowledge bases with their knowledge data.
  *
  * @class
- * @memberof v2
+ * @memberof v2beta1
  */
-class ContextsClient {
+class KnowledgeBasesClient {
   /**
-   * Construct an instance of ContextsClient.
+   * Construct an instance of KnowledgeBasesClient.
    *
    * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
@@ -108,7 +94,7 @@ class ContextsClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/dialogflow/v2/context.proto'
+        'google/cloud/dialogflow/v2beta1/knowledge_base.proto'
       )
     );
 
@@ -116,11 +102,9 @@ class ContextsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      sessionPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/sessions/{session}'
-      ),
-      contextPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/contexts/{context}'
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      knowledgeBasePathTemplate: new gax.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
     };
 
@@ -128,16 +112,16 @@ class ContextsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listContexts: new gax.PageDescriptor(
+      listKnowledgeBases: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'contexts'
+        'knowledgeBases'
       ),
     };
 
     // Put together the default options sent with requests.
     var defaults = gaxGrpc.constructSettings(
-      'google.cloud.dialogflow.v2.Contexts',
+      'google.cloud.dialogflow.v2beta1.KnowledgeBases',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -149,25 +133,23 @@ class ContextsClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.dialogflow.v2.Contexts.
-    var contextsStub = gaxGrpc.createStub(
-      protos.google.cloud.dialogflow.v2.Contexts,
+    // google.cloud.dialogflow.v2beta1.KnowledgeBases.
+    var knowledgeBasesStub = gaxGrpc.createStub(
+      protos.google.cloud.dialogflow.v2beta1.KnowledgeBases,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var contextsStubMethods = [
-      'listContexts',
-      'getContext',
-      'createContext',
-      'updateContext',
-      'deleteContext',
-      'deleteAllContexts',
+    var knowledgeBasesStubMethods = [
+      'listKnowledgeBases',
+      'getKnowledgeBase',
+      'createKnowledgeBase',
+      'deleteKnowledgeBase',
     ];
-    for (let methodName of contextsStubMethods) {
+    for (let methodName of knowledgeBasesStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
-        contextsStub.then(
+        knowledgeBasesStub.then(
           stub =>
             function() {
               var args = Array.prototype.slice.call(arguments, 0);
@@ -216,13 +198,13 @@ class ContextsClient {
   // -------------------
 
   /**
-   * Returns the list of all contexts in the specified session.
+   * Returns the list of all knowledge bases of the specified agent.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Required. The agent to list of knowledge bases for.
+   *   Format: `projects/<Project ID>/agent`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -235,35 +217,35 @@ class ContextsClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The second parameter to the callback is Array of [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListContextsResponse]{@link google.cloud.dialogflow.v2.ListContextsResponse}.
+   *   the raw response object of an object representing [ListKnowledgeBasesResponse]{@link google.cloud.dialogflow.v2beta1.ListKnowledgeBasesResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The first element of the array is Array of [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Context]{@link google.cloud.dialogflow.v2.Context} in a single response.
+   *   The first element is Array of [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListContextsResponse]{@link google.cloud.dialogflow.v2.ListContextsResponse}.
+   *   an object representing [ListKnowledgeBasesResponse]{@link google.cloud.dialogflow.v2beta1.ListKnowledgeBasesResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
-   * client.listContexts({parent: formattedParent})
+   * client.listKnowledgeBases({parent: formattedParent})
    *   .then(responses => {
    *     var resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
@@ -275,7 +257,7 @@ class ContextsClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * var formattedParent = client.projectPath('[PROJECT]');
    *
    *
    * var options = {autoPaginate: false};
@@ -291,29 +273,29 @@ class ContextsClient {
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
-   *     return client.listContexts(nextRequest, options).then(callback);
+   *     return client.listKnowledgeBases(nextRequest, options).then(callback);
    *   }
    * }
-   * client.listContexts({parent: formattedParent}, options)
+   * client.listKnowledgeBases({parent: formattedParent}, options)
    *   .then(callback)
    *   .catch(err => {
    *     console.error(err);
    *   });
    */
-  listContexts(request, options, callback) {
+  listKnowledgeBases(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.listContexts(request, options, callback);
+    return this._innerApiCalls.listKnowledgeBases(request, options, callback);
   }
 
   /**
-   * Equivalent to {@link listContexts}, but returns a NodeJS Stream object.
+   * Equivalent to {@link listKnowledgeBases}, but returns a NodeJS Stream object.
    *
-   * This fetches the paged responses for {@link listContexts} continuously
+   * This fetches the paged responses for {@link listKnowledgeBases} continuously
    * and invokes the callback registered for 'data' event for each element in the
    * responses.
    *
@@ -326,8 +308,8 @@ class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Required. The agent to list of knowledge bases for.
+   *   Format: `projects/<Project ID>/agent`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -338,63 +320,63 @@ class ContextsClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Context]{@link google.cloud.dialogflow.v2.Context} on 'data' event.
+   *   An object stream which emits an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase} on 'data' event.
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-   * client.listContextsStream({parent: formattedParent})
+   * var formattedParent = client.projectPath('[PROJECT]');
+   * client.listKnowledgeBasesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
    *   }).on('error', err => {
    *     console.log(err);
    *   });
    */
-  listContextsStream(request, options) {
+  listKnowledgeBasesStream(request, options) {
     options = options || {};
 
-    return this._descriptors.page.listContexts.createStream(
-      this._innerApiCalls.listContexts,
+    return this._descriptors.page.listKnowledgeBases.createStream(
+      this._innerApiCalls.listKnowledgeBases,
       request,
       options
     );
   }
 
   /**
-   * Retrieves the specified context.
+   * Retrieves the specified knowledge base.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the context. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   Required. The name of the knowledge base to retrieve.
+   *   Format `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The second parameter to the callback is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
-   * client.getContext({name: formattedName})
+   * var formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * client.getKnowledgeBase({name: formattedName})
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -403,54 +385,54 @@ class ContextsClient {
    *     console.error(err);
    *   });
    */
-  getContext(request, options, callback) {
+  getKnowledgeBase(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.getContext(request, options, callback);
+    return this._innerApiCalls.getKnowledgeBase(request, options, callback);
   }
 
   /**
-   * Creates a context.
+   * Creates a knowledge base.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to create a context for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
-   * @param {Object} request.context
-   *   Required. The context to create.
+   *   Required. The agent to create a knowledge base for.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {Object} request.knowledgeBase
+   *   Required. The knowledge base to create.
    *
-   *   This object should have the same structure as [Context]{@link google.cloud.dialogflow.v2.Context}
+   *   This object should have the same structure as [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The second parameter to the callback is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-   * var context = {};
+   * var formattedParent = client.projectPath('[PROJECT]');
+   * var knowledgeBase = {};
    * var request = {
    *   parent: formattedParent,
-   *   context: context,
+   *   knowledgeBase: knowledgeBase,
    * };
-   * client.createContext(request)
+   * client.createKnowledgeBase(request)
    *   .then(responses => {
    *     var response = responses[0];
    *     // doThingsWith(response)
@@ -459,76 +441,27 @@ class ContextsClient {
    *     console.error(err);
    *   });
    */
-  createContext(request, options, callback) {
+  createKnowledgeBase(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.createContext(request, options, callback);
+    return this._innerApiCalls.createKnowledgeBase(request, options, callback);
   }
 
   /**
-   * Updates the specified context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {Object} request.context
-   *   Required. The context to update.
-   *
-   *   This object should have the same structure as [Context]{@link google.cloud.dialogflow.v2.Context}
-   * @param {Object} [request.updateMask]
-   *   Optional. The mask to control which fields get updated.
-   *
-   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const dialogflow = require('dialogflow.v2');
-   *
-   * var client = new dialogflow.v2.ContextsClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * var context = {};
-   * client.updateContext({context: context})
-   *   .then(responses => {
-   *     var response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  updateContext(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-
-    return this._innerApiCalls.updateContext(request, options, callback);
-  }
-
-  /**
-   * Deletes the specified context.
+   * Deletes the specified knowledge base.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the context to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   Required. The name of the knowledge base to delete.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {boolean} [request.force]
+   *   Optional. Force deletes the knowledge base. When set to true, any documents
+   *   in the knowledge base are also deleted.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -539,64 +472,25 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
-   * client.deleteContext({name: formattedName}).catch(err => {
+   * var formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * client.deleteKnowledgeBase({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
    */
-  deleteContext(request, options, callback) {
+  deleteKnowledgeBase(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
     }
     options = options || {};
 
-    return this._innerApiCalls.deleteContext(request, options, callback);
-  }
-
-  /**
-   * Deletes all active contexts in the specified session.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the session to delete all contexts from. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>`.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)} [callback]
-   *   The function which will be called with the result of the API call.
-   * @returns {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const dialogflow = require('dialogflow.v2');
-   *
-   * var client = new dialogflow.v2.ContextsClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-   * client.deleteAllContexts({parent: formattedParent}).catch(err => {
-   *   console.error(err);
-   * });
-   */
-  deleteAllContexts(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-
-    return this._innerApiCalls.deleteAllContexts(request, options, callback);
+    return this._innerApiCalls.deleteKnowledgeBase(request, options, callback);
   }
 
   // --------------------
@@ -604,89 +498,67 @@ class ContextsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified session resource name string.
+   * Return a fully-qualified project resource name string.
    *
    * @param {String} project
-   * @param {String} session
    * @returns {String}
    */
-  sessionPath(project, session) {
-    return this._pathTemplates.sessionPathTemplate.render({
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
       project: project,
-      session: session,
     });
   }
 
   /**
-   * Return a fully-qualified context resource name string.
+   * Return a fully-qualified knowledge_base resource name string.
    *
    * @param {String} project
-   * @param {String} session
-   * @param {String} context
+   * @param {String} knowledgeBase
    * @returns {String}
    */
-  contextPath(project, session, context) {
-    return this._pathTemplates.contextPathTemplate.render({
+  knowledgeBasePath(project, knowledgeBase) {
+    return this._pathTemplates.knowledgeBasePathTemplate.render({
       project: project,
-      session: session,
-      context: context,
+      knowledge_base: knowledgeBase,
     });
   }
 
   /**
-   * Parse the sessionName from a session resource.
+   * Parse the projectName from a project resource.
    *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
-   * Parse the sessionName from a session resource.
+   * Parse the knowledgeBaseName from a knowledge_base resource.
    *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
-   * @returns {String} - A string representing the session.
-   */
-  matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
-  }
-
-  /**
-   * Parse the contextName from a context resource.
-   *
-   * @param {String} contextName
-   *   A fully-qualified path representing a context resources.
+   * @param {String} knowledgeBaseName
+   *   A fully-qualified path representing a knowledge_base resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).project;
+  matchProjectFromKnowledgeBaseName(knowledgeBaseName) {
+    return this._pathTemplates.knowledgeBasePathTemplate.match(
+      knowledgeBaseName
+    ).project;
   }
 
   /**
-   * Parse the contextName from a context resource.
+   * Parse the knowledgeBaseName from a knowledge_base resource.
    *
-   * @param {String} contextName
-   *   A fully-qualified path representing a context resources.
-   * @returns {String} - A string representing the session.
+   * @param {String} knowledgeBaseName
+   *   A fully-qualified path representing a knowledge_base resources.
+   * @returns {String} - A string representing the knowledge_base.
    */
-  matchSessionFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).session;
-  }
-
-  /**
-   * Parse the contextName from a context resource.
-   *
-   * @param {String} contextName
-   *   A fully-qualified path representing a context resources.
-   * @returns {String} - A string representing the context.
-   */
-  matchContextFromContextName(contextName) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).context;
+  matchKnowledgeBaseFromKnowledgeBaseName(knowledgeBaseName) {
+    return this._pathTemplates.knowledgeBasePathTemplate.match(
+      knowledgeBaseName
+    ).knowledge_base;
   }
 }
 
-module.exports = ContextsClient;
+module.exports = KnowledgeBasesClient;

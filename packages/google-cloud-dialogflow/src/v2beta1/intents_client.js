@@ -102,7 +102,7 @@ class IntentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -137,10 +137,6 @@ class IntentsClient {
       intentPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      agentPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agents/{agent}'
-      ),
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -153,7 +149,7 @@ class IntentsClient {
         'intents'
       ),
     };
-    var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -733,7 +729,7 @@ class IntentsClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.agentPath('[PROJECT]', '[AGENT]');
+   * var formattedParent = client.projectAgentPath('[PROJECT]');
    * var languageCode = '';
    * var request = {
    *   parent: formattedParent,
@@ -763,7 +759,7 @@ class IntentsClient {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.agentPath('[PROJECT]', '[AGENT]');
+   * var formattedParent = client.projectAgentPath('[PROJECT]');
    * var languageCode = '';
    * var request = {
    *   parent: formattedParent,
@@ -841,7 +837,7 @@ class IntentsClient {
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * var formattedParent = client.projectAgentPath('[PROJECT]');
    * var intents = [];
    * var request = {
    *   parent: formattedParent,
@@ -871,7 +867,7 @@ class IntentsClient {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * var formattedParent = client.projectAgentPath('[PROJECT]');
    * var intents = [];
    * var request = {
    *   parent: formattedParent,
@@ -946,32 +942,6 @@ class IntentsClient {
   }
 
   /**
-   * Return a fully-qualified agent resource name string.
-   *
-   * @param {String} project
-   * @param {String} agent
-   * @returns {String}
-   */
-  agentPath(project, agent) {
-    return this._pathTemplates.agentPathTemplate.render({
-      project: project,
-      agent: agent,
-    });
-  }
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Parse the projectAgentName from a project_agent resource.
    *
    * @param {String} projectAgentName
@@ -1003,39 +973,6 @@ class IntentsClient {
    */
   matchIntentFromIntentName(intentName) {
     return this._pathTemplates.intentPathTemplate.match(intentName).intent;
-  }
-
-  /**
-   * Parse the agentName from a agent resource.
-   *
-   * @param {String} agentName
-   *   A fully-qualified path representing a agent resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate.match(agentName).project;
-  }
-
-  /**
-   * Parse the agentName from a agent resource.
-   *
-   * @param {String} agentName
-   *   A fully-qualified path representing a agent resources.
-   * @returns {String} - A string representing the agent.
-   */
-  matchAgentFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate.match(agentName).agent;
-  }
-
-  /**
-   * Parse the projectName from a project resource.
-   *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

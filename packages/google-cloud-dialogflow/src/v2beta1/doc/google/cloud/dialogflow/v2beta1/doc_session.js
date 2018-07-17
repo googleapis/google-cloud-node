@@ -22,13 +22,12 @@
  *   Required. The name of the session this query is sent to. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
  *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
- *   ID>/sessions/<Session ID>`. Note: Environments and users are under
- *   construction and will be available soon. If <Environment ID> is not
- *   specified, we assume default 'draft' environment. If <User ID> is not
- *   specified, we are using "-". It’s up to the API caller to choose an
- *   appropriate <Session ID>. and <User Id>. They can be a random numbers or
- *   some type of user and session identifiers (preferably hashed). The length
- *   of the <Session ID> and <User ID> must not exceed 36 characters.
+ *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+ *   default 'draft' environment. If `User ID` is not specified, we are using
+ *   "-". It’s up to the API caller to choose an appropriate `Session ID` and
+ *   `User Id`. They can be a random numbers or some type of user and session
+ *   identifiers (preferably hashed). The length of the `Session ID` and
+ *   `User ID` must not exceed 36 characters.
  *
  * @property {Object} queryParams
  *   Optional. The parameters of this query.
@@ -46,6 +45,13 @@
  *   3.  an event that specifies which intent to trigger.
  *
  *   This object should have the same structure as [QueryInput]{@link google.cloud.dialogflow.v2beta1.QueryInput}
+ *
+ * @property {Object} outputAudioConfig
+ *   Optional. Instructs the speech synthesizer how to generate the output
+ *   audio. If this field is not set and agent-level speech synthesizer is not
+ *   configured, no output audio is generated.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
  *
  * @property {string} inputAudio
  *   Optional. The natural language speech audio to be processed. This field
@@ -68,7 +74,19 @@ var DetectIntentRequest = {
  *   locate a response in the training example set or for reporting issues.
  *
  * @property {Object} queryResult
- *   The results of the conversational query or event processing.
+ *   The selected results of the conversational query or event processing.
+ *   See `alternative_query_results` for additional potential results.
+ *
+ *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
+ *
+ * @property {Object[]} alternativeQueryResults
+ *   If Knowledge Connectors are enabled, there could be more than one result
+ *   returned for a given query or event and this field will contain all results
+ *   except for the top one which is captured in query_result. The alternative
+ *   results are ordered by decreasing
+ *   `QueryResult.intent_detection_confidence`. If Knowledge Connectors are
+ *   disabled this field will be empty  at which point those additional results
+ *   will be surfaced here.
  *
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
  *
@@ -77,6 +95,16 @@ var DetectIntentRequest = {
  *   is never populated in webhook requests.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
+ * @property {string} outputAudio
+ *   The audio data bytes encoded as specified in the request.
+ *
+ * @property {Object} outputAudioConfig
+ *   Instructs the speech synthesizer how to generate the output audio. This
+ *   field is populated from the agent-level speech synthesizer configuration,
+ *   if enabled.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
  *
  * @typedef DetectIntentResponse
  * @memberof google.cloud.dialogflow.v2beta1
@@ -122,6 +150,23 @@ var DetectIntentResponse = {
  *   associated with the agent. Arbitrary JSON objects are supported.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {string[]} knowledgeBaseNames
+ *   Optional. KnowledgeBases to get alternative results from. If not set, the
+ *   KnowledgeBases enabled in the agent (through UI) will be used.
+ *   Format:  `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+ *
+ *   Note: This field is `repeated` for forward compatibility, currently only
+ *   the first one is supported, we may return an error if multiple
+ *   KnowledgeBases are specified.
+ *
+ * @property {Object} sentimentAnalysisRequestConfig
+ *   Optional. Configures the type of sentiment analysis to perform. If not
+ *   provided, sentiment analysis is not performed.
+ *   Note: Sentiment Analysis is only currently available for Enterprise Edition
+ *   agents.
+ *
+ *   This object should have the same structure as [SentimentAnalysisRequestConfig]{@link google.cloud.dialogflow.v2beta1.SentimentAnalysisRequestConfig}
  *
  * @typedef QueryParameters
  * @memberof google.cloud.dialogflow.v2beta1
@@ -187,10 +232,10 @@ var QueryInput = {
  *   correct. The default of 0.0 is a sentinel value indicating that confidence
  *   was not set.
  *
- *   You should not rely on this field as it isn't guaranteed to be accurate, or
- *   even set. In particular this field isn't set in Webhook calls and for
- *   StreamingDetectIntent since the streaming endpoint has separate confidence
- *   estimates per portion of the audio in StreamingRecognitionResult.
+ *   This field is not guaranteed to be accurate or set. In particular this
+ *   field isn't set for StreamingDetectIntent since the streaming endpoint has
+ *   separate confidence estimates per portion of the audio in
+ *   StreamingRecognitionResult.
  *
  * @property {string} action
  *   The action name from the matched intent.
@@ -243,12 +288,26 @@ var QueryInput = {
  * @property {number} intentDetectionConfidence
  *   The intent detection confidence. Values range from 0.0
  *   (completely uncertain) to 1.0 (completely certain).
+ *   If there are `multiple knowledge_answers` messages, this value is set to
+ *   the greatest `knowledgeAnswers.match_confidence` value in the list.
  *
  * @property {Object} diagnosticInfo
  *   The free-form diagnostic info. For example, this field
  *   could contain webhook call latency.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {Object} sentimentAnalysisResult
+ *   The sentiment analysis result, which depends on the
+ *   `sentiment_analysis_request_config` specified in the request.
+ *
+ *   This object should have the same structure as [SentimentAnalysisResult]{@link google.cloud.dialogflow.v2beta1.SentimentAnalysisResult}
+ *
+ * @property {Object} knowledgeAnswers
+ *   The result from Knowledge Connector (if any), ordered by decreasing
+ *   `KnowledgeAnswers.match_confidence`.
+ *
+ *   This object should have the same structure as [KnowledgeAnswers]{@link google.cloud.dialogflow.v2beta1.KnowledgeAnswers}
  *
  * @typedef QueryResult
  * @memberof google.cloud.dialogflow.v2beta1
@@ -259,13 +318,105 @@ var QueryResult = {
 };
 
 /**
+ * Represents the result of querying a Knowledge base.
+ *
+ * @property {Object[]} answers
+ *   A list of answers from Knowledge Connector.
+ *
+ *   This object should have the same structure as [Answer]{@link google.cloud.dialogflow.v2beta1.Answer}
+ *
+ * @typedef KnowledgeAnswers
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.KnowledgeAnswers definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
+ */
+var KnowledgeAnswers = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * An answer from Knowledge Connector.
+   *
+   * @property {string} source
+   *   Indicates which Knowledge Document this answer was extracted from.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+   *   ID>/documents/<Document ID>`.
+   *
+   * @property {string} faqQuestion
+   *   The corresponding FAQ question if the answer was extracted from a FAQ
+   *   Document, empty otherwise.
+   *
+   * @property {string} answer
+   *   The piece of text from the `source` knowledge base document that answers
+   *   this conversational query.
+   *
+   * @property {number} matchConfidenceLevel
+   *   The system's confidence level that this knowledge answer is a good match
+   *   for this conversational query.
+   *   NOTE: The confidence level for a given `<query, answer>` pair may change
+   *   without notice, as it depends on models that are constantly being
+   *   improved. However, it will change less frequently than the confidence
+   *   score below, and should be preferred for referencing the quality of an
+   *   answer.
+   *
+   *   The number should be among the values of [MatchConfidenceLevel]{@link google.cloud.dialogflow.v2beta1.MatchConfidenceLevel}
+   *
+   * @property {number} matchConfidence
+   *   The system's confidence score that this Knowledge answer is a good match
+   *   for this converstational query, range from 0.0 (completely uncertain)
+   *   to 1.0 (completely certain).
+   *   Note: The confidence score is likely to vary somewhat (possibly even for
+   *   identical requests), as the underlying model is under constant
+   *   improvement, we may deprecate it in the future. We recommend using
+   *   `match_confidence_level` which should be generally more stable.
+   *
+   * @typedef Answer
+   * @memberof google.cloud.dialogflow.v2beta1
+   * @see [google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
+   */
+  Answer: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+
+    /**
+     * Represents the system's confidence that this knowledge answer is a good
+     * match for this conversational query.
+     *
+     * @enum {number}
+     * @memberof google.cloud.dialogflow.v2beta1
+     */
+    MatchConfidenceLevel: {
+
+      /**
+       * Not specified.
+       */
+      MATCH_CONFIDENCE_LEVEL_UNSPECIFIED: 0,
+
+      /**
+       * Indicates that the confidence is low.
+       */
+      LOW: 1,
+
+      /**
+       * Indicates our confidence is medium.
+       */
+      MEDIUM: 2,
+
+      /**
+       * Indicates our confidence is high.
+       */
+      HIGH: 3
+    }
+  }
+};
+
+/**
  * The top-level message sent by the client to the
  * `StreamingDetectIntent` method.
  *
  * Multiple request messages should be sent in order:
  *
  * 1.  The first message must contain `session`, `query_input` plus optionally
- *     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
+ *     `query_params` and/or `single_utterance`. If the client wants to receive
+ *     an audio response, it should also contain `output_audio_config`.
+ *     The message must not contain `input_audio`.
  *
  * 2.  If `query_input` was set to a streaming input audio config,
  *     all subsequent messages must contain only `input_audio`.
@@ -276,13 +427,12 @@ var QueryResult = {
  *   Format of the session name:
  *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
  *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
- *   ID>/sessions/<Session ID>`. Note: Environments and users are under
- *   construction and will be available soon. If <Environment ID> is not
- *   specified, we assume default 'draft' environment. If <User ID> is not
- *   specified, we are using "-". It’s up to the API caller to choose an
- *   appropriate <Session ID>. and <User Id>. They can be a random numbers or
- *   some type of user and session identifiers (preferably hashed). The length
- *   of the <Session ID> and <User ID> must not exceed 36 characters.
+ *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+ *   default 'draft' environment. If `User ID` is not specified, we are using
+ *   "-". It’s up to the API caller to choose an appropriate `Session ID` and
+ *   `User Id`. They can be a random numbers or some type of user and session
+ *   identifiers (preferably hashed). The length of the `Session ID` and
+ *   `User ID` must not exceed 36 characters.
  *
  * @property {Object} queryParams
  *   Optional. The parameters of this query.
@@ -311,6 +461,13 @@ var QueryResult = {
  *   needed.
  *   This setting is ignored when `query_input` is a piece of text or an event.
  *
+ * @property {Object} outputAudioConfig
+ *   Optional. Instructs the speech synthesizer how to generate the output
+ *   audio. If this field is not set and agent-level speech synthesizer is not
+ *   configured, no output audio is generated.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
+ *
  * @property {string} inputAudio
  *   Optional. The input audio content to be recognized. Must be sent if
  *   `query_input` was set to a streaming input audio config. The complete audio
@@ -335,8 +492,13 @@ var StreamingDetectIntentRequest = {
  *     complete transcript of what the user said. The last `recognition_result`
  *     has `is_final` set to `true`.
  *
- * 2.  The next message contains `response_id`, `query_result`
- *     and optionally `webhook_status` if a WebHook was called.
+ * 2.  The next message contains `response_id`, `query_result`,
+ *     `alternative_query_results` and optionally `webhook_status` if a WebHook
+ *     was called.
+ *
+ * 3.  If `output_audio_config` was specified in the request or agent-level
+ *     speech synthesizer is configured, all subsequent messages contain
+ *     `output_audio` and `output_audio_config`.
  *
  * @property {string} responseId
  *   The unique identifier of the response. It can be used to
@@ -348,7 +510,19 @@ var StreamingDetectIntentRequest = {
  *   This object should have the same structure as [StreamingRecognitionResult]{@link google.cloud.dialogflow.v2beta1.StreamingRecognitionResult}
  *
  * @property {Object} queryResult
- *   The result of the conversational query or event processing.
+ *   The selected results of the conversational query or event processing.
+ *   See `alternative_query_results` for additional potential results.
+ *
+ *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
+ *
+ * @property {Object[]} alternativeQueryResults
+ *   If Knowledge Connectors are enabled, there could be more than one result
+ *   returned for a given query or event and this field will contain all results
+ *   except for the top one which is captured in query_result. The alternative
+ *   results are ordered by decreasing
+ *   `QueryResult.intent_detection_confidence`. If Knowledge Connectors are
+ *   disabled this field will be empty  at which point those additional results
+ *   will be surfaced here.
  *
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
  *
@@ -356,6 +530,16 @@ var StreamingDetectIntentRequest = {
  *   Specifies the status of the webhook request.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
+ * @property {string} outputAudio
+ *   The audio data bytes encoded as specified in the request.
+ *
+ * @property {Object} outputAudioConfig
+ *   Instructs the speech synthesizer how to generate the output audio. This
+ *   field is populated from the agent-level speech synthesizer configuration,
+ *   if enabled.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
  *
  * @typedef StreamingDetectIntentResponse
  * @memberof google.cloud.dialogflow.v2beta1
@@ -473,8 +657,10 @@ var StreamingRecognitionResult = {
  *
  * @property {number} sampleRateHertz
  *   Required. Sample rate (in Hertz) of the audio content sent in the query.
- *   Refer to [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics) for more
- *   details.
+ *   Refer to
+ *   [Cloud Speech API
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics) for
+ *   more details.
  *
  * @property {string} languageCode
  *   Required. The language of the supplied audio. Dialogflow does not do
@@ -486,7 +672,22 @@ var StreamingRecognitionResult = {
  * @property {string[]} phraseHints
  *   Optional. The collection of phrase hints which are used to boost accuracy
  *   of speech recognition.
- *   Refer to [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics#phrase-hints)
+ *   Refer to
+ *   [Cloud Speech API
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
+ *   for more details.
+ *
+ * @property {string} model
+ *   Optional. Which Speech model to select for the given request. Select the
+ *   model best suited to your domain to get best results. If a model is not
+ *   explicitly specified, then we auto-select a model based on the parameters
+ *   in the InputAudioConfig.
+ *   If enhanced speech model is enabled for the agent and an enhanced
+ *   version of the specified model for the language does not exist, then the
+ *   speech is recognized using the standard version of the specified model.
+ *   Refer to
+ *   [Cloud Speech API
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
  *   for more details.
  *
  * @typedef InputAudioConfig
@@ -548,8 +749,63 @@ var EventInput = {
 };
 
 /**
+ * Configures the types of sentiment analysis to perform.
+ *
+ * @property {boolean} analyzeQueryTextSentiment
+ *   Optional. Instructs the service to perform sentiment analysis on
+ *   `query_text`. If not provided, sentiment analysis is not performed on
+ *   `query_text`.
+ *
+ * @typedef SentimentAnalysisRequestConfig
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.SentimentAnalysisRequestConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
+ */
+var SentimentAnalysisRequestConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The result of sentiment analysis as configured by
+ * `sentiment_analysis_request_config`.
+ *
+ * @property {Object} queryTextSentiment
+ *   The sentiment analysis result for `query_text`.
+ *
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.dialogflow.v2beta1.Sentiment}
+ *
+ * @typedef SentimentAnalysisResult
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.SentimentAnalysisResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
+ */
+var SentimentAnalysisResult = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The sentiment, such as positive/negative feeling or association, for a unit
+ * of analysis, such as the query text.
+ *
+ * @property {number} score
+ *   Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
+ *   sentiment).
+ *
+ * @property {number} magnitude
+ *   A non-negative number in the [0, +inf) range, which represents the absolute
+ *   magnitude of sentiment, regardless of score (positive or negative).
+ *
+ * @typedef Sentiment
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.Sentiment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
+ */
+var Sentiment = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Audio encoding of the audio content sent in the conversational query request.
- * Refer to the [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics) for more
+ * Refer to the
+ * [Cloud Speech API
+ * documentation](https://cloud.google.com/speech-to-text/docs/basics) for more
  * details.
  *
  * @enum {number}

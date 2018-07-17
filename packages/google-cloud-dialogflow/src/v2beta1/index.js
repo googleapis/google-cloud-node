@@ -16,14 +16,18 @@
 
 const AgentsClient = require('./agents_client');
 const ContextsClient = require('./contexts_client');
+const DocumentsClient = require('./documents_client');
 const EntityTypesClient = require('./entity_types_client');
 const IntentsClient = require('./intents_client');
+const KnowledgeBasesClient = require('./knowledge_bases_client');
 const SessionEntityTypesClient = require('./session_entity_types_client');
 const SessionsClient = require('./sessions_client');
 
 module.exports.AgentsClient = AgentsClient;
 module.exports.ContextsClient = ContextsClient;
+module.exports.DocumentsClient = DocumentsClient;
 module.exports.EntityTypesClient = EntityTypesClient;
 module.exports.IntentsClient = IntentsClient;
+module.exports.KnowledgeBasesClient = KnowledgeBasesClient;
 module.exports.SessionEntityTypesClient = SessionEntityTypesClient;
 module.exports.SessionsClient = SessionsClient;
