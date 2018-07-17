@@ -21,11 +21,50 @@ import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as sinon from 'sinon';
 
-import {createProfiler} from '../src/index';
+import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
 import * as heapProfiler from '../src/profilers/heap-profiler';
 
 const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
+
+describe('nodeVersionOkay', () => {
+  it('should accept alpha versions', () => {
+    assert.equal(true, nodeVersionOkay('v11.0.0-alpha.1'));
+  });
+  it('should accept beta versions', () => {
+    assert.equal(true, nodeVersionOkay('v8.9.10-beta.2'));
+  });
+  it('should accept nightly versions', () => {
+    assert.equal(true, nodeVersionOkay('v11.0.0-nightly2018000000'));
+  });
+  it('should accept pre-release versions', () => {
+    assert.equal(true, nodeVersionOkay('v11.0.0-pre'));
+  });
+  it('should accept v6.12.3', () => {
+    assert.equal(true, nodeVersionOkay('v6.12.3'));
+  });
+  it('should not accept v6.12.2', () => {
+    assert.equal(false, nodeVersionOkay('v6.12.2'));
+  });
+  it('should accept v8.9.4', () => {
+    assert.equal(true, nodeVersionOkay('v8.9.4'));
+  });
+  it('should not accept v8.9.3', () => {
+    assert.equal(false, nodeVersionOkay('v8.9.3'));
+  });
+  it('should accept v10.4.1', () => {
+    assert.equal(true, nodeVersionOkay('v10.4.1'));
+  });
+  it('should not accept v10.4.0', () => {
+    assert.equal(false, nodeVersionOkay('v10.4.0'));
+  });
+  it('should accept node 7', () => {
+    assert.equal(true, nodeVersionOkay('v7.7.7'));
+  });
+  it('should accept node 9', () => {
+    assert.equal(true, nodeVersionOkay('v9.9.9'));
+  });
+});
 
 describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;

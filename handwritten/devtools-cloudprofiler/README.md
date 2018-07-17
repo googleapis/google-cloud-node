@@ -14,8 +14,21 @@ deprecation policy.*
 
 ## Prerequisites
 
-1. Your application will need to be using Node.js version 6.12.3 or greater, 
-or Node.js 8.9.4 or greater.
+1. Your application will need to be using Node.js version 6.12.3 or greater,
+Node.js 8.9.4 or greater, or Node.js 10.4.1 or greater. The profiler will not
+be enabled when using earlier versions of Node 6, 8, and 10 because the
+profiler is not stable with those versions of Node.js.
+    * Versions of Node.js 6 prior to 6.12.3 are impacted by
+    [this](https://bugs.chromium.org/p/v8/issues/detail?id=4959) issue, which can
+    cause segmentation faults when heap profiling is enabled.
+    * Versions of Node.js before Node.js 8 prior to 8.9.4 are impacted by
+    [this](https://bugs.chromium.org/p/v8/issues/detail?id=6623) issue, which
+    causes a memory leak when time profiling is enabled.
+    * Versions of Node.js 10 prior to 10.4.1 are impacted by
+    [this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
+    which can cause garbage collection to take several minutes when heap
+    profiling is enabled.
+
 1. You will need a project in the [Google Developers Console][cloud-console]. 
 Your application can run anywhere, but the profiler data is associated with a
 particular project.

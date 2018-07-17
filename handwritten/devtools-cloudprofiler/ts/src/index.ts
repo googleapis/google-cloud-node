@@ -23,6 +23,7 @@ import * as path from 'path';
 import {normalize} from 'path';
 import * as pify from 'pify';
 import * as semver from 'semver';
+import {SemVer} from 'semver';
 
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {Profiler} from './profiler';
@@ -121,19 +122,32 @@ async function initConfigMetadata(config: ProfilerConfig):
   return config;
 }
 
+
+/**
+ * Returns true if the version passed in satifised version requirements
+ * specified in the profiler's package.json.
+ *
+ * Exported for testing.
+ */
+export function nodeVersionOkay(version: string|SemVer): boolean {
+  // Coerce version if possible, to remove any pre-release, alpha, beta, etc
+  // tags.
+  version = semver.coerce(version) || version;
+  return semver.satisfies(version, pjson.engines.node);
+}
+
 /**
  * Initializes the config, and starts heap profiler if the heap profiler is
  * needed. Returns a profiler if creation is successful. Otherwise, returns
  * rejected promise.
  */
 export async function createProfiler(config: Config): Promise<Profiler> {
-  // Coerce version if possible, to remove any pre-release, alpha, beta, etc
-  // tags.
-  const version = semver.coerce(process.version) || process.version;
-  if (!semver.satisfies(version, pjson.engines.node)) {
+  if (!nodeVersionOkay(process.version)) {
     throw new Error(
         `Could not start profiler: node version ${process.version}` +
-        ` does not satisfies "${pjson.engines.node}"`);
+        ` does not satisfies "${pjson.engines.node}"` +
+        '\nSee https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs#prerequisites' +
+        ' for details.');
   }
 
   let profilerConfig: ProfilerConfig = initConfigLocal(config);
