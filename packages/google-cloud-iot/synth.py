@@ -37,6 +37,7 @@ s.copy(
 )
 
 # Streaming is broken and missing grpc handling
+# https://github.com/googleapis/gapic-generator/issues/2152
 s.replace(
     'src/v1/device_manager_client.js',
     f'(listDeviceRegistriesStream\(.*\n\s+options = .*\n)(\n\s+return)',
