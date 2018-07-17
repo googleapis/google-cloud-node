@@ -36,10 +36,21 @@ s.copy(
     excludes=['package.json', 'README.md', 'src/index.js'],
 )
 
+# Streaming is broken and missing grpc handling
+s.replace(
+    'src/v1/device_manager_client.js',
+    f'(listDeviceRegistriesStream\(.*\n\s+options = .*\n)(\n\s+return)',
+    '''\g<1>options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });\n\g<2>''')
+
 #
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'ci'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
-
