@@ -46,6 +46,7 @@ const gapic = Object.freeze({
   v1: require('./v1'),
   v1p1beta1: require('./v1p1beta1'),
   v1p2beta1: require('./v1p2beta1'),
+  v1p3beta1: require('./v1p3beta1'),
 });
 
 // Augment the SpeechClient objects with the helpers.
@@ -102,6 +103,13 @@ module.exports.v1p1beta1 = gapic.v1p1beta1;
  *   Reference to {@link v1p2beta1.ImageAnnotatorClient}
  */
 module.exports.v1p2beta1 = gapic.v1p2beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} ImageAnnotatorClient
+ *   Reference to {@link v1p3beta1.ImageAnnotatorClient}
+ */
+module.exports.v1p3beta1 = gapic.v1p3beta1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);
