@@ -16,6 +16,10 @@
 
 import {Writable} from 'stream';
 import * as util from 'util';
+import * as express from './middleware/express';
+
+// Export the express middleware as 'express'.
+export {express};
 
 const logging = require('@google-cloud/logging');
 
@@ -66,7 +70,7 @@ export class LoggingBunyan extends Writable {
   private logName: string;
   private resource: types.MonitoredResource|undefined;
   private serviceContext: types.ServiceContext|undefined;
-  private stackdriverLog:
+  stackdriverLog:
       types.StackdriverLog;  // TODO: add type for @google-cloud/logging
   constructor(options?: types.Options) {
     options = options || {};

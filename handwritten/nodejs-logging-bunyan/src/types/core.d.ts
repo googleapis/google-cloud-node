@@ -91,17 +91,20 @@ export interface ServiceContext {
 }
 
 export interface StackdriverLog {
-  critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  error: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  info: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  notice: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  warning: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  write: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  alert: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>,
-  entry: (metadata: {}, data: {}|string) => StackdriverEntry
-}export interface Credentials {
+  critical: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  debug: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  emergency: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  error: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  info: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  notice: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  warning: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  write: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  alert: (entry: StackdriverEntry|StackdriverEntry[], options?: {}, callback?: (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
+  entry: (metadata: {}, data: {}|string) => StackdriverEntry;
+  logging: any;
+}
+
+export interface Credentials {
   client_email?: string;
   private_key?: string;
 }
