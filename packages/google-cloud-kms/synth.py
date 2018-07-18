@@ -22,6 +22,7 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
 
 version = 'v1'
 
@@ -34,6 +35,9 @@ s.copy(
     library,
     excludes=['package.json', 'README.md', 'src/index.js'],
 )
+
+templates = common_templates.node_library(package_name="@google-cloud/kms")
+s.copy(templates)
 
 #
 # Node.js specific cleanup
