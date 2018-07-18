@@ -18,7 +18,7 @@ describe('ImageAnnotatorSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const vision = require('../src');
 
-    var client = new vision.v1p2beta1.ImageAnnotatorClient({
+    var client = new vision.v1p3beta1.ImageAnnotatorClient({
       // optional auth parameters.
     });
 
