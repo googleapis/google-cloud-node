@@ -95,7 +95,7 @@
     "cpy-cli": "^2.0.0",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-node": "^7.0.0",
     "eslint-plugin-prettier": "^2.6.1",
     "ncp": "^2.0.0",
     "once": "^1.4.0",
