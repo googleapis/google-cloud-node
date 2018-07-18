@@ -1,0 +1,22 @@
+{
+  "name": "@google-cloud/automl-samples",
+  "description": "Samples for the Cloud KMS Client Library for Node.js.",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=6"
+  },
+  "repository": "googleapis/nodejs-kms",
+  "private": true,
+  "nyc": {
+    "exclude": [
+      "**/*.test.js"
+    ]
+  },
+  "scripts": {},
+  "dependencies": {
+    "@google-cloud/kms": "^0.1.0"
+  },
+  "devDependencies": {}
+}
