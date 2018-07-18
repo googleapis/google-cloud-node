@@ -78,7 +78,7 @@ var fakePaginator = {
 
     extended = true;
     methods = arrify(methods);
-    assert.equal(Class.name, 'Region');
+    assert.strictEqual(Class.name, 'Region');
     assert.deepEqual(methods, [
       'getAddresses',
       'getOperations',

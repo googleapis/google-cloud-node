@@ -50,7 +50,7 @@ var fakePaginator = {
 
     extended = true;
     methods = arrify(methods);
-    assert.equal(Class.name, 'InstanceGroup');
+    assert.strictEqual(Class.name, 'InstanceGroup');
     assert.deepEqual(methods, ['getVMs']);
   },
   streamify: function(methodName) {
