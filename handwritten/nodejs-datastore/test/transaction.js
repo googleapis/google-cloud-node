@@ -158,8 +158,8 @@ describe('Transaction', function() {
 
     it('should commit', function(done) {
       transaction.request_ = function(config) {
-        assert.equal(config.client, 'DatastoreClient');
-        assert.equal(config.method, 'commit');
+        assert.strictEqual(config.client, 'DatastoreClient');
+        assert.strictEqual(config.method, 'commit');
         assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
@@ -255,10 +255,10 @@ describe('Transaction', function() {
 
       transaction.commit();
 
-      assert.equal(deleteCalled, 1);
-      assert.equal(saveCalled, 1);
+      assert.strictEqual(deleteCalled, 1);
+      assert.strictEqual(saveCalled, 1);
 
-      assert.equal(args.length, 2);
+      assert.strictEqual(args.length, 2);
 
       // Save arguments must come first.
       assert.deepEqual(args, [[saveArg1, saveArg2], [deleteArg1, deleteArg2]]);
@@ -282,8 +282,8 @@ describe('Transaction', function() {
       transaction.request_ = util.noop;
 
       transaction.commit();
-      assert.equal(deleteCalled, 0);
-      assert.equal(saveCalled, 1);
+      assert.strictEqual(deleteCalled, 0);
+      assert.strictEqual(saveCalled, 1);
     });
 
     it('should not squash key-incomplete mutations', function(done) {
@@ -373,10 +373,10 @@ describe('Transaction', function() {
 
       transaction.delete(keys);
 
-      assert.equal(transaction.modifiedEntities_.length, keys.length);
+      assert.strictEqual(transaction.modifiedEntities_.length, keys.length);
 
       transaction.modifiedEntities_.forEach(function(queuedEntity) {
-        assert.equal(queuedEntity.method, 'delete');
+        assert.strictEqual(queuedEntity.method, 'delete');
         assert(keys.indexOf(queuedEntity.entity.key) > -1);
         assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
@@ -391,7 +391,7 @@ describe('Transaction', function() {
     it('should rollback', function(done) {
       transaction.request_ = function(config) {
         assert.strictEqual(config.client, 'DatastoreClient');
-        assert.equal(config.method, 'rollback');
+        assert.strictEqual(config.method, 'rollback');
         assert.strictEqual(config.gaxOptions, undefined);
         done();
       };
@@ -590,7 +590,7 @@ describe('Transaction', function() {
 
         transaction.run(function(err) {
           assert.ifError(err);
-          assert.equal(transaction.id, TRANSACTION_ID);
+          assert.strictEqual(transaction.id, TRANSACTION_ID);
           done();
         });
       });
@@ -616,10 +616,10 @@ describe('Transaction', function() {
 
       transaction.save(entities);
 
-      assert.equal(transaction.modifiedEntities_.length, entities.length);
+      assert.strictEqual(transaction.modifiedEntities_.length, entities.length);
 
       transaction.modifiedEntities_.forEach(function(queuedEntity) {
-        assert.equal(queuedEntity.method, 'save');
+        assert.strictEqual(queuedEntity.method, 'save');
 
         var match = entities.filter(function(ent) {
           return ent.key === queuedEntity.entity.key;

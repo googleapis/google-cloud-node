@@ -62,9 +62,9 @@ describe('Query', function() {
       var query = new Query(['kind1']).filter('date', '<=', now);
       var filter = query.filters[0];
 
-      assert.equal(filter.name, 'date');
-      assert.equal(filter.op, '<=');
-      assert.equal(filter.val, now);
+      assert.strictEqual(filter.name, 'date');
+      assert.strictEqual(filter.op, '<=');
+      assert.strictEqual(filter.val, now);
     });
 
     it('should recognize all the different operators', function() {
@@ -76,37 +76,37 @@ describe('Query', function() {
         .filter('size', '<', 10)
         .filter('something', '>=', 11);
 
-      assert.equal(query.filters[0].name, 'date');
-      assert.equal(query.filters[0].op, '<=');
+      assert.strictEqual(query.filters[0].name, 'date');
+      assert.strictEqual(query.filters[0].op, '<=');
       assert.strictEqual(query.filters[0].val, now);
 
-      assert.equal(query.filters[1].name, 'name');
-      assert.equal(query.filters[1].op, '=');
-      assert.equal(query.filters[1].val, 'Title');
+      assert.strictEqual(query.filters[1].name, 'name');
+      assert.strictEqual(query.filters[1].op, '=');
+      assert.strictEqual(query.filters[1].val, 'Title');
 
-      assert.equal(query.filters[2].name, 'count');
-      assert.equal(query.filters[2].op, '>');
+      assert.strictEqual(query.filters[2].name, 'count');
+      assert.strictEqual(query.filters[2].op, '>');
       assert.strictEqual(query.filters[2].val, 20);
 
-      assert.equal(query.filters[3].name, 'size');
-      assert.equal(query.filters[3].op, '<');
+      assert.strictEqual(query.filters[3].name, 'size');
+      assert.strictEqual(query.filters[3].op, '<');
       assert.strictEqual(query.filters[3].val, 10);
 
-      assert.equal(query.filters[4].name, 'something');
-      assert.equal(query.filters[4].op, '>=');
+      assert.strictEqual(query.filters[4].name, 'something');
+      assert.strictEqual(query.filters[4].op, '>=');
       assert.strictEqual(query.filters[4].val, 11);
     });
 
     it('should remove any whitespace surrounding the filter name', function() {
       var query = new Query(['kind1']).filter('   count    ', '>', 123);
 
-      assert.equal(query.filters[0].name, 'count');
+      assert.strictEqual(query.filters[0].name, 'count');
     });
 
     it('should remove any whitespace surrounding the operator', function() {
       var query = new Query(['kind1']).filter('count', '       <        ', 123);
 
-      assert.equal(query.filters[0].op, '<');
+      assert.strictEqual(query.filters[0].op, '<');
     });
 
     it('should return the query instance', function() {
@@ -120,9 +120,9 @@ describe('Query', function() {
       var query = new Query(['kind1']).filter('name', 'Stephen');
       var filter = query.filters[0];
 
-      assert.equal(filter.name, 'name');
-      assert.equal(filter.op, '=');
-      assert.equal(filter.val, 'Stephen');
+      assert.strictEqual(filter.name, 'name');
+      assert.strictEqual(filter.op, '=');
+      assert.strictEqual(filter.val, 'Stephen');
     });
   });
 
@@ -130,8 +130,8 @@ describe('Query', function() {
     it('should support ancestor filtering', function() {
       var query = new Query(['kind1']).hasAncestor(['kind2', 123]);
 
-      assert.equal(query.filters[0].name, '__key__');
-      assert.equal(query.filters[0].op, 'HAS_ANCESTOR');
+      assert.strictEqual(query.filters[0].name, '__key__');
+      assert.strictEqual(query.filters[0].op, 'HAS_ANCESTOR');
       assert.deepEqual(query.filters[0].val, ['kind2', 123]);
     });
 
@@ -147,22 +147,22 @@ describe('Query', function() {
     it('should default ordering to ascending', function() {
       var query = new Query(['kind1']).order('name');
 
-      assert.equal(query.orders[0].name, 'name');
-      assert.equal(query.orders[0].sign, '+');
+      assert.strictEqual(query.orders[0].name, 'name');
+      assert.strictEqual(query.orders[0].sign, '+');
     });
 
     it('should support ascending order', function() {
       var query = new Query(['kind1']).order('name');
 
-      assert.equal(query.orders[0].name, 'name');
-      assert.equal(query.orders[0].sign, '+');
+      assert.strictEqual(query.orders[0].name, 'name');
+      assert.strictEqual(query.orders[0].sign, '+');
     });
 
     it('should support descending order', function() {
       var query = new Query(['kind1']).order('count', {descending: true});
 
-      assert.equal(query.orders[0].name, 'count');
-      assert.equal(query.orders[0].sign, '-');
+      assert.strictEqual(query.orders[0].name, 'count');
+      assert.strictEqual(query.orders[0].sign, '-');
     });
 
     it('should support both ascending and descending', function() {
@@ -170,10 +170,10 @@ describe('Query', function() {
         .order('name')
         .order('count', {descending: true});
 
-      assert.equal(query.orders[0].name, 'name');
-      assert.equal(query.orders[0].sign, '+');
-      assert.equal(query.orders[1].name, 'count');
-      assert.equal(query.orders[1].sign, '-');
+      assert.strictEqual(query.orders[0].name, 'name');
+      assert.strictEqual(query.orders[0].sign, '+');
+      assert.strictEqual(query.orders[1].name, 'count');
+      assert.strictEqual(query.orders[1].sign, '-');
     });
 
     it('should return the query instance', function() {
@@ -230,7 +230,7 @@ describe('Query', function() {
     it('should capture the starting cursor value', function() {
       var query = new Query(['kind1']).start('X');
 
-      assert.equal(query.startVal, 'X');
+      assert.strictEqual(query.startVal, 'X');
     });
 
     it('should return the query instance', function() {
@@ -245,7 +245,7 @@ describe('Query', function() {
     it('should capture the ending cursor value', function() {
       var query = new Query(['kind1']).end('Z');
 
-      assert.equal(query.endVal, 'Z');
+      assert.strictEqual(query.endVal, 'Z');
     });
 
     it('should return the query instance', function() {
