@@ -73,7 +73,7 @@ describe('DlpServiceClient', () => {
 
       client.inspectContent(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -135,7 +135,7 @@ describe('DlpServiceClient', () => {
 
       client.redactImage(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -192,7 +192,7 @@ describe('DlpServiceClient', () => {
 
       client.deidentifyContent(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -249,7 +249,7 @@ describe('DlpServiceClient', () => {
 
       client.reidentifyContent(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -300,7 +300,7 @@ describe('DlpServiceClient', () => {
 
       client.listInfoTypes(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -364,7 +364,7 @@ describe('DlpServiceClient', () => {
 
       client.createInspectTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -434,7 +434,7 @@ describe('DlpServiceClient', () => {
 
       client.updateInspectTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -492,7 +492,7 @@ describe('DlpServiceClient', () => {
 
       client.getInspectTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -559,7 +559,7 @@ describe('DlpServiceClient', () => {
 
       client.listInspectTemplates(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -617,7 +617,7 @@ describe('DlpServiceClient', () => {
 
       client.deleteInspectTemplate(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -680,7 +680,7 @@ describe('DlpServiceClient', () => {
 
       client.createDeidentifyTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -750,7 +750,7 @@ describe('DlpServiceClient', () => {
 
       client.updateDeidentifyTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -820,7 +820,7 @@ describe('DlpServiceClient', () => {
 
       client.getDeidentifyTemplate(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -887,7 +887,7 @@ describe('DlpServiceClient', () => {
 
       client.listDeidentifyTemplates(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -945,7 +945,7 @@ describe('DlpServiceClient', () => {
 
       client.deleteDeidentifyTemplate(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -1006,7 +1006,7 @@ describe('DlpServiceClient', () => {
 
       client.createDlpJob(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1073,7 +1073,7 @@ describe('DlpServiceClient', () => {
 
       client.listDlpJobs(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1135,7 +1135,7 @@ describe('DlpServiceClient', () => {
 
       client.getDlpJob(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1185,7 +1185,7 @@ describe('DlpServiceClient', () => {
 
       client.deleteDlpJob(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -1234,7 +1234,7 @@ describe('DlpServiceClient', () => {
 
       client.cancelDlpJob(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -1300,7 +1300,7 @@ describe('DlpServiceClient', () => {
 
       client.listJobTriggers(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1370,7 +1370,7 @@ describe('DlpServiceClient', () => {
 
       client.getJobTrigger(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1420,7 +1420,7 @@ describe('DlpServiceClient', () => {
 
       client.deleteJobTrigger(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -1489,7 +1489,7 @@ describe('DlpServiceClient', () => {
 
       client.updateJobTrigger(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -1553,7 +1553,7 @@ describe('DlpServiceClient', () => {
 
       client.createJobTrigger(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
