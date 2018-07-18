@@ -478,5 +478,48 @@ describe('Vision helper methods', () => {
           assert(ex.message.indexOf('Setting explicit') > -1);
         });
     });
+
+    it('creates and promisify methods that are available in certain versions', () => {
+      const client = new vision.v1p3beta1.ImageAnnotatorClient();
+      let request = {
+        image: {
+          source: {
+            imageUri: 'https://cloud.google.com/vision/docs/images/bicycle.jpg',
+          },
+        },
+      };
+      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      batchAnnotate.callsArgWith(2, undefined, {
+        responses: [
+          {
+            localizedObjectAnnotations: [{dummy: 'response'}],
+          },
+        ],
+      });
+
+      client
+        .productSearch(request)
+        .then(r => {
+          let response = r[0];
+
+          assert.deepEqual(response, {
+            localizedObjectAnnotations: [{dummy: 'response'}],
+          });
+
+          assert(batchAnnotate.callCount === 1);
+          assert(batchAnnotate.calledWith({requests: [request]}));
+        })
+        .catch(assert.ifError);
+    });
+
+    it('throws an error if trying to invoke a method not available in current version', () => {
+      // Use v1 version of client.
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+
+      assert.throws(() => {
+        // Object localization is only available for v1p3beta1.
+        client.objectLocalization({});
+      }, 'TypeError: client.objectLocalization is not a function');
+    });
   });
 });

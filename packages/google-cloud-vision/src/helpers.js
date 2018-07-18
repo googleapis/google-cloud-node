@@ -828,5 +828,122 @@ module.exports = apiVersion => {
     _createSingleFeatureMethod(features.WEB_DETECTION)
   );
 
+  /**
+   * Annotate a single image with the result from Product Search.
+   *
+   * @see v1p3beta1.ImageAnnotatorClient#batchAnnotateImages
+   * @see google.cloud.vision.v1p3beta1.AnnotateImageRequest
+   *
+   * @method v1p3beta1.ImageAnnotatorClient#productSearch
+   * @param {object|string|Buffer} request A representation of the request
+   *     being sent to the Vision API. This is an
+   *     {@link google.cloud.vision.v1p3beta1.AnnotateImageRequest AnnotateImageRequest}.
+   *     For simple cases, you may also send a string (the URL or filename of
+   *     the image) or a buffer (the image itself).
+   * @param {object} request.image A dictionary-like object representing the
+   *     image. This should have a single key (`source`, `content`).
+   *
+   *     If the key is `source`, the value should be another object containing
+   *     `imageUri` or `filename` as a key and a string as a value.
+   *
+   *     If the key is `content`, the value should be a Buffer.
+   * @param {object} [callOptions] Optional parameters. You can override the
+   *     default settings for this call, e.g, timeout, retries, paginations,
+   * @param {function(?Error, ?object)} [callback] The function which will be
+   *     called with the result of the API call.
+   *
+   *     The second parameter to the callback is an object representing
+   *     [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
+   * @returns {Promise} The promise which resolves to an array. The first
+   *     element of the array is an object representing
+   *     [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
+   *     The promise has a method named "cancel" which cancels the ongoing API
+   *     call.
+   *
+   * @example
+   * const vision = require('@google-cloud/vision').v1p3beta1;
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
+   * };
+   *
+   * client
+   *   .webDetection(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  if (features.PRODUCT_SEARCH !== undefined) {
+    methods.productSearch = promisify(
+      _createSingleFeatureMethod(features.PRODUCT_SEARCH)
+    );
+  }
+
+  /**
+   * Annotate a single image with localization vectors.
+   *
+   * @see v1p3beta1.ImageAnnotatorClient#batchAnnotateImages
+   * @see google.cloud.vision.v1p3beta1.AnnotateImageRequest
+   *
+   * @method v1p3beta1.ImageAnnotatorClient#objectLocalization
+   * @param {object|string|Buffer} request A representation of the request
+   *     being sent to the Vision API. This is an
+   *     {@link google.cloud.vision.v1.AnnotateImageRequest AnnotateImageRequest}.
+   *     For simple cases, you may also send a string (the URL or filename of
+   *     the image) or a buffer (the image itself).
+   * @param {object} request.image A dictionary-like object representing the
+   *     image. This should have a single key (`source`, `content`).
+   *
+   *     If the key is `source`, the value should be another object containing
+   *     `imageUri` or `filename` as a key and a string as a value.
+   *
+   *     If the key is `content`, the value should be a Buffer.
+   * @param {object} [callOptions] Optional parameters. You can override the
+   *     default settings for this call, e.g, timeout, retries, paginations,
+   *     etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions}
+   *     for the details.
+   * @param {function(?Error, ?object)} [callback] The function which will be
+   *     called with the result of the API call.
+   *
+   *     The second parameter to the callback is an object representing
+   *     [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
+   * @returns {Promise} The promise which resolves to an array. The first
+   *     element of the array is an object representing
+   *     [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
+   *     The promise has a method named "cancel" which cancels the ongoing API
+   *     call.
+   *
+   * @example
+   * // Object localization is only available in v1p3beta1.
+   * const vision = require('@google-cloud/vision').v1p3beta1;
+   * const client = new vision.ImageAnnotatorClient();
+   *
+   * const request = {
+   *   image: {
+   *     source: {imageUri: 'gs://path/to/image.jpg'}
+   *   }
+   * };
+   *
+   * client
+   *   .objectLocalization(request)
+   *   .then(response => {
+   *     // doThingsWith(response);
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  if (features.OBJECT_LOCALIZATION !== undefined) {
+    methods.objectLocalization = promisify(
+      _createSingleFeatureMethod(features.OBJECT_LOCALIZATION)
+    );
+  }
+
   return methods;
 };
