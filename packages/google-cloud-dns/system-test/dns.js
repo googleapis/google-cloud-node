@@ -148,7 +148,7 @@ const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     it('should get the metadata for a zone', function(done) {
       ZONE.getMetadata(function(err, metadata) {
         assert.ifError(err);
-        assert.equal(metadata.name, ZONE_NAME);
+        assert.strictEqual(metadata.name, ZONE_NAME);
         done();
       });
     });

@@ -33,7 +33,7 @@ const fakePaginator = {
 
     extended = true;
     methods = arrify(methods);
-    assert.equal(Class.name, 'DNS');
+    assert.strictEqual(Class.name, 'DNS');
     assert.deepEqual(methods, ['getZones']);
   },
   streamify: function(methodName) {
@@ -274,7 +274,7 @@ describe('DNS', function() {
 
     it('should use an empty query if one was not provided', function(done) {
       dns.request = function(reqOpts) {
-        assert.equal(Object.keys(reqOpts.qs).length, 0);
+        assert.strictEqual(Object.keys(reqOpts.qs).length, 0);
         done();
       };
 

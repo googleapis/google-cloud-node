@@ -86,7 +86,7 @@ const fakePaginator = {
 
     extended = true;
     methods = arrify(methods);
-    assert.equal(Class.name, 'Zone');
+    assert.strictEqual(Class.name, 'Zone');
     assert.deepEqual(methods, ['getChanges', 'getRecords']);
   },
   streamify: function(methodName) {
