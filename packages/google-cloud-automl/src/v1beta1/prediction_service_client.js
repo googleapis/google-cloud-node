@@ -71,7 +71,7 @@ class PredictionServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -194,14 +194,6 @@ class PredictionServiceClient {
    * @param {Object.<string, string>} [request.params]
    *   Additional domain-specific parameters, any string must be up to 25000
    *   characters long.
-   *
-   *   *  For Translation:
-   *
-   *      `translation_allow_fallback` - If specified, AutoML will fallback to
-   *      use a Google translation model for translation requests if the
-   *      the specified AutoML translation model cannot serve the request.
-   *      The PredictResponse.metadata field provides additional data to the
-   *      caller.
    *
    *   *  For Image Classification:
    *

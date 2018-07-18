@@ -37,8 +37,11 @@
  *
  * @property {string} annotationSpecId
  *   Output only.
- *   Evaluated annotation spec id. Only non empty if the `ModelEvaluation` is
- *   for a single annotation spec.
+ *   The ID of the annotation spec that the model evaluation applies to. The
+ *   ID is empty for overall model evaluation.
+ *   NOTE: Currently there is no way to obtain the display_name of the
+ *   annotation spec from its ID. To see the display_names, review the model
+ *   evaluations in the UI.
  *
  * @property {Object} createTime
  *   Output only.

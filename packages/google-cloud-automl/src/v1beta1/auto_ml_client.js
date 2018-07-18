@@ -80,7 +80,7 @@ class AutoMlClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = gax.grpc(opts);
+    var gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
@@ -139,7 +139,7 @@ class AutoMlClient {
         'modelEvaluation'
       ),
     };
-    var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
+    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,

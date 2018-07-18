@@ -32,14 +32,6 @@
  *   Additional domain-specific parameters, any string must be up to 25000
  *   characters long.
  *
- *   *  For Translation:
- *
- *      `translation_allow_fallback` - If specified, AutoML will fallback to
- *      use a Google translation model for translation requests if the
- *      the specified AutoML translation model cannot serve the request.
- *      The PredictResponse.metadata field provides additional data to the
- *      caller.
- *
  *   *  For Image Classification:
  *
  *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
@@ -69,12 +61,6 @@ var PredictRequest = {
  *
  * @property {Object.<string, string>} metadata
  *   Additional domain-specific prediction response metadata.
- *   *  For Translation:
- *
- *      `translation_fallback_model` - When PredictRequest.params has
- *      `translation_allow_fallback` specified, the caller can check the value
- *       of `translation_fallback_model` in the metadata to determine whether a
- *       translation fallback model was used and which model was used.
  *
  * @typedef PredictResponse
  * @memberof google.cloud.automl.v1beta1

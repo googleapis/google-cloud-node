@@ -1,4 +1,4 @@
-// Copyright 2018 Google Inc.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,8 +45,11 @@ message ModelEvaluation {
   string name = 1;
 
   // Output only.
-  // Evaluated annotation spec id. Only non empty if the `ModelEvaluation` is
-  // for a single annotation spec.
+  // The ID of the annotation spec that the model evaluation applies to. The
+  // ID is empty for overall model evaluation.
+  // NOTE: Currently there is no way to obtain the display_name of the
+  // annotation spec from its ID. To see the display_names, review the model
+  // evaluations in the UI.
   string annotation_spec_id = 2;
 
   // Output only.

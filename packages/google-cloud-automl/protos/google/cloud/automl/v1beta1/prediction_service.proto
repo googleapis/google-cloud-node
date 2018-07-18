@@ -1,4 +1,4 @@
-// Copyright 2018 Google Inc.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,14 +50,6 @@ message PredictRequest {
   // Additional domain-specific parameters, any string must be up to 25000
   // characters long.
   //
-  // *  For Translation:
-  //
-  //    `translation_allow_fallback` - If specified, AutoML will fallback to
-  //    use a Google translation model for translation requests if the
-  //    the specified AutoML translation model cannot serve the request.
-  //    The [PredictResponse.metadata][google.cloud.automl.v1beta1.PredictResponse.metadata] field provides additional data to the
-  //    caller.
-  //
   // *  For Image Classification:
   //
   //    `score_threshold` - (float) A value from 0.0 to 1.0. When the model
@@ -77,11 +69,5 @@ message PredictResponse {
   repeated AnnotationPayload payload = 1;
 
   // Additional domain-specific prediction response metadata.
-  // *  For Translation:
-  //
-  //    `translation_fallback_model` - When [PredictRequest.params][google.cloud.automl.v1beta1.PredictRequest.params] has
-  //    `translation_allow_fallback` specified, the caller can check the value
-  //     of `translation_fallback_model` in the metadata to determine whether a
-  //     translation fallback model was used and which model was used.
   map<string, string> metadata = 2;
 }

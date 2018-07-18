@@ -42,13 +42,12 @@
     "system-test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "google-gax": "^0.16.1",
+    "google-gax": "^0.17.1",
     "lodash.merge": "^4.6.0",
     "lodash.union": "^4.6.0",
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "async": "^2.6.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
