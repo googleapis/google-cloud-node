@@ -67,7 +67,7 @@ describe('TextToSpeechClient', () => {
 
       client.listVoices(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -135,7 +135,7 @@ describe('TextToSpeechClient', () => {
 
       client.synthesizeSpeech(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
