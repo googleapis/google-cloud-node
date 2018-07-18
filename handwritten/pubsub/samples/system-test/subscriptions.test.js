@@ -76,7 +76,7 @@ test.serial(`should create a subscription`, async t => {
       const [subscriptions] = await pubsub
         .topic(topicNameOne)
         .getSubscriptions();
-      assert.equal(subscriptions[0].name, fullSubscriptionNameOne);
+      assert.strictEqual(subscriptions[0].name, fullSubscriptionNameOne);
     })
     .start();
 });
@@ -191,7 +191,7 @@ test.serial(`should listen for ordered messages`, async t => {
       subscriptionNameThree,
       timeout
     );
-    assert.equal(console.log.callCount, 3);
+    assert.strictEqual(console.log.callCount, 3);
     assert.deepEqual(console.log.secondCall.args, [
       `* %d %j %j`,
       publishedMessageIds[2],
