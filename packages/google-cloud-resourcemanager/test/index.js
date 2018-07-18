@@ -42,7 +42,7 @@ var fakePaginator = {
     }
 
     methods = arrify(methods);
-    assert.equal(Class.name, 'Resource');
+    assert.strictEqual(Class.name, 'Resource');
     assert.deepEqual(methods, ['getProjects']);
     extended = true;
   },
