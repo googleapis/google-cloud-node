@@ -104,7 +104,7 @@ describe('DataTransferServiceClient', () => {
 
       client.getDataSource(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -171,7 +171,7 @@ describe('DataTransferServiceClient', () => {
 
       client.listDataSources(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -251,7 +251,7 @@ describe('DataTransferServiceClient', () => {
 
       client.createTransferConfig(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -331,7 +331,7 @@ describe('DataTransferServiceClient', () => {
 
       client.updateTransferConfig(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -389,7 +389,7 @@ describe('DataTransferServiceClient', () => {
 
       client.deleteTransferConfig(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -470,7 +470,7 @@ describe('DataTransferServiceClient', () => {
 
       client.getTransferConfig(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -537,7 +537,7 @@ describe('DataTransferServiceClient', () => {
 
       client.listTransferConfigs(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -608,7 +608,7 @@ describe('DataTransferServiceClient', () => {
 
       client.scheduleTransferRuns(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -684,7 +684,7 @@ describe('DataTransferServiceClient', () => {
 
       client.getTransferRun(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -742,7 +742,7 @@ describe('DataTransferServiceClient', () => {
 
       client.deleteTransferRun(request, err => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -814,7 +814,7 @@ describe('DataTransferServiceClient', () => {
 
       client.listTransferRuns(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -889,7 +889,7 @@ describe('DataTransferServiceClient', () => {
 
       client.listTransferLogs(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -955,7 +955,7 @@ describe('DataTransferServiceClient', () => {
 
       client.checkValidCreds(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
