@@ -98,7 +98,7 @@ describe('SpeechClient', () => {
 
       client.recognize(request, (err, response) => {
         assert(err instanceof Error);
-        assert.equal(err.code, FAKE_STATUS_CODE);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
         done();
       });
@@ -196,7 +196,7 @@ describe('SpeechClient', () => {
         })
         .catch(err => {
           assert(err instanceof Error);
-          assert.equal(err.code, FAKE_STATUS_CODE);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
           done();
         });
     });
@@ -272,7 +272,7 @@ describe('SpeechClient', () => {
         })
         .on('error', err => {
           assert(err instanceof Error);
-          assert.equal(err.code, FAKE_STATUS_CODE);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
           done();
         });
 
