@@ -574,7 +574,7 @@ describe('Request', function() {
 
     it('should multi delete by keys', function(done) {
       request.request_ = function(config, callback) {
-        assert.equal(config.reqOpts.mutations.length, 2);
+        assert.strictEqual(config.reqOpts.mutations.length, 2);
         callback();
       };
       request.delete([key, key], done);
@@ -1285,7 +1285,7 @@ describe('Request', function() {
 
     it('should save with specific method', function(done) {
       request.request_ = function(config, callback) {
-        assert.equal(config.reqOpts.mutations.length, 3);
+        assert.strictEqual(config.reqOpts.mutations.length, 3);
         assert(is.object(config.reqOpts.mutations[0].insert));
         assert(is.object(config.reqOpts.mutations[1].update));
         assert(is.object(config.reqOpts.mutations[2].upsert));
@@ -1481,8 +1481,8 @@ describe('Request', function() {
           data: [{name: 'name', value: 'value'}],
         });
 
-        assert.equal(typeof request.requestCallbacks_[0], 'function');
-        assert.equal(typeof request.requests_[0], 'object');
+        assert.strictEqual(typeof request.requestCallbacks_[0], 'function');
+        assert.strictEqual(typeof request.requests_[0], 'object');
       });
     });
   });
