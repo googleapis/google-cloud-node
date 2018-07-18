@@ -1,0 +1,24 @@
+{
+  "name": "@google-cloud/automl-samples",
+  "description": "Samples for the Cloud AutoML Client Library for Node.js.",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=6"
+  },
+  "repository": "googleapis/nodejs-automl",
+  "private": true,
+  "nyc": {
+    "exclude": [
+      "**/*.test.js"
+    ]
+  },
+  "scripts": {
+  },
+  "dependencies": {
+    "@google-cloud/automl": "^0.1.0"
+  },
+  "devDependencies": {
+  }
+}

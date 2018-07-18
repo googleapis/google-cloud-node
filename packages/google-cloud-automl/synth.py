@@ -19,7 +19,8 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator(private=True)
+gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
 
 versions = ['v1beta1']
 
@@ -27,6 +28,8 @@ for version in versions:
     library = gapic.node_library('automl', version)
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
+templates = common_templates.node_library(package_name="@google-cloud/automl")
+s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'ci'])
