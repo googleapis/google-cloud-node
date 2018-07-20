@@ -92,7 +92,11 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['request', 'file', 'notification']);
+    assert.deepStrictEqual(options.exclude, [
+      'request',
+      'file',
+      'notification',
+    ]);
   },
 });
 
@@ -104,8 +108,8 @@ const fakePaginator = {
     }
 
     methods = arrify(methods);
-    assert.equal(Class.name, 'Bucket');
-    assert.deepEqual(methods, ['getFiles']);
+    assert.strictEqual(Class.name, 'Bucket');
+    assert.deepStrictEqual(methods, ['getFiles']);
     extended = true;
   },
   streamify: function(methodName) {
@@ -207,14 +211,14 @@ describe('Bucket', function() {
       });
 
       it('should create an ACL object', function() {
-        assert.deepEqual(bucket.acl.calledWith_[0], {
+        assert.deepStrictEqual(bucket.acl.calledWith_[0], {
           request: bucket,
           pathPrefix: '/acl',
         });
       });
 
       it('should create a default ACL object', function() {
-        assert.deepEqual(bucket.acl.default.calledWith_[0], {
+        assert.deepStrictEqual(bucket.acl.default.calledWith_[0], {
           request: bucket,
           pathPrefix: '/defaultObjectAcl',
         });
@@ -239,7 +243,7 @@ describe('Bucket', function() {
       assert.strictEqual(calledWith.parent, storageInstance);
       assert.strictEqual(calledWith.baseUrl, '/b');
       assert.strictEqual(calledWith.id, BUCKET_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
       });
     });
@@ -358,7 +362,7 @@ describe('Bucket', function() {
 
       destination.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/compose');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           destination: {contentType: mime.contentType(destination.name)},
           sourceObjects: [{name: sources[0].name}, {name: sources[1].name}],
         });
@@ -389,7 +393,7 @@ describe('Bucket', function() {
       const destination = bucket.file('destination.txt');
 
       destination.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.sourceObjects, [
+        assert.deepStrictEqual(reqOpts.json.sourceObjects, [
           {name: sources[0].name, generation: sources[0].metadata.generation},
           {name: sources[1].name, generation: sources[1].metadata.generation},
         ]);
@@ -492,8 +496,8 @@ describe('Bucket', function() {
           id: ID,
           type: 'web_hook',
         });
-        assert.deepEqual(reqOpts.json, expectedJson);
-        assert.deepEqual(config, originalConfig);
+        assert.deepStrictEqual(reqOpts.json, expectedJson);
+        assert.deepStrictEqual(config, originalConfig);
 
         done();
       };
@@ -599,7 +603,7 @@ describe('Bucket', function() {
       bucket.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/notificationConfigs');
-        assert.deepEqual(reqOpts.json, expectedJson);
+        assert.deepStrictEqual(reqOpts.json, expectedJson);
         assert.notStrictEqual(reqOpts.json, options);
         done();
       };
@@ -650,7 +654,7 @@ describe('Bucket', function() {
       };
 
       bucket.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, expectedJson);
+        assert.deepStrictEqual(reqOpts.json, expectedJson);
         done();
       };
 
@@ -715,7 +719,7 @@ describe('Bucket', function() {
       bucket.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         callback(); // done()
       };
 
@@ -746,7 +750,7 @@ describe('Bucket', function() {
   describe('deleteFiles', function() {
     it('should accept only a callback', function(done) {
       bucket.getFiles = function(query, callback) {
-        assert.deepEqual(query, {});
+        assert.deepStrictEqual(query, {});
         callback(null, []);
       };
 
@@ -757,7 +761,7 @@ describe('Bucket', function() {
       const query = {a: 'b', c: 'd'};
 
       bucket.getFiles = function(query_) {
-        assert.deepEqual(query_, query);
+        assert.deepStrictEqual(query_, query);
         done();
       };
 
@@ -766,7 +770,7 @@ describe('Bucket', function() {
 
     it('should process 10 files at a time', function(done) {
       eachLimitOverride = function(arr, limit) {
-        assert.equal(limit, 10);
+        assert.strictEqual(limit, 10);
         done();
       };
 
@@ -796,7 +800,7 @@ describe('Bucket', function() {
 
       bucket.deleteFiles(query, function(err) {
         assert.ifError(err);
-        assert.equal(timesCalled, files.length);
+        assert.strictEqual(timesCalled, files.length);
         done();
       });
     });
@@ -1058,15 +1062,15 @@ describe('Bucket', function() {
     });
 
     it('should pass bucket to File object', function() {
-      assert.deepEqual(file.calledWith_[0], bucket);
+      assert.deepStrictEqual(file.calledWith_[0], bucket);
     });
 
     it('should pass filename to File object', function() {
-      assert.equal(file.calledWith_[1], FILE_NAME);
+      assert.strictEqual(file.calledWith_[1], FILE_NAME);
     });
 
     it('should pass configuration object to File', function() {
-      assert.deepEqual(file.calledWith_[2], options);
+      assert.deepStrictEqual(file.calledWith_[2], options);
     });
   });
 
@@ -1168,7 +1172,7 @@ describe('Bucket', function() {
 
           bucket.create = function(callback) {
             bucket.get = function(config, callback) {
-              assert.deepEqual(config, {});
+              assert.deepStrictEqual(config, {});
               callback(); // done()
             };
 
@@ -1190,7 +1194,7 @@ describe('Bucket', function() {
 
           bucket.create = function(callback) {
             bucket.get = function(config, callback) {
-              assert.deepEqual(config, {});
+              assert.deepStrictEqual(config, {});
               callback(); // done()
             };
 
@@ -1207,7 +1211,7 @@ describe('Bucket', function() {
     it('should get files without a query', function(done) {
       bucket.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/o');
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1217,7 +1221,7 @@ describe('Bucket', function() {
     it('should get files with a query', function(done) {
       const token = 'next-page-token';
       bucket.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {maxResults: 5, pageToken: token});
+        assert.deepStrictEqual(reqOpts.qs, {maxResults: 5, pageToken: token});
         done();
       };
       bucket.getFiles({maxResults: 5, pageToken: token}, util.noop);
@@ -1248,7 +1252,7 @@ describe('Bucket', function() {
         callback(null, {nextPageToken: token, items: []});
       };
       bucket.getFiles({maxResults: 5}, function(err, results, nextQuery) {
-        assert.equal(nextQuery.pageToken, token);
+        assert.strictEqual(nextQuery.pageToken, token);
         assert.strictEqual(nextQuery.maxResults, 5);
       });
     });
@@ -1271,7 +1275,10 @@ describe('Bucket', function() {
       bucket.getFiles(function(err, files) {
         assert.ifError(err);
         assert(files[0] instanceof FakeFile);
-        assert.equal(typeof files[0].calledWith_[2].generation, 'undefined');
+        assert.strictEqual(
+          typeof files[0].calledWith_[2].generation,
+          'undefined'
+        );
         done();
       });
     });
@@ -1286,7 +1293,7 @@ describe('Bucket', function() {
       bucket.getFiles({versions: true}, function(err, files) {
         assert.ifError(err);
         assert(files[0] instanceof FakeFile);
-        assert.equal(files[0].calledWith_[2].generation, 1);
+        assert.strictEqual(files[0].calledWith_[2].generation, 1);
         done();
       });
     });
@@ -1313,7 +1320,7 @@ describe('Bucket', function() {
         callback(null, resp);
       };
       bucket.getFiles(function(err, files, nextQuery, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
+        assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
@@ -1349,7 +1356,7 @@ describe('Bucket', function() {
       };
       bucket.getFiles(function(err, files) {
         assert.ifError(err);
-        assert.deepEqual(files[0].metadata, fileMetadata);
+        assert.deepStrictEqual(files[0].metadata, fileMetadata);
         done();
       });
     });
@@ -1425,7 +1432,7 @@ describe('Bucket', function() {
     it('should make the correct request', function(done) {
       bucket.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1504,7 +1511,7 @@ describe('Bucket', function() {
 
     it('should optionally accept options', function(done) {
       bucket.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1564,8 +1571,8 @@ describe('Bucket', function() {
       let didMakeFilesPrivate = false;
 
       bucket.setMetadata = function(metadata, options, callback) {
-        assert.deepEqual(metadata, {acl: null});
-        assert.deepEqual(options, {predefinedAcl: 'projectPrivate'});
+        assert.deepStrictEqual(metadata, {acl: null});
+        assert.deepStrictEqual(options, {predefinedAcl: 'projectPrivate'});
 
         didSetPredefinedAcl = true;
         callback();
@@ -1619,7 +1626,7 @@ describe('Bucket', function() {
       };
 
       bucket.makePrivate(function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
@@ -1638,15 +1645,15 @@ describe('Bucket', function() {
       let didMakeFilesPublic = false;
 
       bucket.acl.add = function(opts, callback) {
-        assert.equal(opts.entity, 'allUsers');
-        assert.equal(opts.role, 'READER');
+        assert.strictEqual(opts.entity, 'allUsers');
+        assert.strictEqual(opts.role, 'READER');
         didSetAcl = true;
         callback();
       };
 
       bucket.acl.default.add = function(opts, callback) {
-        assert.equal(opts.entity, 'allUsers');
-        assert.equal(opts.role, 'READER');
+        assert.strictEqual(opts.entity, 'allUsers');
+        assert.strictEqual(opts.role, 'READER');
         didSetDefaultAcl = true;
         callback();
       };
@@ -1697,7 +1704,7 @@ describe('Bucket', function() {
       };
 
       bucket.makePublic(function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
@@ -1814,7 +1821,7 @@ describe('Bucket', function() {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1971,8 +1978,8 @@ describe('Bucket', function() {
     it('should accept a path & cb', function(done) {
       bucket.upload(filepath, function(err, file) {
         assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, basename);
+        assert.strictEqual(file.bucket.name, bucket.name);
+        assert.strictEqual(file.name, basename);
         done();
       });
     });
@@ -1980,15 +1987,15 @@ describe('Bucket', function() {
     it('should accept a url path & cb', function(done) {
       bucket.upload(urlPath, function(err, file) {
         assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, path.basename(urlPath));
+        assert.strictEqual(file.bucket.name, bucket.name);
+        assert.strictEqual(file.name, path.basename(urlPath));
         done();
       });
     });
 
     it('should accept a url, custom request options & cb', function(done) {
       requestOverride.get = function(options) {
-        assert.deepEqual(options, {
+        assert.deepStrictEqual(options, {
           url: urlPath,
           followAllRedirects: true,
         });
@@ -2013,8 +2020,8 @@ describe('Bucket', function() {
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.deepEqual(file.metadata, metadata);
+        assert.strictEqual(file.bucket.name, bucket.name);
+        assert.deepStrictEqual(file.metadata, metadata);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
         assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
@@ -2030,8 +2037,8 @@ describe('Bucket', function() {
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, newFileName);
+        assert.strictEqual(file.bucket.name, bucket.name);
+        assert.strictEqual(file.name, newFileName);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
         assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
@@ -2048,9 +2055,9 @@ describe('Bucket', function() {
       };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, newFileName);
-        assert.deepEqual(file.metadata, metadata);
+        assert.strictEqual(file.bucket.name, bucket.name);
+        assert.strictEqual(file.name, newFileName);
+        assert.deepStrictEqual(file.metadata, metadata);
         assert.strictEqual(file.options.encryptionKey, options.encryptionKey);
         assert.strictEqual(file.options.kmsKeyName, options.kmsKeyName);
         done();
@@ -2079,7 +2086,7 @@ describe('Bucket', function() {
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert(file.isSameFile());
-        assert.deepEqual(file.metadata, metadata);
+        assert.deepStrictEqual(file.metadata, metadata);
         done();
       });
     });
@@ -2112,7 +2119,7 @@ describe('Bucket', function() {
         ws.write = util.noop;
         setImmediate(function() {
           const expectedContentType = 'application/json; charset=utf-8';
-          assert.equal(options.metadata.contentType, expectedContentType);
+          assert.strictEqual(options.metadata.contentType, expectedContentType);
           done();
         });
         return ws;
@@ -2128,7 +2135,7 @@ describe('Bucket', function() {
         ws.write = util.noop;
         setImmediate(function() {
           const expectedContentType = 'text/plain; charset=utf-8';
-          assert.equal(options.metadata.contentType, expectedContentType);
+          assert.strictEqual(options.metadata.contentType, expectedContentType);
           done();
         });
         return ws;
@@ -2220,7 +2227,10 @@ describe('Bucket', function() {
         const ws = new stream.Writable();
         ws.write = util.noop;
         setImmediate(function() {
-          assert.equal(options.metadata.contentType, metadata.contentType);
+          assert.strictEqual(
+            options.metadata.contentType,
+            metadata.contentType
+          );
           done();
         });
         return ws;
@@ -2302,7 +2312,7 @@ describe('Bucket', function() {
 
     it('should process 10 files at a time', function(done) {
       eachLimitOverride = function(arr, limit) {
-        assert.equal(limit, 10);
+        assert.strictEqual(limit, 10);
         done();
       };
 
@@ -2329,7 +2339,7 @@ describe('Bucket', function() {
 
       bucket.makeAllFilesPublicPrivate_({public: true}, function(err) {
         assert.ifError(err);
-        assert.equal(timesCalled, files.length);
+        assert.strictEqual(timesCalled, files.length);
         done();
       });
     });
@@ -2353,7 +2363,7 @@ describe('Bucket', function() {
 
       bucket.makeAllFilesPublicPrivate_(options, function(err) {
         assert.ifError(err);
-        assert.equal(timesCalled, files.length);
+        assert.strictEqual(timesCalled, files.length);
         done();
       });
     });
@@ -2366,7 +2376,7 @@ describe('Bucket', function() {
       };
 
       bucket.makeAllFilesPublicPrivate_({}, function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
@@ -2385,7 +2395,7 @@ describe('Bucket', function() {
       };
 
       bucket.makeAllFilesPublicPrivate_({public: true}, function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
@@ -2409,7 +2419,7 @@ describe('Bucket', function() {
           force: true,
         },
         function(errs) {
-          assert.deepEqual(errs, [error, error]);
+          assert.deepStrictEqual(errs, [error, error]);
           done();
         }
       );
@@ -2440,8 +2450,8 @@ describe('Bucket', function() {
           force: true,
         },
         function(errs, files) {
-          assert.deepEqual(errs, [error, error]);
-          assert.deepEqual(files, successFiles);
+          assert.deepStrictEqual(errs, [error, error]);
+          assert.deepStrictEqual(files, successFiles);
           done();
         }
       );

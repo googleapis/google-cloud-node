@@ -187,7 +187,7 @@ describe('storage', function() {
           },
           function(err, accessControl) {
             assert.ifError(err);
-            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+            assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
             bucket.acl.default.get(
               {
@@ -195,7 +195,7 @@ describe('storage', function() {
               },
               function(err, accessControl) {
                 assert.ifError(err);
-                assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+                assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
                 bucket.acl.default.update(
                   {
@@ -204,7 +204,10 @@ describe('storage', function() {
                   },
                   function(err, accessControl) {
                     assert.ifError(err);
-                    assert.equal(accessControl.role, storage.acl.READER_ROLE);
+                    assert.strictEqual(
+                      accessControl.role,
+                      storage.acl.READER_ROLE
+                    );
 
                     bucket.acl.default.delete({entity: USER_ACCOUNT}, done);
                   }
@@ -231,13 +234,13 @@ describe('storage', function() {
           },
           function(err, accessControl) {
             assert.ifError(err);
-            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+            assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
             const opts = {entity: USER_ACCOUNT};
 
             bucket.acl.get(opts, function(err, accessControl) {
               assert.ifError(err);
-              assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
               bucket.acl.delete(opts, done);
             });
@@ -253,7 +256,7 @@ describe('storage', function() {
           },
           function(err, accessControl) {
             assert.ifError(err);
-            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+            assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
             bucket.acl.update(
               {
@@ -262,7 +265,7 @@ describe('storage', function() {
               },
               function(err, accessControl) {
                 assert.ifError(err);
-                assert.equal(accessControl.role, storage.acl.WRITER_ROLE);
+                assert.strictEqual(accessControl.role, storage.acl.WRITER_ROLE);
 
                 bucket.acl.delete({entity: USER_ACCOUNT}, done);
               }
@@ -276,7 +279,10 @@ describe('storage', function() {
           assert.ifError(err);
           bucket.acl.get({entity: 'allUsers'}, function(err, aclObject) {
             assert.ifError(err);
-            assert.deepEqual(aclObject, {entity: 'allUsers', role: 'READER'});
+            assert.deepStrictEqual(aclObject, {
+              entity: 'allUsers',
+              role: 'READER',
+            });
             bucket.acl.delete({entity: 'allUsers'}, done);
           });
         });
@@ -340,9 +346,9 @@ describe('storage', function() {
           bucket.makePrivate(function(err) {
             assert.ifError(err);
             bucket.acl.get({entity: 'allUsers'}, function(err, aclObject) {
-              assert.equal(err.code, 404);
-              assert.equal(err.message, 'Not Found');
-              assert.equal(aclObject, null);
+              assert.strictEqual(err.code, 404);
+              assert.strictEqual(err.message, 'Not Found');
+              assert.strictEqual(aclObject, null);
               done();
             });
           });
@@ -412,7 +418,7 @@ describe('storage', function() {
       });
 
       it('should not expose default api', function() {
-        assert.equal(typeof file.default, 'undefined');
+        assert.strictEqual(typeof file.default, 'undefined');
       });
 
       it('should grant an account access', function(done) {
@@ -423,11 +429,11 @@ describe('storage', function() {
           },
           function(err, accessControl) {
             assert.ifError(err);
-            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+            assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
             file.acl.get({entity: USER_ACCOUNT}, function(err, accessControl) {
               assert.ifError(err);
-              assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
               file.acl.delete({entity: USER_ACCOUNT}, done);
             });
@@ -443,7 +449,7 @@ describe('storage', function() {
           },
           function(err, accessControl) {
             assert.ifError(err);
-            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+            assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
 
             file.acl.update(
               {
@@ -453,7 +459,7 @@ describe('storage', function() {
               function(err, accessControl) {
                 assert.ifError(err);
 
-                assert.equal(accessControl.role, storage.acl.READER_ROLE);
+                assert.strictEqual(accessControl.role, storage.acl.READER_ROLE);
 
                 file.acl.delete({entity: USER_ACCOUNT}, done);
               }
@@ -467,7 +473,10 @@ describe('storage', function() {
           assert.ifError(err);
           file.acl.get({entity: 'allUsers'}, function(err, aclObject) {
             assert.ifError(err);
-            assert.deepEqual(aclObject, {entity: 'allUsers', role: 'READER'});
+            assert.deepStrictEqual(aclObject, {
+              entity: 'allUsers',
+              role: 'READER',
+            });
             file.acl.delete({entity: 'allUsers'}, done);
           });
         });
@@ -479,9 +488,9 @@ describe('storage', function() {
           file.makePrivate(function(err) {
             assert.ifError(err);
             file.acl.get({entity: 'allUsers'}, function(err, aclObject) {
-              assert.equal(err.code, 404);
-              assert.equal(err.message, 'Not Found');
-              assert.equal(aclObject, null);
+              assert.strictEqual(err.code, 404);
+              assert.strictEqual(err.message, 'Not Found');
+              assert.strictEqual(aclObject, null);
               done();
             });
           });
@@ -550,7 +559,7 @@ describe('storage', function() {
 
             file.acl.get({entity: 'allUsers'}, function(err, aclObject) {
               assert.ifError(err);
-              assert.deepEqual(aclObject, {
+              assert.deepStrictEqual(aclObject, {
                 entity: 'allUsers',
                 role: 'READER',
               });
@@ -572,7 +581,7 @@ describe('storage', function() {
 
             file.acl.get({entity: 'allUsers'}, function(err, aclObject) {
               assert.ifError(err);
-              assert.deepEqual(aclObject, {
+              assert.deepStrictEqual(aclObject, {
                 entity: 'allUsers',
                 role: 'READER',
               });
@@ -593,9 +602,9 @@ describe('storage', function() {
             assert.ifError(err);
 
             file.acl.get({entity: 'allUsers'}, function(err, aclObject) {
-              assert.equal(err.code, 404);
-              assert.equal(err.message, 'Not Found');
-              assert.equal(aclObject, null);
+              assert.strictEqual(err.code, 404);
+              assert.strictEqual(err.message, 'Not Found');
+              assert.strictEqual(aclObject, null);
               done();
             });
           }
@@ -650,7 +659,7 @@ describe('storage', function() {
         bucket.iam.getPolicy(function(err, policy) {
           assert.ifError(err);
 
-          assert.deepEqual(policy.bindings, [
+          assert.deepStrictEqual(policy.bindings, [
             {
               members: [
                 'projectEditor:' + PROJECT_ID,
@@ -702,7 +711,7 @@ describe('storage', function() {
         bucket.iam.testPermissions(testPermissions, function(err, permissions) {
           assert.ifError(err);
 
-          assert.deepEqual(permissions, {
+          assert.deepStrictEqual(permissions, {
             'storage.buckets.get': true,
             'storage.buckets.getIamPolicy': true,
           });
@@ -785,7 +794,7 @@ describe('storage', function() {
           return bucketsToCreate.indexOf(bucket.name) > -1;
         });
 
-        assert.equal(createdBuckets.length, bucketsToCreate.length);
+        assert.strictEqual(createdBuckets.length, bucketsToCreate.length);
         done();
       });
     });
@@ -817,7 +826,7 @@ describe('storage', function() {
 
       bucket.setMetadata(metadata, function(err, meta) {
         assert.ifError(err);
-        assert.deepEqual(meta.website, metadata.website);
+        assert.deepStrictEqual(meta.website, metadata.website);
         done();
       });
     });
@@ -1477,7 +1486,7 @@ describe('storage', function() {
             data = Buffer.concat([data, chunk]);
           })
           .on('end', function() {
-            assert.equal(data.toString(), contents);
+            assert.strictEqual(data.toString(), contents);
             done();
           });
       });
@@ -1518,7 +1527,7 @@ describe('storage', function() {
           })
           .on('error', done)
           .on('end', function() {
-            assert.equal(sizeStreamed, expectedContentSize);
+            assert.strictEqual(sizeStreamed, expectedContentSize);
             file.delete(done);
           });
       });
@@ -1532,7 +1541,7 @@ describe('storage', function() {
 
         file.download(function(err, remoteContents) {
           assert.ifError(err);
-          assert.equal(String(fileContents), String(remoteContents));
+          assert.strictEqual(String(fileContents), String(remoteContents));
           done();
         });
       });
@@ -1623,7 +1632,7 @@ describe('storage', function() {
           .pipe(file.createWriteStream({resumable: false}))
           .on('error', done)
           .on('finish', function() {
-            assert.equal(file.metadata.md5Hash, FILES.big.hash);
+            assert.strictEqual(file.metadata.md5Hash, FILES.big.hash);
             file.delete(done);
           });
       });
@@ -1639,7 +1648,10 @@ describe('storage', function() {
 
           file.getMetadata(function(err, metadata) {
             assert.ifError(err);
-            assert.equal(metadata.contentType, options.metadata.contentType);
+            assert.strictEqual(
+              metadata.contentType,
+              options.metadata.contentType
+            );
             file.delete(done);
           });
         });
@@ -1659,7 +1671,7 @@ describe('storage', function() {
             upload({interrupt: false}, function(err) {
               assert.ifError(err);
 
-              assert.equal(file.metadata.size, fileSize);
+              assert.strictEqual(file.metadata.size, fileSize);
               file.delete(done);
             });
           });
@@ -1715,7 +1727,7 @@ describe('storage', function() {
                   assert.ifError(err);
 
                   fs.readFile(tmpFilePath, function(err, data) {
-                    assert.equal(data, fileContent);
+                    assert.strictEqual(data, fileContent);
                     done();
                   });
                 });
@@ -2289,7 +2301,7 @@ describe('storage', function() {
           destinationFile.download(function(err, contents) {
             assert.ifError(err);
 
-            assert.equal(contents, files.map(prop('contents')).join(''));
+            assert.strictEqual(contents, files.map(prop('contents')).join(''));
 
             async.each(sourceFiles.concat([destinationFile]), deleteFile, done);
           });
@@ -2348,7 +2360,7 @@ describe('storage', function() {
     it('should get files', function(done) {
       bucket.getFiles(function(err, files) {
         assert.ifError(err);
-        assert.equal(files.length, NEW_FILES.length);
+        assert.strictEqual(files.length, NEW_FILES.length);
         done();
       });
     });
@@ -2398,11 +2410,11 @@ describe('storage', function() {
 
       bucket.getFiles(query, function(err, files, nextQuery) {
         assert.ifError(err);
-        assert.equal(files.length, NEW_FILES.length - 1);
+        assert.strictEqual(files.length, NEW_FILES.length - 1);
         assert(nextQuery);
         bucket.getFiles(nextQuery, function(err, files) {
           assert.ifError(err);
-          assert.equal(files.length, 1);
+          assert.strictEqual(files.length, 1);
           done();
         });
       });
@@ -2459,7 +2471,7 @@ describe('storage', function() {
 
             firstGenFile.download(function(err, contents) {
               assert.ifError(err);
-              assert.equal(contents, 'a');
+              assert.strictEqual(contents, 'a');
               done();
             });
           });
@@ -2480,10 +2492,10 @@ describe('storage', function() {
           assert.ifError(err);
 
           // same file.
-          assert.equal(files[0].name, files[1].name);
+          assert.strictEqual(files[0].name, files[1].name);
 
           // different generations.
-          assert.notEqual(
+          assert.notStrictEqual(
             files[0].metadata.generation,
             files[1].metadata.generation
           );
@@ -2520,7 +2532,7 @@ describe('storage', function() {
           assert.ifError(err);
           request.get(signedReadUrl, function(err, resp, body) {
             assert.ifError(err);
-            assert.equal(body, localFile);
+            assert.strictEqual(body, localFile);
             file.delete(done);
           });
         }
@@ -2538,7 +2550,7 @@ describe('storage', function() {
           request.del(signedDeleteUrl, function(err) {
             assert.ifError(err);
             file.getMetadata(function(err) {
-              assert.equal(err.code, 404);
+              assert.strictEqual(err.code, 404);
               done();
             });
           });

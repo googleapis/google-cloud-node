@@ -76,7 +76,7 @@ describe('Notification', function() {
       assert.strictEqual(calledWith.baseUrl, '/notificationConfigs');
       assert.strictEqual(calledWith.id, ID);
 
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
       });
@@ -122,7 +122,7 @@ describe('Notification', function() {
 
     it('should optionally accept options', function(done) {
       notification.request = function(reqOpts, callback) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         callback(); // the done fn
       };
 
@@ -238,7 +238,7 @@ describe('Notification', function() {
 
           notification.create = function(callback) {
             notification.get = function(config, callback) {
-              assert.deepEqual(config, {});
+              assert.deepStrictEqual(config, {});
               callback(); // done()
             };
 
@@ -260,7 +260,7 @@ describe('Notification', function() {
 
           notification.create = function(callback) {
             notification.get = function(config, callback) {
-              assert.deepEqual(config, {});
+              assert.deepStrictEqual(config, {});
               callback(); // done()
             };
 
@@ -288,7 +288,7 @@ describe('Notification', function() {
 
     it('should optionally accept options', function(done) {
       notification.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 

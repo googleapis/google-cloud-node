@@ -54,7 +54,7 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['request', 'setEncryptionKey']);
+    assert.deepStrictEqual(options.exclude, ['request', 'setEncryptionKey']);
   },
 });
 
@@ -194,7 +194,7 @@ describe('File', function() {
     });
 
     it('should assign file name', function() {
-      assert.equal(file.name, FILE_NAME);
+      assert.strictEqual(file.name, FILE_NAME);
     });
 
     it('should assign the bucket instance', function() {
@@ -218,7 +218,7 @@ describe('File', function() {
 
     it('should accept specifying a generation', function() {
       const file = new File(BUCKET, 'name', {generation: 2});
-      assert.equal(file.generation, 2);
+      assert.strictEqual(file.generation, 2);
     });
 
     it('should build a requestQueryObject from generation', function() {
@@ -521,7 +521,7 @@ describe('File', function() {
         file.request = function(reqOpts, callback) {
           file.copy = function(newFile_, options, callback) {
             assert.strictEqual(newFile_, newFile);
-            assert.deepEqual(options, {token: apiResponse.rewriteToken});
+            assert.deepStrictEqual(options, {token: apiResponse.rewriteToken});
             callback(); // done()
           };
 
@@ -595,7 +595,7 @@ describe('File', function() {
         const newFile = new File(BUCKET, 'new-file');
         file.copy(newFile, function(err, copiedFile) {
           assert.ifError(err);
-          assert.deepEqual(copiedFile, newFile);
+          assert.deepStrictEqual(copiedFile, newFile);
           done();
         });
       });
@@ -604,8 +604,8 @@ describe('File', function() {
         const newFilename = 'new-filename';
         file.copy(newFilename, function(err, copiedFile) {
           assert.ifError(err);
-          assert.equal(copiedFile.bucket.name, BUCKET.name);
-          assert.equal(copiedFile.name, newFilename);
+          assert.strictEqual(copiedFile.bucket.name, BUCKET.name);
+          assert.strictEqual(copiedFile.name, newFilename);
           done();
         });
       });
@@ -613,8 +613,8 @@ describe('File', function() {
       it('should create new file on the destination bucket', function(done) {
         file.copy(BUCKET, function(err, copiedFile) {
           assert.ifError(err);
-          assert.equal(copiedFile.bucket.name, BUCKET.name);
-          assert.equal(copiedFile.name, file.name);
+          assert.strictEqual(copiedFile.bucket.name, BUCKET.name);
+          assert.strictEqual(copiedFile.name, file.name);
           done();
         });
       });
@@ -622,7 +622,7 @@ describe('File', function() {
       it('should pass apiResponse into callback', function(done) {
         file.copy(BUCKET, function(err, copiedFile, apiResponse) {
           assert.ifError(err);
-          assert.deepEqual({success: true}, apiResponse);
+          assert.deepStrictEqual({success: true}, apiResponse);
           done();
         });
       });
@@ -754,7 +754,7 @@ describe('File', function() {
       const versionedFile = new File(BUCKET, 'file.txt', {generation: 1});
 
       versionedFile.requestStream = function(rOpts) {
-        assert.equal(rOpts.qs.generation, 1);
+        assert.strictEqual(rOpts.qs.generation, 1);
         setImmediate(done);
         return duplexify();
       };
@@ -779,7 +779,7 @@ describe('File', function() {
     describe('authenticating', function() {
       it('should create an authenticated request', function(done) {
         file.requestStream = function(opts) {
-          assert.deepEqual(opts, {
+          assert.deepStrictEqual(opts, {
             forever: false,
             uri: '',
             headers: {
@@ -817,7 +817,7 @@ describe('File', function() {
           file
             .createReadStream()
             .once('error', function(err) {
-              assert.equal(err, ERROR);
+              assert.strictEqual(err, ERROR);
               done();
             })
             .resume();
@@ -833,7 +833,10 @@ describe('File', function() {
 
         file.requestStream = function() {
           setImmediate(function() {
-            assert.deepEqual(requestOverride.getRequestOptions(), fakeRequest);
+            assert.deepStrictEqual(
+              requestOverride.getRequestOptions(),
+              fakeRequest
+            );
             done();
           });
 
@@ -886,7 +889,7 @@ describe('File', function() {
           file
             .createReadStream()
             .once('error', function(err) {
-              assert.deepEqual(err, ERROR);
+              assert.deepStrictEqual(err, ERROR);
               done();
             })
             .resume();
@@ -1153,7 +1156,10 @@ describe('File', function() {
 
         file.requestStream = function(opts) {
           setImmediate(function() {
-            assert.equal(opts.headers.Range, 'bytes=' + startOffset + '-');
+            assert.strictEqual(
+              opts.headers.Range,
+              'bytes=' + startOffset + '-'
+            );
             done();
           });
           return duplexify();
@@ -1167,7 +1173,7 @@ describe('File', function() {
 
         file.requestStream = function(opts) {
           setImmediate(function() {
-            assert.equal(opts.headers.Range, 'bytes=0-' + endOffset);
+            assert.strictEqual(opts.headers.Range, 'bytes=0-' + endOffset);
             done();
           });
           return duplexify();
@@ -1183,7 +1189,7 @@ describe('File', function() {
         file.requestStream = function(opts) {
           setImmediate(function() {
             const expectedRange = 'bytes=' + startOffset + '-' + endOffset;
-            assert.equal(opts.headers.Range, expectedRange);
+            assert.strictEqual(opts.headers.Range, expectedRange);
             done();
           });
           return duplexify();
@@ -1199,7 +1205,7 @@ describe('File', function() {
         file.requestStream = function(opts) {
           setImmediate(function() {
             const expectedRange = 'bytes=0-0';
-            assert.equal(opts.headers.Range, expectedRange);
+            assert.strictEqual(opts.headers.Range, expectedRange);
             done();
           });
           return duplexify();
@@ -1223,7 +1229,7 @@ describe('File', function() {
 
         file.requestStream = function(opts) {
           setImmediate(function() {
-            assert.equal(opts.headers.Range, 'bytes=' + endOffset);
+            assert.strictEqual(opts.headers.Range, 'bytes=' + endOffset);
             done();
           });
           return duplexify();
@@ -1330,7 +1336,7 @@ describe('File', function() {
       const writable = file.createWriteStream(options);
 
       file.startSimpleUpload_ = function(stream, options_) {
-        assert.deepEqual(options_, options);
+        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -1346,7 +1352,7 @@ describe('File', function() {
       const writable = file.createWriteStream(options);
 
       file.startResumableUpload_ = function(stream, options_) {
-        assert.deepEqual(options_, options);
+        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -1421,7 +1427,7 @@ describe('File', function() {
       };
 
       file.startSimpleUpload_ = function(stream, options_) {
-        assert.deepEqual(options_, options);
+        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -1438,7 +1444,7 @@ describe('File', function() {
       });
 
       file.startResumableUpload_ = function(stream, options) {
-        assert.deepEqual(options.metadata, METADATA);
+        assert.deepStrictEqual(options.metadata, METADATA);
         done();
       };
 
@@ -1594,7 +1600,7 @@ describe('File', function() {
         writable.end();
 
         writable.on('error', function(err) {
-          assert.equal(err.code, 'FILE_NO_UPLOAD');
+          assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
       });
@@ -1633,7 +1639,7 @@ describe('File', function() {
         writable.end();
 
         writable.on('error', function(err) {
-          assert.equal(err.code, 'FILE_NO_UPLOAD');
+          assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
       });
@@ -1656,7 +1662,7 @@ describe('File', function() {
         writable.end();
 
         writable.on('error', function(err) {
-          assert.equal(err.code, 'FILE_NO_UPLOAD');
+          assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
       });
@@ -1714,7 +1720,7 @@ describe('File', function() {
         writable.end();
 
         writable.on('error', function(err) {
-          assert.equal(err.code, 'MD5_NOT_AVAILABLE');
+          assert.strictEqual(err.code, 'MD5_NOT_AVAILABLE');
           done();
         });
       });
@@ -1739,7 +1745,7 @@ describe('File', function() {
         writable.end();
 
         writable.on('error', function(err) {
-          assert.equal(err.code, 'FILE_NO_UPLOAD_DELETE');
+          assert.strictEqual(err.code, 'FILE_NO_UPLOAD_DELETE');
           assert(err.message.indexOf(deleteErrorMessage) > -1);
           done();
         });
@@ -1751,7 +1757,7 @@ describe('File', function() {
     it('should make the correct request', function(done) {
       file.parent.delete = function(options, callback) {
         assert.strictEqual(this, file);
-        assert.deepEqual(options, {});
+        assert.deepStrictEqual(options, {});
         callback(); // done()
       };
 
@@ -1833,7 +1839,7 @@ describe('File', function() {
       const readOptions = {start: 100, end: 200};
 
       file.createReadStream = function(options) {
-        assert.deepEqual(options, readOptions);
+        assert.deepStrictEqual(options, readOptions);
         done();
         return fileReadStream;
       };
@@ -1864,7 +1870,7 @@ describe('File', function() {
         file.download(function(err, remoteFileContents) {
           assert.ifError(err);
 
-          assert.equal(fileContents, remoteFileContents);
+          assert.strictEqual(fileContents, remoteFileContents.toString());
           done();
         });
       });
@@ -1877,7 +1883,7 @@ describe('File', function() {
         };
 
         file.download(function(err) {
-          assert.equal(err, error);
+          assert.strictEqual(err, error);
           done();
         });
       });
@@ -1902,7 +1908,7 @@ describe('File', function() {
             fs.readFile(tmpFilePath, function(err, tmpFileContents) {
               assert.ifError(err);
 
-              assert.equal(fileContents, tmpFileContents);
+              assert.strictEqual(fileContents, tmpFileContents.toString());
               done();
             });
           });
@@ -1921,7 +1927,7 @@ describe('File', function() {
           };
 
           file.download({destination: tmpFilePath}, function(err) {
-            assert.equal(err, error);
+            assert.strictEqual(err, error);
             done();
           });
         });
@@ -1959,7 +1965,7 @@ describe('File', function() {
     it('should make the correct request', function(done) {
       file.parent.getMetadata = function(options, callback) {
         assert.strictEqual(this, file);
-        assert.deepEqual(options, {});
+        assert.deepStrictEqual(options, {});
         callback(); // done()
       };
 
@@ -2027,9 +2033,9 @@ describe('File', function() {
 
       file.getSignedPolicy(CONFIG, function(err, signedPolicy) {
         assert.ifError(err);
-        assert.equal(typeof signedPolicy.string, 'string');
-        assert.equal(typeof signedPolicy.base64, 'string');
-        assert.equal(typeof signedPolicy.signature, 'string');
+        assert.strictEqual(typeof signedPolicy.string, 'string');
+        assert.strictEqual(typeof signedPolicy.base64, 'string');
+        assert.strictEqual(typeof signedPolicy.signature, 'string');
         done();
       });
     });
@@ -2039,7 +2045,7 @@ describe('File', function() {
 
       file.getSignedPolicy(CONFIG, function(err) {
         assert.ifError(err);
-        assert.deepEqual(CONFIG, originalConfig);
+        assert.deepStrictEqual(CONFIG, originalConfig);
         done();
       });
     });
@@ -2381,14 +2387,14 @@ describe('File', function() {
 
       file.getSignedUrl(CONFIG, function(err, signedUrl) {
         assert.ifError(err);
-        assert.equal(typeof signedUrl, 'string');
+        assert.strictEqual(typeof signedUrl, 'string');
         const expires = Math.round(CONFIG.expires / 1000);
         const expected =
           'https://storage.googleapis.com/bucket-name/file-name.png?' +
           'GoogleAccessId=client-email&Expires=' +
           expires +
           '&Signature=signature';
-        assert.equal(signedUrl, expected);
+        assert.strictEqual(signedUrl, expected);
         done();
       });
     });
@@ -2398,7 +2404,7 @@ describe('File', function() {
 
       file.getSignedUrl(CONFIG, function(err) {
         assert.ifError(err);
-        assert.deepEqual(CONFIG, originalConfig);
+        assert.deepStrictEqual(CONFIG, originalConfig);
         done();
       });
     });
@@ -2479,7 +2485,7 @@ describe('File', function() {
             expires +
             '&Signature=signature';
 
-          assert.equal(signedUrl, expected);
+          assert.strictEqual(signedUrl, expected);
           done();
         });
       });
@@ -2568,7 +2574,7 @@ describe('File', function() {
           function(err, signedUrl) {
             assert.ifError(err);
             const expires_ = url.parse(signedUrl, true).query.Expires;
-            assert.equal(expires_, expectedExpires);
+            assert.strictEqual(expires_, expectedExpires.toString());
             done();
           }
         );
@@ -2586,7 +2592,7 @@ describe('File', function() {
           function(err, signedUrl) {
             assert.ifError(err);
             const expires_ = url.parse(signedUrl, true).query.Expires;
-            assert.equal(expires_, expectedExpires);
+            assert.strictEqual(expires_, expectedExpires.toString());
             done();
           }
         );
@@ -2604,7 +2610,7 @@ describe('File', function() {
           function(err, signedUrl) {
             assert.ifError(err);
             const expires_ = url.parse(signedUrl, true).query.Expires;
-            assert.equal(expires_, expectedExpires);
+            assert.strictEqual(expires_, expectedExpires.toString());
             done();
           }
         );
@@ -2685,7 +2691,7 @@ describe('File', function() {
     it('should make the file private to project by default', function(done) {
       file.setMetadata = function(metadata, query) {
         assert.deepStrictEqual(metadata, {acl: null});
-        assert.deepEqual(query, {predefinedAcl: 'projectPrivate'});
+        assert.deepStrictEqual(query, {predefinedAcl: 'projectPrivate'});
         done();
       };
 
@@ -2694,7 +2700,7 @@ describe('File', function() {
 
     it('should make the file private to user if strict = true', function(done) {
       file.setMetadata = function(metadata, query) {
-        assert.deepEqual(query, {predefinedAcl: 'private'});
+        assert.deepStrictEqual(query, {predefinedAcl: 'private'});
         done();
       };
 
@@ -2726,7 +2732,7 @@ describe('File', function() {
 
     it('should make the file public', function(done) {
       file.acl.add = function(options) {
-        assert.deepEqual(options, {entity: 'allUsers', role: 'READER'});
+        assert.deepStrictEqual(options, {entity: 'allUsers', role: 'READER'});
         done();
       };
 
@@ -2778,7 +2784,7 @@ describe('File', function() {
           callback(error);
         };
         file.move('new-filename', function(err) {
-          assert.equal(err, error);
+          assert.strictEqual(err, error);
           done();
         });
       });
@@ -2790,7 +2796,7 @@ describe('File', function() {
           callback(null);
         };
         file.delete = function() {
-          assert.equal(this, file);
+          assert.strictEqual(this, file);
           done();
         };
         file.move('new-filename');
@@ -2805,7 +2811,7 @@ describe('File', function() {
           deleteCalled = true;
         };
         file.move('new-filename', function() {
-          assert.equal(deleteCalled, false);
+          assert.strictEqual(deleteCalled, false);
           done();
         });
       });
@@ -2834,7 +2840,7 @@ describe('File', function() {
           callback(error);
         };
         file.move('new-filename', function(err) {
-          assert.equal(err, error);
+          assert.strictEqual(err, error);
           done();
         });
       });
@@ -2970,7 +2976,7 @@ describe('File', function() {
 
     it('should not require options', function(done) {
       file.createWriteStream = function(options_) {
-        assert.deepEqual(options_, {});
+        assert.deepStrictEqual(options_, {});
         setImmediate(done);
         return new stream.PassThrough();
       };
@@ -3021,7 +3027,7 @@ describe('File', function() {
 
       file.parent.setMetadata = function(metadata, options, callback) {
         assert.strictEqual(this, file);
-        assert.deepEqual(options, {});
+        assert.deepStrictEqual(options, {});
         callback(); // done()
       };
 
@@ -3073,7 +3079,7 @@ describe('File', function() {
     it('should make the correct copy request', function(done) {
       file.copy = function(newFile, options) {
         assert.strictEqual(newFile, file);
-        assert.deepEqual(options, {
+        assert.deepStrictEqual(options, {
           storageClass: STORAGE_CLASS.toUpperCase(),
         });
         done();
@@ -3366,7 +3372,7 @@ describe('File', function() {
 
       makeWritableStreamOverride = function(stream, options_) {
         assert.strictEqual(options_.metadata, options.metadata);
-        assert.deepEqual(options_.request, {
+        assert.deepStrictEqual(options_.request, {
           qs: {
             name: file.name,
             predefinedAcl: options.predefinedAcl,
@@ -3404,7 +3410,7 @@ describe('File', function() {
       const versionedFile = new File(BUCKET, 'new-file.txt', {generation: 1});
 
       makeWritableStreamOverride = function(stream, options) {
-        assert.equal(options.request.qs.ifGenerationMatch, 1);
+        assert.strictEqual(options.request.qs.ifGenerationMatch, 1);
         done();
       };
 
@@ -3428,7 +3434,10 @@ describe('File', function() {
       };
 
       makeWritableStreamOverride = function(stream, options_) {
-        assert.equal(options_.request.qs.userProject, options.userProject);
+        assert.strictEqual(
+          options_.request.qs.userProject,
+          options.userProject
+        );
         done();
       };
 

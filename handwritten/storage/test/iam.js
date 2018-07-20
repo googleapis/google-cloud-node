@@ -76,7 +76,7 @@ describe('storage/iam', function() {
   describe('getPolicy', function() {
     it('should make the correct api request', function(done) {
       iam.request_ = function(reqOpts, callback) {
-        assert.deepEqual(reqOpts, {
+        assert.deepStrictEqual(reqOpts, {
           uri: '/iam',
           qs: {},
         });
@@ -114,7 +114,7 @@ describe('storage/iam', function() {
       };
 
       iam.request_ = function(reqOpts, callback) {
-        assert.deepEqual(reqOpts, {
+        assert.deepStrictEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
           json: extend(
@@ -161,7 +161,7 @@ describe('storage/iam', function() {
       const permissions = 'storage.bucket.list';
 
       iam.request_ = function(reqOpts) {
-        assert.deepEqual(reqOpts, {
+        assert.deepStrictEqual(reqOpts, {
           uri: '/iam/testPermissions',
           qs: {
             permissions: [permissions],
@@ -204,7 +204,7 @@ describe('storage/iam', function() {
 
       iam.testPermissions(permissions, function(err, permissions, apiResp) {
         assert.ifError(err);
-        assert.deepEqual(permissions, {
+        assert.deepStrictEqual(permissions, {
           'storage.bucket.list': false,
           'storage.bucket.consume': true,
         });
@@ -228,7 +228,7 @@ describe('storage/iam', function() {
       );
 
       iam.request_ = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, expectedQuery);
+        assert.deepStrictEqual(reqOpts.qs, expectedQuery);
         done();
       };
 

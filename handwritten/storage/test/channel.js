@@ -73,7 +73,7 @@ describe('Channel', function() {
       assert.strictEqual(calledWith.parent, STORAGE);
       assert.strictEqual(calledWith.baseUrl, '/channels');
       assert.strictEqual(calledWith.id, '');
-      assert.deepEqual(calledWith.methods, {});
+      assert.deepStrictEqual(calledWith.methods, {});
     });
 
     it('should promisify all the things', function() {
@@ -81,7 +81,7 @@ describe('Channel', function() {
     });
 
     it('should set the default metadata', function() {
-      assert.deepEqual(channel.metadata, {
+      assert.deepStrictEqual(channel.metadata, {
         id: ID,
         resourceId: RESOURCE_ID,
       });
