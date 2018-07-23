@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/promisify",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "description": "A simple utility for promisifying functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
