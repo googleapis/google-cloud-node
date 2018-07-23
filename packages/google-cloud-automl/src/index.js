@@ -24,6 +24,15 @@
 /**
  * @namespace google.cloud.automl.v1beta1
  */
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
 
 'use strict';
 
