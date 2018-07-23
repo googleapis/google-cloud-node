@@ -24,6 +24,18 @@
 /**
  * @namespace google.cloud.iot.v1
  */
+/**
+ * @namespace google.iam
+ */
+/**
+ * @namespace google.iam.v1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
 
 'use strict';
 
