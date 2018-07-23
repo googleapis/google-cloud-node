@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/common-paginator",
+  "name": "@google-cloud/paginator",
   "version": "0.1.0",
   "description": "A result paging utility used by Google node.js modules",
   "main": "build/src/index.js",

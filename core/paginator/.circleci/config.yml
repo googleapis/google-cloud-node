@@ -1,0 +1,82 @@
+version: 2
+workflows:
+  version: 2
+  tests:
+    jobs: &workflow_jobs
+      - node6:
+          filters: &all_commits
+            tags:
+              only: /.*/
+      - node8:
+          filters: *all_commits
+      - node10:
+          filters: *all_commits
+      - lint:
+          filters: *all_commits
+      - publish_npm:
+          requires:
+            - node6
+            - node8
+            - node10
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: '/^v[\d.]+$/'
+  nightly:
+    triggers:
+      - schedule:
+          cron: 0 7 * * *
+          filters:
+            branches:
+              only: master
+    jobs: *workflow_jobs
+jobs:
+  node6:
+    docker:
+      - image: 'node:6'
+        user: node
+    steps: &unit_tests_steps
+      - checkout
+      - run: &remove_package_lock
+          name: Remove package-lock.json if needed.
+          command: |
+            WORKFLOW_NAME=`python .circleci/get_workflow_name.py`
+            echo "Workflow name: $WORKFLOW_NAME"
+            if [ "$WORKFLOW_NAME" = "nightly" ]; then
+              echo "Nightly build detected, removing package-lock.json."
+              rm -f package-lock.json samples/package-lock.json
+            else
+              echo "Not a nightly build, skipping this step."
+            fi
+      - run: npm install
+      - run: npm test
+      - run: npm run codecov
+  node8:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps: *unit_tests_steps
+  node10:
+    docker:
+      - image: 'node:10'
+        user: node
+    steps: *unit_tests_steps
+  lint:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run: npm install
+      - run: npm run check
+  publish_npm:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - run: npm install
+      - run: npm publish --access public
