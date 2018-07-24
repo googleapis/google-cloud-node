@@ -59,7 +59,7 @@
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000 -r source-map-support/register",
-    "test": "mocha build/test -r source-map-support/register",
+    "test": "nyc mocha build/test -r source-map-support/register",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -67,7 +67,8 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "posttest": "npm run check",
+    "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json"
   },
   "dependencies": {
     "@google-cloud/logging": "^2.0.0",
