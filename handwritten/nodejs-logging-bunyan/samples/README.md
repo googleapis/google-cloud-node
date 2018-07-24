@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Stackdriver Logging for Winston: Node.js Samples
+# Stackdriver Logging for Bunyan: Node.js Samples
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -25,7 +25,7 @@ library's README.
 
 View the [source code][quickstart_0_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
 [quickstart_0_docs]: https://cloud.google.com/logging/docs/
 [quickstart_0_code]: quickstart.js
@@ -34,10 +34,10 @@ View the [source code][quickstart_0_code].
 
 View the [source code][setup_explicit_1_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md)
 
 [setup_explicit_1_docs]: https://cloud.google.com/logging/docs/
 [setup_explicit_1_code]: setup_explicit.js
 
 [shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/README.md
