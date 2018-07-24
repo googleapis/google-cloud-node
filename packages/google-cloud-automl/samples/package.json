@@ -3,7 +3,7 @@
   "description": "Samples for the Cloud AutoML Client Library for Node.js.",
   "version": "0.0.1",
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC",
   "engines": {
     "node": ">=6"
   },
