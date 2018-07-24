@@ -3,3 +3,4 @@ env:
   mocha: true
 rules:
   node/no-unpublished-require: off
+  node/no-deprecated-api: off
