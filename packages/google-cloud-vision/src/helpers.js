@@ -19,7 +19,7 @@
 const fs = require('fs');
 const is = require('is');
 const path = require('path');
-const promisify = require('@google-cloud/common').util.promisify;
+const {promisify} = require('@google-cloud/promisify');
 const protobuf = require('protobufjs');
 
 const gax = require('google-gax');
