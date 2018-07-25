@@ -23,7 +23,7 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-
+common_templates = gcp.CommonTemplates()
 
 library = gapic.node_library(
     'iot', 'v1',
@@ -48,6 +48,9 @@ s.replace(
     ] = gax.routingHeader.fromParams({
       parent: request.parent,
     });\n\g<2>''')
+
+templates = common_templates.node_library(package_name="@google-cloud/automl")
+s.copy(templates)
 
 #
 # Node.js specific cleanup

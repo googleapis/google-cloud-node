@@ -76,17 +76,11 @@ jobs:
           command: |-
             mkdir -p /home/node/.npm-global
             npm install
-            npm link
-            chmod +x node_modules/@google-cloud/nodejs-repo-tools/bin/tools
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
-      - run:
-          name: Run unit tests.
-          command: npm test
-      - run:
-          name: Submit coverage data to codecov.
-          command: node_modules/.bin/codecov
-          when: always
+      - run: npm test
+      - run: node_modules/.bin/codecov
+  
   node8:
     docker:
       - image: 'node:8'
@@ -99,7 +93,7 @@ jobs:
     steps: *unit_tests_steps
   lint:
     docker:
-      - image: 'node:10'
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -109,9 +103,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm link @google-cloud/tasks
+            npm link ../
             npm install
-            cd ..
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
@@ -121,7 +114,8 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
   docs:
     docker:
-      - image: 'node:10'
+      - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -131,7 +125,7 @@ jobs:
           command: npm run docs
   sample_tests:
     docker:
-      - image: 'node:10'
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -149,16 +143,16 @@ jobs:
           command: npm run samples-test
           environment:
             GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: /home/node/tasks-samples/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/samples/.circleci/key.json
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /home/node/tasks-samples/
+    working_directory: /home/node/samples/
   system_tests:
     docker:
-      - image: 'node:10'
+      - image: 'node:8'
         user: node
     steps:
       - checkout
@@ -174,7 +168,6 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GCLOUD_PROJECT: long-door-651
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.
@@ -182,13 +175,9 @@ jobs:
           when: always
   publish_npm:
     docker:
-      - image: 'node:10'
+      - image: 'node:8'
         user: node
     steps:
       - checkout
-      - run:
-          name: Set NPM authentication.
-          command: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run:
-          name: Publish the module to npm.
-          command: npm publish
+      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run: npm publish --access=public

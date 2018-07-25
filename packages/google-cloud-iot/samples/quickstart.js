@@ -23,7 +23,7 @@ describe('DeviceManagerSmokeTest', () => {
   var projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
-    const iot = require('../src');
+    const iot = require('@google-cloud/iot');
 
     var client = new iot.v1.DeviceManagerClient({
       // optional auth parameters.
@@ -45,7 +45,7 @@ describe('DeviceManagerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using callbacks', done => {
-    const iot = require('../src');
+    const iot = require('@google-cloud/iot');
 
     var client = new iot.v1.DeviceManagerClient({
       // optional auth parameters.
@@ -78,7 +78,7 @@ describe('DeviceManagerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using streaming', done => {
-    const iot = require('../src');
+    const iot = require('@google-cloud/iot');
 
     var client = new iot.v1.DeviceManagerClient({
       // optional auth parameters.
