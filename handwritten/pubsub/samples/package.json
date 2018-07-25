@@ -9,7 +9,7 @@
     "url": "https://github.com/googleapis/nodejs-pubsub.git"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "ava": "ava -T 20s --verbose system-test/*.test.js",

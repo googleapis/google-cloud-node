@@ -192,13 +192,13 @@ test.serial(`should listen for ordered messages`, async t => {
       timeout
     );
     assert.strictEqual(console.log.callCount, 3);
-    assert.deepEqual(console.log.secondCall.args, [
+    assert.deepStrictEqual(console.log.secondCall.args, [
       `* %d %j %j`,
       publishedMessageIds[2],
       expected,
       {counterId: '2'},
     ]);
-    assert.deepEqual(console.log.thirdCall.args, [
+    assert.deepStrictEqual(console.log.thirdCall.args, [
       `* %d %j %j`,
       publishedMessageIds[0],
       expected,
