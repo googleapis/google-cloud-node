@@ -1,13 +1,7 @@
 {
-  "_product": "iot",
-  "id": "iot",
-  "name": "Google Cloud IoT",
-  "short_name": "Cloud IoT",
-  "docs_url": "https://cloud.google.com/iot/docs/",
-  "description": "Manages connecting to IoT devices and integrating with Google Cloud Platform",
-  "api_id": "iot.googleapis.com",
   "requiresKeyFile": true,
   "requiresProjectId": true,
-  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/iot/latest/",
+  "product": "cloudiot",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/cloudiot/latest/",
   "release_quality": "alpha"
 }
