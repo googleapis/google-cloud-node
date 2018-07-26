@@ -6,7 +6,7 @@
   "author": "Google LLC",
   "repository": "googleapis/tasks",
   "engines": {
-    "node": ">=6.14.2"
+    "node": ">=8"
   },
   "scripts": {
     "lint": "npm run lint task.js",
