@@ -158,17 +158,17 @@ describe('entity', function() {
     it('should not modify input path', function() {
       var inputPath = ['ParentKind', 1, 'Kind', 1];
       new entity.Key({path: inputPath});
-      assert.deepEqual(inputPath, ['ParentKind', 1, 'Kind', 1]);
+      assert.deepStrictEqual(inputPath, ['ParentKind', 1, 'Kind', 1]);
     });
 
     it('should always compute the correct path', function() {
       var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
-      assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
+      assert.deepStrictEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
 
       key.parent.kind = 'GrandParentKind';
       key.kind = 'ParentKind';
 
-      assert.deepEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
+      assert.deepStrictEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
     });
   });
 
@@ -208,18 +208,24 @@ describe('entity', function() {
         return valueProto;
       };
 
-      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+      assert.deepStrictEqual(
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should decode blobs', function() {
-      var expectedValue = new Buffer('Hi');
+      var expectedValue = Buffer.from('Hi');
 
       var valueProto = {
         valueType: 'blobValue',
         blobValue: expectedValue.toString('base64'),
       };
 
-      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+      assert.deepStrictEqual(
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should decode null', function() {
@@ -304,7 +310,10 @@ describe('entity', function() {
         },
       };
 
-      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+      assert.deepStrictEqual(
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should return the value if no conversions are necessary', function() {
@@ -327,7 +336,7 @@ describe('entity', function() {
         booleanValue: value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode null', function() {
@@ -352,7 +361,7 @@ describe('entity', function() {
         this.value = value_;
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode an Int object', function() {
@@ -362,7 +371,7 @@ describe('entity', function() {
         integerValue: value.value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a double', function() {
@@ -377,7 +386,7 @@ describe('entity', function() {
         this.value = value_;
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a Double object', function() {
@@ -387,7 +396,7 @@ describe('entity', function() {
         doubleValue: value.value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a GeoPoint object', function() {
@@ -397,7 +406,7 @@ describe('entity', function() {
         geoPointValue: value.value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a date', function() {
@@ -411,7 +420,7 @@ describe('entity', function() {
         },
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a string', function() {
@@ -421,17 +430,17 @@ describe('entity', function() {
         stringValue: value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a buffer', function() {
-      var value = new Buffer('Hi');
+      var value = Buffer.from('Hi');
 
       var expectedValueProto = {
         blobValue: value,
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode an array', function() {
@@ -456,7 +465,7 @@ describe('entity', function() {
         return value_;
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode a Key', function() {
@@ -474,7 +483,7 @@ describe('entity', function() {
         return value;
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should encode an object', function() {
@@ -503,7 +512,7 @@ describe('entity', function() {
         return value_;
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should clone an object', function() {
@@ -519,7 +528,7 @@ describe('entity', function() {
 
       var encodedValue = entity.encodeValue(value);
 
-      assert.deepEqual(value, originalValue);
+      assert.deepStrictEqual(value, originalValue);
       assert.notStrictEqual(value, encodedValue);
     });
 
@@ -532,7 +541,7 @@ describe('entity', function() {
         },
       };
 
-      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
     it('should throw if an invalid value was provided', function() {
@@ -557,7 +566,7 @@ describe('entity', function() {
         },
       };
 
-      assert.deepEqual(
+      assert.deepStrictEqual(
         entity.entityFromEntityProto(entityProto),
         expectedEntity
       );
@@ -584,7 +593,7 @@ describe('entity', function() {
         return value;
       };
 
-      assert.deepEqual(
+      assert.deepStrictEqual(
         entity.entityToEntityProto(entityObject),
         expectedEntityProto
       );
@@ -1005,7 +1014,7 @@ describe('entity', function() {
         },
       };
 
-      assert.deepEqual(
+      assert.deepStrictEqual(
         entity.entityToEntityProto(entityObject),
         expectedEntityProto
       );
@@ -1040,7 +1049,7 @@ describe('entity', function() {
 
       var ent = entity.formatArray(results)[0];
 
-      assert.deepEqual(ent, expectedResults);
+      assert.deepStrictEqual(ent, expectedResults);
       assert.strictEqual(ent[entity.KEY_SYMBOL], key);
     });
   });
@@ -1118,7 +1127,7 @@ describe('entity', function() {
 
     it('should create a proper Key', function(done) {
       entity.Key = function(keyOptions) {
-        assert.deepEqual(keyOptions, {
+        assert.deepStrictEqual(keyOptions, {
           namespace: NAMESPACE,
           path: ['Kind', new entity.Int(111), 'Kind2', 'name'],
         });
@@ -1362,13 +1371,13 @@ describe('entity', function() {
         .offset(1)
         .hasAncestor(ancestorKey);
 
-      assert.deepEqual(entity.queryToQueryProto(query), queryProto);
+      assert.deepStrictEqual(entity.queryToQueryProto(query), queryProto);
     });
 
     it('should handle buffer start and end values', function() {
       var ds = new Datastore({projectId: 'project-id'});
-      var startVal = new Buffer('start');
-      var endVal = new Buffer('end');
+      var startVal = Buffer.from('start');
+      var endVal = Buffer.from('end');
 
       var query = ds
         .createQuery('Kind1')

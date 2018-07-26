@@ -132,7 +132,7 @@ describe('Query', function() {
 
       assert.strictEqual(query.filters[0].name, '__key__');
       assert.strictEqual(query.filters[0].op, 'HAS_ANCESTOR');
-      assert.deepEqual(query.filters[0].val, ['kind2', 123]);
+      assert.deepStrictEqual(query.filters[0].val, ['kind2', 123]);
     });
 
     it('should return the query instance', function() {
@@ -188,13 +188,13 @@ describe('Query', function() {
     it('should store an array of properties to group by', function() {
       var query = new Query(['kind1']).groupBy(['name', 'size']);
 
-      assert.deepEqual(query.groupByVal, ['name', 'size']);
+      assert.deepStrictEqual(query.groupByVal, ['name', 'size']);
     });
 
     it('should convert a single property into an array', function() {
       var query = new Query(['kind1']).groupBy('name');
 
-      assert.deepEqual(query.groupByVal, ['name']);
+      assert.deepStrictEqual(query.groupByVal, ['name']);
     });
 
     it('should return the query instance', function() {
@@ -209,13 +209,13 @@ describe('Query', function() {
     it('should store an array of properties to select', function() {
       var query = new Query(['kind1']).select(['name', 'size']);
 
-      assert.deepEqual(query.selectVal, ['name', 'size']);
+      assert.deepStrictEqual(query.selectVal, ['name', 'size']);
     });
 
     it('should convert a single property into an array', function() {
       var query = new Query(['kind1']).select('name');
 
-      assert.deepEqual(query.selectVal, ['name']);
+      assert.deepStrictEqual(query.selectVal, ['name']);
     });
 
     it('should return the query instance', function() {
