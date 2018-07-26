@@ -94,6 +94,60 @@ logger.error('warp nacelles offline');
 logger.info('shields at 99%');
 ```
 
+### Using as an express middleware
+
+***NOTE: this feature is experimental. The API may change in a backwards
+incompatible way until this is deemed stable. Please provide us feedback so
+that we can better refine this express integration.***
+
+We provide a middleware that can be used in an express application. Apart from
+being easy to use, this enables some more powerful features of Stackdriver
+Logging: request bundling.
+
+The middleware adds a `bunyan`-style log function to the `request` object. You
+can use this wherever you have access to the `request` object (`req` in the
+sample below). All log entries that are made on behalf of a specific request are
+shown bundled together in the Stackdriver Logging UI.
+
+```javascript
+const lb = require('@google-cloud/logging-bunyan');
+
+// Import express module and create an http server.
+const express = require('express');
+
+async function startServer() {
+  const {logger, mw} = await lb.express.middleware();
+  const app = express();
+
+  // Install the logging middleware. This ensures that a Bunyan-style `log`
+  // function is available on the `request` object. Attach this as one of the
+  // earliest middleware to make sure that log function is available in all the
+  // subsequent middleware and routes.
+  app.use(mw);
+
+  // Setup an http route and a route handler.
+  app.get('/', (req, res) => {
+    // `req.log` can be used as a bunyan style log method. All logs generated
+    // using `req.log` use the current request context. That is, all logs
+    // corresponding to a specific request will be bundled in the Stackdriver
+    // UI.
+    req.log.info('this is an info log message');
+    res.send('hello world');
+  });
+
+  // `logger` can be used as a global logger, one not correlated to any specific
+  // request.
+  logger.info({port: 8080}, 'bonjour');
+
+  // Start listening on the http server.
+  app.listen(8080, () => {
+    console.log('http server listening on port 8080');
+  });
+}
+
+startServer();
+```
+
 ### Error Reporting
 
 Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if your application is running on Google Cloud Platform. Make sure to add logs to your [uncaught exception][uncaught] and [unhandled rejection][unhandled] handlers if you want to see those errors too.
