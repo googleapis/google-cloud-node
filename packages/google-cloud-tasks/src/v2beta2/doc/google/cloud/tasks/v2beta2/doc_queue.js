@@ -157,7 +157,7 @@ var Queue = {
      *
      * A queue becomes `DISABLED` when
      * [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-     * [queue.xml](https://cloud.google.comappengine/docs/standard/java/config/queueref) is uploaded
+     * [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
      * which does not contain the queue. You cannot directly disable a queue.
      *
      * When a queue is disabled, tasks can still be added to a queue
@@ -187,11 +187,11 @@ var Queue = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   * For App Engine queues, the maximum allowed value is 500.
- *   * This field is output only   for [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget). In
- *     addition to the `max_tasks_dispatched_per_second` limit, a
- *     maximum of 10 QPS of LeaseTasks
- *     requests are allowed per pull queue.
+ *   * For App Engine queues, the maximum allowed value
+ *     is 500.
+ *   * This field is output only   for pull queues. In addition to the
+ *     `max_tasks_dispatched_per_second` limit, a maximum of 10 QPS of
+ *     LeaseTasks requests are allowed per pull queue.
  *
  *
  *   This field has the same meaning as
@@ -244,9 +244,8 @@ var Queue = {
  *   The maximum allowed value is 5,000.
  *
  *   This field is output only for
- *   [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget) and always -1, which
- *   indicates no limit. No other queue types can have `max_concurrent_tasks`
- *   set to -1.
+ *   pull queues and always -1, which indicates no limit. No other
+ *   queue types can have `max_concurrent_tasks` set to -1.
  *
  *
  *   This field has the same meaning as
@@ -288,8 +287,7 @@ var RateLimits = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for
- *   [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget).
+ *   This field is output only for pull queues.
  *
  *
  *   `max_retry_duration` will be truncated to the nearest second.
@@ -300,7 +298,7 @@ var RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} minBackoff
- *   A task will be [scheduled](https://cloud.google.comTask.schedule_time) for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
  *   max_backoff duration after it fails,
  *   if the queue's RetryConfig specifies that the task should be
@@ -309,8 +307,7 @@ var RateLimits = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for
- *   [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget).
+ *   This field is output only for pull queues.
  *
  *
  *   `min_backoff` will be truncated to the nearest second.
@@ -321,7 +318,7 @@ var RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} maxBackoff
- *   A task will be [scheduled](https://cloud.google.comTask.schedule_time) for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
  *   max_backoff duration after it fails,
  *   if the queue's RetryConfig specifies that the task should be
@@ -330,8 +327,7 @@ var RateLimits = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for
- *   [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget).
+ *   This field is output only for pull queues.
  *
  *
  *   `max_backoff` will be truncated to the nearest second.
@@ -364,8 +360,7 @@ var RateLimits = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for
- *   [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget).
+ *   This field is output only for pull queues.
  *
  *
  *   This field has the same meaning as

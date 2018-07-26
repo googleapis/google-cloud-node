@@ -471,7 +471,7 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
    * before using this method.
    *
    * @param {Object} request
@@ -557,7 +557,7 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
    * before using this method.
    *
    * @param {Object} request
@@ -637,7 +637,7 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
    * before using this method.
    *
    * @param {Object} request
@@ -820,7 +820,7 @@ class CloudTasksClient {
    * WARNING: Resuming many high-QPS queues at the same time can
    * lead to target overloading. If you are resuming high-QPS
    * queues, follow the 500/50/5 pattern described in
-   * [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/cloud-tasks/pdfs/managing-cloud-tasks-scaling-risks-2017-06-05.pdf).
+   * [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -880,8 +880,9 @@ class CloudTasksClient {
    * Returns an empty policy if the resource exists and does not have a policy
    * set.
    *
-   * Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the
-   * specified resource parent:
+   * Authorization requires the following
+   * [Google IAM](https://cloud.google.com/iam) permission on the specified
+   * resource parent:
    *
    * * `cloudtasks.queues.getIamPolicy`
    *
@@ -944,8 +945,9 @@ class CloudTasksClient {
    * Note: The Cloud Console does not check queue-level IAM permissions yet.
    * Project-level permissions are required to use the Cloud Console.
    *
-   * Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the
-   * specified resource parent:
+   * Authorization requires the following
+   * [Google IAM](https://cloud.google.com/iam) permission on the specified
+   * resource parent:
    *
    * * `cloudtasks.queues.setIamPolicy`
    *
@@ -1092,6 +1094,9 @@ class CloudTasksClient {
    * response_view controls the
    * subset of information which is returned.
    *
+   * The tasks may be returned in any order. The ordering may change at any
+   * time.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1110,15 +1115,10 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
-   * @param {string} [request.orderBy]
-   *   Sort order used for the query. The only fields supported for sorting
-   *   are `schedule_time` and `pull_message.tag`. All results will be
-   *   returned in approximately ascending order. The default ordering is by
-   *   `schedule_time`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1244,15 +1244,10 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
-   * @param {string} [request.orderBy]
-   *   Sort order used for the query. The only fields supported for sorting
-   *   are `schedule_time` and `pull_message.tag`. All results will be
-   *   returned in approximately ascending order. The default ordering is by
-   *   `schedule_time`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1312,8 +1307,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {Object} [options]
@@ -1367,10 +1362,9 @@ class CloudTasksClient {
    *
    * Tasks cannot be updated after creation; there is no UpdateTask command.
    *
-   * * For [App Engine queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.AppEngineHttpTarget),
-   *   the maximum task size is 100KB.
-   * * For [pull queues](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTarget), this
-   *   the maximum task size is 1MB.
+   * * For App Engine queues, the maximum task size is
+   *   100KB.
+   * * For pull queues, the maximum task size is 1MB.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1430,8 +1424,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {Object} [options]
@@ -1598,8 +1592,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {string} [request.filter]
@@ -1803,8 +1797,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {Object} [options]
@@ -1896,8 +1890,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {Object} [options]
@@ -1998,8 +1992,8 @@ class CloudTasksClient {
    *   contains.
    *
    *   Authorization for FULL requires
-   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
    * @param {Object} [options]

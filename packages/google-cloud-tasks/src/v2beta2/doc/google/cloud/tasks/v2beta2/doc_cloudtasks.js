@@ -256,16 +256,10 @@ var ResumeQueueRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
- *
- * @property {string} orderBy
- *   Sort order used for the query. The only fields supported for sorting
- *   are `schedule_time` and `pull_message.tag`. All results will be
- *   returned in approximately ascending order. The default ordering is by
- *   `schedule_time`.
  *
  * @property {number} pageSize
  *   Requested page size. Fewer tasks than requested might be returned.
@@ -340,8 +334,8 @@ var ListTasksResponse = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -414,8 +408,8 @@ var GetTaskRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -486,8 +480,8 @@ var DeleteTaskRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -618,8 +612,8 @@ var AcknowledgeTaskRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -663,8 +657,8 @@ var RenewLeaseRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -697,8 +691,8 @@ var CancelLeaseRequest = {
  *   contains.
  *
  *   Authorization for FULL requires
- *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *

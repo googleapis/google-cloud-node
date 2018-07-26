@@ -151,8 +151,7 @@ var Task = {
  * @property {number} attemptResponseCount
  *   Output only. The number of attempts which have received a response.
  *
- *   This field is not calculated for
- *   [pull tasks](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTaskTarget).
+ *   This field is not calculated for pull tasks.
  *
  * @property {Object} firstAttemptStatus
  *   Output only. The status of the task's first attempt.
@@ -160,16 +159,14 @@ var Task = {
  *   Only dispatch_time will be set.
  *   The other AttemptStatus information is not retained by Cloud Tasks.
  *
- *   This field is not calculated for
- *   [pull tasks](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTaskTarget).
+ *   This field is not calculated for pull tasks.
  *
  *   This object should have the same structure as [AttemptStatus]{@link google.cloud.tasks.v2beta2.AttemptStatus}
  *
  * @property {Object} lastAttemptStatus
  *   Output only. The status of the task's last attempt.
  *
- *   This field is not calculated for
- *   [pull tasks](https://cloud.google.comgoogle.cloud.tasks.v2beta2.PullTaskTarget).
+ *   This field is not calculated for pull tasks.
  *
  *   This object should have the same structure as [AttemptStatus]{@link google.cloud.tasks.v2beta2.AttemptStatus}
  *
