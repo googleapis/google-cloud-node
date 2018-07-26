@@ -22,12 +22,18 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
+
 
 versions = ['v1', 'v1p1beta1', 'v1p2beta1', 'v1p3beta1']
 
 for version in versions:
     library = gapic.node_library('vision', version)
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+
+templates = common_templates.node_library(package_name="@google-cloud/vision")
+s.copy(templates)
+
 
 '''
 Node.js specific cleanup
