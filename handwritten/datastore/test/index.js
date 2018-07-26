@@ -241,7 +241,7 @@ describe('Datastore', function() {
 
       assert.notStrictEqual(datastore.options, options);
 
-      assert.deepEqual(
+      assert.deepStrictEqual(
         datastore.options,
         extend(
           {
@@ -487,7 +487,7 @@ describe('Datastore', function() {
 
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], namespace);
-      assert.deepEqual(query.calledWith_[2], kind);
+      assert.deepStrictEqual(query.calledWith_[2], kind);
     });
 
     it('should include the default namespace', function() {
@@ -496,7 +496,7 @@ describe('Datastore', function() {
 
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
-      assert.deepEqual(query.calledWith_[2], kind);
+      assert.deepStrictEqual(query.calledWith_[2], kind);
     });
 
     it('should include the default namespace in a kindless query', function() {
@@ -504,7 +504,7 @@ describe('Datastore', function() {
 
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
-      assert.deepEqual(query.calledWith_[2], []);
+      assert.deepStrictEqual(query.calledWith_[2], []);
     });
   });
 
@@ -521,7 +521,7 @@ describe('Datastore', function() {
       var key = datastore.key(options);
 
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
-      assert.deepEqual(key.calledWith_[0].path, [options]);
+      assert.deepStrictEqual(key.calledWith_[0].path, [options]);
     });
   });
 

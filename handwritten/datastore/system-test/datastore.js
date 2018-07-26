@@ -145,8 +145,8 @@ describe('Datastore', function() {
           datastore.get(postKey, function(err, entity) {
             assert.ifError(err);
 
-            assert.deepEqual(entity, data);
-            assert.deepEqual(entity[datastore.KEY], postKey);
+            assert.deepStrictEqual(entity, data);
+            assert.deepStrictEqual(entity[datastore.KEY], postKey);
 
             datastore.delete(postKey, done);
           });
@@ -163,8 +163,8 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity, post);
-          assert.deepEqual(entity[datastore.KEY], postKey);
+          assert.deepStrictEqual(entity, post);
+          assert.deepStrictEqual(entity[datastore.KEY], postKey);
 
           datastore.delete(postKey, done);
         });
@@ -180,7 +180,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity, post);
+          assert.deepStrictEqual(entity, post);
 
           datastore.delete(postKey, done);
         });
@@ -190,7 +190,7 @@ describe('Datastore', function() {
     it('should save/get/delete a buffer', function(done) {
       var postKey = datastore.key(['Post']);
       var data = {
-        buf: new Buffer('010100000000000000000059400000000000006940', 'hex'),
+        buf: Buffer.from('010100000000000000000059400000000000006940', 'hex'),
       };
 
       datastore.save({key: postKey, data: data}, function(err) {
@@ -202,7 +202,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity, data);
+          assert.deepStrictEqual(entity, data);
 
           datastore.delete(datastore.key(['Post', assignedId]), done);
         });
@@ -221,7 +221,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity, post);
+          assert.deepStrictEqual(entity, post);
 
           datastore.delete(postKey, done);
         });
@@ -300,7 +300,7 @@ describe('Datastore', function() {
             datastore.get(postKey, function(err, entity) {
               assert.ifError(err);
 
-              assert.deepEqual(entity, post);
+              assert.deepStrictEqual(entity, post);
 
               datastore.delete(postKey, done);
             });
@@ -403,7 +403,7 @@ describe('Datastore', function() {
             assert.ifError(err);
 
             assert.strictEqual(results[0].fullName, 'Full name');
-            assert.deepEqual(results[0].linkedTo, personKey);
+            assert.deepStrictEqual(results[0].linkedTo, personKey);
 
             datastore.delete(personKey, done);
           });
@@ -483,7 +483,7 @@ describe('Datastore', function() {
 
             datastore.get(key, function(err, entity) {
               assert.ifError(err);
-              assert.deepEqual(entity.location, geoPointValue);
+              assert.deepStrictEqual(entity.location, geoPointValue);
               done();
             });
           }
@@ -728,12 +728,12 @@ describe('Datastore', function() {
       datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
 
-        assert.deepEqual(entities[0], {
+        assert.deepStrictEqual(entities[0], {
           name: 'Arya',
           family: 'Stark',
         });
 
-        assert.deepEqual(entities[8], {
+        assert.deepStrictEqual(entities[8], {
           name: 'Sansa',
           family: 'Stark',
         });
@@ -846,7 +846,7 @@ describe('Datastore', function() {
 
             datastore.get(key, function(err, entity) {
               assert.ifError(err);
-              assert.deepEqual(entity, obj);
+              assert.deepStrictEqual(entity, obj);
               done();
             });
           });

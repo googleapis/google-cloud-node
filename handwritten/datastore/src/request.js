@@ -847,7 +847,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *     numDonutsServed: 45,
  *     founded: new Date('Tue May 12 2015 15:30:00 GMT-0400 (EDT)'),
  *     isStartup: true,
- *     donutEmoji: new Buffer('\uD83C\uDF69'),
+ *     donutEmoji: Buffer.from('\uD83C\uDF69'),
  *     keywords: [
  *       'donut',
  *       'coffee',

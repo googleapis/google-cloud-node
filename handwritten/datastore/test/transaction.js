@@ -31,7 +31,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['createQuery', 'delete', 'save']);
+    assert.deepStrictEqual(options.exclude, ['createQuery', 'delete', 'save']);
   },
 });
 
@@ -145,9 +145,9 @@ describe('Transaction', function() {
     });
 
     it('should localize default properties', function() {
-      assert.deepEqual(transaction.modifiedEntities_, []);
-      assert.deepEqual(transaction.requestCallbacks_, []);
-      assert.deepEqual(transaction.requests_, []);
+      assert.deepStrictEqual(transaction.modifiedEntities_, []);
+      assert.deepStrictEqual(transaction.requestCallbacks_, []);
+      assert.deepStrictEqual(transaction.requests_, []);
     });
   });
 
@@ -219,7 +219,7 @@ describe('Transaction', function() {
       };
       transaction.commit(function(err, apiResponse) {
         assert.ifError(err);
-        assert.deepEqual(resp, apiResponse);
+        assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
@@ -261,7 +261,10 @@ describe('Transaction', function() {
       assert.strictEqual(args.length, 2);
 
       // Save arguments must come first.
-      assert.deepEqual(args, [[saveArg1, saveArg2], [deleteArg1, deleteArg2]]);
+      assert.deepStrictEqual(args, [
+        [saveArg1, saveArg2],
+        [deleteArg1, deleteArg2],
+      ]);
     });
 
     it('should honor ordering of mutations (last wins)', function() {
@@ -311,7 +314,7 @@ describe('Transaction', function() {
       ];
 
       transaction.request_ = function(config) {
-        assert.deepEqual(config.reqOpts, {
+        assert.deepStrictEqual(config.reqOpts, {
           mutations: [{a: 'b'}, {c: 'd'}, {e: 'f'}, {g: 'h'}],
         });
         done();
@@ -378,7 +381,7 @@ describe('Transaction', function() {
       transaction.modifiedEntities_.forEach(function(queuedEntity) {
         assert.strictEqual(queuedEntity.method, 'delete');
         assert(keys.indexOf(queuedEntity.entity.key) > -1);
-        assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
+        assert.deepStrictEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
     });
   });
@@ -415,7 +418,7 @@ describe('Transaction', function() {
         callback(error);
       };
       transaction.rollback(function(err) {
-        assert.deepEqual(err, error);
+        assert.deepStrictEqual(err, error);
         done();
       });
     });
@@ -427,7 +430,7 @@ describe('Transaction', function() {
       };
       transaction.rollback(function(err, apiResponse) {
         assert.ifError(err);
-        assert.deepEqual(resp, apiResponse);
+        assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
@@ -458,7 +461,7 @@ describe('Transaction', function() {
       transaction.request_ = function(config) {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'beginTransaction');
-        assert.deepEqual(config.reqOpts, {transactionOptions: {}});
+        assert.deepStrictEqual(config.reqOpts, {transactionOptions: {}});
         assert.strictEqual(config.gaxOpts, undefined);
         done();
       };
@@ -484,7 +487,10 @@ describe('Transaction', function() {
         };
 
         transaction.request_ = function(config) {
-          assert.deepEqual(config.reqOpts.transactionOptions.readOnly, {});
+          assert.deepStrictEqual(
+            config.reqOpts.transactionOptions.readOnly,
+            {}
+          );
           done();
         };
 
@@ -495,7 +501,10 @@ describe('Transaction', function() {
         transaction.readOnly = true;
 
         transaction.request_ = function(config) {
-          assert.deepEqual(config.reqOpts.transactionOptions.readOnly, {});
+          assert.deepStrictEqual(
+            config.reqOpts.transactionOptions.readOnly,
+            {}
+          );
           done();
         };
 
@@ -510,7 +519,7 @@ describe('Transaction', function() {
         };
 
         transaction.request_ = function(config) {
-          assert.deepEqual(config.reqOpts.transactionOptions.readWrite, {
+          assert.deepStrictEqual(config.reqOpts.transactionOptions.readWrite, {
             previousTransaction: options.transactionId,
           });
           done();
@@ -523,7 +532,7 @@ describe('Transaction', function() {
         transaction.id = 'transaction-id';
 
         transaction.request_ = function(config) {
-          assert.deepEqual(config.reqOpts.transactionOptions.readWrite, {
+          assert.deepStrictEqual(config.reqOpts.transactionOptions.readWrite, {
             previousTransaction: transaction.id,
           });
           done();
@@ -546,7 +555,7 @@ describe('Transaction', function() {
         };
 
         transaction.request_ = function(config) {
-          assert.deepEqual(config.reqOpts, options);
+          assert.deepStrictEqual(config.reqOpts, options);
           done();
         };
 
@@ -599,7 +608,7 @@ describe('Transaction', function() {
         transaction.run(function(err, transaction_, apiResponse_) {
           assert.ifError(err);
           assert.strictEqual(transaction_, transaction);
-          assert.deepEqual(apiResponse_, apiResponse);
+          assert.deepStrictEqual(apiResponse_, apiResponse);
           done();
         });
       });
@@ -625,7 +634,7 @@ describe('Transaction', function() {
           return ent.key === queuedEntity.entity.key;
         })[0];
 
-        assert.deepEqual(queuedEntity.args, [match]);
+        assert.deepStrictEqual(queuedEntity.args, [match]);
       });
     });
   });
