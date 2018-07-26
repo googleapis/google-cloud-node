@@ -21,12 +21,18 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
+
 
 version = 'v2beta2'
 library = gapic.node_library('tasks', version,
   config_path='artman_cloudtasks.yaml'
 )
 s.copy(library, excludes=['README.md', 'package.json'])
+
+templates = common_templates.node_library(package_name="@google-cloud/tasks")
+s.copy(templates)
+
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'ci'])
