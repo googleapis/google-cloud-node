@@ -16,10 +16,10 @@
 
 const pkg = require('../../../package.json');
 import * as is from 'is';
-import {Configuration} from '../configuration';
+import {Configuration, Logger} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';
-import {Service, Logger, ServiceOptions} from '@google-cloud/common';
+import {Service, ServiceOptions} from '@google-cloud/common';
 
 /* @const {Array<String>} list of scopes needed to work with the errors api. */
 const SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];

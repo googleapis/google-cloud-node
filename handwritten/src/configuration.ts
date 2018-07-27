@@ -15,7 +15,7 @@
  */
 
 
-import {Logger} from '@google-cloud/common';
+import consoleLogLevel = require('console-log-level');
 import * as is from 'is';
 import {has} from 'lodash';
 
@@ -24,6 +24,8 @@ const isBoolean = is.boolean;
 const isString = is.string;
 const isNumber = is.number;
 const env = process.env;
+
+export type Logger = consoleLogLevel.Logger;
 
 export interface ConfigurationOptions {
   projectId?: string;
@@ -77,10 +79,6 @@ export class Configuration {
     /**
      * The _logger property caches the logger instance created at the top-level
      * for configuration logging purposes.
-     * @memberof Configuration
-     * @private
-     * @type {Object}
-     * @defaultvalue Object
      */
     this._logger = logger;
     /**
