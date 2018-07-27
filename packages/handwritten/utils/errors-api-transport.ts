@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-import {Logger} from '@google-cloud/common';
-
-import {Configuration} from '../src/configuration';
+import {Configuration, Logger} from '../src/configuration';
 import {RequestHandler as AuthClient} from '../src/google-apis/auth-client';
 
 export interface ServiceContext {
