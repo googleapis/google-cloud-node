@@ -20,7 +20,6 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var flatten = require('lodash.flatten');
 var is = require('is');
-var prop = require('propprop');
 var util = require('util');
 
 var entity = require('./entity.js');
@@ -200,7 +199,7 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
   // Take the `req` array built previously, and merge them into one request to
   // send as the final transactional commit.
   var reqOpts = {
-    mutations: flatten(this.requests_.map(prop('mutations'))),
+    mutations: flatten(this.requests_.map(x => x.mutations)),
   };
 
   this.request_(
