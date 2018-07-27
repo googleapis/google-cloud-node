@@ -18,10 +18,8 @@
  * @module error-reporting
  */
 
-import {Logger} from '@google-cloud/common';
-
 import {ErrorMessage} from './classes/error-message';
-import {Configuration, ConfigurationOptions} from './configuration';
+import {Configuration, ConfigurationOptions, Logger} from './configuration';
 import {RequestHandler as AuthClient} from './google-apis/auth-client';
 // Begin error reporting interfaces
 import * as expressInterface from './interfaces/express';

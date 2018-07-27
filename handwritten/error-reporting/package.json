@@ -55,12 +55,14 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.20.3",
+    "console-log-level": "^1.4.0",
     "is": "^3.2.1",
     "lodash.has": "^4.5.2"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@types/boom": "^7.2.0",
+    "@types/console-log-level": "^1.4.0",
     "@types/express": "^4.11.1",
     "@types/express-serve-static-core": "^4.11.1",
     "@types/extend": "^3.0.0",

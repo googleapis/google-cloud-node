@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import {has} from 'lodash';
 import * as is from 'is';
+import {has} from 'lodash';
+
 const isFunction = (is as {} as {fn: Function}).fn;
 const isObject = is.object;
 import * as assert from 'assert';

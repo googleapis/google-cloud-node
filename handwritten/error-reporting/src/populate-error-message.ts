@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import {has} from 'lodash';
 import * as is from 'is';
+import {has} from 'lodash';
+
 const isObject = is.object;
 import {buildStackTrace} from './build-stack-trace';
 

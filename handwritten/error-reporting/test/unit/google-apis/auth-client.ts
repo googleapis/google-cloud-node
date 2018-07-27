@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-import {Logger} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
-import {Configuration, ConfigurationOptions} from '../../../src/configuration';
+import {Configuration, ConfigurationOptions, Logger} from '../../../src/configuration';
 
 function verifyReportedMessage(
     config1: ConfigurationOptions, errToReturn: Error|null|undefined,
-    expectedLogs: {error?: string; info?: string;}) {
+    expectedLogs: {error?: string; info?: string;}, done: () => void) {
   class ServiceStub {
     authClient: {};
     request: {};
@@ -62,33 +61,43 @@ function verifyReportedMessage(
   new RequestHandler(config2, logger);
   setImmediate(() => {
     assert.deepStrictEqual(logs, expectedLogs);
+    done();
   });
 }
 describe('RequestHandler', () => {
-  it('should not request OAuth2 token if key is provided', () => {
-    const config = {
-      ignoreEnvironmentCheck: true,
-      key: 'key',
-    };
-    const message = 'Made OAuth2 Token Request';
-    verifyReportedMessage(config, new Error(message), {
-      info: 'API key provided; skipping OAuth2 token request.',
-    });
-  });
+  it('should not request OAuth2 token if key is provided',
+     (done: () => void) => {
+       const config = {
+         ignoreEnvironmentCheck: true,
+         key: 'key',
+       };
+       const message = 'Made OAuth2 Token Request';
+       verifyReportedMessage(
+           config, new Error(message), {
+             info: 'API key provided; skipping OAuth2 token request.',
+           },
+           done);
+     })
+      .timeout(4000);
 
-  it('should issue a warning if it cannot communicate with the API', () => {
-    const config = {ignoreEnvironmentCheck: true};
-    const message = 'Test Error';
-    verifyReportedMessage(config, new Error(message), {
-      error: 'Unable to find credential information on instance. This ' +
-          'library will be unable to communicate with the Stackdriver API to ' +
-          'save errors.  Message: ' + message,
-    });
-  });
+  it('should issue a warning if it cannot communicate with the API',
+     (done: () => void) => {
+       const config = {ignoreEnvironmentCheck: true};
+       const message = 'Test Error';
+       verifyReportedMessage(
+           config, new Error(message), {
+             error: 'Unable to find credential information on instance. This ' +
+                 'library will be unable to communicate with the Stackdriver API to ' +
+                 'save errors.  Message: ' + message,
+           },
+           done);
+     });
 
-  it('should not issue a warning if it can communicate with the API', () => {
-    const config = {ignoreEnvironmentCheck: true};
-    verifyReportedMessage(config, null, {});
-    verifyReportedMessage(config, undefined, {});
-  });
+  it('should not issue a warning if it can communicate with the API',
+     (done: () => void) => {
+       const config = {ignoreEnvironmentCheck: true};
+       verifyReportedMessage(config, null, {}, () => {
+         verifyReportedMessage(config, undefined, {}, done);
+       });
+     });
 });

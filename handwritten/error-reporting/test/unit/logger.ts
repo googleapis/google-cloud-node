@@ -63,10 +63,10 @@ describe('logger', () => {
       let text: string|undefined;
       beforeEach(() => {
         // eslint-disable-next-line no-console
-        oldLog = console.log;
+        oldLog = console.error;
         text = '';
         // eslint-disable-next-line no-console
-        console.log = function(this) {
+        console.error = function(this) {
           oldLog.apply(this, arguments);
           for (let i = 0; i < arguments.length; i++) {
             text += arguments[i];
@@ -76,7 +76,7 @@ describe('logger', () => {
       afterEach(() => {
         text = undefined;
         // eslint-disable-next-line no-console
-        console.log = oldLog;
+        console.error = oldLog;
       });
       it('Should print WARN logs by default', () => {
         const logger = createLogger();

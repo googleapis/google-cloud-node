@@ -340,6 +340,4 @@ server.head('/hello/:name', respond);
   }
 ];
 
-check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {
-  timeout: 2*60*1000
-});
+check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {timeout: 2 * 60 * 1000});

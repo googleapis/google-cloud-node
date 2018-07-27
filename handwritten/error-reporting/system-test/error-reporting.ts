@@ -451,8 +451,8 @@ describe('error-reporting', () => {
     // more carefully reinitialize the error-reporting library without
     // interfering with existing listeners of the 'unhandledRejection' event.
     assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
-    oldLogger = console.log;
-    console.log = function(this) {
+    oldLogger = console.error;
+    console.error = function(this) {
       const text = util.format.apply(null, arguments);
       oldLogger(text);
       logOutput += text;
@@ -480,7 +480,7 @@ describe('error-reporting', () => {
   }
 
   after(done => {
-    console.log = oldLogger;
+    console.error = oldLogger;
     if (transport) {
       transport.deleteAllEvents(err => {
         assert.ifError(err);
