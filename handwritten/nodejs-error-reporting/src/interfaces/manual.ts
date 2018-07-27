@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import {Logger} from '@google-cloud/common';
 import * as http from 'http';
 import * as is from 'is';
 
 import {ErrorMessage} from '../classes/error-message';
-import {Configuration} from '../configuration';
+import {Configuration, Logger} from '../configuration';
 import {RequestHandler} from '../google-apis/auth-client';
 import {populateErrorMessage} from '../populate-error-message';
 import {manualRequestInformationExtractor} from '../request-extractors/manual';

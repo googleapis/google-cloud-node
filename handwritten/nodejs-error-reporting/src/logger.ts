@@ -16,14 +16,31 @@
 
 import * as is from 'is';
 import {has} from 'lodash';
+import consoleLogLevel = require('console-log-level');
 
 const packageJson = require('../../package.json');
 
-import {ConfigurationOptions} from './configuration';
-import {Logger} from '@google-cloud/common';
+import {ConfigurationOptions, Logger} from './configuration';
+
+
+const LEVELNAMES: consoleLogLevel.LogLevelNames[] =
+    ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
+const DEFAULT_LEVEL = 2;  // warn.
+
+function logLevelToName(level: number): consoleLogLevel.LogLevelNames {
+  if (typeof level === 'string') {
+    level = Number(level);
+  }
+  if (typeof level !== 'number') {
+    level = DEFAULT_LEVEL;
+  }
+  if (level < 0) level = 0;
+  if (level > 4) level = 4;
+  return LEVELNAMES[level];
+}
 
 /**
- * Creates an instance of the Google Cloud Diagnostics logger class. This
+ * Creates an instance of the a Logger class. This
  * instance will be configured to log at the level given by the environment or
  * the runtime configuration property `logLevel`. If neither of these inputs are
  * given or valid then the logger will default to logging at log level `WARN`.
@@ -39,27 +56,27 @@ import {Logger} from '@google-cloud/common';
  * @returns {Object} - returns an instance of the logger created with the given/
  *  default options
  */
-export function createLogger(initConfiguration?: ConfigurationOptions) {
+export function createLogger(config?: ConfigurationOptions): Logger {
   // Default to log level: warn (2)
-  const DEFAULT_LEVEL = Logger.LEVELS[2];
   let level = DEFAULT_LEVEL;
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
-    level =
-        Logger.LEVELS[~~process.env.GCLOUD_ERRORS_LOGLEVEL!] || DEFAULT_LEVEL;
-  } else if (
-      is.object(initConfiguration) && has(initConfiguration, 'logLevel')) {
-    if (is.string(initConfiguration!.logLevel)) {
+    level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL! || DEFAULT_LEVEL;
+  } else if (is.object(config) && has(config, 'logLevel')) {
+    if (is.string(config!.logLevel)) {
       // Cast string as integer
-      level = Logger.LEVELS[~~initConfiguration!.logLevel!] || DEFAULT_LEVEL;
-    } else if (is.number(initConfiguration!.logLevel)) {
-      level =
-          Logger.LEVELS[Number(initConfiguration!.logLevel!)] || DEFAULT_LEVEL;
+      level = ~~config!.logLevel! || DEFAULT_LEVEL;
+    } else if (is.number(config!.logLevel)) {
+      level = Number(config!.logLevel!) || DEFAULT_LEVEL;
     } else {
       throw new Error(
           'config.logLevel must be a number or decimal ' +
           'representation of a number in string form');
     }
   }
-  return new Logger({level, tag: packageJson.name});
+  return consoleLogLevel({
+    stderr: true,
+    prefix: (level: string) => `${level.toUpperCase()}:${packageJson.name}:`,
+    level: logLevelToName(level)
+  });
 }

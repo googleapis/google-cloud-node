@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import {has} from 'lodash';
 import * as is from 'is';
+import {has} from 'lodash';
+
 const isObject = is.object;
 const isArray = is.array;
 // TODO: Address the error where `is` does not have a `fn` property
