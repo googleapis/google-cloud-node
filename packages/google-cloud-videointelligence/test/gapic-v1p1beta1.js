@@ -100,7 +100,7 @@ describe('VideoIntelligenceServiceClient', () => {
         })
         .catch(err => {
           assert(err instanceof Error);
-          assert.equal(err.code, FAKE_STATUS_CODE);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
           done();
         });
     });
