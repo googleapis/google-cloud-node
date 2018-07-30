@@ -40,7 +40,7 @@
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
     "generate-scaffolding-samples": "repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha test/ --timeout 600000",
     "lint": "eslint src/ samples/ system-test/ test/",
