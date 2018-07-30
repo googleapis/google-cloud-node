@@ -33,7 +33,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, [
+    assert.deepStrictEqual(options.exclude, [
       'autoscaler',
       'disk',
       'instanceGroup',
@@ -95,7 +95,7 @@ var fakePaginator = {
     extended = true;
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'Zone');
-    assert.deepEqual(methods, [
+    assert.deepStrictEqual(methods, [
       'getAutoscalers',
       'getDisks',
       'getInstanceGroups',
@@ -188,7 +188,7 @@ describe('Zone', function() {
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.baseUrl, '/zones');
       assert.strictEqual(calledWith.id, ZONE_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true,
@@ -245,7 +245,7 @@ describe('Zone', function() {
 
       zone.request = function(reqOpts) {
         var policy = reqOpts.json.autoscalingPolicy;
-        assert.deepEqual(policy, config.autoscalingPolicy);
+        assert.deepStrictEqual(policy, config.autoscalingPolicy);
         done();
       };
 
@@ -414,7 +414,7 @@ describe('Zone', function() {
         zone.request = function(reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/autoscalers');
-          assert.deepEqual(reqOpts.json, expectedBody);
+          assert.deepStrictEqual(reqOpts.json, expectedBody);
 
           done();
         };
@@ -547,7 +547,7 @@ describe('Zone', function() {
           zone.gceImages.getLatest = function(os, callback) {
             zone.createDisk = function(name, config, callback) {
               assert.strictEqual(name, NAME);
-              assert.deepEqual(config, expectedConfig);
+              assert.deepStrictEqual(config, expectedConfig);
               callback();
             };
 
@@ -575,8 +575,8 @@ describe('Zone', function() {
         zone.request = function(reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/disks');
-          assert.deepEqual(reqOpts.qs, {});
-          assert.deepEqual(reqOpts.json, expectedBody);
+          assert.deepStrictEqual(reqOpts.qs, {});
+          assert.deepStrictEqual(reqOpts.json, expectedBody);
 
           done();
         };
@@ -691,7 +691,7 @@ describe('Zone', function() {
         zone.request = function(reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/instanceGroups');
-          assert.deepEqual(reqOpts.json, expectedBody);
+          assert.deepStrictEqual(reqOpts.json, expectedBody);
 
           done();
         };
@@ -701,7 +701,7 @@ describe('Zone', function() {
 
       it('should not require options', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {name: NAME});
+          assert.deepStrictEqual(reqOpts.json, {name: NAME});
           done();
         };
 
@@ -808,7 +808,7 @@ describe('Zone', function() {
 
       it('should accept an array of tags', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.tags.items, CONFIG.tags);
+          assert.deepStrictEqual(reqOpts.json.tags.items, CONFIG.tags);
           done();
         };
 
@@ -850,7 +850,7 @@ describe('Zone', function() {
 
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
+          assert.deepStrictEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
             type: 'ONE_TO_ONE_NAT',
           });
           done();
@@ -879,7 +879,7 @@ describe('Zone', function() {
         var expectedTags = ['a', 'b', 'http-server'];
 
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.tags.items, expectedTags);
+          assert.deepStrictEqual(reqOpts.json.tags.items, expectedTags);
           done();
         };
 
@@ -930,7 +930,7 @@ describe('Zone', function() {
 
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
+          assert.deepStrictEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
             type: 'ONE_TO_ONE_NAT',
           });
           done();
@@ -959,7 +959,7 @@ describe('Zone', function() {
         var expectedTags = ['a', 'b', 'https-server'];
 
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.tags.items, expectedTags);
+          assert.deepStrictEqual(reqOpts.json.tags.items, expectedTags);
           done();
         };
 
@@ -1028,7 +1028,7 @@ describe('Zone', function() {
           zone.gceImages.getLatest = function(os, callback) {
             zone.createVM = function(name, config, callback) {
               assert.strictEqual(name, NAME);
-              assert.deepEqual(config, expectedConfig);
+              assert.deepStrictEqual(config, expectedConfig);
               callback();
             };
 
@@ -1045,7 +1045,7 @@ describe('Zone', function() {
         zone.request = function(reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/instances');
-          assert.deepEqual(reqOpts.json, EXPECTED_CONFIG);
+          assert.deepStrictEqual(reqOpts.json, EXPECTED_CONFIG);
 
           done();
         };
@@ -1127,7 +1127,7 @@ describe('Zone', function() {
   describe('getAutoscalers', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1195,7 +1195,7 @@ describe('Zone', function() {
         zone.getAutoscalers({}, function(err, disks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -1226,7 +1226,7 @@ describe('Zone', function() {
   describe('getDisks', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1294,7 +1294,7 @@ describe('Zone', function() {
         zone.getDisks({}, function(err, disks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -1325,7 +1325,7 @@ describe('Zone', function() {
   describe('getInstanceGroups', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1393,7 +1393,7 @@ describe('Zone', function() {
         zone.getInstanceGroups({}, function(err, groups, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -1429,7 +1429,7 @@ describe('Zone', function() {
       });
 
       zone.compute.getMachineTypes = function(options, callback) {
-        assert.deepEqual(options, expectedOptions);
+        assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
 
@@ -1446,7 +1446,7 @@ describe('Zone', function() {
 
     it('should not require any arguments', function(done) {
       zone.compute.getMachineTypes = function(options, callback) {
-        assert.deepEqual(options, {
+        assert.deepStrictEqual(options, {
           filter: 'zone eq .*' + zone.name,
         });
         assert.strictEqual(typeof callback, 'undefined');
@@ -1470,7 +1470,7 @@ describe('Zone', function() {
   describe('getOperations', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1537,7 +1537,7 @@ describe('Zone', function() {
         zone.getOperations({}, function(err, operations, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -1568,7 +1568,7 @@ describe('Zone', function() {
   describe('getVMs', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1635,7 +1635,7 @@ describe('Zone', function() {
         zone.getVMs({}, function(err, vms, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -1712,7 +1712,7 @@ describe('Zone', function() {
     it('should create a firewall rule', function(done) {
       zone.compute.createFirewall = function(name, config) {
         assert.strictEqual(name, 'default-allow-http');
-        assert.deepEqual(config, {
+        assert.deepStrictEqual(config, {
           protocols: {
             tcp: [80],
           },
@@ -1760,7 +1760,7 @@ describe('Zone', function() {
     it('should create a firewall rule', function(done) {
       zone.compute.createFirewall = function(name, config) {
         assert.strictEqual(name, 'default-allow-https');
-        assert.deepEqual(config, {
+        assert.deepStrictEqual(config, {
           protocols: {
             tcp: [443],
           },

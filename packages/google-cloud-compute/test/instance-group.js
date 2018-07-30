@@ -51,7 +51,7 @@ var fakePaginator = {
     extended = true;
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'InstanceGroup');
-    assert.deepEqual(methods, ['getVMs']);
+    assert.deepStrictEqual(methods, ['getVMs']);
   },
   streamify: function(methodName) {
     return methodName;
@@ -123,7 +123,7 @@ describe('InstanceGroup', function() {
               assert.strictEqual(calledWith.parent, zoneInstance);
               assert.strictEqual(calledWith.baseUrl, '/instanceGroups');
               assert.strictEqual(calledWith.id, NAME);
-              assert.deepEqual(calledWith.methods, {
+              assert.deepStrictEqual(calledWith.methods, {
                 create: true,
                 exists: true,
                 get: true,
@@ -147,7 +147,7 @@ describe('InstanceGroup', function() {
     };
 
     it('should format an object of named ports', function() {
-      assert.deepEqual(InstanceGroup.formatPorts_(PORTS), [
+      assert.deepStrictEqual(InstanceGroup.formatPorts_(PORTS), [
         {name: 'http', port: 80},
         {name: 'https', port: 443},
       ]);
@@ -161,7 +161,7 @@ describe('InstanceGroup', function() {
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addInstances');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           instances: VMS.map(function(vm) {
             return {
               instance: vm.url,
@@ -304,7 +304,7 @@ describe('InstanceGroup', function() {
 
     it('should accept only a callback', function(done) {
       instanceGroup.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -333,7 +333,7 @@ describe('InstanceGroup', function() {
 
       it('should set the instanceState filter', function(done) {
         instanceGroup.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             instanceState: 'RUNNING',
           });
           done();
@@ -391,7 +391,7 @@ describe('InstanceGroup', function() {
         instanceGroup.getVMs({}, function(err, vms, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -426,7 +426,7 @@ describe('InstanceGroup', function() {
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/removeInstances');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           instances: VMS.map(function(vm) {
             return {
               instance: vm.url,

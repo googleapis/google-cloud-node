@@ -92,7 +92,7 @@ describe('Address', function() {
       assert.strictEqual(calledWith.parent, regionInstance);
       assert.strictEqual(calledWith.baseUrl, '/addresses');
       assert.strictEqual(calledWith.id, ADDRESS_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,

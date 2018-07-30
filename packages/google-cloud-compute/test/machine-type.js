@@ -67,7 +67,7 @@ describe('MachineType', function() {
       assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/machineTypes');
       assert.strictEqual(calledWith.id, MACHINE_TYPE_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true,

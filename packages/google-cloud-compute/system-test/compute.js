@@ -150,7 +150,7 @@ describe('Compute', function() {
 
         assert.strictEqual(metadata.name, AUTOSCALER_NAME);
 
-        assert.deepEqual(metadata.autoscalingPolicy, {
+        assert.deepStrictEqual(metadata.autoscalingPolicy, {
           coolDownPeriodSec: 30,
           cpuUtilization: {
             utilizationTarget: 0.8,
@@ -305,8 +305,8 @@ describe('Compute', function() {
     it('should have opened the correct connections', function(done) {
       firewall.getMetadata(function(err, metadata) {
         assert.ifError(err);
-        assert.deepEqual(metadata.allowed, expectedMetadata.allowed);
-        assert.deepEqual(metadata.sourceRanges, expectedMetadata.sourceRanges);
+        assert.deepStrictEqual(metadata.allowed, expectedMetadata.allowed);
+        assert.deepStrictEqual(metadata.sourceRanges, expectedMetadata.sourceRanges);
         done();
       });
     });
@@ -545,7 +545,7 @@ describe('Compute', function() {
 
         assert.strictEqual(metadata.name, INSTANCE_GROUP_NAME);
         assert.strictEqual(metadata.description, OPTIONS.description);
-        assert.deepEqual(metadata.namedPorts, [
+        assert.deepStrictEqual(metadata.namedPorts, [
           {
             name: 'http',
             port: 80,
@@ -612,7 +612,7 @@ describe('Compute', function() {
 
           instanceGroup.getMetadata(function(err, metadata) {
             assert.ifError(err);
-            assert.deepEqual(metadata.namedPorts, [
+            assert.deepStrictEqual(metadata.namedPorts, [
               {
                 name: 'http',
                 port: 80,
@@ -1271,7 +1271,7 @@ describe('Compute', function() {
     it('should have enabled HTTP connections', function(done) {
       vm.getTags(function(err, tags) {
         assert.ifError(err);
-        assert.deepEqual(tags, ['http-server']);
+        assert.deepStrictEqual(tags, ['http-server']);
         done();
       });
     });
@@ -1402,7 +1402,7 @@ describe('Compute', function() {
           vm.getMetadata(function(err, metadata) {
             assert.ifError(err);
 
-            assert.deepEqual(metadata.metadata.items, [
+            assert.deepStrictEqual(metadata.metadata.items, [
               {
                 key: key,
                 value: value,

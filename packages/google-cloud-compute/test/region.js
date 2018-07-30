@@ -33,7 +33,7 @@ var fakeUtil = extend({}, common.util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, [
+    assert.deepStrictEqual(options.exclude, [
       'address',
       'operation',
       'rule',
@@ -79,7 +79,7 @@ var fakePaginator = {
     extended = true;
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'Region');
-    assert.deepEqual(methods, [
+    assert.deepStrictEqual(methods, [
       'getAddresses',
       'getOperations',
       'getRules',
@@ -147,7 +147,7 @@ describe('Region', function() {
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.baseUrl, '/regions');
       assert.strictEqual(calledWith.id, REGION_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true,
@@ -169,7 +169,7 @@ describe('Region', function() {
         };
 
         var requestInterceptor = region.interceptors.pop().request;
-        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
+        assert.deepStrictEqual(requestInterceptor(reqOpts), expectedReqOpts);
       });
 
       it('should not affect non-cancel requests', function() {
@@ -181,7 +181,7 @@ describe('Region', function() {
         };
 
         var requestInterceptor = region.interceptors.pop().request;
-        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
+        assert.deepStrictEqual(requestInterceptor(reqOpts), expectedReqOpts);
       });
     });
   });
@@ -206,7 +206,7 @@ describe('Region', function() {
       var expectedBody = {name: NAME};
 
       region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, expectedBody);
+        assert.deepStrictEqual(reqOpts.json, expectedBody);
         done();
       };
 
@@ -217,7 +217,7 @@ describe('Region', function() {
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addresses');
-        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+        assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
 
         done();
       };
@@ -313,7 +313,7 @@ describe('Region', function() {
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/subnetworks');
-        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+        assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
 
         done();
       };
@@ -417,7 +417,7 @@ describe('Region', function() {
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
       region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -485,7 +485,7 @@ describe('Region', function() {
         region.getAddresses({}, function(err, addresses, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -516,7 +516,7 @@ describe('Region', function() {
   describe('getOperations', function() {
     it('should accept only a callback', function(done) {
       region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -584,7 +584,7 @@ describe('Region', function() {
         region.getOperations({}, function(err, operations, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -615,7 +615,7 @@ describe('Region', function() {
   describe('getRules', function() {
     it('should accept only a callback', function(done) {
       region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -683,7 +683,7 @@ describe('Region', function() {
         region.getRules({}, function(err, rules, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -714,7 +714,7 @@ describe('Region', function() {
   describe('getSubnetworks', function() {
     it('should accept only a callback', function(done) {
       region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -782,7 +782,7 @@ describe('Region', function() {
         region.getSubnetworks({}, function(err, subnetworks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });

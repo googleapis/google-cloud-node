@@ -83,7 +83,7 @@ describe('Operation', function() {
       assert.strictEqual(calledWith.parent, SCOPE);
       assert.strictEqual(calledWith.baseUrl, '/operations');
       assert.strictEqual(calledWith.id, OPERATION_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         delete: true,
         exists: true,
         get: true,

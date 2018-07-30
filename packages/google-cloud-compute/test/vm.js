@@ -105,7 +105,7 @@ describe('VM', function() {
     });
 
     it('should initialize an empty waiter array', function() {
-      assert.deepEqual(vm.waiters, []);
+      assert.deepStrictEqual(vm.waiters, []);
     });
 
     it('should localize the URL of the VM', function() {
@@ -140,7 +140,7 @@ describe('VM', function() {
       assert.strictEqual(calledWith.parent, zoneInstance);
       assert.strictEqual(calledWith.baseUrl, '/instances');
       assert.strictEqual(calledWith.id, VM_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -173,7 +173,7 @@ describe('VM', function() {
 
     it('should not require an options object', function(done) {
       vm.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+        assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
         done();
       };
 
@@ -187,7 +187,7 @@ describe('VM', function() {
         var expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
 
         vm.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, expectedBody);
+          assert.deepStrictEqual(reqOpts.json, expectedBody);
           done();
         };
 
@@ -208,7 +208,7 @@ describe('VM', function() {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/attachDisk');
-        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+        assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
 
         callback();
       };
@@ -331,7 +331,7 @@ describe('VM', function() {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/detachDisk');
-        assert.deepEqual(reqOpts.qs, {deviceName: DEVICE_NAME});
+        assert.deepStrictEqual(reqOpts.qs, {deviceName: DEVICE_NAME});
 
         callback();
       };
@@ -397,7 +397,7 @@ describe('VM', function() {
     it('should make the correct API request', function(done) {
       FakeServiceObject.prototype.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/serialPort');
-        assert.deepEqual(reqOpts.qs, EXPECTED_QUERY);
+        assert.deepStrictEqual(reqOpts.qs, EXPECTED_QUERY);
 
         done();
       };
@@ -547,7 +547,7 @@ describe('VM', function() {
       vm.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           machineType: MACHINE_TYPE,
         });
         done();
@@ -562,7 +562,7 @@ describe('VM', function() {
       vm.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           machineType: MACHINE_TYPE,
         });
         done();
@@ -769,7 +769,7 @@ describe('VM', function() {
             vm.request = function(reqOpts, callback) {
               assert.strictEqual(reqOpts.method, 'POST');
               assert.strictEqual(reqOpts.uri, '/setMetadata');
-              assert.deepEqual(reqOpts.json, expectedNewMetadata);
+              assert.deepStrictEqual(reqOpts.json, expectedNewMetadata);
 
               callback(); // done()
             };

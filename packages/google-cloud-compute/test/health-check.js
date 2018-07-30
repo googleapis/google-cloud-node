@@ -73,7 +73,7 @@ describe('HealthCheck', function() {
 
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.id, HEALTH_CHECK_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -101,8 +101,8 @@ describe('HealthCheck', function() {
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
-          assert.deepEqual(opts, OPTIONS);
-          assert.deepEqual(OPTIONS, originalOptions);
+          assert.deepStrictEqual(opts, OPTIONS);
+          assert.deepStrictEqual(OPTIONS, originalOptions);
           callback(); // done()
         };
 
@@ -113,7 +113,7 @@ describe('HealthCheck', function() {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
-          assert.deepEqual(opts, {});
+          assert.deepStrictEqual(opts, {});
           callback(); // done()
         };
 
@@ -145,8 +145,8 @@ describe('HealthCheck', function() {
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
-          assert.deepEqual(opts, extend({https: true}, OPTIONS));
-          assert.deepEqual(OPTIONS, originalOptions);
+          assert.deepStrictEqual(opts, extend({https: true}, OPTIONS));
+          assert.deepStrictEqual(OPTIONS, originalOptions);
           callback(); // done()
         };
 
@@ -157,7 +157,7 @@ describe('HealthCheck', function() {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
-          assert.deepEqual(opts, {https: true});
+          assert.deepStrictEqual(opts, {https: true});
           callback(); // done()
         };
 

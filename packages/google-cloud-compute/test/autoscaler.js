@@ -99,7 +99,7 @@ describe('Autoscaler', function() {
       assert.strictEqual(calledWith.baseUrl, '/autoscalers');
       assert.strictEqual(calledWith.id, AUTOSCALER_NAME);
       assert.strictEqual(calledWith.createMethod, createMethod);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -188,7 +188,7 @@ describe('Autoscaler', function() {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '/autoscalers');
         assert.strictEqual(reqOpts.json, metadata);
-        assert.deepEqual(metadata, {
+        assert.deepStrictEqual(metadata, {
           name: autoscaler.name,
           zone: ZONE.name,
         });

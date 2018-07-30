@@ -77,7 +77,7 @@ describe('Firewall', function() {
     });
 
     it('should default to the global network', function() {
-      assert.deepEqual(firewall.metadata, {network: FIREWALL_NETWORK});
+      assert.deepStrictEqual(firewall.metadata, {network: FIREWALL_NETWORK});
     });
 
     it('should inherit from ServiceObject', function() {
@@ -98,7 +98,7 @@ describe('Firewall', function() {
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/firewalls');
       assert.strictEqual(calledWith.id, FIREWALL_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -187,7 +187,7 @@ describe('Firewall', function() {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
-        assert.deepEqual(metadata, {
+        assert.deepStrictEqual(metadata, {
           name: firewall.name,
           network: FIREWALL_NETWORK,
         });

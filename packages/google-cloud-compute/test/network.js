@@ -32,7 +32,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['firewall']);
+    assert.deepStrictEqual(options.exclude, ['firewall']);
   },
 });
 
@@ -126,7 +126,7 @@ describe('Network', function() {
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/networks');
       assert.strictEqual(calledWith.id, NETWORK_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -152,7 +152,7 @@ describe('Network', function() {
 
       network.compute.createFirewall = function(name_, config_, callback) {
         assert.strictEqual(name_, name);
-        assert.deepEqual(config_, expectedConfig);
+        assert.deepStrictEqual(config_, expectedConfig);
         callback();
       };
 
@@ -182,7 +182,7 @@ describe('Network', function() {
 
       region.createSubnetwork = function(name_, config, callback) {
         assert.strictEqual(name_, name);
-        assert.deepEqual(config, expectedConfig);
+        assert.deepStrictEqual(config, expectedConfig);
 
         callback(); // done();
       };
@@ -274,7 +274,7 @@ describe('Network', function() {
       };
 
       var firewallInstance = network.firewall(name);
-      assert.deepEqual(firewallInstance.metadata, {
+      assert.deepStrictEqual(firewallInstance.metadata, {
         network: network.formattedName,
       });
     });
@@ -288,7 +288,7 @@ describe('Network', function() {
       });
 
       network.compute.getFirewalls = function(options, callback) {
-        assert.deepEqual(options, expectedOptions);
+        assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
 
@@ -312,7 +312,7 @@ describe('Network', function() {
       });
 
       network.compute.getFirewallsStream = function(options) {
-        assert.deepEqual(options, expectedOptions);
+        assert.deepStrictEqual(options, expectedOptions);
         done();
       };
 
@@ -348,7 +348,7 @@ describe('Network', function() {
       });
 
       network.compute.getSubnetworks = function(options, callback) {
-        assert.deepEqual(options, expectedOptions);
+        assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
 
@@ -372,7 +372,7 @@ describe('Network', function() {
       });
 
       network.compute.getSubnetworksStream = function(options) {
-        assert.deepEqual(options, expectedOptions);
+        assert.deepStrictEqual(options, expectedOptions);
         done();
       };
 

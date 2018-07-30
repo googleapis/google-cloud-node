@@ -77,7 +77,7 @@ describe('Snapshot', function() {
         'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots'
       );
       assert.strictEqual(calledWith.id, SNAPSHOT_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true,

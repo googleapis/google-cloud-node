@@ -82,7 +82,7 @@ describe('Rule', function() {
       assert.strictEqual(calledWith.baseUrl, '/global/forwardingRules');
       assert.strictEqual(calledWith.id, RULE_NAME);
       assert.strictEqual(calledWith.createMethod, bindMethod);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -187,7 +187,7 @@ describe('Rule', function() {
       rule.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTarget');
-        assert.deepEqual(reqOpts.json, {target: TARGET});
+        assert.deepStrictEqual(reqOpts.json, {target: TARGET});
 
         done();
       };

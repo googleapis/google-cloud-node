@@ -93,7 +93,7 @@ describe('Subnetwork', function() {
       assert.strictEqual(calledWith.baseUrl, '/subnetworks');
       assert.strictEqual(calledWith.id, SUBNETWORK_NAME);
       assert.strictEqual(calledWith.createMethod, createSubnetworkBound);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,

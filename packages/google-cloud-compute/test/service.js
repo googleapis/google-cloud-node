@@ -97,7 +97,7 @@ describe('Service', function() {
       assert.strictEqual(calledWith.baseUrl, '/global/backendServices');
       assert.strictEqual(calledWith.id, SERVICE_NAME);
       assert.strictEqual(calledWith.createMethod, createMethod);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -185,7 +185,7 @@ describe('Service', function() {
       service.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/getHealth');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           group: GROUP,
         });
 
@@ -203,7 +203,7 @@ describe('Service', function() {
         };
 
         service.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             group: [
               'https://www.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,
@@ -230,7 +230,7 @@ describe('Service', function() {
         };
 
         service.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             group: [
               'https://www.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,

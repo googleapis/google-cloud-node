@@ -32,7 +32,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['snapshot']);
+    assert.deepStrictEqual(options.exclude, ['snapshot']);
   },
 });
 
@@ -130,7 +130,7 @@ describe('Disk', function() {
       assert.strictEqual(calledWith.parent, zoneInstance);
       assert.strictEqual(calledWith.baseUrl, '/disks');
       assert.strictEqual(calledWith.id, DISK_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -151,7 +151,7 @@ describe('Disk', function() {
       disk.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/createSnapshot');
-        assert.deepEqual(reqOpts.json, {name: 'test', a: 'b'});
+        assert.deepStrictEqual(reqOpts.json, {name: 'test', a: 'b'});
         done();
       };
 
