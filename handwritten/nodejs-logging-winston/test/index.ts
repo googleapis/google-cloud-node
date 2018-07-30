@@ -76,14 +76,14 @@ describe('logging-winston', () => {
 
   describe('instantiation', () => {
     it('should inherit from winston.Transport', () => {
-      assert.deepEqual(loggingWinston.transportCalledWith_[0], {
+      assert.deepStrictEqual(loggingWinston.transportCalledWith_[0], {
         level: OPTIONS.level,
         name: OPTIONS.logName,
       });
     });
 
     it('should default to logging.write scope', () => {
-      assert.deepEqual((fakeLoggingOptions_ as types.Options).scopes, [
+      assert.deepStrictEqual((fakeLoggingOptions_ as types.Options).scopes, [
         'https://www.googleapis.com/auth/logging.write',
       ]);
     });
@@ -132,7 +132,7 @@ describe('logging-winston', () => {
 
       const loggingWinston =
           new loggingWinstonLib.LoggingWinston(optionsWithoutLevels);
-      assert.deepEqual(loggingWinston.levels, {
+      assert.deepStrictEqual(loggingWinston.levels, {
         error: 3,
         warn: 4,
         info: 6,
@@ -146,7 +146,7 @@ describe('logging-winston', () => {
       const loggingOptions = Object.assign({}, fakeLoggingOptions_);
       delete (loggingOptions as types.Options).scopes;
 
-      assert.deepEqual(loggingOptions, OPTIONS);
+      assert.deepStrictEqual(loggingOptions, OPTIONS);
       assert.strictEqual(fakeLogName_, OPTIONS.logName);
     });
 
@@ -162,7 +162,7 @@ describe('logging-winston', () => {
       const loggingOptions = Object.assign({}, fakeLoggingOptions_);
       delete (loggingOptions as types.Options).scopes;
 
-      assert.deepEqual(loggingOptions, optionsWithLogName);
+      assert.deepStrictEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
     });
 
@@ -213,7 +213,7 @@ describe('logging-winston', () => {
       loggingWinston.stackdriverLog.entry =
           (entryMetadata: types.StackdriverEntryMetadata,
            data: types.StackdriverData) => {
-            assert.deepEqual(entryMetadata, {
+            assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
             });
             assert.deepStrictEqual(data, {
@@ -268,7 +268,7 @@ describe('logging-winston', () => {
       loggingWinston.stackdriverLog.entry =
           (entryMetadata: types.StackdriverEntryMetadata,
            data: types.StackdriverData) => {
-            assert.deepEqual(entryMetadata, {
+            assert.deepStrictEqual(entryMetadata, {
               resource: loggingWinston.resource,
             });
             assert.deepStrictEqual(data, {
@@ -493,7 +493,7 @@ describe('logging-winston', () => {
          loggingWinston.stackdriverLog.entry =
              (entryMetadata1: types.StackdriverEntryMetadata,
               data1: types.StackdriverData) => {
-               assert.deepEqual(entryMetadata1, {
+               assert.deepStrictEqual(entryMetadata1, {
                  resource: loggingWinston.resource,
                  // labels should have been merged.
                  labels: {
@@ -513,7 +513,7 @@ describe('logging-winston', () => {
                    (entryMetadata2: types.StackdriverEntryMetadata,
                     data2: types.StackdriverData) => {
                      console.log(entryMetadata2.labels);
-                     assert.deepEqual(entryMetadata2, {
+                     assert.deepStrictEqual(entryMetadata2, {
                        resource: loggingWinston.resource,
                        labels: {label1: 'value1'}
                      });
