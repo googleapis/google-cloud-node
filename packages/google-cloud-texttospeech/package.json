@@ -39,8 +39,8 @@
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
-    "test-no-cover": "mocha test/*.js --no-timeouts",
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
+    "test-no-cover": "mocha test/*.js",
     "lint": "eslint src/ samples/ system-test/ test/",
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
