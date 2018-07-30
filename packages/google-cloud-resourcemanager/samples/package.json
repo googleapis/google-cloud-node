@@ -6,7 +6,7 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-resource",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8"
   },
   "scripts": {
     "test": "ava -T 20s --verbose system-test/*.test.js"
