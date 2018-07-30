@@ -83,10 +83,10 @@ describe('Translate', () => {
           'https://translation.googleapis.com/language/translate/v2';
 
       assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.deepEqual(calledWith.scopes, [
+      assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform',
       ]);
-      assert.deepEqual(calledWith.packageJson, pkgJson);
+      assert.deepStrictEqual(calledWith.packageJson, pkgJson);
       assert.strictEqual(calledWith.projectIdRequired, false);
     });
 
@@ -149,7 +149,7 @@ describe('Translate', () => {
       translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/detect');
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.deepEqual(reqOpts.json, {q: [INPUT]});
+        assert.deepStrictEqual(reqOpts.json, {q: [INPUT]});
         done();
       };
 
@@ -208,9 +208,9 @@ describe('Translate', () => {
       it('should execute callback with results & API response', done => {
         translate.detect(INPUT, (err, results, apiResponse_) => {
           assert.ifError(err);
-          assert.deepEqual(results, expectedResults);
+          assert.deepStrictEqual(results, expectedResults);
           assert.strictEqual(apiResponse_, apiResponse);
-          assert.deepEqual(apiResponse_, originalApiResponse);
+          assert.deepStrictEqual(apiResponse_, originalApiResponse);
           done();
         });
       });
@@ -218,7 +218,7 @@ describe('Translate', () => {
       it('should execute callback with multiple results', done => {
         translate.detect([INPUT, INPUT], (err, results) => {
           assert.ifError(err);
-          assert.deepEqual(results, [expectedResults]);
+          assert.deepStrictEqual(results, [expectedResults]);
           done();
         });
       });
@@ -226,9 +226,9 @@ describe('Translate', () => {
       it('should return an array if input was an array', done => {
         translate.detect([INPUT], (err, results, apiResponse_) => {
           assert.ifError(err);
-          assert.deepEqual(results, [expectedResults]);
+          assert.deepStrictEqual(results, [expectedResults]);
           assert.strictEqual(apiResponse_, apiResponse);
-          assert.deepEqual(apiResponse_, originalApiResponse);
+          assert.deepStrictEqual(apiResponse_, originalApiResponse);
           done();
         });
       });
@@ -239,7 +239,7 @@ describe('Translate', () => {
     it('should make the correct API request', done => {
       translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/languages');
-        assert.deepEqual(reqOpts.qs, {
+        assert.deepStrictEqual(reqOpts.qs, {
           target: 'en',
         });
         done();
@@ -251,7 +251,7 @@ describe('Translate', () => {
     it('should make the correct API request with target', done => {
       translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/languages');
-        assert.deepEqual(reqOpts.qs, {
+        assert.deepStrictEqual(reqOpts.qs, {
           target: 'es',
         });
         done();
@@ -316,7 +316,7 @@ describe('Translate', () => {
       it('should exec callback with languages', done => {
         translate.getLanguages((err, languages, apiResponse_) => {
           assert.ifError(err);
-          assert.deepEqual(languages, expectedResults);
+          assert.deepStrictEqual(languages, expectedResults);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });
@@ -422,7 +422,7 @@ describe('Translate', () => {
       translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           q: [INPUT],
           format: 'text',
           source: SOURCE_LANG_CODE,
@@ -478,7 +478,7 @@ describe('Translate', () => {
       it('should execute callback with results & API response', done => {
         translate.translate(INPUT, OPTIONS, (err, translations, resp) => {
           assert.ifError(err);
-          assert.deepEqual(translations, expectedResults);
+          assert.deepStrictEqual(translations, expectedResults);
           assert.strictEqual(resp, apiResponse);
           done();
         });
@@ -488,7 +488,7 @@ describe('Translate', () => {
         const input = [INPUT, INPUT];
         translate.translate(input, OPTIONS, (err, translations) => {
           assert.ifError(err);
-          assert.deepEqual(translations, [expectedResults]);
+          assert.deepStrictEqual(translations, [expectedResults]);
           done();
         });
       });
@@ -496,7 +496,7 @@ describe('Translate', () => {
       it('should return an array if input was an array', done => {
         translate.translate([INPUT], OPTIONS, (err, translations) => {
           assert.ifError(err);
-          assert.deepEqual(translations, [expectedResults]);
+          assert.deepStrictEqual(translations, [expectedResults]);
           done();
         });
       });
@@ -548,7 +548,7 @@ describe('Translate', () => {
         const getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
         fakeUtil.getUserAgentFromPackageJson = (packageJson) => {
           fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
-          assert.deepEqual(packageJson, pkgJson);
+          assert.deepStrictEqual(packageJson, pkgJson);
           return userAgent;
         };
 
@@ -574,7 +574,7 @@ describe('Translate', () => {
         expectedReqOpts.uri = translate.baseUrl + reqOpts.uri;
 
         makeRequestOverride = (reqOpts, options, callback) => {
-          assert.deepEqual(reqOpts, expectedReqOpts);
+          assert.deepStrictEqual(reqOpts, expectedReqOpts);
           assert.strictEqual(options, translate.options);
           callback();  // done()
         };

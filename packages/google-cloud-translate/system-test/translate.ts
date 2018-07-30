@@ -129,7 +129,7 @@ describe('translate', function() {
           return language.code === 'en';
         })[0];
 
-        assert.deepEqual(englishResult, {
+        assert.deepStrictEqual(englishResult, {
           code: 'en',
           name: 'English',
         });
@@ -146,7 +146,7 @@ describe('translate', function() {
           return language.code === 'en';
         })[0];
 
-        assert.deepEqual(englishResult, {
+        assert.deepStrictEqual(englishResult, {
           code: 'en',
           name: 'inglés',
         });
