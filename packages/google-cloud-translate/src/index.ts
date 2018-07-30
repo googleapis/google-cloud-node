@@ -22,9 +22,8 @@ import * as extend from 'extend';
 import * as is from 'is';
 import * as isHtml from 'is-html';
 import * as prop from 'propprop';
-import { DecorateRequestOptions, BodyResponseCallback } from '@google-cloud/common/build/src/util';
+import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
 import * as r from 'request';
-
 
 const PKG = require('../../package.json');
 
@@ -33,8 +32,10 @@ const PKG = require('../../package.json');
  * @property {string} [projectId] The project ID from the Google Developer's
  *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
  *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
- *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
- *     your project ID will be detected automatically.
+ *     an environment which supports {@link
+ * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+ * Application Default Credentials}, your project ID will be detected
+ * automatically.
  * @property {string} [key] An API key. You should prefer using a Service
  *     Account key file instead of an API key.
  * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
@@ -142,7 +143,7 @@ export class Translate extends common.Service {
    * //-
    * // Detect the language from a single string input.
    * //-
-   * translate.detect('Hello', function(err, results) {
+   * translate.detect('Hello', (err, results) => {
    *   if (!err) {
    *     // results = {
    *     //   language: 'en',
@@ -159,7 +160,7 @@ export class Translate extends common.Service {
    * translate.detect([
    *   'Hello',
    *   'Hola'
-   * ], function(err, results) {
+   * ], (err, results) => {
    *   if (!err) {
    *     // results = [
    *     //   {
@@ -179,7 +180,7 @@ export class Translate extends common.Service {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * translate.detect('Hello').then(function(data) {
+   * translate.detect('Hello').then((data) => {
    *   var results = data[0];
    *   var apiResponse = data[2];
    * });
@@ -193,37 +194,36 @@ export class Translate extends common.Service {
     input = arrify(input);
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/detect',
-        json: {
-          q: input,
+        {
+          method: 'POST',
+          uri: '/detect',
+          json: {
+            q: input,
+          },
         },
-      },
-      function (err, resp) {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        let results = resp.data.detections.map(function (detection, index) {
-          const result = extend({}, detection[0], {
-            input: input[index],
+          let results = resp.data.detections.map((detection, index) => {
+            const result = extend({}, detection[0], {
+              input: input[index],
+            });
+
+            // Deprecated.
+            delete result.isReliable;
+
+            return result;
           });
 
-          // Deprecated.
-          delete result.isReliable;
+          if (input.length === 1 && !inputIsArray) {
+            results = results[0];
+          }
 
-          return result;
+          callback(null, results, resp);
         });
-
-        if (input.length === 1 && !inputIsArray) {
-          results = results[0];
-        }
-
-        callback(null, results, resp);
-      }
-    );
   }
 
   /**
@@ -272,20 +272,20 @@ export class Translate extends common.Service {
     const reqOpts = {
       uri: '/languages',
       useQuerystring: true,
-      qs: {} as any,
-    };
+      qs: {},
+    } as DecorateRequestOptions;
 
     if (target && is.string(target)) {
       reqOpts.qs.target = target;
     }
 
-    this.request(reqOpts, function (err, resp) {
+    this.request(reqOpts, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
       }
 
-      const languages = resp.data.languages.map(function (language) {
+      const languages = resp.data.languages.map(language => {
         return {
           code: language.language,
           name: language.name,
@@ -301,8 +301,8 @@ export class Translate extends common.Service {
    *
    * @typedef {object} TranslateRequest
    * @property {string} [format] Set the text's format as `html` or `text`.
-   *     If not provided, we will try to auto-detect if the text given is HTML. If
-   *     not, we set the format as `text`.
+   *     If not provided, we will try to auto-detect if the text given is HTML.
+   * If not, we set the format as `text`.
    * @property {string} [from] The ISO 639-1 language code the source input
    *     is written in.
    * @property {string} [model] Set the model type requested for this
@@ -344,7 +344,7 @@ export class Translate extends common.Service {
    * //-
    * // Pass a string and a language code to get the translation.
    * //-
-   * translate.translate('Hello', 'es', function(err, translation) {
+   * translate.translate('Hello', 'es', (err, translation) => {
    *   if (!err) {
    *     // translation = 'Hola'
    *   }
@@ -359,7 +359,7 @@ export class Translate extends common.Service {
    *   to: 'es'
    * };
    *
-   * translate.translate('Hello', options, function(err, translation) {
+   * translate.translate('Hello', options, (err, translation) => {
    *   if (!err) {
    *     // translation = 'Hola'
    *   }
@@ -374,7 +374,7 @@ export class Translate extends common.Service {
    *   'How are you today?'
    * ];
    *
-   * translate.translate(input, 'es', function(err, translations) {
+   * translate.translate(input, 'es', (err, translations) => {
    *   if (!err) {
    *     // translations = [
    *     //   'Hola',
@@ -386,7 +386,7 @@ export class Translate extends common.Service {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * translate.translate('Hello', 'es').then(function(data) {
+   * translate.translate('Hello', 'es').then((data) => {
    *   var translation = data[0];
    *   var apiResponse = data[1];
    * });
@@ -403,7 +403,7 @@ export class Translate extends common.Service {
     const inputIsArray = Array.isArray(input);
     input = arrify(input);
 
-    const body: any = {
+    const body: {[index: string]: string} = {
       q: input,
       format: options.format || (isHtml(input[0]) ? 'html' : 'text'),
     };
@@ -425,30 +425,30 @@ export class Translate extends common.Service {
     }
 
     if (!body.target) {
-      throw new Error('A target language is required to perform a translation.');
+      throw new Error(
+          'A target language is required to perform a translation.');
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '',
-        json: body,
-      },
-      function (err, resp) {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          method: 'POST',
+          uri: '',
+          json: body,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        let translations = resp.data.translations.map(prop('translatedText'));
+          let translations = resp.data.translations.map(prop('translatedText'));
 
-        if (body.q.length === 1 && !inputIsArray) {
-          translations = translations[0];
-        }
+          if (body.q.length === 1 && !inputIsArray) {
+            translations = translations[0];
+          }
 
-        callback(err, translations, resp);
-      }
-    );
+          callback(err, translations, resp);
+        });
   }
 
   /**
@@ -463,8 +463,10 @@ export class Translate extends common.Service {
    * @param {function} callback - The callback function passed to `request`.
    */
   request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback): void;
-  request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback): void|Promise<r.Response> {
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void;
+  request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
+      void|Promise<r.Response> {
     if (!this.key) {
       super.request(reqOpts, callback!);
       return;
@@ -485,11 +487,11 @@ export class Translate extends common.Service {
 }
 
 /*! Developer Documentation
-  *
-  * All async methods (except for streams) will return a Promise in the event
-  * that a callback is omitted.
-  */
-common.util.promisifyAll(Translate, { exclude: ['request']});
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Translate, {exclude: ['request']});
 
 /**
  * The `@google-cloud/translate` package has a single default export, the
@@ -501,19 +503,21 @@ common.util.promisifyAll(Translate, { exclude: ['request']});
  * @module {constructor} @google-cloud/translate
  * @alias nodejs-translate
  *
- * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/translate
+ * @example <caption>Install the client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
+ * @google-cloud/translate
  *
  * @example <caption>Import the client library:</caption>
  * const Translate = require('@google-cloud/translate');
  *
- * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new Translate();
+ * @example <caption>Create a client that uses <a
+ * href="https://goo.gl/64dyYX">Application Default Credentials
+ * (ADC)</a>:</caption> const client = new Translate();
  *
- * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new Translate({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json',
+ * @example <caption>Create a client with <a
+ * href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption> const client
+ * = new Translate({ projectId: 'your-project-id', keyFilename:
+ * '/path/to/keyfile.json',
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>

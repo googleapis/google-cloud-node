@@ -33,8 +33,8 @@ const fakeUtil = extend({}, util, {
 
     return util.makeRequest.apply(null, arguments);
   },
-  promisifyAll(Class) {
-    if (Class.name === 'Translate') {
+  promisifyAll(c) {
+    if (c.name === 'Translate') {
       promisified = true;
     }
   },
@@ -45,40 +45,42 @@ function FakeService() {
   this.calledWith_ = arguments;
 }
 
-describe('Translate', function() {
+describe('Translate', () => {
   const OPTIONS = {
     projectId: 'test-project',
   };
 
+  // tslint:disable-next-line variable-name
   let Translate;
   let translate;
 
-  before(function() {
+  before(() => {
     Translate = proxyquire('../src', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-        Service: FakeService,
-      },
-    }).Translate;
+                  '@google-cloud/common': {
+                    util: fakeUtil,
+                    Service: FakeService,
+                  },
+                }).Translate;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     extend(fakeUtil, originalFakeUtil);
     makeRequestOverride = null;
 
     translate = new Translate(OPTIONS);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should inherit from Service', function() {
+    it('should inherit from Service', () => {
       assert(translate instanceof FakeService);
 
       const calledWith = translate.calledWith_[0];
-      const baseUrl = 'https://translation.googleapis.com/language/translate/v2';
+      const baseUrl =
+          'https://translation.googleapis.com/language/translate/v2';
 
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
@@ -88,46 +90,46 @@ describe('Translate', function() {
       assert.strictEqual(calledWith.projectIdRequired, false);
     });
 
-    describe('Using an API Key', function() {
+    describe('Using an API Key', () => {
       const KEY_OPTIONS = {
         key: 'api-key',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         translate = new Translate(KEY_OPTIONS);
       });
 
-      it('should localize the options', function() {
+      it('should localize the options', () => {
         const options = {key: '...'};
         const translate = new Translate(options);
         assert.strictEqual(translate.options.key, options.key);
       });
 
-      it('should localize the api key', function() {
+      it('should localize the api key', () => {
         assert.strictEqual(translate.key, KEY_OPTIONS.key);
       });
     });
 
-    describe('GOOGLE_CLOUD_TRANSLATE_ENDPOINT', function() {
+    describe('GOOGLE_CLOUD_TRANSLATE_ENDPOINT', () => {
       const CUSTOM_ENDPOINT = '...';
       let translate;
 
-      before(function() {
+      before(() => {
         process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = CUSTOM_ENDPOINT;
         translate = new Translate(OPTIONS);
       });
 
-      after(function() {
+      after(() => {
         delete process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT;
       });
 
-      it('should correctly set the baseUrl', function() {
+      it('should correctly set the baseUrl', () => {
         const baseUrl = translate.calledWith_[0].baseUrl;
 
         assert.strictEqual(baseUrl, CUSTOM_ENDPOINT);
       });
 
-      it('should remove trailing slashes', function() {
+      it('should remove trailing slashes', () => {
         const expectedBaseUrl = 'http://localhost:8080';
 
         process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = 'http://localhost:8080//';
@@ -140,11 +142,11 @@ describe('Translate', function() {
     });
   });
 
-  describe('detect', function() {
+  describe('detect', () => {
     const INPUT = 'input';
 
-    it('should make the correct API request', function(done) {
-      translate.request = function(reqOpts) {
+    it('should make the correct API request', done => {
+      translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/detect');
         assert.strictEqual(reqOpts.method, 'POST');
         assert.deepEqual(reqOpts.json, {q: [INPUT]});
@@ -154,18 +156,18 @@ describe('Translate', function() {
       translate.detect(INPUT, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API resp', function(done) {
-        translate.detect(INPUT, function(err, results, apiResponse_) {
+      it('should execute callback with error & API resp', done => {
+        translate.detect(INPUT, (err, results, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(results, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -174,7 +176,7 @@ describe('Translate', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         data: {
           detections: [
@@ -197,14 +199,14 @@ describe('Translate', function() {
         input: INPUT,
       };
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with results & API response', function(done) {
-        translate.detect(INPUT, function(err, results, apiResponse_) {
+      it('should execute callback with results & API response', done => {
+        translate.detect(INPUT, (err, results, apiResponse_) => {
           assert.ifError(err);
           assert.deepEqual(results, expectedResults);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -213,16 +215,16 @@ describe('Translate', function() {
         });
       });
 
-      it('should execute callback with multiple results', function(done) {
-        translate.detect([INPUT, INPUT], function(err, results) {
+      it('should execute callback with multiple results', done => {
+        translate.detect([INPUT, INPUT], (err, results) => {
           assert.ifError(err);
           assert.deepEqual(results, [expectedResults]);
           done();
         });
       });
 
-      it('should return an array if input was an array', function(done) {
-        translate.detect([INPUT], function(err, results, apiResponse_) {
+      it('should return an array if input was an array', done => {
+        translate.detect([INPUT], (err, results, apiResponse_) => {
           assert.ifError(err);
           assert.deepEqual(results, [expectedResults]);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -233,9 +235,9 @@ describe('Translate', function() {
     });
   });
 
-  describe('getLanguages', function() {
-    it('should make the correct API request', function(done) {
-      translate.request = function(reqOpts) {
+  describe('getLanguages', () => {
+    it('should make the correct API request', done => {
+      translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/languages');
         assert.deepEqual(reqOpts.qs, {
           target: 'en',
@@ -246,8 +248,8 @@ describe('Translate', function() {
       translate.getLanguages(assert.ifError);
     });
 
-    it('should make the correct API request with target', function(done) {
-      translate.request = function(reqOpts) {
+    it('should make the correct API request with target', done => {
+      translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/languages');
         assert.deepEqual(reqOpts.qs, {
           target: 'es',
@@ -258,18 +260,18 @@ describe('Translate', function() {
       translate.getLanguages('es', assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec callback with error & API response', function(done) {
-        translate.getLanguages(function(err, languages, apiResponse_) {
+      it('should exec callback with error & API response', done => {
+        translate.getLanguages((err, languages, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(languages, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -278,7 +280,7 @@ describe('Translate', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         data: {
           languages: [
@@ -305,14 +307,14 @@ describe('Translate', function() {
         },
       ];
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec callback with languages', function(done) {
-        translate.getLanguages(function(err, languages, apiResponse_) {
+      it('should exec callback with languages', done => {
+        translate.getLanguages((err, languages, apiResponse_) => {
           assert.ifError(err);
           assert.deepEqual(languages, expectedResults);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -322,7 +324,7 @@ describe('Translate', function() {
     });
   });
 
-  describe('translate', function() {
+  describe('translate', () => {
     const INPUT = 'Hello';
     const INPUT_HTML = '<html><body>Hello</body></html>';
     const SOURCE_LANG_CODE = 'en';
@@ -333,9 +335,9 @@ describe('Translate', function() {
       to: TARGET_LANG_CODE,
     };
 
-    describe('options = target langauge', function() {
-      it('should make the correct API request', function(done) {
-        translate.request = function(reqOpts) {
+    describe('options = target langauge', () => {
+      it('should make the correct API request', done => {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.target, TARGET_LANG_CODE);
           done();
         };
@@ -344,34 +346,32 @@ describe('Translate', function() {
       });
     });
 
-    describe('options = { source & target }', function() {
-      it('should throw if `to` is not provided', function() {
-        assert.throws(function() {
+    describe('options = { source & target }', () => {
+      it('should throw if `to` is not provided', () => {
+        assert.throws(() => {
           translate.translate(INPUT, {from: SOURCE_LANG_CODE}, util.noop);
         }, /A target language is required to perform a translation\./);
       });
 
-      it('should make the correct API request', function(done) {
-        translate.request = function(reqOpts) {
+      it('should make the correct API request', done => {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.source, SOURCE_LANG_CODE);
           assert.strictEqual(reqOpts.json.target, TARGET_LANG_CODE);
           done();
         };
 
         translate.translate(
-          INPUT,
-          {
-            from: SOURCE_LANG_CODE,
-            to: TARGET_LANG_CODE,
-          },
-          assert.ifError
-        );
+            INPUT, {
+              from: SOURCE_LANG_CODE,
+              to: TARGET_LANG_CODE,
+            },
+            assert.ifError);
       });
     });
 
-    describe('options.format', function() {
-      it('should default to text', function(done) {
-        translate.request = function(reqOpts) {
+    describe('options.format', () => {
+      it('should default to text', done => {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.format, 'text');
           done();
         };
@@ -379,8 +379,8 @@ describe('Translate', function() {
         translate.translate(INPUT, OPTIONS, assert.ifError);
       });
 
-      it('should recognize HTML', function(done) {
-        translate.request = function(reqOpts) {
+      it('should recognize HTML', done => {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.format, 'html');
           done();
         };
@@ -388,12 +388,12 @@ describe('Translate', function() {
         translate.translate(INPUT_HTML, OPTIONS, assert.ifError);
       });
 
-      it('should allow overriding the format', function(done) {
+      it('should allow overriding the format', done => {
         const options = extend({}, OPTIONS, {
           format: 'custom format',
         });
 
-        translate.request = function(reqOpts) {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.format, options.format);
           done();
         };
@@ -402,14 +402,14 @@ describe('Translate', function() {
       });
     });
 
-    describe('options.model', function() {
-      it('should set the model option when available', function(done) {
+    describe('options.model', () => {
+      it('should set the model option when available', done => {
         const fakeOptions = {
           model: 'nmt',
           to: 'es',
         };
 
-        translate.request = function(reqOpts) {
+        translate.request = reqOpts => {
           assert.strictEqual(reqOpts.json.model, 'nmt');
           done();
         };
@@ -418,8 +418,8 @@ describe('Translate', function() {
       });
     });
 
-    it('should make the correct API request', function(done) {
-      translate.request = function(reqOpts) {
+    it('should make the correct API request', done => {
+      translate.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.method, 'POST');
         assert.deepEqual(reqOpts.json, {
@@ -434,18 +434,18 @@ describe('Translate', function() {
       translate.translate(INPUT, OPTIONS, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec callback with error & API response', function(done) {
-        translate.translate(INPUT, OPTIONS, function(err, translations, resp) {
+      it('should exec callback with error & API response', done => {
+        translate.translate(INPUT, OPTIONS, (err, translations, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(translations, null);
           assert.strictEqual(resp, apiResponse);
@@ -454,7 +454,7 @@ describe('Translate', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         data: {
           translations: [
@@ -469,14 +469,14 @@ describe('Translate', function() {
 
       const expectedResults = apiResponse.data.translations[0].translatedText;
 
-      beforeEach(function() {
-        translate.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        translate.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with results & API response', function(done) {
-        translate.translate(INPUT, OPTIONS, function(err, translations, resp) {
+      it('should execute callback with results & API response', done => {
+        translate.translate(INPUT, OPTIONS, (err, translations, resp) => {
           assert.ifError(err);
           assert.deepEqual(translations, expectedResults);
           assert.strictEqual(resp, apiResponse);
@@ -484,17 +484,17 @@ describe('Translate', function() {
         });
       });
 
-      it('should execute callback with multiple results', function(done) {
+      it('should execute callback with multiple results', done => {
         const input = [INPUT, INPUT];
-        translate.translate(input, OPTIONS, function(err, translations) {
+        translate.translate(input, OPTIONS, (err, translations) => {
           assert.ifError(err);
           assert.deepEqual(translations, [expectedResults]);
           done();
         });
       });
 
-      it('should return an array if input was an array', function(done) {
-        translate.translate([INPUT], OPTIONS, function(err, translations) {
+      it('should return an array if input was an array', done => {
+        translate.translate([INPUT], OPTIONS, (err, translations) => {
           assert.ifError(err);
           assert.deepEqual(translations, [expectedResults]);
           done();
@@ -503,19 +503,19 @@ describe('Translate', function() {
     });
   });
 
-  describe('request', function() {
-    describe('OAuth mode', function() {
+  describe('request', () => {
+    describe('OAuth mode', () => {
       let request;
 
-      beforeEach(function() {
+      beforeEach(() => {
         request = FakeService.prototype.request;
       });
 
-      afterEach(function() {
+      afterEach(() => {
         FakeService.prototype.request = request;
       });
 
-      it('should make the correct request', function(done) {
+      it('should make the correct request', done => {
         const fakeOptions = {
           uri: '/test',
           a: 'b',
@@ -524,7 +524,7 @@ describe('Translate', function() {
           },
         };
 
-        FakeService.prototype.request = function(reqOpts, callback) {
+        FakeService.prototype.request = (reqOpts, callback) => {
           assert.strictEqual(reqOpts, fakeOptions);
           callback();
         };
@@ -533,20 +533,20 @@ describe('Translate', function() {
       });
     });
 
-    describe('API key mode', function() {
+    describe('API key mode', () => {
       const KEY_OPTIONS = {
         key: 'api-key',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         translate = new Translate(KEY_OPTIONS);
       });
 
-      it('should make the correct request', function(done) {
+      it('should make the correct request', done => {
         const userAgent = 'user-agent/0.0.0';
 
         const getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
-        fakeUtil.getUserAgentFromPackageJson = function(packageJson) {
+        fakeUtil.getUserAgentFromPackageJson = (packageJson) => {
           fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
           assert.deepEqual(packageJson, pkgJson);
           return userAgent;
@@ -573,10 +573,10 @@ describe('Translate', function() {
 
         expectedReqOpts.uri = translate.baseUrl + reqOpts.uri;
 
-        makeRequestOverride = function(reqOpts, options, callback) {
+        makeRequestOverride = (reqOpts, options, callback) => {
           assert.deepEqual(reqOpts, expectedReqOpts);
           assert.strictEqual(options, translate.options);
-          callback(); // done()
+          callback();  // done()
         };
 
         translate.request(reqOpts, done);

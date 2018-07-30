@@ -4,14 +4,10 @@
     "rootDir": ".",
     "outDir": "build",
     "noImplicitAny": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
     "noImplicitThis": false
   },
   "include": [
     "src/*.ts",
-    "src/**/*.ts",
-    "test/*.ts",
-    "test/**/*.ts"
+    "test/*.ts"
   ]
 }
