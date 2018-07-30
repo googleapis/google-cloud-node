@@ -17,7 +17,8 @@
 'use strict';
 
 var arrify = require('arrify');
-var common = require('@google-cloud/common');
+var {replaceProjectIdToken} = require('@google-cloud/projectify');
+var {promisifyAll} = require('@google-cloud/promisify');
 var concat = require('concat-stream');
 var extend = require('extend');
 var is = require('is');
@@ -339,7 +340,7 @@ DatastoreRequest.prototype.delete = function(keys, gaxOptions, callback) {
     gaxOptions = {};
   }
 
-  callback = callback || common.util.noop;
+  callback = callback || function() {};
 
   var reqOpts = {
     mutations: arrify(keys).map(function(key) {
@@ -1098,7 +1099,7 @@ DatastoreRequest.prototype.upsert = function(entities, callback) {
 DatastoreRequest.prototype.request_ = function(config, callback) {
   var datastore = this.datastore;
 
-  callback = callback || common.util.noop;
+  callback = callback || function() {};
 
   var isTransaction = is.defined(this.id);
   var method = config.method;
@@ -1147,7 +1148,7 @@ DatastoreRequest.prototype.request_ = function(config, callback) {
 
     var gaxClient = datastore.clients_.get(clientName);
 
-    reqOpts = common.util.replaceProjectIdToken(reqOpts, projectId);
+    reqOpts = replaceProjectIdToken(reqOpts, projectId);
 
     var gaxOpts = extend(true, {}, config.gaxOpts, {
       headers: {
@@ -1164,7 +1165,7 @@ DatastoreRequest.prototype.request_ = function(config, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(DatastoreRequest);
+promisifyAll(DatastoreRequest);
 
 /**
  * Reference to the {@link DatastoreRequest} class.

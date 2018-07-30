@@ -17,7 +17,7 @@
 'use strict';
 
 var arrify = require('arrify');
-var common = require('@google-cloud/common');
+var {promisifyAll} = require('@google-cloud/promisify');
 var flatten = require('lodash.flatten');
 var is = require('is');
 var util = require('util');
@@ -129,7 +129,7 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
     gaxOptions = {};
   }
 
-  callback = callback || common.util.noop;
+  callback = callback || function() {};
 
   if (this.skipCommit) {
     setImmediate(callback);
@@ -193,7 +193,7 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
       var method = modifiedEntity.method;
       var args = modifiedEntity.args.reverse();
 
-      Request.prototype[method].call(self, args, common.util.noop);
+      Request.prototype[method].call(self, args, function() {});
     });
 
   // Take the `req` array built previously, and merge them into one request to
@@ -362,7 +362,7 @@ Transaction.prototype.rollback = function(gaxOptions, callback) {
     gaxOptions = {};
   }
 
-  callback = callback || common.util.noop;
+  callback = callback || function() {};
 
   this.request_(
     {
@@ -437,7 +437,7 @@ Transaction.prototype.run = function(options, callback) {
   }
 
   options = options || {};
-  callback = callback || common.util.noop;
+  callback = callback || function() {};
 
   var reqOpts = {
     transactionOptions: {},
@@ -625,7 +625,7 @@ Transaction.prototype.save = function(entities) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Transaction, {
+promisifyAll(Transaction, {
   exclude: ['createQuery', 'delete', 'save'],
 });
 

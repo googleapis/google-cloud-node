@@ -21,23 +21,22 @@ var assert = require('assert');
 var entity = require('../src/entity.js');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
+var pfy = require('@google-cloud/promisify');
 
 var promisified = false;
-var fakeUtil = extend({}, util, {
+var fakePfy = extend({}, pfy, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Transaction') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, ['createQuery', 'delete', 'save']);
   },
 });
 
 var DatastoreRequestOverride = {
-  delete: util.noop,
-  save: util.noop,
+  delete: function() {},
+  save: function() {},
 };
 
 var FakeDatastoreRequest = {
@@ -45,14 +44,14 @@ var FakeDatastoreRequest = {
     delete: function() {
       var args = [].slice.apply(arguments);
       var results = DatastoreRequestOverride.delete.apply(null, args);
-      DatastoreRequestOverride.delete = util.noop;
+      DatastoreRequestOverride.delete = function() {};
       return results;
     },
 
     save: function() {
       var args = [].slice.apply(arguments);
       var results = DatastoreRequestOverride.save.apply(null, args);
-      DatastoreRequestOverride.save = util.noop;
+      DatastoreRequestOverride.save = function() {};
       return results;
     },
   },
@@ -77,9 +76,7 @@ describe('Transaction', function() {
 
   before(function() {
     Transaction = proxyquire('../src/transaction.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
+      '@google-cloud/promisify': fakePfy,
       './request.js': FakeDatastoreRequest,
     });
   });
@@ -251,7 +248,7 @@ describe('Transaction', function() {
         saveCalled++;
       };
 
-      transaction.request_ = util.noop;
+      transaction.request_ = function() {};
 
       transaction.commit();
 
@@ -282,7 +279,7 @@ describe('Transaction', function() {
         saveCalled++;
       };
 
-      transaction.request_ = util.noop;
+      transaction.request_ = function() {};
 
       transaction.commit();
       assert.strictEqual(deleteCalled, 0);
@@ -298,7 +295,7 @@ describe('Transaction', function() {
         done();
       };
 
-      transaction.request_ = util.noop;
+      transaction.request_ = function() {};
 
       transaction.commit();
     });
