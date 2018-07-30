@@ -153,7 +153,7 @@ describe('promisify', () => {
     let returnVal: {};
     returnVal = func.call(fakeContext, function(this: {}) {
       const args = [].slice.call(arguments);
-      assert.deepEqual(args, fakeArgs);
+      assert.deepStrictEqual(args, fakeArgs);
       assert.strictEqual(this, fakeContext);
       assert(!returnVal);
       done();
@@ -162,7 +162,7 @@ describe('promisify', () => {
 
   it('should return a promise when the callback is omitted', () => {
     return func().then((args: Array<{}>) => {
-      assert.deepEqual(args, fakeArgs.slice(1));
+      assert.deepStrictEqual(args, fakeArgs.slice(1));
     });
   });
 
@@ -210,7 +210,7 @@ describe('promisify', () => {
     });
 
     return func().then((args: Array<{}>) => {
-      assert.deepEqual(args, fakeArgs);
+      assert.deepStrictEqual(args, fakeArgs);
     });
   });
 
