@@ -7,7 +7,7 @@
   "types": "out/src/index.d.ts",
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "nyc mocha --require source-map-support/register out/test/test-*.js && nyc --no-clean mocha --require source-map-support/register  out/system-test/test-*.js --timeout=60000",
+    "test": "nyc mocha  out/test/test-*.js && nyc --no-clean mocha   out/system-test/test-*.js --timeout=60000",
     "check": "gts check",
     "clean": "gts clean",
     "codecov": "nyc report --reporter=json && codecov -f coverage/*.json",
@@ -55,12 +55,13 @@
     "codecov": "^3.0.0",
     "deep-copy": "^1.4.2",
     "gts": "^0.8.0",
+    "intelli-espower-loader": "^1.0.1",
     "js-green-licenses": "^0.5.0",
     "mocha": "^5.0.0",
     "nock": "^9.0.22",
     "nyc": "^12.0.2",
     "sinon": "^6.0.0",
-    "source-map-support": "^0.5.0",
+    "source-map-support": "^0.5.6",
     "ts-mockito": "^2.2.5",
     "typescript": "~2.9.0"
   },
