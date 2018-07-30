@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "repository": "googleapis/nodejs-automl",
   "private": true,
@@ -14,11 +14,9 @@
       "**/*.test.js"
     ]
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "@google-cloud/automl": "^0.1.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
