@@ -54,14 +54,14 @@
     "rtw <rtw1981@gmail.com>"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha --require intelli-espower-loader test/*.js && nyc report",
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint src/ samples/ system-test/ test/",
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
-    "test-no-cover": "mocha test/*.js --no-timeouts",
+    "test-no-cover": "mocha test/*.js",
     "test": "npm run cover"
   },
   "dependencies": {
@@ -84,11 +84,11 @@
     "ink-docstrap": "^1.3.2",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
-    "uuid": "^3.3.0",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6",
-    "sinon": "^6.0.1"
+    "sinon": "^6.0.1",
+    "uuid": "^3.3.0"
   }
 }
