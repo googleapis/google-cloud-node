@@ -63,7 +63,7 @@ describe('TimeProfiler', () => {
            isProfiling = false;
          });
          await delay(2 * durationMillis);
-         assert.equal(false, isProfiling, 'profiler is still running');
+         assert.strictEqual(false, isProfiling, 'profiler is still running');
        });
 
     it('should return a profile equal to the expected profile', async () => {

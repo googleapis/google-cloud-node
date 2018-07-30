@@ -80,16 +80,16 @@ function nockOauth2(): nock.Scope {
 describe('Retryer', () => {
   it('should backoff until max-backoff reached', () => {
     const retryer = new Retryer(1000, 1000000, 5, () => 0.5);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000);
-    assert.equal(retryer.getBackoff(), 0.5 * 5000);
-    assert.equal(retryer.getBackoff(), 0.5 * 25000);
-    assert.equal(retryer.getBackoff(), 0.5 * 125000);
-    assert.equal(retryer.getBackoff(), 0.5 * 625000);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000000);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000000);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000000);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000000);
-    assert.equal(retryer.getBackoff(), 0.5 * 1000000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 5000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 25000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 125000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 625000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000000);
+    assert.strictEqual(retryer.getBackoff(), 0.5 * 1000000);
   });
 });
 
@@ -159,7 +159,7 @@ describe('Profiler', () => {
            await profiler.profile(requestProf);
            assert.fail('Expected an error to be thrown,');
          } catch (err) {
-           assert.equal(err.message, 'Unexpected profile type UNKNOWN.');
+           assert.strictEqual(err.message, 'Unexpected profile type UNKNOWN.');
          }
        });
   });
@@ -206,7 +206,7 @@ describe('Profiler', () => {
         await profiler.writeTimeProfile(requestProf);
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.equal(
+        assert.strictEqual(
             err.message,
             'Cannot collect time profile, time profiler not enabled.');
       }
@@ -252,7 +252,7 @@ describe('Profiler', () => {
         await profiler.writeHeapProfile(requestProf);
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.equal(
+        assert.strictEqual(
             err.message,
             'Cannot collect heap profile, heap profiler not enabled.');
       }
@@ -333,7 +333,7 @@ describe('Profiler', () => {
                         }));
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
-      assert.equal(0, requestStub.callCount);
+      assert.strictEqual(0, requestStub.callCount);
     });
     it('should ignore error thrown by http request.', async () => {
       const requestProf = {
@@ -378,7 +378,8 @@ describe('Profiler', () => {
              nock(API).patch('/' + requestProf.name).once().reply(200);
          const profiler = new Profiler(testConfig);
          await profiler.profileAndUpload(requestProf);
-         assert.equal(apiMock.isDone(), true, 'completed call to real API');
+         assert.strictEqual(
+             apiMock.isDone(), true, 'completed call to real API');
        });
     it('should send request to upload profile to non-default API without error.',
        async () => {
@@ -395,7 +396,8 @@ describe('Profiler', () => {
          config.baseApiUrl = TEST_API;
          const profiler = new Profiler(config);
          await profiler.profileAndUpload(requestProf);
-         assert.equal(apiMock.isDone(), true, 'completed call to test API');
+         assert.strictEqual(
+             apiMock.isDone(), true, 'completed call to test API');
        });
   });
   describe('createProfile', () => {
@@ -495,7 +497,7 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.equal(
+        assert.strictEqual(
             err.message,
             'Profile not valid: ' +
                 '{"name":"projects/12345678901/test-projectId"}.');
@@ -596,7 +598,7 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.equal(err.message, 'Network error');
+        assert.strictEqual(err.message, 'Network error');
       }
     });
     it('should throw status message when response has non-200 status.',
@@ -620,7 +622,7 @@ describe('Profiler', () => {
            await profiler.createProfile();
            assert.fail('expected error, no error thrown');
          } catch (err) {
-           assert.equal(err.message, '500 status code');
+           assert.strictEqual(err.message, '500 status code');
          }
        });
     it('should throw error with server-specified backoff when non-200 error' +
@@ -647,7 +649,7 @@ describe('Profiler', () => {
            await profiler.createProfile();
            assert.fail('expected error, no error thrown');
          } catch (err) {
-           assert.equal(err.backoffMillis, 50000);
+           assert.strictEqual(err.backoffMillis, 50000);
          }
        });
     it('should throw error when response undefined', async () => {
@@ -667,7 +669,7 @@ describe('Profiler', () => {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
       } catch (err) {
-        assert.equal(err.message, 'Profile not valid: undefined.');
+        assert.strictEqual(err.message, 'Profile not valid: undefined.');
       }
     });
   });
@@ -709,7 +711,7 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.equal(
+         assert.strictEqual(
              0, delayMillis, 'No delay before asking to collect next profile');
        });
     it('should return expect backoff when non-200 response and no backoff' +
@@ -804,7 +806,7 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.equal(50000, delayMillis);
+         assert.strictEqual(50000, delayMillis);
        });
     it('should return expected backoff when non-200 error and invalid server backoff' +
            ' specified',
@@ -825,7 +827,7 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.equal(500, delayMillis);
+         assert.strictEqual(500, delayMillis);
        });
     it('should return backoff limit, when server specified backoff is greater' +
            ' then backoff limit',
@@ -847,7 +849,7 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.equal(parseDuration('7d'), delayMillis);
+         assert.strictEqual(parseDuration('7d'), delayMillis);
        });
     it('should indicate collectProfile should be called immediately if there' +
            ' is an error when collecting and uploading profile.',
@@ -871,45 +873,45 @@ describe('Profiler', () => {
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
-         assert.equal(0, delayMillis);
+         assert.strictEqual(0, delayMillis);
        });
   });
   describe('parseBackoffDuration', () => {
     it('should return undefined when no duration specified', () => {
-      assert.equal(undefined, parseBackoffDuration(''));
+      assert.strictEqual(undefined, parseBackoffDuration(''));
     });
     it('should parse backoff with minutes and seconds specified', () => {
-      assert.equal(
+      assert.strictEqual(
           62000, parseBackoffDuration('action throttled, backoff for 1m2s'));
     });
     it('should parse backoff with fraction of second', () => {
-      assert.equal(
+      assert.strictEqual(
           2500, parseBackoffDuration('action throttled, backoff for 2.5s'));
     });
     it('should parse backoff with minutes and seconds, including fraction of second',
        () => {
-         assert.equal(
+         assert.strictEqual(
              62500,
              parseBackoffDuration('action throttled, backoff for 1m2.5s'));
        });
     it('should parse backoff with hours and seconds', () => {
-      assert.equal(
+      assert.strictEqual(
           3602500,
           parseBackoffDuration('action throttled, backoff for 1h2.5s'));
     });
     it('should parse backoff with hours, minutes, and seconds', () => {
-      assert.equal(
+      assert.strictEqual(
           3662500,
           parseBackoffDuration('action throttled, backoff for 1h1m2.5s'));
     });
     it('should parse return undefined for unexpected backoff time string format',
        () => {
-         assert.equal(
+         assert.strictEqual(
              undefined,
              parseBackoffDuration('action throttled, backoff for  1m2+s'));
        });
     it('should parse return undefined for unexpected string format', () => {
-      assert.equal(undefined, parseBackoffDuration('time 1m2s'));
+      assert.strictEqual(undefined, parseBackoffDuration('time 1m2s'));
     });
   });
 });
