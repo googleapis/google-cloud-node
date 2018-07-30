@@ -57,7 +57,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -91,14 +91,14 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
         // Inspect the calls to batchAnnotateImages and ensure they matched
         // the expected signature.
         assert(batchAnnotate.callCount === 1);
-        assert.deepEqual(request, {
+        assert.deepStrictEqual(request, {
           image: {content: 'ZmFrZUltYWdl'},
           features: {type: ['LOGO_DETECTION']},
         });
@@ -137,7 +137,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -149,7 +149,7 @@ describe('Vision helper methods', () => {
         // Inspect the calls to batchAnnotateImages and ensure they matched
         // the expected signature.
         assert(batchAnnotate.callCount === 1);
-        assert.deepEqual(request, {
+        assert.deepStrictEqual(request, {
           image: {content: 'ZmFrZUltYWdl'},
           features: {type: ['LOGO_DETECTION']},
         });
@@ -176,7 +176,7 @@ describe('Vision helper methods', () => {
         .annotateImage(request)
         .then(assert.fail)
         .catch(err => {
-          assert.deepEqual(err, {error: 404});
+          assert.deepStrictEqual(err, {error: 404});
         });
     });
 
@@ -201,7 +201,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -232,7 +232,7 @@ describe('Vision helper methods', () => {
       client.annotateImage(request, function(err, response) {
         // Establish that we got the expected response.
         assert(is.undefined(err));
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -257,7 +257,7 @@ describe('Vision helper methods', () => {
       };
       return client.annotateImage(request).catch(err => {
         // Establish that we got the expected response.
-        assert.deepEqual(err, {message: 'Bad things!'});
+        assert.deepStrictEqual(err, {message: 'Bad things!'});
 
         // Inspect the calls to batchAnnotate and ensure that they match
         // what we expected.
@@ -298,7 +298,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -338,7 +338,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -370,7 +370,7 @@ describe('Vision helper methods', () => {
       // Call a request to a single-feature method using a URL.
       return client.logoDetection('/path/to/logo.png').then(response => {
         // Ensure we got the slice of the response that we expected.
-        assert.deepEqual(response, [
+        assert.deepStrictEqual(response, [
           {
             logoAnnotations: [{description: 'Google'}],
           },
@@ -407,7 +407,7 @@ describe('Vision helper methods', () => {
         let response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -445,7 +445,7 @@ describe('Vision helper methods', () => {
       // to ensure that sending call options works appropriately.
       return client.logoDetection(Buffer.from('fakeImage'), opts).then(r => {
         let response = r[0];
-        assert.deepEqual(response, {
+        assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
 
@@ -502,7 +502,7 @@ describe('Vision helper methods', () => {
         .then(r => {
           let response = r[0];
 
-          assert.deepEqual(response, {
+          assert.deepStrictEqual(response, {
             localizedObjectAnnotations: [{dummy: 'response'}],
           });
 
