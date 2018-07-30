@@ -62,7 +62,8 @@
     "system-test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.20.1",
+    "@google-cloud/projectify": "^0.3.0",
+    "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
     "concat-stream": "^1.6.2",
     "create-error-class": "^3.0.2",

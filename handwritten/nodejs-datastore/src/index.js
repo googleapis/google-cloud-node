@@ -17,7 +17,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var common = require('@google-cloud/common');
 var extend = require('extend');
 var gax = require('google-gax');
 var grpc = new gax.GrpcClient().grpc;
@@ -363,10 +362,6 @@ function Datastore(options) {
   if (!(this instanceof Datastore)) {
     return new Datastore(options);
   }
-
-  options = common.util.normalizeArguments(this, options, {
-    projectIdRequired: false,
-  });
 
   this.clients_ = new Map();
   this.datastore = this;

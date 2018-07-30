@@ -23,13 +23,14 @@ var is = require('is');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 var through = require('through2');
-var util = require('@google-cloud/common').util;
+var pfy = require('@google-cloud/promisify');
+var pjy = require('@google-cloud/projectify');
 
 var entity = require('../src/entity.js');
 var Query = require('../src/query.js');
 
 var promisified = false;
-var fakeUtil = extend({}, util, {
+var fakePfy = extend({}, pfy, {
   promisifyAll: function(Class) {
     if (Class.name === 'DatastoreRequest') {
       promisified = true;
@@ -37,10 +38,16 @@ var fakeUtil = extend({}, util, {
   },
 });
 
+var fakePjy = {
+  replaceProjectIdToken: function() {
+    return (pjyOverride || pjy.replaceProjectIdToken).apply(null, arguments);
+  },
+};
+
 var v1FakeClientOverride;
 var fakeV1 = {
   FakeClient: function() {
-    return (v1FakeClientOverride || util.noop).apply(null, arguments);
+    return (v1FakeClientOverride || function() {}).apply(null, arguments);
   },
 };
 
@@ -75,11 +82,12 @@ function resetOverrides() {
 }
 
 override('entity', entity);
-override('util', fakeUtil);
 
 function FakeQuery() {
   this.calledWith_ = arguments;
 }
+
+let pjyOverride;
 
 describe('Request', function() {
   var Request;
@@ -89,9 +97,8 @@ describe('Request', function() {
 
   before(function() {
     Request = proxyquire('../src/request.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
+      '@google-cloud/promisify': fakePfy,
+      '@google-cloud/projectify': fakePjy,
       './entity.js': entity,
       './query.js': FakeQuery,
       './v1': fakeV1,
@@ -106,6 +113,7 @@ describe('Request', function() {
   });
 
   beforeEach(function() {
+    pjyOverride = null;
     key = new entity.Key({
       namespace: 'namespace',
       path: ['Company', 123],
@@ -167,8 +175,8 @@ describe('Request', function() {
     };
 
     beforeEach(function() {
-      overrides.entity.isKeyComplete = util.noop;
-      overrides.entity.keyToKeyProto = util.noop;
+      overrides.entity.isKeyComplete = function() {};
+      overrides.entity.keyToKeyProto = function() {};
     });
 
     it('should throw if the key is complete', function() {
@@ -282,7 +290,7 @@ describe('Request', function() {
 
   describe('createReadStream', function() {
     beforeEach(function() {
-      request.request_ = util.noop;
+      request.request_ = function() {};
     });
 
     it('should throw if no keys are provided', function() {
@@ -373,7 +381,7 @@ describe('Request', function() {
       it('should emit error', function(done) {
         request
           .createReadStream(key)
-          .on('data', util.noop)
+          .on('data', function() {})
           .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
@@ -383,7 +391,7 @@ describe('Request', function() {
       it('should end stream', function(done) {
         var stream = request.createReadStream(key);
 
-        stream.on('data', util.noop).on('error', function() {
+        stream.on('data', function() {}).on('error', function() {
           setImmediate(function() {
             assert.strictEqual(stream._destroyed, true);
             done();
@@ -741,8 +749,8 @@ describe('Request', function() {
 
   describe('runQueryStream', function() {
     beforeEach(function() {
-      overrides.entity.queryToQueryProto = util.noop;
-      request.request_ = util.noop;
+      overrides.entity.queryToQueryProto = function() {};
+      request.request_ = function() {};
     });
 
     it('should clone the query', function(done) {
@@ -1596,7 +1604,7 @@ describe('Request', function() {
     beforeEach(function() {
       var clients_ = new Map();
       clients_.set(CONFIG.client, {
-        [CONFIG.method]: util.noop,
+        [CONFIG.method]: function() {},
       });
 
       request.datastore = {
@@ -1633,7 +1641,7 @@ describe('Request', function() {
 
     it('should initiate and cache the client', function() {
       var fakeClient = {
-        [CONFIG.method]: util.noop,
+        [CONFIG.method]: function() {},
       };
 
       v1FakeClientOverride = function(options) {
@@ -1665,11 +1673,10 @@ describe('Request', function() {
       var expectedReqOpts = extend({}, CONFIG.reqOpts);
       expectedReqOpts.projectId = request.projectId;
 
-      overrides.util.replaceProjectIdToken = function(reqOpts, projectId) {
+      pjyOverride = function(reqOpts, projectId) {
         assert.notStrictEqual(reqOpts, CONFIG.reqOpts);
         assert.deepStrictEqual(reqOpts, expectedReqOpts);
         assert.strictEqual(projectId, PROJECT_ID);
-
         return replacedReqOpts;
       };
 

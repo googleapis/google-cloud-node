@@ -20,7 +20,6 @@ var assert = require('assert');
 var extend = require('extend');
 var gax = new require('google-gax');
 var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
 
 var v1 = require('../src/v1/index.js');
 
@@ -52,12 +51,9 @@ var fakeEntity = {
   },
 };
 
-var fakeUtil = extend({}, util);
-var originalFakeUtil = extend(true, {}, fakeUtil);
-
 var GoogleAuthOverride;
 function fakeGoogleAuth() {
-  return (GoogleAuthOverride || util.noop).apply(null, arguments);
+  return (GoogleAuthOverride || function() {}).apply(null, arguments);
 }
 
 var createInsecureOverride;
@@ -70,7 +66,10 @@ var fakeGoogleGax = {
       this.grpc = {
         credentials: {
           createInsecure() {
-            return (createInsecureOverride || util.noop).apply(null, arguments);
+            return (createInsecureOverride || function() {}).apply(
+              null,
+              arguments
+            );
           },
         },
       };
@@ -108,9 +107,6 @@ describe('Datastore', function() {
 
   before(function() {
     Datastore = proxyquire('../', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
       './entity.js': fakeEntity,
       './query.js': FakeQuery,
       './transaction.js': FakeTransaction,
@@ -123,8 +119,6 @@ describe('Datastore', function() {
   });
 
   beforeEach(function() {
-    extend(fakeUtil, originalFakeUtil);
-
     createInsecureOverride = null;
     GoogleAuthOverride = null;
 
@@ -156,21 +150,6 @@ describe('Datastore', function() {
       assert.doesNotThrow(function() {
         Datastore({projectId: PROJECT_ID});
       });
-    });
-
-    it('should normalize the arguments', function() {
-      var normalizeArgumentsCalled = false;
-      var options = {};
-
-      fakeUtil.normalizeArguments = function(context, options_, config) {
-        normalizeArgumentsCalled = true;
-        assert.strictEqual(options_, options);
-        assert.strictEqual(config.projectIdRequired, false);
-        return options_;
-      };
-
-      new Datastore(options);
-      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should initialize an empty Client map', function() {
