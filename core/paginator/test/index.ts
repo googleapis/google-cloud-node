@@ -89,7 +89,7 @@ describe('paginator', () => {
 
     it('should parse the arguments', (done) => {
       stub('parseArguments_', args => {
-        assert.deepEqual([].slice.call(args), [1, 2, 3]);
+        assert.deepStrictEqual([].slice.call(args), [1, 2, 3]);
         done();
       });
       stub('run_', util.noop);
@@ -158,7 +158,7 @@ describe('paginator', () => {
       const fakeArgs = [1, 2, 3];
 
       stub('parseArguments_', args => {
-        assert.deepEqual(fakeArgs, [].slice.call(args));
+        assert.deepStrictEqual(fakeArgs, [].slice.call(args));
         done();
       });
 
@@ -265,7 +265,7 @@ describe('paginator', () => {
       const args = [undefined, util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.deepEqual(parsedArguments.query, {});
+      assert.deepStrictEqual(parsedArguments.query, {});
     });
 
     it('should detect a callback if last argument is a function', () => {
@@ -404,7 +404,7 @@ describe('paginator', () => {
         } as ParsedArguments;
         stub('runAsStream_', util.noop);
         paginator.run_(parsedArguments, (query: {}, callback: () => void) => {
-          assert.deepEqual(query, parsedArguments.query);
+          assert.deepStrictEqual(query, parsedArguments.query);
           callback();
         });
       });
@@ -452,7 +452,7 @@ describe('paginator', () => {
 
       const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       rs.on('error', (err: Error) => {
-        assert.deepEqual(err, error);
+        assert.deepStrictEqual(err, error);
         done();
       });
     });
@@ -473,7 +473,7 @@ describe('paginator', () => {
         resultsReceived.push(result);
       });
       rs.on('end', () => {
-        assert.deepEqual(resultsReceived, ['a', 'b', 'c']);
+        assert.deepStrictEqual(resultsReceived, ['a', 'b', 'c']);
         done();
       });
     });
@@ -553,7 +553,7 @@ describe('paginator', () => {
           query: {},
           callback: (err: Error|null, res: Array<{}>, nextQuery: {}) => void) {
         if (nextQuerySent) {
-          assert.deepEqual(query, nextQuery);
+          assert.deepStrictEqual(query, nextQuery);
           done();
           return;
         }
