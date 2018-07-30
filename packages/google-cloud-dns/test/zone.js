@@ -35,7 +35,7 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['change', 'record']);
+    assert.deepStrictEqual(options.exclude, ['change', 'record']);
   },
 });
 
@@ -87,7 +87,7 @@ const fakePaginator = {
     extended = true;
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'Zone');
-    assert.deepEqual(methods, ['getChanges', 'getRecords']);
+    assert.deepStrictEqual(methods, ['getChanges', 'getRecords']);
   },
   streamify: function(methodName) {
     return methodName;
@@ -160,7 +160,7 @@ describe('Zone', function() {
       assert.strictEqual(calledWith.parent, dnsInstance);
       assert.strictEqual(calledWith.baseUrl, '/managedZones');
       assert.strictEqual(calledWith.id, ZONE_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
@@ -225,7 +225,7 @@ describe('Zone', function() {
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.add, undefined);
-        assert.deepEqual(reqOpts.json.additions, expectedAdditions);
+        assert.deepStrictEqual(reqOpts.json.additions, expectedAdditions);
         done();
       };
 
@@ -239,7 +239,7 @@ describe('Zone', function() {
 
       zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.delete, undefined);
-        assert.deepEqual(reqOpts.json.deletions, expectedDeletions);
+        assert.deepStrictEqual(reqOpts.json.deletions, expectedDeletions);
         done();
       };
 
@@ -370,7 +370,7 @@ describe('Zone', function() {
       const recordsToDelete = 'ns';
 
       zone.deleteRecordsByType_ = function(types, callback) {
-        assert.deepEqual(types, [recordsToDelete]);
+        assert.deepStrictEqual(types, [recordsToDelete]);
         callback();
       };
 
@@ -381,7 +381,7 @@ describe('Zone', function() {
       const recordsToDelete = {a: 'b', c: 'd'};
 
       zone.createChange = function(options, callback) {
-        assert.deepEqual(options.delete, [recordsToDelete]);
+        assert.deepStrictEqual(options.delete, [recordsToDelete]);
         callback();
       };
 
@@ -450,7 +450,7 @@ describe('Zone', function() {
 
       it('should delete non-NS and non-SOA records', function(done) {
         zone.deleteRecords = function(recordsToDelete, callback) {
-          assert.deepEqual(recordsToDelete, expectedRecordsToDelete);
+          assert.deepStrictEqual(recordsToDelete, expectedRecordsToDelete);
           callback();
         };
 
@@ -570,7 +570,7 @@ describe('Zone', function() {
   describe('getChanges', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -649,7 +649,7 @@ describe('Zone', function() {
         zone.getChanges({}, function(err, changes, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -729,7 +729,7 @@ describe('Zone', function() {
         zone.getRecords({}, function(err, records, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });

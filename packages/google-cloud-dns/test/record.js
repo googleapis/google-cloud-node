@@ -29,7 +29,7 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['toJSON', 'toString']);
+    assert.deepStrictEqual(options.exclude, ['toJSON', 'toString']);
   },
 });
 
@@ -111,7 +111,7 @@ describe('Record', function() {
         const record = Record.fromZoneRecord_(ZONE, 'a', aRecord);
 
         assert.strictEqual(record.type, 'A');
-        assert.deepEqual(record.metadata.data, expectedData);
+        assert.deepStrictEqual(record.metadata.data, expectedData);
         assert.strictEqual(record.metadata.name, aRecord.name);
         assert.strictEqual(record.metadata.ttl, aRecord.ttl);
       });
@@ -312,7 +312,7 @@ describe('Record', function() {
       });
       delete expectedRecord.data;
 
-      assert.deepEqual(record.toJSON(), expectedRecord);
+      assert.deepStrictEqual(record.toJSON(), expectedRecord);
     });
   });
 

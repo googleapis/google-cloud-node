@@ -34,7 +34,7 @@ const fakePaginator = {
     extended = true;
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'DNS');
-    assert.deepEqual(methods, ['getZones']);
+    assert.deepStrictEqual(methods, ['getZones']);
   },
   streamify: function(methodName) {
     return methodName;
@@ -57,7 +57,7 @@ const fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['zone']);
+    assert.deepStrictEqual(options.exclude, ['zone']);
   },
 });
 const originalFakeUtil = extend(true, {}, fakeUtil);
@@ -130,11 +130,14 @@ describe('DNS', function() {
 
       const baseUrl = 'https://www.googleapis.com/dns/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.deepEqual(calledWith.scopes, [
+      assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
       ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      assert.deepStrictEqual(
+        calledWith.packageJson,
+        require('../package.json')
+      );
     });
   });
 
@@ -187,7 +190,7 @@ describe('DNS', function() {
           name: zoneName,
           description: '',
         });
-        assert.deepEqual(reqOpts.json, expectedBody);
+        assert.deepStrictEqual(reqOpts.json, expectedBody);
 
         done();
       };
@@ -343,9 +346,9 @@ describe('DNS', function() {
           assert.ifError(err);
 
           // Check the original query wasn't modified.
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,

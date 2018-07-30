@@ -259,7 +259,7 @@ const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
           const addition = change.metadata.additions[0];
           delete addition.kind;
-          assert.deepEqual(addition, record.toJSON());
+          assert.deepStrictEqual(addition, record.toJSON());
 
           done();
         });
@@ -285,7 +285,7 @@ const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
             delete metadata.status;
             delete expectedMetadata.status;
-            assert.deepEqual(metadata, expectedMetadata);
+            assert.deepStrictEqual(metadata, expectedMetadata);
 
             done();
           });
@@ -363,8 +363,8 @@ const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
             const deleted = change.metadata.deletions[0].rrdatas;
             const added = change.metadata.additions[0].rrdatas;
 
-            assert.deepEqual(deleted, originalData);
-            assert.deepEqual(added, newRecord.data);
+            assert.deepStrictEqual(deleted, originalData);
+            assert.deepStrictEqual(added, newRecord.data);
 
             done();
           });

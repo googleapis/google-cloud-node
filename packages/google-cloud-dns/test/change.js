@@ -72,7 +72,7 @@ describe('Change', function() {
       assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/changes');
       assert.strictEqual(calledWith.id, CHANGE_ID);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true,
