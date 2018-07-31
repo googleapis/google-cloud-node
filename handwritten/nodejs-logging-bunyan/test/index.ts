@@ -145,7 +145,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.stackdriverLog.entry =
           (entryMetadata: types.StackdriverEntryMetadata,
            record: types.StackdriverEntryMetadata) => {
-            assert.deepEqual(entryMetadata, {
+            assert.deepStrictEqual(entryMetadata, {
               resource: loggingBunyan.resource,
               timestamp: RECORD.time,
               severity: 'INFO',
@@ -496,7 +496,7 @@ describe('logging-bunyan', () => {
         [20, 'DEBUG'],
         [10, 'DEBUG'],
       ]);
-      assert.deepEqual(
+      assert.deepStrictEqual(
           loggingBunyanLib.BUNYAN_TO_STACKDRIVER, bunyanToStackdriver);
     });
   });
