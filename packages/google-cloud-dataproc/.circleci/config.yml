@@ -27,14 +27,20 @@ workflows:
           requires:
             - lint
             - docs
-          filters:
+          filters: &master_and_releases
             branches:
               only: master
             tags: &releases
               only: '/^v[\d.]+$/'
+      - sample_tests:
+          requires:
+            - lint
+            - docs
+          filters: *master_and_releases
       - publish_npm:
           requires:
             - system_tests
+            - sample_tests
           filters:
             branches:
               ignore: /.*/
@@ -97,8 +103,8 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link ../
+            npm install
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
@@ -117,6 +123,33 @@ jobs:
       - run:
           name: Build documentation.
           command: npm run docs
+  sample_tests:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run: *remove_package_lock
+      - run:
+          name: Decrypt credentials.
+          command: |
+            openssl aes-256-cbc -d -in .circleci/key.json.enc \
+                -out .circleci/key.json \
+                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
+      - run: *npm_install_and_link
+      - run: *samples_npm_install_and_link
+      - run:
+          name: Run sample tests.
+          command: npm run samples-test
+          environment:
+            GCLOUD_PROJECT: long-door-651
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/samples/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Remove unencrypted key.
+          command: rm .circleci/key.json
+          when: always
+    working_directory: /home/node/samples/
   system_tests:
     docker:
       - image: 'node:8'
@@ -135,7 +168,6 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GCLOUD_PROJECT: long-door-651
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.
