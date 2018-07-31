@@ -80,7 +80,7 @@ describe('Project', function() {
       assert.strictEqual(calledWith.parent, resourceInstance);
       assert.strictEqual(calledWith.baseUrl, '/projects');
       assert.strictEqual(calledWith.id, ID);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         delete: true,
         exists: true,

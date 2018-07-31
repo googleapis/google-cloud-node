@@ -43,7 +43,7 @@ var fakePaginator = {
 
     methods = arrify(methods);
     assert.strictEqual(Class.name, 'Resource');
-    assert.deepEqual(methods, ['getProjects']);
+    assert.deepStrictEqual(methods, ['getProjects']);
     extended = true;
   },
   streamify: function(methodName) {
@@ -67,7 +67,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['operation', 'project']);
+    assert.deepStrictEqual(options.exclude, ['operation', 'project']);
   },
 });
 var originalFakeUtil = extend(true, {}, fakeUtil);
@@ -140,11 +140,14 @@ describe('Resource', function() {
 
       var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.deepEqual(calledWith.scopes, [
+      assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.strictEqual(calledWith.projectIdRequired, false);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      assert.deepStrictEqual(
+        calledWith.packageJson,
+        require('../package.json')
+      );
     });
   });
 
@@ -157,7 +160,7 @@ describe('Resource', function() {
       var expectedBody = {projectId: NEW_PROJECT_ID};
 
       resource.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, expectedBody);
+        assert.deepStrictEqual(reqOpts.json, expectedBody);
         done();
       };
 
@@ -168,7 +171,7 @@ describe('Resource', function() {
       resource.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/projects');
-        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+        assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
 
         done();
       };
@@ -240,7 +243,7 @@ describe('Resource', function() {
   describe('getProjects', function() {
     it('should accept only a callback', function(done) {
       resource.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -308,7 +311,7 @@ describe('Resource', function() {
         resource.getProjects({}, function(err, projects, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -350,7 +353,7 @@ describe('Resource', function() {
 
       assert(operation instanceof FakeOperation);
 
-      assert.deepEqual(operation.calledWith_[0], {
+      assert.deepStrictEqual(operation.calledWith_[0], {
         parent: resource,
         id: NAME,
       });
