@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-
-import consoleLogLevel = require('console-log-level');
 import * as is from 'is';
 import {has} from 'lodash';
 
@@ -25,7 +23,21 @@ const isString = is.string;
 const isNumber = is.number;
 const env = process.env;
 
-export type Logger = consoleLogLevel.Logger;
+// The Logger interface defined below matches the interface
+// used by console-log-level.  If the console-log-level
+// module is imported here to get the Logger interface,
+// TypeScript users of the error reporting library would
+// need to install @types/console-log-level to compile their
+// code.  As a result, the interface is explicitly specified instead.
+export type LogLevel = "error" | "trace" | "debug" | "info" | "warn" | "fatal" | undefined;
+export interface Logger {
+  error(...args: Array<{}>): void;
+  trace(...args: Array<{}>): void;
+  debug(...args: Array<{}>): void;
+  info(...args: Array<{}>): void;
+  warn(...args: Array<{}>): void;
+  fatal(...args: Array<{}>): void;
+}
 
 export interface ConfigurationOptions {
   projectId?: string;
