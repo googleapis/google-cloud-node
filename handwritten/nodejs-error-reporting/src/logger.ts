@@ -15,7 +15,7 @@
  */
 
 import * as is from 'is';
-import {has} from 'lodash';
+import has = require('lodash.has');
 import consoleLogLevel = require('console-log-level');
 
 const packageJson = require('../../package.json');
