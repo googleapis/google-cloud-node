@@ -15,7 +15,7 @@
  */
 
 import * as is from 'is';
-import {has} from 'lodash';
+import has = require('lodash.has');
 
 const isFunction = (is as {} as {fn: Function}).fn;
 const isObject = is.object;
