@@ -306,7 +306,10 @@ describe('Compute', function() {
       firewall.getMetadata(function(err, metadata) {
         assert.ifError(err);
         assert.deepStrictEqual(metadata.allowed, expectedMetadata.allowed);
-        assert.deepStrictEqual(metadata.sourceRanges, expectedMetadata.sourceRanges);
+        assert.deepStrictEqual(
+          metadata.sourceRanges,
+          expectedMetadata.sourceRanges
+        );
         done();
       });
     });

@@ -850,9 +850,12 @@ describe('Zone', function() {
 
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepStrictEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
-            type: 'ONE_TO_ONE_NAT',
-          });
+          assert.deepStrictEqual(
+            reqOpts.json.networkInterfaces[0].accessConfigs[0],
+            {
+              type: 'ONE_TO_ONE_NAT',
+            }
+          );
           done();
         };
 
@@ -930,9 +933,12 @@ describe('Zone', function() {
 
       it('should add a network interface accessConfig', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepStrictEqual(reqOpts.json.networkInterfaces[0].accessConfigs[0], {
-            type: 'ONE_TO_ONE_NAT',
-          });
+          assert.deepStrictEqual(
+            reqOpts.json.networkInterfaces[0].accessConfigs[0],
+            {
+              type: 'ONE_TO_ONE_NAT',
+            }
+          );
           done();
         };
 

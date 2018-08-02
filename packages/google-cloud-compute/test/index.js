@@ -226,7 +226,10 @@ describe('Compute', function() {
       assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',
       ]);
-      assert.deepStrictEqual(calledWith.packageJson, require('../package.json'));
+      assert.deepStrictEqual(
+        calledWith.packageJson,
+        require('../package.json')
+      );
     });
 
     it('should streamify the correct methods', function() {
