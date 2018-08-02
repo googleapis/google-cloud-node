@@ -78,6 +78,12 @@ export interface Config extends GoogleAuthOptions {
   // stack depth may increase overhead of profiling.
   heapMaxStackDepth?: number;
 
+  // Samples with stacks with any location containing this as a substring
+  // in their file name will not be included in heap profiles.
+  // By default this is set to "@google-cloud/profiler" to exclude samples from
+  // the profiler.
+  ignoreHeapSamplesPath?: string;
+
   // On each consecutive error in profile creation, the backoff envelope will
   // increase by this factor. The backoff will be a random value selected
   // from a uniform distribution between 0 and the backoff envelope.
@@ -134,6 +140,7 @@ export interface ProfilerConfig extends GoogleAuthOptions {
   timeIntervalMicros: number;
   heapIntervalBytes: number;
   heapMaxStackDepth: number;
+  ignoreHeapSamplesPath: string;
   initialBackoffMillis: number;
   backoffCapMillis: number;
   backoffMultiplier: number;
@@ -153,6 +160,7 @@ export const defaultConfig = {
   timeIntervalMicros: 1000,
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
+  ignoreHeapSamplesPath: '@google-cloud/profiler',
   initialBackoffMillis: 60 * 1000,  // 1 minute
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,

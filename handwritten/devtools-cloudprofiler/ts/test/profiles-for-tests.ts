@@ -448,3 +448,169 @@ export const anonymousFunctionTimeProfile: perftools.profiles.IProfile =
       periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
       period: 1000,
     });
+
+const heapWithPathLeaf1 = {
+  name: 'foo2',
+  scriptName: 'foo.ts',
+  scriptId: 0,
+  lineNumber: 3,
+  columnNumber: 3,
+  allocations: [{count: 1, sizeBytes: 2}],
+  children: []
+};
+
+
+const heapWithPathLeaf2 = {
+  name: 'bar',
+  scriptName: '@google-cloud/profiler/profiler.ts',
+  scriptId: 1,
+  lineNumber: 10,
+  columnNumber: 5,
+  allocations: [{count: 2, sizeBytes: 2}],
+  children: []
+};
+
+const heapWithPathLeaf3 = {
+  name: 'bar',
+  scriptName: 'bar.ts',
+  scriptId: 2,
+  lineNumber: 3,
+  columnNumber: 3,
+  allocations: [{count: 3, sizeBytes: 2}],
+  children: []
+};
+
+const heapWithPathNode2 = {
+  name: 'baz',
+  scriptName: 'foo.ts',
+  scriptId: 0,
+  lineNumber: 1,
+  columnNumber: 5,
+  allocations: [],
+  children: [heapWithPathLeaf1, heapWithPathLeaf2]
+};
+
+const heapWithPathNode1 = {
+  name: 'foo1',
+  scriptName: 'node_modules/@google-cloud/profiler/profiler.ts',
+  scriptId: 3,
+  lineNumber: 2,
+  columnNumber: 5,
+  allocations: [],
+  children: [heapWithPathLeaf3]
+};
+
+export const v8HeapWithPathProfile = Object.freeze({
+  name: '(root)',
+  scriptName: '(root)',
+  scriptId: 10000,
+  lineNumber: 0,
+  columnNumber: 5,
+  allocations: [],
+  children: [heapWithPathNode1, heapWithPathNode2]
+});
+
+const heapIncludePathFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+  new perftools.profiles.Function({id: 2, name: 7, systemName: 7, filename: 8}),
+  new perftools.profiles.Function({id: 3, name: 9, systemName: 9, filename: 6}),
+  new perftools.profiles.Function(
+      {id: 4, name: 10, systemName: 10, filename: 11}),
+  new perftools.profiles.Function(
+      {id: 5, name: 7, systemName: 7, filename: 12})
+];
+
+const heapIncludePathLocations = [
+  new perftools.profiles.Location({line: [{functionId: 1, line: 1}], id: 1}),
+  new perftools.profiles.Location({line: [{functionId: 2, line: 10}], id: 2}),
+  new perftools.profiles.Location({line: [{functionId: 3, line: 3}], id: 3}),
+  new perftools.profiles.Location({line: [{functionId: 4, line: 2}], id: 4}),
+  new perftools.profiles.Location({line: [{functionId: 5, line: 3}], id: 5}),
+];
+
+export const heapProfileIncludePath: perftools.profiles.IProfile =
+    Object.freeze({
+      sampleType: [
+        new perftools.profiles.ValueType({type: 1, unit: 2}),
+        new perftools.profiles.ValueType({type: 3, unit: 4}),
+      ],
+      sample: [
+        new perftools.profiles.Sample(
+            {locationId: [2, 1], value: [2, 4], label: []}),
+        new perftools.profiles.Sample(
+            {locationId: [3, 1], value: [1, 2], label: []}),
+        new perftools.profiles.Sample(
+            {locationId: [5, 4], value: [3, 6], label: []}),
+      ],
+      location: heapIncludePathLocations,
+      function: heapIncludePathFunctions,
+      stringTable: [
+        '',
+        'objects',
+        'count',
+        'space',
+        'bytes',
+        'baz',
+        'foo.ts',
+        'bar',
+        '@google-cloud/profiler/profiler.ts',
+        'foo2',
+        'foo1',
+        'node_modules/@google-cloud/profiler/profiler.ts',
+        'bar.ts',
+      ],
+      timeNanos: 0,
+      periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+      period: 524288
+    });
+
+// heapProfile is encoded then decoded to convert numbers to longs, in
+// decodedHeapProfile
+const encodedHeapProfileIncludePath =
+    perftools.profiles.Profile.encode(heapProfileIncludePath).finish();
+export const decodedHeapProfileIncludePath = Object.freeze(
+    perftools.profiles.Profile.decode(encodedHeapProfileIncludePath));
+
+const heapExcludePathFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+  new perftools.profiles.Function({id: 2, name: 7, systemName: 7, filename: 6}),
+];
+
+const heapExcludePathLocations = [
+  new perftools.profiles.Location({line: [{functionId: 1, line: 1}], id: 1}),
+  new perftools.profiles.Location({line: [{functionId: 2, line: 3}], id: 2}),
+];
+
+export const heapProfileExcludePath: perftools.profiles.IProfile =
+    Object.freeze({
+      sampleType: [
+        new perftools.profiles.ValueType({type: 1, unit: 2}),
+        new perftools.profiles.ValueType({type: 3, unit: 4}),
+      ],
+      sample: [
+        new perftools.profiles.Sample(
+            {locationId: [2, 1], value: [1, 2], label: []}),
+      ],
+      location: heapExcludePathLocations,
+      function: heapExcludePathFunctions,
+      stringTable: [
+        '',
+        'objects',
+        'count',
+        'space',
+        'bytes',
+        'baz',
+        'foo.ts',
+        'foo2',
+      ],
+      timeNanos: 0,
+      periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+      period: 524288
+    });
+
+// heapProfile is encoded then decoded to convert numbers to longs, in
+// decodedHeapProfile
+const encodedHeapProfileExcludePath =
+    perftools.profiles.Profile.encode(heapProfileExcludePath).finish();
+export const decodedHeapProfileExcludePath = Object.freeze(
+    perftools.profiles.Profile.decode(encodedHeapProfileExcludePath));

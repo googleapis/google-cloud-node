@@ -75,6 +75,7 @@ describe('createProfiler', () => {
     timeIntervalMicros: 1000,
     heapIntervalBytes: 512 * 1024,
     heapMaxStackDepth: 64,
+    ignoreHeapSamplesPath: '@google-cloud/profiler',
     initialBackoffMillis: 1000 * 60,
     backoffCapMillis: 60 * 60 * 1000,
     backoffMultiplier: 1.3,

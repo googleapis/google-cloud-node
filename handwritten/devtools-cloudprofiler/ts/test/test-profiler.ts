@@ -52,6 +52,7 @@ const testConfig: ProfilerConfig = {
   timeIntervalMicros: 1000,
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
+  ignoreHeapSamplesPath: '@google-cloud/profiler',
   initialBackoffMillis: 1000,
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
@@ -61,7 +62,6 @@ const testConfig: ProfilerConfig = {
   localTimeDurationMillis: 1000,
   localLogPeriodMillis: 1000
 };
-
 
 const mockTimeProfiler = mock(TimeProfiler);
 

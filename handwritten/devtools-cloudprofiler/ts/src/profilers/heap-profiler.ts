@@ -30,7 +30,8 @@ let heapStackDepth = 0;
  * Collects a heap profile when heapProfiler is enabled. Otherwise throws
  * an error.
  */
-export function profile(): perftools.profiles.IProfile {
+export function profile(ignoreSamplePath?: string):
+    perftools.profiles.IProfile {
   if (!enabled) {
     throw new Error('Heap profiler is not enabled.');
   }
@@ -41,14 +42,17 @@ export function profile(): perftools.profiles.IProfile {
   // TODO: remove any once type definition is updated to include external.
   // tslint:disable-next-line: no-any
   const {external}: {external: number} = process.memoryUsage() as any;
-  const externalNode: AllocationProfileNode = {
-    name: '(external)',
-    scriptName: '',
-    children: [],
-    allocations: [{sizeBytes: external, count: 1}],
-  };
-  result.children.push(externalNode);
-  return serializeHeapProfile(result, startTimeNanos, heapIntervalBytes);
+  if (external > 0) {
+    const externalNode: AllocationProfileNode = {
+      name: '(external)',
+      scriptName: '',
+      children: [],
+      allocations: [{sizeBytes: external, count: 1}],
+    };
+    result.children.push(externalNode);
+  }
+  return serializeHeapProfile(
+      result, startTimeNanos, heapIntervalBytes, ignoreSamplePath);
 }
 
 /**

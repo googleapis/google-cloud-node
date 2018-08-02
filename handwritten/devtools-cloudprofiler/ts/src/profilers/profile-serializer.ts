@@ -80,7 +80,8 @@ class StringTable {
  */
 function serialize<T extends ProfileNode>(
     profile: perftools.profiles.IProfile, root: T,
-    appendToSamples: AppendEntryToSamples<T>, stringTable: StringTable) {
+    appendToSamples: AppendEntryToSamples<T>, stringTable: StringTable,
+    ignoreSamplesPath?: string) {
   const samples: perftools.profiles.Sample[] = [];
   const locations: perftools.profiles.Location[] = [];
   const functions: perftools.profiles.Function[] = [];
@@ -94,6 +95,9 @@ function serialize<T extends ProfileNode>(
   while (entries.length > 0) {
     const entry = entries.pop()!;
     const node = entry.node;
+    if (ignoreSamplesPath && node.scriptName.indexOf(ignoreSamplesPath) > -1) {
+      continue;
+    }
     const stack = entry.stack;
     const location = getLocation(node);
     stack.unshift(location.id as number);
@@ -246,8 +250,8 @@ export function serializeTimeProfile(
  * @param intervalBytes - bytes allocated between samples.
  */
 export function serializeHeapProfile(
-    prof: AllocationProfileNode, startTimeNanos: number,
-    intervalBytes: number): perftools.profiles.IProfile {
+    prof: AllocationProfileNode, startTimeNanos: number, intervalBytes: number,
+    ignoreSamplesPath?: string): perftools.profiles.IProfile {
   const appendHeapEntryToSamples: AppendEntryToSamples<AllocationProfileNode> =
       (entry: Entry<AllocationProfileNode>,
        samples: perftools.profiles.Sample[]) => {
@@ -274,6 +278,7 @@ export function serializeHeapProfile(
     period: intervalBytes,
   };
 
-  serialize(profile, prof, appendHeapEntryToSamples, stringTable);
+  serialize(
+      profile, prof, appendHeapEntryToSamples, stringTable, ignoreSamplesPath);
   return profile;
 }
