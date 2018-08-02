@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.21.1
+
+Patch release to bring in updates to google-gax@0.18.0 so it no longer emits deprecation warnings with grpc (#120), along with other dependency updates and documentation changes.
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.18.0 (#146)
+- chore: drop dependency on common (#134)
+- chore(deps): update dependency eslint-plugin-node to v7 (#127)
+
+### Documentation
+- Code Samples demonstrating Object Localization & Handwriting OCR (#133)
+
+### Internal / Testing Changes
+- build: initial kokoro setup (#145)
+- chore: assert.deelEqual => assert.deepStrictEqual (#143)
+- chore: move mocha options to mocha.opts (#141)
+- chore: require node 8 for samples (#142)
+- chore: add node templates to synth.py (#139)
+- fix(deps): update dependency @google-cloud/vision to ^0.21.0 (#131)
+
 ## v0.21.0
 
 ### Implementation Changes
