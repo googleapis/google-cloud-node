@@ -154,7 +154,7 @@ app.use(function *(this: any): IterableIterator<any> {
 });
 `,
     description: 'uses koa',
-    dependencies: ['koa'],
+    dependencies: ['koa@1.x.x'],
     devDependencies: ['@types/koa']
   },
   {
@@ -220,7 +220,7 @@ new ErrorReporting({
     code: `const express = require('express');
 
 const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
-const errors = ErrorReporting();
+const errors = new ErrorReporting();
 
 const app = express();
 
@@ -315,7 +315,7 @@ app.use(function *(){
 });
 `,
     description: 'uses koa',
-    dependencies: ['koa'],
+    dependencies: ['koa@1.x.x'],
     devDependencies: []
   },
   {
