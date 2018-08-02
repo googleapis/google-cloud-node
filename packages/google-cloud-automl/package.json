@@ -42,7 +42,7 @@
     "system-test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "google-gax": "^0.17.1",
+    "google-gax": "^0.18.0",
     "lodash.merge": "^4.6.0",
     "lodash.union": "^4.6.0",
     "protobufjs": "^6.8.0"
