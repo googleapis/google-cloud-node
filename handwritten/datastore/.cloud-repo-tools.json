@@ -17,15 +17,6 @@
       "name": "Concepts",
       "file": "concepts.js",
       "docs_link": "https://cloud.google.com/datastore/docs/concepts/entities"
-    },
-    {
-      "id": "error",
-      "name": "Errors and Error Handling",
-      "file": "error.js",
-      "docs_link": "https://cloud.google.com/datastore/docs/concepts/errors",
-      "usage": {
-        "text": "node error.js"
-      }
     }
   ]
 }
