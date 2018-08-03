@@ -86,3 +86,37 @@ For more information, see https://cloud.google.com/text-to-speech/docs
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/README.md
+
+### Synthesize Speech with Audio Profile 
+
+View the [source code][audioProfile_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/audioProfile.js,samples/README.md)
+
+__Usage:__ `node audioProfile.js --help`
+
+```
+audioProfile.js <command>
+
+Commands:
+  node audioProfile.js synthesize "Enter Phrase to Test Here"
+
+Options:
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
+
+Examples:
+  node audioProfile.js synthesize "This is optimized for Phone" -f ./resources/phone.mp3 -e telephony-class-application -l en-US
+  node audioProfile.js synthesize "This is optimized for a Wearable, like a watch" -f ./resources/watch.mp3 -e wearable-class-device -l en-US
+  node audioProfile.js synthesize "This is optimized for Home Entertainment System" -f ./resources/homestereo.mp3 -e large-home-entertainment-class-device
+  node audioProfile.js synthesize "This is optimized for the Car" -f ./resources/car.mp3 -e large-automotive-class-device
+
+For more information, see https://cloud.google.com/text-to-speech/docs
+```
+
+[audioProfile_docs]: https://cloud.google.com/text-to-speech/docs
+[audioProfile_code]: audioProfile.js
+
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/README.md
+
