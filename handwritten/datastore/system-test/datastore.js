@@ -18,8 +18,6 @@
 
 var assert = require('assert');
 var async = require('async');
-var Buffer = require('safe-buffer').Buffer;
-
 var Datastore = require('../');
 var entity = require('../src/entity.js');
 

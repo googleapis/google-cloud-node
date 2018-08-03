@@ -17,7 +17,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var Buffer = require('safe-buffer').Buffer;
 var createErrorClass = require('create-error-class');
 var extend = require('extend');
 var is = require('is');
