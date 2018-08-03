@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^2.0.0",
-    "@opencensus/propagation-stackdriver": "^0.0.2",
+    "@opencensus/propagation-stackdriver": "^0.0.3",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
