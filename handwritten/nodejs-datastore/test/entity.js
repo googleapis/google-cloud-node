@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var Buffer = require('safe-buffer').Buffer;
 var deepStrictEqual = require('deep-strict-equal');
 assert.deepStrictEqual =
   assert.deepStrictEqual ||

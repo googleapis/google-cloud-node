@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var Buffer = require('safe-buffer').Buffer;
 var extend = require('extend');
 var is = require('is');
 var proxyquire = require('proxyquire');
