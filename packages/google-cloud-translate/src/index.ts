@@ -21,7 +21,6 @@ import * as common from '@google-cloud/common';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as isHtml from 'is-html';
-import * as prop from 'propprop';
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
 import * as r from 'request';
 
@@ -84,8 +83,9 @@ const PKG = require('../../package.json');
  */
 export class Translate extends common.Service {
   options;
-  key;
+  key?: string;
   constructor(options?) {
+    options = options || {};
     let baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
     if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
@@ -181,8 +181,8 @@ export class Translate extends common.Service {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * translate.detect('Hello').then((data) => {
-   *   var results = data[0];
-   *   var apiResponse = data[2];
+   *   const results = data[0];
+   *   const apiResponse = data[2];
    * });
    *
    * @example <caption>include:samples/translate.js</caption>
@@ -354,7 +354,7 @@ export class Translate extends common.Service {
    * // The source language is auto-detected by default. To manually set it,
    * // provide an object.
    * //-
-   * var options = {
+   * const options = {
    *   from: 'en',
    *   to: 'es'
    * };
@@ -369,7 +369,7 @@ export class Translate extends common.Service {
    * // Translate multiple strings of input. Note that the results are
    * // now provided as an array.
    * //-
-   * var input = [
+   * const input = [
    *   'Hello',
    *   'How are you today?'
    * ];
@@ -387,8 +387,8 @@ export class Translate extends common.Service {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * translate.translate('Hello', 'es').then((data) => {
-   *   var translation = data[0];
-   *   var apiResponse = data[1];
+   *   const translation = data[0];
+   *   const apiResponse = data[1];
    * });
    *
    * @example <caption>include:samples/translate.js</caption>
@@ -441,7 +441,7 @@ export class Translate extends common.Service {
             return;
           }
 
-          let translations = resp.data.translations.map(prop('translatedText'));
+          let translations = resp.data.translations.map(x => x.translatedText);
 
           if (body.q.length === 1 && !inputIsArray) {
             translations = translations[0];

@@ -17,16 +17,15 @@
 'use strict';
 
 import * as assert from 'assert';
-import * as prop from 'propprop';
 import {Translate} from '../src';
 
-var API_KEY = process.env.TRANSLATE_API_KEY;
+const API_KEY = process.env.TRANSLATE_API_KEY;
 
-describe('translate', function() {
-  var translate = new Translate();
+describe('translate', () => {
+  let translate = new Translate();
 
-  describe('detecting language from input', function() {
-    var INPUT = [
+  describe('detecting language from input', () => {
+    const INPUT = [
       {
         input: 'Hello!',
         expectedLanguage: 'en',
@@ -37,10 +36,10 @@ describe('translate', function() {
       },
     ];
 
-    it('should detect a langauge', function(done) {
-      var input = INPUT.map(prop('input'));
+    it('should detect a langauge', (done) => {
+      const input = INPUT.map(x => x.input);
 
-      translate.detect(input, function(err, results) {
+      translate.detect(input, (err, results) => {
         assert.ifError(err);
         assert.strictEqual(results[0].language, INPUT[0].expectedLanguage);
         assert.strictEqual(results[1].language, INPUT[1].expectedLanguage);
@@ -49,8 +48,8 @@ describe('translate', function() {
     });
   });
 
-  describe('translations', function() {
-    var INPUT = [
+  describe('translations', () => {
+    const INPUT = [
       {
         input: 'Hello!',
         expectedTranslation: 'Hola',
@@ -68,10 +67,10 @@ describe('translate', function() {
       return input.replace(/^\W|\W*$/g, '');
     }
 
-    it('should translate input', function(done) {
-      var input = INPUT.map(prop('input'));
+    it('should translate input', (done) => {
+      const input = INPUT.map(x => x.input);
 
-      translate.translate(input, 'es', function(err, results) {
+      translate.translate(input, 'es', (err, results) => {
         assert.ifError(err);
         results = results.map(removeSymbols);
         assert.strictEqual(results[0], INPUT[0].expectedTranslation);
@@ -80,15 +79,15 @@ describe('translate', function() {
       });
     });
 
-    it('should translate input with from and to options', function(done) {
-      var input = INPUT.map(prop('input'));
+    it('should translate input with from and to options', (done) => {
+      const input = INPUT.map(x => x.input);
 
-      var opts = {
+      const opts = {
         from: 'en',
         to: 'es',
       };
 
-      translate.translate(input, opts, function(err, results) {
+      translate.translate(input, opts, (err, results) => {
         assert.ifError(err);
         results = results.map(removeSymbols);
         assert.strictEqual(results[0], INPUT[0].expectedTranslation);
@@ -97,35 +96,33 @@ describe('translate', function() {
       });
     });
 
-    it('should autodetect HTML', function(done) {
-      var input = '<body>' + INPUT[0].input + '</body>';
+    it('should autodetect HTML', (done) => {
+      const input = '<body>' + INPUT[0].input + '</body>';
 
-      var opts = {
+      const opts = {
         from: 'en',
         to: 'es',
       };
 
-      translate.translate(input, opts, function(err, results) {
+      translate.translate(input, opts, (err, results) => {
         assert.ifError(err);
 
-        var translation = results.split(/<\/*body>/g)[1].trim();
+        const translation = results.split(/<\/*body>/g)[1].trim();
 
         assert.strictEqual(
-          removeSymbols(translation),
-          INPUT[0].expectedTranslation
-        );
+            removeSymbols(translation), INPUT[0].expectedTranslation);
 
         done();
       });
     });
   });
 
-  describe('supported languages', function() {
-    it('should get a list of supported languages', function(done) {
-      translate.getLanguages(function(err, languages) {
+  describe('supported languages', () => {
+    it('should get a list of supported languages', (done) => {
+      translate.getLanguages((err, languages) => {
         assert.ifError(err);
 
-        var englishResult = languages.filter(function(language) {
+        const englishResult = languages.filter((language) => {
           return language.code === 'en';
         })[0];
 
@@ -138,11 +135,11 @@ describe('translate', function() {
       });
     });
 
-    it('should accept a target language', function(done) {
-      translate.getLanguages('es', function(err, languages) {
+    it('should accept a target language', (done) => {
+      translate.getLanguages('es', (err, languages) => {
         assert.ifError(err);
 
-        var englishResult = languages.filter(function(language) {
+        const englishResult = languages.filter((language) => {
           return language.code === 'en';
         })[0];
 
@@ -156,12 +153,12 @@ describe('translate', function() {
     });
   });
 
-  (API_KEY ? describe : describe.skip)('authentication', function() {
-    beforeEach(function() {
+  (API_KEY ? describe : describe.skip)('authentication', () => {
+    beforeEach(() => {
       translate = new Translate({key: API_KEY});
     });
 
-    it('should use an API key to authenticate', function(done) {
+    it('should use an API key to authenticate', (done) => {
       translate.getLanguages(done);
     });
   });
