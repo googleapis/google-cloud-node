@@ -87,11 +87,6 @@ NAN_METHOD(SetSamplingInterval) {
   cpuProfiler->SetSamplingInterval(us);
 }
 
-NAN_METHOD(SetIdle) {
-  bool is_idle = info[0].As<Boolean>()->BooleanValue();
-  cpuProfiler->SetIdle(is_idle);
-}
-
 NAN_MODULE_INIT(InitAll) {
   Nan::Set(target, Nan::New("startProfiling").ToLocalChecked(),
     Nan::GetFunction(Nan::New<FunctionTemplate>(StartProfiling)).ToLocalChecked());
@@ -99,8 +94,6 @@ NAN_MODULE_INIT(InitAll) {
     Nan::GetFunction(Nan::New<FunctionTemplate>(StopProfiling)).ToLocalChecked());
   Nan::Set(target, Nan::New("setSamplingInterval").ToLocalChecked(),
     Nan::GetFunction(Nan::New<FunctionTemplate>(SetSamplingInterval)).ToLocalChecked());
-  Nan::Set(target, Nan::New("setIdle").ToLocalChecked(),
-    Nan::GetFunction(Nan::New<FunctionTemplate>(SetIdle)).ToLocalChecked());
 }
 
 NODE_MODULE(time_profiler, InitAll);
