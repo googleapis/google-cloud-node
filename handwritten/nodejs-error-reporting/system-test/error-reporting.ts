@@ -522,7 +522,7 @@ describe('error-reporting', () => {
       assert.strictEqual(matchedErrors.length, 1);
       const errItem = matchedErrors[0];
       assert.ok(errItem);
-      assert.strictEqual(errItem.count, 1);
+      assert.strictEqual(errItem.count, '1');
       const rep = errItem.representative;
       assert.ok(rep);
       // Ensure the stack trace in the message does not contain any frames
