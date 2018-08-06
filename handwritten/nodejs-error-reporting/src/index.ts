@@ -25,6 +25,7 @@ import {RequestHandler as AuthClient} from './google-apis/auth-client';
 import * as expressInterface from './interfaces/express';
 import * as hapiInterface from './interfaces/hapi';
 import * as koaInterface from './interfaces/koa';
+import * as koa2Interface from './interfaces/koa2';
 import * as manualInterface from './interfaces/manual';
 import * as messageBuilderInterface from './interfaces/message-builder';
 import * as restifyInterface from './interfaces/restify';
@@ -108,6 +109,8 @@ export class ErrorReporting {
   restify: (server: {}) => RestifyRequestHandler | RestifyRequestHandler[];
   // tslint:disable-next-line:no-any
   koa: (context: any, next: {}) => IterableIterator<{}>;
+  // tslint:disable-next-line:no-any
+  koa2: (context: any, next: {}) => Promise<void>;
 
   constructor(initConfiguration?: ConfigurationOptions) {
     if (!(this instanceof ErrorReporting)) {
@@ -120,7 +123,7 @@ export class ErrorReporting {
 
     if (this._config.getReportUnhandledRejections()) {
       const that = this;
-      process.on('unhandledRejection', (reason) => {
+      process.on('unhandledRejection', reason => {
         that._logger.warn(
             'UnhandledPromiseRejectionWarning: ' +
             'Unhandled promise rejection: ' + reason +
@@ -187,11 +190,22 @@ export class ErrorReporting {
 
     /**
      * @example
+     * // for Koa@1
      * const koa = require('koa');
      * const app = koa();
      * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
      * app.use(errors.koa);
      */
     this.koa = koaInterface.koaErrorHandler(this._client, this._config);
+
+    /**
+     * @example
+     * // for Koa@2
+     * const koa = require('koa');
+     * const app = koa();
+     * // BEFORE ALL OTHER ROUTE HANDLERS HANDLERS
+     * app.use(errors.koa2);
+     */
+    this.koa2 = koa2Interface.koa2ErrorHandler(this._client, this._config);
   }
 }
