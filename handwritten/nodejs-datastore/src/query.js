@@ -16,7 +16,7 @@
 
 'use strict';
 
-var arrify = require('arrify');
+const arrify = require('arrify');
 
 /**
  * Build a Query object.
@@ -201,7 +201,7 @@ Query.prototype.hasAncestor = function(key) {
  * });
  */
 Query.prototype.order = function(property, options) {
-  var sign = options && options.descending ? '-' : '+';
+  const sign = options && options.descending ? '-' : '+';
 
   this.orders.push({name: property, sign: sign});
   return this;
@@ -371,7 +371,7 @@ Query.prototype.offset = function(n) {
  *   // entities = An array of records.
  *
  *   // Access the Key object for an entity.
- *   var firstEntityKey = entities[0][datastore.KEY];
+ *   const firstEntityKey = entities[0][datastore.KEY];
  * });
  *
  * //-
@@ -381,7 +381,7 @@ Query.prototype.offset = function(n) {
  * query.select('__key__');
  *
  * query.run(function(err, entities) {
- *   var keys = entities.map(function(entity) {
+ *   const keys = entities.map(function(entity) {
  *     return entity[datastore.KEY];
  *   });
  * });
@@ -390,12 +390,12 @@ Query.prototype.offset = function(n) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * query.run().then(function(data) {
- *   var entities = data[0];
+ *   const entities = data[0];
  * });
  */
 Query.prototype.run = function() {
-  var query = this;
-  var args = [query].concat([].slice.call(arguments));
+  const query = this;
+  const args = [query].concat([].slice.call(arguments));
 
   return this.scope.runQuery.apply(this.scope, args);
 };
@@ -417,7 +417,7 @@ Query.prototype.run = function() {
  *   .on('error', console.error)
  *   .on('data', function (entity) {
  *     // Access the Key object for this entity.
- *     var key = entity[datastore.KEY];
+ *     const key = entity[datastore.KEY];
  *   })
  *   .on('info', function(info) {})
  *   .on('end', function() {
@@ -434,8 +434,8 @@ Query.prototype.run = function() {
  *   });
  */
 Query.prototype.runStream = function() {
-  var query = this;
-  var args = [query].concat([].slice.call(arguments));
+  const query = this;
+  const args = [query].concat([].slice.call(arguments));
 
   return this.scope.runQueryStream.apply(this.scope, args);
 };

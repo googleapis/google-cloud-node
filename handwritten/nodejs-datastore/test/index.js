@@ -16,14 +16,14 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var gax = new require('google-gax');
-var proxyquire = require('proxyquire');
+const assert = require('assert');
+const extend = require('extend');
+const gax = new require('google-gax');
+const proxyquire = require('proxyquire');
 
-var v1 = require('../src/v1/index.js');
+const v1 = require('../src/v1/index.js');
 
-var fakeEntity = {
+const fakeEntity = {
   KEY_SYMBOL: Symbol('fake key symbol'),
   Int: function(value) {
     this.value = value;
@@ -51,14 +51,14 @@ var fakeEntity = {
   },
 };
 
-var GoogleAuthOverride;
+let GoogleAuthOverride;
 function fakeGoogleAuth() {
   return (GoogleAuthOverride || function() {}).apply(null, arguments);
 }
 
-var createInsecureOverride;
+let createInsecureOverride;
 
-var fakeGoogleGax = {
+const fakeGoogleGax = {
   GrpcClient: class extends gax.GrpcClient {
     constructor(opts) {
       // super constructor must be called first!
@@ -88,15 +88,15 @@ function FakeTransaction() {
 function FakeV1() {}
 
 describe('Datastore', function() {
-  var Datastore;
-  var datastore;
+  let Datastore;
+  let datastore;
 
-  var PROJECT_ID = 'project-id';
-  var NAMESPACE = 'namespace';
+  const PROJECT_ID = 'project-id';
+  const NAMESPACE = 'namespace';
 
-  var DATASTORE_PROJECT_ID_CACHED = process.env.DATASTORE_PROJECT_ID;
+  const DATASTORE_PROJECT_ID_CACHED = process.env.DATASTORE_PROJECT_ID;
 
-  var OPTIONS = {
+  const OPTIONS = {
     projectId: PROJECT_ID,
     apiEndpoint: 'http://endpoint',
     credentials: {},
@@ -171,21 +171,21 @@ describe('Datastore', function() {
     });
 
     it('should default project ID to placeholder', function() {
-      var datastore = new Datastore({});
+      const datastore = new Datastore({});
       assert.strictEqual(datastore.projectId, '{{projectId}}');
     });
 
     it('should not default options.projectId to placeholder', function() {
-      var datastore = new Datastore({});
+      const datastore = new Datastore({});
       assert.strictEqual(datastore.options.projectId, undefined);
     });
 
     it('should use DATASTORE_PROJECT_ID', function() {
-      var projectId = 'overridden-project-id';
+      const projectId = 'overridden-project-id';
 
       process.env.DATASTORE_PROJECT_ID = projectId;
 
-      var datastore = new Datastore({});
+      const datastore = new Datastore({});
 
       assert.strictEqual(datastore.projectId, projectId);
       assert.strictEqual(datastore.options.projectId, projectId);
@@ -196,7 +196,7 @@ describe('Datastore', function() {
     });
 
     it('should set default API connection details', function(done) {
-      var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
+      const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
       Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
@@ -211,12 +211,12 @@ describe('Datastore', function() {
     it('should localize the options', function() {
       delete process.env.DATASTORE_PROJECT_ID;
 
-      var options = {
+      const options = {
         a: 'b',
         c: 'd',
       };
 
-      var datastore = new Datastore(options);
+      const datastore = new Datastore(options);
 
       assert.notStrictEqual(datastore.options, options);
 
@@ -237,53 +237,53 @@ describe('Datastore', function() {
     });
 
     it('should set port if detected', function() {
-      var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
+      const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
-      var port = 99;
+      const port = 99;
       Datastore.prototype.determineBaseUrl_ = function() {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
         this.port_ = port;
       };
 
-      var datastore = new Datastore(OPTIONS);
+      const datastore = new Datastore(OPTIONS);
 
       assert.strictEqual(datastore.options.port, port);
     });
 
     it('should set grpc ssl credentials if custom endpoint', function() {
-      var determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
+      const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
       Datastore.prototype.determineBaseUrl_ = function() {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
         this.customEndpoint_ = true;
       };
 
-      var fakeInsecureCreds = {};
+      const fakeInsecureCreds = {};
       createInsecureOverride = function() {
         return fakeInsecureCreds;
       };
 
-      var datastore = new Datastore(OPTIONS);
+      const datastore = new Datastore(OPTIONS);
 
       assert.strictEqual(datastore.options.sslCreds, fakeInsecureCreds);
     });
 
     it('should cache a local GoogleAuth instance', function() {
-      var fakeGoogleAuthInstance = {};
+      const fakeGoogleAuthInstance = {};
 
       GoogleAuthOverride = function() {
         return fakeGoogleAuthInstance;
       };
 
-      var datastore = new Datastore({});
+      const datastore = new Datastore({});
       assert.strictEqual(datastore.auth, fakeGoogleAuthInstance);
     });
   });
 
   describe('double', function() {
     it('should expose Double builder', function() {
-      var aDouble = 7.0;
-      var double = Datastore.double(aDouble);
+      const aDouble = 7.0;
+      const double = Datastore.double(aDouble);
       assert.strictEqual(double.value, aDouble);
     });
 
@@ -294,8 +294,8 @@ describe('Datastore', function() {
 
   describe('geoPoint', function() {
     it('should expose GeoPoint builder', function() {
-      var aGeoPoint = {latitude: 24, longitude: 88};
-      var geoPoint = Datastore.geoPoint(aGeoPoint);
+      const aGeoPoint = {latitude: 24, longitude: 88};
+      const geoPoint = Datastore.geoPoint(aGeoPoint);
       assert.strictEqual(geoPoint.value, aGeoPoint);
     });
 
@@ -306,8 +306,8 @@ describe('Datastore', function() {
 
   describe('int', function() {
     it('should expose Int builder', function() {
-      var anInt = 7;
-      var int = Datastore.int(anInt);
+      const anInt = 7;
+      const int = Datastore.int(anInt);
       assert.strictEqual(int.value, anInt);
     });
 
@@ -318,9 +318,9 @@ describe('Datastore', function() {
 
   describe('isDouble', function() {
     it('should pass value to entity', function() {
-      var value = 0.42;
-      var called = false;
-      var saved = fakeEntity.isDsDouble;
+      const value = 0.42;
+      let called = false;
+      const saved = fakeEntity.isDsDouble;
       fakeEntity.isDsDouble = function(arg) {
         assert.strictEqual(arg, value);
         called = true;
@@ -332,7 +332,7 @@ describe('Datastore', function() {
     });
 
     it('should expose Double identifier', function() {
-      var something = {};
+      const something = {};
       Datastore.isDouble(something);
       assert.strictEqual(fakeEntity.calledWith_[0], something);
     });
@@ -340,9 +340,9 @@ describe('Datastore', function() {
 
   describe('isGeoPoint', function() {
     it('should pass value to entity', function() {
-      var value = {fakeLatitude: 1, fakeLongitude: 2};
-      var called = false;
-      var saved = fakeEntity.isDsGeoPoint;
+      const value = {fakeLatitude: 1, fakeLongitude: 2};
+      let called = false;
+      const saved = fakeEntity.isDsGeoPoint;
       fakeEntity.isDsGeoPoint = function(arg) {
         assert.strictEqual(arg, value);
         called = true;
@@ -354,7 +354,7 @@ describe('Datastore', function() {
     });
 
     it('should expose GeoPoint identifier', function() {
-      var something = {};
+      const something = {};
       Datastore.isGeoPoint(something);
       assert.strictEqual(fakeEntity.calledWith_[0], something);
     });
@@ -362,9 +362,9 @@ describe('Datastore', function() {
 
   describe('isInt', function() {
     it('should pass value to entity', function() {
-      var value = 42;
-      var called = false;
-      var saved = fakeEntity.isDsInt;
+      const value = 42;
+      let called = false;
+      const saved = fakeEntity.isDsInt;
       fakeEntity.isDsInt = function(arg) {
         assert.strictEqual(arg, value);
         called = true;
@@ -376,7 +376,7 @@ describe('Datastore', function() {
     });
 
     it('should expose Int identifier', function() {
-      var something = {};
+      const something = {};
       Datastore.isInt(something);
       assert.strictEqual(fakeEntity.calledWith_[0], something);
     });
@@ -384,9 +384,9 @@ describe('Datastore', function() {
 
   describe('isKey', function() {
     it('should pass value to entity', function() {
-      var value = {zz: true};
-      var called = false;
-      var saved = fakeEntity.isDsKey;
+      const value = {zz: true};
+      let called = false;
+      const saved = fakeEntity.isDsKey;
       fakeEntity.isDsKey = function(arg) {
         assert.strictEqual(arg, value);
         called = true;
@@ -398,7 +398,7 @@ describe('Datastore', function() {
     });
 
     it('should expose Key identifier', function() {
-      var something = {};
+      const something = {};
       datastore.isKey(something);
       assert.strictEqual(fakeEntity.calledWith_[0], something);
     });
@@ -458,10 +458,10 @@ describe('Datastore', function() {
 
   describe('createQuery', function() {
     it('should return a Query object', function() {
-      var namespace = 'namespace';
-      var kind = ['Kind'];
+      const namespace = 'namespace';
+      const kind = ['Kind'];
 
-      var query = datastore.createQuery(namespace, kind);
+      const query = datastore.createQuery(namespace, kind);
       assert(query instanceof FakeQuery);
 
       assert.strictEqual(query.calledWith_[0], datastore);
@@ -470,8 +470,8 @@ describe('Datastore', function() {
     });
 
     it('should include the default namespace', function() {
-      var kind = ['Kind'];
-      var query = datastore.createQuery(kind);
+      const kind = ['Kind'];
+      const query = datastore.createQuery(kind);
 
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
@@ -479,7 +479,7 @@ describe('Datastore', function() {
     });
 
     it('should include the default namespace in a kindless query', function() {
-      var query = datastore.createQuery();
+      const query = datastore.createQuery();
 
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
@@ -489,15 +489,15 @@ describe('Datastore', function() {
 
   describe('key', function() {
     it('should return a Key object', function() {
-      var options = {};
-      var key = datastore.key(options);
+      const options = {};
+      const key = datastore.key(options);
 
       assert.strictEqual(key.calledWith_[0], options);
     });
 
     it('should use a non-object argument as the path', function() {
-      var options = 'path';
-      var key = datastore.key(options);
+      const options = 'path';
+      const key = datastore.key(options);
 
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
       assert.deepStrictEqual(key.calledWith_[0].path, [options]);
@@ -506,13 +506,13 @@ describe('Datastore', function() {
 
   describe('transaction', function() {
     it('should return a Transaction object', function() {
-      var transaction = datastore.transaction();
+      const transaction = datastore.transaction();
       assert.strictEqual(transaction.calledWith_[0], datastore);
     });
 
     it('should pass options to the Transaction constructor', function() {
-      var options = {};
-      var transaction = datastore.transaction(options);
+      const options = {};
+      const transaction = datastore.transaction(options);
       assert.strictEqual(transaction.calledWith_[1], options);
     });
   });
@@ -527,7 +527,7 @@ describe('Datastore', function() {
     });
 
     it('should default to defaultBaseUrl_', function() {
-      var defaultBaseUrl_ = 'defaulturl';
+      const defaultBaseUrl_ = 'defaulturl';
       datastore.defaultBaseUrl_ = defaultBaseUrl_;
 
       datastore.determineBaseUrl_();
@@ -535,7 +535,7 @@ describe('Datastore', function() {
     });
 
     it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'localhost';
+      const expectedBaseUrl = 'localhost';
 
       setHost('localhost/');
       datastore.determineBaseUrl_();
@@ -563,7 +563,7 @@ describe('Datastore', function() {
     });
 
     it('should not set customEndpoint_ when using default baseurl', function() {
-      var datastore = new Datastore({projectId: PROJECT_ID});
+      const datastore = new Datastore({projectId: PROJECT_ID});
       datastore.determineBaseUrl_();
       assert.strictEqual(datastore.customEndpoint_, undefined);
     });
@@ -579,9 +579,9 @@ describe('Datastore', function() {
     });
 
     describe('with DATASTORE_EMULATOR_HOST environment variable', function() {
-      var DATASTORE_EMULATOR_HOST = 'localhost:9090';
-      var EXPECTED_BASE_URL = 'localhost';
-      var EXPECTED_PORT = 9090;
+      const DATASTORE_EMULATOR_HOST = 'localhost:9090';
+      const EXPECTED_BASE_URL = 'localhost';
+      const EXPECTED_PORT = 9090;
 
       beforeEach(function() {
         setHost(DATASTORE_EMULATOR_HOST);

@@ -16,14 +16,14 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var {promisifyAll} = require('@google-cloud/promisify');
-var flatten = require('lodash.flatten');
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const {promisifyAll} = require('@google-cloud/promisify');
+const flatten = require('lodash.flatten');
+const is = require('is');
+const util = require('util');
 
-var entity = require('./entity.js');
-var Request = require('./request.js');
+const entity = require('./entity.js');
+const Request = require('./request.js');
 
 /**
  * A transaction is a set of Datastore operations on one or more entities. Each
@@ -118,11 +118,11 @@ util.inherits(Transaction, Request);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * transaction.commit().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Transaction.prototype.commit = function(gaxOptions, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(gaxOptions)) {
     callback = gaxOptions;
@@ -136,7 +136,7 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
     return;
   }
 
-  var keys = {};
+  const keys = {};
 
   this.modifiedEntities_
     // Reverse the order of the queue to respect the "last queued request wins"
@@ -147,13 +147,13 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
     // key they just asked to be deleted, the delete request will be ignored,
     // giving preference to the save operation.
     .filter(function(modifiedEntity) {
-      var key = modifiedEntity.entity.key;
+      const key = modifiedEntity.entity.key;
 
       if (!entity.isKeyComplete(key)) {
         return true;
       }
 
-      var stringifiedKey = JSON.stringify(modifiedEntity.entity.key);
+      const stringifiedKey = JSON.stringify(modifiedEntity.entity.key);
 
       if (!keys[stringifiedKey]) {
         keys[stringifiedKey] = true;
@@ -172,8 +172,8 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
     // we eventually execute the `save` method's API callback, having all the
     // keys together is necessary to maintain order.
     .reduce(function(acc, entityObject) {
-      var lastEntityObject = acc[acc.length - 1];
-      var sameMethod =
+      const lastEntityObject = acc[acc.length - 1];
+      const sameMethod =
         lastEntityObject && entityObject.method === lastEntityObject.method;
 
       if (!lastEntityObject || !sameMethod) {
@@ -190,15 +190,15 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
     // using `save` and `delete` outside of a transaction, to process the
     // response from the API.
     .forEach(function(modifiedEntity) {
-      var method = modifiedEntity.method;
-      var args = modifiedEntity.args.reverse();
+      const method = modifiedEntity.method;
+      const args = modifiedEntity.args.reverse();
 
       Request.prototype[method].call(self, args, function() {});
     });
 
   // Take the `req` array built previously, and merge them into one request to
   // send as the final transactional commit.
-  var reqOpts = {
+  const reqOpts = {
     mutations: flatten(this.requests_.map(x => x.mutations)),
   };
 
@@ -256,7 +256,7 @@ Transaction.prototype.commit = function(gaxOptions, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   var query = transaction.createQuery('Company');
+ *   const query = transaction.createQuery('Company');
  *
  *   query.run(function(err, entities) {
  *     if (err) {
@@ -308,7 +308,7 @@ Transaction.prototype.createQuery = function() {
  * });
  */
 Transaction.prototype.delete = function(entities) {
-  var self = this;
+  const self = this;
 
   arrify(entities).forEach(function(ent) {
     self.modifiedEntities_.push({
@@ -351,11 +351,11 @@ Transaction.prototype.delete = function(entities) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * transaction.rollback().then(function(data) {
- *   var apiResponse = data[0];
+ *   const apiResponse = data[0];
  * });
  */
 Transaction.prototype.rollback = function(gaxOptions, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(gaxOptions)) {
     callback = gaxOptions;
@@ -402,7 +402,7 @@ Transaction.prototype.rollback = function(gaxOptions, callback) {
  *
  * transaction.run(function(err, transaction) {
  *   // Perform Datastore transactional operations.
- *   var key = datastore.key(['Company', 123]);
+ *   const key = datastore.key(['Company', 123]);
  *
  *   transaction.get(key, function(err, entity) {
  *     entity.name = 'Google';
@@ -424,12 +424,12 @@ Transaction.prototype.rollback = function(gaxOptions, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * transaction.run().then(function(data) {
- *   var transaction = data[0];
- *   var apiResponse = data[1];
+ *   const transaction = data[0];
+ *   const apiResponse = data[1];
  * });
  */
 Transaction.prototype.run = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -439,7 +439,7 @@ Transaction.prototype.run = function(options, callback) {
   options = options || {};
   callback = callback || function() {};
 
-  var reqOpts = {
+  const reqOpts = {
     transactionOptions: {},
   };
 
@@ -607,7 +607,7 @@ Transaction.prototype.run = function(options, callback) {
  * });
  */
 Transaction.prototype.save = function(entities) {
-  var self = this;
+  const self = this;
 
   arrify(entities).forEach(function(ent) {
     self.modifiedEntities_.push({

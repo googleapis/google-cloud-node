@@ -16,15 +16,15 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var createErrorClass = require('create-error-class');
-var extend = require('extend');
-var is = require('is');
+const arrify = require('arrify');
+const createErrorClass = require('create-error-class');
+const extend = require('extend');
+const is = require('is');
 
-var entity = module.exports;
+const entity = module.exports;
 
-var InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
-  var errorMessages = {
+const InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
+  const errorMessages = {
     MISSING_KIND: 'A key should contain at least a kind.',
     MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.',
   };
@@ -179,7 +179,7 @@ function Key(options) {
   options.path = [].slice.call(options.path);
 
   if (options.path.length % 2 === 0) {
-    var identifier = options.path.pop();
+    const identifier = options.path.pop();
 
     if (is.number(identifier) || isDsInt(identifier)) {
       this.id = identifier.value || identifier;
@@ -250,8 +250,8 @@ entity.isDsKey = isDsKey;
  * // <Buffer 68 65 6c 6c 6f>
  */
 function decodeValueProto(valueProto) {
-  var valueType = valueProto.valueType;
-  var value = valueProto[valueType];
+  const valueType = valueProto.valueType;
+  const value = valueProto[valueType];
 
   switch (valueType) {
     case 'arrayValue': {
@@ -283,7 +283,7 @@ function decodeValueProto(valueProto) {
     }
 
     case 'timestampValue': {
-      var milliseconds = parseInt(value.nanos, 10) / 1e6;
+      const milliseconds = parseInt(value.nanos, 10) / 1e6;
       return new Date(parseInt(value.seconds, 10) * 1000 + milliseconds);
     }
 
@@ -309,7 +309,7 @@ entity.decodeValueProto = decodeValueProto;
  * // }
  */
 function encodeValue(value) {
-  var valueProto = {};
+  const valueProto = {};
 
   if (is.boolean(value)) {
     valueProto.booleanValue = value;
@@ -345,7 +345,7 @@ function encodeValue(value) {
   }
 
   if (value instanceof Date) {
-    var seconds = value.getTime() / 1000;
+    const seconds = value.getTime() / 1000;
 
     valueProto.timestampValue = {
       seconds: Math.floor(seconds),
@@ -381,7 +381,7 @@ function encodeValue(value) {
     if (!is.empty(value)) {
       value = extend(true, {}, value);
 
-      for (var prop in value) {
+      for (const prop in value) {
         if (value.hasOwnProperty(prop)) {
           value[prop] = entity.encodeValue(value[prop]);
         }
@@ -427,12 +427,12 @@ entity.encodeValue = encodeValue;
  * // }
  */
 function entityFromEntityProto(entityProto) {
-  var entityObject = {};
+  const entityObject = {};
 
-  var properties = entityProto.properties || {};
+  const properties = entityProto.properties || {};
 
-  for (var property in properties) {
-    var value = properties[property];
+  for (const property in properties) {
+    const value = properties[property];
     entityObject[property] = entity.decodeValueProto(value);
   }
 
@@ -472,10 +472,10 @@ entity.entityFromEntityProto = entityFromEntityProto;
  * // }
  */
 function entityToEntityProto(entityObject) {
-  var properties = entityObject.data;
-  var excludeFromIndexes = entityObject.excludeFromIndexes;
+  const properties = entityObject.data;
+  const excludeFromIndexes = entityObject.excludeFromIndexes;
 
-  var entityProto = {
+  const entityProto = {
     key: null,
 
     properties: Object.keys(properties).reduce(function(encoded, key) {
@@ -493,11 +493,11 @@ function entityToEntityProto(entityObject) {
   return entityProto;
 
   function excludePathFromEntity(entity, path) {
-    var arrayIndex = path.indexOf('[]');
-    var entityIndex = path.indexOf('.');
+    const arrayIndex = path.indexOf('[]');
+    const entityIndex = path.indexOf('.');
 
-    var hasArrayPath = arrayIndex > -1;
-    var hasEntityPath = entityIndex > -1;
+    const hasArrayPath = arrayIndex > -1;
+    const hasEntityPath = entityIndex > -1;
 
     if (!hasArrayPath && !hasEntityPath) {
       // This is the path end node. Traversal ends here in either case.
@@ -517,20 +517,20 @@ function entityToEntityProto(entityObject) {
       return;
     }
 
-    var delimiterIndex;
+    let delimiterIndex;
     if (hasArrayPath && hasEntityPath) {
       delimiterIndex = Math.min(arrayIndex, entityIndex);
     } else {
       delimiterIndex = Math.max(arrayIndex, entityIndex);
     }
 
-    var firstPathPartIsArray = delimiterIndex === arrayIndex;
-    var firstPathPartIsEntity = delimiterIndex === entityIndex;
+    const firstPathPartIsArray = delimiterIndex === arrayIndex;
+    const firstPathPartIsEntity = delimiterIndex === entityIndex;
 
-    var delimiter = firstPathPartIsArray ? '[]' : '.';
-    var splitPath = path.split(delimiter);
-    var firstPathPart = splitPath.shift();
-    var remainderPath = splitPath.join(delimiter).replace(/^(\.|\[\])/, '');
+    const delimiter = firstPathPartIsArray ? '[]' : '.';
+    const splitPath = path.split(delimiter);
+    const firstPathPart = splitPath.shift();
+    const remainderPath = splitPath.join(delimiter).replace(/^(\.|\[\])/, '');
 
     if (!(entity.properties && entity.properties[firstPathPart])) {
       // Either a primitive or an entity for which this path doesn't apply.
@@ -542,7 +542,7 @@ function entityToEntityProto(entityObject) {
       // check also if the property in question is actually an array value.
       entity.properties[firstPathPart].arrayValue
     ) {
-      var array = entity.properties[firstPathPart].arrayValue;
+      const array = entity.properties[firstPathPart].arrayValue;
       array.values.forEach(function(value) {
         if (remainderPath === '') {
           // We want to exclude *this* array property, which is
@@ -562,7 +562,7 @@ function entityToEntityProto(entityObject) {
         }
       });
     } else if (firstPathPartIsEntity) {
-      var parentEntity = entity.properties[firstPathPart].entityValue;
+      const parentEntity = entity.properties[firstPathPart].entityValue;
       excludePathFromEntity(parentEntity, remainderPath);
     }
   }
@@ -581,7 +581,7 @@ entity.entityToEntityProto = entityToEntityProto;
  *
  * @example
  * request_('runQuery', {}, function(err, response) {
- *   var entityObjects = formatArray(response.batch.entityResults);
+ *   const entityObjects = formatArray(response.batch.entityResults);
  *   // {
  *   //   key: {},
  *   //   data: {
@@ -593,7 +593,7 @@ entity.entityToEntityProto = entityToEntityProto;
  */
 function formatArray(results) {
   return results.map(function(result) {
-    var ent = entity.entityFromEntityProto(result.entity);
+    const ent = entity.entityFromEntityProto(result.entity);
     ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key);
     return ent;
   });
@@ -613,7 +613,7 @@ entity.formatArray = formatArray;
  * isKeyComplete(new Key('Company')); // false
  */
 function isKeyComplete(key) {
-  var lastPathElement = entity.keyToKeyProto(key).path.pop();
+  const lastPathElement = entity.keyToKeyProto(key).path.pop();
   return !!(lastPathElement.id || lastPathElement.name);
 }
 
@@ -627,7 +627,7 @@ entity.isKeyComplete = isKeyComplete;
  * @returns {Key}
  *
  * @example
- * var key = keyFromKeyProto({
+ * const key = keyFromKeyProto({
  *   partitionId: {
  *     projectId: 'project-id',
  *     namespaceId: ''
@@ -641,7 +641,7 @@ entity.isKeyComplete = isKeyComplete;
  * });
  */
 function keyFromKeyProto(keyProto) {
-  var keyOptions = {
+  const keyOptions = {
     path: [],
   };
 
@@ -652,7 +652,7 @@ function keyFromKeyProto(keyProto) {
   keyProto.path.forEach(function(path, index) {
     keyOptions.path.push(path.kind);
 
-    var id = path[path.idType];
+    let id = path[path.idType];
 
     if (path.idType === 'id') {
       id = new entity.Int(id);
@@ -680,7 +680,7 @@ entity.keyFromKeyProto = keyFromKeyProto;
  * @returns {object}
  *
  * @example
- * var keyProto = keyToKeyProto(new Key(['Company', 1]));
+ * const keyProto = keyToKeyProto(new Key(['Company', 1]));
  * // {
  * //   path: [
  * //     {
@@ -697,7 +697,7 @@ function keyToKeyProto(key) {
     });
   }
 
-  var keyProto = {
+  const keyProto = {
     path: [],
   };
 
@@ -707,7 +707,7 @@ function keyToKeyProto(key) {
     };
   }
 
-  var numKeysWalked = 0;
+  let numKeysWalked = 0;
 
   // Reverse-iterate over the Key objects.
   do {
@@ -718,7 +718,7 @@ function keyToKeyProto(key) {
       });
     }
 
-    var pathElement = {
+    const pathElement = {
       kind: key.kind,
     };
 
@@ -772,7 +772,7 @@ entity.keyToKeyProto = keyToKeyProto;
  * // }
  */
 function queryToQueryProto(query) {
-  var OP_TO_OPERATOR = {
+  const OP_TO_OPERATOR = {
     '=': 'EQUAL',
     '>': 'GREATER_THAN',
     '>=': 'GREATER_THAN_OR_EQUAL',
@@ -781,12 +781,12 @@ function queryToQueryProto(query) {
     HAS_ANCESTOR: 'HAS_ANCESTOR',
   };
 
-  var SIGN_TO_ORDER = {
+  const SIGN_TO_ORDER = {
     '-': 'DESCENDING',
     '+': 'ASCENDING',
   };
 
-  var queryProto = {
+  const queryProto = {
     distinctOn: query.groupByVal.map(function(groupBy) {
       return {
         name: groupBy,
@@ -836,8 +836,8 @@ function queryToQueryProto(query) {
   }
 
   if (query.filters.length > 0) {
-    var filters = query.filters.map(function(filter) {
-      var value = {};
+    const filters = query.filters.map(function(filter) {
+      let value = {};
 
       if (filter.name === '__key__') {
         value.keyValue = entity.keyToKeyProto(filter.val);

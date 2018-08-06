@@ -16,20 +16,20 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var is = require('is');
-var proxyquire = require('proxyquire');
-var sinon = require('sinon').sandbox.create();
-var through = require('through2');
-var pfy = require('@google-cloud/promisify');
-var pjy = require('@google-cloud/projectify');
+const assert = require('assert');
+const extend = require('extend');
+const is = require('is');
+const proxyquire = require('proxyquire');
+const sinon = require('sinon').sandbox.create();
+const through = require('through2');
+const pfy = require('@google-cloud/promisify');
+const pjy = require('@google-cloud/projectify');
 
-var entity = require('../src/entity.js');
-var Query = require('../src/query.js');
+const entity = require('../src/entity.js');
+const Query = require('../src/query.js');
 
-var promisified = false;
-var fakePfy = extend({}, pfy, {
+let promisified = false;
+const fakePfy = extend({}, pfy, {
   promisifyAll: function(Class) {
     if (Class.name === 'DatastoreRequest') {
       promisified = true;
@@ -37,23 +37,23 @@ var fakePfy = extend({}, pfy, {
   },
 });
 
-var fakePjy = {
+const fakePjy = {
   replaceProjectIdToken: function() {
     return (pjyOverride || pjy.replaceProjectIdToken).apply(null, arguments);
   },
 };
 
-var v1FakeClientOverride;
-var fakeV1 = {
+let v1FakeClientOverride;
+const fakeV1 = {
   FakeClient: function() {
     return (v1FakeClientOverride || function() {}).apply(null, arguments);
   },
 };
 
-var overrides = {};
+let overrides = {};
 
 function override(name, object) {
-  var cachedObject = extend({}, object);
+  const cachedObject = extend({}, object);
   overrides[name] = {};
 
   Object.keys(object).forEach(function(methodName) {
@@ -62,7 +62,7 @@ function override(name, object) {
     }
 
     object[methodName] = function() {
-      var args = arguments;
+      const args = arguments;
 
       if (overrides[name][methodName]) {
         return overrides[name][methodName].apply(this, args);
@@ -89,10 +89,10 @@ function FakeQuery() {
 let pjyOverride;
 
 describe('Request', function() {
-  var Request;
-  var request;
+  let Request;
+  let request;
 
-  var key;
+  let key;
 
   before(function() {
     Request = proxyquire('../src/request.js', {
@@ -131,7 +131,7 @@ describe('Request', function() {
 
   describe('prepareEntityObject_', function() {
     it('should clone an object', function() {
-      var obj = {
+      const obj = {
         data: {
           nested: {
             obj: true,
@@ -139,9 +139,9 @@ describe('Request', function() {
         },
         method: 'insert',
       };
-      var expectedPreparedEntityObject = extend(true, {}, obj);
+      const expectedPreparedEntityObject = extend(true, {}, obj);
 
-      var preparedEntityObject = Request.prepareEntityObject_(obj);
+      const preparedEntityObject = Request.prepareEntityObject_(obj);
 
       assert.notStrictEqual(preparedEntityObject, obj);
 
@@ -154,11 +154,11 @@ describe('Request', function() {
     });
 
     it('should format an entity', function() {
-      var key = {};
-      var entityObject = {data: true};
+      const key = {};
+      const entityObject = {data: true};
       entityObject[entity.KEY_SYMBOL] = key;
 
-      var preparedEntityObject = Request.prepareEntityObject_(entityObject);
+      const preparedEntityObject = Request.prepareEntityObject_(entityObject);
 
       assert.strictEqual(preparedEntityObject.key, key);
       assert.strictEqual(preparedEntityObject.data.data, entityObject.data);
@@ -166,10 +166,10 @@ describe('Request', function() {
   });
 
   describe('allocateIds', function() {
-    var INCOMPLETE_KEY = {};
+    const INCOMPLETE_KEY = {};
 
-    var ALLOCATIONS = 2;
-    var OPTIONS = {
+    const ALLOCATIONS = 2;
+    const OPTIONS = {
       allocations: ALLOCATIONS,
     };
 
@@ -190,7 +190,7 @@ describe('Request', function() {
     });
 
     it('should make the correct request', function(done) {
-      var keyProto = {};
+      const keyProto = {};
 
       overrides.entity.keyToKeyProto = function(key) {
         assert.strictEqual(key, INCOMPLETE_KEY);
@@ -201,7 +201,7 @@ describe('Request', function() {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'allocateIds');
 
-        var expectedKeys = [];
+        const expectedKeys = [];
         expectedKeys.length = ALLOCATIONS;
         expectedKeys.fill(keyProto);
 
@@ -225,7 +225,7 @@ describe('Request', function() {
     });
 
     it('should allow customization of GAX options', function(done) {
-      var options = extend({}, OPTIONS, {
+      const options = extend({}, OPTIONS, {
         gaxOptions: {},
       });
 
@@ -238,8 +238,8 @@ describe('Request', function() {
     });
 
     describe('error', function() {
-      var ERROR = new Error('Error.');
-      var API_RESPONSE = {};
+      const ERROR = new Error('Error.');
+      const API_RESPONSE = {};
 
       beforeEach(function() {
         request.request_ = function(config, callback) {
@@ -258,8 +258,8 @@ describe('Request', function() {
     });
 
     describe('success', function() {
-      var KEY = {};
-      var API_RESPONSE = {
+      const KEY = {};
+      const API_RESPONSE = {
         keys: [KEY],
       };
 
@@ -270,7 +270,7 @@ describe('Request', function() {
       });
 
       it('should create and return Keys & API response', function(done) {
-        var key = {};
+        const key = {};
 
         overrides.entity.keyFromKeyProto = function(keyProto) {
           assert.strictEqual(keyProto, API_RESPONSE.keys[0]);
@@ -320,13 +320,13 @@ describe('Request', function() {
         done();
       };
 
-      var stream = request.createReadStream(key);
+      const stream = request.createReadStream(key);
 
       stream.emit('reading');
     });
 
     it('should allow customization of GAX options', function(done) {
-      var options = {
+      const options = {
         gaxOptions: {},
       };
 
@@ -366,8 +366,8 @@ describe('Request', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         request.request_ = function(config, callback) {
@@ -388,7 +388,7 @@ describe('Request', function() {
       });
 
       it('should end stream', function(done) {
-        var stream = request.createReadStream(key);
+        const stream = request.createReadStream(key);
 
         stream.on('data', function() {}).on('error', function() {
           setImmediate(function() {
@@ -400,7 +400,7 @@ describe('Request', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         found: [
           {
             entity: {
@@ -449,13 +449,13 @@ describe('Request', function() {
         ],
       };
 
-      var expectedResult = entity.formatArray(apiResponse.found)[0];
+      const expectedResult = entity.formatArray(apiResponse.found)[0];
 
-      var apiResponseWithMultiEntities = extend(true, {}, apiResponse);
-      var entities = apiResponseWithMultiEntities.found;
+      const apiResponseWithMultiEntities = extend(true, {}, apiResponse);
+      const entities = apiResponseWithMultiEntities.found;
       entities.push(entities[0]);
 
-      var apiResponseWithDeferred = extend(true, {}, apiResponse);
+      const apiResponseWithDeferred = extend(true, {}, apiResponse);
       apiResponseWithDeferred.deferred = [
         apiResponseWithDeferred.found[0].entity.key,
       ];
@@ -480,7 +480,7 @@ describe('Request', function() {
       });
 
       it('should continue looking for deferred results', function(done) {
-        var numTimesCalled = 0;
+        let numTimesCalled = 0;
 
         request.request_ = function(config, callback) {
           numTimesCalled++;
@@ -490,7 +490,7 @@ describe('Request', function() {
             return;
           }
 
-          var expectedKeys = apiResponseWithDeferred.deferred
+          const expectedKeys = apiResponseWithDeferred.deferred
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
 
@@ -516,7 +516,7 @@ describe('Request', function() {
       });
 
       it('should not push more results if stream was ended', function(done) {
-        var entitiesEmitted = 0;
+        let entitiesEmitted = 0;
 
         request.request_ = function(config, callback) {
           setImmediate(function() {
@@ -538,7 +538,7 @@ describe('Request', function() {
       });
 
       it('should not get more results if stream was ended', function(done) {
-        var lookupCount = 0;
+        let lookupCount = 0;
 
         request.request_ = function(config, callback) {
           lookupCount++;
@@ -574,7 +574,7 @@ describe('Request', function() {
     });
 
     it('should return apiResponse in callback', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
       request.request_ = function(config, callback) {
         callback(null, resp);
       };
@@ -594,7 +594,7 @@ describe('Request', function() {
     });
 
     it('should allow customization of GAX options', function(done) {
-      var gaxOptions = {};
+      const gaxOptions = {};
 
       request.request_ = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -621,12 +621,12 @@ describe('Request', function() {
 
   describe('get', function() {
     describe('success', function() {
-      var keys = [key];
-      var fakeEntities = [{a: 'a'}, {b: 'b'}];
+      const keys = [key];
+      const fakeEntities = [{a: 'a'}, {b: 'b'}];
 
       beforeEach(function() {
         request.createReadStream = sinon.spy(function() {
-          var stream = through.obj();
+          const stream = through.obj();
 
           setImmediate(function() {
             fakeEntities.forEach(function(entity) {
@@ -641,13 +641,13 @@ describe('Request', function() {
       });
 
       it('should return an array of entities', function(done) {
-        var options = {};
+        const options = {};
 
         request.get(keys, options, function(err, entities) {
           assert.ifError(err);
           assert.deepStrictEqual(entities, fakeEntities);
 
-          var spy = request.createReadStream.getCall(0);
+          const spy = request.createReadStream.getCall(0);
           assert.strictEqual(spy.args[0], keys);
           assert.strictEqual(spy.args[1], options);
           done();
@@ -673,7 +673,7 @@ describe('Request', function() {
         request.get(keys, null, function(err) {
           assert.ifError(err);
 
-          var spy = request.createReadStream.getCall(0);
+          const spy = request.createReadStream.getCall(0);
           assert.deepStrictEqual(spy.args[1], {});
           done();
         });
@@ -681,11 +681,11 @@ describe('Request', function() {
     });
 
     describe('error', function() {
-      var error = new Error('err');
+      const error = new Error('err');
 
       beforeEach(function() {
         request.createReadStream = sinon.spy(function() {
-          var stream = through.obj();
+          const stream = through.obj();
 
           setImmediate(function() {
             stream.emit('error', error);
@@ -706,9 +706,9 @@ describe('Request', function() {
 
   describe('insert', function() {
     it('should prepare entity objects', function(done) {
-      var entityObject = {};
-      var preparedEntityObject = {prepared: true};
-      var expectedEntityObject = extend({}, preparedEntityObject, {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = extend({}, preparedEntityObject, {
         method: 'insert',
       });
 
@@ -741,7 +741,7 @@ describe('Request', function() {
         callback();
       };
 
-      var key = new entity.Key({namespace: 'ns', path: ['Company']});
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
       request.insert({key: key, data: {}}, done);
     });
   });
@@ -753,7 +753,7 @@ describe('Request', function() {
     });
 
     it('should clone the query', function(done) {
-      var query = new FakeQuery();
+      let query = new FakeQuery();
       query.namespace = 'namespace';
       query = extend(true, new FakeQuery(), query);
 
@@ -770,8 +770,8 @@ describe('Request', function() {
     });
 
     it('should make correct request when the stream is ready', function(done) {
-      var query = {namespace: 'namespace'};
-      var queryProto = {};
+      const query = {namespace: 'namespace'};
+      const queryProto = {};
 
       overrides.entity.queryToQueryProto = function() {
         return queryProto;
@@ -798,7 +798,7 @@ describe('Request', function() {
     });
 
     it('should allow customization of GAX options', function(done) {
-      var options = {
+      const options = {
         gaxOptions: {},
       };
 
@@ -838,7 +838,7 @@ describe('Request', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         request.request_ = function(config, callback) {
@@ -858,12 +858,12 @@ describe('Request', function() {
     });
 
     describe('success', function() {
-      var entityResultsPerApiCall = {
+      const entityResultsPerApiCall = {
         1: [{a: true}],
         2: [{b: true}, {c: true}],
       };
 
-      var apiResponse = {
+      const apiResponse = {
         batch: {
           entityResults: [{a: true}, {b: true}, {c: true}],
           endCursor: Buffer.from('abc'),
@@ -888,7 +888,7 @@ describe('Request', function() {
           return array;
         };
 
-        var entities = [];
+        const entities = [];
 
         request
           .runQueryStream({})
@@ -903,19 +903,19 @@ describe('Request', function() {
       });
 
       it('should re-run query if not finished', function(done) {
-        var query = {
+        const query = {
           limitVal: 1,
           offsetVal: 8,
         };
-        var queryProto = {
+        const queryProto = {
           limit: {
             value: query.limitVal,
           },
         };
 
-        var timesRequestCalled = 0;
-        var startCalled = false;
-        var offsetCalled = false;
+        let timesRequestCalled = 0;
+        let startCalled = false;
+        let offsetCalled = false;
 
         overrides.entity.formatArray = function(array) {
           assert.strictEqual(
@@ -928,7 +928,7 @@ describe('Request', function() {
         request.request_ = function(config, callback) {
           timesRequestCalled++;
 
-          var resp = extend(true, {}, apiResponse);
+          const resp = extend(true, {}, apiResponse);
           resp.batch.entityResults =
             entityResultsPerApiCall[timesRequestCalled];
 
@@ -960,7 +960,7 @@ describe('Request', function() {
         };
 
         FakeQuery.prototype.offset = function(offset_) {
-          var offset = query.offsetVal - apiResponse.batch.skippedResults;
+          const offset = query.offsetVal - apiResponse.batch.skippedResults;
           assert.strictEqual(offset_, offset);
           offsetCalled = true;
           return this;
@@ -986,8 +986,8 @@ describe('Request', function() {
           return queryProto;
         };
 
-        var entities = [];
-        var info;
+        const entities = [];
+        let info;
 
         request
           .runQueryStream(query)
@@ -999,7 +999,7 @@ describe('Request', function() {
             entities.push(entity);
           })
           .on('end', function() {
-            var allResults = [].slice
+            const allResults = [].slice
               .call(entityResultsPerApiCall[1])
               .concat(entityResultsPerApiCall[2]);
 
@@ -1015,15 +1015,15 @@ describe('Request', function() {
       });
 
       it('should handle large limitless queries', function(done) {
-        var timesRequestCalled = 0;
-        var limitCalled = false;
+        let timesRequestCalled = 0;
+        let limitCalled = false;
 
-        var query = {
+        const query = {
           limitVal: -1,
         };
 
         request.request_ = function(config, callback) {
-          var batch;
+          let batch;
 
           if (++timesRequestCalled === 2) {
             batch = {};
@@ -1058,13 +1058,13 @@ describe('Request', function() {
       });
 
       it('should not push more results if stream was ended', function(done) {
-        var timesRequestCalled = 0;
-        var entitiesEmitted = 0;
+        let timesRequestCalled = 0;
+        let entitiesEmitted = 0;
 
         request.request_ = function(config, callback) {
           timesRequestCalled++;
 
-          var resp = extend(true, {}, apiResponse);
+          const resp = extend(true, {}, apiResponse);
           resp.batch.entityResults =
             entityResultsPerApiCall[timesRequestCalled];
 
@@ -1090,7 +1090,7 @@ describe('Request', function() {
       });
 
       it('should not get more results if stream was ended', function(done) {
-        var timesRequestCalled = 0;
+        let timesRequestCalled = 0;
 
         request.request_ = function(config, callback) {
           timesRequestCalled++;
@@ -1112,15 +1112,15 @@ describe('Request', function() {
   });
 
   describe('runQuery', function() {
-    var query = {};
+    const query = {};
 
     describe('success', function() {
-      var fakeInfo = {};
-      var fakeEntities = [{a: 'a'}, {b: 'b'}];
+      const fakeInfo = {};
+      const fakeEntities = [{a: 'a'}, {b: 'b'}];
 
       beforeEach(function() {
         request.runQueryStream = sinon.spy(function() {
-          var stream = through.obj();
+          const stream = through.obj();
 
           setImmediate(function() {
             stream.emit('info', fakeInfo);
@@ -1137,14 +1137,14 @@ describe('Request', function() {
       });
 
       it('should return an array of entities', function(done) {
-        var options = {};
+        const options = {};
 
         request.runQuery(query, options, function(err, entities, info) {
           assert.ifError(err);
           assert.deepStrictEqual(entities, fakeEntities);
           assert.strictEqual(info, fakeInfo);
 
-          var spy = request.runQueryStream.getCall(0);
+          const spy = request.runQueryStream.getCall(0);
           assert.strictEqual(spy.args[0], query);
           assert.strictEqual(spy.args[1], options);
           done();
@@ -1162,7 +1162,7 @@ describe('Request', function() {
         request.runQuery(query, null, function(err) {
           assert.ifError(err);
 
-          var spy = request.runQueryStream.getCall(0);
+          const spy = request.runQueryStream.getCall(0);
           assert.deepStrictEqual(spy.args[1], {});
           done();
         });
@@ -1170,11 +1170,11 @@ describe('Request', function() {
     });
 
     describe('error', function() {
-      var error = new Error('err');
+      const error = new Error('err');
 
       beforeEach(function() {
         request.runQueryStream = sinon.spy(function() {
-          var stream = through.obj();
+          const stream = through.obj();
 
           setImmediate(function() {
             stream.emit('error', error);
@@ -1195,7 +1195,7 @@ describe('Request', function() {
 
   describe('save', function() {
     it('should save with keys', function(done) {
-      var expectedReq = {
+      const expectedReq = {
         mutations: [
           {
             upsert: {
@@ -1256,7 +1256,7 @@ describe('Request', function() {
     });
 
     it('should allow customization of GAX options', function(done) {
-      var gaxOptions = {};
+      const gaxOptions = {};
 
       request.request_ = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -1274,8 +1274,8 @@ describe('Request', function() {
     });
 
     it('should prepare entity objects', function(done) {
-      var entityObject = {};
-      var prepared = false;
+      const entityObject = {};
+      let prepared = false;
 
       overrides.Request.prepareEntityObject_ = function(obj) {
         assert.strictEqual(obj, entityObject);
@@ -1302,13 +1302,13 @@ describe('Request', function() {
         assert(is.object(config.reqOpts.mutations[1].update));
         assert(is.object(config.reqOpts.mutations[2].upsert));
 
-        var insert = config.reqOpts.mutations[0].insert;
+        const insert = config.reqOpts.mutations[0].insert;
         assert.deepStrictEqual(insert.properties.k, {stringValue: 'v'});
 
-        var update = config.reqOpts.mutations[1].update;
+        const update = config.reqOpts.mutations[1].update;
         assert.deepStrictEqual(update.properties.k2, {stringValue: 'v2'});
 
-        var upsert = config.reqOpts.mutations[2].upsert;
+        const upsert = config.reqOpts.mutations[2].upsert;
         assert.deepStrictEqual(upsert.properties.k3, {stringValue: 'v3'});
 
         callback();
@@ -1340,7 +1340,7 @@ describe('Request', function() {
     });
 
     it('should not alter the provided data object', function(done) {
-      var entities = [
+      const entities = [
         {
           key: key,
           method: 'insert',
@@ -1353,7 +1353,7 @@ describe('Request', function() {
           },
         },
       ];
-      var expectedEntities = entities.map(x => extend(true, {}, x));
+      const expectedEntities = entities.map(x => extend(true, {}, x));
 
       request.request_ = function() {
         // By the time the request is made, the original object has already been
@@ -1366,8 +1366,8 @@ describe('Request', function() {
     });
 
     it('should return apiResponse in callback', function(done) {
-      var key = new entity.Key({namespace: 'ns', path: ['Company']});
-      var mockCommitResponse = {};
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      const mockCommitResponse = {};
       request.request_ = function(config, callback) {
         callback(null, mockCommitResponse);
       };
@@ -1380,7 +1380,7 @@ describe('Request', function() {
 
     it('should allow setting the indexed value of a property', function(done) {
       request.request_ = function(config) {
-        var property = config.reqOpts.mutations[0].upsert.properties.name;
+        const property = config.reqOpts.mutations[0].upsert.properties.name;
         assert.strictEqual(property.stringValue, 'value');
         assert.strictEqual(property.excludeFromIndexes, true);
         done();
@@ -1403,7 +1403,7 @@ describe('Request', function() {
 
     it('should allow setting the indexed value on arrays', function(done) {
       request.request_ = function(config) {
-        var property = config.reqOpts.mutations[0].upsert.properties.name;
+        const property = config.reqOpts.mutations[0].upsert.properties.name;
 
         property.arrayValue.values.forEach(function(value) {
           assert.strictEqual(value.excludeFromIndexes, true);
@@ -1428,14 +1428,14 @@ describe('Request', function() {
     });
 
     it('should assign ID on keys without them', function(done) {
-      var incompleteKey = new entity.Key({path: ['Incomplete']});
-      var incompleteKey2 = new entity.Key({path: ['Incomplete']});
-      var completeKey = new entity.Key({path: ['Complete', 'Key']});
+      const incompleteKey = new entity.Key({path: ['Incomplete']});
+      const incompleteKey2 = new entity.Key({path: ['Incomplete']});
+      const completeKey = new entity.Key({path: ['Complete', 'Key']});
 
-      var keyProtos = [];
-      var ids = [1, 2];
+      const keyProtos = [];
+      const ids = [1, 2];
 
-      var response = {
+      const response = {
         mutationResults: [
           {
             key: {},
@@ -1501,9 +1501,9 @@ describe('Request', function() {
 
   describe('update', function() {
     it('should prepare entity objects', function(done) {
-      var entityObject = {};
-      var preparedEntityObject = {prepared: true};
-      var expectedEntityObject = extend({}, preparedEntityObject, {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = extend({}, preparedEntityObject, {
         method: 'update',
       });
 
@@ -1536,16 +1536,16 @@ describe('Request', function() {
         callback();
       };
 
-      var key = new entity.Key({namespace: 'ns', path: ['Company']});
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
       request.update({key: key, data: {}}, done);
     });
   });
 
   describe('upsert', function() {
     it('should prepare entity objects', function(done) {
-      var entityObject = {};
-      var preparedEntityObject = {prepared: true};
-      var expectedEntityObject = extend({}, preparedEntityObject, {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = extend({}, preparedEntityObject, {
         method: 'upsert',
       });
 
@@ -1579,13 +1579,13 @@ describe('Request', function() {
         callback();
       };
 
-      var key = new entity.Key({namespace: 'ns', path: ['Company']});
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
       request.upsert({key: key, data: {}}, done);
     });
   });
 
   describe('request_', function() {
-    var CONFIG = {
+    const CONFIG = {
       client: 'FakeClient', // name set at top of file
       method: 'method',
       reqOpts: {
@@ -1598,10 +1598,10 @@ describe('Request', function() {
       },
     };
 
-    var PROJECT_ID = 'project-id';
+    const PROJECT_ID = 'project-id';
 
     beforeEach(function() {
-      var clients_ = new Map();
+      const clients_ = new Map();
       clients_.set(CONFIG.client, {
         [CONFIG.method]: function() {},
       });
@@ -1626,7 +1626,7 @@ describe('Request', function() {
     });
 
     it('should return error if getting project ID failed', function(done) {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       request.datastore.auth.getProjectId = function(callback) {
         callback(error);
@@ -1639,7 +1639,7 @@ describe('Request', function() {
     });
 
     it('should initiate and cache the client', function() {
-      var fakeClient = {
+      const fakeClient = {
         [CONFIG.method]: function() {},
       };
 
@@ -1652,7 +1652,7 @@ describe('Request', function() {
 
       request.request_(CONFIG, assert.ifError);
 
-      var client = request.datastore.clients_.get(CONFIG.client);
+      const client = request.datastore.clients_.get(CONFIG.client);
 
       assert.strictEqual(client, fakeClient);
     });
@@ -1667,9 +1667,9 @@ describe('Request', function() {
     });
 
     it('should replace the project ID token', function(done) {
-      var replacedReqOpts = {};
+      const replacedReqOpts = {};
 
-      var expectedReqOpts = extend({}, CONFIG.reqOpts);
+      const expectedReqOpts = extend({}, CONFIG.reqOpts);
       expectedReqOpts.projectId = request.projectId;
 
       pjyOverride = function(reqOpts, projectId) {
@@ -1727,7 +1727,7 @@ describe('Request', function() {
           },
         });
 
-        var config = extend({}, CONFIG, {
+        const config = extend({}, CONFIG, {
           method: 'commit',
         });
 
@@ -1736,7 +1736,7 @@ describe('Request', function() {
     });
 
     describe('transaction', function() {
-      var TRANSACTION_ID = 'transaction';
+      const TRANSACTION_ID = 'transaction';
 
       beforeEach(function() {
         request.id = TRANSACTION_ID;
@@ -1752,7 +1752,7 @@ describe('Request', function() {
           },
         });
 
-        var config = extend({}, CONFIG, {
+        const config = extend({}, CONFIG, {
           method: 'commit',
         });
 
@@ -1768,7 +1768,7 @@ describe('Request', function() {
           },
         });
 
-        var config = extend({}, CONFIG, {
+        const config = extend({}, CONFIG, {
           method: 'rollback',
         });
 
@@ -1776,7 +1776,7 @@ describe('Request', function() {
       });
 
       it('should set the lookup transaction info', function(done) {
-        var config = extend(true, {}, CONFIG, {
+        const config = extend(true, {}, CONFIG, {
           method: 'lookup',
         });
 
@@ -1792,7 +1792,7 @@ describe('Request', function() {
       });
 
       it('should set the runQuery transaction info', function(done) {
-        var config = extend(true, {}, CONFIG, {
+        const config = extend(true, {}, CONFIG, {
           method: 'runQuery',
         });
 
@@ -1808,7 +1808,7 @@ describe('Request', function() {
       });
 
       it('should throw if read consistency is specified', function() {
-        var config = extend(true, {}, CONFIG, {
+        const config = extend(true, {}, CONFIG, {
           method: 'runQuery',
           reqOpts: {
             readOptions: {
