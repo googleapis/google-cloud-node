@@ -6,7 +6,7 @@
   "pinVersions": false,
   "rebaseStalePrs": true,
   "schedule": [
-    "after 10pm and before 5am"
+    "after 9am and before 3pm"
   ],
   "lockFileMaintenance": {
     "enabled": true,
@@ -15,5 +15,11 @@
       "before 10am on tuesday"
     ]
   },
-  "gitAuthor": null
+  "gitAuthor": null,
+  "packageRules": [
+    {
+      "extends": "packages:linters",
+      "groupName": "linters"
+    }
+  ]
 }
