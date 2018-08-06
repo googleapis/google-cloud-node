@@ -16,19 +16,19 @@
 
 'use strict';
 
-var assert = require('assert');
-var deepStrictEqual = require('deep-strict-equal');
+const assert = require('assert');
+const deepStrictEqual = require('deep-strict-equal');
 assert.deepStrictEqual =
   assert.deepStrictEqual ||
   function() {
     return assert(deepStrictEqual.apply(this, arguments));
   };
-var extend = require('extend');
+const extend = require('extend');
 
-var Datastore = require('../');
+const Datastore = require('../');
 
 describe('entity', function() {
-  var entity;
+  let entity;
 
   beforeEach(function() {
     delete require.cache[require.resolve('../src/entity.js')];
@@ -43,125 +43,125 @@ describe('entity', function() {
 
   describe('Double', function() {
     it('should store the value', function() {
-      var value = 8.3;
+      const value = 8.3;
 
-      var double = new entity.Double(value);
+      const double = new entity.Double(value);
       assert.strictEqual(double.value, value);
     });
   });
 
   describe('isDsDouble', function() {
     it('should correctly identify a Double', function() {
-      var double = new entity.Double(0.42);
+      const double = new entity.Double(0.42);
       assert.strictEqual(entity.isDsDouble(double), true);
     });
 
     it('should correctly identify a homomorphic non-Double', function() {
-      var nonDouble = Object.assign({}, new entity.Double(42));
+      const nonDouble = Object.assign({}, new entity.Double(42));
       assert.strictEqual(entity.isDsDouble(nonDouble), false);
     });
 
     it('should correctly identify a primitive', function() {
-      var primitiveDouble = 0.42;
+      const primitiveDouble = 0.42;
       assert.strictEqual(entity.isDsDouble(primitiveDouble), false);
     });
   });
 
   describe('Int', function() {
     it('should store the stringified value', function() {
-      var value = 8;
+      const value = 8;
 
-      var int = new entity.Int(value);
+      const int = new entity.Int(value);
       assert.strictEqual(int.value, value.toString());
     });
   });
 
   describe('isDsInt', function() {
     it('should correctly identify an Int', function() {
-      var int = new entity.Int(42);
+      const int = new entity.Int(42);
       assert.strictEqual(entity.isDsInt(int), true);
     });
 
     it('should correctly identify homomorphic non-Int', function() {
-      var nonInt = Object.assign({}, new entity.Int(42));
+      const nonInt = Object.assign({}, new entity.Int(42));
       assert.strictEqual(entity.isDsInt(nonInt), false);
     });
 
     it('should correctly identify a primitive', function() {
-      var primitiveInt = 42;
+      const primitiveInt = 42;
       assert.strictEqual(entity.isDsInt(primitiveInt), false);
     });
   });
 
   describe('GeoPoint', function() {
     it('should store the value', function() {
-      var value = {
+      const value = {
         latitude: 24,
         longitude: 88,
       };
 
-      var geoPoint = new entity.GeoPoint(value);
+      const geoPoint = new entity.GeoPoint(value);
       assert.strictEqual(geoPoint.value, value);
     });
   });
 
   describe('isDsGeoPoint', function() {
     it('should correctly identify a GeoPoint', function() {
-      var geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
+      const geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
       assert.strictEqual(entity.isDsGeoPoint(geoPoint), true);
     });
 
     it('should correctly identify a homomorphic non-GeoPoint', function() {
-      var geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
-      var nonGeoPoint = Object.assign({}, geoPoint);
+      const geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
+      const nonGeoPoint = Object.assign({}, geoPoint);
       assert.strictEqual(entity.isDsGeoPoint(nonGeoPoint), false);
     });
   });
 
   describe('Key', function() {
     it('should assign the namespace', function() {
-      var namespace = 'NS';
-      var key = new entity.Key({namespace: namespace, path: []});
+      const namespace = 'NS';
+      const key = new entity.Key({namespace: namespace, path: []});
       assert.strictEqual(key.namespace, namespace);
     });
 
     it('should assign the kind', function() {
-      var kind = 'kind';
-      var key = new entity.Key({path: [kind]});
+      const kind = 'kind';
+      const key = new entity.Key({path: [kind]});
       assert.strictEqual(key.kind, kind);
     });
 
     it('should assign the ID', function() {
-      var id = 11;
-      var key = new entity.Key({path: ['Kind', id]});
+      const id = 11;
+      const key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id);
     });
 
     it('should assign the ID from an Int', function() {
-      var id = new entity.Int(11);
-      var key = new entity.Key({path: ['Kind', id]});
+      const id = new entity.Int(11);
+      const key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id.value);
     });
 
     it('should assign the name', function() {
-      var name = 'name';
-      var key = new entity.Key({path: ['Kind', name]});
+      const name = 'name';
+      const key = new entity.Key({path: ['Kind', name]});
       assert.strictEqual(key.name, name);
     });
 
     it('should assign a parent', function() {
-      var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
+      const key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert(key.parent instanceof entity.Key);
     });
 
     it('should not modify input path', function() {
-      var inputPath = ['ParentKind', 1, 'Kind', 1];
+      const inputPath = ['ParentKind', 1, 'Kind', 1];
       new entity.Key({path: inputPath});
       assert.deepStrictEqual(inputPath, ['ParentKind', 1, 'Kind', 1]);
     });
 
     it('should always compute the correct path', function() {
-      var key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
+      const key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert.deepStrictEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
 
       key.parent.kind = 'GrandParentKind';
@@ -173,30 +173,30 @@ describe('entity', function() {
 
   describe('isDsKey', function() {
     it('should correctly identify a Key', function() {
-      var key = new entity.Key({path: ['Kind', 1]});
+      const key = new entity.Key({path: ['Kind', 1]});
       assert.strictEqual(entity.isDsKey(key), true);
     });
 
     it('should correctly identify a homomorphic non-Key', function() {
-      var notKey = Object.assign({}, new entity.Key({path: ['Kind', 1]}));
+      const notKey = Object.assign({}, new entity.Key({path: ['Kind', 1]}));
       assert.strictEqual(entity.isDsKey(notKey), false);
     });
   });
 
   describe('decodeValueProto', function() {
     it('should decode arrays', function() {
-      var expectedValue = [{}];
+      const expectedValue = [{}];
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'arrayValue',
         arrayValue: {
           values: expectedValue,
         },
       };
 
-      var run = false;
+      let run = false;
 
-      var decodeValueProto = entity.decodeValueProto;
+      const decodeValueProto = entity.decodeValueProto;
       entity.decodeValueProto = function(valueProto) {
         if (!run) {
           run = true;
@@ -214,9 +214,9 @@ describe('entity', function() {
     });
 
     it('should decode blobs', function() {
-      var expectedValue = Buffer.from('Hi');
+      const expectedValue = Buffer.from('Hi');
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'blobValue',
         blobValue: expectedValue.toString('base64'),
       };
@@ -228,21 +228,21 @@ describe('entity', function() {
     });
 
     it('should decode null', function() {
-      var expectedValue = null;
+      const expectedValue = null;
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'nullValue',
         nullValue: 0,
       };
 
-      var decodedValue = entity.decodeValueProto(valueProto);
+      const decodedValue = entity.decodeValueProto(valueProto);
       assert.deepStrictEqual(decodedValue, expectedValue);
     });
 
     it('should decode doubles', function() {
-      var expectedValue = 8.3;
+      const expectedValue = 8.3;
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'doubleValue',
         doubleValue: expectedValue,
       };
@@ -251,9 +251,9 @@ describe('entity', function() {
     });
 
     it('should decode ints', function() {
-      var expectedValue = 8;
+      const expectedValue = 8;
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'integerValue',
         integerValue: expectedValue,
       };
@@ -262,9 +262,9 @@ describe('entity', function() {
     });
 
     it('should decode entities', function() {
-      var expectedValue = {};
+      const expectedValue = {};
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'entityValue',
         entityValue: expectedValue,
       };
@@ -278,9 +278,9 @@ describe('entity', function() {
     });
 
     it('should decode keys', function() {
-      var expectedValue = {};
+      const expectedValue = {};
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'keyValue',
         keyValue: expectedValue,
       };
@@ -294,14 +294,14 @@ describe('entity', function() {
     });
 
     it('should decode timestamps', function() {
-      var date = new Date();
+      const date = new Date();
 
-      var seconds = Math.floor(date.getTime() / 1000);
-      var ms = date.getMilliseconds();
+      const seconds = Math.floor(date.getTime() / 1000);
+      const ms = date.getMilliseconds();
 
-      var expectedValue = new Date(seconds * 1000 + ms);
+      const expectedValue = new Date(seconds * 1000 + ms);
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'timestampValue',
         timestampValue: {
           seconds: seconds,
@@ -316,9 +316,9 @@ describe('entity', function() {
     });
 
     it('should return the value if no conversions are necessary', function() {
-      var expectedValue = false;
+      const expectedValue = false;
 
-      var valueProto = {
+      const valueProto = {
         valueType: 'booleanValue',
         booleanValue: expectedValue,
       };
@@ -329,9 +329,9 @@ describe('entity', function() {
 
   describe('encodeValue', function() {
     it('should encode a boolean', function() {
-      var value = true;
+      const value = true;
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         booleanValue: value,
       };
 
@@ -339,9 +339,9 @@ describe('entity', function() {
     });
 
     it('should encode null', function() {
-      var value = null;
+      const value = null;
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         nullValue: 0,
       };
 
@@ -349,9 +349,9 @@ describe('entity', function() {
     });
 
     it('should encode an int', function() {
-      var value = 8;
+      const value = 8;
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         integerValue: value,
       };
 
@@ -364,9 +364,9 @@ describe('entity', function() {
     });
 
     it('should encode an Int object', function() {
-      var value = new entity.Int(3);
+      const value = new entity.Int(3);
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         integerValue: value.value,
       };
 
@@ -374,9 +374,9 @@ describe('entity', function() {
     });
 
     it('should encode a double', function() {
-      var value = 8.3;
+      const value = 8.3;
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         doubleValue: value,
       };
 
@@ -389,9 +389,9 @@ describe('entity', function() {
     });
 
     it('should encode a Double object', function() {
-      var value = new entity.Double(3);
+      const value = new entity.Double(3);
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         doubleValue: value.value,
       };
 
@@ -399,9 +399,9 @@ describe('entity', function() {
     });
 
     it('should encode a GeoPoint object', function() {
-      var value = new entity.GeoPoint();
+      const value = new entity.GeoPoint();
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         geoPointValue: value.value,
       };
 
@@ -409,10 +409,10 @@ describe('entity', function() {
     });
 
     it('should encode a date', function() {
-      var value = new Date();
-      var seconds = value.getTime() / 1000;
+      const value = new Date();
+      const seconds = value.getTime() / 1000;
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         timestampValue: {
           seconds: Math.floor(seconds),
           nanos: value.getMilliseconds() * 1e6,
@@ -423,9 +423,9 @@ describe('entity', function() {
     });
 
     it('should encode a string', function() {
-      var value = 'Hi';
+      const value = 'Hi';
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         stringValue: value,
       };
 
@@ -433,9 +433,9 @@ describe('entity', function() {
     });
 
     it('should encode a buffer', function() {
-      var value = Buffer.from('Hi');
+      const value = Buffer.from('Hi');
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         blobValue: value,
       };
 
@@ -443,17 +443,17 @@ describe('entity', function() {
     });
 
     it('should encode an array', function() {
-      var value = [{}];
+      const value = [{}];
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         arrayValue: {
           values: value,
         },
       };
 
-      var run = false;
+      let run = false;
 
-      var encodeValue = entity.encodeValue;
+      const encodeValue = entity.encodeValue;
       entity.encodeValue = function(value_) {
         if (!run) {
           run = true;
@@ -468,12 +468,12 @@ describe('entity', function() {
     });
 
     it('should encode a Key', function() {
-      var value = new entity.Key({
+      const value = new entity.Key({
         namespace: 'ns',
         path: ['Kind', 1],
       });
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         keyValue: value,
       };
 
@@ -486,11 +486,11 @@ describe('entity', function() {
     });
 
     it('should encode an object', function() {
-      var value = {
+      const value = {
         key: 'value',
       };
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         entityValue: {
           properties: {
             key: value.key,
@@ -498,9 +498,9 @@ describe('entity', function() {
         },
       };
 
-      var run = false;
+      let run = false;
 
-      var encodeValue = entity.encodeValue;
+      const encodeValue = entity.encodeValue;
       entity.encodeValue = function(value_) {
         if (!run) {
           run = true;
@@ -515,7 +515,7 @@ describe('entity', function() {
     });
 
     it('should clone an object', function() {
-      var value = {
+      const value = {
         a: {
           b: {
             obj: true,
@@ -523,18 +523,18 @@ describe('entity', function() {
         },
       };
 
-      var originalValue = extend(true, {}, value);
+      const originalValue = extend(true, {}, value);
 
-      var encodedValue = entity.encodeValue(value);
+      const encodedValue = entity.encodeValue(value);
 
       assert.deepStrictEqual(value, originalValue);
       assert.notStrictEqual(value, encodedValue);
     });
 
     it('should encode an empty object', function() {
-      var value = {};
+      const value = {};
 
-      var expectedValueProto = {
+      const expectedValueProto = {
         entityValue: {
           properties: {},
         },
@@ -552,11 +552,11 @@ describe('entity', function() {
 
   describe('entityFromEntityProto', function() {
     it('should convert entity proto to entity', function() {
-      var expectedEntity = {
+      const expectedEntity = {
         name: 'Stephen',
       };
 
-      var entityProto = {
+      const entityProto = {
         properties: {
           name: {
             valueType: 'stringValue',
@@ -574,15 +574,15 @@ describe('entity', function() {
 
   describe('entityToEntityProto', function() {
     it('should format an entity', function() {
-      var value = 'Stephen';
+      const value = 'Stephen';
 
-      var entityObject = {
+      const entityObject = {
         data: {
           name: value,
         },
       };
 
-      var expectedEntityProto = {
+      const expectedEntityProto = {
         key: null,
         properties: entityObject.data,
       };
@@ -599,23 +599,23 @@ describe('entity', function() {
     });
 
     it('should respect excludeFromIndexes', function() {
-      var value1 = 'Stephen';
-      var value2 = 'Stephen2';
-      var value3 = 'Stephen3';
-      var value4 = 'Stephen4';
-      var value5 = 'Stephen5';
-      var value6 = 'Stephen6';
-      var value7 = 'Stephen7';
-      var value8 = 'Stephen8';
-      var value9 = 'Stephen9';
-      var value10 = 'Stephen10';
-      var value11 = 'Stephen11';
-      var value12 = 'Stephen12';
-      var value13 = 'something';
-      var value14 = 'else';
-      var value15 = 'whatever';
+      const value1 = 'Stephen';
+      const value2 = 'Stephen2';
+      const value3 = 'Stephen3';
+      const value4 = 'Stephen4';
+      const value5 = 'Stephen5';
+      const value6 = 'Stephen6';
+      const value7 = 'Stephen7';
+      const value8 = 'Stephen8';
+      const value9 = 'Stephen9';
+      const value10 = 'Stephen10';
+      const value11 = 'Stephen11';
+      const value12 = 'Stephen12';
+      const value13 = 'something';
+      const value14 = 'else';
+      const value15 = 'whatever';
 
-      var entityObject = {
+      const entityObject = {
         excludeFromIndexes: [
           'name',
           'entity.name',
@@ -713,7 +713,7 @@ describe('entity', function() {
         },
       };
 
-      var expectedEntityProto = {
+      const expectedEntityProto = {
         key: null,
         properties: {
           name: {
@@ -1022,19 +1022,19 @@ describe('entity', function() {
 
   describe('formatArray', function() {
     it('should convert protos to key/data entity array', function() {
-      var key = {};
+      const key = {};
 
-      var entityProto = {
+      const entityProto = {
         key: key,
       };
 
-      var results = [
+      const results = [
         {
           entity: entityProto,
         },
       ];
 
-      var expectedResults = entityProto;
+      const expectedResults = entityProto;
 
       entity.keyFromKeyProto = function(key_) {
         assert.strictEqual(key_, key);
@@ -1046,7 +1046,7 @@ describe('entity', function() {
         return entityProto;
       };
 
-      var ent = entity.formatArray(results)[0];
+      const ent = entity.formatArray(results)[0];
 
       assert.deepStrictEqual(ent, expectedResults);
       assert.strictEqual(ent[entity.KEY_SYMBOL], key);
@@ -1055,7 +1055,7 @@ describe('entity', function() {
 
   describe('isKeyComplete', function() {
     it('should convert key to key proto', function(done) {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: ['Kind', 123],
       });
 
@@ -1069,7 +1069,7 @@ describe('entity', function() {
     });
 
     it('should return true if key has id', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: ['Kind', 123],
       });
 
@@ -1077,7 +1077,7 @@ describe('entity', function() {
     });
 
     it('should return true if key has name', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: ['Kind', 'name'],
       });
 
@@ -1085,7 +1085,7 @@ describe('entity', function() {
     });
 
     it('should return false if key does not have name or ID', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: ['Kind'],
       });
 
@@ -1094,9 +1094,9 @@ describe('entity', function() {
   });
 
   describe('keyFromKeyProto', function() {
-    var NAMESPACE = 'Namespace';
+    const NAMESPACE = 'Namespace';
 
-    var keyProto = {
+    const keyProto = {
       partitionId: {
         namespaceId: NAMESPACE,
         projectId: 'project-id',
@@ -1138,7 +1138,7 @@ describe('entity', function() {
     });
 
     it('should return the created Key', function() {
-      var expectedValue = {};
+      const expectedValue = {};
 
       entity.Key = function() {
         return expectedValue;
@@ -1148,7 +1148,7 @@ describe('entity', function() {
     });
 
     it('should throw if path is invalid', function(done) {
-      var keyProtoInvalid = {
+      const keyProtoInvalid = {
         partitionId: {
           namespaceId: 'Namespace',
           projectId: 'project-id',
@@ -1175,11 +1175,11 @@ describe('entity', function() {
 
   describe('keyToKeyProto', function() {
     it('should handle hierarchical key definitions', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: ['Kind1', 1, 'Kind2', 'name', 'Kind3', new entity.Int(3)],
       });
 
-      var keyProto = entity.keyToKeyProto(key);
+      const keyProto = entity.keyToKeyProto(key);
 
       assert.strictEqual(keyProto.partitionId, undefined);
 
@@ -1197,12 +1197,12 @@ describe('entity', function() {
     });
 
     it('should detect the namespace of the hierarchical keys', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', 1, 'Kind2', 'name'],
       });
 
-      var keyProto = entity.keyToKeyProto(key);
+      const keyProto = entity.keyToKeyProto(key);
 
       assert.strictEqual(keyProto.partitionId.namespaceId, 'Namespace');
 
@@ -1216,17 +1216,17 @@ describe('entity', function() {
     });
 
     it('should handle incomplete keys with & without namespaces', function() {
-      var incompleteKey = new entity.Key({
+      const incompleteKey = new entity.Key({
         path: ['Kind'],
       });
 
-      var incompleteKeyWithNs = new entity.Key({
+      const incompleteKeyWithNs = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind'],
       });
 
-      var keyProto = entity.keyToKeyProto(incompleteKey);
-      var keyProtoWithNs = entity.keyToKeyProto(incompleteKeyWithNs);
+      const keyProto = entity.keyToKeyProto(incompleteKey);
+      const keyProtoWithNs = entity.keyToKeyProto(incompleteKeyWithNs);
 
       assert.strictEqual(keyProto.partitionId, undefined);
       assert.strictEqual(keyProto.path[0].kind, 'Kind');
@@ -1240,7 +1240,7 @@ describe('entity', function() {
     });
 
     it('should throw if key contains 0 items', function(done) {
-      var key = new entity.Key({
+      const key = new entity.Key({
         path: [],
       });
 
@@ -1254,7 +1254,7 @@ describe('entity', function() {
     });
 
     it('should throw if key path contains null ids', function(done) {
-      var key = new entity.Key({
+      const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', null, 'Company'],
       });
@@ -1269,7 +1269,7 @@ describe('entity', function() {
     });
 
     it('should not throw if key is incomplete', function() {
-      var key = new entity.Key({
+      const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', 123, 'Company', null],
       });
@@ -1281,7 +1281,7 @@ describe('entity', function() {
   });
 
   describe('queryToQueryProto', function() {
-    var queryProto = {
+    const queryProto = {
       distinctOn: [
         {
           name: 'name',
@@ -1352,13 +1352,13 @@ describe('entity', function() {
     };
 
     it('should support all configurations of a query', function() {
-      var ancestorKey = new entity.Key({
+      const ancestorKey = new entity.Key({
         path: ['Kind2', 'somename'],
       });
 
-      var ds = new Datastore({projectId: 'project-id'});
+      const ds = new Datastore({projectId: 'project-id'});
 
-      var query = ds
+      const query = ds
         .createQuery('Kind1')
         .filter('name', 'John')
         .start('start')
@@ -1374,16 +1374,16 @@ describe('entity', function() {
     });
 
     it('should handle buffer start and end values', function() {
-      var ds = new Datastore({projectId: 'project-id'});
-      var startVal = Buffer.from('start');
-      var endVal = Buffer.from('end');
+      const ds = new Datastore({projectId: 'project-id'});
+      const startVal = Buffer.from('start');
+      const endVal = Buffer.from('end');
 
-      var query = ds
+      const query = ds
         .createQuery('Kind1')
         .start(startVal)
         .end(endVal);
 
-      var queryProto = entity.queryToQueryProto(query);
+      const queryProto = entity.queryToQueryProto(query);
       assert.strictEqual(queryProto.endCursor, endVal);
       assert.strictEqual(queryProto.startCursor, startVal);
     });

@@ -16,15 +16,15 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var entity = require('../src/entity.js');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var pfy = require('@google-cloud/promisify');
+const arrify = require('arrify');
+const assert = require('assert');
+const entity = require('../src/entity.js');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const pfy = require('@google-cloud/promisify');
 
-var promisified = false;
-var fakePfy = extend({}, pfy, {
+let promisified = false;
+const fakePfy = extend({}, pfy, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Transaction') {
       return;
@@ -34,23 +34,23 @@ var fakePfy = extend({}, pfy, {
   },
 });
 
-var DatastoreRequestOverride = {
+const DatastoreRequestOverride = {
   delete: function() {},
   save: function() {},
 };
 
-var FakeDatastoreRequest = {
+const FakeDatastoreRequest = {
   prototype: {
     delete: function() {
-      var args = [].slice.apply(arguments);
-      var results = DatastoreRequestOverride.delete.apply(null, args);
+      const args = [].slice.apply(arguments);
+      const results = DatastoreRequestOverride.delete.apply(null, args);
       DatastoreRequestOverride.delete = function() {};
       return results;
     },
 
     save: function() {
-      var args = [].slice.apply(arguments);
-      var results = DatastoreRequestOverride.save.apply(null, args);
+      const args = [].slice.apply(arguments);
+      const results = DatastoreRequestOverride.save.apply(null, args);
       DatastoreRequestOverride.save = function() {};
       return results;
     },
@@ -58,13 +58,13 @@ var FakeDatastoreRequest = {
 };
 
 describe('Transaction', function() {
-  var Transaction;
-  var transaction;
-  var TRANSACTION_ID = 'transaction-id';
-  var PROJECT_ID = 'project-id';
-  var NAMESPACE = 'a-namespace';
+  let Transaction;
+  let transaction;
+  const TRANSACTION_ID = 'transaction-id';
+  const PROJECT_ID = 'project-id';
+  const NAMESPACE = 'a-namespace';
 
-  var DATASTORE = {
+  const DATASTORE = {
     request_: function() {},
     projectId: PROJECT_ID,
     namespace: NAMESPACE,
@@ -103,27 +103,27 @@ describe('Transaction', function() {
     });
 
     it('should localize the transaction ID', function() {
-      var options = {
+      const options = {
         id: 'transaction-id',
       };
 
-      var transaction = new Transaction(DATASTORE, options);
+      const transaction = new Transaction(DATASTORE, options);
       assert.strictEqual(transaction.id, options.id);
     });
 
     it('should localize readOnly', function() {
-      var options = {
+      const options = {
         readOnly: true,
       };
 
-      var transaction = new Transaction(DATASTORE, options);
+      const transaction = new Transaction(DATASTORE, options);
       assert.strictEqual(transaction.readOnly, true);
     });
 
     it('should localize request function', function(done) {
-      var transaction;
+      let transaction;
 
-      var fakeDataset = {
+      const fakeDataset = {
         request_: {
           bind: function(context) {
             assert.strictEqual(context, fakeDataset);
@@ -164,7 +164,7 @@ describe('Transaction', function() {
     });
 
     it('should accept gaxOptions', function(done) {
-      var gaxOptions = {};
+      const gaxOptions = {};
 
       transaction.request_ = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -184,11 +184,11 @@ describe('Transaction', function() {
     });
 
     describe('errors', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
-      var rollbackError = new Error('Error.');
-      var rollbackApiResponse = {};
+      const rollbackError = new Error('Error.');
+      const rollbackApiResponse = {};
 
       beforeEach(function() {
         transaction.rollback = function(callback) {
@@ -210,7 +210,7 @@ describe('Transaction', function() {
     });
 
     it('should pass apiResponse to callback', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
       transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
@@ -222,11 +222,11 @@ describe('Transaction', function() {
     });
 
     it('should group mutations & execute original methods', function() {
-      var deleteArg1 = key(['Product', 123]);
-      var deleteArg2 = key(['Product', 234]);
+      const deleteArg1 = key(['Product', 123]);
+      const deleteArg2 = key(['Product', 234]);
 
-      var saveArg1 = {key: key(['Product', 345]), data: ''};
-      var saveArg2 = {key: key(['Product', 456]), data: ''};
+      const saveArg1 = {key: key(['Product', 345]), data: ''};
+      const saveArg2 = {key: key(['Product', 456]), data: ''};
 
       // Queue saves & deletes in varying order.
       transaction.delete(deleteArg1);
@@ -234,15 +234,15 @@ describe('Transaction', function() {
       transaction.delete(deleteArg2);
       transaction.save(saveArg2);
 
-      var args = [];
+      const args = [];
 
-      var deleteCalled = 0;
+      let deleteCalled = 0;
       DatastoreRequestOverride.delete = function() {
         args.push(arguments[0]);
         deleteCalled++;
       };
 
-      var saveCalled = 0;
+      let saveCalled = 0;
       DatastoreRequestOverride.save = function() {
         args.push(arguments[0]);
         saveCalled++;
@@ -269,12 +269,12 @@ describe('Transaction', function() {
       transaction.delete(key(['Product', 123]));
       transaction.save({key: key(['Product', 123]), data: ''});
 
-      var deleteCalled = 0;
+      let deleteCalled = 0;
       DatastoreRequestOverride.delete = function() {
         deleteCalled++;
       };
 
-      var saveCalled = 0;
+      let saveCalled = 0;
       DatastoreRequestOverride.save = function() {
         saveCalled++;
       };
@@ -321,8 +321,8 @@ describe('Transaction', function() {
     });
 
     it('should execute the queued callbacks', function() {
-      var cb1Called = false;
-      var cb2Called = false;
+      let cb1Called = false;
+      let cb2Called = false;
 
       transaction.requestCallbacks_ = [
         function() {
@@ -346,8 +346,8 @@ describe('Transaction', function() {
 
   describe('createQuery', function() {
     it('should return query from datastore.createQuery', function() {
-      var args = [0, 1, 2, 3];
-      var createQueryReturnValue = {};
+      const args = [0, 1, 2, 3];
+      const createQueryReturnValue = {};
 
       transaction.datastore.createQuery = function() {
         assert.strictEqual(this, transaction);
@@ -358,14 +358,14 @@ describe('Transaction', function() {
         return createQueryReturnValue;
       };
 
-      var query = transaction.createQuery.apply(transaction, args);
+      const query = transaction.createQuery.apply(transaction, args);
       assert.strictEqual(query, createQueryReturnValue);
     });
   });
 
   describe('delete', function() {
     it('should push entities into a queue', function() {
-      var keys = [
+      const keys = [
         key('Product', 123),
         key('Product', 234),
         key('Product', 345),
@@ -399,7 +399,7 @@ describe('Transaction', function() {
     });
 
     it('should allow setting gaxOptions', function(done) {
-      var gaxOptions = {};
+      const gaxOptions = {};
 
       transaction.request_ = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -410,7 +410,7 @@ describe('Transaction', function() {
     });
 
     it('should pass error to callback', function(done) {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
       transaction.request_ = function(config, callback) {
         callback(error);
       };
@@ -421,7 +421,7 @@ describe('Transaction', function() {
     });
 
     it('should pass apiResponse to callback', function(done) {
-      var resp = {success: true};
+      const resp = {success: true};
       transaction.request_ = function(config, callback) {
         callback(null, resp);
       };
@@ -467,7 +467,7 @@ describe('Transaction', function() {
     });
 
     it('should allow setting gaxOptions', function(done) {
-      var gaxOptions = {};
+      const gaxOptions = {};
 
       transaction.request_ = function(config) {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -479,7 +479,7 @@ describe('Transaction', function() {
 
     describe('options.readOnly', function() {
       it('should respect the readOnly option', function(done) {
-        var options = {
+        const options = {
           readOnly: true,
         };
 
@@ -511,7 +511,7 @@ describe('Transaction', function() {
 
     describe('options.transactionId', function() {
       it('should respect the transactionId option', function(done) {
-        var options = {
+        const options = {
           transactionId: 'transaction-id',
         };
 
@@ -543,7 +543,7 @@ describe('Transaction', function() {
       it('should allow full override of transactionOptions', function(done) {
         transaction.readOnly = true;
 
-        var options = {
+        const options = {
           transactionOptions: {
             readWrite: {
               previousTransaction: 'transaction-id',
@@ -561,8 +561,8 @@ describe('Transaction', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         transaction.request_ = function(config, callback) {
@@ -581,7 +581,7 @@ describe('Transaction', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         transaction: TRANSACTION_ID,
       };
 
@@ -614,7 +614,7 @@ describe('Transaction', function() {
 
   describe('save', function() {
     it('should push entities into a queue', function() {
-      var entities = [
+      const entities = [
         {key: key('Product', 123), data: 123},
         {key: key('Product', 234), data: 234},
         {key: key('Product', 345), data: 345},
@@ -627,7 +627,7 @@ describe('Transaction', function() {
       transaction.modifiedEntities_.forEach(function(queuedEntity) {
         assert.strictEqual(queuedEntity.method, 'save');
 
-        var match = entities.filter(function(ent) {
+        const match = entities.filter(function(ent) {
           return ent.key === queuedEntity.entity.key;
         })[0];
 

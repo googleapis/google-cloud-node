@@ -16,26 +16,26 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var Datastore = require('../');
-var entity = require('../src/entity.js');
+const assert = require('assert');
+const async = require('async');
+const Datastore = require('../');
+const entity = require('../src/entity.js');
 
 describe('Datastore', function() {
-  var testKinds = [];
-  var datastore = new Datastore({});
+  const testKinds = [];
+  const datastore = new Datastore({});
   // Override the Key method so we can track what keys are created during the
   // tests. They are then deleted in the `after` hook.
-  var key = datastore.key;
+  const key = datastore.key;
   datastore.key = function() {
-    var keyObject = key.apply(this, arguments);
+    const keyObject = key.apply(this, arguments);
     testKinds.push(keyObject.kind);
     return keyObject;
   };
 
   after(function(done) {
     function deleteEntities(kind, callback) {
-      var query = datastore.createQuery(kind).select('__key__');
+      const query = datastore.createQuery(kind).select('__key__');
 
       datastore.runQuery(query, function(err, entities) {
         if (err) {
@@ -43,7 +43,7 @@ describe('Datastore', function() {
           return;
         }
 
-        var keys = entities.map(function(entity) {
+        const keys = entities.map(function(entity) {
           return entity[datastore.KEY];
         });
 
@@ -64,7 +64,7 @@ describe('Datastore', function() {
   });
 
   describe('create, retrieve and delete', function() {
-    var post = {
+    const post = {
       title: 'How to make the perfect pizza in your grill',
       tags: ['pizza', 'grill'],
       publishedAt: new Date(),
@@ -79,10 +79,10 @@ describe('Datastore', function() {
     };
 
     it('should excludeFromIndexes correctly', function(done) {
-      var longString = Buffer.alloc(1501, '.').toString();
-      var postKey = datastore.key(['Post', 'post1']);
+      const longString = Buffer.alloc(1501, '.').toString();
+      const postKey = datastore.key(['Post', 'post1']);
 
-      var data = {
+      const data = {
         longString: longString,
         notMetadata: true,
         longStringArray: [longString],
@@ -153,7 +153,7 @@ describe('Datastore', function() {
     });
 
     it('should save/get/delete with a key name', function(done) {
-      var postKey = datastore.key(['Post', 'post1']);
+      const postKey = datastore.key(['Post', 'post1']);
 
       datastore.save({key: postKey, data: post}, function(err) {
         assert.ifError(err);
@@ -170,7 +170,7 @@ describe('Datastore', function() {
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
-      var postKey = datastore.key(['Post', 123456789]);
+      const postKey = datastore.key(['Post', 123456789]);
 
       datastore.save({key: postKey, data: post}, function(err) {
         assert.ifError(err);
@@ -186,15 +186,15 @@ describe('Datastore', function() {
     });
 
     it('should save/get/delete a buffer', function(done) {
-      var postKey = datastore.key(['Post']);
-      var data = {
+      const postKey = datastore.key(['Post']);
+      const data = {
         buf: Buffer.from('010100000000000000000059400000000000006940', 'hex'),
       };
 
       datastore.save({key: postKey, data: data}, function(err) {
         assert.ifError(err);
 
-        var assignedId = postKey.id;
+        const assignedId = postKey.id;
         assert(assignedId);
 
         datastore.get(postKey, function(err, entity) {
@@ -208,7 +208,7 @@ describe('Datastore', function() {
     });
 
     it('should save/get/delete with a generated key id', function(done) {
-      var postKey = datastore.key('Post');
+      const postKey = datastore.key('Post');
 
       datastore.save({key: postKey, data: post}, function(err) {
         assert.ifError(err);
@@ -227,7 +227,7 @@ describe('Datastore', function() {
     });
 
     it('should save/get/update', function(done) {
-      var postKey = datastore.key('Post');
+      const postKey = datastore.key('Post');
 
       datastore.save({key: postKey, data: post}, function(err) {
         assert.ifError(err);
@@ -253,7 +253,7 @@ describe('Datastore', function() {
     });
 
     it('should save and get with a string ID', function(done) {
-      var longIdKey = datastore.key([
+      const longIdKey = datastore.key([
         'Post',
         datastore.int('100000000000001234'),
       ]);
@@ -278,7 +278,7 @@ describe('Datastore', function() {
     });
 
     it('should fail explicitly set second insert on save', function(done) {
-      var postKey = datastore.key('Post');
+      const postKey = datastore.key('Post');
 
       datastore.save({key: postKey, data: post}, function(err) {
         assert.ifError(err);
@@ -308,7 +308,7 @@ describe('Datastore', function() {
     });
 
     it('should fail explicitly set first update on save', function(done) {
-      var postKey = datastore.key('Post');
+      const postKey = datastore.key('Post');
 
       datastore.save(
         {
@@ -324,7 +324,7 @@ describe('Datastore', function() {
     });
 
     it('should save/get/delete multiple entities at once', function(done) {
-      var post2 = {
+      const post2 = {
         title: 'How to make the perfect homemade pasta',
         tags: ['pasta', 'homemade'],
         publishedAt: Date('2001-01-01T00:00:00.000Z'),
@@ -334,8 +334,8 @@ describe('Datastore', function() {
         rating: 4.5,
       };
 
-      var key1 = datastore.key('Post');
-      var key2 = datastore.key('Post');
+      const key1 = datastore.key('Post');
+      const key2 = datastore.key('Post');
 
       datastore.save(
         [{key: key1, data: post}, {key: key2, data: post2}],
@@ -353,15 +353,15 @@ describe('Datastore', function() {
     });
 
     it('should get multiple entities in a stream', function(done) {
-      var key1 = datastore.key('Post');
-      var key2 = datastore.key('Post');
+      const key1 = datastore.key('Post');
+      const key2 = datastore.key('Post');
 
       datastore.save(
         [{key: key1, data: post}, {key: key2, data: post}],
         function(err) {
           assert.ifError(err);
 
-          var numEntitiesEmitted = 0;
+          let numEntitiesEmitted = 0;
 
           datastore
             .createReadStream([key1, key2])
@@ -379,7 +379,7 @@ describe('Datastore', function() {
     });
 
     it('should save keys as a part of entity and query by key', function(done) {
-      var personKey = datastore.key(['People', 'US', 'Person', 'name']);
+      const personKey = datastore.key(['People', 'US', 'Person', 'name']);
 
       datastore.save(
         {
@@ -392,7 +392,7 @@ describe('Datastore', function() {
         function(err) {
           assert.ifError(err);
 
-          var query = datastore
+          const query = datastore
             .createQuery('Person')
             .hasAncestor(datastore.key(['People', 'US']))
             .filter('linkedTo', personKey);
@@ -411,10 +411,10 @@ describe('Datastore', function() {
 
     describe('entity types', function() {
       it('should save and decode an int', function(done) {
-        var integerValue = 2015;
-        var integerType = Datastore.int(integerValue);
+        const integerValue = 2015;
+        const integerType = Datastore.int(integerValue);
 
-        var key = datastore.key('Person');
+        const key = datastore.key('Person');
 
         datastore.save(
           {
@@ -436,10 +436,10 @@ describe('Datastore', function() {
       });
 
       it('should save and decode a double', function(done) {
-        var doubleValue = 99.99;
-        var doubleType = Datastore.double(doubleValue);
+        const doubleValue = 99.99;
+        const doubleType = Datastore.double(doubleValue);
 
-        var key = datastore.key('Person');
+        const key = datastore.key('Person');
 
         datastore.save(
           {
@@ -461,13 +461,13 @@ describe('Datastore', function() {
       });
 
       it('should save and decode a geo point', function(done) {
-        var geoPointValue = {
+        const geoPointValue = {
           latitude: 40.6894,
           longitude: -74.0447,
         };
-        var geoPointType = Datastore.geoPoint(geoPointValue);
+        const geoPointType = Datastore.geoPoint(geoPointValue);
 
-        var key = datastore.key('Person');
+        const key = datastore.key('Person');
 
         datastore.save(
           {
@@ -491,9 +491,9 @@ describe('Datastore', function() {
   });
 
   describe('querying the datastore', function() {
-    var ancestor = datastore.key(['Book', 'GoT']);
+    const ancestor = datastore.key(['Book', 'GoT']);
 
-    var keys = [
+    const keys = [
       // Paths:
       ['Rickard'],
       ['Rickard', 'Character', 'Eddard'],
@@ -507,7 +507,7 @@ describe('Datastore', function() {
       return datastore.key(['Book', 'GoT', 'Character'].concat(path));
     });
 
-    var characters = [
+    const characters = [
       {
         name: 'Rickard',
         family: 'Stark',
@@ -559,7 +559,7 @@ describe('Datastore', function() {
     ];
 
     before(function(done) {
-      var keysToSave = keys.map(function(key, index) {
+      const keysToSave = keys.map(function(key, index) {
         return {
           key: key,
           data: characters[index],
@@ -574,7 +574,7 @@ describe('Datastore', function() {
     });
 
     it('should limit queries', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .limit(5);
@@ -583,7 +583,7 @@ describe('Datastore', function() {
         assert.ifError(err);
         assert.strictEqual(firstEntities.length, 5);
 
-        var secondQ = datastore
+        const secondQ = datastore
           .createQuery('Character')
           .hasAncestor(ancestor)
           .start(info.endCursor);
@@ -597,9 +597,9 @@ describe('Datastore', function() {
     });
 
     it('should not go over a limit', function(done) {
-      var limit = 3;
+      const limit = 3;
 
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .limit(limit);
@@ -612,9 +612,9 @@ describe('Datastore', function() {
     });
 
     it('should run a query as a stream', function(done) {
-      var q = datastore.createQuery('Character').hasAncestor(ancestor);
+      const q = datastore.createQuery('Character').hasAncestor(ancestor);
 
-      var resultsReturned = 0;
+      let resultsReturned = 0;
 
       datastore
         .runQueryStream(q)
@@ -629,13 +629,13 @@ describe('Datastore', function() {
     });
 
     it('should not go over a limit with a stream', function(done) {
-      var limit = 3;
-      var q = datastore
+      const limit = 3;
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .limit(limit);
 
-      var resultsReturned = 0;
+      let resultsReturned = 0;
 
       datastore
         .runQueryStream(q)
@@ -650,7 +650,7 @@ describe('Datastore', function() {
     });
 
     it('should filter queries with simple indexes', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .filter('appearances', '>=', 20);
@@ -663,7 +663,7 @@ describe('Datastore', function() {
     });
 
     it('should filter queries with defined indexes', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .filter('family', 'Stark')
@@ -677,7 +677,7 @@ describe('Datastore', function() {
     });
 
     it('should filter by ancestor', function(done) {
-      var q = datastore.createQuery('Character').hasAncestor(ancestor);
+      const q = datastore.createQuery('Character').hasAncestor(ancestor);
 
       datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
@@ -687,9 +687,9 @@ describe('Datastore', function() {
     });
 
     it('should filter by key', function(done) {
-      var key = datastore.key(['Book', 'GoT', 'Character', 'Rickard']);
+      const key = datastore.key(['Book', 'GoT', 'Character', 'Rickard']);
 
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .filter('__key__', key);
@@ -702,7 +702,7 @@ describe('Datastore', function() {
     });
 
     it('should order queries', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .order('appearances');
@@ -718,7 +718,7 @@ describe('Datastore', function() {
     });
 
     it('should select projections', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .select(['name', 'family']);
@@ -741,7 +741,7 @@ describe('Datastore', function() {
     });
 
     it('should paginate with offset and limit', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .offset(2)
@@ -755,7 +755,7 @@ describe('Datastore', function() {
         assert.strictEqual(entities[0].name, 'Robb');
         assert.strictEqual(entities[2].name, 'Catelyn');
 
-        var secondQ = datastore
+        const secondQ = datastore
           .createQuery('Character')
           .hasAncestor(ancestor)
           .order('appearances')
@@ -774,7 +774,7 @@ describe('Datastore', function() {
     });
 
     it('should resume from a start cursor', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .offset(2)
@@ -784,7 +784,7 @@ describe('Datastore', function() {
       datastore.runQuery(q, function(err, entities, info) {
         assert.ifError(err);
 
-        var secondQ = datastore
+        const secondQ = datastore
           .createQuery('Character')
           .hasAncestor(ancestor)
           .order('appearances')
@@ -803,7 +803,7 @@ describe('Datastore', function() {
     });
 
     it('should group queries', function(done) {
-      var q = datastore
+      const q = datastore
         .createQuery('Character')
         .hasAncestor(ancestor)
         .groupBy('appearances');
@@ -816,7 +816,7 @@ describe('Datastore', function() {
     });
 
     it('should query from the Query object', function(done) {
-      var q = datastore.createQuery('Character');
+      const q = datastore.createQuery('Character');
 
       q.run(done);
     });
@@ -824,12 +824,12 @@ describe('Datastore', function() {
 
   describe('transactions', function() {
     it('should run in a transaction', function(done) {
-      var key = datastore.key(['Company', 'Google']);
-      var obj = {
+      const key = datastore.key(['Company', 'Google']);
+      const obj = {
         url: 'www.google.com',
       };
 
-      var transaction = datastore.transaction();
+      const transaction = datastore.transaction();
 
       transaction.run(function(err) {
         assert.ifError(err);
@@ -853,9 +853,9 @@ describe('Datastore', function() {
     });
 
     it('should commit all saves and deletes at the end', function(done) {
-      var deleteKey = datastore.key(['Company', 'Subway']);
-      var key = datastore.key(['Company', 'Google']);
-      var incompleteKey = datastore.key('Company');
+      const deleteKey = datastore.key(['Company', 'Subway']);
+      const key = datastore.key(['Company', 'Google']);
+      const incompleteKey = datastore.key('Company');
 
       datastore.save(
         {
@@ -865,7 +865,7 @@ describe('Datastore', function() {
         function(err) {
           assert.ifError(err);
 
-          var transaction = datastore.transaction();
+          const transaction = datastore.transaction();
 
           transaction.run(function(err) {
             assert.ifError(err);
@@ -918,10 +918,10 @@ describe('Datastore', function() {
     });
 
     it('should use the last modification to a key', function(done) {
-      var incompleteKey = datastore.key('Company');
-      var key = datastore.key(['Company', 'Google']);
+      const incompleteKey = datastore.key('Company');
+      const key = datastore.key(['Company', 'Google']);
 
-      var transaction = datastore.transaction();
+      const transaction = datastore.transaction();
 
       transaction.run(function(err) {
         assert.ifError(err);
@@ -960,12 +960,12 @@ describe('Datastore', function() {
     });
 
     it('should query within a transaction', function(done) {
-      var transaction = datastore.transaction();
+      const transaction = datastore.transaction();
 
       transaction.run(function(err) {
         assert.ifError(err);
 
-        var query = transaction.createQuery('Company');
+        const query = transaction.createQuery('Company');
 
         query.run(function(err, entities) {
           if (err) {
@@ -981,8 +981,8 @@ describe('Datastore', function() {
     });
 
     it('should read in a readOnly transaction', function(done) {
-      var transaction = datastore.transaction({readOnly: true});
-      var key = datastore.key(['Company', 'Google']);
+      const transaction = datastore.transaction({readOnly: true});
+      const key = datastore.key(['Company', 'Google']);
 
       transaction.run(function(err) {
         assert.ifError(err);
@@ -991,8 +991,8 @@ describe('Datastore', function() {
     });
 
     it('should not write in a readOnly transaction', function(done) {
-      var transaction = datastore.transaction({readOnly: true});
-      var key = datastore.key(['Company', 'Google']);
+      const transaction = datastore.transaction({readOnly: true});
+      const key = datastore.key(['Company', 'Google']);
 
       transaction.run(function(err) {
         assert.ifError(err);

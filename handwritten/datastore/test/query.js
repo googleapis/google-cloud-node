@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
+const assert = require('assert');
 
 describe('Query', function() {
-  var SCOPE = {};
-  var NAMESPACE = 'Namespace';
-  var KINDS = 'Kind';
+  const SCOPE = {};
+  const NAMESPACE = 'Namespace';
+  const KINDS = 'Kind';
 
-  var Query = require('../src/query.js');
-  var query;
+  const Query = require('../src/query.js');
+  let query;
 
   beforeEach(function() {
     query = new Query(SCOPE, NAMESPACE, KINDS);
@@ -58,9 +58,9 @@ describe('Query', function() {
 
   describe('filter', function() {
     it('should support filtering', function() {
-      var now = new Date();
-      var query = new Query(['kind1']).filter('date', '<=', now);
-      var filter = query.filters[0];
+      const now = new Date();
+      const query = new Query(['kind1']).filter('date', '<=', now);
+      const filter = query.filters[0];
 
       assert.strictEqual(filter.name, 'date');
       assert.strictEqual(filter.op, '<=');
@@ -68,8 +68,8 @@ describe('Query', function() {
     });
 
     it('should recognize all the different operators', function() {
-      var now = new Date();
-      var query = new Query(['kind1'])
+      const now = new Date();
+      const query = new Query(['kind1'])
         .filter('date', '<=', now)
         .filter('name', '=', 'Title')
         .filter('count', '>', 20)
@@ -98,27 +98,31 @@ describe('Query', function() {
     });
 
     it('should remove any whitespace surrounding the filter name', function() {
-      var query = new Query(['kind1']).filter('   count    ', '>', 123);
+      const query = new Query(['kind1']).filter('   count    ', '>', 123);
 
       assert.strictEqual(query.filters[0].name, 'count');
     });
 
     it('should remove any whitespace surrounding the operator', function() {
-      var query = new Query(['kind1']).filter('count', '       <        ', 123);
+      const query = new Query(['kind1']).filter(
+        'count',
+        '       <        ',
+        123
+      );
 
       assert.strictEqual(query.filters[0].op, '<');
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.filter('count', '<', 5);
+      const query = new Query(['kind1']);
+      const nextQuery = query.filter('count', '<', 5);
 
       assert.strictEqual(query, nextQuery);
     });
 
     it('should default the operator to "="', function() {
-      var query = new Query(['kind1']).filter('name', 'Stephen');
-      var filter = query.filters[0];
+      const query = new Query(['kind1']).filter('name', 'Stephen');
+      const filter = query.filters[0];
 
       assert.strictEqual(filter.name, 'name');
       assert.strictEqual(filter.op, '=');
@@ -128,7 +132,7 @@ describe('Query', function() {
 
   describe('hasAncestor', function() {
     it('should support ancestor filtering', function() {
-      var query = new Query(['kind1']).hasAncestor(['kind2', 123]);
+      const query = new Query(['kind1']).hasAncestor(['kind2', 123]);
 
       assert.strictEqual(query.filters[0].name, '__key__');
       assert.strictEqual(query.filters[0].op, 'HAS_ANCESTOR');
@@ -136,8 +140,8 @@ describe('Query', function() {
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.hasAncestor(['kind2', 123]);
+      const query = new Query(['kind1']);
+      const nextQuery = query.hasAncestor(['kind2', 123]);
 
       assert.strictEqual(query, nextQuery);
     });
@@ -145,28 +149,28 @@ describe('Query', function() {
 
   describe('order', function() {
     it('should default ordering to ascending', function() {
-      var query = new Query(['kind1']).order('name');
+      const query = new Query(['kind1']).order('name');
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
     });
 
     it('should support ascending order', function() {
-      var query = new Query(['kind1']).order('name');
+      const query = new Query(['kind1']).order('name');
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
     });
 
     it('should support descending order', function() {
-      var query = new Query(['kind1']).order('count', {descending: true});
+      const query = new Query(['kind1']).order('count', {descending: true});
 
       assert.strictEqual(query.orders[0].name, 'count');
       assert.strictEqual(query.orders[0].sign, '-');
     });
 
     it('should support both ascending and descending', function() {
-      var query = new Query(['kind1'])
+      const query = new Query(['kind1'])
         .order('name')
         .order('count', {descending: true});
 
@@ -177,8 +181,8 @@ describe('Query', function() {
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.order('name');
+      const query = new Query(['kind1']);
+      const nextQuery = query.order('name');
 
       assert.strictEqual(query, nextQuery);
     });
@@ -186,20 +190,20 @@ describe('Query', function() {
 
   describe('groupBy', function() {
     it('should store an array of properties to group by', function() {
-      var query = new Query(['kind1']).groupBy(['name', 'size']);
+      const query = new Query(['kind1']).groupBy(['name', 'size']);
 
       assert.deepStrictEqual(query.groupByVal, ['name', 'size']);
     });
 
     it('should convert a single property into an array', function() {
-      var query = new Query(['kind1']).groupBy('name');
+      const query = new Query(['kind1']).groupBy('name');
 
       assert.deepStrictEqual(query.groupByVal, ['name']);
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.groupBy(['name', 'size']);
+      const query = new Query(['kind1']);
+      const nextQuery = query.groupBy(['name', 'size']);
 
       assert.strictEqual(query, nextQuery);
     });
@@ -207,20 +211,20 @@ describe('Query', function() {
 
   describe('select', function() {
     it('should store an array of properties to select', function() {
-      var query = new Query(['kind1']).select(['name', 'size']);
+      const query = new Query(['kind1']).select(['name', 'size']);
 
       assert.deepStrictEqual(query.selectVal, ['name', 'size']);
     });
 
     it('should convert a single property into an array', function() {
-      var query = new Query(['kind1']).select('name');
+      const query = new Query(['kind1']).select('name');
 
       assert.deepStrictEqual(query.selectVal, ['name']);
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.select(['name', 'size']);
+      const query = new Query(['kind1']);
+      const nextQuery = query.select(['name', 'size']);
 
       assert.strictEqual(query, nextQuery);
     });
@@ -228,14 +232,14 @@ describe('Query', function() {
 
   describe('start', function() {
     it('should capture the starting cursor value', function() {
-      var query = new Query(['kind1']).start('X');
+      const query = new Query(['kind1']).start('X');
 
       assert.strictEqual(query.startVal, 'X');
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.start('X');
+      const query = new Query(['kind1']);
+      const nextQuery = query.start('X');
 
       assert.strictEqual(query, nextQuery);
     });
@@ -243,14 +247,14 @@ describe('Query', function() {
 
   describe('end', function() {
     it('should capture the ending cursor value', function() {
-      var query = new Query(['kind1']).end('Z');
+      const query = new Query(['kind1']).end('Z');
 
       assert.strictEqual(query.endVal, 'Z');
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.end('Z');
+      const query = new Query(['kind1']);
+      const nextQuery = query.end('Z');
 
       assert.strictEqual(query, nextQuery);
     });
@@ -258,14 +262,14 @@ describe('Query', function() {
 
   describe('limit', function() {
     it('should capture the number of results to limit to', function() {
-      var query = new Query(['kind1']).limit(20);
+      const query = new Query(['kind1']).limit(20);
 
       assert.strictEqual(query.limitVal, 20);
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.limit(20);
+      const query = new Query(['kind1']);
+      const nextQuery = query.limit(20);
 
       assert.strictEqual(query, nextQuery);
     });
@@ -273,14 +277,14 @@ describe('Query', function() {
 
   describe('offset', function() {
     it('should capture the number of results to offset by', function() {
-      var query = new Query(['kind1']).offset(100);
+      const query = new Query(['kind1']).offset(100);
 
       assert.strictEqual(query.offsetVal, 100);
     });
 
     it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.offset(100);
+      const query = new Query(['kind1']);
+      const nextQuery = query.offset(100);
 
       assert.strictEqual(query, nextQuery);
     });
@@ -288,7 +292,7 @@ describe('Query', function() {
 
   describe('run', function() {
     it('should call the parent instance runQuery correctly', function(done) {
-      var args = [0, 1, 2];
+      const args = [0, 1, 2];
 
       query.scope.runQuery = function() {
         assert.strictEqual(this, query.scope);
@@ -305,8 +309,8 @@ describe('Query', function() {
 
   describe('runStream', function() {
     it('should call the parent instance runQueryStream correctly', function() {
-      var args = [0, 1, 2];
-      var runQueryReturnValue = {};
+      const args = [0, 1, 2];
+      const runQueryReturnValue = {};
 
       query.scope.runQueryStream = function() {
         assert.strictEqual(this, query.scope);
@@ -317,7 +321,7 @@ describe('Query', function() {
         return runQueryReturnValue;
       };
 
-      var results = query.runStream.apply(query, args);
+      const results = query.runStream.apply(query, args);
       assert.strictEqual(results, runQueryReturnValue);
     });
   });

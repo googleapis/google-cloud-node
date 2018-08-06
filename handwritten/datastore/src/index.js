@@ -16,18 +16,18 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var extend = require('extend');
-var gax = require('google-gax');
-var grpc = new gax.GrpcClient().grpc;
-var GoogleAuth = require('google-auth-library').GoogleAuth;
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const extend = require('extend');
+const gax = require('google-gax');
+const {grpc} = new gax.GrpcClient();
+const {GoogleAuth} = require('google-auth-library');
+const is = require('is');
+const util = require('util');
 
-var DatastoreRequest = require('./request.js');
-var entity = require('./entity.js');
-var Query = require('./query.js');
-var Transaction = require('./transaction.js');
+const DatastoreRequest = require('./request.js');
+const entity = require('./entity.js');
+const Query = require('./query.js');
+const Transaction = require('./transaction.js');
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -699,10 +699,10 @@ Datastore.prototype.transaction = function(options) {
  * @param {string} customApiEndpoint Custom API endpoint.
  */
 Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
-  var baseUrl = this.defaultBaseUrl_;
-  var leadingProtocol = new RegExp('^https*://');
-  var trailingSlashes = new RegExp('/*$');
-  var port = new RegExp(':(\\d+)');
+  let baseUrl = this.defaultBaseUrl_;
+  const leadingProtocol = new RegExp('^https*://');
+  const trailingSlashes = new RegExp('/*$');
+  const port = new RegExp(':(\\d+)');
 
   if (customApiEndpoint) {
     baseUrl = customApiEndpoint;
