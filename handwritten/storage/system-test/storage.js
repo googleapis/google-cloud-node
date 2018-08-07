@@ -1671,7 +1671,7 @@ describe('storage', function() {
             upload({interrupt: false}, function(err) {
               assert.ifError(err);
 
-              assert.strictEqual(file.metadata.size, fileSize);
+              assert.strictEqual(Number(file.metadata.size), fileSize);
               file.delete(done);
             });
           });
@@ -1727,7 +1727,7 @@ describe('storage', function() {
                   assert.ifError(err);
 
                   fs.readFile(tmpFilePath, function(err, data) {
-                    assert.strictEqual(data, fileContent);
+                    assert.strictEqual(data.toString(), fileContent);
                     done();
                   });
                 });
@@ -2301,7 +2301,10 @@ describe('storage', function() {
           destinationFile.download(function(err, contents) {
             assert.ifError(err);
 
-            assert.strictEqual(contents, files.map(prop('contents')).join(''));
+            assert.strictEqual(
+              contents.toString(),
+              files.map(prop('contents')).join('')
+            );
 
             async.each(sourceFiles.concat([destinationFile]), deleteFile, done);
           });
@@ -2471,7 +2474,7 @@ describe('storage', function() {
 
             firstGenFile.download(function(err, contents) {
               assert.ifError(err);
-              assert.strictEqual(contents, 'a');
+              assert.strictEqual(contents.toString(), 'a');
               done();
             });
           });
@@ -2532,7 +2535,7 @@ describe('storage', function() {
           assert.ifError(err);
           request.get(signedReadUrl, function(err, resp, body) {
             assert.ifError(err);
-            assert.strictEqual(body, localFile);
+            assert.strictEqual(body, localFile.toString());
             file.delete(done);
           });
         }
