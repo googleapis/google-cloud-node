@@ -8,13 +8,6 @@
   "schedule": [
     "after 9am and before 3pm"
   ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "recreateClosed": true,
-    "schedule": [
-      "before 10am on tuesday"
-    ]
-  },
   "gitAuthor": null,
   "packageRules": [
     {
