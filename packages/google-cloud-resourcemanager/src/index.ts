@@ -16,10 +16,10 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import * as extend from 'extend';
+import * as is from 'is';
+import * as util from 'util';
 
 var Project = require('./project.js');
 
@@ -82,19 +82,13 @@ var Project = require('./project.js');
  * Full quickstart example:
  */
 function Resource(options) {
-  if (!(this instanceof Resource)) {
-    return new Resource(options);
-  }
-
-  options = common.util.normalizeArguments(this, options, {
-    projectIdRequired: false,
-  });
+  options = options || {};
 
   var config = {
     baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
-    packageJson: require('../package.json'),
+    packageJson: require('../../package.json'),
   };
 
   common.Service.call(this, config, options);
@@ -389,7 +383,7 @@ common.util.promisifyAll(Resource, {
  * @see Project
  * @type {constructor}
  */
-Resource.Project = Project;
+(Resource as any).Project = Project;
 
 /**
  * The default export of the `@google-cloud/resource` package is the

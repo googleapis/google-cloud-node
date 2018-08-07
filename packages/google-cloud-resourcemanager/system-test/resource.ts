@@ -16,13 +16,13 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
+import * as assert from 'assert';
+import * as async from 'async';
 var exec = require('methmeth');
 var googleAuth = require('google-auto-auth');
-var uuid = require('uuid');
+import * as uuid from 'uuid';
 
-var Resource = require('../');
+var Resource = require('../src');
 
 describe('Resource', function() {
   var PREFIX = 'gcloud-tests-';
@@ -74,7 +74,7 @@ describe('Resource', function() {
   //   - Delete a project
   describe('lifecycle', function() {
     var CAN_RUN_TESTS = true;
-    var testProjects = [];
+    var testProjects: string[] = [];
 
     var resource = new Resource();
 

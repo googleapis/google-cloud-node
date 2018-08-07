@@ -16,11 +16,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
+import * as arrify from 'arrify';
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as proxyquire from 'proxyquire';
+import {util} from '@google-cloud/common';
 
 function FakeOperation() {
   this.calledWith_ = arguments;
@@ -79,7 +79,7 @@ describe('Resource', function() {
   var resource;
 
   before(function() {
-    Resource = proxyquire('../', {
+    Resource = proxyquire('../src', {
       '@google-cloud/common': {
         Operation: FakeOperation,
         Service: FakeService,
@@ -112,27 +112,6 @@ describe('Resource', function() {
       assert(promisified);
     });
 
-    it('should work without new', function() {
-      assert.doesNotThrow(function() {
-        Resource({projectId: PROJECT_ID});
-      });
-    });
-
-    it('should normalize the arguments', function() {
-      var normalizeArgumentsCalled = false;
-      var options = {};
-
-      fakeUtil.normalizeArguments = function(context, options_, config) {
-        normalizeArgumentsCalled = true;
-        assert.strictEqual(options_, options);
-        assert.strictEqual(config.projectIdRequired, false);
-        return options_;
-      };
-
-      new Resource(options);
-      assert.strictEqual(normalizeArgumentsCalled, true);
-    });
-
     it('should inherit from Service', function() {
       assert(resource instanceof FakeService);
 
@@ -146,7 +125,7 @@ describe('Resource', function() {
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepStrictEqual(
         calledWith.packageJson,
-        require('../package.json')
+        require('../../package.json')
       );
     });
   });
@@ -200,7 +179,7 @@ describe('Resource', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      var apiResponse: any = {
         name: 'operation-name',
       };
 

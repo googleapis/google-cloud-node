@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import * as util from 'util';
 
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.

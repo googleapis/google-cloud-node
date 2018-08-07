@@ -16,10 +16,10 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
+import * as assert from 'assert';
+import * as extend from 'extend';
 var nodeutil = require('util');
-var proxyquire = require('proxyquire');
+import * as proxyquire from 'proxyquire';
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 

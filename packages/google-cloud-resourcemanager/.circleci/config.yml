@@ -4,51 +4,39 @@ workflows:
   tests:
     jobs: &workflow_jobs
       - node6:
-          filters:
+          filters: &all_commits
             tags:
               only: /.*/
       - node8:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - node10:
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - lint:
           requires:
             - node6
             - node8
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - docs:
           requires:
             - node6
             - node8
             - node10
-          filters:
-            tags:
-              only: /.*/
+          filters: *all_commits
       - system_tests:
           requires:
             - lint
             - docs
-          filters:
+          filters: &master_and_releases
             branches:
               only: master
-            tags:
+            tags: &releases
               only: '/^v[\d.]+$/'
       - sample_tests:
           requires:
             - lint
             - docs
-          filters:
-            branches:
-              only: master
-            tags:
-              only: '/^v[\d.]+$/'
+          filters: *master_and_releases
       - publish_npm:
           requires:
             - system_tests
@@ -56,8 +44,7 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: '/^v[\d.]+$/'
+            tags: *releases
   nightly:
     triggers:
       - schedule:
@@ -70,6 +57,7 @@ jobs:
   node6:
     docker:
       - image: 'node:6'
+        user: node
     steps: &unit_tests_steps
       - checkout
       - run: &remove_package_lock
@@ -84,25 +72,29 @@ jobs:
               echo "Not a nightly build, skipping this step."
             fi
       - run: &npm_install_and_link
-          name: Install and link the module.
-          command: npm install
+          name: Install and link the module
+          command: |-
+            mkdir -p /home/node/.npm-global
+            npm install
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
       - run: node_modules/.bin/codecov
+  
   node8:
     docker:
       - image: 'node:8'
-    steps: *unit_tests_steps
-  node9:
-    docker:
-      - image: 'node:9'
+        user: node
     steps: *unit_tests_steps
   node10:
     docker:
       - image: 'node:10'
+        user: node
     steps: *unit_tests_steps
   lint:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -111,14 +103,19 @@ jobs:
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link ../
+            npm install
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run linting.
           command: npm run lint
+          environment:
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
   docs:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -129,6 +126,7 @@ jobs:
   sample_tests:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -145,15 +143,17 @@ jobs:
           command: npm run samples-test
           environment:
             GCLOUD_PROJECT: long-door-651
-            GOOGLE_APPLICATION_CREDENTIALS: /var/resource/.circleci/key.json
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/samples/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Remove unencrypted key.
           command: rm .circleci/key.json
           when: always
-    working_directory: /var/resource/
+    working_directory: /home/node/samples/
   system_tests:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: *remove_package_lock
@@ -176,7 +176,8 @@ jobs:
   publish_npm:
     docker:
       - image: 'node:8'
+        user: node
     steps:
       - checkout
       - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run: npm publish
+      - run: npm publish --access=public
