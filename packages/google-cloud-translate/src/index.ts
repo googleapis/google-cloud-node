@@ -17,7 +17,8 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import * as common from '@google-cloud/common';
+import {Service, util} from '@google-cloud/common';
+import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as isHtml from 'is-html';
@@ -81,7 +82,7 @@ const PKG = require('../../package.json');
  * region_tag:translate_quickstart
  * Full quickstart example:
  */
-export class Translate extends common.Service {
+export class Translate extends Service {
   options;
   key?: string;
   constructor(options?) {
@@ -478,11 +479,11 @@ export class Translate extends common.Service {
         key: this.key,
       },
       headers: {
-        'User-Agent': common.util.getUserAgentFromPackageJson(PKG),
+        'User-Agent': util.getUserAgentFromPackageJson(PKG),
       },
     });
 
-    common.util.makeRequest(reqOpts, this.options, callback!);
+    util.makeRequest(reqOpts, this.options, callback!);
   }
 }
 
@@ -491,7 +492,7 @@ export class Translate extends common.Service {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Translate, {exclude: ['request']});
+promisifyAll(Translate, {exclude: ['request']});
 
 /**
  * The `@google-cloud/translate` package has a single default export, the

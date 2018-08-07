@@ -63,7 +63,8 @@
     "presystem-test": "npm run compile"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.20.3",
+    "@google-cloud/common": "^0.21.0",
+    "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
     "extend": "^3.0.1",
     "is": "^3.2.1",

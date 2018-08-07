@@ -20,23 +20,26 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {util} from '@google-cloud/common';
+import * as pfy from '@google-cloud/promisify';
 
 const pkgJson = require('../../package.json');
 
 let makeRequestOverride;
 let promisified = false;
+const fakePromisify = extend({}, pfy, {
+  promisifyAll(c) {
+    if (c.name === 'Translate') {
+      promisified = true;
+    }
+  },
+});
+
 const fakeUtil = extend({}, util, {
   makeRequest() {
     if (makeRequestOverride) {
       return makeRequestOverride.apply(null, arguments);
     }
-
     return util.makeRequest.apply(null, arguments);
-  },
-  promisifyAll(c) {
-    if (c.name === 'Translate') {
-      promisified = true;
-    }
   },
 });
 const originalFakeUtil = extend(true, {}, fakeUtil);
@@ -60,6 +63,7 @@ describe('Translate', () => {
                     util: fakeUtil,
                     Service: FakeService,
                   },
+                  '@google-cloud/promisify': fakePromisify
                 }).Translate;
   });
 
