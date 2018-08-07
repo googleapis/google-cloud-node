@@ -18,28 +18,28 @@ const assert = require('assert');
 
 const datastoreModule = require('../src');
 
-const FAKE_STATUS_CODE = 1;
-const error = new Error();
+var FAKE_STATUS_CODE = 1;
+var error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DatastoreClient', () => {
   describe('lookup', () => {
     it('invokes lookup without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
 
       // Mock response
-      const expectedResponse = {};
+      var expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.lookup = mockSimpleGrpcMethod(
@@ -55,15 +55,15 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes lookup with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
@@ -82,21 +82,21 @@ describe('DatastoreClient', () => {
 
   describe('runQuery', () => {
     it('invokes runQuery without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const partitionId = {};
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var partitionId = {};
+      var request = {
         projectId: projectId,
         partitionId: partitionId,
       };
 
       // Mock response
-      const expectedResponse = {};
+      var expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.runQuery = mockSimpleGrpcMethod(
@@ -112,15 +112,15 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes runQuery with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const partitionId = {};
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var partitionId = {};
+      var request = {
         projectId: projectId,
         partitionId: partitionId,
       };
@@ -143,20 +143,20 @@ describe('DatastoreClient', () => {
 
   describe('beginTransaction', () => {
     it('invokes beginTransaction without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var request = {
         projectId: projectId,
       };
 
       // Mock response
-      const transaction = '-34';
-      const expectedResponse = {
+      var transaction = '-34';
+      var expectedResponse = {
         transaction: transaction,
       };
 
@@ -174,14 +174,14 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes beginTransaction with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var request = {
         projectId: projectId,
       };
 
@@ -203,24 +203,24 @@ describe('DatastoreClient', () => {
 
   describe('commit', () => {
     it('invokes commit without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const mode = 'MODE_UNSPECIFIED';
-      const mutations = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var mode = 'MODE_UNSPECIFIED';
+      var mutations = [];
+      var request = {
         projectId: projectId,
         mode: mode,
         mutations: mutations,
       };
 
       // Mock response
-      const indexUpdates = 1425228195;
-      const expectedResponse = {
+      var indexUpdates = 1425228195;
+      var expectedResponse = {
         indexUpdates: indexUpdates,
       };
 
@@ -238,16 +238,16 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes commit with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const mode = 'MODE_UNSPECIFIED';
-      const mutations = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var mode = 'MODE_UNSPECIFIED';
+      var mutations = [];
+      var request = {
         projectId: projectId,
         mode: mode,
         mutations: mutations,
@@ -267,21 +267,21 @@ describe('DatastoreClient', () => {
 
   describe('rollback', () => {
     it('invokes rollback without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const transaction = '-34';
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var transaction = '-34';
+      var request = {
         projectId: projectId,
         transaction: transaction,
       };
 
       // Mock response
-      const expectedResponse = {};
+      var expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.rollback = mockSimpleGrpcMethod(
@@ -297,15 +297,15 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes rollback with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const transaction = '-34';
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var transaction = '-34';
+      var request = {
         projectId: projectId,
         transaction: transaction,
       };
@@ -328,21 +328,21 @@ describe('DatastoreClient', () => {
 
   describe('allocateIds', () => {
     it('invokes allocateIds without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
 
       // Mock response
-      const expectedResponse = {};
+      var expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.allocateIds = mockSimpleGrpcMethod(
@@ -358,15 +358,15 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes allocateIds with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
@@ -389,21 +389,21 @@ describe('DatastoreClient', () => {
 
   describe('reserveIds', () => {
     it('invokes reserveIds without error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
 
       // Mock response
-      const expectedResponse = {};
+      var expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.reserveIds = mockSimpleGrpcMethod(
@@ -419,15 +419,15 @@ describe('DatastoreClient', () => {
     });
 
     it('invokes reserveIds with error', done => {
-      const client = new datastoreModule.v1.DatastoreClient({
+      var client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      const projectId = 'projectId-1969970175';
-      const keys = [];
-      const request = {
+      var projectId = 'projectId-1969970175';
+      var keys = [];
+      var request = {
         projectId: projectId,
         keys: keys,
       };
