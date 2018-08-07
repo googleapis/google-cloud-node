@@ -54,17 +54,6 @@ jobs:
         user: node
     steps: &unit_tests_steps
       - checkout
-      - run: &remove_package_lock
-          name: Remove package-lock.json if needed.
-          command: |
-            WORKFLOW_NAME=`python .circleci/get_workflow_name.py`
-            echo "Workflow name: $WORKFLOW_NAME"
-            if [ "$WORKFLOW_NAME" = "nightly" ]; then
-              echo "Nightly build detected, removing package-lock.json"
-              rm -f package-lock.json samples/package-lock.json
-            else
-              echo "Not a nightly build, skipping this step."
-            fi
       - run: &npm_install_and_link
           name: Install and link the module
           command: |-
@@ -90,7 +79,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: *remove_package_lock
       - run: *npm_install_and_link
       - run: &samples_npm_install_and_link
           name: Link the module being tested to the samples.
@@ -111,7 +99,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: *remove_package_lock
       - run: *npm_install_and_link
       - run:
           name: Build documentation.
@@ -122,7 +109,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: *remove_package_lock
       - run:
           name: Decrypt credentials.
           command: |
