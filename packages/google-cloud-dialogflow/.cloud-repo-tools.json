@@ -12,6 +12,83 @@
       "usage": "node detect.js --help"
     },
     {
+      "id": "dialogflow_create_knowledge_base",
+      "name": "Create Knowledge Base",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.createKnowledgeBase",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_get_knowledge_base",
+      "name": "Get Knowledge Base",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.getKnowledgeBase",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_list_knowledge_base",
+      "name": "list Knowledge Base",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.listKnowledgeBase",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_delete_knowledge_base",
+      "name": "list Knowledge Base",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.deleteKnowledgeBase",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_create_document",
+      "name": "create Document",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.createDocument",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_list_document",
+      "name": "list Documents",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.listDocuments",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_get_document",
+      "name": "Get Document",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.getDocument",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_delete_document",
+      "name": "delete Document",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.deleteDocument",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_detect_intent_with_sentiment_analysis",
+      "name": "detect Intent with sentiment analysis",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentwithSentimentAnalysis",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_detect_intent_with_texttospeech_response",
+      "name": "detect Intent with text-to-speech response",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentwithtexttospeechresponse",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
+      "id": "dialogflow_detect_intent_knowledge",
+      "name": "detect Intent with Knowledge Base",
+      "file": "detect.v2beta1.js",
+      "docs_link": "https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentknowledge",
+      "usage": "node detect.v2beta1.js --help"
+    },
+    {
       "id": "dialogflow_detect_intent_audio",
       "name": "Detect Intent (Audio)",
       "file": "detect.js",
