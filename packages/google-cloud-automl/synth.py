@@ -32,6 +32,6 @@ templates = common_templates.node_library(package_name="@google-cloud/automl")
 s.copy(templates)
 
 # Node.js specific cleanup
-subprocess.run(['npm', 'ci'])
+subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
