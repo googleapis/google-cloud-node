@@ -19,13 +19,102 @@
 import * as arrify from 'arrify';
 import {Service, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
+import {GoogleAuthOptions} from 'google-auth-library';
 import * as extend from 'extend';
 import * as is from 'is';
-import * as isHtml from 'is-html';
+const isHtml = require('is-html');
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
 import * as r from 'request';
 
 const PKG = require('../../package.json');
+
+/**
+ * Translate request options.
+ *
+ * @typedef {object} TranslateRequest
+ * @property {string} [format] Set the text's format as `html` or `text`.
+ *     If not provided, we will try to auto-detect if the text given is HTML.
+ * If not, we set the format as `text`.
+ * @property {string} [from] The ISO 639-1 language code the source input
+ *     is written in.
+ * @property {string} [model] Set the model type requested for this
+ *     translation. Please refer to the upstream documentation for possible
+ *     values.
+ * @property {string} to The ISO 639-1 language code to translate the
+ *     input to.
+ */
+export interface TranslateRequest {
+  format?: string;
+  from?: string;
+  model?: string;
+  to?: string;
+}
+
+/**
+ * @callback TranslateCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object|object[]} translations If a single string input was given, a
+ *     single translation is given. Otherwise, it is an array of translations.
+ * @param {object} apiResponse The full API response.
+ */
+export interface TranslateCallback<T extends string|string[]> {
+  (err: Error|null, translations?: T|null, apiResponse?: r.Response): void;
+}
+
+/**
+ * @typedef {object} DetectResult
+ * @property {string} 0.language The language code matched from the input.
+ * @property {number} [0.confidence] A float 0 - 1. The higher the number, the
+ *     higher the confidence in language detection. Note, this is not always
+ *     returned from the API.
+ * @property {object} 1 The full API response.
+ */
+export interface DetectResult {
+  language: string;
+  confidence: number;
+  input: string;
+}
+
+/**
+ * @callback DetectCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object|object[]} results The detection results.
+ * @param {string} results.language The language code matched from the input.
+ * @param {number} [results.confidence] A float 0 - 1. The higher the number, the
+ *     higher the confidence in language detection. Note, this is not always
+ *     returned from the API.
+ * @param {object} apiResponse The full API response.
+ */
+export interface DetectCallback<T extends DetectResult|DetectResult[]> {
+  (err: Error|null, results?: T|null, apiResponse?: r.Response): void;
+}
+
+/**
+ * @typedef {object} LanguageResult
+ * @property {string} code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+ *     language code.
+ * @property {string} name The language name. This can be translated into your
+ *     preferred language with the `target` option.
+ */
+export interface LanguageResult {
+  code: string;
+  name: string;
+}
+
+/**
+ * @callback GetLanguagesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object[]} results The languages supported by the API.
+ * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+ *     language code.
+ * @param {string} results.name The language name. This can be translated into your
+ *     preferred language with the `target` option.
+ * @param {object} apiResponse The full API response.
+ */
+export interface GetLanguagesCallback {
+  (err: Error|null, results?: LanguageResult[]|null,
+   apiResponse?: r.Response): void;
+}
 
 /**
  * @typedef {object} ClientConfig
@@ -55,6 +144,11 @@ const PKG = require('../../package.json');
  * @property {Constructor} [promise] Custom promise module to use instead of
  *     native Promises.
  */
+export interface TranslateConfig extends GoogleAuthOptions {
+  key?: string;
+  autoRetry?: boolean;
+  maxRetries?: number;
+}
 
 /**
  * With [Google Translate](https://cloud.google.com/translate), you can
@@ -83,10 +177,9 @@ const PKG = require('../../package.json');
  * Full quickstart example:
  */
 export class Translate extends Service {
-  options;
+  options: TranslateConfig;
   key?: string;
-  constructor(options?) {
-    options = options || {};
+  constructor(options?: TranslateConfig) {
     let baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
     if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
@@ -101,32 +194,12 @@ export class Translate extends Service {
     };
 
     super(config, options);
-
-    if (options.key) {
-      this.options = options;
-      this.key = options.key;
+    this.options = options || {};
+    if (this.options.key) {
+      this.key = this.options.key;
     }
   }
 
-  /**
-   * @typedef {array} DetectResponse
-   * @property {object|object[]} 0 The detection results.
-   * @property {string} 0.language The language code matched from the input.
-   * @property {number} [0.confidence] A float 0 - 1. The higher the number, the
-   *     higher the confidence in language detection. Note, this is not always
-   *     returned from the API.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback DetectCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object|object[]} results The detection results.
-   * @param {string} results.language The language code matched from the input.
-   * @param {number} [results.confidence] A float 0 - 1. The higher the number, the
-   *     higher the confidence in language detection. Note, this is not always
-   *     returned from the API.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Detect the language used in a string or multiple strings.
    *
@@ -190,10 +263,14 @@ export class Translate extends Service {
    * region_tag:translate_detect_language
    * Here's a full example:
    */
-  detect(input, callback) {
+  detect(input: string, callback: DetectCallback<DetectResult>): void;
+  detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
+  detect(
+      input: string|string[],
+      callback: DetectCallback<DetectResult>|
+      DetectCallback<DetectResult[]>): void {
     const inputIsArray = Array.isArray(input);
     input = arrify(input);
-
     this.request(
         {
           method: 'POST',
@@ -204,48 +281,31 @@ export class Translate extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            (callback as Function)(err, null, resp);
             return;
           }
 
-          let results = resp.data.detections.map((detection, index) => {
-            const result = extend({}, detection[0], {
-              input: input[index],
-            });
+          let results = resp.data.detections.map(
+              (detection: Array<{}>, index: number) => {
+                const result = extend({}, detection[0], {
+                  input: input[index],
+                });
 
-            // Deprecated.
-            delete result.isReliable;
+                // Deprecated.
+                // tslint:disable-next-line no-any
+                delete (result as any).isReliable;
 
-            return result;
-          });
+                return result;
+              });
 
           if (input.length === 1 && !inputIsArray) {
             results = results[0];
           }
 
-          callback(null, results, resp);
+          (callback as Function)(null, results, resp);
         });
   }
 
-  /**
-   * @typedef {array} GetLanguagesResponse
-   * @property {object[]} 0 The languages supported by the API.
-   * @property {string} 0.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
-   *     language code.
-   * @property {string} 0.name The language name. This can be translated into your
-   *     preferred language with the `target` option.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetLanguagesCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object[]} results The languages supported by the API.
-   * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
-   *     language code.
-   * @param {string} results.name The language name. This can be translated into your
-   *     preferred language with the `target` option.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Get an array of all supported languages.
    *
@@ -264,10 +324,17 @@ export class Translate extends Service {
    * region_tag:translate_list_language_names
    * Gets the language names in a language other than English:
    */
-  getLanguages(target, callback?) {
-    if (is.fn(target)) {
-      callback = target;
+  getLanguages(callback: GetLanguagesCallback): void;
+  getLanguages(target: string, callback: GetLanguagesCallback): void;
+  getLanguages(
+      targetOrCallback?: string|GetLanguagesCallback,
+      callback?: GetLanguagesCallback) {
+    let target: string;
+    if (is.fn(targetOrCallback)) {
+      callback = targetOrCallback as GetLanguagesCallback;
       target = 'en';
+    } else {
+      target = targetOrCallback as string;
     }
 
     const reqOpts = {
@@ -282,49 +349,23 @@ export class Translate extends Service {
 
     this.request(reqOpts, (err, resp) => {
       if (err) {
-        callback(err, null, resp);
+        callback!(err, null, resp);
         return;
       }
 
-      const languages = resp.data.languages.map(language => {
-        return {
-          code: language.language,
-          name: language.name,
-        };
-      });
+      const languages = resp.data.languages.map(
+          (language: {language: string, name: string}) => {
+            return {
+              code: language.language,
+              name: language.name,
+            };
+          });
 
-      callback(null, languages, resp);
+      callback!(null, languages, resp);
     });
   }
 
-  /**
-   * Translate request options.
-   *
-   * @typedef {object} TranslateRequest
-   * @property {string} [format] Set the text's format as `html` or `text`.
-   *     If not provided, we will try to auto-detect if the text given is HTML.
-   * If not, we set the format as `text`.
-   * @property {string} [from] The ISO 639-1 language code the source input
-   *     is written in.
-   * @property {string} [model] Set the model type requested for this
-   *     translation. Please refer to the upstream documentation for possible
-   *     values.
-   * @property {string} to The ISO 639-1 language code to translate the
-   *     input to.
-   */
-  /**
-   * @typedef {array} TranslateResponse
-   * @property {object|object[]} 0 If a single string input was given, a single
-   *     translation is given. Otherwise, it is an array of translations.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback TranslateCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object|object[]} translations If a single string input was given, a
-   *     single translation is given. Otherwise, it is an array of translations.
-   * @param {object} apiResponse The full API response.
-   */
+
   /**
    * Translate a string or multiple strings into another language.
    *
@@ -400,11 +441,30 @@ export class Translate extends Service {
    * region_tag:translate_text_with_model
    * Translation using the premium model:
    */
-  translate(input, options, callback) {
-    const inputIsArray = Array.isArray(input);
-    input = arrify(input);
+  translate(
+      input: string, options: TranslateRequest,
+      callback: TranslateCallback<string>): void;
+  translate(input: string, to: string, callback: TranslateCallback<string>):
+      void;
+  translate(
+      input: string[], options: TranslateRequest,
+      callback: TranslateCallback<string[]>): void;
+  translate(input: string[], to: string, callback: TranslateCallback<string[]>):
+      void;
+  translate(
+      inputs: string|string[], optionsOrTo: string|TranslateRequest,
+      callback: TranslateCallback<string>|TranslateCallback<string[]>) {
+    const inputIsArray = Array.isArray(inputs);
+    const input = arrify(inputs);
+    let options: TranslateRequest = {};
+    if (typeof optionsOrTo === 'object') {
+      options = optionsOrTo as TranslateRequest;
+    } else if (typeof optionsOrTo === 'string') {
+      options = {to: optionsOrTo};
+    }
 
-    const body: {[index: string]: string} = {
+    // tslint:disable-next-line no-any
+    const body: any = {
       q: input,
       format: options.format || (isHtml(input[0]) ? 'html' : 'text'),
     };
@@ -438,17 +498,18 @@ export class Translate extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            (callback as Function)(err, null, resp);
             return;
           }
 
-          let translations = resp.data.translations.map(x => x.translatedText);
+          let translations = resp.data.translations.map(
+              (x: {translatedText: string}) => x.translatedText);
 
           if (body.q.length === 1 && !inputIsArray) {
             translations = translations[0];
           }
 
-          callback(err, translations, resp);
+          (callback as Function)(err, translations, resp);
         });
   }
 
@@ -483,7 +544,7 @@ export class Translate extends Service {
       },
     });
 
-    util.makeRequest(reqOpts, this.options, callback!);
+    util.makeRequest(reqOpts, this.options!, callback!);
   }
 }
 

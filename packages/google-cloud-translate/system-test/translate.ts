@@ -41,8 +41,8 @@ describe('translate', () => {
 
       translate.detect(input, (err, results) => {
         assert.ifError(err);
-        assert.strictEqual(results[0].language, INPUT[0].expectedLanguage);
-        assert.strictEqual(results[1].language, INPUT[1].expectedLanguage);
+        assert.strictEqual(results![0].language, INPUT[0].expectedLanguage);
+        assert.strictEqual(results![1].language, INPUT[1].expectedLanguage);
         done();
       });
     });
@@ -60,7 +60,7 @@ describe('translate', () => {
       },
     ];
 
-    function removeSymbols(input) {
+    function removeSymbols(input: string) {
       // Remove the leading and trailing ! or ? symbols. The API has been known
       // to switch back and forth between returning "Cómo estás hoy" and
       // "¿Cómo estás hoy?", so let's just not depend on that.
@@ -72,9 +72,9 @@ describe('translate', () => {
 
       translate.translate(input, 'es', (err, results) => {
         assert.ifError(err);
-        results = results.map(removeSymbols);
-        assert.strictEqual(results[0], INPUT[0].expectedTranslation);
-        assert.strictEqual(results[1], INPUT[1].expectedTranslation);
+        results = results!.map(removeSymbols);
+        assert.strictEqual(results![0], INPUT[0].expectedTranslation);
+        assert.strictEqual(results![1], INPUT[1].expectedTranslation);
         done();
       });
     });
@@ -89,9 +89,9 @@ describe('translate', () => {
 
       translate.translate(input, opts, (err, results) => {
         assert.ifError(err);
-        results = results.map(removeSymbols);
-        assert.strictEqual(results[0], INPUT[0].expectedTranslation);
-        assert.strictEqual(results[1], INPUT[1].expectedTranslation);
+        results = results!.map(removeSymbols);
+        assert.strictEqual(results![0], INPUT[0].expectedTranslation);
+        assert.strictEqual(results![1], INPUT[1].expectedTranslation);
         done();
       });
     });
@@ -107,7 +107,7 @@ describe('translate', () => {
       translate.translate(input, opts, (err, results) => {
         assert.ifError(err);
 
-        const translation = results.split(/<\/*body>/g)[1].trim();
+        const translation = results!.split(/<\/*body>/g)[1].trim();
 
         assert.strictEqual(
             removeSymbols(translation), INPUT[0].expectedTranslation);
@@ -122,7 +122,7 @@ describe('translate', () => {
       translate.getLanguages((err, languages) => {
         assert.ifError(err);
 
-        const englishResult = languages.filter((language) => {
+        const englishResult = languages!.filter(language => {
           return language.code === 'en';
         })[0];
 
@@ -139,7 +139,7 @@ describe('translate', () => {
       translate.getLanguages('es', (err, languages) => {
         assert.ifError(err);
 
-        const englishResult = languages.filter((language) => {
+        const englishResult = languages!.filter((language) => {
           return language.code === 'en';
         })[0];
 
