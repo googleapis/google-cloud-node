@@ -38,6 +38,9 @@ npmaudit: &npmaudit
   steps:
     - checkout
     - run:
+        name: Create package-lock.json.
+        command: npm i --package-lock-only
+    - run:
         name: Run npm security audit.
         command: npm audit
 
