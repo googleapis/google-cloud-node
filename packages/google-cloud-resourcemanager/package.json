@@ -61,7 +61,7 @@
     "presystem-test": "npm run compile"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.20.0",
+    "@google-cloud/common": "^0.21.0",
     "@google-cloud/paginator": "^0.1.0",
     "@google-cloud/promisify": "^0.3.0",
     "extend": "^3.0.0",
