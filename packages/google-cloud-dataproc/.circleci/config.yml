@@ -59,7 +59,7 @@ jobs:
       - image: 'node:6'
         user: node
     steps: &unit_tests_steps
-      - checkout 
+      - checkout
       - run: &npm_install_and_link
           name: Install and link the module
           command: |-
@@ -69,7 +69,7 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
       - run: node_modules/.bin/codecov
-  
+
   node8:
     docker:
       - image: 'node:8'
@@ -153,6 +153,7 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
+            GCLOUD_PROJECT: long-door-651
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.
