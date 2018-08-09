@@ -36,38 +36,40 @@ function FakeService() {
 
 var extended = false;
 var fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Resource') {
-      return;
-    }
-
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'Resource');
-    assert.deepStrictEqual(methods, ['getProjects']);
-    extended = true;
-  },
-  streamify: function(methodName) {
-    return methodName;
-  },
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Resource') {
+        return;
+      }
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'Resource');
+      assert.deepStrictEqual(methods, ['getProjects']);
+      extended = true;
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
+  }
 };
 
 var promisified = true;
+const fakePromisify = {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Resource') {
+      return;
+    }
+    promisified = true;
+    assert.deepStrictEqual(options.exclude, ['operation', 'project']);
+  },
+};
+
 var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: function() {
     if (makeAuthenticatedRequestFactoryOverride) {
       return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
     }
-
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
-  },
-  promisifyAll: function(Class, options) {
-    if (Class.name !== 'Resource') {
-      return;
-    }
-
-    promisified = true;
-    assert.deepStrictEqual(options.exclude, ['operation', 'project']);
   },
 });
 var originalFakeUtil = extend(true, {}, fakeUtil);
@@ -83,10 +85,10 @@ describe('Resource', function() {
       '@google-cloud/common': {
         Operation: FakeOperation,
         Service: FakeService,
-        paginator: fakePaginator,
-        util: fakeUtil,
       },
-      './project.js': FakeProject,
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/paginator': fakePaginator,
+      './project': FakeProject,
     });
   });
 

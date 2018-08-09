@@ -16,7 +16,9 @@
 
 'use strict';
 
-import * as common from '@google-cloud/common';
+import {Service, Operation} from '@google-cloud/common';
+import {paginator} from '@google-cloud/paginator';
+import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as util from 'util';
@@ -91,10 +93,10 @@ function Resource(options) {
     packageJson: require('../../package.json'),
   };
 
-  common.Service.call(this, config, options);
+  Service.call(this, config, options);
 }
 
-util.inherits(Resource, common.Service);
+util.inherits(Resource, Service);
 
 /**
  * Create a project.
@@ -304,7 +306,7 @@ Resource.prototype.getProjects = function(options, callback) {
  *     this.end();
  *   });
  */
-Resource.prototype.getProjectsStream = common.paginator.streamify(
+Resource.prototype.getProjectsStream = paginator.streamify(
   'getProjects'
 );
 
@@ -330,7 +332,7 @@ Resource.prototype.operation = function(name) {
     throw new Error('A name must be specified for an operation.');
   }
 
-  return new common.Operation({
+  return new Operation({
     parent: this,
     id: name,
   });
@@ -365,14 +367,14 @@ Resource.prototype.project = function(id) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Resource, ['getProjects']);
+paginator.extend(Resource, ['getProjects']);
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Resource, {
+promisifyAll(Resource, {
   exclude: ['operation', 'project'],
 });
 

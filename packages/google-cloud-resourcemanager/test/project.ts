@@ -18,13 +18,13 @@
 
 import * as assert from 'assert';
 import * as extend from 'extend';
-var nodeutil = require('util');
+import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+import {ServiceObject, util} from '@google-cloud/common';
+import * as promisify from '@google-cloud/promisify';
 
 var promisified = false;
-var fakeUtil = extend({}, util, {
+var fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -52,8 +52,8 @@ describe('Project', function() {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify
     });
   });
 
