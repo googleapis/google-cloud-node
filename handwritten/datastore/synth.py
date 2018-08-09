@@ -12,7 +12,7 @@ common_templates = gcp.CommonTemplates()
 # tasks has two product names, and a poorly named artman yaml
 version = 'v1'
 library = gapic.node_library(
-    'datastore', version, 
+    'datastore', version,
     config_path='/google/datastore/artman_datastore.yaml')
 
 # Copy everything except for top level index, package.json, and README.md
@@ -25,6 +25,6 @@ s.copy(templates)
 
 
 # Node.js specific cleanup
-subprocess.run(['npm', 'ci'])
+subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
