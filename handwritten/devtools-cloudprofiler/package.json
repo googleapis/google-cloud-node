@@ -33,7 +33,7 @@
     "gcp-metadata": "^0.7.0",
     "nan": "^2.8.0",
     "parse-duration": "^0.1.1",
-    "pify": "^3.0.0",
+    "pify": "^4.0.0",
     "pretty-ms": "^3.1.0",
     "protobufjs": "~6.8.6",
     "request": "^2.83.0",
