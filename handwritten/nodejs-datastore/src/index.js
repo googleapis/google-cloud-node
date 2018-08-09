@@ -359,6 +359,7 @@ const gapic = Object.freeze({
  * });
  */
 function Datastore(options) {
+  options = options || {};
   if (!(this instanceof Datastore)) {
     return new Datastore(options);
   }
