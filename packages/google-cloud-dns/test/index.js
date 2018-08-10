@@ -21,23 +21,26 @@ const assert = require('assert');
 const extend = require('extend');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const Service = require('@google-cloud/common').Service;
-const util = require('@google-cloud/common').util;
+const {Service} = require('@google-cloud/common');
+const {util} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 
 let extended = false;
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'DNS') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'DNS') {
+        return;
+      }
 
-    extended = true;
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'DNS');
-    assert.deepStrictEqual(methods, ['getZones']);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      extended = true;
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'DNS');
+      assert.deepStrictEqual(methods, ['getZones']);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -48,19 +51,21 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
-let promisified = false;
 const fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop,
+  makeAuthenticatedRequestFactory: function() {},
+});
+const originalFakeUtil = extend(true, {}, fakeUtil);
+
+let promisified = false;
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'DNS') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, ['zone']);
   },
 });
-const originalFakeUtil = extend(true, {}, fakeUtil);
 
 function FakeZone() {
   this.calledWith_ = arguments;
@@ -76,10 +81,10 @@ describe('DNS', function() {
     DNS = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        paginator: fakePaginator,
-        util: fakeUtil,
       },
-      './zone.js': FakeZone,
+      '@google-cloud/paginator': fakePaginator,
+      '@google-cloud/promisify': fakePromisify,
+      './zone': FakeZone,
     });
   });
 
@@ -107,20 +112,6 @@ describe('DNS', function() {
       assert.doesNotThrow(function() {
         DNS({projectId: PROJECT_ID});
       });
-    });
-
-    it('should normalize the arguments', function() {
-      let normalizeArgumentsCalled = false;
-      const options = {};
-
-      fakeUtil.normalizeArguments = function(context, options_) {
-        normalizeArgumentsCalled = true;
-        assert.strictEqual(options_, options);
-        return options_;
-      };
-
-      new DNS(options);
-      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should inherit from Service', function() {

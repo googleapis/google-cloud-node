@@ -16,7 +16,8 @@
 
 'use strict';
 
-const common = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
+const {promisifyAll} = require('@google-cloud/promisify');
 const util = require('util');
 
 /**
@@ -167,7 +168,7 @@ function Change(zone, id) {
    * @name Change#metadata
    * @type {object}
    */
-  common.ServiceObject.call(this, {
+  ServiceObject.call(this, {
     parent: zone,
 
     /**
@@ -186,7 +187,7 @@ function Change(zone, id) {
   });
 }
 
-util.inherits(Change, common.ServiceObject);
+util.inherits(Change, ServiceObject);
 
 /**
  * Create a change.
@@ -243,6 +244,6 @@ Change.prototype.create = function(config, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Change);
+promisifyAll(Change);
 
 module.exports = Change;

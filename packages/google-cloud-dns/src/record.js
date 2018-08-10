@@ -17,7 +17,7 @@
 'use strict';
 
 const arrify = require('arrify');
-const common = require('@google-cloud/common');
+const {promisifyAll} = require('@google-cloud/promisify');
 const extend = require('extend');
 const format = require('string-format-obj');
 
@@ -201,7 +201,7 @@ Record.prototype.toString = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Record, {
+promisifyAll(Record, {
   exclude: ['toJSON', 'toString'],
 });
 

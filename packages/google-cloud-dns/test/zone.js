@@ -24,16 +24,16 @@ const flatten = require('lodash.flatten');
 const nodeutil = require('util');
 const prop = require('propprop');
 const proxyquire = require('proxyquire');
-const {ServiceObject, util} = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 const uuid = require('uuid');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Zone') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, ['change', 'record']);
   },
@@ -42,7 +42,7 @@ const fakeUtil = extend({}, util, {
 let parseOverride;
 const fakeDnsZonefile = {
   parse: function() {
-    return (parseOverride || util.noop).apply(null, arguments);
+    return (parseOverride || function() {}).apply(null, arguments);
   },
 };
 
@@ -50,10 +50,10 @@ let writeFileOverride;
 let readFileOverride;
 const fakeFs = {
   readFile: function() {
-    return (readFileOverride || util.noop).apply(null, arguments);
+    return (readFileOverride || function() {}).apply(null, arguments);
   },
   writeFile: function() {
-    return (writeFileOverride || util.noop).apply(null, arguments);
+    return (writeFileOverride || function() {}).apply(null, arguments);
   },
 };
 
@@ -79,18 +79,20 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let extended = false;
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Zone') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Zone') {
+        return;
+      }
 
-    extended = true;
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'Zone');
-    assert.deepStrictEqual(methods, ['getChanges', 'getRecords']);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      extended = true;
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'Zone');
+      assert.deepStrictEqual(methods, ['getChanges', 'getRecords']);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -99,7 +101,7 @@ describe('Zone', function() {
   let zone;
 
   const DNS = {
-    createZone: util.noop,
+    createZone: function() {},
   };
   const ZONE_NAME = 'zone-name';
 
@@ -109,11 +111,11 @@ describe('Zone', function() {
       fs: fakeFs,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator,
-        util: fakeUtil,
       },
-      './change.js': FakeChange,
-      './record.js': FakeRecord,
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/paginator': fakePaginator,
+      './change': FakeChange,
+      './record': FakeRecord,
     });
   });
 
@@ -214,7 +216,7 @@ describe('Zone', function() {
 
     it('should throw error if add or delete is not provided', function() {
       assert.throws(function() {
-        zone.createChange({}, util.noop);
+        zone.createChange({}, function() {});
       }, /Cannot create a change with no additions or deletions/);
     });
 

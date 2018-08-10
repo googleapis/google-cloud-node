@@ -17,7 +17,9 @@
 'use strict';
 
 const arrify = require('arrify');
-const common = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
+const {paginator} = require('@google-cloud/paginator');
+const {promisifyAll} = require('@google-cloud/promisify');
 const exec = require('methmeth');
 const extend = require('extend');
 const flatten = require('lodash.flatten');
@@ -198,7 +200,7 @@ function Zone(dns, name) {
    * @name Zone#metadata
    * @type {object}
    */
-  common.ServiceObject.call(this, {
+  ServiceObject.call(this, {
     parent: dns,
 
     /**
@@ -224,7 +226,7 @@ function Zone(dns, name) {
   this.name = name;
 }
 
-util.inherits(Zone, common.ServiceObject);
+util.inherits(Zone, ServiceObject);
 
 /**
  * @typedef {array} ZoneAddRecordsResponse
@@ -463,7 +465,7 @@ Zone.prototype.delete = function(options, callback) {
     return;
   }
 
-  common.ServiceObject.prototype.delete.call(this, callback);
+  ServiceObject.prototype.delete.call(this, callback);
 };
 
 /**
@@ -798,7 +800,7 @@ Zone.prototype.getChanges = function(query, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
+Zone.prototype.getChangesStream = paginator.streamify('getChanges');
 
 /**
  * Query object for listing records.
@@ -980,7 +982,7 @@ Zone.prototype.getRecords = function(query, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
+Zone.prototype.getRecordsStream = paginator.streamify('getRecords');
 
 /**
  * @typedef {array} ZoneImportResponse
@@ -1229,14 +1231,14 @@ Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Zone, ['getChanges', 'getRecords']);
+paginator.extend(Zone, ['getChanges', 'getRecords']);
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Zone, {
+promisifyAll(Zone, {
   exclude: ['change', 'record'],
 });
 

@@ -54,6 +54,8 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.20.0",
+    "@google-cloud/paginator": "^0.1.0",
+    "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
     "dns-zonefile": "0.2.2",
     "extend": "^3.0.0",

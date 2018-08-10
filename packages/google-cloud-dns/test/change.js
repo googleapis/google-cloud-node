@@ -20,11 +20,11 @@ const assert = require('assert');
 const extend = require('extend');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = require('@google-cloud/common').ServiceObject;
-const util = require('@google-cloud/common').util;
+const {ServiceObject} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Change') {
       promisified = true;
@@ -45,17 +45,17 @@ describe('Change', function() {
 
   const ZONE = {
     name: 'zone-name',
-    createChange: util.noop,
+    createChange: function() {},
   };
 
   const CHANGE_ID = 'change-id';
 
   before(function() {
-    Change = proxyquire('../src/change.js', {
+    Change = proxyquire('../src/change', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
     });
   });
 

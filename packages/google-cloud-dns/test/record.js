@@ -19,15 +19,14 @@
 const assert = require('assert');
 const extend = require('extend');
 const proxyquire = require('proxyquire');
-const util = require('@google-cloud/common').util;
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Record') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, ['toJSON', 'toString']);
   },
@@ -38,7 +37,7 @@ describe('Record', function() {
   let record;
 
   const ZONE = {
-    deleteRecords: util.noop,
+    deleteRecords: function() {},
   };
   const TYPE = 'A';
   const METADATA = {
@@ -48,10 +47,8 @@ describe('Record', function() {
   };
 
   before(function() {
-    Record = proxyquire('../src/record.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
+    Record = proxyquire('../src/record', {
+      '@google-cloud/promisify': fakePromisify,
     });
   });
 

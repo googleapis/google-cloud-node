@@ -17,7 +17,9 @@
 'use strict';
 
 const arrify = require('arrify');
-const common = require('@google-cloud/common');
+const {Service} = require('@google-cloud/common');
+const {paginator} = require('@google-cloud/paginator');
+const {promisifyAll} = require('@google-cloud/promisify');
 const extend = require('extend');
 const is = require('is');
 const util = require('util');
@@ -83,7 +85,7 @@ function DNS(options) {
     return new DNS(options);
   }
 
-  options = common.util.normalizeArguments(this, options);
+  options = options || {};
 
   const config = {
     baseUrl: 'https://www.googleapis.com/dns/v1',
@@ -94,10 +96,10 @@ function DNS(options) {
     packageJson: require('../package.json'),
   };
 
-  common.Service.call(this, config, options);
+  Service.call(this, config, options);
 }
 
-util.inherits(DNS, common.Service);
+util.inherits(DNS, Service);
 
 /**
  * Config to set for the zone.
@@ -304,7 +306,7 @@ DNS.prototype.getZones = function(query, callback) {
  *     this.end();
  *   });
  */
-DNS.prototype.getZonesStream = common.paginator.streamify('getZones');
+DNS.prototype.getZonesStream = paginator.streamify('getZones');
 
 /**
  * Get a reference to a Zone.
@@ -333,14 +335,14 @@ DNS.prototype.zone = function(name) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(DNS, 'getZones');
+paginator.extend(DNS, 'getZones');
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(DNS, {
+promisifyAll(DNS, {
   exclude: ['zone'],
 });
 
