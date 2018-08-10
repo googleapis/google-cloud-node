@@ -221,9 +221,8 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose uptime check configurations are listed. The format is
-   *
-   *     `projects/[PROJECT_ID]`.
+   *   The project whose uptime check configurations are listed. The format
+   *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -331,9 +330,8 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose uptime check configurations are listed. The format is
-   *
-   *     `projects/[PROJECT_ID]`.
+   *   The project whose uptime check configurations are listed. The format
+   *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -378,9 +376,8 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The uptime check configuration to retrieve. The format is
-   *
-   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+   *   The uptime check configuration to retrieve. The format
+   *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -426,9 +423,8 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which to create the uptime check. The format is:
-   *
-   *     `projects/[PROJECT_ID]`.
+   *   The project in which to create the uptime check. The format
+   *     is `projects/[PROJECT_ID]`.
    * @param {Object} request.uptimeCheckConfig
    *   The new uptime check configuration.
    *
@@ -493,10 +489,14 @@ class UptimeCheckServiceClient {
    *   Required. If an `"updateMask"` has been specified, this field gives
    *   the values for the set of fields mentioned in the `"updateMask"`. If an
    *   `"updateMask"` has not been given, this uptime check configuration replaces
-   *   the current configuration. If a field is mentioned in `"updateMask`" but
+   *   the current configuration. If a field is mentioned in `"updateMask"` but
    *   the corresonding field is omitted in this partial uptime check
    *   configuration, it has the effect of deleting/clearing the field from the
    *   configuration on the server.
+   *
+   *   The following fields can be updated: `display_name`,
+   *   `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
+   *   `selected_regions`.
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
    * @param {Object} [request.updateMask]
@@ -557,9 +557,8 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The uptime check configuration to delete. The format is
-   *
-   *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+   *   The uptime check configuration to delete. The format
+   *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

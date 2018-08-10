@@ -1749,10 +1749,12 @@ describe('UptimeCheckServiceClient', () => {
 
       // Mock response
       var nextPageToken = '';
+      var totalSize = 705419236;
       var uptimeCheckConfigsElement = {};
       var uptimeCheckConfigs = [uptimeCheckConfigsElement];
       var expectedResponse = {
         nextPageToken: nextPageToken,
+        totalSize: totalSize,
         uptimeCheckConfigs: uptimeCheckConfigs,
       };
 
@@ -1820,9 +1822,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       var name2 = 'name2-1052831874';
       var displayName = 'displayName1615086568';
+      var isInternal = true;
       var expectedResponse = {
         name: name2,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer
@@ -1887,9 +1891,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       var name = 'name3373707';
       var displayName = 'displayName1615086568';
+      var isInternal = true;
       var expectedResponse = {
         name: name,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer
@@ -1951,9 +1957,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       var name = 'name3373707';
       var displayName = 'displayName1615086568';
+      var isInternal = true;
       var expectedResponse = {
         name: name,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer

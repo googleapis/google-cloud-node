@@ -16,6 +16,34 @@
 // to be loaded as the JS file.
 
 /**
+ * Nimbus InternalCheckers.
+ *
+ * @property {string} projectId
+ *   The GCP project ID. Not necessarily the same as the project_id for the
+ *   config.
+ *
+ * @property {string} network
+ *   The internal network to perform this uptime check on.
+ *
+ * @property {string} gcpZone
+ *   The GCP zone the uptime check should egress from. Only respected for
+ *   internal uptime checks, where internal_network is specified.
+ *
+ * @property {string} checkerId
+ *   The checker ID.
+ *
+ * @property {string} displayName
+ *   The checker's human-readable name.
+ *
+ * @typedef InternalChecker
+ * @memberof google.monitoring.v3
+ * @see [google.monitoring.v3.InternalChecker definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
+ */
+var InternalChecker = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * This message configures which resources and services to monitor for
  * availability.
  *
@@ -35,7 +63,15 @@
  *   to identify; however, uniqueness is not enforced. Required.
  *
  * @property {Object} monitoredResource
- *   The monitored resource associated with the configuration.
+ *   The [monitored
+ *   resource](https://cloud.google.com/monitoring/api/resources) associated
+ *   with the configuration.
+ *   The following monitored resource types are supported for uptime checks:
+ *     uptime_url
+ *     gce_instance
+ *     gae_app
+ *     aws_ec2_instance
+ *     aws_elb_load_balancer
  *
  *   This object should have the same structure as [MonitoredResource]{@link google.api.MonitoredResource}
  *
@@ -55,8 +91,10 @@
  *   This object should have the same structure as [TcpCheck]{@link google.monitoring.v3.TcpCheck}
  *
  * @property {Object} period
- *   How often the uptime check is performed.
- *   Currently, only 1, 5, 10, and 15 minutes are supported. Required.
+ *   How often, in seconds, the uptime check is performed.
+ *   Currently, the only supported values are `60s` (1 minute), `300s`
+ *   (5 minutes), `600s` (10 minutes), and `900s` (15 minutes). Optional,
+ *   defaults to `300s`.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
@@ -84,8 +122,13 @@
  *
  *   The number should be among the values of [UptimeCheckRegion]{@link google.monitoring.v3.UptimeCheckRegion}
  *
+ * @property {boolean} isInternal
+ *   Denotes whether this is a check that egresses from InternalCheckers.
+ *
  * @property {Object[]} internalCheckers
- *   The internal checkers that this check will egress from.
+ *   The internal checkers that this check will egress from. If `is_internal` is
+ *   true and this list is empty, the check will egress from all
+ *   InternalCheckers configured for the project that owns this CheckConfig.
  *
  *   This object should have the same structure as [InternalChecker]{@link google.monitoring.v3.InternalChecker}
  *
@@ -155,6 +198,7 @@ var UptimeCheckConfig = {
    *   https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
    *   Entering two separate headers with the same key in a Create call will
    *   cause the first to be overwritten by the second.
+   *   The maximum number of headers allowed is 100.
    *
    * @typedef HttpCheck
    * @memberof google.monitoring.v3
@@ -205,40 +249,13 @@ var UptimeCheckConfig = {
    * and more complex matching.
    *
    * @property {string} content
-   *   String content to match
+   *   String content to match (max 1024 bytes)
    *
    * @typedef ContentMatcher
    * @memberof google.monitoring.v3
    * @see [google.monitoring.v3.UptimeCheckConfig.ContentMatcher definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
    */
   ContentMatcher: {
-    // This is for documentation. Actual contents will be loaded by gRPC.
-  },
-
-  /**
-   * Nimbus InternalCheckers.
-   *
-   * @property {string} projectId
-   *   The GCP project ID. Not necessarily the same as the project_id for the config.
-   *
-   * @property {string} network
-   *   The internal network to perform this uptime check on.
-   *
-   * @property {string} gcpZone
-   *   The GCP zone the uptime check should egress from. Only respected for
-   *   internal uptime checks, where internal_network is specified.
-   *
-   * @property {string} checkerId
-   *   The checker ID.
-   *
-   * @property {string} displayName
-   *   The checker's human-readable name.
-   *
-   * @typedef InternalChecker
-   * @memberof google.monitoring.v3
-   * @see [google.monitoring.v3.UptimeCheckConfig.InternalChecker definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
-   */
-  InternalChecker: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
@@ -311,8 +328,10 @@ var UptimeCheckRegion = {
 
 /**
  * The supported resource types that can be used as values of
- * group_resource.resource_type. gae_app and uptime_url are not allowed
- * because group checks on App Engine modules and URLs are not allowed.
+ * `group_resource.resource_type`.
+ * `INSTANCE` includes `gce_instance` and `aws_ec2_instance` resource types.
+ * The resource types `gae_app` and `uptime_url` are not valid here because
+ * group checks on App Engine modules and URLs are not allowed.
  *
  * @enum {number}
  * @memberof google.monitoring.v3
@@ -325,12 +344,13 @@ var GroupResourceType = {
   RESOURCE_TYPE_UNSPECIFIED: 0,
 
   /**
-   * A group of instances (could be either GCE or AWS_EC2).
+   * A group of instances from Google Cloud Platform (GCP) or
+   * Amazon Web Services (AWS).
    */
   INSTANCE: 1,
 
   /**
-   * A group of AWS load balancers.
+   * A group of Amazon ELB load balancers.
    */
   AWS_ELB_LOAD_BALANCER: 2
 };

@@ -19,14 +19,14 @@
  * A single data point in a time series.
  *
  * @property {Object} interval
- *   The time interval to which the data point applies.  For GAUGE metrics, only
- *   the end time of the interval is used.  For DELTA metrics, the start and end
- *   time should specify a non-zero interval, with subsequent points specifying
- *   contiguous and non-overlapping intervals.  For CUMULATIVE metrics, the
- *   start and end time should specify a non-zero interval, with subsequent
- *   points specifying the same start time and increasing end times, until an
- *   event resets the cumulative value to zero and sets a new start time for the
- *   following points.
+ *   The time interval to which the data point applies.  For `GAUGE` metrics,
+ *   only the end time of the interval is used.  For `DELTA` metrics, the start
+ *   and end time should specify a non-zero interval, with subsequent points
+ *   specifying contiguous and non-overlapping intervals.  For `CUMULATIVE`
+ *   metrics, the start and end time should specify a non-zero interval, with
+ *   subsequent points specifying the same start time and increasing end times,
+ *   until an event resets the cumulative value to zero and sets a new start
+ *   time for the following points.
  *
  *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
  *
@@ -56,10 +56,17 @@ var Point = {
  *   This object should have the same structure as [Metric]{@link google.api.Metric}
  *
  * @property {Object} resource
- *   The associated resource. A fully-specified monitored resource used to
- *   identify the time series.
+ *   The associated monitored resource.  Custom metrics can use only certain
+ *   monitored resource types in their time series data.
  *
  *   This object should have the same structure as [MonitoredResource]{@link google.api.MonitoredResource}
+ *
+ * @property {Object} metadata
+ *   Output only. The associated monitored resource metadata. When reading a
+ *   a timeseries, this field will include metadata labels that are explicitly
+ *   named in the reduction. When creating a timeseries, this field is ignored.
+ *
+ *   This object should have the same structure as [MonitoredResourceMetadata]{@link google.api.MonitoredResourceMetadata}
  *
  * @property {number} metricKind
  *   The metric kind of the time series. When listing time series, this metric
@@ -85,8 +92,8 @@ var Point = {
  *   The number should be among the values of [ValueType]{@link google.api.ValueType}
  *
  * @property {Object[]} points
- *   The data points of this time series. When listing time series, the order of
- *   the points is specified by the list method.
+ *   The data points of this time series. When listing time series, points are
+ *   returned in reverse time order.
  *
  *   When creating a time series, this field must contain exactly one point and
  *   the point's type must be the same as the value type of the associated

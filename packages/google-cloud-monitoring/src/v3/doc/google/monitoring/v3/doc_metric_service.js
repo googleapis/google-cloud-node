@@ -48,7 +48,7 @@ var ListMonitoredResourceDescriptorsRequest = {
 };
 
 /**
- * The `ListMonitoredResourcDescriptors` response.
+ * The `ListMonitoredResourceDescriptors` response.
  *
  * @property {Object[]} resourceDescriptors
  *   The monitored resource descriptors that are available to this project
@@ -227,9 +227,8 @@ var DeleteMetricDescriptorRequest = {
  *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
  *
  * @property {string} orderBy
- *   Specifies the order in which the points of the time series should
- *   be returned.  By default, results are not ordered.  Currently,
- *   this field must be left blank.
+ *   Unsupported: must be left blank. The points in each time series are
+ *   returned in reverse time order.
  *
  * @property {number} view
  *   Specifies which information is returned about the time series.
@@ -237,10 +236,11 @@ var DeleteMetricDescriptorRequest = {
  *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
  *
  * @property {number} pageSize
- *   A positive number that is the maximum number of results to return.
- *   When `view` field sets to `FULL`, it limits the number of `Points` server
- *   will return; if `view` field is `HEADERS`, it limits the number of
- *   `TimeSeries` server will return.
+ *   A positive number that is the maximum number of results to return. If
+ *   `page_size` is empty or more than 100,000 results, the effective
+ *   `page_size` is 100,000 results. If `view` is set to `FULL`, this is the
+ *   maximum number of `Points` returned. If `view` is set to `HEADERS`, this is
+ *   the maximum number of `TimeSeries` returned.
  *
  * @property {string} pageToken
  *   If this field is not empty then it must contain the `nextPageToken` value
@@ -288,6 +288,12 @@ var ListTimeSeriesRequest = {
  *   If there are more results than have been returned, then this field is set
  *   to a non-empty value.  To see the additional results,
  *   use that value as `pageToken` in the next call to this method.
+ *
+ * @property {Object[]} executionErrors
+ *   Query execution errors that may have caused the time series data returned
+ *   to be incomplete.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @typedef ListTimeSeriesResponse
  * @memberof google.monitoring.v3

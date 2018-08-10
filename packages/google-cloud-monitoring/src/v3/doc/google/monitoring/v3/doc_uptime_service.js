@@ -19,9 +19,8 @@
  * The protocol for the `ListUptimeCheckConfigs` request.
  *
  * @property {string} parent
- *   The project whose uptime check configurations are listed. The format is
- *
- *     `projects/[PROJECT_ID]`.
+ *   The project whose uptime check configurations are listed. The format
+ *     is `projects/[PROJECT_ID]`.
  *
  * @property {number} pageSize
  *   The maximum number of results to return in a single response. The server
@@ -57,6 +56,10 @@ var ListUptimeCheckConfigsRequest = {
  *   next_page_token is passed to the subsequent List method call (in the
  *   request message's page_token field).
  *
+ * @property {number} totalSize
+ *   The total number of uptime check configurations for the project,
+ *   irrespective of any pagination.
+ *
  * @typedef ListUptimeCheckConfigsResponse
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListUptimeCheckConfigsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
@@ -69,9 +72,8 @@ var ListUptimeCheckConfigsResponse = {
  * The protocol for the `GetUptimeCheckConfig` request.
  *
  * @property {string} name
- *   The uptime check configuration to retrieve. The format is
- *
- *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+ *   The uptime check configuration to retrieve. The format
+ *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
  *
  * @typedef GetUptimeCheckConfigRequest
  * @memberof google.monitoring.v3
@@ -85,9 +87,8 @@ var GetUptimeCheckConfigRequest = {
  * The protocol for the `CreateUptimeCheckConfig` request.
  *
  * @property {string} parent
- *   The project in which to create the uptime check. The format is:
- *
- *     `projects/[PROJECT_ID]`.
+ *   The project in which to create the uptime check. The format
+ *     is `projects/[PROJECT_ID]`.
  *
  * @property {Object} uptimeCheckConfig
  *   The new uptime check configuration.
@@ -117,10 +118,14 @@ var CreateUptimeCheckConfigRequest = {
  *   Required. If an `"updateMask"` has been specified, this field gives
  *   the values for the set of fields mentioned in the `"updateMask"`. If an
  *   `"updateMask"` has not been given, this uptime check configuration replaces
- *   the current configuration. If a field is mentioned in `"updateMask`" but
+ *   the current configuration. If a field is mentioned in `"updateMask"` but
  *   the corresonding field is omitted in this partial uptime check
  *   configuration, it has the effect of deleting/clearing the field from the
  *   configuration on the server.
+ *
+ *   The following fields can be updated: `display_name`,
+ *   `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
+ *   `selected_regions`.
  *
  *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
  *
@@ -136,9 +141,8 @@ var UpdateUptimeCheckConfigRequest = {
  * The protocol for the `DeleteUptimeCheckConfig` request.
  *
  * @property {string} name
- *   The uptime check configuration to delete. The format is
- *
- *     `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+ *   The uptime check configuration to delete. The format
+ *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
  *
  * @typedef DeleteUptimeCheckConfigRequest
  * @memberof google.monitoring.v3

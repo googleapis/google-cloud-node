@@ -806,9 +806,8 @@ class MetricServiceClient {
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
    * @param {string} [request.orderBy]
-   *   Specifies the order in which the points of the time series should
-   *   be returned.  By default, results are not ordered.  Currently,
-   *   this field must be left blank.
+   *   Unsupported: must be left blank. The points in each time series are
+   *   returned in reverse time order.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -957,9 +956,8 @@ class MetricServiceClient {
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
    * @param {string} [request.orderBy]
-   *   Specifies the order in which the points of the time series should
-   *   be returned.  By default, results are not ordered.  Currently,
-   *   this field must be left blank.
+   *   Unsupported: must be left blank. The points in each time series are
+   *   returned in reverse time order.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
