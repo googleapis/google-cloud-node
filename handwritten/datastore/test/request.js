@@ -20,7 +20,7 @@ const assert = require('assert');
 const extend = require('extend');
 const is = require('is');
 const proxyquire = require('proxyquire');
-const sinon = require('sinon').sandbox.create();
+const sinon = require('sinon');
 const through = require('through2');
 const pfy = require('@google-cloud/promisify');
 const pjy = require('@google-cloud/projectify');
@@ -50,38 +50,6 @@ const fakeV1 = {
   },
 };
 
-let overrides = {};
-
-function override(name, object) {
-  const cachedObject = extend({}, object);
-  overrides[name] = {};
-
-  Object.keys(object).forEach(function(methodName) {
-    if (typeof object[methodName] !== 'function') {
-      return;
-    }
-
-    object[methodName] = function() {
-      const args = arguments;
-
-      if (overrides[name][methodName]) {
-        return overrides[name][methodName].apply(this, args);
-      }
-
-      return cachedObject[methodName].apply(this, args);
-    };
-  });
-}
-
-function resetOverrides() {
-  overrides = Object.keys(overrides).reduce(function(acc, name) {
-    acc[name] = {};
-    return acc;
-  }, {});
-}
-
-override('entity', entity);
-
 function FakeQuery() {
   this.calledWith_ = arguments;
 }
@@ -93,25 +61,24 @@ describe('Request', function() {
   let request;
 
   let key;
+  let sandbox;
 
   before(function() {
-    Request = proxyquire('../src/request.js', {
+    Request = proxyquire('../src/request', {
       '@google-cloud/promisify': fakePfy,
       '@google-cloud/projectify': fakePjy,
-      './entity.js': entity,
-      './query.js': FakeQuery,
+      './entity': entity,
+      './query': FakeQuery,
       './v1': fakeV1,
     });
-
-    override('Request', Request);
   });
 
   after(function() {
     v1FakeClientOverride = null;
-    resetOverrides();
   });
 
   beforeEach(function() {
+    sandbox = sinon.createSandbox();
     pjyOverride = null;
     key = new entity.Key({
       namespace: 'namespace',
@@ -119,8 +86,11 @@ describe('Request', function() {
     });
     FakeQuery.prototype = new Query();
     v1FakeClientOverride = null;
-    resetOverrides();
     request = new Request();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   describe('instantiation', function() {
@@ -140,13 +110,9 @@ describe('Request', function() {
         method: 'insert',
       };
       const expectedPreparedEntityObject = extend(true, {}, obj);
-
       const preparedEntityObject = Request.prepareEntityObject_(obj);
-
       assert.notStrictEqual(preparedEntityObject, obj);
-
       assert.notStrictEqual(preparedEntityObject.data.nested, obj.data.nested);
-
       assert.deepStrictEqual(
         preparedEntityObject,
         expectedPreparedEntityObject
@@ -173,16 +139,12 @@ describe('Request', function() {
       allocations: ALLOCATIONS,
     };
 
-    beforeEach(function() {
-      overrides.entity.isKeyComplete = function() {};
-      overrides.entity.keyToKeyProto = function() {};
-    });
-
     it('should throw if the key is complete', function() {
-      overrides.entity.isKeyComplete = function(key) {
+      sandbox.stub(entity, 'keyToKeyProto');
+      sandbox.stub(entity, 'isKeyComplete').callsFake(key => {
         assert.strictEqual(key, INCOMPLETE_KEY);
         return true;
-      };
+      });
 
       assert.throws(function() {
         request.allocateIds(INCOMPLETE_KEY, OPTIONS, assert.ifError);
@@ -191,11 +153,11 @@ describe('Request', function() {
 
     it('should make the correct request', function(done) {
       const keyProto = {};
-
-      overrides.entity.keyToKeyProto = function(key) {
+      sandbox.stub(entity, 'isKeyComplete');
+      sandbox.stub(entity, 'keyToKeyProto').callsFake(key => {
         assert.strictEqual(key, INCOMPLETE_KEY);
         return keyProto;
-      };
+      });
 
       request.request_ = function(config) {
         assert.strictEqual(config.client, 'DatastoreClient');
@@ -216,15 +178,18 @@ describe('Request', function() {
     });
 
     it('should allow a numeric shorthand for allocations', function(done) {
+      sandbox.stub(entity, 'isKeyComplete');
+      sandbox.stub(entity, 'keyToKeyProto');
       request.request_ = function(config) {
         assert.strictEqual(config.reqOpts.keys.length, ALLOCATIONS);
         done();
       };
-
       request.allocateIds(INCOMPLETE_KEY, ALLOCATIONS, assert.ifError);
     });
 
     it('should allow customization of GAX options', function(done) {
+      sandbox.stub(entity, 'isKeyComplete');
+      sandbox.stub(entity, 'keyToKeyProto');
       const options = extend({}, OPTIONS, {
         gaxOptions: {},
       });
@@ -248,6 +213,8 @@ describe('Request', function() {
       });
 
       it('should exec callback with error & API response', function(done) {
+        sandbox.stub(entity, 'isKeyComplete');
+        sandbox.stub(entity, 'keyToKeyProto');
         request.allocateIds(INCOMPLETE_KEY, OPTIONS, function(err, keys, resp) {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(keys, null);
@@ -271,12 +238,12 @@ describe('Request', function() {
 
       it('should create and return Keys & API response', function(done) {
         const key = {};
-
-        overrides.entity.keyFromKeyProto = function(keyProto) {
+        sandbox.stub(entity, 'isKeyComplete');
+        sandbox.stub(entity, 'keyToKeyProto');
+        sandbox.stub(entity, 'keyFromKeyProto').callsFake(keyProto => {
           assert.strictEqual(keyProto, API_RESPONSE.keys[0]);
           return key;
-        };
-
+        });
         request.allocateIds(INCOMPLETE_KEY, OPTIONS, function(err, keys, resp) {
           assert.ifError(err);
           assert.deepStrictEqual(keys, [key]);
@@ -299,10 +266,10 @@ describe('Request', function() {
     });
 
     it('should convert key to key proto', function(done) {
-      overrides.entity.keyToKeyProto = function(key_) {
+      sandbox.stub(entity, 'keyToKeyProto').callsFake(key_ => {
         assert.strictEqual(key_, key);
         done();
-      };
+      });
 
       request.createReadStream(key).on('error', done);
     });
@@ -467,11 +434,11 @@ describe('Request', function() {
       });
 
       it('should format the results', function(done) {
-        overrides.entity.formatArray = function(arr) {
+        sandbox.stub(entity, 'formatArray').callsFake(arr => {
           assert.strictEqual(arr, apiResponse.found);
           setImmediate(done);
           return arr;
-        };
+        });
 
         request
           .createReadStream(key)
@@ -625,7 +592,7 @@ describe('Request', function() {
       const fakeEntities = [{a: 'a'}, {b: 'b'}];
 
       beforeEach(function() {
-        request.createReadStream = sinon.spy(function() {
+        request.createReadStream = sandbox.spy(function() {
           const stream = through.obj();
 
           setImmediate(function() {
@@ -684,7 +651,7 @@ describe('Request', function() {
       const error = new Error('err');
 
       beforeEach(function() {
-        request.createReadStream = sinon.spy(function() {
+        request.createReadStream = sandbox.spy(function() {
           const stream = through.obj();
 
           setImmediate(function() {
@@ -712,10 +679,10 @@ describe('Request', function() {
         method: 'insert',
       });
 
-      overrides.Request.prepareEntityObject_ = function(obj) {
+      sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
         return preparedEntityObject;
-      };
+      });
 
       request.save = function(entities) {
         assert.deepStrictEqual(entities[0], expectedEntityObject);
@@ -748,7 +715,6 @@ describe('Request', function() {
 
   describe('runQueryStream', function() {
     beforeEach(function() {
-      overrides.entity.queryToQueryProto = function() {};
       request.request_ = function() {};
     });
 
@@ -757,11 +723,11 @@ describe('Request', function() {
       query.namespace = 'namespace';
       query = extend(true, new FakeQuery(), query);
 
-      overrides.entity.queryToQueryProto = function(query_) {
+      sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
         assert.notStrictEqual(query_, query);
         assert.deepStrictEqual(query_, query);
         done();
-      };
+      });
 
       request
         .runQueryStream(query)
@@ -773,9 +739,7 @@ describe('Request', function() {
       const query = {namespace: 'namespace'};
       const queryProto = {};
 
-      overrides.entity.queryToQueryProto = function() {
-        return queryProto;
-      };
+      sandbox.stub(entity, 'queryToQueryProto').returns(queryProto);
 
       request.request_ = function(config) {
         assert.strictEqual(config.client, 'DatastoreClient');
@@ -798,6 +762,7 @@ describe('Request', function() {
     });
 
     it('should allow customization of GAX options', function(done) {
+      sandbox.stub(entity, 'queryToQueryProto');
       const options = {
         gaxOptions: {},
       };
@@ -814,6 +779,7 @@ describe('Request', function() {
     });
 
     it('should allow setting strong read consistency', function(done) {
+      sandbox.stub(entity, 'queryToQueryProto');
       request.request_ = function(config) {
         assert.strictEqual(config.reqOpts.readOptions.readConsistency, 1);
         done();
@@ -826,6 +792,7 @@ describe('Request', function() {
     });
 
     it('should allow setting strong eventual consistency', function(done) {
+      sandbox.stub(entity, 'queryToQueryProto');
       request.request_ = function(config) {
         assert.strictEqual(config.reqOpts.readOptions.readConsistency, 2);
         done();
@@ -847,6 +814,7 @@ describe('Request', function() {
       });
 
       it('should emit error on a stream', function(done) {
+        sandbox.stub(entity, 'queryToQueryProto');
         request
           .runQueryStream({})
           .on('error', function(err) {
@@ -872,21 +840,26 @@ describe('Request', function() {
         },
       };
 
+      let formatArrayStub;
       beforeEach(function() {
         request.request_ = function(config, callback) {
           callback(null, apiResponse);
         };
 
-        overrides.entity.formatArray = function(array) {
-          return array;
-        };
+        formatArrayStub = sandbox
+          .stub(entity, 'formatArray')
+          .callsFake(array => {
+            return array;
+          });
       });
 
       it('should format results', function(done) {
-        overrides.entity.formatArray = function(array) {
+        sandbox.stub(entity, 'queryToQueryProto');
+        formatArrayStub.restore();
+        sandbox.stub(entity, 'formatArray').callsFake(array => {
           assert.strictEqual(array, apiResponse.batch.entityResults);
           return array;
-        };
+        });
 
         const entities = [];
 
@@ -917,13 +890,14 @@ describe('Request', function() {
         let startCalled = false;
         let offsetCalled = false;
 
-        overrides.entity.formatArray = function(array) {
+        formatArrayStub.restore();
+        sandbox.stub(entity, 'formatArray').callsFake(array => {
           assert.strictEqual(
             array,
             entityResultsPerApiCall[timesRequestCalled]
           );
           return entityResultsPerApiCall[timesRequestCalled];
-        };
+        });
 
         request.request_ = function(config, callback) {
           timesRequestCalled++;
@@ -979,12 +953,12 @@ describe('Request', function() {
           return this;
         };
 
-        overrides.entity.queryToQueryProto = function(query_) {
+        sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
           if (timesRequestCalled > 1) {
             assert.strictEqual(query_, query);
           }
           return queryProto;
-        };
+        });
 
         const entities = [];
         let info;
@@ -1037,9 +1011,7 @@ describe('Request', function() {
           callback(null, {batch: batch});
         };
 
-        overrides.entity.queryToQueryProto = function() {
-          return {};
-        };
+        sandbox.stub(entity, 'queryToQueryProto').returns({});
 
         FakeQuery.prototype.limit = function() {
           limitCalled = true;
@@ -1060,6 +1032,8 @@ describe('Request', function() {
       it('should not push more results if stream was ended', function(done) {
         let timesRequestCalled = 0;
         let entitiesEmitted = 0;
+
+        sandbox.stub(entity, 'queryToQueryProto');
 
         request.request_ = function(config, callback) {
           timesRequestCalled++;
@@ -1091,7 +1065,7 @@ describe('Request', function() {
 
       it('should not get more results if stream was ended', function(done) {
         let timesRequestCalled = 0;
-
+        sandbox.stub(entity, 'queryToQueryProto');
         request.request_ = function(config, callback) {
           timesRequestCalled++;
           callback(null, apiResponse);
@@ -1119,7 +1093,7 @@ describe('Request', function() {
       const fakeEntities = [{a: 'a'}, {b: 'b'}];
 
       beforeEach(function() {
-        request.runQueryStream = sinon.spy(function() {
+        request.runQueryStream = sandbox.spy(function() {
           const stream = through.obj();
 
           setImmediate(function() {
@@ -1173,7 +1147,7 @@ describe('Request', function() {
       const error = new Error('err');
 
       beforeEach(function() {
-        request.runQueryStream = sinon.spy(function() {
+        request.runQueryStream = sandbox.spy(function() {
           const stream = through.obj();
 
           setImmediate(function() {
@@ -1277,7 +1251,7 @@ describe('Request', function() {
       const entityObject = {};
       let prepared = false;
 
-      overrides.Request.prepareEntityObject_ = function(obj) {
+      sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
         prepared = true;
         return {
@@ -1285,7 +1259,7 @@ describe('Request', function() {
           method: 'insert',
           data: {k: 'v'},
         };
-      };
+      });
 
       request.request_ = function() {
         assert.strictEqual(prepared, true);
@@ -1451,12 +1425,12 @@ describe('Request', function() {
         callback(null, response);
       };
 
-      overrides.entity.keyFromKeyProto = function(keyProto) {
+      sandbox.stub(entity, 'keyFromKeyProto').callsFake(keyProto => {
         keyProtos.push(keyProto);
         return {
           id: ids[keyProtos.length - 1],
         };
-      };
+      });
 
       request.save(
         [
@@ -1507,10 +1481,10 @@ describe('Request', function() {
         method: 'update',
       });
 
-      overrides.Request.prepareEntityObject_ = function(obj) {
+      sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
         return preparedEntityObject;
-      };
+      });
 
       request.save = function(entities) {
         assert.deepStrictEqual(entities[0], expectedEntityObject);
@@ -1549,10 +1523,10 @@ describe('Request', function() {
         method: 'upsert',
       });
 
-      overrides.Request.prepareEntityObject_ = function(obj) {
+      sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
         return preparedEntityObject;
-      };
+      });
 
       request.save = function(entities) {
         assert.deepStrictEqual(entities[0], expectedEntityObject);
