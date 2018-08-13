@@ -24,6 +24,15 @@
 /**
  * @namespace google.privacy.dlp.v2
  */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
 
 'use strict';
 
