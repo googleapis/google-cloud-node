@@ -58,7 +58,7 @@ Examples:
   node analyze.v1.js syntax-file my-bucket file.txt             Detects syntax in gs://my-bucket/file.txt
   node analyze.v1.js entity-sentiment-text "President Obama is speaking at the White House."
   node analyze.v1.js entity-sentiment-file my-bucket file.txt   Detects sentiment of entities in gs://my-bucket/file.txt
-  node analyze.v1.js classify-text "Android is a mobile operating system developed by Google."
+  node analyze.v1.js classify-text "Android is a mobile operating system developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets."
   node analyze.v1.js classify-file my-bucket android_text.txt   Detects syntax in gs://my-bucket/android_text.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
@@ -99,7 +99,7 @@ Examples:
   node analyze.v1beta2.js entities-file my-bucket file.txt      Detects entities in gs://my-bucket/file.txt
   node analyze.v1beta2.js syntax-text "President Obama is speaking at the White House."
   node analyze.v1beta2.js syntax-file my-bucket file.txt        Detects syntax in gs://my-bucket/file.txt
-  node analyze.v1beta2.js classify-text "Android is a mobile operating system developed by Google."
+  node analyze.v1beta2.js classify-text "Android is a mobile operating system developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets."
   node analyze.v1beta2.js classify-file my-bucket               Detects syntax in gs://my-bucket/android_text.txt
   android_text.txt
 
