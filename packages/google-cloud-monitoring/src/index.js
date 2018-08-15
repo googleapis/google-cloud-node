@@ -16,13 +16,19 @@
  * @namespace google
  */
 /**
- * @namespace google.cloud
+ * @namespace google.monitoring
  */
 /**
- * @namespace google.cloud.monitoring
+ * @namespace google.monitoring.v3
  */
 /**
- * @namespace google.cloud.monitoring.v3
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
  */
 
 'use strict';
