@@ -28,6 +28,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.20.3",
     "bindings": "^1.2.1",
+    "console-log-level": "^1.4.0",
     "delay": "^3.0.0",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.7.0",
@@ -41,6 +42,7 @@
     "semver": "^5.5.0"
   },
   "devDependencies": {
+    "@types/console-log-level": "^1.4.0",
     "@types/delay": "^2.0.0",
     "@types/extend": "^3.0.0",
     "@types/long": "^4.0.0",

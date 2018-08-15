@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {Logger, Service, ServiceObject, util} from '@google-cloud/common';
+import {Service, ServiceObject, util} from '@google-cloud/common';
+import * as consoleLogLevel from 'console-log-level';
 import * as http from 'http';
 import * as path from 'path';
 import * as pify from 'pify';
@@ -24,6 +25,7 @@ import * as zlib from 'zlib';
 import {perftools} from '../../proto/profile';
 
 import {ProfilerConfig} from './config';
+import {logLevelToName} from './index';
 import * as heapProfiler from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
 
@@ -232,7 +234,7 @@ function responseToProfileOrError(
  * profiles can be collected.
  */
 export class Profiler extends ServiceObject {
-  private logger: Logger;
+  private logger: consoleLogLevel.Logger;
   private profileLabels: {instance?: string};
   private deployment: Deployment;
   private profileTypes: string[];
@@ -252,8 +254,11 @@ export class Profiler extends ServiceObject {
     super({parent: new Service(serviceConfig, config), baseUrl: '/'});
     this.config = config;
 
-    this.logger = new Logger(
-        {level: Logger.LEVELS[config.logLevel as number], tag: pjson.name});
+    this.logger = consoleLogLevel({
+      stderr: true,
+      prefix: pjson.name,
+      level: logLevelToName(this.config.logLevel)
+    });
 
     const labels: {zone?: string,
                    version?: string, language: string} = {language: 'nodejs'};

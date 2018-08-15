@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {Logger, util} from '@google-cloud/common';
+import {util} from '@google-cloud/common';
+import * as consoleLogLevel from 'console-log-level';
 import * as delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
@@ -188,9 +189,26 @@ export async function start(config: Config = {}): Promise<void> {
   profiler.start();
 }
 
+const LEVEL_NAMES: consoleLogLevel.LogLevelNames[] =
+    ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
+
+export function logLevelToName(level?: number): consoleLogLevel.LogLevelNames {
+  if (level === undefined) {
+    level = defaultConfig.logLevel;
+  } else if (level < 0) {
+    level = 0;
+  } else if (level > 4) {
+    level = 4;
+  }
+  return LEVEL_NAMES[level];
+}
+
 function logError(msg: string, config: Config) {
-  const logger =
-      new Logger({level: Logger.LEVELS[config.logLevel || 2], tag: pjson.name});
+  const logger = consoleLogLevel({
+    stderr: true,
+    prefix: pjson.name,
+    level: logLevelToName(config.logLevel)
+  });
   logger.error(msg);
 }
 
@@ -208,8 +226,12 @@ export async function startLocal(config: Config = {}): Promise<void> {
   }
 
   // Set up periodic logging.
-  const logger = new Logger(
-      {level: Logger.LEVELS[profiler.config.logLevel], tag: pjson.name});
+  const logger = consoleLogLevel({
+    stderr: true,
+    prefix: pjson.name,
+    level: logLevelToName(config.logLevel)
+  });
+
   let heapProfileCount = 0;
   let timeProfileCount = 0;
   let prevLogTime = Date.now();
