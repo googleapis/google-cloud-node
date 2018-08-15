@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/monitoring",
   "description": "Stackdriver Monitoring API client for Node.js",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
