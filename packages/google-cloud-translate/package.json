@@ -85,7 +85,7 @@
     "@types/request": "^2.47.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "gts": "^0.8.0",
