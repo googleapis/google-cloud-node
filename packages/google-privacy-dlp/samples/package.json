@@ -21,6 +21,8 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "ava": "^0.25.0",
+    "pixelmatch": "^4.0.2",
+    "pngjs": "^3.3.3",
     "uuid": "^3.3.2"
   }
 }
