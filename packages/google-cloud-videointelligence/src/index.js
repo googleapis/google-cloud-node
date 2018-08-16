@@ -87,7 +87,7 @@ const gapic = Object.freeze({
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:videointelligence_quickstart
+ * region_tag:video_quickstart
  * Full quickstart example:
  */
 
