@@ -80,7 +80,7 @@
     "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
     "eslint-plugin-prettier": "^2.3.1",
     "google-auto-auth": "^0.10.0",
