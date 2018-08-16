@@ -34,15 +34,19 @@
     "Dave Gramlich <callmehiphop@gmail.com>",
     "Eric Uldall <ericuldall@gmail.com>",
     "Ernest Landrito <landrito@google.com>",
+    "F. Hinkelmann <fhinkel@vt.edu>",
     "Jason Dobry <jason.dobry@gmail.com>",
     "Jason Dobry <jmdobry@users.noreply.github.com>",
+    "Jonathan Lui <jonathanlui@google.com>",
+    "Justin Beckwith <justin.beckwith@gmail.com>",
     "Luke Sneeringer <luke@sneeringer.com>",
     "Stephen <stephenplusplus@users.noreply.github.com>",
     "Stephen Sawchuk <sawchuk@gmail.com>",
     "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
     "Tim Swast <swast@google.com>",
     "florencep <florenceperot@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
+    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>",
+    "renovate[bot] <renovate[bot]@users.noreply.github.com>"
   ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha build/test && nyc report",

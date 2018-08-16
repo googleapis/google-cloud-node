@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Google Cloud Translation API: Node.js Client](https://github.com/googleapis/nodejs-translate)
@@ -7,60 +9,31 @@
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-translate?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-translate)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-translate/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-translate)
 
-> Node.js idiomatic client for [Cloud Translation API][product-docs].
-
 The [Cloud Translation API](https://cloud.google.com/translate/docs), can dynamically translate text between thousands of language pairs. The Cloud Translation API lets websites and programs integrate with the translation service programmatically. The Cloud Translation API is part of the larger Cloud Machine Learning API family.
 
 
-* [Cloud Translation API Node.js Client API Reference][client-docs]
-* [github.com/googleapis/nodejs-translate](https://github.com/googleapis/nodejs-translate)
-* [Cloud Translation API Documentation][product-docs]
-
-Read more about the client libraries for Cloud APIs, including the older
-Google APIs Client Libraries, in [Client Libraries Explained][explained].
-
-[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
-
-**Table of contents:**
-
-* [Quickstart](#quickstart)
-  * [Before you begin](#before-you-begin)
-  * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+* [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Quickstart
+## Using the client library
 
-### Before you begin
+1.  [Select or create a Cloud Platform project][projects].
 
-1.  Select or create a Cloud Platform project.
+1.  [Enable billing for your project][billing].
 
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Google Cloud Translation API API.
-
-    [Enable the API][enable_api]
+1.  [Enable the Google Cloud Translation API API][enable_api].
 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=translate.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+1. Install the client library:
 
-### Installing the client library
+        npm install --save @google-cloud/translate
 
-    npm install --save @google-cloud/translate
-
-### Using the client library
+1. Try an example:
 
 ```javascript
 // Imports the Google Cloud client library
@@ -129,6 +102,21 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-translate/blob/master/LICENSE)
 
+## What's Next
+
+* [Cloud Translation API Documentation][product-docs]
+* [Cloud Translation API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-translate](https://github.com/googleapis/nodejs-translate)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/translate/latest/
 [product-docs]: https://cloud.google.com/translate/docs
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=translate.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
