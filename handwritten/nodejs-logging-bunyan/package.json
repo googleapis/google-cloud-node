@@ -94,7 +94,7 @@
     "cpy-cli": "^2.0.0",
     "delay": "^3.0.0",
     "eslint": "^5.0.1",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
     "eslint-plugin-prettier": "^2.6.1",
     "express": "^4.16.3",
