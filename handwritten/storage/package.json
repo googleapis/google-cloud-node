@@ -92,7 +92,7 @@
     "@google-cloud/pubsub": "*",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^2.5.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
     "eslint-plugin-prettier": "^2.3.1",
     "ink-docstrap": "https://github.com/docstrap/docstrap/tarball/master",
