@@ -33,6 +33,28 @@ var InfoType = {
 };
 
 /**
+ * A reference to a StoredInfoType to use with scanning.
+ *
+ * @property {string} name
+ *   Resource name of the requested `StoredInfoType`, for example
+ *   `organizations/433245324/storedInfoTypes/432452342` or
+ *   `projects/project-id/storedInfoTypes/432452342`.
+ *
+ * @property {Object} createTime
+ *   Timestamp indicating when the version of the `StoredInfoType` used for
+ *   inspection was created. Output-only field, populated by the system.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef StoredType
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StoredType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
+ */
+var StoredType = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Custom information type provided by the user. Used to find domain-specific
  * sensitive information configurable to the data in question.
  *
@@ -64,6 +86,12 @@ var InfoType = {
  *   support reversing.
  *
  *   This object should have the same structure as [SurrogateType]{@link google.privacy.dlp.v2.SurrogateType}
+ *
+ * @property {Object} storedType
+ *   Load an existing `StoredInfoType` resource for use in
+ *   `InspectDataSource`. Not currently supported in `InspectContent`.
+ *
+ *   This object should have the same structure as [StoredType]{@link google.privacy.dlp.v2.StoredType}
  *
  * @property {Object[]} detectionRules
  *   Set of detection rules to apply to all findings of this CustomInfoType.
@@ -98,7 +126,11 @@ var CustomInfoType = {
    *
    * Dictionary words containing a large number of characters that are not
    * letters or digits may result in unexpected findings because such characters
-   * are treated as whitespace.
+   * are treated as whitespace. The
+   * [limits](https://cloud.google.com/dlp/limits) page contains details about
+   * the size limits of dictionaries. For dictionaries that do not fit within
+   * these constraints, consider using `LargeCustomDictionaryConfig` in the
+   * `StoredInfoType` API.
    *
    * @property {Object} wordList
    *   List of words or phrases to search for.
@@ -345,7 +377,14 @@ var DatastoreOptions = {
  *
  * @property {number} bytesLimitPerFile
  *   Max number of bytes to scan from a file. If a scanned file's size is bigger
- *   than this value then the rest of the bytes are omitted.
+ *   than this value then the rest of the bytes are omitted. Only one
+ *   of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+ *
+ * @property {number} bytesLimitPerFilePercent
+ *   Max percentage of bytes to scan from a file. The rest are omitted. The
+ *   number of bytes scanned is rounded down. Must be between 0 and 100,
+ *   inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
+ *   of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
  *
  * @property {number[]} fileTypes
  *   List of file type groups to include in the scan.
@@ -409,6 +448,21 @@ var CloudStorageOptions = {
 };
 
 /**
+ * Message representing a set of files in Cloud Storage.
+ *
+ * @property {string} url
+ *   The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
+ *   path is allowed.
+ *
+ * @typedef CloudStorageFileSet
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.CloudStorageFileSet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
+ */
+var CloudStorageFileSet = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Message representing a single file or path in Cloud Storage.
  *
  * @property {string} path
@@ -440,7 +494,15 @@ var CloudStoragePath = {
  * @property {number} rowsLimit
  *   Max number of rows to scan. If the table has more rows than this value, the
  *   rest of the rows are omitted. If not set, or if set to 0, all rows will be
- *   scanned. Cannot be used in conjunction with TimespanConfig.
+ *   scanned. Only one of rows_limit and rows_limit_percent can be specified.
+ *   Cannot be used in conjunction with TimespanConfig.
+ *
+ * @property {number} rowsLimitPercent
+ *   Max percentage of rows to scan. The rest are omitted. The number of rows
+ *   scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and
+ *   100 means no limit. Defaults to 0. Only one of rows_limit and
+ *   rows_limit_percent can be specified. Cannot be used in conjunction with
+ *   TimespanConfig.
  *
  * @property {number} sampleMethod
  *   The number should be among the values of [SampleMethod]{@link google.privacy.dlp.v2.SampleMethod}
@@ -508,19 +570,21 @@ var StorageConfig = {
    * Currently only supported when inspecting Google Cloud Storage and BigQuery.
    *
    * @property {Object} startTime
-   *   Exclude files older than this value.
+   *   Exclude files or rows older than this value.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
    *
    * @property {Object} endTime
-   *   Exclude files newer than this value.
+   *   Exclude files or rows newer than this value.
    *   If set to zero, no upper time limit is applied.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
    *
    * @property {Object} timestampField
    *   Specification of the field containing the timestamp of scanned items.
-   *   Required for data sources like Datastore or BigQuery.
+   *   Used for data sources like Datastore or BigQuery.
+   *   If not specified for BigQuery, table last modification timestamp
+   *   is checked against given time span.
    *   The valid data types of the timestamp field are:
    *   for BigQuery - timestamp, date, datetime;
    *   for Datastore - timestamp.
@@ -684,6 +748,27 @@ var RecordKey = {
  * @see [google.privacy.dlp.v2.BigQueryTable definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
 var BigQueryTable = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Message defining a field of a BigQuery table.
+ *
+ * @property {Object} table
+ *   Source table of the field.
+ *
+ *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
+ *
+ * @property {Object} field
+ *   Designated field in the BigQuery table.
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
+ *
+ * @typedef BigQueryField
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.BigQueryField definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
+ */
+var BigQueryField = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

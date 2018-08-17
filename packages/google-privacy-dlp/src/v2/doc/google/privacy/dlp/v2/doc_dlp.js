@@ -29,6 +29,11 @@
  *   system may automatically choose what detectors to run. By default this may
  *   be all types, but may change over time as detectors are updated.
  *
+ *   The special InfoType name "ALL_BASIC" can be used to trigger all detectors,
+ *   but may change over time as new InfoTypes are added. If you need precise
+ *   control and predictability as to what detectors are run you should specify
+ *   specific InfoTypes listed in the reference.
+ *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
  * @property {number} minLikelihood
@@ -3784,6 +3789,261 @@ var DeleteDeidentifyTemplateRequest = {
 };
 
 /**
+ * Configuration for a custom dictionary created from a data source of any size
+ * up to the maximum size defined in the
+ * [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
+ * dictionary creation are stored in the specified Google Cloud Storage
+ * location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
+ * that satisfy the size requirements.
+ *
+ * @property {Object} outputPath
+ *   Location to store dictionary artifacts in Google Cloud Storage. These files
+ *   will only be accessible by project owners and the DLP API. If any of these
+ *   artifacts are modified, the dictionary is considered invalid and can no
+ *   longer be used.
+ *
+ *   This object should have the same structure as [CloudStoragePath]{@link google.privacy.dlp.v2.CloudStoragePath}
+ *
+ * @property {Object} cloudStorageFileSet
+ *   Set of files containing newline-delimited lists of dictionary phrases.
+ *
+ *   This object should have the same structure as [CloudStorageFileSet]{@link google.privacy.dlp.v2.CloudStorageFileSet}
+ *
+ * @property {Object} bigQueryField
+ *   Field in a BigQuery table where each cell represents a dictionary phrase.
+ *
+ *   This object should have the same structure as [BigQueryField]{@link google.privacy.dlp.v2.BigQueryField}
+ *
+ * @typedef LargeCustomDictionaryConfig
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.LargeCustomDictionaryConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var LargeCustomDictionaryConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Configuration for a StoredInfoType.
+ *
+ * @property {string} displayName
+ *   Display name of the StoredInfoType (max 256 characters).
+ *
+ * @property {string} description
+ *   Description of the StoredInfoType (max 256 characters).
+ *
+ * @property {Object} largeCustomDictionary
+ *   StoredInfoType where findings are defined by a dictionary of phrases.
+ *
+ *   This object should have the same structure as [LargeCustomDictionaryConfig]{@link google.privacy.dlp.v2.LargeCustomDictionaryConfig}
+ *
+ * @typedef StoredInfoTypeConfig
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StoredInfoTypeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var StoredInfoTypeConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Version of a StoredInfoType, including the configuration used to build it,
+ * create timestamp, and current state.
+ *
+ * @property {Object} config
+ *   StoredInfoType configuration.
+ *
+ *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
+ *
+ * @property {Object} createTime
+ *   Create timestamp of the version. Read-only, determined by the system
+ *   when the version is created.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {number} state
+ *   Stored info type version state. Read-only, updated by the system
+ *   during dictionary creation.
+ *
+ *   The number should be among the values of [StoredInfoTypeState]{@link google.privacy.dlp.v2.StoredInfoTypeState}
+ *
+ * @property {Object[]} errors
+ *   Errors that occurred when creating this storedInfoType version, or
+ *   anomalies detected in the storedInfoType data that render it unusable. Only
+ *   the five most recent errors will be displayed, with the most recent error
+ *   appearing first.
+ *   <p>For example, some of the data for stored custom dictionaries is put in
+ *   the user's Google Cloud Storage bucket, and if this data is modified or
+ *   deleted by the user or another system, the dictionary becomes invalid.
+ *   <p>If any errors occur, fix the problem indicated by the error message and
+ *   use the UpdateStoredInfoType API method to create another version of the
+ *   storedInfoType to continue using it, reusing the same `config` if it was
+ *   not the source of the error.
+ *
+ *   This object should have the same structure as [Error]{@link google.privacy.dlp.v2.Error}
+ *
+ * @typedef StoredInfoTypeVersion
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StoredInfoTypeVersion definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var StoredInfoTypeVersion = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * StoredInfoType resource message that contains information about the current
+ * version and any pending updates.
+ *
+ * @property {string} name
+ *   Resource name.
+ *
+ * @property {Object} currentVersion
+ *   Current version of the stored info type.
+ *
+ *   This object should have the same structure as [StoredInfoTypeVersion]{@link google.privacy.dlp.v2.StoredInfoTypeVersion}
+ *
+ * @property {Object[]} pendingVersions
+ *   Pending versions of the stored info type. Empty if no versions are
+ *   pending.
+ *
+ *   This object should have the same structure as [StoredInfoTypeVersion]{@link google.privacy.dlp.v2.StoredInfoTypeVersion}
+ *
+ * @typedef StoredInfoType
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StoredInfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var StoredInfoType = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for CreateStoredInfoType.
+ *
+ * @property {string} parent
+ *   The parent resource name, for example projects/my-project-id or
+ *   organizations/my-org-id.
+ *
+ * @property {Object} config
+ *   Configuration of the storedInfoType to create.
+ *
+ *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
+ *
+ * @property {string} storedInfoTypeId
+ *   The storedInfoType ID can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ *
+ * @typedef CreateStoredInfoTypeRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.CreateStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var CreateStoredInfoTypeRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for UpdateStoredInfoType.
+ *
+ * @property {string} name
+ *   Resource name of organization and storedInfoType to be updated, for
+ *   example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ *
+ * @property {Object} config
+ *   Updated configuration for the storedInfoType. If not provided, a new
+ *   version of the storedInfoType will be created with the existing
+ *   configuration.
+ *
+ *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
+ *
+ * @property {Object} updateMask
+ *   Mask to control which fields get updated.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateStoredInfoTypeRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.UpdateStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var UpdateStoredInfoTypeRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for GetStoredInfoType.
+ *
+ * @property {string} name
+ *   Resource name of the organization and storedInfoType to be read, for
+ *   example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ *
+ * @typedef GetStoredInfoTypeRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.GetStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var GetStoredInfoTypeRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for ListStoredInfoTypes.
+ *
+ * @property {string} parent
+ *   The parent resource name, for example projects/my-project-id or
+ *   organizations/my-org-id.
+ *
+ * @property {string} pageToken
+ *   Optional page token to continue retrieval. Comes from previous call
+ *   to `ListStoredInfoTypes`.
+ *
+ * @property {number} pageSize
+ *   Optional size of the page, can be limited by server. If zero server returns
+ *   a page of max size 100.
+ *
+ * @typedef ListStoredInfoTypesRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.ListStoredInfoTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var ListStoredInfoTypesRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for ListStoredInfoTypes.
+ *
+ * @property {Object[]} storedInfoTypes
+ *   List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.
+ *
+ *   This object should have the same structure as [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}
+ *
+ * @property {string} nextPageToken
+ *   If the next page is available then the next page token to be used
+ *   in following ListStoredInfoTypes request.
+ *
+ * @typedef ListStoredInfoTypesResponse
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.ListStoredInfoTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var ListStoredInfoTypesResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for DeleteStoredInfoType.
+ *
+ * @property {string} name
+ *   Resource name of the organization and storedInfoType to be deleted, for
+ *   example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ *
+ * @typedef DeleteStoredInfoTypeRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.DeleteStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+var DeleteStoredInfoTypeRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Options describing which parts of the provided content should be scanned.
  *
  * @enum {number}
@@ -3890,4 +4150,37 @@ var DlpJobType = {
    * The job executed a Risk Analysis computation.
    */
   RISK_ANALYSIS_JOB: 2
+};
+
+/**
+ * State of a StoredInfoType version.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+var StoredInfoTypeState = {
+  STORED_INFO_TYPE_STATE_UNSPECIFIED: 0,
+
+  /**
+   * StoredInfoType version is being created.
+   */
+  PENDING: 1,
+
+  /**
+   * StoredInfoType version is ready for use.
+   */
+  READY: 2,
+
+  /**
+   * StoredInfoType creation failed. All relevant error messages are returned in
+   * the `StoredInfoTypeVersion` message.
+   */
+  FAILED: 3,
+
+  /**
+   * StoredInfoType is no longer valid because artifacts stored in
+   * user-controlled storage were modified. To fix an invalid StoredInfoType,
+   * use the `UpdateStoredInfoType` method to create a new version.
+   */
+  INVALID: 4
 };

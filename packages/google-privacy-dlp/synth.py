@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
@@ -22,26 +21,13 @@ gapic = gcp.GAPICGenerator()
 common_templates = gcp.CommonTemplates()
 
 version = 'v2'
-library = gapic.node_library('dlp', version,
-  config_path='/google/privacy/dlp/artman_dlp_v2.yaml'
-)
-s.copy(library,
-  excludes=['README.md', 'package.json']
-)
+library = gapic.node_library(
+    'dlp', version, config_path='/google/privacy/dlp/artman_dlp_v2.yaml')
+s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
-templates = common_templates.node_library(package_name="@google-cloud/dlp")
+templates = common_templates.node_library(
+    package_name="@google-cloud/dlp", repo_name="googleapis/nodejs-dlp")
 s.copy(templates)
-
-
-'''
-Replace the namespace so RPC types documentation are linked properly.
-'''
-s.replace(
-  'src/index.js',
-  '\* @namespace google.cloud',
-  '* @namespace google.privacy',
-)
-
 '''
 Node.js specific cleanup
 '''
