@@ -105,7 +105,7 @@
     "mocha": "^5.2.0",
     "ncp": "^2.0.0",
     "once": "^1.4.0",
-    "pify": "^3.0.0",
+    "pify": "^4.0.0",
     "post-install-check": "0.0.1",
     "prettier": "^1.13.6",
     "proxyquire": "^2.0.1",
