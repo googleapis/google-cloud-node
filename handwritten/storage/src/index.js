@@ -442,6 +442,82 @@ class Storage extends common.Service {
       }
     );
   }
+
+  /**
+   * @typedef {array} GetServiceAccountResponse
+   * @property {object} 0 The service account resource.
+   * @property {object} 1 The full
+   * [API response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   */
+  /**
+   * @callback GetServiceAccountCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} serviceAccount The serviceAccount resource.
+   * @param {string} serviceAccount.emailAddress The service account email
+   *     address.
+   * @param {object} apiResponse The full
+   * [API response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   */
+  /**
+   * Get the email address of this project's Google Cloud Storage service
+   * account.
+   *
+   * @see [Projects.serviceAccount: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount/get}
+   * @see [Projects.serviceAccount Resource]{@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource}
+   *
+   * @param {object} [options] Configuration object.
+   * @param {string} [options.userProject] User project to be billed for this
+   *     request.
+   * @param {GetServiceAccountCallback} [callback] Callback function.
+   * @returns {Promise<GetServiceAccountResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   *
+   * storage.getServiceAccount(function(err, serviceAccount, apiResponse) {
+   *   if (!err) {
+   *     const serviceAccountEmail = serviceAccount.emailAddress;
+   *   }
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * storage.getServiceAccount().then(function(data) {
+   *   const serviceAccountEmail = data[0].emailAddress;
+   *   const apiResponse = data[1];
+   * });
+   */
+  getServiceAccount(options, callback) {
+    if (!callback) {
+      callback = options;
+      options = {};
+    }
+
+    this.request(
+      {
+        uri: `/projects/${this.projectId}/serviceAccount`,
+        qs: options,
+      },
+      (err, resp) => {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+
+        const camelCaseResponse = {};
+
+        for (let prop in resp) {
+          let camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
+            match.toUpperCase()
+          );
+          camelCaseResponse[camelCaseProp] = resp[prop];
+        }
+
+        callback(null, camelCaseResponse, resp);
+      }
+    );
+  }
 }
 
 // Allow creating a `Storage` instance without using the `new` keyword. (#173)

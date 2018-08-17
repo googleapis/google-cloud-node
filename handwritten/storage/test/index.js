@@ -434,4 +434,86 @@ describe('Storage', function() {
       });
     });
   });
+
+  describe('getServiceAccount', function() {
+    it('should make the correct request', function(done) {
+      storage.request = function(reqOpts) {
+        assert.strictEqual(
+          reqOpts.uri,
+          `/projects/${storage.projectId}/serviceAccount`
+        );
+        assert.deepStrictEqual(reqOpts.qs, {});
+        done();
+      };
+
+      storage.getServiceAccount(assert.ifError);
+    });
+
+    it('should allow user options', function(done) {
+      const options = {};
+
+      storage.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      storage.getServiceAccount(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      const ERROR = new Error('Error.');
+      const API_RESPONSE = {};
+
+      beforeEach(function() {
+        storage.request = function(reqOpts, callback) {
+          callback(ERROR, API_RESPONSE);
+        };
+      });
+
+      it('should return the error and apiResponse', function(done) {
+        storage.getServiceAccount(function(err, serviceAccount, apiResponse) {
+          assert.strictEqual(err, ERROR);
+          assert.strictEqual(serviceAccount, null);
+          assert.strictEqual(apiResponse, API_RESPONSE);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      const API_RESPONSE = {};
+
+      beforeEach(function() {
+        storage.request = function(reqOpts, callback) {
+          callback(null, API_RESPONSE);
+        };
+      });
+
+      it('should convert snake_case response to camelCase', function(done) {
+        const apiResponse = {
+          snake_case: true,
+        };
+
+        storage.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+
+        storage.getServiceAccount(function(err, serviceAccount) {
+          assert.ifError(err);
+          assert.strictEqual(serviceAccount.snakeCase, apiResponse.snake_case);
+          assert.strictEqual(serviceAccount.snake_case, undefined);
+          done();
+        });
+      });
+
+      it('should return the serviceAccount and apiResponse', function(done) {
+        storage.getServiceAccount(function(err, serviceAccount, apiResponse) {
+          assert.ifError(err);
+          assert.deepStrictEqual(serviceAccount, {});
+          assert.strictEqual(apiResponse, API_RESPONSE);
+          done();
+        });
+      });
+    });
+  });
 });
