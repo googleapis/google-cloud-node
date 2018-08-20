@@ -39,23 +39,21 @@ const DatastoreRequestOverride = {
   save: function() {},
 };
 
-const FakeDatastoreRequest = {
-  prototype: {
-    delete: function() {
-      const args = [].slice.apply(arguments);
-      const results = DatastoreRequestOverride.delete.apply(null, args);
-      DatastoreRequestOverride.delete = function() {};
-      return results;
-    },
+class FakeDatastoreRequest {
+  delete() {
+    const args = [].slice.apply(arguments);
+    const results = DatastoreRequestOverride.delete.apply(null, args);
+    DatastoreRequestOverride.delete = function() {};
+    return results;
+  }
 
-    save: function() {
-      const args = [].slice.apply(arguments);
-      const results = DatastoreRequestOverride.save.apply(null, args);
-      DatastoreRequestOverride.save = function() {};
-      return results;
-    },
-  },
-};
+  save() {
+    const args = [].slice.apply(arguments);
+    const results = DatastoreRequestOverride.save.apply(null, args);
+    DatastoreRequestOverride.save = function() {};
+    return results;
+  }
+}
 
 describe('Transaction', function() {
   let Transaction;
