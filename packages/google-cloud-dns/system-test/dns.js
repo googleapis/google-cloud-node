@@ -29,8 +29,14 @@ const DNS = require('../');
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
+if (!DNS_DOMAIN) {
+  assert.fail(
+    `The 'GCLOUD_TESTS_DNS_DOMAIN' environment variable must be set to run the system tests.`
+  );
+}
+
 // Only run the tests if there is a domain to test with.
-(DNS_DOMAIN ? describe : describe.skip)('dns', function() {
+describe('dns', function() {
   if (!DNS_DOMAIN) {
     // The test runner still executes this function, even if it is skipped.
     return;
