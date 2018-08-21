@@ -20,21 +20,20 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const nodeutil = require('util');
-const proxyquire = require('proxyquire');
-const ServiceObject = require('@google-cloud/common').ServiceObject;
-const util = require('@google-cloud/common').util;
+import * as assert from 'assert';
+import * as nodeutil from 'util';
+import * as proxyquire from 'proxyquire';
+import {ServiceObject, util} from '@google-cloud/common';
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
-  promisifyAll: function(Class) {
+const fakePromisify = {
+  // tslint:disable-next-line:variable-name
+  promisifyAll(Class) {
     if (Class.name === 'Channel') {
       promisified = true;
     }
   },
-});
+};
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -43,29 +42,30 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-describe('Channel', function() {
+describe('Channel', () => {
   const STORAGE = {};
   const ID = 'channel-id';
   const RESOURCE_ID = 'resource-id';
 
+  // tslint:disable-next-line:variable-name
   let Channel;
   let channel;
 
-  before(function() {
+  before(() => {
     Channel = proxyquire('../src/channel.js', {
-      '@google-cloud/common': {
-        ServiceObject: FakeServiceObject,
-        util: fakeUtil,
-      },
-    });
+                '@google-cloud/promisify': fakePromisify,
+                '@google-cloud/common': {
+                  ServiceObject: FakeServiceObject,
+                },
+              }).Channel;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     channel = new Channel(STORAGE, ID, RESOURCE_ID);
   });
 
-  describe('initialization', function() {
-    it('should inherit from ServiceObject', function() {
+  describe('initialization', () => {
+    it('should inherit from ServiceObject', () => {
       assert(channel instanceof ServiceObject);
 
       const calledWith = channel.calledWith_[0];
@@ -76,11 +76,11 @@ describe('Channel', function() {
       assert.deepStrictEqual(calledWith.methods, {});
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should set the default metadata', function() {
+    it('should set the default metadata', () => {
       assert.deepStrictEqual(channel.metadata, {
         id: ID,
         resourceId: RESOURCE_ID,
@@ -88,9 +88,9 @@ describe('Channel', function() {
     });
   });
 
-  describe('stop', function() {
-    it('should make the correct request', function(done) {
-      channel.request = function(reqOpts) {
+  describe('stop', () => {
+    it('should make the correct request', done => {
+      channel.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/stop');
         assert.strictEqual(reqOpts.json, channel.metadata);
@@ -101,23 +101,23 @@ describe('Channel', function() {
       channel.stop(assert.ifError);
     });
 
-    it('should execute callback with error & API response', function(done) {
+    it('should execute callback with error & API response', done => {
       const error = {};
       const apiResponse = {};
 
-      channel.request = function(reqOpts, callback) {
+      channel.request = (reqOpts, callback) => {
         callback(error, apiResponse);
       };
 
-      channel.stop(function(err, apiResponse_) {
+      channel.stop((err, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should not require a callback', function(done) {
-      channel.request = function(reqOpts, callback) {
+    it('should not require a callback', done => {
+      channel.request = (reqOpts, callback) => {
         assert.doesNotThrow(callback);
         done();
       };

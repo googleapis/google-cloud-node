@@ -26,7 +26,7 @@
 function createNotification(bucketName, topic) {
   // [START storage_create_notification]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -53,7 +53,7 @@ function createNotification(bucketName, topic) {
 function listNotifications(bucketName) {
   // [START storage_list_notifications]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -84,7 +84,7 @@ function listNotifications(bucketName) {
 function getMetadata(bucketName, notificationId) {
   // [START storage_notifications_get_metadata]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -122,7 +122,7 @@ function getMetadata(bucketName, notificationId) {
 function deleteNotification(bucketName, notificationId) {
   // [START storage_delete_notification]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();

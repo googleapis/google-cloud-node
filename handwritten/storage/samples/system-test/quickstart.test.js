@@ -17,11 +17,14 @@
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const sinon = require(`sinon`);
-const storage = proxyquire(`@google-cloud/storage`, {})();
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
+
+const {Storage} = proxyquire(`@google-cloud/storage`, {});
+
+const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 

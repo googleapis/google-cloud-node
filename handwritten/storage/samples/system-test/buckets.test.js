@@ -16,11 +16,12 @@
 'use strict';
 
 const path = require(`path`);
-const storage = require(`@google-cloud/storage`)();
+const {Storage} = require(`@google-cloud/storage`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
+const storage = new Storage();
 const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;

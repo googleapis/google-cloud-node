@@ -16,10 +16,21 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const common = require('@google-cloud/common');
-const extend = require('extend');
-const is = require('is');
+import * as arrify from 'arrify';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
+import * as is from 'is';
+
+interface AclQuery {
+  generation: number;
+  userProject: string;
+}
+
+interface AccessControlObject {
+  entity: string;
+  role: string;
+  projectTeam: string;
+}
 
 /**
  * Attach functionality to a {@link Storage.acl} instance. This will add an
@@ -37,156 +48,175 @@ const is = require('is');
  * @private
  */
 class AclRoleAccessorMethods {
+  private static accessMethods = ['add', 'delete'];
+
+  private static entities = [
+    // Special entity groups that do not require further specification.
+    'allAuthenticatedUsers',
+    'allUsers',
+
+    // Entity groups that require specification, e.g. `user-email@example.com`.
+    'domain-',
+    'group-',
+    'project-',
+    'user-',
+  ];
+
+  private static roles = ['OWNER', 'READER', 'WRITER'];
+
+  /**
+   * An object of convenience methods to add or delete owner ACL permissions for
+   * a given entity.
+   *
+   * The supported methods include:
+   *
+   *   - `myFile.acl.owners.addAllAuthenticatedUsers`
+   *   - `myFile.acl.owners.deleteAllAuthenticatedUsers`
+   *   - `myFile.acl.owners.addAllUsers`
+   *   - `myFile.acl.owners.deleteAllUsers`
+   *   - `myFile.acl.owners.addDomain`
+   *   - `myFile.acl.owners.deleteDomain`
+   *   - `myFile.acl.owners.addGroup`
+   *   - `myFile.acl.owners.deleteGroup`
+   *   - `myFile.acl.owners.addProject`
+   *   - `myFile.acl.owners.deleteProject`
+   *   - `myFile.acl.owners.addUser`
+   *   - `myFile.acl.owners.deleteUser`
+   *
+   * @return {object}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const myFile = myBucket.file('my-file');
+   *
+   * //-
+   * // Add a user as an owner of a file.
+   * //-
+   * const myBucket = gcs.bucket('my-bucket');
+   * const myFile = myBucket.file('my-file');
+   * myFile.acl.owners.addUser('email@example.com', function(err, aclObject)
+   * {});
+   *
+   * //-
+   * // For reference, the above command is the same as running the following.
+   * //-
+   * myFile.acl.add({
+   *   entity: 'user-email@example.com',
+   *   role: gcs.acl.OWNER_ROLE
+   * }, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * myFile.acl.owners.addUser('email@example.com').then(function(data) {
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  owners = {};
+
+  /**
+   * An object of convenience methods to add or delete reader ACL permissions
+   * for a given entity.
+   *
+   * The supported methods include:
+   *
+   *   - `myFile.acl.readers.addAllAuthenticatedUsers`
+   *   - `myFile.acl.readers.deleteAllAuthenticatedUsers`
+   *   - `myFile.acl.readers.addAllUsers`
+   *   - `myFile.acl.readers.deleteAllUsers`
+   *   - `myFile.acl.readers.addDomain`
+   *   - `myFile.acl.readers.deleteDomain`
+   *   - `myFile.acl.readers.addGroup`
+   *   - `myFile.acl.readers.deleteGroup`
+   *   - `myFile.acl.readers.addProject`
+   *   - `myFile.acl.readers.deleteProject`
+   *   - `myFile.acl.readers.addUser`
+   *   - `myFile.acl.readers.deleteUser`
+   *
+   * @return {object}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const myFile = myBucket.file('my-file');
+   *
+   * //-
+   * // Add a user as a reader of a file.
+   * //-
+   * myFile.acl.readers.addUser('email@example.com', function(err, aclObject)
+   * {});
+   *
+   * //-
+   * // For reference, the above command is the same as running the following.
+   * //-
+   * myFile.acl.add({
+   *   entity: 'user-email@example.com',
+   *   role: gcs.acl.READER_ROLE
+   * }, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * myFile.acl.readers.addUser('email@example.com').then(function(data) {
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  readers = {};
+
+  /**
+   * An object of convenience methods to add or delete writer ACL permissions
+   * for a given entity.
+   *
+   * The supported methods include:
+   *
+   *   - `myFile.acl.writers.addAllAuthenticatedUsers`
+   *   - `myFile.acl.writers.deleteAllAuthenticatedUsers`
+   *   - `myFile.acl.writers.addAllUsers`
+   *   - `myFile.acl.writers.deleteAllUsers`
+   *   - `myFile.acl.writers.addDomain`
+   *   - `myFile.acl.writers.deleteDomain`
+   *   - `myFile.acl.writers.addGroup`
+   *   - `myFile.acl.writers.deleteGroup`
+   *   - `myFile.acl.writers.addProject`
+   *   - `myFile.acl.writers.deleteProject`
+   *   - `myFile.acl.writers.addUser`
+   *   - `myFile.acl.writers.deleteUser`
+   *
+   * @return {object}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const myBucket = storage.bucket('my-bucket');
+   * const myFile = myBucket.file('my-file');
+   *
+   * //-
+   * // Add a user as a writer of a file.
+   * //-
+   * myFile.acl.writers.addUser('email@example.com', function(err, aclObject)
+   * {});
+   *
+   * //-
+   * // For reference, the above command is the same as running the following.
+   * //-
+   * myFile.acl.add({
+   *   entity: 'user-email@example.com',
+   *   role: gcs.acl.WRITER_ROLE
+   * }, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * myFile.acl.writers.addUser('email@example.com').then(function(data) {
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  writers = {};
+
   constructor() {
-    /**
-     * An object of convenience methods to add or delete owner ACL permissions for a
-     * given entity.
-     *
-     * The supported methods include:
-     *
-     *   - `myFile.acl.owners.addAllAuthenticatedUsers`
-     *   - `myFile.acl.owners.deleteAllAuthenticatedUsers`
-     *   - `myFile.acl.owners.addAllUsers`
-     *   - `myFile.acl.owners.deleteAllUsers`
-     *   - `myFile.acl.owners.addDomain`
-     *   - `myFile.acl.owners.deleteDomain`
-     *   - `myFile.acl.owners.addGroup`
-     *   - `myFile.acl.owners.deleteGroup`
-     *   - `myFile.acl.owners.addProject`
-     *   - `myFile.acl.owners.deleteProject`
-     *   - `myFile.acl.owners.addUser`
-     *   - `myFile.acl.owners.deleteUser`
-     *
-     * @return {object}
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const myBucket = storage.bucket('my-bucket');
-     * const myFile = myBucket.file('my-file');
-     *
-     * //-
-     * // Add a user as an owner of a file.
-     * //-
-     * const myBucket = gcs.bucket('my-bucket');
-     * const myFile = myBucket.file('my-file');
-     * myFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});
-     *
-     * //-
-     * // For reference, the above command is the same as running the following.
-     * //-
-     * myFile.acl.add({
-     *   entity: 'user-email@example.com',
-     *   role: gcs.acl.OWNER_ROLE
-     * }, function(err, aclObject) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * myFile.acl.owners.addUser('email@example.com').then(function(data) {
-     *   const aclObject = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    this.owners = {};
-
-    /**
-     * An object of convenience methods to add or delete reader ACL permissions for
-     * a given entity.
-     *
-     * The supported methods include:
-     *
-     *   - `myFile.acl.readers.addAllAuthenticatedUsers`
-     *   - `myFile.acl.readers.deleteAllAuthenticatedUsers`
-     *   - `myFile.acl.readers.addAllUsers`
-     *   - `myFile.acl.readers.deleteAllUsers`
-     *   - `myFile.acl.readers.addDomain`
-     *   - `myFile.acl.readers.deleteDomain`
-     *   - `myFile.acl.readers.addGroup`
-     *   - `myFile.acl.readers.deleteGroup`
-     *   - `myFile.acl.readers.addProject`
-     *   - `myFile.acl.readers.deleteProject`
-     *   - `myFile.acl.readers.addUser`
-     *   - `myFile.acl.readers.deleteUser`
-     *
-     * @return {object}
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const myBucket = storage.bucket('my-bucket');
-     * const myFile = myBucket.file('my-file');
-     *
-     * //-
-     * // Add a user as a reader of a file.
-     * //-
-     * myFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});
-     *
-     * //-
-     * // For reference, the above command is the same as running the following.
-     * //-
-     * myFile.acl.add({
-     *   entity: 'user-email@example.com',
-     *   role: gcs.acl.READER_ROLE
-     * }, function(err, aclObject) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * myFile.acl.readers.addUser('email@example.com').then(function(data) {
-     *   const aclObject = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    this.readers = {};
-
-    /**
-     * An object of convenience methods to add or delete writer ACL permissions for
-     * a given entity.
-     *
-     * The supported methods include:
-     *
-     *   - `myFile.acl.writers.addAllAuthenticatedUsers`
-     *   - `myFile.acl.writers.deleteAllAuthenticatedUsers`
-     *   - `myFile.acl.writers.addAllUsers`
-     *   - `myFile.acl.writers.deleteAllUsers`
-     *   - `myFile.acl.writers.addDomain`
-     *   - `myFile.acl.writers.deleteDomain`
-     *   - `myFile.acl.writers.addGroup`
-     *   - `myFile.acl.writers.deleteGroup`
-     *   - `myFile.acl.writers.addProject`
-     *   - `myFile.acl.writers.deleteProject`
-     *   - `myFile.acl.writers.addUser`
-     *   - `myFile.acl.writers.deleteUser`
-     *
-     * @return {object}
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const myBucket = storage.bucket('my-bucket');
-     * const myFile = myBucket.file('my-file');
-     *
-     * //-
-     * // Add a user as a writer of a file.
-     * //-
-     * myFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});
-     *
-     * //-
-     * // For reference, the above command is the same as running the following.
-     * //-
-     * myFile.acl.add({
-     *   entity: 'user-email@example.com',
-     *   role: gcs.acl.WRITER_ROLE
-     * }, function(err, aclObject) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * myFile.acl.writers.addUser('email@example.com').then(function(data) {
-     *   const aclObject = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    this.writers = {};
-
     AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));
   }
 
@@ -219,19 +249,18 @@ class AclRoleAccessorMethods {
             apiEntity = entity + entityId;
           } else {
             // If the entity is not a prefix, it is a special entity group that
-            // does not require further details. The accessor methods only accept
-            // a callback.
+            // does not require further details. The accessor methods only
+            // accept a callback.
             apiEntity = entity;
             callback = entityId;
           }
 
           options = extend(
-            {
-              entity: apiEntity,
-              role: role,
-            },
-            options
-          );
+              {
+                entity: apiEntity,
+                role,
+              },
+              options);
 
           const args = [options];
 
@@ -247,22 +276,6 @@ class AclRoleAccessorMethods {
     }, {});
   }
 }
-
-AclRoleAccessorMethods.accessMethods = ['add', 'delete'];
-
-AclRoleAccessorMethods.entities = [
-  // Special entity groups that do not require further specification.
-  'allAuthenticatedUsers',
-  'allUsers',
-
-  // Entity groups that require specification, e.g. `user-email@example.com`.
-  'domain-',
-  'group-',
-  'project-',
-  'user-',
-];
-
-AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
 
 /**
  * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -306,6 +319,10 @@ AclRoleAccessorMethods.roles = ['OWNER', 'READER', 'WRITER'];
  * @param {object} options Configuration options.
  */
 class Acl extends AclRoleAccessorMethods {
+  default?: Acl;
+  pathPrefix;
+  request_;
+
   constructor(options) {
     super();
 
@@ -333,7 +350,8 @@ class Acl extends AclRoleAccessorMethods {
    * @param {object} options Configuration options.
    * @param {string} options.entity Whose permissions will be added.
    * @param {string} options.role Permissions allowed for the defined entity.
-   *     See {@link https://cloud.google.com/storage/docs/access-control Access Control}.
+   *     See {@link https://cloud.google.com/storage/docs/access-control Access
+   * Control}.
    * @param {number} [options.generation] **File Objects Only** Select a specific
    *     revision of this file (as opposed to the latest version, the default).
    * @param {string} [options.userProject] The ID of the project which will be
@@ -355,7 +373,8 @@ class Acl extends AclRoleAccessorMethods {
    *
    * //-
    * // For file ACL operations, you can also specify a `generation` property.
-   * // Here is how you would grant ownership permissions to a user on a specific
+   * // Here is how you would grant ownership permissions to a user on a
+   * specific
    * // revision of a file.
    * //-
    * myFile.acl.add({
@@ -384,8 +403,8 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_add_bucket_default_owner
    * Example of adding a default owner to a bucket:
    */
-  add(options, callback) {
-    const query = {};
+  add(options, callback?) {
+    const query = {} as AclQuery;
 
     if (options.generation) {
       query.generation = options.generation;
@@ -396,24 +415,23 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '',
-        qs: query,
-        json: {
-          entity: options.entity,
-          role: options.role.toUpperCase(),
+        {
+          method: 'POST',
+          uri: '',
+          qs: query,
+          json: {
+            entity: options.entity,
+            role: options.role.toUpperCase(),
+          },
         },
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        (err, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
 
-        callback(null, this.makeAclObject_(resp), resp);
-      }
-    );
+          callback!(null, this.makeAclObject_(resp), resp);
+        });
   }
 
   /**
@@ -476,8 +494,8 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_remove_file_owner
    * Example of removing an owner from a bucket:
    */
-  delete(options, callback) {
-    const query = {};
+  delete(options, callback?) {
+    const query = {} as AclQuery;
 
     if (options.generation) {
       query.generation = options.generation;
@@ -488,15 +506,14 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-      {
-        method: 'DELETE',
-        uri: '/' + encodeURIComponent(options.entity),
-        qs: query,
-      },
-      (err, resp) => {
-        callback(err, resp);
-      }
-    );
+        {
+          method: 'DELETE',
+          uri: '/' + encodeURIComponent(options.entity),
+          qs: query,
+        },
+        (err, resp) => {
+          callback!(err, resp);
+        });
   }
 
   /**
@@ -519,8 +536,8 @@ class Acl extends AclRoleAccessorMethods {
    * @see [ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}
    *
    * @param {object|function} [options] Configuration options. If you want to
-   *     receive a list of all access controls, pass the callback function as the
-   *     only argument.
+   *     receive a list of all access controls, pass the callback function as
+   * the only argument.
    * @param {string} [options.entity] Whose permissions will be fetched.
    * @param {number} [options.generation] **File Objects Only** Select a specific
    *     revision of this file (as opposed to the latest version, the default).
@@ -582,9 +599,9 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_print_bucket_acl_for_user
    * Example of printing a bucket's ACL for a specific user:
    */
-  get(options, callback) {
+  get(options, callback?) {
     let path = '';
-    const query = {};
+    const query = {} as AclQuery;
 
     if (is.fn(options)) {
       callback = options;
@@ -602,27 +619,26 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-      {
-        uri: path,
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          uri: path,
+          qs: query,
+        },
+        (err, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
 
-        let results;
+          let results;
 
-        if (resp.items) {
-          results = arrify(resp.items).map(this.makeAclObject_);
-        } else {
-          results = this.makeAclObject_(resp);
-        }
+          if (resp.items) {
+            results = arrify(resp.items).map(this.makeAclObject_);
+          } else {
+            results = this.makeAclObject_(resp);
+          }
 
-        callback(null, results, resp);
-      }
-    );
+          callback!(null, results, resp);
+        });
   }
 
   /**
@@ -682,8 +698,8 @@ class Acl extends AclRoleAccessorMethods {
    *   const apiResponse = data[1];
    * });
    */
-  update(options, callback) {
-    const query = {};
+  update(options, callback?) {
+    const query = {} as AclQuery;
 
     if (options.generation) {
       query.generation = options.generation;
@@ -694,23 +710,22 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-      {
-        method: 'PUT',
-        uri: '/' + encodeURIComponent(options.entity),
-        qs: query,
-        json: {
-          role: options.role.toUpperCase(),
+        {
+          method: 'PUT',
+          uri: '/' + encodeURIComponent(options.entity),
+          qs: query,
+          json: {
+            role: options.role.toUpperCase(),
+          },
         },
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        (err, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
 
-        callback(null, this.makeAclObject_(resp), resp);
-      }
-    );
+          callback!(null, this.makeAclObject_(resp), resp);
+        });
   }
 
   /**
@@ -718,11 +733,11 @@ class Acl extends AclRoleAccessorMethods {
    *
    * @private
    */
-  makeAclObject_(accessControlObject) {
+  makeAclObject_(accessControlObject): AccessControlObject {
     const obj = {
       entity: accessControlObject.entity,
       role: accessControlObject.role,
-    };
+    } as AccessControlObject;
 
     if (accessControlObject.projectTeam) {
       obj.projectTeam = accessControlObject.projectTeam;
@@ -753,10 +768,11 @@ class Acl extends AclRoleAccessorMethods {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Acl, {
+promisifyAll(Acl, {
   exclude: ['request'],
 });
 
-module.exports = Acl;
-
-module.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;
+export {
+  Acl,
+  AclRoleAccessorMethods,
+};

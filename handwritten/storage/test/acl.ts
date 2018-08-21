@@ -16,25 +16,29 @@
 
 'use strict';
 
-const assert = require('assert');
-const async = require('async');
-const extend = require('extend');
-const proxyquire = require('proxyquire');
-const util = require('@google-cloud/common').util;
+import * as assert from 'assert';
+import * as async from 'async';
+import * as extend from 'extend';
+import * as proxyquire from 'proxyquire';
+import {util} from '@google-cloud/common';
 
-let promisified = false;
-const fakeUtil = extend({}, util, {
-  promisifyAll: function(Class) {
-    if (Class.name === 'Acl') {
-      promisified = true;
-    }
-  },
-});
-
-const Storage = require('../');
+// tslint:disable-next-line:variable-name
 let Acl;
+// tslint:disable-next-line:variable-name
+let AclRoleAccessorMethods;
+describe('storage/acl', () => {
+  let promisified = false;
+  const fakePromisify = {
+    // tslint:disable-next-line:variable-name
+    promisifyAll(Class) {
+      if (Class.name === 'Acl') {
+        promisified = true;
+      }
+    },
+  };
 
-describe('storage/acl', function() {
+  // tslint:disable-next-line:variable-name
+  const {Storage} = require('../src');
   let acl;
 
   const ERROR = new Error('Error.');
@@ -43,32 +47,32 @@ describe('storage/acl', function() {
   const ROLE = Storage.acl.OWNER_ROLE;
   const ENTITY = 'user-user@example.com';
 
-  before(function() {
-    Acl = proxyquire('../src/acl.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
+  before(() => {
+    const aclModule = proxyquire('../src/acl.js', {
+      '@google-cloud/promisify': fakePromisify,
     });
+    Acl = aclModule.Acl;
+    AclRoleAccessorMethods = aclModule.AclRoleAccessorMethods;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     acl = new Acl({request: MAKE_REQ, pathPrefix: PATH_PREFIX});
   });
 
-  describe('initialization', function() {
-    it('should promisify all the things', function() {
+  describe('initialization', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should assign makeReq and pathPrefix', function() {
+    it('should assign makeReq and pathPrefix', () => {
       assert.strictEqual(acl.pathPrefix, PATH_PREFIX);
       assert.strictEqual(acl.request_, MAKE_REQ);
     });
   });
 
-  describe('add', function() {
-    it('should make the correct api request', function(done) {
-      acl.request = function(reqOpts) {
+  describe('add', () => {
+    it('should make the correct api request', done => {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '');
         assert.deepStrictEqual(reqOpts.json, {entity: ENTITY, role: ROLE});
@@ -78,14 +82,14 @@ describe('storage/acl', function() {
       acl.add({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', function(done) {
+    it('should set the generation', done => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -93,14 +97,14 @@ describe('storage/acl', function() {
       acl.add(options, assert.ifError);
     });
 
-    it('should set the userProject', function(done) {
+    it('should set the userProject', done => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -108,54 +112,54 @@ describe('storage/acl', function() {
       acl.add(options, assert.ifError);
     });
 
-    it('should execute the callback with an ACL object', function(done) {
+    it('should execute the callback with an ACL object', done => {
       const apiResponse = {entity: ENTITY, role: ROLE};
       const expectedAclObject = {entity: ENTITY, role: ROLE};
 
-      acl.makeAclObject_ = function(obj) {
+      acl.makeAclObject_ = (obj) => {
         assert.deepStrictEqual(obj, apiResponse);
         return expectedAclObject;
       };
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, apiResponse);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, function(err, aclObject) {
+      acl.add({entity: ENTITY, role: ROLE}, (err, aclObject) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
         done();
       });
     });
 
-    it('should execute the callback with an error', function(done) {
-      acl.request = function(reqOpts, callback) {
+    it('should execute the callback with an error', done => {
+      acl.request = (reqOpts, callback) => {
         callback(ERROR);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, function(err) {
+      acl.add({entity: ENTITY, role: ROLE}, (err) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
     });
 
-    it('should execute the callback with apiResponse', function(done) {
+    it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, resp);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, function(err, acls, apiResponse) {
+      acl.add({entity: ENTITY, role: ROLE}, (err, acls, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
   });
 
-  describe('delete', function() {
-    it('should make the correct api request', function(done) {
-      acl.request = function(reqOpts) {
+  describe('delete', () => {
+    it('should make the correct api request', done => {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
@@ -165,13 +169,13 @@ describe('storage/acl', function() {
       acl.delete({entity: ENTITY}, assert.ifError);
     });
 
-    it('should set the generation', function(done) {
+    it('should set the generation', done => {
       const options = {
         entity: ENTITY,
         generation: 8,
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -179,14 +183,14 @@ describe('storage/acl', function() {
       acl.delete(options, assert.ifError);
     });
 
-    it('should set the userProject', function(done) {
+    it('should set the userProject', done => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -194,35 +198,35 @@ describe('storage/acl', function() {
       acl.delete(options, assert.ifError);
     });
 
-    it('should execute the callback with an error', function(done) {
-      acl.request = function(reqOpts, callback) {
+    it('should execute the callback with an error', done => {
+      acl.request = (reqOpts, callback) => {
         callback(ERROR);
       };
 
-      acl.delete({entity: ENTITY}, function(err) {
+      acl.delete({entity: ENTITY}, (err) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
     });
 
-    it('should execute the callback with apiResponse', function(done) {
+    it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, resp);
       };
 
-      acl.delete({entity: ENTITY}, function(err, apiResponse) {
+      acl.delete({entity: ENTITY}, (err, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
   });
 
-  describe('get', function() {
-    describe('all ACL objects', function() {
-      it('should make the correct API request', function(done) {
-        acl.request = function(reqOpts) {
+  describe('get', () => {
+    describe('all ACL objects', () => {
+      it('should make the correct API request', done => {
+        acl.request = reqOpts => {
           assert.strictEqual(reqOpts.uri, '');
 
           done();
@@ -231,19 +235,19 @@ describe('storage/acl', function() {
         acl.get(assert.ifError);
       });
 
-      it('should accept a configuration object', function(done) {
+      it('should accept a configuration object', done => {
         const generation = 1;
 
-        acl.request = function(reqOpts) {
+        acl.request = reqOpts => {
           assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
         };
 
-        acl.get({generation: generation}, assert.ifError);
+        acl.get({generation}, assert.ifError);
       });
 
-      it('should pass an array of acl objects to the callback', function(done) {
+      it('should pass an array of acl objects to the callback', done => {
         const apiResponse = {
           items: [
             {entity: ENTITY, role: ROLE},
@@ -258,15 +262,15 @@ describe('storage/acl', function() {
           {entity: ENTITY, role: ROLE},
         ];
 
-        acl.makeAclObject_ = function(obj, index) {
+        acl.makeAclObject_ = (obj, index) => {
           return expectedAclObjects[index];
         };
 
-        acl.request = function(reqOpts, callback) {
+        acl.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
 
-        acl.get(function(err, aclObjects) {
+        acl.get((err, aclObjects) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObjects, expectedAclObjects);
           done();
@@ -274,9 +278,9 @@ describe('storage/acl', function() {
       });
     });
 
-    describe('ACL object for an entity', function() {
-      it('should get a specific ACL object', function(done) {
-        acl.request = function(reqOpts) {
+    describe('ACL object for an entity', () => {
+      it('should get a specific ACL object', done => {
+        acl.request = reqOpts => {
           assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
           done();
@@ -285,25 +289,25 @@ describe('storage/acl', function() {
         acl.get({entity: ENTITY}, assert.ifError);
       });
 
-      it('should accept a configuration object', function(done) {
+      it('should accept a configuration object', done => {
         const generation = 1;
 
-        acl.request = function(reqOpts) {
+        acl.request = reqOpts => {
           assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
         };
 
-        acl.get({entity: ENTITY, generation: generation}, assert.ifError);
+        acl.get({entity: ENTITY, generation}, assert.ifError);
       });
 
-      it('should set the userProject', function(done) {
+      it('should set the userProject', done => {
         const options = {
           entity: ENTITY,
           userProject: 'grape-spaceship-123',
         };
 
-        acl.request = function(reqOpts) {
+        acl.request = reqOpts => {
           assert.strictEqual(reqOpts.qs.userProject, options.userProject);
           done();
         };
@@ -311,19 +315,19 @@ describe('storage/acl', function() {
         acl.get(options, assert.ifError);
       });
 
-      it('should pass an acl object to the callback', function(done) {
+      it('should pass an acl object to the callback', done => {
         const apiResponse = {entity: ENTITY, role: ROLE};
         const expectedAclObject = {entity: ENTITY, role: ROLE};
 
-        acl.makeAclObject_ = function() {
+        acl.makeAclObject_ = () => {
           return expectedAclObject;
         };
 
-        acl.request = function(reqOpts, callback) {
+        acl.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
 
-        acl.get({entity: ENTITY}, function(err, aclObject) {
+        acl.get({entity: ENTITY}, (err, aclObject) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObject, expectedAclObject);
           done();
@@ -331,34 +335,34 @@ describe('storage/acl', function() {
       });
     });
 
-    it('should execute the callback with an error', function(done) {
-      acl.request = function(reqOpts, callback) {
+    it('should execute the callback with an error', done => {
+      acl.request = (reqOpts, callback) => {
         callback(ERROR);
       };
 
-      acl.get(function(err) {
+      acl.get((err) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
     });
 
-    it('should execute the callback with apiResponse', function(done) {
+    it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, resp);
       };
 
-      acl.get(function(err, acls, apiResponse) {
+      acl.get((err, acls, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
   });
 
-  describe('update', function() {
-    it('should make the correct API request', function(done) {
-      acl.request = function(reqOpts) {
+  describe('update', () => {
+    it('should make the correct API request', done => {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
         assert.deepStrictEqual(reqOpts.json, {role: ROLE});
@@ -369,14 +373,14 @@ describe('storage/acl', function() {
       acl.update({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', function(done) {
+    it('should set the generation', done => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         generation: 8,
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -384,14 +388,14 @@ describe('storage/acl', function() {
       acl.update(options, assert.ifError);
     });
 
-    it('should set the userProject', function(done) {
+    it('should set the userProject', done => {
       const options = {
         entity: ENTITY,
         role: ROLE,
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = function(reqOpts) {
+      acl.request = reqOpts => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -399,53 +403,53 @@ describe('storage/acl', function() {
       acl.update(options, assert.ifError);
     });
 
-    it('should pass an acl object to the callback', function(done) {
+    it('should pass an acl object to the callback', done => {
       const apiResponse = {entity: ENTITY, role: ROLE};
       const expectedAclObject = {entity: ENTITY, role: ROLE};
 
-      acl.makeAclObject_ = function() {
+      acl.makeAclObject_ = () => {
         return expectedAclObject;
       };
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, apiResponse);
       };
 
-      acl.update({entity: ENTITY, role: ROLE}, function(err, aclObject) {
+      acl.update({entity: ENTITY, role: ROLE}, (err, aclObject) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
         done();
       });
     });
 
-    it('should execute the callback with an error', function(done) {
-      acl.request = function(reqOpts, callback) {
+    it('should execute the callback with an error', done => {
+      acl.request = (reqOpts, callback) => {
         callback(ERROR);
       };
 
-      acl.update({entity: ENTITY, role: ROLE}, function(err) {
+      acl.update({entity: ENTITY, role: ROLE}, (err) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
     });
 
-    it('should execute the callback with apiResponse', function(done) {
+    it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = function(reqOpts, callback) {
+      acl.request = (reqOpts, callback) => {
         callback(null, resp);
       };
 
       const config = {entity: ENTITY, role: ROLE};
-      acl.update(config, function(err, acls, apiResponse) {
+      acl.update(config, (err, acls, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
     });
   });
 
-  describe('makeAclObject_', function() {
-    it('should return an ACL object from an API response', function() {
+  describe('makeAclObject_', () => {
+    it('should return an ACL object from an API response', () => {
       const projectTeam = {
         projectNumber: '283748374',
         team: 'awesome',
@@ -454,7 +458,7 @@ describe('storage/acl', function() {
       const apiResponse = {
         entity: ENTITY,
         role: ROLE,
-        projectTeam: projectTeam,
+        projectTeam,
         extra: 'ignored',
         things: true,
       };
@@ -462,23 +466,23 @@ describe('storage/acl', function() {
       assert.deepStrictEqual(acl.makeAclObject_(apiResponse), {
         entity: ENTITY,
         role: ROLE,
-        projectTeam: projectTeam,
+        projectTeam,
       });
     });
   });
 
-  describe('request', function() {
-    it('should make the correct request', function(done) {
+  describe('request', () => {
+    it('should make the correct request', done => {
       const uri = '/uri';
 
       const reqOpts = {
-        uri: uri,
+        uri,
       };
 
-      acl.request_ = function(reqOpts_, callback) {
+      acl.request_ = (reqOpts_, callback) => {
         assert.strictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, PATH_PREFIX + uri);
-        callback(); // done()
+        callback();  // done()
       };
 
       acl.request(reqOpts, done);
@@ -486,15 +490,15 @@ describe('storage/acl', function() {
   });
 });
 
-describe('storage/AclRoleAccessorMethods', function() {
+describe('storage/AclRoleAccessorMethods', () => {
   let aclEntity;
 
-  beforeEach(function() {
-    aclEntity = new Acl.AclRoleAccessorMethods();
+  beforeEach(() => {
+    aclEntity = new AclRoleAccessorMethods();
   });
 
-  describe('initialization', function() {
-    it('should assign access methods for every role object', function() {
+  describe('initialization', () => {
+    it('should assign access methods for every role object', () => {
       const expectedApi = [
         'addAllAuthenticatedUsers',
         'deleteAllAuthenticatedUsers',
@@ -526,24 +530,24 @@ describe('storage/AclRoleAccessorMethods', function() {
     });
   });
 
-  describe('_assignAccessMethods', function() {
-    it('should call parent method', function(done) {
+  describe('_assignAccessMethods', () => {
+    it('should call parent method', done => {
       const userName = 'email@example.com';
       const role = 'fakerole';
 
-      aclEntity.add = function(options, callback) {
+      aclEntity.add = (options, callback) => {
         assert.deepStrictEqual(options, {
           entity: 'user-' + userName,
-          role: role,
+          role,
         });
 
         callback();
       };
 
-      aclEntity.delete = function(options, callback) {
+      aclEntity.delete = (options, callback) => {
         assert.deepStrictEqual(options, {
           entity: 'allUsers',
-          role: role,
+          role,
         });
 
         callback();
@@ -552,23 +556,23 @@ describe('storage/AclRoleAccessorMethods', function() {
       aclEntity._assignAccessMethods(role);
 
       async.parallel(
-        [
-          function(next) {
-            // The method name should be in plural form. (fakeroles vs fakerole)
-            aclEntity.fakeroles.addUser(userName, next);
-          },
-          function(next) {
-            aclEntity.fakeroles.deleteAllUsers(next);
-          },
-        ],
-        done
-      );
+          [
+            next => {
+              // The method name should be in plural form. (fakeroles vs
+              // fakerole)
+              aclEntity.fakeroles.addUser(userName, next);
+            },
+            next => {
+              aclEntity.fakeroles.deleteAllUsers(next);
+            },
+          ],
+          done);
     });
 
-    it('should return the parent methods return value', function() {
+    it('should return the parent methods return value', () => {
       const fakeReturn = {};
 
-      aclEntity.add = function() {
+      aclEntity.add = () => {
         return fakeReturn;
       };
 
@@ -578,9 +582,9 @@ describe('storage/AclRoleAccessorMethods', function() {
       assert.strictEqual(value, fakeReturn);
     });
 
-    it('should not pass in the callback if undefined', function(done) {
-      aclEntity.add = function() {
-        assert.strictEqual(arguments.length, 1);
+    it('should not pass in the callback if undefined', done => {
+      aclEntity.add = (...args) => {
+        assert.strictEqual(args.length, 1);
         done();
       };
 
@@ -588,7 +592,7 @@ describe('storage/AclRoleAccessorMethods', function() {
       aclEntity.fakeroles.addUser('email@example.com', undefined);
     });
 
-    it('should optionally accept options', function(done) {
+    it('should optionally accept options', done => {
       const fakeRole = 'fakerole';
       const fakeUser = 'email@example.com';
       const fakeOptions = {
@@ -596,14 +600,13 @@ describe('storage/AclRoleAccessorMethods', function() {
       };
 
       const expectedOptions = extend(
-        {
-          entity: 'user-' + fakeUser,
-          role: fakeRole,
-        },
-        fakeOptions
-      );
+          {
+            entity: 'user-' + fakeUser,
+            role: fakeRole,
+          },
+          fakeOptions);
 
-      aclEntity.add = function(options) {
+      aclEntity.add = (options) => {
         assert.deepStrictEqual(options, expectedOptions);
         done();
       };

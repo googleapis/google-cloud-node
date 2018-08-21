@@ -33,7 +33,7 @@ const uuid = require('uuid');
 
 const util = require('@google-cloud/common').util;
 
-const Storage = require('../');
+const {Storage} = require('../');
 const Bucket = Storage.Bucket;
 const PubSub = require('@google-cloud/pubsub');
 
@@ -109,7 +109,8 @@ describe('storage', function() {
           process.env.GOOGLE_APPLICATION_CREDENTIALS;
         delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-        storageWithoutAuth = require('../')();
+        const {Storage} = require('../');
+        storageWithoutAuth = new Storage();
 
         done();
       });

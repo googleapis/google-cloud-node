@@ -26,7 +26,7 @@
 function enableRequesterPays(bucketName) {
   // [START storage_enable_requester_pays]
   // Imports the Google Cloud client library
-  const Storage = require(`@google-cloud/storage`);
+  const {Storage} = require(`@google-cloud/storage`);
 
   // Creates a client
   const storage = new Storage();
@@ -54,7 +54,7 @@ function enableRequesterPays(bucketName) {
 function disableRequesterPays(bucketName) {
   // [START storage_disable_requester_pays]
   // Imports the Google Cloud client library
-  const Storage = require(`@google-cloud/storage`);
+  const {Storage} = require(`@google-cloud/storage`);
 
   // Creates a client
   const storage = new Storage();
@@ -82,7 +82,7 @@ function disableRequesterPays(bucketName) {
 function getRequesterPaysStatus(bucketName) {
   // [START storage_get_requester_pays_status]
   // Imports the Google Cloud client library
-  const Storage = require(`@google-cloud/storage`);
+  const {Storage} = require(`@google-cloud/storage`);
 
   // Creates a client
   const storage = new Storage();
@@ -122,7 +122,7 @@ function downloadFileUsingRequesterPays(
 ) {
   // [START storage_download_file_requester_pays]
   // Imports the Google Cloud client library
-  const Storage = require(`@google-cloud/storage`);
+  const {Storage} = require(`@google-cloud/storage`);
 
   // Creates a client
   const storage = new Storage();

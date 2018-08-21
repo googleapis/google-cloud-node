@@ -16,21 +16,30 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const common = require('@google-cloud/common');
-const extend = require('extend');
+import * as arrify from 'arrify';
+import {Service} from '@google-cloud/common';
+import {paginator} from '@google-cloud/paginator';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
 
-const Bucket = require('./bucket.js');
-const Channel = require('./channel.js');
-const File = require('./file.js');
+import {Bucket} from './bucket';
+import {Channel} from './channel';
+import {File} from './file';
+
+interface CreateBucketQuery {
+  project: string;
+  userProject: string;
+}
 
 /**
  * @typedef {object} ClientConfig
  * @property {string} [projectId] The project ID from the Google Developer's
  *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
  *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
- *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
- *     your project ID will be detected automatically.
+ *     an environment which supports {@link
+ * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+ * Application Default Credentials}, your project ID will be detected
+ * automatically.
  * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
  *     downloaded from the Google Developers Console. If you provide a path to a
  *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
@@ -71,12 +80,12 @@ const File = require('./file.js');
  * @class
  * @hideconstructor
  *
- * @example <caption>Create a client that uses Application Default Credentials (ADC)</caption>
- * const Storage = require('@google-cloud/storage');
- * const storage = new Storage();
+ * @example <caption>Create a client that uses Application Default Credentials
+ * (ADC)</caption> const {Storage} = require('@google-cloud/storage'); const
+ * storage = new Storage();
  *
  * @example <caption>Create a client with explicit credentials</caption>
- * const Storage = require('@google-cloud/storage');
+ * storage');/storage');
  * const storage = new Storage({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json'
@@ -84,7 +93,133 @@ const File = require('./file.js');
  *
  * @param {ClientConfig} [options] Configuration options.
  */
-class Storage extends common.Service {
+class Storage extends Service {
+  /**
+   * {@link Bucket} class.
+   *
+   * @name Storage.Bucket
+   * @see Bucket
+   * @type {Constructor}
+   */
+  static Bucket: typeof Bucket = Bucket;
+
+  /**
+   * {@link Channel} class.
+   *
+   * @name Storage.Channel
+   * @see Channel
+   * @type {Constructor}
+   */
+  static Channel: typeof Channel = Channel;
+
+  /**
+   * {@link File} class.
+   *
+   * @name Storage.File
+   * @see File
+   * @type {Constructor}
+   */
+  static File: typeof File = File;
+
+  /**
+   * Cloud Storage uses access control lists (ACLs) to manage object and
+   * bucket access. ACLs are the mechanism you use to share objects with other
+   * users and allow other users to access your buckets and objects.
+   *
+   * This object provides constants to refer to the three permission levels that
+   * can be granted to an entity:
+   *
+   *   - `gcs.acl.OWNER_ROLE` - ("OWNER")
+   *   - `gcs.acl.READER_ROLE` - ("READER")
+   *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
+   *
+   * @see [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
+   *
+   * @name Storage.acl
+   * @type {object}
+   * @property {string} OWNER_ROLE
+   * @property {string} READER_ROLE
+   * @property {string} WRITER_ROLE
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const albums = storage.bucket('albums');
+   *
+   * //-
+   * // Make all of the files currently in a bucket publicly readable.
+   * //-
+   * const options = {
+   *   entity: 'allUsers',
+   *   role: storage.acl.READER_ROLE
+   * };
+   *
+   * albums.acl.add(options, function(err, aclObject) {});
+   *
+   * //-
+   * // Make any new objects added to a bucket publicly readable.
+   * //-
+   * albums.acl.default.add(options, function(err, aclObject) {});
+   *
+   * //-
+   * // Grant a user ownership permissions to a bucket.
+   * //-
+   * albums.acl.add({
+   *   entity: 'user-useremail@example.com',
+   *   role: storage.acl.OWNER_ROLE
+   * }, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * albums.acl.add(options).then(function(data) {
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  static acl = {
+    OWNER_ROLE: 'OWNER',
+    READER_ROLE: 'READER',
+    WRITER_ROLE: 'WRITER',
+  };
+
+  /**
+   * Reference to {@link Storage.acl}.
+   *
+   * @name Storage#acl
+   * @see Storage.acl
+   */
+  acl: typeof Storage.acl;
+
+  /**
+   * Get {@link Bucket} objects for all of the buckets in your project as
+   * a readable object stream.
+   *
+   * @method Storage#getBucketsStream
+   * @param {GetBucketsRequest} [query] Query object for listing buckets.
+   * @returns {ReadableStream} A readable stream that emits {@link Bucket} instances.
+   *
+   * @example
+   * storage.getBucketsStream()
+   *   .on('error', console.error)
+   *   .on('data', function(bucket) {
+   *     // bucket is a Bucket object.
+   *   })
+   *   .on('end', function() {
+   *     // All buckets retrieved.
+   *   });
+   *
+   * //-
+   * // If you anticipate many results, you can end a stream early to prevent
+   * // unnecessary processing and API requests.
+   * //-
+   * storage.getBucketsStream()
+   *   .on('data', function(bucket) {
+   *     this.end();
+   *   });
+   */
+  getBucketsStream;
+
   constructor(options) {
     const config = {
       baseUrl: 'https://www.googleapis.com/storage/v1',
@@ -94,7 +229,7 @@ class Storage extends common.Service {
         'https://www.googleapis.com/auth/cloud-platform',
         'https://www.googleapis.com/auth/devstorage.full_control',
       ],
-      packageJson: require('../package.json'),
+      packageJson: require('../../package.json'),
     };
 
     super(config, options);
@@ -107,34 +242,7 @@ class Storage extends common.Service {
      */
     this.acl = Storage.acl;
 
-    /**
-     * Get {@link Bucket} objects for all of the buckets in your project as
-     * a readable object stream.
-     *
-     * @method Storage#getBucketsStream
-     * @param {GetBucketsRequest} [query] Query object for listing buckets.
-     * @returns {ReadableStream} A readable stream that emits {@link Bucket} instances.
-     *
-     * @example
-     * storage.getBucketsStream()
-     *   .on('error', console.error)
-     *   .on('data', function(bucket) {
-     *     // bucket is a Bucket object.
-     *   })
-     *   .on('end', function() {
-     *     // All buckets retrieved.
-     *   });
-     *
-     * //-
-     * // If you anticipate many results, you can end a stream early to prevent
-     * // unnecessary processing and API requests.
-     * //-
-     * storage.getBucketsStream()
-     *   .on('data', function(bucket) {
-     *     this.end();
-     *   });
-     */
-    this.getBucketsStream = common.paginator.streamify('getBuckets');
+    this.getBucketsStream = paginator.streamify('getBuckets');
   }
 
   /**
@@ -151,11 +259,12 @@ class Storage extends common.Service {
    * @see Bucket
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const albums = storage.bucket('albums');
    * const photos = storage.bucket('photos');
    */
-  bucket(name, options) {
+  bucket(name, options?) {
     if (!name) {
       throw new Error('A bucket name is needed to use Cloud Storage.');
     }
@@ -172,7 +281,8 @@ class Storage extends common.Service {
    * @see Channel
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const channel = storage.channel('id', 'resource-id');
    */
   channel(id, resourceId) {
@@ -212,7 +322,8 @@ class Storage extends common.Service {
    *
    * Cloud Storage uses a flat namespace, so you can't create a bucket with
    * a name that is already in use. For more information, see
-   * [Bucket Naming Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
+   * [Bucket Naming
+   * Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
    *
    * @see [Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}
    * @see [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
@@ -225,7 +336,8 @@ class Storage extends common.Service {
    * @see Bucket#create
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const callback = function(err, bucket, apiResponse) {
    *   // `bucket` is a Bucket object.
    * };
@@ -235,7 +347,8 @@ class Storage extends common.Service {
    * //-
    * // Create a bucket in a specific location and region. <em>See the <a
    * // href="https://cloud.google.com/storage/docs/json_api/v1/buckets/insert">
-   * // Official JSON API docs</a> for complete details on the `location` option.
+   * // Official JSON API docs</a> for complete details on the `location`
+   * option.
    * // </em>
    * //-
    * const metadata = {
@@ -279,7 +392,7 @@ class Storage extends common.Service {
     }
 
     const body = extend({}, metadata, {
-      name: name,
+      name,
     });
 
     const storageClasses = {
@@ -306,7 +419,7 @@ class Storage extends common.Service {
 
     const query = {
       project: this.projectId,
-    };
+    } as CreateBucketQuery;
 
     if (body.userProject) {
       query.userProject = body.userProject;
@@ -314,24 +427,23 @@ class Storage extends common.Service {
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/b',
-        qs: query,
-        json: body,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          method: 'POST',
+          uri: '/b',
+          qs: query,
+          json: body,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        const bucket = this.bucket(name);
-        bucket.metadata = resp;
+          const bucket = this.bucket(name);
+          bucket.metadata = resp;
 
-        callback(null, bucket, resp);
-      }
-    );
+          callback(null, bucket, resp);
+        });
   }
 
   /**
@@ -367,7 +479,8 @@ class Storage extends common.Service {
    * @returns {Promise<GetBucketsResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * storage.getBuckets(function(err, buckets) {
    *   if (!err) {
    *     // buckets is an array of Bucket objects.
@@ -417,37 +530,37 @@ class Storage extends common.Service {
     query.project = query.project || this.projectId;
 
     this.request(
-      {
-        uri: '/b',
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
+        {
+          uri: '/b',
+          qs: query,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
 
-        const buckets = arrify(resp.items).map(bucket => {
-          const bucketInstance = this.bucket(bucket.id);
-          bucketInstance.metadata = bucket;
-          return bucketInstance;
+          const buckets = arrify(resp.items).map(bucket => {
+            const bucketInstance = this.bucket(bucket.id);
+            bucketInstance.metadata = bucket;
+            return bucketInstance;
+          });
+
+          let nextQuery = null;
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, query, {pageToken: resp.nextPageToken});
+          }
+
+          callback(null, buckets, nextQuery, resp);
         });
-
-        let nextQuery = null;
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, query, {pageToken: resp.nextPageToken});
-        }
-
-        callback(null, buckets, nextQuery, resp);
-      }
-    );
   }
 
   /**
    * @typedef {array} GetServiceAccountResponse
    * @property {object} 0 The service account resource.
    * @property {object} 1 The full
-   * [API response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * [API
+   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
    */
   /**
    * @callback GetServiceAccountCallback
@@ -456,7 +569,8 @@ class Storage extends common.Service {
    * @param {string} serviceAccount.emailAddress The service account email
    *     address.
    * @param {object} apiResponse The full
-   * [API response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * [API
+   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
    */
   /**
    * Get the email address of this project's Google Cloud Storage service
@@ -472,7 +586,8 @@ class Storage extends common.Service {
    * @returns {Promise<GetServiceAccountResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    *
    * storage.getServiceAccount(function(err, serviceAccount, apiResponse) {
    *   if (!err) {
@@ -495,146 +610,49 @@ class Storage extends common.Service {
     }
 
     this.request(
-      {
-        uri: `/projects/${this.projectId}/serviceAccount`,
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          uri: `/projects/${this.projectId}/serviceAccount`,
+          qs: options,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        const camelCaseResponse = {};
+          const camelCaseResponse = {};
 
-        for (let prop in resp) {
-          let camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
-            match.toUpperCase()
-          );
-          camelCaseResponse[camelCaseProp] = resp[prop];
-        }
+          for (const prop in resp) {
+            if (resp.hasOwnProperty(prop)) {
+              const camelCaseProp =
+                  prop.replace(/_(\w)/g, (_, match) => match.toUpperCase());
+              camelCaseResponse[camelCaseProp] = resp[prop];
+            }
+          }
 
-        callback(null, camelCaseResponse, resp);
-      }
-    );
+          callback(null, camelCaseResponse, resp);
+        });
   }
 }
-
-// Allow creating a `Storage` instance without using the `new` keyword. (#173)
-// eslint-disable-next-line no-class-assign
-Storage = new Proxy(Storage, {
-  apply(target, thisArg, argumentsList) {
-    return new target(...argumentsList);
-  },
-});
-
-/**
- * Cloud Storage uses access control lists (ACLs) to manage object and
- * bucket access. ACLs are the mechanism you use to share objects with other
- * users and allow other users to access your buckets and objects.
- *
- * This object provides constants to refer to the three permission levels that
- * can be granted to an entity:
- *
- *   - `gcs.acl.OWNER_ROLE` - ("OWNER")
- *   - `gcs.acl.READER_ROLE` - ("READER")
- *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
- *
- * @see [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
- *
- * @name Storage.acl
- * @type {object}
- * @property {string} OWNER_ROLE
- * @property {string} READER_ROLE
- * @property {string} WRITER_ROLE
- *
- * @example
- * const storage = require('@google-cloud/storage')();
- * const albums = storage.bucket('albums');
- *
- * //-
- * // Make all of the files currently in a bucket publicly readable.
- * //-
- * const options = {
- *   entity: 'allUsers',
- *   role: storage.acl.READER_ROLE
- * };
- *
- * albums.acl.add(options, function(err, aclObject) {});
- *
- * //-
- * // Make any new objects added to a bucket publicly readable.
- * //-
- * albums.acl.default.add(options, function(err, aclObject) {});
- *
- * //-
- * // Grant a user ownership permissions to a bucket.
- * //-
- * albums.acl.add({
- *   entity: 'user-useremail@example.com',
- *   role: storage.acl.OWNER_ROLE
- * }, function(err, aclObject) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * albums.acl.add(options).then(function(data) {
- *   const aclObject = data[0];
- *   const apiResponse = data[1];
- * });
- */
-Storage.acl = {
-  OWNER_ROLE: 'OWNER',
-  READER_ROLE: 'READER',
-  WRITER_ROLE: 'WRITER',
-};
 
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Storage, 'getBuckets');
+paginator.extend(Storage, 'getBuckets');
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Storage, {
+promisifyAll(Storage, {
   exclude: ['bucket', 'channel'],
 });
 
 /**
- * {@link Bucket} class.
- *
- * @name Storage.Bucket
- * @see Bucket
- * @type {Constructor}
- */
-Storage.Bucket = Bucket;
-
-/**
- * {@link Channel} class.
- *
- * @name Storage.Channel
- * @see Channel
- * @type {Constructor}
- */
-Storage.Channel = Channel;
-
-/**
- * {@link File} class.
- *
- * @name Storage.File
- * @see File
- * @type {Constructor}
- */
-Storage.File = File;
-
-/**
- * The default export of the `@google-cloud/storage` package is the
- * {@link Storage} class, which also serves as a factory function which produces
- * {@link Storage} instances.
+ * The `@google-cloud/storage` package has a single named export which is the
+ * {@link Storage} (ES6) class, which should be instantiated with `new`.
  *
  * See {@link Storage} and {@link ClientConfig} for client methods and
  * configuration options.
@@ -642,23 +660,25 @@ Storage.File = File;
  * @module {Storage} @google-cloud/storage
  * @alias nodejs-storage
  *
- * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/storage
+ * @example <caption>Install the client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
+ * @google-cloud/storage
  *
  * @example <caption>Import the client library</caption>
- * const Storage = require('@google-cloud/storage');
+ * const {Storage} = require('@google-cloud/storage');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const storage = new Storage();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const storage = new Storage();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const storage = new Storage({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const storage = new Storage({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:storage_quickstart
  * Full quickstart example:
  */
-module.exports = Storage;
+export {Storage};

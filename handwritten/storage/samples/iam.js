@@ -18,7 +18,7 @@
 function viewBucketIamMembers(bucketName) {
   // [START storage_view_bucket_iam_members]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -56,7 +56,7 @@ function viewBucketIamMembers(bucketName) {
 function addBucketIamMember(bucketName, roleName, members) {
   // [START storage_add_bucket_iam_member]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
@@ -106,7 +106,7 @@ function addBucketIamMember(bucketName, roleName, members) {
 function removeBucketIamMember(bucketName, roleName, members) {
   // [START storage_remove_bucket_iam_member]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   /**
    * TODO(developer): Uncomment the following lines before running the sample.

@@ -16,83 +16,86 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const proxyquire = require('proxyquire');
-const util = require('@google-cloud/common').util;
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as proxyquire from 'proxyquire';
+import {util} from '@google-cloud/common';
 
-let promisified = false;
-const fakeUtil = extend({}, util, {
-  promisifyAll: function(Class) {
-    if (Class.name === 'Iam') {
-      promisified = true;
-    }
-  },
-});
-
-describe('storage/iam', function() {
+describe('storage/iam', () => {
+  // tslint:disable-next-line:variable-name
   let Iam;
   let iam;
 
   let BUCKET_INSTANCE;
+  let promisified = false;
+  const fakePromisify = {
+    // tslint:disable-next-line:variable-name
+    promisifyAll(Class) {
+      if (Class.name === 'Iam') {
+        promisified = true;
+      }
+    },
+  };
 
-  before(function() {
+  before(() => {
     Iam = proxyquire('../src/iam.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-      },
-    });
+            '@google-cloud/promisify': fakePromisify,
+          }).Iam;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
+    const id = 'bucket-id';
     BUCKET_INSTANCE = {
-      id: 'bucket-id',
+      id,
       request: util.noop,
+      getId: () => id,
     };
 
     iam = new Iam(BUCKET_INSTANCE);
   });
 
-  describe('initialization', function() {
-    it('should promisify all the things', function() {
+  describe('initialization', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the request function', function(done) {
-      BUCKET_INSTANCE.request = function(callback) {
-        assert.strictEqual(this, BUCKET_INSTANCE);
-        callback(); // done()
-      };
+    it('should localize the request function', done => {
+      extend(BUCKET_INSTANCE, {
+        request(callback) {
+          assert.strictEqual(this, BUCKET_INSTANCE);
+          callback();  // done()
+        },
+      });
 
       const iam = new Iam(BUCKET_INSTANCE);
       iam.request_(done);
     });
 
-    it('should localize the resource ID', function() {
+    it('should localize the resource ID', () => {
       assert.strictEqual(iam.resourceId_, 'buckets/' + BUCKET_INSTANCE.id);
     });
   });
 
-  describe('getPolicy', function() {
-    it('should make the correct api request', function(done) {
-      iam.request_ = function(reqOpts, callback) {
+  describe('getPolicy', () => {
+    it('should make the correct api request', done => {
+      iam.request_ = (reqOpts, callback) => {
         assert.deepStrictEqual(reqOpts, {
           uri: '/iam',
           qs: {},
         });
 
-        callback(); // done()
+        callback();  // done()
       };
 
       iam.getPolicy(done);
     });
 
-    it('should accept an options object', function(done) {
+    it('should accept an options object', done => {
       const options = {
         userProject: 'grape-spaceship-123',
       };
 
-      iam.request_ = function(reqOpts) {
+      iam.request_ = reqOpts => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -101,38 +104,37 @@ describe('storage/iam', function() {
     });
   });
 
-  describe('setPolicy', function() {
-    it('should throw an error if a policy is not supplied', function() {
-      assert.throws(function() {
+  describe('setPolicy', () => {
+    it('should throw an error if a policy is not supplied', () => {
+      assert.throws(() => {
         iam.setPolicy(util.noop);
       }, /A policy object is required\./);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const policy = {
         a: 'b',
       };
 
-      iam.request_ = function(reqOpts, callback) {
+      iam.request_ = (reqOpts, callback) => {
         assert.deepStrictEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
           json: extend(
-            {
-              resourceId: iam.resourceId_,
-            },
-            policy
-          ),
+              {
+                resourceId: iam.resourceId_,
+              },
+              policy),
           qs: {},
         });
 
-        callback(); // done()
+        callback();  // done()
       };
 
       iam.setPolicy(policy, done);
     });
 
-    it('should accept an options object', function(done) {
+    it('should accept an options object', done => {
       const policy = {
         a: 'b',
       };
@@ -141,7 +143,7 @@ describe('storage/iam', function() {
         userProject: 'grape-spaceship-123',
       };
 
-      iam.request_ = function(reqOpts) {
+      iam.request_ = reqOpts => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -150,17 +152,17 @@ describe('storage/iam', function() {
     });
   });
 
-  describe('testPermissions', function() {
-    it('should throw an error if permissions are missing', function() {
-      assert.throws(function() {
+  describe('testPermissions', () => {
+    it('should throw an error if permissions are missing', () => {
+      assert.throws(() => {
         iam.testPermissions(util.noop);
       }, /Permissions are required\./);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const permissions = 'storage.bucket.list';
 
-      iam.request_ = function(reqOpts) {
+      iam.request_ = reqOpts => {
         assert.deepStrictEqual(reqOpts, {
           uri: '/iam/testPermissions',
           qs: {
@@ -175,16 +177,16 @@ describe('storage/iam', function() {
       iam.testPermissions(permissions, assert.ifError);
     });
 
-    it('should send an error back if the request fails', function(done) {
+    it('should send an error back if the request fails', done => {
       const permissions = ['storage.bucket.list'];
       const error = new Error('Error.');
       const apiResponse = {};
 
-      iam.request_ = function(reqOpts, callback) {
+      iam.request_ = (reqOpts, callback) => {
         callback(error, apiResponse);
       };
 
-      iam.testPermissions(permissions, function(err, permissions, apiResp) {
+      iam.testPermissions(permissions, (err, permissions, apiResp) => {
         assert.strictEqual(err, error);
         assert.strictEqual(permissions, null);
         assert.strictEqual(apiResp, apiResponse);
@@ -192,17 +194,17 @@ describe('storage/iam', function() {
       });
     });
 
-    it('should pass back a hash of permissions the user has', function(done) {
+    it('should pass back a hash of permissions the user has', done => {
       const permissions = ['storage.bucket.list', 'storage.bucket.consume'];
       const apiResponse = {
         permissions: ['storage.bucket.consume'],
       };
 
-      iam.request_ = function(reqOpts, callback) {
+      iam.request_ = (reqOpts, callback) => {
         callback(null, apiResponse);
       };
 
-      iam.testPermissions(permissions, function(err, permissions, apiResp) {
+      iam.testPermissions(permissions, (err, permissions, apiResp) => {
         assert.ifError(err);
         assert.deepStrictEqual(permissions, {
           'storage.bucket.list': false,
@@ -214,20 +216,19 @@ describe('storage/iam', function() {
       });
     });
 
-    it('should accept an options object', function(done) {
+    it('should accept an options object', done => {
       const permissions = ['storage.bucket.list'];
       const options = {
         userProject: 'grape-spaceship-123',
       };
 
       const expectedQuery = extend(
-        {
-          permissions: permissions,
-        },
-        options
-      );
+          {
+            permissions,
+          },
+          options);
 
-      iam.request_ = function(reqOpts) {
+      iam.request_ = reqOpts => {
         assert.deepStrictEqual(reqOpts.qs, expectedQuery);
         done();
       };

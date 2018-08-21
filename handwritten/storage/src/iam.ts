@@ -16,10 +16,12 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const common = require('@google-cloud/common');
-const extend = require('extend');
-const is = require('is');
+import * as arrify from 'arrify';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
+import * as is from 'is';
+
+import {Bucket} from './bucket';
 
 /**
  * Get and set IAM policies for your Cloud Storage bucket.
@@ -33,14 +35,18 @@ const is = require('is');
  *
  * @param {Bucket} bucket The parent instance.
  * @example
- * const storage = require('@google-cloud/storage')();
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
  * const bucket = storage.bucket('my-bucket');
  * // bucket.iam
  */
 class Iam {
-  constructor(bucket) {
+  private request_: typeof Bucket.prototype.request;
+  private resourceId_: string;
+
+  constructor(bucket: Bucket) {
     this.request_ = bucket.request.bind(bucket);
-    this.resourceId_ = 'buckets/' + bucket.id;
+    this.resourceId_ = 'buckets/' + bucket.getId();
   }
 
   /**
@@ -69,7 +75,8 @@ class Iam {
    * @see [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('my-bucket');
    * bucket.iam.getPolicy(function(err, policy, apiResponse) {});
    *
@@ -92,12 +99,11 @@ class Iam {
     }
 
     this.request_(
-      {
-        uri: '/iam',
-        qs: options,
-      },
-      callback
-    );
+        {
+          uri: '/iam',
+          qs: options,
+        },
+        callback);
   }
 
   /**
@@ -129,14 +135,16 @@ class Iam {
    * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('my-bucket');
    *
    * const myPolicy = {
    *   bindings: [
    *     {
    *       role: 'roles/storage.admin',
-   *       members: ['serviceAccount:myotherproject@appspot.gserviceaccount.com']
+   *       members:
+   * ['serviceAccount:myotherproject@appspot.gserviceaccount.com']
    *     }
    *   ]
    * };
@@ -170,19 +178,17 @@ class Iam {
     }
 
     this.request_(
-      {
-        method: 'PUT',
-        uri: '/iam',
-        json: extend(
-          {
-            resourceId: this.resourceId_,
-          },
-          policy
-        ),
-        qs: options,
-      },
-      callback
-    );
+        {
+          method: 'PUT',
+          uri: '/iam',
+          json: extend(
+              {
+                resourceId: this.resourceId_,
+              },
+              policy),
+          qs: options,
+        },
+        callback);
   }
 
   /**
@@ -211,7 +217,8 @@ class Iam {
    * @see [Buckets: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('my-bucket');
    *
    * //-
@@ -261,34 +268,32 @@ class Iam {
     }
 
     options = extend(
-      {
-        permissions: arrify(permissions),
-      },
-      options
-    );
+        {
+          permissions: arrify(permissions),
+        },
+        options);
 
     this.request_(
-      {
-        uri: '/iam/testPermissions',
-        qs: options,
-        useQuerystring: true,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          uri: '/iam/testPermissions',
+          qs: options,
+          useQuerystring: true,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        const availablePermissions = arrify(resp.permissions);
+          const availablePermissions = arrify(resp.permissions);
 
-        const permissionsHash = permissions.reduce(function(acc, permission) {
-          acc[permission] = availablePermissions.indexOf(permission) > -1;
-          return acc;
-        }, {});
+          const permissionsHash = permissions.reduce((acc, permission) => {
+            acc[permission] = availablePermissions.indexOf(permission) > -1;
+            return acc;
+          }, {});
 
-        callback(null, permissionsHash, resp);
-      }
-    );
+          callback(null, permissionsHash, resp);
+        });
   }
 }
 
@@ -297,6 +302,6 @@ class Iam {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Iam);
+promisifyAll(Iam);
 
-module.exports = Iam;
+export {Iam};

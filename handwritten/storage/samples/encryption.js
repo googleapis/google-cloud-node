@@ -51,7 +51,7 @@ function generateEncryptionKey() {
 function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // [START storage_upload_encrypted_file]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -93,7 +93,7 @@ function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
 function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // [START storage_download_encrypted_file]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -132,7 +132,7 @@ function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
 function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
   // [START storage_rotate_encryption_key]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();

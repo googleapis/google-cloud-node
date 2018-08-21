@@ -26,7 +26,7 @@
 function createBucket(bucketName) {
   // [START storage_create_bucket]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -54,7 +54,7 @@ function createBucket(bucketName) {
 function listBuckets() {
   // [START storage_list_buckets]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -79,7 +79,7 @@ function listBuckets() {
 function deleteBucket(bucketName) {
   // [START storage_delete_bucket]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -105,7 +105,7 @@ function deleteBucket(bucketName) {
 function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
   // [START storage_set_bucket_default_kms_key]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();

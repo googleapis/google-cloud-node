@@ -16,21 +16,79 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const async = require('async');
-const common = require('@google-cloud/common');
-const extend = require('extend');
-const fs = require('fs');
-const is = require('is');
-const mime = require('mime-types');
-const path = require('path');
-const snakeize = require('snakeize');
-const request = require('request');
+import * as arrify from 'arrify';
+import * as async from 'async';
+import {ServiceObject, util} from '@google-cloud/common';
+import {paginator} from '@google-cloud/paginator';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
+import * as fs from 'fs';
+import * as is from 'is';
+import * as mime from 'mime-types';
+import * as path from 'path';
+import * as snakeize from 'snakeize';
+import * as request from 'request';
 
-const Acl = require('./acl.js');
-const File = require('./file.js');
-const Iam = require('./iam.js');
-const Notification = require('./notification.js');
+import {Acl} from './acl';
+import {File, FileOptions} from './file';
+import {Iam} from './iam';
+import {Notification} from './notification';
+import {Storage} from './index';
+
+interface SourceObject {
+  name: string;
+  generation?: number;
+}
+
+interface CreateNotificationQuery {
+  userProject?: string;
+}
+
+interface MetadataRequest {
+  predefinedAcl: string;
+  userProject?: string;
+}
+
+/**
+ * Query object for listing files.
+ *
+ * @typedef {object} GetFilesRequest
+ * @property {boolean} [autoPaginate=true] Have pagination handled
+ *     automatically.
+ * @property {string} [delimiter] Results will contain only objects whose
+ *     names, aside from the prefix, do not contain delimiter. Objects whose
+ *     names, aside from the prefix, contain delimiter will have their name
+ *     truncated after the delimiter, returned in `apiResponse.prefixes`.
+ *     Duplicate prefixes are omitted.
+ * @property {string} [directory] Filter results based on a directory name, or
+ *     more technically, a "prefix".
+ * @property {string} [prefix] Filter results to objects whose names begin
+ *     with this prefix.
+ * @property {number} [maxApiCalls] Maximum number of API calls to make.
+ * @property {number} [maxResults] Maximum number of items plus prefixes to
+ *     return.
+ * @property {string} [pageToken] A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ * @property {boolean} [versions] If true, returns File objects scoped to
+ *     their versions.
+ */
+export interface GetFilesRequest {
+  autoPaginate?: boolean;
+  delimited?: string;
+  directory?: string;
+  prefix?: string;
+  maxApiCalls?: number;
+  maxResults?: number;
+  pageToken?: string;
+  userProject?: string;
+  versions?: boolean;
+}
+
+export interface DeleteFilesRequest extends GetFilesRequest {
+  force?: boolean;
+}
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -53,11 +111,195 @@ const RESUMABLE_THRESHOLD = 5000000;
  * @param {string} [options.userProject] User project.
  *
  * @example
- * const storage = require('@google-cloud/storage')();
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
  * const bucket = storage.bucket('albums');
  */
-class Bucket extends common.ServiceObject {
-  constructor(storage, name, options) {
+class Bucket extends ServiceObject {
+  /**
+   * The bucket's name.
+   * @name Bucket#name
+   * @type {string}
+   */
+  name: string;
+
+  /**
+   * A reference to the {@link Storage} associated with this {@link Bucket}
+   * instance.
+   * @name Bucket#storage
+   * @type {Storage}
+   */
+  storage: Storage;
+
+  /**
+   * A user project to apply to each request from this bucket.
+   * @name Bucket#userProject
+   * @type {string}
+   */
+  userProject: string;
+
+  /**
+   * Cloud Storage uses access control lists (ACLs) to manage object and
+   * bucket access. ACLs are the mechanism you use to share objects with other
+   * users and allow other users to access your buckets and objects.
+   *
+   * An ACL consists of one or more entries, where each entry grants permissions
+   * to an entity. Permissions define the actions that can be performed against
+   * an object or bucket (for example, `READ` or `WRITE`); the entity defines
+   * who the permission applies to (for example, a specific user or group of
+   * users).
+   *
+   * The `acl` object on a Bucket instance provides methods to get you a list of
+   * the ACLs defined on your bucket, as well as set, update, and delete them.
+   *
+   * Buckets also have
+   * [default
+   * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
+   * for all created files. Default ACLs specify permissions that all new
+   * objects added to the bucket will inherit by default. You can add, delete,
+   * get, and update entities and permissions for these as well with
+   * {@link Bucket#acl.default}.
+   *
+   * @see [About Access Control Lists]{@link http://goo.gl/6qBBPO}
+   * @see [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
+   *
+   * @name Bucket#acl
+   * @mixes Acl
+   * @property {Acl} default Cloud Storage Buckets have
+   * [default
+   * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
+   * for all created files. You can add, delete, get, and update entities and
+   * permissions for these as well. The method signatures and examples are all
+   * the same, after only prefixing the method call with `default`.
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   *
+   * //-
+   * // Make a bucket's contents publicly readable.
+   * //-
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const options = {
+   *   entity: 'allUsers',
+   *   role: storage.acl.READER_ROLE
+   * };
+   *
+   * myBucket.acl.add(options, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * myBucket.acl.add(options).then(function(data) {
+   *   const aclObject = data[0];
+   *   const apiResponse = data[1];
+   * });
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_print_bucket_acl
+   * Example of printing a bucket's ACL:
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_print_bucket_acl_for_user
+   * Example of printing a bucket's ACL for a specific user:
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_add_bucket_owner
+   * Example of adding an owner to a bucket:
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_remove_bucket_owner
+   * Example of removing an owner from a bucket:
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_add_bucket_default_owner
+   * Example of adding a default owner to a bucket:
+   *
+   * @example <caption>include:samples/acl.js</caption>
+   * region_tag:storage_remove_bucket_default_owner
+   * Example of removing a default owner from a bucket:
+   */
+  acl: Acl;
+
+  /**
+   * Get and set IAM policies for your bucket.
+   *
+   * @name Bucket#iam
+   * @mixes Iam
+   *
+   * @see [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
+   * @see [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
+   * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('albums');
+   *
+   * //-
+   * // Get the IAM policy for your bucket.
+   * //-
+   * bucket.iam.getPolicy(function(err, policy) {
+   *   console.log(policy);
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.iam.getPolicy().then(function(data) {
+   *   const policy = data[0];
+   *   const apiResponse = data[1];
+   * });
+   *
+   * @example <caption>include:samples/iam.js</caption>
+   * region_tag:storage_view_bucket_iam_members
+   * Example of retrieving a bucket's IAM policy:
+   *
+   * @example <caption>include:samples/iam.js</caption>
+   * region_tag:storage_add_bucket_iam_member
+   * Example of adding to a bucket's IAM policy:
+   *
+   * @example <caption>include:samples/iam.js</caption>
+   * region_tag:storage_remove_bucket_iam_member
+   * Example of removing from a bucket's IAM policy:
+   */
+  iam: Iam;
+
+  /**
+   * Get {@link File} objects for the files currently in the bucket as a
+   * readable object stream.
+   *
+   * @method Bucket#getFilesStream
+   * @param {GetFilesRequest} [query] Query object for listing files.
+   * @returns {ReadableStream} A readable stream that emits {@link File} instances.
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('albums');
+   *
+   * bucket.getFilesStream()
+   *   .on('error', console.error)
+   *   .on('data', function(file) {
+   *     // file is a File object.
+   *   })
+   *   .on('end', function() {
+   *     // All files retrieved.
+   *   });
+   *
+   * //-
+   * // If you anticipate many results, you can end a stream early to prevent
+   * // unnecessary processing and API requests.
+   * //-
+   * bucket.getFilesStream()
+   *   .on('data', function(file) {
+   *     this.end();
+   *   });
+   */
+  getFilesStream: Function;
+
+  constructor(storage, name, options?) {
     options = options || {};
 
     name = name.replace(/^gs:\/\//, '');
@@ -72,7 +314,8 @@ class Bucket extends common.ServiceObject {
        * @returns {Promise<CreateBucketResponse>}
        *
        * @example
-       * const storage = require('@google-cloud/storage')();
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
        * const bucket = storage.bucket('albums');
        * bucket.create(function(err, bucket, apiResponse) {
        *   if (!err) {
@@ -96,109 +339,15 @@ class Bucket extends common.ServiceObject {
       baseUrl: '/b',
       id: name,
       createMethod: storage.createBucket.bind(storage),
-      methods: methods,
+      methods,
     });
 
-    /**
-     * The bucket's name.
-     * @name Bucket#name
-     * @type {string}
-     */
     this.name = name;
-    /**
-     * A reference to the {@link Storage} associated with this {@link Bucket}
-     * instance.
-     * @name Bucket#storage
-     * @type {string}
-     */
+
     this.storage = storage;
 
-    /**
-     * A user project to apply to each request from this bucket.
-     * @name Bucket#userProject
-     * @type {string}
-     */
     this.userProject = options.userProject;
 
-    /**
-     * Cloud Storage uses access control lists (ACLs) to manage object and
-     * bucket access. ACLs are the mechanism you use to share objects with other
-     * users and allow other users to access your buckets and objects.
-     *
-     * An ACL consists of one or more entries, where each entry grants permissions
-     * to an entity. Permissions define the actions that can be performed against
-     * an object or bucket (for example, `READ` or `WRITE`); the entity defines
-     * who the permission applies to (for example, a specific user or group of
-     * users).
-     *
-     * The `acl` object on a Bucket instance provides methods to get you a list of
-     * the ACLs defined on your bucket, as well as set, update, and delete them.
-     *
-     * Buckets also have
-     * [default ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
-     * for all created files. Default ACLs specify permissions that all new
-     * objects added to the bucket will inherit by default. You can add, delete,
-     * get, and update entities and permissions for these as well with
-     * {@link Bucket#acl.default}.
-     *
-     * @see [About Access Control Lists]{@link http://goo.gl/6qBBPO}
-     * @see [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
-     *
-     * @name Bucket#acl
-     * @mixes Acl
-     * @property {Acl} default Cloud Storage Buckets have
-     * [default ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
-     * for all created files. You can add, delete, get, and update entities and
-     * permissions for these as well. The method signatures and examples are all
-     * the same, after only prefixing the method call with `default`.
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     *
-     * //-
-     * // Make a bucket's contents publicly readable.
-     * //-
-     * const myBucket = storage.bucket('my-bucket');
-     *
-     * const options = {
-     *   entity: 'allUsers',
-     *   role: storage.acl.READER_ROLE
-     * };
-     *
-     * myBucket.acl.add(options, function(err, aclObject) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * myBucket.acl.add(options).then(function(data) {
-     *   const aclObject = data[0];
-     *   const apiResponse = data[1];
-     * });
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_print_bucket_acl
-     * Example of printing a bucket's ACL:
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_print_bucket_acl_for_user
-     * Example of printing a bucket's ACL for a specific user:
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_add_bucket_owner
-     * Example of adding an owner to a bucket:
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_remove_bucket_owner
-     * Example of removing an owner from a bucket:
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_add_bucket_default_owner
-     * Example of adding a default owner to a bucket:
-     *
-     * @example <caption>include:samples/acl.js</caption>
-     * region_tag:storage_remove_bucket_default_owner
-     * Example of removing a default owner from a bucket:
-     */
     this.acl = new Acl({
       request: this.request.bind(this),
       pathPrefix: '/acl',
@@ -209,80 +358,9 @@ class Bucket extends common.ServiceObject {
       pathPrefix: '/defaultObjectAcl',
     });
 
-    /**
-     * Get and set IAM policies for your bucket.
-     *
-     * @name Bucket#iam
-     * @mixes Iam
-     *
-     * @see [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
-     * @see [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
-     * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const bucket = storage.bucket('albums');
-     *
-     * //-
-     * // Get the IAM policy for your bucket.
-     * //-
-     * bucket.iam.getPolicy(function(err, policy) {
-     *   console.log(policy);
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * bucket.iam.getPolicy().then(function(data) {
-     *   const policy = data[0];
-     *   const apiResponse = data[1];
-     * });
-     *
-     * @example <caption>include:samples/iam.js</caption>
-     * region_tag:storage_view_bucket_iam_members
-     * Example of retrieving a bucket's IAM policy:
-     *
-     * @example <caption>include:samples/iam.js</caption>
-     * region_tag:storage_add_bucket_iam_member
-     * Example of adding to a bucket's IAM policy:
-     *
-     * @example <caption>include:samples/iam.js</caption>
-     * region_tag:storage_remove_bucket_iam_member
-     * Example of removing from a bucket's IAM policy:
-     */
     this.iam = new Iam(this);
 
-    /**
-     * Get {@link File} objects for the files currently in the bucket as a
-     * readable object stream.
-     *
-     * @method Bucket#getFilesStream
-     * @param {GetFilesRequest} [query] Query object for listing files.
-     * @returns {ReadableStream} A readable stream that emits {@link File} instances.
-     *
-     * @example
-     * const storage = require('@google-cloud/storage')();
-     * const bucket = storage.bucket('albums');
-     *
-     * bucket.getFilesStream()
-     *   .on('error', console.error)
-     *   .on('data', function(file) {
-     *     // file is a File object.
-     *   })
-     *   .on('end', function() {
-     *     // All files retrieved.
-     *   });
-     *
-     * //-
-     * // If you anticipate many results, you can end a stream early to prevent
-     * // unnecessary processing and API requests.
-     * //-
-     * bucket.getFilesStream()
-     *   .on('data', function(file) {
-     *     this.end();
-     *   });
-     */
-    this.getFilesStream = common.paginator.streamify('getFiles');
+    this.getFilesStream = paginator.streamify('getFiles');
   }
 
   /**
@@ -313,15 +391,14 @@ class Bucket extends common.ServiceObject {
    * @param {string} [options.kmsKeyName] Resource name of the Cloud KMS key, of
    *     the form
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
-   *     that will be used to encrypt the object. Overwrites the object metadata's
-   *     `kms_key_name` value, if any.
+   *     that will be used to encrypt the object. Overwrites the object
+   * metadata's `kms_key_name` value, if any.
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {CombineCallback} [callback] Callback function.
    * @returns {Promise<CombineResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
    * const logBucket = storage.bucket('log-bucket');
    *
    * const sources = [
@@ -367,7 +444,7 @@ class Bucket extends common.ServiceObject {
 
     sources = sources.map(convertToFile);
     destination = convertToFile(destination);
-    callback = callback || common.util.noop;
+    callback = callback || util.noop;
 
     if (!destination.metadata.contentType) {
       const destinationContentType = mime.contentType(destination.name);
@@ -379,36 +456,35 @@ class Bucket extends common.ServiceObject {
 
     // Make the request from the destination File object.
     destination.request(
-      {
-        method: 'POST',
-        uri: '/compose',
-        json: {
-          destination: {
-            contentType: destination.metadata.contentType,
+        {
+          method: 'POST',
+          uri: '/compose',
+          json: {
+            destination: {
+              contentType: destination.metadata.contentType,
+            },
+            sourceObjects: sources.map(source => {
+              const sourceObject = {
+                name: source.name,
+              } as SourceObject;
+
+              if (source.metadata && source.metadata.generation) {
+                sourceObject.generation = source.metadata.generation;
+              }
+
+              return sourceObject;
+            }),
           },
-          sourceObjects: sources.map(source => {
-            const sourceObject = {
-              name: source.name,
-            };
-
-            if (source.metadata && source.metadata.generation) {
-              sourceObject.generation = source.metadata.generation;
-            }
-
-            return sourceObject;
-          }),
+          qs: options,
         },
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        callback(null, destination, resp);
-      }
-    );
+          callback(null, destination, resp);
+        });
   }
 
   /**
@@ -432,7 +508,8 @@ class Bucket extends common.ServiceObject {
    *
    * @param {string} id The ID of the channel to create.
    * @param {object} config See a
-   *     [Objects: watchAll request body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
+   *     [Objects: watchAll request
+   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
    * @param {string} config.address The address where notifications are
    *     delivered for this channel.
    * @param {object} [options] Configuration options.
@@ -442,7 +519,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<CreateChannelResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    * const id = 'new-channel-id';
    *
@@ -479,32 +557,30 @@ class Bucket extends common.ServiceObject {
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/o/watch',
-        json: extend(
-          {
-            id: id,
-            type: 'web_hook',
-          },
-          config
-        ),
-        qs: options,
-      },
-      (err, apiResponse) => {
-        if (err) {
-          callback(err, null, apiResponse);
-          return;
-        }
+        {
+          method: 'POST',
+          uri: '/o/watch',
+          json: extend(
+              {
+                id,
+                type: 'web_hook',
+              },
+              config),
+          qs: options,
+        },
+        (err, apiResponse) => {
+          if (err) {
+            callback(err, null, apiResponse);
+            return;
+          }
 
-        const resourceId = apiResponse.resourceId;
-        const channel = this.storage.channel(id, resourceId);
+          const resourceId = apiResponse.resourceId;
+          const channel = this.storage.channel(id, resourceId);
 
-        channel.metadata = apiResponse;
+          channel.metadata = apiResponse;
 
-        callback(null, channel, apiResponse);
-      }
-    );
+          callback(null, channel, apiResponse);
+        });
   }
 
   /**
@@ -545,8 +621,8 @@ class Bucket extends common.ServiceObject {
    * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
    *
    * @param {Topic|string} topic The Cloud PubSub topic to which this
-   *     subscription publishes. If the project ID is omitted, the current project
-   *     ID will be used.
+   *     subscription publishes. If the project ID is omitted, the current
+   * project ID will be used.
    *
    *     Acceptable formats are:
    *     - `projects/grape-spaceship-123/topics/my-topic`
@@ -560,7 +636,8 @@ class Bucket extends common.ServiceObject {
    * @see Notification#create
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
    *
    * const callback = function(err, notification, apiResponse) {
@@ -598,7 +675,7 @@ class Bucket extends common.ServiceObject {
       options = {};
     }
 
-    if (is.object(topic) && common.util.isCustomType(topic, 'pubsub/topic')) {
+    if (is.object(topic) && util.isCustomType(topic, 'pubsub/topic')) {
       topic = topic.name;
     }
 
@@ -606,7 +683,7 @@ class Bucket extends common.ServiceObject {
       throw new Error('A valid topic name is required.');
     }
 
-    const body = extend({topic: topic}, options);
+    const body = extend({topic}, options);
 
     if (body.topic.indexOf('projects') !== 0) {
       body.topic = 'projects/{{projectId}}/topics/' + body.topic;
@@ -618,7 +695,7 @@ class Bucket extends common.ServiceObject {
       body.payloadFormat = 'JSON_API_V1';
     }
 
-    const query = {};
+    const query = {} as CreateNotificationQuery;
 
     if (body.userProject) {
       query.userProject = body.userProject;
@@ -626,25 +703,24 @@ class Bucket extends common.ServiceObject {
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/notificationConfigs',
-        json: snakeize(body),
-        qs: query,
-      },
-      (err, apiResponse) => {
-        if (err) {
-          callback(err, null, apiResponse);
-          return;
-        }
+        {
+          method: 'POST',
+          uri: '/notificationConfigs',
+          json: snakeize(body),
+          qs: query,
+        },
+        (err, apiResponse) => {
+          if (err) {
+            callback(err, null, apiResponse);
+            return;
+          }
 
-        const notification = this.notification(apiResponse.id);
+          const notification = this.notification(apiResponse.id);
 
-        notification.metadata = apiResponse;
+          notification.metadata = apiResponse;
 
-        callback(null, notification, apiResponse);
-      }
-    );
+          callback(null, notification, apiResponse);
+        });
   }
 
   /**
@@ -668,7 +744,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<DeleteBucketResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    * bucket.delete(function(err, apiResponse) {});
    *
@@ -683,20 +760,19 @@ class Bucket extends common.ServiceObject {
    * region_tag:storage_delete_bucket
    * Another example:
    */
-  delete(options, callback) {
+  delete(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
     this.request(
-      {
-        method: 'DELETE',
-        uri: '',
-        qs: options,
-      },
-      callback || common.util.noop
-    );
+        {
+          method: 'DELETE',
+          uri: '',
+          qs: options,
+        },
+        callback || util.noop);
   }
 
   /**
@@ -708,14 +784,14 @@ class Bucket extends common.ServiceObject {
   /**
    * Iterate over the bucket's files, calling `file.delete()` on each.
    *
-   * <strong>This is not an atomic request.</strong> A delete attempt will be made
-   * for each file individually. Any one can fail, in which case only a portion of
-   * the files you intended to be deleted would have.
+   * <strong>This is not an atomic request.</strong> A delete attempt will be
+   * made for each file individually. Any one can fail, in which case only a
+   * portion of the files you intended to be deleted would have.
    *
    * Operations are performed in parallel, up to 10 at once. The first error
    * breaks the loop and will execute the provided callback with it. Specify
-   * `{ force: true }` to suppress the errors until all files have had a chance to
-   * be processed.
+   * `{ force: true }` to suppress the errors until all files have had a chance
+   * to be processed.
    *
    * The `query` object passed as the first argument will also be passed to
    * {@link Bucket#getFiles}.
@@ -732,7 +808,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -742,7 +819,8 @@ class Bucket extends common.ServiceObject {
    *
    * //-
    * // By default, if a file cannot be deleted, this method will stop deleting
-   * // files from your bucket. You can override this setting with `force: true`.
+   * // files from your bucket. You can override this setting with `force:
+   * true`.
    * //-
    * bucket.deleteFiles({
    *   force: true
@@ -769,7 +847,7 @@ class Bucket extends common.ServiceObject {
    * //-
    * bucket.deleteFiles().then(function() {});
    */
-  deleteFiles(query, callback) {
+  deleteFiles(query: DeleteFilesRequest, callback) {
     if (is.fn(query)) {
       callback = query;
       query = {};
@@ -778,7 +856,7 @@ class Bucket extends common.ServiceObject {
     query = query || {};
 
     const MAX_PARALLEL_LIMIT = 10;
-    const errors = [];
+    const errors = [] as Error[];
 
     this.getFiles(query, (err, files) => {
       if (err) {
@@ -787,7 +865,7 @@ class Bucket extends common.ServiceObject {
       }
 
       const deleteFile = (file, callback) => {
-        file.delete(query, err => {
+        file.delete(query, (err: Error) => {
           if (err) {
             if (query.force) {
               errors.push(err);
@@ -833,7 +911,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<DeleteLabelsResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -861,7 +940,7 @@ class Bucket extends common.ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  deleteLabels(labels, callback) {
+  deleteLabels(labels, callback?) {
     if (is.fn(labels)) {
       callback = labels;
       labels = [];
@@ -915,7 +994,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<DisableRequesterPaysCallback>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.disableRequesterPays(function(err, apiResponse) {
@@ -937,13 +1017,12 @@ class Bucket extends common.ServiceObject {
    */
   disableRequesterPays(callback) {
     this.setMetadata(
-      {
-        billing: {
-          requesterPays: false,
+        {
+          billing: {
+            requesterPays: false,
+          },
         },
-      },
-      callback || common.util.noop
-    );
+        callback || util.noop);
   }
 
   /**
@@ -971,7 +1050,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<EnableRequesterPaysResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.enableRequesterPays(function(err, apiResponse) {
@@ -991,15 +1071,14 @@ class Bucket extends common.ServiceObject {
    * region_tag:storage_enable_requester_pays
    * Example of enabling requester pays:
    */
-  enableRequesterPays(callback) {
+  enableRequesterPays(callback?) {
     this.setMetadata(
-      {
-        billing: {
-          requesterPays: true,
+        {
+          billing: {
+            requesterPays: true,
+          },
         },
-      },
-      callback || common.util.noop
-    );
+        callback || util.noop);
   }
 
   /**
@@ -1021,7 +1100,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<BucketExistsResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.exists(function(err, exists) {});
@@ -1033,7 +1113,7 @@ class Bucket extends common.ServiceObject {
    *   const exists = data[0];
    * });
    */
-  exists(options, callback) {
+  exists(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1065,7 +1145,8 @@ class Bucket extends common.ServiceObject {
    * @param {string|number} [options.generation] Only use a specific revision of
    *     this file.
    * @param {string} [options.encryptionKey] A custom encryption key. See
-   *     [Customer-supplied Encryption Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+   *     [Customer-supplied Encryption
+   * Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
    * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
    *     be used to encrypt the object. Must be in the format:
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
@@ -1073,11 +1154,12 @@ class Bucket extends common.ServiceObject {
    * @returns {File}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    * const file = bucket.file('my-existing-file.png');
    */
-  file(name, options) {
+  file(name, options?: FileOptions) {
     if (!name) {
       throw Error('A file name must be specified.');
     }
@@ -1113,7 +1195,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<GetBucketResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.get(function(err, bucket, apiResponse) {
@@ -1128,7 +1211,7 @@ class Bucket extends common.ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  get(options, callback) {
+  get(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1156,7 +1239,7 @@ class Bucket extends common.ServiceObject {
     this.getMetadata(options, (err, metadata) => {
       if (err) {
         if (err.code === 404 && autoCreate) {
-          const args = [];
+          const args = [] as object[];
 
           if (!is.empty(options)) {
             args.push(options);
@@ -1177,31 +1260,6 @@ class Bucket extends common.ServiceObject {
   }
 
   /**
-   * Query object for listing files.
-   *
-   * @typedef {object} GetFilesRequest
-   * @property {boolean} [autoPaginate=true] Have pagination handled
-   *     automatically.
-   * @property {string} [delimiter] Results will contain only objects whose
-   *     names, aside from the prefix, do not contain delimiter. Objects whose
-   *     names, aside from the prefix, contain delimiter will have their name
-   *     truncated after the delimiter, returned in `apiResponse.prefixes`.
-   *     Duplicate prefixes are omitted.
-   * @property {string} [directory] Filter results based on a directory name, or
-   *     more technically, a "prefix".
-   * @property {string} [prefix] Filter results to objects whose names begin
-   *     with this prefix.
-   * @property {number} [maxApiCalls] Maximum number of API calls to make.
-   * @property {number} [maxResults] Maximum number of items plus prefixes to
-   *     return.
-   * @property {string} [pageToken] A previously-returned page token
-   *     representing part of the larger set of results to view.
-   * @property {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   * @property {boolean} [versions] If true, returns File objects scoped to
-   *     their versions.
-   */
-  /**
    * @typedef {array} GetFilesResponse
    * @property {File[]} 0 Array of {@link File} instances.
    */
@@ -1220,7 +1278,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<GetFilesResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.getFiles(function(err, files) {
@@ -1277,7 +1336,7 @@ class Bucket extends common.ServiceObject {
    * region_tag:storage_list_files_with_prefix
    * Example of listing files, filtered by a prefix:
    */
-  getFiles(query, callback) {
+  getFiles(query: GetFilesRequest, callback?) {
     if (!callback) {
       callback = query;
       query = {};
@@ -1291,43 +1350,42 @@ class Bucket extends common.ServiceObject {
     }
 
     this.request(
-      {
-        uri: '/o',
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
-
-        const files = arrify(resp.items).map(file => {
-          const options = {};
-
-          if (query.versions) {
-            options.generation = file.generation;
+        {
+          uri: '/o',
+          qs: query,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
           }
 
-          if (file.kmsKeyName) {
-            options.kmsKeyName = file.kmsKeyName;
-          }
+          const files = arrify(resp.items).map(file => {
+            const options = {} as FileOptions;
 
-          const fileInstance = this.file(file.name, options);
-          fileInstance.metadata = file;
+            if (query.versions) {
+              options.generation = file.generation;
+            }
 
-          return fileInstance;
-        });
+            if (file.kmsKeyName) {
+              options.kmsKeyName = file.kmsKeyName;
+            }
 
-        let nextQuery = null;
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, query, {
-            pageToken: resp.nextPageToken,
+            const fileInstance = this.file(file.name, options);
+            fileInstance.metadata = file;
+
+            return fileInstance;
           });
-        }
 
-        callback(null, files, nextQuery, resp);
-      }
-    );
+          let nextQuery: object|null = null;
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, query, {
+              pageToken: resp.nextPageToken,
+            });
+          }
+
+          callback(null, files, nextQuery, resp);
+        });
   }
 
   /**
@@ -1349,7 +1407,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<GetLabelsCallback>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.getLabels(function(err, labels) {
@@ -1370,7 +1429,7 @@ class Bucket extends common.ServiceObject {
    *   const labels = data[0];
    * });
    */
-  getLabels(options, callback) {
+  getLabels(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1411,7 +1470,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<GetBucketMetadataResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.getMetadata(function(err, metadata, apiResponse) {});
@@ -1428,28 +1488,27 @@ class Bucket extends common.ServiceObject {
    * region_tag:storage_get_requester_pays_status
    * Example of retrieving the requester pays status of a bucket:
    */
-  getMetadata(options, callback) {
+  getMetadata(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
     this.request(
-      {
-        uri: '',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          uri: '',
+          qs: options,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        this.metadata = resp;
+          this.metadata = resp;
 
-        callback(null, this.metadata, resp);
-      }
-    );
+          callback(null, this.metadata, resp);
+        });
   }
 
   /**
@@ -1476,7 +1535,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<GetNotificationsResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('my-bucket');
    *
    * bucket.getNotifications(function(err, notifications, apiResponse) {
@@ -1504,25 +1564,24 @@ class Bucket extends common.ServiceObject {
     }
 
     this.request(
-      {
-        uri: '/notificationConfigs',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
+        {
+          uri: '/notificationConfigs',
+          qs: options,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
 
-        const notifications = arrify(resp.items).map(notification => {
-          const notificationInstance = this.notification(notification.id);
-          notificationInstance.metadata = notification;
-          return notificationInstance;
+          const notifications = arrify(resp.items).map(notification => {
+            const notificationInstance = this.notification(notification.id);
+            notificationInstance.metadata = notification;
+            return notificationInstance;
+          });
+
+          callback(null, notifications, resp);
         });
-
-        callback(null, notifications, resp);
-      }
-    );
   }
 
   /**
@@ -1537,18 +1596,18 @@ class Bucket extends common.ServiceObject {
   /**
    * Make the bucket listing private.
    *
-   * You may also choose to make the contents of the bucket private by specifying
-   * `includeFiles: true`. This will automatically run
+   * You may also choose to make the contents of the bucket private by
+   * specifying `includeFiles: true`. This will automatically run
    * {@link File#makePrivate} for every file in the bucket.
    *
-   * When specifying `includeFiles: true`, use `force: true` to delay execution of
-   * your callback until all files have been processed. By default, the callback
-   * is executed after the first error. Use `force` to queue such errors until all
-   * files have been processed, after which they will be returned as an array as
-   * the first argument to your callback.
+   * When specifying `includeFiles: true`, use `force: true` to delay execution
+   * of your callback until all files have been processed. By default, the
+   * callback is executed after the first error. Use `force` to queue such
+   * errors until all files have been processed, after which they will be
+   * returned as an array as the first argument to your callback.
    *
-   * NOTE: This may cause the process to be long-running and use a high number of
-   * requests. Use with caution.
+   * NOTE: This may cause the process to be long-running and use a high number
+   * of requests. Use with caution.
    *
    * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
    *
@@ -1563,7 +1622,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<MakeBucketPrivateResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -1622,21 +1682,19 @@ class Bucket extends common.ServiceObject {
     const setPredefinedAcl = done => {
       const query = {
         predefinedAcl: 'projectPrivate',
-      };
+      } as MetadataRequest;
 
       if (options.userProject) {
         query.userProject = options.userProject;
       }
 
       this.setMetadata(
-        {
-          // You aren't allowed to set both predefinedAcl & acl properties on a
-          // bucket so acl must explicitly be nullified.
-          acl: null,
-        },
-        query,
-        done
-      );
+          {
+            // You aren't allowed to set both predefinedAcl & acl properties on
+            // a bucket so acl must explicitly be nullified.
+            acl: null,
+          },
+          query, done);
     };
 
     const makeFilesPrivate = done => {
@@ -1667,14 +1725,14 @@ class Bucket extends common.ServiceObject {
    * specifying `includeFiles: true`. This will automatically run
    * {@link File#makePublic} for every file in the bucket.
    *
-   * When specifying `includeFiles: true`, use `force: true` to delay execution of
-   * your callback until all files have been processed. By default, the callback
-   * is executed after the first error. Use `force` to queue such errors until all
-   * files have been processed, after which they will be returned as an array as
-   * the first argument to your callback.
+   * When specifying `includeFiles: true`, use `force: true` to delay execution
+   * of your callback until all files have been processed. By default, the
+   * callback is executed after the first error. Use `force` to queue such
+   * errors until all files have been processed, after which they will be
+   * returned as an array as the first argument to your callback.
    *
-   * NOTE: This may cause the process to be long-running and use a high number of
-   * requests. Use with caution.
+   * NOTE: This may cause the process to be long-running and use a high number
+   * of requests. Use with caution.
    *
    * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
    *
@@ -1687,7 +1745,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<MakeBucketPublicResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -1746,22 +1805,20 @@ class Bucket extends common.ServiceObject {
     const addAclPermissions = done => {
       // Allow reading bucket contents while preserving original permissions.
       this.acl.add(
-        {
-          entity: 'allUsers',
-          role: 'READER',
-        },
-        done
-      );
+          {
+            entity: 'allUsers',
+            role: 'READER',
+          },
+          done);
     };
 
     const addDefaultAclPermissions = done => {
-      this.acl.default.add(
-        {
-          entity: 'allUsers',
-          role: 'READER',
-        },
-        done
-      );
+      this.acl.default !.add(
+          {
+            entity: 'allUsers',
+            role: 'READER',
+          },
+          done);
     };
 
     const makeFilesPublic = done => {
@@ -1774,9 +1831,8 @@ class Bucket extends common.ServiceObject {
     };
 
     async.series(
-      [addAclPermissions, addDefaultAclPermissions, makeFilesPublic],
-      callback
-    );
+        [addAclPermissions, addDefaultAclPermissions, makeFilesPublic],
+        callback);
   }
 
   /**
@@ -1787,7 +1843,8 @@ class Bucket extends common.ServiceObject {
    * @see Notification
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('my-bucket');
    * const notification = bucket.notification('1');
    */
@@ -1807,7 +1864,9 @@ class Bucket extends common.ServiceObject {
    * @param {object} reqOpts - The request options.
    * @param {function} callback - The callback function.
    */
-  request(reqOpts, callback) {
+  request(reqOpts): Promise<request.Response>;
+  request(reqOpts, callback): void;
+  request(reqOpts, callback?): void|Promise<request.Response> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
       reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
     }
@@ -1838,7 +1897,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<SetLabelsResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * const labels = {
@@ -1859,13 +1919,13 @@ class Bucket extends common.ServiceObject {
    *   const metadata = data[0];
    * });
    */
-  setLabels(labels, options, callback) {
+  setLabels(labels, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
-    callback = callback || common.util.noop;
+    callback = callback || util.noop;
 
     this.setMetadata({labels}, options, callback);
   }
@@ -1892,7 +1952,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise<SetBucketMetadataResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -1932,32 +1993,31 @@ class Bucket extends common.ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  setMetadata(metadata, options, callback) {
+  setMetadata(metadata, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
-    callback = callback || common.util.noop;
+    callback = callback || util.noop;
 
     this.request(
-      {
-        method: 'PATCH',
-        uri: '',
-        json: metadata,
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, resp);
-          return;
-        }
+        {
+          method: 'PATCH',
+          uri: '',
+          json: metadata,
+          qs: options,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, resp);
+            return;
+          }
 
-        this.metadata = resp;
+          this.metadata = resp;
 
-        callback(null, resp);
-      }
-    );
+          callback(null, resp);
+        });
   }
 
   /**
@@ -1979,7 +2039,8 @@ class Bucket extends common.ServiceObject {
    * @returns {Promise}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.setStorageClass('regional', function(err, apiResponse) {
@@ -1997,12 +2058,13 @@ class Bucket extends common.ServiceObject {
    */
   setStorageClass(storageClass, options, callback) {
     // In case we get input like `storageClass`, convert to `storage_class`.
-    storageClass = storageClass
-      .replace(/-/g, '_')
-      .replace(/([a-z])([A-Z])/g, (_, low, up) => {
-        return low + '_' + up;
-      })
-      .toUpperCase();
+    storageClass = storageClass.replace(/-/g, '_')
+                       .replace(
+                           /([a-z])([A-Z])/g,
+                           (_, low, up) => {
+                             return low + '_' + up;
+                           })
+                       .toUpperCase();
 
     this.setMetadata({storageClass}, options, callback);
   }
@@ -2014,7 +2076,8 @@ class Bucket extends common.ServiceObject {
    * @param {string} userProject The user project.
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * bucket.setUserProject('grape-spaceship-123');
@@ -2039,8 +2102,8 @@ class Bucket extends common.ServiceObject {
    * {@link File#createWriteStream}.
    *
    * You can specify whether or not an upload is resumable by setting
-   * `options.resumable`. *Resumable uploads are enabled by default if your input
-   * file is larger than 5 MB.*
+   * `options.resumable`. *Resumable uploads are enabled by default if your
+   * input file is larger than 5 MB.*
    *
    * For faster crc32c computation, you must manually install
    * [`fast-crc32c`](http://www.gitnpm.com/fast-crc32c):
@@ -2055,19 +2118,22 @@ class Bucket extends common.ServiceObject {
    * @param {object} [options] Configuration options.
    * @param {string|File} [options.destination] The place to save
    *     your file. If given a string, the file will be uploaded to the bucket
-   *     using the string as a filename. When given a File object, your local file
-   *     will be uploaded to the File object's bucket and under the File object's
-   *     name. Lastly, when this argument is omitted, the file is uploaded to your
-   *     bucket using the name of the local file or the path of the url relative to it's domain.
+   *     using the string as a filename. When given a File object, your local
+   * file will be uploaded to the File object's bucket and under the File
+   * object's name. Lastly, when this argument is omitted, the file is uploaded
+   * to your bucket using the name of the local file or the path of the url
+   * relative to it's domain.
    * @param {string} [options.encryptionKey] A custom encryption key. See
-   *     [Customer-supplied Encryption Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+   *     [Customer-supplied Encryption
+   * Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
    * @param {boolean} [options.gzip] Automatically gzip the file. This will set
    *     `options.metadata.contentEncoding` to `gzip`.
    * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
    *     be used to encrypt the object. Must be in the format:
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
    * @param {object} [options.metadata] See an
-   *     [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).
+   *     [Objects: insert request
+   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).
    * @param {string} [options.offset] The starting byte of the upload stream, for
    *     resuming an interrupted upload. Defaults to 0.
    * @param {string} [options.predefinedAcl] Apply a predefined set of access
@@ -2088,8 +2154,8 @@ class Bucket extends common.ServiceObject {
    *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
    *       team members get access according to their roles.
    *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers` get
-   *       `READER` access.
+   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   * get `READER` access.
    * @param {boolean} [options.private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
    * @param {boolean} [options.public] Make the uploaded file public. (Alias for
@@ -2103,16 +2169,18 @@ class Bucket extends common.ServiceObject {
    * @param {string|boolean} [options.validation] Possible values: `"md5"`,
    *     `"crc32c"`, or `false`. By default, data integrity is validated with an
    *     MD5 checksum for maximum reliability. CRC32c will provide better
-   *     performance with less reliability. You may also choose to skip validation
-   *     completely, however this is **not recommended**.
+   *     performance with less reliability. You may also choose to skip
+   * validation completely, however this is **not recommended**.
    * @param {object} [options.requestOptions] When `pathString` is a URL,
-   *     additional [options for the HTTP request](https://github.com/request/request#requestoptions-callback)
-   *     could be provided here.
+   *     additional [options for the HTTP
+   * request](https://github.com/request/request#requestoptions-callback) could
+   * be provided here.
    * @param {UploadCallback} [callback] Callback function.
    * @returns {Promise<UploadResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
    * //-
@@ -2129,7 +2197,8 @@ class Bucket extends common.ServiceObject {
    * // You can also upload a file from a URL.
    * //-
    *
-   * bucket.upload('https://example.com/images/image.png', function(err, file, apiResponse) {
+   * bucket.upload('https://example.com/images/image.png', function(err, file,
+   * apiResponse) {
    *   // Your bucket now contains:
    *   // - "image.png"
    *
@@ -2167,7 +2236,8 @@ class Bucket extends common.ServiceObject {
    *   // Your bucket now contains:
    *   // - "index.html" (automatically compressed with gzip)
    *
-   *   // Downloading the file with `file.download` will automatically decode the
+   *   // Downloading the file with `file.download` will automatically decode
+   * the
    *   // file.
    * });
    *
@@ -2190,8 +2260,10 @@ class Bucket extends common.ServiceObject {
    *
    * //-
    * // To use
-   * // <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">
-   * // Customer-supplied Encryption Keys</a>, provide the `encryptionKey` option.
+   * // <a
+   * href="https://cloud.google.com/storage/docs/encryption#customer-supplied">
+   * // Customer-supplied Encryption Keys</a>, provide the `encryptionKey`
+   * option.
    * //-
    * const crypto = require('crypto');
    * const encryptionKey = crypto.randomBytes(32);
@@ -2245,7 +2317,7 @@ class Bucket extends common.ServiceObject {
    * Example of uploading an encrypted file:
    */
   upload(pathString, options, callback) {
-    if (global.GCLOUD_SANDBOX_ENV) {
+    if (global['GCLOUD_SANDBOX_ENV']) {
       return;
     }
 
@@ -2257,18 +2329,16 @@ class Bucket extends common.ServiceObject {
     }
 
     options = extend(
-      {
-        metadata: {},
-      },
-      options
-    );
+        {
+          metadata: {},
+        },
+        options);
 
     const requestOptions = Object.assign(
-      {
-        url: pathString,
-      },
-      options.requestOptions
-    );
+        {
+          url: pathString,
+        },
+        options.requestOptions);
 
     let newFile;
     if (options.destination instanceof File) {
@@ -2334,13 +2404,12 @@ class Bucket extends common.ServiceObject {
         sourceStream = fs.createReadStream(pathString);
       }
 
-      sourceStream
-        .on('error', callback)
-        .pipe(newFile.createWriteStream(options))
-        .on('error', callback)
-        .on('finish', () => {
-          callback(null, newFile, newFile.metadata);
-        });
+      sourceStream.on('error', callback)
+          .pipe(newFile.createWriteStream(options))
+          .on('error', callback)
+          .on('finish', () => {
+            callback(null, newFile, newFile.metadata);
+          });
     }
   }
 
@@ -2365,8 +2434,8 @@ class Bucket extends common.ServiceObject {
    */
   makeAllFilesPublicPrivate_(options, callback) {
     const MAX_PARALLEL_LIMIT = 10;
-    const errors = [];
-    const updatedFiles = [];
+    const errors = [] as Error[];
+    const updatedFiles = [] as File[];
 
     this.getFiles(options, (err, files) => {
       if (err) {
@@ -2374,7 +2443,7 @@ class Bucket extends common.ServiceObject {
         return;
       }
 
-      const processFile = (file, callback) => {
+      const processFile = (file: File, callback) => {
         const processedCallback = err => {
           if (err) {
             if (options.force) {
@@ -2409,20 +2478,24 @@ class Bucket extends common.ServiceObject {
       });
     });
   }
+
+  getId(): string {
+    return this.id!;
+  }
 }
 
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Bucket, 'getFiles');
+paginator.extend(Bucket, 'getFiles');
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Bucket, {
+promisifyAll(Bucket, {
   exclude: ['request', 'file', 'notification'],
 });
 
@@ -2431,4 +2504,4 @@ common.util.promisifyAll(Bucket, {
  * @name module:@google-cloud/storage.Bucket
  * @see Bucket
  */
-module.exports = Bucket;
+export {Bucket};

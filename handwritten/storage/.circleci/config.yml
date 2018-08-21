@@ -59,7 +59,7 @@ jobs:
       - image: 'node:6'
         user: node
     steps: &unit_tests_steps
-      - checkout 
+      - checkout
       - run: &npm_install_and_link
           name: Install and link the module
           command: |-
@@ -96,7 +96,7 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
           name: Run linting.
-          command: npm run lint
+          command: npm run check
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
   docs:
@@ -172,5 +172,4 @@ jobs:
     steps:
       - checkout
       - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
-      - run: npm publish
-
+      - run: npm publish --access=public

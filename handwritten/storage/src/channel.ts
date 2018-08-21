@@ -16,7 +16,8 @@
 
 'use strict';
 
-const common = require('@google-cloud/common');
+import {ServiceObject, util} from '@google-cloud/common';
+import {promisifyAll} from '@google-cloud/promisify';
 
 /**
  * Create a channel object to interact with a Cloud Storage channel.
@@ -29,28 +30,33 @@ const common = require('@google-cloud/common');
  * @param {string} resourceId The resource ID of the channel.
  *
  * @example
- * const storage = require('@google-cloud/storage')();
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
  * const channel = storage.channel('id', 'resource-id');
  */
-class Channel extends common.ServiceObject {
+class Channel extends ServiceObject {
   constructor(storage, id, resourceId) {
     const config = {
       parent: storage,
       baseUrl: '/channels',
 
       // An ID shouldn't be included in the API requests.
-      // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
+      // RE:
+      // https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
       id: '',
 
       methods: {
-        // Only need `request`.
+          // Only need `request`.
       },
     };
 
     super(config);
 
-    this.metadata.id = id;
-    this.metadata.resourceId = resourceId;
+    // TODO: remove type cast to any once ServiceObject's type declaration has
+    // been fixed. https://github.com/googleapis/nodejs-common/issues/176
+    const metadata = this.metadata;
+    metadata.id = id;
+    metadata.resourceId = resourceId;
   }
 
   /**
@@ -69,7 +75,8 @@ class Channel extends common.ServiceObject {
    * @returns {Promise<StopResponse>}
    *
    * @example
-   * const storage = require('@google-cloud/storage')();
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
    * const channel = storage.channel('id', 'resource-id');
    * channel.stop(function(err, apiResponse) {
    *   if (!err) {
@@ -85,18 +92,17 @@ class Channel extends common.ServiceObject {
    * });
    */
   stop(callback) {
-    callback = callback || common.util.noop;
+    callback = callback || util.noop;
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/stop',
-        json: this.metadata,
-      },
-      function(err, apiResponse) {
-        callback(err, apiResponse);
-      }
-    );
+        {
+          method: 'POST',
+          uri: '/stop',
+          json: this.metadata,
+        },
+        (err, apiResponse) => {
+          callback(err, apiResponse);
+        });
   }
 }
 
@@ -105,11 +111,11 @@ class Channel extends common.ServiceObject {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Channel);
+promisifyAll(Channel);
 
 /**
  * Reference to the {@link Channel} class.
  * @name module:@google-cloud/storage.Channel
  * @see Channel
  */
-module.exports = Channel;
+export {Channel};

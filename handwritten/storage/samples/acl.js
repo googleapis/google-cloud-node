@@ -26,7 +26,7 @@
 function printBucketAcl(bucketName) {
   // [START storage_print_bucket_acl]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -56,7 +56,7 @@ function printBucketAcl(bucketName) {
 function printBucketAclForUser(bucketName, userEmail) {
   // [START storage_print_bucket_acl_for_user]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -90,7 +90,7 @@ function printBucketAclForUser(bucketName, userEmail) {
 function addBucketOwner(bucketName, userEmail) {
   // [START storage_add_bucket_owner]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -122,7 +122,7 @@ function addBucketOwner(bucketName, userEmail) {
 function removeBucketOwner(bucketName, userEmail) {
   // [START storage_remove_bucket_owner]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -151,7 +151,7 @@ function removeBucketOwner(bucketName, userEmail) {
 function addBucketDefaultOwner(bucketName, userEmail) {
   // [START storage_add_bucket_default_owner]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -183,7 +183,7 @@ function addBucketDefaultOwner(bucketName, userEmail) {
 function removeBucketDefaultOwner(bucketName, userEmail) {
   // [START storage_remove_bucket_default_owner]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -212,7 +212,7 @@ function removeBucketDefaultOwner(bucketName, userEmail) {
 function printFileAcl(bucketName, filename) {
   // [START storage_print_file_acl]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -244,7 +244,7 @@ function printFileAcl(bucketName, filename) {
 function printFileAclForUser(bucketName, filename, userEmail) {
   // [START storage_print_file_acl_for_user]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -280,7 +280,7 @@ function printFileAclForUser(bucketName, filename, userEmail) {
 function addFileOwner(bucketName, filename, userEmail) {
   // [START storage_add_file_owner]
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -312,7 +312,7 @@ function addFileOwner(bucketName, filename, userEmail) {
 // [START storage_remove_file_owner]
 function removeFileOwner(bucketName, filename, userEmail) {
   // Imports the Google Cloud client library
-  const Storage = require('@google-cloud/storage');
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
