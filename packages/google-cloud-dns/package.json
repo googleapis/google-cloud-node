@@ -53,7 +53,7 @@
     "system-test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.20.0",
+    "@google-cloud/common": "^0.21.0",
     "@google-cloud/paginator": "^0.1.0",
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
