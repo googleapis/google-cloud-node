@@ -15,7 +15,7 @@
 
 'use strict';
 
-// [START texttospeech_quickstart]
+// [START tts_quickstart]
 const fs = require('fs');
 
 // Imports the Google Cloud client library
@@ -52,4 +52,4 @@ client.synthesizeSpeech(request, (err, response) => {
     console.log('Audio content written to file: output.mp3');
   });
 });
-// [END texttospeech_quickstart]
+// [END tts_quickstart]
