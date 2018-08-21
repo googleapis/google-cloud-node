@@ -88,6 +88,7 @@ describe('createProfiler', () => {
   let defaultConfig: GlobalConfig;
 
   before(async () => {
+    process.env = {};
     defaultConfig = await common.util.normalizeArguments(
         null, extend({}, internalConfigParams as GlobalConfig));
     startStub = sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
