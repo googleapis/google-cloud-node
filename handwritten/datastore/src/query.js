@@ -367,7 +367,7 @@ class Query {
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
    *
-   * query.run(function(err, entities, info) {
+   * query.run((err, entities, info) => {
    *   // entities = An array of records.
    *
    *   // Access the Key object for an entity.
@@ -380,8 +380,8 @@ class Query {
    * //-
    * query.select('__key__');
    *
-   * query.run(function(err, entities) {
-   *   const keys = entities.map(function(entity) {
+   * query.run((err, entities) => {
+   *   const keys = entities.map((entity) => {
    *     return entity[datastore.KEY];
    *   });
    * });
@@ -389,7 +389,7 @@ class Query {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * query.run().then(function(data) {
+   * query.run().then((data) => {
    *   const entities = data[0];
    * });
    */
@@ -418,8 +418,8 @@ class Query {
    *     // Access the Key object for this entity.
    *     const key = entity[datastore.KEY];
    *   })
-   *   .on('info', function(info) {})
-   *   .on('end', function() {
+   *   .on('info', (info) => {})
+   *   .on('end', () => {
    *     // All entities retrieved.
    *   });
    *

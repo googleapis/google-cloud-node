@@ -107,7 +107,7 @@ class Transaction extends Request {
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
    *
-   * transaction.commit(function(err, apiResponse) {
+   * transaction.commit((err, apiResponse) => {
    *   if (err) {
    *     // Transaction could not be committed.
    *   }
@@ -116,19 +116,17 @@ class Transaction extends Request {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * transaction.commit().then(function(data) {
+   * transaction.commit().then((data) => {
    *   const apiResponse = data[0];
    * });
    */
   commit(gaxOptions, callback) {
-    const self = this;
-
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
     }
 
-    callback = callback || function() {};
+    callback = callback || (() => {});
 
     if (this.skipCommit) {
       setImmediate(callback);
@@ -145,7 +143,7 @@ class Transaction extends Request {
       // recently queued operations. E.g., if a user tries to save with the same
       // key they just asked to be deleted, the delete request will be ignored,
       // giving preference to the save operation.
-      .filter(function(modifiedEntity) {
+      .filter(modifiedEntity => {
         const key = modifiedEntity.entity.key;
 
         if (!entity.isKeyComplete(key)) {
@@ -162,7 +160,7 @@ class Transaction extends Request {
       // Group entities together by method: `save` mutations, then `delete`. Note:
       // `save` mutations being first is required to maintain order when assigning
       // IDs to incomplete keys.
-      .sort(function(a, b) {
+      .sort((a, b) => {
         return a.method < b.method ? 1 : a.method > b.method ? -1 : 0;
       })
       // Group arguments together so that we only make one call to each method.
@@ -170,7 +168,7 @@ class Transaction extends Request {
       // handles assigning auto-generated IDs to the original keys passed in. When
       // we eventually execute the `save` method's API callback, having all the
       // keys together is necessary to maintain order.
-      .reduce(function(acc, entityObject) {
+      .reduce((acc, entityObject) => {
         const lastEntityObject = acc[acc.length - 1];
         const sameMethod =
           lastEntityObject && entityObject.method === lastEntityObject.method;
@@ -190,11 +188,10 @@ class Transaction extends Request {
       // `callbacks` array, that is the same callback that would run if we were
       // using `save` and `delete` outside of a transaction, to process the
       // response from the API.
-      .forEach(function(modifiedEntity) {
+      .forEach(modifiedEntity => {
         const method = modifiedEntity.method;
         const args = modifiedEntity.args.reverse();
-
-        Request.prototype[method].call(self, args, function() {});
+        Request.prototype[method].call(this, args, () => {});
       });
 
     // Take the `req` array built previously, and merge them into one request to
@@ -210,10 +207,10 @@ class Transaction extends Request {
         reqOpts: reqOpts,
         gaxOpts: gaxOptions,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           // Rollback automatically for the user.
-          self.rollback(function() {
+          this.rollback(() => {
             // Provide the error & API response from the failed commit to the user.
             // Even a failed rollback should be transparent.
             // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1369#discussion_r66833976
@@ -225,10 +222,9 @@ class Transaction extends Request {
         // The `callbacks` array was built previously. These are the callbacks that
         // handle the API response normally when using the DatastoreRequest.save and
         // .delete methods.
-        self.requestCallbacks_.forEach(function(cb) {
+        this.requestCallbacks_.forEach(cb => {
           cb(null, resp);
         });
-
         callback(null, resp);
       }
     );
@@ -252,19 +248,19 @@ class Transaction extends Request {
    * const transaction = datastore.transaction();
    *
    * // Run the query inside the transaction.
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
    *   const query = transaction.createQuery('Company');
    *
-   *   query.run(function(err, entities) {
+   *   query.run((err, entities) => {
    *     if (err) {
    *       // Error handling omitted.
    *     }
    *
-   *     transaction.commit(function(err) {
+   *     transaction.commit((err) => {
    *       if (!err) {
    *         // Transaction committed successfully.
    *       }
@@ -287,7 +283,7 @@ class Transaction extends Request {
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -301,7 +297,7 @@ class Transaction extends Request {
    *     datastore.key(['Product', 'Computer'])
    *   ]);
    *
-   *   transaction.commit(function(err) {
+   *   transaction.commit((err) => {
    *     if (!err) {
    *       // Transaction committed successfully.
    *     }
@@ -309,10 +305,8 @@ class Transaction extends Request {
    * });
    */
   delete(entities) {
-    const self = this;
-
-    arrify(entities).forEach(function(ent) {
-      self.modifiedEntities_.push({
+    arrify(entities).forEach(ent => {
+      this.modifiedEntities_.push({
         entity: {
           key: ent,
         },
@@ -336,12 +330,12 @@ class Transaction extends Request {
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
-   *   transaction.rollback(function(err) {
+   *   transaction.rollback((err) => {
    *     if (!err) {
    *       // Transaction rolled back successfully.
    *     }
@@ -351,19 +345,17 @@ class Transaction extends Request {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * transaction.rollback().then(function(data) {
+   * transaction.rollback().then((data) => {
    *   const apiResponse = data[0];
    * });
    */
   rollback(gaxOptions, callback) {
-    const self = this;
-
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
     }
 
-    callback = callback || function() {};
+    callback = callback || (() => {});
 
     this.request_(
       {
@@ -371,9 +363,8 @@ class Transaction extends Request {
         method: 'rollback',
         gaxOpts: gaxOptions,
       },
-      function(err, resp) {
-        self.skipCommit = true;
-
+      (err, resp) => {
+        this.skipCommit = true;
         callback(err || null, resp);
       }
     );
@@ -401,11 +392,11 @@ class Transaction extends Request {
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err, transaction) {
+   * transaction.run((err, transaction) => {
    *   // Perform Datastore transactional operations.
    *   const key = datastore.key(['Company', 123]);
    *
-   *   transaction.get(key, function(err, entity) {
+   *   transaction.get(key, (err, entity) => {
    *     entity.name = 'Google';
    *
    *     transaction.save({
@@ -413,7 +404,7 @@ class Transaction extends Request {
    *       data: entity
    *     });
    *
-   *     transaction.commit(function(err) {
+   *     transaction.commit((err) => {
    *       if (!err) {
    *         // Data saved successfully.
    *       }
@@ -424,21 +415,19 @@ class Transaction extends Request {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * transaction.run().then(function(data) {
+   * transaction.run().then((data) => {
    *   const transaction = data[0];
    *   const apiResponse = data[1];
    * });
    */
   run(options, callback) {
-    const self = this;
-
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
     options = options || {};
-    callback = callback || function() {};
+    callback = callback || (() => {});
 
     const reqOpts = {
       transactionOptions: {},
@@ -465,15 +454,13 @@ class Transaction extends Request {
         reqOpts: reqOpts,
         gaxOpts: options.gaxOptions,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
         }
-
-        self.id = resp.transaction;
-
-        callback(null, self, resp);
+        this.id = resp.transaction;
+        callback(null, this, resp);
       }
     );
   }
@@ -513,7 +500,7 @@ class Transaction extends Request {
    * //-
    * const key = datastore.key('Company');
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -525,7 +512,7 @@ class Transaction extends Request {
    *     }
    *   });
    *
-   *   transaction.commit(function(err) {
+   *   transaction.commit((err) => {
    *     if (!err) {
    *       // Data saved successfully.
    *     }
@@ -540,7 +527,7 @@ class Transaction extends Request {
    * // Use an array, `excludeFromIndexes`, to exclude properties from indexing.
    * // This will allow storing string values larger than 1500 bytes.
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -565,7 +552,7 @@ class Transaction extends Request {
    *     }
    *   });
    *
-   *   transaction.commit(function(err) {
+   *   transaction.commit((err) => {
    *     if (!err) {
    *       // Data saved successfully.
    *     }
@@ -580,7 +567,7 @@ class Transaction extends Request {
    * const companyKey = datastore.key(['Company', 123]);
    * const productKey = datastore.key(['Product', 'Computer']);
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -600,7 +587,7 @@ class Transaction extends Request {
    *     }
    *   ]);
    *
-   *   transaction.commit(function(err) {
+   *   transaction.commit((err) => {
    *     if (!err) {
    *       // Data saved successfully.
    *     }
@@ -608,9 +595,8 @@ class Transaction extends Request {
    * });
    */
   save(entities) {
-    const self = this;
-    arrify(entities).forEach(function(ent) {
-      self.modifiedEntities_.push({
+    arrify(entities).forEach(ent => {
+      this.modifiedEntities_.push({
         entity: {
           key: ent.key,
         },
