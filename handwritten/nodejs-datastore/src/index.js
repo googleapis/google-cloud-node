@@ -170,7 +170,7 @@ const gapic = Object.freeze({
  * //-
  * // Run the query with {@link Datastore#runQuery}.
  * //-
- * datastore.runQuery(query, function(err, entities) {
+ * datastore.runQuery(query, (err, entities) => {
  *   // entities = An array of records.
  *
  *   // Access the Key object for an entity.
@@ -187,7 +187,7 @@ const gapic = Object.freeze({
  *
  * const NUM_RESULTS_PER_PAGE = 15;
  *
- * app.get('/contacts', function(req, res) {
+ * app.get('/contacts', (req, res) => {
  *   const query = datastore.createQuery('Contacts')
  *     .limit(NUM_RESULTS_PER_PAGE);
  *
@@ -195,7 +195,7 @@ const gapic = Object.freeze({
  *     query.start(req.query.nextPageCursor);
  *   }
  *
- *   datastore.runQuery(query, function(err, entities, info) {
+ *   datastore.runQuery(query, (err, entities, info) => {
  *     if (err) {
  *       // Error handling omitted.
  *       return;
@@ -233,7 +233,7 @@ const gapic = Object.freeze({
  * datastore.save({
  *   key: key,
  *   data: data
- * }, function(err) {
+ * }, (err) => {
  *   if (!err) {
  *     // Record saved successfully.
  *   }
@@ -242,7 +242,7 @@ const gapic = Object.freeze({
  * //-
  * // We can verify the data was saved by using {@link Datastore#get}.
  * //-
- * datastore.get(key, function(err, entity) {
+ * datastore.get(key, (err, entity) => {
  *   // entity = {
  *   //   name: 'Google',
  *   //   location: 'CA'
@@ -258,7 +258,7 @@ const gapic = Object.freeze({
  * datastore.save({
  *   key: key, // defined above (datastore.key(['Company', 'Google']))
  *   data: data
- * }, function(err, entity) {
+ * }, (err, entity) => {
  *   if (!err) {
  *     // Record updated successfully.
  *   }
@@ -270,7 +270,7 @@ const gapic = Object.freeze({
  * //-
  * const key = datastore.key(['Company', 'Google']);
  *
- * datastore.delete(key, function(err) {
+ * datastore.delete(key, (err) => {
  *   if (!err) {
  *     // Record deleted successfully.
  *   }
@@ -283,14 +283,14 @@ const gapic = Object.freeze({
  * //-
  * const transaction = datastore.transaction();
  *
- * transaction.run(function(err) {
+ * transaction.run((err) => {
  *   if (err) {
  *     // Error handling omitted.
  *   }
  *
  *   const key = datastore.key(['Company', 'Google']);
  *
- *   transaction.get(key, function(err, entity) {
+ *   transaction.get(key, (err, entity) => {
  *     if (err) {
  *       // Error handling omitted.
  *     }
@@ -299,7 +299,7 @@ const gapic = Object.freeze({
  *
  *     transaction.save(entity);
  *
- *     transaction.commit(function(err) {
+ *     transaction.commit((err) => {
  *       if (!err) {
  *         // Transaction committed successfully.
  *       }

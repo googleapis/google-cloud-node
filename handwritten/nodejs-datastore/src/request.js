@@ -66,11 +66,11 @@ class DatastoreRequest {
    *     datastore.save({
    *       key: datastore.key('Kind'),
    *       data: { foo: 'bar' }
-   *     }, function(err) {})
+   *     }, (err) => {})
    *
    *     const entity = { foo: 'bar' }
    *     entity[datastore.KEY] = datastore.key('Kind')
-   *     datastore.save(entity, function(err) {})
+   *     datastore.save(entity, (err) => {})
    *
    * @private
    *
@@ -113,24 +113,24 @@ class DatastoreRequest {
    * // The following call will create 100 new IDs from the Company kind, which
    * // exists under the default namespace.
    * //-
-   * datastore.allocateIds(incompleteKey, 100, function(err, keys) {});
+   * datastore.allocateIds(incompleteKey, 100, (err, keys) => {});
    *
    * //-
    * // Or, if you're using a transaction object.
    * //-
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
-   *   transaction.allocateIds(incompleteKey, 100, function(err, keys) {
+   *   transaction.allocateIds(incompleteKey, 100, (err, keys) => {
    *     if (err) {
    *       // Error handling omitted.
    *     }
    *
-   *     transaction.commit(function(err) {
+   *     transaction.commit((err) => {
    *       if (!err) {
    *         // Transaction committed successfully.
    *       }
@@ -156,7 +156,7 @@ class DatastoreRequest {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * datastore.allocateIds(incompleteKey, 100).then(function(data) {
+   * datastore.allocateIds(incompleteKey, 100).then((data) => {
    *   const keys = data[0];
    *   const apiResponse = data[1];
    * });
@@ -181,14 +181,12 @@ class DatastoreRequest {
         },
         gaxOpts: options.gaxOptions,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
         }
-
         const keys = arrify(resp.keys).map(entity.keyFromKeyProto);
-
         callback(null, keys, resp);
       }
     );
@@ -210,32 +208,22 @@ class DatastoreRequest {
    * ];
    *
    * datastore.createReadStream(keys)
-   *   .on('error', function(err) {})
-   *   .on('data', function(entity) {
+   *   .on('error', (err) =>  {})
+   *   .on('data', (entity) => {
    *     // entity is an entity object.
    *   })
-   *   .on('end', function() {
+   *   .on('end', () => {
    *     // All entities retrieved.
    *   });
    */
   createReadStream(keys, options) {
-    const self = this;
-
     options = options || {};
-
     keys = arrify(keys).map(entity.keyToKeyProto);
-
     if (keys.length === 0) {
       throw new Error('At least one Key object is required.');
     }
 
-    const stream = streamEvents(through.obj());
-
-    stream.once('reading', function() {
-      makeRequest(keys);
-    });
-
-    function makeRequest(keys) {
+    const makeRequest = keys => {
       const reqOpts = {
         keys: keys,
       };
@@ -248,14 +236,14 @@ class DatastoreRequest {
         };
       }
 
-      self.request_(
+      this.request_(
         {
           client: 'DatastoreClient',
           method: 'lookup',
           reqOpts: reqOpts,
           gaxOpts: options.gaxOptions,
         },
-        function(err, resp) {
+        (err, resp) => {
           if (err) {
             stream.destroy(err);
             return;
@@ -266,7 +254,7 @@ class DatastoreRequest {
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
 
-          split(entities, stream).then(function(streamEnded) {
+          split(entities, stream).then(streamEnded => {
             if (streamEnded) {
               return;
             }
@@ -280,8 +268,12 @@ class DatastoreRequest {
           });
         }
       );
-    }
+    };
 
+    const stream = streamEvents(through.obj());
+    stream.once('reading', () => {
+      makeRequest(keys);
+    });
     return stream;
   }
 
@@ -297,21 +289,21 @@ class DatastoreRequest {
    *
    * @example
    * const key = datastore.key(['Company', 123]);
-   * datastore.delete(key, function(err, apiResp) {});
+   * datastore.delete(key, (err, apiResp) => {});
    *
    * //-
    * // Or, if you're using a transaction object.
    * //-
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
    *   transaction.delete(key);
    *
-   *   transaction.commit(function(err) {
+   *   transaction.commit((err) => {
    *     if (!err) {
    *       // Transaction committed successfully.
    *     }
@@ -324,12 +316,12 @@ class DatastoreRequest {
    * datastore.delete([
    *   datastore.key(['Company', 123]),
    *   datastore.key(['Product', 'Computer'])
-   * ], function(err, apiResponse) {});
+   * ], (err, apiResponse) => {});
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * datastore.delete().then(function(data) {
+   * datastore.delete().then((data) => {
    *   const apiResponse = data[0];
    * });
    */
@@ -339,10 +331,10 @@ class DatastoreRequest {
       gaxOptions = {};
     }
 
-    callback = callback || function() {};
+    callback = callback || (() => {});
 
     const reqOpts = {
-      mutations: arrify(keys).map(function(key) {
+      mutations: arrify(keys).map(key => {
         return {
           delete: entity.keyToKeyProto(key),
         };
@@ -391,24 +383,24 @@ class DatastoreRequest {
    * //-
    * const key = datastore.key(['Company', 123]);
    *
-   * datastore.get(key, function(err, entity) {});
+   * datastore.get(key, (err, entity) => {});
    *
    * //-
    * // Or, if you're using a transaction object.
    * //-
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
-   *   transaction.get(key, function(err, entity) {
+   *   transaction.get(key, (err, entity) => {
    *     if (err) {
    *       // Error handling omitted.
    *     }
    *
-   *     transaction.commit(function(err) {
+   *     transaction.commit((err) => {
    *       if (!err) {
    *         // Transaction committed successfully.
    *       }
@@ -424,13 +416,13 @@ class DatastoreRequest {
    *   datastore.key(['Product', 'Computer'])
    * ];
    *
-   * datastore.get(keys, function(err, entities) {});
+   * datastore.get(keys, (err, entities) => {});
    *
    * //-
    * // Here's how you would update the value of an entity with the help of the
    * // `save` method.
    * //-
-   * datastore.get(key, function(err, entity) {
+   * datastore.get(key, (err, entity) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -440,13 +432,13 @@ class DatastoreRequest {
    *   datastore.save({
    *     key: key,
    *     data: entity
-   *   }, function(err) {});
+   *   }, (err) => {});
    * });
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * datastore.get(keys).then(function(data) {
+   * datastore.get(keys).then((data) => {
    *   const entities = data[0];
    * });
    */
@@ -461,7 +453,7 @@ class DatastoreRequest {
     this.createReadStream(keys, options)
       .on('error', callback)
       .pipe(
-        concat(function(results) {
+        concat(results => {
           const isSingleLookup = !is.array(keys);
           callback(null, isSingleLookup ? results[0] : results);
         })
@@ -531,7 +523,7 @@ class DatastoreRequest {
    * //-
    * const query = datastore.createQuery('Lion');
    *
-   * datastore.runQuery(query, function(err, entities, info) {
+   * datastore.runQuery(query, (err, entities, info) => {
    *   // entities = An array of records.
    *
    *   // Access the Key object for an entity.
@@ -543,17 +535,17 @@ class DatastoreRequest {
    * //-
    * const transaction = datastore.transaction();
    *
-   * transaction.run(function(err) {
+   * transaction.run((err) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
    *
-   *   transaction.runQuery(query, function(err, entities) {
+   *   transaction.runQuery(query, (err, entities) => {
    *     if (err) {
    *       // Error handling omitted.
    *     }
    *
-   *     transaction.commit(function(err) {
+   *     transaction.commit((err) => {
    *       if (!err) {
    *         // Transaction committed successfully.
    *       }
@@ -567,8 +559,8 @@ class DatastoreRequest {
    * //-
    * const keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
    *
-   * datastore.runQuery(keysOnlyQuery, function(err, entities) {
-   *   const keys = entities.map(function(entity) {
+   * datastore.runQuery(keysOnlyQuery, (err, entities) => {
+   *   const keys = entities.map((entity) => {
    *     return entity[datastore.KEY];
    *   });
    * });
@@ -576,7 +568,7 @@ class DatastoreRequest {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * datastore.runQuery(query).then(function(data) {
+   * datastore.runQuery(query).then((data) => {
    *   const entities = data[0];
    * });
    */
@@ -592,11 +584,11 @@ class DatastoreRequest {
 
     this.runQueryStream(query, options)
       .on('error', callback)
-      .on('info', function(info_) {
+      .on('info', info_ => {
         info = info_;
       })
       .pipe(
-        concat(function(results) {
+        concat(results => {
           callback(null, results, info);
         })
       );
@@ -615,12 +607,12 @@ class DatastoreRequest {
    * @example
    * datastore.runQueryStream(query)
    *   .on('error', console.error)
-   *   .on('data', function(entity) {
+   *   .on('data', (entity) => {
    *     // Access the Key object for this entity.
    *     const key = entity[datastore.KEY];
    *   })
-   *   .on('info', function(info) {})
-   *   .on('end', function() {
+   *   .on('info', (info) => {})
+   *   .on('end', () => {
    *     // All entities retrieved.
    *   });
    *
@@ -629,24 +621,15 @@ class DatastoreRequest {
    * // unnecessary processing and API requests.
    * //-
    * datastore.runQueryStream(query)
-   *   .on('data', function(entity) {
+   *   .on('data', (entity) => {
    *     this.end();
    *   });
    */
   runQueryStream(query, options) {
-    const self = this;
-
     options = options || {};
-
     query = extend(true, new Query(), query);
 
-    const stream = streamEvents(through.obj());
-
-    stream.once('reading', function() {
-      makeRequest(query);
-    });
-
-    function makeRequest(query) {
+    const makeRequest = query => {
       const reqOpts = {
         query: entity.queryToQueryProto(query),
       };
@@ -664,7 +647,7 @@ class DatastoreRequest {
         };
       }
 
-      self.request_(
+      this.request_(
         {
           client: 'DatastoreClient',
           method: 'runQuery',
@@ -673,7 +656,7 @@ class DatastoreRequest {
         },
         onResultSet
       );
-    }
+    };
 
     function onResultSet(err, resp) {
       if (err) {
@@ -696,7 +679,7 @@ class DatastoreRequest {
       }
 
       // Emit each result right away, then get the rest if necessary.
-      split(entities, stream).then(function(streamEnded) {
+      split(entities, stream).then(streamEnded => {
         if (streamEnded) {
           return;
         }
@@ -721,6 +704,10 @@ class DatastoreRequest {
       });
     }
 
+    const stream = streamEvents(through.obj());
+    stream.once('reading', () => {
+      makeRequest(query);
+    });
     return stream;
   }
 
@@ -774,7 +761,7 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err) {
+   * datastore.save(entity, (err) => {
    *   console.log(key.path); // [ 'Company', 5669468231434240 ]
    *   console.log(key.namespace); // undefined
    * });
@@ -795,7 +782,7 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err) {
+   * datastore.save(entity, (err) => {
    *   console.log(key.path); // ['Company', 'donutshack']
    *   console.log(key.namespace); // undefined
    * });
@@ -820,7 +807,7 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err) {
+   * datastore.save(entity, (err) => {
    *   console.log(key.path); // ['Company', 'donutshack']
    *   console.log(key.namespace); // 'my-namespace'
    * });
@@ -856,7 +843,7 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err, apiResponse) {});
+   * datastore.save(entity, (err, apiResponse) => {});
    *
    * //-
    * // Use an array, `excludeFromIndexes`, to exclude properties from indexing.
@@ -884,7 +871,7 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err, apiResponse) {});
+   * datastore.save(entity, (err, apiResponse) => {});
    *
    * //-
    * // Save multiple entities at once.
@@ -906,7 +893,7 @@ class DatastoreRequest {
    *   }
    * ];
    *
-   * datastore.save(entities, function(err, apiResponse) {});
+   * datastore.save(entities, (err, apiResponse) => {});
    *
    * //-
    * // Explicitly attempt to 'insert' a specific entity.
@@ -920,12 +907,12 @@ class DatastoreRequest {
    *   }
    * };
    *
-   * datastore.save(entity, function(err, apiResponse) {});
+   * datastore.save(entity, (err, apiResponse) => {});
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * datastore.save(entity).then(function(data) {
+   * datastore.save(entity).then((data) => {
    *   const apiResponse = data[0];
    * });
    */
@@ -949,7 +936,7 @@ class DatastoreRequest {
     // then place in the correct mutation array (insert, update, etc).
     entities
       .map(DatastoreRequest.prepareEntityObject_)
-      .forEach(function(entityObject, index) {
+      .forEach((entityObject, index) => {
         const mutation = {};
         let entityProto = {};
         let method = 'upsert';
@@ -972,10 +959,7 @@ class DatastoreRequest {
         // This was replaced with a more efficient mechanism in the top-level
         // `excludeFromIndexes` option.
         if (is.array(entityObject.data)) {
-          entityProto.properties = entityObject.data.reduce(function(
-            acc,
-            data
-          ) {
+          entityProto.properties = entityObject.data.reduce((acc, data) => {
             const value = entity.encodeValue(data.value);
 
             if (is.boolean(data.excludeFromIndexes)) {
@@ -992,8 +976,7 @@ class DatastoreRequest {
             acc[data.name] = value;
 
             return acc;
-          },
-          {});
+          }, {});
         } else {
           entityProto = entity.entityToEntityProto(entityObject);
         }
@@ -1014,7 +997,7 @@ class DatastoreRequest {
         return;
       }
 
-      arrify(resp.mutationResults).forEach(function(result, index) {
+      arrify(resp.mutationResults).forEach((result, index) => {
         if (!result.key) {
           return;
         }
@@ -1104,7 +1087,7 @@ class DatastoreRequest {
   request_(config, callback) {
     const datastore = this.datastore;
 
-    callback = callback || function() {};
+    callback = callback || (() => {});
 
     const isTransaction = is.defined(this.id);
     const method = config.method;
@@ -1138,7 +1121,7 @@ class DatastoreRequest {
       };
     }
 
-    datastore.auth.getProjectId(function(err, projectId) {
+    datastore.auth.getProjectId((err, projectId) => {
       if (err) {
         callback(err);
         return;
@@ -1152,17 +1135,13 @@ class DatastoreRequest {
           new gapic.v1[clientName](datastore.options)
         );
       }
-
       const gaxClient = datastore.clients_.get(clientName);
-
       reqOpts = replaceProjectIdToken(reqOpts, projectId);
-
       const gaxOpts = extend(true, {}, config.gaxOpts, {
         headers: {
           'google-cloud-resource-prefix': `projects/${projectId}`,
         },
       });
-
       gaxClient[method](reqOpts, gaxOpts, callback);
     });
   }

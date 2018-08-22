@@ -478,14 +478,14 @@ function entityToEntityProto(entityObject) {
   const entityProto = {
     key: null,
 
-    properties: Object.keys(properties).reduce(function(encoded, key) {
+    properties: Object.keys(properties).reduce((encoded, key) => {
       encoded[key] = entity.encodeValue(properties[key]);
       return encoded;
     }, {}),
   };
 
   if (excludeFromIndexes && excludeFromIndexes.length > 0) {
-    excludeFromIndexes.forEach(function(excludePath) {
+    excludeFromIndexes.forEach(excludePath => {
       excludePathFromEntity(entityProto, excludePath);
     });
   }
@@ -543,7 +543,7 @@ function entityToEntityProto(entityObject) {
       entity.properties[firstPathPart].arrayValue
     ) {
       const array = entity.properties[firstPathPart].arrayValue;
-      array.values.forEach(function(value) {
+      array.values.forEach(value => {
         if (remainderPath === '') {
           // We want to exclude *this* array property, which is
           // equivalent with excluding all its values
@@ -580,7 +580,7 @@ entity.entityToEntityProto = entityToEntityProto;
  * @returns {object[]}
  *
  * @example
- * request_('runQuery', {}, function(err, response) {
+ * request_('runQuery', {}, (err, response) => {
  *   const entityObjects = formatArray(response.batch.entityResults);
  *   // {
  *   //   key: {},
@@ -592,7 +592,7 @@ entity.entityToEntityProto = entityToEntityProto;
  * });
  */
 function formatArray(results) {
-  return results.map(function(result) {
+  return results.map(result => {
     const ent = entity.entityFromEntityProto(result.entity);
     ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key);
     return ent;
@@ -649,7 +649,7 @@ function keyFromKeyProto(keyProto) {
     keyOptions.namespace = keyProto.partitionId.namespaceId;
   }
 
-  keyProto.path.forEach(function(path, index) {
+  keyProto.path.forEach((path, index) => {
     keyOptions.path.push(path.kind);
 
     let id = path[path.idType];
@@ -787,19 +787,19 @@ function queryToQueryProto(query) {
   };
 
   const queryProto = {
-    distinctOn: query.groupByVal.map(function(groupBy) {
+    distinctOn: query.groupByVal.map(groupBy => {
       return {
         name: groupBy,
       };
     }),
 
-    kind: query.kinds.map(function(kind) {
+    kind: query.kinds.map(kind => {
       return {
         name: kind,
       };
     }),
 
-    order: query.orders.map(function(order) {
+    order: query.orders.map(order => {
       return {
         property: {
           name: order.name,
@@ -808,7 +808,7 @@ function queryToQueryProto(query) {
       };
     }),
 
-    projection: query.selectVal.map(function(select) {
+    projection: query.selectVal.map(select => {
       return {
         property: {
           name: select,
@@ -836,7 +836,7 @@ function queryToQueryProto(query) {
   }
 
   if (query.filters.length > 0) {
-    const filters = query.filters.map(function(filter) {
+    const filters = query.filters.map(filter => {
       let value = {};
 
       if (filter.name === '__key__') {
