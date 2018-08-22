@@ -73,20 +73,6 @@ const fakePromisify = {
 const fsCached = extend(true, {}, fs);
 const fakeFs = extend(true, {}, fsCached);
 
-let REQUEST_DEFAULT_CONF;  // eslint-disable-line no-unused-vars
-const requestCached = request;
-let requestOverride;
-const fakeRequest: RequestStub = (...args) => {
-  return (requestOverride || requestCached).apply(null, arguments);
-};
-
-fakeRequest.defaults = defaultConfiguration => {
-  // Ignore the default values, so we don't have to test for them in every API
-  // call.
-  REQUEST_DEFAULT_CONF = defaultConfiguration;
-  return fakeRequest;
-};
-
 let hashStreamValidationOverride;
 const hashStreamValidation = require('hash-stream-validation');
 function fakeHashStreamValidation() {
@@ -165,7 +151,6 @@ describe('File', () => {
              'gcs-resumable-upload': fakeResumableUpload,
              'hash-stream-validation': fakeHashStreamValidation,
              os: fakeOs,
-             request: fakeRequest,
              'xdg-basedir': fakeXdgBasedir,
            }).File;
     duplexify = require('duplexify');
@@ -183,8 +168,6 @@ describe('File', () => {
       makeAuthenticatedRequest(req, callback) {
         if (callback) {
           (callback.onAuthenticated || callback)(null, req);
-        } else {
-          return (requestOverride || requestCached)(req);
         }
       },
       bucket(name) {
@@ -201,7 +184,6 @@ describe('File', () => {
     handleRespOverride = null;
     hashStreamValidationOverride = null;
     makeWritableStreamOverride = null;
-    requestOverride = null;
     resumableUploadOverride = null;
   });
 
@@ -733,10 +715,6 @@ describe('File', () => {
           rawResponseStream.end();
         });
       };
-
-      requestOverride = () => {
-        return through();
-      };
     });
 
     it('should throw if both a range and validation is given', () => {
@@ -822,8 +800,8 @@ describe('File', () => {
         const ERROR = new Error('Error.');
 
         beforeEach(() => {
-          file.requestStream = opts => {
-            const stream = requestOverride(opts);
+          file.requestStream = () => {
+            const stream = through();
 
             setImmediate(() => {
               stream.emit('error', ERROR);
@@ -848,18 +826,12 @@ describe('File', () => {
 
     describe('requestStream', () => {
       it('should get readable stream from request', done => {
-        const fakeRequest = {a: 'b', c: 'd'};
-
-        requestOverride = getFakeRequest();
-
         file.requestStream = () => {
           setImmediate(() => {
-            assert.deepStrictEqual(
-                requestOverride.getRequestOptions(), fakeRequest);
             done();
           });
 
-          return requestOverride(fakeRequest);
+          return through();
         };
 
         file.createReadStream().resume();

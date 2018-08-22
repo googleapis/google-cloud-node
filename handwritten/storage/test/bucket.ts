@@ -68,18 +68,6 @@ function FakeNotification(bucket, id) {
   this.id = id;
 }
 
-const requestCached = request;
-let requestOverride;
-const fakeRequest: RequestStub = (...args) => {
-  return (requestOverride || requestCached).apply(null, args);
-};
-
-fakeRequest.defaults = () => fakeRequest;
-fakeRequest.get = (...args) =>
-    (requestOverride.get || fakeRequest).apply(null, args);
-fakeRequest.head = (...args) =>
-    (requestOverride.head || fakeRequest).apply(null, args);
-
 let eachLimitOverride;
 
 const fakeAsync = extend({}, async);
@@ -153,7 +141,6 @@ describe('Bucket', () => {
   before(() => {
     Bucket = proxyquire('../src/bucket.js', {
                async: fakeAsync,
-               request: fakeRequest,
                '@google-cloud/promisify': fakePromisify,
                '@google-cloud/paginator': fakePaginator,
                '@google-cloud/common': {
@@ -168,7 +155,6 @@ describe('Bucket', () => {
   });
 
   beforeEach(() => {
-    requestOverride = null;
     eachLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
@@ -1944,7 +1930,6 @@ describe('Bucket', () => {
     const filepath = path.join(__dirname, '../../test/testdata/' + basename);
     const textFilepath =
         path.join(__dirname, '../../test/testdata/textfile.txt');
-    const urlPath = 'http://www.example.com/image.jpg';
     const metadata = {
       metadata: {
         a: 'b',
@@ -1953,20 +1938,6 @@ describe('Bucket', () => {
     };
 
     beforeEach(() => {
-      requestOverride = util.noop;
-      requestOverride.get = () => {
-        const requestStream = through();
-
-        setImmediate(() => {
-          requestStream.end();
-        });
-
-        return requestStream;
-      };
-      requestOverride.head = (uri, callback) => {
-        callback(null, {headers: {}});
-      };
-
       bucket.file = (name, metadata) => {
         return new FakeFile(bucket, name, metadata);
       };
@@ -1986,34 +1957,6 @@ describe('Bucket', () => {
         assert.strictEqual(file.name, basename);
         done();
       });
-    });
-
-    it('should accept a url path & cb', done => {
-      bucket.upload(urlPath, (err, file) => {
-        assert.ifError(err);
-        assert.strictEqual(file.bucket.name, bucket.name);
-        assert.strictEqual(file.name, path.basename(urlPath));
-        done();
-      });
-    });
-
-    it('should accept a url, custom request options & cb', done => {
-      requestOverride.get = options => {
-        assert.deepStrictEqual(options, {
-          url: urlPath,
-          followAllRedirects: true,
-        });
-        setImmediate(done);
-        return through.obj();
-      };
-
-      const options = {
-        requestOptions: {
-          followAllRedirects: true,
-        },
-      };
-
-      bucket.upload(urlPath, options, assert.ifError);
     });
 
     it('should accept a path, metadata, & cb', done => {
@@ -2095,26 +2038,6 @@ describe('Bucket', () => {
       });
     });
 
-    it('should execute callback with error if file not found', done => {
-      bucket.upload('./not-real-file.json', err => {
-        assert.strictEqual(err.code, 'ENOENT');
-        done();
-      });
-    });
-
-    it('should execute callback with error if url not found', done => {
-      const error = new Error('Error.');
-
-      requestOverride.head = (url, callback) => {
-        callback(error);
-      };
-
-      bucket.upload('http://not-real-url', err => {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-
     it('should guess at the content type', done => {
       const fakeFile = new FakeFile(bucket, 'file-name');
       const options = {destination: fakeFile};
@@ -2160,67 +2083,6 @@ describe('Bucket', () => {
         return ws;
       };
       bucket.upload(filepath, options, assert.ifError);
-    });
-
-    it('should force a resumable upload with url', done => {
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      const options = {destination: fakeFile, resumable: true};
-      fakeFile.createWriteStream = options_ => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          assert.strictEqual(options_.resumable, options.resumable);
-          done();
-        });
-        return ws;
-      };
-      bucket.upload(urlPath, options, assert.ifError);
-    });
-
-    it('should set resumable to true from contentLength', done => {
-      requestOverride.head = (url, callback) => {
-        callback(null, {
-          headers: {
-            'content-length': 5000001,
-          },
-        });
-      };
-
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.createWriteStream = options => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          assert.strictEqual(options.resumable, true);
-          done();
-        });
-        return ws;
-      };
-
-      bucket.upload(urlPath, {destination: fakeFile}, assert.ifError);
-    });
-
-    it('should set resumable to false from contentLength', done => {
-      requestOverride.head = (url, callback) => {
-        callback(null, {
-          headers: {
-            'content-length': 1001,
-          },
-        });
-      };
-
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.createWriteStream = options => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          assert.strictEqual(options.resumable, false);
-          done();
-        });
-        return ws;
-      };
-
-      bucket.upload(urlPath, {destination: fakeFile}, assert.ifError);
     });
 
     it('should allow overriding content type', done => {

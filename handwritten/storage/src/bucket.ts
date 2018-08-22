@@ -2113,7 +2113,7 @@ class Bucket extends ServiceObject {
    * @see [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}
    * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
    *
-   * @param {string} pathString The fully qualified path or url to the file you
+   * @param {string} pathString The fully qualified path to the file you
    *     wish to upload to your bucket.
    * @param {object} [options] Configuration options.
    * @param {string|File} [options.destination] The place to save
@@ -2121,8 +2121,7 @@ class Bucket extends ServiceObject {
    *     using the string as a filename. When given a File object, your local
    * file will be uploaded to the File object's bucket and under the File
    * object's name. Lastly, when this argument is omitted, the file is uploaded
-   * to your bucket using the name of the local file or the path of the url
-   * relative to it's domain.
+   * to your bucket using the name of the local file.
    * @param {string} [options.encryptionKey] A custom encryption key. See
    *     [Customer-supplied Encryption
    * Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
@@ -2171,10 +2170,6 @@ class Bucket extends ServiceObject {
    *     MD5 checksum for maximum reliability. CRC32c will provide better
    *     performance with less reliability. You may also choose to skip
    * validation completely, however this is **not recommended**.
-   * @param {object} [options.requestOptions] When `pathString` is a URL,
-   *     additional [options for the HTTP
-   * request](https://github.com/request/request#requestoptions-callback) could
-   * be provided here.
    * @param {UploadCallback} [callback] Callback function.
    * @returns {Promise<UploadResponse>}
    *
@@ -2193,17 +2188,6 @@ class Bucket extends ServiceObject {
    *   // `file` is an instance of a File object that refers to your new file.
    * });
    *
-   * //-
-   * // You can also upload a file from a URL.
-   * //-
-   *
-   * bucket.upload('https://example.com/images/image.png', function(err, file,
-   * apiResponse) {
-   *   // Your bucket now contains:
-   *   // - "image.png"
-   *
-   *   // `file` is an instance of a File object that refers to your new file.
-   * });
    *
    * //-
    * // It's not always that easy. You will likely want to specify the filename
@@ -2294,19 +2278,7 @@ class Bucket extends ServiceObject {
    *   const file = data[0];
    * });
    *
-   * //-
-   * // Additional options for download request could be provided.
-   * //-
-   * bucket.upload('https://example.com/images/image.png', {
-   *   requestOptions: {
-   *     headers: {
-   *       'User-Agent': 'curl/7.54.0'
-   *     }
-   *   }
-   * }, function(err, newFile) {
-   *   // Custom `User-Agent` header will be used for the download request of
-   *   // "https://example.com/images/image.png".
-   * });
+   * To upload a file from a URL, use {@link File#createWriteStream}.
    *
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_upload_file
@@ -2321,8 +2293,6 @@ class Bucket extends ServiceObject {
       return;
     }
 
-    const isURL = /^(http|https):/.test(pathString);
-
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -2333,12 +2303,6 @@ class Bucket extends ServiceObject {
           metadata: {},
         },
         options);
-
-    const requestOptions = Object.assign(
-        {
-          url: pathString,
-        },
-        options.requestOptions);
 
     let newFile;
     if (options.destination instanceof File) {
@@ -2366,21 +2330,6 @@ class Bucket extends ServiceObject {
 
     if (is.boolean(options.resumable)) {
       upload();
-    } else if (isURL) {
-      request.head(requestOptions, (err, resp) => {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const contentLength = resp.headers['content-length'];
-
-        if (is.number(contentLength)) {
-          options.resumable = contentLength > RESUMABLE_THRESHOLD;
-        }
-
-        upload();
-      });
     } else {
       // Determine if the upload should be resumable if it's over the threshold.
       fs.stat(pathString, (err, fd) => {
@@ -2396,15 +2345,8 @@ class Bucket extends ServiceObject {
     }
 
     function upload() {
-      let sourceStream;
-
-      if (isURL) {
-        sourceStream = request.get(requestOptions);
-      } else {
-        sourceStream = fs.createReadStream(pathString);
-      }
-
-      sourceStream.on('error', callback)
+      fs.createReadStream(pathString)
+          .on('error', callback)
           .pipe(newFile.createWriteStream(options))
           .on('error', callback)
           .on('finish', () => {

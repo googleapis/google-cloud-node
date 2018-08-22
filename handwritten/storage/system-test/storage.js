@@ -23,10 +23,10 @@ const crypto = require('crypto');
 const extend = require('extend');
 const fs = require('fs');
 const is = require('is');
+const fetch = require('node-fetch');
 const normalizeNewline = require('normalize-newline');
 const path = require('path');
 const prop = require('propprop');
-const request = require('request');
 const through = require('through2');
 const tmp = require('tmp');
 const uuid = require('uuid');
@@ -610,25 +610,6 @@ describe('storage', function() {
             });
           }
         );
-      });
-
-      it('should upload a file from a URL', function(done) {
-        const url =
-          'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg';
-
-        bucket.upload(url, function(err, file) {
-          assert.ifError(err);
-
-          file.download(function(err, contents) {
-            assert.ifError(err);
-
-            request(url, function(err, resp, body) {
-              assert.ifError(err);
-              assert.strictEqual(body.toString(), contents.toString());
-              done();
-            });
-          });
-        });
       });
     });
   });
@@ -2528,11 +2509,13 @@ describe('storage', function() {
         },
         function(err, signedReadUrl) {
           assert.ifError(err);
-          request.get(signedReadUrl, function(err, resp, body) {
-            assert.ifError(err);
-            assert.strictEqual(body, localFile.toString());
-            file.delete(done);
-          });
+          fetch(signedReadUrl)
+            .then(res => res.text())
+            .then(body => {
+              assert.strictEqual(body, localFile.toString());
+              file.delete(done);
+            })
+            .catch(error => assert.ifError(error));
         }
       );
     });
@@ -2545,13 +2528,14 @@ describe('storage', function() {
         },
         function(err, signedDeleteUrl) {
           assert.ifError(err);
-          request.del(signedDeleteUrl, function(err) {
-            assert.ifError(err);
-            file.getMetadata(function(err) {
-              assert.strictEqual(err.code, 404);
-              done();
-            });
-          });
+          fetch(signedDeleteUrl, {method: 'DELETE'})
+            .then(() => {
+              file.getMetadata(function(err) {
+                assert.strictEqual(err.code, 404);
+                done();
+              });
+            })
+            .catch(error => assert.ifError(error));
         }
       );
     });
