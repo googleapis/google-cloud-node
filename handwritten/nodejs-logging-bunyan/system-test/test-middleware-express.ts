@@ -17,7 +17,7 @@
 /* AN EXAMPLE RATHER THAN A TEST AT THIS POINT */
 
 import * as assert from 'assert';
-import * as delay from 'delay';
+import delay from 'delay';
 
 import {express as elb} from '../src/index';
 
