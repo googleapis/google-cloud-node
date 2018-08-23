@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import * as delay from 'delay';
+import delay from 'delay';
 import * as nock from 'nock';
 import * as pify from 'pify';
 import * as zlib from 'zlib';
