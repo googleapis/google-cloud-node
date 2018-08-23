@@ -210,7 +210,7 @@ export class Translate extends Service {
    * @returns {Promise<DetectResponse>}
    *
    * @example
-   * const Translate = require('@google-cloud/translate');
+   * const {Translate} = require('@google-cloud/translate');
    *
    * const translate = new Translate();
    *
@@ -570,7 +570,7 @@ promisifyAll(Translate, {exclude: ['request']});
  * @google-cloud/translate
  *
  * @example <caption>Import the client library:</caption>
- * const Translate = require('@google-cloud/translate');
+ * const {Translate} = require('@google-cloud/translate');
  *
  * @example <caption>Create a client that uses <a
  * href="https://goo.gl/64dyYX">Application Default Credentials

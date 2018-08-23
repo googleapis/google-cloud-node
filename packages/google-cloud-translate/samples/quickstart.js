@@ -17,7 +17,7 @@
 
 // [START translate_quickstart]
 // Imports the Google Cloud client library
-const Translate = require('@google-cloud/translate');
+const {Translate} = require('@google-cloud/translate');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
