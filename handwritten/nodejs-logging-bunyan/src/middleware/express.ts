@@ -16,7 +16,11 @@
 
 import * as context from '@opencensus/propagation-stackdriver';
 import * as bunyan from 'bunyan';
-import {NextFunction, Request, Response} from 'express';
+import * as http from 'http';
+
+export type Request = http.IncomingMessage;
+export type Response = http.ServerResponse;
+export type NextFunction = (err?: Error) => void;
 
 import {LOGGING_TRACE_KEY, LoggingBunyan} from '../index';
 import * as types from '../types/core';
