@@ -21,8 +21,7 @@ import * as pify from 'pify';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
-import {Config} from '../src/config';
-import {Profiler, RequestProfile} from '../src/profiler';
+import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
 let savedEnv: {};

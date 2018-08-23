@@ -15,7 +15,7 @@
  */
 
 import {perftools} from '../../proto/profile';
-import {TimeProfile, TimeProfileNode} from '../src/v8-types';
+import {TimeProfile} from '../src/v8-types';
 
 const timeLeaf1 = {
   name: 'function1',

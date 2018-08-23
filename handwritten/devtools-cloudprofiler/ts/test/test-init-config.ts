@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-import * as common from '@google-cloud/common';
-import {GlobalConfig} from '@google-cloud/common/build/src/util';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as gcpMetadata from 'gcp-metadata';
 import * as sinon from 'sinon';
 
@@ -85,12 +82,11 @@ describe('createProfiler', () => {
     localLogPeriodMillis: 10000,
     baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',
   };
-  let defaultConfig: GlobalConfig;
+  let defaultConfig: {};
 
   before(async () => {
     process.env = {};
-    defaultConfig = await common.util.normalizeArguments(
-        null, extend({}, internalConfigParams as GlobalConfig));
+    defaultConfig = internalConfigParams || {};
     startStub = sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
     savedEnv = process.env;
   });

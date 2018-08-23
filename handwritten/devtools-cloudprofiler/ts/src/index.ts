@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-import {util} from '@google-cloud/common';
 import * as consoleLogLevel from 'console-log-level';
 import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
-import * as path from 'path';
-import {normalize} from 'path';
-import * as pify from 'pify';
 import * as semver from 'semver';
 import {SemVer} from 'semver';
 
@@ -53,8 +49,6 @@ function hasService(config: Config):
  * Throws error if value that must be set cannot be initialized.
  */
 function initConfigLocal(config: Config): ProfilerConfig {
-  config = util.normalizeArguments(null, config);
-
   const envConfig: Config = {
     projectId: process.env.GCLOUD_PROJECT,
     serviceContext: {

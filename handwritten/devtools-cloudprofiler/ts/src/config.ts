@@ -17,7 +17,6 @@
 import {GoogleAuthOptions} from '@google-cloud/common';
 
 const parseDuration: (str: string) => number = require('parse-duration');
-const extend = require('extend');
 
 // Configuration for Profiler.
 export interface Config extends GoogleAuthOptions {

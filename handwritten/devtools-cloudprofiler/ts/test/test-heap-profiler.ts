@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-import delay from 'delay';
 import * as sinon from 'sinon';
 
-import {perftools} from '../../proto/profile';
 import * as heapProfiler from '../src/profilers/heap-profiler';
 
 import {heapProfileExcludePath, heapProfileIncludePath, heapProfileWithExternal, v8HeapProfile, v8HeapWithPathProfile} from './profiles-for-tests';

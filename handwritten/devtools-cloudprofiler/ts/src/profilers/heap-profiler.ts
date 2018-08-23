@@ -15,7 +15,6 @@
  */
 
 import {perftools} from '../../../proto/profile';
-import {defaultConfig} from '../config';
 import {AllocationProfileNode} from '../v8-types';
 
 import {serializeHeapProfile} from './profile-serializer';
