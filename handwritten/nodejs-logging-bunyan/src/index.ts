@@ -15,7 +15,6 @@
  */
 
 import {Writable} from 'stream';
-import * as util from 'util';
 import * as express from './middleware/express';
 
 // Export the express middleware as 'express'.
