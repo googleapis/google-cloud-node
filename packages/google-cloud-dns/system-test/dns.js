@@ -27,21 +27,10 @@ const uuid = require('uuid');
 const DNS = require('../');
 
 const dns = new DNS();
-const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
-
-if (!DNS_DOMAIN) {
-  assert.fail(
-    `The 'GCLOUD_TESTS_DNS_DOMAIN' environment variable must be set to run the system tests.`
-  );
-}
+const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
 
 // Only run the tests if there is a domain to test with.
 describe('dns', function() {
-  if (!DNS_DOMAIN) {
-    // The test runner still executes this function, even if it is skipped.
-    return;
-  }
-
   const ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
   const ZONE = dns.zone(ZONE_NAME);
 
@@ -256,17 +245,14 @@ describe('dns', function() {
           ttl: 3600,
           name: DNS_DOMAIN,
           data: '10 0 5222 127.0.0.1.',
+          signatureRrdatas: [],
         });
-
         const change = ZONE.change();
-
         change.create({add: record}, function(err) {
           assert.ifError(err);
-
           const addition = change.metadata.additions[0];
           delete addition.kind;
           assert.deepStrictEqual(addition, record.toJSON());
-
           done();
         });
       });

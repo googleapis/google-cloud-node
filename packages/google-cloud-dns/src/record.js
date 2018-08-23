@@ -47,154 +47,143 @@ const format = require('string-format-obj');
  *   data: '1.2.3.4'
  * });
  */
-function Record(zone, type, metadata) {
-  this.zone_ = zone;
-
-  /**
-   * @name Record#type
-   * @type {string}
-   */
-  this.type = type;
-
-  /**
-   * @name Record#metadata
-   * @type {object}
-   * @property {string} name
-   * @property {string[]} data
-   * @property {number} metadata.ttl
-   */
-  this.metadata = metadata;
-
-  extend(this, this.toJSON());
-
-  if (this.rrdatas) {
+class Record {
+  constructor(zone, type, metadata) {
+    this.zone_ = zone;
     /**
-     * @name Record#data
-     * @type {?object[]}
+     * @name Record#type
+     * @type {string}
      */
-    this.data = this.rrdatas;
-    delete this.rrdatas;
+    this.type = type;
+    /**
+     * @name Record#metadata
+     * @type {object}
+     * @property {string} name
+     * @property {string[]} data
+     * @property {number} metadata.ttl
+     */
+    this.metadata = metadata;
+    extend(this, this.toJSON());
+    if (this.rrdatas) {
+      /**
+       * @name Record#data
+       * @type {?object[]}
+       */
+      this.data = this.rrdatas;
+      delete this.rrdatas;
+    }
+  }
+  /**
+   * @typedef {array} DeleteRecordResponse
+   * @property {Change} 0 A {@link Change} object.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback DeleteRecordCallback
+   * @param {?Error} err Request error, if any.
+   * @param {?Change} change A {@link Change} object.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Delete this record by creating a change on your zone. This is a convenience
+   * method for:
+   *
+   *     zone.createChange({
+   *       delete: record
+   *     }, (err, change, apiResponse) => {});
+   *
+   * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+   *
+   * @param {DeleteRecordCallback} [callback] Callback function.
+   * @returns {Promise<DeleteRecordResponse>}
+   *
+   * @example
+   * const DNS = require('@google-cloud/dns');
+   * const dns = new DNS();
+   * const zone = dns.zone('zone-id');
+   * const record = zone.record('a', {
+   *   name: 'example.com.',
+   *   ttl: 86400,
+   *   data: '1.2.3.4'
+   * });
+   *
+   * record.delete((err, change, apiResponse) => {
+   *   if (!err) {
+   *     // Delete change modification was created.
+   *   }
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * record.delete().then((data) => {
+   *   const change = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  delete(callback) {
+    this.zone_.deleteRecords(this, callback);
+  }
+  /**
+   * Serialize the record instance to the format the API expects.
+   *
+   * @returns {object}
+   */
+  toJSON() {
+    const recordObject = extend({}, this.metadata, {
+      type: this.type.toUpperCase(),
+    });
+    if (recordObject.data) {
+      recordObject.rrdatas = arrify(recordObject.data);
+      delete recordObject.data;
+    }
+    return recordObject;
+  }
+  /**
+   * Convert the record to a string, formatted for a zone file.
+   *
+   * @returns {string}
+   */
+  toString() {
+    const json = this.toJSON();
+    return (json.rrdatas || [{}])
+      .map(function(data) {
+        json.rrdata = data;
+        return format('{name} {ttl} IN {type} {rrdata}', json);
+      })
+      .join('\n');
+  }
+  /**
+   * Create a Record instance from a resource record set in a zone file.
+   *
+   * @private
+   *
+   * @param {Zone} zone The zone.
+   * @param {string} type The record type, e.g. `A`, `AAAA`, `MX`.
+   * @param {object} bindData Metadata parsed from dns-zonefile. Properties vary
+   *     based on the type of record.
+   * @returns {Record}
+   */
+  static fromZoneRecord_(zone, type, bindData) {
+    const typeToZoneFormat = {
+      a: '{ip}',
+      aaaa: '{ip}',
+      cname: '{alias}',
+      mx: '{preference} {host}',
+      ns: '{host}',
+      soa: '{mname} {rname} {serial} {retry} {refresh} {expire} {minimum}',
+      spf: '{data}',
+      srv: '{priority} {weight} {port} {target}',
+      txt: '{txt}',
+    };
+    const metadata = {
+      data: format(typeToZoneFormat[type.toLowerCase()], bindData),
+      name: bindData.name,
+      ttl: bindData.ttl,
+    };
+    return new Record(zone, type, metadata);
   }
 }
-
-/**
- * Create a Record instance from a resource record set in a zone file.
- *
- * @private
- *
- * @param {Zone} zone The zone.
- * @param {string} type The record type, e.g. `A`, `AAAA`, `MX`.
- * @param {object} bindData Metadata parsed from dns-zonefile. Properties vary
- *     based on the type of record.
- * @returns {Record}
- */
-Record.fromZoneRecord_ = function(zone, type, bindData) {
-  const typeToZoneFormat = {
-    a: '{ip}',
-    aaaa: '{ip}',
-    cname: '{alias}',
-    mx: '{preference} {host}',
-    ns: '{host}',
-    soa: '{mname} {rname} {serial} {retry} {refresh} {expire} {minimum}',
-    spf: '{data}',
-    srv: '{priority} {weight} {port} {target}',
-    txt: '{txt}',
-  };
-
-  const metadata = {
-    data: format(typeToZoneFormat[type.toLowerCase()], bindData),
-    name: bindData.name,
-    ttl: bindData.ttl,
-  };
-
-  return new Record(zone, type, metadata);
-};
-
-/**
- * @typedef {array} DeleteRecordResponse
- * @property {Change} 0 A {@link Change} object.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback DeleteRecordCallback
- * @param {?Error} err Request error, if any.
- * @param {?Change} change A {@link Change} object.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Delete this record by creating a change on your zone. This is a convenience
- * method for:
- *
- *     zone.createChange({
- *       delete: record
- *     }, function(err, change, apiResponse) {});
- *
- * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
- *
- * @param {DeleteRecordCallback} [callback] Callback function.
- * @returns {Promise<DeleteRecordResponse>}
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- * const zone = dns.zone('zone-id');
- * const record = zone.record('a', {
- *   name: 'example.com.',
- *   ttl: 86400,
- *   data: '1.2.3.4'
- * });
- *
- * record.delete(function(err, change, apiResponse) {
- *   if (!err) {
- *     // Delete change modification was created.
- *   }
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * record.delete().then(function(data) {
- *   const change = data[0];
- *   const apiResponse = data[1];
- * });
- */
-Record.prototype.delete = function(callback) {
-  this.zone_.deleteRecords(this, callback);
-};
-
-/**
- * Serialize the record instance to the format the API expects.
- *
- * @returns {object}
- */
-Record.prototype.toJSON = function() {
-  const recordObject = extend({}, this.metadata, {
-    type: this.type.toUpperCase(),
-  });
-
-  if (recordObject.data) {
-    recordObject.rrdatas = arrify(recordObject.data);
-    delete recordObject.data;
-  }
-
-  return recordObject;
-};
-
-/**
- * Convert the record to a string, formatted for a zone file.
- *
- * @returns {string}
- */
-Record.prototype.toString = function() {
-  const json = this.toJSON();
-
-  return (json.rrdatas || [{}])
-    .map(function(data) {
-      json.rrdata = data;
-      return format('{name} {ttl} IN {type} {rrdata}', json);
-    })
-    .join('\n');
-};
 
 /*! Developer Documentation
  *

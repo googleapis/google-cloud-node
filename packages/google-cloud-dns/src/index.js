@@ -24,7 +24,7 @@ const extend = require('extend');
 const is = require('is');
 const util = require('util');
 
-const Zone = require('./zone.js');
+const Zone = require('./zone');
 
 /**
  * @typedef {object} ClientConfig
@@ -50,7 +50,6 @@ const Zone = require('./zone.js');
  * @property {Constructor} [promise] Custom promise module to use instead of
  *     native Promises.
  */
-
 /**
  * [Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
  * performance, resilient, global DNS service that provides a cost-effective way
@@ -80,201 +79,203 @@ const Zone = require('./zone.js');
  * region_tag:dns_quickstart
  * Full quickstart example:
  */
-function DNS(options) {
-  if (!(this instanceof DNS)) {
-    return new DNS(options);
+class DNS extends Service {
+  constructor(options) {
+    options = options || {};
+    const config = {
+      baseUrl: 'https://www.googleapis.com/dns/v1',
+      scopes: [
+        'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
+        'https://www.googleapis.com/auth/cloud-platform',
+      ],
+      packageJson: require('../package.json'),
+    };
+    super(config, options);
   }
-
-  options = options || {};
-
-  const config = {
-    baseUrl: 'https://www.googleapis.com/dns/v1',
-    scopes: [
-      'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
-      'https://www.googleapis.com/auth/cloud-platform',
-    ],
-    packageJson: require('../package.json'),
-  };
-
-  Service.call(this, config, options);
+  /**
+   * Config to set for the zone.
+   *
+   * @typedef {object} CreateZoneRequest
+   * @property {string} dnsName DNS name for the zone. E.g. "example.com."
+   * @property {string} [description] Description text for the zone.
+   */
+  /**
+   * @typedef {array} CreateZoneResponse
+   * @property {Zone} 0 The new {@link Zone}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback CreateZoneCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Zone} zone The new {@link Zone}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Create a managed zone.
+   *
+   * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
+   *
+   * @throws {error} If a zone name is not provided.
+   * @throws {error} If a zone dnsName is not provided.
+   *
+   * @param {string} name Name of the zone to create, e.g. "my-zone".
+   * @param {CreateZoneRequest} [config] Config to set for the zone.
+   * @param {CreateZoneCallback} [callback] Callback function.
+   * @returns {Promise<CreateZoneResponse>}
+   * @throws {Error} If a name is not provided.
+   * @see Zone#create
+   *
+   * @example
+   * const DNS = require('@google-cloud/dns');
+   * const dns = new DNS();
+   *
+   * const config = {
+   *   dnsName: 'example.com.', // note the period at the end of the domain.
+   *   description: 'This zone is awesome!'
+   * };
+   *
+   * dns.createZone('my-awesome-zone', config, function(err, zone, apiResponse) {
+   *   if (!err) {
+   *     // The zone was created successfully.
+   *   }
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * dns.createZone('my-awesome-zone', config).then(function(data) {
+   *   const zone = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  createZone(name, config, callback) {
+    const self = this;
+    if (!name) {
+      throw new Error('A zone name is required.');
+    }
+    if (!config || !config.dnsName) {
+      throw new Error('A zone dnsName is required.');
+    }
+    config.name = name;
+    // Required by the API.
+    config.description = config.description || '';
+    this.request(
+      {
+        method: 'POST',
+        uri: '/managedZones',
+        json: config,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+        const zone = self.zone(resp.name);
+        zone.metadata = resp;
+        callback(null, zone, resp);
+      }
+    );
+  }
+  /**
+   * Query object for listing zones.
+   *
+   * @typedef {object} GetZonesRequest
+   * @property {boolean} [autoPaginate=true] Have pagination handled
+   *     automatically.
+   * @property {number} [maxApiCalls] Maximum number of API calls to make.
+   * @property {number} [maxResults] Maximum number of items plus prefixes to
+   *     return.
+   * @property {string} [pageToken] A previously-returned page token
+   *     representing part of the larger set of results to view.
+   */
+  /**
+   * @typedef {array} GetZonesResponse
+   * @property {Zone[]} 0 Array of {@link Zone} instances.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetZonesCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Zone[]} zones Array of {@link Zone} instances.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Gets a list of managed zones for the project.
+   *
+   * @see [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
+   *
+   * @param {GetZonesRequest} [query] Query object for listing zones.
+   * @param {GetZonesCallback} [callback] Callback function.
+   * @returns {Promise<GetZonesResponse>}
+   *
+   * @example
+   * const DNS = require('@google-cloud/dns');
+   * const dns = new DNS();
+   *
+   * dns.getZones(function(err, zones, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * dns.getZones().then(function(data) {
+   *   const zones = data[0];
+   * });
+   */
+  getZones(query, callback) {
+    const self = this;
+    if (is.fn(query)) {
+      callback = query;
+      query = {};
+    }
+    this.request(
+      {
+        uri: '/managedZones',
+        qs: query,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, null, resp);
+          return;
+        }
+        const zones = arrify(resp.managedZones).map(function(zone) {
+          const zoneInstance = self.zone(zone.name);
+          zoneInstance.metadata = zone;
+          return zoneInstance;
+        });
+        let nextQuery = null;
+        if (resp.nextPageToken) {
+          nextQuery = extend({}, query, {
+            pageToken: resp.nextPageToken,
+          });
+        }
+        callback(null, zones, nextQuery, resp);
+      }
+    );
+  }
+  /**
+   * Get a reference to a Zone.
+   *
+   * @param {string} name The unique name of the zone.
+   * @returns {Zone}
+   * @see Zone
+   *
+   * @throws {error} If a zone name is not provided.
+   *
+   * @example
+   * const DNS = require('@google-cloud/dns');
+   * const dns = new DNS();
+   *
+   * const zone = dns.zone('my-zone');
+   */
+  zone(name) {
+    if (!name) {
+      throw new Error('A zone name is required.');
+    }
+    return new Zone(this, name);
+  }
 }
 
 util.inherits(DNS, Service);
-
-/**
- * Config to set for the zone.
- *
- * @typedef {object} CreateZoneRequest
- * @property {string} dnsName DNS name for the zone. E.g. "example.com."
- * @property {string} [description] Description text for the zone.
- */
-/**
- * @typedef {array} CreateZoneResponse
- * @property {Zone} 0 The new {@link Zone}.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback CreateZoneCallback
- * @param {?Error} err Request error, if any.
- * @param {Zone} zone The new {@link Zone}.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Create a managed zone.
- *
- * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
- *
- * @throws {error} If a zone name is not provided.
- * @throws {error} If a zone dnsName is not provided.
- *
- * @param {string} name Name of the zone to create, e.g. "my-zone".
- * @param {CreateZoneRequest} [config] Config to set for the zone.
- * @param {CreateZoneCallback} [callback] Callback function.
- * @returns {Promise<CreateZoneResponse>}
- * @throws {Error} If a name is not provided.
- * @see Zone#create
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- *
- * const config = {
- *   dnsName: 'example.com.', // note the period at the end of the domain.
- *   description: 'This zone is awesome!'
- * };
- *
- * dns.createZone('my-awesome-zone', config, function(err, zone, apiResponse) {
- *   if (!err) {
- *     // The zone was created successfully.
- *   }
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * dns.createZone('my-awesome-zone', config).then(function(data) {
- *   const zone = data[0];
- *   const apiResponse = data[1];
- * });
- */
-DNS.prototype.createZone = function(name, config, callback) {
-  const self = this;
-
-  if (!name) {
-    throw new Error('A zone name is required.');
-  }
-
-  if (!config || !config.dnsName) {
-    throw new Error('A zone dnsName is required.');
-  }
-
-  config.name = name;
-
-  // Required by the API.
-  config.description = config.description || '';
-
-  this.request(
-    {
-      method: 'POST',
-      uri: '/managedZones',
-      json: config,
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, resp);
-        return;
-      }
-
-      const zone = self.zone(resp.name);
-      zone.metadata = resp;
-
-      callback(null, zone, resp);
-    }
-  );
-};
-
-/**
- * Query object for listing zones.
- *
- * @typedef {object} GetZonesRequest
- * @property {boolean} [autoPaginate=true] Have pagination handled
- *     automatically.
- * @property {number} [maxApiCalls] Maximum number of API calls to make.
- * @property {number} [maxResults] Maximum number of items plus prefixes to
- *     return.
- * @property {string} [pageToken] A previously-returned page token
- *     representing part of the larger set of results to view.
- */
-/**
- * @typedef {array} GetZonesResponse
- * @property {Zone[]} 0 Array of {@link Zone} instances.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback GetZonesCallback
- * @param {?Error} err Request error, if any.
- * @param {Zone[]} zones Array of {@link Zone} instances.
- * @param {object} apiResponse The full API response.
- */
-/**
- * Gets a list of managed zones for the project.
- *
- * @see [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
- *
- * @param {GetZonesRequest} [query] Query object for listing zones.
- * @param {GetZonesCallback} [callback] Callback function.
- * @returns {Promise<GetZonesResponse>}
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- *
- * dns.getZones(function(err, zones, apiResponse) {});
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * dns.getZones().then(function(data) {
- *   const zones = data[0];
- * });
- */
-DNS.prototype.getZones = function(query, callback) {
-  const self = this;
-
-  if (is.fn(query)) {
-    callback = query;
-    query = {};
-  }
-
-  this.request(
-    {
-      uri: '/managedZones',
-      qs: query,
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, null, resp);
-        return;
-      }
-
-      const zones = arrify(resp.managedZones).map(function(zone) {
-        const zoneInstance = self.zone(zone.name);
-        zoneInstance.metadata = zone;
-        return zoneInstance;
-      });
-
-      let nextQuery = null;
-
-      if (resp.nextPageToken) {
-        nextQuery = extend({}, query, {
-          pageToken: resp.nextPageToken,
-        });
-      }
-
-      callback(null, zones, nextQuery, resp);
-    }
-  );
-};
 
 /**
  * Get {@link Zone} objects for all of the zones in your project as
@@ -307,29 +308,6 @@ DNS.prototype.getZones = function(query, callback) {
  *   });
  */
 DNS.prototype.getZonesStream = paginator.streamify('getZones');
-
-/**
- * Get a reference to a Zone.
- *
- * @param {string} name The unique name of the zone.
- * @returns {Zone}
- * @see Zone
- *
- * @throws {error} If a zone name is not provided.
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- *
- * const zone = dns.zone('my-zone');
- */
-DNS.prototype.zone = function(name) {
-  if (!name) {
-    throw new Error('A zone name is required.');
-  }
-
-  return new Zone(this, name);
-};
 
 /*! Developer Documentation
  *

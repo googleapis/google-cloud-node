@@ -108,12 +108,6 @@ describe('DNS', function() {
       assert(promisified);
     });
 
-    it('should work without new', function() {
-      assert.doesNotThrow(function() {
-        DNS({projectId: PROJECT_ID});
-      });
-    });
-
     it('should inherit from Service', function() {
       assert(dns instanceof Service);
 
