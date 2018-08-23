@@ -88,8 +88,10 @@ describe('Resource', function() {
       },
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
-      './project': FakeProject,
-    });
+      './project': {
+        Project: FakeProject,
+      }
+    }).Resource;
   });
 
   beforeEach(function() {
@@ -137,7 +139,7 @@ describe('Resource', function() {
     var OPTIONS = {a: 'b', c: 'd'};
     var EXPECTED_BODY = extend({}, OPTIONS, {projectId: NEW_PROJECT_ID});
 
-    it('should not require any options', function(done) {
+    it('should not require any options', done => {
       var expectedBody = {projectId: NEW_PROJECT_ID};
 
       resource.request = function(reqOpts) {
@@ -148,7 +150,7 @@ describe('Resource', function() {
       resource.createProject(NEW_PROJECT_ID, assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       resource.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/projects');
@@ -170,7 +172,7 @@ describe('Resource', function() {
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
+      it('should execute callback with error & API response', done => {
         resource.createProject(NEW_PROJECT_ID, OPTIONS, function(err, p, res) {
           assert.strictEqual(err, error);
           assert.strictEqual(p, null);
@@ -191,7 +193,7 @@ describe('Resource', function() {
         };
       });
 
-      it('should exec callback with Project & API response', function(done) {
+      it('should exec callback with Project & API response', done => {
         var project = {};
         var fakeOperation = {};
 
@@ -222,7 +224,7 @@ describe('Resource', function() {
   });
 
   describe('getProjects', function() {
-    it('should accept only a callback', function(done) {
+    it('should accept only a callback', done => {
       resource.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -231,7 +233,7 @@ describe('Resource', function() {
       resource.getProjects(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       var query = {a: 'b', c: 'd'};
 
       resource.request = function(reqOpts) {
@@ -254,7 +256,7 @@ describe('Resource', function() {
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
+      it('should execute callback with error & API response', done => {
         resource.getProjects({}, function(err, projects, nextQuery, apiResp) {
           assert.strictEqual(err, error);
           assert.strictEqual(projects, null);
@@ -276,7 +278,7 @@ describe('Resource', function() {
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         var nextPageToken = 'next-page-token';
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -298,7 +300,7 @@ describe('Resource', function() {
         });
       });
 
-      it('should execute callback with Projects & API resp', function(done) {
+      it('should execute callback with Projects & API resp', done => {
         var project = {};
 
         resource.project = function(name) {

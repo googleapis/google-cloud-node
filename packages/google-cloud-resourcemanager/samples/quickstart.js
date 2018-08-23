@@ -17,7 +17,7 @@
 
 // [START resource_quickstart]
 // Imports the Google Cloud client library
-const Resource = require('@google-cloud/resource');
+const {Resource} = require('@google-cloud/resource');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';

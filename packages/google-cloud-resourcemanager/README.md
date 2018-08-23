@@ -64,7 +64,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ```javascript
 // Imports the Google Cloud client library
-const Resource = require('@google-cloud/resource');
+const {Resource} = require('@google-cloud/resource');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';

@@ -19,10 +19,10 @@
 import * as assert from 'assert';
 import * as async from 'async';
 var exec = require('methmeth');
-var googleAuth = require('google-auto-auth');
+import {GoogleAuth} from 'google-auth-library';
 import * as uuid from 'uuid';
 
-var Resource = require('../src');
+import {Resource, Project} from '../src';
 
 describe('Resource', function() {
   var PREFIX = 'gcloud-tests-';
@@ -30,7 +30,7 @@ describe('Resource', function() {
   var project = resource.project();
 
   describe('resource', function() {
-    it('should get a list of projects', function(done) {
+    it('should get a list of projects', done => {
       resource.getProjects(function(err, projects) {
         assert.ifError(err);
         assert(projects.length > 0);
@@ -38,7 +38,7 @@ describe('Resource', function() {
       });
     });
 
-    it('should get a list of projects in stream mode', function(done) {
+    it('should get a list of projects in stream mode', done => {
       var resultsMatched = 0;
 
       resource
@@ -55,12 +55,10 @@ describe('Resource', function() {
   });
 
   describe('project', function() {
-    it('should get metadata', function(done) {
+    it('should get metadata', done => {
       project.getMetadata(function(err, metadata) {
         assert.ifError(err);
-
-        assert.notStrictEqual(metadata.projectId, undefined);
-
+        assert.notStrictEqual((metadata as any).projectId, undefined);
         done();
       });
     });
@@ -74,25 +72,27 @@ describe('Resource', function() {
   //   - Delete a project
   describe('lifecycle', function() {
     var CAN_RUN_TESTS = true;
-    var testProjects: string[] = [];
+    var testProjects: Project[] = [];
 
     var resource = new Resource();
 
     var project = resource.project(generateName('project'));
 
     before(function(done) {
-      var authClient = googleAuth();
+      const authClient = new GoogleAuth();
 
       async.series(
         [
           function(callback) {
             // See if an auth token exists.
-            authClient.getToken(function(err) {
-              CAN_RUN_TESTS = err === null;
+            authClient.getAccessToken().then(() => {
+              CAN_RUN_TESTS = true;
+              callback();
+            }).catch(e => {
+              CAN_RUN_TESTS = e === null;
               callback();
             });
           },
-
           deleteTestProjects,
         ],
         function(err) {
@@ -128,22 +128,20 @@ describe('Resource', function() {
         this.skip();
         return;
       }
-
       deleteTestProjects(done);
     });
 
-    it('should have created the project', function(done) {
+    it('should have created the project', done => {
       project.getMetadata(function(err, metadata) {
         assert.ifError(err);
-        assert.strictEqual(metadata.projectId, project.id);
+        assert.strictEqual((metadata as any).projectId, (project as any).id);
         done();
       });
     });
 
-    it('should run operation as a promise', function(done) {
+    it('should run operation as a promise', done => {
       var project = resource.project(generateName('project'));
-
-      project
+      (project as any)
         .create()
         .then(function(response) {
           var operation = response[1];
@@ -151,32 +149,28 @@ describe('Resource', function() {
         })
         .then(function() {
           testProjects.push(project);
-          return project.getMetadata();
+          return (project as any).getMetadata();
         })
         .then(function(response) {
           var metadata = response[0];
-          assert.strictEqual(metadata.projectId, project.id);
+          assert.strictEqual(metadata.projectId, (project as any).id);
           done();
         });
     });
 
-    it('should set metadata', function(done) {
+    it('should set metadata', done => {
       var newProjectName = 'gcloud-tests-project-name';
-
       project.getMetadata(function(err, metadata) {
         assert.ifError(err);
-
-        var originalProjectName = metadata.name;
+        var originalProjectName = (metadata as any).name;
         assert.notStrictEqual(originalProjectName, newProjectName);
-
-        project.setMetadata(
+        (project as any).setMetadata(
           {
             name: newProjectName,
           },
           function(err) {
             assert.ifError(err);
-
-            project.setMetadata(
+            (project as any).setMetadata(
               {
                 name: originalProjectName,
               },
@@ -187,7 +181,7 @@ describe('Resource', function() {
       });
     });
 
-    it('should restore the project', function(done) {
+    it('should restore the project', done => {
       project.delete(function(err) {
         assert.ifError(err);
         project.restore(done);
@@ -199,20 +193,17 @@ describe('Resource', function() {
         callback();
         return;
       }
-
       async.series(
         [
           function(callback) {
             async.eachSeries(testProjects, exec('delete'), callback);
           },
-
           function(callback) {
             resource.getProjects(function(err, projects) {
               if (err) {
                 callback(err);
                 return;
               }
-
               var projectsToDelete = projects.filter(function(project) {
                 var isTestProject = project.id.indexOf(PREFIX) === 0;
                 var deleted =
@@ -220,7 +211,6 @@ describe('Resource', function() {
 
                 return isTestProject && !deleted;
               });
-
               async.each(projectsToDelete, exec('delete'), callback);
             });
           },

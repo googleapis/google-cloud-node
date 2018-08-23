@@ -18,7 +18,6 @@
 
 import * as assert from 'assert';
 import * as extend from 'extend';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
 import {ServiceObject, util} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
@@ -32,14 +31,15 @@ var fakePromisify = extend({}, promisify, {
   },
 });
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  calledWith_;
+  constructor(config) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
 
-nodeutil.inherits(FakeServiceObject, ServiceObject);
-
-describe('Project', function() {
+describe('Project', () => {
   var Project;
   var project;
 
@@ -48,21 +48,21 @@ describe('Project', function() {
   };
   var ID = 'project-id';
 
-  before(function() {
+  before(() => {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
       },
       '@google-cloud/promisify': fakePromisify
-    });
+    }).Project;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     project = new Project(RESOURCE, ID);
   });
 
-  describe('instantiation', function() {
-    it('should inherit from ServiceObject', function(done) {
+  describe('instantiation', () => {
+    it('should inherit from ServiceObject', done => {
       var resourceInstance = extend({}, RESOURCE, {
         createProject: {
           bind: function(context) {
@@ -94,42 +94,40 @@ describe('Project', function() {
       });
     });
 
-    it('should promisify all tlhe things', function() {
+    it('should promisify all tlhe things', () => {
       assert(promisified);
     });
   });
 
-  describe('restore', function() {
+  describe('restore', () => {
     var error = new Error('Error.');
     var apiResponse = {a: 'b', c: 'd'};
 
-    beforeEach(function() {
+    beforeEach(() => {
       project.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       project.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, ':undelete');
-
         done();
       };
-
       project.restore(assert.ifError);
     });
 
-    it('should execute the callback with error & API response', function(done) {
-      project.restore(function(err, apiResponse_) {
+    it('should execute the callback with error & API response', done => {
+      project.restore((err, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should not require a callback', function() {
-      assert.doesNotThrow(function() {
+    it('should not require a callback', () => {
+      assert.doesNotThrow(() => {
         project.restore();
       });
     });
