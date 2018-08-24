@@ -16,10 +16,12 @@
 'use strict';
 
 const path = require(`path`);
-const pubsub = require(`@google-cloud/pubsub`)();
+const PubSub = require(`@google-cloud/pubsub`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
+
+const pubsub = new PubSub();
 
 const cwd = path.join(__dirname, `..`);
 const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
