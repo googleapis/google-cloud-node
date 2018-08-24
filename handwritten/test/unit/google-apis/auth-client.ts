@@ -65,20 +65,18 @@ function verifyReportedMessage(
   });
 }
 describe('RequestHandler', () => {
-  it('should not request OAuth2 token if key is provided',
-     (done: () => void) => {
-       const config = {
-         ignoreEnvironmentCheck: true,
-         key: 'key',
-       };
-       const message = 'Made OAuth2 Token Request';
-       verifyReportedMessage(
-           config, new Error(message), {
-             info: 'API key provided; skipping OAuth2 token request.',
-           },
-           done);
-     })
-      .timeout(4000);
+  it('should not request OAuth2 token if key is provided', done => {
+    const config = {
+      ignoreEnvironmentCheck: true,
+      key: 'key',
+    };
+    const message = 'Made OAuth2 Token Request';
+    verifyReportedMessage(
+        config, new Error(message), {
+          info: 'API key provided; skipping OAuth2 token request.',
+        },
+        done);
+  }).timeout(8000);
 
   it('should issue a warning if it cannot communicate with the API',
      (done: () => void) => {
