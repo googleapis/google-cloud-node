@@ -18,7 +18,7 @@
 
 import {util, ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import { Resource } from '.';
+import {Resource} from '.';
 
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
@@ -37,7 +37,7 @@ import { Resource } from '.';
  */
 class Project extends ServiceObject {
   constructor(resource: Resource, id: string) {
-    var methods = {
+    const methods = {
       /**
        * Create a project.
        *
@@ -49,16 +49,17 @@ class Project extends ServiceObject {
        * const resource = new Resource();
        * const project = resource.project('grape-spaceship-123');
        *
-       * project.create(function(err, project, operation, apiResponse) {
+       * project.create((err, project, operation, apiResponse) => {
        *   if (err) {
        *     // Error handling omitted.
        *   }
        *
-       *   // `operation` will emit `error` or `complete` when the status updates.
+       *   // `operation` will emit `error` or `complete` when the status
+       * updates.
        *
        *   operation
-       *     .on('error', function(err) {})
-       *     .on('complete', function() {
+       *     .on('error', err => {})
+       *     .on('complete', () => {
        *       // Project was created successfully!
        *     });
        * });
@@ -67,14 +68,14 @@ class Project extends ServiceObject {
        * // If the callback is omitted, we'll return a Promise.
        * //-
        * project.create()
-       *   .then(function(data) {
+       *   .then(data => {
        *     const project = data[0];
        *     const operation = data[1];
        *     const apiResponse = data[2];
        *
        *     return operation.promise();
        *   })
-       *   .then(function(data) {
+       *   .then(data => {
        *     const operationMetadata = data[0];
        *
        *     // Project created successfully!
@@ -85,8 +86,8 @@ class Project extends ServiceObject {
       /**
        * Delete the project.
        *
-       * **This method only works if you are authenticated as yourself, e.g. using
-       * the gcloud SDK.**
+       * **This method only works if you are authenticated as yourself, e.g.
+       * using the gcloud SDK.**
        *
        * @see [projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/delete}
        *
@@ -143,10 +144,10 @@ class Project extends ServiceObject {
       /**
        * Get a project if it exists.
        *
-       * You may optionally use this to "get or create" an object by providing an
-       * object with `autoCreate` set to `true`. Any extra configuration that is
-       * normally required for the `create` method must be contained within this
-       * object as well.
+       * You may optionally use this to "get or create" an object by providing
+       * an object with `autoCreate` set to `true`. Any extra configuration that
+       * is normally required for the `create` method must be contained within
+       * this object as well.
        *
        * @method Project#get
        * @param {options} [options] Configuration object.
@@ -205,15 +206,16 @@ class Project extends ServiceObject {
       /**
        * Set the project's metadata.
        *
-       * **This method only works if you are authenticated as yourself, e.g. using
-       * the gcloud SDK.**
+       * **This method only works if you are authenticated as yourself, e.g.
+       * using the gcloud SDK.**
        *
        * @see [projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/update}
        * @see [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
        *
        * @method Project#setMetadata
        * @param {object} metadata See a
-       *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
+       *     [Project
+       * resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
        * @param {function} [callback] The callback function.
        * @param {?error} callback.err An error returned while making this
        *     request.
@@ -255,17 +257,18 @@ class Project extends ServiceObject {
        * @name Project#id
        * @type {string}
        */
-      id: id,
+      id,
       createMethod: resource.createProject.bind(resource),
-      methods: methods,
+      methods,
+      // tslint:disable-next-line no-any
     } as any);
   }
 
   /**
    * Restore a project.
    *
-   * **This method only works if you are authenticated as yourself, e.g. using the
-   * gcloud SDK.**
+   * **This method only works if you are authenticated as yourself, e.g. using
+   * the gcloud SDK.**
    *
    * @see [projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/undelete}
    *
@@ -295,22 +298,21 @@ class Project extends ServiceObject {
     callback = callback || util.noop;
 
     this.request(
-      {
-        method: 'POST',
-        uri: ':undelete',
-      },
-      (err, resp) => {
-        callback(err, resp);
-      }
-    );
-  };
+        {
+          method: 'POST',
+          uri: ':undelete',
+        },
+        (err, resp) => {
+          callback(err, resp);
+        });
+  }
 }
 
 /*! Developer Documentation
-*
-* All async methods (except for streams) will return a Promise in the event
-* that a callback is omitted.
-*/
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
 promisifyAll(Project);
 
 /**

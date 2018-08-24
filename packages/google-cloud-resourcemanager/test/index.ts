@@ -22,22 +22,32 @@ import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {util} from '@google-cloud/common';
 
-function FakeOperation() {
-  this.calledWith_ = arguments;
+class FakeOperation {
+  calledWith_;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
-function FakeProject() {
-  this.calledWith_ = arguments;
+class FakeProject {
+  calledWith_;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
-function FakeService() {
-  this.calledWith_ = arguments;
+class FakeService {
+  calledWith_;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
-var extended = false;
-var fakePaginator = {
+let extended = false;
+const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    // tslint:disable-next-line variable-name
+    extend(Class, methods) {
       if (Class.name !== 'Resource') {
         return;
       }
@@ -46,15 +56,16 @@ var fakePaginator = {
       assert.deepStrictEqual(methods, ['getProjects']);
       extended = true;
     },
-    streamify: function(methodName) {
+    streamify(methodName) {
       return methodName;
     },
   }
 };
 
-var promisified = true;
+let promisified = true;
 const fakePromisify = {
-  promisifyAll: function(Class, options) {
+  // tslint:disable-next-line variable-name
+  promisifyAll(Class, options) {
     if (Class.name !== 'Resource') {
       return;
     }
@@ -63,38 +74,39 @@ const fakePromisify = {
   },
 };
 
-var makeAuthenticatedRequestFactoryOverride;
-var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: function() {
+let makeAuthenticatedRequestFactoryOverride;
+const fakeUtil = extend({}, util, {
+  makeAuthenticatedRequestFactory() {
     if (makeAuthenticatedRequestFactoryOverride) {
       return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
     }
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
   },
 });
-var originalFakeUtil = extend(true, {}, fakeUtil);
+const originalFakeUtil = extend(true, {}, fakeUtil);
 
-describe('Resource', function() {
-  var PROJECT_ID = 'test-project-id';
+describe('Resource', () => {
+  const PROJECT_ID = 'test-project-id';
 
-  var Resource;
-  var resource;
+  // tslint:disable-next-line variable-name
+  let Resource;
+  let resource;
 
-  before(function() {
+  before(() => {
     Resource = proxyquire('../src', {
-      '@google-cloud/common': {
-        Operation: FakeOperation,
-        Service: FakeService,
-      },
-      '@google-cloud/promisify': fakePromisify,
-      '@google-cloud/paginator': fakePaginator,
-      './project': {
-        Project: FakeProject,
-      }
-    }).Resource;
+                 '@google-cloud/common': {
+                   Operation: FakeOperation,
+                   Service: FakeService,
+                 },
+                 '@google-cloud/promisify': fakePromisify,
+                 '@google-cloud/paginator': fakePaginator,
+                 './project': {
+                   Project: FakeProject,
+                 }
+               }).Resource;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     extend(fakeUtil, originalFakeUtil);
     makeAuthenticatedRequestFactoryOverride = null;
 
@@ -103,46 +115,44 @@ describe('Resource', function() {
     });
   });
 
-  describe('instantiation', function() {
-    it('should extend the correct methods', function() {
-      assert(extended); // See `fakePaginator.extend`
+  describe('instantiation', () => {
+    it('should extend the correct methods', () => {
+      assert(extended);  // See `fakePaginator.extend`
     });
 
-    it('should streamify the correct methods', function() {
+    it('should streamify the correct methods', () => {
       assert.strictEqual(resource.getProjectsStream, 'getProjects');
     });
 
-    it('should promisify all tlhe things', function() {
+    it('should promisify all tlhe things', () => {
       assert(promisified);
     });
 
-    it('should inherit from Service', function() {
+    it('should inherit from Service', () => {
       assert(resource instanceof FakeService);
 
-      var calledWith = resource.calledWith_[0];
+      const calledWith = resource.calledWith_[0];
 
-      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
+      const baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepStrictEqual(
-        calledWith.packageJson,
-        require('../../package.json')
-      );
+          calledWith.packageJson, require('../../package.json'));
     });
   });
 
-  describe('createProject', function() {
-    var NEW_PROJECT_ID = 'new-project-id';
-    var OPTIONS = {a: 'b', c: 'd'};
-    var EXPECTED_BODY = extend({}, OPTIONS, {projectId: NEW_PROJECT_ID});
+  describe('createProject', () => {
+    const NEW_PROJECT_ID = 'new-project-id';
+    const OPTIONS = {a: 'b', c: 'd'};
+    const EXPECTED_BODY = extend({}, OPTIONS, {projectId: NEW_PROJECT_ID});
 
     it('should not require any options', done => {
-      var expectedBody = {projectId: NEW_PROJECT_ID};
+      const expectedBody = {projectId: NEW_PROJECT_ID};
 
-      resource.request = function(reqOpts) {
+      resource.request = reqOpts => {
         assert.deepStrictEqual(reqOpts.json, expectedBody);
         done();
       };
@@ -151,7 +161,7 @@ describe('Resource', function() {
     });
 
     it('should make the correct API request', done => {
-      resource.request = function(reqOpts) {
+      resource.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/projects');
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
@@ -162,18 +172,18 @@ describe('Resource', function() {
       resource.createProject(NEW_PROJECT_ID, OPTIONS, assert.ifError);
     });
 
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+    describe('error', () => {
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
-        resource.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        resource.request = (reqOpts, callback) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error & API response', done => {
-        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(err, p, res) {
+        resource.createProject(NEW_PROJECT_ID, OPTIONS, (err, p, res) => {
           assert.strictEqual(err, error);
           assert.strictEqual(p, null);
           assert.strictEqual(res, apiResponse);
@@ -182,82 +192,72 @@ describe('Resource', function() {
       });
     });
 
-    describe('success', function() {
-      var apiResponse: any = {
-        name: 'operation-name',
-      };
+    describe('success', () => {
+      const apiResponse = {name: 'operation-name', projectId: undefined};
 
-      beforeEach(function() {
-        resource.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        resource.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
       });
 
       it('should exec callback with Project & API response', done => {
-        var project = {};
-        var fakeOperation = {};
+        const project = {};
+        const fakeOperation = {};
 
-        resource.project = function(id) {
+        resource.project = (id) => {
           assert.strictEqual(id, apiResponse.projectId);
           return project;
         };
 
-        resource.operation = function(name) {
+        resource.operation = (name) => {
           assert.strictEqual(name, apiResponse.name);
           return fakeOperation;
         };
 
-        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(e, p, o, res) {
+        resource.createProject(NEW_PROJECT_ID, OPTIONS, (e, p, o, res) => {
           assert.ifError(e);
-
           assert.strictEqual(p, project);
-
           assert.strictEqual(o, fakeOperation);
           assert.strictEqual(o.metadata, apiResponse);
-
           assert.strictEqual(res, apiResponse);
-
           done();
         });
       });
     });
   });
 
-  describe('getProjects', function() {
+  describe('getProjects', () => {
     it('should accept only a callback', done => {
-      resource.request = function(reqOpts) {
+      resource.request = reqOpts => {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
-
       resource.getProjects(assert.ifError);
     });
 
     it('should make the correct API request', done => {
-      var query = {a: 'b', c: 'd'};
-
-      resource.request = function(reqOpts) {
+      const query = {a: 'b', c: 'd'};
+      resource.request = reqOpts => {
         assert.strictEqual(reqOpts.uri, '/projects');
         assert.strictEqual(reqOpts.qs, query);
-
         done();
       };
-
       resource.getProjects(query, assert.ifError);
     });
 
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+    describe('error', () => {
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
-        resource.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        resource.request = (reqOpts, callback) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error & API response', done => {
-        resource.getProjects({}, function(err, projects, nextQuery, apiResp) {
+        resource.getProjects({}, (err, projects, nextQuery, apiResp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(projects, null);
           assert.strictEqual(nextQuery, null);
@@ -267,31 +267,31 @@ describe('Resource', function() {
       });
     });
 
-    describe('success', function() {
-      var apiResponse = {
+    describe('success', () => {
+      const apiResponse = {
         projects: [{projectId: PROJECT_ID}],
       };
 
-      beforeEach(function() {
-        resource.request = function(reqOpts, callback) {
+      beforeEach(() => {
+        resource.request = (reqOpts, callback) => {
           callback(null, apiResponse);
         };
       });
 
       it('should build a nextQuery if necessary', done => {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken,
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken,
         });
-        var expectedNextQuery = {
+        const expectedNextQuery = {
           pageToken: nextPageToken,
         };
 
-        resource.request = function(reqOpts, callback) {
+        resource.request = (reqOpts, callback) => {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        resource.getProjects({}, function(err, projects, nextQuery) {
+        resource.getProjects({}, (err, projects, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -301,38 +301,35 @@ describe('Resource', function() {
       });
 
       it('should execute callback with Projects & API resp', done => {
-        var project = {};
+        const project = {};
 
-        resource.project = function(name) {
+        resource.project = (name) => {
           assert.strictEqual(name, apiResponse.projects[0].projectId);
           return project;
         };
 
-        resource.getProjects({}, function(err, projects, nextQuery, apiResp) {
+        resource.getProjects({}, (err, projects, nextQuery, apiResp) => {
           assert.ifError(err);
-
           assert.strictEqual(projects[0], project);
           assert.strictEqual(projects[0].metadata, apiResponse.projects[0]);
-
           assert.strictEqual(apiResp, apiResponse);
-
           done();
         });
       });
     });
   });
 
-  describe('operation', function() {
-    var NAME = 'operation-name';
+  describe('operation', () => {
+    const NAME = 'operation-name';
 
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
+    it('should throw if a name is not provided', () => {
+      assert.throws(() => {
         resource.operation();
       }, /A name must be specified for an operation\./);
     });
 
-    it('should return a common/operation', function() {
-      var operation = resource.operation(NAME);
+    it('should return a common/operation', () => {
+      const operation = resource.operation(NAME);
 
       assert(operation instanceof FakeOperation);
 
@@ -343,25 +340,25 @@ describe('Resource', function() {
     });
   });
 
-  describe('project', function() {
-    it('should return a Project object', function() {
-      var project = resource.project(PROJECT_ID);
+  describe('project', () => {
+    it('should return a Project object', () => {
+      const project = resource.project(PROJECT_ID);
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[0], resource);
       assert.strictEqual(project.calledWith_[1], PROJECT_ID);
     });
 
-    it('should use the project ID from the resource', function() {
+    it('should use the project ID from the resource', () => {
       resource.projectId = PROJECT_ID;
-      var project = resource.project();
+      const project = resource.project();
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[1], PROJECT_ID);
     });
 
-    it('should throw if no project ID was given or found', function() {
-      var resourceWithoutProjectId = new Resource({});
+    it('should throw if no project ID was given or found', () => {
+      const resourceWithoutProjectId = new Resource({});
 
-      assert.throws(function() {
+      assert.throws(() => {
         resourceWithoutProjectId.project();
       }, /A project ID is required\./);
     });

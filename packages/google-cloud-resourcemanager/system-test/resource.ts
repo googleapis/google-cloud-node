@@ -18,20 +18,20 @@
 
 import * as assert from 'assert';
 import * as async from 'async';
-var exec = require('methmeth');
+const exec = require('methmeth');
 import {GoogleAuth} from 'google-auth-library';
 import * as uuid from 'uuid';
 
 import {Resource, Project} from '../src';
 
-describe('Resource', function() {
-  var PREFIX = 'gcloud-tests-';
-  var resource = new Resource();
-  var project = resource.project();
+describe('Resource', () => {
+  const PREFIX = 'gcloud-tests-';
+  const resource = new Resource();
+  const project = resource.project();
 
-  describe('resource', function() {
+  describe('resource', () => {
     it('should get a list of projects', done => {
-      resource.getProjects(function(err, projects) {
+      resource.getProjects((err, projects) => {
         assert.ifError(err);
         assert(projects.length > 0);
         done();
@@ -39,25 +39,26 @@ describe('Resource', function() {
     });
 
     it('should get a list of projects in stream mode', done => {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
-      resource
-        .getProjectsStream()
-        .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
-          assert(resultsMatched > 0);
-          done();
-        });
+      resource.getProjectsStream()
+          .on('error', done)
+          .on('data',
+              () => {
+                resultsMatched++;
+              })
+          .on('end', () => {
+            assert(resultsMatched > 0);
+            done();
+          });
     });
   });
 
-  describe('project', function() {
+  describe('project', () => {
     it('should get metadata', done => {
-      project.getMetadata(function(err, metadata) {
+      project.getMetadata((err, metadata) => {
         assert.ifError(err);
+        // tslint:disable-next-line no-any
         assert.notStrictEqual((metadata as any).projectId, undefined);
         done();
       });
@@ -70,51 +71,50 @@ describe('Resource', function() {
   //   - Set metadata
   //   - Restore a project
   //   - Delete a project
-  describe('lifecycle', function() {
-    var CAN_RUN_TESTS = true;
-    var testProjects: Project[] = [];
+  describe('lifecycle', () => {
+    let CAN_RUN_TESTS = true;
+    const testProjects: Project[] = [];
 
-    var resource = new Resource();
+    const resource = new Resource();
 
-    var project = resource.project(generateName('project'));
+    const project = resource.project(generateName('project'));
 
-    before(function(done) {
+    before(done => {
       const authClient = new GoogleAuth();
 
       async.series(
-        [
-          function(callback) {
-            // See if an auth token exists.
-            authClient.getAccessToken().then(() => {
-              CAN_RUN_TESTS = true;
-              callback();
-            }).catch(e => {
-              CAN_RUN_TESTS = e === null;
-              callback();
-            });
-          },
-          deleteTestProjects,
-        ],
-        function(err) {
-          if (err || !CAN_RUN_TESTS) {
-            done(err);
-            return;
-          }
-
-          project.create(function(err, project, operation) {
-            if (err) {
+          [
+            (callback) => {
+              // See if an auth token exists.
+              authClient.getAccessToken()
+                  .then(() => {
+                    CAN_RUN_TESTS = true;
+                    callback();
+                  })
+                  .catch(e => {
+                    CAN_RUN_TESTS = e === null;
+                    callback();
+                  });
+            },
+            deleteTestProjects,
+          ],
+          (err) => {
+            if (err || !CAN_RUN_TESTS) {
               done(err);
               return;
             }
 
-            testProjects.push(project);
-
-            operation.on('error', done).on('complete', function() {
-              done();
+            project.create((err, project, operation) => {
+              if (err) {
+                done(err);
+                return;
+              }
+              testProjects.push(project);
+              operation.on('error', done).on('complete', () => {
+                done();
+              });
             });
           });
-        }
-      );
     });
 
     beforeEach(function() {
@@ -132,57 +132,64 @@ describe('Resource', function() {
     });
 
     it('should have created the project', done => {
-      project.getMetadata(function(err, metadata) {
+      project.getMetadata((err, metadata) => {
         assert.ifError(err);
+        // tslint:disable-next-line no-any
         assert.strictEqual((metadata as any).projectId, (project as any).id);
         done();
       });
     });
 
     it('should run operation as a promise', done => {
-      var project = resource.project(generateName('project'));
+      const project = resource.project(generateName('project'));
+      // tslint:disable-next-line no-any
       (project as any)
-        .create()
-        .then(function(response) {
-          var operation = response[1];
-          return operation.promise();
-        })
-        .then(function() {
-          testProjects.push(project);
-          return (project as any).getMetadata();
-        })
-        .then(function(response) {
-          var metadata = response[0];
-          assert.strictEqual(metadata.projectId, (project as any).id);
-          done();
-        });
+          .create()
+          .then(response => {
+            const operation = response[1];
+            return operation.promise();
+          })
+          .then(() => {
+            testProjects.push(project);
+            // tslint:disable-next-line no-any
+            return (project as any).getMetadata();
+          })
+          .then(response => {
+            const metadata = response[0];
+            // tslint:disable-next-line no-any
+            assert.strictEqual(metadata.projectId, (project as any).id);
+            done();
+          });
     });
 
     it('should set metadata', done => {
-      var newProjectName = 'gcloud-tests-project-name';
-      project.getMetadata(function(err, metadata) {
+      const newProjectName = 'gcloud-tests-project-name';
+      project.getMetadata((err, metadata) => {
         assert.ifError(err);
-        var originalProjectName = (metadata as any).name;
+        // tslint:disable-next-line no-any
+        const originalProjectName = (metadata as any).name;
         assert.notStrictEqual(originalProjectName, newProjectName);
-        (project as any).setMetadata(
-          {
-            name: newProjectName,
-          },
-          function(err) {
-            assert.ifError(err);
-            (project as any).setMetadata(
-              {
-                name: originalProjectName,
-              },
-              done
-            );
-          }
-        );
+        // tslint:disable-next-line no-any
+        (project as any)
+            .setMetadata(
+                {
+                  name: newProjectName,
+                },
+                (err) => {
+                  assert.ifError(err);
+                  // tslint:disable-next-line no-any
+                  (project as any)
+                      .setMetadata(
+                          {
+                            name: originalProjectName,
+                          },
+                          done);
+                });
       });
     });
 
     it('should restore the project', done => {
-      project.delete(function(err) {
+      project.delete(err => {
         assert.ifError(err);
         project.restore(done);
       });
@@ -194,29 +201,27 @@ describe('Resource', function() {
         return;
       }
       async.series(
-        [
-          function(callback) {
-            async.eachSeries(testProjects, exec('delete'), callback);
-          },
-          function(callback) {
-            resource.getProjects(function(err, projects) {
-              if (err) {
-                callback(err);
-                return;
-              }
-              var projectsToDelete = projects.filter(function(project) {
-                var isTestProject = project.id.indexOf(PREFIX) === 0;
-                var deleted =
-                  project.metadata.lifecycleState === 'DELETE_REQUESTED';
-
-                return isTestProject && !deleted;
+          [
+            callback => {
+              async.eachSeries(testProjects, exec('delete'), callback);
+            },
+            callback => {
+              resource.getProjects((err, projects) => {
+                if (err) {
+                  callback(err);
+                  return;
+                }
+                const projectsToDelete = projects.filter(project => {
+                  const isTestProject = project.id.indexOf(PREFIX) === 0;
+                  const deleted =
+                      project.metadata.lifecycleState === 'DELETE_REQUESTED';
+                  return isTestProject && !deleted;
+                });
+                async.each(projectsToDelete, exec('delete'), callback);
               });
-              async.each(projectsToDelete, exec('delete'), callback);
-            });
-          },
-        ],
-        callback
-      );
+            },
+          ],
+          callback);
     }
 
     function generateName(resourceType) {

@@ -28,8 +28,10 @@ import {Project} from './project';
  * @property {string} [projectId] The project ID from the Google Developer's
  *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
  *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
- *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
- *     your project ID will be detected automatically.
+ *     an environment which supports {@link
+ * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+ * Application Default Credentials}, your project ID will be detected
+ * automatically.
  * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
  *     downloaded from the Google Developers Console. If you provide a path to a
  *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
@@ -68,13 +70,14 @@ import {Project} from './project';
  * @example <caption>Import the client library</caption>
  * const {Resource} = require('@google-cloud/resource');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const resource = new Resource();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const resource = new Resource();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const resource = new Resource({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const resource = new Resource({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
@@ -85,7 +88,7 @@ class Resource extends Service {
   getProjectsStream;
   constructor(options?) {
     options = options || {};
-    var config = {
+    const config = {
       baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       projectIdRequired: false,
@@ -94,7 +97,8 @@ class Resource extends Service {
     super(config, options);
 
     /**
-     * Get a list of {@link Resource/project} objects as a readable object stream.
+     * Get a list of {@link Resource/project} objects as a readable object
+     * stream.
      *
      * @param {object} query Configuration object. See
      *     {@link Resource#getProjects} for a complete list of options.
@@ -106,10 +110,10 @@ class Resource extends Service {
      *
      * resource.getProjectsStream()
      *   .on('error', console.error)
-     *   .on('data', function(project) {
+     *   .on('data', project => {
      *     // `project` is a `Project` object.
      *   })
-     *   .on('end', function() {
+     *   .on('end', () => {
      *     // All projects retrieved.
      *   });
      *
@@ -122,23 +126,22 @@ class Resource extends Service {
      *     this.end();
      *   });
      */
-    this.getProjectsStream = paginator.streamify(
-      'getProjects'
-    );
+    this.getProjectsStream = paginator.streamify('getProjects');
   }
 
   /**
    * Create a project.
    *
-   * **This method only works if you are authenticated as yourself, e.g. using the
-   * gcloud SDK.**
+   * **This method only works if you are authenticated as yourself, e.g. using
+   * the gcloud SDK.**
    *
    * @see [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
    * @see [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
    *
    * @param {string} id ID of the project.
    * @param {object} [options] See a
-   *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
+   *     [Project
+   * resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
    * @param {function} [callback] The callback function.
    * @param {?error} callback.err An error returned while making this request.
    * @param {Project} callback.project The created Project
@@ -151,7 +154,7 @@ class Resource extends Service {
    *
    * const id = 'new-project-id';
    *
-   * resource.createProject(id, function(err, project, operation, apiResponse) {
+   * resource.createProject(id, (err, project, operation, apiResponse) => {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -160,8 +163,8 @@ class Resource extends Service {
    *   // `operation` will emit `error` or `complete` when the status updates.
    *
    *   operation
-   *     .on('error', function(err) {})
-   *     .on('complete', function() {
+   *     .on('error', err => {})
+   *     .on('complete', () => {
    *       // Project was created successfully!
    *     });
    * });
@@ -170,14 +173,14 @@ class Resource extends Service {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * resource.createProject(id)
-   *   .then(function(data) {
+   *   .then(data => {
    *     const project = data[0];
    *     const operation = data[1];
    *     const apiResponse = data[2];
    *
    *     return operation.promise();
    *   })
-   *   .then(function(data) {
+   *   .then(data => {
    *     const operationMetadata = data[0];
    *
    *     // Project created successfully!
@@ -190,25 +193,24 @@ class Resource extends Service {
     }
 
     this.request(
-      {
-        method: 'POST',
-        uri: '/projects',
-        json: extend({}, options, {
-          projectId: id,
-        }),
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
-        const project = this.project(resp.projectId);
-        const operation = this.operation(resp.name);
-        operation.metadata = resp;
-        callback(null, project, operation, resp);
-      }
-    );
-  };
+        {
+          method: 'POST',
+          uri: '/projects',
+          json: extend({}, options, {
+            projectId: id,
+          }),
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
+          const project = this.project(resp.projectId);
+          const operation = this.operation(resp.name);
+          operation.metadata = resp;
+          callback(null, project, operation, resp);
+        });
+  }
 
   /**
    * Get a list of projects.
@@ -235,7 +237,7 @@ class Resource extends Service {
    * const {Resource} = require('@google-cloud/resource');
    * const resource = new Resource();
    *
-   * resource.getProjects(function(err, projects) {
+   * resource.getProjects((err, projects) => {
    *   // `projects` is an array of `Project` objects.
    * });
    *
@@ -257,7 +259,7 @@ class Resource extends Service {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * resource.getProjects().then(function(data) {
+   * resource.getProjects().then(data => {
    *   const projects = data[0];
    * });
    */
@@ -270,39 +272,38 @@ class Resource extends Service {
     options = options || {};
 
     this.request(
-      {
-        uri: '/projects',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
+        {
+          uri: '/projects',
+          qs: options,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
 
-        var nextQuery = null;
+          let nextQuery = null;
 
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
-            pageToken: resp.nextPageToken,
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, options, {
+              pageToken: resp.nextPageToken,
+            });
+          }
+
+          const projects = (resp.projects || []).map(project => {
+            const projectInstance = this.project(project.projectId);
+            projectInstance.metadata = project;
+            return projectInstance;
           });
-        }
 
-        var projects = (resp.projects || []).map(project => {
-          var projectInstance = this.project(project.projectId);
-          projectInstance.metadata = project;
-          return projectInstance;
+          callback(null, projects, nextQuery, resp);
         });
-
-        callback(null, projects, nextQuery, resp);
-      }
-    );
-  };
+  }
 
   /*! Developer Documentation
-  *
-  * @returns {module:common/operation}
-  */
+   *
+   * @returns {module:common/operation}
+   */
   /**
    * Get a reference to an existing operation.
    *
@@ -324,7 +325,7 @@ class Resource extends Service {
       parent: this,
       id: name,
     });
-  };
+  }
 
   /**
    * Create a Project object. See {@link Resource#createProject} to create
@@ -347,20 +348,20 @@ class Resource extends Service {
       throw new Error('A project ID is required.');
     }
     return new Project(this, id);
-  };
+  }
 }
 
 /*! Developer Documentation
-*
-* These methods can be auto-paginated.
-*/
+ *
+ * These methods can be auto-paginated.
+ */
 paginator.extend(Resource, ['getProjects']);
 
 /*! Developer Documentation
-*
-* All async methods (except for streams) will return a Promise in the event
-* that a callback is omitted.
-*/
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
 promisifyAll(Resource, {
   exclude: ['operation', 'project'],
 });
@@ -384,19 +385,21 @@ export {Project};
  * @module {constructor} @google-cloud/resource
  * @alias nodejs-resource
  *
- * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/resource
+ * @example <caption>Install the client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
+ * @google-cloud/resource
  *
  * @example <caption>Import the client library</caption>
  * const {Resource} = require('@google-cloud/resource');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const resource = new Resource();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const resource = new Resource();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const resource = new Resource({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const resource = new Resource({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>

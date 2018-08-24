@@ -22,9 +22,10 @@ import * as proxyquire from 'proxyquire';
 import {ServiceObject, util} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 
-var promisified = false;
-var fakePromisify = extend({}, promisify, {
-  promisifyAll: function(Class) {
+let promisified = false;
+const fakePromisify = extend({}, promisify, {
+  // tslint:disable-next-line variable-name
+  promisifyAll(Class) {
     if (Class.name === 'Project') {
       promisified = true;
     }
@@ -40,21 +41,22 @@ class FakeServiceObject extends ServiceObject {
 }
 
 describe('Project', () => {
-  var Project;
-  var project;
+  // tslint:disable-next-line variable-name
+  let Project;
+  let project;
 
-  var RESOURCE = {
+  const RESOURCE = {
     createProject: util.noop,
   };
-  var ID = 'project-id';
+  const ID = 'project-id';
 
   before(() => {
     Project = proxyquire('../src/project.js', {
-      '@google-cloud/common': {
-        ServiceObject: FakeServiceObject,
-      },
-      '@google-cloud/promisify': fakePromisify
-    }).Project;
+                '@google-cloud/common': {
+                  ServiceObject: FakeServiceObject,
+                },
+                '@google-cloud/promisify': fakePromisify
+              }).Project;
   });
 
   beforeEach(() => {
@@ -63,19 +65,19 @@ describe('Project', () => {
 
   describe('instantiation', () => {
     it('should inherit from ServiceObject', done => {
-      var resourceInstance = extend({}, RESOURCE, {
+      const resourceInstance = extend({}, RESOURCE, {
         createProject: {
-          bind: function(context) {
+          bind(context) {
             assert.strictEqual(context, resourceInstance);
             done();
           },
         },
       });
 
-      var project = new Project(resourceInstance, ID);
+      const project = new Project(resourceInstance, ID);
       assert(project instanceof ServiceObject);
 
-      var calledWith = project.calledWith_[0];
+      const calledWith = project.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, resourceInstance);
       assert.strictEqual(calledWith.baseUrl, '/projects');
@@ -100,17 +102,17 @@ describe('Project', () => {
   });
 
   describe('restore', () => {
-    var error = new Error('Error.');
-    var apiResponse = {a: 'b', c: 'd'};
+    const error = new Error('Error.');
+    const apiResponse = {a: 'b', c: 'd'};
 
     beforeEach(() => {
-      project.request = function(reqOpts, callback) {
+      project.request = (reqOpts, callback) => {
         callback(error, apiResponse);
       };
     });
 
     it('should make the correct API request', done => {
-      project.request = function(reqOpts) {
+      project.request = reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, ':undelete');
         done();

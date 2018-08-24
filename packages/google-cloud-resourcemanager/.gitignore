@@ -12,3 +12,4 @@ system-test/*key.json
 google-cloud-logging-winston-*.tgz
 google-cloud-logging-bunyan-*.tgz
 package-lock.json
+.vscode

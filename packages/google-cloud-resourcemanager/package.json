@@ -46,7 +46,7 @@
     "cover": "nyc --reporter=lcov mocha build/test && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "eslint samples/",
+    "lint": "npm run check && eslint samples/",
     "prettier": "prettier --write samples/*.js samples/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
