@@ -21,6 +21,7 @@ import merge = require('lodash.merge');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {ConfigurationOptions} from '../../src/configuration';
 import {Fuzzer} from '../../utils/fuzzer';
+import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 import {createLogger} from '../../src/logger';
 const logger = createLogger({
@@ -67,7 +68,7 @@ describe('Configuration class', () => {
         let c;
         f.fuzzFunctionForTypes((givenConfigFuzz: ConfigurationOptions) => {
           c = new Configuration(givenConfigFuzz, logger);
-          assert.deepEqual(c._givenConfiguration, {});
+          deepStrictEqual(c._givenConfiguration, {});
         }, ['object']);
       });
     });
@@ -86,7 +87,7 @@ describe('Configuration class', () => {
         });
       });
       it('Should have a property reflecting the config argument', () => {
-        assert.deepEqual(c._givenConfiguration, validConfig);
+        deepStrictEqual(c._givenConfiguration, validConfig);
       });
       it('Should not have a project id', () => {
         assert.strictEqual(c._projectId, null);
@@ -95,7 +96,7 @@ describe('Configuration class', () => {
         assert.strictEqual(c.getKey(), null);
       });
       it('Should have a default service context', () => {
-        assert.deepEqual(c.getServiceContext(), {
+        deepStrictEqual(c.getServiceContext(), {
           service: 'node',
           version: undefined,
         });
@@ -299,7 +300,7 @@ describe('Configuration class', () => {
           c = new Configuration(undefined, logger);
         });
         it('Should assign', () => {
-          assert.deepEqual(c.getServiceContext(), serviceContext);
+          deepStrictEqual(c.getServiceContext(), serviceContext);
         });
       });
     });
@@ -321,7 +322,7 @@ describe('Configuration class', () => {
           });
         });
         it('Should assign', () => {
-          assert.deepEqual(c.getServiceContext(), serviceContext);
+          deepStrictEqual(c.getServiceContext(), serviceContext);
         });
       });
       describe('api key', () => {

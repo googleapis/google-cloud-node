@@ -17,6 +17,7 @@
 import * as assert from 'assert';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
+import {deepStrictEqual} from '../../util';
 
 describe('Instantiating a new ErrorMessage', () => {
   let em: ErrorMessage;
@@ -25,13 +26,14 @@ describe('Instantiating a new ErrorMessage', () => {
   });
 
   it('Should have a default service context', () => {
-    assert.deepEqual(em.serviceContext, {service: 'node', version: undefined});
+    deepStrictEqual(
+        em.serviceContext, {service: 'node', version: undefined});
   });
   it('Should have a default message', () => {
     assert.strictEqual(em.message, '');
   });
   it('Should have a default http context', () => {
-    assert.deepEqual(em.context.httpRequest, {
+    deepStrictEqual(em.context.httpRequest, {
       method: '',
       url: '',
       userAgent: '',
@@ -41,7 +43,7 @@ describe('Instantiating a new ErrorMessage', () => {
     });
   });
   it('Should have a default reportLocation', () => {
-    assert.deepEqual(em.context.reportLocation, {
+    deepStrictEqual(em.context.reportLocation, {
       filePath: '',
       lineNumber: 0,
       functionName: '',
@@ -72,7 +74,7 @@ describe('Fuzzing against setServiceContext', () => {
 
   it('Should set the value for service context', () => {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, AFFIRMATIVE_TEST_VALUE);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: AFFIRMATIVE_TEST_VALUE,
           version: AFFIRMATIVE_TEST_VALUE,
@@ -84,7 +86,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should set the default values', () => {
     em.setServiceContext(DEFAULT_TEST_VALUE, DEFAULT_TEST_VALUE);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_TEST_VALUE,
           version: DEFAULT_TEST_VALUE,
@@ -96,7 +98,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should still set version with affirmative value', () => {
     em.setServiceContext(null!, AFFIRMATIVE_TEST_VALUE);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
           version: AFFIRMATIVE_TEST_VALUE,
@@ -109,7 +111,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should still set service with affirmative value', () => {
     em.setServiceContext(AFFIRMATIVE_TEST_VALUE, null!);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: AFFIRMATIVE_TEST_VALUE,
           version: DEFAULT_VERSION_VALUE,
@@ -122,7 +124,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should set default values on both', () => {
     em.setServiceContext(null!, null!);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
           version: DEFAULT_VERSION_VALUE,
@@ -134,7 +136,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should set default values on both', () => {
     em.setServiceContext(2 as {} as string, 1.3 as {} as string);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
           version: DEFAULT_VERSION_VALUE,
@@ -146,7 +148,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should set as default', () => {
     em.setServiceContext({test: 'true'} as {} as string, [] as {} as string);
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
           version: DEFAULT_VERSION_VALUE,
@@ -158,7 +160,7 @@ describe('Fuzzing against setServiceContext', () => {
   });
   it('Should set as default', () => {
     em.setServiceContext();
-    assert.deepEqual(
+    deepStrictEqual(
         em.serviceContext, {
           service: DEFAULT_SERVICE_VALUE,
           version: DEFAULT_VERSION_VALUE,

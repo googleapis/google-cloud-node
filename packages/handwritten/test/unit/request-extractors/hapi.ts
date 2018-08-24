@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
 import * as hapi from 'hapi';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';
+import {deepStrictEqual} from '../../util';
 
 describe('hapiRequestInformationExtractor behaviour', () => {
   describe('behaviour given invalid input', () => {
@@ -33,7 +33,7 @@ describe('hapiRequestInformationExtractor behaviour', () => {
       };
       const f = new Fuzzer();
       const cbFn = (value: {}) => {
-        assert.deepEqual(value, DEFAULT_RETURN_VALUE);
+        deepStrictEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(hapiRequestInformationExtractor, ['object'], cbFn);
     });
@@ -103,19 +103,19 @@ describe('hapiRequestInformationExtractor behaviour', () => {
       statusCode: 0,
     };
     it('Should produce the full request input', () => {
-      assert.deepEqual(
+      deepStrictEqual(
           hapiRequestInformationExtractor(
               FULL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           FULL_REQ_EXPECTED_VALUE);
     });
     it('Should produce the partial request input', () => {
-      assert.deepEqual(
+      deepStrictEqual(
           hapiRequestInformationExtractor(
               PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           PARTIAL_REQ_EXPECTED_VALUE);
     });
     it('Should produce the second partial request input', () => {
-      assert.deepEqual(
+      deepStrictEqual(
           hapiRequestInformationExtractor(
               ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           ANOTHER_PARTIAL_REQ_EXPECTED_VALUE);
