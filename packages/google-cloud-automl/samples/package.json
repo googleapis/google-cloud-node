@@ -16,7 +16,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@google-cloud/automl": "^0.1.1"
+    "@google-cloud/automl": "^0.1.2"
   },
   "devDependencies": {}
 }
