@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
 import {Configuration, ConfigurationOptions, Logger} from '../../../src/configuration';
+import {deepStrictEqual} from '../../util';
 
 function verifyReportedMessage(
     config1: ConfigurationOptions, errToReturn: Error|null|undefined,
@@ -60,7 +60,7 @@ function verifyReportedMessage(
   // tslint:disable-next-line:no-unused-expression
   new RequestHandler(config2, logger);
   setImmediate(() => {
-    assert.deepStrictEqual(logs, expectedLogs);
+    deepStrictEqual(logs, expectedLogs);
     done();
   });
 }
