@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import * as assert from 'assert';
 import {Request, Response} from 'koa';
 
 import {koaRequestInformationExtractor} from '../../../src/request-extractors/koa';
 import {Fuzzer} from '../../../utils/fuzzer';
+import {deepStrictEqual} from '../../util';
 
 describe('koaRequestInformationExtractor', () => {
   describe('Behaviour under invalid input', () => {
@@ -33,7 +33,7 @@ describe('koaRequestInformationExtractor', () => {
       };
       const f = new Fuzzer();
       const cbFn = (value: {}) => {
-        assert.deepEqual(value, DEFAULT_RETURN_VALUE);
+        deepStrictEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
           koaRequestInformationExtractor, ['object', 'object'], cbFn);
@@ -61,7 +61,7 @@ describe('koaRequestInformationExtractor', () => {
         remoteAddress: '0.0.0.0',
         statusCode: 200,
       };
-      assert.deepEqual(
+      deepStrictEqual(
           koaRequestInformationExtractor(
               FULL_REQ_DERIVATION_VALUE as Request,
               FULL_RES_DERIVATION_VALUE as Response),

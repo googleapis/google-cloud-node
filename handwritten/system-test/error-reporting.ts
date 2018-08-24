@@ -24,6 +24,7 @@ import {RequestHandler} from '../src/google-apis/auth-client';
 import {createLogger} from '../src/logger';
 import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
 import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
+import {deepStrictEqual} from '../test/util';
 
 import assign = require('lodash.assign');
 import pick = require('lodash.pick');
@@ -551,7 +552,7 @@ describe('error-reporting', () => {
       errors.report(errOb, undefined, undefined, (err, response, body) => {
         assert.ifError(err);
         assert(is.object(response));
-        assert.deepEqual(body, {});
+        deepStrictEqual(body, {});
         verifyServerResponse(messageTest, timeout, cb);
       });
     })();

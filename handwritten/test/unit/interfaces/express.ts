@@ -23,6 +23,7 @@ import {makeExpressHandler as expressInterface} from '../../../src/interfaces/ex
 import {createLogger} from '../../../src/logger';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
+import {deepStrictEqual} from '../../util';
 
 describe('expressInterface', () => {
   describe('Exception handling', () => {
@@ -59,7 +60,7 @@ describe('expressInterface', () => {
         expressInterface(client as {} as RequestHandler, stubbedConfig);
     it('Should return the error message', () => {
       const res = validBoundHandler(testError, null!, null!, null!);
-      assert.deepEqual(
+      deepStrictEqual(
           res,
           merge(
               new ErrorMessage()
