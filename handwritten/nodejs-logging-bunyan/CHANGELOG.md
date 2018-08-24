@@ -4,6 +4,11 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.9.1
+
+### Fixes
+- chore: fix install tests (#133)
+
 ## v0.9.0
 
 ### Breaking changes
