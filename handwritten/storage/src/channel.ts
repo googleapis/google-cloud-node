@@ -18,6 +18,7 @@
 
 import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
+import * as request from 'request';
 
 /**
  * Create a channel object to interact with a Cloud Storage channel.
@@ -48,6 +49,7 @@ class Channel extends ServiceObject {
       methods: {
           // Only need `request`.
       },
+      requestModule: request,
     };
 
     super(config);

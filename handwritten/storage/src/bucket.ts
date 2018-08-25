@@ -340,6 +340,7 @@ class Bucket extends ServiceObject {
       id: name,
       createMethod: storage.createBucket.bind(storage),
       methods,
+      requestModule: request,
     });
 
     this.name = name;

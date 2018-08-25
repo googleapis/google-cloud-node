@@ -239,6 +239,7 @@ class File extends ServiceObject {
       parent: bucket,
       baseUrl: '/o',
       id: encodeURIComponent(name),
+      requestModule: r,
     });
 
     options = options || {};
@@ -2589,6 +2590,7 @@ class File extends ServiceObject {
       },
       metadata: options.metadata,
       request: reqOpts,
+      requestModule: r,
     });
   }
 }

@@ -19,6 +19,7 @@
 import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as is from 'is';
+import * as request from 'request';
 
 /**
  * A Notification object is created from your {@link Bucket} object using
@@ -123,6 +124,7 @@ class Notification extends ServiceObject {
       id: id.toString(),
       createMethod: bucket.createNotification.bind(bucket),
       methods,
+      requestModule: request,
     });
   }
 
