@@ -19,4 +19,10 @@
 // Imports the Google Cloud client library
 const asset = require('@google-cloud/asset');
 
+// eslint-disable-next-line
+const client = new asset.AssetServiceClient({
+  projectId: 'your-project-id',
+  keyFilename: '/path/to/keyfile.json',
+});
+
 // [END asset_quickstart]
