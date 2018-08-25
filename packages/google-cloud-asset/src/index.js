@@ -24,6 +24,15 @@
 /**
  * @namespace google.cloud.asset.v1beta1
  */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
 
 'use strict';
 
