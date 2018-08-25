@@ -1,45 +1,43 @@
-# copyright 2018 google LLC
+# Copyright 2018 Google LLC
 #
-# licensed under the apache license, version 2.0 (the "license");
-# you may not use this file except in compliance with the license.
-# you may obtain a copy of the license at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/license-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-# unless required by applicable law or agreed to in writing, software
-# distributed under the license is distributed on an "as is" basis,
-# without warranties or conditions of any kind, either express or implied.
-# see the license for the specific language governing permissions and
-# limitations under the license.
-
-"""this script is used to synthesize generated parts of this library."""
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 import logging
 
-logging.basicconfig(level=logging.debug)
+logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.gapicgenerator()
-common_templates = gcp.commontemplates()
+gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
 
-version = "v1"
+version = 'v1beta1'
 
-library = gapic.node_library('asset', version, private=True)
-s.copy(library, excludes=['src/index.js', 'readme.md', 'package.json'])
+library = gapic.node_library(
+    'asset', version, config_path="artman_cloudasset_v1beta1.yaml",
+    artman_output_name=f"cloudasset-{version}")
+
+s.copy(library)
+# , excludes=['src/index.js', 'README.md', 'package.json'])
 
 templates = common_templates.node_library(
-    package_name="@google-cloud/asset",
-    repo_name="googleapis/nodejs-asset",
-)
+    package_name="@google-cloud/asset", repo_name="googleapis/nodejs-asset")
 s.copy(templates)
-
-
 '''
-node.js specific cleanup
+Node.js specific cleanup
 '''
-subprocess.run(['npm', 'ci'])
+subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
 subprocess.run(['npm', 'run', 'lint'])
-
