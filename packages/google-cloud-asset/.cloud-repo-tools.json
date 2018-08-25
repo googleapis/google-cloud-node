@@ -1,0 +1,9 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "asset",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/asset/latest/",
+  "release_quality": "alpha",
+  "samples": [
+  ]
+}
