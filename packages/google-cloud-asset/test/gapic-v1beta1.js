@@ -44,17 +44,24 @@ describe('AssetServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.exportAssets = mockLongRunningGrpcMethod(request, expectedResponse);
+      client._innerApiCalls.exportAssets = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
 
-      client.exportAssets(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(responses => {
-        assert.deepStrictEqual(responses[0], expectedResponse);
-        done();
-      }).catch(err => {
-        done(err);
-      });
+      client
+        .exportAssets(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes exportAssets with error', done => {
@@ -74,18 +81,26 @@ describe('AssetServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.exportAssets = mockLongRunningGrpcMethod(request, null, error);
+      client._innerApiCalls.exportAssets = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
 
-      client.exportAssets(request).then(responses => {
-        var operation = responses[0];
-        return operation.promise();
-      }).then(() => {
-        assert.fail();
-      }).catch(err => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        done();
-      });
+      client
+        .exportAssets(request)
+        .then(responses => {
+          var operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
     });
 
     it('has longrunning decoder functions', () => {
@@ -93,8 +108,14 @@ describe('AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert(client._descriptors.longrunning.exportAssets.responseDecoder instanceof Function);
-      assert(client._descriptors.longrunning.exportAssets.metadataDecoder instanceof Function);
+      assert(
+        client._descriptors.longrunning.exportAssets.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.exportAssets.metadataDecoder instanceof
+          Function
+      );
     });
   });
 
@@ -166,7 +187,6 @@ describe('AssetServiceClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
@@ -190,12 +210,11 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          }
-          else {
+          } else {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };
