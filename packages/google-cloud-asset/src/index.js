@@ -55,10 +55,10 @@ const gapic = Object.freeze({
  * @alias nodejs-asset
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save asset
+ * npm install --save @google-cloud/asset
  *
  * @example <caption>Import the client library:</caption>
- * const asset = require('asset');
+ * const asset = require('@google-cloud/asset');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new asset.AssetServiceClient();
