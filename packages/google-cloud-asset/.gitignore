@@ -8,7 +8,6 @@ build/
 system-test/secrets.js
 system-test/*key.json
 *.lock
-**/package-lock.json
 .DS_Store
 google-cloud-logging-winston-*.tgz
 google-cloud-logging-bunyan-*.tgz

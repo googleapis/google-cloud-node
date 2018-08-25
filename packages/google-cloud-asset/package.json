@@ -1,9 +1,13 @@
 {
-  "repository": "googleapis/nodejs-asset",
   "name": "@google-cloud/asset",
-  "version": "0.1.0",
-  "author": "Google LLC",
   "description": "Cloud Asset API client for Node.js",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": "googleapis/nodejs-asset",
   "main": "src/index.js",
   "files": [
     "protos",
@@ -24,6 +28,20 @@
     "cloudasset",
     "Cloud Asset API"
   ],
+  "contributors": [
+    "Jonathan Lui <jonathanlui@google.com>"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
+    "docs": "jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "eslint src/ samples/ system-test/ test/",
+    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
+    "test-no-cover": "mocha test/*.js",
+    "test": "npm run cover"
+  },
   "dependencies": {
     "google-gax": "^0.17.1",
     "lodash.merge": "^4.6.0",
@@ -44,20 +62,5 @@
     "power-assert": "^1.6.0",
     "prettier": "^1.13.7",
     "through2": "^2.0.3"
-  },
-  "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
-    "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "eslint src/ samples/ system-test/ test/",
-    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
-    "test-no-cover": "mocha test/*.js",
-    "test": "npm run cover"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=6.0.0"
   }
 }
