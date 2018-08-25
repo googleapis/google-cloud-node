@@ -101,16 +101,19 @@ class AssetServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
     var protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/asset/v1beta1/asset_service.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/asset/v1beta1/asset_service.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -157,10 +160,7 @@ class AssetServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var assetServiceStubMethods = [
-      'exportAssets',
-      'batchGetAssetsHistory',
-    ];
+    var assetServiceStubMethods = ['exportAssets', 'batchGetAssetsHistory'];
     for (let methodName of assetServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         assetServiceStub.then(
@@ -195,9 +195,7 @@ class AssetServiceClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -417,7 +415,11 @@ class AssetServiceClient {
     }
     options = options || {};
 
-    return this._innerApiCalls.batchGetAssetsHistory(request, options, callback);
+    return this._innerApiCalls.batchGetAssetsHistory(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------
@@ -444,11 +446,8 @@ class AssetServiceClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
-
 
 module.exports = AssetServiceClient;
