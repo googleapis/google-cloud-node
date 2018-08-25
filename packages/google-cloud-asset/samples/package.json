@@ -1,0 +1,22 @@
+{
+  "name": "@google-cloud/asset-samples",
+  "description": "Samples for the Cloud Asset API Client Library for Node.js.",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "googleapis/nodejs-asset",
+  "private": true,
+  "nyc": {
+    "exclude": [
+      "**/*.test.js"
+    ]
+  },
+  "scripts": {},
+  "dependencies": {
+    "@google-cloud/asset": "^0.1.0"
+  },
+  "devDependencies": {}
+}
