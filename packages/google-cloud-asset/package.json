@@ -1,6 +1,6 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
-  "name": "asset",
+  "repository": "googleapis/nodejs-asset",
+  "name": "@google-cloud/asset",
   "version": "0.1.0",
   "author": "Google LLC",
   "description": "Cloud Asset API client for Node.js",
