@@ -29,12 +29,11 @@ library = gapic.node_library(
     'asset', version, config_path="artman_cloudasset_v1beta1.yaml",
     artman_output_name=f"cloudasset-{version}")
 
-s.copy(library)
-# , excludes=['src/index.js', 'README.md', 'package.json'])
+s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
-templates = common_templates.node_library(
-    package_name="@google-cloud/asset", repo_name="googleapis/nodejs-asset")
+templates = common_templates.node_library()
 s.copy(templates)
+
 '''
 Node.js specific cleanup
 '''
