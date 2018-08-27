@@ -118,6 +118,25 @@ describe('logging-bunyan', () => {
       assert.strictEqual(fakeLogName_, 'bunyan_log');
       assert.deepStrictEqual(fakeLogOptions_, {removeCircular: true});
     });
+
+    it('should not throw if a serviceContext is not specified', () => {
+      // tslint:disable-next-line:no-unused-expression
+      new loggingBunyanLib.LoggingBunyan();
+    });
+
+    it('should throw if a serviceContext is specified without a service',
+       done => {
+         try {
+           // tslint:disable-next-line:no-unused-expression
+           new loggingBunyanLib.LoggingBunyan({serviceContext: {}});
+         } catch (err) {
+           assert.strictEqual(
+               err.message,
+               `If 'serviceContext' is specified then ` +
+                   `'serviceContext.service' is required.`);
+           done();
+         }
+       });
   });
 
   describe('stream', () => {
