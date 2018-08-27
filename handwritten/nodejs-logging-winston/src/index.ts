@@ -109,6 +109,19 @@ export class LoggingWinston extends winston.Transport {
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
     this.labels = options.labels;
+
+    // serviceContext.service is required by the Error Reporting
+    // API.  Without it, errors that are logged with level 'error'
+    // or higher will not be displayed in the Error Reporting
+    // console.
+    //
+    // As a result, if serviceContext is specified, it is required
+    // that serviceContext.service is specified.
+    if (this.serviceContext && !this.serviceContext.service) {
+      throw new Error(
+          `If 'serviceContext' is specified then ` +
+          `'serviceContext.service' is required.`);
+    }
   }
 
   log(levelName: string, msg: string, metadata: types.Metadata,
