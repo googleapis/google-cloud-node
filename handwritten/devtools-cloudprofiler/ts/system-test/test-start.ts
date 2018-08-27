@@ -70,6 +70,9 @@ before(async () => {
       .persist()
       .patch('/projects/X/test-projectId')
       .reply(200, (request: RequestProfile, body: RequestProfile) => {
+        if (typeof body === 'string') {
+          body = JSON.parse(body);
+        }
         tempUploadedProfiles.push(body);
       });
   nock('https://www.googleapis.com')
@@ -93,12 +96,12 @@ before(async () => {
   // copy over currently uploaded profiles, so all tests look at same profiles.
   uploadedProfiles = tempUploadedProfiles.slice();
 
-  // Restore environment vairables and mocks.
+  // Restore environment variables and mocks.
   process.env = savedEnv;
 });
 
 
-// Restore environment vairables after tests.
+// Restore environment variables after tests.
 // nock not restored, since profiles still being uploaded.
 after(() => {
   process.env = savedEnv;

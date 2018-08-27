@@ -19,7 +19,7 @@ import * as consoleLogLevel from 'console-log-level';
 import * as http from 'http';
 import * as pify from 'pify';
 import * as msToStr from 'pretty-ms';
-import * as request from 'request';
+import {teenyRequest as request} from 'teeny-request';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
@@ -250,12 +250,14 @@ export class Profiler extends ServiceObject {
       baseUrl: config.baseApiUrl,
       scopes: [SCOPE],
       packageJson: pjson,
-      requestModule: request,
+      // tslint:disable-next-line: no-any
+      requestModule: request as any,
     };
     super({
       parent: new Service(serviceConfig, config),
       baseUrl: '/',
-      requestModule: request
+      // tslint:disable-next-line: no-any
+      requestModule: request as any
     });
     this.config = config;
 

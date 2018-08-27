@@ -37,8 +37,8 @@
     "pify": "^4.0.0",
     "pretty-ms": "^3.1.0",
     "protobufjs": "~6.8.6",
-    "request": "^2.88.0",
-    "semver": "^5.5.0"
+    "semver": "^5.5.0",
+    "teeny-request": "^3.3.0"
   },
   "devDependencies": {
     "@types/console-log-level": "^1.4.0",
