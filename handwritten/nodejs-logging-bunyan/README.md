@@ -85,7 +85,7 @@ const logger = bunyan.createLogger({
     // Log to the console
     {stream: process.stdout},
     // And log to Stackdriver Logging
-    loggingBunyan.stream(),
+    loggingBunyan.stream('info'),
   ],
 });
 
