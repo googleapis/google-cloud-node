@@ -15,9 +15,12 @@
  */
 
 import * as assert from 'assert';
+import delay from 'delay';
 import * as winston from 'winston';
 
 import * as types from '../src/types/core';
+
+import {ErrorsApiTransport} from './errors-transport';
 
 const logging = require('@google-cloud/logging')();
 const LoggingWinston = require('../src/index').LoggingWinston;
@@ -27,7 +30,11 @@ describe('LoggingWinston', () => {
   const WRITE_CONSISTENCY_DELAY_MS = 90000;
 
   const logger = new winston.Logger({
-    transports: [new LoggingWinston({logName: LOG_NAME})],
+    transports: [new LoggingWinston({
+      logName: LOG_NAME,
+      serviceContext:
+          {service: 'logging-winston-system-test', version: 'none'}
+    })],
   });
 
   describe('log', () => {
@@ -112,6 +119,41 @@ describe('LoggingWinston', () => {
               done();
             });
       }, WRITE_CONSISTENCY_DELAY_MS);
+    });
+  });
+
+  describe('ErrorReporting', () => {
+    const ERROR_REPORTING_DELAY_MS = 10 * 1000;
+    const errorsTransport = new ErrorsApiTransport();
+
+    beforeEach(async function() {
+      this.timeout(2 * ERROR_REPORTING_DELAY_MS);
+      await errorsTransport.deleteAllEvents();
+      await new Promise((resolve, reject) => {
+        setTimeout(resolve, ERROR_REPORTING_DELAY_MS);
+      });
+    });
+
+    afterEach(async () => {
+      await errorsTransport.deleteAllEvents();
+    });
+
+    it('reports errors when logging errors', async function() {
+      this.timeout(2 * ERROR_REPORTING_DELAY_MS);
+      const message = `an error at ${Date.now()}`;
+      // logger does not have index signature.
+      // tslint:disable-next-line:no-any
+      (logger as any)['error'].apply(logger, ['an error', new Error(message)]);
+      await delay(ERROR_REPORTING_DELAY_MS);
+      const errors = await errorsTransport.getAllGroups();
+      assert.strictEqual(errors.length, 1);
+      const errEvent = errors[0];
+      assert.strictEqual(errEvent.count, '1');
+      assert.strictEqual(
+          errEvent.representative.serviceContext.service,
+          'logging-winston-system-test');
+      assert(errEvent.representative.message.startsWith(
+          `an error Error: ${message}`));
     });
   });
 });

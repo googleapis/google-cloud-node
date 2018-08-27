@@ -73,6 +73,7 @@
     "posttest": "npm run check"
   },
   "dependencies": {
+    "@google-cloud/common": "^0.21.1",
     "@google-cloud/logging": "^3.0.1",
     "@sindresorhus/is": "^0.10.0",
     "lodash.mapvalues": "^4.6.0"
@@ -93,6 +94,7 @@
     "@types/winston": "^2.3.9",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
+    "delay": "^3.1.0",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
