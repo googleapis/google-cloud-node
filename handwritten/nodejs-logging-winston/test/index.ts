@@ -173,6 +173,25 @@ describe('logging-winston', () => {
     it('should localize the provided service context', () => {
       assert.strictEqual(loggingWinston.serviceContext, OPTIONS.serviceContext);
     });
+
+    it('should not throw if a serviceContext is not specified', () => {
+      // tslint:disable-next-line:no-unused-expression
+      new loggingWinstonLib.LoggingWinston();
+    });
+
+    it('should throw if a serviceContext is specified without a service',
+       done => {
+         try {
+           // tslint:disable-next-line:no-unused-expression
+           new loggingWinstonLib.LoggingWinston({serviceContext: {}});
+         } catch (err) {
+           assert.strictEqual(
+               err.message,
+               `If 'serviceContext' is specified then ` +
+                   `'serviceContext.service' is required.`);
+           done();
+         }
+       });
   });
 
   describe('log', () => {
