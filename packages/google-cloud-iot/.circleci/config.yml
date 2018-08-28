@@ -59,7 +59,7 @@ jobs:
       - image: 'node:6'
         user: node
     steps: &unit_tests_steps
-      - checkout 
+      - checkout
       - run: &npm_install_and_link
           name: Install and link the module
           command: |-
@@ -69,7 +69,7 @@ jobs:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
       - run: node_modules/.bin/codecov
-  
+
   node8:
     docker:
       - image: 'node:8'
@@ -107,9 +107,7 @@ jobs:
     steps:
       - checkout
       - run: *npm_install_and_link
-      - run:
-          name: Build documentation.
-          command: npm run docs
+      - run: npm run docs
   sample_tests:
     docker:
       - image: 'node:8'
@@ -164,5 +162,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - npm install
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npm publish --access=public
