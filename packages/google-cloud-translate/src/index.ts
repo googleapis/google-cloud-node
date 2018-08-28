@@ -25,6 +25,7 @@ import * as is from 'is';
 const isHtml = require('is-html');
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
 import * as r from 'request';
+import {teenyRequest} from 'teeny-request';
 
 const PKG = require('../../package.json');
 
@@ -148,6 +149,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
   key?: string;
   autoRetry?: boolean;
   maxRetries?: number;
+  requestModule?: typeof teenyRequest;
 }
 
 /**
@@ -191,10 +193,12 @@ export class Translate extends Service {
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson: require('../../package.json'),
       projectIdRequired: false,
+      requestModule: teenyRequest as typeof r,
     };
 
     super(config, options);
     this.options = options || {};
+    this.options.requestModule = config.requestModule;
     if (this.options.key) {
       this.key = this.options.key;
     }
@@ -544,7 +548,7 @@ export class Translate extends Service {
       },
     });
 
-    util.makeRequest(reqOpts, this.options!, callback!);
+    util.makeRequest(reqOpts, this.options, callback!);
   }
 }
 
