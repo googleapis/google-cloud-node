@@ -107,9 +107,7 @@ jobs:
     steps:
       - checkout
       - run: *npm_install_and_link
-      - run:
-          name: Build documentation.
-          command: npm run docs
+      - run: npm run docs
   sample_tests:
     docker:
       - image: 'node:8'
@@ -153,7 +151,6 @@ jobs:
           name: Run system tests.
           command: npm run system-test
           environment:
-            GCLOUD_PROJECT: long-door-651
             GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
       - run:
           name: Remove unencrypted key.
@@ -165,5 +162,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - npm install
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npm publish --access=public
