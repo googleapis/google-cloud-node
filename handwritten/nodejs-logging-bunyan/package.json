@@ -71,7 +71,7 @@
     "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.21.1",
+    "@google-cloud/common": "^0.23.0",
     "@google-cloud/logging": "^3.0.1",
     "@opencensus/propagation-stackdriver": "^0.0.3",
     "uuid": "^3.2.1"
@@ -102,6 +102,7 @@
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6",
     "proxyquire": "^2.0.1",
+    "request": "^2.88.0",
     "source-map-support": "^0.5.6",
     "typescript": "~3.0.0"
   },
