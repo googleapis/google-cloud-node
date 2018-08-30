@@ -49,7 +49,7 @@ const gapic = Object.freeze({
  * npm install --save tasks
  *
  * @example <caption>Import the client library:</caption>
- * const tasks = require('tasks');
+ * const tasks = require('@google-cloud/tasks');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new tasks.CloudTasksClient();

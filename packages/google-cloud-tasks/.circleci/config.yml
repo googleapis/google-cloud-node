@@ -162,6 +162,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - npm install
+      - run: npm install
       - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npm publish --access=public

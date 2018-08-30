@@ -273,7 +273,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -381,7 +381,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -428,7 +428,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -506,7 +506,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -593,7 +593,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -657,7 +657,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -713,7 +713,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -775,7 +775,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -842,7 +842,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -905,7 +905,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -977,7 +977,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1048,7 +1048,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1150,7 +1150,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1262,7 +1262,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1324,7 +1324,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1441,7 +1441,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1503,7 +1503,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1639,7 +1639,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1719,7 +1719,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1814,7 +1814,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -1907,7 +1907,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
@@ -2009,7 +2009,7 @@ class CloudTasksClient {
    *
    * @example
    *
-   * const tasks = require('tasks.v2beta2');
+   * const tasks = require('@google-cloud/tasks');
    *
    * var client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
