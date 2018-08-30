@@ -23,8 +23,8 @@ import {ErrorMessage} from '../src/classes/error-message';
 import {RequestHandler} from '../src/google-apis/auth-client';
 import {createLogger} from '../src/logger';
 import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
-import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
 import {deepStrictEqual} from '../test/util';
+import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
 
 import assign = require('lodash.assign');
 import pick = require('lodash.pick');
