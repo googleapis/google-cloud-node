@@ -58,7 +58,7 @@
     "console-log-level": "^1.4.0",
     "is": "^3.2.1",
     "lodash.has": "^4.5.2",
-    "request": "^2.88.0"
+    "teeny-request": "^3.6.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
