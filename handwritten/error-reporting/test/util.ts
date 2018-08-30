@@ -19,6 +19,7 @@ import * as stringify from 'json-stable-stringify';
 
 export type Anything = {}|undefined|null;
 
-export function deepStrictEqual(actual: Anything, expected: Anything, message?: string) {
+export function deepStrictEqual(
+    actual: Anything, expected: Anything, message?: string) {
   assert.deepStrictEqual(stringify(actual), stringify(expected), message);
 }
