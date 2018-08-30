@@ -153,8 +153,11 @@ describe('translate', () => {
     });
   });
 
-  (API_KEY ? describe : describe.skip)('authentication', () => {
+  describe('authentication', () => {
     beforeEach(() => {
+      if (!API_KEY) {
+        throw new Error('The `TRANSLATE_API_KEY` environment variable is required!');
+      }
       translate = new Translate({key: API_KEY});
     });
 
