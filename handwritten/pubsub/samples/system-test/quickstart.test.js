@@ -21,10 +21,11 @@ const sinon = require(`sinon`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
-const pubsub = new PubSub();
+
+const projectId = process.env.GCLOUD_PROJECT;
+const pubsub = new PubSub({projectId});
 
 const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
-const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 
 test.before(tools.stubConsole);

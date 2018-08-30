@@ -21,7 +21,8 @@ const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
-const pubsub = new PubSub();
+const projectId = process.env.GCLOUD_PROJECT;
+const pubsub = new PubSub({projectId});
 
 const cwd = path.join(__dirname, `..`);
 const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
@@ -30,7 +31,6 @@ const subscriptionNameOne = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
 const subscriptionNameTwo = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
 const subscriptionNameThree = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
 const subscriptionNameFour = `nodejs-docs-samples-test-sub-${uuid.v4()}`;
-const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
 const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
 const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
