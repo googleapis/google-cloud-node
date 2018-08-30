@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Google Cloud Pub/Sub: Node.js Samples
@@ -87,15 +89,16 @@ __Usage:__ `node topics.js --help`
 topics.js <command>
 
 Commands:
-  topics.js list                                   Lists all topics in the current project.
-  topics.js create <topicName>                     Creates a new topic.
-  topics.js delete <topicName>                     Deletes a topic.
-  topics.js publish <topicName> <message>          Publishes a message to a topic.
-  topics.js publish-batch <topicName> <message>    Publishes messages to a topic using custom batching settings.
-  topics.js publish-ordered <topicName> <message>  Publishes an ordered message to a topic.
-  topics.js get-policy <topicName>                 Gets the IAM policy for a topic.
-  topics.js set-policy <topicName>                 Sets the IAM policy for a topic.
-  topics.js test-permissions <topicName>           Tests the permissions for a topic.
+  topics.js list                                      Lists all topics in the current project.
+  topics.js create <topicName>                        Creates a new topic.
+  topics.js delete <topicName>                        Deletes a topic.
+  topics.js publish <topicName> <message>             Publishes a message to a topic.
+  topics.js publish-attributes <topicName> <message>  Publishes a message with custom attributes to a Topic
+  topics.js publish-batch <topicName> <message>       Publishes messages to a topic using custom batching settings.
+  topics.js publish-ordered <topicName> <message>     Publishes an ordered message to a topic.
+  topics.js get-policy <topicName>                    Gets the IAM policy for a topic.
+  topics.js set-policy <topicName>                    Sets the IAM policy for a topic.
+  topics.js test-permissions <topicName>              Tests the permissions for a topic.
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -107,6 +110,7 @@ Examples:
   node topics.js delete my-topic
   node topics.js publish my-topic "Hello, world!"
   node topics.js publish my-topic '{"data":"Hello, world!"}'
+  node topics.js publish-attributes my-topic "Hello, world!"
   node topics.js publish-ordered my-topic "Hello, world!"
   node topics.js publish-batch my-topic "Hello, world!" -w 1000
   node topics.js get-policy greetings
@@ -119,5 +123,5 @@ For more information, see https://cloud.google.com/pubsub/docs
 [topics_1_docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic
 [topics_1_code]: topics.js
 
-[shell_img]: https://www.gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/README.md

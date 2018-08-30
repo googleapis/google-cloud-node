@@ -15,7 +15,7 @@
 
 'use strict';
 
-// [START pubsub_quickstart_create_topic]
+// [START pubsub_quickstart]
 // Imports the Google Cloud client library
 const PubSub = require('@google-cloud/pubsub');
 
@@ -40,4 +40,4 @@ pubsubClient
   .catch(err => {
     console.error('ERROR:', err);
   });
-// [END pubsub_quickstart_create_topic]
+// [END pubsub_quickstart]
