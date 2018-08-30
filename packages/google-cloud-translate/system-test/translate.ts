@@ -156,7 +156,8 @@ describe('translate', () => {
   describe('authentication', () => {
     beforeEach(() => {
       if (!API_KEY) {
-        throw new Error('The `TRANSLATE_API_KEY` environment variable is required!');
+        throw new Error(
+            'The `TRANSLATE_API_KEY` environment variable is required!');
       }
       translate = new Translate({key: API_KEY});
     });
