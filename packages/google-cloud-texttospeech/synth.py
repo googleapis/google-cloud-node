@@ -22,6 +22,7 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
+common_templates = gcp.CommonTemplates()
 
 versions = ['v1', 'v1beta1']
 
@@ -33,6 +34,9 @@ for version in versions:
         library,
         excludes=['package.json', 'README.md', 'src/index.js'],
     )
+
+templates = common_templates.node_library()
+s.copy(templates)
 
 #
 # Node.js specific cleanup
