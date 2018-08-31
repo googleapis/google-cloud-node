@@ -62,7 +62,7 @@
     "test": "npm run test-only",
     "pretest-only": "npm run compile",
     "lint": "eslint samples/ system-test/ && gts check",
-    "samples-test": "npm link && cd samples/ && npm link ../ & npm test && cd ../",
+    "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "all-test": "npm test && npm run system-test && npm run samples-test",
     "check": "gts check",
     "clean": "gts clean",
