@@ -88,11 +88,11 @@ const _pullOneMessage = (subscriptionObj, timeout) => {
 test.serial(`should create a topic`, async t => {
   t.plan(1);
   const output = await tools.runAsync(`${cmd} create ${topicNameOne}`, cwd);
-  t.is(output, `Topic ${fullTopicNameOne} created.`);
+  t.is(output, `Topic ${topicNameOne} created.`);
   await tools
     .tryTest(async assert => {
       const [topics] = await pubsub.getTopics();
-      assert(topics.some(s => s.name === fullTopicNameOne));
+      assert(topics.some(t => t.name === fullTopicNameOne));
     })
     .start();
 });
@@ -111,7 +111,7 @@ test.serial(`should publish a simple message`, async t => {
   t.plan(1);
   const [subscription] = await pubsub
     .topic(topicNameOne)
-    .createSubscription(subscriptionNameOne);
+    .get(subscriptionNameOne, {autoCreate: true});
   await tools.runAsync(
     `${cmd} publish ${topicNameOne} "${expectedMessage.data}"`,
     cwd
@@ -123,7 +123,7 @@ test.serial(`should publish a simple message`, async t => {
 test.serial(`should publish a JSON message`, async t => {
   const [subscription] = await pubsub
     .topic(topicNameOne)
-    .createSubscription(subscriptionNameOne);
+    .get(subscriptionNameOne, {autoCreate: true});
   await tools.runAsync(
     `${cmd} publish ${topicNameOne} '${JSON.stringify(expectedMessage)}'`,
     cwd
@@ -136,7 +136,7 @@ test.serial(`should publish a message with custom attributes`, async t => {
   t.plan(2);
   const [subscription] = await pubsub
     .topic(topicNameOne)
-    .createSubscription(subscriptionNameOne);
+    .get(subscriptionNameOne, {autoCreate: true});
   await tools.runAsync(
     `${cmd} publish-attributes ${topicNameOne} "${expectedMessage.data}"`,
     cwd
@@ -154,7 +154,7 @@ test.serial(`should publish ordered messages`, async t => {
 
   const [subscription] = await pubsub
     .topic(topicNameTwo)
-    .createSubscription(subscriptionNameTwo);
+    .get(subscriptionNameTwo, {autoCreate: true});
 
   let messageId = await topics.publishOrderedMessage(
     topicNameTwo,
@@ -181,7 +181,7 @@ test.serial(`should publish with specific batch settings`, async t => {
   const expectedWait = 1000;
   const [subscription] = await pubsub
     .topic(topicNameOne)
-    .createSubscription(subscriptionNameThree);
+    .get(subscriptionNameThree, {autoCreate: true});
   const startTime = Date.now();
   await tools.runAsync(
     `${cmd} publish-batch ${topicNameOne} "${

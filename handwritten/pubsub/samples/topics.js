@@ -64,7 +64,7 @@ function createTopic(topicName) {
     .createTopic(topicName)
     .then(results => {
       const topic = results[0];
-      console.log(`Topic ${topic.name} created.`);
+      console.log(`Topic ${topicName} created.`);
     })
     .catch(err => {
       console.error('ERROR:', err);

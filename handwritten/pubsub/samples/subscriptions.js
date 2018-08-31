@@ -95,7 +95,7 @@ function createSubscription(topicName, subscriptionName) {
     .createSubscription(subscriptionName)
     .then(results => {
       const subscription = results[0];
-      console.log(`Subscription ${subscription.name} created.`);
+      console.log(`Subscription ${subscriptionName} created.`);
     })
     .catch(err => {
       console.error('ERROR:', err);
@@ -184,7 +184,7 @@ function createPushSubscription(topicName, subscriptionName) {
     .then(results => {
       const subscription = results[0];
 
-      console.log(`Subscription ${subscription.name} created.`);
+      console.log(`Subscription ${subscriptionName} created.`);
     })
     .catch(err => {
       console.error('ERROR:', err);

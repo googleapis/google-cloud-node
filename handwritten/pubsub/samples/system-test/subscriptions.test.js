@@ -72,7 +72,7 @@ test.serial(`should create a subscription`, async t => {
     `${cmd} create ${topicNameOne} ${subscriptionNameOne}`,
     cwd
   );
-  t.is(output, `Subscription ${fullSubscriptionNameOne} created.`);
+  t.is(output, `Subscription ${subscriptionNameOne} created.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub
@@ -88,7 +88,7 @@ test.serial(`should create a push subscription`, async t => {
     `${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`,
     cwd
   );
-  t.is(output, `Subscription ${fullSubscriptionNameTwo} created.`);
+  t.is(output, `Subscription ${subscriptionNameTwo} created.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub
@@ -168,7 +168,9 @@ test.serial(`should listen for ordered messages`, async t => {
   const publishedMessageIds = [];
   const publisherTwo = pubsub.topic(topicNameTwo).publisher();
 
-  await pubsub.topic(topicNameTwo).createSubscription(subscriptionNameThree);
+  await pubsub
+    .topic(topicNameTwo)
+    .get(subscriptionNameThree, {autoCreate: true});
   let [result] = await publisherTwo.publish(expectedBuffer, {counterId: '3'});
   publishedMessageIds.push(result);
   await subscriptions.listenForOrderedMessages(subscriptionNameThree, timeout);
