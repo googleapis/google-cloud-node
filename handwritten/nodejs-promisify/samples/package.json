@@ -1,0 +1,19 @@
+{
+  "description": "Samples for the nodejs-promisify npm module.",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "googleapis/nodejs-promisify",
+  "private": true,
+  "scripts": {
+    "test": "mocha system-test"
+  },
+  "dependencies": {
+    "@google-cloud/promisify": "*"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}

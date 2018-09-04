@@ -16,7 +16,6 @@
 
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-
 import * as util from '../src';
 
 const noop = () => {};
@@ -36,20 +35,17 @@ describe('promisifyAll', () => {
   let FakeClass: any;
 
   beforeEach(() => {
-    FakeClass = () => {};
-
-    FakeClass.prototype.methodName = (callback: Function) => {
-      callback.apply(null, fakeArgs);
+    FakeClass = class {
+      methodName(callback: Function) {
+        callback.apply(null, fakeArgs);
+      }
+      methodSingle(callback: Function) {
+        callback(null, fakeArgs[1]);
+      }
+      methodError(callback: Function) {
+        callback(fakeError);
+      }
     };
-
-    FakeClass.prototype.methodSingle = (callback: Function) => {
-      callback(null, fakeArgs[1]);
-    };
-
-    FakeClass.prototype.methodError = (callback: Function) => {
-      callback(fakeError);
-    };
-
     FakeClass.prototype.method_ = noop;
     FakeClass.prototype._method = noop;
     FakeClass.prototype.methodStream = noop;
@@ -180,7 +176,7 @@ describe('promisify', () => {
 
   it('should allow the Promise object to be overridden', () => {
     // tslint:disable-next-line:variable-name
-    const FakePromise = () => {};
+    const FakePromise = class {};
     const promise = func.call({Promise: FakePromise});
     assert(promise instanceof FakePromise);
   });
