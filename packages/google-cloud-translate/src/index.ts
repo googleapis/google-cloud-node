@@ -149,7 +149,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
   key?: string;
   autoRetry?: boolean;
   maxRetries?: number;
-  requestModule?: typeof teenyRequest;
+  request?: typeof r;
 }
 
 /**
@@ -198,7 +198,7 @@ export class Translate extends Service {
 
     super(config, options);
     this.options = options || {};
-    this.options.requestModule = config.requestModule;
+    this.options.request = config.requestModule;
     if (this.options.key) {
       this.key = this.options.key;
     }
