@@ -82,7 +82,7 @@ var LongRunningRecognizeRequest = {
  *   `audio_content` data. The audio bytes must be encoded as specified in
  *   `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
  *   pure binary representation (not base64). See
- *   [audio limits](https://cloud.google.com/speech/limits#content).
+ *   [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @typedef StreamingRecognizeRequest
  * @memberof google.cloud.speech.v1
@@ -134,22 +134,26 @@ var StreamingRecognitionConfig = {
  * request.
  *
  * @property {number} encoding
- *   *Required* Encoding of audio data sent in all `RecognitionAudio` messages.
+ *   Encoding of audio data sent in all `RecognitionAudio` messages.
+ *   This field is optional for `FLAC` and `WAV` audio files and required
+ *   for all other audio formats. For details, see AudioEncoding.
  *
  *   The number should be among the values of [AudioEncoding]{@link google.cloud.speech.v1.AudioEncoding}
  *
  * @property {number} sampleRateHertz
- *   *Required* Sample rate in Hertz of the audio data sent in all
+ *   Sample rate in Hertz of the audio data sent in all
  *   `RecognitionAudio` messages. Valid values are: 8000-48000.
  *   16000 is optimal. For best results, set the sampling rate of the audio
  *   source to 16000 Hz. If that's not possible, use the native sample rate of
  *   the audio source (instead of re-sampling).
+ *   This field is optional for `FLAC` and `WAV` audio files and required
+ *   for all other audio formats. For details, see AudioEncoding.
  *
  * @property {string} languageCode
  *   *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
- *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
  *   for a list of the currently supported language codes.
  *
  * @property {number} maxAlternatives
@@ -167,7 +171,9 @@ var StreamingRecognitionConfig = {
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* A means to provide context to assist the speech recognition.
+ *   *Optional* array of SpeechContext.
+ *   A means to provide context to assist the speech recognition. For more
+ *   information, see [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.speech.v1.SpeechContext}
  *
@@ -177,6 +183,62 @@ var StreamingRecognitionConfig = {
  *   `false`, no word-level time offset information is returned. The default is
  *   `false`.
  *
+ * @property {boolean} enableAutomaticPunctuation
+ *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   This feature is only available in select languages. Setting this for
+ *   requests in other languages has no effect at all.
+ *   The default 'false' value does not add punctuation to result hypotheses.
+ *   Note: This is currently offered as an experimental service, complimentary
+ *   to all users. In the future this may be exclusively available as a
+ *   premium feature.
+ *
+ * @property {string} model
+ *   *Optional* Which model to select for the given request. Select the model
+ *   best suited to your domain to get best results. If a model is not
+ *   explicitly specified, then we auto-select a model based on the parameters
+ *   in the RecognitionConfig.
+ *   <table>
+ *     <tr>
+ *       <td><b>Model</b></td>
+ *       <td><b>Description</b></td>
+ *     </tr>
+ *     <tr>
+ *       <td><code>command_and_search</code></td>
+ *       <td>Best for short queries such as voice commands or voice search.</td>
+ *     </tr>
+ *     <tr>
+ *       <td><code>phone_call</code></td>
+ *       <td>Best for audio that originated from a phone call (typically
+ *       recorded at an 8khz sampling rate).</td>
+ *     </tr>
+ *     <tr>
+ *       <td><code>video</code></td>
+ *       <td>Best for audio that originated from from video or includes multiple
+ *           speakers. Ideally the audio is recorded at a 16khz or greater
+ *           sampling rate. This is a premium model that costs more than the
+ *           standard rate.</td>
+ *     </tr>
+ *     <tr>
+ *       <td><code>default</code></td>
+ *       <td>Best for audio that is not one of the specific audio models.
+ *           For example, long-form audio. Ideally the audio is high-fidelity,
+ *           recorded at a 16khz or greater sampling rate.</td>
+ *     </tr>
+ *   </table>
+ *
+ * @property {boolean} useEnhanced
+ *   *Optional* Set to true to use an enhanced model for speech recognition.
+ *   You must also set the `model` field to a valid, enhanced model. If
+ *   `use_enhanced` is set to true and the `model` field is not set, then
+ *   `use_enhanced` is ignored. If `use_enhanced` is true and an enhanced
+ *   version of the specified model does not exist, then the speech is
+ *   recognized using the standard version of the specified model.
+ *
+ *   Enhanced speech models require that you opt-in to data logging using
+ *   instructions in the [documentation](https://cloud.google.com/speech-to-text/enable-data-logging).
+ *   If you set `use_enhanced` to true and you have not enabled audio logging,
+ *   then you will receive an error.
+ *
  * @typedef RecognitionConfig
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
@@ -185,16 +247,26 @@ var RecognitionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Audio encoding of the data sent in the audio message. All encodings support
-   * only 1 channel (mono) audio. Only `FLAC` and `WAV` include a header that
-   * describes the bytes of audio that follow the header. The other encodings
-   * are raw audio bytes with no header.
+   * The encoding of the audio data sent in the request.
+   *
+   * All encodings support only 1 channel (mono) audio.
    *
    * For best results, the audio source should be captured and transmitted using
-   * a lossless encoding (`FLAC` or `LINEAR16`). Recognition accuracy may be
-   * reduced if lossy codecs, which include the other codecs listed in
-   * this section, are used to capture or transmit the audio, particularly if
-   * background noise is present.
+   * a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
+   * recognition can be reduced if lossy codecs are used to capture or transmit
+   * audio, particularly if background noise is present. Lossy codecs include
+   * `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
+   *
+   * The `FLAC` and `WAV` audio file formats include a header that describes the
+   * included audio content. You can request recognition for `WAV` files that
+   * contain either `LINEAR16` or `MULAW` encoded audio.
+   * If you send `FLAC` or `WAV` audio file format in
+   * your request, you do not need to specify an `AudioEncoding`; the audio
+   * encoding format is determined from the file header. If you specify
+   * an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
+   * encoding configuration must match the encoding described in the audio
+   * header; otherwise the request returns an
+   * google.rpc.Code.INVALID_ARGUMENT error code.
    *
    * @enum {number}
    * @memberof google.cloud.speech.v1
@@ -202,7 +274,7 @@ var RecognitionConfig = {
   AudioEncoding: {
 
     /**
-     * Not specified. Will return result google.rpc.Code.INVALID_ARGUMENT.
+     * Not specified.
      */
     ENCODING_UNSPECIFIED: 0,
 
@@ -212,7 +284,7 @@ var RecognitionConfig = {
     LINEAR16: 1,
 
     /**
-     * [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+     * `FLAC` (Free Lossless Audio
      * Codec) is the recommended encoding because it is
      * lossless--therefore recognition is not compromised--and
      * requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
@@ -239,7 +311,7 @@ var RecognitionConfig = {
     /**
      * Opus encoded audio frames in Ogg container
      * ([OggOpus](https://wiki.xiph.org/OggOpus)).
-     * `sample_rate_hertz` must be 16000.
+     * `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
      */
     OGG_OPUS: 6,
 
@@ -272,7 +344,7 @@ var RecognitionConfig = {
  *   to improve the accuracy for specific words and phrases, for example, if
  *   specific commands are typically spoken by the user. This can also be used
  *   to add additional words to the vocabulary of the recognizer. See
- *   [usage limits](https://cloud.google.com/speech/limits#content).
+ *   [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @typedef SpeechContext
  * @memberof google.cloud.speech.v1
@@ -286,7 +358,7 @@ var SpeechContext = {
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
  * returns google.rpc.Code.INVALID_ARGUMENT. See
- * [audio limits](https://cloud.google.com/speech/limits#content).
+ * [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @property {string} content
  *   The audio data bytes encoded as specified in
@@ -295,7 +367,8 @@ var SpeechContext = {
  *
  * @property {string} uri
  *   URI that points to a file that contains audio data bytes as specified in
- *   `RecognitionConfig`. Currently, only Google Cloud Storage URIs are
+ *   `RecognitionConfig`. The file must not be compressed (for example, gzip).
+ *   Currently, only Google Cloud Storage URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket_name/object_name` (other URI formats return
  *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
@@ -315,7 +388,7 @@ var RecognitionAudio = {
  * messages.
  *
  * @property {Object[]} results
- *   *Output-only* Sequential list of transcription results corresponding to
+ *   Output only. Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
  *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
@@ -336,7 +409,7 @@ var RecognizeResponse = {
  * service.
  *
  * @property {Object[]} results
- *   *Output-only* Sequential list of transcription results corresponding to
+ *   Output only. Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
  *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
@@ -428,21 +501,21 @@ var LongRunningRecognizeMetadata = {
  *     one or more (repeated) `results`.
  *
  * @property {Object} error
- *   *Output-only* If set, returns a google.rpc.Status message that
+ *   Output only. If set, returns a google.rpc.Status message that
  *   specifies the error for the operation.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {Object[]} results
- *   *Output-only* This repeated list contains zero or more results that
+ *   Output only. This repeated list contains zero or more results that
  *   correspond to consecutive portions of the audio currently being processed.
- *   It contains zero or more `is_final=false` results followed by zero or one
- *   `is_final=true` result (the newly settled portion).
+ *   It contains zero or one `is_final=true` result (the newly settled portion),
+ *   followed by zero or more `is_final=false` results (the interim results).
  *
  *   This object should have the same structure as [StreamingRecognitionResult]{@link google.cloud.speech.v1.StreamingRecognitionResult}
  *
  * @property {number} speechEventType
- *   *Output-only* Indicates the type of speech event.
+ *   Output only. Indicates the type of speech event.
  *
  *   The number should be among the values of [SpeechEventType]{@link google.cloud.speech.v1.SpeechEventType}
  *
@@ -484,20 +557,22 @@ var StreamingRecognizeResponse = {
  * that is currently being processed.
  *
  * @property {Object[]} alternatives
- *   *Output-only* May contain one or more recognition hypotheses (up to the
+ *   Output only. May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
+ *   These alternatives are ordered in terms of accuracy, with the top (first)
+ *   alternative being the most probable, as ranked by the recognizer.
  *
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1.SpeechRecognitionAlternative}
  *
  * @property {boolean} isFinal
- *   *Output-only* If `false`, this `StreamingRecognitionResult` represents an
+ *   Output only. If `false`, this `StreamingRecognitionResult` represents an
  *   interim result that may change. If `true`, this is the final time the
  *   speech service will return this particular `StreamingRecognitionResult`,
  *   the recognizer will not return any further hypotheses for this portion of
  *   the transcript and corresponding audio.
  *
  * @property {number} stability
- *   *Output-only* An estimate of the likelihood that the recognizer will not
+ *   Output only. An estimate of the likelihood that the recognizer will not
  *   change its guess about this interim result. Values range from 0.0
  *   (completely unstable) to 1.0 (completely stable).
  *   This field is only provided for interim results (`is_final=false`).
@@ -515,7 +590,7 @@ var StreamingRecognitionResult = {
  * A speech recognition result corresponding to a portion of the audio.
  *
  * @property {Object[]} alternatives
- *   *Output-only* May contain one or more recognition hypotheses (up to the
+ *   Output only. May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
  *   These alternatives are ordered in terms of accuracy, with the top (first)
  *   alternative being the most probable, as ranked by the recognizer.
@@ -534,18 +609,19 @@ var SpeechRecognitionResult = {
  * Alternative hypotheses (a.k.a. n-best list).
  *
  * @property {string} transcript
- *   *Output-only* Transcript text representing the words that the user spoke.
+ *   Output only. Transcript text representing the words that the user spoke.
  *
  * @property {number} confidence
- *   *Output-only* The confidence estimate between 0.0 and 1.0. A higher number
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
- *   correct. This field is typically provided only for the top hypothesis, and
- *   only for `is_final=true` results. Clients should not rely on the
- *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   correct. This field is set only for the top alternative of a non-streaming
+ *   result or, of a streaming result where `is_final=true`.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
  * @property {Object[]} words
- *   *Output-only* A list of word-specific information for each recognized word.
+ *   Output only. A list of word-specific information for each recognized word.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.speech.v1.WordInfo}
  *
@@ -558,12 +634,10 @@ var SpeechRecognitionAlternative = {
 };
 
 /**
- * Word-specific information for recognized words. Word information is only
- * included in the response when certain request parameters are set, such
- * as `enable_word_time_offsets`.
+ * Word-specific information for recognized words.
  *
  * @property {Object} startTime
- *   *Output-only* Time offset relative to the beginning of the audio,
+ *   Output only. Time offset relative to the beginning of the audio,
  *   and corresponding to the start of the spoken word.
  *   This field is only set if `enable_word_time_offsets=true` and only
  *   in the top hypothesis.
@@ -573,7 +647,7 @@ var SpeechRecognitionAlternative = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} endTime
- *   *Output-only* Time offset relative to the beginning of the audio,
+ *   Output only. Time offset relative to the beginning of the audio,
  *   and corresponding to the end of the spoken word.
  *   This field is only set if `enable_word_time_offsets=true` and only
  *   in the top hypothesis.
@@ -583,7 +657,7 @@ var SpeechRecognitionAlternative = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {string} word
- *   *Output-only* The word corresponding to this set of information.
+ *   Output only. The word corresponding to this set of information.
  *
  * @typedef WordInfo
  * @memberof google.cloud.speech.v1
