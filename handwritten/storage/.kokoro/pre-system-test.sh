@@ -14,10 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -xeo pipefail
-
-cd $(dirname $0)/..
-
-npm install
-
-npm run docs
+# nodejs-storage's system tests require additional project and
+# system test key
+export GCN_STORAGE_2ND_PROJECT_ID=gcloud-node-whitelist-ci-tests
+export GCN_STORAGE_2ND_PROJECT_KEY=${KOKORO_GFILE_DIR}/no-whitelist-key.json
