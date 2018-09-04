@@ -16,6 +16,7 @@
 
 'use strict';
 
+const request = require('request');
 const {ServiceObject} = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
 
@@ -179,6 +180,7 @@ class Change extends ServiceObject {
        */
       id: id,
       methods: methods,
+      requestModule: request,
     });
   }
   /**
