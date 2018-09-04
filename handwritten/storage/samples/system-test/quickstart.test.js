@@ -16,7 +16,6 @@
 'use strict';
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
-const sinon = require(`sinon`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);

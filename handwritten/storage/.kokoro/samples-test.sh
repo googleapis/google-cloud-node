@@ -1,11 +1,12 @@
 #!/bin/bash
-# Copyright 2017 Google Inc.
+
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,13 +16,18 @@
 
 set -xeo pipefail
 
-# Always run the cleanup script, regardless of the success of bouncing into
-# the container.
-function cleanup() {
-    chmod +x ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
-    ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
-    echo "cleanup";
-}
-trap cleanup EXIT
+# Setup service account credentials.
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+export GCLOUD_PROJECT=long-door-651
 
-python3 "${KOKORO_GFILE_DIR}/trampoline_v1.py"
+cd $(dirname $0)/..
+
+npm install
+
+# Install and link samples
+cd samples/
+npm link ../
+npm install
+cd ..
+
+npm run samples-test
