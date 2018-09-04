@@ -23,15 +23,28 @@ workflows:
             - node8
             - node10
           filters: *all_commits
-      - publish_npm:
+      - system_tests:
           requires:
             - lint
             - docs
+          filters: &master_and_releases
+            branches:
+              only: master
+            tags: &releases
+              only: '/^v[\d.]+$/'
+      - sample_tests:
+          requires:
+            - lint
+            - docs
+          filters: *master_and_releases
+      - publish_npm:
+          requires:
+            - system_tests
+            - sample_tests
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: '/^v[\d.]+$/'
+            tags: *releases
   nightly:
     triggers:
       - schedule:
@@ -46,17 +59,17 @@ jobs:
       - image: 'node:6'
         user: node
     steps: &unit_tests_steps
-      - checkout 
+      - checkout
       - run: &npm_install_and_link
           name: Install and link the module
           command: |-
             mkdir -p /home/node/.npm-global
-            npm install
+            ./.circleci/npm-install-retry.js
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
       - run: node_modules/.bin/codecov
-  
+
   node8:
     docker:
       - image: 'node:8'
@@ -74,12 +87,12 @@ jobs:
     steps:
       - checkout
       - run: *npm_install_and_link
-      - run:
+      - run: &samples_npm_install_and_link
           name: Link the module being tested to the samples.
           command: |
             cd samples/
-            npm install
             npm link ../
+            ./../.circleci/npm-install-retry.js
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
@@ -94,14 +107,71 @@ jobs:
     steps:
       - checkout
       - run: *npm_install_and_link
+      - run: npm run docs
+  sample_tests:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
       - run:
-          name: Build documentation.
-          command: npm run docs
+          name: Decrypt credentials.
+          command: |
+            if ! [[ -z "${SYSTEM_TESTS_ENCRYPTION_KEY}" ]]; then
+              openssl aes-256-cbc -d -in .circleci/key.json.enc \
+                -out .circleci/key.json \
+                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
+            fi
+      - run: *npm_install_and_link
+      - run: *samples_npm_install_and_link
+      - run:
+          name: Run sample tests.
+          command: npm run samples-test
+          environment:
+            GCLOUD_PROJECT: long-door-651
+            GOOGLE_APPLICATION_CREDENTIALS: /home/node/samples/.circleci/key.json
+            NPM_CONFIG_PREFIX: /home/node/.npm-global
+      - run:
+          name: Remove unencrypted key.
+          command: |
+            if ! [[ -z "${SYSTEM_TESTS_ENCRYPTION_KEY}" ]]; then
+              rm .circleci/key.json
+            fi
+          when: always
+    working_directory: /home/node/samples/
+  system_tests:
+    docker:
+      - image: 'node:8'
+        user: node
+    steps:
+      - checkout
+      - run:
+          name: Decrypt credentials.
+          command: |
+            if ! [[ -z "${SYSTEM_TESTS_ENCRYPTION_KEY}" ]]; then
+              openssl aes-256-cbc -d -in .circleci/key.json.enc \
+                -out .circleci/key.json \
+                -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
+            fi
+      - run: *npm_install_and_link
+      - run:
+          name: Run system tests.
+          command: npm run system-test
+          environment:
+            GOOGLE_APPLICATION_CREDENTIALS: .circleci/key.json
+      - run:
+          name: Remove unencrypted key.
+          command: |
+            if ! [[ -z "${SYSTEM_TESTS_ENCRYPTION_KEY}" ]]; then
+              rm .circleci/key.json
+            fi
+          when: always
   publish_npm:
     docker:
       - image: 'node:8'
         user: node
     steps:
       - checkout
-      - run: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+      - run: ./.circleci/npm-install-retry.js
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npm publish --access=public
