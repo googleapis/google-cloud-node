@@ -64,7 +64,7 @@ jobs:
           name: Install and link the module
           command: |-
             mkdir -p /home/node/.npm-global
-            npm install
+            ./.circleci/npm-install-retry.js
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
@@ -92,7 +92,7 @@ jobs:
           command: |
             cd samples/
             npm link ../
-            npm install
+            ./../.circleci/npm-install-retry.js
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run:
@@ -172,6 +172,6 @@ jobs:
         user: node
     steps:
       - checkout
-      - run: npm install
+      - run: ./.circleci/npm-install-retry.js
       - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npm publish --access=public
