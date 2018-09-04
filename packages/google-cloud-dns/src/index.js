@@ -22,7 +22,7 @@ const {paginator} = require('@google-cloud/paginator');
 const {promisifyAll} = require('@google-cloud/promisify');
 const extend = require('extend');
 const is = require('is');
-const request = require('request');
+const teenyRequest = require('teeny-request').teenyRequest;
 
 const Zone = require('./zone');
 
@@ -89,7 +89,7 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/cloud-platform',
       ],
       packageJson: require('../package.json'),
-      requestModule: request,
+      requestModule: teenyRequest,
     };
     super(config, options);
   }

@@ -27,7 +27,7 @@ const fs = require('fs');
 const groupBy = require('lodash.groupby');
 const is = require('is');
 const prop = require('propprop');
-const request = require('request');
+const teenyRequest = require('teeny-request').teenyRequest;
 const zonefile = require('dns-zonefile');
 
 const Change = require('./change');
@@ -212,7 +212,7 @@ class Zone extends ServiceObject {
       id: name,
       createMethod: dns.createZone.bind(dns),
       methods: methods,
-      requestModule: request,
+      requestModule: teenyRequest,
     });
     /**
      * @name Zone#name
