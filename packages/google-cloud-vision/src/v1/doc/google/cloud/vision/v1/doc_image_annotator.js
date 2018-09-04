@@ -107,7 +107,12 @@ var Feature = {
     /**
      * Run web detection.
      */
-    WEB_DETECTION: 10
+    WEB_DETECTION: 10,
+
+    /**
+     * Run localizer for object detection.
+     */
+    OBJECT_LOCALIZATION: 19
   }
 };
 
@@ -570,6 +575,36 @@ var EntityAnnotation = {
 };
 
 /**
+ * Set of detected objects with bounding boxes.
+ *
+ * @property {string} mid
+ *   Object ID that should align with EntityAnnotation mid.
+ *
+ * @property {string} languageCode
+ *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *
+ * @property {string} name
+ *   Object name, expressed in its `language_code` language.
+ *
+ * @property {number} score
+ *   Score of the result. Range [0, 1].
+ *
+ * @property {Object} boundingPoly
+ *   Image region to which this object belongs. This must be populated.
+ *
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
+ *
+ * @typedef LocalizedObjectAnnotation
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.LocalizedObjectAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+var LocalizedObjectAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Set of features pertaining to the image, computed by computer vision
  * methods over safe-search verticals (for example, adult, spoof, medical,
  * violence).
@@ -868,6 +903,12 @@ var ImageAnnotationContext = {
  *   If present, label detection has completed successfully.
  *
  *   This object should have the same structure as [EntityAnnotation]{@link google.cloud.vision.v1.EntityAnnotation}
+ *
+ * @property {Object[]} localizedObjectAnnotations
+ *   If present, localized object detection has completed successfully.
+ *   This will be sorted descending by confidence score.
+ *
+ *   This object should have the same structure as [LocalizedObjectAnnotation]{@link google.cloud.vision.v1.LocalizedObjectAnnotation}
  *
  * @property {Object[]} textAnnotations
  *   If present, text (OCR) detection has completed successfully.
