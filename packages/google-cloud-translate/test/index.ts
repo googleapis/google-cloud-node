@@ -47,8 +47,12 @@ const fakeUtil = extend({}, util, {
 });
 const originalFakeUtil = extend(true, {}, fakeUtil);
 
-function FakeService() {
-  this.calledWith_ = arguments;
+class FakeService {
+  calledWith_: IArguments;
+  request?: Function;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
 describe('Translate', () => {
@@ -525,10 +529,10 @@ describe('Translate', () => {
 
   describe('request', () => {
     describe('OAuth mode', () => {
-      let request: r.Request;
+      let request: Function;
 
       beforeEach(() => {
-        request = FakeService.prototype.request;
+        request = FakeService.prototype.request!;
       });
 
       afterEach(() => {
