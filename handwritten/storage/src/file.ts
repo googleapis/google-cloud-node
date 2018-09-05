@@ -16,7 +16,6 @@
 
 'use strict';
 
-import {Buffer} from 'safe-buffer';
 import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import compressible = require('compressible');

@@ -23,8 +23,6 @@
 
 'use strict';
 
-const Buffer = require('safe-buffer').Buffer;
-
 // [START storage_generate_encryption_key]
 const crypto = require('crypto');
 

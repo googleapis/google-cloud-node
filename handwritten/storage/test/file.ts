@@ -17,7 +17,6 @@
 'use strict';
 
 import * as assert from 'assert';
-import {Buffer} from 'safe-buffer';
 import * as crypto from 'crypto';
 let duplexify;
 import * as extend from 'extend';

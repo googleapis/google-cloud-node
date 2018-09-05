@@ -18,7 +18,6 @@
 
 const assert = require('assert');
 const async = require('async');
-const Buffer = require('safe-buffer').Buffer;
 const crypto = require('crypto');
 const extend = require('extend');
 const fs = require('fs');
