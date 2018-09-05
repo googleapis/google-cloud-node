@@ -27,7 +27,7 @@ version = 'v1beta1'
 
 library = gapic.node_library(
     'asset', version, config_path="artman_cloudasset_v1beta1.yaml",
-    artman_output_name=f"cloudasset-{version}")
+    artman_output_name=f"asset-{version}")
 
 s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
@@ -39,4 +39,3 @@ Node.js specific cleanup
 '''
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])

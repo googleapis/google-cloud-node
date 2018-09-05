@@ -32,11 +32,9 @@ describe('AssetServiceClient', () => {
 
       // Mock request
       var formattedParent = client.projectPath('[PROJECT]');
-      var contentTypes = [];
       var outputConfig = {};
       var request = {
         parent: formattedParent,
-        contentTypes: contentTypes,
         outputConfig: outputConfig,
       };
 
@@ -72,11 +70,9 @@ describe('AssetServiceClient', () => {
 
       // Mock request
       var formattedParent = client.projectPath('[PROJECT]');
-      var contentTypes = [];
       var outputConfig = {};
       var request = {
         parent: formattedParent,
-        contentTypes: contentTypes,
         outputConfig: outputConfig,
       };
 
@@ -128,12 +124,10 @@ describe('AssetServiceClient', () => {
 
       // Mock request
       var formattedParent = client.projectPath('[PROJECT]');
-      var assetNames = [];
       var contentType = 'CONTENT_TYPE_UNSPECIFIED';
       var readTimeWindow = {};
       var request = {
         parent: formattedParent,
-        assetNames: assetNames,
         contentType: contentType,
         readTimeWindow: readTimeWindow,
       };
@@ -162,12 +156,10 @@ describe('AssetServiceClient', () => {
 
       // Mock request
       var formattedParent = client.projectPath('[PROJECT]');
-      var assetNames = [];
       var contentType = 'CONTENT_TYPE_UNSPECIFIED';
       var readTimeWindow = {};
       var request = {
         parent: formattedParent,
-        assetNames: assetNames,
         contentType: contentType,
         readTimeWindow: readTimeWindow,
       };

@@ -19,25 +19,26 @@
  * Export asset request.
  *
  * @property {string} parent
- *   Required. The relative name of the root asset. It can only be an
- *   organization number (e.g. "organizations/123") or a project number
- *   (e.g. "projects/12345").
+ *   Required. The relative name of the root asset. Can only be an organization
+ *   number (such as "organizations/123"), or a project id (such as
+ *   "projects/my-project-id") or a project number (such as "projects/12345").
  *
  * @property {Object} readTime
- *   Timestamp to take an asset snapshot. This can only be current or past
- *   time. If not specified, the current time will be used. Due to delays in
- *   resource data collection and indexing, there is a volatile window during
- *   which running the same query may get different results.
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp in
+ *   the past or of the current time. If not specified, the current time will be
+ *   used. Due to delays in resource data collection and indexing, there is a
+ *   volatile window during which running the same query may get different
+ *   results.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string[]} assetTypes
- *   A list of asset types to take a snapshot for. Example:
+ *   A list of asset types of which to take a snapshot for. Example:
  *   "google.compute.disk". If specified, only matching assets will be returned.
  *
- * @property {number[]} contentTypes
- *   A list of asset content types. If specified, only matching content will be
- *   returned. Otherwise, no content but the asset name will be returned.
+ * @property {number} contentType
+ *   Asset content type. If not specified, no content but the asset name will be
+ *   returned.
  *
  *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1beta1.ContentType}
  *
@@ -61,12 +62,12 @@ var ExportAssetsRequest = {
  * google.longrunning.Operation.response field.
  *
  * @property {Object} readTime
- *   Required. Time the snapshot was taken.
+ *   Time the snapshot was taken.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} outputConfig
- *   Required. Output configuration indicating where the results were output to.
+ *   Output configuration indicating where the results were output to.
  *   All results are in JSON format.
  *
  *   This object should have the same structure as [OutputConfig]{@link google.cloud.asset.v1beta1.OutputConfig}
@@ -84,8 +85,8 @@ var ExportAssetsResponse = {
  *
  * @property {string} parent
  *   Required. The relative name of the root asset. It can only be an
- *   organization ID (e.g. "organizations/123") or a project ID
- *   (e.g. "projects/12345").
+ *   organization number (such as "organizations/123"), or a project id (such as
+ *   "projects/my-project-id")"or a project number (such as "projects/12345").
  *
  * @property {string[]} assetNames
  *   A list of the full names of the assets. See:
@@ -93,7 +94,8 @@ var ExportAssetsResponse = {
  *   Example:
  *   "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
  *
- *   The request becomes a no-op if the asset name list is empty.
+ *   The request becomes a no-op if the asset name list is empty, and the max
+ *   size of the asset name list is 100 in one request.
  *
  * @property {number} contentType
  *   Required. The content type.
@@ -101,9 +103,9 @@ var ExportAssetsResponse = {
  *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1beta1.ContentType}
  *
  * @property {Object} readTimeWindow
- *   Required. The time window for the asset history. The returned results
- *   contain all temporal assets whose time window overlap with
- *   read_time_window.
+ *   Required. The time window for the asset history. The start time is
+ *   required. The returned results contain all temporal assets whose time
+ *   window overlap with read_time_window.
  *
  *   This object should have the same structure as [TimeWindow]{@link google.cloud.asset.v1beta1.TimeWindow}
  *

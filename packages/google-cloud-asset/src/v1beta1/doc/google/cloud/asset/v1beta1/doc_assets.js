@@ -45,13 +45,12 @@ var TemporalAsset = {
  *
  * @property {Object} startTime
  *   Start time of the time window (inclusive).
- *   Infinite past if not specified.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} endTime
  *   End time of the time window (exclusive).
- *   Infinite future if not specified.
+ *   Current timestamp if not specified.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
