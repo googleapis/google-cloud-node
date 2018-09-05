@@ -1,6 +1,5 @@
 {
   "name": "nodejs-docs-samples-container",
-  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -8,13 +7,8 @@
   },
   "repository": "googleapis/nodejs-cloud-container",
   "private": true,
-  "semistandard": {
-    "ignore": [
-      "node_modules"
-    ]
-  },
   "scripts": {
-    "test": "node -e 'console.log(`no tests`);'"
+    "test": "echo no sample tests 👻"
   },
   "dependencies": {
     "@google-cloud/container": "^0.2.0"
