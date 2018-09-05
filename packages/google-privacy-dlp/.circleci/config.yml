@@ -150,8 +150,8 @@ jobs:
           command: |
             if ! [[ -z "${SYSTEM_TESTS_ENCRYPTION_KEY}" ]]; then
               for encrypted_key in .circleci/*.json.enc; do
-                openssl aes-256-cbc -d -in $encrypted_key
-                  -out $(echo $encrypted_key | sed 's/\.enc//')
+                openssl aes-256-cbc -d -in $encrypted_key \
+                  -out $(echo $encrypted_key | sed 's/\.enc//') \
                   -k "${SYSTEM_TESTS_ENCRYPTION_KEY}"
               done
             fi
