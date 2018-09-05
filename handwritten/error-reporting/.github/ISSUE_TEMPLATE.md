@@ -4,9 +4,8 @@ Please run down the following list and make sure you've tried the usual "quick
 fixes":
 
   - Search the issues already opened: https://github.com/googleapis/nodejs-error-reporting/issues
+  - Search the issues on our "catch-all" repository: https://github.com/GoogleCloudPlatform/google-cloud-node
   - Search StackOverflow: http://stackoverflow.com/questions/tagged/google-cloud-platform+node.js
-  - Check our Troubleshooting guide: https://googlecloudplatform.github.io/google-cloud-node/#/docs/guides/troubleshooting
-  - Check our FAQ: https://googlecloudplatform.github.io/google-cloud-node/#/docs/guides/faq
 
 If you are still having issues, please be sure to include as much information as
 possible:
@@ -16,7 +15,7 @@ possible:
   - OS:
   - Node.js version:
   - npm version:
-  - @google-cloud/error-reporting version:
+  - `@google-cloud/error-reporting` version:
 
 #### Steps to reproduce
 
