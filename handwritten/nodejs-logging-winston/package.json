@@ -73,12 +73,12 @@
     "posttest": "npm run check"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.21.1",
-    "@google-cloud/logging": "^3.0.1",
+    "@google-cloud/logging": "^3.0.2",
     "@sindresorhus/is": "^0.10.0",
     "lodash.mapvalues": "^4.6.0"
   },
   "devDependencies": {
+    "@google-cloud/common": "^0.23.0",
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@types/glob": "^5.0.35",
     "@types/is": "0.0.20",
@@ -111,6 +111,7 @@
     "post-install-check": "0.0.1",
     "prettier": "^1.13.6",
     "proxyquire": "^2.0.1",
+    "request": "^2.88.0",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.6",
     "tmp": "0.0.33",
