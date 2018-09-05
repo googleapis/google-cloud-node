@@ -15,6 +15,7 @@
  */
 
 import * as common from '@google-cloud/common';
+import * as request from 'request';
 const packageJson = require('../../package.json');
 
 export interface ServiceContext {
@@ -46,7 +47,8 @@ export class ErrorsApiTransport extends common.Service {
     super({
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      packageJson
+      packageJson,
+      requestModule: request
     });
   }
 
