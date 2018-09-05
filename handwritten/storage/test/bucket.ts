@@ -177,6 +177,11 @@ describe('Bucket', () => {
       assert.strictEqual(bucket.name, 'bucket-name');
     });
 
+    it('should remove a trailing /', () => {
+      const bucket = new Bucket(STORAGE, 'bucket-name/');
+      assert.strictEqual(bucket.name, 'bucket-name');
+    });
+
     it('should localize the name', () => {
       assert.strictEqual(bucket.name, BUCKET_NAME);
     });

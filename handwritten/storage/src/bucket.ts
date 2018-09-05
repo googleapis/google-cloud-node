@@ -302,7 +302,8 @@ class Bucket extends ServiceObject {
   constructor(storage, name, options?) {
     options = options || {};
 
-    name = name.replace(/^gs:\/\//, '');
+    // Allow for "gs://"-style input, and strip any trailing slashes.
+    name = name.replace(/^gs:\/\//, '').replace(/\/+$/, '');
 
     const methods = {
       /**
