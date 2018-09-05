@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v2.1.1
+
+### Internal / Testing Changes
+- Retry npm install in CI (#113)
+- fix: set request module (#112)
+- Re-generate library using /synth.py (#111)
+- fix: run the linter (#110)
+- fix: always run all system-tests (#109)
+
 ## v2.1.0
 
 ### Implementation Changes
