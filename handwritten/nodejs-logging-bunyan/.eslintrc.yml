@@ -11,5 +11,3 @@ rules:
   block-scoped-var: error
   eqeqeq: error
   no-warning-comments: warn
-  node/no-unsupported-features: warn
-  node/no-unsupported-features/es-syntax: warn
