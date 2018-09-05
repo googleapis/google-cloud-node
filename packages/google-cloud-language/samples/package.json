@@ -1,6 +1,5 @@
 {
   "name": "nodejs-docs-samples-language",
-  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -8,11 +7,6 @@
   },
   "repository": "googleapis/nodejs-language",
   "private": true,
-  "semistandard": {
-    "ignore": [
-      "node_modules"
-    ]
-  },
   "scripts": {
     "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
@@ -20,14 +14,12 @@
   },
   "dependencies": {
     "@google-cloud/language": "^1.2.0",
-    "@google-cloud/storage": "^1.7.0",
+    "@google-cloud/storage": "^2.0.0",
     "yargs": "^12.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "ava": "^0.25.0",
-    "proxyquire": "^2.0.1",
-    "sinon": "^6.0.1",
     "uuid": "^3.2.1"
   }
 }
