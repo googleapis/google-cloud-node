@@ -25,7 +25,6 @@ const is = require('is');
 const fetch = require('node-fetch');
 const normalizeNewline = require('normalize-newline');
 const path = require('path');
-const prop = require('propprop');
 const through = require('through2');
 const tmp = require('tmp');
 const uuid = require('uuid');
@@ -1111,7 +1110,7 @@ describe('storage', function() {
           async.each(files, createFile, function(err) {
             assert.ifError(err);
 
-            const sourceFiles = files.map(prop('file'));
+            const sourceFiles = files.map(x => x.file);
             const destinationFile = bucketNonWhitelist.file(
               'file-one-n-two.txt'
             );
@@ -2267,7 +2266,7 @@ describe('storage', function() {
       async.each(files, createFile, function(err) {
         assert.ifError(err);
 
-        const sourceFiles = files.map(prop('file'));
+        const sourceFiles = files.map(x => x.file);
         const destinationFile = bucket.file('file-one-and-two.txt');
 
         bucket.combine(sourceFiles, destinationFile, function(err) {
@@ -2278,7 +2277,7 @@ describe('storage', function() {
 
             assert.strictEqual(
               contents.toString(),
-              files.map(prop('contents')).join('')
+              files.map(x => x.contents).join('')
             );
 
             async.each(sourceFiles.concat([destinationFile]), deleteFile, done);
