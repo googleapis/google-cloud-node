@@ -22,7 +22,9 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
 import {Project} from './project';
-import * as request from 'request';
+import * as r from 'request';  // Only for type declarations.
+import {teenyRequest} from 'teeny-request';
+
 
 /**
  * @typedef {object} ClientConfig
@@ -94,7 +96,7 @@ class Resource extends Service {
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       projectIdRequired: false,
       packageJson: require('../../package.json'),
-      requestModule: request
+      requestModule: teenyRequest as typeof r,
     };
     super(config, options);
 
@@ -323,7 +325,8 @@ class Resource extends Service {
     if (!name) {
       throw new Error('A name must be specified for an operation.');
     }
-    return new Operation({parent: this, id: name, requestModule: request});
+    return new Operation(
+        {parent: this, id: name, requestModule: teenyRequest as typeof r});
   }
 
   /**

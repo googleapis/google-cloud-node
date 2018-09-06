@@ -19,7 +19,8 @@
 import {util, ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Resource} from '.';
-import * as request from 'request';
+import * as r from 'request';  // Only for type declarations.
+import {teenyRequest} from 'teeny-request';
 
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
@@ -253,7 +254,7 @@ class Project extends ServiceObject {
 
     super({
       parent: resource,
-      requestModule: request,
+      requestModule: teenyRequest as typeof r,
       baseUrl: '/projects',
       /**
        * @name Project#id

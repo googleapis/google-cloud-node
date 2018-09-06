@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {util} from '@google-cloud/common';
-import * as request from 'request';
+import {teenyRequest} from 'teeny-request';
 
 class FakeOperation {
   calledWith_;
@@ -334,7 +334,7 @@ describe('Resource', () => {
       assert(operation instanceof FakeOperation);
       assert.deepStrictEqual(
           operation.calledWith_[0],
-          {parent: resource, id: NAME, requestModule: request});
+          {parent: resource, id: NAME, requestModule: teenyRequest});
     });
   });
 
