@@ -21,6 +21,7 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {util} from '@google-cloud/common';
+import * as request from 'request';
 
 class FakeOperation {
   calledWith_;
@@ -330,13 +331,10 @@ describe('Resource', () => {
 
     it('should return a common/operation', () => {
       const operation = resource.operation(NAME);
-
       assert(operation instanceof FakeOperation);
-
-      assert.deepStrictEqual(operation.calledWith_[0], {
-        parent: resource,
-        id: NAME,
-      });
+      assert.deepStrictEqual(
+          operation.calledWith_[0],
+          {parent: resource, id: NAME, requestModule: request});
     });
   });
 

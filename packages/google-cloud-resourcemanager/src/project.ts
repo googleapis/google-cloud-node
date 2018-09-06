@@ -19,6 +19,7 @@
 import {util, ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Resource} from '.';
+import * as request from 'request';
 
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
@@ -252,6 +253,7 @@ class Project extends ServiceObject {
 
     super({
       parent: resource,
+      requestModule: request,
       baseUrl: '/projects',
       /**
        * @name Project#id
@@ -260,8 +262,7 @@ class Project extends ServiceObject {
       id,
       createMethod: resource.createProject.bind(resource),
       methods,
-      // tslint:disable-next-line no-any
-    } as any);
+    });
   }
 
   /**
