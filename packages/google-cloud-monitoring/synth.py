@@ -21,20 +21,17 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
 common_templates = gcp.CommonTemplates()
 
 version = "v3"
 
-library = gapic.node_library("monitoring", version,
-        config_path="/google/monitoring/artman_monitoring.yaml")
+library = gapic.node_library(
+    "monitoring", version, config_path="/google/monitoring/artman_monitoring.yaml"
+)
 
 s.copy(library, excludes=["src/index.js", "README.md", "package.json"])
 
-templates = common_templates.node_library(
-    package_name="@google-cloud/monitoring",
-    repo_name="googleapis/nodejs-monitoring")
-
+templates = common_templates.node_library()
 s.copy(templates)
 
 """
