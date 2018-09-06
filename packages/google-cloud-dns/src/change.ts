@@ -16,9 +16,9 @@
 
 'use strict';
 
-const teenyRequest = require('teeny-request').teenyRequest;
-const {ServiceObject} = require('@google-cloud/common');
-const {promisifyAll} = require('@google-cloud/promisify');
+import {teenyRequest} from 'teeny-request';
+import {ServiceObject} from '@google-cloud/common';
+import {promisifyAll} from '@google-cloud/promisify';
 
 /**
  * @class
@@ -32,7 +32,7 @@ const {promisifyAll} = require('@google-cloud/promisify');
  * const zone = dns.zone('zone-id');
  * const change = zone.change('change-id');
  */
-class Change extends ServiceObject {
+export class Change extends ServiceObject {
   constructor(zone, id) {
     const methods = {
       /**
@@ -178,9 +178,9 @@ class Change extends ServiceObject {
        * @name Change#id
        * @type {string}
        */
-      id: id,
-      methods: methods,
-      requestModule: teenyRequest,
+      id,
+      methods,
+      requestModule: teenyRequest as any,
     });
   }
   /**
@@ -217,8 +217,8 @@ class Change extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  create(config, callback) {
-    this.parent.createChange(config, (err, change, apiResponse) => {
+  create(config, callback?) {
+    (this.parent as any).createChange(config, (err, change, apiResponse) => {
       if (err) {
         callback(err, null, apiResponse);
         return;
@@ -236,5 +236,3 @@ class Change extends ServiceObject {
  * that a callback is omitted.
  */
 promisifyAll(Change);
-
-module.exports = Change;

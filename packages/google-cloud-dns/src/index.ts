@@ -16,15 +16,15 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const {Service} = require('@google-cloud/common');
-const {paginator} = require('@google-cloud/paginator');
-const {promisifyAll} = require('@google-cloud/promisify');
-const extend = require('extend');
-const is = require('is');
-const teenyRequest = require('teeny-request').teenyRequest;
+import * as arrify from 'arrify';
+import { Service } from '@google-cloud/common';
+import { paginator } from '@google-cloud/paginator';
+import { promisifyAll } from '@google-cloud/promisify';
+import * as extend from 'extend';
+import * as is from 'is';
+import { teenyRequest } from 'teeny-request';
 
-const Zone = require('./zone');
+import { Zone } from './zone';
 
 /**
  * @typedef {object} ClientConfig
@@ -80,6 +80,7 @@ const Zone = require('./zone');
  * Full quickstart example:
  */
 class DNS extends Service {
+  getZonesStream;
   constructor(options) {
     options = options || {};
     const config = {
@@ -88,10 +89,42 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
       ],
-      packageJson: require('../package.json'),
-      requestModule: teenyRequest,
+      packageJson: require('../../package.json'),
+      requestModule: teenyRequest as any,
     };
     super(config, options);
+
+    /**
+     * Get {@link Zone} objects for all of the zones in your project as
+     * a readable object stream.
+     *
+     * @method DNS#getZonesStream
+     * @param {GetZonesRequest} [query] Query object for listing zones.
+     * @returns {ReadableStream} A readable stream that emits {@link Zone} instances.
+     *
+     * @example
+     * const DNS = require('@google-cloud/dns');
+     * const dns = new DNS();
+     *
+     * dns.getZonesStream()
+     *   .on('error', console.error)
+     *   .on('data', function(zone) {
+     *     // zone is a Zone object.
+     *   })
+     *   .on('end', function() {
+     *     // All zones retrieved.
+     *   });
+     *
+     * //-
+     * // If you anticipate many results, you can end a stream early to prevent
+     * // unnecessary processing and API requests.
+     * //-
+     * dns.getZonesStream()
+     *   .on('data', function(zone) {
+     *     this.end();
+     *   });
+     */
+    this.getZonesStream = paginator.streamify('getZones');
   }
   /**
    * Config to set for the zone.
@@ -166,7 +199,7 @@ class DNS extends Service {
         uri: '/managedZones',
         json: config,
       },
-      function(err, resp) {
+      function (err, resp) {
         if (err) {
           callback(err, null, resp);
           return;
@@ -233,12 +266,12 @@ class DNS extends Service {
         uri: '/managedZones',
         qs: query,
       },
-      function(err, resp) {
+      function (err, resp) {
         if (err) {
           callback(err, null, null, resp);
           return;
         }
-        const zones = arrify(resp.managedZones).map(function(zone) {
+        const zones = arrify(resp.managedZones).map(function (zone) {
           const zoneInstance = self.zone(zone.name);
           zoneInstance.metadata = zone;
           return zoneInstance;
@@ -276,38 +309,6 @@ class DNS extends Service {
   }
 }
 
-/**
- * Get {@link Zone} objects for all of the zones in your project as
- * a readable object stream.
- *
- * @method DNS#getZonesStream
- * @param {GetZonesRequest} [query] Query object for listing zones.
- * @returns {ReadableStream} A readable stream that emits {@link Zone} instances.
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- *
- * dns.getZonesStream()
- *   .on('error', console.error)
- *   .on('data', function(zone) {
- *     // zone is a Zone object.
- *   })
- *   .on('end', function() {
- *     // All zones retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * dns.getZonesStream()
- *   .on('data', function(zone) {
- *     this.end();
- *   });
- */
-DNS.prototype.getZonesStream = paginator.streamify('getZones');
-
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
@@ -330,7 +331,7 @@ promisifyAll(DNS, {
  * @see Zone
  * @type {Constructor}
  */
-DNS.Zone = Zone;
+export { Zone };
 
 /**
  * The default export of the `@google-cloud/dns` package is the {@link DNS}
@@ -361,4 +362,4 @@ DNS.Zone = Zone;
  * region_tag:dns_quickstart
  * Full quickstart example:
  */
-module.exports = DNS;
+export { DNS };

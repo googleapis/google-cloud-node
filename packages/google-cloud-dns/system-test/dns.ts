@@ -16,15 +16,15 @@
 
 'use strict';
 
-const assert = require('assert');
-const async = require('async');
+import * as assert from 'assert';
+import * as async from 'async';
 const exec = require('methmeth');
 const format = require('string-format-obj');
-const fs = require('fs');
+import * as fs from 'fs';
 const tmp = require('tmp');
-const uuid = require('uuid');
+import * as uuid from 'uuid';
 
-const DNS = require('../');
+const {DNS} = require('../src');
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
@@ -167,10 +167,10 @@ describe('dns', function() {
     });
 
     it('should import records from a zone file', function(done) {
-      const zoneFilename = require.resolve('./data/zonefile.zone');
+      const zoneFilename = require.resolve('../../system-test/data/zonefile.zone');
       let zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
       zoneFileTemplate = format(zoneFileTemplate, {
-        DNS_DOMAIN: DNS_DOMAIN,
+        DNS_DOMAIN,
       });
 
       tmp.setGracefulCleanup();
@@ -331,37 +331,23 @@ describe('dns', function() {
       });
     });
 
-    it('should replace records', function(done) {
+    it('should replace records', async () => {
       const name = 'test-zone-' + uuid.v4().substr(0, 18);
 
       // Do this in a new zone so no existing records are affected.
-      dns.createZone(name, {dnsName: DNS_DOMAIN}, function(err, zone) {
-        assert.ifError(err);
-
-        zone.getRecords('ns', function(err, originalRecords) {
-          assert.ifError(err);
-
-          const originalData = originalRecords[0].data;
-
-          const newRecord = zone.record('ns', {
-            ttl: 3600,
-            name: DNS_DOMAIN,
-            data: ['ns1.nameserver.net.', 'ns2.nameserver.net.'],
-          });
-
-          zone.replaceRecords('ns', newRecord, function(err, change) {
-            assert.ifError(err);
-
-            const deleted = change.metadata.deletions[0].rrdatas;
-            const added = change.metadata.additions[0].rrdatas;
-
-            assert.deepStrictEqual(deleted, originalData);
-            assert.deepStrictEqual(added, newRecord.data);
-
-            done();
-          });
-        });
+      const [zone] = await dns.createZone(name, {dnsName: DNS_DOMAIN});
+      const [originalRecords] = await zone.getRecords('ns');
+      const originalData = originalRecords[0].data;
+      const newRecord = zone.record('ns', {
+        ttl: 3600,
+        name: DNS_DOMAIN,
+        data: ['ns1.nameserver.net.', 'ns2.nameserver.net.'],
       });
+      const [change] = await zone.replaceRecords('ns', newRecord);
+      const deleted = change.metadata.deletions[0].rrdatas;
+      const added = change.metadata.additions[0].rrdatas;
+      assert.deepStrictEqual(deleted, originalData);
+      assert.deepStrictEqual(added, newRecord.data);
     });
   });
 });

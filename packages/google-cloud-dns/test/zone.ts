@@ -16,21 +16,21 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const assert = require('assert');
+import * as arrify from 'arrify';
+import * as assert from 'assert';
 const exec = require('methmeth');
-const extend = require('extend');
+import * as extend from 'extend';
 const flatten = require('lodash.flatten');
-const nodeutil = require('util');
+import * as nodeutil from 'util';
 const prop = require('propprop');
-const proxyquire = require('proxyquire');
-const {ServiceObject} = require('@google-cloud/common');
-const promisify = require('@google-cloud/promisify');
-const uuid = require('uuid');
+import * as proxyquire from 'proxyquire';
+import {ServiceObject} from '@google-cloud/common';
+import * as promisify from '@google-cloud/promisify';
+import * as uuid from 'uuid';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll(Class, options) {
     if (Class.name !== 'Zone') {
       return;
     }
@@ -41,7 +41,7 @@ const fakePromisify = extend({}, promisify, {
 
 let parseOverride;
 const fakeDnsZonefile = {
-  parse: function() {
+  parse() {
     return (parseOverride || function() {}).apply(null, arguments);
   },
 };
@@ -49,10 +49,10 @@ const fakeDnsZonefile = {
 let writeFileOverride;
 let readFileOverride;
 const fakeFs = {
-  readFile: function() {
+  readFile() {
     return (readFileOverride || function() {}).apply(null, arguments);
   },
-  writeFile: function() {
+  writeFile() {
     return (writeFileOverride || function() {}).apply(null, arguments);
   },
 };
@@ -61,14 +61,17 @@ function FakeChange() {
   this.calledWith_ = arguments;
 }
 
-function FakeRecord() {
-  this.calledWith_ = arguments;
+class FakeRecord {
+  calledWith_;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
+  static fromZoneRecord_() {
+    const record = new FakeRecord();
+    record.calledWith_ = arguments;
+    return record;
+  };
 }
-FakeRecord.fromZoneRecord_ = function() {
-  const record = new FakeRecord();
-  record.calledWith_ = arguments;
-  return record;
-};
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -80,7 +83,7 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 let extended = false;
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend(Class, methods) {
       if (Class.name !== 'Zone') {
         return;
       }
@@ -90,7 +93,7 @@ const fakePaginator = {
       assert.strictEqual(Class.name, 'Zone');
       assert.deepStrictEqual(methods, ['getChanges', 'getRecords']);
     },
-    streamify: function(methodName) {
+    streamify(methodName) {
       return methodName;
     },
   },
@@ -101,7 +104,7 @@ describe('Zone', function() {
   let zone;
 
   const DNS = {
-    createZone: function() {},
+    createZone() {},
   };
   const ZONE_NAME = 'zone-name';
 
@@ -114,9 +117,13 @@ describe('Zone', function() {
       },
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
-      './change': FakeChange,
-      './record': FakeRecord,
-    });
+      './change': {
+        Change: FakeChange,
+      },
+      './record': {
+        Record: FakeRecord
+      }
+    }).Zone;
   });
 
   beforeEach(function() {
@@ -147,7 +154,7 @@ describe('Zone', function() {
     it('should inherit from ServiceObject', function(done) {
       const dnsInstance = extend({}, DNS, {
         createZone: {
-          bind: function(context) {
+          bind(context) {
             assert.strictEqual(context, dnsInstance);
             done();
           },
@@ -197,7 +204,7 @@ describe('Zone', function() {
   });
 
   describe('createChange', function() {
-    function generateRecord(recordJson) {
+    function generateRecord(recordJson?) {
       recordJson = extend(
         {
           name: uuid.v1(),
@@ -208,7 +215,7 @@ describe('Zone', function() {
       );
 
       return {
-        toJSON: function() {
+        toJSON() {
           return recordJson;
         },
       };
@@ -466,22 +473,22 @@ describe('Zone', function() {
 
     const records = [
       {
-        toString: function() {
+        toString() {
           return 'a';
         },
       },
       {
-        toString: function() {
+        toString() {
           return 'a';
         },
       },
       {
-        toString: function() {
+        toString() {
           return 'a';
         },
       },
       {
-        toString: function() {
+        toString() {
           return 'a';
         },
       },
@@ -638,7 +645,7 @@ describe('Zone', function() {
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken,
+          nextPageToken,
         });
         const expectedNextQuery = {
           pageToken: nextPageToken,
@@ -720,7 +727,7 @@ describe('Zone', function() {
       it('should execute callback with nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken,
+          nextPageToken,
         });
         const expectedNextQuery = {pageToken: nextPageToken};
 
@@ -830,7 +837,7 @@ describe('Zone', function() {
 
     describe('success', function() {
       const recordType = 'ns';
-      let parsedZonefile = {};
+      let parsedZonefile: any = {};
 
       beforeEach(function() {
         parsedZonefile = {
@@ -849,39 +856,29 @@ describe('Zone', function() {
       it('should add records', function(done) {
         zone.addRecords = function(recordsToCreate, callback) {
           assert.strictEqual(recordsToCreate.length, 1);
-
           const recordToCreate = recordsToCreate[0];
-
           assert(recordToCreate instanceof FakeRecord);
-
           const args = recordToCreate.calledWith_;
           assert.strictEqual(args[0], zone);
           assert.strictEqual(args[1], recordType);
           assert.strictEqual(args[2], parsedZonefile[recordType]);
-
           callback();
         };
-
         zone.import(path, done);
       });
 
       it('should use the default ttl', function(done) {
         const defaultTTL = '90';
-
         parsedZonefile.$ttl = defaultTTL;
         parsedZonefile[recordType] = {};
         parsedZonefile.mx = {ttl: '180'};
-
         zone.addRecords = function(recordsToCreate) {
           const record1 = recordsToCreate[0].calledWith_[2];
           assert.strictEqual(record1.ttl, defaultTTL);
-
           const record2 = recordsToCreate[1].calledWith_[2];
           assert.strictEqual(record2.ttl, '180');
-
           done();
         };
-
         zone.import(path, done);
       });
     });
@@ -891,11 +888,8 @@ describe('Zone', function() {
     it('should return a Record object', function() {
       const type = 'a';
       const metadata = {a: 'b', c: 'd'};
-
       const record = zone.record(type, metadata);
-
       assert(record instanceof FakeRecord);
-
       const args = record.calledWith_;
       assert.strictEqual(args[0], zone);
       assert.strictEqual(args[1], type);

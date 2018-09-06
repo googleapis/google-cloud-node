@@ -16,9 +16,9 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const {promisifyAll} = require('@google-cloud/promisify');
-const extend = require('extend');
+import * as arrify from 'arrify';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
 const format = require('string-format-obj');
 
 /**
@@ -47,7 +47,12 @@ const format = require('string-format-obj');
  *   data: '1.2.3.4'
  * });
  */
-class Record {
+export class Record {
+  zone_;
+  type;
+  metadata;
+  rrdatas;
+  data;
   constructor(zone, type, metadata) {
     this.zone_ = zone;
     /**
@@ -193,5 +198,3 @@ class Record {
 promisifyAll(Record, {
   exclude: ['toJSON', 'toString'],
 });
-
-module.exports = Record;

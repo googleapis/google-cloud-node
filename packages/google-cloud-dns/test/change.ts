@@ -16,16 +16,16 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const nodeutil = require('util');
-const proxyquire = require('proxyquire');
-const {ServiceObject} = require('@google-cloud/common');
-const promisify = require('@google-cloud/promisify');
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as nodeutil from 'util';
+import * as proxyquire from 'proxyquire';
+import {ServiceObject} from '@google-cloud/common';
+import * as promisify from '@google-cloud/promisify';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll(Class) {
     if (Class.name === 'Change') {
       promisified = true;
     }
@@ -45,7 +45,7 @@ describe('Change', function() {
 
   const ZONE = {
     name: 'zone-name',
-    createChange: function() {},
+    createChange() {},
   };
 
   const CHANGE_ID = 'change-id';
@@ -56,7 +56,7 @@ describe('Change', function() {
         ServiceObject: FakeServiceObject,
       },
       '@google-cloud/promisify': fakePromisify,
-    });
+    }).Change;
   });
 
   beforeEach(function() {

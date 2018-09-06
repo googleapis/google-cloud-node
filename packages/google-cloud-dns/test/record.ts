@@ -16,14 +16,14 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const proxyquire = require('proxyquire');
-const promisify = require('@google-cloud/promisify');
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as proxyquire from 'proxyquire';
+import * as promisify from '@google-cloud/promisify';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll(Class, options) {
     if (Class.name !== 'Record') {
       return;
     }
@@ -37,7 +37,7 @@ describe('Record', function() {
   let record;
 
   const ZONE = {
-    deleteRecords: function() {},
+    deleteRecords() {},
   };
   const TYPE = 'A';
   const METADATA = {
@@ -49,7 +49,7 @@ describe('Record', function() {
   before(function() {
     Record = proxyquire('../src/record', {
       '@google-cloud/promisify': fakePromisify,
-    });
+    }).Record;
   });
 
   beforeEach(function() {

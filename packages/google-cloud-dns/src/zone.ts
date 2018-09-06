@@ -16,22 +16,21 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const {ServiceObject} = require('@google-cloud/common');
-const {paginator} = require('@google-cloud/paginator');
-const {promisifyAll} = require('@google-cloud/promisify');
-const exec = require('methmeth');
-const extend = require('extend');
+import * as arrify from 'arrify';
+import {ServiceObject} from '@google-cloud/common';
+import {paginator} from '@google-cloud/paginator';
+import {promisifyAll} from '@google-cloud/promisify';
+import * as extend from 'extend';
 const flatten = require('lodash.flatten');
-const fs = require('fs');
+import * as fs from 'fs';
 const groupBy = require('lodash.groupby');
-const is = require('is');
+import * as is from 'is';
 const prop = require('propprop');
-const teenyRequest = require('teeny-request').teenyRequest;
+import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
-const Change = require('./change');
-const Record = require('./record');
+import {Change} from './change';
+import {Record} from './record';
 
 /**
  * A Zone object is used to interact with your project's managed zone. It will
@@ -211,8 +210,8 @@ class Zone extends ServiceObject {
        */
       id: name,
       createMethod: dns.createZone.bind(dns),
-      methods: methods,
-      requestModule: teenyRequest,
+      methods,
+      requestModule: teenyRequest as any,
     });
     /**
      * @name Zone#name
@@ -337,8 +336,8 @@ class Zone extends ServiceObject {
     }
     const body = extend(
       {
-        additions: groupByType(arrify(config.add).map(exec('toJSON'))),
-        deletions: groupByType(arrify(config.delete).map(exec('toJSON'))),
+        additions: groupByType(arrify(config.add).map(x => x.toJSON())),
+        deletions: groupByType(arrify(config.delete).map(x => x.toJSON())),
       },
       config
     );
@@ -346,7 +345,7 @@ class Zone extends ServiceObject {
     delete body.delete;
     function groupByType(changes) {
       changes = groupBy(changes, 'type');
-      const changesArray = [];
+      const changesArray: Array<{}> = [];
       for (const recordType in changes) {
         const recordsByName = groupBy(changes[recordType], 'name');
         for (const recordName in recordsByName) {
@@ -431,7 +430,7 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  delete(options, callback) {
+  delete(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -624,7 +623,7 @@ class Zone extends ServiceObject {
         callback(err);
         return;
       }
-      const stringRecords = records.map(exec('toString')).join('\n');
+      const stringRecords = records.map(x => x.toString()).join('\n');
       fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {
         callback(err || null);
       });
@@ -820,7 +819,7 @@ class Zone extends ServiceObject {
    *   const records = data[0];
    * });
    */
-  getRecords(query, callback) {
+  getRecords(query, callback?) {
     const self = this;
     if (is.fn(query)) {
       callback = query;
@@ -833,7 +832,7 @@ class Zone extends ServiceObject {
         filterByTypes_[type.toUpperCase()] = true;
       });
       query = {
-        filterByTypes_: filterByTypes_,
+        filterByTypes_,
       };
     }
     const requestQuery = extend({}, query);
@@ -917,7 +916,7 @@ class Zone extends ServiceObject {
       const defaultTTL = parsedZonefile.$ttl;
       delete parsedZonefile.$ttl;
       const recordTypes = Object.keys(parsedZonefile);
-      const recordsToCreate = [];
+      const recordsToCreate: Array<{}> = [];
       recordTypes.forEach(function(recordType) {
         const recordTypeSet = arrify(parsedZonefile[recordType]);
         recordTypeSet.forEach(function(record) {
@@ -1182,4 +1181,4 @@ promisifyAll(Zone, {
  * @name module:@google-cloud/dns.Zone
  * @see Zone
  */
-module.exports = Zone;
+export {Zone};

@@ -16,29 +16,28 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const assert = require('assert');
-const extend = require('extend');
-const nodeutil = require('util');
-const proxyquire = require('proxyquire');
-const {Service} = require('@google-cloud/common');
+import * as arrify from 'arrify';
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as nodeutil from 'util';
+import * as proxyquire from 'proxyquire';
+import {Service} from '@google-cloud/common';
 const {util} = require('@google-cloud/common');
-const promisify = require('@google-cloud/promisify');
+import * as promisify from '@google-cloud/promisify';
 
 let extended = false;
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend(Class, methods) {
       if (Class.name !== 'DNS') {
         return;
       }
-
       extended = true;
       methods = arrify(methods);
       assert.strictEqual(Class.name, 'DNS');
       assert.deepStrictEqual(methods, ['getZones']);
     },
-    streamify: function(methodName) {
+    streamify(methodName) {
       return methodName;
     },
   },
@@ -52,13 +51,13 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 const fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: function() {},
+  makeAuthenticatedRequestFactory() {},
 });
 const originalFakeUtil = extend(true, {}, fakeUtil);
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll(Class, options) {
     if (Class.name !== 'DNS') {
       return;
     }
@@ -78,14 +77,16 @@ describe('DNS', function() {
   const PROJECT_ID = 'project-id';
 
   before(function() {
-    DNS = proxyquire('../', {
+    DNS = proxyquire('../src', {
       '@google-cloud/common': {
         Service: FakeService,
       },
       '@google-cloud/paginator': fakePaginator,
       '@google-cloud/promisify': fakePromisify,
-      './zone': FakeZone,
-    });
+      './zone': {
+        Zone: FakeZone,
+      }
+    }).DNS;
   });
 
   beforeEach(function() {
@@ -121,7 +122,7 @@ describe('DNS', function() {
       ]);
       assert.deepStrictEqual(
         calledWith.packageJson,
-        require('../package.json')
+        require('../../package.json')
       );
     });
   });
@@ -376,7 +377,6 @@ describe('DNS', function() {
     it('should return a Zone', function() {
       const newZoneName = 'new-zone-name';
       const newZone = dns.zone(newZoneName);
-
       assert(newZone instanceof FakeZone);
       assert.strictEqual(newZone.calledWith_[0], dns);
       assert.strictEqual(newZone.calledWith_[1], newZoneName);
