@@ -43,15 +43,14 @@
     "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha build/test && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "npm run check && eslint samples/",
     "prettier": "prettier --write samples/*.js samples/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test-no-cover": "mocha build/test",
-    "test": "npm run cover",
+    "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json",
+    "test": "nyc mocha build/test",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
