@@ -100,7 +100,7 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
     "tmp": "^0.0.33",
-    "typescript": "~2.8.0",
+    "typescript": "~3.0.0",
     "uuid": "^3.2.1"
   },
   "nyc": {
