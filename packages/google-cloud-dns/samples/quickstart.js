@@ -17,7 +17,7 @@
 
 // [START dns_quickstart]
 // Imports the Google Cloud client library
-const DNS = require('@google-cloud/dns');
+const {DNS} = require('@google-cloud/dns');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';

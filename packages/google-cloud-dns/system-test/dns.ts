@@ -23,14 +23,13 @@ const format = require('string-format-obj');
 import * as fs from 'fs';
 const tmp = require('tmp');
 import * as uuid from 'uuid';
-
-const {DNS} = require('../src');
+import {DNS} from '../src';
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
 
 // Only run the tests if there is a domain to test with.
-describe('dns', function() {
+describe('dns', () => {
   const ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
   const ZONE = dns.zone(ZONE_NAME);
 
@@ -109,14 +108,14 @@ describe('dns', function() {
     }),
   };
 
-  before(function(done) {
-    dns.getZones(function(err, zones) {
+  before(done => {
+    dns.getZones((err, zones) => {
       if (err) {
         done(err);
         return;
       }
 
-      async.each(zones, exec('delete', {force: true}), function(err) {
+      async.each(zones, exec('delete', {force: true}), err => {
         if (err) {
           done(err);
           return;
@@ -127,28 +126,28 @@ describe('dns', function() {
     });
   });
 
-  after(function(done) {
+  after(done => {
     ZONE.delete({force: true}, done);
   });
 
-  it('should return 0 or more zones', function(done) {
-    dns.getZones(function(err, zones) {
+  it('should return 0 or more zones', done => {
+    dns.getZones((err, zones) => {
       assert.ifError(err);
       assert(zones.length >= 0);
       done();
     });
   });
 
-  describe('Zones', function() {
-    it('should get the metadata for a zone', function(done) {
-      ZONE.getMetadata(function(err, metadata) {
+  describe('Zones', () => {
+    it('should get the metadata for a zone', done => {
+      ZONE.getMetadata((err, metadata) => {
         assert.ifError(err);
         assert.strictEqual(metadata.name, ZONE_NAME);
         done();
       });
     });
 
-    it('should support all types of records', function(done) {
+    it('should support all types of records', done => {
       const recordsToCreate = [
         records.a,
         records.aaaa,
@@ -166,45 +165,41 @@ describe('dns', function() {
       ZONE.replaceRecords(['ns', 'soa'], recordsToCreate, done);
     });
 
-    it('should import records from a zone file', function(done) {
-      const zoneFilename = require.resolve('../../system-test/data/zonefile.zone');
+    it('should import records from a zone file', done => {
+      const zoneFilename =
+          require.resolve('../../system-test/data/zonefile.zone');
       let zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
       zoneFileTemplate = format(zoneFileTemplate, {
         DNS_DOMAIN,
       });
 
       tmp.setGracefulCleanup();
-      tmp.file(function _tempFileCreated(err, tmpFilePath) {
+      tmp.file((err, tmpFilePath) => {
         assert.ifError(err);
-
         fs.writeFileSync(tmpFilePath, zoneFileTemplate, 'utf-8');
-
-        ZONE.empty(function(err) {
+        ZONE.empty(err => {
           assert.ifError(err);
-
-          ZONE.import(tmpFilePath, function(err) {
+          ZONE.import(tmpFilePath, err => {
             assert.ifError(err);
 
-            ZONE.getRecords(['spf', 'txt'], function(err, records) {
+            ZONE.getRecords(['spf', 'txt'], (err, records) => {
               assert.ifError(err);
 
-              const spfRecord = records.filter(function(record) {
+              const spfRecord = records.filter(record => {
                 return record.type === 'SPF';
               })[0];
 
               assert.strictEqual(
-                spfRecord.toJSON().rrdatas[0],
-                '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"'
-              );
+                  spfRecord.toJSON().rrdatas[0],
+                  '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"');
 
-              const txtRecord = records.filter(function(record) {
+              const txtRecord = records.filter(record => {
                 return record.type === 'TXT';
               })[0];
 
               assert.strictEqual(
-                txtRecord.toJSON().rrdatas[0],
-                '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"'
-              );
+                  txtRecord.toJSON().rrdatas[0],
+                  '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"');
 
               done();
             });
@@ -213,34 +208,22 @@ describe('dns', function() {
       });
     });
 
-    it('should export records to a zone file', function(done) {
+    it('should export records to a zone file', done => {
       tmp.setGracefulCleanup();
-      tmp.file(function tempFileCreated(err, tmpFilename) {
+      tmp.file((err, tmpFilename) => {
         assert.ifError(err);
-
         async.series(
-          [
-            function(next) {
-              ZONE.empty(next);
-            },
-
-            function(next) {
-              const recordsToCreate = [records.spf, records.srv];
-
-              ZONE.addRecords(recordsToCreate, next);
-            },
-
-            function(next) {
-              ZONE.export(tmpFilename, next);
-            },
-          ],
-          done
-        );
+            [
+              next => ZONE.empty(next),
+              next => ZONE.addRecords([records.spf, records.srv], next),
+              next => ZONE.export(tmpFilename, next)
+            ],
+            done);
       });
     });
 
-    describe('changes', function() {
-      it('should create a change', function(done) {
+    describe('changes', () => {
+      it('should create a change', done => {
         const record = ZONE.record('srv', {
           ttl: 3600,
           name: DNS_DOMAIN,
@@ -248,7 +231,7 @@ describe('dns', function() {
           signatureRrdatas: [],
         });
         const change = ZONE.change();
-        change.create({add: record}, function(err) {
+        change.create({add: record}, err => {
           assert.ifError(err);
           const addition = change.metadata.additions[0];
           delete addition.kind;
@@ -257,28 +240,24 @@ describe('dns', function() {
         });
       });
 
-      it('should get a list of changes', function(done) {
-        ZONE.getChanges(function(err, changes) {
+      it('should get a list of changes', done => {
+        ZONE.getChanges((err, changes) => {
           assert.ifError(err);
           assert(changes.length >= 0);
           done();
         });
       });
 
-      it('should get metadata', function(done) {
-        ZONE.getChanges(function(err, changes) {
+      it('should get metadata', done => {
+        ZONE.getChanges((err, changes) => {
           assert.ifError(err);
-
           const change = changes[0];
           const expectedMetadata = change.metadata;
-
-          change.getMetadata(function(err, metadata) {
+          change.getMetadata((err, metadata) => {
             assert.ifError(err);
-
             delete metadata.status;
             delete expectedMetadata.status;
             assert.deepStrictEqual(metadata, expectedMetadata);
-
             done();
           });
         });
@@ -286,16 +265,16 @@ describe('dns', function() {
     });
   });
 
-  describe('Records', function() {
-    it('should return 0 or more records', function(done) {
-      ZONE.getRecords(function(err, records) {
+  describe('Records', () => {
+    it('should return 0 or more records', done => {
+      ZONE.getRecords((err, records) => {
         assert.ifError(err);
         assert(records.length >= 0);
         done();
       });
     });
 
-    it('should cursor through records by type', function(done) {
+    it('should cursor through records by type', done => {
       const newRecords = [
         ZONE.record('cname', {
           ttl: 86400,
@@ -309,33 +288,29 @@ describe('dns', function() {
         }),
       ];
 
-      ZONE.replaceRecords('cname', newRecords, function(err) {
+      ZONE.replaceRecords('cname', newRecords, err => {
         assert.ifError(err);
-
-        function onRecordsReceived(err, records, nextQuery) {
+        const onRecordsReceived = (err, records, nextQuery) => {
           if (nextQuery) {
             ZONE.getRecords(nextQuery, onRecordsReceived);
             return;
           }
-
           ZONE.deleteRecords(newRecords, done);
-        }
-
+        };
         ZONE.getRecords(
-          {
-            types: 'cname',
-            maxResults: 2,
-          },
-          onRecordsReceived
-        );
+            {
+              types: 'cname',
+              maxResults: 2,
+            },
+            onRecordsReceived);
       });
     });
 
     it('should replace records', async () => {
       const name = 'test-zone-' + uuid.v4().substr(0, 18);
-
       // Do this in a new zone so no existing records are affected.
-      const [zone] = await dns.createZone(name, {dnsName: DNS_DOMAIN});
+      // tslint:disable-next-line:no-any
+      const [zone] = await (dns as any).createZone(name, {dnsName: DNS_DOMAIN});
       const [originalRecords] = await zone.getRecords('ns');
       const originalData = originalRecords[0].data;
       const newRecord = zone.record('ns', {

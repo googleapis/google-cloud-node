@@ -27,13 +27,13 @@ import {promisifyAll} from '@google-cloud/promisify';
  * @param {string} id ID of the change.
  *
  * @example
- * const DNS = require('@google-cloud/dns');
+ * const {DNS} = require('@google-cloud/dns');
  * const dns = new DNS();
  * const zone = dns.zone('zone-id');
  * const change = zone.change('change-id');
  */
 export class Change extends ServiceObject {
-  constructor(zone, id) {
+  constructor(zone, id?) {
     const methods = {
       /**
        * @typedef {array} ChangeExistsResponse
@@ -52,7 +52,7 @@ export class Change extends ServiceObject {
        * @returns {Promise<ChangeExistsResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        * const change = zone.change('change-id');
@@ -81,10 +81,10 @@ export class Change extends ServiceObject {
       /**
        * Get a change if it exists.
        *
-       * You may optionally use this to "get or create" an object by providing an
-       * object with `autoCreate` set to `true`. Any extra configuration that is
-       * normally required for the `create` method must be contained within this
-       * object as well.
+       * You may optionally use this to "get or create" an object by providing
+       * an object with `autoCreate` set to `true`. Any extra configuration that
+       * is normally required for the `create` method must be contained within
+       * this object as well.
        *
        * @method Change#get
        * @param {options} [options] Configuration object.
@@ -94,7 +94,7 @@ export class Change extends ServiceObject {
        * @returns {Promise<GetChangeResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        * const change = zone.change('change-id');
@@ -133,7 +133,7 @@ export class Change extends ServiceObject {
        * @returns {Promise<GetChangeMetadataResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        * const change = zone.change('change-id');
@@ -180,6 +180,7 @@ export class Change extends ServiceObject {
        */
       id,
       methods,
+      // tslint:disable-next-line:no-any
       requestModule: teenyRequest as any,
     });
   }
@@ -192,7 +193,7 @@ export class Change extends ServiceObject {
    * @returns {Promise<CreateChangeResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    * const change = zone.change('change-id');
@@ -218,6 +219,7 @@ export class Change extends ServiceObject {
    * });
    */
   create(config, callback?) {
+    // tslint:disable-next-line:no-any
     (this.parent as any).createChange(config, (err, change, apiResponse) => {
       if (err) {
         callback(err, null, apiResponse);

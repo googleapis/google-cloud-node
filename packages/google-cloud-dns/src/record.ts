@@ -37,7 +37,7 @@ const format = require('string-format-obj');
  *     resolvers.
  *
  * @example
- * const DNS = require('@google-cloud/dns');
+ * const {DNS} = require('@google-cloud/dns');
  * const dns = new DNS();
  * const zone = dns.zone('my-awesome-zone');
  *
@@ -103,7 +103,7 @@ export class Record {
    * @returns {Promise<DeleteRecordResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    * const record = zone.record('a', {
@@ -152,11 +152,11 @@ export class Record {
   toString() {
     const json = this.toJSON();
     return (json.rrdatas || [{}])
-      .map(function(data) {
-        json.rrdata = data;
-        return format('{name} {ttl} IN {type} {rrdata}', json);
-      })
-      .join('\n');
+        .map(data => {
+          json.rrdata = data;
+          return format('{name} {ttl} IN {type} {rrdata}', json);
+        })
+        .join('\n');
   }
   /**
    * Create a Record instance from a resource record set in a zone file.

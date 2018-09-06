@@ -25,6 +25,7 @@ import * as promisify from '@google-cloud/promisify';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
+  // tslint:disable-next-line:variable-name
   promisifyAll(Class) {
     if (Class.name === 'Change') {
       promisified = true;
@@ -39,7 +40,8 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-describe('Change', function() {
+describe('Change', () => {
+  // tslint:disable-next-line:variable-name
   let Change;
   let change;
 
@@ -50,21 +52,21 @@ describe('Change', function() {
 
   const CHANGE_ID = 'change-id';
 
-  before(function() {
+  before(() => {
     Change = proxyquire('../src/change', {
-      '@google-cloud/common': {
-        ServiceObject: FakeServiceObject,
-      },
-      '@google-cloud/promisify': fakePromisify,
-    }).Change;
+               '@google-cloud/common': {
+                 ServiceObject: FakeServiceObject,
+               },
+               '@google-cloud/promisify': fakePromisify,
+             }).Change;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     change = new Change(ZONE, CHANGE_ID);
   });
 
-  describe('instantiation', function() {
-    it('should inherit from ServiceObject', function() {
+  describe('instantiation', () => {
+    it('should inherit from ServiceObject', () => {
       assert(change instanceof ServiceObject);
 
       const calledWith = change.calledWith_[0];
@@ -79,16 +81,16 @@ describe('Change', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
   });
 
-  describe('change', function() {
-    it('should call the parent change method', function(done) {
+  describe('change', () => {
+    it('should call the parent change method', done => {
       const config = {};
 
-      change.parent.createChange = function(config_) {
+      change.parent.createChange = config_ => {
         assert.strictEqual(config, config_);
         done();
       };
@@ -96,18 +98,18 @@ describe('Change', function() {
       change.create(config, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
-        change.parent.createChange = function(config, callback) {
+      beforeEach(() => {
+        change.parent.createChange = (config, callback) => {
           callback(error, null, apiResponse);
         };
       });
 
-      it('should execute callback with error & apiResponse', function(done) {
-        change.create({}, function(err, change, apiResponse_) {
+      it('should execute callback with error & apiResponse', done => {
+        change.create({}, (err, change, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(change, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -117,37 +119,33 @@ describe('Change', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const changeInstance = {
         id: 'id',
         metadata: {},
       };
       const apiResponse = {};
 
-      beforeEach(function() {
-        change.parent.createChange = function(config, callback) {
+      beforeEach(() => {
+        change.parent.createChange = (config, callback) => {
           callback(null, changeInstance, apiResponse);
         };
       });
 
-      it('should execute callback with self & API response', function(done) {
-        change.create({}, function(err, change_, apiResponse_) {
+      it('should execute callback with self & API response', done => {
+        change.create({}, (err, change_, apiResponse_) => {
           assert.ifError(err);
-
           assert.strictEqual(change_, change);
           assert.strictEqual(apiResponse_, apiResponse);
-
           done();
         });
       });
 
-      it('should assign the ID and metadata from the change', function(done) {
-        change.create({}, function(err, change_) {
+      it('should assign the ID and metadata from the change', done => {
+        change.create({}, (err, change_) => {
           assert.ifError(err);
-
           assert.strictEqual(change_.id, changeInstance.id);
           assert.strictEqual(change_.metadata, changeInstance.metadata);
-
           done();
         });
       });

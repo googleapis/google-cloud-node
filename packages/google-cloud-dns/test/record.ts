@@ -23,6 +23,7 @@ import * as promisify from '@google-cloud/promisify';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
+  // tslint:disable-next-line:variable-name
   promisifyAll(Class, options) {
     if (Class.name !== 'Record') {
       return;
@@ -32,7 +33,8 @@ const fakePromisify = extend({}, promisify, {
   },
 });
 
-describe('Record', function() {
+describe('Record', () => {
+  // tslint:disable-next-line:variable-name
   let Record;
   let record;
 
@@ -46,43 +48,43 @@ describe('Record', function() {
     ttl: 86400,
   };
 
-  before(function() {
+  before(() => {
     Record = proxyquire('../src/record', {
-      '@google-cloud/promisify': fakePromisify,
-    }).Record;
+               '@google-cloud/promisify': fakePromisify,
+             }).Record;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     record = new Record(ZONE, TYPE, METADATA);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the zone instance', function() {
+    it('should localize the zone instance', () => {
       assert.strictEqual(record.zone_, ZONE);
     });
 
-    it('should localize the type', function() {
+    it('should localize the type', () => {
       assert.strictEqual(record.type, TYPE);
     });
 
-    it('should localize the metadata', function() {
+    it('should localize the metadata', () => {
       assert.strictEqual(record.metadata, METADATA);
     });
 
-    it('should assign the parsed metadata', function() {
+    it('should assign the parsed metadata', () => {
       const parsedMetadata = record.toJSON();
       delete parsedMetadata.rrdatas;
-
+      // tslint:disable-next-line:forin
       for (const prop in parsedMetadata) {
         assert.strictEqual(record[prop], parsedMetadata[prop]);
       }
     });
 
-    it('should re-assign rrdatas to data', function() {
+    it('should re-assign rrdatas to data', () => {
       const originalRrdatas = [];
 
       const recordThatHadRrdatas = new Record(ZONE, TYPE, {
@@ -94,8 +96,8 @@ describe('Record', function() {
     });
   });
 
-  describe('fromZoneRecord_', function() {
-    describe('a', function() {
+  describe('fromZoneRecord_', () => {
+    describe('a', () => {
       const aRecord = {
         ip: '0.0.0.0',
         name: 'name',
@@ -104,7 +106,7 @@ describe('Record', function() {
 
       const expectedData = aRecord.ip;
 
-      it('should parse an A record', function() {
+      it('should parse an A record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'a', aRecord);
 
         assert.strictEqual(record.type, 'A');
@@ -114,7 +116,7 @@ describe('Record', function() {
       });
     });
 
-    describe('aaaa', function() {
+    describe('aaaa', () => {
       const aaaaRecord = {
         ip: '2607:f8b0:400a:801::1005',
         name: 'name',
@@ -123,7 +125,7 @@ describe('Record', function() {
 
       const expectedData = aaaaRecord.ip;
 
-      it('should parse an AAAA record', function() {
+      it('should parse an AAAA record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'aaaa', aaaaRecord);
 
         assert.strictEqual(record.type, 'AAAA');
@@ -133,7 +135,7 @@ describe('Record', function() {
       });
     });
 
-    describe('cname', function() {
+    describe('cname', () => {
       const cnameRecord = {
         alias: 'example.com.',
         name: 'name',
@@ -142,7 +144,7 @@ describe('Record', function() {
 
       const expectedData = cnameRecord.alias;
 
-      it('should parse a CNAME record', function() {
+      it('should parse a CNAME record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'cname', cnameRecord);
 
         assert.strictEqual(record.type, 'CNAME');
@@ -152,7 +154,7 @@ describe('Record', function() {
       });
     });
 
-    describe('mx', function() {
+    describe('mx', () => {
       const mxRecord = {
         preference: 0,
         host: 'mail',
@@ -162,7 +164,7 @@ describe('Record', function() {
 
       const expectedData = mxRecord.preference + ' ' + mxRecord.host;
 
-      it('should parse an MX record', function() {
+      it('should parse an MX record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'mx', mxRecord);
 
         assert.strictEqual(record.type, 'MX');
@@ -172,7 +174,7 @@ describe('Record', function() {
       });
     });
 
-    describe('ns', function() {
+    describe('ns', () => {
       const nsRecord = {
         host: 'example.com',
         name: 'name',
@@ -181,7 +183,7 @@ describe('Record', function() {
 
       const expectedData = nsRecord.host;
 
-      it('should parse an NS record', function() {
+      it('should parse an NS record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'ns', nsRecord);
 
         assert.strictEqual(record.type, 'NS');
@@ -191,7 +193,7 @@ describe('Record', function() {
       });
     });
 
-    describe('soa', function() {
+    describe('soa', () => {
       const soaRecord = {
         mname: 'ns1.nameserver.net.',
         rname: 'hostmaster.mydomain.com.',
@@ -214,7 +216,7 @@ describe('Record', function() {
         soaRecord.minimum,
       ].join(' ');
 
-      it('should parse an SOA record', function() {
+      it('should parse an SOA record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'soa', soaRecord);
 
         assert.strictEqual(record.type, 'SOA');
@@ -224,7 +226,7 @@ describe('Record', function() {
       });
     });
 
-    describe('spf', function() {
+    describe('spf', () => {
       const spfRecord = {
         data: '"v=spf1" "mx:example.com"',
         name: 'name',
@@ -233,7 +235,7 @@ describe('Record', function() {
 
       const expectedData = spfRecord.data;
 
-      it('should parse an SPF record', function() {
+      it('should parse an SPF record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'spf', spfRecord);
 
         assert.strictEqual(record.type, 'SPF');
@@ -243,7 +245,7 @@ describe('Record', function() {
       });
     });
 
-    describe('srv', function() {
+    describe('srv', () => {
       const srvRecord = {
         priority: 10,
         weight: 0,
@@ -260,7 +262,7 @@ describe('Record', function() {
         srvRecord.target,
       ].join(' ');
 
-      it('should parse an SRV record', function() {
+      it('should parse an SRV record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'srv', srvRecord);
 
         assert.strictEqual(record.type, 'SRV');
@@ -270,7 +272,7 @@ describe('Record', function() {
       });
     });
 
-    describe('txt', function() {
+    describe('txt', () => {
       const txtRecord = {
         txt: 'txt-record-txt',
         name: 'name',
@@ -279,7 +281,7 @@ describe('Record', function() {
 
       const expectedData = txtRecord.txt;
 
-      it('should parse a TXT record', function() {
+      it('should parse a TXT record', () => {
         const record = Record.fromZoneRecord_(ZONE, 'txt', txtRecord);
 
         assert.strictEqual(record.type, 'TXT');
@@ -290,19 +292,18 @@ describe('Record', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call zone.deleteRecords', function(done) {
-      record.zone_.deleteRecords = function(records, callback) {
+  describe('delete', () => {
+    it('should call zone.deleteRecords', done => {
+      record.zone_.deleteRecords = (records, callback) => {
         assert.strictEqual(records, record);
         callback();
       };
-
       record.delete(done);
     });
   });
 
-  describe('toJSON', function() {
-    it('should format the data for the API', function() {
+  describe('toJSON', () => {
+    it('should format the data for the API', () => {
       const expectedRecord = extend({}, METADATA, {
         type: 'A',
         rrdatas: METADATA.data,
@@ -313,14 +314,14 @@ describe('Record', function() {
     });
   });
 
-  describe('toString', function() {
-    it('should format the data for a zonefile', function() {
+  describe('toString', () => {
+    it('should format the data for a zonefile', () => {
       const jsonRecord = extend({}, METADATA, {
         type: TYPE,
         rrdatas: ['example.com.', 'example2.com.'],
       });
 
-      record.toJSON = function() {
+      record.toJSON = () => {
         return jsonRecord;
       };
 

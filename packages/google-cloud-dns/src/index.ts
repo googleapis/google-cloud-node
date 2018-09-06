@@ -17,22 +17,24 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import { Service } from '@google-cloud/common';
-import { paginator } from '@google-cloud/paginator';
-import { promisifyAll } from '@google-cloud/promisify';
+import {Service} from '@google-cloud/common';
+import {paginator} from '@google-cloud/paginator';
+import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
-import { teenyRequest } from 'teeny-request';
+import {teenyRequest} from 'teeny-request';
 
-import { Zone } from './zone';
+import {Zone} from './zone';
 
 /**
  * @typedef {object} ClientConfig
  * @property {string} [projectId] The project ID from the Google Developer's
  *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
  *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
- *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
- *     your project ID will be detected automatically.
+ *     an environment which supports {@link
+ * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+ * Application Default Credentials}, your project ID will be detected
+ * automatically.
  * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
  *     downloaded from the Google Developers Console. If you provide a path to a
  *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
@@ -64,15 +66,16 @@ import { Zone } from './zone';
  * @param {ClientConfig} [options] Configuration options.
  *
  * @example <caption>Import the client library</caption>
- * const DNS = require('@google-cloud/dns');
+ * const {DNS} = require('@google-cloud/dns');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const dns = new DNS();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const dns = new DNS();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const dns = new DNS({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const dns = new DNS({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
@@ -81,7 +84,7 @@ import { Zone } from './zone';
  */
 class DNS extends Service {
   getZonesStream;
-  constructor(options) {
+  constructor(options?) {
     options = options || {};
     const config = {
       baseUrl: 'https://www.googleapis.com/dns/v1',
@@ -90,6 +93,7 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/cloud-platform',
       ],
       packageJson: require('../../package.json'),
+      // tslint:disable-next-line:no-any
       requestModule: teenyRequest as any,
     };
     super(config, options);
@@ -103,7 +107,7 @@ class DNS extends Service {
      * @returns {ReadableStream} A readable stream that emits {@link Zone} instances.
      *
      * @example
-     * const DNS = require('@google-cloud/dns');
+     * const {DNS} = require('@google-cloud/dns');
      * const dns = new DNS();
      *
      * dns.getZonesStream()
@@ -111,7 +115,7 @@ class DNS extends Service {
      *   .on('data', function(zone) {
      *     // zone is a Zone object.
      *   })
-     *   .on('end', function() {
+     *   .on('end', () => {
      *     // All zones retrieved.
      *   });
      *
@@ -160,7 +164,7 @@ class DNS extends Service {
    * @see Zone#create
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
    * const config = {
@@ -168,7 +172,7 @@ class DNS extends Service {
    *   description: 'This zone is awesome!'
    * };
    *
-   * dns.createZone('my-awesome-zone', config, function(err, zone, apiResponse) {
+   * dns.createZone('my-awesome-zone', config, (err, zone, apiResponse) => {
    *   if (!err) {
    *     // The zone was created successfully.
    *   }
@@ -177,13 +181,12 @@ class DNS extends Service {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * dns.createZone('my-awesome-zone', config).then(function(data) {
+   * dns.createZone('my-awesome-zone', config).then((data) => {
    *   const zone = data[0];
    *   const apiResponse = data[1];
    * });
    */
-  createZone(name, config, callback) {
-    const self = this;
+  createZone(name, config, callback?) {
     if (!name) {
       throw new Error('A zone name is required.');
     }
@@ -194,21 +197,20 @@ class DNS extends Service {
     // Required by the API.
     config.description = config.description || '';
     this.request(
-      {
-        method: 'POST',
-        uri: '/managedZones',
-        json: config,
-      },
-      function (err, resp) {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
-        const zone = self.zone(resp.name);
-        zone.metadata = resp;
-        callback(null, zone, resp);
-      }
-    );
+        {
+          method: 'POST',
+          uri: '/managedZones',
+          json: config,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
+          const zone = this.zone(resp.name);
+          zone.metadata = resp;
+          callback(null, zone, resp);
+        });
   }
   /**
    * Query object for listing zones.
@@ -243,48 +245,46 @@ class DNS extends Service {
    * @returns {Promise<GetZonesResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
-   * dns.getZones(function(err, zones, apiResponse) {});
+   * dns.getZones((err, zones, apiResponse) {});
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * dns.getZones().then(function(data) {
+   * dns.getZones().then(data => {
    *   const zones = data[0];
    * });
    */
-  getZones(query, callback) {
-    const self = this;
+  getZones(query, callback?) {
     if (is.fn(query)) {
       callback = query;
       query = {};
     }
     this.request(
-      {
-        uri: '/managedZones',
-        qs: query,
-      },
-      function (err, resp) {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
-        const zones = arrify(resp.managedZones).map(function (zone) {
-          const zoneInstance = self.zone(zone.name);
-          zoneInstance.metadata = zone;
-          return zoneInstance;
-        });
-        let nextQuery = null;
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, query, {
-            pageToken: resp.nextPageToken,
+        {
+          uri: '/managedZones',
+          qs: query,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
+          const zones = arrify(resp.managedZones).map(zone => {
+            const zoneInstance = this.zone(zone.name);
+            zoneInstance.metadata = zone;
+            return zoneInstance;
           });
-        }
-        callback(null, zones, nextQuery, resp);
-      }
-    );
+          let nextQuery = null;
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, query, {
+              pageToken: resp.nextPageToken,
+            });
+          }
+          callback(null, zones, nextQuery, resp);
+        });
   }
   /**
    * Get a reference to a Zone.
@@ -296,7 +296,7 @@ class DNS extends Service {
    * @throws {error} If a zone name is not provided.
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
    * const zone = dns.zone('my-zone');
@@ -331,7 +331,7 @@ promisifyAll(DNS, {
  * @see Zone
  * @type {Constructor}
  */
-export { Zone };
+export {Zone};
 
 /**
  * The default export of the `@google-cloud/dns` package is the {@link DNS}
@@ -343,23 +343,25 @@ export { Zone };
  * @module {DNS} @google-cloud/dns
  * @alias nodejs-dns
  *
- * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/dns
+ * @example <caption>Install the client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
+ * @google-cloud/dns
  *
  * @example <caption>Import the client library</caption>
- * const DNS = require('@google-cloud/dns');
+ * const {DNS} = require('@google-cloud/dns');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const dns = new DNS();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const dns = new DNS();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const dns = new DNS({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const dns = new DNS({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:dns_quickstart
  * Full quickstart example:
  */
-export { DNS };
+export {DNS};

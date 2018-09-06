@@ -25,7 +25,6 @@ const flatten = require('lodash.flatten');
 import * as fs from 'fs';
 const groupBy = require('lodash.groupby');
 import * as is from 'is';
-const prop = require('propprop');
 import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
@@ -40,7 +39,7 @@ import {Record} from './record';
  * @class
  *
  * @example
- * const DNS = require('@google-cloud/dns');
+ * const {DNS} = require('@google-cloud/dns');
  * const dns = new DNS();
  *
  * const zone = dns.zone('zone-id');
@@ -57,7 +56,7 @@ class Zone extends ServiceObject {
        * @returns {Promise<CreateZoneResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        *
        * const config = {
@@ -97,11 +96,11 @@ class Zone extends ServiceObject {
        * @returns {Promise<ZoneExistsResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        *
-       * zone.exists(function(err, exists) {});
+       * zone.exists((err, exists) => {});
        *
        * //-
        * // If the callback is omitted, we'll return a Promise.
@@ -125,10 +124,10 @@ class Zone extends ServiceObject {
       /**
        * Get a zone if it exists.
        *
-       * You may optionally use this to "get or create" an object by providing an
-       * object with `autoCreate` set to `true`. Any extra configuration that is
-       * normally required for the `create` method must be contained within this
-       * object as well.
+       * You may optionally use this to "get or create" an object by providing
+       * an object with `autoCreate` set to `true`. Any extra configuration that
+       * is normally required for the `create` method must be contained within
+       * this object as well.
        *
        * @method Zone#get
        * @param {options} [options] Configuration object.
@@ -138,18 +137,18 @@ class Zone extends ServiceObject {
        * @returns {Promise<GetZoneResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        *
-       * zone.get(function(err, zone, apiResponse) {
+       * zone.get((err, zone, apiResponse) => {
        *   // `zone.metadata` has been populated.
        * });
        *
        * //-
        * // If the callback is omitted, we'll return a Promise.
        * //-
-       * zone.get().then((data) => {
+       * zone.get().then(data => {
        *   const zone = data[0];
        *   const apiResponse = data[1];
        * });
@@ -176,11 +175,11 @@ class Zone extends ServiceObject {
        * @returns {Promise<GetZoneMetadataResponse>}
        *
        * @example
-       * const DNS = require('@google-cloud/dns');
+       * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
        * const zone = dns.zone('zone-id');
        *
-       * zone.getMetadata(function(err, metadata, apiResponse) {});
+       * zone.getMetadata((err, metadata, apiResponse) => {});
        *
        * //-
        * // If the callback is omitted, we'll return a Promise.
@@ -211,6 +210,7 @@ class Zone extends ServiceObject {
       id: name,
       createMethod: dns.createZone.bind(dns),
       methods,
+      // tslint:disable-next-line:no-any
       requestModule: teenyRequest as any,
     });
     /**
@@ -242,11 +242,10 @@ class Zone extends ServiceObject {
    */
   addRecords(records, callback) {
     this.createChange(
-      {
-        add: records,
-      },
-      callback
-    );
+        {
+          add: records,
+        },
+        callback);
   }
   /**
    * Create a reference to a {@link Change} object in this zone.
@@ -255,12 +254,12 @@ class Zone extends ServiceObject {
    * @returns {Change}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    * const change = zone.change('change-id');
    */
-  change(id) {
+  change(id?) {
     return new Change(this, id);
   }
   /**
@@ -294,7 +293,7 @@ class Zone extends ServiceObject {
    * @returns {Promise<CreateChangeResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    *
@@ -315,7 +314,7 @@ class Zone extends ServiceObject {
    *   delete: oldARecord
    * };
    *
-   * zone.createChange(config, function(err, change, apiResponse) {
+   * zone.createChange(config, (err, change, apiResponse) => {
    *   if (!err) {
    *     // The change was created successfully.
    *   }
@@ -330,52 +329,51 @@ class Zone extends ServiceObject {
    * });
    */
   createChange(config, callback) {
-    const self = this;
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
     }
-    const body = extend(
-      {
-        additions: groupByType(arrify(config.add).map(x => x.toJSON())),
-        deletions: groupByType(arrify(config.delete).map(x => x.toJSON())),
-      },
-      config
-    );
-    delete body.add;
-    delete body.delete;
-    function groupByType(changes) {
+    const groupByType = changes => {
       changes = groupBy(changes, 'type');
       const changesArray: Array<{}> = [];
+      // tslint:disable-next-line:forin
       for (const recordType in changes) {
         const recordsByName = groupBy(changes[recordType], 'name');
+        // tslint:disable-next-line:forin
         for (const recordName in recordsByName) {
           const records = recordsByName[recordName];
           const templateRecord = extend({}, records[0]);
           if (records.length > 1) {
             // Combine the `rrdatas` values from all records of the same type.
-            templateRecord.rrdatas = flatten(records.map(prop('rrdatas')));
+            templateRecord.rrdatas = flatten(records.map(x => x.rrdatas));
           }
           changesArray.push(templateRecord);
         }
       }
       return changesArray;
-    }
+    };
+    const body = extend(
+        {
+          additions: groupByType(arrify(config.add).map(x => x.toJSON())),
+          deletions: groupByType(arrify(config.delete).map(x => x.toJSON())),
+        },
+        config);
+    delete body.add;
+    delete body.delete;
     this.request(
-      {
-        method: 'POST',
-        uri: '/changes',
-        json: body,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
-        const change = self.change(resp.id);
-        change.metadata = resp;
-        callback(null, change, resp);
-      }
-    );
+        {
+          method: 'POST',
+          uri: '/changes',
+          json: body,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
+          const change = this.change(resp.id);
+          change.metadata = resp;
+          callback(null, change, resp);
+        });
   }
   /**
    * @typedef {array} DeleteZoneResponse
@@ -402,11 +400,11 @@ class Zone extends ServiceObject {
    * @returns {Promise<DeleteZoneResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    *
-   * zone.delete(function(err, apiResponse) {
+   * zone.delete((err, apiResponse) => {
    *   if (!err) {
    *     // The zone is now deleted.
    *   }
@@ -417,7 +415,7 @@ class Zone extends ServiceObject {
    * //-
    * zone.delete({
    *   force: true
-   * }, function(err, apiResponse) {
+   * }, (err, apiResponse) => {
    *   if (!err) {
    *     // The zone is now deleted.
    *   }
@@ -426,7 +424,7 @@ class Zone extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * zone.delete().then((data) => {
+   * zone.delete().then(data => {
    *   const apiResponse = data[0];
    * });
    */
@@ -465,14 +463,14 @@ class Zone extends ServiceObject {
    * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
    *
    * @param {Record|Record[]|string} record If given a string, it is interpreted
-   *     as a record type. All records that match that type will be retrieved and
-   *     then deleted. You can also provide a {@link Record} object or array of
+   *     as a record type. All records that match that type will be retrieved
+   * and then deleted. You can also provide a {@link Record} object or array of
    *     {@link Record} objects.
    * @param {ZoneDeleteRecordsCallback} [callback] Callback function.
    * @returns {Promise<ZoneDeleteRecordsResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    *
@@ -482,7 +480,7 @@ class Zone extends ServiceObject {
    *   ttl: 86400
    * });
    *
-   * const callback = function(err, change, apiResponse) {
+   * const callback = (err, change, apiResponse) => {
    *   if (!err) {
    *     // Delete change modification was created.
    *   }
@@ -511,7 +509,8 @@ class Zone extends ServiceObject {
    * ], callback);
    *
    * //-
-   * // Possibly a simpler way to perform the above change is deleting records by
+   * // Possibly a simpler way to perform the above change is deleting records
+   * by
    * // type.
    * //-
    * zone.deleteRecords('ns', callback);
@@ -536,11 +535,10 @@ class Zone extends ServiceObject {
       return;
     }
     this.createChange(
-      {
-        delete: records,
-      },
-      callback
-    );
+        {
+          delete: records,
+        },
+        callback);
   }
   /**
    * @typedef {array} ZoneEmptyResponse
@@ -565,19 +563,18 @@ class Zone extends ServiceObject {
    * @returns {Promise<ZoneEmptyResponse>}
    */
   empty(callback) {
-    const self = this;
-    this.getRecords(function(err, records) {
+    this.getRecords((err, records) => {
       if (err) {
         callback(err);
         return;
       }
-      const recordsToDelete = records.filter(function(record) {
+      const recordsToDelete = records.filter(record => {
         return record.type !== 'NS' && record.type !== 'SOA';
       });
       if (recordsToDelete.length === 0) {
         callback();
       } else {
-        self.deleteRecords(recordsToDelete, callback);
+        this.deleteRecords(recordsToDelete, callback);
       }
     });
   }
@@ -600,13 +597,13 @@ class Zone extends ServiceObject {
    * @returns {Promise<ZoneExportResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    *
    * const zoneFilename = '/Users/stephen/zonefile.zone';
    *
-   * zone.export(zoneFilename, function(err) {
+   * zone.export(zoneFilename, err => {
    *   if (!err) {
    *     // The zone file was created successfully.
    *   }
@@ -615,16 +612,16 @@ class Zone extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * zone.export(zoneFilename).then(function() {});
+   * zone.export(zoneFilename).then(() => {});
    */
   export(localPath, callback) {
-    this.getRecords(function(err, records) {
+    this.getRecords((err, records) => {
       if (err) {
         callback(err);
         return;
       }
       const stringRecords = records.map(x => x.toString()).join('\n');
-      fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {
+      fs.writeFile(localPath, stringRecords, 'utf-8', err => {
         callback(err || null);
       });
     });
@@ -664,18 +661,17 @@ class Zone extends ServiceObject {
    * @returns {Promise<GetChangesResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
-   * const callback = function(err, changes, nextQuery, apiResponse) {
+   * const callback = (err, changes, nextQuery, apiResponse) => {
    *   // The `metadata` property is populated for you with the metadata at the
    *   // time of fetching.
    *   changes[0].metadata;
    *
    *   // However, in cases where you are concerned the metadata could have
    *   // changed, use the `getMetadata` method.
-   *   changes[0].getMetadata(function(err, metadata) {});
-
+   *   changes[0].getMetadata((err, metadata) => {});
    *   if (nextQuery) {
    *     // nextQuery will be non-null if there are more results.
    *     zone.getChanges(nextQuery, callback);
@@ -693,8 +689,7 @@ class Zone extends ServiceObject {
    *   const changes = data[0];
    * });
    */
-  getChanges(query, callback) {
-    const self = this;
+  getChanges(query, callback?) {
     if (is.fn(query)) {
       callback = query;
       query = {};
@@ -704,29 +699,28 @@ class Zone extends ServiceObject {
       delete query.sort;
     }
     this.request(
-      {
-        uri: '/changes',
-        qs: query,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
-        const changes = (resp.changes || []).map(function(change) {
-          const changeInstance = self.change(change.id);
-          changeInstance.metadata = change;
-          return changeInstance;
-        });
-        let nextQuery = null;
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, query, {
-            pageToken: resp.nextPageToken,
+        {
+          uri: '/changes',
+          qs: query,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
+          const changes = (resp.changes || []).map(change => {
+            const changeInstance = this.change(change.id);
+            changeInstance.metadata = change;
+            return changeInstance;
           });
-        }
-        callback(null, changes, nextQuery, resp);
-      }
-    );
+          let nextQuery = null;
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, query, {
+              pageToken: resp.nextPageToken,
+            });
+          }
+          callback(null, changes, nextQuery, resp);
+        });
   }
   /**
    * Query object for listing records.
@@ -764,10 +758,10 @@ class Zone extends ServiceObject {
    * @returns {Promise<GetRecordsResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
-   * const callback = function(err, records, nextQuery, apiResponse) {
+   * const callback = (err, records, nextQuery, apiResponse) => {
    *   if (!err) {
    *     // records is an array of Record objects.
    *   }
@@ -797,7 +791,7 @@ class Zone extends ServiceObject {
    * // If you only want records of a specific type or types, provide them in
    * // place of the query object.
    * //-
-   * zone.getRecords('ns', function(err, records) {
+   * zone.getRecords('ns', (err, records) => {
    *   if (!err) {
    *     // records is an array of NS Record objects in your zone.
    *   }
@@ -806,7 +800,7 @@ class Zone extends ServiceObject {
    * //-
    * // You can also specify multiple record types.
    * //-
-   * zone.getRecords(['ns', 'a', 'cname'], function(err, records) {
+   * zone.getRecords(['ns', 'a', 'cname'], (err, records) => {
    *   if (!err) {
    *     // records is an array of NS, A, and CNAME records in your zone.
    *   }
@@ -815,12 +809,11 @@ class Zone extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * zone.getRecords(query).then((data) => {
+   * zone.getRecords(query).then(data => {
    *   const records = data[0];
    * });
    */
   getRecords(query, callback?) {
-    const self = this;
     if (is.fn(query)) {
       callback = query;
       query = {};
@@ -828,7 +821,7 @@ class Zone extends ServiceObject {
     if (is.string(query) || is.array(query)) {
       const filterByTypes_ = {};
       // For faster lookups, store the record types the user wants in an object.
-      arrify(query).forEach(function(type) {
+      arrify(query).forEach(type => {
         filterByTypes_[type.toUpperCase()] = true;
       });
       query = {
@@ -838,32 +831,31 @@ class Zone extends ServiceObject {
     const requestQuery = extend({}, query);
     delete requestQuery.filterByTypes_;
     this.request(
-      {
-        uri: '/rrsets',
-        qs: requestQuery,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
-        let records = (resp.rrsets || []).map(function(record) {
-          return self.record(record.type, record);
+        {
+          uri: '/rrsets',
+          qs: requestQuery,
+        },
+        (err, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
+          let records = (resp.rrsets || []).map(record => {
+            return this.record(record.type, record);
+          });
+          if (query.filterByTypes_) {
+            records = records.filter(record => {
+              return query.filterByTypes_[record.type];
+            });
+          }
+          let nextQuery = null;
+          if (resp.nextPageToken) {
+            nextQuery = extend({}, query, {
+              pageToken: resp.nextPageToken,
+            });
+          }
+          callback(null, records, nextQuery, resp);
         });
-        if (query.filterByTypes_) {
-          records = records.filter(function(record) {
-            return query.filterByTypes_[record.type];
-          });
-        }
-        let nextQuery = null;
-        if (resp.nextPageToken) {
-          nextQuery = extend({}, query, {
-            pageToken: resp.nextPageToken,
-          });
-        }
-        callback(null, records, nextQuery, resp);
-      }
-    );
   }
   /**
    * @typedef {array} ZoneImportResponse
@@ -885,13 +877,13 @@ class Zone extends ServiceObject {
    * @param {ZoneImportCallback} [callback] Callback function.
    * @returns {Promise<ZoneImportResponse>}
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
    *
    * const zoneFilename = '/Users/dave/zonefile.zone';
    *
-   * zone.import(zoneFilename, function(err, change, apiResponse) {
+   * zone.import(zoneFilename, (err, change, apiResponse) => {
    *   if (!err) {
    *     // The change was created successfully.
    *   }
@@ -900,33 +892,30 @@ class Zone extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * zone.import(zoneFilename).then((data) => {
+   * zone.import(zoneFilename).then(data => {
    *   const change = data[0];
    *   const apiResponse = data[1];
    * });
    */
   import(localPath, callback) {
-    const self = this;
-    fs.readFile(localPath, 'utf-8', function(err, file) {
-      if (err) {
-        callback(err);
-        return;
-      }
-      const parsedZonefile = zonefile.parse(file);
-      const defaultTTL = parsedZonefile.$ttl;
-      delete parsedZonefile.$ttl;
-      const recordTypes = Object.keys(parsedZonefile);
-      const recordsToCreate: Array<{}> = [];
-      recordTypes.forEach(function(recordType) {
-        const recordTypeSet = arrify(parsedZonefile[recordType]);
-        recordTypeSet.forEach(function(record) {
-          record.ttl = record.ttl || defaultTTL;
-          recordsToCreate.push(
-            Record.fromZoneRecord_(self, recordType, record)
-          );
-        });
+    fs.readFile(localPath, 'utf-8', (err, file) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    const parsedZonefile = zonefile.parse(file);
+    const defaultTTL = parsedZonefile.$ttl;
+    delete parsedZonefile.$ttl;
+    const recordTypes = Object.keys(parsedZonefile);
+    const recordsToCreate: Array<{}> = [];
+    recordTypes.forEach(recordType => {
+      const recordTypeSet = arrify(parsedZonefile[recordType]);
+      recordTypeSet.forEach(record => {
+        record.ttl = record.ttl || defaultTTL;
+        recordsToCreate.push(Record.fromZoneRecord_(this, recordType, record));
       });
-      self.addRecords(recordsToCreate, callback);
+    });
+    this.addRecords(recordsToCreate, callback);
     });
   }
   /**
@@ -950,7 +939,7 @@ class Zone extends ServiceObject {
    * @returns {Record}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
    * const zone = dns.zone('zone-id');
@@ -979,7 +968,7 @@ class Zone extends ServiceObject {
    * zone.createChange({
    *   add: newARecord,
    *   delete: oldARecord
-   * }, function(err, change, apiResponse) {});
+   * }, (err, change, apiResponse) => {});
    */
   record(type, metadata) {
     return new Record(this, type, metadata);
@@ -1011,7 +1000,7 @@ class Zone extends ServiceObject {
    * @returns {Promise<ZoneReplaceRecordsResponse>}
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    *
    * const zone = dns.zone('zone-id');
@@ -1033,7 +1022,7 @@ class Zone extends ServiceObject {
    *   newNs2Record
    * ];
    *
-   * zone.replaceRecords('ns', newNsRecords, function(err, change, apiResponse) {
+   * zone.replaceRecords('ns', newNsRecords, (err, change, apiResponse) => {
    *   if (!err) {
    *     // The change was created successfully.
    *   }
@@ -1042,25 +1031,23 @@ class Zone extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * zone.replaceRecords('ns', newNsRecords).then((data) => {
+   * zone.replaceRecords('ns', newNsRecords).then(data => {
    *   const change = data[0];
    *   const apiResponse = data[1];
    * });
    */
   replaceRecords(recordType, newRecords, callback) {
-    const self = this;
-    this.getRecords(recordType, function(err, recordsToDelete) {
-      if (err) {
-        callback(err);
-        return;
-      }
-      self.createChange(
+    this.getRecords(recordType, (err, recordsToDelete) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    this.createChange(
         {
           add: newRecords,
           delete: recordsToDelete,
         },
-        callback
-      );
+        callback);
     });
   }
   /**
@@ -1072,27 +1059,26 @@ class Zone extends ServiceObject {
    * @param {function} callback Callback function.
    *
    * @example
-   * const DNS = require('@google-cloud/dns');
+   * const {DNS} = require('@google-cloud/dns');
    * const dns = new DNS();
    * const zone = dns.zone('zone-id');
-   * zone.deleteRecordsByType_(['NS', 'A'], function(err, change, apiResponse) {
+   * zone.deleteRecordsByType_(['NS', 'A'], (err, change, apiResponse) => {
    *   if (!err) {
    *     // The change was created successfully.
    *   }
    * });
    */
   deleteRecordsByType_(recordTypes, callback) {
-    const self = this;
-    this.getRecords(recordTypes, function(err, records) {
-      if (err) {
-        callback(err);
-        return;
-      }
-      if (records.length === 0) {
-        callback();
-        return;
-      }
-      self.deleteRecords(records, callback);
+    this.getRecords(recordTypes, (err, records) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    if (records.length === 0) {
+      callback();
+      return;
+    }
+    this.deleteRecords(records, callback);
     });
   }
 }
@@ -1109,10 +1095,10 @@ class Zone extends ServiceObject {
  * @example
  * zone.getChangesStream()
  *   .on('error', console.error)
- *   .on('data', function(change) {
+ *   .on('data', change => {
  *     // change is a Change object.
  *   })
- *   .on('end', function() {
+ *   .on('end', () => {
  *     // All changes retrieved.
  *   });
  *
@@ -1127,58 +1113,58 @@ class Zone extends ServiceObject {
  */
 Zone.prototype.getChangesStream = paginator.streamify('getChanges');
 
-/**
- * Get the list of {module:dns/record} objects for this zone as a readable
- * object stream.
- *
- * @method Zone#getRecordsStream
- * @param {GetRecordsRequest} [query] Query object for listing records.
- * @returns {ReadableStream} A readable stream that emits {@link Record}
- *     instances.
- *
- * @example
- * const DNS = require('@google-cloud/dns');
- * const dns = new DNS();
- * const zone = dns.zone('zone-id');
- *
- * zone.getRecordsStream()
- *   .on('error', console.error)
- *   .on('data', function(record) {
- *     // record is a Record object.
- *   })
- *   .on('end', function() {
- *     // All records retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getRecordsStream()
- *   .on('data', function(change) {
- *     this.end();
- *   });
- */
-Zone.prototype.getRecordsStream = paginator.streamify('getRecords');
+  /**
+   * Get the list of {module:dns/record} objects for this zone as a readable
+   * object stream.
+   *
+   * @method Zone#getRecordsStream
+   * @param {GetRecordsRequest} [query] Query object for listing records.
+   * @returns {ReadableStream} A readable stream that emits {@link Record}
+   *     instances.
+   *
+   * @example
+   * const {DNS} = require('@google-cloud/dns');
+   * const dns = new DNS();
+   * const zone = dns.zone('zone-id');
+   *
+   * zone.getRecordsStream()
+   *   .on('error', console.error)
+   *   .on('data', record => {
+   *     // record is a Record object.
+   *   })
+   *   .on('end', () => {
+   *     // All records retrieved.
+   *   });
+   *
+   * //-
+   * // If you anticipate many results, you can end a stream early to prevent
+   * // unnecessary processing and API requests.
+   * //-
+   * zone.getRecordsStream()
+   *   .on('data', function(change) {
+   *     this.end();
+   *   });
+   */
+  Zone.prototype.getRecordsStream = paginator.streamify('getRecords');
 
-/*! Developer Documentation
- *
- * These methods can be auto-paginated.
- */
-paginator.extend(Zone, ['getChanges', 'getRecords']);
+  /*! Developer Documentation
+   *
+   * These methods can be auto-paginated.
+   */
+  paginator.extend(Zone, ['getChanges', 'getRecords']);
 
-/*! Developer Documentation
- *
- * All async methods (except for streams) will return a Promise in the event
- * that a callback is omitted.
- */
-promisifyAll(Zone, {
-  exclude: ['change', 'record'],
-});
+  /*! Developer Documentation
+   *
+   * All async methods (except for streams) will return a Promise in the event
+   * that a callback is omitted.
+   */
+  promisifyAll(Zone, {
+    exclude: ['change', 'record'],
+  });
 
-/**
- * Reference to the {@link Zone} class.
- * @name module:@google-cloud/dns.Zone
- * @see Zone
- */
-export {Zone};
+  /**
+   * Reference to the {@link Zone} class.
+   * @name module:@google-cloud/dns.Zone
+   * @see Zone
+   */
+  export {Zone};
