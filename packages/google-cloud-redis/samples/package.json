@@ -1,0 +1,19 @@
+{
+  "description": "Samples for the @google-cloud/redis npm module.",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "googleapis/nodejs-redis",
+  "private": true,
+  "scripts": {
+    "test": "mocha system-test"
+  },
+  "dependencies": {
+    "@google-cloud/redis": "*"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
