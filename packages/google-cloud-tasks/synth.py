@@ -22,17 +22,21 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-version = 'v2beta2'
-library = gapic.node_library('tasks', version,
-  config_path='artman_cloudtasks.yaml'
-)
-s.copy(library, excludes=['README.md', 'package.json'])
-
 common_templates = gcp.CommonTemplates()
+
+versions = ["v2beta2", "v2beta3"]
+
+for version in versions:
+    library = gapic.node_library(
+        "tasks", version, config_path=f"artman_cloudtasks_{version}.yaml"
+    )
+
+    s.copy(library, excludes=["README.md", "package.json", "src/index.js"])
+
 templates = common_templates.node_library()
 s.copy(templates)
 
 # Node.js specific cleanup
-subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(["npm", "install"])
+subprocess.run(["npm", "run", "prettier"])
+subprocess.run(["npm", "run", "lint"])
