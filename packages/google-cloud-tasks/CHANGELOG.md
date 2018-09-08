@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## v0.2.0
+
+### New Features
+- v2beta3 support for Node.js (#62)
+
+### Internal / Testing Changes
+- Retry npm install in CI (#63)
+
 ## v0.1.1
 
 ### Minor updates

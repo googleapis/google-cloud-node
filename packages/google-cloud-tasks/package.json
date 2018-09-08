@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
