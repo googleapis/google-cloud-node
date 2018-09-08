@@ -12,25 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This script is used to synthesize generated parts of this library."""
-
 import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 
 gapic = gcp.GAPICGenerator()
-common_templates = gcp.CommonTemplates()
-
-
 version = 'v1'
 library = gapic.node_library('dataproc', version)
 s.copy(library, excludes=['README.md', 'package.json'])
 
-templates = common_templates.node_library(package_name="@google-cloud/dataproc")
+common_templates = gcp.CommonTemplates()
+templates = common_templates.node_library()
 s.copy(templates)
 
-
-# Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
