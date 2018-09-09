@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
-import {Service} from '@google-cloud/common';
+import {Service, ServiceConfig, ServiceOptions} from '@google-cloud/common';
 import {util} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 
@@ -44,12 +44,13 @@ const fakePaginator = {
   },
 };
 
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
+class FakeService extends Service {
+  calledWith_: IArguments;
+  constructor(config: ServiceConfig, options?: ServiceOptions) {
+    super(config, options);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeService, Service);
 
 const fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory() {},
@@ -68,8 +69,11 @@ const fakePromisify = extend({}, promisify, {
   },
 });
 
-function FakeZone() {
-  this.calledWith_ = arguments;
+class FakeZone {
+  calledWith_: IArguments;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
 describe('DNS', () => {
