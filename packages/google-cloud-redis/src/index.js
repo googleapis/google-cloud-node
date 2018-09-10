@@ -24,11 +24,24 @@
 /**
  * @namespace google.cloud.redis.v1beta1
  */
+/**
+ * @namespace google.cloud.redis.v1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
 
 'use strict';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
+  v1: require('./v1'),
   v1beta1: require('./v1beta1'),
 });
 
@@ -36,11 +49,11 @@ const gapic = Object.freeze({
  * The `redis` package has the following named exports:
  *
  * - `CloudRedisClient` - Reference to
- *   {@link v1beta1.CloudRedisClient}
- * - `v1beta1` - This is used for selecting or pinning a
+ *   {@link v1.CloudRedisClient}
+ * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `CloudRedisClient` - Reference to
- *       {@link v1beta1.CloudRedisClient}
+ *       {@link v1.CloudRedisClient}
  *
  * @module {object} redis
  * @alias nodejs-redis
@@ -66,7 +79,14 @@ const gapic = Object.freeze({
  * @property {constructor} CloudRedisClient
  *   Reference to {@link v1beta1.CloudRedisClient}
  */
-module.exports = gapic.v1beta1;
+module.exports = gapic.v1;
+
+/**
+ * @type {object}
+ * @property {constructor} CloudRedisClient
+ *   Reference to {@link v1.CloudRedisClient}
+ */
+module.exports.v1 = gapic.v1;
 
 /**
  * @type {object}

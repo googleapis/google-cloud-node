@@ -8,14 +8,13 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICGenerator()
 
 # tasks has two product names, and a poorly named artman yaml
-version = 'v1beta1'
-library = gapic.node_library('redis', version)
+versions = ['v1beta1', 'v1']
 
-# skip index, protos, package.json, and README.md
-s.copy(
-    library,
-    excludes=['package.json', 'README.md', 'src/index.js',
-              f'src/{version}/index.js'])
+for version in versions:
+    library = gapic.node_library('redis', version)
+    s.copy(
+        library,
+        excludes=['package.json', 'README.md', 'src/index.js'])
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
