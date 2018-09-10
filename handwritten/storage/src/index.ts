@@ -361,17 +361,6 @@ class Storage extends Service {
    * storage.createBucket('new-bucket', metadata, callback);
    *
    * //-
-   * // Create a bucket with a retention policy of 6 months.
-   * //-
-   * const metadata = {
-   *   retentionPolicy: {
-   *     retentionPeriod: 15780000 // 6 months in seconds.
-   *   }
-   * };
-   *
-   * storage.createBucket('new-bucket', metadata, callback);
-   *
-   * //-
    * // Enable versioning on a new bucket.
    * //-
    * const metadata = {

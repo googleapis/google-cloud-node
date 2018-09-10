@@ -1501,51 +1501,6 @@ class File extends ServiceObject {
   }
 
   /**
-   * @typedef {array} GetExpirationDateResponse
-   * @property {date} 0 A Date object representing the earliest time this file's
-   *     retention policy will expire.
-   */
-  /**
-   * @callback GetExpirationDateCallback
-   * @param {?Error} err Request error, if any.
-   * @param {date} expirationDate A Date object representing the earliest time
-   *     this file's retention policy will expire.
-   */
-  /**
-   * If this bucket has a retention policy defined, use this method to get a
-   * Date object representing the earliest time this file will expire.
-   *
-   * @param {GetExpirationDateCallback} [callback] Callback function.
-   * @returns {Promise<GetExpirationDateResponse>}
-   *
-   * @example
-   * const storage = require('@google-cloud/storage')();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   *
-   * file.getExpirationDate(function(err, expirationDate) {
-   *   // expirationDate is a Date object.
-   * });
-   */
-  getExpirationDate(callback) {
-    this.getMetadata((err, metadata, apiResponse) => {
-      if (err) {
-        callback(err, null, apiResponse);
-        return;
-      }
-
-      if (!metadata.retentionExpirationTime) {
-        const error = new Error('An expiration time is not available.');
-        callback(error, null, apiResponse);
-        return;
-      }
-
-      callback(null, new Date(metadata.retentionExpirationTime), apiResponse);
-    });
-  }
-
-  /**
    * @typedef {array} GetFileMetadataResponse
    * @property {object} 0 The {@link File} metadata.
    * @property {object} 1 The full API response.
@@ -2420,24 +2375,6 @@ class File extends ServiceObject {
    * }, function(err, apiResponse) {
    *   // metadata should now be { abc: '123', hello: 'goodbye' }
    * });
-   *
-   * //-
-   * // Set a temporary hold on this file from its bucket's retention period
-   * // configuration.
-   * //
-   * file.setMetadata({
-   *   temporaryHold: true
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // Alternatively, you may set a temporary hold. This will follow the same
-   * // behavior as an event-based hold, with the exception that the bucket's
-   * // retention policy will not renew for this file from the time the hold is
-   * // released.
-   * //-
-   * file.setMetadata({
-   *   eventBasedHold: true
-   * }, function(err, apiResponse) {});
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
