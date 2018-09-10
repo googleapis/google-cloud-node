@@ -68,7 +68,7 @@ jobs:
           environment:
             NPM_CONFIG_PREFIX: /home/node/.npm-global
       - run: npm test
-      - run: npm run codecov
+      - run: node_modules/.bin/codecov
 
   node8:
     docker:
