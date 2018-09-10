@@ -86,7 +86,7 @@
     "bunyan": "^1.8.12",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
-    "delay": "^3.1.0",
+    "delay": "^4.0.0",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
