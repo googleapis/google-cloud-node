@@ -22,7 +22,7 @@
     "@google-cloud/logging": "^2.0.0",
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "ava": "^0.25.0",
-    "delay": "^3.1.0",
+    "delay": "^4.0.0",
     "execa": "^1.0.0",
     "got": "^9.0.0"
   }
