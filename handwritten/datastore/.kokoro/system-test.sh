@@ -16,10 +16,18 @@
 
 set -xeo pipefail
 
+export NPM_CONFIG_PREFIX=/home/node/.npm-global
+
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+export GCLOUD_PROJECT=long-door-651
 
 cd $(dirname $0)/..
+
+# Run a pre-test hook, if a pre-system-test.sh is in the project
+if [ -f .kokoro/pre-system-test.sh ]; then
+    . .kokoro/pre-system-test.sh
+fi
 
 npm install
 
