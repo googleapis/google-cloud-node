@@ -21,9 +21,8 @@
 'use strict';
 
 import * as assert from 'assert';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 
 let promisified = false;
 const fakePromisify = {
@@ -35,12 +34,13 @@ const fakePromisify = {
   },
 };
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  calledWith_: IArguments;
+  constructor(config: ServiceObjectConfig) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Channel', () => {
   const STORAGE = {};

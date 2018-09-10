@@ -18,30 +18,19 @@
 
 import * as assert from 'assert';
 import * as crypto from 'crypto';
-let duplexify;
 import * as extend from 'extend';
 import * as fs from 'fs';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
-import * as request from 'request';
 import * as stream from 'stream';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as url from 'url';
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, util, ServiceObjectConfig} from '@google-cloud/common';
 import * as zlib from 'zlib';
-
-interface RequestAPI extends
-    request.RequestAPI<request.Request, request.CoreOptions, {}> {}
-
-interface RequestStub {
-  (...args): RequestAPI;
-  defaults?: (...args) => RequestStub;
-  get?: typeof request.get;
-  head?: typeof request.head;
-}
+import {Readable} from 'stream';
 
 const {Bucket} = require('../src/bucket.js');
+let duplexify;
 
 let promisified = false;
 let makeWritableStreamOverride;
@@ -110,12 +99,13 @@ extend(fakeResumableUpload, {
   }
 });
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  calledWith_: IArguments;
+  constructor(config: ServiceObjectConfig) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let xdgConfigOverride;
 const xdgBasedirCached = require('xdg-basedir');
@@ -159,7 +149,8 @@ describe('File', () => {
     extend(true, fakeFs, fsCached);
     extend(true, fakeOs, osCached);
     xdgConfigOverride = null;
-    FakeServiceObject.prototype.request = util.noop;
+    // tslint:disable-next-line:no-any
+    FakeServiceObject.prototype.request = util.noop as any;
 
     STORAGE = {
       createBucket: util.noop,
@@ -1844,7 +1835,7 @@ describe('File', () => {
 
     it('should only execute callback once', done => {
       extend(fileReadStream, {
-        _read() {
+        _read(this: Readable) {
           this.emit('error', new Error('Error.'));
           this.emit('error', new Error('Error.'));
         },
@@ -1860,7 +1851,7 @@ describe('File', () => {
         const fileContents = 'abcdefghijklmnopqrstuvwxyz';
 
         extend(fileReadStream, {
-          _read() {
+          _read(this: Readable) {
             this.push(fileContents);
             this.push(null);
           },
@@ -1878,7 +1869,7 @@ describe('File', () => {
         const error = new Error('Error.');
 
         extend(fileReadStream, {
-          _read() {
+          _read(this: Readable) {
             this.emit('error', error);
           }
         });
@@ -1899,7 +1890,7 @@ describe('File', () => {
           const fileContents = 'abcdefghijklmnopqrstuvwxyz';
 
           extend(fileReadStream, {
-            _read() {
+            _read(this: Readable) {
               this.push(fileContents);
               this.push(null);
             },
@@ -1926,7 +1917,7 @@ describe('File', () => {
           const error = new Error('Error.');
 
           extend(fileReadStream, {
-            _read() {
+            _read(this: Readable) {
               this.emit('error', error);
             },
           });
@@ -2827,10 +2818,12 @@ describe('File', () => {
     });
 
     it('should set the userProject if qs is undefined', done => {
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       file.request({}, assert.ifError);
     });
@@ -2842,11 +2835,13 @@ describe('File', () => {
         },
       };
 
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs, options.qs);
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs, options.qs);
+            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       file.request(options, assert.ifError);
     });
@@ -2859,10 +2854,12 @@ describe('File', () => {
         },
       };
 
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       file.request(options, assert.ifError);
     });

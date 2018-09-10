@@ -19,53 +19,52 @@
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as async from 'async';
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, util, ServiceObjectConfig} from '@google-cloud/common';
 import * as extend from 'extend';
 import * as mime from 'mime-types';
-import * as nodeutil from 'util';
 import * as path from 'path';
 import * as propAssign from 'prop-assign';
 import * as proxyquire from 'proxyquire';
-import * as request from 'request';
 import * as snakeize from 'snakeize';
 import * as stream from 'stream';
 import * as through from 'through2';
+import {Bucket} from '../src/bucket';
 
-interface RequestAPI extends
-    request.RequestAPI<request.Request, request.CoreOptions, {}> {}
+class FakeFile {
+  calledWith_: IArguments;
+  bucket: Bucket;
+  name: string;
+  options: {};
+  metadata: {};
+  createWriteStream: Function;
+  isSameFile?: () => boolean;
+  constructor(bucket, name, options?) {
+    this.calledWith_ = arguments;
+    this.bucket = bucket;
+    this.name = name;
+    this.options = options;
+    this.metadata = {};
 
-interface RequestStub {
-  (...args): RequestAPI;
-  defaults?: () => RequestStub;
-  get?: typeof request.get;
-  head?: typeof request.head;
-}
-
-function FakeFile(bucket, name, options?) {
-  const self = this;
-
-  this.calledWith_ = arguments;
-
-  this.bucket = bucket;
-  this.name = name;
-  this.options = options;
-  this.metadata = {};
-
-  this.createWriteStream = options => {
-    self.metadata = options.metadata;
-    const ws = new stream.Writable();
-    ws.write = () => {
-      ws.emit('complete');
-      ws.end();
-      return true;
+    this.createWriteStream = options => {
+      this.metadata = options.metadata;
+      const ws = new stream.Writable();
+      ws.write = () => {
+        ws.emit('complete');
+        ws.end();
+        return true;
+      };
+      return ws;
     };
-    return ws;
-  };
+  }
 }
 
-function FakeNotification(bucket, id) {
-  this.bucket = bucket;
-  this.id = id;
+class FakeNotification {
+  bucket: Bucket;
+  id: string;
+  constructor(bucket, id) {
+    this.bucket = bucket;
+    this.id = id;
+  }
 }
 
 let eachLimitOverride;
@@ -113,20 +112,27 @@ const fakePaginator = {
   },
 };
 
-function FakeAcl() {
-  this.calledWith_ = [].slice.call(arguments);
+class FakeAcl {
+  calledWith_: IArguments;
+  constructor() {
+    this.calledWith_ = [].slice.call(arguments);
+  }
 }
 
-function FakeIam() {
-  this.calledWith_ = arguments;
+class FakeIam {
+  calledWith_: IArguments;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  calledWith_: IArguments;
+  constructor(config: ServiceObjectConfig) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Bucket', () => {
   // tslint:disable-next-line:variable-name
@@ -578,8 +584,11 @@ describe('Bucket', () => {
     const FULL_TOPIC_NAME =
         PUBSUB_SERVICE_PATH + 'projects/{{projectId}}/topics/' + TOPIC;
 
-    function FakeTopic(name) {
-      this.name = 'projects/grape-spaceship-123/topics/' + name;
+    class FakeTopic {
+      name: string;
+      constructor(name: string) {
+        this.name = 'projects/grape-spaceship-123/topics/' + name;
+      }
     }
 
     beforeEach(() => {
@@ -1727,10 +1736,12 @@ describe('Bucket', () => {
     });
 
     it('should set the userProject if qs is undefined', done => {
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       bucket.request({}, assert.ifError);
     });
@@ -1742,11 +1753,13 @@ describe('Bucket', () => {
         },
       };
 
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs, options.qs);
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs, options.qs);
+            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       bucket.request(options, assert.ifError);
     });
@@ -1759,10 +1772,12 @@ describe('Bucket', () => {
         },
       };
 
-      FakeServiceObject.prototype.request = reqOpts => {
-        assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
-        done();
-      };
+      FakeServiceObject.prototype.request =
+          (reqOpts => {
+            assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
+            done();
+            // tslint:disable-next-line:no-any
+          }) as any;
 
       bucket.request(options, assert.ifError);
     });

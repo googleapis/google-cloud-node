@@ -19,7 +19,6 @@
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as extend from 'extend';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
 import {Service, util} from '@google-cloud/common';
 

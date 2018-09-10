@@ -17,17 +17,17 @@
 'use strict';
 
 import * as assert from 'assert';
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, util, ServiceObjectConfig} from '@google-cloud/common';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import * as nodeUtil from 'util';
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  calledWith_: IArguments;
+  constructor(config: ServiceObjectConfig) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeUtil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Notification', () => {
   // tslint:disable-next-line:variable-name
