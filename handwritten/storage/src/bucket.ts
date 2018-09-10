@@ -1455,7 +1455,7 @@ class Bucket extends ServiceObject {
   /**
    * @callback GetBucketMetadataCallback
    * @param {?Error} err Request error, if any.
-   * @param {object} files The bucket metadata.
+   * @param {object} metadata The bucket metadata.
    * @param {object} apiResponse The full API response.
    */
   /**
@@ -1584,6 +1584,48 @@ class Bucket extends ServiceObject {
 
           callback(null, notifications, resp);
         });
+  }
+
+  /**
+   * Lock a previously-defined retention policy. This will prevent changes to
+   * the policy.
+   *
+   * @throws {Error} if a metageneration is not provided.
+   *
+   * @param {Number|String} metageneration The bucket's metageneration. This is
+   *     accesssible from calling {@link File#getMetadata}.
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const bucket = storage.bucket('albums');
+   *
+   * const metageneration = 2;
+   *
+   * bucket.lock(metageneration, function(err, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.lock(metageneration).then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  lock(metageneration, callback) {
+    if (!is.number(metageneration) && !is.string(metageneration)) {
+      throw new Error('A metageneration must be provided.');
+    }
+
+    this.request(
+        {
+          method: 'POST',
+          uri: '/lockRetentionPolicy',
+          qs: {
+            ifMetagenerationMatch: metageneration,
+          },
+        },
+        callback);
   }
 
   /**
@@ -1859,6 +1901,34 @@ class Bucket extends ServiceObject {
   }
 
   /**
+   * Remove an already-existing retention policy from this bucket, if it is not
+   * locked.
+   *
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const bucket = storage.bucket('albums');
+   *
+   * bucket.removeRetentionPeriod(function(err, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.removeRetentionPeriod().then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  removeRetentionPeriod(callback) {
+    this.setMetadata(
+        {
+          retentionPolicy: null,
+        },
+        callback);
+  }
+
+  /**
    * Makes request and applies userProject query parameter if necessary.
    *
    * @private
@@ -1989,6 +2059,13 @@ class Bucket extends ServiceObject {
    * }, function(err, apiResponse) {});
    *
    * //-
+   * // Set the default event-based hold value for new objects in this bucket.
+   * //-
+   * bucket.setMetadata({
+   *   defaultEventBasedHold: true
+   * }, function(err, apiResponse) {});
+   *
+   * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * bucket.setMetadata(metadata).then(function(data) {
@@ -2020,6 +2097,51 @@ class Bucket extends ServiceObject {
 
           callback(null, resp);
         });
+  }
+
+  /**
+   * Lock all objects contained in the bucket, based on their creation time. Any
+   * attempt to overwrite or delete objects younger than the retention period
+   * will result in a `PERMISSION_DENIED` error.
+   *
+   * An unlocked retention policy can be modified or removed from the bucket via
+   * {@link File#removeRetentionPeriod} and {@link File#setRetentionPeriod}. A
+   * locked retention policy cannot be removed or shortened in duration for the
+   * lifetime of the bucket. Attempting to remove or decrease period of a locked
+   * retention policy will result in a `PERMISSION_DENIED` error. You can still
+   * increase the policy.
+   *
+   * @param {*} duration In seconds, the minimum retention time for all objects
+   *     contained in this bucket.
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const bucket = storage.bucket('albums');
+   *
+   * const DURATION_SECONDS = 15780000; // 6 months.
+   *
+   * //-
+   * // Lock the objects in this bucket for 6 months.
+   * //-
+   * bucket.setRetentionPeriod(DURATION_SECONDS, function(err, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.setRetentionPeriod(DURATION_SECONDS).then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  setRetentionPeriod(duration, callback) {
+    this.setMetadata(
+        {
+          retentionPolicy: {
+            retentionPeriod: duration,
+          },
+        },
+        callback);
   }
 
   /**

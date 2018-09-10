@@ -1957,6 +1957,66 @@ describe('File', () => {
     });
   });
 
+  describe('getExpirationDate', () => {
+    it('should refresh metadata', done => {
+      file.getMetadata = () => {
+        done();
+      };
+
+      file.getExpirationDate(assert.ifError);
+    });
+
+    it('should return error from getMetadata', done => {
+      const error = new Error('Error.');
+      const apiResponse = {};
+
+      file.getMetadata = callback => {
+        callback(error, null, apiResponse);
+      };
+
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.strictEqual(err, error);
+        assert.strictEqual(expirationDate, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
+    it('should return an error if there is no expiration time', done => {
+      const apiResponse = {};
+
+      file.getMetadata = callback => {
+        callback(null, {}, apiResponse);
+      };
+
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.strictEqual(err.message, `An expiration time is not available.`);
+        assert.strictEqual(expirationDate, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
+    it('should return the expiration time as a Date object', done => {
+      const expirationTime = new Date();
+
+      const apiResponse = {
+        retentionExpirationTime: expirationTime.toJSON(),
+      };
+
+      file.getMetadata = callback => {
+        callback(null, apiResponse, apiResponse);
+      };
+
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(expirationDate, expirationTime);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+  });
+
   describe('getMetadata', () => {
     it('should make the correct request', done => {
       extend(file.parent, {
