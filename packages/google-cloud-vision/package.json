@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "@google-cloud/storage": "^1.7.0",
+    "@google-cloud/storage": "^2.0.0",
     "async": "^2.6.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.1",
