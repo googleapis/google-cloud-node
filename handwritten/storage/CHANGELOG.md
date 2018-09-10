@@ -4,6 +4,32 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.0.1
+
+**This fixes types declaration issues with projects using TypeScript.**
+
+### Implementation Changes
+- Enable noImplicitThis in the tsconfig ([#370](https://github.com/googleapis/nodejs-storage/pull/370))
+- Fix the path to the d.ts ([#364](https://github.com/googleapis/nodejs-storage/pull/364))
+- fix: make dependency on request explicit ([#361](https://github.com/googleapis/nodejs-storage/pull/361))
+- fix: remove trailing slashes from bucket name. ([#266](https://github.com/googleapis/nodejs-storage/pull/266))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.24.0 ([#367](https://github.com/googleapis/nodejs-storage/pull/367))
+- fix(deps): update dependency gcs-resumable-upload to ^0.13.0 ([#368](https://github.com/googleapis/nodejs-storage/pull/368))
+- Remove unused dependencies ([#363](https://github.com/googleapis/nodejs-storage/pull/363))
+- Remove safe-buffer ([#359](https://github.com/googleapis/nodejs-storage/pull/359))
+- samples: update dependency @google-cloud/storage to v2 ([#350](https://github.com/googleapis/nodejs-storage/pull/350))
+
+### Internal / Testing Changes
+- Update CI config ([#371](https://github.com/googleapis/nodejs-storage/pull/371))
+- build(kokoro): run docker as user node ([#358](https://github.com/googleapis/nodejs-storage/pull/358))
+- build: fix multiline in circle.yml ([#357](https://github.com/googleapis/nodejs-storage/pull/357))
+- fix executable modes on .sh's; add pre-system-test.sh hook ([#356](https://github.com/googleapis/nodejs-storage/pull/356))
+- decrypt both service account keys ([#353](https://github.com/googleapis/nodejs-storage/pull/353))
+- Retry npm install in CI ([#352](https://github.com/googleapis/nodejs-storage/pull/352))
+- Add synth script and run it ([#351](https://github.com/googleapis/nodejs-storage/pull/351))
+
 ## v2.0.0
 
 **This release has breaking changes**.  This release has a few notable breaking changes.  Please take care when upgrading!
