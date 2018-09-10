@@ -27,6 +27,15 @@
 /**
  * @namespace google.cloud.tasks.v2beta3
  */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
 
 'use strict';
 
