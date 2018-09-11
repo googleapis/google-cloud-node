@@ -20,6 +20,7 @@ import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as is from 'is';
 import * as request from 'request';
+import {Bucket} from './bucket';
 
 /**
  * A Notification object is created from your {@link Bucket} object using
@@ -42,7 +43,7 @@ import * as request from 'request';
  * const notification = myBucket.notification('1');
  */
 class Notification extends ServiceObject {
-  constructor(bucket, id) {
+  constructor(bucket: Bucket, id: string) {
     const methods = {
       /**
        * Creates a notification subscription for the bucket.

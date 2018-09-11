@@ -143,9 +143,43 @@ interface SignedUrlQuery {
   'response-content-disposition': string;
 }
 
+export interface CreateReadStreamOptions {
+  /**
+   * The ID of the project which will be billed for the request.
+   */
+  userProject?: string;
+  /**
+   * By default, data integrity is validated with a
+   * CRC32c checksum. You may use MD5 if preferred, but that hash is not
+   * supported for composite objects. An error will be raised if MD5 is
+   * specified but is not available. You may also choose to skip validation
+   * completely, however this is **not recommended**.
+   */
+  validation?: 'md5'|'crc32c'|false|true;
+  /**
+   * A byte offset to begin the file's download
+   * from. Default is 0. NOTE: Byte ranges are inclusive; that is,
+   * `options.start = 0` and `options.end = 999` represent the first 1000
+   * bytes in a file or object. NOTE: when specifying a byte range, data
+   * integrity is not available.
+   */
+  start?: number;
+  /**
+   * A byte offset to stop reading the file at.
+   * NOTE: Byte ranges are inclusive; that is, `options.start = 0` and
+   * `options.end = 999` represent the first 1000 bytes in a file or object.
+   * NOTE: when specifying a byte range, data integrity is not available.
+   */
+  end?: number;
+}
+
 class RequestError extends Error {
   code?: string;
   errors?: Error[];
+}
+
+export interface FileCallback {
+  (err: Error|null, file?: File|null, apiResponse?: r.Response): void;
 }
 
 /**
@@ -231,7 +265,7 @@ class File extends ServiceObject {
   private encryptionKeyInterceptor?:
       {request: (reqOpts: r.OptionsWithUri) => r.OptionsWithUri;};
 
-  constructor(bucket, name, options?: FileOptions) {
+  constructor(bucket: Bucket, name: string, options: FileOptions = {}) {
     name = name.replace(/^\/+/, '');
 
     super({
@@ -241,10 +275,9 @@ class File extends ServiceObject {
       requestModule: r,
     });
 
-    options = options || {};
-
     this.bucket = bucket;
-    this.storage = bucket.parent;
+    // tslint:disable-next-line:no-any
+    this.storage = (bucket as any).parent as Storage;
 
     this.kmsKeyName = options.kmsKeyName;
     this.userProject = options.userProject || bucket.userProject;
@@ -401,7 +434,13 @@ class File extends ServiceObject {
    * region_tag:storage_copy_file
    * Another example:
    */
-  copy(destination, options: CopyOptions, callback?) {
+  copy(destination: string|Bucket|File, callback: FileCallback);
+  copy(
+      destination: string|Bucket|File, options: CopyOptions,
+      callback: FileCallback);
+  copy(
+      destination: string|Bucket|File,
+      optionsOrCallback: CopyOptions|FileCallback, callback?: FileCallback) {
     const noDestinationError =
         new Error('Destination file should have a name.');
 
@@ -409,9 +448,12 @@ class File extends ServiceObject {
       throw noDestinationError;
     }
 
-    if (is.fn(options)) {
-      callback = options;
+    let options: CopyOptions;
+    if (typeof optionsOrCallback === 'function') {
+      callback = optionsOrCallback;
       options = {};
+    } else {
+      options = optionsOrCallback;
     }
 
     options = extend(true, {}, options);
@@ -421,7 +463,7 @@ class File extends ServiceObject {
     let destName;
     let newFile;
 
-    if (is.string(destination)) {
+    if (typeof destination === 'string') {
       const parsedDestination = GS_URL_REGEXP.exec(destination);
       if (parsedDestination !== null && parsedDestination.length === 3) {
         destBucket = this.storage.bucket(parsedDestination[1]);
@@ -495,7 +537,7 @@ class File extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
 
@@ -512,11 +554,11 @@ class File extends ServiceObject {
               options.destinationKmsKeyName = query.destinationKmsKeyName;
             }
 
-            this.copy(newFile, options, callback);
+            this.copy(newFile, options, callback!);
             return;
           }
 
-          callback(null, newFile, resp);
+          callback!(null, newFile, resp);
         });
   }
 
@@ -608,11 +650,9 @@ class File extends ServiceObject {
    *   .on('error', function(err) {})
    *   .pipe(fs.createWriteStream('/Users/stephen/logfile.txt'));
    */
-  createReadStream(options) {
-    options = options || {};
-
+  createReadStream(options: CreateReadStreamOptions = {}) {
     const rangeRequest = is.number(options.start) || is.number(options.end);
-    const tailRequest = options.end < 0;
+    const tailRequest = options.end! < 0;
 
     let validateStream;  // Created later, if necessary.
     const throughStream = streamEvents(through()) as Duplex;
@@ -623,7 +663,9 @@ class File extends ServiceObject {
     let refreshedMetadata = false;
 
     if (is.string(options.validation)) {
-      options.validation = options.validation.toLowerCase();
+      // tslint:disable-next-line:no-any
+      (options as any).validation =
+          (options.validation as string).toLowerCase();
       crc32c = options.validation === 'crc32c';
       md5 = options.validation === 'md5';
     } else if (options.validation === false) {
@@ -878,7 +920,7 @@ class File extends ServiceObject {
    *   const uri = data[0];
    * });
    */
-  createResumableUpload(options, callback) {
+  createResumableUpload(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1052,9 +1094,8 @@ class File extends ServiceObject {
    *     // The file upload is complete.
    *   });
    */
-  createWriteStream(options) {
-    options = options || {};
-
+  // tslint:disable-next-line:no-any
+  createWriteStream(options: any = {}) {
     options = extend({metadata: {}}, options);
 
     if (options.contentType) {
@@ -1257,9 +1298,7 @@ class File extends ServiceObject {
     }
 
     options = extend({}, this.requestQueryObject, options);
-
-    // tslint:disable-next-line:no-any
-    (this.parent as any).delete.call(this, options, callback);
+    (this.parent as ServiceObject).delete.call(this, options, callback);
   }
 
   /**
@@ -1382,8 +1421,7 @@ class File extends ServiceObject {
    * });
    */
   exists(options, callback?) {
-    // tslint:disable-next-line:no-any
-    (this.parent as any).exists.call(this, options, callback);
+    (this.parent as ServiceObject).exists.call(this, options, callback);
   }
 
   /**
@@ -1432,7 +1470,6 @@ class File extends ServiceObject {
   setEncryptionKey(encryptionKey) {
     this.encryptionKey = encryptionKey;
     this.encryptionKeyBase64 = Buffer.from(encryptionKey).toString('base64');
-
     this.encryptionKeyHash =
         crypto
             .createHash('sha256')
@@ -2259,7 +2296,7 @@ class File extends ServiceObject {
       };
     }
 
-    const newFile = this.bucket.file(this.id, options);
+    const newFile = this.bucket.file(this.id!, options);
     this.copy(newFile, callback);
   }
 
@@ -2455,7 +2492,7 @@ class File extends ServiceObject {
         return;
       }
 
-      this.metadata = file.metadata;
+      this.metadata = file!.metadata;
 
       callback(null, apiResponse);
     });
@@ -2475,7 +2512,7 @@ class File extends ServiceObject {
    *
    * file.setUserProject('grape-spaceship-123');
    */
-  setUserProject(userProject) {
+  setUserProject(userProject: string) {
     this.userProject = userProject;
   }
 
@@ -2501,8 +2538,7 @@ class File extends ServiceObject {
       bucket: this.bucket.name,
       file: this.name,
       generation: this.generation,
-      // tslint:disable-next-line:no-any
-      key: this.encryptionKey as any,
+      key: this.encryptionKey,
       kmsKeyName: this.kmsKeyName,
       metadata: options.metadata,
       offset: options.offset,

@@ -92,7 +92,7 @@ class Iam {
    * region_tag:storage_view_bucket_iam_members
    * Example of retrieving a bucket's IAM policy:
    */
-  getPolicy(options, callback) {
+  getPolicy(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -167,7 +167,7 @@ class Iam {
    * region_tag:storage_remove_bucket_iam_member
    * Example of removing from a bucket's IAM policy:
    */
-  setPolicy(policy, options, callback) {
+  setPolicy(policy, options, callback?) {
     if (!is.object(policy)) {
       throw new Error('A policy object is required.');
     }
@@ -257,7 +257,7 @@ class Iam {
    *   const apiResponse = data[1];
    * });
    */
-  testPermissions(permissions, options, callback) {
+  testPermissions(permissions, options, callback?) {
     if (!is.array(permissions) && !is.string(permissions)) {
       throw new Error('Permissions are required.');
     }

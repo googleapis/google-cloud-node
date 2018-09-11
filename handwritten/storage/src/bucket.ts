@@ -299,7 +299,7 @@ class Bucket extends ServiceObject {
    */
   getFilesStream: Function;
 
-  constructor(storage, name, options?) {
+  constructor(storage: Storage, name: string, options?) {
     options = options || {};
 
     // Allow for "gs://"-style input, and strip any trailing slashes.
@@ -422,7 +422,7 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  combine(sources, destination, options, callback) {
+  combine(sources: string[]|File[], destination, options, callback) {
     if (!is.array(sources) || sources.length < 2) {
       throw new Error('You must provide at least two source files.');
     }
@@ -436,15 +436,15 @@ class Bucket extends ServiceObject {
       options = {};
     }
 
-    const convertToFile = file => {
+    const convertToFile = (file: string|File) => {
       if (file instanceof File) {
         return file;
       }
-
       return this.file(file);
     };
 
-    sources = sources.map(convertToFile);
+    // tslint:disable-next-line:no-any
+    sources = (sources as any).map(convertToFile);
     destination = convertToFile(destination);
     callback = callback || util.noop;
 
@@ -465,7 +465,8 @@ class Bucket extends ServiceObject {
             destination: {
               contentType: destination.metadata.contentType,
             },
-            sourceObjects: sources.map(source => {
+            // tslint:disable-next-line:no-any
+            sourceObjects: (sources as any).map(source => {
               const sourceObject = {
                 name: source.name,
               } as SourceObject;
@@ -544,7 +545,7 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  createChannel(id, config, options, callback) {
+  createChannel(id: string, config, options, callback?) {
     if (!is.string(id)) {
       throw new Error('An ID is required to create a channel.');
     }
@@ -671,14 +672,15 @@ class Bucket extends ServiceObject {
    * region_tag:storage_create_notification
    * Another example:
    */
-  createNotification(topic, options, callback) {
+  createNotification(topic: string, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
     }
 
     if (is.object(topic) && util.isCustomType(topic, 'pubsub/topic')) {
-      topic = topic.name;
+      // tslint:disable-next-line:no-any
+      topic = (topic as any).name;
     }
 
     if (!is.string(topic)) {
@@ -849,7 +851,7 @@ class Bucket extends ServiceObject {
    * //-
    * bucket.deleteFiles().then(function() {});
    */
-  deleteFiles(query: DeleteFilesRequest, callback) {
+  deleteFiles(query: DeleteFilesRequest, callback?) {
     if (is.fn(query)) {
       callback = query;
       query = {};
@@ -942,7 +944,7 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  deleteLabels(labels, callback?) {
+  deleteLabels(labels: string|string[], callback?) {
     if (is.fn(labels)) {
       callback = labels;
       labels = [];
@@ -1017,7 +1019,7 @@ class Bucket extends ServiceObject {
    * region_tag:storage_disable_requester_pays
    * Example of disabling requester pays:
    */
-  disableRequesterPays(callback) {
+  disableRequesterPays(callback?) {
     this.setMetadata(
         {
           billing: {
@@ -1161,7 +1163,7 @@ class Bucket extends ServiceObject {
    * const bucket = storage.bucket('albums');
    * const file = bucket.file('my-existing-file.png');
    */
-  file(name, options?: FileOptions) {
+  file(name: string, options?: FileOptions) {
     if (!name) {
       throw Error('A file name must be specified.');
     }
@@ -1559,7 +1561,7 @@ class Bucket extends ServiceObject {
    * region_tag:storage_list_notifications
    * Another example:
    */
-  getNotifications(options, callback) {
+  getNotifications(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1672,7 +1674,7 @@ class Bucket extends ServiceObject {
    *   const files = data[0];
    * });
    */
-  makePrivate(options, callback) {
+  makePrivate(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1795,7 +1797,7 @@ class Bucket extends ServiceObject {
    *   const files = data[0];
    * });
    */
-  makePublic(options, callback) {
+  makePublic(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -1850,7 +1852,7 @@ class Bucket extends ServiceObject {
    * const bucket = storage.bucket('my-bucket');
    * const notification = bucket.notification('1');
    */
-  notification(id) {
+  notification(id: string) {
     if (!id) {
       throw new Error('You must supply a notification ID.');
     }
@@ -2084,7 +2086,7 @@ class Bucket extends ServiceObject {
    *
    * bucket.setUserProject('grape-spaceship-123');
    */
-  setUserProject(userProject) {
+  setUserProject(userProject: string) {
     this.userProject = userProject;
   }
 
@@ -2290,7 +2292,7 @@ class Bucket extends ServiceObject {
    * region_tag:storage_upload_encrypted_file
    * Example of uploading an encrypted file:
    */
-  upload(pathString, options, callback) {
+  upload(pathString: string, options, callback?) {
     if (global['GCLOUD_SANDBOX_ENV']) {
       return;
     }
