@@ -170,7 +170,8 @@ test.serial(`should listen for ordered messages`, async t => {
 
   await pubsub
     .topic(topicNameTwo)
-    .get(subscriptionNameThree, {autoCreate: true});
+    .subscription(subscriptionNameThree)
+    .get({autoCreate: true});
   let [result] = await publisherTwo.publish(expectedBuffer, {counterId: '3'});
   publishedMessageIds.push(result);
   await subscriptions.listenForOrderedMessages(subscriptionNameThree, timeout);
