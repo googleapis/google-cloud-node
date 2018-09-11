@@ -1324,7 +1324,7 @@ class File extends ServiceObject {
    * region_tag:storage_download_file_requester_pays
    * Example of downloading a file where the requester pays:
    */
-  download(options, callback) {
+  download(options?, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -2307,7 +2307,7 @@ class File extends ServiceObject {
    * //-
    * file.save(contents).then(function() {});
    */
-  save(data, options, callback) {
+  save(data, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
