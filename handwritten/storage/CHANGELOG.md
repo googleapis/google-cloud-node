@@ -4,6 +4,11 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.0.2
+
+### Implementation Changes
+- Improve the types (#377)
+
 ## v2.0.1
 
 **This fixes types declaration issues with projects using TypeScript.**
