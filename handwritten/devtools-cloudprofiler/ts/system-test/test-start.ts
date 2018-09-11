@@ -75,12 +75,8 @@ before(async () => {
         }
         tempUploadedProfiles.push(body);
       });
-  nock('https://www.googleapis.com')
-      .post(
-          /\/oauth2.*token/,
-          (body: {}) => {
-            return true;
-          })
+  nock('https://oauth2.googleapis.com')
+      .post(/\/token/, () => true)
       .once()
       .reply(200, {
         refresh_token: 'hello',
