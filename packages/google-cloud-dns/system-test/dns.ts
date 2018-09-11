@@ -24,6 +24,7 @@ import * as fs from 'fs';
 const tmp = require('tmp');
 import * as uuid from 'uuid';
 import {DNS} from '../src';
+import {ChangeCallback} from '../src/change';
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
@@ -115,7 +116,7 @@ describe('dns', () => {
         return;
       }
 
-      async.each(zones, exec('delete', {force: true}), err => {
+      async.each(zones!, exec('delete', {force: true}), err => {
         if (err) {
           done(err);
           return;
@@ -133,7 +134,7 @@ describe('dns', () => {
   it('should return 0 or more zones', done => {
     dns.getZones((err, zones) => {
       assert.ifError(err);
-      assert(zones.length >= 0);
+      assert(zones!.length >= 0);
       done();
     });
   });
@@ -185,7 +186,7 @@ describe('dns', () => {
             ZONE.getRecords(['spf', 'txt'], (err, records) => {
               assert.ifError(err);
 
-              const spfRecord = records.filter(record => {
+              const spfRecord = records!.filter(record => {
                 return record.type === 'SPF';
               })[0];
 
@@ -193,7 +194,7 @@ describe('dns', () => {
                   spfRecord.toJSON().rrdatas[0],
                   '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"');
 
-              const txtRecord = records.filter(record => {
+              const txtRecord = records!.filter(record => {
                 return record.type === 'TXT';
               })[0];
 
@@ -214,8 +215,9 @@ describe('dns', () => {
         assert.ifError(err);
         async.series(
             [
-              next => ZONE.empty(next),
-              next => ZONE.addRecords([records.spf, records.srv], next),
+              next => ZONE.empty(next as ChangeCallback),
+              next => ZONE.addRecords(
+                  [records.spf, records.srv], next as ChangeCallback),
               next => ZONE.export(tmpFilename, next)
             ],
             done);
@@ -269,7 +271,7 @@ describe('dns', () => {
     it('should return 0 or more records', done => {
       ZONE.getRecords((err, records) => {
         assert.ifError(err);
-        assert(records.length >= 0);
+        assert(records!.length >= 0);
         done();
       });
     });
@@ -299,7 +301,7 @@ describe('dns', () => {
         };
         ZONE.getRecords(
             {
-              types: 'cname',
+              type: 'cname',
               maxResults: 2,
             },
             onRecordsReceived);

@@ -19,6 +19,8 @@
 import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
+import {ChangeCallback} from './change';
+import {Zone} from './zone';
 const format = require('string-format-obj');
 
 /**
@@ -48,12 +50,12 @@ const format = require('string-format-obj');
  * });
  */
 export class Record {
-  zone_;
-  type;
+  zone_: Zone;
+  type: string;
   metadata;
   rrdatas;
   data;
-  constructor(zone, type, metadata) {
+  constructor(zone: Zone, type: string, metadata) {
     this.zone_ = zone;
     /**
      * @name Record#type
@@ -126,7 +128,7 @@ export class Record {
    *   const apiResponse = data[1];
    * });
    */
-  delete(callback) {
+  delete(callback: ChangeCallback) {
     this.zone_.deleteRecords(this, callback);
   }
   /**
@@ -169,7 +171,7 @@ export class Record {
    *     based on the type of record.
    * @returns {Record}
    */
-  static fromZoneRecord_(zone, type, bindData) {
+  static fromZoneRecord_(zone: Zone, type: string, bindData) {
     const typeToZoneFormat = {
       a: '{ip}',
       aaaa: '{ip}',

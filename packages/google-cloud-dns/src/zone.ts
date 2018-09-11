@@ -17,7 +17,7 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import {ServiceObject} from '@google-cloud/common';
+import {ServiceObject, DeleteCallback} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -28,8 +28,29 @@ import * as is from 'is';
 import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
-import {Change} from './change';
+import {Change, ChangeCallback, CreateChangeRequest} from './change';
 import {Record} from './record';
+import {DNS} from '.';
+import {Response} from 'request';
+
+export interface DeleteZoneConfig {
+  force?: boolean;
+}
+
+export interface GetRecordsCallback {
+  (err: Error|null, records?: Record[]|null, nextQuery?: {}|null,
+   apiResponse?: Response): void;
+}
+
+export interface GetRecordsRequest {
+  autoPaginate?: boolean;
+  maxApiCalls?: number;
+  maxResults?: number;
+  name?: string;
+  pageToken?: string;
+  type?: string;
+  filterByTypes_?: {[index: string]: boolean};
+}
 
 /**
  * A Zone object is used to interact with your project's managed zone. It will
@@ -45,7 +66,7 @@ import {Record} from './record';
  * const zone = dns.zone('zone-id');
  */
 class Zone extends ServiceObject {
-  constructor(dns, name) {
+  constructor(dns: DNS, name: string) {
     const methods = {
       /**
        * Create a zone.
@@ -240,12 +261,8 @@ class Zone extends ServiceObject {
    * @param {ZoneAddRecordsCallback} [callback] Callback function.
    * @returns {Promise<ZoneAddRecordsResponse>}
    */
-  addRecords(records, callback) {
-    this.createChange(
-        {
-          add: records,
-        },
-        callback);
+  addRecords(records: Record|Record[], callback: ChangeCallback) {
+    this.createChange({add: records}, callback);
   }
   /**
    * Create a reference to a {@link Change} object in this zone.
@@ -259,7 +276,7 @@ class Zone extends ServiceObject {
    * const zone = dns.zone('zone-id');
    * const change = zone.change('change-id');
    */
-  change(id?) {
+  change(id?: string) {
     return new Change(this, id);
   }
   /**
@@ -328,7 +345,7 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  createChange(config, callback) {
+  createChange(config: CreateChangeRequest, callback: ChangeCallback) {
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
     }
@@ -428,16 +445,20 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  delete(options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  delete(callback: DeleteCallback): void;
+  delete(options: DeleteZoneConfig, callback: DeleteCallback): void;
+  delete(
+      optionsOrCallback: DeleteZoneConfig|DeleteCallback,
+      callback?: DeleteCallback): void {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     if (options.force) {
       this.empty(this.delete.bind(this, callback));
       return;
     }
-    ServiceObject.prototype.delete.call(this, callback);
+    super.delete(callback);
   }
   /**
    * @typedef {array} ZoneDeleteRecordsResponse
@@ -528,17 +549,25 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  deleteRecords(records, callback) {
-    records = arrify(records);
+  deleteRecords(callback: ChangeCallback): void;
+  deleteRecords(records: Record|Record[]|string, callback: ChangeCallback):
+      void;
+  deleteRecords(
+      recordsOrCallback: Record|Record[]|string|ChangeCallback,
+      callback?: ChangeCallback): void {
+    let records: Array<Record|string>;
+    if (typeof recordsOrCallback === 'function') {
+      callback = recordsOrCallback;
+      records = [];
+    } else {
+      records = arrify<Record|string>(recordsOrCallback);
+    }
+
     if (is.string(records[0])) {
-      this.deleteRecordsByType_(records, callback);
+      this.deleteRecordsByType_(records as string[], callback!);
       return;
     }
-    this.createChange(
-        {
-          delete: records,
-        },
-        callback);
+    this.createChange({delete: records as Record[]}, callback!);
   }
   /**
    * @typedef {array} ZoneEmptyResponse
@@ -562,13 +591,13 @@ class Zone extends ServiceObject {
    * @param {ZoneEmptyCallback} [callback] Callback function.
    * @returns {Promise<ZoneEmptyResponse>}
    */
-  empty(callback) {
+  empty(callback: ChangeCallback) {
     this.getRecords((err, records) => {
       if (err) {
         callback(err);
         return;
       }
-      const recordsToDelete = records.filter(record => {
+      const recordsToDelete = records!.filter(record => {
         return record.type !== 'NS' && record.type !== 'SOA';
       });
       if (recordsToDelete.length === 0) {
@@ -614,13 +643,13 @@ class Zone extends ServiceObject {
    * //-
    * zone.export(zoneFilename).then(() => {});
    */
-  export(localPath, callback) {
+  export(localPath: string, callback) {
     this.getRecords((err, records) => {
       if (err) {
         callback(err);
         return;
       }
-      const stringRecords = records.map(x => x.toString()).join('\n');
+      const stringRecords = records!.map(x => x.toString()).join('\n');
       fs.writeFile(localPath, stringRecords, 'utf-8', err => {
         callback(err || null);
       });
@@ -813,22 +842,32 @@ class Zone extends ServiceObject {
    *   const records = data[0];
    * });
    */
-  getRecords(query, callback?) {
-    if (is.fn(query)) {
-      callback = query;
-      query = {};
+  getRecords(callback: GetRecordsCallback): void;
+  getRecords(
+      query: GetRecordsRequest|string|string[],
+      callback: GetRecordsCallback): void;
+  getRecords(
+      queryOrCallback: GetRecordsRequest|GetRecordsCallback|string|string[],
+      callback?: GetRecordsCallback): void {
+    let query: string|string[]|GetRecordsRequest;
+    if (typeof queryOrCallback === 'function') {
+      callback = queryOrCallback;
+      query = [];
+    } else {
+      query = queryOrCallback;
     }
+
     if (is.string(query) || is.array(query)) {
-      const filterByTypes_ = {};
+      const filterByTypes_: {[index: string]: boolean} = {};
       // For faster lookups, store the record types the user wants in an object.
-      arrify(query).forEach(type => {
+      arrify(query as string).forEach(type => {
         filterByTypes_[type.toUpperCase()] = true;
       });
       query = {
         filterByTypes_,
       };
     }
-    const requestQuery = extend({}, query);
+    const requestQuery = extend({}, query) as GetRecordsRequest;
     delete requestQuery.filterByTypes_;
     this.request(
         {
@@ -837,24 +876,24 @@ class Zone extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, null, resp);
+            callback!(err, null, null, resp);
             return;
           }
           let records = (resp.rrsets || []).map(record => {
             return this.record(record.type, record);
           });
-          if (query.filterByTypes_) {
+          if ((query as GetRecordsRequest).filterByTypes_) {
             records = records.filter(record => {
-              return query.filterByTypes_[record.type];
+              return (query as GetRecordsRequest).filterByTypes_![record.type];
             });
           }
-          let nextQuery = null;
+          let nextQuery: {}|null = null;
           if (resp.nextPageToken) {
             nextQuery = extend({}, query, {
               pageToken: resp.nextPageToken,
             });
           }
-          callback(null, records, nextQuery, resp);
+          callback!(null, records, nextQuery, resp);
         });
   }
   /**
@@ -897,7 +936,7 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  import(localPath, callback) {
+  import(localPath: string, callback: ChangeCallback) {
     fs.readFile(localPath, 'utf-8', (err, file) => {
     if (err) {
       callback(err);
@@ -907,7 +946,7 @@ class Zone extends ServiceObject {
     const defaultTTL = parsedZonefile.$ttl;
     delete parsedZonefile.$ttl;
     const recordTypes = Object.keys(parsedZonefile);
-    const recordsToCreate: Array<{}> = [];
+    const recordsToCreate: Record[] = [];
     recordTypes.forEach(recordType => {
       const recordTypeSet = arrify(parsedZonefile[recordType]);
       recordTypeSet.forEach(record => {
@@ -970,7 +1009,7 @@ class Zone extends ServiceObject {
    *   delete: oldARecord
    * }, (err, change, apiResponse) => {});
    */
-  record(type, metadata) {
+  record(type: string, metadata: {}) {
     return new Record(this, type, metadata);
   }
   /**
@@ -1036,7 +1075,7 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  replaceRecords(recordType, newRecords, callback) {
+  replaceRecords(recordType: string|string[], newRecords: Record|Record[], callback: ChangeCallback) {
     this.getRecords(recordType, (err, recordsToDelete) => {
     if (err) {
       callback(err);
@@ -1045,7 +1084,7 @@ class Zone extends ServiceObject {
     this.createChange(
         {
           add: newRecords,
-          delete: recordsToDelete,
+          delete: recordsToDelete!,
         },
         callback);
     });
@@ -1068,17 +1107,17 @@ class Zone extends ServiceObject {
    *   }
    * });
    */
-  deleteRecordsByType_(recordTypes, callback) {
+  deleteRecordsByType_(recordTypes: string[], callback: ChangeCallback) {
     this.getRecords(recordTypes, (err, records) => {
     if (err) {
       callback(err);
       return;
     }
-    if (records.length === 0) {
+    if (records!.length === 0) {
       callback();
       return;
     }
-    this.deleteRecords(records, callback);
+    this.deleteRecords(records!, callback);
     });
   }
 }

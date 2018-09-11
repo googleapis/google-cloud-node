@@ -18,7 +18,6 @@
 
 import * as assert from 'assert';
 import * as extend from 'extend';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
 import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';

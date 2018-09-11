@@ -19,6 +19,18 @@
 import {teenyRequest} from 'teeny-request';
 import {ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
+import {Zone} from './zone';
+import {Record} from './record';
+import {Response} from 'request';
+
+export interface CreateChangeRequest {
+  add?: Record|Record[];
+  delete?: Record|Record[];
+}
+
+export interface ChangeCallback {
+  (err?: Error|null, change?: Change|null, apiResponse?: Response): void;
+}
 
 /**
  * @class
@@ -33,7 +45,7 @@ import {promisifyAll} from '@google-cloud/promisify';
  * const change = zone.change('change-id');
  */
 export class Change extends ServiceObject {
-  constructor(zone, id?) {
+  constructor(zone: Zone, id?: string) {
     const methods = {
       /**
        * @typedef {array} ChangeExistsResponse
@@ -180,9 +192,9 @@ export class Change extends ServiceObject {
        */
       id,
       methods,
+      requestModule: teenyRequest,
       // tslint:disable-next-line:no-any
-      requestModule: teenyRequest as any,
-    });
+    } as any);
   }
   /**
    * Create a change.
@@ -218,16 +230,22 @@ export class Change extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  create(config, callback?) {
-    // tslint:disable-next-line:no-any
-    (this.parent as any).createChange(config, (err, change, apiResponse) => {
+  create(callback: ChangeCallback): void;
+  create(config: CreateChangeRequest, callback: ChangeCallback): void;
+  create(
+      configOrCallback: CreateChangeRequest|ChangeCallback,
+      callback?: ChangeCallback) {
+    const config = typeof configOrCallback === 'object' ? configOrCallback : {};
+    callback =
+        typeof configOrCallback === 'function' ? configOrCallback! : callback;
+    (this.parent as Zone).createChange(config, (err, change, apiResponse) => {
       if (err) {
-        callback(err, null, apiResponse);
+        callback!(err, null, apiResponse);
         return;
       }
-      this.id = change.id;
-      this.metadata = change.metadata;
-      callback(null, this, apiResponse);
+      this.id = change!.id;
+      this.metadata = change!.metadata;
+      callback!(null, this, apiResponse);
     });
   }
 }

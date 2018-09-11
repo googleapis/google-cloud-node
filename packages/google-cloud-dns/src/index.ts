@@ -17,14 +17,40 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import {Service} from '@google-cloud/common';
+import {Service, GoogleAuthOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import * as is from 'is';
 import {teenyRequest} from 'teeny-request';
-
 import {Zone} from './zone';
+import {Response} from 'request';
+
+export interface GetZonesRequest {
+  autoPaginate?: boolean;
+  maxApiCalls?: number;
+  maxResults?: number;
+  pageToken?: string;
+}
+
+export interface DNSConfig extends GoogleAuthOptions {
+  autoRetry?: boolean;
+  maxRetries?: number;
+}
+
+export interface GetZonesCallback {
+  (err: Error|null, zones: Zone[]|null, nextQuery?: {}|null,
+   apiResponse?: Response): void;
+}
+
+export interface GetZoneCallback {
+  (err: Error|null, zone?: Zone|null, apiResponse?: Response): void;
+}
+
+export interface CreateZoneRequest {
+  dnsName?: string;
+  description?: string;
+  name?: string;
+}
 
 /**
  * @typedef {object} ClientConfig
@@ -83,8 +109,8 @@ import {Zone} from './zone';
  * Full quickstart example:
  */
 class DNS extends Service {
-  getZonesStream;
-  constructor(options?) {
+  getZonesStream: Function;
+  constructor(options?: GoogleAuthOptions) {
     options = options || {};
     const config = {
       baseUrl: 'https://www.googleapis.com/dns/v1',
@@ -186,7 +212,8 @@ class DNS extends Service {
    *   const apiResponse = data[1];
    * });
    */
-  createZone(name, config, callback?) {
+  createZone(
+      name: string, config: CreateZoneRequest, callback?: GetZoneCallback) {
     if (!name) {
       throw new Error('A zone name is required.');
     }
@@ -204,12 +231,12 @@ class DNS extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
           const zone = this.zone(resp.name);
           zone.metadata = resp;
-          callback(null, zone, resp);
+          callback!(null, zone, resp);
         });
   }
   /**
@@ -257,11 +284,14 @@ class DNS extends Service {
    *   const zones = data[0];
    * });
    */
-  getZones(query, callback?) {
-    if (is.fn(query)) {
-      callback = query;
-      query = {};
-    }
+  getZones(callback: GetZonesCallback): void;
+  getZones(query: GetZonesRequest, callback: GetZonesCallback): void;
+  getZones(
+      queryOrCallback: GetZonesRequest|GetZonesCallback,
+      callback?: GetZonesCallback): void {
+    const query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
+    callback =
+        typeof queryOrCallback === 'function' ? queryOrCallback : callback;
     this.request(
         {
           uri: '/managedZones',
@@ -269,7 +299,7 @@ class DNS extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, null, resp);
+            callback!(err, null, null, resp);
             return;
           }
           const zones = arrify(resp.managedZones).map(zone => {
@@ -277,13 +307,13 @@ class DNS extends Service {
             zoneInstance.metadata = zone;
             return zoneInstance;
           });
-          let nextQuery = null;
+          let nextQuery: {}|null = null;
           if (resp.nextPageToken) {
             nextQuery = extend({}, query, {
               pageToken: resp.nextPageToken,
             });
           }
-          callback(null, zones, nextQuery, resp);
+          callback!(null, zones, nextQuery, resp);
         });
   }
   /**
@@ -301,7 +331,7 @@ class DNS extends Service {
    *
    * const zone = dns.zone('my-zone');
    */
-  zone(name) {
+  zone(name: string) {
     if (!name) {
       throw new Error('A zone name is required.');
     }
