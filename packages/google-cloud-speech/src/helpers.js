@@ -67,10 +67,17 @@ module.exports = () => {
       options = {};
     }
 
-    var requestStream = this._innerApiCalls.streamingRecognize(options);
-
     // Format the audio content as input request for pipeline
     var recognizeStream = streamEvents(pumpify.obj());
+
+    var requestStream = this._innerApiCalls
+      .streamingRecognize(options)
+      .on('error', err => {
+        recognizeStream.destroy(err);
+      })
+      .on('response', response => {
+        recognizeStream.emit('response', response);
+      });
 
     // Attach the events to the request stream, but only do so
     // when the first write (of data) comes in.
@@ -78,17 +85,8 @@ module.exports = () => {
     // This also means that the sending of the initial request (with the
     // config) is delayed until we get the first burst of data.
     recognizeStream.once('writing', () => {
-      requestStream.on('error', err => {
-        recognizeStream.destroy(err);
-      });
-
-      // Responses must be explicitly forwarded.
-      requestStream.on('response', response => {
-        recognizeStream.emit('response', response);
-      });
-
       // The first message should contain the streaming config.
-      let first_message = true;
+      let firstMessage = true;
 
       // Set up appropriate piping between the stream returned by
       // the underlying API method and the one that we return.
@@ -98,7 +96,7 @@ module.exports = () => {
         // the appropriate request structure.
         through.obj((obj, _, next) => {
           let payload = {};
-          if (first_message && config !== undefined) {
+          if (firstMessage && config !== undefined) {
             // Write the initial configuration to the stream.
             payload.streamingConfig = config;
           }

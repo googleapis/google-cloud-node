@@ -102,8 +102,6 @@ describe('Speech helper methods', () => {
         done();
       });
 
-      userStream.emit('writing');
-
       requestStream.emit('error', error);
     });
 
