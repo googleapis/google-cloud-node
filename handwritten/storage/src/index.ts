@@ -17,7 +17,7 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import {Service} from '@google-cloud/common';
+import {Service, GoogleAuthOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -30,6 +30,31 @@ import {File} from './file';
 interface CreateBucketQuery {
   project: string;
   userProject: string;
+}
+
+export interface StorageOptions extends GoogleAuthOptions {
+  autoRetry?: boolean;
+  maxRetries?: number;
+  promise?: typeof Promise;
+}
+
+export interface BucketOptions {
+  kmsKeyName?: string;
+  userProject?: string;
+}
+
+export interface CreateBucketRequest {
+  coldline?: boolean;
+  dra?: boolean;
+  multiRegional?: boolean;
+  nearline?: boolean;
+  regional?: boolean;
+  requesterPays?: boolean;
+  userProject?: string;
+}
+
+export interface BucketCallback {
+  (err: Error|null, bucket?: Bucket|null, apiResponse?: request.Response): void;
 }
 
 /**
@@ -221,7 +246,7 @@ class Storage extends Service {
    */
   getBucketsStream;
 
-  constructor(options) {
+  constructor(options: StorageOptions = {}) {
     const config = {
       baseUrl: 'https://www.googleapis.com/storage/v1',
       projectIdRequired: false,
@@ -266,11 +291,10 @@ class Storage extends Service {
    * const albums = storage.bucket('albums');
    * const photos = storage.bucket('photos');
    */
-  bucket(name, options?) {
+  bucket(name: string, options?: BucketOptions) {
     if (!name) {
       throw new Error('A bucket name is needed to use Cloud Storage.');
     }
-
     return new Bucket(this, name, options);
   }
 
@@ -287,7 +311,7 @@ class Storage extends Service {
    * const storage = new Storage();
    * const channel = storage.channel('id', 'resource-id');
    */
-  channel(id, resourceId) {
+  channel(id: string, resourceId: string) {
     return new Channel(this, id, resourceId);
   }
 
@@ -383,19 +407,30 @@ class Storage extends Service {
    * region_tag:storage_create_bucket
    * Another example:
    */
-  createBucket(name, metadata, callback) {
+  createBucket(name: string, callback: BucketCallback): void;
+  createBucket(
+      name: string, metadata: CreateBucketRequest,
+      callback: BucketCallback): void;
+  createBucket(
+      name: string, metadataOrCallback: BucketCallback|CreateBucketRequest,
+      callback?: BucketCallback) {
     if (!name) {
       throw new Error('A name is required to create a bucket.');
     }
 
+    let metadata: CreateBucketRequest;
     if (!callback) {
-      callback = metadata;
+      callback = metadataOrCallback as BucketCallback;
       metadata = {};
+    } else {
+      metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body = extend({}, metadata, {
-      name,
-    });
+    const body: CreateBucketRequest&
+        {name?: string, storageClass?: string, billing?: {}} =
+            extend({}, metadata, {
+              name,
+            });
 
     const storageClasses = {
       coldline: 'COLDLINE',
@@ -437,14 +472,14 @@ class Storage extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
 
           const bucket = this.bucket(name);
           bucket.metadata = resp;
 
-          callback(null, bucket, resp);
+          callback!(null, bucket, resp);
         });
   }
 
