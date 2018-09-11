@@ -4,6 +4,12 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.0.3
+
+### Implementation Changes
+- Improve TypeScript types ([#381](https://github.com/googleapis/nodejs-storage/pull/381))
+- Make some parameters optional ([#380](https://github.com/googleapis/nodejs-storage/pull/380))
+
 ## v2.0.2
 
 ### Implementation Changes
