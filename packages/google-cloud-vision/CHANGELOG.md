@@ -4,6 +4,41 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.22.0
+
+### New Features
+Object Localization is available on v1 of this library:
+- Updated CI config and run synth ([#181](https://github.com/googleapis/nodejs-vision/pull/181))
+
+### Dependencies
+- chore(deps): update dependency @google-cloud/storage to v2 ([#183](https://github.com/googleapis/nodejs-vision/pull/183))
+- chore(deps): update dependency nyc to v13 ([#177](https://github.com/googleapis/nodejs-vision/pull/177))
+- fix(deps): update dependency google-gax to ^0.19.0 ([#173](https://github.com/googleapis/nodejs-vision/pull/173))
+- chore(deps): update dependency eslint-config-prettier to v3 ([#170](https://github.com/googleapis/nodejs-vision/pull/170))
+
+### Internal / Testing Changes
+- Update CI config ([#188](https://github.com/googleapis/nodejs-vision/pull/188))
+- Fix the sample tests ([#187](https://github.com/googleapis/nodejs-vision/pull/187))
+- Retry npm install in CI ([#185](https://github.com/googleapis/nodejs-vision/pull/185))
+- Update CI config ([#184](https://github.com/googleapis/nodejs-vision/pull/184))
+- fix: (tests): Use real service to validate expectations. ([#182](https://github.com/googleapis/nodejs-vision/pull/182))
+- chore: make the CircleCI config consistent
+- Udpate Beta Vision samples to use beta tags ([#172](https://github.com/googleapis/nodejs-vision/pull/172))
+- Vision region tag update ([#171](https://github.com/googleapis/nodejs-vision/pull/171))
+- build: configure Windows build on Kokoro ([#165](https://github.com/googleapis/nodejs-vision/pull/165))
+- chore: do not use npm ci ([#167](https://github.com/googleapis/nodejs-vision/pull/167))
+- build(kokoro): samples-test.sh need GCLOUD_PROJECT env; node6 and node8 is using wrong .sh ([#162](https://github.com/googleapis/nodejs-vision/pull/162))
+- build(kokoro): setup samples and system test ([#161](https://github.com/googleapis/nodejs-vision/pull/161))
+- chore: ignore package-lock.json ([#160](https://github.com/googleapis/nodejs-vision/pull/160))
+- build: rename build.sh => test.sh; presubmit jobs runs lint and docs properly ([#158](https://github.com/googleapis/nodejs-vision/pull/158))
+- fix(samples): missing fs requires causing sample-test to fail ([#157](https://github.com/googleapis/nodejs-vision/pull/157))
+- build: add set -x to .sh to show the command being executed ([#156](https://github.com/googleapis/nodejs-vision/pull/156))
+- add samples linking to kokoro jobs ([#155](https://github.com/googleapis/nodejs-vision/pull/155))
+- Kokoro multi ver ([#153](https://github.com/googleapis/nodejs-vision/pull/153))
+- chore: update renovate config ([#152](https://github.com/googleapis/nodejs-vision/pull/152))
+- have presubmit.cfg in separate node* folders ([#151](https://github.com/googleapis/nodejs-vision/pull/151))
+- split presubmit to multiple node versions ([#149](https://github.com/googleapis/nodejs-vision/pull/149))
+
 ## v0.21.1
 
 Patch release to bring in updates to google-gax@0.18.0 so it no longer emits deprecation warnings with grpc (#120), along with other dependency updates and documentation changes.
