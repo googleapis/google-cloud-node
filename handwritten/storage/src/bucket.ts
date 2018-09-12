@@ -76,7 +76,7 @@ interface MetadataRequest {
  */
 export interface GetFilesRequest {
   autoPaginate?: boolean;
-  delimited?: string;
+  delimiter?: string;
   directory?: string;
   prefix?: string;
   maxApiCalls?: number;
