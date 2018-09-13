@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## v0.2.1
+
+### Implementation Changes
+Samples for v2beta3 is pending and they won't work for v2beta2. We're temporarily reverting back to defaulting to v2beta2 when you import the library like so:
+```
+const cloudTasks = require('@google-cloud/tasks');
+const client = new cloudTasks.CloudTasksClient(); // v2beta2 by default
+```
+- feat: restoring v2beta2 by default ([#71](https://github.com/googleapis/nodejs-tasks/pull/71))
+
+### Dependencies
+v0.20.0 fixes an issue with semver.
+- bump google-gax 0.20.0 ([#69](https://github.com/googleapis/nodejs-tasks/pull/69))
+
+### Documentation
+- add namespace to fix some 404s in doc ([#66](https://github.com/googleapis/nodejs-tasks/pull/66))
+
+### Internal / Testing Changes
+- Update CI config ([#65](https://github.com/googleapis/nodejs-tasks/pull/65))
+
 ## v0.2.0
 
 ### New Features
