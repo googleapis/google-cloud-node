@@ -14,7 +14,7 @@
     "test": "npm run unit-test && npm run system-test"
   },
   "dependencies": {
-    "@google-cloud/tasks": "^0.2.1",
+    "@google-cloud/tasks": "^0.2.2",
     "body-parser": "^1.18.3",
     "express": "4.16.3",
     "yargs": "^12.0.1"

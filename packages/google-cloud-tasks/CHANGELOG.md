@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## v0.2.2
+
+### Implementation Changes
+This patch release reverts back to using v2beta3 as the default version. It also updates the samples.
+- feat: using v2beta3 by default
+
+### Documentation
+- Update Cloud Tasks Sample ([#67](https://github.com/googleapis/nodejs-tasks/pull/67))
+
+### Internal / Testing Changes
+- fix: replace service account key with Tasks access ([#75](https://github.com/googleapis/nodejs-tasks/pull/75))
+
 ## v0.2.1
 
 ### Implementation Changes
