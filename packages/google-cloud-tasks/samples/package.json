@@ -1,23 +1,40 @@
 {
-  "name": "nodejs-docs-samples-tasks",
-  "version": "0.1.0",
-  "private": true,
+  "name": "appengine-cloudtasks",
+  "description": "Google App Engine Cloud Tasks example.",
+  "version": "0.2.0",
   "license": "Apache-2.0",
-  "author": "Google LLC",
-  "repository": "googleapis/tasks",
+  "author": "Google Inc.",
+  "private": true,
   "engines": {
     "node": ">=8"
   },
   "scripts": {
-    "lint": "npm run lint task.js",
-    "test": "ava -T 5m --verbose system-test/*.test.js"
+    "unit-test": "ava --verbose system-test/*.test.js",
+    "system-test": "repo-tools test app --config package.json --config-key cloud-repo-tools",
+    "test": "npm run unit-test && npm run system-test"
   },
   "dependencies": {
     "@google-cloud/tasks": "^0.2.1",
+    "body-parser": "^1.18.3",
+    "express": "4.16.3",
     "yargs": "^12.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "ava": "^0.25.0"
+    "@google-cloud/nodejs-repo-tools": "2.3.0",
+    "ava": "^0.25.0",
+    "proxyquire": "2.0.1",
+    "sinon": "6.0.1"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true,
+    "test": {
+      "app": {
+        "msg": "Hello, World!",
+        "args": [
+          "server.js"
+        ]
+      }
+    }
   }
 }
