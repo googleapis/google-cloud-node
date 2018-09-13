@@ -77,9 +77,9 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} CloudTasksClient
- *   Reference to {@link v2beta2.CloudTasksClient}
+ *   Reference to {@link v2beta3.CloudTasksClient}
  */
-module.exports = gapic.v2beta2;
+module.exports = gapic.v2beta3;
 
 /**
  * @type {object}
