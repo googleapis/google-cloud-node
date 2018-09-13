@@ -453,9 +453,10 @@ describe('File', () => {
       }
 
       it('should allow a string', done => {
-        const newFileName = 'new-file-name.png';
+        const newFileName = '/new-file-name.png';
+        const newFile = new File(BUCKET, newFileName);
         const expectedPath =
-            `/rewriteTo/b/${file.bucket.name}/o/${newFileName}`;
+            `/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });

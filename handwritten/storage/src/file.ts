@@ -530,7 +530,7 @@ class File extends ServiceObject {
         {
           method: 'POST',
           uri: `/rewriteTo/b/${destBucket.name}/o/${
-              encodeURIComponent(destName)}`,
+              encodeURIComponent(newFile.name)}`,
           qs: query,
           json: options,
           headers,
