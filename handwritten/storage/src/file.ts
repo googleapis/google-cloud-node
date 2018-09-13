@@ -254,7 +254,7 @@ class File extends ServiceObject {
   bucket: Bucket;
   storage: Storage;
   kmsKeyName?: string;
-  userProject: string;
+  userProject?: string;
   name: string;
   generation?: number;
   requestQueryObject?: {generation: number};

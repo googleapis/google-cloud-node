@@ -30,6 +30,7 @@ import * as snakeize from 'snakeize';
 import * as request from 'request';
 
 import {Acl} from './acl';
+import {Channel} from './channel';
 import {File, FileOptions} from './file';
 import {Iam} from './iam';
 import {Notification} from './notification';
@@ -47,6 +48,25 @@ interface CreateNotificationQuery {
 interface MetadataRequest {
   predefinedAcl: string;
   userProject?: string;
+}
+
+interface BucketOptions {
+  userProject?: string;
+}
+
+/**
+ * See a [Objects:
+ * watchAll request
+ * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
+ */
+interface WatchAllRequest {
+  delimiter: string;
+  maxResults: number;
+  pageToken: string;
+  prefix: string;
+  projection: string;
+  userProject: string;
+  versions: boolean;
 }
 
 /**
@@ -86,9 +106,87 @@ export interface GetFilesRequest {
   versions?: boolean;
 }
 
+/**
+ * @typedef {object} DeleteFilesRequest Query object. See {@link Bucket#getFiles}
+ *     for all of the supported properties.
+ * @property {boolean} [force] Suppress errors until all files have been
+ *     processed.
+ */
 export interface DeleteFilesRequest extends GetFilesRequest {
   force?: boolean;
 }
+
+/**
+ * @typedef {object} CombineOptions
+ * @property {string} [kmsKeyName] Resource name of the Cloud KMS key, of
+ *     the form
+ *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
+ *     that will be used to encrypt the object. Overwrites the object
+ * metadata's `kms_key_name` value, if any.
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ */
+export interface CombineOptions {
+  kmsKeyName?: string;
+  userProject?: string;
+}
+
+/**
+ * @callback CombineCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File} newFile The new {@link File}.
+ * @param {object} apiResponse The full API response.
+ */
+export interface CombineCallback {
+  (err: Error|null, newFile: File|null, apiResponse: object);
+}
+
+/**
+ * @typedef {array} CombineResponse
+ * @property {File} 0 The new {@link File}.
+ * @property {object} 1 The full API response.
+ */
+export type CombineResponse = [File, object];
+
+/**
+ * See a [Objects:
+ * watchAll request
+ * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
+ *
+ * @typedef {object} CreateChannelConfig
+ * @property {string} address The address where notifications are
+ *     delivered for this channel.
+ */
+export interface CreateChannelConfig extends WatchAllRequest {
+  address: string;
+}
+
+/**
+ * @typedef {object} CreateChannelOptions
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ */
+export interface CreateChannelOptions {
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} CreateChannelResponse
+ * @property {Channel} 0 The new {@link Channel}.
+ * @property {object} 1 The full API response.
+ */
+export type CreateChannelResponse = [Channel, object];
+
+/**
+ * @callback CreateChannelCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Channel} channel The new {@link Channel}.
+ * @param {object} apiResponse The full API response.
+ */
+export interface CreateChannelCallback {
+  (err: Error|null, channel: Channel|null, apiResponse: object);
+}
+
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -136,7 +234,7 @@ class Bucket extends ServiceObject {
    * @name Bucket#userProject
    * @type {string}
    */
-  userProject: string;
+  userProject?: string;
 
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -299,7 +397,7 @@ class Bucket extends ServiceObject {
    */
   getFilesStream: Function;
 
-  constructor(storage: Storage, name: string, options?) {
+  constructor(storage: Storage, name: string, options?: BucketOptions) {
     options = options || {};
 
     // Allow for "gs://"-style input, and strip any trailing slashes.
@@ -366,17 +464,6 @@ class Bucket extends ServiceObject {
   }
 
   /**
-   * @typedef {array} CombineResponse
-   * @property {File} 0 The new {@link File}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback CombineCallback
-   * @param {?Error} err Request error, if any.
-   * @param {File} newFile The new {@link File}.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Combine multiple files into one new file.
    *
    * @see [Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}
@@ -389,14 +476,7 @@ class Bucket extends ServiceObject {
    *     combined.
    * @param {string|File} destination The file you would like the
    *     source files combined into.
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.kmsKeyName] Resource name of the Cloud KMS key, of
-   *     the form
-   *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
-   *     that will be used to encrypt the object. Overwrites the object
-   * metadata's `kms_key_name` value, if any.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {CombineOptions} [options] Configuration options.
    * @param {CombineCallback} [callback] Callback function.
    * @returns {Promise<CombineResponse>}
    *
@@ -422,7 +502,15 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  combine(sources: string[]|File[], destination, options, callback) {
+  combine(
+      sources: string[]|File[], destination: string|File,
+      options: CombineOptions): Promise<CombineResponse>;
+  combine(
+      sources: string[]|File[], destination: string|File,
+      options: CombineOptions, callback);
+  combine(
+      sources: string[]|File[], destination: string|File,
+      options: CombineOptions, callback?): Promise<CombineResponse>|void {
     if (!is.array(sources) || sources.length < 2) {
       throw new Error('You must provide at least two source files.');
     }
@@ -482,25 +570,14 @@ class Bucket extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
 
-          callback(null, destination, resp);
+          callback!(null, destination, resp);
         });
   }
 
-  /**
-   * @typedef {array} CreateChannelResponse
-   * @property {Channel} 0 The new {@link Channel}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback CreateChannelCallback
-   * @param {?Error} err Request error, if any.
-   * @param {Channel} channel The new {@link Channel}.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Create a channel that will be notified when objects in this bucket changes.
    *
@@ -510,14 +587,8 @@ class Bucket extends ServiceObject {
    * @see [Objects: watchAll API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll}
    *
    * @param {string} id The ID of the channel to create.
-   * @param {object} config See a
-   *     [Objects: watchAll request
-   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
-   * @param {string} config.address The address where notifications are
-   *     delivered for this channel.
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {CreateChannelConfig} config Configuration for creating channel.
+   * @param {CreateChannelOptions} [options] Configuration options.
    * @param {CreateChannelCallback} [callback] Callback function.
    * @returns {Promise<CreateChannelResponse>}
    *
@@ -545,7 +616,18 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  createChannel(id: string, config, options, callback?) {
+  createChannel(
+      id: string, config: CreateChannelConfig,
+      options?: CreateChannelOptions): Promise<CreateChannelResponse>;
+  createChannel(
+      id: string, config: CreateChannelConfig, callback: CreateChannelCallback);
+  createChannel(
+      id: string, config: CreateChannelConfig, options: CreateChannelOptions,
+      callback: CreateChannelCallback);
+  createChannel(
+      id: string, config: CreateChannelConfig,
+      options?: CreateChannelOptions|CreateChannelCallback,
+      callback?: CreateChannelCallback): Promise<CreateChannelResponse>|void {
     if (!is.string(id)) {
       throw new Error('An ID is required to create a channel.');
     }
@@ -554,7 +636,7 @@ class Bucket extends ServiceObject {
       throw new Error('An address is required to create a channel.');
     }
 
-    if (is.fn(options)) {
+    if (typeof options === 'function') {
       callback = options;
       options = {};
     }
@@ -573,7 +655,7 @@ class Bucket extends ServiceObject {
         },
         (err, apiResponse) => {
           if (err) {
-            callback(err, null, apiResponse);
+            callback!(err, null, apiResponse);
             return;
           }
 
@@ -582,7 +664,7 @@ class Bucket extends ServiceObject {
 
           channel.metadata = apiResponse;
 
-          callback(null, channel, apiResponse);
+          callback!(null, channel, apiResponse);
         });
   }
 
@@ -802,12 +884,7 @@ class Bucket extends ServiceObject {
    *
    * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
    *
-   * @param {object} [query] Query object. See {@link Bucket#getFiles}
-   *     for all of the supported properties.
-   * @param {boolean} [query.force] Suppress errors until all files have been
-   *     processed.
-   * @param {string} [query.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {DeleteFilesRequest} [query] Query object. See {@link Bucket#getFiles}
    * @param {DeleteFilesCallback} [callback] Callback function.
    * @returns {Promise}
    *
