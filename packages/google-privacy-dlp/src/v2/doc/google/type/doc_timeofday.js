@@ -38,6 +38,6 @@
  * @memberof google.type
  * @see [google.type.TimeOfDay definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto}
  */
-var TimeOfDay = {
+const TimeOfDay = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

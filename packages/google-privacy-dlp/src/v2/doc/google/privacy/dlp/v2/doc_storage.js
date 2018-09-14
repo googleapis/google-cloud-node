@@ -28,7 +28,7 @@
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var InfoType = {
+const InfoType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -50,7 +50,7 @@ var InfoType = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StoredType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var StoredType = {
+const StoredType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -104,7 +104,7 @@ var StoredType = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CustomInfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var CustomInfoType = {
+const CustomInfoType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -306,7 +306,7 @@ var CustomInfoType = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.FieldId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var FieldId = {
+const FieldId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -328,7 +328,7 @@ var FieldId = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.PartitionId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var PartitionId = {
+const PartitionId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -342,7 +342,7 @@ var PartitionId = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.KindExpression definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var KindExpression = {
+const KindExpression = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -364,7 +364,7 @@ var KindExpression = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DatastoreOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var DatastoreOptions = {
+const DatastoreOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -405,7 +405,7 @@ var DatastoreOptions = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CloudStorageOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var CloudStorageOptions = {
+const CloudStorageOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -458,7 +458,7 @@ var CloudStorageOptions = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CloudStorageFileSet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var CloudStorageFileSet = {
+const CloudStorageFileSet = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -473,7 +473,7 @@ var CloudStorageFileSet = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CloudStoragePath definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var CloudStoragePath = {
+const CloudStoragePath = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -511,7 +511,7 @@ var CloudStoragePath = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BigQueryOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var BigQueryOptions = {
+const BigQueryOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -562,7 +562,7 @@ var BigQueryOptions = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StorageConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var StorageConfig = {
+const StorageConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -624,7 +624,7 @@ var StorageConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BigQueryKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var BigQueryKey = {
+const BigQueryKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -640,7 +640,7 @@ var BigQueryKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DatastoreKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var DatastoreKey = {
+const DatastoreKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -674,7 +674,7 @@ var DatastoreKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Key definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var Key = {
+const Key = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -722,7 +722,7 @@ var Key = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var RecordKey = {
+const RecordKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -747,7 +747,7 @@ var RecordKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BigQueryTable definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var BigQueryTable = {
+const BigQueryTable = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -768,7 +768,7 @@ var BigQueryTable = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BigQueryField definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var BigQueryField = {
+const BigQueryField = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -788,7 +788,7 @@ var BigQueryField = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.EntityId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
  */
-var EntityId = {
+const EntityId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -799,7 +799,7 @@ var EntityId = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var Likelihood = {
+const Likelihood = {
 
   /**
    * Default value; same as POSSIBLE.
@@ -830,7 +830,7 @@ var Likelihood = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var FileType = {
+const FileType = {
 
   /**
    * Includes all files.

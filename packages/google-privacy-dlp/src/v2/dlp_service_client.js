@@ -79,13 +79,13 @@ class DlpServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -96,7 +96,7 @@ class DlpServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -155,7 +155,7 @@ class DlpServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.privacy.dlp.v2.DlpService',
       gapicConfig,
       opts.clientConfig,
@@ -169,14 +169,14 @@ class DlpServiceClient {
 
     // Put together the "service stub" for
     // google.privacy.dlp.v2.DlpService.
-    var dlpServiceStub = gaxGrpc.createStub(
+    const dlpServiceStub = gaxGrpc.createStub(
       protos.google.privacy.dlp.v2.DlpService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var dlpServiceStubMethods = [
+    const dlpServiceStubMethods = [
       'inspectContent',
       'redactImage',
       'deidentifyContent',
@@ -208,7 +208,7 @@ class DlpServiceClient {
         dlpServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -298,14 +298,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.inspectContent({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -366,14 +366,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.redactImage({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -447,14 +447,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.deidentifyContent({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -529,14 +529,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.reidentifyContent({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -582,14 +582,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    *
    * client.listInfoTypes({})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -640,14 +640,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    * client.createInspectTemplate({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -701,14 +701,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.organizationInspectTemplatePath('[ORGANIZATION]', '[INSPECT_TEMPLATE]');
+   * const formattedName = client.organizationInspectTemplatePath('[ORGANIZATION]', '[INSPECT_TEMPLATE]');
    * client.updateInspectTemplate({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -754,14 +754,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    *
    * client.getInspectTemplate({})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -820,16 +820,16 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    *
    * client.listInspectTemplates({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -839,17 +839,17 @@ class DlpServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -908,11 +908,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    * client.listInspectTemplatesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -952,11 +952,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.organizationInspectTemplatePath('[ORGANIZATION]', '[INSPECT_TEMPLATE]');
+   * const formattedName = client.organizationInspectTemplatePath('[ORGANIZATION]', '[INSPECT_TEMPLATE]');
    * client.deleteInspectTemplate({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1010,14 +1010,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    * client.createDeidentifyTemplate({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1072,14 +1072,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
+   * const formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
    * client.updateDeidentifyTemplate({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1126,14 +1126,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
+   * const formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
    * client.getDeidentifyTemplate({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1197,16 +1197,16 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    *
    * client.listDeidentifyTemplates({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1216,17 +1216,17 @@ class DlpServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1289,11 +1289,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.organizationPath('[ORGANIZATION]');
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
    * client.listDeidentifyTemplatesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1334,11 +1334,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
+   * const formattedName = client.organizationDeidentifyTemplatePath('[ORGANIZATION]', '[DEIDENTIFY_TEMPLATE]');
    * client.deleteDeidentifyTemplate({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1394,14 +1394,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.createDlpJob({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1488,16 +1488,16 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listDlpJobs({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1507,17 +1507,17 @@ class DlpServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1603,11 +1603,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.listDlpJobsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1649,14 +1649,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+   * const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
    * client.getDlpJob({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1696,11 +1696,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+   * const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
    * client.deleteDlpJob({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1738,11 +1738,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+   * const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
    * client.cancelDlpJob({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1811,16 +1811,16 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listJobTriggers({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1830,17 +1830,17 @@ class DlpServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1911,11 +1911,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.listJobTriggersStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1957,14 +1957,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectJobTriggerPath('[PROJECT]', '[JOB_TRIGGER]');
+   * const formattedName = client.projectJobTriggerPath('[PROJECT]', '[JOB_TRIGGER]');
    * client.getJobTrigger({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -2002,11 +2002,11 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var name = '';
+   * const name = '';
    * client.deleteJobTrigger({name: name}).catch(err => {
    *   console.error(err);
    * });
@@ -2053,14 +2053,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectJobTriggerPath('[PROJECT]', '[JOB_TRIGGER]');
+   * const formattedName = client.projectJobTriggerPath('[PROJECT]', '[JOB_TRIGGER]');
    * client.updateJobTrigger({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -2110,14 +2110,14 @@ class DlpServiceClient {
    *
    * const dlp = require('@google-cloud/dlp');
    *
-   * var client = new dlp.v2.DlpServiceClient({
+   * const client = new dlp.v2.DlpServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.createJobTrigger({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

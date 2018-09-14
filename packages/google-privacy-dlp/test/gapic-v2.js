@@ -18,26 +18,26 @@ const assert = require('assert');
 
 const dlpModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DlpServiceClient', () => {
   describe('inspectContent', () => {
     it('invokes inspectContent without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.inspectContent = mockSimpleGrpcMethod(
@@ -53,14 +53,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes inspectContent with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -82,21 +82,21 @@ describe('DlpServiceClient', () => {
 
   describe('redactImage', () => {
     it('invokes redactImage without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var redactedImage = '28';
-      var extractedText = 'extractedText998260012';
-      var expectedResponse = {
+      const redactedImage = '28';
+      const extractedText = 'extractedText998260012';
+      const expectedResponse = {
         redactedImage: redactedImage,
         extractedText: extractedText,
       };
@@ -115,14 +115,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes redactImage with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -144,19 +144,19 @@ describe('DlpServiceClient', () => {
 
   describe('deidentifyContent', () => {
     it('invokes deidentifyContent without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deidentifyContent = mockSimpleGrpcMethod(
@@ -172,14 +172,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deidentifyContent with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -201,19 +201,19 @@ describe('DlpServiceClient', () => {
 
   describe('reidentifyContent', () => {
     it('invokes reidentifyContent without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.reidentifyContent = mockSimpleGrpcMethod(
@@ -229,14 +229,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes reidentifyContent with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -258,16 +258,16 @@ describe('DlpServiceClient', () => {
 
   describe('listInfoTypes', () => {
     it('invokes listInfoTypes without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(
@@ -283,13 +283,13 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listInfoTypes with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listInfoTypes = mockSimpleGrpcMethod(
@@ -309,22 +309,22 @@ describe('DlpServiceClient', () => {
 
   describe('createInspectTemplate', () => {
     it('invokes createInspectTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -344,14 +344,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes createInspectTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -373,25 +373,25 @@ describe('DlpServiceClient', () => {
 
   describe('updateInspectTemplate', () => {
     it('invokes updateInspectTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationInspectTemplatePath(
+      const formattedName = client.organizationInspectTemplatePath(
         '[ORGANIZATION]',
         '[INSPECT_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -411,17 +411,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes updateInspectTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationInspectTemplatePath(
+      const formattedName = client.organizationInspectTemplatePath(
         '[ORGANIZATION]',
         '[INSPECT_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -443,19 +443,19 @@ describe('DlpServiceClient', () => {
 
   describe('getInspectTemplate', () => {
     it('invokes getInspectTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -475,13 +475,13 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes getInspectTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock Grpc layer
       client._innerApiCalls.getInspectTemplate = mockSimpleGrpcMethod(
@@ -501,22 +501,22 @@ describe('DlpServiceClient', () => {
 
   describe('listInspectTemplates', () => {
     it('invokes listInspectTemplates without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var inspectTemplatesElement = {};
-      var inspectTemplates = [inspectTemplatesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const inspectTemplatesElement = {};
+      const inspectTemplates = [inspectTemplatesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         inspectTemplates: inspectTemplates,
       };
@@ -539,14 +539,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listInspectTemplates with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -568,17 +568,17 @@ describe('DlpServiceClient', () => {
 
   describe('deleteInspectTemplate', () => {
     it('invokes deleteInspectTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationInspectTemplatePath(
+      const formattedName = client.organizationInspectTemplatePath(
         '[ORGANIZATION]',
         '[INSPECT_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -594,17 +594,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deleteInspectTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationInspectTemplatePath(
+      const formattedName = client.organizationInspectTemplatePath(
         '[ORGANIZATION]',
         '[INSPECT_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -625,22 +625,22 @@ describe('DlpServiceClient', () => {
 
   describe('createDeidentifyTemplate', () => {
     it('invokes createDeidentifyTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -660,14 +660,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes createDeidentifyTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -689,25 +689,25 @@ describe('DlpServiceClient', () => {
 
   describe('updateDeidentifyTemplate', () => {
     it('invokes updateDeidentifyTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -727,17 +727,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes updateDeidentifyTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -759,25 +759,25 @@ describe('DlpServiceClient', () => {
 
   describe('getDeidentifyTemplate', () => {
     it('invokes getDeidentifyTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -797,17 +797,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes getDeidentifyTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -829,22 +829,22 @@ describe('DlpServiceClient', () => {
 
   describe('listDeidentifyTemplates', () => {
     it('invokes listDeidentifyTemplates without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var deidentifyTemplatesElement = {};
-      var deidentifyTemplates = [deidentifyTemplatesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const deidentifyTemplatesElement = {};
+      const deidentifyTemplates = [deidentifyTemplatesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         deidentifyTemplates: deidentifyTemplates,
       };
@@ -867,14 +867,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listDeidentifyTemplates with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.organizationPath('[ORGANIZATION]');
-      var request = {
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -896,17 +896,17 @@ describe('DlpServiceClient', () => {
 
   describe('deleteDeidentifyTemplate', () => {
     it('invokes deleteDeidentifyTemplate without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -922,17 +922,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deleteDeidentifyTemplate with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.organizationDeidentifyTemplatePath(
+      const formattedName = client.organizationDeidentifyTemplatePath(
         '[ORGANIZATION]',
         '[DEIDENTIFY_TEMPLATE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -953,21 +953,21 @@ describe('DlpServiceClient', () => {
 
   describe('createDlpJob', () => {
     it('invokes createDlpJob without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var jobTriggerName = 'jobTriggerName1819490804';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const jobTriggerName = 'jobTriggerName1819490804';
+      const expectedResponse = {
         name: name,
         jobTriggerName: jobTriggerName,
       };
@@ -986,14 +986,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes createDlpJob with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1015,22 +1015,22 @@ describe('DlpServiceClient', () => {
 
   describe('listDlpJobs', () => {
     it('invokes listDlpJobs without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var jobsElement = {};
-      var jobs = [jobsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const jobsElement = {};
+      const jobs = [jobsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         jobs: jobs,
       };
@@ -1053,14 +1053,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listDlpJobs with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1082,21 +1082,21 @@ describe('DlpServiceClient', () => {
 
   describe('getDlpJob', () => {
     it('invokes getDlpJob without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var jobTriggerName = 'jobTriggerName1819490804';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const jobTriggerName = 'jobTriggerName1819490804';
+      const expectedResponse = {
         name: name2,
         jobTriggerName: jobTriggerName,
       };
@@ -1115,14 +1115,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes getDlpJob with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
@@ -1144,14 +1144,14 @@ describe('DlpServiceClient', () => {
 
   describe('deleteDlpJob', () => {
     it('invokes deleteDlpJob without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
@@ -1165,14 +1165,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deleteDlpJob with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
@@ -1193,14 +1193,14 @@ describe('DlpServiceClient', () => {
 
   describe('cancelDlpJob', () => {
     it('invokes cancelDlpJob without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
@@ -1214,14 +1214,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes cancelDlpJob with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
-      var request = {
+      const formattedName = client.dlpJobPath('[PROJECT]', '[DLP_JOB]');
+      const request = {
         name: formattedName,
       };
 
@@ -1242,22 +1242,22 @@ describe('DlpServiceClient', () => {
 
   describe('listJobTriggers', () => {
     it('invokes listJobTriggers without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var jobTriggersElement = {};
-      var jobTriggers = [jobTriggersElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const jobTriggersElement = {};
+      const jobTriggers = [jobTriggersElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         jobTriggers: jobTriggers,
       };
@@ -1280,14 +1280,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes listJobTriggers with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1309,25 +1309,25 @@ describe('DlpServiceClient', () => {
 
   describe('getJobTrigger', () => {
     it('invokes getJobTrigger without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectJobTriggerPath(
+      const formattedName = client.projectJobTriggerPath(
         '[PROJECT]',
         '[JOB_TRIGGER]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -1347,17 +1347,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes getJobTrigger with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectJobTriggerPath(
+      const formattedName = client.projectJobTriggerPath(
         '[PROJECT]',
         '[JOB_TRIGGER]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1379,14 +1379,14 @@ describe('DlpServiceClient', () => {
 
   describe('deleteJobTrigger', () => {
     it('invokes deleteJobTrigger without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var name = 'name3373707';
-      var request = {
+      const name = 'name3373707';
+      const request = {
         name: name,
       };
 
@@ -1400,14 +1400,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes deleteJobTrigger with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var name = 'name3373707';
-      var request = {
+      const name = 'name3373707';
+      const request = {
         name: name,
       };
 
@@ -1428,25 +1428,25 @@ describe('DlpServiceClient', () => {
 
   describe('updateJobTrigger', () => {
     it('invokes updateJobTrigger without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectJobTriggerPath(
+      const formattedName = client.projectJobTriggerPath(
         '[PROJECT]',
         '[JOB_TRIGGER]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -1466,17 +1466,17 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes updateJobTrigger with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectJobTriggerPath(
+      const formattedName = client.projectJobTriggerPath(
         '[PROJECT]',
         '[JOB_TRIGGER]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1498,22 +1498,22 @@ describe('DlpServiceClient', () => {
 
   describe('createJobTrigger', () => {
     it('invokes createJobTrigger without error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -1533,14 +1533,14 @@ describe('DlpServiceClient', () => {
     });
 
     it('invokes createJobTrigger with error', done => {
-      var client = new dlpModule.v2.DlpServiceClient({
+      const client = new dlpModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 

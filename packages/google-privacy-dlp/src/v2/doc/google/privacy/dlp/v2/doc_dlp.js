@@ -69,7 +69,7 @@
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectConfig = {
+const InspectConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -136,7 +136,7 @@ var InspectConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ByteContentItem definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ByteContentItem = {
+const ByteContentItem = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -176,7 +176,7 @@ var ByteContentItem = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ContentItem definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ContentItem = {
+const ContentItem = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -195,7 +195,7 @@ var ContentItem = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Table definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Table = {
+const Table = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -231,7 +231,7 @@ var Table = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectResult = {
+const InspectResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -277,7 +277,7 @@ var InspectResult = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Finding definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Finding = {
+const Finding = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -310,7 +310,7 @@ var Finding = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Location definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Location = {
+const Location = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -354,7 +354,7 @@ var Location = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ContentLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ContentLocation = {
+const ContentLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -369,7 +369,7 @@ var ContentLocation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DocumentLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DocumentLocation = {
+const DocumentLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -395,7 +395,7 @@ var DocumentLocation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RecordLocation = {
+const RecordLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -409,7 +409,7 @@ var RecordLocation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.TableLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var TableLocation = {
+const TableLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -426,7 +426,7 @@ var TableLocation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Range definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Range = {
+const Range = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -442,7 +442,7 @@ var Range = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ImageLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ImageLocation = {
+const ImageLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -465,7 +465,7 @@ var ImageLocation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BoundingBox definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var BoundingBox = {
+const BoundingBox = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -499,7 +499,7 @@ var BoundingBox = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RedactImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RedactImageRequest = {
+const RedactImageRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -548,7 +548,7 @@ var RedactImageRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Color definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Color = {
+const Color = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -572,7 +572,7 @@ var Color = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RedactImageResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RedactImageResponse = {
+const RedactImageResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -619,7 +619,7 @@ var RedactImageResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeidentifyContentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeidentifyContentRequest = {
+const DeidentifyContentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -640,7 +640,7 @@ var DeidentifyContentRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeidentifyContentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeidentifyContentResponse = {
+const DeidentifyContentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -692,7 +692,7 @@ var DeidentifyContentResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ReidentifyContentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ReidentifyContentRequest = {
+const ReidentifyContentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -713,7 +713,7 @@ var ReidentifyContentRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ReidentifyContentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ReidentifyContentResponse = {
+const ReidentifyContentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -745,7 +745,7 @@ var ReidentifyContentResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectContentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectContentRequest = {
+const InspectContentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -761,7 +761,7 @@ var InspectContentRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectContentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectContentResponse = {
+const InspectContentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -802,7 +802,7 @@ var InspectContentResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.OutputStorageConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var OutputStorageConfig = {
+const OutputStorageConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -857,7 +857,7 @@ var OutputStorageConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InfoTypeStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InfoTypeStats = {
+const InfoTypeStats = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -878,7 +878,7 @@ var InfoTypeStats = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectDataSourceDetails definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectDataSourceDetails = {
+const InspectDataSourceDetails = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -939,7 +939,7 @@ var InspectDataSourceDetails = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InfoTypeDescription definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InfoTypeDescription = {
+const InfoTypeDescription = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -959,7 +959,7 @@ var InfoTypeDescription = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInfoTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListInfoTypesRequest = {
+const ListInfoTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -975,7 +975,7 @@ var ListInfoTypesRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInfoTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListInfoTypesResponse = {
+const ListInfoTypesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1003,7 +1003,7 @@ var ListInfoTypesResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RiskAnalysisJobConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RiskAnalysisJobConfig = {
+const RiskAnalysisJobConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1039,7 +1039,7 @@ var RiskAnalysisJobConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.QuasiId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var QuasiId = {
+const QuasiId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1073,7 +1073,7 @@ var QuasiId = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StatisticalTable definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var StatisticalTable = {
+const StatisticalTable = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1119,7 +1119,7 @@ var StatisticalTable = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.PrivacyMetric definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var PrivacyMetric = {
+const PrivacyMetric = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1405,7 +1405,7 @@ var PrivacyMetric = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var AnalyzeDataSourceRiskDetails = {
+const AnalyzeDataSourceRiskDetails = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1798,7 +1798,7 @@ var AnalyzeDataSourceRiskDetails = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ValueFrequency definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ValueFrequency = {
+const ValueFrequency = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1834,7 +1834,7 @@ var ValueFrequency = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Value definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Value = {
+const Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1848,7 +1848,7 @@ var Value = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.QuoteInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var QuoteInfo = {
+const QuoteInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1874,7 +1874,7 @@ var QuoteInfo = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DateTime definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DateTime = {
+const DateTime = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1911,7 +1911,7 @@ var DateTime = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeidentifyConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeidentifyConfig = {
+const DeidentifyConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1952,7 +1952,7 @@ var DeidentifyConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.PrimitiveTransformation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var PrimitiveTransformation = {
+const PrimitiveTransformation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1967,7 +1967,7 @@ var PrimitiveTransformation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.TimePartConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var TimePartConfig = {
+const TimePartConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2026,7 +2026,7 @@ var TimePartConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CryptoHashConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CryptoHashConfig = {
+const CryptoHashConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2042,7 +2042,7 @@ var CryptoHashConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ReplaceValueConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ReplaceValueConfig = {
+const ReplaceValueConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2052,7 +2052,7 @@ var ReplaceValueConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ReplaceWithInfoTypeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ReplaceWithInfoTypeConfig = {
+const ReplaceWithInfoTypeConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2064,7 +2064,7 @@ var ReplaceWithInfoTypeConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RedactConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RedactConfig = {
+const RedactConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2081,7 +2081,7 @@ var RedactConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CharsToIgnore definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CharsToIgnore = {
+const CharsToIgnore = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2154,7 +2154,7 @@ var CharsToIgnore = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CharacterMaskConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CharacterMaskConfig = {
+const CharacterMaskConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2201,7 +2201,7 @@ var CharacterMaskConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.FixedSizeBucketingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var FixedSizeBucketingConfig = {
+const FixedSizeBucketingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2225,7 +2225,7 @@ var FixedSizeBucketingConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.BucketingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var BucketingConfig = {
+const BucketingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2346,7 +2346,7 @@ var BucketingConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CryptoReplaceFfxFpeConfig = {
+const CryptoReplaceFfxFpeConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2402,7 +2402,7 @@ var CryptoReplaceFfxFpeConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CryptoKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CryptoKey = {
+const CryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2422,7 +2422,7 @@ var CryptoKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.TransientCryptoKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var TransientCryptoKey = {
+const TransientCryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2437,7 +2437,7 @@ var TransientCryptoKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.UnwrappedCryptoKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var UnwrappedCryptoKey = {
+const UnwrappedCryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2457,7 +2457,7 @@ var UnwrappedCryptoKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.KmsWrappedCryptoKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var KmsWrappedCryptoKey = {
+const KmsWrappedCryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2495,7 +2495,7 @@ var KmsWrappedCryptoKey = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DateShiftConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DateShiftConfig = {
+const DateShiftConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2515,7 +2515,7 @@ var DateShiftConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InfoTypeTransformations definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InfoTypeTransformations = {
+const InfoTypeTransformations = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2579,7 +2579,7 @@ var InfoTypeTransformations = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.FieldTransformation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var FieldTransformation = {
+const FieldTransformation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2602,7 +2602,7 @@ var FieldTransformation = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordTransformations definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RecordTransformations = {
+const RecordTransformations = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2620,7 +2620,7 @@ var RecordTransformations = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordSuppression definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RecordSuppression = {
+const RecordSuppression = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2637,7 +2637,7 @@ var RecordSuppression = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordCondition definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var RecordCondition = {
+const RecordCondition = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2742,7 +2742,7 @@ var RecordCondition = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.TransformationOverview definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var TransformationOverview = {
+const TransformationOverview = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2788,7 +2788,7 @@ var TransformationOverview = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.TransformationSummary definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var TransformationSummary = {
+const TransformationSummary = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -2844,7 +2844,7 @@ var TransformationSummary = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Schedule definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Schedule = {
+const Schedule = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2886,7 +2886,7 @@ var Schedule = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectTemplate definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectTemplate = {
+const InspectTemplate = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2926,7 +2926,7 @@ var InspectTemplate = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeidentifyTemplate definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeidentifyTemplate = {
+const DeidentifyTemplate = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2947,7 +2947,7 @@ var DeidentifyTemplate = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Error definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Error = {
+const Error = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3008,7 +3008,7 @@ var Error = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.JobTrigger definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var JobTrigger = {
+const JobTrigger = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -3079,7 +3079,7 @@ var JobTrigger = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Action definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var Action = {
+const Action = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -3159,7 +3159,7 @@ var Action = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateInspectTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CreateInspectTemplateRequest = {
+const CreateInspectTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3185,7 +3185,7 @@ var CreateInspectTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.UpdateInspectTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var UpdateInspectTemplateRequest = {
+const UpdateInspectTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3201,7 +3201,7 @@ var UpdateInspectTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.GetInspectTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var GetInspectTemplateRequest = {
+const GetInspectTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3224,7 +3224,7 @@ var GetInspectTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInspectTemplatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListInspectTemplatesRequest = {
+const ListInspectTemplatesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3244,7 +3244,7 @@ var ListInspectTemplatesRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInspectTemplatesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListInspectTemplatesResponse = {
+const ListInspectTemplatesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3260,7 +3260,7 @@ var ListInspectTemplatesResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeleteInspectTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeleteInspectTemplateRequest = {
+const DeleteInspectTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3285,7 +3285,7 @@ var DeleteInspectTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateJobTriggerRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CreateJobTriggerRequest = {
+const CreateJobTriggerRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3310,7 +3310,7 @@ var CreateJobTriggerRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.UpdateJobTriggerRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var UpdateJobTriggerRequest = {
+const UpdateJobTriggerRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3325,7 +3325,7 @@ var UpdateJobTriggerRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.GetJobTriggerRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var GetJobTriggerRequest = {
+const GetJobTriggerRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3353,7 +3353,7 @@ var GetJobTriggerRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateDlpJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CreateDlpJobRequest = {
+const CreateDlpJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3389,7 +3389,7 @@ var CreateDlpJobRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListJobTriggersRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListJobTriggersRequest = {
+const ListJobTriggersRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3409,7 +3409,7 @@ var ListJobTriggersRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListJobTriggersResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListJobTriggersResponse = {
+const ListJobTriggersResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3424,7 +3424,7 @@ var ListJobTriggersResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeleteJobTriggerRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeleteJobTriggerRequest = {
+const DeleteJobTriggerRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3454,7 +3454,7 @@ var DeleteJobTriggerRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.InspectJobConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var InspectJobConfig = {
+const InspectJobConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3512,7 +3512,7 @@ var InspectJobConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DlpJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DlpJob = {
+const DlpJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -3559,7 +3559,7 @@ var DlpJob = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.GetDlpJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var GetDlpJobRequest = {
+const GetDlpJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3609,7 +3609,7 @@ var GetDlpJobRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDlpJobsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListDlpJobsRequest = {
+const ListDlpJobsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3628,7 +3628,7 @@ var ListDlpJobsRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDlpJobsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListDlpJobsResponse = {
+const ListDlpJobsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3642,7 +3642,7 @@ var ListDlpJobsResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CancelDlpJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CancelDlpJobRequest = {
+const CancelDlpJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3656,7 +3656,7 @@ var CancelDlpJobRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeleteDlpJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeleteDlpJobRequest = {
+const DeleteDlpJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3682,7 +3682,7 @@ var DeleteDlpJobRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateDeidentifyTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CreateDeidentifyTemplateRequest = {
+const CreateDeidentifyTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3708,7 +3708,7 @@ var CreateDeidentifyTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var UpdateDeidentifyTemplateRequest = {
+const UpdateDeidentifyTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3724,7 +3724,7 @@ var UpdateDeidentifyTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.GetDeidentifyTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var GetDeidentifyTemplateRequest = {
+const GetDeidentifyTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3747,7 +3747,7 @@ var GetDeidentifyTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDeidentifyTemplatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListDeidentifyTemplatesRequest = {
+const ListDeidentifyTemplatesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3768,7 +3768,7 @@ var ListDeidentifyTemplatesRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDeidentifyTemplatesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListDeidentifyTemplatesResponse = {
+const ListDeidentifyTemplatesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3784,7 +3784,7 @@ var ListDeidentifyTemplatesResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeleteDeidentifyTemplateRequest = {
+const DeleteDeidentifyTemplateRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3818,7 +3818,7 @@ var DeleteDeidentifyTemplateRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.LargeCustomDictionaryConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var LargeCustomDictionaryConfig = {
+const LargeCustomDictionaryConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3840,7 +3840,7 @@ var LargeCustomDictionaryConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StoredInfoTypeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var StoredInfoTypeConfig = {
+const StoredInfoTypeConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3884,7 +3884,7 @@ var StoredInfoTypeConfig = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StoredInfoTypeVersion definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var StoredInfoTypeVersion = {
+const StoredInfoTypeVersion = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3910,7 +3910,7 @@ var StoredInfoTypeVersion = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.StoredInfoType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var StoredInfoType = {
+const StoredInfoType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3936,7 +3936,7 @@ var StoredInfoType = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var CreateStoredInfoTypeRequest = {
+const CreateStoredInfoTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3964,7 +3964,7 @@ var CreateStoredInfoTypeRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.UpdateStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var UpdateStoredInfoTypeRequest = {
+const UpdateStoredInfoTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -3980,7 +3980,7 @@ var UpdateStoredInfoTypeRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.GetStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var GetStoredInfoTypeRequest = {
+const GetStoredInfoTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -4003,7 +4003,7 @@ var GetStoredInfoTypeRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListStoredInfoTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListStoredInfoTypesRequest = {
+const ListStoredInfoTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -4023,7 +4023,7 @@ var ListStoredInfoTypesRequest = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListStoredInfoTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var ListStoredInfoTypesResponse = {
+const ListStoredInfoTypesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -4039,7 +4039,7 @@ var ListStoredInfoTypesResponse = {
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeleteStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
-var DeleteStoredInfoTypeRequest = {
+const DeleteStoredInfoTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -4049,7 +4049,7 @@ var DeleteStoredInfoTypeRequest = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var ContentOption = {
+const ContentOption = {
 
   /**
    * Includes entire content of a file or a data stream.
@@ -4073,7 +4073,7 @@ var ContentOption = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var InfoTypeSupportedBy = {
+const InfoTypeSupportedBy = {
   ENUM_TYPE_UNSPECIFIED: 0,
 
   /**
@@ -4093,7 +4093,7 @@ var InfoTypeSupportedBy = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var RelationalOperator = {
+const RelationalOperator = {
   RELATIONAL_OPERATOR_UNSPECIFIED: 0,
 
   /**
@@ -4138,7 +4138,7 @@ var RelationalOperator = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var DlpJobType = {
+const DlpJobType = {
   DLP_JOB_TYPE_UNSPECIFIED: 0,
 
   /**
@@ -4158,7 +4158,7 @@ var DlpJobType = {
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
-var StoredInfoTypeState = {
+const StoredInfoTypeState = {
   STORED_INFO_TYPE_STATE_UNSPECIFIED: 0,
 
   /**

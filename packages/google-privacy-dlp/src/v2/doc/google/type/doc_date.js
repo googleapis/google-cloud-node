@@ -39,6 +39,6 @@
  * @memberof google.type
  * @see [google.type.Date definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/type/date.proto}
  */
-var Date = {
+const Date = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
